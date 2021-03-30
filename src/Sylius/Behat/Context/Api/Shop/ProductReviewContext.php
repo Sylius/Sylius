@@ -90,6 +90,39 @@ final class ProductReviewContext implements Context
     }
 
     /**
+     * @Then I should see :amount product reviews
+     */
+    public function iShouldSeeProductReviews(int $amount = 0): void
+    {
+        /** @var ProductInterface $product */
+        $product = $this->sharedStorage->get('product');
+
+        $this->client->index();
+        $this->client->addFilter('reviewSubject', $this->iriConverter->getIriFromItem($product));
+        $this->client->addFilter('itemsPerPage', 3);
+        $this->client->addFilter('order[createdAt]', 'desc');
+        $this->client->filter();
+
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $amount);
+    }
+
+    /**
+     * @Then I should see reviews titled :titleOne, :titleTwo and :titleThree
+     */
+    public function iShouldSeeReviewsTitledAnd(string ...$titles): void
+    {
+        Assert::true($this->hasReviewsWithTitles($titles));
+    }
+
+    /**
+     * @Then I should not see review titled :title
+     */
+    public function iShouldNotSeeReviewTitled(string $title): void
+    {
+        Assert::false($this->hasReviewsWithTitles([$title]));
+    }
+
+    /**
      * @When I rate it with :rating point(s)
      */
     public function iRateItWithPoints(int $rating): void
@@ -125,5 +158,16 @@ final class ProductReviewContext implements Context
     public function iShouldNotSeeReviewTitledInTheList(string $title): void
     {
         Assert::isEmpty($this->responseChecker->getCollectionItemsWithValue($this->client->getLastResponse(), 'title', $title));
+    }
+
+    private function hasReviewsWithTitles(array $titles): bool
+    {
+        foreach ($titles as $title) {
+            if (!$this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'title', $title)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

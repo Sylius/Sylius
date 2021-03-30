@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
@@ -37,24 +36,14 @@ final class ProductContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /** @var ApiClientInterface */
-    private $productReviewClient;
-
-    /** @var IriConverterInterface */
-    private $iriConverter;
-
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage,
-        ApiClientInterface $productReviewClient,
-        IriConverterInterface $iriConverter
+        SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
-        $this->productReviewClient = $productReviewClient;
-        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -92,39 +81,6 @@ final class ProductContext implements Context
     {
         $this->client->addFilter('translations.name', $name);
         $this->client->filter();
-    }
-
-    /**
-     * @Then I should see :amount product reviews
-     */
-    public function iShouldSeeProductReviews(int $amount): void
-    {
-        /** @var ProductInterface $product */
-        $product = $this->sharedStorage->get('product');
-
-        $this->productReviewClient->index();
-        $this->productReviewClient->addFilter('reviewSubject', $this->iriConverter->getIriFromItem($product));
-        $this->productReviewClient->addFilter('itemsPerPage', 3);
-        $this->productReviewClient->addFilter('order[createdAt]', 'desc');
-        $this->productReviewClient->filter();
-
-        Assert::same($this->responseChecker->countCollectionItems($this->productReviewClient->getLastResponse()), $amount);
-    }
-
-    /**
-     * @Then I should see reviews titled :titleOne, :titleTwo and :titleThree
-     */
-    public function iShouldSeeReviewsTitledAnd(string ...$titles): void
-    {
-        Assert::true($this->hasReviewsWithTitles($titles));
-    }
-
-    /**
-     * @Then I should not see review titled :title
-     */
-    public function iShouldNotSeeReviewTitled(string $title): void
-    {
-        Assert::false($this->hasReviewsWithTitles([$title]));
     }
 
     /**
@@ -257,16 +213,5 @@ final class ProductContext implements Context
         }
 
         return false;
-    }
-
-    private function hasReviewsWithTitles(array $titles): bool
-    {
-        foreach ($titles as $title) {
-            if (!$this->responseChecker->hasItemWithValue($this->productReviewClient->getLastResponse(), 'title', $title)) {
-                return false;
-            }
-        }
-
-        return true;
     }
 }
