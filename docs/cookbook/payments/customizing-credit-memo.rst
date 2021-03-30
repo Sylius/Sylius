@@ -87,48 +87,98 @@ entity level with credit memo.
 
 **1.** Copy ``vendor/sylius/refund-plugin/src/Resources/views/Download/creditMemo.html.twig`` into ``templates/bundles/SyliusRefundPlugin/Download/creditMemo.html.twig``.
 
-**2.** Embed a controller in the credit memo template:
+**2.** Customize credit memo template to include the reason:
 
     .. code-block:: html
 
         <div class="credit-memo">
-            Some unique data: {{ render(controller('App\\Controller\\FooController::extraData', { 'creditMemo': creditMemo })) }}
+            Reason: {{ creditMemo.reason }}
 
             <!-- ... -->
         </div>
 
-**3.** Create the referenced controller in a file called ``src/Controller/FooController.php``:
+**3.** Override the default credit memo model in ``src/Entity/Refund/CreditMemo.php``:
 
     .. code-block:: php
 
-        namespace App\Controller;
+        namespace App\Entity\Refund;
 
-        use Sylius\RefundPlugin\Entity\CreditMemoInterface;
-        use Symfony\Component\HttpFoundation\Response;
-        use Twig\Environment;
+        use Doctrine\ORM\Mapping as ORM;
+        use Sylius\RefundPlugin\Entity\CreditMemo as BaseCreditMemo;
 
-        final class FooController
+        /**
+         * @ORM\Entity
+         * @ORM\Table(name="sylius_refund_credit_memo")
+         */
+        class CreditMemo extends BaseCreditMemo
         {
-            /** @var Environment */
-            private $twig;
+            /**
+             * @ORM\Column
+             *
+             * @var string|null
+             */
+            private $reason;
 
-            public function __construct(Environment $twig)
+            public function getReason(): ?string
             {
-                $this->twig = $twig;
+                return $this->reason;
             }
 
-            public function extraData(CreditMemoInterface $creditMemo): Response
+            public function setReason(?string $reason): void
             {
-                return new Response($this->twig->render('CreditMemo/extraData.html.twig', [
-                    'creditMemo' => $creditMemo,
-                    // Customise it to your needs, this one makes no sense
-                    'extraData' => $creditMemo->getNetValueTotal() * random_int(0, 42),
-                ]));
+                $this->reason = $reason;
             }
         }
 
-**4.** Created the template referenced in the controller in a file called ``templates/CreditMemo/extraData.html.twig``:
+**4.** Configure ResourceBundle to use overridden model in ``config/packages/sylius_refund.yaml``:
 
-    .. code-block:: html
+    .. code-block:: yaml
 
-        <strong>{{ extraData }}</strong>
+        sylius_resource:
+            resources:
+                sylius_refund.credit_memo:
+                    classes:
+                        model: App\Entity\Refund\CreditMemo
+
+**5.** Decorate credit memo generator to set the reason while generating the invoice. Create a class in ``src/Refund/CreditMemoGenerator.php``:
+
+    .. code-block:: php
+
+        namespace App\Refund;
+
+        use App\Entity\Refund\CreditMemo;
+        use Sylius\Component\Core\Model\OrderInterface;
+        use Sylius\RefundPlugin\Entity\CreditMemoInterface;
+        use Sylius\RefundPlugin\Generator\CreditMemoGeneratorInterface;
+
+        final class CreditMemoGenerator implements CreditMemoGeneratorInterface
+        {
+            /** @var CreditMemoGeneratorInterface */
+            private $creditMemoGenerator;
+
+            public function __construct(CreditMemoGeneratorInterface $creditMemoGenerator)
+            {
+                $this->creditMemoGenerator = $creditMemoGenerator;
+            }
+
+            public function generate(OrderInterface $order, int $total, array $units, array $shipments, string $comment): CreditMemoInterface
+            {
+                /** @var CreditMemo $creditMemo */
+                $creditMemo = $this->creditMemoGenerator->generate($order, $total, $units, $shipments, $comment);
+                $creditMemo->setReason('Charged too much');
+
+                return $creditMemo;
+            }
+        }
+
+**6.** And then configure Symfony's dependency injection to use that class in ``config/services.yaml``:
+
+    .. code-block:: yaml
+
+    services:
+        # ...
+
+        App\Refund\CreditMemoGenerator:
+            decorates: 'Sylius\RefundPlugin\Generator\CreditMemoGenerator'
+            arguments:
+                - '@App\Refund\CreditMemoGenerator.inner'
