@@ -55,7 +55,7 @@
         "swiftmailer/swiftmailer": "^6.2",
         "sylius-labs/association-hydrator": "^1.1",
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.3",
-        "sylius/admin-api-bundle": "^1.8",
+        "sylius/admin-api-bundle": "~1.8.0",
         "sylius/fixtures-bundle": "^1.6.1",
         "sylius/grid": "^1.7.5",
         "sylius/grid-bundle": "^1.7.5",
