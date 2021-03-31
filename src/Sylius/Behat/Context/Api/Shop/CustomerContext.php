@@ -281,10 +281,10 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatFirstNameIsRequired(): void
     {
-        $this->isViolationWithMessageInResponse(
+        Assert::true($this->isViolationWithMessageInResponse(
             $this->customerClient->getLastResponse(),
             'First name must be at least 2 characters long.'
-        );
+        ));
     }
 
     /**
@@ -292,10 +292,10 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatLastNameIsRequired(): void
     {
-        $this->isViolationWithMessageInResponse(
+        Assert::true($this->isViolationWithMessageInResponse(
             $this->customerClient->getLastResponse(),
             'Last name must be at least 2 characters long.'
-        );
+        ));
     }
 
     /**
@@ -303,10 +303,10 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatEmailIsRequired(): void
     {
-        $this->isViolationWithMessageInResponse(
+        Assert::true($this->isViolationWithMessageInResponse(
             $this->customerClient->getLastResponse(),
             'Please enter your email.'
-        );
+        ));
     }
 
     /**
@@ -314,10 +314,10 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatTheEmailIsAlreadyUsed(): void
     {
-        $this->isViolationWithMessageInResponse(
+        Assert::true($this->isViolationWithMessageInResponse(
             $this->customerClient->getLastResponse(),
             'This email is already used.'
-        );
+        ));
     }
 
     /**
@@ -325,10 +325,10 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsInvalid(): void
     {
-        $this->isViolationWithMessageInResponse(
+        Assert::true($this->isViolationWithMessageInResponse(
             $this->customerClient->getLastResponse(),
             'This email is invalid.'
-        );
+        ));
     }
 
     /**
