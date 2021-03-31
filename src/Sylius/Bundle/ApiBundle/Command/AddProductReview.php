@@ -47,9 +47,9 @@ class AddProductReview implements CommandAwareDataTransformerInterface
     public $email;
 
     public function __construct(
-        string $title,
-        int $rating,
-        string $comment,
+        ?string $title,
+        ?int $rating,
+        ?string $comment,
         string $productCode,
         ?string $email = null
     ) {

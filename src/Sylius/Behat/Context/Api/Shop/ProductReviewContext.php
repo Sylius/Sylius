@@ -20,6 +20,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ProductReviewContext implements Context
@@ -63,6 +64,7 @@ final class ProductReviewContext implements Context
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt(): void
     {
@@ -79,14 +81,33 @@ final class ProductReviewContext implements Context
     }
 
     /**
+     * @When I leave a comment :comment as :email
      * @When I leave a comment :comment, titled :title as :email
      * @When I leave a comment :comment, titled :title
+     * @When I leave a review titled :title as :email
      */
-    public function iLeaveACommentTitled(string $comment, string $title, ?string $email = null): void
+    public function iLeaveACommentTitled(?string $comment = null, ?string $title = null, ?string $email = null): void
     {
         $this->client->addRequestData('title', $title);
         $this->client->addRequestData('comment', $comment);
         $this->client->addRequestData('email', $email);
+    }
+
+    /**
+     * @When I rate it with :rating point(s)
+     * @When I do not rate it
+     */
+    public function iRateItWithPoints(?int $rating = null): void
+    {
+        $this->client->addRequestData('rating', $rating);
+    }
+
+    /**
+     * @When I title it with very long title
+     */
+    public function iTitleItWithVeryLongTitle(): void
+    {
+        $this->client->addRequestData('title', 'Exegi monumentum aere perennius regalique situ pyramidum altius, quod non imber edax, non Aquilo inpotens possit diruere aut innumerabilis annorum series et fuga temporum. Non omnis moriar multaque pars mei vitabit Libitinam; usque ego postera crescam laude recens, dum Capitoliumscandet cum tacita virgine pontifex.Dicar, qua violens obstrepit Aufiduset qua pauper aquae Daunus agrestiumregnavit populorum, ex humili potensprinceps Aeolium carmen ad Italosdeduxisse modos. Sume superbiamquaesitam meritis et mihi Delphicalauro cinge volens, Melpomene, comam.');
     }
 
     /**
@@ -123,14 +144,6 @@ final class ProductReviewContext implements Context
     }
 
     /**
-     * @When I rate it with :rating point(s)
-     */
-    public function iRateItWithPoints(int $rating): void
-    {
-        $this->client->addRequestData('rating', $rating);
-    }
-
-    /**
      * @Then I should be notified that my review is waiting for the acceptation
      */
     public function iShouldBeNotifiedThatMyReviewIsWaitingForTheAcceptation(): void
@@ -160,6 +173,69 @@ final class ProductReviewContext implements Context
         Assert::isEmpty($this->responseChecker->getCollectionItemsWithValue($this->client->getLastResponse(), 'title', $title));
     }
 
+    /**
+     * @Then I should be notified that I must check review rating
+     */
+    public function iShouldBeNotifiedThatIMustCheckReviewRating(): void
+    {
+        $this->assertViolation('You must check review rating.', 'rating');
+    }
+
+    /**
+     * @Then I should be notified that title is required
+     */
+    public function iShouldBeNotifiedThatTitleIsRequired(): void
+    {
+        $this->assertViolation('Review title should not be blank.', 'title');
+    }
+
+    /**
+     * @Then I should be notified that title must have at least 2 characters
+     */
+    public function iShouldBeNotifiedThatTitleMustHaveAtLeast2Characters(): void
+    {
+        $this->assertViolation('Review title must have at least 2 characters.', 'title');
+    }
+    /**
+     * @Then I should be notified that title must have at most 255 characters
+     */
+    public function iShouldBeNotifiedThatTitleMustHaveAtMost255Characters(): void
+    {
+        $this->assertViolation('Review title must have at most 255 characters.', 'title');
+    }
+
+    /**
+     * @Then I should be notified that comment is required
+     */
+    public function iShouldBeNotifiedThatCommentIsRequired(): void
+    {
+        $this->assertViolation('Review comment should not be blank.', 'comment');
+    }
+
+    /**
+     * @Then I should be notified that I must enter my email
+     */
+    public function iShouldBeNotifiedThatIMustEnterMyEmail(): void
+    {
+        $this->assertViolation('Please enter your email.', 'email');
+    }
+
+    /**
+     * @Then I should be notified that this email is already registered
+     */
+    public function iShouldBeNotifiedThatThisEmailIsAlreadyRegistered(): void
+    {
+        $this->assertViolation('This email is already registered, please login or use forgotten password.', 'email');
+    }
+
+    /**
+     * @Then I should be notified that rate must be an integer in the range 1-5
+     */
+    public function iShouldBeNotifiedThatRateMustBeAnIntegerInTheRange15(): void
+    {
+        $this->assertViolation('Review rating must be an integer in the range 1-5.', 'rating');
+    }
+
     private function hasReviewsWithTitles(array $titles): bool
     {
         foreach ($titles as $title) {
@@ -169,5 +245,13 @@ final class ProductReviewContext implements Context
         }
 
         return true;
+    }
+
+    private function assertViolation(string $message, ?string $property = null): void
+    {
+        $response = $this->client->getLastResponse();
+
+        Assert::same($response->getStatusCode(), 400);
+        Assert::true($this->responseChecker->hasViolationWithMessage($response, $message, $property));
     }
 }
