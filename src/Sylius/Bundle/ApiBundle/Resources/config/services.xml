@@ -120,7 +120,7 @@
             <tag name="sylius.api.command_data_transformer" />
         </service>
 
-        <service id="sylius.api.data_transformer.add_product_review_input_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserEmailAwareCommandDataTransformer">
+        <service id="sylius.api.data_transformer.logged_in_shop_user_email_aware_command_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserEmailAwareCommandDataTransformer">
             <argument type="service" id="sylius.api.context.user" />
             <tag name="sylius.api.command_data_transformer" />
         </service>
@@ -163,6 +163,13 @@
         <service id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider" decorates="api_platform.item_data_provider">
             <argument type="service" id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider.inner" />
             <argument type="service" id="sylius.context.channel" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\AddPRoductReviewCommandFieldItemIriToIdentifierDenormalizer">
+            <argument type="service" id="serializer.normalizer.object" />
+            <argument type="service" id="sylius.api.data_transformer.command_aware_input_data_transformer" />
+            <argument type="service" id="api_platform.iri_converter" />
+            <tag name="serializer.normalizer" />
         </service>
     </services>
 </container>

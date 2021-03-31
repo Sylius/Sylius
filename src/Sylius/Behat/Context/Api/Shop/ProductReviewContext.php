@@ -75,7 +75,7 @@ final class ProductReviewContext implements Context
     public function iWantToReviewProduct(ProductInterface $product): void
     {
         $this->client->buildCreateRequest();
-        $this->client->addRequestData('productCode', $product->getCode());
+        $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
     }
 
     /**
