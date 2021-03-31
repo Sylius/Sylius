@@ -20,7 +20,8 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class AddPRoductReviewCommandFieldItemIriToIdentifierDenormalizer implements ContextAwareDenormalizerInterface
+/** @experimental */
+final class AddProductReviewCommandFieldItemIriToIdentifierDenormalizer implements ContextAwareDenormalizerInterface
 {
     /** @var DenormalizerInterface */
     private $objectNormalizer;
