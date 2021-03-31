@@ -5,3 +5,5 @@ sylius:
         is_verified: 'Account with email %email% is currently verified.'
     order:
         not_empty: 'An empty order cannot be completed.'
+    shipment:
+        shipped: 'You cannot ship a shipment that was shipped before.'
