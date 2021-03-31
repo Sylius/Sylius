@@ -28,7 +28,7 @@
             <group>shop:product_review:create</group>
             <group>shop:product_review:read</group>
         </attribute>
-        <attribute name="productCode">
+        <attribute name="productCode" serialized-name="product">
             <group>shop:product_review:create</group>
             <group>shop:product_review:read</group>
         </attribute>
