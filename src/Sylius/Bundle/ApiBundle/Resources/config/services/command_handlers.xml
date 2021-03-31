@@ -88,6 +88,7 @@
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\ShipShipmentHandler">
             <argument type="service" id="sylius.repository.shipment" />
             <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_default.bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
@@ -176,6 +177,12 @@
             <argument type="service" id="sylius.email_sender" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.repository.shop_user" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\SendShipmentConfirmationEmailHandler">
+            <argument type="service" id="sylius.email_sender" />
+            <argument type="service" id="sylius.repository.shipment" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
