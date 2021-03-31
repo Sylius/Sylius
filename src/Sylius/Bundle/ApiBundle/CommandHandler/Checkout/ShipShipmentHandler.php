@@ -15,10 +15,13 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ShipShipment;
+use Sylius\Bundle\ApiBundle\Command\SendShipmentConfirmationEmail;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
@@ -30,15 +33,20 @@ final class ShipShipmentHandler implements MessageHandlerInterface
     /** @var FactoryInterface */
     private $stateMachineFactory;
 
+    /** @var MessageBusInterface */
+    private $eventBus;
+
     public function __construct(
         ShipmentRepositoryInterface $shipmentRepository,
-        FactoryInterface $stateMachineFactory
+        FactoryInterface $stateMachineFactory,
+        MessageBusInterface $eventBus
     ) {
         $this->shipmentRepository = $shipmentRepository;
         $this->stateMachineFactory = $stateMachineFactory;
+        $this->eventBus = $eventBus;
     }
 
-    public function __invoke(ShipShipment $shipShipment): void
+    public function __invoke(ShipShipment $shipShipment): ShipmentInterface
     {
         /** @var ShipmentInterface|null $shipment */
         $shipment = $this->shipmentRepository->find($shipShipment->shipmentId);
@@ -57,5 +65,9 @@ final class ShipShipmentHandler implements MessageHandlerInterface
         );
 
         $stateMachine->apply(ShipmentTransitions::TRANSITION_SHIP);
+
+        $this->eventBus->dispatch(new SendShipmentConfirmationEmail($shipShipment->shipmentId), [new DispatchAfterCurrentBusStamp()]);
+
+        return $shipment;
     }
 }
