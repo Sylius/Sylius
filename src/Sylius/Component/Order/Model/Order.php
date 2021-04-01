@@ -237,6 +237,8 @@ class Order implements OrderInterface
             $this->addToAdjustmentsTotal($adjustment);
             $adjustment->setAdjustable($this);
         }
+        
+        $this->recalculateAdjustmentsTotal();
     }
 
     public function removeAdjustment(AdjustmentInterface $adjustment): void
@@ -246,6 +248,8 @@ class Order implements OrderInterface
             $this->subtractFromAdjustmentsTotal($adjustment);
             $adjustment->setAdjustable(null);
         }
+        
+        $this->recalculateAdjustmentsTotal();
     }
 
     public function hasAdjustment(AdjustmentInterface $adjustment): bool
