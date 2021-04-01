@@ -1,8 +1,8 @@
 {
     "page": 1,
     "limit": 10,
-    "pages": 2,
-    "total": 20,
+    "pages": 3,
+    "total": 21,
     "_links": {
         "self": {
             "href": "\/api\/v1\/products\/MUG_SW\/variants\/?sorting%5Bposition%5D=desc&page=1&limit=10"
@@ -11,7 +11,7 @@
             "href": "\/api\/v1\/products\/MUG_SW\/variants\/?sorting%5Bposition%5D=desc&page=1&limit=10"
         },
         "last": {
-            "href": "\/api\/v1\/products\/MUG_SW\/variants\/?sorting%5Bposition%5D=desc&page=2&limit=10"
+            "href": "\/api\/v1\/products\/MUG_SW\/variants\/?sorting%5Bposition%5D=desc&page=3&limit=10"
         },
         "next": {
             "href": "\/api\/v1\/products\/MUG_SW\/variants\/?sorting%5Bposition%5D=desc&page=2&limit=10"
@@ -19,6 +19,32 @@
     },
     "_embedded": {
         "items": [
+            {
+                "id": @integer@,
+                "code": "LARGE_MUG",
+                "optionValues": [
+                    {
+                        "code": "MUG_TYPE_LARGE",
+                        "translations": []
+                    }
+                ],
+                "position": 22,
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Large Mug"
+                    }
+                },
+                "version": 1,
+                "tracked": false,
+                "channelPricings": [],
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/LARGE_MUG"
+                    }
+                }
+            },
             {
                 "id": @integer@,
                 "code": "MUG_20",
@@ -205,27 +231,6 @@
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_12"
-                    }
-                }
-            },
-            {
-                "id": @integer@,
-                "code": "MUG_11",
-                "optionValues": [],
-                "position": 11,
-                "translations": {
-                    "en_US": {
-                        "id": @integer@,
-                        "locale": "en_US",
-                        "name": "Mug 11"
-                    }
-                },
-                "version": 1,
-                "tracked": false,
-                "channelPricings": [],
-                "_links": {
-                    "self": {
-                        "href": "\/api\/v1\/products\/MUG_SW\/variants\/MUG_11"
                     }
                 }
             }
