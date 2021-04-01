@@ -2,7 +2,7 @@
     "id": @integer@,
     "code": "MONSTER_MUG",
     "optionValues": [],
-    "position": 21,
+    "position": 23,
     "translations": [],
     "onHold": 0,
     "onHand": 0,
