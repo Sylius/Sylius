@@ -24,7 +24,7 @@ final class ShipmentIdAwareInputCommandDataTransformer implements CommandDataTra
         /** @var ShipmentInterface $shipment */
         $shipment = $context['object_to_populate'];
 
-        $object->setShipmentId((string) $shipment->getId());
+        $object->setShipmentId($shipment->getId());
 
         return $object;
     }

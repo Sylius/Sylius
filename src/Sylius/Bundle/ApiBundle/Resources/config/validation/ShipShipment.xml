@@ -18,7 +18,6 @@
     <class name="Sylius\Bundle\ApiBundle\Command\Checkout\ShipShipment">
         <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\ShipmentNotShippedState">
             <option name="groups">
-                <value>sylius_shipment_ship</value>
                 <value>sylius</value>
             </option>
         </constraint>

@@ -44,7 +44,7 @@ final class SendShipmentConfirmationEmailHandlerSpec extends ObjectBehavior
         ShipmentRepositoryInterface $shipmentRepository,
         OrderInterface $order
     ): void {
-        $shipmentRepository->find('ID')->willReturn($shipment);
+        $shipmentRepository->find(123)->willReturn($shipment);
         $shipment->getOrder()->willReturn($order);
 
         $order->getChannel()->willReturn($channel);
@@ -64,6 +64,6 @@ final class SendShipmentConfirmationEmailHandlerSpec extends ObjectBehavior
             ]
         )->shouldBeCalled();
 
-        $this(new SendShipmentConfirmationEmail('ID'));
+        $this(new SendShipmentConfirmationEmail(123));
     }
 }
