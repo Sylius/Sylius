@@ -45,7 +45,7 @@ interface ProductVariantInterface extends
 
     public function removeOptionValue(ProductOptionValueInterface $optionValue): void;
 
-    public function hasOptionValue(ProductOptionValueInterface $optionValue): bool;
+    public function hasOptionValue(?ProductOptionValueInterface $optionValue): bool;
 
     public function getProduct(): ?ProductInterface;
 

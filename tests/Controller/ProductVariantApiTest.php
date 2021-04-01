@@ -17,7 +17,6 @@ use ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\VarDumper\VarDumper;
 
 final class ProductVariantApiTest extends JsonApiTestCase
 {
