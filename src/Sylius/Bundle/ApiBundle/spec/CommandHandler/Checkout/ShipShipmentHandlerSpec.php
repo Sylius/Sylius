@@ -43,9 +43,9 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
         MessageBusInterface $eventBus
     ): void {
         $shipShipment = new ShipShipment();
-        $shipShipment->setShipmentId('ID');
+        $shipShipment->setShipmentId(123);
 
-        $shipmentRepository->find('ID')->willReturn($shipment);
+        $shipmentRepository->find(123)->willReturn($shipment);
 
         $shipment->setTracking(null)->shouldNotBeCalled();
 
@@ -54,7 +54,7 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
 
         $stateMachine->apply(ShipmentTransitions::TRANSITION_SHIP)->shouldBeCalled();
 
-        $sendShipmentConfirmationEmail = new SendShipmentConfirmationEmail('ID');
+        $sendShipmentConfirmationEmail = new SendShipmentConfirmationEmail(123);
 
         $eventBus
             ->dispatch($sendShipmentConfirmationEmail, [new DispatchAfterCurrentBusStamp()])
@@ -73,9 +73,9 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
         MessageBusInterface $eventBus
     ): void {
         $shipShipment = new ShipShipment('TRACK');
-        $shipShipment->setShipmentId('ID');
+        $shipShipment->setShipmentId(123);
 
-        $shipmentRepository->find('ID')->willReturn($shipment);
+        $shipmentRepository->find(123)->willReturn($shipment);
 
         $shipment->setTracking('TRACK')->shouldBeCalled();
 
@@ -84,7 +84,7 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
 
         $stateMachine->apply(ShipmentTransitions::TRANSITION_SHIP)->shouldBeCalled();
 
-        $sendShipmentConfirmationEmail = new SendShipmentConfirmationEmail('ID');
+        $sendShipmentConfirmationEmail = new SendShipmentConfirmationEmail(123);
 
         $eventBus
             ->dispatch($sendShipmentConfirmationEmail, [new DispatchAfterCurrentBusStamp()])
@@ -99,9 +99,9 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
         ShipmentRepositoryInterface $shipmentRepository
     ): void {
         $shipShipment = new ShipShipment('TRACK');
-        $shipShipment->setShipmentId('ID');
+        $shipShipment->setShipmentId(123);
 
-        $shipmentRepository->find('ID')->willReturn(null);
+        $shipmentRepository->find(123)->willReturn(null);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -116,9 +116,9 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory
     ): void {
         $shipShipment = new ShipShipment('TRACK');
-        $shipShipment->setShipmentId('ID');
+        $shipShipment->setShipmentId(123);
 
-        $shipmentRepository->find('ID')->willReturn($shipment);
+        $shipmentRepository->find(123)->willReturn($shipment);
 
         $shipment->setTracking('TRACK')->shouldBeCalled();
 

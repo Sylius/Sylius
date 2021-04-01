@@ -18,23 +18,23 @@ use Sylius\Bundle\ApiBundle\Command\ShipmentIdAwareInterface;
 /** @experimental */
 class ShipShipment implements ShipmentIdAwareInterface
 {
-    /** @var string|null */
+    /** @var mixed|null */
     public $shipmentId;
 
     /** @var string|null */
-    public $tracking;
+    public $trackingCode;
 
-    public function __construct(?string $tracking = null)
+    public function __construct(?string $trackingCode = null)
     {
-        $this->tracking = $tracking;
+        $this->trackingCode = $trackingCode;
     }
 
-    public function getShipmentId(): ?string
+    public function getShipmentId(): ?int
     {
         return $this->shipmentId;
     }
 
-    public function setShipmentId(?string $shipmentId): void
+    public function setShipmentId(?int $shipmentId): void
     {
         $this->shipmentId = $shipmentId;
     }

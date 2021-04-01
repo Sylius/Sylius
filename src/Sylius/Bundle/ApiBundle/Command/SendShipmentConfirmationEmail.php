@@ -16,10 +16,10 @@ namespace Sylius\Bundle\ApiBundle\Command;
 /** @experimental */
 class SendShipmentConfirmationEmail
 {
-    /** @var string */
+    /** @var mixed */
     public $shipmentId;
 
-    public function __construct(string $shipmentId)
+    public function __construct($shipmentId)
     {
         $this->shipmentId = $shipmentId;
     }

@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Command;
 /** @experimental */
 interface ShipmentIdAwareInterface extends CommandAwareDataTransformerInterface
 {
-    public function getShipmentId(): ?string;
+    public function getShipmentId(): ?int;
 
-    public function setShipmentId(?string $shipmentId): void;
+    public function setShipmentId(?int $shipmentId): void;
 }

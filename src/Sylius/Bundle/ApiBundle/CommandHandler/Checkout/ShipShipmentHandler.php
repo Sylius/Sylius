@@ -51,10 +51,10 @@ final class ShipShipmentHandler implements MessageHandlerInterface
         /** @var ShipmentInterface|null $shipment */
         $shipment = $this->shipmentRepository->find($shipShipment->shipmentId);
 
-        Assert::notNull($shipment,'Shipment has has not been found.');
+        Assert::notNull($shipment, 'Shipment has not been found.');
 
-        if ($shipShipment->tracking !== null) {
-            $shipment->setTracking($shipShipment->tracking);
+        if ($shipShipment->trackingCode !== null) {
+            $shipment->setTracking($shipShipment->trackingCode);
         }
 
         $stateMachine = $this->stateMachineFactory->get($shipment, ShipmentTransitions::GRAPH);

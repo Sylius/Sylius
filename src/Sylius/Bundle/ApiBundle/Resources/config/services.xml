@@ -110,7 +110,7 @@
             <tag name="sylius.api.command_data_transformer" />
         </service>
 
-        <service id="sylius.api.data_transformer.shipment_id_aware_input_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\ShipmentIdAwareInputCommandDataTransformer">
+        <service id="sylius.api.data_transformer.shipment_id_aware_input_command" class="Sylius\Bundle\ApiBundle\DataTransformer\ShipmentIdAwareInputCommandDataTransformer">
             <tag name="sylius.api.command_data_transformer" />
         </service>
 

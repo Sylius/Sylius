@@ -43,9 +43,9 @@ final class ShipmentNotShippedStateValidatorSpec extends ObjectBehavior
     ): void {
         $constraint = new ShipmentNotShippedState();
         $shipShipment = new ShipShipment();
-        $shipShipment->setShipmentId('id');
+        $shipShipment->setShipmentId(123);
 
-        $shipmentRepository->find('id')->willReturn($shipment);
+        $shipmentRepository->find(123)->willReturn($shipment);
 
         $shipment->getState()->willReturn(OrderShippingStates::STATE_SHIPPED);
 
@@ -61,9 +61,9 @@ final class ShipmentNotShippedStateValidatorSpec extends ObjectBehavior
     ): void {
         $constraint = new ShipmentNotShippedState();
         $shipShipment = new ShipShipment();
-        $shipShipment->setShipmentId('id');
+        $shipShipment->setShipmentId(123);
 
-        $shipmentRepository->find('id')->willReturn($shipment);
+        $shipmentRepository->find(123)->willReturn($shipment);
 
         $shipment->getState()->willReturn(OrderShippingStates::STATE_CART);
 

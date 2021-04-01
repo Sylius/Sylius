@@ -34,9 +34,9 @@ final class ShipmentIdAwareInputCommandDataTransformerSpec extends ObjectBehavio
         ShipmentInterface $shipment
     ): void {
         $context = ['object_to_populate' => $shipment];
-        $shipment->getId()->willReturn('id');
+        $shipment->getId()->willReturn(123);
 
-        $command->setShipmentId('id');
+        $command->setShipmentId(123);
 
         $this->transform($command, '', $context)->shouldReturn($command);
     }
