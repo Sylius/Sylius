@@ -15,14 +15,14 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ShipShipment;
-use Sylius\Bundle\ApiBundle\Validator\Constraints\ShipmentNotShippedState;
+use Sylius\Bundle\ApiBundle\Validator\Constraints\ShipmentAlreadyShipped;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-final class ShipmentNotShippedStateValidatorSpec extends ObjectBehavior
+final class ShipmentAlreadyShippedValidatorSpec extends ObjectBehavior
 {
     function let(ShipmentRepositoryInterface $shipmentRepository, ExecutionContextInterface $executionContext): void
     {
@@ -41,7 +41,7 @@ final class ShipmentNotShippedStateValidatorSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ExecutionContextInterface $executionContext
     ): void {
-        $constraint = new ShipmentNotShippedState();
+        $constraint = new ShipmentAlreadyShipped();
         $shipShipment = new ShipShipment();
         $shipShipment->setShipmentId(123);
 
@@ -59,7 +59,7 @@ final class ShipmentNotShippedStateValidatorSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ExecutionContextInterface $executionContext
     ): void {
-        $constraint = new ShipmentNotShippedState();
+        $constraint = new ShipmentAlreadyShipped();
         $shipShipment = new ShipShipment();
         $shipShipment->setShipmentId(123);
 
