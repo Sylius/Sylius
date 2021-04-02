@@ -32,7 +32,6 @@
             <group>admin:customer:update</group>
             <group>shop:customer:read</group>
             <group>shop:customer:update</group>
-            <group>admin:order:read</group>
         </attribute>
 
         <attribute name="firstName">
@@ -53,8 +52,6 @@
 
         <attribute name="fullName">
             <group>admin:customer:read</group>
-            <group>admin:order:all</group>
-            <group>admin:order:read</group>
             <group>shop:customer:read</group>
         </attribute>
 
@@ -78,7 +75,6 @@
             <group>admin:customer:read</group>
             <group>admin:customer:create</group>
             <group>admin:customer:update</group>
-            <group>admin:order:read</group>
             <group>shop:customer:read</group>
             <group>shop:customer:update</group>
         </attribute>

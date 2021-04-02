@@ -18,13 +18,11 @@
     <class name="Sylius\Component\Core\Model\ShippingMethod">
         <attribute name="id">
             <group>admin:shipping_method:read</group>
-            <group>admin:shipping_method:all</group>
             <group>shop:shipping_method:read</group>
         </attribute>
 
         <attribute name="translations">
             <group>admin:shipping_method:read</group>
-            <group>admin:shipping_method:all</group>
             <group>admin:shipping_method:create</group>
             <group>admin:shipping_method:update</group>
             <group>shop:cart:read</group>
@@ -40,7 +38,6 @@
 
         <attribute name="code">
             <group>admin:shipping_method:read</group>
-            <group>admin:shipping_method:all</group>
             <group>admin:shipping_method:create</group>
             <group>shop:shipping_method:read</group>
             <group>admin:zone:read</group>
@@ -50,7 +47,6 @@
 
         <attribute name="position">
             <group>admin:shipping_method:read</group>
-            <group>admin:shipping_method:all</group>
             <group>admin:shipping_method:create</group>
             <group>admin:shipping_method:update</group>
             <group>shop:shipping_method:read</group>
@@ -58,14 +54,12 @@
 
         <attribute name="zone">
             <group>admin:shipping_method:read</group>
-            <group>admin:shipping_method:all</group>
             <group>admin:shipping_method:create</group>
             <group>admin:shipping_method:update</group>
         </attribute>
 
         <attribute name="enabled">
             <group>admin:shipping_method:read</group>
-            <group>admin:shipping_method:all</group>
             <group>admin:shipping_method:create</group>
             <group>admin:shipping_method:update</group>
             <group>shop:shipping_method:read</group>
@@ -73,7 +67,6 @@
 
         <attribute name="channels">
             <group>admin:shipping_method:read</group>
-            <group>admin:shipping_method:all</group>
             <group>admin:shipping_method:create</group>
             <group>admin:shipping_method:update</group>
             <group>shop:shipping_method:read</group>
@@ -81,7 +74,6 @@
 
         <attribute name="calculator">
             <group>admin:shipping_method:read</group>
-            <group>admin:shipping_method:all</group>
             <group>admin:shipping_method:create</group>
             <group>admin:shipping_method:update</group>
             <group>admin:zone:update</group>
@@ -90,7 +82,6 @@
 
         <attribute name="configuration">
             <group>admin:shipping_method:read</group>
-            <group>admin:shipping_method:all</group>
             <group>admin:shipping_method:create</group>
             <group>admin:shipping_method:update</group>
             <group>admin:zone:all</group>
@@ -101,21 +92,18 @@
 
         <attribute name="createdAt">
             <group>admin:shipping_method:read</group>
-            <group>admin:shipping_method:all</group>
         </attribute>
 
         <attribute name="updatedAt">
             <group>admin:shipping_method:read</group>
-            <group>admin:shipping_method:all</group>
         </attribute>
 
         <attribute name="archivedAt">
             <group>admin:shipping_method:read</group>
-            <group>admin:shipping_method:all</group>
         </attribute>
 
         <attribute name="rules">
-            <group>admin:shipping_method:all</group>
+            <group>admin:shipping_method:read</group>
             <group>admin:zone:all</group>
             <group>admin:zone:read</group>
             <group>admin:zone:update</group>

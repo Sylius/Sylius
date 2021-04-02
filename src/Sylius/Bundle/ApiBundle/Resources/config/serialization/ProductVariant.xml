@@ -26,8 +26,7 @@
             <group>admin:product_variant_inventory:read</group>
             <group>admin:product:read</group>
             <group>shop:product_variant:read</group>
-            <group>shop:product:read</group>
-            <group>shop:order_item:subresource</group>
+            <group>shop:order_item:subresource:read</group>
         </attribute>
         <attribute name="product">
             <group>admin:product_variant:read</group>
@@ -42,7 +41,6 @@
             <group>admin:product_variant_inventory:read</group>
             <group>admin:product:read</group>
             <group>shop:product_variant:read</group>
-            <group>shop:product:read</group>
         </attribute>
         <attribute name="tracked">
             <group>admin:product_variant:read</group>
@@ -105,7 +103,7 @@
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
-            <group>shop:product:read</group>
+            <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="translations">
             <group>admin:product_variant:read</group>
@@ -115,7 +113,6 @@
             <group>admin:product:read</group>
             <group>shop:product_variant:read</group>
             <group>shop:order:account:read</group>
-            <group>shop:cart:read</group>
         </attribute>
     </class>
 </serializer>

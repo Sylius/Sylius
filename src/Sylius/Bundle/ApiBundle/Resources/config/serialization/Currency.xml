@@ -24,12 +24,10 @@
            <group>admin:currency:read</group>
            <group>shop:currency:read</group>
            <group>shop:channel:read</group>
-           <group>admin:exchange_rate:read</group>
        </attribute>
         <attribute name="name">
             <group>admin:currency:read</group>
             <group>shop:currency:read</group>
-            <group>admin:exchange_rate:read</group>
         </attribute>
     </class>
 </serializer>

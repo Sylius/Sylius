@@ -15,7 +15,7 @@
             <group>admin:product:create</group>
             <group>admin:product:update</group>
             <group>shop:product:read</group>
-            <group>shop:order_item:subresource</group>
+            <group>shop:order_item:subresource:read</group>
         </attribute>
     </class>
 </serializer>

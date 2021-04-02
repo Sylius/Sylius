@@ -22,14 +22,9 @@
         <attribute name="code">
             <group>product_option:read</group>
             <group>product_option:create</group>
-            <group>product_option:update</group>
-            <group>admin:product:read</group>
-            <group>shop:product:read</group>
         </attribute>
         <attribute name="name">
             <group>product_option:read</group>
-            <group>admin:product:read</group>
-            <group>shop:product:read</group>
         </attribute>
         <attribute name="createdAt">
             <group>product_option:read</group>
@@ -37,7 +32,7 @@
         <attribute name="updatedAt">
             <group>product_option:read</group>
         </attribute>
-        <attribute name="values">
+        <attribute name="values" max-depth="1">
             <group>product_option:read</group>
             <group>product_option:create</group>
             <group>product_option:update</group>

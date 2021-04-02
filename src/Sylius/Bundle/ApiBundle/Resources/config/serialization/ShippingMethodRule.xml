@@ -14,11 +14,9 @@
     <class name="Sylius\Component\Shipping\Model\ShippingMethodRule">
         <attribute name="id">
             <group>admin:shipping_method:read</group>
-            <group>admin:shipping_method:all</group>
         </attribute>
         <attribute name="type">
             <group>admin:shipping_method:read</group>
-            <group>admin:shipping_method:all</group>
             <group>admin:shipping_method:create</group>
             <group>admin:shipping_method:update</group>
             <group>admin:zone:all</group>
@@ -28,7 +26,6 @@
         </attribute>
         <attribute name="configuration">
             <group>admin:shipping_method:read</group>
-            <group>admin:shipping_method:all</group>
             <group>admin:shipping_method:create</group>
             <group>admin:shipping_method:update</group>
             <group>admin:zone:all</group>

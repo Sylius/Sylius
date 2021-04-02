@@ -12,6 +12,7 @@
         <attribute name="name">
             <group>admin:taxon:read</group>
             <group>admin:taxon_translation:read</group>
+            <group>shop:taxon:read</group>
         </attribute>
         <attribute name="description">
             <group>admin:taxon:read</group>

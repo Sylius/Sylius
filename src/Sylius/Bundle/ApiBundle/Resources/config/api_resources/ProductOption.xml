@@ -17,6 +17,7 @@
 >
     <resource class="%sylius.model.product_option.class%" shortName="ProductOption">
         <attribute name="normalization_context">
+            <attribute name="enable_max_depth">true</attribute>
             <attribute name="groups">
                 <attribute>product_option:read</attribute>
             </attribute>

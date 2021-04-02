@@ -25,7 +25,7 @@
             <group>admin:product:create</group>
             <group>admin:product:update</group>
             <group>shop:product:read</group>
-            <group>shop:order_item:subresource</group>
+            <group>shop:order_item:subresource:read</group>
         </attribute>
         <attribute name="createdAt">
             <group>admin:product:read</group>
@@ -68,7 +68,7 @@
             <group>admin:product:create</group>
             <group>admin:product:update</group>
             <group>shop:product:read</group>
-            <group>shop:order_item:subresource</group>
+            <group>shop:order_item:subresource:read</group>
         </attribute>
         <attribute name="variants">
             <group>admin:product:read</group>

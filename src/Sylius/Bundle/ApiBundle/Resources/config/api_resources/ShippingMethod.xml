@@ -22,12 +22,16 @@
             <attribute name="position">ASC</attribute>
         </attribute>
 
+        <attribute name="normalization_context">
+            <attribute name="groups">admin:shipping_method:read</attribute>
+        </attribute>
+
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/shipping-methods</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_method:all</attribute>
+                    <attribute name="groups">admin:shipping_method:read</attribute>
                 </attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.filter_archived_shipping_methods</attribute>
