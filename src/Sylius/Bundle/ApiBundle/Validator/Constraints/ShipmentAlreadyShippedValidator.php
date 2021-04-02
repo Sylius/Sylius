@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-final class ShipmentNotShippedStateValidator extends ConstraintValidator
+final class ShipmentAlreadyShippedValidator extends ConstraintValidator
 {
     /** @var ShipmentRepositoryInterface */
     private $shipmentRepository;
@@ -33,7 +33,7 @@ final class ShipmentNotShippedStateValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint): void
     {
-        Assert::isInstanceOf($constraint, ShipmentNotShippedState::class);
+        Assert::isInstanceOf($constraint, ShipmentAlreadyShipped::class);
         Assert::isInstanceOf($value, ShipShipment::class);
 
         /** @var ShipmentInterface $shipment */

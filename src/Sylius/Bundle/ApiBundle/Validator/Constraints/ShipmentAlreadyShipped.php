@@ -15,14 +15,14 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-final class ShipmentNotShippedState extends Constraint
+final class ShipmentAlreadyShipped extends Constraint
 {
     /** @var string */
     public $message = 'sylius.shipment.shipped';
 
     public function validatedBy(): string
     {
-        return 'sylius_api_shipment_not_shipped_state';
+        return 'sylius_api_shipment_already_shipped';
     }
 
     public function getTargets(): string

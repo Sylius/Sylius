@@ -20,7 +20,6 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 
 final class ShipmentIdAwareInputCommandDataTransformerSpec extends ObjectBehavior
 {
-
     function it_supports_only_shipment_id_aware_interface(
         LocaleCodeAwareInterface $localeCodeAware,
         ShipmentIdAwareInterface $shipmentIdAware
