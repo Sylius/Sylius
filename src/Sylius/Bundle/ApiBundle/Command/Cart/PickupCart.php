@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
 use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
 
 /** @experimental */
-class PickupCart implements ChannelCodeAwareInterface
+class PickupCart implements ChannelCodeAwareInterface, ShopUserIdAwareInterface
 {
     /** @var string|null
      * @psalm-immutable */
@@ -30,6 +31,9 @@ class PickupCart implements ChannelCodeAwareInterface
 
     /** @var string|null */
     private $channelCode;
+
+    /** @var mixed|null */
+    public $shopUserId;
 
     public function __construct(?string $tokenValue = null, ?string $localeCode = null)
     {
@@ -45,5 +49,15 @@ class PickupCart implements ChannelCodeAwareInterface
     public function setChannelCode(?string $channelCode): void
     {
         $this->channelCode = $channelCode;
+    }
+
+    public function getShopUserId()
+    {
+        return $this->shopUserId;
+    }
+
+    public function setShopUserId($shopUserId): void
+    {
+        $this->shopUserId = $shopUserId;
     }
 }
