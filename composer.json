@@ -158,7 +158,6 @@
         "sylius/user-bundle": "self.version"
     },
     "conflict": {
-        "api-platform/core": "^2.6",
         "doctrine/doctrine-bundle": "2.3.0",
         "jms/serializer-bundle": "3.9",
         "laminas/laminas-code": "^4.0.0",
