@@ -25,7 +25,7 @@ final class AdminUriBasedSectionResolverSpec extends ObjectBehavior
         $this->beConstructedWith('/admin');
     }
 
-    function it_it_uri_based_section_resolver(): void
+    function it_is_uri_based_section_resolver(): void
     {
         $this->shouldImplement(UriBasedSectionResolverInterface::class);
     }
