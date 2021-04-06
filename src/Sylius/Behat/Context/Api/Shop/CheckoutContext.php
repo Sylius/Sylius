@@ -755,7 +755,7 @@ final class CheckoutContext implements Context
     {
         $response = $this->ordersClient->getLastResponse();
 
-        Assert::true($response->getStatusCode() === 400);
+        Assert::true($response->getStatusCode() === 422);
 
         /** @var array|null $violations */
         $violations = $this->responseChecker->getResponseContent($response)['violations'];
@@ -917,7 +917,7 @@ final class CheckoutContext implements Context
     {
         $response = $this->ordersClient->getLastResponse();
 
-        Assert::same($response->getStatusCode(), 400);
+        Assert::oneOf($response->getStatusCode(), [400, 422]);
         Assert::true($this->isViolationWithMessageInResponse(
             $response,
             'Please select proper province.',
