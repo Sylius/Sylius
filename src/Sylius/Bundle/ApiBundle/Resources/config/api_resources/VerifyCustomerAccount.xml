@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="Sylius\Bundle\ApiBundle\Command\VerifyCustomerAccount" shortName="VerifyCustomerAccount">
+        <attribute name="identifiedBy">token</attribute>
+
         <attribute name="route_prefix">shop</attribute>
         <attribute name="messenger">input</attribute>
         <attribute name="validation_groups">sylius</attribute>

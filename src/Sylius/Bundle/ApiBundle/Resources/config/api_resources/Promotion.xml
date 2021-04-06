@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.promotion.class%" shortName="Promotion">
+        <attribute name="identifiedBy">id</attribute>
+
         <attribute name="route_prefix">admin</attribute>
 
         <attribute name="validation_groups">sylius</attribute>
@@ -41,7 +43,7 @@
             </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="true" writable="false" />
+        <property name="id" writable="false" />
         <property name="name" readable="true" />
         <property name="description" readable="true" />
         <property name="priority" readable="true" />

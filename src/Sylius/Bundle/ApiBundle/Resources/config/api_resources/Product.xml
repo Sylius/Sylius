@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.product.class%" shortName="Product">
+        <attribute name="identifiedBy">code</attribute>
+
         <attribute name="validation_groups">sylius</attribute>
 
         <attribute name="order">
@@ -97,8 +99,8 @@
             </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="false" writable="false" />
-        <property name="code" identifier="true" required="true" />
+        <property name="id" writable="false" />
+        <property name="code" required="true" />
         <property name="createdAt" writable="false" />
         <property name="updatedAt" writable="false" />
         <property name="translations" readable="true" writable="true">

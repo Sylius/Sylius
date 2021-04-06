@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.order.class%" shortName="Order">
+        <attribute name="identifiedBy">tokenValue</attribute>
+
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>admin:order:read</attribute>
@@ -370,9 +372,9 @@
             </subresourceOperation>
         </subresourceOperations>
 
-        <property name="id" identifier="false" writable="false" />
-        <property name="number" identifier="false" writable="false" />
-        <property name="tokenValue" identifier="true" writable="false" />
+        <property name="id" writable="false" />
+        <property name="number" writable="false" />
+        <property name="tokenValue" writable="false" />
         <property name="channel" writable="false" />
         <property name="customer" writable="false" />
         <property name="shipments" writable="false">

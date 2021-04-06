@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.zone.class%" shortName="Zone">
+        <attribute name="identifiedBy">code</attribute>
+
         <attribute name="route_prefix">admin</attribute>
 
         <attribute name="validation_groups">sylius</attribute>
@@ -56,10 +58,10 @@
             </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="false" writable="false" />
+        <property name="id" writable="false" />
         <property name="createdAt" writable="false" />
         <property name="updatedAt" writable="false" />
-        <property name="code" identifier="true" required="true" />
+        <property name="code" required="true" />
         <property name="name" required="true" />
         <property name="scope" readable="true" writable="true" />
         <property name="type" readable="true" writable="true" />

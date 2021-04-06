@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.shipping_method_translation.class%" shortName="ShippingMethodTranslation">
+        <attribute name="identifiedBy">id</attribute>
+
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations />
@@ -32,9 +34,9 @@
             </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="true" writable="false" />
-        <property name="name" identifier="false" required="true" />
-        <property name="description" identifier="false" />
-        <property name="locale" identifier="false" required="true" />
+        <property name="id" writable="false" />
+        <property name="name" required="true" />
+        <property name="description" />
+        <property name="locale" required="true" />
     </resource>
 </resources>

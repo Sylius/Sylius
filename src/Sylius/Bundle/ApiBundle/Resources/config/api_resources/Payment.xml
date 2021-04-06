@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.payment.class%" shortName="Payment">
+        <attribute name="identifiedBy">id</attribute>
+
         <attribute name="validation_groups">sylius</attribute>
 
         <attribute name="order">
@@ -73,7 +75,7 @@
             </subresourceOperation>
         </subresourceOperations>
 
-        <property name="id" identifier="true" writable="false" />
+        <property name="id" writable="false" />
         <property name="createdAt" writable="false" />
         <property name="updatedAt" writable="false" />
         <property name="method" writable="false">

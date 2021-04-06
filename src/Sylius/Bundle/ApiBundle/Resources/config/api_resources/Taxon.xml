@@ -5,6 +5,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.taxon.class%" shortName="Taxon">
+        <attribute name="identifiedBy">code</attribute>
+
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
@@ -59,8 +61,8 @@
             </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="false" writable="false" />
-        <property name="code" identifier="true" required="true" />
+        <property name="id" writable="false" />
+        <property name="code" required="true" />
         <property name="translations" readable="true" writable="true" />
     </resource>
 </resources>

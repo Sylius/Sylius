@@ -5,6 +5,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.product_taxon.class%" shortName="ProductTaxon">
+        <attribute name="identifiedBy">id</attribute>
+
         <attribute name="validation_groups">sylius</attribute>
 
         <attribute name="normalization_context">
@@ -31,7 +33,7 @@
             </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="true" writable="false" />
+        <property name="id" writable="false" />
         <property name="product" required="true" />
         <property name="taxon" writable="true" />
         <property name="position" writable="true" />

@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.product_option_value.class%" shortName="ProductOptionValue">
+        <attribute name="identifiedBy">code</attribute>
+
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>product_option_value:read</attribute>
@@ -44,8 +46,8 @@
             </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="false" writable="false" />
-        <property name="code" identifier="true" required="true" />
+        <property name="id" writable="false" />
+        <property name="code" required="true" />
         <property name="translations" readable="true" writable="true" >
             <attribute name="openapi_context">
                 <attribute name="type">array</attribute>

@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.channel.class%" shortName="Channel">
+        <attribute name="identifiedBy">code</attribute>
+
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
@@ -65,8 +67,8 @@
             </subresourceOperation>
         </subresourceOperations>
 
-        <property name="id" identifier="false" writable="false" />
-        <property name="code" identifier="true" required="true" />
+        <property name="id" writable="false" />
+        <property name="code" required="true" />
         <property name="name" writable="true" readable="true" />
         <property name="description" writable="true" readable="true" />
         <property name="hostname" writable="true" readable="true" />

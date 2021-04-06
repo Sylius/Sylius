@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.exchange_rate.class%" shortName="ExchangeRate">
+        <attribute name="identifiedBy">id</attribute>
+
         <attribute name="route_prefix">admin</attribute>
 
         <attribute name="validation_groups">sylius</attribute>
@@ -59,10 +61,10 @@
             </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="true" writable="false" />
-        <property name="ratio" identifier="false" required="true" />
-        <property name="sourceCurrency" identifier="false" required="true" />
-        <property name="targetCurrency" identifier="false" required="true" />
+        <property name="id" writable="false" />
+        <property name="ratio" required="true" />
+        <property name="sourceCurrency" required="true" />
+        <property name="targetCurrency" required="true" />
         <property name="createdAt" writable="false" />
         <property name="updatedAt" writable="false" />
     </resource>

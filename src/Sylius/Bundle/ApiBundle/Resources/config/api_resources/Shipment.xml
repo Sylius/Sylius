@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.shipment.class%" shortName="Shipment">
+        <attribute name="identifiedBy">id</attribute>
+
         <attribute name="validation_groups">sylius</attribute>
 
         <attribute name="order">
@@ -75,7 +77,7 @@
             </subresourceOperation>
         </subresourceOperations>
 
-        <property name="id" identifier="true" />
+        <property name="id" />
         <property name="createdAt" />
         <property name="updatedAt" />
         <property name="state" />

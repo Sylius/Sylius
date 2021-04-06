@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.avatar_image.class%" shortName="AvatarImage">
+        <attribute name="identifiedBy">id</attribute>
+
         <attribute name="route_prefix">admin</attribute>
 
         <collectionOperations>
@@ -63,7 +65,7 @@
             </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="true" writable="false" />
+        <property name="id" writable="false" />
         <property name="path" required="true" />
         <property name="owner" required="true" />
     </resource>

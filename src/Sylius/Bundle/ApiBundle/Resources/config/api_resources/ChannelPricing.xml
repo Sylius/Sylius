@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.channel_pricing.class%" shortName="ChannelPricing">
+        <attribute name="identifiedBy">id</attribute>
+
         <attribute name="validation_groups">sylius</attribute>
 
         <attribute name="normalization_context">
@@ -34,7 +36,7 @@
         <collectionOperations>
         </collectionOperations>
 
-        <property name="id" writable="false" readable="true" identifier="true" />
+        <property name="id" writable="false" readable="true" />
         <property name="price" writable="false" readable="true" />
         <property name="originalPrice" writable="false" readable="true" />
     </resource>
