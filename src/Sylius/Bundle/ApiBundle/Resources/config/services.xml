@@ -71,9 +71,6 @@
             <argument type="service" id="service_container" />
         </service>
 
-        <service id="api_platform.doctrine.orm.default.subresource_data_provider" parent="api_platform.doctrine.orm.subresource_data_provider" class="Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Doctrine\ORM\SubresourceDataProvider">
-            <tag name="api_platform.subresource_data_provider" />
-        </service>
 
         <service id="api_platform.swagger.action.ui" class="Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Bundle\Action\SwaggerUiAction" public="true">
             <argument type="service" id="api_platform.metadata.resource.name_collection_factory" />
