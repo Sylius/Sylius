@@ -39,7 +39,7 @@
         <itemOperations>
             <itemOperation name="shop_verify_customer_account">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/account-verification-requests/{id}</attribute>
+                <attribute name="path">/account-verification-requests/{token}</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\VerifyCustomerAccount</attribute>
                 <attribute name="status">202</attribute>
                 <attribute name="denormalization_context">
