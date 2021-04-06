@@ -175,5 +175,15 @@
             <argument type="service" id="api_platform.iri_converter" />
             <tag name="serializer.normalizer" />
         </service>
+
+        <service id="sylius.api.section_resolver.admin_api_uri_based_section_resolver" class="Sylius\Bundle\ApiBundle\SectionResolver\AdminApiUriBasedSectionResolver">
+            <argument>%sylius.security.new_api_admin_route%</argument>
+            <tag name="sylius.uri_based_section_resolver" priority="30" />
+        </service>
+
+        <service id="sylius.api.section_resolver.shop_api_uri_based_section_resolver" class="Sylius\Bundle\ApiBundle\SectionResolver\ShopApiUriBasedSectionResolver">
+            <argument>%sylius.security.new_api_shop_route%</argument>
+            <tag name="sylius.uri_based_section_resolver" priority="40" />
+        </service>
     </services>
 </container>
