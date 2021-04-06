@@ -251,7 +251,7 @@ final class ProductReviewContext implements Context
     {
         $response = $this->client->getLastResponse();
 
-        Assert::same($response->getStatusCode(), 400);
+        Assert::oneOf($response->getStatusCode(), [400, 422]);
         Assert::true($this->responseChecker->hasViolationWithMessage($response, $message, $property));
     }
 }
