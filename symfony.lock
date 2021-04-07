@@ -669,6 +669,9 @@
     "sylius-labs/sensio-distribution-bundle": {
         "version": "v6.0.1"
     },
+    "sylius/admin-api-bundle": {
+        "version": "v1.9.1"
+    },
     "sylius/fixtures-bundle": {
         "version": "v1.4.1"
     },
