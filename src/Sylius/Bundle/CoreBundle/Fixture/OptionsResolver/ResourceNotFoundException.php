@@ -11,10 +11,8 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminApiBundle\Model;
+namespace Sylius\Bundle\CoreBundle\Fixture\OptionsResolver;
 
-use FOS\OAuthServerBundle\Entity\AccessToken as BaseAccessToken;
-
-class AccessToken extends BaseAccessToken implements AccessTokenInterface
+final class ResourceNotFoundException extends \RuntimeException
 {
 }

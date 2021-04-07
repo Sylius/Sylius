@@ -17,8 +17,6 @@
             <directory name="src/Sylius/Bundle/AddressingBundle/spec" />
             <directory name="src/Sylius/Bundle/AddressingBundle/test" />
             <directory name="src/Sylius/Bundle/AddressingBundle/Tests" />
-            <directory name="src/Sylius/Bundle/AdminApiBundle/spec" />
-            <directory name="src/Sylius/Bundle/AdminApiBundle/Tests" />
             <directory name="src/Sylius/Bundle/ApiBundle/spec" />
             <directory name="src/Sylius/Bundle/ApiBundle/Tests" />
             <directory name="src/Sylius/Bundle/AdminBundle/spec" />
