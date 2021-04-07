@@ -311,7 +311,7 @@ final class CheckoutContext implements Context
     {
         $response = $this->completeOrder();
 
-        if ($response->getStatusCode() === 400) {
+        if ($response->getStatusCode() === 422) {
             return;
         }
 
