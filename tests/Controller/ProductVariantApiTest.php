@@ -346,8 +346,8 @@ EOT;
 <<<EOT
         {
             "code": "MONSTER_MUG",
-            "optionValues": { 
-                "MUG_TYPE": "MUG_TYPE_MEDIUM" 
+            "optionValues": {
+                "MUG_TYPE": "MUG_TYPE_MEDIUM"
             }
         }
 EOT;
@@ -526,6 +526,41 @@ EOT;
         {
             "version": "$version",
             "optionValues": {}
+        }
+EOT;
+
+        $this->client->request('PUT', $this->getVariantUrl($product, $productVariant), [], [], static::$authorizedHeaderWithContentType, $data);
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_allow_nulling_information_about_product_variant_options_in_product_without_options()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $productVariantsData = $this->loadFixturesFromFiles([
+            'resources/locales.yml',
+            'resources/product_variants.yml',
+        ]);
+
+        /** @var ProductInterface $product */
+        $product = $productVariantsData['product3'];
+
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $productVariantsData['productVariant23'];
+
+        $version = $productVariant->getVersion();
+
+        $data =
+            <<<EOT
+        {
+            "version": "$version",
+            "optionValues": {
+                "MUG_TYPE": "MUG_TYPE_MEDIUM"
+            }
         }
 EOT;
 

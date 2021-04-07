@@ -35,6 +35,10 @@ Sylius\Component\Core\Model\Product:
         fallbackLocale: en_US
         currentLocale: en
         code: STICKER
+    product3:
+        fallbackLocale: en_US
+        currentLocale: en
+        code: MUG_ES
 
 Sylius\Component\Product\Model\ProductVariantTranslation:
     productVariantTranslation{1..20}:
@@ -49,6 +53,10 @@ Sylius\Component\Product\Model\ProductVariantTranslation:
         name: "Large Mug"
         locale: en_US
         translatable: "@productVariant22"
+    productVariantTranslation23:
+        name: "Fancy Mug"
+        locale: en_US
+        translatable: "@productVariant23"
 
 Sylius\Component\Core\Model\ProductVariant:
     productVariant{1..20}:
@@ -71,6 +79,15 @@ Sylius\Component\Core\Model\ProductVariant:
         position: 22
         translations:
             - "@productVariantTranslation22"
+    productVariant23:
+        code: FANCY_MUG
+        version: 1
+        product: "@product3"
+        fallbackLocale: en_US
+        currentLocale: de
+        position: 23
+        translations:
+            - "@productVariantTranslation23"
     productVariant21:
         code: SMALL_STICKER
         version: 1

@@ -32,5 +32,8 @@
         <constraint name="Sylius\Bundle\ProductBundle\Validator\Constraint\ProductVariantCombination">
             <option name="groups">sylius</option>
         </constraint>
+        <constraint name="Sylius\Bundle\ProductBundle\Validator\Constraint\ProductVariantOptionsChecker">
+            <option name="groups">sylius</option>
+        </constraint>
     </class>
 </constraint-mapping>

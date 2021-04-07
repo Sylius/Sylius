@@ -19,11 +19,6 @@
                 "errors": [
                     "Please enter the code."
                 ]
-            },
-            "optionValues": {
-              "children": {
-                "MUG_TYPE": {}
-              }
             }
         }
     }

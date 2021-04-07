@@ -40,6 +40,9 @@
             <argument type="service" id="sylius.checker.product_variants_parity" />
             <tag name="validator.constraint_validator" alias="sylius.validator.product_variant_combination" />
         </service>
+        <service id="sylius.validator.product_variant_options_checker" class="Sylius\Bundle\ProductBundle\Validator\ProductVariantOptionsCheckerValidator">
+            <tag name="validator.constraint_validator" alias="sylius.validator.product_variant_options_checker" />
+        </service>
         <service id="sylius.validator.product_code_uniqueness" class="Sylius\Bundle\ProductBundle\Validator\UniqueSimpleProductCodeValidator">
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="validator.constraint_validator" alias="sylius.validator.unique_simple_product_code" />

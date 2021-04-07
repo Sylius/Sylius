@@ -36,6 +36,8 @@ sylius:
             max_length: Option name must not be longer than 1 character.|Option name must not be longer than {{ limit }} characters.
         values:
             min_count: Please add at least {{ limit }} option value.|Please add at least {{ limit }} option values.
+        not_empty: Option Values cannot be empty.
+        not_null: Option Values cannot be null.
     option_value:
         code:
             not_blank: Please enter option value code.
