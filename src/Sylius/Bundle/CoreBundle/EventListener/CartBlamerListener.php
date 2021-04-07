@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Persistence\ObjectManager;
-use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTAuthenticatedEvent;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
+use Sylius\Bundle\ShopBundle\SectionResolver\ShopSection;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -31,14 +33,25 @@ final class CartBlamerListener
     /** @var CartContextInterface */
     private $cartContext;
 
-    public function __construct(ObjectManager $cartManager, CartContextInterface $cartContext)
-    {
+    /** @var SectionProviderInterface */
+    private $uriBasedSectionContext;
+
+    public function __construct(
+        ObjectManager $cartManager,
+        CartContextInterface $cartContext,
+        SectionProviderInterface $uriBasedSectionContext
+    ) {
         $this->cartManager = $cartManager;
         $this->cartContext = $cartContext;
+        $this->uriBasedSectionContext = $uriBasedSectionContext;
     }
 
     public function onImplicitLogin(UserEvent $userEvent): void
     {
+        if (!$this->uriBasedSectionContext->getSection() instanceof ShopSection) {
+            return;
+        }
+
         $user = $userEvent->getUser();
         if (!$user instanceof ShopUserInterface) {
             return;
@@ -49,17 +62,12 @@ final class CartBlamerListener
 
     public function onInteractiveLogin(InteractiveLoginEvent $interactiveLoginEvent): void
     {
-        $user = $interactiveLoginEvent->getAuthenticationToken()->getUser();
-        if (!$user instanceof ShopUserInterface) {
+        $section = $this->uriBasedSectionContext->getSection();
+        if (!$section instanceof ShopSection && !$section instanceof ShopApiSection) {
             return;
         }
 
-        $this->blame($user);
-    }
-
-    public function onJWTAuthenticatedLogin(JWTAuthenticatedEvent $event): void
-    {
-        $user = $event->getToken()->getUser();
+        $user = $interactiveLoginEvent->getAuthenticationToken()->getUser();
         if (!$user instanceof ShopUserInterface) {
             return;
         }
