@@ -81,12 +81,13 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
         );
     }
 
-    function it_applies_conditions_to_get_order_with_state_cart_by_authorized_shop_user_that_is_assigns_to_this_order(
+    function it_applies_conditions_to_get_order_with_state_cart_by_authorized_shop_user_that_is_assigns_to_this_order_or_order_with_state_cart_has_not_assigned_customer(
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
+        Expr $expr
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -97,10 +98,22 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
         $shopUser->getRoles()->willReturn(['ROLE_USER']);
 
         $queryBuilder
-            ->andWhere(sprintf('%s.customer = :customer', 'o'))
+            ->expr()
+            ->shouldBeCalled()
+            ->willReturn($expr);
+
+        $expr
+            ->orX(sprintf('%s.customer = :customer', 'o'), sprintf('%s.customer IS NULL', 'o'))
+            ->shouldBeCalled()
+            ->willReturn(sprintf('%s.customer = :customer OR %s.customer IS NULL', 'o', 'o'))
+        ;
+
+        $queryBuilder
+            ->andWhere(sprintf('%s.customer = :customer OR %s.customer IS NULL', 'o', 'o'))
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
-        ;
+                ;
+
         $queryBuilder
             ->setParameter('customer', 1)
             ->shouldBeCalled()

@@ -37,7 +37,7 @@ final class OrderAdjustmentsSubresourceDataProvider implements RestrictedDataPro
 
         return
             is_a($resourceClass, AdjustmentInterface::class, true) &&
-            isset($subresourceIdentifiers['id']) &&
+            isset($subresourceIdentifiers['tokenValue']) &&
             !isset($subresourceIdentifiers['items'])
         ;
     }
@@ -47,7 +47,7 @@ final class OrderAdjustmentsSubresourceDataProvider implements RestrictedDataPro
         $subresourceIdentifiers = $context['subresource_identifiers'];
 
         /** @var OrderInterface|null $order */
-        $order = $this->orderRepository->findOneBy(['tokenValue' => $subresourceIdentifiers['id']]);
+        $order = $this->orderRepository->findOneBy(['tokenValue' => $subresourceIdentifiers['tokenValue']]);
         Assert::notNull($order);
 
         return $order->getAdjustmentsRecursively();

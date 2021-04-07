@@ -389,7 +389,7 @@ final class AddressContext implements Context
     {
         $response = $this->responseChecker->getResponseContent($this->addressClient->getLastResponse());
 
-        Assert::inArray(['propertyPath' => '', 'message' => 'Please select proper province.'], $response['violations']);
+        Assert::same('Please select proper province.', $response['violations'][0]['message']);
     }
 
     /**
