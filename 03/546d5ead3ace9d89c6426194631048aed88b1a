@@ -1,0 +1,42 @@
+---------------------------------------------------------------------------
+
+by pamil at 2021-03-30T13:46:42Z
+
+It almost works, but it requires adding `COMPOSER_ROOT_VERSION=dev-master` with `composer update` for any other branch that `master` (so `1.8` and `1.9` as well).
+
+If not added, resolving dependencies fails with the following message:
+```
+  Problem 1
+    - sylius/admin-api-bundle[v1.8.0, ..., v1.9.1] require sylius/core-bundle ^1.6 -> found sylius/core-bundle[v1.6.0, ..., v1.9.1] but these were not loaded, likely because it conflicts with another require.
+    - Root composer.json requires sylius/admin-api-bundle ^1.8 -> satisfiable by sylius/admin-api-bundle[v1.8.0, ..., v1.9.1].
+```
+
+I'm looking for ideas to make it work by default without having to add this env variable; it hurts DX a lot.
+
+---------------------------------------------------------------------------
+
+by pamil at 2021-03-30T14:02:37Z
+
+Changing branch names helps, renaming `1.8` to `1.8.x` fixes the problem, but I'm not sure how it would work out for new branches based on those. `1.8.x-anything` still does not work.
+
+---------------------------------------------------------------------------
+
+by pamil at 2021-03-30T14:27:49Z
+
+Two more potential fixes:
+ - explicitly specifying `version` in `composer.json` (prone to human error while tagging)
+ - replacing packages for the whole minor version, like `1.8.*`, instead of `self.version` (but then eg. `sylius/sylius` v1.8.15 could be installed even if `sylius/core-bundle` v1.8.20 is required and some dependency prevents from installing more recent version of `sylius/sylius`)
+
+---------------------------------------------------------------------------
+
+by pamil at 2021-03-30T14:32:42Z
+
+I guess I'll go with explicitly setting version in composer.json, we already do that in `Kernel` for Sylius version - it seems like the best possible solution.
+
+---------------------------------------------------------------------------
+
+by pamil at 2021-03-30T18:52:35Z
+
+When upmerging, make sure all AdminApiBundle files are removed and the required version is bumped to `~1.9.0` for Sylius 1.9 and `^1.10` for Sylius 1.10 (dev-master).
+
+**The most important thing - make sure versions in `composer.json` are updated properly and are the same as the ones specified in the `Kernel` class from `CoreBundle`. Double-check before tagging any release.**
