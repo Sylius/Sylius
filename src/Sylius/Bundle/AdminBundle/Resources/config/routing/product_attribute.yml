@@ -58,4 +58,3 @@ sylius_admin_render_attribute_forms:
     defaults:
         _controller: sylius.controller.product_attribute:renderAttributeValueFormsAction
         template: "@SyliusAdmin/Product/Attribute/attributeValues.html.twig"
-

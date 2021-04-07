@@ -40,7 +40,7 @@ sylius_fixtures:
                             -   name: 'Dress material'
                                 code: 'dress_material'
                                 type: 'text'
-                                
+
                             -   name: 'Length'
                                 code: 'length'
                                 type: 'integer'
