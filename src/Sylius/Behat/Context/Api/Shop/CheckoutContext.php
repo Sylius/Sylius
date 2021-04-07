@@ -448,7 +448,7 @@ final class CheckoutContext implements Context
 
         $response = $this->ordersClient->getLastResponse();
 
-        Assert::same($response->getStatusCode(), 400);
+        Assert::same($response->getStatusCode(), 422);
 
         Assert::true($this->isViolationWithMessageInResponse(
             $response,
@@ -809,7 +809,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldNotSeeTheThankYouPage(): void
     {
-        Assert::same($this->ordersClient->getLastResponse()->getStatusCode(), 400);
+        Assert::oneOf($this->ordersClient->getLastResponse()->getStatusCode(), [400, 422]);
     }
 
     /**
@@ -838,7 +838,7 @@ final class CheckoutContext implements Context
     {
         $response = $this->ordersClient->getLastResponse();
 
-        Assert::same($response->getStatusCode(), 400);
+        Assert::same($response->getStatusCode(), 422);
 
         Assert::true($this->isViolationWithMessageInResponse(
             $response,

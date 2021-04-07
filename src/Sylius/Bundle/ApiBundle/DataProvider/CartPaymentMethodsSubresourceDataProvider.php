@@ -51,7 +51,7 @@ final class CartPaymentMethodsSubresourceDataProvider implements RestrictedDataP
 
         return
             is_a($resourceClass, PaymentMethodInterface::class, true) &&
-            isset($subresourceIdentifiers['id'], $subresourceIdentifiers['payments'])
+            isset($subresourceIdentifiers['tokenValue'], $subresourceIdentifiers['payments'])
         ;
     }
 
@@ -60,7 +60,7 @@ final class CartPaymentMethodsSubresourceDataProvider implements RestrictedDataP
         $subresourceIdentifiers = $context['subresource_identifiers'];
 
         /** @var OrderInterface|null $order */
-        $order = $this->orderRepository->findCartByTokenValue($subresourceIdentifiers['id']);
+        $order = $this->orderRepository->findCartByTokenValue($subresourceIdentifiers['tokenValue']);
         Assert::notNull($order);
 
         /** @var PaymentInterface|null $payment */

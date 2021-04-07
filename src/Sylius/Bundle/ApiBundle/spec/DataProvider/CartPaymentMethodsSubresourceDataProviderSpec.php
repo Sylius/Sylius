@@ -45,7 +45,7 @@ final class CartPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavior
             ->shouldReturn(false)
         ;
 
-        $context['subresource_identifiers'] = ['id' => '69', 'payments' => '420'];
+        $context['subresource_identifiers'] = ['tokenValue' => '69', 'payments' => '420'];
 
         $this
             ->supports(
@@ -60,9 +60,9 @@ final class CartPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavior
     function it_throws_an_exception_if_cart_does_not_exist(
         OrderRepositoryInterface $orderRepository): void
     {
-        $context['subresource_identifiers'] = ['id' => '69', 'payments' => '420'];
+        $context['subresource_identifiers'] = ['tokenValue' => '69', 'payments' => '420'];
 
-        $orderRepository->findCartByTokenValue($context['subresource_identifiers']['id'])->willReturn(null);
+        $orderRepository->findCartByTokenValue($context['subresource_identifiers']['tokenValue'])->willReturn(null);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -81,9 +81,9 @@ final class CartPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavior
         OrderInterface $order,
         PaymentInterface $payment
     ): void {
-        $context['subresource_identifiers'] = ['id' => '69', 'payments' => '420'];
+        $context['subresource_identifiers'] = ['tokenValue' => '69', 'payments' => '420'];
 
-        $orderRepository->findCartByTokenValue($context['subresource_identifiers']['id'])->willReturn($order);
+        $orderRepository->findCartByTokenValue($context['subresource_identifiers']['tokenValue'])->willReturn($order);
         $paymentRepository->find($context['subresource_identifiers']['payments'])->willReturn($payment);
 
         $order->hasPayment($payment)->willReturn(false);
@@ -105,9 +105,9 @@ final class CartPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavior
         OrderInterface $order,
         PaymentInterface $payment
     ): void {
-        $context['subresource_identifiers'] = ['id' => '69', 'payments' => '420'];
+        $context['subresource_identifiers'] = ['tokenValue' => '69', 'payments' => '420'];
 
-        $orderRepository->findCartByTokenValue($context['subresource_identifiers']['id'])->willReturn($order);
+        $orderRepository->findCartByTokenValue($context['subresource_identifiers']['tokenValue'])->willReturn($order);
         $paymentRepository->find($context['subresource_identifiers']['payments'])->willReturn($payment);
 
         $order->hasPayment($payment)->willReturn(false);
@@ -129,9 +129,9 @@ final class CartPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavior
         OrderInterface $order,
         PaymentInterface $payment
     ): void {
-        $context['subresource_identifiers'] = ['id' => '69', 'payments' => '420'];
+        $context['subresource_identifiers'] = ['tokenValue' => '69', 'payments' => '420'];
 
-        $orderRepository->findCartByTokenValue($context['subresource_identifiers']['id'])->willReturn($order);
+        $orderRepository->findCartByTokenValue($context['subresource_identifiers']['tokenValue'])->willReturn($order);
         $paymentRepository->find($context['subresource_identifiers']['payments'])->willReturn($payment);
 
         $order->hasPayment($payment)->willReturn(false);
@@ -155,9 +155,9 @@ final class CartPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavior
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod
     ): void {
-        $context['subresource_identifiers'] = ['id' => '69', 'payments' => '420'];
+        $context['subresource_identifiers'] = ['tokenValue' => '69', 'payments' => '420'];
 
-        $orderRepository->findCartByTokenValue($context['subresource_identifiers']['id'])->willReturn($order);
+        $orderRepository->findCartByTokenValue($context['subresource_identifiers']['tokenValue'])->willReturn($order);
         $paymentRepository->find($context['subresource_identifiers']['payments'])->willReturn($payment);
 
         $order->hasPayment($payment)->willReturn(true);
