@@ -133,7 +133,7 @@
                     <attribute name="summary">Selects shipping methods for particular shipment</attribute>
                     <attribute name="parameters">
                         <attribute>
-                            <attribute name="name">id</attribute>
+                            <attribute name="name">tokenValue</attribute>
                             <attribute name="in">path</attribute>
                             <attribute name="required">true</attribute>
                             <attribute name="schema">
@@ -167,7 +167,7 @@
                     <attribute name="summary">Selects payment methods for particular payment</attribute>
                     <attribute name="parameters">
                         <attribute>
-                            <attribute name="name">id</attribute>
+                            <attribute name="name">tokenValue</attribute>
                             <attribute name="in">path</attribute>
                             <attribute name="required">true</attribute>
                             <attribute name="schema">
@@ -201,7 +201,7 @@
                     <attribute name="summary">Change the payment method as logged shop user</attribute>
                     <attribute name="parameters">
                         <attribute>
-                            <attribute name="name">id</attribute>
+                            <attribute name="name">tokenValue</attribute>
                             <attribute name="in">path</attribute>
                             <attribute name="required">true</attribute>
                             <attribute name="schema">
@@ -228,7 +228,7 @@
                     <attribute name="summary">Retrieve payment method configuration</attribute>
                     <attribute name="parameters">
                         <attribute>
-                            <attribute name="name">id</attribute>
+                            <attribute name="name">tokenValue</attribute>
                             <attribute name="in">path</attribute>
                             <attribute name="required">true</attribute>
                             <attribute name="schema">
@@ -279,7 +279,7 @@
                 <attribute name="openapi_context">
                     <attribute name="parameters">
                         <attribute>
-                            <attribute name="name">id</attribute>
+                            <attribute name="name">tokenValue</attribute>
                             <attribute name="in">path</attribute>
                             <attribute name="required">true</attribute>
                             <attribute name="schema">
