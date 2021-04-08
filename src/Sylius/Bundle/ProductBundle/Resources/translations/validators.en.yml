@@ -15,6 +15,10 @@ sylius:
             not_blank: Please enter product name.
             min_length: Product name must be at least 1 character long.|Product name must be at least {{ limit }} characters long.
             max_length: Product name must not be longer than 1 character.|Product name must not be longer than {{ limit }} characters.
+        meta_keywords:
+            max_length: Product meta keywords must not be longer than 1 character.|Product meta keywords must not be longer than {{ limit }} characters.
+        meta_description:
+            max_length: Product meta description must not be longer than 1 character.|Product meta description must not be longer than {{ limit }} characters.
     product_variant:
         combination: Variant with this option set already exists.
         code:
