@@ -26,6 +26,20 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="metaKeywords">
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.product.meta_keywords.max_length</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="metaDescription">
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.product.meta_description.max_length</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">
                 <value>locale</value>
