@@ -75,10 +75,7 @@ final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
 
         if ($user instanceof ShopUserInterface && in_array('ROLE_USER', $user->getRoles(), true)) {
             $queryBuilder
-                ->andWhere($queryBuilder->expr()->orX(
-                    sprintf('%s.customer = :customer', $rootAlias),
-                    sprintf('%s.customer IS NULL', $rootAlias))
-                )
+                ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
                 ->setParameter('customer', $user->getCustomer()->getId())
             ;
 
