@@ -1,5 +1,5 @@
-Using Webpack Encore in Sylius
-------------------------------
+How to use Webpack Encore in Sylius?
+------------------------------------
 
 This is a simple guide on how to start using webpack in Sylius apps. Webpack finally lets us easily customize Sylius assets.
 
