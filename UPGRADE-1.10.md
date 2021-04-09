@@ -12,4 +12,4 @@
 
 - `product_review:update` changed to: `admin:product_review:update` and `shop:product_review:update`
 
-1. We've removed `Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Doctrine\ORM\SubresourceDataProvider` is not longer needed because `ApiPlatform\Core\Bridge\Doctrine\Orm\SubresourceDataProvider` is the same file.
+1. We've removed `Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Doctrine\ORM\SubresourceDataProvider`. It's no longer needed because `ApiPlatform\Core\Bridge\Doctrine\Orm\SubresourceDataProvider` has the same logic.

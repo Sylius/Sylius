@@ -47,7 +47,7 @@ final class TokenValueBasedCartContext implements CartContextInterface
         $request = $this->getMasterRequest();
         $this->checkApiRequest($request);
 
-        $tokenValue = $request->attributes->get('id');
+        $tokenValue = $request->attributes->get('tokenValue');
         if ($tokenValue === null) {
             throw new CartNotFoundException('Sylius was not able to find the cart, as there is no passed token value.');
         }
