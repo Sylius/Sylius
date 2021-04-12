@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
-use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\ShopBundle\SectionResolver\ShopSection;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
@@ -24,11 +23,8 @@ use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
-final class CartBlamerListener
+final class ShopCartBlamerListener
 {
-    /** @var ObjectManager */
-    private $cartManager;
-
     /** @var CartContextInterface */
     private $cartContext;
 
@@ -36,11 +32,9 @@ final class CartBlamerListener
     private $uriBasedSectionContext;
 
     public function __construct(
-        ObjectManager $cartManager,
         CartContextInterface $cartContext,
         SectionProviderInterface $uriBasedSectionContext
     ) {
-        $this->cartManager = $cartManager;
         $this->cartContext = $cartContext;
         $this->uriBasedSectionContext = $uriBasedSectionContext;
     }
@@ -77,13 +71,11 @@ final class CartBlamerListener
     private function blame(ShopUserInterface $user): void
     {
         $cart = $this->getCart();
-        if (null === $cart) {
+        if (null === $cart || null !== $cart->getCustomer()) {
             return;
         }
 
         $cart->setCustomer($user->getCustomer());
-        $this->cartManager->persist($cart);
-        $this->cartManager->flush();
     }
 
     /**
