@@ -77,6 +77,9 @@ sylius:
     product_translation:
         short_description:
             max: Kısa açıklama daha sonra {{ limit }} karakter olmalıdır.
+    review:
+        author:
+            not_blank: Lütfen e-posta adresinizi girin.
     taxon_image:
         file:
             max_size: Görüntü çok büyük - {{ size }}{{ suffix }}. En fazla izin verilen boyut {{ limit }}{{ suffix }}.
