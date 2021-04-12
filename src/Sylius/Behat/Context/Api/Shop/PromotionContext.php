@@ -58,7 +58,7 @@ final class PromotionContext implements Context
     {
         $response = $this->cartsClient->getLastResponse();
 
-        Assert::oneOf($response->getStatusCode(), [400, 422]);
+        Assert::same($response->getStatusCode(), 422);
         Assert::notNull($this->responseChecker->getError($response));
     }
 
