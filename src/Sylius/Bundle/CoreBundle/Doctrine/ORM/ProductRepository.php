@@ -95,11 +95,23 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         // Grid hack, we do not need to join these if we don't sort by price
         if (isset($sorting['price'])) {
             // Another hack, the subquery to get the first position variant
-            $subQuery = $this->createQueryBuilder('m')
-                 ->select('min(v.position)')
-                 ->innerJoin('m.variants', 'v')
-                 ->andWhere('m.id = :product_id')
+            $allVariants = $this->createQueryBuilder('m1')
+                 ->select('min(v1.position)')
+                 ->innerJoin('m1.variants', 'v1')
+                 ->andWhere('m1.id = :product_id')
+                 ->andWhere('v1.enabled = :enabled')
+                ->getDQL()
              ;
+            // ... show available variant if such exists
+            $availableVariants = $this->createQueryBuilder('m2')
+                ->select('min(v2.position)')
+                ->innerJoin('m2.variants', 'v2')
+                ->andWhere('m2.id = :product_id')
+                ->andWhere('v2.enabled = :enabled')
+                ->getDQL()
+            ;
+
+            [$allVariants, $availableVariants] = str_replace(':product_id', 'o.id', [$allVariants, $availableVariants]);
 
             $queryBuilder
                 ->addSelect('variant')
@@ -107,12 +119,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
                 ->innerJoin('o.variants', 'variant')
                 ->innerJoin('variant.channelPricings', 'channelPricing')
                 ->andWhere('channelPricing.channelCode = :channelCode')
-                ->andWhere(
-                    $queryBuilder->expr()->in(
-                        'variant.position',
-                        str_replace(':product_id', 'o.id', $subQuery->getDQL())
-                    )
-                )
+                ->andWhere("variant.position = IFNULL($availableVariants, $allVariants)")
                 ->setParameter('channelCode', $channel->getCode())
             ;
         }
