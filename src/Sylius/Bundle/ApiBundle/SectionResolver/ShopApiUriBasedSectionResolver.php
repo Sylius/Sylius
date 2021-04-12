@@ -22,14 +22,22 @@ final class ShopApiUriBasedSectionResolver implements UriBasedSectionResolverInt
     /** @var string */
     private $shopApiUriBeginning;
 
-    public function __construct(string $shopApiUriBeginning)
+    /** @var string */
+    private $shopApiOrdersResourceUri;
+
+    public function __construct(string $shopApiUriBeginning, string $shopApiOrdersResourceUri)
     {
         $this->shopApiUriBeginning = $shopApiUriBeginning;
+        $this->shopApiOrdersResourceUri = $shopApiOrdersResourceUri;
     }
 
     public function getSection(string $uri): SectionInterface
     {
         if (0 === strpos($uri, $this->shopApiUriBeginning)) {
+            if (str_contains($uri, $this->shopApiOrdersResourceUri)) {
+                return new ShopApiOrdersSubSection();
+            }
+
             return new ShopApiSection();
         }
 

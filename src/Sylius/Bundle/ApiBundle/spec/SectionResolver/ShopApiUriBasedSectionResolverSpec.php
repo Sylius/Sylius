@@ -22,7 +22,7 @@ final class ShopApiUriBasedSectionResolverSpec extends ObjectBehavior
 {
     function let(): void
     {
-        $this->beConstructedWith('/api/v2/shop');
+        $this->beConstructedWith('/api/v2/shop', 'orders');
     }
 
     function it_is_uri_based_section_resolver(): void
