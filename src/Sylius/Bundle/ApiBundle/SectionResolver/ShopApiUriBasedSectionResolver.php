@@ -33,14 +33,14 @@ final class ShopApiUriBasedSectionResolver implements UriBasedSectionResolverInt
 
     public function getSection(string $uri): SectionInterface
     {
-        if (0 === strpos($uri, $this->shopApiUriBeginning)) {
-            if (str_contains($uri, $this->shopApiOrdersResourceUri)) {
-                return new ShopApiOrdersSubSection();
-            }
-
-            return new ShopApiSection();
+        if (0 !== strpos($uri, $this->shopApiUriBeginning)) {
+            throw new SectionCannotBeResolvedException();
         }
 
-        throw new SectionCannotBeResolvedException();
+        if (str_contains($uri, $this->shopApiOrdersResourceUri)) {
+            return new ShopApiOrdersSubSection();
+        }
+
+        return new ShopApiSection();
     }
 }

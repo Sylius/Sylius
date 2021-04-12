@@ -31,14 +31,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
-final class CartBlamerListenerSpec extends ObjectBehavior
+final class ShopCartBlamerListenerSpec extends ObjectBehavior
 {
     function let(
-        ObjectManager $cartManager,
         CartContextInterface $cartContext,
         SectionProviderInterface $sectionResolver
     ): void {
-        $this->beConstructedWith($cartManager, $cartContext, $sectionResolver);
+        $this->beConstructedWith($cartContext, $sectionResolver);
     }
 
     function it_throws_an_exception_when_cart_does_not_implement_core_order_interface_on_implicit_login(
@@ -76,7 +75,6 @@ final class CartBlamerListenerSpec extends ObjectBehavior
     }
 
     function it_blames_cart_on_user_on_implicit_login(
-        ObjectManager $cartManager,
         CartContextInterface $cartContext,
         SectionProviderInterface $sectionResolver,
         OrderInterface $cart,
@@ -87,18 +85,16 @@ final class CartBlamerListenerSpec extends ObjectBehavior
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
         $cartContext->getCart()->willReturn($cart);
+        $cart->getCustomer()->willReturn(null);
         $userEvent->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
 
         $cart->setCustomer($customer)->shouldBeCalled();
-        $cartManager->persist($cart)->shouldBeCalled();
-        $cartManager->flush()->shouldBeCalled();
 
         $this->onImplicitLogin($userEvent);
     }
 
     function it_blames_cart_on_user_on_interactive_login(
-        ObjectManager $cartManager,
         CartContextInterface $cartContext,
         SectionProviderInterface $sectionResolver,
         OrderInterface $cart,
@@ -110,12 +106,29 @@ final class CartBlamerListenerSpec extends ObjectBehavior
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
         $cartContext->getCart()->willReturn($cart);
+        $cart->getCustomer()->willReturn(null);
         $token->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
 
         $cart->setCustomer($customer)->shouldBeCalled();
-        $cartManager->persist($cart)->shouldBeCalled();
-        $cartManager->flush()->shouldBeCalled();
+
+        $this->onInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
+    }
+
+    function it_does_nothing_if_given_cart_has_been_blamed_in_past(
+        CartContextInterface $cartContext,
+        SectionProviderInterface $sectionResolver,
+        OrderInterface $cart,
+        Request $request,
+        TokenInterface $token,
+        CustomerInterface $customer,
+        ShopSection $shopSection
+    ): void {
+        $sectionResolver->getSection()->willReturn($shopSection);
+        $cartContext->getCart()->willReturn($cart);
+        $cart->getCustomer()->willReturn($customer);
+
+        $cart->setCustomer(Argument::any())->shouldNotBeCalled();
 
         $this->onInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
     }

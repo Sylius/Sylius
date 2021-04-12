@@ -1,6 +1,6 @@
 # UPGRADE FROM `v1.9.X` TO `v1.10.0`
 
-1. CartBlamerListener has been moved from CoreBundle to ShopBundle and adjusted to work properly when decoupled.
+1. `Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener` has been moved from CoreBundle to ShopBundle, renamed to `Sylius\Bundle\ShopBundle\EventListener\ShopCartBlamerListener` and adjusted to work properly when decoupled.
 
 ### New API
 
