@@ -108,9 +108,9 @@ class ProductVariant implements ProductVariantInterface
         }
     }
 
-    public function hasOptionValue(?ProductOptionValueInterface $optionValue): bool
+    public function hasOptionValue(ProductOptionValueInterface $optionValue): bool
     {
-        return $optionValue === null ? true : $this->optionValues->contains($optionValue);
+        return $this->optionValues->contains($optionValue);
     }
 
     public function getProduct(): ?ProductInterface
