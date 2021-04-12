@@ -1,7 +1,0 @@
-{
-  "access_token": @string@,
-  "expires_in": 3600,
-  "token_type": "bearer",
-  "scope": null,
-  "refresh_token": @string@
-}
