@@ -183,7 +183,7 @@
 
         <service id="sylius.api.section_resolver.shop_api_uri_based_section_resolver" class="Sylius\Bundle\ApiBundle\SectionResolver\ShopApiUriBasedSectionResolver">
             <argument>%sylius.security.new_api_shop_route%</argument>
-            <argument>%sylius.new_api_orders_resource_route%</argument>
+            <argument>orders</argument>
             <tag name="sylius.uri_based_section_resolver" priority="40" />
         </service>
 
