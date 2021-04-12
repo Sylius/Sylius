@@ -426,7 +426,7 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch(): void
     {
-        Assert::oneOf($this->customerClient->getLastResponse()->getStatusCode(), [400, 422]);
+        Assert::same($this->customerClient->getLastResponse()->getStatusCode(), 422);
 
         Assert::contains(
             $this->responseChecker->getError($this->customerClient->getLastResponse()),

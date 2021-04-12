@@ -809,7 +809,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldNotSeeTheThankYouPage(): void
     {
-        Assert::oneOf($this->ordersClient->getLastResponse()->getStatusCode(), [400, 422]);
+        Assert::same($this->ordersClient->getLastResponse()->getStatusCode(), 422);
     }
 
     /**
@@ -917,7 +917,7 @@ final class CheckoutContext implements Context
     {
         $response = $this->ordersClient->getLastResponse();
 
-        Assert::oneOf($response->getStatusCode(), [400, 422]);
+        Assert::same($response->getStatusCode(), 422);
         Assert::true($this->isViolationWithMessageInResponse(
             $response,
             'Please select proper province.',
