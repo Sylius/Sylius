@@ -11,10 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\EventListener;
+namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Doctrine\Persistence\ObjectManager;
-use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\ShopBundle\SectionResolver\ShopSection;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
@@ -63,7 +62,7 @@ final class CartBlamerListener
     public function onInteractiveLogin(InteractiveLoginEvent $interactiveLoginEvent): void
     {
         $section = $this->uriBasedSectionContext->getSection();
-        if (!$section instanceof ShopSection && !$section instanceof ShopApiSection) {
+        if (!$section instanceof ShopSection) {
             return;
         }
 

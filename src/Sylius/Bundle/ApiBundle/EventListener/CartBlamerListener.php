@@ -61,8 +61,7 @@ final class CartBlamerListener
 
     public function onInteractiveLogin(InteractiveLoginEvent $interactiveLoginEvent): void
     {
-        $section = $this->uriBasedSectionContext->getSection();
-        if (!$section instanceof ShopApiOrdersSubSection) {
+        if (!$this->uriBasedSectionContext->getSection() instanceof ShopApiOrdersSubSection) {
             return;
         }
 

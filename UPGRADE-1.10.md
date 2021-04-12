@@ -1,5 +1,7 @@
 # UPGRADE FROM `v1.9.X` TO `v1.10.0`
 
+1. CartBlamerListener has been moved from CoreBundle to ShopBundle and adjusted to work properly when decoupled.
+
 ### New API
 
 1. API CartShippingMethod key `cost` has been changed to `price`.
