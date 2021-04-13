@@ -113,6 +113,12 @@
             <tag name="messenger.message_handler" bus="sylius_default.bus"/>
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\BlameCartHandler">
+            <argument type="service" id="sylius.repository.shop_user" />
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus"/>
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\ChangeShopUserPasswordHandler">
             <argument type="service" id="sylius.security.password_updater" />
             <argument type="service" id="sylius.repository.shop_user" />
