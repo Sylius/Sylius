@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\BlameCart;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
@@ -27,11 +27,13 @@ final class BlameCartHandlerSpec extends ObjectBehavior
 {
     function let(
         UserRepositoryInterface $shopUserRepository,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
+        OrderProcessorInterface $orderProcessor
     ): void {
         $this->beConstructedWith(
             $shopUserRepository,
-            $orderRepository
+            $orderRepository,
+            $orderProcessor
         );
     }
 
@@ -45,7 +47,8 @@ final class BlameCartHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         OrderInterface $cart,
         ShopUserInterface $user,
-        CustomerInterface $customer
+        CustomerInterface $customer,
+        OrderProcessorInterface $orderProcessor
     ): void {
         $shopUserRepository->findOneByEmail('sylius@example.com')->willReturn($user);
         $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
@@ -56,10 +59,12 @@ final class BlameCartHandlerSpec extends ObjectBehavior
 
         $cart->setCustomer($customer)->shouldBeCalled();
 
+        $orderProcessor->process($cart)->shouldBeCalled();
+
         $this(new BlameCart('sylius@example.com', 'TOKEN'));
     }
 
-    function it_does_not_blame_when_cart_is_occupied(
+    function it_throws_an_exception_if_cart_is_occupied(
         UserRepositoryInterface $shopUserRepository,
         OrderRepositoryInterface $orderRepository,
         OrderInterface $cart,
@@ -71,18 +76,6 @@ final class BlameCartHandlerSpec extends ObjectBehavior
 
         $cart->getCustomer()->willReturn($customer);
 
-        $user->getCustomer()->shouldNotBeCalled();
-        $cart->setCustomer(Argument::Any())->shouldNotBeCalled();
-
-        $this(new BlameCart('sylius@example.com', 'TOKEN'));
-    }
-
-    function it_throws_an_exception_if_user_has_not_been_found(
-        UserRepositoryInterface $shopUserRepository,
-        ShopUserInterface $user
-    ): void {
-        $shopUserRepository->findOneByEmail('sylius@example.com')->willReturn($user);
-
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('__invoke', [
@@ -91,13 +84,23 @@ final class BlameCartHandlerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_if_cart_has_not_been_found(): void
+    function it_throws_an_exception_if_cart_has_not_been_found(
+        UserRepositoryInterface $shopUserRepository,
+        ShopUserInterface $user
+    ): void {
+        $shopUserRepository->findOneByEmail('sylius@example.com')->willReturn($user);
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('__invoke', [new BlameCart('sylius@example.com', 'TOKEN')])
+        ;
+    }
+
+    function it_throws_an_exception_if_user_has_not_been_found(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [
-                new BlameCart('sylius@example.com', 'TOKEN')
-            ])
+            ->during('__invoke', [new BlameCart('sylius@example.com', 'TOKEN')])
         ;
     }
 }

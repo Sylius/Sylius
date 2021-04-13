@@ -30,7 +30,6 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
@@ -86,7 +85,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         $blameCart = new BlameCart('email@sylius.com', 'TOKEN');
 
         $commandBus
-            ->dispatch($blameCart, [new DispatchAfterCurrentBusStamp()])
+            ->dispatch($blameCart)
             ->shouldBeCalled()
             ->willReturn(new Envelope($blameCart))
         ;
