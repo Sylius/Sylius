@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\EventListener;
 
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiOrdersSubSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
@@ -37,20 +36,6 @@ final class ApiCartBlamerListener
     ) {
         $this->cartContext = $cartContext;
         $this->uriBasedSectionContext = $uriBasedSectionContext;
-    }
-
-    public function onImplicitLogin(UserEvent $userEvent): void
-    {
-        if (!$this->uriBasedSectionContext->getSection() instanceof ShopApiOrdersSubSection) {
-            return;
-        }
-
-        $user = $userEvent->getUser();
-        if (!$user instanceof ShopUserInterface) {
-            return;
-        }
-
-        $this->blame($user);
     }
 
     public function onInteractiveLogin(InteractiveLoginEvent $interactiveLoginEvent): void
