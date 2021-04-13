@@ -160,10 +160,17 @@
             <argument type="service" id="sylius.context.channel" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Serializer\AddProductReviewCommandFieldItemIriToIdentifierDenormalizer">
+        <service id="Sylius\Bundle\ApiBundle\Map\CommandItemIriArgumentToIdentifierMap">
+            <argument type="collection">
+                <argument key="Sylius\Bundle\ApiBundle\Command\AddProductReview">product</argument>
+            </argument>
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandFieldItemIriToIdentifierDenormalizer">
             <argument type="service" id="serializer.normalizer.object" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverter" />
             <argument type="service" id="sylius.api.data_transformer.command_aware_input_data_transformer" />
-            <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Map\CommandItemIriArgumentToIdentifierMap" />
             <tag name="serializer.normalizer" />
         </service>
 
@@ -183,6 +190,10 @@
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <argument type="service" id="sylius_default.bus" />
             <tag name="kernel.event_listener" event="security.interactive_login" method="onInteractiveLogin" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverter">
+            <argument type="service" id="api_platform.router" />
         </service>
     </services>
 </container>
