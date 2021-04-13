@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\EventListener;
+namespace Sylius\Bundle\ApiBundle\EventListener;
 
-use Doctrine\Persistence\ObjectManager;
-use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTAuthenticatedEvent;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiOrdersSubSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -23,22 +23,28 @@ use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
-final class CartBlamerListener
+final class ApiCartBlamerListener
 {
-    /** @var ObjectManager */
-    private $cartManager;
-
     /** @var CartContextInterface */
     private $cartContext;
 
-    public function __construct(ObjectManager $cartManager, CartContextInterface $cartContext)
-    {
-        $this->cartManager = $cartManager;
+    /** @var SectionProviderInterface */
+    private $uriBasedSectionContext;
+
+    public function __construct(
+        CartContextInterface $cartContext,
+        SectionProviderInterface $uriBasedSectionContext
+    ) {
         $this->cartContext = $cartContext;
+        $this->uriBasedSectionContext = $uriBasedSectionContext;
     }
 
     public function onImplicitLogin(UserEvent $userEvent): void
     {
+        if (!$this->uriBasedSectionContext->getSection() instanceof ShopApiOrdersSubSection) {
+            return;
+        }
+
         $user = $userEvent->getUser();
         if (!$user instanceof ShopUserInterface) {
             return;
@@ -49,17 +55,11 @@ final class CartBlamerListener
 
     public function onInteractiveLogin(InteractiveLoginEvent $interactiveLoginEvent): void
     {
-        $user = $interactiveLoginEvent->getAuthenticationToken()->getUser();
-        if (!$user instanceof ShopUserInterface) {
+        if (!$this->uriBasedSectionContext->getSection() instanceof ShopApiOrdersSubSection) {
             return;
         }
 
-        $this->blame($user);
-    }
-
-    public function onJWTAuthenticatedLogin(JWTAuthenticatedEvent $event): void
-    {
-        $user = $event->getToken()->getUser();
+        $user = $interactiveLoginEvent->getAuthenticationToken()->getUser();
         if (!$user instanceof ShopUserInterface) {
             return;
         }
@@ -70,13 +70,11 @@ final class CartBlamerListener
     private function blame(ShopUserInterface $user): void
     {
         $cart = $this->getCart();
-        if (null === $cart) {
+        if (null === $cart || null !== $cart->getCustomer()) {
             return;
         }
 
         $cart->setCustomer($user->getCustomer());
-        $this->cartManager->persist($cart);
-        $this->cartManager->flush();
     }
 
     /**
