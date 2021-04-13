@@ -58,14 +58,11 @@ final class ApiCartBlamerListener
         }
 
         $cart = $this->getCart();
-        if ($cart === null) {
+        if (null === $cart || null !== $cart->getCustomer()) {
             return;
         }
 
-        $this->commandBus->dispatch(
-            new BlameCart($user->getEmail(), $cart->getTokenValue()),
-            [new DispatchAfterCurrentBusStamp()]
-        );
+        $this->commandBus->dispatch(new BlameCart($user->getEmail(), $cart->getTokenValue()));
     }
 
     /**

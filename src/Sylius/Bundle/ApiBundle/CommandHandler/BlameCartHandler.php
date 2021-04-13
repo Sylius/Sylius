@@ -8,6 +8,7 @@ use Sylius\Bundle\ApiBundle\Command\BlameCart;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
@@ -19,10 +20,17 @@ class BlameCartHandler implements MessageHandlerInterface
     /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    public function __construct(UserRepositoryInterface $shopUserRepository, OrderRepositoryInterface $orderRepository)
-    {
+    /** @var OrderProcessorInterface */
+    private $orderProcessor;
+
+    public function __construct(
+        UserRepositoryInterface $shopUserRepository,
+        OrderRepositoryInterface $orderRepository,
+        OrderProcessorInterface $orderProcessor
+    ) {
         $this->shopUserRepository = $shopUserRepository;
         $this->orderRepository = $orderRepository;
+        $this->orderProcessor = $orderProcessor;
     }
 
     public function __invoke(BlameCart $blameCart): void
@@ -42,9 +50,11 @@ class BlameCartHandler implements MessageHandlerInterface
         }
 
         if (null !== $cart->getCustomer()) {
-            return;
+            throw new \InvalidArgumentException('There is an assigned customer to this cart');
         }
 
         $cart->setCustomer($user->getCustomer());
+
+        $this->orderProcessor->process($cart);
     }
 }
