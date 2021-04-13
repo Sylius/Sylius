@@ -266,9 +266,9 @@ final class RegistrationContext implements Context
         $decodedResponse = json_decode($this->client->getResponse()->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
         Assert::keyExists($decodedResponse, 'violations');
-        Assert::oneOf(
-            ['propertyPath' => $path, 'message' => $message],
-            $decodedResponse['violations']
+        Assert::same(
+            $decodedResponse['violations'][0],
+            ['propertyPath' => $path, 'message' => $message, 'code' => $decodedResponse['violations'][0]['code']]
         );
     }
 

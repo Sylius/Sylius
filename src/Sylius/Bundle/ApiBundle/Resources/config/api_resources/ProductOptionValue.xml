@@ -35,12 +35,12 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/product-option-values/{id}</attribute>
+                <attribute name="path">/admin/product-option-values/{code}</attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/product-option-values/{id}</attribute>
+                <attribute name="path">/shop/product-option-values/{code}</attribute>
             </itemOperation>
         </itemOperations>
 

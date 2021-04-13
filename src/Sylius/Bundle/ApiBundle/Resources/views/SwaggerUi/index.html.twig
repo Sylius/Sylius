@@ -13,24 +13,6 @@
     {% set oauth_data = {'oauth': swagger_data.oauth|merge({'redirectUrl' : absolute_url(asset('bundles/apiplatform/swagger-ui/oauth2-redirect.html')) })} %}
     {# json_encode(65) is for JSON_UNESCAPED_SLASHES|JSON_HEX_TAG to avoid JS XSS #}
     <script id="swagger-data" type="application/json">{{ swagger_data|merge(oauth_data)|json_encode(65)|raw }}</script>
-    <style>
-        #info-swagger {
-            margin: 30px 0 30px;
-            width: 100%;
-            max-width: 100%;
-            background-color: #288690;
-            color: #fff;
-            font-weight: 400;
-            font-family: sans-serif;
-            border-bottom: 1px solid #ccc;
-            padding-left: 30px;
-            font-size: 13px;
-        }
-
-        #info-swagger small {
-            white-space: pre-line;
-        }
-    </style>
 </head>
 
 <body>
@@ -78,18 +60,6 @@
     <div class="web"><img src="{{ asset('bundles/apiplatform/web.png') }}"></div>
     <div class="webby"><img src="{{ asset('bundles/apiplatform/webby.png') }}"></div>
 {% endif %}
-
-<div class="information-container wrapper" id="info-swagger">
-    <h2 class="title">
-        <small>
-            Parameter {id} used in API endpoints is in fact API resource identifier, configured in the API resource configuration file. The following rules apply to this parameter:
-            For the Order API, the id of the resource is tokenValue.
-            For the Customer API, the id of the resource is id.
-            For the rest of the endpoints, the id of the resource is code.
-        </small>
-    </h2>
-</div>
-
 <div id="swagger-ui" class="api-platform"></div>
 
 <div class="swagger-ui" id="formats">

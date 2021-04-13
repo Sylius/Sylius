@@ -40,7 +40,7 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
         Request $request,
         OrderInterface $cart
     ): void {
-        $request->attributes = new ParameterBag(['id' => 'TOKEN_VALUE']);
+        $request->attributes = new ParameterBag(['tokenValue' => 'TOKEN_VALUE']);
         $request->getRequestUri()->willReturn('/api/v2/orders/TOKEN_VALUE');
 
         $requestStack->getMasterRequest()->willReturn($request);
@@ -94,7 +94,7 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         Request $request
     ): void {
-        $request->attributes = new ParameterBag(['id' => 'TOKEN_VALUE']);
+        $request->attributes = new ParameterBag(['tokenValue' => 'TOKEN_VALUE']);
         $request->getRequestUri()->willReturn('/api/v2/orders/TOKEN_VALUE');
 
         $requestStack->getMasterRequest()->willReturn($request);
