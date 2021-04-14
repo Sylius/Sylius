@@ -35,7 +35,7 @@
 
         <service id="sylius.api.product_taxon_code_filter" parent="api_platform.doctrine.orm.search_filter">
             <argument type="collection">
-                <argument key="productTaxons.taxon">exact</argument>
+                <argument key="productTaxons.taxon.code">exact</argument>
             </argument>
             <tag name="api_platform.filter" />
         </service>
