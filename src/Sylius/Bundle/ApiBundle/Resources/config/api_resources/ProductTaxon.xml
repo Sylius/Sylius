@@ -9,7 +9,8 @@
 
         <attribute name="normalization_context">
             <attribute name="groups">
-                <attribute>product_taxon:read</attribute>
+                <attribute>admin:product_taxon:read</attribute>
+                <attribute>shop:product_taxon:read</attribute>
             </attribute>
         </attribute>
 
@@ -17,6 +18,9 @@
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-taxons</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_taxon:read</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -24,10 +28,16 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-taxons/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_taxon:read</attribute>
+                </attribute>
             </itemOperation>
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-taxons/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product_taxon:read</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 

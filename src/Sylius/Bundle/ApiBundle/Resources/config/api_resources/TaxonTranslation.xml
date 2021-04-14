@@ -7,6 +7,13 @@
     <resource class="%sylius.model.taxon_translation.class%" shortName="TaxonTranslation">
         <attribute name="validation_groups">sylius</attribute>
 
+        <attribute name="normalization_context">
+            <attribute name="groups">
+                <attribute>admin:taxon_translation:read</attribute>
+                <attribute>admin:taxon_translation:read</attribute>
+            </attribute>
+        </attribute>
+
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
@@ -14,7 +21,7 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>admin:taxon:read</attribute>
-                        <attribute>taxon_translation:read</attribute>
+                        <attribute>admin:taxon_translation:read</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
@@ -27,7 +34,7 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>admin:taxon:read</attribute>
-                        <attribute>taxon_translation:read</attribute>
+                        <attribute>admin:taxon_translation:read</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
@@ -38,7 +45,7 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>admin:taxon:read</attribute>
-                        <attribute>taxon_translation:read</attribute>
+                        <attribute>shop:taxon_translation:read</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
