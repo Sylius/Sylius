@@ -1,5 +1,5 @@
 @admin_locale
-Feature: Handling admin panel
+Feature: Browsing administration panel in a proper locale
     In order to see panel in correct language
     As an Admin
     I want to browse admin panel in my locale

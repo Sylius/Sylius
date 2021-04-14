@@ -37,7 +37,7 @@ class LocaleAwareListener implements EventSubscriberInterface
         $this->decoratedListener->onKernelFinishRequest($event);
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             // must be registered after the Locale listener
