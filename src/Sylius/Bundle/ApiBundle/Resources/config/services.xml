@@ -194,6 +194,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverter">
             <argument type="service" id="api_platform.router" />
+            <argument type="service" id="api_platform.identifier.converter" on-invalid="ignore" />
         </service>
     </services>
 </container>
