@@ -17,8 +17,6 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 use Sylius\Bundle\ApiBundle\Command\ResendVerificationEmail;
 use Sylius\Bundle\ApiBundle\Command\SendAccountVerificationEmail;
-use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -34,21 +32,16 @@ final class ResendVerificationEmailHandler implements MessageHandlerInterface
     /** @var GeneratorInterface */
     private $tokenGenerator;
 
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
-
     /** @var MessageBusInterface */
     private $commandBus;
 
     public function __construct(
         UserRepositoryInterface $shopUserRepository,
         GeneratorInterface $tokenGenerator,
-        ChannelRepositoryInterface $channelRepository,
         MessageBusInterface $commandBus
     ) {
         $this->shopUserRepository = $shopUserRepository;
         $this->tokenGenerator = $tokenGenerator;
-        $this->channelRepository = $channelRepository;
         $this->commandBus = $commandBus;
     }
 
@@ -56,9 +49,6 @@ final class ResendVerificationEmailHandler implements MessageHandlerInterface
     {
         /** @var UserInterface|null $user */
         Assert::notNull($user = $this->shopUserRepository->findOneByEmail($command->email));
-
-        /** @var ChannelInterface $channel */
-        $channel = $this->channelRepository->findOneByCode($command->channelCode);
 
         $token = $this->tokenGenerator->generate();
         $user->setEmailVerificationToken($token);
