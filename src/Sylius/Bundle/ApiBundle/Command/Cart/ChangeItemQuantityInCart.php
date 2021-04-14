@@ -13,18 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
+use Sylius\Bundle\ApiBundle\Command\OrderItemIdAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 
 /** @experimental */
-class ChangeItemQuantityInCart implements OrderTokenValueAwareInterface
+class ChangeItemQuantityInCart implements OrderTokenValueAwareInterface, OrderItemIdAwareInterface
 {
     /** @var string|null */
     public $orderTokenValue;
 
-    /**
-     * @var string
-     * @psalm-immutable
-     */
+    /** @var mixed|null */
     public $orderItemId;
 
     /**
@@ -33,17 +31,17 @@ class ChangeItemQuantityInCart implements OrderTokenValueAwareInterface
      */
     public $newQuantity;
 
-    public function __construct(string $orderItemId, int $newQuantity)
+    public function __construct(int $newQuantity)
     {
-        $this->orderItemId = $orderItemId;
         $this->newQuantity = $newQuantity;
     }
 
     public static function createFromData(string $tokenValue, string $orderItemId, int $newQuantity): self
     {
-        $command = new self($orderItemId, $newQuantity);
+        $command = new self($newQuantity);
 
         $command->orderTokenValue = $tokenValue;
+        $command->orderItemId = $orderItemId;
 
         return $command;
     }
@@ -56,5 +54,15 @@ class ChangeItemQuantityInCart implements OrderTokenValueAwareInterface
     public function setOrderTokenValue(?string $orderTokenValue): void
     {
         $this->orderTokenValue = $orderTokenValue;
+    }
+
+    public function getOrderItemId(): ?string
+    {
+        return $this->orderItemId;
+    }
+
+    public function setOrderItemId(?string $orderItemId): void
+    {
+        $this->orderItemId = $orderItemId;
     }
 }

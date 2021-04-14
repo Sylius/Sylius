@@ -300,7 +300,7 @@
 
             <itemOperation name="shop_change_quantity">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/shop/orders/{tokenValue}/change-quantity</attribute>
+                <attribute name="path">/shop/orders/{tokenValue}/items/{orderItemId}</attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart</attribute>
                 <attribute name="denormalization_context">
@@ -308,6 +308,24 @@
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Changes quantity of order item</attribute>
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">tokenValue</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                        <attribute>
+                            <attribute name="name">orderItemId</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
