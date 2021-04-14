@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Converter;
 use ApiPlatform\Core\DataProvider\OperationDataProviderTrait;
 use ApiPlatform\Core\Exception\InvalidArgumentException;
 use ApiPlatform\Core\Exception\InvalidIdentifierException;
+use ApiPlatform\Core\Identifier\IdentifierConverterInterface;
 use ApiPlatform\Core\Util\AttributesExtractor;
 use Symfony\Component\Routing\Exception\ExceptionInterface as RoutingExceptionInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -28,9 +29,10 @@ final class ItemIriToIdentifierConverter implements ItemIriToIdentifierConverter
     /** @var RouterInterface */
     private $router;
 
-    public function __construct(RouterInterface $router)
+    public function __construct(RouterInterface $router, IdentifierConverterInterface $identifierConverter)
     {
         $this->router = $router;
+        $this->identifierConverter = $identifierConverter;
     }
 
     public function getIdentifier(string $iri): string {
@@ -56,10 +58,10 @@ final class ItemIriToIdentifierConverter implements ItemIriToIdentifierConverter
             throw new InvalidArgumentException($e->getMessage(), (int) $e->getCode(), $e);
         }
 
-        if (is_array($identifiers)) {
+        if (count($identifiers) > 1) {
             throw new InvalidArgumentException(sprintf('%s does not support subresources', self::class));
         }
 
-        return (string) $identifiers;
+        return (string) array_values($identifiers)[0];
     }
 }

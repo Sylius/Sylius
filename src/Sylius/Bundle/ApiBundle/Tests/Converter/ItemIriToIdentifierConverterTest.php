@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Tests\Converter;
 
 use ApiPlatform\Core\Exception\InvalidArgumentException;
+use ApiPlatform\Core\Identifier\IdentifierConverterInterface;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\AddProductReview;
 use Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverter;
@@ -31,9 +32,11 @@ final class ItemIriToIdentifierConverterTest extends TestCase
         $this->expectExceptionMessage('No route matches "/users/3".');
 
         $router = $this->prophesize(RouterInterface::class);
+        $identifierConverter = $this->prophesize(IdentifierConverterInterface::class);
+
         $router->match('/users/3')->willThrow(new RouteNotFoundException())->shouldBeCalledTimes(1);
 
-        $converter = new ItemIriToIdentifierConverter($router->reveal());
+        $converter = new ItemIriToIdentifierConverter($router->reveal(), $identifierConverter->reveal());
         $converter->getIdentifier('/users/3');
     }
 
@@ -46,29 +49,37 @@ final class ItemIriToIdentifierConverterTest extends TestCase
         $this->expectExceptionMessage('No resource associated to "/users/3".');
 
         $router = $this->prophesize(RouterInterface::class);
+        $identifierConverter = $this->prophesize(IdentifierConverterInterface::class);
+
         $router->match('/users/3')->willReturn([])->shouldBeCalledTimes(1);
 
-        $converter = new ItemIriToIdentifierConverter($router->reveal());
+        $converter = new ItemIriToIdentifierConverter($router->reveal(), $identifierConverter->reveal());
         $converter->getIdentifier('/users/3');
     }
 
     /**
      * @test
      */
-    public function it_throws_invalid_argument_exception_if_parameter_id_does_not_exist(): void
+    public function it_throws_invalid_argument_exception_if_converter_returns_more_than_one_identifier(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Parameter "id" not found');
+        $this->expectExceptionMessage('ItemIriToIdentifierConverter does not support subresources');
 
         $router = $this->prophesize(RouterInterface::class);
-        $router->match('/users')->willReturn([
+        $identifierConverter = $this->prophesize(IdentifierConverterInterface::class);
+
+        $router->match('/users/3/nexts/5')->willReturn([
             '_api_resource_class' => AddProductReview::class,
             '_api_item_operation_name' => 'get',
-            '_api_identifiers' => [],
+            '_api_identifiers' => ['id', 'nextId'],
+            'id' => 3,
+            'nextId' => 5
         ])->shouldBeCalledTimes(1);
 
-        $converter = new ItemIriToIdentifierConverter($router->reveal());
-        $converter->getIdentifier('/users');
+        $identifierConverter->convert(['id' => 3, 'nextId' => 5], AddProductReview::class)->willReturn(['3', '5']);
+        $converter = new ItemIriToIdentifierConverter($router->reveal(), $identifierConverter->reveal());
+
+        $this->assertSame('3', $converter->getIdentifier('/users/3/nexts/5'));
     }
 
     /**
@@ -77,6 +88,8 @@ final class ItemIriToIdentifierConverterTest extends TestCase
     public function it_get_identifier(): void
     {
         $router = $this->prophesize(RouterInterface::class);
+        $identifierConverter = $this->prophesize(IdentifierConverterInterface::class);
+
         $router->match('/users/3')->willReturn([
             '_api_resource_class' => AddProductReview::class,
             '_api_item_operation_name' => 'get',
@@ -84,7 +97,8 @@ final class ItemIriToIdentifierConverterTest extends TestCase
             'id' => 3,
         ])->shouldBeCalledTimes(1);
 
-        $converter = new ItemIriToIdentifierConverter($router->reveal());
+        $identifierConverter->convert(['id' => 3], AddProductReview::class)->willReturn(['3']);
+        $converter = new ItemIriToIdentifierConverter($router->reveal(), $identifierConverter->reveal());
 
         $this->assertSame('3', $converter->getIdentifier('/users/3'));
     }
