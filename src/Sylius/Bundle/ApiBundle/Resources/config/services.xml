@@ -163,6 +163,8 @@
         <service id="Sylius\Bundle\ApiBundle\Map\CommandItemIriArgumentToIdentifierMap">
             <argument type="collection">
                 <argument key="Sylius\Bundle\ApiBundle\Command\AddProductReview">product</argument>
+                <argument key="Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod">paymentMethod</argument>
+                <argument key="Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod">paymentMethod</argument>
             </argument>
         </service>
 
