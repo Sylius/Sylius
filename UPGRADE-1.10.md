@@ -16,4 +16,16 @@
 
 - `product_review:update` changed to: `admin:product_review:update` and `shop:product_review:update`
 
+- `product_association_type` changed to: `admin:product_association_type`
+
+- `product_option` changed to: `admin:product_option`
+
+- `product_option_value` changed to: `admin:product_option_value`
+
+- `product_taxon` changed to: `admin:product_taxon` and `shop:product_taxon`
+
+- `product_variant` changed to: `admin:product_variant` and `shop:product_variant`
+
+- `taxon_translation` changed to: `admin:taxon_translation` and `shop:taxon_translation`
+
 1. We've removed `Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Doctrine\ORM\SubresourceDataProvider`. It's no longer needed because `ApiPlatform\Core\Bridge\Doctrine\Orm\SubresourceDataProvider` has the same logic.
