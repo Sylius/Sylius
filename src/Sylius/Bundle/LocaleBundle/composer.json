@@ -60,8 +60,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\LocaleBundle\\spec\\": "spec/",
-            "Sylius\\Bundle\\LocaleBundle\\Application\\": "test/src/"
+            "Sylius\\Bundle\\LocaleBundle\\spec\\": "spec/"
         },
         "classmap": [
             "test/app/AppKernel.php"
