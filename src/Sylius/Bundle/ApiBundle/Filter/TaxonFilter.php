@@ -27,7 +27,7 @@ final class TaxonFilter extends AbstractContextAwareFilter
     /** @var IriConverter */
     private $iriConverter;
 
-    /** @var ManagerRegistry  */
+    /** @var ManagerRegistry */
     protected $managerRegistry;
 
     public function __construct(IriConverter $iriConverter, ManagerRegistry $managerRegistry)
