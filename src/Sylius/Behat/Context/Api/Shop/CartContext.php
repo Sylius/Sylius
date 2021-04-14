@@ -631,9 +631,9 @@ final class CartContext implements Context
 
     private function changeQuantityOfOrderItem(string $orderItemId, int $quantity, string $tokenValue): void
     {
-        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'change-quantity');
+        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, sprintf('items/%s', $orderItemId));
 
-        $request->updateContent(['orderItemId' => $orderItemId, 'newQuantity' => $quantity]);
+        $request->updateContent(['newQuantity' => $quantity]);
 
         $this->cartsClient->executeCustomRequest($request);
 
