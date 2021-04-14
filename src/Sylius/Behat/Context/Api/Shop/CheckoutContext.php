@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
@@ -65,6 +66,9 @@ final class CheckoutContext implements Context
     /** @var ProductVariantResolverInterface */
     private $productVariantResolver;
 
+    /** @var IriConverterInterface */
+    private $iriConverter;
+
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
@@ -79,6 +83,7 @@ final class CheckoutContext implements Context
         OrderRepositoryInterface $orderRepository,
         RepositoryInterface $paymentMethodRepository,
         ProductVariantResolverInterface $productVariantResolver,
+        IriConverterInterface $iriConverter,
         SharedStorageInterface $sharedStorage
     ) {
         $this->ordersClient = $ordersClient;
@@ -88,6 +93,7 @@ final class CheckoutContext implements Context
         $this->orderRepository = $orderRepository;
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->productVariantResolver = $productVariantResolver;
+        $this->iriConverter = $iriConverter;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -391,7 +397,7 @@ final class CheckoutContext implements Context
             \sprintf('payments/%s', $this->getCart()['payments'][0]['id'])
         );
 
-        $request->setContent(['paymentMethodCode' => $paymentMethod->getCode()]);
+        $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromItem($paymentMethod)]);
 
         $this->ordersClient->executeCustomRequest($request);
     }
