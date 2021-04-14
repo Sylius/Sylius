@@ -13,16 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
-use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
@@ -36,14 +35,19 @@ final class ProductContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
+    /** @var IriConverterInterface */
+    private $iriConverter;
+
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
+        IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
+        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -61,7 +65,7 @@ final class ProductContext implements Context
     public function iBrowseProductsFromTaxon(TaxonInterface $taxon): void
     {
         $this->client->index();
-        $this->client->addFilter('productTaxons.taxon.code', $taxon->getCode());
+        $this->client->addFilter('productTaxons', $this->iriConverter->getIriFromItem($taxon));
         $this->client->filter();
     }
 
@@ -176,6 +180,14 @@ final class ProductContext implements Context
                 $variantName
             )
         );
+    }
+
+    /**
+     * @Then I should see empty list of products
+     */
+    public function iShouldSeeEmptyListOfProducts(): void
+    {
+        Assert::same(0, $this->responseChecker->countTotalCollectionItems($this->client->getLastResponse()));
     }
 
     private function hasProductWithPrice(array $products, int $price, ?string $productCode = null): bool
