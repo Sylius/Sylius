@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
+use Sylius\Bundle\ShopBundle\SectionResolver\ShopSection;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
@@ -29,10 +31,17 @@ final class UserCartRecalculationListener
     /** @var OrderProcessorInterface */
     private $orderProcessor;
 
-    public function __construct(CartContextInterface $cartContext, OrderProcessorInterface $orderProcessor)
-    {
+    /** @var SectionProviderInterface */
+    private $uriBasedSectionContext;
+
+    public function __construct(
+        CartContextInterface $cartContext,
+        OrderProcessorInterface $orderProcessor,
+        SectionProviderInterface $uriBasedSectionContext
+    ) {
         $this->cartContext = $cartContext;
         $this->orderProcessor = $orderProcessor;
+        $this->uriBasedSectionContext = $uriBasedSectionContext;
     }
 
     /**
@@ -40,6 +49,10 @@ final class UserCartRecalculationListener
      */
     public function recalculateCartWhileLogin(object $event): void
     {
+        if (!$this->uriBasedSectionContext->getSection() instanceof ShopSection) {
+            return;
+        }
+
         /** @psalm-suppress DocblockTypeContradiction */
         if (!$event instanceof InteractiveLoginEvent && !$event instanceof UserEvent) {
             throw new \TypeError(sprintf(

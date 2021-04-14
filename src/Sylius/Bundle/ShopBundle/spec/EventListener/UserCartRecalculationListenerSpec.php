@@ -15,6 +15,9 @@ namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\AdminBundle\SectionResolver\AdminSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
+use Sylius\Bundle\ShopBundle\SectionResolver\ShopSection;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
@@ -26,18 +29,24 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 final class UserCartRecalculationListenerSpec extends ObjectBehavior
 {
-    function let(CartContextInterface $cartContext, OrderProcessorInterface $orderProcessor): void
-    {
-        $this->beConstructedWith($cartContext, $orderProcessor);
+    function let(
+        CartContextInterface $cartContext,
+        OrderProcessorInterface $orderProcessor,
+        SectionProviderInterface $uriBasedSectionContext
+    ): void {
+        $this->beConstructedWith($cartContext, $orderProcessor, $uriBasedSectionContext);
     }
 
     function it_recalculates_cart_for_logged_in_user_and_interactive_login_event(
         CartContextInterface $cartContext,
         OrderProcessorInterface $orderProcessor,
+        SectionProviderInterface $uriBasedSectionContext,
         Request $request,
         TokenInterface $token,
-        OrderInterface $order
+        OrderInterface $order,
+        ShopSection $shopSection
     ): void {
+        $uriBasedSectionContext->getSection()->willReturn($shopSection);
         $cartContext->getCart()->willReturn($order);
         $orderProcessor->process($order)->shouldBeCalled();
 
@@ -47,9 +56,12 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
     function it_recalculates_cart_for_logged_in_user_and_user_event(
         CartContextInterface $cartContext,
         OrderProcessorInterface $orderProcessor,
+        SectionProviderInterface $uriBasedSectionContext,
         UserEvent $event,
-        OrderInterface $order
+        OrderInterface $order,
+        ShopSection $shopSection
     ): void {
+        $uriBasedSectionContext->getSection()->willReturn($shopSection);
         $cartContext->getCart()->willReturn($order);
         $orderProcessor->process($order)->shouldBeCalled();
 
@@ -59,9 +71,12 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
     function it_does_nothing_if_cannot_find_cart_for_interactive_login_event(
         CartContextInterface $cartContext,
         OrderProcessorInterface $orderProcessor,
+        SectionProviderInterface $uriBasedSectionContext,
         Request $request,
-        TokenInterface $token
+        TokenInterface $token,
+        ShopSection $shopSection
     ): void {
+        $uriBasedSectionContext->getSection()->willReturn($shopSection);
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
         $orderProcessor->process(Argument::any())->shouldNotBeCalled();
 
@@ -71,9 +86,25 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
     function it_does_nothing_if_cannot_find_cart_for_user_event(
         CartContextInterface $cartContext,
         OrderProcessorInterface $orderProcessor,
+        SectionProviderInterface $uriBasedSectionContext,
+        UserEvent $event,
+        ShopSection $shopSection
+    ): void {
+        $uriBasedSectionContext->getSection()->willReturn($shopSection);
+        $cartContext->getCart()->willThrow(CartNotFoundException::class);
+        $orderProcessor->process(Argument::any())->shouldNotBeCalled();
+
+        $this->recalculateCartWhileLogin($event);
+    }
+
+    function it_does_nothing_if_section_is_different_than_shop_section(
+        CartContextInterface $cartContext,
+        OrderProcessorInterface $orderProcessor,
+        SectionProviderInterface $uriBasedSectionContext,
         UserEvent $event
     ): void {
-        $cartContext->getCart()->willThrow(CartNotFoundException::class);
+        $uriBasedSectionContext->getSection()->willReturn(null);
+        $cartContext->getCart()->shouldNotBeCalled();
         $orderProcessor->process(Argument::any())->shouldNotBeCalled();
 
         $this->recalculateCartWhileLogin($event);
