@@ -13,30 +13,29 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Filter;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
-use ApiPlatform\Core\Bridge\Symfony\Routing\IriConverter;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 
 final class TaxonFilterSpec extends ObjectBehavior
 {
-    function let(IriConverter $iriConverter, ManagerRegistry $managerRegistry): void
+    function let(IriConverterInterface $iriConverter, ManagerRegistry $managerRegistry): void
     {
         $this->beConstructedWith($iriConverter, $managerRegistry);
     }
 
     function it_adds_taxon_filter_if_property_is_product_taxon(
-        IriConverter $iriConverter,
+        IriConverterInterface $iriConverter,
         TaxonInterface $taxon,
+        TaxonInterface $taxonRoot,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $iriConverter->getItemFromIri('api/taxon')->willReturn($taxon);
-        $queryBuilder->getRootAliases()->shouldNotBeCalled();
-        $queryNameGenerator->generateParameterName('taxon')->willReturn('taxon1');
+        $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $queryBuilder
             ->join('o.productTaxons', 'p')
@@ -45,17 +44,59 @@ final class TaxonFilterSpec extends ObjectBehavior
         ;
 
         $queryBuilder
-            ->andWhere('p.taxon = taxon1')
+            ->innerJoin('p.taxon', 'taxon')
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
 
         $queryBuilder
-            ->setParameter('taxon1', $taxon)
+            ->andWhere('taxon.left >= :taxonLeft')
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
 
-        $this->filterProperty('productTaxon', 'api/taxon', $queryBuilder, $queryNameGenerator, Argument::type('string'));
+        $queryBuilder
+            ->andWhere('taxon.right <= :taxonRight')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $queryBuilder
+            ->andWhere('taxon.root = :taxonRoot')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $taxon->getLeft()->willReturn(1);
+
+        $queryBuilder
+            ->setParameter('taxonLeft', 1)
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $taxon->getRight()->willReturn(3);
+
+        $queryBuilder
+            ->setParameter('taxonRight', 3)
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $taxon->getRoot()->willReturn($taxonRoot);
+
+        $queryBuilder
+            ->setParameter('taxonRoot', $taxonRoot)
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $this->filterProperty(
+            'productTaxons',
+            'api/taxon',
+            $queryBuilder,
+            $queryNameGenerator,
+            'resourceClass'
+        );
     }
 }

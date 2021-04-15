@@ -187,7 +187,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeEmptyListOfProducts(): void
     {
-        Assert::same(0, $this->responseChecker->countTotalCollectionItems($this->client->getLastResponse()));
+        Assert::same($this->responseChecker->countTotalCollectionItems($this->client->getLastResponse()), 0);
     }
 
     private function hasProductWithPrice(array $products, int $price, ?string $productCode = null): bool
