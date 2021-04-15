@@ -12,6 +12,7 @@ sylius:
             gender: Płeć
             birthday: Data urodzenia
             billing_address: Adres do rachunku
+            different_shipping_address: Użyć innego adresu do wysyłki?
             only_customer_registration: Utworzyć konto?
             subscribed_to_newsletter: Zapisz się do newslettera
         customer_group:
