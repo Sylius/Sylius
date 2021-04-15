@@ -18,13 +18,6 @@
     <resource class="%sylius.model.product_variant.class%" shortName="ProductVariant">
         <attribute name="validation_groups">sylius</attribute>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>admin:product_variant:read</attribute>
-                <attribute>shop:product_variant:read</attribute>
-            </attribute>
-        </attribute>
-
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>

@@ -7,13 +7,6 @@
     <resource class="%sylius.model.product_taxon.class%" shortName="ProductTaxon">
         <attribute name="validation_groups">sylius</attribute>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>admin:product_taxon:read</attribute>
-                <attribute>shop:product_taxon:read</attribute>
-            </attribute>
-        </attribute>
-
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
