@@ -47,7 +47,7 @@ final class CommandFieldItemIriToIdentifierDenormalizer implements ContextAwareD
 
     public function supportsDenormalization($data, $type, $format = null, array $context = [])
     {
-        return $this->commandItemIriArgumentToIdentifierMap->has($this->getInputClassName($context)) ? true : false;
+        return $this->commandItemIriArgumentToIdentifierMap->has($this->getInputClassName($context));
     }
 
     public function denormalize($data, $type, $format = null, array $context = [])
@@ -55,11 +55,9 @@ final class CommandFieldItemIriToIdentifierDenormalizer implements ContextAwareD
         /** @psalm-var class-string $inputClassName */
         $inputClassName = $this->getInputClassName($context);
 
-        if ($this->commandItemIriArgumentToIdentifierMap->has($inputClassName)) {
-            $fieldName = $this->commandItemIriArgumentToIdentifierMap->get($inputClassName);
+        $fieldName = $this->commandItemIriArgumentToIdentifierMap->get($inputClassName);
 
-            $data[$fieldName] = $this->itemIriToIdentifierConverter->getIdentifier($data[$fieldName]);
-        }
+        $data[$fieldName] = $this->itemIriToIdentifierConverter->getIdentifier($data[$fieldName]);
 
         $denormalizedInput = $this->objectNormalizer->denormalize($data, $this->getInputClassName($context), $format, $context);
 
