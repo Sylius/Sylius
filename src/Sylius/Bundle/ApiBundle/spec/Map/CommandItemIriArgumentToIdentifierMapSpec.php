@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Map;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Map\CommandItemIriArgumentToIdentifierMap;
 use Sylius\Bundle\ApiBundle\Map\CommandItemIriArgumentToIdentifierMapInterface;
-use Webmozart\Assert\Assert;
 
 final class CommandItemIriArgumentToIdentifierMapSpec extends ObjectBehavior
 {
@@ -30,21 +28,18 @@ final class CommandItemIriArgumentToIdentifierMapSpec extends ObjectBehavior
         $this->shouldImplement(CommandItemIriArgumentToIdentifierMapInterface::class);
     }
 
-    function it_get_element(): void
+    function it_gets_an_element(): void
     {
-        $map = new CommandItemIriArgumentToIdentifierMap(['Sylius\Bundle\ApiBundle\Command\Cart\PickupCart' => 'token']);
-        Assert::same('token', $map->get('Sylius\Bundle\ApiBundle\Command\Cart\PickupCart'));
+        $this->get('Sylius\Bundle\ApiBundle\Command\Cart\PickupCart')->shouldReturn('token');
     }
 
-    function it_has_element(): void
+    function it_has_an_element(): void
     {
-        $map = new CommandItemIriArgumentToIdentifierMap(['Sylius\Bundle\ApiBundle\Command\Cart\PickupCart' => 'token']);
-        Assert::true($map->has('Sylius\Bundle\ApiBundle\Command\Cart\PickupCart'));
+        $this->has('Sylius\Bundle\ApiBundle\Command\Cart\PickupCart')->shouldReturn(true);
     }
 
-    function it_has_not_element(): void
+    function it_has_no_element(): void
     {
-        $map = new CommandItemIriArgumentToIdentifierMap(['Sylius\Bundle\ApiBundle\Command\Cart\PickupCart' => 'token']);
-        Assert::false($map->has('Sylius\Bundle\ApiBundle\Command\Cart\CreateCart'));
+        $this->has('Sylius\Bundle\ApiBundle\Command\Cart\CreateCart')->shouldReturn(false);
     }
 }

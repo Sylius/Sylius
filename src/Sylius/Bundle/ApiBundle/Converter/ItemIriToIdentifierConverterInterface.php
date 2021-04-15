@@ -15,6 +15,5 @@ namespace Sylius\Bundle\ApiBundle\Converter;
 
 interface ItemIriToIdentifierConverterInterface
 {
-    /** @return string */
-    public function getIdentifier(string $iri): string ;
+    public function getIdentifier(string $iri): string;
 }

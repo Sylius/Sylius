@@ -85,7 +85,7 @@ final class ItemIriToIdentifierConverterTest extends TestCase
     /**
      * @test
      */
-    public function it_get_identifier(): void
+    public function it_gets_identifier(): void
     {
         $router = $this->prophesize(RouterInterface::class);
         $identifierConverter = $this->prophesize(IdentifierConverterInterface::class);
