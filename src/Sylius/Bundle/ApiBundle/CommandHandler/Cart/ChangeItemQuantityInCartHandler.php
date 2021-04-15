@@ -59,7 +59,7 @@ final class ChangeItemQuantityInCartHandler implements MessageHandlerInterface
 
         Assert::same($cart->getTokenValue(), $command->orderTokenValue);
 
-        $this->orderItemQuantityModifier->modify($orderItem, $command->newQuantity);
+        $this->orderItemQuantityModifier->modify($orderItem, $command->quantity);
         $this->orderProcessor->process($cart);
 
         return $cart;
