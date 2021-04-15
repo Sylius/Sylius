@@ -26,11 +26,11 @@ class BlameCart
      * @var string
      * @psalm-immutable
      */
-    public $cartToken;
+    public $orderTokenValue;
 
-    public function __construct(string $shopUserEmail, string $cartToken)
+    public function __construct(string $shopUserEmail, string $orderTokenValue)
     {
         $this->shopUserEmail = $shopUserEmail;
-        $this->cartToken = $cartToken;
+        $this->orderTokenValue = $orderTokenValue;
     }
 }
