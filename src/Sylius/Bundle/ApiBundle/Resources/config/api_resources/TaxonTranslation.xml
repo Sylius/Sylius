@@ -7,13 +7,6 @@
     <resource class="%sylius.model.taxon_translation.class%" shortName="TaxonTranslation">
         <attribute name="validation_groups">sylius</attribute>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>admin:taxon_translation:read</attribute>
-                <attribute>admin:taxon_translation:read</attribute>
-            </attribute>
-        </attribute>
-
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
