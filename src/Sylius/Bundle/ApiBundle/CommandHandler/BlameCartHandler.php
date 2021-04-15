@@ -12,7 +12,7 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class BlameCartHandler implements MessageHandlerInterface
+final class BlameCartHandler implements MessageHandlerInterface
 {
     /** @var UserRepositoryInterface */
     private $shopUserRepository;
@@ -43,7 +43,7 @@ class BlameCartHandler implements MessageHandlerInterface
         }
 
         /** @var OrderInterface|null $cart */
-        $cart = $this->orderRepository->findCartByTokenValue($blameCart->cartToken);
+        $cart = $this->orderRepository->findCartByTokenValue($blameCart->orderTokenValue);
 
         if ($cart === null) {
             throw new \InvalidArgumentException('Cart with given token value could not be found');
