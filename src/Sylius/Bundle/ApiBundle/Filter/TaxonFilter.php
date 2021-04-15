@@ -13,43 +13,49 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Filter;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\AbstractContextAwareFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
-use ApiPlatform\Core\Bridge\Symfony\Routing\IriConverter;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * It should be replaced with generic collection filter after fixed: https://github.com/api-platform/api-platform/issues/1868
  */
 final class TaxonFilter extends AbstractContextAwareFilter
 {
-    /** @var IriConverter */
+    /** @var IriConverterInterface */
     private $iriConverter;
 
     /** @var ManagerRegistry */
     protected $managerRegistry;
 
-    public function __construct(IriConverter $iriConverter, ManagerRegistry $managerRegistry)
+    public function __construct(IriConverterInterface $iriConverter, ManagerRegistry $managerRegistry)
     {
         parent::__construct($managerRegistry);
         $this->iriConverter = $iriConverter;
     }
 
-    protected function filterProperty(string $property, $value, QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null)
+    public function filterProperty(string $property, $value, QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null)
     {
         if ($property !== 'productTaxons') {
             return;
         }
 
+        /** @var TaxonInterface $taxon */
         $taxon = $this->iriConverter->getItemFromIri($value);
         $alias = $queryBuilder->getRootAliases()[0];
-        $valueParameter = $queryNameGenerator->generateParameterName('taxon');
 
         $queryBuilder
             ->join(sprintf('%s.productTaxons', $alias), 'p')
-            ->andWhere(sprintf('p.taxon = :%s', $valueParameter))
-            ->setParameter($valueParameter, $taxon)
+            ->innerJoin('p.taxon', 'taxon')
+            ->andWhere('taxon.left >= :taxonLeft')
+            ->andWhere('taxon.right <= :taxonRight')
+            ->andWhere('taxon.root = :taxonRoot')
+            ->setParameter('taxonLeft', $taxon->getLeft())
+            ->setParameter('taxonRight', $taxon->getRight())
+            ->setParameter('taxonRoot', $taxon->getRoot())
         ;
     }
 
