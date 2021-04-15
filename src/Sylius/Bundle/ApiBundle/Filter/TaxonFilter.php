@@ -44,12 +44,16 @@ final class TaxonFilter extends AbstractContextAwareFilter
 
         $taxon = $this->iriConverter->getItemFromIri($value);
         $alias = $queryBuilder->getRootAliases()[0];
-        $valueParameter = $queryNameGenerator->generateParameterName('taxon');
 
         $queryBuilder
             ->join(sprintf('%s.productTaxons', $alias), 'p')
-            ->andWhere(sprintf('p.taxon = :%s', $valueParameter))
-            ->setParameter($valueParameter, $taxon)
+            ->innerJoin('p.taxon', 'taxon')
+            ->andWhere('taxon.left >= :taxonLeft')
+            ->andWhere('taxon.right <= :taxonRight')
+            ->andWhere('taxon.root = :taxonRoot')
+            ->setParameter('taxonLeft', $taxon->getLeft())
+            ->setParameter('taxonRight', $taxon->getRight())
+            ->setParameter('taxonRoot', $taxon->getRoot())
         ;
     }
 
