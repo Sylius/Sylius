@@ -633,7 +633,7 @@ final class CartContext implements Context
     {
         $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, sprintf('items/%s', $orderItemId));
 
-        $request->updateContent(['newQuantity' => $quantity]);
+        $request->updateContent(['quantity' => $quantity]);
 
         $this->cartsClient->executeCustomRequest($request);
 
