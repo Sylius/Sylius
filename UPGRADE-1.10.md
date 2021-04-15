@@ -37,3 +37,27 @@
 ### Commands
 
 1. We've removed `productCode` from `Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart` command.
+
+1. Endpoints with changed code to IRI:
+
+PATCH on `/api/v2/shop/account/orders/{tokenValue}/payments/{paymentId}`:
+
+````
+{
+    - "paymentMethodCode": "string"
+    + "paymentMethod": "string"
+}
+````
+
+POST on `/api/v2/shop/product-reviews`:
+
+````
+{
+      "title": "string",
+      "rating": 0,
+      "comment": "string",
+    - "productCode": "string",
+    + "product": "string",
+      "email": "string"
+}
+````
