@@ -65,7 +65,7 @@ final class ProductContext implements Context
     public function iBrowseProductsFromTaxon(TaxonInterface $taxon): void
     {
         $this->client->index();
-        $this->client->addFilter('productTaxons', $this->iriConverter->getIriFromItem($taxon));
+        $this->client->addFilter('taxon', $this->iriConverter->getIriFromItem($taxon));
         $this->client->filter();
     }
 

@@ -37,7 +37,7 @@ final class TaxonFilter extends AbstractContextAwareFilter
 
     public function filterProperty(string $property, $value, QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null)
     {
-        if ($property !== 'productTaxons') {
+        if ($property !== 'taxon') {
             return;
         }
 
@@ -59,18 +59,16 @@ final class TaxonFilter extends AbstractContextAwareFilter
 
     public function getDescription(string $resourceClass): array
     {
-        $description = [];
-        $description["productTaxons"] =
-            [
-            'type' => 'string',
-            'required' => false,
-            'property' => null,
-            'swagger' => [
-                'name' =>'Product taxon filter',
-                'description' => 'Get a collection of product with chosen taxon'
-            ]
+        return [
+            'taxon' => [
+                'type' => 'string',
+                'required' => false,
+                'property' => null,
+                'swagger' => [
+                    'name' =>'Product taxon filter',
+                    'description' => 'Get a collection of product with chosen taxon',
+                ],
+            ],
         ];
-
-        return $description;
     }
 }
