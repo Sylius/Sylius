@@ -92,7 +92,7 @@ final class TaxonFilterSpec extends ObjectBehavior
         ;
 
         $this->filterProperty(
-            'productTaxons',
+            'taxon',
             'api/taxon',
             $queryBuilder,
             $queryNameGenerator,
