@@ -41,8 +41,8 @@
         </service>
 
         <service id="sylius.api.product_taxon_filter" class="Sylius\Bundle\ApiBundle\Filter\TaxonFilter">
+            <argument type="service" id="doctrine" />
             <argument type="service" id="api_platform.iri_converter" />
-            <argument type="service" id="Doctrine\Common\Persistence\ManagerRegistry" />
             <tag name="api_platform.filter" />
         </service>
 

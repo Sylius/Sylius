@@ -22,9 +22,9 @@ use Symfony\Bridge\Doctrine\ManagerRegistry;
 
 final class TaxonFilterSpec extends ObjectBehavior
 {
-    function let(IriConverterInterface $iriConverter, ManagerRegistry $managerRegistry): void
+    function let(ManagerRegistry $managerRegistry, IriConverterInterface $iriConverter): void
     {
-        $this->beConstructedWith($iriConverter, $managerRegistry);
+        $this->beConstructedWith($managerRegistry, $iriConverter);
     }
 
     function it_adds_taxon_filter_if_property_is_product_taxon(
