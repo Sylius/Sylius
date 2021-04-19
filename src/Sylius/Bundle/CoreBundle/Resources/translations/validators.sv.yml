@@ -73,6 +73,9 @@ sylius:
     product_translation:
         short_description:
             max: En kort beskrivning kan inte vara längre än {{ limit }} tecken.
+    review:
+        author:
+            not_blank: Skriv din e-postadress.
     taxon_image:
         file:
             max_size: Bilden är för stor - {{ size }}{{ suffix }}. Högsta tillåtna storlek är {{ limit }}{{ suffix }}.

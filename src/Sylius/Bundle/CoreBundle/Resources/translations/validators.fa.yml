@@ -72,6 +72,9 @@ sylius:
     product_translation:
         short_description:
             max: معرفی کوتاه نباید بیش از {{ limit }} حرف باشد.
+    review:
+        author:
+            not_blank: لطفا ایمیل خود را وارد کنید.
     taxon_image:
         file:
             max_size: تصویر بسیار بزرگ است -{{ size }}{{ suffix }}. حداکثر اندازه مجاز {{ limit }}{{ suffix }} می باشد.

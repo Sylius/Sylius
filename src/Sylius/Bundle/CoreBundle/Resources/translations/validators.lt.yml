@@ -34,6 +34,9 @@ sylius:
     product_translation:
         short_description:
             max: Trumpas aprašymas negali būti ilgesnis nei {{ limit }} simbolių.
+    review:
+        author:
+            not_blank: Įveskite savo elektroninio pašto adresą.
     user:
         email:
             unique: Šis el. paštas jau naudojamas.

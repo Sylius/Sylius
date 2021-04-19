@@ -77,6 +77,9 @@ sylius:
     product_translation:
         short_description:
             max: Кратко описание трябва да бъде по-дълго от {{ limit }} знака.
+    review:
+        author:
+            not_blank: Моля, въведете вашия имейл.
     taxon_image:
         file:
             max_size: Изображението е твърде голям - {{ size }}{{ suffix }}. Максимално допустима размер е {{ limit }}{{ suffix }}.

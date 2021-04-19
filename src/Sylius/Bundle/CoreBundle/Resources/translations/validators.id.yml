@@ -77,6 +77,9 @@ sylius:
     product_translation:
         short_description:
             max: Deskripsi singkat tidak boleh lebih dari {{ limit }} karakter.
+    review:
+        author:
+            not_blank: Masukkan email Anda.
     taxon_image:
         file:
             max_size: Gambar terlalu besar - {{ size }}{{ suffix }}. Ukuran maksimal yang diperbolehkan berukuran {{ limit }}{{ suffix }}.

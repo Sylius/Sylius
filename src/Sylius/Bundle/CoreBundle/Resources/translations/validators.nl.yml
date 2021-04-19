@@ -79,6 +79,9 @@ sylius:
     product_translation:
         short_description:
             max: Korte omschrijving mag niet meer dan {{ limit }} tekens bevatten.
+    review:
+        author:
+            not_blank: Vul uw e-mailadres in.
     taxon_image:
         file:
             max_size: De afbeelding is te groot - {{ size }}{{ suffix }}. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.
