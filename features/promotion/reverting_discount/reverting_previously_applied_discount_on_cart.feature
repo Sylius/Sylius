@@ -10,7 +10,7 @@ Feature: Reverting previously applied discount on cart
         And the store has a product "PHP Mug" priced at "$20.00"
         And there is a promotion "Christmas promotion"
 
-    @ui
+    @ui @api
     Scenario: Reverting discount applied from total item quantity based promotion
         Given this promotion gives "$10.00" discount to every order with quantity at least 2
         And I have product "PHP Mug" in the cart

@@ -16,7 +16,7 @@ Feature: Receiving a discount based on a configured promotion
         And the store has a product "Rammstein bow tie" priced at "$10.00"
         And this product belongs to "Formal attire"
 
-    @ui
+    @ui @api
     Scenario: Receiving a discount on the first order
         Given there is a promotion "First order promotion"
         And it gives "20%" off on the customer's 1st order
@@ -37,7 +37,7 @@ Feature: Receiving a discount based on a configured promotion
         And my cart total should be "$630.00"
         And my cart shipping total should be "$0.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving a discount on products from a specific taxon if an order contains products from an another taxon
         Given there is a promotion "Jacket-trousers pack"
         And it gives "10%" off on every product classified as "Jackets" if order contains any product classified as "Trousers"
@@ -64,7 +64,7 @@ Feature: Receiving a discount based on a configured promotion
         And product "Rammstein bow tie" price should be decreased by "$1.00"
         And my cart total should be "$134.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving a discount on products from a specific taxon together with fixed discount on order
         Given there is a promotion "Jacket-trousers pack"
         And it gives "10%" off on every product classified as "Jackets" and "$20.00" discount on every order
