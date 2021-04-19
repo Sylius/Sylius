@@ -34,7 +34,7 @@
             <group>shop:product_variant:read</group>
             <group>shop:cart:read</group>
             <group>admin:product_variant_inventory:read</group>
-            <group>admin:product:read</group>yy
+            <group>admin:product:read</group>
         </attribute>
     </class>
 </serializer>

@@ -61,26 +61,18 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-<<<<<<< HEAD
-                <attribute name="path">/admin/orders/{id}</attribute>
+                <attribute name="path">/admin/orders/{tokenValue}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:order:read</attribute>
                 </attribute>
-=======
-                <attribute name="path">/admin/orders/{tokenValue}</attribute>
->>>>>>> 1fa71556fd02e94990c3b2a80682c206b7875e5e
             </itemOperation>
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-<<<<<<< HEAD
-                <attribute name="path">/shop/orders/{id}</attribute>
+                <attribute name="path">/shop/orders/{tokenValue}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:order:read</attribute>
                 </attribute>    
-=======
-                <attribute name="path">/shop/orders/{tokenValue}</attribute>
->>>>>>> 1fa71556fd02e94990c3b2a80682c206b7875e5e
             </itemOperation>
 
             <itemOperation name="shop_delete">
