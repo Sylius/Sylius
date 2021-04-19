@@ -28,6 +28,9 @@ sylius:
     product_translation:
         short_description:
             max: Përshkrimi i shkurtër nuk duhet të përmbajë më shumë se {{ limit }} karaktere.
+    review:
+        author:
+            not_blank: Shkruaj adresën e email-it.
     user:
         email:
             unique: Ky email është përdorur tashmë.

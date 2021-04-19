@@ -77,6 +77,9 @@ sylius:
     product_translation:
         short_description:
             max: البريد الإلكتروني يجب أن لا تكون أطول من أحرف {{ limit }}.
+    review:
+        author:
+            not_blank: الرجاء إدخال البريدك الإلكتروني.
     taxon_image:
         file:
             max_size: يتم الصورة كبيرة جداً--{{ size }}{{ suffix }}. الحد الأقصى المسموح به لحجم هو {{ limit }}{{ suffix }}.
