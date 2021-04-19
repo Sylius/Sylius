@@ -19,7 +19,7 @@
         <attribute name="normalization_context">
             <attribute name="enable_max_depth">true</attribute>
             <attribute name="groups">
-                <attribute>product_option:read</attribute>
+                <attribute>admin:product_option:read</attribute>
             </attribute>
         </attribute>
 
@@ -39,7 +39,7 @@
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/product-options</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">product_option:create</attribute>
+                    <attribute name="groups">admin:product_option:create</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -47,19 +47,19 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/product-options/{id}</attribute>
+                <attribute name="path">/admin/product-options/{code}</attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/product-options/{id}</attribute>
+                <attribute name="path">/shop/product-options/{code}</attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
-                <attribute name="path">/admin/product-options/{id}</attribute>
+                <attribute name="path">/admin/product-options/{code}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">product_option:update</attribute>
+                    <attribute name="groups">admin:product_option:update</attribute>
                 </attribute>
             </itemOperation>
 
@@ -72,7 +72,7 @@
         <subresourceOperations>
             <subresourceOperation name="values_get_subresource">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/product-options/{id}/values</attribute>
+                <attribute name="path">/admin/product-options/{code}/values</attribute>
             </subresourceOperation>
         </subresourceOperations>
 

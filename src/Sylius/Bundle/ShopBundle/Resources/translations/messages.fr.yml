@@ -18,6 +18,8 @@ sylius:
             reset_your_password: 'Réinitialiser votre mot de passe'
             subject: 'Réinitialisation du mot de passe'
             to_reset_your_password: 'Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous'
+            to_reset_your_password_token: 'Pour réinitialiser votre mot de passe, utilisez le jeton ci-dessous'
+            token: 'Votre jeton de réinitialisation de mot de passe est'
         user_registration:
             start_shopping: 'Commencer le shopping'
             subject: 'Enregistrement de l''utilisateur'

@@ -20,7 +20,7 @@
 
         <attribute name="normalization_context">
             <attribute name="groups">
-                <attribute>product_association_type:read</attribute>
+                <attribute>admin:product_association_type:read</attribute>
             </attribute>
         </attribute>
 
@@ -37,7 +37,7 @@
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">product_association_type:create</attribute>
+                    <attribute name="groups">admin:product_association_type:create</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -50,7 +50,7 @@
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">product_association_type:update</attribute>
+                    <attribute name="groups">admin:product_association_type:update</attribute>
                 </attribute>
             </itemOperation>
 

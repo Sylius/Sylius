@@ -19,13 +19,13 @@
 
         <attribute name="normalization_context">
             <attribute name="groups">
-                <attribute>product_option_value:read</attribute>
+                <attribute>admin:product_option_value:read</attribute>
             </attribute>
         </attribute>
 
         <attribute name="denormalization_context">
             <attribute name="groups">
-                <attribute>product_option_value:write</attribute>
+                <attribute>admin:product_option_value:write</attribute>
             </attribute>
         </attribute>
 
@@ -36,12 +36,12 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/product-option-values/{id}</attribute>
+                <attribute name="path">/admin/product-option-values/{code}</attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/product-option-values/{id}</attribute>
+                <attribute name="path">/shop/product-option-values/{code}</attribute>
             </itemOperation>
         </itemOperations>
 

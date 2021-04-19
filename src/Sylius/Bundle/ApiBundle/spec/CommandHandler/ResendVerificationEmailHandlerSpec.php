@@ -7,7 +7,6 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\ResendVerificationEmail;
 use Sylius\Bundle\ApiBundle\Command\SendAccountVerificationEmail;
-use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -22,10 +21,9 @@ final class ResendVerificationEmailHandlerSpec extends ObjectBehavior
     function let(
         UserRepositoryInterface $userRepository,
         GeneratorInterface $generator,
-        ChannelRepositoryInterface $channelRepository,
         MessageBusInterface $messageBus
     ): void {
-        $this->beConstructedWith($userRepository, $generator, $channelRepository, $messageBus);
+        $this->beConstructedWith($userRepository, $generator, $messageBus);
     }
 
     function it_is_a_message_handler(): void
@@ -49,14 +47,12 @@ final class ResendVerificationEmailHandlerSpec extends ObjectBehavior
 
     function it_handles_request_for_resend_verification_email(
         UserRepositoryInterface $userRepository,
-        ChannelRepositoryInterface $channelRepository,
         ShopUserInterface $shopUser,
         GeneratorInterface $generator,
         MessageBusInterface $messageBus,
         ChannelInterface $channel
     ): void {
         $userRepository->findOneByEmail('test@email.com')->willReturn($shopUser);
-        $channelRepository->findOneByCode('WEB')->willReturn($channel);
 
         $channel->isAccountVerificationRequired()->willReturn(true);
 

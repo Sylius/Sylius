@@ -22,9 +22,11 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
 
 final class ManagingShipmentsContext implements Context
@@ -119,6 +121,20 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
+     * @When I try to ship the shipment of order :order
+     */
+    public function iTryToShipShipmentOfOrder(OrderInterface $order): void
+    {
+        /** @var ShipmentInterface $shipment */
+        $shipment = $order->getShipments()->first();
+
+        $this->client->customAction(
+            sprintf('/api/v2/admin/shipments/%s/ship', (string) $shipment->getId()),
+            HttpRequest::METHOD_PATCH
+        );
+    }
+
+    /**
      * @When I ship the shipment of order :order with :trackingCode tracking code
      */
     public function iShipTheShipmentOfOrderWithTrackingCode(OrderInterface $order, string $trackingCode): void
@@ -136,6 +152,18 @@ final class ManagingShipmentsContext implements Context
     public function iShouldBeNotifiedThatTheShipmentHasBeenSuccessfullyShipped(): void
     {
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'state'), 'shipped', 'Shipment is not shipped');
+    }
+
+    /**
+     * @Then I should be notified that shipment has been already shipped
+     */
+    public function iShouldBeNotifiedThatTheShipmentHasBeenAlreadyShipped(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'You cannot ship a shipment that was shipped before.',
+            'Shipment was able to be shipped when should not.'
+        );
     }
 
     /**

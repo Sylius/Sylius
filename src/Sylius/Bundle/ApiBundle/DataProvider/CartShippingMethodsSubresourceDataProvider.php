@@ -62,7 +62,7 @@ final class CartShippingMethodsSubresourceDataProvider implements RestrictedData
         $subresourceIdentifiers = $context['subresource_identifiers'];
 
         /** @var OrderInterface|null $cart */
-        $cart = $this->orderRepository->findCartByTokenValue($subresourceIdentifiers['id']);
+        $cart = $this->orderRepository->findCartByTokenValue($subresourceIdentifiers['tokenValue']);
         Assert::notNull($cart);
 
         /** @var ShipmentInterface $shipment */
@@ -80,7 +80,7 @@ final class CartShippingMethodsSubresourceDataProvider implements RestrictedData
 
         return
             is_a($resourceClass, ShippingMethodInterface::class, true) &&
-            isset($subresourceIdentifiers['id'], $subresourceIdentifiers['shipments'])
+            isset($subresourceIdentifiers['tokenValue'], $subresourceIdentifiers['shipments'])
         ;
     }
 

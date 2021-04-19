@@ -44,7 +44,12 @@ final class UserImpersonator implements UserImpersonatorInterface
 
     public function impersonate(UserInterface $user): void
     {
-        $token = new UsernamePasswordToken($user, $user->getPassword(), $this->firewallContextName, $user->getRoles());
+        $token = new UsernamePasswordToken(
+            $user,
+            $user->getPassword(),
+            $this->firewallContextName,
+            array_map(/** @param object|string $role */ static function ($role): string { return (string) $role; }, $user->getRoles())
+        );
         $this->session->set($this->sessionTokenParameter, serialize($token));
         $this->session->save();
 

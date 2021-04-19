@@ -39,7 +39,7 @@
     "require": {
         "php": "^7.4",
         "doctrine/orm": "^2.7",
-        "egulias/email-validator": "^2.1",
+        "egulias/email-validator": "^3.0",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0",
         "sylius/mailer-bundle": "^1.4",

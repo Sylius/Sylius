@@ -21,16 +21,16 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Pauschale pro Sendung
-                amount: Steuersatz
+                amount: Betrag
             per_unit_rate_configuration:
                 label: Pauschale pro Artikel
-                amount: Steuersatz
+                amount: Betrag
         shipping_category:
             description: Beschreibung
             name: Name
         shipping_method:
             add_rule: Regel hinzufügen
-            calculator: Steuersatzrechner
+            calculator: Rechner
             category: Kategorie
             category_requirement: Kategorievoraussetzungen
             channels: Ausgabekanäle
@@ -54,4 +54,4 @@ sylius:
             total_weight_greater_than_or_equal: Gesamtgewicht größer oder gleich
             total_weight_less_than_or_equal: Gesamtgewicht kleiner oder gleich
             weight: Gewicht
-            amount: Steuersatz
+            amount: Betrag

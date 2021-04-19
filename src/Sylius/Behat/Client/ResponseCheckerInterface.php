@@ -67,4 +67,6 @@ interface ResponseCheckerInterface
     public function hasItemWithValues(Response $response, array $parameters): bool;
 
     public function getResponseContent(Response $response): array;
+
+    public function hasViolationWithMessage(Response $response, string $message, ?string $property = null): bool;
 }

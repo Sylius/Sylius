@@ -77,6 +77,9 @@ sylius:
     product_translation:
         short_description:
             max: คำอธิบายสั้น ต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร
+    review:
+        author:
+            not_blank: กรุณาระบุอีเมลของคุณ
     taxon_image:
         file:
             max_size: ภาพใหญ่เกินไป - {{ size }}{{ suffix }} ขนาดสูงสุดคือ {{ limit }}{{ suffix }}

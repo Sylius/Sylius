@@ -1,6 +1,7 @@
 {
     "name": "sylius/sylius",
     "type": "library",
+    "version": "v1.10.0-dev",
     "description": "E-Commerce platform for PHP, based on Symfony framework.",
     "homepage": "https://sylius.com",
     "license": "MIT",
@@ -23,7 +24,7 @@
         "ext-exif": "*",
         "ext-fileinfo": "*",
         "ext-gd": "*",
-        "api-platform/core": "^2.5",
+        "api-platform/core": "^2.6",
         "babdev/pagerfanta-bundle": "^2.5",
         "behat/transliterator": "^1.3",
         "doctrine/collections": "^1.6",
@@ -32,7 +33,7 @@
         "doctrine/inflector": "^1.4 || ^2.0",
         "doctrine/migrations": "^3.0",
         "doctrine/orm": "^2.7",
-        "egulias/email-validator": "^2.1",
+        "egulias/email-validator": "^3.0",
         "fakerphp/faker": "^1.9",
         "friendsofphp/proxy-manager-lts": "^1.0",
         "friendsofsymfony/oauth-server-bundle": ">2.0.0-alpha.0 ^2.0@dev",
@@ -59,6 +60,7 @@
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0",
         "sylius-labs/polyfill-symfony-security": "^1.0",
+        "sylius/admin-api-bundle": "^1.10",
         "sylius/fixtures-bundle": "^1.6.1",
         "sylius/grid": "^1.8",
         "sylius/grid-bundle": "^1.8",
@@ -158,9 +160,8 @@
         "sylius/user-bundle": "self.version"
     },
     "conflict": {
-        "api-platform/core": "^2.6",
         "doctrine/doctrine-bundle": "2.3.0",
-        "jms/serializer-bundle": "3.9",
+        "jms/serializer-bundle": "3.9.0",
         "laminas/laminas-code": "^4.0.0",
         "symfony/doctrine-bridge": "4.4.16",
         "symfony/polyfill-mbstring": "^1.22.0",
@@ -201,7 +202,7 @@
         "symfony/maker-bundle": "^1.28",
         "symfony/web-profiler-bundle": "^4.4 || ^5.2",
         "symplify/package-builder": "^8.0 <8.3",
-        "vimeo/psalm": "4.4.1"
+        "vimeo/psalm": "4.7.0"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
@@ -254,7 +255,6 @@
             "spec\\Sylius\\Component\\Taxonomy\\": "src/Sylius/Component/Taxonomy/spec/",
             "spec\\Sylius\\Component\\User\\": "src/Sylius/Component/User/spec/",
             "spec\\Sylius\\Bundle\\AddressingBundle\\": "src/Sylius/Bundle/AddressingBundle/spec/",
-            "spec\\Sylius\\Bundle\\AdminApiBundle\\": "src/Sylius/Bundle/AdminApiBundle/spec/",
             "spec\\Sylius\\Bundle\\AdminBundle\\": "src/Sylius/Bundle/AdminBundle/spec/",
             "spec\\Sylius\\Bundle\\ApiBundle\\": "src/Sylius/Bundle/ApiBundle/spec/",
             "spec\\Sylius\\Bundle\\AttributeBundle\\": "src/Sylius/Bundle/AttributeBundle/spec/",

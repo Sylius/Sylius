@@ -76,7 +76,7 @@ jobs:
 
             -
                 name: Validate composer.json
-                run: composer validate --strict
+                run: composer validate --strict --no-check-version
                 if: always() && steps.end-of-setup.outcome == 'success'
 
             -

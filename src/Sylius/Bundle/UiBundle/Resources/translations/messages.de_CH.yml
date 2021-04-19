@@ -58,7 +58,7 @@ sylius:
         administration_panel_login: 'Administrations-Bereich Anmeldung'
         all: 'Alle'
         all_your_addresses: 'Alle Adressen'
-        amount: 'Steuersatz'
+        amount: 'Betrag'
         an_error_occurred: 'Es ist ein Fehler aufgetreten'
         api: 'API'
         apply_coupon: 'Gutscheincode einlösen'

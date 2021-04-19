@@ -54,7 +54,6 @@
 
         <attribute name="tracking">
             <group>admin:shipment:read</group>
-            <group>admin:shipment:update</group>
             <group>shop:shipment:read</group>
         </attribute>
 

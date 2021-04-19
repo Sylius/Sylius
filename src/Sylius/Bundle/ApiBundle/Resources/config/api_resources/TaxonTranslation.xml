@@ -21,7 +21,7 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>admin:taxon:read</attribute>
-                        <attribute>taxon_translation:read</attribute>
+                        <attribute>admin:taxon_translation:read</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
@@ -34,7 +34,7 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>admin:taxon:read</attribute>
-                        <attribute>taxon_translation:read</attribute>
+                        <attribute>admin:taxon_translation:read</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
@@ -45,7 +45,7 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>admin:taxon:read</attribute>
-                        <attribute>taxon_translation:read</attribute>
+                        <attribute>shop:taxon_translation:read</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>

@@ -17,10 +17,10 @@ sylius:
         amount:
             not_blank: Bitte geben Sie den Wert des Kurses der Steuerkategorie an.
         calculator:
-            not_blank: Bitte wählen Sie den Kursrechner aus.
+            not_blank: Bitte wählen Sie einen Steuersatzrechner aus.
         zone:
             not_blank: Bitte wählen Sie eine Zone.
         code:
             not_blank: Bitte geben Sie ein Kürzel für die Besteuerung an.
-            regex: Kürzel des Steuersatzes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+            regex: Code des Steuersatzes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Eine Besteuerung mit diesem Kürzel existiert bereits.
