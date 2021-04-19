@@ -77,6 +77,9 @@ sylius:
     product_translation:
         short_description:
             max: Η σύντομη περιγραφή δεν πρέπει να είναι μεγαλύτερη από {{ limit }} χαρακτήρες.
+    review:
+        author:
+            not_blank: Παρακαλώ εισάγετε το email σας.
     taxon_image:
         file:
             max_size: Η εικόνα είναι πολύ μεγάλη - {{ size }}{{ suffix }}. Το μέγιστο επιτρεπόμενο μέγεθος είναι {{ limit }}{{ suffix }}.

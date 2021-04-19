@@ -52,6 +52,9 @@ sylius:
     product_translation:
         short_description:
             max: A descrição curta não pode ter mais que {{ limit }} caracteres.
+    review:
+        author:
+            not_blank: Por favor introduza o seu endereço de e-mail.
     user:
         email:
             unique: Este endereço de e-mail já está registado.

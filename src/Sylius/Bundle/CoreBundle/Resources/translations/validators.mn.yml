@@ -79,6 +79,9 @@ sylius:
     product_translation:
         short_description:
             max: Товч тодорхойлолт {{ limit }} тэмдэгтээс ихгүй байх ёстой.
+    review:
+        author:
+            not_blank: Имэйл хаягаа оруулна уу.
     taxon_image:
         file:
             max_size: Энэ зураг маш том байна - {{ size }}{{ suffix }}. Зөвшөөрөгдөх хамгийн их хэмжээ нь  {{ limit }}{{ suffix }} байна.

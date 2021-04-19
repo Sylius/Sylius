@@ -79,6 +79,9 @@ sylius:
     product_translation:
         short_description:
             max: Descrierea scurtă nu poate fi mai lungă de {{ limit }} caractere.
+    review:
+        author:
+            not_blank: Vă rugăm să completați adresa de e-mail.
     taxon_image:
         file:
             max_size: Imaginea e prea mare - {{ size }} {{ suffix }}. Mărimea maximă admisă este {{ limit }} {{ suffix }}.
