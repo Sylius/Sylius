@@ -17,7 +17,7 @@ use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
-use Sylius\Component\Customer\Model\CustomerInterface as CustotmerComponent;
+use Sylius\Component\Customer\Model\CustomerInterface as CustomerComponent;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -97,10 +97,10 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
             ->setDefault('customer_group', LazyOption::randomOneOrNull($this->customerGroupRepository, 100))
             ->setAllowedTypes('customer_group', ['null', 'string', CustomerGroupInterface::class])
             ->setNormalizer('customer_group', LazyOption::findOneBy($this->customerGroupRepository, 'code'))
-            ->setDefault('gender', CustotmerComponent::UNKNOWN_GENDER)
+            ->setDefault('gender', CustomerComponent::UNKNOWN_GENDER)
             ->setAllowedValues(
                 'gender',
-                [CustotmerComponent::UNKNOWN_GENDER, CustotmerComponent::MALE_GENDER, CustotmerComponent::FEMALE_GENDER]
+                [CustomerComponent::UNKNOWN_GENDER, CustomerComponent::MALE_GENDER, CustomerComponent::FEMALE_GENDER]
             )
             ->setDefault('phone_number', function (Options $options): string {
                 return $this->faker->phoneNumber;
