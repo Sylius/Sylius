@@ -1,0 +1,2 @@
+Sylius\Component\Core\Model\ShopUser:
+    exclusion_policy: ALL

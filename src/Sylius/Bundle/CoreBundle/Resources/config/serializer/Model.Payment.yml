@@ -1,0 +1,3 @@
+Sylius\Component\Core\Model\Payment:
+    exclusion_policy: ALL
+    xml_root_name: payment
