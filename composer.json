@@ -45,6 +45,7 @@
         "knplabs/knp-menu-bundle": "^3.0",
         "lexik/jwt-authentication-bundle": "^2.11",
         "liip/imagine-bundle": "^2.3",
+        "nelmio/cors-bundle": "^2.1",
         "payum/payum": "^1.6",
         "payum/payum-bundle": "^2.4",
         "php-http/guzzle6-adapter": "^2.0",
