@@ -68,6 +68,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $this->prependSyliusThemeBundle($container, $config['driver']);
         $this->prependHwiOauth($container);
         $this->prependDoctrineMigrations($container);
+        $this->prependJmsSerializerIfAdminApiBundleIsNotPresent($container);
     }
 
     protected function getMigrationsNamespace(): string
@@ -109,5 +110,30 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         }
 
         $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.theme.context.channel_based']);
+    }
+
+    private function prependJmsSerializerIfAdminApiBundleIsNotPresent(ContainerBuilder $container): void
+    {
+        if (!$container->hasExtension('jms_serializer')) {
+            return;
+        }
+
+        if ($container->hasExtension('sylius_admin_api')) {
+            return;
+        }
+
+        $container->prependExtensionConfig('jms_serializer', [
+            'metadata' => [
+                'directories' => [
+                    'sylius-core' => [
+                        'namespace_prefix' => 'Sylius\Component\Core',
+                        'path' => '@SyliusCoreBundle/Resources/config/serializer',
+                    ],
+                ],
+            ],
+            'property_naming' => [
+                'id' => 'jms_serializer.identical_property_naming_strategy',
+            ],
+        ]);
     }
 }
