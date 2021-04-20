@@ -38,13 +38,31 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
         $this->calculate($productVariant, ['channel' => $channel])->shouldReturn(1000);
     }
 
-    function it_throws_a_channel_not_defined_exception_if_there_is_no_variant_price_for_given_channel(
+    function it_throws_a_channel_not_defined_exception_if_there_is_no_channel_pricing(
         ChannelInterface $channel,
         ProductVariantInterface $productVariant
     ): void {
         $channel->getName()->willReturn('WEB');
 
         $productVariant->getChannelPricingForChannel($channel)->willReturn(null);
+        $productVariant->getName()->willReturn('Red variant');
+        $productVariant->getCode()->willReturn('RED_VARIANT');
+
+        $this
+            ->shouldThrow(MissingChannelConfigurationException::class)
+            ->during('calculate', [$productVariant, ['channel' => $channel]])
+        ;
+    }
+
+    function it_throws_a_channel_not_defined_exception_if_there_is_no_variant_price_for_given_channel(
+        ChannelInterface $channel,
+        ProductVariantInterface $productVariant,
+        ChannelPricingInterface $channelPricing
+    ): void {
+        $channel->getName()->willReturn('WEB');
+
+        $productVariant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
+        $channelPricing->getPrice()->willReturn(null);
         $productVariant->getName()->willReturn('Red variant');
         $productVariant->getCode()->willReturn('RED_VARIANT');
 
@@ -85,13 +103,32 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
         $this->calculateOriginal($productVariant, ['channel' => $channel])->shouldReturn(1000);
     }
 
-    function it_throws_a_channel_not_defined_exception_if_there_is_no_variant_price_for_given_channel_when_calculating_original_price(
+    function it_throws_a_channel_not_defined_exception_if_there_is_no_channel_pricing_when_calculating_original_price(
         ChannelInterface $channel,
         ProductVariantInterface $productVariant
     ): void {
         $channel->getName()->willReturn('WEB');
 
         $productVariant->getChannelPricingForChannel($channel)->willReturn(null);
+        $productVariant->getName()->willReturn('Red variant');
+        $productVariant->getCode()->willReturn('RED_VARIANT');
+
+        $this
+            ->shouldThrow(MissingChannelConfigurationException::class)
+            ->during('calculateOriginal', [$productVariant, ['channel' => $channel]])
+        ;
+    }
+
+    function it_throws_a_channel_not_defined_exception_if_there_is_no_variant_price_for_given_channel_when_calculating_original_price(
+        ChannelInterface $channel,
+        ProductVariantInterface $productVariant,
+        ChannelPricingInterface $channelPricing
+    ): void {
+        $channel->getName()->willReturn('WEB');
+
+        $productVariant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
+        $channelPricing->getOriginalPrice()->willReturn(null);
+        $channelPricing->getPrice()->willReturn(null);
         $productVariant->getName()->willReturn('Red variant');
         $productVariant->getCode()->willReturn('RED_VARIANT');
 
