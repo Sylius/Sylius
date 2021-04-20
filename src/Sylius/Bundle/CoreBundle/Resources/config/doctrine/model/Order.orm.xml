@@ -73,11 +73,7 @@
             </cascade>
         </many-to-many>
 
-        <unique-constraints>
-            <unique-constraint columns="token_value" />
-        </unique-constraints>
-
-        <field type="string" name="tokenValue" column="token_value" nullable="true" />
+        <field type="string" name="tokenValue" column="token_value" nullable="true" unique="true" />
         <field type="string" name="customerIp" column="customer_ip" nullable="true" />
     </mapped-superclass>
 
