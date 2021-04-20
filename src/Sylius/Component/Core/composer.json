@@ -26,7 +26,7 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^7.4 || ^8.0",
         "knplabs/gaufrette": "^0.8",
         "payum/payum": "^1.6",
         "php-http/guzzle6-adapter": "^2.0",
