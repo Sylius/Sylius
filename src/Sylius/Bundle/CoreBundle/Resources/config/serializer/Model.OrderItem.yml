@@ -1,0 +1,7 @@
+Sylius\Component\Core\Model\OrderItem:
+    exclusion_policy: ALL
+    xml_root_name: order-item
+    properties:
+        variant:
+            expose: true
+            groups: [Default, Detailed, DetailedCart]

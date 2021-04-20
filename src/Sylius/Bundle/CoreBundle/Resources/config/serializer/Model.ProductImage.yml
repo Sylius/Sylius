@@ -1,0 +1,3 @@
+Sylius\Component\Core\Model\ProductImage:
+    exclusion_policy: ALL
+    xml_root_name: product-image

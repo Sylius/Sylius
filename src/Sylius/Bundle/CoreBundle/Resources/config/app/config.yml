@@ -43,6 +43,15 @@ doctrine:
                         WEEK: Sylius\Bundle\CoreBundle\Doctrine\DQL\Week
                         YEAR: Sylius\Bundle\CoreBundle\Doctrine\DQL\Year
 
+jms_serializer:
+    metadata:
+        directories:
+            sylius-core:
+                namespace_prefix: "Sylius\\Component\\Core"
+                path: "@SyliusCoreBundle/Resources/config/serializer"
+    property_naming:
+        id: jms_serializer.identical_property_naming_strategy
+
 knp_gaufrette:
     adapters:
         sylius_image:
