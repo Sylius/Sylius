@@ -1,3 +1,7 @@
+# UPGRADE FROM `v1.9.2` TO `v1.9.3`
+
+1. The endpoint `GET api/v2/order-items/{id}/adjustments` has been changed to `GET api/v2/admin/order-items/{id}/adjustments`
+
 # UPGRADE FROM `v1.8.X` TO `v1.9.0`
 
 ### Package upgrades

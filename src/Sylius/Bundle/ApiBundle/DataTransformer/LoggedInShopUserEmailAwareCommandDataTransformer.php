@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
-use Sylius\Bundle\AdminApiBundle\Model\UserInterface;
 use Sylius\Bundle\ApiBundle\Command\AddProductReview;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 /** @experimental */
 final class LoggedInShopUserEmailAwareCommandDataTransformer implements CommandDataTransformerInterface
@@ -51,7 +51,7 @@ final class LoggedInShopUserEmailAwareCommandDataTransformer implements CommandD
     {
         /** @var UserInterface|null $user */
         $user = $this->userContext->getUser();
-        if ($user !== null && $user instanceof ShopUserInterface) {
+        if ($user instanceof ShopUserInterface) {
             return $user->getCustomer();
         }
 

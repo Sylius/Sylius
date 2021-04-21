@@ -1,0 +1,30 @@
+Sylius\Component\Core\Model\Product:
+    exclusion_policy: ALL
+    xml_root_name: product
+    properties:
+        shortDescription:
+            expose: true
+            type: string
+        averageRating:
+            expose: true
+            type: float
+            groups: [Default, Detailed]
+        images:
+            expose: true
+            type: iterable
+            groups: [Default, Detailed]
+        channels:
+            expose: true
+            type: iterable
+            groups: [Detailed]
+        reviews:
+            expose: true
+            type: iterable
+            groups: [Detailed]
+        productTaxons:
+            expose: true
+            type: iterable
+            groups: [Detailed]
+        mainTaxon:
+            expose: true
+            groups: [Detailed]

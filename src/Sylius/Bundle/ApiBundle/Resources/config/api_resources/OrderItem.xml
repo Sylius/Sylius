@@ -42,6 +42,13 @@
                     <attribute name="groups">shop:order_item:subresource:read</attribute>
                 </attribute>
             </subresourceOperation>
+            <subresourceOperation name="adjustments_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/order-items/{id}/adjustments</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:order_item:read</attribute>
+                </attribute>
+            </subresourceOperation>
         </subresourceOperations>
 
         <property name="id" identifier="true" writable="false" />
