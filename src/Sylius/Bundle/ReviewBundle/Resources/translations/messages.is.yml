@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        review:
+            author: Höfundur
+            comment: Athugasemd
+            rating: Einkunn
+            status:
+                label: Staða
+                new: Nýtt
+                rejected: Hafnað

@@ -56,7 +56,7 @@ final class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavio
             ->shouldReturn(false)
         ;
 
-        $context['subresource_identifiers'] = ['id' => '666', 'shipments' => '999'];
+        $context['subresource_identifiers'] = ['tokenValue' => '666', 'shipments' => '999'];
 
         $this
             ->supports(
@@ -71,7 +71,7 @@ final class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavio
     function it_throws_an_exception_if_cart_does_not_exist(
         OrderRepositoryInterface $orderRepository
     ): void {
-        $context['subresource_identifiers'] = ['id' => '666', 'shipments' => '999'];
+        $context['subresource_identifiers'] = ['tokenValue' => '666', 'shipments' => '999'];
 
         $orderRepository->findCartByTokenValue('666')->willReturn(null);
 
@@ -91,7 +91,7 @@ final class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavio
         ShipmentRepositoryInterface $shipmentRepository,
         OrderInterface $cart
     ): void {
-        $context['subresource_identifiers'] = ['id' => '666', 'shipments' => '999'];
+        $context['subresource_identifiers'] = ['tokenValue' => '666', 'shipments' => '999'];
 
         $orderRepository->findCartByTokenValue('666')->willReturn($cart);
         $shipmentRepository->find('999')->willReturn(null);
@@ -113,7 +113,7 @@ final class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavio
         OrderInterface $cart,
         ShipmentInterface $shipment
     ): void {
-        $context['subresource_identifiers'] = ['id' => '666', 'shipments' => '999'];
+        $context['subresource_identifiers'] = ['tokenValue' => '666', 'shipments' => '999'];
 
         $orderRepository->findCartByTokenValue('666')->willReturn($cart);
         $shipmentRepository->find('999')->willReturn($shipment);
@@ -137,7 +137,7 @@ final class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavio
         OrderInterface $cart,
         ShipmentInterface $shipment
     ): void {
-        $context['subresource_identifiers'] = ['id' => '666', 'shipments' => '999'];
+        $context['subresource_identifiers'] = ['tokenValue' => '666', 'shipments' => '999'];
 
         $orderRepository->findCartByTokenValue('666')->willReturn($cart);
         $shipmentRepository->find('999')->willReturn($shipment);
@@ -168,7 +168,7 @@ final class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavio
         CalculatorInterface $calculator,
         CartShippingMethodInterface $cartShippingMethod
     ): void {
-        $context['subresource_identifiers'] = ['id' => '666', 'shipments' => '999'];
+        $context['subresource_identifiers'] = ['tokenValue' => '666', 'shipments' => '999'];
 
         $orderRepository->findCartByTokenValue('666')->willReturn($cart);
         $shipmentRepository->find('999')->willReturn($shipment);

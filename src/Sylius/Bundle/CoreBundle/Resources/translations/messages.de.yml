@@ -2,6 +2,31 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        order_confirmation:
+            has_been_successfully_placed: 'wurde erfolgreich platziert.'
+            subject: 'Bestellbestätigung'
+            view_order_or_change_payment_method: 'Bestellung anzeigen oder Zahlungsart ändern'
+            thank_you: 'Vielen Dank für Ihren Einkauf in unserem Shop!'
+            your_order_number: 'Ihre Bestellnummer'
+        password_reset:
+            hello: 'Hallo'
+            reset_your_password: 'Setzen Sie Ihr Passwort zurück'
+            subject: 'Passwort zurücksetzen'
+            to_reset_your_password: 'Um Ihr Passwort zurückzusetzen, klicken Sie auf den unten stehenden Link.'
+            to_reset_your_password_token: 'Um das Passwort zurückzusetzen, benutzen Sie den unten stehenden Code'
+            token: 'Ihr Code zum Zurücksetzen des Passworts lautet'
+        user_registration:
+            start_shopping: 'Jetzt einkaufen'
+            subject: 'Benutzerregistrierung'
+            welcome_to_our_store: 'Willkommen in unserem Shop!'
+            you_have_just_been_registered: 'Sie sind nun registriert. Vielen Dank'
+        verification_token:
+            hello: 'Hallo'
+            message: 'Bestätigen Sie Ihr Konto mit dem Code:'
+            subject: 'Überprüfung der E-Mail-Adresse'
+            to_verify_your_email_address: 'Um Ihre E-Mail-Adresse zu verifizieren, klicken Sie auf den Link unten'
+            verify_your_email_address: 'Bestätigen Sie Ihre E-Mail-Adresse'
     form:
         block:
             body: Inhalt
@@ -11,7 +36,7 @@ sylius:
             coupon: Gutschein
         checkout:
             addressing:
-                different_billing_address: Eine andere Rechnungsadresse benutzen?
+                different_billing_address: Eine abweichende Rechnungsadresse benutzen?
                 different_shipping_address: Eine abweichende Lieferadresse benutzen?
             payment_method: Zahlungsmethode
             shipping_method: Versandarten
@@ -98,7 +123,7 @@ sylius:
             billing_address: Rechnungsadresse
             channel: Alle Kanäle
         shipping_method:
-            zone: Versandgebiet
+            zone: Gebiet
         taxon:
             code: Code
             file: Foto auswählen
@@ -116,11 +141,11 @@ sylius:
             password: Passwort
             shipping_address: Lieferadresse
         user_filter:
-            query: Suche
+            query: Suchen
         variant:
             depth: Tiefe
             height: Höhe
-            on_hand: Auf Lager
+            on_hand: Aktueller Lagerbestand
             price: Preis
             sku: Bestandseinheit
             shipping_required: Ist ein Versand erforderlich?
@@ -150,7 +175,7 @@ sylius:
                 products: Produkte
             total_of_items_from_taxon:
                 taxon: Produktgruppe
-                amount: Steuersatz
+                amount: Betrag
         payment_method:
             channels: Ausgabekanäle
         product_attribute:

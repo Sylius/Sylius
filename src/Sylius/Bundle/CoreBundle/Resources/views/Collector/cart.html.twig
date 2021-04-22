@@ -17,11 +17,11 @@
                 </div>
                 <div class="sf-toolbar-info-piece">
                     <b>Subtotal</b>
-                    <span>{{ money.convertAndFormat(collector.subtotal, collector.currency) }}</span>
+                    <span>{{ money.format(collector.subtotal, collector.currency) }}</span>
                 </div>
                 <div class="sf-toolbar-info-piece">
                     <b>Total</b>
-                    <span>{{ money.convertAndFormat(collector.total, collector.currency) }}</span>
+                    <span>{{ money.format(collector.total, collector.currency) }}</span>
                 </div>
             </div>
             <div class="sf-toolbar-info-group">
@@ -64,8 +64,8 @@
                 <td>{{ collector.id }}</td>
                 <td>{{ collector.currency }}</td>
                 <td>{{ collector.locale }}</td>
-                <td>{{ money.convertAndFormat(collector.subtotal, collector.currency) }}</td>
-                <td>{{ money.convertAndFormat(collector.total, collector.currency) }}</td>
+                <td>{{ money.format(collector.subtotal, collector.currency) }}</td>
+                <td>{{ money.format(collector.total, collector.currency) }}</td>
             </tr>
         </table>
 

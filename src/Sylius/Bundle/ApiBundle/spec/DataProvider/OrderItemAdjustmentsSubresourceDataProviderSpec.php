@@ -35,7 +35,7 @@ final class OrderItemAdjustmentsSubresourceDataProviderSpec extends ObjectBehavi
             ->shouldReturn(false)
         ;
 
-        $context['subresource_identifiers'] = ['id' => 'TOKEN', 'items' => 11];
+        $context['subresource_identifiers'] = ['tokenValue' => 'TOKEN', 'items' => 11];
         $this
             ->supports(AdjustmentInterface::class, Request::METHOD_GET, $context)
             ->shouldReturn(true)
@@ -45,7 +45,7 @@ final class OrderItemAdjustmentsSubresourceDataProviderSpec extends ObjectBehavi
     function it_throws_an_exception_if_order_item_with_given_id_does_not_exist(
         OrderItemRepositoryInterface $orderItemRepository
     ): void {
-        $context['subresource_identifiers'] = ['id' => 'TOKEN', 'items' => 11];
+        $context['subresource_identifiers'] = ['tokenValue' => 'TOKEN', 'items' => 11];
         $orderItemRepository->find(11)->willReturn(null);
 
         $this
@@ -64,7 +64,7 @@ final class OrderItemAdjustmentsSubresourceDataProviderSpec extends ObjectBehavi
         OrderItemInterface $orderItem,
         AdjustmentInterface $adjustment
     ): void {
-        $context['subresource_identifiers'] = ['id' => 'TOKEN', 'items' => 11];
+        $context['subresource_identifiers'] = ['tokenValue' => 'TOKEN', 'items' => 11];
         $orderItemRepository->find(11)->willReturn($orderItem);
 
         $orderItem->getAdjustmentsRecursively()->willReturn(new ArrayCollection([$adjustment->getWrappedObject()]));

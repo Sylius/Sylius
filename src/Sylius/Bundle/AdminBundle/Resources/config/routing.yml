@@ -15,7 +15,7 @@ sylius_admin_dashboard_statistics:
     path: /statistics
     defaults:
         _controller: sylius.controller.admin.dashboard:getRawData
-        
+
 sylius_admin_impersonate_user:
     path: /impersonate/{username}
     defaults:

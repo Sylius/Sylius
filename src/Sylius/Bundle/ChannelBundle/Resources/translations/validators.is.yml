@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        code:
+            not_blank: Vinsamlega sláðu inn kóda sölumáta.
+            regex: Kódi sölumáta má aðeins innihalda stafi, tölur, bandstrik og undirstrik.
+            unique: Kódi sölumata verður að vera einstakur.
+        name:
+            not_blank: Vinsamlega sláðu inn nafn sölumáta.

@@ -120,7 +120,6 @@
         <property name="defaultAddress" writable="true" />
         <property name="phoneNumber" writable="true" />
         <property name="subscribedToNewsletter" writable="true" />
-        <property name="createdAt" writable="false" />
-        <property name="updatedAt" writable="false" />
+        <property name="user" readable="true" />
     </resource>
 </resources>

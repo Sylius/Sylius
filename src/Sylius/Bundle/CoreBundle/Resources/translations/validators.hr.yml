@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: Slika je previše velika -{{ size }}{{ suffix }}. Maksimalna dozvoljena veličina je {{ limit }}{{ suffix }}.
+            upload_ini_size: Slika je previše velika. Maksimalna dozvoljena veličina je {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: Molimo unesite osnovnu valutu za ovaj kanal.
@@ -13,7 +17,6 @@ sylius:
             min: Email adresa mora imati barem {{ limit }} znakova.
     channel_pricing:
         price:
-            min: Cijena mora biti barem {{ limit }}.
             not_blank: Molimo unesite cijenu.
     checkout:
         shipping_method:
@@ -39,9 +42,6 @@ sylius:
         product_eligibility: 'Proizvod %productName% je onemogućen.'
         shipping_method_eligibility: 'Proizvod ne spada u tražene zahtjeve za %shippingMethodName% metodu dostave. Molimo ponovo odaberite svoju metodu dostave.'
     locale:
-        code:
-            not_blank: Unesite lokalni kod.
-            unique: Ovaj lokalni kod već postoji.
         enabled:
             cannot_disable_base: Osnovni jezik nije moguće onemogućiti.
     product:
@@ -77,6 +77,9 @@ sylius:
     product_translation:
         short_description:
             max: Kratki opis ne smije biti duži od {{ limit }} znakova.
+    review:
+        author:
+            not_blank: Molimo unesite vašu email adresu.
     taxon_image:
         file:
             max_size: Slika je previše velika -{{ size }}{{ suffix }}. Maksimalna dozvoljena veličina je {{ limit }}{{ suffix }}.

@@ -1,8 +1,31 @@
 # CONFLICTS
 
 This document explains why certain conflicts were added to `composer.json` and
-refereneces related issues.
+references related issues.
 
+ - `doctrine/doctrine-bundle:2.3.0`:
+
+   This version makes Gedmo Doctrine Extensions fail (tree and position behaviour mostly).
+
+   References: https://github.com/doctrine/DoctrineBundle/issues/1305
+
+ - `jms/serializer-bundle:3.9`:
+
+   This version automatically registered DocBlockDriver, which is always turned on, while docblocks used in our code are not usable with it. Sample error:
+   `Can't use incorrect type object for collection in Doctrine\ORM\PersistentCollection:owner`
+
+   References: https://github.com/schmittjoh/JMSSerializerBundle/issues/844
+
+ - `symfony/serializer:4.4.19|5.2.2`:
+
+   These versions of Symfony Serializer introduces a bug with trying to access some private properties that don't have getters.
+   
+   References: https://github.com/symfony/symfony/pull/40004
+
+ - `api-platform/core:^2.6`:
+
+   API Platform 2.6 introduces a series of issues that make our Behat suite fail.
+ 
  - `symfony/doctrine-bridge:4.4.16`:
 
    This version of Doctrine Bridge introduces a bug that causes an issue related to `ChannelPricing` mapping.

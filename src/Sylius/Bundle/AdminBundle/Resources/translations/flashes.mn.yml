@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    email:
+        order_confirmation_resent: 'Захиалгын баталгаажуулалтыг харилцагчид амжилттай илгээсэн болно.'
+        shipment_confirmation_resent: 'Хүргэлтийн баталгаажуулалтыг харилцагчид амжилттай илгээсэн болно.'
+    product_variant:
+        cannot_generate_variants: 'Сонголтуудын утгагүй бүтээгдэхүүний хувилбарыг гаргаж үүсгэх боломжгүй.'

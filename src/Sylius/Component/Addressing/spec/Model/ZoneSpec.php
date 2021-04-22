@@ -19,6 +19,7 @@ use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\Zone;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 
 final class ZoneSpec extends ObjectBehavior
 {

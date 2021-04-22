@@ -26,9 +26,9 @@
         }
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^7.4",
         "doctrine/doctrine-migrations-bundle": "^3.0",
-        "egulias/email-validator": "^2.1",
+        "egulias/email-validator": "^3.0",
         "fzaninotto/faker": "^1.9",
         "jms/serializer-bundle": "^3.5",
         "knplabs/gaufrette": "^0.8",
@@ -78,6 +78,9 @@
         "phpspec/phpspec": "^7.0",
         "phpunit/phpunit": "^8.5",
         "symfony/dependency-injection": "^4.4 || ^5.2"
+    },
+    "conflict": {
+        "symfony/doctrine-bridge": "4.4.20 || 5.2.4 || 5.2.5"
     },
     "config": {
         "bin-dir": "bin"

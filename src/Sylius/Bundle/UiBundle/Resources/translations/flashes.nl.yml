@@ -24,3 +24,7 @@ sylius:
         out_of_stock: 'Er is alleen %quantity% van dit product in de voorraad.'
     product_variant:
         update_error: 'Er was een onverwacht probleem met het bijwerken van de product variant. Probeer de product variant nogmaals bij te werken.'
+    promotion:
+        update_rules: 'Sommige regels van de promoties met codes %codes% zijn bijgewerkt.'
+    taxon:
+        menu_taxon_delete: 'Je kan geen menu categorie van een kanaal verwijderen.'

@@ -15,13 +15,6 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.listener.cart_blamer" class="Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener">
-            <argument type="service" id="sylius.manager.order" />
-            <argument type="service" id="sylius.context.cart" />
-            <tag name="kernel.event_listener" event="sylius.user.security.implicit_login" method="onImplicitLogin" />
-            <tag name="kernel.event_listener" event="security.interactive_login" method="onInteractiveLogin" />
-            <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_jwt_authenticated" method="onJWTAuthenticatedLogin" />
-        </service>
         <service id="sylius.listener.channel" class="Sylius\Bundle\CoreBundle\EventListener\ChannelDeletionListener">
             <argument type="service" id="sylius.repository.channel" />
             <tag name="kernel.event_listener" event="sylius.channel.pre_delete" method="onChannelPreDelete" />
@@ -48,12 +41,6 @@
         <service id="sylius.listener.order_recalculation" class="Sylius\Bundle\CoreBundle\EventListener\OrderRecalculationListener">
             <argument type="service" id="sylius.order_processing.order_processor" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculateOrder" />
-        </service>
-        <service id="sylius.listener.user_cart_recalculation" class="Sylius\Bundle\CoreBundle\EventListener\UserCartRecalculationListener">
-            <argument type="service" id="sylius.context.cart" />
-            <argument type="service" id="sylius.order_processing.order_processor" />
-            <tag name="kernel.event_listener" event="sylius.user.security.implicit_login" method="recalculateCartWhileLogin" />
-            <tag name="kernel.event_listener" event="security.interactive_login" method="recalculateCartWhileLogin" />
         </service>
         <service id="sylius.listener.default_username" class="Sylius\Bundle\CoreBundle\EventListener\DefaultUsernameORMListener">
             <tag name="doctrine.event_listener" event="onFlush" lazy="true" />
@@ -91,6 +78,10 @@
             <tag name="kernel.event_listener" event="sylius.address.pre_create" method="preCreate" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\EventListener\LocaleAwareListener" decorates="locale_aware_listener">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\EventListener\LocaleAwareListener.inner" />
+        </service>
+
         <service id="sylius.listener.taxon_deletion" class="Sylius\Bundle\CoreBundle\EventListener\TaxonDeletionListener">
             <argument type="service" id="session" />
             <argument type="service" id="sylius.repository.channel" />
@@ -98,10 +89,6 @@
             <argument type="service" id="sylius.promotion_rule_updater.has_taxon" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="protectFromRemovingMenuTaxon" />
             <tag name="kernel.event_listener" event="sylius.taxon.post_delete" method="removeTaxonFromPromotionRules" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\EventListener\CircularDependencyBreakingErrorListener" decorates="exception_listener">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\EventListener\CircularDependencyBreakingErrorListener.inner" />
         </service>
     </services>
 </container>

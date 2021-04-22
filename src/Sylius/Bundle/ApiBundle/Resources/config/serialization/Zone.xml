@@ -55,16 +55,5 @@
             <group>admin:zone:create</group>
             <group>admin:zone:update</group>
         </attribute>
-        <attribute name="shippingMethods">
-            <group>admin:zone:all</group>
-            <group>admin:zone:read</group>
-            <group>admin:zone:create</group>
-            <group>admin:zone:update</group>
-        </attribute>
-        <attribute name="taxRates">
-            <group>admin:zone:all</group>
-            <group>admin:zone:read</group>
-            <group>admin:zone:update</group>
-        </attribute>
     </class>
 </serializer>

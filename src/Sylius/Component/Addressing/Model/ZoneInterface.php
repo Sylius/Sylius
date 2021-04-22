@@ -16,8 +16,6 @@ namespace Sylius\Component\Addressing\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Model\TaxRateInterface;
 
 interface ZoneInterface extends ResourceInterface, CodeAwareInterface
 {
@@ -58,24 +56,4 @@ interface ZoneInterface extends ResourceInterface, CodeAwareInterface
     public function removeMember(ZoneMemberInterface $member): void;
 
     public function hasMember(ZoneMemberInterface $member): bool;
-
-    public function getShippingMethods(): Collection;
-
-    public function hasShippingMethods(): bool;
-
-    public function addShippingMethod(ShippingMethodInterface $shippingMethod): void;
-
-    public function removeShippingMethod(ShippingMethodInterface $shippingMethod): void;
-
-    public function hasShippingMethod(ShippingMethodInterface $shippingMethod): bool;
-
-    public function getTaxRates(): Collection;
-
-    public function hasTaxRates(): bool;
-
-    public function addTaxRate(TaxRateInterface $taxRate): void;
-
-    public function removeTaxRate(TaxRateInterface $taxRate): void;
-
-    public function hasTaxRate(TaxRateInterface $taxRate): bool;
 }

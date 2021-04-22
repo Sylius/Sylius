@@ -311,7 +311,7 @@ final class CheckoutContext implements Context
     {
         $response = $this->completeOrder();
 
-        if ($response->getStatusCode() === 400) {
+        if ($response->getStatusCode() === 422) {
             return;
         }
 
@@ -447,7 +447,7 @@ final class CheckoutContext implements Context
 
         $response = $this->ordersClient->getLastResponse();
 
-        Assert::same($response->getStatusCode(), 400);
+        Assert::same($response->getStatusCode(), 422);
 
         Assert::true($this->isViolationWithMessageInResponse(
             $response,
@@ -754,7 +754,7 @@ final class CheckoutContext implements Context
     {
         $response = $this->ordersClient->getLastResponse();
 
-        Assert::true($response->getStatusCode() === 400);
+        Assert::true($response->getStatusCode() === 422);
 
         /** @var array|null $violations */
         $violations = $this->responseChecker->getResponseContent($response)['violations'];
@@ -785,7 +785,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldNotSeeTheThankYouPage(): void
     {
-        Assert::same($this->ordersClient->getLastResponse()->getStatusCode(), 400);
+        Assert::same($this->ordersClient->getLastResponse()->getStatusCode(), 422);
     }
 
     /**
@@ -814,7 +814,7 @@ final class CheckoutContext implements Context
     {
         $response = $this->ordersClient->getLastResponse();
 
-        Assert::same($response->getStatusCode(), 400);
+        Assert::same($response->getStatusCode(), 422);
 
         Assert::true($this->isViolationWithMessageInResponse(
             $response,
@@ -884,7 +884,7 @@ final class CheckoutContext implements Context
     {
         $response = $this->ordersClient->getLastResponse();
 
-        Assert::same($response->getStatusCode(), 400);
+        Assert::same($response->getStatusCode(), 422);
         Assert::true($this->isViolationWithMessageInResponse(
             $response,
             'Please select proper province.',
@@ -984,7 +984,7 @@ final class CheckoutContext implements Context
     {
         foreach ($this->getCartShippingMethods($this->getCart()) as $cartShippingMethod) {
             if (
-                $cartShippingMethod['cost'] === $fee &&
+                $cartShippingMethod['price'] === $fee &&
                 $cartShippingMethod['shippingMethod']['code'] === $shippingMethod->getCode()
             ) {
                 return true;

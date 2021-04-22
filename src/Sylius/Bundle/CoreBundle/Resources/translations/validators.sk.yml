@@ -42,9 +42,6 @@ sylius:
         product_eligibility: 'Tento produkt %productName% bola vypnutý.'
         shipping_method_eligibility: 'Produkt nezodpovedá požiadavkám dopravy %shippingMethodName%. Prosím vyberte iný spôsob dopravy.'
     locale:
-        code:
-            not_blank: Zadajte kód jazyka.
-            unique: Tento jazyk už existuje.
         enabled:
             cannot_disable_base: Základná mena sa nedá vypnúť.
     product:
@@ -80,6 +77,9 @@ sylius:
     product_translation:
         short_description:
             max: Stručný popis nesmie byť dlhší ako {{ limit }} znakov.
+    review:
+        author:
+            not_blank: Zadajte Váš e-mail.
     taxon_image:
         file:
             max_size: Obrázok je príliš veľký - {{ size }}{{ suffix }}. Maximálna povolená veľkosť je {{ limit }}{{ suffix }}.

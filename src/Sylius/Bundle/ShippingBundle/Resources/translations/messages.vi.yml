@@ -19,3 +19,7 @@ sylius:
             description: Mô tả
             enabled: Đã kích hoạt
             name: Tên
+        shipping_method_rule:
+            type: Phân loại
+            total: Tổng cộng
+            amount: Số tiền

@@ -11,7 +11,7 @@ sylius:
         shipment:
             state: Status
             states:
-                checkout: Trimite comanda
+                checkout: Finalizare comandă
                 pending: În așteptare
                 ready: Gata
                 shipped: Expediată

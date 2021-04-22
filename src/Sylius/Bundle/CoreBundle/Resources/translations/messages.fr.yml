@@ -2,6 +2,31 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        order_confirmation:
+            has_been_successfully_placed: 'a été passée avec succès.'
+            subject: 'Confirmation de commande'
+            view_order_or_change_payment_method: 'Voir la commande ou modifier le mode de paiement'
+            thank_you: 'Merci d''avoir acheté dans notre boutique !'
+            your_order_number: 'Votre commande n°'
+        password_reset:
+            hello: 'Bonjour'
+            reset_your_password: 'Réinitialiser votre mot de passe'
+            subject: 'Réinitialisation du mot de passe'
+            to_reset_your_password: 'Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous'
+            to_reset_your_password_token: 'Pour réinitialiser votre mot de passe, utilisez le jeton ci-dessous'
+            token: 'Votre jeton de réinitialisation de mot de passe est'
+        user_registration:
+            start_shopping: 'Commencer le shopping'
+            subject: 'Inscription utilisateur'
+            welcome_to_our_store: 'Bienvenue dans notre boutique !'
+            you_have_just_been_registered: 'Vous venez d''être enregistré(e). Merci'
+        verification_token:
+            hello: 'Bonjour'
+            message: 'Vérifiez votre compte avec le jeton : '
+            subject: 'Vérification de l''adresse e-mail'
+            to_verify_your_email_address: 'Pour vérifier votre adresse e-mail - cliquez sur le lien ci-dessous'
+            verify_your_email_address: 'Vérifiez votre adresse e-mail'
     form:
         block:
             body: Corps
@@ -42,7 +67,7 @@ sylius:
             account_verification_required: La vérification des comptes est-elle requise ?
             hostname: Nom d'hôte
             locale_default: Paramètres régionaux par défaut
-            locales: Locales
+            locales: Paramètres régionaux
             menu_taxon: Taxonomie de menu
             payment_methods: Moyens de paiement
             shipping_methods: Modes de livraison
@@ -58,14 +83,14 @@ sylius:
             file: Image
         locale:
             code: Code
-            enabled: Activé
+            enabled: Activée
         order_filter:
             created_at_from: Créé après le
             created_at_to: Créé avant le
             number: Numéro
             total_from: De
             total_to: À
-            payment_state: État du paiement
+            payment_state: Etat du paiement
             channel: Tous les canaux
         page:
             body: Corps
@@ -78,7 +103,7 @@ sylius:
             variant_selection_method: Méthode de sélection de variante
             main_taxon: Taxonomie principale
             channels: Canaux
-            enabled: Activé
+            enabled: Activée
         product_filter:
             name: Nom
             code: Code
@@ -108,7 +133,7 @@ sylius:
         user:
             billing_address: Adresse de facturation
             different_shipping_address: Utiliser une adresse différente pour la livraison ?
-            enabled: Activé
+            enabled: Activée
             first_name: Prénom
             groups: Groupes
             roles: Rôles
@@ -132,7 +157,7 @@ sylius:
                 attribute: Attribut 
                 value: Valeur
         guest:
-            email: E-mail
+            email: Courriel
         product_association:
             product: Produits associés
             type: Type d'association

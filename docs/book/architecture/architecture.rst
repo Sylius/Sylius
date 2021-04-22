@@ -34,7 +34,7 @@ Doctrine
 The most important are the object-relational mapper (ORM) and the database abstraction layer (DBAL).
 One of Doctrine's key features is the possibility to write database queries in Doctrine Query Language (DQL) - an object-oriented dialect of SQL.
 
-To learn more about Doctrine - see `their documentation <http://www.doctrine-project.org/about.html>`_.
+To learn more about Doctrine - see `their documentation <https://www.doctrine-project.org/>`_.
 
 Twig
 ----

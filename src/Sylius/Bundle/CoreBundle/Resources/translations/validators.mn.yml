@@ -1,0 +1,99 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    avatar_image:
+        file:
+            max_size: Энэ зураг маш том байна - {{ size }}{{ suffix }}. Зөвшөөрөгдөх хамгийн их хэмжээ нь  {{ limit }}{{ suffix }} байна.
+            upload_ini_size: Энэ зураг маш том байна - {{ size }}{{ suffix }}. Зөвшөөрөгдөх хамгийн их хэмжээ нь  {{ limit }}{{ suffix }} байна.
+    channel:
+        base_currency:
+            not_blank: Сувгийн үндсэн валютыг оруулна уу.
+        default_locale:
+            enabled: Анхдагч байршилыг идэвхжүүлсэн байх ёстой.
+            not_blank: Сувгийн анхдагч газрыг оруулна уу.
+        contact_email:
+            invalid: Энэ имэйл буруу байна.
+            max: Имэйл {{ limit }} тэмдэгтээс ихгүй байх ёстой.
+            min: Имэйл хамгийн багадаа {{ limit }} тэмдэгтээс бүрдэх ёстой.
+    channel_pricing:
+        price:
+            min: Үнэ 0-ээс бага байж болохгүй.
+            not_blank: Үнээ оруулна уу.
+    checkout:
+        shipping_method:
+            not_blank: Хүргэлтийн төрлийг сонгоно уу.
+    contact:
+        email:
+            invalid: Энэ имэйл буруу байна.
+            not_blank: Имэйл хаягаа оруулна уу.
+        message:
+            not_blank: Зурвасаа оруулна уу.
+    currency:
+        enabled:
+            cannot_disable_base: Үндсэн валютыг идэвхгүй болгох боломжгүй.
+    customer:
+        currency_code:
+            not_valid: Таны оруулсан валютын код буруу байна.
+    cart_item:
+        not_available: '%itemName% хангалттай нөөц байхгүй байна.'
+    order:
+        currency_code:
+            not_valid: Таны оруулсан валютын код буруу байна.
+        payment_method_eligibility: 'Энэ төлбөрийн хэрэгсэлийг  %paymentMethodName% идэвхгүй болгосон. Төлбөрийн хэрэгслээ дахин сонгоно уу.'
+        product_eligibility: 'Энэ бүтээгдэхүүнийг %productName% идэвхгүй болгосон.'
+        shipping_method_eligibility: 'Бүтээгдэхүүн нь %shippingMethodName% хүргэлтийн төрлийн шаардлагад нийцэхгүй байна. Хүргэлтийн төрлийг дахин сонгоно уу.'
+    locale:
+        enabled:
+            cannot_disable_base: Үндсэн газрыг идэвхгүй болгох боломжгүй.
+    product:
+        variants:
+            all_prices_defined: Эхлээд шинээр оноосон сувгуудын бүтээгдэхүүний хувилбарын үнийг тодорхойлох хэрэгтэй.
+    product_attribute:
+        invalid: Байрлал нь бүхэл тоо байх ёстой.
+    product_image:
+        file:
+            max_size: Энэ зураг маш том байна - {{ size }}{{ suffix }}. Зөвшөөрөгдөх хамгийн их хэмжээ нь  {{ limit }}{{ suffix }} байна.
+            upload_ini_size: Энэ зураг маш том байна - {{ size }}{{ suffix }}. Зөвшөөрөгдөх хамгийн их хэмжээ нь  {{ limit }}{{ suffix }} байна.
+    product_variant:
+        onHand:
+            min: Үлдэгдэл {{ limit }} -ээс их байх ёстой.
+            not_blank: Үлдэгдлийг оруулна уу.
+            reserved: Үлдэгдэл нь үлдэгдлийн нэгж тооноос их байх ёстой.
+        original_price:
+            min: Анхны үнэ нь сөрөг тоо байх ёсгүй.
+        weight:
+            min: Жин сөрөг тоо байх ёсгүй.
+            invalid: Жин нь тоо байх ёстой.
+        width:
+            min: Өргөн нь сөрөг тоо байж болохгүй.
+            invalid: Өргөн нь тоо байх ёстой.
+        height:
+            min: Өндөр нь сөрөг тоо байх ёсгүй.
+            invalid: Өндөр нь тоо байх ёстой.
+        depth:
+            min: Гүн нь сөрөг тоо байж болохгүй.
+            invalid: Гүн нь тоо байх ёстой.
+        channel_pricing:
+            all_defined: 'Суваг бүрийн үнийг тодорхойлох ёстой.'
+    product_translation:
+        short_description:
+            max: Товч тодорхойлолт {{ limit }} тэмдэгтээс ихгүй байх ёстой.
+    review:
+        author:
+            not_blank: Имэйл хаягаа оруулна уу.
+    taxon_image:
+        file:
+            max_size: Энэ зураг маш том байна - {{ size }}{{ suffix }}. Зөвшөөрөгдөх хамгийн их хэмжээ нь  {{ limit }}{{ suffix }} байна.
+            upload_ini_size: Энэ зураг маш том байна - {{ size }}{{ suffix }}. Зөвшөөрөгдөх хамгийн их хэмжээ нь  {{ limit }}{{ suffix }} байна.
+    user:
+        email:
+            unique: Энэ имэйлийг аль хэдийн ашигласан байна.
+            min: Имэйл хамгийн багадаа  {{ min }} тэмдэгтээс бүрдэх ёстой.
+            max: "\nИмэйл хамгийн ихдээ {{ max }} тэмдэгттэй байх ёстой."
+            invalid: Энэ имэйл буруу байна.
+        username:
+            unique: Энэ хэрэглэгчийн нэрийг аль хэдийн ашигласан байна.
+            not_blank: Нэрээ оруулна уу
+        locale_code:
+            not_blank: Газраа сонгоно уу.

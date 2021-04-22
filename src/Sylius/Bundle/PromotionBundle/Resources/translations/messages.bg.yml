@@ -61,5 +61,5 @@ sylius:
                 country: Държава
             taxonomy_configuration:
                 exclude: Изключи
-                taxons: Категории
+                taxons: Класификации
             type: Тип

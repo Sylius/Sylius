@@ -9,6 +9,7 @@ sylius:
                     association_types: Yhteystyypit
                     attributes: Määritteet
                     header: Luettelo
+                    inventory: Inventaario
                     options: Asetukset
                     products: Tuotteet
                     taxons: Veroryhmät
@@ -17,6 +18,7 @@ sylius:
                     channels: Kanavat
                     countries: Maat
                     currencies: Valuutat
+                    exchange_rates: Valuuttakurssit
                     header: Asetukset
                     locales: Alueet
                     payment_methods: Maksutavat
@@ -26,6 +28,7 @@ sylius:
                     zones: Vyöhykkeet
                 marketing:
                     header: Markkinointi
+                    product_reviews: Tuotearvostelut
                     promotions: Kampanjat
                 customers:
                     customers: Asiakkaat

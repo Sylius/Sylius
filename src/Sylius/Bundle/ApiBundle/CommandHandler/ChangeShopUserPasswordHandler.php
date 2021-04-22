@@ -35,7 +35,7 @@ final class ChangeShopUserPasswordHandler implements MessageHandlerInterface
         $this->userRepository = $userRepository;
     }
 
-    public function __invoke(ChangeShopUserPassword $changeShopUserPassword)
+    public function __invoke(ChangeShopUserPassword $changeShopUserPassword): void
     {
         if ($changeShopUserPassword->confirmNewPassword !== $changeShopUserPassword->newPassword) {
             throw new \InvalidArgumentException('Passwords do not match.');

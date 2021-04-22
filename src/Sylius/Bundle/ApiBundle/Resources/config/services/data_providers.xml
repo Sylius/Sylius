@@ -76,12 +76,16 @@
             <tag name="api_platform.item_data_provider" priority="10" />
         </service>
 
+        <service id="sylius.api.item_data_provider.reset_password_item" class="Sylius\Bundle\ApiBundle\DataProvider\ResetPasswordItemDataProvider">
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
+
         <service
             id="sylius.api.collection_data_provider.shipping_methods_available_for_order"
             class="Sylius\Bundle\ApiBundle\DataProvider\CartShippingMethodsSubresourceDataProvider"
         >
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius.repository.shipment"/>
+            <argument type="service" id="sylius.repository.shipment" />
             <argument type="service" id="sylius.shipping_methods_resolver" />
             <argument type="service" id="sylius.registry.shipping_calculator" />
             <argument type="service" id="sylius.api.factory.cart_shipping_method" />
@@ -134,6 +138,13 @@
         <service id="sylius.api.item_data_provider.inventory" class="Sylius\Bundle\ApiBundle\DataProvider\InventoryItemDataProvider">
             <argument type="service" id="sylius.repository.product_variant" />
             <argument type="service" id="sylius.api.context.user" />
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
+        
+        <service
+            id="sylius.api.item_data_provider.verify_customer_account"
+            class="Sylius\Bundle\ApiBundle\DataProvider\VerifyCustomerAccountItemDataProvider"
+        >
             <tag name="api_platform.item_data_provider" priority="10" />
         </service>
     </services>

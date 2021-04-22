@@ -5,13 +5,14 @@ sylius:
     form:
         user:
             email: Адреса електронної пошти
-            enabled: Ввімкнено
+            enabled: Увімкнено
             password:
                 label: Пароль
                 confirmation: Перевірка
             remember_me: Пам'ятати мене
             shipping_address: Адреса доставки
             username: Ім'я користувача
+            verified: Перевірено
         user_filter:
             query: Пошук
         user_change_password:

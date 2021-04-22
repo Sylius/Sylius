@@ -21,10 +21,6 @@ sylius:
             not_blank: Prosimo, vnesite vaše sporočilo.
     cart_item:
         not_available: '%itemName% ni na zalogi v željeni količini.'
-    locale:
-        code:
-            not_blank: Prosimo, vnesite kodo območnih nastavitev.
-            unique: Ta nastavitev območja že obstaja.
     product_variant:
         onHand:
             min: Na voljo mora biti večje od {{ limit }}.
@@ -34,6 +30,9 @@ sylius:
     product_translation:
         short_description:
             max: Kratek opis ne sme biti daljši kot {{ limit }} znakov.
+    review:
+        author:
+            not_blank: Prosimo, vnesite vaš elektronski naslov.
     user:
         email:
             unique: Ta e-pošta je že v uporabi.

@@ -226,6 +226,7 @@ sylius:
         save: 'Сачувај'
         save_changes: 'Сачувај измене'
         scope: 'Обухват'
+        select: 'Изаберите'
         set_as_default_billing_address: 'Постави подразумевану адресу за плаћање'
         set_as_default_shipping_address: 'Постави подразумевану адресу за слање'
         shipment_details: 'Детаљи пошиљке'

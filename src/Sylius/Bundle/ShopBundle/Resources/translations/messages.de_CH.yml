@@ -2,6 +2,41 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        contact_request:
+            content: 'Inhalt'
+            message_from: 'Nachricht von'
+            subject: 'Kontaktanfrage'
+        order_confirmation:
+            has_been_successfully_placed: 'wurde erfolgreich platziert.'
+            subject: 'Bestellbestätigung'
+            view_order_or_change_payment_method: 'Bestellung anzeigen oder Zahlungsart ändern'
+            thank_you: 'Vielen Dank für Ihren Einkauf in unserem Shop!'
+            your_order_number: 'Ihre Bestellnr.'
+        password_reset:
+            hello: 'Hallo'
+            reset_your_password: 'Passwort zurücksetzen'
+            subject: 'Passwort zurücksetzen'
+            to_reset_your_password: 'Um Ihr Passwort zurück zu setzen, klicken Sie bitte nachstehenden Link'
+            to_reset_your_password_token: 'Um das Passwort zurück zu setzen - benutze den Token unten'
+            token: 'Ihr Password Zurücksetzen Token ist'
+        user_registration:
+            start_shopping: 'Jetzt einkaufen'
+            subject: 'Benutzerregistrierung'
+            welcome_to_our_store: 'Willkommen in unserem Shop!'
+            you_have_just_been_registered: 'Sie sind nun registriert. Vielen Dank'
+        verification_token:
+            hello: 'Hallo'
+            subject: 'E-Mail-Adressenüberprüfung'
+            to_verify_your_email_address: 'Um Ihre E-Mail-Adresse zu verifizieren - klicken Sie auf den folgenden Link'
+            verify_your_email_address: 'Bestätigen Sie Ihre E-Mail-Adresse'
+    homepage:
+        about_us: 'Über uns'
+        about_us_content: 'Willkommen in unserem Shop. Wir freuen uns, Sie als unseren Kunden begrüßen zu dürfen. Kaufen Sie in Ruhe ein, wir sind steht''s benüht Ihnen den bestern Service zu bieten.  (<i>Sie können diesen Inhalt ändern, indem Sie den Schlüssel "sylius.homepage.about_us_content" in Ihrer Übersetzungsdatei überschreiben</i>)'
+        carousel_header: 'Wappnet euch! Der Winter kommt'
+        newsletter: 'Newsletter'
+        newsletter_description: 'Abonnieren Sie jetzt unseren Newsletter, und sichern Sie sich die vielen Vorteile unseres Shops" (<i>Sie können diesen Text in der Übersetzungsdatei anpassen, wenn Sie nach dem Schlüssel  "sylius.homepage.newsletter_description" suchen</i>)'
+        subscribe: 'Abonnieren'
     lightbox:
         image_album_label: 'Bild %1 von %2'
     menu:
@@ -12,4 +47,4 @@ sylius:
                 dashboard: 'Dashboard'
                 header: 'Ihr Konto'
                 order_history: 'Bestellverlauf'
-                personal_information: 'Persönliche Informationen'
+                personal_information: 'Mein Profil'

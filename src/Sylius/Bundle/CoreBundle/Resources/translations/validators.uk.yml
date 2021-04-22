@@ -2,10 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: Зображення є занадто великим - {{ size }}{{ suffix }}. Максимально дозволений розмір становить {{ limit }}{{ suffix }}.
+            upload_ini_size: Зображення є занадто великим. Максимально дозволений розмір становить {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: Будь ласка, введіть основну валюту каналу.
         default_locale:
+            enabled: Локаль за замовчуванням має бути увімкнена.
             not_blank: Будь ласка, введіть типову локаль каналу.
         contact_email:
             invalid: Ця адреса електронної пошти невірна.
@@ -13,7 +18,7 @@ sylius:
             min: Адреса електронної пошти має бути щонайменше {{ limit }} символ(-и,-ів).
     channel_pricing:
         price:
-            min: Ціна повинна бути не менша {{ limit }}.
+            min: Ціна не може бути меншою за 0.
             not_blank: Будь ласка, введіть ціну.
     checkout:
         shipping_method:
@@ -39,9 +44,6 @@ sylius:
         product_eligibility: 'Цей продукт %productName% був відключений.'
         shipping_method_eligibility: 'Продукт не відповідає вимогам для %shippingMethodName% способу доставки. Будь ласка, повторно виберіть метод доставки.'
     locale:
-        code:
-            not_blank: Будь ласка, введіть код локалі.
-            unique: Ця локаль вже існує.
         enabled:
             cannot_disable_base: Базова локаль не може бути недоступною.
     product:
@@ -77,6 +79,9 @@ sylius:
     product_translation:
         short_description:
             max: Стислий опис має містити не більше {{ limit }} символів.
+    review:
+        author:
+            not_blank: Будь ласка, введіть свою адресу електронної пошти.
     taxon_image:
         file:
             max_size: Зображення є занадто великим - {{ size }}{{ suffix }}. Максимально дозволений розмір становить {{ limit }}{{ suffix }}.

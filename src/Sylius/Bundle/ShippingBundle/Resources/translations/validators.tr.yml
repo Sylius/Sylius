@@ -12,6 +12,8 @@ sylius:
             regex: 'Nakliye katagorisi kodu sadece harflerden, sayılardan, tire ve alt çizgi karakterlerinden oluşur.'
             unique: 'Girilen nakliye katagori kodu zaten var.'
     shipping_method:
+        calculator:
+            not_blank: 'Lütfen gönderim yöntemi hesaplayıcısını seçin.'
         name:
             max_length: 'Kargo yönteminin adı {{ limit }} karakterden daha uzun olamaz.'
             min_length: 'Kargo yönteminin adı en az {{ limit }} karakter uzunluğunda olmalıdır.'

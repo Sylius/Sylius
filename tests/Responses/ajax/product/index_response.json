@@ -25,12 +25,7 @@
                 "code": "MUG_BB",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "\/api\/v1\/products\/MUG_BB"
-                    }
-                }
+                "images": []
             },
             {
                 "id": @integer@,
@@ -38,12 +33,7 @@
                 "code": "MUG_LOTR",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "\/api\/v1\/products\/MUG_LOTR"
-                    }
-                }
+                "images": []
             },
             {
                 "id": @integer@,
@@ -57,12 +47,7 @@
                         "type": "thumbnail",
                         "path": "\/uo\/product.jpg"
                     }
-                ],
-                "_links": {
-                    "self": {
-                        "href": "\/api\/v1\/products\/MUG_SW"
-                    }
-                }
+                ]
             },
             {
                 "id": @integer@,
@@ -70,12 +55,7 @@
                 "code": "PRODUCT_10",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "\/api\/v1\/products\/PRODUCT_10"
-                    }
-                }
+                "images": []
             },
             {
                 "id": @integer@,
@@ -83,12 +63,7 @@
                 "code": "PRODUCT_11",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "\/api\/v1\/products\/PRODUCT_11"
-                    }
-                }
+                "images": []
             },
             {
                 "id": @integer@,
@@ -96,12 +71,7 @@
                 "code": "PRODUCT_12",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "\/api\/v1\/products\/PRODUCT_12"
-                    }
-                }
+                "images": []
             },
             {
                 "id": @integer@,
@@ -109,12 +79,7 @@
                 "code": "PRODUCT_13",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "\/api\/v1\/products\/PRODUCT_13"
-                    }
-                }
+                "images": []
             },
             {
                 "id": @integer@,
@@ -122,12 +87,7 @@
                 "code": "PRODUCT_14",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "\/api\/v1\/products\/PRODUCT_14"
-                    }
-                }
+                "images": []
             },
             {
                 "id": @integer@,
@@ -135,12 +95,7 @@
                 "code": "PRODUCT_15",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "\/api\/v1\/products\/PRODUCT_15"
-                    }
-                }
+                "images": []
             },
             {
                 "id": @integer@,
@@ -148,12 +103,7 @@
                 "code": "PRODUCT_16",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
-                "_links": {
-                    "self": {
-                        "href": "\/api\/v1\/products\/PRODUCT_16"
-                    }
-                }
+                "images": []
             }
         ]
     }

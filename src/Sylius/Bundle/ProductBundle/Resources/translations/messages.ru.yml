@@ -4,26 +4,26 @@
 sylius:
     form:
         product:
-            name: Округ
+            name: Название
             description: Описание
             attributes: Атрибуты
-            options: Список опций
+            options: Опции
             meta_keywords: Ключевые слова метаданных
             meta_description: Описание метаданных
-            slug: Псевдоним
-            taxons: Категории
+            slug: ЧПУ
+            taxons: Класификации
         product_variant:
-            name: Округ
+            name: Название
         association_type:
-            name: Округ
+            name: Название
             translations: '﻿Переводы'
         association:
             type: Тип взаимосвязи
             product: Связанные продукты
         variant:
-            name: Округ
+            name: Название
         option:
-            name: Округ
+            name: Название
             position: Позиция
             values: Возможные значения
         option_value:

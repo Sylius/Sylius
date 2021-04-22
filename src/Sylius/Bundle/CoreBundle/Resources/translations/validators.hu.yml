@@ -2,46 +2,96 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: Túl nagy kép - {{ size }}{{ suffix }}. A maximális megengedett méret {{ limit }}{{ suffix }}.
+            upload_ini_size: Túl nagy kép. A maximális megengedett méret {{ limit }}{{ suffix }}.
     channel:
+        base_currency:
+            not_blank: Kérjük adja meg a csatorna alap pénznemét.
+        default_locale:
+            not_blank: Kérjük adja meg a csatorna alapértelmezett területi formátumát.
         contact_email:
-            invalid: Ez az e-mail cím érvénytelen.
-            max: E-mail nem lehet {{ limit }} karakternél hosszabb.
+            invalid: Ez az email cím érvénytelen.
+            max: Email nem lehet {{ limit }} karakternél hosszabb.
             min: E-mailnek legalább {{ limit }} karakter hosszúnak kell lennie.
     channel_pricing:
         price:
             not_blank: Kérjük, írja be az árat.
     checkout:
         shipping_method:
-            not_blank: Kérjük, válassza ki a szállítási formát.
+            not_blank: Kérjük, válassza ki a szállítási módot.
     contact:
         email:
-            invalid: Ez az e-mail cím érvénytelen.
-            not_blank: Kérjük adja meg e-mail címét!
+            invalid: Ez az email cím érvénytelen.
+            not_blank: Kérjük adja meg email címét!
         message:
             not_blank: Kérjük adjon meg egy üzenetet!
+    currency:
+        enabled:
+            cannot_disable_base: Az alapértelmezett pénznem nem tiltható le.
     customer:
         currency_code:
-            not_valid: A megadott pénznem érvénytelen.
+            not_valid: A megadott pénznem kód érvénytelen.
+    cart_item:
+        not_available: '%itemName% nem rendelkezik elegendő készlettel.'
     order:
         currency_code:
             not_valid: A megadott pénznem érvénytelen.
+        payment_method_eligibility: 'A %paymentMethodName% fizetési mód le van tiltva. Kérjük válasszon másik fizetési módot.'
+        product_eligibility: 'A %productName% termék le van tiltva.'
+        shipping_method_eligibility: 'A termék nem felel meg a %shippingMethodName% kiszállítási mód feltételeinek. Kérjük válasszon másik kiszállítási módot.'
     locale:
-        code:
-            not_blank: Kérjük, írja be a hely kódját.
-            unique: A területi beállítás már létezik.
+        enabled:
+            cannot_disable_base: Az alapértelmezett területi formátum nem tiltható le.
+    product:
+        variants:
+            all_prices_defined: A termék változatok árát először az újonnan hozzárendelt csatornákra kell meghatároznia.
+    product_attribute:
+        invalid: A pozíciónak egész számnak kell lennie.
+    product_image:
+        file:
+            max_size: Túl nagy kép - {{ size }}{{ suffix }}. A maximális megengedett méret {{ limit }}{{ suffix }}.
+            upload_ini_size: Túl nagy kép. A maximális megengedett méret {{ limit }}{{ suffix }}.
     product_variant:
         onHand:
             min: A készletnek nagyobbnak kell lenni mint {{ limit }}.
             not_blank: Kérjük, adja meg a készletet.
+            reserved: A készletnek nagyobbnak kell lennie, mint a fenntartott darabok számának
         original_price:
             min: Az eredeti ár nem lehet negatív.
+        weight:
+            min: A súly nem lehet negatív szám.
+            invalid: A súlynak számnak kell lennie.
+        width:
+            min: A szélesség nem lehet negatív.
+            invalid: A szélességnek számnak kell lennie.
+        height:
+            min: A magasság nem lehet negatív.
+            invalid: A magasságnak számnak kell lennie.
+        depth:
+            min: A mélység nem lehet negatív.
+            invalid: A mélységnek számnak kell lennie.
+        channel_pricing:
+            all_defined: 'Minden csatornához hozzá kell rendelni egy árat.'
     product_translation:
         short_description:
             max: Rövid leírás nem lehet hosszabb mint {{ limit }} karakterek.
+    review:
+        author:
+            not_blank: Kérjük adja meg email címét!
+    taxon_image:
+        file:
+            max_size: Túl nagy kép - {{ size }}{{ suffix }}. A maximális megengedett méret {{ limit }}{{ suffix }}.
+            upload_ini_size: Túl nagy kép. A maximális megengedett méret {{ limit }}{{ suffix }}.
     user:
         email:
-            unique: Ez az e-mail cím már használatban van.
-            invalid: Ez az e-mail cím érvénytelen.
+            unique: Ez az email cím már használatban van.
+            min: Az email címnek legalább {{ min }} karakter hosszúnak kell lennie.
+            max: Az email cím legfeljebb {{ max }} karakterből állhat.
+            invalid: Ez az email cím érvénytelen.
         username:
             unique: Ez a felhasználónév már használatban van.
             not_blank: Kérjük, add meg a neved.
+        locale_code:
+            not_blank: Kérjük válasszon területi formátumot.

@@ -18,43 +18,48 @@
     <class name="Sylius\Component\Core\Model\Shipment">
         <attribute name="id">
             <group>admin:shipment:read</group>
-            <group>shop:shipment:read</group>
             <group>admin:order:read</group>
+            <group>shop:shipment:read</group>
             <group>shop:order:read</group>
             <group>shop:cart:read</group>
         </attribute>
 
         <attribute name="createdAt">
             <group>admin:shipment:read</group>
+            <group>shop:shipment:read</group>
         </attribute>
 
         <attribute name="updatedAt">
             <group>admin:shipment:read</group>
+            <group>shop:shipment:read</group>
         </attribute>
 
         <attribute name="state">
             <group>admin:shipment:read</group>
+            <group>shop:shipment:read</group>
         </attribute>
 
         <attribute name="method">
-            <group>admin:order:read</group>
-            <group>shop:order:account:read</group>
             <group>admin:shipment:read</group>
-            <group>shop:cart:read</group>
+            <group>admin:order:read</group>
             <group>shop:shipment:read</group>
+            <group>shop:cart:read</group>
+            <group>shop:order:account:read</group>
         </attribute>
 
         <attribute name="units">
             <group>admin:shipment:read</group>
+            <group>shop:shipment:read</group>
         </attribute>
 
         <attribute name="tracking">
             <group>admin:shipment:read</group>
-            <group>admin:shipment:update</group>
+            <group>shop:shipment:read</group>
         </attribute>
 
         <attribute name="shippedAt">
             <group>admin:shipment:read</group>
+            <group>shop:shipment:read</group>
         </attribute>
 
         <attribute name="order">

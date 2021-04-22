@@ -130,12 +130,12 @@ final class RouteNameResolverTest extends TestCase
         $routeCollection->add('a_certain_subresource_route', new Route('/a/certain/item/path/{id}', [
             '_api_resource_class' => 'AppBundle\Entity\User',
             '_api_subresource_operation_name' => 'certain_other_item_op',
-            '_api_subresource_context' => ['identifiers' => [[1, 'bar']]],
+            '_api_subresource_context' => ['identifiers' => ['id' => ['bar', 'id']]],
         ]));
         $routeCollection->add('b_certain_subresource_route', new Route('/b/certain/item/path/{id}', [
             '_api_resource_class' => 'AppBundle\Entity\User',
             '_api_subresource_operation_name' => 'certain_item_op',
-            '_api_subresource_context' => ['identifiers' => [[1, 'foo']]],
+            '_api_subresource_context' => ['identifiers' => ['id' => ['foo', 'id']]],
         ]));
         $routeCollection->add('certain_collection_route', new Route('/certain/collection/path', [
             '_api_resource_class' => 'AppBundle\Entity\User',

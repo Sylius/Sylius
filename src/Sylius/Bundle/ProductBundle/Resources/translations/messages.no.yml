@@ -7,7 +7,7 @@ sylius:
             name: Navn
             description: Beskrivelse
             attributes: Egenskaper
-            options: Instillinger
+            options: Opsjoner
             meta_keywords: Meta nøkkelord
             meta_description: Metabeskrivelse
             slug: Slug

@@ -109,6 +109,7 @@
             <argument type="service" id="sylius.factory.address" />
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="sylius.factory.order_item" />
+            <argument type="service" id="sylius.factory.shipment" />
             <argument type="service" id="sm.factory" />
             <argument type="service" id="sylius.repository.country" />
             <argument type="service" id="sylius.repository.customer" />

@@ -2,10 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: Das Bild ist zu groß - {{ size }}{{ suffix }}. Maximal zulässige Größe {{ limit }}{{ suffix }}.
+            upload_ini_size: Das Bild ist zu groß. Maximal zulässige Größe {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: Bitte geben Sie die Basiswährung für den Kanal an.
         default_locale:
+            enabled: Standard-Gebietsschema muss aktiviert sein.
             not_blank: Bitte Standard-Gebietsschema für diesen Kanal angeben.
         contact_email:
             invalid: Diese E-Mail Adresse ist ungültig.
@@ -13,7 +18,7 @@ sylius:
             min: E-Mail muss mindestens {{ limit }} Zeichen lang sein.
     channel_pricing:
         price:
-            min: Preis muss mindestens {{ limit }} sein.
+            min: Preis darf nicht kleiner als 0 sein.
             not_blank: Bitte Preis eingeben.
     checkout:
         shipping_method:
@@ -39,9 +44,6 @@ sylius:
         product_eligibility: 'Dieses Produkt %productName% wurde deaktiviert.'
         shipping_method_eligibility: 'Das Produkt erfüllt nicht die Voraussetzungen für die Versandart %shippingMethodName%. Bitte wählen Sie eine andere Versandart.'
     locale:
-        code:
-            not_blank: Bitte lokalen Code eingeben.
-            unique: Locale existiert bereits.
         enabled:
             cannot_disable_base: Das Basis-Gebietsschema kann nicht deaktiviert werden.
     product:
@@ -77,6 +79,11 @@ sylius:
     product_translation:
         short_description:
             max: Kurzbeschreibung darf nicht länger als {{ limit }} Zeichen sein.
+    review:
+        author:
+            not_blank: Bitte geben Sie Ihre E-Mail-Adresse ein.
+        rating:
+            range: Bewertung muss eine Ganzzahl im Bereich 1-5 sein.
     taxon_image:
         file:
             max_size: Das Bild ist zu groß - {{ size }}{{ suffix }}. Maximal zulässige Größe {{ limit }}{{ suffix }}.

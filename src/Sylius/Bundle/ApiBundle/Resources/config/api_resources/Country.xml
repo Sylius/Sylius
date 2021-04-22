@@ -52,19 +52,19 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/countries/{id}</attribute>
+                <attribute name="path">/admin/countries/{code}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:country:read</attribute>
                 </attribute>
             </itemOperation>
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/countries/{id}</attribute>
+                <attribute name="path">/shop/countries/{code}</attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
-                <attribute name="path">/admin/countries/{id}</attribute>
+                <attribute name="path">/admin/countries/{code}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:country:update</attribute>
                 </attribute>
@@ -74,7 +74,7 @@
         <subresourceOperations>
             <subresourceOperation name="provinces_get_subresource">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/countries/{id}/provinces</attribute>
+                <attribute name="path">/admin/countries/{code}/provinces</attribute>
             </subresourceOperation>
         </subresourceOperations>
 

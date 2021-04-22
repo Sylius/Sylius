@@ -44,8 +44,9 @@ final class PromotionContext implements Context
 
     /**
      * @When I use coupon with code :couponCode
+     * @When I remove coupon from my cart
      */
-    public function iUseCouponWithCode(string $couponCode): void
+    public function iUseCouponWithCode(string $couponCode = null): void
     {
         $this->useCouponCode($couponCode);
     }
@@ -57,7 +58,7 @@ final class PromotionContext implements Context
     {
         $response = $this->cartsClient->getLastResponse();
 
-        Assert::same($response->getStatusCode(), 400);
+        Assert::same($response->getStatusCode(), 422);
         Assert::notNull($this->responseChecker->getError($response));
     }
 
@@ -70,7 +71,7 @@ final class PromotionContext implements Context
         return null;
     }
 
-    private function useCouponCode(string $couponCode): void
+    private function useCouponCode(?string $couponCode): void
     {
         $request = Request::customItemAction('shop', 'orders', $this->getCartTokenValue(), HttpRequest::METHOD_PATCH, 'apply-coupon');
 

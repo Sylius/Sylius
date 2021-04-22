@@ -29,6 +29,7 @@ sylius:
             description: Περιγραφή
             name: Ονομασία
         shipping_method:
+            add_rule: Προσθήκη κανόνα
             calculator: Τρόπος υπολογισμού
             category: Κατηγορία
             category_requirement: Απαίτηση κατηγορίας
@@ -41,5 +42,11 @@ sylius:
             match_none_category_requirement: Καμία από τις μονάδες δεν πρέπει να ταιριάζει με τις μεθόδους της κατηγορίας
             name: Ονομασία
             position: Θέση
+            rules: Κανόνες
             tax_category: Φορολογική κατηγορία
             translations: Μεταφράσεις
+        shipping_method_rule:
+            type: Τύπος
+            total: Σύνολο
+            weight: Βάρος
+            amount: Ποσό

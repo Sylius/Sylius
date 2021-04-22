@@ -16,7 +16,7 @@ sylius:
             zone: Zone
         country:
             add_province: Provincie toevoegen
-            name: Naam
+            name: Promoties beheren
             provinces: Provincies
             select: Selecteer
             enabled: Ingeschakeld

@@ -44,9 +44,6 @@ sylius:
         product_eligibility: 'Le produit %productName% a été désactivé.'
         shipping_method_eligibility: 'Ce produit n''est pas éligible au mode de livraison %shippingMethodName%. Veuillez sélectionner une nouvelle fois votre mode de livraison.'
     locale:
-        code:
-            not_blank: Veuillez saisir le code de la locale.
-            unique: Ce paramètre régional existe déjà.
         enabled:
             cannot_disable_base: La base locale ne peut pas être désactivée.
     product:
@@ -82,6 +79,11 @@ sylius:
     product_translation:
         short_description:
             max: La description courte ne doit pas dépasser {{ limit }} caractères.
+    review:
+        author:
+            not_blank: Veuillez saisir votre adresse email.
+        rating:
+            range: La note de l'avis doit être un entier entre 1 et 5.
     taxon_image:
         file:
             max_size: L'image est trop grande - {{ size }}{{ suffix }}. La taille maximum autorisée est de {{ limit }}{{ suffix }}.

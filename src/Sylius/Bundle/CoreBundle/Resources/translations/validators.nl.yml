@@ -2,10 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: De afbeelding is te groot - {{ size }}{{ suffix }}. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.
+            upload_ini_size: Het beeld is te groot. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: Geef de basisvaluta van de kanaal.
         default_locale:
+            enabled: Standaard lokalisatie moet ingeschakeld zijn.
             not_blank: Voer a.u.b. een standaard taal in.
         contact_email:
             invalid: Deze e-mail is ongeldig.
@@ -13,7 +18,7 @@ sylius:
             min: E-mail moet ten minste {{ limit }} karakters lang zijn.
     channel_pricing:
         price:
-            min: Prijs moet ten minste {{ limit }} zijn.
+            min: Prijs kan niet lager zijn dan 0.
             not_blank: Voer de prijs in.
     checkout:
         shipping_method:
@@ -39,9 +44,6 @@ sylius:
         product_eligibility: 'Het product %productName% is uitgeschakeld.'
         shipping_method_eligibility: 'Product past niet binnen de vereisten voor de verzendmethode %shippingMethodName%. Kies alstublieft een andere verzendmethode.'
     locale:
-        code:
-            not_blank: Voer een locatie code in.
-            unique: Deze locatie bestaat al.
         enabled:
             cannot_disable_base: De basis landinstelling worden niet uitgeschakeld.
     product:
@@ -77,6 +79,9 @@ sylius:
     product_translation:
         short_description:
             max: Korte omschrijving mag niet meer dan {{ limit }} tekens bevatten.
+    review:
+        author:
+            not_blank: Vul uw e-mailadres in.
     taxon_image:
         file:
             max_size: De afbeelding is te groot - {{ size }}{{ suffix }}. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.

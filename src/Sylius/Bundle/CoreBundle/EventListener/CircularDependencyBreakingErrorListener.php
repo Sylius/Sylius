@@ -19,6 +19,8 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\EventListener\ErrorListener;
 
 /**
+ * For Symfony 5+.
+ *
  * `Symfony\Component\HttpKernel\EventListener\ErrorListener::onKernelException` happens to set previous
  * exception for a wrapper exception. This is meant to improve DX while debugging nested exceptions,
  * but also creates some issues.
@@ -45,7 +47,7 @@ use Symfony\Component\HttpKernel\EventListener\ErrorListener;
  */
 final class CircularDependencyBreakingErrorListener extends ErrorListener
 {
-    /** @var CircularDependencyBreakingErrorListener */
+    /** @var ErrorListener */
     private $decoratedListener;
 
     public function __construct(ErrorListener $decoratedListener)
@@ -61,6 +63,7 @@ final class CircularDependencyBreakingErrorListener extends ErrorListener
     public function onKernelException(ExceptionEvent $event, string $eventName = null, EventDispatcherInterface $eventDispatcher = null): void
     {
         try {
+            /** @psalm-suppress TooManyArguments */
             $this->decoratedListener->onKernelException($event, $eventName, $eventDispatcher);
         } catch (\Throwable $throwable) {
             $this->breakCircularDependency($throwable);

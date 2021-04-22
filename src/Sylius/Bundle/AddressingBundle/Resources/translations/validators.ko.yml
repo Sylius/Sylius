@@ -4,13 +4,9 @@
 sylius:
     address:
         city:
-            max_length: 도시 이름은 최대 255자여야 합니다.|도시 이름은 최대 255자여야 합니다.
-            min_length: 도시 이름은 최소 2자여야 합니다.|도시 이름은 최소 2자여야 합니다.
             not_blank: 도시를 입력해 주세요.
         country:
             not_blank: 국가를 선택 해 주세요.
             disabled: 선택하신 국가는 적용될 수 없습니다. 다른 국가를 선택 해 주세요.
         first_name:
-            max_length: 이름은 255자를 초가 해서는 안됩니다.
-            min_length: 이름은 최소 2차 이상을 입력해야 합니다.
             not_blank: 이름을 입력해 주세요.

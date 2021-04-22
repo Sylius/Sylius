@@ -42,9 +42,6 @@ sylius:
         product_eligibility: 'Produk %productName% ini telah dinonaktifkan.'
         shipping_method_eligibility: 'Produk tidak memenuhi persyaratan untuk pengiriman metode %shippingMethodName%. Silahkan memilih ulang metode pengiriman Anda.'
     locale:
-        code:
-            not_blank: Masukkan kode lokal.
-            unique: Lokal ini sudah ada.
         enabled:
             cannot_disable_base: Bahasa utama tidak dapat dinonaktifkan.
     product:
@@ -80,6 +77,9 @@ sylius:
     product_translation:
         short_description:
             max: Deskripsi singkat tidak boleh lebih dari {{ limit }} karakter.
+    review:
+        author:
+            not_blank: Masukkan email Anda.
     taxon_image:
         file:
             max_size: Gambar terlalu besar - {{ size }}{{ suffix }}. Ukuran maksimal yang diperbolehkan berukuran {{ limit }}{{ suffix }}.

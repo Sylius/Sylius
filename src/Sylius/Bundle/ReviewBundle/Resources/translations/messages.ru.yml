@@ -14,4 +14,4 @@ sylius:
                 new: Новый
                 rejected: Отклонено
             submit: Отправить
-            title: Название
+            title: Заголовок

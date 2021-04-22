@@ -4,19 +4,29 @@
 sylius:
     address:
         city:
+            max_length: Název města nesmí být delší než {{ limit }} znaků|Název města nesmí být delší než {{ limit }} znaků.
+            min_length: Název města musí mít nejméně {{ limit }} znaky|Název města musí mít alespoň {{ limit }} znaky.
             not_blank: Zadejte město.
         country:
             not_blank: Zvolte zemi.
             disabled: Vybrané země je zakázán. Prosím zvolte jinou.
         first_name:
+            max_length: Křestní jméno nesmí být delší než {{ limit }} znaků|Křestní jméno nesmí být delší než {{ limit }} znaků.
+            min_length: Křestní jméno musí mít alespoň {{ limit }} znaků|Křestní jméno musí mít alespoň {{ limit }} znaků.
             not_blank: Zadejte křestní jméno.
         last_name:
+            max_length: Příjmení nesmí být delší než {{ limit }} znaků|Příjmení nesmí být delší než {{ limit }} znaků.
+            min_length: Příjmení musí mít alespoň {{ limit }} znaků|Příjmení musí mít alespoň {{ limit }} znaků.
             not_blank: Zadejte příjmení.
         postcode:
+            max_length: Psč nesmí být delší než {{ limit }} znaků|Psč nesmí být delší než {{ limit }} znaků.
+            min_length: Psč musí mít alespoň {{ limit }} znaky|Psč musí mít alespoň {{ limit }} znaky.
             not_blank: Zadejte PSČ.
         province:
             valid: Vyberte správný název státu.
         street:
+            max_length: Ulice nesmí být delší než {{ limit }} znaků|Ulice nesmí být delší než {{ limit }} znaků.
+            min_length: Ulice musí mít alespoň {{ limit }} znaků|Ulice musí mít alespoň {{ limit }} znaků.
             not_blank: Zadejte ulici.
         not_shippable: Tato adresa není platnou dodací destinací.
     country:
@@ -31,6 +41,8 @@ sylius:
             regex: Kód provincie by měl mít následující formát XX-XX (např. US-FL).
             unique: Provincie kód musí být jedinečný.
         name:
+            max_length: Název provincie nesmí být delší než {{ limit }} znaků|Název provincie nesmí být delší než {{ limit }} znaků.
+            min_length: Název provincie musí mít alespoň {{ limit }} znaků|Název provincie musí být alespoň {{ limit }} znaků.
             not_blank: Zadejte prosím název státu.
             unique: Název provincie musí být jedinečný.
     zone:
@@ -43,8 +55,11 @@ sylius:
         members:
             min_count: Prosím přidejte alespoň {{ limit }} člena oblasti.
         name:
+            max_length: Název zóny nesmí být delší než {{ limit }} znaků|Název zóny nesmí být delší než {{ limit }} znaků.
+            min_length: Název zóny musí mít alespoň {{ limit }} znaků|Název zóny musí mít alespoň {{ limit }} znaků.
             not_blank: Prosím zadejte název oblasti.
     zone_member:
+        cannot_be_the_same_as_zone: Člen zóny nemůže být stejný jako zóna.
         code:
             not_blank: Prosím zvolte člena zóny.
             regex: Kód země může tvořit pouze písmena, číslice, pomlčky a podtržítka.

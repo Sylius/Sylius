@@ -32,6 +32,7 @@ sylius:
                 postcode: Postnummer
                 street: Gatuadress
             contact_email: Kontakt e-post
+            countries: Länder
             currencies: Valutor
             currency_base: Basvaluta
             account_verification_required: Krävs kontoverifiering?
@@ -100,7 +101,6 @@ sylius:
             file: Välj bild
         user:
             billing_address: Faktureringsadress
-            different_billing_address: Använda annan adress för fakturering?
             enabled: Aktiverad
             first_name: Förnamn
             groups: Grupper
@@ -142,7 +142,7 @@ sylius:
                 products: Produkter
             total_of_items_from_taxon:
                 taxon: Taxon
-                amount: Antal
+                amount: Belopp
         payment_method:
             channels: Kanaler
         product_attribute:

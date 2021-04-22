@@ -4,10 +4,13 @@
 sylius:
     form:
         promotion:
+            description: Beskrywing
             name: Naam
         promotion_action:
             type: Tipe
         promotion_rule:
+            contains_product_configuration:
+                variants: Produkte
             shipping_country_configuration:
                 country: Land
             type: Tipe

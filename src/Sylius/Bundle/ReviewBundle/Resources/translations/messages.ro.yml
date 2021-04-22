@@ -11,7 +11,7 @@ sylius:
             status:
                 approved: Aprobat
                 label: Stare
-                new: Nouă
+                new: Nou
                 rejected: Respins
             submit: Trimite
             title: Titlu

@@ -18,17 +18,15 @@
     <resource class="%sylius.model.channel_pricing.class%" shortName="ChannelPricing">
         <attribute name="validation_groups">sylius</attribute>
 
-        <collectionOperations>
-            <collectionOperation name="admin_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/channel-pricings</attribute>
-            </collectionOperation>
-        </collectionOperations>
+        <collectionOperations />
 
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/channel-pricings/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:channel_pricing:read</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 

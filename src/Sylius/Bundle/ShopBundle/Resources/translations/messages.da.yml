@@ -2,6 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        contact_request:
+            content: 'Indhold'
+        password_reset:
+            hello: 'Hej'
+        verification_token:
+            hello: 'Hej'
+    lightbox:
+        image_album_label: 'Billede %1 af %2'
     menu:
         shop:
             account:

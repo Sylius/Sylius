@@ -72,8 +72,8 @@ final class RouteNameResolver implements RouteNameResolverInterface
         $subresources = array_keys($context['subresource_resources']);
         $currentSubresources = [];
 
-        foreach ($currentContext['identifiers'] as $identifierContext) {
-            $currentSubresources[] = $identifierContext[1];
+        foreach ($currentContext['identifiers'] as [$class]) {
+            $currentSubresources[] = $class;
         }
 
         return $currentSubresources === $subresources;
@@ -89,10 +89,13 @@ final class RouteNameResolver implements RouteNameResolverInterface
         }
 
         foreach ($matchingRoutes as $routeName => $route) {
-            $requestPrefix = $this->pathPrefixProvider->getCurrentPrefix();
             $routePrefix = $this->pathPrefixProvider->getPathPrefix($route->getPath());
+            if ($routePrefix === null) {
+                return $routeName;
+            }
 
-            if ($requestPrefix !== null && $routePrefix !== null && $requestPrefix === $routePrefix) {
+            $requestPrefix = $this->pathPrefixProvider->getCurrentPrefix();
+            if ($requestPrefix === $routePrefix) {
                 return $routeName;
             }
         }

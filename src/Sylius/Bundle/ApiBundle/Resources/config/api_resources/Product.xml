@@ -27,6 +27,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/products</attribute>
                 <attribute name="filters">
+                    <attribute>sylius.api.product_name_filter</attribute>
                     <attribute>sylius.api.product_order_filter</attribute>
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
                     <attribute>sylius.api.translation_order_name_and_locale_filter</attribute>
@@ -40,6 +41,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/products</attribute>
                 <attribute name="filters">
+                    <attribute>sylius.api.product_name_filter</attribute>
                     <attribute>sylius.api.product_order_filter</attribute>
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
                     <attribute>sylius.api.translation_order_name_and_locale_filter</attribute>
@@ -61,7 +63,7 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/products/{id}</attribute>
+                <attribute name="path">/admin/products/{code}</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Use code to retrieve a product resource.</attribute>
                 </attribute>
@@ -72,7 +74,7 @@
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/products/{id}</attribute>
+                <attribute name="path">/shop/products/{code}</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Use code to retrieve a product resource.</attribute>
                 </attribute>
@@ -83,16 +85,15 @@
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
-                <attribute name="path">/admin/products/{id}</attribute>
+                <attribute name="path">/admin/products/{code}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product:update</attribute>
-                    <attribute name="max-depth">2</attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
-                <attribute name="path">/admin/products/{id}</attribute>
+                <attribute name="path">/admin/products/{code}</attribute>
             </itemOperation>
         </itemOperations>
 
@@ -121,5 +122,6 @@
         <property name="variants" readable="true"/>
         <property name="enabled" readable="true"/>
         <property name="attributes" readable="false" writable="false"/>
+        <property name="averageRating" readable="true" />
     </resource>
 </resources>

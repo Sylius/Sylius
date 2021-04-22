@@ -1,0 +1,3 @@
+Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource:
+    fooSyliusResource{1..2}:
+        name: FooSyliusResource<current()>
