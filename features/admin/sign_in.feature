@@ -1,8 +1,8 @@
 @administrator_login
-Feature: Sign in to the store
-    In order to view my orders
-    As a Visitor
-    I want to be able to log in to the store
+Feature: Sign in to the administration panel
+    In order to access administration panel
+    As an Administrator
+    I want to be able to log in to the administration panel
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -29,7 +29,7 @@ Feature: Sign in to the store
     @ui
     Scenario: Sign in using customer account
         Given I want to log in
-        When I specify the username as "bear@example.com"
+        When I specify the username as "ted@example.com"
         And I specify the password as "bear"
         And I log in
         Then I should be notified about bad credentials
