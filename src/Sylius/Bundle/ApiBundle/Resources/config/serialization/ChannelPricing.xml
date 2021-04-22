@@ -43,6 +43,8 @@
             <group>admin:product_variant:update</group>
             <group>admin:product_variant_inventory:read</group>
             <group>admin:product:read</group>
+            <group>shop:product:read</group>
+            <group>shop:product_variant:read</group>
         </attribute>
     </class>
 </serializer>
