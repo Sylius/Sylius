@@ -29,7 +29,7 @@
         "php": "^7.4 || ^8.0",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "egulias/email-validator": "^3.0",
-        "fzaninotto/faker": "^1.9",
+        "fakerphp/faker": "^1.10",
         "jms/serializer-bundle": "^3.5",
         "knplabs/gaufrette": "^0.8",
         "knplabs/knp-gaufrette-bundle": "^0.7",
