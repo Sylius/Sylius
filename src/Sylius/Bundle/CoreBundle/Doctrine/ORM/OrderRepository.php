@@ -44,7 +44,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         return $this->createQueryBuilder('o')
             ->addSelect('channel')
             ->addSelect('customer')
-            ->innerJoin('o.channel', 'channel')
+            ->leftJoin('o.channel', 'channel')
             ->leftJoin('o.customer', 'customer')
             ->andWhere('o.state != :state')
             ->setParameter('state', OrderInterface::STATE_CART)
