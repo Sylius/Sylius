@@ -86,17 +86,17 @@ jobs:
 
             -
                 name: Validate Doctrine mapping
-                run: bin/console doctrine:schema:validate --skip-sync -vvv
+                run: bin/console doctrine:schema:validate --skip-sync -vvv --env=test
                 if: always() && steps.end-of-setup.outcome == 'success'
 
             -
                 name: Validate Twig templates
-                run: bin/console lint:twig src
+                run: bin/console lint:twig src --env=test
                 if: always() && steps.end-of-setup.outcome == 'success'
 
             -
                 name: Validate Yaml files
-                run: bin/console lint:yaml src
+                run: bin/console lint:yaml src --env=test
                 if: always() && steps.end-of-setup.outcome == 'success'
 
             -
@@ -186,7 +186,7 @@ jobs:
 
             -
                 name: Warmup cache
-                run: bin/console cache:warmup
+                run: bin/console cache:warmup --env=test
 
             -
                 name: Make filesystem readonly
@@ -195,23 +195,23 @@ jobs:
             -
                 name: Prepare application database
                 run: |
-                    APP_DEBUG=1 bin/console doctrine:database:create -vvv
-                    bin/console doctrine:migrations:migrate -n -vvv
+                    APP_DEBUG=1 bin/console doctrine:database:create -vvv --env=test
+                    bin/console doctrine:migrations:migrate -n -vvv --env=test
 
             -
                 name: Test provided migrations
                 run: |
-                    bin/console doctrine:migrations:migrate first --no-interaction
-                    bin/console doctrine:migrations:migrate latest --no-interaction
-                    bin/console doctrine:schema:validate --skip-mapping -vvv
+                    bin/console doctrine:migrations:migrate first --no-interaction --env=test
+                    bin/console doctrine:migrations:migrate latest --no-interaction --env=test
+                    bin/console doctrine:schema:validate --skip-mapping -vvv --env=test
 
             -
                 name: Test installer
-                run: bin/console sylius:install --no-interaction -vvv
+                run: bin/console sylius:install --no-interaction -vvv --env=test
 
             -
                 name: Load fixtures
-                run: bin/console sylius:fixtures:load default --no-interaction
+                run: bin/console sylius:fixtures:load default --no-interaction --env=test
 
             -
                 name: Run PHPSpec
@@ -351,7 +351,7 @@ jobs:
 
             -
                 name: Warmup cache
-                run: bin/console cache:warmup
+                run: bin/console cache:warmup --env=test
 
             -
                 name: Run webserver
@@ -360,13 +360,13 @@ jobs:
             -
                 name: Prepare application database
                 run: |
-                    APP_DEBUG=1 bin/console doctrine:database:create -vvv
-                    bin/console doctrine:migrations:migrate -n -vvv
+                    APP_DEBUG=1 bin/console doctrine:database:create -vvv --env=test
+                    bin/console doctrine:migrations:migrate -n -vvv --env=test
 
             -
                 name: Build assets
                 run: |
-                    bin/console assets:install public -vvv
+                    bin/console assets:install public -vvv --env=test
                     yarn build
 
             -

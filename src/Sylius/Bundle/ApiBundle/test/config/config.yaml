@@ -26,6 +26,8 @@ framework:
     serializer:
         mapping:
             paths: ['%kernel.project_dir%/config/serialization']
+    messenger:
+        default_bus: sylius_default.bus
 
 doctrine_migrations:
     storage:
