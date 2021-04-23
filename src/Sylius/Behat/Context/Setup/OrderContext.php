@@ -641,9 +641,9 @@ final class OrderContext implements Context
      * @Given then :numberOfCustomers more customers have placed :numberOfOrders orders for total of :total
      */
     public function customersHavePlacedOrdersForTotalOf(
+        string $total,
         int $numberOfCustomers = 1,
-        int $numberOfOrders = 1,
-        string $total
+        int $numberOfOrders = 1
     ): void {
         $this->createOrders($numberOfCustomers, $numberOfOrders, $total);
     }

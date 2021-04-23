@@ -31,8 +31,8 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: [7.4]
-                symfony: [^4.4, ^5.2]
+                php: ["7.4", "8.0"]
+                symfony: ["^4.4", "^5.2"]
 
         steps:
             -
@@ -119,14 +119,10 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: [7.4]
-                symfony: [^4.4, ^5.2]
-                mysql: [5.7, 8.0]
-
-                exclude:
-                    -
-                        php: 7.3
-                        mysql: 8.0
+                php: ["7.4", "8.0"]
+                symfony: ["^4.4", "^5.2"]
+                node: ["10.x"]
+                mysql: ["5.7", "8.0"]
 
         env:
             APP_ENV: test_cached
@@ -252,15 +248,10 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: [7.4]
-                symfony: [^4.4, ^5.2]
-                node: [10.x]
-                mysql: [5.7, 8.0]
-
-                exclude:
-                    -
-                        php: 7.3
-                        mysql: 8.0
+                php: ["7.4", "8.0"]
+                symfony: ["^4.4", "^5.2"]
+                node: ["10.x"]
+                mysql: ["5.7", "8.0"]
 
         env:
             APP_ENV: test_cached
