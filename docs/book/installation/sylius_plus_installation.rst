@@ -288,6 +288,8 @@ Installing Sylius Plus as a plugin to a Sylius application
 
     <?php
 
+    // src/Entity/Order/Adjustment.php
+
     declare(strict_types=1);
 
     namespace App\Entity\Order;
@@ -345,7 +347,14 @@ your application's ``.env`` file:
     yarn build
     bin/console assets:install --ansi
 
-**11.** For more details check the installation guides for all plugins installed as dependencies with Sylius Plus.
+**11.** Rebuild cache for proper display of all translations:
+
+.. code-block:: bash
+
+    bin/console cache:clear
+    bin/console cache:warmup
+
+**12.** For more details check the installation guides for all plugins installed as dependencies with Sylius Plus.
 
 * `Sylius/InvoicingPlugin <https://github.com/Sylius/InvoicingPlugin/blob/master/README.md#installation>`_
 * `Sylius/RefundPlugin <https://github.com/Sylius/RefundPlugin/blob/master/README.md#installation>`_
