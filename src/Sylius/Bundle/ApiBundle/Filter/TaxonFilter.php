@@ -20,9 +20,6 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-/**
- * It should be replaced with generic collection filter after fixed: https://github.com/api-platform/api-platform/issues/1868
- */
 final class TaxonFilter extends AbstractContextAwareFilter
 {
     /** @var IriConverterInterface */
