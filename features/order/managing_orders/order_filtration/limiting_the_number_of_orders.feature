@@ -18,7 +18,7 @@ Feature: Limiting the number of orders
         And I am logged in as an administrator
 
     @api
-    Scenario: Filtering orders by an another shipping method
+    Scenario: Limiting the number of orders
         When I browse orders
         And I limit number of items to 1
         Then I should see a single order in the list
