@@ -17,7 +17,6 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionEx
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
-use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -45,17 +44,12 @@ final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollection
         }
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
+        $queryBuilder
+            ->andWhere(sprintf('%s.state != :state', $rootAlias))
+            ->setParameter('state', OrderInterface::STATE_CART)
+        ;
+
         $user = $this->userContext->getUser();
-
-        if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
-            $queryBuilder
-                ->andWhere(sprintf('%s.state != :state', $rootAlias))
-                ->setParameter('state', OrderInterface::STATE_CART)
-            ;
-
-            return;
-        }
-
         if ($user instanceof ShopUserInterface) {
             /** @var CustomerInterface $customer */
             $customer = $user->getCustomer();
@@ -64,8 +58,6 @@ final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollection
                 ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
                 ->setParameter('customer', $customer)
             ;
-
-            return;
         }
     }
 }

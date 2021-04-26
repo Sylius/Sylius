@@ -17,11 +17,11 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
-use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
 {
@@ -41,14 +41,13 @@ class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
         $this->applyToCollection($queryBuilder, $queryNameGenerator, ResourceInterface::class, 'get', []);
     }
 
-    function it_filters_out_carts_if_current_user_is_an_admin_user(
+    function it_filters_out_carts_for_all_users(
         UserContextInterface $userContext,
-        AdminUserInterface $user,
+        UserInterface $user,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $userContext->getUser()->willReturn($user);
-        $user->getRoles()->willReturn(['ROLE_API_ACCESS']);
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->andWhere('o.state != :state')->shouldBeCalled()->willReturn($queryBuilder);
@@ -68,7 +67,9 @@ class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
         $user->getCustomer()->willReturn($customer);
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
+        $queryBuilder->andWhere('o.state != :state')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->andWhere('o.customer = :customer')->shouldBeCalled()->willReturn($queryBuilder);
+        $queryBuilder->setParameter('state', OrderInterface::STATE_CART)->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->setParameter('customer', $customer)->shouldBeCalled()->willReturn($queryBuilder);
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, OrderInterface::class, 'get', []);
