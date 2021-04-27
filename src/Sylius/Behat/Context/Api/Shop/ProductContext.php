@@ -19,6 +19,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
@@ -48,6 +49,14 @@ final class ProductContext implements Context
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
         $this->iriConverter = $iriConverter;
+    }
+
+    /**
+     * @Given I am browsing channel :channel
+     */
+    public function iAmBrowsingChannel(ChannelInterface $channel)
+    {
+        $this->sharedStorage->set('hostname', $channel->getHostname());
     }
 
     /**
