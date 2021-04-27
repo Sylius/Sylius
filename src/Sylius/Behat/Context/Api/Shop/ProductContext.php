@@ -52,14 +52,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given I am browsing channel :channel
-     */
-    public function iAmBrowsingChannel(ChannelInterface $channel)
-    {
-        $this->sharedStorage->set('hostname', $channel->getHostname());
-    }
-
-    /**
      * @When /^I check (this product)'s details$/
      * @When I view product :product
      */
