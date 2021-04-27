@@ -54,6 +54,7 @@
         <property name="id" identifier="true" writable="false" />
         <property name="name" required="true" />
         <property name="slug" required="true" />
+        <property name="locale" required="true" />
         <property name="description" required="false" />
     </resource>
 </resources>

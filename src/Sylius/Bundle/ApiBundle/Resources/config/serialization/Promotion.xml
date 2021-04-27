@@ -19,7 +19,6 @@
             <group>admin:promotion:read</group>
             <group>admin:promotion:create</group>
             <group>admin:promotion:update</group>
-            <group>admin:order:read</group>
         </attribute>
         <attribute name="code">
             <group>admin:promotion:read</group>
