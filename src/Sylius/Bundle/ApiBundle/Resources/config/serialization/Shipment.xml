@@ -41,9 +41,9 @@
 
         <attribute name="method">
             <group>admin:shipment:read</group>
-            <group>admin:order:read</group>
             <group>shop:shipment:read</group>
             <group>shop:cart:read</group>
+            <group>shop:order:read</group>
             <group>shop:order:account:read</group>
         </attribute>
 

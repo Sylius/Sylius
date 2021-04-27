@@ -56,6 +56,7 @@
         <attribute name="couponBased">
             <group>admin:promotion:read</group>
             <group>admin:promotion:create</group>
+            <group>admin:promotion:update</group>
         </attribute>
         <attribute name="coupons">
             <group>admin:promotion:read</group>

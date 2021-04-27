@@ -56,8 +56,8 @@
             </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="false" writable="false" />
-        <property name="code" identifier="true" required="true"/>
+        <property name="id" identifier="true" writable="false" />
+        <property name="code" identifier="false" />
         <property name="name" readable="true" />
         <property name="description" readable="true" />
         <property name="priority" readable="true" />
