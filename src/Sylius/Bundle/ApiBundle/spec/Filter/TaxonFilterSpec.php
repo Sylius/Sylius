@@ -27,7 +27,7 @@ final class TaxonFilterSpec extends ObjectBehavior
         $this->beConstructedWith($managerRegistry, $iriConverter);
     }
 
-    function it_adds_taxon_filter_if_property_is_product_taxon(
+    function it_adds_taxon_filter_if_property_is_taxon(
         IriConverterInterface $iriConverter,
         TaxonInterface $taxon,
         TaxonInterface $taxonRoot,

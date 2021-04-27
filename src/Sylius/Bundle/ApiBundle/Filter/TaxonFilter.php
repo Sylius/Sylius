@@ -32,8 +32,15 @@ final class TaxonFilter extends AbstractContextAwareFilter
         $this->iriConverter = $iriConverter;
     }
 
-    public function filterProperty(string $property, $value, QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null)
-    {
+    public function filterProperty(
+        string $property,
+        $value,
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+        string $resourceClass,
+        string $operationName = null,
+        array $context  = []
+    ) {
         if ($property !== 'taxon') {
             return;
         }

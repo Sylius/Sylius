@@ -118,7 +118,7 @@ final class ChannelContext implements Context
         $channelCode = StringInflector::nameToLowercaseCode($channelName);
         $defaultData = $this->defaultChannelFactory->create($channelCode, $channelName, $currencyCode);
 
-        $defaultData['channel']->setHostname($hostname);
+        $defaultData['channel']->setHostname(strtolower($hostname ?: str_replace(' ', '-', $channelName)));
 
         $this->sharedStorage->setClipboard($defaultData);
         $this->sharedStorage->set('channel', $defaultData['channel']);
