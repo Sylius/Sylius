@@ -119,6 +119,15 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I limit number of items to :limit
+     */
+    public function iLimitNumberOfItemsTo(int $limit): void
+    {
+        $this->client->addFilter('itemsPerPage', $limit);
+        $this->client->filter();
+    }
+
+    /**
      * @Then I should see a single order from customer :customer
      */
     public function iShouldSeeASingleOrderFromCustomer(CustomerInterface $customer): void
@@ -129,6 +138,14 @@ final class ManagingOrdersContext implements Context
             $this->iriConverter->getIriFromItem($customer)),
             sprintf('There is no order for customer %s', $customer->getEmail())
         );
+    }
+
+    /**
+     * @Then I should see a single order in the list
+     */
+    public function iShouldSeeASingleOrderInTheList(): void
+    {
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), 1);
     }
 
     /**
