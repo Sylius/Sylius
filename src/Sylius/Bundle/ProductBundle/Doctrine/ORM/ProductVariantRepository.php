@@ -85,6 +85,17 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
         ;
     }
 
+    public function findOneByCode(string $code): ?ProductVariantInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.product', 'product')
+            ->andWhere('o.code = :code')
+            ->setParameter('code', $code)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
     public function findByCodesAndProductCode(array $codes, string $productCode): array
     {
         return $this->createQueryBuilder('o')
