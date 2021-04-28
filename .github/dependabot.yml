@@ -1,0 +1,41 @@
+version: 2
+updates:
+- package-ecosystem: composer
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "10:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: phpstan/phpstan
+    versions:
+    - 0.12.83
+  - dependency-name: vimeo/psalm
+    versions:
+    - 4.5.0
+    - 4.5.1
+    - 4.5.2
+    - 4.6.0
+    - 4.6.1
+    - 4.6.2
+    - 4.6.3
+    - 4.6.4
+    - 4.7.0
+  - dependency-name: egulias/email-validator
+    versions:
+    - 3.1.0
+  - dependency-name: phpstan/phpstan-doctrine
+    versions:
+    - 0.12.31
+  - dependency-name: stripe/stripe-php
+    versions:
+    - 7.69.0
+    - 7.70.0
+    - 7.71.0
+    - 7.72.0
+  - dependency-name: zendframework/zend-hydrator
+    versions:
+    - 3.0.2
+  - dependency-name: twig/intl-extra
+    versions:
+    - 3.2.0
