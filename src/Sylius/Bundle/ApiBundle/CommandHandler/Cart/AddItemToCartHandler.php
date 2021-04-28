@@ -60,7 +60,7 @@ final class AddItemToCartHandler implements MessageHandlerInterface
     public function __invoke(AddItemToCart $addItemToCart): OrderInterface
     {
         /** @var ProductVariantInterface|null $productVariant */
-        $productVariant = $this->productVariantRepository->findOneByCode($addItemToCart->productVariantCode);
+        $productVariant = $this->productVariantRepository->findOneBy(['code' => $addItemToCart->productVariantCode]);
 
         Assert::notNull($productVariant);
 
