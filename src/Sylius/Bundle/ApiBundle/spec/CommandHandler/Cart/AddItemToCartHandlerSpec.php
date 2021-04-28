@@ -60,7 +60,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
     ): void {
         $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
         $productVariantRepository
-            ->findOneByCode('PRODUCT_VARIANT_CODE')
+            ->findOneBy(['code' => 'PRODUCT_VARIANT_CODE'])
             ->willReturn($productVariant)
         ;
 
@@ -82,7 +82,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
         ProductVariantRepositoryInterface $productVariantRepository,
         CartItemFactoryInterface $cartItemFactory
     ): void {
-        $productVariantRepository->findOneByCode('PRODUCT_VARIANT_CODE')->willReturn(null);
+        $productVariantRepository->findOneBy(['code' => 'PRODUCT_VARIANT_CODE'])->willReturn(null);
 
         $cartItemFactory->createNew()->shouldNotBeCalled();
 
@@ -103,7 +103,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
         ProductVariantInterface $productVariant
     ): void {
         $productVariantRepository
-            ->findOneByCode('PRODUCT_VARIANT_CODE')
+            ->findOneBy(['code' => 'PRODUCT_VARIANT_CODE'])
             ->willReturn($productVariant)
         ;
 

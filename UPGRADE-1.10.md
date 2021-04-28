@@ -33,3 +33,7 @@
 1. API Change Quantity endpoint `PATCH api/v2/admin/orders/{tokenValue}/change-quantity` has been changed to `PATCH api/v2/admin/orders/{tokenValue}/items/{orderItemId}` and its body value `orderItemId` has been removed (now it is a route parameter) and `newQuantity` has been renamed to `quantity`.
 
 1. API Add to cart endpoint `PATCH /api/v2/shop/orders/{tokenValue}/items` no longer requires `productCode` in request body.
+
+### Commands
+
+1. We've removed `productCode` from `Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart` command.
