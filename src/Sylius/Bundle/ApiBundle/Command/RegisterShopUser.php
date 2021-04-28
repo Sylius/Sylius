@@ -60,6 +60,9 @@ class RegisterShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInte
     /** @var string|null */
     public $localeCode;
 
+    /** @var string|null */
+    public $locale;
+
     public function __construct(
         string $firstName,
         string $lastName,
@@ -94,5 +97,10 @@ class RegisterShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInte
     public function setLocaleCode(?string $localeCode): void
     {
         $this->localeCode = $localeCode;
+    }
+
+    public function getLocale(): ?string
+    {
+        return $this->locale;
     }
 }

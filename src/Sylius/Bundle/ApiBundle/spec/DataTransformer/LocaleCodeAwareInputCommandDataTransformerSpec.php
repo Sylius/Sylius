@@ -13,17 +13,19 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\DataTransformer;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 final class LocaleCodeAwareInputCommandDataTransformerSpec extends ObjectBehavior
 {
-    function let(LocaleContextInterface $localeContext): void
+    function let(LocaleContextInterface $localeContext, IriConverterInterface $iriConverter): void
     {
-        $this->beConstructedWith($localeContext);
+        $this->beConstructedWith($localeContext, $iriConverter);
     }
 
     function it_supports_only_locale_code_aware_interface(
@@ -38,7 +40,7 @@ final class LocaleCodeAwareInputCommandDataTransformerSpec extends ObjectBehavio
         LocaleContextInterface $localeContext,
         LocaleCodeAwareInterface $command
     ): void {
-        $command->getLocaleCode()->willReturn(null);
+        $command->getLocale()->willReturn(null);
 
         $localeContext->getLocaleCode()->willReturn('en_US');
 
@@ -47,12 +49,16 @@ final class LocaleCodeAwareInputCommandDataTransformerSpec extends ObjectBehavio
         $this->transform($command, '', [])->shouldReturn($command);
     }
 
-    function it_does_nothing_if_object_has_locale_code(
-        LocaleCodeAwareInterface $command
+    function it_changes_locale_iri_to_locale_code(
+        LocaleCodeAwareInterface $command,
+        IriConverterInterface $iriConverter,
+        LocaleInterface $locale
     ): void {
-        $command->getLocaleCode()->willReturn('en_US');
+        $command->getLocale()->willReturn('api/v2/shop/en_US');
+        $iriConverter->getItemFromIri('api/v2/shop/en_US')->willReturn($locale);
+        $locale->getCode()->willReturn('en_US');
 
-        $command->setLocaleCode('en_US')->shouldNotBeCalled();
+        $command->setLocaleCode('en_US')->shouldBeCalled();
 
         $this->transform($command, '', [])->shouldReturn($command);
     }

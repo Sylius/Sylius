@@ -21,6 +21,7 @@
         </attribute>
         <attribute name="code">
             <group>admin:locale:read</group>
+            <group>shop:locale:read</group>
             <group>admin:locale:create</group>
         </attribute>
     </class>

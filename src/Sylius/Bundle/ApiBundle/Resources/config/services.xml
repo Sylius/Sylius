@@ -122,6 +122,7 @@
 
         <service id="sylius.api.data_transformer.locale_code_aware_input_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\LocaleCodeAwareInputCommandDataTransformer">
             <argument type="service" id="sylius.context.locale.composite" />
+            <argument type="service" id="api_platform.iri_converter" />
             <tag name="sylius.api.command_data_transformer" />
         </service>
 

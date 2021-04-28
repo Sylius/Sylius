@@ -31,6 +31,9 @@ class ResendVerificationEmail implements ChannelCodeAwareInterface, LocaleCodeAw
      */
     public $localeCode;
 
+    /** @var string|null */
+    public $locale;
+
     public function __construct(string $email)
     {
         $this->email = $email;
@@ -54,5 +57,10 @@ class ResendVerificationEmail implements ChannelCodeAwareInterface, LocaleCodeAw
     public function setLocaleCode(?string $localeCode): void
     {
         $this->localeCode = $localeCode;
+    }
+
+    public function getLocale(): ?string
+    {
+        return $this->locale;
     }
 }
