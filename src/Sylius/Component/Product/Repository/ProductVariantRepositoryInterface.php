@@ -36,6 +36,8 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
 
     public function findOneByCodeAndProductCode(string $code, string $productCode): ?ProductVariantInterface;
 
+    public function findOneByCode(string $code): ?ProductVariantInterface;
+
     /**
      * @param array|string[] $codes
      *
