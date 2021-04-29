@@ -52,6 +52,9 @@ final class CartContext implements Context
     /** @var ProductVariantResolverInterface */
     private $productVariantResolver;
 
+    /** @var IriConverterInterface */
+    private $iriConverter;
+
     public function __construct(
         ApiClientInterface $cartsClient,
         ApiClientInterface $ordersAdminClient,
@@ -59,7 +62,8 @@ final class CartContext implements Context
         ApiClientInterface $productVariantsClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
-        ProductVariantResolverInterface $productVariantResolver
+        ProductVariantResolverInterface $productVariantResolver,
+        IriConverterInterface $iriConverter
     ) {
         $this->cartsClient = $cartsClient;
         $this->ordersAdminClient = $ordersAdminClient;
@@ -68,6 +72,7 @@ final class CartContext implements Context
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
         $this->productVariantResolver = $productVariantResolver;
+        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -143,7 +148,7 @@ final class CartContext implements Context
     ): void {
         $productData = json_decode($this->productsClient->show($product->getCode())->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
-        $variantCode = null;
+        $variantIri = null;
         foreach ($productData['options'] as $optionIri) {
             $optionData = json_decode($this->productsClient->showByIri($optionIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
@@ -166,11 +171,11 @@ final class CartContext implements Context
 
                 Assert::same($variantsData['hydra:totalItems'], 1);
 
-                $variantCode = $variantsData['hydra:member'][0]['code'];
+                $variantIri = $variantsData['hydra:member'][0]['@id'];
             }
         }
 
-        if (null === $variantCode) {
+        if (null === $variantIri) {
             throw new \DomainException(sprintf('Could not find variant with option "%s" set to "%s"', $productOption, $productOptionValue));
         }
 
@@ -180,7 +185,7 @@ final class CartContext implements Context
 
         $request->updateContent([
             'productCode' => $productData['code'],
-            'productVariantCode' => $variantCode,
+            'productVariant' => $variantIri,
             'quantity' => 1,
         ]);
 
@@ -550,7 +555,7 @@ final class CartContext implements Context
         $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
 
         $request->updateContent([
-            'productVariantCode' => $this->productVariantResolver->getVariant($product)->getCode(),
+            'productVariant' => $this->iriConverter->getIriFromItem($this->productVariantResolver->getVariant($product)),
             'quantity' => $quantity,
         ]);
 
@@ -564,8 +569,7 @@ final class CartContext implements Context
         $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
 
         $request->updateContent([
-            'productCode' => $productVariant->getProduct()->getCode(),
-            'productVariantCode' => $productVariant->getCode(),
+            'productVariant' => $this->iriConverter->getIriFromItem($productVariant),
             'quantity' => $quantity,
         ]);
 

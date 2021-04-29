@@ -57,7 +57,9 @@ final class CommandFieldItemIriToIdentifierDenormalizer implements ContextAwareD
 
         $fieldName = $this->commandItemIriArgumentToIdentifierMap->get($inputClassName);
 
-        $data[$fieldName] = $this->itemIriToIdentifierConverter->getIdentifier($data[$fieldName]);
+        if (array_key_exists($fieldName, $data)) {
+            $data[$fieldName] = $this->itemIriToIdentifierConverter->getIdentifier($data[$fieldName]);
+        }
 
         $denormalizedInput = $this->objectNormalizer->denormalize($data, $this->getInputClassName($context), $format, $context);
 
