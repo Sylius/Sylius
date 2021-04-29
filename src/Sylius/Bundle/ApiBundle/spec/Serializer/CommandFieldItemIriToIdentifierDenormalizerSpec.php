@@ -13,21 +13,22 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\AddProductReview;
-use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverterInterface;
 use Sylius\Bundle\ApiBundle\DataTransformer\CommandAwareInputDataTransformer;
 use Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserEmailAwareCommandDataTransformer;
-use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Bundle\ApiBundle\Map\CommandItemIriArgumentToIdentifierMapInterface;
+use Sylius\Component\Core\Model\Order;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class AddProductReviewCommandFieldItemIriToIdentifierDenormalizerSpec extends ObjectBehavior
+final class CommandFieldItemIriToIdentifierDenormalizerSpec extends ObjectBehavior
 {
     function let(
         DenormalizerInterface $objectNormalizer,
-        IriConverterInterface $iriConverter,
+        ItemIriToIdentifierConverterInterface $itemIriToIdentifierConverter,
+        CommandItemIriArgumentToIdentifierMapInterface $commandItemIriArgumentToIdentifierMap,
         UserContextInterface $userContext
     ): void {
         $commandAwareInputDataTransformer = new CommandAwareInputDataTransformer(
@@ -36,12 +37,21 @@ final class AddProductReviewCommandFieldItemIriToIdentifierDenormalizerSpec exte
             )
         );
 
-        $this->beConstructedWith($objectNormalizer, $commandAwareInputDataTransformer, $iriConverter);
+        $this->beConstructedWith(
+            $objectNormalizer,
+            $itemIriToIdentifierConverter,
+            $commandAwareInputDataTransformer,
+            $commandItemIriArgumentToIdentifierMap
+        );
     }
 
-    function it_supports_denormalization_add_product_review(): void
+    function it_supports_denormalization_add_product_review(
+        CommandItemIriArgumentToIdentifierMapInterface $commandItemIriArgumentToIdentifierMap
+    ): void
     {
         $context['input']['class'] = AddProductReview::class;
+
+        $commandItemIriArgumentToIdentifierMap->has(AddProductReview::class)->willReturn(true);
 
         $this
             ->supportsDenormalization(
@@ -54,13 +64,17 @@ final class AddProductReviewCommandFieldItemIriToIdentifierDenormalizerSpec exte
         ;
     }
 
-    function it_does_not_support_denormalization_other_than_add_product_review(): void
+    function it_does_not_support_denormalization_for_not_supported_class(
+        CommandItemIriArgumentToIdentifierMapInterface $commandItemIriArgumentToIdentifierMap
+    ): void
     {
-        $context['input']['class'] = PickupCart::class;
+        $context['input']['class'] = Order::class;
+
+        $commandItemIriArgumentToIdentifierMap->has(Order::class)->willReturn(false);
 
         $this
             ->supportsDenormalization(
-                new PickupCart(),
+                new Order(),
                 AddProductReview::class,
                 null,
                 $context
@@ -71,16 +85,18 @@ final class AddProductReviewCommandFieldItemIriToIdentifierDenormalizerSpec exte
 
     function it_denormalizes_add_product_review_and_transforms_product_field_from_iri_to_code(
         DenormalizerInterface $objectNormalizer,
-        IriConverterInterface $iriConverter,
-        ProductInterface $product
+        ItemIriToIdentifierConverterInterface $itemIriToIdentifierConverter,
+        CommandItemIriArgumentToIdentifierMapInterface $commandItemIriArgumentToIdentifierMap,
+        UserContextInterface $userContext
     ): void {
         $context['input']['class'] = AddProductReview::class;
 
         $addProductReview = new AddProductReview('Cap', 5, 'ok', 'cap_code', 'john@example.com');
 
-        $iriConverter->getItemFromIri('/api/v2/shop/products/cap_code')->willReturn($product);
+        $commandItemIriArgumentToIdentifierMap->get(AddProductReview::class)->willReturn('product');
+        $commandItemIriArgumentToIdentifierMap->has(AddProductReview::class)->willReturn(true);
 
-        $product->getCode()->willReturn('cap_code');
+        $itemIriToIdentifierConverter->getIdentifier('/api/v2/shop/products/cap_code')->willReturn('cap_code');
 
         $objectNormalizer
             ->denormalize([
