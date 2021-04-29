@@ -550,7 +550,6 @@ final class CartContext implements Context
         $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
 
         $request->updateContent([
-            'productCode' => $product->getCode(),
             'productVariantCode' => $this->productVariantResolver->getVariant($product)->getCode(),
             'quantity' => $quantity,
         ]);

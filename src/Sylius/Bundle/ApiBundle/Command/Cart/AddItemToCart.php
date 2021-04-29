@@ -25,12 +25,6 @@ class AddItemToCart implements OrderTokenValueAwareInterface
      * @var string
      * @psalm-immutable
      */
-    public $productCode;
-
-    /**
-     * @var string
-     * @psalm-immutable
-     */
     public $productVariantCode;
 
     /**
@@ -39,16 +33,15 @@ class AddItemToCart implements OrderTokenValueAwareInterface
      */
     public $quantity;
 
-    public function __construct(string $productCode, string $productVariantCode, int $quantity)
+    public function __construct(string $productVariantCode, int $quantity)
     {
-        $this->productCode = $productCode;
         $this->productVariantCode = $productVariantCode;
         $this->quantity = $quantity;
     }
 
-    public static function createFromData(string $tokenValue, string $productCode, string $productVariantCode, int $quantity): self
+    public static function createFromData(string $tokenValue, string $productVariantCode, int $quantity): self
     {
-        $command = new self($productCode, $productVariantCode, $quantity);
+        $command = new self($productVariantCode, $quantity);
 
         $command->orderTokenValue = $tokenValue;
 
