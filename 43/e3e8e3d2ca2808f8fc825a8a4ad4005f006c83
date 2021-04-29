@@ -1,0 +1,18 @@
+---------------------------------------------------------------------------
+
+by AdamKasp at 2021-03-30T09:51:00Z
+
+@Tomanhez, before potentially merge, you should add specs for it, and all classes should be `@experimental`
+
+---------------------------------------------------------------------------
+
+by AdamKasp at 2021-03-30T09:52:49Z
+
+And probably you should update the description of this PR :)
+And it is a new and custom logic, so I suggest adding a doc with an explanation of how it works and how to use it (maybe ADR?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-04-29T13:25:41Z
+
+Thanks, Tomasz! :1st_place_medal:
