@@ -165,6 +165,10 @@
                 <argument key="Sylius\Bundle\ApiBundle\Command\AddProductReview">product</argument>
                 <argument key="Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod">paymentMethod</argument>
                 <argument key="Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod">paymentMethod</argument>
+                <argument key="Sylius\Bundle\ApiBundle\Command\RequestResetPasswordToken">locale</argument>
+                <argument key="Sylius\Bundle\ApiBundle\Command\ResendVerificationEmail">locale</argument>
+                <argument key="Sylius\Bundle\ApiBundle\Command\Cart\PickupCart">locale</argument>
+                <argument key="Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod">shippingMethod</argument>
             </argument>
         </service>
 

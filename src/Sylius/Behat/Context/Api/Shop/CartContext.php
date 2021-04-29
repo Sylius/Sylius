@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
@@ -23,7 +24,6 @@ use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
@@ -195,8 +195,8 @@ final class CartContext implements Context
      */
     public function iChangeQuantityToInMyCart(ProductInterface $product, int $quantity, string $tokenValue): void
     {
-        $itemId = $this->geOrderItemIdForProductInCart($product, $tokenValue);
-        $this->changeQuantityOfOrderItem($itemId, $quantity, $tokenValue);
+        $itemResponse = $this->getOrderItemResponseFromProductInCart($product, $tokenValue);
+        $this->changeQuantityOfOrderItem((string) $itemResponse['id'], $quantity, $tokenValue);
     }
 
     /**
@@ -204,8 +204,8 @@ final class CartContext implements Context
      */
     public function iRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
     {
-        $itemId = $this->geOrderItemIdForProductInCart($product, $tokenValue);
-        $this->removeOrderItemFromCart($itemId, $tokenValue);
+        $itemResponse = $this->getOrderItemResponseFromProductInCart($product, $tokenValue);
+        $this->removeOrderItemFromCart((string) $itemResponse['id'], $tokenValue);
     }
 
     /**
@@ -535,7 +535,7 @@ final class CartContext implements Context
     private function pickupCart(?string $localeCode = null): string
     {
         $this->cartsClient->buildCreateRequest();
-        $this->cartsClient->addRequestData('localeCode', $localeCode);
+        $this->cartsClient->addRequestData('locale', $localeCode);
         $tokenValue = $this->responseChecker->getValue($this->cartsClient->create(), 'tokenValue');
 
         $this->sharedStorage->set('cart_token', $tokenValue);
@@ -614,14 +614,14 @@ final class CartContext implements Context
         return $this->cartsClient->getLastResponse();
     }
 
-    private function geOrderItemIdForProductInCart(ProductInterface $product, string $tokenValue): ?string
+    private function getOrderItemResponseFromProductInCart(ProductInterface $product, string $tokenValue): ?array
     {
         $items = $this->responseChecker->getValue($this->cartsClient->show($tokenValue), 'items');
 
         foreach ($items as $item) {
             $response = $this->getProductForItem($item);
             if ($this->responseChecker->hasValue($response, 'code', $product->getCode())) {
-                return (string) $item['id'];
+                return $item;
             }
         }
 
