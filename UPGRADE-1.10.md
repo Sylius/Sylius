@@ -61,3 +61,50 @@ POST on `/api/v2/shop/product-reviews`:
       "email": "string"
 }
 ````
+
+POST on `/api/v2/shop/reset-password-requests`:
+
+````
+{
+    - "localeCode": "string"
+    + "locale": "string"
+}
+````
+
+
+POST on `api/v2/shop/account-verification-requests`:
+
+````
+{
+    - "localeCode": "string"
+    + "locale": "string"
+}
+````
+
+POST on `/api/v2/shop/orders`:
+
+````
+{
+    - "localeCode": "string"
+    + "locale": "string"
+}
+````
+
+PATCH on `/api/v2/shop/account/orders/{tokenValue}/shipments/{shipmentId}`:
+
+````
+{
+    - "shippingMethodCode": "string"
+    + "shippingMethod": "string"
+}
+````
+
+PATCH on `/api/v2/shop/account/orders/{tokenValue}/items`:
+
+````
+{
+    - "productVariantCode": "string"
+    + "productVariant": "string"
+}
+````
+

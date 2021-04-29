@@ -1110,7 +1110,7 @@ final class CheckoutContext implements Context
 
         $request->setContent([
             'productCode' => $product->getCode(),
-            'productVariantCode' => $productVariant->getCode(),
+            'productVariant' => $this->iriConverter->getIriFromItem($productVariant),
             'quantity' => $quantity,
         ]);
 
