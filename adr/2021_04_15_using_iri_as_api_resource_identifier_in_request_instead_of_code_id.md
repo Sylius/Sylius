@@ -36,7 +36,7 @@ and field name as a field that will be transformed from IRI to `code`/`id`. All 
                 <argument key="Sylius\Bundle\ApiBundle\Command\AddProductReview">product</argument>
                 <argument key="Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod">paymentMethod</argument>
                 <argument key="Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod">paymentMethod</argument>
-                <argument key="NewCommandFQCN">NewCommandFieldName</argument><-- Example -->
+                <argument key="NewCommandFQCN">NewCommandFieldName</argument>
             </argument>
         </service>
 ````

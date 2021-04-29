@@ -53,7 +53,7 @@
                     <attribute>sylius.api.product_variant_option_value_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_variant:read</attribute>
+                    <attribute name="groups">shop:product_variant:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>

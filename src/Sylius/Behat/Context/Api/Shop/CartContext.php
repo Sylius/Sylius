@@ -171,7 +171,7 @@ final class CartContext implements Context
 
                 Assert::same($variantsData['hydra:totalItems'], 1);
 
-                $variantIri = $variantsData['hydra:member'][0]['@id'];
+                $variantIri = $variantsData['@id'].'/'.$variantsData['hydra:member'][0]['code'];
             }
         }
 
@@ -215,11 +215,11 @@ final class CartContext implements Context
 
     /**
      * @When I pick up my cart (again)
-     * @When I pick up cart in the :localeCode locale
+     * @When I pick up cart in the :locale locale
      */
-    public function iPickUpMyCart(?string $localeCode = null): void
+    public function iPickUpMyCart(?LocaleInterface $locale = null): void
     {
-        $this->pickupCart($localeCode);
+        $this->pickupCart($locale);
     }
 
     /**
@@ -537,10 +537,14 @@ final class CartContext implements Context
         throw new \DomainException(sprintf('Could not find item with option "%s" set to "%s"', $optionName, $optionValue));
     }
 
-    private function pickupCart(?string $localeCode = null): string
+    private function pickupCart(?LocaleInterface $locale = null): string
     {
         $this->cartsClient->buildCreateRequest();
-        $this->cartsClient->addRequestData('locale', $localeCode);
+        $this->cartsClient->addRequestData('locale', null);
+        if ($locale !== null) {
+            $this->cartsClient->addRequestData('locale', $this->iriConverter->getIriFromItem($locale));
+        }
+
         $tokenValue = $this->responseChecker->getValue($this->cartsClient->create(), 'tokenValue');
 
         $this->sharedStorage->set('cart_token', $tokenValue);
