@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
 use Webmozart\Assert\Assert;
 
@@ -29,15 +31,20 @@ final class LoginContext implements Context
     /** @var ApiClientInterface */
     private $apiClient;
 
+    /** @var IriConverterInterface */
+    private $iriConverter;
+
     /** @var Request|null */
     private $request;
 
     public function __construct(
         ApiSecurityClientInterface $apiSecurityClient,
-        ApiClientInterface $apiClient
+        ApiClientInterface $apiClient,
+        IriConverterInterface $iriConverter
     ) {
         $this->apiSecurityClient = $apiSecurityClient;
         $this->apiClient = $apiClient;
+        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -65,13 +72,13 @@ final class LoginContext implements Context
     }
 
     /**
-     * @When I reset password for email :email in :localeCode locale
+     * @When I reset password for email :email in :locale locale
      */
-    public function iResetPasswordForEmailInLocale(string $email, string $localeCode): void
+    public function iResetPasswordForEmailInLocale(string $email, LocaleInterface $locale): void
     {
         $this->iWantToResetPassword();
         $this->iSpecifyTheEmail($email);
-        $this->addLocaleCode($localeCode);
+        $this->addLocale($this->iriConverter->getIriFromItem($locale));
         $this->iResetIt();
     }
 
@@ -221,8 +228,8 @@ final class LoginContext implements Context
         $this->iShouldNotBeLoggedIn();
     }
 
-    private function addLocaleCode(string $localeCode): void
+    private function addLocale(string $locale): void
     {
-        $this->request->updateContent(['localeCode' => $localeCode]);
+        $this->request->updateContent(['locale' => $locale]);
     }
 }

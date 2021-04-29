@@ -348,7 +348,7 @@ final class CheckoutContext implements Context
             sprintf('shipments/%s', $this->getCart()['shipments'][0]['id'])
         );
 
-        $request->setContent(['shippingMethodCode' => $shippingMethod->getCode()]);
+        $request->setContent(['shippingMethod' => $this->iriConverter->getIriFromItem($shippingMethod)]);
 
         $this->ordersClient->executeCustomRequest($request);
     }

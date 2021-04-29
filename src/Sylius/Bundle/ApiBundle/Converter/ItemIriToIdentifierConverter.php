@@ -35,8 +35,12 @@ final class ItemIriToIdentifierConverter implements ItemIriToIdentifierConverter
         $this->identifierConverter = $identifierConverter;
     }
 
-    public function getIdentifier(string $iri): string
+    public function getIdentifier(?string $iri): ?string
     {
+        if ($iri === null || $iri === '') {
+           return null;
+        }
+
         try {
             $parameters = $this->router->match($iri);
         } catch (RoutingExceptionInterface $e) {
