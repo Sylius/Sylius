@@ -34,6 +34,8 @@
 
 1. API Add to cart endpoint `PATCH /api/v2/shop/orders/{tokenValue}/items` no longer requires `productCode` in request body.
 
+1. Channel pricing resource and its serialization has been removed from shop section
+
 ### Commands
 
 1. We've removed `productCode` from `Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart` command.
