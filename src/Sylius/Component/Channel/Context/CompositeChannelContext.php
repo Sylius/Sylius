@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Channel\Context;
 
-use Sylius\Component\Channel\Model\ChannelInterface;
 use Laminas\Stdlib\PriorityQueue;
+use Sylius\Component\Channel\Model\ChannelInterface;
 
 final class CompositeChannelContext implements ChannelContextInterface
 {

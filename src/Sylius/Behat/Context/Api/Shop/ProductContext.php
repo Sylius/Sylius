@@ -19,7 +19,6 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
@@ -142,7 +141,7 @@ final class ProductContext implements Context
                 $price,
                 $product->getCode()
             ),
-            sprintf("There is no product with %s code and %s price", $product->getCode(), $price)
+            sprintf('There is no product with %s code and %s price', $product->getCode(), $price)
         );
     }
 
@@ -202,7 +201,7 @@ final class ProductContext implements Context
                 $this->client->executeCustomRequest(Request::custom($variantIri, HttpRequest::METHOD_GET));
 
                 /** @var int $variantPrice */
-                $variantPrice = $this->responseChecker->getValue($this->client->getLastResponse(), "price");
+                $variantPrice = $this->responseChecker->getValue($this->client->getLastResponse(), 'price');
 
                 if ($price === $variantPrice) {
                     return true;

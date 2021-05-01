@@ -79,7 +79,7 @@ final class BlameCartHandlerSpec extends ObjectBehavior
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('__invoke', [
-                new BlameCart('sylius@example.com', 'TOKEN')
+                new BlameCart('sylius@example.com', 'TOKEN'),
             ])
         ;
     }

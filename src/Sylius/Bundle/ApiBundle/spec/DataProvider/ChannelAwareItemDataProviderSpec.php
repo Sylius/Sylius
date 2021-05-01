@@ -6,7 +6,6 @@ namespace spec\Sylius\Bundle\ApiBundle\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;

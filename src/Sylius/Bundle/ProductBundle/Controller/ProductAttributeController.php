@@ -16,16 +16,10 @@ namespace Sylius\Bundle\ProductBundle\Controller;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeChoiceType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Attribute\Model\AttributeInterface;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Webmozart\Assert\Assert;
 
 class ProductAttributeController extends ResourceController
 {

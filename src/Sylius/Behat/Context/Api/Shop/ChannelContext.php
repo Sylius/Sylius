@@ -41,7 +41,6 @@ final class ChannelContext implements Context
         $this->sharedStorage = $sharedStorage;
     }
 
-
     /**
      * @Given I am browsing channel :channel
      */

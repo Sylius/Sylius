@@ -171,7 +171,7 @@ final class CartContext implements Context
 
                 Assert::same($variantsData['hydra:totalItems'], 1);
 
-                $variantIri = $variantsData['@id'].'/'.$variantsData['hydra:member'][0]['code'];
+                $variantIri = $variantsData['@id'] . '/' . $variantsData['hydra:member'][0]['code'];
             }
         }
 
@@ -589,7 +589,6 @@ final class CartContext implements Context
             HttpRequest::METHOD_DELETE,
             \sprintf('items/%s', $orderItemId)
         );
-
 
         $this->cartsClient->executeCustomRequest($request);
     }

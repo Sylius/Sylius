@@ -46,9 +46,9 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($shopUser);
         $metadata->getParameter('resetting')->willReturn(['token' => ['ttl' => 'P5D']]);
 
-        $shopUser->isPasswordRequestNonExpired(Argument::that(function(\DateInterval $dateInterval) {
+        $shopUser->isPasswordRequestNonExpired(Argument::that(function (\DateInterval $dateInterval) {
             return $dateInterval->format('%d') === '5';
-        } ))->willReturn(true);
+        }))->willReturn(true);
 
         $shopUser->getPasswordResetToken()->willReturn('TOKEN');
 
@@ -71,9 +71,9 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($shopUser);
         $metadata->getParameter('resetting')->willReturn(['token' => ['ttl' => 'P5D']]);
 
-        $shopUser->isPasswordRequestNonExpired(Argument::that(function(\DateInterval $dateInterval) {
+        $shopUser->isPasswordRequestNonExpired(Argument::that(function (\DateInterval $dateInterval) {
             return $dateInterval->format('%d') === '5';
-        } ))->willReturn(false);
+        }))->willReturn(false);
 
         $shopUser->getPasswordResetToken()->willReturn('TOKEN');
         $shopUser->setPlainPassword('newPassword')->shouldNotBeCalled();
@@ -98,9 +98,9 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($shopUser);
         $metadata->getParameter('resetting')->willReturn(['token' => ['ttl' => 'P5D']]);
 
-        $shopUser->isPasswordRequestNonExpired(Argument::that(function(\DateInterval $dateInterval) {
+        $shopUser->isPasswordRequestNonExpired(Argument::that(function (\DateInterval $dateInterval) {
             return $dateInterval->format('%d') === '5';
-        } ))->willReturn(false);
+        }))->willReturn(false);
 
         $shopUser->getPasswordResetToken()->willReturn('BADTOKEN');
         $shopUser->setPlainPassword('newPassword')->shouldNotBeCalled();
