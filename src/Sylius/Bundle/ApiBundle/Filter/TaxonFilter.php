@@ -39,7 +39,7 @@ final class TaxonFilter extends AbstractContextAwareFilter
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         string $operationName = null,
-        array $context  = []
+        array $context = []
     ) {
         if ($property !== 'taxon') {
             return;
@@ -69,7 +69,7 @@ final class TaxonFilter extends AbstractContextAwareFilter
                 'required' => false,
                 'property' => null,
                 'swagger' => [
-                    'name' =>'Product taxon filter',
+                    'name' => 'Product taxon filter',
                     'description' => 'Get a collection of product with chosen taxon',
                 ],
             ],

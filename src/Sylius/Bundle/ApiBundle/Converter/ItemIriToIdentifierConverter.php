@@ -38,7 +38,7 @@ final class ItemIriToIdentifierConverter implements ItemIriToIdentifierConverter
     public function getIdentifier(?string $iri): ?string
     {
         if ($iri === null || $iri === '') {
-           return null;
+            return null;
         }
 
         try {

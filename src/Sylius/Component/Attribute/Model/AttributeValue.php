@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Attribute\Model;
 
-use Webmozart\Assert\Assert;
-
 class AttributeValue implements AttributeValueInterface
 {
     /** @var mixed */

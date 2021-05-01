@@ -47,8 +47,7 @@ final class CommandFieldItemIriToIdentifierDenormalizerSpec extends ObjectBehavi
 
     function it_supports_denormalization_add_product_review(
         CommandItemIriArgumentToIdentifierMapInterface $commandItemIriArgumentToIdentifierMap
-    ): void
-    {
+    ): void {
         $context['input']['class'] = AddProductReview::class;
 
         $commandItemIriArgumentToIdentifierMap->has(AddProductReview::class)->willReturn(true);
@@ -66,8 +65,7 @@ final class CommandFieldItemIriToIdentifierDenormalizerSpec extends ObjectBehavi
 
     function it_does_not_support_denormalization_for_not_supported_class(
         CommandItemIriArgumentToIdentifierMapInterface $commandItemIriArgumentToIdentifierMap
-    ): void
-    {
+    ): void {
         $context['input']['class'] = Order::class;
 
         $commandItemIriArgumentToIdentifierMap->has(Order::class)->willReturn(false);
@@ -104,7 +102,7 @@ final class CommandFieldItemIriToIdentifierDenormalizerSpec extends ObjectBehavi
                 'rating' => 5,
                 'comment' => 'ok',
                 'product' => 'cap_code',
-                'email' => 'john@example.com'
+                'email' => 'john@example.com',
             ],
                 AddProductReview::class,
                 null,
@@ -119,7 +117,7 @@ final class CommandFieldItemIriToIdentifierDenormalizerSpec extends ObjectBehavi
                 'rating' => 5,
                 'comment' => 'ok',
                 'product' => '/api/v2/shop/products/cap_code',
-                'email' => 'john@example.com'
+                'email' => 'john@example.com',
             ],
                 AddProductReview::class,
                 null,

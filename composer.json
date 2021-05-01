@@ -191,13 +191,12 @@
         "psalm/plugin-mockery": "0.7.0",
         "psr/event-dispatcher": "^1.0",
         "stripe/stripe-php": "^6.43",
-        "sylius-labs/coding-standard": "^3.1",
+        "sylius-labs/coding-standard": "^4.0",
         "symfony/browser-kit": "^4.4 || ^5.2",
         "symfony/debug-bundle": "^4.4 || ^5.2",
         "symfony/dotenv": "^4.4 || ^5.2",
         "symfony/flex": "^1.7",
         "symfony/web-profiler-bundle": "^4.4 || ^5.2",
-        "symplify/package-builder": "^8.0 <8.3",
         "vimeo/psalm": "4.7.1"
     },
     "suggest": {

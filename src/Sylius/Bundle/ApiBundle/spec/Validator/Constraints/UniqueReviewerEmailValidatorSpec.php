@@ -17,9 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\UniqueReviewerEmail;
-use Sylius\Bundle\ApiBundle\Validator\Constraints\UniqueShopUserEmail;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
@@ -67,7 +65,8 @@ final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', ['', new class() extends Constraint {}])
+            ->during('validate', ['', new class() extends Constraint {
+            }])
         ;
     }
 

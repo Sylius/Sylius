@@ -73,7 +73,7 @@ final class ItemIriToIdentifierConverterTest extends TestCase
             '_api_item_operation_name' => 'get',
             '_api_identifiers' => ['id', 'nextId'],
             'id' => 3,
-            'nextId' => 5
+            'nextId' => 5,
         ])->shouldBeCalledTimes(1);
 
         $identifierConverter->convert(['id' => 3, 'nextId' => 5], AddProductReview::class)->willReturn(['3', '5']);
