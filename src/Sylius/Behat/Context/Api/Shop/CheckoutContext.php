@@ -771,6 +771,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Then /^I should be informed that (this product) has been disabled$/
+     * @Then /^I should be informed that (product "[^"]+") is disabled$/
      */
     public function iShouldBeInformedThatThisProductHasBeenDisabled(ProductInterface $product): void
     {
