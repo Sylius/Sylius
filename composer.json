@@ -30,7 +30,7 @@
         "doctrine/collections": "^1.6",
         "doctrine/doctrine-bundle": "^1.12 || ^2.0",
         "doctrine/doctrine-migrations-bundle": "^3.0.1",
-        "doctrine/inflector": "^1.4 || ^2.0",
+        "doctrine/inflector": "^2.0.3",
         "doctrine/migrations": "^3.0",
         "doctrine/orm": "^2.7",
         "egulias/email-validator": "^3.0",
