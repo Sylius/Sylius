@@ -86,7 +86,7 @@
         "symfony/monolog-bundle": "^3.5",
         "symfony/options-resolver": "^4.4 || ^5.2",
         "symfony/polyfill-iconv": "^1.17",
-        "symfony/polyfill-intl-icu": "^1.17",
+        "symfony/polyfill-intl-icu": "^1.22",
         "symfony/polyfill-mbstring": "^1.17",
         "symfony/polyfill-php80": "^1.17",
         "symfony/process": "^4.4 || ^5.2",
