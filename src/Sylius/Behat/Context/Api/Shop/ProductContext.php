@@ -134,6 +134,41 @@ final class ProductContext implements Context
     }
 
     /**
+     * @When I browse products
+     */
+    public function iViewProducts(): void
+    {
+        $this->client->index();
+    }
+
+    /**
+     * @When /^I should see only (\d+) product(s)$/
+     */
+    public function iShouldSeeOnlyProducts(int $count): void
+    {
+        Assert::same(
+            count($this->responseChecker->getCollection($this->client->getLastResponse())),
+            $count,
+            'Number of products from response is different then expected'
+        );
+    }
+
+    /**
+     * @Then I should not see the product with name :name
+     */
+    public function iShouldNotSeeProductWithName(string $name): void
+    {
+        Assert::false(
+            $this->responseChecker->hasItemWithTranslation(
+                $this->client->getLastResponse(),
+                'en_US',
+                'name',
+                $name
+            )
+        );
+    }
+
+    /**
      * @Then I should see the product name :name
      */
     public function iShouldSeeProductName(string $name): void
