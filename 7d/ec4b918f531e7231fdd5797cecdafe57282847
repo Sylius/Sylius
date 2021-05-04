@@ -1,0 +1,31 @@
+---------------------------------------------------------------------------
+
+by jacquesbh at 2021-03-16T12:00:45Z
+
+@pamil For me, no impact on column length or indices after 5.7.7. According to my searches.
+
+---------------------------------------------------------------------------
+
+by pamil at 2021-03-16T12:12:47Z
+
+Indeed, looks like a change that we should do then! `utf8` is an alias for `utf8mb3` which is deprecated in favour of `utf8mb4`. I'm just wondering how to upgrade existing projects to `uft8mb4`, considering these concerns here: https://serversforhackers.com/c/mysql-utf8-and-indexing
+
+---------------------------------------------------------------------------
+
+by jacquesbh at 2021-03-16T12:23:57Z
+
+The issue with the indices is gone after 5.7.7 :).
+
+---------------------------------------------------------------------------
+
+by jacquesbh at 2021-03-19T14:41:43Z
+
+> Should we generate some migrations for this change to take place for existing data?
+
+I don't think so… maybe a warning in the UPGRADE?
+
+---------------------------------------------------------------------------
+
+by pamil at 2021-05-04T10:06:21Z
+
+Thanks, Jacques! :tada:
