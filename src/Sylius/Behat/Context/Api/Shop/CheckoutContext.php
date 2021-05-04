@@ -25,6 +25,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
@@ -782,6 +783,17 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then /^I should be informed that ("([^"]*)" product variant) is disabled$/
+     */
+    public function iShouldBeInformedThatProductVariantIsDisabled(ProductVariantInterface $productVariant): void
+    {
+        Assert::true($this->isViolationWithMessageInResponse(
+            $this->ordersClient->getLastResponse(),
+            sprintf('This product %s has been disabled.', $productVariant->getName())
+        ));
+    }
+
+    /**
      * @Then I should not see the thank you page
      */
     public function iShouldNotSeeTheThankYouPage(): void
@@ -832,6 +844,15 @@ final class CheckoutContext implements Context
     public function iTryToAddProductToCart(ProductInterface $product, string $tokenValue): void
     {
         $this->putProductToCart($product, $tokenValue);
+    }
+
+    /**
+     * @When /^I try to add ("([^"]+)" product variant)$/
+     */
+    public function iTryToAddProductVariant(ProductVariantInterface $productVariant): void
+    {
+        $tokenValue = $this->getCartTokenValue();
+        $this->putVariantToCart($productVariant, $tokenValue);
     }
 
     /**
@@ -1095,6 +1116,11 @@ final class CheckoutContext implements Context
     {
         Assert::notNull($productVariant = $this->productVariantResolver->getVariant($product));
 
+        $this->putVariantToCart($productVariant, $tokenValue, $quantity);
+    }
+
+    private function putVariantToCart(ProductVariantInterface $productVariant, string $tokenValue, int $quantity = 1): void
+    {
         $request = Request::customItemAction(
             'shop',
             'orders',
@@ -1104,7 +1130,7 @@ final class CheckoutContext implements Context
         );
 
         $request->setContent([
-            'productCode' => $product->getCode(),
+            'productCode' => $productVariant->getProduct()->getCode(),
             'productVariantCode' => $productVariant->getCode(),
             'quantity' => $quantity,
         ]);

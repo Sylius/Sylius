@@ -1,5 +1,5 @@
 @checkout
-Feature: Preventing adding to cart invalid products
+Feature: Preventing adding to cart disabled products
     In order to have correct products in cart when adding them
     As a customer
     I want to have the added products validated
@@ -7,9 +7,8 @@ Feature: Preventing adding to cart invalid products
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
-        And this product's price is "$19.99"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store has a "Super Cool T-Shirt" configurable product
+        And this product has "Small", "Medium" and "Large" variants
         And I am a logged in customer
 
     @api
@@ -18,3 +17,10 @@ Feature: Preventing adding to cart invalid products
         When I pick up my cart
         And I try to add product "PHP T-Shirt" to the cart
         Then I should be informed that product "PHP T-Shirt" is disabled
+
+    @api
+    Scenario: Preventing customer from adding disabled variant
+        Given the "Large" product variant is disabled
+        When I pick up my cart
+        And I try to add "Large" product variant
+        Then I should be informed that "Large" product variant is disabled

@@ -41,19 +41,19 @@ final class ProductOrVariantEnabledValidator extends ConstraintValidator
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->productVariantRepository->findOneBy(['code' =>$value->productVariantCode]);
 
-        if (!$productVariant->isEnabled()) {
+        if (!$productVariant->getProduct()->isEnabled()) {
             $this->context->addViolation(
                 $constraint->message,
-                ['%productName%' => $productVariant->getName()]
+                ['%productName%' => $productVariant->getProduct()->getName()]
             );
 
             return;
         }
 
-        if (!$productVariant->getProduct()->isEnabled()) {
+        if (!$productVariant->isEnabled()) {
             $this->context->addViolation(
                 $constraint->message,
-                ['%productName%' => $productVariant->getProduct()->getName()]
+                ['%productName%' => $productVariant->getName()]
             );
         }
     }
