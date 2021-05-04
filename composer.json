@@ -108,7 +108,7 @@
         "symfony/twig-bundle": "^4.4 || ^5.2",
         "symfony/validator": "^4.4 || ^5.2",
         "symfony/yaml": "^4.4 || ^5.2",
-        "twig/intl-extra": "^2.12",
+        "twig/intl-extra": "^2.12 || ^3.0",
         "twig/twig": "^2.12",
         "webmozart/assert": "^1.9",
         "willdurand/hateoas": "^3.0",
