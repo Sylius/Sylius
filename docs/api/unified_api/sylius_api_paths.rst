@@ -1,7 +1,8 @@
-Custom Paths in new Api
-=======================
+Sylius API paths
+================
 
 All paths in new API have the same prefix structure: ``/api/v2/admin/`` or ``/api/v2/shop/``
+Part ``/api/v2`` indicates the API version and ``/admin/`` or ``/shop/`` is necessary for authorization purpose.
 
 When you are adding a new path to API resource configuration, you should remember to add also proper prefix.
 
