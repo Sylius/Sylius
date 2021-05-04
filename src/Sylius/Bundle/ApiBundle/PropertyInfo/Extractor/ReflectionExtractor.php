@@ -595,7 +595,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
         try {
             $reflectionProperty = new \ReflectionProperty($class, $property);
 
-            return boolval($reflectionProperty->getModifiers() & $this->propertyReflectionFlags);
+            return (bool) ($reflectionProperty->getModifiers() & $this->propertyReflectionFlags);
         } catch (\ReflectionException $e) {
             // Return false if the property doesn't exist
         }
