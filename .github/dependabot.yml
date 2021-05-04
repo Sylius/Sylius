@@ -7,4 +7,4 @@ updates:
             interval: daily
             time: "10:00"
         open-pull-requests-limit: 4
-        versioning-strategy: increase
+        versioning-strategy: increase-if-necessary
