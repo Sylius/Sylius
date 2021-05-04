@@ -18,40 +18,32 @@
     <class name="Sylius\Component\Addressing\Model\Zone">
         <attribute name="id">
             <group>admin:zone:read</group>
-            <group>admin:zone:all</group>
         </attribute>
         <attribute name="code">
             <group>admin:zone:read</group>
-            <group>admin:zone:all</group>
             <group>admin:zone:create</group>
         </attribute>
         <attribute name="name">
             <group>admin:zone:read</group>
-            <group>admin:zone:all</group>
             <group>admin:zone:create</group>
             <group>admin:zone:update</group>
         </attribute>
         <attribute name="type">
             <group>admin:zone:read</group>
-            <group>admin:zone:all</group>
             <group>admin:zone:create</group>
         </attribute>
         <attribute name="scope">
             <group>admin:zone:read</group>
-            <group>admin:zone:all</group>
             <group>admin:zone:create</group>
         </attribute>
         <attribute name="createdAt">
             <group>admin:zone:read</group>
-            <group>admin:zone:all</group>
         </attribute>
         <attribute name="updatedAt">
             <group>admin:zone:read</group>
-            <group>admin:zone:all</group>
         </attribute>
         <attribute name="members">
             <group>admin:zone:read</group>
-            <group>admin:zone:all</group>
             <group>admin:zone:create</group>
             <group>admin:zone:update</group>
         </attribute>

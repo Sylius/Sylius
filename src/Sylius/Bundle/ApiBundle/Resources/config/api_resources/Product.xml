@@ -89,6 +89,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product:update</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_delete">
@@ -119,8 +122,8 @@
         <property name="channels" required="false" />
         <property name="images" required="false" />
         <property name="mainTaxon" required="false" />
-        <property name="variants" readable="true"/>
-        <property name="enabled" readable="true"/>
+        <property name="variants" readable="true" />
+        <property name="enabled" readable="true" />
         <property name="attributes" readable="false" writable="false"/>
         <property name="averageRating" readable="true" />
     </resource>
