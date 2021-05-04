@@ -59,33 +59,6 @@ final class ProductOrVariantEnabledValidatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_adds_violation_if_product_variant_is_disabled(
-        ProductVariantRepositoryInterface $productVariantRepository,
-        ProductVariantInterface $productVariant,
-        ProductInterface $product,
-        ExecutionContextInterface $executionContext
-    ): void {
-        $this->initialize($executionContext);
-
-        $value = new AddItemToCart('productVariantCode', 1);
-        $constraint = new ProductOrVariantEnabled();
-        $constraint->message = 'message';
-
-        $productVariantRepository->findOneBy(['code' => 'productVariantCode'])->willReturn($productVariant);
-        $productVariant->isEnabled()->willReturn(false);
-        $productVariant->getName()->willReturn('NAME');
-        $executionContext
-            ->addViolation(
-                'message',
-                ['%productName%' => 'NAME']
-            )
-            ->shouldBeCalled();
-
-        $productVariant->getProduct()->willReturn($product);
-
-        $this->validate($value, $constraint);
-    }
-
     function it_adds_violation_if_product_is_disabled(
         ProductVariantRepositoryInterface $productVariantRepository,
         ProductVariantInterface $productVariant,
@@ -99,14 +72,33 @@ final class ProductOrVariantEnabledValidatorSpec extends ObjectBehavior
         $constraint->message = 'message';
 
         $productVariantRepository->findOneBy(['code' => 'productVariantCode'])->willReturn($productVariant);
-        $productVariant->isEnabled()->willReturn(true);
-        $productVariant->getName()->willReturn('NAME');
+        $productVariant->getProduct()->willReturn($product);
+
+        $product->isEnabled()->willReturn(false);
+        $product->getName()->willReturn('PRODUCTNAME');
         $executionContext
             ->addViolation(
                 'message',
-                ['%productName%' => 'NAME']
+                ['%productName%' => 'PRODUCTNAME']
             )
-            ->shouldNotBeCalled();
+            ->shouldBeCalled();
+
+        $this->validate($value, $constraint);
+    }
+
+    function it_adds_violation_if_product_variant_is_disabled(
+        ProductVariantRepositoryInterface $productVariantRepository,
+        ProductVariantInterface $productVariant,
+        ProductInterface $product,
+        ExecutionContextInterface $executionContext
+    ): void {
+        $this->initialize($executionContext);
+
+        $value = new AddItemToCart('productVariantCode', 1);
+        $constraint = new ProductOrVariantEnabled();
+        $constraint->message = 'message';
+
+        $productVariantRepository->findOneBy(['code' => 'productVariantCode'])->willReturn($productVariant);
 
         $productVariant->getProduct()->willReturn($product);
 
@@ -118,6 +110,15 @@ final class ProductOrVariantEnabledValidatorSpec extends ObjectBehavior
                 ['%productName%' => 'PRODUCTNAME']
             )
             ->shouldBeCalled();
+
+        $productVariant->isEnabled()->willReturn(true);
+        $productVariant->getName()->willReturn('NAME');
+        $executionContext
+            ->addViolation(
+                'message',
+                ['%productName%' => 'NAME']
+            )
+            ->shouldNotBeCalled();
 
         $this->validate($value, $constraint);
     }
