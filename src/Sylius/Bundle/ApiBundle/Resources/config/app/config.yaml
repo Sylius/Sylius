@@ -33,14 +33,21 @@ api_platform:
 framework:
     messenger:
         buses:
-            sylius_default.bus:
-                middleware:
-                    - 'validation'
-                    - 'doctrine_transaction'
-            sylius_event.bus:
-                middleware:
-                    - 'validation'
-                    - 'doctrine_transaction'
+            sylius.command_bus: &command_bus
+                default_middleware: allow_no_handlers
+            sylius.event_bus: &event_bus
+                default_middleware: allow_no_handlers
+            sylius_default.bus: *command_bus
+            sylius_event.bus: *event_bus
+            
+services:
+    sylius_default.bus:
+        deprecated: 'The "%service_id%" service alias is deprecated.'
+        synthetic: true
+    sylius_event.bus:
+        deprecated: 'The "%service_id%" service alias is deprecated.'
+        synthetic: true
+
 lexik_jwt_authentication:
     token_extractors:
         authorization_header:

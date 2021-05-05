@@ -31,7 +31,7 @@
         </service>
 
         <service id="sylius.behat.context.setup.cart" class="Sylius\Behat\Context\Setup\CartContext">
-            <argument type="service" id="sylius_default.bus" />
+            <argument type="service" id="sylius.command_bus" />
             <argument type="service" id="sylius.product_variant_resolver.default" />
             <argument type="service" id="sylius.random_generator" />
             <argument type="service" id="sylius.behat.shared_storage" />
@@ -41,7 +41,7 @@
             <argument type="service" id="sylius.repository.order"/>
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.repository.payment_method" />
-            <argument type="service" id="sylius_default.bus" />
+            <argument type="service" id="sylius.command_bus" />
             <argument type="service" id="sylius.factory.address" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
@@ -278,7 +278,7 @@
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.fixture.example_factory.shop_user" />
             <argument type="service" id="sylius.manager.shop_user" />
-            <argument type="service" id="sylius_default.bus" />
+            <argument type="service" id="sylius.command_bus" />
         </service>
 
         <service id="sylius.behat.context.setup.zone" class="Sylius\Behat\Context\Setup\ZoneContext">
