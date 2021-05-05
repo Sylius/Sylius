@@ -34,6 +34,9 @@
                 <attribute name="openapi_context">
                     <attribute name="summary">Registers a new customer</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:customer:read</attribute>
+                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:customer:create</attribute>
                 </attribute>
@@ -66,6 +69,9 @@
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/customers/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:customer:read</attribute>
+                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:customer:update</attribute>
                 </attribute>

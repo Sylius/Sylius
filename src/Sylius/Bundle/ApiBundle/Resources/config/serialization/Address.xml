@@ -30,9 +30,9 @@
             <group>admin:order:read</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:order:read</group>
             <group>shop:cart:address</group>
             <group>shop:cart:read</group>
+            <group>shop:order:read</group>
             <group>shop:order:account:read</group>
         </attribute>
         <attribute name="lastName">
@@ -40,9 +40,9 @@
             <group>admin:order:read</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:order:read</group>
             <group>shop:cart:address</group>
             <group>shop:cart:read</group>
+            <group>shop:order:read</group>
             <group>shop:order:account:read</group>
         </attribute>
         <attribute name="phoneNumber">
@@ -60,9 +60,9 @@
             <group>admin:order:read</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:order:read</group>
             <group>shop:cart:address</group>
             <group>shop:cart:read</group>
+            <group>shop:order:read</group>
             <group>shop:order:account:read</group>
         </attribute>
         <attribute name="street">
@@ -70,9 +70,9 @@
             <group>admin:order:read</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:order:read</group>
             <group>shop:cart:address</group>
             <group>shop:cart:read</group>
+            <group>shop:order:read</group>
             <group>shop:order:account:read</group>
         </attribute>
         <attribute name="postcode">
@@ -80,9 +80,9 @@
             <group>admin:order:read</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:order:read</group>
             <group>shop:cart:address</group>
             <group>shop:cart:read</group>
+            <group>shop:order:read</group>
             <group>shop:order:account:read</group>
         </attribute>
         <attribute name="countryCode">
@@ -90,9 +90,9 @@
             <group>admin:order:read</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:order:read</group>
             <group>shop:cart:address</group>
             <group>shop:cart:read</group>
+            <group>shop:order:read</group>
             <group>shop:order:account:read</group>
         </attribute>
         <attribute name="provinceCode">
@@ -101,6 +101,7 @@
             <group>shop:address:update</group>
             <group>shop:cart:address</group>
             <group>shop:cart:read</group>
+            <group>shop:order:read</group>
             <group>shop:order:account:read</group>
         </attribute>
         <attribute name="provinceName">
@@ -108,9 +109,9 @@
             <group>admin:order:read</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:order:read</group>
             <group>shop:cart:address</group>
             <group>shop:cart:read</group>
+            <group>shop:order:read</group>
             <group>shop:order:account:read</group>
         </attribute>
     </class>

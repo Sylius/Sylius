@@ -39,7 +39,7 @@
         <subresourceOperations>
             <subresourceOperation name="api_orders_items_get_subresource">
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:order_item:subresource:read</attribute>
+                    <attribute name="groups">shop:order_item:read</attribute>
                 </attribute>
             </subresourceOperation>
             <subresourceOperation name="adjustments_get_subresource">

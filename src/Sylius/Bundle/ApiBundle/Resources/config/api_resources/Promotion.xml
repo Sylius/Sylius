@@ -24,7 +24,7 @@
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion:all</attribute>
+                    <attribute name="groups">admin:promotion:read</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -57,12 +57,12 @@
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
+        <property name="code" identifier="false" />
         <property name="name" readable="true" />
         <property name="description" readable="true" />
         <property name="priority" readable="true" />
         <property name="exclusive" readable="true" />
         <property name="usageLimit" readable="true" />
-        <property name="used" readable="true" writable="false"/>
         <property name="startsAt" readable="true" />
         <property name="endsAt" readable="true" />
         <property name="couponBased" readable="true" />
@@ -72,5 +72,6 @@
         <property name="rules" readable="true" />
         <property name="actions" readable="true" />
         <property name="channels" readable="true" />
+        <property name="used" readable="true" writable="false" />
     </resource>
 </resources>

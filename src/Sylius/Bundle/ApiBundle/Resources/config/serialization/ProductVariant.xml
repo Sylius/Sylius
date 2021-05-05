@@ -24,9 +24,7 @@
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>
             <group>admin:product_variant_inventory:read</group>
-            <group>admin:product:read</group>
             <group>shop:product_variant:read</group>
-            <group>shop:order_item:subresource:read</group>
         </attribute>
         <attribute name="product">
             <group>admin:product_variant:read</group>
@@ -39,7 +37,6 @@
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
             <group>admin:product_variant_inventory:read</group>
-            <group>admin:product:read</group>
             <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="tracked">
@@ -48,7 +45,6 @@
             <group>admin:product_variant:update</group>
             <group>admin:product_variant_inventory:read</group>
             <group>admin:product_variant_inventory:update</group>
-            <group>admin:product:read</group>
         </attribute>
         <attribute name="onHand">
             <group>admin:product_variant:read</group>
@@ -56,48 +52,41 @@
             <group>admin:product_variant:update</group>
             <group>admin:product_variant_inventory:read</group>
             <group>admin:product_variant_inventory:update</group>
-            <group>admin:product:read</group>
         </attribute>
         <attribute name="weight">
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
-            <group>admin:product:read</group>
             <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="width">
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
-            <group>admin:product:read</group>
             <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="height">
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
-            <group>admin:product:read</group>
             <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="depth">
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
-            <group>admin:product:read</group>
             <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="enabled">
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
-            <group>admin:product:read</group>
             <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="shippingRequired">
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
-            <group>admin:product:read</group>
         </attribute>
         <attribute name="optionValues">
             <group>admin:product_variant:read</group>
@@ -110,7 +99,6 @@
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
             <group>admin:product_variant_inventory:read</group>
-            <group>admin:product:read</group>
             <group>shop:product_variant:read</group>
             <group>shop:order:account:read</group>
         </attribute>

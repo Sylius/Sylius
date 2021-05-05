@@ -21,7 +21,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/payment-methods</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:payment_method:all</attribute>
+                    <attribute name="groups">admin:payment_method:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>

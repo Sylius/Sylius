@@ -20,6 +20,10 @@
             <group>admin:order_item_unit:read</group>
             <group>shop:order_item_unit:read</group>
         </attribute>
+        <attribute name="adjustments">
+            <group>admin:order_item_unit:read</group>
+            <group>shop:order_item_unit:read</group>
+        </attribute>
         <attribute name="shippable">
             <group>admin:order_item_unit:read</group>
             <group>shop:order_item_unit:read</group>

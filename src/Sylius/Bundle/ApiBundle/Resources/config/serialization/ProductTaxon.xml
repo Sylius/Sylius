@@ -12,6 +12,8 @@
         <attribute name="taxon">
             <group>admin:product_taxon:read</group>
             <group>shop:product_taxon:read</group>
+            <group>admin:product:create</group>
+            <group>admin:product:update</group>
         </attribute>
     </class>
 </serializer>

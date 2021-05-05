@@ -18,13 +18,11 @@
     <class name="Sylius\Component\Core\Model\PaymentMethod">
         <attribute name="id">
             <group>admin:payment_method:read</group>
-            <group>admin:payment_method:all</group>
             <group>shop:payment_method:read</group>
         </attribute>
         <attribute name="name">
             <group>admin:payment:read</group>
             <group>admin:payment_method:read</group>
-            <group>admin:payment_method:all</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
             <group>shop:payment:read</group>
@@ -35,17 +33,14 @@
         </attribute>
         <attribute name="code">
             <group>admin:payment_method:read</group>
-            <group>admin:payment_method:all</group>
             <group>shop:payment_method:read</group>
         </attribute>
         <attribute name="enabled">
             <group>admin:payment_method:read</group>
-            <group>admin:payment_method:all</group>
             <group>admin:payment_method:update</group>
         </attribute>
         <attribute name="position">
             <group>admin:payment_method:read</group>
-            <group>admin:payment_method:all</group>
             <group>admin:payment_method:update</group>
         </attribute>
         <attribute name="gatewayConfig">

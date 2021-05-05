@@ -13,18 +13,31 @@
         </attribute>
         <attribute name="name">
             <group>admin:taxon:read</group>
+            <group>admin:taxon:create</group>
+            <group>admin:taxon:update</group>
             <group>shop:taxon:read</group>
             <group>admin:taxon_translation:read</group>
             <group>shop:taxon_translation:read</group>
         </attribute>
         <attribute name="description">
             <group>admin:taxon:read</group>
+            <group>admin:taxon:create</group>
+            <group>admin:taxon:update</group>
             <group>shop:taxon:read</group>
             <group>admin:taxon_translation:read</group>
             <group>shop:taxon_translation:read</group>
         </attribute>
         <attribute name="slug">
             <group>admin:taxon:read</group>
+            <group>admin:taxon:create</group>
+            <group>admin:taxon:update</group>
+            <group>shop:taxon:read</group>
+            <group>admin:taxon_translation:read</group>
+            <group>shop:taxon_translation:read</group>
+        </attribute>
+        <attribute name="locale">
+            <group>admin:taxon:read</group>
+            <group>admin:taxon:create</group>
             <group>shop:taxon:read</group>
             <group>admin:taxon_translation:read</group>
             <group>shop:taxon_translation:read</group>

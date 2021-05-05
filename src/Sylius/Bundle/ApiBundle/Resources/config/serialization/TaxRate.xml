@@ -17,31 +17,21 @@
         </attribute>
         <attribute name="code">
             <group>admin:tax_rate:read</group>
-            <group>admin:zone:read</group>
-            <group>admin:zone:update</group>
         </attribute>
         <attribute name="name">
             <group>admin:tax_rate:read</group>
-            <group>admin:zone:update</group>
         </attribute>
         <attribute name="amount">
             <group>admin:tax_rate:read</group>
-            <group>admin:zone:all</group>
-            <group>admin:zone:read</group>
-            <group>admin:zone:update</group>
         </attribute>
         <attribute name="includedInPrice">
             <group>admin:tax_rate:read</group>
-            <group>admin:zone:read</group>
-            <group>admin:zone:update</group>
         </attribute>
         <attribute name="calculator">
             <group>admin:tax_rate:read</group>
-            <group>admin:zone:update</group>
         </attribute>
         <attribute name="category">
             <group>admin:tax_rate:read</group>
-            <group>admin:zone:update</group>
         </attribute>
     </class>
 </serializer>

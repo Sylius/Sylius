@@ -10,12 +10,12 @@
             <group>shop:product:read</group>
         </attribute>
         <attribute name="path">
+            <group>admin:product_image:read</group>
             <group>shop:product_image:read</group>
             <group>admin:product:read</group>
             <group>admin:product:create</group>
             <group>admin:product:update</group>
             <group>shop:product:read</group>
-            <group>shop:order_item:subresource:read</group>
         </attribute>
     </class>
 </serializer>
