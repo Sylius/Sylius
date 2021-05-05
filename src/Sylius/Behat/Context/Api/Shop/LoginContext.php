@@ -95,7 +95,7 @@ final class LoginContext implements Context
         Assert::keyExists(
             $content,
             'token',
-            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Token not found.', $response)
+            'Token not found.'
         );
     }
 

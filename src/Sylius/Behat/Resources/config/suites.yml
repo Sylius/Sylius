@@ -18,7 +18,6 @@ imports:
     - suites/api/currency/currencies.yml
     - suites/api/currency/managing_currencies.yml
     - suites/api/currency/managing_exchange_rates.yml
-    - suites/api/customer/customer_login.yaml
     - suites/api/homepage/viewing_products.yml
     - suites/api/locale/managing_locales.yml
     - suites/api/order/managing_orders.yml
