@@ -13,46 +13,53 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
-use Sylius\Bundle\ApiBundle\Command\AddProductReview;
+use Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverterInterface;
 use Sylius\Bundle\ApiBundle\DataTransformer\CommandAwareInputDataTransformer;
-use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Bundle\ApiBundle\Map\CommandItemIriArgumentToIdentifierMapInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-/** @experimental */
-final class AddProductReviewCommandFieldItemIriToIdentifierDenormalizer implements ContextAwareDenormalizerInterface
+final class CommandFieldItemIriToIdentifierDenormalizer implements ContextAwareDenormalizerInterface
 {
     /** @var DenormalizerInterface */
     private $objectNormalizer;
 
+    /** @var ItemIriToIdentifierConverterInterface */
+    private $itemIriToIdentifierConverter;
+
     /** @var CommandAwareInputDataTransformer */
     private $commandAwareInputDataTransformer;
 
-    /** @var IriConverterInterface */
-    private $iriConverter;
+    /** @var CommandItemIriArgumentToIdentifierMapInterface */
+    private $commandItemIriArgumentToIdentifierMap;
 
     public function __construct(
         DenormalizerInterface $objectNormalizer,
+        ItemIriToIdentifierConverterInterface $itemIriToIdentifierConverter,
         CommandAwareInputDataTransformer $commandAwareInputDataTransformer,
-        IriConverterInterface $iriConverter
+        CommandItemIriArgumentToIdentifierMapInterface $commandItemIriArgumentToIdentifierMap
     ) {
         $this->objectNormalizer = $objectNormalizer;
+        $this->itemIriToIdentifierConverter = $itemIriToIdentifierConverter;
         $this->commandAwareInputDataTransformer = $commandAwareInputDataTransformer;
-        $this->iriConverter = $iriConverter;
+        $this->commandItemIriArgumentToIdentifierMap = $commandItemIriArgumentToIdentifierMap;
     }
 
     public function supportsDenormalization($data, $type, $format = null, array $context = [])
     {
-        return $this->getInputClassName($context) === AddProductReview::class ? true : false;
+        return $this->commandItemIriArgumentToIdentifierMap->has($this->getInputClassName($context));
     }
 
     public function denormalize($data, $type, $format = null, array $context = [])
     {
-        /** @var ProductInterface $product */
-        $product = $this->iriConverter->getItemFromIri($data['product']);
+        /** @psalm-var class-string $inputClassName */
+        $inputClassName = $this->getInputClassName($context);
 
-        $data['product'] = $product->getCode();
+        $fieldName = $this->commandItemIriArgumentToIdentifierMap->get($inputClassName);
+
+        if (array_key_exists($fieldName, $data)) {
+            $data[$fieldName] = $this->itemIriToIdentifierConverter->getIdentifier($data[$fieldName]);
+        }
 
         $denormalizedInput = $this->objectNormalizer->denormalize($data, $this->getInputClassName($context), $format, $context);
 

@@ -211,7 +211,6 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->addParameter($key, $value);
     }
 
-    /** @param string|int $value */
     public function clearParameters(): void
     {
         $this->request->clearParameters();

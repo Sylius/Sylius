@@ -40,6 +40,12 @@
             <tag name="api_platform.filter" />
         </service>
 
+        <service id="sylius.api.product_taxon_filter" class="Sylius\Bundle\ApiBundle\Filter\TaxonFilter">
+            <argument type="service" id="doctrine" />
+            <argument type="service" id="api_platform.iri_converter" />
+            <tag name="api_platform.filter" />
+        </service>
+
         <service id="sylius.api.product_name_filter" parent="api_platform.doctrine.orm.search_filter">
             <argument type="collection">
                 <argument key="translations.name">partial</argument>

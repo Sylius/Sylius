@@ -57,7 +57,7 @@ final class LocaleContext implements Context
      */
     public function iShouldBeNotifiedThatThisEmailIsNotValidInLocale(string $localeCode): void
     {
-        Assert::same($this->createPage->getValidationMessage('email'), $this->translate('sylius.contact.email.invalid',  $localeCode, 'validators'));
+        Assert::same($this->createPage->getValidationMessage('email'), $this->translate('sylius.contact.email.invalid', $localeCode, 'validators'));
     }
 
     /**

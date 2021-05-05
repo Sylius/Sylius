@@ -81,6 +81,7 @@ final class OrderContext implements Context
     /**
      * @Transform :orderNumber
      * @Transform /^an order "([^"]+)"$/
+     * @Transform /^another order "([^"]+)"$/
      * @Transform /^the order "([^"]+)"$/
      * @Transform /^the "([^"]+)" order$/
      */

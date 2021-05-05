@@ -83,21 +83,21 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         $customer->setPhoneNumber('+13104322400')->shouldBeCalled();
         $customer->setUser($shopUser)->shouldBeCalled();
 
-       $channelRepository->findOneByCode('CHANNEL_CODE')->willReturn($channel);
+        $channelRepository->findOneByCode('CHANNEL_CODE')->willReturn($channel);
         $channel->isAccountVerificationRequired()->willReturn(true);
         $generator->generate()->willReturn('TOKEN');
         $shopUser->setEmailVerificationToken('TOKEN')->shouldBeCalled();
 
         $shopUserManager->persist($shopUser)->shouldBeCalled();
 
-        $sendRegistrationEmailCommand = new SendAccountRegistrationEmail('WILL.SMITH@example.com',  'en_US', 'CHANNEL_CODE');
+        $sendRegistrationEmailCommand = new SendAccountRegistrationEmail('WILL.SMITH@example.com', 'en_US', 'CHANNEL_CODE');
         $commandBus
             ->dispatch($sendRegistrationEmailCommand, [new DispatchAfterCurrentBusStamp()])
             ->shouldBeCalled()
             ->willReturn(new Envelope($sendRegistrationEmailCommand))
         ;
 
-        $sendVerificationEmailCommand = new SendAccountVerificationEmail('WILL.SMITH@example.com',  'en_US', 'CHANNEL_CODE');
+        $sendVerificationEmailCommand = new SendAccountVerificationEmail('WILL.SMITH@example.com', 'en_US', 'CHANNEL_CODE');
         $commandBus
             ->dispatch($sendVerificationEmailCommand, [new DispatchAfterCurrentBusStamp()])
             ->shouldBeCalled()
@@ -117,7 +117,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         ChannelInterface $channel,
         MessageBusInterface $commandBus
     ): void {
-        $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot','+13104322400',true);
+        $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400', true);
         $command->setChannelCode('CHANNEL_CODE');
         $command->setLocaleCode('en_US');
 
@@ -136,7 +136,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
 
         $shopUserManager->persist($shopUser)->shouldBeCalled();
 
-        $sendRegistrationEmailCommand = new SendAccountRegistrationEmail('WILL.SMITH@example.com',  'en_US', 'CHANNEL_CODE');
+        $sendRegistrationEmailCommand = new SendAccountRegistrationEmail('WILL.SMITH@example.com', 'en_US', 'CHANNEL_CODE');
         $commandBus
             ->dispatch($sendRegistrationEmailCommand, [new DispatchAfterCurrentBusStamp()])
             ->shouldBeCalled()
@@ -166,7 +166,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
 
         $shopUserManager->persist($shopUser)->shouldNotBeCalled();
 
-        $sendRegistrationEmailCommand = new SendAccountRegistrationEmail('WILL.SMITH@example.com',  'en_US', 'CHANNEL_CODE');
+        $sendRegistrationEmailCommand = new SendAccountRegistrationEmail('WILL.SMITH@example.com', 'en_US', 'CHANNEL_CODE');
         $commandBus->dispatch($sendRegistrationEmailCommand)->shouldNotBeCalled()->willReturn(new Envelope($sendRegistrationEmailCommand));
 
         $this

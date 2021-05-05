@@ -27,7 +27,7 @@ abstract class AbstractConfigurableShippingMethodElementType extends AbstractRes
     /** @var FormTypeRegistryInterface */
     private $formTypeRegistry;
 
-    public function __construct(string $dataClass, array $validationGroups = [], FormTypeRegistryInterface $formTypeRegistry)
+    public function __construct(string $dataClass, array $validationGroups, FormTypeRegistryInterface $formTypeRegistry)
     {
         parent::__construct($dataClass, $validationGroups);
 
