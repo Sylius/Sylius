@@ -19,12 +19,6 @@
         <attribute name="id">
             <group>admin:country:read</group>
         </attribute>
-        <attribute name="createdAt">
-           <group>admin:country:read</group>
-       </attribute>
-        <attribute name="updatedAt">
-           <group>admin:country:read</group>
-       </attribute>
        <attribute name="code">
            <group>admin:country:read</group>
            <group>admin:country:create</group>
