@@ -57,8 +57,8 @@
             </subresourceOperation>
         </subresourceOperations>
 
-        <property name="id" identifier="false" writable="false" />
-        <property name="code" identifier="true" required="true" />
+        <property name="id" identifier="true" writable="false" />
+        <property name="code" identifier="false" required="true" />
         <property name="usageLimit" readable="true" />
         <property name="used" readable="true" writable="false"/>
         <property name="promotion" readable="true" />
