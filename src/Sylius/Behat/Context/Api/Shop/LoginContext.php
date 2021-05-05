@@ -18,8 +18,13 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
 use Sylius\Behat\Client\Request;
+use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Behat\Service\SprintfResponseEscaper;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
 use Webmozart\Assert\Assert;
 
@@ -34,17 +39,32 @@ final class LoginContext implements Context
     /** @var IriConverterInterface */
     private $iriConverter;
 
+    /** @var AbstractBrowser */
+    private $shopAuthenticationTokenClient;
+
+    /** @var ResponseCheckerInterface */
+    private $responseChecker;
+
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
     /** @var Request|null */
     private $request;
 
     public function __construct(
         ApiSecurityClientInterface $apiSecurityClient,
         ApiClientInterface $apiClient,
-        IriConverterInterface $iriConverter
+        IriConverterInterface $iriConverter,
+        AbstractBrowser $shopAuthenticationTokenClient,
+        ResponseCheckerInterface $responseChecker,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->apiSecurityClient = $apiSecurityClient;
         $this->apiClient = $apiClient;
         $this->iriConverter = $iriConverter;
+        $this->shopAuthenticationTokenClient = $shopAuthenticationTokenClient;
+        $this->responseChecker = $responseChecker;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -53,6 +73,30 @@ final class LoginContext implements Context
     public function iAmAVisitor(): void
     {
         // Intentionally left blank;
+    }
+
+    /**
+     * @When I am a logged in customer with email :email
+     */
+    public function iAmALoggedInCustomerWithEmail(string $email): void
+    {
+        $this->shopAuthenticationTokenClient->request(
+            'POST',
+            '/api/v2/shop/authentication-token',
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
+            json_encode(['email' => $email, 'password' => 'sylius'])
+        );
+
+        $response = $this->shopAuthenticationTokenClient->getResponse();
+        $content = json_decode($response->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+
+        Assert::keyExists(
+            $content,
+            'token',
+            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Token not found.', $response)
+        );
     }
 
     /**
@@ -226,6 +270,23 @@ final class LoginContext implements Context
         $this->iLogInAsWithPassword($email, $password);
 
         $this->iShouldNotBeLoggedIn();
+    }
+
+    /**
+     * @Then I should see who I am
+     */
+    public function iShouldSeeWhoIAm(): void
+    {
+        /** @var CustomerInterface $customer */
+        $customer = $this->sharedStorage->get('customer');
+
+        Assert::same(
+            $this->responseChecker->getValue(
+                $this->shopAuthenticationTokenClient->getResponse(),
+                'customerId'
+            ),
+            $customer->getId()
+        );
     }
 
     private function addLocale(string $locale): void

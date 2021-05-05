@@ -70,6 +70,7 @@ final class UserContext implements Context
 
     /**
      * @Given I registered with previously used :email email and :password password
+     * @Given I have already registered :email account
      */
     public function theCustomerCreatedAccountWithPassword(string $email, string $password = 'sylius'): void
     {
