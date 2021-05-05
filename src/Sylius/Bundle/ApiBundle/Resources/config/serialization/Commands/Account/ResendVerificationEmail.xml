@@ -19,7 +19,7 @@
         <attribute name="email">
             <group>shop:resend_verification_email:create</group>
         </attribute>
-        <attribute name="localeCode">
+        <attribute name="localeCode" serialized-name="locale">
             <group>shop:resend_verification_email:create</group>
         </attribute>
     </class>

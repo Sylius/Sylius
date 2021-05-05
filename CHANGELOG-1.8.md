@@ -1,5 +1,18 @@
 # CHANGELOG FOR `1.8.X`
 
+## v1.8.12 (2021-04-22)
+
+#### Details
+
+- [#12469](https://github.com/Sylius/Sylius/issues/12469) Extract sylius/admin-api-bundle out of Sylius Core (but keep it installed by default in existing minor releases) ([@pamil](https://github.com/pamil))
+- [#12489](https://github.com/Sylius/Sylius/issues/12489) Build fix Change int to string in GenerateCouponsCommand ([@Tomanhez](https://github.com/Tomanhez))
+- [#12493](https://github.com/Sylius/Sylius/issues/12493) Update model.rst ([@mariogalan](https://github.com/mariogalan))
+- [#12501](https://github.com/Sylius/Sylius/issues/12501) [BUG] Product options null value returns 400 instead of 500 ([@lchrusciel](https://github.com/lchrusciel), [@SirDomin](https://github.com/SirDomin))
+- [#12504](https://github.com/Sylius/Sylius/issues/12504) Change app.php to index.php ([@stefandoorn](https://github.com/stefandoorn))
+- [#12516](https://github.com/Sylius/Sylius/issues/12516) Fix CustomerComponent Typo ([@DennisdeBest](https://github.com/DennisdeBest))
+- [#12522](https://github.com/Sylius/Sylius/issues/12522) Revert BC break in ProductVariantInterface ([@pamil](https://github.com/pamil))
+- [#12523](https://github.com/Sylius/Sylius/issues/12523) Remove Admin API Bundle-related tests ([@pamil](https://github.com/pamil))
+
 ## v1.8.11 (2021-03-22)
 
 #### Details

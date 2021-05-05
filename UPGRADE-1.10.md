@@ -31,3 +31,80 @@
 1. We've removed `Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Doctrine\ORM\SubresourceDataProvider`. It's no longer needed because `ApiPlatform\Core\Bridge\Doctrine\Orm\SubresourceDataProvider` has the same logic.
 
 1. API Change Quantity endpoint `PATCH api/v2/admin/orders/{tokenValue}/change-quantity` has been changed to `PATCH api/v2/admin/orders/{tokenValue}/items/{orderItemId}` and its body value `orderItemId` has been removed (now it is a route parameter) and `newQuantity` has been renamed to `quantity`.
+
+1. API Add to cart endpoint `PATCH /api/v2/shop/orders/{tokenValue}/items` no longer requires `productCode` in request body.
+
+### Commands
+
+1. We've removed `productCode` from `Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart` command.
+
+1. Endpoints with changed code to IRI:
+
+PATCH on `/api/v2/shop/account/orders/{tokenValue}/payments/{paymentId}`:
+
+````
+{
+    - "paymentMethodCode": "string"
+    + "paymentMethod": "string"
+}
+````
+
+POST on `/api/v2/shop/product-reviews`:
+
+````
+{
+      "title": "string",
+      "rating": 0,
+      "comment": "string",
+    - "productCode": "string",
+    + "product": "string",
+      "email": "string"
+}
+````
+
+POST on `/api/v2/shop/reset-password-requests`:
+
+````
+{
+    - "localeCode": "string"
+    + "locale": "string"
+}
+````
+
+
+POST on `api/v2/shop/account-verification-requests`:
+
+````
+{
+    - "localeCode": "string"
+    + "locale": "string"
+}
+````
+
+POST on `/api/v2/shop/orders`:
+
+````
+{
+    - "localeCode": "string"
+    + "locale": "string"
+}
+````
+
+PATCH on `/api/v2/shop/account/orders/{tokenValue}/shipments/{shipmentId}`:
+
+````
+{
+    - "shippingMethodCode": "string"
+    + "shippingMethod": "string"
+}
+````
+
+PATCH on `/api/v2/shop/account/orders/{tokenValue}/items`:
+
+````
+{
+    - "productVariantCode": "string"
+    + "productVariant": "string"
+}
+````
+

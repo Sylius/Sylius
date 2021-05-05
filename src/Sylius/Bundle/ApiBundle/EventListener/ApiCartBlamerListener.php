@@ -22,7 +22,6 @@ use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 final class ApiCartBlamerListener

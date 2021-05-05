@@ -101,7 +101,7 @@ final class ManagingProductOptionsContext implements Context
      * @When I rename it to :name in :language
      * @When I remove its name from :language translation
      */
-    public function iRenameItToInLanguage($name = null, $language)
+    public function iRenameItToInLanguage(string $language, ?string $name = null): void
     {
         $this->updatePage->nameItIn($name ?? '', $language);
     }

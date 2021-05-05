@@ -59,6 +59,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\Component\Routing\RouteCollectionBuilder;
 use winzou\Bundle\StateMachineBundle\winzouStateMachineBundle;
 
 final class TestKernel extends BaseKernel
@@ -170,7 +171,10 @@ final class TestKernel extends BaseKernel
         $loader->load('@SyliusCoreBundle/Resources/config/app/config.yml');
     }
 
-    protected function configureRoutes(RoutingConfigurator $routes): void
+    /**
+     * @param RoutingConfigurator|RouteCollectionBuilder $routes
+     */
+    protected function configureRoutes(object $routes): void
     {
     }
 
