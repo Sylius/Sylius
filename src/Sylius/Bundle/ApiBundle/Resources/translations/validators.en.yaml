@@ -5,5 +5,8 @@ sylius:
         is_verified: 'Account with email %email% is currently verified.'
     order:
         not_empty: 'An empty order cannot be completed.'
+    product:
+        channel:
+            does_not_exist: 'The product %productName% does not exist.'
     shipment:
         shipped: 'You cannot ship a shipment that was shipped before.'
