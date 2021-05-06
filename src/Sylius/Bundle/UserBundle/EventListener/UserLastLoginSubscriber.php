@@ -62,6 +62,11 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
         if (!$user instanceof UserInterface) {
             throw new \UnexpectedValueException('In order to use this subscriber, your class has to implement UserInterface');
         }
+        
+        // Update login time once per day to avoid excessive update query
+        if ($user->getLastLogin() && $user->getLastLogin()->diff(new DateTime('now'))->days === 0) {
+            return;
+        }
 
         $user->setLastLogin(new \DateTime());
         $this->userManager->persist($user);
