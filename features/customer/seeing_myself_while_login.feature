@@ -11,5 +11,5 @@ Feature: Seeing myself while login
 
     @api
     Scenario: Seeing my basic data while login
-        When I am a logged in customer with email "car@better.com"
+        When I log in with the email "car@better.com"
         Then I should see who I am

@@ -20,7 +20,6 @@ use Sylius\Behat\Client\ApiSecurityClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Behat\Service\SprintfResponseEscaper;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -76,9 +75,9 @@ final class LoginContext implements Context
     }
 
     /**
-     * @When I am a logged in customer with email :email
+     * @When I log in with the email :email
      */
-    public function iAmALoggedInCustomerWithEmail(string $email): void
+    public function iLogInWithTheEmail(string $email): void
     {
         $this->shopAuthenticationTokenClient->request(
             'POST',
@@ -92,11 +91,7 @@ final class LoginContext implements Context
         $response = $this->shopAuthenticationTokenClient->getResponse();
         $content = json_decode($response->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
-        Assert::keyExists(
-            $content,
-            'token',
-            'Token not found.'
-        );
+        Assert::keyExists($content, 'token', 'Token not found.');
     }
 
     /**
@@ -283,9 +278,9 @@ final class LoginContext implements Context
         Assert::same(
             $this->responseChecker->getValue(
                 $this->shopAuthenticationTokenClient->getResponse(),
-                'customerId'
+                'customer'
             ),
-            $customer->getId()
+            $this->iriConverter->getIriFromItem($customer)
         );
     }
 
