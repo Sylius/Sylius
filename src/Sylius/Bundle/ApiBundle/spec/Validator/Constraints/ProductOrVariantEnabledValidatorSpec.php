@@ -67,7 +67,7 @@ final class ProductOrVariantEnabledValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $value = new AddItemToCart('productVariantCode', 1);
+        $value = new AddItemToCart('productCode', 'productVariantCode', 1);
         $constraint = new ProductOrVariantEnabled();
         $constraint->message = 'message';
 
@@ -94,7 +94,7 @@ final class ProductOrVariantEnabledValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $value = new AddItemToCart('productVariantCode', 1);
+        $value = new AddItemToCart('productCode', 'productVariantCode', 1);
         $constraint = new ProductOrVariantEnabled();
         $constraint->message = 'message';
 
@@ -131,7 +131,7 @@ final class ProductOrVariantEnabledValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $value = new AddItemToCart('productVariantCode', 1);
+        $value = new AddItemToCart('productCode', 'productVariantCode', 1);
         $constraint = new ProductOrVariantEnabled();
         $constraint->message = 'message';
 
