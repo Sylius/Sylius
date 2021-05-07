@@ -16,7 +16,6 @@ Feature: Preventing adding to cart disabled products
         Given the product "PHP T-Shirt" has been disabled
         When I pick up my cart
         And I try to add product "PHP T-Shirt" to the cart
-        Then I should be informed that product "PHP T-Shirt" is disabled
         Then I should be informed that product "PHP T-Shirt" does not exist
 
     @api
