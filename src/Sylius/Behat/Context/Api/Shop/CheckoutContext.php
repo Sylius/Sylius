@@ -795,7 +795,7 @@ final class CheckoutContext implements Context
     {
         Assert::true($this->isViolationWithMessageInResponse(
             $this->ordersClient->getLastResponse(),
-            sprintf('This product %s does not exist.', $product->getName())
+            sprintf('The product %s does not exist.', $product->getName())
         ));
     }
 
@@ -806,7 +806,7 @@ final class CheckoutContext implements Context
     {
         Assert::true($this->isViolationWithMessageInResponse(
             $this->ordersClient->getLastResponse(),
-            sprintf('This product %s does not exist.', $productVariant->getName())
+            sprintf('The product %s does not exist.', $productVariant->getName())
         ));
     }
 
@@ -865,6 +865,7 @@ final class CheckoutContext implements Context
 
     /**
      * @When /^I try to add ("([^"]+)" product variant)$/
+     * @When /^I try to add ("([^"]+)" variant of product "([^"]+)")$/
      */
     public function iTryToAddProductVariant(ProductVariantInterface $productVariant): void
     {

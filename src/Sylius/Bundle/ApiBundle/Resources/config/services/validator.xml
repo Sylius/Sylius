@@ -38,6 +38,12 @@
             <tag name="validator.constraint_validator" alias="sylius_api_validator_order_shipping_method_eligibility" />
         </service>
 
+        <service id="sylius.api.validator.product_available_in_channel" class="Sylius\Bundle\ApiBundle\Validator\Constraints\ProductAvailableInChannelValidator">
+            <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_product_available_in_channel" />
+        </service>
+
         <service id="sylius.api.validator.product_or_variant_enabled" class="Sylius\Bundle\ApiBundle\Validator\Constraints\ProductOrVariantEnabledValidator">
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_product_or_variant_enabled" />
