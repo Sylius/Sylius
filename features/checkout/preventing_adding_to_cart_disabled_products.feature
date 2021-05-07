@@ -1,7 +1,7 @@
 @checkout
 Feature: Preventing adding to cart disabled products
     In order to have correct products in cart when adding them
-    As a customer
+    As a Customer
     I want to have the added products validated
 
     Background:

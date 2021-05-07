@@ -859,6 +859,7 @@ final class CheckoutContext implements Context
 
     /**
      * @When /^I try to add ("([^"]+)" product variant)$/
+     * @When /^I try to add ("([^"]+)" variant of product "([^"]+)")$/
      */
     public function iTryToAddProductVariant(ProductVariantInterface $productVariant): void
     {

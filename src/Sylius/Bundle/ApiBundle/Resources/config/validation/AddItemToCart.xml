@@ -18,6 +18,11 @@
                 <value>sylius</value>
             </option>
         </constraint>
+        <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\ProductAvailableInChannel">
+            <option name="groups">
+                <value>sylius</value>
+            </option>
+        </constraint>
         <property name="quantity">
             <constraint name="Range">
                 <option name="min">1</option>
