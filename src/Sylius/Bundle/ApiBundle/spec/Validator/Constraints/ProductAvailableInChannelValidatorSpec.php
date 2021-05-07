@@ -52,8 +52,7 @@ final class ProductAvailableInChannelValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [new AddItemToCart('productCode', 'productVariantCode', 1), new class() extends Constraint {
-            }])
+            ->during('validate', [new AddItemToCart('productVariantCode', 1), new class() extends Constraint {}])
         ;
     }
 
@@ -68,7 +67,7 @@ final class ProductAvailableInChannelValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $value = new AddItemToCart('productCode', 'productVariantCode', 1);
+        $value = new AddItemToCart('productVariantCode', 1);
         $value->setOrderTokenValue('TOKEN');
         $constraint = new ProductAvailableInChannel();
         $constraint->message = 'message';
@@ -100,7 +99,7 @@ final class ProductAvailableInChannelValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $value = new AddItemToCart('productCode', 'productVariantCode', 1);
+        $value = new AddItemToCart('productVariantCode', 1);
         $value->setOrderTokenValue('TOKEN');
         $constraint = new ProductAvailableInChannel();
         $constraint->message = 'message';
