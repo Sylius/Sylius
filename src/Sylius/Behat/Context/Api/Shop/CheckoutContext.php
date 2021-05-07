@@ -783,13 +783,24 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then /^I should be informed that ("([^"]*)" product variant) is disabled$/
+     * @Then /^I should be informed that (product "[^"]+") does not exist$/
      */
-    public function iShouldBeInformedThatProductVariantIsDisabled(ProductVariantInterface $productVariant): void
+    public function iShouldBeInformedThatThisProductDoesNotExist(ProductInterface $product): void
     {
         Assert::true($this->isViolationWithMessageInResponse(
             $this->ordersClient->getLastResponse(),
-            sprintf('This product %s has been disabled.', $productVariant->getName())
+            sprintf('This product %s does not exist.', $product->getName())
+        ));
+    }
+
+    /**
+     * @Then /^I should be informed that ("([^"]*)" product variant) does not exist$/
+     */
+    public function iShouldBeInformedThatProductVariantDoesNotExist(ProductVariantInterface $productVariant): void
+    {
+        Assert::true($this->isViolationWithMessageInResponse(
+            $this->ordersClient->getLastResponse(),
+            sprintf('This product %s does not exist.', $productVariant->getName())
         ));
     }
 
