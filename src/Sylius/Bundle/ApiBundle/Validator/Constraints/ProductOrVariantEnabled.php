@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraint;
 final class ProductOrVariantEnabled extends Constraint
 {
     /** @var string */
-    public $message = 'sylius.order.product_eligibility';
+    public $message = 'sylius.order.product_does_not_exist';
 
     public function validatedBy(): string
     {
