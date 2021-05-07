@@ -41,20 +41,20 @@ final class ProductAvailableInChannelValidatorSpec extends ObjectBehavior
         $this->shouldImplement(ConstraintValidatorInterface::class);
     }
 
-    function it_throws_an_exception_if_value_is_not_an_instance_of_product_or_variant_enabled_class(): void
+    function it_throws_an_exception_if_value_is_not_an_instance_of_add_item_to_cart_command(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [new CompleteOrder(), new class() extends Constraint {
-            }]);
+            ->during('validate', [new CompleteOrder(), new ProductAvailableInChannel()]);
     }
 
-    function it_throws_an_exception_if_constraint_is_not_an_instance_of_add_item_to_cart(): void
+    function it_throws_an_exception_if_constraint_is_not_an_instance_of_product_available_in_channel(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', ['', new class() extends Constraint {
-            }]);
+            ->during('validate', [new AddItemToCart('productCode', 'productVariantCode', 1), new class() extends Constraint {
+            }])
+        ;
     }
 
     function it_adds_violation_if_product_is_not_available_in_channel(
@@ -82,11 +82,9 @@ final class ProductAvailableInChannelValidatorSpec extends ObjectBehavior
         $product->hasChannel($channel)->willReturn(false);
         $product->getName()->willReturn('PRODUCTNAME');
         $executionContext
-            ->addViolation(
-                'message',
-                ['%productName%' => 'PRODUCTNAME']
-            )
-            ->shouldBeCalled();
+            ->addViolation('message', ['%productName%' => 'PRODUCTNAME'])
+            ->shouldBeCalled()
+        ;
 
         $this->validate($value, $constraint);
     }
@@ -116,11 +114,9 @@ final class ProductAvailableInChannelValidatorSpec extends ObjectBehavior
         $product->hasChannel($channel)->willReturn(true);
         $product->getName()->willReturn('PRODUCTNAME');
         $executionContext
-            ->addViolation(
-                'message',
-                ['%productName%' => 'PRODUCTNAME']
-            )
-            ->shouldNotBeCalled();
+            ->addViolation('message', ['%productName%' => 'PRODUCTNAME'])
+            ->shouldNotBeCalled()
+        ;
 
         $this->validate($value, $constraint);
     }

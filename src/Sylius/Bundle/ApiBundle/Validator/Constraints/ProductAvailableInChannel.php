@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraint;
 final class ProductAvailableInChannel extends Constraint
 {
     /** @var string */
-    public $message = 'sylius.product.channel.does_not_exist';
+    public $message = 'sylius.product.not_exist';
 
     public function validatedBy(): string
     {
