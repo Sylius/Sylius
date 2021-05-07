@@ -43,14 +43,6 @@ framework:
                     - 'doctrine_transaction'
             sylius_default.bus: *command_bus
             sylius_event.bus: *event_bus
-            
-services:
-    sylius_default.bus:
-        deprecated: 'The "%service_id%" service alias is deprecated.'
-        abstract: true
-    sylius_event.bus:
-        deprecated: 'The "%service_id%" service alias is deprecated.'
-        abstract: true
 
 lexik_jwt_authentication:
     token_extractors:

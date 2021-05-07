@@ -13,6 +13,6 @@ framework:
         # Route your messages to the transports
         # 'App\Message\YourMessage': async
 
-        default_bus: sylius_default.bus
+        default_bus: sylius.command_bus
         buses:
-            sylius_default.bus: ~
+            sylius.command_bus: ~
