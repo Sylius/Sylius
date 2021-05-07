@@ -21,6 +21,7 @@ The Customization Guide is helpful while wanting to adapt Sylius to your persona
     fixtures
     fixture_suites
     tips_and_tricks
+    api
 
 .. include:: /customization/map.rst.inc
 
