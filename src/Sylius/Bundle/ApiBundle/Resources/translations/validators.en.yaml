@@ -4,5 +4,7 @@ sylius:
         product_does_not_exist: 'The product %productName% does not exist.'
     product:
         not_exist: 'The product %productName% does not exist.'
+    product_variant:
+        not_exist: 'The product variant with %productVariantCode% does not exist.'
     shipment:
         shipped: 'You cannot ship a shipment that was shipped before.'
