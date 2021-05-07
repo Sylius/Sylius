@@ -22,7 +22,7 @@ winzou_state_machine:
         callbacks:
             before:
                 sylius_assign_date:
-                    on: "ship"
+                    on: ["ship"]
                     do: ["@sylius.shipping_date_assigner", "assign"]
                     args: ["object"]
                     priority: -200
