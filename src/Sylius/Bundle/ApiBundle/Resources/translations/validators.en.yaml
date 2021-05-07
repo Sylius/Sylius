@@ -1,3 +1,7 @@
 sylius:
     order:
         not_empty: 'An empty order cannot be completed.'
+    product:
+        not_exist: 'The product %productName% does not exist.'
+    shipment:
+        shipped: 'You cannot ship a shipment that was shipped before.'
