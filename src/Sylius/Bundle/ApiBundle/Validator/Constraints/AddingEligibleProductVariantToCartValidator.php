@@ -24,7 +24,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class ProductAvailableInChannelValidator extends ConstraintValidator
+final class AddingEligibleProductVariantToCartValidator extends ConstraintValidator
 {
     /** @var ProductVariantRepositoryInterface */
     private $productVariantRepository;
@@ -44,23 +44,50 @@ final class ProductAvailableInChannelValidator extends ConstraintValidator
     {
         Assert::isInstanceOf($value, AddItemToCart::class);
 
-        /** @var ProductAvailableInChannel $constraint */
-        Assert::isInstanceOf($constraint, ProductAvailableInChannel::class);
+        /** @var AddingEligibleProductVariantToCart $constraint */
+        Assert::isInstanceOf($constraint, AddingEligibleProductVariantToCart::class);
 
-        /** @var OrderInterface $cart */
-        $cart = $this->orderRepository->findCartByTokenValue($value->getOrderTokenValue());
+        /** @var ProductVariantInterface|null $productVariant */
+        $productVariant = $this->productVariantRepository->findOneBy(['code' =>$value->productVariantCode]);
 
-        /** @var ProductVariantInterface $productVariant */
-        $productVariant = $this->productVariantRepository->findOneBy(['code' => $value->productVariantCode]);
+        if ($productVariant === null) {
+            $this->context->addViolation(
+                $constraint->productVariantNotExistMessage,
+                ['%productVariantCode%' => $value->productVariantCode]
+            );
 
-        Assert::notNull($cartChannel = $cart->getChannel());
+            return;
+        }
 
         /** @var ProductInterface $product */
         $product = $productVariant->getProduct();
-
-        if (!$product->hasChannel($cartChannel)) {
+        if (!$product->isEnabled()) {
             $this->context->addViolation(
-                $constraint->message,
+                $constraint->productNotExistMessage,
+                ['%productName%' => $product->getName()]
+            );
+
+            return;
+        }
+
+        if (!$productVariant->isEnabled()) {
+            $this->context->addViolation(
+                $constraint->productVariantNotExistMessage,
+                ['%productVariantCode%' => $productVariant->getCode()]
+            );
+
+            return;
+        }
+
+        /** @var OrderInterface|null $cart */
+        $cart = $this->orderRepository->findCartByTokenValue($value->getOrderTokenValue());
+        Assert::notNull($cart);
+        $channel = $cart->getChannel();
+        Assert::notNull($channel);
+
+        if (!$product->hasChannel($channel)) {
+            $this->context->addViolation(
+                $constraint->productNotExistMessage,
                 ['%productName%' => $product->getName()]
             );
         }

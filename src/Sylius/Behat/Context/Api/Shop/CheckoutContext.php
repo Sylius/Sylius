@@ -806,7 +806,18 @@ final class CheckoutContext implements Context
     {
         Assert::true($this->isViolationWithMessageInResponse(
             $this->ordersClient->getLastResponse(),
-            sprintf('The product %s does not exist.', $productVariant->getName())
+            sprintf('The product variant with %s does not exist.', $productVariant->getCode())
+        ));
+    }
+
+    /**
+     * @Then I should be informed that product variant with code :code does not exist
+     */
+    public function iShouldBeInformedThatProductVariantWithCodeDoesNotExist(string $code): void
+    {
+        Assert::true($this->isViolationWithMessageInResponse(
+            $this->ordersClient->getLastResponse(),
+            sprintf('The product variant with %s does not exist.', $code)
         ));
     }
 
@@ -871,6 +882,15 @@ final class CheckoutContext implements Context
     {
         $tokenValue = $this->getCartTokenValue();
         $this->putVariantToCart($productVariant, $tokenValue);
+    }
+
+    /**
+     * @When /^I try to add (product "[^"]+") with variant code "([^"]+)"$/
+     */
+    public function iTryToAddProductVariantWithCode(ProductInterface $product, string $code): void
+    {
+        $tokenValue = $this->getCartTokenValue();
+        $this->putProductWithVariantCode($product, $tokenValue, $code);
     }
 
     /**
@@ -1153,6 +1173,30 @@ final class CheckoutContext implements Context
         ]);
 
         $this->sharedStorage->set('response', $this->ordersClient->executeCustomRequest($request));
+    }
+
+    private function putProductWithVariantCode(ProductInterface $product, string $tokenValue, string $code): void
+    {
+        $request = $this->preparePutProductRequest($tokenValue);
+
+        $request->setContent([
+            'productCode' => $product->getCode(),
+            'productVariantCode' => $code,
+            'quantity' => 1,
+        ]);
+
+        $this->sharedStorage->set('response', $this->ordersClient->executeCustomRequest($request));
+    }
+
+    private function preparePutProductRequest(string $tokenValue): Request
+    {
+        return Request::customItemAction(
+            'shop',
+            'orders',
+            $tokenValue,
+            HTTPRequest::METHOD_PATCH,
+            'items'
+        );
     }
 
     private function removeOrderItemFromCart(int $orderItemId, string $tokenValue): void
