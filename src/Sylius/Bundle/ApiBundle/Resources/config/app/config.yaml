@@ -34,13 +34,9 @@ framework:
     messenger:
         buses:
             sylius.command_bus: &command_bus
-                middleware:
-                    - 'validation'
-                    - 'doctrine_transaction'
+                default_middleware: allow_no_handlers
             sylius.event_bus: &event_bus
-                middleware:
-                    - 'validation'
-                    - 'doctrine_transaction'
+                default_middleware: allow_no_handlers
             sylius_default.bus: *command_bus
             sylius_event.bus: *event_bus
 
@@ -50,3 +46,4 @@ lexik_jwt_authentication:
             enabled: true
             prefix: Bearer
             name: "%sylius.api.authorization_header%"
+
