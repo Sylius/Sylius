@@ -890,7 +890,21 @@ final class CheckoutContext implements Context
     public function iTryToAddProductVariantWithCode(ProductInterface $product, string $code): void
     {
         $tokenValue = $this->getCartTokenValue();
-        $this->putProductWithVariantCode($product, $tokenValue, $code);
+
+        $request = Request::customItemAction(
+            'shop',
+            'orders',
+            $tokenValue,
+            HTTPRequest::METHOD_PATCH,
+            'items'
+        );
+
+        $request->setContent([
+            'productVariant' => $this->iriConverter->getItemIriFromResourceClass(\get_class($product->getVariants()->first()), ['code' => $code]),
+            'quantity' => 1,
+        ]);
+
+        $this->sharedStorage->set('response', $this->ordersClient->executeCustomRequest($request));
     }
 
     /**
@@ -1173,30 +1187,6 @@ final class CheckoutContext implements Context
         ]);
 
         $this->sharedStorage->set('response', $this->ordersClient->executeCustomRequest($request));
-    }
-
-    private function putProductWithVariantCode(ProductInterface $product, string $tokenValue, string $code): void
-    {
-        $request = $this->preparePutProductRequest($tokenValue);
-
-        $request->setContent([
-            'productCode' => $product->getCode(),
-            'productVariantCode' => $code,
-            'quantity' => 1,
-        ]);
-
-        $this->sharedStorage->set('response', $this->ordersClient->executeCustomRequest($request));
-    }
-
-    private function preparePutProductRequest(string $tokenValue): Request
-    {
-        return Request::customItemAction(
-            'shop',
-            'orders',
-            $tokenValue,
-            HTTPRequest::METHOD_PATCH,
-            'items'
-        );
     }
 
     private function removeOrderItemFromCart(int $orderItemId, string $tokenValue): void
