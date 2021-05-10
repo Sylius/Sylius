@@ -15,24 +15,55 @@ namespace Sylius\Bundle\PayumBundle\Extension;
 
 use Payum\Core\Extension\Context;
 use Payum\Core\Extension\ExtensionInterface;
-use Payum\Core\Request\Generic;
-use Payum\Core\Request\GetStatusInterface;
-use Payum\Core\Request\Notify;
+use Payum\Core\Model\ModelAggregateInterface;
+use Payum\Core\Storage\IdentityInterface;
+use Payum\Core\Storage\StorageInterface;
 use SM\Factory\FactoryInterface;
-use Sylius\Bundle\PayumBundle\Request\GetStatus;
+use SM\SMException;
+use Sylius\Bundle\PayumBundle\Factory\GetStatusFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Webmozart\Assert\Assert;
 
+/**
+ * Reproduction of the Payum Core StorageExtension behaviour for Sylius payments
+ *
+ * @see \Payum\Core\Extension\StorageExtension
+ */
 final class UpdatePaymentStateExtension implements ExtensionInterface
 {
-    public function __construct(private FactoryInterface $factory)
-    {
+    /** @var PaymentInterface[] */
+    private array $scheduledPaymentsToProcess = [];
+
+    public function __construct(
+        private FactoryInterface $factory,
+        private StorageInterface $storage,
+        private GetStatusFactoryInterface $getStatusRequestFactory
+    ) {
     }
 
     public function onPreExecute(Context $context): void
     {
+        /** @var mixed|ModelAggregateInterface $request */
+        $request = $context->getRequest();
+
+        if (false === $request instanceof ModelAggregateInterface) {
+            return;
+        }
+
+        if ($request->getModel() instanceof IdentityInterface) {
+            $payment = $this->storage->find($request->getModel());
+        } else {
+            /** @var PaymentInterface|mixed $payment */
+            $payment = $request->getModel();
+        }
+
+        if (false === $payment instanceof PaymentInterface) {
+            return;
+        }
+
+        $this->scheduleForProcessingIfSupported($payment);
     }
 
     public function onExecute(Context $context): void
@@ -41,56 +72,75 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
 
     public function onPostExecute(Context $context): void
     {
-        $previousStack = $context->getPrevious();
-        $previousStackSize = count($previousStack);
-
-        if ($previousStackSize > 1) {
-            return;
-        }
-
-        if ($previousStackSize === 1) {
-            $previousActionClassName = $previousStack[0]->getAction()::class;
-            if (false === stripos($previousActionClassName, 'NotifyNullAction')) {
-                return;
-            }
-        }
-
-        $request = $context->getRequest();
-
-        if (!$request instanceof Generic) {
-            return;
-        }
-
-        if (!$request instanceof GetStatusInterface && !$request instanceof Notify) {
-            return;
-        }
-
-        $payment = $request->getFirstModel();
-
-        if (!$payment instanceof PaymentInterface) {
-            return;
-        }
-
         if (null !== $context->getException()) {
             return;
         }
 
-        $context->getGateway()->execute($status = new GetStatus($payment));
-        $value = $status->getValue();
-        if ($payment->getState() !== $value && PaymentInterface::STATE_UNKNOWN !== $value) {
-            $this->updatePaymentState($payment, $value);
+        /** @var mixed|ModelAggregateInterface $request */
+        $request = $context->getRequest();
+
+        if ($request instanceof ModelAggregateInterface) {
+            /** @var PaymentInterface|mixed $payment */
+            $payment = $request->getModel();
+            if ($payment instanceof PaymentInterface) {
+                $this->scheduleForProcessingIfSupported($payment);
+            }
         }
+
+        if (count($context->getPrevious()) > 0) {
+            return;
+        }
+
+        foreach ($this->scheduledPaymentsToProcess as $id => $payment) {
+            $this->processPayment($context, $payment);
+            unset($this->scheduledPaymentsToProcess[$id]);
+        }
+    }
+
+    /**
+     * @throws SMException
+     */
+    private function processPayment(Context $context, PaymentInterface $payment): void
+    {
+        $status = $this->getStatusRequestFactory->createNewWithModel($payment);
+        $context->getGateway()->execute($status);
+        $value = (string) $status->getValue();
+        if ($payment->getState() === $value) {
+            return;
+        }
+
+        if (PaymentInterface::STATE_UNKNOWN === $value) {
+            return;
+        }
+
+        $this->updatePaymentState($payment, $value);
     }
 
     private function updatePaymentState(PaymentInterface $payment, string $nextState): void
     {
         $stateMachine = $this->factory->get($payment, PaymentTransitions::GRAPH);
 
-        /** @var StateMachineInterface $stateMachine */
         Assert::isInstanceOf($stateMachine, StateMachineInterface::class);
 
-        if (null !== $transition = $stateMachine->getTransitionToState($nextState)) {
-            $stateMachine->apply($transition);
+        $transition = $stateMachine->getTransitionToState($nextState);
+        if (null === $transition) {
+            return;
         }
+
+        $stateMachine->apply($transition);
+    }
+
+    private function scheduleForProcessingIfSupported(PaymentInterface $payment): void
+    {
+        $id = $payment->getId();
+        if (null === $id) {
+            return;
+        }
+
+        if (false === is_int($id)) {
+            return;
+        }
+
+        $this->scheduledPaymentsToProcess[$id] = $payment;
     }
 }
