@@ -31,6 +31,8 @@
             <argument type="service" id="api_platform.iri_converter" />
         </service>
 
+        <service id="api_platform.message_bus" alias="sylius_default.bus" />
+
         <service
             id="sylius.api.swagger_admin_authentication_documentation_normalizer"
             class="Sylius\Bundle\ApiBundle\Swagger\AdminAuthenticationTokenDocumentationNormalizer"
