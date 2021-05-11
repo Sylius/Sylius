@@ -215,11 +215,11 @@ final class CartContext implements Context
 
     /**
      * @When I pick up my cart (again)
-     * @When I pick up cart in the :locale locale
+     * @When I pick up cart in the :localeCode locale
      */
-    public function iPickUpMyCart(?LocaleInterface $locale = null): void
+    public function iPickUpMyCart(?string $localeCode = null): void
     {
-        $this->pickupCart($locale);
+        $this->pickupCart($localeCode);
     }
 
     /**
@@ -537,13 +537,10 @@ final class CartContext implements Context
         throw new \DomainException(sprintf('Could not find item with option "%s" set to "%s"', $optionName, $optionValue));
     }
 
-    private function pickupCart(?LocaleInterface $locale = null): string
+    private function pickupCart(?string $localeCode = null): string
     {
         $this->cartsClient->buildCreateRequest();
-        $this->cartsClient->addRequestData('locale', null);
-        if ($locale !== null) {
-            $this->cartsClient->addRequestData('locale', $this->iriConverter->getIriFromItem($locale));
-        }
+        $this->cartsClient->addRequestData('localeCode', $localeCode);
 
         $tokenValue = $this->responseChecker->getValue($this->cartsClient->create(), 'tokenValue');
 

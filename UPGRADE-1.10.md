@@ -81,15 +81,6 @@ POST on `api/v2/shop/account-verification-requests`:
 }
 ````
 
-POST on `/api/v2/shop/orders`:
-
-````
-{
-    - "localeCode": "string"
-    + "locale": "string"
-}
-````
-
 PATCH on `/api/v2/shop/account/orders/{tokenValue}/shipments/{shipmentId}`:
 
 ````
