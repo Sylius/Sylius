@@ -795,7 +795,7 @@ final class CheckoutContext implements Context
     {
         Assert::true($this->isViolationWithMessageInResponse(
             $this->ordersClient->getLastResponse(),
-            sprintf('This product %s does not exist.', $product->getName())
+            sprintf('The product %s does not exist.', $product->getName())
         ));
     }
 
@@ -806,7 +806,18 @@ final class CheckoutContext implements Context
     {
         Assert::true($this->isViolationWithMessageInResponse(
             $this->ordersClient->getLastResponse(),
-            sprintf('This product %s does not exist.', $productVariant->getName())
+            sprintf('The product variant with %s does not exist.', $productVariant->getCode())
+        ));
+    }
+
+    /**
+     * @Then I should be informed that product variant with code :code does not exist
+     */
+    public function iShouldBeInformedThatProductVariantWithCodeDoesNotExist(string $code): void
+    {
+        Assert::true($this->isViolationWithMessageInResponse(
+            $this->ordersClient->getLastResponse(),
+            sprintf('The product variant with %s does not exist.', $code)
         ));
     }
 
@@ -865,11 +876,35 @@ final class CheckoutContext implements Context
 
     /**
      * @When /^I try to add ("([^"]+)" product variant)$/
+     * @When /^I try to add ("([^"]+)" variant of product "([^"]+)")$/
      */
     public function iTryToAddProductVariant(ProductVariantInterface $productVariant): void
     {
         $tokenValue = $this->getCartTokenValue();
         $this->putVariantToCart($productVariant, $tokenValue);
+    }
+
+    /**
+     * @When /^I try to add (product "[^"]+") with variant code "([^"]+)"$/
+     */
+    public function iTryToAddProductVariantWithCode(ProductInterface $product, string $code): void
+    {
+        $tokenValue = $this->getCartTokenValue();
+
+        $request = Request::customItemAction(
+            'shop',
+            'orders',
+            $tokenValue,
+            HTTPRequest::METHOD_PATCH,
+            'items'
+        );
+
+        $request->setContent([
+            'productVariant' => $this->iriConverter->getItemIriFromResourceClass(\get_class($product->getVariants()->first()), ['code' => $code]),
+            'quantity' => 1,
+        ]);
+
+        $this->sharedStorage->set('response', $this->ordersClient->executeCustomRequest($request));
     }
 
     /**

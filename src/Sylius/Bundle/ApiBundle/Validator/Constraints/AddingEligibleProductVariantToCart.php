@@ -16,14 +16,17 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 
 /** @experimental */
-final class ProductOrVariantEnabled extends Constraint
+final class AddingEligibleProductVariantToCart extends Constraint
 {
     /** @var string */
-    public $message = 'sylius.order.product_does_not_exist';
+    public $productNotExistMessage = 'sylius.product.not_exist';
+
+    /** @var string */
+    public $productVariantNotExistMessage = 'sylius.product_variant.not_exist';
 
     public function validatedBy(): string
     {
-        return 'sylius_api_validator_product_or_variant_enabled';
+        return 'sylius_api_validator_adding_eligible_product_variant_to_cart';
     }
 
     public function getTargets(): string
