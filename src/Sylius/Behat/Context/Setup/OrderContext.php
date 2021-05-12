@@ -133,11 +133,16 @@ final class OrderContext implements Context
      * @Given a customer :customer placed an order :orderNumber
      * @Given the customer :customer has already placed an order :orderNumber
      * @Given there is a customer :customer that placed an order :orderNumber in channel :channel
+     * @Given /^(this customer) placed (another order "[^"]+")$/
      */
-    public function thereIsCustomerThatPlacedOrder(CustomerInterface $customer, $orderNumber = null, $channel = null)
-    {
+    public function thereIsCustomerThatPlacedOrder(
+        CustomerInterface $customer,
+        string $orderNumber = null,
+        ChannelInterface $channel = null
+    ): void {
         $order = $this->createOrder($customer, $orderNumber, $channel);
 
+        $this->sharedStorage->set('customer', $customer);
         $this->sharedStorage->set('order', $order);
 
         $this->orderRepository->add($order);
@@ -641,9 +646,9 @@ final class OrderContext implements Context
      * @Given then :numberOfCustomers more customers have placed :numberOfOrders orders for total of :total
      */
     public function customersHavePlacedOrdersForTotalOf(
+        string $total,
         int $numberOfCustomers = 1,
-        int $numberOfOrders = 1,
-        string $total
+        int $numberOfOrders = 1
     ): void {
         $this->createOrders($numberOfCustomers, $numberOfOrders, $total);
     }

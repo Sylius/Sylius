@@ -3,3 +3,5 @@ suites:
         namespace: Sylius\Bundle\PaymentBundle
         psr4_prefix: Sylius\Bundle\PaymentBundle
         src_path: .
+
+runner.maintainers.errors.level: 14335 # E_ALL & ~E_USER_DEPRECATED ^ E_STRICT

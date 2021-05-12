@@ -92,7 +92,6 @@ final class CartContext implements Context
 
         $this->commandBus->dispatch(AddItemToCart::createFromData(
             $tokenValue,
-            $productVariant->getProduct()->getCode(),
             $productVariant->getCode(),
             1
         ));
@@ -115,7 +114,6 @@ final class CartContext implements Context
 
         $this->commandBus->dispatch(AddItemToCart::createFromData(
             $tokenValue,
-            $product->getCode(),
             $this
                 ->getProductVariantWithProductOptionAndProductOptionValue(
                     $product,
@@ -185,7 +183,6 @@ final class CartContext implements Context
 
         $this->commandBus->dispatch(AddItemToCart::createFromData(
             $tokenValue,
-            $product->getCode(),
             $this->productVariantResolver->getVariant($product)->getCode(),
             $quantity
         ));
