@@ -50,11 +50,15 @@ final class TaxonFilter extends AbstractContextAwareFilter
         $alias = $queryBuilder->getRootAliases()[0];
 
         $queryBuilder
+            ->distinct()
+            ->addSelect('productTaxon')
             ->join(sprintf('%s.productTaxons', $alias), 'p')
+            ->innerJoin($alias . '.productTaxons', 'productTaxon')
             ->innerJoin('p.taxon', 'taxon')
             ->andWhere('taxon.left >= :taxonLeft')
             ->andWhere('taxon.right <= :taxonRight')
             ->andWhere('taxon.root = :taxonRoot')
+            ->addOrderBy('productTaxon.position')
             ->setParameter('taxonLeft', $taxon->getLeft())
             ->setParameter('taxonRight', $taxon->getRight())
             ->setParameter('taxonRoot', $taxon->getRoot())

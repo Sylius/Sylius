@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -223,6 +224,30 @@ final class ProductContext implements Context
     public function iShouldSeeEmptyListOfProducts(): void
     {
         Assert::same($this->responseChecker->countTotalCollectionItems($this->client->getLastResponse()), 0);
+    }
+
+    /**
+     * @Then I should see :count products in the list
+     */
+    public function iShouldSeeProductsInTheList(int $count): void
+    {
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
+    }
+
+    /**
+     * @Then they should have order like :firstProductName, :secondProductName and :thirdProductName
+     */
+    public function theyShouldHaveOrderLikeAnd(string ...$productNames): void
+    {
+        $productNamesFromResponse = new ArrayCollection();
+
+        foreach ($this->responseChecker->getCollection($this->client->getLastResponse()) as $productItem) {
+            $productNamesFromResponse->add($productItem['translations']['en_US']['name']);
+        }
+
+        foreach ($productNamesFromResponse as $key => $name) {
+            Assert::same($name, $productNames[$key]);
+        }
     }
 
     private function hasProductWithPrice(array $products, int $price, ?string $productCode = null): bool
