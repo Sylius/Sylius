@@ -29,7 +29,7 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/payment-methods/{id}</attribute>
+                <attribute name="path">/admin/payment-methods/{code}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:payment_method:read</attribute>
                 </attribute>
@@ -45,14 +45,15 @@
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/payment-methods/{id}</attribute>
+                <attribute name="path">/shop/payment-methods/{code}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:payment_method:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="true" writable="false" />
+        <property name="id" identifier="false" writable="false" />
+        <property name="code" identifier="true" writable="false" />
         <property name="name" writable="true" />
         <property name="description" writable="true" />
         <property name="enabled" writable="true" />

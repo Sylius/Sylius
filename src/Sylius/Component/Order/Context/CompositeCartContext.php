@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Order\Context;
 
-use Sylius\Component\Order\Model\OrderInterface;
 use Laminas\Stdlib\PriorityQueue;
+use Sylius\Component\Order\Model\OrderInterface;
 
 final class CompositeCartContext implements CartContextInterface
 {

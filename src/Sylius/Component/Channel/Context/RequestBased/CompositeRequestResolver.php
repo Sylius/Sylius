@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Channel\Context\RequestBased;
 
+use Laminas\Stdlib\PriorityQueue;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Laminas\Stdlib\PriorityQueue;
 
 final class CompositeRequestResolver implements RequestResolverInterface
 {

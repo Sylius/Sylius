@@ -29,7 +29,7 @@ final class ProductVariantDocumentationNormalizer implements NormalizerInterface
         $docs['components']['schemas']['ProductVariant:jsonld-product_variant:read']['properties']['price'] = [
             'type' => 'int',
             'readOnly' => true,
-            'default' => 0
+            'default' => 0,
         ];
 
         return $docs;

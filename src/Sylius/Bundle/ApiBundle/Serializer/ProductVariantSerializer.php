@@ -38,6 +38,7 @@ final class ProductVariantSerializer implements ContextAwareNormalizerInterface
         Assert::isInstanceOf($object, ProductVariantInterface::class);
 
         $data = $this->objectNormalizer->normalize($object, $format, $context);
+
         try {
             $data['price'] = $this->priceCalculator->calculate($object, ['channel' => $this->channelContext->getChannel()]);
         } catch (ChannelNotFoundException $exception) {
@@ -49,7 +50,7 @@ final class ProductVariantSerializer implements ContextAwareNormalizerInterface
 
     public function supportsNormalization($data, $format = null, $context = []): bool
     {
-       return $data instanceof ProductVariantInterface && $this->isAdminGetOperation($context);
+        return $data instanceof ProductVariantInterface && $this->isAdminGetOperation($context);
     }
 
     private function isAdminGetOperation(array $context): bool

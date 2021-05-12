@@ -66,7 +66,6 @@ final class ResendVerificationEmailHandlerSpec extends ObjectBehavior
             [new DispatchAfterCurrentBusStamp()]
         )->willReturn(new Envelope($sendAccountVerificationEmail))->shouldBeCalled();
 
-
         $resendVerificationEmail = new ResendVerificationEmail('test@email.com');
         $resendVerificationEmail->setChannelCode('WEB');
         $resendVerificationEmail->setLocaleCode('en_US');

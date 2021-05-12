@@ -15,13 +15,12 @@ namespace Sylius\Bundle\CoreBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CircularDependencyBreakingErrorListenerPass;
+use Sylius\Bundle\CoreBundle\EventListener\CircularDependencyBreakingErrorListener;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Sylius\Bundle\CoreBundle\EventListener\CircularDependencyBreakingErrorListener;
 
 final class CircularDependencyBreakingErrorListenerPassTest extends AbstractCompilerPassTestCase
 {
-
     public function it_register_circular_dependency_breaking_error_listener_when_exception_listener_is_registered(): void
     {
         $this->container->setDefinition('exception_listener', new Definition('ExceptionListener'));
