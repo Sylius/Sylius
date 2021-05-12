@@ -115,6 +115,10 @@ final class CartContext implements Context
      */
     public function iAddThisProductToTheCart(ProductInterface $product, ?string $tokenValue): void
     {
+        if (!$this->sharedStorage->has('cart_token')) {
+            $this->pickupCart();
+        }
+
         $this->putProductToCart($product, $tokenValue);
 
         $this->sharedStorage->set('product', $product);
@@ -332,6 +336,24 @@ final class CartContext implements Context
             $this->responseChecker->isUpdateSuccessful($response),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Quantity of an order item cannot be lower than 1.', $response)
         );
+    }
+
+    /**
+     * @Then /^I should see "([^"]+)" with unit price ("[^"]+") in my cart$/
+     */
+    public function iShouldSeeProductWithUnitPriceInMyCart(string $productName, int $unitPrice): void
+    {
+        $response = $this->cartsClient->getLastResponse();
+
+        foreach ($this->responseChecker->getValue($response, 'items') as $item) {
+            if ($item['productName'] === $productName) {
+                Assert::same($item['unitPrice'], $unitPrice);
+
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf('The product %s does not exist', $productName));
     }
 
     /**
