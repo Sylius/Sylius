@@ -112,10 +112,10 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     {
         $attribute = $this->getDocument()->find('css', sprintf('.attribute .attribute-label:contains("%s")', $attributeName));
 
-        return
+        return (
             $attribute->getParent()->getParent()->find('css', '.attribute-input input')->getValue() === $value &&
             $attribute->find('css', '.globe.icon') !== null
-        ;
+        );
     }
 
     public function selectMainTaxon(TaxonInterface $taxon): void

@@ -5,6 +5,7 @@ Feature: Viewing products from taxon children
     I want to be able to view products from taxon and from taxon children
 
     Background:
+        Given the store has currency "Euro"
         And the store operates on a channel named "Poland"
         And the store classifies its products as "T-Shirts"
         And the "T-Shirts" taxon has children taxon "Men" and "Women"
@@ -23,7 +24,7 @@ Feature: Viewing products from taxon children
         And this product belongs to "T-Shirts"
         And this product belongs to "Men"
 
-    @ui @api
+    @ui
     Scenario: Viewing products from taxon children
         When I browse products from taxon "T-Shirts"
         Then I should see the product "T-Shirt Coconut"

@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
+use ApiPlatform\Core\Serializer\SerializerContextBuilderInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Order\Model\Order;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class ProductVariantSerializerSpec extends ObjectBehavior
@@ -31,8 +33,7 @@ final class ProductVariantSerializerSpec extends ObjectBehavior
         $this->beConstructedWith($objectNormalizer, $pricesCalculator, $channelContext);
     }
 
-    function it_supports_only_product_variant_interface(): void
-    {
+    function it_supports_only_product_variant_interface(): void {
         $variant = new ProductVariant();
         $this->supportsNormalization($variant)->shouldReturn(true);
 
@@ -40,8 +41,7 @@ final class ProductVariantSerializerSpec extends ObjectBehavior
         $this->supportsNormalization($order)->shouldReturn(false);
     }
 
-    function it_does_not_serialize_if_item_operation_name_is_admin_get(): void
-    {
+    function it_does_not_serialize_if_item_operation_name_is_admin_get(): void {
         $variant = new ProductVariant();
         $this->supportsNormalization($variant, null, ['item_operation_name' => 'admin_get'])->shouldReturn(false);
     }

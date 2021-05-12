@@ -45,6 +45,6 @@ final class VerifyCustomerAccountHandler implements MessageHandlerInterface
         $user->setEmailVerificationToken(null);
         $user->enable();
 
-        return new JsonResponse([]);
+        return new JsonResponse([]) ;
     }
 }

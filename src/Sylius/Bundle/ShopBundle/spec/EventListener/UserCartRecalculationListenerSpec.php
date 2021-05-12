@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\AdminBundle\SectionResolver\AdminSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\ShopBundle\SectionResolver\ShopSection;
 use Sylius\Bundle\UserBundle\Event\UserEvent;

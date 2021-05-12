@@ -390,9 +390,6 @@
     "nette/finder": {
         "version": "v2.5.2"
     },
-    "nette/neon": {
-        "version": "v3.2.2"
-    },
     "nette/robot-loader": {
         "version": "v3.3.0"
     },
@@ -638,6 +635,9 @@
     },
     "squizlabs/php_codesniffer": {
         "version": "3.3.1"
+    },
+    "sspooky13/yaml-standards": {
+        "version": "5.0.0"
     },
     "stof/doctrine-extensions-bundle": {
         "version": "1.2",
@@ -1039,44 +1039,29 @@
     "symfony/yaml": {
         "version": "v4.4.13"
     },
+    "symplify/auto-bind-parameter": {
+        "version": "v8.2.9"
+    },
     "symplify/autowire-array-parameter": {
         "version": "v8.2.9"
     },
     "symplify/coding-standard": {
         "version": "v8.1.19"
     },
-    "symplify/composer-json-manipulator": {
-        "version": "v9.3.0"
-    },
     "symplify/console-color-diff": {
         "version": "v8.2.9"
-    },
-    "symplify/console-package-builder": {
-        "version": "v9.3.0"
     },
     "symplify/easy-coding-standard": {
         "version": "v8.1.19"
     },
-    "symplify/easy-testing": {
-        "version": "v9.3.0"
-    },
     "symplify/package-builder": {
         "version": "8.2.21"
-    },
-    "symplify/rule-doc-generator-contracts": {
-        "version": "v9.3.0"
     },
     "symplify/set-config-resolver": {
         "version": "8.2.21"
     },
-    "symplify/skipper": {
-        "version": "v9.3.0"
-    },
     "symplify/smart-file-system": {
         "version": "8.2.21"
-    },
-    "symplify/symplify-kernel": {
-        "version": "v9.3.0"
     },
     "textalk/websocket": {
         "version": "1.2.0"

@@ -15,19 +15,17 @@ Installing Sylius Plus as a plugin to a Sylius application
 +---------------+-----------------------+
 | PHP           | ^7.3                  |
 +---------------+-----------------------+
-| sylius/sylius | ^1.9                  |
-+---------------+-----------------------+
-| Symfony       | ^5.2                  |
+| sylius/sylius | ^1.7                  |
 +---------------+-----------------------+
 
 **0.** Prepare project:
 
 .. tip::
 
-    If it is a new project you are initiating, then first install Sylius-Standard in **version ^1.9** according to
+    If it is a new project you are initiating, then first install Sylius-Standard in **version ^1.6** according to
     :doc:`these instructions </book/installation/installation>`.
 
-    If you're installing Plus package to an existing project, then make sure you're upgraded to ``sylius/sylius ^1.9``.
+    If you're installing Plus package to an existing project, then make sure you're upgraded to ``sylius/sylius ^1.7``.
 
 **1.** Configure access to the private Packagist package in composer by using the Access Token you have been given with your license.
 
@@ -64,6 +62,13 @@ Installing Sylius Plus as a plugin to a Sylius application
     imports:
     ...
         - { resource: "@SyliusPlusPlugin/Resources/config/config.yaml" }
+
+.. code-block:: yaml
+
+    // config/packages/messenger.yaml
+    framework:
+        messenger:
+            default_bus: sylius_invoicing_plugin.command_bus
 
 **5.** Configure Shop, Admin and Admin API routing:
 
@@ -103,14 +108,13 @@ Installing Sylius Plus as a plugin to a Sylius application
 * Customer
 * Order
 * ProductVariant
-* Shipment (trait + interface from RefundPlugin)
-* Adjustment (interface from RefundPlugin)
+* Shipment
 
 .. code-block:: php
 
-    <?php
-
     // src/Entity/User/AdminUser.php
+
+    <?php
 
     declare(strict_types=1);
 
@@ -145,9 +149,9 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: php
 
-    <?php
-
     // src/Entity/Channel/Channel.php
+
+    <?php
 
     declare(strict_types=1);
 
@@ -170,9 +174,9 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: php
 
-    <?php
-
     // src/Entity/Customer/Customer.php
+
+    <?php
 
     declare(strict_types=1);
 
@@ -195,9 +199,9 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: php
 
-    <?php
-
     // src/Entity/Order/Order.php
+
+    <?php
 
     declare(strict_types=1);
 
@@ -220,9 +224,9 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: php
 
-    <?php
-
     // src/Entity/Product/ProductVariant.php
+
+    <?php
 
     declare(strict_types=1);
 
@@ -260,9 +264,9 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: php
 
-    <?php
-
     // src/Entity/Shipping/Shipment.php
+
+    <?php
 
     declare(strict_types=1);
 
@@ -273,51 +277,26 @@ Installing Sylius Plus as a plugin to a Sylius application
     use Sylius\Component\Core\Model\Shipment as BaseShipment;
     use Sylius\Plus\Entity\ShipmentInterface;
     use Sylius\Plus\Entity\ShipmentTrait;
-    use Sylius\RefundPlugin\Entity\ShipmentInterface as RefundShipmentInterface;
 
     /**
      * @Entity
      * @Table(name="sylius_shipment")
      */
-    class Shipment extends BaseShipment implements ShipmentInterface, RefundShipmentInterface
+    class Shipment extends BaseShipment implements ShipmentInterface
     {
         use ShipmentTrait;
     }
 
-.. code-block:: php
+**7.** Copy and apply migrations:
 
-    <?php
+Copy Sylius Plus migrations from ``vendor/sylius/plus/migrations/`` to your migrations directory (e.g. ``src/Migrations``)
+and apply them to your database:
 
-    // src/Entity/Order/Adjustment.php
+.. code-block:: bash
 
-    declare(strict_types=1);
-
-    namespace App\Entity\Order;
-
-    use Doctrine\ORM\Mapping as ORM;
-    use Sylius\Component\Core\Model\Adjustment as BaseAdjustment;
-    use Sylius\RefundPlugin\Entity\AdjustmentInterface as RefundAdjustmentInterface;
-
-    /**
-     * @ORM\Entity
-     * @ORM\Table(name="sylius_adjustment")
-     */
-    class Adjustment extends BaseAdjustment implements RefundAdjustmentInterface
-    {
-    }
-
-**7.** Add wkhtmltopdf binary for Invoicing purposes.
-
-If you do not have the ``wkhtmltopdf`` binary, download it `here <https://wkhtmltopdf.org/downloads.html>`_.
-
-In case wkhtmltopdf is not located in ``/usr/local/bin/wkhtmltopdf``, add the following snippet at the end of
-your application's ``.env`` file:
-
-.. code-block:: yaml
-
-    ###> knplabs/knp-snappy-bundle ###
-    WKHTMLTOPDF_PATH=/your-path
-    ###< knplabs/knp-snappy-bundle ###
+    bin/console doctrine:database:create --if-not-exists
+    cp -f vendor/sylius/plus/migrations/* src/Migrations
+    bin/console doctrine:migrations:migrate -n
 
 **8.** Install Sylius with Sylius Plus fixtures:
 
@@ -333,13 +312,26 @@ your application's ``.env`` file:
 
         bin/console sylius:install --fixture-suite plus -n
 
-**9.** Copy templates that are overridden by Sylius Plus into ``templates/bundles``:
+**9.** Add wkhtmltopdf binary for Invoicing purposes.
+
+If you do not have the ``wkhtmltopdf`` binary, download it `here <https://wkhtmltopdf.org/downloads.html>`_.
+
+In case wkhtmltopdf is not located in ``/usr/local/bin/wkhtmltopdf``, add the following snippet at the end of
+your application's ``.env`` file:
+
+.. code-block:: yaml
+
+    ###> knplabs/knp-snappy-bundle ###
+    WKHTMLTOPDF_PATH=/your-path
+    ###< knplabs/knp-snappy-bundle ###
+
+**10.** Copy templates that are overridden by Sylius Plus into ``templates/bundles``:
 
 .. code-block:: bash
 
     cp -fr vendor/sylius/plus/src/Resources/templates/bundles/* templates/bundles
 
-**10.** Install JS libraries using Yarn:
+**11.** Install JS libraries using Yarn:
 
 .. code-block:: bash
 
@@ -347,14 +339,7 @@ your application's ``.env`` file:
     yarn build
     bin/console assets:install --ansi
 
-**11.** Rebuild cache for proper display of all translations:
-
-.. code-block:: bash
-
-    bin/console cache:clear
-    bin/console cache:warmup
-
-**12.** For more details check the installation guides for all plugins installed as dependencies with Sylius Plus.
+**12.** Additionally check the installation guides for all plugins installed as dependencies with Sylius Plus.
 
 * `Sylius/InvoicingPlugin <https://github.com/Sylius/InvoicingPlugin/blob/master/README.md#installation>`_
 * `Sylius/RefundPlugin <https://github.com/Sylius/RefundPlugin/blob/master/README.md#installation>`_

@@ -3,5 +3,3 @@ suites:
         namespace: Sylius\Component\Shipping
         psr4_prefix: Sylius\Component\Shipping
         src_path: .
-
-runner.maintainers.errors.level: 14335 # E_ALL & ~E_USER_DEPRECATED ^ E_STRICT

@@ -22,8 +22,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 
 final class LoggedInShopUserEmailAwareCommandDataTransformerSpec extends ObjectBehavior
 {
-    function let(UserContextInterface $userContext)
-    {
+    function let(UserContextInterface $userContext) {
         $this->beConstructedWith($userContext);
     }
 

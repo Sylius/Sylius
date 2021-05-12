@@ -36,7 +36,7 @@ final class RequestResetPasswordTokenHandlerSpec extends ObjectBehavior
         ShopUserInterface $shopUser,
         GeneratorInterface $generator,
         MessageBusInterface $messageBus
-    ): void {
+    ): void{
         $userRepository->findOneByEmail('test@email.com')->willReturn($shopUser);
 
         $generator->generate()->willReturn('TOKEN');
@@ -49,6 +49,7 @@ final class RequestResetPasswordTokenHandlerSpec extends ObjectBehavior
             $sendResetPasswordEmail,
             [new DispatchAfterCurrentBusStamp()]
         )->willReturn(new Envelope($sendResetPasswordEmail))->shouldBeCalled();
+
 
         $requestResetPasswordToken = new RequestResetPasswordToken('test@email.com');
         $requestResetPasswordToken->setChannelCode('WEB');

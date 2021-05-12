@@ -22,7 +22,6 @@ default:
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.taxonomy
 
-                - sylius.behat.context.api.shop.channel
                 - sylius.behat.context.api.shop.product
 
             filters:

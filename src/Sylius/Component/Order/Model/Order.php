@@ -293,8 +293,6 @@ class Order implements OrderInterface
 
             $this->removeAdjustment($adjustment);
         }
-
-        $this->recalculateAdjustmentsTotal();
     }
 
     public function removeAdjustmentsRecursively(?string $type = null): void

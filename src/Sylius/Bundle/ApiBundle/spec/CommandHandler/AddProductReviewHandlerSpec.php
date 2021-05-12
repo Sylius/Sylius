@@ -87,7 +87,7 @@ final class AddProductReviewHandlerSpec extends ObjectBehavior
                     5,
                     'Really good stuff',
                     'winter_cap'
-                ),
+                )
             ])
         ;
     }

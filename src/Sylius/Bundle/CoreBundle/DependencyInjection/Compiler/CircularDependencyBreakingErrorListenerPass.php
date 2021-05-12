@@ -29,7 +29,7 @@ final class CircularDependencyBreakingErrorListenerPass implements CompilerPassI
 
         $definition = new Definition(CircularDependencyBreakingErrorListener::class);
         $definition->setDecoratedService('exception_listener');
-        $definition->addArgument(new Reference(CircularDependencyBreakingErrorListener::class . '.inner'));
+        $definition->addArgument(new Reference(CircularDependencyBreakingErrorListener::class .'.inner'));
 
         $container->setDefinition(
             CircularDependencyBreakingErrorListener::class,

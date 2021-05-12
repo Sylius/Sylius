@@ -15,6 +15,8 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\ChangeShopUserPassword;
+use Sylius\Bundle\ApiBundle\Command\ResetPassword;
+use Sylius\Bundle\ApiBundle\Validator\Constraints\ConfirmResetPassword;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectChangeShopUserConfirmPassword;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -32,7 +34,7 @@ final class CorrectChangeShopUserConfirmPasswordValidatorSpec extends ObjectBeha
         $constraint = new CorrectChangeShopUserConfirmPassword();
         $this->initialize($executionContext);
 
-        $value = new ChangeShopUserPassword('password', 'password', 'current');
+        $value = new ChangeShopUserPassword('password','password', 'current');
 
         $executionContext->buildViolation('sylius.user.plainPassword.mismatch')->shouldNotBeCalled();
 
@@ -46,7 +48,7 @@ final class CorrectChangeShopUserConfirmPasswordValidatorSpec extends ObjectBeha
         $constraint = new CorrectChangeShopUserConfirmPassword();
         $this->initialize($executionContext);
 
-        $value = new ChangeShopUserPassword('password', 'notaPassword', 'current');
+        $value = new ChangeShopUserPassword('password','notaPassword', 'current');
 
         $executionContext->buildViolation('sylius.user.plainPassword.mismatch')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('newPassword')->willReturn($constraintViolationBuilder);

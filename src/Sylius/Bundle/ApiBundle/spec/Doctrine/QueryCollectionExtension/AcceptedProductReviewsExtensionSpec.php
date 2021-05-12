@@ -62,4 +62,5 @@ class AcceptedProductReviewsExtensionSpec extends ObjectBehavior
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductReview::class, 'shop_get', []);
     }
+
 }

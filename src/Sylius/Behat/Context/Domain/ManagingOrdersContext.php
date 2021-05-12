@@ -170,7 +170,6 @@ final class ManagingOrdersContext implements Context
     {
         Assert::notSame($order->getState(), OrderInterface::STATE_CANCELLED);
     }
-
     /**
      * @Then /^(the order)'s items total should be ("[^"]+")$/
      */

@@ -75,7 +75,7 @@ final class OrderContext implements Context
             $this->client->getToken()
         );
 
-        $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromItem($paymentMethod)]);
+        $request->setContent(['paymentMethodCode' => $paymentMethod->getCode()]);
 
         $this->client->executeCustomRequest($request);
     }
@@ -308,7 +308,7 @@ final class OrderContext implements Context
             ->getValue($this->client->getLastResponse(), 'payments')[0]['method']['@id']
         ;
 
-        Assert::same($this->iriConverter->getItemFromIri($paymentMethodIri)->getCode(), $paymentMethod->getCode());
+        Assert::same($this->iriConverter->getItemFromIri($paymentMethodIri)->getId(), $paymentMethod->getId());
     }
 
     private function getAdjustmentsForOrder(): array

@@ -175,7 +175,6 @@ final class OrderSpec extends ObjectBehavior
         $this->removeAdjustment($adjustment);
 
         $this->hasAdjustment($adjustment)->shouldReturn(false);
-        $this->getAdjustmentsTotal()->shouldReturn(0);
     }
 
     function it_removes_adjustments_recursively_properly(
@@ -198,7 +197,6 @@ final class OrderSpec extends ObjectBehavior
         $this->removeAdjustmentsRecursively();
 
         $this->hasAdjustment($orderAdjustment)->shouldReturn(false);
-        $this->getAdjustmentsTotal()->shouldReturn(0);
     }
 
     function it_removes_adjustments_recursively_by_type_properly(
@@ -234,7 +232,6 @@ final class OrderSpec extends ObjectBehavior
 
         $this->hasAdjustment($orderPromotionAdjustment)->shouldReturn(true);
         $this->hasAdjustment($orderTaxAdjustment)->shouldReturn(false);
-        $this->getAdjustmentsTotal('tax')->shouldReturn(0);
     }
 
     function it_returns_adjustments_recursively(

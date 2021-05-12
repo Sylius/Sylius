@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
@@ -24,6 +23,7 @@ use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,9 +52,6 @@ final class CartContext implements Context
     /** @var ProductVariantResolverInterface */
     private $productVariantResolver;
 
-    /** @var IriConverterInterface */
-    private $iriConverter;
-
     public function __construct(
         ApiClientInterface $cartsClient,
         ApiClientInterface $ordersAdminClient,
@@ -62,8 +59,7 @@ final class CartContext implements Context
         ApiClientInterface $productVariantsClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
-        ProductVariantResolverInterface $productVariantResolver,
-        IriConverterInterface $iriConverter
+        ProductVariantResolverInterface $productVariantResolver
     ) {
         $this->cartsClient = $cartsClient;
         $this->ordersAdminClient = $ordersAdminClient;
@@ -72,7 +68,6 @@ final class CartContext implements Context
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
         $this->productVariantResolver = $productVariantResolver;
-        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -148,7 +143,7 @@ final class CartContext implements Context
     ): void {
         $productData = json_decode($this->productsClient->show($product->getCode())->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
-        $variantIri = null;
+        $variantCode = null;
         foreach ($productData['options'] as $optionIri) {
             $optionData = json_decode($this->productsClient->showByIri($optionIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
@@ -171,11 +166,11 @@ final class CartContext implements Context
 
                 Assert::same($variantsData['hydra:totalItems'], 1);
 
-                $variantIri = $variantsData['@id'] . '/' . $variantsData['hydra:member'][0]['code'];
+                $variantCode = $variantsData['hydra:member'][0]['code'];
             }
         }
 
-        if (null === $variantIri) {
+        if (null === $variantCode) {
             throw new \DomainException(sprintf('Could not find variant with option "%s" set to "%s"', $productOption, $productOptionValue));
         }
 
@@ -185,7 +180,7 @@ final class CartContext implements Context
 
         $request->updateContent([
             'productCode' => $productData['code'],
-            'productVariant' => $variantIri,
+            'productVariantCode' => $variantCode,
             'quantity' => 1,
         ]);
 
@@ -200,8 +195,8 @@ final class CartContext implements Context
      */
     public function iChangeQuantityToInMyCart(ProductInterface $product, int $quantity, string $tokenValue): void
     {
-        $itemResponse = $this->getOrderItemResponseFromProductInCart($product, $tokenValue);
-        $this->changeQuantityOfOrderItem((string) $itemResponse['id'], $quantity, $tokenValue);
+        $itemId = $this->geOrderItemIdForProductInCart($product, $tokenValue);
+        $this->changeQuantityOfOrderItem($itemId, $quantity, $tokenValue);
     }
 
     /**
@@ -209,17 +204,17 @@ final class CartContext implements Context
      */
     public function iRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
     {
-        $itemResponse = $this->getOrderItemResponseFromProductInCart($product, $tokenValue);
-        $this->removeOrderItemFromCart((string) $itemResponse['id'], $tokenValue);
+        $itemId = $this->geOrderItemIdForProductInCart($product, $tokenValue);
+        $this->removeOrderItemFromCart($itemId, $tokenValue);
     }
 
     /**
      * @When I pick up my cart (again)
-     * @When I pick up cart in the :locale locale
+     * @When I pick up cart in the :localeCode locale
      */
-    public function iPickUpMyCart(?LocaleInterface $locale = null): void
+    public function iPickUpMyCart(?string $localeCode = null): void
     {
-        $this->pickupCart($locale);
+        $this->pickupCart($localeCode);
     }
 
     /**
@@ -537,14 +532,10 @@ final class CartContext implements Context
         throw new \DomainException(sprintf('Could not find item with option "%s" set to "%s"', $optionName, $optionValue));
     }
 
-    private function pickupCart(?LocaleInterface $locale = null): string
+    private function pickupCart(?string $localeCode = null): string
     {
         $this->cartsClient->buildCreateRequest();
-        $this->cartsClient->addRequestData('locale', null);
-        if ($locale !== null) {
-            $this->cartsClient->addRequestData('locale', $this->iriConverter->getIriFromItem($locale));
-        }
-
+        $this->cartsClient->addRequestData('localeCode', $localeCode);
         $tokenValue = $this->responseChecker->getValue($this->cartsClient->create(), 'tokenValue');
 
         $this->sharedStorage->set('cart_token', $tokenValue);
@@ -559,7 +550,8 @@ final class CartContext implements Context
         $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
 
         $request->updateContent([
-            'productVariant' => $this->iriConverter->getIriFromItem($this->productVariantResolver->getVariant($product)),
+            'productCode' => $product->getCode(),
+            'productVariantCode' => $this->productVariantResolver->getVariant($product)->getCode(),
             'quantity' => $quantity,
         ]);
 
@@ -573,7 +565,8 @@ final class CartContext implements Context
         $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
 
         $request->updateContent([
-            'productVariant' => $this->iriConverter->getIriFromItem($productVariant),
+            'productCode' => $productVariant->getProduct()->getCode(),
+            'productVariantCode' => $productVariant->getCode(),
             'quantity' => $quantity,
         ]);
 
@@ -589,6 +582,7 @@ final class CartContext implements Context
             HttpRequest::METHOD_DELETE,
             \sprintf('items/%s', $orderItemId)
         );
+
 
         $this->cartsClient->executeCustomRequest($request);
     }
@@ -621,14 +615,14 @@ final class CartContext implements Context
         return $this->cartsClient->getLastResponse();
     }
 
-    private function getOrderItemResponseFromProductInCart(ProductInterface $product, string $tokenValue): ?array
+    private function geOrderItemIdForProductInCart(ProductInterface $product, string $tokenValue): ?string
     {
         $items = $this->responseChecker->getValue($this->cartsClient->show($tokenValue), 'items');
 
         foreach ($items as $item) {
             $response = $this->getProductForItem($item);
             if ($this->responseChecker->hasValue($response, 'code', $product->getCode())) {
-                return $item;
+                return (string) $item['id'];
             }
         }
 
