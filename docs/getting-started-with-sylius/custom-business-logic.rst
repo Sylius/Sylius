@@ -129,6 +129,89 @@ For 4 products:
 
 |
 
+Or if you are using unified API:
+
+First You need to pickup new cart:
+
+.. code-block:: bash
+
+    curl -X POST "https://master.demo.sylius.com/api/v2/shop/orders" -H "accept: application/ld+json"
+
+With empty body:
+
+.. code-block:: json
+
+    {}
+
+This should return a response with ``tokenValue`` which we would need for next API calls:
+
+.. code-block:: json
+
+    {
+        "shippingState": "string",
+        "tokenValue": "CART_TOKEN",
+        "id": 123,
+    }
+
+Then we need to add product to the cart but first it would be good to have any, You can use this call to retrieve some products:
+
+.. code-block:: bash
+
+    curl -X GET "https://master.demo.sylius.com/api/v2/shop/products?page=1&itemsPerPage=30" -H  "accept: application/ld+json"
+
+And choose any product variant IRI that you would like to add to your cart:
+
+.. code-block:: bash
+
+    curl --location --request PATCH 'https://127.0.0.1:8000/api/v2/shop/orders/CART_TOKEN/items' -H 'Content-Type: application/merge-patch+json'
+
+With product variant of choose in body:
+
+.. code-block:: json
+
+    {
+        "productVariant": "/api/v2/shop/product-variants/PRODUCT_VARIANT_IRI",
+        "quantity": 1
+    }
+
+This should return a response with the cart which should contain ``shippingTotal``:
+
+.. code-block:: json
+
+    {
+        "taxTotal": 0,
+        "shippingTotal": 500,
+        "orderPromotionTotal": 0
+    }
+
+.. attention::
+
+    API returns costs in decimal numbers that's why in response it is 500 currency unit shipping total (which stands for 5 USD in this case).
+
+Now let's change the quantity of our product variant. We can do it by once again calling endpoint as above, or by utilising ``changeQuantity`` endpoint:
+
+.. code-block:: bash
+
+    curl --location --request PATCH 'https://127.0.0.1:8000/api/v2/shop/orders/CART_TOKEN/items/ORDER_ITEM_ID' -H 'Content-Type: application/merge-patch+json'
+
+With new quantity in body:
+
+.. code-block:: json
+
+    {
+      "quantity": 4
+    }
+
+Which should return a response with the cart:
+
+.. code-block:: json
+
+    {
+        "taxTotal": 0,
+        "shippingTotal": 1000,
+        "orderPromotionTotal": 0
+    }
+
 Amazing job! You've just provided your own logic into a Sylius-based system. Therefore, your store can provide a unique
 experience for your Customers. Basing on this knowledge, you're ready to customize your shop even more and make it as suitable
 to your business needs as possible.
@@ -141,3 +224,4 @@ Learn more
 * :doc:`Checkout </book/orders/checkout>`
 * :doc:`Orders </book/orders/orders>`
 * :doc:`Adjustments </book/orders/adjustments>`
+* :doc:`Unified API </api/index>`
