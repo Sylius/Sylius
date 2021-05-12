@@ -78,14 +78,5 @@
             <argument type="service" id="sylius.api.context.user" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
-
-        <service
-            id="sylius.api.doctrine.query_collection_extension.sort_product_by_position_in_taxon"
-            class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\SortProductsByPositionInTaxon"
-            public="true"
-        >
-            <argument type="service" id="sylius.api.context.user" />
-            <tag name="api_platform.doctrine.orm.query_extension.collection" />
-        </service>
     </services>
 </container>

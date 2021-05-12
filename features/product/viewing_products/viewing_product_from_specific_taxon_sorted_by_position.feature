@@ -1,7 +1,7 @@
 @viewing_products
 Feature: Viewing products from specific taxon sorted by position
     In order to see product in order chosen by shop owner
-    As a Shop User
+    As a Visitor
     I want to see sorted products
 
     Background:
