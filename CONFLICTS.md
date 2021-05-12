@@ -53,3 +53,12 @@ references related issues.
    `ParseError - vendor/symfony/polyfill-mbstring/bootstrap80.php:125:86 - Syntax error, unexpected '=' on line 125 (see https://psalm.dev/173) function mb_scrub(string $string, string $encoding = null): string { $encoding ??= mb_internal_encoding(); return mb_convert_encoding($string, $encoding, $encoding); }`
 
    References: https://github.com/vimeo/psalm/issues/4961
+
+ - `symfony/property-info:4.4.22|5.2.7`:
+
+   These versions of Symfony PropertyInfo Component introduce a bug with resolving wrong namespace for some translation entities 
+   in Swagger UI docs for API.
+   
+   The potential solution would be to explicitly define these translation entities as API resources with proper serialization.
+
+   Probably introduced in: https://github.com/symfony/symfony/pull/40811
