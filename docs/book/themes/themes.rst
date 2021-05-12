@@ -83,16 +83,8 @@ When you create a new asset or delete an existing one, it is required to rerun t
 
 4. Customize a template:
 
-In order to customize the login view you should take the content of ``@SyliusShopBundle/views/login.html.twig`` file and ...
-
-* Before theme-bundle v2,
-  paste it to your theme directory: ``themes/CrimsonTheme/SyliusShopBundle/views/login.html.twig``
-  (There are more informations in the official documentation about `theme structure v1.5.1 <https://github.com/Sylius/SyliusThemeBundle/blob/v1.5.1/docs/your_first_theme.md#theme-structure>`_)
-
-
-* From `theme-bundle v2 <https://github.com/Sylius/SyliusThemeBundle/releases/tag/v2.0.0>`_,
-  paste it to your theme directory: ``themes/CrimsonTheme/templates/bundle/SyliusShopBundle/login.html.twig``
-  (There are more informations in the official documentation about `theme structure v2.0.0 <https://github.com/Sylius/SyliusThemeBundle/blob/v2.0.0/docs/your_first_theme.md#theme-structure>`_)
+In order to customize the login view you should take the content of ``@SyliusShopBundle/views/login.html.twig`` file
+and paste it to your theme directory: ``themes/CrimsonTheme/SyliusShopBundle/views/login.html.twig``
 
 Let's remove the registration column in this example:
 
@@ -124,8 +116,6 @@ Let's remove the registration column in this example:
 .. tip::
 
    Learn more about customizing templates :doc:`here </customization/template>`.
-
-   You can check major modifications in theme-bundle structure and configuration `here <https://github.com/Sylius/SyliusThemeBundle/blob/master/docs/important_changes.md>`_
 
 5. Choose your new theme on the channel:
 

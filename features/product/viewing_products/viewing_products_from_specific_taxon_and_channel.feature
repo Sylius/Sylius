@@ -5,8 +5,9 @@ Feature: Viewing products from a specific taxon and a channel
     I want to be able to view products from a specific taxon and a channel
 
     Background:
-        Given the store operates on a channel named "Poland" with hostname "poland"
-        And the store operates on another channel named "United States" with hostname "united-states"
+        Given the store has currency "Euro"
+        And the store operates on a channel named "Poland"
+        And the store operates on another channel named "United States"
         And the store classifies its products as "T-Shirts" and "Funny"
         And the store has a product "T-Shirt Banana" available in "Poland" channel
         And this product belongs to "T-Shirts"
@@ -14,14 +15,14 @@ Feature: Viewing products from a specific taxon and a channel
         And the store has a product "T-Shirt Batman" available in "United States" channel
         And this product belongs to "T-Shirts"
 
-    @ui @api
+    @ui
     Scenario: Viewing products from a specific taxon in selected channel
         Given I am browsing channel "Poland"
         When I browse products from taxon "T-Shirts"
         Then I should see the product "T-Shirt Banana"
         And I should not see the product "T-Shirt Batman"
 
-    @ui @api
+    @ui
     Scenario: Viewing information about empty list of products from a given taxon in selected channel
         Given I am browsing channel "United States"
         When I browse products from taxon "Funny"

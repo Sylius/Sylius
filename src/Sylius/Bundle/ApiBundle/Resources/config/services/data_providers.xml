@@ -119,12 +119,14 @@
         <service id="sylius.api.context.user" class="Sylius\Bundle\ApiBundle\Context\TokenBasedUserContext">
             <argument type="service" id="security.token_storage" />
         </service>
-        
+
         <service
-            id="sylius.api.item_data_provider.verify_customer_account"
-            class="Sylius\Bundle\ApiBundle\DataProvider\VerifyCustomerAccountItemDataProvider"
+            id="sylius.api.collection_data_provider.orders"
+            class="Sylius\Bundle\ApiBundle\DataProvider\OrderCollectionDataProvider"
         >
-            <tag name="api_platform.item_data_provider" priority="10" />
+            <argument type="service" id="sylius.api.context.user" />
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="api_platform.collection_data_provider" priority="10" />
         </service>
 
         <service id="sylius.api.collection_data_provider.inventory" class="Sylius\Bundle\ApiBundle\DataProvider\InventoryCollectionDataProvider">
@@ -136,6 +138,13 @@
         <service id="sylius.api.item_data_provider.inventory" class="Sylius\Bundle\ApiBundle\DataProvider\InventoryItemDataProvider">
             <argument type="service" id="sylius.repository.product_variant" />
             <argument type="service" id="sylius.api.context.user" />
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
+        
+        <service
+            id="sylius.api.item_data_provider.verify_customer_account"
+            class="Sylius\Bundle\ApiBundle\DataProvider\VerifyCustomerAccountItemDataProvider"
+        >
             <tag name="api_platform.item_data_provider" priority="10" />
         </service>
     </services>

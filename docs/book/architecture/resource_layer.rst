@@ -100,8 +100,8 @@ The repository service is available via the *sylius.repository.product* id and c
     An important feature of the repositories are the ``add($resource)`` and ``remove($resource)`` methods,
     which take a resource as an argument and perform the adding/removing action with a flush inside.
 
-    These actions can be used when the performance of operations is negligible. If you want
-    to perform operations on large sets of data we recommend using the manager instead.
+    These actions can be used when the performance of operations may be neglected. If you are willing
+    to perform operations on sets of data we are suggesting to use the manager instead.
 
 Every Sylius repository supports paginating resources. To create a `Pagerfanta instance <https://github.com/whiteoctober/Pagerfanta>`_ use the ``createPaginator`` method:
 

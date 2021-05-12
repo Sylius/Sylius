@@ -13,11 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\DependencyInjection;
 
+use Payum\Bundle\PayumBundle\Controller;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 final class SyliusPayumExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {

@@ -30,7 +30,7 @@ final class CircularDependencyBreakingExceptionListenerPass implements CompilerP
 
         $definition = new Definition(CircularDependencyBreakingExceptionListener::class);
         $definition->setDecoratedService('twig.exception_listener');
-        $definition->addArgument(new Reference(CircularDependencyBreakingExceptionListener::class . '.inner'));
+        $definition->addArgument(new Reference(CircularDependencyBreakingExceptionListener::class .'.inner'));
 
         $container->setDefinition(
             CircularDependencyBreakingExceptionListener::class,

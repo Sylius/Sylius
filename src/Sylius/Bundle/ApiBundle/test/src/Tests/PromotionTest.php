@@ -42,7 +42,7 @@ final class PromotionTest extends ApiTestCase
             'hydra:member' => [
                 [
                   '@type' => 'Promotion',
-                  'name' => 'Sunday promotion',
+                  'name' => 'Sunday promotion'
                 ],
             ],
             'hydra:totalItems' => 1,
@@ -70,7 +70,7 @@ final class PromotionTest extends ApiTestCase
             'hydra:member' => [
                 [
                     '@type' => 'Promotion',
-                    'name' => 'Sunday promotion',
+                    'name' => 'Sunday promotion'
                 ],
             ],
             'hydra:totalItems' => 1,

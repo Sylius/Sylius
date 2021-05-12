@@ -20,6 +20,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ProductReviewContext implements Context
@@ -195,7 +196,6 @@ final class ProductReviewContext implements Context
     {
         $this->assertViolation('Review title must have at least 2 characters.', 'title');
     }
-
     /**
      * @Then I should be notified that title must have at most 255 characters
      */

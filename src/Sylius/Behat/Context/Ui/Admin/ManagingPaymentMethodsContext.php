@@ -72,7 +72,7 @@ final class ManagingPaymentMethodsContext implements Context
      * @When I rename it to :name in :language
      * @When I remove its name from :language translation
      */
-    public function iNameItIn(string $language, ?string $name = null): void
+    public function iNameItIn($name = null, $language)
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);

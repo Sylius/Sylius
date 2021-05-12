@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
@@ -26,7 +25,6 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
@@ -66,9 +64,6 @@ final class CheckoutContext implements Context
     /** @var ProductVariantResolverInterface */
     private $productVariantResolver;
 
-    /** @var IriConverterInterface */
-    private $iriConverter;
-
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
@@ -83,7 +78,6 @@ final class CheckoutContext implements Context
         OrderRepositoryInterface $orderRepository,
         RepositoryInterface $paymentMethodRepository,
         ProductVariantResolverInterface $productVariantResolver,
-        IriConverterInterface $iriConverter,
         SharedStorageInterface $sharedStorage
     ) {
         $this->ordersClient = $ordersClient;
@@ -93,7 +87,6 @@ final class CheckoutContext implements Context
         $this->orderRepository = $orderRepository;
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->productVariantResolver = $productVariantResolver;
-        $this->iriConverter = $iriConverter;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -349,7 +342,7 @@ final class CheckoutContext implements Context
             sprintf('shipments/%s', $this->getCart()['shipments'][0]['id'])
         );
 
-        $request->setContent(['shippingMethod' => $this->iriConverter->getIriFromItem($shippingMethod)]);
+        $request->setContent(['shippingMethodCode' => $shippingMethod->getCode()]);
 
         $this->ordersClient->executeCustomRequest($request);
     }
@@ -397,7 +390,7 @@ final class CheckoutContext implements Context
             \sprintf('payments/%s', $this->getCart()['payments'][0]['id'])
         );
 
-        $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromItem($paymentMethod)]);
+        $request->setContent(['paymentMethodCode' => $paymentMethod->getCode()]);
 
         $this->ordersClient->executeCustomRequest($request);
     }
@@ -778,24 +771,12 @@ final class CheckoutContext implements Context
 
     /**
      * @Then /^I should be informed that (this product) has been disabled$/
-     * @Then /^I should be informed that (product "[^"]+") is disabled$/
      */
     public function iShouldBeInformedThatThisProductHasBeenDisabled(ProductInterface $product): void
     {
         Assert::true($this->isViolationWithMessageInResponse(
             $this->ordersClient->getLastResponse(),
             sprintf('This product %s has been disabled.', $product->getName())
-        ));
-    }
-
-    /**
-     * @Then /^I should be informed that ("([^"]*)" product variant) is disabled$/
-     */
-    public function iShouldBeInformedThatProductVariantIsDisabled(ProductVariantInterface $productVariant): void
-    {
-        Assert::true($this->isViolationWithMessageInResponse(
-            $this->ordersClient->getLastResponse(),
-            sprintf('This product %s has been disabled.', $productVariant->getName())
         ));
     }
 
@@ -850,15 +831,6 @@ final class CheckoutContext implements Context
     public function iTryToAddProductToCart(ProductInterface $product, string $tokenValue): void
     {
         $this->putProductToCart($product, $tokenValue);
-    }
-
-    /**
-     * @When /^I try to add ("([^"]+)" product variant)$/
-     */
-    public function iTryToAddProductVariant(ProductVariantInterface $productVariant): void
-    {
-        $tokenValue = $this->getCartTokenValue();
-        $this->putVariantToCart($productVariant, $tokenValue);
     }
 
     /**
@@ -1122,11 +1094,6 @@ final class CheckoutContext implements Context
     {
         Assert::notNull($productVariant = $this->productVariantResolver->getVariant($product));
 
-        $this->putVariantToCart($productVariant, $tokenValue, $quantity);
-    }
-
-    private function putVariantToCart(ProductVariantInterface $productVariant, string $tokenValue, int $quantity = 1): void
-    {
         $request = Request::customItemAction(
             'shop',
             'orders',
@@ -1136,7 +1103,8 @@ final class CheckoutContext implements Context
         );
 
         $request->setContent([
-            'productVariant' => $this->iriConverter->getIriFromItem($productVariant),
+            'productCode' => $product->getCode(),
+            'productVariantCode' => $productVariant->getCode(),
             'quantity' => $quantity,
         ]);
 

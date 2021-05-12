@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\DataProvider;
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Sylius\Bundle\ApiBundle\Command\ResetPassword;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 /** @experimental */
 final class ResetPasswordItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface

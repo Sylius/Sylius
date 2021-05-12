@@ -60,6 +60,7 @@ interface ApiClientInterface
     /** @param string|int $value */
     public function addFilter(string $key, $value): void;
 
+    /** @param string|int $value */
     public function clearParameters(): void;
 
     public function addFile(string $key, UploadedFile $file): void;

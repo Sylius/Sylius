@@ -1,26 +1,5 @@
 # CHANGELOG FOR `1.9.X`
 
-## v1.9.3 (2021-04-22)
-
-#### Details
-
-- [#12458](https://github.com/Sylius/Sylius/issues/12458) [Locale] Current locale set on request ([@lchrusciel](https://github.com/lchrusciel), [@SirDomin](https://github.com/SirDomin))
-- [#12469](https://github.com/Sylius/Sylius/issues/12469) Extract sylius/admin-api-bundle out of Sylius Core (but keep it installed by default in existing minor releases) ([@pamil](https://github.com/pamil))
-- [#12475](https://github.com/Sylius/Sylius/issues/12475) [Taxation] Fix applying shipment taxes for multiple shipments ([@GSadee](https://github.com/GSadee))
-- [#12489](https://github.com/Sylius/Sylius/issues/12489) Build fix Change int to string in GenerateCouponsCommand ([@Tomanhez](https://github.com/Tomanhez))
-- [#12493](https://github.com/Sylius/Sylius/issues/12493) Update model.rst ([@mariogalan](https://github.com/mariogalan))
-- [#12494](https://github.com/Sylius/Sylius/issues/12494) [Behat][Customer] Fix assertions ([@GSadee](https://github.com/GSadee))
-- [#12500](https://github.com/Sylius/Sylius/issues/12500) [Documentation] Customizing credit memo ([@pamil](https://github.com/pamil))
-- [#12501](https://github.com/Sylius/Sylius/issues/12501) [BUG] Product options null value returns 400 instead of 500 ([@lchrusciel](https://github.com/lchrusciel), [@SirDomin](https://github.com/SirDomin))
-- [#12504](https://github.com/Sylius/Sylius/issues/12504) Change app.php to index.php ([@stefandoorn](https://github.com/stefandoorn))
-- [#12508](https://github.com/Sylius/Sylius/issues/12508) Fix the build by solving errors reported by static analysis tools ([@pamil](https://github.com/pamil))
-- [#12516](https://github.com/Sylius/Sylius/issues/12516) Fix CustomerComponent Typo ([@DennisdeBest](https://github.com/DennisdeBest))
-- [#12522](https://github.com/Sylius/Sylius/issues/12522) Revert BC break in ProductVariantInterface ([@pamil](https://github.com/pamil))
-- [#12523](https://github.com/Sylius/Sylius/issues/12523) Remove Admin API Bundle-related tests ([@pamil](https://github.com/pamil))
-- [#12525](https://github.com/Sylius/Sylius/issues/12525) Move note from UPGRADE-1.8 to UPGRADE-1.9 file ([@GSadee](https://github.com/GSadee))
-- [#12535](https://github.com/Sylius/Sylius/issues/12535) [API] Add prefix to subresource endpoint of order item's adjustments ([@GSadee](https://github.com/GSadee))
-- [#12546](https://github.com/Sylius/Sylius/issues/12546) [Minor] Use explicit bus instead of the default one ([@lchrusciel](https://github.com/lchrusciel))
-
 ## v1.9.2 (2021-03-23)
 
 #### Details

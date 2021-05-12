@@ -60,7 +60,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
     ): void {
         $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
         $productVariantRepository
-            ->findOneBy(['code' => 'PRODUCT_VARIANT_CODE'])
+            ->findOneByCodeAndProductCode('PRODUCT_VARIANT_CODE', 'PRODUCT_CODE')
             ->willReturn($productVariant)
         ;
 
@@ -73,6 +73,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
 
         $this(AddItemToCart::createFromData(
             'TOKEN',
+            'PRODUCT_CODE',
             'PRODUCT_VARIANT_CODE',
             5
         ))->shouldReturn($cart);
@@ -82,7 +83,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
         ProductVariantRepositoryInterface $productVariantRepository,
         CartItemFactoryInterface $cartItemFactory
     ): void {
-        $productVariantRepository->findOneBy(['code' => 'PRODUCT_VARIANT_CODE'])->willReturn(null);
+        $productVariantRepository->findOneByCodeAndProductCode('PRODUCT_VARIANT_CODE', 'PRODUCT_CODE')->willReturn(null);
 
         $cartItemFactory->createNew()->shouldNotBeCalled();
 
@@ -90,6 +91,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('__invoke', [AddItemToCart::createFromData(
                 'TOKEN',
+                'PRODUCT_CODE',
                 'PRODUCT_VARIANT_CODE',
                 1
             )])
@@ -103,7 +105,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
         ProductVariantInterface $productVariant
     ): void {
         $productVariantRepository
-            ->findOneBy(['code' => 'PRODUCT_VARIANT_CODE'])
+            ->findOneByCodeAndProductCode('PRODUCT_VARIANT_CODE', 'PRODUCT_CODE')
             ->willReturn($productVariant)
         ;
 
@@ -115,6 +117,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('__invoke', [AddItemToCart::createFromData(
                 'TOKEN',
+                'PRODUCT_CODE',
                 'PRODUCT_VARIANT_CODE',
                 1
             )])

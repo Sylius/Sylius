@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ReviewBundle\Doctrine\ORM\Subscriber;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Webmozart\Assert\Assert;
 
 final class LoadMetadataSubscriber implements EventSubscriber
 {

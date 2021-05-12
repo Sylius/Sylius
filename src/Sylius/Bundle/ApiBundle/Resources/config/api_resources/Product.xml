@@ -45,7 +45,6 @@
                     <attribute>sylius.api.product_order_filter</attribute>
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
                     <attribute>sylius.api.translation_order_name_and_locale_filter</attribute>
-                    <attribute>sylius.api.product_taxon_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:product:read</attribute>
