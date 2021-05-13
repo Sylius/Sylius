@@ -80,6 +80,12 @@ Sylius uses email as the username, that's why we choose emails as ``scope`` for 
     * Click ``+Add Platform`` and choose "Website" type.
     * Provide the **Site URL** of the platform - your local server on which you run Sylius: ``http://localhost:8000``
 
+    Alternatively, you could temporarily expose your localhost to be publicly accessible, using a tool like `ngrok <https://ngrok.com/>`_.
+    Facebook app configuration would be similar to:
+
+    * **App Domain**: ``abcde12345.ngrok.io``
+    * **Site URL** ``http://abcde12345.ngrok.io``
+
 Configure the security layer
 ----------------------------
 
