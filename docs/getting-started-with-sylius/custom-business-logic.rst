@@ -129,21 +129,27 @@ For 4 products:
 
 |
 
-Or if you are using unified API:
+This customization should also work when using unified API without any extra steps:
 
-First You need to pickup new cart:
+First, you need to pickup new cart:
 
 .. code-block:: bash
 
     curl -X POST "https://master.demo.sylius.com/api/v2/shop/orders" -H "accept: application/ld+json"
 
-With empty body:
+With body:
 
 .. code-block:: json
 
-    {}
+    {
+        "localeCode": "string"
+    }
 
-This should return a response with ``tokenValue`` which we would need for next API calls:
+.. note::
+
+    The ``localeCode`` value is optional in body of pickup cart. This means that if you won't provide it, the default locale from channel will be used.
+
+This should return a response with ``tokenValue`` which we would need for the next API calls:
 
 .. code-block:: json
 
@@ -153,7 +159,7 @@ This should return a response with ``tokenValue`` which we would need for next A
         "id": 123,
     }
 
-Then we need to add product to the cart but first it would be good to have any, You can use this call to retrieve some products:
+Then we need to add a product to the cart but first, it would be good to have any. You can use this call to retrieve some products:
 
 .. code-block:: bash
 
@@ -165,7 +171,7 @@ And choose any product variant IRI that you would like to add to your cart:
 
     curl --location --request PATCH 'https://127.0.0.1:8000/api/v2/shop/orders/CART_TOKEN/items' -H 'Content-Type: application/merge-patch+json'
 
-With product variant of choose in body:
+With a chosen product variant in the body:
 
 .. code-block:: json
 
@@ -174,7 +180,7 @@ With product variant of choose in body:
         "quantity": 1
     }
 
-This should return a response with the cart which should contain ``shippingTotal``:
+This should return a response with the cart that should contain a ``shippingTotal``:
 
 .. code-block:: json
 
@@ -188,7 +194,7 @@ This should return a response with the cart which should contain ``shippingTotal
 
     API returns costs in decimal numbers that's why in response it is 500 currency unit shipping total (which stands for 5 USD in this case).
 
-Now let's change the quantity of our product variant. We can do it by once again calling endpoint as above, or by utilising ``changeQuantity`` endpoint:
+Now let's change the quantity of our product variant. We can do it by calling the endpoint above once again, or by utilizing the ``changeQuantity`` endpoint:
 
 .. code-block:: bash
 
