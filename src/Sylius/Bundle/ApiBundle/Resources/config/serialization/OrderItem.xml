@@ -48,7 +48,6 @@
         </attribute>
         <attribute name="unitPrice">
             <group>admin:order_item:read</group>
-            <group>shop:order_item:read</group>
             <group>shop:cart:read</group>
         </attribute>
         <attribute name="units">
@@ -90,7 +89,6 @@
         <attribute name="total">
             <group>admin:order:read</group>
             <group>admin:order_item:read</group>
-<!--            <group>shop:order_item:read</group>-->
         </attribute>
     </class>
 </serializer>
