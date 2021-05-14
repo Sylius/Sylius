@@ -1,0 +1,19 @@
+---------------------------------------------------------------------------
+
+by stloyd at 2021-05-06T08:02:13Z
+
+This still is broken when your existing application has own bus declared, see https://github.com/Sylius/Sylius/pull/12561.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-05-10T14:02:29Z
+
+Hey Joseph,
+
+that would be awesome to have it fixed, but we need to declare default bus anyway, due to Symfony constraints. Your proposal has some solution for that, but if we would remove the default bus from the end-users app, it will throw an exception. Therefore, I think we will stay with the current solution, but I may propose docs about changing the default bus. Perhaps, we should wire up Api Platform usage to our busses as well, so the app will not collapse once one will change the default one.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2021-05-14T04:54:24Z
+
+Thanks, @SirDomin! :1st_place_medal:
