@@ -151,12 +151,14 @@ With body:
 
 This should return a response with ``tokenValue`` which we would need for the next API calls:
 
-.. code-block:: json
+.. code-block:: javascript
 
     {
+        //...
         "shippingState": "string",
         "tokenValue": "CART_TOKEN",
         "id": 123,
+        //...
     }
 
 Then we need to add a product to the cart but first, it would be good to have any. You can use this call to retrieve some products:
@@ -182,12 +184,14 @@ With a chosen product variant in the body:
 
 This should return a response with the cart that should contain a ``shippingTotal``:
 
-.. code-block:: json
+.. code-block:: javascript
 
     {
+        //...
         "taxTotal": 0,
         "shippingTotal": 500,
-        "orderPromotionTotal": 0
+        "orderPromotionTotal": 0,
+        //...
     }
 
 .. attention::
@@ -210,12 +214,14 @@ With new quantity in the body:
 
 Which should return a response with the cart:
 
-.. code-block:: json
+.. code-block:: javascript
 
     {
+        //...
         "taxTotal": 0,
         "shippingTotal": 1000,
-        "orderPromotionTotal": 0
+        "orderPromotionTotal": 0,
+        //...
     }
 
 Amazing job! You've just provided your own logic into a Sylius-based system. Therefore, your store can provide a unique
