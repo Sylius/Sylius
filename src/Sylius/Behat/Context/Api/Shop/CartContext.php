@@ -115,10 +115,6 @@ final class CartContext implements Context
      */
     public function iAddThisProductToTheCart(ProductInterface $product, ?string $tokenValue): void
     {
-        if (!$this->sharedStorage->has('cart_token')) {
-            $this->pickupCart();
-        }
-
         $this->putProductToCart($product, $tokenValue);
 
         $this->sharedStorage->set('product', $product);
@@ -707,7 +703,7 @@ final class CartContext implements Context
 
         foreach ($items as $item) {
             if ($item['productName'] === $productName) {
-                Assert::same($productPrice, $item['total']);
+                Assert::same($item['total'], $productPrice);
             }
 
             return;

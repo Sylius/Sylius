@@ -10,21 +10,18 @@
             <group>admin:order:read</group>
             <group>admin:product_variant:read</group>
             <group>shop:product_variant:read</group>
-            <group>shop:cart:read</group>
         </attribute>
         <attribute name="name">
             <group>shop:order:account:read</group>
             <group>admin:order:read</group>
             <group>admin:product_variant:read</group>
             <group>shop:product_variant:read</group>
-            <group>shop:cart:read</group>
         </attribute>
         <attribute name="locale">
             <group>shop:order:account:read</group>
             <group>admin:order:read</group>
             <group>admin:product_variant:read</group>
             <group>shop:product_variant:read</group>
-            <group>shop:cart:read</group>
         </attribute>
     </class>
 </serializer>

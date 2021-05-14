@@ -32,7 +32,6 @@
             <group>shop:order:account:read</group>
             <group>admin:product_variant:read</group>
             <group>shop:product_variant:read</group>
-            <group>shop:cart:read</group>
         </attribute>
         <attribute name="optionValues">
             <group>admin:product_variant:read</group>
