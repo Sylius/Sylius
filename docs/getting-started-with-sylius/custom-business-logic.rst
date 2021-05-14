@@ -129,9 +129,9 @@ For 4 products:
 
 |
 
-This customization should also work when using unified API without any extra steps:
+This customization will also work when using unified API without any extra steps:
 
-First, you need to pickup new cart:
+First, you need to pick up a new cart:
 
 .. code-block:: bash
 
@@ -147,7 +147,7 @@ With body:
 
 .. note::
 
-    The ``localeCode`` value is optional in body of pickup cart. This means that if you won't provide it, the default locale from channel will be used.
+    The ``localeCode`` value is optional in the body of cart pickup. This means that if you won't provide it, the default locale from the channel will be used.
 
 This should return a response with ``tokenValue`` which we would need for the next API calls:
 
@@ -169,14 +169,14 @@ And choose any product variant IRI that you would like to add to your cart:
 
 .. code-block:: bash
 
-    curl --location --request PATCH 'https://127.0.0.1:8000/api/v2/shop/orders/CART_TOKEN/items' -H 'Content-Type: application/merge-patch+json'
+    curl --location --request PATCH 'https://master.demo.sylius.com/api/v2/shop/orders/CART_TOKEN/items' -H 'Content-Type: application/merge-patch+json'
 
 With a chosen product variant in the body:
 
 .. code-block:: json
 
     {
-        "productVariant": "/api/v2/shop/product-variants/PRODUCT_VARIANT_IRI",
+        "productVariant": "/api/v2/shop/product-variants/PRODUCT_VARIANT_CODE",
         "quantity": 1
     }
 
@@ -198,9 +198,9 @@ Now let's change the quantity of our product variant. We can do it by calling th
 
 .. code-block:: bash
 
-    curl --location --request PATCH 'https://127.0.0.1:8000/api/v2/shop/orders/CART_TOKEN/items/ORDER_ITEM_ID' -H 'Content-Type: application/merge-patch+json'
+    curl --location --request PATCH 'https://master.demo.sylius.com/api/v2/shop/orders/CART_TOKEN/items/ORDER_ITEM_ID' -H 'Content-Type: application/merge-patch+json'
 
-With new quantity in body:
+With new quantity in the body:
 
 .. code-block:: json
 
