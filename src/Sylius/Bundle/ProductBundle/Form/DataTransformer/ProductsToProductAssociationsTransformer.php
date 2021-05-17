@@ -87,7 +87,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
             }
 
             /** @var ProductAssociationInterface $productAssociation */
-            $productAssociation = $this->getProductAssociationByTypeCode($productAssociationTypeCode);
+            $productAssociation = $this->getProductAssociationByTypeCode((string) $productAssociationTypeCode);
             $this->setAssociatedProductsByProductCodes($productAssociation, $productCodes);
             $productAssociations->add($productAssociation);
         }
