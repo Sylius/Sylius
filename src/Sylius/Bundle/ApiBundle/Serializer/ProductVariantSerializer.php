@@ -44,13 +44,14 @@ final class ProductVariantSerializer implements ContextAwareNormalizerInterface
         Assert::isInstanceOf($object, ProductVariantInterface::class);
 
         $data = $this->objectNormalizer->normalize($object, $format, $context);
-        
+
         try {
             $data['price'] = $this->priceCalculator->calculate($object, ['channel' => $this->channelContext->getChannel()]);
-            $data['inStock'] = $this->availabilityChecker->isStockAvailable($object);
         } catch (ChannelNotFoundException $exception) {
             unset($data['price']);
         }
+
+        $data['inStock'] = $this->availabilityChecker->isStockAvailable($object);
 
         return $data;
     }

@@ -510,6 +510,21 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then I should be unable to add it to the cart
+     */
+    public function iShouldBeUnableToAddItToTheCart(): void
+    {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->sharedStorage->get('productVariant');
+
+        $tokenValue = $this->pickupCart();
+        $this->putProductVariantToCart($productVariant, $tokenValue);
+
+        $response = $this->cartsClient->getLastResponse();
+        Assert::same($response->getStatusCode(), 422);
+    }
+
+    /**
      * @Then /^(this product) should have ([^"]+) "([^"]+)"$/
      */
     public function thisItemShouldHaveOptionValue(ProductInterface $product, string $optionName, string $optionValue): void
