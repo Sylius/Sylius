@@ -23,6 +23,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -31,9 +32,10 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
 {
     function let(
         ProductVariantRepositoryInterface $productVariantRepository,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
+        AvailabilityCheckerInterface $availabilityChecker
     ): void {
-        $this->beConstructedWith($productVariantRepository, $orderRepository);
+        $this->beConstructedWith($productVariantRepository, $orderRepository, $availabilityChecker);
     }
 
     function it_is_a_constraint_validator(): void
@@ -129,6 +131,34 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         );
     }
 
+    function it_adds_violation_if_product_variant_stock_is_not_sufficient(
+        ProductVariantRepositoryInterface $productVariantRepository,
+        ExecutionContextInterface $executionContext,
+        ProductVariantInterface $productVariant,
+        ProductInterface $product,
+        AvailabilityCheckerInterface $availabilityChecker
+    ): void {
+        $this->initialize($executionContext);
+
+        $productVariantRepository->findOneBy(['code' => 'productVariantCode'])->willReturn($productVariant);
+        $productVariant->getCode()->willReturn('productVariantCode');
+        $productVariant->isEnabled()->willReturn(true);
+        $productVariant->getProduct()->willReturn($product);
+        $product->isEnabled()->willReturn(true);
+
+        $availabilityChecker->isStockSufficient($productVariant, 1)->willReturn(false);
+
+        $executionContext
+            ->addViolation('sylius.product_variant.not_sufficient', ['%productVariantCode%' => 'productVariantCode'])
+            ->shouldBeCalled()
+        ;
+
+        $this->validate(
+            new AddItemToCart( 'productVariantCode', 1),
+            new AddingEligibleProductVariantToCart()
+        );
+    }
+
     function it_adds_violation_if_product_is_not_available_in_channel(
         ProductVariantRepositoryInterface $productVariantRepository,
         OrderRepositoryInterface $orderRepository,
@@ -136,7 +166,8 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         ChannelInterface $channel,
         ProductVariantInterface $productVariant,
         ProductInterface $product,
-        OrderInterface $cart
+        OrderInterface $cart,
+        AvailabilityCheckerInterface $availabilityChecker
     ): void {
         $this->initialize($executionContext);
 
@@ -149,6 +180,8 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         $productVariant->getProduct()->willReturn($product);
 
         $product->isEnabled()->willReturn(true);
+        $availabilityChecker->isStockSufficient($productVariant, 1)->willReturn(true);
+
         $product->hasChannel($channel)->willReturn(false);
         $product->getName()->willReturn('PRODUCT NAME');
 
@@ -170,7 +203,8 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         ChannelInterface $channel,
         ProductVariantInterface $productVariant,
         ProductInterface $product,
-        OrderInterface $cart
+        OrderInterface $cart,
+        AvailabilityCheckerInterface $availabilityChecker
     ): void {
         $this->initialize($executionContext);
 
@@ -183,6 +217,8 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         $productVariant->getProduct()->willReturn($product);
 
         $product->isEnabled()->willReturn(true);
+        $availabilityChecker->isStockSufficient($productVariant, 1)->willReturn(true);
+
         $product->hasChannel($channel)->willReturn(true);
         $product->getName()->willReturn('PRODUCT NAME');
 
@@ -195,6 +231,10 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         ;
         $executionContext
             ->addViolation('sylius.product.not_exist', ['%productName%' => 'PRODUCT NAME'])
+            ->shouldNotBeCalled()
+        ;
+        $executionContext
+            ->addViolation('sylius.product_variant.not_sufficient', ['%productVariantCode%' => 'productVariantCode'])
             ->shouldNotBeCalled()
         ;
 

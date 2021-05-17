@@ -141,6 +141,7 @@
             <argument type="service" id="api_platform.serializer.normalizer.item" />
             <argument type="service" id="sylius.calculator.product_variant_price" />
             <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.availability_checker" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
 

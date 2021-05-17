@@ -24,6 +24,9 @@ final class AddingEligibleProductVariantToCart extends Constraint
     /** @var string */
     public $productVariantNotExistMessage = 'sylius.product_variant.not_exist';
 
+    /** @var string */
+    public $productVariantNotSufficient = 'sylius.product_variant.not_sufficient';
+
     public function validatedBy(): string
     {
         return 'sylius_api_validator_adding_eligible_product_variant_to_cart';

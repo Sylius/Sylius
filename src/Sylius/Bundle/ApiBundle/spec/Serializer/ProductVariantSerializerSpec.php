@@ -18,6 +18,7 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariant;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Order\Model\Order;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
@@ -26,9 +27,10 @@ final class ProductVariantSerializerSpec extends ObjectBehavior
     function let(
         NormalizerInterface $objectNormalizer,
         ProductVariantPricesCalculatorInterface $pricesCalculator,
-        ChannelContextInterface $channelContext
+        ChannelContextInterface $channelContext,
+        AvailabilityCheckerInterface $availabilityChecker
     ): void {
-        $this->beConstructedWith($objectNormalizer, $pricesCalculator, $channelContext);
+        $this->beConstructedWith($objectNormalizer, $pricesCalculator, $channelContext, $availabilityChecker);
     }
 
     function it_supports_only_product_variant_interface(): void
@@ -50,7 +52,8 @@ final class ProductVariantSerializerSpec extends ObjectBehavior
         NormalizerInterface $objectNormalizer,
         ProductVariantPricesCalculatorInterface $pricesCalculator,
         ChannelInterface $channel,
-        ChannelContextInterface $channelContext
+        ChannelContextInterface $channelContext,
+        AvailabilityCheckerInterface $availabilityChecker
     ): void {
         $variant = new ProductVariant();
 
@@ -58,7 +61,8 @@ final class ProductVariantSerializerSpec extends ObjectBehavior
 
         $channelContext->getChannel()->willReturn($channel);
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(1000);
+        $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 
-        $this->normalize($variant, null, [])->shouldReturn(['price' => 1000]);
+        $this->normalize($variant, null, [])->shouldReturn(['price' => 1000, 'inStock' => true]);
     }
 }
