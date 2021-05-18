@@ -8,28 +8,29 @@ In this guide, you will learn how to customize Sylius API endpoints using ``xml`
 How to prepare project for customization?
 =========================================
 
-For any kind of customization firstly you need to configure directory with your configs.
+If your project was created before v1.10, make sure your API Platform config follows the one below:
 
 .. code-block:: yaml
 
     # config/packages/api_platform.yaml
     api_platform:
-    mapping:
-        paths:
-            - '%kernel.project_dir%/vendor/sylius/sylius/src/Sylius/Bundle/ApiBundle/Resources/config/api_resources'
-            - '%kernel.project_dir%/config/api_platform'
-    patch_formats:
-        json: ['application/merge-patch+json']
-    swagger:
-        versions: [3]
-
-And now if you want to customize any API resource you need to copy the entire configuration of this resource from ``%kernel.project_dir%/vendor/sylius/sylius/src/Sylius/Bundle/ApiBundle/Resources/config/api_resources/`` to ``%kernel.project_dir%/config/api_platform``
+        mapping:
+            paths:
+                - '%kernel.project_dir%/vendor/sylius/sylius/src/Sylius/Bundle/ApiBundle/Resources/config/api_resources'
+                - '%kernel.project_dir%/config/api_platform'
+                - '%kernel.project_dir%/src/Entity'
+        patch_formats:
+            json: ['application/merge-patch+json']
+        swagger:
+            versions: [3]
 
 How to add an additional endpoint?
 ==================================
 
 Let's assume that you want to add a new endpoint to the ``Order`` resource that will be dispatching a command.
-You need to add proper configuration in ``config/api_platform/Order.xml``:
+If you want to customize any API resource, you need to copy the entire configuration of this resource from
+``%kernel.project_dir%/vendor/sylius/sylius/src/Sylius/Bundle/ApiBundle/Resources/config/api_resources/`` to ``%kernel.project_dir%/config/api_platform``.
+Add the following configuration in the config copied to ``config/api_platform/Order.xml``:
 
 .. code-block:: xml
 
