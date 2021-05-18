@@ -13,12 +13,15 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\AddingEligibleProductVariantToCart;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -131,20 +134,83 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         );
     }
 
-    function it_adds_violation_if_product_variant_stock_is_not_sufficient(
+    function it_adds_violation_if_product_variant_stock_is_not_sufficient_and_cart_has_same_units(
         ProductVariantRepositoryInterface $productVariantRepository,
+        OrderRepositoryInterface $orderRepository,
         ExecutionContextInterface $executionContext,
         ProductVariantInterface $productVariant,
         ProductInterface $product,
-        AvailabilityCheckerInterface $availabilityChecker
+        AvailabilityCheckerInterface $availabilityChecker,
+        OrderInterface $cart,
+        Collection $units,
+        OrderItemInterface $orderItem,
+        OrderItemUnitInterface $orderItemUnit,
+        ProductVariantInterface $itemProductVariant
     ): void {
         $this->initialize($executionContext);
+
+        $command = new AddItemToCart( 'productVariantCode', 1);
+        $command->setOrderTokenValue('TOKEN');
 
         $productVariantRepository->findOneBy(['code' => 'productVariantCode'])->willReturn($productVariant);
         $productVariant->getCode()->willReturn('productVariantCode');
         $productVariant->isEnabled()->willReturn(true);
         $productVariant->getProduct()->willReturn($product);
+
         $product->isEnabled()->willReturn(true);
+
+        $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
+
+        $cart->getItemUnits()->willReturn($units->getWrappedObject());
+
+        $units->isEmpty()->willReturn(false);
+        $units->getIterator()->willReturn(new \ArrayIterator([$orderItemUnit->getWrappedObject()]));
+
+        $orderItemUnit->getOrderItem()->willReturn($orderItem);
+
+        $orderItem->getVariant()->willReturn($itemProductVariant);
+        $itemProductVariant->getCode()->willReturn('productVariantCode');
+
+        $availabilityChecker->isStockSufficient($productVariant, 2)->willReturn(false);
+
+        $executionContext
+            ->addViolation('sylius.product_variant.not_sufficient', ['%productVariantCode%' => 'productVariantCode'])
+            ->shouldBeCalled()
+        ;
+
+        $this->validate(
+            $command,
+            new AddingEligibleProductVariantToCart()
+        );
+    }
+
+    function it_adds_violation_if_product_variant_stock_is_not_sufficient_and_cart_has_not_same_units(
+        ProductVariantRepositoryInterface $productVariantRepository,
+        OrderRepositoryInterface $orderRepository,
+        ExecutionContextInterface $executionContext,
+        ProductVariantInterface $productVariant,
+        ProductInterface $product,
+        AvailabilityCheckerInterface $availabilityChecker,
+        OrderInterface $cart,
+        Collection $units
+    ): void {
+        $this->initialize($executionContext);
+
+        $command = new AddItemToCart( 'productVariantCode', 1);
+        $command->setOrderTokenValue('TOKEN');
+
+        $productVariantRepository->findOneBy(['code' => 'productVariantCode'])->willReturn($productVariant);
+        $productVariant->getCode()->willReturn('productVariantCode');
+        $productVariant->isEnabled()->willReturn(true);
+        $productVariant->getProduct()->willReturn($product);
+
+        $product->isEnabled()->willReturn(true);
+
+        $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
+
+        $cart->getItemUnits()->willReturn($units->getWrappedObject());
+
+        $units->isEmpty()->willReturn(true);
 
         $availabilityChecker->isStockSufficient($productVariant, 1)->willReturn(false);
 
@@ -154,7 +220,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         ;
 
         $this->validate(
-            new AddItemToCart( 'productVariantCode', 1),
+            $command,
             new AddingEligibleProductVariantToCart()
         );
     }
@@ -167,6 +233,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         ProductVariantInterface $productVariant,
         ProductInterface $product,
         OrderInterface $cart,
+        Collection $units,
         AvailabilityCheckerInterface $availabilityChecker
     ): void {
         $this->initialize($executionContext);
@@ -178,6 +245,12 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         $productVariant->getCode()->willReturn('productVariantCode');
         $productVariant->isEnabled()->willReturn(true);
         $productVariant->getProduct()->willReturn($product);
+
+        $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
+
+        $cart->getItemUnits()->willReturn($units->getWrappedObject());
+
+        $units->isEmpty()->willReturn(true);
 
         $product->isEnabled()->willReturn(true);
         $availabilityChecker->isStockSufficient($productVariant, 1)->willReturn(true);
@@ -204,6 +277,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         ProductVariantInterface $productVariant,
         ProductInterface $product,
         OrderInterface $cart,
+        Collection $units,
         AvailabilityCheckerInterface $availabilityChecker
     ): void {
         $this->initialize($executionContext);
@@ -215,6 +289,12 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         $productVariant->getCode()->willReturn('productVariantCode');
         $productVariant->isEnabled()->willReturn(true);
         $productVariant->getProduct()->willReturn($product);
+
+        $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
+
+        $cart->getItemUnits()->willReturn($units->getWrappedObject());
+
+        $units->isEmpty()->willReturn(true);
 
         $product->isEnabled()->willReturn(true);
         $availabilityChecker->isStockSufficient($productVariant, 1)->willReturn(true);
