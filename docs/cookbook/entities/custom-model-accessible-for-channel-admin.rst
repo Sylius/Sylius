@@ -12,6 +12,11 @@ channel-based entity to it, you will need to enable this entity to be viewed onl
 
 In order to prepare a simple Entity follow :doc:`this guide </cookbook/entities/custom-model>`.
 
+1. Add your entity to admin menu:
+----------------------------------
+
+Adding a new entity to the admin menu is described in the section ``How to customize Admin Menu`` of :doc:`this guide </customization/menu>`.
+
 * Having your Supplier entity created, add a channel field with relation to the ``Channel`` entity:
 
 .. code-block:: php
@@ -78,7 +83,7 @@ In order to prepare a simple Entity follow :doc:`this guide </cookbook/entities/
 .. code-block:: yaml
 
     App\Form\SupplierType:
-        arguments: ['App\Entity\Supplier', ['sylius'], '@Sylius\Plus\ChannelAdmin\Application\Provider\AvailableChannelsForAdminProviderInterface']
+        arguments: ['@Sylius\Plus\ChannelAdmin\Application\Provider\AvailableChannelsForAdminProviderInterface', 'App\Entity\Supplier', ['sylius']]
         tags: ['form.type']
 
 The ``Sylius\Plus\ChannelAdmin\Application\Provider\AvailableChannelsForAdminProviderInterface`` service allows getting a list of proper channels for the currently logged-in admin.
@@ -96,38 +101,8 @@ Remember to register ``App\Form\SupplierType`` for resource:
        +            form: App\Form\SupplierType
 
 
-1. Add your entity to admin menu:
-----------------------------------
-
-Adding a new entity to the admin menu is described in the section ``How to customize Admin Menu`` of :doc:`this guide </customization/menu>`.
-
 1. Restrict access to the entity for the respective channel administrator roles (using ACL/RBAC):
 -------------------------------------------------------------------------------------------------
-
-* Add access to all resource sections: ``index, create, update, delete, show, bulk_delete``
-
-.. code-block:: yaml
-
-    sylius_plus:
-        permissions:
-            app_admin_supplier_index:
-                parent: suppliers
-                label: action.index
-            app_admin_supplier_create:
-                parent: suppliers
-                label: action.create
-            app_admin_supplier_update:
-                parent: suppliers
-                label: action.update
-            app_admin_supplier_delete:
-                parent: suppliers
-                label: action.delete
-            app_admin_supplier_show:
-                parent: suppliers
-                label: action.show
-            app_admin_supplier_bulk_delete:
-                parent: suppliers
-                label: action.bulk_delete
 
 .. note::
 
@@ -200,7 +175,7 @@ Adding a new entity to the admin menu is described in the section ``How to custo
         public function isFromChannel(object $resource, ChannelInterface $channel): bool
         {
             if (
-                $resource instanceof Supplier && ($resource->getChannel() === $channel || $resource->getChannel() === null)
+                $resource instanceof Supplier && in_array($resource->getChannel(), [$channel, null], true)
             ) {
                 return true;
             }
@@ -272,7 +247,7 @@ After that, access to the resource should work properly with all restrictions.
         class: App\Doctrine\ORM\RestrictingSupplierListQueryBuilder
         arguments: ['@Sylius\Plus\ChannelAdmin\Application\Provider\AdminChannelProviderInterface', '@app.repository.supplier']
 
-* Add method to Suppliers grid:
+* Add method to the Suppliers grid:
 
 .. code-block:: yaml
 
