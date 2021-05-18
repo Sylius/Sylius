@@ -130,14 +130,6 @@ final class CartContext implements Context
         $this->putProductToCart($product, $tokenValue, $quantity);
     }
 
-//    /**
-//     * @When /^I add(?:|ed)(?:| again) (\d+) (products "([^"]+)") to the cart$/
-//     */
-//    public function iAddProductsToTheCart(int $quantity, ProductInterface $product): void
-//    {
-//        $this->putProductToCart($product, $this->sharedStorage->get('cart_token'), $quantity);
-//    }
-
     /**
      * @When /^I add ("[^"]+" variant of this product) to the (cart)$/
      */

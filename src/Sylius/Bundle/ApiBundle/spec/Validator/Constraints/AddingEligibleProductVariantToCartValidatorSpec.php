@@ -163,6 +163,8 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
 
         $cart->getItemUnits()->willReturn($units->getWrappedObject());
 
+        $productVariant->isTracked()->willReturn(true);
+
         $units->isEmpty()->willReturn(false);
         $units->getIterator()->willReturn(new \ArrayIterator([$orderItemUnit->getWrappedObject()]));
 
@@ -210,6 +212,8 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
 
         $cart->getItemUnits()->willReturn($units->getWrappedObject());
 
+        $productVariant->isTracked()->willReturn(true);
+
         $units->isEmpty()->willReturn(true);
 
         $availabilityChecker->isStockSufficient($productVariant, 1)->willReturn(false);
@@ -249,6 +253,8 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
 
         $cart->getItemUnits()->willReturn($units->getWrappedObject());
+
+        $productVariant->isTracked()->willReturn(true);
 
         $units->isEmpty()->willReturn(true);
 
@@ -293,6 +299,8 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
 
         $cart->getItemUnits()->willReturn($units->getWrappedObject());
+
+        $productVariant->isTracked()->willReturn(true);
 
         $units->isEmpty()->willReturn(true);
 
