@@ -21,6 +21,7 @@ use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
@@ -58,6 +59,7 @@ final class ProductContext implements Context
     public function iOpenProductPage(ProductInterface $product): void
     {
         $this->client->show($product->getCode());
+        $this->sharedStorage->set('productVariant', current($product->getVariants()->getValues()));
     }
 
     /**
@@ -105,6 +107,19 @@ final class ProductContext implements Context
             $this->responseChecker->getCollection($this->client->getLastResponse()),
             $name
         ));
+    }
+
+    /**
+     * @Then I should see that it is out of stock
+     */
+    public function iShouldSeeItIsOutOfStock(): void
+    {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->sharedStorage->get('productVariant');
+
+        $variantResponse = $this->client->showByIri($this->iriConverter->getIriFromItem($productVariant));
+
+        Assert::false($this->responseChecker->getValue($variantResponse, 'inStock'));
     }
 
     /**

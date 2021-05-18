@@ -335,6 +335,24 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then /^I should see "([^"]+)" with unit price ("[^"]+") in my cart$/
+     */
+    public function iShouldSeeProductWithUnitPriceInMyCart(string $productName, int $unitPrice): void
+    {
+        $response = $this->cartsClient->getLastResponse();
+
+        foreach ($this->responseChecker->getValue($response, 'items') as $item) {
+            if ($item['productName'] === $productName) {
+                Assert::same($item['unitPrice'], $unitPrice);
+
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf('The product %s does not exist', $productName));
+    }
+
+    /**
      * @Then there should be one item in my cart
      */
     public function thereShouldBeOneItemInMyCart(): void
@@ -507,6 +525,21 @@ final class CartContext implements Context
         $items = $this->responseChecker->getValue($this->cartsClient->show($tokenValue), 'items');
 
         Assert::same(count($items), 0, 'There should be an empty cart');
+    }
+
+    /**
+     * @Then I should be unable to add it to the cart
+     */
+    public function iShouldBeUnableToAddItToTheCart(): void
+    {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->sharedStorage->get('productVariant');
+
+        $tokenValue = $this->pickupCart();
+        $this->putProductVariantToCart($productVariant, $tokenValue);
+
+        $response = $this->cartsClient->getLastResponse();
+        Assert::same($response->getStatusCode(), 422);
     }
 
     /**
@@ -685,7 +718,7 @@ final class CartContext implements Context
 
         foreach ($items as $item) {
             if ($item['productName'] === $productName) {
-                Assert::same($productPrice, $item['total']);
+                Assert::same($item['total'], $productPrice);
             }
 
             return;

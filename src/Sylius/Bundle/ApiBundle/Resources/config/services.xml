@@ -141,6 +141,7 @@
             <argument type="service" id="api_platform.serializer.normalizer.item" />
             <argument type="service" id="sylius.calculator.product_variant_price" />
             <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.availability_checker" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
@@ -152,7 +153,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction" public="true">
-            <argument type="service" id="sylius_default.bus" />
+            <argument type="service" id="sylius.command_bus" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider" decorates="api_platform.item_data_provider">
@@ -194,7 +195,7 @@
         <service id="sylius.listener.api_cart_blamer" class="Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener">
             <argument type="service" id="sylius.context.cart" />
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
-            <argument type="service" id="sylius_default.bus" />
+            <argument type="service" id="sylius.command_bus" />
             <tag name="kernel.event_listener" event="security.interactive_login" method="onInteractiveLogin" />
         </service>
 

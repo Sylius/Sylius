@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -32,12 +33,17 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
     /** @var OrderRepositoryInterface */
     private $orderRepository;
 
+    /** @var AvailabilityCheckerInterface  */
+    private $availabilityChecker;
+
     public function __construct(
         ProductVariantRepositoryInterface $productVariantRepository,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
+        AvailabilityCheckerInterface $availabilityChecker
     ) {
         $this->productVariantRepository = $productVariantRepository;
         $this->orderRepository = $orderRepository;
+        $this->availabilityChecker = $availabilityChecker;
     }
 
     public function validate($value, Constraint $constraint)
@@ -73,6 +79,15 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
         if (!$productVariant->isEnabled()) {
             $this->context->addViolation(
                 $constraint->productVariantNotExistMessage,
+                ['%productVariantCode%' => $productVariant->getCode()]
+            );
+
+            return;
+        }
+
+        if (!$this->availabilityChecker->isStockSufficient($productVariant, $value->quantity)) {
+            $this->context->addViolation(
+                $constraint->productVariantNotSufficient,
                 ['%productVariantCode%' => $productVariant->getCode()]
             );
 
