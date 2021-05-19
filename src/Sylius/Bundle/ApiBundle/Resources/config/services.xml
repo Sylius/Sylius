@@ -31,41 +31,6 @@
             <argument type="service" id="api_platform.iri_converter" />
         </service>
 
-        <service
-            id="sylius.api.swagger_admin_authentication_documentation_normalizer"
-            class="Sylius\Bundle\ApiBundle\Swagger\AdminAuthenticationTokenDocumentationNormalizer"
-            decorates="api_platform.swagger.normalizer.documentation"
-            public="true"
-            autoconfigure="false"
-            decoration-priority="20"
-        >
-            <argument type="service" id="sylius.api.swagger_admin_authentication_documentation_normalizer.inner" />
-            <argument>%sylius.security.new_api_route%</argument>
-        </service>
-
-        <service
-            id="sylius.api.swagger_shop_authentication_documentation_normalizer"
-            class="Sylius\Bundle\ApiBundle\Swagger\ShopAuthenticationTokenDocumentationNormalizer"
-            decorates="api_platform.swagger.normalizer.documentation"
-            public="true"
-            autoconfigure="false"
-            decoration-priority="10"
-        >
-            <argument type="service" id="sylius.api.swagger_shop_authentication_documentation_normalizer.inner" />
-            <argument>%sylius.security.new_api_route%</argument>
-        </service>
-
-        <service
-            id="sylius.api.swagger_product_variant_documentation_normalizer"
-            class="Sylius\Bundle\ApiBundle\Swagger\ProductVariantDocumentationNormalizer"
-            decorates="api_platform.swagger.normalizer.documentation"
-            public="true"
-            autoconfigure="false"
-            decoration-priority="20"
-        >
-            <argument type="service" id="sylius.api.swagger_product_variant_documentation_normalizer.inner" />
-        </service>
-
         <service id="api_platform.swagger.action.ui" class="Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Bundle\Action\SwaggerUiAction" public="true">
             <argument type="service" id="api_platform.metadata.resource.name_collection_factory" />
             <argument type="service" id="api_platform.metadata.resource.metadata_factory" />
