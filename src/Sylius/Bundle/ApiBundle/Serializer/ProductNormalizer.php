@@ -40,7 +40,8 @@ final class ProductNormalizer implements ContextAwareNormalizerInterface, Normal
         $context[self::ALREADY_CALLED] = true;
 
         $data = $this->normalizer->normalize($object, $format, $context);
-        $data['defaultVariant'] = $this->iriConverter->getIriFromItem($this->defaultProductVariantResolver->getVariant($object));
+        $variant = $this->defaultProductVariantResolver->getVariant($object);
+        $data['defaultVariant'] = $variant === null ? null : $this->iriConverter->getIriFromItem($variant);
 
         return $data;
     }

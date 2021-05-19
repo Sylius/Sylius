@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
 use ApiPlatform\Core\Api\IriConverterInterface;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -36,7 +37,7 @@ final class ProductNormalizerSpec extends ObjectBehavior
         $this->supportsNormalization($order)->shouldReturn(false);
     }
 
-    function it_adds_default_variant_field_to_serialized_product(
+    function it_adds_default_variant_iri_to_serialized_product(
         ProductVariantResolverInterface $defaultProductVariantResolver,
         IriConverterInterface $iriConverter,
         NormalizerInterface $normalizer,
@@ -50,5 +51,20 @@ final class ProductNormalizerSpec extends ObjectBehavior
         $iriConverter->getIriFromItem($variant)->willReturn('/api/v2/shop/product-variants/CODE');
 
         $this->normalize($product, null, [])->shouldReturn(['defaultVariant' => '/api/v2/shop/product-variants/CODE']);
+    }
+
+    function it_adds_default_variant_field_with_null_value_to_serialized_product_if_there_is_no_default_variant(
+        ProductVariantResolverInterface $defaultProductVariantResolver,
+        IriConverterInterface $iriConverter,
+        NormalizerInterface $normalizer,
+        ProductInterface $product
+    ): void {
+        $this->setNormalizer($normalizer);
+
+        $normalizer->normalize($product, null, ['product_normalizer_already_called' => true])->willReturn([]);
+        $defaultProductVariantResolver->getVariant($product)->willReturn(null);
+        $iriConverter->getIriFromItem(Argument::any())->shouldNotBeCalled();
+
+        $this->normalize($product, null, [])->shouldReturn(['defaultVariant' => null]);
     }
 }
