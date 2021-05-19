@@ -8,14 +8,16 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class ProductNormalizer implements ContextAwareNormalizerInterface
+final class ProductNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
 {
-    /** @var NormalizerInterface */
-    private $objectNormalizer;
+    use NormalizerAwareTrait;
+
+    private const ALREADY_CALLED = 'product_normalizer_already_called';
 
     /** @var ProductVariantResolverInterface */
     private $defaultProductVariantResolver;
@@ -24,11 +26,9 @@ final class ProductNormalizer implements ContextAwareNormalizerInterface
     private $iriConverter;
 
     public function __construct(
-        NormalizerInterface $objectNormalizer,
         ProductVariantResolverInterface $defaultProductVariantResolver,
         IriConverterInterface $iriConverter
     ) {
-        $this->objectNormalizer = $objectNormalizer;
         $this->defaultProductVariantResolver = $defaultProductVariantResolver;
         $this->iriConverter = $iriConverter;
     }
@@ -37,8 +37,9 @@ final class ProductNormalizer implements ContextAwareNormalizerInterface
     {
         Assert::isInstanceOf($object, ProductInterface::class);
 
-        $data = $this->objectNormalizer->normalize($object, $format, $context);
+        $context[self::ALREADY_CALLED] = true;
 
+        $data = $this->normalizer->normalize($object, $format, $context);
         $data['defaultVariant'] = $this->iriConverter->getIriFromItem($this->defaultProductVariantResolver->getVariant($object));
 
         return $data;
@@ -46,6 +47,10 @@ final class ProductNormalizer implements ContextAwareNormalizerInterface
 
     public function supportsNormalization($data, $format = null, $context = []): bool
     {
+        if (isset($context[self::ALREADY_CALLED])) {
+            return false;
+        }
+
         return $data instanceof ProductInterface;
     }
 }

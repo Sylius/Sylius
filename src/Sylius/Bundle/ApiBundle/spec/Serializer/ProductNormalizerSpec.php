@@ -24,11 +24,10 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 final class ProductNormalizerSpec extends ObjectBehavior
 {
     function let(
-        NormalizerInterface $objectNormalizer,
         ProductVariantResolverInterface $defaultProductVariantResolver,
         IriConverterInterface $iriConverter
     ): void {
-        $this->beConstructedWith($objectNormalizer, $defaultProductVariantResolver, $iriConverter);
+        $this->beConstructedWith($defaultProductVariantResolver, $iriConverter);
     }
 
     function it_supports_only_product_interface(ProductInterface $product, OrderInterface $order): void
@@ -38,13 +37,15 @@ final class ProductNormalizerSpec extends ObjectBehavior
     }
 
     function it_adds_default_variant_field_to_serialized_product(
-        NormalizerInterface $objectNormalizer,
         ProductVariantResolverInterface $defaultProductVariantResolver,
         IriConverterInterface $iriConverter,
+        NormalizerInterface $normalizer,
         ProductInterface $product,
         ProductVariantInterface $variant
     ): void {
-        $objectNormalizer->normalize($product, null, [])->willReturn([]);
+        $this->setNormalizer($normalizer);
+
+        $normalizer->normalize($product, null, ['product_normalizer_already_called' => true])->willReturn([]);
         $defaultProductVariantResolver->getVariant($product)->willReturn($variant);
         $iriConverter->getIriFromItem($variant)->willReturn('/api/v2/shop/product-variants/CODE');
 

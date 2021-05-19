@@ -32,7 +32,6 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\ProductNormalizer">
-            <argument type="service" id="api_platform.serializer.normalizer.item" />
             <argument type="service" id="sylius.product_variant_resolver.default" />
             <argument type="service" id="api_platform.iri_converter" />
             <tag name="serializer.normalizer" priority="64" />
