@@ -24,6 +24,16 @@ If your project was created before v1.10, make sure your API Platform config fol
         swagger:
             versions: [3]
 
+And if you want to modify serialization add this code to framework config:
+
+.. code-block:: yaml
+
+    # config/packages/framework.yaml
+    //...
+    serializer:
+        mapping:
+            paths: [ '%kernel.project_dir%/config/serialization' ]
+
 How to add an additional endpoint?
 ----------------------------------
 
@@ -98,16 +108,77 @@ The next step is to modify the security configuration in ``config/packages/secur
 After these two steps you can start to use endpoints with new prefixes
 
 How to customize serialization?
-===============================
+-------------------------------
 
-Let's assume that you want to modify responses with your custom fields serialized in response.
+Let's say that you want to change the serialized fields in your responses.
 For an example we will use ``Product`` resource and customize its fields.
 
 Adding a field to response
-==========================
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Let's say that you want to serialize existing field named ``averageRating`` to ``Product`` in admin response so the administrator would be able to check what is products average rating.
+
+First let's copy serialization configuration file named ``Product.xml`` from ``%kernel.project_dir%/vendor/sylius/sylius/src/Sylius/Bundle/ApiBundle/Resources/config/serialization/``
+to ``config/serialization/Product.xml``
+
+Then let's find the attribute ``averageRating``:
+
+.. code-block:: xml
+
+    <!--...-->
+    <attribute name="averageRating">
+            <group>shop:product:read</group>
+    </attribute>
+    <!--...-->
+
+
+and add serialization group that is used by endpoint we want to modify
+
+.. tip::
+
+    You can create your own serialization group for every endpoint or use the one out of the box. If you don't know the name of group for endpoint you want to modify,
+    you can find it by searching for your class configuration file in `%kernel.project_dir%/vendor/sylius/sylius/src/Sylius/Bundle/ApiBundle/Resources/config/api_resources``
+    and look for path that you want to modify.
+
+In this case the new ``group`` is called ``admin:product:read``:
+
+.. code-block:: xml
+
+    <!--...-->
+    <attribute name="averageRating">
+            <group>admin:product:read</group>
+            <group>shop:product:read</group>
+    </attribute>
+    <!--...-->
+
+After this change your response should be extended with new field:
+
+.. code-block:: javascript
+
+    {
+        //...
+        "id": 123,
+        "code": "product_code",
+        "variants": [
+            "/api/v2/shop/product-variants/product-variant-0",
+        ],
+        "averageRating": 3,
+        //...
+    }
+
+.. tip::
+
+    Read more about API Platform `serialization groups <https://api-platform.com/docs/core/serialization/#using-serialization-groups>`_
+
+
+We were able to add a field that exists in ``Product`` class, but what if you want to extend it with custom fields?
+Let's customize response now with your custom fields serialized in response.
+
+Adding a custom field to response
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Let's say that you want to add a new field named ``additionalText`` to ``Product``.
-First let's create a new serializer that will supports our ``Product`` resource.
+First let's create a new serializer that will support our ``Product`` resource:
 
 .. code-block:: php
 
@@ -146,7 +217,7 @@ First let's create a new serializer that will supports our ``Product`` resource.
         }
     }
 
-And now let's declare it's service in config files.
+And now let's declare its service in config files:
 
 .. code-block:: xml
 
@@ -155,7 +226,7 @@ And now let's declare it's service in config files.
             <tag name="serializer.normalizer" />
     </service>
 
-Then we can add the new field.
+Then we can add the new field:
 
 .. code-block:: php
 
@@ -167,7 +238,7 @@ Then we can add the new field.
     return $data;
     //...
 
-Now your response should be extended with new field
+Now your response should be extended with the new field:
 
 .. code-block:: javascript
 
@@ -182,20 +253,18 @@ Now your response should be extended with new field
         //...
     }
 
-Removing a field from response
-==============================
+Removing a field from a response
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Let's say that for some reason you want to remove some field from serialization.
-Your possible solution could be that you use serialization groups.
+One of possible solution could be that you use serialization groups.
 Those will limit the fields from your resource, according to serialization groups that you will choose.
 
 .. tip::
 
     Read more about API Platform `serialization groups <https://api-platform.com/docs/core/serialization/#using-serialization-groups>`_
 
-But if you want to remove the field by utilising serializer, first step is to create a class as in ``Adding a field from response`` and register it's service.
-
-Let's assume that ``Product`` resource returns
+Let's assume that ``Product`` resource returns such a response:
 
 .. code-block:: javascript
 
@@ -216,7 +285,71 @@ Let's assume that ``Product`` resource returns
         }
     }
 
-Then let's say you want to remove ``translations``. We can do it by adding
+Then let's say you want to remove ``translations``.
+
+Utilising serialization groups to remove fields might be quite tricky as symfony combines all of the serialization files into one.
+The easiest solution to remove the field is to create a new serialization group and use it for fields you want to have and declare this group in the endpoint.
+
+First let's add the ``config/api_platform/Product.xml`` configuration file. See ``How to add an additional endpoint?`` for more information.
+Then let's modify the endpoint. For this example i will use GET item in shop, but you can also create some custom endpoint:
+
+.. code-block:: xml
+
+    <!--...-->
+    <itemOperation name="shop_get">
+        <attribute name="method">GET</attribute>
+        <attribute name="path">/shop/products/{code}</attribute>
+        <attribute name="openapi_context">
+            <attribute name="summary">Use code to retrieve a product resource.</attribute>
+        </attribute>
+        <attribute name="normalization_context">
+            <attribute name="groups">shop:product:read</attribute>
+        </attribute>
+    </itemOperation>
+    <!--...-->
+
+then let's change the serialization group in ``normalization_context`` attribute to `shop:product:custom_read`:
+
+.. code-block:: xml
+
+    <!--...-->
+    <attribute name="normalization_context">
+        <attribute name="groups">shop:product:custom_read</attribute>
+    </attribute>
+    <!--...-->
+
+Now we need to modify the file ``config/serialization/Product.xml`` and add this custom serialization group to fields we want to show:
+
+.. code-block:: xml
+
+    <!--...-->
+    <attribute name="updatedAt">
+            <group>admin:product:read</group>
+    </attribute>
+    <attribute name="translations">
+        <group>admin:product:create</group>
+        <group>admin:product:read</group>
+        <group>admin:product:update</group>
+        <group>shop:product:read</group>
+    </attribute>
+    <attribute name="mainTaxon">
+        <group>admin:product:create</group>
+        <group>admin:product:read</group>
+        <group>admin:product:update</group>
+        <group>shop:product:read</group>
+        <group>shop:product:custom_read</group>
+    </attribute>
+    <!--...-->
+
+.. note::
+
+    In example the ``translations`` doesn't have the new group ``shop:product:custom_read`` so it won't be shown by that endpoint.
+    The rest of fields that we wan't to show has the new serialization group declared.
+
+In cases, where you would like to remove small amount of fields, the serializer would be a way to go.
+First step is to create a class as in ``Adding a field from response`` and register it's service.
+
+Then modify it's logic with this code:
 
 .. code-block:: php
 
@@ -228,7 +361,7 @@ Then let's say you want to remove ``translations``. We can do it by adding
     return $data;
     //...
 
-Now your response fields should look like this
+Now your response fields should look like this:
 
 .. code-block:: javascript
 
@@ -238,14 +371,15 @@ Now your response fields should look like this
         "code": "product_code",
         "variants": [
             "/api/v2/shop/product-variants/product-variant-0",
-        ]
+        ],
+        // the translations which were here are now removed
     }
 
-Renaming a field from response
-==============================
+Renaming a field of a response
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As simple as any other steps, renaming name of response fields is also very simple.
-Let's modify the ``optionValues`` name to ``options`` that's how response looks like now
+Renaming name of response fields is very simple. In this example
+let's modify the ``optionValues`` name to ``options``, that's how response looks like now:
 
 .. code-block:: javascript
 
@@ -260,7 +394,31 @@ Let's modify the ``optionValues`` name to ``options`` that's how response looks 
         //...
     }
 
-Now let's modify the serialization class that we used before with some simple logic
+The simplest method to achieve this is to modify serialization configuration file.
+We can use the file ``config/serialization/Product.xml`` from example above and find the attribute named ``optionValues``
+
+.. code-block:: xml
+
+    <!--...-->
+    <attribute name="optionValues">
+            <group>admin:product:read</group>
+            <group>shop:product:read</group>
+    </attribute>
+    <!--...-->
+
+And just add a ``serialized-name`` into attribute description with new name:
+
+.. code-block:: xml
+
+    <!--...-->
+    <attribute name="optionValues" serialized-name="option">
+            <group>admin:product:read</group>
+            <group>shop:product:read</group>
+    </attribute>
+    <!--...-->
+
+You can also achieve this by utilising serializer class.
+In this example we will modify it, so the name of field would be changed. Just add some custom logic:
 
 .. code-block:: php
 
@@ -273,7 +431,7 @@ Now let's modify the serialization class that we used before with some simple lo
     return $data;
     //...
 
-And here we go, now your response should look like this
+And here we go, now your response should look like this:
 
 .. code-block:: javascript
 
