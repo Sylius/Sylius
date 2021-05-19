@@ -265,6 +265,18 @@ final class ProductContext implements Context
         }
     }
 
+    /**
+     * @Then /^the product price should be ("[^"]+")$/
+     */
+    public function theProductPriceShouldBe(int $price): void
+    {
+        $defaultVariantResponse = $this->client->showByIri(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'defaultVariant')
+        );
+
+        Assert::same($this->responseChecker->getValue($defaultVariantResponse, 'price'), $price);
+    }
+
     private function hasProductWithPrice(array $products, int $price, ?string $productCode = null): bool
     {
         foreach ($products as $product) {

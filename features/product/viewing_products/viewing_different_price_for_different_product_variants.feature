@@ -12,7 +12,7 @@ Feature: Viewing different price for different product variants
         And the product "Wyborowa Vodka" has "Wyborowa Apple" variant priced at "$12.55"
         And the "Wyborowa Lemon" product variant is disabled
 
-    @ui
+    @ui @api
     Scenario: Viewing a detailed page with default variant's price
         When I view product "Wyborowa Vodka"
         Then the product price should be "$40.00"
