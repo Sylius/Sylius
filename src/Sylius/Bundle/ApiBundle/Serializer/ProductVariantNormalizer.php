@@ -9,13 +9,16 @@ use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Webmozart\Assert\Assert;
 
-final class ProductVariantSerializer implements ContextAwareNormalizerInterface
+/** @experimental */
+final class ProductVariantNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
 {
-    /** @var NormalizerInterface */
-    private $objectNormalizer;
+    use NormalizerAwareTrait;
+
+    private const ALREADY_CALLED = 'product_variant_normalizer_already_called';
 
     /** @var ProductVariantPriceCalculatorInterface */
     private $priceCalculator;
@@ -24,11 +27,9 @@ final class ProductVariantSerializer implements ContextAwareNormalizerInterface
     private $channelContext;
 
     public function __construct(
-        NormalizerInterface $objectNormalizer,
         ProductVariantPriceCalculatorInterface $priceCalculator,
         ChannelContextInterface $channelContext
     ) {
-        $this->objectNormalizer = $objectNormalizer;
         $this->priceCalculator = $priceCalculator;
         $this->channelContext = $channelContext;
     }
@@ -37,7 +38,10 @@ final class ProductVariantSerializer implements ContextAwareNormalizerInterface
     {
         Assert::isInstanceOf($object, ProductVariantInterface::class);
 
-        $data = $this->objectNormalizer->normalize($object, $format, $context);
+        $context[self::ALREADY_CALLED] = true;
+
+        $data = $this->normalizer->normalize($object, $format, $context);
+
         try {
             $data['price'] = $this->priceCalculator->calculate($object, ['channel' => $this->channelContext->getChannel()]);
         } catch (ChannelNotFoundException $exception) {
@@ -49,6 +53,10 @@ final class ProductVariantSerializer implements ContextAwareNormalizerInterface
 
     public function supportsNormalization($data, $format = null, $context = []): bool
     {
+        if (isset($context[self::ALREADY_CALLED])) {
+            return false;
+        }
+
        return $data instanceof ProductVariantInterface && $this->isAdminGetOperation($context);
     }
 

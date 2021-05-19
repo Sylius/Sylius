@@ -125,20 +125,6 @@
             <tag name="sylius.api.command_data_transformer" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Serializer\AddressDenormalizer">
-            <argument type="service" id="serializer.normalizer.object" />
-            <argument type="string">%sylius.model.address.class%</argument>
-            <argument type="string">%sylius.model.address.interface%</argument>
-            <tag name="serializer.normalizer" priority="64" />
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductVariantSerializer">
-            <argument type="service" id="api_platform.serializer.normalizer.item" />
-            <argument type="service" id="sylius.calculator.product_variant_price" />
-            <argument type="service" id="sylius.context.channel" />
-            <tag name="serializer.normalizer" priority="64" />
-        </service>
-
         <service id="sylius.api.factory.cart_shipping_method" class="Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactory" />
 
         <service id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChanger">
