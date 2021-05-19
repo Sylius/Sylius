@@ -12,10 +12,8 @@ channel-based entity to it, you will need to enable this entity to be viewed onl
 
 In order to prepare a simple Entity follow :doc:`this guide </cookbook/entities/custom-model>`.
 
-1. Add your entity to admin menu:
-----------------------------------
-
-Adding a new entity to the admin menu is described in the section ``How to customize Admin Menu`` of :doc:`this guide </customization/menu>`.
+Remember to then add your entity to the admin menu. Adding a new entity to the admin menu
+is described in the section ``How to customize Admin Menu`` of :doc:`this guide </customization/menu>`.
 
 * Having your Supplier entity created, add a channel field with relation to the ``Channel`` entity:
 
@@ -99,7 +97,6 @@ Remember to register ``App\Form\SupplierType`` for resource:
                 classes:
                     model: App\Entity\Supplier
        +            form: App\Form\SupplierType
-
 
 1. Restrict access to the entity for the respective channel administrator roles (using ACL/RBAC):
 -------------------------------------------------------------------------------------------------
