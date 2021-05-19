@@ -10,6 +10,7 @@ Entities
     :hidden:
 
     entities/custom-model
+    entities/custom-model-accessible-for-channel-admin
     entities/custom-translatable-model
 
 .. include:: /cookbook/entities/map.rst.inc
