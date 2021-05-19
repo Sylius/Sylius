@@ -81,15 +81,6 @@ POST on `api/v2/shop/account-verification-requests`:
 }
 ````
 
-POST on `/api/v2/shop/orders`:
-
-````
-{
-    - "localeCode": "string"
-    + "locale": "string"
-}
-````
-
 PATCH on `/api/v2/shop/account/orders/{tokenValue}/shipments/{shipmentId}`:
 
 ````
@@ -108,3 +99,6 @@ PATCH on `/api/v2/shop/account/orders/{tokenValue}/items`:
 }
 ````
 
+### Buses
+
+1. Sylius buses `sylius_default.bus` and `sylius_event.bus` are deprecated and should not be used anymore.

@@ -110,6 +110,7 @@ final class ChannelContext implements Context
     /**
      * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)"$/
      * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)" in "([^"]+)" currency$/
+     * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)" in "([^"]+)" currency and with hostname "([^"]+)"$/
      * @Given the store operates on a channel identified by :code code
      * @Given the store (also) operates on a(nother) channel named :channelName with hostname :hostname
      */

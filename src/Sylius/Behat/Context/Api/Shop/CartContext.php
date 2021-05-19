@@ -215,11 +215,11 @@ final class CartContext implements Context
 
     /**
      * @When I pick up my cart (again)
-     * @When I pick up cart in the :locale locale
+     * @When I pick up cart in the :localeCode locale
      */
-    public function iPickUpMyCart(?LocaleInterface $locale = null): void
+    public function iPickUpMyCart(?string $localeCode = null): void
     {
-        $this->pickupCart($locale);
+        $this->pickupCart($localeCode);
     }
 
     /**
@@ -332,6 +332,24 @@ final class CartContext implements Context
             $this->responseChecker->isUpdateSuccessful($response),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Quantity of an order item cannot be lower than 1.', $response)
         );
+    }
+
+    /**
+     * @Then /^I should see "([^"]+)" with unit price ("[^"]+") in my cart$/
+     */
+    public function iShouldSeeProductWithUnitPriceInMyCart(string $productName, int $unitPrice): void
+    {
+        $response = $this->cartsClient->getLastResponse();
+
+        foreach ($this->responseChecker->getValue($response, 'items') as $item) {
+            if ($item['productName'] === $productName) {
+                Assert::same($item['unitPrice'], $unitPrice);
+
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf('The product %s does not exist', $productName));
     }
 
     /**
@@ -510,6 +528,21 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then I should be unable to add it to the cart
+     */
+    public function iShouldBeUnableToAddItToTheCart(): void
+    {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->sharedStorage->get('productVariant');
+
+        $tokenValue = $this->pickupCart();
+        $this->putProductVariantToCart($productVariant, $tokenValue);
+
+        $response = $this->cartsClient->getLastResponse();
+        Assert::same($response->getStatusCode(), 422);
+    }
+
+    /**
      * @Then /^(this product) should have ([^"]+) "([^"]+)"$/
      */
     public function thisItemShouldHaveOptionValue(ProductInterface $product, string $optionName, string $optionValue): void
@@ -537,13 +570,10 @@ final class CartContext implements Context
         throw new \DomainException(sprintf('Could not find item with option "%s" set to "%s"', $optionName, $optionValue));
     }
 
-    private function pickupCart(?LocaleInterface $locale = null): string
+    private function pickupCart(?string $localeCode = null): string
     {
         $this->cartsClient->buildCreateRequest();
-        $this->cartsClient->addRequestData('locale', null);
-        if ($locale !== null) {
-            $this->cartsClient->addRequestData('locale', $this->iriConverter->getIriFromItem($locale));
-        }
+        $this->cartsClient->addRequestData('localeCode', $localeCode);
 
         $tokenValue = $this->responseChecker->getValue($this->cartsClient->create(), 'tokenValue');
 
@@ -688,7 +718,7 @@ final class CartContext implements Context
 
         foreach ($items as $item) {
             if ($item['productName'] === $productName) {
-                Assert::same($productPrice, $item['total']);
+                Assert::same($item['total'], $productPrice);
             }
 
             return;

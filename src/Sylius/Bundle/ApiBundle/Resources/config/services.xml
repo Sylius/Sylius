@@ -141,6 +141,7 @@
             <argument type="service" id="api_platform.serializer.normalizer.item" />
             <argument type="service" id="sylius.calculator.product_variant_price" />
             <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.availability_checker" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
@@ -152,7 +153,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction" public="true">
-            <argument type="service" id="sylius_default.bus" />
+            <argument type="service" id="sylius.command_bus" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider" decorates="api_platform.item_data_provider">
@@ -167,7 +168,6 @@
                 <argument key="Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod">paymentMethod</argument>
                 <argument key="Sylius\Bundle\ApiBundle\Command\RequestResetPasswordToken">locale</argument>
                 <argument key="Sylius\Bundle\ApiBundle\Command\ResendVerificationEmail">locale</argument>
-                <argument key="Sylius\Bundle\ApiBundle\Command\Cart\PickupCart">locale</argument>
                 <argument key="Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart">productVariant</argument>
                 <argument key="Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod">shippingMethod</argument>
             </argument>
@@ -195,8 +195,13 @@
         <service id="sylius.listener.api_cart_blamer" class="Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener">
             <argument type="service" id="sylius.context.cart" />
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
-            <argument type="service" id="sylius_default.bus" />
+            <argument type="service" id="sylius.command_bus" />
             <tag name="kernel.event_listener" event="security.interactive_login" method="onInteractiveLogin" />
+        </service>
+
+        <service id="sylius.listener.api_authentication_success_listener" class="Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener">
+            <argument type="service" id="api_platform.iri_converter" />
+            <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverter">

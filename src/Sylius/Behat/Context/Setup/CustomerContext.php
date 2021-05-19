@@ -68,6 +68,8 @@ final class CustomerContext implements Context
         $partsOfName = explode(' ', $name);
         $customer = $this->createCustomer($email, $partsOfName[0], $partsOfName[1]);
         $this->customerRepository->add($customer);
+
+        $this->sharedStorage->set('customer', $customer);
     }
 
     /**

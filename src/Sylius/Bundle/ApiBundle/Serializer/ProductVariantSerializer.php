@@ -6,8 +6,9 @@ namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
-use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Webmozart\Assert\Assert;
@@ -17,20 +18,25 @@ final class ProductVariantSerializer implements ContextAwareNormalizerInterface
     /** @var NormalizerInterface */
     private $objectNormalizer;
 
-    /** @var ProductVariantPriceCalculatorInterface */
+    /** @var ProductVariantPricesCalculatorInterface */
     private $priceCalculator;
 
     /** @var ChannelContextInterface */
     private $channelContext;
 
+    /** @var AvailabilityCheckerInterface */
+    private $availabilityChecker;
+
     public function __construct(
         NormalizerInterface $objectNormalizer,
-        ProductVariantPriceCalculatorInterface $priceCalculator,
-        ChannelContextInterface $channelContext
+        ProductVariantPricesCalculatorInterface $priceCalculator,
+        ChannelContextInterface $channelContext,
+        AvailabilityCheckerInterface $availabilityChecker
     ) {
         $this->objectNormalizer = $objectNormalizer;
         $this->priceCalculator = $priceCalculator;
         $this->channelContext = $channelContext;
+        $this->availabilityChecker = $availabilityChecker;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -45,15 +51,17 @@ final class ProductVariantSerializer implements ContextAwareNormalizerInterface
             unset($data['price']);
         }
 
+        $data['inStock'] = $this->availabilityChecker->isStockAvailable($object);
+
         return $data;
     }
 
     public function supportsNormalization($data, $format = null, $context = []): bool
     {
-        return $data instanceof ProductVariantInterface && $this->isAdminGetOperation($context);
+        return $data instanceof ProductVariantInterface && $this->isNotAdminGetOperation($context);
     }
 
-    private function isAdminGetOperation(array $context): bool
+    private function isNotAdminGetOperation(array $context): bool
     {
         return !isset($context['item_operation_name']) || !($context['item_operation_name'] === 'admin_get');
     }

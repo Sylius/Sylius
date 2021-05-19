@@ -32,6 +32,7 @@
                 <attribute name="path">/shop/order-items/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:order_item:read</attribute>
+                    <attribute name="groups">shop:cart:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

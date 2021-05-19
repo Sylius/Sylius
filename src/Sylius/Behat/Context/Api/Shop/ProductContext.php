@@ -15,11 +15,13 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
@@ -57,6 +59,7 @@ final class ProductContext implements Context
     public function iOpenProductPage(ProductInterface $product): void
     {
         $this->client->show($product->getCode());
+        $this->sharedStorage->set('productVariant', current($product->getVariants()->getValues()));
     }
 
     /**
@@ -104,6 +107,19 @@ final class ProductContext implements Context
             $this->responseChecker->getCollection($this->client->getLastResponse()),
             $name
         ));
+    }
+
+    /**
+     * @Then I should see that it is out of stock
+     */
+    public function iShouldSeeItIsOutOfStock(): void
+    {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->sharedStorage->get('productVariant');
+
+        $variantResponse = $this->client->showByIri($this->iriConverter->getIriFromItem($productVariant));
+
+        Assert::false($this->responseChecker->getValue($variantResponse, 'inStock'));
     }
 
     /**
@@ -223,6 +239,30 @@ final class ProductContext implements Context
     public function iShouldSeeEmptyListOfProducts(): void
     {
         Assert::same($this->responseChecker->countTotalCollectionItems($this->client->getLastResponse()), 0);
+    }
+
+    /**
+     * @Then I should see :count products in the list
+     */
+    public function iShouldSeeProductsInTheList(int $count): void
+    {
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
+    }
+
+    /**
+     * @Then they should have order like :firstProductName, :secondProductName and :thirdProductName
+     */
+    public function theyShouldHaveOrderLikeAnd(string ...$productNames): void
+    {
+        $productNamesFromResponse = new ArrayCollection();
+
+        foreach ($this->responseChecker->getCollection($this->client->getLastResponse()) as $productItem) {
+            $productNamesFromResponse->add($productItem['translations']['en_US']['name']);
+        }
+
+        foreach ($productNamesFromResponse as $key => $name) {
+            Assert::same($name, $productNames[$key]);
+        }
     }
 
     private function hasProductWithPrice(array $products, int $price, ?string $productCode = null): bool

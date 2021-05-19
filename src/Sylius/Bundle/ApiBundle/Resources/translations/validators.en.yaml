@@ -5,5 +5,10 @@ sylius:
         is_verified: 'Account with email %email% is currently verified.'
     order:
         not_empty: 'An empty order cannot be completed.'
+    product:
+        not_exist: 'The product %productName% does not exist.'
+    product_variant:
+        not_exist: 'The product variant with %productVariantCode% does not exist.'
+        not_sufficient: 'The product variant with %productVariantCode% code does not have sufficient stock.'
     shipment:
         shipped: 'You cannot ship a shipment that was shipped before.'
