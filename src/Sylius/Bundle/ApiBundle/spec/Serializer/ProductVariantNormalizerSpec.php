@@ -13,48 +13,45 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
-use ApiPlatform\Core\Serializer\SerializerContextBuilderInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariant;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Order\Model\Order;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-final class ProductVariantSerializerSpec extends ObjectBehavior
+final class ProductVariantNormalizerSpec extends ObjectBehavior
 {
     function let(
-        NormalizerInterface $objectNormalizer,
         ProductVariantPricesCalculatorInterface $pricesCalculator,
         ChannelContextInterface $channelContext
     ): void {
-        $this->beConstructedWith($objectNormalizer, $pricesCalculator, $channelContext);
+        $this->beConstructedWith($pricesCalculator, $channelContext);
     }
 
-    function it_supports_only_product_variant_interface(): void {
-        $variant = new ProductVariant();
-        $this->supportsNormalization($variant)->shouldReturn(true);
-
-        $order = new Order();
-        $this->supportsNormalization($order)->shouldReturn(false);
+    function it_supports_only_product_variant_interface(): void
+    {
+        $this->supportsNormalization(new ProductVariant())->shouldReturn(true);
+        $this->supportsNormalization(new Order())->shouldReturn(false);
     }
 
-    function it_does_not_serialize_if_item_operation_name_is_admin_get(): void {
-        $variant = new ProductVariant();
-        $this->supportsNormalization($variant, null, ['item_operation_name' => 'admin_get'])->shouldReturn(false);
+    function it_does_not_serialize_if_item_operation_name_is_admin_get(): void
+    {
+        $this->supportsNormalization(new ProductVariant(), null, ['item_operation_name' => 'admin_get'])->shouldReturn(false);
     }
 
     function it_serializes_product_variant_if_item_operation_name_is_different_that_admin_get(
-        NormalizerInterface $objectNormalizer,
         ProductVariantPricesCalculatorInterface $pricesCalculator,
+        ChannelContextInterface $channelContext,
+        NormalizerInterface $normalizer,
         ChannelInterface $channel,
-        ChannelContextInterface $channelContext
+        ProductVariantInterface $variant
     ): void {
-        $variant = new ProductVariant();
+        $this->setNormalizer($normalizer);
 
-        $objectNormalizer->normalize($variant, null, [])->willReturn([]);
+        $normalizer->normalize($variant, null, ['product_variant_normalizer_already_called' => true])->willReturn([]);
 
         $channelContext->getChannel()->willReturn($channel);
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(1000);
