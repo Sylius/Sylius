@@ -31,41 +31,6 @@
             <argument type="service" id="api_platform.iri_converter" />
         </service>
 
-        <service
-            id="sylius.api.swagger_admin_authentication_documentation_normalizer"
-            class="Sylius\Bundle\ApiBundle\Swagger\AdminAuthenticationTokenDocumentationNormalizer"
-            decorates="api_platform.swagger.normalizer.documentation"
-            public="true"
-            autoconfigure="false"
-            decoration-priority="20"
-        >
-            <argument type="service" id="sylius.api.swagger_admin_authentication_documentation_normalizer.inner" />
-            <argument>%sylius.security.new_api_route%</argument>
-        </service>
-
-        <service
-            id="sylius.api.swagger_shop_authentication_documentation_normalizer"
-            class="Sylius\Bundle\ApiBundle\Swagger\ShopAuthenticationTokenDocumentationNormalizer"
-            decorates="api_platform.swagger.normalizer.documentation"
-            public="true"
-            autoconfigure="false"
-            decoration-priority="10"
-        >
-            <argument type="service" id="sylius.api.swagger_shop_authentication_documentation_normalizer.inner" />
-            <argument>%sylius.security.new_api_route%</argument>
-        </service>
-
-        <service
-            id="sylius.api.swagger_product_variant_documentation_normalizer"
-            class="Sylius\Bundle\ApiBundle\Swagger\ProductVariantDocumentationNormalizer"
-            decorates="api_platform.swagger.normalizer.documentation"
-            public="true"
-            autoconfigure="false"
-            decoration-priority="20"
-        >
-            <argument type="service" id="sylius.api.swagger_product_variant_documentation_normalizer.inner" />
-        </service>
-
         <service id="api_platform.swagger.action.ui" class="Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Bundle\Action\SwaggerUiAction" public="true">
             <argument type="service" id="api_platform.metadata.resource.name_collection_factory" />
             <argument type="service" id="api_platform.metadata.resource.metadata_factory" />
@@ -130,21 +95,6 @@
             <tag name="sylius.api.command_data_transformer" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Serializer\AddressDenormalizer">
-            <argument type="service" id="serializer.normalizer.object" />
-            <argument type="string">%sylius.model.address.class%</argument>
-            <argument type="string">%sylius.model.address.interface%</argument>
-            <tag name="serializer.normalizer" priority="64" />
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductVariantSerializer">
-            <argument type="service" id="api_platform.serializer.normalizer.item" />
-            <argument type="service" id="sylius.calculator.product_variant_price" />
-            <argument type="service" id="sylius.context.channel" />
-            <argument type="service" id="sylius.availability_checker" />
-            <tag name="serializer.normalizer" priority="64" />
-        </service>
-
         <service id="sylius.api.factory.cart_shipping_method" class="Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactory" />
 
         <service id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChanger">
@@ -171,14 +121,6 @@
                 <argument key="Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart">productVariant</argument>
                 <argument key="Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod">shippingMethod</argument>
             </argument>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandFieldItemIriToIdentifierDenormalizer">
-            <argument type="service" id="serializer.normalizer.object" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverter" />
-            <argument type="service" id="sylius.api.data_transformer.command_aware_input_data_transformer" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Map\CommandItemIriArgumentToIdentifierMap" />
-            <tag name="serializer.normalizer" />
         </service>
 
         <service id="sylius.api.section_resolver.admin_api_uri_based_section_resolver" class="Sylius\Bundle\ApiBundle\SectionResolver\AdminApiUriBasedSectionResolver">
