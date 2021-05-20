@@ -6,7 +6,7 @@ API Platform allows configuring an endpoint by ``yaml`` and ``xml`` files or by 
 In this guide, you will learn how to customize Sylius API endpoints using ``xml`` configuration.
 
 How to prepare project for customization?
-=========================================
+-----------------------------------------
 
 If your project was created before v1.10, make sure your API Platform config follows the one below:
 
@@ -25,7 +25,7 @@ If your project was created before v1.10, make sure your API Platform config fol
             versions: [3]
 
 How to add an additional endpoint?
-==================================
+----------------------------------
 
 Let's assume that you want to add a new endpoint to the ``Order`` resource that will be dispatching a command.
 If you want to customize any API resource, you need to copy the entire configuration of this resource from
@@ -50,7 +50,7 @@ And that's all, now you have a new endpoint with your custom logic.
     Read more about API Platform endpoint configuration `here <https://api-platform.com/docs/core/operations/>`_
 
 How to remove an endpoint?
-==========================
+--------------------------
 
 Let's assume that your shop is offering only digital products. Therefore, while checking out,
 your customers do not need to choose a shipping method for their orders.
@@ -66,7 +66,7 @@ To remove the endpoint you only need to delete the unnecessary configuration fro
     </itemOperation>
 
 How to rename an endpoint's path?
-=================================
+---------------------------------
 
 If you want to change an endpoint's path, you just need to change the ``path`` attribute in your config:
 
@@ -80,7 +80,7 @@ If you want to change an endpoint's path, you just need to change the ``path`` a
     </itemOperations>
 
 How to modify the endpoints prefixes?
-=====================================
+-------------------------------------
 
 Let's assume that you want to have your own prefixes on paths (for example to be more consistent with the rest of your application).
 As the first step you need to change the ``paths`` or ``route_prefix`` attribute in all needed resources.
@@ -95,4 +95,4 @@ The next step is to modify the security configuration in ``config/packages/secur
 
     Changing prefix without security configuration update can expose confidential data (like customers addresses).
 
-After these two steps you can start to use endpoints with new prefixes
+After these two steps you can start to use endpoints with new prefixes.
