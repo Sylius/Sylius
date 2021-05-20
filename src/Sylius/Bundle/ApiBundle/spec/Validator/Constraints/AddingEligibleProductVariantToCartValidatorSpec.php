@@ -142,9 +142,8 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         ProductInterface $product,
         AvailabilityCheckerInterface $availabilityChecker,
         OrderInterface $cart,
-        Collection $units,
+        Collection $items,
         OrderItemInterface $orderItem,
-        OrderItemUnitInterface $orderItemUnit,
         ProductVariantInterface $itemProductVariant
     ): void {
         $this->initialize($executionContext);
@@ -161,16 +160,14 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
 
         $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
 
-        $cart->getItemUnits()->willReturn($units->getWrappedObject());
+        $cart->getItems()->willReturn($items->getWrappedObject());
 
         $productVariant->isTracked()->willReturn(true);
 
-        $units->isEmpty()->willReturn(false);
-        $units->getIterator()->willReturn(new \ArrayIterator([$orderItemUnit->getWrappedObject()]));
-
-        $orderItemUnit->getOrderItem()->willReturn($orderItem);
+        $items->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
 
         $orderItem->getVariant()->willReturn($itemProductVariant);
+        $orderItem->getQuantity()->willReturn(1);
         $itemProductVariant->getCode()->willReturn('productVariantCode');
 
         $availabilityChecker->isStockSufficient($productVariant, 2)->willReturn(false);
@@ -194,7 +191,9 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         ProductInterface $product,
         AvailabilityCheckerInterface $availabilityChecker,
         OrderInterface $cart,
-        Collection $units
+        Collection $items,
+        OrderItemInterface $orderItem,
+        ProductVariantInterface $orderItemVariant
     ): void {
         $this->initialize($executionContext);
 
@@ -210,11 +209,15 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
 
         $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
 
-        $cart->getItemUnits()->willReturn($units->getWrappedObject());
-
         $productVariant->isTracked()->willReturn(true);
 
-        $units->isEmpty()->willReturn(true);
+        $cart->getItems()->willReturn($items->getWrappedObject());
+
+        $orderItem->getVariant()->willReturn($orderItemVariant);
+
+        $orderItemVariant->getCode()->willReturn('otherProductVariantCode');
+
+        $items->getIterator()->willReturn(new \ArrayIterator([]));
 
         $availabilityChecker->isStockSufficient($productVariant, 1)->willReturn(false);
 
@@ -237,8 +240,10 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         ProductVariantInterface $productVariant,
         ProductInterface $product,
         OrderInterface $cart,
-        Collection $units,
-        AvailabilityCheckerInterface $availabilityChecker
+        Collection $items,
+        OrderItemInterface $orderItem,
+        AvailabilityCheckerInterface $availabilityChecker,
+        ProductVariantInterface $itemProductVariant
     ): void {
         $this->initialize($executionContext);
 
@@ -252,11 +257,14 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
 
         $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
 
-        $cart->getItemUnits()->willReturn($units->getWrappedObject());
+        $cart->getItems()->willReturn($items->getWrappedObject());
 
         $productVariant->isTracked()->willReturn(true);
 
-        $units->isEmpty()->willReturn(true);
+        $items->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
+
+        $orderItem->getVariant()->willReturn($itemProductVariant);
+        $orderItem->getQuantity()->willReturn(1);
 
         $product->isEnabled()->willReturn(true);
         $availabilityChecker->isStockSufficient($productVariant, 1)->willReturn(true);
@@ -283,7 +291,10 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         ProductVariantInterface $productVariant,
         ProductInterface $product,
         OrderInterface $cart,
-        Collection $units,
+        Collection $items,
+        OrderItemInterface $orderItem,
+        ProductVariantInterface $itemProductVariant,
+
         AvailabilityCheckerInterface $availabilityChecker
     ): void {
         $this->initialize($executionContext);
@@ -298,11 +309,16 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
 
         $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
 
-        $cart->getItemUnits()->willReturn($units->getWrappedObject());
+        $cart->getItems()->willReturn($items->getWrappedObject());
 
         $productVariant->isTracked()->willReturn(true);
 
-        $units->isEmpty()->willReturn(true);
+        $items->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
+
+        $orderItem->getVariant()->willReturn($itemProductVariant);
+        $orderItem->getQuantity()->willReturn(1);
+
+        $items->isEmpty()->willReturn(true);
 
         $product->isEnabled()->willReturn(true);
         $availabilityChecker->isStockSufficient($productVariant, 1)->willReturn(true);

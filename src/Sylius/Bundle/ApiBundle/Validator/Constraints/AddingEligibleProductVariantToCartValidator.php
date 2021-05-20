@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -90,27 +89,10 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
         $cart = $this->orderRepository->findCartByTokenValue($value->getOrderTokenValue());
         Assert::notNull($cart);
 
-        $units = $cart->getItemUnits();
-
-        $sameOrderItemsCounter = 0;
-
-        if ($productVariant->isTracked() && !$units->isEmpty()) {
-            foreach ($units as $unit) {
-                /** @var OrderItemInterface $orderItem */
-                $orderItem = $unit->getOrderItem();
-
-                /** @var ProductVariantInterface */
-                $variant = $orderItem->getVariant();
-
-                $code = $variant->getCode();
-
-                if ($value->productVariantCode = $code) {
-                    ++$sameOrderItemsCounter;
-                }
-            }
-        }
-
-        if (!$this->availabilityChecker->isStockSufficient($productVariant, $value->quantity + $sameOrderItemsCounter)) {
+        if (!$this->availabilityChecker->isStockSufficient(
+            $productVariant,
+            $value->quantity + $this->getExistingCartItemQuantityFromCart($cart, $productVariant)
+        )) {
             $this->context->addViolation(
                 $constraint->productVariantNotSufficient,
                 ['%productVariantCode%' => $productVariant->getCode()]
@@ -128,5 +110,16 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
                 ['%productName%' => $product->getName()]
             );
         }
+    }
+
+    private function getExistingCartItemQuantityFromCart(OrderInterface $cart, ProductVariantInterface $productVariant): int
+    {
+        foreach ($cart->getItems() as $existingCartItem) {
+            if ($existingCartItem->getVariant()->getCode() === $productVariant->getCode() && $productVariant->isTracked()) {
+                return $existingCartItem->getQuantity();
+            }
+        }
+
+        return 0;
     }
 }
