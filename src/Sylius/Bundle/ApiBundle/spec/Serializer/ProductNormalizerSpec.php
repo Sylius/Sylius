@@ -37,6 +37,14 @@ final class ProductNormalizerSpec extends ObjectBehavior
         $this->supportsNormalization($order)->shouldReturn(false);
     }
 
+    function it_does_not_support_if_the_normalizer_has_been_already_called(ProductVariantInterface $variant): void
+    {
+        $this
+            ->supportsNormalization($variant, null, ['product_normalizer_already_called' => true])
+            ->shouldReturn(false)
+        ;
+    }
+
     function it_adds_default_variant_iri_to_serialized_product(
         ProductVariantResolverInterface $defaultProductVariantResolver,
         IriConverterInterface $iriConverter,
@@ -66,5 +74,19 @@ final class ProductNormalizerSpec extends ObjectBehavior
         $iriConverter->getIriFromItem(Argument::any())->shouldNotBeCalled();
 
         $this->normalize($product, null, [])->shouldReturn(['defaultVariant' => null]);
+    }
+
+    function it_throws_an_exception_if_the_normalizer_has_been_already_called(
+        NormalizerInterface $normalizer,
+        ProductInterface $product
+    ): void {
+        $this->setNormalizer($normalizer);
+
+        $normalizer->normalize($product, null, ['product_normalizer_already_called' => true])->shouldNotBeCalled();
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('normalize', [$product, null, ['product_normalizer_already_called' => true]])
+        ;
     }
 }

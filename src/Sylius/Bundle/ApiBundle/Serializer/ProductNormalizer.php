@@ -36,6 +36,7 @@ final class ProductNormalizer implements ContextAwareNormalizerInterface, Normal
     public function normalize($object, $format = null, array $context = [])
     {
         Assert::isInstanceOf($object, ProductInterface::class);
+        Assert::keyNotExists($context, self::ALREADY_CALLED);
 
         $context[self::ALREADY_CALLED] = true;
 
