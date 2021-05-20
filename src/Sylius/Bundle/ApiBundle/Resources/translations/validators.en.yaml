@@ -5,6 +5,8 @@ sylius:
         is_verified: 'Account with email %email% is currently verified.'
     order:
         not_empty: 'An empty order cannot be completed.'
+    payment_method:
+        not_exist: 'The payment method with %paymentMethodCode% code does not exist.'
     product:
         not_exist: 'The product %productName% does not exist.'
     product_variant:

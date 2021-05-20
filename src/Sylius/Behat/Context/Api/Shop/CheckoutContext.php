@@ -24,6 +24,7 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentMethod;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -350,6 +351,27 @@ final class CheckoutContext implements Context
         );
 
         $request->setContent(['shippingMethod' => $this->iriConverter->getIriFromItem($shippingMethod)]);
+
+        $this->ordersClient->executeCustomRequest($request);
+    }
+
+
+    /**
+     * @When /^I try to select inexistent "([^"]*)" payment method$/
+     */
+    public function iTryToSelectInexistentPaymentMethod(string $code): void
+    {
+        $paymentMethod = new PaymentMethod();
+
+        $request = Request::customItemAction(
+            'shop',
+            'orders',
+            $this->sharedStorage->get('cart_token'),
+            HTTPRequest::METHOD_PATCH,
+            sprintf('payments/%s', $this->getCart()['payments'][0]['id'])
+        );
+
+        $request->setContent(['paymentMethod' => $this->iriConverter->getItemIriFromResourceClass(\get_class($paymentMethod), ['code' => $code])]);
 
         $this->ordersClient->executeCustomRequest($request);
     }
@@ -818,6 +840,17 @@ final class CheckoutContext implements Context
         Assert::true($this->isViolationWithMessageInResponse(
             $this->ordersClient->getLastResponse(),
             sprintf('The product variant with %s does not exist.', $code)
+        ));
+    }
+
+    /**
+     * @Then I should be informed that payment method with code :code does not exist
+     */
+    public function iShouldBeInformedThatPaymentMethodWithCodeDoesNotExist(string $code): void
+    {
+        Assert::true($this->isViolationWithMessageInResponse(
+            $this->ordersClient->getLastResponse(),
+            sprintf('The payment method with %s code does not exist.', $code)
         ));
     }
 
