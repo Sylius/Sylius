@@ -19,45 +19,42 @@ use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Order\Model\Order;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-final class ProductVariantSerializerSpec extends ObjectBehavior
+final class ProductVariantNormalizerSpec extends ObjectBehavior
 {
     function let(
-        NormalizerInterface $objectNormalizer,
         ProductVariantPricesCalculatorInterface $pricesCalculator,
         ChannelContextInterface $channelContext,
         AvailabilityCheckerInterface $availabilityChecker
     ): void {
-        $this->beConstructedWith($objectNormalizer, $pricesCalculator, $channelContext, $availabilityChecker);
+        $this->beConstructedWith($pricesCalculator, $channelContext, $availabilityChecker);
     }
 
     function it_supports_only_product_variant_interface(): void
     {
-        $variant = new ProductVariant();
-        $this->supportsNormalization($variant)->shouldReturn(true);
-
-        $order = new Order();
-        $this->supportsNormalization($order)->shouldReturn(false);
+        $this->supportsNormalization(new ProductVariant())->shouldReturn(true);
+        $this->supportsNormalization(new Order())->shouldReturn(false);
     }
 
     function it_does_not_serialize_if_item_operation_name_is_admin_get(): void
     {
-        $variant = new ProductVariant();
-        $this->supportsNormalization($variant, null, ['item_operation_name' => 'admin_get'])->shouldReturn(false);
+        $this->supportsNormalization(new ProductVariant(), null, ['item_operation_name' => 'admin_get'])->shouldReturn(false);
     }
 
     function it_serializes_product_variant_if_item_operation_name_is_different_that_admin_get(
-        NormalizerInterface $objectNormalizer,
         ProductVariantPricesCalculatorInterface $pricesCalculator,
-        ChannelInterface $channel,
         ChannelContextInterface $channelContext,
-        AvailabilityCheckerInterface $availabilityChecker
+        AvailabilityCheckerInterface $availabilityChecker,
+        NormalizerInterface $normalizer,
+        ChannelInterface $channel,
+        ProductVariantInterface $variant
     ): void {
-        $variant = new ProductVariant();
+        $this->setNormalizer($normalizer);
 
-        $objectNormalizer->normalize($variant, null, [])->willReturn([]);
+        $normalizer->normalize($variant, null, ['product_variant_normalizer_already_called' => true])->willReturn([]);
 
         $channelContext->getChannel()->willReturn($channel);
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(1000);
