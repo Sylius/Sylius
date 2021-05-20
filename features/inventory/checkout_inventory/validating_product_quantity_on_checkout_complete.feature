@@ -16,23 +16,23 @@ Feature: Being unable to buy products that are out of stock
         And the store allows paying offline
         And I am a logged in customer
 
-    @ui
+    @ui @api
     Scenario: Placing an order with products that have sufficient quantity
         Given I have added 3 products "Iron Maiden T-Shirt" to the cart
-        And I have proceeded selecting "Offline" payment method
+        And I proceed through checkout process
         When I confirm my order
         Then I should see the thank you page
 
-    @ui
+    @ui @api
     Scenario: Being unable to place an order with product that is out of stock
         Given I have added 5 products "Iron Maiden T-Shirt" to the cart
-        And I have proceeded selecting "Offline" payment method
+        And I proceed through checkout process
         When other customer has bought 2 "Iron Maiden T-Shirt" products by this time
         And I confirm my order
         Then I should not see the thank you page
-        And I should be notified that this product does not have sufficient stock
+        And I should be notified that "Iron Maiden T-Shirt" does not have sufficient stock
 
-    @ui
+    @ui @api
     Scenario: Being unable to place an order with products that are out of stock
         Given I have added 5 products "Iron Maiden T-Shirt" to the cart
         And I have added 5 products "2Pac T-Shirt" to the cart

@@ -121,6 +121,7 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given /^I have(?:| added) (\d+) (products "[^"]+") (?:to|in) the (cart)$/
      * @When /^I add (\d+) of (them) to (?:the|my) (cart)$/
      * @When /^I add (\d+) (products "[^"]+") to the (cart)$/
      * @When /^I try to add (\d+) (products "[^"]+") to the (cart)$/
