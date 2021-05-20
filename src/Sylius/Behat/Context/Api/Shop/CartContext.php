@@ -122,7 +122,7 @@ final class CartContext implements Context
 
     /**
      * @When /^I add (\d+) of (them) to (?:the|my) (cart)$/
-     * @When /^I add (\d+) (products "[^"]+") to the (cart)$/
+     * @When /^I add(?:| again) (\d+) (products "[^"]+") to the (cart)$/
      * @When /^I try to add (\d+) (products "[^"]+") to the (cart)$/
      */
     public function iAddOfThemToMyCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
@@ -228,6 +228,36 @@ final class CartContext implements Context
     public function iCheckDetailsOfMyCart(string $tokenValue): void
     {
         $this->cartsClient->show($tokenValue);
+    }
+
+    /**
+     * @Then /^I should be notified that (this product) does not have sufficient stock$/
+     */
+    public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
+    {
+        Assert::true($this->responseChecker->hasViolationWithMessage(
+            $this->cartsClient->getLastResponse(),
+            sprintf('The product variant with %s code does not have sufficient stock.', $product->getCode())
+        ));
+    }
+
+    /**
+     * @Then /^I should not be notified that (this product) does not have sufficient stock$/
+     */
+    public function iShouldNotBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
+    {
+        Assert::false($this->responseChecker->hasViolationWithMessage(
+            $this->cartsClient->getLastResponse(),
+            sprintf('The product variant with %s code does not have sufficient stock.', $product->getCode())
+        ));
+    }
+
+    /**
+     * @Then I should still be on product :product page
+     */
+    public function iShouldStillBeOnProductPage(ProductInterface $product): void
+    {
+        // Intentionally left blank
     }
 
     /**
