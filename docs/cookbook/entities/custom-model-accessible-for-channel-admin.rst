@@ -20,13 +20,28 @@ is described in the section ``How to customize Admin Menu`` of :doc:`this guide 
 .. code-block:: php
 
     /**
-      * @var ChannelInterface
-      * @ORM\ManyToOne(targetEntity="Sylius\Plus\Entity\ChannelInterface")
-      * @ORM\JoinColumn(name="channel_id", referencedColumnName="id", nullable=true)
-      */
-     protected $channel;
+     * @var ChannelInterface
+     * @ORM\ManyToOne(targetEntity="Sylius\Plus\Entity\ChannelInterface")
+     * @ORM\JoinColumn(name="channel_id", referencedColumnName="id", nullable=true)
+     */
+    protected $channel;
 
-* Create a proper migration for these changes.
+    public function getChannel(): ?ChannelInterface
+    {
+        return $this->channel;
+    }
+
+    public function setChannel(?ChannelInterface $channel): void
+    {
+        $this->channel = $channel;
+    }
+
+* Assuming that your database was up-to-date before these changes, create a proper migration and use it:
+
+.. code-block:: bash
+
+    php bin/console doctrine:migrations:diff
+    php bin/console doctrine:migrations:migrate
 
 * Next, create a form type for your entity:
 
@@ -36,7 +51,7 @@ is described in the section ``How to customize Admin Menu`` of :doc:`this guide 
 
     declare(strict_types=1);
 
-    namespace App\Form;
+    namespace App\Form\Type;
 
     use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
     use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
@@ -50,9 +65,9 @@ is described in the section ``How to customize Admin Menu`` of :doc:`this guide 
         private $availableChannelsForAdminProvider;
 
         public function __construct(
-            AvailableChannelsForAdminProviderInterface $availableChannelsForAdminProvider,
             string $dataClass,
-            array $validationGroups = []
+            array $validationGroups,
+            AvailableChannelsForAdminProviderInterface $availableChannelsForAdminProvider
         ) {
             parent::__construct($dataClass, $validationGroups);
 
@@ -80,11 +95,13 @@ is described in the section ``How to customize Admin Menu`` of :doc:`this guide 
 
 .. code-block:: yaml
 
-    App\Form\SupplierType:
-        arguments: ['@Sylius\Plus\ChannelAdmin\Application\Provider\AvailableChannelsForAdminProviderInterface', 'App\Entity\Supplier', ['sylius']]
+    # config/services.yaml
+    App\Form\Type\SupplierType:
+        arguments: ['App\Entity\Supplier', ['sylius'], '@Sylius\Plus\ChannelAdmin\Application\Provider\AvailableChannelsForAdminProviderInterface']
         tags: ['form.type']
 
-The ``Sylius\Plus\ChannelAdmin\Application\Provider\AvailableChannelsForAdminProviderInterface`` service allows getting a list of proper channels for the currently logged-in admin.
+The ``Sylius\Plus\ChannelAdmin\Application\Provider\AvailableChannelsForAdminProviderInterface`` service allows getting
+a list of proper channels for the currently logged in admin user.
 
 Remember to register ``App\Form\SupplierType`` for resource:
 
@@ -96,10 +113,10 @@ Remember to register ``App\Form\SupplierType`` for resource:
                 driver: doctrine/orm
                 classes:
                     model: App\Entity\Supplier
-       +            form: App\Form\SupplierType
+       +            form: App\Form\Type\SupplierType
 
-1. Restrict access to the entity for the respective channel administrator roles (using ACL/RBAC):
--------------------------------------------------------------------------------------------------
+1. Restrict access to the entity for the respective channel administrator:
+--------------------------------------------------------------------------
 
 .. note::
 
@@ -118,7 +135,6 @@ Remember to register ``App\Form\SupplierType`` for resource:
     namespace App\Checker;
 
     use Sylius\Plus\ChannelAdmin\Application\Checker\ResourceChannelEnabilibityCheckerInterface;
-    use Sylius\Plus\ChannelAdmin\Application\Checker\ResourceChannelEnabilibityChecker as DecoratedResourceChannelEnabilibityChecker;
 
     final class ResourceChannelEnabilibityChecker implements ResourceChannelEnabilibityCheckerInterface
     {
@@ -142,6 +158,7 @@ Remember to register ``App\Form\SupplierType`` for resource:
 
 .. code-block:: yaml
 
+    # config/services.yaml
     App\Checker\ResourceChannelEnabilibityChecker:
         decorates: Sylius\Plus\ChannelAdmin\Application\Checker\ResourceChannelEnabilibityCheckerInterface
         arguments: ['@.inner']
@@ -156,6 +173,7 @@ Remember to register ``App\Form\SupplierType`` for resource:
 
     namespace App\Checker;
 
+    use App\Entity\Supplier;
     use Sylius\Plus\ChannelAdmin\Application\Checker\ResourceChannelCheckerInterface;
     use Sylius\Plus\Entity\ChannelInterface;
 
@@ -171,9 +189,7 @@ Remember to register ``App\Form\SupplierType`` for resource:
 
         public function isFromChannel(object $resource, ChannelInterface $channel): bool
         {
-            if (
-                $resource instanceof Supplier && in_array($resource->getChannel(), [$channel, null], true)
-            ) {
+            if ($resource instanceof Supplier && in_array($resource->getChannel(), [$channel, null], true)) {
                 return true;
             }
 
@@ -183,6 +199,7 @@ Remember to register ``App\Form\SupplierType`` for resource:
 
 .. code-block:: yaml
 
+    # config/services.yaml
     App\Checker\ResourceChannelChecker:
         decorates: Sylius\Plus\ChannelAdmin\Application\Checker\ResourceChannelCheckerInterface
         arguments: ['@.inner']
@@ -239,6 +256,7 @@ After that, access to the resource should work properly with all restrictions.
 
 .. code-block:: yaml
 
+    # config/services.yaml
     App\Doctrine\ORM\RestrictingSupplierListQueryBuilder:
         public: true
         class: App\Doctrine\ORM\RestrictingSupplierListQueryBuilder
@@ -255,7 +273,7 @@ After that, access to the resource should work properly with all restrictions.
                     name: doctrine/orm
                     options:
                         class: App\Entity\Supplier
-                        repository:
+  +                     repository:
   +                         method: [expr:service('App\\Doctrine\\ORM\\RestrictingSupplierListQueryBuilder'), create]
 
 Well done! That's it, now you have a Supplier entity, that is accessible within the Sylius Plus Administrators per Channel feature!
