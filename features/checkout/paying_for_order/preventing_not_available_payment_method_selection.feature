@@ -42,5 +42,5 @@ Feature: Preventing not available payment method selection
         And I complete the addressing step
         And I select "Free" shipping method
         And I complete the shipping step
-        And I try to select inexistent "Free" payment method
+        And I try to select "Free" payment method
         Then I should be informed that payment method with code "Free" does not exist

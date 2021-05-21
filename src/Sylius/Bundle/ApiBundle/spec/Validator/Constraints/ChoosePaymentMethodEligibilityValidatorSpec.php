@@ -35,7 +35,7 @@ final class ChoosePaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         $this->shouldImplement(ConstraintValidatorInterface::class);
     }
 
-    function it_throws_an_exception_if_constraint_does_not_extend_payment_method_code_aware_interface(): void
+    function it_throws_an_exception_if_value_does_not_extend_payment_method_code_aware_interface(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -70,20 +70,16 @@ final class ChoosePaymentMethodEligibilityValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $constraint = new ChoosePaymentMethodEligibility();
-
-        $value = new ChoosePaymentMethod('code');
-
-        $paymentMethodRepository->findOneBy(['code' => $value->getPaymentMethodCode()])->willReturn(null);
+        $paymentMethodRepository->findOneBy(['code' => 'payment_method_code'])->willReturn(null);
 
         $executionContext
-            ->addViolation(
-                'sylius.payment_method.not_exist',
-                ['%paymentMethodCode%' => 'code']
-            )
+            ->addViolation('sylius.payment_method.not_exist', ['%paymentMethodCode%' => 'payment_method_code'])
             ->shouldBeCalled();
 
-        $this->validate($value, $constraint);
+        $this->validate(
+            new ChoosePaymentMethod('payment_method_code'),
+            new ChoosePaymentMethodEligibility()
+        );
     }
 
     function it_does_nothing_if_payment_method_is_eligible(
@@ -93,19 +89,15 @@ final class ChoosePaymentMethodEligibilityValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $constraint = new ChoosePaymentMethodEligibility();
-
-        $value = new ChoosePaymentMethod('code');
-
-        $paymentMethodRepository->findOneBy(['code' => $value->getPaymentMethodCode()])->willReturn($paymentMethod);
+        $paymentMethodRepository->findOneBy(['code' => 'payment_method_code'])->willReturn($paymentMethod);
 
         $executionContext
-            ->addViolation(
-                'sylius.payment_method.not_exist',
-                ['%paymentMethodCode%' => 'code']
-            )
+            ->addViolation('sylius.payment_method.not_exist', ['%paymentMethodCode%' => 'payment_method_code'])
             ->shouldNotBeCalled();
 
-        $this->validate($value, $constraint);
+        $this->validate(
+            new ChoosePaymentMethod('payment_method_code'),
+            new ChoosePaymentMethodEligibility()
+        );
     }
 }

@@ -20,7 +20,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-class ChoosePaymentMethodEligibilityValidator extends ConstraintValidator
+final class ChoosePaymentMethodEligibilityValidator extends ConstraintValidator
 {
     /** @var PaymentMethodRepositoryInterface */
     private $paymentMethodRepository;
@@ -41,7 +41,7 @@ class ChoosePaymentMethodEligibilityValidator extends ConstraintValidator
         if ($paymentMethod === null) {
             $this->context->addViolation(
                 $constraint->paymentMethodNotExistMessage,
-                ['%paymentMethodCode%' => $value->paymentMethodCode]
+                ['%paymentMethodCode%' => $value->getPaymentMethodCode()]
             );
 
             return;

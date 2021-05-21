@@ -357,12 +357,10 @@ final class CheckoutContext implements Context
 
 
     /**
-     * @When /^I try to select inexistent "([^"]*)" payment method$/
+     * @When I try to select :paymentMethodCode payment method
      */
-    public function iTryToSelectInexistentPaymentMethod(string $code): void
+    public function iTryToSelectPaymentMethod(string $paymentMethodCode): void
     {
-        $paymentMethod = new PaymentMethod();
-
         $request = Request::customItemAction(
             'shop',
             'orders',
@@ -371,7 +369,7 @@ final class CheckoutContext implements Context
             sprintf('payments/%s', $this->getCart()['payments'][0]['id'])
         );
 
-        $request->setContent(['paymentMethod' => $this->iriConverter->getItemIriFromResourceClass(\get_class($paymentMethod), ['code' => $code])]);
+        $request->setContent(['paymentMethod' => $this->iriConverter->getItemIriFromResourceClass(PaymentMethod::class, ['code' => $paymentMethodCode])]);
 
         $this->ordersClient->executeCustomRequest($request);
     }
