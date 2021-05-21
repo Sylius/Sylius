@@ -20,18 +20,33 @@
         </attribute>
         <attribute name="name">
             <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:create</group>
+            <group>admin:tax_rate:update</group>
         </attribute>
         <attribute name="amount">
             <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:create</group>
+            <group>admin:tax_rate:update</group>
         </attribute>
         <attribute name="includedInPrice">
             <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:create</group>
+            <group>admin:tax_rate:update</group>
         </attribute>
         <attribute name="calculator">
             <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:create</group>
+            <group>admin:tax_rate:update</group>
         </attribute>
         <attribute name="category">
             <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:create</group>
+            <group>admin:tax_rate:update</group>
+        </attribute>
+        <attribute name="zone">
+            <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:create</group>
+            <group>admin:tax_rate:update</group>
         </attribute>
     </class>
 </serializer>
