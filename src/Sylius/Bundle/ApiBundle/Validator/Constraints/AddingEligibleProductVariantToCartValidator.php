@@ -85,7 +85,14 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
             return;
         }
 
-        if (!$this->availabilityChecker->isStockSufficient($productVariant, $value->quantity)) {
+        /** @var OrderInterface|null $cart */
+        $cart = $this->orderRepository->findCartByTokenValue($value->getOrderTokenValue());
+        Assert::notNull($cart);
+
+        if (!$this->availabilityChecker->isStockSufficient(
+            $productVariant,
+            $value->quantity + $this->getExistingCartItemQuantityFromCart($cart, $productVariant)
+        )) {
             $this->context->addViolation(
                 $constraint->productVariantNotSufficient,
                 ['%productVariantCode%' => $productVariant->getCode()]
@@ -94,9 +101,6 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
             return;
         }
 
-        /** @var OrderInterface|null $cart */
-        $cart = $this->orderRepository->findCartByTokenValue($value->getOrderTokenValue());
-        Assert::notNull($cart);
         $channel = $cart->getChannel();
         Assert::notNull($channel);
 
@@ -106,5 +110,16 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
                 ['%productName%' => $product->getName()]
             );
         }
+    }
+
+    private function getExistingCartItemQuantityFromCart(OrderInterface $cart, ProductVariantInterface $productVariant): int
+    {
+        foreach ($cart->getItems() as $existingCartItem) {
+            if ($existingCartItem->getVariant()->getCode() === $productVariant->getCode() && $productVariant->isTracked()) {
+                return $existingCartItem->getQuantity();
+            }
+        }
+
+        return 0;
     }
 }
