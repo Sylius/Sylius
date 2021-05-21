@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\AddingEligibleProductVariantToCart;
-use Sylius\Bundle\ApiBundle\Validator\Constraints\ChangingItemQuantityInCart;
+use Sylius\Bundle\ApiBundle\Validator\Constraints\ChangedItemQuantityInCart;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -30,7 +30,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-final class ChangingItemQuantityInCartValidatorSpec extends ObjectBehavior
+final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
 {
     function let(
         RepositoryInterface $orderItemRepository,
@@ -52,12 +52,12 @@ final class ChangingItemQuantityInCartValidatorSpec extends ObjectBehavior
             ->during('validate', [new CompleteOrder(), new AddingEligibleProductVariantToCart()]);
     }
 
-    function it_throws_an_exception_if_constraint_is_not_an_instance_of_changing_item_quantity_in_cart(): void
+    function it_throws_an_exception_if_constraint_is_not_an_instance_of_changed_item_quantity_in_cart(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('validate', [
-                new ChangeItemQuantityInCart( 2),
+                new ChangeItemQuantityInCart(2),
                 new class() extends Constraint {}
             ])
         ;
@@ -75,13 +75,13 @@ final class ChangingItemQuantityInCartValidatorSpec extends ObjectBehavior
         $orderItem->getVariantName()->willReturn('MacPro');
 
         $executionContext
-            ->addViolation('sylius.product_variant.with_name_not_exist', ['%productVariantName%' => 'MacPro'])
+            ->addViolation('sylius.product_variant.not_longer_available', ['%productVariantName%' => 'MacPro'])
             ->shouldBeCalled()
         ;
 
         $this->validate(
             ChangeItemQuantityInCart::createFromData('token', '11', 2),
-            new ChangingItemQuantityInCart()
+            new ChangedItemQuantityInCart()
         );
     }
 
@@ -111,7 +111,7 @@ final class ChangingItemQuantityInCartValidatorSpec extends ObjectBehavior
 
         $this->validate(
             ChangeItemQuantityInCart::createFromData('token', '11', 2),
-            new ChangingItemQuantityInCart()
+            new ChangedItemQuantityInCart()
         );
     }
 
@@ -137,13 +137,13 @@ final class ChangingItemQuantityInCartValidatorSpec extends ObjectBehavior
         $productVariant->isEnabled()->willReturn(false);
 
         $executionContext
-            ->addViolation('sylius.product_variant.with_name_not_exist', ['%productVariantName%' => 'Variant Name'])
+            ->addViolation('sylius.product_variant.not_longer_available', ['%productVariantName%' => 'Variant Name'])
             ->shouldBeCalled()
         ;
 
         $this->validate(
             ChangeItemQuantityInCart::createFromData('token', '11', 2),
-            new ChangingItemQuantityInCart()
+            new ChangedItemQuantityInCart()
         );
     }
 
@@ -178,7 +178,7 @@ final class ChangingItemQuantityInCartValidatorSpec extends ObjectBehavior
 
         $this->validate(
             ChangeItemQuantityInCart::createFromData('token', '11', 2),
-            new ChangingItemQuantityInCart()
+            new ChangedItemQuantityInCart()
         );
     }
 
@@ -223,7 +223,7 @@ final class ChangingItemQuantityInCartValidatorSpec extends ObjectBehavior
 
         $this->validate(
             ChangeItemQuantityInCart::createFromData('TOKEN', '11', 2),
-            new ChangingItemQuantityInCart()
+            new ChangedItemQuantityInCart()
         );
     }
 
@@ -276,7 +276,7 @@ final class ChangingItemQuantityInCartValidatorSpec extends ObjectBehavior
 
         $this->validate(
             ChangeItemQuantityInCart::createFromData('TOKEN', '11', 2),
-            new ChangingItemQuantityInCart()
+            new ChangedItemQuantityInCart()
         );
     }
 }
