@@ -527,6 +527,17 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then /^my cart should have (\d+) items total$/
+     */
+    public function myCartShouldHaveItemsTotal(int $total): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->cartsClient->getLastResponse(), 'shippingTotal'),
+            $total
+        );
+    }
+
+    /**
      * @Then /^my cart should have (\d+) items of (product "([^"]+)")$/
      */
     public function myCartShouldHaveItems(int $quantity, ProductInterface $product): void
