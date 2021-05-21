@@ -16,7 +16,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
     <class name="Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod">
-        <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\ChoosePaymentMethodEligibility">
+        <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentMethodEligibility">
             <option name="groups">
                 <value>sylius</value>
             </option>

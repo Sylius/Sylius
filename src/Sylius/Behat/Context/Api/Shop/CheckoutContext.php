@@ -355,7 +355,6 @@ final class CheckoutContext implements Context
         $this->ordersClient->executeCustomRequest($request);
     }
 
-
     /**
      * @When I try to select :paymentMethodCode payment method
      */

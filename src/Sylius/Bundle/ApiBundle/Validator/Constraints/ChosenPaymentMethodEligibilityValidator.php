@@ -20,7 +20,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class ChoosePaymentMethodEligibilityValidator extends ConstraintValidator
+final class ChosenPaymentMethodEligibilityValidator extends ConstraintValidator
 {
     /** @var PaymentMethodRepositoryInterface */
     private $paymentMethodRepository;
@@ -29,18 +29,19 @@ final class ChoosePaymentMethodEligibilityValidator extends ConstraintValidator
     {
         $this->paymentMethodRepository = $paymentMethodRepository;
     }
+    
     public function validate($value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, PaymentMethodCodeAwareInterface::class);
 
-        /** @var ChoosePaymentMethodEligibility $constraint */
-        Assert::isInstanceOf($constraint, ChoosePaymentMethodEligibility::class);
+        /** @var ChosenPaymentMethodEligibility $constraint */
+        Assert::isInstanceOf($constraint, ChosenPaymentMethodEligibility::class);
 
         $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $value->getPaymentMethodCode()]);
 
         if ($paymentMethod === null) {
             $this->context->addViolation(
-                $constraint->paymentMethodNotExistMessage,
+                $constraint->message,
                 ['%paymentMethodCode%' => $value->getPaymentMethodCode()]
             );
 

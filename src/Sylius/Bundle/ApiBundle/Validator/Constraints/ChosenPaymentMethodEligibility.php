@@ -15,14 +15,14 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-final class ChoosePaymentMethodEligibility extends Constraint
+final class ChosenPaymentMethodEligibility extends Constraint
 {
     /** @var string */
-    public $paymentMethodNotExistMessage = 'sylius.payment_method.not_exist';
+    public $message = 'sylius.payment_method.not_exist';
 
     public function validatedBy(): string
     {
-        return 'sylius_api_choose_payment_method_eligibility';
+        return 'sylius_api_chosen_payment_method_eligibility';
     }
 
     public function getTargets(): string

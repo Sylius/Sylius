@@ -16,18 +16,22 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Bundle\ApiBundle\Command\PaymentMethodCodeAwareInterface;
-use Sylius\Bundle\ApiBundle\Validator\Constraints\ChoosePaymentMethodEligibility;
+use Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentMethodEligibility;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-final class ChoosePaymentMethodEligibilityValidatorSpec extends ObjectBehavior
+final class ChosenPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
 {
-    function let(PaymentMethodRepositoryInterface $paymentMethodRepository): void
-    {
+    function let(
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
+        ExecutionContextInterface $executionContext
+    ): void {
         $this->beConstructedWith($paymentMethodRepository);
+
+        $this->initialize($executionContext);
     }
 
     function it_is_a_constraint_validator(): void
@@ -39,37 +43,21 @@ final class ChoosePaymentMethodEligibilityValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', ['', new class() extends Constraint {
-            }]);
+            ->during('validate', ['', new ChosenPaymentMethodEligibility()]);
     }
 
-    function it_throws_an_exception_if_constraint_does_not_type_of_choose_payment_method_eligibility(): void
+    function it_throws_an_exception_if_constraint_is_not_an_instance_of_chosen_payment_method_eligibility(): void
     {
-        $constraint = new class() extends Constraint implements PaymentMethodCodeAwareInterface {
-            private $paymentMethodCode;
-
-            function getPaymentMethodCode(): ?string
-            {
-                return 'abc';
-            }
-
-            function setPaymentMethodCode(?string $paymentMethodCode): void
-            {
-                $this->paymentMethodCode = $paymentMethodCode;
-            }
-        };
-
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', ['', $constraint]);
+            ->during('validate', [new ChoosePaymentMethod('code'), new class() extends Constraint {}])
+        ;
     }
 
     function it_adds_violation_if_payment_does_not_exist(
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         ExecutionContextInterface $executionContext
     ): void {
-        $this->initialize($executionContext);
-
         $paymentMethodRepository->findOneBy(['code' => 'payment_method_code'])->willReturn(null);
 
         $executionContext
@@ -78,7 +66,7 @@ final class ChoosePaymentMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $this->validate(
             new ChoosePaymentMethod('payment_method_code'),
-            new ChoosePaymentMethodEligibility()
+            new ChosenPaymentMethodEligibility()
         );
     }
 
@@ -87,8 +75,6 @@ final class ChoosePaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         PaymentMethodInterface $paymentMethod,
         ExecutionContextInterface $executionContext
     ): void {
-        $this->initialize($executionContext);
-
         $paymentMethodRepository->findOneBy(['code' => 'payment_method_code'])->willReturn($paymentMethod);
 
         $executionContext
@@ -97,7 +83,7 @@ final class ChoosePaymentMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $this->validate(
             new ChoosePaymentMethod('payment_method_code'),
-            new ChoosePaymentMethodEligibility()
+            new ChosenPaymentMethodEligibility()
         );
     }
 }
