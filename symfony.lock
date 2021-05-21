@@ -2,6 +2,9 @@
     "aeon-php/calendar": {
         "version": "0.15.0"
     },
+    "alcohol/iso4217": {
+        "version": "4.0.0"
+    },
     "amphp/amp": {
         "version": "v2.5.0"
     },
@@ -93,6 +96,9 @@
     },
     "doctrine/dbal": {
         "version": "2.10.3"
+    },
+    "doctrine/deprecations": {
+        "version": "v0.5.3"
     },
     "doctrine/doctrine-bundle": {
         "version": "1.12",
