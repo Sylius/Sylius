@@ -33,7 +33,7 @@
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
-               <attribute name="denormalization_context">
+                <attribute name="denormalization_context">
                     <attribute name="groups">admin:tax_rate:create</attribute>
                 </attribute>
             </collectionOperation>
