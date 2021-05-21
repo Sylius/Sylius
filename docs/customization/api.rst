@@ -178,7 +178,10 @@ Adding a custom field to response
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Let's say that you want to add a new field named ``additionalText`` to ``Product``.
-First let's create a new serializer that will support our ``Product`` resource:
+First we need to create a new serializer that will support our ``Product`` resource, but in this case we have a ``ProductNormalizer`` provided from Sylius.
+Unfortunately we cannot use more than one normalizer per resource, hence we will override existing one.
+
+Let's than copy code of ProductNormalizer from ``vendor/sylius/sylius/src/Sylius/Bundle/ApiBundle/Serializer/ProductNormalizer.php`` :
 
 .. code-block:: php
 
@@ -208,6 +211,8 @@ First let's create a new serializer that will support our ``Product`` resource:
             $context[self::ALREADY_CALLED] = true;
 
             $data = $this->normalizer->normalize($object, $format, $context);
+            $variant = $this->defaultProductVariantResolver->getVariant($object);
+            $data['defaultVariant'] = $variant === null ? null : $this->iriConverter->getIriFromItem($variant);
 
             return $data;
         }
@@ -230,6 +235,11 @@ And now let's declare its service in config files:
     App\Serializer\ProductNormalizer:
         tags:
             - { name: 'serializer.normalizer', priority: 100 }
+
+.. warning::
+
+    As we can use only one Normalizer per resource we need to set priority higher then one from Sylius.
+    Default value for Sylius Normalizers is typically 64, but if you want to be sure, check the values in ``src/Sylius/Bundle/ApiBundle/Resources/config/services/serializers.xml``
 
 Then we can add the new field:
 
