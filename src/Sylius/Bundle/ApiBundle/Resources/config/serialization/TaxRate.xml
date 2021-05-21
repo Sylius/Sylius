@@ -17,6 +17,7 @@
         </attribute>
         <attribute name="code">
             <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:create</group>
         </attribute>
         <attribute name="name">
             <group>admin:tax_rate:read</group>
