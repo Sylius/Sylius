@@ -62,3 +62,27 @@ Feature: Preventing not available shipping method selection
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should not be able to select "Dragon Post" shipping method
+
+    @ui @api
+    Scenario: Not being able to select shipping method not available for shipping category of products in cart
+        Given the store has "Over-sized" shipping category
+        And product "Targaryen T-Shirt" belongs to "Over-sized" shipping category
+        And the store has "Raven Post" shipping method with "$10.00" fee
+        And the store has "Dragon Post" shipping method with "$30.00" fee
+        And this shipping method requires that no units match to "Over-sized" shipping category
+        And I have product "Targaryen T-Shirt" in the cart
+        And I am at the checkout addressing step
+        When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
+        Then I should not be able to select "Dragon Post" shipping method
+
+    @ui @api
+    Scenario: Not being able to select shipping method not available due to shipping rules
+        Given the store has "Raven Post" shipping method with "$10.00" fee
+        And the store has "Dragon Post" shipping method with "$30.00" fee
+        And this shipping method is only available for orders over or equal to "$100"
+        And I have product "Targaryen T-Shirt" in the cart
+        And I am at the checkout addressing step
+        When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
+        Then I should not be able to select "Dragon Post" shipping method
