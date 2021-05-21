@@ -783,6 +783,7 @@ final class ProductContext implements Context
 
     /**
      * @Given /^(this product) belongs to ("([^"]+)" shipping category)$/
+     * @Given product :product belongs to :shippingCategory shipping category
      * @Given product :product shipping category has been changed to :shippingCategory
      */
     public function thisProductBelongsToShippingCategory(ProductInterface $product, ShippingCategoryInterface $shippingCategory)

@@ -3,6 +3,9 @@
 1. `Sylius\Bundle\ApiBundle\DataProvider\OrderCollectionDataProvider` has been removed and the same logic 
 is now implemented in `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrdersByLoggedInUserExtension`
 
+1. The service `Sylius\Bundle\ApiBundle\Serializer\ProductVariantSerializer` has been changed to `Sylius\Bundle\ApiBundle\Serializer\ProductVariantNormalizer`
+and its first argument `NormalizerInterface $objectNormalizer` has been removed from constructor.
+
 # UPGRADE FROM `v1.9.2` TO `v1.9.3`
 
 1. The endpoint `GET api/v2/order-items/{id}/adjustments` has been changed to `GET api/v2/admin/order-items/{id}/adjustments`

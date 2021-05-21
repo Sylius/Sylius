@@ -10,13 +10,16 @@ use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Webmozart\Assert\Assert;
 
-final class ProductVariantSerializer implements ContextAwareNormalizerInterface
+/** @experimental */
+final class ProductVariantNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
 {
-    /** @var NormalizerInterface */
-    private $objectNormalizer;
+    use NormalizerAwareTrait;
+
+    private const ALREADY_CALLED = 'product_variant_normalizer_already_called';
 
     /** @var ProductVariantPricesCalculatorInterface */
     private $priceCalculator;
@@ -28,12 +31,10 @@ final class ProductVariantSerializer implements ContextAwareNormalizerInterface
     private $availabilityChecker;
 
     public function __construct(
-        NormalizerInterface $objectNormalizer,
         ProductVariantPricesCalculatorInterface $priceCalculator,
         ChannelContextInterface $channelContext,
         AvailabilityCheckerInterface $availabilityChecker
     ) {
-        $this->objectNormalizer = $objectNormalizer;
         $this->priceCalculator = $priceCalculator;
         $this->channelContext = $channelContext;
         $this->availabilityChecker = $availabilityChecker;
@@ -42,8 +43,11 @@ final class ProductVariantSerializer implements ContextAwareNormalizerInterface
     public function normalize($object, $format = null, array $context = [])
     {
         Assert::isInstanceOf($object, ProductVariantInterface::class);
+        Assert::keyNotExists($context, self::ALREADY_CALLED);
 
-        $data = $this->objectNormalizer->normalize($object, $format, $context);
+        $context[self::ALREADY_CALLED] = true;
+
+        $data = $this->normalizer->normalize($object, $format, $context);
 
         try {
             $data['price'] = $this->priceCalculator->calculate($object, ['channel' => $this->channelContext->getChannel()]);
@@ -58,6 +62,9 @@ final class ProductVariantSerializer implements ContextAwareNormalizerInterface
 
     public function supportsNormalization($data, $format = null, $context = []): bool
     {
+        if (isset($context[self::ALREADY_CALLED])) {
+            return false;
+        }
         return $data instanceof ProductVariantInterface && $this->isNotAdminGetOperation($context);
     }
 

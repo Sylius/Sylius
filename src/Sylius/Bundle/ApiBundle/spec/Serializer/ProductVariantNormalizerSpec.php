@@ -17,52 +17,70 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
-use Sylius\Component\Order\Model\Order;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-final class ProductVariantSerializerSpec extends ObjectBehavior
+final class ProductVariantNormalizerSpec extends ObjectBehavior
 {
     function let(
-        NormalizerInterface $objectNormalizer,
         ProductVariantPricesCalculatorInterface $pricesCalculator,
         ChannelContextInterface $channelContext,
         AvailabilityCheckerInterface $availabilityChecker
     ): void {
-        $this->beConstructedWith($objectNormalizer, $pricesCalculator, $channelContext, $availabilityChecker);
+        $this->beConstructedWith($pricesCalculator, $channelContext, $availabilityChecker);
     }
 
-    function it_supports_only_product_variant_interface(): void
+    function it_supports_only_product_variant_interface(ProductVariantInterface $variant, OrderInterface $order): void
     {
-        $variant = new ProductVariant();
         $this->supportsNormalization($variant)->shouldReturn(true);
-
-        $order = new Order();
         $this->supportsNormalization($order)->shouldReturn(false);
     }
 
-    function it_does_not_serialize_if_item_operation_name_is_admin_get(): void
+    function it_does_not_support_if_item_operation_name_is_admin_get(ProductVariantInterface $variant): void
     {
-        $variant = new ProductVariant();
         $this->supportsNormalization($variant, null, ['item_operation_name' => 'admin_get'])->shouldReturn(false);
     }
 
-    function it_serializes_product_variant_if_item_operation_name_is_different_that_admin_get(
-        NormalizerInterface $objectNormalizer,
-        ProductVariantPricesCalculatorInterface $pricesCalculator,
-        ChannelInterface $channel,
-        ChannelContextInterface $channelContext,
-        AvailabilityCheckerInterface $availabilityChecker
-    ): void {
-        $variant = new ProductVariant();
+    function it_does_not_support_if_the_normalizer_has_been_already_called(ProductVariantInterface $variant): void
+    {
+        $this
+            ->supportsNormalization($variant, null, ['product_variant_normalizer_already_called' => true])
+            ->shouldReturn(false)
+        ;
+    }
 
-        $objectNormalizer->normalize($variant, null, [])->willReturn([]);
+    function it_serializes_product_variant_if_item_operation_name_is_different_that_admin_get(
+        ProductVariantPricesCalculatorInterface $pricesCalculator,
+        ChannelContextInterface $channelContext,
+        AvailabilityCheckerInterface $availabilityChecker,
+        NormalizerInterface $normalizer,
+        ChannelInterface $channel,
+        ProductVariantInterface $variant
+    ): void {
+        $this->setNormalizer($normalizer);
+
+        $normalizer->normalize($variant, null, ['product_variant_normalizer_already_called' => true])->willReturn([]);
 
         $channelContext->getChannel()->willReturn($channel);
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(1000);
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 
         $this->normalize($variant, null, [])->shouldReturn(['price' => 1000, 'inStock' => true]);
+    }
+
+    function it_throws_an_exception_if_the_normalizer_has_been_already_called(
+        NormalizerInterface $normalizer,
+        ProductVariantInterface $variant
+    ): void {
+        $this->setNormalizer($normalizer);
+
+        $normalizer->normalize($variant, null, ['product_variant_normalizer_already_called' => true])->shouldNotBeCalled();
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('normalize', [$variant, null, ['product_variant_normalizer_already_called' => true]])
+        ;
     }
 }

@@ -341,17 +341,7 @@ final class CheckoutContext implements Context
      */
     public function iProceededWithShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
-        $request = Request::customItemAction(
-            'shop',
-            'orders',
-            $this->sharedStorage->get('cart_token'),
-            HTTPRequest::METHOD_PATCH,
-            sprintf('shipments/%s', $this->getCart()['shipments'][0]['id'])
-        );
-
-        $request->setContent(['shippingMethod' => $this->iriConverter->getIriFromItem($shippingMethod)]);
-
-        $this->ordersClient->executeCustomRequest($request);
+        $this->selectShippingMethod($shippingMethod);
     }
 
     /**
@@ -636,11 +626,24 @@ final class CheckoutContext implements Context
 
     /**
      * @Then I should not see :shippingMethod shipping method
+     */
+    public function iShouldNotSeeShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        Assert::false($this->hasShippingMethod($shippingMethod));
+    }
+
+    /**
      * @Then I should not be able to select :shippingMethod shipping method
      */
     public function iShouldNotBeAbleToSelectShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
-        Assert::false($this->hasShippingMethod($shippingMethod));
+        $response = $this->selectShippingMethod($shippingMethod);
+
+        Assert::same($response->getStatusCode(), 422);
+        Assert::true($this->isViolationWithMessageInResponse($response, sprintf(
+            'The shipping method %s is not available for this order. Please reselect your shipping method.',
+            $shippingMethod->getName()
+        )));
     }
 
     /**
@@ -1253,6 +1256,21 @@ final class CheckoutContext implements Context
         );
 
         $request->setContent(['notes' => $notes]);
+
+        return $this->ordersClient->executeCustomRequest($request);
+    }
+
+    private function selectShippingMethod(ShippingMethodInterface $shippingMethod): Response
+    {
+        $request = Request::customItemAction(
+            'shop',
+            'orders',
+            $this->sharedStorage->get('cart_token'),
+            HTTPRequest::METHOD_PATCH,
+            sprintf('shipments/%s', $this->getCart()['shipments'][0]['id'])
+        );
+
+        $request->setContent(['shippingMethod' => $this->iriConverter->getIriFromItem($shippingMethod)]);
 
         return $this->ordersClient->executeCustomRequest($request);
     }
