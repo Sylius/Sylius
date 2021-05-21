@@ -16,6 +16,12 @@ sylius:
             to_reset_your_password: 'Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous'
             to_reset_your_password_token: 'Pour réinitialiser votre mot de passe, utilisez le jeton ci-dessous'
             token: 'Votre jeton de réinitialisation de mot de passe est'
+        shipment_confirmation:
+            has_been_sent_using: 'a été envoyé en utilisant'
+            subject: 'Confirmation d''expédition'
+            thank_you_for_transaction: 'Merci pour votre transaction réussie.'
+            you_can_check_its_location_with_the_tracking_code: 'Vous pouvez vérifier sa progression avec le code de suivi %tracking_code%.'
+            your_order_with_number: 'Votre commande numéro'
         user_registration:
             start_shopping: 'Commencer le shopping'
             subject: 'Inscription utilisateur'
