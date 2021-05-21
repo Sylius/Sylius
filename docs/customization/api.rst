@@ -116,7 +116,7 @@ For an example we will use ``Product`` resource and customize its fields.
 Adding a field to response
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's say that you want to serialize existing field named ``averageRating`` to ``Product`` in admin response so the administrator would be able to check what is products average rating.
+Let's say that you want to serialize existing field named ``averageRating`` to ``Product`` in admin response so the administrator would be able to check what is the average rating of product.
 
 First let's copy serialization configuration file named ``Product.xml`` from ``%kernel.project_dir%/vendor/sylius/sylius/src/Sylius/Bundle/ApiBundle/Resources/config/serialization/``
 to ``config/serialization/Product.xml``
@@ -190,48 +190,53 @@ First let's create a new serializer that will support our ``Product`` resource:
 
     use Sylius\Component\Core\Model\ProductInterface;
     use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
-    use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+    use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
+    use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
     use Webmozart\Assert\Assert;
 
-    final class ProductSerializer implements ContextAwareNormalizerInterface
+    final class ProductNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
     {
-        /** @var NormalizerInterface */
-        private $objectNormalizer;
+        use NormalizerAwareTrait;
 
-        public function __construct(NormalizerInterface $objectNormalizer) {
-            $this->objectNormalizer = $objectNormalizer;
-        }
+        private const ALREADY_CALLED = 'product_normalizer_already_called';
 
         public function normalize($object, $format = null, array $context = [])
         {
             Assert::isInstanceOf($object, ProductInterface::class);
+            Assert::keyNotExists($context, self::ALREADY_CALLED);
 
-            $data = $this->objectNormalizer->normalize($object, $format, $context);
+            $context[self::ALREADY_CALLED] = true;
+
+            $data = $this->normalizer->normalize($object, $format, $context);
 
             return $data;
         }
 
         public function supportsNormalization($data, $format = null, $context = []): bool
         {
+            if (isset($context[self::ALREADY_CALLED])) {
+                return false;
+            }
+
             return $data instanceof ProductInterface;
         }
     }
 
 And now let's declare its service in config files:
 
-.. code-block:: xml
+.. code-block:: yaml
 
-    <service id="App\Serializer\ProductSerializer">
-            <argument type="service" id="api_platform.serializer.normalizer.item" />
-            <tag name="serializer.normalizer" />
-    </service>
+    # config/services.yaml
+    App\Serializer\ProductNormalizer:
+        tags:
+            - { name: 'serializer.normalizer', priority: 100 }
 
 Then we can add the new field:
 
 .. code-block:: php
 
     //...
-    $data = $this->objectNormalizer->normalize($object, $format, $context);
+    $data = $this->normalizer->normalize($object, $format, $context);
 
     $data['additionalText'] = 'your custom text or logic that will be added to this field.';
 
@@ -287,7 +292,7 @@ Let's assume that ``Product`` resource returns such a response:
 
 Then let's say you want to remove ``translations``.
 
-Utilising serialization groups to remove fields might be quite tricky as symfony combines all of the serialization files into one.
+Utilising serialization groups to remove fields might be quite tricky as Symfony combines all of the serialization files into one.
 The easiest solution to remove the field is to create a new serialization group and use it for fields you want to have and declare this group in the endpoint.
 
 First let's add the ``config/api_platform/Product.xml`` configuration file. See ``How to add an additional endpoint?`` for more information.
@@ -344,17 +349,17 @@ Now we need to modify the file ``config/serialization/Product.xml`` and add this
 .. note::
 
     In example the ``translations`` doesn't have the new group ``shop:product:custom_read`` so it won't be shown by that endpoint.
-    The rest of fields that we wan't to show has the new serialization group declared.
+    The rest of the fields that we want to show have the new serialization group declared.
 
 In cases, where you would like to remove small amount of fields, the serializer would be a way to go.
-First step is to create a class as in ``Adding a field from response`` and register it's service.
+First step is to create a class as in ``Adding a custom field to response`` and register its service.
 
 Then modify it's logic with this code:
 
 .. code-block:: php
 
     //...
-    $data = $this->objectNormalizer->normalize($object, $format, $context);
+    $data = $this->normalizer->normalize($object, $format, $context);
 
     unset($data['translations']); // removes `translations` from response
 
@@ -423,7 +428,7 @@ In this example we will modify it, so the name of field would be changed. Just a
 .. code-block:: php
 
     //...
-    $data = $this->objectNormalizer->normalize($object, $format, $context);
+    $data = $this->normalizer->normalize($object, $format, $context);
 
     $data['options'] = $data['optionValues']; // this will change the name of your field
     unset($data['optionValues']); // optionally you can also remove old `optionValues` field
