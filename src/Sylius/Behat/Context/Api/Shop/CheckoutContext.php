@@ -31,7 +31,6 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Product\Resolver\DefaultProductVariantResolver;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
@@ -73,9 +72,6 @@ final class CheckoutContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /** @var DefaultProductVariantResolver */
-    private $defaultProductVariantResolver;
-
     /** @var string[] */
     private $content = [];
 
@@ -88,8 +84,7 @@ final class CheckoutContext implements Context
         RepositoryInterface $paymentMethodRepository,
         ProductVariantResolverInterface $productVariantResolver,
         IriConverterInterface $iriConverter,
-        SharedStorageInterface $sharedStorage,
-        DefaultProductVariantResolver $defaultProductVariantResolver
+        SharedStorageInterface $sharedStorage
     ) {
         $this->ordersClient = $ordersClient;
         $this->addressesClient = $addressesClient;
@@ -100,7 +95,6 @@ final class CheckoutContext implements Context
         $this->productVariantResolver = $productVariantResolver;
         $this->iriConverter = $iriConverter;
         $this->sharedStorage = $sharedStorage;
-        $this->defaultProductVariantResolver = $defaultProductVariantResolver;
     }
 
     /**
@@ -961,13 +955,12 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that (this product) does not have sufficient stock$/
-     * @Then I should be notified that :product does not have sufficient stock
+     * @Then I should be notified that product :product does not have sufficient stock
      */
     public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
     {
         /** @var ProductVariantInterface $variant */
-        $variant = $this->defaultProductVariantResolver->getVariant($product);
+        $variant = $this->productVariantResolver->getVariant($product);
 
         Assert::true($this->responseChecker->hasViolationWithMessage(
             $this->ordersClient->getLastResponse(),

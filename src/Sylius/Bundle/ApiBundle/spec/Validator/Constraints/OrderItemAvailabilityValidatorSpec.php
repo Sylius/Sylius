@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
-use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderProductInStockEligibility;
+use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderItemAvailability;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -27,11 +27,15 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-final class OrderProductInStockEligibilityValidatorSpec extends ObjectBehavior
+final class OrderItemAvailabilityValidatorSpec extends ObjectBehavior
 {
-    function let(OrderRepositoryInterface $orderRepository, AvailabilityCheckerInterface $availabilityChecker): void
-    {
+    function let(
+        OrderRepositoryInterface $orderRepository,
+        AvailabilityCheckerInterface $availabilityChecker,
+        ExecutionContextInterface $executionContext
+    ): void {
         $this->beConstructedWith($orderRepository, $availabilityChecker);
+        $this->initialize($executionContext);
     }
 
     function it_is_a_constraint_validator(): void
@@ -51,16 +55,14 @@ final class OrderProductInStockEligibilityValidatorSpec extends ObjectBehavior
     }
 
     function it_adds_violation_if_product_variant_does_not_have_sufficient_stock(
-        ExecutionContextInterface $executionContext,
         OrderRepositoryInterface $orderRepository,
+        AvailabilityCheckerInterface $availabilityChecker,
+        ExecutionContextInterface $executionContext,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant,
-        AvailabilityCheckerInterface $availabilityChecker,
         Collection $orderItems
     ): void {
-        $this->initialize($executionContext);
-
         $command = new CompleteOrder();
         $command->setOrderTokenValue('cartToken');
 
@@ -81,20 +83,18 @@ final class OrderProductInStockEligibilityValidatorSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $this->validate($command, new OrderProductInStockEligibility());
+        $this->validate($command, new OrderItemAvailability());
     }
 
     function it_does_nothing_if_product_variant_has_sufficient_stock(
-        ExecutionContextInterface $executionContext,
         OrderRepositoryInterface $orderRepository,
+        AvailabilityCheckerInterface $availabilityChecker,
+        ExecutionContextInterface $executionContext,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant,
-        AvailabilityCheckerInterface $availabilityChecker,
         Collection $orderItems
     ): void {
-        $this->initialize($executionContext);
-
         $command = new CompleteOrder();
         $command->setOrderTokenValue('cartToken');
 
@@ -115,6 +115,6 @@ final class OrderProductInStockEligibilityValidatorSpec extends ObjectBehavior
             ->shouldNotBeCalled()
         ;
 
-        $this->validate($command, new OrderProductInStockEligibility());
+        $this->validate($command, new OrderItemAvailability());
     }
 }

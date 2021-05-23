@@ -23,7 +23,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class OrderProductInStockEligibilityValidator extends ConstraintValidator
+final class OrderItemAvailabilityValidator extends ConstraintValidator
 {
     /** @var OrderRepositoryInterface */
     private $orderRepository;
@@ -43,8 +43,8 @@ final class OrderProductInStockEligibilityValidator extends ConstraintValidator
     {
         Assert::isInstanceOf($value, OrderTokenValueAwareInterface::class);
 
-        /** @var OrderProductInStockEligibility $constraint */
-        Assert::isInstanceOf($constraint, OrderProductInStockEligibility::class);
+        /** @var OrderItemAvailability $constraint */
+        Assert::isInstanceOf($constraint, OrderItemAvailability::class);
 
         $order = $this->orderRepository->findOneBy(['tokenValue' => $value->getOrderTokenValue()]);
 

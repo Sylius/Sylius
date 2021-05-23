@@ -16,14 +16,14 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 
 /** @experimental */
-final class OrderProductInStockEligibility extends Constraint
+final class OrderItemAvailability extends Constraint
 {
     /** @var string  */
     public $message = 'sylius.product_variant.product_variant_with_name_not_sufficient';
 
     public function validatedBy(): string
     {
-        return 'sylius_api_validator_order_product_in_stock_eligibility';
+        return 'sylius_api_validator_order_item_availability';
     }
 
     public function getTargets(): string

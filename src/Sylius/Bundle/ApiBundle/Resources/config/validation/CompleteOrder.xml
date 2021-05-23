@@ -26,7 +26,7 @@
                 <value>sylius_checkout_complete</value>
             </option>
         </constraint>
-        <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderProductInStockEligibility">
+        <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderItemAvailability">
             <option name="groups">
                 <value>sylius_checkout_complete</value>
             </option>
