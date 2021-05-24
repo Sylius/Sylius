@@ -504,13 +504,20 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should not be able to select :paymentMethodName payment method
+     * @Then I should not be able to select :paymentMethod payment method
      */
-    public function iShouldNotBeAbleToSelectPaymentMethod(string $paymentMethodName): void
+    public function iShouldNotBeAbleToSelectPaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
-        $paymentMethods = $this->getPossiblePaymentMethods();
+        $this->iChoosePaymentMethod($paymentMethod);
 
-        Assert::false(array_search($paymentMethodName, array_column($paymentMethods, 'name'), true));
+        Assert::true(
+            $this->responseChecker->hasViolationWithMessage($this->ordersClient->getLastResponse(),
+                sprintf(
+                    'The payment method %s is not available for this order. Please reselect your payment method.',
+                    $paymentMethod->getName()
+                )
+            )
+        );
     }
 
     /**

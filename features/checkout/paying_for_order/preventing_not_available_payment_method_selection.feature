@@ -8,6 +8,7 @@ Feature: Preventing not available payment method selection
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store allows paying with "Paypal Express Checkout"
+        And the store allows paying with "Bank transfer"
         And the store ships everywhere for free
         And I am a logged in customer
 
@@ -23,7 +24,7 @@ Feature: Preventing not available payment method selection
         Then I should not be able to select "Paypal Express Checkout" payment method
 
     @ui @api
-    Scenario: Not being able to select payment method not available for oder channel
+    Scenario: Not being able to select payment method not available for order channel
         Given the store has "Cash on delivery" payment method not assigned to any channel
         And I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step

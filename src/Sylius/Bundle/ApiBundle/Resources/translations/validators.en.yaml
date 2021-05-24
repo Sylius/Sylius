@@ -7,6 +7,7 @@ sylius:
         not_empty: 'An empty order cannot be completed.'
     payment_method:
         not_exist: 'The payment method with %paymentMethodCode% code does not exist.'
+        not_available: 'The payment method %name% is not available for this order. Please reselect your payment method.'
     product:
         not_exist: 'The product %productName% does not exist.'
     product_variant:
