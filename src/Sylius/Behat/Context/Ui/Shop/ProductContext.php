@@ -135,7 +135,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeTheProductDescription(string $description): void
     {
-        Assert::same($this->showPage->getDetails(), $description);
+        Assert::same($this->showPage->getDescription(), $description);
     }
 
     /**

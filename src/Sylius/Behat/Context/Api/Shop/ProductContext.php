@@ -286,6 +286,11 @@ final class ProductContext implements Context
             $this->responseChecker->getValue($this->client->getLastResponse(), 'description'),
             $description
         );
+
+        Assert::same(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'translations')['en_US']['description'],
+            $description
+        );
     }
 
     private function hasProductWithPrice(array $products, int $price, ?string $productCode = null): bool

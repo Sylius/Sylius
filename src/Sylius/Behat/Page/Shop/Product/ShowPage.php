@@ -296,10 +296,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         );
     }
 
-    public function getDetails(): string
+    public function getDescription(): string
     {
         return $this->getDocument()->findAll('css', '[data-tab="details"]')[1]->getText();
     }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
