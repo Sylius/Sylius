@@ -21,6 +21,9 @@ final class ChosenShippingMethodEligibility extends Constraint
     /** @var string */
     public $message = 'sylius.shipping_method.not_available';
 
+    /** @var string */
+    public $notFoundMessage = 'sylius.shipping_method.not_found';
+
     public function validatedBy(): string
     {
         return 'sylius_api_validator_chosen_shipping_method_eligibility';
