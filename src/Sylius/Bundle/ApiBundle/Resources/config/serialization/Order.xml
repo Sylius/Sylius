@@ -67,10 +67,12 @@
 
         <attribute name="paymentState">
             <group>admin:order:read</group>
+            <group>shop:cart:read</group>
         </attribute>
 
         <attribute name="shippingState">
             <group>admin:order:read</group>
+            <group>shop:cart:read</group>
         </attribute>
 
         <attribute name="total">
@@ -100,6 +102,12 @@
 
         <attribute name="notes">
             <group>admin:order:read</group>
+        </attribute>
+
+        <attribute name="itemsTotal">
+            <group>shop:cart:read</group>
+            <group>shop:order:read</group>
+            <group>shop:order:account:read</group>
         </attribute>
 
         <attribute name="taxTotal">
