@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Search\Model\SearchQueryInterface;
 
 class CustomerRepository extends EntityRepository implements CustomerRepositoryInterface
 {
@@ -48,5 +50,27 @@ class CustomerRepository extends EntityRepository implements CustomerRepositoryI
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function searchWithoutTerms(): Pagerfanta
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        return $this->getPaginator($queryBuilder);
+    }
+
+    public function searchByTerms(SearchQueryInterface $query): Pagerfanta
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->where('MATCH_AGAINST(o.firstName, o.lastName, o.email, :terms) > 0.6')
+            ->orWhere('CONCAT(o.firstName, o.lastName, o.email) LIKE :likeTerms')
+            ->setParameters([
+                'terms' => $query->getTerms(),
+                'likeTerms' => sprintf('%%%s%%', str_replace(' ', '%', $query->getTerms())),
+            ])
+            ->orderBy('MATCH_AGAINST(o.firstName, o.lastName, o.email, :terms \'IN BOOLEAN MODE\')', 'DESC')
+        ;
+
+        return $this->getPaginator($queryBuilder);
     }
 }

@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import 'jquery-address';
 import 'semantic-ui-css/components/accordion';
 import 'semantic-ui-css/components/checkbox';
 import 'semantic-ui-css/components/dimmer';
@@ -38,7 +39,15 @@ $(document).ready(() => {
   $('.link.ui.dropdown').dropdown({ action: 'hide' });
   $('.button.ui.dropdown').dropdown({ action: 'hide' });
   $('.ui.fluid.search.selection.ui.dropdown').dropdown();
-  $('.ui.tabular.menu .item, .sylius-tabular-form .menu .item').tab();
+  $('.ui.tabular.menu:not(.tabular-historized) .item, .sylius-tabular-form .menu .item').tab();
+  $('.ui.tabular.tabular-historized.menu .item').tab({
+    context: '.tabular-historized-container',
+    history: true,
+  });
+  $('.ui.tab .pagination a').on('click', (event) => {
+    // eslint-disable-next-line no-param-reassign,no-restricted-globals
+    event.target.href = `${event.target.href}${location.hash}`;
+  });
   $('.ui.card .dimmable.image, .ui.cards .card .dimmable.image').dimmer({ on: 'hover' });
   $('.ui.rating').rating('disable');
 

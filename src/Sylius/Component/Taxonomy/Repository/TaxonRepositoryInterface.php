@@ -15,9 +15,10 @@ namespace Sylius\Component\Taxonomy\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Search\Repository\SearchableRepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-interface TaxonRepositoryInterface extends RepositoryInterface
+interface TaxonRepositoryInterface extends RepositoryInterface, SearchableRepositoryInterface
 {
     /**
      * @return array|TaxonInterface[]

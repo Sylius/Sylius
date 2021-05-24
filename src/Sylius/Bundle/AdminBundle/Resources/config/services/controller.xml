@@ -64,5 +64,9 @@
             <argument type="string">%sylius.admin.notification.uri%</argument>
             <argument type="string">%kernel.environment%</argument>
         </service>
+
+        <service id="sylius.controller.admin.search" class="Sylius\Bundle\AdminBundle\Controller\SearchController">
+            <argument key="$searchEngine" type="service" id="Sylius\Bundle\AdminBundle\Provider\SearchEngineInterface"/>
+        </service>
     </services>
 </container>
