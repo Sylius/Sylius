@@ -121,7 +121,7 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         $this->validate($command, new ChosenShippingMethodEligibility());
     }
 
-    function it_throws_an_exception_if_given_shipping_method_is_null(
+    function it_adds_a_violation_if_given_shipping_method_is_null(
         ShipmentRepositoryInterface $shipmentRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ExecutionContextInterface $executionContext
@@ -137,11 +137,12 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
             ->addViolation('sylius.shipping_method.not_available', Argument::any())
             ->shouldNotBeCalled()
         ;
-
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [$command, new ChosenShippingMethodEligibility()])
+        $executionContext
+            ->addViolation('sylius.shipping_method.not_found', ['%code%' => 'SHIPPING_METHOD_CODE'])
+            ->shouldBeCalled()
         ;
+
+        $this->validate($command, new ChosenShippingMethodEligibility());
     }
 
     function it_throws_an_exception_if_given_shipmnent_is_null(

@@ -28,6 +28,7 @@ use Sylius\Component\Core\Model\PaymentMethod;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\ShippingMethod;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
@@ -346,6 +347,24 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I try to select :shippingMethodCode shipping method
+     */
+    public function iTryToSelectShippingMethod(string $shippingMethodCode): void
+    {
+        $request = Request::customItemAction(
+            'shop',
+            'orders',
+            $this->sharedStorage->get('cart_token'),
+            HTTPRequest::METHOD_PATCH,
+            sprintf('shipments/%s', $this->getCart()['shipments'][0]['id'])
+        );
+
+        $request->setContent(['shippingMethod' => $this->iriConverter->getItemIriFromResourceClass(ShippingMethod::class, ['code' => $shippingMethodCode])]);
+
+        $this->ordersClient->executeCustomRequest($request);
+    }
+
+    /**
      * @When I try to select :paymentMethodCode payment method
      */
     public function iTryToSelectPaymentMethod(string $paymentMethodCode): void
@@ -361,6 +380,17 @@ final class CheckoutContext implements Context
         $request->setContent(['paymentMethod' => $this->iriConverter->getItemIriFromResourceClass(PaymentMethod::class, ['code' => $paymentMethodCode])]);
 
         $this->ordersClient->executeCustomRequest($request);
+    }
+
+    /**
+     * @Then I should be informed that shipping method with code :code does not exist
+     */
+    public function iShouldBeInformedThatShippingMethodWithCodeDoesNotExist(string $code): void
+    {
+        Assert::true($this->isViolationWithMessageInResponse(
+            $this->ordersClient->getLastResponse(),
+            sprintf('The shipping method with %s code does not exist.', $code)
+        ));
     }
 
     /**

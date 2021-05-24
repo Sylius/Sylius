@@ -17,4 +17,5 @@ sylius:
     shipment:
         shipped: 'You cannot ship a shipment that was shipped before.'
     shipping_method:
+        not_found: 'The shipping method with %code% code does not exist.'
         not_available: 'The shipping method %name% is not available for this order. Please reselect your shipping method.'
