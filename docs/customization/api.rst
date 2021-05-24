@@ -105,7 +105,7 @@ The next step is to modify the security configuration in ``config/packages/secur
 
     Changing prefix without security configuration update can expose confidential data (like customers addresses).
 
-After these two steps you can start to use endpoints with new prefixes
+After these two steps you can start to use endpoints with new prefixes.
 
 How to customize serialization?
 -------------------------------
@@ -118,21 +118,24 @@ Adding a field to response
 
 Let's say that you want to serialize existing field named ``averageRating`` to ``Product`` in admin response so the administrator would be able to check what is the average rating of product.
 
-First let's copy serialization configuration file named ``Product.xml`` from ``%kernel.project_dir%/vendor/sylius/sylius/src/Sylius/Bundle/ApiBundle/Resources/config/serialization/``
-to ``config/serialization/Product.xml``
-
-Then let's find the attribute ``averageRating``:
+First let's create serialization configuration file named ``Product.xml`` in ``config/serialization/Product.xml``
+and and add serialization group that is used by endpoint we want to modify, in this case the new ``group`` is called ``admin:product:read``:
 
 .. code-block:: xml
 
-    <!--...-->
-    <attribute name="averageRating">
-            <group>shop:product:read</group>
-    </attribute>
-    <!--...-->
+    <?xml version="1.0" ?>
 
-
-and add serialization group that is used by endpoint we want to modify
+    <serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+    >
+        <class name="Sylius\Component\Core\Model\Product">
+            <attribute name="averageRating">
+                <group>admin:product:read</group>
+                <group>shop:product:read</group>
+            </attribute>
+        </class>
+    </serializer>
 
 .. tip::
 
@@ -140,16 +143,9 @@ and add serialization group that is used by endpoint we want to modify
     you can find it by searching for your class configuration file in `%kernel.project_dir%/vendor/sylius/sylius/src/Sylius/Bundle/ApiBundle/Resources/config/api_resources``
     and look for path that you want to modify.
 
-In this case the new ``group`` is called ``admin:product:read``:
+.. tip::
 
-.. code-block:: xml
-
-    <!--...-->
-    <attribute name="averageRating">
-            <group>admin:product:read</group>
-            <group>shop:product:read</group>
-    </attribute>
-    <!--...-->
+    The serialization groups from Sylius look this way to reflect: ``user context``, ``resource name`` and ``type of operation``.
 
 After this change your response should be extended with new field:
 
@@ -174,11 +170,95 @@ After this change your response should be extended with new field:
 We were able to add a field that exists in ``Product`` class, but what if you want to extend it with custom fields?
 Let's customize response now with your custom fields serialized in response.
 
+.. tip::
+
+    The same way you may expose additional fields added to any Sylius resource
+
 Adding a custom field to response
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's say that you want to add a new field named ``additionalText`` to ``Product``.
-First we need to create a new serializer that will support our ``Product`` resource, but in this case we have a ``ProductNormalizer`` provided from Sylius.
+Let's say that you want to add a new field named ``additionalText`` to ``Customer``.
+First we need to create a new serializer that will support this resource. Let's name it ``CustomerNormalizer``:
+
+.. code-block:: php
+
+    <?php
+
+    declare(strict_types=1);
+
+    namespace App\Serializer;
+
+    use Sylius\Component\Core\Model\CustomerInterface;
+    use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
+    use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
+    use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
+    use Webmozart\Assert\Assert;
+
+    final class CustomerNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
+    {
+        use NormalizerAwareTrait;
+
+        private const ALREADY_CALLED = 'customer_normalizer_already_called';
+
+        public function normalize($object, $format = null, array $context = [])
+        {
+            Assert::isInstanceOf($object, CustomerInterface::class);
+            Assert::keyNotExists($context, self::ALREADY_CALLED);
+
+            $context[self::ALREADY_CALLED] = true;
+
+            $data = $this->normalizer->normalize($object, $format, $context);
+
+            return $data;
+        }
+
+        public function supportsNormalization($data, $format = null, $context = []): bool
+        {
+            if (isset($context[self::ALREADY_CALLED])) {
+                return false;
+            }
+
+            return $data instanceof CustomerInterface;
+        }
+    }
+
+And now let's declare its service in config files:
+
+.. code-block:: yaml
+
+    # config/services.yaml
+    App\Serializer\CustomerNormalizer:
+        tags:
+            - { name: 'serializer.normalizer', priority: 100 }
+
+Then we can add the new field:
+
+.. code-block:: php
+
+    //...
+    $data = $this->normalizer->normalize($object, $format, $context);
+
+    $data['additionalText'] = 'your custom text or logic that will be added to this field.';
+
+    return $data;
+    //...
+
+Now your response should be extended with the new field:
+
+.. code-block:: javascript
+
+    {
+        //...
+        "id": 123,
+        "email": "sylius@example.com",
+        "firstName": "sylius",
+        "additionalText": "my additional field with text",
+        //...
+    }
+
+But let's consider another case where the Normalizer exists for given Resource.
+Here we will also add a new field named ``additionalText`` but this time to ``Product``.
+First we need to create a serializer that will support our ``Product`` resource, but in this case we have a ``ProductNormalizer`` provided from Sylius.
 Unfortunately we cannot use more than one normalizer per resource, hence we will override existing one.
 
 Let's than copy code of ProductNormalizer from ``vendor/sylius/sylius/src/Sylius/Bundle/ApiBundle/Serializer/ProductNormalizer.php`` :
@@ -239,7 +319,7 @@ And now let's declare its service in config files:
 .. warning::
 
     As we can use only one Normalizer per resource we need to set priority higher then one from Sylius.
-    Default value for Sylius Normalizers is typically 64, but if you want to be sure, check the values in ``src/Sylius/Bundle/ApiBundle/Resources/config/services/serializers.xml``
+    You can find priority value of Normalizer in ``src/Sylius/Bundle/ApiBundle/Resources/config/services/serializers.xml``
 
 Then we can add the new field:
 
@@ -253,7 +333,7 @@ Then we can add the new field:
     return $data;
     //...
 
-Now your response should be extended with the new field:
+And your response should be extended with the new field:
 
 .. code-block:: javascript
 
@@ -306,7 +386,7 @@ Utilising serialization groups to remove fields might be quite tricky as Symfony
 The easiest solution to remove the field is to create a new serialization group and use it for fields you want to have and declare this group in the endpoint.
 
 First let's add the ``config/api_platform/Product.xml`` configuration file. See ``How to add an additional endpoint?`` for more information.
-Then let's modify the endpoint. For this example i will use GET item in shop, but you can also create some custom endpoint:
+Then let's modify the endpoint. For this example I will use GET item in the shop, but you can also create some custom endpoint:
 
 .. code-block:: xml
 
@@ -333,32 +413,23 @@ then let's change the serialization group in ``normalization_context`` attribute
     </attribute>
     <!--...-->
 
-Now we need to modify the file ``config/serialization/Product.xml`` and add this custom serialization group to fields we want to show:
+Now we can define all the fields we want to expose in the ``config/serialization/Product.xml``:
 
 .. code-block:: xml
 
     <!--...-->
     <attribute name="updatedAt">
-            <group>admin:product:read</group>
+        <group>shop:product:custom_read</group>
     </attribute>
-    <attribute name="translations">
-        <group>admin:product:create</group>
-        <group>admin:product:read</group>
-        <group>admin:product:update</group>
-        <group>shop:product:read</group>
-    </attribute>
+    <!-- here `translation` attribute would be declared -->
     <attribute name="mainTaxon">
-        <group>admin:product:create</group>
-        <group>admin:product:read</group>
-        <group>admin:product:update</group>
-        <group>shop:product:read</group>
         <group>shop:product:custom_read</group>
     </attribute>
     <!--...-->
 
 .. note::
 
-    In example the ``translations`` doesn't have the new group ``shop:product:custom_read`` so it won't be shown by that endpoint.
+    In xml example the ``translations`` is not declared with ``<group>shop:product:custom_read</group>`` group, so endpoint won't return this value.
     The rest of the fields that we want to show have the new serialization group declared.
 
 In cases, where you would like to remove small amount of fields, the serializer would be a way to go.
@@ -394,7 +465,7 @@ Renaming a field of a response
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Renaming name of response fields is very simple. In this example
-let's modify the ``optionValues`` name to ``options``, that's how response looks like now:
+let's modify the ``options`` name to ``optionValues``, that's how response looks like now:
 
 .. code-block:: javascript
 
@@ -403,21 +474,21 @@ let's modify the ``optionValues`` name to ``options``, that's how response looks
         "id": 123,
         "code": "product_code",
         "product": "/api/v2/shop/products/product_code",
-        "optionValues": [
+        "options": [
             "/api/v2/shop/product-option-values/product_size_s"
         ],
         //...
     }
 
-The simplest method to achieve this is to modify serialization configuration file.
-We can use the file ``config/serialization/Product.xml`` from example above and find the attribute named ``optionValues``
+The simplest method to achieve this is to modify the serialization configuration file that we've already created.
+Let's add to the ``config/serialization/Product.xml`` file config for ``options`` with a ``serialized-name`` attribute description:
 
 .. code-block:: xml
 
     <!--...-->
-    <attribute name="optionValues">
-            <group>admin:product:read</group>
-            <group>shop:product:read</group>
+    <attribute name="options">
+        <group>admin:product:read</group>
+        <group>shop:product:read</group>
     </attribute>
     <!--...-->
 
@@ -426,9 +497,9 @@ And just add a ``serialized-name`` into attribute description with new name:
 .. code-block:: xml
 
     <!--...-->
-    <attribute name="optionValues" serialized-name="option">
-            <group>admin:product:read</group>
-            <group>shop:product:read</group>
+    <attribute name="options" serialized-name="optionValues">
+        <group>admin:product:read</group>
+        <group>shop:product:read</group>
     </attribute>
     <!--...-->
 
@@ -440,8 +511,8 @@ In this example we will modify it, so the name of field would be changed. Just a
     //...
     $data = $this->normalizer->normalize($object, $format, $context);
 
-    $data['options'] = $data['optionValues']; // this will change the name of your field
-    unset($data['optionValues']); // optionally you can also remove old `optionValues` field
+    $data['optionValues'] = $data['options']; // this will change the name of your field
+    unset($data['options']); // optionally you can also remove old `options` field
 
     return $data;
     //...
@@ -455,7 +526,7 @@ And here we go, now your response should look like this:
         "id": 123,
         "code": "product_code",
         "product": "/api/v2/shop/products/product_code",
-        "options": [
+        "optionValues": [
             "/api/v2/shop/product-option-values/product_size_s"
         ],
         //...
