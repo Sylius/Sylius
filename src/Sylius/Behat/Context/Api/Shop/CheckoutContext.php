@@ -957,6 +957,20 @@ final class CheckoutContext implements Context
         $this->assertProvinceMessage('billingAddress');
     }
 
+    /**
+     * @Then I should be notified that product :product does not have sufficient stock
+     */
+    public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
+    {
+        /** @var ProductVariantInterface $variant */
+        $variant = $this->productVariantResolver->getVariant($product);
+
+        Assert::true($this->responseChecker->hasViolationWithMessage(
+            $this->ordersClient->getLastResponse(),
+            sprintf('The product variant with %s name does not have sufficient stock.', $variant->getName())
+        ));
+    }
+
     private function assertProvinceMessage(string $addressType): void
     {
         $response = $this->ordersClient->getLastResponse();

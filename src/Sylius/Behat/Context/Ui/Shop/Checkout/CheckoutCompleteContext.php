@@ -230,6 +230,7 @@ final class CheckoutCompleteContext implements Context
 
     /**
      * @Then /^I should be notified that (this product) does not have sufficient stock$/
+     * @Then I should be notified that product :product does not have sufficient stock
      */
     public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
     {
