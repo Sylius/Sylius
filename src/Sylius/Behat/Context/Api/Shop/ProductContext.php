@@ -277,6 +277,22 @@ final class ProductContext implements Context
         Assert::same($this->responseChecker->getValue($defaultVariantResponse, 'price'), $price);
     }
 
+    /**
+     * @Then I should see the product description :description
+     */
+    public function iShouldSeeTheProductDescription(string $description): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'description'),
+            $description
+        );
+
+        Assert::same(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'translations')['en_US']['description'],
+            $description
+        );
+    }
+
     private function hasProductWithPrice(array $products, int $price, ?string $productCode = null): bool
     {
         foreach ($products as $product) {
