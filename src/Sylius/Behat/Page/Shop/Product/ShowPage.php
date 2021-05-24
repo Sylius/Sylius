@@ -296,6 +296,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         );
     }
 
+    public function getDetails(): string
+    {
+        return $this->getDocument()->findAll('css', '[data-tab="details"]')[1]->getText();
+    }
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -304,6 +308,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'attributes' => '[data-test-product-attributes]',
             'average_rating' => '[data-test-average-rating]',
             'current_variant_input' => '[data-test-product-variants] td input:checked',
+            'details' => '[data-tab="details"]',
             'main_image' => '[data-test-main-image]',
             'name' => '[data-test-product-name]',
             'option_select' => '#sylius_add_to_cart_cartItem_variant_%optionCode%',

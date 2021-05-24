@@ -131,6 +131,14 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then I should see the product description :description
+     */
+    public function iShouldSeeTheProductDescription(string $description): void
+    {
+        Assert::same($this->showPage->getDetails(), $description);
+    }
+
+    /**
      * @When I open page :url
      */
     public function iOpenPage($url)
