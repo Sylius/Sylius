@@ -67,10 +67,12 @@
 
         <attribute name="paymentState">
             <group>admin:order:read</group>
+            <group>shop:cart:read</group>
         </attribute>
 
         <attribute name="shippingState">
             <group>admin:order:read</group>
+            <group>shop:cart:read</group>
         </attribute>
 
         <attribute name="total">
