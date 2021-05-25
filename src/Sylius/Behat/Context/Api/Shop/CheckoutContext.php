@@ -513,9 +513,22 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->responseChecker->hasViolationWithMessage($this->ordersClient->getLastResponse(),
                 sprintf(
-                    'The payment method %s is not available for this order. Please reselect your payment method.',
+                    'The payment method %s is not available for this order. Please choose another one.',
                     $paymentMethod->getName()
                 )
+            )
+        );
+    }
+
+    /**
+     * @Then I should be informed that payment method with code :code does not exist
+     */
+    public function iShouldBeInformedThatPaymentMethodWithCodeDoesNotExist(string $code): void
+    {
+        Assert::true(
+            $this->responseChecker->hasViolationWithMessage(
+                $this->ordersClient->getLastResponse(),
+                sprintf('The payment method with %s code does not exist.', $code)
             )
         );
     }
@@ -877,17 +890,6 @@ final class CheckoutContext implements Context
         Assert::true($this->isViolationWithMessageInResponse(
             $this->ordersClient->getLastResponse(),
             sprintf('The product variant with %s does not exist.', $code)
-        ));
-    }
-
-    /**
-     * @Then I should be informed that payment method with code :code does not exist
-     */
-    public function iShouldBeInformedThatPaymentMethodWithCodeDoesNotExist(string $code): void
-    {
-        Assert::true($this->isViolationWithMessageInResponse(
-            $this->ordersClient->getLastResponse(),
-            sprintf('The payment method with %s code does not exist.', $code)
         ));
     }
 

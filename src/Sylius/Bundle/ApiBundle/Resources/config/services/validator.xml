@@ -71,7 +71,9 @@
         </service>
 
         <service id="sylius.api.validator.chosen_payment_method_eligibility" class="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentMethodEligibilityValidator">
+            <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="sylius.repository.payment_method" />
+            <argument type="service" id="sylius.payment_methods_resolver" />
             <tag name="validator.constraint_validator" alias="sylius_api_chosen_payment_method_eligibility" />
         </service>
 
