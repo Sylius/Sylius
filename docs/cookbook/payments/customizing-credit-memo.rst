@@ -82,6 +82,128 @@ line items data included with credit memo.
 Displaying additional elements on Credit Memo
 ---------------------------------------------
 
+.. warning::
+
+    This section applies only for RefundPlugin in version v1.0.0-RC.10 or above.
+
+There might be a case when you want to extend the credit memo with additional field.
+
+**1.** Copy ``vendor/sylius/refund-plugin/src/Resources/views/Download/creditMemo.html.twig`` into ``templates/bundles/SyliusRefundPlugin/Download/creditMemo.html.twig``.
+
+**2.** Customize credit memo template to include the reason:
+
+    .. code-block:: html
+
+        <div class="credit-memo">
+            Reason: {{ creditMemo.reason }}
+
+            <!-- ... -->
+        </div>
+
+**3.** Override the default credit memo model in ``src/Entity/Refund/CreditMemo.php``:
+
+    .. code-block:: php
+
+        <?php
+
+        declare(strict_types=1);
+
+        namespace App\Entity\Refund;
+
+        use Doctrine\ORM\Mapping as ORM;
+        use Sylius\RefundPlugin\Entity\CreditMemo as BaseCreditMemo;
+
+        /**
+         * @ORM\Entity
+         * @ORM\Table(name="sylius_refund_credit_memo")
+         */
+        class CreditMemo extends BaseCreditMemo
+        {
+            /**
+             * @ORM\Column
+             *
+             * @var string|null
+             */
+            private $reason;
+
+            public function getReason(): ?string
+            {
+                return $this->reason;
+            }
+
+            public function setReason(?string $reason): void
+            {
+                $this->reason = $reason;
+            }
+        }
+
+**4.** Configure ResourceBundle to use overridden model in ``config/packages/sylius_refund.yaml``:
+
+    .. code-block:: yaml
+
+        sylius_resource:
+            resources:
+                sylius_refund.credit_memo:
+                    classes:
+                        model: App\Entity\Refund\CreditMemo
+
+**5.** Assuming that your database was up-to-date before these changes, create a proper migration and use it:
+
+.. code-block:: bash
+
+    php bin/console doctrine:migrations:diff
+    php bin/console doctrine:migrations:migrate
+
+**6.** Decorate credit memo generator to set the reason while generating the invoice. Create a class in ``src/Refund/CreditMemoGenerator.php``:
+
+    .. code-block:: php
+
+        <?php
+
+        declare(strict_types=1);
+
+        namespace App\Refund;
+
+        use App\Entity\Refund\CreditMemo;
+        use Sylius\Component\Core\Model\OrderInterface;
+        use Sylius\RefundPlugin\Entity\CreditMemoInterface;
+        use Sylius\RefundPlugin\Generator\CreditMemoGeneratorInterface;
+
+        final class CreditMemoGenerator implements CreditMemoGeneratorInterface
+        {
+            /** @var CreditMemoGeneratorInterface */
+            private $creditMemoGenerator;
+
+            public function __construct(CreditMemoGeneratorInterface $creditMemoGenerator)
+            {
+                $this->creditMemoGenerator = $creditMemoGenerator;
+            }
+
+            public function generate(OrderInterface $order, int $total, array $units, array $shipments, string $comment): CreditMemoInterface
+            {
+                /** @var CreditMemo $creditMemo */
+                $creditMemo = $this->creditMemoGenerator->generate($order, $total, $units, $shipments, $comment);
+                $creditMemo->setReason('Charged too much');
+
+                return $creditMemo;
+            }
+        }
+
+**7.** And then configure Symfony's dependency injection to use that class in ``config/services.yaml``:
+
+    .. code-block:: yaml
+
+        services:
+            # ...
+
+            App\Refund\CreditMemoGenerator:
+                decorates: 'Sylius\RefundPlugin\Generator\CreditMemoGenerator'
+                arguments:
+                    - '@App\Refund\CreditMemoGenerator.inner'
+
+Displaying additional elements on Credit Memo by embedding a controller
+-----------------------------------------------------------------------
+
 There might be times when you want to calculate some extra data on-the-fly or get some which are not connected on
 entity level with credit memo.
 
@@ -100,6 +222,10 @@ entity level with credit memo.
 **3.** Create the referenced controller in a file called ``src/Controller/FooController.php``:
 
     .. code-block:: php
+
+        <?php
+
+        declare(strict_types=1);
 
         namespace App\Controller;
 
