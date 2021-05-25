@@ -24,7 +24,7 @@ If your project was created before v1.10, make sure your API Platform config fol
         swagger:
             versions: [3]
 
-And if you want to modify serialization add this code to framework config:
+Also, if you're planning to modify serialization add this code to framework config:
 
 .. code-block:: yaml
 
@@ -33,6 +33,8 @@ And if you want to modify serialization add this code to framework config:
     serializer:
         mapping:
             paths: [ '%kernel.project_dir%/config/serialization' ]
+
+.. _how-to-add-additional-endpoint:
 
 How to add an additional endpoint?
 ----------------------------------
@@ -116,10 +118,11 @@ For an example we will use ``Product`` resource and customize its fields.
 Adding a field to response
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's say that you want to serialize existing field named ``averageRating`` to ``Product`` in admin response so the administrator would be able to check what is the average rating of product.
+Let's say that you want to serialize the existing field named ``averageRating`` to ``Product`` in the admin response
+so the administrator would be able to check what is the average rating of product.
 
 First let's create serialization configuration file named ``Product.xml`` in ``config/serialization/Product.xml``
-and and add serialization group that is used by endpoint we want to modify, in this case the new ``group`` is called ``admin:product:read``:
+and add serialization group that is used by endpoint we want to modify, in this case the new ``group`` is called ``admin:product:read``:
 
 .. code-block:: xml
 
@@ -139,8 +142,9 @@ and and add serialization group that is used by endpoint we want to modify, in t
 
 .. tip::
 
-    You can create your own serialization group for every endpoint or use the one out of the box. If you don't know the name of group for endpoint you want to modify,
-    you can find it by searching for your class configuration file in `%kernel.project_dir%/vendor/sylius/sylius/src/Sylius/Bundle/ApiBundle/Resources/config/api_resources``
+    You can create your own serialization group for every endpoint or use the one out of the box.
+    If you don't know the name of group for endpoint you want to modify, you can find it by searching
+    for your class configuration file in `%kernel.project_dir%/vendor/sylius/sylius/src/Sylius/Bundle/ApiBundle/Resources/config/api_resources``
     and look for path that you want to modify.
 
 .. tip::
@@ -169,10 +173,6 @@ After this change your response should be extended with new field:
 
 We were able to add a field that exists in ``Product`` class, but what if you want to extend it with custom fields?
 Let's customize response now with your custom fields serialized in response.
-
-.. tip::
-
-    The same way you may expose additional fields added to any Sylius resource
 
 Adding a custom field to response
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -256,12 +256,12 @@ Now your response should be extended with the new field:
         //...
     }
 
-But let's consider another case where the Normalizer exists for given Resource.
+But let's consider another case where the Normalizer exists for a given Resource.
 Here we will also add a new field named ``additionalText`` but this time to ``Product``.
-First we need to create a serializer that will support our ``Product`` resource, but in this case we have a ``ProductNormalizer`` provided from Sylius.
-Unfortunately we cannot use more than one normalizer per resource, hence we will override existing one.
+First, we need to create a serializer that will support our ``Product`` resource but in this case, we have a ``ProductNormalizer`` provided by Sylius.
+Unfortunately, we cannot use more than one normalizer per resource, hence we will override the existing one.
 
-Let's than copy code of ProductNormalizer from ``vendor/sylius/sylius/src/Sylius/Bundle/ApiBundle/Serializer/ProductNormalizer.php`` :
+Let's then copy the code of ProductNormalizer from ``vendor/sylius/sylius/src/Sylius/Bundle/ApiBundle/Serializer/ProductNormalizer.php`` :
 
 .. code-block:: php
 
@@ -318,8 +318,8 @@ And now let's declare its service in config files:
 
 .. warning::
 
-    As we can use only one Normalizer per resource we need to set priority higher then one from Sylius.
-    You can find priority value of Normalizer in ``src/Sylius/Bundle/ApiBundle/Resources/config/services/serializers.xml``
+    As we can use only one Normalizer per resource we need to set priority for it, higher then the priority of the Sylius one.
+    You can find the priority value of the Sylius Normalizer in ``src/Sylius/Bundle/ApiBundle/Resources/config/services/serializers.xml``
 
 Then we can add the new field:
 
@@ -351,8 +351,8 @@ And your response should be extended with the new field:
 Removing a field from a response
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's say that for some reason you want to remove some field from serialization.
-One of possible solution could be that you use serialization groups.
+Let's say that for some reason you want to remove a field from serialization.
+One possible solution could be that you use serialization groups.
 Those will limit the fields from your resource, according to serialization groups that you will choose.
 
 .. tip::
@@ -383,10 +383,10 @@ Let's assume that ``Product`` resource returns such a response:
 Then let's say you want to remove ``translations``.
 
 Utilising serialization groups to remove fields might be quite tricky as Symfony combines all of the serialization files into one.
-The easiest solution to remove the field is to create a new serialization group and use it for fields you want to have and declare this group in the endpoint.
+The easiest solution to remove the field is to create a new serialization group, use it for the fields you want to have, and declare this group in the endpoint.
 
-First let's add the ``config/api_platform/Product.xml`` configuration file. See ``How to add an additional endpoint?`` for more information.
-Then let's modify the endpoint. For this example I will use GET item in the shop, but you can also create some custom endpoint:
+First, let's add the ``config/api_platform/Product.xml`` configuration file. See :ref:`how-to-add-additional-endpoint` for more information.
+Then let's modify the endpoint. For this example, we will use GET item in the shop, but you can also create some custom endpoint:
 
 .. code-block:: xml
 
@@ -464,7 +464,7 @@ Now your response fields should look like this:
 Renaming a field of a response
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Renaming name of response fields is very simple. In this example
+Changing the name of response fields is very simple. In this example
 let's modify the ``options`` name to ``optionValues``, that's how response looks like now:
 
 .. code-block:: javascript
@@ -492,7 +492,7 @@ Let's add to the ``config/serialization/Product.xml`` file config for ``options`
     </attribute>
     <!--...-->
 
-And just add a ``serialized-name`` into attribute description with new name:
+And just add a ``serialized-name`` into the attribute description with a new name:
 
 .. code-block:: xml
 
@@ -532,6 +532,7 @@ And here we go, now your response should look like this:
         //...
     }
 
-.. tip::
+Learn more
+-----------
 
-    Read more about API Platform `serialization <https://api-platform.com/docs/core/serialization>`_
+* `API Platform serialization <https://api-platform.com/docs/core/serialization>`_
