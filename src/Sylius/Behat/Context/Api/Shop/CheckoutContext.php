@@ -183,6 +183,28 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When /^the visitor try to specify the billing incorrect address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
+     */
+    public function iTryToSpecifyTheBillingAddressAs(
+        string $city,
+        string $street,
+        string $postcode,
+        string $countryName,
+        string $customerName
+    ): void {
+        $addressType = 'billingAddress';
+
+        [$firstName, $lastName] = explode(' ', $customerName);
+
+        $this->content[$addressType]['city'] = $city;
+        $this->content[$addressType]['street'] = $street;
+        $this->content[$addressType]['postcode'] = $postcode;
+        $this->content[$addressType]['countryCode'] = StringInflector::nameToLowercaseCode($countryName);
+        $this->content[$addressType]['firstName'] = $firstName;
+        $this->content[$addressType]['lastName'] = $lastName;
+    }
+
+    /**
      * @When /^I specify the shipping (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^I specify the shipping (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      */
@@ -617,6 +639,17 @@ final class CheckoutContext implements Context
     public function theVisitorShouldHaveCheckoutAddressStepCompleted(string $stepType): void
     {
         Assert::same($this->getCheckoutState(), $this::CHECKOUT_STATE_TYPES[$stepType]);
+    }
+
+    /**
+     * @Then I should be notified that :countryName country does not exist
+     */
+    public function iShouldNotBeNotifiedThatCountryDoesNotExist(string $countryName): void
+    {
+        $this->responseChecker->hasViolationWithMessage(
+            $this->ordersClient->getLastResponse(),
+            sprintf('The country %s does not exist.', StringInflector::nameToLowercaseCode($countryName))
+        );
     }
 
     /**
