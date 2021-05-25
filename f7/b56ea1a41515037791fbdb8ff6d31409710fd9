@@ -1,0 +1,38 @@
+---------------------------------------------------------------------------
+
+by olimination at 2021-05-18T15:31:49Z
+
+Should we document in this change also the possibility to customize the serialization via the XML files? I have received an answer for such a case in this Slack conversation: https://sylius-devs.slack.com/archives/C5Q1H5SNT/p1620749434045200
+
+The use case is: Extend the taxons endpoint such it also returns the children or parent information of a taxon so that the consumer is able to render for example a navigation out of it.
+
+You can simply achieve this by creating a new serializer config file in your project: `config/serializer/Taxon.xml` with the following content:
+
+```xml
+<?xml version="1.0" ?>
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd">
+  <class name="Sylius\Component\Core\Model\Taxon">
+    <attribute name="parent">
+      <group>admin:taxon:read</group>
+      <group>shop:taxon:read</group>
+    </attribute>
+  </class>
+</serializer>
+```
+
+What do you think? Or should we create another docs PR?
+
+---------------------------------------------------------------------------
+
+by CoderMaggie at 2021-05-18T20:27:44Z
+
+Hi @olimination :)
+We've got that planned for the nearest future to document it in both XML and annotations. Right now we were only sure that the YML operations work, that's why this PR is limited to YML only.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2021-05-25T05:43:44Z
+
+Thanks, @arti0090! :tada:
