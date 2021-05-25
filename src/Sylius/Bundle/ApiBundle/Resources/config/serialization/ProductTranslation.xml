@@ -27,5 +27,8 @@
         <attribute name="description">
             <group>shop:product:read</group>
         </attribute>
+        <attribute name="shortDescription">
+            <group>shop:product:read</group>
+        </attribute>
     </class>
 </serializer>

@@ -162,6 +162,21 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then I should see the product :product with short description :shortDescription
+     */
+    public function iShouldSeeTheProductWithShortDescription(ProductInterface $product, string $shortDescription): void
+    {
+        Assert::true(
+            $this->hasProductWithNameAndShortDescription(
+                $this->responseChecker->getCollection($this->client->getLastResponse()),
+                $product->getName(),
+                $shortDescription
+            ),
+            sprintf('There is no product with %s name and %s short description', $product->getName(), $shortDescription)
+        );
+    }
+
+    /**
      * @When I browse products
      */
     public function iViewProducts(): void
@@ -320,6 +335,19 @@ final class ProductContext implements Context
         foreach ($products as $product) {
             foreach ($product['translations'] as $translation) {
                 if ($translation['name'] === $name) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private function hasProductWithNameAndShortDescription(array $products, string $name, string $shortDescription): bool
+    {
+        foreach ($products as $product) {
+            foreach ($product['translations'] as $translation) {
+                if ($translation['name'] === $name && $translation['shortDescription'] === $shortDescription) {
                     return true;
                 }
             }
