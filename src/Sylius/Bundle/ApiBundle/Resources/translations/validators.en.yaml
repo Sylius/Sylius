@@ -1,4 +1,6 @@
 sylius:
+    country:
+        not_exist: 'The country %countryCode% does not exist.'
     order:
         not_empty: 'An empty order cannot be completed.'
     product:
