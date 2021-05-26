@@ -28,7 +28,6 @@
         <attribute name="type">
             <group>admin:product_attribute:read</group>
             <group>admin:product_attribute:create</group>
-            <group>admin:product_attribute:update</group>
             <group>shop:product_attribute:read</group>
         </attribute>
         <attribute name="configuration">
