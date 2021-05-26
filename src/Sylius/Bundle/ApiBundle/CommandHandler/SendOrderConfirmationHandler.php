@@ -41,7 +41,7 @@ final class SendOrderConfirmationHandler implements MessageHandlerInterface
         $order = $this->orderRepository->findOneByTokenValue($sendOrderConfirmation->orderToken());
 
         $this->emailSender->send(
-            Emails::ORDER_CONFIRMATION_RESENT,
+            Emails::ORDER_CONFIRMATION,
             [$order->getCustomer()->getEmail()],
             [
                 'order' => $order,
