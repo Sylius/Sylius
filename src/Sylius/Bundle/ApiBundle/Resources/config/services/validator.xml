@@ -44,8 +44,9 @@
             <tag name="validator.constraint_validator" alias="sylius_api_validator_adding_eligible_product_variant_to_cart" />
         </service>
 
-        <service id="sylius.api.validator.correct_address_order" class="Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectAddressOrderValidator">
-            <tag name="validator.constraint_validator" alias="sylius_api_validator_correct_address_order" />
+        <service id="sylius.api.validator.correct_order_address" class="Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectOrderAddressValidator">
+            <argument type="service" id="sylius.repository.country" />
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_correct_order_address" />
         </service>
 
         <service id="sylius.api.validator.payment_method_eligibility" class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibilityValidator">

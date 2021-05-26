@@ -15,14 +15,17 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-final class CorrectAddressOrder extends Constraint
+final class CorrectOrderAddress extends Constraint
 {
     /** @var string */
-    public $countryWithCountryCodeNotExistMessage = 'sylius.country.not_exist';
+    public $countryCodeNotExistMessage = 'sylius.country.not_exist';
+
+    /** @var string */
+    public $addressWithoutCountryCodeCanNotExistMessage = 'sylius.address.without_country';
 
     public function validatedBy(): string
     {
-        return 'sylius_api_validator_correct_address_order';
+        return 'sylius_api_validator_correct_order_address';
     }
 
     public function getTargets(): string

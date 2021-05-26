@@ -189,11 +189,3 @@ Feature: Allowing access only for correctly logged in users
         And there is logged in the administrator
         When the administrator try to see the summary of customer's cart
         Then the administrator should see "Stark T-shirt" product with quantity 1 in the visitor cart
-
-    @api
-    Scenario: Trying to add incorrect address to the cart by the visitor
-        Given the visitor has product "Stark T-Shirt" in the cart
-        When the visitor specify the email as "jon.snow@example.com"
-        And the visitor try to specify the billing incorrect address as "Ankh Morpork", "Frost Alley", "90210", "United Russia" for "Jon Snow"
-        And the visitor complete the addressing step
-        Then I should be notified that "United Russia" country does not exist
