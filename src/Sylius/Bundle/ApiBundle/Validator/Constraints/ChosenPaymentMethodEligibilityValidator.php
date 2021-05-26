@@ -13,8 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
-use Sylius\Bundle\ApiBundle\Command\PaymentMethodCodeAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
+use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
+use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
@@ -22,17 +25,28 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ChosenPaymentMethodEligibilityValidator extends ConstraintValidator
 {
+    /** @var PaymentRepositoryInterface */
+    private $paymentRepository;
+
     /** @var PaymentMethodRepositoryInterface */
     private $paymentMethodRepository;
 
-    public function __construct(PaymentMethodRepositoryInterface $paymentMethodRepository)
-    {
+    /** @var PaymentMethodsResolverInterface */
+    private $paymentMethodsResolver;
+
+    public function __construct(
+        PaymentRepositoryInterface $paymentRepository,
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
+        PaymentMethodsResolverInterface $paymentMethodsResolver
+    ) {
+        $this->paymentRepository = $paymentRepository;
         $this->paymentMethodRepository = $paymentMethodRepository;
+        $this->paymentMethodsResolver = $paymentMethodsResolver;
     }
-    
+
     public function validate($value, Constraint $constraint): void
     {
-        Assert::isInstanceOf($value, PaymentMethodCodeAwareInterface::class);
+        Assert::isInstanceOf($value, ChoosePaymentMethod::class);
 
         /** @var ChosenPaymentMethodEligibility $constraint */
         Assert::isInstanceOf($constraint, ChosenPaymentMethodEligibility::class);
@@ -40,12 +54,16 @@ final class ChosenPaymentMethodEligibilityValidator extends ConstraintValidator
         $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $value->getPaymentMethodCode()]);
 
         if ($paymentMethod === null) {
-            $this->context->addViolation(
-                $constraint->message,
-                ['%paymentMethodCode%' => $value->getPaymentMethodCode()]
-            );
-
+            $this->context->addViolation($constraint->notExist, ['%code%' => $value->getPaymentMethodCode()]);
             return;
+        }
+
+        /** @var PaymentInterface $payment */
+        $payment = $this->paymentRepository->find($value->paymentId);
+        Assert::notNull($payment);
+
+        if (!in_array($paymentMethod, $this->paymentMethodsResolver->getSupportedMethods($payment), true)) {
+            $this->context->addViolation($constraint->notAvailable, ['%name%' => $paymentMethod->getName()]);
         }
     }
 }

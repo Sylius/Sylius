@@ -18,7 +18,10 @@ use Symfony\Component\Validator\Constraint;
 final class ChosenPaymentMethodEligibility extends Constraint
 {
     /** @var string */
-    public $message = 'sylius.payment_method.not_exist';
+    public $notAvailable = 'sylius.payment_method.not_available';
+
+    /** @var string  */
+    public $notExist = 'sylius.payment_method.not_exist';
 
     public function validatedBy(): string
     {

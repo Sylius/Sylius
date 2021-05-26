@@ -514,13 +514,33 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should not be able to select :paymentMethodName payment method
+     * @Then I should not be able to select :paymentMethod payment method
      */
-    public function iShouldNotBeAbleToSelectPaymentMethod(string $paymentMethodName): void
+    public function iShouldNotBeAbleToSelectPaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
-        $paymentMethods = $this->getPossiblePaymentMethods();
+        $this->iChoosePaymentMethod($paymentMethod);
 
-        Assert::false(array_search($paymentMethodName, array_column($paymentMethods, 'name'), true));
+        Assert::true(
+            $this->responseChecker->hasViolationWithMessage($this->ordersClient->getLastResponse(),
+                sprintf(
+                    'The payment method %s is not available for this order. Please choose another one.',
+                    $paymentMethod->getName()
+                )
+            )
+        );
+    }
+
+    /**
+     * @Then I should be informed that payment method with code :code does not exist
+     */
+    public function iShouldBeInformedThatPaymentMethodWithCodeDoesNotExist(string $code): void
+    {
+        Assert::true(
+            $this->responseChecker->hasViolationWithMessage(
+                $this->ordersClient->getLastResponse(),
+                sprintf('The payment method with %s code does not exist.', $code)
+            )
+        );
     }
 
     /**
@@ -880,17 +900,6 @@ final class CheckoutContext implements Context
         Assert::true($this->isViolationWithMessageInResponse(
             $this->ordersClient->getLastResponse(),
             sprintf('The product variant with %s does not exist.', $code)
-        ));
-    }
-
-    /**
-     * @Then I should be informed that payment method with code :code does not exist
-     */
-    public function iShouldBeInformedThatPaymentMethodWithCodeDoesNotExist(string $code): void
-    {
-        Assert::true($this->isViolationWithMessageInResponse(
-            $this->ordersClient->getLastResponse(),
-            sprintf('The payment method with %s code does not exist.', $code)
         ));
     }
 

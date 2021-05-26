@@ -17,8 +17,11 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Bundle\ApiBundle\Command\PaymentMethodCodeAwareInterface;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentMethodEligibility;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
+use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
+use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -26,10 +29,12 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 final class ChosenPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
 {
     function let(
+        PaymentRepositoryInterface $paymentRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
+        PaymentMethodsResolverInterface $paymentMethodsResolver,
         ExecutionContextInterface $executionContext
     ): void {
-        $this->beConstructedWith($paymentMethodRepository);
+        $this->beConstructedWith($paymentRepository, $paymentMethodRepository, $paymentMethodsResolver);
 
         $this->initialize($executionContext);
     }
@@ -54,35 +59,80 @@ final class ChosenPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_adds_violation_if_payment_does_not_exist(
+    function it_adds_violation_if_chosen_payment_method_does_not_match_supported_methods(
+        PaymentRepositoryInterface $paymentRepository,
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
+        PaymentMethodsResolverInterface $paymentMethodsResolver,
+        ExecutionContextInterface $executionContext,
+        PaymentMethodInterface $firstPaymentMethod,
+        PaymentMethodInterface $secondPaymentMethod,
+        PaymentMethodInterface $thirdPaymentMethod,
+        PaymentInterface $payment
+    ): void {
+        $command = new ChoosePaymentMethod('PAYMENT_METHOD_CODE');
+        $command->setOrderTokenValue('ORDER_TOKEN');
+        $command->setSubresourceId('123');
+
+        $paymentMethodRepository->findOneBy(['code' => 'PAYMENT_METHOD_CODE'])->willReturn($firstPaymentMethod);
+        $firstPaymentMethod->getName()->willReturn('offline');
+
+        $paymentRepository->find('123')->willReturn($payment);
+
+        $paymentMethodsResolver->getSupportedMethods($payment)->willReturn([$secondPaymentMethod, $thirdPaymentMethod]);
+
+        $executionContext
+            ->addViolation('sylius.payment_method.not_available', ['%name%' => 'offline'])
+            ->shouldBeCalled()
+        ;
+
+        $this->validate($command, new ChosenPaymentMethodEligibility());
+    }
+
+    function it_adds_violation_if_payment_method_does_not_exist(
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         ExecutionContextInterface $executionContext
     ): void {
-        $paymentMethodRepository->findOneBy(['code' => 'payment_method_code'])->willReturn(null);
+        $command = new ChoosePaymentMethod('PAYMENT_METHOD_CODE');
+        $command->setOrderTokenValue('ORDER_TOKEN');
+        $command->setSubresourceId('123');
+
+        $paymentMethodRepository->findOneBy(['code' => 'PAYMENT_METHOD_CODE'])->willReturn(null);
 
         $executionContext
-            ->addViolation('sylius.payment_method.not_exist', ['%paymentMethodCode%' => 'payment_method_code'])
-            ->shouldBeCalled();
+            ->addViolation('sylius.payment_method.not_exist', ['%code%' => 'PAYMENT_METHOD_CODE'])
+            ->shouldBeCalled()
+        ;
 
-        $this->validate(
-            new ChoosePaymentMethod('payment_method_code'),
-            new ChosenPaymentMethodEligibility()
-        );
+        $this->validate($command, new ChosenPaymentMethodEligibility());
     }
 
     function it_does_nothing_if_payment_method_is_eligible(
+        PaymentRepositoryInterface $paymentRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
-        PaymentMethodInterface $paymentMethod,
-        ExecutionContextInterface $executionContext
+        PaymentMethodsResolverInterface $paymentMethodsResolver,
+        ExecutionContextInterface $executionContext,
+        PaymentMethodInterface $firstPaymentMethod,
+        PaymentMethodInterface $secondPaymentMethod,
+        PaymentInterface $payment
     ): void {
-        $paymentMethodRepository->findOneBy(['code' => 'payment_method_code'])->willReturn($paymentMethod);
+        $command = new ChoosePaymentMethod('PAYMENT_METHOD_CODE');
+        $command->setOrderTokenValue('ORDER_TOKEN');
+        $command->setSubresourceId('123');
+
+        $paymentMethodRepository->findOneBy(['code' => 'PAYMENT_METHOD_CODE'])->willReturn($secondPaymentMethod);
+
+        $firstPaymentMethod->getName()->willReturn('offline');
+
+        $paymentRepository->find('123')->willReturn($payment);
+
+        $paymentMethodsResolver->getSupportedMethods($payment)->willReturn([$firstPaymentMethod, $secondPaymentMethod]);
 
         $executionContext
-            ->addViolation('sylius.payment_method.not_exist', ['%paymentMethodCode%' => 'payment_method_code'])
+            ->addViolation('sylius.payment_method.not_exist', ['%code%' => 'PAYMENT_METHOD_CODE'])
             ->shouldNotBeCalled();
 
         $this->validate(
-            new ChoosePaymentMethod('payment_method_code'),
+            $command,
             new ChosenPaymentMethodEligibility()
         );
     }
