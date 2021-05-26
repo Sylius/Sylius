@@ -25,12 +25,12 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class OrderConfirmationResendTest extends KernelTestCase
+final class SendOrderConfirmationEmailHandlerTest extends KernelTestCase
 {
     /**
      * @test
      */
-    public function it_resends_order_confirmation_email(): void
+    public function it_sends_order_confirmation_email(): void
     {
         $container = self::bootKernel()->getContainer();
 
@@ -73,7 +73,7 @@ final class OrderConfirmationResendTest extends KernelTestCase
 
         $sendOrderConfirmationEmailHandler(new SendOrderConfirmation('TOKEN'));
 
-        self::assertSame(1, $emailChecker->countMessagesTo('johnny.bravo@email.com'));
+        self::assertSame($emailChecker->countMessagesTo('johnny.bravo@email.com'), 1);
         self::assertTrue($emailChecker->hasMessageTo(
             sprintf(
                 '%s %s %s',
