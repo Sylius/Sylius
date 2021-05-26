@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Exception\MissingTokenException;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -45,6 +46,9 @@ final class AddressItemDataProvider implements ItemDataProviderInterface, Restri
     public function getItem(string $resourceClass, $id, string $operationName = null, array $context = [])
     {
         $user = $this->userContext->getUser();
+        if ($user === null) {
+            throw new MissingTokenException('JWT Token not found');
+        }
 
         /** @var CustomerInterface|null $customer */
         $customer = $user instanceof ShopUserInterface ? $user->getCustomer() : null;

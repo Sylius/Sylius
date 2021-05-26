@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\DataProvider;
 
+use Lexik\Bundle\JWTAuthenticationBundle\Exception\MissingTokenException;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -102,5 +104,19 @@ final class AddressItemDataProviderSpec extends ObjectBehavior
         $addressRepository->findOneByCustomer('123', new Customer())->shouldNotBeCalled();
 
         $this->getItem(AddressInterface::class, '123')->shouldReturn(null);
+    }
+
+    function it_throws_an_exception_if_there_is_not_logged_in_user(
+        AddressRepositoryInterface $addressRepository,
+        UserContextInterface $userContext
+    ): void {
+        $userContext->getUser()->willReturn(null);
+
+        $addressRepository->findOneByCustomer('123', Argument::any())->shouldNotBeCalled();
+
+        $this
+            ->shouldThrow(MissingTokenException::class)
+            ->during('getItem', [AddressInterface::class, '123'])
+        ;
     }
 }
