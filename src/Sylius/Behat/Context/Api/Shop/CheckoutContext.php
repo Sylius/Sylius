@@ -77,6 +77,12 @@ final class CheckoutContext implements Context
     /** @var string[] */
     private $content = [];
 
+    /** @var string */
+    private $paymentMethodClass;
+
+    /** @var string */
+    private $shippingMethodClass;
+
     public function __construct(
         ApiClientInterface $ordersClient,
         ApiClientInterface $addressesClient,
@@ -86,7 +92,9 @@ final class CheckoutContext implements Context
         RepositoryInterface $paymentMethodRepository,
         ProductVariantResolverInterface $productVariantResolver,
         IriConverterInterface $iriConverter,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
+        string $paymentMethodClass,
+        string $shippingMethodClass
     ) {
         $this->ordersClient = $ordersClient;
         $this->addressesClient = $addressesClient;
@@ -97,6 +105,8 @@ final class CheckoutContext implements Context
         $this->productVariantResolver = $productVariantResolver;
         $this->iriConverter = $iriConverter;
         $this->sharedStorage = $sharedStorage;
+        $this->paymentMethodClass = $paymentMethodClass;
+        $this->shippingMethodClass = $shippingMethodClass;
     }
 
     /**
@@ -359,7 +369,7 @@ final class CheckoutContext implements Context
             sprintf('shipments/%s', $this->getCart()['shipments'][0]['id'])
         );
 
-        $request->setContent(['shippingMethod' => $this->iriConverter->getItemIriFromResourceClass(ShippingMethod::class, ['code' => $shippingMethodCode])]);
+        $request->setContent(['shippingMethod' => $this->iriConverter->getItemIriFromResourceClass($this->shippingMethodClass, ['code' => $shippingMethodCode])]);
 
         $this->ordersClient->executeCustomRequest($request);
     }
@@ -377,7 +387,7 @@ final class CheckoutContext implements Context
             sprintf('payments/%s', $this->getCart()['payments'][0]['id'])
         );
 
-        $request->setContent(['paymentMethod' => $this->iriConverter->getItemIriFromResourceClass(PaymentMethod::class, ['code' => $paymentMethodCode])]);
+        $request->setContent(['paymentMethod' => $this->iriConverter->getItemIriFromResourceClass($this->paymentMethodClass, ['code' => $paymentMethodCode])]);
 
         $this->ordersClient->executeCustomRequest($request);
     }
