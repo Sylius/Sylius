@@ -38,6 +38,9 @@
 
 1. `Sylius\Bundle\ApiBundle\DataProvider\AddressCollectionDataProvider` has been removed in favour of `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AddressesExtension`
 
+1. Second argument of `Sylius\Bundle\ApiBundle\DataPersister\AddressDataPersister` has been changed 
+from `CustomerContextInterface $customerContext` to `UserContextInterface $userContext` 
+
 ### Commands
 
 1. We've removed `productCode` from `Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart` command.

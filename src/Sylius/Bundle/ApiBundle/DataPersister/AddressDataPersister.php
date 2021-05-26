@@ -14,9 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Exception\MissingTokenException;
+use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Customer\Context\CustomerContextInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 
 /** @experimental */
 final class AddressDataPersister implements ContextAwareDataPersisterInterface
@@ -24,15 +26,15 @@ final class AddressDataPersister implements ContextAwareDataPersisterInterface
     /** @var ContextAwareDataPersisterInterface */
     private $decoratedDataPersister;
 
-    /** @var CustomerContextInterface */
-    private $customerContext;
+    /** @var UserContextInterface */
+    private $userContext;
 
     public function __construct(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
-        CustomerContextInterface $customerContext
+        UserContextInterface $userContext
     ) {
         $this->decoratedDataPersister = $decoratedDataPersister;
-        $this->customerContext = $customerContext;
+        $this->userContext = $userContext;
     }
 
     public function supports($data, array $context = []): bool
@@ -42,8 +44,13 @@ final class AddressDataPersister implements ContextAwareDataPersisterInterface
 
     public function persist($data, array $context = [])
     {
+        $user = $this->userContext->getUser();
+        if ($user === null) {
+            throw new MissingTokenException('JWT Token not found');
+        }
+
         /** @var CustomerInterface|null $customer */
-        $customer = $this->customerContext->getCustomer();
+        $customer = $user instanceof ShopUserInterface ? $user->getCustomer() : null;
         if ($customer !== null) {
             /** @var AddressInterface $data */
             $data->setCustomer($customer);
@@ -58,6 +65,11 @@ final class AddressDataPersister implements ContextAwareDataPersisterInterface
 
     public function remove($data, array $context = [])
     {
+        $user = $this->userContext->getUser();
+        if ($user === null) {
+            throw new MissingTokenException('JWT Token not found');
+        }
+
         return $this->decoratedDataPersister->remove($data, $context);
     }
 }
