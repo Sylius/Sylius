@@ -17,7 +17,7 @@
         <collectionOperations>
             <collectionOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/account/addresses</attribute>
+                <attribute name="path">/shop/addresses</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:address:read</attribute>
                 </attribute>
@@ -25,7 +25,7 @@
 
             <collectionOperation name="shop_post">
                 <attribute name="method">POST</attribute>
-                <attribute name="path">/shop/account/addresses</attribute>
+                <attribute name="path">/shop/addresses</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:address:create</attribute>
                 </attribute>
@@ -45,7 +45,7 @@
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/account/addresses/{id}</attribute>
+                <attribute name="path">/shop/addresses/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:address:read</attribute>
                 </attribute>
@@ -53,12 +53,12 @@
 
             <itemOperation name="shop_delete">
                 <attribute name="method">DELETE</attribute>
-                <attribute name="path">/shop/account/addresses/{id}</attribute>
+                <attribute name="path">/shop/addresses/{id}</attribute>
             </itemOperation>
 
             <itemOperation name="shop_put">
                 <attribute name="method">PUT</attribute>
-                <attribute name="path">/shop/account/addresses/{id}</attribute>
+                <attribute name="path">/shop/addresses/{id}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:address:update</attribute>
                 </attribute>

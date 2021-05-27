@@ -35,6 +35,15 @@
         </service>
 
         <service
+            id="sylius.api.doctrine.query_collection_extension.addresses"
+            class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AddressesExtension"
+            public="true"
+        >
+            <argument type="service" id="sylius.api.context.user" />
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+        </service>
+
+        <service
             id="sylius.api.doctrine.query_collection_extension.products_by_channel_and_locale_code"
             class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsByChannelAndLocaleCodeExtension"
             public="true"
