@@ -96,7 +96,7 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         if (!$channel->isAccountVerificationRequired()) {
             $user->setEnabled(true);
 
-            return;
+            return $user;
         }
 
         $token = $this->tokenGenerator->generate();
