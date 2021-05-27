@@ -183,6 +183,33 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When /^the visitor try to specify the incorrect billing address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
+     */
+    public function iTryToSpecifyTheIncorrectBillingAddressAs(
+        string $city,
+        string $street,
+        string $postcode,
+        string $countryName,
+        string $customerName
+    ): void {
+        $addressType = 'billingAddress';
+
+        $this->addAddress($addressType, $city, $street, $postcode, $customerName, $countryName);
+    }
+
+    /**
+     * @When /^the visitor try to specify the billing address without country as "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
+     */
+    public function iTryToSpecifyTheBillingAddressWithoutCountryAs(
+        string $city,
+        string $street,
+        string $postcode,
+        string $customerName
+    ): void {
+        $this->addAddress('billingAddress', $city, $street, $postcode, $customerName);
+    }
+
+    /**
      * @When /^I specify the shipping (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^I specify the shipping (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      */
@@ -617,6 +644,28 @@ final class CheckoutContext implements Context
     public function theVisitorShouldHaveCheckoutAddressStepCompleted(string $stepType): void
     {
         Assert::same($this->getCheckoutState(), $this::CHECKOUT_STATE_TYPES[$stepType]);
+    }
+
+    /**
+     * @Then I should be notified that :countryName country does not exist
+     */
+    public function iShouldBeNotifiedThatCountryDoesNotExist(string $countryName): void
+    {
+        $this->responseChecker->hasViolationWithMessage(
+            $this->ordersClient->getLastResponse(),
+            sprintf('The country %s does not exist.', StringInflector::nameToLowercaseCode($countryName))
+        );
+    }
+
+    /**
+     * @Then I should be notified that address without country cannot exist
+     */
+    public function iShouldBeNotifiedThatAddressWithoutCountryCannotExist(): void
+    {
+        $this->responseChecker->hasViolationWithMessage(
+            $this->ordersClient->getLastResponse(),
+            'The address without country cannot exist'
+        );
     }
 
     /**
@@ -1260,5 +1309,23 @@ final class CheckoutContext implements Context
         $request->setContent(['notes' => $notes]);
 
         return $this->ordersClient->executeCustomRequest($request);
+    }
+
+    private function addAddress(
+        string $addressType,
+        string $city,
+        string $street,
+        string $postcode,
+        string $customerName,
+        ?string $countryName = null
+    ): void {
+        [$firstName, $lastName] = explode(' ', $customerName);
+
+        $this->content[$addressType]['city'] = $city;
+        $this->content[$addressType]['street'] = $street;
+        $this->content[$addressType]['postcode'] = $postcode;
+        $this->content[$addressType]['firstName'] = $firstName;
+        $this->content[$addressType]['lastName'] = $lastName;
+        $this->content[$addressType]['countryCode'] = $countryName !== null ? StringInflector::nameToLowercaseCode($countryName) : null;
     }
 }
