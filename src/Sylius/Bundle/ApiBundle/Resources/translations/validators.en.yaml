@@ -3,6 +3,10 @@ sylius:
         invalid_email: 'There is no shop user with %email% email.'
         invalid_verification_token: 'There is no shop user with %verificationToken% email verification token.'
         is_verified: 'Account with email %email% is currently verified.'
+    address:
+        without_country: 'The address without country cannot exist'
+    country:
+        not_exist: 'The country %countryCode% does not exist.'
     order:
         not_empty: 'An empty order cannot be completed.'
     payment_method:
