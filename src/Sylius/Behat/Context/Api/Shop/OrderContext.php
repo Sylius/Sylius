@@ -203,7 +203,8 @@ final class OrderContext implements Context
             $orderElementState,
             StringInflector::codeToName(
                 $this->responseChecker->getValue(
-                    $this->client->getLastResponse(), $elementType . 'State'
+                    $this->client->getLastResponse(),
+                    $elementType . 'State'
                 )
             )
         );

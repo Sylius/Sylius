@@ -26,7 +26,8 @@ final class InstallDatabaseCommand extends AbstractInstallCommand
     {
         $this
             ->setDescription('Install Sylius database.')
-            ->setHelp(<<<EOT
+            ->setHelp(
+                <<<EOT
 The <info>%command.name%</info> command creates Sylius database.
 EOT
             )

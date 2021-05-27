@@ -38,7 +38,9 @@ final class NotificationContext implements Context
     public function iShouldBeNotifiedItHasBeenSuccessfullyCreated(): void
     {
         $this->testHelper->waitUntilNotificationPopups(
-            $this->notificationChecker, NotificationType::success(), 'has been successfully created.'
+            $this->notificationChecker,
+            NotificationType::success(),
+            'has been successfully created.'
         );
     }
 
@@ -48,7 +50,9 @@ final class NotificationContext implements Context
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
         $this->testHelper->waitUntilNotificationPopups(
-            $this->notificationChecker, NotificationType::success(), 'has been successfully updated.'
+            $this->notificationChecker,
+            NotificationType::success(),
+            'has been successfully updated.'
         );
     }
 
@@ -59,7 +63,9 @@ final class NotificationContext implements Context
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
         $this->testHelper->waitUntilNotificationPopups(
-                $this->notificationChecker, NotificationType::success(), 'has been successfully deleted.'
+            $this->notificationChecker,
+            NotificationType::success(),
+            'has been successfully deleted.'
         );
     }
 }

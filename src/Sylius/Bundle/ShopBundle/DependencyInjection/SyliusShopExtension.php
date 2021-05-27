@@ -50,7 +50,8 @@ final class SyliusShopExtension extends Extension
             return;
         }
 
-        $checkoutResolverDefinition = new Definition(CheckoutResolver::class,
+        $checkoutResolverDefinition = new Definition(
+            CheckoutResolver::class,
             [
                 new Reference('sylius.context.cart'),
                 new Reference('sylius.router.checkout_state'),

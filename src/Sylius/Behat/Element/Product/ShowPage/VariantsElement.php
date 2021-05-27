@@ -54,9 +54,12 @@ final class VariantsElement extends Element implements VariantsElementInterface
         string $price,
         string $currentStock
     ): bool {
-        $variantContent = $variant->getParent()->find('css', sprintf(
+        $variantContent = $variant->getParent()->find(
+            'css',
+            sprintf(
             '.variants-accordion__content.%s',
-            explode(' ', $variant->getAttribute('class'))[1])
+            explode(' ', $variant->getAttribute('class'))[1]
+        )
         );
 
         if (

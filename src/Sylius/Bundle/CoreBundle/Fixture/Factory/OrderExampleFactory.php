@@ -316,7 +316,10 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         return sprintf(
             "No enabled %s method was found for the channel '%s'. " .
             "Set 'skipping_%s_step_allowed' option to true for this channel if you want to skip %s method selection.",
-            $type, $channelCode, $type, $type
+            $type,
+            $channelCode,
+            $type,
+            $type
         );
     }
 

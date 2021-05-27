@@ -275,8 +275,11 @@ final class CartContext implements Context
      */
     public function myCartLocaleShouldBe(LocaleInterface $locale): void
     {
-        Assert::same($this->responseChecker->getValue(
-            $this->cartsClient->getLastResponse(), 'localeCode'),
+        Assert::same(
+            $this->responseChecker->getValue(
+            $this->cartsClient->getLastResponse(),
+            'localeCode'
+        ),
             $locale->getCode()
         );
     }
@@ -558,7 +561,8 @@ final class CartContext implements Context
 
         Assert::same(
             $this->responseChecker->getValue($response, 'shippingTotal'),
-            $shippingTotal);
+            $shippingTotal
+        );
     }
 
     /**

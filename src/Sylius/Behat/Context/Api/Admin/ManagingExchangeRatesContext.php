@@ -354,7 +354,10 @@ final class ManagingExchangeRatesContext implements Context
 
         Assert::false(
             $this->responseChecker->hasItemOnPositionWithValue(
-                $this->client->index(), 0, $currencyType, '/api/v2/admin/currencies/EUR'
+                $this->client->index(),
+                0,
+                $currencyType,
+                '/api/v2/admin/currencies/EUR'
             ),
             sprintf('It was possible to change %s', $currencyType)
         );

@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
-use Sylius\Bundle\ApiBundle\Command\PaymentMethodCodeAwareInterface;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentMethodEligibility;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -55,7 +54,8 @@ final class ChosenPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [new ChoosePaymentMethod('code'), new class() extends Constraint {}])
+            ->during('validate', [new ChoosePaymentMethod('code'), new class() extends Constraint {
+            }])
         ;
     }
 

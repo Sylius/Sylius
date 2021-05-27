@@ -408,8 +408,10 @@ final class ManagingZonesContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
-        Assert::true($this->responseChecker->isDeletionSuccessful(
-            $this->client->getLastResponse()),
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful(
+            $this->client->getLastResponse()
+        ),
             'Zone could not be deleted'
         );
     }

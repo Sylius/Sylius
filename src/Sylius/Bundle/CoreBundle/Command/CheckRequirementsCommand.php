@@ -25,7 +25,8 @@ final class CheckRequirementsCommand extends AbstractInstallCommand
     {
         $this
             ->setDescription('Checks if all Sylius requirements are satisfied.')
-            ->setHelp(<<<EOT
+            ->setHelp(
+                <<<EOT
 The <info>%command.name%</info> command checks system requirements.
 EOT
             )

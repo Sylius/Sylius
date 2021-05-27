@@ -36,7 +36,8 @@ class ImageUploader implements ImageUploaderInterface
 
         if ($imagePathGenerator === null) {
             @trigger_error(sprintf(
-                'Not passing an $imagePathGenerator to %s constructor is deprecated since Sylius 1.6 and will be not possible in Sylius 2.0.', self::class
+                'Not passing an $imagePathGenerator to %s constructor is deprecated since Sylius 1.6 and will be not possible in Sylius 2.0.',
+                self::class
             ), \E_USER_DEPRECATED);
         }
 

@@ -83,7 +83,8 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
                     'taxRateCode' => 'simple_tax',
                     'taxRateName' => 'Simple tax',
                     'taxRateAmount' => 0.1,
-                ])
+                ]
+            )
             ->willReturn($shippingTaxAdjustment)
         ;
         $shipment->addAdjustment($shippingTaxAdjustment)->shouldBeCalled();
@@ -138,7 +139,8 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
                     'taxRateCode' => 'simple_tax',
                     'taxRateName' => 'Simple tax',
                     'taxRateAmount' => 0.1,
-                ])
+                ]
+            )
             ->willReturn($firstShippingTaxAdjustment)
         ;
         $firstShipment->addAdjustment($firstShippingTaxAdjustment)->shouldBeCalled();
@@ -156,7 +158,8 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
                     'taxRateCode' => 'simple_tax',
                     'taxRateName' => 'Simple tax',
                     'taxRateAmount' => 0.1,
-                ])
+                ]
+            )
             ->willReturn($secondShippingTaxAdjustment)
         ;
         $secondShipment->addAdjustment($secondShippingTaxAdjustment)->shouldBeCalled();
@@ -218,7 +221,8 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
                     'taxRateCode' => 'simple_tax',
                     'taxRateName' => 'Simple tax',
                     'taxRateAmount' => 0.1,
-                ])
+                ]
+            )
             ->willReturn($shippingTaxAdjustment)
         ;
         $secondShipment->addAdjustment($shippingTaxAdjustment)->shouldBeCalled();
@@ -279,7 +283,8 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
                     'taxRateCode' => 'simple_tax',
                     'taxRateName' => 'Simple tax',
                     'taxRateAmount' => 0.1,
-                ])
+                ]
+            )
             ->shouldNotBeCalled()
         ;
 
@@ -296,7 +301,8 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
                     'taxRateCode' => 'simple_tax',
                     'taxRateName' => 'Simple tax',
                     'taxRateAmount' => 0.1,
-                ])
+                ]
+            )
             ->willReturn($shippingTaxAdjustment)
         ;
         $secondShipment->addAdjustment($shippingTaxAdjustment)->shouldBeCalled();

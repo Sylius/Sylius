@@ -68,10 +68,12 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
             $emailSender
         );
 
-        $sendAccountVerificationEmailHandler(new SendAccountVerificationEmail(
+        $sendAccountVerificationEmailHandler(
+            new SendAccountVerificationEmail(
             'user@example.com',
             'en_US',
-            'CHANNEL_CODE')
+            'CHANNEL_CODE'
+        )
         );
 
         self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));
@@ -122,10 +124,12 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
             $emailSender
         );
 
-        $sendAccountVerificationEmailHandler(new SendAccountVerificationEmail(
-                'user@example.com',
-                'en_US',
-                'CHANNEL_CODE')
+        $sendAccountVerificationEmailHandler(
+            new SendAccountVerificationEmail(
+            'user@example.com',
+            'en_US',
+            'CHANNEL_CODE'
+        )
         );
 
         self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));

@@ -24,7 +24,10 @@ final class TotalWeightGreaterThanOrEqualConfigurationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('weight', NumberType::class, [
+        $builder->add(
+            'weight',
+            NumberType::class,
+            [
                 'label' => 'sylius.form.shipping_method_rule.weight',
                 'constraints' => [
                     new NotBlank(['groups' => ['sylius']]),

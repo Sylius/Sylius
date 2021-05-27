@@ -52,7 +52,8 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('validate', [
                 new AddressOrder('john@doe.com', $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject()),
-                new class() extends Constraint {}
+                new class() extends Constraint {
+                }
             ])
         ;
     }

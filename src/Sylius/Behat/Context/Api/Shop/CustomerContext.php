@@ -377,7 +377,8 @@ final class CustomerContext implements Context
     public function thisOrderShouldHaveNumber(string $orderNumber): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->orderShopClient->getLastResponse(),
+            $this->responseChecker->hasItemWithValue(
+                $this->orderShopClient->getLastResponse(),
                 'number',
                 $orderNumber
             )
@@ -439,7 +440,8 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatTheElementShouldBe(string $elementName, string $validationMessage): void
     {
-        Assert::contains($this->responseChecker->getError($this->customerClient->getLastResponse()),
+        Assert::contains(
+            $this->responseChecker->getError($this->customerClient->getLastResponse()),
             sprintf('%s must be %s.', ucfirst($elementName), $validationMessage)
         );
     }

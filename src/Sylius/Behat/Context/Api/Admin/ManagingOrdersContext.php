@@ -132,10 +132,12 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldSeeASingleOrderFromCustomer(CustomerInterface $customer): void
     {
-        Assert::true($this->responseChecker->hasItemWithValue(
+        Assert::true(
+            $this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'customer',
-            $this->iriConverter->getIriFromItem($customer)),
+            $this->iriConverter->getIriFromItem($customer)
+        ),
             sprintf('There is no order for customer %s', $customer->getEmail())
         );
     }

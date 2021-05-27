@@ -20,7 +20,7 @@ final class ChosenPaymentMethodEligibility extends Constraint
     /** @var string */
     public $notAvailable = 'sylius.payment_method.not_available';
 
-    /** @var string  */
+    /** @var string */
     public $notExist = 'sylius.payment_method.not_exist';
 
     public function validatedBy(): string

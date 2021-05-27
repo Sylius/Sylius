@@ -140,7 +140,10 @@ final class ManagingPaymentsContext implements Context
     public function iShouldSeePaymentForTheOrderInTheList(OrderInterface $order, int $position): void
     {
         Assert::true($this->responseChecker->hasItemOnPositionWithValue(
-            $this->client->getLastResponse(), $position - 1, 'order', sprintf('/api/v2/admin/orders/%s', $order->getTokenValue())
+            $this->client->getLastResponse(),
+            $position - 1,
+            'order',
+            sprintf('/api/v2/admin/orders/%s', $order->getTokenValue())
         ));
     }
 

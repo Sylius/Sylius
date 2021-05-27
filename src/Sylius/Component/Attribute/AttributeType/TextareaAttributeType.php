@@ -59,7 +59,8 @@ final class TextareaAttributeType implements AttributeTypeInterface
         $validator = $context->getValidator();
 
         return $validator->validate(
-            $value, [
+            $value,
+            [
                 new NotBlank([]),
             ]
         );

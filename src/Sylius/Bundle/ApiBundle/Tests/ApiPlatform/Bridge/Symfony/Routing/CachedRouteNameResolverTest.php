@@ -267,7 +267,8 @@ final class CachedRouteNameResolverTest extends TestCase
         $cacheItemPool
             ->getItem(Argument::type('string'))
             ->shouldBeCalledTimes(1)
-            ->willThrow($cacheException->reveal()
+            ->willThrow(
+                $cacheException->reveal()
             );
 
         $decorated = $this->prophesize(RouteNameResolverInterface::class);

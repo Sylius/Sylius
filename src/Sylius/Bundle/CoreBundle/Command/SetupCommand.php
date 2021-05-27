@@ -33,7 +33,8 @@ final class SetupCommand extends AbstractInstallCommand
     {
         $this
             ->setDescription('Sylius configuration setup.')
-            ->setHelp(<<<EOT
+            ->setHelp(
+                <<<EOT
 The <info>%command.name%</info> command allows user to configure basic Sylius data.
 EOT
             )

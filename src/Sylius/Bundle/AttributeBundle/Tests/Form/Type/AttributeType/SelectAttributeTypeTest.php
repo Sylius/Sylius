@@ -60,8 +60,11 @@ final class SelectAttributeTypeTest extends TypeTestCase
 
     private function assertChoicesLabels(array $expectedLabels, array $formConfiguration = []): void
     {
-        $form = $this->factory->create(\Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType::class,
-            null, $formConfiguration);
+        $form = $this->factory->create(
+            \Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType::class,
+            null,
+            $formConfiguration
+        );
         $view = $form->createView();
 
         Assert::assertSame($expectedLabels, array_map(function (ChoiceView $choiceView): string {

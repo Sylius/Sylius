@@ -9,17 +9,17 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20210408131321 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return 'Adds unique index to sylius_order table for token_value column';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         $this->addSql('CREATE UNIQUE INDEX UNIQ_6196A1F9BEA95C75 ON sylius_order (token_value)');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         $this->addSql('DROP INDEX UNIQ_6196A1F9BEA95C75 ON sylius_order');
     }

@@ -33,7 +33,8 @@ class PromoteUserCommand extends AbstractRoleCommand
                 new InputOption('super-admin', null, InputOption::VALUE_NONE, 'Set the user as a super admin'),
                 new InputOption('user-type', null, InputOption::VALUE_REQUIRED, 'User type'),
             ])
-            ->setHelp(<<<EOT
+            ->setHelp(
+                <<<EOT
 The <info>sylius:user:promote</info> command promotes a user by adding security roles
 
   <info>php app/console sylius:user:promote matthieu@email.com</info>

@@ -65,6 +65,7 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         if (isset($context[self::ALREADY_CALLED])) {
             return false;
         }
+
         return $data instanceof ProductVariantInterface && $this->isNotAdminGetOperation($context);
     }
 

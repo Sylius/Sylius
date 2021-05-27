@@ -39,7 +39,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function describeIt(string $description, string $languageCode): void
     {
         $this->getDocument()->fillField(
-            sprintf('sylius_shipping_method_translations_%s_description', $languageCode), $description
+            sprintf('sylius_shipping_method_translations_%s_description', $languageCode),
+            $description
         );
     }
 

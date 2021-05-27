@@ -55,6 +55,7 @@ final class ChosenPaymentMethodEligibilityValidator extends ConstraintValidator
 
         if ($paymentMethod === null) {
             $this->context->addViolation($constraint->notExist, ['%code%' => $value->getPaymentMethodCode()]);
+
             return;
         }
 

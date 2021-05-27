@@ -53,7 +53,8 @@ trait SyliusPluginTrait
                 if ($expectedAlias !== $extension->getAlias()) {
                     throw new \LogicException(sprintf(
                         'Users will expect the alias of the default extension of a plugin to be the underscored version of the plugin name ("%s"). You can override "Bundle::getContainerExtension()" if you want to use "%s" or another alias.',
-                        $expectedAlias, $extension->getAlias()
+                        $expectedAlias,
+                        $extension->getAlias()
                     ));
                 }
 

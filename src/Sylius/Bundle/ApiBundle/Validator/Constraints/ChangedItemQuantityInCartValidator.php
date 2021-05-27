@@ -32,7 +32,7 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
     /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /** @var AvailabilityCheckerInterface  */
+    /** @var AvailabilityCheckerInterface */
     private $availabilityChecker;
 
     public function __construct(
