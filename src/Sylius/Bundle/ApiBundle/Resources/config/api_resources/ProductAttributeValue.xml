@@ -11,16 +11,22 @@
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-attribute-values</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.product_attribute_value_subject_filter</attribute>
+                </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:product_attribute_value:read</attribute>
                 </attribute>
             </collectionOperation>
 
-            <collectionOperation name="admin_post">
-                <attribute name="method">POST</attribute>
-                <attribute name="path">/admin/product-attribute-values</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product_attribute_value:create</attribute>
+            <collectionOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/product-attribute-values</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.product_attribute_value_subject_filter</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product_attribute_value:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -41,23 +47,10 @@
                     <attribute name="groups">shop:product_attribute_value:read</attribute>
                 </attribute>
             </itemOperation>
-
-            <itemOperation name="admin_put">
-                <attribute name="method">PUT</attribute>
-                <attribute name="path">/admin/product-attribute-values/{id}</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product_attribute_value:update</attribute>
-                </attribute>
-            </itemOperation>
-
-            <itemOperation name="admin_delete">
-                <attribute name="method">DELETE</attribute>
-                <attribute name="path">/admin/product-attribute-values/{id}</attribute>
-            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
-        <property name="product" />
+        <property name="subject" />
         <property name="attribute" />
         <property name="value" />
         <property name="localeCode" />

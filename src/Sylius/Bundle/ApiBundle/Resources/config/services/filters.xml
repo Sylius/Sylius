@@ -119,5 +119,12 @@
             </argument>
             <tag name="api_platform.filter" />
         </service>
+
+        <service id="sylius.api.product_attribute_value_subject_filter" parent="api_platform.doctrine.orm.search_filter">
+            <argument type="collection">
+                <argument key="subject">exact</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
     </services>
 </container>
