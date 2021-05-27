@@ -50,7 +50,7 @@
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
-        <property name="subject" />
+        <property name="product" />
         <property name="attribute" />
         <property name="value" />
         <property name="localeCode" />
