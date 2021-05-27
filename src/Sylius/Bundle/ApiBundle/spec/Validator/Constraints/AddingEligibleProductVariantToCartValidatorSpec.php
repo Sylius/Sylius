@@ -21,7 +21,6 @@ use Sylius\Bundle\ApiBundle\Validator\Constraints\AddingEligibleProductVariantTo
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -58,8 +57,9 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('validate', [
-                new AddItemToCart( 'productVariantCode', 1),
-                new class() extends Constraint {}
+                new AddItemToCart('productVariantCode', 1),
+                new class() extends Constraint {
+                }
             ])
         ;
     }
@@ -78,7 +78,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         ;
 
         $this->validate(
-            new AddItemToCart( 'productVariantCode', 1),
+            new AddItemToCart('productVariantCode', 1),
             new AddingEligibleProductVariantToCart()
         );
     }
@@ -103,7 +103,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         ;
 
         $this->validate(
-            new AddItemToCart( 'productVariantCode', 1),
+            new AddItemToCart('productVariantCode', 1),
             new AddingEligibleProductVariantToCart()
         );
     }
@@ -129,7 +129,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         ;
 
         $this->validate(
-            new AddItemToCart( 'productVariantCode', 1),
+            new AddItemToCart('productVariantCode', 1),
             new AddingEligibleProductVariantToCart()
         );
     }
@@ -148,7 +148,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
     ): void {
         $this->initialize($executionContext);
 
-        $command = new AddItemToCart( 'productVariantCode', 1);
+        $command = new AddItemToCart('productVariantCode', 1);
         $command->setOrderTokenValue('TOKEN');
 
         $productVariantRepository->findOneBy(['code' => 'productVariantCode'])->willReturn($productVariant);
@@ -197,7 +197,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
     ): void {
         $this->initialize($executionContext);
 
-        $command = new AddItemToCart( 'productVariantCode', 1);
+        $command = new AddItemToCart('productVariantCode', 1);
         $command->setOrderTokenValue('TOKEN');
 
         $productVariantRepository->findOneBy(['code' => 'productVariantCode'])->willReturn($productVariant);
@@ -247,7 +247,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
     ): void {
         $this->initialize($executionContext);
 
-        $command = new AddItemToCart( 'productVariantCode', 1);
+        $command = new AddItemToCart('productVariantCode', 1);
         $command->setOrderTokenValue('TOKEN');
 
         $productVariantRepository->findOneBy(['code' => 'productVariantCode'])->willReturn($productVariant);
@@ -294,12 +294,11 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         Collection $items,
         OrderItemInterface $orderItem,
         ProductVariantInterface $itemProductVariant,
-
         AvailabilityCheckerInterface $availabilityChecker
     ): void {
         $this->initialize($executionContext);
 
-        $command = new AddItemToCart( 'productVariantCode', 1);
+        $command = new AddItemToCart('productVariantCode', 1);
         $command->setOrderTokenValue('TOKEN');
 
         $productVariantRepository->findOneBy(['code' => 'productVariantCode'])->willReturn($productVariant);

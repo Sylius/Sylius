@@ -32,7 +32,8 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         $this->clickTabIfItsNotActive('details');
 
         $this->getDocument()->fillField(
-            sprintf('sylius_product_translations_%s_name', $localeCode), $name
+            sprintf('sylius_product_translations_%s_name', $localeCode),
+            $name
         );
 
         if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {

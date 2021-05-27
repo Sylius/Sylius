@@ -51,7 +51,8 @@ final class InstallCommand extends AbstractInstallCommand
     {
         $this
             ->setDescription('Installs Sylius in your preferred environment.')
-            ->setHelp(<<<EOT
+            ->setHelp(
+                <<<EOT
 The <info>%command.name%</info> command installs Sylius.
 EOT
             )

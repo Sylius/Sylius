@@ -24,19 +24,22 @@ final class RegisterGatewayConfigTypePassTest extends AbstractCompilerPassTestCa
     public function it_registers_payment_gateways_configs_by_their_priority_in_the_registry(): void
     {
         $this->setDefinition('sylius.form_registry.payum_gateway_config', new Definition());
-        $this->setDefinition('custom_low_priority_gateway',
+        $this->setDefinition(
+            'custom_low_priority_gateway',
             (new Definition('LowGatewayClass'))->addTag(
                 'sylius.gateway_configuration_type',
                 ['type' => 'low_gateway', 'label' => 'Low Gateway', 'priority' => 10]
             )
         );
-        $this->setDefinition('custom_high_priority_gateway',
+        $this->setDefinition(
+            'custom_high_priority_gateway',
             (new Definition('HighGatewayClass'))->addTag(
                 'sylius.gateway_configuration_type',
                 ['type' => 'high_gateway', 'label' => 'High Gateway', 'priority' => 1000]
             )
         );
-        $this->setDefinition('custom_medium_priority_gateway',
+        $this->setDefinition(
+            'custom_medium_priority_gateway',
             (new Definition('MediumGatewayClass'))->addTag(
                 'sylius.gateway_configuration_type',
                 ['type' => 'medium_gateway', 'label' => 'Medium Gateway', 'priority' => 300]
@@ -76,19 +79,22 @@ final class RegisterGatewayConfigTypePassTest extends AbstractCompilerPassTestCa
     public function it_registers_payment_gateways_configs_with_default_priorities_in_the_registry(): void
     {
         $this->setDefinition('sylius.form_registry.payum_gateway_config', new Definition());
-        $this->setDefinition('custom_low_priority_gateway',
+        $this->setDefinition(
+            'custom_low_priority_gateway',
             (new Definition('LowGatewayClass'))->addTag(
                 'sylius.gateway_configuration_type',
                 ['type' => 'low_gateway', 'label' => 'Low Gateway', 'priority' => 10]
             )
         );
-        $this->setDefinition('custom_regular_priority_gateway',
+        $this->setDefinition(
+            'custom_regular_priority_gateway',
             (new Definition('RegularGatewayClass'))->addTag(
                 'sylius.gateway_configuration_type',
                 ['type' => 'regular_gateway', 'label' => 'Regular Gateway']
             )
         );
-        $this->setDefinition('custom_medium_priority_gateway',
+        $this->setDefinition(
+            'custom_medium_priority_gateway',
             (new Definition('MediumGatewayClass'))->addTag(
                 'sylius.gateway_configuration_type',
                 ['type' => 'medium_gateway', 'label' => 'Medium Gateway', 'priority' => 300]

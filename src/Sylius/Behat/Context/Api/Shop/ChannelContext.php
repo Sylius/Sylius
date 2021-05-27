@@ -62,8 +62,11 @@ final class ChannelContext implements Context
      */
     public function iShouldShopUsingTheCurrency(string $currencyCode): void
     {
-        Assert::same($this->responseChecker->getValue(
-            $this->client->getLastResponse(), 'baseCurrency')['code'],
+        Assert::same(
+            $this->responseChecker->getValue(
+            $this->client->getLastResponse(),
+            'baseCurrency'
+        )['code'],
             $currencyCode
         );
     }

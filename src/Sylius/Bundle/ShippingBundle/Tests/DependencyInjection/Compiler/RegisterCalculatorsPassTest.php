@@ -26,7 +26,8 @@ final class RegisterCalculatorsPassTest extends AbstractCompilerPassTestCase
     {
         $this->setDefinition('sylius.registry.shipping_calculator', new Definition());
         $this->setDefinition('sylius.form_registry.shipping_calculator', new Definition());
-        $this->setDefinition('custom_calc',
+        $this->setDefinition(
+            'custom_calc',
             (new Definition())
                 ->addTag('sylius.shipping_calculator', ['calculator' => 'calc1', 'label' => 'Calc 1'])
                 ->addTag('sylius.shipping_calculator', ['calculator' => 'calc2', 'label' => 'Calc 2'])

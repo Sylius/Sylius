@@ -224,8 +224,10 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
-        Assert::true($this->responseChecker->isDeletionSuccessful(
-            $this->client->getLastResponse()),
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful(
+            $this->client->getLastResponse()
+        ),
             'Customer group could not be deleted'
         );
     }

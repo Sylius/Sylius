@@ -68,10 +68,12 @@ final class SendAccountRegistrationEmailHandlerTest extends KernelTestCase
             $emailSender
         );
 
-        $sendAccountRegistrationEmailHandler(new SendAccountRegistrationEmail(
-                'user@example.com',
-                'en_US',
-                'CHANNEL_CODE')
+        $sendAccountRegistrationEmailHandler(
+            new SendAccountRegistrationEmail(
+            'user@example.com',
+            'en_US',
+            'CHANNEL_CODE'
+        )
         );
 
         self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));
@@ -122,10 +124,12 @@ final class SendAccountRegistrationEmailHandlerTest extends KernelTestCase
             $emailSender
         );
 
-        $sendAccountRegistrationEmailHandler(new SendAccountRegistrationEmail(
+        $sendAccountRegistrationEmailHandler(
+            new SendAccountRegistrationEmail(
             'user@example.com',
             'en_US',
-            'CHANNEL_CODE')
+            'CHANNEL_CODE'
+        )
         );
 
         self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));

@@ -18,11 +18,11 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderItemAvailability;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
-use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -49,7 +49,8 @@ final class OrderItemAvailabilityValidatorSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('validate', [
                 new CompleteOrder(),
-                new class() extends Constraint {}
+                new class() extends Constraint {
+                }
             ])
         ;
     }

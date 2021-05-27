@@ -29,7 +29,8 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     public function nameItIn(string $name, string $localeCode): void
     {
         $this->getDocument()->fillField(
-            sprintf('sylius_product_translations_%s_name', $localeCode), $name
+            sprintf('sylius_product_translations_%s_name', $localeCode),
+            $name
         );
     }
 

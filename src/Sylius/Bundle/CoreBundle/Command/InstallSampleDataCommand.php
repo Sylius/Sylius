@@ -28,7 +28,8 @@ final class InstallSampleDataCommand extends AbstractInstallCommand
     {
         $this
             ->setDescription('Install sample data into Sylius.')
-            ->setHelp(<<<EOT
+            ->setHelp(
+                <<<EOT
 The <info>%command.name%</info> command loads the sample data for Sylius.
 EOT
             )

@@ -100,7 +100,8 @@ final class UserDeleteListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         UserInterface $userToBeDeleted,
         UserInterface $currentlyLoggedInUser,
-        $tokenStorage, $flashBag,
+        $tokenStorage,
+        $flashBag,
         TokenInterface $token
     ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
@@ -124,7 +125,8 @@ final class UserDeleteListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         UserInterface $userToBeDeleted,
         UserInterface $currentlyLoggedInUser,
-        $tokenStorage, $flashBag,
+        $tokenStorage,
+        $flashBag,
         TokenInterface $token
     ): void {
         $event->getSubject()->willReturn($userToBeDeleted);

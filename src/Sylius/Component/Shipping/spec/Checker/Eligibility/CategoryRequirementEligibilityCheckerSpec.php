@@ -70,7 +70,9 @@ final class CategoryRequirementEligibilityCheckerSpec extends ObjectBehavior
         ShippableInterface $shippable
     ): void {
         $shippingMethod->getCategory()->willReturn(
-            $shippingCategory, $shippingCategory, $shippingCategory2
+            $shippingCategory,
+            $shippingCategory,
+            $shippingCategory2
         );
         $shippingMethod->getCategoryRequirement()->willReturn(
             ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY,

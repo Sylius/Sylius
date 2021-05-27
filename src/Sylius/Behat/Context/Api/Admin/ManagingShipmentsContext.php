@@ -202,10 +202,10 @@ final class ManagingShipmentsContext implements Context
     public function iShouldSeeTheShippingDateAs(OrderInterface $order, string $dateTime): void
     {
         Assert::eq(
-             new \DateTime($this->responseChecker->getValue($this->client->show((string) $order->getShipments()->first()->getId()), 'shippedAt')),
-             new \DateTime($dateTime),
-             'Shipment was shipped in different date'
-         );
+            new \DateTime($this->responseChecker->getValue($this->client->show((string) $order->getShipments()->first()->getId()), 'shippedAt')),
+            new \DateTime($dateTime),
+            'Shipment was shipped in different date'
+        );
     }
 
     /**
@@ -220,8 +220,11 @@ final class ManagingShipmentsContext implements Context
     ): void {
         $this->client->index();
 
-        foreach ($this->responseChecker->getCollectionItemsWithValue($this->client->getLastResponse(), 'state',
-            StringInflector::nameToLowercaseCode($shippingState)) as $shipment) {
+        foreach ($this->responseChecker->getCollectionItemsWithValue(
+            $this->client->getLastResponse(),
+            'state',
+            StringInflector::nameToLowercaseCode($shippingState)
+        ) as $shipment) {
             $orderShowResponse = $this->client->showByIri($shipment['order']);
 
             if (!$this->responseChecker->HasValue($orderShowResponse, 'number', $orderNumber)) {

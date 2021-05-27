@@ -168,9 +168,9 @@ final class ManagingProductReviewsContext implements Context
     {
         $id = (string) $this->sharedStorage->get('product_review_id');
         Assert::false(
-           $this->isItemOnIndex('id', $id),
-           sprintf('Product review with id %s exist', $id)
-       );
+            $this->isItemOnIndex('id', $id),
+            sprintf('Product review with id %s exist', $id)
+        );
     }
 
     /**

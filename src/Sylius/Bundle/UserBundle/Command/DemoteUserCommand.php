@@ -33,7 +33,8 @@ class DemoteUserCommand extends AbstractRoleCommand
                 new InputOption('super-admin', null, InputOption::VALUE_NONE, 'Unset the user as super admin'),
                 new InputOption('user-type', null, InputOption::VALUE_REQUIRED, 'Use shop or admin user type'),
             ])
-            ->setHelp(<<<EOT
+            ->setHelp(
+                <<<EOT
 The <info>sylius:user:demote</info> command demotes a user by removing security roles
 
   <info>php app/console sylius:user:demote matthieu@email.com</info>

@@ -48,7 +48,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function nameItIn(string $name, string $language): void
     {
         $this->getDocument()->fillField(
-            sprintf('sylius_product_variant_translations_%s_name', $language), $name
+            sprintf('sylius_product_variant_translations_%s_name', $language),
+            $name
         );
     }
 

@@ -24,7 +24,9 @@ final class CountryNameConverter implements CountryNameConverterInterface
 
         if (false === $countryCode) {
             throw new \InvalidArgumentException(sprintf(
-                'Country "%s" not found! Available names: %s.', $name, implode(', ', $names)
+                'Country "%s" not found! Available names: %s.',
+                $name,
+                implode(', ', $names)
             ));
         }
 

@@ -24,7 +24,8 @@ final class InstallAssetsCommand extends AbstractInstallCommand
     {
         $this
             ->setDescription('Installs all Sylius assets.')
-            ->setHelp(<<<EOT
+            ->setHelp(
+                <<<EOT
 The <info>%command.name%</info> command downloads and installs all Sylius media assets.
 EOT
             )

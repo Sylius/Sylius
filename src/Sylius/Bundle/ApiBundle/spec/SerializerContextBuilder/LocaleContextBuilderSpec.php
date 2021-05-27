@@ -21,17 +21,17 @@ use Symfony\Component\HttpFoundation\Request;
 final class LocaleContextBuilderSpec extends ObjectBehavior
 {
     function let(
-       SerializerContextBuilderInterface $decoratedSerializerContextBuilder,
-       LocaleContextInterface $localeContext
-   ): void {
+        SerializerContextBuilderInterface $decoratedSerializerContextBuilder,
+        LocaleContextInterface $localeContext
+    ): void {
         $this->beConstructedWith($decoratedSerializerContextBuilder, $localeContext);
     }
 
     function it_updates_an_context_when_locale_context_has_locale(
-       Request $request,
-       SerializerContextBuilderInterface $decoratedSerializerContextBuilder,
-       LocaleContextInterface $localeContext
-   ): void {
+        Request $request,
+        SerializerContextBuilderInterface $decoratedSerializerContextBuilder,
+        LocaleContextInterface $localeContext
+    ): void {
         $decoratedSerializerContextBuilder->createFromRequest($request, true, [])->shouldBeCalled();
         $localeContext->getLocaleCode()->willReturn('en_US');
 

@@ -24,7 +24,9 @@ class CurrencyNameConverter implements CurrencyNameConverterInterface
 
         if (false === $currencyCode) {
             throw new \InvalidArgumentException(sprintf(
-                'Currency "%s" not found! Available names: %s.', $name, implode(', ', $names)
+                'Currency "%s" not found! Available names: %s.',
+                $name,
+                implode(', ', $names)
             ));
         }
 

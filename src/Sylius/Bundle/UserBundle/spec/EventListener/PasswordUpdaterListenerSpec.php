@@ -81,7 +81,8 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
 
     function it_updates_password_on_pre_persist_doctrine_event_for_user_interface_implementation_only(
         PasswordUpdaterInterface $passwordUpdater,
-        LifecycleEventArgs $event): void
+        LifecycleEventArgs $event
+    ): void
     {
         $event->getEntity()->willReturn('user');
         $passwordUpdater->updatePassword(Argument::any())->shouldNotBeCalled();

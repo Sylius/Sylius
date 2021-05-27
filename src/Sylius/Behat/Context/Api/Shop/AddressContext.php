@@ -387,9 +387,11 @@ final class AddressContext implements Context
      */
     public function iShouldBeNotifiedThatTheProvinceNeedsToBeSpecified(): void
     {
-        Assert::true($this->responseChecker->hasViolationWithMessage(
+        Assert::true(
+            $this->responseChecker->hasViolationWithMessage(
             $this->addressClient->getLastResponse(),
-            'Please select proper province.')
+            'Please select proper province.'
+        )
         );
     }
 

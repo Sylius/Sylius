@@ -146,8 +146,10 @@ final class ManagingProductAssociationTypesContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
-        Assert::true($this->responseChecker->isDeletionSuccessful(
-            $this->client->getLastResponse()),
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful(
+            $this->client->getLastResponse()
+        ),
             'Product association type could not be deleted'
         );
     }

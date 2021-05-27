@@ -534,7 +534,8 @@ final class CheckoutContext implements Context
 
         Assert::true($this->isViolationWithMessageInResponse(
             $response,
-            sprintf('Product does not fit requirements for %s shipping method. Please reselect your shipping method.',
+            sprintf(
+                'Product does not fit requirements for %s shipping method. Please reselect your shipping method.',
                 $shippingMethod->getName()
             )
         ));
@@ -548,7 +549,8 @@ final class CheckoutContext implements Context
         $this->iChoosePaymentMethod($paymentMethod);
 
         Assert::true(
-            $this->responseChecker->hasViolationWithMessage($this->ordersClient->getLastResponse(),
+            $this->responseChecker->hasViolationWithMessage(
+                $this->ordersClient->getLastResponse(),
                 sprintf(
                     'The payment method %s is not available for this order. Please choose another one.',
                     $paymentMethod->getName()
@@ -902,7 +904,8 @@ final class CheckoutContext implements Context
         foreach ([$firstElement, $secondElement] as $element) {
             $violation = $this->getViolation(
                 $violations,
-                $detailType . '.' . StringInflector::nameToCamelCase($element));
+                $detailType . '.' . StringInflector::nameToCamelCase($element)
+            );
             Assert::same($violation['message'], sprintf('Please enter %s.', $element));
         }
     }

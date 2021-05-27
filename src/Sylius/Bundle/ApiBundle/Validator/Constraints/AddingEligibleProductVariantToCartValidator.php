@@ -33,7 +33,7 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
     /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /** @var AvailabilityCheckerInterface  */
+    /** @var AvailabilityCheckerInterface */
     private $availabilityChecker;
 
     public function __construct(
@@ -54,7 +54,7 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
         Assert::isInstanceOf($constraint, AddingEligibleProductVariantToCart::class);
 
         /** @var ProductVariantInterface|null $productVariant */
-        $productVariant = $this->productVariantRepository->findOneBy(['code' =>$value->productVariantCode]);
+        $productVariant = $this->productVariantRepository->findOneBy(['code' => $value->productVariantCode]);
 
         if ($productVariant === null) {
             $this->context->addViolation(

@@ -75,7 +75,8 @@ final class TextAttributeType implements AttributeTypeInterface
         }
 
         return $validator->validate(
-            $value, $constraints
+            $value,
+            $constraints
         );
     }
 }

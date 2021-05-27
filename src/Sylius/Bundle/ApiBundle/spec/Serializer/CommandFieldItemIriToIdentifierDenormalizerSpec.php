@@ -97,7 +97,8 @@ final class CommandFieldItemIriToIdentifierDenormalizerSpec extends ObjectBehavi
         $itemIriToIdentifierConverter->getIdentifier('/api/v2/shop/products/cap_code')->willReturn('cap_code');
 
         $objectNormalizer
-            ->denormalize([
+            ->denormalize(
+                [
                 'title' => 'Cap',
                 'rating' => 5,
                 'comment' => 'ok',
@@ -112,7 +113,8 @@ final class CommandFieldItemIriToIdentifierDenormalizerSpec extends ObjectBehavi
         ;
 
         $this
-            ->denormalize([
+            ->denormalize(
+                [
                 'title' => 'Cap',
                 'rating' => 5,
                 'comment' => 'ok',
