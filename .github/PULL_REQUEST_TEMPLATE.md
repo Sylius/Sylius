@@ -1,18 +1,15 @@
-| Q               | A
-| --------------- | -----
-| Branch?         | 1.7, 1.8 or master <!-- see the comment below -->
-| Bug fix?        | no/yes
-| New feature?    | no/yes
-| BC breaks?      | no/yes
-| Deprecations?   | no/yes <!-- don't forget to update the UPGRADE-*.md file -->
-| Related tickets | fixes #X, partially #Y, mentioned in #Z
-| License         | MIT
+| Q  | A |
+| ------------- | ------------- |
+| Related tickets | _replace example with your answer_ ex: #123 or N/A |
+| Tests | _replace example with your answer_ ex: Y / N |
 
-<!--
- - Bug fixes must be submitted against the 1.7 or 1.8 branch (the lowest possible)
- - Features and deprecations must be submitted against the master branch
- - Make sure that the correct base branch is set
+_All table fields are required_
 
- To be sure you are not breaking any Backward Compatibilities, check the documentation:
- https://docs.sylius.com/en/latest/book/organization/backward-compatibility-promise.html
--->
+
+### Changelog
+
+_replace example with your answer_
+* New: Added Image LightBox
+* Improved: Image resizing will now happen locally in WP instead of on Brizy servers
+* Updated: Carousel library that is used in the editor (react-slick)
+* Fixed: Text space for ordered and unordered lists

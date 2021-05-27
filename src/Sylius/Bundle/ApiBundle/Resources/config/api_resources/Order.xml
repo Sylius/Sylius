@@ -134,7 +134,6 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="validation_groups">
                     <attribute>sylius</attribute>
-                    <attribute>sylius_checkout_complete</attribute>
                 </attribute>
                 <attribute name="path">/shop/orders/{tokenValue}/shipments/{shipmentId}</attribute>
                 <attribute name="messenger">input</attribute>

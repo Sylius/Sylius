@@ -12,3 +12,5 @@ sylius:
         not_sufficient: 'The product variant with %productVariantCode% code does not have sufficient stock.'
     shipment:
         shipped: 'You cannot ship a shipment that was shipped before.'
+    shipping_method:
+        not_available: 'The shipping method %name% is not available for this order. Please reselect your shipping method.'
