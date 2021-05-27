@@ -104,7 +104,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
             ->willReturn(new Envelope($sendVerificationEmailCommand))
         ;
 
-        $this($command);
+        $this($command)->shouldReturn($shopUser);
     }
 
     function it_creates_a_shop_user_with_given_data_and_verifies_it(
@@ -147,7 +147,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         $channel->isAccountVerificationRequired()->willReturn(false);
         $shopUser->setEnabled(true);
 
-        $this($command);
+        $this($command)->shouldReturn($shopUser);
     }
 
     function it_throws_an_exception_if_customer_with_user_already_exists(

@@ -64,7 +64,7 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         $this->commandBus = $commandBus;
     }
 
-    public function __invoke(RegisterShopUser $command): void
+    public function __invoke(RegisterShopUser $command): ShopUserInterface
     {
         /** @var ShopUserInterface $user */
         $user = $this->shopUserFactory->createNew();
@@ -107,5 +107,7 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
             $command->localeCode,
             $command->channelCode
         ), [new DispatchAfterCurrentBusStamp()]);
+
+        return $user;
     }
 }
