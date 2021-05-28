@@ -19,7 +19,7 @@
         <attribute name="id">
             <group>admin:product_attribute_value:read</group>
         </attribute>
-        <attribute name="subject">
+        <attribute name="product">
             <group>admin:product_attribute_value:read</group>
             <group>shop:product_attribute_value:read</group>
         </attribute>
@@ -27,25 +27,16 @@
             <group>admin:product_attribute_value:read</group>
             <group>admin:product_attribute_value:update</group>
             <group>shop:product_attribute_value:read</group>
-            <!-- <group>admin:product:read</group> -->
-            <!-- <group>admin:product:create</group> -->
-            <!-- <group>admin:product:update</group> -->
         </attribute>
         <attribute name="value">
             <group>admin:product_attribute_value:read</group>
             <group>admin:product_attribute_value:update</group>
             <group>shop:product_attribute_value:read</group>
-            <!-- <group>admin:product:read</group> -->
-            <!-- <group>admin:product:create</group> -->
-            <!-- <group>admin:product:update</group> -->
         </attribute>
         <attribute name="localeCode">
             <group>admin:product_attribute_value:read</group>
             <group>admin:product_attribute_value:update</group>
             <group>shop:product_attribute_value:read</group>
-            <!-- <group>admin:product:read</group> -->
-            <!-- <group>admin:product:create</group> -->
-            <!-- <group>admin:product:update</group> -->
         </attribute>
     </class>
 </serializer>
