@@ -19,7 +19,7 @@
         <attribute name="id">
             <group>admin:product_attribute_value:read</group>
         </attribute>
-        <attribute name="product">
+        <attribute name="subject">
             <group>admin:product_attribute_value:read</group>
             <group>shop:product_attribute_value:read</group>
         </attribute>
