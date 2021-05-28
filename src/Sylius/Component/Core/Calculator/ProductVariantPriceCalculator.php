@@ -25,7 +25,7 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
 
         $channelPricing = $productVariant->getChannelPricingForChannel($context['channel']);
 
-        if (null === $channelPricing) {
+        if (null === $channelPricing || $channelPricing->getPrice() === null) {
             $message = sprintf('Channel %s has no price defined for product variant', $context['channel']->getName());
 
             if ($productVariant->getName() !== null) {
@@ -58,6 +58,18 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
         }
 
         if (null === $channelPricing->getOriginalPrice()) {
+            if ($channelPricing->getPrice() === null) {
+                $message = sprintf('Channel %s has no price defined for product variant', $context['channel']->getName());
+
+                if ($productVariant->getName() !== null) {
+                    $message .= sprintf(' %s (%s)', $productVariant->getName(), $productVariant->getCode());
+                } else {
+                    $message .= sprintf(' with code %s', $productVariant->getCode());
+                }
+
+                throw new MissingChannelConfigurationException($message);
+            }
+
             return $channelPricing->getPrice();
         }
 
