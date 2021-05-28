@@ -27,7 +27,7 @@
             <group>admin:product_attribute_value:read</group>
             <group>admin:product_attribute_value:update</group>
             <group>shop:product_attribute_value:read</group>
-            <group>admin:product:read</group>
+            <!-- <group>admin:product:read</group> -->
             <!-- <group>admin:product:create</group> -->
             <!-- <group>admin:product:update</group> -->
         </attribute>
@@ -35,7 +35,7 @@
             <group>admin:product_attribute_value:read</group>
             <group>admin:product_attribute_value:update</group>
             <group>shop:product_attribute_value:read</group>
-            <group>admin:product:read</group>
+            <!-- <group>admin:product:read</group> -->
             <!-- <group>admin:product:create</group> -->
             <!-- <group>admin:product:update</group> -->
         </attribute>
@@ -43,7 +43,7 @@
             <group>admin:product_attribute_value:read</group>
             <group>admin:product_attribute_value:update</group>
             <group>shop:product_attribute_value:read</group>
-            <group>admin:product:read</group>
+            <!-- <group>admin:product:read</group> -->
             <!-- <group>admin:product:create</group> -->
             <!-- <group>admin:product:update</group> -->
         </attribute>
