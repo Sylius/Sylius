@@ -1,10 +1,47 @@
 # UPGRADE FROM `v1.9.X` TO `v1.10.0`
 
+### Admin API Bundle Removal
+
+Sylius v1.10 extracts AdminApiBundle outside the core package. You might choose either to keep that bundle or remove it in case it's not used.
+
+#### Keeping Admin API Bundle
+
+1. Add Admin API Bundle to your application by running the following command:
+
+```
+composer require sylius/admin-api-bundle
+```
+
+#### Removing Admin API Bundle
+
+1. **Before installing Sylius 1.10**, run the following command to adjust the database schema:
+
+```
+bin/console doctrine:migrations:execute Sylius\\Bundle\\AdminApiBundle\\Migrations\\Version20161202011556 Sylius\\Bundle\\AdminApiBundle\\Migrations\\Version20170313125424 Sylius\\Bundle\\AdminApiBundle\\Migrations\\Version20170711151342 --down
+```
+
+1. After installing Sylius v1.10, remove the remaining configuration by following the changes in [this PR](https://github.com/Sylius/Sylius-Standard/pull/543/files):
+
+- remove `friendsofsymfony/oauth-server-bundle` from your `composer.json` and run `composer update`
+- remove `FOS\OAuthServerBundle\FOSOAuthServerBundle` and `Sylius\Bundle\AdminApiBundle\SyliusAdminApiBundle` from `config/bundles.php`
+- remove `@SyliusAdminApiBundle/Resources/config/app/config.yml` import from `config/packages/_sylius.yaml`
+- remove `sylius_admin_api` package configuration from `config/packages/_sylius.yaml`
+- remove `oauth_token` and `api` firewalls from `config/security.yaml`
+- remove `sylius.security.api_regex` parameter and all its usage in access control from `config/security.yaml`
+- remove `config/routes/sylius_admin_api.yaml` file
+- remove all classes from `src/Entity/AdminApi` directory
+
+### Buses
+
+1. Message buses `sylius_default.bus` and `sylius_event.bus` has been deprecated. Use `sylius.command_bus` and `sylius.event_bus` instead.
+
+### Shop & Core Decoupled
+
 1. `Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener` has been moved from CoreBundle to ShopBundle, renamed to `Sylius\Bundle\ShopBundle\EventListener\ShopCartBlamerListener` and adjusted to work properly when decoupled.
+   
+1. `Sylius\Bundle\CoreBundle\EventListener\UserCartRecalculationListener` has been moved from CoreBundle to ShopBundle as `Sylius\Bundle\ShopBundle\EventListener\UserCartRecalculationListener` and adjusted to work properly when decoupled.
 
-1. `Sylius\Bundle\CoreBundle\EventListener\UserCartRecalculationListener` has been moved from CoreBundle to ShopBundle `Sylius\Bundle\ShopBundle\EventListener\UserCartRecalculationListener` and adjusted to work properly when decoupled.
-
-### New API
+### API v2 changes (`/api/v2`)
 
 1. API CartShippingMethod key `cost` has been changed to `price`.
 
@@ -41,7 +78,7 @@
 1. Second argument of `Sylius\Bundle\ApiBundle\DataPersister\AddressDataPersister` has been changed 
 from `CustomerContextInterface $customerContext` to `UserContextInterface $userContext` 
 
-### Commands
+#### Commands
 
 1. We've removed `productCode` from `Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart` command.
 
@@ -105,7 +142,3 @@ PATCH on `/api/v2/shop/account/orders/{tokenValue}/items`:
     + "productVariant": "string"
 }
 ````
-
-### Buses
-
-1. Sylius buses `sylius_default.bus` and `sylius_event.bus` are deprecated and should not be used anymore.
