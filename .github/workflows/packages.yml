@@ -16,19 +16,19 @@ on:
     schedule:
         -
             cron: "0 1 * * 6" # Run at 1am every Saturday
-    workflow_dispatch: ~ 
+    workflow_dispatch: ~
 
 jobs:
     list:
         runs-on: ubuntu-18.04
-        
+
         name: "Create a list of packages"
-        
+
         steps:
-            -   
+            -
                 uses: actions/checkout@v2
-                
-            -   
+
+            -
                 name: "Provide the list"
                 id: create-list
                 run: echo "::set-output name=packages::$(find src/Sylius -mindepth 3 -maxdepth 3 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Sylius\///g' | sort | jq  --raw-input . | jq --slurp . | jq -c .)"
@@ -38,37 +38,37 @@ jobs:
 
     test:
         needs: list
-        
+
         runs-on: ubuntu-18.04
-        
+
         name: "${{ matrix.package }}, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}"
 
         timeout-minutes: 10
-        
+
         strategy:
             fail-fast: false
             matrix:
                 php: ["7.4", "8.0"]
-                symfony: ["^4.4", "^5.2"]
+                symfony: ["^4.4", "5.2.*"]
                 package: "${{ fromJson(needs.list.outputs.packages) }}"
-                
+
         steps:
-            -   
+            -
                 uses: actions/checkout@v2
 
-            -   
+            -
                 name: Setup PHP
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: "${{ matrix.php }}"
                     coverage: none
 
-            -   
+            -
                 name: Get Composer cache directory
                 id: composer-cache
                 run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-            -   
+            -
                 name: Cache Composer
                 uses: actions/cache@v2
                 with:
@@ -78,26 +78,26 @@ jobs:
                         ${{ runner.os }}-php-${{ matrix.php }}-package-${{ matrix.package }}-composer-
                         ${{ runner.os }}-php-${{ matrix.php }}-package-
 
-            -   
+            -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
                 working-directory: "src/Sylius/${{ matrix.package }}"
-                    
+
             -
                 name: Validate composer.json
                 run: composer validate --ansi --strict
                 working-directory: "src/Sylius/${{ matrix.package }}"
-                
+
             -
                 name: Install dependencies
                 run: composer install --ansi --no-interaction
                 env:
                     COMPOSER_ROOT_VERSION: dev-master
                 working-directory: "src/Sylius/${{ matrix.package }}"
-                
+
             -
                 name: Test package
                 run: bin/test-package src/Sylius/${{ matrix.package }}
@@ -114,7 +114,7 @@ jobs:
         timeout-minutes: 5
 
         steps:
-            -   
+            -
                 name: "Process data"
                 id: process-data
                 shell: bash
@@ -122,7 +122,7 @@ jobs:
                     echo "::set-output name=branch::$(echo ${{ github.ref }} | sed 's/refs\/heads\///g' | sed 's/refs\/tags\///g')"
                     echo "::set-output name=sha::$(echo ${{ github.sha }} | cut -c 1-12)"
 
-            -   
+            -
                 name: "Notify on Slack"
                 uses: edge/simple-slack-notify@master
                 env:
