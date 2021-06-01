@@ -13,6 +13,7 @@
                 <attribute name="path">/admin/product-attribute-values</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.product_attribute_value_subject_filter</attribute>
+                    <attribute>sylius.api.product_attribute_value_localeCode_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:product_attribute_value:read</attribute>
@@ -24,6 +25,7 @@
                 <attribute name="path">/shop/product-attribute-values</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.product_attribute_value_subject_filter</attribute>
+                    <attribute>sylius.api.product_attribute_value_localeCode_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:product_attribute_value:read</attribute>
@@ -39,18 +41,10 @@
                     <attribute name="groups">admin:product_attribute_value:read</attribute>
                 </attribute>
             </itemOperation>
-
-            <itemOperation name="shop_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/product-attribute-values/{id}</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">shop:product_attribute_value:read</attribute>
-                </attribute>
-            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
-        <property name="subject" />
+        <property name="product" />
         <property name="attribute" />
         <property name="value" />
         <property name="localeCode" />
