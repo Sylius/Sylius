@@ -158,7 +158,7 @@ Having a grid prepared we can configure routing for the entity administration:
         resource: |
             alias: app.supplier
             section: admin
-            path: admin
+            path: admin/suppliers
             templates: "@SyliusAdmin\\Crud"
             redirect: update
             grid: app_admin_supplier
