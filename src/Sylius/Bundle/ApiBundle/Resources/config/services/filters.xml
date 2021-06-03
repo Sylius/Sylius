@@ -126,7 +126,8 @@
             </argument>
             <tag name="api_platform.filter" />
         </service>
-        <service id="sylius.api.product_attribute_value_localeCode_filter" parent="api_platform.doctrine.orm.search_filter">
+
+        <service id="sylius.api.product_attribute_value_locale_code_filter" parent="api_platform.doctrine.orm.search_filter">
             <argument type="collection">
                 <argument key="localeCode">exact</argument>
             </argument>
