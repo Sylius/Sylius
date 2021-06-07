@@ -1,0 +1,3 @@
+'%sylius.model.promotion.class%':
+    collectionOperations:
+        admin_get (unset): ~

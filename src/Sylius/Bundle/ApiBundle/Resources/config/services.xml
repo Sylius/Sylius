@@ -150,5 +150,15 @@
             <argument type="service" id="api_platform.router" />
             <argument type="service" id="api_platform.identifier.converter" on-invalid="ignore" />
         </service>
+
+        <service
+            id="api_platform.metadata.resource.metadata_factory.yaml"
+            class="Sylius\Bundle\ApiBundle\ApiPlatform\Factory\MergingExtractorResourceMetadataFactory"
+            decorates="api_platform.metadata.resource.metadata_factory"
+            decoration-priority="40"
+        >
+            <argument type="service" id="api_platform.metadata.extractor.yaml" />
+            <argument type="service" id="api_platform.metadata.resource.metadata_factory.yaml.inner" />
+        </service>
     </services>
 </container>
