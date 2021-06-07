@@ -1,3 +1,4 @@
-'%sylius.model.promotion.class%':
+'%sylius.model.zone.class%':
     collectionOperations:
         admin_get (unset): ~
+        admin_post (unset): ~
