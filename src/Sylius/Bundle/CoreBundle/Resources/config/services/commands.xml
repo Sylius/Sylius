@@ -39,6 +39,10 @@
             <tag name="console.command" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\Command\PluginCreateCommand">
+            <tag name="console.command" />
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\Command\SetupCommand">
             <tag name="console.command" />
         </service>

@@ -29,6 +29,7 @@
         <import resource="services/payment.xml" />
         <import resource="services/promotion.xml" />
         <import resource="services/shipping.xml" />
+        <import resource="services/plugin.xml" />
         <import resource="services/state_resolvers.xml" />
         <import resource="services/taxation.xml" />
         <import resource="services/templating.xml" />
