@@ -29,8 +29,8 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
 
     protected function get($id)
     {
-        if (method_exists(static::class, 'getContainer')) {
-            return static::getContainer()->get($id);
+        if (property_exists(static::class, 'container')) {
+            return static::$container->get($id);
         }
 
         return parent::get($id);
