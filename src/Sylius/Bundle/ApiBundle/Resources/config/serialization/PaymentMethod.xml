@@ -32,5 +32,14 @@
             <group>admin:payment_method:read</group>
             <group>shop:payment_method:read</group>
         </attribute>
+        <attribute name="description">
+            <group>shop:payment_method:read</group>
+        </attribute>
+        <attribute name="instructions">
+            <group>shop:payment_method:read</group>
+        </attribute>
+        <attribute name="position">
+            <group>shop:payment_method:read</group>
+        </attribute>
     </class>
 </serializer>
