@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
@@ -61,13 +62,18 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
 
         /** @var PromotionCouponInterface|null $promotionCoupon */
         $promotionCoupon = $this->promotionCouponRepository->findOneBy(['code' => $value->couponCode]);
+        /** @var PromotionInterface $promotion */
+        $promotion = $promotionCoupon->getPromotion();
 
         /** @var OrderInterface $cart */
         $cart = $this->orderRepository->findCartByTokenValue($value->getOrderTokenValue());
 
         $cart->setPromotionCoupon($promotionCoupon);
 
-        if ($promotionCoupon === null || !$this->promotionCouponChecker->isEligible($cart, $promotionCoupon)) {
+        if (
+            $promotionCoupon === null ||
+            !$this->promotionCouponChecker->isEligible($cart, $promotionCoupon)
+        ) {
             $this->context->buildViolation('sylius.promotion_coupon.is_invalid')
                 ->atPath('couponCode')
                 ->addViolation()
@@ -76,7 +82,10 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
             return;
         }
 
-        if (!$this->promotionChecker->isEligible($cart, $promotionCoupon->getPromotion())) {
+        if (
+            !$this->promotionChecker->isEligible($cart, $promotionCoupon->getPromotion()) ||
+            !$promotion->getChannels()->contains($cart->getChannel())
+        ) {
             $this->context->buildViolation('sylius.promotion.is_invalid')
                 ->atPath('couponCode')
                 ->addViolation()

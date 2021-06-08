@@ -775,6 +775,19 @@ final class PromotionContext implements Context
         $this->generateCoupons($amount, $promotion, $codeLength, null, $suffix);
     }
 
+    /**
+     * @Given /^(this promotion) is not available in any channel$/
+     */
+    public function thisPromotionIsNotAvailableInAnyChannel(PromotionInterface $promotion): void
+    {
+        /** @var ChannelInterface $channel */
+        foreach ($promotion->getChannels() as $channel) {
+            $promotion->removeChannel($channel);
+        }
+
+        $this->objectManager->flush();
+    }
+
     private function getTaxonFilterConfiguration(array $taxonCodes): array
     {
         return ['filters' => ['taxons_filter' => ['taxons' => $taxonCodes]]];
