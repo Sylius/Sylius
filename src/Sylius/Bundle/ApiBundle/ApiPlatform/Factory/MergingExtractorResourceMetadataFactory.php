@@ -18,7 +18,10 @@ use ApiPlatform\Core\Metadata\Extractor\ExtractorInterface;
 use ApiPlatform\Core\Metadata\Resource\Factory\ResourceMetadataFactoryInterface;
 use ApiPlatform\Core\Metadata\Resource\ResourceMetadata;
 
-
+/**
+ * @experimental
+ * This class is overwriting ApiPlatform ExtractorResourceMetadataFactory to allow yaml files to be merged into api platform config
+ */
 final class MergingExtractorResourceMetadataFactory implements ResourceMetadataFactoryInterface
 {
     /** @var ExtractorInterface */
@@ -29,6 +32,9 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
 
     /** @var array */
     private $defaults;
+
+    /** @var array */
+    private $resources = ['description', 'iri', 'itemOperations', 'collectionOperations', 'graphql'];
 
     public function __construct(ExtractorInterface $extractor, ResourceMetadataFactoryInterface $decorated = null, array $defaults = [])
     {
@@ -55,13 +61,12 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
             return $this->handleNotFound($parentResourceMetadata, $resourceClass);
         }
 
-        $resource['description'] = $resource['description'] ?? $this->defaults['description'] ?? null;
-        $resource['iri'] = $resource['iri'] ?? $this->defaults['iri'] ?? null;
-        $resource['itemOperations'] = $resource['itemOperations'] ?? $this->defaults['item_operations'] ?? null;
-        $resource['collectionOperations'] = $resource['collectionOperations'] ?? $this->defaults['collection_operations'] ?? null;
-        $resource['graphql'] = $resource['graphql'] ?? $this->defaults['graphql'] ?? null;
+        foreach ($this->resources as $availableResource) {
+            $resource[$availableResource] =
+                $resource[$availableResource] ?? $this->defaults[strtolower(preg_replace('/(?<!^)[A-Z]+|(?<!^|\d)[\d]+/', '_$0', $availableResource))] ?? null;
+        }
 
-        if (null !== $resource['attributes'] || [] !== $this->defaults['attributes']) {
+        if ( $resource['attributes'] ==! null || !empty($this->defaults['attributes'])) {
             $resource['attributes'] = (array) $resource['attributes'];
             foreach ($this->defaults['attributes'] as $key => $value) {
                 if (!isset($resource['attributes'][$key])) {
