@@ -38,8 +38,10 @@ final class OrderItemQuantityDataMapperSpec extends ObjectBehavior
         FormInterface $form,
         OrderItemInterface $orderItem
     ): void {
-        $propertyPathDataMapper->mapDataToForms($orderItem, [$form])->shouldBeCalled();
+        $forms = new \ArrayIterator([$form->getWrappedObject()]);
 
-        $this->mapDataToForms($orderItem, [$form]);
+        $propertyPathDataMapper->mapDataToForms($orderItem, $forms)->shouldBeCalled();
+
+        $this->mapDataToForms($orderItem, $forms);
     }
 }

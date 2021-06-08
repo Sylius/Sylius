@@ -32,7 +32,7 @@ jobs:
             fail-fast: false
             matrix:
                 php: [7.3, 7.4]
-                symfony: [^4.4, 5.2.*]
+                symfony: [^4.4, ^5.2]
 
         steps:
             -
@@ -120,7 +120,7 @@ jobs:
             fail-fast: false
             matrix:
                 php: [7.3, 7.4]
-                symfony: [^4.4, 5.2.*]
+                symfony: [^4.4, ^5.2]
                 mysql: [5.7, 8.0]
 
                 exclude:
@@ -253,7 +253,7 @@ jobs:
             fail-fast: false
             matrix:
                 php: [7.3, 7.4]
-                symfony: [^4.4, 5.2.*]
+                symfony: [^4.4, ^5.2]
                 node: [10.x]
                 mysql: [5.7, 8.0]
 

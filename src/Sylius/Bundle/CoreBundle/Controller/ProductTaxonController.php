@@ -86,7 +86,7 @@ class ProductTaxonController extends ResourceController
 
     private function validateCsrfProtection(Request $request, RequestConfiguration $configuration): void
     {
-        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid('update-product-taxon-position', $request->request->get('_csrf_token'))) {
+        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid('update-product-taxon-position', (string) $request->request->get('_csrf_token'))) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
     }
