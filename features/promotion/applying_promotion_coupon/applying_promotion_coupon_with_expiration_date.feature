@@ -27,7 +27,7 @@ Feature: Applying promotion coupon with an expiration date
         And my cart total should be "$100.00"
         And there should be no discount
 
-    @ui @api
+    @ui
     Scenario: Receiving no discount from valid coupon from expired promotion
         Given this promotion has already expired
         When I add product "PHP T-Shirt" to the cart
