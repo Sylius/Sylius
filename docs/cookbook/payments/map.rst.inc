@@ -4,3 +4,4 @@
 * :doc:`/cookbook/payments/authorize`
 * :doc:`/cookbook/payments/custom-payment-gateway`
 * :doc:`/cookbook/payments/customizing-credit-memo`
+* :doc:`/cookbook/payments/refund-process`
