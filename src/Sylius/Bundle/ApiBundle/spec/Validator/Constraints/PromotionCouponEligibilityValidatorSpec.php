@@ -157,4 +157,30 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
 
         $this->validate($value, $constraint);
     }
+
+    function it_does_add_violation_if_promotion_code_does_not_exist(
+        PromotionCouponRepositoryInterface $promotionCouponRepository,
+        OrderRepositoryInterface $orderRepository,
+        OrderInterface $cart,
+        ExecutionContextInterface $executionContext,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder
+    ): void {
+        $this->initialize($executionContext);
+        $constraint = new PromotionCouponEligibility();
+
+        $value = new ApplyCouponToCart('couponCode');
+        $value->setOrderTokenValue('token');
+
+        $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn(null);
+
+        $orderRepository->findCartByTokenValue('token')->willReturn($cart);
+
+        $cart->setPromotionCoupon(null)->shouldBeCalled();
+
+        $executionContext->buildViolation('sylius.promotion_coupon.is_invalid')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('couponCode')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+
+        $this->validate($value, $constraint);
+    }
 }

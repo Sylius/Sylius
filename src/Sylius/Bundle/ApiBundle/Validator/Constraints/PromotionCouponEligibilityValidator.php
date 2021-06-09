@@ -59,7 +59,7 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
             return;
         }
 
-        /** @var PromotionCouponInterface $promotionCoupon */
+        /** @var PromotionCouponInterface|null $promotionCoupon */
         $promotionCoupon = $this->promotionCouponRepository->findOneBy(['code' => $value->couponCode]);
 
         /** @var OrderInterface $cart */
@@ -67,7 +67,7 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
 
         $cart->setPromotionCoupon($promotionCoupon);
 
-        if (!$this->promotionCouponChecker->isEligible($cart, $promotionCoupon)) {
+        if ($promotionCoupon === null || !$this->promotionCouponChecker->isEligible($cart, $promotionCoupon)) {
             $this->context->buildViolation('sylius.promotion_coupon.is_invalid')
                 ->atPath('couponCode')
                 ->addViolation()
