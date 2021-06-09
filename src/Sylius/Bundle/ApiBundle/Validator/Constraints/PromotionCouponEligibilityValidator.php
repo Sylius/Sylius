@@ -74,22 +74,19 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
             $promotionCoupon === null ||
             !$this->promotionCouponChecker->isEligible($cart, $promotionCoupon)
         ) {
-            $this->context->buildViolation('sylius.promotion_coupon.is_invalid')
-                ->atPath('couponCode')
-                ->addViolation()
-            ;
-
-            return;
+            $this->addViolation('sylius.promotion_coupon.is_invalid', 'couponCode');
         }
 
         if (
             !$this->promotionChecker->isEligible($cart, $promotionCoupon->getPromotion()) ||
             !$promotion->getChannels()->contains($cart->getChannel())
         ) {
-            $this->context->buildViolation('sylius.promotion.is_invalid')
-                ->atPath('couponCode')
-                ->addViolation()
-            ;
+            $this->addViolation('sylius.promotion.is_invalid', 'couponCode');
         }
+    }
+
+    private function addViolation(string $message, string $path): void
+    {
+        $this->context->buildViolation($message)->atPath($path)->addViolation();
     }
 }
