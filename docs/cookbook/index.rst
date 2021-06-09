@@ -54,6 +54,7 @@ Payments
     payments/authorize
     payments/custom-payment-gateway
     payments/customizing-credit-memo
+    payments/refund-process
 
 .. include:: /cookbook/payments/map.rst.inc
 
@@ -149,13 +150,3 @@ Frontend
     frontend/webpack.rst
 
 .. include:: /cookbook/frontend/map.rst.inc
-
-Refund
-------
-
-.. toctree::
-    :hidden:
-
-    refund/refund-process.rst
-
-.. include:: /cookbook/refund/map.rst.inc
