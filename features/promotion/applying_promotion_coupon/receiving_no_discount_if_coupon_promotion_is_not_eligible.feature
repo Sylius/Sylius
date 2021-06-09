@@ -20,3 +20,19 @@ Feature: Receiving no discount if coupon promotion is not eligible
         And I use coupon with code "SANTA2016"
         Then I should be notified that the promotion is invalid
         And my cart total should be "$100.00"
+
+    @api
+    Scenario: Receiving no discount if promotion for the applied coupon has not started yet
+        Given this promotion starts tomorrow
+        When I add product "PHP T-Shirt" to the cart
+        And I use coupon with code "SANTA2016"
+        Then I should be notified that the promotion is invalid
+        And my cart total should be "$100.00"
+
+    @api
+    Scenario: Receiving no discount if promotion for the applied coupon has already expired
+        Given this promotion has already expired
+        When I add product "PHP T-Shirt" to the cart
+        And I use coupon with code "SANTA2016"
+        Then I should be notified that the promotion is invalid
+        And my cart total should be "$100.00"
