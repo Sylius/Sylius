@@ -72,16 +72,11 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
 
         if (
             $promotionCoupon === null ||
-            !$this->promotionCouponChecker->isEligible($cart, $promotionCoupon)
-        ) {
-            $this->addViolation('sylius.promotion_coupon.is_invalid', 'couponCode');
-        }
-
-        if (
+            !$this->promotionCouponChecker->isEligible($cart, $promotionCoupon) ||
             !$this->promotionChecker->isEligible($cart, $promotionCoupon->getPromotion()) ||
             !$promotion->getChannels()->contains($cart->getChannel())
         ) {
-            $this->addViolation('sylius.promotion.is_invalid', 'couponCode');
+            $this->addViolation('sylius.promotion_coupon.is_invalid', 'couponCode');
         }
     }
 

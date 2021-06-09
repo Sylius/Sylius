@@ -62,17 +62,6 @@ final class PromotionContext implements Context
         Assert::same($this->responseChecker->getError($response), 'couponCode: Coupon code is invalid.');
     }
 
-    /**
-     * @Then I should be notified that the promotion is invalid
-     */
-    public function iShouldBeNotifiedThatPromotionIsInvalid(): void
-    {
-        $response = $this->cartsClient->getLastResponse();
-
-        Assert::same($response->getStatusCode(), 422);
-        Assert::same($this->responseChecker->getError($response), 'couponCode: Promotion is invalid.');
-    }
-
     private function getCartTokenValue(): ?string
     {
         if ($this->sharedStorage->has('cart_token')) {

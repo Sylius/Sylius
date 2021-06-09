@@ -86,14 +86,12 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
 
         $promotionCouponChecker->isEligible($cart, $promotionCoupon)->willReturn(true);
 
-        $executionContext->buildViolation('sylius.promotion_coupon.is_invalid')->shouldNotBeCalled();
-
         $promotionCoupon->getPromotion()->willReturn($promotion);
         $promotion->getChannels()->willReturn(new ArrayCollection([$firstChannel->getWrappedObject(), $secondChannel->getWrappedObject()]));
 
         $promotionChecker->isEligible($cart, $promotion)->willReturn(true);
 
-        $executionContext->buildViolation('sylius.promotion.is_invalid')->shouldNotBeCalled();
+        $executionContext->buildViolation('sylius.promotion_coupon.is_invalid')->shouldNotBeCalled();
 
         $this->validate($value, $constraint);
     }
@@ -161,7 +159,7 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
 
         $promotionChecker->isEligible($cart, $promotion)->willReturn(false);
 
-        $executionContext->buildViolation('sylius.promotion.is_invalid')->willReturn($constraintViolationBuilder);
+        $executionContext->buildViolation('sylius.promotion_coupon.is_invalid')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('couponCode')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
@@ -193,14 +191,10 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
 
         $promotionCouponChecker->isEligible($cart, $promotionCoupon)->willReturn(true);
 
-        $executionContext->buildViolation('sylius.promotion_coupon.is_invalid')->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->atPath('couponCode')->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->addViolation()->shouldNotBeCalled();
-
         $promotionCoupon->getPromotion()->willReturn($promotion);
         $promotionChecker->isEligible($cart, $promotion)->willReturn(false);
 
-        $executionContext->buildViolation('sylius.promotion.is_invalid')->willReturn($constraintViolationBuilder);
+        $executionContext->buildViolation('sylius.promotion_coupon.is_invalid')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('couponCode')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
