@@ -788,6 +788,26 @@ final class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
+    /**
+     * @Given /^(this promotion) has usage limit equal to (\d+)$/
+     */
+    public function thisPromotionHasUsageLimitEqualTo(PromotionInterface $promotion, int $usageLimit): void
+    {
+        $promotion->setUsageLimit($usageLimit);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this promotion) usage limit is already reached$/
+     */
+    public function thisPromotionUsageLimitIsAlreadyReached(PromotionInterface $promotion): void
+    {
+        $promotion->setUsed($promotion->getUsageLimit());
+
+        $this->objectManager->flush();
+    }
+
     private function getTaxonFilterConfiguration(array $taxonCodes): array
     {
         return ['filters' => ['taxons_filter' => ['taxons' => $taxonCodes]]];
