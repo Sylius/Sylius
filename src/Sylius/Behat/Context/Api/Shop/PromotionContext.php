@@ -59,7 +59,7 @@ final class PromotionContext implements Context
         $response = $this->cartsClient->getLastResponse();
 
         Assert::same($response->getStatusCode(), 422);
-        Assert::notNull($this->responseChecker->getError($response));
+        Assert::same($this->responseChecker->getError($response), 'couponCode: Coupon code is invalid.');
     }
 
     private function getCartTokenValue(): ?string

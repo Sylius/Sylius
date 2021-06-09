@@ -13,12 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
+use Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponEligibilityCheckerInterface;
-use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
-use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -33,22 +32,17 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
     /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /** @var PromotionEligibilityCheckerInterface */
-    private $promotionChecker;
-
-    /** @var PromotionCouponEligibilityCheckerInterface */
-    private $promotionCouponChecker;
+    /** @var AppliedCouponEligibilityCheckerInterface */
+    private $appliedCouponEligibilityChecker;
 
     public function __construct(
         PromotionCouponRepositoryInterface $promotionCouponRepository,
         OrderRepositoryInterface $orderRepository,
-        PromotionEligibilityCheckerInterface $promotionChecker,
-        PromotionCouponEligibilityCheckerInterface $promotionCouponChecker
+        AppliedCouponEligibilityCheckerInterface $appliedCouponEligibilityChecker
     ) {
         $this->promotionCouponRepository = $promotionCouponRepository;
         $this->orderRepository = $orderRepository;
-        $this->promotionChecker = $promotionChecker;
-        $this->promotionCouponChecker = $promotionCouponChecker;
+        $this->appliedCouponEligibilityChecker = $appliedCouponEligibilityChecker;
     }
 
     public function validate($value, Constraint $constraint): void
@@ -61,23 +55,14 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
 
         /** @var PromotionCouponInterface|null $promotionCoupon */
         $promotionCoupon = $this->promotionCouponRepository->findOneBy(['code' => $value->couponCode]);
-
         /** @var OrderInterface $cart */
         $cart = $this->orderRepository->findCartByTokenValue($value->getOrderTokenValue());
 
         $cart->setPromotionCoupon($promotionCoupon);
 
-        if ($promotionCoupon === null || !$this->promotionCouponChecker->isEligible($cart, $promotionCoupon)) {
-            $this->context->buildViolation('sylius.promotion_coupon.is_invalid')
-                ->atPath('couponCode')
-                ->addViolation()
-            ;
-
-            return;
-        }
-
-        if (!$this->promotionChecker->isEligible($cart, $promotionCoupon->getPromotion())) {
-            $this->context->buildViolation('sylius.promotion.is_invalid')
+        if (!$this->appliedCouponEligibilityChecker->isEligible($promotionCoupon, $cart)) {
+            $this->context
+                ->buildViolation('sylius.promotion_coupon.is_invalid')
                 ->atPath('couponCode')
                 ->addViolation()
             ;

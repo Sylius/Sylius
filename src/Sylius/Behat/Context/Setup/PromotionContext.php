@@ -775,6 +775,39 @@ final class PromotionContext implements Context
         $this->generateCoupons($amount, $promotion, $codeLength, null, $suffix);
     }
 
+    /**
+     * @Given /^(this promotion) is not available in any channel$/
+     */
+    public function thisPromotionIsNotAvailableInAnyChannel(PromotionInterface $promotion): void
+    {
+        /** @var ChannelInterface $channel */
+        foreach ($promotion->getChannels() as $channel) {
+            $promotion->removeChannel($channel);
+        }
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this promotion) has usage limit equal to (\d+)$/
+     */
+    public function thisPromotionHasUsageLimitEqualTo(PromotionInterface $promotion, int $usageLimit): void
+    {
+        $promotion->setUsageLimit($usageLimit);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this promotion) usage limit is already reached$/
+     */
+    public function thisPromotionUsageLimitIsAlreadyReached(PromotionInterface $promotion): void
+    {
+        $promotion->setUsed($promotion->getUsageLimit());
+
+        $this->objectManager->flush();
+    }
+
     private function getTaxonFilterConfiguration(array $taxonCodes): array
     {
         return ['filters' => ['taxons_filter' => ['taxons' => $taxonCodes]]];
