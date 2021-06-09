@@ -9,5 +9,5 @@ use Sylius\Component\Core\Model\PromotionCouponInterface;
 
 interface AppliedCouponEligibilityCheckerInterface
 {
-    public function isEligible(PromotionCouponInterface $promotionCoupon, OrderInterface $cart): bool;
+    public function isEligible(?PromotionCouponInterface $promotionCoupon, OrderInterface $cart): bool;
 }

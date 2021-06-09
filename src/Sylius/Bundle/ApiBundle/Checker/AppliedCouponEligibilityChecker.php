@@ -35,8 +35,12 @@ final class AppliedCouponEligibilityChecker implements AppliedCouponEligibilityC
         $this->promotionCouponChecker = $promotionCouponChecker;
     }
 
-    public function isEligible(PromotionCouponInterface $promotionCoupon, OrderInterface $cart): bool
+    public function isEligible(?PromotionCouponInterface $promotionCoupon, OrderInterface $cart): bool
     {
+        if (null === $promotionCoupon) {
+            return false;
+        }
+
         /** @var PromotionInterface $promotion */
         $promotion = $promotionCoupon->getPromotion();
 

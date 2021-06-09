@@ -38,6 +38,21 @@ final class AppliedCouponEligibilityCheckerSpec extends ObjectBehavior
         $this->shouldImplement(AppliedCouponEligibilityCheckerInterface::class);
     }
 
+    function it_returns_false_if_promotion_coupon_is_null(
+        PromotionEligibilityCheckerInterface $promotionChecker,
+        PromotionCouponEligibilityCheckerInterface $promotionCouponChecker,
+        PromotionCouponInterface $promotionCoupon,
+        PromotionInterface $promotion,
+        OrderInterface $cart
+    ): void {
+        $promotionCoupon->getPromotion()->shouldNotBeCalled();
+        $promotion->getChannels()->shouldNotBeCalled();
+        $promotionChecker->isEligible(Argument::any())->shouldNotBeCalled();
+        $promotionCouponChecker->isEligible(Argument::any())->shouldNotBeCalled();
+
+        $this->isEligible(null, $cart)->shouldReturn(false);
+    }
+
     function it_returns_false_if_cart_channel_is_not_one_of_promotion_channels(
         PromotionEligibilityCheckerInterface $promotionChecker,
         PromotionCouponEligibilityCheckerInterface $promotionCouponChecker,

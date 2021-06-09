@@ -60,10 +60,7 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
 
         $cart->setPromotionCoupon($promotionCoupon);
 
-        if (
-            $promotionCoupon === null ||
-            !$this->appliedCouponEligibilityChecker->isEligible($promotionCoupon, $cart)
-        ) {
+        if (!$this->appliedCouponEligibilityChecker->isEligible($promotionCoupon, $cart)) {
             $this->context
                 ->buildViolation('sylius.promotion_coupon.is_invalid')
                 ->atPath('couponCode')
