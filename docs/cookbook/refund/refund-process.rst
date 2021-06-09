@@ -18,7 +18,9 @@ There is an easy way to customize it. You just need to override the priority in 
 .. code-block:: yaml
 
     # config/services.yaml
-    Sylius\RefundPlugin\ProcessManager\CreditMemoProcessManager:
+    services:
+        Sylius\RefundPlugin\ProcessManager\CreditMemoProcessManager:
+            arguments: ['@sylius.command_bus']
             tags:
                 - { name: sylius_refund.units_refunded.process_step, priority: 0 }
 
@@ -27,7 +29,14 @@ Or like this:
 .. code-block:: yaml
 
     # config/services.yaml
-    Sylius\RefundPlugin\ProcessManager\RefundPaymentProcessManager:
+    services:
+        Sylius\RefundPlugin\ProcessManager\RefundPaymentProcessManager:
+            arguments:
+                - '@Sylius\RefundPlugin\StateResolver\OrderFullyRefundedStateResolverInterface'
+                - '@Sylius\RefundPlugin\Provider\RelatedPaymentIdProviderInterface'
+                - '@Sylius\RefundPlugin\Factory\RefundPaymentFactoryInterface'
+                - '@doctrine.orm.default_entity_manager'
+                - '@sylius.event_bus'
             tags:
                 - { name: sylius_refund.units_refunded.process_step, priority: 200 }
 
