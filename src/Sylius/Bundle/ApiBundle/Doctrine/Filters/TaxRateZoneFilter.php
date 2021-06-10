@@ -29,7 +29,7 @@ final class TaxRateZoneFilter extends AbstractContextAwareFilter
         string $operationName = null
     ) {
         if ($property === 'zoneCode') {
-            $value = explode('/',$value);
+            $value = explode('/', $value);
             $queryBuilder
                 ->innerJoin('o.zone', 'zoneId')
                 ->where('zoneId.code LIKE :code')
