@@ -56,7 +56,7 @@ final class ResendShipmentConfirmationEmailAction
     {
         $shipmentId = $request->attributes->get('id');
 
-        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken($shipmentId, $request->query->get('_csrf_token')))) {
+        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken($shipmentId, (string) $request->query->get('_csrf_token')))) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 

@@ -44,8 +44,8 @@ final class TaxonSlugController
 
     public function generateAction(Request $request): Response
     {
-        $name = $request->query->get('name');
-        $locale = $request->query->get('locale');
+        $name = (string) $request->query->get('name');
+        $locale = (string) $request->query->get('locale');
         $parentId = $request->query->get('parentId');
 
         /** @var TaxonInterface $taxon */

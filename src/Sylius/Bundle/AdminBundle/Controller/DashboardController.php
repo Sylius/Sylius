@@ -62,7 +62,7 @@ final class DashboardController
     public function indexAction(Request $request): Response
     {
         /** @var ChannelInterface|null $channel */
-        $channel = $this->findChannelByCodeOrFindFirst($request->query->get('channel'));
+        $channel = $this->findChannelByCodeOrFindFirst($request->query->has('channel') ? (string) $request->query->get('channel') : null);
 
         if (null === $channel) {
             return new RedirectResponse($this->router->generate('sylius_admin_channel_create'));
@@ -76,7 +76,7 @@ final class DashboardController
     public function getRawData(Request $request): Response
     {
         /** @var ChannelInterface|null $channel */
-        $channel = $this->findChannelByCodeOrFindFirst($request->query->get('channelCode'));
+        $channel = $this->findChannelByCodeOrFindFirst((string) $request->query->get('channelCode'));
 
         if (null === $channel) {
             return new RedirectResponse($this->router->generate('sylius_admin_channel_create'));
@@ -85,9 +85,9 @@ final class DashboardController
         return new JsonResponse(
             $this->statisticsDataProvider->getRawData(
                 $channel,
-                (new \DateTime($request->query->get('startDate'))),
-                (new \DateTime($request->query->get('endDate'))),
-                $request->query->get('interval')
+                (new \DateTime((string) $request->query->get('startDate'))),
+                (new \DateTime((string) $request->query->get('endDate'))),
+                (string) $request->query->get('interval')
             )
         );
     }
