@@ -1,19 +1,27 @@
-How to customize the refund process?
-====================================
+How to have the Credit Memos created after the Refund Payments?
+===============================================================
 
-The Refund Plugin provides a possibility to refund orders fully as well as partially.
-With this plugin there comes a process where credit memos and refund payments are created.
+.. note::
 
-In the vanilla plugin, we are creating the refund payment right after when the credit memo has been created.
-But what about situations where requirements say to change this order?
+    This cookbook requires having the `Refund Plugin <https://github.com/Sylius/RefundPlugin>` installed in your application.
 
-We will find out about it in this tutorial.
+.. tip::
 
-Changing the order of the refund process.
------------------------------------------
+    Read about the features of Refund Plugin in the documentation :doc:`here </book/orders/refunds>`.
 
-Let's say that you need to change the order of the refund process.
-There is an easy way to customize it. You just need to override the priority in service declaration in the config file:
+
+By default the refund payments are created right after the credit memos have been created.
+Although one may need to change it due to business requirements.
+
+Let's see how to achieve this!
+
+Credit Memos created after the Refund Payments
+----------------------------------------------
+
+All you need to do is to override the priority in service declaration in the config file.
+Give the `CreditMemoProcessManager`, which is responsible for the Credit Memo generation, the lowest possible priority (``0``).
+The priorites of services are interpreted in the descending order, thus this change will make it run after the service responsible for
+Refund Payments.
 
 .. code-block:: yaml
 
@@ -24,7 +32,8 @@ There is an easy way to customize it. You just need to override the priority in 
             tags:
                 - { name: sylius_refund.units_refunded.process_step, priority: 0 }
 
-Or like this:
+You can also achieve it the other way round, by giving the service responsible for Payments
+- ``RefundPaymentProcessManager`` - the highest priority, let it be ``200``.
 
 .. code-block:: yaml
 
@@ -40,15 +49,16 @@ Or like this:
             tags:
                 - { name: sylius_refund.units_refunded.process_step, priority: 200 }
 
-The process will work according to the priority (descending).
+The process managers will work according to the new priorities (descending), and as a result, all Refund Payments will be created before their Credit Memos.
 
 .. tip::
 
-    You can find the default config of the refund process in `%kernel.project_dir%/vendor/sylius/refund-plugin/src/Resources/config/services/event_bus.xml`
-    on services tagged as `sylius_refund.units_refunded.process_step`
+    You can find the default config of all the services run int he the refund process in 
+    ``%kernel.project_dir%/vendor/sylius/refund-plugin/src/Resources/config/services/event_bus.xml``
+    tagged as ``sylius_refund.units_refunded.process_step``
 
-After one of these changes, the refund process will be shifted and the Credit Memo will be generated after the Refund Payment.
 
-.. tip::
+Learn more
+----------
 
-    You can learn more about the refund process `here <https://github.com/Sylius/RefundPlugin#post-refunding-process>`
+* `The refund process - details <https://github.com/Sylius/RefundPlugin#post-refunding-process>`
