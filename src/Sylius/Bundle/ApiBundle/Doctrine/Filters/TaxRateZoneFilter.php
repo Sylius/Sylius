@@ -33,7 +33,7 @@ final class TaxRateZoneFilter extends AbstractContextAwareFilter
             $queryBuilder
                 ->innerJoin('o.zone', 'zoneId')
                 ->where('zoneId.code LIKE :code')
-                ->setParameter('code', $value[end($value)])
+                ->setParameter('code', end($value))
             ;
         }
     }
