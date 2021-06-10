@@ -30,7 +30,7 @@ final class AttributeValueLocaleCodeFilter extends AbstractContextAwareFilter
     ) {
         if ($property === 'localeCode') {
             $queryBuilder
-                ->where('o.localeCode LIKE :code')
+                ->andWhere('o.localeCode LIKE :code')
                 ->orWhere('o.localeCode IS NULL')
                 ->setParameter('code', $value)
             ;
