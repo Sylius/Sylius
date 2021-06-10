@@ -19,7 +19,7 @@ Credit Memos created after the Refund Payments
 ----------------------------------------------
 
 All you need to do is to override the priority in service declaration in the config file.
-Give the `CreditMemoProcessManager`, whcich is responsible for the Credit Memo generation, the lowest possible priority (``0``).
+Give the `CreditMemoProcessManager`, which is responsible for the Credit Memo generation, the lowest possible priority (``0``).
 The priorites of services are interpreted in the descending order, thus this change will make it run after the service responsible for
 Refund Payments.
 
@@ -32,7 +32,7 @@ Refund Payments.
             tags:
                 - { name: sylius_refund.units_refunded.process_step, priority: 0 }
 
-You can also achieve it the other way round, by giving the service resonsible for Payments
+You can also achieve it the other way round, by giving the service responsible for Payments
 - ``RefundPaymentProcessManager`` - the highest priority, let it be ``200``.
 
 .. code-block:: yaml
@@ -49,7 +49,7 @@ You can also achieve it the other way round, by giving the service resonsible fo
             tags:
                 - { name: sylius_refund.units_refunded.process_step, priority: 200 }
 
-The process mangers will work according to the new priorities (descending), and as a result all Refund Payments will be created before their Credit Memos.
+The process managers will work according to the new priorities (descending), and as a result, all Refund Payments will be created before their Credit Memos.
 
 .. tip::
 
