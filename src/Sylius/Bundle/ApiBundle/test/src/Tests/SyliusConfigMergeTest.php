@@ -13,7 +13,7 @@ namespace Sylius\Bundle\ApiBundle\Application\Tests;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 
-class SyliusConfigMergeTest extends ApiTestCase
+final class SyliusConfigMergeTest extends ApiTestCase
 {
     use SetUpTestsTrait;
 
@@ -36,7 +36,6 @@ class SyliusConfigMergeTest extends ApiTestCase
         );
 
         $this->assertResponseStatusCodeSame(404);
-        $this->assertJsonContains(['hydra:description' => 'No route found for "GET /api/v2/admin/zones"']);
     }
 
     /**
