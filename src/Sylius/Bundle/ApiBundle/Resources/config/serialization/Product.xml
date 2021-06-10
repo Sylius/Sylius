@@ -62,6 +62,12 @@
             <group>admin:product:update</group>
             <group>shop:product:read</group>
         </attribute>
+        <attribute name="attributes">
+            <group>admin:product:read</group>
+            <group>admin:product:create</group>
+            <group>admin:product:update</group>
+            <group>shop:product:read</group>
+        </attribute>
         <attribute name="images">
             <group>admin:product:read</group>
             <group>admin:product:create</group>

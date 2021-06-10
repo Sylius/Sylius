@@ -113,10 +113,20 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="sylius.api.tax_rate_zone_filter" parent="api_platform.doctrine.orm.search_filter">
+        <service id="sylius.api.tax_rate_zone_filter" class="Sylius\Bundle\ApiBundle\Doctrine\Filters\TaxRateZoneFilter">
+            <argument type="service" id="doctrine" />
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius.api.product_attribute_value_subject_filter" parent="api_platform.doctrine.orm.search_filter">
             <argument type="collection">
-                <argument key="zone">exact</argument>
+                <argument key="subject">exact</argument>
             </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius.api.product_attribute_value_locale_code_filter" class="Sylius\Bundle\ApiBundle\Doctrine\Filters\AttributeValueLocaleCodeFilter">
+            <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />
         </service>
     </services>
