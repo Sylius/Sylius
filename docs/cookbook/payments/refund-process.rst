@@ -3,7 +3,7 @@ How to have the Credit Memos created after the Refund Payments?
 
 .. note::
 
-    This cookbook requires having the `Refund Plugin <https://github.com/Sylius/RefundPlugin>` installed in your application.
+    This cookbook requires having the `Refund Plugin <https://github.com/Sylius/RefundPlugin>`_ installed in your application.
 
 .. tip::
 
@@ -53,7 +53,7 @@ The process managers will work according to the new priorities (descending), and
 
 .. tip::
 
-    You can find the default config of all the services run int he the refund process in 
+    You can find the default config of all the services run in the the refund process in
     ``%kernel.project_dir%/vendor/sylius/refund-plugin/src/Resources/config/services/event_bus.xml``
     tagged as ``sylius_refund.units_refunded.process_step``
 
@@ -61,4 +61,4 @@ The process managers will work according to the new priorities (descending), and
 Learn more
 ----------
 
-* `The refund process - details <https://github.com/Sylius/RefundPlugin#post-refunding-process>`
+* `The refund process - details <https://github.com/Sylius/RefundPlugin#post-refunding-process>`_
