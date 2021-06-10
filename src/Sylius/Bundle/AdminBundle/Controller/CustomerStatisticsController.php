@@ -58,7 +58,7 @@ final class CustomerStatisticsController
         if (null === $customer) {
             throw new HttpException(
                 Response::HTTP_BAD_REQUEST,
-                sprintf('Customer with id %s doesn\'t exist.', $customerId)
+                sprintf('Customer with id %s doesn\'t exist.', (string) $customerId)
             );
         }
 
