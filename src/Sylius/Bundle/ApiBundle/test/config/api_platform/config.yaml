@@ -2,3 +2,12 @@
     collectionOperations:
         admin_get (unset): ~
         admin_post (unset): ~
+
+'%sylius.model.channel.class%':
+    collectionOperations:
+        channels-new-path:
+            method: GET
+            path: /shop/channels-new-path
+            normalization_context:
+                groups: ['shop:channel:read']
+            filters: ['test.channel.id_filter']

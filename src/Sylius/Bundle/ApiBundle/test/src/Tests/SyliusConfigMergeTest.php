@@ -13,7 +13,7 @@ namespace Sylius\Bundle\ApiBundle\Application\Tests;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 
-class SyliusRouteDisableTest extends ApiTestCase
+class SyliusConfigMergeTest extends ApiTestCase
 {
     use SetUpTestsTrait;
 
@@ -37,5 +37,39 @@ class SyliusRouteDisableTest extends ApiTestCase
 
         $this->assertResponseStatusCodeSame(404);
         $this->assertJsonContains(['hydra:description' => 'No route found for "GET /api/v2/admin/zones"']);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_add_new_operation(): void
+    {
+        static::createClient()->request(
+            'GET',
+            '/api/v2/shop/channels-new-path',
+        );
+
+        $this->assertResponseIsSuccessful();
+        $this->assertJsonContains(['@type' => 'hydra:Collection']);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_add_new_filter(): void
+    {
+        static::createClient()->request(
+            'GET',
+            '/api/v2/shop/channels-new-path?id=20',
+        );
+
+        $this->assertJsonContains(['hydra:totalItems' => 0]);
+
+        static::createClient()->request(
+            'GET',
+            '/api/v2/shop/channels-new-path',
+        );
+
+        $this->assertJsonContains(['hydra:totalItems' => 1]);
     }
 }
