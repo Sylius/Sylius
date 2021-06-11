@@ -1,0 +1,2 @@
+imports:
+    - { resource: ../dev/sourceability_instrumentation.yaml }

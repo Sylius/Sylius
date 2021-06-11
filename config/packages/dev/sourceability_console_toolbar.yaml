@@ -1,0 +1,8 @@
+sourceability_console_toolbar:
+    toolbar:
+        hidden_panels:
+            - config
+            - form
+            - validator
+            - logger
+            - api_platform.data_collector.request
