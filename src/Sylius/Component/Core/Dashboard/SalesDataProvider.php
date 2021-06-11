@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Dashboard;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\OrderPaymentStates;
 
@@ -24,6 +25,17 @@ final class SalesDataProvider implements SalesDataProviderInterface
 {
     /** @var EntityRepository */
     private $orderRepository;
+
+    const YEAR = 'year';
+    const MONTH = 'month';
+    const DAY = 'day';
+    const WEEK = 'week';
+
+    const CHECKOUT_DATE = 'o.checkoutCompletedAt';
+    const SELECT_YEAR = "YEAR(".self::CHECKOUT_DATE.")";
+    const SELECT_MONTH = "MONTH(".self::CHECKOUT_DATE.")";
+    const SELECT_DAY = "DAY(".self::CHECKOUT_DATE.")";
+    const SELECT_WEEK = "WEEK(".self::CHECKOUT_DATE.")";
 
     public function __construct(EntityRepository $orderRepository)
     {
@@ -45,103 +57,47 @@ final class SalesDataProvider implements SalesDataProviderInterface
         ;
 
         switch ($interval->asString()) {
-            case 'year':
-                $queryBuilder
-                    ->addSelect('YEAR(o.checkoutCompletedAt) as year')
-                    ->groupBy('year')
-                    ->andHaving('year >= :startYear AND year <= :endYear')
-                    ->setParameter('startYear', $startDate->format('Y'))
-                    ->setParameter('endYear', $endDate->format('Y'))
-                ;
+            case self::YEAR:
+                $this->buildYearQuery($queryBuilder, $startDate, $endDate);
+
                 $dateFormatter = static function (\DateTimeInterface $date): string {
                     return $date->format('Y');
                 };
                 $resultFormatter = static function (array $data): string {
-                    return $data['year'];
+                    return $data[self::YEAR];
                 };
 
                 break;
-            case 'month':
-                $queryBuilder
-                    ->addSelect('YEAR(o.checkoutCompletedAt) as year')
-                    ->addSelect('MONTH(o.checkoutCompletedAt) as month')
-                    ->groupBy('year')
-                    ->addGroupBy('month')
-                    ->andHaving($queryBuilder->expr()->orX(
-                        'year = :startYear AND year = :endYear AND month >= :startMonth AND month <= :endMonth',
-                        'year = :startYear AND year != :endYear AND month >= :startMonth',
-                        'year = :endYear AND year != :startYear AND month <= :endMonth',
-                        'year > :startYear AND year < :endYear'
-                    ))
-                    ->setParameter('startYear', $startDate->format('Y'))
-                    ->setParameter('startMonth', $startDate->format('n'))
-                    ->setParameter('endYear', $endDate->format('Y'))
-                    ->setParameter('endMonth', $endDate->format('n'))
-                ;
+            case self::MONTH:
+                $this->buildMonthQuery($queryBuilder, $startDate, $endDate);
+
                 $dateFormatter = static function (\DateTimeInterface $date): string {
                     return $date->format('n.Y');
                 };
                 $resultFormatter = static function (array $data): string {
-                    return $data['month'] . '.' . $data['year'];
+                    return $data[self::MONTH] . '.' . $data[self::YEAR];
                 };
 
                 break;
-            case 'week':
-                $queryBuilder
-                    ->addSelect('YEAR(o.checkoutCompletedAt) as year')
-                    ->addSelect('WEEK(o.checkoutCompletedAt) as week')
-                    ->groupBy('year')
-                    ->addGroupBy('week')
-                    ->andHaving($queryBuilder->expr()->orX(
-                        'year = :startYear AND year = :endYear AND week >= :startWeek AND week <= :endWeek',
-                        'year = :startYear AND year != :endYear AND week >= :startWeek',
-                        'year = :endYear AND year != :startYear AND week <= :endWeek',
-                        'year > :startYear AND year < :endYear'
-                    ))
-                    ->setParameter('startYear', $startDate->format('Y'))
-                    ->setParameter('startWeek', (ltrim($startDate->format('W'), '0') ?: '0'))
-                    ->setParameter('endYear', $endDate->format('Y'))
-                    ->setParameter('endWeek', (ltrim($endDate->format('W'), '0') ?: '0'))
-                ;
+            case self::WEEK:
+                $this->buildWeekQuery($queryBuilder, $startDate, $endDate);
+
                 $dateFormatter = static function (\DateTimeInterface $date): string {
                     return (ltrim($date->format('W'), '0') ?: '0') . ' ' . $date->format('Y');
                 };
                 $resultFormatter = static function (array $data): string {
-                    return $data['week'] . ' ' . $data['year'];
+                    return $data[self::WEEK] . ' ' . $data[self::YEAR];
                 };
 
                 break;
-            case 'day':
-                $queryBuilder
-                    ->addSelect('YEAR(o.checkoutCompletedAt) as year')
-                    ->addSelect('MONTH(o.checkoutCompletedAt) as month')
-                    ->addSelect('DAY(o.checkoutCompletedAt) as day')
-                    ->groupBy('year')
-                    ->addGroupBy('month')
-                    ->addGroupBy('day')
-                    ->andHaving($queryBuilder->expr()->orX(
-                        'year = :startYear AND year = :endYear AND month = :startMonth AND month = :endMonth AND day >= :startDay AND day <= :endDay',
-                        'year = :startYear AND year = :endYear AND month = :startMonth AND month != :endMonth AND day >= :startDay',
-                        'year = :startYear AND year = :endYear AND month = :endMonth AND month != :startMonth AND day <= :endDay',
-                        'year = :startYear AND year = :endYear AND month > :startMonth AND month < :endMonth',
-                        'year = :startYear AND year != :endYear AND month = :startMonth AND day >= :startDay',
-                        'year = :startYear AND year != :endYear AND month > :startMonth',
-                        'year = :endYear AND year != :startYear AND month = :endMonth AND day <= :endDay',
-                        'year = :endYear AND year != :startYear AND month < :endMonth',
-                        'year > :startYear AND year < :endYear'
-                    ))
-                    ->setParameter('startYear', $startDate->format('Y'))
-                    ->setParameter('startMonth', $startDate->format('n'))
-                    ->setParameter('startDay', $startDate->format('j'))
-                    ->setParameter('endYear', $endDate->format('Y'))
-                    ->setParameter('endMonth', $endDate->format('n'))
-                    ->setParameter('endDay', $endDate->format('j'))
-                ;
+            case self::DAY:
+                $this->buildDayQuery($queryBuilder, $startDate, $endDate);
+
                 $dateFormatter = static function (\DateTimeInterface $date): string {
                     return $date->format('j.n.Y');
                 };
                 $resultFormatter = static function (array $data): string {
-                    return $data['day'] . '.' . $data['month'] . '.' . $data['year'];
+                    return $data[self::DAY] . '.' . $data[self::MONTH] . '.' . $data[self::YEAR];
                 };
 
                 break;
@@ -170,5 +126,85 @@ final class SalesDataProvider implements SalesDataProviderInterface
         );
 
         return new SalesSummary($salesData);
+    }
+
+    private function buildDayQuery(QueryBuilder $queryBuilder, \DateTime$startDate, \DateTime $endDate)
+    {
+        $queryBuilder
+            ->addSelect(self::SELECT_YEAR.' as '.self::YEAR)
+            ->addSelect(self::SELECT_MONTH. ' as '.self::MONTH)
+            ->addSelect(self::SELECT_DAY.' as '.self::DAY)
+            ->groupBy(self::YEAR)
+            ->addGroupBy(self::MONTH)
+            ->addGroupBy(self::DAY)
+            ->andHaving($queryBuilder->expr()->orX(
+                self::SELECT_YEAR.' = :startYear AND '.self::SELECT_YEAR.' = :endYear AND '.self::SELECT_MONTH.' = :startMonth AND '.self::SELECT_MONTH.' = :endMonth AND '.self::SELECT_DAY.' >= :startDay AND '.self::SELECT_DAY.' <= :endDay',
+                self::SELECT_YEAR.' = :startYear AND '.self::SELECT_YEAR.' = :endYear AND '.self::SELECT_MONTH.' = :startMonth AND '.self::SELECT_MONTH.' != :endMonth AND '.self::SELECT_DAY.' >= :startDay',
+                self::SELECT_YEAR.' = :startYear AND '.self::SELECT_YEAR.' = :endYear AND '.self::SELECT_MONTH.' = :endMonth AND '.self::SELECT_MONTH.' != :startMonth AND '.self::SELECT_DAY.' <= :endDay',
+                self::SELECT_YEAR.' = :startYear AND '.self::SELECT_YEAR.' = :endYear AND '.self::SELECT_MONTH.' > :startMonth AND '.self::SELECT_MONTH.' < :endMonth',
+                self::SELECT_YEAR.' = :startYear AND '.self::SELECT_YEAR.' != :endYear AND '.self::SELECT_MONTH.' = :startMonth AND '.self::SELECT_DAY.' >= :startDay',
+                self::SELECT_YEAR.' = :startYear AND '.self::SELECT_YEAR.' != :endYear AND '.self::SELECT_MONTH.' > :startMonth',
+                self::SELECT_YEAR.' = :endYear AND '.self::SELECT_YEAR.' != :startYear AND '.self::SELECT_MONTH.' = :endMonth AND '.self::SELECT_DAY.' <= :endDay',
+                self::SELECT_YEAR.' = :endYear AND '.self::SELECT_YEAR.' != :startYear AND '.self::SELECT_MONTH.' < :endMonth',
+                self::SELECT_YEAR.' > :startYear AND '.self::SELECT_YEAR.' < :endYear'
+            ))
+            ->setParameter('startYear', $startDate->format('Y'))
+            ->setParameter('startMonth', $startDate->format('n'))
+            ->setParameter('startDay', $startDate->format('j'))
+            ->setParameter('endYear', $endDate->format('Y'))
+            ->setParameter('endMonth', $endDate->format('n'))
+            ->setParameter('endDay', $endDate->format('j'))
+        ;
+    }
+
+    private function buildMonthQuery(QueryBuilder $queryBuilder, \DateTime$startDate, \DateTime $endDate)
+    {
+        $queryBuilder
+            ->addSelect(self::SELECT_YEAR.' as '.self::YEAR)
+            ->addSelect(self::SELECT_MONTH. ' as '.self::MONTH)
+            ->groupBy(self::YEAR)
+            ->addGroupBy(self::MONTH)
+            ->andHaving($queryBuilder->expr()->orX(
+                self::SELECT_YEAR.' = :startYear AND '.self::SELECT_YEAR.' = :endYear AND '.self::SELECT_MONTH.' >= :startMonth AND '.self::SELECT_MONTH.' <= :endMonth',
+                self::SELECT_YEAR.' = :startYear AND '.self::SELECT_YEAR.' != :endYear AND '.self::SELECT_MONTH.' >= :startMonth',
+                self::SELECT_YEAR.' = :endYear AND '.self::SELECT_YEAR.' != :startYear AND '.self::SELECT_MONTH.' <= :endMonth',
+                self::SELECT_YEAR.' > :startYear AND '.self::SELECT_YEAR.' < :endYear'
+            ))
+            ->setParameter('startYear', $startDate->format('Y'))
+            ->setParameter('startMonth', $startDate->format('n'))
+            ->setParameter('endYear', $endDate->format('Y'))
+            ->setParameter('endMonth', $endDate->format('n'))
+        ;
+    }
+
+    private function buildYearQuery(QueryBuilder $queryBuilder, \DateTime$startDate, \DateTime $endDate)
+    {
+        $queryBuilder
+            ->addSelect(self::SELECT_YEAR.' as '.self::YEAR)
+            ->groupBy(self::YEAR)
+            ->andHaving(self::SELECT_YEAR.' >= :startYear AND '.self::SELECT_YEAR.' <= :endYear')
+            ->setParameter('startYear', $startDate->format('Y'))
+            ->setParameter('endYear', $endDate->format('Y'))
+        ;
+    }
+
+    private function buildWeekQuery(QueryBuilder $queryBuilder, \DateTime$startDate, \DateTime $endDate)
+    {
+        $queryBuilder
+            ->addSelect(self::SELECT_YEAR.' as '.self::YEAR)
+            ->addSelect(self::SELECT_WEEK. ' as '.self::YEAR)
+            ->groupBy(self::YEAR)
+            ->addGroupBy(self::YEAR)
+            ->andHaving($queryBuilder->expr()->orX(
+                self::SELECT_YEAR.' = :startYear AND '.self::SELECT_YEAR.' = :endYear AND '.self::SELECT_WEEK.' >= :startWeek AND '.self::SELECT_WEEK.' <= :endWeek',
+                self::SELECT_YEAR.' = :startYear AND '.self::SELECT_YEAR.' != :endYear AND '.self::SELECT_WEEK.' >= :startWeek',
+                self::SELECT_YEAR.' = :endYear AND '.self::SELECT_YEAR.' != :startYear AND '.self::SELECT_WEEK.' <= :endWeek',
+                self::SELECT_YEAR.' > :startYear AND '.self::SELECT_YEAR.' < :endYear'
+            ))
+            ->setParameter('startYear', $startDate->format('Y'))
+            ->setParameter('startWeek', (ltrim($startDate->format('W'), '0') ?: '0'))
+            ->setParameter('endYear', $endDate->format('Y'))
+            ->setParameter('endWeek', (ltrim($endDate->format('W'), '0') ?: '0'))
+        ;
     }
 }
