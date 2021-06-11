@@ -22,6 +22,7 @@
         <attribute name="code">
             <group>admin:locale:read</group>
             <group>admin:locale:create</group>
+            <group>admin:locale:update</group>
         </attribute>
     </class>
 </serializer>

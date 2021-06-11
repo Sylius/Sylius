@@ -29,6 +29,13 @@
                     <attribute name="groups">admin:shop_billing_data:read</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:shop_billing_data:update</attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />

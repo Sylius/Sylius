@@ -22,26 +22,32 @@
        <attribute name="company">
            <group>admin:channel:create</group>
            <group>admin:shop_billing_data:read</group>
+           <group>admin:shop_billing_data:update</group>
        </attribute>
        <attribute name="taxId">
            <group>admin:channel:create</group>
            <group>admin:shop_billing_data:read</group>
+           <group>admin:shop_billing_data:update</group>
        </attribute>
        <attribute name="countryCode">
            <group>admin:channel:create</group>
            <group>admin:shop_billing_data:read</group>
+           <group>admin:shop_billing_data:update</group>
        </attribute>
        <attribute name="street">
            <group>admin:channel:create</group>
            <group>admin:shop_billing_data:read</group>
+           <group>admin:shop_billing_data:update</group>
        </attribute>
        <attribute name="city">
            <group>admin:channel:create</group>
            <group>admin:shop_billing_data:read</group>
+           <group>admin:shop_billing_data:update</group>
        </attribute>
        <attribute name="postcode">
            <group>admin:channel:create</group>
            <group>admin:shop_billing_data:read</group>
+           <group>admin:shop_billing_data:update</group>
        </attribute>
     </class>
 </serializer>
