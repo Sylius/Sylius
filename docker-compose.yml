@@ -1,0 +1,35 @@
+version: '3'
+
+volumes:
+    var-cache-volume: # On Mac, it is faster to have symfony cache files outside of the host volume
+    node-modules-volume: # Unlike vendor/, I don't need node_modules/ on my host, so this should also speed things up
+
+services:
+    php:
+        image: thecodingmachine/php:7.4-v4-apache-node14
+        volumes:
+            - .:/var/www/html:cached
+            - var-cache-volume:/var/www/html/var/cache
+            - node-modules-volume:/var/www/html/node_modules
+            - $HOME/.composer:/home/docker/.composer/:cached
+        ports:
+            - '8500:80'
+        environment:
+            PHP_EXTENSIONS: 'intl gd pdo_sqlite amqp'
+            TZ: UTC
+            PHP_INI_DATE__TIMEZONE: UTC
+            
+            APACHE_DOCUMENT_ROOT: public/
+            
+            APP_ENV: test
+            STARTUP_COMMAND_1: sudo chown -R docker:docker /var/www/html/var/cache /var/www/html/node_modules
+            STARTUP_COMMAND_2: composer install
+            STARTUP_COMMAND_3: bin/console sylius:install -n
+            STARTUP_COMMAND_4: yarn install
+            STARTUP_COMMAND_5: yarn build
+
+    mysql:
+        image: mysql:8
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: sylius

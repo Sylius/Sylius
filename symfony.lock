@@ -627,6 +627,12 @@
     "sonata-project/twig-extensions": {
         "version": "1.4.1"
     },
+    "sourceability/console-toolbar-bundle": {
+        "version": "0.1.2"
+    },
+    "sourceability/instrumentation": {
+        "version": "0.2.0"
+    },
     "squizlabs/php_codesniffer": {
         "version": "3.3.1"
     },

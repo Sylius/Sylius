@@ -2,3 +2,11 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en_US
+    
+    env(REQUEST_CONTEXT_HOST): 'localhost'
+    env(REQUEST_CONTEXT_SCHEME): 'http'
+    env(REQUEST_CONTEXT_BASE_URL): ''
+
+    router.request_context.host: '%env(REQUEST_CONTEXT_HOST)%'
+    router.request_context.scheme: '%env(REQUEST_CONTEXT_SCHEME)%'
+    router.request_context.base_url: '%env(REQUEST_CONTEXT_BASE_URL)%'

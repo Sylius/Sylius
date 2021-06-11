@@ -1,0 +1,22 @@
+sourceability_instrumentation:
+    profilers:
+        # This "hacks" the symfony web profiler to create profiles in non web contexts like workers, commands.
+        # This is really useful for development along with https://github.com/sourceability/console-toolbar-bundle
+        symfony:
+            enabled: true # This should be safe to keep enabled even if the profiler is disabled
+    listeners:
+        command:
+            enabled: true
+
+# See src/Sylius/Bundle/CoreBundle/Resources/config/app/messenger.yaml
+framework:
+    messenger:
+        buses:
+            sylius.command_bus: &command_bus
+                middleware:
+                    - 'Sourceability\Instrumentation\Messenger\ProfilerMiddleware'
+                    
+                    # Need to duplicate config from core bundle
+                    - 'validation'
+                    - 'doctrine_transaction'
+            sylius_default.bus: *command_bus

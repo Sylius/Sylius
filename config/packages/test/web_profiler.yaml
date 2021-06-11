@@ -1,6 +1,12 @@
+parameters:
+    env(TEST_PROFILER_ENABLED): '0'
+
 web_profiler:
-    toolbar: false
+    toolbar: '%env(bool:TEST_PROFILER_ENABLED)%'
     intercept_redirects: false
 
 framework:
-    profiler: { collect: false }
+    profiler:
+        enabled: '%env(bool:TEST_PROFILER_ENABLED)%'
+        collect: '%env(bool:TEST_PROFILER_ENABLED)%'
+        only_exceptions: '%env(not:bool:TEST_PROFILER_ENABLED)%'
