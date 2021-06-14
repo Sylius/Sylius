@@ -11,3 +11,10 @@
             normalization_context:
                 groups: ['shop:channel:read']
             filters: ['test.channel.id_filter']
+
+'%sylius.model.order.class%':
+    itemOperations:
+        shop_select_shipping_method (unset): ~
+    collectionOperations:
+        admin_get:
+            path: /admin/orders/get/all

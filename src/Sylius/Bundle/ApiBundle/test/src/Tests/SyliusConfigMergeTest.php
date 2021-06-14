@@ -71,4 +71,53 @@ final class SyliusConfigMergeTest extends ApiTestCase
 
         $this->assertJsonContains(['hydra:totalItems' => 1]);
     }
+
+    /**
+     * @test
+     */
+    public function it_merges_configs(): void
+    {
+        static::createClient()->request(
+            'GET',
+            '/api/v2/shop/channels/WEB',
+        );
+
+        $this->assertResponseIsSuccessful();
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_overwrite_endpoint(): void
+    {
+        static::createClient()->request(
+            'GET',
+            '/api/v2/admin/orders',
+            ['auth_bearer' => $this->JWTAdminUserToken]
+        );
+
+        $this->assertResponseStatusCodeSame(404);
+
+        static::createClient()->request(
+            'GET',
+            '/api/v2/admin/orders/get/all',
+            ['auth_bearer' => $this->JWTAdminUserToken]
+        );
+
+        $this->assertResponseIsSuccessful();
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_remove_non_crud_endpoint(): void
+    {
+        static::createClient()->request(
+            'PATCH',
+            '/api/v2/shop/orders/TOKEN/shipments/TEST'
+        );
+
+        $this->assertResponseStatusCodeSame(404);
+        $this->assertJsonContains(['hydra:description' => 'No route found for "PATCH http://example.com/api/v2/shop/orders/TOKEN/shipments/TEST"']);
+    }
 }
