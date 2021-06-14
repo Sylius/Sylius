@@ -580,6 +580,18 @@ To add a new operation, just specify it in the config file.
                 normalization_context:
                     groups: ['shop:channel:read']
 
+You can also overwrite existing endpoints, for example let's change admin_get operation in order collectionOperations.
+
+.. code-block:: yaml
+
+    '%sylius.model.order.class%':
+        collectionOperations:
+            admin_get:
+                path: /admin/orders/new_endpoint
+                normalization_context:
+                    groups: ['shop:channel:new_group']
+
+This way we can edit the existing endpoint and add custom normalization or change path.
 Learn more
 -----------
 
