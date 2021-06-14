@@ -131,7 +131,10 @@ final class PickupCartHandler implements MessageHandlerInterface
         }
 
         if (!$this->hasLocaleWithLocaleCode($channel, $localeCode)) {
-            throw new \InvalidArgumentException('Choosen localeCode doesn\'t exist.');
+            throw new \InvalidArgumentException(sprintf(
+                'Cannot pick up cart, locale code "%s" does not exist.',
+                $localeCode
+            ));
         }
 
         return $localeCode;
