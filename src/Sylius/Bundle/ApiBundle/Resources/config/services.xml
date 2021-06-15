@@ -151,6 +151,13 @@
             <argument type="service" id="api_platform.identifier.converter" on-invalid="ignore" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\ApiPlatform\ConfigMergeManager" >
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver" >
+            <argument type="service" id="Sylius\Bundle\ApiBundle\ApiPlatform\ConfigMergeManager" />
+        </service>
+
         <service
             id="api_platform.metadata.resource.metadata_factory.yaml"
             class="Sylius\Bundle\ApiBundle\ApiPlatform\Factory\MergingExtractorResourceMetadataFactory"
@@ -159,6 +166,7 @@
         >
             <argument type="service" id="api_platform.metadata.extractor.yaml" />
             <argument type="service" id="api_platform.metadata.resource.metadata_factory.yaml.inner" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver" />
         </service>
     </services>
 </container>

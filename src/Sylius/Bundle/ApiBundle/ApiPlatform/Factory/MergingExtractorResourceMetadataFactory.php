@@ -17,6 +17,8 @@ use ApiPlatform\Core\Exception\ResourceClassNotFoundException;
 use ApiPlatform\Core\Metadata\Extractor\ExtractorInterface;
 use ApiPlatform\Core\Metadata\Resource\Factory\ResourceMetadataFactoryInterface;
 use ApiPlatform\Core\Metadata\Resource\ResourceMetadata;
+use Sylius\Bundle\ApiBundle\ApiPlatform\ConfigMergeManager;
+use Sylius\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver;
 
 /**
  * @experimental
@@ -36,10 +38,18 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
     /** @var array */
     private $resources = ['description', 'iri', 'itemOperations', 'collectionOperations', 'graphql'];
 
-    public function __construct(ExtractorInterface $extractor, ResourceMetadataFactoryInterface $decorated = null, array $defaults = [])
-    {
+    /** @var ResourceMetadataPropertyValueResolver */
+    private $resourceMetadataPropertyValueResolver;
+
+    public function __construct(
+        ExtractorInterface $extractor,
+        ResourceMetadataFactoryInterface $decorated = null,
+        ResourceMetadataPropertyValueResolver  $resourceMetadataPropertyValueResolver,
+        array $defaults = []
+    ) {
         $this->extractor = $extractor;
         $this->decorated = $decorated;
+        $this->resourceMetadataPropertyValueResolver = $resourceMetadataPropertyValueResolver;
         $this->defaults = $defaults + ['attributes' => []];
     }
 
@@ -98,76 +108,12 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
     private function update(ResourceMetadata $resourceMetadata, array $metadata): ResourceMetadata
     {
         foreach (['shortName', 'description', 'iri', 'itemOperations', 'collectionOperations', 'subresourceOperations', 'graphql', 'attributes'] as $propertyName) {
-            $propertyValue = $this->resolveResourceMetadataPropertyValue($propertyName, $resourceMetadata, $metadata);
+            $propertyValue = $this->resourceMetadataPropertyValueResolver->resolve($propertyName, $resourceMetadata, $metadata);
             if (null !== $propertyValue) {
                 $resourceMetadata = $resourceMetadata->{'with' . ucfirst($propertyName)}($propertyValue);
             }
         }
 
         return $resourceMetadata;
-    }
-
-    /** @return mixed */
-    private function resolveResourceMetadataPropertyValue(
-        string $propertyName,
-        ResourceMetadata $parentResourceMetadata,
-        array $childResourceMetadata
-    ) {
-        $parentPropertyValue = $parentResourceMetadata->{'get' . ucfirst($propertyName)}();
-
-        $childPropertyValue = $childResourceMetadata[$propertyName];
-        if (null === $childPropertyValue) {
-            return $parentPropertyValue;
-        }
-
-        if (null === $parentPropertyValue) {
-            return $childPropertyValue;
-        }
-
-        if (is_array($parentPropertyValue)) {
-            if (!is_array($childPropertyValue)) {
-                throw new \InvalidArgumentException(sprintf(
-                    'Invalid child property value type for property "%s", expected array',
-                    $propertyName,
-                ));
-            }
-
-            return $this->mergeConfigs($parentPropertyValue, $childPropertyValue);
-        }
-
-        return $childPropertyValue;
-    }
-
-    private function mergeConfigs(...$configs): array
-    {
-        $resultingConfig = [];
-
-        foreach ($configs as $config) {
-            foreach ($config as $newKey => $newValue) {
-                $unsetNewKey = false;
-                if (is_string($newKey) && 1 === preg_match('/^(.*[^ ]) +\\(unset\\)$/', $newKey, $matches)) {
-                    [, $newKey] = $matches;
-                    $unsetNewKey = true;
-                }
-
-                if ($unsetNewKey) {
-                    unset($resultingConfig[$newKey]);
-
-                    if (null === $newValue) {
-                        continue;
-                    }
-                }
-
-                if (is_integer($newKey)) {
-                    $resultingConfig[] = $newValue;
-                } elseif (isset($resultingConfig[$newKey]) && is_array($resultingConfig[$newKey]) && is_array($newValue)) {
-                    $resultingConfig[$newKey] = $this->mergeConfigs($resultingConfig[$newKey], $newValue);
-                } else {
-                    $resultingConfig[$newKey] = $newValue;
-                }
-            }
-        }
-
-        return $resultingConfig;
     }
 }
