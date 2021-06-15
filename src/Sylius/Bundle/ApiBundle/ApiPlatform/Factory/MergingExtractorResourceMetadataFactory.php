@@ -29,8 +29,11 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
     /** @var ExtractorInterface */
     private $extractor;
 
-    /** @var ?ResourceMetadataFactoryInterface  */
+    /** @var ResourceMetadataFactoryInterface  */
     private $decorated;
+
+    /** @var ResourceMetadataPropertyValueResolver */
+    private $resourceMetadataPropertyValueResolver;
 
     /** @var array */
     private $defaults;
@@ -38,12 +41,9 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
     /** @var array */
     private $resources = ['description', 'iri', 'itemOperations', 'collectionOperations', 'graphql'];
 
-    /** @var ResourceMetadataPropertyValueResolver */
-    private $resourceMetadataPropertyValueResolver;
-
     public function __construct(
         ExtractorInterface $extractor,
-        ResourceMetadataFactoryInterface $decorated = null,
+        ResourceMetadataFactoryInterface $decorated,
         ResourceMetadataPropertyValueResolver  $resourceMetadataPropertyValueResolver,
         array $defaults = []
     ) {
