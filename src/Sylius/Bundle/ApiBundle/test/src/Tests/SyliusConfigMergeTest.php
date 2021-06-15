@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ApiBundle\Application\Tests;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use Webmozart\Assert\Assert;
 
 final class SyliusConfigMergeTest extends ApiTestCase
 {
@@ -112,12 +113,17 @@ final class SyliusConfigMergeTest extends ApiTestCase
      */
     public function it_allows_to_remove_non_crud_endpoint(): void
     {
-        static::createClient()->request(
-            'PATCH',
-            '/api/v2/shop/orders/TOKEN/shipments/TEST'
-        );
+        $response =
+            json_decode(
+                static::createClient()
+                    ->request(
+                    'PATCH',
+                    '/api/v2/shop/orders/TOKEN/shipments/TEST'
+                    )->getContent(false),
+                true
+            );
 
         $this->assertResponseStatusCodeSame(404);
-        $this->assertJsonContains(['hydra:description' => 'No route found for "PATCH http://example.com/api/v2/shop/orders/TOKEN/shipments/TEST"']);
+        Assert::contains($response['hydra:description'], 'No route found');
     }
 }
