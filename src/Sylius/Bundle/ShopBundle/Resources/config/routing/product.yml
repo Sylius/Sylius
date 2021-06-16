@@ -24,4 +24,4 @@ sylius_shop_product_index:
             template: "@SyliusShop/Product/index.html.twig"
             grid: sylius_shop_product
     requirements:
-        slug: .+
+        slug: .+(?<!/)
