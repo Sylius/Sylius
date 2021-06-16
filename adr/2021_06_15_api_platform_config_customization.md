@@ -5,7 +5,10 @@
 
 ## Context and Problem Statement
 
-It's difficult to overwrite or remove endpoints.
+Sylius is by design application that will be adjusted to customer needs. 
+Therefore each part of it has to be crafted with replaceability or customizability at its core. 
+Nonetheless, the current state of API Platform integration requires the replacement of the whole config of the whole resource. 
+In terms of the more complicated cases like Order or Customer, this practice may become error-prone and hard to maintain for both maintainers and Sylius users.
 
 ## Considered Options
 
@@ -34,7 +37,7 @@ in specified directory all we need to do is create config we want to overwrite, 
         admin_get (unset): ~
 ```
 
-This is example config to remove specific operation, more examples can be found in docs.
+This is example config to remove specific operation, more examples can be found in docs (https://docs.sylius.com/en/latest/customization/api.html).
 
 * Good, because it's easy to understand, you can overwrite any endpoint in just a few lines from any place specified in api platform config.
 * Bad, because we need to overwrite and modify services provided by API Platform, differences between API Platform versions can break our application.

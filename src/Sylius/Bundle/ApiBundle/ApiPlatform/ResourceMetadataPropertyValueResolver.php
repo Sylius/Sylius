@@ -16,14 +16,14 @@ namespace Sylius\Bundle\ApiBundle\ApiPlatform;
 use ApiPlatform\Core\Metadata\Resource\ResourceMetadata;
 
 /** @experimental */
-class ResourceMetadataPropertyValueResolver
+class ResourceMetadataPropertyValueResolver implements ResourceMetadataPropertyValueResolverInteface
 {
-    /** @var ConfigMergeManager */
-    private $configMergeManager;
+    /** @var ApiResourceConfigurationMergerInterface */
+    private $apiResourceConfigurationMerger;
 
-    public function __construct(ConfigMergeManager $configMergeManager)
+    public function __construct(ApiResourceConfigurationMergerInterface $apiResourceConfigurationMerger)
     {
-        $this->configMergeManager = $configMergeManager;
+        $this->apiResourceConfigurationMerger = $apiResourceConfigurationMerger;
     }
 
     /**
@@ -54,7 +54,7 @@ class ResourceMetadataPropertyValueResolver
                 ));
             }
 
-            return $this->configMergeManager->mergeConfigs($parentPropertyValue, $childPropertyValue);
+            return $this->apiResourceConfigurationMerger->mergeConfigs($parentPropertyValue, $childPropertyValue);
         }
 
         return $childPropertyValue;

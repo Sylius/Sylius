@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\ApiPlatform;
 
 /** @experimental */
-class ConfigMergeManager
+class ApiResourceConfigurationMerger implements ApiResourceConfigurationMergerInterface
 {
     public function mergeConfigs(...$configs): array
     {
@@ -22,15 +22,10 @@ class ConfigMergeManager
 
         foreach ($configs as $config) {
             foreach ($config as $newKey => $newValue) {
-                $unsetNewKey = false;
                 if (is_string($newKey) && 1 === preg_match('/^(.*[^ ]) +\\(unset\\)$/', $newKey, $matches)) {
                     [, $newKey] = $matches;
-                    $unsetNewKey = true;
-                }
 
-                if ($unsetNewKey) {
                     unset($resultingConfig[$newKey]);
-
                     if (null === $newValue) {
                         continue;
                     }
@@ -38,11 +33,17 @@ class ConfigMergeManager
 
                 if (is_integer($newKey)) {
                     $resultingConfig[] = $newValue;
-                } elseif (isset($resultingConfig[$newKey]) && is_array($resultingConfig[$newKey]) && is_array($newValue)) {
-                    $resultingConfig[$newKey] = $this->mergeConfigs($resultingConfig[$newKey], $newValue);
-                } else {
-                    $resultingConfig[$newKey] = $newValue;
+
+                    continue;
                 }
+
+                if (isset($resultingConfig[$newKey]) && is_array($resultingConfig[$newKey]) && is_array($newValue)) {
+                    $resultingConfig[$newKey] = $this->mergeConfigs($resultingConfig[$newKey], $newValue);
+
+                    continue;
+                }
+
+                $resultingConfig[$newKey] = $newValue;
             }
         }
 

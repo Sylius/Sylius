@@ -38,7 +38,7 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
     private $defaults;
 
     /** @var array */
-    private $resources = ['description', 'iri', 'itemOperations', 'collectionOperations', 'graphql'];
+    private const RESOURCES = ['shortName', 'description', 'iri', 'itemOperations', 'collectionOperations', 'subresourceOperations', 'graphql', 'attributes'];
 
     public function __construct(
         ExtractorInterface $extractor,
@@ -70,7 +70,7 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
             return $this->handleNotFound($parentResourceMetadata, $resourceClass);
         }
 
-        foreach ($this->resources as $availableResource) {
+        foreach (self::RESOURCES as $availableResource) {
             $resource[$availableResource] =
                 $resource[$availableResource] ?? $this->defaults[strtolower(preg_replace('/(?<!^)[A-Z]+|(?<!^|\d)[\d]+/', '_$0', $availableResource))] ?? null;
         }
@@ -106,7 +106,7 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
      */
     private function update(ResourceMetadata $resourceMetadata, array $metadata): ResourceMetadata
     {
-        foreach (['shortName', 'description', 'iri', 'itemOperations', 'collectionOperations', 'subresourceOperations', 'graphql', 'attributes'] as $propertyName) {
+        foreach (self::RESOURCES as $propertyName) {
             $propertyValue = $this->resourceMetadataPropertyValueResolver->resolve($propertyName, $resourceMetadata, $metadata);
             if (null !== $propertyValue) {
                 $resourceMetadata = $resourceMetadata->{'with' . ucfirst($propertyName)}($propertyValue);
