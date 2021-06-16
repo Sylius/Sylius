@@ -32,7 +32,7 @@ sylius_grid:
                     type: string
                     label: sylius.ui.name
                     options:
-                        fields: [translation.name]
+                        fields: [translation.name, product.translations.name]
             actions:
                 item:
                     update_product:
