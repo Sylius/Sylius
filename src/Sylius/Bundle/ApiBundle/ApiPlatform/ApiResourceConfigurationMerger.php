@@ -22,7 +22,7 @@ class ApiResourceConfigurationMerger implements ApiResourceConfigurationMergerIn
 
         foreach ($configs as $config) {
             foreach ($config as $newKey => $newValue) {
-                if (is_string($newKey) && 1 === preg_match('/^(.*[^ ]) +\\(unset\\)$/', $newKey, $matches)) {
+                if ($this->containsUnset($newKey, $matches)) {
                     [, $newKey] = $matches;
 
                     unset($resultingConfig[$newKey]);
@@ -48,5 +48,10 @@ class ApiResourceConfigurationMerger implements ApiResourceConfigurationMergerIn
         }
 
         return $resultingConfig;
+    }
+
+    private function containsUnset($key, &$matches): bool
+    {
+        return is_string($key) && 1 === preg_match('/^(.*[^ ]) +\\(unset\\)$/', $key, $matches);
     }
 }
