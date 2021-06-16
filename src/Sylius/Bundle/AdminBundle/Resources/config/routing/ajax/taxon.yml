@@ -60,12 +60,40 @@ sylius_admin_ajax_generate_taxon_slug:
         _controller: sylius.controller.taxon_slug:generateAction
         _format: json
 
-sylius_admin_ajax_taxon_move:
-    path: /{id}/move
+sylius_admin_ajax_taxon_move_up:
+    path: /{id}/move/up
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.taxon:updateAction
+        limit: 1
+        _controller: sylius.controller.taxon_move:upAction
         _format: json
         _sylius:
             permission: true
-            form: Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonPositionType
+
+sylius_admin_ajax_taxon_move_down:
+    path: /{id}/move/down
+    methods: [PUT]
+    defaults:
+        limit: 1
+        _controller: sylius.controller.taxon_move:downAction
+        _format: json
+        _sylius:
+            permission: true
+
+sylius_admin_ajax_taxon_move_top:
+    path: /{id}/move/top
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.taxon_move:upAction
+        _format: json
+        _sylius:
+            permission: true
+
+sylius_admin_ajax_taxon_move_end:
+    path: /{id}/move/end
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.taxon_move:downAction
+        _format: json
+        _sylius:
+            permission: true
