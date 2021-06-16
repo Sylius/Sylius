@@ -5,7 +5,7 @@
 
 ## Context and Problem Statement
 
-Its difficult to overwrite or remove endpoints.
+It's difficult to overwrite or remove endpoints.
 
 ## Considered Options
 
@@ -36,7 +36,7 @@ in specified directory all we need to do is create config we want to overwrite, 
 
 This is example config to remove specific operation, more examples can be found in docs.
 
-* Good, because its easy to understand, you can overwrite any endpoint in just a few lines from any place specified in api platform config.
+* Good, because it's easy to understand, you can overwrite any endpoint in just a few lines from any place specified in api platform config.
 * Bad, because we need to overwrite and modify services provided by API Platform, differences between API Platform versions can break our application.
 
 ## Decision Outcome

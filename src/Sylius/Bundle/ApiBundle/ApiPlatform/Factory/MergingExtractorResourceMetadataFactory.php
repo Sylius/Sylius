@@ -17,7 +17,6 @@ use ApiPlatform\Core\Exception\ResourceClassNotFoundException;
 use ApiPlatform\Core\Metadata\Extractor\ExtractorInterface;
 use ApiPlatform\Core\Metadata\Resource\Factory\ResourceMetadataFactoryInterface;
 use ApiPlatform\Core\Metadata\Resource\ResourceMetadata;
-use Sylius\Bundle\ApiBundle\ApiPlatform\ConfigMergeManager;
 use Sylius\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver;
 
 /**
@@ -29,7 +28,7 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
     /** @var ExtractorInterface */
     private $extractor;
 
-    /** @var ResourceMetadataFactoryInterface  */
+    /** @var ResourceMetadataFactoryInterface */
     private $decorated;
 
     /** @var ResourceMetadataPropertyValueResolver */

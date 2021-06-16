@@ -151,8 +151,7 @@
             <argument type="service" id="api_platform.identifier.converter" on-invalid="ignore" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\ApiPlatform\ConfigMergeManager" >
-        </service>
+        <service id="Sylius\Bundle\ApiBundle\ApiPlatform\ConfigMergeManager" />
 
         <service id="Sylius\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver" >
             <argument type="service" id="Sylius\Bundle\ApiBundle\ApiPlatform\ConfigMergeManager" />
