@@ -66,7 +66,8 @@ class ProductsWithEnableFlagExtensionSpec extends ObjectBehavior
         $user->getRoles()->willReturn([]);
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
-        $queryBuilder->andWhere('o.enabled = 1')->shouldBeCalled()->willReturn($queryBuilder);
+        $queryBuilder->andWhere('o.enabled = :enabled')->shouldBeCalled()->willReturn($queryBuilder);
+        $queryBuilder->setParameter('enabled', true)->shouldBeCalled()->willReturn($queryBuilder);
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, 'get', [ContextKeys::CHANNEL => $channel, ContextKeys::LOCALE_CODE => 'en_US']);
     }
