@@ -15,13 +15,11 @@ namespace Sylius\Bundle\ApiBundle\DataProvider;
 
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use ApiPlatform\Core\DataProvider\SubresourceDataProviderInterface;
-use Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Webmozart\Assert\Assert;
 
@@ -37,24 +35,14 @@ final class CartShippingMethodsSubresourceDataProvider implements RestrictedData
     /** @var ShippingMethodsResolverInterface */
     private $shippingMethodsResolver;
 
-    /** @var ServiceRegistryInterface */
-    private $calculators;
-
-    /** @var CartShippingMethodFactoryInterface */
-    private $cartShippingMethodFactory;
-
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         ShipmentRepositoryInterface $shipmentRepository,
-        ShippingMethodsResolverInterface $shippingMethodsResolver,
-        ServiceRegistryInterface $calculators,
-        CartShippingMethodFactoryInterface $cartShippingMethodFactory
+        ShippingMethodsResolverInterface $shippingMethodsResolver
     ) {
         $this->orderRepository = $orderRepository;
         $this->shipmentRepository = $shipmentRepository;
         $this->shippingMethodsResolver = $shippingMethodsResolver;
-        $this->calculators = $calculators;
-        $this->cartShippingMethodFactory = $cartShippingMethodFactory;
     }
 
     public function getSubresource(string $resourceClass, array $identifiers, array $context, string $operationName = null)
@@ -71,7 +59,7 @@ final class CartShippingMethodsSubresourceDataProvider implements RestrictedData
 
         Assert::true($cart->hasShipment($shipment), 'Shipment doesn\'t match for order');
 
-        return $this->getCartShippingMethods($cart, $shipment);
+        return $this->shippingMethodsResolver->getSupportedMethods($shipment);
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
@@ -82,30 +70,5 @@ final class CartShippingMethodsSubresourceDataProvider implements RestrictedData
             is_a($resourceClass, ShippingMethodInterface::class, true) &&
             isset($subresourceIdentifiers['tokenValue'], $subresourceIdentifiers['shipments'])
         ;
-    }
-
-    private function getCartShippingMethods(OrderInterface $cart, ShipmentInterface $shipment): array
-    {
-        if (!$cart->hasShipments()) {
-            return [];
-        }
-
-        $cartShippingMethods = [];
-
-        $shippingMethods = $this->shippingMethodsResolver->getSupportedMethods($shipment);
-
-        /** @var ShippingMethodInterface $shippingMethod */
-        foreach ($shippingMethods as $shippingMethod) {
-            $calculator = $this->calculators->get($shippingMethod->getCalculator());
-            /** @var int $cost */
-            $cost = $calculator->calculate($shipment, $shippingMethod->getConfiguration());
-
-            $cartShippingMethods[] = $this->cartShippingMethodFactory->create(
-                $shippingMethod,
-                $cost
-            );
-        }
-
-        return $cartShippingMethods;
     }
 }
