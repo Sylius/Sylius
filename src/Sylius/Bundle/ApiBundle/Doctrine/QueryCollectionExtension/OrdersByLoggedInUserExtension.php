@@ -20,6 +20,7 @@ use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /** @experimental */
 final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollectionExtensionInterface
@@ -50,6 +51,11 @@ final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollection
         ;
 
         $user = $this->userContext->getUser();
+
+        if (null === $user) {
+            throw new AccessDeniedException();
+        }
+
         if ($user instanceof ShopUserInterface) {
             /** @var CustomerInterface $customer */
             $customer = $user->getCustomer();
