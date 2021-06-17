@@ -669,7 +669,7 @@ final class CheckoutContext implements Context
         $shippingMethodName = $shippingMethod->getName();
 
         foreach ($shippingMethods as $method) {
-            if ($method['shippingMethod']['translations']['en_US']['name'] === $shippingMethodName) {
+            if ($method['translations']['en_US']['name'] === $shippingMethodName) {
                 return;
             }
         }
@@ -783,7 +783,7 @@ final class CheckoutContext implements Context
     {
         $shippingMethods = $this->getCartShippingMethods($this->getCart());
 
-        Assert::true($shippingMethods[0]['shippingMethod']['code'] === $shippingMethod->getCode());
+        Assert::true($shippingMethods[0]['code'] === $shippingMethod->getCode());
     }
 
     /**
@@ -793,7 +793,7 @@ final class CheckoutContext implements Context
     {
         $shippingMethods = $this->getCartShippingMethods($this->getCart());
 
-        Assert::true(end($shippingMethods)['shippingMethod']['code'] === $shippingMethod->getCode());
+        Assert::true(end($shippingMethods)['code'] === $shippingMethod->getCode());
     }
 
     /**
@@ -1194,7 +1194,7 @@ final class CheckoutContext implements Context
     private function hasShippingMethod(ShippingMethodInterface $shippingMethod): bool
     {
         foreach ($this->getCartShippingMethods($this->getCart()) as $cartShippingMethod) {
-            if ($cartShippingMethod['shippingMethod']['code'] === $shippingMethod->getCode()) {
+            if ($cartShippingMethod['code'] === $shippingMethod->getCode()) {
                 return true;
             }
         }
@@ -1207,7 +1207,7 @@ final class CheckoutContext implements Context
         foreach ($this->getCartShippingMethods($this->getCart()) as $cartShippingMethod) {
             if (
                 $cartShippingMethod['price'] === $fee &&
-                $cartShippingMethod['shippingMethod']['code'] === $shippingMethod->getCode()
+                $cartShippingMethod['code'] === $shippingMethod->getCode()
             ) {
                 return true;
             }
