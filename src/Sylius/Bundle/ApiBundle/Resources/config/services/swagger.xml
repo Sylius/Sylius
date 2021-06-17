@@ -61,5 +61,16 @@
         >
             <argument type="service" id="sylius.api.swagger_product_variant_documentation_normalizer.inner" />
         </service>
+
+        <service
+            id="sylius.api.swagger_shipping_method_documentation_normalizer"
+            class="Sylius\Bundle\ApiBundle\Swagger\ShippingMethodDocumentationNormalizer"
+            decorates="api_platform.swagger.normalizer.documentation"
+            public="true"
+            autoconfigure="false"
+            decoration-priority="20"
+        >
+            <argument type="service" id="sylius.api.swagger_shipping_method_documentation_normalizer.inner" />
+        </service>
     </services>
 </container>
