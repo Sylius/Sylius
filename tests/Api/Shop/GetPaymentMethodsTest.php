@@ -42,9 +42,12 @@ final class GetPaymentMethodsTest extends JsonApiTestCase
         $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::CONTENT_TYPE_HEADER);
         $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
 
+        $explodedPaymentIri = explode('/', $orderResponse['payments'][0]);
+        $paymentId =array_pop($explodedPaymentIri);
+
         $this->client->request(
             'GET',
-            sprintf('/api/v2/shop/orders/nAWw2jewpA/payments/%s/methods', $orderResponse['payments'][0]['id']),
+            sprintf('/api/v2/shop/orders/nAWw2jewpA/payments/%s/methods', $paymentId),
             [],
             [],
             self::CONTENT_TYPE_HEADER

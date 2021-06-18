@@ -406,12 +406,15 @@ final class CheckoutContext implements Context
      */
     public function iTryToSelectPaymentMethod(string $paymentMethodCode): void
     {
+        $explodedPaymentIri = explode('/', $this->getCart()['payments'][0]);
+        $paymentId =array_pop($explodedPaymentIri);
+
         $request = Request::customItemAction(
             'shop',
             'orders',
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_PATCH,
-            sprintf('payments/%s', $this->getCart()['payments'][0]['id'])
+            sprintf('payments/%s', $paymentId)
         );
 
         $request->setContent(['paymentMethod' => $this->iriConverter->getItemIriFromResourceClass($this->paymentMethodClass, ['code' => $paymentMethodCode])]);
@@ -465,12 +468,15 @@ final class CheckoutContext implements Context
      */
     public function iChoosePaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
+        $explodedPaymentIri = explode('/', $this->getCart()['payments'][0]);
+        $paymentId =array_pop($explodedPaymentIri);
+
         $request = Request::customItemAction(
             'shop',
             'orders',
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_PATCH,
-            \sprintf('payments/%s', $this->getCart()['payments'][0]['id'])
+            \sprintf('payments/%s', $paymentId)
         );
 
         $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromItem($paymentMethod)]);
