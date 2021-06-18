@@ -36,7 +36,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         ZoneMatcherInterface $zoneMatcher,
         PrioritizedServiceRegistryInterface $strategyRegistry
     ): void {
-        $this->beConstructedWith($defaultTaxZoneProvider, $zoneMatcher, $strategyRegistry);
+        $this->beConstructedWith($defaultTaxZoneProvider, $zoneMatcher, $strategyRegistry, true);
     }
 
     function it_is_an_order_processor(): void

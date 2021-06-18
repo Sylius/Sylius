@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\Scope;
@@ -38,14 +39,19 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
     /** @var PrioritizedServiceRegistryInterface */
     private $strategyRegistry;
 
+    /** @var bool */
+    private $defaultTaxationStrategy;
+
     public function __construct(
         ZoneProviderInterface $defaultTaxZoneProvider,
         ZoneMatcherInterface $zoneMatcher,
-        PrioritizedServiceRegistryInterface $strategyRegistry
+        PrioritizedServiceRegistryInterface $strategyRegistry,
+        bool $defaultTaxationStrategy = true
     ) {
         $this->defaultTaxZoneProvider = $defaultTaxZoneProvider;
         $this->zoneMatcher = $zoneMatcher;
         $this->strategyRegistry = $strategyRegistry;
+        $this->defaultTaxationStrategy = $defaultTaxationStrategy;
     }
 
     public function process(BaseOrderInterface $order): void
@@ -78,7 +84,7 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
 
     private function getTaxZone(OrderInterface $order): ?ZoneInterface
     {
-        $billingAddress = $order->getBillingAddress();
+        $billingAddress = $this->getTaxAddress($order);
         $zone = null;
 
         if (null !== $billingAddress) {
@@ -100,5 +106,14 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         foreach ($order->getShipments() as $shipment) {
             $shipment->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
         }
+    }
+
+    private function getTaxAddress(OrderInterface $order): ?AddressInterface
+    {
+        if (!$this->defaultTaxationStrategy) {
+            return $order->getShippingAddress();
+        }
+
+        return $order->getBillingAddress();
     }
 }
