@@ -32,9 +32,10 @@ class PaymentMethodRepository extends BasePaymentMethodRepository implements Pay
     public function findEnabledForChannel(ChannelInterface $channel): array
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.enabled = true')
+            ->andWhere('o.enabled = :enabled')
             ->andWhere(':channel MEMBER OF o.channels')
             ->setParameter('channel', $channel)
+            ->setParameter('enabled', true)
             ->addOrderBy('o.position')
             ->getQuery()
             ->getResult()
