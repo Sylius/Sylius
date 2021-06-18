@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 use Doctrine\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
@@ -74,6 +75,19 @@ final class AddressOrderHandler implements MessageHandlerInterface
 
         if (null === $order->getCustomer()) {
             $order->setCustomer($this->provideCustomerByEmail($addressOrder->email));
+        }
+
+        /** @var AddressInterface|null $billingAddress */
+        $billingAddress = $order->getBillingAddress();
+        /** @var AddressInterface|null $shippingAddress */
+        $shippingAddress = $order->getShippingAddress();
+
+        if ($billingAddress !== null) {
+            $this->manager->remove($billingAddress);
+        }
+
+        if ($shippingAddress !== null) {
+            $this->manager->remove($shippingAddress);
         }
 
         $order->setBillingAddress($addressOrder->billingAddress);

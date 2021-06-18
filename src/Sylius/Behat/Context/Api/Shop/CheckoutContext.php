@@ -191,7 +191,7 @@ final class CheckoutContext implements Context
 
     /**
      * @When /^I specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
-     * @When /^the (?:customer|visitor) (?:specify|change) the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @When /^the (?:customer|visitor) (?:specifies|changes) the billing (address to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^I specify the billing (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      * @Given /^the (?:visitor|customer) has specified (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      */
@@ -314,7 +314,7 @@ final class CheckoutContext implements Context
     /**
      * @When I complete the addressing step
      * @When I try to complete the addressing step
-     * @When /^the (?:customer|visitor) complete the addressing step$/
+     * @When /^the (?:customer|visitor) completes the addressing step$/
      * @Given /^the (?:customer|visitor) has completed the addressing step$/
      * @When the visitor try to complete the addressing step in the customer cart
      */

@@ -20,7 +20,7 @@ Feature: Allowing access only for correctly logged in users
         Given the visitor has product "Stark T-Shirt" in the cart
         When the visitor specify the email as "jon.snow@example.com"
         And the visitor specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And the visitor complete the addressing step
+        And the visitor completes the addressing step
         Then the visitor should have checkout address step completed
 
     @api

@@ -61,6 +61,9 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $order->setCustomer($customer);
         $order->getCustomer()->willReturn($customer);
 
+        $order->getShippingAddress()->willReturn(null);
+        $order->getBillingAddress()->willReturn(null);
+
         $order->setBillingAddress($billingAddress)->shouldBeCalled();
         $order->setShippingAddress(Argument::type(AddressInterface::class))->shouldBeCalled();
 
@@ -97,6 +100,8 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $customer->setEmail('r2d2@droid.com')->shouldBeCalled();
         $manager->persist($customer)->shouldBeCalled();
         $order->setCustomer($customer)->shouldBeCalled();
+        $order->getShippingAddress()->willReturn(null);
+        $order->getBillingAddress()->willReturn(null);
         $order->setBillingAddress($billingAddress)->shouldBeCalled();
         $order->setShippingAddress($shippingAddress)->shouldBeCalled();
 
@@ -136,6 +141,8 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $manager->persist($customer)->shouldNotBeCalled();
         $order->setCustomer($customer)->shouldNotBeCalled();
 
+        $order->getShippingAddress()->willReturn(null);
+        $order->getBillingAddress()->willReturn(null);
         $order->setBillingAddress($billingAddress)->shouldBeCalled();
         $order->setShippingAddress($shippingAddress)->shouldBeCalled();
 
@@ -151,7 +158,6 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
     function it_handles_addressing_an_order_for_not_logged_in_shop_user(
         OrderRepositoryInterface $orderRepository,
         CustomerRepositoryInterface $customerRepository,
-        FactoryInterface $customerFactory,
         ObjectManager $manager,
         StateMachineFactoryInterface $stateMachineFactory,
         CustomerInterface $customer,
@@ -175,8 +181,54 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
 
         $order->getCustomer()->shouldBeCalled();
         $order->setCustomer($customer)->shouldBeCalled();
+        $order->getShippingAddress()->willReturn(null);
+        $order->getBillingAddress()->willReturn(null);
         $order->setBillingAddress($billingAddress)->shouldBeCalled();
         $order->setShippingAddress($shippingAddress)->shouldBeCalled();
+
+        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(true);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS)->shouldBeCalled();
+
+        $manager->persist($order)->shouldBeCalled();
+
+        $this($addressOrder);
+    }
+
+    function it_deletes_old_order_address_while_creating_new_addresses_for_already_addressed_order(
+        OrderRepositoryInterface $orderRepository,
+        FactoryInterface $customerFactory,
+        ObjectManager $manager,
+        StateMachineFactoryInterface $stateMachineFactory,
+        CustomerInterface $customer,
+        AddressInterface $newBillingAddress,
+        AddressInterface $newShippingAddress,
+        AddressInterface $oldBillingAddress,
+        AddressInterface $oldShippingAddress,
+        OrderInterface $order,
+        StateMachineInterface $stateMachine
+    ): void {
+        $addressOrder = new AddressOrder(
+            'r2d2@droid.com',
+            $newBillingAddress->getWrappedObject(),
+            $newShippingAddress->getWrappedObject()
+        );
+        $addressOrder->setOrderTokenValue('ORDERTOKEN');
+
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
+
+        $order->getCustomer()->willReturn(null);
+
+        $customerFactory->createNew()->willReturn($customer);
+        $customer->setEmail('r2d2@droid.com')->shouldBeCalled();
+        $manager->persist($customer)->shouldBeCalled();
+        $order->setCustomer($customer)->shouldBeCalled();
+        $order->getBillingAddress()->willReturn($oldBillingAddress);
+        $order->getShippingAddress()->willReturn($oldShippingAddress);
+        $manager->remove($oldBillingAddress)->shouldBeCalled();
+        $manager->remove($oldShippingAddress)->shouldBeCalled();
+        $order->setBillingAddress($newBillingAddress)->shouldBeCalled();
+        $order->setShippingAddress($newShippingAddress)->shouldBeCalled();
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(true);
