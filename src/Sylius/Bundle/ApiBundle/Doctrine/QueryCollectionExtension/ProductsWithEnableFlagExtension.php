@@ -47,6 +47,7 @@ final class ProductsWithEnableFlagExtension implements ContextAwareQueryCollecti
         }
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
-        $queryBuilder->andWhere($rootAlias . '.enabled = 1');
+        $queryBuilder->andWhere($rootAlias . '.enabled = :enabled');
+        $queryBuilder->setParameter('enabled', true);
     }
 }
