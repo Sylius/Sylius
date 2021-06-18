@@ -19,3 +19,31 @@
             ...
         }
     ``` 
+
+1. The response schema for endpoint `GET /api/v2/shop/orders/{tokenValue}/shipments/{shipments}/methods` has been changed from: 
+
+    ```
+    ...
+    "hydra:member": [
+        {
+            ...
+            "@type": "CartShippingMethod",
+            "shippingMethod": {
+                ...
+                "price": 500
+            }
+        }
+    ]
+    ```
+    to:
+    ```
+    ...
+    "hydra:member": [
+        {
+            ...
+            "@type": "ShippingMethod",
+            ...
+            "price": 500
+        }
+    ]
+    ```
