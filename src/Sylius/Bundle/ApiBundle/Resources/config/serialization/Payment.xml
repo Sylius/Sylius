@@ -19,13 +19,11 @@
         <attribute name="id">
             <group>admin:order:read</group>
             <group>admin:payment:read</group>
-            <group>shop:cart:read</group>
             <group>shop:payment:read</group>
         </attribute>
         <attribute name="method">
             <group>admin:order:read</group>
             <group>admin:payment:read</group>
-            <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
             <group>shop:payment:read</group>
         </attribute>
