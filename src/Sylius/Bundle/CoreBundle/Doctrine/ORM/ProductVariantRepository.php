@@ -23,8 +23,9 @@ class ProductVariantRepository extends BaseProductVariantRepository implements P
     {
         return $this->createQueryBuilder('o')
             ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
-            ->andWhere('o.tracked = true')
+            ->andWhere('o.tracked = :tracked')
             ->setParameter('locale', $locale)
+            ->setParameter('tracked', true)
         ;
     }
 }
