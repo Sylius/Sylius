@@ -2,3 +2,4 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en_US
+    sylius_core.taxation.default_strategy: true
