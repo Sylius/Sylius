@@ -35,7 +35,7 @@ Your extending repository class should look like that:
             {
                 return $this->createQueryBuilder('o')
                     ->innerJoin('o.channels', 'channel')
-                    ->andWhere('o.enabled = true')
+                    ->andWhere('o.enabled = :enabled')
                     ->andWhere('channel = :channel')
                     ->innerJoin('o.productTaxons', 'productTaxons')
                     ->addOrderBy('productTaxons.position', 'asc')
@@ -43,6 +43,7 @@ Your extending repository class should look like that:
                     ->andWhere('taxon.code = :code')
                     ->setParameter('code', $code)
                     ->setParameter('channel', $channel)
+                    ->setParameter('enabled', true)
                     ->setMaxResults($count)
                     ->getQuery()
                     ->getResult();
