@@ -49,3 +49,8 @@
 ###> vscode project files ###
 /.vscode
 ###< vscode project files ###
+
+###> squizlabs/php_codesniffer ###
+/.phpcs-cache
+/phpcs.xml
+###< squizlabs/php_codesniffer ###
