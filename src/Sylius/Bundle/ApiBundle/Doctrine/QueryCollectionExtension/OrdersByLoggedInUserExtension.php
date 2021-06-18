@@ -17,6 +17,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionEx
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -52,8 +53,8 @@ final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollection
 
         $user = $this->userContext->getUser();
 
-        if (null === $user) {
-            throw new AccessDeniedException();
+        if ($user instanceof AdminUserInterface) {
+            return;
         }
 
         if ($user instanceof ShopUserInterface) {
@@ -65,5 +66,7 @@ final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollection
                 ->setParameter('customer', $customer)
             ;
         }
+
+        throw new AccessDeniedException();
     }
 }
