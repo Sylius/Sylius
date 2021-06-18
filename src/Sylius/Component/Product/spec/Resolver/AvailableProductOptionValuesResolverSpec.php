@@ -51,8 +51,8 @@ final class AvailableProductOptionValuesResolverSpec extends ObjectBehavior
             new \InvalidArgumentException(
                 sprintf(
                     'Cannot resolve available product option values. Option "%s" does not belong to product "%s".',
-                    self::PRODUCT_CODE,
                     self::PRODUCT_OPTION_CODE,
+                    self::PRODUCT_CODE,
                 ),
             ),
         )->during('resolve', [$product, $productOption]);
