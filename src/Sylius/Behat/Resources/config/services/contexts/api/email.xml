@@ -18,5 +18,9 @@
             <argument type="service" id="sylius.behat.email_checker" />
             <argument type="service" id="translator" />
         </service>
+
+        <service id="sylius.behat.context.api.address" class="Sylius\Behat\Context\Api\AddressContext">
+            <argument type="service" id="sylius.repository.address" />
+        </service>
     </services>
 </container>
