@@ -1,0 +1,607 @@
+How to customize the refund form?
+=================================
+
+    .. note::
+        This cookbook describes customization of a feature available only with `Sylius/RefundPlugin <https://github.com/Sylius/RefundPlugin/>`_ installed.
+
+        A refund form is the form in which, as an Administrator, you can specify the exact amounts of money that will be refunded to a Customer.
+
+Why would you customize the refund form?
+----------------------------------------
+
+Refund Plugin provides a generic solution for refunding orders, it is enough for a basic refund but many shops need more custom functionalities.
+For example, one may need to add refund payments scheduling, as they may be paid once a month.
+
+How to add a field to the refund form?
+--------------------------------------
+
+The refund form is a form used to create the Refund Payment, thus in order to add a field to this form,
+you need to first add it to the Refund Payment's model.
+
+Refunds are processed with such a flow: ``command -> handler -> event -> listener``, and this flow we will also need to customize in order to process the data from the new field.
+
+In this customization, we will be extending the refund form with a ``scheduledAt`` field,
+which might be used then for scheduling the payments in the payment gateway.
+
+1. Add the custom field to the Refund Payment:
+
+Extended refund payment should look like this:
+
+.. code-block:: php
+
+    <?php
+
+    declare(strict_types=1);
+
+    namespace App\Entity;
+
+    use Doctrine\ORM\Mapping as ORM;
+    use Sylius\RefundPlugin\Entity\RefundPayment as BaseRefundPayment;
+
+    /**
+     * @ORM\Entity
+     * @ORM\Table(name="sylius_refund_refund_payment")
+     */
+    class RefundPayment extends BaseRefundPayment implements RefundPaymentInterface
+    {
+        /**
+         * @var \DateTime|null
+         *
+         * @ORM\Column(type="datetime", nullable="true", name="scheduled_at")
+         */
+        protected $scheduledAt;
+
+        public function getScheduledAt(): ?\DateTime
+        {
+            return $this->scheduledAt;
+        }
+
+        public function setScheduledAt(\DateTime $scheduledAt): void
+        {
+            $this->scheduledAt = $scheduledAt;
+        }
+    }
+
+It should implement a new interface:
+
+.. code-block:: php
+
+    <?php
+
+    declare(strict_types=1);
+
+    namespace App\Entity;
+
+    use Sylius\RefundPlugin\Entity\RefundPaymentInterface as BaseRefundPaymentInterface;
+
+    interface RefundPaymentInterface extends BaseRefundPaymentInterface
+    {
+        public function getScheduledAt(): ?\DateTime;
+
+        public function setScheduledAt(\DateTime $date): void;
+    }
+
+Remember to update resource configuration:
+
+.. code-block:: yaml
+
+    # config/packages/sylius_refund.yaml
+    sylius_resource:
+    resources:
+        sylius_refund.refund_payment:
+            classes:
+                model: App\Entity\RefundPayment
+                interface: App\Entity\RefundPaymentInterface
+
+And update the database:
+
+.. code-block:: bash
+
+    php bin/console doctrine:migrations:diff
+    php bin/console doctrine:migrations:migrate
+
+2. Modify the refund form:
+
+Once we have the new field on the Refund Payment, we will need to display its input on the refund form.
+We need to overwrite the template ``orderRefunds.html.twig`` from Refund Plugin.
+To achieve that copy the entire ``orderRefunds.html.twig`` to ``templates/bundles/SyliusRefundPlugin/orderRefunds.html.twig``.
+Then add:
+
+.. code-block:: twig
+
+    <div class="field">
+        <label for="scheduled-at">Scheduled at</label>
+        <input type="date" name="sylius_scheduled_at" id="scheduled-at" />
+    </div>
+
+3. Adjust the ``RefundUnits`` command:
+
+We want the refund payments to be created with our extra ``scheduledAt`` date, therefore we need to provide this data in command,
+We will extend the ``RefundUnits`` command from Refund Plugin and add the new value:
+
+.. code-block:: php
+
+    <?php
+
+    declare(strict_types=1);
+
+    namespace App\Command;
+
+    use Sylius\RefundPlugin\Command\RefundUnits as BaseRefundUnits;
+
+    final class RefundUnits extends BaseRefundUnits
+    {
+        /** @var \DateTime|null */
+        private $scheduledAt;
+
+        public function __construct(
+            string $orderNumber,
+            array $units,
+            array $shipments,
+            int $paymentMethodId,
+            string $comment,
+            ?\DateTime $scheduledAt
+        ) {
+            parent::__construct($orderNumber, $units, $shipments, $paymentMethodId, $comment);
+            $this->scheduledAt = $scheduledAt;
+        }
+
+        public function getScheduledAt(): ?\DateTime
+        {
+            return $this->scheduledAt;
+        }
+
+        public function setScheduledAt(?\DateTime $scheduledAt): void
+        {
+            $this->scheduledAt = $scheduledAt;
+        }
+    }
+
+
+4. Update the ``RefundUnitsCommandCreator``:
+
+The controller related to the refund form dispatches the ``RefundUnits`` command, and there is a service that creates a command from request,
+so we need to overwrite the ``Sylius\RefundPlugin\Creator\RefundUnitsCommandCreatorInterface``:
+
+.. code-block:: php
+
+    <?php
+
+    declare(strict_types=1);
+
+    namespace App\Creator;
+
+    use App\Command\RefundUnits;
+    use Sylius\RefundPlugin\Calculator\UnitRefundTotalCalculatorInterface;
+    use Sylius\RefundPlugin\Command\RefundUnits as BaseRefundUnits;
+    use Sylius\RefundPlugin\Creator\RefundUnitsCommandCreatorInterface;
+    use Sylius\RefundPlugin\Exception\InvalidRefundAmount;
+    use Sylius\RefundPlugin\Model\OrderItemUnitRefund;
+    use Sylius\RefundPlugin\Model\RefundType;
+    use Sylius\RefundPlugin\Model\ShipmentRefund;
+    use Sylius\RefundPlugin\Model\UnitRefundInterface;
+    use Symfony\Component\HttpFoundation\Request;
+    use Webmozart\Assert\Assert;
+
+    final class RefundUnitsCommandCreator implements RefundUnitsCommandCreatorInterface
+    {
+        /** @var UnitRefundTotalCalculatorInterface */
+        private $unitRefundTotalCalculator;
+
+        public function __construct(UnitRefundTotalCalculatorInterface $unitRefundTotalCalculator)
+        {
+            $this->unitRefundTotalCalculator = $unitRefundTotalCalculator;
+        }
+
+        public function fromRequest(Request $request): BaseRefundUnits
+        {
+            Assert::true($request->attributes->has('orderNumber'), 'Refunded order number not provided');
+
+            $units = $this->filterEmptyRefundUnits(
+                $request->request->has('sylius_refund_units') ? $request->request->all()['sylius_refund_units'] : []
+            );
+            $shipments = $this->filterEmptyRefundUnits(
+                $request->request->has('sylius_refund_shipments') ? $request->request->all()['sylius_refund_shipments'] : []
+            );
+
+            if (count($units) === 0 && count($shipments) === 0) {
+                throw InvalidRefundAmount::withValidationConstraint('sylius_refund.at_least_one_unit_should_be_selected_to_refund');
+            }
+
+            /** @var string $comment */
+            $comment = $request->request->get('sylius_refund_comment', '');
+
+            // here we need to return the new RefundUnits command, with new data
+            return new RefundUnits(
+                $request->attributes->get('orderNumber'),
+                $this->parseIdsToUnitRefunds($units, RefundType::orderItemUnit(), OrderItemUnitRefund::class),
+                $this->parseIdsToUnitRefunds($shipments, RefundType::shipment(), ShipmentRefund::class),
+                (int) $request->request->get('sylius_refund_payment_method'),
+                $comment,
+                new \DateTime($request->request->get('sylius_scheduled_at'))
+            );
+        }
+
+        /**
+         * Parse shipment id's to ShipmentRefund with id and remaining total or amount passed in request
+         *
+         * @return array|UnitRefundInterface[]
+         */
+        private function parseIdsToUnitRefunds(array $units, RefundType $refundType, string $unitRefundClass): array
+        {
+            $refundUnits = [];
+            foreach ($units as $id => $unit) {
+                $total = $this
+                    ->unitRefundTotalCalculator
+                    ->calculateForUnitWithIdAndType($id, $refundType, $this->getAmount($unit))
+                ;
+
+                $refundUnits[] = new $unitRefundClass((int) $id, $total);
+            }
+
+            return $refundUnits;
+        }
+
+        private function filterEmptyRefundUnits(array $units): array
+        {
+            return array_filter($units, function (array $refundUnit): bool {
+                return
+                    (isset($refundUnit['amount']) && $refundUnit['amount'] !== '') ||
+                    isset($refundUnit['full'])
+                ;
+            });
+        }
+
+        private function getAmount(array $unit): ?float
+        {
+            if (isset($unit['full'])) {
+                return null;
+            }
+
+            Assert::keyExists($unit, 'amount');
+
+            return (float) $unit['amount'];
+        }
+    }
+
+And register the new service:
+
+.. code-block:: yaml
+
+    # config/services.yaml
+    Sylius\RefundPlugin\Creator\RefundUnitsCommandCreatorInterface:
+        class: App\Creator\RefundUnitsCommandCreator
+        arguments:
+            - '@Sylius\RefundPlugin\Calculator\UnitRefundTotalCalculatorInterface'
+
+
+5. Modify the ``RefundUnitsHandler``:
+
+Now, when we have a new command, we also need to overwrite the related command handler:
+
+.. code-block:: php
+
+    <?php
+
+    declare(strict_types=1);
+
+    namespace App\CommandHandler;
+
+    use Sylius\Component\Core\Model\OrderInterface;
+    use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+    use App\Command\RefundUnits;
+    use App\Event\UnitsRefunded;
+    use Sylius\RefundPlugin\Refunder\RefunderInterface;
+    use Sylius\RefundPlugin\Validator\RefundUnitsCommandValidatorInterface;
+    use Symfony\Component\Messenger\MessageBusInterface;
+    use Webmozart\Assert\Assert;
+
+    final class RefundUnitsHandler
+    {
+        /** @var RefunderInterface */
+        private $orderUnitsRefunder;
+
+        /** @var RefunderInterface */
+        private $orderShipmentsRefunder;
+
+        /** @var MessageBusInterface */
+        private $eventBus;
+
+        /** @var OrderRepositoryInterface */
+        private $orderRepository;
+
+        /** @var RefundUnitsCommandValidatorInterface */
+        private $refundUnitsCommandValidator;
+
+        public function __construct(
+            RefunderInterface $orderUnitsRefunder,
+            RefunderInterface $orderShipmentsRefunder,
+            MessageBusInterface $eventBus,
+            OrderRepositoryInterface $orderRepository,
+            RefundUnitsCommandValidatorInterface $refundUnitsCommandValidator
+        ) {
+            $this->orderUnitsRefunder = $orderUnitsRefunder;
+            $this->orderShipmentsRefunder = $orderShipmentsRefunder;
+            $this->eventBus = $eventBus;
+            $this->orderRepository = $orderRepository;
+            $this->refundUnitsCommandValidator = $refundUnitsCommandValidator;
+        }
+
+        public function __invoke(RefundUnits $command): void
+        {
+            $this->refundUnitsCommandValidator->validate($command);
+
+            $orderNumber = $command->orderNumber();
+
+            /** @var OrderInterface $order */
+            $order = $this->orderRepository->findOneByNumber($orderNumber);
+
+            $refundedTotal = 0;
+            $refundedTotal += $this->orderUnitsRefunder->refundFromOrder($command->units(), $orderNumber);
+            $refundedTotal += $this->orderShipmentsRefunder->refundFromOrder($command->shipments(), $orderNumber);
+
+            /** @var string|null $currencyCode */
+            $currencyCode = $order->getCurrencyCode();
+            Assert::notNull($currencyCode);
+
+            // Dispatching a new event
+            $this->eventBus->dispatch(new UnitsRefunded(
+                $orderNumber,
+                $command->units(),
+                $command->shipments(),
+                $command->paymentMethodId(),
+                $refundedTotal,
+                $currencyCode,
+                $command->comment(),
+                $command->getScheduledAt()
+            ));
+        }
+    }
+
+And register it:
+
+.. code-block:: yaml
+
+    # config/services.yaml
+    Sylius\RefundPlugin\CommandHandler\RefundUnitsHandler:
+        class: App\CommandHandler\RefundUnitsHandler
+        arguments:
+            - '@Sylius\RefundPlugin\Refunder\OrderItemUnitsRefunder'
+            - '@Sylius\RefundPlugin\Refunder\OrderShipmentsRefunder'
+            - '@sylius.event_bus'
+            - '@sylius.repository.order'
+            - '@Sylius\RefundPlugin\Validator\RefundUnitsCommandValidatorInterface'
+        tags:
+            - { name: messenger.message_handler, bus: sylius.command_bus }
+
+6. Modify the ``UnitsReturned`` event:
+
+In previous command handler we are dispatching a new event so now we need to create this event and related event handler:
+
+event:
+
+.. code-block:: php
+
+    <?php
+
+    declare(strict_types=1);
+
+    namespace App\Event;
+
+    use Sylius\RefundPlugin\Event\UnitsRefunded as BaseUnitsRefunded;
+
+    class UnitsRefunded extends BaseUnitsRefunded
+    {
+        /** @var \DateTime */
+        public $futureDate;
+
+        public function __construct(
+            string $orderNumber,
+            array $units,
+            array $shipments,
+            int $paymentMethodId,
+            int $amount,
+            string $currencyCode,
+            string $comment,
+            \DateTime $scheduledAt
+        ) {
+            parent::__construct($orderNumber, $units, $shipments, $paymentMethodId, $amount, $currencyCode, $comment);
+            $this->futureDate = $futureDate;
+        }
+
+        public function getScheduledAt(): \DateTime
+        {
+            return $this->scheduledAt;
+        }
+    }
+
+And handler:
+
+.. code-block:: php
+
+    <?php
+
+    declare(strict_types=1);
+
+    namespace App\ProcessManager;
+
+    use Doctrine\ORM\EntityManagerInterface;
+    use Sylius\Component\Core\Model\OrderInterface;
+    use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+    use Sylius\RefundPlugin\Entity\RefundPaymentInterface;
+    use Sylius\RefundPlugin\Event\RefundPaymentGenerated;
+    use Sylius\RefundPlugin\Event\UnitsRefunded;
+    use Sylius\RefundPlugin\Factory\RefundPaymentFactoryInterface;
+    use Sylius\RefundPlugin\ProcessManager\UnitsRefundedProcessStepInterface;
+    use Sylius\RefundPlugin\Provider\RelatedPaymentIdProviderInterface;
+    use Sylius\RefundPlugin\StateResolver\OrderFullyRefundedStateResolverInterface;
+    use Symfony\Component\Messenger\MessageBusInterface;
+    use Webmozart\Assert\Assert;
+
+    final class RefundPaymentProcessManager implements UnitsRefundedProcessStepInterface
+    {
+        /** @var OrderFullyRefundedStateResolverInterface */
+        private $orderFullyRefundedStateResolver;
+
+        /** @var RelatedPaymentIdProviderInterface */
+        private $relatedPaymentIdProvider;
+
+        /** @var RefundPaymentFactoryInterface */
+        private $refundPaymentFactory;
+
+        /** @var OrderRepositoryInterface */
+        private $orderRepository;
+
+        /** @var EntityManagerInterface */
+        private $entityManager;
+
+        /** @var MessageBusInterface */
+        private $eventBus;
+
+        public function __construct(
+            OrderFullyRefundedStateResolverInterface $orderFullyRefundedStateResolver,
+            RelatedPaymentIdProviderInterface $relatedPaymentIdProvider,
+            RefundPaymentFactoryInterface $refundPaymentFactory,
+            OrderRepositoryInterface $orderRepository,
+            EntityManagerInterface $entityManager,
+            MessageBusInterface $eventBus
+        ) {
+            $this->orderFullyRefundedStateResolver = $orderFullyRefundedStateResolver;
+            $this->relatedPaymentIdProvider = $relatedPaymentIdProvider;
+            $this->refundPaymentFactory = $refundPaymentFactory;
+            $this->orderRepository = $orderRepository;
+            $this->entityManager = $entityManager;
+            $this->eventBus = $eventBus;
+        }
+
+        public function next(UnitsRefunded $unitsRefunded): void
+        {
+            /** @var OrderInterface|null $order */
+            $order = $this->orderRepository->findOneByNumber($unitsRefunded->orderNumber());
+            Assert::notNull($order);
+
+            $refundPayment = $this->refundPaymentFactory->createWithDataAndDate(
+                $order,
+                $unitsRefunded->amount(),
+                $unitsRefunded->currencyCode(),
+                RefundPaymentInterface::STATE_NEW,
+                $unitsRefunded->paymentMethodId(),
+                $unitsRefunded->getScheduledAt()
+            );
+
+            $this->entityManager->persist($refundPayment);
+            $this->entityManager->flush();
+
+            $this->eventBus->dispatch(new RefundPaymentGenerated(
+                $refundPayment->getId(),
+                $unitsRefunded->orderNumber(),
+                $unitsRefunded->amount(),
+                $unitsRefunded->currencyCode(),
+                $unitsRefunded->paymentMethodId(),
+                $this->relatedPaymentIdProvider->getForRefundPayment($refundPayment)
+            ));
+
+            $this->orderFullyRefundedStateResolver->resolve($unitsRefunded->orderNumber());
+        }
+    }
+
+And register it:
+
+.. code-block:: yaml
+
+    Sylius\RefundPlugin\ProcessManager\RefundPaymentProcessManager:
+            class: App\ProcessManager\RefundPaymentProcessManager
+            arguments:
+                - '@Sylius\RefundPlugin\StateResolver\OrderFullyRefundedStateResolverInterface'
+                - '@Sylius\RefundPlugin\Provider\RelatedPaymentIdProviderInterface'
+                - '@App\Factory\RefundPaymentFactory'
+                - '@sylius.repository.order'
+                - '@doctrine.orm.default_entity_manager'
+                - '@sylius.event_bus'
+            tags:
+                - {name: sylius_refund.units_refunded.process_step, priority: 50}
+
+7. Create the Payment Factory:
+
+In our handler we have used a new Factory, so now it is time to implement it:
+
+.. code-block:: php
+
+    <?php
+
+    declare(strict_types=1);
+
+    namespace App\Factory;
+
+    use Sylius\Component\Core\Model\OrderInterface;
+    use Sylius\Component\Core\Model\PaymentMethodInterface;
+    use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
+    use App\Entity\RefundPayment;
+    use Sylius\RefundPlugin\Entity\RefundPaymentInterface as BaseRefundPaymentInterface;
+    use App\Entity\RefundPaymentInterface;
+    use Sylius\RefundPlugin\Factory\RefundPaymentFactoryInterface;
+
+    final class RefundPaymentFactory implements RefundPaymentFactoryInterface
+    {
+        /** @var RefundPaymentFactoryInterface */
+        private $baseRefundPaymentFactory;
+
+        /** @var PaymentMethodRepositoryInterface */
+        private $paymentMethodRepository;
+
+        public function __construct($baseRefundPaymentFactory, $paymentMethodRepository)
+        {
+            $this->baseRefundPaymentFactory = $baseRefundPaymentFactory;
+            $this->paymentMethodRepository = $paymentMethodRepository;
+        }
+
+        public function createWithData(
+            OrderInterface $order,
+            int $amount,
+            string $currencyCode,
+            string $state,
+            int $paymentMethodId
+        ): BaseRefundPaymentInterface {
+            return $this->baseRefundPaymentFactory->createWithData($order, $amount, $currencyCode, $state, $paymentMethodId);
+        }
+
+        public function createWithDataAndDate(
+            OrderInterface $order,
+            int $amount,
+            string $currencyCode,
+            string $state,
+            int $paymentMethodId,
+            \DateTime $date
+        ): RefundPaymentInterface {
+            /** @var PaymentMethodInterface $paymentMethod */
+            $paymentMethod = $this->paymentMethodRepository->find($paymentMethodId);
+
+            $payment = new RefundPayment($order, $amount, $currencyCode, $state, $paymentMethod);
+            $payment->setScheduledAt($date);
+
+            return $payment;
+        }
+    }
+
+And register it:
+
+.. code-block:: yaml
+
+    App\Factory\RefundPaymentFactory:
+        arguments:
+            - '@Sylius\RefundPlugin\Factory\RefundPaymentFactoryInterface'
+            - '@sylius.repository.payment_method'
+
+8. Display the new field on the refund payment:
+
+And as the last step, we need to overwrite the template ``_refundPayments.html.twig`` from Refund Plugin.
+Copy the entire ``_refundPayments.html.twig`` to ``templates/bundles/SyliusRefundPlugin/Order/Admin/_refundPayments.html.twig`` and add replace ``header`` with:
+
+.. code-block:: twig
+
+    <div class="header">
+        {{ refund_payment.paymentMethod  }} {%  if refund_payment.scheduledAt is not null %} (Payment should be made in {{ refund_payment.scheduledAt|date('Y-M-d') }}) {% endif %}
+    </div>
+
+
+And now it is everything, we have new field on `RefundPayment` with future date (when admin should make the payment), in your application you probably will add crone for automatize it.
