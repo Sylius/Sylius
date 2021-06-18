@@ -160,6 +160,7 @@
     "conflict": {
         "doctrine/doctrine-bundle": "2.3.0",
         "jms/serializer-bundle": "3.9.0",
+        "laminas/laminas-code": "^4.0",
         "symfony/doctrine-bridge": "4.4.16",
         "symfony/property-info": "4.4.22 || 5.2.7",
         "symfony/serializer": "4.4.19 || 5.2.2"
