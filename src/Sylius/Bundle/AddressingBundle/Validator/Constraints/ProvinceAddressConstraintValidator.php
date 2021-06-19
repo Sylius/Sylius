@@ -46,7 +46,7 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
         /** @var ProvinceAddressConstraint $constraint */
         Assert::isInstanceOf($constraint, ProvinceAddressConstraint::class);
 
-        $propertyPath = $this->context->getPropertyPath();
+        $propertyPath = $this->context->getPropertyPath('provinceCode');
 
         foreach (iterator_to_array($this->context->getViolations()) as $violation) {
             if (0 === strpos($violation->getPropertyPath(), $propertyPath)) {
