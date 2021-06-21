@@ -60,9 +60,7 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
             'itemOperations',
             $resourceMetadata,
             [
-                'itemOperations' => [
-                    'admin_get (unset)' => null,
-                ]
+                'itemOperations' => ['admin_get (unset)' => null]
             ]
         )->shouldReturn(
             [
@@ -92,16 +90,12 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
             ]
         );
 
-        $apiResourceConfigurationMerger->mergeConfigs(
-            Argument::any()
-        )->shouldNotBeCalled();
+        $apiResourceConfigurationMerger->mergeConfigs(Argument::any())->shouldNotBeCalled();
 
         $this->resolve(
             'itemOperations',
             $resourceMetadata,
-            [
-                'itemOperations' => null
-            ]
+            ['itemOperations' => null]
         )->shouldReturn(
             [
                 'admin_get' => [
@@ -125,9 +119,7 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
             null
         );
 
-        $apiResourceConfigurationMerger->mergeConfigs(
-            Argument::any()
-        )->shouldNotBeCalled();
+        $apiResourceConfigurationMerger->mergeConfigs(Argument::any())->shouldNotBeCalled();
 
         $this->resolve(
             'itemOperations',
@@ -158,16 +150,12 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
             null,
         );
 
-        $apiResourceConfigurationMerger->mergeConfigs(
-            Argument::any()
-        )->shouldNotBeCalled();
+        $apiResourceConfigurationMerger->mergeConfigs(Argument::any())->shouldNotBeCalled();
 
         $this->resolve(
             'shortName',
             $resourceMetadata,
-            [
-                'shortName' => 'child_short_name'
-            ]
+            ['shortName' => 'child_short_name']
         )->shouldReturn('child_short_name');
     }
 
@@ -190,16 +178,12 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
             ]
         );
 
-        $apiResourceConfigurationMerger->mergeConfigs(
-            Argument::any()
-        )->shouldNotBeCalled();
+        $apiResourceConfigurationMerger->mergeConfigs(Argument::any())->shouldNotBeCalled();
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('resolve', [
             'collectionOperations',
             $resourceMetadata,
-            [
-                'collectionOperations' => 'invalid_string'
-            ]
+            ['collectionOperations' => 'invalid_string']
         ]);
     }
 }

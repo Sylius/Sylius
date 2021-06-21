@@ -72,10 +72,11 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
 
         foreach (self::RESOURCES as $availableResource) {
             $resource[$availableResource] =
-                $resource[$availableResource] ?? $this->defaults[strtolower(preg_replace('/(?<!^)[A-Z]+|(?<!^|\d)[\d]+/', '_$0', $availableResource))] ?? null;
+                $resource[$availableResource] ?? $this->defaults[strtolower(preg_replace('/(?<!^)[A-Z]+|(?<!^|\d)[\d]+/', '_$0', $availableResource))] ?? null
+            ;
         }
 
-        if ( $resource['attributes'] ==! null || !empty($this->defaults['attributes'])) {
+        if ($resource['attributes'] ==! null || !empty($this->defaults['attributes'])) {
             $resource['attributes'] = (array) $resource['attributes'];
             foreach ($this->defaults['attributes'] as $key => $value) {
                 if (!isset($resource['attributes'][$key])) {
@@ -84,7 +85,7 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
             }
         }
 
-        return $this->update($parentResourceMetadata ?: new ResourceMetadata(), $resource);
+        return $this->update($parentResourceMetadata ?? new ResourceMetadata(), $resource);
     }
 
     /**
