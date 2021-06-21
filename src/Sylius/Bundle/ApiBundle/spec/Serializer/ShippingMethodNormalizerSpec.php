@@ -25,7 +25,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class ShippingMethodNormalizerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         OrderRepositoryInterface $orderRepository,
         ShipmentRepositoryInterface $shipmentRepository,
         ServiceRegistryInterface $shippingCalculators
@@ -33,7 +33,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         $this->beConstructedWith($orderRepository, $shipmentRepository, $shippingCalculators);
     }
 
-    function it_supports_only_shipping_method_interface(ShippingMethodInterface $shippingMethod, OrderInterface $order): void
+    public function it_supports_only_shipping_method_interface(ShippingMethodInterface $shippingMethod, OrderInterface $order): void
     {
         $this
             ->supportsNormalization($shippingMethod, null, ['subresource_identifiers' => ['tokenValue' => '666', 'shipments' => '999']])
@@ -45,7 +45,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_not_support_if_item_operation_name_is_admin_get(ShippingMethodInterface $shippingMethod): void
+    public function it_does_not_support_if_item_operation_name_is_admin_get(ShippingMethodInterface $shippingMethod): void
     {
         $this
             ->supportsNormalization($shippingMethod, null, [
@@ -56,7 +56,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_not_support_if_the_normalizer_has_been_already_called(ShippingMethodInterface $shippingMethod): void
+    public function it_does_not_support_if_the_normalizer_has_been_already_called(ShippingMethodInterface $shippingMethod): void
     {
         $this
             ->supportsNormalization($shippingMethod, null, [
@@ -67,12 +67,12 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_not_support_if_the_subresource_identifiers_are_not_provided(ShippingMethodInterface $shippingMethod): void
+    public function it_does_not_support_if_the_subresource_identifiers_are_not_provided(ShippingMethodInterface $shippingMethod): void
     {
         $this->supportsNormalization($shippingMethod, null, [])->shouldReturn(false);
     }
 
-    function it_serializes_shipping_method_if_item_operation_name_is_different_that_admin_get(
+    public function it_serializes_shipping_method_if_item_operation_name_is_different_that_admin_get(
         OrderRepositoryInterface $orderRepository,
         ShipmentRepositoryInterface $shipmentRepository,
         ServiceRegistryInterface $shippingCalculators,
@@ -110,7 +110,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_if_the_normalizer_has_been_already_called(
+    public function it_throws_an_exception_if_the_normalizer_has_been_already_called(
         NormalizerInterface $normalizer,
         ShippingMethodInterface $shippingMethod
     ): void {
