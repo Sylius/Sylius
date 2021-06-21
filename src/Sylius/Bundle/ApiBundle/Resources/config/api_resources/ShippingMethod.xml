@@ -23,7 +23,7 @@
         </attribute>
 
         <attribute name="normalization_context">
-            <attribute name="groups">shop:shipping_method:read</attribute>
+            <attribute name="groups">admin:shipping_method:read</attribute>
         </attribute>
 
         <itemOperations>
