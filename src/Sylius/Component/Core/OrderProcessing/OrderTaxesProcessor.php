@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
+use Sylius\Component\Core\Resolver\TaxationAddressResolverInterface;
 use Sylius\Component\Core\Taxation\Exception\UnsupportedTaxCalculationStrategyException;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
@@ -39,19 +40,19 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
     /** @var PrioritizedServiceRegistryInterface */
     private $strategyRegistry;
 
-    /** @var bool */
-    private $defaultTaxationStrategy;
+    /** @var TaxationAddressResolverInterface|null */
+    private $taxationAddressResolver;
 
     public function __construct(
         ZoneProviderInterface $defaultTaxZoneProvider,
         ZoneMatcherInterface $zoneMatcher,
         PrioritizedServiceRegistryInterface $strategyRegistry,
-        bool $defaultTaxationStrategy = true
+        ?TaxationAddressResolverInterface $taxationAddressResolver
     ) {
         $this->defaultTaxZoneProvider = $defaultTaxZoneProvider;
         $this->zoneMatcher = $zoneMatcher;
         $this->strategyRegistry = $strategyRegistry;
-        $this->defaultTaxationStrategy = $defaultTaxationStrategy;
+        $this->taxationAddressResolver = $taxationAddressResolver;
     }
 
     public function process(BaseOrderInterface $order): void
@@ -84,11 +85,16 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
 
     private function getTaxZone(OrderInterface $order): ?ZoneInterface
     {
-        $billingAddress = $this->getTaxAddress($order);
+        $taxationAddress = $order->getBillingAddress();
+
+        if ($this->taxationAddressResolver) {
+            $taxationAddress = $this->taxationAddressResolver->getTaxationAddressFromOrder($order);
+        }
+
         $zone = null;
 
-        if (null !== $billingAddress) {
-            $zone = $this->zoneMatcher->match($billingAddress, Scope::TAX);
+        if (null !== $taxationAddress) {
+            $zone = $this->zoneMatcher->match($taxationAddress, Scope::TAX);
         }
 
         return $zone ?: $this->defaultTaxZoneProvider->getZone($order);
@@ -106,14 +112,5 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         foreach ($order->getShipments() as $shipment) {
             $shipment->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
         }
-    }
-
-    private function getTaxAddress(OrderInterface $order): ?AddressInterface
-    {
-        if (!$this->defaultTaxationStrategy) {
-            return $order->getShippingAddress();
-        }
-
-        return $order->getBillingAddress();
     }
 }

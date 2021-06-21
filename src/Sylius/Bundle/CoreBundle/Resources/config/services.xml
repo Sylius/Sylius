@@ -105,6 +105,10 @@
         </service>
         <service id="Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface" alias="sylius.shipping_method_resolver.default" />
 
+        <service id="sylius.taxation_address_resolver" class="Sylius\Component\Core\Resolver\TaxationAddressResolver">
+            <argument>%sylius_core.taxation.shipping_address_based_taxation%</argument>
+        </service>
+
         <service id="sylius.context.customer" class="Sylius\Bundle\CoreBundle\Context\CustomerContext">
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="security.authorization_checker" />
