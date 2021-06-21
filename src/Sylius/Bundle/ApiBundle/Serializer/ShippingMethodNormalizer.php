@@ -11,42 +11,52 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\DataProvider;
+namespace Sylius\Bundle\ApiBundle\Serializer;
 
-use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use ApiPlatform\Core\DataProvider\SubresourceDataProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
-use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class CartShippingMethodsSubresourceDataProvider implements RestrictedDataProviderInterface, SubresourceDataProviderInterface
+final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
 {
+    use NormalizerAwareTrait;
+
+    private const ALREADY_CALLED = 'shipping_method_normalizer_already_called';
+
     /** @var OrderRepositoryInterface */
     private $orderRepository;
 
     /** @var ShipmentRepositoryInterface */
     private $shipmentRepository;
 
-    /** @var ShippingMethodsResolverInterface */
-    private $shippingMethodsResolver;
+    /** @var ServiceRegistryInterface */
+    private $shippingCalculators;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         ShipmentRepositoryInterface $shipmentRepository,
-        ShippingMethodsResolverInterface $shippingMethodsResolver
+        ServiceRegistryInterface $shippingCalculators
     ) {
         $this->orderRepository = $orderRepository;
         $this->shipmentRepository = $shipmentRepository;
-        $this->shippingMethodsResolver = $shippingMethodsResolver;
+        $this->shippingCalculators = $shippingCalculators;
     }
 
-    public function getSubresource(string $resourceClass, array $identifiers, array $context, string $operationName = null)
+    public function normalize($object, $format = null, array $context = [])
     {
+        Assert::isInstanceOf($object, ShippingMethodInterface::class);
+        Assert::keyNotExists($context, self::ALREADY_CALLED);
+
+        $context[self::ALREADY_CALLED] = true;
+
         $subresourceIdentifiers = $context['subresource_identifiers'];
 
         /** @var OrderInterface|null $cart */
@@ -59,16 +69,31 @@ final class CartShippingMethodsSubresourceDataProvider implements RestrictedData
 
         Assert::true($cart->hasShipment($shipment), 'Shipment doesn\'t match for order');
 
-        return $this->shippingMethodsResolver->getSupportedMethods($shipment);
+        $data = $this->normalizer->normalize($object, $format, $context);
+
+        $calculator = $this->shippingCalculators->get($object->getCalculator());
+        $data['price'] = $calculator->calculate($shipment, $object->getConfiguration());
+
+        return $data;
     }
 
-    public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
+    public function supportsNormalization($data, $format = null, $context = []): bool
     {
+        if (isset($context[self::ALREADY_CALLED])) {
+            return false;
+        }
+
         $subresourceIdentifiers = $context['subresource_identifiers'] ?? null;
 
         return
-            is_a($resourceClass, ShippingMethodInterface::class, true) &&
+            $data instanceof ShippingMethodInterface &&
+            $this->isNotAdminGetOperation($context) &&
             isset($subresourceIdentifiers['tokenValue'], $subresourceIdentifiers['shipments'])
         ;
+    }
+
+    private function isNotAdminGetOperation(array $context): bool
+    {
+        return !isset($context['item_operation_name']) || !($context['item_operation_name'] === 'admin_get');
     }
 }

@@ -100,6 +100,17 @@
             </collectionOperation>
         </collectionOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="api_orders_shipments_methods_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>shop:shipping_method:read</attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
         <property name="createdAt" writable="false" />
