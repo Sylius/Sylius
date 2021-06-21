@@ -1,3 +1,7 @@
+# UPGRADE FROM `v1.9.4` TO `v1.9.5`
+
+1. `Sylius\Bundle\UserBundle\Authentication\AuthenticationFailureHandler` now needs the `translator`. Make sure to inject it using setter injection if you customized the `sylius.authentication.failure_handler` service definition.
+
 # UPGRADE FROM `v1.9.3` TO `v1.9.4`
 
 1. `Sylius\Bundle\ApiBundle\DataProvider\OrderCollectionDataProvider` has been removed and the same logic 
