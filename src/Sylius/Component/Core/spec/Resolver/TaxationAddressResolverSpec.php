@@ -22,7 +22,7 @@ final class TaxationAddressResolverSpec extends ObjectBehavior
 {
     public function let(): void
     {
-        $this->beConstructedWith(false, true);
+        $this->beConstructedWith(false);
     }
 
     public function it_implements_taxation_address_resolver_interface(): void
@@ -35,7 +35,6 @@ final class TaxationAddressResolverSpec extends ObjectBehavior
         AddressInterface $billingAddress,
         AddressInterface $shippingAddress
     ): void {
-        $this->beConstructedWith(false);
         $order->setBillingAddress($billingAddress);
         $order->setShippingAddress($shippingAddress);
 
