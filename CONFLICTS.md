@@ -22,10 +22,6 @@ references related issues.
    
    References: https://github.com/symfony/symfony/pull/40004
 
- - `api-platform/core:^2.6`:
-
-   API Platform 2.6 introduces a series of issues that make our Behat suite fail.
- 
  - `symfony/doctrine-bridge:4.4.16`:
 
    This version of Doctrine Bridge introduces a bug that causes an issue related to `ChannelPricing` mapping.
