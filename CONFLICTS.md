@@ -28,6 +28,10 @@ references related issues.
 
    References: https://github.com/Sylius/Sylius/issues/11970, https://github.com/symfony/symfony/issues/38861
 
+ - `symfony/polyfill-mbstring:^1.22.0`:
+
+   `polyfill-mbstring` ^1.22.0 potentially causes a problem with random segmentation faults. 
+
  - `symfony/property-info:4.4.22|5.2.7`:
 
    These versions of Symfony PropertyInfo Component introduce a bug with resolving wrong namespace for some translation entities 
