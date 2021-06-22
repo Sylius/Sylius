@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\ApiPlatform;
 
 /** @experimental */
-class ApiResourceConfigurationMerger implements ApiResourceConfigurationMergerInterface
+final class ApiResourceConfigurationMerger implements ApiResourceConfigurationMergerInterface
 {
     public function mergeConfigs(...$configs): array
     {

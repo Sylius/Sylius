@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\ApiPlatform;
 use ApiPlatform\Core\Metadata\Resource\ResourceMetadata;
 
 /** @experimental */
-class ResourceMetadataPropertyValueResolver implements ResourceMetadataPropertyValueResolverInteface
+final class ResourceMetadataPropertyValueResolver implements ResourceMetadataPropertyValueResolverInteface
 {
     /** @var ApiResourceConfigurationMergerInterface */
     private $apiResourceConfigurationMerger;

@@ -15,7 +15,7 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
         $this->beConstructedWith($apiResourceConfigurationMerger);
     }
 
-    function it_returns_merged_configs(ApiResourceConfigurationMerger $apiResourceConfigurationMerger): void
+    function it_returns_merged_configs(ApiResourceConfigurationMergerInterface $apiResourceConfigurationMerger): void
     {
         $resourceMetadata = new ResourceMetadata(
             null,
@@ -159,7 +159,7 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
         )->shouldReturn('child_short_name');
     }
 
-    public function it_throws_error_if_parent_data_is_array_and_child_type_is_different(ApiResourceConfigurationMerger $apiResourceConfigurationMerger): void
+    public function it_throws_error_if_parent_data_is_array_and_child_type_is_different(ApiResourceConfigurationMergerInterface $apiResourceConfigurationMerger): void
     {
         $resourceMetadata = new ResourceMetadata(
             'parent_short_name',

@@ -151,7 +151,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\ApiPlatform\ApiResourceConfigurationMerger" />
 
-        <service id="Sylius\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver" >
+        <service id="Sylius\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver">
             <argument type="service" id="Sylius\Bundle\ApiBundle\ApiPlatform\ApiResourceConfigurationMerger" />
         </service>
 
