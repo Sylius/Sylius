@@ -30,7 +30,6 @@ And add a parameter to your config:
 
     # app/config/packages/_sylius.yaml
     parameters:
-        sylius_core.public_dir: '%kernel.project_dir%/public'
-        sylius_core.taxation.shipping_address_based_taxation: false
+        sylius_core.taxation.shipping_address_based_taxation: true
 
 And with this change, the way how taxes are calculated is based on shipping address.

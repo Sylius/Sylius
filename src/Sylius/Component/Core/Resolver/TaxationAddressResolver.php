@@ -26,7 +26,7 @@ final class TaxationAddressResolver Implements TaxationAddressResolverInterface
         $this->shippingAddressBasedTaxation = $shippingAddressBasedTaxation;
     }
 
-    public function getTaxationAddressFromOrder(OrderInterface $order): AddressInterface
+    public function getTaxationAddressFromOrder(OrderInterface $order): ?AddressInterface
     {
         if ($this->shippingAddressBasedTaxation) {
             return $order->getShippingAddress();

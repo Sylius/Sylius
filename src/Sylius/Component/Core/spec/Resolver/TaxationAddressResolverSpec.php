@@ -30,7 +30,7 @@ final class TaxationAddressResolverSpec extends ObjectBehavior
         $this->shouldImplement(TaxationAddressResolverInterface::class);
     }
 
-    public function it_should_return_billing_address_from_order_if_it_has_default_parameter(
+    public function it_returns_billing_address_from_order_if_it_has_default_parameter(
         OrderInterface $order,
         AddressInterface $billingAddress,
         AddressInterface $shippingAddress
@@ -44,7 +44,7 @@ final class TaxationAddressResolverSpec extends ObjectBehavior
         $this->getTaxationAddressFromOrder($order)->shouldNotReturn($shippingAddress);
     }
 
-    public function it_should_return_shipping_address_from_order_if_parameter_is_true(
+    public function it_returns_shipping_address_from_order_if_parameter_is_true(
         OrderInterface $order,
         AddressInterface $billingAddress,
         AddressInterface $shippingAddress
@@ -58,5 +58,4 @@ final class TaxationAddressResolverSpec extends ObjectBehavior
         $this->getTaxationAddressFromOrder($order)->shouldReturn($shippingAddress);
         $this->getTaxationAddressFromOrder($order)->shouldNotReturn($billingAddress);
     }
-
 }
