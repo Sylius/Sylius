@@ -23,7 +23,6 @@
         <attribute name="name">
             <group>admin:payment:read</group>
             <group>admin:payment_method:read</group>
-            <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
             <group>shop:payment:read</group>
             <group>shop:payment_method:read</group>
