@@ -63,7 +63,7 @@ Sylius\Component\Product\Model\ProductVariantTranslation:
 Sylius\Component\Core\Model\ChannelPricing:
     channel_pricing_product_variant_mug_blue_web:
         channelCode: 'WEB'
-        price: 20
+        price: 2000
 
 Sylius\Component\Product\Model\ProductOption:
     product_option_color:
