@@ -9,27 +9,13 @@ as from 1st July 2021 the new taxation rules will be applied.
 
     You can learn more about new EU taxation rules `here <https://ec.europa.eu/taxation_customs/business/vat/modernising-vat-cross-border-ecommerce_en>`_.
 
-To change the way how the taxes are calculated: by billing or by shipping address, you need to declare ``OrderTaxesProcessor`` with
-additional argument in your config file:
-
-.. code-block:: yaml
-
-    # app/config/services.yaml
-        App\OrderProcessing\OrderTaxesProcessor:
-        arguments:
-            - '@sylius.provider.channel_based_default_zone_provider'
-            - '@sylius.zone_matcher'
-            - '@sylius.registry.tax_calculation_strategy'
-            - '@sylius.taxation_address_resolver'
-        tags:
-            - { name: sylius.order_processor, priority: 10 }
-
-And add a parameter to your config:
+To change the way how the taxes are calculated: by billing or by shipping address, you need to add a parameter to your config:
 
 .. code-block:: yaml
 
     # app/config/packages/_sylius.yaml
-    parameters:
-        sylius_core.taxation.shipping_address_based_taxation: true
+    sylius_core:
+        # resources definitions
+        shipping_address_based_taxation: true
 
-And with this change, the way how taxes are calculated is based on shipping address.
+And with this change, the way how taxes are calculated is now based on shipping address.
