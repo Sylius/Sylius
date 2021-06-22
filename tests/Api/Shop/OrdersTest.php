@@ -26,13 +26,7 @@ final class OrdersTest extends JsonApiTestCase
     /** @test */
     public function it_gets_an_order(): void
     {
-        $this->loadFixturesFromFiles([
-            'cart.yaml',
-            'country.yaml',
-            'zone.yaml',
-            'shipping_method.yaml',
-            'payment_method.yaml'
-        ]);
+        $this->loadFixturesFromFiles(['cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
         $tokenValue = 'nAWw2jewpA';
 

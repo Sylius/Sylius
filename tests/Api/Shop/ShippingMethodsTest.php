@@ -26,7 +26,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_available_shipping_methods(): void
     {
-        $this->loadFixturesFromFiles(['cart.yaml', 'country.yaml', 'zone.yaml', 'shipping_method.yaml']);
+        $this->loadFixturesFromFiles(['cart.yaml', 'country.yaml', 'shipping_method.yaml']);
 
         $tokenValue = 'nAWw2jewpA';
 
