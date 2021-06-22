@@ -150,3 +150,13 @@ Frontend
     frontend/webpack.rst
 
 .. include:: /cookbook/frontend/map.rst.inc
+
+Taxation
+--------
+
+.. toctree::
+    :hidden:
+
+    taxation/customize-tax-by-address
+
+.. include:: /cookbook/taxation/map.rst.inc
