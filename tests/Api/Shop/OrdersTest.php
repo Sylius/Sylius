@@ -21,12 +21,12 @@ use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class ShippingMethodsTest extends JsonApiTestCase
+final class OrdersTest extends JsonApiTestCase
 {
     /** @test */
-    public function it_gets_available_shipping_methods(): void
+    public function it_gets_an_order(): void
     {
-        $this->loadFixturesFromFiles(['cart.yaml', 'country.yaml', 'shipping_method.yaml']);
+        $this->loadFixturesFromFiles(['cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
         $tokenValue = 'nAWw2jewpA';
 
@@ -54,17 +54,8 @@ final class ShippingMethodsTest extends JsonApiTestCase
         $commandBus->dispatch($addressOrderCommand);
 
         $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::CONTENT_TYPE_HEADER);
-        $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
-
-        $this->client->request(
-            'GET',
-            sprintf('/api/v2/shop/orders/nAWw2jewpA/shipments/%s/methods', $orderResponse['shipments'][0]['id']),
-            [],
-            [],
-            self::CONTENT_TYPE_HEADER
-        );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_shipping_methods_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/get_order_response', Response::HTTP_OK);
     }
 }

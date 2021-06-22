@@ -1,0 +1,66 @@
+{
+    "@context": "\/api\/v2\/contexts\/Order",
+    "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA",
+    "@type": "Order",
+    "shippingAddress": {
+        "@id": "\/api\/v2\/shop\/addresses\/@integer@",
+        "@type": "Address",
+        "firstName": "John",
+        "lastName": "Doe",
+        "countryCode": "US",
+        "street": "Avenue",
+        "city": "New York",
+        "postcode": "90000"
+    },
+    "billingAddress": {
+        "@id": "\/api\/v2\/shop\/addresses\/@integer@",
+        "@type": "Address",
+        "firstName": "John",
+        "lastName": "Doe",
+        "countryCode": "US",
+        "street": "Avenue",
+        "city": "New York",
+        "postcode": "90000"
+    },
+    "payments": [
+        {
+            "@id": "\/api\/v2\/shop\/payments\/@integer@",
+            "@type": "Payment",
+            "id": @integer@,
+            "method": "\/api\/v2\/shop\/payment-methods\/CASH_ON_DELIVERY"
+        }
+    ],
+    "shipments": [
+        {
+            "@id": "\/api\/v2\/shop\/shipments\/@integer@",
+            "@type": "Shipment",
+            "id": @integer@,
+            "method": "\/api\/v2\/shop\/shipping-methods\/UPS"
+        }
+    ],
+    "currencyCode": "USD",
+    "localeCode": "en_US",
+    "checkoutState": "addressed",
+    "paymentState": "cart",
+    "shippingState": "cart",
+    "tokenValue": "nAWw2jewpA",
+    "id": @integer@,
+    "items": [
+        {
+            "@id": "\/api\/v2\/shop\/order-items\/@integer@",
+            "@type": "OrderItem",
+            "variant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
+            "productName": "Mug",
+            "id": @integer@,
+            "quantity": 3,
+            "unitPrice": 2000,
+            "total": 6000,
+            "subtotal": 6000
+        }
+    ],
+    "itemsTotal": 6000,
+    "total": 6500,
+    "taxTotal": 0,
+    "shippingTotal": 500,
+    "orderPromotionTotal": 0
+}
