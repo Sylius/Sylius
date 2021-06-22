@@ -554,8 +554,7 @@ Using the ``(unset)`` key you can also remove filters you don't need.
     '%sylius.model.product.class%':
         collectionOperations:
             shop_get:
-                filters (unset):
-                    - app.product_new_filter
+                filters (unset): ~
 
 If you need to add a new filter in the yaml configuration, simply add this kind of code to ``config/api_platform/config.yaml``.
 
