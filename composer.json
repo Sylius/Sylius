@@ -197,7 +197,7 @@
         "symfony/dotenv": "^4.4 || ^5.2",
         "symfony/flex": "^1.7",
         "symfony/web-profiler-bundle": "^4.4 || ^5.2",
-        "vimeo/psalm": "4.7.2"
+        "vimeo/psalm": "4.8.1"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
