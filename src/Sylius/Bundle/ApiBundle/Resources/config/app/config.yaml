@@ -27,6 +27,7 @@ api_platform:
         SM\SMException: 422
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser: 422
         Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved: 422
+        Sylius\Bundle\ApiBundle\Exception\OrderCannotBeShippedWithoutAddressing: 422
     collection:
         pagination:
             client_items_per_page: true
