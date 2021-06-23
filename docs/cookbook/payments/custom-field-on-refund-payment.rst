@@ -1,10 +1,11 @@
 How to customize the refund form?
 =================================
 
-    .. note::
-        This cookbook describes customization of a feature available only with `Sylius/RefundPlugin <https://github.com/Sylius/RefundPlugin/>`_ installed.
+.. note::
 
-        A refund form is the form in which, as an Administrator, you can specify the exact amounts of money that will be refunded to a Customer.
+    This cookbook describes customization of a feature available only with `Sylius/RefundPlugin <https://github.com/Sylius/RefundPlugin/>`_ installed.
+
+A refund form is the form in which, as an Administrator, you can specify the exact amounts of money that will be refunded to a Customer.
 
 Why would you customize the refund form?
 ----------------------------------------
@@ -23,7 +24,7 @@ Refunds are processed with such a flow: ``command -> handler -> event -> listene
 In this customization, we will be extending the refund form with a ``scheduledAt`` field,
 which might be used then for scheduling the payments in the payment gateway.
 
-1. Add the custom field to the Refund Payment:
+**1. Add the custom field to the Refund Payment:**
 
 Extended refund payment should look like this:
 
@@ -33,7 +34,7 @@ Extended refund payment should look like this:
 
     declare(strict_types=1);
 
-    namespace App\Entity;
+    namespace App\Entity\Refund;
 
     use Doctrine\ORM\Mapping as ORM;
     use Sylius\RefundPlugin\Entity\RefundPayment as BaseRefundPayment;
@@ -45,18 +46,18 @@ Extended refund payment should look like this:
     class RefundPayment extends BaseRefundPayment implements RefundPaymentInterface
     {
         /**
-         * @var \DateTime|null
+         * @var \DateTimeInterface|null
          *
          * @ORM\Column(type="datetime", nullable="true", name="scheduled_at")
          */
         protected $scheduledAt;
 
-        public function getScheduledAt(): ?\DateTime
+        public function getScheduledAt(): ?\DateTimeInterface
         {
             return $this->scheduledAt;
         }
 
-        public function setScheduledAt(\DateTime $scheduledAt): void
+        public function setScheduledAt(\DateTimeInterface $scheduledAt): void
         {
             $this->scheduledAt = $scheduledAt;
         }
@@ -70,15 +71,15 @@ It should implement a new interface:
 
     declare(strict_types=1);
 
-    namespace App\Entity;
+    namespace App\Entity\Refund;
 
     use Sylius\RefundPlugin\Entity\RefundPaymentInterface as BaseRefundPaymentInterface;
 
     interface RefundPaymentInterface extends BaseRefundPaymentInterface
     {
-        public function getScheduledAt(): ?\DateTime;
+        public function getScheduledAt(): ?\DateTimeInterface;
 
-        public function setScheduledAt(\DateTime $date): void;
+        public function setScheduledAt(\DateTimeInterface $date): void;
     }
 
 Remember to update resource configuration:
@@ -87,11 +88,11 @@ Remember to update resource configuration:
 
     # config/packages/sylius_refund.yaml
     sylius_resource:
-    resources:
-        sylius_refund.refund_payment:
-            classes:
-                model: App\Entity\RefundPayment
-                interface: App\Entity\RefundPaymentInterface
+        resources:
+            sylius_refund.refund_payment:
+                classes:
+                    model: App\Entity\Refund\RefundPayment
+                    interface: App\Entity\Refund\RefundPaymentInterface
 
 And update the database:
 
@@ -100,11 +101,17 @@ And update the database:
     php bin/console doctrine:migrations:diff
     php bin/console doctrine:migrations:migrate
 
-2. Modify the refund form:
+**2. Modify the refund form:**
 
 Once we have the new field on the Refund Payment, we will need to display its input on the refund form.
 We need to overwrite the template ``orderRefunds.html.twig`` from Refund Plugin.
 To achieve that copy the entire ``orderRefunds.html.twig`` to ``templates/bundles/SyliusRefundPlugin/orderRefunds.html.twig``.
+
+.. code-block:: bash
+
+    mkdir templates/bundles/SyliusRefundPlugin
+    cp vendor/sylius/refund-plugin/src/Resources/views/orderRefunds.html.twig templates/bundles/SyliusRefundPlugin
+
 Then add:
 
 .. code-block:: twig
@@ -114,7 +121,7 @@ Then add:
         <input type="date" name="sylius_scheduled_at" id="scheduled-at" />
     </div>
 
-3. Adjust the ``RefundUnits`` command:
+**3. Adjust the ``RefundUnits`` command:**
 
 We want the refund payments to be created with our extra ``scheduledAt`` date, therefore we need to provide this data in command,
 We will extend the ``RefundUnits`` command from Refund Plugin and add the new value:
@@ -131,7 +138,7 @@ We will extend the ``RefundUnits`` command from Refund Plugin and add the new va
 
     final class RefundUnits extends BaseRefundUnits
     {
-        /** @var \DateTime|null */
+        /** @var \DateTimeInterface|null */
         private $scheduledAt;
 
         public function __construct(
@@ -140,28 +147,28 @@ We will extend the ``RefundUnits`` command from Refund Plugin and add the new va
             array $shipments,
             int $paymentMethodId,
             string $comment,
-            ?\DateTime $scheduledAt
+            ?\DateTimeInterface $scheduledAt
         ) {
             parent::__construct($orderNumber, $units, $shipments, $paymentMethodId, $comment);
+
             $this->scheduledAt = $scheduledAt;
         }
 
-        public function getScheduledAt(): ?\DateTime
+        public function getScheduledAt(): ?\DateTimeInterface
         {
             return $this->scheduledAt;
         }
 
-        public function setScheduledAt(?\DateTime $scheduledAt): void
+        public function setScheduledAt(?\DateTimeInterface $scheduledAt): void
         {
             $this->scheduledAt = $scheduledAt;
         }
     }
 
-
-4. Update the ``RefundUnitsCommandCreator``:
+**4. Update the ``RefundUnitsCommandCreator``:**
 
 The controller related to the refund form dispatches the ``RefundUnits`` command, and there is a service that creates a command from request,
-so we need to overwrite the ``Sylius\RefundPlugin\Creator\RefundUnitsCommandCreatorInterface``:
+so we need to overwrite the ``Sylius\RefundPlugin\Creator\RefundUnitsCommandCreator``:
 
 .. code-block:: php
 
@@ -275,7 +282,7 @@ And register the new service:
             - '@Sylius\RefundPlugin\Calculator\UnitRefundTotalCalculatorInterface'
 
 
-5. Modify the ``RefundUnitsHandler``:
+**5. Modify the ``RefundUnitsHandler``:**
 
 Now, when we have a new command, we also need to overwrite the related command handler:
 
@@ -374,7 +381,7 @@ And register it:
         tags:
             - { name: messenger.message_handler, bus: sylius.command_bus }
 
-6. Modify the ``UnitsReturned`` event:
+**6. Modify the ``UnitsReturned`` event:**
 
 In previous command handler we are dispatching a new event so now we need to create this event and related event handler:
 
@@ -392,8 +399,8 @@ event:
 
     class UnitsRefunded extends BaseUnitsRefunded
     {
-        /** @var \DateTime */
-        public $futureDate;
+        /** @var \DateTimeInterface */
+        protected $scheduledAt;
 
         public function __construct(
             string $orderNumber,
@@ -406,16 +413,17 @@ event:
             \DateTime $scheduledAt
         ) {
             parent::__construct($orderNumber, $units, $shipments, $paymentMethodId, $amount, $currencyCode, $comment);
-            $this->futureDate = $futureDate;
+
+            $this->scheduledAt = $scheduledAt;
         }
 
-        public function getScheduledAt(): \DateTime
+        public function getScheduledAt(): \DateTimeInterface
         {
             return $this->scheduledAt;
         }
     }
 
-And handler:
+And process manager to handle the new event:
 
 .. code-block:: php
 
@@ -510,18 +518,18 @@ And register it:
 .. code-block:: yaml
 
     Sylius\RefundPlugin\ProcessManager\RefundPaymentProcessManager:
-            class: App\ProcessManager\RefundPaymentProcessManager
-            arguments:
-                - '@Sylius\RefundPlugin\StateResolver\OrderFullyRefundedStateResolverInterface'
-                - '@Sylius\RefundPlugin\Provider\RelatedPaymentIdProviderInterface'
-                - '@App\Factory\RefundPaymentFactory'
-                - '@sylius.repository.order'
-                - '@doctrine.orm.default_entity_manager'
-                - '@sylius.event_bus'
-            tags:
-                - {name: sylius_refund.units_refunded.process_step, priority: 50}
+        class: App\ProcessManager\RefundPaymentProcessManager
+        arguments:
+            - '@Sylius\RefundPlugin\StateResolver\OrderFullyRefundedStateResolverInterface'
+            - '@Sylius\RefundPlugin\Provider\RelatedPaymentIdProviderInterface'
+            - '@App\Factory\RefundPaymentFactory'
+            - '@sylius.repository.order'
+            - '@doctrine.orm.default_entity_manager'
+            - '@sylius.event_bus'
+        tags:
+            - {name: sylius_refund.units_refunded.process_step, priority: 50}
 
-7. Create the Payment Factory:
+**7. Create the Payment Factory:**
 
 In our handler we have used a new Factory, so now it is time to implement it:
 
@@ -533,25 +541,21 @@ In our handler we have used a new Factory, so now it is time to implement it:
 
     namespace App\Factory;
 
+    use App\Entity\Refund\RefundPayment;
+    use App\Entity\Refund\RefundPaymentInterface;
     use Sylius\Component\Core\Model\OrderInterface;
     use Sylius\Component\Core\Model\PaymentMethodInterface;
     use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
-    use App\Entity\RefundPayment;
     use Sylius\RefundPlugin\Entity\RefundPaymentInterface as BaseRefundPaymentInterface;
-    use App\Entity\RefundPaymentInterface;
     use Sylius\RefundPlugin\Factory\RefundPaymentFactoryInterface;
 
     final class RefundPaymentFactory implements RefundPaymentFactoryInterface
     {
-        /** @var RefundPaymentFactoryInterface */
-        private $baseRefundPaymentFactory;
-
         /** @var PaymentMethodRepositoryInterface */
         private $paymentMethodRepository;
 
-        public function __construct($baseRefundPaymentFactory, $paymentMethodRepository)
+        public function __construct($paymentMethodRepository)
         {
-            $this->baseRefundPaymentFactory = $baseRefundPaymentFactory;
             $this->paymentMethodRepository = $paymentMethodRepository;
         }
 
@@ -562,7 +566,10 @@ In our handler we have used a new Factory, so now it is time to implement it:
             string $state,
             int $paymentMethodId
         ): BaseRefundPaymentInterface {
-            return $this->baseRefundPaymentFactory->createWithData($order, $amount, $currencyCode, $state, $paymentMethodId);
+            /** @var PaymentMethodInterface $paymentMethod */
+            $paymentMethod = $this->paymentMethodRepository->find($paymentMethodId);
+
+            return new RefundPayment($order, $amount, $currencyCode, $state, $paymentMethod);
         }
 
         public function createWithDataAndDate(
@@ -589,13 +596,19 @@ And register it:
 
     App\Factory\RefundPaymentFactory:
         arguments:
-            - '@Sylius\RefundPlugin\Factory\RefundPaymentFactoryInterface'
             - '@sylius.repository.payment_method'
 
-8. Display the new field on the refund payment:
+**8. Display the new field on the refund payment:**
 
 And as the last step, we need to overwrite the template ``_refundPayments.html.twig`` from Refund Plugin.
-Copy the entire ``_refundPayments.html.twig`` to ``templates/bundles/SyliusRefundPlugin/Order/Admin/_refundPayments.html.twig`` and add replace ``header`` with:
+Copy the entire ``_refundPayments.html.twig`` to ``templates/bundles/SyliusRefundPlugin/Order/Admin/_refundPayments.html.twig``:
+
+.. code-block:: bash
+
+    mkdir -p templates/bundles/SyliusRefundPlugin/Order/Admin
+    cp vendor/sylius/refund-plugin/src/Resources/views/Order/Admin/_refundPayments.html.twig templates/bundles/SyliusRefundPlugin/Order/Admin/
+
+And replace ``header`` with:
 
 .. code-block:: twig
 
@@ -603,5 +616,5 @@ Copy the entire ``_refundPayments.html.twig`` to ``templates/bundles/SyliusRefun
         {{ refund_payment.paymentMethod  }} {%  if refund_payment.scheduledAt is not null %} (Payment should be made in {{ refund_payment.scheduledAt|date('Y-M-d') }}) {% endif %}
     </div>
 
-
-And now it is everything, we have new field on `RefundPayment` with future date (when admin should make the payment), in your application you probably will add crone for automatize it.
+And that's it, we have a new field on Refund Payment with a "scheduled at" date (when admin/payment gateway
+should make the payment), in your application, you probably will add crone to automatize it.
