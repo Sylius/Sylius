@@ -15,11 +15,13 @@ namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
+use Sylius\Component\Core\Resolver\TaxationAddressResolverInterface;
 use Sylius\Component\Core\Taxation\Exception\UnsupportedTaxCalculationStrategyException;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
@@ -38,14 +40,22 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
     /** @var PrioritizedServiceRegistryInterface */
     private $strategyRegistry;
 
+    /** @var TaxationAddressResolverInterface|null */
+    private $taxationAddressResolver;
+
     public function __construct(
         ZoneProviderInterface $defaultTaxZoneProvider,
         ZoneMatcherInterface $zoneMatcher,
-        PrioritizedServiceRegistryInterface $strategyRegistry
+        PrioritizedServiceRegistryInterface $strategyRegistry,
+        ?TaxationAddressResolverInterface $taxationAddressResolver = null
     ) {
         $this->defaultTaxZoneProvider = $defaultTaxZoneProvider;
         $this->zoneMatcher = $zoneMatcher;
         $this->strategyRegistry = $strategyRegistry;
+        $this->taxationAddressResolver = $taxationAddressResolver;
+        if ($this->taxationAddressResolver === null) {
+            @trigger_error(sprintf('Not passing a $taxationAddressResolver to %s constructor is deprecated since Sylius 1.11 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+        }
     }
 
     public function process(BaseOrderInterface $order): void
@@ -78,11 +88,16 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
 
     private function getTaxZone(OrderInterface $order): ?ZoneInterface
     {
-        $billingAddress = $order->getBillingAddress();
+        $taxationAddress = $order->getBillingAddress();
+
+        if ($this->taxationAddressResolver) {
+            $taxationAddress = $this->taxationAddressResolver->getTaxationAddressFromOrder($order);
+        }
+
         $zone = null;
 
-        if (null !== $billingAddress) {
-            $zone = $this->zoneMatcher->match($billingAddress, Scope::TAX);
+        if (null !== $taxationAddress) {
+            $zone = $this->zoneMatcher->match($taxationAddress, Scope::TAX);
         }
 
         return $zone ?: $this->defaultTaxZoneProvider->getZone($order);

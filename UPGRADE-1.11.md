@@ -47,3 +47,17 @@
         }
     ]
     ```
+
+1. Constructor of `Core/OrderProcessing/OrderTaxesProcessor.php` has been changed where new service implementing
+   `TaxationAddressResolverInterface` will become mandatory from Sylius version 2.0:
+
+    ```diff
+        public function __construct(
+            ZoneProviderInterface $defaultTaxZoneProvider,
+            ZoneMatcherInterface $zoneMatcher,
+            PrioritizedServiceRegistryInterface $strategyRegistry,
+    +       ?TaxationAddressResolverInterface $taxationAddressResolver = null
+        ) {
+            ...
+        }
+    ```
