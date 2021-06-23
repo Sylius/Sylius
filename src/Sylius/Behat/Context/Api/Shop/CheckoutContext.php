@@ -422,11 +422,13 @@ final class CheckoutContext implements Context
     /**
      * @Then I should be notified that the order should be addressed first
      */
-    public function iShouldBeNotifiedThatTheOrderShouldBeAddressedFirst()
+    public function iShouldBeNotifiedThatTheOrderShouldBeAddressedFirst(): void
     {
-        Assert::same($this->ordersClient->getLastResponse()->getStatusCode(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        $response = $this->ordersClient->getLastResponse();
 
-        $content = json_decode($this->ordersClient->getLastResponse()->getContent(), true);
+        Assert::same($response->getStatusCode(), Response::HTTP_UNPROCESSABLE_ENTITY);
+
+        $content = json_decode($response->getContent(), true);
 
         Assert::same($content['message'], 'Order should be addressed first.');
     }

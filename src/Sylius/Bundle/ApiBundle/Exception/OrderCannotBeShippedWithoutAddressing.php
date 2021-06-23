@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Exception;
 
-class OrderCannotBeShippedWithoutAddressing extends \RuntimeException
+final class OrderCannotBeShippedWithoutAddressing extends \RuntimeException
 {
     public function __construct()
     {
