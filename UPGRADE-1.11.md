@@ -61,3 +61,17 @@
             ...
         }
     ```
+
+1. Constructor of `ApiBundle/Serializer/ProductVariantNormalizer.php` has been extended with `SectionProviderInterface`
+    parameter:
+
+    ```diff
+        public function __construct(
+            ProductVariantPricesCalculatorInterface $priceCalculator,
+            ChannelContextInterface $channelContext,
+            AvailabilityCheckerInterface $availabilityChecker,
+    +       SectionProviderInterface $uriBasedSectionContext
+        ) {
+            ...
+        }
+    ```
