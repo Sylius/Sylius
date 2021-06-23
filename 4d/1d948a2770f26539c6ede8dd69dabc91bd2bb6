@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------
+
+by arti0090 at 2021-06-18T06:37:21Z
+
+If this PR will be confirmed positively I think there would be needed and note in upgrade file about constructor, and maybe this PR should have branch changed to 1.10 .
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2021-06-18T11:13:41Z
+
+@arti0090 is this meant to solve https://github.com/Sylius/Sylius/issues/10946?
+
+---------------------------------------------------------------------------
+
+by arti0090 at 2021-06-18T11:16:03Z
+
+Hi @vvasiloi and alter ego @victor-v-bv  😄  Well this is one way of how to fix this, the second is here https://github.com/Sylius/Sylius/pull/12724 but I am looking to discuss / find which way to go.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2021-06-23T05:32:54Z
+
+Thank you, @arti0090! :tada:
