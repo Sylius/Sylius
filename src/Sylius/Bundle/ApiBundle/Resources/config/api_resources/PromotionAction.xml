@@ -33,6 +33,33 @@
 
         <property name="id" identifier="true" writable="false" />
         <property name="type" readable="true" />
-        <property name="configuration" readable="true" />
+        <property name="configuration" readable="true">
+            <attribute name="openapi_context">
+                <attribute name="type">object</attribute>
+                <attribute name="example">
+                    <attribute name="shopName?">
+                        <attribute name="amount?">0</attribute>
+                        <attribute name="percentage?">0</attribute>
+                        <attribute name="filters?">
+                            <attribute name="price_range_filter">
+                                <attribute name="min">0</attribute>
+                                <attribute name="max">0</attribute>
+                            </attribute>
+                            <attribute name="taxons_filter">
+                                <attribute name="taxons">
+                                    <attribute>code</attribute>
+                                </attribute>
+                            </attribute>
+                            <attribute name="products_filter">
+                                <attribute name="products">
+                                    <attribute>code</attribute>
+                                </attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                    <attribute name="percentage?">0</attribute>
+                </attribute>
+            </attribute>
+        </property>
     </resource>
 </resources>
