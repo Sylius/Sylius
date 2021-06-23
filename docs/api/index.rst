@@ -20,18 +20,6 @@ This part of the documentation is about the currently developed unified API for 
 
 .. include:: /api/unified_api/map.rst.inc
 
-Admin API
----------
-
-This part of the documentation is about the old Admin API for the Sylius platform.
-
-.. toctree::
-    :hidden:
-
-    admin_api/index
-
-.. include:: /api/admin_api/map.rst.inc
-
 Shop API
 --------
 

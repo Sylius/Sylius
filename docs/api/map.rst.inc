@@ -1,1 +1,1 @@
-* :doc:`/api/admin_api/index`
+* :doc:`/api/unified_api/index`
