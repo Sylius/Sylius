@@ -1,0 +1,12 @@
+Sylius\Component\Core\Model\Address:
+    address:
+        firstName: "John"
+        lastName: "Doe"
+        company: "CocaCola"
+        street: "Green Avenue"
+        countryCode: "US"
+        city: "New York"
+        postcode: "00000"
+        phoneNumber: "123456789"
+        provinceCode: "999"
+        provinceName: "east"

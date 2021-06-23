@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 use Doctrine\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
+use Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -44,18 +45,23 @@ final class AddressOrderHandler implements MessageHandlerInterface
     /** @var StateMachineFactoryInterface */
     private $stateMachineFactory;
 
+    /** @var AddressMapperInterface */
+    private $addressMapper;
+
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         CustomerRepositoryInterface $customerRepository,
         FactoryInterface $customerFactory,
         ObjectManager $manager,
-        StateMachineFactoryInterface $stateMachineFactory
+        StateMachineFactoryInterface $stateMachineFactory,
+        AddressMapperInterface $addressMapper
     ) {
         $this->orderRepository = $orderRepository;
         $this->customerRepository = $customerRepository;
         $this->customerFactory = $customerFactory;
         $this->manager = $manager;
         $this->stateMachineFactory = $stateMachineFactory;
+        $this->addressMapper = $addressMapper;
     }
 
     public function __invoke(AddressOrder $addressOrder): OrderInterface
@@ -83,15 +89,18 @@ final class AddressOrderHandler implements MessageHandlerInterface
         $shippingAddress = $order->getShippingAddress();
 
         if ($billingAddress !== null) {
-            $this->manager->remove($billingAddress);
+            $order->setBillingAddress($this->addressMapper->mapExisting($billingAddress, $addressOrder->billingAddress));
+        } else {
+            $order->setBillingAddress($addressOrder->billingAddress);
         }
+
+        $newShippingAddress = $addressOrder->shippingAddress ?? clone $addressOrder->billingAddress;
 
         if ($shippingAddress !== null) {
-            $this->manager->remove($shippingAddress);
+            $order->setShippingAddress($this->addressMapper->mapExisting($shippingAddress, $newShippingAddress));
+        } else {
+            $order->setShippingAddress($newShippingAddress);
         }
-
-        $order->setBillingAddress($addressOrder->billingAddress);
-        $order->setShippingAddress($addressOrder->shippingAddress ?? clone $addressOrder->billingAddress);
 
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
 

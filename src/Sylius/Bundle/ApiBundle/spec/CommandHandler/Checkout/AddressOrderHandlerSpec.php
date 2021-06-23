@@ -19,6 +19,7 @@ use Prophecy\Argument;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
+use Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -34,14 +35,16 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         CustomerRepositoryInterface $customerRepository,
         FactoryInterface $customerFactory,
         ObjectManager $manager,
-        StateMachineFactoryInterface $stateMachineFactory
+        StateMachineFactoryInterface $stateMachineFactory,
+        AddressMapperInterface $addressMapper
     ): void {
         $this->beConstructedWith(
             $orderRepository,
             $customerRepository,
             $customerFactory,
             $manager,
-            $stateMachineFactory
+            $stateMachineFactory,
+            $addressMapper
         );
     }
 
@@ -195,11 +198,12 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $this($addressOrder);
     }
 
-    function it_deletes_old_order_address_while_creating_new_addresses_for_already_addressed_order(
+    function it_updates_order_address_based_on_data_form_new_order_address(
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $customerFactory,
         ObjectManager $manager,
         StateMachineFactoryInterface $stateMachineFactory,
+        AddressMapperInterface $addressMapper,
         CustomerInterface $customer,
         AddressInterface $newBillingAddress,
         AddressInterface $newShippingAddress,
@@ -225,10 +229,12 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $order->setCustomer($customer)->shouldBeCalled();
         $order->getBillingAddress()->willReturn($oldBillingAddress);
         $order->getShippingAddress()->willReturn($oldShippingAddress);
-        $manager->remove($oldBillingAddress)->shouldBeCalled();
-        $manager->remove($oldShippingAddress)->shouldBeCalled();
-        $order->setBillingAddress($newBillingAddress)->shouldBeCalled();
-        $order->setShippingAddress($newShippingAddress)->shouldBeCalled();
+
+        $addressMapper->mapExisting($oldBillingAddress, $newBillingAddress)->willReturn($oldBillingAddress);
+        $addressMapper->mapExisting($oldShippingAddress, $newShippingAddress)->willReturn($oldShippingAddress);
+
+        $order->setBillingAddress($oldBillingAddress)->shouldBeCalled();
+        $order->setShippingAddress($oldShippingAddress)->shouldBeCalled();
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(true);

@@ -1,0 +1,9 @@
+Sylius\Component\Core\Model\Order:
+    order:
+        channel: "@channel_web"
+        currencyCode: "USD"
+        localeCode: "en_US"
+        state: "cart"
+        tokenValue: "token"
+        billingAddress: "@address"
+        shippingAddress: "@address"

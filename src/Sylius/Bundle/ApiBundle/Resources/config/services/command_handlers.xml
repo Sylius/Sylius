@@ -61,6 +61,7 @@
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="sylius.manager.customer" />
             <argument type="service" id="sm.factory" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>

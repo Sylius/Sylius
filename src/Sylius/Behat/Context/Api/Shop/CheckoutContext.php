@@ -191,7 +191,8 @@ final class CheckoutContext implements Context
 
     /**
      * @When /^I specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
-     * @When /^the (?:customer|visitor) (?:specifies|changes) the billing (address to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @When /^the visitor changes the billing (address to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @When /^the (?:customer|visitor) specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^I specify the billing (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      * @Given /^the (?:visitor|customer) has specified (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      */
@@ -504,7 +505,8 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) should be filled as (billing) address$/
+     * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as (billing) address$/
+     * @Then /^the visitor should has ("[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+" specified as) (billing) address$/
      */
     public function addressShouldBeFilledAsBillingAddress(AddressInterface $address, string $addressType): void
     {
@@ -512,7 +514,8 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) should be filled as (shipping) address$/
+     * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as (shipping) address$/
+     * @Then /^the visitor should has ("[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+" specified as) (shipping) address$/
      */
     public function addressShouldBeFilledAsShippingAddress(AddressInterface $address, string $addressType): void
     {
