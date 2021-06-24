@@ -436,7 +436,9 @@ And process manager to handle the new event:
     use App\Entity\Refund\RefundPaymentInterface as AppRefundPaymentInterface;
     use Doctrine\ORM\EntityManagerInterface;
     use Sylius\Component\Core\Model\OrderInterface;
+    use Sylius\Component\Core\Model\PaymentMethodInterface;
     use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+    use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
     use Sylius\RefundPlugin\Entity\RefundPaymentInterface;
     use Sylius\RefundPlugin\Event\RefundPaymentGenerated;
     use Sylius\RefundPlugin\Event\UnitsRefunded;
@@ -461,6 +463,9 @@ And process manager to handle the new event:
         /** @var OrderRepositoryInterface */
         private $orderRepository;
 
+        /** @var PaymentMethodRepositoryInterface */
+        private $paymentMethodRepository;
+
         /** @var EntityManagerInterface */
         private $entityManager;
 
@@ -472,6 +477,7 @@ And process manager to handle the new event:
             RelatedPaymentIdProviderInterface $relatedPaymentIdProvider,
             RefundPaymentFactoryInterface $refundPaymentFactory,
             OrderRepositoryInterface $orderRepository,
+            PaymentMethodRepositoryInterface $paymentMethodRepository,
             EntityManagerInterface $entityManager,
             MessageBusInterface $eventBus
         ) {
@@ -479,6 +485,7 @@ And process manager to handle the new event:
             $this->relatedPaymentIdProvider = $relatedPaymentIdProvider;
             $this->refundPaymentFactory = $refundPaymentFactory;
             $this->orderRepository = $orderRepository;
+            $this->paymentMethodRepository = $paymentMethodRepository;
             $this->entityManager = $entityManager;
             $this->eventBus = $eventBus;
         }
@@ -489,14 +496,19 @@ And process manager to handle the new event:
             $order = $this->orderRepository->findOneByNumber($unitsRefunded->orderNumber());
             Assert::notNull($order);
 
-            $refundPayment = $this->refundPaymentFactory->createWithDataAndDate(
+            /** @var PaymentMethodInterface|null $paymentMethod */
+            $paymentMethod = $this->paymentMethodRepository->find($unitsRefunded->paymentMethodId());
+            Assert::notNull($paymentMethod);
+
+            /** @var AppRefundPaymentInterface $refundPayment */
+            $refundPayment = $this->refundPaymentFactory->createWithData(
                 $order,
                 $unitsRefunded->amount(),
                 $unitsRefunded->currencyCode(),
                 RefundPaymentInterface::STATE_NEW,
-                $unitsRefunded->paymentMethodId(),
-                $unitsRefunded->getScheduledAt()
+                $paymentMethod
             );
+            $refundPayment->setScheduledAt($unitsRefunded->getScheduledAt());
 
             $this->entityManager->persist($refundPayment);
             $this->entityManager->flush();
@@ -523,83 +535,15 @@ And register it:
         arguments:
             - '@Sylius\RefundPlugin\StateResolver\OrderFullyRefundedStateResolverInterface'
             - '@Sylius\RefundPlugin\Provider\RelatedPaymentIdProviderInterface'
-            - '@App\Factory\RefundPaymentFactory'
+            - '@sylius_refund.factory.refund_payment'
             - '@sylius.repository.order'
+            - '@sylius.repository.payment_method'
             - '@doctrine.orm.default_entity_manager'
             - '@sylius.event_bus'
         tags:
             - {name: sylius_refund.units_refunded.process_step, priority: 50}
 
-**7. Create the Payment Factory:**
-
-In our handler we have used a new Factory, so now it is time to implement it:
-
-.. code-block:: php
-
-    <?php
-
-    declare(strict_types=1);
-
-    namespace App\Factory;
-
-    use App\Entity\Refund\RefundPayment;
-    use App\Entity\Refund\RefundPaymentInterface;
-    use Sylius\Component\Core\Model\OrderInterface;
-    use Sylius\Component\Core\Model\PaymentMethodInterface;
-    use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
-    use Sylius\RefundPlugin\Entity\RefundPaymentInterface as BaseRefundPaymentInterface;
-    use Sylius\RefundPlugin\Factory\RefundPaymentFactoryInterface;
-
-    final class RefundPaymentFactory implements RefundPaymentFactoryInterface
-    {
-        /** @var PaymentMethodRepositoryInterface */
-        private $paymentMethodRepository;
-
-        public function __construct($paymentMethodRepository)
-        {
-            $this->paymentMethodRepository = $paymentMethodRepository;
-        }
-
-        public function createWithData(
-            OrderInterface $order,
-            int $amount,
-            string $currencyCode,
-            string $state,
-            int $paymentMethodId
-        ): BaseRefundPaymentInterface {
-            /** @var PaymentMethodInterface $paymentMethod */
-            $paymentMethod = $this->paymentMethodRepository->find($paymentMethodId);
-
-            return new RefundPayment($order, $amount, $currencyCode, $state, $paymentMethod);
-        }
-
-        public function createWithDataAndDate(
-            OrderInterface $order,
-            int $amount,
-            string $currencyCode,
-            string $state,
-            int $paymentMethodId,
-            \DateTime $date
-        ): RefundPaymentInterface {
-            /** @var PaymentMethodInterface $paymentMethod */
-            $paymentMethod = $this->paymentMethodRepository->find($paymentMethodId);
-
-            $payment = new RefundPayment($order, $amount, $currencyCode, $state, $paymentMethod);
-            $payment->setScheduledAt($date);
-
-            return $payment;
-        }
-    }
-
-And register it:
-
-.. code-block:: yaml
-
-    App\Factory\RefundPaymentFactory:
-        arguments:
-            - '@sylius.repository.payment_method'
-
-**8. Display the new field on the refund payment:**
+**7. Display the new field on the refund payment:**
 
 And as the last step, we need to overwrite the template ``_refundPayments.html.twig`` from Refund Plugin.
 Copy the entire ``_refundPayments.html.twig`` to ``templates/bundles/SyliusRefundPlugin/Order/Admin/_refundPayments.html.twig``:
