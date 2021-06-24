@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
-use Sylius\Bundle\ApiBundle\Exception\OrderCannotBeShippedWithoutAddressing;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
@@ -66,10 +65,6 @@ final class ChooseShippingMethodHandler implements MessageHandlerInterface
         Assert::notNull($cart, 'Cart has not been found.');
 
         $stateMachine = $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH);
-
-        if ($cart->getShippingAddress() === null) {
-            throw new OrderCannotBeShippedWithoutAddressing();
-        }
 
         Assert::true(
             $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING),

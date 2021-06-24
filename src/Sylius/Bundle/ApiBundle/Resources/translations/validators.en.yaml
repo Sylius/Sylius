@@ -24,3 +24,4 @@ sylius:
     shipping_method:
         not_found: 'The shipping method with %code% code does not exist.'
         not_available: 'The shipping method %name% is not available for this order. Please reselect your shipping method.'
+        shipping_address_not_found: 'Order should be addressed first.'
