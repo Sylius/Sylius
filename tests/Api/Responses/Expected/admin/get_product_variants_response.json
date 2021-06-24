@@ -1,0 +1,20 @@
+{
+    "@context":"\/api\/v2\/contexts\/ProductVariant",
+    "@id":"\/api\/v2\/admin\/product-variants\/MUG",
+    "@type":"ProductVariant",
+    "id":"@integer@",
+    "code":"MUG",
+    "product":"\/api\/v2\/admin\/products\/MUG_SW",
+    "optionValues":[],
+    "translations":
+        {
+            "en_US":
+                {
+                    "@id":"\/api\/v2\/admin\/product-variant-translation\/@integer@",
+                    "@type":"ProductVariantTranslation",
+                    "id":"@integer@",
+                    "name":"Mug",
+                    "locale":"en_US"
+                }
+        }
+}

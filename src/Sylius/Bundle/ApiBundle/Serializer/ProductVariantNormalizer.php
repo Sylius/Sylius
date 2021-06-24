@@ -82,10 +82,10 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
             return false;
         }
 
-        return $data instanceof ProductVariantInterface && $this->isNotAdminGetOperation();
+        return $data instanceof ProductVariantInterface && $this->isNotAdminApiSection();
     }
 
-    private function isNotAdminGetOperation(): bool
+    private function isNotAdminApiSection(): bool
     {
         return !$this->uriBasedSectionContext->getSection() instanceof AdminApiSection;
     }

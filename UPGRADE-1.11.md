@@ -63,7 +63,7 @@
     ```
 
 1. Constructor of `ApiBundle/Serializer/ProductVariantNormalizer.php` has been extended with `SectionProviderInterface`
-    parameter:
+    argument:
 
     ```diff
         public function __construct(

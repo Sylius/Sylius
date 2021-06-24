@@ -26,7 +26,7 @@ final class ProductVariantTest extends JsonApiTestCase
         $this->client->request('GET', '/api/v2/admin/product-variants/MUG');
 
         $response = $this->client->getResponse();
-        $this->assertSame(401, $response->getStatusCode());
+        $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
     }
 
     /** @test */
@@ -57,6 +57,6 @@ final class ProductVariantTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'admin/get_product_variant_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'admin/get_product_variants_response', Response::HTTP_OK);
     }
 }

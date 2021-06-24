@@ -48,7 +48,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         ShopApiSection $shopApiSection
     ): void {
         $sectionProvider->getSection()->willReturn($shopApiSection);
-        $this->supportsNormalization($variant, null, ['item_operation_name' => 'shop_get'])->shouldReturn(true);
+        $this->supportsNormalization($variant)->shouldReturn(true);
     }
 
     function it_does_not_support_if_section_is_admin_get(
@@ -57,7 +57,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         AdminApiSection $adminApiSection
     ): void {
         $sectionProvider->getSection()->willReturn($adminApiSection);
-        $this->supportsNormalization($variant, null, ['item_operation_name' => 'admin_get'])->shouldReturn(false);
+        $this->supportsNormalization($variant)->shouldReturn(false);
     }
 
     function it_does_not_support_if_the_normalizer_has_been_already_called(ProductVariantInterface $variant): void

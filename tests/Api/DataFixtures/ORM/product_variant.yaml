@@ -5,13 +5,13 @@ Sylius\Component\Core\Model\Product:
         code: MUG_SW
 
 Sylius\Component\Product\Model\ProductVariantTranslation:
-    productVariantTranslation:
+    product_variant_translation:
         name: "Mug"
         locale: en_US
-        translatable: "@productVariant"
+        translatable: "@product_variant"
 
 Sylius\Component\Core\Model\ProductVariant:
-    productVariant:
+    product_variant:
         code: MUG
         version: 1
         product: "@product"
@@ -19,4 +19,4 @@ Sylius\Component\Core\Model\ProductVariant:
         currentLocale: en
         position: 1
         translations:
-            - "@productVariantTranslation"
+            - "@product_variant_translation"
