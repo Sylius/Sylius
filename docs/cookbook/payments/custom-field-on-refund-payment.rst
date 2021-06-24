@@ -105,7 +105,7 @@ And update the database:
 
 Once we have the new field on the Refund Payment, we will need to display its input on the refund form.
 We need to overwrite the template ``orderRefunds.html.twig`` from Refund Plugin.
-To achieve that copy the entire ``orderRefunds.html.twig`` to ``templates/bundles/SyliusRefundPlugin/orderRefunds.html.twig``.
+To achieve that copy the entire ``orderRefunds.html.twig`` to ``templates/bundles/SyliusRefundPlugin/orderRefunds.html.twig``:
 
 .. code-block:: bash
 
@@ -313,7 +313,6 @@ Now, when we have a new command, we also need to overwrite the related command h
             $currencyCode = $order->getCurrencyCode();
             Assert::notNull($currencyCode);
 
-            // Dispatching a new event
             $this->eventBus->dispatch(new UnitsRefunded(
                 $orderNumber,
                 $command->units(),
@@ -359,7 +358,7 @@ event:
 
     use Sylius\RefundPlugin\Event\UnitsRefunded as BaseUnitsRefunded;
 
-    class UnitsRefunded extends BaseUnitsRefunded
+    final class UnitsRefunded extends BaseUnitsRefunded
     {
         /** @var \DateTimeInterface */
         protected $scheduledAt;
