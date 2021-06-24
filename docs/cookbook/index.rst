@@ -55,6 +55,7 @@ Payments
     payments/custom-payment-gateway
     payments/customizing-credit-memo
     payments/refund-process
+    payments/custom-field-on-refund-payment
 
 .. include:: /cookbook/payments/map.rst.inc
 
