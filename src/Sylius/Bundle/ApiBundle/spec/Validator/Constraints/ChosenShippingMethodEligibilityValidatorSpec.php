@@ -18,6 +18,8 @@ use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenShippingMethodEligibility;
+use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
@@ -69,7 +71,9 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         ShippingMethodInterface $shippingMethod,
         ShippingMethodInterface $differentShippingMethod,
-        ShipmentInterface $shipment
+        ShipmentInterface $shipment,
+        OrderInterface $order,
+        AddressInterface $shippingAddress
     ): void {
         $command = new ChooseShippingMethod('SHIPPING_METHOD_CODE');
         $command->setOrderTokenValue('ORDER_TOKEN');
@@ -79,6 +83,10 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         $shippingMethod->getName()->willReturn('DHL');
 
         $shipmentRepository->find('123')->willReturn($shipment);
+
+        $shipment->getOrder()->willReturn($order);
+
+        $order->getShippingAddress()->willReturn($shippingAddress);
 
         $shippingMethodsResolver->getSupportedMethods($shipment)->willReturn([$differentShippingMethod]);
 
@@ -96,7 +104,9 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         ShippingMethodsResolverInterface $shippingMethodsResolver,
         ExecutionContextInterface $executionContext,
         ShippingMethodInterface $shippingMethod,
-        ShipmentInterface $shipment
+        ShipmentInterface $shipment,
+        OrderInterface $order,
+        AddressInterface $shippingAddress
     ): void {
         $command = new ChooseShippingMethod('SHIPPING_METHOD_CODE');
         $command->setOrderTokenValue('ORDER_TOKEN');
@@ -105,6 +115,11 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         $shippingMethodRepository->findOneBy(['code' => 'SHIPPING_METHOD_CODE'])->willReturn($shippingMethod);
 
         $shipmentRepository->find('123')->willReturn($shipment);
+
+
+        $shipment->getOrder()->willReturn($order);
+
+        $order->getShippingAddress()->willReturn($shippingAddress);
 
         $shippingMethodsResolver->getSupportedMethods($shipment)->willReturn([$shippingMethod]);
 
@@ -134,6 +149,38 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         ;
         $executionContext
             ->addViolation('sylius.shipping_method.not_found', ['%code%' => 'SHIPPING_METHOD_CODE'])
+            ->shouldBeCalled()
+        ;
+
+        $this->validate($command, new ChosenShippingMethodEligibility());
+    }
+
+    function it_adds_violation_if_order_is_not_addressed(
+        ShipmentRepositoryInterface $shipmentRepository,
+        ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ShippingMethodsResolverInterface $shippingMethodsResolver,
+        ExecutionContextInterface $executionContext,
+        ShippingMethodInterface $shippingMethod,
+        ShipmentInterface $shipment,
+        OrderInterface $order,
+        AddressInterface $shippingAddress
+    ): void {
+        $command = new ChooseShippingMethod('SHIPPING_METHOD_CODE');
+        $command->setOrderTokenValue('ORDER_TOKEN');
+        $command->setSubresourceId('123');
+
+        $shippingMethodRepository->findOneBy(['code' => 'SHIPPING_METHOD_CODE'])->willReturn($shippingMethod);
+
+        $shipmentRepository->find('123')->willReturn($shipment);
+
+        $shipment->getOrder()->willReturn($order);
+
+        $order->getShippingAddress()->willReturn(null);
+
+        $shippingMethodsResolver->getSupportedMethods($shipment)->willReturn([$shippingMethod]);
+
+        $executionContext
+            ->addViolation('sylius.shipping_method.shipping_address_not_found')
             ->shouldBeCalled()
         ;
 
