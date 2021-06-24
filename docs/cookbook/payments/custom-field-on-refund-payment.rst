@@ -179,36 +179,40 @@ so we need to overwrite the ``Sylius\RefundPlugin\Creator\RefundUnitsCommandCrea
     namespace App\Creator;
 
     use App\Command\RefundUnits;
-    use Sylius\RefundPlugin\Calculator\UnitRefundTotalCalculatorInterface;
     use Sylius\RefundPlugin\Command\RefundUnits as BaseRefundUnits;
+    use Sylius\RefundPlugin\Converter\RefundUnitsConverterInterface;
     use Sylius\RefundPlugin\Creator\RefundUnitsCommandCreatorInterface;
     use Sylius\RefundPlugin\Exception\InvalidRefundAmount;
     use Sylius\RefundPlugin\Model\OrderItemUnitRefund;
     use Sylius\RefundPlugin\Model\RefundType;
     use Sylius\RefundPlugin\Model\ShipmentRefund;
-    use Sylius\RefundPlugin\Model\UnitRefundInterface;
     use Symfony\Component\HttpFoundation\Request;
     use Webmozart\Assert\Assert;
 
     final class RefundUnitsCommandCreator implements RefundUnitsCommandCreatorInterface
     {
-        /** @var UnitRefundTotalCalculatorInterface */
-        private $unitRefundTotalCalculator;
+        /** @var RefundUnitsConverterInterface */
+        private $refundUnitsConverter;
 
-        public function __construct(UnitRefundTotalCalculatorInterface $unitRefundTotalCalculator)
+        public function __construct(RefundUnitsConverterInterface $refundUnitsConverter)
         {
-            $this->unitRefundTotalCalculator = $unitRefundTotalCalculator;
+            $this->refundUnitsConverter = $refundUnitsConverter;
         }
 
         public function fromRequest(Request $request): BaseRefundUnits
         {
             Assert::true($request->attributes->has('orderNumber'), 'Refunded order number not provided');
 
-            $units = $this->filterEmptyRefundUnits(
-                $request->request->has('sylius_refund_units') ? $request->request->all()['sylius_refund_units'] : []
+            $units = $this->refundUnitsConverter->convert(
+                $request->request->has('sylius_refund_units') ? $request->request->all()['sylius_refund_units'] : [],
+                RefundType::orderItemUnit(),
+                OrderItemUnitRefund::class
             );
-            $shipments = $this->filterEmptyRefundUnits(
-                $request->request->has('sylius_refund_shipments') ? $request->request->all()['sylius_refund_shipments'] : []
+
+            $shipments = $this->refundUnitsConverter->convert(
+                $request->request->has('sylius_refund_shipments') ? $request->request->all()['sylius_refund_shipments'] : [],
+                RefundType::shipment(),
+                ShipmentRefund::class
             );
 
             if (count($units) === 0 && count($shipments) === 0) {
@@ -221,53 +225,12 @@ so we need to overwrite the ``Sylius\RefundPlugin\Creator\RefundUnitsCommandCrea
             // here we need to return the new RefundUnits command, with new data
             return new RefundUnits(
                 $request->attributes->get('orderNumber'),
-                $this->parseIdsToUnitRefunds($units, RefundType::orderItemUnit(), OrderItemUnitRefund::class),
-                $this->parseIdsToUnitRefunds($shipments, RefundType::shipment(), ShipmentRefund::class),
+                $units,
+                $shipments,
                 (int) $request->request->get('sylius_refund_payment_method'),
                 $comment,
                 new \DateTime($request->request->get('sylius_scheduled_at'))
             );
-        }
-
-        /**
-         * Parse shipment id's to ShipmentRefund with id and remaining total or amount passed in request
-         *
-         * @return array|UnitRefundInterface[]
-         */
-        private function parseIdsToUnitRefunds(array $units, RefundType $refundType, string $unitRefundClass): array
-        {
-            $refundUnits = [];
-            foreach ($units as $id => $unit) {
-                $total = $this
-                    ->unitRefundTotalCalculator
-                    ->calculateForUnitWithIdAndType($id, $refundType, $this->getAmount($unit))
-                ;
-
-                $refundUnits[] = new $unitRefundClass((int) $id, $total);
-            }
-
-            return $refundUnits;
-        }
-
-        private function filterEmptyRefundUnits(array $units): array
-        {
-            return array_filter($units, function (array $refundUnit): bool {
-                return
-                    (isset($refundUnit['amount']) && $refundUnit['amount'] !== '') ||
-                    isset($refundUnit['full'])
-                ;
-            });
-        }
-
-        private function getAmount(array $unit): ?float
-        {
-            if (isset($unit['full'])) {
-                return null;
-            }
-
-            Assert::keyExists($unit, 'amount');
-
-            return (float) $unit['amount'];
         }
     }
 
@@ -279,8 +242,7 @@ And register the new service:
     Sylius\RefundPlugin\Creator\RefundUnitsCommandCreatorInterface:
         class: App\Creator\RefundUnitsCommandCreator
         arguments:
-            - '@Sylius\RefundPlugin\Calculator\UnitRefundTotalCalculatorInterface'
-
+            - '@Sylius\RefundPlugin\Converter\RefundUnitsConverterInterface'
 
 **5. Modify the ``RefundUnitsHandler``:**
 
