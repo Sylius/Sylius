@@ -1,0 +1,22 @@
+Sylius\Component\Core\Model\Product:
+    product:
+        fallbackLocale: en_US
+        currentLocale: en
+        code: MUG_SW
+
+Sylius\Component\Product\Model\ProductVariantTranslation:
+    product_variant_translation:
+        name: "Mug"
+        locale: en_US
+        translatable: "@product_variant"
+
+Sylius\Component\Core\Model\ProductVariant:
+    product_variant:
+        code: MUG
+        version: 1
+        product: "@product"
+        fallbackLocale: en_US
+        currentLocale: en
+        position: 1
+        translations:
+            - "@product_variant_translation"

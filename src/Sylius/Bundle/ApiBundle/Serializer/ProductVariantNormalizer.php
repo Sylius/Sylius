@@ -1,9 +1,20 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
@@ -30,14 +41,19 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
     /** @var AvailabilityCheckerInterface */
     private $availabilityChecker;
 
+    /** @var SectionProviderInterface */
+    private $uriBasedSectionContext;
+
     public function __construct(
         ProductVariantPricesCalculatorInterface $priceCalculator,
         ChannelContextInterface $channelContext,
-        AvailabilityCheckerInterface $availabilityChecker
+        AvailabilityCheckerInterface $availabilityChecker,
+        SectionProviderInterface $uriBasedSectionContext
     ) {
         $this->priceCalculator = $priceCalculator;
         $this->channelContext = $channelContext;
         $this->availabilityChecker = $availabilityChecker;
+        $this->uriBasedSectionContext = $uriBasedSectionContext;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -66,11 +82,11 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
             return false;
         }
 
-        return $data instanceof ProductVariantInterface && $this->isNotAdminGetOperation($context);
+        return $data instanceof ProductVariantInterface && $this->isNotAdminApiSection();
     }
 
-    private function isNotAdminGetOperation(array $context): bool
+    private function isNotAdminApiSection(): bool
     {
-        return !isset($context['item_operation_name']) || !($context['item_operation_name'] === 'admin_get');
+        return !$this->uriBasedSectionContext->getSection() instanceof AdminApiSection;
     }
 }
