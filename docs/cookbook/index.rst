@@ -15,16 +15,6 @@ Entities
 
 .. include:: /cookbook/entities/map.rst.inc
 
-Api
----
-
-.. toctree::
-    :hidden:
-
-    api/api
-
-.. include:: /cookbook/api/map.rst.inc
-
 Shop
 ----
 
