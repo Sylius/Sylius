@@ -122,16 +122,7 @@ The output should be:
 .. image:: ../../_images/container_debug_supplier.png
     :align: center
 
-7. Optionally try to use Sylius API to create new resource
-----------------------------------------------------------
-
-See how to work with API in :doc:`the separate cookbook here </cookbook/api/api>`.
-
-.. note::
-
-    Using API is not mandatory. It is just a nice moment for you to try it out. If you are not interested go to the next point of this cookbook.
-
-8. Define grid structure for the new entity
+7. Define grid structure for the new entity
 -------------------------------------------
 
 To have templates for your Entity administration out of the box you can use Grids. Here you can see how to configure a grid for the Supplier entity.
@@ -168,7 +159,7 @@ To have templates for your Entity administration out of the box you can use Grid
                         delete:
                             type: delete
 
-9. Define routing for entity administration
+8. Define routing for entity administration
 -------------------------------------------
 
 Having a grid prepared we can configure routing for the entity administration:
@@ -192,14 +183,14 @@ Having a grid prepared we can configure routing for the entity administration:
         prefix: /admin
 
 
-10. Add entity administration to the admin menu
+9. Add entity administration to the admin menu
 -----------------------------------------------
 
 .. tip::
 
     See :doc:`how to add links to your new entity administration in the administration menu </customization/menu>`.
 
-11. Check the admin panel for your changes
+10. Check the admin panel for your changes
 ------------------------------------------
 
 .. tip::
