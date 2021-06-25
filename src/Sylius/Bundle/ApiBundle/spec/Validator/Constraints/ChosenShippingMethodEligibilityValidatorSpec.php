@@ -116,7 +116,6 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $shipmentRepository->find('123')->willReturn($shipment);
 
-
         $shipment->getOrder()->willReturn($order);
 
         $order->getShippingAddress()->willReturn($shippingAddress);

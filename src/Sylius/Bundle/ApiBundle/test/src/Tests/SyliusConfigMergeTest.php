@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sylius package.
  *
@@ -117,8 +119,8 @@ final class SyliusConfigMergeTest extends ApiTestCase
             json_decode(
                 static::createClient()
                     ->request(
-                    'PATCH',
-                    '/api/v2/shop/orders/TOKEN/shipments/TEST'
+                        'PATCH',
+                        '/api/v2/shop/orders/TOKEN/shipments/TEST'
                     )->getContent(false),
                 true
             );

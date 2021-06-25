@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ApiBundle\ApiPlatform;
 
 use ApiPlatform\Core\Metadata\Resource\ResourceMetadata;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\ApiPlatform\ApiResourceConfigurationMerger;
 use Sylius\Bundle\ApiBundle\ApiPlatform\ApiResourceConfigurationMergerInterface;
 
 final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior

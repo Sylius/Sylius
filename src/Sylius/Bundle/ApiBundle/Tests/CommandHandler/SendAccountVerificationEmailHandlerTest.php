@@ -70,10 +70,10 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
 
         $sendAccountVerificationEmailHandler(
             new SendAccountVerificationEmail(
-            'user@example.com',
-            'en_US',
-            'CHANNEL_CODE'
-        )
+                'user@example.com',
+                'en_US',
+                'CHANNEL_CODE'
+            )
         );
 
         self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));

@@ -43,7 +43,7 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
     public function __construct(
         ExtractorInterface $extractor,
         ResourceMetadataFactoryInterface $decorated,
-        ResourceMetadataPropertyValueResolver  $resourceMetadataPropertyValueResolver,
+        ResourceMetadataPropertyValueResolver $resourceMetadataPropertyValueResolver,
         array $defaults = []
     ) {
         $this->extractor = $extractor;
@@ -76,7 +76,7 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
             ;
         }
 
-        if ($resource['attributes'] ==! null || !empty($this->defaults['attributes'])) {
+        if ($resource['attributes'] !== null || !empty($this->defaults['attributes'])) {
             $resource['attributes'] = (array) $resource['attributes'];
             foreach ($this->defaults['attributes'] as $key => $value) {
                 if (!isset($resource['attributes'][$key])) {
