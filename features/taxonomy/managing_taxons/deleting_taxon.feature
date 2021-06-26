@@ -31,3 +31,11 @@ Feature: Deleting a taxon
         And channel "Web Store" has menu taxon "Caps"
         When I try to delete taxon named "Caps"
         Then I should be notified that I cannot delete a menu taxon of any channel
+
+    @ui @javascript
+    Scenario: Being unable to delete a taxon used as main taxon
+        Given the store classifies its products as "T-Shirts"
+        And the store has a product "Young"
+        And the product "Young" has a main taxon "T-Shirts"
+        When I try to delete taxon named "T-Shirts"
+        Then I should be notified that I cannot delete a taxon used as main taxon for this product

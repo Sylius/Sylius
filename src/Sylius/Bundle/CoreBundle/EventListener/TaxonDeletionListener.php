@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Updater\Rule\TaxonAwareRuleUpdaterInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -29,16 +30,21 @@ final class TaxonDeletionListener
     /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
+    /** @var ProductRepositoryInterface */
+    private $productRepository;
+
     /** @var TaxonAwareRuleUpdaterInterface[] */
     private $ruleUpdaters;
 
     public function __construct(
         SessionInterface $session,
         ChannelRepositoryInterface $channelRepository,
+        ProductRepositoryInterface $productRepository,
         TaxonAwareRuleUpdaterInterface ...$ruleUpdaters
     ) {
         $this->session = $session;
         $this->channelRepository = $channelRepository;
+        $this->productRepository = $productRepository;
         $this->ruleUpdaters = $ruleUpdaters;
     }
 
@@ -55,6 +61,35 @@ final class TaxonDeletionListener
 
             $event->stopPropagation();
         }
+    }
+
+    public function protectFromRemovingProductMainTaxon(GenericEvent $event): void
+    {
+        $taxon = $event->getSubject();
+        Assert::isInstanceOf($taxon, TaxonInterface::class);
+
+        $productsCount = 20;
+
+        $products = $this->productRepository->findByMainTaxon($taxon, $productsCount);
+
+        if (empty($products)) {
+            return;
+        }
+
+        $inUseProductCodes = [];
+
+        foreach ($products as $product) {
+            $inUseProductCodes[] = $product->getCode();
+        }
+
+        /** @var FlashBagInterface $flashes */
+        $flashes = $this->session->getBag('flashes');
+        $flashes->add('error', [
+            'message' => 'sylius.taxon.main_taxon_delete',
+            'parameters' => ['%codes%' => implode(', ', $inUseProductCodes), '%count%' => $productsCount],
+        ]);
+
+        $event->stopPropagation();
     }
 
     public function removeTaxonFromPromotionRules(GenericEvent $event): void

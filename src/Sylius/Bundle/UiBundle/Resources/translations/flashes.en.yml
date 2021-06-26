@@ -28,3 +28,4 @@ sylius:
         update_rules: 'Some rules of the promotions with codes %codes% have been updated.'
     taxon:
         menu_taxon_delete: 'You cannot delete a menu taxon of any channel.'
+        main_taxon_delete: 'You cannot delete this taxon, it is used as the main taxon for at least products with codes %codes% (max. %count%).'

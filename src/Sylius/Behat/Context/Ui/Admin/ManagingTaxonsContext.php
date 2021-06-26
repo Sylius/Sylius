@@ -22,6 +22,7 @@ use Sylius\Behat\Service\Helper\JavaScriptTestHelper;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -401,6 +402,17 @@ final class ManagingTaxonsContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'You cannot delete a menu taxon of any channel.',
+            NotificationType::failure()
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that I cannot delete a taxon used as main taxon for (this product)$/
+     */
+    public function iShouldBeNotifiedThatICannotDeleteATaxonUsedAsMainTaxonForProduct(ProductInterface $product)
+    {
+        $this->notificationChecker->checkNotification(
+            sprintf('You cannot delete this taxon, it is used as the main taxon for at least products with codes %s (max. 20).', $product->getCode()),
             NotificationType::failure()
         );
     }

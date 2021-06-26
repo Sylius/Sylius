@@ -44,4 +44,6 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
     public function findOneByChannelAndCode(ChannelInterface $channel, string $code): ?ProductInterface;
 
     public function findOneByCode(string $code): ?ProductInterface;
+
+    public function findByMainTaxon(TaxonInterface $taxon, int $count): ?array;
 }
