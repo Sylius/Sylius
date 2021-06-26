@@ -16,6 +16,10 @@
     <services>
         <defaults public="true"/>
 
+        <service id="sylius.custom_factory.shipping_method_rule" class="Sylius\Component\Core\Factory\ShippingMethodRuleFactory" decorates="sylius.factory.shipping_method_rule" decoration-priority="256" public="false">
+            <argument type="service" id="sylius.custom_factory.shipping_method_rule.inner" />
+        </service>
+
         <service id="sylius.shipping_calculator.flat_rate"
                  class="Sylius\Component\Core\Shipping\Calculator\FlatRateCalculator">
             <tag name="sylius.shipping_calculator" calculator="flat_rate"

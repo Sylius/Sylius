@@ -40,6 +40,14 @@ class ShippingMethodFixture extends AbstractResourceFixture
                     ->end()
                 ->end()
                 ->scalarNode('tax_category')->end()
+                ->arrayNode('rules')
+                    ->arrayPrototype()
+                        ->children()
+                            ->scalarNode('type')->cannotBeEmpty()->end()
+                            ->variableNode('configuration')->end()
+                        ->end()
+                    ->end()
+                ->end()
         ;
     }
 }
