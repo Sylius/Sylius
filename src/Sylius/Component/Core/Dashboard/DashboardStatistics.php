@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Dashboard;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 
-class DashboardStatistics
+class DashboardStatistics implements DashboardStatisticsInterface
 {
     /** @var int */
     private $totalSales;

@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\AdminBundle\Provider\StatisticsDataProvider;
 use Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface;
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
-use Sylius\Component\Core\Dashboard\DashboardStatistics;
+use Sylius\Component\Core\Dashboard\DashboardStatisticsInterface;
 use Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface;
 use Sylius\Component\Core\Dashboard\Interval;
 use Sylius\Component\Core\Dashboard\SalesDataProviderInterface;
@@ -49,7 +49,7 @@ class StatisticsDataProviderSpec extends ObjectBehavior
         ChannelInterface $channel,
         DashboardStatisticsProviderInterface $statisticsProvider,
         SalesDataProviderInterface $salesDataProvider,
-        DashboardStatistics $statistics,
+        DashboardStatisticsInterface $statistics,
         SalesSummaryInterface $salesSummary,
         CurrencyInterface $currency,
         MoneyFormatterInterface $moneyFormatter
@@ -99,7 +99,7 @@ class StatisticsDataProviderSpec extends ObjectBehavior
         ChannelInterface $channel,
         DashboardStatisticsProviderInterface $statisticsProvider,
         SalesDataProviderInterface $salesDataProvider,
-        DashboardStatistics $statistics,
+        DashboardStatisticsInterface $statistics,
         SalesSummaryInterface $salesSummary,
         CurrencyInterface $currency,
         MoneyFormatterInterface $moneyFormatter
@@ -181,7 +181,7 @@ class StatisticsDataProviderSpec extends ObjectBehavior
         ChannelInterface $channel,
         DashboardStatisticsProviderInterface $statisticsProvider,
         SalesDataProviderInterface $salesDataProvider,
-        DashboardStatistics $statistics,
+        DashboardStatisticsInterface $statistics,
         SalesSummaryInterface $salesSummary,
         CurrencyInterface $currency,
         MoneyFormatterInterface $moneyFormatter

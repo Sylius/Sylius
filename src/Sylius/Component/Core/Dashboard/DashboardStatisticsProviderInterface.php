@@ -17,11 +17,19 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 interface DashboardStatisticsProviderInterface
 {
-    public function getStatisticsForChannel(ChannelInterface $channel): DashboardStatistics;
+    // Use typehint instead of PHPDoc once PHP <= 7.3 support is dropped.
+    /**
+     * @return DashboardStatisticsInterface
+     */
+    public function getStatisticsForChannel(ChannelInterface $channel);
 
+    // Use typehint instead of PHPDoc once PHP <= 7.3 support is dropped.
+    /**
+     * @return DashboardStatisticsInterface
+     */
     public function getStatisticsForChannelInPeriod(
         ChannelInterface $channel,
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate
-    ): DashboardStatistics;
+    );
 }

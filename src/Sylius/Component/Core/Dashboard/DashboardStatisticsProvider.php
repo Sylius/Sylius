@@ -33,7 +33,10 @@ class DashboardStatisticsProvider implements DashboardStatisticsProviderInterfac
         $this->customerRepository = $customerRepository;
     }
 
-    public function getStatisticsForChannel(ChannelInterface $channel): DashboardStatistics
+    /**
+     * {@inheritdoc}
+     */
+    public function getStatisticsForChannel(ChannelInterface $channel)
     {
         return new DashboardStatistics(
             $this->orderRepository->getTotalPaidSalesForChannel($channel),
@@ -43,11 +46,14 @@ class DashboardStatisticsProvider implements DashboardStatisticsProviderInterfac
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getStatisticsForChannelInPeriod(
         ChannelInterface $channel,
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate
-    ): DashboardStatistics {
+    ) {
         return new DashboardStatistics(
             $this->orderRepository->getTotalPaidSalesForChannelInPeriod($channel, $startDate, $endDate),
             $this->orderRepository->countPaidForChannelInPeriod($channel, $startDate, $endDate),
