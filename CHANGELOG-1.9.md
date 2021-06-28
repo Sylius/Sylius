@@ -1,5 +1,34 @@
 # CHANGELOG FOR `1.9.X`
 
+## v1.9.5 (2021-06-28)
+
+#### TL;DR
+
+**This is a security release!**
+
+Fixes the follwing vulnerability:
+
+- [List of order ids, number, items total and token value exposed for unauthorized uses via new API](https://github.com/Sylius/Sylius/security/advisories/GHSA-rpxh-vg2x-526v)
+
+#### Details
+
+- [#12596](https://github.com/Sylius/Sylius/issues/12596) Country api resource shouldn't have created/updated at ([@kayue](https://github.com/kayue))
+- [#12618](https://github.com/Sylius/Sylius/issues/12618) [Docs] Fix cookbook for custom entity ([@Tomanhez](https://github.com/Tomanhez))
+- [#12682](https://github.com/Sylius/Sylius/issues/12682) Use Symfony 5.2.* instead of ^5.2 for GitHub Actions ([@pamil](https://github.com/pamil))
+- [#12686](https://github.com/Sylius/Sylius/issues/12686) [DOCS] Cookbook for customizing refund process ([@arti0090](https://github.com/arti0090))
+- [#12687](https://github.com/Sylius/Sylius/issues/12687) Fix typo and imporve error message ([@dantleech](https://github.com/dantleech))
+- [#12690](https://github.com/Sylius/Sylius/issues/12690) [Doctrine] Fix problem with explicitly defining entity managers ([@GSadee](https://github.com/GSadee))
+- [#12698](https://github.com/Sylius/Sylius/issues/12698) Fix the build with Symfony 5.3 ([@pamil](https://github.com/pamil))
+- [#12699](https://github.com/Sylius/Sylius/issues/12699) [Documentation] Update templates directory in Themes doc ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#12702](https://github.com/Sylius/Sylius/issues/12702) [Documentation] Fix Refund Process Cookbook ([@GSadee](https://github.com/GSadee))
+- [#12706](https://github.com/Sylius/Sylius/issues/12706) [Documentation] Tweaks on the refunds process cookbook ([@CoderMaggie](https://github.com/CoderMaggie), [@GSadee](https://github.com/GSadee))
+- [#12707](https://github.com/Sylius/Sylius/issues/12707) [Documentation] Fix links in the refunds process cookbook ([@GSadee](https://github.com/GSadee))
+- [#12715](https://github.com/Sylius/Sylius/issues/12715) [Dql] Add parameter instead of hardcoding it in where statement ([@SirDomin](https://github.com/SirDomin))
+- [#12720](https://github.com/Sylius/Sylius/issues/12720) [DQL] Change hardcoded enabled value to parameter in where statements ([@GSadee](https://github.com/GSadee))
+- [#12726](https://github.com/Sylius/Sylius/issues/12726) [DQL] Change hardcoded tracked value to parameter in where statements ([@lchrusciel](https://github.com/lchrusciel))
+- [#12731](https://github.com/Sylius/Sylius/issues/12731) Add cookbook with how to change tax address ([@arti0090](https://github.com/arti0090))
+- [#12748](https://github.com/Sylius/Sylius/issues/12748) [Documentation][Refund] Add cookbook about refund customization with improvements ([@AdamKasp](https://github.com/AdamKasp), [@GSadee](https://github.com/GSadee))
+
 ## v1.9.4 (2021-05-27)
 
 #### Details

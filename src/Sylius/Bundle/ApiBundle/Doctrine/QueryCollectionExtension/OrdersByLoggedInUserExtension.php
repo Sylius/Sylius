@@ -17,9 +17,11 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionEx
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /** @experimental */
 final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollectionExtensionInterface
@@ -50,6 +52,11 @@ final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollection
         ;
 
         $user = $this->userContext->getUser();
+
+        if ($user instanceof AdminUserInterface) {
+            return;
+        }
+
         if ($user instanceof ShopUserInterface) {
             /** @var CustomerInterface $customer */
             $customer = $user->getCustomer();
@@ -58,6 +65,10 @@ final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollection
                 ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
                 ->setParameter('customer', $customer)
             ;
+
+            return;
         }
+
+        throw new AccessDeniedException();
     }
 }
