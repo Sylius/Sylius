@@ -65,6 +65,8 @@ final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollection
                 ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
                 ->setParameter('customer', $customer)
             ;
+
+            return;
         }
 
         throw new AccessDeniedException();
