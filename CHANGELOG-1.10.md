@@ -1,5 +1,11 @@
 # CHANGELOG FOR `1.10.X`
 
+## v1.10.0 (2021-06-28)
+
+#### Details
+
+No additional changes apart from the ones reported in pre-releases.
+
 ## v1.10.0-RC.1 (2021-06-28)
 
 #### TL;DR
