@@ -75,7 +75,7 @@
         "hwi/oauth-bundle": "^1.1",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
-        "phpspec/phpspec": "^7.0",
+        "phpspec/phpspec": "^7.1",
         "phpunit/phpunit": "^8.5",
         "symfony/dependency-injection": "^4.4 || ^5.2"
     },

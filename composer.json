@@ -196,7 +196,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "mikey179/vfsstream": "^1.6",
         "mockery/mockery": "^1.4",
-        "phpspec/phpspec": "^7.0",
+        "phpspec/phpspec": "^7.1",
         "phpstan/phpstan": "0.12.96",
         "phpstan/phpstan-doctrine": "0.12.33",
         "phpunit/phpunit": "^8.5",
