@@ -137,7 +137,7 @@ a {
         }
         &.open,
         &.current_ancestor {
-            > .menu{
+            > .menu {
                 max-height: 120vh;
                 overflow: visible;
                 visibility: visible;
