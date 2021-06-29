@@ -71,6 +71,7 @@ Recommended Sylius version to use with Sylius Plus is 1.10. If, for any reason, 
 to customise some API configurations. Run the following commands, to do it:
 
 ```bash
+rm vendor/sylius/plus/src/Resources/config/api_resources/Shipment.xml
 mkdir config/api_platform/
 cp -R vendor/sylius/plus/etc/sylius-1.9/Resources/config/api_resources/* config/api_platform/
 ```
@@ -96,15 +97,18 @@ cp -R vendor/sylius/plus/etc/sylius-1.9/Resources/config/api_resources/* config/
     sylius_plus_admin:
         resource: "@SyliusPlusPlugin/Resources/config/admin_routing.yaml"
         prefix: /admin
+.. warning::
 
-.. code-block:: yaml
+    Not needed for Sylius Plus >= `1.0.0-ALPHA.1`
 
-    // config/routes/sylius_admin_api.yaml:
-    #...
+    .. code-block:: yaml
 
-    sylius_plus_admin_api:
-        resource: "@SyliusPlusPlugin/Resources/config/api_routing.yaml"
-        prefix: /api/v1
+        // config/routes/sylius_admin_api.yaml:
+        #...
+
+        sylius_plus_admin_api:
+            resource: "@SyliusPlusPlugin/Resources/config/api_routing.yaml"
+            prefix: /api/v1
 
 **6.** Add traits that enhance Sylius models:
 
