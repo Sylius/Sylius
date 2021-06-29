@@ -13,7 +13,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 **Important Requirements**
 
 +---------------+-----------------------+
-| PHP           | ^7.3                  |
+| PHP           | ^7.4                  |
 +---------------+-----------------------+
 | sylius/sylius | ^1.9                  |
 +---------------+-----------------------+
@@ -86,15 +86,6 @@ Installing Sylius Plus as a plugin to a Sylius application
     sylius_plus_admin:
         resource: "@SyliusPlusPlugin/Resources/config/admin_routing.yaml"
         prefix: /admin
-
-.. code-block:: yaml
-
-    // config/routes/sylius_admin_api.yaml:
-    #...
-
-    sylius_plus_admin_api:
-        resource: "@SyliusPlusPlugin/Resources/config/api_routing.yaml"
-        prefix: /api/v1
 
 **6.** Add traits that enhance Sylius models:
 
