@@ -1,6 +1,6 @@
 <h1 align="center">
     <a href="https://sylius.com/github-readme/link/" target="_blank">
-        <img src="https://sylius.com/assets/github-readme.png?v19" />
+        <img src="https://sylius.com/assets/github-readme.png?v110" />
     </a>
 </h1>
 
