@@ -165,5 +165,7 @@
             <argument type="service" id="api_platform.metadata.resource.metadata_factory.yaml.inner" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface" class="Sylius\Bundle\ApiBundle\Mapper\AddressMapper" public="true"/>
     </services>
 </container>

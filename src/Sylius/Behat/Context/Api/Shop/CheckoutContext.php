@@ -191,6 +191,7 @@ final class CheckoutContext implements Context
 
     /**
      * @When /^I specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @When /^the visitor changes the billing (address to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^the (?:customer|visitor) specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^I specify the billing (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      * @Given /^the (?:visitor|customer) has specified (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
@@ -314,7 +315,7 @@ final class CheckoutContext implements Context
     /**
      * @When I complete the addressing step
      * @When I try to complete the addressing step
-     * @When /^the (?:customer|visitor) complete the addressing step$/
+     * @When /^the (?:customer|visitor) completes the addressing step$/
      * @Given /^the (?:customer|visitor) has completed the addressing step$/
      * @When the visitor try to complete the addressing step in the customer cart
      */
@@ -505,6 +506,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as (billing) address$/
+     * @Then /^the visitor should has ("[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+" specified as) (billing) address$/
      */
     public function addressShouldBeFilledAsBillingAddress(AddressInterface $address, string $addressType): void
     {
@@ -513,6 +515,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as (shipping) address$/
+     * @Then /^the visitor should has ("[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+" specified as) (shipping) address$/
      */
     public function addressShouldBeFilledAsShippingAddress(AddressInterface $address, string $addressType): void
     {
