@@ -40,4 +40,3 @@ lexik_jwt_authentication:
             enabled: true
             prefix: Bearer
             name: "%sylius.api.authorization_header%"
-
