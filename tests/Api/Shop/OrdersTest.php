@@ -58,4 +58,13 @@ final class OrdersTest extends JsonApiTestCase
 
         $this->assertResponse($response, 'shop/get_order_response', Response::HTTP_OK);
     }
+
+    /** @test */
+    public function it_does_not_get_orders_collection_for_guest(): void
+    {
+        $this->client->request('GET', '/api/v2/shop/orders', [], [], self::CONTENT_TYPE_HEADER);
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/error/jwt_token_not_found', Response::HTTP_UNAUTHORIZED);
+    }
 }
