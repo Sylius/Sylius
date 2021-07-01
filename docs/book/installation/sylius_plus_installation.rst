@@ -117,8 +117,7 @@ cp -R vendor/sylius/plus/etc/sylius-1.9/Resources/config/api_resources/* config/
 * Customer
 * Order
 * ProductVariant
-* Shipment (trait + interface from RefundPlugin)
-* Adjustment (interface from RefundPlugin)
+* Shipment
 
 .. code-block:: php
 
@@ -287,37 +286,14 @@ cp -R vendor/sylius/plus/etc/sylius-1.9/Resources/config/api_resources/* config/
     use Sylius\Component\Core\Model\Shipment as BaseShipment;
     use Sylius\Plus\Entity\ShipmentInterface;
     use Sylius\Plus\Entity\ShipmentTrait;
-    use Sylius\RefundPlugin\Entity\ShipmentInterface as RefundShipmentInterface;
 
     /**
      * @Entity
      * @Table(name="sylius_shipment")
      */
-    class Shipment extends BaseShipment implements ShipmentInterface, RefundShipmentInterface
+    class Shipment extends BaseShipment implements ShipmentInterface
     {
         use ShipmentTrait;
-    }
-
-.. code-block:: php
-
-    <?php
-
-    // src/Entity/Order/Adjustment.php
-
-    declare(strict_types=1);
-
-    namespace App\Entity\Order;
-
-    use Doctrine\ORM\Mapping as ORM;
-    use Sylius\Component\Core\Model\Adjustment as BaseAdjustment;
-    use Sylius\RefundPlugin\Entity\AdjustmentInterface as RefundAdjustmentInterface;
-
-    /**
-     * @ORM\Entity
-     * @ORM\Table(name="sylius_adjustment")
-     */
-    class Adjustment extends BaseAdjustment implements RefundAdjustmentInterface
-    {
     }
 
 **7.** Add wkhtmltopdf binary for Invoicing purposes.
