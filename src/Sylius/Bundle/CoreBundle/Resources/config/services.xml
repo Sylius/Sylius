@@ -227,6 +227,11 @@
             <argument type="service" id="sylius.custom_resource_controller.resource_update_handler.inner" />
         </service>
 
+        <service id="sylius.custom_resource_controller.resource_delete_handler" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceDeleteHandler" decorates="sylius.resource_controller.resource_delete_handler" public="false">
+            <argument type="service" id="sylius.custom_resource_controller.resource_delete_handler.inner" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
         <service id="sylius.order_item_names_setter" class="Sylius\Component\Core\Order\OrderItemNamesSetter" />
         <service id="Sylius\Component\Core\Order\OrderItemNamesSetterInterface" alias="sylius.order_item_names_setter" />
 
