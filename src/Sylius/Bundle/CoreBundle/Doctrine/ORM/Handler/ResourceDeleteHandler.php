@@ -48,7 +48,13 @@ final class ResourceDeleteHandler implements ResourceDeleteHandlerInterface
         } catch (ORMException $exception) {
             $this->entityManager->rollback();
 
-            throw new DeleteHandlingException();
+            throw new DeleteHandlingException(
+                'Ups, something went wrong during deleting a resource, please try again.',
+                'something_went_wrong_error',
+                500,
+                0,
+                $exception
+            );
         }
     }
 }
