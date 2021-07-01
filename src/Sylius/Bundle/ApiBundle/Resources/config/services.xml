@@ -109,18 +109,6 @@
             <argument type="service" id="sylius.context.channel" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Map\CommandItemIriArgumentToIdentifierMap">
-            <argument type="collection">
-                <argument key="Sylius\Bundle\ApiBundle\Command\AddProductReview">product</argument>
-                <argument key="Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod">paymentMethod</argument>
-                <argument key="Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod">paymentMethod</argument>
-                <argument key="Sylius\Bundle\ApiBundle\Command\RequestResetPasswordToken">locale</argument>
-                <argument key="Sylius\Bundle\ApiBundle\Command\ResendVerificationEmail">locale</argument>
-                <argument key="Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart">productVariant</argument>
-                <argument key="Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod">shippingMethod</argument>
-            </argument>
-        </service>
-
         <service id="sylius.api.section_resolver.admin_api_uri_based_section_resolver" class="Sylius\Bundle\ApiBundle\SectionResolver\AdminApiUriBasedSectionResolver">
             <argument>%sylius.security.new_api_admin_route%</argument>
             <tag name="sylius.uri_based_section_resolver" priority="30" />
