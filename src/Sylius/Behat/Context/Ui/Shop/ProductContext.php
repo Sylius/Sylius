@@ -351,9 +351,9 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When I set its :optionName to :optionValue
+     * @When I select its :optionName as :optionValue
      */
-    public function iSetItsOptionTo($optionName, $optionValue)
+    public function iSelectItsOptionAs(string $optionName, string $optionValue): void
     {
         $this->showPage->selectOption($optionName, $optionValue);
     }
