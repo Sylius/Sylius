@@ -25,4 +25,9 @@ final class UniqueShopUserEmail extends Constraint
     {
         return 'sylius.validator.unique_shop_user_email';
     }
+
+    public function getTargets(): string
+    {
+        return self::PROPERTY_CONSTRAINT;
+    }
 }

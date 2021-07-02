@@ -25,4 +25,9 @@ final class UniqueReviewerEmail extends Constraint
     {
         return 'sylius_api_unique_reviewer_email_validator';
     }
+
+    public function getTargets(): string
+    {
+        return self::PROPERTY_CONSTRAINT;
+    }
 }

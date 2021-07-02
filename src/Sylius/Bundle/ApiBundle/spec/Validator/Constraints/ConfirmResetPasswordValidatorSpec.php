@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\ResetPassword;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\ConfirmResetPassword;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
@@ -36,7 +37,7 @@ final class ConfirmResetPasswordValidatorSpec extends ObjectBehavior
         $value->newPassword = 'password';
         $value->confirmNewPassword = 'password';
 
-        $executionContext->buildViolation('sylius.user.plainPassword.mismatch')->shouldNotBeCalled();
+        $executionContext->buildViolation(Argument::any())->shouldNotBeCalled();
 
         $this->validate($value, $constraint);
     }
@@ -46,13 +47,14 @@ final class ConfirmResetPasswordValidatorSpec extends ObjectBehavior
         ConstraintViolationBuilderInterface $constraintViolationBuilder
     ): void {
         $constraint = new ConfirmResetPassword();
+        $constraint->message = 'message';
         $this->initialize($executionContext);
 
         $value = new ResetPassword('token');
         $value->newPassword = 'password';
         $value->confirmNewPassword = 'notaPassword';
 
-        $executionContext->buildViolation('sylius.user.plainPassword.mismatch')->willReturn($constraintViolationBuilder);
+        $executionContext->buildViolation($constraint->message)->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('newPassword')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
