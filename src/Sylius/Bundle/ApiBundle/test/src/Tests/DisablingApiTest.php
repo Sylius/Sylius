@@ -32,7 +32,8 @@ class DisablingApiTest extends ApiTestCase
     {
         static::createClient()->request(
             'GET',
-            'api/v2/shop/orders',
+            'api/v2/admin/orders',
+            ['auth_bearer' => $this->JWTAdminUserToken]
         );
 
         $this->assertResponseIsSuccessful();
@@ -47,21 +48,30 @@ class DisablingApiTest extends ApiTestCase
 
         static::createClient()->request(
             'GET',
-            'api/v2/shop/orders',
+            'api/v2/admin/orders',
+            ['auth_bearer' => $this->JWTAdminUserToken]
         );
 
         $this->assertResponseStatusCodeSame(404);
 
         $this->enableApi();
+
+        static::createClient()->request(
+            'GET',
+            'api/v2/admin/orders',
+            ['auth_bearer' => $this->JWTAdminUserToken]
+        );
+
+        $this->assertResponseIsSuccessful();
     }
 
     private function disableApi(): void
     {
-        $_ENV['SYLIUS_API_ENABLED'] = 'false';
+        $_ENV['SYLIUS_API_ENABLED'] = false;
     }
 
     private function enableApi(): void
     {
-        $_ENV['SYLIUS_API_ENABLED'] = 'true';
+        $_ENV['SYLIUS_API_ENABLED'] = true;
     }
 }
