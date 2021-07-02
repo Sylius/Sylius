@@ -91,22 +91,5 @@ class DisablingApiTest extends ApiTestCase
     private function enableApi(): void
     {
         $_ENV['SYLIUS_API_ENABLED'] = true;
-        $response = static::createClient()->request(
-            'POST',
-            'api/v2/shop/authentication-token',
-            [
-                'body' => [
-                  "email" => "api@example.com",
-                  "password" => "sylius-api"
-                ]
-            ]
-        );
-
-        dd($response);
-    }
-
-    private function setEnv(string $key, string $value): void
-    {
-        $_ENV[$key] = $value;
     }
 }

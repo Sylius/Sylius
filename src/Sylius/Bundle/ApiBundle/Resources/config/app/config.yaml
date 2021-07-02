@@ -4,6 +4,9 @@
 sylius_api:
     enabled: true
 
+sylius_api:
+    enabled: true
+
 api_platform:
     patch_formats:
         json: ['application/merge-patch+json']
