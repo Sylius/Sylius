@@ -16,6 +16,11 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
+        <service id="sylius.api.kerner_request_event_subscriber" class="Sylius\Bundle\ApiBundle\EventSubscriber\KernelRequestEventSubscriber">
+            <argument>%sylius_api.enabled%</argument>
+            <argument>%sylius.security.new_api_route%</argument>
+            <tag name="kernel.event_subscriber" />
+        </service>
         <service id="sylius.api.product_slug_event_subscriber" class="Sylius\Bundle\ApiBundle\EventSubscriber\ProductSlugEventSubscriber">
             <argument type="service" id="sylius.generator.slug" />
             <tag name="kernel.event_subscriber" />
