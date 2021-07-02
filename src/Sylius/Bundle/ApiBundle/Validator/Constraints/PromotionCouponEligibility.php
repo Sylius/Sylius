@@ -18,6 +18,9 @@ use Symfony\Component\Validator\Constraint;
 /** @experimental */
 final class PromotionCouponEligibility extends Constraint
 {
+    /** @var string  */
+    public $message = 'sylius.promotion_coupon.is_invalid';
+
     public function validatedBy(): string
     {
         return 'sylius_api_promotion_coupon_eligibility';

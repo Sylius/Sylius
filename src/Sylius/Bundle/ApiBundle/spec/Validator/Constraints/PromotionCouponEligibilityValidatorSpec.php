@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\PromotionCouponEligibility;
@@ -74,7 +75,7 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
 
         $appliedCouponEligibilityChecker->isEligible($promotionCoupon, $cart)->willReturn(true);
 
-        $executionContext->buildViolation('sylius.promotion_coupon.is_invalid')->shouldNotBeCalled();
+        $executionContext->buildViolation(Argument::any())->shouldNotBeCalled();
 
         $this->validate($value, $constraint);
     }
@@ -90,6 +91,7 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
         $constraint = new PromotionCouponEligibility();
+        $constraint->message = 'message';
 
         $value = new ApplyCouponToCart('couponCode');
         $value->setOrderTokenValue('token');
@@ -101,7 +103,7 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
 
         $appliedCouponEligibilityChecker->isEligible($promotionCoupon, $cart)->willReturn(false);
 
-        $executionContext->buildViolation('sylius.promotion_coupon.is_invalid')->willReturn($constraintViolationBuilder);
+        $executionContext->buildViolation($constraint->message)->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('couponCode')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 

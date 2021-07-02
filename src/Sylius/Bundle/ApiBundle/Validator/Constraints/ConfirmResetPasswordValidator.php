@@ -26,8 +26,11 @@ final class ConfirmResetPasswordValidator extends ConstraintValidator
     {
         Assert::isInstanceOf($value, ResetPassword::class);
 
+        /** @var ConfirmResetPassword $constraint */
+        Assert::isInstanceOf($constraint, ConfirmResetPassword::class);
+
         if ($value->confirmNewPassword !== $value->newPassword) {
-            $this->context->buildViolation('sylius.user.plainPassword.mismatch')
+            $this->context->buildViolation($constraint->message)
                 ->atPath('newPassword')
                 ->addViolation()
             ;

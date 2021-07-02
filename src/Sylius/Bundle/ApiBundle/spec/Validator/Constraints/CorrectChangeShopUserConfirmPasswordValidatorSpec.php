@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\ChangeShopUserPassword;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectChangeShopUserConfirmPassword;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
@@ -34,7 +35,7 @@ final class CorrectChangeShopUserConfirmPasswordValidatorSpec extends ObjectBeha
 
         $value = new ChangeShopUserPassword('password', 'password', 'current');
 
-        $executionContext->buildViolation('sylius.user.plainPassword.mismatch')->shouldNotBeCalled();
+        $executionContext->buildViolation(Argument::any())->shouldNotBeCalled();
 
         $this->validate($value, $constraint);
     }
@@ -44,11 +45,12 @@ final class CorrectChangeShopUserConfirmPasswordValidatorSpec extends ObjectBeha
         ConstraintViolationBuilderInterface $constraintViolationBuilder
     ): void {
         $constraint = new CorrectChangeShopUserConfirmPassword();
+        $constraint->message = 'message';
         $this->initialize($executionContext);
 
         $value = new ChangeShopUserPassword('password', 'notaPassword', 'current');
 
-        $executionContext->buildViolation('sylius.user.plainPassword.mismatch')->willReturn($constraintViolationBuilder);
+        $executionContext->buildViolation($constraint->message)->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('newPassword')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 

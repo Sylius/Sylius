@@ -49,6 +49,9 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
     {
         Assert::isInstanceOf($value, ApplyCouponToCart::class);
 
+        /** @var PromotionCouponEligibility $constraint */
+        Assert::isInstanceOf($constraint, PromotionCouponEligibility::class);
+
         if ($value->couponCode === null) {
             return;
         }
@@ -62,7 +65,7 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
 
         if (!$this->appliedCouponEligibilityChecker->isEligible($promotionCoupon, $cart)) {
             $this->context
-                ->buildViolation('sylius.promotion_coupon.is_invalid')
+                ->buildViolation($constraint->message)
                 ->atPath('couponCode')
                 ->addViolation()
             ;
