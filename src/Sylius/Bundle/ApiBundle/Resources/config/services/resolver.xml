@@ -25,6 +25,7 @@
             <argument type="service" id="api_platform.cache.route_name_resolver" />
             <argument type="service" id="api_platform.route_name_resolver.cached.inner" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" />
+            <argument>%sylius_api.enabled%</argument>
         </service>
     </services>
 </container>
