@@ -75,6 +75,7 @@ sylius_resource:
         test.foo_sylius_resource:
             classes:
                 model: Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource
+<<<<<<< HEAD
 
 services:
     test.channel.id_filter:
@@ -85,3 +86,5 @@ services:
     Sylius\Bundle\ApiBundle\Application\CommandHandler\FooHandler:
         tags:
             - { name: messenger.message_handler, bus: sylius.command_bus }
+=======
+>>>>>>> [Docs] add info how to enable api
