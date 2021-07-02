@@ -70,11 +70,11 @@ Installing Sylius Plus as a plugin to a Sylius application
     Recommended Sylius version to use with Sylius Plus is 1.10. If, for any reason, you need to use Sylius 1.9, it's required
     to customise some API configurations. Run the following commands, to do it:
 
-.. code-block:: bash
+    .. code-block:: bash
 
-    rm vendor/sylius/plus/src/Resources/config/api_resources/Shipment.xml
-    mkdir config/api_platform/
-    cp -R vendor/sylius/plus/etc/sylius-1.9/Resources/config/api_resources/* config/api_platform/
+        rm vendor/sylius/plus/src/Resources/config/api_resources/Shipment.xml
+        mkdir config/api_platform/
+        cp -R vendor/sylius/plus/etc/sylius-1.9/Resources/config/api_resources/* config/api_platform/
 
 **5.** Configure Shop, Admin and Admin API routing:
 
