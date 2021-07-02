@@ -14,9 +14,11 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\DataProvider;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -57,17 +59,17 @@ final class LocaleCollectionDataProviderSpec extends ObjectBehavior
         $channel->addLocale($firstLocale);
         $channel->addLocale($secondLocale);
 
-        $channel->getLocales()->willReturn([$firstLocale, $secondLocale]);
+        $channel->getLocales()->willReturn(new ArrayCollection([$firstLocale->getWrappedObject(), $secondLocale->getWrappedObject()]));
 
         $this
             ->getCollection(LocaleInterface::class, 'get', [ContextKeys::CHANNEL => $channel])
-            ->shouldReturn(new ArrayCollection([$firstLocale, $secondLocale]))
+            ->shouldBeLike(new ArrayCollection([$firstLocale->getWrappedObject(), $secondLocale->getWrappedObject()]))
         ;
     }
 
     function it_provides_all_locales_if_user_is_admin(
         UserContextInterface $userContext,
-        UserInterface $user,
+        AdminUserInterface $user,
         ChannelInterface $channel,
         LocaleInterface $firstLocale,
         LocaleInterface $secondLocale,

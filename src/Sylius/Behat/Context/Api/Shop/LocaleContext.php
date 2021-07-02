@@ -56,9 +56,11 @@ final class LocaleContext implements Context
      */
     public function theLocaleWithCodeShouldBeAvailable(string $name, string $code): void
     {
-        Assert::true(
-            $this->isLocaleWithName($name, $this->responseChecker->getCollection($this->client->getLastResponse()))
-        );
+        Assert::true($this->isLocaleWithNameAndCode(
+            $this->responseChecker->getCollection($this->client->getLastResponse()),
+            $name,
+            $code
+        ));
     }
 
     /**
@@ -66,15 +68,17 @@ final class LocaleContext implements Context
      */
     public function theLocaleWithCodeShouldNotBeAvailable(string $name, string $code): void
     {
-        Assert::false(
-            $this->isLocaleWithName($name, $this->responseChecker->getCollection($this->client->getLastResponse()))
-        );
+        Assert::false($this->isLocaleWithNameAndCode(
+            $this->responseChecker->getCollection($this->client->getLastResponse()),
+            $name,
+            $code
+        ));
     }
 
-    private function isLocaleWithName(string $name, array $locales): bool
+    private function isLocaleWithNameAndCode(array $locales, string $name, string $code): bool
     {
         foreach ($locales as $locale) {
-            if ($locale['name'] === $name) {
+            if ($locale['name'] === $name && $locale['code'] === $code) {
                 return true;
             }
         }

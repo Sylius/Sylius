@@ -1,5 +1,5 @@
 @locales
-Feature: Getting a available locales in current channel
+Feature: Getting available locales in the current channel
     In order to use a shop in chosen locale
     As a Customer
     I want to be able to get available locales
