@@ -43,7 +43,7 @@ class DisablingApiTest extends ApiTestCase
      */
     public function it_returns_route_not_found_with_api_disabled(): void
     {
-        $this->setEnv('SYLIUS_API_ENABLED', 'false');
+        $this->disableApi();
 
         static::createClient()->request(
             'GET',
@@ -52,22 +52,16 @@ class DisablingApiTest extends ApiTestCase
 
         $this->assertResponseStatusCodeSame(404);
 
-        $response = static::createClient()->request(
-            'POST',
-            'api/v2/shop/authentication-token',
-            [
-                'body' => [
-                  "email" => "api@example.com",
-                  "password" => "sylius-api"
-                ]
-            ]
-        );
-
-        dd($response);
+        $this->enableApi();
     }
 
-    private function setEnv(string $key, string $value): void
+    private function disableApi(): void
     {
-        $_ENV[$key] = $value;
+        $_ENV['SYLIUS_API_ENABLED'] = 'false';
+    }
+
+    private function enableApi(): void
+    {
+        $_ENV['SYLIUS_API_ENABLED'] = 'true';
     }
 }
