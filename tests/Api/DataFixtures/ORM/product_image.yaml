@@ -1,0 +1,11 @@
+Sylius\Component\Core\Model\Product:
+    product:
+        fallbackLocale: en_US
+        currentLocale: en
+        code: MUG_SW
+        images: ["@product_thumbnail"]
+        
+Sylius\Component\Core\Model\ProductImage:
+    product_thumbnail:
+        type: "thumbnail"
+        path: "/uo/product.jpg"

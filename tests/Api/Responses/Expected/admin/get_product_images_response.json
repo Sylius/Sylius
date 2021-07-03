@@ -1,0 +1,15 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductImage",
+    "@id": "\/api\/v2\/admin\/product-images",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/product-images\/@integer@",
+            "@type": "ProductImage",
+            "id": "@integer@",
+            "type": "thumbnail",
+            "path": "\/uo\/product.jpg"
+        }
+    ],
+    "hydra:totalItems": 1
+}
