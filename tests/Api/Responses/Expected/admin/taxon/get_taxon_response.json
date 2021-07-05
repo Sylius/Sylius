@@ -19,5 +19,6 @@
         "\/api\/v2\/admin\/taxons\/MUG",
         "\/api\/v2\/admin\/taxons\/HAT",
         "\/api\/v2\/admin\/taxons\/T_SHIRTS"
-    ]
+    ],
+    "enabled": true
 }

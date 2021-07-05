@@ -102,7 +102,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_creates_product_variant(): void
+    public function it_creates_product_variant_enabled_by_default(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'product/product_variant.yaml', 'authentication/api_administrator.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -123,13 +123,47 @@ final class ProductVariantsTest extends JsonApiTestCase
                     'price' => 4000,
                     'originalPrice' => 5000,
                     'minimumPrice' => 2000,
-                ]]
+                ]],
             ], JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/product_variant/post_product_variant_response',
+            Response::HTTP_CREATED,
+        );
+    }
+
+    /** @test */
+    public function it_creates_disabled_product_variant(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'product/product_variant.yaml', 'authentication/api_administrator.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductInterface $product */
+        $product = $fixtures['product'];
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/product-variants',
+            server: $header,
+            content: json_encode([
+                'code' => 'MUG_2',
+                'position' => 1,
+                'product' => sprintf('/api/v2/admin/products/%s', $product->getCode()),
+                'channelPricings' => ['WEB' => [
+                    'channelCode' => 'WEB',
+                    'price' => 4000,
+                    'originalPrice' => 5000,
+                    'minimumPrice' => 2000,
+                ]],
+                'enabled' => false,
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_variant/post_product_variant_disabled_response',
             Response::HTTP_CREATED,
         );
     }

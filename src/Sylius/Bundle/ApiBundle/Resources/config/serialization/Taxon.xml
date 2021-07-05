@@ -31,5 +31,10 @@
             <group>admin:taxon:read</group>
             <group>shop:taxon:read</group>
         </attribute>
+        <attribute name="enabled">
+            <group>admin:taxon:read</group>
+            <group>admin:taxon:create</group>
+            <group>admin:taxon:update</group>
+        </attribute>
     </class>
 </serializer>

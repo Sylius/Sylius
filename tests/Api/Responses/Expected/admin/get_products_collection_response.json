@@ -21,6 +21,7 @@
             ],
             "createdAt": @date@,
             "updatedAt": @date@,
+            "enabled": true,
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/product-translations\/@integer@",

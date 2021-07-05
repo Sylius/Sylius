@@ -23,7 +23,8 @@
                 "\/api\/v2\/admin\/taxons\/MUG",
                 "\/api\/v2\/admin\/taxons\/HAT",
                 "\/api\/v2\/admin\/taxons\/T_SHIRTS"
-            ]
+            ],
+            "enabled": true
         },
         {
             "@id": "\/api\/v2\/admin\/taxons\/MUG",
@@ -50,7 +51,8 @@
                     "locale": "de_DE"
                 }
             },
-            "children": []
+            "children": [],
+            "enabled": true
         },
         {
             "@id": "\/api\/v2\/admin\/taxons\/HAT",
@@ -77,7 +79,8 @@
                     "locale": "de_DE"
                 }
             },
-            "children": []
+            "children": [],
+            "enabled": true
         },
         {
             "@id": "\/api\/v2\/admin\/taxons\/T_SHIRTS",
@@ -107,7 +110,8 @@
             "children": [
                 "\/api\/v2\/admin\/taxons\/MEN_T_SHIRTS",
                 "\/api\/v2\/admin\/taxons\/WOMEN_T_SHIRTS"
-            ]
+            ],
+            "enabled": true
         },
         {
             "@id": "\/api\/v2\/admin\/taxons\/MEN_T_SHIRTS",
@@ -134,7 +138,8 @@
                     "locale": "de_DE"
                 }
             },
-            "children": []
+            "children": [],
+            "enabled": true
         },
         {
             "@id": "\/api\/v2\/admin\/taxons\/WOMEN_T_SHIRTS",
@@ -161,7 +166,8 @@
                     "locale": "de_DE"
                 }
             },
-            "children": []
+            "children": [],
+            "enabled": true
         },
         {
             "@id": "\/api\/v2\/admin\/taxons\/BRAND",
@@ -188,7 +194,8 @@
                     "locale": "de_DE"
                 }
             },
-            "children": []
+            "children": [],
+            "enabled": true
         },
         {
             "@id": "\/api\/v2\/admin\/taxons\/de%3Flol=xd%23boom",
@@ -206,7 +213,8 @@
                     "locale": "en_US"
                 }
             },
-            "children": []
+            "children": [],
+            "enabled": true
         }
     ],
     "hydra:totalItems": 8

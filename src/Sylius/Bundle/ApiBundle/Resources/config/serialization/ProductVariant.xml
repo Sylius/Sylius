@@ -41,5 +41,10 @@
         <attribute name="name">
             <group>shop:product_variant:read</group>
         </attribute>
+        <attribute name="enabled">
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+        </attribute>
     </class>
 </serializer>
