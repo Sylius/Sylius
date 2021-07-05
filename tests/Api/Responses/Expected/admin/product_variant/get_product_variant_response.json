@@ -24,5 +24,6 @@
             "name":"Mug",
             "locale":"en_US"
         }
-    }
+    },
+    "enabled": true
 }

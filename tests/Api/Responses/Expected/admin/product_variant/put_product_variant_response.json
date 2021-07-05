@@ -16,6 +16,7 @@
         }
     },
     "optionValues":[],
+    "enabled": true,
     "translations": {
         "en_US": {
             "@id":"\/api\/v2\/admin\/product-variant-translation\/@integer@",
