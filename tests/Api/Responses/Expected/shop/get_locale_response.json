@@ -1,0 +1,7 @@
+{
+  "@context":"\/api\/v2\/contexts\/Locale",
+  "@id":"\/api\/v2\/shop\/locales\/en_US",
+  "@type":"Locale",
+  "code":"en_US",
+  "name":"English (United States)"
+}
