@@ -41,6 +41,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 
     composer config repositories.plus composer https://sylius.repo.packagist.com/ShortNameOfYourOrganization/
     composer config minimum-stability rc #due to the usage of some pre-stable packages (like SyliusRefundPlugin)
+    composer require "friendsofsymfony/oauth-server-bundle":">2.0.0-alpha.0 ^2.0@dev"
     composer require sylius/plus --no-update
     composer update --no-scripts
     composer sync-recipes
