@@ -26,9 +26,7 @@ class DisablingApiTest extends ApiTestCase
         $this->setUpTest();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_gets_collection_if_api_is_enabled(): void
     {
         static::createClient()->request(
@@ -40,9 +38,7 @@ class DisablingApiTest extends ApiTestCase
         $this->assertResponseIsSuccessful();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_returns_route_not_found_if_api_is_disabled(): void
     {
         $this->disableApi();
@@ -67,9 +63,7 @@ class DisablingApiTest extends ApiTestCase
         $this->assertResponseIsSuccessful();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_throws_not_found_exception_for_any_api_endpoint(): void
     {
         $this->disableApi();

@@ -1,5 +1,7 @@
 # UPGRADE FROM `v1.8.4` TO `v1.8.6`
 
+1. Api is disabled by default, to enable it you need to set flag ``sylius_api.enabled`` to ``true`` in ``app/config/packages/_sylius.yaml``.
+
 1. Change configuration of new ApiBundle in your `config/packages/security.yaml` file:
 
     ```diff
@@ -76,8 +78,6 @@
     ```
 
 # UPGRADE FROM `v1.7.X` TO `v1.8.0`
-
-1. Api is disabled by default, to enable it you need to set flag ``sylius_api.enabled`` to ``true`` in ``app/config/packages/_sylius.yaml``.
 
 1. Add new bundles to your list of used bundles in `config/bundles.php` if you are not using it apart from Sylius:
 

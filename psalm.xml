@@ -123,6 +123,7 @@
                 <referencedMethod name="Symfony\Component\Intl\Intl::getLocaleBundle" />
                 <referencedMethod name="Symfony\Component\Intl\Intl::getRegionBundle" />
                 <referencedMethod name="Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent::getException" />
+                <referencedMethod name="Faker\Generator::__get"/>
             </errorLevel>
         </DeprecatedMethod>
 
