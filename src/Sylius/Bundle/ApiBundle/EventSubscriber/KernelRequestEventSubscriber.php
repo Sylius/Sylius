@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /** @experimental  */
-class KernelRequestEventSubscriber implements EventSubscriberInterface
+final class KernelRequestEventSubscriber implements EventSubscriberInterface
 {
     /** @var bool */
     private $apiEnabled;
@@ -45,7 +45,7 @@ class KernelRequestEventSubscriber implements EventSubscriberInterface
     {
         $pathInfo = $event->getRequest()->getPathInfo();
 
-        if($this->apiEnabled === false && strpos($pathInfo, $this->apiRoute) !== false) {
+        if ($this->apiEnabled === false && strpos($pathInfo, $this->apiRoute) !== false) {
             throw new NotFoundHttpException('Route not found');
         }
     }
