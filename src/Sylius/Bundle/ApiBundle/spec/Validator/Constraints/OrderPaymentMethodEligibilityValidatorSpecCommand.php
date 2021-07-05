@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
-use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareCommandInterface;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibility;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -49,7 +49,7 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_constraint_does_not_type_of_order_shipping_method_eligibility(): void
     {
-        $constraint = new class() extends Constraint implements OrderTokenValueAwareInterface {
+        $constraint = new class() extends Constraint implements OrderTokenValueAwareCommandInterface {
             private $orderTokenValue;
 
             function getOrderTokenValue(): ?string

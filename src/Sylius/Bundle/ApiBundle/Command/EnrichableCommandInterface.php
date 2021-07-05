@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command;
 
-/** @experimental */
-interface OrderTokenValueAwareInterface extends CommandAwareDataTransformerInterface
+/**
+ * Marker interface, used to inform \Sylius\Bundle\ApiBundle\DataTransformer\CompositeEnrichableCommandDataTransformer,
+ * that this command should be passed through Sylius transformers
+ *
+ * @experimental
+ */
+interface EnrichableCommandInterface
 {
-    public function getOrderTokenValue(): ?string;
-
-    public function setOrderTokenValue(?string $orderTokenValue): void;
 }

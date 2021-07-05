@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DependencyInjection\Compiler;
 
-use Sylius\Bundle\ApiBundle\DataTransformer\CommandAwareInputDataTransformer;
+use Sylius\Bundle\ApiBundle\DataTransformer\CompositeEnrichableCommandDataTransformer;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -24,7 +24,7 @@ final class CommandDataTransformerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $commandDataTransformersChainDefinition = new Definition(CommandAwareInputDataTransformer::class);
+        $commandDataTransformersChainDefinition = new Definition(CompositeEnrichableCommandDataTransformer::class);
 
         $taggedServices = $container->findTaggedServiceIds('sylius.api.command_data_transformer');
 

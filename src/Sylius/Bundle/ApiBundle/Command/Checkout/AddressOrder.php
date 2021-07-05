@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
-use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareCommandInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 
 /** @experimental */
-class AddressOrder implements OrderTokenValueAwareInterface
+class AddressOrder implements OrderTokenValueAwareCommandInterface
 {
     /** @var string */
     public $orderTokenValue;

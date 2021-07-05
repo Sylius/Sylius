@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
-use Sylius\Bundle\ApiBundle\Command\ChangeShopUserPassword;
+use Sylius\Bundle\ApiBundle\Command\ChangeShopUserPasswordCommand;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
@@ -35,7 +35,7 @@ final class ChangeShopUserPasswordHandler implements MessageHandlerInterface
         $this->userRepository = $userRepository;
     }
 
-    public function __invoke(ChangeShopUserPassword $changeShopUserPassword)
+    public function __invoke(ChangeShopUserPasswordCommand $changeShopUserPassword)
     {
         if ($changeShopUserPassword->confirmNewPassword !== $changeShopUserPassword->newPassword) {
             throw new \InvalidArgumentException('Passwords do not match.');
