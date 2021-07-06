@@ -24,12 +24,10 @@ final class AddressesPostTest extends JsonApiTestCase
     public function it_denies_access_to_a_create_an_address_for_not_authenticated_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'country.yaml']);
-        /** @var CustomerInterface $customer */
-        $customer = $fixtures['customer_Oliver'];
         /** @var CountryInterface $country */
         $country = $fixtures['country_US'];
 
-        $bodyRequest = $this->createBodyRequest($customer, $country);
+        $bodyRequest = $this->createBodyRequest($country->getCode());
 
         $this->client->request(
             'POST',
@@ -41,7 +39,7 @@ final class AddressesPostTest extends JsonApiTestCase
         );
 
         $response = $this->client->getResponse();
-        $this->assertSame(Response::HTTP_INTERNAL_SERVER_ERROR, $response->getStatusCode());
+        $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
     }
 
     /** @test */
@@ -67,7 +65,7 @@ final class AddressesPostTest extends JsonApiTestCase
 
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
 
-        $bodyRequest = $this->createBodyRequest($customer, $country);
+        $bodyRequest = $this->createBodyRequest($country->getCode());
 
         $this->client->request(
             'POST',
@@ -83,15 +81,14 @@ final class AddressesPostTest extends JsonApiTestCase
         $this->assertResponse($response, 'shop/post_addresses_response', Response::HTTP_CREATED);
     }
 
-    private function createBodyRequest(CustomerInterface $customer, CountryInterface $country): array
+    private function createBodyRequest(string $countryCode): array
     {
         return [
-            'customer' => '/api/v2/shop/customers/'.$customer->getId(),
             'firstName'=> 'TEST',
             'lastName'=> 'TEST',
             'phoneNumber'=> '666111333',
             'company'=> 'Potato Corp.',
-            'countryCode'=> $country->getCode(),
+            'countryCode'=> $countryCode,
             'provinceCode'=> null,
             'provinceName'=> null,
             'street'=> 'Top secret',

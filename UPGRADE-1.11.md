@@ -75,3 +75,21 @@
             ...
         }
     ```
+
+1. Request body of `POST` `api/v2/shop/addresses` endpoint has been changed:
+
+    ```diff
+        {
+    -       "customer": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "phoneNumber": "string",
+            "company": "string",
+            "countryCode": "string",
+            "provinceCode": "string",
+            "provinceName": "string",
+            "street": "string",
+            "city": "string",
+            "postcode": "string"
+        }
+    ```
