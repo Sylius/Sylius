@@ -36,6 +36,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:tax_rate:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:tax_rate:create</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -50,6 +53,9 @@
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
+                    <attribute name="groups">admin:tax_rate:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
                     <attribute name="groups">admin:tax_rate:update</attribute>
                 </attribute>
             </itemOperation>

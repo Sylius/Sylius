@@ -63,6 +63,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:shipment:update</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shipment:update</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 

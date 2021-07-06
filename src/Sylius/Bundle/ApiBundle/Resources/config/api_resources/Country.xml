@@ -46,6 +46,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:country:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:country:create</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -60,12 +63,18 @@
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/countries/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:country:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/countries/{code}</attribute>
                 <attribute name="denormalization_context">
+                    <attribute name="groups">admin:country:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
                     <attribute name="groups">admin:country:update</attribute>
                 </attribute>
             </itemOperation>

@@ -23,7 +23,7 @@
                     <attribute name="groups">admin:taxon:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon:read</attribute>
+                    <attribute name="groups">admin:taxon:create</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -52,7 +52,7 @@
                     <attribute name="groups">admin:taxon:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon:read</attribute>
+                    <attribute name="groups">admin:taxon:update</attribute>
                 </attribute>
             </itemOperation>
 

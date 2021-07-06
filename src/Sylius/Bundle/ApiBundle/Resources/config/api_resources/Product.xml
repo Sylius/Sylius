@@ -58,6 +58,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product:create</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -91,7 +94,7 @@
                     <attribute name="groups">admin:product:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product:read</attribute>
+                    <attribute name="groups">admin:product:update</attribute>
                 </attribute>
             </itemOperation>
 
@@ -127,5 +130,13 @@
         <property name="enabled" readable="true" />
         <property name="attributes" required="false" />
         <property name="averageRating" readable="true" />
+        <property name="defaultVariant" readable="true">
+            <attribute name="openapi_context">
+                <attribute name="type">string</attribute>
+                <attribute name="format">iri-reference</attribute>
+                <attribute name="nullable">true</attribute>
+            </attribute>
+        </property>
+
     </resource>
 </resources>

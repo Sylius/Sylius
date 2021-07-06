@@ -33,6 +33,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:promotion:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:promotion:create</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -47,6 +50,9 @@
             <itemOperation name="admin_update">
                 <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
+                    <attribute name="groups">admin:promotion:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
                     <attribute name="groups">admin:promotion:update</attribute>
                 </attribute>
             </itemOperation>

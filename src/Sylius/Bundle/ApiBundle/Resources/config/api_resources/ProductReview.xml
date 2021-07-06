@@ -33,7 +33,11 @@
                 <attribute name="path">/shop/product-reviews</attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\AddProductReview</attribute>
+                <attribute name="output">Sylius\Bundle\ApiBundle\Command\AddProductReview</attribute>
                 <attribute name="denormalization_context">
+                    <attribute name="groups">shop:product_review:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
                     <attribute name="groups">shop:product_review:create</attribute>
                 </attribute>
             </collectionOperation>
@@ -44,6 +48,9 @@
                 <attribute name="filters">
                     <attribute>sylius.api.product_review_product_filter</attribute>
                     <attribute>sylius.api.product_review_date_filter</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_review:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -76,8 +83,8 @@
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/product-reviews/{id}</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">product_review:update</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_review:update</attribute>
                 </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_review:update</attribute>

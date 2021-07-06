@@ -46,6 +46,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:shipping_method:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shipping_method:create</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -70,6 +73,9 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/shipping-methods/{code}</attribute>
                 <attribute name="denormalization_context">
+                    <attribute name="groups">admin:shipping_method:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
                     <attribute name="groups">admin:shipping_method:update</attribute>
                 </attribute>
             </itemOperation>

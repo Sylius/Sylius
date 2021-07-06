@@ -26,6 +26,9 @@
             <collectionOperation name="shop_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/shop/account/addresses</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:address:create</attribute>
+                </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:address:create</attribute>
                 </attribute>
@@ -60,6 +63,9 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/shop/account/addresses/{id}</attribute>
                 <attribute name="denormalization_context">
+                    <attribute name="groups">shop:address:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
                     <attribute name="groups">shop:address:update</attribute>
                 </attribute>
             </itemOperation>

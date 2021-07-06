@@ -30,6 +30,12 @@
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/currencies</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:currency:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:currency:create</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 

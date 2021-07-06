@@ -41,6 +41,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:payment_method:update</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:payment_method:update</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">

@@ -28,14 +28,16 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:province:read</attribute>
                 </attribute>
-
-                <attribute name="denormalization_context">
-                    <attribute name="groups">admin:province:update</attribute>
-                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:province:update</attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:province:update</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 

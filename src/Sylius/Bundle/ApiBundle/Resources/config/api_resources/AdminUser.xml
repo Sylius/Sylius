@@ -34,6 +34,9 @@
                     <attribute>sylius</attribute>
                     <attribute>sylius_user_create</attribute>
                 </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:admin_user:create</attribute>
+                </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:admin_user:create</attribute>
                 </attribute>
@@ -51,6 +54,9 @@
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
+                    <attribute name="groups">admin:admin_user:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
                     <attribute name="groups">admin:admin_user:update</attribute>
                 </attribute>
             </itemOperation>

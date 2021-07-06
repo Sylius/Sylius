@@ -132,6 +132,7 @@
             <group>admin:order:read</group>
             <group>admin:cart:update</group>
             <group>shop:order:read</group>
+            <group>shop:order:create</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
         </attribute>

@@ -28,10 +28,12 @@
        <attribute name="title">
            <group>admin:product_review:read</group>
            <group>admin:product_review:update</group>
+           <group>shop:product_review:create</group>
        </attribute>
        <attribute name="rating">
            <group>admin:product_review:read</group>
            <group>admin:product_review:update</group>
+           <group>shop:product_review:create</group>
        </attribute>
        <attribute name="comment">
            <group>admin:product_review:read</group>
@@ -40,6 +42,7 @@
        </attribute>
        <attribute name="author">
            <group>admin:product_review:read</group>
+           <group>shop:product_review:create</group>
        </attribute>
        <attribute name="status">
            <group>admin:product_review:read</group>
@@ -47,6 +50,7 @@
        </attribute>
        <attribute name="reviewSubject">
            <group>admin:product_review:read</group>
+           <group>shop:product_review:create</group>
        </attribute>
     </class>
 </serializer>

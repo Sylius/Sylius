@@ -87,5 +87,9 @@
         <attribute name="averageRating">
             <group>shop:product:read</group>
         </attribute>
+        <attribute name="defaultVariant">
+            <group>admin:product:read</group>
+            <group>shop:product:read</group>
+        </attribute>
     </class>
 </serializer>

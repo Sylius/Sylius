@@ -22,6 +22,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_attribute:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_attribute:create</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -46,6 +49,9 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/product-attributes/{code}</attribute>
                 <attribute name="denormalization_context">
+                    <attribute name="groups">admin:product_attribute:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
                     <attribute name="groups">admin:product_attribute:update</attribute>
                 </attribute>
             </itemOperation>

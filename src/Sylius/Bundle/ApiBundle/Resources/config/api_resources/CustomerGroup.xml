@@ -33,6 +33,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:customer_group:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:customer_group:create</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -47,6 +50,9 @@
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
+                    <attribute name="groups">admin:customer_group:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
                     <attribute name="groups">admin:customer_group:update</attribute>
                 </attribute>
             </itemOperation>
