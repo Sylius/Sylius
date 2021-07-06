@@ -60,6 +60,9 @@
                 <attribute name="openapi_context">
                     <attribute name="summary">Completes Payment</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:payment:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_refund">
@@ -70,6 +73,9 @@
                 <attribute name="openapi_context">
                     <attribute name="summary">Refunds Payment</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:payment:read</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 
@@ -79,6 +85,12 @@
                 <attribute name="path">/shop/payments/{id}/methods</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:payment:read</attribute>
+                </attribute>
+            </subresourceOperation>
+
+            <subresourceOperation name="api_orders_payments_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:payment:read</attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>

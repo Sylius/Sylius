@@ -56,7 +56,7 @@
                     <attribute name="groups">admin:exchange_rate:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:exchange_rate:update</attribute>
+                    <attribute name="groups">admin:exchange_rate:read</attribute>
                 </attribute>
             </itemOperation>
 

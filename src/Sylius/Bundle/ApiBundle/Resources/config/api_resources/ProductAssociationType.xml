@@ -39,9 +39,6 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_association_type:create</attribute>
                 </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_association_type:create</attribute>
-                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -53,9 +50,6 @@
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product_association_type:update</attribute>
-                </attribute>
-                <attribute name="normalization_context">
                     <attribute name="groups">admin:product_association_type:update</attribute>
                 </attribute>
             </itemOperation>

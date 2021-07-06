@@ -45,7 +45,7 @@
                     <attribute name="groups">shop:order:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:order:create</attribute>
+                    <attribute name="groups">shop:order:read</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Pickups a new cart. Provided locale code has to be one of available for a particular channel.</attribute>
@@ -362,6 +362,9 @@
                 <attribute name="path">/shop/orders/{tokenValue}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:cart:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:cart:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

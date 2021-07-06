@@ -30,7 +30,7 @@
                     <attribute name="groups">shop:address:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:address:create</attribute>
+                    <attribute name="groups">shop:address:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -66,7 +66,7 @@
                     <attribute name="groups">shop:address:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:address:update</attribute>
+                    <attribute name="groups">shop:address:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

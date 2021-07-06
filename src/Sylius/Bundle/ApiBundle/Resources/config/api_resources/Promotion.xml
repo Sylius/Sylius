@@ -34,7 +34,7 @@
                     <attribute name="groups">admin:promotion:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion:create</attribute>
+                    <attribute name="groups">admin:promotion:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -53,7 +53,7 @@
                     <attribute name="groups">admin:promotion:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion:update</attribute>
+                    <attribute name="groups">admin:promotion:read</attribute>
                 </attribute>
             </itemOperation>
 

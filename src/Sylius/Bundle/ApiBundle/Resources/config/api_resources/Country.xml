@@ -75,7 +75,7 @@
                     <attribute name="groups">admin:country:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:country:update</attribute>
+                    <attribute name="groups">admin:country:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

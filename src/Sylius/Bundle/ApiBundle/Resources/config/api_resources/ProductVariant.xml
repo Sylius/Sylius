@@ -47,7 +47,7 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/inventory/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_variant_inventory:update</attribute>
+                    <attribute name="groups">admin:product_variant_inventory:read</attribute>
                 </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_variant_inventory:update</attribute>
@@ -61,7 +61,7 @@
                     <attribute name="groups">admin:product_variant:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_variant:update</attribute>
+                    <attribute name="groups">admin:product_variant:read</attribute>
                 </attribute>
             </itemOperation>
 
@@ -98,7 +98,7 @@
                     <attribute name="groups">admin:product_variant:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_variant:create</attribute>
+                    <attribute name="groups">admin:product_variant:read</attribute>
                 </attribute>
             </collectionOperation>
 

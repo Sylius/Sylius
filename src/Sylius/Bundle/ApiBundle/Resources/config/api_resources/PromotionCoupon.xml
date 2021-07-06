@@ -27,7 +27,7 @@
                     <attribute name="groups">admin:promotion_coupon:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion_coupon:create</attribute>
+                    <attribute name="groups">admin:promotion_coupon:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -46,7 +46,7 @@
                     <attribute name="groups">admin:promotion_coupon:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion_coupon:update</attribute>
+                    <attribute name="groups">admin:promotion_coupon:read</attribute>
                 </attribute>
             </itemOperation>
 
@@ -56,8 +56,7 @@
         </itemOperations>
 
         <subresourceOperations>
-            <subresourceOperation name="api_promotions_promotion_coupon_get_subresource">
-                <attribute name="method">GET</attribute>
+            <subresourceOperation name="api_promotions_coupons_get_subresource">
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:promotion_coupon:read</attribute>
                 </attribute>

@@ -64,7 +64,7 @@
                     <attribute name="groups">admin:shipment:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipment:update</attribute>
+                    <attribute name="groups">admin:shipment:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
@@ -73,8 +73,11 @@
             <subresourceOperation name="methods_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/shipments/{id}/methods</attribute>
+            </subresourceOperation>
+
+            <subresourceOperation name="api_orders_shipments_get_subresource">
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:shipment:read</attribute>
+                    <attribute name="groups">admin:shipment:read</attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>

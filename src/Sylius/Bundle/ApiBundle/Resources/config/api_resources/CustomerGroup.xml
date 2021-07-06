@@ -53,7 +53,7 @@
                     <attribute name="groups">admin:customer_group:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:customer_group:update</attribute>
+                    <attribute name="groups">admin:customer_group:read</attribute>
                 </attribute>
             </itemOperation>
 

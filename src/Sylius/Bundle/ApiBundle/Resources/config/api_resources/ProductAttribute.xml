@@ -23,7 +23,7 @@
                     <attribute name="groups">admin:product_attribute:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_attribute:create</attribute>
+                    <attribute name="groups">admin:product_attribute:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -52,7 +52,7 @@
                     <attribute name="groups">admin:product_attribute:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_attribute:update</attribute>
+                    <attribute name="groups">admin:product_attribute:read</attribute>
                 </attribute>
             </itemOperation>
 

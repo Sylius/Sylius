@@ -42,7 +42,7 @@
                     <attribute name="groups">admin:payment_method:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:payment_method:update</attribute>
+                    <attribute name="groups">admin:payment_method:read</attribute>
                 </attribute>
             </itemOperation>
 
@@ -54,6 +54,20 @@
                 </attribute>
             </itemOperation>
         </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="api_orders_payments_methods_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:payment:read</attribute>
+                </attribute>
+            </subresourceOperation>
+
+            <subresourceOperation name="api_payments_methods_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:payment:read</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" writable="false" />

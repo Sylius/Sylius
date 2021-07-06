@@ -34,7 +34,7 @@
                     <attribute name="groups">admin:tax_category:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:tax_category:create</attribute>
+                    <attribute name="groups">admin:tax_category:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -53,7 +53,7 @@
                     <attribute name="groups">admin:tax_category:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:tax_category:update</attribute>
+                    <attribute name="groups">admin:tax_category:read</attribute>
                 </attribute>
             </itemOperation>
 
