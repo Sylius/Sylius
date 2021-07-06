@@ -38,12 +38,12 @@
                 <attribute name="type">object</attribute>
                 <attribute name="example">
                     <attribute name="shopName?">
-                        <attribute name="amount?">0</attribute>
-                        <attribute name="percentage?">0</attribute>
+                        <attribute name="amount?">integer</attribute>
+                        <attribute name="percentage?">integer</attribute>
                         <attribute name="filters?">
                             <attribute name="price_range_filter">
-                                <attribute name="min">0</attribute>
-                                <attribute name="max">0</attribute>
+                                <attribute name="min">integer</attribute>
+                                <attribute name="max">integer</attribute>
                             </attribute>
                             <attribute name="taxons_filter">
                                 <attribute name="taxons">
@@ -57,7 +57,7 @@
                             </attribute>
                         </attribute>
                     </attribute>
-                    <attribute name="percentage?">0</attribute>
+                    <attribute name="percentage?">integer</attribute>
                 </attribute>
             </attribute>
         </property>
