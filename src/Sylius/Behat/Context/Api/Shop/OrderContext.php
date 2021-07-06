@@ -36,9 +36,6 @@ final class OrderContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
-    /** @var ApiClientInterface */
-    private $paymentsClient;
-
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
@@ -50,24 +47,14 @@ final class OrderContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
-        ApiClientInterface $paymentsClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
         IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
-        $this->paymentsClient = $paymentsClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
         $this->iriConverter = $iriConverter;
-    }
-
-    /**
-     * @When I view the summary of the order :order
-     */
-    public function iSeeTheOrder(OrderInterface $order): void
-    {
-        $this->client->show($order->getTokenValue());
     }
 
     /**
@@ -262,7 +249,7 @@ final class OrderContext implements Context
      */
     public function iShouldSeeIHaveToPayForThisOrder(int $paymentAmount): void
     {
-        $response = $this->paymentsClient->showByIri(
+        $response = $this->client->showByIri(
             $this->responseChecker->getValue($this->client->getLastResponse(), 'payments')[0]['@id']
         );
 

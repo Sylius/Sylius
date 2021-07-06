@@ -112,7 +112,6 @@
 
         <service id="sylius.behat.context.api.shop.order" class="Sylius\Behat\Context\Api\Shop\OrderContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop.order" />
-            <argument type="service" id="sylius.behat.api_platform_client.shop.payment" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="api_platform.iri_converter" />

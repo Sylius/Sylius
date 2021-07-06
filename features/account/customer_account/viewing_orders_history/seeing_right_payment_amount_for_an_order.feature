@@ -19,6 +19,6 @@ Feature: Viewing payment's amount on my account panel
 
     @ui @api
     Scenario: Seeing total payment
-        When I view the summary of the order "#00000666"
+        When I view the summary of my order "#00000666"
         Then I should see "$66.60" as order's total
         And I should see that I have to pay "$66.60" for this order
