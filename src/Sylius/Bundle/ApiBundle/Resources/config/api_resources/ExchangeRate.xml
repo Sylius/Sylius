@@ -37,7 +37,7 @@
                     <attribute name="groups">admin:exchange_rate:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:exchange_rate:create</attribute>
+                    <attribute name="groups">admin:exchange_rate:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
