@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 final class LocalesTest extends JsonApiTestCase
 {
     /** @test */
-    public function it_gets_locales(): void
+    public function it_gets_locales_as_logged_in_administrator(): void
     {
         $this->loadFixturesFromFiles(['cart.yaml', 'authentication/api_administrator.yaml']);
 
@@ -48,5 +48,16 @@ final class LocalesTest extends JsonApiTestCase
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'admin/get_locales_response', Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function it_denies_access_to_a_locales_list_for_not_authenticated_user(): void
+    {
+        $this->loadFixturesFromFiles(['cart.yaml', 'authentication/api_administrator.yaml']);
+
+        $this->client->request('GET', '/api/v2/admin/locales');
+
+        $response = $this->client->getResponse();
+        $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
     }
 }

@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
 
 final class LocaleContext implements Context
@@ -41,6 +42,14 @@ final class LocaleContext implements Context
     }
 
     /**
+     * @When I get :locale locale
+     */
+    public function iGetLocale(LocaleInterface $locale): void
+    {
+        $this->client->show($locale->getCode());
+    }
+
+    /**
      * @Then I should have :count locales
      */
     public function iShouldHaveLocales(int $count): void
@@ -56,11 +65,9 @@ final class LocaleContext implements Context
      */
     public function theLocaleWithCodeShouldBeAvailable(string $name, string $code): void
     {
-        Assert::true($this->isLocaleWithNameAndCode(
-            $this->responseChecker->getCollection($this->client->getLastResponse()),
-            $name,
-            $code
-        ));
+        Assert::true(
+            $this->responseChecker->hasItemWithValues($this->client->getLastResponse(), ['name' => $name, 'code' => $code])
+        );
     }
 
     /**
@@ -68,21 +75,19 @@ final class LocaleContext implements Context
      */
     public function theLocaleWithCodeShouldNotBeAvailable(string $name, string $code): void
     {
-        Assert::false($this->isLocaleWithNameAndCode(
-            $this->responseChecker->getCollection($this->client->getLastResponse()),
-            $name,
-            $code
-        ));
+        Assert::false(
+            $this->responseChecker->hasItemWithValues($this->client->getLastResponse(), ['name' => $name, 'code' => $code])
+        );
     }
 
-    private function isLocaleWithNameAndCode(array $locales, string $name, string $code): bool
+    /**
+     * @Then I should have :name with code :code
+     */
+    public function iShouldHaveWithCode(string $name, string $code): void
     {
-        foreach ($locales as $locale) {
-            if ($locale['name'] === $name && $locale['code'] === $code) {
-                return true;
-            }
-        }
+        $response = $this->client->getLastResponse();
 
-        return false;
+        Assert::true($this->responseChecker->hasValue($response, 'name', $name));
+        Assert::true($this->responseChecker->hasValue($response, 'code', $code));
     }
 }

@@ -16,5 +16,6 @@ default:
                 - sylius.behat.context.setup.locale
 
                 - sylius.behat.context.api.shop.locale
+                
             filters:
                 tags: "@locales && @api"
