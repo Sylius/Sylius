@@ -34,7 +34,7 @@
                     <attribute name="groups">admin:currency:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:currency:create</attribute>
+                    <attribute name="groups">admin:currency:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
