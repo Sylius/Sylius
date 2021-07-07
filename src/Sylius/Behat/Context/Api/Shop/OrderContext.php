@@ -18,9 +18,11 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -34,7 +36,10 @@ use Webmozart\Assert\Assert;
 final class OrderContext implements Context
 {
     /** @var ApiClientInterface */
-    private $client;
+    private $shopOrderClient;
+
+    /** @var ApiClientInterface */
+    private $adminOrderClient;
 
     /** @var ResponseCheckerInterface */
     private $responseChecker;
@@ -45,16 +50,23 @@ final class OrderContext implements Context
     /** @var IriConverterInterface */
     private $iriConverter;
 
+    /** @var SecurityServiceInterface */
+    private $adminSecurityService;
+
     public function __construct(
-        ApiClientInterface $client,
+        ApiClientInterface $shopOrderClient,
+        ApiClientInterface $adminOrderClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
-        IriConverterInterface $iriConverter
+        IriConverterInterface $iriConverter,
+        SecurityServiceInterface $adminSecurityService
     ) {
-        $this->client = $client;
+        $this->shopOrderClient = $shopOrderClient;
+        $this->adminOrderClient = $adminOrderClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
         $this->iriConverter = $iriConverter;
+        $this->adminSecurityService = $adminSecurityService;
     }
 
     /**
@@ -72,12 +84,12 @@ final class OrderContext implements Context
                 (string) $order->getPayments()->first()->getId()
             ),
             HttpRequest::METHOD_PATCH,
-            $this->client->getToken()
+            $this->shopOrderClient->getToken()
         );
 
         $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromItem($paymentMethod)]);
 
-        $this->client->executeCustomRequest($request);
+        $this->shopOrderClient->executeCustomRequest($request);
     }
 
     /**
@@ -85,7 +97,7 @@ final class OrderContext implements Context
      */
     public function iViewTheSummaryOfMyOrder(OrderInterface $order): void
     {
-        $this->client->show($order->getTokenValue());
+        $this->shopOrderClient->show($order->getTokenValue());
     }
 
     /**
@@ -105,16 +117,16 @@ final class OrderContext implements Context
      */
     public function iShouldBeAbleToAccessThisOrderDetails(): void
     {
-        $response = $this->client->show($this->sharedStorage->get('cart_token'));
+        $response = $this->shopOrderClient->show($this->sharedStorage->get('cart_token'));
 
         Assert::same($response->getStatusCode(), Response::HTTP_OK);
         Assert::same(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'checkoutState'),
+            $this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), 'checkoutState'),
             OrderCheckoutStates::STATE_COMPLETED
         );
         Assert::same(
             $this->sharedStorage->get('order_number'),
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'number')
+            $this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), 'number')
         );
     }
 
@@ -123,7 +135,7 @@ final class OrderContext implements Context
      */
     public function itShouldHaveTheNumber(string $orderNumber): void
     {
-        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'number'), $orderNumber);
+        Assert::same($this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), 'number'), $orderNumber);
     }
 
     /**
@@ -137,7 +149,7 @@ final class OrderContext implements Context
         CountryInterface $country,
         string $addressType
     ): void {
-        $address = $this->responseChecker->getValue($this->client->getLastResponse(), ($addressType . 'Address'));
+        $address = $this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), ($addressType . 'Address'));
 
         $names = explode(' ', $customerName);
 
@@ -154,7 +166,7 @@ final class OrderContext implements Context
      */
     public function iShouldSeeItemsInTheList(int $amount): void
     {
-        Assert::same(count($this->responseChecker->getValue($this->client->getLastResponse(), 'items')), $amount);
+        Assert::same(count($this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), 'items')), $amount);
     }
 
     /**
@@ -162,7 +174,7 @@ final class OrderContext implements Context
      */
     public function theProductShouldBeInTheItemsList(string $productName): void
     {
-        $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'items');
+        $items = $this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), 'items');
 
         foreach ($items as $item) {
             if ($item['productName'] === $productName) {
@@ -182,7 +194,7 @@ final class OrderContext implements Context
         string $elementStatus,
         int $position = 0
     ): void {
-        $resources = $this->responseChecker->getValue($this->client->getLastResponse(), $elementType . 's');
+        $resources = $this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), $elementType . 's');
 
         $resource = $this->iriConverter->getItemFromIri($resources[$position]['@id']);
 
@@ -203,7 +215,7 @@ final class OrderContext implements Context
             $orderElementState,
             StringInflector::codeToName(
                 $this->responseChecker->getValue(
-                    $this->client->getLastResponse(),
+                    $this->shopOrderClient->getLastResponse(),
                     $elementType . 'State'
                 )
             )
@@ -215,7 +227,7 @@ final class OrderContext implements Context
      */
     public function iShouldSeeAsProvinceInTheShippingAddress(string $provinceName, string $addressType): void
     {
-        $address = $this->responseChecker->getValue($this->client->getLastResponse(), ($addressType . 'Address'));
+        $address = $this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), ($addressType . 'Address'));
 
         Assert::same($address['provinceName'], $provinceName);
     }
@@ -225,7 +237,7 @@ final class OrderContext implements Context
      */
     public function iShouldSeeAsOrderSSubtotal(int $expectedSubtotal): void
     {
-        $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'items');
+        $items = $this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), 'items');
 
         $subtotal = 0;
 
@@ -241,7 +253,7 @@ final class OrderContext implements Context
      */
     public function iShouldSeeAsOrderSTotal(int $total): void
     {
-        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'total'), $total);
+        Assert::same($this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), 'total'), $total);
     }
 
     /**
@@ -249,8 +261,8 @@ final class OrderContext implements Context
      */
     public function iShouldSeeIHaveToPayForThisOrder(int $paymentAmount): void
     {
-        $response = $this->client->showByIri(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'payments')[0]['@id']
+        $response = $this->shopOrderClient->showByIri(
+            $this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), 'payments')[0]['@id']
         );
 
         Assert::same($this->responseChecker->getValue($response, 'amount'), $paymentAmount);
@@ -297,7 +309,7 @@ final class OrderContext implements Context
     {
         $payment = $this
             ->responseChecker
-            ->getValue($this->client->show($this->sharedStorage->get('cart_token')), 'payments')[0]
+            ->getValue($this->shopOrderClient->show($this->sharedStorage->get('cart_token')), 'payments')[0]
         ;
 
         Assert::same($this->iriConverter->getIriFromItem($paymentMethod), $payment['method']);
@@ -308,7 +320,7 @@ final class OrderContext implements Context
      */
     public function iShouldNotBeAbleToSeeThatOrder(): void
     {
-        Assert::false($this->responseChecker->isShowSuccessful($this->client->getLastResponse()));
+        Assert::false($this->responseChecker->isShowSuccessful($this->shopOrderClient->getLastResponse()));
     }
 
     /**
@@ -316,7 +328,7 @@ final class OrderContext implements Context
      */
     public function iShouldDeniedAnAccessToOrderList(): void
     {
-        Assert::true($this->responseChecker->hasAccessDenied($this->client->getLastResponse()));
+        Assert::true($this->responseChecker->hasAccessDenied($this->shopOrderClient->getLastResponse()));
     }
 
     /**
@@ -326,22 +338,54 @@ final class OrderContext implements Context
     {
         $paymentMethodIri = $this
             ->responseChecker
-            ->getValue($this->client->getLastResponse(), 'payments')[0]['method']['@id']
+            ->getValue($this->shopOrderClient->getLastResponse(), 'payments')[0]['method']['@id']
         ;
 
         Assert::same($this->iriConverter->getItemFromIri($paymentMethodIri)->getCode(), $paymentMethod->getCode());
     }
 
+    /**
+     * @Then /^(the administrator) should know about (this additional note) for (this order made by "[^"]+")$/
+     */
+    public function theCustomerServiceShouldKnowAboutThisAdditionalNotes(
+        AdminUserInterface $user,
+        string $notes,
+        OrderInterface $order
+    ): void {
+        $this->adminSecurityService->logIn($user);
+
+        Assert::same(
+            $notes,
+            $this->responseChecker->getValue($this->adminOrderClient->show($order->getTokenValue()), 'notes')
+        );
+    }
+
+    /**
+     * @Then /^(the administrator) should see that (order placed by "[^"]+") has "([^"]+)" currency$/
+     */
+    public function theAdministratorShouldSeeThatThisOrderHasBeenPlacedIn(
+        AdminUserInterface $user,
+        OrderInterface $order,
+        string $currency
+    ): void {
+        $this->adminSecurityService->logIn($user);
+
+        Assert::same(
+            $currency,
+            $this->responseChecker->getValue($this->adminOrderClient->show($order->getTokenValue()), 'currencyCode')
+        );
+    }
+
     private function getAdjustmentsForOrder(): array
     {
-        $response = $this->client->subResourceIndex('adjustments', $this->sharedStorage->get('cart_token'));
+        $response = $this->shopOrderClient->subResourceIndex('adjustments', $this->sharedStorage->get('cart_token'));
 
         return $this->responseChecker->getCollection($response);
     }
 
     private function getAdjustmentsForOrderItem(string $itemId): array
     {
-        $response = $this->client->customAction(
+        $response = $this->shopOrderClient->customAction(
             sprintf('/api/v2/shop/orders/%s/items/%s/adjustments', $this->sharedStorage->get('cart_token'), $itemId),
             HttpRequest::METHOD_GET
         );
@@ -351,7 +395,7 @@ final class OrderContext implements Context
 
     private function geOrderItemIdForProductInCart(ProductInterface $product, string $tokenValue): ?string
     {
-        $items = $this->responseChecker->getValue($this->client->show($tokenValue), 'items');
+        $items = $this->responseChecker->getValue($this->shopOrderClient->show($tokenValue), 'items');
 
         foreach ($items as $item) {
             $response = $this->getProductForItem($item);
@@ -372,9 +416,9 @@ final class OrderContext implements Context
             );
         }
 
-        $this->client->executeCustomRequest(Request::custom($item['variant'], HttpRequest::METHOD_GET));
+        $this->shopOrderClient->executeCustomRequest(Request::custom($item['variant'], HttpRequest::METHOD_GET));
 
-        return $this->client->showByIri($this->responseChecker->getValue($this->client->getLastResponse(), 'product'));
+        return $this->shopOrderClient->showByIri($this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), 'product'));
     }
 
     private function getAdjustmentWithLabel(string $label): ?array

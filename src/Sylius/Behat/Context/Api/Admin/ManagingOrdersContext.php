@@ -324,21 +324,6 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then /^(the administrator) should know about (this additional note) for (this order made by "[^"]+")$/
-     */
-    public function theCustomerServiceShouldKnowAboutThisAdditionalNotes(
-        AdminUserInterface $user,
-        string $notes,
-        OrderInterface $order
-    ): void {
-        $this->adminSecurityService->logIn($user);
-
-        $orderNotes = $this->responseChecker->getValue($this->client->show($order->getTokenValue()), 'notes');
-
-        Assert::same($notes, $orderNotes);
-    }
-
-    /**
      * @Then /^(the administrator) should see that (order placed by "[^"]+") has "([^"]+)" currency$/
      */
     public function theAdministratorShouldSeeThatThisOrderHasBeenPlacedIn(
