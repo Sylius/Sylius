@@ -35,7 +35,7 @@
                     <attribute name="summary">Registers a new customer</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:customer:create</attribute>
+                    <attribute name="groups">admin:customer:read</attribute>
                 </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:customer:create</attribute>
