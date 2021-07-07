@@ -46,6 +46,7 @@ Payments
     payments/customizing-credit-memo
     payments/refund-process
     payments/custom-field-on-refund-payment
+    payments/custom-type-of-refund
 
 .. include:: /cookbook/payments/map.rst.inc
 
