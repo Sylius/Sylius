@@ -6,3 +6,4 @@
 * :doc:`/cookbook/payments/customizing-credit-memo`
 * :doc:`/cookbook/payments/refund-process`
 * :doc:`/cookbook/payments/custom-field-on-refund-payment`
+* :doc:`/cookbook/payments/custom-type-of-refund`
