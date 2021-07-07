@@ -38,7 +38,7 @@
                     <attribute name="groups">admin:admin_user:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:admin_user:create</attribute>
+                    <attribute name="groups">admin:admin_user:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
