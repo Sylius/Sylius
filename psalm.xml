@@ -118,6 +118,7 @@
                 <referencedMethod name="Symfony\Component\HttpKernel\Event\KernelEvent::isMasterRequest" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedMethod name="Symfony\Component\Security\Core\User\UserInterface::getUsername" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedMethod name="Symfony\Component\Security\Core\User\UserProviderInterface::loadUserByUsername" /> <!-- deprecated in Symfony 5.3 -->
+                <referencedMethod name="Faker\Generator::__get"/>
             </errorLevel>
         </DeprecatedMethod>
 

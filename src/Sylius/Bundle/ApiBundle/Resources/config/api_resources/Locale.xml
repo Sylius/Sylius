@@ -17,6 +17,7 @@
 >
     <resource class="%sylius.model.locale.class%" shortName="Locale">
         <attribute name="validation_groups">sylius</attribute>
+        <attribute name="pagination_enabled">false</attribute>
 
         <collectionOperations>
             <collectionOperation name="admin_get">
