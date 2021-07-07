@@ -34,7 +34,7 @@
                     <attribute name="groups">admin:customer_group:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:customer_group:create</attribute>
+                    <attribute name="groups">admin:customer_group:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
