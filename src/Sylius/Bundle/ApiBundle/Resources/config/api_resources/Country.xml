@@ -47,7 +47,7 @@
                     <attribute name="groups">admin:country:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:country:create</attribute>
+                    <attribute name="groups">admin:country:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
