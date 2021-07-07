@@ -194,6 +194,11 @@
             <argument>shop</argument>
         </service>
 
+        <service id="sylius.behat.api_platform_client.shop.locale" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
+            <argument>locales</argument>
+            <argument>shop</argument>
+        </service>
+
         <service id="Sylius\Behat\Client\ResponseCheckerInterface" class="Sylius\Behat\Client\ResponseChecker">
             <argument type="service" id="test.client" />
         </service>
