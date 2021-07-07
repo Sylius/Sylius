@@ -110,6 +110,8 @@ and its first argument `NormalizerInterface $objectNormalizer` has been removed 
 
 ### New API
 
+1. Api is disabled by default, to enable it you need to set flag ``sylius_api.enabled`` to ``true`` in ``app/config/packages/_sylius.yaml``.
+
 1. Adjust your `config/packages/security.yaml`.
 
     * Parameters from `config/packages/security.yaml` has been moved to separated bundles. 

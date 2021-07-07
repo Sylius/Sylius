@@ -27,6 +27,14 @@ final class Configuration implements ConfigurationInterface
         /** @var ArrayNodeDefinition $rootNode */
         $rootNode = $treeBuilder->getRootNode();
 
+        $rootNode
+            ->children()
+                ->booleanNode('enabled')
+                    ->defaultTrue()
+                ->end()
+            ->end()
+        ;
+
         return $treeBuilder;
     }
 }

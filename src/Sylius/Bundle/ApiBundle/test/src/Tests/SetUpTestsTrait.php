@@ -53,5 +53,7 @@ trait SetUpTestsTrait
         $adminUser = $this->objects['admin'];
 
         $this->JWTAdminUserToken = $JWTManager->create($adminUser);
+
+        $_ENV['SYLIUS_API_ENABLED'] = true;
     }
 }
