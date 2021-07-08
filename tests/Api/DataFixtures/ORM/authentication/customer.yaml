@@ -1,5 +1,5 @@
 Sylius\Component\Core\Model\ShopUser:
-    user_{Oliver}:
+    shop_user_{oliver}:
         plainPassword: "sylius"
         roles: [ROLE_USER]
         enabled: true
@@ -8,7 +8,7 @@ Sylius\Component\Core\Model\ShopUser:
         usernameCanonical: "<current()>\\@doe.com"
 
 Sylius\Component\Core\Model\Customer:
-    customer_{Oliver}:
+    customer_{oliver}:
         firstName: "<current()>"
         lastName: "Doe"
         email: "<current()>\\@doe.com"
