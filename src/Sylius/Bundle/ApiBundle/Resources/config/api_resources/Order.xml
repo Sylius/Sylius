@@ -16,12 +16,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.order.class%" shortName="Order">
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>admin:order:read</attribute>
-            </attribute>
-        </attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
@@ -38,6 +32,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:order:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:cart:read</attribute>
+                </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Pickups a new cart. Provided locale code has to be one of available for a particular channel.</attribute>                </attribute>
             </collectionOperation>
@@ -46,9 +43,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/orders</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>shop:order:read</attribute>
-                    </attribute>
+                    <attribute name="groups">shop:cart:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -57,11 +52,17 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/orders/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:order:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/orders/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:cart:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_delete">
@@ -80,6 +81,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:order:update</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:order:read</attribute>
+                </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Cancels Order</attribute>
                 </attribute>
@@ -92,6 +96,9 @@
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:cart:add_item</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:cart:read</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Adds Item to cart</attribute>
@@ -306,6 +313,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:cart:change_quantity</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:cart:read</attribute>
+                </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Changes quantity of order item</attribute>
                 </attribute>
@@ -319,6 +329,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:cart:apply_coupon</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:cart:read</attribute>
+                </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Applies coupon to cart</attribute>
                 </attribute>
@@ -329,6 +342,9 @@
                 <attribute name="path">/shop/orders/{id}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:cart:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:cart:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
