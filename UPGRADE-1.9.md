@@ -1,3 +1,12 @@
+# UPGRADE FROM `v1.9.5` TO `v1.9.6`
+
+1. API is disabled by default, to enable it you need to set flag to ``true`` in ``app/config/packages/_sylius.yaml``:
+
+    ```yaml
+    sylius_api:
+        enabled: true
+    ```
+
 # UPGRADE FROM `v1.9.3` TO `v1.9.4`
 
 1. `Sylius\Bundle\ApiBundle\DataProvider\OrderCollectionDataProvider` has been removed and the same logic 
@@ -109,8 +118,6 @@ and its first argument `NormalizerInterface $objectNormalizer` has been removed 
     ```
 
 ### New API
-
-1. Api is disabled by default, to enable it you need to set flag ``sylius_api.enabled`` to ``true`` in ``app/config/packages/_sylius.yaml``.
 
 1. Adjust your `config/packages/security.yaml`.
 
