@@ -60,6 +60,15 @@ This is a simple guide on how to start using webpack in Sylius apps. Webpack fin
             <img src="{{ asset('assets/shop/img/logo.png') }}" alt="Sylius logo" class="ui small image" />
         </a>
     </div>
+    
+    // templates/bundles/SyliusShopBundle/Layout/Security/_content.html.twig
+    {% include '@SyliusUi/Security/_login.html.twig' with {
+    'action': path('sylius_admin_login_check'),
+    'paths': {
+        'logo': asset('build/admin/images/logo.png', 'admin')
+    }
+} %}
+
 
 
 .. warning::
