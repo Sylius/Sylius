@@ -1,0 +1,14 @@
+/adr export-ignore
+/docs export-ignore
+/features export-ignore
+/phpspec.yml.dist export-ignore
+/phpstan.neon.dist export-ignore
+/phpunit.xml.dist export-ignore
+/psalm.xml export-ignore
+/src/Sylius/Behat export-ignore
+/tests export-ignore
+/.env export-ignore
+/.env.test export-ignore
+/.env.test_cached export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
