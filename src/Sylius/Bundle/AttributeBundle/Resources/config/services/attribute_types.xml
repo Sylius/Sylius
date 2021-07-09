@@ -36,6 +36,11 @@
                  form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\IntegerAttributeType" />
         </service>
 
+        <service id="sylius.attribute_type.float" class="Sylius\Component\Attribute\AttributeType\FloatAttributeType">
+            <tag name="sylius.attribute.type" attribute-type="float" label="Float"
+                 form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\FloatAttributeType"/>
+        </service>
+
         <service id="sylius.attribute_type.percent" class="Sylius\Component\Attribute\AttributeType\PercentAttributeType">
             <tag name="sylius.attribute.type" attribute-type="percent" label="Percent"
                  form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\PercentAttributeType" />
