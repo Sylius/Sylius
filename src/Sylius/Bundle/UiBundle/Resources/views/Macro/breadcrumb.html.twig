@@ -11,7 +11,7 @@
                 <i class="right chevron icon divider"></i>
             {% endif %}
         {% else %}
-            <a href="{{ root_url|default('/') }}" class="section">{{ root_label|default('sylius.ui.root'|trans) }}</a>
+            <a href="{{ root_path|default('/') }}" class="section">{{ root_label|default('sylius.ui.root'|trans) }}</a>
         {% endfor %}
     </div>
 {% endmacro %}

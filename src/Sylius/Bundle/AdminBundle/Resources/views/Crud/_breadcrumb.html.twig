@@ -1,0 +1,23 @@
+{% import '@SyliusAdmin/Macro/breadcrumb.html.twig' as breadcrumb %}
+
+{% if breadcrumbs|default([])|length > 0 %}
+    {% set index_url = path(
+            configuration.vars.index.route.name|default(configuration.getRouteName('index')),
+            configuration.vars.index.route.parameters|default(configuration.vars.route.parameters|default({}))
+        )
+    %}
+
+    {% set breadcrumbs = [
+            { label: 'sylius.ui.administration'|trans, url: path('sylius_admin_dashboard') },
+            { label: (metadata.applicationName~'.ui.'~metadata.pluralName)|trans, url: index_url },
+        ]|merge(breadcrumbs|default([]))
+    %}
+{% else %}
+    {% set breadcrumbs = [
+            { label: 'sylius.ui.administration'|trans, url: path('sylius_admin_dashboard') },
+            { label: (metadata.applicationName~'.ui.'~metadata.pluralName)|trans },
+        ]|merge(breadcrumbs|default([]))
+    %}
+{% endif %}
+
+{{ breadcrumb.crumble(breadcrumbs) }}
