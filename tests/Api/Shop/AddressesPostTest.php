@@ -47,7 +47,7 @@ final class AddressesPostTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'country.yaml']);
         /** @var CustomerInterface $customer */
-        $customer = $fixtures['customer_Oliver'];
+        $customer = $fixtures['customer_oliver'];
         /** @var CountryInterface $country */
         $country = $fixtures['country_US'];
 
@@ -78,7 +78,7 @@ final class AddressesPostTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/post_addresses_response', Response::HTTP_CREATED);
+        $this->assertResponse($response, 'shop/create_address_response', Response::HTTP_CREATED);
     }
 
     private function createBodyRequest(string $countryCode): array
