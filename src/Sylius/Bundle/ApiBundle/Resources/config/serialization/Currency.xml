@@ -22,6 +22,7 @@
         </attribute>
        <attribute name="code">
            <group>admin:currency:read</group>
+           <group>admin:currency:create</group>
            <group>shop:currency:read</group>
            <group>shop:channel:read</group>
        </attribute>

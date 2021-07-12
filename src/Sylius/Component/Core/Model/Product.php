@@ -55,6 +55,9 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /** @var float */
     protected $averageRating = 0;
 
+    /** @var string */
+    protected $defaultVariant = null;
+
     /**
      * @var Collection|ImageInterface[]
      *
@@ -79,6 +82,11 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         $this->images = new ArrayCollection();
     }
 
+    public function getDefaultVariant()
+    {
+        return null;
+    }
+    
     public function getVariantSelectionMethod(): string
     {
         return $this->variantSelectionMethod;

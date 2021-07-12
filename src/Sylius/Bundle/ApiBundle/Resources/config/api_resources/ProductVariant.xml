@@ -60,6 +60,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_variant:update</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_variant:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_delete">
@@ -87,15 +90,18 @@
                     <attribute name="groups">admin:product_variant_inventory:read</attribute>
                 </attribute>
             </collectionOperation>
-            
+
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/product-variants</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_variant:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_variant:read</attribute>
+                </attribute>
             </collectionOperation>
-            
+
             <collectionOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-variants</attribute>
@@ -116,10 +122,10 @@
             <attribute name="openapi_context">
                 <attribute name="type">array</attribute>
                 <attribute name="example">
-                    <attribute name="FASHION_WEB">
+                    <attribute name="shopName">
                         <attribute name="channelCode">string</attribute>
-                        <attribute name="price">0</attribute>
-                        <attribute name="originalPrice">0</attribute>
+                        <attribute name="price">integer</attribute>
+                        <attribute name="originalPrice">integer</attribute>
                     </attribute>
                 </attribute>
             </attribute>

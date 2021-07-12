@@ -7,6 +7,8 @@
     <resource class="%sylius.model.product_attribute_translation.class%" shortName="ProductAttributeTranslation">
         <attribute name="validation_groups">sylius</attribute>
 
+        <collectionOperations />
+        
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>

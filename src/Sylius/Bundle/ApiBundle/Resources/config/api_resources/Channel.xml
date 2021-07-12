@@ -31,6 +31,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:channel:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:channel:create</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 

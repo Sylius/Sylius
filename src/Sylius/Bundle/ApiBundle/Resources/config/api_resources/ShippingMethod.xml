@@ -35,9 +35,6 @@
                     <attribute>sylius.api.shipping_method_order_filter</attribute>
                     <attribute>sylius.api.translation_order_name_and_locale_filter</attribute>
                 </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_method:read</attribute>
-                </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">
@@ -53,9 +50,6 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/shipping-methods/{code}</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_method:read</attribute>
-                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
@@ -99,6 +93,14 @@
                 </attribute>
             </itemOperation>
         </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="api_shipments_methods_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:shipping_method:read</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />

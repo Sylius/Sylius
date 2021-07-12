@@ -28,16 +28,26 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:province:read</attribute>
                 </attribute>
-
-                <attribute name="denormalization_context">
-                    <attribute name="groups">admin:province:update</attribute>
-                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:province:read</attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:province:update</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="api_countries_provinces_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:province:read</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />

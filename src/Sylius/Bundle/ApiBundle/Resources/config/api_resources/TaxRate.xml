@@ -20,14 +20,15 @@
 
         <attribute name="validation_groups">sylius</attribute>
 
+        <attribute name="normalization_context">
+            <attribute name="groups">admin:tax_rate:read</attribute>
+        </attribute>
+
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.tax_rate_zone_filter</attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:tax_rate:read</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -42,9 +43,6 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:tax_rate:read</attribute>
-                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">

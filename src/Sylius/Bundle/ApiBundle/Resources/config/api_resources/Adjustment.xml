@@ -37,9 +37,21 @@
         </itemOperations>
 
         <subresourceOperations>
+            <subresourceOperation name="api_orders_items_adjustments_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:adjustment:read</attribute>
+                </attribute>
+            </subresourceOperation>
+
             <subresourceOperation name="api_orders_adjustments_get_subresource">
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:adjustment:read</attribute>
+                </attribute>
+            </subresourceOperation>
+
+            <subresourceOperation name="api_order_items_adjustments_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:adjustment:read</attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>

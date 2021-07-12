@@ -38,6 +38,14 @@
             </itemOperation>
         </itemOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="api_channels_shop_billing_data_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shop_billing_data:read</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="true" writable="false" />
         <property name="company" writable="true" readable="true" />
         <property name="taxId" writable="true" readable="true" />
