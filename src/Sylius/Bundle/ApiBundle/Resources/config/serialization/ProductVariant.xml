@@ -37,5 +37,8 @@
             <group>admin:product_variant:read</group>
             <group>shop:product_variant:read</group>
         </attribute>
+        <attribute name="enabled">
+            <group>admin:product_variant:read</group>
+        </attribute>
     </class>
 </serializer>

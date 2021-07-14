@@ -77,5 +77,8 @@
         <attribute name="description">
             <group>shop:product:read</group>
         </attribute>
+        <attribute name="enabled">
+            <group>admin:product:read</group>
+        </attribute>
     </class>
 </serializer>
