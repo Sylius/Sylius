@@ -41,6 +41,7 @@ imports:
     - suites/api/shipping/managing_shipments.yml
     - suites/api/shipping/managing_shipping_categories.yml
     - suites/api/shipping/managing_shipping_methods.yml
+    - suites/api/taxation/applying_taxes.yml
     - suites/api/taxation/managing_tax_categories.yml
     - suites/api/taxon/managing_taxons.yml
     - suites/api/user/managing_administrators.yml
