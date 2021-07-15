@@ -31,6 +31,23 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:product_image:read</attribute>
                 </attribute>
+                <attribute name="controller">sylius.api.product_image</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">filter</attribute>
+                            <attribute name="in">query</attribute>
+                            <attribute name="description">Provide one of supported image liip imagine filters. </attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                                <attribute name="enum">
+                                    <attribute>sylius_shop_product_thumbnail</attribute>
+                                    <attribute>sylius_shop_product_large_thumbnail</attribute>
+                                </attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 

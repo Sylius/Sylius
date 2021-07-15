@@ -20,6 +20,11 @@
             <argument type="service" id="sylius.calendar" />
         </service>
 
+        <service id="sylius.api.product_image" class="Sylius\Bundle\ApiBundle\Applicator\ProductImageFilterController" public="true">
+            <argument type="service" id="liip_imagine.cache.manager" />
+            <argument type="service" id="request_stack" />
+        </service>
+
         <service id="sylius.api.order_state_machine_transition_applicator" class="Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicator" public="true">
             <argument id="sm.factory" type="service" />
         </service>
