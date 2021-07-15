@@ -40,7 +40,6 @@ Installing Sylius Plus as a plugin to a Sylius application
 .. code-block:: bash
 
     composer config repositories.plus composer https://sylius.repo.packagist.com/ShortNameOfYourOrganization/
-    composer config minimum-stability rc #due to the usage of some pre-stable packages (like SyliusRefundPlugin)
     composer require sylius/plus --no-update
     composer update --no-scripts
     composer sync-recipes
@@ -60,7 +59,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: yaml
 
-    // config/packages/_sylius.yaml
+    # config/packages/_sylius.yaml
     imports:
     ...
         - { resource: "@SyliusPlusPlugin/Resources/config/config.yaml" }
@@ -80,7 +79,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: yaml
 
-    // config/routes/sylius_shop.yaml
+    # config/routes/sylius_shop.yaml
     ...
 
     sylius_plus_shop:
@@ -91,8 +90,8 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: yaml
 
-    // config/routes/sylius_admin.yaml:
-    #...
+    # config/routes/sylius_admin.yaml:
+    ...
 
     sylius_plus_admin:
         resource: "@SyliusPlusPlugin/Resources/config/admin_routing.yaml"
@@ -103,8 +102,8 @@ Installing Sylius Plus as a plugin to a Sylius application
 
     .. code-block:: yaml
 
-        // config/routes/sylius_admin_api.yaml:
-        #...
+        # config/routes/sylius_admin_api.yaml:
+        ...
 
         sylius_plus_admin_api:
             resource: "@SyliusPlusPlugin/Resources/config/api_routing.yaml"
@@ -121,9 +120,9 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: php
 
-    <?php
-
     // src/Entity/User/AdminUser.php
+
+    <?php
 
     declare(strict_types=1);
 
@@ -158,9 +157,9 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: php
 
-    <?php
-
     // src/Entity/Channel/Channel.php
+
+    <?php
 
     declare(strict_types=1);
 
@@ -183,9 +182,9 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: php
 
-    <?php
-
     // src/Entity/Customer/Customer.php
+
+    <?php
 
     declare(strict_types=1);
 
@@ -208,9 +207,9 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: php
 
-    <?php
-
     // src/Entity/Order/Order.php
+
+    <?php
 
     declare(strict_types=1);
 
@@ -233,9 +232,9 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: php
 
-    <?php
-
     // src/Entity/Product/ProductVariant.php
+
+    <?php
 
     declare(strict_types=1);
 
@@ -273,9 +272,9 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: php
 
-    <?php
-
     // src/Entity/Shipping/Shipment.php
+
+    <?php
 
     declare(strict_types=1);
 
