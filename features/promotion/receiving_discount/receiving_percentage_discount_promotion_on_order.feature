@@ -16,7 +16,7 @@ Feature: Receiving percentage discount promotion on order
         Then my cart total should be "$80.00"
         And my discount should be "-$20.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving percentage discount does not affect the shipping fee
         Given the store has "DHL" shipping method with "$10.00" fee
         And I am a logged in customer
