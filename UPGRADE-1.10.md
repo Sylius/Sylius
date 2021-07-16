@@ -1,3 +1,12 @@
+# UPGRADE FROM `v1.10.0` TO `v1.10.1`
+
+1. API is disabled by default, to enable it you need to set flag to ``true`` in ``app/config/packages/_sylius.yaml``:
+
+    ```yaml
+    sylius_api:
+        enabled: true
+    ```
+
 # UPGRADE FROM `v1.9.X` TO `v1.10.0`
 
 ### Admin API Bundle Removal
