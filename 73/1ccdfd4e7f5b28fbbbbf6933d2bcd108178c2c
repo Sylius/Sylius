@@ -1,0 +1,24 @@
+---------------------------------------------------------------------------
+
+by GSadee at 2021-07-16T09:18:42Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "enable-api-in-dev-by-default"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by stloyd at 2021-07-16T09:22:13Z
+
+In overall this is **huge** BC break to disabled in minor version something that was enabled before by default... cause as developer you don't expect to do update, have code working in dev env go to production & get fatal errors or 404s...
+
+---------------------------------------------------------------------------
+
+by GSadee at 2021-07-16T09:42:36Z
+
+Thank you, Mateusz! :1st_place_medal:
