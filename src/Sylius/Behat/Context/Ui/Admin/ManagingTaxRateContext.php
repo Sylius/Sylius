@@ -344,4 +344,14 @@ final class ManagingTaxRateContext implements Context
     {
         $this->createPage->chooseIncludedInPrice();
     }
+
+    /**
+     * @Then the tax rate :taxRate should be included in price
+     */
+    public function theTaxRateShouldBeIncludedInPrice(TaxRateInterface $taxRate): void
+    {
+        $this->updatePage->open(['id' => $taxRate->getId()]);
+
+        Assert::true($this->updatePage->isIncludedInPrice());
+    }
 }
