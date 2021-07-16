@@ -71,3 +71,12 @@ Feature: Account registration
         And I try to register this account
         Then I should be notified that the email is required
         And I should not be logged in
+
+    @api
+    Scenario: Trying to register a new account without providing required fields
+        When I want to register a new account
+        And I specify the email as "goodman@gmail.com"
+        And I specify the password as "heisenberg"
+        And I try to register this account
+        Then I should be notified that the "first name" and "last name" have to be provided
+        And I should not be logged in

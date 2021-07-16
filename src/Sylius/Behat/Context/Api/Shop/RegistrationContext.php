@@ -154,6 +154,24 @@ final class RegistrationContext implements Context
     }
 
     /**
+     * @Then /^I should be notified that the "([^"]+)" and "([^"]+)" have to be provided$/
+     */
+    public function iShouldBeNotifiedThatFieldHaveToBeProvided(string ...$fields): void
+    {
+        $content = $this->getResponseContent();
+
+        foreach ($fields as $key => $field) {
+            $fields[$key] = lcfirst(str_replace(" ", "", ucwords($field)));
+        }
+
+        Assert::same(
+            $content['message'],
+            'Request does not have the following required fields specified: ' . implode(', ', $fields) . '.'
+        );
+        Assert::same($content['code'], 400);
+    }
+
+    /**
      * @Then I should be notified that the last name is required
      */
     public function iShouldBeNotifiedThatTheLastNameIsRequired(): void
@@ -203,7 +221,7 @@ final class RegistrationContext implements Context
 
     private function assertFieldValidationMessage(string $path, string $message): void
     {
-        $decodedResponse = json_decode($this->client->getResponse()->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+        $decodedResponse = $this->getResponseContent();
 
         Assert::keyExists($decodedResponse, 'violations');
         Assert::oneOf(
@@ -215,10 +233,13 @@ final class RegistrationContext implements Context
     private function fillContent(?string $email = 'example@example.com', ?string $password = 'example'): void
     {
         $this->content = [
-            'firstName' => 'First',
-            'lastName' => 'Last',
             'email' => $email,
             'password' => $password,
         ];
+    }
+
+    private function getResponseContent(): array
+    {
+        return json_decode($this->client->getResponse()->getContent(), true);
     }
 }
