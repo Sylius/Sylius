@@ -16,19 +16,19 @@ Feature: Round taxes on order item level
         And the store has a product "PHP Mug" priced at "$45.94"
         And it belongs to "Mugs" tax category
 
-    @ui
+    @ui @api
     Scenario: Properly rounded up tax for single product
         When I add product "Symfony Mug" to the cart
         Then my cart total should be "$50.55"
         And my cart taxes should be "$4.60"
 
-    @ui
+    @ui @api
     Scenario: Properly rounded down tax for single product
         When I add product "PHP Mug" to the cart
         Then my cart total should be "$50.53"
         And my cart taxes should be "$4.59"
 
-    @ui
+    @ui @api
     Scenario: Properly rounded taxes for multiple products
         When I add 10 products "PHP T-Shirt" to the cart
         Then my cart total should be "$124.23"

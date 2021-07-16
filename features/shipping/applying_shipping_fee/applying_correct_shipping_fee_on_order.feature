@@ -12,14 +12,14 @@ Feature: Apply correct shipping fee on order
         And the store has "UPS" shipping method with "$5.00" fee per unit for "United States" channel
         And I am a logged in customer
 
-    @ui
+    @ui @api
     Scenario: Adding proper shipping fee
         Given I have product "PHP T-Shirt" in the cart
         When I proceed selecting "DHL" shipping method
         Then my cart total should be "$110.00"
         And my cart shipping total should be "$10.00"
 
-    @ui
+    @ui @api
     Scenario: Changing shipping fee after shipping method change
         Given I have product "PHP T-Shirt" in the cart
         And I chose "DHL" shipping method
@@ -27,7 +27,7 @@ Feature: Apply correct shipping fee on order
         Then my cart total should be "$130.00"
         And my cart shipping total should be "$30.00"
 
-    @ui
+    @ui @api
     Scenario: Changing per unit shipping fee after decreasing quantity of item
         Given I have 2 products "PHP T-Shirt" in the cart
         And I chose "UPS" shipping method

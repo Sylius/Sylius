@@ -874,6 +874,8 @@ final class CheckoutContext implements Context
      */
     public function thereShouldBeNoTaxesCharged(): void
     {
+        $this->ordersClient->show($this->sharedStorage->get('cart_token'));
+
         Assert::same($this->responseChecker->getValue($this->ordersClient->getLastResponse(), 'taxTotal'), 0);
     }
 

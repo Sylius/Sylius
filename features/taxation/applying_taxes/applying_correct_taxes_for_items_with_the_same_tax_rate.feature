@@ -13,26 +13,26 @@ Feature: Apply correct taxes for items with the same tax rate
         And the store has a product "Symfony Hat" priced at "$30.00"
         And it belongs to "Clothes" tax category
 
-    @ui
+    @ui @api
     Scenario: Proper taxes for taxed product
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$123.00"
         And my cart taxes should be "$23.00"
 
-    @ui
+    @ui @api
     Scenario: Proper taxes for multiple same products with the same tax rate
         When I add 3 products "PHP T-Shirt" to the cart
         Then my cart total should be "$369.00"
         And my cart taxes should be "$69.00"
 
-    @ui
+    @ui @api
     Scenario: Proper taxes for multiple different products with the same tax rate
         When I add 3 products "PHP T-Shirt" to the cart
         And I add 2 products "Symfony Hat" to the cart
         Then my cart total should be "$442.80"
         And my cart taxes should be "$82.80"
 
-    @ui
+    @ui @api
     Scenario: Proper taxes after removing one of the item
         Given I have 3 products "PHP T-Shirt" in the cart
         And I have 2 products "Symfony Hat" in the cart

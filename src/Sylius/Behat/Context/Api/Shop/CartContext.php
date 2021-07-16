@@ -311,12 +311,13 @@ final class CartContext implements Context
      */
     public function myCartSTotalShouldBe(string $tokenValue, int $total): void
     {
+        $response = $this->cartsClient->show($tokenValue);
         $responseTotal = $this->responseChecker->getValue(
-            $this->cartsClient->show($tokenValue),
+            $response,
             'total'
         );
 
-        Assert::same($total, (int) $responseTotal);
+        Assert::same($total, (int) $responseTotal, 'Expected totals are not the same. Received message:' . $response->getContent());
     }
 
     /**
@@ -537,6 +538,17 @@ final class CartContext implements Context
         Assert::same(
             $this->responseChecker->getValue($this->cartsClient->getLastResponse(), 'itemsTotal'),
             $itemsTotal
+        );
+    }
+
+    /**
+     * @Then /^my cart taxes should be ("[^"]+")$/
+     */
+    public function myCartTaxesShouldBe(int $taxTotal): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->cartsClient->getLastResponse(), 'taxTotal'),
+            $taxTotal
         );
     }
 
