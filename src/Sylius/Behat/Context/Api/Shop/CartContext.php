@@ -128,6 +128,8 @@ final class CartContext implements Context
     public function iAddOfThemToMyCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
     {
         $this->putProductToCart($product, $tokenValue, $quantity);
+
+        $this->sharedStorage->set('product', $product);
     }
 
     /**
@@ -465,9 +467,9 @@ final class CartContext implements Context
      */
     public function itsPriceShouldBeDecreasedBy(ProductInterface $product, int $amount): void
     {
-        $pricing = $this->getChannelPricing($product);
+        $pricing = $this->getExpectedPriceOfProductTimesQuantity($product);
 
-        $this->compareItemSubtotal($product->getName(), $pricing->getPrice() - $amount);
+        $this->compareItemSubtotal($product->getName(), $pricing - $amount);
     }
 
     /**
@@ -475,7 +477,7 @@ final class CartContext implements Context
      */
     public function productPriceShouldNotBeDecreased(ProductInterface $product): void
     {
-        $this->compareItemSubtotal($product->getName(), $this->getChannelPricing($product)->getPrice());
+        $this->compareItemSubtotal($product->getName(), $this->getExpectedPriceOfProductTimesQuantity($product));
     }
 
     /**
@@ -782,7 +784,7 @@ final class CartContext implements Context
 
     private function compareItemSubtotal(string $productName, int $productPrice): void
     {
-        $items = $this->responseChecker->getValue($this->cartsClient->getLastResponse(), 'items');
+        $items = $this->responseChecker->getValue($this->cartsClient->show($this->sharedStorage->get('cart_token')), 'items');
 
         foreach ($items as $item) {
             if ($item['productName'] === $productName) {
@@ -795,8 +797,21 @@ final class CartContext implements Context
         throw new \InvalidArgumentException('Expected product does not exist');
     }
 
-    private function getChannelPricing(ProductInterface $product): ChannelPricingInterface
+    private function getExpectedPriceOfProductTimesQuantity(ProductInterface $product): int
     {
-        return $product->getVariants()->first()->getChannelPricingForChannel($this->sharedStorage->get('channel'));
+        $cartResponse = $this->cartsClient->show($this->sharedStorage->get('cart_token'));
+        $items = $this->responseChecker->getValue($cartResponse, 'items');
+
+        foreach ($items as $item) {
+            $productResponse = $this->getProductForItem($item);
+
+            if ($this->responseChecker->hasTranslation($productResponse, 'en_US', 'name', $product->getName())) {
+                $variantForItem = $this->getProductVariantForItem($item);
+
+                return $this->responseChecker->getValue($variantForItem, 'price') * $item['quantity'];
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf('Price for product %s had not been found', $product->getName()));
     }
 }

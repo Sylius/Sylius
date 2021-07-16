@@ -34,7 +34,7 @@ Feature: Receiving fixed discount on products from specific taxon
         Then theirs price should be decreased by "$60.00"
         And my cart total should be "$0.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving fixed discount equal to the items total of my cart even if the discount is bigger than the items total
         Given there is a promotion "Christmas Sale"
         And it gives "$30.00" off on every product classified as "Mugs"

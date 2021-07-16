@@ -23,13 +23,13 @@ Feature: Receiving fixed discount on specific products
         Then product "PHP Mug" price should not be decreased
         And my cart total should be "$20.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving fixed discount on a multiple items
         When I add 3 products "PHP T-Shirt" to the cart
         Then theirs price should be decreased by "$30.00"
         And my cart total should be "$270.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving fixed discount equal to the items total of my cart
         Given there is a promotion "Christmas Sale"
         And it gives "$20.00" off on a "PHP Mug" product
@@ -37,7 +37,7 @@ Feature: Receiving fixed discount on specific products
         Then theirs price should be decreased by "$60.00"
         And my cart total should be "$0.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving fixed discount equal to the items total of my cart even if the discount is bigger than the items total
         Given there is a promotion "Christmas Sale"
         And it gives "$30.00" off on a "PHP Mug" product
