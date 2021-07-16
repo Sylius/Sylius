@@ -6,7 +6,7 @@ Feature: Viewing payment's amount on my account panel
 
     Background:
         Given the store operates on a single channel in "United States"
-        And there is a user "lucy@teamlucifer.com" identified by "dantesdreams"
+        And there is a user "lucy@teamlucifer.com"
         And the store has a product "Angel T-Shirt" priced at "$39.00"
         And the store has a product "Angel Mug" priced at "$19.00"
         But the store has "DHL" shipping method with "$8.60" fee
@@ -17,8 +17,8 @@ Feature: Viewing payment's amount on my account panel
         And I addressed it to "Lucifer Morningstar", "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
         And I chose "DHL" shipping method with "Cash on Delivery" payment
 
-    @ui
+    @ui @api
     Scenario: Seeing total payment
-        When I view the summary of the order "#00000666"
+        When I view the summary of my order "#00000666"
         Then I should see "$66.60" as order's total
         And I should see that I have to pay "$66.60" for this order

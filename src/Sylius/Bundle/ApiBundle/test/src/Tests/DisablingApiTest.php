@@ -29,6 +29,7 @@ class DisablingApiTest extends ApiTestCase
     /** @test */
     public function it_gets_collection_if_api_is_enabled(): void
     {
+        $this->enableApi();
         static::createClient()->request(
             'GET',
             'api/v2/admin/orders',
