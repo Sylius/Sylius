@@ -50,7 +50,7 @@
         "payum/payum-bundle": "^2.4",
         "php-http/guzzle6-adapter": "^2.0",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "ramsey/uuid": "^3.9",
+        "ramsey/uuid": "^3.9 || ^4.0",
         "sonata-project/block-bundle": "^4.2",
         "stof/doctrine-extensions-bundle": "^1.4",
         "swiftmailer/swiftmailer": "^6.2",
