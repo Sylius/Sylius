@@ -15,6 +15,33 @@ Enjoy being an eCommerce Developer again!
 
 ⚙️ Installation
 --------------
+<ol>
+    <li>
+         clone repository on your local machine
+    </li>
+    <li>
+        get into the project main directory (Sylius/)
+    </li>
+    <li>
+         create: `.env.local` file and add your local db configuration,
+        ex: DATABASE_URL=mysql://db_user:db_password@db_host/db_name
+    </li>
+    <li>
+        run: composer install/update
+    </li>
+    <li>
+         run: php bin/console sylius:install --env dev (and follow the installation steps)
+    </li>
+    <li>
+         run: yarn install (make sure you have yarn installed on your machine)
+    </li>
+    <li>
+         run: yarn build
+    </li>
+    <li>
+        if you have a symfony executable run: symfony serve -d (...to run project as a daemon and open provided link in browser)
+    </li>
+</ol>
 
 [Install Sylius](https://docs.sylius.com/en/latest/book/installation/installation.html) with Composer (see [requirements details](https://docs.sylius.com/en/latest/book/installation/requirements.html)).
 
