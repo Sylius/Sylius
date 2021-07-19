@@ -40,7 +40,7 @@ final class StringInflector
 
     public static function nameToCamelCase(string $value): string
     {
-        return (string) u($value)->camel();
+        return lcfirst(str_replace(' ', '', ucwords(preg_replace('/[^a-zA-Z0-9\x7f-\xff]++/', ' ', $value))));
     }
 
     private function __construct()
