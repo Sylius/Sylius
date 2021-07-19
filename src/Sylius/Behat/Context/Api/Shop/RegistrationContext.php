@@ -158,11 +158,8 @@ final class RegistrationContext implements Context
      */
     public function iShouldBeNotifiedThatFieldHaveToBeProvided(string ...$fields): void
     {
+        $fields = $this->convertElementsToCamelCase($fields);
         $content = $this->getResponseContent();
-
-        foreach ($fields as $key => $field) {
-            $fields[$key] = lcfirst(str_replace(" ", "", ucwords($field)));
-        }
 
         Assert::same(
             $content['message'],
@@ -241,5 +238,14 @@ final class RegistrationContext implements Context
     private function getResponseContent(): array
     {
         return json_decode($this->client->getResponse()->getContent(), true);
+    }
+
+    private function convertElementsToCamelCase(array $fields): array
+    {
+        foreach ($fields as $key => $field) {
+            $fields[$key] = lcfirst(str_replace(" ", "", ucwords($field)));
+        }
+
+        return $fields;
     }
 }
