@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
+use Sylius\Component\Core\Model\Customer;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -54,7 +55,7 @@ final class CommandOperationDenormalizerSpec extends ObjectBehavior
         $baseNormalizer
             ->denormalize(
                 ['firstName' => 'John', 'lastName' => 'Doe', 'email' => 'test@example.com', 'password' => 'pa$$word'],
-                RegisterShopUser::class,
+                Customer::class,
                 null,
                 ['input' => ['class' => RegisterShopUser::class]]
             )
@@ -63,7 +64,7 @@ final class CommandOperationDenormalizerSpec extends ObjectBehavior
 
         $this->denormalize(
             ['firstName' => 'John', 'lastName' => 'Doe', 'email' => 'test@example.com', 'password' => 'pa$$word'],
-            '',
+            Customer::class,
             null,
             ['input' => ['class' => RegisterShopUser::class]]
         )->shouldReturn(['key' => 'value']);

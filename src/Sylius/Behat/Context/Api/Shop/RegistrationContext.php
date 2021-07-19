@@ -243,7 +243,7 @@ final class RegistrationContext implements Context
     private function convertElementsToCamelCase(array $fields): array
     {
         foreach ($fields as $key => $field) {
-            $fields[$key] = lcfirst(str_replace(" ", "", ucwords($field)));
+            $fields[$key] = lcfirst(str_replace(' ', '', ucwords($field)));
         }
 
         return $fields;

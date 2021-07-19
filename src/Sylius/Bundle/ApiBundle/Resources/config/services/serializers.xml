@@ -29,8 +29,8 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\CommandOperationDenormalizer">
-            <argument type="service" id="serializer.normalizer.object" />
-            <tag name="serializer.normalizer" priority="64" />
+            <argument type="service" id="api_platform.serializer.normalizer.item" />
+            <tag name="serializer.normalizer" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\ProductVariantNormalizer">

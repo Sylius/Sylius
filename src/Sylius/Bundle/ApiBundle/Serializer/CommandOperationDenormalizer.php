@@ -11,11 +11,11 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 final class CommandOperationDenormalizer implements ContextAwareDenormalizerInterface
 {
     /** @var DenormalizerInterface */
-    private $objectNormalizer;
+    private $itemNormalizer;
 
-    public function __construct(DenormalizerInterface $objectNormalizer)
+    public function __construct(DenormalizerInterface $itemNormalizer)
     {
-        $this->objectNormalizer = $objectNormalizer;
+        $this->itemNormalizer = $itemNormalizer;
     }
 
     public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
@@ -34,17 +34,12 @@ final class CommandOperationDenormalizer implements ContextAwareDenormalizerInte
             }
         }
 
-        if (count($missingFields) === 0) {
-            return $this->objectNormalizer->denormalize($data, $this->getInputClassName($context), $format, $context);
+        if (count($missingFields) > 0) {
+            throw new MissingConstructorArgumentsException(
+                sprintf('Request does not have the following required fields specified: %s.', implode(', ', $missingFields))
+            );
         }
 
-        throw new MissingConstructorArgumentsException(
-            sprintf('Request does not have the following required fields specified: %s.', implode(', ', $missingFields))
-        );
-    }
-
-    private function getInputClassName(array $context): ?string
-    {
-        return $context['input']['class'] ?? null;
+        return $this->itemNormalizer->denormalize($data, $type, $format, $context);
     }
 }
