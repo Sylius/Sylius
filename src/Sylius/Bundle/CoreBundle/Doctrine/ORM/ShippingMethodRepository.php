@@ -41,7 +41,6 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
         return $this->createEnabledForChannelQueryBuilder($channel)
             ->andWhere('o.zone IN (:zones)')
             ->setParameter('zones', $zones)
-            ->addOrderBy('o.position', 'ASC')
             ->getQuery()
             ->getResult()
         ;
@@ -55,6 +54,7 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
             ->andWhere(':channel MEMBER OF o.channels')
             ->setParameter('channel', $channel)
             ->setParameter('enabled', true)
+            ->addOrderBy('o.position', 'ASC')
         ;
     }
 }
