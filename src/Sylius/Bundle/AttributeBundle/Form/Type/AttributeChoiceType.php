@@ -42,9 +42,7 @@ abstract class AttributeChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choices' => function (Options $options) {
-                    return $this->attributeRepository->findAll();
-                },
+                'choices' => $this->attributeRepository->findAll(),
                 'choice_value' => 'code',
                 'choice_label' => 'name',
                 'choice_translation_domain' => false,
