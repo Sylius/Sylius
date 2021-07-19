@@ -11,12 +11,8 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Map;
+namespace Sylius\Bundle\ApiBundle\Command;
 
-interface CommandItemIriArgumentToIdentifierMapInterface
+interface CommandFieldItemIriToIdentifierAwareInterface
 {
-    /** @psalm-var class-string $className */
-    public function get(string $className): string;
-
-    public function has(?string $className): bool;
 }
