@@ -35,6 +35,7 @@ sylius:
                 street: Straat
                 tax_id: BTW-nummer
             contact_email: Contact e-mail
+            contact_phone_number: Telefoonnummer voor contact
             countries: Landen
             currencies: Valuta's
             currency_base: Standaardvaluta
