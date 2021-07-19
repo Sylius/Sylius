@@ -103,7 +103,7 @@ The repository service is available via the *sylius.repository.product* id and c
     These actions can be used when the performance of operations is negligible. If you want
     to perform operations on large sets of data we recommend using the manager instead.
 
-Every Sylius repository supports paginating resources. To create a `Pagerfanta instance <https://github.com/whiteoctober/Pagerfanta>`_ use the ``createPaginator`` method:
+Every Sylius repository supports paginating resources. To create a `Pagerfanta instance <https://github.com/BabDev/Pagerfanta>`_ use the ``createPaginator`` method:
 
 .. code-block:: php
 
