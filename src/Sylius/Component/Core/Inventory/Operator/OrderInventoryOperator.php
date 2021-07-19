@@ -63,8 +63,10 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
                 ($variant->getOnHold() - $orderItem->getQuantity()),
                 0,
                 sprintf(
-                    'Not enough units to decrease on hold quantity from the inventory of a variant "%s".',
-                    $variant->getName()
+                    'Not enough units to decrease on hold quantity from the inventory of a variant "%s" (ID: "%d") on order item "%d".',
+                    $variant->getName(),
+                    $variant->getId(),
+                    $orderItem->getId() 
                 )
             );
 
@@ -72,8 +74,10 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
                 ($variant->getOnHand() - $orderItem->getQuantity()),
                 0,
                 sprintf(
-                    'Not enough units to decrease on hand quantity from the inventory of a variant "%s".',
-                    $variant->getName()
+                    'Not enough units to decrease on hand quantity from the inventory of a variant "%s" (ID: "%d") on order item "%d".',
+                    $variant->getName(),
+                    $variant->getId(),
+                    $orderItem->getId()
                 )
             );
 
@@ -99,8 +103,10 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
                 ($variant->getOnHold() - $orderItem->getQuantity()),
                 0,
                 sprintf(
-                    'Not enough units to decrease on hold quantity from the inventory of a variant "%s".',
-                    $variant->getName()
+                    'Not enough units to decrease on hold quantity from the inventory of a variant "%s" (ID: "%d") on order item "%d".',
+                    $variant->getName(),
+                    $variant->getId(),
+                    $orderItem->getId()
                 )
             );
 

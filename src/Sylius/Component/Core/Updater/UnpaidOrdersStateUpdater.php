@@ -19,6 +19,7 @@ use SM\SMException;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
+use Webmozart\Assert\InvalidArgumentException;
 
 final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterface
 {
@@ -63,6 +64,13 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
             try {
                 $this->cancelOrder($expiredUnpaidOrder);
             } catch (SMException $e) {
+                if (null !== $this->logger) {
+                    $this->logger->error(
+                        sprintf('An error occurred while cancelling unpaid order #%s', $expiredUnpaidOrder->getId()),
+                        ['exception' => $e, 'message' => $e->getMessage()]
+                    );
+                }
+            } catch (InvalidArgumentException $e) {
                 if (null !== $this->logger) {
                     $this->logger->error(
                         sprintf('An error occurred while cancelling unpaid order #%s', $expiredUnpaidOrder->getId()),
