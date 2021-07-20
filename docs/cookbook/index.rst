@@ -152,3 +152,13 @@ Taxation
     taxation/customize-tax-by-address
 
 .. include:: /cookbook/taxation/map.rst.inc
+
+API
+---
+
+.. toctree::
+    :hidden:
+
+    api/add_to_cart_product_chosen_by_product_options
+
+.. include:: /cookbook/api/map.rst.inc
