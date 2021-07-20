@@ -236,4 +236,4 @@ Learn more
 * :doc:`Checkout </book/orders/checkout>`
 * :doc:`Orders </book/orders/orders>`
 * :doc:`Adjustments </book/orders/adjustments>`
-* :doc:`Unified API </api/index>`
+* :doc:`Unified API </book/api/index>`

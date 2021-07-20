@@ -96,6 +96,26 @@ You should also have a look here if you are looking for Cart, which is in Sylius
 
 .. include:: /book/orders/map.rst.inc
 
+API
+---
+
+.. warning::
+
+    The new, unified Sylius API is still under development, that's why the whole ``ApiBundle`` is tagged with ``@experimental``.
+    This means that all code from ``ApiBundle`` is excluded from :doc:`Backward Compatibility Promise </book/organization/backward-compatibility-promise>`.
+
+This chapter will explain to you how to start with our new API, show concepts used in it, and you will inform you why we have decided to rebuild entire api from scratch.
+To use this API remember to generate JWT token. For more information, please visit `jwt package documentation <https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/index.md#generate-the-ssh-keys/>`_
+
+This part of the documentation is about the currently developed unified API for the Sylius platform.
+
+.. toctree::
+    :hidden:
+
+    api/index
+
+.. include:: /book/api/map.rst.inc
+
 Themes
 ------
 
