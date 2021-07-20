@@ -75,3 +75,8 @@ sylius_resource:
         test.foo_sylius_resource:
             classes:
                 model: Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource
+
+services:
+    Sylius\Bundle\ApiBundle\Application\CommandHandler\FooHandler:
+        tags:
+            - { name: messenger.message_handler, bus: sylius_default.bus }
