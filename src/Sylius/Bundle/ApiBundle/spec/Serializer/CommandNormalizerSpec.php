@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-final class CommandOperationNormalizerSpec extends ObjectBehavior
+final class CommandNormalizerSpec extends ObjectBehavior
 {
     function let(NormalizerInterface $baseNormalizer): void
     {
@@ -53,7 +53,7 @@ final class CommandOperationNormalizerSpec extends ObjectBehavior
     function it_does_not_support_normalization_if_normalizer_has_already_been_called(): void
     {
         $this
-            ->supportsNormalization(new \stdClass(), null, ['command_operation_normalizer_already_called' => true])
+            ->supportsNormalization(new \stdClass(), null, ['command_normalizer_already_called' => true])
             ->shouldReturn(false)
         ;
     }
@@ -63,7 +63,7 @@ final class CommandOperationNormalizerSpec extends ObjectBehavior
         \stdClass $object
     ): void {
         $baseNormalizer
-            ->normalize($object, null, ['command_operation_normalizer_already_called' => true])
+            ->normalize($object, null, ['command_normalizer_already_called' => true])
             ->willReturn(['message' => 'Message'])
         ;
 

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
@@ -8,9 +17,12 @@ use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-final class CommandOperationNormalizer implements ContextAwareNormalizerInterface
+/**
+ * @experimental
+ */
+final class CommandNormalizer implements ContextAwareNormalizerInterface
 {
-    private const ALREADY_CALLED = 'command_operation_normalizer_already_called';
+    private const ALREADY_CALLED = 'command_normalizer_already_called';
 
     /** @var NormalizerInterface */
     private $objectNormalizer;

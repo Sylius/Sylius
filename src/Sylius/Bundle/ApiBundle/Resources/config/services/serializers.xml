@@ -23,12 +23,12 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandOperationNormalizer">
+        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandNormalizer">
             <argument type="service" id="serializer.normalizer.object" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandOperationDenormalizer">
+        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandDenormalizer">
             <argument type="service" id="api_platform.serializer.normalizer.item" />
             <tag name="serializer.normalizer" />
         </service>

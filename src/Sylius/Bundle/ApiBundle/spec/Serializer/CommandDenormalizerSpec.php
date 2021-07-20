@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class CommandOperationDenormalizerSpec extends ObjectBehavior
+final class CommandDenormalizerSpec extends ObjectBehavior
 {
     function let(DenormalizerInterface $baseNormalizer): void
     {
