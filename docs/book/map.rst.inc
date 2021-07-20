@@ -10,3 +10,4 @@
 * :doc:`/book/organization/index`
 * :doc:`/book/support/index`
 * :doc:`/book/contributing/index`
+* :doc:`/book/api/index`
