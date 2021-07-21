@@ -120,6 +120,14 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then my cart items total should be :total
+     */
+    public function myCartItemsTotalShouldBe(string $itemsTotal): void
+    {
+        Assert::same($this->summaryPage->getItemsTotal(), $itemsTotal);
+    }
+
+    /**
      * @Then my cart taxes should be :taxTotal
      */
     public function myCartTaxesShouldBe(string $taxTotal): void
@@ -131,6 +139,7 @@ final class CartContext implements Context
 
     /**
      * @Then my included in price taxes should be :taxTotal
+     * @Then my cart included in price taxes should be :taxTotal
      */
     public function myIncludedInPriceTaxesShouldBe(string $taxTotal): void
     {
@@ -152,8 +161,9 @@ final class CartContext implements Context
     /**
      * @Then my cart shipping total should be :shippingTotal
      * @Then my cart shipping should be for free
+     * @Then my cart estimated shipping cost should be :shippingTotal
      */
-    public function myCartShippingFeeShouldBe($shippingTotal = '$0.00')
+    public function myCartShippingFeeShouldBe(string $shippingTotal = '$0.00'): void
     {
         $this->summaryPage->open();
 
