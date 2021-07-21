@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Converter;
 
+/** @experimental */
 interface ItemIriToIdentifierConverterInterface
 {
     public function getIdentifier(?string $iri): ?string;

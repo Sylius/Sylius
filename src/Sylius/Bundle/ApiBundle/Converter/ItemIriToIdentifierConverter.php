@@ -22,7 +22,11 @@ use Sylius\Bundle\ApiBundle\Exception\NoRouteMatchesException;
 use Symfony\Component\Routing\Exception\ExceptionInterface as RoutingExceptionInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-/** Logic of this class is based on ApiPlatform\Core\Bridge\Symfony\Routing\IriConverter, This class provide `id` from path but it doesn't fetch object from database */
+/**
+ * Logic of this class is based on ApiPlatform\Core\Bridge\Symfony\Routing\IriConverter, This class provide `id` from path but it doesn't fetch object from database
+ *
+ * @experimental
+ */
 final class ItemIriToIdentifierConverter implements ItemIriToIdentifierConverterInterface
 {
     use OperationDataProviderTrait;

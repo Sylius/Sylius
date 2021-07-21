@@ -19,6 +19,7 @@ use Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverterInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
+/** @experimental */
 final class CommandFieldItemIriToIdentifierDenormalizer implements ContextAwareDenormalizerInterface
 {
     /** @var DenormalizerInterface */
