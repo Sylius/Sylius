@@ -26,6 +26,17 @@
                     <attribute name="groups">foo:create</attribute>
                 </attribute>
             </collectionOperation>
+
+            <collectionOperation name="post_with_command">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/foo-api-command</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Application\Command\FooCommand</attribute>
+                <attribute name="output">false</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">foo:read</attribute>
+                </attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>

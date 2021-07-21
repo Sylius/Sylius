@@ -11,6 +11,8 @@ Feature: Account registration
     Scenario: Trying to register a new account with email that has been already used
         Given there is a user "goodman@gmail.com" identified by "heisenberg"
         When I want to register a new account
+        And I specify the first name as "Saul"
+        And I specify the last name as "Goodman"
         And I specify the email as "goodman@gmail.com"
         And I try to register this account
         Then I should be notified that the email is already used
@@ -70,4 +72,13 @@ Feature: Account registration
         And I specify the last name as "Goodman"
         And I try to register this account
         Then I should be notified that the email is required
+        And I should not be logged in
+
+    @api
+    Scenario: Trying to register a new account without providing required fields
+        When I want to register a new account
+        And I specify the email as "goodman@gmail.com"
+        And I specify the password as "heisenberg"
+        And I try to register this account
+        Then I should be notified that the "first name" and "last name" have to be provided
         And I should not be logged in
