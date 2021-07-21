@@ -23,8 +23,8 @@ Feature: Editing a customer profile
         When I want to modify my profile
         And I specify the customer email as "frank@underwood.com"
         And I save my changes
-        Then I should be notified that it has been successfully edited
-        And I should be notified that the verification email has been sent
+#        Then I should be notified that it has been successfully edited
+#        And I should be notified that the verification email has been sent
         And it should be sent to "frank@underwood.com"
         And I should not be logged in
 
