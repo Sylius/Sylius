@@ -17,11 +17,11 @@ use ApiPlatform\Core\Exception\InvalidArgumentException;
 use ApiPlatform\Core\Identifier\IdentifierConverterInterface;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\AddProductReview;
-use Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverter;
+use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
 
-final class ItemIriToIdentifierConverterTest extends TestCase
+final class IriToIdentifierConverterTest extends TestCase
 {
     /**
      * @test
@@ -36,7 +36,7 @@ final class ItemIriToIdentifierConverterTest extends TestCase
 
         $router->match('/users/3')->willThrow(new RouteNotFoundException())->shouldBeCalledTimes(1);
 
-        $converter = new ItemIriToIdentifierConverter($router->reveal(), $identifierConverter->reveal());
+        $converter = new IriToIdentifierConverter($router->reveal(), $identifierConverter->reveal());
         $converter->getIdentifier('/users/3');
     }
 
@@ -53,7 +53,7 @@ final class ItemIriToIdentifierConverterTest extends TestCase
 
         $router->match('/users/3')->willReturn([])->shouldBeCalledTimes(1);
 
-        $converter = new ItemIriToIdentifierConverter($router->reveal(), $identifierConverter->reveal());
+        $converter = new IriToIdentifierConverter($router->reveal(), $identifierConverter->reveal());
         $converter->getIdentifier('/users/3');
     }
 
@@ -63,7 +63,7 @@ final class ItemIriToIdentifierConverterTest extends TestCase
     public function it_throws_invalid_argument_exception_if_converter_returns_more_than_one_identifier(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('ItemIriToIdentifierConverter does not support subresources');
+        $this->expectExceptionMessage('IriToIdentifierConverter does not support subresources');
 
         $router = $this->prophesize(RouterInterface::class);
         $identifierConverter = $this->prophesize(IdentifierConverterInterface::class);
@@ -77,7 +77,7 @@ final class ItemIriToIdentifierConverterTest extends TestCase
         ])->shouldBeCalledTimes(1);
 
         $identifierConverter->convert(['id' => 3, 'nextId' => 5], AddProductReview::class)->willReturn(['3', '5']);
-        $converter = new ItemIriToIdentifierConverter($router->reveal(), $identifierConverter->reveal());
+        $converter = new IriToIdentifierConverter($router->reveal(), $identifierConverter->reveal());
 
         $this->assertSame('3', $converter->getIdentifier('/users/3/nexts/5'));
     }
@@ -98,7 +98,7 @@ final class ItemIriToIdentifierConverterTest extends TestCase
         ])->shouldBeCalledTimes(1);
 
         $identifierConverter->convert(['id' => 3], AddProductReview::class)->willReturn(['3']);
-        $converter = new ItemIriToIdentifierConverter($router->reveal(), $identifierConverter->reveal());
+        $converter = new IriToIdentifierConverter($router->reveal(), $identifierConverter->reveal());
 
         $this->assertSame('3', $converter->getIdentifier('/users/3'));
     }

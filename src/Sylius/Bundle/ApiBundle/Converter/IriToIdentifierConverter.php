@@ -27,7 +27,7 @@ use Symfony\Component\Routing\RouterInterface;
  *
  * @experimental
  */
-final class ItemIriToIdentifierConverter implements ItemIriToIdentifierConverterInterface
+final class IriToIdentifierConverter implements IriToIdentifierConverterInterface
 {
     use OperationDataProviderTrait;
 

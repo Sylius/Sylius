@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use Sylius\Bundle\ApiBundle\Command\CommandFieldItemIriToIdentifierAwareInterface;
-use Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverterInterface;
+use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
@@ -25,19 +25,19 @@ final class CommandFieldItemIriToIdentifierDenormalizer implements ContextAwareD
     /** @var DenormalizerInterface */
     private $objectNormalizer;
 
-    /** @var ItemIriToIdentifierConverterInterface */
-    private $itemIriToIdentifierConverter;
+    /** @var IriToIdentifierConverterInterface */
+    private $iriToIdentifierConverter;
 
     /** @var DataTransformerInterface */
     private $commandAwareInputDataTransformer;
 
     public function __construct(
         DenormalizerInterface $objectNormalizer,
-        ItemIriToIdentifierConverterInterface $itemIriToIdentifierConverter,
+        IriToIdentifierConverterInterface $iriToIdentifierConverter,
         DataTransformerInterface $commandAwareInputDataTransformer
     ) {
         $this->objectNormalizer = $objectNormalizer;
-        $this->itemIriToIdentifierConverter = $itemIriToIdentifierConverter;
+        $this->iriToIdentifierConverter = $iriToIdentifierConverter;
         $this->commandAwareInputDataTransformer = $commandAwareInputDataTransformer;
     }
 
@@ -70,8 +70,8 @@ final class CommandFieldItemIriToIdentifierDenormalizer implements ContextAwareD
             }
 
             foreach ($data as $classFieldName => $classFieldValue) {
-                if ($this->itemIriToIdentifierConverter->isIdentifier($data[$classFieldName]) && $data[$classFieldName] != '') {
-                    $data[$classFieldName] = $this->itemIriToIdentifierConverter->getIdentifier((string) $data[$classFieldName]);
+                if ($this->iriToIdentifierConverter->isIdentifier($data[$classFieldName]) && $data[$classFieldName] != '') {
+                    $data[$classFieldName] = $this->iriToIdentifierConverter->getIdentifier((string) $data[$classFieldName]);
                 }
             }
         }

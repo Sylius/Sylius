@@ -93,3 +93,6 @@
             "postcode": "string"
         }
     ```
+
+1. The service `Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverter` has changed its name to `Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter`
+    and its service definitions from `Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverter` to `Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface` 
