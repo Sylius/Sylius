@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
-use Sylius\Bundle\ApiBundle\Command\CommandFieldItemIriToIdentifierAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 
 /** @experimental */
-class AddItemToCart implements OrderTokenValueAwareInterface, CommandFieldItemIriToIdentifierAwareInterface
+class AddItemToCart implements OrderTokenValueAwareInterface, IriToIdentifierConversionAwareInterface
 {
     /** @var string|null */
     public $orderTokenValue;

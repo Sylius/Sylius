@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
-use Sylius\Bundle\ApiBundle\Command\CommandFieldItemIriToIdentifierAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -51,7 +51,7 @@ final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInte
         }
 
         foreach (class_implements($inputClassName) as $classInterface) {
-            if ($classInterface === CommandFieldItemIriToIdentifierAwareInterface::class) {
+            if ($classInterface === IriToIdentifierConversionAwareInterface::class) {
                 return true;
             }
         }
@@ -65,7 +65,7 @@ final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInte
         $inputClassName = $this->getInputClassName($context);
 
         foreach (class_implements($inputClassName) as $classInterface) {
-            if ($classInterface !== CommandFieldItemIriToIdentifierAwareInterface::class) {
+            if ($classInterface !== IriToIdentifierConversionAwareInterface::class) {
                 continue;
             }
 
