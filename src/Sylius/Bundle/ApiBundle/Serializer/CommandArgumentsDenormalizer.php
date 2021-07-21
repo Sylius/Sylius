@@ -20,7 +20,7 @@ use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /** @experimental */
-final class CommandFieldItemIriToIdentifierDenormalizer implements ContextAwareDenormalizerInterface
+final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInterface
 {
     /** @var DenormalizerInterface */
     private $objectNormalizer;

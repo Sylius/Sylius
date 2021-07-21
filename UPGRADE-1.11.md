@@ -95,4 +95,7 @@
     ```
 
 1. The service `Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverter` has changed its name to `Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter`
-    and its service definitions from `Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverter` to `Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface` 
+    and its service definition from `Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverter` to `Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface`
+
+1. The service `Sylius\Bundle\ApiBundle\Serializer\CommandFieldItemIriToIdentifierDenormalizer` has changed its name to `Sylius\Bundle\ApiBundle\Serializer\CommandArgumentsDenormalizer`
+    and also its service definition.

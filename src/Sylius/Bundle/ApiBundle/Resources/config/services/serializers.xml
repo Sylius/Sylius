@@ -23,7 +23,7 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandFieldItemIriToIdentifierDenormalizer">
+        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandArgumentsDenormalizer">
             <argument type="service" id="serializer.normalizer.object" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface" />
             <argument type="service" id="sylius.api.data_transformer.command_aware_input_data_transformer" />

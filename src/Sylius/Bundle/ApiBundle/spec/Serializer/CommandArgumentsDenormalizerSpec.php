@@ -20,7 +20,7 @@ use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface;
 use Sylius\Component\Core\Model\Order;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class CommandFieldItemIriToIdentifierDenormalizerSpec extends ObjectBehavior
+final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
 {
     function let(
         DenormalizerInterface $objectNormalizer,
