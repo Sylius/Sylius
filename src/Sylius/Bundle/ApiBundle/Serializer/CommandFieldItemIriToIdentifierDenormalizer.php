@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
+use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use Sylius\Bundle\ApiBundle\Command\CommandFieldItemIriToIdentifierAwareInterface;
 use Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverterInterface;
-use Sylius\Bundle\ApiBundle\DataTransformer\CommandAwareInputDataTransformer;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
@@ -27,13 +27,13 @@ final class CommandFieldItemIriToIdentifierDenormalizer implements ContextAwareD
     /** @var ItemIriToIdentifierConverterInterface */
     private $itemIriToIdentifierConverter;
 
-    /** @var CommandAwareInputDataTransformer */
+    /** @var DataTransformerInterface */
     private $commandAwareInputDataTransformer;
 
     public function __construct(
         DenormalizerInterface $objectNormalizer,
         ItemIriToIdentifierConverterInterface $itemIriToIdentifierConverter,
-        CommandAwareInputDataTransformer $commandAwareInputDataTransformer
+        DataTransformerInterface $commandAwareInputDataTransformer
     ) {
         $this->objectNormalizer = $objectNormalizer;
         $this->itemIriToIdentifierConverter = $itemIriToIdentifierConverter;
@@ -64,10 +64,10 @@ final class CommandFieldItemIriToIdentifierDenormalizer implements ContextAwareD
         $inputClassName = $this->getInputClassName($context);
 
         foreach (class_implements($inputClassName) as $classInterface) {
-            if (!$classInterface === CommandFieldItemIriToIdentifierAwareInterface::class) {
+            if ($classInterface !== CommandFieldItemIriToIdentifierAwareInterface::class) {
                 continue;
             }
-    
+
             foreach ($data as $classFieldName => $classFieldValue) {
                 if ($this->itemIriToIdentifierConverter->isIdentifier($data[$classFieldName]) && $data[$classFieldName] != '') {
                     $data[$classFieldName] = $this->itemIriToIdentifierConverter->getIdentifier((string) $data[$classFieldName]);
