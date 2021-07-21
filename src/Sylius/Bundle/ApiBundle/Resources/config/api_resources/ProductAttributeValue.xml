@@ -41,6 +41,14 @@
                     <attribute name="groups">admin:product_attribute_value:read</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/product-attribute-values/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product_attribute_value:read</attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
