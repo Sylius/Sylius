@@ -1,8 +1,5 @@
-Sylius API
-==========
-
-Unified API
------------
+API
+===
 
 .. warning::
 
@@ -16,13 +13,9 @@ This part of the documentation is about the currently developed unified API for 
 .. toctree::
     :hidden:
 
-    unified_api/index
+    introduction
+    authorization
+    sylius_api_paths
 
-.. include:: /api/unified_api/map.rst.inc
+.. include:: /book/api/map.rst.inc
 
-Shop API
---------
-
-`Sylius Shop API <https://github.com/Sylius/ShopApiPlugin>`_ is an official plugin, providing customer-centered API.
-
-Follow the `API reference <https://app.swaggerhub.com/apis/Sylius/sylius-shop-api/1.0.0>`_ for more details.

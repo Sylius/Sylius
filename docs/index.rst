@@ -71,18 +71,6 @@ The Cookbook
 
    cookbook/index
 
-The Sylius API
---------------
-
-In :doc:`the Sylius API chapter </api/index>` you'll understand both the new Sylius API and the old Admin API.
-
-.. toctree::
-   :hidden:
-
-   api/index
-
-.. include:: /api/map.rst.inc
-
 The BDD Guide
 -------------
 

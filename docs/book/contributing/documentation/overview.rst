@@ -128,7 +128,7 @@ You can prefix the title of your pull request in a few cases:
 
 * ``[Behat]`` if you modify something in the :doc:`the BDD guide </bdd/index>`.
 
-* ``[API]`` when you are contributing docs to :doc:`the API guide </api/index>`.
+* ``[API]`` when you are contributing docs to :doc:`the API guide </book/api/index>`.
 
 For instance if your pull request is about documentation of some feature of the Resource bundle, but it is still a work in progress
 it should look like : ``[WIP][Documentation][ResourceBundle] Arbitrary feature documentation``.
