@@ -41,7 +41,7 @@ final class CommandDenormalizer implements ContextAwareDenormalizerInterface
 
         $missingFields = [];
         foreach ($parameters as $parameter) {
-            if (!isset($data[$parameter->getName()]) && !$parameter->allowsNull()) {
+            if (!isset($data[$parameter->getName()]) && !($parameter->allowsNull() || $parameter->isDefaultValueAvailable())) {
                 $missingFields[] = $parameter->getName();
             }
         }
