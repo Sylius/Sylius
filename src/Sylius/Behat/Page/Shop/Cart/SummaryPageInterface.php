@@ -21,7 +21,6 @@ interface SummaryPageInterface extends PageInterface
     public function getGrandTotal(): string;
 
     public function getBaseGrandTotal(): string;
-
     public function getIncludedTaxTotal(): string;
 
     public function getExcludedTaxTotal(): string;
@@ -33,6 +32,8 @@ interface SummaryPageInterface extends PageInterface
     public function hasShippingTotal(): bool;
 
     public function getPromotionTotal(): string;
+
+    public function getItemsTotal(): string;
 
     public function getItemTotal(string $productName): string;
 
