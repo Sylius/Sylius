@@ -126,7 +126,7 @@ Api
 The API available in Sylius Core is called the **Admin API** as it is operating from the Admin perspective.
 Our API uses the REST approach. Since our controllers are format agnostic they have become reusable in the API.
 Therefore if you request products in the shop frontend you are using exactly the same action as when you are placing the api request.
-Read more about our REST API in the :doc:`Sylius API Guide </api/index>`.
+Read more about our REST API in the :doc:`Sylius API Guide </book/api/index>`.
 
 .. tip::
 
