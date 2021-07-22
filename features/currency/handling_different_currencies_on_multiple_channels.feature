@@ -23,7 +23,7 @@ Feature: Handling different currencies on multiple channels
         And I start browsing the "Mobile" channel
         Then I should shop using the "USD" currency
 
-    @ui
+    @ui @no-api
     Scenario: Switching a currency applies only to the current channel
         When I browse the "Web" channel
         And I switch to the "GBP" currency

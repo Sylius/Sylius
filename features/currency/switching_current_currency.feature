@@ -18,7 +18,7 @@ Feature: Switching the current currency
         When I browse that channel
         Then I should be able to shop using the "USD" currency
 
-    @ui
+    @ui @no-api
     Scenario: Switching the current currency
         When I browse that channel
         And I switch to the "USD" currency
