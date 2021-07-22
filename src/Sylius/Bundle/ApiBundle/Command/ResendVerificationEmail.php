@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command;
 
 /** @experimental */
-class ResendVerificationEmail implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
+class ResendVerificationEmail implements ChannelCodeAwareInterface, LocaleCodeAwareInterface, IriToIdentifierConversionAwareInterface
 {
     /** @var string */
     public $email;

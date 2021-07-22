@@ -13,44 +13,29 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
+use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\AddProductReview;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
-use Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverterInterface;
-use Sylius\Bundle\ApiBundle\DataTransformer\CommandAwareInputDataTransformer;
-use Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserEmailAwareCommandDataTransformer;
-use Sylius\Bundle\ApiBundle\Map\CommandItemIriArgumentToIdentifierMapInterface;
+use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface;
 use Sylius\Component\Core\Model\Order;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class CommandFieldItemIriToIdentifierDenormalizerSpec extends ObjectBehavior
+final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
 {
     function let(
         DenormalizerInterface $objectNormalizer,
-        ItemIriToIdentifierConverterInterface $itemIriToIdentifierConverter,
-        CommandItemIriArgumentToIdentifierMapInterface $commandItemIriArgumentToIdentifierMap,
-        UserContextInterface $userContext
+        IriToIdentifierConverterInterface $iriToIdentifierConverter,
+        DataTransformerInterface $commandAwareInputDataTransformer
     ): void {
-        $commandAwareInputDataTransformer = new CommandAwareInputDataTransformer(
-            new LoggedInShopUserEmailAwareCommandDataTransformer(
-                $userContext->getWrappedObject()
-            )
-        );
-
         $this->beConstructedWith(
             $objectNormalizer,
-            $itemIriToIdentifierConverter,
+            $iriToIdentifierConverter,
             $commandAwareInputDataTransformer,
-            $commandItemIriArgumentToIdentifierMap
         );
     }
 
-    function it_supports_denormalization_add_product_review(
-        CommandItemIriArgumentToIdentifierMapInterface $commandItemIriArgumentToIdentifierMap
-    ): void {
+    function it_supports_denormalization_add_product_review(): void {
         $context['input']['class'] = AddProductReview::class;
-
-        $commandItemIriArgumentToIdentifierMap->has(AddProductReview::class)->willReturn(true);
 
         $this
             ->supportsDenormalization(
@@ -63,12 +48,8 @@ final class CommandFieldItemIriToIdentifierDenormalizerSpec extends ObjectBehavi
         ;
     }
 
-    function it_does_not_support_denormalization_for_not_supported_class(
-        CommandItemIriArgumentToIdentifierMapInterface $commandItemIriArgumentToIdentifierMap
-    ): void {
+    function it_does_not_support_denormalization_for_not_supported_class(): void {
         $context['input']['class'] = Order::class;
-
-        $commandItemIriArgumentToIdentifierMap->has(Order::class)->willReturn(false);
 
         $this
             ->supportsDenormalization(
@@ -83,18 +64,19 @@ final class CommandFieldItemIriToIdentifierDenormalizerSpec extends ObjectBehavi
 
     function it_denormalizes_add_product_review_and_transforms_product_field_from_iri_to_code(
         DenormalizerInterface $objectNormalizer,
-        ItemIriToIdentifierConverterInterface $itemIriToIdentifierConverter,
-        CommandItemIriArgumentToIdentifierMapInterface $commandItemIriArgumentToIdentifierMap,
-        UserContextInterface $userContext
+        iriToIdentifierConverterInterface $iriToIdentifierConverter,
+        DataTransformerInterface $commandAwareInputDataTransformer
     ): void {
         $context['input']['class'] = AddProductReview::class;
 
         $addProductReview = new AddProductReview('Cap', 5, 'ok', 'cap_code', 'john@example.com');
 
-        $commandItemIriArgumentToIdentifierMap->get(AddProductReview::class)->willReturn('product');
-        $commandItemIriArgumentToIdentifierMap->has(AddProductReview::class)->willReturn(true);
-
-        $itemIriToIdentifierConverter->getIdentifier('/api/v2/shop/products/cap_code')->willReturn('cap_code');
+        $iriToIdentifierConverter->isIdentifier('Cap')->willReturn(false);
+        $iriToIdentifierConverter->isIdentifier(5)->willReturn(false);
+        $iriToIdentifierConverter->isIdentifier('ok')->willReturn(false);
+        $iriToIdentifierConverter->isIdentifier('john@example.com')->willReturn(false);
+        $iriToIdentifierConverter->isIdentifier('/api/v2/shop/products/cap_code')->willReturn(true);
+        $iriToIdentifierConverter->getIdentifier('/api/v2/shop/products/cap_code')->willReturn('cap_code');
 
         $objectNormalizer
             ->denormalize(
@@ -110,6 +92,15 @@ final class CommandFieldItemIriToIdentifierDenormalizerSpec extends ObjectBehavi
                 $context
             )
             ->willReturn($addProductReview)
+        ;
+
+        $commandAwareInputDataTransformer
+            ->supportsTransformation($addProductReview, AddProductReview::class, $context)
+            ->willReturn(false)
+        ;
+        $commandAwareInputDataTransformer
+            ->transform($addProductReview, AddProductReview::class, $context)
+            ->shouldNotBeCalled()
         ;
 
         $this

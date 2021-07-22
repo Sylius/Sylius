@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command;
 
 /** @experimental */
-class RequestResetPasswordToken implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
+class RequestResetPasswordToken implements ChannelCodeAwareInterface, LocaleCodeAwareInterface, IriToIdentifierConversionAwareInterface
 {
     /** @var string */
     public $email;

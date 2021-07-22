@@ -18,11 +18,16 @@ use ApiPlatform\Core\Exception\InvalidArgumentException;
 use ApiPlatform\Core\Exception\InvalidIdentifierException;
 use ApiPlatform\Core\Identifier\IdentifierConverterInterface;
 use ApiPlatform\Core\Util\AttributesExtractor;
+use Sylius\Bundle\ApiBundle\Exception\NoRouteMatchesException;
 use Symfony\Component\Routing\Exception\ExceptionInterface as RoutingExceptionInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-/** Logic of this class is based on ApiPlatform\Core\Bridge\Symfony\Routing\IriConverter, This class provide `id` from path but it doesn't fetch object from database */
-final class ItemIriToIdentifierConverter implements ItemIriToIdentifierConverterInterface
+/**
+ * Logic of this class is based on ApiPlatform\Core\Bridge\Symfony\Routing\IriConverter, This class provide `id` from path but it doesn't fetch object from database
+ *
+ * @experimental
+ */
+final class IriToIdentifierConverter implements IriToIdentifierConverterInterface
 {
     use OperationDataProviderTrait;
 
@@ -44,7 +49,7 @@ final class ItemIriToIdentifierConverter implements ItemIriToIdentifierConverter
         try {
             $parameters = $this->router->match($iri);
         } catch (RoutingExceptionInterface $e) {
-            throw new InvalidArgumentException(sprintf('No route matches "%s".', $iri), (int) $e->getCode(), $e);
+            throw new NoRouteMatchesException(sprintf('No route matches "%s".', $iri), (int) $e->getCode(), $e);
         }
 
         if (!isset($parameters['_api_resource_class'])) {
@@ -68,5 +73,20 @@ final class ItemIriToIdentifierConverter implements ItemIriToIdentifierConverter
         }
 
         return (string) array_values($identifiers)[0];
+    }
+
+    public function isIdentifier($fieldValue): bool
+    {
+        if (!is_string($fieldValue)) {
+            return false;
+        }
+
+        try {
+            $this->router->match($fieldValue);
+        } catch (RoutingExceptionInterface $e) {
+            return false;
+        }
+
+        return true;
     }
 }

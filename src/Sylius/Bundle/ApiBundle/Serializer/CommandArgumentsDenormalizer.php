@@ -13,41 +13,50 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
-use Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverterInterface;
-use Sylius\Bundle\ApiBundle\DataTransformer\CommandAwareInputDataTransformer;
-use Sylius\Bundle\ApiBundle\Map\CommandItemIriArgumentToIdentifierMapInterface;
+use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
+use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
+use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class CommandFieldItemIriToIdentifierDenormalizer implements ContextAwareDenormalizerInterface
+/** @experimental */
+final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInterface
 {
     /** @var DenormalizerInterface */
     private $objectNormalizer;
 
-    /** @var ItemIriToIdentifierConverterInterface */
-    private $itemIriToIdentifierConverter;
+    /** @var IriToIdentifierConverterInterface */
+    private $iriToIdentifierConverter;
 
-    /** @var CommandAwareInputDataTransformer */
+    /** @var DataTransformerInterface */
     private $commandAwareInputDataTransformer;
-
-    /** @var CommandItemIriArgumentToIdentifierMapInterface */
-    private $commandItemIriArgumentToIdentifierMap;
 
     public function __construct(
         DenormalizerInterface $objectNormalizer,
-        ItemIriToIdentifierConverterInterface $itemIriToIdentifierConverter,
-        CommandAwareInputDataTransformer $commandAwareInputDataTransformer,
-        CommandItemIriArgumentToIdentifierMapInterface $commandItemIriArgumentToIdentifierMap
+        IriToIdentifierConverterInterface $iriToIdentifierConverter,
+        DataTransformerInterface $commandAwareInputDataTransformer
     ) {
         $this->objectNormalizer = $objectNormalizer;
-        $this->itemIriToIdentifierConverter = $itemIriToIdentifierConverter;
+        $this->iriToIdentifierConverter = $iriToIdentifierConverter;
         $this->commandAwareInputDataTransformer = $commandAwareInputDataTransformer;
-        $this->commandItemIriArgumentToIdentifierMap = $commandItemIriArgumentToIdentifierMap;
     }
 
     public function supportsDenormalization($data, $type, $format = null, array $context = [])
     {
-        return $this->commandItemIriArgumentToIdentifierMap->has($this->getInputClassName($context));
+        /** @psalm-var class-string $inputClassName|null */
+        $inputClassName = $this->getInputClassName($context);
+
+        if ($inputClassName === null) {
+            return false;
+        }
+
+        foreach (class_implements($inputClassName) as $classInterface) {
+            if ($classInterface === IriToIdentifierConversionAwareInterface::class) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function denormalize($data, $type, $format = null, array $context = [])
@@ -55,10 +64,16 @@ final class CommandFieldItemIriToIdentifierDenormalizer implements ContextAwareD
         /** @psalm-var class-string $inputClassName */
         $inputClassName = $this->getInputClassName($context);
 
-        $fieldName = $this->commandItemIriArgumentToIdentifierMap->get($inputClassName);
+        foreach (class_implements($inputClassName) as $classInterface) {
+            if ($classInterface !== IriToIdentifierConversionAwareInterface::class) {
+                continue;
+            }
 
-        if (array_key_exists($fieldName, $data)) {
-            $data[$fieldName] = $this->itemIriToIdentifierConverter->getIdentifier($data[$fieldName]);
+            foreach ($data as $classFieldName => $classFieldValue) {
+                if ($this->iriToIdentifierConverter->isIdentifier($data[$classFieldName]) && $data[$classFieldName] != '') {
+                    $data[$classFieldName] = $this->iriToIdentifierConverter->getIdentifier((string) $data[$classFieldName]);
+                }
+            }
         }
 
         $denormalizedInput = $this->objectNormalizer->denormalize($data, $this->getInputClassName($context), $format, $context);

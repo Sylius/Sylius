@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Map;
+namespace Sylius\Bundle\ApiBundle\Converter;
 
-interface CommandItemIriArgumentToIdentifierMapInterface
+/** @experimental */
+interface IriToIdentifierConverterInterface
 {
-    /** @psalm-var class-string $className */
-    public function get(string $className): string;
+    public function getIdentifier(?string $iri): ?string;
 
-    public function has(?string $className): bool;
+    public function isIdentifier($fieldValue): bool;
 }

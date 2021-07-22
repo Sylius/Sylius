@@ -11,9 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Converter;
+namespace Sylius\Bundle\ApiBundle\Exception;
 
-interface ItemIriToIdentifierConverterInterface
+use ApiPlatform\Core\Exception\InvalidArgumentException;
+
+final class NoRouteMatchesException extends InvalidArgumentException
 {
-    public function getIdentifier(?string $iri): ?string;
 }
