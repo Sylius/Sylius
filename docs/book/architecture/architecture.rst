@@ -47,6 +47,15 @@ Twig
 
 To read more about Twig, `go here <http://twig.sensiolabs.org/>`_.
 
+API Platform
+------------
+
+.. image:: ../../_images/api_platform.png
+    :scale: 25%
+    :align: center
+
+**API Platform** is a modern solution for developing high quality APIs. API Platform works by default with Symfony and depends on its components.
+
 Architecture
 ------------
 
@@ -123,10 +132,14 @@ Also here views have been built using the `SemanticUI <http://semantic-ui.com/>`
 Api
 ~~~
 
-The API available in Sylius Core is called the **Admin API** as it is operating from the Admin perspective.
-Our API uses the REST approach. Since our controllers are format agnostic they have become reusable in the API.
-Therefore if you request products in the shop frontend you are using exactly the same action as when you are placing the api request.
-Read more about our REST API in the :doc:`Sylius API Guide </book/api/index>`.
+When we created our API based on API Platform framework we have done everything to offer API as easy as possible to use by developer.
+The most important features of our API:
+
+    * All operations are grouped by `shop` and `admin` context (two prefixes)
+    * Developers can enable or disable entire API by changing single parameter (check :doc:`this </book/api/introduction>` chapter)
+    * We create all endpoints implementing the REST principles and we are using http verbs (POST, GET, PUT, PATCH, DELETE)
+    * Returned responses contain minimal information (developer should extend serialization if need more data)
+    * Entire business logic is separated from API - if it necessary we dispatch command instead mixing API logic with business logic
 
 .. tip::
 
