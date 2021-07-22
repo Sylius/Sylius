@@ -22,6 +22,8 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
  */
 final class CommandDenormalizer implements ContextAwareDenormalizerInterface
 {
+    private const OBJECT_TO_POPULATE = 'object_to_populate';
+
     /** @var DenormalizerInterface */
     private $itemNormalizer;
 
@@ -37,6 +39,10 @@ final class CommandDenormalizer implements ContextAwareDenormalizerInterface
 
     public function denormalize($data, $type, $format = null, array $context = [])
     {
+        if (isset($context[self::OBJECT_TO_POPULATE])) {
+            return $this->itemNormalizer->denormalize($data, $type, $format, $context);
+        }
+
         $parameters = (new \ReflectionClass($context['input']['class']))->getConstructor()->getParameters();
 
         $missingFields = [];
