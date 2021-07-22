@@ -47,6 +47,15 @@ Twig
 
 To read more about Twig, `go here <http://twig.sensiolabs.org/>`_.
 
+API Platform
+------------
+
+.. image:: ../../_images/api_platform.png
+    :scale: 25%
+    :align: center
+
+**API Platform** is a modern solution for developing high quality APIs. API Platform works by default with Symfony and depends on its components.
+
 Architecture
 ------------
 
