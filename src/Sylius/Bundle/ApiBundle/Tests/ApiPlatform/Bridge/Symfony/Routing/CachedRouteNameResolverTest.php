@@ -18,11 +18,11 @@ use ApiPlatform\Core\Bridge\Symfony\Routing\RouteNameResolverInterface;
 use ApiPlatform\Core\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Psr\Cache\CacheException;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing\CachedRouteNameResolver;
 use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
+use Symfony\Component\Cache\Exception\CacheException;
 
 final class CachedRouteNameResolverTest extends TestCase
 {
@@ -260,16 +260,11 @@ final class CachedRouteNameResolverTest extends TestCase
      */
     public function get_route_name_with_cache_item_throws_cache_exception(): void
     {
-        $cacheException = $this->prophesize(\Exception::class);
-        $cacheException->willImplement(CacheException::class);
-
         $cacheItemPool = $this->prophesize(CacheItemPoolInterface::class);
         $cacheItemPool
             ->getItem(Argument::type('string'))
             ->shouldBeCalledTimes(1)
-            ->willThrow(
-                $cacheException->reveal()
-            );
+            ->willThrow(new CacheException());
 
         $decorated = $this->prophesize(RouteNameResolverInterface::class);
         $decorated
