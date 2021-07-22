@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\KernelEvent;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -23,7 +26,7 @@ final class KernelRequestEventSubscriberSpec extends ObjectBehavior
 {
     function let(): void
     {
-        $this->beConstructedWith(true, '/api/v2');
+        $this->beConstructedWith(true, '/new-api');
     }
 
     function it_does_nothing_if_api_is_enabled(
@@ -33,38 +36,27 @@ final class KernelRequestEventSubscriberSpec extends ObjectBehavior
     ): void {
         $event->getRequest()->willReturn($request);
 
-        $request->getPathInfo()->willReturn('/api/v2/any-endpoint');
+        $request->getPathInfo()->willReturn('/new-api/any-endpoint');
 
-        $this->validateApi(new RequestEvent(
-            $kernel->getWrappedObject(),
-            $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST
-        ));
+        $event->setResponse(new Response('Route not found', 404))->shouldNotBeCalled();
+
+        $this->validateApi($event);
     }
 
-    function it_throws_not_found_exception_if_api_is_disabled(
+    function it_returns_404_if_api_is_disabled(
         RequestEvent $event,
         Request $request,
         HttpKernelInterface $kernel
     ): void {
-        $this->beConstructedWith(false, '/api/v2');
+        $this->beConstructedWith(false, '/new-api');
 
         $event->getRequest()->willReturn($request);
 
-        $request->getPathInfo()->willReturn('/api/v2/any-endpoint');
+        $request->getPathInfo()->willReturn('/new-api/any-endpoint');
 
-        $this
-            ->shouldThrow(NotFoundHttpException::class)
-            ->during(
-                'validateApi',
-                [
-                    new RequestEvent(
-                        $kernel->getWrappedObject(),
-                        $request->getWrappedObject(),
-                        HttpKernelInterface::MASTER_REQUEST
-                    )
-                ]
-            );
+        $event->setResponse(new Response('Route not found', 404))->shouldBeCalled();
+
+        $this->validateApi($event);
     }
 
     function it_does_nothing_for_non_api_endpoints_when_api_is_disabled(
@@ -72,16 +64,14 @@ final class KernelRequestEventSubscriberSpec extends ObjectBehavior
         Request $request,
         HttpKernelInterface $kernel
     ): void {
-        $this->beConstructedWith(false, '/api/v2');
+        $this->beConstructedWith(false, '/new-api');
 
         $event->getRequest()->willReturn($request);
 
         $request->getPathInfo()->willReturn('/');
 
-        $this->validateApi(new RequestEvent(
-            $kernel->getWrappedObject(),
-            $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST
-        ));
+        $event->setResponse(new Response('Route not found', 404))->shouldNotBeCalled();
+
+        $this->validateApi($event);
     }
 }
