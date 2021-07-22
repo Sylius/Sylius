@@ -15,8 +15,8 @@ namespace Sylius\Bundle\ApiBundle\EventSubscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /** @experimental  */
@@ -46,7 +46,7 @@ final class KernelRequestEventSubscriber implements EventSubscriberInterface
         $pathInfo = $event->getRequest()->getPathInfo();
 
         if ($this->apiEnabled === false && strpos($pathInfo, $this->apiRoute) !== false) {
-            $event->setResponse(new Response('Route not found', 404));
+            throw new NotFoundHttpException('Route not found');
         }
     }
 }

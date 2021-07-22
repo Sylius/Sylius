@@ -13,9 +13,6 @@ parameters:
     sylius.security.new_api_user_account_route: "%sylius.security.new_api_shop_route%/account"
     sylius.security.new_api_user_account_regex: "^%sylius.security.new_api_user_account_route%"
 
-sylius_api:
-    enabled: true
-
 api_platform:
     patch_formats:
         json: ['application/merge-patch+json']
