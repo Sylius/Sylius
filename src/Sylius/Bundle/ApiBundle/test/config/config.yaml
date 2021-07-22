@@ -79,4 +79,4 @@ sylius_resource:
 services:
     Sylius\Bundle\ApiBundle\Application\CommandHandler\FooHandler:
         tags:
-            - { name: messenger.message_handler, bus: sylius_default.bus }
+            - { name: messenger.message_handler, bus: sylius.command_bus }

@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
+use Sylius\Bundle\ApiBundle\Command\VerifyCustomerAccount;
 use Sylius\Component\Core\Model\Customer;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
@@ -68,6 +69,36 @@ final class CommandDenormalizerSpec extends ObjectBehavior
             null,
             ['input' => ['class' => RegisterShopUser::class]]
         )->shouldReturn(['key' => 'value']);
+    }
+
+    function it_does_not_check_parameters_if_there_is_an_object_to_populate(
+        DenormalizerInterface $baseNormalizer
+    ): void {
+        $baseNormalizer
+            ->denormalize(
+                [],
+                Customer::class,
+                null,
+                [
+                    'input' => ['class' => VerifyCustomerAccount::class],
+                    'object_to_populate' => new VerifyCustomerAccount('TOKEN')
+                ]
+            )
+            ->willReturn(['key' => 'value'])
+        ;
+
+        $this
+            ->denormalize(
+                [],
+                Customer::class,
+                null,
+                [
+                    'input' => ['class' => VerifyCustomerAccount::class],
+                    'object_to_populate' => new VerifyCustomerAccount('TOKEN')
+                ]
+            )
+            ->shouldReturn(['key' => 'value'])
+        ;
     }
 
     function it_implements_context_aware_denormalizer_interface(): void
