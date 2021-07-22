@@ -45,6 +45,7 @@ Also, if you're planning to modify serialization add this code to framework conf
     adding_and_removing_endpoints
     modifying_endpoints
     serialization_customization
+    customizing_endpoints_using_yaml
 
 .. include:: /customization/api/map.rst.inc
 
