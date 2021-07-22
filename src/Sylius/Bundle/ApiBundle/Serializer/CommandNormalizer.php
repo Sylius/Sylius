@@ -38,7 +38,11 @@ final class CommandNormalizer implements ContextAwareNormalizerInterface
             return false;
         }
 
-        return method_exists($data, 'getClass') && $data->getClass() === MissingConstructorArgumentsException::class;
+        return
+            is_object($data) &&
+            method_exists($data, 'getClass') &&
+            $data->getClass() === MissingConstructorArgumentsException::class
+        ;
     }
 
     public function normalize($object, $format = null, array $context = [])
