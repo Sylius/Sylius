@@ -13,4 +13,3 @@
 * :doc:`/customization/fixtures`
 * :doc:`/customization/fixture_suites`
 * :doc:`/customization/tips_and_tricks`
-* :doc:`/customization/api`
