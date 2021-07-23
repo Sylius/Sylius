@@ -30,7 +30,7 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->booleanNode('enabled')
-                    ->defaultTrue()
+                    ->defaultFalse()
                 ->end()
             ->end()
         ;
