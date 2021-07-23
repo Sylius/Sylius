@@ -31,7 +31,7 @@ final class ApiResourceConfigurationMerger implements ApiResourceConfigurationMe
                     }
                 }
 
-                if (is_integer($newKey)) {
+                if (is_int($newKey)) {
                     $resultingConfig[] = $newValue;
 
                     continue;

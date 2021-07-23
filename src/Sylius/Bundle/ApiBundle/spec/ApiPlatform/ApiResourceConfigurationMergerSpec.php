@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ApiBundle\ApiPlatform;
 
 use PhpSpec\ObjectBehavior;
