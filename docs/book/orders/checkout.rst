@@ -217,7 +217,7 @@ from the repository to assign it to your order's payment created defaultly in th
     // Let's assume that you have a method with code 'paypal' configured
     $paymentMethod = $this->container->get('sylius.repository.payment_method')->findOneByCode('paypal');
 
-    // Payments are a Collection, so even though you hve one Payment by default you have to iterate over them
+    // Payments are a Collection, so even though you have one Payment by default you have to iterate over them
     foreach ($order->getPayments() as $payment) {
         $payment->setMethod($paymentMethod);
     }
