@@ -1,5 +1,7 @@
 # UPGRADE FROM `v1.10.X` TO `v1.11.0`
 
+1. `Sylius\Bundle\ApiBundle\Doctrine\Filters\ExchangeRateFilter` and `Sylius\Bundle\ApiBundle\Doctrine\Filters\TranslationOrderNameAndLocaleFilter` has been moved to `Sylius\Bundle\ApiBundle\Doctrine\Filter\ExchangeRateFilter` and `Sylius\Bundle\ApiBundle\Doctrine\Filter\TranslationOrderNameAndLocaleFilter` respectively.
+
 1. `Sylius\Bundle\ApiBundle\View\CartShippingMethodInterface` and `Sylius\Bundle\ApiBundle\View\CartShippingMethod` have been removed.
 
 1. `Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactoryInterface` and `Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactory` have been removed.
