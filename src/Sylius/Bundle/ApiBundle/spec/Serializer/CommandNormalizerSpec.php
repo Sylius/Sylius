@@ -53,9 +53,18 @@ final class CommandNormalizerSpec extends ObjectBehavior
     function it_does_not_support_normalization_if_normalizer_has_already_been_called(): void
     {
         $this
-            ->supportsNormalization(new \stdClass(), null, ['command_normalizer_already_called' => true])
+            ->supportsNormalization(
+                new class() { public function getClass(): string { return MissingConstructorArgumentsException::class; }},
+                null,
+                ['command_normalizer_already_called' => true]
+            )
             ->shouldReturn(false)
         ;
+    }
+
+    function it_does_not_support_normalization_if_data_is_not_an_object(): void
+    {
+        $this->supportsNormalization('test')->shouldReturn(false);
     }
 
     function it_normalizes_response_for_missing_constructor_arguments_exception(
