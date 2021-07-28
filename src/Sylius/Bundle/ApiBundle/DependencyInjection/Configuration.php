@@ -33,6 +33,11 @@ final class Configuration implements ConfigurationInterface
                     ->defaultFalse()
                 ->end()
             ->end()
+            ->children()
+                ->variableNode('product_image_prefix')
+                    ->defaultValue('media/image')
+                ->end()
+            ->end()
         ;
 
         return $treeBuilder;

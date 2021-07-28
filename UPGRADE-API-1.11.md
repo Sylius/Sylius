@@ -1,5 +1,28 @@
 # UPGRADE FROM `v1.10.X` TO `v1.11.0`
 
+1. The product images should have a proper prefix added to the path, so the images could be resolved. 
+   This is now done and response of `Product Image` resource has been extended with parameter `media_path`.
+   
+    ```diff
+        {
+            "@context": "/api/v2/contexts/ProductImage",
+            "@id": "/api/v2/shop/product-images/123",
+            "@type": "ProductImage",
+            "id": "123",
+            "type": "thumbnail",
+            "path": "uo/product.jpg",
+    +       "media_path": "/media/image/uo/product.jpg"
+        } 
+   ```
+   To change the prefix you need to set parameter in ``app/config/packages/_sylius.yaml``:
+
+    ```yaml
+    sylius_api:
+        product_image_prefix: 'media/image'
+    ```
+
+1. `Sylius\Bundle\ApiBundle\Doctrine\Filters\ExchangeRateFilter` and `Sylius\Bundle\ApiBundle\Doctrine\Filters\TranslationOrderNameAndLocaleFilter` has been moved to `Sylius\Bundle\ApiBundle\Doctrine\Filter\ExchangeRateFilter` and `Sylius\Bundle\ApiBundle\Doctrine\Filter\TranslationOrderNameAndLocaleFilter` respectively.
+
 1. `Sylius\Bundle\ApiBundle\View\CartShippingMethodInterface` and `Sylius\Bundle\ApiBundle\View\CartShippingMethod` have been removed.
 
 1. `Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactoryInterface` and `Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactory` have been removed.
