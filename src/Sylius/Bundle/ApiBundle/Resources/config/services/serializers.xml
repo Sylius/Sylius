@@ -36,6 +36,11 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductImageNormalizer">
+            <argument type="string">%sylius_api.product_image_prefix%</argument>
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Serializer\CommandNormalizer">
             <argument type="service" id="serializer.normalizer.object" />
             <tag name="serializer.normalizer" priority="64" />

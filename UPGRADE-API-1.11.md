@@ -14,6 +14,7 @@
     +       "media_path": "/media/image/uo/product.jpg"
         } 
    ```
+   
    To change the prefix you need to set parameter in ``app/config/packages/_sylius.yaml``:
 
     ```yaml
