@@ -40,3 +40,9 @@ lexik_jwt_authentication:
             prefix: Bearer
             name: "%sylius.api.authorization_header%"
 
+liip_imagine:
+    filter_sets:
+        sylius_api_product_original: ~
+        sylius_api_product_thumbnail:
+            filters:
+                thumbnail: { size: [260, 260], mode: outbound }

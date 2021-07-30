@@ -26,5 +26,11 @@
             <argument type="service" id="sylius.api.context.user" />
             <argument>%sylius.security.new_api_route%</argument>
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Provider\ProductImageFilterProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\LiipProductImageFilterProvider">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
     </services>
 </container>
