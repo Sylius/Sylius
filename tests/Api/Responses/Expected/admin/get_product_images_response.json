@@ -8,7 +8,7 @@
             "@type": "ProductImage",
             "id": "@integer@",
             "type": "thumbnail",
-            "path": "\/uo\/product.jpg"
+            "path": "\/media\/image\/uo\/product.jpg"
         }
     ],
     "hydra:totalItems": 1

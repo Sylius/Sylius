@@ -8,4 +8,4 @@ Sylius\Component\Core\Model\Product:
 Sylius\Component\Core\Model\ProductImage:
     product_thumbnail:
         type: "thumbnail"
-        path: "/uo/product.jpg"
+        path: "uo/product.jpg"
