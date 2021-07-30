@@ -1,7 +1,7 @@
 # UPGRADE FROM `v1.10.X` TO `v1.11.0`
 
-1. The product images should have a proper prefix added to the path, so the images could be resolved. 
-   This is now done and response of `Product Image` resource has been extended with parameter `media_path`.
+1. The product images should have a proper prefix (`/media/image/`) added to the path, so the images could be resolved. 
+   This is now done out of the box and response of `Product Image` resource is now:
    
     ```diff
         {
@@ -10,8 +10,8 @@
             "@type": "ProductImage",
             "id": "123",
             "type": "thumbnail",
-            "path": "uo/product.jpg",
-    +       "media_path": "/media/image/uo/product.jpg"
+    -       "path": "uo/product.jpg",
+    +       "path": "/media/image/uo/product.jpg"
         } 
    ```
    

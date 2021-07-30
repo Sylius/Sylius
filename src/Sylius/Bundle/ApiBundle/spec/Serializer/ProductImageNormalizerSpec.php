@@ -23,7 +23,7 @@ final class ProductImageNormalizerSpec extends ObjectBehavior
 {
     function let(): void
     {
-        $this->beConstructedWith('prefix');
+        $this->beConstructedWith('prefix', '/prefix', '/prefix/', 'prefix/');
     }
 
     function it_implements_context_aware_normalizer_interface(): void
@@ -45,6 +45,6 @@ final class ProductImageNormalizerSpec extends ObjectBehavior
 
         $normalizer->normalize($productImage, null, ['product_image_normalizer_already_called' => true])->willReturn(['path' => 'some_path']);
 
-        $this->normalize($productImage, null, [])->shouldReturn(['path' => 'some_path', 'media_path' => '/prefix/some_path']);
+        $this->normalize($productImage, null, [])->shouldReturn(['path' => '/prefix/some_path']);
     }
 }

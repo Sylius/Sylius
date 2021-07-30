@@ -563,7 +563,7 @@ final class ManagingProductsContext implements Context
 
         return
             isset($productFromResponse['images'][0]) &&
-            $productFromResponse['images'][0]['path'] === $product->getImages()->first()->getPath()
+            str_contains($productFromResponse['images'][0]['path'], $product->getImages()->first()->getPath())
         ;
     }
 

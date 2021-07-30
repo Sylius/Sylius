@@ -43,7 +43,7 @@ class ProductImageNormalizer implements ContextAwareNormalizerInterface, Normali
 
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        $data['media_path'] = $this->prefix . $data['path'];
+        $data['path'] = $this->prefix . $data['path'];
 
         return $data;
     }
@@ -59,14 +59,14 @@ class ProductImageNormalizer implements ContextAwareNormalizerInterface, Normali
 
     private function validatePrefix(string $prefix): string
     {
-        if ('/' !== substr($prefix, 0, 1)) {
-            $prefix = '/'.$prefix;
+        if (\DIRECTORY_SEPARATOR !== substr($prefix, 0, 1)) {
+            $prefix = \DIRECTORY_SEPARATOR . $prefix;
         }
 
-        if ('/' === substr($prefix, -1)) {
+        if (\DIRECTORY_SEPARATOR === substr($prefix, -1)) {
             return $prefix;
         }
 
-        return $prefix . '/';
+        return $prefix . \DIRECTORY_SEPARATOR;
     }
 }
