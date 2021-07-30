@@ -1,5 +1,45 @@
 # CHANGELOG FOR `1.10.X`
 
+## v1.10.1 (2021-07-30)
+
+#### Details
+
+- [#12751](https://github.com/Sylius/Sylius/issues/12751) [Docs] Describe API customization requirement for SyliusPlus with Sylius 1.9 ([@Zales0123](https://github.com/Zales0123), [@Tomanhez](https://github.com/Tomanhez))
+- [#12763](https://github.com/Sylius/Sylius/issues/12763) [Docs] Remove redundant refund interfaces ([@Tomanhez](https://github.com/Tomanhez))
+- [#12764](https://github.com/Sylius/Sylius/issues/12764) [Taxon] Wrap resource deletion operation with a transaction to fix a problem with removing used taxon ([@GSadee](https://github.com/GSadee))
+- [#12767](https://github.com/Sylius/Sylius/issues/12767) [Documentation] Fix warning about version of Sylius in Plus installation guide ([@GSadee](https://github.com/GSadee))
+- [#12768](https://github.com/Sylius/Sylius/issues/12768) [Docs] Update release cycle after 1.10 release ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#12770](https://github.com/Sylius/Sylius/issues/12770) [Documentation] One more fix for warning about version of Sylius in Plus installation guide ([@GSadee](https://github.com/GSadee))
+- [#12771](https://github.com/Sylius/Sylius/issues/12771) [API] Turn on/off api endpoints with parameter ([@SirDomin](https://github.com/SirDomin))
+- [#12776](https://github.com/Sylius/Sylius/issues/12776) [Docs][Plus] Modify plus installation guide ([@Tomanhez](https://github.com/Tomanhez))
+- [#12777](https://github.com/Sylius/Sylius/issues/12777) [Docs][Plus] Change steps order ([@Tomanhez](https://github.com/Tomanhez))
+- [#12784](https://github.com/Sylius/Sylius/issues/12784) [Documentation][Cookbook] How to add another type of refund? ([@GSadee](https://github.com/GSadee))
+- [#12789](https://github.com/Sylius/Sylius/issues/12789) [API] Disable API by default ([@GSadee](https://github.com/GSadee))
+- [#12800](https://github.com/Sylius/Sylius/issues/12800) [Documentation] Update Plus installation guide for Sylius 1.10 ([@GSadee](https://github.com/GSadee))
+- [#12801](https://github.com/Sylius/Sylius/issues/12801) [Documentation] Update Plus installation guide for Sylius 1.9 ([@GSadee](https://github.com/GSadee))
+- [#12804](https://github.com/Sylius/Sylius/issues/12804) Enable API by default in dev environment ([@Zales0123](https://github.com/Zales0123))
+- [#12807](https://github.com/Sylius/Sylius/issues/12807) Optimizing the attribute loading in product edit ([@mamazu](https://github.com/mamazu))
+- [#12808](https://github.com/Sylius/Sylius/issues/12808) [API] Add missing note about enabling API to UPGRADE-1.10 file ([@GSadee](https://github.com/GSadee))
+- [#12811](https://github.com/Sylius/Sylius/issues/12811) [API] Test not providing required fields during registration ([@Zales0123](https://github.com/Zales0123))
+- [#12814](https://github.com/Sylius/Sylius/issues/12814) [Documentation] API docs reorganisation  ([@AdamKasp](https://github.com/AdamKasp))
+- [#12816](https://github.com/Sylius/Sylius/issues/12816) [Maintenance] Fix 1.8 build ([@GSadee](https://github.com/GSadee), [@SirDomin](https://github.com/SirDomin))
+- [#12817](https://github.com/Sylius/Sylius/issues/12817) [Taxation] Add scenarios for applying proper taxes for shipping ([@GSadee](https://github.com/GSadee))
+- [#12818](https://github.com/Sylius/Sylius/issues/12818) [Core] Bring back String u function ([@GSadee](https://github.com/GSadee))
+- [#12819](https://github.com/Sylius/Sylius/issues/12819) [API] 1.8 api as opt ([@SirDomin](https://github.com/SirDomin))
+- [#12820](https://github.com/Sylius/Sylius/issues/12820) [Documentation] Chapter about legacy APIs ([@AdamKasp](https://github.com/AdamKasp))
+- [#12823](https://github.com/Sylius/Sylius/issues/12823) [API] Allow creation of commands with no arguments with a default value ([@GSadee](https://github.com/GSadee))
+- [#12825](https://github.com/Sylius/Sylius/issues/12825) [API] Do not check command arguments if there is an object to populate ([@GSadee](https://github.com/GSadee))
+- [#12826](https://github.com/Sylius/Sylius/issues/12826) [Documentation] New API described in architecture chapter ([@AdamKasp](https://github.com/AdamKasp))
+- [#12828](https://github.com/Sylius/Sylius/issues/12828) [Docs] split api customization docs ([@SirDomin](https://github.com/SirDomin))
+- [#12833](https://github.com/Sylius/Sylius/issues/12833) [API] Disable API by default ([@GSadee](https://github.com/GSadee))
+- [#12837](https://github.com/Sylius/Sylius/issues/12837) [UPGRADE] Split API and non API upgrade files ([@lchrusciel](https://github.com/lchrusciel))
+- [#12838](https://github.com/Sylius/Sylius/issues/12838) [UPGRADE] Split API and non API upgrade files ([@lchrusciel](https://github.com/lchrusciel))
+- [#12839](https://github.com/Sylius/Sylius/issues/12839) [UI] Add bottom scroll to the order summary table ([@kulczy](https://github.com/kulczy))
+- [#12840](https://github.com/Sylius/Sylius/issues/12840) [UPGRADE] Split API and non API upgrade files ([@lchrusciel](https://github.com/lchrusciel))
+- [#12843](https://github.com/Sylius/Sylius/issues/12843) [Documentation] Change version of Plus in installation guide ([@GSadee](https://github.com/GSadee))
+- [#12844](https://github.com/Sylius/Sylius/issues/12844) [API][PHPSpec] Improve spec for CommandNormalizer ([@GSadee](https://github.com/GSadee))
+- [#12845](https://github.com/Sylius/Sylius/issues/12845) Quick Typo update :) ([@FaithlessLooting](https://github.com/FaithlessLooting))
+
 ## v1.10.0 (2021-06-28)
 
 #### Details
