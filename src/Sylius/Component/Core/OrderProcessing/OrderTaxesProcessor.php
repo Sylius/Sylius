@@ -63,6 +63,10 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
+        if (OrderInterface::STATE_CART !== $order->getState()) {
+            return;
+        }
+
         $this->clearTaxes($order);
         if ($order->isEmpty()) {
             return;

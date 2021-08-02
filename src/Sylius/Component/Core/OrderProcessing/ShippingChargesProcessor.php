@@ -43,6 +43,10 @@ final class ShippingChargesProcessor implements OrderProcessorInterface
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
+        if (OrderInterface::STATE_CART !== $order->getState()) {
+            return;
+        }
+
         // Remove all shipping adjustments, we recalculate everything from scratch.
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT);
 
