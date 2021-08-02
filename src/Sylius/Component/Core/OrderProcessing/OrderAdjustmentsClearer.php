@@ -44,6 +44,10 @@ final class OrderAdjustmentsClearer implements OrderProcessorInterface
 
     public function process(OrderInterface $order): void
     {
+        if (OrderInterface::STATE_CART !== $order->getState()) {
+            return;
+        }
+
         foreach ($this->adjustmentsToRemove as $type) {
             $order->removeAdjustmentsRecursively($type);
         }

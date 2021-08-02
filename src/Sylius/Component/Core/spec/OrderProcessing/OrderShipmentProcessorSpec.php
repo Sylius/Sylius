@@ -54,6 +54,8 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         ShippingMethodInterface $defaultShippingMethod,
         OrderItemInterface $orderItem
     ): void {
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
         $defaultShippingMethodResolver->getDefaultShippingMethod($shipment)->willReturn($defaultShippingMethod);
 
         $shipmentFactory->createNew()->willReturn($shipment);
@@ -86,6 +88,8 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         OrderItemInterface $orderItem
     ): void {
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
         $defaultShippingMethodResolver->getDefaultShippingMethod($shipment)->willThrow(UnresolvedDefaultShippingMethodException::class);
 
         $shipmentFactory->createNew()->willReturn($shipment);
@@ -123,6 +127,8 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant
     ): void {
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
         $defaultShippingMethodResolver->getDefaultShippingMethod($shipment)->willReturn($defaultShippingMethod);
 
         $shipmentFactory->createNew()->willReturn($shipment);
@@ -151,6 +157,8 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         ProductVariantInterface $productVariant,
         ShippingMethodInterface $shippingMethod
     ): void {
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
         $shipments->first()->willReturn($shipment);
 
         $shipment->getMethod()->willReturn($shippingMethod);
@@ -189,6 +197,8 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
     ): void {
         $this->beConstructedWith($defaultShippingMethodResolver, $shipmentFactory);
 
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
         $shipments->first()->willReturn($shipment);
 
         $orderItem->getVariant()->willReturn($productVariant);
@@ -220,6 +230,8 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         OrderItemUnitInterface $itemUnitWithoutShipment,
         ShippingMethodInterface $shippingMethod
     ): void {
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
         $shipments->first()->willReturn($shipment);
 
         $shipment->getMethod()->willReturn($shippingMethod);
@@ -256,6 +268,8 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         ShippingMethodInterface $firstShippingMethod,
         ShippingMethodInterface $secondShippingMethod
     ): void {
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
         $shipments->first()->willReturn($shipment);
 
         $shipment->getMethod()->willReturn($firstShippingMethod);
@@ -280,6 +294,19 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         $shipment->getUnits()->willReturn(new ArrayCollection([]));
         $shipment->addUnit($itemUnitWithoutShipment)->shouldBeCalled();
         $shipment->addUnit($itemUnit)->shouldNotBeCalled();
+
+        $this->process($order);
+    }
+
+    function it_does_nothing_if_the_order_is_in_a_state_different_than_cart(OrderInterface $order): void
+    {
+        $order->getState()->willReturn(OrderInterface::STATE_NEW);
+
+        $order->isEmpty()->shouldNotBeCalled();
+        $order->getItems()->shouldNotBeCalled();
+        $order->isShippingRequired()->shouldNotBeCalled();
+        $order->hasShipments()->shouldNotBeCalled();
+        $order->getShipments()->shouldNotBeCalled();
 
         $this->process($order);
     }

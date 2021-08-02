@@ -38,6 +38,9 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
 
     function it_removes_existing_shipping_adjustments(OrderInterface $order): void
     {
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
+
         $order->getShipments()->willReturn(new ArrayCollection([]));
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
 
@@ -46,6 +49,8 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
 
     function it_does_not_apply_any_shipping_charge_if_order_has_no_shipments(OrderInterface $order): void
     {
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $order->getShipments()->willReturn(new ArrayCollection([]));
         $order->addAdjustment(Argument::any())->shouldNotBeCalled();
@@ -61,6 +66,8 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod
     ): void {
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
         $adjustmentFactory->createNew()->willReturn($adjustment);
         $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
 
@@ -84,6 +91,16 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $shipment->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $shipment->addAdjustment($adjustment)->shouldBeCalled();
+
+        $this->process($order);
+    }
+
+    function it_does_nothing_if_the_order_is_in_a_state_different_than_cart(OrderInterface $order): void
+    {
+        $order->getState()->willReturn(OrderInterface::STATE_NEW);
+
+        $order->getShipments()->shouldNotBeCalled();
+        $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldNotBeCalled();
 
         $this->process($order);
     }
