@@ -37,7 +37,7 @@
 
             <itemOperation name="admin_update">
                 <attribute name="method">PUT</attribute>
-                <attribute name="path">/admin/payment-methods/{id}</attribute>
+                <attribute name="path">/admin/payment-methods/{code}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:payment_method:update</attribute>
                 </attribute>
