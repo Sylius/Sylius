@@ -264,7 +264,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then /^the order's tax total should(?:| still) be ("[^"]+")$/
      */
-    public function theOrdersTaxTotalShouldBe(int $taxTotal)
+    public function theOrdersTaxTotalShouldBe(int $taxTotal): void
     {
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'taxTotal'), $taxTotal);
     }
