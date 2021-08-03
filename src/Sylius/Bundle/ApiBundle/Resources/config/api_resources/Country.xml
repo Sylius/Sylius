@@ -30,11 +30,6 @@
             <collectionOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/countries</attribute>
-            </collectionOperation>
-
-            <collectionOperation name="shop_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/countries</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:country:read</attribute>
                 </attribute>
@@ -60,6 +55,9 @@
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/countries/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:country:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
@@ -81,6 +79,7 @@
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
         <property name="enabled" writable="true" />
+        <property name="name" writable="false" readable="true" />
         <property name="provinces" readable="true" writable="true">
             <subresource resourceClass="%sylius.model.province.class%" collection="true" />
         </property>
