@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
@@ -25,9 +26,13 @@ final class ResourceUpdateHandler implements ResourceUpdateHandlerInterface
     /** @var ResourceUpdateHandlerInterface */
     private $decoratedHandler;
 
-    public function __construct(ResourceUpdateHandlerInterface $decoratedHandler)
+    /** @var EntityManagerInterface */
+    private $entityManager;
+
+    public function __construct(ResourceUpdateHandlerInterface $decoratedHandler, EntityManagerInterface $entityManager)
     {
         $this->decoratedHandler = $decoratedHandler;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -38,9 +43,15 @@ final class ResourceUpdateHandler implements ResourceUpdateHandlerInterface
         RequestConfiguration $requestConfiguration,
         ObjectManager $manager
     ): void {
+        $this->entityManager->beginTransaction();
+
         try {
             $this->decoratedHandler->handle($resource, $requestConfiguration, $manager);
+
+            $this->entityManager->commit();
         } catch (OptimisticLockException $exception) {
+            $this->entityManager->rollback();
+
             throw new RaceConditionException($exception);
         }
     }
