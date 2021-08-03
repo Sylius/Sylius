@@ -18,6 +18,7 @@
     <class name="Sylius\Component\Core\Model\ShopUser">
         <attribute name="verified">
             <group>shop:customer:read</group>
+            <group>shop:customer:update</group>
         </attribute>
     </class>
 </serializer>
