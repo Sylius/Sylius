@@ -45,7 +45,9 @@ winzou_state_machine:
                     on: ["pay"]
                     do: ["@sylius.inventory.order_inventory_operator", "sell"]
                     args: ["object"]
+                    priority: -200
                 sylius_resolve_state:
                     on: ["pay"]
                     do: ["@sylius.state_resolver.order", "resolve"]
                     args: ["object"]
+                    priority: -100
