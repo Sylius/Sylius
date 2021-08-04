@@ -97,7 +97,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     public function __construct(
         FactoryInterface $productFactory,
         FactoryInterface $productVariantFactory,
-        FactoryInterface $channelPricing,
+        FactoryInterface $channelPricingFactory,
         ProductVariantGeneratorInterface $variantGenerator,
         FactoryInterface $productAttributeValueFactory,
         FactoryInterface $productImageFactory,
