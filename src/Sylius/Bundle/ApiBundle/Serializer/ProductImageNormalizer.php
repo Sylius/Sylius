@@ -77,8 +77,12 @@ class ProductImageNormalizer implements ContextAwareNormalizerInterface, Normali
     {
         $request = $this->requestStack->getCurrentRequest();
 
-        if (null !== $request->query->get('filter')) {
-            $data['filtered_path'] = $this->cacheManager->getBrowserPath(parse_url($data['path'], PHP_URL_PATH), $request->query->get('filter'));
+        if ($request->query->has('filter')) {
+            /** @var string $filter */
+            $filter = $request->query->get('filter');
+
+            $data['path'] = $this->cacheManager->getBrowserPath(parse_url($data['path'], PHP_URL_PATH), $filter);
+            return $data;
         }
 
         $data['path'] = $this->prefix . $data['path'];

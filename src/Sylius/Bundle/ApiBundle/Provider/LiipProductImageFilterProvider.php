@@ -18,16 +18,21 @@ use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 /** @experimental */
 class LiipProductImageFilterProvider implements ProductImageFilterProviderInterface
 {
-    use ContainerAwareTrait;
+    private array $filters;
+
+    public function __construct(array $filters)
+    {
+        $this->filters = $filters;
+    }
 
     public function provideAllFilters(): array
     {
-        return $this->container->getParameter('liip_imagine.filter_sets');
+        return $this->filters;
     }
 
     public function provideShopFilters(): array
     {
-        $filters = $this->container->getParameter('liip_imagine.filter_sets');
+        $filters = $this->provideAllFilters();
 
         return $this->removeAdminFilters($filters);
     }

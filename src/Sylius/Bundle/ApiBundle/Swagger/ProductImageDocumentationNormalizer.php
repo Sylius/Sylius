@@ -19,6 +19,8 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 /** @experimental */
 class ProductImageDocumentationNormalizer implements NormalizerInterface
 {
+    private const SHOP_ITEM_PATH = '/api/v2/shop/product-images/{id}';
+
     /** @var NormalizerInterface */
     private $decoratedNormalizer;
 
@@ -43,16 +45,16 @@ class ProductImageDocumentationNormalizer implements NormalizerInterface
         $enums = $this->filterProvider->provideShopFilters();
         $enums = array_keys($enums);
 
-        $params = $docs['paths']['/api/v2/shop/product-images/{id}']['get']['parameters'];
+        $params = $docs['paths'][self::SHOP_ITEM_PATH]['get']['parameters'];
 
         foreach ($params as $index => $param) {
             if ($param['in'] === 'query') {
                 if (is_string($param['schema']['enum']) || $param['schema']['enum'] === null) {
-                    $docs['paths']['/api/v2/shop/product-images/{id}']['get']['parameters'][$index]['schema']['enum'] = $enums;
+                    $docs['paths'][self::SHOP_ITEM_PATH]['get']['parameters'][$index]['schema']['enum'] = $enums;
                     break;
                 }
 
-                $docs['paths']['/api/v2/shop/product-images/{id}']['get']['parameters'][$index]['schema']['enum'] = array_merge($param['schema']['enum'], $enums);
+                $docs['paths'][self::SHOP_ITEM_PATH]['get']['parameters'][$index]['schema']['enum'] = array_merge($param['schema']['enum'], $enums);
             }
         }
 

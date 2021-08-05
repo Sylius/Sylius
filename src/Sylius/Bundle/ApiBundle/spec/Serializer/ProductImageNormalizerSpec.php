@@ -13,17 +13,25 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
+use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductImageInterface;
+use Symfony\Component\HttpFoundation\InputBag;
+use Symfony\Component\HttpFoundation\ParameterBag;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class ProductImageNormalizerSpec extends ObjectBehavior
 {
-    function let(): void
+    function let(CacheManager $cacheManager, RequestStack $requestStack): void
     {
-        $this->beConstructedWith('prefix', '/prefix', '/prefix/', 'prefix/');
+        $this->beConstructedWith(
+            $cacheManager,
+            $requestStack,
+            'prefix', '/prefix', '/prefix/', 'prefix/');
     }
 
     function it_implements_context_aware_normalizer_interface(): void
@@ -39,12 +47,36 @@ final class ProductImageNormalizerSpec extends ObjectBehavior
 
     function it_serializes_product_image_with_proper_prefix(
         NormalizerInterface $normalizer,
-        ProductImageInterface $productImage
+        ProductImageInterface $productImage,
+        RequestStack $requestStack,
+        Request $request
     ): void {
         $this->setNormalizer($normalizer);
 
         $normalizer->normalize($productImage, null, ['product_image_normalizer_already_called' => true])->willReturn(['path' => 'some_path']);
 
+        $requestStack->getCurrentRequest()->willReturn($request);
+        $request->query = new InputBag([]);
+
         $this->normalize($productImage, null, [])->shouldReturn(['path' => '/prefix/some_path']);
+    }
+
+    function it_serializes_filtered_path_to_product_image(
+        NormalizerInterface $normalizer,
+        ProductImageInterface $productImage,
+        RequestStack $requestStack,
+        Request $request,
+        CacheManager $cacheManager
+    ): void {
+        $this->setNormalizer($normalizer);
+
+        $normalizer->normalize($productImage, null, ['product_image_normalizer_already_called' => true])->willReturn(['path' => 'some_path']);
+
+        $requestStack->getCurrentRequest()->willReturn($request);
+        $request->query = new ParameterBag(['filter' => 'sylius_large']);
+
+        $cacheManager->getBrowserPath('some_path', 'sylius_large')->willReturn('/sylius_large/some_path');
+
+        $this->normalize($productImage, null, [])->shouldReturn(['path' => '/sylius_large/some_path']);
     }
 }
