@@ -35,7 +35,7 @@ final class OrdersTest extends JsonApiTestCase
 
         $tokenValue = 'nAWw2jewpA';
 
-        $this->placeOrder($tokenValue, $header);
+        $this->placeOrder($tokenValue);
 
         $this->client->request('GET', '/api/v2/admin/orders/nAWw2jewpA', [], [], $header);
         $response = $this->client->getResponse();

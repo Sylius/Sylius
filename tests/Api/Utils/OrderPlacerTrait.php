@@ -20,11 +20,14 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Component\Core\Model\Address;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Webmozart\Assert\Assert;
 
 trait OrderPlacerTrait
 {
-    protected function placeOrder(string $tokenValue, array $header): void
+    protected function placeOrder(string $tokenValue): void
     {
         /** @var MessageBusInterface $commandBus */
         $commandBus = $this->get('sylius.command_bus');
@@ -49,17 +52,20 @@ trait OrderPlacerTrait
         $addressOrderCommand->setOrderTokenValue($tokenValue);
         $commandBus->dispatch($addressOrderCommand);
 
-        $this->client->request('GET', '/api/v2/admin/orders/nAWw2jewpA', [], [], $header);
-        $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
+        /** @var OrderRepositoryInterface $orderRepository */
+        $orderRepository = $this->get('sylius.repository.order');
+        /** @var OrderInterface|null $cart */
+        $cart = $orderRepository->findCartByTokenValue($tokenValue);
+        Assert::notNull($cart);
 
         $chooseShippingMethodCommand = new ChooseShippingMethod('UPS');
         $chooseShippingMethodCommand->setOrderTokenValue($tokenValue);
-        $chooseShippingMethodCommand->setSubresourceId((string) $orderResponse['shipments'][0]['id']);
+        $chooseShippingMethodCommand->setSubresourceId((string) $cart->getShipments()->first()->getId());
         $commandBus->dispatch($chooseShippingMethodCommand);
 
         $choosePaymentMethodCommand = new ChoosePaymentMethod('CASH_ON_DELIVERY');
         $choosePaymentMethodCommand->setOrderTokenValue($tokenValue);
-        $choosePaymentMethodCommand->setSubresourceId((string) $orderResponse['payments'][0]['id']);
+        $choosePaymentMethodCommand->setSubresourceId((string) $cart->getLastPayment()->getId());
         $commandBus->dispatch($choosePaymentMethodCommand);
 
         $completeOrderCommand = new CompleteOrder();
