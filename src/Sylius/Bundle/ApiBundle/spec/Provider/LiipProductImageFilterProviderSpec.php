@@ -19,6 +19,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class LiipProductImageFilterProviderSpec extends ObjectBehavior
 {
+    function let(): void
+    {
+        $this->beConstructedWith(['sylius_shop_product_original' => 'args', 'sylius_admin_product_original' => 'args']);
+    }
+
     function it_is_a_product_image_filter_provider(): void
     {
         $this->shouldImplement(ProductImageFilterProviderInterface::class);
@@ -26,23 +31,11 @@ class LiipProductImageFilterProviderSpec extends ObjectBehavior
 
     function it_returns_all_image_filters(ContainerInterface $container): void
     {
-        $filters = ['sylius_shop_product_original' => 'args', 'sylius_admin_product_original' => 'args'];
-        $container->setParameter('liip_imagine.filter_sets', $filters);
-        $this->setContainer($container);
-
-        $container->getParameter('liip_imagine.filter_sets')->willReturn($filters);
-
-        $this->provideAllFilters()->shouldReturn($filters);
+        $this->provideAllFilters()->shouldReturn(['sylius_shop_product_original' => 'args', 'sylius_admin_product_original' => 'args']);
     }
 
     function it_returns_shop_image_filters(ContainerInterface $container): void
     {
-        $filters = ['sylius_shop_product_original' => 'args', 'sylius_admin_product_original' => 'args'];
-        $container->setParameter('liip_imagine.filter_sets', $filters);
-        $this->setContainer($container);
-
-        $container->getParameter('liip_imagine.filter_sets')->willReturn($filters);
-
         $this->provideShopFilters()->shouldReturn(['sylius_shop_product_original' => 'args']);
     }
 }
