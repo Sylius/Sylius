@@ -14,7 +14,7 @@ namespace Sylius\Tests\Api\Shop;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-class CustomerUpdateTest extends JsonApiTestCase
+final class CustomersTest extends JsonApiTestCase
 {
     /** @test */
     public function it_returns_small_amount_of_data_on_customer_update(): void

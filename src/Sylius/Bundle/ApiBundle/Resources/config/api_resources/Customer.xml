@@ -71,11 +71,11 @@
             <itemOperation name="shop_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/shop/customers/{id}</attribute>
-                <attribute name="normalization_context">
+                <attribute name="denormalization_context">
                     <attribute name="groups">shop:customer:update</attribute>
                 </attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">shop:customer:denormalize</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:customer:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

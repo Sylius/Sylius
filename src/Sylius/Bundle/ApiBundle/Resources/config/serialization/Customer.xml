@@ -24,46 +24,38 @@
             <group>admin:customer:read</group>
             <group>shop:customer:read</group>
             <group>shop:customer:update</group>
-            <group>shop:customer:denormalize</group>
         </attribute>
 
         <attribute name="firstName">
             <group>admin:customer:read</group>
             <group>shop:customer:read</group>
             <group>shop:customer:update</group>
-            <group>shop:customer:denormalize</group>
         </attribute>
 
         <attribute name="lastName">
             <group>admin:customer:read</group>
             <group>shop:customer:read</group>
             <group>shop:customer:update</group>
-            <group>shop:customer:denormalize</group>
         </attribute>
 
         <attribute name="fullName">
             <group>admin:customer:read</group>
             <group>shop:customer:read</group>
-            <group>shop:customer:update</group>
-            <group>shop:customer:denormalize</group>
         </attribute>
 
         <attribute name="defaultAddress">
             <group>admin:customer:read</group>
             <group>shop:customer:read</group>
             <group>shop:customer:update</group>
-            <group>shop:customer:denormalize</group>
         </attribute>
 
         <attribute name="subscribedToNewsletter">
             <group>shop:customer:read</group>
             <group>shop:customer:update</group>
-            <group>shop:customer:denormalize</group>
         </attribute>
 
         <attribute name="user">
             <group>shop:customer:read</group>
-            <group>shop:customer:update</group>
         </attribute>
     </class>
 </serializer>
