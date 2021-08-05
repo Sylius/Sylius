@@ -17,7 +17,6 @@ use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductImageInterface;
-use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -56,7 +55,7 @@ final class ProductImageNormalizerSpec extends ObjectBehavior
         $normalizer->normalize($productImage, null, ['product_image_normalizer_already_called' => true])->willReturn(['path' => 'some_path']);
 
         $requestStack->getCurrentRequest()->willReturn($request);
-        $request->query = new InputBag([]);
+        $request->query = new ParameterBag([]);
 
         $this->normalize($productImage, null, [])->shouldReturn(['path' => '/prefix/some_path']);
     }
