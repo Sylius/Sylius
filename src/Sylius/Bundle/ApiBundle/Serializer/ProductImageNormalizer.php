@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
+use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Sylius\Component\Core\Model\ProductImageInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
@@ -26,11 +28,14 @@ class ProductImageNormalizer implements ContextAwareNormalizerInterface, Normali
 
     private const ALREADY_CALLED = 'product_image_normalizer_already_called';
 
-    /** @var string */
-    private $prefix;
+    private CacheManager $cacheManager;
+    private RequestStack $requestStack;
+    private string $prefix;
 
-    public function __construct(string $prefix)
+    public function __construct(CacheManager $cacheManager, RequestStack $requestStack, string $prefix)
     {
+        $this->cacheManager = $cacheManager;
+        $this->requestStack = $requestStack;
         $this->prefix = $this->validatePrefix($prefix);
     }
 
@@ -43,9 +48,7 @@ class ProductImageNormalizer implements ContextAwareNormalizerInterface, Normali
 
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        $data['path'] = $this->prefix . $data['path'];
-
-        return $data;
+        return $this->resolvePath($data);
     }
 
     public function supportsNormalization($data, $format = null, $context = []): bool
@@ -68,5 +71,22 @@ class ProductImageNormalizer implements ContextAwareNormalizerInterface, Normali
         }
 
         return $prefix . \DIRECTORY_SEPARATOR;
+    }
+
+    private function resolvePath($data): array
+    {
+        $request = $this->requestStack->getCurrentRequest();
+
+        if ($request->query->has('filter')) {
+            /** @var string $filter */
+            $filter = $request->query->get('filter');
+
+            $data['path'] = $this->cacheManager->getBrowserPath(parse_url($data['path'], PHP_URL_PATH), $filter);
+            return $data;
+        }
+
+        $data['path'] = $this->prefix . $data['path'];
+
+        return $data;
     }
 }
