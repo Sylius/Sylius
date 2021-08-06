@@ -57,6 +57,7 @@ final class ZoneCannotContainItselfValidatorSpec extends ObjectBehavior
         ZoneMemberInterface $zoneMember
     ): void {
         $zone->getCode()->willReturn('WORLD');
+        $zone->getType()->willReturn(ZoneInterface::TYPE_ZONE);
         $zoneMember->getCode()->willReturn('EU');
         $zoneMember->getBelongsTo()->willReturn($zone);
 
@@ -71,10 +72,26 @@ final class ZoneCannotContainItselfValidatorSpec extends ObjectBehavior
         ZoneMemberInterface $zoneMember
     ): void {
         $zone->getCode()->willReturn('EU');
+        $zone->getType()->willReturn(ZoneInterface::TYPE_ZONE);
         $zoneMember->getCode()->willReturn('EU');
         $zoneMember->getBelongsTo()->willReturn($zone);
 
         $executionContext->addViolation(Argument::cetera())->shouldBeCalled();
+
+        $this->validate([$zoneMember], new ZoneCannotContainItself());
+    }
+
+    function it_does_not_add_violation_if_zone_containing_itself_is_country_type(
+        ExecutionContextInterface $executionContext,
+        ZoneInterface $zone,
+        ZoneMemberInterface $zoneMember
+    ): void {
+        $zone->getCode()->willReturn('FR');
+        $zone->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
+        $zoneMember->getCode()->willReturn('FR');
+        $zoneMember->getBelongsTo()->willReturn($zone);
+
+        $executionContext->addViolation(Argument::cetera())->shouldNotBeCalled();
 
         $this->validate([$zoneMember], new ZoneCannotContainItself());
     }
