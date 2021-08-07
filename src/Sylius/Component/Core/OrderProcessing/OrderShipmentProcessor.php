@@ -70,7 +70,8 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
             $shipment = $this->getExistingShipmentWithProperMethod($order);
 
             if (null === $shipment) {
-                return;
+                // No shipping method available to this order, remove all shipments.
+                $order->removeShipments();
             }
 
             $this->processShipmentUnits($order, $shipment);
