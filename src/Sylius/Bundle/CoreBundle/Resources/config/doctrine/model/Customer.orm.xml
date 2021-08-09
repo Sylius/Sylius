@@ -13,6 +13,10 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <mapped-superclass name="Sylius\Component\Core\Model\Customer" table="sylius_customer">
+        <indexes>
+            <index name="created_at_index" columns="created_at" />
+        </indexes>
+
         <one-to-one field="defaultAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
             <join-column name="default_address_id" on-delete="SET NULL" />
             <cascade>
