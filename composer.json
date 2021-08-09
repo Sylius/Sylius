@@ -19,6 +19,12 @@
             "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/AdamKasp/SyliusGridBundle.git"
+        }
+    ],
     "require": {
         "php": "^7.4 || ^8.0",
         "ext-exif": "*",
@@ -60,8 +66,7 @@
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0",
         "sylius-labs/polyfill-symfony-security": "^1.0",
         "sylius/fixtures-bundle": "^1.6.1",
-        "sylius/grid": "^1.8",
-        "sylius/grid-bundle": "^1.8",
+        "sylius/grid-bundle": "dev-pagination",
         "sylius/mailer": "^1.5",
         "sylius/mailer-bundle": "^1.5",
         "sylius/registry": "^1.5",
