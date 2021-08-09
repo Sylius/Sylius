@@ -1,0 +1,22 @@
+Query optimization
+==================
+
+Huge performance boost is achieved by optimizing queries.
+
+For example let's take a look on customers listing.
+By default, we don't really need to fetch every single field from customer to create a list of 10 customers,
+all we need is to load `id` and field we are sorting by (for pagination purposes).
+
+Once these 10 customers are fetched, we can create 10 queries to fetch data for them.
+As it can slow down small databases (a lot of unnecessary queries), this allows tables with millions of records to be loaded in less than a second.
+
+It seems to be a bit complicated, but `DoctrineORMAdapter` allows us to achieve easily.
+
+Second argument of `DoctrineORMAdapter` is `fetchJoinCollection`, which is false by default.
+Changing it to true, forces database to fetch additional data once we get sorted results.
+
+With 3 000 000 customers this method allows you to load page up to 70% faster.
+
+.. warning::
+
+    This solution may slow down loading page with small tables as it will create additional database queries.
