@@ -82,9 +82,53 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
 
         $channelContext->getChannel()->willReturn($channel);
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(1000);
+        $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willReturn(1000);
+
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 
-        $this->normalize($variant, null, [])->shouldReturn(['price' => 1000, 'inStock' => true]);
+        $this->normalize($variant, null, [])->shouldReturn(['price' => 1000, 'original_price' => null, 'inStock' => true]);
+    }
+
+    function it_does_not_return_original_price_if_price_is_same(
+        ProductVariantPricesCalculatorInterface $pricesCalculator,
+        ChannelContextInterface $channelContext,
+        AvailabilityCheckerInterface $availabilityChecker,
+        NormalizerInterface $normalizer,
+        ChannelInterface $channel,
+        ProductVariantInterface $variant
+    ): void {
+        $this->setNormalizer($normalizer);
+
+        $normalizer->normalize($variant, null, ['product_variant_normalizer_already_called' => true])->willReturn([]);
+
+        $channelContext->getChannel()->willReturn($channel);
+        $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(500);
+        $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willReturn(500);
+
+        $availabilityChecker->isStockAvailable($variant)->willReturn(false);
+
+        $this->normalize($variant, null, [])->shouldReturn(['price' => 500, 'original_price' => null, 'inStock' => false]);
+    }
+
+    function it_returns_original_price_if_is_different_than_price(
+        ProductVariantPricesCalculatorInterface $pricesCalculator,
+        ChannelContextInterface $channelContext,
+        AvailabilityCheckerInterface $availabilityChecker,
+        NormalizerInterface $normalizer,
+        ChannelInterface $channel,
+        ProductVariantInterface $variant
+    ): void {
+        $this->setNormalizer($normalizer);
+
+        $normalizer->normalize($variant, null, ['product_variant_normalizer_already_called' => true])->willReturn([]);
+
+        $channelContext->getChannel()->willReturn($channel);
+        $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(500);
+        $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willReturn(1000);
+
+        $availabilityChecker->isStockAvailable($variant)->willReturn(true);
+
+        $this->normalize($variant, null, [])->shouldReturn(['price' => 500, 'original_price' => 1000, 'inStock' => true]);
     }
 
     function it_throws_an_exception_if_the_normalizer_has_been_already_called(

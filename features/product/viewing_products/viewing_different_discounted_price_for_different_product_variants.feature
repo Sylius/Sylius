@@ -11,7 +11,7 @@ Feature: Viewing different discounted price for different product variants
         And the product "Wyborowa Vodka" has "Wyborowa Apple" variant priced at "$12.55"
         And the "Wyborowa Apple" product variant has original price at "$20.00"
 
-    @ui
+    @ui @api
     Scenario: Viewing a detailed page with default variant's price without discount
         When I view product "Wyborowa Vodka"
         Then the product price should be "$40.00"
