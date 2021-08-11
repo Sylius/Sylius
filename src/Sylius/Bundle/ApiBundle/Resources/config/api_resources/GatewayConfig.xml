@@ -30,5 +30,7 @@
 
         <property name="id" identifier="true" writable="false" />
         <property name="config" writable="true" />
+        <property name="gateway_name" writable="true" />
+        <property name="factory_name" writable="true" />
     </resource>
 </resources>

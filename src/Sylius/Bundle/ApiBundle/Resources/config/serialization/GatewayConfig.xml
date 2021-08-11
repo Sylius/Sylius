@@ -24,5 +24,11 @@
             <group>admin:payment_method:read</group>
             <group>admin:payment_method:update</group>
         </attribute>
+        <attribute name="factory_name">
+            <group>admin:gateway_config:read</group>
+        </attribute>
+        <attribute name="gateway_name">
+            <group>admin:gateway_config:read</group>
+        </attribute>
     </class>
 </serializer>
