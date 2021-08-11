@@ -21,11 +21,9 @@ use Webmozart\Assert\Assert;
 
 final class ProductVariantContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $client;
+    private ApiClientInterface $client;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
     public function __construct(
         ApiClientInterface $client,
@@ -56,7 +54,7 @@ final class ProductVariantContext implements Context
     /**
      * @Then /^the product original price should be ("[^"]+")$/
      */
-    public function theProductOriginalPriceShouldBe(int $originalPrice)
+    public function theProductOriginalPriceShouldBe(int $originalPrice): void
     {
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 

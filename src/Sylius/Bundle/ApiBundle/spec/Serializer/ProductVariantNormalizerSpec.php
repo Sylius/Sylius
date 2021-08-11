@@ -18,6 +18,7 @@ use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -86,28 +87,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
 
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 
-        $this->normalize($variant, null, [])->shouldReturn(['price' => 1000, 'original_price' => null, 'inStock' => true]);
-    }
-
-    function it_does_not_return_original_price_if_price_is_same(
-        ProductVariantPricesCalculatorInterface $pricesCalculator,
-        ChannelContextInterface $channelContext,
-        AvailabilityCheckerInterface $availabilityChecker,
-        NormalizerInterface $normalizer,
-        ChannelInterface $channel,
-        ProductVariantInterface $variant
-    ): void {
-        $this->setNormalizer($normalizer);
-
-        $normalizer->normalize($variant, null, ['product_variant_normalizer_already_called' => true])->willReturn([]);
-
-        $channelContext->getChannel()->willReturn($channel);
-        $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(500);
-        $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willReturn(500);
-
-        $availabilityChecker->isStockAvailable($variant)->willReturn(false);
-
-        $this->normalize($variant, null, [])->shouldReturn(['price' => 500, 'original_price' => null, 'inStock' => false]);
+        $this->normalize($variant, null, [])->shouldReturn(['price' => 1000, 'original_price' => 1000, 'inStock' => true]);
     }
 
     function it_returns_original_price_if_is_different_than_price(
@@ -129,6 +109,27 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 
         $this->normalize($variant, null, [])->shouldReturn(['price' => 500, 'original_price' => 1000, 'inStock' => true]);
+    }
+
+    function it_doesnt_return_prices_if_channel_is_not_found(
+        ProductVariantPricesCalculatorInterface $pricesCalculator,
+        ChannelContextInterface $channelContext,
+        AvailabilityCheckerInterface $availabilityChecker,
+        NormalizerInterface $normalizer,
+        ChannelInterface $channel,
+        ProductVariantInterface $variant
+    ): void {
+        $this->setNormalizer($normalizer);
+
+        $normalizer->normalize($variant, null, ['product_variant_normalizer_already_called' => true])->willReturn([]);
+
+        $channelContext->getChannel()->willReturn($channel);
+        $pricesCalculator->calculate($variant, ['channel' => $channel])->willThrow(ChannelNotFoundException::class);
+        $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willThrow(ChannelNotFoundException::class);
+
+        $availabilityChecker->isStockAvailable($variant)->willReturn(true);
+
+        $this->normalize($variant, null, [])->shouldReturn(['inStock' => true]);
     }
 
     function it_throws_an_exception_if_the_normalizer_has_been_already_called(
