@@ -24,11 +24,13 @@
             <group>admin:product_option:update</group>
             <group>admin:product_option_value:read</group>
             <group>admin:product_option_value:write</group>
+            <group>admin:product_option_value:create</group>
         </attribute>
         <attribute name="locale">
             <group>admin:product_option:create</group>
             <group>admin:product_option:update</group>
             <group>admin:product_option_value:write</group>
+            <group>admin:product_option_value:create</group>
         </attribute>
     </class>
 </serializer>
