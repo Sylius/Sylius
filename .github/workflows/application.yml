@@ -121,7 +121,7 @@ jobs:
 
         env:
             APP_ENV: test_cached
-            DATABASE_URL: "pgsql://postgres:postgres@127.0.0.1/postgres?serverVersion=${{ matrix.postgres }}"
+            DATABASE_URL: "pgsql://postgres:postgres@127.0.0.1/sylius?serverVersion=${{ matrix.postgres }}"
 
         steps:
             -
@@ -183,47 +183,9 @@ jobs:
                 name: Prepare application database
                 run: |
                     APP_DEBUG=1 bin/console doctrine:database:create -vvv
-                    bin/console doctrine:migrations:migrate -n -vvv
-    
-            -
-                name: Test provided migrations
-                run: |
-                    bin/console doctrine:migrations:migrate first --no-interaction
-                    bin/console doctrine:migrations:migrate latest --no-interaction
-                    bin/console doctrine:schema:validate --skip-mapping -vvv
-    
-            -
-                name: Test installer
-                run: bin/console sylius:install --no-interaction -vvv
-    
-            -
-                name: Load fixtures
-                run: bin/console sylius:fixtures:load default --no-interaction
-    
-            -
-                name: Run PHPSpec
-                run: vendor/bin/phpspec run --ansi --no-interaction -f dot
-    
-            -
-                name: Run PHPUnit
-                run: vendor/bin/phpunit --colors=always
-    
-            -
-                name: Run CLI Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli && ~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli && ~@todo" --rerun
-    
-            -
-                name: Run non-JS Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript && ~@todo && ~@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript && ~@todo && ~@cli" --rerun
-    
-            -
-                name: Upload Behat logs
-                uses: actions/upload-artifact@v2
-                if: failure()
-                with:
-                    name: "Behat logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
-                    path: etc/build/
-                    if-no-files-found: ignore
+                    bin/console doctrine:schema:up --force -vvv
+                    bin/console doctrine:schema:validate
+                continue-on-error: true
 
     test-application-without-frontend-mysql:
         runs-on: ubuntu-18.04
