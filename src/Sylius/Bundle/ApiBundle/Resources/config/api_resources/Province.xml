@@ -20,7 +20,15 @@
 
         <attribute name="validation_groups">sylius</attribute>
 
-        <collectionOperations />
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/provinces</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:province:read</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
 
         <itemOperations>
             <itemOperation name="admin_get">
