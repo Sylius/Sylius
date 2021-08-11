@@ -20,6 +20,7 @@
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>admin:product_option_value:read</attribute>
+                <attribute>admin:product_option_value:create</attribute>
             </attribute>
         </attribute>
 
@@ -31,7 +32,15 @@
 
         <attribute name="validation_groups">sylius</attribute>
 
-        <collectionOperations />
+        <collectionOperations>
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/product-option-values</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:product_option_value:create</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
 
         <itemOperations>
             <itemOperation name="admin_get">
@@ -48,7 +57,7 @@
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
         <property name="value" />
-        <property name="option" writable="false" />
+        <property name="option" writable="true" />
         <property name="translations" readable="true" writable="true" >
             <attribute name="openapi_context">
                 <attribute name="type">array</attribute>

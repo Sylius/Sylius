@@ -24,18 +24,21 @@
         </attribute>
         <attribute name="option">
             <group>admin:product_option_value:read</group>
+            <group>admin:product_option_value:create</group>
         </attribute>
         <attribute name="code">
             <group>admin:product_option:create</group>
             <group>admin:product_option:update</group>
             <group>admin:product_option_value:read</group>
             <group>admin:product_option_value:write</group>
+            <group>admin:product_option_value:create</group>
         </attribute>
         <attribute name="translations">
             <group>admin:product_option:create</group>
             <group>admin:product_option:update</group>
             <group>admin:product_option_value:read</group>
             <group>admin:product_option_value:write</group>
+            <group>admin:product_option_value:create</group>
         </attribute>
     </class>
 </serializer>
