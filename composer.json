@@ -111,6 +111,7 @@
         "twig/intl-extra": "^2.12",
         "twig/twig": "^2.12",
         "webmozart/assert": "^1.9",
+        "webonyx/graphql-php": "^14.9",
         "willdurand/hateoas": "^3.0",
         "willdurand/hateoas-bundle": "^2.0",
         "winzou/state-machine-bundle": "^0.5"

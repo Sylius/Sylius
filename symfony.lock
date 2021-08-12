@@ -1042,6 +1042,9 @@
     "webmozart/path-util": {
         "version": "2.3.0"
     },
+    "webonyx/graphql-php": {
+        "version": "v14.9.0"
+    },
     "willdurand/hateoas": {
         "version": "2.12.0"
     },
