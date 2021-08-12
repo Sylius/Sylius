@@ -609,7 +609,7 @@ jobs:
 
         if: failure() && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'release')
 
-        needs: [static-checks, test-application-without-frontend-mysql, test-application-without-frontend-postgres, test-application-with-frontend]
+        needs: [static-checks, test-application-without-frontend-mysql, test-application-without-frontend-postgres, test-application-without-frontend-mariadb, test-application-with-frontend]
 
         name: "Notify about build failure"
 
