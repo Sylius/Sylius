@@ -228,6 +228,240 @@ After these two steps your admin product grid should not have the image field.
 
 .. include:: /customization/plugins.rst.inc
 
+Disabling `fetch join collection` and output walkers
+----------------------------------------------------
+
+In all Grids by default option `fetch_join_collection` and `use_output_walkers` are enabled, if you want to disable it, you should past following code:
+
+.. code-block:: yaml
+
+    # config/packages/_sylius.yaml
+
+Current configuration for extension with alias "sylius_grid"
+============================================================
+
+.. code-block:: yaml
+
+    sylius_grid:
+        grids:
+            sylius_admin_address_log_entry:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_admin_user:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_channel:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_country:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_currency:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_customer:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_customer_group:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_customer_order:
+                extends: sylius_admin_order
+                driver:
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_exchange_rate:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_inventory:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_locale:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_order:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_payment:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_payment_method:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_product:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_product_association_type:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_product_attribute:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_product_option:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_product_review:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_product_variant:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_promotion:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_promotion_coupon:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_shipment:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_shipping_category:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_shipping_method:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_tax_category:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_tax_rate:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_taxon:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_zone:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_shop_account_order:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_shop_product:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+
 Learn more
 ----------
 
