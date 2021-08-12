@@ -30,6 +30,10 @@ final class SubresourceIdAwareCommandDataTransformer implements CommandDataTrans
 
     public function transform($object, string $to, array $context = [])
     {
+        if (null !== $object->getSubresourceId()) {
+            return $object;
+        }
+
         $attributes = $this->requestStack->getCurrentRequest()->attributes;
 
         $attributeKey = $object->getSubresourceIdAttributeKey();
