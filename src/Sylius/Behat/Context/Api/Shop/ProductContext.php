@@ -147,6 +147,29 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then /^I should see the product original price ("[^"]+")$/
+     */
+    public function iShouldSeeTheProductOriginalPrice(int $originalPrice): void
+    {
+        Assert::true(
+            $this->hasProductWithOriginalPrice(
+                [$this->responseChecker->getResponseContent($this->client->getLastResponse())],
+                $originalPrice
+            )
+        );
+    }
+
+    /**
+     * @Then I should not see any original price
+     */
+    public function iShouldNotSeeAnyOriginalPrice(): void
+    {
+        $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+
+        Assert::same($response['original_price'], $response['price']);
+    }
+
+    /**
      * @Then /^I should see the (product "[^"]+") with price ("[^"]+")$/
      */
     public function iShouldSeeTheProductWithPrice(ProductInterface $product, int $price): void
@@ -337,6 +360,17 @@ final class ProductContext implements Context
                 if ($translation['name'] === $name) {
                     return true;
                 }
+            }
+        }
+
+        return false;
+    }
+
+    private function hasProductWithOriginalPrice(array $products, int $originalPrice): bool
+    {
+        foreach ($products as $product) {
+            if ($product['original_price'] === $originalPrice) {
+                return true;
             }
         }
 
