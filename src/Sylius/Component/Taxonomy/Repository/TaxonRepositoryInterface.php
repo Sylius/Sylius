@@ -44,4 +44,9 @@ interface TaxonRepositoryInterface extends RepositoryInterface
     public function findByNamePart(string $phrase, ?string $locale = null, ?int $limit = null): array;
 
     public function createListQueryBuilder(): QueryBuilder;
+
+    public function createChildrenByChannelMenuTaxonQueryBuilder(
+        ?TaxonInterface $menuTaxon = null,
+        ?string $locale = null
+    ): QueryBuilder;
 }
