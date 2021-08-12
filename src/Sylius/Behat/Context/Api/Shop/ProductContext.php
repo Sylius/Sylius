@@ -166,7 +166,7 @@ final class ProductContext implements Context
     {
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
-        Assert::same($response['original_price'], $response['price']);
+        Assert::same($response['originalPrice'], $response['price']);
     }
 
     /**
@@ -369,7 +369,7 @@ final class ProductContext implements Context
     private function hasProductWithOriginalPrice(array $products, int $originalPrice): bool
     {
         foreach ($products as $product) {
-            if ($product['original_price'] === $originalPrice) {
+            if ($product['originalPrice'] === $originalPrice) {
                 return true;
             }
         }

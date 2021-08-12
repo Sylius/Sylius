@@ -87,7 +87,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
 
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 
-        $this->normalize($variant, null, [])->shouldReturn(['price' => 1000, 'original_price' => 1000, 'inStock' => true]);
+        $this->normalize($variant, null, [])->shouldReturn(['price' => 1000, 'originalPrice' => 1000, 'inStock' => true]);
     }
 
     function it_returns_original_price_if_is_different_than_price(
@@ -108,7 +108,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
 
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 
-        $this->normalize($variant, null, [])->shouldReturn(['price' => 500, 'original_price' => 1000, 'inStock' => true]);
+        $this->normalize($variant, null, [])->shouldReturn(['price' => 500, 'originalPrice' => 1000, 'inStock' => true]);
     }
 
     function it_doesnt_return_prices_if_channel_is_not_found(

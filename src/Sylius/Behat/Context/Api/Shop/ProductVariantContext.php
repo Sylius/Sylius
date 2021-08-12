@@ -58,6 +58,6 @@ final class ProductVariantContext implements Context
     {
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
-        Assert::same($response['original_price'], $originalPrice);
+        Assert::same($response['originalPrice'], $originalPrice);
     }
 }
