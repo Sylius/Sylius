@@ -40,6 +40,13 @@
             <tag name="api_platform.filter" />
         </service>
 
+        <service id="sylius.api.product_taxon_slug_filter" parent="api_platform.doctrine.orm.search_filter">
+            <argument type="collection">
+                <argument key="productTaxons.taxon.translations.slug">exact</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
         <service id="sylius.api.product_taxon_filter" class="Sylius\Bundle\ApiBundle\Filter\TaxonFilter">
             <argument type="service" id="doctrine" />
             <argument type="service" id="api_platform.iri_converter" />
@@ -49,6 +56,13 @@
         <service id="sylius.api.product_name_filter" parent="api_platform.doctrine.orm.search_filter">
             <argument type="collection">
                 <argument key="translations.name">partial</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius.api.product_slug_filter" parent="api_platform.doctrine.orm.search_filter">
+            <argument type="collection">
+                <argument key="translations.slug">exact</argument>
             </argument>
             <tag name="api_platform.filter" />
         </service>
