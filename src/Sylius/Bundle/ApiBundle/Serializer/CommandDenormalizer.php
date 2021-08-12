@@ -13,9 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
+use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @experimental
@@ -27,28 +30,53 @@ final class CommandDenormalizer implements ContextAwareDenormalizerInterface
     /** @var DenormalizerInterface */
     private $itemNormalizer;
 
-    public function __construct(DenormalizerInterface $itemNormalizer)
+    /** @var ClassMetadataFactoryInterface */
+    private $classMetadataFactory;
+
+    public function __construct(
+        DenormalizerInterface $itemNormalizer,
+        ClassMetadataFactoryInterface $classMetadataFactory
+    )
     {
         $this->itemNormalizer = $itemNormalizer;
+        $this->classMetadataFactory = $classMetadataFactory;
     }
 
+    /** @psalm-suppress MissingParamType */
     public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return isset($context['input']['class']);
+        /** @psalm-var class-string|null $inputClassName */
+        $inputClassName = $context['input']['class'] ?? null;
+
+        if ($inputClassName === null) {
+            return $this->canBeConvertedFromIriToIdentifier($type);
+        }
+
+        return $this->canBeConvertedFromIriToIdentifier($inputClassName);
     }
 
+    /** @psalm-suppress MissingParamType */
     public function denormalize($data, $type, $format = null, array $context = [])
     {
         if (isset($context[self::OBJECT_TO_POPULATE])) {
             return $this->itemNormalizer->denormalize($data, $type, $format, $context);
         }
 
-        $parameters = (new \ReflectionClass($context['input']['class']))->getConstructor()->getParameters();
+        $constructor = (new \ReflectionClass($context['input']['class']))->getConstructor();
+        Assert::notNull($constructor);
+
+        $metadata = $this->classMetadataFactory->getMetadataFor($context['input']['class']);
 
         $missingFields = [];
-        foreach ($parameters as $parameter) {
-            if (!isset($data[$parameter->getName()]) && !($parameter->allowsNull() || $parameter->isDefaultValueAvailable())) {
-                $missingFields[] = $parameter->getName();
+
+        /** @psalm-suppress InternalMethod */
+        foreach ($metadata->getAttributesMetadata() as $attributeMetadata) {
+            $attributeMetadataName = $attributeMetadata->getSerializedName() !== null ? $attributeMetadata->getSerializedName() : $attributeMetadata->getName();
+
+            foreach ($constructor->getParameters() as $constructorParameter) {
+                if ($constructorParameter->getName() === $attributeMetadata->getName() && !isset($data[$attributeMetadataName]) && !($constructorParameter->allowsNull() || $constructorParameter->isDefaultValueAvailable())) {
+                    $missingFields[] = $attributeMetadataName;
+                }
             }
         }
 
@@ -59,5 +87,10 @@ final class CommandDenormalizer implements ContextAwareDenormalizerInterface
         }
 
         return $this->itemNormalizer->denormalize($data, $type, $format, $context);
+    }
+
+    private function canBeConvertedFromIriToIdentifier(string $type): bool
+    {
+        return in_array(IriToIdentifierConversionAwareInterface::class, class_implements($type) ?? [], true);
     }
 }

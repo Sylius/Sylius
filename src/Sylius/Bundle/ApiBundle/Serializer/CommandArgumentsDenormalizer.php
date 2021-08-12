@@ -47,24 +47,22 @@ final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInte
         $inputClassName = $this->getInputClassName($context);
 
         if ($inputClassName === null) {
-            return false;
+            return $this->canBeConvertedFromIriToIdentifier($type);
         }
 
-        foreach (class_implements($inputClassName) as $classInterface) {
-            if ($classInterface === IriToIdentifierConversionAwareInterface::class) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->canBeConvertedFromIriToIdentifier($inputClassName);
     }
 
     public function denormalize($data, $type, $format = null, array $context = [])
     {
-        /** @psalm-var class-string $inputClassName */
-        $inputClassName = $this->getInputClassName($context);
+        /** @psalm-var class-string|null $inputClassName */
+        $targetClassName = $this->getInputClassName($context);
 
-        foreach (class_implements($inputClassName) as $classInterface) {
+        if ($targetClassName === null) {
+            $targetClassName = $type;
+        }
+
+        foreach (class_implements($targetClassName) as $classInterface) {
             if ($classInterface !== IriToIdentifierConversionAwareInterface::class) {
                 continue;
             }
@@ -76,10 +74,10 @@ final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInte
             }
         }
 
-        $denormalizedInput = $this->objectNormalizer->denormalize($data, $this->getInputClassName($context), $format, $context);
+        $denormalizedInput = $this->objectNormalizer->denormalize($data, $targetClassName, $format, $context);
 
-        if ($this->commandAwareInputDataTransformer->supportsTransformation($denormalizedInput, $type, $context)) {
-            return $this->commandAwareInputDataTransformer->transform($denormalizedInput, $type, $context);
+        if ($this->commandAwareInputDataTransformer->supportsTransformation($denormalizedInput, $targetClassName, $context)) {
+            return $this->commandAwareInputDataTransformer->transform($denormalizedInput, $targetClassName, $context);
         }
 
         return $denormalizedInput;
@@ -88,5 +86,10 @@ final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInte
     private function getInputClassName(array $context): ?string
     {
         return $context['input']['class'] ?? null;
+    }
+
+    private function canBeConvertedFromIriToIdentifier(string $type): bool
+    {
+        return in_array(IriToIdentifierConversionAwareInterface::class, class_implements($type) ?? [], true);
     }
 }

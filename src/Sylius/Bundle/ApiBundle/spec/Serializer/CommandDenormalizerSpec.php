@@ -17,21 +17,51 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
+use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Component\Core\Model\Customer;
+use Sylius\Component\Core\Model\Order;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
+use Symfony\Component\Serializer\Mapping\AttributeMetadataInterface;
+use Symfony\Component\Serializer\Mapping\ClassMetadataInterface;
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 final class CommandDenormalizerSpec extends ObjectBehavior
 {
-    function let(DenormalizerInterface $baseNormalizer): void
+    function let(DenormalizerInterface $baseNormalizer, ClassMetadataFactoryInterface $classMetadataFactory): void
     {
-        $this->beConstructedWith($baseNormalizer);
+        $this->beConstructedWith($baseNormalizer, $classMetadataFactory);
     }
 
     function it_throws_exception_if_not_all_required_parameters_are_present_in_the_context(
-        DenormalizerInterface $baseNormalizer
+        DenormalizerInterface $baseNormalizer,
+        ClassMetadataFactoryInterface $classMetadataFactory,
+        ClassMetadataInterface $classMetadata,
+        AttributeMetadataInterface $emailAttributeMetadata,
+        AttributeMetadataInterface $passwordAttributeMetadata,
+        AttributeMetadataInterface $firstNameCodeMetadata,
+        AttributeMetadataInterface $lastNameCodeMetadata
     ): void {
+        $classMetadataFactory->getMetadataFor(RegisterShopUser::class)->willReturn($classMetadata);
+
+        $classMetadata->getAttributesMetadata()->willReturn([
+            $emailAttributeMetadata->getWrappedObject(),
+            $passwordAttributeMetadata->getWrappedObject(),
+            $firstNameCodeMetadata->getWrappedObject(),
+            $lastNameCodeMetadata->getWrappedObject()
+        ]);
+
+        $emailAttributeMetadata->getName()->willReturn('email');
+        $passwordAttributeMetadata->getName()->willReturn('password');
+        $firstNameCodeMetadata->getName()->willReturn('firstName');
+        $lastNameCodeMetadata->getName()->willReturn('lastName');
+
+        $emailAttributeMetadata->getSerializedName()->willReturn(null);
+        $passwordAttributeMetadata->getSerializedName()->willReturn(null);
+        $firstNameCodeMetadata->getSerializedName()->willReturn(null);
+        $lastNameCodeMetadata->getSerializedName()->willReturn(null);
+
         $baseNormalizer->denormalize(Argument::any())->shouldNotBeCalled();
 
         $this
@@ -51,8 +81,33 @@ final class CommandDenormalizerSpec extends ObjectBehavior
     }
 
     function it_denormalizes_data_if_all_required_parameters_are_specified(
-        DenormalizerInterface $baseNormalizer
+        DenormalizerInterface $baseNormalizer,
+        ClassMetadataFactoryInterface $classMetadataFactory,
+        ClassMetadataInterface $classMetadata,
+        AttributeMetadataInterface $emailAttributeMetadata,
+        AttributeMetadataInterface $passwordAttributeMetadata,
+        AttributeMetadataInterface $firstNameCodeMetadata,
+        AttributeMetadataInterface $lastNameCodeMetadata
     ): void {
+        $classMetadataFactory->getMetadataFor(RegisterShopUser::class)->willReturn($classMetadata);
+
+        $classMetadata->getAttributesMetadata()->willReturn([
+            $emailAttributeMetadata->getWrappedObject(),
+            $passwordAttributeMetadata->getWrappedObject(),
+            $firstNameCodeMetadata->getWrappedObject(),
+            $lastNameCodeMetadata->getWrappedObject()
+        ]);
+
+        $emailAttributeMetadata->getName()->willReturn('email');
+        $passwordAttributeMetadata->getName()->willReturn('password');
+        $firstNameCodeMetadata->getName()->willReturn('firstName');
+        $lastNameCodeMetadata->getName()->willReturn('lastName');
+
+        $emailAttributeMetadata->getSerializedName()->willReturn(null);
+        $passwordAttributeMetadata->getSerializedName()->willReturn(null);
+        $firstNameCodeMetadata->getSerializedName()->willReturn(null);
+        $lastNameCodeMetadata->getSerializedName()->willReturn(null);
+
         $baseNormalizer
             ->denormalize(
                 ['firstName' => 'John', 'lastName' => 'Doe', 'email' => 'test@example.com', 'password' => 'pa$$word'],
@@ -108,11 +163,21 @@ final class CommandDenormalizerSpec extends ObjectBehavior
 
     function it_supports_denormalization_for_specified_input_class(): void
     {
-        $this->supportsDenormalization(null, '', null, ['input' => ['class' => 'Class']])->shouldReturn(true);
+        $this->supportsDenormalization(
+            null,
+            Order::class,
+            null,
+            ['input' => ['class' => AddItemToCart::class]]
+        )->shouldReturn(true);
     }
 
     function it_does_not_support_denormalization_for_not_specified_input_class(): void
     {
-        $this->supportsDenormalization(null, '', null, [])->shouldReturn(false);
+        $this->supportsDenormalization(
+            null,
+            Order::class,
+            null,
+            []
+        )->shouldReturn(false);
     }
 }
