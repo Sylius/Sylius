@@ -28,7 +28,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
-        $token = $this->logInAdminUser('api@example.com', 'sylius');
+        $token = $this->logInAdminUser('api@example.com');
         $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
