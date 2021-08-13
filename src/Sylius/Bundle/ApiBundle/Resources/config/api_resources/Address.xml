@@ -12,6 +12,17 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.address.class%" shortName="Address">
+        <graphql>
+            <operation name="item_query" />
+
+            <operation name="collection_query">
+                <attribute name="pagination_type">page</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.payment_method_enabled_filter</attribute>
+                </attribute>
+            </operation>
+        </graphql>
+
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>

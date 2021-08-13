@@ -16,6 +16,14 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.promotion.class%" shortName="Promotion">
+        <graphql>
+            <operation name="collection_query">
+                <attribute name="pagination_type">page</attribute>
+            </operation>
+
+            <operation name="item_query" />
+        </graphql>
+
         <attribute name="route_prefix">admin</attribute>
 
         <attribute name="validation_groups">sylius</attribute>

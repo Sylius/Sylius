@@ -25,6 +25,7 @@
                     <attribute>sylius.api.product_order_filter</attribute>
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
                     <attribute>sylius.api.product_taxon_slug_filter</attribute>
+                    <attribute>sylius.api.product_price_filter</attribute>
                 </attribute>
             </operation>
 
@@ -37,6 +38,7 @@
             <attribute>sylius.api.product_order_filter</attribute>
             <attribute>sylius.api.product_taxon_code_filter</attribute>
             <attribute>sylius.api.product_taxon_slug_filter</attribute>
+            <attribute>sylius.api.product_price_filter</attribute>
         </attribute>
 
         <attribute name="validation_groups">sylius</attribute>
@@ -143,7 +145,7 @@
         <property name="channels" required="false" />
         <property name="images" required="false" />
         <property name="mainTaxon" required="false" />
-        <property name="variants" readable="true"/>
+        <property name="variants" readable="true" />
         <property name="averageRating" readable="true" />
     </resource>
 </resources>

@@ -16,7 +16,75 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.customer.class%" shortName="Customer">
+        <graphql>
+            <operation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/customers/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>shop:customer:read</attribute>
+                    </attribute>
+                </attribute>
+            </operation>
 
+            <operation name="shop_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/shop/customers</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Registers a new customer</attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:customer:create</attribute>
+                </attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\RegisterShopUser</attribute>
+                <attribute name="output">false</attribute>
+                <attribute name="args">
+                    <attribute name="firstName">
+                        <attribute name="type">String</attribute>
+                    </attribute>
+                    <attribute name="lastName">
+                        <attribute name="type">String</attribute>
+                    </attribute>
+                    <attribute name="email">
+                        <attribute name="type">String</attribute>
+                    </attribute>
+                    <attribute name="password">
+                        <attribute name="type">String</attribute>
+                    </attribute>
+                    <attribute name="phoneNumber">
+                        <attribute name="type">String</attribute>
+                    </attribute>
+                    <attribute name="subscribedToNewsletter">
+                        <attribute name="type">Boolean</attribute>
+                    </attribute>
+                </attribute>
+            </operation>
+
+            <operation name="shop_password_update">
+                <attribute name="method">PUT</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\ChangeShopUserPassword</attribute>
+                <attribute name="output">false</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:customer:password:update</attribute>
+                </attribute>
+                <attribute name="args">
+                    <attribute name="shopUserId">
+                        <attribute name="type">String</attribute>
+                    </attribute>
+                    <attribute name="currentPassword">
+                        <attribute name="type">String</attribute>
+                    </attribute>
+                    <attribute name="newPassword">
+                        <attribute name="type">String</attribute>
+                    </attribute>
+                    <attribute name="confirmNewPassword">
+                        <attribute name="type">String</attribute>
+                    </attribute>
+                </attribute>
+            </operation>
+        </graphql>
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
@@ -73,9 +141,6 @@
                 <attribute name="path">/shop/customers/{id}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:customer:update</attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">shop:customer:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

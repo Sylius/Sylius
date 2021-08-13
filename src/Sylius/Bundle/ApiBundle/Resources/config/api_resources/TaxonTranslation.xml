@@ -10,7 +10,7 @@
                 <attribute name="pagination_type">page</attribute>
             </operation>
         </graphql>
-        
+
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
@@ -51,7 +51,7 @@
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
-        <property name="name" required="true" />
+        <property name="name" required="true" readable="true" />
         <property name="slug" required="true" />
         <property name="description" required="false" />
     </resource>

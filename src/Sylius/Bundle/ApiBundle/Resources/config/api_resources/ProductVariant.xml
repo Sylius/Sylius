@@ -69,6 +69,7 @@
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
         <property name="product" />
+        <property name="onHand" />
         <property name="translations">
             <attribute name="openapi_context">
                 <attribute name="type">array</attribute>
