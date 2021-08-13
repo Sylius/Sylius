@@ -59,6 +59,7 @@ final class ProductContext implements Context
     public function iOpenProductPage(ProductInterface $product): void
     {
         $this->client->show($product->getCode());
+        $this->sharedStorage->set('product', $product);
         $this->sharedStorage->set('productVariant', current($product->getVariants()->getValues()));
     }
 
@@ -84,7 +85,7 @@ final class ProductContext implements Context
     /**
      * @When I search for products with name :name
      */
-    public function iSearchForProductsWithName(string $name)
+    public function iSearchForProductsWithName(string $name): void
     {
         $this->client->addFilter('translations.name', $name);
         $this->client->filter();
@@ -151,12 +152,12 @@ final class ProductContext implements Context
      */
     public function iShouldSeeTheProductOriginalPrice(int $originalPrice): void
     {
-        Assert::true(
-            $this->hasProductWithOriginalPrice(
-                [$this->responseChecker->getResponseContent($this->client->getLastResponse())],
-                $originalPrice
-            )
-        );
+        /** @var ProductInterface $checkedProduct */
+        $checkedProduct = $this->sharedStorage->get('product');
+        $product = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+
+        Assert::same($product['originalPrice'], $originalPrice);
+        Assert::same($product['code'], $checkedProduct->getCode());
     }
 
     /**
@@ -360,17 +361,6 @@ final class ProductContext implements Context
                 if ($translation['name'] === $name) {
                     return true;
                 }
-            }
-        }
-
-        return false;
-    }
-
-    private function hasProductWithOriginalPrice(array $products, int $originalPrice): bool
-    {
-        foreach ($products as $product) {
-            if ($product['originalPrice'] === $originalPrice) {
-                return true;
             }
         }
 
