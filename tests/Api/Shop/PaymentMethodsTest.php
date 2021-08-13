@@ -19,7 +19,7 @@ use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class GetPaymentMethodsTest extends JsonApiTestCase
+final class PaymentMethodsTest extends JsonApiTestCase
 {
     /** @test */
     public function it_gets_available_payment_methods(): void

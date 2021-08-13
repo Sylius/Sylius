@@ -22,8 +22,6 @@
         product_image_prefix: 'media/image'
     ```
 
-1. `Sylius\Bundle\ApiBundle\Doctrine\Filters\ExchangeRateFilter` and `Sylius\Bundle\ApiBundle\Doctrine\Filters\TranslationOrderNameAndLocaleFilter` has been moved to `Sylius\Bundle\ApiBundle\Doctrine\Filter\ExchangeRateFilter` and `Sylius\Bundle\ApiBundle\Doctrine\Filter\TranslationOrderNameAndLocaleFilter` respectively.
-
 1. `Sylius\Bundle\ApiBundle\View\CartShippingMethodInterface` and `Sylius\Bundle\ApiBundle\View\CartShippingMethod` have been removed.
 
 1. `Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactoryInterface` and `Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactory` have been removed.
@@ -121,3 +119,34 @@
 
 1. The service `Sylius\Bundle\ApiBundle\Serializer\CommandFieldItemIriToIdentifierDenormalizer` has changed its name to `Sylius\Bundle\ApiBundle\Serializer\CommandArgumentsDenormalizer`
     and also its service definition.
+
+1. Following namespaces has been changed:
+	* '\Sylius\Bundle\ApiBundle\CommandHandler\AddProductReviewHandler' => '\Sylius\Bundle\ApiBundle\CommandHandler\Catalog\AddProductReviewHandler'
+	* '\Sylius\Bundle\ApiBundle\CommandHandler\BlameCartHandler' => '\Sylius\Bundle\ApiBundle\CommandHandler\Cart\BlameCartHandler'
+	* '\Sylius\Bundle\ApiBundle\CommandHandler\RequestResetPasswordTokenHandler' => '\Sylius\Bundle\ApiBundle\CommandHandler\Account\RequestResetPasswordTokenHandler'
+	* '\Sylius\Bundle\ApiBundle\CommandHandler\ResendVerificationEmailHandler' => '\Sylius\Bundle\ApiBundle\CommandHandler\Account\ResendVerificationEmailHandler'
+	* '\Sylius\Bundle\ApiBundle\CommandHandler\ResetPasswordHandler' => '\Sylius\Bundle\ApiBundle\CommandHandler\Account\ResetPasswordHandler'
+	* '\Sylius\Bundle\ApiBundle\CommandHandler\SendAccountRegistrationEmailHandler' => '\Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountRegistrationEmailHandler'
+	* '\Sylius\Bundle\ApiBundle\CommandHandler\SendAccountVerificationEmailHandler' => '\Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountVerificationEmailHandler'
+	* '\Sylius\Bundle\ApiBundle\CommandHandler\SendOrderConfirmationHandler' => '\Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendOrderConfirmationHandler'
+	* '\Sylius\Bundle\ApiBundle\CommandHandler\SendResetPasswordEmailHandler' => '\Sylius\Bundle\ApiBundle\CommandHandler\Account\SendResetPasswordEmailHandler'
+	* '\Sylius\Bundle\ApiBundle\CommandHandler\SendShipmentConfirmationEmailHandler' => '\Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendShipmentConfirmationEmailHandler'
+	* '\Sylius\Bundle\ApiBundle\CommandHandler\VerifyCustomerAccountHandler' => '\Sylius\Bundle\ApiBundle\CommandHandler\Account\VerifyCustomerAccountHandler'
+	* '\Sylius\Bundle\ApiBundle\Command\AddProductReview' => '\Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview'
+	* '\Sylius\Bundle\ApiBundle\Command\BlameCart' => '\Sylius\Bundle\ApiBundle\Command\Cart\BlameCart'
+	* '\Sylius\Bundle\ApiBundle\Command\RequestResetPasswordToken' => '\Sylius\Bundle\ApiBundle\Command\Account\RequestResetPasswordToken'
+	* '\Sylius\Bundle\ApiBundle\Command\ResendVerificationEmail' => '\Sylius\Bundle\ApiBundle\Command\Account\ResendVerificationEmail'
+	* '\Sylius\Bundle\ApiBundle\Command\ResetPassword' => '\Sylius\Bundle\ApiBundle\Command\Account\ResetPassword'
+	* '\Sylius\Bundle\ApiBundle\Command\SendAccountRegistrationEmail' => '\Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail'
+	* '\Sylius\Bundle\ApiBundle\Command\SendAccountVerificationEmail' => '\Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail'
+	* '\Sylius\Bundle\ApiBundle\Command\SendOrderConfirmation' => '\Sylius\Bundle\ApiBundle\Command\Checkout\SendOrderConfirmation'
+	* '\Sylius\Bundle\ApiBundle\Command\SendResetPasswordEmail' => '\Sylius\Bundle\ApiBundle\Command\Account\SendResetPasswordEmail'
+	* '\Sylius\Bundle\ApiBundle\Command\SendShipmentConfirmationEmail' => '\Sylius\Bundle\ApiBundle\Command\Checkout\SendShipmentConfirmationEmail'
+	* '\Sylius\Bundle\ApiBundle\Command\VerifyCustomerAccount' => '\Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount'
+    * `\Sylius\Bundle\ApiBundle\CommandHandler\ChangeShopUserPasswordHandler` => `\Sylius\Bundle\ApiBundle\CommandHandler\Account\ChangeShopUserPasswordHandler`
+    * `\Sylius\Bundle\ApiBundle\CommandHandler\PickupCartHandler` => `\Sylius\Bundle\ApiBundle\CommandHandler\Cart\PickupCartHandler`
+    * `\Sylius\Bundle\ApiBundle\CommandHandler\RegisterShopUserHandler` => `\Sylius\Bundle\ApiBundle\CommandHandler\Account\RegisterShopUserHandler`
+    * `\Sylius\Bundle\ApiBundle\Command\ChangeShopUserPassword` => `\Sylius\Bundle\ApiBundle\Command\Account\ChangeShopUserPassword`
+    * `\Sylius\Bundle\ApiBundle\Command\RegisterShopUser` => `\Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser`
+    * `\Sylius\Bundle\ApiBundle\Doctrine\Filters\ExchangeRateFilter` => `\Sylius\Bundle\ApiBundle\Doctrine\Filter\ExchangeRateFilter`
+    * `\Sylius\Bundle\ApiBundle\Doctrine\Filters\TranslationOrderNameAndLocaleFilter` => `Sylius\Bundle\ApiBundle\Doctrine\Filter\TranslationOrderNameAndLocaleFilter`

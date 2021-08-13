@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
-use Sylius\Bundle\ApiBundle\Command\ResetPassword;
+use Sylius\Bundle\ApiBundle\Command\Account\ResetPassword;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;

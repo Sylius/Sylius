@@ -15,8 +15,8 @@ namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
-use Sylius\Bundle\ApiBundle\Command\VerifyCustomerAccount;
+use Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser;
+use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
 use Sylius\Component\Core\Model\Customer;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;

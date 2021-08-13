@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\DataProvider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\VerifyCustomerAccount;
+use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 final class VerifyCustomerAccountItemDataProviderSpec extends ObjectBehavior

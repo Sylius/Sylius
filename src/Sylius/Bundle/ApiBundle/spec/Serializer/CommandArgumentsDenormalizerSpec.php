@@ -15,7 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\AddProductReview;
+use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
 use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface;
 use Sylius\Component\Core\Model\Order;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
