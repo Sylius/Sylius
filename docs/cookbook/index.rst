@@ -91,6 +91,7 @@ Invoices
     :hidden:
 
     invoices/custom-invoice
+    invoices/generating-invoice-after-payment
 
 .. include:: /cookbook/invoices/map.rst.inc
 
