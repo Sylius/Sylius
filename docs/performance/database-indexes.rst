@@ -1,19 +1,34 @@
 Database indexes
 ================
 
-Indexing tables allows you to decrease fetching time from database.
+Indexing tables allow you to decrease fetching time from the database.
 
-As an example lets take a look on customers list
+As an example, let's take a look at the customers' list.
 
-Default index page is sorted by registration date, to create table index all you need to do is modify `Customer` Entity and add index using annotations.
-`ORM annotations <https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/annotations-reference.html#annref_haslifecyclecallbacks>`_
+The default index page is sorted by registration date, to create a table index all you need to do is modify `\App\Entity\Customer\Customer` entity and add the index using annotations. This class can be found at `src/Entity/Customer/Customer.php`. Once open, paste the following code:
 
 .. code-block:: php
 
+    <?php
+
+    declare(strict_types=1);
+
+    namespace App\Entity\Customer;
+
+    use Doctrine\ORM\Mapping as ORM;
+    use Sylius\Component\Core\Model\Customer as BaseCustomer;
+
     /**
-     * @Entity
-     * @Table(name="customer",indexes={@Index(name="created_at_index", fields={"created_at"})})
+     * @ORM\Entity
+     * @ORM\Table(name="customer",indexes={@Index(name="created_at_index", fields={"created_at"})})
      */
+    class Customer extends BaseCustomer
+    {
+    }
+
+.. note::
+
+    You can learn more here about `ORM annotations <https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/annotations-reference.html#annref_haslifecyclecallbacks>`_
 
 This should be considered for the most common sorting in your application.
 
