@@ -19,8 +19,8 @@ Getting started
 ---------------
 
 Before you start make sure that you have:
-1.`Sylius/InvoicingPlugin <https://github.com/Sylius/InvoicingPlugin/>`_ installed.
-2.`Wkhtmltopdf <https://wkhtmltopdf.org/>`_ package installed, because most of pdf generation is done with it.
+**1.** `Sylius/InvoicingPlugin <https://github.com/Sylius/InvoicingPlugin/>`_ installed.
+**2.** `Wkhtmltopdf <https://wkhtmltopdf.org/>`_ package installed, because most of pdf generation is done with it.
 
 How to customize the invoice appearance?
 ----------------------------------------
