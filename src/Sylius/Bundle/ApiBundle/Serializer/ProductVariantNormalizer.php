@@ -67,11 +67,11 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
 
         try {
             $data['price'] = $this->priceCalculator->calculate($object, ['channel' => $this->channelContext->getChannel()]);
-            $data['original_price'] = $this->priceCalculator->calculateOriginal($object, ['channel' => $this->channelContext->getChannel()]);
+            $data['originalPrice'] = $this->priceCalculator->calculateOriginal($object, ['channel' => $this->channelContext->getChannel()]);
 
         } catch (ChannelNotFoundException $exception) {
             unset($data['price']);
-            unset($data['original_price']);
+            unset($data['originalPrice']);
         }
 
         $data['inStock'] = $this->availabilityChecker->isStockAvailable($object);
