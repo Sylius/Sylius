@@ -22,6 +22,7 @@ use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
+use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 
 final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
 {
@@ -73,5 +74,27 @@ final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
         ;
 
         $this->getDefaultPaymentMethod($payment)->shouldReturn($firstPaymentMethod);
+    }
+
+    function it_returns_the_first_method_from_the_payment_methods_resolver_when_passed(
+        CorePaymentInterface $payment,
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
+        PaymentMethodInterface $firstPaymentMethod,
+        PaymentMethodInterface $secondPaymentMethod,
+        ChannelInterface $channel,
+        OrderInterface $order,
+        PaymentMethodsResolverInterface $paymentMethodsResolver
+    ): void {
+        $this->beConstructedWith($paymentMethodRepository, $paymentMethodsResolver);
+
+        $payment->getOrder()->willReturn($order);
+        $order->getChannel()->willReturn($channel);
+        $paymentMethodRepository
+            ->findEnabledForChannel($channel)
+            ->willReturn([$firstPaymentMethod, $secondPaymentMethod])
+        ;
+        $paymentMethodsResolver->getSupportedMethods($payment)->willReturn([$secondPaymentMethod]);
+
+        $this->getDefaultPaymentMethod($payment)->shouldReturn($secondPaymentMethod);
     }
 }
