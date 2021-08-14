@@ -51,6 +51,14 @@ final class EligibleDefaultShippingMethodResolver implements DefaultShippingMeth
         $this->shippingMethodEligibilityChecker = $shippingMethodEligibilityChecker;
         $this->zoneMatcher = $zoneMatcher;
 
+        Assert::false(
+            null === $shippingMethodRepository && null === $shippingMethodsResolver,
+            sprintf(
+                'You must pass to "%s" constructor either a $shippingMethodRepository, or a $shippingMethodsResolver, or both.',
+                __CLASS__,
+            )
+        );
+
         if (null !== $shippingMethodRepository) {
             @trigger_error(
                 sprintf(

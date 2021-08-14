@@ -176,4 +176,17 @@ final class EligibleDefaultShippingMethodResolverSpec extends ObjectBehavior
 
         $this->getDefaultShippingMethod($shipment)->shouldReturn($thirdShippingMethod);
     }
+
+    function it_throws_an_exception_if_neither_a_repository_nor_a_resolver_is_passed_to_the_constructor(
+        ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker,
+        ZoneMatcherInterface $zoneMatcher
+    ): void {
+        $this->beConstructedWith(
+            null,
+            $shippingMethodEligibilityChecker,
+            $zoneMatcher
+        );
+
+        $this->shouldThrow(InvalidArgumentException::class)->duringInstantiation();
+    }
 }
