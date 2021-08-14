@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Resolver;
 
+use InvalidArgumentException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -39,7 +40,7 @@ final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
     function it_throws_an_invalid_argument_exception_if_subject_not_implements_core_payment_interface(
         PaymentInterface $payment
     ): void {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('getDefaultPaymentMethod', [$payment]);
+        $this->shouldThrow(InvalidArgumentException::class)->during('getDefaultPaymentMethod', [$payment]);
     }
 
     function it_throws_an_unresolved_default_payment_method_exception_if_there_is_no_enabled_payment_methods_in_database(
@@ -96,5 +97,12 @@ final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
         $paymentMethodsResolver->getSupportedMethods($payment)->willReturn([$secondPaymentMethod]);
 
         $this->getDefaultPaymentMethod($payment)->shouldReturn($secondPaymentMethod);
+    }
+
+    function it_throws_an_exception_if_neither_a_repository_nor_a_resolver_is_passed_to_the_constructor(): void
+    {
+        $this->beConstructedWith();
+
+        $this->shouldThrow(InvalidArgumentException::class)->duringInstantiation();
     }
 }

@@ -34,6 +34,14 @@ class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterf
     ) {
         $this->paymentMethodRepository = $paymentMethodRepository;
 
+        Assert::false(
+            null === $paymentMethodRepository && null === $paymentMethodsResolver,
+            sprintf(
+                'You must pass to "%s" constructor either a $paymentMethodRepository, or a $paymentMethodsResolver, or both.',
+                __CLASS__,
+            )
+        );
+
         if (null !== $paymentMethodRepository) {
             @trigger_error(
                 sprintf(
