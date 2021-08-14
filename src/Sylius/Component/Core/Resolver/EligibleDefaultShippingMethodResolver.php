@@ -42,7 +42,7 @@ final class EligibleDefaultShippingMethodResolver implements DefaultShippingMeth
     private $shippingMethodsResolver;
 
     public function __construct(
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ?ShippingMethodRepositoryInterface $shippingMethodRepository = null,
         ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker,
         ZoneMatcherInterface $zoneMatcher,
         ?ShippingMethodsResolverInterface $shippingMethodsResolver = null
@@ -51,11 +51,21 @@ final class EligibleDefaultShippingMethodResolver implements DefaultShippingMeth
         $this->shippingMethodEligibilityChecker = $shippingMethodEligibilityChecker;
         $this->zoneMatcher = $zoneMatcher;
 
+        if (null !== $shippingMethodRepository) {
+            @trigger_error(
+                sprintf(
+                    'Passing an $shippingMethodRepository to "%s" constructor is deprecated since Sylius 1.9 and the argument will be removed in Sylius 2.0.',
+                    self::class
+                ),
+                \E_USER_DEPRECATED
+            );
+        }
+
         if (null === $shippingMethodsResolver) {
             @trigger_error(
                 sprintf(
-                    'Not passing an $shippingMethodsResolver to "%s" constructor is deprecated since Sylius 1.9 and will be impossible in Sylius 2.0.',
-                    self::class
+                    'Not passing a $shippingMethodsResolver to "%s" constructor is deprecated since Sylius 1.9 and the argument will be required starting with Sylius 2.0.',
+                    __CLASS__
                 ),
                 \E_USER_DEPRECATED
             );
