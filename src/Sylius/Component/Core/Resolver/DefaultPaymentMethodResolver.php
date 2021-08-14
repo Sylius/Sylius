@@ -24,15 +24,25 @@ use Webmozart\Assert\Assert;
 
 class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterface
 {
-    protected PaymentMethodRepositoryInterface $paymentMethodRepository;
+    protected ?PaymentMethodRepositoryInterface $paymentMethodRepository;
 
     protected ?PaymentMethodsResolverInterface $paymentMethodsResolver;
 
     public function __construct(
-        PaymentMethodRepositoryInterface $paymentMethodRepository,
+        ?PaymentMethodRepositoryInterface $paymentMethodRepository = null,
         ?PaymentMethodsResolverInterface $paymentMethodsResolver = null
     ) {
         $this->paymentMethodRepository = $paymentMethodRepository;
+
+        if (null !== $paymentMethodRepository) {
+            @trigger_error(
+                sprintf(
+                    'Passing an $paymentMethodRepository to "%s" constructor is deprecated since Sylius 1.9 and the argument will be removed in Sylius 2.0.',
+                    self::class
+                ),
+                \E_USER_DEPRECATED
+            );
+        }
 
         if (null === $paymentMethodsResolver) {
             @trigger_error(
