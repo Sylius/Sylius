@@ -54,7 +54,7 @@ final class EligibleDefaultShippingMethodResolver implements DefaultShippingMeth
         if (null === $shippingMethodsResolver) {
             @trigger_error(
                 sprintf(
-                    'Not passing an $shippingMethodsResolver to "%s" constructor is deprecated since Sylius 1.8 and will be impossible in Sylius 2.0.',
+                    'Not passing an $shippingMethodsResolver to "%s" constructor is deprecated since Sylius 1.9 and will be impossible in Sylius 2.0.',
                     self::class
                 ),
                 \E_USER_DEPRECATED
