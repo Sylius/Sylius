@@ -95,8 +95,6 @@ final class EligibleDefaultShippingMethodResolver implements DefaultShippingMeth
     }
 
     /**
-     * @deprecated
-     *
      * @throws UnresolvedDefaultShippingMethodException
      */
     private function getFromRepository(CoreShipmentInterface $shipment): ShippingMethodInterface
@@ -114,8 +112,6 @@ final class EligibleDefaultShippingMethodResolver implements DefaultShippingMeth
     }
 
     /**
-     * @deprecated
-     *
      * @return array|ShippingMethodInterface[]
      */
     private function getShippingMethods(ChannelInterface $channel, ?AddressInterface $address): array
