@@ -1,9 +1,0 @@
-Sylius\Component\Currency\Model\Currency:
-    currency_1:
-        code: "USD"
-
-    currency_2:
-        code: "EUR"
-
-    currency_3:
-        code: "GBP"

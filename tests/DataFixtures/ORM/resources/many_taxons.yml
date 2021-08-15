@@ -1,3 +1,0 @@
-Sylius\Component\Core\Model\Taxon:
-    taxon{1..10}:
-        code: "taxon<current()>"

@@ -1,7 +1,0 @@
-Sylius\Component\Addressing\Model\Country:
-    country_US:
-        code: 'US'
-    country_FR:
-        code: 'FR'
-    country_DE:
-        code: 'DE'
