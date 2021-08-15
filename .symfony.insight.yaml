@@ -1,9 +1,0 @@
-php_version: 7.4
-
-pre_composer_script: |
-    #!/bin/bash
-    composer config platform.php 7.4.8
-
-commit_failure_conditions:
-    - "pr.severity.critical > 0"
-    - "pr.severity.major > 0"
