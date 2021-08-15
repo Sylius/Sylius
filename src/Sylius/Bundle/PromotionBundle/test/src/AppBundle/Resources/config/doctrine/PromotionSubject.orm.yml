@@ -1,9 +1,0 @@
-AppBundle\Entity\PromotionSubject:
-    type: entity
-    table: app_promotion_subject
-    id:
-        id:
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO

@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    locale:
-        code:
-            not_blank: Wybierz kod lokalizacji.
-            regex: Kod ustawień językowych może składać się wyłącznie z liter, cyfr, myślników i podkreśleń.
-            unique: Kod lokalizacji musi być unikalny.

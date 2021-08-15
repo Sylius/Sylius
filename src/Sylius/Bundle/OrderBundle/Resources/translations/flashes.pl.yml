@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    cart:
-        add_item: 'Element został dodany do koszyka'
-        cannot_modify: 'Zamówienie, które próbowano edytować zostało już przesłane.'
-        remove_item: 'Element został usunięty z koszyka'
-        save: 'Koszyk został pomyślnie zaktualizowany'

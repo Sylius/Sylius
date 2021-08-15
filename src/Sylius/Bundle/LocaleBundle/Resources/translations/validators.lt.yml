@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    locale:
-        code:
-            not_blank: Pasirinkite lokalės kodą.
-            regex: Lokalės kodas gali būti sudarytas tik iš raidžių, skaičių, brūkšnelių ir pabraukimų.
-            unique: Lokalės kodas turi būti unikalus.

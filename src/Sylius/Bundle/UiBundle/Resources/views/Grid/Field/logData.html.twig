@@ -1,3 +1,0 @@
-{% for key, field in data|filter(field => field is not null) %}
-    <strong>{{ key|humanize }}</strong>: {{ field }}<br/>
-{% endfor %}

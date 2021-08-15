@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    review:
-        accept: 'Gözden geçirme başarıyla kabul edildi.'
-        reject: 'Gözden geçirme başarıyla reddetti.'
-        wait_for_the_acceptation: 'Gözden geçirmeniz onay için bekliyor.'

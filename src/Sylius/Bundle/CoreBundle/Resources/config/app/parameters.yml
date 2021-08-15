@@ -1,6 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-parameters:
-    sylius.uploader.filesystem: sylius_image
-    sylius_core.public_dir: "%kernel.project_dir%/web"

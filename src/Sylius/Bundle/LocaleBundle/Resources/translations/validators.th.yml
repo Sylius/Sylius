@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    locale:
-        code:
-            not_blank: กรุณาเลือกรหัสภาษา
-            regex: รหัสต้องประกอบด้วยตัวอักษร ตัวเลข เส้นประ และขีดเส้นใต้เท่านั้น
-            unique: รหัสภาษาต้องไม่ซ้ำกัน

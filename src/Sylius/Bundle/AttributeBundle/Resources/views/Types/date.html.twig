@@ -1,5 +1,0 @@
-{% if attribute.attribute.configuration['format'] is defined %}
-    {{ attribute.value|format_date(attribute.attribute.configuration['format']) }}
-{% else %}
-    {{ attribute.value|format_date }}
-{% endif %}

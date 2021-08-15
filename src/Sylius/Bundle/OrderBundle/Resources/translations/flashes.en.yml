@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    cart:
-        add_item: 'Item has been added to cart'
-        cannot_modify: 'An order has already been submitted for the cart you were trying to modify.'
-        remove_item: 'Item has been removed from cart'
-        save: 'The cart has been successfully updated'

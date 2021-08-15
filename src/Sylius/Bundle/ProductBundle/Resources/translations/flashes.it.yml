@@ -1,6 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    product_variant:
-        generate: 'Le varianti del prodotto sono state generate con successo.'

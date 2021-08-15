@@ -1,6 +1,0 @@
-sylius:
-    locale:
-        code:
-            not_blank: Please choose locale code.
-            regex: Locale code can only be comprised of letters, numbers, dashes and underscores.
-            unique: Locale code must be unique.

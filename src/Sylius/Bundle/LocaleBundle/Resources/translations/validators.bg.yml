@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    locale:
-        code:
-            not_blank: Изберете код на място.
-            regex: Езиковия код може да се състои само от букви, цифри, тирета и долни черти.
-            unique: Кода на мястото трябва да е уникален.

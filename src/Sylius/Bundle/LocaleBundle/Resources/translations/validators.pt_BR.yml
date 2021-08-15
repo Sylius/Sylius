@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    locale:
-        code:
-            not_blank: Por favor, escolha o código de localidade.
-            regex: Código da localidade somente pode ser composto por letras, números, hifens e traços.
-            unique: Código de localidade deve ser único.

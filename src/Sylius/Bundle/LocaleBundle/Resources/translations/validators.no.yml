@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    locale:
-        code:
-            not_blank: Velg koden for nasjonale innstillinger.
-            regex: Koden for nasjonale instillinger kan kun bestå av bokstaver, tall, bindestrek og understrek.
-            unique: Koden for nasjonale innstillinger må være unik.

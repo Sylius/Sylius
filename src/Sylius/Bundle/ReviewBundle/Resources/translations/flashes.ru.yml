@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    review:
-        accept: 'Отзыв был успешно принят.'
-        reject: 'Отзыв отклонен.'
-        wait_for_the_acceptation: 'Ваш отзыв ожидает подтверждения.'

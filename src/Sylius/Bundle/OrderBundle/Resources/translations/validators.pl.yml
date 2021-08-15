@@ -1,7 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    order_item:
-        quantity:
-            min: Ilość zamawianych elementów nie może być mniejsza od 1.

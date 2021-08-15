@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    locale:
-        code:
-            not_blank: Калі ласка, выберыце код лакалі.
-            unique: Код лакалі павінен быць унікальным.

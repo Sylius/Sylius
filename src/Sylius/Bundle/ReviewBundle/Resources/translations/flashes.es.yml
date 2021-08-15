@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    review:
-        accept: 'La reseña se ha aceptado correctamente.'
-        reject: 'La reseña se ha rechazado correctamente.'
-        wait_for_the_acceptation: 'Su reseña está a la espera de ser revisada.'

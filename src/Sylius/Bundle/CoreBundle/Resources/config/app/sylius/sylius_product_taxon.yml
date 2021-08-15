@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius_core:
-    resources:
-        product_taxon:
-            classes:
-                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductTaxonRepository

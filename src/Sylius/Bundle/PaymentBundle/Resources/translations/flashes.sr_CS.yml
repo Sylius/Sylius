@@ -1,7 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    payment:
-        cancelled: 'Uplata je otkazana.'
-        refunded: 'Uplata je uspešno refundirana.'

@@ -1,6 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    product_variant:
-        generate: 'สินค้าย่อยถูกสร้างเรียบร้อยแล้ว'

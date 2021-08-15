@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    cart:
-        add_item: 'Artikeln har lagts till i kundvagnen'
-        cannot_modify: 'En beställning har redan lagts för den kundvagn som du försökte ändra.'
-        remove_item: 'Artikeln har tagits bort från kundvagnen'
-        save: 'Kundvagnen har uppdaterats'

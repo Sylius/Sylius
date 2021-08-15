@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    locale:
-        code:
-            not_blank: Molim odaberite šifru jezičnog područja.
-            regex: Kod lokaliteta se može sastojati samo od slova, brojeva, povlaka i podvlaka.
-            unique: Šifra jezičnog područja mora biti jedinstvena.

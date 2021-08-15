@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    cart:
-        add_item: 'Položka bola pridaná do košíka'
-        cannot_modify: 'Objednávka, ktorú sa pokúšate zmeniť, už bola odoslaná.'
-        remove_item: 'Položka bola odstránená z košíka'
-        save: 'Košík bol úspešne aktualizovaný'

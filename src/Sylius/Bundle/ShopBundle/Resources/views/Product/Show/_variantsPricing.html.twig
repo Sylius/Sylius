@@ -1,7 +1,0 @@
-{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
-
-<div id="sylius-variants-pricing" data-unavailable-text="{{ 'sylius.ui.unavailable'|trans }}">
-{% for price in pricing %}
-    <div {% for option, value in price %}data-{{ option }}="{% if option == 'value' or option == 'original-price' %}{{ money.convertAndFormat(value) }}{% else %}{{ value|replace({'\"': '\''}) }}{% endif %}" {{ sylius_test_html_attribute('variant-price') }}{% endfor %}></div>
-{% endfor %}
-</div>

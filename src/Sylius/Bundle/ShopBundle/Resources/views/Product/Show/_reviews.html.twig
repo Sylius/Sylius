@@ -1,7 +1,0 @@
-<div class="ui text menu">
-    <div class="item">
-        {% include '@SyliusShop/Product/_starRating.html.twig' %}
-    </div>
-    <a href="{{ path('sylius_shop_product_review_index', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="item">{{ product.acceptedReviews|length }} {{ 'sylius.ui.reviews'|trans }}</a>
-    <a href="{{ path('sylius_shop_product_review_create', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="item">{{ 'sylius.ui.add_your_review'|trans }}</a>
-</div>

@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    form:
-        channel:
-            enabled: 사용
-            name: 이름

@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    locale:
-        code:
-            not_blank: Bitte Gebietsscode auswählen.
-            regex: Kürzel des Gebietsschemas darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
-            unique: Gebeitscode muss eindeutig sein.

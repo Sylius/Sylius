@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-jms_serializer:
-    metadata:
-        directories:
-            sylius-inventory:
-                namespace_prefix: "Sylius\\Component\\Inventory"
-                path: "@SyliusInventoryBundle/Resources/config/serializer"

@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-jms_serializer:
-    metadata:
-        directories:
-            sylius-payment:
-                namespace_prefix: "Sylius\\Component\\Payment"
-                path: "@SyliusPaymentBundle/Resources/config/serializer"

@@ -1,4 +1,0 @@
-sylius:
-    order_item:
-        quantity:
-            min: Quantity of an order item cannot be lower than 1.

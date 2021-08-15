@@ -1,8 +1,0 @@
-sylius:
-    channel:
-        code:
-            not_blank: Please enter channel code.
-            regex: Channel code can only be comprised of letters, numbers, dashes and underscores.
-            unique: Channel code has to be unique.
-        name:
-            not_blank: Please enter channel name.

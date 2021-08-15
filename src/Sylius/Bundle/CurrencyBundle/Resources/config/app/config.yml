@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-jms_serializer:
-    metadata:
-        directories:
-            sylius-currency:
-                namespace_prefix: "Sylius\\Component\\Currency"
-                path: "@SyliusCurrencyBundle/Resources/config/serializer"

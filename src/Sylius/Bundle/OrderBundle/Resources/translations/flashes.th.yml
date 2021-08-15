@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    cart:
-        add_item: 'เพิ่มสินค้าในรถเข็นแล้ว'
-        remove_item: 'สินค้าถูกลบออกจากตะกร้าสินค้าแล้ว'
-        save: 'อัปเดตตะกร้าสินค้าเสร็จเรียบร้อยแล้ว'

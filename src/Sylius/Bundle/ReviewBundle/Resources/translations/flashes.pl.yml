@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    review:
-        accept: 'Opinia została pomyślnie zaakceptowana.'
-        reject: 'Opinia została pomyślnie odrzucona.'
-        wait_for_the_acceptation: 'Twoja opinia czeka na akceptację.'

@@ -1,6 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    customer:
-        register: 'Ďakujeme za registráciu, skontrolujte si e-mail pre overenie vašeho účtu.'
