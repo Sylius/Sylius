@@ -37,6 +37,9 @@ final class GraphQLApiPlatformContext implements Context
     /** @var array */
     private $graphqlRequest;
 
+    /** @var array */
+    private $lastRequest;
+
     /**
      * Gives access to the Behatch context.
      *
@@ -150,6 +153,18 @@ final class GraphQLApiPlatformContext implements Context
     }
 
     /**
+     * @Then I send the same request again
+     * @Then I resend the request
+     */
+    public function IResendGraphqlRequest(string $method = self::METHOD_POST): DocumentElement
+    {
+        $response = $this->restContext->iSendARequestTo($method, '/api/v2/graphql?' . http_build_query($this->graphqlRequest));
+        $this->saveLastResponse($response);
+
+        return  $response;
+    }
+
+    /**
      * @Given I have the following file(s) for a GraphQL request:
      */
     public function iHaveTheFollowingFilesForAGraphqlRequest(TableNode $table)
@@ -231,6 +246,7 @@ final class GraphQLApiPlatformContext implements Context
 
     private function sendGraphqlRequest(string $method = self::METHOD_POST): DocumentElement
     {
+        $this->lastRequest = $this->graphqlRequest;
         $response = $this->restContext->iSendARequestTo($method, '/api/v2/graphql?' . http_build_query($this->graphqlRequest));
         $this->saveLastResponse($response);
 
