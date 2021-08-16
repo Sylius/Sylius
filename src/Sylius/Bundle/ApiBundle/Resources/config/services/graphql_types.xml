@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <defaults autowire="false" autoconfigure="false" public="false" />
+
+        <service id="sylius.api.product_slug_filter" class="Sylius\Bundle\ApiBundle\Types\BillingAddress">
+            <tag name="api_platform.graphql.type" />
+        </service>
+    </services>
+</container>
