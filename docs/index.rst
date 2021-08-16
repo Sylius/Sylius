@@ -107,10 +107,10 @@ Components & Bundles
 
 .. include:: /components_and_bundles/map.rst.inc
 
-Performance guide
------------------
+The Performance Guide
+---------------------
 
-with :doc:`Performance guide </performance/index>` you can decrease page loading times.
+With :doc:`The Performance Guide </performance/index>` you can decrease page loading times.
 
 .. toctree::
    :hidden:
