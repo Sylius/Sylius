@@ -11,26 +11,33 @@
 
 namespace Sylius\Tests\Api\Shop;
 
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
+use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 final class CustomersTest extends JsonApiTestCase
 {
+    use ShopUserLoginTrait;
+
     /** @test */
     public function it_returns_small_amount_of_data_on_customer_update(): void
     {
-        $this->loadFixturesFromFiles(['authentication/customer.yaml']);
-        $loginData = $this->loginAsCustomer();
+        $loadedData = $this->loadFixturesFromFiles(['authentication/customer.yaml']);
+        $token = $this->logInShopUser('oliver@doe.com');
+
+        /** @var CustomerInterface $customer */
+        $customer = $loadedData['customer_oliver'];
 
         $this->client->request(
             'PUT',
-            $loginData['customer'],
+            '/api/v2/shop/customers/' . $customer->getId(),
             [],
             [],
             [
                 'CONTENT_TYPE' => 'application/ld+json',
                 'HTTP_ACCEPT' => 'application/ld+json',
-                'HTTP_Authorization' => sprintf('Bearer %s', $loginData['token'])
+                'HTTP_Authorization' => sprintf('Bearer %s', $token)
             ],
             json_encode([
                 'firstName' => 'John'
@@ -42,8 +49,11 @@ final class CustomersTest extends JsonApiTestCase
         $this->assertResponse($response, 'shop/update_customer_response', Response::HTTP_OK);
     }
 
-    private function loginAsCustomer(): array
+    /** @test */
+    public function it_allows_customer_to_log_in(): void
     {
+        $this->loadFixturesFromFiles(['authentication/customer.yaml']);
+
         $this->client->request(
             'POST',
             '/api/v2/shop/authentication-token',
@@ -56,6 +66,8 @@ final class CustomersTest extends JsonApiTestCase
             ])
         );
 
-        return json_decode($this->client->getResponse()->getContent(), true);
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/log_in_customer_response', Response::HTTP_OK);
     }
 }

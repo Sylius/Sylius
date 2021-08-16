@@ -24,7 +24,7 @@ final class PaymentsTest extends JsonApiTestCase
     use OrderPlacerTrait;
 
     /** @test */
-    public function it_gets_payment_form_placed_order(): void
+    public function it_gets_payment_from_placed_order(): void
     {
         $this->loadFixturesFromFiles(['authentication/customer.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
