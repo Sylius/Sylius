@@ -27,10 +27,10 @@ class RemoveItemFromCart implements OrderTokenValueAwareInterface
      */
     public $itemId;
 
-    public function __construct(?string $orderTokenValue, string $itemId)
+    public function __construct(?string $orderTokenValue, string $orderItemId)
     {
         $this->orderTokenValue = $orderTokenValue;
-        $this->itemId = $itemId;
+        $this->itemId = $orderItemId;
     }
 
     public static function removeFromData(string $tokenValue, string $orderItemId): self

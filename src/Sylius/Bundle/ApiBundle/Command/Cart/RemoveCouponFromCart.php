@@ -16,27 +16,25 @@ namespace Sylius\Bundle\ApiBundle\Command\Cart;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 
 /** @experimental */
-class ApplyCouponToCart implements OrderTokenValueAwareInterface
+class RemoveCouponFromCart implements OrderTokenValueAwareInterface
 {
     /** @var string|null */
     public $orderTokenValue;
 
-    /** @var string|null */
+    /**
+     * @var string
+     */
     public $couponCode;
 
-    public function __construct(?string $couponCode,?string $orderTokenValue)
+    public function __construct(?string $orderTokenValue, string $couponCode)
     {
-        $this->couponCode = $couponCode;
         $this->orderTokenValue = $orderTokenValue;
+        $this->couponCode = $couponCode;
     }
 
-    public static function createFromData(string $orderTokenValue, ?string $couponCode): self
+    public static function removeFromData(string $tokenValue, string $couponCode): self
     {
-        $command = new self($couponCode,$orderTokenValue);
-
-        $command->setOrderTokenValue($orderTokenValue);
-
-        return $command;
+        return new self($tokenValue, $couponCode);
     }
 
     public function getOrderTokenValue(): ?string

@@ -19,5 +19,8 @@
         <attribute name="quantity">
             <group>shop:cart:change_quantity</group>
         </attribute>
+        <attribute name="orderItemId">
+            <group>shop:cart:change_quantity</group>
+        </attribute>
     </class>
 </serializer>

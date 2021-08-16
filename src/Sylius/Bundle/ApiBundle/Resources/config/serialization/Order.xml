@@ -105,7 +105,6 @@
         </attribute>
 
         <attribute name="itemsTotal">
-            <group>admin:order:read</group>
             <group>shop:cart:read</group>
             <group>shop:order:read</group>
             <group>shop:order:account:read</group>
@@ -139,6 +138,7 @@
         <attribute name="billingAddress">
             <group>admin:order:read</group>
             <group>shop:cart:read</group>
+            <group>shop:cart:address</group>
             <group>shop:order:account:read</group>
         </attribute>
     </class>

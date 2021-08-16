@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
+use Sylius\Component\Addressing\Model\Address;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;

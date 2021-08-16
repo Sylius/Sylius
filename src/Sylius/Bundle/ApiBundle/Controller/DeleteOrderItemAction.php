@@ -32,7 +32,7 @@ final class DeleteOrderItemAction
     public function __invoke(Request $request): Response
     {
         $command = new RemoveItemFromCart(
-            $request->attributes->get('tokenValue'),
+            $request->attributes->get('id'),
             $request->attributes->get('itemId')
         );
 

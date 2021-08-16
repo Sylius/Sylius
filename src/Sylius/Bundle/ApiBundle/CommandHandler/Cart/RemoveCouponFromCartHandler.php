@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
-use Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart;
+use Sylius\Bundle\ApiBundle\Command\Cart\RemoveCouponFromCart;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
@@ -23,7 +23,7 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class ApplyCouponToCartHandler implements MessageHandlerInterface
+final class RemoveCouponFromCartHandler implements MessageHandlerInterface
 {
     /** @var OrderRepositoryInterface */
     private $orderRepository;
@@ -44,15 +44,17 @@ final class ApplyCouponToCartHandler implements MessageHandlerInterface
         $this->orderProcessor = $orderProcessor;
     }
 
-    public function __invoke(ApplyCouponToCart $command): OrderInterface
+    public function __invoke(RemoveCouponFromCart $command): OrderInterface
     {
         /** @var OrderInterface $cart */
         $cart = $this->orderRepository->findCartByTokenValue($command->getOrderTokenValue());
 
         Assert::notNull($cart, 'Cart doesn\'t exist');
-        $promotionCoupon = $this->getPromotionCoupon($command->couponCode);
 
-        $cart->setPromotionCoupon($promotionCoupon);
+        $promotionCoupon = $this->getPromotionCoupon($command->couponCode);
+        $promotion = $promotionCoupon->getPromotion();
+
+        $cart->removePromotion($promotion);
 
         $this->orderProcessor->process($cart);
 
