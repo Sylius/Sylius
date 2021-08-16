@@ -54,7 +54,10 @@
 
         <service id="sylius.api.collection_data_provider.taxon" class="Sylius\Bundle\ApiBundle\DataProvider\TaxonCollectionDataProvider">
             <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="api_platform.doctrine.orm.query_extension.pagination" />
             <argument type="service" id="sylius.api.context.user" />
+            <argument type="service" id="api_platform.core.bridge.doctrine.orm.util.query_name_generator" />
+            <argument type="tagged" tag="api_platform.doctrine.orm.query_extension.collection" />
             <tag name="api_platform.collection_data_provider" priority="10" />
         </service>
 

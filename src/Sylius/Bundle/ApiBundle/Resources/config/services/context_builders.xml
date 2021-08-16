@@ -47,37 +47,5 @@
             <argument type="service" id="sylius_api.serializer_context_builder.http_request_method_type.inner" />
         </service>
 
-        <service
-            id="sylius_api.serializer_context_builder.graphql.channel"
-            class="Sylius\Bundle\ApiBundle\SerializerContextBuilder\GraphQL\ChannelContextBuilder"
-            decorates="api_platform.graphql.serializer.context_builder"
-            decoration-priority="64"
-        >
-            <argument type="service" id="sylius_api.serializer_context_builder.graphql.channel.inner" />
-            <argument type="service" id="sylius.context.channel" />
-        </service>
-
-        <service
-            id="sylius_api.serializer_context_builder.graphql.locale"
-            class="Sylius\Bundle\ApiBundle\SerializerContextBuilder\GraphQL\LocaleContextBuilder"
-            decorates="api_platform.graphql.serializer.context_builder"
-            decoration-priority="64"
-        >
-            <argument type="service" id="sylius_api.serializer_context_builder.graphql.locale.inner" />
-            <argument type="service" id="sylius.context.locale" />
-        </service>
-
-        <service
-            id="sylius_api.serializer_context_builder.graphql.http_request_method_type"
-            class="Sylius\Bundle\ApiBundle\SerializerContextBuilder\GraphQL\HttpRequestMethodTypeContextBuilder"
-            decorates="api_platform.graphql.serializer.context_builder"
-            decoration-priority="64"
-        >
-            <argument
-                type="service"
-                id="sylius_api.serializer_context_builder.graphql.http_request_method_type.inner"
-            />
-            <argument type="service" id="api_platform.metadata.resource.metadata_factory.operation" />
-        </service>
     </services>
 </container>

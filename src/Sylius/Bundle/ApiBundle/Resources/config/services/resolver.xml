@@ -26,5 +26,13 @@
             <argument type="service" id="api_platform.route_name_resolver.cached.inner" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" />
         </service>
+
+        <service id="api_platform.login_mutation_resolver" class="Sylius\Bundle\ApiBundle\GraphQl\Resolver\LoginMutationResolver">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="lexik_jwt_authentication.jwt_manager" />
+            <argument type="service" id="security.encoder_factory" />
+            <tag name="api_platform.graphql.mutation_resolver" />
+        </service>
+
     </services>
 </container>
