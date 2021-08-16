@@ -46,6 +46,12 @@ final class ProductVariantDocumentationNormalizer implements NormalizerInterface
             'readOnly' => true,
         ];
 
+        $docs['components']['schemas']['ProductVariant.jsonld-shop.product_variant.read']['properties']['originalPrice'] = [
+            'type' => 'int',
+            'readOnly' => true,
+            'default' => 0,
+        ];
+
         return $docs;
     }
 }
