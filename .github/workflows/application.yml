@@ -112,7 +112,7 @@ jobs:
     test-application-without-frontend-postgres:
         runs-on: ubuntu-18.04
 
-        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgresSql ${{ matrix.postgres }})"
+        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgresSQL ${{ matrix.postgres }})"
         strategy:
             matrix: 
                 php: ["8.0"]
@@ -262,13 +262,6 @@ jobs:
                 name: Make filesystem readonly
                 run: chmod -R 555 app bin config docs features src templates tests translations vendor
     
-            -
-                name: Prepare application database
-                run: |
-                    APP_DEBUG=1 bin/console doctrine:database:create -vvv
-                    bin/console doctrine:schema:up --force -vvv
-                    bin/console doctrine:schema:validate
-                continue-on-error: true
             -
                 name: Prepare application database
                 run: |
