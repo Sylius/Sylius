@@ -56,6 +56,13 @@ class User implements UserInterface
      */
     protected $plainPassword;
 
+    /**
+     * Used for GraphQL serialisation validation. Must not be persisted.
+     *
+     * @var string|null
+     */
+    protected $token;
+
     /** @var \DateTimeInterface|null */
     protected $lastLogin;
 
@@ -336,6 +343,7 @@ class User implements UserInterface
     public function eraseCredentials(): void
     {
         $this->plainPassword = null;
+        $this->token = null;
     }
 
     public function getOAuthAccounts(): Collection
@@ -376,6 +384,16 @@ class User implements UserInterface
     public function setEncoderName(?string $encoderName): void
     {
         $this->encoderName = $encoderName;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): void
+    {
+        $this->token = $token;
     }
 
     /**

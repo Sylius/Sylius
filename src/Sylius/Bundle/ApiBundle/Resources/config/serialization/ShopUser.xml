@@ -19,5 +19,9 @@
         <attribute name="verified">
             <group>shop:customer:read</group>
         </attribute>
+
+        <attribute name="token">
+            <group>shop:customer:read</group>
+        </attribute>
     </class>
 </serializer>

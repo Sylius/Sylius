@@ -47,4 +47,8 @@ interface CredentialsHolderInterface
      * the plain-text password is stored on this object.
      */
     public function eraseCredentials();
+
+    public function getToken(): ?string;
+
+    public function setToken(?string $token): void;
 }
