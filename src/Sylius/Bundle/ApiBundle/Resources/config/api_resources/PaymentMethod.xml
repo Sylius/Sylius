@@ -16,6 +16,21 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.payment_method.class%" shortName="PaymentMethod">
+        <graphql>
+            <operation name="collection_query">
+                <attribute name="pagination_type">page</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.payment_method_enabled_filter</attribute>
+                </attribute>
+            </operation>
+
+            <operation name="item_query" />
+        </graphql>
+
+        <attribute name="filters">
+            <attribute>sylius.api.payment_method_enabled_filter</attribute>
+        </attribute>
+
         <collectionOperations />
 
         <itemOperations>
@@ -36,19 +51,20 @@
             </itemOperation>
         </itemOperations>
 
-        <subresourceOperations>
-            <subresourceOperation name="api_orders_payments_methods_get_subresource">
-                <attribute name="method">GET</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>shop:payment_method:read</attribute>
-                    </attribute>
-                </attribute>
-            </subresourceOperation>
-        </subresourceOperations>
-
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" writable="false" />
         <property name="name" writable="true" />
+        <property name="translations" readable="true" writable="true">
+            <attribute name="openapi_context">
+                <attribute name="type">object</attribute>
+                <attribute name="example">
+                    <attribute name="en_US">
+                        <attribute name="name">string</attribute>
+                        <attribute name="slug">string</attribute>
+                        <attribute name="locale">string</attribute>
+                    </attribute>
+                </attribute>
+            </attribute>
+        </property>
     </resource>
 </resources>

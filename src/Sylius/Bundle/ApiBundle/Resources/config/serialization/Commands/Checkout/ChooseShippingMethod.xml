@@ -16,7 +16,13 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod">
-        <attribute name="shippingMethodCode" serialized-name="shippingMethod">
+        <attribute name="shipmentId">
+            <group>shop:cart:select_shipping_method</group>
+        </attribute>
+        <attribute name="orderTokenValue">
+            <group>shop:cart:select_shipping_method</group>
+        </attribute>
+        <attribute name="shippingMethodCode">
             <group>shop:cart:select_shipping_method</group>
         </attribute>
     </class>

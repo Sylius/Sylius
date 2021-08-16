@@ -16,7 +16,13 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod">
-        <attribute name="paymentMethodCode" serialized-name="paymentMethod">
+        <attribute name="paymentId">
+            <group>shop:cart:select_payment_method</group>
+        </attribute>
+        <attribute name="orderTokenValue">
+            <group>shop:cart:select_payment_method</group>
+        </attribute>
+        <attribute name="paymentMethodCode">
             <group>shop:cart:select_payment_method</group>
         </attribute>
     </class>

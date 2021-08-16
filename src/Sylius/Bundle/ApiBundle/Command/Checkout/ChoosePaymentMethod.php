@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
-use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\PaymentMethodCodeAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\SubresourceIdAwareInterface;
 
 /** @experimental */
-class ChoosePaymentMethod implements OrderTokenValueAwareInterface, SubresourceIdAwareInterface, PaymentMethodCodeAwareInterface, IriToIdentifierConversionAwareInterface
+class ChoosePaymentMethod implements OrderTokenValueAwareInterface, SubresourceIdAwareInterface, PaymentMethodCodeAwareInterface
 {
     /** @var string|null */
     public $orderTokenValue;
@@ -38,8 +37,9 @@ class ChoosePaymentMethod implements OrderTokenValueAwareInterface, SubresourceI
      */
     public $paymentMethodCode;
 
-    public function __construct(string $paymentMethodCode)
+    public function __construct(string $orderTokenValue, string $paymentMethodCode)
     {
+        $this->orderTokenValue = $orderTokenValue;
         $this->paymentMethodCode = $paymentMethodCode;
     }
 
