@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Bundle\ApiBundle\DataTransformer\CommandDataTransformerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /** @experimental */
@@ -22,9 +23,17 @@ final class OrderTokenValueAwareInputCommandDataTransformer implements CommandDa
     public function transform($object, string $to, array $context = [])
     {
         /** @var OrderInterface $cart */
-        $cart = $context['object_to_populate'];
 
-        $object->setOrderTokenValue($cart->getTokenValue());
+        if(key_exists('object_to_populate',$context)){
+            $cart = $context['object_to_populate'];
+            $tokenValue = $cart->getTokenValue();
+        }else if(property_exists($object,'orderTokenValue')){
+            $tokenValue = $object->orderTokenValue;
+        }else{
+            throw new \Exception('Token value could not be found');
+        }
+
+        $object->setOrderTokenValue($tokenValue);
 
         return $object;
     }

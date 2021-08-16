@@ -13,6 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DataProvider;
 
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\PaginationExtension;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryResultCollectionExtensionInterface;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
@@ -27,13 +31,34 @@ final class TaxonCollectionDataProvider implements CollectionDataProviderInterfa
     /** @var TaxonRepositoryInterface */
     private $taxonRepository;
 
+    /** @var PaginationExtension */
+    private $paginationExtension;
+
     /** @var UserContextInterface */
     private $userContext;
 
-    public function __construct(TaxonRepositoryInterface $taxonRepository, UserContextInterface $userContext)
-    {
+    /**
+     * @var iterable
+     *
+     * @see QueryCollectionExtensionInterface
+     */
+    private $collectionExtensions;
+
+    /** @var QueryNameGeneratorInterface */
+    private $queryNameGenerator;
+
+    public function __construct(
+        TaxonRepositoryInterface $taxonRepository,
+        PaginationExtension $paginationExtension,
+        UserContextInterface $userContext,
+        QueryNameGeneratorInterface $queryNameGenerator,
+        iterable $collectionExtensions
+    ) {
         $this->taxonRepository = $taxonRepository;
+        $this->paginationExtension = $paginationExtension;
         $this->userContext = $userContext;
+        $this->queryNameGenerator = $queryNameGenerator;
+        $this->collectionExtensions = $collectionExtensions;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
@@ -51,6 +76,22 @@ final class TaxonCollectionDataProvider implements CollectionDataProviderInterfa
             return $this->taxonRepository->findAll();
         }
 
-        return $this->taxonRepository->findChildrenByChannelMenuTaxon($channelMenuTaxon);
+        $queryBuilder = $this->taxonRepository->createChildrenByChannelMenuTaxonQueryBuilder(
+            $channelMenuTaxon
+        );
+        foreach ($this->collectionExtensions as $extension) {
+            $extension->applyToCollection($queryBuilder, $this->queryNameGenerator, $resourceClass, $operationName, $context);
+
+            if ($extension instanceof QueryResultCollectionExtensionInterface && $extension->supportsResult($resourceClass, $operationName, $context)) {
+                return $extension->getResult($queryBuilder, $resourceClass, $operationName, $context);
+            }
+        }
+
+        return $this->paginationExtension->getResult(
+            $queryBuilder,
+            $resourceClass,
+            $operationName,
+            $context
+        );
     }
 }

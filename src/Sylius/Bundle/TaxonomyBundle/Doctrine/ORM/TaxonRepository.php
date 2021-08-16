@@ -135,6 +135,6 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
             ->andWhere('parent.code = :parentCode')
             ->addOrderBy('o.position')
             ->setParameter('parentCode', ($menuTaxon !== null) ? $menuTaxon->getCode() : 'category')
-        ;
+            ;
     }
 }
