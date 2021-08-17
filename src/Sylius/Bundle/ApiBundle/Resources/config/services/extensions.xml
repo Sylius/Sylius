@@ -17,8 +17,7 @@
 >
     <services>
         <service
-            id="sylius.api.doctrine.query_collection_extension.hide_archived_shipping_method"
-            class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\HideArchivedShippingMethodExtension"
+            id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\HideArchivedShippingMethodExtension"
             public="true"
         >
             <argument>%sylius.model.shipping_method.class%</argument>
@@ -26,8 +25,7 @@
         </service>
 
         <service
-            id="sylius.api.doctrine.query_collection_extension.accepted_product_reviews"
-            class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AcceptedProductReviewsExtension"
+            id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AcceptedProductReviewsExtension"
             public="true"
         >
             <argument>%sylius.model.product_review.class%</argument>
@@ -35,56 +33,50 @@
         </service>
 
         <service
-            id="sylius.api.doctrine.query_collection_extension.addresses"
-            class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AddressesExtension"
+            id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AddressesExtension"
             public="true"
         >
-            <argument type="service" id="sylius.api.context.user" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
         <service
-            id="sylius.api.doctrine.query_collection_extension.products_by_channel_and_locale_code"
-            class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsByChannelAndLocaleCodeExtension"
+            id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsByChannelAndLocaleCodeExtension"
             public="true"
         >
-            <argument type="service" id="sylius.api.context.user" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
         <service
-            id="sylius.api.doctrine.query_collection_extension.orders_by_logged_in_user"
-            class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrdersByLoggedInUserExtension"
+            id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrdersByLoggedInUserExtension"
             public="true"
         >
-            <argument type="service" id="sylius.api.context.user" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
         <service
-            id="sylius.api.doctrine.query_collection_extension.products_with_enable_flag"
-            class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsWithEnableFlagExtension"
+            id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsWithEnableFlagExtension"
             public="true"
         >
-            <argument type="service" id="sylius.api.context.user" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
         <service
-            id="sylius.api.doctrine.query_item_extension.get_order"
-            class="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderGetMethodItemExtension"
+            id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderGetMethodItemExtension"
             public="true"
         >
-            <argument type="service" id="sylius.api.context.user" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
         <service
-            id="sylius.api.doctrine.query_item_extension.delete_order"
-            class="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderMethodsItemExtension"
+            id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderMethodsItemExtension"
             public="true"
         >
-            <argument type="service" id="sylius.api.context.user" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
     </services>
