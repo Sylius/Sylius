@@ -165,6 +165,6 @@ Let's start first with EventListeners that will override the default ones:
             - '@sylius_invoicing_plugin.date_time_provider'
         public: true
 
-After this changes, the invoice will be generated after the order is paid, not just after it is placed.
+After these changes, the invoice will be generated after the order is paid, not just after it is placed.
 
 .. image:: ../../_images/cookbook/generating-invoice-after-payment/before_payment.png
