@@ -149,7 +149,7 @@ final class CartContext implements Context
         $commandPickupCart = new PickupCart($tokenValue);
         $commandPickupCart->setChannelCode($channelCode);
 
-        if ($this->sharedStorage->has('token') && $this->sharedStorage->has('token')) {
+        if ($this->sharedStorage->has('token') && $this->sharedStorage->has('user')) {
             $user = $this->sharedStorage->get('user');
 
             if ($user instanceof ShopUserInterface) {
