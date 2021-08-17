@@ -21,10 +21,9 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
 use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\AddressOrderHandler;
 use Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface;
+use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Core\Model\Address;
-use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -40,14 +39,11 @@ final class ChangeAddressOrderHandlerTest extends KernelTestCase
         /** @var RepositoryInterface $addressRepository */
         $addressRepository = $container->get('sylius.repository.address');
 
-        /** @var CustomerRepositoryInterface $customerRepository */
-        $customerRepository = $container->get('sylius.repository.customer');
+        /** @var CustomerProviderInterface $customerProvider */
+        $customerProvider = $container->get('Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface');
 
         /** @var OrderRepositoryInterface $orderRepository */
         $orderRepository = $container->get('sylius.repository.order');
-
-        /** @var FactoryInterface $customerFactory */
-        $customerFactory =  $container->get('sylius.factory.customer');
 
         /** @var ObjectManager $manager */
         $manager = $container->get('doctrine.orm.default_entity_manager');
@@ -79,11 +75,10 @@ final class ChangeAddressOrderHandlerTest extends KernelTestCase
 
         $addressOrderHandler = new AddressOrderHandler(
             $orderRepository,
-            $customerRepository,
-            $customerFactory,
             $manager,
             $stateMachineFactory,
-            $addressMapper
+            $addressMapper,
+            $customerProvider
         );
 
         $newBillingAddress = $address = new Address();

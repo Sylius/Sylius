@@ -20,6 +20,7 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
 use Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface;
+use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -32,19 +33,17 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
 {
     function let(
         OrderRepositoryInterface $orderRepository,
-        CustomerRepositoryInterface $customerRepository,
-        FactoryInterface $customerFactory,
         ObjectManager $manager,
         StateMachineFactoryInterface $stateMachineFactory,
-        AddressMapperInterface $addressMapper
+        AddressMapperInterface $addressMapper,
+        CustomerProviderInterface $customerProvider
     ): void {
         $this->beConstructedWith(
             $orderRepository,
-            $customerRepository,
-            $customerFactory,
             $manager,
             $stateMachineFactory,
-            $addressMapper
+            $addressMapper,
+            $customerProvider
         );
     }
 
@@ -79,7 +78,7 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
 
     function it_handles_addressing_an_order_for_visitor(
         OrderRepositoryInterface $orderRepository,
-        FactoryInterface $customerFactory,
+        CustomerProviderInterface $customerProvider,
         ObjectManager $manager,
         StateMachineFactoryInterface $stateMachineFactory,
         CustomerInterface $customer,
@@ -99,9 +98,8 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
 
         $order->getCustomer()->willReturn(null);
 
-        $customerFactory->createNew()->willReturn($customer);
-        $customer->setEmail('r2d2@droid.com')->shouldBeCalled();
-        $manager->persist($customer)->shouldBeCalled();
+        $customerProvider->provide('r2d2@droid.com')->willReturn($customer);
+
         $order->setCustomer($customer)->shouldBeCalled();
         $order->getShippingAddress()->willReturn(null);
         $order->getBillingAddress()->willReturn(null);
@@ -117,9 +115,9 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $this($addressOrder);
     }
 
-    function it_handles_addressing_an_order_for_logged_in_shop_user(
+    function it_handles_addressing_an_order_with_the_cutomer_already_assigned(
         OrderRepositoryInterface $orderRepository,
-        FactoryInterface $customerFactory,
+        CustomerProviderInterface $customerProvider,
         ObjectManager $manager,
         StateMachineFactoryInterface $stateMachineFactory,
         CustomerInterface $customer,
@@ -139,8 +137,9 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
 
         $order->getCustomer()->willReturn($customer);
 
-        $customerFactory->createNew()->shouldNotBeCalled();
-        $customer->setEmail('r2d2@droid.com')->shouldNotBeCalled();
+        $customerProvider->provide(Argument::any())->shouldNotBeCalled();
+        $customer->setEmail(Argument::any())->shouldNotBeCalled();
+
         $manager->persist($customer)->shouldNotBeCalled();
         $order->setCustomer($customer)->shouldNotBeCalled();
 
@@ -158,49 +157,9 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $this($addressOrder);
     }
 
-    function it_handles_addressing_an_order_for_not_logged_in_shop_user(
-        OrderRepositoryInterface $orderRepository,
-        CustomerRepositoryInterface $customerRepository,
-        ObjectManager $manager,
-        StateMachineFactoryInterface $stateMachineFactory,
-        CustomerInterface $customer,
-        AddressInterface $billingAddress,
-        AddressInterface $shippingAddress,
-        OrderInterface $order,
-        StateMachineInterface $stateMachine
-    ): void {
-        $addressOrder = new AddressOrder(
-            'r2d2@droid.com',
-            $billingAddress->getWrappedObject(),
-            $shippingAddress->getWrappedObject()
-        );
-        $addressOrder->setOrderTokenValue('ORDERTOKEN');
-
-        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
-
-        $order->getCustomer()->willReturn(null);
-
-        $customerRepository->findOneBy(['email' => 'r2d2@droid.com'])->willReturn($customer);
-
-        $order->getCustomer()->shouldBeCalled();
-        $order->setCustomer($customer)->shouldBeCalled();
-        $order->getShippingAddress()->willReturn(null);
-        $order->getBillingAddress()->willReturn(null);
-        $order->setBillingAddress($billingAddress)->shouldBeCalled();
-        $order->setShippingAddress($shippingAddress)->shouldBeCalled();
-
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(true);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS)->shouldBeCalled();
-
-        $manager->persist($order)->shouldBeCalled();
-
-        $this($addressOrder);
-    }
-
     function it_updates_order_address_based_on_data_form_new_order_address(
         OrderRepositoryInterface $orderRepository,
-        FactoryInterface $customerFactory,
+        CustomerProviderInterface $customerProvider,
         ObjectManager $manager,
         StateMachineFactoryInterface $stateMachineFactory,
         AddressMapperInterface $addressMapper,
@@ -223,9 +182,8 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
 
         $order->getCustomer()->willReturn(null);
 
-        $customerFactory->createNew()->willReturn($customer);
-        $customer->setEmail('r2d2@droid.com')->shouldBeCalled();
-        $manager->persist($customer)->shouldBeCalled();
+        $customerProvider->provide('r2d2@droid.com')->willReturn($customer);
+
         $order->setCustomer($customer)->shouldBeCalled();
         $order->getBillingAddress()->willReturn($oldBillingAddress);
         $order->getShippingAddress()->willReturn($oldShippingAddress);
