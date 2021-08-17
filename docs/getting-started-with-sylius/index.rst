@@ -41,6 +41,7 @@ and simplest way from an idea ("I want to sell some stuff online") to the first 
     plugin-installation
     deployment
     summary
+    using-api
 
 .. include:: /getting-started-with-sylius/map.rst.inc
 

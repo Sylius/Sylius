@@ -7,3 +7,4 @@
 * :doc:`/getting-started-with-sylius/plugin-installation`
 * :doc:`/getting-started-with-sylius/deployment`
 * :doc:`/getting-started-with-sylius/summary`
+* :doc:`/getting-started-with-sylius/using-api`
