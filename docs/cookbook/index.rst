@@ -84,6 +84,17 @@ Inventory
 
 .. include:: /cookbook/inventory/map.rst.inc
 
+Invoices
+--------
+
+.. toctree::
+    :hidden:
+
+    invoices/custom-invoice
+    invoices/generating-invoice-after-payment
+
+.. include:: /cookbook/invoices/map.rst.inc
+
 Shipping methods
 ----------------
 
