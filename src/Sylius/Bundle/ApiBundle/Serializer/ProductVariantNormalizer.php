@@ -30,7 +30,7 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
 {
     use NormalizerAwareTrait;
 
-    private const ALREADY_CALLED = 'product_variant_normalizer_already_called';
+    private const ALREADY_CALLED = 'sylius_product_variant_normalizer_already_called';
 
     /** @var ProductVariantPricesCalculatorInterface */
     private $priceCalculator;

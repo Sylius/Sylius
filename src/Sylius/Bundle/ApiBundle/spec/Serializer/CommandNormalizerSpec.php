@@ -56,7 +56,7 @@ final class CommandNormalizerSpec extends ObjectBehavior
             ->supportsNormalization(
                 new class() { public function getClass(): string { return MissingConstructorArgumentsException::class; }},
                 null,
-                ['command_normalizer_already_called' => true]
+                ['sylius_command_normalizer_already_called' => true]
             )
             ->shouldReturn(false)
         ;
@@ -72,7 +72,7 @@ final class CommandNormalizerSpec extends ObjectBehavior
         \stdClass $object
     ): void {
         $baseNormalizer
-            ->normalize($object, null, ['command_normalizer_already_called' => true])
+            ->normalize($object, null, ['sylius_command_normalizer_already_called' => true])
             ->willReturn(['message' => 'Message'])
         ;
 

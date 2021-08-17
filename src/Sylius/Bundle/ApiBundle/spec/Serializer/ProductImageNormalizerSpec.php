@@ -52,7 +52,7 @@ final class ProductImageNormalizerSpec extends ObjectBehavior
     ): void {
         $this->setNormalizer($normalizer);
 
-        $normalizer->normalize($productImage, null, ['product_image_normalizer_already_called' => true])->willReturn(['path' => 'some_path']);
+        $normalizer->normalize($productImage, null, ['sylius_product_image_normalizer_already_called' => true])->willReturn(['path' => 'some_path']);
 
         $requestStack->getCurrentRequest()->willReturn($request);
         $request->query = new ParameterBag([]);
@@ -69,7 +69,7 @@ final class ProductImageNormalizerSpec extends ObjectBehavior
     ): void {
         $this->setNormalizer($normalizer);
 
-        $normalizer->normalize($productImage, null, ['product_image_normalizer_already_called' => true])->willReturn(['path' => 'some_path']);
+        $normalizer->normalize($productImage, null, ['sylius_product_image_normalizer_already_called' => true])->willReturn(['path' => 'some_path']);
 
         $requestStack->getCurrentRequest()->willReturn($request);
         $request->query = new ParameterBag(['filter' => 'sylius_large']);

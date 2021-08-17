@@ -22,7 +22,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
  */
 final class CommandNormalizer implements ContextAwareNormalizerInterface
 {
-    private const ALREADY_CALLED = 'command_normalizer_already_called';
+    private const ALREADY_CALLED = 'sylius_command_normalizer_already_called';
 
     /** @var NormalizerInterface */
     private $objectNormalizer;
