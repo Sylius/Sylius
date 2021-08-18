@@ -15,6 +15,8 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use Sylius\Bundle\ApiBundle\Command\Account\ResendVerificationEmail;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
@@ -47,16 +49,18 @@ final class ResendVerificationEmailHandler implements MessageHandlerInterface
 
     public function __invoke(ResendVerificationEmail $command): void
     {
-        /** @var UserInterface|null $user */
-        Assert::notNull($user = $this->shopUserRepository->findOneByEmail($command->email));
+        /** @var ShopUserInterface|null $user */
+        Assert::notNull($user = $this->shopUserRepository->find($command->getShopUserId()));
 
         $token = $this->tokenGenerator->generate();
         $user->setEmailVerificationToken($token);
+        /** @var CustomerInterface $customer */
+        $customer = $user->getCustomer();
 
         $this->commandBus->dispatch(new SendAccountVerificationEmail(
-            $command->email,
-            $command->localeCode,
-            $command->channelCode
+            $customer->getEmail(),
+            $command->getLocaleCode(),
+            $command->getChannelCode()
         ), [new DispatchAfterCurrentBusStamp()]);
     }
 }
