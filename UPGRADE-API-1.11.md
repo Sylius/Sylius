@@ -28,6 +28,8 @@
 
 1. `Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactoryInterface` and `Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactory` have been removed.
 
+1. The `Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserEmailAwareCommandDataTransformer` service has been renamed to `Sylius\Bundle\ApiBundle\DataTransformer\LoggedInCustomerEmailAwareCommandDataTransformer`
+
 1. The constructor of `Sylius\Bundle\ApiBundle\DataProvider\CartShippingMethodsSubresourceDataProvider` has been changed:
 
     ```diff
@@ -37,6 +39,36 @@
             ShippingMethodsResolverInterface $shippingMethodsResolver,
     -       ServiceRegistryInterface $calculators,
     -       CartShippingMethodFactoryInterface $cartShippingMethodFactory
+        ) {
+            ...
+        }
+    ``` 
+
+1. The `Sylius\Bundle\ApiBundle\Command\Cart\PickupCart` command has interface changed from `Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface`
+   to `Sylius\Bundle\ApiBundle\Command\CustomerEmailAwareInterface`, therefore following fields and methods have been changed
+
+    ```diff
+    -   public $shopUserId;
+    +   public ?string $email = null;
+   
+    -   public function getShopUserId()
+    +   public function getEmail(): ?string
+   
+    -   public function setShopUserId($shopUserId): void
+    +   public function setEmail(?string $email): void
+    ```
+
+1. The constructor of `Sylius\Bundle\ApiBundle\CommandHandler\Cart\PickupCartHandler` has been changed:
+
+    ```diff
+        public function __construct(
+            FactoryInterface $cartFactory,
+            OrderRepositoryInterface $cartRepository,
+            ChannelRepositoryInterface $channelRepository,
+            ObjectManager $orderManager,
+            RandomnessGeneratorInterface $generator,
+    -       UserRepositoryInterface $userRepository
+    +       CustomerRepositoryInterface $customerRepository
         ) {
             ...
         }
@@ -187,7 +219,7 @@
      * `sylius.api.data_transformer.shipment_id_aware_input_command` => `Sylius\Bundle\ApiBundle\DataTransformer\ShipmentIdAwareInputCommandDataTransformer`
      * `sylius.api.data_transformer.logged_in_shop_user_id_aware_input_data_transformer` => `Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserIdAwareCommandDataTransformer`
      * `sylius.api.data_transformer.channel_code_aware_input_data_transformer` => `Sylius\Bundle\ApiBundle\DataTransformer\ChannelCodeAwareInputCommandDataTransformer`
-     * `sylius.api.data_transformer.logged_in_shop_user_email_aware_command` => `Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserEmailAwareCommandDataTransformer`
+     * `sylius.api.data_transformer.logged_in_shop_user_email_aware_command` => `Sylius\Bundle\ApiBundle\DataTransformer\LoggedInCustomerEmailAwareCommandDataTransformer`
      * `sylius.api.data_transformer.locale_code_aware_input_data_transformer` => `Sylius\Bundle\ApiBundle\DataTransformer\LocaleCodeAwareInputCommandDataTransformer`
      * `sylius.api.data_transformer.subresource_id_aware_data_transformer` => `Sylius\Bundle\ApiBundle\DataTransformer\SubresourceIdAwareCommandDataTransformer`
      * `sylius.api.section_resolver.admin_api_uri_based_section_resolver` => `Sylius\Bundle\ApiBundle\SectionResolver\AdminApiUriBasedSectionResolver`

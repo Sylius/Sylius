@@ -56,7 +56,7 @@ final class AddProductReviewHandler implements MessageHandlerInterface
         $product = $this->productRepository->findOneByCode($addProductReview->productCode);
 
         /** @var string|null $email */
-        $email = $addProductReview->email;
+        $email = $addProductReview->getEmail();
 
         if ($email === null) {
             throw new \InvalidArgumentException('Visitor should provide an email');

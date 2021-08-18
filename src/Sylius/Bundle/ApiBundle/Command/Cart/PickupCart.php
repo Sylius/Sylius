@@ -13,27 +13,21 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
-use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\CustomerEmailAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
 
 /** @experimental */
-class PickupCart implements ChannelCodeAwareInterface, ShopUserIdAwareInterface
+class PickupCart implements ChannelCodeAwareInterface, CustomerEmailAwareInterface
 {
-    /** @var string|null
-     * @psalm-immutable */
-    public $tokenValue;
+    /** @psalm-immutable */
+    public ?string $tokenValue;
 
-    /**
-     * @var string|null
-     * @psalm-immutable
-     */
-    public $localeCode;
+    /** @psalm-immutable */
+    public ?string $localeCode;
 
-    /** @var string|null */
-    private $channelCode;
+    public ?string $channelCode = null;
 
-    /** @var mixed|null */
-    public $shopUserId;
+    public ?string $email = null;
 
     public function __construct(?string $tokenValue = null, ?string $localeCode = null)
     {
@@ -51,13 +45,13 @@ class PickupCart implements ChannelCodeAwareInterface, ShopUserIdAwareInterface
         $this->channelCode = $channelCode;
     }
 
-    public function getShopUserId()
+    public function getEmail(): ?string
     {
-        return $this->shopUserId;
+        return $this->email;
     }
 
-    public function setShopUserId($shopUserId): void
+    public function setEmail(?string $email): void
     {
-        $this->shopUserId = $shopUserId;
+        $this->email = $email;
     }
 }
