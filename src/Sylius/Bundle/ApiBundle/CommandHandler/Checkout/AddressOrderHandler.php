@@ -17,13 +17,11 @@ use Doctrine\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
 use Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface;
+use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
-use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
@@ -32,12 +30,6 @@ final class AddressOrderHandler implements MessageHandlerInterface
 {
     /** @var OrderRepositoryInterface */
     private $orderRepository;
-
-    /** @var CustomerRepositoryInterface */
-    private $customerRepository;
-
-    /** @var FactoryInterface */
-    private $customerFactory;
 
     /** @var ObjectManager */
     private $manager;
@@ -48,20 +40,21 @@ final class AddressOrderHandler implements MessageHandlerInterface
     /** @var AddressMapperInterface */
     private $addressMapper;
 
+    /** @var CustomerProviderInterface */
+    private  $customerProvider;
+
     public function __construct(
         OrderRepositoryInterface $orderRepository,
-        CustomerRepositoryInterface $customerRepository,
-        FactoryInterface $customerFactory,
         ObjectManager $manager,
         StateMachineFactoryInterface $stateMachineFactory,
-        AddressMapperInterface $addressMapper
+        AddressMapperInterface $addressMapper,
+        CustomerProviderInterface $customerProvider
     ) {
         $this->orderRepository = $orderRepository;
-        $this->customerRepository = $customerRepository;
-        $this->customerFactory = $customerFactory;
         $this->manager = $manager;
         $this->stateMachineFactory = $stateMachineFactory;
         $this->addressMapper = $addressMapper;
+        $this->customerProvider = $customerProvider;
     }
 
     public function __invoke(AddressOrder $addressOrder): OrderInterface
@@ -80,7 +73,9 @@ final class AddressOrderHandler implements MessageHandlerInterface
         );
 
         if (null === $order->getCustomer()) {
-            $order->setCustomer($this->provideCustomerByEmail($addressOrder->email));
+            Assert::notNull($addressOrder->email, sprintf('Visitor should provide an email.'));
+
+            $order->setCustomer($this->customerProvider->provide($addressOrder->email));
         }
 
         /** @var AddressInterface|null $billingAddress */
@@ -107,20 +102,5 @@ final class AddressOrderHandler implements MessageHandlerInterface
         $this->manager->persist($order);
 
         return $order;
-    }
-
-    private function provideCustomerByEmail(?string $email): CustomerInterface
-    {
-        Assert::notNull($email, sprintf('Visitor should provide an email.'));
-
-        $customer = $this->customerRepository->findOneBy(['email' => $email]);
-        if (null === $customer) {
-            /** @var CustomerInterface $customer */
-            $customer = $this->customerFactory->createNew();
-            $customer->setEmail($email);
-            $this->manager->persist($customer);
-        }
-
-        return $customer;
     }
 }
