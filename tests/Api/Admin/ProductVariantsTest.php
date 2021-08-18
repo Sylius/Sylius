@@ -16,7 +16,7 @@ namespace Sylius\Tests\Api\Admin;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-final class ProductVariantTest extends JsonApiTestCase
+final class ProductVariantsTest extends JsonApiTestCase
 {
     /** @test */
     public function it_denies_access_to_a_products_list_for_not_authenticated_user(): void

@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-final class ProductImageTest extends JsonApiTestCase
+final class ProductImagesTest extends JsonApiTestCase
 {
     /** @test */
     public function it_denies_access_to_a_product_images_list_for_not_authenticated_user(): void
