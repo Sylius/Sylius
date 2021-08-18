@@ -19,5 +19,8 @@
             <group>admin:taxon:read</group>
             <group>shop:taxon:read</group>
         </attribute>
+        <attribute name="children">
+            <group>shop:taxon:read</group>
+        </attribute>
     </class>
 </serializer>
