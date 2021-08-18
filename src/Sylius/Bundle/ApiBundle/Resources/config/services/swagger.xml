@@ -16,10 +16,11 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
+        <defaults public="true" />
+
         <service
             id="Sylius\Bundle\ApiBundle\Swagger\AdminAuthenticationTokenDocumentationNormalizer"
             decorates="api_platform.swagger.normalizer.documentation"
-            public="true"
             autoconfigure="false"
             decoration-priority="20"
         >
@@ -30,7 +31,6 @@
         <service
             id="Sylius\Bundle\ApiBundle\Swagger\ShopAuthenticationTokenDocumentationNormalizer"
             decorates="api_platform.swagger.normalizer.documentation"
-            public="true"
             autoconfigure="false"
             decoration-priority="10"
         >
@@ -41,7 +41,6 @@
         <service
             id="Sylius\Bundle\ApiBundle\Swagger\ProductDocumentationNormalizer"
             decorates="api_platform.swagger.normalizer.documentation"
-            public="true"
             autoconfigure="false"
             decoration-priority="20"
         >
@@ -51,7 +50,6 @@
         <service
             id="Sylius\Bundle\ApiBundle\Swagger\ProductImageDocumentationNormalizer"
             decorates="api_platform.swagger.normalizer.documentation"
-            public="true"
             autoconfigure="false"
             decoration-priority="20"
         >
@@ -62,7 +60,6 @@
         <service
             id="Sylius\Bundle\ApiBundle\Swagger\ProductVariantDocumentationNormalizer"
             decorates="api_platform.swagger.normalizer.documentation"
-            public="true"
             autoconfigure="false"
             decoration-priority="20"
         >
@@ -72,7 +69,6 @@
         <service
             id="Sylius\Bundle\ApiBundle\Swagger\ShippingMethodDocumentationNormalizer"
             decorates="api_platform.swagger.normalizer.documentation"
-            public="true"
             autoconfigure="false"
             decoration-priority="20"
         >
