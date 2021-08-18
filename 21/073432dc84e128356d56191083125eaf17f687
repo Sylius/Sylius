@@ -1,0 +1,36 @@
+---------------------------------------------------------------------------
+
+by vvasiloi at 2021-08-12T08:07:23Z
+
+Now that I see this I think the checklist should've also contained 'add global parameters that apply to all grids'.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2021-08-12T08:09:53Z
+
+Oh, wait... there were global params, but you removed them... never mind.
+
+---------------------------------------------------------------------------
+
+by AdamKasp at 2021-08-12T09:38:05Z
+
+@vvasiloi yes I removed them because we decided to have by default `true` for both and add this doc :)
+
+---------------------------------------------------------------------------
+
+by GSadee at 2021-08-18T10:19:49Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "add-snippet-with-fetch-collection-and-output-walkers-disabling"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-08-18T10:53:32Z
+
+Thank you, Adam! :tada:
