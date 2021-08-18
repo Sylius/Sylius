@@ -24,6 +24,8 @@
 
 1. `Sylius\Bundle\ApiBundle\View\CartShippingMethodInterface` and `Sylius\Bundle\ApiBundle\View\CartShippingMethod` have been removed.
 
+1. `Sylius\Bundle\ApiBundle\Applicator\ShipmentStateMachineTransitionApplicatorInterface` and `Sylius\Bundle\ApiBundle\Applicator\ShipmentStateMachineTransitionApplicator` have been removed.
+
 1. `Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactoryInterface` and `Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactory` have been removed.
 
 1. The constructor of `Sylius\Bundle\ApiBundle\DataProvider\CartShippingMethodsSubresourceDataProvider` has been changed:
