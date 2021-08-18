@@ -231,7 +231,7 @@ After these two steps your admin product grid should not have the image field.
 Changes related to upgrade to GridBundle 1.10
 ---------------------------------------------
 
-In SyliusGridBundle all grids has options `fetch_join_collection` and `use_output_walkers` enabled by default.
+Since the SyliusGridBundle v1.10, all grids has options `fetch_join_collection` and `use_output_walkers` enabled by default.
 According to our research it may fix a lot of pagination issues and improve big-database performance (1M+ rows) up to 70%,
 but with the price of more queries required to be performed. If this trade-off is not worth it for you,
 you may disable it by using the following configuration snippet:
