@@ -29,7 +29,7 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
 {
     use NormalizerAwareTrait;
 
-    private const ALREADY_CALLED = 'shipping_method_normalizer_already_called';
+    private const ALREADY_CALLED = 'sylius_shipping_method_normalizer_already_called';
 
     /** @var OrderRepositoryInterface */
     private $orderRepository;

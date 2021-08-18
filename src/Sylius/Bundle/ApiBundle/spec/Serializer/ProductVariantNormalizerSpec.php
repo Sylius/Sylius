@@ -64,7 +64,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
     function it_does_not_support_if_the_normalizer_has_been_already_called(ProductVariantInterface $variant): void
     {
         $this
-            ->supportsNormalization($variant, null, ['product_variant_normalizer_already_called' => true])
+            ->supportsNormalization($variant, null, ['sylius_product_variant_normalizer_already_called' => true])
             ->shouldReturn(false)
         ;
     }
@@ -79,7 +79,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
     ): void {
         $this->setNormalizer($normalizer);
 
-        $normalizer->normalize($variant, null, ['product_variant_normalizer_already_called' => true])->willReturn([]);
+        $normalizer->normalize($variant, null, ['sylius_product_variant_normalizer_already_called' => true])->willReturn([]);
 
         $channelContext->getChannel()->willReturn($channel);
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(1000);
@@ -100,7 +100,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
     ): void {
         $this->setNormalizer($normalizer);
 
-        $normalizer->normalize($variant, null, ['product_variant_normalizer_already_called' => true])->willReturn([]);
+        $normalizer->normalize($variant, null, ['sylius_product_variant_normalizer_already_called' => true])->willReturn([]);
 
         $channelContext->getChannel()->willReturn($channel);
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(500);
@@ -121,7 +121,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
     ): void {
         $this->setNormalizer($normalizer);
 
-        $normalizer->normalize($variant, null, ['product_variant_normalizer_already_called' => true])->willReturn([]);
+        $normalizer->normalize($variant, null, ['sylius_product_variant_normalizer_already_called' => true])->willReturn([]);
 
         $channelContext->getChannel()->willReturn($channel);
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willThrow(ChannelNotFoundException::class);
@@ -138,11 +138,11 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
     ): void {
         $this->setNormalizer($normalizer);
 
-        $normalizer->normalize($variant, null, ['product_variant_normalizer_already_called' => true])->shouldNotBeCalled();
+        $normalizer->normalize($variant, null, ['sylius_product_variant_normalizer_already_called' => true])->shouldNotBeCalled();
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('normalize', [$variant, null, ['product_variant_normalizer_already_called' => true]])
+            ->during('normalize', [$variant, null, ['sylius_product_variant_normalizer_already_called' => true]])
         ;
     }
 }

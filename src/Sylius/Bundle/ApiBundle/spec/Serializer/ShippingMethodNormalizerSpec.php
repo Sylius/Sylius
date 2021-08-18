@@ -60,7 +60,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
     {
         $this
             ->supportsNormalization($shippingMethod, null, [
-                'shipping_method_normalizer_already_called' => true,
+                'sylius_shipping_method_normalizer_already_called' => true,
                 'subresource_identifiers' => ['tokenValue' => '666', 'shipments' => '999'],
             ])
             ->shouldReturn(false)
@@ -90,7 +90,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
 
         $normalizer
             ->normalize($shippingMethod, null, [
-                'shipping_method_normalizer_already_called' => true,
+                'sylius_shipping_method_normalizer_already_called' => true,
                 'subresource_identifiers' => ['tokenValue' => '666', 'shipments' => '999'],
             ])
             ->willReturn([])
@@ -118,7 +118,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
 
         $normalizer
             ->normalize($shippingMethod, null, [
-                'shipping_method_normalizer_already_called' => true,
+                'sylius_shipping_method_normalizer_already_called' => true,
                 'subresource_identifiers' => ['tokenValue' => '666', 'shipments' => '999'],
             ])
             ->shouldNotBeCalled()

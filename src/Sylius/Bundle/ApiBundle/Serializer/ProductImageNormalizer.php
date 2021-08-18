@@ -26,7 +26,7 @@ class ProductImageNormalizer implements ContextAwareNormalizerInterface, Normali
 {
     use NormalizerAwareTrait;
 
-    private const ALREADY_CALLED = 'product_image_normalizer_already_called';
+    private const ALREADY_CALLED = 'sylius_product_image_normalizer_already_called';
 
     private CacheManager $cacheManager;
     private RequestStack $requestStack;
