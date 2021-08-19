@@ -7,7 +7,7 @@ You could do that by using an endpoint with default credentials for API administ
 
 .. image:: ../../_images/sylius_api/api_platform_authentication_endpoint.png
     :align: center
-    :scale: 50%
+    :scale: 75%
 
 |
 
@@ -24,7 +24,7 @@ Notice the **Authorize** button and unlocked padlock near the available URLs:
 
 .. image:: ../../_images/sylius_api/api_platform_not_authorized.png
     :align: center
-    :scale: 50%
+    :scale: 75%
 
 |
 
@@ -32,7 +32,7 @@ Click the **Authorize** button and put the authentication token (remember about 
 
 .. image:: ../../_images/sylius_api/api_platform_authorization.png
     :align: center
-    :scale: 50%
+    :scale: 75%
 
 |
 
