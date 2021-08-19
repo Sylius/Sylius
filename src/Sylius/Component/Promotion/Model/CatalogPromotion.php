@@ -17,8 +17,11 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 class CatalogPromotion implements ResourceInterface
 {
+    /** @psalm-suppress PropertyNotSetInConstructor */
     protected int $id;
+    /** @psalm-suppress PropertyNotSetInConstructor */
     protected string $name;
+    /** @psalm-suppress PropertyNotSetInConstructor */
     protected string $code;
 
     public function getId(): int
