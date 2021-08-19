@@ -82,7 +82,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/orders/{tokenValue}/cancel</attribute>
                 <attribute name="input">false</attribute>
-                <attribute name="controller">sylius.api.order_state_machine_transition_applicator:cancel</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicatorInterface:cancel</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:order:update</attribute>
                 </attribute>
@@ -230,7 +230,7 @@
 
             <itemOperation name="get_configuration">
                 <attribute name="method">GET</attribute>
-                <attribute name="controller">sylius.api.get_configuration_action</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\Payment\GetPaymentConfiguration</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}/payments/{paymentId}/configuration</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Retrieve payment method configuration</attribute>

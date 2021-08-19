@@ -21,7 +21,7 @@
         <collectionOperations>
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
-                <attribute name="controller">sylius.api.upload_avatar_image_action</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction</attribute>
                 <attribute name="deserialize">false</attribute>
                 <attribute name="openapi_context">
                     <attribute name="requestBody">
