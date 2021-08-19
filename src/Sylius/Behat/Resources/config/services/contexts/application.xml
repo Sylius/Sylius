@@ -12,14 +12,11 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <imports>
-        <import resource="contexts/api.xml" />
-        <import resource="contexts/application.xml" />
-        <import resource="contexts/cli.xml" />
-        <import resource="contexts/domain.xml" />
-        <import resource="contexts/hook.xml" />
-        <import resource="contexts/setup.xml" />
-        <import resource="contexts/transform.xml" />
-        <import resource="contexts/ui.xml" />
-    </imports>
+    <services>
+        <defaults public="true" />
+        <service id="sylius.behat.context.application.admin.managing_catalog_promotions" class="Sylius\Behat\Context\Application\Admin\ManagingCatalogPromotionsContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin.catalog_promotion" />
+            <argument type="service" id="sylius.event_bus" />
+        </service>
+    </services>
 </container>
