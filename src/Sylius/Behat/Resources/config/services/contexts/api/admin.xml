@@ -157,5 +157,10 @@
             <argument type="service" id="sylius.behat.api_platform_client.admin.promotion" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
         </service>
+
+        <service id="sylius.behat.context.api.admin.managing_catalog_promotions" class="Sylius\Behat\Context\Api\Admin\ManagingCatalogPromotionsContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin.catalog_promotion" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+        </service>
     </services>
 </container>
