@@ -14,7 +14,7 @@ final class Version20210819203611 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Create catalog promotion';
     }
 
     public function up(Schema $schema): void
