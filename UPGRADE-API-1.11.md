@@ -99,6 +99,12 @@
         }
     ```
 
+1. Constructor of `Sylius\Bundle\ApiBundle\Command\Account\ResendVerificationEmail` has been removed. Relation to the current 
+   customer is set through `setShopUserId()`
+
+1. The `Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserExists` constraint and the `Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserExistsValidator`
+   have been removed 
+
 1. Constructor of `ApiBundle/Serializer/ProductVariantNormalizer.php` has been extended with `SectionProviderInterface`
     argument:
 
@@ -128,6 +134,15 @@
             "street": "string",
             "city": "string",
             "postcode": "string"
+        }
+    ```
+
+1. Request body of `POST` `api/v2/shop/account-verification-requests` endpoint has been removed:
+
+    ```diff
+        {
+    -       "email": "string",
+    -       "localeCode": "string"
         }
     ```
 
@@ -230,7 +245,6 @@
      * `sylius.api.validator.confirm_reset_password` => `Sylius\Bundle\ApiBundle\Validator\Constraints\ConfirmResetPasswordValidator`
      * `sylius.api.validator.promotion_coupon_eligibility` => `Sylius\Bundle\ApiBundle\Validator\Constraints\PromotionCouponEligibilityValidator`
      * `sylius.api.validator.shipment_already_shipped` => `Sylius\Bundle\ApiBundle\Validator\Constraints\ShipmentAlreadyShippedValidator`
-     * `sylius.api.validator.shop_user_exists` => `Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserExistsValidator`
      * `sylius.api.validator.shop_user_not_verified` => `Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserNotVerifiedValidator`
      * `sylius.api.validator.account_verification_token_eligibility` => `Sylius\Bundle\ApiBundle\Validator\Constraints\AccountVerificationTokenEligibilityValidator`
      * `sylius.api.validator.unique_reviewer_email` => `Sylius\Bundle\ApiBundle\Validator\Constraints\UniqueReviewerEmailValidator`

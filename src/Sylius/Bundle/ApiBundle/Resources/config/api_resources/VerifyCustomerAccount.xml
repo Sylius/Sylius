@@ -33,6 +33,7 @@
                 <attribute name="openapi_context">
                     <attribute name="summary">Resends verification email</attribute>
                 </attribute>
+                <attribute name="security">is_granted("ROLE_USER")</attribute>
             </collectionOperation>
         </collectionOperations>
 

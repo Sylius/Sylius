@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Account\ResendVerificationEmail;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail;
-use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
@@ -42,11 +42,12 @@ final class ResendVerificationEmailHandlerSpec extends ObjectBehavior
 
     function it_throws_exception_if_shop_user_does_not_exist(UserRepositoryInterface $userRepository): void
     {
-        $userRepository->findOneByEmail('test@email.com')->willReturn(null);
+        $userRepository->find(42)->willReturn(null);
 
-        $resendVerificationEmail = new ResendVerificationEmail('test@email.com');
+        $resendVerificationEmail = new ResendVerificationEmail();
         $resendVerificationEmail->setChannelCode('WEB');
         $resendVerificationEmail->setLocaleCode('en_US');
+        $resendVerificationEmail->setShopUserId(42);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -59,11 +60,11 @@ final class ResendVerificationEmailHandlerSpec extends ObjectBehavior
         ShopUserInterface $shopUser,
         GeneratorInterface $generator,
         MessageBusInterface $messageBus,
-        ChannelInterface $channel
+        CustomerInterface $customer
     ): void {
-        $userRepository->findOneByEmail('test@email.com')->willReturn($shopUser);
-
-        $channel->isAccountVerificationRequired()->willReturn(true);
+        $userRepository->find(42)->willReturn($shopUser);
+        $shopUser->getCustomer()->willReturn($customer);
+        $customer->getEmail()->willReturn('test@email.com');
 
         $generator->generate()->willReturn('TOKEN');
         $shopUser->setEmailVerificationToken('TOKEN')->shouldBeCalled();
@@ -75,9 +76,10 @@ final class ResendVerificationEmailHandlerSpec extends ObjectBehavior
             [new DispatchAfterCurrentBusStamp()]
         )->willReturn(new Envelope($sendAccountVerificationEmail))->shouldBeCalled();
 
-        $resendVerificationEmail = new ResendVerificationEmail('test@email.com');
+        $resendVerificationEmail = new ResendVerificationEmail();
         $resendVerificationEmail->setChannelCode('WEB');
         $resendVerificationEmail->setLocaleCode('en_US');
+        $resendVerificationEmail->setShopUserId(42);
 
         $this($resendVerificationEmail);
     }

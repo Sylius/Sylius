@@ -16,29 +16,23 @@ namespace Sylius\Bundle\ApiBundle\Command\Account;
 use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
 
 /** @experimental */
-class ResendVerificationEmail implements ChannelCodeAwareInterface, LocaleCodeAwareInterface, IriToIdentifierConversionAwareInterface
+class ResendVerificationEmail implements ShopUserIdAwareInterface, ChannelCodeAwareInterface, LocaleCodeAwareInterface, IriToIdentifierConversionAwareInterface
 {
-    /** @var string */
-    public $email;
-
-    /**
-     * @var string
-     * @psalm-immutable
-     */
-    public $channelCode;
+    /** @var string|int|null */
+    public $shopUserId = null;
 
     /**
      * @var string|null
-     * @psalm-immutable
      */
-    public $localeCode;
+    public ?string $channelCode = null;
 
-    public function __construct(string $email)
-    {
-        $this->email = $email;
-    }
+    /**
+     * @var string|null
+     */
+    public ?string $localeCode = null;
 
     public function getChannelCode(): string
     {
@@ -58,5 +52,15 @@ class ResendVerificationEmail implements ChannelCodeAwareInterface, LocaleCodeAw
     public function setLocaleCode(?string $localeCode): void
     {
         $this->localeCode = $localeCode;
+    }
+
+    public function getShopUserId()
+    {
+        return $this->shopUserId;
+    }
+
+    public function setShopUserId($shopUserId): void
+    {
+        $this->shopUserId = $shopUserId;
     }
 }
