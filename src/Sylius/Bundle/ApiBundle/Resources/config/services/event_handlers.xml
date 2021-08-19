@@ -16,6 +16,8 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
+        <defaults public="true" />
+
         <service id="Sylius\Bundle\ApiBundle\EventHandler\OrderCompletedHandler">
             <argument type="service" id="sylius.command_bus" />
             <argument type="service" id="sylius.repository.order" />
