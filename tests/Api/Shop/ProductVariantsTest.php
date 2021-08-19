@@ -16,7 +16,7 @@ namespace Sylius\Tests\Api\Shop;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-final class ProductTest extends JsonApiTestCase
+final class ProductVariantsTest extends JsonApiTestCase
 {
     /** @test */
     public function it_gets_products_with_original_price(): void

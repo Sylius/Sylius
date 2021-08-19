@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-final class ProductImageTest extends JsonApiTestCase
+final class ProductImagesTest extends JsonApiTestCase
 {
     /** @test */
     public function it_gets_one_product_image(): void
