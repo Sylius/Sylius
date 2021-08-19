@@ -101,7 +101,8 @@ In the previous example we used a custom query in the product repository, here i
                 ->where('pt.taxon = :taxon')
                 ->setParameter('taxon', $taxon)
                 ->getQuery()
-                ->getResult();
+                ->getResult()
+             ;
         }
     }
 
