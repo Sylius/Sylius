@@ -1,0 +1,27 @@
+---------------------------------------------------------------------------
+
+by stloyd at 2021-08-18T09:36:13Z
+
+Hmmmmmmm, with all the DI injection, autowiring etc. why such change? It's against best practices of Symfony IIRC.
+
+---------------------------------------------------------------------------
+
+by Arminek at 2021-08-18T10:04:07Z
+
+@lchrusciel Could you give more background on why we want to have this?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-08-18T11:08:21Z
+
+Hey @stloyd & @Arminek.
+
+You are right, this PR is against Symfony Best practices. However, our internal rule is to make all services public, due to Sylius Resource Controller and testing with PHPUnit for example. In all these scenarios we are fetching services directly from the container. In the resource controller, the services are fetched to perform regular logic. In the case of PHPUnit, I just had a failing test at #12968. IIRC, Behat also requires us to have public services, but I'm not 100% sure about it.
+
+These changes should make us coherent with something, that we introduced in #9366. All our services should be public by default, unless we will write a new ADR
+
+---------------------------------------------------------------------------
+
+by GSadee at 2021-08-19T08:47:42Z
+
+Thank you, Łukasz! :tada:
