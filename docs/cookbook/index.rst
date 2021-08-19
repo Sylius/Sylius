@@ -47,6 +47,8 @@ Payments
     payments/refund-process
     payments/custom-field-on-refund-payment
     payments/custom-type-of-refund
+    payments/custom-invoice
+    payments/generating-invoice-after-payment
 
 .. include:: /cookbook/payments/map.rst.inc
 
@@ -83,17 +85,6 @@ Inventory
     inventory/custom-inventory-sources-filter
 
 .. include:: /cookbook/inventory/map.rst.inc
-
-Invoices
---------
-
-.. toctree::
-    :hidden:
-
-    invoices/custom-invoice
-    invoices/generating-invoice-after-payment
-
-.. include:: /cookbook/invoices/map.rst.inc
 
 Shipping methods
 ----------------
