@@ -14,6 +14,3 @@ sylius_promotion:
             classes:
                 model: Sylius\Component\Core\Model\PromotionCoupon
                 repository: Sylius\Bundle\PromotionBundle\Doctrine\ORM\PromotionCouponRepository
-        catalog_promotion:
-            classes:
-                model: Sylius\Component\Promotion\Model\CatalogPromotion

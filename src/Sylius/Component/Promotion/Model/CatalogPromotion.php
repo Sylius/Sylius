@@ -13,18 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Promotion\Model;
 
-use Sylius\Component\Resource\Model\ResourceInterface;
-
-class CatalogPromotion implements ResourceInterface
+class CatalogPromotion implements CatalogPromotionInterface
 {
-    /** @psalm-suppress PropertyNotSetInConstructor */
-    protected int $id;
+    /**
+     * @psalm-suppress PropertyNotSetInConstructor
+     * @var mixed
+     */
+    protected $id;
     /** @psalm-suppress PropertyNotSetInConstructor */
     protected string $name;
     /** @psalm-suppress PropertyNotSetInConstructor */
     protected string $code;
 
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }

@@ -16,15 +16,15 @@ namespace Sylius\Behat\Context\Application\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Component\Promotion\Message\CatalogPromotionCreated;
-use Symfony\Component\Messenger\TraceableMessageBus;
+use Symfony\Component\Messenger\MessageBus;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
 {
     private ApiClientInterface $client;
-    private TraceableMessageBus $messageBus;
+    private MessageBus $messageBus;
 
-    public function __construct(ApiClientInterface $client, TraceableMessageBus $messageBus)
+    public function __construct(ApiClientInterface $client, MessageBus $messageBus)
     {
         $this->client = $client;
         $this->messageBus = $messageBus;
@@ -46,7 +46,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function thereShouldBeNewCatalogPromotionOnTheList(int $amount): void
     {
-        Assert::count($this->messageBus->getDispatchedMessages(), $amount);
+        Assert::count($this->messageBus->getDispatchedMessages(), $amount);//todo
     }
 
     /**
@@ -56,7 +56,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         /** @var CatalogPromotionCreated $actualMessage */
         $actualMessage = $this->messageBus->getDispatchedMessages()[0];
-        Assert::eq($actualMessage->code, $code);
-        Assert::eq($actualMessage->name, $name);
+        Assert::same($actualMessage->code, $code);
+        Assert::same($actualMessage->name, $name);
     }
 }
