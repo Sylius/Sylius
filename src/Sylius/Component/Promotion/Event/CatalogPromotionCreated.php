@@ -11,18 +11,14 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Promotion\Message;
+namespace Sylius\Component\Promotion\Event;
 
 final class CatalogPromotionCreated
 {
-    public int $id;
-    public string $name;
     public string $code;
 
-    public function __construct(int $id, string $name, string $code)
+    public function __construct(string $code)
     {
-        $this->id = $id;
-        $this->name = $name;
         $this->code = $code;
     }
 }
