@@ -82,5 +82,10 @@
             <argument type="service" id="sylius.promotion_coupon_generator.percentage_policy" />
             <tag name="validator.constraint_validator" alias="sylius_coupon_generation_amount_validator" />
         </service>
+
+        <service id="Sylius\Bundle\PromotionBundle\Subscriber\CatalogPromotionSubscriber">
+            <argument type="service" id="sylius.event_bus" />
+            <tag name="kernel.event_subscriber" />
+        </service>
     </services>
 </container>

@@ -13,3 +13,4 @@ Feature: Managing catalog promotions
         When I create a new catalog promotion with "winter_sale" code and "Winter sale" name
         Then there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name
+        And this catalog promotion should be usable

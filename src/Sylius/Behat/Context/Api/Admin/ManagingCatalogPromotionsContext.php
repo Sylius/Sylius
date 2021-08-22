@@ -16,17 +16,25 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
+use Symfony\Component\Messenger\MessageBus;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
 {
     private ApiClientInterface $client;
     private ResponseCheckerInterface $responseChecker;
+    private MessageBusInterface $messageBus;
 
-    public function __construct(ApiClientInterface $client, ResponseCheckerInterface $responseChecker)
-    {
+    public function __construct(
+        ApiClientInterface $client,
+        ResponseCheckerInterface $responseChecker,
+        MessageBusInterface $messageBus
+    ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
+        $this->messageBus = $messageBus;
     }
 
     /**
@@ -57,5 +65,13 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->hasItemWithValues($this->client->index(), ['code' => $code, 'name' => $name]),
             sprintf('Cannot find catalog promotions with code "%s" and name "%s" in the list', $code, $name)
         );
+    }
+
+    /**
+     * @Then this catalog promotion should be usable
+     */
+    public function thisCatalogPromotionShouldBeUsable(): void
+    {
+        Assert::isInstanceOf($this->messageBus->getDispatchedMessages()[0]['message'], CatalogPromotionCreated::class);
     }
 }
