@@ -15,37 +15,34 @@ namespace Sylius\Component\Promotion\Model;
 
 class CatalogPromotion implements CatalogPromotionInterface
 {
-    /**
-     * @psalm-suppress PropertyNotSetInConstructor
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
-    /** @psalm-suppress PropertyNotSetInConstructor */
-    protected string $name;
-    /** @psalm-suppress PropertyNotSetInConstructor */
-    protected string $code;
+
+    protected ?string $name = null;
+
+    protected ?string $code = null;
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(string $code): void
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }

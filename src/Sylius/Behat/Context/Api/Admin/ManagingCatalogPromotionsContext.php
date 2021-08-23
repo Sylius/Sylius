@@ -45,6 +45,9 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function thereShouldBeNewCatalogPromotionOnTheList(int $amount): void
     {
+        $x = $this->client->index();
+        
+
         Assert::count($this->responseChecker->getCollection($this->client->index()), $amount);
     }
 

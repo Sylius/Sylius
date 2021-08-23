@@ -17,13 +17,11 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface CatalogPromotionInterface extends ResourceInterface
 {
-    public function getId();
+    public function getName(): ?string;
 
-    public function getName(): string;
+    public function setName(?string $name): void;
 
-    public function setName(string $name): void;
+    public function getCode(): ?string;
 
-    public function getCode(): string;
-
-    public function setCode(string $code): void;
+    public function setCode(?string $code): void;
 }

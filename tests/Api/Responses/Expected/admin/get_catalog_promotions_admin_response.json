@@ -1,0 +1,15 @@
+{
+    "@context": "\/api\/v2\/contexts\/CatalogPromotion",
+    "@id": "\/api\/v2\/admin\/catalog-promotions",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/catalog-promotions\/catalog_promotion",
+            "@type": "CatalogPromotion",
+            "id": @integer@,
+            "name": "catalog promotion",
+            "code": "catalog_promotion"
+        }
+    ],
+    "hydra:totalItems": 1
+}

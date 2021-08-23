@@ -36,8 +36,8 @@
             </collectionOperation>
         </collectionOperations>
 
-        <property name="id" identifier="true" writable="false" />
-        <property name="name" readable="true" writable="true" />
-        <property name="code" readable="true" writable="true" />
+        <property name="id" identifier="false" writable="false" />
+        <property name="code" identifier="true" />
+        <property name="name" writable="true" />
     </resource>
 </resources>
