@@ -52,7 +52,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.13.4"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -
@@ -164,7 +164,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.13.4"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -
@@ -300,7 +300,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.13.4"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -
