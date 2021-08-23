@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -46,8 +47,8 @@ final class PickupCartHandler implements MessageHandlerInterface
     /** @var RandomnessGeneratorInterface */
     private $generator;
 
-    /** @var UserRepositoryInterface */
-    private $userRepository;
+    /** @var CustomerRepositoryInterface */
+    private $customerRepository;
 
     public function __construct(
         FactoryInterface $cartFactory,
@@ -55,14 +56,14 @@ final class PickupCartHandler implements MessageHandlerInterface
         ChannelRepositoryInterface $channelRepository,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator,
-        UserRepositoryInterface $userRepository
+        CustomerRepositoryInterface $customerRepository
     ) {
         $this->cartFactory = $cartFactory;
         $this->cartRepository = $cartRepository;
         $this->channelRepository = $channelRepository;
         $this->orderManager = $orderManager;
         $this->generator = $generator;
-        $this->userRepository = $userRepository;
+        $this->customerRepository = $customerRepository;
     }
 
     public function __invoke(PickupCart $pickupCart)
@@ -72,8 +73,9 @@ final class PickupCartHandler implements MessageHandlerInterface
 
         $customer = null;
 
-        if ($pickupCart->getShopUserId() !== null) {
-            $customer = $this->provideCustomer($pickupCart->getShopUserId());
+        if ($pickupCart->getEmail() !== null) {
+            /** @var CustomerInterface|null $customer */
+            $customer = $this->customerRepository->findOneBy(['email' => $pickupCart->getEmail()]);
         }
 
         if ($customer !== null) {
@@ -101,20 +103,6 @@ final class PickupCartHandler implements MessageHandlerInterface
         $this->orderManager->persist($cart);
 
         return $cart;
-    }
-
-    private function provideCustomer($shopUserId): ?CustomerInterface
-    {
-        /** @var ShopUserInterface|null $user */
-        $user = $this->userRepository->find($shopUserId);
-        if ($user !== null) {
-            /** @var CustomerInterface $customer */
-            $customer = $user->getCustomer();
-
-            return $customer;
-        }
-
-        return null;
     }
 
     private function hasLocaleWithLocaleCode(ChannelInterface $channel, ?string $localeCode): bool

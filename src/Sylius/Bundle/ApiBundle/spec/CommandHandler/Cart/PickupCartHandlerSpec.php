@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\Cart\CommandHandler;
+namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
@@ -23,6 +23,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -39,7 +40,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         ChannelRepositoryInterface $channelRepository,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator,
-        UserRepositoryInterface $userRepository
+        CustomerRepositoryInterface $customerRepository
     ): void {
         $this->beConstructedWith(
             $cartFactory,
@@ -47,7 +48,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
             $channelRepository,
             $orderManager,
             $generator,
-            $userRepository
+            $customerRepository
         );
     }
 
@@ -60,11 +61,10 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         FactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
-        ShopUserInterface $user,
         CustomerInterface $customer,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator,
-        UserRepositoryInterface $userRepository,
+        CustomerRepositoryInterface $customerRepository,
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
@@ -72,14 +72,13 @@ final class PickupCartHandlerSpec extends ObjectBehavior
     ): void {
         $pickupCart = new PickupCart();
         $pickupCart->setChannelCode('code');
-        $pickupCart->setShopUserId(42);
+        $pickupCart->setEmail('sample@email.com');
 
         $channelRepository->findOneByCode('code')->willReturn($channel);
         $channel->getBaseCurrency()->willReturn($currency);
         $channel->getDefaultLocale()->willReturn($locale);
 
-        $userRepository->find(42)->willReturn($user);
-        $user->getCustomer()->willReturn($customer);
+        $customerRepository->findOneBy(['email' => 'sample@email.com'])->willReturn($customer);
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn(null);
 
@@ -105,8 +104,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         FactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
-        UserRepositoryInterface $userRepository,
-        ShopUserInterface $user,
+        CustomerRepositoryInterface $customerRepository,
         CustomerInterface $customer,
         ObjectManager $orderManager,
         OrderInterface $cart,
@@ -114,12 +112,11 @@ final class PickupCartHandlerSpec extends ObjectBehavior
     ): void {
         $pickupCart = new PickupCart();
         $pickupCart->setChannelCode('code');
-        $pickupCart->setShopUserId(42);
+        $pickupCart->setEmail('sample@email.com');
 
         $channelRepository->findOneByCode('code')->willReturn($channel);
 
-        $userRepository->find(42)->willReturn($user);
-        $user->getCustomer()->willReturn($customer);
+        $customerRepository->findOneBy(['email' => 'sample@email.com'])->willReturn($customer);
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn($cart);
 

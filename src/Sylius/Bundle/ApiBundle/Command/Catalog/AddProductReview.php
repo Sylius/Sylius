@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Catalog;
 
-use Sylius\Bundle\ApiBundle\Command\CommandAwareDataTransformerInterface;
+use Sylius\Bundle\ApiBundle\Command\CustomerEmailAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 
 /** @experimental */
-class AddProductReview implements CommandAwareDataTransformerInterface, IriToIdentifierConversionAwareInterface
+class AddProductReview implements IriToIdentifierConversionAwareInterface, CustomerEmailAwareInterface
 {
     /**
      * @var string
@@ -60,6 +60,16 @@ class AddProductReview implements CommandAwareDataTransformerInterface, IriToIde
         $this->rating = $rating;
         $this->comment = $comment;
         $this->productCode = $productCode;
+        $this->email = $email;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): void
+    {
         $this->email = $email;
     }
 }

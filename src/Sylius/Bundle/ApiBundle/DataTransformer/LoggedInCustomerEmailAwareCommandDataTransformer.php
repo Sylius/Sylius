@@ -14,13 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
 use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
+use Sylius\Bundle\ApiBundle\Command\CustomerEmailAwareInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class LoggedInShopUserEmailAwareCommandDataTransformer implements CommandDataTransformerInterface
+final class LoggedInCustomerEmailAwareCommandDataTransformer implements CommandDataTransformerInterface
 {
     /** @var UserContextInterface */
     private $userContext;
@@ -35,8 +37,11 @@ final class LoggedInShopUserEmailAwareCommandDataTransformer implements CommandD
         /** @var CustomerInterface|null $customer */
         $customer = $this->getCustomer();
 
+        /** @var CustomerEmailAwareInterface|mixed $object */
+        Assert::object($object, CustomerEmailAwareInterface::class);
+
         if ($customer !== null) {
-            $object->email = $customer->getEmail();
+            $object->setEmail($customer->getEmail());
         }
 
         return $object;
@@ -44,7 +49,7 @@ final class LoggedInShopUserEmailAwareCommandDataTransformer implements CommandD
 
     public function supportsTransformation($object): bool
     {
-        return $object instanceof AddProductReview;
+        return $object instanceof CustomerEmailAwareInterface;
     }
 
     private function getCustomer(): ?CustomerInterface

@@ -19,6 +19,7 @@ use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -153,7 +154,9 @@ final class CartContext implements Context
             $user = $this->sharedStorage->get('user');
 
             if ($user instanceof ShopUserInterface) {
-                $commandPickupCart->setShopUserId($user->getId());
+                /** @var CustomerInterface $customer */
+                $customer = $user->getCustomer();
+                $commandPickupCart->setEmail($customer->getEmail());
             }
         }
 
