@@ -36,8 +36,28 @@
             </collectionOperation>
         </collectionOperations>
 
-        <property name="id" identifier="false" writable="false" />
-        <property name="code" identifier="true" />
-        <property name="name" writable="true" />
+        <itemOperations>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:catalog_promotion:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:catalog_promotion:update</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="id" identifier="true" writable="false" />
+        <property name="name" readable="true" writable="true" />
+        <property name="code" readable="true" writable="true" />
     </resource>
 </resources>
