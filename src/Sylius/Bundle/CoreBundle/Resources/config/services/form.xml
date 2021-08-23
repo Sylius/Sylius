@@ -51,7 +51,6 @@
         <parameter key="sylius.form.type.product_image.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
-        <parameter key="sylius.model.shop_billing_data.class">Sylius\Component\Core\Model\ShopBillingData</parameter>
         <parameter key="sylius.catalog_promotion.action.fixed_discount" type="constant">Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator::TYPE</parameter>
         <parameter key="sylius.catalog_promotion.action.percentage_discount" type="constant">Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPriceCalculator::TYPE</parameter>
         <parameter key="sylius.catalog_promotion.scope.for_products" type="constant">Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForProductScopeVariantChecker::TYPE</parameter>
