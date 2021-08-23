@@ -85,7 +85,7 @@
 
         <service id="Sylius\Bundle\PromotionBundle\Subscriber\CatalogPromotionSubscriber">
             <argument type="service" id="sylius.event_bus" />
-            <tag name="kernel.event_subscriber" />
+            <tag name="doctrine.event_subscriber" connection="default" />
         </service>
     </services>
 </container>

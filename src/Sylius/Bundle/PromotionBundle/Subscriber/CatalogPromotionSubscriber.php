@@ -13,13 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Subscriber;
 
-use ApiPlatform\Core\EventListener\EventPriorities;
+use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
+use Doctrine\ORM\Events;
+use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Event\ViewEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionSubscriber implements EventSubscriberInterface
@@ -31,22 +29,19 @@ final class CatalogPromotionSubscriber implements EventSubscriberInterface
         $this->messageBus = $messageBus;
     }
 
-    public static function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
-        return [
-            KernelEvents::VIEW => ['dispatchCatalogPromotionCreated', EventPriorities::POST_WRITE],
-        ];
+        return [Events::postPersist];
     }
 
-    public function dispatchCatalogPromotionCreated(ViewEvent $event): void
+    public function postPersist(LifecycleEventArgs $args)
     {
-        $catalogPromotion = $event->getControllerResult();
-        $method = $event->getRequest()->getMethod();
+        $entity = $args->getObject();
 
-        if (!$catalogPromotion instanceof CatalogPromotionInterface || Request::METHOD_POST !== $method) {
+        if (!$entity instanceof CatalogPromotionInterface) {
             return;
         }
 
-        $this->messageBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
+        $this->messageBus->dispatch(new CatalogPromotionCreated($entity->getCode()));
     }
 }

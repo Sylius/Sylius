@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\PromotionBundle\Subscriber;
 
+use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionSubscriberSpec extends ObjectBehavior
