@@ -35,6 +35,7 @@ imports:
     - suites/api/product/viewing_product_reviews.yml
     - suites/api/promotion/applying_promotion_coupon.yml
     - suites/api/promotion/applying_promotion_rules.yml
+    - suites/api/promotion/managing_catalog_promotions.yml
     - suites/api/promotion/managing_promotions.yml
     - suites/api/promotion/receiving_discount.yml
     - suites/api/shipping/applying_shipping_method_rules.yml

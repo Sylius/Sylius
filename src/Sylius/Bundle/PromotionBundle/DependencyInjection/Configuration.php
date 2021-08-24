@@ -19,7 +19,9 @@ use Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Promotion\Model\CatalogPromotion;
 use Sylius\Component\Promotion\Model\Promotion;
 use Sylius\Component\Promotion\Model\PromotionAction;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
@@ -29,6 +31,7 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionRule;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -86,6 +89,23 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(PromotionType::class)->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('catalog_promotion')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(CatalogPromotion::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(ResourceInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('form')->defaultValue(DefaultResourceType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()
