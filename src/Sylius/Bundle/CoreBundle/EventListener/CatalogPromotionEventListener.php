@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PromotionBundle\Subscriber;
+namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\Events;
@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class CatalogPromotionSubscriber implements EventSubscriberInterface
+final class CatalogPromotionEventListener
 {
     private MessageBusInterface $messageBus;
 
@@ -29,12 +29,7 @@ final class CatalogPromotionSubscriber implements EventSubscriberInterface
         $this->messageBus = $messageBus;
     }
 
-    public function getSubscribedEvents(): array
-    {
-        return [Events::postPersist];
-    }
-
-    public function postPersist(LifecycleEventArgs $args)
+    public function postPersist(LifecycleEventArgs $args): void
     {
         $entity = $args->getObject();
 
