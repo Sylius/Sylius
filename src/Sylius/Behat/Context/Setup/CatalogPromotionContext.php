@@ -15,17 +15,44 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Tester\Exception\PendingException;
+use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class CatalogPromotionContext implements Context
 {
+    private FactoryInterface $catalogPromotionFactory;
+
+    private EntityManagerInterface $entityManager;
+
+    private SharedStorageInterface $sharedStorage;
+
+    public function __construct(
+        FactoryInterface $catalogPromotionFactory,
+        EntityManagerInterface $entityManager,
+        SharedStorageInterface $sharedStorage
+    ) {
+        $this->catalogPromotionFactory = $catalogPromotionFactory;
+        $this->entityManager = $entityManager;
+        $this->sharedStorage = $sharedStorage;
+    }
+
     /**
      * @Given there is a catalog promotions with :code code and :name name
      */
     public function thereIsACatalogPromotionsWithCodeAndName(string $code, string $name): void
     {
-        throw new PendingException();
+        /** @var CatalogPromotionInterface $catalogPromotion */
+        $catalogPromotion = $this->catalogPromotionFactory->createNew();
+        $catalogPromotion->setName($name);
+        $catalogPromotion->setCode($code);
+
+        $this->entityManager->persist($catalogPromotion);
+        $this->entityManager->flush();
+
+        $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
     }
 
     /**
@@ -33,14 +60,14 @@ final class CatalogPromotionContext implements Context
      */
     public function itWillBeAppliedOnTaxon(CatalogPromotionInterface $catalogPromotion, TaxonInterface $taxon): void
     {
-        throw new PendingException();
+        // TODO: Add Taxon Rule to the Catalog Promotion
     }
 
     /**
      * @Given /^(it) will reduce price by ([^"]+)%$/
      */
-    public function itWillReducePriceBy50(CatalogPromotionInterface $catalogPromotion, int $discount): void
+    public function itWillReducePrice(CatalogPromotionInterface $catalogPromotion, int $discount): void
     {
-        throw new PendingException();
+        // TODO: Add fixed discount Action to the Catalog Promotion
     }
 }
