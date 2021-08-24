@@ -38,7 +38,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'admin/get_catalog_promotions_admin_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'admin/catalog_promotion/get_catalog_promotions_admin_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -62,7 +62,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'admin/get_catalog_promotion_admin_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'admin/catalog_promotion/get_catalog_promotion_admin_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -82,7 +82,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
 
-        $this->assertResponseCode($response, Response::HTTP_CREATED);
+        $this->assertResponse($response, 'admin/catalog_promotion/post_catalog_promotion_admin_response', Response::HTTP_CREATED);
     }
 
     /** @test */
@@ -102,7 +102,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'admin/put_catalog_promotion_admin_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'admin/catalog_promotion/put_catalog_promotion_admin_response', Response::HTTP_OK);
     }
 
     /** @test */
