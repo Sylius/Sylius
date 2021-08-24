@@ -45,9 +45,6 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function thereShouldBeNewCatalogPromotionOnTheList(int $amount): void
     {
-        $x = $this->client->index();
-        
-
         Assert::count($this->responseChecker->getCollection($this->client->index()), $amount);
     }
 
@@ -56,10 +53,9 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function itShouldHaveCodeAndName(string $code, string $name): void
     {
-        $expectedValues = ['code' => $code, 'name' => $name];
         Assert::true(
-            $this->responseChecker->hasItemWithValues($this->client->index(), $expectedValues),
-            sprintf('Cannot find catalog promotions with %s in the list', implode(',', $expectedValues))
+            $this->responseChecker->hasItemWithValues($this->client->index(), ['code' => $code, 'name' => $name]),
+            sprintf('Cannot find catalog promotions with code "%s" and name "%s" in the list', $code, $name)
         );
     }
 }
