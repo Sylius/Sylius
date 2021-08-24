@@ -16,7 +16,7 @@ namespace Sylius\Bundle\PromotionBundle\Subscriber;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
+use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -42,6 +42,6 @@ final class CatalogPromotionSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $this->messageBus->dispatch(new CatalogPromotionCreated($entity->getCode()));
+        $this->messageBus->dispatch(new CatalogPromotionUpdated($entity->getCode()));
     }
 }

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Promotion\Event;
 
-final class CatalogPromotionCreated
+final class CatalogPromotionUpdated
 {
     public string $code;
 
