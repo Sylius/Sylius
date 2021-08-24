@@ -11,6 +11,7 @@
     "email": "oliver@doe.com",
     "firstName": "John",
     "lastName": "Doe",
+    "gender": "u",
     "subscribedToNewsletter": false,
     "fullName": "John Doe"
 }
