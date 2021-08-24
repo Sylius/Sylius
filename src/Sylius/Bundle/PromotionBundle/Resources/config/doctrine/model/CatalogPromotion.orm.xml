@@ -19,5 +19,12 @@
 
         <field name="code" unique="true" />
         <field name="name" />
+
+        <one-to-many field="rules" target-entity="Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface" mapped-by="catalogPromotion" orphan-removal="true">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+
     </mapped-superclass>
 </doctrine-mapping>

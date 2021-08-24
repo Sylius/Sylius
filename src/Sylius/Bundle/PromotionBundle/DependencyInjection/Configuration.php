@@ -23,6 +23,8 @@ use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Promotion\Model\CatalogPromotion;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionRule;
+use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionTranslation;
 use Sylius\Component\Promotion\Model\CatalogPromotionTranslationInterface;
 use Sylius\Component\Promotion\Model\Promotion;
@@ -125,6 +127,23 @@ final class Configuration implements ConfigurationInterface
                                                 ->scalarNode('form')->defaultValue(DefaultResourceType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('catalog_promotion_rule')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(CatalogPromotionRule::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(CatalogPromotionRuleInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('form')->defaultValue(DefaultResourceType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

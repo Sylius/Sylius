@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Promotion\Model;
 
 use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
@@ -34,4 +35,17 @@ interface CatalogPromotionInterface extends ResourceInterface, CodeAwareInterfac
 
     /** @return CatalogPromotionTranslationInterface */
     public function getTranslation(?string $locale = null): TranslationInterface;
+
+    public function setCode(?string $code): void;
+
+    /**
+     * @return Collection|PromotionRuleInterface[]
+     *
+     * @psalm-return Collection<array-key, CatalogPromotionRuleInterface>
+     */
+    public function getRules(): Collection;
+
+    public function addRule(CatalogPromotionRuleInterface $rule): void;
+
+    public function removeRule(CatalogPromotionRuleInterface $rule): void;
 }

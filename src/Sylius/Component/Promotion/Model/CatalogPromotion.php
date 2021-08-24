@@ -15,6 +15,8 @@ namespace Sylius\Component\Promotion\Model;
 
 use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Resource\Model\TranslationInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 class CatalogPromotion implements CatalogPromotionInterface
 {
@@ -30,9 +32,17 @@ class CatalogPromotion implements CatalogPromotionInterface
 
     protected ?string $code = null;
 
+    /**
+     * @var Collection|CatalogPromotionRuleInterface[]
+     *
+     * @psalm-var Collection<array-key, CatalogPromotionRuleInterface>
+     */
+    protected $rules;
+
     public function __construct()
     {
         $this->initializeTranslationsCollection();
+        $this->rules = new ArrayCollection();
     }
 
     public function getId()
@@ -92,5 +102,29 @@ class CatalogPromotion implements CatalogPromotionInterface
     protected function createTranslation(): CatalogPromotionTranslationInterface
     {
         return new CatalogPromotionTranslation();
+    }
+
+    public function getRules(): Collection
+    {
+        return $this->rules;
+    }
+
+    public function hasRule(CatalogPromotionRuleInterface $rule): bool
+    {
+        return $this->rules->contains($rule);
+    }
+
+    public function addRule(CatalogPromotionRuleInterface $rule): void
+    {
+        if (!$this->hasRule($rule)) {
+            $rule->setCatalogPromotion($this);
+            $this->rules->add($rule);
+        }
+    }
+
+    public function removeRule(CatalogPromotionRuleInterface $rule): void
+    {
+        $rule->setCatalogPromotion(null);
+        $this->rules->removeElement($rule);
     }
 }

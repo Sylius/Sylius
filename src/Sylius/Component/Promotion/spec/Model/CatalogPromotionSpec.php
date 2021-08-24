@@ -15,6 +15,8 @@ namespace spec\Sylius\Component\Promotion\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
+use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
 
 final class CatalogPromotionSpec extends ObjectBehavior
 {
@@ -56,5 +58,50 @@ final class CatalogPromotionSpec extends ObjectBehavior
     {
         $this->setDescription('Discount on every mug.');
         $this->getDescription()->shouldReturn('Discount on every mug.');
+    }
+
+
+    function it_is_a_catalog_promotion(): void
+    {
+        $this->shouldImplement(CatalogPromotionInterface::class);
+    }
+
+    function it_does_not_have_id_by_default(): void
+    {
+        $this->getId()->shouldReturn(null);
+    }
+
+    function it_has_mutable_code(): void
+    {
+        $this->setCode('P1');
+        $this->getCode()->shouldReturn('P1');
+    }
+
+    function it_initializes_rules_collection_by_default(): void
+    {
+        $this->getRules()->shouldHaveType(Collection::class);
+    }
+
+    function it_adds_rules_properly(CatalogPromotionRuleInterface $rule): void
+    {
+        $this->hasRule($rule)->shouldReturn(false);
+
+        $rule->setCatalogPromotion($this)->shouldBeCalled();
+        $this->addRule($rule);
+
+        $this->hasRule($rule)->shouldReturn(true);
+    }
+
+    function it_removes_rules_properly(CatalogPromotionRuleInterface $rule): void
+    {
+        $this->hasRule($rule)->shouldReturn(false);
+
+        $rule->setCatalogPromotion($this)->shouldBeCalled();
+        $this->addRule($rule);
+
+        $rule->setCatalogPromotion(null)->shouldBeCalled();
+        $this->removeRule($rule);
+
+        $this->hasRule($rule)->shouldReturn(false);
     }
 }
