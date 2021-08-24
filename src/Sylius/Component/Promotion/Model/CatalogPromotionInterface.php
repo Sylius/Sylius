@@ -36,6 +36,8 @@ interface CatalogPromotionInterface extends ResourceInterface, CodeAwareInterfac
     /** @return CatalogPromotionTranslationInterface */
     public function getTranslation(?string $locale = null): TranslationInterface;
 
+    public function setCode(?string $code): void;
+
     /**
      * @return Collection|PromotionRuleInterface[]
      *
