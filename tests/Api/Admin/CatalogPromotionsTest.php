@@ -33,7 +33,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
 
         $this->client->request(
             'GET',
-            sprintf('/api/v2/admin/catalog-promotions'),
+            '/api/v2/admin/catalog-promotions',
             [],
             [],
             $header
@@ -42,6 +42,53 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'admin/get_catalog_promotions_admin_response', Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function it_allows_admin_to_get_catalog_promotion(): void
+    {
+        $catalogPromotion = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'catalog_promotion.yaml'])['catalog_promotion'];
+
+        $token = $this->logInAdminUser('api@example.com');
+        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
+        $header = array_merge($header, self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            'GET',
+            sprintf('/api/v2/admin/catalog-promotions/%s', $catalogPromotion['id']),
+            [],
+            [],
+            $header
+        );
+
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'admin/get_catalog_promotion_admin_response', Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function it_allows_admin_to_post_new_catalog_promotion(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'catalog_promotion.yaml']);
+
+        $token = $this->logInAdminUser('api@example.com');
+        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
+        $header = array_merge($header, self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            'POST',
+            '/api/v2/admin/catalog-promotions',
+            [],
+            [],
+            $header,
+            json_encode(["name" => "new_promotion", "code" => "new_code"], JSON_THROW_ON_ERROR)
+        );
+
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_CREATED);
     }
 
     /** @test */
@@ -103,7 +150,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     {
         $this->client->request(
             'GET',
-            sprintf('/api/v2/admin/catalog-promotions'),
+            '/api/v2/admin/catalog-promotions',
             [],
             [],
             $header

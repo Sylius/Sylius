@@ -1,0 +1,7 @@
+{
+    "@id": "\/api\/v2\/admin\/catalog-promotions\/@integer@",
+    "@type": "CatalogPromotion",
+    "id": "@integer@",
+    "name": "catalog promotion",
+    "code": "catalog_promotion"
+}
