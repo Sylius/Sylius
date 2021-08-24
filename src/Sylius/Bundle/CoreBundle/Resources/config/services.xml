@@ -247,5 +247,20 @@
         <service class="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager" id="sylius.mailer.order_email_manager">
             <argument type="service" id="sylius.email_sender" />
         </service>
+
+        <service
+            id="Sylius\Bundle\CoreBundle\Applicator\ProductCatalogPromotionApplicatorInterface"
+            class="Sylius\Bundle\CoreBundle\Applicator\ProductCatalogPromotionApplicator"
+        />
+
+        <service
+            id="Sylius\Bundle\CoreBundle\Processor\ProductCatalogPromotionProcessorInterface"
+            class="Sylius\Bundle\CoreBundle\Processor\DummyProductCatalogPromotionProcessor"
+        >
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\ProductCatalogPromotionApplicatorInterface" />
+            <argument type="service" id="sylius.manager.product" />
+        </service>
     </services>
 </container>
