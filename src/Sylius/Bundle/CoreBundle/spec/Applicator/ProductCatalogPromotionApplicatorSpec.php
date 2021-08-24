@@ -1,0 +1,83 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace spec\Sylius\Bundle\CoreBundle\Applicator;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Applicator\ProductCatalogPromotionApplicatorInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+
+final class ProductCatalogPromotionApplicatorSpec extends ObjectBehavior
+{
+    function it_implements_product_catalog_promotion_applicator_interface(): void
+    {
+        $this->shouldImplement(ProductCatalogPromotionApplicatorInterface::class);
+    }
+
+    function it_applies_percentage_discount_on_all_products_variants(
+        ProductInterface $product,
+        ProductVariantInterface $firstVariant,
+        ProductVariantInterface $secondVariant,
+        ChannelPricingInterface $firstChannelPricing,
+        ChannelPricingInterface $secondChannelPricing
+    ): void {
+        $product->getVariants()->willReturn(new ArrayCollection([
+            $firstVariant->getWrappedObject(),
+            $secondVariant->getWrappedObject(),
+        ]));
+
+        $firstVariant->getChannelPricings()->willReturn(new ArrayCollection([
+            $firstChannelPricing->getWrappedObject(),
+        ]));
+        $secondVariant->getChannelPricings()->willReturn(new ArrayCollection([
+            $secondChannelPricing->getWrappedObject(),
+        ]));
+
+        $firstChannelPricing->getPrice()->willReturn(1000);
+        $firstChannelPricing->getOriginalPrice()->willReturn(null);
+        $firstChannelPricing->setOriginalPrice(1000)->shouldBeCalled();
+        $firstChannelPricing->setPrice(500)->shouldBeCalled();
+
+        $secondChannelPricing->getPrice()->willReturn(1400);
+        $secondChannelPricing->getOriginalPrice()->willReturn(null);
+        $secondChannelPricing->setOriginalPrice(1400)->shouldBeCalled();
+        $secondChannelPricing->setPrice(700)->shouldBeCalled();
+
+        $this->applyPercentageDiscount($product, 0.5);
+    }
+
+    function it_does_not_set_original_price_during_application_if_its_already_there(
+        ProductInterface $product,
+        ProductVariantInterface $firstVariant,
+        ChannelPricingInterface $firstChannelPricing
+    ): void {
+        $product->getVariants()->willReturn(new ArrayCollection([
+            $firstVariant->getWrappedObject()
+        ]));
+
+        $firstVariant->getChannelPricings()->willReturn(new ArrayCollection([
+            $firstChannelPricing->getWrappedObject(),
+        ]));
+
+        $firstChannelPricing->getPrice()->willReturn(1000);
+        $firstChannelPricing->getOriginalPrice()->willReturn(2000);
+        $firstChannelPricing->setOriginalPrice(Argument::any())->shouldNotBeCalled();
+        $firstChannelPricing->setPrice(500)->shouldBeCalled();
+
+        $this->applyPercentageDiscount($product, 0.5);
+    }
+}
