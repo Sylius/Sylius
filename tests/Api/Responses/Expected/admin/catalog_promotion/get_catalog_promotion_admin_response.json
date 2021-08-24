@@ -1,8 +1,8 @@
 {
     "@context": "\/api\/v2\/contexts\/CatalogPromotion",
-    "@id": "\/api\/v2\/admin\/catalog-promotions\/catalog_promotion",
+    "@id": "\/api\/v2\/admin\/catalog-promotions\/mugs_discount",
     "@type": "CatalogPromotion",
     "id": "@integer@",
-    "name": "catalog promotion",
-    "code": "catalog_promotion"
+    "name": "Mugs discount",
+    "code": "mugs_discount"
 }
