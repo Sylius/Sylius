@@ -30,6 +30,9 @@
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:catalog_promotion:create</attribute>
+                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:catalog_promotion:create</attribute>
                 </attribute>
@@ -46,6 +49,9 @@
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:catalog_promotion:update</attribute>
+                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:catalog_promotion:update</attribute>
                 </attribute>

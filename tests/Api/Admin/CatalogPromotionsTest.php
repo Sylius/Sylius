@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,11 +26,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     public function it_allows_admin_to_get_catalog_promotions(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'catalog_promotion.yaml']);
-
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-        $header = array_merge($header, self::CONTENT_TYPE_HEADER);
+        $header = $this->getLoggedHeader();
 
         $this->client->request(
             'GET',
@@ -47,7 +44,8 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_allows_admin_to_get_catalog_promotion(): void
     {
-        $catalogPromotion = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'catalog_promotion.yaml'])['catalog_promotion'];
+        $catalogPromotion = $this->loadFixturesAndGetCatalogPromotion();
+        $header = $this->getLoggedHeader();
 
         $token = $this->logInAdminUser('api@example.com');
         $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
@@ -56,7 +54,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
 
         $this->client->request(
             'GET',
-            sprintf('/api/v2/admin/catalog-promotions/%s', $catalogPromotion['id']),
+            sprintf('/api/v2/admin/catalog-promotions/%s', $catalogPromotion->getCode()),
             [],
             [],
             $header
@@ -68,14 +66,10 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_allows_admin_to_post_new_catalog_promotion(): void
+    public function it_allows_admin_to_create_a_catalog_promotion(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'catalog_promotion.yaml']);
-
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-        $header = array_merge($header, self::CONTENT_TYPE_HEADER);
+        $header = $this->getLoggedHeader();
 
         $this->client->request(
             'POST',
@@ -83,7 +77,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             [],
             [],
             $header,
-            json_encode(["name" => "new_promotion", "code" => "new_code"], JSON_THROW_ON_ERROR)
+            json_encode(['name' => 'new_promotion', 'code' => 'new_code'], JSON_THROW_ON_ERROR)
         );
 
         $response = $this->client->getResponse();
@@ -94,24 +88,16 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_allows_admin_to_update_catalog_promotion(): void
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
-        $this->loadFixturesFromFile('catalog_promotion.yaml');
-
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-        $header = array_merge($header, self::CONTENT_TYPE_HEADER);
-
-        // Should be replaced with fixture_catalog_promotion['id'];
-        $id = $this->getId($header);
+        $catalogPromotion = $this->loadFixturesAndGetCatalogPromotion();
+        $header = $this->getLoggedHeader();
 
         $this->client->request(
             'PUT',
-            sprintf('/api/v2/admin/catalog-promotions/%s', $id),
+            sprintf('/api/v2/admin/catalog-promotions/%s', $catalogPromotion->getCode()),
             [],
             [],
             $header,
-            json_encode(["name" => "new_promotion", "code" => "new_code"], JSON_THROW_ON_ERROR)
+            json_encode(['name' => 'new_promotion', 'code' => 'new_code'], JSON_THROW_ON_ERROR)
         );
 
         $response = $this->client->getResponse();
@@ -122,20 +108,12 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_allows_admin_to_delete_catalog_promotion(): void
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
-        $catalogPromotion = $this->loadFixturesFromFile('catalog_promotion.yaml');
-
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-        $header = array_merge($header, self::CONTENT_TYPE_HEADER);
-
-        // Should be replaced with $catalogPromotion['id'];
-        $id = $this->getId($header);
+        $catalogPromotion = $this->loadFixturesAndGetCatalogPromotion();
+        $header = $this->getLoggedHeader();
 
         $this->client->request(
             'DELETE',
-            sprintf('/api/v2/admin/catalog-promotions/%s', $id),
+            sprintf('/api/v2/admin/catalog-promotions/%s', $catalogPromotion->getCode()),
             [],
             [],
             $header
@@ -146,18 +124,21 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
 
-    private function getId(array $header): string
+    private function loadFixturesAndGetCatalogPromotion(): CatalogPromotionInterface
     {
-        $this->client->request(
-            'GET',
-            '/api/v2/admin/catalog-promotions',
-            [],
-            [],
-            $header
-        );
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'catalog_promotion.yaml']);
 
-        $response = $this->client->getResponse();
-        $content = json_decode($response->getContent(), true);
-        return (string) $content['hydra:member'][0]['id'];
+        /** @var CatalogPromotionInterface $catalogPromotion */
+        $catalogPromotion = $fixtures['catalog_promotion'];
+
+        return $catalogPromotion;
+    }
+
+    private function getLoggedHeader(): array
+    {
+        $token = $this->logInAdminUser('api@example.com');
+        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
+        return array_merge($header, self::CONTENT_TYPE_HEADER);
     }
 }
