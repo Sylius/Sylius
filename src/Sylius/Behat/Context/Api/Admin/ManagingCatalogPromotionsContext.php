@@ -68,8 +68,9 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When I want to create a new catalog promotion
+     * @When I want to create new catalog promotion
      */
-    public function iWantToCreateANewCatalogPromotion(): void
+    public function iWantToCreateNewCatalogPromotion(): void
     {
         $this->client->buildCreateRequest();
     }
@@ -181,6 +182,31 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iBrowseCatalogPromotions(): void
     {
         $this->client->index();
+    }
+
+    /**
+     * @When I specify its code as :code
+     */
+    public function iSpecifyItsCodeAs(string $code): void
+    {
+        $this->client->addRequestData('code', $code);
+    }
+
+    /**
+     * @When I name it :name
+     */
+    public function iNameIt(string $name): void
+    {
+        $this->client->addRequestData('name', $name);
+    }
+
+    /**
+     * @When I add the "contains variants" rule configured with :firstVariant and :secondVariant
+     */
+    public function iAddTheRuleConfiguredWithProductAnd(...$taxons): void
+    {
+        //todo
+        throw new PendingException();
     }
 
     /**
