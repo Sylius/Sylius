@@ -90,5 +90,10 @@
             <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="protectFromRemovingMenuTaxon" />
             <tag name="kernel.event_listener" event="sylius.taxon.post_delete" method="removeTaxonFromPromotionRules" />
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\CatalogPromotionEventListener">
+            <argument type="service" id="sylius.event_bus" />
+            <tag name="doctrine.event_listener" event="postPersist" connection="default" />
+        </service>
     </services>
 </container>
