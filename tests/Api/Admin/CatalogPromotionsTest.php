@@ -72,7 +72,15 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             [],
             [],
             $header,
-            json_encode(['name' => 'new_promotion', 'code' => 'new_code'], JSON_THROW_ON_ERROR)
+            json_encode([
+                'name' => 'T-Shirts discount',
+                'code' => 'tshirts_discount',
+                'translations' => ['en_US' => [
+                    'locale' => 'en_US',
+                    'label' => 'T-Shirts discount',
+                    'description' => '50% discount on every T-Shirt',
+                ]]
+            ], JSON_THROW_ON_ERROR)
         );
 
         $response = $this->client->getResponse();
