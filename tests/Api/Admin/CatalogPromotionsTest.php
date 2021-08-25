@@ -38,7 +38,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'admin/catalog_promotion/get_catalog_promotions_admin_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'admin/catalog_promotion/get_catalog_promotions_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -46,11 +46,6 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     {
         $catalogPromotion = $this->loadFixturesAndGetCatalogPromotion();
         $header = $this->getLoggedHeader();
-
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-        $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
             'GET',
@@ -62,7 +57,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'admin/catalog_promotion/get_catalog_promotion_admin_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'admin/catalog_promotion/get_catalog_promotion_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -82,7 +77,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'admin/catalog_promotion/post_catalog_promotion_admin_response', Response::HTTP_CREATED);
+        $this->assertResponse($response, 'admin/catalog_promotion/post_catalog_promotion_response', Response::HTTP_CREATED);
     }
 
     /** @test */
@@ -102,7 +97,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'admin/catalog_promotion/put_catalog_promotion_admin_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'admin/catalog_promotion/put_catalog_promotion_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -139,6 +134,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         $token = $this->logInAdminUser('api@example.com');
         $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
+
         return array_merge($header, self::CONTENT_TYPE_HEADER);
     }
 }
