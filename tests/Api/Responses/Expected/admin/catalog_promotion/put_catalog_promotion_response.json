@@ -2,7 +2,7 @@
     "@context": "\/api\/v2\/contexts\/CatalogPromotion",
     "@id": "\/api\/v2\/admin\/catalog-promotions\/new_code",
     "@type": "CatalogPromotion",
-    "id": "@integer@",
+    "id": @integer@,
     "name": "new_promotion",
     "code": "new_code"
 }

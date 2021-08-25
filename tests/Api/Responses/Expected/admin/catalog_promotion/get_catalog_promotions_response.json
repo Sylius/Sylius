@@ -6,7 +6,7 @@
         {
             "@id": "\/api\/v2\/admin\/catalog-promotions\/mugs_discount",
             "@type": "CatalogPromotion",
-            "id": "@integer@",
+            "id": @integer@,
             "name": "Mugs discount",
             "code": "mugs_discount"
         }
