@@ -22,11 +22,11 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionEventListener
 {
-    private MessageBusInterface $messageBus;
+    private MessageBusInterface $eventBus;
 
-    public function __construct(MessageBusInterface $messageBus)
+    public function __construct(MessageBusInterface $eventBus)
     {
-        $this->messageBus = $messageBus;
+        $this->eventBus = $eventBus;
     }
 
     public function postPersist(LifecycleEventArgs $args): void
