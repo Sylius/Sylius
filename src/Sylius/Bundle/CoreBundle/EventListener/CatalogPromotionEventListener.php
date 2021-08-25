@@ -37,6 +37,6 @@ final class CatalogPromotionEventListener
             return;
         }
 
-        $this->messageBus->dispatch(new CatalogPromotionUpdated($entity->getCode()));
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($entity->getCode()));
     }
 }

@@ -24,9 +24,9 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionEventListenerSpec extends ObjectBehavior
 {
-    function let(MessageBusInterface $bus): void
+    function let(MessageBusInterface $eventBus): void
     {
-        $this->beConstructedWith($bus);
+        $this->beConstructedWith($eventBus);
     }
 
     function it_is_initializable(): void
@@ -35,24 +35,24 @@ final class CatalogPromotionEventListenerSpec extends ObjectBehavior
     }
 
     function it_sends_catalog_promotion_updated_after_persist_catalog_promotion(
-        MessageBusInterface $bus,
+        MessageBusInterface $eventBus,
         LifecycleEventArgs $args,
         CatalogPromotionInterface $entity
     ): void {
         $args->getObject()->willReturn($entity);
         $entity->getCode()->willReturn('winter_sale');
         $message = new CatalogPromotionUpdated('winter_sale');
-        $bus->dispatch($message)->willReturn(new Envelope($message));
+        $eventBus->dispatch($message)->willReturn(new Envelope($message));
 
         $this->postPersist($args);
     }
 
     function it_does_not_send_catalog_promotion_updated_after_persist_other_entity(
-        MessageBusInterface $bus,
+        MessageBusInterface $eventBus,
         LifecycleEventArgs $args
     ): void {
         $args->getObject()->willReturn(new \stdClass());
-        $bus->dispatch(Argument::any())->shouldNotBeCalled();
+        $eventBus->dispatch(Argument::any())->shouldNotBeCalled();
 
         $this->postPersist($args);
     }
