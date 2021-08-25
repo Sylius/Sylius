@@ -13,8 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Promotion\Model;
 
+use Sylius\Component\Resource\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslationInterface;
+
 class CatalogPromotion implements CatalogPromotionInterface
 {
+    use TranslatableTrait {
+        __construct as private initializeTranslationsCollection;
+        getTranslation as private doGetTranslation;
+    }
+
     /** @var mixed */
     protected $id;
 
@@ -22,9 +30,24 @@ class CatalogPromotion implements CatalogPromotionInterface
 
     protected ?string $code = null;
 
+    public function __construct()
+    {
+        $this->initializeTranslationsCollection();
+    }
+
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(?string $code): void
+    {
+        $this->code = $code;
     }
 
     public function getName(): ?string
@@ -37,13 +60,37 @@ class CatalogPromotion implements CatalogPromotionInterface
         $this->name = $name;
     }
 
-    public function getCode(): ?string
+    public function getLabel(): ?string
     {
-        return $this->code;
+        return $this->getTranslation()->getLabel();
     }
 
-    public function setCode(?string $code): void
+    public function setLabel(?string $label): void
     {
-        $this->code = $code;
+        $this->getTranslation()->setLabel($label);
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->getTranslation()->getDescription();
+    }
+
+    public function setDescription(?string $description): void
+    {
+        $this->getTranslation()->setDescription($description);
+    }
+
+    /** @return CatalogPromotionTranslationInterface */
+    public function getTranslation(?string $locale = null): TranslationInterface
+    {
+        /** @var CatalogPromotionTranslationInterface $translation */
+        $translation = $this->doGetTranslation($locale);
+
+        return $translation;
+    }
+
+    protected function createTranslation(): CatalogPromotionTranslationInterface
+    {
+        return new CatalogPromotionTranslation();
     }
 }

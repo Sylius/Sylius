@@ -14,19 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Component\Promotion\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
-interface CatalogPromotionInterface extends ResourceInterface, TranslatableInterface
+interface CatalogPromotionTranslationInterface extends ResourceInterface, TranslationInterface
 {
-    public function getCode(): ?string;
-
-    public function setCode(?string $code): void;
-
-    public function getName(): ?string;
-
-    public function setName(?string $name): void;
-
     public function getLabel(): ?string;
 
     public function setLabel(?string $label): void;
@@ -34,7 +25,4 @@ interface CatalogPromotionInterface extends ResourceInterface, TranslatableInter
     public function getDescription(): ?string;
 
     public function setDescription(?string $description): void;
-
-    /** @return CatalogPromotionTranslationInterface */
-    public function getTranslation(?string $locale = null): TranslationInterface;
 }

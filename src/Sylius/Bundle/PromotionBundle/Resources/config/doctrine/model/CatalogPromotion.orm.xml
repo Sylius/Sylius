@@ -17,7 +17,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="code" type="string" unique="true" />
-        <field name="name" type="string" />
+        <field name="code" unique="true" />
+        <field name="name" />
     </mapped-superclass>
 </doctrine-mapping>
