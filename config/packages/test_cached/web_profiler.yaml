@@ -1,0 +1,2 @@
+imports:
+    - { resource: "../test/web_profiler.yaml" }
