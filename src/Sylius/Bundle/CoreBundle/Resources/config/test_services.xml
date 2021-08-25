@@ -54,5 +54,9 @@
         </service>
 
         <service id="sylius.liip.filter_service" alias="liip_imagine.service.filter" public="true" />
+
+        <service id="debug.traced.sylius.event_bus" class="Symfony\Component\Messenger\TraceableMessageBus" decorates="sylius.event_bus">
+            <argument type="service" id="debug.traced.sylius_default.bus.inner" />
+        </service>
     </services>
 </container>
