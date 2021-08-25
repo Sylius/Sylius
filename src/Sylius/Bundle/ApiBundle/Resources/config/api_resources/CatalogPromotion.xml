@@ -30,11 +30,37 @@
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:catalog_promotion:create</attribute>
+                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:catalog_promotion:create</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:catalog_promotion:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:catalog_promotion:update</attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:catalog_promotion:update</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+            </itemOperation>
+        </itemOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" />
