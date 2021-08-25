@@ -14,10 +14,11 @@ default:
                 - sylius.behat.context.setup.taxonomy
 
                 - sylius.behat.context.transform.lexical
-                - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.taxon
 
                 - sylius.behat.context.api.shop.product
+
             filters:
                 tags: "@applying_catalog_promotions && @api"

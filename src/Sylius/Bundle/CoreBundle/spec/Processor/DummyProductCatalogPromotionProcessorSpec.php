@@ -67,15 +67,10 @@ final class DummyProductCatalogPromotionProcessorSpec extends ObjectBehavior
         $this->process($catalogPromotion);
     }
 
-    function it_does_nothing_if_there_is_not_t_shirts_taxon(
+    function it_does_nothing_if_there_is_no_t_shirts_taxon(
         ProductRepositoryInterface $productRepository,
         TaxonRepositoryInterface $taxonRepository,
-        CatalogPromotionInterface $catalogPromotion,
-        ProductCatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
-        EntityManagerInterface $entityManager,
-        TaxonInterface $taxon,
-        ProductInterface $firstProduct,
-        ProductInterface $secondProduct
+        CatalogPromotionInterface $catalogPromotion
     ): void {
         $taxonRepository->findOneBy(['code' => 't_shirts'])->willReturn(null);
 
