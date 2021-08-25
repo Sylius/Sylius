@@ -1,2 +1,2 @@
-fidry_alice_data_fixtures:
-    default_purge_mode: no_purge
+imports:
+    - { resource: "../test/fidry_alice_data_fixtures.yaml" }
