@@ -22,6 +22,7 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
@@ -202,11 +203,21 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When I add the "contains variants" rule configured with :firstVariant and :secondVariant
+     * @When /^I add the "contains variants" rule configured with ("[^"]+" variant) and ("[^"]+" variant)$/
      */
-    public function iAddTheRuleConfiguredWithProductAnd(...$taxons): void
+    public function iAddTheRuleConfiguredWithProductAnd(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
     {
-        //todo
-        throw new PendingException();
+        $rules = [
+            [
+                'type' => 'contains variants',
+                'configuration' => [
+                    $this->iriConverter->getIriFromItem($firstVariant),
+                    $this->iriConverter->getIriFromItem($secondVariant),
+                ],
+            ],
+        ];
+
+        $this->client->addRequestData('rules', $rules);
     }
 
     /**

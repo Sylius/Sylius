@@ -12,12 +12,12 @@ Feature: Adding catalog promotion with a rule
         And this product has "Python T-Shirt" variant priced at "$40.00"
         And I am logged in as an administrator
 
-    @api @todo
+    @api
     Scenario: Creating catalog promotion for chosen product variants
         When I want to create new catalog promotion
         And I specify its code as "winter_sale"
         And I name it "Winter sale"
-        And I add the "contains variants" rule configured with "PHP T-Shirt" and "Kotlin T-Shirt"
+        And I add the "contains variants" rule configured with "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add it
         Then there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name
