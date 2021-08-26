@@ -18,8 +18,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class AdjustmentFactory implements AdjustmentFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $adjustmentFactory;
+    private FactoryInterface $adjustmentFactory;
 
     public function __construct(FactoryInterface $adjustmentFactory)
     {

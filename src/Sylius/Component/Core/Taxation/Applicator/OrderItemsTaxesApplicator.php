@@ -26,17 +26,13 @@ use Webmozart\Assert\Assert;
 
 class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
 {
-    /** @var CalculatorInterface */
-    private $calculator;
+    private CalculatorInterface $calculator;
 
-    /** @var AdjustmentFactoryInterface */
-    private $adjustmentFactory;
+    private AdjustmentFactoryInterface $adjustmentFactory;
 
-    /** @var IntegerDistributorInterface */
-    private $distributor;
+    private IntegerDistributorInterface $distributor;
 
-    /** @var TaxRateResolverInterface */
-    private $taxRateResolver;
+    private TaxRateResolverInterface $taxRateResolver;
 
     public function __construct(
         CalculatorInterface $calculator,

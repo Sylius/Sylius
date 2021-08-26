@@ -22,32 +22,23 @@ class Customer implements CustomerInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string|null */
-    protected $email;
+    protected ?string $email = null;
 
-    /** @var string|null */
-    protected $emailCanonical;
+    protected ?string $emailCanonical = null;
 
-    /** @var string|null */
-    protected $firstName;
+    protected ?string $firstName = null;
 
-    /** @var string|null */
-    protected $lastName;
+    protected ?string $lastName = null;
 
-    /** @var \DateTimeInterface|null */
-    protected $birthday;
+    protected ?\DateTimeInterface $birthday = null;
 
-    /** @var string */
-    protected $gender = CustomerInterface::UNKNOWN_GENDER;
+    protected ?string $gender = CustomerInterface::UNKNOWN_GENDER;
 
-    /** @var CustomerGroupInterface|null */
-    protected $group;
+    protected ?CustomerGroupInterface $group = null;
 
-    /** @var string|null */
-    protected $phoneNumber;
+    protected ?string $phoneNumber = null;
 
-    /** @var bool */
-    protected $subscribedToNewsletter = false;
+    protected bool $subscribedToNewsletter = false;
 
     public function __construct()
     {

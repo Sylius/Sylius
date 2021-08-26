@@ -23,18 +23,16 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterface
 {
-    /** @var ZoneInterface */
-    protected $zone;
+    protected ?ZoneInterface $zone = null;
 
-    /** @var TaxCategoryInterface */
-    protected $taxCategory;
+    protected ?TaxCategoryInterface $taxCategory = null;
 
     /**
      * @var Collection|ChannelInterface[]
      *
      * @psalm-var Collection<array-key, ChannelInterface>
      */
-    protected $channels;
+    protected Collection $channels;
 
     public function __construct()
     {

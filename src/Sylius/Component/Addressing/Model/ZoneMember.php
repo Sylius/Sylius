@@ -18,11 +18,9 @@ class ZoneMember implements ZoneMemberInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string|null */
-    protected $code;
+    protected ?string $code = null;
 
-    /** @var ZoneInterface|null */
-    protected $belongsTo;
+    protected ?ZoneInterface $belongsTo = null;
 
     public function getId()
     {

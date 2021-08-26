@@ -20,14 +20,11 @@ class PaymentMethodTranslation extends AbstractTranslation implements PaymentMet
     /** @var mixed */
     protected $id;
 
-    /** @var string|null */
-    protected $name;
+    protected ?string $name = null;
 
-    /** @var string|null */
-    protected $description;
+    protected ?string $description = null;
 
-    /** @var string|null */
-    protected $instructions;
+    protected ?string $instructions = null;
 
     public function __toString(): string
     {

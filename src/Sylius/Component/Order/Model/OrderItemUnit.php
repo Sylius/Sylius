@@ -18,25 +18,22 @@ use Doctrine\Common\Collections\Collection;
 
 class OrderItemUnit implements OrderItemUnitInterface
 {
-    /** @var int */
-    protected $id;
+    /** @var mixed|null */
+    protected $id = null;
 
-    /** @var OrderItemInterface */
-    protected $orderItem;
+    protected OrderItemInterface $orderItem;
 
     /**
      * @var Collection|AdjustmentInterface[]
      *
      * @psalm-var Collection<array-key, AdjustmentInterface>
      */
-    protected $adjustments;
+    protected Collection $adjustments;
 
-    /** @var int */
-    protected $adjustmentsTotal = 0;
+    protected int $adjustmentsTotal = 0;
 
     public function __construct(OrderItemInterface $orderItem)
     {
-        /** @var ArrayCollection<array-key, AdjustmentInterface> $this->adjustments */
         $this->adjustments = new ArrayCollection();
 
         $this->orderItem = $orderItem;

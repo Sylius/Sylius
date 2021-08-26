@@ -18,35 +18,25 @@ class AttributeValue implements AttributeValueInterface
     /** @var mixed */
     protected $id;
 
-    /** @var AttributeSubjectInterface|null */
-    protected $subject;
+    protected ?AttributeSubjectInterface $subject = null;
 
-    /** @var AttributeInterface|null */
-    protected $attribute;
+    protected ?AttributeInterface $attribute = null;
 
-    /** @var string|null */
-    protected $localeCode;
+    protected ?string $localeCode = null;
 
-    /** @var string|null */
-    private $text;
+    private ?string $text = null;
 
-    /** @var bool|null */
-    private $boolean;
+    private ?bool $boolean = null;
 
-    /** @var int|null */
-    private $integer;
+    private ?int $integer = null;
 
-    /** @var float|null */
-    private $float;
+    private ?float $float = null;
 
-    /** @var \DateTimeInterface|null */
-    private $datetime;
+    private ?\DateTimeInterface $datetime = null;
 
-    /** @var \DateTimeInterface|null */
-    private $date;
+    private ?\DateTimeInterface $date = null;
 
-    /** @var array|null */
-    private $json;
+    private ?array $json = null;
 
     public function getId()
     {

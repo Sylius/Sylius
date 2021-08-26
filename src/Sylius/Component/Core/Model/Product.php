@@ -25,32 +25,30 @@ use Webmozart\Assert\Assert;
 
 class Product extends BaseProduct implements ProductInterface, ReviewableProductInterface
 {
-    /** @var string */
-    protected $variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
+    protected ?string $variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
 
     /**
      * @var Collection|ProductTaxonInterface[]
      *
      * @psalm-var Collection<array-key, ProductTaxonInterface>
      */
-    protected $productTaxons;
+    protected Collection $productTaxons;
 
     /**
      * @var Collection|ChannelInterface[]
      *
      * @psalm-var Collection<array-key, ChannelInterface>
      */
-    protected $channels;
+    protected Collection $channels;
 
-    /** @var BaseTaxonInterface */
-    protected $mainTaxon;
+    protected ?\Sylius\Component\Core\Model\TaxonInterface $mainTaxon = null;
 
     /**
      * @var Collection|ReviewInterface[]
      *
      * @psalm-var Collection<array-key, ReviewInterface>
      */
-    protected $reviews;
+    protected Collection $reviews;
 
     /** @var float */
     protected $averageRating = 0;
@@ -60,7 +58,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
      *
      * @psalm-var Collection<array-key, ImageInterface>
      */
-    protected $images;
+    protected Collection $images;
 
     public function __construct()
     {

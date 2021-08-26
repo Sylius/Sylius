@@ -17,8 +17,7 @@ use Sylius\Component\Order\Model\Adjustment as BaseAdjustment;
 
 class Adjustment extends BaseAdjustment implements AdjustmentInterface
 {
-    /** @var ShipmentInterface|null */
-    protected $shipment;
+    protected ?ShipmentInterface $shipment = null;
 
     public function getShipment(): ?ShipmentInterface
     {

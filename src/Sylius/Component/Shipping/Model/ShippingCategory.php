@@ -22,14 +22,11 @@ class ShippingCategory implements ShippingCategoryInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
-    protected $code;
+    protected ?string $code = null;
 
-    /** @var string */
-    protected $name;
+    protected ?string $name = null;
 
-    /** @var string */
-    protected $description;
+    protected ?string $description = null;
 
     public function __construct()
     {

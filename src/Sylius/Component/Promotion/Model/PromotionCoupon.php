@@ -22,20 +22,15 @@ class PromotionCoupon implements PromotionCouponInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string|null */
-    protected $code;
+    protected ?string $code = null;
 
-    /** @var int|null */
-    protected $usageLimit;
+    protected ?int $usageLimit = null;
 
-    /** @var int */
-    protected $used = 0;
+    protected int $used = 0;
 
-    /** @var PromotionInterface|null */
-    protected $promotion;
+    protected ?PromotionInterface $promotion = null;
 
-    /** @var \DateTimeInterface|null */
-    protected $expiresAt;
+    protected ?\DateTimeInterface $expiresAt = null;
 
     public function getId()
     {

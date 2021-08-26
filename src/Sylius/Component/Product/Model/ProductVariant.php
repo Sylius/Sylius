@@ -31,21 +31,18 @@ class ProductVariant implements ProductVariantInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
-    protected $code;
+    protected ?string $code = null;
 
-    /** @var ProductInterface */
-    protected $product;
+    protected ?ProductInterface $product = null;
 
     /**
      * @var Collection|ProductOptionValueInterface[]
      *
      * @psalm-var Collection<array-key, ProductOptionValueInterface>
      */
-    protected $optionValues;
+    protected Collection $optionValues;
 
-    /** @var int */
-    protected $position;
+    protected ?int $position = null;
 
     public function __construct()
     {

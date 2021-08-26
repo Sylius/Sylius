@@ -22,32 +22,23 @@ class Adjustment implements AdjustmentInterface
     /** @var mixed */
     protected $id;
 
-    /** @var OrderInterface|null */
-    protected $order;
+    protected ?OrderInterface $order = null;
 
-    /** @var OrderItemInterface|null */
-    protected $orderItem;
+    protected ?OrderItemInterface $orderItem = null;
 
-    /** @var OrderItemUnitInterface|null */
-    protected $orderItemUnit;
+    protected ?OrderItemUnitInterface $orderItemUnit = null;
 
-    /** @var string|null */
-    protected $type;
+    protected ?string $type = null;
 
-    /** @var string|null */
-    protected $label;
+    protected ?string $label = null;
 
-    /** @var int */
-    protected $amount = 0;
+    protected int $amount = 0;
 
-    /** @var bool */
-    protected $neutral = false;
+    protected bool $neutral = false;
 
-    /** @var bool */
-    protected $locked = false;
+    protected bool $locked = false;
 
-    /** @var string|null */
-    protected $originCode;
+    protected ?string $originCode = null;
 
     /** @var array */
     protected $details = [];

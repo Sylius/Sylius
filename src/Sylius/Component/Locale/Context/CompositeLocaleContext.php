@@ -22,7 +22,7 @@ final class CompositeLocaleContext implements LocaleContextInterface
      *
      * @psalm-var PriorityQueue<LocaleContextInterface>
      */
-    private $localeContexts;
+    private PriorityQueue $localeContexts;
 
     public function __construct()
     {

@@ -25,68 +25,49 @@ class User implements UserInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string|null */
-    protected $username;
+    protected ?string $username = null;
 
     /**
      * Normalized representation of a username.
-     *
-     * @var string|null
      */
-    protected $usernameCanonical;
+    protected ?string $usernameCanonical = null;
 
     /**
      * Random data that is used as an additional input to a function that hashes a password.
-     *
-     * @var string
      */
-    protected $salt;
+    protected string $salt;
 
     /**
      * Encrypted password. Must be persisted.
-     *
-     * @var string|null
      */
-    protected $password;
+    protected ?string $password = null;
 
     /**
      * Password before encryption. Used for model validation. Must not be persisted.
-     *
-     * @var string|null
      */
-    protected $plainPassword;
+    protected ?string $plainPassword = null;
 
-    /** @var \DateTimeInterface|null */
-    protected $lastLogin;
+    protected ?\DateTimeInterface $lastLogin = null;
 
     /**
      * Random string sent to the user email address in order to verify it
-     *
-     * @var string|null
      */
-    protected $emailVerificationToken;
+    protected ?string $emailVerificationToken = null;
 
     /**
      * Random string sent to the user email address in order to verify the password resetting request
-     *
-     * @var string|null
      */
-    protected $passwordResetToken;
+    protected ?string $passwordResetToken = null;
 
-    /** @var \DateTimeInterface|null */
-    protected $passwordRequestedAt;
+    protected ?\DateTimeInterface $passwordRequestedAt = null;
 
-    /** @var \DateTimeInterface|null */
-    protected $verifiedAt;
+    protected ?\DateTimeInterface $verifiedAt = null;
 
-    /** @var bool */
-    protected $locked = false;
+    protected bool $locked = false;
 
-    /** @var \DateTimeInterface|null */
-    protected $expiresAt;
+    protected ?\DateTimeInterface $expiresAt = null;
 
-    /** @var \DateTimeInterface|null */
-    protected $credentialsExpireAt;
+    protected ?\DateTimeInterface $credentialsExpireAt = null;
 
     /**
      * We need at least one role to be able to authenticate
@@ -100,16 +81,13 @@ class User implements UserInterface
      *
      * @psalm-var Collection<array-key, UserOAuthInterface>
      */
-    protected $oauthAccounts;
+    protected Collection $oauthAccounts;
 
-    /** @var string|null */
-    protected $email;
+    protected ?string $email = null;
 
-    /** @var string|null */
-    protected $emailCanonical;
+    protected ?string $emailCanonical = null;
 
-    /** @var string|null */
-    protected $encoderName;
+    protected ?string $encoderName = null;
 
     public function __construct()
     {

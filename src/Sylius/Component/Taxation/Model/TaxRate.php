@@ -22,23 +22,17 @@ class TaxRate implements TaxRateInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
-    protected $code;
+    protected ?string $code = null;
 
-    /** @var TaxCategoryInterface */
-    protected $category;
+    protected ?TaxCategoryInterface $category = null;
 
-    /** @var string */
-    protected $name;
+    protected ?string $name = null;
 
-    /** @var float */
-    protected $amount = 0.0;
+    protected ?float $amount = 0.0;
 
-    /** @var bool */
-    protected $includedInPrice = false;
+    protected ?bool $includedInPrice = false;
 
-    /** @var string */
-    protected $calculator;
+    protected ?string $calculator = null;
 
     public function __construct()
     {

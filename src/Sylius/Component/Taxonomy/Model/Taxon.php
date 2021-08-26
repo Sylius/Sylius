@@ -30,33 +30,26 @@ class Taxon implements TaxonInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string|null */
-    protected $code;
+    protected ?string $code = null;
 
-    /** @var TaxonInterface|null */
-    protected $root;
+    protected ?TaxonInterface $root = null;
 
-    /** @var TaxonInterface|null */
-    protected $parent;
+    protected ?TaxonInterface $parent = null;
 
     /**
      * @var Collection|TaxonInterface[]
      *
      * @psalm-var Collection<array-key, TaxonInterface>
      */
-    protected $children;
+    protected Collection $children;
 
-    /** @var int|null */
-    protected $left;
+    protected ?int $left = null;
 
-    /** @var int|null */
-    protected $right;
+    protected ?int $right = null;
 
-    /** @var int|null */
-    protected $level;
+    protected ?int $level = null;
 
-    /** @var int|null */
-    protected $position;
+    protected ?int $position = null;
 
     public function __construct()
     {

@@ -26,17 +26,16 @@ class Customer extends BaseCustomer implements CustomerInterface
      *
      * @psalm-var Collection<array-key, OrderInterface>
      */
-    protected $orders;
+    protected Collection $orders;
 
-    /** @var AddressInterface|null */
-    protected $defaultAddress;
+    protected ?AddressInterface $defaultAddress = null;
 
     /**
      * @var Collection|AddressInterface[]
      *
      * @psalm-var Collection<array-key, AddressInterface>
      */
-    protected $addresses;
+    protected Collection $addresses;
 
     /** @var ShopUserInterface|null */
     protected $user;

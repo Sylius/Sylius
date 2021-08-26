@@ -15,8 +15,7 @@ namespace Sylius\Component\Locale\Context;
 
 final class ImmutableLocaleContext implements LocaleContextInterface
 {
-    /** @var string */
-    private $localeCode;
+    private string $localeCode;
 
     public function __construct(string $localeCode)
     {

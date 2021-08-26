@@ -27,14 +27,11 @@ use Webmozart\Assert\Assert;
 
 final class ShopBasedCartContext implements CartContextInterface
 {
-    /** @var CartContextInterface */
-    private $cartContext;
+    private CartContextInterface $cartContext;
 
-    /** @var ShopperContextInterface */
-    private $shopperContext;
+    private ShopperContextInterface $shopperContext;
 
-    /** @var OrderInterface|null */
-    private $cart;
+    private ?\Sylius\Component\Core\Model\OrderInterface $cart = null;
 
     public function __construct(CartContextInterface $cartContext, ShopperContextInterface $shopperContext)
     {

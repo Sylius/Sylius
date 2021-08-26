@@ -19,8 +19,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class CustomerAfterCheckoutFactory implements CustomerAfterCheckoutFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $baseCustomerFactory;
+    private FactoryInterface $baseCustomerFactory;
 
     public function __construct(FactoryInterface $baseCustomerFactory)
     {

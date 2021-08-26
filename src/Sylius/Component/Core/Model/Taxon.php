@@ -29,7 +29,7 @@ class Taxon extends BaseTaxon implements TaxonInterface, Comparable
      *
      * @psalm-var Collection<array-key, ImageInterface>
      */
-    protected $images;
+    protected Collection $images;
 
     public function __construct()
     {

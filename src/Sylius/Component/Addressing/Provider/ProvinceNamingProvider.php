@@ -20,8 +20,7 @@ use Webmozart\Assert\Assert;
 
 class ProvinceNamingProvider implements ProvinceNamingProviderInterface
 {
-    /** @var RepositoryInterface */
-    private $provinceRepository;
+    private RepositoryInterface $provinceRepository;
 
     public function __construct(RepositoryInterface $provinceRepository)
     {

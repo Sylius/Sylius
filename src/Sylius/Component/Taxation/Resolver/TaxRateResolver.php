@@ -19,8 +19,7 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 class TaxRateResolver implements TaxRateResolverInterface
 {
-    /** @var RepositoryInterface */
-    protected $taxRateRepository;
+    protected RepositoryInterface $taxRateRepository;
 
     /**
      * @var RepositoryInterface

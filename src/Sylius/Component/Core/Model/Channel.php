@@ -23,62 +23,50 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 
 class Channel extends BaseChannel implements ChannelInterface
 {
-    /** @var CurrencyInterface */
-    protected $baseCurrency;
+    protected ?CurrencyInterface $baseCurrency = null;
 
-    /** @var LocaleInterface */
-    protected $defaultLocale;
+    protected ?LocaleInterface $defaultLocale = null;
 
-    /** @var ZoneInterface */
-    protected $defaultTaxZone;
+    protected ?ZoneInterface $defaultTaxZone = null;
 
-    /** @var string */
-    protected $taxCalculationStrategy;
+    protected ?string $taxCalculationStrategy = null;
 
     /**
      * @var Collection|CurrencyInterface[]
      *
      * @psalm-var Collection<array-key, CurrencyInterface>
      */
-    protected $currencies;
+    protected Collection $currencies;
 
     /**
      * @var Collection|LocaleInterface[]
      *
      * @psalm-var Collection<array-key, LocaleInterface>
      */
-    protected $locales;
+    protected Collection $locales;
 
     /**
      * @var Collection|CountryInterface[]
      *
      * @psalm-var Collection<array-key, CountryInterface>
      */
-    protected $countries;
+    protected Collection $countries;
 
-    /** @var string */
-    protected $themeName;
+    protected ?string $themeName = null;
 
-    /** @var string */
-    protected $contactEmail;
+    protected ?string $contactEmail = null;
 
-    /** @var string|null */
-    protected $contactPhoneNumber;
+    protected ?string $contactPhoneNumber = null;
 
-    /** @var bool */
-    protected $skippingShippingStepAllowed = false;
+    protected bool $skippingShippingStepAllowed = false;
 
-    /** @var bool */
-    protected $skippingPaymentStepAllowed = false;
+    protected bool $skippingPaymentStepAllowed = false;
 
-    /** @var bool */
-    protected $accountVerificationRequired = true;
+    protected bool $accountVerificationRequired = true;
 
-    /** @var ShopBillingDataInterface|null */
-    protected $shopBillingData;
+    protected ?ShopBillingDataInterface $shopBillingData = null;
 
-    /** @var TaxonInterface|null */
-    protected $menuTaxon;
+    protected ?TaxonInterface $menuTaxon = null;
 
     public function __construct()
     {

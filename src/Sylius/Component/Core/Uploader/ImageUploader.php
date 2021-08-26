@@ -22,11 +22,9 @@ use Webmozart\Assert\Assert;
 
 class ImageUploader implements ImageUploaderInterface
 {
-    /** @var Filesystem */
-    protected $filesystem;
+    protected Filesystem $filesystem;
 
-    /** @var ImagePathGeneratorInterface */
-    protected $imagePathGenerator;
+    protected ImagePathGeneratorInterface $imagePathGenerator;
 
     public function __construct(
         Filesystem $filesystem,

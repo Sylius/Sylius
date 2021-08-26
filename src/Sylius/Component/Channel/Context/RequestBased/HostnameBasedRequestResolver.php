@@ -19,8 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class HostnameBasedRequestResolver implements RequestResolverInterface
 {
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
+    private ChannelRepositoryInterface $channelRepository;
 
     public function __construct(ChannelRepositoryInterface $channelRepository)
     {

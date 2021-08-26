@@ -20,11 +20,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ChannelFactory implements ChannelFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $decoratedFactory;
+    private FactoryInterface $decoratedFactory;
 
-    /** @var string */
-    private $defaultCalculationStrategy;
+    private string $defaultCalculationStrategy;
 
     public function __construct(FactoryInterface $decoratedFactory, string $defaultCalculationStrategy)
     {

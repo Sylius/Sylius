@@ -18,8 +18,7 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 final class CompositeMethodsResolver implements ShippingMethodsResolverInterface
 {
-    /** @var PrioritizedServiceRegistryInterface */
-    private $resolversRegistry;
+    private PrioritizedServiceRegistryInterface $resolversRegistry;
 
     public function __construct(PrioritizedServiceRegistryInterface $resolversRegistry)
     {

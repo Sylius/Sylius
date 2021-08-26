@@ -23,20 +23,15 @@ class Channel implements ChannelInterface
     /** @var mixed|null */
     protected $id;
 
-    /** @var string|null */
-    protected $code;
+    protected ?string $code = null;
 
-    /** @var string|null */
-    protected $name;
+    protected ?string $name = null;
 
-    /** @var string|null */
-    protected $description;
+    protected ?string $description = null;
 
-    /** @var string|null */
-    protected $hostname;
+    protected ?string $hostname = null;
 
-    /** @var string|null */
-    protected $color;
+    protected ?string $color = null;
 
     public function __construct()
     {

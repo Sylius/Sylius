@@ -29,14 +29,11 @@ class PaymentMethod implements PaymentMethodInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
-    protected $code;
+    protected ?string $code = null;
 
-    /** @var string */
-    protected $environment;
+    protected ?string $environment = null;
 
-    /** @var int */
-    protected $position;
+    protected ?int $position = null;
 
     public function __construct()
     {

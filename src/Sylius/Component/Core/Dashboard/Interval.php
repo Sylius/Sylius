@@ -15,8 +15,7 @@ namespace Sylius\Component\Core\Dashboard;
 
 final class Interval
 {
-    /** @var string */
-    private $interval;
+    private string $interval;
 
     private function __construct(string $interval)
     {

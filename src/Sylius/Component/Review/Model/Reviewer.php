@@ -15,17 +15,13 @@ namespace Sylius\Component\Review\Model;
 
 class Reviewer implements ReviewerInterface
 {
-    /** @var int|null */
-    protected $id;
+    protected ?int $id = null;
 
-    /** @var string|null */
-    protected $email;
+    protected ?string $email = null;
 
-    /** @var string|null */
-    protected $firstName;
+    protected ?string $firstName = null;
 
-    /** @var string|null */
-    protected $lastName;
+    protected ?string $lastName = null;
 
     /**
      * @return int|null
