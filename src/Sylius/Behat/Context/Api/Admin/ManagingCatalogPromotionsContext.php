@@ -117,14 +117,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I delete a ("([^"]+)" catalog promotion)$/
-     */
-    public function iDeleteACatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
-    {
-        $this->client->delete((string) $catalogPromotion->getCode());
-    }
-
-    /**
      * @When I rename it to :name
      */
     public function iRenameItTo(?string $name = null): void
@@ -193,31 +185,6 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::true(
             $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
             'Catalog promotion could not be edited'
-        );
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
-    {
-        Assert::true(
-            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
-            'Catalog Promotion still exists, but it should not'
-        );
-    }
-
-    /**
-     * @Then /^(this catalog promotion) should no longer exist in the registry$/
-     */
-    public function catalogPromotionShouldNoLongerExistInTheRegistry(CatalogPromotionInterface $catalogPromotion): void
-    {
-        $response = $this->client->index();
-        $promotionName = (string) $catalogPromotion->getName();
-
-        Assert::false(
-            $this->responseChecker->hasItemWithValue($response, 'name', $promotionName),
-            sprintf('Catalog promotion with name %s still exist', $promotionName)
         );
     }
 
