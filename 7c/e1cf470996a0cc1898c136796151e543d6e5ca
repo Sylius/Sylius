@@ -1,0 +1,38 @@
+---------------------------------------------------------------------------
+
+by jacquesbh at 2021-01-06T08:01:47Z
+
+I agree, it makes no sense to change it.
+
+---------------------------------------------------------------------------
+
+by stale[bot] at 2021-06-26T03:06:37Z
+
+This issue has been automatically marked as stale because it has not had any recent activity. It will be closed in a week if no further activity occurs. Thank you for your contributions.
+
+---------------------------------------------------------------------------
+
+by jacquesbh at 2021-06-28T15:38:25Z
+
+Do not stale.
+
+ping @Sylius/core-team
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-08-26T09:47:14Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-3"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-08-26T10:13:05Z
+
+Thanks, Maxime! :tada:
