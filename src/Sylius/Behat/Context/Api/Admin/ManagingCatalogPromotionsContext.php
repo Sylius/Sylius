@@ -208,15 +208,13 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddTheRuleConfiguredWithProductAnd(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
     {
-        $rules = [
-            [
+        $rules = [[
                 'type' => CatalogPromotionRuleInterface::CATALOG_PROMOTION_RULE_CONTAINS_VARIANTS_TYPE,
                 'configuration' => [
                     $this->iriConverter->getIriFromItem($firstVariant),
                     $this->iriConverter->getIriFromItem($secondVariant),
                 ],
-            ],
-        ];
+            ]];
 
         $this->client->addRequestData('rules', $rules);
     }
@@ -236,8 +234,6 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function itShouldHaveCodeAndName(string $code, string $name): void
     {
-
-        $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
         Assert::true(
             $this->responseChecker->hasItemWithValues($this->client->index(), ['code' => $code, 'name' => $name]),
             sprintf('Cannot find catalog promotions with code "%s" and name "%s" in the list', $code, $name)

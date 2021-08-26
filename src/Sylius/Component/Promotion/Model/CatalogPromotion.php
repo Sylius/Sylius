@@ -37,11 +37,12 @@ class CatalogPromotion implements CatalogPromotionInterface
      *
      * @psalm-var Collection<array-key, CatalogPromotionRuleInterface>
      */
-    protected $rules;
+    protected Collection $rules;
 
     public function __construct()
     {
         $this->initializeTranslationsCollection();
+
         $this->rules = new ArrayCollection();
     }
 

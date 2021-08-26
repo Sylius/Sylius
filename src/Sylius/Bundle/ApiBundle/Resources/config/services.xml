@@ -95,13 +95,6 @@
             <tag name="sylius.api.command_data_transformer" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\DataTransformer\CatalogPromotionDataTransformer">
-            <argument type="service" id="api_platform.iri_converter" />
-            <argument type="service" id="sylius.custom_factory.catalog_promotion_rule" />
-            <argument type="service" id="sylius.factory.catalog_promotion" />
-            <tag name="api_platform.data_transformer" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface" class="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChanger">
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="sylius.repository.payment_method" />

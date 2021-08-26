@@ -25,6 +25,5 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
-
     </mapped-superclass>
 </doctrine-mapping>
