@@ -22,7 +22,7 @@
             <argument type="service" id="sylius.fixture.example_factory.address" />
         </service>
 
-        <service id="sylius.behat.context.transform.catalog_promotion" class="Sylius\Behat\Context\Transform\CatalogPromotionContext">
+        <service id="Sylius\Behat\Context\Transform\CatalogPromotionContext">
             <argument type="service" id="sylius.repository.catalog_promotion" />
         </service>
 
@@ -167,10 +167,6 @@
             <argument type="service" id="sylius.repository.province" />
             <argument type="service" id="sylius.repository.zone" />
             <argument type="service" id="sylius.repository.zone_member" />
-        </service>
-
-        <service id="Sylius\Behat\Context\Transform\CatalogPromotionContext">
-            <argument type="service" id="sylius.repository.catalog_promotion" />
         </service>
     </services>
 </container>

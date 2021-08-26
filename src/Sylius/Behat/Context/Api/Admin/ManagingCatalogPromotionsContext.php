@@ -109,26 +109,12 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I want to modify the :catalogPromotion catalog promotion
+     * @When /^I rename the ("[^"]+" catalog promotion) to "([^"]+)"$/
      */
-    public function iWantToModifyACatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    public function iRenameTheCatalogPromotionTo(CatalogPromotionInterface $catalogPromotion, string $name): void
     {
         $this->client->buildUpdateRequest($catalogPromotion->getCode());
-    }
-
-    /**
-     * @When I rename it to :name
-     */
-    public function iRenameItTo(?string $name = null): void
-    {
         $this->client->updateRequestData(['name' => $name]);
-    }
-
-    /**
-     * @When I (try to) save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
         $this->client->update();
     }
 
@@ -162,10 +148,7 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @Then the catalog promotion :catalogPromotion should be available in channel :channel
      */
-    public function itShouldBeAvailableInChannel(
-        CatalogPromotionInterface $catalogPromotion,
-        ChannelInterface $channel
-    ): void
+    public function itShouldBeAvailableInChannel(CatalogPromotionInterface $catalogPromotion, ChannelInterface $channel): void
     {
         Assert::true(
             $this->responseChecker->hasValueInCollection(
@@ -196,7 +179,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $response = $this->client->show($catalogPromotion->getCode());
 
         Assert::true(
-            $this->responseChecker->hasValue($response,'name', $name),
+            $this->responseChecker->hasValue($response, 'name', $name),
             sprintf('Catalog promotion\'s name %s does not exist', $name)
         );
     }

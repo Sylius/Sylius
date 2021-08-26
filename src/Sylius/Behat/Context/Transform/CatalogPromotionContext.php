@@ -31,13 +31,13 @@ final class CatalogPromotionContext implements Context
      * @Transform /^"([^"]+)" catalog promotion$/
      * @Transform :catalogPromotion
      */
-    public function getPromotionByName($promotionName): CatalogPromotionInterface
+    public function getCatalogPromotionByName(string $name): CatalogPromotionInterface
     {
-        $catalogPromotion = $this->catalogPromotionRepository->findOneBy(['name' => $promotionName]);
+        $catalogPromotion = $this->catalogPromotionRepository->findOneBy(['name' => $name]);
 
         Assert::notNull(
             $catalogPromotion,
-            sprintf('Catalog Promotion with name "%s" does not exist', $promotionName)
+            sprintf('Catalog promotion with name "%s" does not exist', $name)
         );
 
         return $catalogPromotion;
