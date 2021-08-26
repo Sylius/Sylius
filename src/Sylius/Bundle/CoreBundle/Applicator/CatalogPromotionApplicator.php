@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-final class ProductCatalogPromotionApplicator implements ProductCatalogPromotionApplicatorInterface
+final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInterface
 {
     public function applyPercentageDiscount(ProductInterface $product, float $discount): void
     {

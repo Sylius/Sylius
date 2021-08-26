@@ -16,20 +16,20 @@ namespace spec\Sylius\Bundle\CoreBundle\Processor;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Applicator\ProductCatalogPromotionApplicatorInterface;
-use Sylius\Bundle\CoreBundle\Processor\ProductCatalogPromotionProcessorInterface;
+use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
+use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
-final class DummyProductCatalogPromotionProcessorSpec extends ObjectBehavior
+final class DummyCatalogPromotionProcessorSpec extends ObjectBehavior
 {
     function let(
         ProductRepositoryInterface $productRepository,
         TaxonRepositoryInterface $taxonRepository,
-        ProductCatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
+        CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
         EntityManagerInterface $entityManager
     ): void {
         $this->beConstructedWith(
@@ -40,15 +40,15 @@ final class DummyProductCatalogPromotionProcessorSpec extends ObjectBehavior
         );
     }
 
-    function it_implements_product_catalog_promotion_processor_interface(): void
+    function it_implements_catalog_promotion_processor_interface(): void
     {
-        $this->shouldImplement(ProductCatalogPromotionProcessorInterface::class);
+        $this->shouldImplement(CatalogPromotionProcessorInterface::class);
     }
 
     function it_always_applies_50_percent_catalog_promotion_on_t_shirts_products(
         ProductRepositoryInterface $productRepository,
         TaxonRepositoryInterface $taxonRepository,
-        ProductCatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
+        CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
         EntityManagerInterface $entityManager,
         CatalogPromotionInterface $catalogPromotion,
         TaxonInterface $taxon,

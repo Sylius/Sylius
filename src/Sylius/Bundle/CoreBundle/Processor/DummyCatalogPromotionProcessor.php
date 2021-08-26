@@ -14,32 +14,32 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Processor;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Bundle\CoreBundle\Applicator\ProductCatalogPromotionApplicatorInterface;
+use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
-final class DummyProductCatalogPromotionProcessor implements ProductCatalogPromotionProcessorInterface
+final class DummyCatalogPromotionProcessor implements CatalogPromotionProcessorInterface
 {
     private ProductRepositoryInterface $productRepository;
 
     private TaxonRepositoryInterface $taxonRepository;
 
-    private ProductCatalogPromotionApplicatorInterface $productCatalogPromotionApplicator;
+    private CatalogPromotionApplicatorInterface $catalogPromotionApplicator;
 
     private EntityManagerInterface $entityManager;
 
     public function __construct(
         ProductRepositoryInterface $productRepository,
         TaxonRepositoryInterface $taxonRepository,
-        ProductCatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
+        CatalogPromotionApplicatorInterface $catalogPromotionApplicator,
         EntityManagerInterface $entityManager
     ) {
         $this->productRepository = $productRepository;
         $this->taxonRepository = $taxonRepository;
-        $this->productCatalogPromotionApplicator = $productCatalogPromotionApplicator;
+        $this->catalogPromotionApplicator = $catalogPromotionApplicator;
         $this->entityManager = $entityManager;
     }
 
@@ -54,7 +54,7 @@ final class DummyProductCatalogPromotionProcessor implements ProductCatalogPromo
         $products = $this->productRepository->findByTaxon($taxon);
         /** @var ProductInterface $product */
         foreach ($products as $product) {
-            $this->productCatalogPromotionApplicator->applyPercentageDiscount($product, 0.5);
+            $this->catalogPromotionApplicator->applyPercentageDiscount($product, 0.5);
         }
 
         $this->entityManager->flush();

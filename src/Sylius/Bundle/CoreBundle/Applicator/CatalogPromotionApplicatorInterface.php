@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Processor;
+namespace Sylius\Bundle\CoreBundle\Applicator;
 
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 
-interface ProductCatalogPromotionProcessorInterface
+interface CatalogPromotionApplicatorInterface
 {
-    public function process(CatalogPromotionInterface $catalogPromotion): void;
+    public function applyPercentageDiscount(ProductInterface $product, float $discount): void;
 }

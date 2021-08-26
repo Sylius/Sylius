@@ -16,16 +16,16 @@ namespace spec\Sylius\Bundle\CoreBundle\Applicator;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Applicator\ProductCatalogPromotionApplicatorInterface;
+use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-final class ProductCatalogPromotionApplicatorSpec extends ObjectBehavior
+final class CatalogPromotionApplicatorSpec extends ObjectBehavior
 {
-    function it_implements_product_catalog_promotion_applicator_interface(): void
+    function it_implements_catalog_promotion_applicator_interface(): void
     {
-        $this->shouldImplement(ProductCatalogPromotionApplicatorInterface::class);
+        $this->shouldImplement(CatalogPromotionApplicatorInterface::class);
     }
 
     function it_applies_percentage_discount_on_all_products_variants(

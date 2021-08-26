@@ -13,22 +13,22 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Listener;
 
-use Sylius\Bundle\CoreBundle\Processor\ProductCatalogPromotionProcessorInterface;
+use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CatalogPromotionUpdateListener
 {
-    private ProductCatalogPromotionProcessorInterface $productCatalogPromotionProcessor;
+    private CatalogPromotionProcessorInterface $catalogPromotionProcessor;
 
     private RepositoryInterface $catalogPromotionRepository;
 
     public function __construct(
-        ProductCatalogPromotionProcessorInterface $productCatalogPromotionProcessor,
+        CatalogPromotionProcessorInterface $catalogPromotionProcessor,
         RepositoryInterface $catalogPromotionRepository
     ) {
-        $this->productCatalogPromotionProcessor = $productCatalogPromotionProcessor;
+        $this->catalogPromotionProcessor = $catalogPromotionProcessor;
         $this->catalogPromotionRepository = $catalogPromotionRepository;
     }
 
@@ -40,6 +40,6 @@ final class CatalogPromotionUpdateListener
             return;
         }
 
-        $this->productCatalogPromotionProcessor->process($catalogPromotion);
+        $this->catalogPromotionProcessor->process($catalogPromotion);
     }
 }
