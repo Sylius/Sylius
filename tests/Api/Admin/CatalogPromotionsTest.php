@@ -108,25 +108,6 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         $this->assertResponse($response, 'admin/catalog_promotion/put_catalog_promotion_response', Response::HTTP_OK);
     }
 
-    /** @test */
-    public function it_allows_admin_to_delete_catalog_promotion(): void
-    {
-        $catalogPromotion = $this->loadFixturesAndGetCatalogPromotion();
-        $header = $this->getLoggedHeader();
-
-        $this->client->request(
-            'DELETE',
-            sprintf('/api/v2/admin/catalog-promotions/%s', $catalogPromotion->getCode()),
-            [],
-            [],
-            $header
-        );
-
-        $response = $this->client->getResponse();
-
-        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
-    }
-
     private function loadFixturesAndGetCatalogPromotion(): CatalogPromotionInterface
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'catalog_promotion.yaml']);
