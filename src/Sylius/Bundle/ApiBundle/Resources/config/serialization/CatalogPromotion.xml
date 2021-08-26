@@ -44,5 +44,9 @@
             <group>admin:catalog_promotion:read</group>
             <group>admin:catalog_promotion:create</group>
         </attribute>
+        <attribute name="rules">
+            <group>admin:catalog_promotion:read</group>
+            <group>admin:catalog_promotion:create</group>
+        </attribute>
     </class>
 </serializer>

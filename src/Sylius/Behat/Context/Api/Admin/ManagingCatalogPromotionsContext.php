@@ -209,12 +209,12 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddTheRuleConfiguredWithProductAnd(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
     {
         $rules = [[
-                'type' => CatalogPromotionRuleInterface::CATALOG_PROMOTION_RULE_CONTAINS_VARIANTS_TYPE,
-                'configuration' => [
-                    $this->iriConverter->getIriFromItem($firstVariant),
-                    $this->iriConverter->getIriFromItem($secondVariant),
-                ],
-            ]];
+            'type' => CatalogPromotionRuleInterface::CATALOG_PROMOTION_RULE_CONTAINS_VARIANTS_TYPE,
+            'configuration' => [
+                $this->iriConverter->getIriFromItem($firstVariant),
+                $this->iriConverter->getIriFromItem($secondVariant),
+            ],
+        ]];
 
         $this->client->addRequestData('rules', $rules);
     }
