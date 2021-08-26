@@ -56,10 +56,6 @@
                     <attribute name="groups">admin:catalog_promotion:update</attribute>
                 </attribute>
             </itemOperation>
-
-            <itemOperation name="admin_delete">
-                <attribute name="method">DELETE</attribute>
-            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />
