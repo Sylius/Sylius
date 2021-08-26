@@ -139,6 +139,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+<<<<<<< HEAD
      * @When I rename the :catalogPromotion catalog promotion to :name
      */
     public function iRenameTheCatalogPromotionTo(CatalogPromotionInterface $catalogPromotion, string $name): void
