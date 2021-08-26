@@ -3,6 +3,9 @@
 
 sylius_promotion:
     resources:
+        catalog_promotion:
+            classes:
+                model: Sylius\Component\Core\Model\CatalogPromotion
         promotion_subject:
             classes:
                 model: "%sylius.model.order.class%"

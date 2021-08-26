@@ -164,5 +164,9 @@
             <argument type="service" id="sylius.repository.zone" />
             <argument type="service" id="sylius.repository.zone_member" />
         </service>
+
+        <service id="Sylius\Behat\Context\Transform\CatalogPromotionContext">
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+        </service>
     </services>
 </container>

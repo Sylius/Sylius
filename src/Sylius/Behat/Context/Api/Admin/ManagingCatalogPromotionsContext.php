@@ -13,9 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
@@ -25,15 +28,18 @@ final class ManagingCatalogPromotionsContext implements Context
     private ApiClientInterface $client;
     private ResponseCheckerInterface $responseChecker;
     private MessageBusInterface $messageBus;
+    private IriConverterInterface $iriConverter;
 
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        MessageBusInterface $messageBus
+        MessageBusInterface $messageBus,
+        IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->messageBus = $messageBus;
+        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -87,6 +93,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I make it available in channel :channel
+     */
+    public function iMakeItAvailableInChannel(ChannelInterface $channel): void
+    {
+        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromItem($channel)]);
+    }
+
+    /**
      * @When I add it
      */
     public function iAddIt(): void
@@ -119,5 +133,22 @@ final class ManagingCatalogPromotionsContext implements Context
     public function thisCatalogPromotionShouldBeUsable(): void
     {
         Assert::isInstanceOf($this->messageBus->getDispatchedMessages()[0]['message'], CatalogPromotionUpdated::class);
+    }
+
+    /**
+     * @Then the catalog promotion :catalogPromotion should be available in channel :channel
+     */
+    public function itShouldBeAvailableInChannel(
+        CatalogPromotionInterface $catalogPromotion,
+        ChannelInterface $channel
+    ): void {
+        Assert::true(
+            $this->responseChecker->hasValueInCollection(
+                $this->client->show($catalogPromotion->getCode()),
+                'channels',
+                $this->iriConverter->getIriFromItem($channel)
+            ),
+            sprintf('Catalog promotion is not assigned to %s channel', $channel->getName())
+        );
     }
 }

@@ -27,7 +27,7 @@ Feature: Creating a catalog promotion
         And it should have "winter_sale" code and "Winter sale" name
         And this catalog promotion should be usable
 
-    @todo @api
+    @api
     Scenario: Creating a catalog promotion for channel
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -36,5 +36,5 @@ Feature: Creating a catalog promotion
         And I add it
         Then there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name
-        And it should be available in channel "United States"
+        And the catalog promotion "Winter sale" should be available in channel "United States"
         And this catalog promotion should be usable
