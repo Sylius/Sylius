@@ -13,16 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Promotion\Model;
 
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
-interface CatalogPromotionInterface extends ResourceInterface, TranslatableInterface
+interface CatalogPromotionInterface extends ResourceInterface, CodeAwareInterface, TranslatableInterface
 {
-    public function getCode(): ?string;
-
-    public function setCode(?string $code): void;
-
     public function getName(): ?string;
 
     public function setName(?string $name): void;
