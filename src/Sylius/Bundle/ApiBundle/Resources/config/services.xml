@@ -95,6 +95,10 @@
             <tag name="sylius.api.command_data_transformer" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\DataTransformer\CatalogPromotionDataTransformer">
+            <tag name="api_platform.data_transformer" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface" class="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChanger">
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="sylius.repository.payment_method" />

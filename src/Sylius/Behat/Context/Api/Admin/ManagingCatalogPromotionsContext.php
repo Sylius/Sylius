@@ -134,6 +134,30 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I want to create new catalog promotion
+     */
+    public function iWantToCreateNewCatalogPromotion(): void
+    {
+        $this->client->buildCreateRequest();
+    }
+
+    /**
+     * @When I specify its code as :code
+     */
+    public function iSpecifyItsCodeAs(string $code): void
+    {
+        $this->client->addRequestData('code', $code);
+    }
+
+    /**
+     * @When I name it :name
+     */
+    public function iNameIt(string $name): void
+    {
+        $this->client->addRequestData('name', $name);
+    }
+
+    /**
      * @When I add it
      */
     public function iAddIt(): void
@@ -163,6 +187,45 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When I save my changes
+     * @When I add the :type catalog promotion action configured with amount of :amount
+     */
+    public function iAddTheCatalogPromotionActionConfiguredWithAmountOf(string $type, string $amount): void
+    {
+        $actions = [
+            [
+                'type' => $type,
+                'configuration' => [
+                    'amount' => $amount
+                ],
+            ],
+        ];
+
+        $this->client->addRequestData('actions', $actions);
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully created
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
+    {
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 201);
+    }
+
+    /**
+     * @Then the :catalogPromotionName catalog promotion should appear in the registry with :catalogPromotionAction action
+     */
+    public function theCatalogPromotionShouldAppearInTheRegistry(string $catalogPromotionName, string $catalogPromotionAction): void
+    {
+        $this->client->show($this->responseChecker->getResponseContent($this->client->getLastResponse())['code']);
+
+        $catalogPromotion = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+
+        Assert::same($catalogPromotion['name'], $catalogPromotionName);
+        Assert::same($catalogPromotion['actions'][0]['type'], $catalogPromotionAction);
+    }
+
+    /**
+     * @Then there should be :amount new catalog promotion on the list
      */
     public function iSaveMyChanges(): void
     {

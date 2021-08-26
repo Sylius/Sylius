@@ -29,6 +29,8 @@ use Sylius\Component\Promotion\Model\CatalogPromotionRule;
 use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionTranslation;
 use Sylius\Component\Promotion\Model\CatalogPromotionTranslationInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionAction;
+use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\Promotion;
 use Sylius\Component\Promotion\Model\PromotionAction;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
@@ -142,6 +144,23 @@ final class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(CatalogPromotionRule::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(CatalogPromotionRuleInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('form')->defaultValue(DefaultResourceType::class)->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('catalog_promotion_rule')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(CatalogPromotionAction::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(CatalogPromotionActionInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()

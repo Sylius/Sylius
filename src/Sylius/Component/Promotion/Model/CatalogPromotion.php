@@ -39,11 +39,15 @@ class CatalogPromotion implements CatalogPromotionInterface
      */
     protected Collection $rules;
 
+    protected Collection $actions;
+
     public function __construct()
     {
         $this->initializeTranslationsCollection();
 
         $this->rules = new ArrayCollection();
+
+        $this->actions = new ArrayCollection();
     }
 
     public function getId()
@@ -127,5 +131,34 @@ class CatalogPromotion implements CatalogPromotionInterface
     {
         $rule->setCatalogPromotion(null);
         $this->rules->removeElement($rule);
+    }
+
+    public function getActions(): Collection
+    {
+        return $this->actions;
+    }
+
+    public function hasActions(): bool
+    {
+        return !$this->actions->isEmpty();
+    }
+
+    public function hasAction(CatalogPromotionActionInterface $action): bool
+    {
+        return $this->actions->contains($action);
+    }
+
+    public function addAction(CatalogPromotionActionInterface $action): void
+    {
+        if (!$this->hasAction($action)) {
+            $action->setCatalogPromotion($this);
+            $this->actions->add($action);
+        }
+    }
+
+    public function removeAction(CatalogPromotionActionInterface $action): void
+    {
+        $action->setCatalogPromotion(null);
+        $this->actions->removeElement($action);
     }
 }
