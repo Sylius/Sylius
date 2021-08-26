@@ -109,11 +109,35 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I want to modify the :catalogPromotion catalog promotion
+     */
+    public function iWantToModifyACatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->client->buildUpdateRequest($catalogPromotion->getCode());
+    }
+
+    /**
      * @When /^I delete a ("([^"]+)" catalog promotion)$/
      */
-    public function iDeletePromotion(CatalogPromotionInterface $catalogPromotion): void
+    public function iDeleteACatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
         $this->client->delete((string) $catalogPromotion->getCode());
+    }
+
+    /**
+     * @When I rename it to :name
+     */
+    public function iRenameItTo(?string $name = null): void
+    {
+        $this->client->updateRequestData(['name' => $name]);
+    }
+
+    /**
+     * @When I (try to) save my changes
+     */
+    public function iSaveMyChanges(): void
+    {
+        $this->client->update();
     }
 
     /**
@@ -149,7 +173,8 @@ final class ManagingCatalogPromotionsContext implements Context
     public function itShouldBeAvailableInChannel(
         CatalogPromotionInterface $catalogPromotion,
         ChannelInterface $channel
-    ): void {
+    ): void
+    {
         Assert::true(
             $this->responseChecker->hasValueInCollection(
                 $this->client->show($catalogPromotion->getCode()),
@@ -157,6 +182,17 @@ final class ManagingCatalogPromotionsContext implements Context
                 $this->iriConverter->getIriFromItem($channel)
             ),
             sprintf('Catalog promotion is not assigned to %s channel', $channel->getName())
+        );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
+    {
+        Assert::true(
+            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
+            'Catalog promotion could not be edited'
         );
     }
 
@@ -174,7 +210,7 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @Then /^(this catalog promotion) should no longer exist in the registry$/
      */
-    public function promotionShouldNotExistInTheRegistry(CatalogPromotionInterface $catalogPromotion): void
+    public function catalogPromotionShouldNoLongerExistInTheRegistry(CatalogPromotionInterface $catalogPromotion): void
     {
         $response = $this->client->index();
         $promotionName = (string) $catalogPromotion->getName();
@@ -182,6 +218,19 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::false(
             $this->responseChecker->hasItemWithValue($response, 'name', $promotionName),
             sprintf('Catalog promotion with name %s still exist', $promotionName)
+        );
+    }
+
+    /**
+     * @Then /^(this catalog promotion) name should be "([^"]+)"$/
+     */
+    public function thisCatalogPromotionNameShouldBe(CatalogPromotionInterface $catalogPromotion, string $name): void
+    {
+        $response = $this->client->show($catalogPromotion->getCode());
+
+        Assert::true(
+            $this->responseChecker->hasValue($response,'name', $name),
+            sprintf('Catalog promotion\'s name %s does not exist', $name)
         );
     }
 }
