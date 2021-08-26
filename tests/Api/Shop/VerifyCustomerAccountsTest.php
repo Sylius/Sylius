@@ -34,7 +34,7 @@ final class VerifyCustomerAccountsTest extends JsonApiTestCase
 
         $filesystem->remove($emailChecker->getSpoolDirectory());
 
-        $loadedData = $this->loadFixturesFromFiles(['cart.yaml', 'authentication/customer.yaml']);
+        $loadedData = $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'authentication/customer.yaml']);
         $token = $this->logInShopUser('oliver@doe.com');
 
         $this->client->request(
@@ -69,7 +69,7 @@ final class VerifyCustomerAccountsTest extends JsonApiTestCase
 
         $filesystem->remove($emailChecker->getSpoolDirectory());
 
-        $this->loadFixturesFromFiles(['cart.yaml', 'authentication/customer.yaml']);
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'authentication/customer.yaml']);
 
         $this->client->request(
             'POST',

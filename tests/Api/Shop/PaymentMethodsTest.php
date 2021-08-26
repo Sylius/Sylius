@@ -24,7 +24,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_available_payment_methods(): void
     {
-        $this->loadFixturesFromFiles(['cart.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'payment_method.yaml']);
 
         $tokenValue = 'nAWw2jewpA';
 

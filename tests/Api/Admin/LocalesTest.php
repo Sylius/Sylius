@@ -21,7 +21,7 @@ final class LocalesTest extends JsonApiTestCase
     /** @test */
     public function it_gets_locales_as_logged_in_administrator(): void
     {
-        $this->loadFixturesFromFiles(['cart.yaml', 'authentication/api_administrator.yaml']);
+        $this->loadFixturesFromFiles(['channel.yaml', 'authentication/api_administrator.yaml']);
 
         $this->client->request(
             'POST',
@@ -53,7 +53,7 @@ final class LocalesTest extends JsonApiTestCase
     /** @test */
     public function it_denies_access_to_a_locales_list_for_not_authenticated_user(): void
     {
-        $this->loadFixturesFromFiles(['cart.yaml', 'authentication/api_administrator.yaml']);
+        $this->loadFixturesFromFiles(['channel.yaml', 'authentication/api_administrator.yaml']);
 
         $this->client->request('GET', '/api/v2/admin/locales');
 

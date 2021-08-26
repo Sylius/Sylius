@@ -26,7 +26,7 @@ final class PaymentsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_payment_from_placed_order(): void
     {
-        $this->loadFixturesFromFiles(['authentication/customer.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles(['authentication/customer.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
         $loginData = $this->logInShopUser('oliver@doe.com');
         $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
