@@ -48,6 +48,53 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I want to create a new catalog promotion
+     */
+    public function iWantToCreateANewCatalogPromotion(): void
+    {
+        $this->client->buildCreateRequest();
+    }
+
+    /**
+     * @When I specify its :field as :value
+     * @When I :field it :value
+     */
+    public function iSpecifyItsAs(string $field, string $value): void
+    {
+        $this->client->addRequestData($field, $value);
+    }
+
+    /**
+     * @When I specify its :field as :value in :localeCode
+     */
+    public function iSpecifyItsAsIn(string $field, string $value, string $localeCode): void
+    {
+        $data = ['translations' => [$localeCode => ['locale' => $localeCode]]];
+        $data['translations'][$localeCode][$field] = $value;
+
+        $this->client->updateRequestData($data);
+    }
+
+    /**
+     * @When I describe it as :description in :localeCode
+     */
+    public function iDescribeItAsIn(string $description, string $localeCode): void
+    {
+        $data = ['translations' => [$localeCode => ['locale' => $localeCode]]];
+        $data['translations'][$localeCode]['description'] = $description;
+
+        $this->client->updateRequestData($data);
+    }
+
+    /**
+     * @When I add it
+     */
+    public function iAddIt(): void
+    {
+        $this->client->create();
+    }
+
+    /**
      * @Then there should be :amount new catalog promotion on the list
      */
     public function thereShouldBeNewCatalogPromotionOnTheList(int $amount): void

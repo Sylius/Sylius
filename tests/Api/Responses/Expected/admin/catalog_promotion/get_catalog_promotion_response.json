@@ -4,5 +4,14 @@
     "@type": "CatalogPromotion",
     "id": @integer@,
     "name": "Mugs discount",
-    "code": "mugs_discount"
+    "code": "mugs_discount",
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/catalog-promotion-translations\/@integer@",
+            "@type": "CatalogPromotionTranslation",
+            "id": @integer@,
+            "label": "Mugs discount",
+            "description": @string@
+        }
+    }
 }
