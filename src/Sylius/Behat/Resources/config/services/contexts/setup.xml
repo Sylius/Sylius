@@ -292,5 +292,11 @@
         <service id="sylius.behat.context.setup.calendar" class="Sylius\Behat\Context\Setup\CalendarContext">
             <argument>%kernel.project_dir%</argument>
         </service>
+
+        <service id="sylius.behat.context.setup.catalog_promotion" class="Sylius\Behat\Context\Setup\CatalogPromotionContext">
+            <argument type="service" id="sylius.factory.catalog_promotion" />
+            <argument type="service" id="sylius.manager.catalog_promotion" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
     </services>
 </container>

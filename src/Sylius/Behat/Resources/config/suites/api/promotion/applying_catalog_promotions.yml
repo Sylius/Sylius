@@ -1,0 +1,24 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        api_applying_catalog_promotions:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.setup.catalog_promotion
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.product_taxon
+                - sylius.behat.context.setup.taxonomy
+
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.taxon
+
+                - sylius.behat.context.api.shop.product
+
+            filters:
+                tags: "@applying_catalog_promotions && @api"
