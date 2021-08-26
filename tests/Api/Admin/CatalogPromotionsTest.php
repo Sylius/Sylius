@@ -23,7 +23,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     use AdminUserLoginTrait;
 
     /** @test */
-    public function it_allows_admin_to_get_catalog_promotions(): void
+    public function it_gets_catalog_promotions(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'catalog_promotion.yaml']);
         $header = $this->getLoggedHeader();
@@ -42,7 +42,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_allows_admin_to_get_catalog_promotion(): void
+    public function it_gets_catalog_promotion(): void
     {
         $catalogPromotion = $this->loadFixturesAndGetCatalogPromotion();
         $header = $this->getLoggedHeader();
@@ -61,9 +61,9 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_allows_admin_to_create_a_catalog_promotion(): void
+    public function it_creates_a_catalog_promotion(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'catalog_promotion.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
         $header = $this->getLoggedHeader();
 
         $this->client->request(
@@ -92,7 +92,58 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_allows_admin_to_update_catalog_promotion(): void
+    public function it_does_not_create_a_catalog_promotion_without_required_data(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
+        $header = $this->getLoggedHeader();
+
+        $this->client->request(
+            'POST',
+            '/api/v2/admin/catalog-promotions',
+            [],
+            [],
+            $header,
+            json_encode([], JSON_THROW_ON_ERROR)
+        );
+
+        $response = $this->client->getResponse();
+
+        $this->assertResponse(
+            $response,
+            'admin/catalog_promotion/post_catalog_promotion_without_required_data_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY
+        );
+    }
+
+    /** @test */
+    public function it_does_not_create_a_catalog_promotion_with_taken_code(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'catalog_promotion.yaml']);
+        $header = $this->getLoggedHeader();
+
+        $this->client->request(
+            'POST',
+            '/api/v2/admin/catalog-promotions',
+            [],
+            [],
+            $header,
+            json_encode([
+                'name' => 'Mugs discount',
+                'code' => 'mugs_discount',
+            ], JSON_THROW_ON_ERROR)
+        );
+
+        $response = $this->client->getResponse();
+
+        $this->assertResponse(
+            $response,
+            'admin/catalog_promotion/post_catalog_promotion_with_taken_code_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY
+        );
+    }
+
+    /** @test */
+    public function it_updates_catalog_promotion(): void
     {
         $catalogPromotion = $this->loadFixturesAndGetCatalogPromotion();
         $header = $this->getLoggedHeader();
