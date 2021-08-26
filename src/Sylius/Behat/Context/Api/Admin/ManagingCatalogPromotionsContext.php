@@ -139,7 +139,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-<<<<<<< HEAD
      * @When I rename the :catalogPromotion catalog promotion to :name
      */
     public function iRenameTheCatalogPromotionTo(CatalogPromotionInterface $catalogPromotion, string $name): void
@@ -235,8 +234,6 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function itShouldHaveCodeAndName(string $code, string $name): void
     {
-
-        $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
         Assert::true(
             $this->responseChecker->hasItemWithValues($this->client->index(), ['code' => $code, 'name' => $name]),
             sprintf('Cannot find catalog promotions with code "%s" and name "%s" in the list', $code, $name)

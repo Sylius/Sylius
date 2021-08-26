@@ -42,6 +42,7 @@ class CatalogPromotion implements CatalogPromotionInterface
     public function __construct()
     {
         $this->initializeTranslationsCollection();
+
         $this->rules = new ArrayCollection();
     }
 
