@@ -1,7 +1,8 @@
-Sylius\Component\Promotion\Model\CatalogPromotion:
+Sylius\Component\Core\Model\CatalogPromotion:
     catalog_promotion:
         name: 'Mugs discount'
         code: 'mugs_discount'
+        channels: ['@channel_web']
         translations: ['@catalog_promotion_translation']
 
 Sylius\Component\Promotion\Model\CatalogPromotionTranslation:

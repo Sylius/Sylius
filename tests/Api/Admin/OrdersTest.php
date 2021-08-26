@@ -26,7 +26,7 @@ final class OrdersTest extends JsonApiTestCase
     /** @test */
     public function it_gets_an_order(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
         $token = $this->logInAdminUser('api@example.com');
         $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');

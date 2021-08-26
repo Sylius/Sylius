@@ -5,6 +5,9 @@
     "id": @integer@,
     "name": "T-Shirts discount",
     "code": "tshirts_discount",
+    "channels": [
+        "\/api\/v2\/admin\/channels\/WEB"
+    ],
     "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/catalog-promotion-translations\/@integer@",

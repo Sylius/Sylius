@@ -5,6 +5,9 @@
     "id": @integer@,
     "name": "new_promotion",
     "code": "new_code",
+    "channels": [
+        "\/api\/v2\/admin\/channels\/WEB"
+    ],
     "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/catalog-promotion-translations\/@integer@",

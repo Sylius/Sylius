@@ -5,6 +5,9 @@
     "id": @integer@,
     "name": "Mugs discount",
     "code": "mugs_discount",
+    "channels": [
+        "\/api\/v2\/admin\/channels\/WEB"
+    ],
     "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/catalog-promotion-translations\/@integer@",

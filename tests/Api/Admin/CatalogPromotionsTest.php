@@ -25,7 +25,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_allows_admin_to_get_catalog_promotions(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'catalog_promotion.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'catalog_promotion.yaml']);
         $header = $this->getLoggedHeader();
 
         $this->client->request(
@@ -63,7 +63,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_allows_admin_to_create_a_catalog_promotion(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'catalog_promotion.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'catalog_promotion.yaml']);
         $header = $this->getLoggedHeader();
 
         $this->client->request(
@@ -75,6 +75,9 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             json_encode([
                 'name' => 'T-Shirts discount',
                 'code' => 'tshirts_discount',
+                'channels' => [
+                    '/api/v2/admin/channels/WEB',
+                ],
                 'translations' => ['en_US' => [
                     'locale' => 'en_US',
                     'label' => 'T-Shirts discount',
@@ -110,7 +113,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
 
     private function loadFixturesAndGetCatalogPromotion(): CatalogPromotionInterface
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'catalog_promotion.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'catalog_promotion.yaml']);
 
         /** @var CatalogPromotionInterface $catalogPromotion */
         $catalogPromotion = $fixtures['catalog_promotion'];
