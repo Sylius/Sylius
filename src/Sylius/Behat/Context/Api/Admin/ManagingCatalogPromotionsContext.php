@@ -23,6 +23,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
@@ -209,7 +210,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $rules = [
             [
-                'type' => 'contains variants',
+                'type' => CatalogPromotionRuleInterface::CATALOG_PROMOTION_RULE_CONTAINS_VARIANTS_TYPE,
                 'configuration' => [
                     $this->iriConverter->getIriFromItem($firstVariant),
                     $this->iriConverter->getIriFromItem($secondVariant),

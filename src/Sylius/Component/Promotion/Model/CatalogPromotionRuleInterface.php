@@ -17,7 +17,13 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface CatalogPromotionRuleInterface extends ResourceInterface
 {
+    public const CATALOG_PROMOTION_RULE_CONTAINS_VARIANTS_TYPE = 'contains_variants';
+
     public function setType(?string $type): void;
+
+    public function getType(): ?string;
+
+    public function getConfiguration(): array;
 
     public function setConfiguration(array $configuration): void;
 

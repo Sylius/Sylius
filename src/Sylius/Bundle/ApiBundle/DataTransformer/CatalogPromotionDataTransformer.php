@@ -17,23 +17,27 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use Sylius\Component\Promotion\Factory\CatalogPromotionRuleFactoryInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotion;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class CatalogPromotionDataTransformer implements DataTransformerInterface
 {
     private IriConverterInterface $iriConverter;
     private CatalogPromotionRuleFactoryInterface $catalogPromotionRuleFactory;
+    private FactoryInterface $catalogPromotionFactory;
 
     public function __construct(
         IriConverterInterface $iriConverter,
-        CatalogPromotionRuleFactoryInterface $catalogPromotionRuleFactory
+        CatalogPromotionRuleFactoryInterface $catalogPromotionRuleFactory,
+        FactoryInterface $catalogPromotionFactory
     ) {
         $this->iriConverter = $iriConverter;
         $this->catalogPromotionRuleFactory = $catalogPromotionRuleFactory;
+        $this->catalogPromotionFactory = $catalogPromotionFactory;
     }
 
     public function transform($object, string $to, array $context = [])
     {
-        $catalogPromotion = new CatalogPromotion();
+        $catalogPromotion = $this->catalogPromotionFactory->createNew();
         $catalogPromotion->setCode($object->getCode());
         $catalogPromotion->setName($object->getName());
 
