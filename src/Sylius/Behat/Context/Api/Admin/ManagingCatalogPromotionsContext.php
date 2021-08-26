@@ -109,6 +109,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I delete a ("([^"]+)" catalog promotion)$/
+     */
+    public function iDeletePromotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->client->delete((string) $catalogPromotion->getCode());
+    }
+
+    /**
      * @Then there should be :amount new catalog promotion on the list
      */
     public function thereShouldBeNewCatalogPromotionOnTheList(int $amount): void
@@ -149,6 +157,31 @@ final class ManagingCatalogPromotionsContext implements Context
                 $this->iriConverter->getIriFromItem($channel)
             ),
             sprintf('Catalog promotion is not assigned to %s channel', $channel->getName())
+        );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Catalog Promotion still exists, but it should not'
+        );
+    }
+
+    /**
+     * @Then /^(this catalog promotion) should no longer exist in the registry$/
+     */
+    public function promotionShouldNotExistInTheRegistry(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $response = $this->client->index();
+        $promotionName = (string) $catalogPromotion->getName();
+
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($response, 'name', $promotionName),
+            sprintf('Catalog promotion with name %s still exist', $promotionName)
         );
     }
 }

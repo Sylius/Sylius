@@ -37,6 +37,12 @@
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
+        <service id="sylius.behat.context.setup.catalog_promotion" class="Sylius\Behat\Context\Setup\CatalogPromotionContext">
+            <argument type="service" id="sylius.test.factory.catalog_promotion" />
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
+
         <service id="sylius.behat.context.setup.checkout" class="Sylius\Behat\Context\Setup\CheckoutContext">
             <argument type="service" id="sylius.repository.order"/>
             <argument type="service" id="sylius.repository.shipping_method" />

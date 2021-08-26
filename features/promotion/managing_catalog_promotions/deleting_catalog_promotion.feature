@@ -9,7 +9,7 @@ Feature: Deleting a catalog promotion
         And there is a catalog promotion "Christmas sale"
         And I am logged in as an administrator
 
-    @ui
+    @api
     Scenario: Deleting a catalog promotion
         When I delete a "Christmas sale" catalog promotion
         Then I should be notified that it has been successfully deleted

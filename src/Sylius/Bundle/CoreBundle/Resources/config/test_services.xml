@@ -54,7 +54,7 @@
         </service>
 
         <service id="sylius.test.factory.catalog_promotion" class="Sylius\Component\Core\Test\Factory\TestCatalogPromotionFactory">
-            <argument type="service" id="sylius.factory.promotion" />
+            <argument type="service" id="sylius.factory.catalog_promotion" />
         </service>
 
         <service id="sylius.liip.filter_service" alias="liip_imagine.service.filter" public="true" />
