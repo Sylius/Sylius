@@ -60,7 +60,6 @@ final class CatalogPromotionSpec extends ObjectBehavior
         $this->getDescription()->shouldReturn('Discount on every mug.');
     }
 
-
     function it_is_a_catalog_promotion(): void
     {
         $this->shouldImplement(CatalogPromotionInterface::class);
@@ -73,8 +72,8 @@ final class CatalogPromotionSpec extends ObjectBehavior
 
     function it_has_mutable_code(): void
     {
-        $this->setCode('P1');
-        $this->getCode()->shouldReturn('P1');
+        $this->setCode('mug_catalog_promotion');
+        $this->getCode()->shouldReturn('mug_catalog_promotion');
     }
 
     function it_initializes_rules_collection_by_default(): void
@@ -82,7 +81,7 @@ final class CatalogPromotionSpec extends ObjectBehavior
         $this->getRules()->shouldHaveType(Collection::class);
     }
 
-    function it_adds_rules_properly(CatalogPromotionRuleInterface $rule): void
+    function it_adds_rules(CatalogPromotionRuleInterface $rule): void
     {
         $this->hasRule($rule)->shouldReturn(false);
 
@@ -92,7 +91,7 @@ final class CatalogPromotionSpec extends ObjectBehavior
         $this->hasRule($rule)->shouldReturn(true);
     }
 
-    function it_removes_rules_properly(CatalogPromotionRuleInterface $rule): void
+    function it_removes_rules(CatalogPromotionRuleInterface $rule): void
     {
         $this->hasRule($rule)->shouldReturn(false);
 

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -63,7 +64,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_creates_a_catalog_promotion(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product_variant.yaml']);
         $header = $this->getLoggedHeader();
 
         $this->client->request(
@@ -77,6 +78,14 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 'code' => 'tshirts_discount',
                 'channels' => [
                     '/api/v2/admin/channels/WEB',
+                ],
+                'rules' => [
+                    [
+                        'type' => CatalogPromotionRuleInterface::TYPE_CONTAINS_VARIANTS,
+                        'configuration' => [
+                            '/api/v2/shop/product-variants/MUG'
+                        ],
+                    ]
                 ],
                 'translations' => ['en_US' => [
                     'locale' => 'en_US',
@@ -156,6 +165,15 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             $header,
             json_encode([
                 'name' => 'T-Shirts discount',
+                'code' => 'new_code',
+                'rules' => [
+                    [
+                        'type' => CatalogPromotionRuleInterface::TYPE_CONTAINS_VARIANTS,
+                        'configuration' => [
+                            '/api/v2/admin/product-variants/MUG'
+                        ],
+                    ]
+                ],
                 'channels' => [
                     '/api/v2/admin/channels/MOBILE',
                 ],
@@ -173,7 +191,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
 
     private function loadFixturesAndGetCatalogPromotion(): CatalogPromotionInterface
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'catalog_promotion.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product_variant.yaml', 'catalog_promotion.yaml']);
 
         /** @var CatalogPromotionInterface $catalogPromotion */
         $catalogPromotion = $fixtures['catalog_promotion'];

@@ -15,7 +15,9 @@ namespace Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\Api\IriConverterInterface;
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\Exception\ItemNotFoundException;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
 
 /** @experimental  */
@@ -54,11 +56,17 @@ final class CatalogPromotionDataPersister implements ContextAwareDataPersisterIn
 
     private function replaceIriToCodeInConfiguration(array $configuration): array
     {
-        $newConfiguration = [];
+        $processedConfiguration = [];
         foreach ($configuration as $item) {
-            array_push($newConfiguration, $this->iriConverter->getItemFromIri($item)->getCode());
+            $product = $this->iriConverter->getItemFromIri($item);
+
+            if (!$product instanceof ProductVariantInterface) {
+                throw new ItemNotFoundException();
+            }
+
+            $processedConfiguration[] = $product->getCode();
         }
 
-        return $newConfiguration;
+        return $processedConfiguration;
     }
 }

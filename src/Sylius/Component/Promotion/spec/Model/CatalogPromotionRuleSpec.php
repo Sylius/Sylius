@@ -29,35 +29,23 @@ final class CatalogPromotionRuleSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_does_not_have_type_by_default(): void
-    {
-        $this->getType()->shouldReturn(null);
-    }
-
     function its_type_is_mutable(): void
     {
+        $this->getType()->shouldReturn(null);
         $this->setType('type');
         $this->getType()->shouldReturn('type');
     }
 
-    function it_initializes_array_for_configuration_by_default(): void
-    {
-        $this->getConfiguration()->shouldReturn([]);
-    }
-
     function its_configuration_is_mutable(): void
     {
+        $this->getConfiguration()->shouldReturn([]);
         $this->setConfiguration(['value' => 500]);
         $this->getConfiguration()->shouldReturn(['value' => 500]);
     }
 
-    function it_does_not_have_a_catalog_promotion_by_default(): void
-    {
-        $this->getCatalogPromotion()->shouldReturn(null);
-    }
-
     function its_catalog_promotion_is_mutable(CatalogPromotionInterface $catalogPromotion): void
     {
+        $this->getCatalogPromotion()->shouldReturn(null);
         $this->setCatalogPromotion($catalogPromotion);
         $this->getCatalogPromotion()->shouldReturn($catalogPromotion);
     }

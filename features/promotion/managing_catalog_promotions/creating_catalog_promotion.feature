@@ -26,11 +26,11 @@ Feature: Creating a catalog promotion
         And I name it "Winter sale"
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
-        And I add the "contains variants" rule configured with "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And it applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add it
         Then there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name
-        And it should have "contains variants" rule
+        And it should apply to "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And this catalog promotion should be usable
 
     @api

@@ -18,11 +18,11 @@ class CatalogPromotionRule implements CatalogPromotionRuleInterface
     /** @var mixed */
     protected $id;
 
-    protected ?string $type;
+    protected ?string $type = null;
 
     protected array $configuration = [];
 
-    protected ?CatalogPromotionInterface $catalogPromotion;
+    protected ?CatalogPromotionInterface $catalogPromotion = null;
 
     public function getId()
     {

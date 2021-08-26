@@ -70,7 +70,6 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When I want to create a new catalog promotion
-     * @When I want to create new catalog promotion
      */
     public function iWantToCreateNewCatalogPromotion(): void
     {
@@ -149,6 +148,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+<<<<<<< HEAD
      * @When I try to change the code of the :catalogPromotion catalog promotion to :code
      */
     public function iTryToChangeTheCodeOfTheCatalogPromotionTo(
@@ -205,11 +205,13 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @When I add the "contains variants" rule configured with :firstVariant and :secondVariant
      * @When /^I add the "contains variants" rule configured with ("[^"]+" variant) and ("[^"]+" variant)$/
+     * @When it applies on variants :firstVariant and :secondVariant
+     * @When /^it applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/
      */
     public function iAddTheRuleConfiguredWithProductAnd(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
     {
         $rules = [[
-            'type' => CatalogPromotionRuleInterface::CATALOG_PROMOTION_RULE_CONTAINS_VARIANTS_TYPE,
+            'type' => CatalogPromotionRuleInterface::TYPE_CONTAINS_VARIANTS,
             'configuration' => [
                 $this->iriConverter->getIriFromItem($firstVariant),
                 $this->iriConverter->getIriFromItem($secondVariant),
@@ -255,10 +257,14 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @Then it should have "contains variants" rule
+     * @Then /^it should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
      */
-    public function itShouldHaveRule(): void
+    public function itShouldHaveRule(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
     {
-        Assert::same(CatalogPromotionRuleInterface::CATALOG_PROMOTION_RULE_CONTAINS_VARIANTS_TYPE, $this->responseChecker->getCollection($this->client->getLastResponse())[0]['rules'][0]['type']);
+        Assert::same(
+            [$this->iriConverter->getIriFromItem($firstVariant), $this->iriConverter->getIriFromItem($secondVariant)],
+            $this->responseChecker->getCollection($this->client->getLastResponse())[0]['rules'][0]['configuration']
+        );
     }
 
     /**
