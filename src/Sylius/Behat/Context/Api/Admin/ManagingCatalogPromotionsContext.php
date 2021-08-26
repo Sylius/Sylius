@@ -109,6 +109,16 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I rename the ("[^"]+" catalog promotion) to "([^"]+)"$/
+     */
+    public function iRenameTheCatalogPromotionTo(CatalogPromotionInterface $catalogPromotion, string $name): void
+    {
+        $this->client->buildUpdateRequest($catalogPromotion->getCode());
+        $this->client->updateRequestData(['name' => $name]);
+        $this->client->update();
+    }
+
+    /**
      * @Then there should be :amount new catalog promotion on the list
      */
     public function thereShouldBeNewCatalogPromotionOnTheList(int $amount): void
@@ -138,10 +148,8 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @Then the catalog promotion :catalogPromotion should be available in channel :channel
      */
-    public function itShouldBeAvailableInChannel(
-        CatalogPromotionInterface $catalogPromotion,
-        ChannelInterface $channel
-    ): void {
+    public function itShouldBeAvailableInChannel(CatalogPromotionInterface $catalogPromotion, ChannelInterface $channel): void
+    {
         Assert::true(
             $this->responseChecker->hasValueInCollection(
                 $this->client->show($catalogPromotion->getCode()),
@@ -149,6 +157,30 @@ final class ManagingCatalogPromotionsContext implements Context
                 $this->iriConverter->getIriFromItem($channel)
             ),
             sprintf('Catalog promotion is not assigned to %s channel', $channel->getName())
+        );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
+    {
+        Assert::true(
+            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
+            'Catalog promotion could not be edited'
+        );
+    }
+
+    /**
+     * @Then /^(this catalog promotion) name should be "([^"]+)"$/
+     */
+    public function thisCatalogPromotionNameShouldBe(CatalogPromotionInterface $catalogPromotion, string $name): void
+    {
+        $response = $this->client->show($catalogPromotion->getCode());
+
+        Assert::true(
+            $this->responseChecker->hasValue($response, 'name', $name),
+            sprintf('Catalog promotion\'s name %s does not exist', $name)
         );
     }
 }
