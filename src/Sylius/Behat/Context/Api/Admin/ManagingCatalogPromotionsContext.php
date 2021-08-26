@@ -54,6 +54,15 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I create a new catalog promotion without specifying its code and name
+     */
+    public function iCreateANewCatalogPromotionWithoutSpecifyingItsCodeAndName(): void
+    {
+        $this->client->buildCreateRequest();
+        $this->client->create();
+    }
+
+    /**
      * @When I want to create a new catalog promotion
      */
     public function iWantToCreateANewCatalogPromotion(): void
@@ -120,8 +129,9 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @Then there should be :amount new catalog promotion on the list
+     * @Then there should be an empty list of catalog promotions
      */
-    public function thereShouldBeNewCatalogPromotionOnTheList(int $amount): void
+    public function thereShouldBeNewCatalogPromotionOnTheList(int $amount = 0): void
     {
         Assert::count($this->responseChecker->getCollection($this->client->index()), $amount);
     }
@@ -182,5 +192,40 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->hasValue($response, 'name', $name),
             sprintf('Catalog promotion\'s name %s does not exist', $name)
         );
+    }
+
+    /**
+     * @Then I should be notified that code and name are required
+     */
+    public function iShouldBeNotifiedThatCodeAndNameAreRequired(): void
+    {
+        $validationError = $this->responseChecker->getError($this->client->getLastResponse());
+
+        Assert::contains($validationError, 'code: Please enter catalog promotion code.');
+        Assert::contains($validationError, 'name: Please enter catalog promotion name.');
+    }
+
+    /**
+     * @Then I should be notified that catalog promotion with this code already exists
+     */
+    public function iShouldBeNotifiedThatCatalogPromotionWithThisCodeAlreadyExists(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::false(
+            $this->responseChecker->isCreationSuccessful($response),
+            'Catalog promotion has been created successfully, but it should not'
+        );
+        Assert::same(
+            $this->responseChecker->getError($response),
+            'code: The catalog promotion with given code already exists.'
+        );
+    }
+
+    /**
+     * @Then there should still be only one catalog promotion with code :code
+     */
+    public function thereShouldStillBeOnlyOneCatalogPromotionWithCode(string $code): void
+    {
+        Assert::count($this->responseChecker->getCollectionItemsWithValue($this->client->index(), 'code', $code), 1);
     }
 }

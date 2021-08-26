@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "code: The catalog promotion with given code already exists.",
+    "violations": [
+        {
+            "propertyPath": "code",
+            "message": "The catalog promotion with given code already exists.",
+            "code": @string@
+        }
+    ]
+}
