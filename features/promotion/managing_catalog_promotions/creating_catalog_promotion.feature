@@ -30,6 +30,7 @@ Feature: Creating a catalog promotion
         And I add it
         Then there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name
+        And it should have "contains variants" rule
         And this catalog promotion should be usable
 
     @api

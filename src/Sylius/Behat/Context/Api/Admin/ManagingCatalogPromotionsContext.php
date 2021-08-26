@@ -254,6 +254,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then it should have "contains variants" rule
+     */
+    public function itShouldHaveRule(): void
+    {
+        Assert::same(CatalogPromotionRuleInterface::CATALOG_PROMOTION_RULE_CONTAINS_VARIANTS_TYPE, $this->responseChecker->getCollection($this->client->getLastResponse())[0]['rules'][0]['type']);
+    }
+
+    /**
      * @Then this catalog promotion should be usable
      */
     public function thisCatalogPromotionShouldBeUsable(): void
