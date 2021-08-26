@@ -50,14 +50,14 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $firstChannelPricing->getPrice()->willReturn(1000);
         $firstChannelPricing->getOriginalPrice()->willReturn(null);
         $firstChannelPricing->setOriginalPrice(1000)->shouldBeCalled();
-        $firstChannelPricing->setPrice(500)->shouldBeCalled();
+        $firstChannelPricing->setPrice(600)->shouldBeCalled();
 
         $secondChannelPricing->getPrice()->willReturn(1400);
         $secondChannelPricing->getOriginalPrice()->willReturn(null);
         $secondChannelPricing->setOriginalPrice(1400)->shouldBeCalled();
-        $secondChannelPricing->setPrice(700)->shouldBeCalled();
+        $secondChannelPricing->setPrice(840)->shouldBeCalled();
 
-        $this->applyPercentageDiscount($product, 0.5);
+        $this->applyPercentageDiscount($product, 0.4);
     }
 
     function it_does_not_set_original_price_during_application_if_its_already_there(

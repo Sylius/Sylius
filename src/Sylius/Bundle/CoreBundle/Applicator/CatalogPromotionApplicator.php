@@ -34,7 +34,7 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
             if ($channelPricing->getOriginalPrice() === null) {
                 $channelPricing->setOriginalPrice($channelPricing->getPrice());
             }
-            $channelPricing->setPrice((int) ($channelPricing->getPrice() * $discount));
+            $channelPricing->setPrice((int) ($channelPricing->getPrice() - ($channelPricing->getPrice() * $discount)));
         }
     }
 }

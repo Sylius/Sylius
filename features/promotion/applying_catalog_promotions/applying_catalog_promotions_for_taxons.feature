@@ -11,7 +11,7 @@ Feature: Applying catalog promotions for taxons
         And it belongs to "T-Shirts"
         And the store has a product "PHP Mug" priced at "$10.00"
         And it belongs to "Mugs"
-        And there is a catalog promotions with "winter_sale" code and "Winter sale" name
+        And there is a catalog promotion with "winter_sale" code and "Winter sale" name
         And it will be applied on "T-Shirts" taxon
         And it will reduce price by 50%
 

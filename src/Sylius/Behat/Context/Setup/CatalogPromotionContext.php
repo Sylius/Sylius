@@ -40,9 +40,9 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given there is a catalog promotions with :code code and :name name
+     * @Given there is a catalog promotion with :code code and :name name
      */
-    public function thereIsACatalogPromotionsWithCodeAndName(string $code, string $name): void
+    public function thereIsACatalogPromotionWithCodeAndName(string $code, string $name): void
     {
         /** @var CatalogPromotionInterface $catalogPromotion */
         $catalogPromotion = $this->catalogPromotionFactory->createNew();
