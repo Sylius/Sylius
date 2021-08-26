@@ -20,8 +20,6 @@
 
         <attribute name="validation_groups">sylius</attribute>
 
-        <attribute name="input">Sylius\Component\Promotion\DTO\CatalogPromotion</attribute>
-
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
@@ -35,7 +33,6 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
                 </attribute>
-                <attribute name="input">Sylius\Component\Promotion\DTO\CatalogPromotion</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:catalog_promotion:create</attribute>
                 </attribute>
