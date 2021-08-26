@@ -15,16 +15,20 @@ namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
 use ApiPlatform\Core\Api\IriConverterInterface;
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
+use Sylius\Component\Promotion\Factory\CatalogPromotionRuleFactoryInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotion;
-use Sylius\Component\Promotion\Model\CatalogPromotionRule;
 
 final class CatalogPromotionDataTransformer implements DataTransformerInterface
 {
     private IriConverterInterface $iriConverter;
+    private CatalogPromotionRuleFactoryInterface $catalogPromotionRuleFactory;
 
-    public function __construct(IriConverterInterface $iriConverter)
-    {
+    public function __construct(
+        IriConverterInterface $iriConverter,
+        CatalogPromotionRuleFactoryInterface $catalogPromotionRuleFactory
+    ) {
         $this->iriConverter = $iriConverter;
+        $this->catalogPromotionRuleFactory = $catalogPromotionRuleFactory;
     }
 
     public function transform($object, string $to, array $context = [])
@@ -35,16 +39,12 @@ final class CatalogPromotionDataTransformer implements DataTransformerInterface
 
         foreach($object->rules as $ruleData) {
 
-            $CatalogPromotionRule = new CatalogPromotionRule();
-            $CatalogPromotionRule->setCatalogPromotion($catalogPromotion);
-            $CatalogPromotionRule->setType($ruleData['type']);
-
-            $configuration = array_map(
-                static function (string $iri): string { return $this->iriConverter->getItemFromIri($iri)->getCode();},
-                $ruleData['configuration']
+            $configuration = $this->replaceIriToCodeInConfiguration($ruleData['configuration']);
+            $CatalogPromotionRule = $this->catalogPromotionRuleFactory->createWithData(
+                $ruleData['type'],
+                $catalogPromotion,
+                $configuration
             );
-
-            $CatalogPromotionRule->setConfiguration($configuration);
 
             $catalogPromotion->addRule($CatalogPromotionRule);
         }
@@ -55,5 +55,15 @@ final class CatalogPromotionDataTransformer implements DataTransformerInterface
     public function supportsTransformation($data, string $to, array $context = []): bool
     {
         return CatalogPromotion::class === $to;
+    }
+
+    private function replaceIriToCodeInConfiguration(array $configuration): array
+    {
+        $newConfiguration = [];
+        foreach ($configuration as $item) {
+            array_push($newConfiguration, $this->iriConverter->getItemFromIri($item)->getCode());
+        }
+
+        return $newConfiguration;
     }
 }
