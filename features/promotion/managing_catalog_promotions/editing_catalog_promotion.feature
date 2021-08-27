@@ -16,17 +16,18 @@ Feature: Editing catalog promotion
         Then I should be notified that it has been successfully edited
         And this catalog promotion name should be "Black Friday"
 
-    @todo @api
+    @api
     Scenario: Changing label and description of catalog promotion
         When I want to modify a catalog promotion "Christmas sale"
         And I specify its label as "Christmas -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
         And I save my changes
-        Then this catalog promotion label in "English (United States)" should be "Christmas -50%"
-        And this catalog promotion description in "English (United States)" should be "This promotion gives a 50% discount on all products"
+        Then this catalog promotion label in "English (United States)" locale should be "Christmas -50%"
+        And this catalog promotion description in "English (United States)" locale should be "This promotion gives a 50% discount on all products"
 
-    @todo @api
+    @api
     Scenario: Changing availability in channels for catalog promotion
+        Given the catalog promotion "Christmas sale" is available in "United States"
         When I want to modify a catalog promotion "Christmas sale"
         And I make it available in channel "Europe"
         And I make it unavailable in channel "United States"
@@ -34,7 +35,7 @@ Feature: Editing catalog promotion
         Then this catalog promotion should be available in channel "Europe"
         But this catalog promotion should not be available in channel "United States"
 
-    @todo @api
+    @api
     Scenario: Trying to change code of catalog promotion
         When I try to change the code of the "Christmas sale" catalog promotion to "sale"
-        Then I should not be able to edit its code
+        Then this catalog promotion code should still be "christmas_sale"

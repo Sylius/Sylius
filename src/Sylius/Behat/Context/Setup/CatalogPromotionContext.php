@@ -16,8 +16,9 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class CatalogPromotionContext implements Context
@@ -52,6 +53,18 @@ final class CatalogPromotionContext implements Context
         $this->entityManager->flush();
 
         $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
+    }
+
+    /**
+     * @Given the catalog promotion :catalogPromotion is available in :channel
+     */
+    public function theCatalogPromotionIsAvailableIn(
+        CatalogPromotionInterface $catalogPromotion,
+        ChannelInterface $channel
+    ): void {
+        $catalogPromotion->addChannel($channel);
+
+        $this->entityManager->flush();
     }
 
     /**
