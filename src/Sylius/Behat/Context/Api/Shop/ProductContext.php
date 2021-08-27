@@ -153,7 +153,7 @@ final class ProductContext implements Context
     public function iShouldSeeTheProductOriginalPrice(int $originalPrice): void
     {
         /** @var ProductInterface $checkedProduct */
-        $checkedProduct = $this->sharedStorage->get('product');
+        $checkedProduct = $this->sharedStorage->get('productVariant');
         $product = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
         Assert::same($product['originalPrice'], $originalPrice);

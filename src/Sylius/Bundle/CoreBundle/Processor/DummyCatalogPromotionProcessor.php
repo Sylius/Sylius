@@ -15,9 +15,9 @@ namespace Sylius\Bundle\CoreBundle\Processor;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Provider\CatalogPromotionProductsProviderInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 
 final class DummyCatalogPromotionProcessor implements CatalogPromotionProcessorInterface
 {
