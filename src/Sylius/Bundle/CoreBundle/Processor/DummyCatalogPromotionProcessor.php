@@ -16,42 +16,34 @@ namespace Sylius\Bundle\CoreBundle\Processor;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Sylius\Component\Core\Provider\CatalogPromotionProductsProviderInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
-use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 final class DummyCatalogPromotionProcessor implements CatalogPromotionProcessorInterface
 {
-    private ProductRepositoryInterface $productRepository;
-
-    private TaxonRepositoryInterface $taxonRepository;
+    private CatalogPromotionProductsProviderInterface $catalogPromotionProductsProvider;
 
     private CatalogPromotionApplicatorInterface $catalogPromotionApplicator;
 
     private EntityManagerInterface $entityManager;
 
     public function __construct(
-        ProductRepositoryInterface $productRepository,
-        TaxonRepositoryInterface $taxonRepository,
+        CatalogPromotionProductsProviderInterface $catalogPromotionProductsProvider,
         CatalogPromotionApplicatorInterface $catalogPromotionApplicator,
         EntityManagerInterface $entityManager
     ) {
-        $this->productRepository = $productRepository;
-        $this->taxonRepository = $taxonRepository;
+        $this->catalogPromotionProductsProvider = $catalogPromotionProductsProvider;
         $this->catalogPromotionApplicator = $catalogPromotionApplicator;
         $this->entityManager = $entityManager;
     }
 
     public function process(CatalogPromotionInterface $catalogPromotion): void
     {
-        /** @var TaxonInterface|null $taxon */
-        $taxon = $this->taxonRepository->findOneBy(['code' => 't_shirts']);
-        if ($taxon === null) {
+        $products = $this->catalogPromotionProductsProvider->provideEligibleProducts($catalogPromotion);
+        if (empty($products)) {
             return;
         }
 
-        $products = $this->productRepository->findByTaxon($taxon);
         /** @var ProductInterface $product */
         foreach ($products as $product) {
             $this->catalogPromotionApplicator->applyPercentageDiscount($product, 0.5);

@@ -254,11 +254,17 @@
         />
 
         <service
+            id="Sylius\Component\Core\Provider\CatalogPromotionProductsProviderInterface"
+            class="Sylius\Bundle\CoreBundle\Provider\CatalogPromotionProductsProvider"
+        >
+            <argument type="service" id="sylius.repository.product_variant" />
+        </service>
+
+        <service
             id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface"
             class="Sylius\Bundle\CoreBundle\Processor\DummyCatalogPromotionProcessor"
         >
-            <argument type="service" id="sylius.repository.product" />
-            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="Sylius\Component\Core\Provider\CatalogPromotionProductsProviderInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface" />
             <argument type="service" id="sylius.manager.product" />
         </service>

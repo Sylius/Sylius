@@ -15,26 +15,21 @@ namespace spec\Sylius\Bundle\CoreBundle\Processor;
 
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
-use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Sylius\Component\Core\Provider\CatalogPromotionProductsProviderInterface;
 
 final class DummyCatalogPromotionProcessorSpec extends ObjectBehavior
 {
     function let(
-        ProductRepositoryInterface $productRepository,
-        TaxonRepositoryInterface $taxonRepository,
+        CatalogPromotionProductsProviderInterface $catalogPromotionProductsProvider,
         CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
         EntityManagerInterface $entityManager
     ): void {
         $this->beConstructedWith(
-            $productRepository,
-            $taxonRepository,
+            $catalogPromotionProductsProvider,
             $productCatalogPromotionApplicator,
             $entityManager
         );
@@ -45,19 +40,18 @@ final class DummyCatalogPromotionProcessorSpec extends ObjectBehavior
         $this->shouldImplement(CatalogPromotionProcessorInterface::class);
     }
 
-    function it_always_applies_50_percent_catalog_promotion_on_t_shirts_products(
-        ProductRepositoryInterface $productRepository,
-        TaxonRepositoryInterface $taxonRepository,
+    function it_always_applies_50_percent_catalog_promotion_on_products_from_eligible_taxon(
+        CatalogPromotionProductsProviderInterface $catalogPromotionProductsProvider,
         CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
         EntityManagerInterface $entityManager,
         CatalogPromotionInterface $catalogPromotion,
-        TaxonInterface $taxon,
         ProductInterface $firstProduct,
         ProductInterface $secondProduct
     ): void {
-        $taxonRepository->findOneBy(['code' => 't_shirts'])->willReturn($taxon);
-
-        $productRepository->findByTaxon($taxon)->willReturn([$firstProduct, $secondProduct]);
+        $catalogPromotionProductsProvider
+            ->provideEligibleProducts($catalogPromotion)
+            ->willReturn([$firstProduct, $secondProduct])
+        ;
 
         $productCatalogPromotionApplicator->applyPercentageDiscount($firstProduct, 0.5)->shouldBeCalled();
         $productCatalogPromotionApplicator->applyPercentageDiscount($secondProduct, 0.5)->shouldBeCalled();
@@ -68,13 +62,13 @@ final class DummyCatalogPromotionProcessorSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_there_is_no_t_shirts_taxon(
-        ProductRepositoryInterface $productRepository,
-        TaxonRepositoryInterface $taxonRepository,
+        CatalogPromotionProductsProviderInterface $catalogPromotionProductsProvider,
+        EntityManagerInterface $entityManager,
         CatalogPromotionInterface $catalogPromotion
     ): void {
-        $taxonRepository->findOneBy(['code' => 't_shirts'])->willReturn(null);
+        $catalogPromotionProductsProvider->provideEligibleProducts($catalogPromotion)->willReturn([]);
 
-        $productRepository->findByTaxon(Argument::any())->shouldNotBeCalled();
+        $entityManager->flush()->shouldNotBeCalled();
 
         $this->process($catalogPromotion);
     }
