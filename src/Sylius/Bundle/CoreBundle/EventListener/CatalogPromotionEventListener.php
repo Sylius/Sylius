@@ -18,6 +18,7 @@ use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionEventListener
@@ -33,10 +34,14 @@ final class CatalogPromotionEventListener
     {
         $entity = $args->getObject();
 
-        if (!$entity instanceof CatalogPromotionInterface) {
+        if ($entity instanceof CatalogPromotionInterface) {
+            $this->eventBus->dispatch(new CatalogPromotionUpdated($entity->getCode()));
+
             return;
         }
 
-        $this->eventBus->dispatch(new CatalogPromotionUpdated($entity->getCode()));
+        if ($entity instanceof CatalogPromotionRuleInterface) {
+            $this->eventBus->dispatch(new CatalogPromotionUpdated($entity->getCatalogPromotion()->getCode()));
+        }
     }
 }

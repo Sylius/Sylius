@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Listener;
 
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CatalogPromotionUpdateListener

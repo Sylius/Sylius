@@ -19,6 +19,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\EventListener\CatalogPromotionEventListener;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -34,7 +35,7 @@ final class CatalogPromotionEventListenerSpec extends ObjectBehavior
         $this->shouldHaveType(CatalogPromotionEventListener::class);
     }
 
-    function it_sends_catalog_promotion_updated_after_persist_catalog_promotion(
+    function it_sends_catalog_promotion_updated_after_persisting_catalog_promotion(
         MessageBusInterface $eventBus,
         LifecycleEventArgs $args,
         CatalogPromotionInterface $entity
@@ -47,7 +48,24 @@ final class CatalogPromotionEventListenerSpec extends ObjectBehavior
         $this->postPersist($args);
     }
 
-    function it_does_not_send_catalog_promotion_updated_after_persist_other_entity(
+    function it_sends_catalog_promotion_updated_after_persisting_catalog_promotion_rule(
+        MessageBusInterface $eventBus,
+        LifecycleEventArgs $args,
+        CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionRuleInterface $entity
+    ): void {
+        $args->getObject()->willReturn($entity);
+
+        $entity->getCatalogPromotion()->willReturn($catalogPromotion);
+        $catalogPromotion->getCode()->willReturn('winter_sale');
+
+        $message = new CatalogPromotionUpdated('winter_sale');
+        $eventBus->dispatch($message)->willReturn(new Envelope($message));
+
+        $this->postPersist($args);
+    }
+
+    function it_does_not_send_catalog_promotion_updated_after_persisting_other_entity(
         MessageBusInterface $eventBus,
         LifecycleEventArgs $args
     ): void {
