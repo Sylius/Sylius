@@ -10,6 +10,17 @@ Sylius\Component\Core\Model\Channel:
         color: 'black'
         enabled: true
         taxCalculationStrategy: 'order_items_based'
+    channel_mobile:
+        code: 'MOBILE'
+        name: 'Mobile Channel'
+        hostname: 'localhost'
+        description: 'Lorem ipsum'
+        baseCurrency: '@currency_usd'
+        defaultLocale: '@locale_en'
+        locales: ['@locale_en', '@locale_pl']
+        color: 'black'
+        enabled: true
+        taxCalculationStrategy: 'order_items_based'
 
 Sylius\Component\Currency\Model\Currency:
     currency_usd:

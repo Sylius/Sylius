@@ -154,7 +154,16 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             [],
             [],
             $header,
-            json_encode(['name' => 'new_promotion', 'code' => 'new_code'], JSON_THROW_ON_ERROR)
+            json_encode([
+                'name' => 'T-Shirts discount',
+                'channels' => [
+                    '/api/v2/admin/channels/MOBILE',
+                ],
+                'translations' => ['en_US' => [
+                    '@id' => sprintf('/api/v2/admin/catalog-promotion-translations/%s', $catalogPromotion->getTranslation('en_US')->getId()),
+                    'label' => 'T-Shirts discount',
+                ]]
+            ], JSON_THROW_ON_ERROR)
         );
 
         $response = $this->client->getResponse();
