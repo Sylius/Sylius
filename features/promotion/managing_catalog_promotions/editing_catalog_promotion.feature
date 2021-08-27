@@ -22,8 +22,8 @@ Feature: Editing catalog promotion
         And I specify its label as "Christmas -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
         And I save my changes
-        Then this catalog promotion label in "English (United States)" locale should be "Christmas -50%"
-        And this catalog promotion description in "English (United States)" locale should be "This promotion gives a 50% discount on all products"
+        Then this catalog promotion should be labelled as "Christmas -50%" in "English (United States)" locale
+        And this catalog promotion should be described as "This promotion gives a 50% discount on all products" in "English (United States)" locale
 
     @api
     Scenario: Changing availability in channels for catalog promotion
