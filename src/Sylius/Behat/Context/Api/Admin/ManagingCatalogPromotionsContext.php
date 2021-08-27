@@ -261,17 +261,22 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then /^(this catalog promotion) (label|description) in ("[^"]+" locale) should be "([^"]+)"$/
+     * @Then /^(this catalog promotion) should be (labelled|described) as "([^"]+)" in ("[^"]+" locale)$/
      */
     public function thisCatalogPromotionLabelInLocaleShouldBe(
         CatalogPromotionInterface $catalogPromotion,
         string $field,
-        string $localeCode,
-        string $value
+        string $value,
+        string $localeCode
     ): void {
+        $fieldsMapping = [
+            'labelled' => 'label',
+            'described' => 'description',
+        ];
+
         $response = $this->client->show($catalogPromotion->getCode());
 
-        Assert::true($this->responseChecker->hasTranslation($response, $localeCode, $field, $value));
+        Assert::true($this->responseChecker->hasTranslation($response, $localeCode, $fieldsMapping[$field], $value));
     }
 
     /**
