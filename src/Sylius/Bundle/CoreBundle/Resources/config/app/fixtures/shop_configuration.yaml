@@ -244,3 +244,12 @@ sylius_fixtures:
                                         configuration:
                                             FASHION_WEB:
                                                 amount: 10.00
+
+                catalog_promotion:
+                    options:
+                        custom:
+                            winter:
+                                code: 'winter'
+                                name: 'Winter sale'
+                                channels:
+                                    - 'FASHION_WEB'

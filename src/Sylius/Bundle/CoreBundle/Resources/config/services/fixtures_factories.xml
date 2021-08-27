@@ -15,6 +15,12 @@
     <services>
         <defaults public="true" />
 
+        <service id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionExampleFactory">
+            <argument type="service" id="sylius.factory.catalog_promotion" />
+            <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.repository.channel" />
+        </service>
+
         <service id="sylius.fixture.example_factory.payment_method" class="Sylius\Bundle\CoreBundle\Fixture\Factory\PaymentMethodExampleFactory">
             <argument type="service" id="sylius.factory.payment_method" />
             <argument type="service" id="sylius.repository.locale" />
