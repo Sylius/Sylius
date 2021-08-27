@@ -1,19 +1,19 @@
 {
     "@context": "\/api\/v2\/contexts\/CatalogPromotion",
-    "@id": "\/api\/v2\/admin\/catalog-promotions\/new_code",
+    "@id": "\/api\/v2\/admin\/catalog-promotions\/mugs_discount",
     "@type": "CatalogPromotion",
     "id": @integer@,
-    "name": "new_promotion",
-    "code": "new_code",
+    "name": "T-Shirts discount",
+    "code": "mugs_discount",
     "channels": [
-        "\/api\/v2\/admin\/channels\/WEB"
+        "\/api\/v2\/admin\/channels\/MOBILE"
     ],
     "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/catalog-promotion-translations\/@integer@",
             "@type": "CatalogPromotionTranslation",
             "id": @integer@,
-            "label": "Mugs discount",
+            "label": "T-Shirts discount",
             "description": @string@
         }
     }

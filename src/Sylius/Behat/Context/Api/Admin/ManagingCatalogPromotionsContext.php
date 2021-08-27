@@ -17,6 +17,7 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
@@ -29,17 +30,20 @@ final class ManagingCatalogPromotionsContext implements Context
     private ResponseCheckerInterface $responseChecker;
     private MessageBusInterface $messageBus;
     private IriConverterInterface $iriConverter;
+    private SharedStorageInterface $sharedStorage;
 
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
         MessageBusInterface $messageBus,
-        IriConverterInterface $iriConverter
+        IriConverterInterface $iriConverter,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->messageBus = $messageBus;
         $this->iriConverter = $iriConverter;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -110,6 +114,20 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I make (it) unavailable in (channel "[^"]+")$/
+     */
+    public function iMakeItUnavailableInChannel(CatalogPromotionInterface $catalogPromotion, ChannelInterface $channel): void
+    {
+        $channels = $this->responseChecker->getValue($this->client->show($catalogPromotion->getCode()), 'channels');
+
+        foreach (array_keys($channels, $this->iriConverter->getIriFromItem($channel)) as $key) {
+            unset($channels[$key]);
+        }
+
+        $this->client->addRequestData('channels', $channels);
+    }
+
+    /**
      * @When I add it
      */
     public function iAddIt(): void
@@ -118,12 +136,42 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I rename the ("[^"]+" catalog promotion) to "([^"]+)"$/
+     * @When I rename the :catalogPromotion catalog promotion to :name
      */
     public function iRenameTheCatalogPromotionTo(CatalogPromotionInterface $catalogPromotion, string $name): void
     {
         $this->client->buildUpdateRequest($catalogPromotion->getCode());
         $this->client->updateRequestData(['name' => $name]);
+        $this->client->update();
+    }
+
+    /**
+     * @When I try to change the code of the :catalogPromotion catalog promotion to :code
+     */
+    public function iTryToChangeTheCodeOfTheCatalogPromotionTo(
+        CatalogPromotionInterface $catalogPromotion,
+        string $code
+    ): void {
+        $this->client->buildUpdateRequest($catalogPromotion->getCode());
+        $this->client->updateRequestData(['code' => $code]);
+        $this->client->update();
+    }
+
+    /**
+     * @When I want to modify a catalog promotion :catalogPromotion
+     */
+    public function iWantToModifyACatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->client->buildUpdateRequest($catalogPromotion->getCode());
+
+        $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges(): void
+    {
         $this->client->update();
     }
 
@@ -157,6 +205,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @Then the catalog promotion :catalogPromotion should be available in channel :channel
+     * @Then /^(this catalog promotion) should be available in (channel "[^"]+")$/
      */
     public function itShouldBeAvailableInChannel(CatalogPromotionInterface $catalogPromotion, ChannelInterface $channel): void
     {
@@ -167,6 +216,23 @@ final class ManagingCatalogPromotionsContext implements Context
                 $this->iriConverter->getIriFromItem($channel)
             ),
             sprintf('Catalog promotion is not assigned to %s channel', $channel->getName())
+        );
+    }
+
+    /**
+     * @Then /^(this catalog promotion) should not be available in (channel "[^"]+")$/
+     */
+    public function itShouldNotBeAvailableInChannel(
+        CatalogPromotionInterface $catalogPromotion,
+        ChannelInterface $channel
+    ): void {
+        Assert::false(
+            $this->responseChecker->hasValueInCollection(
+                $this->client->show($catalogPromotion->getCode()),
+                'channels',
+                $this->iriConverter->getIriFromItem($channel)
+            ),
+            sprintf('Catalog promotion is assigned to %s channel', $channel->getName())
         );
     }
 
@@ -192,6 +258,20 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->hasValue($response, 'name', $name),
             sprintf('Catalog promotion\'s name %s does not exist', $name)
         );
+    }
+
+    /**
+     * @Then /^(this catalog promotion) (label|description) in ("[^"]+" locale) should be "([^"]+)"$/
+     */
+    public function thisCatalogPromotionLabelInLocaleShouldBe(
+        CatalogPromotionInterface $catalogPromotion,
+        string $field,
+        string $localeCode,
+        string $value
+    ): void {
+        $response = $this->client->show($catalogPromotion->getCode());
+
+        Assert::true($this->responseChecker->hasTranslation($response, $localeCode, $field, $value));
     }
 
     /**
@@ -227,5 +307,16 @@ final class ManagingCatalogPromotionsContext implements Context
     public function thereShouldStillBeOnlyOneCatalogPromotionWithCode(string $code): void
     {
         Assert::count($this->responseChecker->getCollectionItemsWithValue($this->client->index(), 'code', $code), 1);
+    }
+
+    /**
+     * @Then this catalog promotion code should still be :code
+     */
+    public function thisCatalogPromotionCodeShouldStillBe(string $code): void
+    {
+        Assert::true(
+            $this->responseChecker->hasValue($this->client->getLastResponse(), 'code', $code),
+            'The code has been changed, but it should not'
+        );
     }
 }
