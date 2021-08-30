@@ -35,9 +35,3 @@ Sylius\Component\Addressing\Model\Zone:
             expose: true
             type: DateTime
             groups: [Detailed]
-    relations:
-        -   rel: self
-            href:
-                route: sylius_admin_api_zone_show
-                parameters:
-                    code: expr(object.getCode())
