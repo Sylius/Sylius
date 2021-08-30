@@ -1,6 +1,6 @@
 # UPGRADE FROM `v1.9.5` TO `v1.9.6`
 
-1. API is disabled by default, to enable it you need to set flag to ``true`` in ``app/config/packages/_sylius.yaml``:
+1. API is disabled by default, to enable it you need to set flag to ``true`` in ``config/packages/_sylius.yaml``:
 
     ```yaml
     sylius_api:
