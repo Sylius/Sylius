@@ -1,0 +1,11 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-08-27T10:34:51Z
+
+There is one more thing - the configuration of rules is not directly related to the entities. I don't see the benefit that would justify the necessity of custom persisters and normalizers to convert IRIs into codes. We don't have to remove this part in this PR - but I would suggest it next time we touch rule and/or action functionality.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2021-08-30T09:56:25Z
+
+Thank you, Adam! :tada:
