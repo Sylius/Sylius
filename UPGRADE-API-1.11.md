@@ -15,7 +15,7 @@
         } 
    ```
    
-   To change the prefix you need to set parameter in ``app/config/packages/_sylius.yaml``:
+   To change the prefix you need to set parameter in ``config/packages/_sylius.yaml``:
 
     ```yaml
     sylius_api:

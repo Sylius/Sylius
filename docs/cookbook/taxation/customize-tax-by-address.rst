@@ -13,7 +13,7 @@ To change the way how the taxes are calculated: by billing or by shipping addres
 
 .. code-block:: yaml
 
-    # app/config/packages/_sylius.yaml
+    # config/packages/_sylius.yaml
     sylius_core:
         # resources definitions
         shipping_address_based_taxation: true
