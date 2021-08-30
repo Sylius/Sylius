@@ -1,6 +1,6 @@
 # UPGRADE FROM `v1.8.4` TO `v1.8.6`
 
-1. API is disabled by default, to enable it you need to set flag to ``true`` in ``app/config/packages/_sylius.yaml``:
+1. API is disabled by default, to enable it you need to set flag to ``true`` in ``config/packages/_sylius.yaml``:
 
     ```yaml
     sylius_api:
