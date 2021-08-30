@@ -8,5 +8,5 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 
 interface CatalogPromotionProductsProviderInterface
 {
-    public function provideEligibleProducts(CatalogPromotionInterface $catalogPromotion);
+    public function provideEligibleProducts(CatalogPromotionInterface $catalogPromotion): array;
 }

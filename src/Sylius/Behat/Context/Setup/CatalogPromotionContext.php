@@ -83,9 +83,9 @@ final class CatalogPromotionContext implements Context
 
         $catalogPromotionRule->setType(CatalogPromotionRule::TYPE_CONTAINS_VARIANTS);
         $catalogPromotionRule->setConfiguration([$variant->getCode()]);
-        $catalogPromotionRule->setCatalogPromotion($catalogPromotion);
 
-        $this->entityManager->persist($catalogPromotionRule);
+        $catalogPromotion->addRule($catalogPromotionRule);
+
         $this->entityManager->flush();
     }
 

@@ -29,7 +29,7 @@ final class CatalogPromotionProductsProvider implements CatalogPromotionProducts
         $this->productVariantRepository = $productVariantRepository;
     }
 
-    public function provideEligibleProducts(CatalogPromotionInterface $catalogPromotion)
+    public function provideEligibleProducts(CatalogPromotionInterface $catalogPromotion): array
     {
         $products = [];
 
