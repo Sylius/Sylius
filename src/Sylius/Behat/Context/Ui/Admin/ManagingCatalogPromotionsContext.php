@@ -39,6 +39,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I want to create a new catalog promotion
+     */
+    public function iWantToCreateNewCatalogPromotion(): void
+    {
+        $this->createPage->open();
+    }
+
+    /**
      * @When I create a new catalog promotion with :code code and :name name
      */
     public function iCreateANewCatalogPromotionWithCodeAndName(string $code, string $name): void
@@ -46,6 +54,46 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->createPage->open();
         $this->createPage->specifyCode($code);
         $this->createPage->nameIt($name);
+        $this->createPage->create();
+    }
+
+    /**
+     * @When I specify its code as :code
+     */
+    public function iSpecifyItsCodeAs(string $code): void
+    {
+        $this->createPage->specifyCode($code);
+    }
+
+    /**
+     * @When I name it :name
+     */
+    public function iNameIt(string $name): void
+    {
+        $this->createPage->nameIt($name);
+    }
+
+    /**
+     * @When I specify its label as :label in :localeCode
+     */
+    public function iSpecifyItsLabelAsIn(string $label, string $localeCode): void
+    {
+        $this->createPage->labelIt($label, $localeCode);
+    }
+
+    /**
+     * @When I describe it as :description in :localeCode
+     */
+    public function iDescribeItAsIn(string $description, string $localeCode): void
+    {
+        $this->createPage->describeIt($description, $localeCode);
+    }
+
+    /**
+     * @When I add it
+     */
+    public function iAddIt(): void
+    {
         $this->createPage->create();
     }
 

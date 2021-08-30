@@ -27,12 +27,12 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function labelIt(string $label, string $localeCode): void
     {
-        $this->getElement('label', ['%locale%' => $localeCode])->setValue($label);
+        $this->getElement('label', ['%localeCode%' => $localeCode])->setValue($label);
     }
 
     public function describeIt(string $description, string $localeCode): void
     {
-        $this->getElement('description', ['%locale%' => $localeCode])->setValue($description);
+        $this->getElement('description', ['%localeCode%' => $localeCode])->setValue($description);
     }
 
     protected function getDefinedElements(): array

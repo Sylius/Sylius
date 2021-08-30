@@ -15,7 +15,7 @@ Feature: Creating a catalog promotion
         And it should have "winter_sale" code and "Winter sale" name
         And this catalog promotion should be usable
 
-    @api
+    @api @ui
     Scenario: Creating a catalog promotion
         Given the store has a "T-Shirt" configurable product
         And this product has "PHP T-Shirt" variant priced at "$20.00"

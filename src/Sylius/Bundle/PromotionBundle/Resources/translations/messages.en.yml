@@ -3,7 +3,10 @@
 sylius:
     form:
         catalog_promotion:
+            description: Description
+            label: Label
             name: Name
+            translations: Translations
         promotion:
             actions: Actions
             add_action: Add action
