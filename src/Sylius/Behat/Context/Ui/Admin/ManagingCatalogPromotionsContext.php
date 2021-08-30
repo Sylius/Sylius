@@ -90,6 +90,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I make it available in channel :channelName
+     */
+    public function iMakeItAvailableInChannel(string $channelName): void
+    {
+        $this->createPage->checkChannel($channelName);
+    }
+
+    /**
      * @When I add it
      */
     public function iAddIt(): void
@@ -135,5 +143,13 @@ final class ManagingCatalogPromotionsContext implements Context
     public function thisCatalogPromotionShouldBeUsable(): void
     {
         // Intentionally left blank
+    }
+
+    /**
+     * @Then the catalog promotion :catalogPromotionName should be available in channel :channelName
+     */
+    public function itShouldBeAvailableInChannel(string $catalogPromotionName, string $channelName): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $catalogPromotionName, 'channels' => $channelName]));
     }
 }

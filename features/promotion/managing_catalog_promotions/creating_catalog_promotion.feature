@@ -15,7 +15,7 @@ Feature: Creating a catalog promotion
         And it should have "winter_sale" code and "Winter sale" name
         And this catalog promotion should be usable
 
-    @api @ui
+    @api
     Scenario: Creating a catalog promotion
         Given the store has a "T-Shirt" configurable product
         And this product has "PHP T-Shirt" variant priced at "$20.00"
@@ -33,7 +33,7 @@ Feature: Creating a catalog promotion
         And it should apply to "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And this catalog promotion should be usable
 
-    @api
+    @api @ui
     Scenario: Creating a catalog promotion for channel
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"

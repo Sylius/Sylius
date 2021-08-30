@@ -35,9 +35,15 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getElement('description', ['%localeCode%' => $localeCode])->setValue($description);
     }
 
+    public function checkChannel(string $channelName): void
+    {
+        $this->getDocument()->checkField($channelName);
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'channel' => '#sylius_catalog_promotion_code',
             'code' => '#sylius_catalog_promotion_code',
             'description' => '#sylius_catalog_promotion_translations_%localeCode%_description',
             'label' => '#sylius_catalog_promotion_translations_%localeCode%_label',

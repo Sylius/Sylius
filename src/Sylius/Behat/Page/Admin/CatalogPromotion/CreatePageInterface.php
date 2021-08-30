@@ -24,4 +24,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function labelIt(string $label, string $localeCode): void;
 
     public function describeIt(string $description, string $localeCode): void;
+
+    public function checkChannel(string $channelName): void;
 }

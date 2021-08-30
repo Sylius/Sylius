@@ -18,6 +18,11 @@ sylius_grid:
                     type: string
                     label: sylius.ui.label
                     sortable: ~
+                channels:
+                    type: twig
+                    label: sylius.ui.channels
+                    options:
+                        template: '@SyliusAdmin/Grid/Field/_channels.html.twig'
             actions:
                 main:
                     create:

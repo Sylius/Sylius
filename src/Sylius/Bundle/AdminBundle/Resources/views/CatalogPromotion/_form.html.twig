@@ -2,9 +2,10 @@
 
 <div class="ui segment">
     {{ form_errors(form) }}
-    <div class="two fields">
+    <div class="three fields">
         {{ form_row(form.code) }}
         {{ form_row(form.name) }}
+        {{ form_row(form.channels) }}
     </div>
     {{ translationForm(form.translations) }}
 </div>
