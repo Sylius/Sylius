@@ -45,7 +45,7 @@ sylius:
                 different_billing_address: Eine abweichende Rechnungsadresse benutzen?
                 different_shipping_address: Eine abweichende Lieferadresse benutzen?
             payment_method: Zahlungsmethode
-            shipping_method: Versandarten
+            shipping_method: Versandart
         promotion:
             channels: Ausgabekanäle
         promotion_action:
