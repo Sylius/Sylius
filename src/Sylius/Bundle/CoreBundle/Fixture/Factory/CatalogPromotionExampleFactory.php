@@ -81,6 +81,13 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
             ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['name']);
             })
+            ->setNormalizer('code', static function (Options $options, ?string $code): string {
+                if ($code === null) {
+                    return StringInflector::nameToCode($options['name']);
+                }
+
+                return $code;
+            })
             ->setDefault('name', function (Options $options): string {
                 /** @var string $words */
                 $words = $this->faker->words(3, true);

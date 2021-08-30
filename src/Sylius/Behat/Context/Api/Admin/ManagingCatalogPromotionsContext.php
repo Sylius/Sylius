@@ -176,7 +176,16 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I browse catalog promotions
+     */
+    public function iBrowseCatalogPromotions(): void
+    {
+        $this->client->index();
+    }
+
+    /**
      * @Then there should be :amount new catalog promotion on the list
+     * @Then there should be :amount catalog promotions on the list
      * @Then there should be an empty list of catalog promotions
      */
     public function thereShouldBeNewCatalogPromotionOnTheList(int $amount = 0): void
@@ -193,6 +202,19 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->hasItemWithValues($this->client->index(), ['code' => $code, 'name' => $name]),
             sprintf('Cannot find catalog promotions with code "%s" and name "%s" in the list', $code, $name)
         );
+    }
+
+    /**
+     * @Then the catalog promotions named :firstName and :secondName should be in the registry
+     */
+    public function theCatalogPromotionsNamedShouldBeInTheRegistry(string ...$names): void
+    {
+        foreach ($names as $name) {
+            Assert::true(
+                $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $name),
+                sprintf('Cannot find catalog promotions with name "%s" in the list', $name)
+            );
+        }
     }
 
     /**
