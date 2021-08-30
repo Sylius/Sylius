@@ -121,6 +121,12 @@ final class MainMenuBuilder
         ;
 
         $marketing
+            ->addChild('catalog_promotions', ['route' => 'sylius_admin_catalog_promotion_index'])
+            ->setLabel('sylius.menu.admin.main.marketing.catalog_promotions')
+            ->setLabelAttribute('icon', 'bookmark')
+        ;
+
+        $marketing
             ->addChild('promotions', ['route' => 'sylius_admin_promotion_index'])
             ->setLabel('sylius.menu.admin.main.marketing.promotions')
             ->setLabelAttribute('icon', 'in cart')

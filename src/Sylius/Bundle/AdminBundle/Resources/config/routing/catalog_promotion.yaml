@@ -1,0 +1,15 @@
+sylius_admin_catalog_promotion:
+    resource: |
+        alias: sylius.catalog_promotion
+        section: admin
+        templates: "@SyliusAdmin\\Crud"
+        only: ['index']
+        redirect: index
+        grid: sylius_admin_catalog_promotion
+        permission: true
+        vars:
+            all:
+                subheader: sylius.ui.manage_discounts_on_product_catalog
+            index:
+                icon: bookmark
+    type: sylius.resource
