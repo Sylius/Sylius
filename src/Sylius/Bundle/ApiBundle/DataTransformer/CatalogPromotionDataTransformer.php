@@ -11,47 +11,38 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\DataPersister;
+namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
 use ApiPlatform\Core\Api\IriConverterInterface;
-use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use ApiPlatform\Core\Exception\ItemNotFoundException;
-use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotion;
 use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
 
-/** @experimental  */
-final class CatalogPromotionDataPersister implements ContextAwareDataPersisterInterface
+/** @experimental */
+final class CatalogPromotionDataTransformer implements DataTransformerInterface
 {
-    private ContextAwareDataPersisterInterface $decoratedDataPersister;
     private IriConverterInterface $iriConverter;
 
-    public function __construct(
-        ContextAwareDataPersisterInterface $decoratedDataPersister,
-        IriConverterInterface $iriConverter
-    ) {
-        $this->decoratedDataPersister = $decoratedDataPersister;
+    public function __construct(IriConverterInterface $iriConverter)
+    {
         $this->iriConverter = $iriConverter;
     }
 
-    public function supports($data, array $context = []): bool
-    {
-        return $data instanceof CatalogPromotionInterface;
-    }
-
-    public function persist($data, array $context = [])
+    public function transform($object, string $to, array $context = [])
     {
         /** @var CatalogPromotionRuleInterface $rule */
-        foreach ($data->getRules() as $rule) {
+        foreach ($object->getRules() as $rule) {
             $rule->setConfiguration($this->replaceIriToCodeInConfiguration($rule->getConfiguration()));
         }
 
-        return $this->decoratedDataPersister->persist($data, $context);
+        return $object;
     }
 
-    public function remove($data, array $context = [])
+    public function supportsTransformation($data, string $to, array $context = []): bool
     {
-        return $this->decoratedDataPersister->remove($data, $context);
+        return CatalogPromotion::class === $to;
     }
 
     private function replaceIriToCodeInConfiguration(array $configuration): array

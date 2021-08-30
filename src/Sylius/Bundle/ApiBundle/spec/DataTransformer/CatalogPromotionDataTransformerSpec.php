@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\DataPersister;
+namespace spec\Sylius\Bundle\ApiBundle\DataTransformer;
 
 use ApiPlatform\Core\Api\IriConverterInterface;
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
@@ -23,23 +23,22 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-final class CatalogPromotionDataPersisterSpec extends ObjectBehavior
+final class CatalogPromotionDataTransformerSpec extends ObjectBehavior
 {
-    function let(
-        ContextAwareDataPersisterInterface $decoratedDataPersister,
-        IriConverterInterface $iriConverter
-    ): void {
-        $this->beConstructedWith($decoratedDataPersister, $iriConverter);
+    function let(IriConverterInterface $iriConverter): void
+    {
+        $this->beConstructedWith($iriConverter);
     }
 
-    function it_supports_only_catalog_promotion_entity(CatalogPromotionInterface $catalogPromotion, ResourceInterface $resource): void
-    {
+    function it_supports_only_catalog_promotion_entity(
+        CatalogPromotionInterface $catalogPromotion,
+        ResourceInterface $resource
+    ): void {
         $this->supports($catalogPromotion)->shouldReturn(true);
         $this->supports($resource)->shouldReturn(false);
     }
 
     function it_replaces_codes_with_iri_in_configuration(
-        ContextAwareDataPersisterInterface $decoratedDataPersister,
         IriConverterInterface $iriConverter,
         CatalogPromotionInterface $catalogPromotion,
         CatalogPromotionRuleInterface $catalogPromotionRuleOne,
@@ -61,9 +60,13 @@ final class CatalogPromotionDataPersisterSpec extends ObjectBehavior
         $catalogPromotionRuleOne->setConfiguration(['MUG'])->shouldBeCalled();
         $catalogPromotionRuleTwo->setConfiguration(['MUG_2'])->shouldBeCalled();
 
-        $decoratedDataPersister->persist($catalogPromotion, [])->shouldBeCalled();
-
-        $this->persist($catalogPromotion, []);
+        $this
+            ->transform(
+                $catalogPromotion,
+                CatalogPromotionInterface::class,
+                []
+            )
+            ->shouldReturn($catalogPromotion);
     }
 
     function it_throws_item_not_found_exception_if_product_variant_is_not_found(
@@ -92,12 +95,10 @@ final class CatalogPromotionDataPersisterSpec extends ObjectBehavior
         $decoratedDataPersister->persist($catalogPromotion, [])->shouldNotBeCalled();
 
         $this->shouldThrow(ItemNotFoundException::class)->during('persist', [$catalogPromotion, []]);
-    }
 
-    function it_removes_catalog_promotion(ContextAwareDataPersisterInterface $decoratedDataPersister, CatalogPromotionInterface $catalogPromotion): void
-    {
-        $decoratedDataPersister->remove($catalogPromotion, [])->shouldBeCalled();
-
-        $this->remove($catalogPromotion, []);
+        $this
+            ->shouldThrow(ItemNotFoundException::class)
+            ->during('transform', [$catalogPromotion, CatalogPromotionInterface::class, []])
+        ;
     }
 }
