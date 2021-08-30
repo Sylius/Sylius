@@ -9,7 +9,7 @@ Feature: Browsing catalog promotions
         And there are catalog promotions named "Summer sale" and "Winter sale"
         And I am logged in as an administrator
 
-    @api
+    @api @ui
     Scenario: Browsing defined catalog promotions
         When I browse catalog promotions
         Then there should be 2 catalog promotions on the list
