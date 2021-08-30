@@ -6,10 +6,6 @@ Feature: Creating a catalog promotion
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a "T-Shirt" configurable product
-        And this product has "PHP T-Shirt" variant priced at "$20.00"
-        And this product has "Kotlin T-Shirt" variant priced at "$40.00"
-        And this product has "Python T-Shirt" variant priced at "$40.00"
         And I am logged in as an administrator
 
     @api
@@ -21,6 +17,10 @@ Feature: Creating a catalog promotion
 
     @api
     Scenario: Creating a catalog promotion
+        Given the store has a "T-Shirt" configurable product
+        And this product has "PHP T-Shirt" variant priced at "$20.00"
+        And this product has "Kotlin T-Shirt" variant priced at "$40.00"
+        And this product has "Python T-Shirt" variant priced at "$40.00"
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
         And I name it "Winter sale"
