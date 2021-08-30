@@ -9,6 +9,7 @@
         "\/api\/v2\/admin\/channels\/WEB"
     ],
     "rules": [],
+    "actions": [],
     "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/catalog-promotion-translations\/@integer@",

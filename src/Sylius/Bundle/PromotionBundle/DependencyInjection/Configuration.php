@@ -152,7 +152,7 @@ final class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                         ->end()
-                        ->arrayNode('catalog_promotion_rule')
+                        ->arrayNode('catalog_promotion_action')
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->variableNode('options')->end()

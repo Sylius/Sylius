@@ -79,6 +79,14 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 'channels' => [
                     '/api/v2/admin/channels/WEB',
                 ],
+                'actions' => [
+                    [
+                        'type' => CatalogPromotionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                        'configuration' => [
+                            'amount' => '50%'
+                        ]
+                    ]
+                ],
                 'rules' => [
                     [
                         'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
@@ -166,6 +174,14 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             json_encode([
                 'name' => 'T-Shirts discount',
                 'code' => 'new_code',
+                'actions' => [
+                    [
+                        'type' => CatalogPromotionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                        'configuration' => [
+                            'amount' => '40%'
+                        ]
+                    ]
+                ],
                 'rules' => [
                     [
                         'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,

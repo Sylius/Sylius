@@ -21,7 +21,6 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
@@ -134,30 +133,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I want to create new catalog promotion
-     */
-    public function iWantToCreateNewCatalogPromotion(): void
-    {
-        $this->client->buildCreateRequest();
-    }
-
-    /**
-     * @When I specify its code as :code
-     */
-    public function iSpecifyItsCodeAs(string $code): void
-    {
-        $this->client->addRequestData('code', $code);
-    }
-
-    /**
-     * @When I name it :name
-     */
-    public function iNameIt(string $name): void
-    {
-        $this->client->addRequestData('name', $name);
-    }
-
-    /**
      * @When I add it
      */
     public function iAddIt(): void
@@ -186,14 +161,13 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I add the :type catalog promotion action configured with amount of :amount
+     * @When I add the percentage discount catalog promotion action configured with amount of :amount
      */
-    public function iAddTheCatalogPromotionActionConfiguredWithAmountOf(string $type, string $amount): void
+    public function iAddThePercentageDiscountCatalogPromotionActionConfiguredWithAmountOf(string $amount): void
     {
         $actions = [
             [
-                'type' => $type,
+                'type' => CatalogPromotionInterface::TYPE_PERCENTAGE_DISCOUNT,
                 'configuration' => [
                     'amount' => $amount
                 ],
@@ -204,28 +178,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully created
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
-    {
-        Assert::same($this->client->getLastResponse()->getStatusCode(), 201);
-    }
-
-    /**
-     * @Then the :catalogPromotionName catalog promotion should appear in the registry with :catalogPromotionAction action
-     */
-    public function theCatalogPromotionShouldAppearInTheRegistry(string $catalogPromotionName, string $catalogPromotionAction): void
-    {
-        $this->client->show($this->responseChecker->getResponseContent($this->client->getLastResponse())['code']);
-
-        $catalogPromotion = $this->responseChecker->getResponseContent($this->client->getLastResponse());
-
-        Assert::same($catalogPromotion['name'], $catalogPromotionName);
-        Assert::same($catalogPromotion['actions'][0]['type'], $catalogPromotionAction);
-    }
-
-    /**
-     * @Then there should be :amount new catalog promotion on the list
+     * @When I save my changes
      */
     public function iSaveMyChanges(): void
     {
@@ -276,6 +229,23 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I want ("[^"]+" catalog promotion) to have "([^"]+)" discount$/
+     */
+    public function iWantPromotionToHaveDiscount(CatalogPromotionInterface $catalogPromotion, string $amount): void
+    {
+        $this->client->buildUpdateRequest($catalogPromotion->getCode());
+        $rules = [[
+            'type' => CatalogPromotionInterface::TYPE_PERCENTAGE_DISCOUNT,
+            'configuration' => [
+                'amount' => $amount,
+            ],
+        ]];
+
+        $this->client->updateRequestData(['actions' => $rules]);
+        $this->client->update();
+    }
+
+    /**
      * @Then there should be :amount new catalog promotion on the list
      * @Then there should be :amount catalog promotions on the list
      * @Then there should be an empty list of catalog promotions
@@ -283,6 +253,35 @@ final class ManagingCatalogPromotionsContext implements Context
     public function thereShouldBeNewCatalogPromotionOnTheList(int $amount = 0): void
     {
         Assert::count($this->responseChecker->getCollection($this->client->index()), $amount);
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully created
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
+    {
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 201);
+    }
+
+    /**
+     * @Then /^it should have "([^"]+)" discount$/
+     */
+    public function itShouldHaveDiscount(string $amount): void
+    {
+        $catalogPromotion = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
+
+        Assert::same($catalogPromotion['actions'][0]['configuration']['amount'], $amount);
+    }
+
+    /**
+     * @Then this catalog promotion should have :amount percentage discount
+     */
+    public function itShouldHavePercentageDiscount(string $amount): void
+    {
+        $catalogPromotionAction = $this->responseChecker->getResponseContent($this->client->getLastResponse())['actions'][0];
+
+        Assert::same($amount, $catalogPromotionAction['configuration']['amount']);
+        Assert::same(CatalogPromotionInterface::TYPE_PERCENTAGE_DISCOUNT, $catalogPromotionAction['type']);
     }
 
     /**
