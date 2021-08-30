@@ -506,6 +506,7 @@ sylius:
         need_assistance: 'Need assistance?'
         new: 'New'
         new_admin_user: 'New administrator'
+        new_catalog_promotion: 'New catalog promotion'
         new_channel: 'New channel'
         new_comment_posted_on_order: 'New comment posted on order'
         new_country: 'New country'

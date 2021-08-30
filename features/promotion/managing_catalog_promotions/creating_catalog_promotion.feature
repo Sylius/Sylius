@@ -8,7 +8,7 @@ Feature: Creating a catalog promotion
         Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @api
+    @api @ui
     Scenario: Creating a simple catalog promotion only with code and name
         When I create a new catalog promotion with "winter_sale" code and "Winter sale" name
         Then there should be 1 new catalog promotion on the list

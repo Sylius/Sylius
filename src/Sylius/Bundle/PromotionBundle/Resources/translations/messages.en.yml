@@ -2,6 +2,8 @@
 # (c) Paweł Jędrzejewski
 sylius:
     form:
+        catalog_promotion:
+            name: Name
         promotion:
             actions: Actions
             add_action: Add action

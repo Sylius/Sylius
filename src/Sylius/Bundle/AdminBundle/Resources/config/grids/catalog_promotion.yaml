@@ -18,3 +18,7 @@ sylius_grid:
                     type: string
                     label: sylius.ui.label
                     sortable: ~
+            actions:
+                main:
+                    create:
+                        type: create

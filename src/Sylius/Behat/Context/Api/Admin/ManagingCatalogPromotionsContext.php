@@ -20,18 +20,22 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
 {
     private ApiClientInterface $client;
+
     private ResponseCheckerInterface $responseChecker;
+
     private MessageBusInterface $messageBus;
+
     private IriConverterInterface $iriConverter;
+
     private SharedStorageInterface $sharedStorage;
 
     public function __construct(
