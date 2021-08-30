@@ -8,6 +8,17 @@
     "channels": [
         "\/api\/v2\/admin\/channels\/WEB"
     ],
+    "rules": [
+        {
+            "@type": "CatalogPromotionRule",
+            "@id": @string@,
+            "id": @integer@,
+            "type": "contains_variants",
+            "configuration": [
+                "\/api\/v2\/admin\/product-variants\/MUG"
+            ]
+        }
+    ],
     "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/catalog-promotion-translations\/@integer@",

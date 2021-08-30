@@ -74,5 +74,6 @@
                 </attribute>
             </attribute>
         </property>
+        <property name="rules" writable="true" />
     </resource>
 </resources>

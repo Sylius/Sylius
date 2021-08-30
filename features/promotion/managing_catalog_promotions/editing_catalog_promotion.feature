@@ -7,7 +7,11 @@ Feature: Editing catalog promotion
     Background:
         Given the store operates on a single channel in "United States"
         And the store operates on a channel named "Europe"
+        And the store has a "T-Shirt" configurable product
+        And this product has "PHP T-Shirt" variant priced at "$20.00"
+        And this product has "Kotlin T-Shirt" variant priced at "$40.00"
         And there is a catalog promotion with "christmas_sale" code and "Christmas sale" name
+        And it will be applied on "PHP T-Shirt" variant
         And I am logged in as an administrator
 
     @api
@@ -39,3 +43,9 @@ Feature: Editing catalog promotion
     Scenario: Trying to change code of catalog promotion
         When I try to change the code of the "Christmas sale" catalog promotion to "sale"
         Then this catalog promotion code should still be "christmas_sale"
+
+    @api
+    Scenario: Editing catalog promotion rule
+        When I want "Christmas sale" catalog promotion to be applied on "Kotlin T-shirt" variant
+        Then I should be notified that it has been successfully edited
+        And this catalog promotion should be applied on "Kotlin T-shirt" variant

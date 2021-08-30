@@ -22,6 +22,8 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
@@ -69,7 +71,7 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @When I want to create a new catalog promotion
      */
-    public function iWantToCreateANewCatalogPromotion(): void
+    public function iWantToCreateNewCatalogPromotion(): void
     {
         $this->client->buildCreateRequest();
     }
@@ -184,6 +186,41 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I add the "contains variants" rule configured with :firstVariant and :secondVariant
+     * @When /^I add the "contains variants" rule configured with ("[^"]+" variant) and ("[^"]+" variant)$/
+     * @When /^it applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/
+     */
+    public function iAddTheRuleConfiguredWithProductAnd(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
+    {
+        $rules = [[
+            'type' => CatalogPromotionRuleInterface::TYPE_CONTAINS_VARIANTS,
+            'configuration' => [
+                $this->iriConverter->getIriFromItem($firstVariant),
+                $this->iriConverter->getIriFromItem($secondVariant),
+            ],
+        ]];
+
+        $this->client->addRequestData('rules', $rules);
+    }
+
+    /**
+     * @When /^I want ("[^"]+" catalog promotion) to be applied on ("[^"]+" variant)$/
+     */
+    public function iWantCatalogPromotionToBeAppliedOn(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface $productVariant): void
+    {
+        $this->client->buildUpdateRequest($catalogPromotion->getCode());
+        $rules = [[
+            'type' => CatalogPromotionRuleInterface::TYPE_CONTAINS_VARIANTS,
+            'configuration' => [
+                $this->iriConverter->getIriFromItem($productVariant),
+            ],
+        ]];
+
+        $this->client->updateRequestData(['rules' => $rules]);
+        $this->client->update();
+    }
+
+    /**
      * @Then there should be :amount new catalog promotion on the list
      * @Then there should be :amount catalog promotions on the list
      * @Then there should be an empty list of catalog promotions
@@ -215,6 +252,18 @@ final class ManagingCatalogPromotionsContext implements Context
                 sprintf('Cannot find catalog promotions with name "%s" in the list', $name)
             );
         }
+    }
+
+    /**
+     * @Then it should have "contains variants" rule
+     * @Then /^it should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
+     */
+    public function itShouldHaveRule(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
+    {
+        Assert::same(
+            [$this->iriConverter->getIriFromItem($firstVariant), $this->iriConverter->getIriFromItem($secondVariant)],
+            $this->responseChecker->getCollection($this->client->getLastResponse())[0]['rules'][0]['configuration']
+        );
     }
 
     /**
@@ -299,6 +348,19 @@ final class ManagingCatalogPromotionsContext implements Context
         $response = $this->client->show($catalogPromotion->getCode());
 
         Assert::true($this->responseChecker->hasTranslation($response, $localeCode, $fieldsMapping[$field], $value));
+
+    }
+
+    /**
+     * @Then /^(this catalog promotion) should be applied on ("[^"]+" variant)$/
+     */
+    public function thisCatalogPromotionShouldBeAppliedOn(
+        CatalogPromotionInterface $catalogPromotion,
+        ProductVariantInterface $productVariant
+    ): void {
+        $this->client->show($catalogPromotion->getCode());
+
+        Assert::true($this->catalogPromotionAppliesOn($productVariant));
     }
 
     /**
@@ -345,5 +407,29 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->hasValue($this->client->getLastResponse(), 'code', $code),
             'The code has been changed, but it should not'
         );
+    }
+
+    private function catalogPromotionAppliesOn(ProductVariantInterface ...$productVariants): bool
+    {
+        $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+
+        foreach ($productVariants as $productVariant) {
+            if ($this->hasVariantInConfiguration($response['rules'][0]['configuration'], $productVariant) === false) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function hasVariantInConfiguration(array $configuration, ProductVariantInterface $productVariant): bool
+    {
+        foreach ($configuration as $productVariantIri) {
+            if ($productVariantIri === $this->iriConverter->getIriFromItem($productVariant)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
