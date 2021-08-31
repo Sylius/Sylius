@@ -526,6 +526,22 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
+    /**
+     * @Then I should be notified that configuration of a discount is required
+     */
+    public function iShouldBeNotifiedThatConfigurationOfADiscountIsRequired(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::false(
+            $this->responseChecker->isCreationSuccessful($response),
+            'Catalog promotion has been created successfully, but it should not'
+        );
+        Assert::same(
+            $this->responseChecker->getError($response),
+            'discount: Please enter catalog promotion discount.'
+        );
+    }
+
     private function catalogPromotionAppliesOn(ProductVariantInterface ...$productVariants): bool
     {
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
