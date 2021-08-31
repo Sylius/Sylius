@@ -19,10 +19,8 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionRule;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class CatalogPromotionContext implements Context
 {
@@ -77,25 +75,17 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^(it) will be applied on ("[^"]+" taxon)$/
-     */
-    public function itWillBeAppliedOnTaxon(CatalogPromotionInterface $catalogPromotion, TaxonInterface $taxon): void
-    {
-        // TODO: Add Taxon Rule to the Catalog Promotion
-    }
-
-    /**
      * @Given /^(it) will be applied on ("[^"]+" variant)$/
      */
     public function itWillBeAppliedOnVariant(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface $variant): void
     {
         $catalogPromotionRule = new CatalogPromotionRule();
 
-        $catalogPromotionRule->setType(CatalogPromotionRule::TYPE_CONTAINS_VARIANTS);
+        $catalogPromotionRule->setType(CatalogPromotionRule::TYPE_FOR_VARIANTS);
         $catalogPromotionRule->setConfiguration([$variant->getCode()]);
-        $catalogPromotionRule->setCatalogPromotion($catalogPromotion);
 
-        $this->entityManager->persist($catalogPromotionRule);
+        $catalogPromotion->addRule($catalogPromotionRule);
+
         $this->entityManager->flush();
     }
 

@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Applicator;
 
-use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 
 interface CatalogPromotionApplicatorInterface
 {
-    public function applyPercentageDiscount(ProductInterface $product, float $discount): void;
+    public function applyPercentageDiscount(ProductVariantInterface $variant, float $discount): void;
 }

@@ -16,8 +16,8 @@ namespace spec\Sylius\Bundle\CoreBundle\Listener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CatalogPromotionUpdateListenerSpec extends ObjectBehavior

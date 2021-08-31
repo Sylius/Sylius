@@ -18,7 +18,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class CatalogPromotionApplicatorSpec extends ObjectBehavior
@@ -29,21 +28,12 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
     }
 
     function it_applies_percentage_discount_on_all_products_variants(
-        ProductInterface $product,
-        ProductVariantInterface $firstVariant,
-        ProductVariantInterface $secondVariant,
+        ProductVariantInterface $variant,
         ChannelPricingInterface $firstChannelPricing,
         ChannelPricingInterface $secondChannelPricing
     ): void {
-        $product->getVariants()->willReturn(new ArrayCollection([
-            $firstVariant->getWrappedObject(),
-            $secondVariant->getWrappedObject(),
-        ]));
-
-        $firstVariant->getChannelPricings()->willReturn(new ArrayCollection([
+        $variant->getChannelPricings()->willReturn(new ArrayCollection([
             $firstChannelPricing->getWrappedObject(),
-        ]));
-        $secondVariant->getChannelPricings()->willReturn(new ArrayCollection([
             $secondChannelPricing->getWrappedObject(),
         ]));
 
@@ -57,19 +47,14 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $secondChannelPricing->setOriginalPrice(1400)->shouldBeCalled();
         $secondChannelPricing->setPrice(840)->shouldBeCalled();
 
-        $this->applyPercentageDiscount($product, 0.4);
+        $this->applyPercentageDiscount($variant, 0.4);
     }
 
     function it_does_not_set_original_price_during_application_if_its_already_there(
-        ProductInterface $product,
-        ProductVariantInterface $firstVariant,
+        ProductVariantInterface $variant,
         ChannelPricingInterface $firstChannelPricing
     ): void {
-        $product->getVariants()->willReturn(new ArrayCollection([
-            $firstVariant->getWrappedObject()
-        ]));
-
-        $firstVariant->getChannelPricings()->willReturn(new ArrayCollection([
+        $variant->getChannelPricings()->willReturn(new ArrayCollection([
             $firstChannelPricing->getWrappedObject(),
         ]));
 
@@ -78,6 +63,6 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $firstChannelPricing->setOriginalPrice(Argument::any())->shouldNotBeCalled();
         $firstChannelPricing->setPrice(500)->shouldBeCalled();
 
-        $this->applyPercentageDiscount($product, 0.5);
+        $this->applyPercentageDiscount($variant, 0.5);
     }
 }

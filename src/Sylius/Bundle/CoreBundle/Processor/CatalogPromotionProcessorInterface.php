@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Processor;
 
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 
 interface CatalogPromotionProcessorInterface
 {

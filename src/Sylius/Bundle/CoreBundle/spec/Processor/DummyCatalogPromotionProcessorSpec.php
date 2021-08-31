@@ -15,26 +15,22 @@ namespace spec\Sylius\Bundle\CoreBundle\Processor;
 
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
-use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
 
 final class DummyCatalogPromotionProcessorSpec extends ObjectBehavior
 {
     function let(
-        ProductRepositoryInterface $productRepository,
-        TaxonRepositoryInterface $taxonRepository,
+        CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
         CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
         EntityManagerInterface $entityManager
     ): void {
         $this->beConstructedWith(
-            $productRepository,
-            $taxonRepository,
+            $catalogPromotionVariantsProvider,
             $productCatalogPromotionApplicator,
             $entityManager
         );
@@ -45,22 +41,21 @@ final class DummyCatalogPromotionProcessorSpec extends ObjectBehavior
         $this->shouldImplement(CatalogPromotionProcessorInterface::class);
     }
 
-    function it_always_applies_50_percent_catalog_promotion_on_t_shirts_products(
-        ProductRepositoryInterface $productRepository,
-        TaxonRepositoryInterface $taxonRepository,
+    function it_always_applies_50_percent_catalog_promotion_on_products_from_eligible_taxon(
+        CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
         CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
         EntityManagerInterface $entityManager,
         CatalogPromotionInterface $catalogPromotion,
-        TaxonInterface $taxon,
-        ProductInterface $firstProduct,
-        ProductInterface $secondProduct
+        ProductVariantInterface $firstVariant,
+        ProductVariantInterface $secondVariant
     ): void {
-        $taxonRepository->findOneBy(['code' => 't_shirts'])->willReturn($taxon);
+        $catalogPromotionVariantsProvider
+            ->provideEligibleVariants($catalogPromotion)
+            ->willReturn([$firstVariant, $secondVariant])
+        ;
 
-        $productRepository->findByTaxon($taxon)->willReturn([$firstProduct, $secondProduct]);
-
-        $productCatalogPromotionApplicator->applyPercentageDiscount($firstProduct, 0.5)->shouldBeCalled();
-        $productCatalogPromotionApplicator->applyPercentageDiscount($secondProduct, 0.5)->shouldBeCalled();
+        $productCatalogPromotionApplicator->applyPercentageDiscount($firstVariant, 0.5)->shouldBeCalled();
+        $productCatalogPromotionApplicator->applyPercentageDiscount($secondVariant, 0.5)->shouldBeCalled();
 
         $entityManager->flush()->shouldBeCalled();
 
@@ -68,13 +63,13 @@ final class DummyCatalogPromotionProcessorSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_there_is_no_t_shirts_taxon(
-        ProductRepositoryInterface $productRepository,
-        TaxonRepositoryInterface $taxonRepository,
+        CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
+        EntityManagerInterface $entityManager,
         CatalogPromotionInterface $catalogPromotion
     ): void {
-        $taxonRepository->findOneBy(['code' => 't_shirts'])->willReturn(null);
+        $catalogPromotionVariantsProvider->provideEligibleVariants($catalogPromotion)->willReturn([]);
 
-        $productRepository->findByTaxon(Argument::any())->shouldNotBeCalled();
+        $entityManager->flush()->shouldNotBeCalled();
 
         $this->process($catalogPromotion);
     }

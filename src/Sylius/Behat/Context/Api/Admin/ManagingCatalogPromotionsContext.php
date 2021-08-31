@@ -193,7 +193,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddTheRuleConfiguredWithProductAnd(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
     {
         $rules = [[
-            'type' => CatalogPromotionRuleInterface::TYPE_CONTAINS_VARIANTS,
+            'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
             'configuration' => [
                 $firstVariant->getCode(),
                 $secondVariant->getCode(),
@@ -210,7 +210,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $this->client->buildUpdateRequest($catalogPromotion->getCode());
         $rules = [[
-            'type' => CatalogPromotionRuleInterface::TYPE_CONTAINS_VARIANTS,
+            'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
             'configuration' => [
                 $productVariant->getCode(),
             ],

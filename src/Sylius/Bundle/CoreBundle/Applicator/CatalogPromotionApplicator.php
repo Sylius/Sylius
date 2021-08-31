@@ -14,20 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Applicator;
 
 use Sylius\Component\Core\Model\ChannelPricingInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInterface
 {
-    public function applyPercentageDiscount(ProductInterface $product, float $discount): void
-    {
-        /** @var ProductVariantInterface $variant */
-        foreach ($product->getVariants() as $variant) {
-            $this->lowerVariantPricesForAllChannels($variant, $discount);
-        }
-    }
-
-    private function lowerVariantPricesForAllChannels(ProductVariantInterface $variant, float $discount): void
+    public function applyPercentageDiscount(ProductVariantInterface $variant, float $discount): void
     {
         /** @var ChannelPricingInterface $channelPricing */
         foreach ($variant->getChannelPricings() as $channelPricing) {
