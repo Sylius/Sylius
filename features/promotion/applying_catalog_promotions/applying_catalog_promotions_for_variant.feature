@@ -1,5 +1,5 @@
 @applying_catalog_promotions
-Feature: Applying catalog promotions for taxons
+Feature: Applying catalog promotions for variants
     In order to be attracted to products
     As a Customer
     I want to see discounted products in the catalog

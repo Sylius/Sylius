@@ -60,7 +60,7 @@ final class ProductContext implements Context
     {
         $this->client->show($product->getCode());
         $this->sharedStorage->set('product', $product);
-        $this->sharedStorage->set('productVariant', current($product->getVariants()->getValues()));
+        $this->sharedStorage->set('product_variant', current($product->getVariants()->getValues()));
     }
 
     /**
@@ -116,7 +116,7 @@ final class ProductContext implements Context
     public function iShouldSeeItIsOutOfStock(): void
     {
         /** @var ProductVariantInterface $productVariant */
-        $productVariant = $this->sharedStorage->get('productVariant');
+        $productVariant = $this->sharedStorage->get('product_variant');
 
         $variantResponse = $this->client->showByIri($this->iriConverter->getIriFromItem($productVariant));
 
@@ -152,12 +152,12 @@ final class ProductContext implements Context
      */
     public function iShouldSeeTheProductOriginalPrice(int $originalPrice): void
     {
-        /** @var ProductInterface $checkedProduct */
-        $checkedProduct = $this->sharedStorage->get('productVariant');
-        $product = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+        /** @var ProductVariantInterface $checkedVariant */
+        $checkedVariant = $this->sharedStorage->get('product_variant');
+        $variant = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
-        Assert::same($product['originalPrice'], $originalPrice);
-        Assert::same($product['code'], $checkedProduct->getCode());
+        Assert::same($variant['originalPrice'], $originalPrice);
+        Assert::same($variant['code'], $checkedVariant->getCode());
     }
 
     /**

@@ -81,7 +81,7 @@ final class CatalogPromotionContext implements Context
     {
         $catalogPromotionRule = new CatalogPromotionRule();
 
-        $catalogPromotionRule->setType(CatalogPromotionRule::TYPE_CONTAINS_VARIANTS);
+        $catalogPromotionRule->setType(CatalogPromotionRule::TYPE_FOR_VARIANTS);
         $catalogPromotionRule->setConfiguration([$variant->getCode()]);
 
         $catalogPromotion->addRule($catalogPromotionRule);

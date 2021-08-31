@@ -13,7 +13,7 @@
             "@type": "CatalogPromotionRule",
             "@id": @string@,
             "id": @integer@,
-            "type": "contains_variants",
+            "type": "for_variants",
             "configuration": [
                 "\/api\/v2\/admin\/product-variants\/MUG"
             ]

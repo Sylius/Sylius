@@ -17,36 +17,37 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Provider\CatalogPromotionProductsProviderInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
 
 final class DummyCatalogPromotionProcessor implements CatalogPromotionProcessorInterface
 {
-    private CatalogPromotionProductsProviderInterface $catalogPromotionProductsProvider;
+    private CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider;
 
     private CatalogPromotionApplicatorInterface $catalogPromotionApplicator;
 
     private EntityManagerInterface $entityManager;
 
     public function __construct(
-        CatalogPromotionProductsProviderInterface $catalogPromotionProductsProvider,
+        CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
         CatalogPromotionApplicatorInterface $catalogPromotionApplicator,
         EntityManagerInterface $entityManager
     ) {
-        $this->catalogPromotionProductsProvider = $catalogPromotionProductsProvider;
+        $this->catalogPromotionVariantsProvider = $catalogPromotionVariantsProvider;
         $this->catalogPromotionApplicator = $catalogPromotionApplicator;
         $this->entityManager = $entityManager;
     }
 
     public function process(CatalogPromotionInterface $catalogPromotion): void
     {
-        $products = $this->catalogPromotionProductsProvider->provideEligibleProducts($catalogPromotion);
-        if (empty($products)) {
+        $variants = $this->catalogPromotionVariantsProvider->provideEligibleVariants($catalogPromotion);
+        if (empty($variants)) {
             return;
         }
 
-        /** @var ProductInterface $product */
-        foreach ($products as $product) {
-            $this->catalogPromotionApplicator->applyPercentageDiscount($product, 0.5);
+        /** @var ProductVariantInterface $variant */
+        foreach ($variants as $variant) {
+            $this->catalogPromotionApplicator->applyPercentageDiscount($variant, 0.5);
         }
 
         $this->entityManager->flush();

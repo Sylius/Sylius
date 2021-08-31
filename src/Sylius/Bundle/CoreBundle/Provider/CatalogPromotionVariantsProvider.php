@@ -16,11 +16,11 @@ namespace Sylius\Bundle\CoreBundle\Provider;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Provider\CatalogPromotionProductsProviderInterface;
+use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
 
-final class CatalogPromotionProductsProvider implements CatalogPromotionProductsProviderInterface
+final class CatalogPromotionVariantsProvider implements CatalogPromotionVariantsProviderInterface
 {
     private ProductVariantRepositoryInterface $productVariantRepository;
 
@@ -29,22 +29,22 @@ final class CatalogPromotionProductsProvider implements CatalogPromotionProducts
         $this->productVariantRepository = $productVariantRepository;
     }
 
-    public function provideEligibleProducts(CatalogPromotionInterface $catalogPromotion): array
+    public function provideEligibleVariants(CatalogPromotionInterface $catalogPromotion): array
     {
-        $products = [];
+        $variants = [];
 
         /** @var CatalogPromotionRuleInterface $rule */
         foreach ($catalogPromotion->getRules() as $rule) {
             $configuration = $rule->getConfiguration();
 
             /** We can do that for now, as we have only one rule */
-            $products = $this->getVariantsProducts($configuration, $products);
+            $variants = $this->getVariantsProducts($configuration, $variants);
         }
 
-        return $products;
+        return $variants;
     }
 
-    private function getVariantsProducts(array $configuration, array $products): array
+    private function getVariantsProducts(array $configuration, array $variants): array
     {
         /** @var string $variantCode */
         foreach ($configuration as $variantCode) {
@@ -54,13 +54,11 @@ final class CatalogPromotionProductsProvider implements CatalogPromotionProducts
                 continue;
             }
 
-            /** @var ProductInterface $product */
-            $product = $variant->getProduct();
-            if (!in_array($product, $products)) {
-                $products[] = $product;
+            if (!in_array($variant, $variants)) {
+                $variants[] = $variant;
             }
         }
 
-        return $products;
+        return $variants;
     }
 }

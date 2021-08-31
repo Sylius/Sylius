@@ -19,17 +19,18 @@ use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Provider\CatalogPromotionProductsProviderInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
 
 final class DummyCatalogPromotionProcessorSpec extends ObjectBehavior
 {
     function let(
-        CatalogPromotionProductsProviderInterface $catalogPromotionProductsProvider,
+        CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
         CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
         EntityManagerInterface $entityManager
     ): void {
         $this->beConstructedWith(
-            $catalogPromotionProductsProvider,
+            $catalogPromotionVariantsProvider,
             $productCatalogPromotionApplicator,
             $entityManager
         );
@@ -41,20 +42,20 @@ final class DummyCatalogPromotionProcessorSpec extends ObjectBehavior
     }
 
     function it_always_applies_50_percent_catalog_promotion_on_products_from_eligible_taxon(
-        CatalogPromotionProductsProviderInterface $catalogPromotionProductsProvider,
+        CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
         CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
         EntityManagerInterface $entityManager,
         CatalogPromotionInterface $catalogPromotion,
-        ProductInterface $firstProduct,
-        ProductInterface $secondProduct
+        ProductVariantInterface $firstVariant,
+        ProductVariantInterface $secondVariant
     ): void {
-        $catalogPromotionProductsProvider
-            ->provideEligibleProducts($catalogPromotion)
-            ->willReturn([$firstProduct, $secondProduct])
+        $catalogPromotionVariantsProvider
+            ->provideEligibleVariants($catalogPromotion)
+            ->willReturn([$firstVariant, $secondVariant])
         ;
 
-        $productCatalogPromotionApplicator->applyPercentageDiscount($firstProduct, 0.5)->shouldBeCalled();
-        $productCatalogPromotionApplicator->applyPercentageDiscount($secondProduct, 0.5)->shouldBeCalled();
+        $productCatalogPromotionApplicator->applyPercentageDiscount($firstVariant, 0.5)->shouldBeCalled();
+        $productCatalogPromotionApplicator->applyPercentageDiscount($secondVariant, 0.5)->shouldBeCalled();
 
         $entityManager->flush()->shouldBeCalled();
 
@@ -62,11 +63,11 @@ final class DummyCatalogPromotionProcessorSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_there_is_no_t_shirts_taxon(
-        CatalogPromotionProductsProviderInterface $catalogPromotionProductsProvider,
+        CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
         EntityManagerInterface $entityManager,
         CatalogPromotionInterface $catalogPromotion
     ): void {
-        $catalogPromotionProductsProvider->provideEligibleProducts($catalogPromotion)->willReturn([]);
+        $catalogPromotionVariantsProvider->provideEligibleVariants($catalogPromotion)->willReturn([]);
 
         $entityManager->flush()->shouldNotBeCalled();
 

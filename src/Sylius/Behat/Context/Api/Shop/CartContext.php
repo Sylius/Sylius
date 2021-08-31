@@ -603,7 +603,7 @@ final class CartContext implements Context
     public function iShouldBeUnableToAddItToTheCart(): void
     {
         /** @var ProductVariantInterface $productVariant */
-        $productVariant = $this->sharedStorage->get('productVariant');
+        $productVariant = $this->sharedStorage->get('product_variant');
 
         $tokenValue = $this->pickupCart();
         $this->putProductVariantToCart($productVariant, $tokenValue);
