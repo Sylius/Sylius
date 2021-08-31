@@ -83,7 +83,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     [
                         'type' => CatalogPromotionRuleInterface::TYPE_CONTAINS_VARIANTS,
                         'configuration' => [
-                            '/api/v2/shop/product-variants/MUG'
+                            'MUG'
                         ],
                     ]
                 ],
@@ -170,7 +170,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     [
                         'type' => CatalogPromotionRuleInterface::TYPE_CONTAINS_VARIANTS,
                         'configuration' => [
-                            '/api/v2/admin/product-variants/MUG'
+                            'MUG'
                         ],
                     ]
                 ],

@@ -15,7 +15,7 @@
             "id": @integer@,
             "type": "contains_variants",
             "configuration": [
-                "\/api\/v2\/admin\/product-variants\/MUG"
+                "MUG"
             ]
         }
     ],

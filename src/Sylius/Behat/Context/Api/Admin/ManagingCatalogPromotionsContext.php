@@ -195,8 +195,8 @@ final class ManagingCatalogPromotionsContext implements Context
         $rules = [[
             'type' => CatalogPromotionRuleInterface::TYPE_CONTAINS_VARIANTS,
             'configuration' => [
-                $this->iriConverter->getIriFromItem($firstVariant),
-                $this->iriConverter->getIriFromItem($secondVariant),
+                $firstVariant->getCode(),
+                $secondVariant->getCode(),
             ],
         ]];
 
@@ -212,7 +212,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $rules = [[
             'type' => CatalogPromotionRuleInterface::TYPE_CONTAINS_VARIANTS,
             'configuration' => [
-                $this->iriConverter->getIriFromItem($productVariant),
+                $productVariant->getCode(),
             ],
         ]];
 
@@ -261,7 +261,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function itShouldHaveRule(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
     {
         Assert::same(
-            [$this->iriConverter->getIriFromItem($firstVariant), $this->iriConverter->getIriFromItem($secondVariant)],
+            [$firstVariant->getCode(), $secondVariant->getCode()],
             $this->responseChecker->getCollection($this->client->getLastResponse())[0]['rules'][0]['configuration']
         );
     }
@@ -425,7 +425,7 @@ final class ManagingCatalogPromotionsContext implements Context
     private function hasVariantInConfiguration(array $configuration, ProductVariantInterface $productVariant): bool
     {
         foreach ($configuration as $productVariantIri) {
-            if ($productVariantIri === $this->iriConverter->getIriFromItem($productVariant)) {
+            if ($productVariantIri === $productVariant->getCode()) {
                 return true;
             }
         }
