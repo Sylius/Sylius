@@ -13,18 +13,23 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\CatalogPromotion;
 
-use Sylius\Behat\Behaviour\SpecifiesItsCode;
-use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Behat\Mink\Element\NodeElement;
+use Sylius\Behat\Behaviour\ChecksCodeImmutability;
+use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
-class CreatePage extends BaseCreatePage implements CreatePageInterface
+class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
-    use SpecifiesItsCode;
+    use ChecksCodeImmutability;
+
+    protected function getCodeElement(): NodeElement
+    {
+        return $this->getElement('code');
+    }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_catalog_promotion_code',
-            'name' => '#sylius_catalog_promotion_name',
         ]);
     }
 }
