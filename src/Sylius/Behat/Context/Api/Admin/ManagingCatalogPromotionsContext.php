@@ -135,7 +135,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I add it
+     * @When I (try to) add it
      */
     public function iAddIt(): void
     {
@@ -244,6 +244,36 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->client->updateRequestData(['actions' => $rules]);
         $this->client->update();
     }
+
+    /**
+     * @Given I specify nonexistent catalog promotion rule
+     */
+    public function ISpecifyNonexistentCatalogPromotionRule(): void
+    {
+        $rules = [[
+            'type' => 'nonexistent_rule',
+            'configuration' => [
+                'config' => 'config'
+            ],
+        ]];
+
+        $this->client->addRequestData('rules', $rules);
+    }
+
+    /**
+     * @Given I specify rule "Contains variants" with wrong configuration
+     */
+    public function iSpecifyRuleWithWrongConfiguration(): void
+    {
+        $rules = [[
+            'type' => 'nonexistent_rule',
+            'configuration' => [
+                'config' => ['more_config' => 'wrong config'],
+                'product' => 'some_product'
+            ],
+        ]];
+
+        $this->client->addRequestData('rules', $rules);    }
 
     /**
      * @Then there should be :amount new catalog promotion on the list
@@ -431,6 +461,28 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::same(
             $this->responseChecker->getError($response),
             'code: The catalog promotion with given code already exists.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that rule is invalid
+     */
+    public function iShouldBeNotifiedThatRuleIsInvalid(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'rule: Please enter valid rule name'
+        );
+    }
+
+    /**
+     * @Then I should be notified that rule configuration is invalid
+     */
+    public function iShouldBeNotifiedThatRuleConfigurationIsInvalid(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'rule: Please enter valid rule configuration'
         );
     }
 
