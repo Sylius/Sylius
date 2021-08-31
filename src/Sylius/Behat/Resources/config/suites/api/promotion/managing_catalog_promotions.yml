@@ -7,13 +7,11 @@ default:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
                     
+                - sylius.behat.context.transform.channel
                 - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.locale
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.product_variant
-                - sylius.behat.context.transform.shared_storage
-
-                - sylius.behat.context.transform.channel
-                - sylius.behat.context.transform.locale
                 - sylius.behat.context.transform.shared_storage
                 - Sylius\Behat\Context\Transform\CatalogPromotionContext
                 
