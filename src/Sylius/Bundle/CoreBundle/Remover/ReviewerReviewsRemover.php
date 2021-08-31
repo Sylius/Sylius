@@ -22,14 +22,11 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 final class ReviewerReviewsRemover implements ReviewerReviewsRemoverInterface
 {
-    /** @var EntityRepository */
-    private $reviewRepository;
+    private EntityRepository $reviewRepository;
 
-    /** @var ObjectManager */
-    private $reviewManager;
+    private ObjectManager $reviewManager;
 
-    /** @var ReviewableRatingUpdaterInterface */
-    private $averageRatingUpdater;
+    private ReviewableRatingUpdaterInterface $averageRatingUpdater;
 
     public function __construct(
         EntityRepository $reviewRepository,

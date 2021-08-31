@@ -35,23 +35,17 @@ use Webmozart\Assert\Assert;
  */
 class UserProvider extends BaseUserProvider implements AccountConnectorInterface, OAuthAwareUserProviderInterface
 {
-    /** @var FactoryInterface */
-    private $oauthFactory;
+    private FactoryInterface $oauthFactory;
 
-    /** @var RepositoryInterface */
-    private $oauthRepository;
+    private RepositoryInterface $oauthRepository;
 
-    /** @var FactoryInterface */
-    private $customerFactory;
+    private FactoryInterface $customerFactory;
 
-    /** @var FactoryInterface */
-    private $userFactory;
+    private FactoryInterface $userFactory;
 
-    /** @var ObjectManager */
-    private $userManager;
+    private ObjectManager $userManager;
 
-    /** @var CustomerRepositoryInterface */
-    private $customerRepository;
+    private CustomerRepositoryInterface $customerRepository;
 
     public function __construct(
         string $supportedUserClass,

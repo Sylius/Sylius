@@ -17,8 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 final class CartItemAvailability extends Constraint
 {
-    /** @var string */
-    public $message;
+    public string $message;
 
     public function validatedBy(): string
     {

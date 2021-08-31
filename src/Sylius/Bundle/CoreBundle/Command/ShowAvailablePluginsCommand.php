@@ -30,7 +30,7 @@ final class ShowAvailablePluginsCommand extends Command
      * @phpstan-var ArrayCollection<PluginInfo>
      * @psalm-var ArrayCollection<array-key, PluginInfo>
      */
-    private $plugins;
+    private ?ArrayCollection $plugins = null;
 
     protected function configure(): void
     {

@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use Faker\Generator;
+use Faker\Factory;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -23,20 +25,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProductAttributeExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /** @var AttributeFactoryInterface */
-    private $productAttributeFactory;
+    private AttributeFactoryInterface $productAttributeFactory;
 
-    /** @var RepositoryInterface */
-    private $localeRepository;
+    private RepositoryInterface $localeRepository;
 
-    /** @var \Faker\Generator */
-    private $faker;
+    private Generator $faker;
 
-    /** @var OptionsResolver */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
-    /** @var array */
-    private $attributeTypes;
+    private array $attributeTypes;
 
     public function __construct(
         AttributeFactoryInterface $productAttributeFactory,
@@ -47,7 +44,7 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
         $this->localeRepository = $localeRepository;
         $this->attributeTypes = $attributeTypes;
 
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);

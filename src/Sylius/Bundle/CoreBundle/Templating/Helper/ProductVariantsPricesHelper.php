@@ -20,8 +20,7 @@ use Symfony\Component\Templating\Helper\Helper;
 
 class ProductVariantsPricesHelper extends Helper
 {
-    /** @var ProductVariantsPricesProviderInterface */
-    private $productVariantsPricesProvider;
+    private ProductVariantsPricesProviderInterface $productVariantsPricesProvider;
 
     public function __construct(ProductVariantsPricesProviderInterface $productVariantsPricesProvider)
     {

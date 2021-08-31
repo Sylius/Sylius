@@ -19,8 +19,7 @@ use Twig\TwigFunction;
 
 final class CheckoutStepsExtension extends AbstractExtension
 {
-    /** @var CheckoutStepsHelper */
-    private $checkoutStepsHelper;
+    private CheckoutStepsHelper $checkoutStepsHelper;
 
     public function __construct(CheckoutStepsHelper $checkoutStepsHelper)
     {

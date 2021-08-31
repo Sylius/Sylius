@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use Faker\Generator;
+use Faker\Factory;
 use Doctrine\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
@@ -41,53 +43,37 @@ use Webmozart\Assert\Assert;
 
 class OrderExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /** @var FactoryInterface */
-    protected $orderFactory;
+    protected \Sylius\Component\Resource\Factory\FactoryInterface $orderFactory;
 
-    /** @var FactoryInterface */
-    protected $orderItemFactory;
+    protected \Sylius\Component\Resource\Factory\FactoryInterface $orderItemFactory;
 
-    /** @var OrderItemQuantityModifierInterface */
-    protected $orderItemQuantityModifier;
+    protected OrderItemQuantityModifierInterface $orderItemQuantityModifier;
 
-    /** @var ObjectManager */
-    protected $orderManager;
+    protected ObjectManager $orderManager;
 
-    /** @var RepositoryInterface */
-    protected $channelRepository;
+    protected RepositoryInterface $channelRepository;
 
-    /** @var RepositoryInterface */
-    protected $customerRepository;
+    protected RepositoryInterface $customerRepository;
 
-    /** @var ProductRepositoryInterface */
-    protected $productRepository;
+    protected ProductRepositoryInterface $productRepository;
 
-    /** @var RepositoryInterface */
-    protected $countryRepository;
+    protected RepositoryInterface $countryRepository;
 
-    /** @var PaymentMethodRepositoryInterface */
-    protected $paymentMethodRepository;
+    protected PaymentMethodRepositoryInterface $paymentMethodRepository;
 
-    /** @var ShippingMethodRepositoryInterface */
-    protected $shippingMethodRepository;
+    protected ShippingMethodRepositoryInterface $shippingMethodRepository;
 
-    /** @var FactoryInterface */
-    protected $addressFactory;
+    protected \Sylius\Component\Resource\Factory\FactoryInterface $addressFactory;
 
-    /** @var StateMachineFactoryInterface */
-    protected $stateMachineFactory;
+    protected StateMachineFactoryInterface $stateMachineFactory;
 
-    /** @var OrderShippingMethodSelectionRequirementCheckerInterface */
-    protected $orderShippingMethodSelectionRequirementChecker;
+    protected OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker;
 
-    /** @var OrderPaymentMethodSelectionRequirementCheckerInterface */
-    protected $orderPaymentMethodSelectionRequirementChecker;
+    protected OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker;
 
-    /** @var OptionsResolver */
-    protected $optionsResolver;
+    protected OptionsResolver $optionsResolver;
 
-    /** @var \Faker\Generator */
-    protected $faker;
+    protected Generator $faker;
 
     public function __construct(
         FactoryInterface $orderFactory,
@@ -121,7 +107,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $this->orderPaymentMethodSelectionRequirementChecker = $orderPaymentMethodSelectionRequirementChecker;
 
         $this->optionsResolver = new OptionsResolver();
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->configureOptions($this->optionsResolver);
     }
 

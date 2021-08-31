@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use Faker\Generator;
+use Faker\Factory;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -25,20 +27,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $shopUserFactory;
+    private FactoryInterface $shopUserFactory;
 
-    /** @var FactoryInterface */
-    private $customerFactory;
+    private FactoryInterface $customerFactory;
 
-    /** @var RepositoryInterface */
-    private $customerGroupRepository;
+    private RepositoryInterface $customerGroupRepository;
 
-    /** @var \Faker\Generator */
-    private $faker;
+    private Generator $faker;
 
-    /** @var OptionsResolver */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
         FactoryInterface $shopUserFactory,
@@ -49,7 +46,7 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
         $this->customerFactory = $customerFactory;
         $this->customerGroupRepository = $customerGroupRepository;
 
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);

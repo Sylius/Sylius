@@ -18,11 +18,10 @@ use Webmozart\Assert\Assert;
 
 final class UriBasedSectionProvider implements SectionProviderInterface
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
     /** @var iterable|UriBasedSectionResolverInterface[] */
-    private $resolvers;
+    private iterable $resolvers;
 
     public function __construct(RequestStack $requestStack, iterable $resolvers)
     {

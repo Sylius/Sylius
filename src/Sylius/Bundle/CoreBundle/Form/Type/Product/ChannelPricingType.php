@@ -27,8 +27,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ChannelPricingType extends AbstractResourceType
 {
-    /** @var RepositoryInterface */
-    private $channelPricingRepository;
+    private ?RepositoryInterface $channelPricingRepository;
 
     public function __construct(
         string $dataClass,

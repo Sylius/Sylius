@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use Faker\Generator;
+use Faker\Factory;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -27,20 +29,15 @@ use Webmozart\Assert\Assert;
 
 class AddressExampleFactory extends AbstractExampleFactory
 {
-    /** @var FactoryInterface */
-    private $addressFactory;
+    private FactoryInterface $addressFactory;
 
-    /** @var RepositoryInterface */
-    private $countryRepository;
+    private RepositoryInterface $countryRepository;
 
-    /** @var RepositoryInterface */
-    private $customerRepository;
+    private RepositoryInterface $customerRepository;
 
-    /** @var \Faker\Generator */
-    private $faker;
+    private Generator $faker;
 
-    /** @var OptionsResolver */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
         FactoryInterface $addressFactory,
@@ -51,7 +48,7 @@ class AddressExampleFactory extends AbstractExampleFactory
         $this->countryRepository = $countryRepository;
         $this->customerRepository = $customerRepository;
 
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);

@@ -22,8 +22,7 @@ use Webmozart\Assert\Assert;
 
 final class TaxonsToCodesTransformer implements DataTransformerInterface
 {
-    /** @var TaxonRepositoryInterface */
-    private $taxonRepository;
+    private TaxonRepositoryInterface $taxonRepository;
 
     public function __construct(TaxonRepositoryInterface $taxonRepository)
     {

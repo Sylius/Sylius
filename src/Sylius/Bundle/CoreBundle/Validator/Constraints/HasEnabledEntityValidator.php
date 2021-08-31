@@ -25,11 +25,9 @@ use Webmozart\Assert\Assert;
 
 final class HasEnabledEntityValidator extends ConstraintValidator
 {
-    /** @var ManagerRegistry */
-    private $registry;
+    private ManagerRegistry $registry;
 
-    /** @var PropertyAccessor */
-    private $accessor;
+    private PropertyAccessor $accessor;
 
     public function __construct(ManagerRegistry $registry)
     {

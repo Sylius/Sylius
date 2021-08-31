@@ -23,14 +23,11 @@ use Sylius\Component\Order\Model\OrderInterface;
 
 final class CustomerAndChannelBasedCartContext implements CartContextInterface
 {
-    /** @var CustomerContextInterface */
-    private $customerContext;
+    private CustomerContextInterface $customerContext;
 
-    /** @var ChannelContextInterface */
-    private $channelContext;
+    private ChannelContextInterface $channelContext;
 
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
     public function __construct(
         CustomerContextInterface $customerContext,

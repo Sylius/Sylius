@@ -21,11 +21,9 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class CurrencyFixture extends AbstractFixture
 {
-    /** @var FactoryInterface */
-    private $currencyFactory;
+    private FactoryInterface $currencyFactory;
 
-    /** @var ObjectManager */
-    private $currencyManager;
+    private ObjectManager $currencyManager;
 
     public function __construct(FactoryInterface $currencyFactory, ObjectManager $currencyManager)
     {

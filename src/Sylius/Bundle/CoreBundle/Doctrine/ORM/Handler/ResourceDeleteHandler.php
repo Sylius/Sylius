@@ -22,11 +22,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ResourceDeleteHandler implements ResourceDeleteHandlerInterface
 {
-    /** @var ResourceDeleteHandlerInterface */
-    private $decoratedHandler;
+    private ResourceDeleteHandlerInterface $decoratedHandler;
 
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(ResourceDeleteHandlerInterface $decoratedHandler, EntityManagerInterface $entityManager)
     {

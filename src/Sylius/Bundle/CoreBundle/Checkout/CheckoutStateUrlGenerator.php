@@ -20,11 +20,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterface
 {
-    /** @var RouterInterface */
-    private $router;
+    private RouterInterface $router;
 
-    /** @var array */
-    private $routeCollection = [];
+    private array $routeCollection = [];
 
     public function __construct(RouterInterface $router, array $routeCollection)
     {
