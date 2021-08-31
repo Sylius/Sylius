@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PromotionBundle\DependencyInjection;
 
 use Sylius\Bundle\PromotionBundle\Controller\PromotionCouponController;
+use Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionTranslationType;
 use Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponType;
@@ -125,7 +126,7 @@ final class Configuration implements ConfigurationInterface
                                                 ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('repository')->cannotBeEmpty()->end()
                                                 ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                                ->scalarNode('form')->defaultValue(DefaultResourceType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('form')->defaultValue(CatalogPromotionTranslationType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()
