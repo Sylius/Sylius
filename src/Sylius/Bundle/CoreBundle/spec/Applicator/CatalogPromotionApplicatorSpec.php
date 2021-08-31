@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionTranslationInterface;
 
 final class CatalogPromotionApplicatorSpec extends ObjectBehavior
 {
@@ -33,6 +34,7 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion,
         CatalogPromotionActionInterface $catalogPromotionAction,
+        CatalogPromotionTranslationInterface $translation,
         ChannelPricingInterface $firstChannelPricing,
         ChannelPricingInterface $secondChannelPricing
     ): void {
@@ -46,8 +48,9 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         ]));
 
         $catalogPromotionAction->getConfiguration()->willReturn(['amount' => 0.3]);
-
         $catalogPromotion->getLabel()->willReturn('Winter sale');
+        $catalogPromotion->getTranslations()->willReturn(new ArrayCollection([$translation->getWrappedObject()]));
+        $translation->getLabel()->willReturn('Winter sale');
         $catalogPromotion->getCode()->willReturn('winter_sale');
 
         $firstChannelPricing->getPrice()->willReturn(1000);
@@ -69,6 +72,7 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion,
         CatalogPromotionActionInterface $catalogPromotionAction,
+        CatalogPromotionTranslationInterface $translation,
         ChannelPricingInterface $firstChannelPricing
     ): void {
         $variant->getChannelPricings()->willReturn(new ArrayCollection([
@@ -82,6 +86,8 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $catalogPromotionAction->getConfiguration()->willReturn(['amount' => 0.5]);
 
         $catalogPromotion->getLabel()->willReturn('Winter sale');
+        $catalogPromotion->getTranslations()->willReturn(new ArrayCollection([$translation->getWrappedObject()]));
+        $translation->getLabel()->willReturn('Winter sale');
         $catalogPromotion->getCode()->willReturn('winter_sale');
 
         $firstChannelPricing->getPrice()->willReturn(1000);

@@ -17,6 +17,7 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionTranslationInterface;
 
 final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInterface
 {
@@ -44,12 +45,20 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
 
             $channelPricing->setPrice((int) ($channelPricing->getPrice() - ($channelPricing->getPrice() * $discount)));
 
-            /** @var string $label */
-            $label = $catalogPromotion->getLabel();
-            /** @var string $code */
-            $code = $catalogPromotion->getCode();
-
-            $channelPricing->addAppliedPromotion([$code => ['name' => $label]]);
+            $channelPricing->addAppliedPromotion($this->formatAppliedPromotion($catalogPromotion));
         }
+    }
+
+    private function formatAppliedPromotion(CatalogPromotionInterface $catalogPromotion): array
+    {
+        /** @var CatalogPromotionTranslationInterface $translation */
+        $translation = $catalogPromotion->getTranslations()->first();
+
+        /** @var string $label */
+        $label = $translation->getLabel();
+        /** @var string $code */
+        $code = $catalogPromotion->getCode();
+
+        return [$code => ['name' => $label]];
     }
 }
