@@ -135,7 +135,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I add it
+     * @When I (try to) add it
      */
     public function iAddIt(): void
     {
@@ -460,6 +460,22 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::false(
             $this->responseChecker->hasValue($this->client->getLastResponse(), 'code', 'NEW_CODE'),
             'The code has been changed, but it should not'
+        );
+    }
+
+    /**
+     * @Then I should be notified that configuration of a discount is required
+     */
+    public function iShouldBeNotifiedThatConfigurationOfADiscountIsRequired(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::false(
+            $this->responseChecker->isCreationSuccessful($response),
+            'Catalog promotion has been created successfully, but it should not'
+        );
+        Assert::same(
+            $this->responseChecker->getError($response),
+            'discount: Please enter catalog promotion discount.'
         );
     }
 
