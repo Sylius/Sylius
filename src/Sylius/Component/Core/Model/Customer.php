@@ -37,8 +37,7 @@ class Customer extends BaseCustomer implements CustomerInterface
      */
     protected Collection $addresses;
 
-    /** @var ShopUserInterface|null */
-    protected $user;
+    protected ?ShopUserInterface $user = null;
 
     public function __construct()
     {

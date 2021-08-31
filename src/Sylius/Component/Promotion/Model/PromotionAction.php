@@ -20,8 +20,7 @@ class PromotionAction implements PromotionActionInterface
 
     protected ?string $type = null;
 
-    /** @var array */
-    protected $configuration = [];
+    protected array $configuration = [];
 
     protected ?PromotionInterface $promotion = null;
 

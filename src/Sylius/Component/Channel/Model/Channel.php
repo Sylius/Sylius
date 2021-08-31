@@ -20,7 +20,7 @@ class Channel implements ChannelInterface
 {
     use TimestampableTrait, ToggleableTrait;
 
-    /** @var mixed|null */
+    /** @var mixed */
     protected $id;
 
     protected ?string $code = null;

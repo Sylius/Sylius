@@ -30,8 +30,7 @@ class Payment implements PaymentInterface
 
     protected ?string $state = PaymentInterface::STATE_CART;
 
-    /** @var array */
-    protected $details = [];
+    protected array $details = [];
 
     public function __construct()
     {

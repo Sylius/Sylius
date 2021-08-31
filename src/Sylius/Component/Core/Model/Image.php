@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Model;
 
 abstract class Image implements ImageInterface
 {
-    /** @var mixed|null */
+    /** @var mixed */
     protected $id = null;
 
     protected ?string $type = null;

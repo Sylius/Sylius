@@ -42,8 +42,7 @@ class ShippingMethod implements ShippingMethodInterface
 
     protected ?string $calculator = null;
 
-    /** @var array */
-    protected $configuration = [];
+    protected array $configuration = [];
 
     /**
      * @var Collection|ShippingMethodRuleInterface[]

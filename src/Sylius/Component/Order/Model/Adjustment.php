@@ -40,8 +40,7 @@ class Adjustment implements AdjustmentInterface
 
     protected ?string $originCode = null;
 
-    /** @var array */
-    protected $details = [];
+    protected array $details = [];
 
     public function __construct()
     {

@@ -15,7 +15,8 @@ namespace Sylius\Component\Review\Model;
 
 class Reviewer implements ReviewerInterface
 {
-    protected ?int $id = null;
+    /** @var mixed */
+    protected $id = null;
 
     protected ?string $email = null;
 
@@ -24,7 +25,7 @@ class Reviewer implements ReviewerInterface
     protected ?string $lastName = null;
 
     /**
-     * @return int|null
+     * @return mixed
      */
     public function getId()
     {

@@ -23,11 +23,9 @@ final class CachedPerRequestChannelContext implements ChannelContextInterface
 
     private RequestStack $requestStack;
 
-    /** @var \SplObjectStorage<Request, ChannelInterface> */
-    private $requestToChannelMap;
+    private \SplObjectStorage $requestToChannelMap;
 
-    /** @var \SplObjectStorage<Request, ChannelNotFoundException> */
-    private $requestToExceptionMap;
+    private \SplObjectStorage $requestToExceptionMap;
 
     public function __construct(ChannelContextInterface $decoratedChannelContext, RequestStack $requestStack)
     {

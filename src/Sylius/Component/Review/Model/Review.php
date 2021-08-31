@@ -19,7 +19,7 @@ class Review implements ReviewInterface
 {
     use TimestampableTrait;
 
-    /** @var mixed|null */
+    /** @var mixed */
     protected $id = null;
 
     protected ?string $title = null;

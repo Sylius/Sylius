@@ -30,13 +30,10 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
 
     private ?LoggerInterface $logger;
 
-    /**
-     * @param string $expirationPeriod
-     */
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         Factory $stateMachineFactory,
-        $expirationPeriod,
+        string $expirationPeriod,
         LoggerInterface $logger = null
     ) {
         $this->orderRepository = $orderRepository;

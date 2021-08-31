@@ -20,7 +20,7 @@ class Locale implements LocaleInterface
 {
     use TimestampableTrait;
 
-    /** @var mixed|null  */
+    /** @var mixed  */
     protected $id = null;
 
     protected ?string $code = null;

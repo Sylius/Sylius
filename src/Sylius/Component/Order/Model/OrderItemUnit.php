@@ -18,7 +18,7 @@ use Doctrine\Common\Collections\Collection;
 
 class OrderItemUnit implements OrderItemUnitInterface
 {
-    /** @var mixed|null */
+    /** @var mixed */
     protected $id = null;
 
     protected OrderItemInterface $orderItem;

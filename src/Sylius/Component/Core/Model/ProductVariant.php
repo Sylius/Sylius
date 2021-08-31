@@ -26,8 +26,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface, Com
 
     protected ?int $onHold = 0;
 
-    /** @var int */
-    protected $onHand = 0;
+    protected ?int $onHand = 0;
 
     protected bool $tracked = false;
 

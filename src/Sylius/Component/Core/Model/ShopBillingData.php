@@ -15,7 +15,8 @@ namespace Sylius\Component\Core\Model;
 
 class ShopBillingData implements ShopBillingDataInterface
 {
-    protected ?int $id = null;
+    /** @var mixed */
+    protected $id = null;
 
     protected ?string $company = null;
 

@@ -33,8 +33,7 @@ class Attribute implements AttributeInterface
 
     protected ?string $type = TextAttributeType::TYPE;
 
-    /** @var array */
-    protected $configuration = [];
+    protected array $configuration = [];
 
     protected ?string $storageType = null;
 

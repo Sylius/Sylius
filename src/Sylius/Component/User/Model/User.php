@@ -71,10 +71,8 @@ class User implements UserInterface
 
     /**
      * We need at least one role to be able to authenticate
-     *
-     * @var array
      */
-    protected $roles = [UserInterface::DEFAULT_ROLE];
+    protected array $roles = [UserInterface::DEFAULT_ROLE];
 
     /**
      * @var Collection|UserOAuthInterface[]

@@ -41,7 +41,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
      */
     protected Collection $channels;
 
-    protected ?\Sylius\Component\Core\Model\TaxonInterface $mainTaxon = null;
+    protected ?TaxonInterface $mainTaxon = null;
 
     /**
      * @var Collection|ReviewInterface[]
@@ -50,8 +50,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
      */
     protected Collection $reviews;
 
-    /** @var float */
-    protected $averageRating = 0;
+    protected float $averageRating = 0.0;
 
     /**
      * @var Collection|ImageInterface[]

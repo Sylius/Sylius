@@ -31,7 +31,7 @@ final class ShopBasedCartContext implements CartContextInterface
 
     private ShopperContextInterface $shopperContext;
 
-    private ?\Sylius\Component\Core\Model\OrderInterface $cart = null;
+    private ?OrderInterface $cart = null;
 
     public function __construct(CartContextInterface $cartContext, ShopperContextInterface $shopperContext)
     {

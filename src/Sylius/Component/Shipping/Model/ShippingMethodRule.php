@@ -23,8 +23,7 @@ class ShippingMethodRule implements ShippingMethodRuleInterface
 
     protected ?string $type = null;
 
-    /** @var array */
-    protected $configuration = [];
+    protected array $configuration = [];
 
     protected ?ShippingMethodInterface $shippingMethod = null;
 

@@ -29,11 +29,9 @@ use Webmozart\Assert\Assert;
 
 class Order extends BaseOrder implements OrderInterface
 {
-    /** @var CustomerInterface|null */
-    protected $customer;
+    protected ?CustomerInterface $customer = null;
 
-    /** @var ChannelInterface|null */
-    protected $channel;
+    protected ?ChannelInterface $channel = null;
 
     protected ?AddressInterface $shippingAddress = null;
 
@@ -57,8 +55,7 @@ class Order extends BaseOrder implements OrderInterface
 
     protected ?string $localeCode = null;
 
-    /** @var BaseCouponInterface|null */
-    protected $promotionCoupon;
+    protected ?BaseCouponInterface $promotionCoupon = null;
 
     protected ?string $checkoutState = OrderCheckoutStates::STATE_CART;
 
