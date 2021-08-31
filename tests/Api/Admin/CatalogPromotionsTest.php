@@ -84,7 +84,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     [
                         'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
                         'configuration' => [
-                            'amount' => '50%'
+                            'amount' => 0.5
                         ]
                     ]
                 ],
@@ -179,7 +179,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     [
                         'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
                         'configuration' => [
-                            'amount' => '40%'
+                            'amount' => 0.4
                         ]
                     ]
                 ],

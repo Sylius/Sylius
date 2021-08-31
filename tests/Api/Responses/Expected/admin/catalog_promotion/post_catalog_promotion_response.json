@@ -24,9 +24,9 @@
             "@type": "CatalogPromotionAction",
             "@id": @string@,
             "id": @integer@,
-            "type": "percentage_product_discount",
+            "type": "percentage_discount",
             "configuration": {
-                "amount": "50%"
+                "amount": 0.5
             }
         }
     ],
