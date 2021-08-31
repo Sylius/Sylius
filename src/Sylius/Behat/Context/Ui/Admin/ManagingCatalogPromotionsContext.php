@@ -14,8 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\CatalogPromotion\FormElementInterface;
 use Sylius\Behat\Page\Admin\CatalogPromotion\CreatePageInterface;
+use Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
@@ -24,10 +27,20 @@ final class ManagingCatalogPromotionsContext implements Context
 
     private CreatePageInterface $createPage;
 
-    public function __construct(IndexPageInterface $indexPage, CreatePageInterface $createPage)
-    {
+    private UpdatePageInterface $updatePage;
+
+    private FormElementInterface $formElement;
+
+    public function __construct(
+        IndexPageInterface $indexPage,
+        CreatePageInterface $createPage,
+        UpdatePageInterface $updatePage,
+        FormElementInterface $formElement
+    ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
+        $this->updatePage = $updatePage;
+        $this->formElement = $formElement;
     }
 
     /**
@@ -53,7 +66,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $this->createPage->open();
         $this->createPage->specifyCode($code);
-        $this->createPage->nameIt($name);
+        $this->formElement->nameIt($name);
         $this->createPage->create();
     }
 
@@ -79,7 +92,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iNameIt(string $name): void
     {
-        $this->createPage->nameIt($name);
+        $this->formElement->nameIt($name);
     }
 
     /**
@@ -87,7 +100,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iSpecifyItsLabelAsIn(string $label, string $localeCode): void
     {
-        $this->createPage->labelIt($label, $localeCode);
+        $this->formElement->labelIt($label, $localeCode);
     }
 
     /**
@@ -95,7 +108,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iDescribeItAsIn(string $description, string $localeCode): void
     {
-        $this->createPage->describeIt($description, $localeCode);
+        $this->formElement->describeIt($description, $localeCode);
     }
 
     /**
@@ -103,7 +116,15 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iMakeItAvailableInChannel(string $channelName): void
     {
-        $this->createPage->checkChannel($channelName);
+        $this->formElement->checkChannel($channelName);
+    }
+
+    /**
+     * @When I make it unavailable in channel :channelName
+     */
+    public function iMakeItUnavailableInChannel(string $channelName): void
+    {
+        $this->formElement->uncheckChannel($channelName);
     }
 
     /**
@@ -115,12 +136,40 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I rename the :catalogPromotion catalog promotion to :name
+     */
+    public function iRenameTheCatalogPromotionTo(CatalogPromotionInterface $catalogPromotion, string $name): void
+    {
+        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
+        $this->formElement->nameIt($name);
+        $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @When I want to modify a catalog promotion :catalogPromotion
+     */
+    public function iWantToModifyACatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges(): void
+    {
+        $this->updatePage->saveChanges();
+    }
+
+    /**
      * @Then there should be :amount catalog promotions on the list
      * @Then there should be :amount new catalog promotion on the list
      * @Then there should be an empty list of catalog promotions
      */
     public function thereShouldBeCatalogPromotionsOnTheList(int $amount = 0): void
     {
+        $this->indexPage->open();
+
         Assert::same($this->indexPage->countItems(), $amount);
     }
 
@@ -168,9 +217,33 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @Then the catalog promotion :catalogPromotionName should be available in channel :channelName
      */
-    public function itShouldBeAvailableInChannel(string $catalogPromotionName, string $channelName): void
+    public function theCatalogPromotionShouldBeAvailableInChannel(string $catalogPromotionName, string $channelName): void
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $catalogPromotionName, 'channels' => $channelName]));
+    }
+
+    /**
+     * @Then /^(this catalog promotion) should be available in channel "([^"]+)"$/
+     */
+    public function thisCatalogPromotionShouldBeAvailableInChannel(
+        CatalogPromotionInterface $catalogPromotion,
+        string $channelName
+    ): void {
+        $this->indexPage->open();
+
+        $this->theCatalogPromotionShouldBeAvailableInChannel($catalogPromotion->getName(), $channelName);
+    }
+
+    /**
+     * @Then /^(this catalog promotion) should not be available in channel "([^"]+)"$/
+     */
+    public function thisCatalogPromotionShouldNotBeAvailableInChannel(
+        CatalogPromotionInterface $catalogPromotion,
+        string $channelName
+    ): void {
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage(['name' => $catalogPromotion->getName(), 'channels' => $channelName])
+        );
     }
 
     /**
@@ -188,5 +261,42 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldBeNotifiedThatCatalogPromotionWithThisCodeAlreadyExists(): void
     {
         Assert::same($this->createPage->getValidationMessage('code'), 'The catalog promotion with given code already exists.');
+    }
+
+    /**
+     * @Then /^(this catalog promotion) name should be "([^"]+)"$/
+     */
+    public function thisCatalogPromotionNameShouldBe(CatalogPromotionInterface $catalogPromotion, string $name): void
+    {
+        $this->iBrowseCatalogPromotions();
+
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['code' => $catalogPromotion->getCode(), 'name' => $name,])
+        );
+    }
+
+    /**
+     * @Then /^(this catalog promotion) should be (labelled|described) as "([^"]+)" in ("[^"]+" locale)$/
+     */
+    public function thisCatalogPromotionLabelInLocaleShouldBe(
+        CatalogPromotionInterface $catalogPromotion,
+        string $field,
+        string $value,
+        string $localeCode
+    ): void {
+        $fieldsMapping = [
+            'labelled' => 'label',
+            'described' => 'description',
+        ];
+
+        Assert::same($this->formElement->getFieldValueInLocale($fieldsMapping[$field], $localeCode), $value);
+    }
+
+    /**
+     * @Then I should not be able to edit its code
+     */
+    public function iShouldNotBeAbleToEditItsCode(): void
+    {
+        Assert::true($this->updatePage->isCodeDisabled());
     }
 }

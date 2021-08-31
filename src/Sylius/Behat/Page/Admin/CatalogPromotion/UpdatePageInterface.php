@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\CatalogPromotion;
 
-use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
+use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
-interface CreatePageInterface extends BaseCreatePageInterface
+interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    public function specifyCode(string $code): void;
+    public function isCodeDisabled(): bool;
 }

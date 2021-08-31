@@ -18,6 +18,7 @@
     <parameters>
         <parameter key="sylius.behat.page.admin.catalog_promotion.create.class">Sylius\Behat\Page\Admin\CatalogPromotion\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.catalog_promotion.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.catalog_promotion.update.class">Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePage</parameter>
     </parameters>
 
     <services>
@@ -35,6 +36,14 @@
             parent="sylius.behat.page.admin.crud.index"
         >
             <argument type="string">sylius_admin_catalog_promotion_index</argument>
+        </service>
+
+        <service
+            id="sylius.behat.page.admin.catalog_promotion.update"
+            class="%sylius.behat.page.admin.catalog_promotion.update.class%"
+            parent="sylius.behat.page.admin.crud.update"
+        >
+            <argument type="string">sylius_admin_catalog_promotion_update</argument>
         </service>
     </services>
 </container>

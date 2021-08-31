@@ -152,18 +152,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I try to change the code of the :catalogPromotion catalog promotion to :code
-     */
-    public function iTryToChangeTheCodeOfTheCatalogPromotionTo(
-        CatalogPromotionInterface $catalogPromotion,
-        string $code
-    ): void {
-        $this->client->buildUpdateRequest($catalogPromotion->getCode());
-        $this->client->updateRequestData(['code' => $code]);
-        $this->client->update();
-    }
-
-    /**
      * @When I want to modify a catalog promotion :catalogPromotion
      */
     public function iWantToModifyACatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
@@ -352,7 +340,6 @@ final class ManagingCatalogPromotionsContext implements Context
         $response = $this->client->show($catalogPromotion->getCode());
 
         Assert::true($this->responseChecker->hasTranslation($response, $localeCode, $fieldsMapping[$field], $value));
-
     }
 
     /**
@@ -403,12 +390,15 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then this catalog promotion code should still be :code
+     * @Then I should not be able to edit its code
      */
-    public function thisCatalogPromotionCodeShouldStillBe(string $code): void
+    public function iShouldNotBeAbleToEditItsCode(): void
     {
-        Assert::true(
-            $this->responseChecker->hasValue($this->client->getLastResponse(), 'code', $code),
+        $this->client->updateRequestData(['code' => 'NEW_CODE']);
+        $this->client->update();
+
+        Assert::false(
+            $this->responseChecker->hasValue($this->client->getLastResponse(), 'code', 'NEW_CODE'),
             'The code has been changed, but it should not'
         );
     }
