@@ -246,7 +246,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Given I specify nonexistent catalog promotion rule
+     * @When I specify nonexistent catalog promotion rule
      */
     public function ISpecifyNonexistentCatalogPromotionRule(): void
     {
@@ -261,19 +261,20 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Given I specify rule "Contains variants" with wrong configuration
+     * @When I specify rule "For variants" with the wrong configuration
      */
     public function iSpecifyRuleWithWrongConfiguration(): void
     {
         $rules = [[
-            'type' => 'nonexistent_rule',
+            'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
             'configuration' => [
                 'config' => ['more_config' => 'wrong config'],
                 'product' => 'some_product'
             ],
         ]];
 
-        $this->client->addRequestData('rules', $rules);    }
+        $this->client->addRequestData('rules', $rules);
+    }
 
     /**
      * @Then there should be :amount new catalog promotion on the list
@@ -471,7 +472,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'rule: Please enter valid rule name'
+            'rules: Catalog promotion rule type is invalid. Please choose a valid type'
         );
     }
 
@@ -482,7 +483,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'rule: Please enter valid rule configuration'
+            'rules: Provided configuration contains errors.'
         );
     }
 
