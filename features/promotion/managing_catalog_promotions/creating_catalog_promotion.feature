@@ -45,13 +45,13 @@ Feature: Creating a catalog promotion
         And the catalog promotion "Winter sale" should be available in channel "United States"
         And this catalog promotion should be usable
 
-    @api
+    @api @ui
     Scenario: Trying to create a catalog promotion without specifying its code and name
         When I create a new catalog promotion without specifying its code and name
         Then I should be notified that code and name are required
         And there should be an empty list of catalog promotions
 
-    @api
+    @api @ui
     Scenario: Trying to create a catalog promotion with taken code
         Given there is a catalog promotion with "sale" code and "Summer sale" name
         When I create a new catalog promotion with "sale" code and "Winter sale" name
