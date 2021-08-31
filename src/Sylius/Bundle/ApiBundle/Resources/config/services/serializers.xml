@@ -38,12 +38,6 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Serializer\CatalogPromotionNormalizer">
-            <argument type="service" id="api_platform.iri_converter" />
-            <argument type="service" id="sylius.repository.product_variant" />
-            <tag name="serializer.normalizer" priority="64" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\Serializer\ProductImageNormalizer">
             <argument type="service" id="liip_imagine.cache.manager" />
             <argument type="service" id="request_stack" />
