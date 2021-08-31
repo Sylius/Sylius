@@ -26,11 +26,9 @@ use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 /** @experimental */
 final class AddressItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
-    /** @var AddressRepositoryInterface */
-    private $addressRepository;
+    private AddressRepositoryInterface $addressRepository;
 
-    /** @var UserContextInterface */
-    private $userContext;
+    private UserContextInterface $userContext;
 
     public function __construct(AddressRepositoryInterface $addressRepository, UserContextInterface $userContext)
     {

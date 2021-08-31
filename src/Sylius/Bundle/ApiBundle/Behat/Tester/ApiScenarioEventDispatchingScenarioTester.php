@@ -26,8 +26,7 @@ use Behat\Testwork\Tester\Setup\Teardown;
 /** @experimental */
 final class ApiScenarioEventDispatchingScenarioTester implements ScenarioTester
 {
-    /** @var ScenarioTester */
-    private $baseTester;
+    private ScenarioTester $baseTester;
 
     public function __construct(ScenarioTester $baseTester)
     {

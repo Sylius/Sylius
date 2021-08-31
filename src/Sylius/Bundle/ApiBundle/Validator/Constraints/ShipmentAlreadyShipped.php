@@ -17,8 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 final class ShipmentAlreadyShipped extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.shipment.shipped';
+    public string $message = 'sylius.shipment.shipped';
 
     public function validatedBy(): string
     {

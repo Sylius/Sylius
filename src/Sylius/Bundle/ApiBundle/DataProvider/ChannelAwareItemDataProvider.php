@@ -21,11 +21,9 @@ use Sylius\Component\Channel\Context\ChannelNotFoundException;
 /** @experimental */
 final class ChannelAwareItemDataProvider implements ItemDataProviderInterface
 {
-    /** @var ItemDataProviderInterface */
-    private $itemDataProvider;
+    private ItemDataProviderInterface $itemDataProvider;
 
-    /** @var ChannelContextInterface */
-    private $channelContext;
+    private ChannelContextInterface $channelContext;
 
     public function __construct(ItemDataProviderInterface $itemDataProvider, ChannelContextInterface $channelContext)
     {

@@ -17,14 +17,11 @@ use Symfony\Component\Validator\Constraint;
 
 final class ChangedItemQuantityInCart extends Constraint
 {
-    /** @var string */
-    public $productNotExistMessage = 'sylius.product.not_exist';
+    public string $productNotExistMessage = 'sylius.product.not_exist';
 
-    /** @var string */
-    public $productVariantNotLongerAvailable = 'sylius.product_variant.not_longer_available';
+    public string $productVariantNotLongerAvailable = 'sylius.product_variant.not_longer_available';
 
-    /** @var string */
-    public $productVariantNotSufficient = 'sylius.product_variant.not_sufficient';
+    public string $productVariantNotSufficient = 'sylius.product_variant.not_sufficient';
 
     public function validatedBy(): string
     {

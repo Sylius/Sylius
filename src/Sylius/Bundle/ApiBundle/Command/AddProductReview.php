@@ -17,34 +17,29 @@ namespace Sylius\Bundle\ApiBundle\Command;
 class AddProductReview implements CommandAwareDataTransformerInterface
 {
     /**
-     * @var string
      * @psalm-immutable
      */
-    public $title;
+    public ?string $title;
 
     /**
-     * @var int
      * @psalm-immutable
      */
-    public $rating;
+    public ?int $rating;
 
     /**
-     * @var string
      * @psalm-immutable
      */
-    public $comment;
+    public ?string $comment;
 
     /**
-     * @var string
      * @psalm-immutable
      */
-    public $productCode;
+    public string $productCode;
 
     /**
-     * @var string|null
      * @psalm-immutable
      */
-    public $email;
+    public ?string $email;
 
     public function __construct(
         ?string $title,

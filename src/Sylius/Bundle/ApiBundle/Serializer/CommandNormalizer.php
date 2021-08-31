@@ -24,8 +24,7 @@ final class CommandNormalizer implements ContextAwareNormalizerInterface
 {
     private const ALREADY_CALLED = 'command_normalizer_already_called';
 
-    /** @var NormalizerInterface */
-    private $objectNormalizer;
+    private NormalizerInterface $objectNormalizer;
 
     public function __construct(NormalizerInterface $objectNormalizer)
     {

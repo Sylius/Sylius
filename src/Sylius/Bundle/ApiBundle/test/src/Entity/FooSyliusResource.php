@@ -17,11 +17,9 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 class FooSyliusResource implements ResourceInterface
 {
-    /** @var int */
-    private $id;
+    private ?int $id = null;
 
-    /** @var string */
-    private $name;
+    private ?string $name = null;
 
     public function getId()
     {

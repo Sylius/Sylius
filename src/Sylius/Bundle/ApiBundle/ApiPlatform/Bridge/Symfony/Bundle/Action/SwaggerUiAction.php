@@ -34,25 +34,25 @@ use Twig\Environment as TwigEnvironment;
  */
 final class SwaggerUiAction
 {
-    private $resourceNameCollectionFactory;
+    private ResourceNameCollectionFactoryInterface $resourceNameCollectionFactory;
 
-    private $resourceMetadataFactory;
+    private ResourceMetadataFactoryInterface $resourceMetadataFactory;
 
-    private $normalizer;
+    private NormalizerInterface $normalizer;
 
-    private $twig;
+    private TwigEnvironment $twig;
 
-    private $urlGenerator;
+    private UrlGeneratorInterface $urlGenerator;
 
-    private $title;
+    private string $title;
 
-    private $description;
+    private string $description;
 
-    private $version;
+    private string $version;
 
-    private $showWebby;
+    private bool $showWebby;
 
-    private $formats;
+    private ?array $formats;
 
     private $oauthEnabled;
 
@@ -72,17 +72,17 @@ final class SwaggerUiAction
 
     private $formatsProvider;
 
-    private $swaggerUiEnabled;
+    private bool $swaggerUiEnabled;
 
-    private $reDocEnabled;
+    private bool $reDocEnabled;
 
-    private $graphqlEnabled;
+    private bool $graphqlEnabled;
 
-    private $graphiQlEnabled;
+    private bool $graphiQlEnabled;
 
-    private $graphQlPlaygroundEnabled;
+    private bool $graphQlPlaygroundEnabled;
 
-    private $swaggerVersions;
+    private array $swaggerVersions;
 
     /**
      * @param int[] $swaggerVersions

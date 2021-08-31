@@ -19,11 +19,9 @@ use Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionResolverInterface;
 
 final class ShopApiUriBasedSectionResolver implements UriBasedSectionResolverInterface
 {
-    /** @var string */
-    private $shopApiUriBeginning;
+    private string $shopApiUriBeginning;
 
-    /** @var string */
-    private $shopApiOrdersResourceUri;
+    private string $shopApiOrdersResourceUri;
 
     public function __construct(string $shopApiUriBeginning, string $shopApiOrdersResourceUri)
     {

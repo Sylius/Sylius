@@ -21,14 +21,11 @@ use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 /** @experimental */
 final class CustomerProvider implements CustomerProviderInterface
 {
-    /** @var CanonicalizerInterface */
-    private $canonicalizer;
+    private CanonicalizerInterface $canonicalizer;
 
-    /** @var FactoryInterface */
-    private $customerFactory;
+    private FactoryInterface $customerFactory;
 
-    /** @var CustomerRepositoryInterface */
-    private $customerRepository;
+    private CustomerRepositoryInterface $customerRepository;
 
     public function __construct(
         CanonicalizerInterface $canonicalizer,

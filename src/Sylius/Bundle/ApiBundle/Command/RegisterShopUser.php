@@ -19,46 +19,38 @@ namespace Sylius\Bundle\ApiBundle\Command;
 class RegisterShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
 {
     /**
-     * @var string
      * @psalm-immutable
      */
-    public $firstName;
+    public string $firstName;
 
     /**
-     * @var string
      * @psalm-immutable
      */
-    public $lastName;
+    public string $lastName;
 
     /**
-     * @var string
      * @psalm-immutable
      */
-    public $email;
+    public string $email;
 
     /**
-     * @var string
      * @psalm-immutable
      */
-    public $password;
+    public string $password;
 
     /**
-     * @var string|null
      * @psalm-immutable
      */
-    public $phoneNumber;
+    public ?string $phoneNumber;
 
     /**
-     * @var bool
      * @psalm-immutable
      */
-    public $subscribedToNewsletter;
+    public bool $subscribedToNewsletter;
 
-    /** @var string */
-    public $channelCode;
+    public ?string $channelCode = null;
 
-    /** @var string|null */
-    public $localeCode;
+    public ?string $localeCode = null;
 
     public function __construct(
         string $firstName,

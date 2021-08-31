@@ -28,20 +28,15 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class AddItemToCartHandler implements MessageHandlerInterface
 {
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /** @var ProductVariantRepositoryInterface */
-    private $productVariantRepository;
+    private ProductVariantRepositoryInterface $productVariantRepository;
 
-    /** @var OrderModifierInterface */
-    private $orderModifier;
+    private OrderModifierInterface $orderModifier;
 
-    /** @var CartItemFactoryInterface */
-    private $cartItemFactory;
+    private CartItemFactoryInterface $cartItemFactory;
 
-    /** @var OrderItemQuantityModifierInterface */
-    private $orderItemQuantityModifier;
+    private OrderItemQuantityModifierInterface $orderItemQuantityModifier;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,

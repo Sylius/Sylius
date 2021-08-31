@@ -25,11 +25,9 @@ use Sylius\Component\Core\Repository\OrderItemRepositoryInterface;
 /** @experimental */
 final class OrderItemItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
-    /** @var OrderItemRepositoryInterface */
-    private $orderItemRepository;
+    private OrderItemRepositoryInterface $orderItemRepository;
 
-    /** @var UserContextInterface */
-    private $userContext;
+    private UserContextInterface $userContext;
 
     public function __construct(OrderItemRepositoryInterface $orderItemRepository, UserContextInterface $userContext)
     {

@@ -23,8 +23,7 @@ use Webmozart\Assert\Assert;
 
 final class ShipmentAlreadyShippedValidator extends ConstraintValidator
 {
-    /** @var ShipmentRepositoryInterface */
-    private $shipmentRepository;
+    private ShipmentRepositoryInterface $shipmentRepository;
 
     public function __construct(ShipmentRepositoryInterface $shipmentRepository)
     {

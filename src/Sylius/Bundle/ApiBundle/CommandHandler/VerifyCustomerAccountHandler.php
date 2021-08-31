@@ -23,8 +23,7 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /** @experimental  */
 final class VerifyCustomerAccountHandler implements MessageHandlerInterface
 {
-    /** @var RepositoryInterface */
-    private $shopUserRepository;
+    private RepositoryInterface $shopUserRepository;
 
     public function __construct(RepositoryInterface $shopUserRepository)
     {

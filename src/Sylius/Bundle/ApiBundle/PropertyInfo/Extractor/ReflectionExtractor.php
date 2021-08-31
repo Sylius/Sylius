@@ -28,13 +28,13 @@ use Symfony\Component\String\Inflector\InflectorInterface;
 class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTypeExtractorInterface, PropertyAccessExtractorInterface, PropertyInitializableExtractorInterface, PropertyReadInfoExtractorInterface, PropertyWriteInfoExtractorInterface, ConstructorArgumentTypeExtractorInterface
 {
     /** @internal */
-    public static $defaultMutatorPrefixes = ['add', 'remove', 'set'];
+    public static array $defaultMutatorPrefixes = ['add', 'remove', 'set'];
 
     /** @internal */
-    public static $defaultAccessorPrefixes = ['get', 'is', 'has', 'can'];
+    public static array $defaultAccessorPrefixes = ['get', 'is', 'has', 'can'];
 
     /** @internal */
-    public static $defaultArrayMutatorPrefixes = ['add', 'remove'];
+    public static array $defaultArrayMutatorPrefixes = ['add', 'remove'];
 
     public const ALLOW_PRIVATE = 1;
 
@@ -60,25 +60,25 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
         'double' => Type::BUILTIN_TYPE_FLOAT,
     ];
 
-    private $mutatorPrefixes;
+    private array $mutatorPrefixes;
 
-    private $accessorPrefixes;
+    private array $accessorPrefixes;
 
-    private $arrayMutatorPrefixes;
+    private array $arrayMutatorPrefixes;
 
-    private $enableConstructorExtraction;
+    private bool $enableConstructorExtraction;
 
-    private $methodReflectionFlags;
+    private int $methodReflectionFlags;
 
-    private $magicMethodsFlags;
+    private int $magicMethodsFlags;
 
-    private $propertyReflectionFlags;
+    private int $propertyReflectionFlags;
 
-    private $inflector;
+    private InflectorInterface $inflector;
 
-    private $arrayMutatorPrefixesFirst;
+    private array $arrayMutatorPrefixesFirst;
 
-    private $arrayMutatorPrefixesLast;
+    private array $arrayMutatorPrefixesLast;
 
     /**
      * @param string[]|null $mutatorPrefixes

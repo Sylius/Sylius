@@ -27,11 +27,9 @@ final class CachedRouteNameResolver implements RouteNameResolverInterface
 {
     use CachedTrait;
 
-    /** @var RouteNameResolverInterface */
-    private $decorated;
+    private RouteNameResolverInterface $decorated;
 
-    /** @var PathPrefixProviderInterface */
-    private $pathPrefixProvider;
+    private PathPrefixProviderInterface $pathPrefixProvider;
 
     public function __construct(
         CacheItemPoolInterface $cacheItemPool,

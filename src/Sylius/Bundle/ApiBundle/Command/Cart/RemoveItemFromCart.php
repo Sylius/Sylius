@@ -18,14 +18,12 @@ use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 /** @experimental */
 class RemoveItemFromCart implements OrderTokenValueAwareInterface
 {
-    /** @var string|null */
-    public $orderTokenValue;
+    public ?string $orderTokenValue;
 
     /**
-     * @var string
      * @psalm-immutable
      */
-    public $itemId;
+    public string $itemId;
 
     public function __construct(?string $orderTokenValue, string $itemId)
     {

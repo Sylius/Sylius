@@ -25,14 +25,11 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ApplyCouponToCartHandler implements MessageHandlerInterface
 {
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /** @var PromotionCouponRepositoryInterface */
-    private $promotionCouponRepository;
+    private PromotionCouponRepositoryInterface $promotionCouponRepository;
 
-    /** @var OrderProcessorInterface */
-    private $orderProcessor;
+    private OrderProcessorInterface $orderProcessor;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,

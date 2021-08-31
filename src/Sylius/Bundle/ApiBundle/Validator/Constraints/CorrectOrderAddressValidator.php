@@ -23,8 +23,7 @@ use Webmozart\Assert\Assert;
 
 final class CorrectOrderAddressValidator extends ConstraintValidator
 {
-    /** @var RepositoryInterface */
-    private $countryRepository;
+    private RepositoryInterface $countryRepository;
 
     public function __construct(RepositoryInterface $countryRepository)
     {

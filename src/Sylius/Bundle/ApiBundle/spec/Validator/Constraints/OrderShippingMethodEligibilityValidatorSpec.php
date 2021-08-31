@@ -53,7 +53,7 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
     function it_throws_an_exception_if_constraint_does_not_type_of_order_shipping_method_eligibility(): void
     {
         $constraint = new class() extends Constraint implements OrderTokenValueAwareInterface {
-            private $orderTokenValue;
+            private ?string $orderTokenValue = null;
 
             public function getOrderTokenValue(): ?string
             {

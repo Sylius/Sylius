@@ -25,11 +25,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /** @experimental */
 final class CountryCollectionDataProvider implements CollectionDataProviderInterface, RestrictedDataProviderInterface
 {
-    /** @var RepositoryInterface */
-    private $countryRepository;
+    private RepositoryInterface $countryRepository;
 
-    /** @var UserContextInterface */
-    private $userContext;
+    private UserContextInterface $userContext;
 
     public function __construct(RepositoryInterface $countryRepository, UserContextInterface $userContext)
     {

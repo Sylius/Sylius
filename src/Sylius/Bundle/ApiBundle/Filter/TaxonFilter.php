@@ -22,8 +22,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 final class TaxonFilter extends AbstractContextAwareFilter
 {
-    /** @var IriConverterInterface */
-    private $iriConverter;
+    private IriConverterInterface $iriConverter;
 
     public function __construct(ManagerRegistry $managerRegistry, IriConverterInterface $iriConverter)
     {

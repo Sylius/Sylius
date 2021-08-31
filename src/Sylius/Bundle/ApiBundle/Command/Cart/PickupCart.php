@@ -18,18 +18,16 @@ use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
 /** @experimental */
 class PickupCart implements ChannelCodeAwareInterface
 {
-    /** @var string|null
+    /**
      * @psalm-immutable */
-    public $tokenValue;
+    public ?string $tokenValue;
 
     /**
-     * @var string|null
      * @psalm-immutable
      */
-    public $localeCode;
+    public ?string $localeCode;
 
-    /** @var string|null */
-    private $channelCode;
+    private ?string $channelCode = null;
 
     public function __construct(?string $tokenValue = null, ?string $localeCode = null)
     {

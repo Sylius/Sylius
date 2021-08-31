@@ -17,16 +17,14 @@ namespace Sylius\Bundle\ApiBundle\Command;
 class BlameCart
 {
     /**
-     * @var string
      * @psalm-immutable
      */
-    public $shopUserEmail;
+    public string $shopUserEmail;
 
     /**
-     * @var string
      * @psalm-immutable
      */
-    public $orderTokenValue;
+    public string $orderTokenValue;
 
     public function __construct(string $shopUserEmail, string $orderTokenValue)
     {

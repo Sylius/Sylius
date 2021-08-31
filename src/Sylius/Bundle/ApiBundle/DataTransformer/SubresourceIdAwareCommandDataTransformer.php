@@ -20,8 +20,7 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class SubresourceIdAwareCommandDataTransformer implements CommandDataTransformerInterface
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
     public function __construct(RequestStack $requestStack)
     {

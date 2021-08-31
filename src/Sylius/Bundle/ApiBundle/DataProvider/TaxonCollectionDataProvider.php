@@ -24,11 +24,9 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class TaxonCollectionDataProvider implements CollectionDataProviderInterface, RestrictedDataProviderInterface
 {
-    /** @var TaxonRepositoryInterface */
-    private $taxonRepository;
+    private TaxonRepositoryInterface $taxonRepository;
 
-    /** @var UserContextInterface */
-    private $userContext;
+    private UserContextInterface $userContext;
 
     public function __construct(TaxonRepositoryInterface $taxonRepository, UserContextInterface $userContext)
     {

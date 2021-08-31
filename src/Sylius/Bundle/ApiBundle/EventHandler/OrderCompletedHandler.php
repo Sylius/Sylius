@@ -20,8 +20,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 /** @experimental */
 final class OrderCompletedHandler
 {
-    /** @var MessageBusInterface */
-    private $commandBus;
+    private MessageBusInterface $commandBus;
 
     public function __construct(MessageBusInterface $commandBus)
     {

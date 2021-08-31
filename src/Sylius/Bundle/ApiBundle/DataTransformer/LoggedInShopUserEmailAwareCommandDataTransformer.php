@@ -22,8 +22,7 @@ use Sylius\Component\User\Model\UserInterface;
 /** @experimental */
 final class LoggedInShopUserEmailAwareCommandDataTransformer implements CommandDataTransformerInterface
 {
-    /** @var UserContextInterface */
-    private $userContext;
+    private UserContextInterface $userContext;
 
     public function __construct(UserContextInterface $userContext)
     {

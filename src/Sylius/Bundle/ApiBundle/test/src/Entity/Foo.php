@@ -17,17 +17,13 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 
 class Foo
 {
-    /** @var int */
-    private $id;
+    private ?int $id = null;
 
-    /** @var string */
-    private $name;
+    private ?string $name = null;
 
-    /** @var AdminUserInterface */
-    private $owner;
+    private ?AdminUserInterface $owner = null;
 
-    /** @var FooSyliusResource */
-    private $fooSyliusResource;
+    private ?FooSyliusResource $fooSyliusResource = null;
 
     public function getId(): int
     {

@@ -32,23 +32,17 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /** @experimental */
 final class PickupCartHandler implements MessageHandlerInterface
 {
-    /** @var FactoryInterface */
-    private $cartFactory;
+    private FactoryInterface $cartFactory;
 
-    /** @var OrderRepositoryInterface */
-    private $cartRepository;
+    private OrderRepositoryInterface $cartRepository;
 
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
+    private ChannelRepositoryInterface $channelRepository;
 
-    /** @var UserContextInterface */
-    private $userContext;
+    private UserContextInterface $userContext;
 
-    /** @var ObjectManager */
-    private $orderManager;
+    private ObjectManager $orderManager;
 
-    /** @var RandomnessGeneratorInterface */
-    private $generator;
+    private RandomnessGeneratorInterface $generator;
 
     public function __construct(
         FactoryInterface $cartFactory,

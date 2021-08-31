@@ -22,11 +22,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /** @experimental */
 final class ShipmentStateMachineTransitionApplicator implements ShipmentStateMachineTransitionApplicatorInterface
 {
-    /** @var StateMachineFactoryInterface */
-    private $stateMachineFactory;
+    private StateMachineFactoryInterface $stateMachineFactory;
 
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(
         StateMachineFactoryInterface $stateMachineFactory,

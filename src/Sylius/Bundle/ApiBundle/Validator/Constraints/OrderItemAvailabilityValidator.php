@@ -25,11 +25,9 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class OrderItemAvailabilityValidator extends ConstraintValidator
 {
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /** @var AvailabilityCheckerInterface */
-    private $availabilityChecker;
+    private AvailabilityCheckerInterface $availabilityChecker;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,
