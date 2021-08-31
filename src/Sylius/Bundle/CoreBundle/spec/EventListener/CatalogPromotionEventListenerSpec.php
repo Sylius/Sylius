@@ -18,6 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\EventListener\CatalogPromotionEventListener;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
+use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
 use Symfony\Component\Messenger\Envelope;
@@ -53,6 +54,23 @@ final class CatalogPromotionEventListenerSpec extends ObjectBehavior
         LifecycleEventArgs $args,
         CatalogPromotionInterface $catalogPromotion,
         CatalogPromotionRuleInterface $entity
+    ): void {
+        $args->getObject()->willReturn($entity);
+
+        $entity->getCatalogPromotion()->willReturn($catalogPromotion);
+        $catalogPromotion->getCode()->willReturn('winter_sale');
+
+        $message = new CatalogPromotionUpdated('winter_sale');
+        $eventBus->dispatch($message)->willReturn(new Envelope($message));
+
+        $this->postPersist($args);
+    }
+
+    function it_sends_catalog_promotion_updated_after_persisting_catalog_promotion_action(
+        MessageBusInterface $eventBus,
+        LifecycleEventArgs $args,
+        CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionActionInterface $entity
     ): void {
         $args->getObject()->willReturn($entity);
 

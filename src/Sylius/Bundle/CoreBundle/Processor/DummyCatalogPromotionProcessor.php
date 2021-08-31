@@ -16,9 +16,9 @@ namespace Sylius\Bundle\CoreBundle\Processor;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
 final class DummyCatalogPromotionProcessor implements CatalogPromotionProcessorInterface
 {
@@ -45,9 +45,12 @@ final class DummyCatalogPromotionProcessor implements CatalogPromotionProcessorI
             return;
         }
 
-        /** @var ProductVariantInterface $variant */
-        foreach ($variants as $variant) {
-            $this->catalogPromotionApplicator->applyPercentageDiscount($variant, 0.5);
+        /** @var CatalogPromotionActionInterface $action */
+        foreach ($catalogPromotion->getActions() as $action) {
+            /** @var ProductVariantInterface $variant */
+            foreach ($variants as $variant) {
+                $this->catalogPromotionApplicator->applyPercentageDiscount($variant, $action->getConfiguration()['amount']);
+            }
         }
 
         $this->entityManager->flush();
