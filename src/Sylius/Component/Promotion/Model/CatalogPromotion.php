@@ -137,11 +137,6 @@ class CatalogPromotion implements CatalogPromotionInterface
         return $this->actions;
     }
 
-    public function hasActions(): bool
-    {
-        return !$this->actions->isEmpty();
-    }
-
     public function hasAction(CatalogPromotionActionInterface $action): bool
     {
         return $this->actions->contains($action);

@@ -22,7 +22,7 @@ class CatalogPromotionAction implements CatalogPromotionActionInterface
 
     protected array $configuration = [];
 
-    protected ?CatalogPromotion $catalogPromotion = null;
+    protected ?CatalogPromotionInterface $catalogPromotion = null;
 
     public function getId()
     {
