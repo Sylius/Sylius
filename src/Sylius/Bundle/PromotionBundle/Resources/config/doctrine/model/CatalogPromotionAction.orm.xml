@@ -17,7 +17,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="type" type="string" />
+        <field name="type" />
         <field name="configuration" type="array" />
 
         <many-to-one field="catalogPromotion" target-entity="Sylius\Component\Promotion\Model\CatalogPromotionInterface" inversed-by="actions">

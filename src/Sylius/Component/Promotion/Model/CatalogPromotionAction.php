@@ -18,7 +18,7 @@ class CatalogPromotionAction implements CatalogPromotionActionInterface
     /** @var mixed */
     protected $id;
 
-    protected ?string $type;
+    protected ?string $type = null;
 
     protected array $configuration = [];
 

@@ -46,7 +46,6 @@ class CatalogPromotion implements CatalogPromotionInterface
         $this->initializeTranslationsCollection();
 
         $this->rules = new ArrayCollection();
-
         $this->actions = new ArrayCollection();
     }
 

@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -81,7 +82,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 ],
                 'actions' => [
                     [
-                        'type' => CatalogPromotionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                        'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
                         'configuration' => [
                             'amount' => '50%'
                         ]
@@ -176,7 +177,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 'code' => 'new_code',
                 'actions' => [
                     [
-                        'type' => CatalogPromotionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                        'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
                         'configuration' => [
                             'amount' => '40%'
                         ]

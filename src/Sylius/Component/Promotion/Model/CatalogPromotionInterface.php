@@ -21,10 +21,6 @@ use Sylius\Component\Resource\Model\TranslationInterface;
 
 interface CatalogPromotionInterface extends ResourceInterface, CodeAwareInterface, TranslatableInterface
 {
-    public const TYPE_PERCENTAGE_DISCOUNT = 'percentage_product_discount';
-
-    public const TYPE_CONTAINS_VARIANTS = 'contains_variants';
-
     public function getName(): ?string;
 
     public function setName(?string $name): void;

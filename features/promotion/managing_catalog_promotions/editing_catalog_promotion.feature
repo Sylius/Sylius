@@ -52,6 +52,6 @@ Feature: Editing catalog promotion
 
     @api
     Scenario: Editing catalog promotion action
-        When I want "Christmas sale" catalog promotion to have "40%" discount
+        When I edit "Christmas sale" catalog promotion to have "40%" discount
         Then I should be notified that it has been successfully edited
         And this catalog promotion should have "40%" percentage discount

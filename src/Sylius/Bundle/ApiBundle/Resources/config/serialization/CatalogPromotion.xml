@@ -49,7 +49,6 @@
             <group>admin:catalog_promotion:read</group>
             <group>admin:catalog_promotion:create</group>
             <group>admin:catalog_promotion:update</group>
-
         </attribute>
     </class>
 </serializer>

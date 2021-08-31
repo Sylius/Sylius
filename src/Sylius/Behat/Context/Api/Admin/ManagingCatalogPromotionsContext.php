@@ -161,18 +161,16 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I add the percentage discount catalog promotion action configured with amount of :amount
+     * @When it gives the :amount percentage discount
      */
     public function iAddThePercentageDiscountCatalogPromotionActionConfiguredWithAmountOf(string $amount): void
     {
-        $actions = [
-            [
-                'type' => CatalogPromotionInterface::TYPE_PERCENTAGE_DISCOUNT,
-                'configuration' => [
-                    'amount' => $amount
-                ],
+        $actions = [[
+            'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+            'configuration' => [
+                'amount' => $amount
             ],
-        ];
+        ]];
 
         $this->client->addRequestData('actions', $actions);
     }
@@ -229,13 +227,13 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I want ("[^"]+" catalog promotion) to have "([^"]+)" discount$/
+     * @When /^I edit ("[^"]+" catalog promotion) to have "([^"]+)" discount$/
      */
     public function iWantPromotionToHaveDiscount(CatalogPromotionInterface $catalogPromotion, string $amount): void
     {
         $this->client->buildUpdateRequest($catalogPromotion->getCode());
         $rules = [[
-            'type' => CatalogPromotionInterface::TYPE_PERCENTAGE_DISCOUNT,
+            'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
             'configuration' => [
                 'amount' => $amount,
             ],
@@ -256,14 +254,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully created
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
-    {
-        Assert::same($this->client->getLastResponse()->getStatusCode(), 201);
-    }
-
-    /**
      * @Then /^it should have "([^"]+)" discount$/
      */
     public function itShouldHaveDiscount(string $amount): void
@@ -281,7 +271,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $catalogPromotionAction = $this->responseChecker->getResponseContent($this->client->getLastResponse())['actions'][0];
 
         Assert::same($amount, $catalogPromotionAction['configuration']['amount']);
-        Assert::same(CatalogPromotionInterface::TYPE_PERCENTAGE_DISCOUNT, $catalogPromotionAction['type']);
+        Assert::same(CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT, $catalogPromotionAction['type']);
     }
 
     /**
