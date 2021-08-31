@@ -22,11 +22,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ZoneChoiceType extends AbstractType
 {
-    /** @var RepositoryInterface */
-    private $zoneRepository;
+    private RepositoryInterface $zoneRepository;
 
     /** @var string[] */
-    private $scopeTypes;
+    private array $scopeTypes;
 
     public function __construct(RepositoryInterface $zoneRepository, array $scopeTypes = [])
     {

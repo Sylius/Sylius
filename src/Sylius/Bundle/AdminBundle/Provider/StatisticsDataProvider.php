@@ -22,14 +22,11 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 class StatisticsDataProvider implements StatisticsDataProviderInterface
 {
-    /** @var DashboardStatisticsProviderInterface */
-    private $statisticsProvider;
+    private DashboardStatisticsProviderInterface $statisticsProvider;
 
-    /** @var SalesDataProviderInterface */
-    private $salesDataProvider;
+    private SalesDataProviderInterface $salesDataProvider;
 
-    /** @var MoneyFormatterInterface */
-    private $moneyFormatter;
+    private MoneyFormatterInterface $moneyFormatter;
 
     public function __construct(
         DashboardStatisticsProviderInterface $statisticsProvider,

@@ -17,8 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 final class ProductVariantCombination extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.product_variant.combination';
+    public string $message = 'sylius.product_variant.combination';
 
     public function validatedBy(): string
     {

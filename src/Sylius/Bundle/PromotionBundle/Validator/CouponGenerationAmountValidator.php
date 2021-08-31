@@ -22,8 +22,7 @@ use Webmozart\Assert\Assert;
 
 final class CouponGenerationAmountValidator extends ConstraintValidator
 {
-    /** @var GenerationPolicyInterface */
-    private $generationPolicy;
+    private GenerationPolicyInterface $generationPolicy;
 
     public function __construct(GenerationPolicyInterface $generationPolicy)
     {

@@ -19,11 +19,9 @@ use Webmozart\Assert\Assert;
 
 final class UserWithEncoderFactory implements FactoryInterface
 {
-    /** @var FactoryInterface */
-    private $decoratedUserFactory;
+    private FactoryInterface $decoratedUserFactory;
 
-    /** @var string */
-    private $encoderName;
+    private string $encoderName;
 
     public function __construct(FactoryInterface $decoratedUserFactory, string $encoderName)
     {

@@ -26,11 +26,9 @@ use Webmozart\Assert\Assert;
 
 final class BuildAttributesFormSubscriber implements EventSubscriberInterface
 {
-    /** @var FactoryInterface */
-    private $attributeValueFactory;
+    private FactoryInterface $attributeValueFactory;
 
-    /** @var TranslationLocaleProviderInterface */
-    private $localeProvider;
+    private TranslationLocaleProviderInterface $localeProvider;
 
     public function __construct(
         FactoryInterface $attributeValueFactory,

@@ -19,8 +19,7 @@ use Twig\TwigFilter;
 
 final class ChannelNameExtension extends AbstractExtension
 {
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
+    private ChannelRepositoryInterface $channelRepository;
 
     public function __construct(ChannelRepositoryInterface $channelRepository)
     {

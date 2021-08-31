@@ -28,8 +28,7 @@ final class DebugTemplateEventCommand extends Command
 {
     protected static $defaultName = 'sylius:debug:template-event';
 
-    /** @var TemplateBlockRegistryInterface */
-    private $templateBlockRegistry;
+    private TemplateBlockRegistryInterface $templateBlockRegistry;
 
     public function __construct(TemplateBlockRegistryInterface $templateBlockRegistry)
     {

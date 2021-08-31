@@ -19,8 +19,7 @@ use Twig\TwigFilter;
 
 final class ConvertMoneyExtension extends AbstractExtension
 {
-    /** @var ConvertMoneyHelperInterface */
-    private $helper;
+    private ConvertMoneyHelperInterface $helper;
 
     public function __construct(ConvertMoneyHelperInterface $helper)
     {

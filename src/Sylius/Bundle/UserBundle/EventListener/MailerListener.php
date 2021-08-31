@@ -20,8 +20,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 class MailerListener
 {
-    /** @var SenderInterface */
-    protected $emailSender;
+    protected SenderInterface $emailSender;
 
     public function __construct(SenderInterface $emailSender)
     {

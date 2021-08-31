@@ -20,8 +20,7 @@ use Webmozart\Assert\Assert;
 
 final class UserReloaderListener
 {
-    /** @var UserReloaderInterface */
-    private $userReloader;
+    private UserReloaderInterface $userReloader;
 
     public function __construct(UserReloaderInterface $userReloader)
     {

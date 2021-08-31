@@ -20,15 +20,14 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
 {
-    /** @var int */
-    private $id;
+    private int $id;
 
     /**
      * @var Collection|PromotionInterface[]
      *
      * @psalm-var Collection<array-key, PromotionInterface>
      */
-    protected $promotions;
+    protected Collection $promotions;
 
     public function getId(): int
     {

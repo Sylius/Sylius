@@ -15,8 +15,7 @@ namespace Sylius\Bundle\UserBundle\Form\Model;
 
 class PasswordReset
 {
-    /** @var string|null */
-    private $password;
+    private ?string $password = null;
 
     public function getPassword(): ?string
     {

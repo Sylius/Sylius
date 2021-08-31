@@ -21,11 +21,9 @@ use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
  */
 final class HtmlDebugTemplateEventRenderer implements TemplateEventRendererInterface
 {
-    /** @var TemplateEventRendererInterface */
-    private $templateEventRenderer;
+    private TemplateEventRendererInterface $templateEventRenderer;
 
-    /** @var TemplateBlockRegistryInterface */
-    private $templateBlockRegistry;
+    private TemplateBlockRegistryInterface $templateBlockRegistry;
 
     public function __construct(TemplateEventRendererInterface $templateEventRenderer, TemplateBlockRegistryInterface $templateBlockRegistry)
     {

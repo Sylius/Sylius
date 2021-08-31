@@ -22,8 +22,7 @@ use Twig\TwigFunction;
  */
 final class TemplateEventExtension extends AbstractExtension
 {
-    /** @var TemplateEventRendererInterface */
-    private $templateEventRenderer;
+    private TemplateEventRendererInterface $templateEventRenderer;
 
     public function __construct(TemplateEventRendererInterface $templateEventRenderer)
     {

@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AttributeBundle\Tests\Form\Type\AttributeType;
 
+use Prophecy\Prophecy\ObjectProphecy;
+use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType;
 use PHPUnit\Framework\Assert;
 use Prophecy\Prophecy\ProphecyInterface;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
@@ -22,8 +24,7 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 final class SelectAttributeTypeTest extends TypeTestCase
 {
-    /** @var ProphecyInterface */
-    private $translationProvider;
+    private ObjectProphecy $translationProvider;
 
     /**
      * @test
@@ -51,7 +52,7 @@ final class SelectAttributeTypeTest extends TypeTestCase
 
     protected function getExtensions(): array
     {
-        $type = new \Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType($this->translationProvider->reveal());
+        $type = new SelectAttributeType($this->translationProvider->reveal());
 
         return [
             new PreloadedExtension([$type], []),
@@ -61,7 +62,7 @@ final class SelectAttributeTypeTest extends TypeTestCase
     private function assertChoicesLabels(array $expectedLabels, array $formConfiguration = []): void
     {
         $form = $this->factory->create(
-            \Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType::class,
+            SelectAttributeType::class,
             null,
             $formConfiguration
         );

@@ -20,8 +20,7 @@ use Sylius\Component\Core\Model\PromotionInterface;
 
 final class PromotionMenuBuilderEvent extends MenuBuilderEvent
 {
-    /** @var PromotionInterface */
-    private $promotion;
+    private PromotionInterface $promotion;
 
     public function __construct(
         FactoryInterface $factory,
