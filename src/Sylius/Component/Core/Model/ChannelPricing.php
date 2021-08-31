@@ -30,6 +30,9 @@ class ChannelPricing implements ChannelPricingInterface
     /** @var int|null */
     protected $originalPrice;
 
+    /** @var array */
+    protected $appliedPromotions = [];
+
     public function __toString(): string
     {
         return (string) $this->getPrice();
@@ -83,5 +86,20 @@ class ChannelPricing implements ChannelPricingInterface
     public function isPriceReduced(): bool
     {
         return $this->originalPrice > $this->price;
+    }
+
+    public function addAppliedPromotion(array $promotion): void
+    {
+        $this->appliedPromotions = array_merge_recursive($this->appliedPromotions, $promotion);
+    }
+
+    public function removeAppliedPromotion(string $promotionCode): void
+    {
+        unset($this->appliedPromotions[$promotionCode]);
+    }
+
+    public function getAppliedPromotions(): array
+    {
+        return $this->appliedPromotions;
     }
 }

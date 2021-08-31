@@ -79,4 +79,19 @@ final class ChannelPricingSpec extends ObjectBehavior
         $this->setOriginalPrice(1500);
         $this->isPriceReduced()->shouldReturn(false);
     }
+
+    function it_can_have_promotions_applied(): void
+    {
+        $this->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']]);
+        $this->addAppliedPromotion(['extra_sale' => ['name' => 'Extra sale']]);
+        $this->getAppliedPromotions()->shouldReturn([
+            'winter_sale' => ['name' => 'Winter sale'],
+            'extra_sale' => ['name' => 'Extra sale'],
+        ]);
+
+        $this->removeAppliedPromotion('winter_sale');
+        $this->getAppliedPromotions()->shouldReturn([
+            'extra_sale' => ['name' => 'Extra sale'],
+        ]);
+    }
 }

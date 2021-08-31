@@ -85,6 +85,8 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(1000);
         $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willReturn(1000);
 
+        $variant->getAppliedPromotionsForChannel($channel)->willReturn([]);
+
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 
         $this->normalize($variant, null, [])->shouldReturn(['price' => 1000, 'originalPrice' => 1000, 'inStock' => true]);
@@ -106,9 +108,37 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(500);
         $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willReturn(1000);
 
+        $variant->getAppliedPromotionsForChannel($channel)->willReturn([]);
+
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 
         $this->normalize($variant, null, [])->shouldReturn(['price' => 500, 'originalPrice' => 1000, 'inStock' => true]);
+    }
+
+    function it_returns_catalog_promotions_if_applied(
+        ProductVariantPricesCalculatorInterface $pricesCalculator,
+        ChannelContextInterface $channelContext,
+        AvailabilityCheckerInterface $availabilityChecker,
+        NormalizerInterface $normalizer,
+        ChannelInterface $channel,
+        ProductVariantInterface $variant
+    ): void {
+        $this->setNormalizer($normalizer);
+
+        $normalizer->normalize($variant, null, ['sylius_product_variant_normalizer_already_called' => true])->willReturn([]);
+
+        $channelContext->getChannel()->willReturn($channel);
+        $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(500);
+        $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willReturn(1000);
+
+        $variant->getAppliedPromotionsForChannel($channel)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
+
+        $availabilityChecker->isStockAvailable($variant)->willReturn(true);
+
+        $this
+            ->normalize($variant)
+            ->shouldReturn(['price' => 500, 'originalPrice' => 1000, 'appliedPromotions' => ['winter_sale' => ['name' => 'Winter sale']], 'inStock' => true])
+        ;
     }
 
     function it_doesnt_return_prices_if_channel_is_not_found(
@@ -126,6 +156,8 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         $channelContext->getChannel()->willReturn($channel);
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willThrow(ChannelNotFoundException::class);
         $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willThrow(ChannelNotFoundException::class);
+
+        $variant->getAppliedPromotionsForChannel($channel)->willReturn([]);
 
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 

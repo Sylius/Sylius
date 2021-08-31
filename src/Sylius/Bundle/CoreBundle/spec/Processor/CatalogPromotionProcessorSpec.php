@@ -19,7 +19,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
@@ -48,7 +47,6 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
         CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
         EntityManagerInterface $entityManager,
         CatalogPromotionInterface $catalogPromotion,
-        CatalogPromotionActionInterface $action,
         ProductVariantInterface $firstVariant,
         ProductVariantInterface $secondVariant
     ): void {
@@ -57,14 +55,8 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
             ->willReturn([$firstVariant, $secondVariant])
         ;
 
-        $catalogPromotion->getActions()->willReturn(new ArrayCollection([
-            $action->getWrappedObject(),
-        ]));
-
-        $action->getConfiguration()->willReturn(['amount' => 0.3]);
-
-        $productCatalogPromotionApplicator->applyPercentageDiscount($firstVariant, 0.3)->shouldBeCalled();
-        $productCatalogPromotionApplicator->applyPercentageDiscount($secondVariant, 0.3)->shouldBeCalled();
+        $productCatalogPromotionApplicator->applyCatalogPromotion($firstVariant, $catalogPromotion)->shouldBeCalled();
+        $productCatalogPromotionApplicator->applyCatalogPromotion($secondVariant, $catalogPromotion)->shouldBeCalled();
 
         $entityManager->flush()->shouldBeCalled();
 

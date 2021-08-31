@@ -45,12 +45,9 @@ final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterf
             return;
         }
 
-        /** @var CatalogPromotionActionInterface $action */
-        foreach ($catalogPromotion->getActions() as $action) {
-            /** @var ProductVariantInterface $variant */
-            foreach ($variants as $variant) {
-                $this->catalogPromotionApplicator->applyPercentageDiscount($variant, $action->getConfiguration()['amount']);
-            }
+        /** @var ProductVariantInterface $variant */
+        foreach ($variants as $variant) {
+            $this->catalogPromotionApplicator->applyCatalogPromotion($variant, $catalogPromotion);
         }
 
         $this->entityManager->flush();

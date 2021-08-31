@@ -281,6 +281,20 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->getImagesByType('thumbnail')->shouldBeLike(new ArrayCollection([$image->getWrappedObject()]));
     }
 
+    function it_returns_channel_pricing_applied_promotions(
+        ChannelPricingInterface $channelPricing,
+        ChannelInterface $channel
+    ): void {
+        $channel->getCode()->willReturn('CHANNEL_WEB');
+        $channelPricing->setProductVariant($this)->shouldBeCalled();
+        $channelPricing->getChannelCode()->willReturn('CHANNEL_WEB');
+        $channelPricing->getAppliedPromotions()->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
+
+        $this->addChannelPricing($channelPricing);
+
+        $this->getAppliedPromotionsForChannel($channel)->shouldReturn(['winter_sale' => ['name' => 'Winter sale']]);
+    }
+
     function it_is_comparable(): void
     {
         $this->setCode('test');
