@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
-use Symfony\Component\Validator\Constraint;
-
-interface ConstraintResolver
+interface TypedConfiguration
 {
-    public function resolveForType(string $type): Constraint;
+    public function getType(): string;
+    public function getConfiguration(): array;
 }
