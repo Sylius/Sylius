@@ -25,5 +25,17 @@ interface FormElementInterface
 
     public function uncheckChannel(string $channelName): void;
 
+    public function addRule(): void;
+
+    public function addAction(): void;
+
+    public function chooseLastRuleVariants(array $variantCodes): void;
+
+    public function specifyLastActionDiscount(string $discount): void;
+
     public function getFieldValueInLocale(string $field, string $localeCode): string;
+
+    public function getLastRuleVariantCodes(): array;
+
+    public function getLastActionDiscount(): string;
 }

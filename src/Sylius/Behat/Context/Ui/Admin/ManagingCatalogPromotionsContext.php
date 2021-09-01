@@ -18,7 +18,9 @@ use Sylius\Behat\Element\Admin\CatalogPromotion\FormElementInterface;
 use Sylius\Behat\Page\Admin\CatalogPromotion\CreatePageInterface;
 use Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
@@ -31,16 +33,20 @@ final class ManagingCatalogPromotionsContext implements Context
 
     private FormElementInterface $formElement;
 
+    private SharedStorageInterface $sharedStorage;
+
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
-        FormElementInterface $formElement
+        FormElementInterface $formElement,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
         $this->formElement = $formElement;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -128,6 +134,28 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^it applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/
+     */
+    public function itAppliesOnVariants(...$variants): void
+    {
+        $variantCodes = array_map(function(ProductVariantInterface $variant) {
+            return $variant->getCode();
+        }, $variants);
+
+        $this->formElement->addRule();
+        $this->formElement->chooseLastRuleVariants($variantCodes);
+    }
+
+    /**
+     * @When /^it gives the "([^"]+)%" percentage discount$/
+     */
+    public function catalogPromotionGivesDiscount(string $discount): void
+    {
+        $this->formElement->addAction();
+        $this->formElement->specifyLastActionDiscount($discount);
+    }
+
+    /**
      * @When I add it
      */
     public function iAddIt(): void
@@ -194,6 +222,31 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->indexPage->isSingleResourceOnPage(['name' => $name, 'code' => $code]),
             sprintf('Cannot find catalog promotions with code "%s" and name "%s" in the list', $code, $name)
         );
+
+        $this->sharedStorage->set('catalog_promotion_name', $name);
+    }
+
+    /**
+     * @Then /^it should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
+     */
+    public function itShouldHaveRule(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
+    {
+        $catalogPromotionName = $this->sharedStorage->get('catalog_promotion_name');
+
+        $actions = $this->indexPage->getActionsForResource(['name' => $catalogPromotionName]);
+        $actions->pressButton('Edit');
+
+        $selectedVariants = $this->formElement->getLastRuleVariantCodes();
+        Assert::inArray($firstVariant->getCode(), $selectedVariants);
+        Assert::inArray($secondVariant->getCode(), $selectedVariants);
+    }
+
+    /**
+     * @Then /^it should have "([^"]+)%" discount$/
+     */
+    public function itShouldHaveDiscount(float $amount): void
+    {
+        Assert::same($this->formElement->getLastActionDiscount(), $amount);
     }
 
     /**
