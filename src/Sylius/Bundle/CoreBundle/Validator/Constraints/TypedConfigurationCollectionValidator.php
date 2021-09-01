@@ -34,10 +34,7 @@ final class TypedConfigurationCollectionValidator extends CollectionValidator
             $type = $value['type'];
             $data = $value['configuration'];
         }
-        if (
-            is_object($value) &&
-            $value instanceof TypedConfiguration
-        ) {
+        if ($value instanceof TypedConfiguration) {
             $type = $value->getType();
             $data = $value->getConfiguration();
         }
