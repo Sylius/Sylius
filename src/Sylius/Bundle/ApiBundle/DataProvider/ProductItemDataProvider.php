@@ -19,9 +19,10 @@ use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Bundle\ApiBundle\Entity\Product\Product;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Webmozart\Assert\Assert;
+use Sylius\Bundle\ApiBundle\DataProvider\Helpers\ProductDataProviderHelper;
 
 /** @experimental */
 final class ProductItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
@@ -43,19 +44,22 @@ final class ProductItemDataProvider implements RestrictedDataProviderInterface, 
         $user = $this->userContext->getUser();
 
         if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
-            return $this->productRepository->findOneByCode($id);
+            /** @var Product $product */
+            $product = $this->productRepository->findOneByCode($id);
+        } else {
+            Assert::keyExists($context, ContextKeys::CHANNEL);
+
+            /** @var ChannelInterface $channel */
+            $channel = $context[ContextKeys::CHANNEL];
+            /** @var Product $product */
+            $product = $this->productRepository->findOneByChannelAndCode($channel, $id);
         }
 
-        Assert::keyExists($context, ContextKeys::CHANNEL);
-
-        /** @var ChannelInterface $channel */
-        $channel = $context[ContextKeys::CHANNEL];
-
-        return $this->productRepository->findOneByChannelAndCode($channel, $id);
+        return ($product && $context[ContextKeys::CHANNEL]->getCode()) ? ProductDataProviderHelper::setCustomPropertiesToProduct($product, $context[ContextKeys::CHANNEL]->getCode()) : null;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
-        return is_a($resourceClass, ProductInterface::class, true);
+        return is_a($resourceClass, Product::class, true);
     }
 }

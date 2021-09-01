@@ -16,7 +16,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <imports>
-        <import resource="services/**/*.xml" />
+        <import resource="services/**/*.xml"/>
     </imports>
 
     <parameters>
@@ -24,19 +24,21 @@
     </parameters>
 
     <services>
-        <service id="sylius.api.upload_avatar_image_action" class="Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction" public="true">
-            <argument type="service" id="sylius.factory.avatar_image" />
-            <argument type="service" id="sylius.repository.avatar_image" />
-            <argument type="service" id="sylius.image_uploader" />
-            <argument type="service" id="api_platform.iri_converter" />
+        <service id="sylius.api.upload_avatar_image_action"
+                 class="Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction" public="true">
+            <argument type="service" id="sylius.factory.avatar_image"/>
+            <argument type="service" id="sylius.repository.avatar_image"/>
+            <argument type="service" id="sylius.image_uploader"/>
+            <argument type="service" id="api_platform.iri_converter"/>
         </service>
 
-        <service id="api_platform.swagger.action.ui" class="Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Bundle\Action\SwaggerUiAction" public="true">
-            <argument type="service" id="api_platform.metadata.resource.name_collection_factory" />
-            <argument type="service" id="api_platform.metadata.resource.metadata_factory" />
-            <argument type="service" id="api_platform.serializer" />
-            <argument type="service" id="twig" />
-            <argument type="service" id="router" />
+        <service id="api_platform.swagger.action.ui"
+                 class="Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Bundle\Action\SwaggerUiAction" public="true">
+            <argument type="service" id="api_platform.metadata.resource.name_collection_factory"/>
+            <argument type="service" id="api_platform.metadata.resource.metadata_factory"/>
+            <argument type="service" id="api_platform.serializer"/>
+            <argument type="service" id="twig"/>
+            <argument type="service" id="router"/>
             <argument>%api_platform.title%</argument>
             <argument>%api_platform.description%</argument>
             <argument>%api_platform.version%</argument>
@@ -58,57 +60,67 @@
             <argument>%api_platform.swagger.versions%</argument>
         </service>
 
-        <service id="sylius.api.property_info.extractor.empty_list_extractor" class="Sylius\Bundle\ApiBundle\PropertyInfo\Extractor\EmptyPropertyListExtractor">
-            <tag name="property_info.list_extractor" priority="-2000" />
+        <service id="sylius.api.property_info.extractor.empty_list_extractor"
+                 class="Sylius\Bundle\ApiBundle\PropertyInfo\Extractor\EmptyPropertyListExtractor">
+            <tag name="property_info.list_extractor" priority="-2000"/>
         </service>
 
-        <service id="sylius.api.data_transformer.order_token_value_aware_input_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\OrderTokenValueAwareInputCommandDataTransformer">
-            <tag name="sylius.api.command_data_transformer" />
+        <service id="sylius.api.data_transformer.order_token_value_aware_input_data_transformer"
+                 class="Sylius\Bundle\ApiBundle\DataTransformer\OrderTokenValueAwareInputCommandDataTransformer">
+            <tag name="sylius.api.command_data_transformer"/>
         </service>
 
-        <service id="sylius.api.data_transformer.shipment_id_aware_input_command" class="Sylius\Bundle\ApiBundle\DataTransformer\ShipmentIdAwareInputCommandDataTransformer">
-            <tag name="sylius.api.command_data_transformer" />
+        <service id="sylius.api.data_transformer.shipment_id_aware_input_command"
+                 class="Sylius\Bundle\ApiBundle\DataTransformer\ShipmentIdAwareInputCommandDataTransformer">
+            <tag name="sylius.api.command_data_transformer"/>
         </service>
 
-        <service id="sylius.api.data_transformer.logged_in_shop_user_id_aware_input_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserIdAwareCommandDataTransformer">
-            <argument type="service" id="sylius.api.context.user" />
-            <tag name="sylius.api.command_data_transformer" />
+        <service id="sylius.api.data_transformer.logged_in_shop_user_id_aware_input_data_transformer"
+                 class="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserIdAwareCommandDataTransformer">
+            <argument type="service" id="sylius.api.context.user"/>
+            <tag name="sylius.api.command_data_transformer"/>
         </service>
 
-        <service id="sylius.api.data_transformer.channel_code_aware_input_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\ChannelCodeAwareInputCommandDataTransformer">
-            <argument type="service" id="sylius.context.channel" />
-            <tag name="sylius.api.command_data_transformer" />
+        <service id="sylius.api.data_transformer.channel_code_aware_input_data_transformer"
+                 class="Sylius\Bundle\ApiBundle\DataTransformer\ChannelCodeAwareInputCommandDataTransformer">
+            <argument type="service" id="sylius.context.channel"/>
+            <tag name="sylius.api.command_data_transformer"/>
         </service>
 
-        <service id="sylius.api.data_transformer.logged_in_shop_user_email_aware_command" class="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserEmailAwareCommandDataTransformer">
-            <argument type="service" id="sylius.api.context.user" />
-            <tag name="sylius.api.command_data_transformer" />
+        <service id="sylius.api.data_transformer.logged_in_shop_user_email_aware_command"
+                 class="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserEmailAwareCommandDataTransformer">
+            <argument type="service" id="sylius.api.context.user"/>
+            <tag name="sylius.api.command_data_transformer"/>
         </service>
 
-        <service id="sylius.api.data_transformer.locale_code_aware_input_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\LocaleCodeAwareInputCommandDataTransformer">
-            <argument type="service" id="sylius.context.locale.composite" />
-            <tag name="sylius.api.command_data_transformer" />
+        <service id="sylius.api.data_transformer.locale_code_aware_input_data_transformer"
+                 class="Sylius\Bundle\ApiBundle\DataTransformer\LocaleCodeAwareInputCommandDataTransformer">
+            <argument type="service" id="sylius.context.locale.composite"/>
+            <tag name="sylius.api.command_data_transformer"/>
         </service>
 
-        <service id="sylius.api.data_transformer.subresource_id_aware_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\SubresourceIdAwareCommandDataTransformer">
-            <argument type="service" id="request_stack" />
-            <tag name="sylius.api.command_data_transformer" />
+        <service id="sylius.api.data_transformer.subresource_id_aware_data_transformer"
+                 class="Sylius\Bundle\ApiBundle\DataTransformer\SubresourceIdAwareCommandDataTransformer">
+            <argument type="service" id="request_stack"/>
+            <tag name="sylius.api.command_data_transformer"/>
         </service>
 
-        <service id="sylius.api.factory.cart_shipping_method" class="Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactory" />
+        <service id="sylius.api.factory.cart_shipping_method"
+                 class="Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactory"/>
 
         <service id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChanger">
-            <argument type="service" id="sylius.repository.payment" />
-            <argument type="service" id="sylius.repository.payment_method" />
+            <argument type="service" id="sylius.repository.payment"/>
+            <argument type="service" id="sylius.repository.payment_method"/>
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction" public="true">
-            <argument type="service" id="sylius.command_bus" />
+            <argument type="service" id="sylius.command_bus"/>
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider" decorates="api_platform.item_data_provider">
-            <argument type="service" id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider.inner" />
-            <argument type="service" id="sylius.context.channel" />
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider"
+                 decorates="api_platform.item_data_provider">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider.inner"/>
+            <argument type="service" id="sylius.context.channel"/>
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Map\CommandItemIriArgumentToIdentifierMap">
@@ -123,32 +135,47 @@
             </argument>
         </service>
 
-        <service id="sylius.api.section_resolver.admin_api_uri_based_section_resolver" class="Sylius\Bundle\ApiBundle\SectionResolver\AdminApiUriBasedSectionResolver">
+        <service id="sylius.api.section_resolver.admin_api_uri_based_section_resolver"
+                 class="Sylius\Bundle\ApiBundle\SectionResolver\AdminApiUriBasedSectionResolver">
             <argument>%sylius.security.new_api_admin_route%</argument>
-            <tag name="sylius.uri_based_section_resolver" priority="30" />
+            <tag name="sylius.uri_based_section_resolver" priority="30"/>
         </service>
 
-        <service id="sylius.api.section_resolver.shop_api_uri_based_section_resolver" class="Sylius\Bundle\ApiBundle\SectionResolver\ShopApiUriBasedSectionResolver">
+        <service id="sylius.api.section_resolver.shop_api_uri_based_section_resolver"
+                 class="Sylius\Bundle\ApiBundle\SectionResolver\ShopApiUriBasedSectionResolver">
             <argument>%sylius.security.new_api_shop_route%</argument>
             <argument>orders</argument>
-            <tag name="sylius.uri_based_section_resolver" priority="40" />
+            <tag name="sylius.uri_based_section_resolver" priority="40"/>
         </service>
 
-        <service id="sylius.listener.api_cart_blamer" class="Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener">
-            <argument type="service" id="sylius.context.cart" />
-            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
-            <argument type="service" id="sylius.command_bus" />
-            <tag name="kernel.event_listener" event="security.interactive_login" method="onInteractiveLogin" />
+        <service id="sylius.listener.api_cart_blamer"
+                 class="Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener">
+            <argument type="service" id="sylius.context.cart"/>
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver"/>
+            <argument type="service" id="sylius.command_bus"/>
+            <tag name="kernel.event_listener" event="security.interactive_login" method="onInteractiveLogin"/>
         </service>
 
-        <service id="sylius.listener.api_authentication_success_listener" class="Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener">
-            <argument type="service" id="api_platform.iri_converter" />
-            <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
+        <service id="sylius.listener.api_authentication_success_listener"
+                 class="Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener">
+            <argument type="service" id="api_platform.iri_converter"/>
+            <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success"
+                 method="onAuthenticationSuccessResponse"/>
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverter">
-            <argument type="service" id="api_platform.router" />
-            <argument type="service" id="api_platform.identifier.converter" on-invalid="ignore" />
+            <argument type="service" id="api_platform.router"/>
+            <argument type="service" id="api_platform.identifier.converter" on-invalid="ignore"/>
+        </service>
+        <!--        custom model-->
+        <service id="Sylius\Bundle\ApiBundle\Entity\Product\Product"
+                 class="Sylius\Bundle\ApiBundle\Entity\Product\Product"/>
+        <!--        custom data-provider-->
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\ProductCollectionDataProvider"
+                 class="Sylius\Bundle\ApiBundle\DataProvider\ProductCollectionDataProvider" autoconfigure="false" >
+            <tag priority="2" name="api_platform.collection_data_provider"/>
+            <bind key="$collectionDataProvider" type="service"
+                  id="api_platform.doctrine.orm.default.collection_data_provider"/>
         </service>
     </services>
 </container>

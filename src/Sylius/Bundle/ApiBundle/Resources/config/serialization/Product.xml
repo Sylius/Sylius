@@ -91,5 +91,11 @@
             <group>admin:product:read</group>
             <group>shop:product:read</group>
         </attribute>
+        <attribute name="onHand">
+            <group>admin:product:read</group>
+        </attribute>
+        <attribute name="price">
+            <group>admin:product:read</group>
+        </attribute>
     </class>
 </serializer>
