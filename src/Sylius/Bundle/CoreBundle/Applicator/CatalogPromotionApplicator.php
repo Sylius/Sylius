@@ -13,14 +13,21 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Applicator;
 
+use Sylius\Bundle\CoreBundle\Formatter\AppliedPromotionInformationFormatterInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionTranslationInterface;
 
 final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInterface
 {
+    private AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter;
+
+    public function __construct(AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter)
+    {
+        $this->appliedPromotionInformationFormatter = $appliedPromotionInformationFormatter;
+    }
+
     public function applyCatalogPromotion(
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion
@@ -45,20 +52,9 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
 
             $channelPricing->setPrice((int) ($channelPricing->getPrice() - ($channelPricing->getPrice() * $discount)));
 
-            $channelPricing->addAppliedPromotion($this->formatAppliedPromotion($catalogPromotion));
+            $channelPricing->addAppliedPromotion(
+                $this->appliedPromotionInformationFormatter->format($catalogPromotion)
+            );
         }
-    }
-
-    private function formatAppliedPromotion(CatalogPromotionInterface $catalogPromotion): array
-    {
-        /** @var CatalogPromotionTranslationInterface $translation */
-        $translation = $catalogPromotion->getTranslations()->first();
-
-        /** @var string $label */
-        $label = $translation->getLabel();
-        /** @var string $code */
-        $code = $catalogPromotion->getCode();
-
-        return [$code => ['name' => $label]];
     }
 }

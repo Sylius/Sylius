@@ -249,9 +249,16 @@
         </service>
 
         <service
+            id="Sylius\Bundle\CoreBundle\Formatter\AppliedPromotionInformationFormatterInterface"
+            class="Sylius\Bundle\CoreBundle\Formatter\AppliedPromotionInformationFormatter"
+        />
+
+        <service
             id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface"
             class="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicator"
-        />
+        >
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Formatter\AppliedPromotionInformationFormatterInterface" />
+        </service>
 
         <service
             id="Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface"

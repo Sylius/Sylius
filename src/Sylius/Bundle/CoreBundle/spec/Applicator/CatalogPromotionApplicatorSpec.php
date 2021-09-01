@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
+use Sylius\Bundle\CoreBundle\Formatter\AppliedPromotionInformationFormatterInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -25,16 +26,21 @@ use Sylius\Component\Promotion\Model\CatalogPromotionTranslationInterface;
 
 final class CatalogPromotionApplicatorSpec extends ObjectBehavior
 {
+    function let(AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter): void
+    {
+        $this->beConstructedWith($appliedPromotionInformationFormatter);
+    }
+
     function it_implements_catalog_promotion_applicator_interface(): void
     {
         $this->shouldImplement(CatalogPromotionApplicatorInterface::class);
     }
 
     function it_applies_percentage_discount_on_all_products_variants(
+        AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter,
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion,
         CatalogPromotionActionInterface $catalogPromotionAction,
-        CatalogPromotionTranslationInterface $translation,
         ChannelPricingInterface $firstChannelPricing,
         ChannelPricingInterface $secondChannelPricing
     ): void {
@@ -47,11 +53,8 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
             $secondChannelPricing->getWrappedObject(),
         ]));
 
+        $appliedPromotionInformationFormatter->format($catalogPromotion)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
         $catalogPromotionAction->getConfiguration()->willReturn(['amount' => 0.3]);
-        $catalogPromotion->getLabel()->willReturn('Winter sale');
-        $catalogPromotion->getTranslations()->willReturn(new ArrayCollection([$translation->getWrappedObject()]));
-        $translation->getLabel()->willReturn('Winter sale');
-        $catalogPromotion->getCode()->willReturn('winter_sale');
 
         $firstChannelPricing->getPrice()->willReturn(1000);
         $firstChannelPricing->getOriginalPrice()->willReturn(null);
@@ -69,6 +72,7 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
     }
 
     function it_does_not_set_original_price_during_application_if_its_already_there(
+        AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter,
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion,
         CatalogPromotionActionInterface $catalogPromotionAction,
@@ -83,12 +87,8 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
             $catalogPromotionAction->getWrappedObject(),
         ]));
 
+        $appliedPromotionInformationFormatter->format($catalogPromotion)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
         $catalogPromotionAction->getConfiguration()->willReturn(['amount' => 0.5]);
-
-        $catalogPromotion->getLabel()->willReturn('Winter sale');
-        $catalogPromotion->getTranslations()->willReturn(new ArrayCollection([$translation->getWrappedObject()]));
-        $translation->getLabel()->willReturn('Winter sale');
-        $catalogPromotion->getCode()->willReturn('winter_sale');
 
         $firstChannelPricing->getPrice()->willReturn(1000);
         $firstChannelPricing->getOriginalPrice()->willReturn(2000);
