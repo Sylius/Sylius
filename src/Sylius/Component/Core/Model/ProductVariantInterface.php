@@ -70,4 +70,6 @@ interface ProductVariantInterface extends
     public function isShippingRequired(): bool;
 
     public function setShippingRequired(bool $shippingRequired): void;
+
+    public function getAppliedPromotionsForChannel(ChannelInterface $channel): array;
 }

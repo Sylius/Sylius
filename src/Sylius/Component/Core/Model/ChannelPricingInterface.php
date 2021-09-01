@@ -37,4 +37,10 @@ interface ChannelPricingInterface extends ResourceInterface
     public function setOriginalPrice(?int $originalPrice): void;
 
     public function isPriceReduced(): bool;
+
+    public function addAppliedPromotion(array $promotion): void;
+
+    public function removeAppliedPromotion(string $promotionCode): void;
+
+    public function getAppliedPromotions(): array;
 }

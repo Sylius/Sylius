@@ -13,19 +13,48 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Applicator;
 
+use Sylius\Bundle\CoreBundle\Formatter\AppliedPromotionInformationFormatterInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
 final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInterface
 {
-    public function applyPercentageDiscount(ProductVariantInterface $variant, float $discount): void
+    private AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter;
+
+    public function __construct(AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter)
     {
+        $this->appliedPromotionInformationFormatter = $appliedPromotionInformationFormatter;
+    }
+
+    public function applyCatalogPromotion(
+        ProductVariantInterface $variant,
+        CatalogPromotionInterface $catalogPromotion
+    ): void {
+        foreach ($catalogPromotion->getActions() as $action) {
+            $this->applyDiscountFromAction($catalogPromotion, $action, $variant);
+        }
+    }
+
+    private function applyDiscountFromAction(
+        CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionActionInterface $action,
+        ProductVariantInterface $variant
+    ) {
+        $discount = $action->getConfiguration()['amount'];
+
         /** @var ChannelPricingInterface $channelPricing */
         foreach ($variant->getChannelPricings() as $channelPricing) {
             if ($channelPricing->getOriginalPrice() === null) {
                 $channelPricing->setOriginalPrice($channelPricing->getPrice());
             }
+
             $channelPricing->setPrice((int) ($channelPricing->getPrice() - ($channelPricing->getPrice() * $discount)));
+
+            $channelPricing->addAppliedPromotion(
+                $this->appliedPromotionInformationFormatter->format($catalogPromotion)
+            );
         }
     }
 }

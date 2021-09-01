@@ -278,6 +278,13 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface, Com
         $this->shippingRequired = $shippingRequired;
     }
 
+    public function getAppliedPromotionsForChannel(ChannelInterface $channel): array
+    {
+        $channelPricing = $this->getChannelPricingForChannel($channel);
+
+        return ($channelPricing !== null) ? $channelPricing->getAppliedPromotions() : [];
+    }
+
     /**
      * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
      * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
