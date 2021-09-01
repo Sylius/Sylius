@@ -18,4 +18,5 @@ use Sylius\Component\Promotion\Model\CatalogPromotionInterface as BaseCatalogPro
 
 interface CatalogPromotionInterface extends BaseCatalogPromotionInterface, ChannelsAwareInterface
 {
+    public const TYPE_CONTAINS_VARIANTS = 'contains_variants';
 }

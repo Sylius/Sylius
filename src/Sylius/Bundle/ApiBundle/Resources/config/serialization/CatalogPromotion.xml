@@ -43,8 +43,9 @@
         <attribute name="rules">
             <group>admin:catalog_promotion:read</group>
             <group>admin:catalog_promotion:create</group>
+            <group>admin:catalog_promotion:update</group>
         </attribute>
-        <attribute name="rules">
+        <attribute name="actions">
             <group>admin:catalog_promotion:read</group>
             <group>admin:catalog_promotion:create</group>
             <group>admin:catalog_promotion:update</group>

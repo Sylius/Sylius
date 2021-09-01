@@ -49,3 +49,9 @@ Feature: Editing catalog promotion
         When I want "Christmas sale" catalog promotion to be applied on "Kotlin T-shirt" variant
         Then I should be notified that it has been successfully edited
         And this catalog promotion should be applied on "Kotlin T-shirt" variant
+
+    @api
+    Scenario: Editing catalog promotion action
+        When I edit "Christmas sale" catalog promotion to have "40%" discount
+        Then I should be notified that it has been successfully edited
+        And this catalog promotion should have "40%" percentage discount

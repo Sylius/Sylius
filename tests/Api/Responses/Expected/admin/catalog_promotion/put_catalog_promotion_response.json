@@ -19,6 +19,17 @@
             ]
         }
     ],
+    "actions": [
+        {
+            "@type": "CatalogPromotionAction",
+            "@id": @string@,
+            "id": @integer@,
+            "type": "percentage_discount",
+            "configuration": {
+                "amount": 0.4
+            }
+        }
+    ],
     "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/catalog-promotion-translations\/@integer@",

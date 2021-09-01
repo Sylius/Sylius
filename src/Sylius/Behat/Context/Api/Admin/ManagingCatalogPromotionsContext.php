@@ -22,6 +22,7 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
+use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
@@ -162,6 +163,21 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^it gives the ("[^"]+") percentage discount$/
+     */
+    public function iAddThePercentageDiscountCatalogPromotionActionConfiguredWithAmountOf(float $amount): void
+    {
+        $actions = [[
+            'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+            'configuration' => [
+                'amount' => $amount
+            ],
+        ]];
+
+        $this->client->addRequestData('actions', $actions);
+    }
+
+    /**
      * @When I save my changes
      */
     public function iSaveMyChanges(): void
@@ -213,6 +229,23 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I edit ("[^"]+" catalog promotion) to have ("[^"]+") discount$/
+     */
+    public function iWantPromotionToHaveDiscount(CatalogPromotionInterface $catalogPromotion, float $amount): void
+    {
+        $this->client->buildUpdateRequest($catalogPromotion->getCode());
+        $rules = [[
+            'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+            'configuration' => [
+                'amount' => $amount,
+            ],
+        ]];
+
+        $this->client->updateRequestData(['actions' => $rules]);
+        $this->client->update();
+    }
+
+    /**
      * @Then there should be :amount new catalog promotion on the list
      * @Then there should be :amount catalog promotions on the list
      * @Then there should be an empty list of catalog promotions
@@ -220,6 +253,27 @@ final class ManagingCatalogPromotionsContext implements Context
     public function thereShouldBeNewCatalogPromotionOnTheList(int $amount = 0): void
     {
         Assert::count($this->responseChecker->getCollection($this->client->index()), $amount);
+    }
+
+    /**
+     * @Then /^it should have ("[^"]+") discount$/
+     */
+    public function itShouldHaveDiscount(float $amount): void
+    {
+        $catalogPromotion = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
+
+        Assert::same($catalogPromotion['actions'][0]['configuration']['amount'], $amount);
+    }
+
+    /**
+     * @Then /^this catalog promotion should have ("[^"]+") percentage discount$/
+     */
+    public function itShouldHavePercentageDiscount(float $amount): void
+    {
+        $catalogPromotionAction = $this->responseChecker->getResponseContent($this->client->getLastResponse())['actions'][0];
+
+        Assert::same($amount, $catalogPromotionAction['configuration']['amount']);
+        Assert::same(CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT, $catalogPromotionAction['type']);
     }
 
     /**
@@ -247,7 +301,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then it should have "contains variants" rule
      * @Then /^it should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
      */
     public function itShouldHaveRule(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
