@@ -7,13 +7,18 @@
     <class name="Sylius\Component\Core\Model\ProductTaxon">
         <attribute name="id">
             <group>admin:product_taxon:read</group>
+            <group>admin:product:read</group>
             <group>shop:product_taxon:read</group>
         </attribute>
         <attribute name="taxon">
             <group>admin:product_taxon:read</group>
             <group>shop:product_taxon:read</group>
             <group>admin:product:create</group>
+            <group>admin:product:read</group>
             <group>admin:product:update</group>
+        </attribute>
+        <attribute name="position">
+            <group>admin:product:read</group>
         </attribute>
     </class>
 </serializer>
