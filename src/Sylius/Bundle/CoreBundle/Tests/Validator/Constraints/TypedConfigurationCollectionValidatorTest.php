@@ -28,9 +28,9 @@ final class TypedConfigurationCollectionValidatorTest extends KernelTestCase
 
     /**
      * @test
-     * @dataProvider caseProvider
+     * @dataProvider badCases
      */
-    public function it_validates_against_constraints(
+    public function it_validates_against_constraints_with_invalid_data(
         int $expectedViolationCount,
         string $expectedPropertyPath,
         string $expectedMessage,
@@ -43,7 +43,19 @@ final class TypedConfigurationCollectionValidatorTest extends KernelTestCase
         $this->assertSame($expectedMessage, $violations->get(0)->getMessage());
     }
 
-    public function caseProvider(): iterable
+    /**
+     * @test
+     * @dataProvider goodCases
+     */
+    public function it_validates_against_constraints_with_valid_data(
+        $toValidate,
+        Constraint $constraint
+    ): void {
+        $violations = $this->validator->validate($toValidate, $constraint);
+        $this->assertCount(0, $violations);
+    }
+
+    public function badCases(): iterable
     {
         yield [
             'expectedViolationCount' => 1,
@@ -60,7 +72,9 @@ final class TypedConfigurationCollectionValidatorTest extends KernelTestCase
                     'some_custom_type' => new Collection([
                         'someValue' => new Range(['min' => 1, 'max' => 10])
                     ]),
-                    'some_other_custom_type' => new Collection([])
+                    'some_custom_class' => new Collection([
+                        'someField' => new NotBlank()
+                    ])
                 ],
             ])
         ];
@@ -71,6 +85,44 @@ final class TypedConfigurationCollectionValidatorTest extends KernelTestCase
             'toValidate' => new class() implements TypedConfiguration {
                 public function getType(): string { return 'some_custom_class'; }
                 public function getConfiguration(): array { return []; }
+            },
+            'constraint' => new TypedConfigurationCollection([
+                'types' => [
+                    'some_custom_type' => new Collection([
+                        'someValue' => new Range(['min' => 1, 'max' => 10])
+                    ]),
+                    'some_custom_class' => new Collection([
+                        'someField' => new NotBlank()
+                    ])
+                ],
+            ])
+        ];
+    }
+
+    public function goodCases(): iterable
+    {
+        yield [
+            'toValidate' => [
+                'type' => 'some_custom_type',
+                'configuration' => [
+                    'someValue' => 5
+                ]
+            ],
+            'constraint' => new TypedConfigurationCollection([
+                'types' => [
+                    'some_custom_type' => new Collection([
+                        'someValue' => new Range(['min' => 1, 'max' => 10])
+                    ]),
+                    'some_custom_class' => new Collection([
+                        'someField' => new NotBlank()
+                    ])
+                ],
+            ])
+        ];
+        yield [
+            'toValidate' => new class() implements TypedConfiguration {
+                public function getType(): string { return 'some_custom_class'; }
+                public function getConfiguration(): array { return ['someField' => 123]; }
             },
             'constraint' => new TypedConfigurationCollection([
                 'types' => [
