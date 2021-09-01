@@ -9,15 +9,16 @@ class ProductDataProviderHelper
 {
     /**
      * @param Product $product
+     * @param string $chanel
      * @return Product
      */
-    public static function setCustomPropertiesToProduct($product)
+    public static function setCustomPropertiesToProduct($product, $chanel)
     {
         $onHand = 0;
 
         foreach ($product->getVariants()->getValues() as $i => $variant) {
             if ($i === 0){
-                $product->setPrice($variant->getChannelPricings()['FASHION_WEB']->getPrice());
+                $product->setPrice($variant->getChannelPricings()[$chanel]->getPrice());
             }
 
             $onHand += $variant->getOnHand();

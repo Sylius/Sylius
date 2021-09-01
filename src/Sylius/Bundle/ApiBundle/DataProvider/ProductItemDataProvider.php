@@ -45,19 +45,17 @@ final class ProductItemDataProvider implements RestrictedDataProviderInterface, 
 
         if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
             /** @var Product $product */
-            $product =  $this->productRepository->findOneByCode($id);
+            $product = $this->productRepository->findOneByCode($id);
         } else {
             Assert::keyExists($context, ContextKeys::CHANNEL);
 
             /** @var ChannelInterface $channel */
             $channel = $context[ContextKeys::CHANNEL];
             /** @var Product $product */
-            $product =  $this->productRepository->findOneByChannelAndCode($channel, $id);
+            $product = $this->productRepository->findOneByChannelAndCode($channel, $id);
         }
 
-        $product = ProductDataProviderHelper::setCustomPropertiesToProduct($product);
-
-        return $product;
+        return ($product && $context[ContextKeys::CHANNEL]->getCode()) ? ProductDataProviderHelper::setCustomPropertiesToProduct($product, $context[ContextKeys::CHANNEL]->getCode()) : null;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
