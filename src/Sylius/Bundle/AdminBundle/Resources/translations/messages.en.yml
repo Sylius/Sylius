@@ -32,6 +32,7 @@ sylius:
                     tax_rates: Tax rates
                     zones: Zones
                 marketing:
+                    cart_promotions: Cart promotions
                     catalog_promotions: Catalog promotions
                     header: Marketing
                     product_reviews: Product reviews
