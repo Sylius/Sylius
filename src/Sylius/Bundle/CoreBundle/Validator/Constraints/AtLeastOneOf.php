@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\Composite;
 
 /**
@@ -22,26 +23,35 @@ class AtLeastOneOf extends Composite
 {
     public const AT_LEAST_ONE_OF_ERROR = 'f27e6d6c-261a-4056-b391-6673a623531c';
 
+    /**
+     * @psalm-var array<array-key, string>
+     */
     protected static $errorNames = [
         self::AT_LEAST_ONE_OF_ERROR => 'AT_LEAST_ONE_OF_ERROR',
     ];
 
+    /**
+     * @var Constraint[]
+     */
     public $constraints = [];
-    public $message = 'This value should satisfy at least one of the following constraints:';
-    public $messageCollection = 'Each element of this collection should satisfy its own set of constraints.';
-    public $includeInternalMessages = true;
+    public string $message = 'This value should satisfy at least one of the following constraints:';
+    public string $messageCollection = 'Each element of this collection should satisfy its own set of constraints.';
+    public bool $includeInternalMessages = true;
 
-    public function getDefaultOption()
+    public function getDefaultOption(): string
     {
         return 'constraints';
     }
 
-    public function getRequiredOptions()
+    /**
+     * @return string[]
+     */
+    public function getRequiredOptions(): array
     {
         return ['constraints'];
     }
 
-    protected function getCompositeOption()
+    protected function getCompositeOption(): string
     {
         return 'constraints';
     }
