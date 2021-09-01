@@ -1,7 +1,7 @@
 @applying_catalog_promotions
 Feature: Applying catalog promotions for variants
     In order to be attracted to products
-    As a Customer
+    As a Visitor
     I want to see discounted products in the catalog
 
     Background:
