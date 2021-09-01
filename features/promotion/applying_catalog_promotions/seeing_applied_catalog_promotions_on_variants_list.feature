@@ -12,7 +12,7 @@ Feature: Seeing applied catalog promotions on variants list
         And this product has "Python T-Shirt" variant priced at "$40.00"
         And there is a catalog promotion with "winter_sale" code and "Winter sale" name
         And it will be applied on "PHP T-Shirt" variant
-        And it will reduce price by 50%
+        And it will reduce price by "50%"
 
     @api
     Scenario: Seeing applied catalog promotion on variant

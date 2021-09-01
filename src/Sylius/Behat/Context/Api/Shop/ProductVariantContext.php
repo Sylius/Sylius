@@ -74,35 +74,30 @@ final class ProductVariantContext implements Context
      * @Then /^I should see ("[^"]+" variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/
      */
     public function iShouldSeeVariantIsDiscountedFromToWithPromotion(
-        ProductVariantInterface $targetVariant,
+        ProductVariantInterface $variant,
         int $originalPrice,
         int $price,
         string $promotionName
     ): void {
-        $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+        $response = $this->client->getLastResponse();
+        $content = $this->responseChecker->getCollectionItemsWithValue($response, 'code', $variant->getCode())[0];
 
-        foreach ($response['hydra:member'] as $variant) {
-            if ($variant['code'] !== $targetVariant->getCode()) {
-                continue;
-            }
-
-            Assert::same($variant['price'], $price);
-            Assert::same($variant['originalPrice'], $originalPrice);
-            Assert::inArray(['name' => $promotionName], $variant['appliedPromotions']);
-        }
+        Assert::same($content['price'], $price);
+        Assert::same($content['originalPrice'], $originalPrice);
+        Assert::inArray(['name' => $promotionName], $content['appliedPromotions']);
     }
 
     /**
-     * @Then I should see :firstVariant variant and :secondVariant variant are not discounted
+     * @Then /^I should see ("[^"]+" variant) and ("[^"]+" variant) are not discounted$/
      */
-    public function iShouldSeeVariantsAreNotDiscounted(string ...$variantsNames): void
+    public function iShouldSeeVariantsAreNotDiscounted(ProductVariantInterface ...$variants): void
     {
-        $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+        $response = $this->client->getLastResponse();
 
-        foreach ($response['hydra:member'] as $variant) {
-            if (in_array($variant['translations']['en_US']['name'], $variantsNames)) {
-                Assert::keyNotExists($variant, 'appliedPromotions');
-            }
+        foreach ($variants as $variant) {
+            $items = $this->responseChecker->getCollectionItemsWithValue($response, 'code', $variant->getCode());
+            $item = array_pop($items);
+            Assert::keyNotExists($item, 'appliedPromotions');
         }
     }
 }

@@ -14,7 +14,7 @@ final class Version20210830193340 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Add information about applied catalog promotions on channel pricing';
     }
 
     public function up(Schema $schema): void
