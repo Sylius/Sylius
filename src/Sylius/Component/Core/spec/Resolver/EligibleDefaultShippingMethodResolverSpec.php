@@ -27,6 +27,7 @@ use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheck
 use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
+use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 final class EligibleDefaultShippingMethodResolverSpec extends ObjectBehavior
 {
@@ -134,5 +135,58 @@ final class EligibleDefaultShippingMethodResolverSpec extends ObjectBehavior
     function it_throws_an_exception_if_passed_shipment_is_not_core_shipment_object(BaseShipmentInterface $shipment): void
     {
         $this->shouldThrow(InvalidArgumentException::class)->during('getDefaultShippingMethod', [$shipment]);
+    }
+
+    function it_returns_the_first_method_from_the_shipping_methods_resolver_when_passed(
+        ChannelInterface $channel,
+        OrderInterface $order,
+        ShipmentInterface $shipment,
+        ShippingMethodInterface $firstShippingMethod,
+        ShippingMethodInterface $secondShippingMethod,
+        ShippingMethodInterface $thirdShippingMethod,
+        ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker,
+        ZoneMatcherInterface $zoneMatcher,
+        ShippingMethodsResolverInterface $shippingMethodsResolver
+    ): void {
+        $this->beConstructedWith(
+            $shippingMethodRepository,
+            $shippingMethodEligibilityChecker,
+            $zoneMatcher,
+            $shippingMethodsResolver
+        );
+
+        $shipment->getOrder()->willReturn($order);
+        $order->getChannel()->willReturn($channel);
+        $order->getShippingAddress()->willReturn(null);
+
+        $shippingMethodRepository
+            ->findEnabledForChannel($channel)
+            ->willReturn([$firstShippingMethod, $secondShippingMethod])
+        ;
+
+        $shippingMethodEligibilityChecker->isEligible($shipment, $firstShippingMethod)->willReturn(false);
+        $shippingMethodEligibilityChecker->isEligible($shipment, $secondShippingMethod)->willReturn(true);
+        $shippingMethodEligibilityChecker->isEligible($shipment, $thirdShippingMethod)->willReturn(true);
+
+        $shippingMethodsResolver
+            ->getSupportedMethods($shipment)
+            ->willReturn([$thirdShippingMethod])
+        ;
+
+        $this->getDefaultShippingMethod($shipment)->shouldReturn($thirdShippingMethod);
+    }
+
+    function it_throws_an_exception_if_neither_a_repository_nor_a_resolver_is_passed_to_the_constructor(
+        ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker,
+        ZoneMatcherInterface $zoneMatcher
+    ): void {
+        $this->beConstructedWith(
+            null,
+            $shippingMethodEligibilityChecker,
+            $zoneMatcher
+        );
+
+        $this->shouldThrow(InvalidArgumentException::class)->duringInstantiation();
     }
 }

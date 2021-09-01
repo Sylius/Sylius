@@ -17,7 +17,6 @@ use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface as CoreShipmentInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
@@ -25,40 +24,97 @@ use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
+use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Webmozart\Assert\Assert;
 
 final class EligibleDefaultShippingMethodResolver implements DefaultShippingMethodResolverInterface
 {
-    /** @var ShippingMethodRepositoryInterface */
-    private $shippingMethodRepository;
+    private ?ShippingMethodRepositoryInterface $shippingMethodRepository;
 
-    /** @var ShippingMethodEligibilityCheckerInterface */
-    private $shippingMethodEligibilityChecker;
+    private ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker;
 
-    /** @var ZoneMatcherInterface */
-    private $zoneMatcher;
+    private ZoneMatcherInterface $zoneMatcher;
+
+    private ?ShippingMethodsResolverInterface $shippingMethodsResolver;
 
     public function __construct(
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ?ShippingMethodRepositoryInterface $shippingMethodRepository = null,
         ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker,
-        ZoneMatcherInterface $zoneMatcher
+        ZoneMatcherInterface $zoneMatcher,
+        ?ShippingMethodsResolverInterface $shippingMethodsResolver = null
     ) {
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->shippingMethodEligibilityChecker = $shippingMethodEligibilityChecker;
         $this->zoneMatcher = $zoneMatcher;
+
+        Assert::false(
+            null === $shippingMethodRepository && null === $shippingMethodsResolver,
+            sprintf(
+                'You must pass to "%s" constructor either a $shippingMethodRepository, or a $shippingMethodsResolver, or both.',
+                __CLASS__,
+            )
+        );
+
+        if (null !== $shippingMethodRepository) {
+            @trigger_error(
+                sprintf(
+                    'Passing an $shippingMethodRepository to "%s" constructor is deprecated since Sylius 1.9 and the argument will be removed in Sylius 2.0.',
+                    self::class
+                ),
+                \E_USER_DEPRECATED
+            );
+        }
+
+        if (null === $shippingMethodsResolver) {
+            @trigger_error(
+                sprintf(
+                    'Not passing a $shippingMethodsResolver to "%s" constructor is deprecated since Sylius 1.9 and the argument will be required starting with Sylius 2.0.',
+                    __CLASS__
+                ),
+                \E_USER_DEPRECATED
+            );
+        }
+
+        $this->shippingMethodsResolver = $shippingMethodsResolver;
     }
 
+    /**
+     * @param ShipmentInterface|CoreShipmentInterface $shipment
+     *
+     * @throws UnresolvedDefaultShippingMethodException
+     */
     public function getDefaultShippingMethod(ShipmentInterface $shipment): ShippingMethodInterface
     {
-        /** @var CoreShipmentInterface $shipment */
         Assert::isInstanceOf($shipment, CoreShipmentInterface::class);
 
-        /** @var OrderInterface $order */
-        $order = $shipment->getOrder();
-        /** @var ChannelInterface $channel */
-        $channel = $order->getChannel();
+        if (null !== $this->shippingMethodsResolver) {
+            return $this->getFromResolver($shipment);
+        }
 
-        $shippingMethods = $this->getShippingMethods($channel, $order->getShippingAddress());
+        return $this->getFromRepository($shipment);
+    }
+
+    /**
+     * @throws UnresolvedDefaultShippingMethodException
+     */
+    private function getFromResolver(CoreShipmentInterface $shipment): ShippingMethodInterface
+    {
+        $shippingMethods = $this->shippingMethodsResolver->getSupportedMethods($shipment);
+
+        if (empty($shippingMethods)) {
+            throw new UnresolvedDefaultShippingMethodException();
+        }
+
+        return $shippingMethods[0];
+    }
+
+    /**
+     * @throws UnresolvedDefaultShippingMethodException
+     */
+    private function getFromRepository(CoreShipmentInterface $shipment): ShippingMethodInterface
+    {
+        $order = $shipment->getOrder();
+        $shippingMethods = $this->getShippingMethods($order->getChannel(), $order->getShippingAddress());
 
         foreach ($shippingMethods as $shippingMethod) {
             if ($this->shippingMethodEligibilityChecker->isEligible($shipment, $shippingMethod)) {
