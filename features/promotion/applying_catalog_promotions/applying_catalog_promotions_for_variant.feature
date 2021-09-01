@@ -15,12 +15,12 @@ Feature: Applying catalog promotions for variants
         And this product has "Kotlin Mug" variant priced at "$7.00"
         And there is a catalog promotion with "winter_sale" code and "Winter sale" name
         And it will be applied on "PHP T-Shirt" variant
-        And it will reduce price by 50%
+        And it will reduce price by "30%"
 
     @api
     Scenario: Applying simple catalog promotions
         When I view product "T-Shirt"
-        Then I should see the product price "$10.00"
+        Then I should see the product price "$14.00"
         And I should see the product original price "$20.00"
 
     @api

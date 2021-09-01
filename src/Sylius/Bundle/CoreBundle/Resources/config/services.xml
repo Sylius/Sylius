@@ -262,7 +262,7 @@
 
         <service
             id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface"
-            class="Sylius\Bundle\CoreBundle\Processor\DummyCatalogPromotionProcessor"
+            class="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessor"
         >
             <argument type="service" id="Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface" />

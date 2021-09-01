@@ -20,11 +20,18 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionRule;
+use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class CatalogPromotionContext implements Context
 {
     private ExampleFactoryInterface $catalogPromotionExampleFactory;
+
+    private FactoryInterface $catalogPromotionRuleFactory;
+
+    private FactoryInterface $catalogPromotionActionFactory;
 
     private EntityManagerInterface $entityManager;
 
@@ -32,10 +39,14 @@ final class CatalogPromotionContext implements Context
 
     public function __construct(
         ExampleFactoryInterface $catalogPromotionExampleFactory,
+        FactoryInterface $catalogPromotionRuleFactory,
+        FactoryInterface $catalogPromotionActionFactory,
         EntityManagerInterface $entityManager,
         SharedStorageInterface $sharedStorage
     ) {
         $this->catalogPromotionExampleFactory = $catalogPromotionExampleFactory;
+        $this->catalogPromotionRuleFactory = $catalogPromotionRuleFactory;
+        $this->catalogPromotionActionFactory = $catalogPromotionActionFactory;
         $this->entityManager = $entityManager;
         $this->sharedStorage = $sharedStorage;
     }
@@ -79,8 +90,8 @@ final class CatalogPromotionContext implements Context
      */
     public function itWillBeAppliedOnVariant(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface $variant): void
     {
-        $catalogPromotionRule = new CatalogPromotionRule();
-
+        /** @var CatalogPromotionRuleInterface $catalogPromotionRule */
+        $catalogPromotionRule = $this->catalogPromotionRuleFactory->createNew();
         $catalogPromotionRule->setType(CatalogPromotionRule::TYPE_FOR_VARIANTS);
         $catalogPromotionRule->setConfiguration([$variant->getCode()]);
 
@@ -90,11 +101,18 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^(it) will reduce price by ([^"]+)%$/
+     * @Given /^(it) will reduce price by ("[^"]+")$/
      */
-    public function itWillReducePrice(CatalogPromotionInterface $catalogPromotion, int $discount): void
+    public function itWillReducePrice(CatalogPromotionInterface $catalogPromotion, float $discount): void
     {
-        // TODO: Add fixed discount Action to the Catalog Promotion
+        /** @var CatalogPromotionActionInterface $catalogPromotionAction */
+        $catalogPromotionAction = $this->catalogPromotionActionFactory->createNew();
+        $catalogPromotionAction->setType(CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT);
+        $catalogPromotionAction->setConfiguration(['amount' => $discount]);
+
+        $catalogPromotion->addAction($catalogPromotionAction);
+
+        $this->entityManager->flush();
     }
 
     private function createCatalogPromotion(string $name, ?string $code = null): CatalogPromotionInterface

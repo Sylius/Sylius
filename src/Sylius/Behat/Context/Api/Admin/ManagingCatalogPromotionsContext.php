@@ -165,7 +165,7 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @When /^it gives the ("[^"]+") percentage discount$/
      */
-    public function iAddThePercentageDiscountCatalogPromotionActionConfiguredWithAmountOf(float $amount): void
+    public function iGivesPercentageDistount(float $amount): void
     {
         $actions = [[
             'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
@@ -231,7 +231,7 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @When /^I edit ("[^"]+" catalog promotion) to have ("[^"]+") discount$/
      */
-    public function iWantPromotionToHaveDiscount(CatalogPromotionInterface $catalogPromotion, float $amount): void
+    public function iEditCatalogPromotionToHaveDiscount(CatalogPromotionInterface $catalogPromotion, float $amount): void
     {
         $this->client->buildUpdateRequest($catalogPromotion->getCode());
         $rules = [[
@@ -268,12 +268,19 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @Then /^this catalog promotion should have ("[^"]+") percentage discount$/
      */
-    public function itShouldHavePercentageDiscount(float $amount): void
+    public function thisCatalogPromotionShouldHavePercentageDiscount(float $amount): void
     {
-        $catalogPromotionAction = $this->responseChecker->getResponseContent($this->client->getLastResponse())['actions'][0];
+        $catalogPromotionActions = $this->responseChecker->getResponseContent($this->client->getLastResponse())['actions'];
+        foreach ($catalogPromotionActions as $catalogPromotionAction) {
+            if (
+                $catalogPromotionAction['configuration']['amount'] === $amount &&
+                $catalogPromotionAction['type'] === CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT
+            ) {
+                return;
+            }
+        }
 
-        Assert::same($amount, $catalogPromotionAction['configuration']['amount']);
-        Assert::same(CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT, $catalogPromotionAction['type']);
+        throw new \Exception(sprintf('There is no "%s" action with %f', CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT, $amount));
     }
 
     /**
