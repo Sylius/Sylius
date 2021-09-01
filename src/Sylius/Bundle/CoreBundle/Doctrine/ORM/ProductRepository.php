@@ -25,7 +25,7 @@ use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
 {
-    private AssociationHydrator $associationHydrator;
+    protected AssociationHydrator $associationHydrator;
 
     public function __construct(EntityManager $entityManager, ClassMetadata $class)
     {
