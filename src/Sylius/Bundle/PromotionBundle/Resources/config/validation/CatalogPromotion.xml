@@ -42,5 +42,8 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="actions">
+            <constraint name="Valid" />
+        </property>
     </class>
 </constraint-mapping>

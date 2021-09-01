@@ -178,6 +178,19 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When it does not give the percentage discount
+     */
+    public function itDoesNotGiveThePercentageDiscount(): void
+    {
+        $actions = [[
+            'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+            'configuration' => [],
+        ]];
+
+        $this->client->addRequestData('actions', $actions);
+    }
+
+    /**
      * @When I save my changes
      */
     public function iSaveMyChanges(): void
@@ -475,7 +488,7 @@ final class ManagingCatalogPromotionsContext implements Context
         );
         Assert::same(
             $this->responseChecker->getError($response),
-            'discount: Please enter catalog promotion discount.'
+            'actions[0].configuration: This value should satisfy at least one of the following constraints: [1] Configuration for action cannot be empty. [2] Each element of this collection should satisfy its own set of constraints.'
         );
     }
 

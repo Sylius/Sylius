@@ -3,6 +3,13 @@ sylius:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
             upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
+    catalog_promotion:
+        action:
+            configuration:
+                not_blank: Configuration for action cannot be empty.
+                percentage_discount:
+                    discount:
+                        not_blank: Discount cannot be empty.
     channel:
         base_currency:
             not_blank: Please enter channel base currency.

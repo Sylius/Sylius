@@ -60,7 +60,7 @@ Feature: Creating a catalog promotion
         Then I should be notified that catalog promotion with this code already exists
         And there should still be only one catalog promotion with code "sale"
 
-    @todo
+    @api
     Scenario: Trying to create a catalog promotion without discount
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -69,6 +69,7 @@ Feature: Creating a catalog promotion
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
         And it applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And it does not give the percentage discount
         And I try to add it
         Then I should be notified that configuration of a discount is required
         And there should be an empty list of catalog promotions
