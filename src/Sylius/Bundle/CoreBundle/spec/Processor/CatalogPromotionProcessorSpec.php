@@ -24,7 +24,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
-final class DummyCatalogPromotionProcessorSpec extends ObjectBehavior
+final class CatalogPromotionProcessorSpec extends ObjectBehavior
 {
     function let(
         CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,

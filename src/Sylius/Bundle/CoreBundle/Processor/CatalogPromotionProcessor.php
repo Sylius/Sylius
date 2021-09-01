@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
-final class DummyCatalogPromotionProcessor implements CatalogPromotionProcessorInterface
+final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterface
 {
     private CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider;
 
