@@ -1,0 +1,67 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
+
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Constraints\All;
+use Symfony\Component\Validator\Constraints\Collection;
+use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+
+/**
+ * @internal
+ */
+class AtLeastOneOfValidator extends ConstraintValidator
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function validate($value, Constraint $constraint)
+    {
+        if (!$constraint instanceof AtLeastOneOf) {
+            throw new UnexpectedTypeException($constraint, AtLeastOneOf::class);
+        }
+
+        $validator = $this->context->getValidator();
+
+        $messages = [$constraint->message];
+
+        foreach ($constraint->constraints as $key => $item) {
+            $executionContext = clone $this->context;
+            $executionContext->setNode($value, $this->context->getObject(), $this->context->getMetadata(), $this->context->getPropertyPath());
+            $violations = $validator->inContext($executionContext)->validate($value, $item, $this->context->getGroup())->getViolations();
+
+            if (\count($this->context->getViolations()) === \count($violations)) {
+                return;
+            }
+
+            if ($constraint->includeInternalMessages) {
+                $message = ' ['.($key + 1).'] ';
+
+                if ($item instanceof All || $item instanceof Collection) {
+                    $message .= $constraint->messageCollection;
+                } else {
+                    $message .= $violations->get(\count($violations) - 1)->getMessage();
+                }
+
+                $messages[] = $message;
+            }
+        }
+
+        $this->context->buildViolation(implode('', $messages))
+            ->setCode(AtLeastOneOf::AT_LEAST_ONE_OF_ERROR)
+            ->addViolation()
+        ;
+    }
+}
