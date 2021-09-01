@@ -28,7 +28,7 @@ final class TypedConfigurationCollectionValidatorTest extends KernelTestCase
 
     /**
      * @test
-     * @dataProvider badCases
+     * @dataProvider violationCases
      */
     public function it_validates_against_constraints_with_invalid_data(
         int $expectedViolationCount,
@@ -45,7 +45,7 @@ final class TypedConfigurationCollectionValidatorTest extends KernelTestCase
 
     /**
      * @test
-     * @dataProvider goodCases
+     * @dataProvider noViolationCases
      */
     public function it_validates_against_constraints_with_valid_data(
         $toValidate,
@@ -55,7 +55,7 @@ final class TypedConfigurationCollectionValidatorTest extends KernelTestCase
         $this->assertCount(0, $violations);
     }
 
-    public function badCases(): iterable
+    public function violationCases(): iterable
     {
         yield [
             'expectedViolationCount' => 1,
@@ -99,7 +99,7 @@ final class TypedConfigurationCollectionValidatorTest extends KernelTestCase
         ];
     }
 
-    public function goodCases(): iterable
+    public function noViolationCases(): iterable
     {
         yield [
             'toValidate' => [
@@ -124,6 +124,32 @@ final class TypedConfigurationCollectionValidatorTest extends KernelTestCase
                 public function getType(): string { return 'some_custom_class'; }
                 public function getConfiguration(): array { return ['someField' => 123]; }
             },
+            'constraint' => new TypedConfigurationCollection([
+                'types' => [
+                    'some_custom_type' => new Collection([
+                        'someValue' => new Range(['min' => 1, 'max' => 10])
+                    ]),
+                    'some_custom_class' => new Collection([
+                        'someField' => new NotBlank()
+                    ])
+                ],
+            ])
+        ];
+        yield [
+            'toValidate' => new class() {},
+            'constraint' => new TypedConfigurationCollection([
+                'types' => [
+                    'some_custom_type' => new Collection([
+                        'someValue' => new Range(['min' => 1, 'max' => 10])
+                    ]),
+                    'some_custom_class' => new Collection([
+                        'someField' => new NotBlank()
+                    ])
+                ],
+            ])
+        ];
+        yield [
+            'toValidate' => [],
             'constraint' => new TypedConfigurationCollection([
                 'types' => [
                     'some_custom_type' => new Collection([
