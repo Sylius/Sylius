@@ -20,7 +20,6 @@
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>admin:product_option_value:read</attribute>
-                <attribute>admin:product_option_value:create</attribute>
             </attribute>
         </attribute>
 
