@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
-use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;

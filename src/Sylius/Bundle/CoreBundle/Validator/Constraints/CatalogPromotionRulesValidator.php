@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
+use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;

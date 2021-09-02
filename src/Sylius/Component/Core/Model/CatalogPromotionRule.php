@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
-use Sylius\Component\Channel\Model\ChannelsAwareInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface as BaseCatalogPromotionInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionRule as BaseCatalogPromotionRule;
 
-interface CatalogPromotionInterface extends BaseCatalogPromotionInterface, ChannelsAwareInterface
+class CatalogPromotionRule extends BaseCatalogPromotionRule implements CatalogPromotionRuleInterface
 {
 }
