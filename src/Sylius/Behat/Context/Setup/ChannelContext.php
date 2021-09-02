@@ -220,6 +220,16 @@ final class ChannelContext implements Context
     }
 
     /**
+     * @Given /^on (this channel) account verification is required$/
+     */
+    public function onThisChannelAccountVerificationIsRequired(ChannelInterface $channel)
+    {
+        $channel->setAccountVerificationRequired(true);
+
+        $this->channelManager->flush();
+    }
+
+    /**
      * @Given channel :channel billing data is :company, :street, :postcode :city, :country with :taxId tax ID
      */
     public function channelBillingDataIs(

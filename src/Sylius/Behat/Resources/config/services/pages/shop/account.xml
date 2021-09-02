@@ -23,6 +23,7 @@
         <parameter key="sylius.behat.page.shop.account.order.show.class">Sylius\Behat\Page\Shop\Account\Order\ShowPage</parameter>
         <parameter key="sylius.behat.page.shop.account.profile_update.class">Sylius\Behat\Page\Shop\Account\ProfileUpdatePage</parameter>
         <parameter key="sylius.behat.page.shop.account.register.class">Sylius\Behat\Page\Shop\Account\RegisterPage</parameter>
+        <parameter key="sylius.behat.page.shop.account.register.thank_you.class">Sylius\Behat\Page\Shop\Account\RegisterThankYouPage</parameter>
         <parameter key="sylius.behat.page.shop.account.request_password_reset.class">Sylius\Behat\Page\Shop\Account\RequestPasswordResetPage</parameter>
         <parameter key="sylius.behat.page.shop.account.reset_password.class">Sylius\Behat\Page\Shop\Account\ResetPasswordPage</parameter>
         <parameter key="sylius.behat.page.shop.account.verify.class">Sylius\Behat\Page\Shop\Account\VerificationPage</parameter>
@@ -46,6 +47,7 @@
         </service>
         <service id="sylius.behat.page.shop.account.profile_update" class="%sylius.behat.page.shop.account.profile_update.class%" parent="sylius.behat.symfony_page" public="false" />
         <service id="sylius.behat.page.shop.account.register" class="%sylius.behat.page.shop.account.register.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.account.register.thank_you" class="%sylius.behat.page.shop.account.register.thank_you.class%" parent="sylius.behat.symfony_page" public="false" />
         <service id="sylius.behat.page.shop.account.request_password_reset" class="%sylius.behat.page.shop.account.request_password_reset.class%" parent="sylius.behat.symfony_page" public="false" />
         <service id="sylius.behat.page.shop.account.reset_password" class="%sylius.behat.page.shop.account.reset_password.class%" parent="sylius.behat.symfony_page" public="false" />
         <service id="sylius.behat.page.shop.account.verify" class="%sylius.behat.page.shop.account.verify.class%" parent="sylius.behat.symfony_page" public="false" />
