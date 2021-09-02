@@ -1,5 +1,30 @@
 # CHANGELOG FOR `1.10.X`
 
+## v1.10.2 (2021-09-02)
+
+#### Details
+
+- [#11623](https://github.com/Sylius/Sylius/issues/11623) Fix #11603, Update documentation to replace use of removed function ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#12085](https://github.com/Sylius/Sylius/issues/12085) [Doc] Add contact email ([@MatthieuCutin](https://github.com/MatthieuCutin), [@CoderMaggie](https://github.com/CoderMaggie))
+- [#12223](https://github.com/Sylius/Sylius/issues/12223) Remove security.yaml change when disabling localized URLs ([@maximehuran](https://github.com/maximehuran))
+- [#12852](https://github.com/Sylius/Sylius/issues/12852) [API] Do not check command arguments if there is an object to populate ([@GSadee](https://github.com/GSadee))
+- [#12873](https://github.com/Sylius/Sylius/issues/12873) [Docs] sylius performance boost ([@SirDomin](https://github.com/SirDomin), [@arti0090](https://github.com/arti0090))
+- [#12875](https://github.com/Sylius/Sylius/issues/12875) [Admin] Fix shipping totals in order summary ([@aleho](https://github.com/aleho))
+- [#12881](https://github.com/Sylius/Sylius/issues/12881) [Documentation] Note about changes related to upgrade to GridBundle 1.10 ([@AdamKasp](https://github.com/AdamKasp), [@GSadee](https://github.com/GSadee))
+- [#12885](https://github.com/Sylius/Sylius/issues/12885) [Minor][Docs] Bump requirements version ([@lchrusciel](https://github.com/lchrusciel))
+- [#12973](https://github.com/Sylius/Sylius/issues/12973) Fix borders in order - show - addresses ([@pavol-tk](https://github.com/pavol-tk))
+- [#12975](https://github.com/Sylius/Sylius/issues/12975) [Docs] fix annotations ([@SirDomin](https://github.com/SirDomin))
+- [#12976](https://github.com/Sylius/Sylius/issues/12976) [Documentation] Minor fix in grids docs ([@GSadee](https://github.com/GSadee))
+- [#12977](https://github.com/Sylius/Sylius/issues/12977) [Docs] add prefix to sylius customer table ([@SirDomin](https://github.com/SirDomin))
+- [#12984](https://github.com/Sylius/Sylius/issues/12984) [Documentation] Move invoice cookbooks to payments section ([@GSadee](https://github.com/GSadee))
+- [#12988](https://github.com/Sylius/Sylius/issues/12988) [Docs] Specify Sylius 1.11 release date ([@Zales0123](https://github.com/Zales0123))
+- [#12993](https://github.com/Sylius/Sylius/issues/12993) [Build] Force symfony flex in github actions ([@SirDomin](https://github.com/SirDomin))
+- [#13018](https://github.com/Sylius/Sylius/issues/13018) [Bug] Fix default sylius config file path in Sylius 1.8 ([@lchrusciel](https://github.com/lchrusciel))
+- [#13019](https://github.com/Sylius/Sylius/issues/13019) [Bug] Fix default sylius config file path in Sylius 1.9 ([@lchrusciel](https://github.com/lchrusciel))
+- [#13020](https://github.com/Sylius/Sylius/issues/13020) [Bug] Fix default sylius config file path in Sylius 1.10 ([@lchrusciel](https://github.com/lchrusciel))
+- [#13027](https://github.com/Sylius/Sylius/issues/13027) Remove serialization moved to admin api bundle ([@AdamKasp](https://github.com/AdamKasp))
+- [#13032](https://github.com/Sylius/Sylius/issues/13032) [Docs] Choosing the right branch - fix ([@CoderMaggie](https://github.com/CoderMaggie))
+
 ## v1.10.1 (2021-07-30)
 
 #### Details
