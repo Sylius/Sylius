@@ -98,6 +98,16 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
         ;
     }
 
+    public function findByCodes(array $codes): array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.code IN (:codes)')
+            ->setParameter('codes', $codes)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function findOneByIdAndProductId($id, $productId): ?ProductVariantInterface
     {
         return $this->createQueryBuilder('o')
@@ -125,6 +135,23 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
             ->setParameter('phrase', '%' . $phrase . '%')
             ->setParameter('locale', $locale)
             ->setParameter('productCode', $productCode)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findByPhrase(string $phrase, string $locale): array
+    {
+        $expr = $this->getEntityManager()->getExpressionBuilder();
+
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
+            ->andWhere($expr->orX(
+                'translation.name LIKE :phrase',
+                'o.code LIKE :phrase'
+            ))
+            ->setParameter('phrase', '%' . $phrase . '%')
+            ->setParameter('locale', $locale)
             ->getQuery()
             ->getResult()
         ;

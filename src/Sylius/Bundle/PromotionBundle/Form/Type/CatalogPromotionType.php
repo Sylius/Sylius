@@ -16,6 +16,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -43,6 +44,12 @@ final class CatalogPromotionType extends AbstractResourceType
             ->add('translations', ResourceTranslationsType::class, [
                 'entry_type' => $this->catalogPromotionTranslationType,
                 'label' => 'sylius.form.catalog_promotion.translations',
+            ])
+            ->add('rules', CollectionType::class, [
+                'label' => 'sylius.ui.rules',
+                'entry_type' => CatalogPromotionRuleType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
             ])
         ;
     }

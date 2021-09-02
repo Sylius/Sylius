@@ -43,6 +43,12 @@
             <tag name="form.type" />
         </service>
 
+        <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionRuleType">
+            <argument>%sylius.model.catalog_promotion_rule.class%</argument>
+            <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
         <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionTranslationType">
             <argument>%sylius.model.catalog_promotion_translation.class%</argument>
             <argument>%sylius.form.type.catalog_promotion_translation.validation_groups%</argument>
