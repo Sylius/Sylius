@@ -15,12 +15,15 @@ namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Shop\Account\RegisterElementInterface;
+use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
+use Sylius\Behat\Page\Shop\Account\RegisterThankYouPageInterface;
 use Sylius\Behat\Page\Shop\Account\VerificationPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class RegistrationAfterCheckoutContext implements Context
@@ -40,8 +43,17 @@ final class RegistrationAfterCheckoutContext implements Context
     /** @var VerificationPageInterface */
     private $verificationPage;
 
+    /** @var RegisterThankYouPageInterface */
+    private $registerThankYouPage;
+
+    /** @var DashboardPageInterface */
+    private $dashboardPage;
+
     /** @var RegisterElementInterface */
     private $registerElement;
+
+    /** @var CustomerRepositoryInterface */
+    private $customerRepository;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -49,14 +61,20 @@ final class RegistrationAfterCheckoutContext implements Context
         ThankYouPageInterface $thankYouPage,
         HomePageInterface $homePage,
         VerificationPageInterface $verificationPage,
-        RegisterElementInterface $registerElement
+        RegisterThankYouPageInterface $registerThankYouPage,
+        DashboardPageInterface $dashboardPage,
+        RegisterElementInterface $registerElement,
+        CustomerRepositoryInterface $customerRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->loginPage = $loginPage;
         $this->thankYouPage = $thankYouPage;
         $this->homePage = $homePage;
         $this->verificationPage = $verificationPage;
+        $this->registerThankYouPage = $registerThankYouPage;
+        $this->dashboardPage = $dashboardPage;
         $this->registerElement = $registerElement;
+        $this->customerRepository = $customerRepository;
     }
 
     /**
@@ -116,5 +134,22 @@ final class RegistrationAfterCheckoutContext implements Context
         $this->loginPage->logIn();
 
         Assert::true($this->homePage->hasLogoutButton());
+    }
+
+    /**
+     * @Then /^I should be on registration thank you page$/
+     */
+    public function iShouldBeOnRegistrationThankYouPage(): void
+    {
+        $registeredCustomer = $this->customerRepository->findLatest(1)[0];
+        Assert::true($this->registerThankYouPage->isOpen(['id' => $registeredCustomer->getId()]));
+    }
+
+    /**
+     * @Then /^I should be on my account dashboard/
+     */
+    public function iShouldBeOnMyAccountDashboard()
+    {
+        Assert::true($this->dashboardPage->isOpen());
     }
 }

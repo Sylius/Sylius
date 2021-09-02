@@ -20,12 +20,14 @@ use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
 use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
+use Sylius\Behat\Page\Shop\Account\RegisterThankYouPageInterface;
 use Sylius\Behat\Page\Shop\Account\VerificationPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 class RegistrationContext implements Context
@@ -45,6 +47,9 @@ class RegistrationContext implements Context
     /** @var RegisterPageInterface */
     private $registerPage;
 
+    /** @var RegisterThankYouPageInterface */
+    private $registerThankYouPage;
+
     /** @var VerificationPageInterface */
     private $verificationPage;
 
@@ -56,6 +61,10 @@ class RegistrationContext implements Context
 
     /** @var NotificationCheckerInterface */
     private $notificationChecker;
+    /**
+     * @var CustomerRepositoryInterface
+     */
+    private $customerRepository;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -63,20 +72,24 @@ class RegistrationContext implements Context
         HomePageInterface $homePage,
         LoginPageInterface $loginPage,
         RegisterPageInterface $registerPage,
+        RegisterThankYouPageInterface $registerThankYouPage,
         VerificationPageInterface $verificationPage,
         ProfileUpdatePageInterface $profileUpdatePage,
         RegisterElementInterface $registerElement,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
+        CustomerRepositoryInterface $customerRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->dashboardPage = $dashboardPage;
         $this->homePage = $homePage;
         $this->loginPage = $loginPage;
         $this->registerPage = $registerPage;
+        $this->registerThankYouPage = $registerThankYouPage;
         $this->verificationPage = $verificationPage;
         $this->profileUpdatePage = $profileUpdatePage;
         $this->registerElement = $registerElement;
         $this->notificationChecker = $notificationChecker;
+        $this->customerRepository = $customerRepository;
     }
 
     /**
@@ -382,6 +395,23 @@ class RegistrationContext implements Context
         $this->profileUpdatePage->open();
 
         Assert::true($this->profileUpdatePage->isSubscribedToTheNewsletter());
+    }
+
+    /**
+     * @Then /^I should be on registration thank you page$/
+     */
+    public function iShouldBeOnRegistrationThankYouPage(): void
+    {
+        $registeredCustomer = $this->customerRepository->findLatest(1)[0];
+        Assert::true($this->registerThankYouPage->isOpen(['id' => $registeredCustomer->getId()]));
+    }
+
+    /**
+     * @Then /^I should be on my account dashboard$/
+     */
+    public function iShouldBeOnMyAccountDashboard()
+    {
+        Assert::true($this->dashboardPage->isOpen());
     }
 
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void

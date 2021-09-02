@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
@@ -35,6 +35,7 @@ final class MailerListenerSpec extends ObjectBehavior
     ): void {
         $this->beConstructedWith($emailSender, $channelContext, $localeContext);
 
+        $channel->isAccountVerificationRequired()->willReturn(false);
         $channelContext->getChannel()->willReturn($channel);
         $localeContext->getLocaleCode()->willReturn('en_US');
     }

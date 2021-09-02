@@ -8,7 +8,8 @@ Feature: Account registration
         Given the store operates on a single channel in "United States"
 
     @ui @api
-    Scenario: Registering a new account with minimum information
+    Scenario: Registering a new account with minimum information when channel has enabled registration verification
+        Given on this channel account verification is required
         When I want to register a new account
         And I specify the first name as "Saul"
         And I specify the last name as "Goodman"
@@ -17,6 +18,7 @@ Feature: Account registration
         And I confirm this password
         And I register this account
         Then I should be notified that new account has been successfully created
+        And I should be on registration thank you page
         But I should not be logged in
 
     @ui @api
@@ -31,6 +33,7 @@ Feature: Account registration
         And I register this account
         Then I should be notified that new account has been successfully created
         And I should be logged in
+        And I should be on my account dashboard
 
     @ui @api
     Scenario: Registering a new account with all details
