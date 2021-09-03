@@ -19,17 +19,13 @@ use Webmozart\Assert\Assert;
 
 class OrderItem extends BaseOrderItem implements OrderItemInterface
 {
-    /** @var int */
-    protected $version = 1;
+    protected ?int $version = 1;
 
-    /** @var ProductVariantInterface */
-    protected $variant;
+    protected ?ProductVariantInterface $variant = null;
 
-    /** @var string */
-    protected $productName;
+    protected ?string $productName = null;
 
-    /** @var string */
-    protected $variantName;
+    protected ?string $variantName = null;
 
     public function getVersion(): ?int
     {

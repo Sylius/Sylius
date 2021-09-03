@@ -19,8 +19,7 @@ use Webmozart\Assert\Assert;
 
 final class EmailChecker implements EmailCheckerInterface
 {
-    /** @var string */
-    private $spoolDirectory;
+    private string $spoolDirectory;
 
     public function __construct(string $spoolDirectory)
     {

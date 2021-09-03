@@ -21,11 +21,9 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 
 final class ChannelAwareCurrencyContext implements CurrencyContextInterface
 {
-    /** @var CurrencyContextInterface */
-    private $currencyContext;
+    private CurrencyContextInterface $currencyContext;
 
-    /** @var ChannelContextInterface */
-    private $channelContext;
+    private ChannelContextInterface $channelContext;
 
     public function __construct(CurrencyContextInterface $currencyContext, ChannelContextInterface $channelContext)
     {

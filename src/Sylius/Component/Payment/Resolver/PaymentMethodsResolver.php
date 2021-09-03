@@ -18,8 +18,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class PaymentMethodsResolver implements PaymentMethodsResolverInterface
 {
-    /** @var RepositoryInterface */
-    private $paymentMethodRepository;
+    private RepositoryInterface $paymentMethodRepository;
 
     public function __construct(RepositoryInterface $paymentMethodRepository)
     {

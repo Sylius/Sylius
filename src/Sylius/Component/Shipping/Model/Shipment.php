@@ -24,24 +24,20 @@ class Shipment implements ShipmentInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
-    protected $state = ShipmentInterface::STATE_CART;
+    protected ?string $state = ShipmentInterface::STATE_CART;
 
-    /** @var ShippingMethodInterface|null */
-    protected $method;
+    protected ?ShippingMethodInterface $method = null;
 
     /**
      * @var Collection|ShipmentUnitInterface[]
      *
      * @psalm-var Collection<array-key, ShipmentUnitInterface>
      */
-    protected $units;
+    protected Collection $units;
 
-    /** @var string|null */
-    protected $tracking;
+    protected ?string $tracking = null;
 
-    /** @var \DateTimeInterface|null */
-    protected $shippedAt;
+    protected ?\DateTimeInterface $shippedAt = null;
 
     public function __construct()
     {

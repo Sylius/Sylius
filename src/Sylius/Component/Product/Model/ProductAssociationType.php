@@ -25,14 +25,12 @@ class ProductAssociationType implements ProductAssociationTypeInterface
         getTranslation as private doGetTranslation;
     }
 
-    /** @var int */
-    protected $id;
+    /** @var mixed */
+    protected $id = null;
 
-    /** @var string */
-    protected $code;
+    protected ?string $code = null;
 
-    /** @var string */
-    protected $name;
+    protected ?string $name = null;
 
     public function __construct()
     {

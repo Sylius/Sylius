@@ -23,7 +23,7 @@ final class CompositeCartContext implements CartContextInterface
      *
      * @psalm-var PriorityQueue<CartContextInterface>
      */
-    private $cartContexts;
+    private PriorityQueue $cartContexts;
 
     public function __construct()
     {

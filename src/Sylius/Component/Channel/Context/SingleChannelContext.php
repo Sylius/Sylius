@@ -18,8 +18,7 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
 final class SingleChannelContext implements ChannelContextInterface
 {
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
+    private ChannelRepositoryInterface $channelRepository;
 
     public function __construct(ChannelRepositoryInterface $channelRepository)
     {

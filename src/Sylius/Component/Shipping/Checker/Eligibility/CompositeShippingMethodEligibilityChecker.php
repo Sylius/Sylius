@@ -20,7 +20,7 @@ use Webmozart\Assert\Assert;
 final class CompositeShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheckerInterface
 {
     /** @var ShippingMethodEligibilityCheckerInterface[] */
-    private $eligibilityCheckers;
+    private array $eligibilityCheckers;
 
     /**
      * @param ShippingMethodEligibilityCheckerInterface[] $eligibilityCheckers

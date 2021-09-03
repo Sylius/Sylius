@@ -22,7 +22,7 @@ final class CompositeCurrencyContext implements CurrencyContextInterface
      *
      * @psalm-var PriorityQueue<CurrencyContextInterface>
      */
-    private $currencyContexts;
+    private PriorityQueue $currencyContexts;
 
     public function __construct()
     {

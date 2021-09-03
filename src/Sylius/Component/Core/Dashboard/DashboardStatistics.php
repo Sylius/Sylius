@@ -17,17 +17,13 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 class DashboardStatistics
 {
-    /** @var int */
-    private $totalSales;
+    private int $totalSales;
 
-    /** @var int */
-    private $numberOfNewOrders;
+    private int $numberOfNewOrders;
 
-    /** @var int */
-    private $numberOfNewCustomers;
+    private int $numberOfNewCustomers;
 
-    /** @var ChannelInterface */
-    private $channel;
+    private ?ChannelInterface $channel;
 
     /**
      * @throws \InvalidArgumentException

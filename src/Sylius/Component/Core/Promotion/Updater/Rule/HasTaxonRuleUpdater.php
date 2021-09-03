@@ -21,11 +21,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class HasTaxonRuleUpdater implements TaxonAwareRuleUpdaterInterface
 {
-    /** @var RepositoryInterface */
-    private $promotionRuleRepository;
+    private RepositoryInterface $promotionRuleRepository;
 
-    /** @var EntityManagerInterface */
-    private $manager;
+    private EntityManagerInterface $manager;
 
     public function __construct(RepositoryInterface $promotionRuleRepository, EntityManagerInterface $manager)
     {

@@ -20,7 +20,7 @@ use Webmozart\Assert\Assert;
 final class CompositePromotionEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
     /** @var PromotionEligibilityCheckerInterface[] */
-    private $promotionEligibilityCheckers;
+    private array $promotionEligibilityCheckers;
 
     /**
      * @param PromotionEligibilityCheckerInterface[] $promotionEligibilityCheckers

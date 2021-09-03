@@ -18,11 +18,9 @@ use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 
 final class LimitingOrderItemQuantityModifier implements OrderItemQuantityModifierInterface
 {
-    /** @var OrderItemQuantityModifierInterface */
-    private $decoratedOrderItemQuantityModifier;
+    private OrderItemQuantityModifierInterface $decoratedOrderItemQuantityModifier;
 
-    /** @var int */
-    private $limit;
+    private int $limit;
 
     public function __construct(OrderItemQuantityModifierInterface $decoratedOrderItemQuantityModifier, int $limit)
     {

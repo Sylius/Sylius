@@ -29,62 +29,50 @@ use Webmozart\Assert\Assert;
 
 class Order extends BaseOrder implements OrderInterface
 {
-    /** @var CustomerInterface|null */
-    protected $customer;
+    protected ?CustomerInterface $customer = null;
 
-    /** @var ChannelInterface|null */
-    protected $channel;
+    protected ?ChannelInterface $channel = null;
 
-    /** @var AddressInterface|null */
-    protected $shippingAddress;
+    protected ?AddressInterface $shippingAddress = null;
 
-    /** @var AddressInterface|null */
-    protected $billingAddress;
+    protected ?AddressInterface $billingAddress = null;
 
     /**
      * @var Collection|PaymentInterface[]
      *
      * @psalm-var Collection<array-key, PaymentInterface>
      */
-    protected $payments;
+    protected Collection $payments;
 
     /**
      * @var Collection|ShipmentInterface[]
      *
      * @psalm-var Collection<array-key, ShipmentInterface>
      */
-    protected $shipments;
+    protected Collection $shipments;
 
-    /** @var string|null */
-    protected $currencyCode;
+    protected ?string $currencyCode = null;
 
-    /** @var string|null */
-    protected $localeCode;
+    protected ?string $localeCode = null;
 
-    /** @var BaseCouponInterface|null */
-    protected $promotionCoupon;
+    protected ?BaseCouponInterface $promotionCoupon = null;
 
-    /** @var string */
-    protected $checkoutState = OrderCheckoutStates::STATE_CART;
+    protected ?string $checkoutState = OrderCheckoutStates::STATE_CART;
 
-    /** @var string */
-    protected $paymentState = OrderPaymentStates::STATE_CART;
+    protected ?string $paymentState = OrderPaymentStates::STATE_CART;
 
-    /** @var string */
-    protected $shippingState = OrderShippingStates::STATE_CART;
+    protected ?string $shippingState = OrderShippingStates::STATE_CART;
 
     /**
      * @var Collection|BasePromotionInterface[]
      *
      * @psalm-var Collection<array-key, BasePromotionInterface>
      */
-    protected $promotions;
+    protected Collection $promotions;
 
-    /** @var string|null */
-    protected $tokenValue;
+    protected ?string $tokenValue = null;
 
-    /** @var string|null */
-    protected $customerIp;
+    protected ?string $customerIp = null;
 
     public function __construct()
     {

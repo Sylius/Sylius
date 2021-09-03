@@ -27,10 +27,9 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
      *
      * @psalm-var Collection<array-key, BaseChannelInterface>
      */
-    protected $channels;
+    protected Collection $channels;
 
-    /** @var GatewayConfigInterface */
-    protected $gatewayConfig;
+    protected ?GatewayConfigInterface $gatewayConfig = null;
 
     public function __construct()
     {

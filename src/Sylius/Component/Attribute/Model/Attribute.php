@@ -29,23 +29,17 @@ class Attribute implements AttributeInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
-    protected $code;
+    protected ?string $code = null;
 
-    /** @var string */
-    protected $type = TextAttributeType::TYPE;
+    protected ?string $type = TextAttributeType::TYPE;
 
-    /** @var array */
-    protected $configuration = [];
+    protected array $configuration = [];
 
-    /** @var string */
-    protected $storageType;
+    protected ?string $storageType = null;
 
-    /** @var int */
-    protected $position;
+    protected ?int $position = null;
 
-    /** @var bool */
-    protected $translatable = true;
+    protected bool $translatable = true;
 
     public function __construct()
     {

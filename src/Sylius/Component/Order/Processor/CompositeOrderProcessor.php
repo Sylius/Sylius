@@ -23,7 +23,7 @@ final class CompositeOrderProcessor implements OrderProcessorInterface
      *
      * @psalm-var PriorityQueue<OrderProcessorInterface>
      */
-    private $orderProcessors;
+    private PriorityQueue $orderProcessors;
 
     public function __construct()
     {

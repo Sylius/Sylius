@@ -22,8 +22,7 @@ use Sylius\Component\Core\OrderPaymentStates;
  */
 final class SalesDataProvider implements SalesDataProviderInterface
 {
-    /** @var EntityRepository */
-    private $orderRepository;
+    private EntityRepository $orderRepository;
 
     public function __construct(EntityRepository $orderRepository)
     {

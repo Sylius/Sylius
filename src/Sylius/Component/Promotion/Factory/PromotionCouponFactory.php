@@ -20,8 +20,7 @@ use Webmozart\Assert\Assert;
 
 final class PromotionCouponFactory implements PromotionCouponFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $factory;
+    private FactoryInterface $factory;
 
     public function __construct(FactoryInterface $factory)
     {

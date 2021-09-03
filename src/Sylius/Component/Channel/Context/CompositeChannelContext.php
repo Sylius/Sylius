@@ -23,7 +23,7 @@ final class CompositeChannelContext implements ChannelContextInterface
      *
      * @psalm-var PriorityQueue<ChannelContextInterface>
      */
-    private $channelContexts;
+    private PriorityQueue $channelContexts;
 
     public function __construct()
     {

@@ -23,17 +23,13 @@ use Webmozart\Assert\Assert;
 
 final class PromotionCouponGenerator implements PromotionCouponGeneratorInterface
 {
-    /** @var FactoryInterface */
-    private $couponFactory;
+    private FactoryInterface $couponFactory;
 
-    /** @var PromotionCouponRepositoryInterface */
-    private $couponRepository;
+    private PromotionCouponRepositoryInterface $couponRepository;
 
-    /** @var ObjectManager */
-    private $objectManager;
+    private ObjectManager $objectManager;
 
-    /** @var GenerationPolicyInterface */
-    private $generationPolicy;
+    private GenerationPolicyInterface $generationPolicy;
 
     public function __construct(
         FactoryInterface $couponFactory,

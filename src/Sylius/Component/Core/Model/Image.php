@@ -16,23 +16,16 @@ namespace Sylius\Component\Core\Model;
 abstract class Image implements ImageInterface
 {
     /** @var mixed */
-    protected $id;
+    protected $id = null;
 
-    /** @var string|null */
-    protected $type;
+    protected ?string $type = null;
 
-    /** @var \SplFileInfo|null */
-    protected $file;
+    protected ?\SplFileInfo $file = null;
 
-    /** @var string|null */
-    protected $path;
+    protected ?string $path = null;
 
-    /** @var object|null */
-    protected $owner;
+    protected ?object $owner = null;
 
-    /**
-     * @return int
-     */
     public function getId()
     {
         return $this->id;

@@ -22,25 +22,18 @@ use Sylius\Component\Order\OrderTransitions;
 
 final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterface
 {
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /** @var Factory */
-    private $stateMachineFactory;
+    private Factory $stateMachineFactory;
 
-    /** @var string */
-    private $expirationPeriod;
+    private string $expirationPeriod;
 
-    /** @var LoggerInterface|null */
-    private $logger;
+    private ?LoggerInterface $logger;
 
-    /**
-     * @param string $expirationPeriod
-     */
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         Factory $stateMachineFactory,
-        $expirationPeriod,
+        string $expirationPeriod,
         LoggerInterface $logger = null
     ) {
         $this->orderRepository = $orderRepository;
