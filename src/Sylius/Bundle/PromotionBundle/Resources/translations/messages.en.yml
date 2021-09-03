@@ -3,6 +3,8 @@
 sylius:
     form:
         catalog_promotion:
+            action:
+                percentage_discount: Percentage discount
             description: Description
             label: Label
             name: Name

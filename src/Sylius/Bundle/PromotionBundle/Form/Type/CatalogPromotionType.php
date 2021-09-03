@@ -50,6 +50,14 @@ final class CatalogPromotionType extends AbstractResourceType
                 'entry_type' => CatalogPromotionRuleType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
+                'by_reference' => false,
+            ])
+            ->add('actions', CollectionType::class, [
+                'label' => 'sylius.ui.actions',
+                'entry_type' => CatalogPromotionActionType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
             ])
         ;
     }
