@@ -21,6 +21,11 @@
             <argument type="service" id="sylius.repository.channel" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionRuleExampleFactory">
+            <argument type="service" id="sylius.factory.catalog_promotion_rule" />
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+        </service>
+
         <service id="sylius.fixture.example_factory.payment_method" class="Sylius\Bundle\CoreBundle\Fixture\Factory\PaymentMethodExampleFactory">
             <argument type="service" id="sylius.factory.payment_method" />
             <argument type="service" id="sylius.repository.locale" />
