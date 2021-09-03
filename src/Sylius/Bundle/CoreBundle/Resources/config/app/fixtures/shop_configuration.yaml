@@ -253,3 +253,9 @@ sylius_fixtures:
                                 name: 'Winter sale'
                                 channels:
                                     - 'FASHION_WEB'
+                                        
+                catalog_promotion_rule:
+                    options:
+                        custom:
+                            for_variants:
+                                catalogPromotion: 'winter'
