@@ -62,6 +62,12 @@
             <tag name="sylius_fixtures.fixture" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\Fixture\CatalogPromotionRuleFixture">
+            <argument type="service" id="sylius.manager.catalog_promotion_rule" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionRuleExampleFactory" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
         <service id="sylius.fixture.channel" class="Sylius\Bundle\CoreBundle\Fixture\ChannelFixture">
             <argument type="service" id="sylius.manager.channel" />
             <argument type="service" id="sylius.fixture.example_factory.channel" />
