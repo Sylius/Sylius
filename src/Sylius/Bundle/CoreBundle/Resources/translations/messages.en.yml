@@ -39,6 +39,8 @@ sylius:
             coupon: Coupon
         catalog_promotion:
             channels: Channels
+            rule:
+                for_variants: For variants
         checkout:
             addressing:
                 different_billing_address: Use different address for billing?

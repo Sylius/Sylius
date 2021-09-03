@@ -1,11 +1,23 @@
 {% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationForm %}
 
-<div class="ui segment">
+{% form_theme form '@SyliusAdmin/CatalogPromotion/theme.html.twig' %}
+
+<div class="ui two column stackable grid">
     {{ form_errors(form) }}
-    <div class="three fields">
-        {{ form_row(form.code) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.channels) }}
+    <div class="column">
+        <div class="ui segment">
+            {{ form_row(form.code) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.channels) }}
+        </div>
+        <div class="ui segment" id="rules">
+            {{ form_row(form.rules) }}
+        </div>
+        <div class="ui segment" id="actions">
+            {{ form_row(form.actions) }}
+        </div>
     </div>
-    {{ translationForm(form.translations) }}
+    <div class="column">
+        {{ translationForm(form.translations) }}
+    </div>
 </div>

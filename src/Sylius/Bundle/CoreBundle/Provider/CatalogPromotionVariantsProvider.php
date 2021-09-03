@@ -54,11 +54,11 @@ final class CatalogPromotionVariantsProvider implements CatalogPromotionVariants
                 continue;
             }
 
-            if (!in_array($variant, $variants)) {
-                $variants[] = $variant;
+            if (!isset($variants[$variant->getCode()])) {
+                $variants[$variant->getCode()] = $variant;
             }
         }
 
-        return $variants;
+        return array_values($variants);
     }
 }

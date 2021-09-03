@@ -78,6 +78,10 @@
         <service id="sylius.form.extension.type.cart" class="Sylius\Bundle\CoreBundle\Form\Extension\CartTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\OrderBundle\Form\Type\CartType" />
         </service>
+        <service id="Sylius\Bundle\CoreBundle\Form\Extension\CatalogPromotionRuleTypeExtension">
+            <argument type="service" id="sylius.form.type.data_transformer.product_variants_to_codes" />
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionRuleType" />
+        </service>
         <service id="sylius.form.extension.type.cart_item" class="Sylius\Bundle\CoreBundle\Form\Extension\CartItemTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\OrderBundle\Form\Type\CartItemType" />
         </service>
@@ -190,6 +194,9 @@
         <service id="sylius.form.type.data_transformer.taxons_to_codes" class="Sylius\Bundle\CoreBundle\Form\DataTransformer\TaxonsToCodesTransformer">
             <argument type="service" id="sylius.repository.taxon" />
         </service>
+        <service id="sylius.form.type.data_transformer.product_variants_to_codes" class="Sylius\Bundle\CoreBundle\Form\DataTransformer\ProductVariantsToCodesTransformer">
+            <argument type="service" id="sylius.repository.product_variant" />
+        </service>
         <service id="sylius.form.type.data_transformer.products_to_codes" class="Sylius\Bundle\CoreBundle\Form\DataTransformer\ProductsToCodesTransformer">
             <argument type="service" id="sylius.repository.product" />
         </service>
@@ -259,6 +266,15 @@
         <service id="sylius.form.type.autocomplete_product_taxon_choice" class="Sylius\Bundle\CoreBundle\Form\Type\Taxon\ProductTaxonAutocompleteChoiceType">
             <argument type="service" id="sylius.factory.product_taxon" />
             <argument type="service" id="sylius.repository.product_taxon" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionRuleType">
+            <argument>%sylius.model.catalog_promotion_rule.class%</argument>
+            <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
+            <argument type="collection">
+                <argument type="constant" key="sylius.form.catalog_promotion.rule.for_variants">Sylius\Component\Core\Model\CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS</argument>
+            </argument>
             <tag name="form.type" />
         </service>
     </services>

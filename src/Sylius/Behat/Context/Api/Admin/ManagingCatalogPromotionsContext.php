@@ -194,8 +194,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I add the "contains variants" rule configured with :firstVariant and :secondVariant
-     * @When /^I add the "contains variants" rule configured with ("[^"]+" variant) and ("[^"]+" variant)$/
      * @When /^it applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/
      */
     public function iAddTheRuleConfiguredWithProductAnd(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
