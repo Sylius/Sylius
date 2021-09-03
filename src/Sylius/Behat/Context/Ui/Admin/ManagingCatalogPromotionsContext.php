@@ -223,7 +223,8 @@ final class ManagingCatalogPromotionsContext implements Context
             sprintf('Cannot find catalog promotions with code "%s" and name "%s" in the list', $code, $name)
         );
 
-        $this->sharedStorage->set('catalog_promotion_name', $name);
+        $actions = $this->indexPage->getActionsForResource(['name' => $name]);
+        $actions->clickLink('Edit');
     }
 
     /**
@@ -231,12 +232,8 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function itShouldHaveRule(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
     {
-        $catalogPromotionName = $this->sharedStorage->get('catalog_promotion_name');
-
-        $actions = $this->indexPage->getActionsForResource(['name' => $catalogPromotionName]);
-        $actions->clickLink('Edit');
-
         $selectedVariants = $this->formElement->getLastRuleVariantCodes();
+
         Assert::inArray($firstVariant->getCode(), $selectedVariants);
         Assert::inArray($secondVariant->getCode(), $selectedVariants);
     }

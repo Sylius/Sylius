@@ -46,24 +46,12 @@ final class FormElement extends Element implements FormElementInterface
 
     public function addRule(): void
     {
-        $count = count($this->getCollectionItems('rules'));
-
-        $this->getElement('add_rule_button')->click();
-
-        $this->getDocument()->waitFor(5, function () use ($count) {
-            return $count + 1 === count($this->getCollectionItems('rules'));
-        });
+        $this->addCollectionElement('rules', 'add_rule_button');
     }
 
     public function addAction(): void
     {
-        $count = count($this->getCollectionItems('actions'));
-
-        $this->getElement('add_action_button')->click();
-
-        $this->getDocument()->waitFor(5, function () use ($count) {
-            return $count + 1 === count($this->getCollectionItems('rules'));
-        });
+        $this->addCollectionElement('actions', 'add_action_button');
     }
 
     public function chooseLastRuleVariants(array $variantCodes): void
@@ -113,6 +101,17 @@ final class FormElement extends Element implements FormElementInterface
             'name' => '#sylius_catalog_promotion_name',
             'rules' => '#rules',
         ]);
+    }
+
+    private function addCollectionElement(string $collectionElement, string $buttonElement): void
+    {
+        $count = count($this->getCollectionItems($collectionElement));
+
+        $this->getElement($buttonElement)->click();
+
+        $this->getDocument()->waitFor(5, function () use ($count, $collectionElement) {
+            return $count + 1 === count($this->getCollectionItems($collectionElement));
+        });
     }
 
     /** @return NodeElement[] */
