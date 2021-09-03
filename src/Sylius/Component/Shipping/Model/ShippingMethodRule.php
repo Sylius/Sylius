@@ -21,14 +21,11 @@ class ShippingMethodRule implements ShippingMethodRuleInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
-    protected $type;
+    protected ?string $type = null;
 
-    /** @var array */
-    protected $configuration = [];
+    protected array $configuration = [];
 
-    /** @var ShippingMethodInterface */
-    protected $shippingMethod;
+    protected ?ShippingMethodInterface $shippingMethod = null;
 
     public function getId()
     {

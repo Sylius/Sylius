@@ -18,20 +18,15 @@ class UserOAuth implements UserOAuthInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string|null */
-    protected $provider;
+    protected ?string $provider = null;
 
-    /** @var string|null */
-    protected $identifier;
+    protected ?string $identifier = null;
 
-    /** @var string|null */
-    protected $accessToken;
+    protected ?string $accessToken = null;
 
-    /** @var string|null */
-    protected $refreshToken;
+    protected ?string $refreshToken = null;
 
-    /** @var UserInterface|null */
-    protected $user;
+    protected ?UserInterface $user = null;
 
     public function getId()
     {

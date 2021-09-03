@@ -24,64 +24,52 @@ class Promotion implements PromotionInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
-    protected $code;
+    protected ?string $code = null;
 
-    /** @var string */
-    protected $name;
+    protected ?string $name = null;
 
-    /** @var string */
-    protected $description;
+    protected ?string $description = null;
 
     /**
      * When exclusive, promotion with top priority will be applied
-     *
-     * @var int
      */
-    protected $priority = 0;
+    protected int $priority = 0;
 
     /**
      * Cannot be applied together with other promotions
-     *
-     * @var bool
      */
-    protected $exclusive = false;
+    protected ?bool $exclusive = false;
 
-    /** @var int */
-    protected $usageLimit;
+    protected ?int $usageLimit = null;
 
-    /** @var int */
-    protected $used = 0;
+    protected ?int $used = 0;
 
-    /** @var \DateTimeInterface */
-    protected $startsAt;
+    protected ?\DateTimeInterface $startsAt = null;
 
-    /** @var \DateTimeInterface */
-    protected $endsAt;
+    protected ?\DateTimeInterface $endsAt = null;
 
-    /** @var bool */
-    protected $couponBased = false;
+    protected bool $couponBased = false;
 
     /**
      * @var Collection|PromotionCouponInterface[]
      *
      * @psalm-var Collection<array-key, PromotionCouponInterface>
      */
-    protected $coupons;
+    protected Collection $coupons;
 
     /**
      * @var Collection|PromotionRuleInterface[]
      *
      * @psalm-var Collection<array-key, PromotionRuleInterface>
      */
-    protected $rules;
+    protected Collection $rules;
 
     /**
      * @var Collection|PromotionActionInterface[]
      *
      * @psalm-var Collection<array-key, PromotionActionInterface>
      */
-    protected $actions;
+    protected Collection $actions;
 
     public function __construct()
     {

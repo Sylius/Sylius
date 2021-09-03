@@ -20,8 +20,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class TestPromotionFactory implements TestPromotionFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $promotionFactory;
+    private FactoryInterface $promotionFactory;
 
     public function __construct(FactoryInterface $promotionFactory)
     {

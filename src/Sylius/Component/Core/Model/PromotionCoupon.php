@@ -17,11 +17,9 @@ use Sylius\Component\Promotion\Model\PromotionCoupon as BasePromotionCoupon;
 
 class PromotionCoupon extends BasePromotionCoupon implements PromotionCouponInterface
 {
-    /** @var int|null */
-    protected $perCustomerUsageLimit;
+    protected ?int $perCustomerUsageLimit = null;
 
-    /** @var bool */
-    protected $reusableFromCancelledOrders = true;
+    protected bool $reusableFromCancelledOrders = true;
 
     public function getPerCustomerUsageLimit(): ?int
     {

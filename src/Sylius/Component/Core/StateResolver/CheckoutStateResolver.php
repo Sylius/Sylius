@@ -22,14 +22,11 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
 final class CheckoutStateResolver implements StateResolverInterface
 {
-    /** @var FactoryInterface */
-    private $stateMachineFactory;
+    private FactoryInterface $stateMachineFactory;
 
-    /** @var OrderPaymentMethodSelectionRequirementCheckerInterface */
-    private $orderPaymentMethodSelectionRequirementChecker;
+    private OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker;
 
-    /** @var OrderShippingMethodSelectionRequirementCheckerInterface */
-    private $orderShippingMethodSelectionRequirementChecker;
+    private OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker;
 
     public function __construct(
         FactoryInterface $stateMachineFactory,

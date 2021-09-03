@@ -24,11 +24,9 @@ use Webmozart\Assert\Assert;
 
 final class OrderPaymentProcessor implements OrderProcessorInterface
 {
-    /** @var OrderPaymentProviderInterface */
-    private $orderPaymentProvider;
+    private OrderPaymentProviderInterface $orderPaymentProvider;
 
-    /** @var string */
-    private $targetState;
+    private string $targetState;
 
     public function __construct(
         OrderPaymentProviderInterface $orderPaymentProvider,

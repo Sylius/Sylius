@@ -30,18 +30,16 @@ class ProductOption implements ProductOptionInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
-    protected $code;
+    protected ?string $code = null;
 
-    /** @var int */
-    protected $position;
+    protected ?int $position = null;
 
     /**
      * @var Collection|ProductOptionValueInterface[]
      *
      * @psalm-var Collection<array-key, ProductOptionValueInterface>
      */
-    protected $values;
+    protected Collection $values;
 
     public function __construct()
     {

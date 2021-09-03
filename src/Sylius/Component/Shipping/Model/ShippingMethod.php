@@ -32,30 +32,24 @@ class ShippingMethod implements ShippingMethodInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
-    protected $code;
+    protected ?string $code = null;
 
-    /** @var int */
-    protected $position;
+    protected ?int $position = null;
 
-    /** @var ShippingCategoryInterface */
-    protected $category;
+    protected ?ShippingCategoryInterface $category = null;
 
-    /** @var int */
-    protected $categoryRequirement = ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY;
+    protected ?int $categoryRequirement = ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY;
 
-    /** @var string */
-    protected $calculator;
+    protected ?string $calculator = null;
 
-    /** @var array */
-    protected $configuration = [];
+    protected array $configuration = [];
 
     /**
      * @var Collection|ShippingMethodRuleInterface[]
      *
      * @psalm-var Collection<array-key, ShippingMethodRuleInterface>
      */
-    protected $rules;
+    protected Collection $rules;
 
     public function __construct()
     {

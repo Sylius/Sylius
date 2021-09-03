@@ -22,14 +22,11 @@ class ExchangeRate implements ExchangeRateInterface
     /** @var mixed */
     protected $id;
 
-    /** @var float|null */
-    protected $ratio;
+    protected ?float $ratio = null;
 
-    /** @var CurrencyInterface|null */
-    protected $sourceCurrency;
+    protected ?CurrencyInterface $sourceCurrency = null;
 
-    /** @var CurrencyInterface|null */
-    protected $targetCurrency;
+    protected ?CurrencyInterface $targetCurrency = null;
 
     public function __construct()
     {
@@ -41,6 +38,10 @@ class ExchangeRate implements ExchangeRateInterface
         return $this->id;
     }
 
+    /**
+     * @psalm-suppress TypeDoesNotContainType
+     * @psalm-suppress RedundantCondition
+     */
     public function getRatio(): ?float
     {
         /**

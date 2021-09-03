@@ -20,11 +20,10 @@ class Locale implements LocaleInterface
 {
     use TimestampableTrait;
 
-    /** @var int */
-    protected $id;
+    /** @var mixed  */
+    protected $id = null;
 
-    /** @var string|null */
-    protected $code;
+    protected ?string $code = null;
 
     public function __construct()
     {

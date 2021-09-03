@@ -24,51 +24,40 @@ class Order implements OrderInterface
     /** @var mixed */
     protected $id;
 
-    /** @var \DateTimeInterface|null */
-    protected $checkoutCompletedAt;
+    protected ?\DateTimeInterface $checkoutCompletedAt = null;
 
-    /** @var string|null */
-    protected $number;
+    protected ?string $number = null;
 
-    /** @var string|null */
-    protected $notes;
+    protected ?string $notes = null;
 
     /**
      * @var Collection|OrderItemInterface[]
      *
      * @psalm-var Collection<array-key, OrderItemInterface>
      */
-    protected $items;
+    protected Collection $items;
 
-    /** @var int */
-    protected $itemsTotal = 0;
+    protected int $itemsTotal = 0;
 
     /**
      * @var Collection|AdjustmentInterface[]
      *
      * @psalm-var Collection<array-key, AdjustmentInterface>
      */
-    protected $adjustments;
+    protected Collection $adjustments;
 
-    /** @var int */
-    protected $adjustmentsTotal = 0;
+    protected int $adjustmentsTotal = 0;
 
     /**
      * Items total + adjustments total.
-     *
-     * @var int
      */
-    protected $total = 0;
+    protected int $total = 0;
 
-    /** @var string */
-    protected $state = OrderInterface::STATE_CART;
+    protected string $state = OrderInterface::STATE_CART;
 
     public function __construct()
     {
-        /** @var ArrayCollection<array-key, OrderItemInterface> $this->items */
         $this->items = new ArrayCollection();
-
-        /** @var ArrayCollection<array-key, AdjustmentInterface> $this->adjustments */
         $this->adjustments = new ArrayCollection();
 
         $this->createdAt = new \DateTime();

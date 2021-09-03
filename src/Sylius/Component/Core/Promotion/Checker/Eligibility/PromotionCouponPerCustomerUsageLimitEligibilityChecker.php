@@ -22,8 +22,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 final class PromotionCouponPerCustomerUsageLimitEligibilityChecker implements PromotionCouponEligibilityCheckerInterface
 {
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
     public function __construct(OrderRepositoryInterface $orderRepository)
     {

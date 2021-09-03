@@ -116,11 +116,9 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
         $decoratedChannelContext
             ->getChannel()
             ->will(new class($channel->getWrappedObject()) {
-                /** @var int */
-                private $counter = 0;
+                private int $counter = 0;
 
-                /** @var ChannelInterface */
-                private $channel;
+                private ChannelInterface $channel;
 
                 public function __construct(ChannelInterface $channel)
                 {

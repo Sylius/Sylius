@@ -24,11 +24,9 @@ use Webmozart\Assert\Assert;
 
 final class ShippingChargesProcessor implements OrderProcessorInterface
 {
-    /** @var FactoryInterface */
-    private $adjustmentFactory;
+    private FactoryInterface $adjustmentFactory;
 
-    /** @var DelegatingCalculatorInterface */
-    private $shippingChargesCalculator;
+    private DelegatingCalculatorInterface $shippingChargesCalculator;
 
     public function __construct(
         FactoryInterface $adjustmentFactory,

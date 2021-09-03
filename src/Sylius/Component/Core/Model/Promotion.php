@@ -25,7 +25,7 @@ class Promotion extends BasePromotion implements PromotionInterface
      *
      * @psalm-var Collection<array-key, ChannelInterface>
      */
-    protected $channels;
+    protected Collection $channels;
 
     public function __construct()
     {

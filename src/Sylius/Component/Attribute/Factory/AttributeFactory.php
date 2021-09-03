@@ -20,11 +20,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class AttributeFactory implements AttributeFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $factory;
+    private FactoryInterface $factory;
 
-    /** @var ServiceRegistryInterface */
-    private $attributeTypesRegistry;
+    private ServiceRegistryInterface $attributeTypesRegistry;
 
     public function __construct(FactoryInterface $factory, ServiceRegistryInterface $attributeTypesRegistry)
     {

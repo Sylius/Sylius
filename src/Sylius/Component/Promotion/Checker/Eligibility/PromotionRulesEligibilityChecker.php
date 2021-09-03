@@ -21,8 +21,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 
 final class PromotionRulesEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
-    /** @var ServiceRegistryInterface */
-    private $ruleRegistry;
+    private ServiceRegistryInterface $ruleRegistry;
 
     public function __construct(ServiceRegistryInterface $ruleRegistry)
     {

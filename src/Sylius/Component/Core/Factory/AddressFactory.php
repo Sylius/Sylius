@@ -19,8 +19,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class AddressFactory implements AddressFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $decoratedFactory;
+    private FactoryInterface $decoratedFactory;
 
     public function __construct(FactoryInterface $decoratedFactory)
     {

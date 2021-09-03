@@ -25,14 +25,11 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
 {
     public const TYPE = 'unit_fixed_discount';
 
-    /** @var FilterInterface */
-    private $priceRangeFilter;
+    private FilterInterface $priceRangeFilter;
 
-    /** @var FilterInterface */
-    private $taxonFilter;
+    private FilterInterface $taxonFilter;
 
-    /** @var FilterInterface */
-    private $productFilter;
+    private FilterInterface $productFilter;
 
     public function __construct(
         FactoryInterface $adjustmentFactory,

@@ -18,8 +18,7 @@ use Sylius\Component\Taxation\Model\TaxRate as BaseTaxRate;
 
 class TaxRate extends BaseTaxRate implements TaxRateInterface
 {
-    /** @var ZoneInterface */
-    protected $zone;
+    protected ?ZoneInterface $zone = null;
 
     public function getZone(): ?ZoneInterface
     {
