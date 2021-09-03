@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\CatalogPromotion;
 
+use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Webmozart\Assert\Assert;
 
 final class FormElement extends Element implements FormElementInterface
 {
@@ -44,12 +46,24 @@ final class FormElement extends Element implements FormElementInterface
 
     public function addRule(): void
     {
+        $count = count($this->getCollectionItems('rules'));
+
         $this->getElement('add_rule_button')->click();
+
+        $this->getDocument()->waitFor(5, function () use ($count) {
+            return $count + 1 === count($this->getCollectionItems('rules'));
+        });
     }
 
     public function addAction(): void
     {
+        $count = count($this->getCollectionItems('actions'));
+
         $this->getElement('add_action_button')->click();
+
+        $this->getDocument()->waitFor(5, function () use ($count) {
+            return $count + 1 === count($this->getCollectionItems('rules'));
+        });
     }
 
     public function chooseLastRuleVariants(array $variantCodes): void
@@ -82,12 +96,13 @@ final class FormElement extends Element implements FormElementInterface
     {
         $lastAction = $this->getElement('last_action');
 
-        return $lastAction->getValue();
+        return $lastAction->find('css', 'input')->getValue();
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'actions' => '#actions',
             'add_action_button' => '#actions [data-form-collection="add"]',
             'add_rule_button' => '#rules [data-form-collection="add"]',
             'channel' => '#sylius_catalog_promotion_code',
@@ -96,6 +111,17 @@ final class FormElement extends Element implements FormElementInterface
             'last_action' => '#actions [data-form-collection="item"]:last-child',
             'last_rule' => '#rules [data-form-collection="item"]:last-child',
             'name' => '#sylius_catalog_promotion_name',
+            'rules' => '#rules',
         ]);
+    }
+
+    /** @return NodeElement[] */
+    private function getCollectionItems(string $collection): array
+    {
+        $items = $this->getElement($collection)->findAll('css', 'div[data-form-collection="item"]');
+
+        Assert::isArray($items);
+
+        return $items;
     }
 }

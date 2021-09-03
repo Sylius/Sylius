@@ -234,7 +234,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $catalogPromotionName = $this->sharedStorage->get('catalog_promotion_name');
 
         $actions = $this->indexPage->getActionsForResource(['name' => $catalogPromotionName]);
-        $actions->pressButton('Edit');
+        $actions->clickLink('Edit');
 
         $selectedVariants = $this->formElement->getLastRuleVariantCodes();
         Assert::inArray($firstVariant->getCode(), $selectedVariants);
@@ -244,7 +244,7 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @Then /^it should have "([^"]+)%" discount$/
      */
-    public function itShouldHaveDiscount(float $amount): void
+    public function itShouldHaveDiscount(string $amount): void
     {
         Assert::same($this->formElement->getLastActionDiscount(), $amount);
     }

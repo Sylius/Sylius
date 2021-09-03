@@ -52,6 +52,9 @@ final class CatalogPromotionVariantsProviderSpec extends ObjectBehavior
         $productVariantRepository->findOneBy(['code' => 'PHP_T_SHIRT_XS_BLACK'])->willReturn($secondVariant);
         $productVariantRepository->findOneBy(['code' => 'PHP_MUG'])->willReturn(null);
 
+        $firstVariant->getCode()->willReturn('PHP_T_SHIRT_XS_WHITE');
+        $secondVariant->getCode()->willReturn('PHP_T_SHIRT_XS_BLACK');
+
         $this
             ->provideEligibleVariants($catalogPromotion)
             ->shouldReturn([$firstVariant, $secondVariant])
