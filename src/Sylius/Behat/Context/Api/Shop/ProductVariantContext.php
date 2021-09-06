@@ -36,6 +36,7 @@ final class ProductVariantContext implements Context
 
     /**
      * @When I select :variant variant
+     * @When I view :variant variant
      */
     public function iSelectVariant(ProductVariantInterface $variant): void
     {
@@ -79,8 +80,7 @@ final class ProductVariantContext implements Context
         int $price,
         string $promotionName
     ): void {
-        $response = $this->client->getLastResponse();
-        $content = $this->responseChecker->getCollectionItemsWithValue($response, 'code', $variant->getCode())[0];
+        $content = $this->findVariant($variant);
 
         Assert::same($content['price'], $price);
         Assert::same($content['originalPrice'], $originalPrice);
@@ -99,5 +99,16 @@ final class ProductVariantContext implements Context
             $item = array_pop($items);
             Assert::keyNotExists($item, 'appliedPromotions');
         }
+    }
+
+    private function findVariant(?ProductVariantInterface $variant): array
+    {
+        $response = $this->client->getLastResponse();
+
+        if ($variant !== null && $this->responseChecker->hasValue($response, '@type', 'hydra:Collection')) {
+            return $this->responseChecker->getCollectionItemsWithValue($response, 'code', $variant->getCode())[0];
+        }
+
+        return $this->responseChecker->getResponseContent($response);
     }
 }
