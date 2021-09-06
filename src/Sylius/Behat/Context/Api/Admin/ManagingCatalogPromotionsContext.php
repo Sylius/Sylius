@@ -210,9 +210,9 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I want ("[^"]+" catalog promotion) to be applied on ("[^"]+" variant)$/
+     * @When /^I edit ("[^"]+" catalog promotion) to be applied on ("[^"]+" variant)$/
      */
-    public function iWantCatalogPromotionToBeAppliedOn(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface $productVariant): void
+    public function iEditCatalogPromotionToBeAppliedOn(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface $productVariant): void
     {
         $this->client->buildUpdateRequest($catalogPromotion->getCode());
         $rules = [[
@@ -441,6 +441,18 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->client->show($catalogPromotion->getCode());
 
         Assert::true($this->catalogPromotionAppliesOn($productVariant));
+    }
+
+    /**
+     * @Then /^(this catalog promotion) should not be applied on ("[^"]+" variant)$/
+     */
+    public function thisCatalogPromotionShouldNotBeAppliedOn(
+        CatalogPromotionInterface $catalogPromotion,
+        ProductVariantInterface $productVariant
+    ): void {
+        $this->client->show($catalogPromotion->getCode());
+
+        Assert::false($this->catalogPromotionAppliesOn($productVariant));
     }
 
     /**
