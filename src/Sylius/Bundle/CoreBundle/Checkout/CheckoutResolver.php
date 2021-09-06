@@ -65,7 +65,15 @@ final class CheckoutResolver implements EventSubscriberInterface
         $order = $this->cartContext->getCart();
         if ($order->isEmpty()) {
             $event->setResponse(new RedirectResponse($this->urlGenerator->generateForCart()));
+
+            return;
         }
+        
+        if (!$request->attributes->has('_sylius')) {
+            $event->setResponse(new RedirectResponse($this->urlGenerator->generateForCart()));
+            
+            return;
+        }        
 
         $stateMachine = $this->stateMachineFactory->get($order, $this->getRequestedGraph($request));
 
