@@ -50,7 +50,7 @@ That's it! All other files are just a boilerplate to show you what can be done i
 
 * All files from ``tests/Behat/Page/Shop/`` (with corresponding services)
 
-* ``tests/Context/Ui/Shop/WelcomeContext.php`` (with corresponding service)
+* ``tests/Behat/Context/Ui/Shop/WelcomeContext.php`` (with corresponding service)
 
 You should also delete Behat suite named ``greeting_customer`` from ``tests/Behat/Resources/suites.yml``.
 
