@@ -337,7 +337,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then /^it should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
+     * @Then /^"[^"]+" catalog promotion should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
      */
     public function itShouldHaveRule(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
     {
