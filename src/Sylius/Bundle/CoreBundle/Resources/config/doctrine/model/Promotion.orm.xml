@@ -28,6 +28,8 @@
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
+
+        <many-to-many field="orders" target-entity="Sylius\Component\Order\Model\OrderInterface" mapped-by="promotions" />
     </mapped-superclass>
 
 </doctrine-mapping>

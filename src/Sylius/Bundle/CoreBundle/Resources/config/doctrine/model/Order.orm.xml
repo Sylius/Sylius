@@ -33,7 +33,7 @@
             <join-column name="billing_address_id" referenced-column-name="id" nullable="true" />
         </one-to-one>
 
-        <many-to-one field="promotionCoupon" target-entity="Sylius\Component\Promotion\Model\PromotionCouponInterface">
+        <many-to-one field="promotionCoupon" target-entity="Sylius\Component\Promotion\Model\PromotionCouponInterface" inversed-by="orders">
             <join-column name="promotion_coupon_id" />
             <cascade>
                 <cascade-persist />
@@ -59,7 +59,7 @@
             </cascade>
         </many-to-one>
 
-        <many-to-many field="promotions" target-entity="Sylius\Component\Promotion\Model\PromotionInterface">
+        <many-to-many field="promotions" target-entity="Sylius\Component\Promotion\Model\PromotionInterface" inversed-by="orders">
             <join-table name="sylius_promotion_order">
                 <join-columns>
                     <join-column name="order_id" referenced-column-name="id" on-delete="CASCADE" />

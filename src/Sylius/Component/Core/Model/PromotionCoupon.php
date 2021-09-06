@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Promotion\Model\PromotionCoupon as BasePromotionCoupon;
 
 class PromotionCoupon extends BasePromotionCoupon implements PromotionCouponInterface
@@ -20,6 +22,19 @@ class PromotionCoupon extends BasePromotionCoupon implements PromotionCouponInte
     protected ?int $perCustomerUsageLimit = null;
 
     protected bool $reusableFromCancelledOrders = true;
+
+    /**
+     * @var Collection|OrderInterface[]
+     *
+     * @psalm-var Collection<array-key, OrderInterface>
+     */
+    protected Collection $orders;
+
+    public function __construct()
+    {
+        /** @var ArrayCollection<array-key, OrderInterface> $this->orders */
+        $this->orders = new ArrayCollection();
+    }
 
     public function getPerCustomerUsageLimit(): ?int
     {

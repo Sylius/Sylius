@@ -51,6 +51,12 @@ sylius_grid:
                     label: sylius.ui.coupon
                     options:
                         fields: [coupons.code]
+                usage_date:
+                    type: date
+                    label: sylius.ui.used
+                    options:
+                        field: orders.checkoutCompletedAt
+                        inclusive_to: true
             actions:
                 main:
                     create:

@@ -36,6 +36,12 @@ sylius_grid:
                 code:
                     type: string
                     label: sylius.ui.code
+                usage_date:
+                    type: date
+                    label: sylius.ui.used
+                    options:
+                        field: orders.checkoutCompletedAt
+                        inclusive_to: true
             actions:
                 main:
                     generate:

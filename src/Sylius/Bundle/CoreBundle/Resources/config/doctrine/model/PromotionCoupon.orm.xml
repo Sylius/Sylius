@@ -23,6 +23,8 @@
                 <option name="default">1</option>
             </options>
         </field>
+
+        <one-to-many field="orders" target-entity="Sylius\Component\Order\Model\OrderInterface" mapped-by="promotionCoupon" />
     </mapped-superclass>
 
 </doctrine-mapping>

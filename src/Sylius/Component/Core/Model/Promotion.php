@@ -27,12 +27,21 @@ class Promotion extends BasePromotion implements PromotionInterface
      */
     protected Collection $channels;
 
+    /**
+     * @var Collection|OrderInterface[]
+     *
+     * @psalm-var Collection<array-key, OrderInterface>
+     */
+    protected Collection $orders;
+
     public function __construct()
     {
         parent::__construct();
 
         /** @var ArrayCollection<array-key, ChannelInterface> $this->channels */
         $this->channels = new ArrayCollection();
+        /** @var ArrayCollection<array-key, OrderInterface> $this->orders */
+        $this->orders = new ArrayCollection();
     }
 
     /**
@@ -61,5 +70,14 @@ class Promotion extends BasePromotion implements PromotionInterface
     public function hasChannel(BaseChannelInterface $channel): bool
     {
         return $this->channels->contains($channel);
+    }
+
+    /**
+     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
+     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
     }
 }
