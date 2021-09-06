@@ -23,14 +23,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class TaxonSlugController
 {
-    /** @var TaxonSlugGeneratorInterface */
-    private $taxonSlugGenerator;
+    private TaxonSlugGeneratorInterface $taxonSlugGenerator;
 
-    /** @var RepositoryInterface */
-    private $taxonRepository;
+    private RepositoryInterface $taxonRepository;
 
-    /** @var FactoryInterface */
-    private $taxonFactory;
+    private FactoryInterface $taxonFactory;
 
     public function __construct(
         TaxonSlugGeneratorInterface $taxonSlugGenerator,

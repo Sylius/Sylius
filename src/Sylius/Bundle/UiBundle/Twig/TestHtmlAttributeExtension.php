@@ -18,8 +18,7 @@ use Twig\TwigFunction;
 
 final class TestHtmlAttributeExtension extends AbstractExtension
 {
-    /** @var string */
-    private $env;
+    private string $env;
 
     public function __construct(string $env)
     {

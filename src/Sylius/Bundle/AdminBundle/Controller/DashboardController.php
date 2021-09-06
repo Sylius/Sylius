@@ -27,20 +27,16 @@ use Twig\Environment;
 
 final class DashboardController
 {
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
+    private ChannelRepositoryInterface $channelRepository;
 
     /** @var EngineInterface|Environment */
     private $templatingEngine;
 
-    /** @var RouterInterface */
-    private $router;
+    private RouterInterface $router;
 
-    /** @var SalesDataProviderInterface|null */
-    private $salesDataProvider;
+    private ?SalesDataProviderInterface $salesDataProvider;
 
-    /** @var StatisticsDataProviderInterface */
-    private $statisticsDataProvider;
+    private ?StatisticsDataProviderInterface $statisticsDataProvider;
 
     /**
      * @param EngineInterface|Environment $templatingEngine

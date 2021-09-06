@@ -17,8 +17,7 @@ use Payum\Core\Request\Generic;
 
 class ResolveNextRoute extends Generic implements ResolveNextRouteInterface
 {
-    /** @var string */
-    private $routeName;
+    private ?string $routeName = null;
 
     /** @var array */
     private $routeParameters = [];

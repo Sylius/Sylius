@@ -19,8 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PromotionActionChoiceType extends AbstractType
 {
-    /** @var array */
-    private $actions;
+    private array $actions;
 
     public function __construct(array $actions)
     {

@@ -23,8 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class TaxCategoryChoiceType extends AbstractType
 {
-    /** @var RepositoryInterface */
-    private $taxCategoryRepository;
+    private RepositoryInterface $taxCategoryRepository;
 
     public function __construct(RepositoryInterface $taxCategoryRepository)
     {

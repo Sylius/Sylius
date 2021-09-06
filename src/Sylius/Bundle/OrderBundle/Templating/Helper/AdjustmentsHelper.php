@@ -19,8 +19,7 @@ use Symfony\Component\Templating\Helper\Helper;
 
 class AdjustmentsHelper extends Helper
 {
-    /** @var AdjustmentsAggregatorInterface */
-    private $adjustmentsAggregator;
+    private AdjustmentsAggregatorInterface $adjustmentsAggregator;
 
     public function __construct(AdjustmentsAggregatorInterface $adjustmentsAggregator)
     {

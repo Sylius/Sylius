@@ -19,8 +19,7 @@ use Twig\TwigFunction;
 
 final class InventoryExtension extends AbstractExtension
 {
-    /** @var InventoryHelper */
-    private $helper;
+    private InventoryHelper $helper;
 
     public function __construct(InventoryHelper $helper)
     {

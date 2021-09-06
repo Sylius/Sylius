@@ -23,8 +23,7 @@ use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
 
 final class ConvertPaymentAction implements ActionInterface
 {
-    /** @var InvoiceNumberGeneratorInterface */
-    private $invoiceNumberGenerator;
+    private InvoiceNumberGeneratorInterface $invoiceNumberGenerator;
 
     public function __construct(InvoiceNumberGeneratorInterface $invoiceNumberGenerator)
     {

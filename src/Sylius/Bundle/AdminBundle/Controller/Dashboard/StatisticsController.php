@@ -24,8 +24,7 @@ final class StatisticsController
     /** @var EngineInterface|Environment */
     private $templatingEngine;
 
-    /** @var StatisticsDataProviderInterface */
-    private $statisticsDataProvider;
+    private StatisticsDataProviderInterface $statisticsDataProvider;
 
     /**
      * @param EngineInterface|Environment $templatingEngine

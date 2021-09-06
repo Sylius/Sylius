@@ -23,11 +23,9 @@ use Symfony\Component\Security\Http\SecurityEvents;
 
 final class UserLastLoginSubscriber implements EventSubscriberInterface
 {
-    /** @var ObjectManager */
-    private $userManager;
+    private ObjectManager $userManager;
 
-    /** @var string */
-    private $userClass;
+    private string $userClass;
 
     public function __construct(ObjectManager $userManager, string $userClass)
     {

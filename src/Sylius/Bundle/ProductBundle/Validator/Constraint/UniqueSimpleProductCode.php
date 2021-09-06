@@ -17,8 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 final class UniqueSimpleProductCode extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.simple_product.code.unique';
+    public string $message = 'sylius.simple_product.code.unique';
 
     public function validatedBy(): string
     {

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Tests\Form\Type;
 
+use Prophecy\Prophecy\ObjectProphecy;
 use PHPUnit\Framework\Assert;
 use Prophecy\Prophecy\ProphecyInterface;
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryChoiceType;
@@ -24,8 +25,7 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 final class CountryChoiceTypeTest extends TypeTestCase
 {
-    /** @var ProphecyInterface|RepositoryInterface */
-    private $countryRepository;
+    private ObjectProphecy $countryRepository;
 
     /** @var ProphecyInterface|CountryInterface */
     private $france;
