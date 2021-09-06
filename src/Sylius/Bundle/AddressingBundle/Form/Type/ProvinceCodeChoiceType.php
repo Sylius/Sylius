@@ -21,8 +21,7 @@ use Symfony\Component\Form\ReversedTransformer;
 
 final class ProvinceCodeChoiceType extends AbstractType
 {
-    /** @var RepositoryInterface */
-    private $provinceRepository;
+    private RepositoryInterface $provinceRepository;
 
     public function __construct(RepositoryInterface $provinceRepository)
     {

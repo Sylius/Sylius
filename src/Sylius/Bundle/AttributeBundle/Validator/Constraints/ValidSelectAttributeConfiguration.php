@@ -17,14 +17,11 @@ use Symfony\Component\Validator\Constraint;
 
 final class ValidSelectAttributeConfiguration extends Constraint
 {
-    /** @var string */
-    public $messageMultiple = 'sylius.attribute.configuration.multiple';
+    public string $messageMultiple = 'sylius.attribute.configuration.multiple';
 
-    /** @var string */
-    public $messageMinEntries = 'sylius.attribute.configuration.min_entries';
+    public string $messageMinEntries = 'sylius.attribute.configuration.min_entries';
 
-    /** @var string */
-    public $messageMaxEntries = 'sylius.attribute.configuration.max_entries';
+    public string $messageMaxEntries = 'sylius.attribute.configuration.max_entries';
 
     public function getTargets(): string
     {

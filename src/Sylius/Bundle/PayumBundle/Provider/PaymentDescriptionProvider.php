@@ -19,8 +19,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class PaymentDescriptionProvider implements PaymentDescriptionProviderInterface
 {
-    /** @var TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
     public function __construct(TranslatorInterface $translator)
     {

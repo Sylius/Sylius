@@ -25,17 +25,13 @@ final class OrderShowMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.order.show';
 
-    /** @var FactoryInterface */
-    private $factory;
+    private \Knp\Menu\FactoryInterface $factory;
 
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
-    /** @var StateMachineFactoryInterface */
-    private $stateMachineFactory;
+    private StateMachineFactoryInterface $stateMachineFactory;
 
-    /** @var CsrfTokenManagerInterface */
-    private $csrfTokenManager;
+    private CsrfTokenManagerInterface $csrfTokenManager;
 
     public function __construct(
         FactoryInterface $factory,

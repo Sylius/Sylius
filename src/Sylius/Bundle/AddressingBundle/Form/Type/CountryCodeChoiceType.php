@@ -21,8 +21,7 @@ use Symfony\Component\Form\ReversedTransformer;
 
 final class CountryCodeChoiceType extends AbstractType
 {
-    /** @var RepositoryInterface */
-    private $countryRepository;
+    private RepositoryInterface $countryRepository;
 
     public function __construct(RepositoryInterface $countryRepository)
     {

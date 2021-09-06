@@ -20,11 +20,9 @@ use Symfony\Component\Templating\Helper\Helper;
 
 final class LocaleHelper extends Helper implements LocaleHelperInterface
 {
-    /** @var LocaleConverterInterface */
-    private $localeConverter;
+    private LocaleConverterInterface $localeConverter;
 
-    /** @var LocaleContextInterface|null */
-    private $localeContext;
+    private ?LocaleContextInterface $localeContext;
 
     public function __construct(LocaleConverterInterface $localeConverter, ?LocaleContextInterface $localeContext = null)
     {

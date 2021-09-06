@@ -13,6 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\DependencyInjection\Compiler;
 
+use Payum\Bundle\PayumBundle\Controller\AuthorizeController;
+use Payum\Bundle\PayumBundle\Controller\CancelController;
+use Payum\Bundle\PayumBundle\Controller\CaptureController;
+use Payum\Bundle\PayumBundle\Controller\NotifyController;
+use Payum\Bundle\PayumBundle\Controller\PayoutController;
+use Payum\Bundle\PayumBundle\Controller\RefundController;
+use Payum\Bundle\PayumBundle\Controller\SyncController;
 use Payum\Bundle\PayumBundle\Controller;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -28,13 +35,13 @@ use Symfony\Component\DependencyInjection\Reference;
 final class InjectContainerIntoControllersPass implements CompilerPassInterface
 {
     private const SERVICES = [
-        Controller\AuthorizeController::class,
-        Controller\CancelController::class,
-        Controller\CaptureController::class,
-        Controller\NotifyController::class,
-        Controller\PayoutController::class,
-        Controller\RefundController::class,
-        Controller\SyncController::class,
+        AuthorizeController::class,
+        CancelController::class,
+        CaptureController::class,
+        NotifyController::class,
+        PayoutController::class,
+        RefundController::class,
+        SyncController::class,
     ];
 
     public function process(ContainerBuilder $container): void

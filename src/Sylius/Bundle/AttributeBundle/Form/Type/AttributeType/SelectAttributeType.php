@@ -23,8 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class SelectAttributeType extends AbstractType
 {
-    /** @var string */
-    private $defaultLocaleCode;
+    private string $defaultLocaleCode;
 
     public function __construct(TranslationLocaleProviderInterface $localeProvider)
     {

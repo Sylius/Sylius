@@ -21,11 +21,9 @@ use Symfony\Component\Form\DataMapperInterface;
  */
 class OrderItemQuantityDataMapper implements DataMapperInterface
 {
-    /** @var OrderItemQuantityModifierInterface */
-    private $orderItemQuantityModifier;
+    private OrderItemQuantityModifierInterface $orderItemQuantityModifier;
 
-    /** @var DataMapperInterface */
-    private $propertyPathDataMapper;
+    private DataMapperInterface $propertyPathDataMapper;
 
     public function __construct(
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,

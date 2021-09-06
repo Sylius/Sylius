@@ -23,8 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ShippingCategoryChoiceType extends AbstractType
 {
-    /** @var RepositoryInterface */
-    private $shippingCategoryRepository;
+    private RepositoryInterface $shippingCategoryRepository;
 
     public function __construct(RepositoryInterface $shippingCategoryRepository)
     {

@@ -28,17 +28,13 @@ use Symfony\Component\Form\ReversedTransformer;
 
 abstract class AttributeValueType extends AbstractResourceType
 {
-    /** @var string */
-    protected $attributeChoiceType;
+    protected string $attributeChoiceType;
 
-    /** @var RepositoryInterface */
-    protected $attributeRepository;
+    protected RepositoryInterface $attributeRepository;
 
-    /** @var RepositoryInterface */
-    protected $localeRepository;
+    protected RepositoryInterface $localeRepository;
 
-    /** @var FormTypeRegistryInterface */
-    protected $formTypeRegistry;
+    protected FormTypeRegistryInterface $formTypeRegistry;
 
     public function __construct(
         string $dataClass,

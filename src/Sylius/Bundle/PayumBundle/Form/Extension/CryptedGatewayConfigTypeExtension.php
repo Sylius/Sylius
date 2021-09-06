@@ -23,8 +23,7 @@ use Symfony\Component\Form\FormEvents;
 
 final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
 {
-    /** @var CypherInterface|null */
-    private $cypher;
+    private ?CypherInterface $cypher;
 
     public function __construct(?CypherInterface $cypher = null)
     {

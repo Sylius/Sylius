@@ -18,8 +18,7 @@ use Sylius\Component\User\Model\UserInterface;
 
 final class UserReloader implements UserReloaderInterface
 {
-    /** @var ObjectManager */
-    private $objectManager;
+    private ObjectManager $objectManager;
 
     public function __construct(ObjectManager $objectManager)
     {

@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Csrf\CsrfToken;
@@ -28,23 +27,19 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 final class ResendShipmentConfirmationEmailAction
 {
-    /** @var ShipmentRepositoryInterface */
-    private $shipmentRepository;
+    private ShipmentRepositoryInterface $shipmentRepository;
 
-    /** @var ShipmentEmailManagerInterface */
-    private $shipmentEmailManager;
+    private ShipmentEmailManagerInterface $shipmentEmailManager;
 
-    /** @var CsrfTokenManagerInterface */
-    private $csrfTokenManager;
+    private CsrfTokenManagerInterface $csrfTokenManager;
 
-    /** @var Session */
-    private $session;
+    private Session $session;
 
     public function __construct(
         ShipmentRepositoryInterface $shipmentRepository,
         ShipmentEmailManagerInterface $shipmentEmailManager,
         CsrfTokenManagerInterface $csrfTokenManager,
-        SessionInterface $session
+        Session $session
     ) {
         $this->shipmentRepository = $shipmentRepository;
         $this->shipmentEmailManager = $shipmentEmailManager;

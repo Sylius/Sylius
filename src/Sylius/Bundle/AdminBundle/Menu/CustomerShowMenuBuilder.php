@@ -23,11 +23,9 @@ final class CustomerShowMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.customer.show';
 
-    /** @var FactoryInterface */
-    private $factory;
+    private FactoryInterface $factory;
 
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(
         FactoryInterface $factory,

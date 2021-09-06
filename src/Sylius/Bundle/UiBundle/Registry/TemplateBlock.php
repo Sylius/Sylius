@@ -18,23 +18,17 @@ namespace Sylius\Bundle\UiBundle\Registry;
  */
 final class TemplateBlock
 {
-    /** @var string */
-    private $name;
+    private string $name;
 
-    /** @var string */
-    private $eventName;
+    private string $eventName;
 
-    /** @var string|null */
-    private $template;
+    private ?string $template;
 
-    /** @var array|null */
-    private $context;
+    private ?array $context;
 
-    /** @var int|null */
-    private $priority;
+    private ?int $priority;
 
-    /** @var bool|null */
-    private $enabled;
+    private ?bool $enabled;
 
     public function __construct(
         string $name,

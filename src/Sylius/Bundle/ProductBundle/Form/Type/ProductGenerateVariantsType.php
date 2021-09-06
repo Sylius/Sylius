@@ -20,8 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class ProductGenerateVariantsType extends AbstractResourceType
 {
-    /** @var EventSubscriberInterface */
-    private $generateProductVariantsSubscriber;
+    private EventSubscriberInterface $generateProductVariantsSubscriber;
 
     /**
      * @param array|string[] $validationGroups

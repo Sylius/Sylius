@@ -22,11 +22,9 @@ final class MainMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.main';
 
-    /** @var FactoryInterface */
-    private $factory;
+    private FactoryInterface $factory;
 
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(FactoryInterface $factory, EventDispatcherInterface $eventDispatcher)
     {

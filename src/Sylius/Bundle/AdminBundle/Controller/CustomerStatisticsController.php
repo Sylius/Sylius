@@ -24,11 +24,9 @@ use Twig\Environment;
 
 final class CustomerStatisticsController
 {
-    /** @var CustomerStatisticsProviderInterface */
-    private $statisticsProvider;
+    private CustomerStatisticsProviderInterface $statisticsProvider;
 
-    /** @var RepositoryInterface */
-    private $customerRepository;
+    private RepositoryInterface $customerRepository;
 
     /** @var EngineInterface|Environment */
     private $templatingEngine;

@@ -23,8 +23,7 @@ use Symfony\Component\Form\FormEvents;
 
 final class GatewayConfigType extends AbstractResourceType
 {
-    /** @var FormTypeRegistryInterface */
-    private $gatewayConfigurationTypeRegistry;
+    private FormTypeRegistryInterface $gatewayConfigurationTypeRegistry;
 
     public function __construct(
         string $dataClass,

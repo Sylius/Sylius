@@ -23,8 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductOptionValueChoiceType extends AbstractType
 {
-    /** @var AvailableProductOptionValuesResolverInterface|null */
-    private $availableProductOptionValuesResolver;
+    private ?AvailableProductOptionValuesResolverInterface $availableProductOptionValuesResolver;
 
     public function __construct(?AvailableProductOptionValuesResolverInterface $availableProductOptionValuesResolver = null)
     {

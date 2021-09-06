@@ -29,11 +29,9 @@ use Symfony\Component\Form\FormInterface;
  */
 final class BuildAddressFormSubscriber implements EventSubscriberInterface
 {
-    /** @var ObjectRepository */
-    private $countryRepository;
+    private ObjectRepository $countryRepository;
 
-    /** @var FormFactoryInterface */
-    private $formFactory;
+    private FormFactoryInterface $formFactory;
 
     public function __construct(ObjectRepository $countryRepository, FormFactoryInterface $factory)
     {

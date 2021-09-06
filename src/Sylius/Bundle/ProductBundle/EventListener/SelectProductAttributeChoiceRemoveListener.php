@@ -22,8 +22,7 @@ use Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface
 
 final class SelectProductAttributeChoiceRemoveListener
 {
-    /** @var string */
-    private $productAttributeValueClass;
+    private string $productAttributeValueClass;
 
     public function __construct(string $productAttributeValueClass)
     {

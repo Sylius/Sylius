@@ -25,10 +25,10 @@ final class TemplateBlockRenderingHistory
     private $renderedEvents = [];
 
     /** @psalm-var list<array{name: string, start: float, stop?: float, time?: float, blocks: list<array{definition: TemplateBlock, start: float, stop: float, time: float}>}> */
-    private $currentlyRenderedEvents = [];
+    private array $currentlyRenderedEvents = [];
 
     /** @psalm-var list<array{definition: TemplateBlock, start: float, stop?: float, time?: float}> */
-    private $currentlyRenderedBlocks = [];
+    private array $currentlyRenderedBlocks = [];
 
     public function startRenderingEvent(array $eventNames, array $context): void
     {
