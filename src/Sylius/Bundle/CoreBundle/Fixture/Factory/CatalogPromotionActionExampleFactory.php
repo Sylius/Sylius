@@ -13,41 +13,41 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class CatalogPromotionRuleExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+final class CatalogPromotionActionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private FactoryInterface $catalogPromotionRuleFactory;
+    private FactoryInterface $catalogPromotionActionFactory;
 
     private OptionsResolver $optionsResolver;
 
-    public function __construct(FactoryInterface $catalogPromotionRuleFactory)
+    public function __construct(FactoryInterface $catalogPromotionActionFactory)
     {
-        $this->catalogPromotionRuleFactory = $catalogPromotionRuleFactory;
+        $this->catalogPromotionActionFactory = $catalogPromotionActionFactory;
 
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
     }
 
-    public function create(array $options = []): CatalogPromotionRuleInterface
+    public function create(array $options = []): CatalogPromotionActionInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
-        /** @var CatalogPromotionRuleInterface $catalogPromotionRule */
-        $catalogPromotionRule = $this->catalogPromotionRuleFactory->createNew();
-        $catalogPromotionRule->setType($options['type']);
-        $catalogPromotionRule->setConfiguration($options['configuration']);
+        /** @var CatalogPromotionActionInterface $catalogPromotionAction */
+        $catalogPromotionAction = $this->catalogPromotionActionFactory->createNew();
+        $catalogPromotionAction->setType($options['type']);
+        $catalogPromotionAction->setConfiguration($options['configuration']);
 
-        return $catalogPromotionRule;
+        return $catalogPromotionAction;
     }
 
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('type', CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS)
+            ->setDefault('type', CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT)
             ->setAllowedTypes('type', 'string')
             ->setDefault('configuration', [])
             ->setAllowedTypes('configuration', 'array')

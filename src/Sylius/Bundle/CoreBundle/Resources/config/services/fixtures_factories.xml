@@ -19,11 +19,16 @@
             <argument type="service" id="sylius.factory.catalog_promotion" />
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionRuleExampleFactory" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionActionExampleFactory" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionRuleExampleFactory">
             <argument type="service" id="sylius.factory.catalog_promotion_rule" />
-            <argument type="service" id="sylius.repository.catalog_promotion" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionActionExampleFactory">
+            <argument type="service" id="sylius.factory.catalog_promotion_action" />
         </service>
 
         <service id="sylius.fixture.example_factory.payment_method" class="Sylius\Bundle\CoreBundle\Fixture\Factory\PaymentMethodExampleFactory">
