@@ -57,10 +57,9 @@ This is a simple guide on how to start using webpack in Sylius apps. Webpack fin
     // templates/bundles/SyliusShopBundle/Layout/Header/_logo.html.twig
     <div class="column">
         <a href="{{ path('sylius_shop_homepage') }}">
-            <img src="{{ asset('assets/shop/img/logo.png') }}" alt="Sylius logo" class="ui small image" />
+            <img src="{{ asset('build/shop/images/logo.png', 'shop') }}" alt="Sylius logo" class="ui small image" />
         </a>
     </div>
-
 
 .. warning::
 
