@@ -8,9 +8,7 @@ Feature: Seeing applied catalog promotions on variant
         Given the store operates on a single channel in "United States"
         And the store has a "T-Shirt" configurable product
         And this product has "PHP T-Shirt" variant priced at "$20.00"
-        And there is a catalog promotion with "winter_sale" code and "Winter sale" name
-        And it will be applied on "PHP T-Shirt" variant
-        And it will reduce price by "50%"
+        And there is a catalog promotion with "Winter sale" name that applies on "PHP T-shirt" variant and reduces price by "50%"
 
     @api
     Scenario: Seeing applied catalog promotion on variant

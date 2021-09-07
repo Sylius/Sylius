@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -104,6 +105,33 @@ final class CatalogPromotionContext implements Context
      */
     public function itWillReducePrice(CatalogPromotionInterface $catalogPromotion, float $discount): void
     {
+        /** @var CatalogPromotionActionInterface $catalogPromotionAction */
+        $catalogPromotionAction = $this->catalogPromotionActionFactory->createNew();
+        $catalogPromotionAction->setType(CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT);
+        $catalogPromotionAction->setConfiguration(['amount' => $discount]);
+
+        $catalogPromotion->addAction($catalogPromotionAction);
+
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given /^there is a catalog promotion with "([^"]*)" name that applies on ("[^"]+" variant) and reduces price by ("[^"]+")$/
+     */
+    public function thereIsACatalogPromotionWithNameThatAppliesOnVariantAndReducesPriceBy(
+        string $name,
+        ProductVariantInterface $variant,
+        float $discount
+    ): void {
+        $catalogPromotion = $this->createCatalogPromotion($name);
+
+        /** @var CatalogPromotionRuleInterface $catalogPromotionRule */
+        $catalogPromotionRule = $this->catalogPromotionRuleFactory->createNew();
+        $catalogPromotionRule->setType(CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS);
+        $catalogPromotionRule->setConfiguration(['variants' => [$variant->getCode()]]);
+
+        $catalogPromotion->addRule($catalogPromotionRule);
+
         /** @var CatalogPromotionActionInterface $catalogPromotionAction */
         $catalogPromotionAction = $this->catalogPromotionActionFactory->createNew();
         $catalogPromotionAction->setType(CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT);

@@ -41,7 +41,7 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
         CatalogPromotionInterface $catalogPromotion,
         CatalogPromotionActionInterface $action,
         ProductVariantInterface $variant
-    ) {
+    ): void {
         $discount = $action->getConfiguration()['amount'];
 
         /** @var ChannelPricingInterface $channelPricing */
