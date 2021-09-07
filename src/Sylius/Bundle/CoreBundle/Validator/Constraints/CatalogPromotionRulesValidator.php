@@ -40,13 +40,20 @@ final class CatalogPromotionRulesValidator extends ConstraintValidator
                 continue;
             }
 
-                $this->validateRuleConfiguration($rule->getConfiguration(), $constraint);
+            $this->validateRuleConfiguration($rule->getConfiguration(), $constraint);
         }
     }
 
     private function validateRuleConfiguration(array $configuration, CatalogPromotionRules $constraint): void
     {
-        foreach ($configuration as $variantCode) {
+
+        if (array_key_exists('variants', $configuration) === false) {
+            $this->context->addViolation($constraint->invalidConfiguration);
+
+            return;
+        }
+
+        foreach ($configuration['variants'] as $variantCode) {
             if (null === $this->variantRepository->findOneBy(['code' => $variantCode])) {
                 $this->context->addViolation($constraint->invalidConfiguration);
 

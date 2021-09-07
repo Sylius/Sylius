@@ -79,7 +79,6 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\OrderBundle\Form\Type\CartType" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\Form\Extension\CatalogPromotionRuleTypeExtension">
-            <argument type="service" id="sylius.form.type.data_transformer.product_variants_to_codes" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionRuleType" />
         </service>
         <service id="sylius.form.extension.type.cart_item" class="Sylius\Bundle\CoreBundle\Form\Extension\CartItemTypeExtension">
@@ -158,6 +157,10 @@
         </service>
         <service id="sylius.form.type.avatar_image" class="Sylius\Bundle\CoreBundle\Form\Type\User\AvatarImageType">
             <argument>%sylius.model.avatar_image.class%</argument>
+            <tag name="form.type" />
+        </service>
+        <service id="sylius.form.type.variant_rule" class="Sylius\Bundle\PromotionBundle\Form\Type\CatalogRule\VariantRuleConfigurationType">
+            <argument type="service" id="sylius.form.type.data_transformer.product_variants_to_codes" />
             <tag name="form.type" />
         </service>
 

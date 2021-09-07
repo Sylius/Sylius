@@ -92,7 +92,7 @@ final class CatalogPromotionContext implements Context
         /** @var CatalogPromotionRuleInterface $catalogPromotionRule */
         $catalogPromotionRule = $this->catalogPromotionRuleFactory->createNew();
         $catalogPromotionRule->setType(CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS);
-        $catalogPromotionRule->setConfiguration([$variant->getCode()]);
+        $catalogPromotionRule->setConfiguration(['variants' => [$variant->getCode()]]);
 
         $catalogPromotion->addRule($catalogPromotionRule);
 
