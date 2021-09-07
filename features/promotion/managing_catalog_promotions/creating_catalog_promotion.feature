@@ -9,7 +9,6 @@ Feature: Creating a catalog promotion
         And the store has a "T-Shirt" configurable product
         And this product has "PHP T-Shirt" variant priced at "$20.00"
         And this product has "Kotlin T-Shirt" variant priced at "$40.00"
-        And this product has "Python T-Shirt" variant priced at "$40.00"
         And I am logged in as an administrator
 
     @api @ui
@@ -27,7 +26,7 @@ Feature: Creating a catalog promotion
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
         And it applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
-        And it gives the "50%" percentage discount
+        And I specify action that gives "50%" percentage discount
         And I add it
         Then there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name
@@ -46,16 +45,3 @@ Feature: Creating a catalog promotion
         And it should have "winter_sale" code and "Winter sale" name
         And the catalog promotion "Winter sale" should be available in channel "United States"
         And this catalog promotion should be usable
-
-    @todo
-    Scenario: Trying to create a catalog promotion without discount
-        When I want to create a new catalog promotion
-        And I specify its code as "winter_sale"
-        And I name it "Winter sale"
-        And I make it available in channel "United States"
-        And I specify its label as "Winter -50%" in "English (United States)"
-        And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
-        And it applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
-        And I try to add it
-        Then I should be notified that configuration of a discount is required
-        And there should be an empty list of catalog promotions

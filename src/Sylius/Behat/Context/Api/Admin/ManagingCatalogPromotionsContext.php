@@ -163,9 +163,9 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^it gives the ("[^"]+") percentage discount$/
+     * @When /^I specify action that gives ("[^"]+") percentage discount$/
      */
-    public function iGivesPercentageDistount(float $amount): void
+    public function iSpecifyActionThatGivesPercentageDiscount(float $amount): void
     {
         $actions = [[
             'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
@@ -272,6 +272,32 @@ final class ManagingCatalogPromotionsContext implements Context
         ]];
 
         $this->client->addRequestData('rules', $rules);
+    }
+
+    /**
+     * @When I specify action percentage discount without amount configured
+     */
+    public function iSpecifyActionPercentageDiscountWithoutAmountConfigured(): void
+    {
+        $actions = [[
+            'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+            'configuration' => [],
+        ]];
+
+        $this->client->addRequestData('actions', $actions);
+    }
+
+    /**
+     * @When I specify catalog promotion action with nonexistent type
+     */
+    public function ISpecifyCatalogPromotionActionWithNonexistentType(): void
+    {
+        $actions = [[
+            'type' => 'nonexistent_action',
+            'configuration' => [],
+        ]];
+
+        $this->client->addRequestData('actions', $actions);
     }
 
     /**
@@ -527,9 +553,9 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that configuration of a discount is required
+     * @Then I should be notified that a discount amount is required
      */
-    public function iShouldBeNotifiedThatConfigurationOfADiscountIsRequired(): void
+    public function iShouldBeNotifiedThatADiscountAmountIsRequired(): void
     {
         $response = $this->client->getLastResponse();
         Assert::false(
@@ -538,7 +564,29 @@ final class ManagingCatalogPromotionsContext implements Context
         );
         Assert::same(
             $this->responseChecker->getError($response),
-            'discount: Please enter catalog promotion discount.'
+            'configuration: The percentage discount amount must be configured.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that type of action is invalid
+     */
+    public function iShouldBeNotifiedThatTypeOfActionIsInvalid(): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'configuration: Catalog promotion action type is invalid. Please choose a valid type.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that a discount amount should be between 0% and 100%
+     */
+    public function iShouldBeNotifiedThatADiscountAmountShouldBeBetween0And100(): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'configuration: The percentage discount amount must be between 0% and 100%.'
         );
     }
 
