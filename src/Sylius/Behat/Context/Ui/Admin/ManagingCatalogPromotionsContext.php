@@ -20,7 +20,9 @@ use Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
@@ -136,7 +138,7 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @When /^it applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/
      */
-    public function itAppliesOnVariants(...$variants): void
+    public function itAppliesOnVariants(ProductVariantInterface ...$variants): void
     {
         $variantCodes = array_map(function(ProductVariantInterface $variant) {
             return $variant->getCode();
@@ -190,6 +192,29 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I edit ("[^"]+" catalog promotion) to be applied on ("[^"]+" variant)$/
+     */
+    public function iEditCatalogPromotionToBeAppliedOn(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface $productVariant): void
+    {
+        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
+
+        $this->formElement->addRule();
+        $this->formElement->chooseLastRuleVariants([$productVariant->getCode()]);
+        $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @When /^I edit ("[^"]+" catalog promotion) to have "([^"]+)%" discount$/
+     */
+    public function iEditCatalogPromotionToHaveDiscount(CatalogPromotionInterface $catalogPromotion, string $amount): void
+    {
+        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
+        $this->formElement->addAction();
+        $this->formElement->specifyLastActionDiscount($amount);
+        $this->updatePage->saveChanges();
+    }
+
+    /**
      * @Then there should be :amount catalog promotions on the list
      * @Then there should be :amount new catalog promotion on the list
      * @Then there should be an empty list of catalog promotions
@@ -213,6 +238,7 @@ final class ManagingCatalogPromotionsContext implements Context
             );
         }
     }
+
     /**
      * @Then it should have :code code and :name name
      */
@@ -239,7 +265,33 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then /^it should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
+     * @Then /^this catalog promotion should be applied on ("[^"]+" variant)$/
+     */
+    public function itShouldAppyToVariants(ProductVariantInterface ...$variants): void
+    {
+        $selectedVariants = $this->formElement->getLastRuleVariantCodes();
+
+        foreach ($variants as $productVariant) {
+            Assert::inArray($productVariant->getCode(), $selectedVariants);
+        }
+    }
+
+    /**
+     * @Then /^this catalog promotion should not be applied on ("[^"]+" variant)$/
+     */
+    public function itShouldNotAppyToVariants(ProductVariantInterface ...$variants): void
+    {
+        $selectedVariants = $this->formElement->getLastRuleVariantCodes();
+
+        foreach ($variants as $productVariant) {
+            Assert::false(in_array($productVariant->getCode(), $selectedVariants));
+        }
+    }
+
+    /**
      * @Then /^it should have "([^"]+)%" discount$/
+     * @Then /^this catalog promotion should have "([^"]+)%" percentage discount$/
      */
     public function itShouldHaveDiscount(string $amount): void
     {

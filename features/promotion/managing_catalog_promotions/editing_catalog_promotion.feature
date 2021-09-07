@@ -12,6 +12,7 @@ Feature: Editing catalog promotion
         And this product has "Kotlin T-Shirt" variant priced at "$40.00"
         And there is a catalog promotion with "christmas_sale" code and "Christmas sale" name
         And it will be applied on "PHP T-Shirt" variant
+        And it will reduce price by "30%"
         And I am logged in as an administrator
 
     @api @ui
@@ -44,13 +45,14 @@ Feature: Editing catalog promotion
         When I want to modify a catalog promotion "Christmas sale"
         Then I should not be able to edit its code
 
-    @api
+    @api @ui @javascript
     Scenario: Editing catalog promotion rule
-        When I want "Christmas sale" catalog promotion to be applied on "Kotlin T-shirt" variant
+        When I edit "Christmas sale" catalog promotion to be applied on "Kotlin T-shirt" variant
         Then I should be notified that it has been successfully edited
         And this catalog promotion should be applied on "Kotlin T-shirt" variant
+        And this catalog promotion should not be applied on "PHP T-Shirt" variant
 
-    @api
+    @api @ui @javascript
     Scenario: Editing catalog promotion action
         When I edit "Christmas sale" catalog promotion to have "40%" discount
         Then I should be notified that it has been successfully edited
