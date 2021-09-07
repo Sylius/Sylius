@@ -67,6 +67,10 @@ To test the documentation before a commit you need to install Sphinx and needed 
 
     Official Sphinx installation guide : `www.sphinx-doc.org <https://www.sphinx-doc.org/en/master/usage/installation.html>`_
 
+.. note::
+
+    If you are using docker - you can try building your documentation with: `Sylius Documentation Builder <https://github.com/arti0090/SyliusDocumentationBuilder>`_
+
 Our recommendation is to install ``Sphinx`` via `Pip`_.
 
 We suggest to install & use ``Sphinx v1.8.5``
