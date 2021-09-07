@@ -24,10 +24,13 @@ Default logo in shop panel:
 The first step is to detect which template is responsible for displaying the logo and therefore which should be overridden
 to customize a logo image.
 
-It's placed in **SyliusShopBundle**, at ``Resources/views/Layout/Header/_logo.html.twig.path``, so to override it,
+It's placed in **SyliusShopBundle**, at ``Resources/views/Layout/Header/_logo.html.twig`` path, so to override it,
 you should create the ``templates/bundles/SyliusShopBundle/Layout/Header/_logo.html.twig`` file and copy the original file content.
 Next, replace the ``img`` element source with a link to the logo or properly imported asset image (take a look at
 `Symfony assets documentation <https://symfony.com/doc/current/best_practices/web-assets.html>`_ for more info).
+
+The other way to achieve this is to modify the configuration of the ``sylius.shop.layout.header.grid`` template event.
+Learn more about it in :doc:`this doc</customization/template>`.
 
 .. hint::
 
