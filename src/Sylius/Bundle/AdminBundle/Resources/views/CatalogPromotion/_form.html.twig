@@ -3,8 +3,8 @@
 {% form_theme form '@SyliusAdmin/CatalogPromotion/theme.html.twig' %}
 
 <div class="ui two column stackable grid">
-    {{ form_errors(form) }}
     <div class="column">
+        {{ form_errors(form) }}
         <div class="ui segment">
             {{ form_row(form.code) }}
             {{ form_row(form.name) }}

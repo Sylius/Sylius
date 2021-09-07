@@ -38,4 +38,6 @@ interface FormElementInterface
     public function getLastRuleVariantCodes(): array;
 
     public function getLastActionDiscount(): string;
+
+    public function getValidationMessageForAction(): string;
 }

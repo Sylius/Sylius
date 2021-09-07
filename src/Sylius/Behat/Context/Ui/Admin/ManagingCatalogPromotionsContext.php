@@ -18,11 +18,8 @@ use Sylius\Behat\Element\Admin\CatalogPromotion\FormElementInterface;
 use Sylius\Behat\Page\Admin\CatalogPromotion\CreatePageInterface;
 use Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
@@ -35,20 +32,16 @@ final class ManagingCatalogPromotionsContext implements Context
 
     private FormElementInterface $formElement;
 
-    private SharedStorageInterface $sharedStorage;
-
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
-        FormElementInterface $formElement,
-        SharedStorageInterface $sharedStorage
+        FormElementInterface $formElement
     ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
         $this->formElement = $formElement;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -158,7 +151,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I add it
+     * @When I (try to) add it
      */
     public function iAddIt(): void
     {
@@ -212,6 +205,14 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->formElement->addAction();
         $this->formElement->specifyLastActionDiscount($amount);
         $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @When I add for variants rule without variants configured
+     */
+    public function iAddForVariantsRuleWithoutVariantsConfigured(): void
+    {
+        $this->formElement->addRule();
     }
 
     /**
@@ -400,5 +401,13 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldNotBeAbleToEditItsCode(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
+    }
+
+    /**
+     * @Then I should be notified that at least 1 variant is required
+     */
+    public function iShouldBeNotifiedThatAtLeast1VariantIsRequired(): void
+    {
+        Assert::same($this->formElement->getValidationMessageForAction(), 'Please add at least 1 variant.');
     }
 }
