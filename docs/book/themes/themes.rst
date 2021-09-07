@@ -91,35 +91,36 @@ In order to customize the login view you should take the content of ``@SyliusSho
 
 
 * From `theme-bundle v2 <https://github.com/Sylius/SyliusThemeBundle/releases/tag/v2.0.0>`_,
-  paste it to your theme directory: ``themes/CrimsonTheme/templates/bundle/SyliusShopBundle/login.html.twig``
+  paste it to your theme directory: ``themes/CrimsonTheme/templates/bundles/SyliusShopBundle/login.html.twig``
   (There are more informations in the official documentation about `theme structure v2.0.0 <https://github.com/Sylius/SyliusThemeBundle/blob/v2.0.0/docs/your_first_theme.md#theme-structure>`_)
 
 Let's remove the registration column in this example:
 
 .. code-block:: twig
 
-   {% extends '@SyliusShop/layout.html.twig' %}
+    {% extends '@SyliusShop/layout.html.twig' %}
 
-   {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+    {% form_theme form '@SyliusUi/Form/theme.html.twig' %}
 
-   {% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
+    {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
 
-   {% block content %}
-       {% include '@SyliusShop/Login/_header.html.twig' %}
-       <div class="ui padded segment">
-           <div class="ui one column very relaxed stackable grid">
-               <div class="column">
-                   <h4 class="ui dividing header">{{ 'sylius.ui.registered_customers'|trans }}</h4>
-                   <p>{{ 'sylius.ui.if_you_have_an_account_sign_in_with_your_email_address'|trans }}.</p>
-                   {{ form_start(form, {'action': path('sylius_shop_login_check'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-                       {% include '@SyliusShop/Login/_form.html.twig' %}
-                       <button type="submit" class="ui blue submit button">{{ 'sylius.ui.login'|trans }}</button>
-                       <a href="{{ path('sylius_shop_request_password_reset_token') }}" class="ui right floated button">{{ 'sylius.ui.forgot_password'|trans }}</a>
-                   {{ form_end(form, {'render_rest': false}) }}
-               </div>
-           </div>
-       </div>
-   {% endblock %}
+    {% block content %}
+        {% include '@SyliusShop/Login/_header.html.twig' %}
+        <div class="ui padded segment">
+            <div class="ui one column very relaxed stackable grid">
+                <div class="column">
+                    <h4 class="ui dividing header">{{ 'sylius.ui.registered_customers'|trans }}</h4>
+                    <p>{{ 'sylius.ui.if_you_have_an_account_sign_in_with_your_email_address'|trans }}.</p>
+                    {{ form_start(form, {'action': path('sylius_shop_login_check'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+                    {% include '@SyliusShop/Login/_form.html.twig' %}
+                    <button type="submit" class="ui blue submit button">{{ 'sylius.ui.login'|trans }}</button>
+                    <a href="{{ path('sylius_shop_request_password_reset_token') }}" class="ui right floated button">{{ 'sylius.ui.forgot_password'|trans }}</a>
+                    {{ form_end(form, {'render_rest': false}) }}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
 
 .. tip::
 
