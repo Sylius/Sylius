@@ -222,20 +222,20 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->indexPage->isSingleResourceOnPage(['name' => $name, 'code' => $code]),
             sprintf('Cannot find catalog promotions with code "%s" and name "%s" in the list', $code, $name)
         );
-
-        $actions = $this->indexPage->getActionsForResource(['name' => $name]);
-        $actions->clickLink('Edit');
     }
 
     /**
-     * @Then /^it should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
+     * @Then /^("[^"]+" catalog promotion) should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
      */
-    public function itShouldHaveRule(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
+    public function itShouldHaveRule(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface ...$variants): void
     {
+        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
+
         $selectedVariants = $this->formElement->getLastRuleVariantCodes();
 
-        Assert::inArray($firstVariant->getCode(), $selectedVariants);
-        Assert::inArray($secondVariant->getCode(), $selectedVariants);
+        foreach ($variants as $productVariant) {
+            Assert::inArray($productVariant->getCode(), $selectedVariants);
+        }
     }
 
     /**

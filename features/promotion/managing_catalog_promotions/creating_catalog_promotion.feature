@@ -31,7 +31,7 @@ Feature: Creating a catalog promotion
         And I add it
         Then there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name
-        And it should apply to "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And "Winter sale" catalog promotion should apply to "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And it should have "50%" discount
         And this catalog promotion should be usable
 
