@@ -130,6 +130,7 @@ Configuration
     configuration/disabling-shop-admin-api
     configuration/installation-commands
     configuration/disabling-admin-notifications
+    configuration/admin-prefix
 
 .. include:: /cookbook/configuration/map.rst.inc
 
