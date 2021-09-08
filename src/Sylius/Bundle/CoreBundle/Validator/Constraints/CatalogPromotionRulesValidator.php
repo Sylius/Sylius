@@ -32,6 +32,7 @@ final class CatalogPromotionRulesValidator extends ConstraintValidator
     {
         /** @var CatalogPromotionRules $constraint */
         Assert::isInstanceOf($constraint, CatalogPromotionRules::class);
+
         /** @var CatalogPromotionRuleInterface $rule */
         foreach ($value as $rule) {
             if ($rule->getType() !== CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS) {

@@ -149,9 +149,9 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^it gives the "([^"]+)%" percentage discount$/
+     * @When I specify action that gives ":discount%" percentage discount
      */
-    public function catalogPromotionGivesDiscount(string $discount): void
+    public function iSpecifyActionThatGivesPercentageDiscount(string $discount): void
     {
         $this->formElement->addAction();
         $this->formElement->specifyLastActionDiscount($discount);
