@@ -90,6 +90,8 @@
 
         <attribute name="rules">
             <group>admin:shipping_method:read</group>
+            <group>admin:shipping_method:create</group>
+            <group>admin:shipping_method:update</group>
         </attribute>
     </class>
 </serializer>
