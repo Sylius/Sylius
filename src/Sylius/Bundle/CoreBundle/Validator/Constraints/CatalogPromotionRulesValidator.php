@@ -46,7 +46,6 @@ final class CatalogPromotionRulesValidator extends ConstraintValidator
 
     private function validateRuleConfiguration(array $configuration, CatalogPromotionRules $constraint): void
     {
-
         if (array_key_exists('variants', $configuration) === false) {
             $this->context->addViolation($constraint->invalidConfiguration);
 
