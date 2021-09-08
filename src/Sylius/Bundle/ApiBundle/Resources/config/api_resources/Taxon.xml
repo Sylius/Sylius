@@ -72,6 +72,26 @@
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
-        <property name="translations" readable="true" writable="true" />
+        <property name="parent" readable="true" required="false">
+            <attribute name="openapi_context">
+                <attribute name="type">string</attribute>
+                <attribute name="format">iri-reference</attribute>
+                <attribute name="summary">iri-reference (optional field)</attribute>
+                <attribute name="example">iri-reference</attribute>
+            </attribute>
+        </property>
+        <property name="translations" readable="true" writable="true">
+            <attribute name="openapi_context">
+                <attribute name="type">array</attribute>
+                <attribute name="example">
+                    <attribute name="en_US">
+                        <attribute name="name">string</attribute>
+                        <attribute name="slug">string</attribute>
+                        <attribute name="description">string</attribute>
+                        <attribute name="locale">en_US</attribute>
+                    </attribute>
+                </attribute>
+            </attribute>
+        </property>
     </resource>
 </resources>
