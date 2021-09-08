@@ -60,6 +60,18 @@ final class CatalogPromotionFixtureTest extends TestCase
         $this->assertConfigurationIsValid([['custom' => [['channels' => ['first_channel', 'second_channel']]]]], 'custom.*.channels');
     }
 
+    /** @test */
+    public function catalog_promotion_rules_can_be_set(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['rules' => [['type' => 'some_rule_type', 'configuration' => ['first_variant', 'second_variant']]]]]]], 'custom.*.rules');
+    }
+
+    /** @test */
+    public function catalog_promotion_actions_can_be_set(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['actions' => [['type' => 'some_action_type', 'configuration' => ['amount' => 500]]]]]]], 'custom.*.actions');
+    }
+
     protected function getConfiguration(): CatalogPromotionFixture
     {
         return new CatalogPromotionFixture(

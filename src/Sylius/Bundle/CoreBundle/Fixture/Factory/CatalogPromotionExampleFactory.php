@@ -19,6 +19,8 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -32,6 +34,10 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
 
     private ChannelRepositoryInterface $channelRepository;
 
+    private ExampleFactoryInterface $catalogPromotionRuleExampleFactory;
+
+    private ExampleFactoryInterface $catalogPromotionActionExampleFactory;
+
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
@@ -39,11 +45,15 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
     public function __construct(
         FactoryInterface $catalogPromotionFactory,
         RepositoryInterface $localeRepository,
-        ChannelRepositoryInterface $channelRepository
+        ChannelRepositoryInterface $channelRepository,
+        ExampleFactoryInterface $catalogPromotionRuleExampleFactory,
+        ExampleFactoryInterface $catalogPromotionActionExampleFactory
     ) {
         $this->catalogPromotionFactory = $catalogPromotionFactory;
         $this->localeRepository = $localeRepository;
         $this->channelRepository = $channelRepository;
+        $this->catalogPromotionRuleExampleFactory = $catalogPromotionRuleExampleFactory;
+        $this->catalogPromotionActionExampleFactory = $catalogPromotionActionExampleFactory;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -70,6 +80,24 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
 
         foreach ($options['channels'] as $channel) {
             $catalogPromotion->addChannel($channel);
+        }
+
+        if (isset($options['rules'])) {
+            foreach ($options['rules'] as $rule) {
+                /** @var CatalogPromotionRuleInterface $catalogPromotionRule */
+                $catalogPromotionRule = $this->catalogPromotionRuleExampleFactory->create($rule);
+                $catalogPromotionRule->setCatalogPromotion($catalogPromotion);
+                $catalogPromotion->addRule($catalogPromotionRule);
+            }
+        }
+
+        if (isset($options['actions'])) {
+            foreach ($options['actions'] as $action) {
+                /** @var CatalogPromotionActionInterface $catalogPromotionAction */
+                $catalogPromotionAction = $this->catalogPromotionActionExampleFactory->create($action);
+                $catalogPromotionAction->setCatalogPromotion($catalogPromotion);
+                $catalogPromotion->addAction($catalogPromotionAction);
+            }
         }
 
         return $catalogPromotion;
@@ -103,6 +131,22 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
             ->setDefault('channels', LazyOption::all($this->channelRepository))
             ->setAllowedTypes('channels', 'array')
             ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))
+            ->setDefined('rules')
+            ->setNormalizer('rules', function (Options $options, array $rules): array {
+                if (empty($rules)) {
+                    return [[]];
+                }
+
+                return $rules;
+            })
+            ->setDefined('actions')
+            ->setNormalizer('actions', function (Options $options, array $actions): array {
+                if (empty($actions)) {
+                    return [[]];
+                }
+
+                return $actions;
+            })
         ;
     }
 

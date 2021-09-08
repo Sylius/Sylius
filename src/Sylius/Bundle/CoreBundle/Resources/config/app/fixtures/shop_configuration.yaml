@@ -253,3 +253,12 @@ sylius_fixtures:
                                 name: 'Winter sale'
                                 channels:
                                     - 'FASHION_WEB'
+                                rules:
+                                    -   type: 'for_variants'
+                                        configuration:
+                                            - 't_shirt_size_s'
+                                            - 't_shirt_size_l'
+                                actions:
+                                    -   type: 'percentage_discount'
+                                        configuration:
+                                            - amount: 0.5
