@@ -18,6 +18,7 @@ use Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionRules;
 use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
+use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
@@ -58,6 +59,18 @@ final class CatalogPromotionRulesValidatorSpec extends ObjectBehavior
         $this->validate([$rule], new CatalogPromotionRules());
     }
 
+    function it_adds_violation_if_catalog_promotion_rule_is_without_variants_key(
+        ExecutionContextInterface $executionContext,
+        CatalogPromotionRuleInterface $rule
+    ): void {
+        $rule->getType()->willReturn(CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS);
+        $rule->getConfiguration()->willReturn(['first_variant', 'second_variant']);
+
+        $executionContext->addViolation('sylius.catalog_promotion.rules.invalid_configuration')->shouldBeCalled();
+
+        $this->validate([$rule], new CatalogPromotionRules());
+    }
+
     function it_does_nothing_if_catalog_promotion_rule_is_valid(
         ExecutionContextInterface $executionContext,
         CatalogPromotionRuleInterface $rule,
@@ -66,7 +79,7 @@ final class CatalogPromotionRulesValidatorSpec extends ObjectBehavior
         ProductVariantInterface $secondVariant
     ): void {
         $rule->getType()->willReturn(CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS);
-        $rule->getConfiguration()->willReturn(['first_variant', 'second_variant']);
+        $rule->getConfiguration()->willReturn(['variants' => ['first_variant', 'second_variant']]);
 
         $executionContext->addViolation('sylius.catalog_promotion.rules.invalid_type')->shouldNotBeCalled();
 

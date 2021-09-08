@@ -14,9 +14,11 @@
             "@id": @string@,
             "id": @integer@,
             "type": "for_variants",
-            "configuration": [
-                "MUG"
-            ]
+            "configuration": {
+                "variants": [
+                    "MUG"
+                ]
+            }
         }
     ],
     "actions": [

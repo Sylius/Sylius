@@ -201,8 +201,10 @@ final class ManagingCatalogPromotionsContext implements Context
         $rules = [[
             'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
             'configuration' => [
-                $firstVariant->getCode(),
-                $secondVariant->getCode(),
+                'variants' => [
+                    $firstVariant->getCode(),
+                    $secondVariant->getCode(),
+                ]
             ],
         ]];
 
@@ -218,7 +220,9 @@ final class ManagingCatalogPromotionsContext implements Context
         $rules = [[
             'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
             'configuration' => [
-                $productVariant->getCode(),
+                'variants' => [
+                    $productVariant->getCode(),
+                ]
             ],
         ]];
 
@@ -342,7 +346,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function itShouldHaveRule(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
     {
         Assert::same(
-            [$firstVariant->getCode(), $secondVariant->getCode()],
+            ['variants' => [$firstVariant->getCode(), $secondVariant->getCode()]],
             $this->responseChecker->getCollection($this->client->getLastResponse())[0]['rules'][0]['configuration']
         );
     }
@@ -531,7 +535,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
         foreach ($productVariants as $productVariant) {
-            if ($this->hasVariantInConfiguration($response['rules'][0]['configuration'], $productVariant) === false) {
+            if ($this->hasVariantInConfiguration($response['rules'][0]['configuration']['variants'], $productVariant) === false) {
                 return false;
             }
         }
