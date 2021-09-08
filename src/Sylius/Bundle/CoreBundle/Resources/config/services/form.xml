@@ -159,7 +159,7 @@
             <argument>%sylius.model.avatar_image.class%</argument>
             <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.variant_rule" class="Sylius\Bundle\CoreBundle\Form\Type\CatalogRule\VariantRuleConfigurationType">
+        <service id="sylius.form.type.for_variants_rule" class="Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionRule\ForVariantsRuleConfigurationType">
             <argument type="service" id="sylius.form.type.data_transformer.product_variants_to_codes" />
             <tag name="form.type" />
         </service>

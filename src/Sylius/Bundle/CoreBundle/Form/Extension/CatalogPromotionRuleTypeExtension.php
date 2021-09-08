@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionRuleType;
-use Sylius\Bundle\CoreBundle\Form\Type\CatalogRule\VariantRuleConfigurationType;
+use Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionRule\ForVariantsRuleConfigurationType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -22,7 +22,7 @@ final class CatalogPromotionRuleTypeExtension extends AbstractTypeExtension
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('configuration', VariantRuleConfigurationType::class, [
+        $builder->add('configuration', ForVariantsRuleConfigurationType::class, [
             'label' => false,
         ]);
     }
