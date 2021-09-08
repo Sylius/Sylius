@@ -562,9 +562,9 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->isCreationSuccessful($response),
             'Catalog promotion has been created successfully, but it should not'
         );
-        Assert::same(
+        Assert::contains(
             $this->responseChecker->getError($response),
-            'configuration: The percentage discount amount must be configured.'
+            'The percentage discount amount must be configured.'
         );
     }
 
@@ -573,9 +573,9 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatTypeOfActionIsInvalid(): void
     {
-        Assert::same(
+        Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'configuration: Catalog promotion action type is invalid. Please choose a valid type.'
+            'Catalog promotion action type is invalid. Please choose a valid type.'
         );
     }
 
@@ -584,9 +584,9 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatADiscountAmountShouldBeBetween0And100(): void
     {
-        Assert::same(
+        Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'configuration: The percentage discount amount must be between 0% and 100%.'
+            'The percentage discount amount must be between 0% and 100%.'
         );
     }
 

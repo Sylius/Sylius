@@ -161,6 +161,67 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_does_not_create_a_catalog_promotion_with_invalid_actions(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product_variant.yaml']);
+        $header = $this->getLoggedHeader();
+
+        $this->client->request(
+            'POST',
+            '/api/v2/admin/catalog-promotions',
+            [],
+            [],
+            $header,
+            json_encode([
+                'name' => 'T-Shirts discount',
+                'code' => 'tshirts_discount',
+                'channels' => [
+                    '/api/v2/admin/channels/WEB',
+                ],
+                'actions' => [
+                    [
+                        'type' => 'invalid_type',
+                        'configuration' => [
+                            'amount' => 0.5
+                        ]
+                    ],
+                    [
+                        'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                        'configuration' => []
+                    ],
+                    [
+                        'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                        'configuration' => [
+                            'amount' => 1.5
+                        ]
+                    ]
+                ],
+                'rules' => [
+                    [
+                        'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+                        'configuration' => [
+                            'MUG'
+                        ],
+                    ]
+                ],
+                'translations' => ['en_US' => [
+                    'locale' => 'en_US',
+                    'label' => 'T-Shirts discount',
+                    'description' => '50% discount on every T-Shirt',
+                ]]
+            ], JSON_THROW_ON_ERROR)
+        );
+
+        $response = $this->client->getResponse();
+
+        $this->assertResponse(
+            $response,
+            'admin/catalog_promotion/post_catalog_promotion_with_invalid_actions_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY
+        );
+    }
+
+    /** @test */
     public function it_updates_catalog_promotion(): void
     {
         $catalogPromotion = $this->loadFixturesAndGetCatalogPromotion();
