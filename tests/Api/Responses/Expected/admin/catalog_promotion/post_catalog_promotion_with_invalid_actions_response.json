@@ -2,20 +2,20 @@
     "@context": "/api/v2/contexts/ConstraintViolationList",
     "@type": "ConstraintViolationList",
     "hydra:title": "An error occurred",
-    "hydra:description": "actions[0]: Catalog promotion action type is invalid. Please choose a valid type.\nactions[1]: The percentage discount amount must be configured.\nactions[2]: The percentage discount amount must be between 0% and 100%.",
+    "hydra:description": "actions[0].type: Catalog promotion action type is invalid. Please choose a valid type.\nactions[1].configuration.amount: The percentage discount amount must be configured.\nactions[2].configuration.amount: The percentage discount amount must be between 0% and 100%.",
     "violations": [
         {
-            "propertyPath": "actions[0]",
+            "propertyPath": "actions[0].type",
             "message": "Catalog promotion action type is invalid. Please choose a valid type.",
             "code": null
         },
         {
-            "propertyPath": "actions[1]",
+            "propertyPath": "actions[1].configuration.amount",
             "message": "The percentage discount amount must be configured.",
             "code": null
         },
         {
-            "propertyPath": "actions[2]",
+            "propertyPath": "actions[2].configuration.amount",
             "message": "The percentage discount amount must be between 0% and 100%.",
             "code": null
         }

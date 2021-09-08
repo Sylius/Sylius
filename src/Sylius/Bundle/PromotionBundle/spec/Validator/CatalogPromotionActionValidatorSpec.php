@@ -16,9 +16,9 @@ namespace spec\Sylius\Bundle\PromotionBundle\Validator;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionAction;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
-use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class CatalogPromotionActionValidatorSpec extends ObjectBehavior
 {
@@ -34,35 +34,44 @@ final class CatalogPromotionActionValidatorSpec extends ObjectBehavior
 
     function it_adds_violation_if_catalog_promotion_action_has_invalid_type(
         ExecutionContextInterface $executionContext,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
         CatalogPromotionActionInterface $action
     ): void {
         $action->getType()->willReturn('wrong_type');
 
-        $executionContext->addViolation('sylius.catalog_promotion_action.invalid_type')->shouldBeCalled();
+        $executionContext->buildViolation('sylius.catalog_promotion_action.invalid_type')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('type')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
         $this->validate($action, new CatalogPromotionAction());
     }
 
     function it_adds_violation_if_catalog_promotion_action_has_invalid_discount(
         ExecutionContextInterface $executionContext,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
         CatalogPromotionActionInterface $action
     ): void {
         $action->getType()->willReturn(CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT);
         $action->getConfiguration()->willReturn([]);
 
-        $executionContext->addViolation('sylius.catalog_promotion_action.percentage_discount.not_valid')->shouldBeCalled();
+        $executionContext->buildViolation('sylius.catalog_promotion_action.percentage_discount.not_valid')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('configuration.amount')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
         $this->validate($action, new CatalogPromotionAction());
     }
 
     function it_adds_violation_if_catalog_promotion_action_has_discount_in_wrong_range(
         ExecutionContextInterface $executionContext,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
         CatalogPromotionActionInterface $action
     ): void {
         $action->getType()->willReturn(CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT);
         $action->getConfiguration()->willReturn(['amount' => 2]);
 
-        $executionContext->addViolation('sylius.catalog_promotion_action.percentage_discount.not_in_range')->shouldBeCalled();
+        $executionContext->buildViolation('sylius.catalog_promotion_action.percentage_discount.not_in_range')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('configuration.amount')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
         $this->validate($action, new CatalogPromotionAction());
     }
@@ -74,9 +83,9 @@ final class CatalogPromotionActionValidatorSpec extends ObjectBehavior
         $action->getType()->willReturn(CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT);
         $action->getConfiguration()->willReturn(['amount' => 0.2]);
 
-        $executionContext->addViolation('sylius.catalog_promotion_action.invalid_type')->shouldNotBeCalled();
-        $executionContext->addViolation('sylius.catalog_promotion_action.percentage_discount.not_valid')->shouldNotBeCalled();
-        $executionContext->addViolation('sylius.catalog_promotion_action.percentage_discount.not_in_range')->shouldNotBeCalled();
+        $executionContext->buildViolation('sylius.catalog_promotion_action.invalid_type')->shouldNotBeCalled();
+        $executionContext->buildViolation('sylius.catalog_promotion_action.percentage_discount.not_valid')->shouldNotBeCalled();
+        $executionContext->buildViolation('sylius.catalog_promotion_action.percentage_discount.not_in_range')->shouldNotBeCalled();
 
         $this->validate($action, new CatalogPromotionAction());
     }

@@ -28,20 +28,20 @@ final class CatalogPromotionActionValidator extends ConstraintValidator
 
         /** @var CatalogPromotionActionInterface $value */
         if ($value->getType() !== CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT) {
-            $this->context->addViolation($constraint->invalidType);
+            $this->context->buildViolation($constraint->invalidType)->atPath('type')->addViolation();
 
             return;
         }
 
         $configuration = $value->getConfiguration();
         if (!array_key_exists('amount', $configuration)) {
-            $this->context->addViolation($constraint->invalidDiscount);
+            $this->context->buildViolation($constraint->invalidDiscount)->atPath('configuration.amount')->addViolation();
 
             return;
         }
 
         if ($configuration['amount'] < 0 || $configuration['amount'] > 1) {
-            $this->context->addViolation($constraint->notInRangeDiscount);
+            $this->context->buildViolation($constraint->notInRangeDiscount)->atPath('configuration.amount')->addViolation();
         }
     }
 }
