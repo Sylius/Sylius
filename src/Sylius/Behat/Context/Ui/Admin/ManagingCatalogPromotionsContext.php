@@ -149,7 +149,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I specify action that gives ("[^"]+") percentage discount$/
+     * @When I specify action that gives ":discount%" percentage discount
      */
     public function iSpecifyActionThatGivesPercentageDiscount(string $discount): void
     {
