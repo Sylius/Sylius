@@ -8,14 +8,9 @@ Feature: Applying catalog promotions for variants
         Given the store operates on a single channel in "United States"
         And the store has a "T-Shirt" configurable product
         And this product has "PHP T-Shirt" variant priced at "$20.00"
-        And this product has "Kotlin T-Shirt" variant priced at "$40.00"
-        And this product has "Python T-Shirt" variant priced at "$40.00"
         And the store has a "Mug" configurable product
         And this product has "PHP Mug" variant priced at "$5.00"
-        And this product has "Kotlin Mug" variant priced at "$7.00"
-        And there is a catalog promotion with "winter_sale" code and "Winter sale" name
-        And it will be applied on "PHP T-Shirt" variant
-        And it will reduce price by "30%"
+        And there is a catalog promotion with "Winter sale" name that applies on "PHP T-shirt" variant and reduces price by "30%"
 
     @api
     Scenario: Applying simple catalog promotions
