@@ -163,9 +163,9 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I specify action that gives ("[^"]+") percentage discount$/
+     * @When /^I add action that gives ("[^"]+") percentage discount$/
      */
-    public function iSpecifyActionThatGivesPercentageDiscount(float $amount): void
+    public function iAddActionThatGivesPercentageDiscount(float $amount): void
     {
         $actions = [[
             'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
@@ -248,9 +248,9 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I specify nonexistent catalog promotion rule
+     * @When I add catalog promotion rule with nonexistent type
      */
-    public function ISpecifyNonexistentCatalogPromotionRule(): void
+    public function iAddCatalogPromotionRuleWithNonexistentType(): void
     {
         $rules = [[
             'type' => 'nonexistent_rule',
@@ -263,15 +263,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I specify rule "For variants" with the wrong configuration
+     * @When I add for variants rule with the wrong configuration
      */
-    public function iSpecifyRuleWithWrongConfiguration(): void
+    public function iAddForVariantsRuleWithTheWrongConfiguration(): void
     {
         $rules = [[
             'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
             'configuration' => [
-                'config' => ['more_config' => 'wrong config'],
-                'product' => 'some_product'
+                'variants' => ['wrong_code'],
             ],
         ]];
 
@@ -279,9 +278,24 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I specify action percentage discount without amount configured
+     * @When I add for variants rule without variants configured
      */
-    public function iSpecifyActionPercentageDiscountWithoutAmountConfigured(): void
+    public function iAddForVariantsRuleWithoutVariantsConfigured(): void
+    {
+        $rules = [[
+            'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+            'configuration' => [
+                'variants' => [],
+            ],
+        ]];
+
+        $this->client->addRequestData('rules', $rules);
+    }
+
+    /**
+     * @When I add percentage discount action without amount configured
+     */
+    public function iAddPercentageDiscountActionWithoutAmountConfigured(): void
     {
         $actions = [[
             'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
@@ -292,9 +306,9 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I specify catalog promotion action with nonexistent type
+     * @When I add catalog promotion action with nonexistent type
      */
-    public function ISpecifyCatalogPromotionActionWithNonexistentType(): void
+    public function iAddCatalogPromotionActionWithNonexistentType(): void
     {
         $actions = [[
             'type' => 'nonexistent_action',
@@ -513,28 +527,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that rule is invalid
-     */
-    public function iShouldBeNotifiedThatRuleIsInvalid(): void
-    {
-        Assert::contains(
-            $this->responseChecker->getError($this->client->getLastResponse()),
-            'rules: Catalog promotion rule type is invalid. Please choose a valid type'
-        );
-    }
-
-    /**
-     * @Then I should be notified that rule configuration is invalid
-     */
-    public function iShouldBeNotifiedThatRuleConfigurationIsInvalid(): void
-    {
-        Assert::contains(
-            $this->responseChecker->getError($this->client->getLastResponse()),
-            'rules: Provided configuration contains errors.'
-        );
-    }
-
-    /**
      * @Then there should still be only one catalog promotion with code :code
      */
     public function thereShouldStillBeOnlyOneCatalogPromotionWithCode(string $code): void
@@ -573,13 +565,13 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that type of action is invalid
+     * @Then /^I should be notified that type of (action|rule) is invalid$/
      */
-    public function iShouldBeNotifiedThatTypeOfActionIsInvalid(): void
+    public function iShouldBeNotifiedThatTypeIsInvalid(string $field): void
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Catalog promotion action type is invalid. Please choose a valid type.'
+            sprintf('Catalog promotion %s type is invalid. Please choose a valid type.', $field)
         );
     }
 
@@ -591,6 +583,28 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'The percentage discount amount must be between 0% and 100%.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that rule configuration is invalid
+     */
+    public function iShouldBeNotifiedThatRuleConfigurationIsInvalid(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Provided configuration contains errors. Please add only existing variants.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that at least 1 variant is required
+     */
+    public function iShouldBeNotifiedThatAtLeast1VariantIsRequired(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Please add at least 1 variant.'
         );
     }
 

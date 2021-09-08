@@ -15,19 +15,21 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-final class CatalogPromotionRules extends Constraint
+final class CatalogPromotionRule extends Constraint
 {
-    public string $invalidConfiguration = 'sylius.catalog_promotion.rules.invalid_configuration';
+    public string $invalidType = 'sylius.catalog_promotion_rule.invalid_type';
 
-    public string $invalidType = 'sylius.catalog_promotion.rules.invalid_type';
+    public string $invalidVariants = 'sylius.catalog_promotion_rule.for_variants.invalid_variants';
+
+    public string $notEmpty = 'sylius.catalog_promotion_rule.for_variants.not_empty';
 
     public function validatedBy(): string
     {
-        return 'sylius_catalog_promotion_rules';
+        return 'sylius_catalog_promotion_rule';
     }
 
     public function getTargets(): string
     {
-        return self::PROPERTY_CONSTRAINT;
+        return self::CLASS_CONSTRAINT;
     }
 }

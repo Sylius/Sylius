@@ -64,9 +64,9 @@
             <tag name="validator.constraint_validator" alias="sylius_channel_default_locale_enabled" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionRulesValidator">
+        <service id="Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionRuleValidator">
             <argument type="service" id="sylius.repository.product_variant" />
-            <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_rules" />
+            <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_rule" />
         </service>
     </services>
 </container>
