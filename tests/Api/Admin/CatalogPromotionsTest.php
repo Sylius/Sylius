@@ -38,9 +38,11 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             $header
         );
 
-        $response = $this->client->getResponse();
-
-        $this->assertResponse($response, 'admin/catalog_promotion/get_catalog_promotions_response', Response::HTTP_OK);
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/catalog_promotion/get_catalog_promotions_response',
+            Response::HTTP_OK
+        );
     }
 
     /** @test */
@@ -57,9 +59,11 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             $header
         );
 
-        $response = $this->client->getResponse();
-
-        $this->assertResponse($response, 'admin/catalog_promotion/get_catalog_promotion_response', Response::HTTP_OK);
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/catalog_promotion/get_catalog_promotion_response',
+            Response::HTTP_OK
+        );
     }
 
     /** @test */
@@ -106,9 +110,11 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             ], JSON_THROW_ON_ERROR)
         );
 
-        $response = $this->client->getResponse();
-
-        $this->assertResponse($response, 'admin/catalog_promotion/post_catalog_promotion_response', Response::HTTP_CREATED);
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/catalog_promotion/post_catalog_promotion_response',
+            Response::HTTP_CREATED
+        );
     }
 
     /** @test */
@@ -126,10 +132,8 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             json_encode([], JSON_THROW_ON_ERROR)
         );
 
-        $response = $this->client->getResponse();
-
         $this->assertResponse(
-            $response,
+            $this->client->getResponse(),
             'admin/catalog_promotion/post_catalog_promotion_without_required_data_response',
             Response::HTTP_UNPROCESSABLE_ENTITY
         );
@@ -153,11 +157,71 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             ], JSON_THROW_ON_ERROR)
         );
 
-        $response = $this->client->getResponse();
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/catalog_promotion/post_catalog_promotion_with_taken_code_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY
+        );
+    }
+
+    /** @test */
+    public function it_does_not_create_a_catalog_promotion_with_invalid_rules(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product_variant.yaml']);
+        $header = $this->getLoggedHeader();
+
+        $this->client->request(
+            'POST',
+            '/api/v2/admin/catalog-promotions',
+            [],
+            [],
+            $header,
+            json_encode([
+                'name' => 'T-Shirts discount',
+                'code' => 'tshirts_discount',
+                'channels' => [
+                    '/api/v2/admin/channels/WEB',
+                ],
+                'actions' => [
+                    [
+                        'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                        'configuration' => [
+                            'amount' => 0.5
+                        ]
+                    ]
+                ],
+                'rules' => [
+                    [
+                        'type' => 'invalid_type',
+                        'configuration' => [
+                            'variants' => ['MUG']
+                        ],
+                    ], [
+                        'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+                        'configuration' => [],
+                    ], [
+                        'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+                        'configuration' => [
+                            'variants' => []
+                        ],
+                    ], [
+                        'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+                        'configuration' => [
+                            'variants' => ['invalid_variant']
+                        ],
+                    ]
+                ],
+                'translations' => ['en_US' => [
+                    'locale' => 'en_US',
+                    'label' => 'T-Shirts discount',
+                    'description' => '50% discount on every T-Shirt',
+                ]]
+            ], JSON_THROW_ON_ERROR)
+        );
 
         $this->assertResponse(
-            $response,
-            'admin/catalog_promotion/post_catalog_promotion_with_taken_code_response',
+            $this->client->getResponse(),
+            'admin/catalog_promotion/post_catalog_promotion_with_invalid_rules_response',
             Response::HTTP_UNPROCESSABLE_ENTITY
         );
     }
@@ -186,12 +250,10 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                         'configuration' => [
                             'amount' => 0.5
                         ]
-                    ],
-                    [
+                    ], [
                         'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
                         'configuration' => []
-                    ],
-                    [
+                    ], [
                         'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
                         'configuration' => [
                             'amount' => 1.5
@@ -202,7 +264,9 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     [
                         'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
                         'configuration' => [
-                            'MUG'
+                            'variants' => [
+                                'MUG'
+                            ]
                         ],
                     ]
                 ],
@@ -214,10 +278,8 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             ], JSON_THROW_ON_ERROR)
         );
 
-        $response = $this->client->getResponse();
-
         $this->assertResponse(
-            $response,
+            $this->client->getResponse(),
             'admin/catalog_promotion/post_catalog_promotion_with_invalid_actions_response',
             Response::HTTP_UNPROCESSABLE_ENTITY
         );
@@ -266,9 +328,11 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             ], JSON_THROW_ON_ERROR)
         );
 
-        $response = $this->client->getResponse();
-
-        $this->assertResponse($response, 'admin/catalog_promotion/put_catalog_promotion_response', Response::HTTP_OK);
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/catalog_promotion/put_catalog_promotion_response',
+            Response::HTTP_OK
+        );
     }
 
     private function loadFixturesAndGetCatalogPromotion(): CatalogPromotionInterface

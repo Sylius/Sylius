@@ -3,10 +3,11 @@ sylius:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
             upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
-    catalog_promotion:
-        rules:
-            invalid_configuration: Provided configuration contains errors.
-            invalid_type: Catalog promotion rule type is invalid. Please choose a valid type.
+    catalog_promotion_rule:
+        invalid_type: Catalog promotion rule type is invalid. Please choose a valid type.
+        for_variants:
+            invalid_variants: Provided configuration contains errors. Please add only existing variants.
+            not_empty: Please add at least 1 variant.
     channel:
         base_currency:
             not_blank: Please enter channel base currency.

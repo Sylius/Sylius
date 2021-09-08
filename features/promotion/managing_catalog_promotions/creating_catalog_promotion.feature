@@ -26,7 +26,7 @@ Feature: Creating a catalog promotion
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
         And it applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
-        And I specify action that gives "50%" percentage discount
+        And I add action that gives "50%" percentage discount
         And I add it
         Then there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name

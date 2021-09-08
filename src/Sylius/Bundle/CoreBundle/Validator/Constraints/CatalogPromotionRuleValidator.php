@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-final class CatalogPromotionRulesValidator extends ConstraintValidator
+final class CatalogPromotionRuleValidator extends ConstraintValidator
 {
     private ProductVariantRepositoryInterface $variantRepository;
 
@@ -30,32 +30,26 @@ final class CatalogPromotionRulesValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint): void
     {
-        /** @var CatalogPromotionRules $constraint */
-        Assert::isInstanceOf($constraint, CatalogPromotionRules::class);
+        /** @var CatalogPromotionRule $constraint */
+        Assert::isInstanceOf($constraint, CatalogPromotionRule::class);
 
-        /** @var CatalogPromotionRuleInterface $rule */
-        foreach ($value as $rule) {
-            if ($rule->getType() !== CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS) {
-                $this->context->addViolation($constraint->invalidType);
+        /** @var CatalogPromotionRuleInterface $value */
+        if ($value->getType() !== CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS) {
+            $this->context->buildViolation($constraint->invalidType)->atPath('type')->addViolation();
 
-                continue;
-            }
-
-            $this->validateRuleConfiguration($rule->getConfiguration(), $constraint);
+            return;
         }
-    }
 
-    private function validateRuleConfiguration(array $configuration, CatalogPromotionRules $constraint): void
-    {
-        if (array_key_exists('variants', $configuration) === false) {
-            $this->context->addViolation($constraint->invalidConfiguration);
+        $configuration = $value->getConfiguration();
+        if (!array_key_exists('variants', $configuration) || empty($configuration['variants'])) {
+            $this->context->buildViolation($constraint->notEmpty)->atPath('configuration.variants')->addViolation();
 
             return;
         }
 
         foreach ($configuration['variants'] as $variantCode) {
             if (null === $this->variantRepository->findOneBy(['code' => $variantCode])) {
-                $this->context->addViolation($constraint->invalidConfiguration);
+                $this->context->buildViolation($constraint->invalidVariants)->atPath('configuration.variants')->addViolation();
 
                 break;
             }
