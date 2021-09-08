@@ -11,14 +11,14 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\CatalogRule;
+namespace Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionRule;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
-final class VariantRuleConfigurationType extends AbstractType
+final class ForVariantsRuleConfigurationType extends AbstractType
 {
     private DataTransformerInterface $productVariantsToCodesTransformer;
 
