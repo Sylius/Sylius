@@ -192,6 +192,7 @@
             <argument type="service" id="request_stack" />
             <argument type="collection" />
         </service>
+        <service id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" alias="sylius.section_resolver.uri_based_section_resolver" />
 
         <service id="sylius.reviewer_reviews_remover" class="Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemover">
             <argument type="service" id="sylius.repository.product_review" />
