@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Applicator;
 
 use Sylius\Bundle\CoreBundle\Formatter\AppliedPromotionInformationFormatterInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
@@ -44,17 +43,18 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
     ): void {
         $discount = $action->getConfiguration()['amount'];
 
-        /** @var ChannelPricingInterface $channelPricing */
-        foreach ($variant->getChannelPricings() as $channelPricing) {
+        foreach ($catalogPromotion->getChannels() as $channel) {
+            $channelPricing = $variant->getChannelPricingForChannel($channel);
+            if ($channelPricing === null) {
+                continue;
+            }
+
             if ($channelPricing->getOriginalPrice() === null) {
                 $channelPricing->setOriginalPrice($channelPricing->getPrice());
             }
 
             $channelPricing->setPrice((int) ($channelPricing->getPrice() - ($channelPricing->getPrice() * $discount)));
-
-            $channelPricing->addAppliedPromotion(
-                $this->appliedPromotionInformationFormatter->format($catalogPromotion)
-            );
+            $channelPricing->addAppliedPromotion($this->appliedPromotionInformationFormatter->format($catalogPromotion));
         }
     }
 }

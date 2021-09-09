@@ -190,6 +190,10 @@ final class CatalogPromotionContext implements Context
         array $rules = [],
         array $actions = []
     ): CatalogPromotionInterface {
+        if (empty($channels) && $this->sharedStorage->has('channel')) {
+            $channels = [$this->sharedStorage->get('channel')];
+        }
+
         /** @var CatalogPromotionInterface $catalogPromotion */
         $catalogPromotion = $this->catalogPromotionExampleFactory->create([
             'name' => $name,
