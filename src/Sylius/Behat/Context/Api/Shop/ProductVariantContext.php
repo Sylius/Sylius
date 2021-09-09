@@ -49,7 +49,6 @@ final class ProductVariantContext implements Context
     public function iViewVariants(): void
     {
         $this->client->index();
-        $resp = $this->client->getLastResponse();
     }
 
     /**
@@ -93,9 +92,7 @@ final class ProductVariantContext implements Context
      */
     public function iShouldSeeVariantIsNotDiscounted(ProductVariantInterface $variant): void
     {
-        $response = $this->client->getLastResponse();
-
-        $items = $this->responseChecker->getCollectionItemsWithValue($response, 'code', $variant->getCode());
+        $items = $this->responseChecker->getCollectionItemsWithValue($this->client->getLastResponse(), 'code', $variant->getCode());
         $item = array_pop($items);
         Assert::keyNotExists($item, 'appliedPromotions');
     }
@@ -106,6 +103,7 @@ final class ProductVariantContext implements Context
 
         if ($variant !== null && $this->responseChecker->hasValue($response, '@type', 'hydra:Collection')) {
             $returnValue = $this->responseChecker->getCollectionItemsWithValue($response, 'code', $variant->getCode());
+
             return array_shift($returnValue);
         }
 

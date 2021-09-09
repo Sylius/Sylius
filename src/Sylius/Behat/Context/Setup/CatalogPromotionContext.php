@@ -116,16 +116,16 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^there is a catalog promotion with "([^"]*)" name that reduces price by ("[^"]+") and applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/
+     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" variant) and ("[^"]+" variant)$/
+     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
      */
-    public function thereIsACatalogPromotionWithNameThatAppliesOnVariantsAndReducesPriceBy(
+    public function thereIsACatalogPromotionThatReducesPriceByAndAppliesOn(
         string $name,
         float $discount,
         ProductVariantInterface ...$variants
     ): void {
         $catalogPromotion = $this->createCatalogPromotion($name);
         $variantCodes = [];
-
         foreach ($variants as $variant) {
             $variantCodes[] = $variant->getCode();
         }
@@ -133,9 +133,7 @@ final class CatalogPromotionContext implements Context
         /** @var CatalogPromotionRuleInterface $catalogPromotionRule */
         $catalogPromotionRule = $this->catalogPromotionRuleFactory->createNew();
         $catalogPromotionRule->setType(CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS);
-        $catalogPromotionRule->setConfiguration(
-            ['variants' => array_values($variantCodes)]
-        );
+        $catalogPromotionRule->setConfiguration(['variants' => array_values($variantCodes)]);
 
         $catalogPromotion->addRule($catalogPromotionRule);
 

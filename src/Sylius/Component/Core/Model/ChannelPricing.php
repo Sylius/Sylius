@@ -88,6 +88,7 @@ class ChannelPricing implements ChannelPricingInterface
     {
         if ($this->appliedPromotions === null) {
             $this->appliedPromotions = $promotion;
+
             return;
         }
 

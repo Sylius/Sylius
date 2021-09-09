@@ -38,7 +38,9 @@ final class CatalogPromotionVariantsProvider implements CatalogPromotionVariants
             $configuration = $rule->getConfiguration();
 
             /** We can do that for now, as we have only one rule */
-            $variants = $this->getVariantsProducts($configuration, $variants);
+            if (array_key_exists('variants', $configuration)) {
+                $variants = $this->getVariantsProducts($configuration, $variants);
+            }
         }
 
         return $variants;
