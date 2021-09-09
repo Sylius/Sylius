@@ -49,6 +49,7 @@ final class ProductVariantContext implements Context
     public function iViewVariants(): void
     {
         $this->client->index();
+        $resp = $this->client->getLastResponse();
     }
 
     /**
@@ -88,17 +89,15 @@ final class ProductVariantContext implements Context
     }
 
     /**
-     * @Then /^I should see ("[^"]+" variant) and ("[^"]+" variant) are not discounted$/
+     * @Then /^I should see ("[^"]+" variant) is not discounted$/
      */
-    public function iShouldSeeVariantsAreNotDiscounted(ProductVariantInterface ...$variants): void
+    public function iShouldSeeVariantIsNotDiscounted(ProductVariantInterface $variant): void
     {
         $response = $this->client->getLastResponse();
 
-        foreach ($variants as $variant) {
-            $items = $this->responseChecker->getCollectionItemsWithValue($response, 'code', $variant->getCode());
-            $item = array_pop($items);
-            Assert::keyNotExists($item, 'appliedPromotions');
-        }
+        $items = $this->responseChecker->getCollectionItemsWithValue($response, 'code', $variant->getCode());
+        $item = array_pop($items);
+        Assert::keyNotExists($item, 'appliedPromotions');
     }
 
     private function findVariant(?ProductVariantInterface $variant): array
@@ -106,7 +105,8 @@ final class ProductVariantContext implements Context
         $response = $this->client->getLastResponse();
 
         if ($variant !== null && $this->responseChecker->hasValue($response, '@type', 'hydra:Collection')) {
-            return $this->responseChecker->getCollectionItemsWithValue($response, 'code', $variant->getCode())[0];
+            $returnValue = $this->responseChecker->getCollectionItemsWithValue($response, 'code', $variant->getCode());
+            return array_shift($returnValue);
         }
 
         return $this->responseChecker->getResponseContent($response);

@@ -26,7 +26,7 @@ class ChannelPricing implements ChannelPricingInterface
 
     protected ?int $originalPrice = null;
 
-    /** @var array */
+    /** @var ?array */
     protected $appliedPromotions = [];
 
     public function __toString(): string
@@ -86,6 +86,11 @@ class ChannelPricing implements ChannelPricingInterface
 
     public function addAppliedPromotion(array $promotion): void
     {
+        if ($this->appliedPromotions === null) {
+            $this->appliedPromotions = $promotion;
+            return;
+        }
+
         $this->appliedPromotions = array_merge_recursive($this->appliedPromotions, $promotion);
     }
 
