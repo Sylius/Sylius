@@ -22,4 +22,4 @@ Super-flexible promotions system with support of complex rules and actions. Coup
 Learn more
 ----------
 
-* :doc:`Promotions in the Sylius platform </book/orders/promotions>` - concept documentation
+* :doc:`Cart Promotions in the Sylius platform </book/orders/cart-promotions>` - concept documentation

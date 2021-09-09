@@ -4,7 +4,7 @@
 Coupons
 =======
 
-The concept of coupons is closely connected to the :doc:`Promotions Concept </book/orders/promotions>`.
+The concept of coupons is closely connected to the :doc:`Cart Promotions Concept </book/orders/cart-promotions>`.
 
 Coupon Parameters
 -----------------
@@ -114,6 +114,6 @@ The above piece of code will result in a set of 10 coupons that will work with t
 Learn more
 ----------
 
-* :doc:`Promotions Concept Documentation </book/orders/promotions>`
+* :doc:`Cart Promotions Concept Documentation </book/orders/cart-promotions>`
 * :doc:`promotion - Component Documentation </components_and_bundles/components/Promotion/index>`
 * :doc:`promotion - Bundle Documentation </components_and_bundles/bundles/SyliusPromotionBundle/index>`

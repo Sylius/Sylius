@@ -2,7 +2,7 @@
 * :doc:`/book/orders/cart-flow`
 * :doc:`/book/orders/taxation`
 * :doc:`/book/orders/adjustments`
-* :doc:`/book/orders/promotions`
+* :doc:`/book/orders/cart-promotions`
 * :doc:`/book/orders/coupons`
 * :doc:`/book/orders/payments`
 * :doc:`/book/orders/invoices`
