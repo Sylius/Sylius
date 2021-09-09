@@ -139,12 +139,10 @@ final class ProductContext implements Context
      */
     public function iShouldSeeTheProductPrice(int $price): void
     {
-        Assert::true(
-            $this->hasProductWithPrice(
-                [$this->responseChecker->getResponseContent($this->client->getLastResponse())],
-                $price,
-            )
-        );
+        Assert::true($this->hasProductWithPrice(
+            [$this->responseChecker->getResponseContent($this->client->getLastResponse())],
+            $price,
+        ));
     }
 
     /**
