@@ -178,6 +178,21 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I add invalid percentage discount action with non number in amount
+     */
+    public function iAddInvalidPercentageDiscountActionWithNonNumberInAmount(): void
+    {
+        $actions = [[
+            'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+            'configuration' => [
+                'amount' => 'text'
+            ],
+        ]];
+
+        $this->client->addRequestData('actions', $actions);
+    }
+
+    /**
      * @When I save my changes
      */
     public function iSaveMyChanges(): void
@@ -583,6 +598,17 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'The percentage discount amount must be between 0% and 100%.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that a discount amount should be a number
+     */
+    public function iShouldBeNotifiedThatDiscountAmountShouldBeNumber(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'The percentage discount amount must be a number.'
         );
     }
 
