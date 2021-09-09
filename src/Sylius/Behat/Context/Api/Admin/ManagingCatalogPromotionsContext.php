@@ -194,9 +194,9 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^it applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/
+     * @When /^I add rule that applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/
      */
-    public function iAddTheRuleConfiguredWithProductAnd(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
+    public function iAddRuleThatAppliesOnVariants(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
     {
         $rules = [[
             'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,

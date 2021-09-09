@@ -11,8 +11,8 @@ Feature: Editing catalog promotion
         And this product has "PHP T-Shirt" variant priced at "$20.00"
         And this product has "Kotlin T-Shirt" variant priced at "$40.00"
         And there is a catalog promotion with "christmas_sale" code and "Christmas sale" name
-        And it will be applied on "PHP T-Shirt" variant
-        And it will reduce price by "30%"
+        And it applies on "PHP T-Shirt" variant
+        And it reduces price by "30%"
         And I am logged in as an administrator
 
     @api @ui

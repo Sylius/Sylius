@@ -69,7 +69,7 @@ Feature: Validating a catalog promotion creation
         And I make it available in channel "United States"
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
-        And it applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And I add rule that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add catalog promotion action with nonexistent type
         And I try to add it
         Then I should be notified that type of action is invalid
@@ -83,7 +83,7 @@ Feature: Validating a catalog promotion creation
         And I make it available in channel "United States"
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
-        And it applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And I add rule that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add percentage discount action without amount configured
         And I try to add it
         Then I should be notified that a discount amount is required
@@ -97,7 +97,7 @@ Feature: Validating a catalog promotion creation
         And I make it available in channel "United States"
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
-        And it applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And I add rule that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add action that gives "120%" percentage discount
         And I try to add it
         Then I should be notified that a discount amount should be between 0% and 100%

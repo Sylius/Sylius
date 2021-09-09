@@ -86,9 +86,9 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^(it) will be applied on ("[^"]+" variant)$/
+     * @Given /^(it) applies on ("[^"]+" variant)$/
      */
-    public function itWillBeAppliedOnVariant(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface $variant): void
+    public function itAppliesOnVariant(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface $variant): void
     {
         /** @var CatalogPromotionRuleInterface $catalogPromotionRule */
         $catalogPromotionRule = $this->catalogPromotionRuleFactory->createNew();
@@ -101,7 +101,7 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^(it) will reduce price by ("[^"]+")$/
+     * @Given /^(it) reduces price by ("[^"]+")$/
      */
     public function itWillReducePrice(CatalogPromotionInterface $catalogPromotion, float $discount): void
     {
