@@ -74,17 +74,6 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^there is a catalog promotion "([^"]+)" available in ("[^"]+" channel)$/
-     */
-    public function thereIsACatalogPromotionAvailableInChannel(string $name, ChannelInterface $channel): void
-    {
-        $catalogPromotion = $this->createCatalogPromotion($name);
-        $catalogPromotion->addChannel($channel);
-
-        $this->entityManager->flush();
-    }
-
-    /**
      * @Given the catalog promotion :catalogPromotion is available in :channel
      */
     public function theCatalogPromotionIsAvailableIn(
