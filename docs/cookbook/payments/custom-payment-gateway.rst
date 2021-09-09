@@ -41,7 +41,7 @@ In the following example, a new gateway will be configured, which will send paym
             }
         }
 
-    And at the end of ``src/Resources/config/services.xml``, or, ``src/Resources/config/services.yaml`` add such a configuration for your gateway:
+    And at the end of ``src/Resources/config/services.xml`` or ``src/Resources/config/services.yaml`` add such a configuration for your gateway:
 
     .. code-block:: xml
 
@@ -52,9 +52,9 @@ In the following example, a new gateway will be configured, which will send paym
             <tag name="payum.gateway_factory_builder" factory="sylius_payment" />
         </service>
 
-    .. code-block:: yml
+    .. code-block:: yaml
 
-        #src/Resources/config/services.yaml
+        # src/Resources/config/services.yaml
         
         app.sylius_payment:
             class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
@@ -101,9 +101,9 @@ In the following example, a new gateway will be configured, which will send paym
             <tag name="form.type" />
         </service>
     
-    .. code-block:: yml
+    .. code-block:: yaml
     
-        #src/Resources/config/services.yaml
+        # src/Resources/config/services.yaml
         
         Acme\SyliusExamplePlugin\Form\Type\SyliusGatewayConfigurationType:
             tags:
@@ -380,7 +380,7 @@ so we can use an API Key provided in form.
     
     .. code-block:: yaml
     
-        #src/Resources/config/services.yaml
+        # src/Resources/config/services.yaml
         
         Acme\SyliusExamplePlugin\Payum\Action\CaptureAction:
             arguments:
