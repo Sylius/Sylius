@@ -256,9 +256,11 @@ sylius_fixtures:
                                 rules:
                                     -   type: 'for_variants'
                                         configuration:
-                                            - 't_shirt_size_s'
-                                            - 't_shirt_size_l'
+                                            variants:
+                                                - '000F_office_grey_jeans-variant-0'
+                                                - '000F_office_grey_jeans-variant-1'
+                                                - '000F_office_grey_jeans-variant-2'
                                 actions:
                                     -   type: 'percentage_discount'
                                         configuration:
-                                            - amount: 0.5
+                                            amount: 0.5
