@@ -36,6 +36,33 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:catalog_promotion:create</attribute>
                 </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="description">
+Example configuration for `for_variants` rule type:
+
+```
+{
+    "type": "for_variants",
+    "configuration": {
+        "variants": [
+            "string"
+        ]
+    }
+}
+```
+
+Example configuration for `percentage_discount` action type:
+
+```
+{
+    "type": "percentage_discount",
+    "configuration": {
+        "amount": float
+    }
+}
+```
+                    </attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -54,6 +81,33 @@
                 </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:catalog_promotion:update</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="description">
+Example configuration for `for_variants` rule type:
+
+```
+{
+    "type": "for_variants",
+    "configuration": {
+        "variants": [
+            "string"
+        ]
+    }
+}
+```
+
+Example configuration for `percentage_discount` action type:
+
+```
+{
+    "type": "percentage_discount",
+    "configuration": {
+        "amount": float
+    }
+}
+```
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
