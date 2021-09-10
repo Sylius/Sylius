@@ -10,10 +10,11 @@ Feature: Seeing applied catalog promotions on variants list
         And this product has "PHP T-Shirt" variant priced at "$20.00"
         And this product has "Kotlin T-Shirt" variant priced at "$40.00"
         And this product has "Python T-Shirt" variant priced at "$40.00"
-        And there is a catalog promotion with "Winter sale" name that applies on "PHP T-shirt" variant and reduces price by "50%"
+        And there is a catalog promotion "Winter sale" that reduces price by "50%" and applies on "PHP T-shirt" variant and "Python T-Shirt" variant
 
     @api
     Scenario: Seeing applied catalog promotion on variant
         When I view variants
         Then I should see "PHP T-Shirt" variant is discounted from "$20.00" to "$10.00" with "Winter sale" promotion
-        And I should see "Kotlin T-Shirt" variant and "Python T-Shirt" variant are not discounted
+        And I should see "Python T-Shirt" variant is discounted from "$40.00" to "$20.00" with "Winter sale" promotion
+        And I should see "Kotlin T-Shirt" variant is not discounted

@@ -10,7 +10,7 @@ Feature: Applying catalog promotions for variants
         And this product has "PHP T-Shirt" variant priced at "$20.00"
         And the store has a "Mug" configurable product
         And this product has "PHP Mug" variant priced at "$5.00"
-        And there is a catalog promotion with "Winter sale" name that applies on "PHP T-shirt" variant and reduces price by "30%"
+        And there is a catalog promotion "Winter sale" that reduces price by "30%" and applies on "PHP T-shirt" variant
 
     @api
     Scenario: Applying simple catalog promotions

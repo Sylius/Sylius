@@ -46,7 +46,7 @@ final class CatalogPromotionVariantsProviderSpec extends ObjectBehavior
         ProductVariantInterface $secondVariant
     ): void {
         $catalogPromotion->getRules()->willReturn(new ArrayCollection([$rule->getWrappedObject()]));
-        $rule->getConfiguration()->willReturn(['PHP_T_SHIRT_XS_WHITE', 'PHP_T_SHIRT_XS_BLACK', 'PHP_MUG']);
+        $rule->getConfiguration()->willReturn(['variants' => ['PHP_T_SHIRT_XS_WHITE', 'PHP_T_SHIRT_XS_BLACK', 'PHP_MUG']]);
 
         $productVariantRepository->findOneBy(['code' => 'PHP_T_SHIRT_XS_WHITE'])->willReturn($firstVariant);
         $productVariantRepository->findOneBy(['code' => 'PHP_T_SHIRT_XS_BLACK'])->willReturn($secondVariant);
