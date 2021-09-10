@@ -194,4 +194,4 @@ If you still need the methods of the original ``HomepageController``, then copy 
 
 From now on your ``customAction`` of the ``HomepageController`` will be available alongside the ``indexAction`` from the base class.
 
-.. include:: /customization/plugins.rst.inc
+.. include:: /customization/plugins.rst

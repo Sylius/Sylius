@@ -120,7 +120,7 @@ To actually use it overwrite ``sylius_admin_product_create_simple`` route like b
                     route:
                         name: sylius_admin_product_create_simple
 
-.. include:: /customization/plugins.rst.inc
+.. include:: /customization/plugins.rst
 
 Learn more
 ----------
