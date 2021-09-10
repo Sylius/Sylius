@@ -76,6 +76,21 @@ final class CatalogPromotionActionValidatorSpec extends ObjectBehavior
         $this->validate($action, new CatalogPromotionAction());
     }
 
+    function it_adds_violation_if_catalog_promotion_action_has_wrong_type_on_amount(
+        ExecutionContextInterface $executionContext,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
+        CatalogPromotionActionInterface $action
+    ): void {
+        $action->getType()->willReturn(CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT);
+        $action->getConfiguration()->willReturn(['amount' => 'text']);
+
+        $executionContext->buildViolation('sylius.catalog_promotion_action.percentage_discount.not_number')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('configuration.amount')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+
+        $this->validate($action, new CatalogPromotionAction());
+    }
+
     function it_does_nothing_if_catalog_promotion_action_is_valid(
         ExecutionContextInterface $executionContext,
         CatalogPromotionActionInterface $action
