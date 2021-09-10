@@ -49,7 +49,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that rule configuration is invalid
         And there should be an empty list of catalog promotions
 
-    @api
+    @api @ui @javascript
     Scenario: Trying to create a catalog promotion with not configured for variants rule
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
