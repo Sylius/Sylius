@@ -6,8 +6,7 @@ namespace Sylius\Bundle\CoreBundle\Formatter;
 
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 
-interface
-AppliedPromotionInformationFormatterInterface
+interface AppliedPromotionInformationFormatterInterface
 {
     public function format(CatalogPromotionInterface $catalogPromotion): array;
 }
