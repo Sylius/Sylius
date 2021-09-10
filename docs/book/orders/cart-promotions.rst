@@ -1,14 +1,14 @@
 .. index::
-   single: Promotions
+   single: Cart Promotions
 
-Promotions
-==========
+Cart Promotions
+===============
 
-The system of **Promotions** in **Sylius** is really flexible. It is a combination of promotion rules and actions.
+The system of **Cart Promotions** in **Sylius** is really flexible. It is a combination of promotion rules and actions.
 
-Promotions have a few parameters - a unique ``code``, ``name``, ``usageLimit``,
+Cart Promotions have a few parameters - a unique ``code``, ``name``, ``usageLimit``,
 the period of time when it works.
-There is a possibility to define **exclusive promotions** (no other can be applied if an exclusive promotion was applied)
+There is a possibility to define **exclusive cart promotions** (no other can be applied if an exclusive promotion was applied)
 and **priority** that is useful for them, because the exclusive promotion should get the top priority.
 
 .. tip::
@@ -20,7 +20,7 @@ and **priority** that is useful for them, because the exclusive promotion should
    **Promotion priorities** are numbers that you assign to the promotion. The larger the number, the higher the priority.
    So a promotion with priority 3 would be applied before a promotion with priority set to 1.
 
-   What can you use the priority for? Well, imagine that you have two different promotions, one's action is to give 10% discount
+   What can you use the priority for? Well, imagine that you have two different cart promotions, one's action is to give 10% discount
    on whole order and the other one gives 5$ discount from the order total. Business (and money) wise, which one should we apply first? ;)
 
 How to create a Promotion programmatically?
@@ -147,7 +147,7 @@ In the example below you can see how to create a simple Fixed Discount action, t
 
    All **Actions** are assigned to a Promotion and are executed while the Promotion is applied.
    This happens via the `CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Order/Processor/CompositeOrderProcessor.php>`_ service.
-   See details of **applying Promotions** below.
+   See details of **applying Cart Promotions** below.
 
 And finally after you have an **PromotionAction** and a **PromotionRule** assigned to the **Promotion** add it to the repository.
 
@@ -174,24 +174,24 @@ Each PromotionAction type has a very specific structure of its configuration arr
 | ``shipping_percentage_discount`` | ``['percentage' => $percentage]``                   |
 +----------------------------------+-----------------------------------------------------+
 
-Applying Promotions
--------------------
+Applying Cart Promotions
+------------------------
 
-Promotions in Sylius are handled by the `PromotionProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Promotion/Processor/PromotionProcessor.php>`_
+Cart Promotions in Sylius are handled by the `PromotionProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Promotion/Processor/PromotionProcessor.php>`_
 which inside uses the `PromotionApplicator <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Promotion/Action/PromotionApplicator.php>`_.
 
-The **PromotionProcessor**'s method ``process()`` is executed on the subject of promotions - an Order:
+The **PromotionProcessor**'s method ``process()`` is executed on the subject of cart promotions - an Order:
 
-* firstly it iterates over the promotions of a given Order and first **reverts** them all,
-* then it checks the eligibility of all promotions available in the system on the given Order
-* and finally it applies all the eligible promotions to that order.
+* firstly it iterates over the cart promotions of a given Order and first **reverts** them all,
+* then it checks the eligibility of all cart promotions available in the system on the given Order
+* and finally it applies all the eligible cart promotions to that order.
 
-How to apply a Promotion manually?
-''''''''''''''''''''''''''''''''''
+How to apply a Cart Promotion manually?
+'''''''''''''''''''''''''''''''''''''''
 
 Let's assume that you would like to **apply a 10% discount on everything** somewhere in your code.
 
-To achieve that, create a Promotion with an PromotionAction that gives 10% discount. You don't need rules.
+To achieve that, create a Cart Promotion with an PromotionAction that gives 10% discount. You don't need rules.
 
 .. code-block:: php
 

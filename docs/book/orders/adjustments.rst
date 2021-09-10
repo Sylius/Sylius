@@ -70,6 +70,6 @@ To see changes on the order you need to update it in the database.
 Learn more
 ----------
 
-* :doc:`Promotions - Concept Documentation </book/orders/promotions>`
+* :doc:`Cart Promotions - Concept Documentation </book/orders/cart-promotions>`
 * :doc:`Taxation - Concept Documentation </book/orders/taxation>`
 * :doc:`Shipments - Concept Documentation </book/orders/shipments>`
