@@ -20,13 +20,16 @@ final class AppliedPromotionInformationFormatter implements AppliedPromotionInfo
 {
     public function format(CatalogPromotionInterface $catalogPromotion): array
     {
+        $translationLabels = [];
+
         /** @var CatalogPromotionTranslationInterface $translation */
-        $translation = $catalogPromotion->getTranslations()->first();
+        foreach ($catalogPromotion->getTranslations() as $translation) {
+            $translationLabels[$translation->getLocale()] = ['name' => $translation->getLabel()];
+        }
+
         /** @var string $code */
         $code = $catalogPromotion->getCode();
-        /** @var string $name */
-        $name = $translation->getLabel();
 
-        return [$code => ['name' => $name]];
+        return [$code => $translationLabels];
     }
 }

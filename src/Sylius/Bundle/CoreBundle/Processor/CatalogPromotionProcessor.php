@@ -18,7 +18,6 @@ use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
 final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterface
 {
