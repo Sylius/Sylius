@@ -3,6 +3,7 @@
 * :doc:`/book/products/product_associations`
 * :doc:`/book/products/attributes`
 * :doc:`/book/products/pricing`
+* :doc:`/book/products/catalog_promotions`
 * :doc:`/book/products/taxons`
 * :doc:`/book/products/inventory`
 * :doc:`/book/products/multi_source_inventory`
