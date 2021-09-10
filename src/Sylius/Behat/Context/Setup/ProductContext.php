@@ -176,7 +176,9 @@ final class ProductContext implements Context
 
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
-        $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
+        if (!$productVariant->hasChannelPricingForChannel($channel)) {
+            $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
+        }
 
         $this->objectManager->flush();
     }
@@ -1053,6 +1055,18 @@ final class ProductContext implements Context
         }
 
         $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this product) is available in ("[^"]+" channel) and ("[^"]+" channel)$/
+     */
+    public function thisProductIsAvailableInChannels(ProductInterface $product, ChannelInterface ...$channels): void
+    {
+        foreach ($channels as $channel) {
+            $product->addChannel($channel);
+        }
+
+        $this->saveProduct($product);
     }
 
     private function getPriceFromString(string $price): int

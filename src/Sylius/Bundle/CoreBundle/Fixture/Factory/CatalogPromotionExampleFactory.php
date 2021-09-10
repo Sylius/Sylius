@@ -132,21 +132,7 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
             ->setAllowedTypes('channels', 'array')
             ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))
             ->setDefined('rules')
-            ->setNormalizer('rules', function (Options $options, array $rules): array {
-                if (empty($rules)) {
-                    return [[]];
-                }
-
-                return $rules;
-            })
             ->setDefined('actions')
-            ->setNormalizer('actions', function (Options $options, array $actions): array {
-                if (empty($actions)) {
-                    return [[]];
-                }
-
-                return $actions;
-            })
         ;
     }
 

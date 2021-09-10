@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Provider;
 
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
@@ -39,17 +38,17 @@ final class CatalogPromotionVariantsProvider implements CatalogPromotionVariants
 
             /** We can do that for now, as we have only one rule */
             if (array_key_exists('variants', $configuration)) {
-                $variants = $this->getVariantsProducts($configuration, $variants);
+                $variants = $this->getVariants($configuration['variants'], $variants);
             }
         }
 
         return $variants;
     }
 
-    private function getVariantsProducts(array $configuration, array $variants): array
+    private function getVariants(array $configuration, array $variants): array
     {
         /** @var string $variantCode */
-        foreach ($configuration['variants'] as $variantCode) {
+        foreach ($configuration as $variantCode) {
             /** @var ProductVariantInterface|null $variant */
             $variant = $this->productVariantRepository->findOneBy(['code' => $variantCode]);
             if ($variant === null) {

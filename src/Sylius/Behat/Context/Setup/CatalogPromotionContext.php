@@ -124,35 +124,72 @@ final class CatalogPromotionContext implements Context
         float $discount,
         ProductVariantInterface ...$variants
     ): void {
-        $catalogPromotion = $this->createCatalogPromotion($name);
         $variantCodes = [];
         foreach ($variants as $variant) {
             $variantCodes[] = $variant->getCode();
         }
 
-        /** @var CatalogPromotionRuleInterface $catalogPromotionRule */
-        $catalogPromotionRule = $this->catalogPromotionRuleFactory->createNew();
-        $catalogPromotionRule->setType(CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS);
-        $catalogPromotionRule->setConfiguration(['variants' => array_values($variantCodes)]);
-
-        $catalogPromotion->addRule($catalogPromotionRule);
-
-        /** @var CatalogPromotionActionInterface $catalogPromotionAction */
-        $catalogPromotionAction = $this->catalogPromotionActionFactory->createNew();
-        $catalogPromotionAction->setType(CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT);
-        $catalogPromotionAction->setConfiguration(['amount' => $discount]);
-
-        $catalogPromotion->addAction($catalogPromotionAction);
+        $this->createCatalogPromotion(
+            $name,
+            null,
+            [],
+            [[
+                'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+                'configuration' => ['variants' => $variantCodes],
+            ]],
+            [[
+                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'configuration' => ['amount' => $discount],
+            ]]
+        );
 
         $this->entityManager->flush();
     }
 
-    private function createCatalogPromotion(string $name, ?string $code = null): CatalogPromotionInterface
-    {
+    /**
+     * @Given /^there is a catalog promotion "([^"]*)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
+     */
+    public function thereIsACatalogPromotionAvailableInChannelThatReducesPriceByAndAppliesOnVariant(
+        string $name,
+        ChannelInterface $channel,
+        float $discount,
+        ProductVariantInterface $variant
+    ): void {
+        $this->createCatalogPromotion(
+            $name,
+            null,
+            [$channel->getCode()],
+            [[
+                'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+                'configuration' => ['variants' => [$variant->getCode()]],
+            ]],
+            [[
+                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'configuration' => ['amount' => $discount],
+            ]]
+        );
+
+        $this->entityManager->flush();
+    }
+
+    private function createCatalogPromotion(
+        string $name,
+        ?string $code = null,
+        array $channels = [],
+        array $rules = [],
+        array $actions = []
+    ): CatalogPromotionInterface {
+        if (empty($channels) && $this->sharedStorage->has('channel')) {
+            $channels = [$this->sharedStorage->get('channel')];
+        }
+
         /** @var CatalogPromotionInterface $catalogPromotion */
         $catalogPromotion = $this->catalogPromotionExampleFactory->create([
             'name' => $name,
             'code' => $code,
+            'channels' => $channels,
+            'actions' => $actions,
+            'rules' => $rules,
         ]);
 
         $this->entityManager->persist($catalogPromotion);
