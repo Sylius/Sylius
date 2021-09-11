@@ -24,8 +24,7 @@ final class CommandDenormalizer implements ContextAwareDenormalizerInterface
 {
     private const OBJECT_TO_POPULATE = 'object_to_populate';
 
-    /** @var DenormalizerInterface */
-    private $itemNormalizer;
+    private DenormalizerInterface $itemNormalizer;
 
     public function __construct(DenormalizerInterface $itemNormalizer)
     {
@@ -43,7 +42,18 @@ final class CommandDenormalizer implements ContextAwareDenormalizerInterface
             return $this->itemNormalizer->denormalize($data, $type, $format, $context);
         }
 
-        $parameters = (new \ReflectionClass($context['input']['class']))->getConstructor()->getParameters();
+        $constructor = (new \ReflectionClass($context['input']['class']))->getConstructor();
+
+        if (null !== $constructor) {
+            $this->assertConstructorArgumentsPresence($constructor, $data);
+        }
+
+        return $this->itemNormalizer->denormalize($data, $type, $format, $context);
+    }
+
+    private function assertConstructorArgumentsPresence(\ReflectionMethod $constructor, $data): void
+    {
+        $parameters = $constructor->getParameters();
 
         $missingFields = [];
         foreach ($parameters as $parameter) {
@@ -57,7 +67,5 @@ final class CommandDenormalizer implements ContextAwareDenormalizerInterface
                 sprintf('Request does not have the following required fields specified: %s.', implode(', ', $missingFields))
             );
         }
-
-        return $this->itemNormalizer->denormalize($data, $type, $format, $context);
     }
 }
