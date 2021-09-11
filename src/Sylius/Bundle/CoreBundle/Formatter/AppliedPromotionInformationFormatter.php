@@ -24,7 +24,7 @@ final class AppliedPromotionInformationFormatter implements AppliedPromotionInfo
 
         /** @var CatalogPromotionTranslationInterface $translation */
         foreach ($catalogPromotion->getTranslations() as $translation) {
-            $translationLabels[$translation->getLocale()] = ['name' => $translation->getLabel()];
+            $translationLabels[$translation->getLocale()] = ['name' => $translation->getLabel(), 'description' => $translation->getDescription()];
         }
 
         /** @var string $code */
