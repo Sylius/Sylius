@@ -19,7 +19,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -40,16 +43,20 @@ final class ProductContext implements Context
     /** @var IriConverterInterface */
     private $iriConverter;
 
+    private ChannelContextSetterInterface $channelContextSetter;
+
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
-        IriConverterInterface $iriConverter
+        IriConverterInterface $iriConverter,
+        ChannelContextSetterInterface $channelContextSetter
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
         $this->iriConverter = $iriConverter;
+        $this->channelContextSetter = $channelContextSetter;
     }
 
     /**
@@ -330,8 +337,33 @@ final class ProductContext implements Context
         );
     }
 
-    private function hasProductWithPrice(array $products, int $price, ?string $productCode = null): bool
-    {
+    /**
+     * @Then /^the visitor should see ("[^"]+") as the (price|original price) of the ("[^"]+" product) in the ("[^"]+" channel)$/
+     */
+    public function theVisitorShouldSeeAsThePriceOfTheProductInTheChannel(
+        int $price,
+        string $priceType,
+        ProductInterface $product,
+        ChannelInterface $channel
+    ): void {
+        $this->sharedStorage->set('token', null);
+        $this->sharedStorage->set('hostname', $channel->getHostname());
+        $this->channelContextSetter->setChannel($channel);
+
+        Assert::true($this->hasProductWithPrice(
+            [$this->responseChecker->getResponseContent($this->client->show($product->getCode()))],
+            $price,
+            null,
+            StringInflector::nameToCamelCase($priceType)
+        ));
+    }
+
+    private function hasProductWithPrice(
+        array $products,
+        int $price,
+        ?string $productCode = null,
+        string $priceType = 'price'
+    ): bool {
         foreach ($products as $product) {
             if ($productCode !== null && $product['code'] !== $productCode) {
                 continue;
@@ -341,7 +373,7 @@ final class ProductContext implements Context
                 $this->client->executeCustomRequest(Request::custom($variantIri, HttpRequest::METHOD_GET));
 
                 /** @var int $variantPrice */
-                $variantPrice = $this->responseChecker->getValue($this->client->getLastResponse(), 'price');
+                $variantPrice = $this->responseChecker->getValue($this->client->getLastResponse(), $priceType);
 
                 if ($price === $variantPrice) {
                     return true;

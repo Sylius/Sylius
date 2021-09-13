@@ -73,6 +73,8 @@ interface ApiClientInterface
 
     public function updateRequestData(array $data): void;
 
+    public function getContent(): array;
+
     public function getLastResponse(): Response;
 
     public function getToken(): ?string;

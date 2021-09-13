@@ -334,6 +334,60 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I make (this catalog promotion) unavailable in the ("[^"]+" channel)$/
+     */
+    public function iMakeThisCatalogPromotionUnavailableInTheChannel(
+        CatalogPromotionInterface $catalogPromotion,
+        ChannelInterface $channel
+    ): void {
+        $catalogPromotionCode = $catalogPromotion->getCode();
+        Assert::notNull($catalogPromotionCode);
+
+        $this->client->buildUpdateRequest($catalogPromotionCode);
+        $content = $this->client->getContent();
+        foreach (array_keys($content['channels'], $this->iriConverter->getIriFromItem($channel)) as $key) {
+            unset($content['channels'][$key]);
+        }
+
+        $this->client->setRequestData($content);
+        $this->client->update();
+    }
+
+    /**
+     * @When /^I make (this catalog promotion) available in the ("[^"]+" channel)$/
+     */
+    public function iMakeThisCatalogPromotionAvailableInTheChannel(
+        CatalogPromotionInterface $catalogPromotion,
+        ChannelInterface $channel
+    ): void {
+        $this->client->buildUpdateRequest($catalogPromotion->getCode());
+        $this->client->updateRequestData(['channels' => $this->iriConverter->getIriFromItem($channel)]);
+        $this->client->update();
+    }
+
+    /**
+     * @When /^I switch (this catalog promotion) availability from the ("[^"]+" channel) to the ("[^"]+" channel)$/
+     */
+    public function iSwitchThisCatalogPromotionAvailabilityFromTheChannelToTheChannel(
+        CatalogPromotionInterface $catalogPromotion,
+        ChannelInterface $removedChannel,
+        ChannelInterface $addedChannel
+    ): void {
+        $catalogPromotionCode = $catalogPromotion->getCode();
+        Assert::notNull($catalogPromotionCode);
+
+        $this->client->buildUpdateRequest($catalogPromotionCode);
+        $content = $this->client->getContent();
+        foreach (array_keys($content['channels'], $this->iriConverter->getIriFromItem($removedChannel)) as $key) {
+            unset($content['channels'][$key]);
+        }
+
+        $content['channels'][] = $this->iriConverter->getIriFromItem($addedChannel);
+        $this->client->setRequestData($content);
+        $this->client->update();
+    }
+
+    /**
      * @Then there should be :amount new catalog promotion on the list
      * @Then there should be :amount catalog promotions on the list
      * @Then there should be an empty list of catalog promotions
