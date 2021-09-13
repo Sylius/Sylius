@@ -101,6 +101,30 @@ final class CommandDenormalizerSpec extends ObjectBehavior
         ;
     }
 
+    function it_does_not_check_parameters_if_there_is_no_constructor(
+        DenormalizerInterface $baseNormalizer
+    ): void {
+        $baseNormalizer
+            ->denormalize(
+                [],
+                Customer::class,
+                null,
+                ['input' => ['class' => \stdClass::class]]
+            )
+            ->willReturn(['key' => 'value'])
+        ;
+
+        $this
+            ->denormalize(
+                [],
+                Customer::class,
+                null,
+                ['input' => ['class' => \stdClass::class]]
+            )
+            ->shouldReturn(['key' => 'value'])
+        ;
+    }
+
     function it_implements_context_aware_denormalizer_interface(): void
     {
         $this->shouldImplement(ContextAwareDenormalizerInterface::class);
