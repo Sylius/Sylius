@@ -23,7 +23,7 @@ final class CatalogPromotionAction extends Constraint
 
     public string $notInRangeDiscount = 'sylius.catalog_promotion_action.percentage_discount.not_in_range';
 
-    public string $notNumber = 'sylius.catalog_promotion_action.percentage_discount.not_number';
+    public string $notNumber = 'sylius.catalog_promotion_action.percentage_discount.not_number_empty';
 
     public function validatedBy(): string
     {
