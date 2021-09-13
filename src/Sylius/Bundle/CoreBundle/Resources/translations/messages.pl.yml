@@ -9,6 +9,8 @@ sylius:
             title: Tytuł
         cart:
             coupon: Kupon
+        catalog_promotion:
+            channels: Kanały
         checkout:
             addressing:
                 different_billing_address: Użyć innego adresu do rozliczeń?

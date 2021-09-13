@@ -5,6 +5,8 @@ sylius:
     form:
         block:
             body: Saturs
+        catalog_promotion:
+            channels: Kanāli
         promotion:
             channels: Kanāli
         group:

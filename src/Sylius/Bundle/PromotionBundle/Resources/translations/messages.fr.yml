@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Description
+            name: Nom
         promotion:
             actions: Actions
             add_action: Ajouter une action

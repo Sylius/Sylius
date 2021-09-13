@@ -9,6 +9,8 @@ sylius:
             title: Titel
         cart:
             coupon: Coupon
+        catalog_promotion:
+            channels: Kanalen
         checkout:
             addressing:
                 different_billing_address: Gebruik een ander adres voor facturering?

@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: 描述
+            name: 名称
         promotion:
             actions: 操作
             add_action: 添加操作

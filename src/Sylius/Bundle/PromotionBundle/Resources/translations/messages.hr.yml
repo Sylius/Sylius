@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Opis
+            name: Naziv regije
         promotion:
             actions: Akcije
             add_action: Dodajte akciju

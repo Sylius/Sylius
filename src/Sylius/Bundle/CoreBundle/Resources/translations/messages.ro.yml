@@ -9,6 +9,8 @@ sylius:
             title: Titlu
         cart:
             coupon: Cod promoțional
+        catalog_promotion:
+            channels: Canale
         checkout:
             addressing:
                 different_billing_address: Folosiți o adresă de facturare diferită?

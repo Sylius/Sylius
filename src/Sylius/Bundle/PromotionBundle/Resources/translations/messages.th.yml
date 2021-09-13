@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: คำอธิบาย
+            name: ชื่อภาษา
         promotion:
             actions: ดำเนินการ
             add_action: เพิ่มการลดราคา

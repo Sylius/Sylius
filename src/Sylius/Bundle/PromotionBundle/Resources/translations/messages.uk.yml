@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Опис
+            name: Назва регіону
         promotion:
             actions: Дії
             add_action: Додати дію

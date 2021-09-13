@@ -3,6 +3,8 @@
 
 sylius:
     form:
+        catalog_promotion:
+            channels: Kanale
         promotion:
             channels: Kanale
         group:
