@@ -5,7 +5,7 @@ Catalog Promotions
 ==================
 
 The **Catalog Promotions** system in **Sylius** is a new way of dealing with promotions on multiple products.
-If you get used to `Cart Promotions </book/orders/cart-promotions>` this will be something familiar to you.
+If you get used to :doc:`Cart Promotions </book/orders/cart-promotions>` this will be something familiar to you.
 
 It is managed by combination of promotion rules and actions, where you can specify on which e.g. products or taxons
 you can specify the Catalog Promotion with your custom actions as well as actions like percentage discount.
@@ -115,7 +115,7 @@ After we get to know with some basics of Catalog Promotion let's see how we can 
 
 .. tip::
 
-    Check this doc `Authorization </book/api/authorization>` if you are having trouble with login in.
+    Check this doc :doc:`Authorization </book/api/authorization>` if you are having trouble with login in.
 
 And let's call the POST endpoint to create very basic catalog promotion:
 
