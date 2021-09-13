@@ -1,8 +1,8 @@
 @applying_catalog_promotions
 Feature: Reapplying catalog promotions after editing its channels
-    In order to be attracted to products by its current prices
-    As a Visitor
-    I want to see current discounted prices of products in proper channel
+    In order to have proper discounts in different channels
+    As a Store Owner
+    I want to have discounts reapplied in product catalog once the channels of catalog promotion changes
 
     Background:
         Given the store operates on a channel named "Web-US" with hostname "web-us"
@@ -12,28 +12,23 @@ Feature: Reapplying catalog promotions after editing its channels
         And "PHP T-Shirt" variant priced at "$30.00" in "Web-GB" channel
         And this product is available in "Web-US" channel and "Web-GB" channel
         And there is a catalog promotion "Winter sale" available in "Web-US" channel that reduces price by "30%" and applies on "PHP T-shirt" variant
-        And I am currently in the "Web-US" channel
 
     @todo
     Scenario: Removing applied catalog promotion after removing its channel
-        Given this catalog promotion is no longer available in "Web-US" channel
-        When I view product "T-Shirt"
-        Then I should see the product price "$20.00"
-        And I should see the product original price "$20.00"
+        When I make this catalog promotion unavailable in the "Web-US" channel
+        Then the visitor should see "$20.00" as the price of the product "T-Shirt" in the "Web-US" channel
+        And the visitor should see "$20.00" as the original price of the product "T-Shirt" in the "Web-US" channel
 
     @todo
     Scenario: Reapplying catalog promotion after adding new channel to them
-        Given this catalog promotion is available in "Web-GB" channel
-        When I change my current channel to "Web-GB"
-        And I view product "T-Shirt"
-        Then I should see the product price "$21.00"
-        And I should see the product original price "$30.00"
+        When I make this catalog promotion available in the "Web-GB" channel
+        Then the visitor should see "$21.00" as the price of the product "T-Shirt" in the "Web-GB" channel
+        And the visitor should see "$30.00" as the original price of the product "T-Shirt" in the "Web-GB" channel
 
     @todo
-    Scenario: Reapplying catalog promotion after switching channels
-        Given this catalog promotion is no longer available in "Web-US" channel
-        And this catalog promotion is available in "Web-GB" channel
-        When I view product "T-Shirt"
-        Then I should see the product price "$20.00"
-        And I should see the product original price "$20.00"
-        And I should see the product price "$21.00" with original price "$30.00" in "Web-GB" channel
+    Scenario: Reapplying catalog promotion after switching availability in channels
+        When I switch this catalog promotion availability from the "Web-US" channel to the "Web-GB" channel
+        Then the visitor should see "$20.00" as the price of the product "T-Shirt" in the "Web-US" channel
+        And the visitor should see "$20.00" as the original price of the product "T-Shirt" in the "Web-US" channel
+        And the visitor should see "$21.00" as the price of the product "T-Shirt" in the "Web-GB" channel
+        And the visitor should see "$30.00" as the original price of the product "T-Shirt" in the "Web-GB" channel
