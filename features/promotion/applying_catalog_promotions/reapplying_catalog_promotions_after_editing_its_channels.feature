@@ -12,23 +12,24 @@ Feature: Reapplying catalog promotions after editing its channels
         And "PHP T-Shirt" variant priced at "$30.00" in "Web-GB" channel
         And this product is available in "Web-US" channel and "Web-GB" channel
         And there is a catalog promotion "Winter sale" available in "Web-US" channel that reduces price by "30%" and applies on "PHP T-shirt" variant
+        And I am logged in as an administrator
 
     @todo
     Scenario: Removing applied catalog promotion after removing its channel
         When I make this catalog promotion unavailable in the "Web-US" channel
-        Then the visitor should see "$20.00" as the price of the product "T-Shirt" in the "Web-US" channel
-        And the visitor should see "$20.00" as the original price of the product "T-Shirt" in the "Web-US" channel
+        Then the visitor should see "$20.00" as the price of the "T-Shirt" product in the "Web-US" channel
+        And the visitor should see "$20.00" as the original price of the "T-Shirt" product in the "Web-US" channel
 
     @todo
     Scenario: Reapplying catalog promotion after adding new channel to them
         When I make this catalog promotion available in the "Web-GB" channel
-        Then the visitor should see "$21.00" as the price of the product "T-Shirt" in the "Web-GB" channel
-        And the visitor should see "$30.00" as the original price of the product "T-Shirt" in the "Web-GB" channel
+        Then the visitor should see "$21.00" as the price of the "T-Shirt" product in the "Web-GB" channel
+        And the visitor should see "$30.00" as the original price of the "T-Shirt" product in the "Web-GB" channel
 
     @todo
     Scenario: Reapplying catalog promotion after switching availability in channels
         When I switch this catalog promotion availability from the "Web-US" channel to the "Web-GB" channel
-        Then the visitor should see "$20.00" as the price of the product "T-Shirt" in the "Web-US" channel
-        And the visitor should see "$20.00" as the original price of the product "T-Shirt" in the "Web-US" channel
-        And the visitor should see "$21.00" as the price of the product "T-Shirt" in the "Web-GB" channel
-        And the visitor should see "$30.00" as the original price of the product "T-Shirt" in the "Web-GB" channel
+        Then the visitor should see "$20.00" as the price of the "T-Shirt" product in the "Web-US" channel
+        And the visitor should see "$20.00" as the original price of the "T-Shirt" product in the "Web-US" channel
+        And the visitor should see "$21.00" as the price of the "T-Shirt" product in the "Web-GB" channel
+        And the visitor should see "$30.00" as the original price of the "T-Shirt" product in the "Web-GB" channel
