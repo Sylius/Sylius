@@ -190,6 +190,7 @@ final class CatalogPromotionContext implements Context
             'channels' => $channels,
             'actions' => $actions,
             'rules' => $rules,
+            'description' => $name . ' description'
         ]);
 
         $this->entityManager->persist($catalogPromotion);

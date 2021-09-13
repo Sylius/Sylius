@@ -34,8 +34,13 @@ final class AppliedPromotionInformationFormatterSpec extends ObjectBehavior
 
         $translation->getLabel()->willReturn('Winter sale');
         $translation->getLocale()->willReturn('en_US');
+        $translation->getDescription()->willReturn('Winter sale description');
         $catalogPromotion->getCode()->willReturn('winter_sale');
 
-        $this->format($catalogPromotion)->shouldReturn(['winter_sale' => ['en_US' => ['name' => 'Winter sale']]]);
+        $this->format($catalogPromotion)->shouldReturn([
+            'winter_sale' => [
+                'en_US' => ['name' => 'Winter sale', 'description' => 'Winter sale description']
+            ]
+        ]);
     }
 }
