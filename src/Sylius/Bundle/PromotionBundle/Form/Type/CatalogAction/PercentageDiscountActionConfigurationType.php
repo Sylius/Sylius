@@ -7,6 +7,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type\CatalogAction;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class PercentageDiscountActionConfigurationType extends AbstractType
 {
@@ -15,6 +16,9 @@ final class PercentageDiscountActionConfigurationType extends AbstractType
         $builder
             ->add('amount', PercentType::class, [
                 'label' => 'sylius.ui.amount',
+                'constraints' => [
+                    new NotBlank(['groups' => ['sylius']])
+                ]
             ])
         ;
     }
