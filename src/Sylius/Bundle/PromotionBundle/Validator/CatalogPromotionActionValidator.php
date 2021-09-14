@@ -36,13 +36,13 @@ final class CatalogPromotionActionValidator extends ConstraintValidator
         $configuration = $value->getConfiguration();
 
         if (!array_key_exists('amount', $configuration)) {
-            $this->context->buildViolation($constraint->notNumber)->atPath('configuration.amount')->addViolation();
+            $this->context->buildViolation($constraint->notNumberOrEmpty)->atPath('configuration.amount')->addViolation();
 
             return;
         }
 
         if (!is_float($configuration['amount']) && !is_integer($configuration['amount'])) {
-            $this->context->buildViolation($constraint->notNumber)->atPath('configuration.amount')->addViolation();
+            $this->context->buildViolation($constraint->notNumberOrEmpty)->atPath('configuration.amount')->addViolation();
 
             return;
         }

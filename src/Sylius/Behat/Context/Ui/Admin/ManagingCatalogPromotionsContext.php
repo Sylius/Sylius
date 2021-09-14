@@ -226,7 +226,7 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @When I add invalid percentage discount action with non number in amount
      */
-    public function iAddInvalidPercentageDiscountActionWithNonNumberInAmount()
+    public function iAddInvalidPercentageDiscountActionWithNonNumberInAmount(): void
     {
         $this->formElement->addAction();
         $this->formElement->specifyLastActionDiscount('alot');
@@ -235,15 +235,15 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @Then I should be notified that a discount amount should be between 0% and 100%
      */
-    public function iShouldBeNotifiedThatADiscountAmountShouldBeBetweenAnd(): void
+    public function iShouldBeNotifiedThatADiscountAmountShouldBeBetween0And100Percent(): void
     {
         Assert::same($this->formElement->getValidationMessageForAction(), 'The percentage discount amount must be between 0% and 100%.');
     }
 
     /**
-     * @Then I should be notified that a discount amount should be a number and can not be empty
+     * @Then I should be notified that a discount amount should be a number and cannot be empty
      */
-    public function iShouldBeNotifiedThatADiscountAmountShouldBeANumber()
+    public function iShouldBeNotifiedThatADiscountAmountShouldBeANumber(): void
     {
         Assert::same($this->formElement->getValidationMessageForAction(), 'The percentage discount amount must be a number and can not be empty.');
     }

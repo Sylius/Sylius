@@ -61,7 +61,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that at least 1 variant is required
         And there should be an empty list of catalog promotions
 
-    @api @no-api
+    @api
     Scenario: Trying to create a catalog promotion with invalid type of action
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -86,7 +86,7 @@ Feature: Validating a catalog promotion creation
         And I add rule that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add percentage discount action without amount configured
         And I try to add it
-        Then I should be notified that a discount amount should be a number and can not be empty
+        Then I should be notified that a discount amount should be a number and cannot be empty
         And there should be an empty list of catalog promotions
 
     @api @ui @javascript
@@ -111,5 +111,5 @@ Feature: Validating a catalog promotion creation
         And I add rule that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add invalid percentage discount action with non number in amount
         And I try to add it
-        Then I should be notified that a discount amount should be a number and can not be empty
+        Then I should be notified that a discount amount should be a number and cannot be empty
         And there should be an empty list of catalog promotions

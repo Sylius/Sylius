@@ -54,7 +54,7 @@ final class CatalogPromotionActionValidatorSpec extends ObjectBehavior
         $action->getType()->willReturn(CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT);
         $action->getConfiguration()->willReturn([]);
 
-        $executionContext->buildViolation('sylius.catalog_promotion_action.percentage_discount.not_number_empty')->willReturn($constraintViolationBuilder);
+        $executionContext->buildViolation('sylius.catalog_promotion_action.percentage_discount.not_number_or_empty')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('configuration.amount')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
@@ -84,7 +84,7 @@ final class CatalogPromotionActionValidatorSpec extends ObjectBehavior
         $action->getType()->willReturn(CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT);
         $action->getConfiguration()->willReturn(['amount' => 'text']);
 
-        $executionContext->buildViolation('sylius.catalog_promotion_action.percentage_discount.not_number_empty')->willReturn($constraintViolationBuilder);
+        $executionContext->buildViolation('sylius.catalog_promotion_action.percentage_discount.not_number_or_empty')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('configuration.amount')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 

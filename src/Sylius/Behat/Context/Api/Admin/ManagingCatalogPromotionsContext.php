@@ -602,7 +602,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that a discount amount should be a number and can not be empty
+     * @Then I should be notified that a discount amount should be a number and cannot be empty
      */
     public function iShouldBeNotifiedThatDiscountAmountShouldBeNumber(): void
     {

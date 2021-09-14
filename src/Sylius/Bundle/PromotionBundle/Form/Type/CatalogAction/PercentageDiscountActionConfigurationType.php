@@ -17,7 +17,7 @@ final class PercentageDiscountActionConfigurationType extends AbstractType
             ->add('amount', PercentType::class, [
                 'label' => 'sylius.ui.amount',
                 'constraints' => [
-                    new NotBlank(['groups' => ['sylius']])
+                    new NotBlank(['groups' => ['sylius']]),
                 ]
             ])
         ;
