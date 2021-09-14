@@ -104,4 +104,9 @@ class ChannelPricing implements ChannelPricingInterface
     {
         return $this->appliedPromotions;
     }
+
+    public function clearAppliedPromotions(): void
+    {
+        $this->appliedPromotions = [];
+    }
 }

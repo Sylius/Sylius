@@ -22,7 +22,7 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
+use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
@@ -361,7 +361,9 @@ final class ManagingCatalogPromotionsContext implements Context
         ChannelInterface $channel
     ): void {
         $this->client->buildUpdateRequest($catalogPromotion->getCode());
-        $this->client->updateRequestData(['channels' => $this->iriConverter->getIriFromItem($channel)]);
+        $content = $this->client->getContent();
+        $content['channels'][] = $this->iriConverter->getIriFromItem($channel);
+        $this->client->updateRequestData(['channels' => $content['channels']]);
         $this->client->update();
     }
 
@@ -465,7 +467,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function thisCatalogPromotionShouldBeUsable(): void
     {
-        Assert::isInstanceOf($this->messageBus->getDispatchedMessages()[0]['message'], CatalogPromotionUpdated::class);
+        Assert::isInstanceOf($this->messageBus->getDispatchedMessages()[0]['message'], CatalogPromotionCreated::class);
     }
 
     /**

@@ -94,9 +94,17 @@
         <service id="Sylius\Bundle\CoreBundle\EventListener\CatalogPromotionEventListener">
             <argument type="service" id="sylius.event_bus" />
             <tag name="doctrine.event_listener" event="postPersist" connection="default" />
+            <tag name="doctrine.event_listener" event="postUpdate" connection="default" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Listener\CatalogPromotionCreateListener">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface" />
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+            <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Listener\CatalogPromotionUpdateListener">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface" />
             <argument type="service" id="sylius.repository.catalog_promotion" />
             <tag name="messenger.message_handler" bus="sylius.event_bus" />

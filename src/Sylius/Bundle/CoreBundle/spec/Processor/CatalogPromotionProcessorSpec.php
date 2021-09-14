@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\Processor;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
@@ -21,7 +20,6 @@ use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
 final class CatalogPromotionProcessorSpec extends ObjectBehavior
 {
@@ -42,7 +40,7 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
         $this->shouldImplement(CatalogPromotionProcessorInterface::class);
     }
 
-    function it_always_applies_50_percent_catalog_promotion_on_products_from_eligible_taxon(
+    function it_applies_catalog_promotion_on_eligible_variants(
         CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
         CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
         EntityManagerInterface $entityManager,
@@ -63,7 +61,7 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
         $this->process($catalogPromotion);
     }
 
-    function it_does_nothing_if_there_is_are_no_eligible_variants(
+    function it_does_nothing_if_there_are_no_eligible_variants(
         CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
         EntityManagerInterface $entityManager,
         CatalogPromotionInterface $catalogPromotion

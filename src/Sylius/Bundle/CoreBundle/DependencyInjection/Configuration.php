@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Sylius\Bundle\CoreBundle\Controller\ProductTaxonController;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\AvatarImageRepository;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\ChannelPricingRepository;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Bundle\CoreBundle\Form\Type\ShopBillingDataType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -135,7 +136,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(ChannelPricingInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(ChannelPricingRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('form')->defaultValue(ChannelPricingType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
