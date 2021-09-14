@@ -1,12 +1,16 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 {% set product_variant = item.variant %}
+{% set pricing_for_active_channel = product_variant.getChannelPricingForChannel(cart.channel) %}
 
 <tr {{ sylius_test_html_attribute('cart-product-row', item.productName) }}>
     <td class="single line" {{ sylius_test_html_attribute('cart-item', loop_index|default(null) ) }}>
         {% include '@SyliusShop/Product/_info.html.twig' with {'variant': product_variant} %}
     </td>
     <td class="right aligned">
+        {% if pricing_for_active_channel.originalPrice is not null %}
+            <span class="old-price">{{ money.convertAndFormat(pricing_for_active_channel.originalPrice) }}</span>
+        {% endif %}
         {% if item.unitPrice != item.discountedUnitPrice %}
             <span class="sylius-regular-unit-price" {{ sylius_test_html_attribute('cart-product-regular-unit-price') }}>
                 <span class="old-price">{{ money.convertAndFormat(item.unitPrice) }}</span>

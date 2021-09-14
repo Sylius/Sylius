@@ -52,8 +52,9 @@ final class CartContext implements Context
 
     /**
      * @When /^I see the summary of my (?:|previous )cart$/
+     * @When /^I check details of my cart$/
      */
-    public function iOpenCartSummaryPage()
+    public function iOpenCartSummaryPage(): void
     {
         $this->summaryPage->open();
     }
@@ -408,11 +409,28 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^I should see "([^"]+)" with unit price ("[^"]+") in my cart$/
+     * @Then /^I should see(?:| also) "([^"]+)" with unit price ("[^"]+") in my cart$/
      */
-    public function iShouldSeeProductWithUnitPriceInMyCart($productName, $unitPrice)
+    public function iShouldSeeProductWithUnitPriceInMyCart($productName, $unitPrice): void
     {
         Assert::same($this->summaryPage->getItemUnitPrice($productName), $unitPrice);
+    }
+
+    /**
+     * @Then /^I should see "([^"]+)" with original price ("[^"]+") in my cart$/
+     */
+    public function iShouldSeeWithOriginalPriceInMyCart(string $productName, int $originalPrice): void
+    {
+        Assert::same($this->summaryPage->getItemUnitRegularPrice($productName), $originalPrice);
+    }
+
+    /**
+     * @Then /^I should see "([^"]+)" only with unit price ("[^"]+") in my cart$/
+     */
+    public function iShouldSeeOnlyWithUnitPriceInMyCart(string $productName, int $unitPrice): void
+    {
+        $this->iShouldSeeProductWithUnitPriceInMyCart($productName, $unitPrice);
+        Assert::false($this->summaryPage->hasOriginalPrice($productName));
     }
 
     /**
