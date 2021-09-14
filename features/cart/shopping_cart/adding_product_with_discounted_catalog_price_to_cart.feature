@@ -10,7 +10,7 @@ Feature: Adding a simple product with discounted catalog price to the cart
         And the store has a product "T-Shirt" priced at "$20"
         And there is a catalog promotion "Winter sale" that reduces price by "25%" and applies on "T-Shirt" variant
 
-    @ui
+    @ui @api
     Scenario: Adding a simple product with discounted catalog price to the cart
         When I add product "T-Shirt" to the cart
         And I add product "Mug" to the cart
