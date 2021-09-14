@@ -94,4 +94,11 @@ final class ChannelPricingSpec extends ObjectBehavior
             'extra_sale' => ['name' => 'Extra sale'],
         ]);
     }
+
+    function it_can_clear_applied_promotions(): void
+    {
+        $this->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']]);
+        $this->clearAppliedPromotions();
+        $this->getAppliedPromotions()->shouldReturn([]);
+    }
 }

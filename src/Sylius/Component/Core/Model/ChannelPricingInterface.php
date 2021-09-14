@@ -43,4 +43,6 @@ interface ChannelPricingInterface extends ResourceInterface
     public function removeAppliedPromotion(string $promotionCode): void;
 
     public function getAppliedPromotions(): array;
+
+    public function clearAppliedPromotions(): void;
 }
