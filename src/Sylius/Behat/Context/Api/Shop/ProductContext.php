@@ -338,7 +338,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then /^the visitor should see ("[^"]+") as the (price|original price) of the ("[^"]+" product) in the ("[^"]+" channel)$/
+     * @Then /^the visitor should(?:| still) see ("[^"]+") as the (price|original price) of the ("[^"]+" product) in the ("[^"]+" channel)$/
      */
     public function theVisitorShouldSeeAsThePriceOfTheProductInTheChannel(
         int $price,
