@@ -166,6 +166,16 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then I should see this product has no catalog promotion applied
+     */
+    public function iShouldSeeThisProductHasNoCatalogPromotionApplied(): void
+    {
+        $variant = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+
+        Assert::same($variant['originalPrice'], $variant['price']);
+    }
+
+    /**
      * @Then I should not see any original price
      */
     public function iShouldNotSeeAnyOriginalPrice(): void

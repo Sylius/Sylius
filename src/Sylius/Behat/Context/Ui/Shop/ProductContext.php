@@ -352,7 +352,18 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then /^I should see ("[^"]+" variant) is not discounted$/
+     */
+    public function iShouldSeeVariantIsNotDiscounted(ProductVariantInterface $variant): void
+    {
+        $this->showPage->selectVariant($variant->getName());
+
+        Assert::same($this->showPage->getPrice(), $this->showPage->getOriginalPrice());
+    }
+
+    /**
      * @Then I should not see any original price
+     * @Then I should see this product has no catalog promotion applied
      */
     public function iShouldNotSeeTheProductOriginalPrice(): void
     {
@@ -369,10 +380,33 @@ final class ProductContext implements Context
 
     /**
      * @When I select :variantName variant
+     * @When I view :variantName variant
      */
-    public function iSelectVariant($variantName)
+    public function iSelectVariant($variantName): void
     {
         $this->showPage->selectVariant($variantName);
+    }
+
+    /**
+     * @When I view variants
+     */
+    public function iViewVariants(): void
+    {
+        //intentionally left empty
+    }
+
+    /**
+     * @Then /^I should see ("[^"]+" variant) is discounted from "([^"]+)" to "([^"]+)" with "[^"]+" promotion$/
+     */
+    public function iShouldSeeVariantIsDiscountedFromToWithPromotion(
+        ProductVariantInterface $variant,
+        string $originalPrice,
+        string $price
+    ): void {
+        $this->showPage->selectVariant($variant->getName());
+
+        Assert::same($this->showPage->getPrice(), $price);
+        Assert::same($this->showPage->getOriginalPrice(), $originalPrice);
     }
 
     /**
