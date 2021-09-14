@@ -164,6 +164,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When /^I add action that gives ("[^"]+") percentage discount$/
+     * @When /^I edit its action so that it reduces price by ("[^"]+")$/
      */
     public function iAddActionThatGivesPercentageDiscount(float $amount): void
     {
