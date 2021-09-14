@@ -156,6 +156,8 @@ You can check if the catalog promotion exists by using GET endpoint
     Take into account that both the API and Programmatically added catalog promotions in this shape are not really useful.
     You need to add configurations to them so they make any business valued changes.
 
+.. _how-to-create-a-catalog-promotion-rule-and-action:
+
 How to create a Catalog Promotion Rule and Action?
 --------------------------------------------------
 
@@ -272,6 +274,28 @@ Catalog Promotion Actions configuration reference
 +===============================+====================================================================+
 | ``percentage_discount``       | ``['amount' => $amountFloat]``                                     |
 +-------------------------------+--------------------------------------------------------------------+
+
+How the Catalog Promotions are applied?
+---------------------------------------
+
+The Catalog Promotion application process utilises `Doctrine events <https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html>`_.
+When a new Promotion is created there is an event ``postPersist()`` in `CatalogPromotionEventListener <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/EventListener/CatalogPromotionEventListener.php>`_
+that dispatches another ``CatalogPromotionUpdated`` event to event bus.
+
+This event is handled by `CatalogPromotionUpdateListener <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Listener/CatalogPromotionUpdateListener.php>`_ which resolves the appropriate ``CatalogPromotion``.
+With the needed data and configuration from ``CatalogPromotion`` we can now process the ``Product`` and ``ProductVariant`` entities.
+
+The changes are first handled in `CatalogPromotionProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Processor/CatalogPromotionProcessor.php>`_
+which inside uses the `CatalogPromotionApplicator <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Applicator/CatalogPromotionApplicator.php>`_.
+
+The **CatalogPromotionProcessor**'s method ``process()`` is executed on the eligible items:
+
+* firstly it iterates over eligible items: ``Product Variants``,
+* then it calculates and applies the ``CatalogPromotionAction`` for given item
+
+.. note::
+
+    If you want to reapply Catalog Promotion manually you can refer to the :ref:`How to create a Catalog Promotion Rule and Action? <how-to-create-a-catalog-promotion-rule-and-action>` section
 
 Learn more
 ----------
