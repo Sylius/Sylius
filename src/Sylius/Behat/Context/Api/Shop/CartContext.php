@@ -381,7 +381,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^I should see "([^"]+)" with unit price ("[^"]+") in my cart$/
+     * @Then /^I should see(?:| also) "([^"]+)" with unit price ("[^"]+") in my cart$/
      */
     public function iShouldSeeProductWithUnitPriceInMyCart(string $productName, int $unitPrice): void
     {
@@ -813,5 +813,23 @@ final class CartContext implements Context
         }
 
         throw new \InvalidArgumentException(sprintf('Price for product %s had not been found', $product->getName()));
+    }
+
+    /**
+     * @Then /^I should see "([^"]+)" with original price ("[^"]+") in my cart$/
+     */
+    public function iShouldSeeWithOriginalPriceInMyCart(string $productName, int $originalPrice): void
+    {
+        $response = $this->cartsClient->getLastResponse();
+
+        foreach ($this->responseChecker->getValue($response, 'items') as $item) {
+            if ($item['productName'] === $productName) {
+                Assert::same($item['originalPrice'], $originalPrice);
+
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf('The product %s does not exist', $productName));
     }
 }
