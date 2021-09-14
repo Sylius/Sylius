@@ -658,13 +658,13 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that a discount amount should be a number
+     * @Then I should be notified that a discount amount should be a number and cannot be empty
      */
     public function iShouldBeNotifiedThatDiscountAmountShouldBeNumber(): void
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'The percentage discount amount must be a number.'
+            'The percentage discount amount must be a number and can not be empty.'
         );
     }
 
