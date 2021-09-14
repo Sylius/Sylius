@@ -43,6 +43,20 @@ const handleProductVariantsChange = function handleProductVariantsChange() {
     const priceRow = $(event.currentTarget).parents('tr').find('.sylius-product-variant-price');
     const price = priceRow.text();
     const originalPrice = priceRow.attr('data-original-price');
+
+    const promotionName = priceRow.attr('data-catalog-promotion-name');
+    const promotionDescription = priceRow.attr('data-catalog-promotion-description');
+
+    if (promotionName !== '') {
+      document.querySelector('#promotion_label').style.display = 'block';
+      document.querySelector('#sylius_catalog_promotion_name').innerHTML = promotionName;
+      document.querySelector('#sylius_catalog_promotion_description').innerHTML = promotionDescription;
+    } else {
+      document.querySelector('#promotion_label').style.display = 'none';
+      document.querySelector('#sylius_catalog_promotion_name').innerHTML = '';
+      document.querySelector('#sylius_catalog_promotion_description').innerHTML = '';
+    }
+
     $('#product-price').text(price);
 
     if (originalPrice !== undefined) {

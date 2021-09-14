@@ -46,6 +46,8 @@ interface ShowPageInterface extends PageInterface
 
     public function getAverageRating(): float;
 
+    public function getCatalogPromotionName(): string;
+
     public function getCurrentUrl(): string;
 
     public function getCurrentVariantName(): string;

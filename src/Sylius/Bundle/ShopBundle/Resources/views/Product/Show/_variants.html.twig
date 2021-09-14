@@ -10,6 +10,14 @@
     </thead>
     <tbody>
     {% for key, variant in product.enabledVariants %}
+        {% set promotion = false %}
+        {% set channelPricing = variant.getChannelPricingForChannel(sylius.channel) %}
+
+        {% if channelPricing.appliedPromotions %}
+            {% for appliedPromotion in channelPricing.appliedPromotions %}
+                {% set promotion = appliedPromotion[sylius.localeCode] %}
+            {% endfor %}
+        {% endif %}
         <tr {{ sylius_test_html_attribute('product-variants-row') }}>
             <td>
                 {{ variant.name }}
@@ -23,7 +31,7 @@
                     </div>
                 {% endif %}
             </td>
-            <td class="sylius-product-variant-price" {% if variant|sylius_has_discount({'channel': sylius.channel}) %}data-original-price="{{ money.calculateOriginalPrice(variant) }}"{% endif %}>
+            <td class="sylius-product-variant-price" data-catalog-promotion-name="{{ promotion ? promotion.name : '' }}" data-catalog-promotion-description="{{ promotion ? promotion.description : '' }}"  {% if variant|sylius_has_discount({'channel': sylius.channel}) %}data-original-price="{{ money.calculateOriginalPrice(variant) }}"{% endif %}>
                 {{ money.calculatePrice(variant) }}
             </td>
             <td class="right aligned">

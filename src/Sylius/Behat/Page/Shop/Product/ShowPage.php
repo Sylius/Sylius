@@ -117,6 +117,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return (float) $this->getElement('average_rating')->getAttribute('data-test-average-rating');
     }
 
+    public function getCatalogPromotionName(): string
+    {
+        return $this->getElement('catalog_promotion_name')->getText();
+    }
+
     public function getCurrentUrl(): string
     {
         return $this->getDriver()->getCurrentUrl();
@@ -309,6 +314,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'attributes' => '[data-test-product-attributes]',
             'average_rating' => '[data-test-average-rating]',
             'current_variant_input' => '[data-test-product-variants] td input:checked',
+            'catalog_promotion_name' => '#sylius_catalog_promotion_name',
             'details' => '[data-tab="details"]',
             'main_image' => '[data-test-main-image]',
             'name' => '[data-test-product-name]',
