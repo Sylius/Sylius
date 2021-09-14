@@ -144,7 +144,7 @@ final class Request implements RequestInterface
         return new self(
             sprintf('/api/v2/%s%s/%s/%s', self::prepareSection($section), $resource, $id, $action),
             $type,
-            ['CONTENT_TYPE' => 'application/merge-patch+json']
+            ['CONTENT_TYPE' => self::resolveHttpMethod($type)]
         );
     }
 
@@ -168,7 +168,7 @@ final class Request implements RequestInterface
 
     public static function custom(string $url, string $method, ?string $token = null): RequestInterface
     {
-        $headers = ['CONTENT_TYPE' => 'application/merge-patch+json'];
+        $headers = ['CONTENT_TYPE' => self::resolveHttpMethod($method)];
         if ($token !== null) {
             $headers['HTTP_Authorization'] = 'Bearer ' . $token;
         }
@@ -276,5 +276,10 @@ final class Request implements RequestInterface
         }
 
         return $section . '/';
+    }
+
+    private static function resolveHttpMethod(string $method): string
+    {
+        return $method === HttpRequest::METHOD_PATCH ? 'application/merge-patch+json' : 'application/json';
     }
 }

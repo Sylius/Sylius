@@ -367,7 +367,7 @@ final class CartContext implements Context
     {
         $response = $this->cartsClient->getLastResponse();
         Assert::true(
-            $this->responseChecker->isUpdateSuccessful($response),
+            $this->responseChecker->isCreationSuccessful($response),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Item has not been added.', $response)
         );
     }
@@ -379,7 +379,7 @@ final class CartContext implements Context
     {
         $response = $this->cartsClient->getLastResponse();
         Assert::false(
-            $this->responseChecker->isUpdateSuccessful($response),
+            $this->responseChecker->isCreationSuccessful($response),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Quantity of an order item cannot be lower than 1.', $response)
         );
     }
