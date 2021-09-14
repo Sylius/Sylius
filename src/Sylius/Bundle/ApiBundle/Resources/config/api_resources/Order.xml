@@ -92,7 +92,7 @@
             </itemOperation>
 
             <itemOperation name="shop_add_item">
-                <attribute name="method">PATCH</attribute>
+                <attribute name="method">POST</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}/items</attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart</attribute>
