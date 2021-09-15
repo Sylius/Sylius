@@ -878,7 +878,6 @@ final class OrderContext implements Context
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $productVariant->getChannelPricingForChannel($channel);
         $item->setUnitPrice($channelPricing->getPrice());
-        $item->setOriginalPrice($channelPricing->getOriginalPrice());
 
         $this->itemQuantityModifier->modify($item, $quantity);
 

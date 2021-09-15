@@ -121,14 +121,6 @@ final class CartContext implements Context
     }
 
     /**
-     * @When /^I add ("[^"]+" variant) of (product "[^"]+") to the (cart)$/
-     */
-    public function iAddProductToTheCartSelectingVariant(ProductVariantInterface $variant, ProductInterface $product, ?string $tokenValue): void
-    {
-        $this->putProductVariantToCart($variant, $tokenValue, 1);
-    }
-
-    /**
      * @When /^I add (\d+) of (them) to (?:the|my) (cart)$/
      * @When /^I add(?:| again) (\d+) (products "[^"]+") to the (cart)$/
      * @When /^I try to add (\d+) (products "[^"]+") to the (cart)$/
@@ -141,10 +133,14 @@ final class CartContext implements Context
     }
 
     /**
-     * @When /^I add ("[^"]+" variant of this product) to the (cart)$/
+     * @When /^I add ("[^"]+" variant) of (this product) to the (cart)$/
+     * @When /^I add ("[^"]+" variant) of (product "[^"]+") to the (cart)$/
      */
-    public function iAddVariantOfThisProductToTheCart(ProductVariantInterface $productVariant, ?string $tokenValue): void
-    {
+    public function iAddVariantOfThisProductToTheCart(
+        ProductVariantInterface $productVariant,
+        ProductInterface $product,
+        ?string $tokenValue
+    ): void {
         $this->putProductVariantToCart($productVariant, $tokenValue, 1);
     }
 
