@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
@@ -35,6 +36,8 @@ final class CatalogPromotionContext implements Context
 
     private EntityManagerInterface $entityManager;
 
+    private ChannelRepositoryInterface $channelRepository;
+
     private SharedStorageInterface $sharedStorage;
 
     public function __construct(
@@ -42,12 +45,14 @@ final class CatalogPromotionContext implements Context
         FactoryInterface $catalogPromotionRuleFactory,
         FactoryInterface $catalogPromotionActionFactory,
         EntityManagerInterface $entityManager,
+        ChannelRepositoryInterface $channelRepository,
         SharedStorageInterface $sharedStorage
     ) {
         $this->catalogPromotionExampleFactory = $catalogPromotionExampleFactory;
         $this->catalogPromotionRuleFactory = $catalogPromotionRuleFactory;
         $this->catalogPromotionActionFactory = $catalogPromotionActionFactory;
         $this->entityManager = $entityManager;
+        $this->channelRepository = $channelRepository;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -169,6 +174,19 @@ final class CatalogPromotionContext implements Context
             ]]
         );
 
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @When And the :catalogPromotion catalog promotion is no longer available
+     */
+    public function theAdministratorMakesThisCatalogPromotionUnavailableInTheChannel(
+        CatalogPromotionInterface $catalogPromotion
+    ): void {
+        foreach ($this->channelRepository->findAll() as $channel) {
+            $catalogPromotion->removeChannel($channel);
+        }
+        $this->entityManager->persist($catalogPromotion);
         $this->entityManager->flush();
     }
 
