@@ -5,23 +5,22 @@
 {% set channelPricing = variant.getChannelPricingForChannel(sylius.channel) %}
 {% set promotion = null %}
 
-<div>
-    {% if channelPricing.appliedPromotions %}
-        {% for appliedPromotion in channelPricing.appliedPromotions %}
-            {% set promotion = appliedPromotion[sylius.localeCode] %}
-        {% endfor %}
-    {% endif %}
-    <div class="ui blue label" id="promotion_label" style="{{ promotion ? 'block' : none }}">
-        <div class="row ui small header" id="sylius_catalog_promotion_name">{{ promotion ? promotion.name : '' }}</div>
-        <div class="row" id="sylius_catalog_promotion_description">{{ promotion ? promotion.description : '' }}</div>
-    </div>
-</div>
-
 <span class="ui small header" id="product-original-price" {{ sylius_test_html_attribute('product-original-price', money.calculateOriginalPrice(variant)) }}>
     {% if hasDiscount %}
         <del>{{ money.calculateOriginalPrice(variant) }}</del>
     {% endif %}
 </span>
+
+<div id="appliedPromotions" data-applied-promotions-locale="{{ sylius.localeCode }}">
+    {% for appliedPromotion in channelPricing.appliedPromotions %}
+    <div class="ui blue label" id="promotion_label" style="display: {{ channelPricing.appliedPromotions ? 'block' : none }}; margin: 1rem 0;">
+        {% set promotion = appliedPromotion[sylius.localeCode] %}
+        <div class="row ui small" id="sylius_catalog_promotion">
+            {{ promotion.name }} - {{ promotion.description }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
 <span class="ui huge header" id="product-price" {{ sylius_test_html_attribute('product-price', money.calculatePrice(variant)) }}>
     {{ money.calculatePrice(variant) }}

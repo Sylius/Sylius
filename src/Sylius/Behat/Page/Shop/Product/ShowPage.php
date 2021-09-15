@@ -119,7 +119,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getCatalogPromotionName(): string
     {
-        return $this->getElement('catalog_promotion_name')->getText();
+        return explode(' - ', $this->getElement('catalog_promotion')->getText())[0];
     }
 
     public function getCurrentUrl(): string
@@ -322,7 +322,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'association' => '[data-test-product-association="%associationName%"]',
             'attributes' => '[data-test-product-attributes]',
             'average_rating' => '[data-test-average-rating]',
-            'catalog_promotion_name' => '#sylius_catalog_promotion_name',
+            'catalog_promotion' => '#sylius_catalog_promotion',
             'current_variant_input' => '[data-test-product-variants] td input:checked',
             'details' => '[data-tab="details"]',
             'main_image' => '[data-test-main-image]',

@@ -9,6 +9,18 @@
 
 import $ from 'jquery';
 
+function formatAppliedPromotions(appliedPromotions, locale = 'en_US') {
+  let appliedPromotionsElement = '';
+  $('#appliedPromotions').html('');
+
+  if (appliedPromotions !== '[]') {
+    $.each(appliedPromotions, (index, promotion) => {
+      appliedPromotionsElement += `<div class="ui blue label" id="promotion_label" style="margin: 1rem 0;">${promotion[locale].name} - ${promotion[locale].description}</div>`;
+    });
+    $('#appliedPromotions').html(appliedPromotionsElement);
+  }
+}
+
 const handleProductOptionsChange = function handleProductOptionsChange() {
   $('[name*="sylius_add_to_cart[cartItem][variant]"]').on('change', () => {
     let selector = '';
@@ -21,6 +33,11 @@ const handleProductOptionsChange = function handleProductOptionsChange() {
 
     const price = $('#sylius-variants-pricing').find(selector).attr('data-value');
     const originalPrice = $('#sylius-variants-pricing').find(selector).attr('data-original-price');
+    const locale = $('#appliedPromotions').attr('data-applied-promotions-locale');
+    let appliedPromotions = $('#sylius-variants-pricing').find(selector).attr('data-applied_promotions');
+    if (appliedPromotions !== undefined) {
+      appliedPromotions = JSON.parse(appliedPromotions);
+    }
 
     if (price !== undefined) {
       $('#product-price').text(price);
@@ -31,6 +48,8 @@ const handleProductOptionsChange = function handleProductOptionsChange() {
       } else {
         $('#product-original-price').css('display', 'none');
       }
+
+      formatAppliedPromotions(appliedPromotions, locale);
     } else {
       $('#product-price').text($('#sylius-variants-pricing').attr('data-unavailable-text'));
       $('button[type=submit]').attr('disabled', 'disabled');
@@ -43,21 +62,14 @@ const handleProductVariantsChange = function handleProductVariantsChange() {
     const priceRow = $(event.currentTarget).parents('tr').find('.sylius-product-variant-price');
     const price = priceRow.text();
     const originalPrice = priceRow.attr('data-original-price');
-
-    const promotionName = priceRow.attr('data-catalog-promotion-name');
-    const promotionDescription = priceRow.attr('data-catalog-promotion-description');
-
-    if (promotionName !== '') {
-      document.querySelector('#promotion_label').style.display = 'block';
-      document.querySelector('#sylius_catalog_promotion_name').innerHTML = promotionName;
-      document.querySelector('#sylius_catalog_promotion_description').innerHTML = promotionDescription;
-    } else {
-      document.querySelector('#promotion_label').style.display = 'none';
-      document.querySelector('#sylius_catalog_promotion_name').innerHTML = '';
-      document.querySelector('#sylius_catalog_promotion_description').innerHTML = '';
+    const locale = $('#appliedPromotions').attr('data-applied-promotions-locale');
+    let appliedPromotions = priceRow.attr('data-applied-promotions');
+    if (appliedPromotions !== '[]') {
+      appliedPromotions = JSON.parse(appliedPromotions);
     }
 
     $('#product-price').text(price);
+    formatAppliedPromotions(appliedPromotions, locale);
 
     if (originalPrice !== undefined) {
       $('#product-original-price').css('display', 'inline').html(`<del>${originalPrice}</del>`);
