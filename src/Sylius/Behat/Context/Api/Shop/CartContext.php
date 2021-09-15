@@ -865,7 +865,7 @@ final class CartContext implements Context
         foreach ($this->responseChecker->getValue($response, 'items') as $item) {
             if ($item['productName'] === $productName) {
                 Assert::same($item['unitPrice'], $unitPrice);
-                Assert::true(!isset($item['originalPrice']));
+                Assert::false(isset($item['originalPrice']));
 
                 return;
             }
