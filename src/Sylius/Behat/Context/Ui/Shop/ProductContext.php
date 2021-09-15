@@ -352,13 +352,32 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then I should see :productName product discounted from :originalPrice to :price on the list
+     */
+    public function iShouldSeeProductDiscountedOnTheList(string $productName, string $originalPrice, string $price): void
+    {
+        Assert::same($this->indexPage->getProductPrice($productName), $price);
+        Assert::same($this->indexPage->getProductOriginalPrice($productName), $originalPrice);
+    }
+
+    /**
+     * @Then I should see :productName product not discounted on the list
+     */
+    public function iShouldSeeProductNotDiscountedOnTheList(string $productName): void
+    {
+        $originalPrice = $this->indexPage->getProductOriginalPrice($productName);
+
+        Assert::null($originalPrice);
+    }
+
+    /**
      * @Then /^I should see ("[^"]+" variant) is not discounted$/
      */
     public function iShouldSeeVariantIsNotDiscounted(ProductVariantInterface $variant): void
     {
         $this->showPage->selectVariant($variant->getName());
 
-        Assert::same($this->showPage->getPrice(), $this->showPage->getOriginalPrice());
+        Assert::null($this->showPage->getOriginalPrice());
     }
 
     /**
@@ -385,14 +404,6 @@ final class ProductContext implements Context
     public function iSelectVariant($variantName): void
     {
         $this->showPage->selectVariant($variantName);
-    }
-
-    /**
-     * @When I view variants
-     */
-    public function iViewVariants(): void
-    {
-        //intentionally left empty
     }
 
     /**
