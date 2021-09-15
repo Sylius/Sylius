@@ -413,6 +413,15 @@ final class ProductContext implements Context
     }
 
     /**
+     * @When I view :variantName variant of the :product product
+     */
+    public function iViewVariantOfProduct(string $variantName, ProductInterface $product): void
+    {
+        $this->showPage->open(['slug' => $product->getTranslation('en_US')->getSlug(), '_locale' => 'en_US']);
+        $this->showPage->selectVariant($variantName);
+    }
+
+    /**
      * @Then /^I should see ("[^"]+" variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" promotion$/
      * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" promotion$/
      */

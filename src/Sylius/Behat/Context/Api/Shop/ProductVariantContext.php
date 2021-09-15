@@ -37,6 +37,7 @@ final class ProductVariantContext implements Context
     /**
      * @When I select :variant variant
      * @When I view :variant variant
+     * @When I view :variant variant of the :product product
      */
     public function iSelectVariant(ProductVariantInterface $variant): void
     {
