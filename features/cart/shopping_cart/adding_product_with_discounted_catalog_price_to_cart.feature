@@ -19,3 +19,16 @@ Feature: Adding a simple product with discounted catalog price to the cart
         And I should see "T-Shirt" with unit price "$15.00" in my cart
         And I should see "T-Shirt" with original price "$20.00" in my cart
         And I should see "Mug" only with unit price "$40.00" in my cart
+
+    @ui
+    Scenario: Adding a simple product with catalog and cart promotion to the cart
+        Given there is a promotion "Cheap Stuff"
+        And this promotion gives "50%" off on every product when the item total is at least "$5"
+        When I add product "T-Shirt" to the cart
+        And I add product "Mug" to the cart
+        Then I should be on my cart summary page
+        And I should be notified that the product has been successfully added
+        And I should see "T-Shirt" with unit price "$7.50" in my cart
+        And I should see "T-Shirt" with original price "$20.00" in my cart
+        And I should see "Mug" with unit price "$20.00" in my cart
+        And I should see "Mug" with price "$40.00" without applied cart promotion in my cart

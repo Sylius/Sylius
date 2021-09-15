@@ -8,8 +8,8 @@
         {% include '@SyliusShop/Product/_info.html.twig' with {'variant': product_variant} %}
     </td>
     <td class="right aligned">
-        {% if pricing_for_active_channel.originalPrice is not null %}
-            <span class="old-price">{{ money.convertAndFormat(pricing_for_active_channel.originalPrice) }}</span>
+        {% if pricing_for_active_channel.originalPrice is not null and pricing_for_active_channel.originalPrice > pricing_for_active_channel.price  %}
+            <span class="old-price" {{ sylius_test_html_attribute('cart-product-original-unit-price') }}>{{ money.convertAndFormat(pricing_for_active_channel.originalPrice) }}</span>
         {% endif %}
         {% if item.unitPrice != item.discountedUnitPrice %}
             <span class="sylius-regular-unit-price" {{ sylius_test_html_attribute('cart-product-regular-unit-price') }}>

@@ -39,6 +39,8 @@ interface SummaryPageInterface extends PageInterface
 
     public function getItemUnitRegularPrice(string $productName): int;
 
+    public function getItemUnitOriginalPrice(string $productName): int;
+
     public function getItemUnitPrice(string $productName): int;
 
     public function hasOriginalPrice(string $productName): bool;
