@@ -421,15 +421,7 @@ final class CartContext implements Context
      */
     public function iShouldSeeWithOriginalPriceInMyCart(string $productName, int $originalPrice): void
     {
-        Assert::same($this->summaryPage->getItemUnitOriginalPrice($productName), $originalPrice);
-    }
-
-    /**
-     * @Given /^I should see "([^"]*)" with price ("[^"]+") without applied cart promotion in my cart$/
-     */
-    public function iShouldSeeWithPriceBeforeCartPromotionInMyCart(string $productName, int $regularPrice): void
-    {
-        Assert::same($this->summaryPage->getItemUnitRegularPrice($productName), $regularPrice);
+        Assert::same($this->summaryPage->getItemUnitRegularPrice($productName), $originalPrice);
     }
 
     /**

@@ -31,4 +31,3 @@ Feature: Adding a simple product with discounted catalog price to the cart
         And I should see "T-Shirt" with unit price "$7.50" in my cart
         And I should see "T-Shirt" with original price "$20.00" in my cart
         And I should see "Mug" with unit price "$20.00" in my cart
-        And I should see "Mug" with price "$40.00" without applied cart promotion in my cart

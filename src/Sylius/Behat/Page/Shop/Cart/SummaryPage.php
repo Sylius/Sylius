@@ -103,13 +103,6 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return $this->getPriceFromString(trim($regularUnitPrice->getText()));
     }
 
-    public function getItemUnitOriginalPrice(string $productName): int
-    {
-        $regularUnitPrice = $this->getElement('product_unit_original_price', ['%name%' => $productName]);
-
-        return $this->getPriceFromString(trim($regularUnitPrice->getText()));
-    }
-
     public function getItemUnitPrice(string $productName): int
     {
         $unitPrice = $this->getElement('product_unit_price', ['%name%' => $productName]);
@@ -261,7 +254,6 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'product_total' => '[data-test-cart-product-row="%name%"] [data-test-cart-product-subtotal]',
             'product_unit_price' => '[data-test-cart-product-row="%name%"] [data-test-cart-product-unit-price]',
             'product_unit_regular_price' => '[data-test-cart-product-row="%name%"] [data-test-cart-product-regular-unit-price]',
-            'product_unit_original_price' => '[data-test-cart-product-row="%name%"] [data-test-cart-product-original-unit-price]',
             'promotion_coupon_validation_message' => '[data-test-cart-promotion-coupon] [data-test-validation-error]',
             'promotion_total' => '[data-test-cart-promotion-total]',
             'save_button' => '[data-test-apply-coupon-button]',
