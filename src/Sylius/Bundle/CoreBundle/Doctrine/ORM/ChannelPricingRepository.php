@@ -22,6 +22,7 @@ class ChannelPricingRepository extends EntityRepository implements ChannelPricin
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.originalPrice IS NOT NULL')
+            ->andWhere('o.originalPrice > o.price')
             ->getQuery()
             ->getResult()
         ;
