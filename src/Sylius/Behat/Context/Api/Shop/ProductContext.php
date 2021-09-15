@@ -173,6 +173,7 @@ final class ProductContext implements Context
         $variant = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
         Assert::same($variant['originalPrice'], $variant['price']);
+        Assert::keyNotExists($variant, 'appliedPromotions');
     }
 
     /**

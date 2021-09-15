@@ -37,6 +37,8 @@ interface IndexPageInterface extends PageInterface
 
     public function getProductOriginalPrice(string $productName): ?string;
 
+    public function getProductPromotionLabel(string $productName): ?string;
+
     public function isProductOnPageWithName(string $name): bool;
 
     public function hasProductsInOrder(array $productNames): bool;

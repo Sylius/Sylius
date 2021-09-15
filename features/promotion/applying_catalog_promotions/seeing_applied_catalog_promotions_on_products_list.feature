@@ -20,5 +20,5 @@ Feature: Seeing applied catalog promotions on products list
     @ui @no-api
     Scenario: Seeing applied catalog promotion on products list
         When I browse products from taxon "T-Shirts"
-        Then I should see "Programming T-Shirt" product discounted from "$20.00" to "$10.00" on the list
+        Then I should see "Programming T-Shirt" product discounted from "$20.00" to "$10.00" by "Winter sale" on the list
         And I should see "Nerd T-Shirt" product not discounted on the list

@@ -93,6 +93,14 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return ($originalPriceElement !== null) ? $originalPriceElement->getText() : null;
     }
 
+    public function getProductPromotionLabel(string $productName): ?string
+    {
+        $element = $this->getElement('product_name', ['%productName%' => $productName]);
+        $promotionLabelElement = $element->getParent()->find('css', '[data-test-product-promotion-label]');
+
+        return ($promotionLabelElement !== null) ? $promotionLabelElement->getText() : null;
+    }
+
     public function isProductOnPageWithName(string $productName): bool
     {
         return $this->hasElement('product_name', ['%productName%' => $productName]);

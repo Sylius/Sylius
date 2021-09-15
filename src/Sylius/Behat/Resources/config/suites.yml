@@ -93,8 +93,8 @@ imports:
     - suites/ui/order/order_history.yml
     - suites/ui/payment/managing_payment_methods.yml
     - suites/ui/payment/managing_payments.yml
-    - suites/ui/product/adding_product_review.yml
     - suites/ui/product/accessing_edit_page_from_product_show_page.yml
+    - suites/ui/product/adding_product_review.yml
     - suites/ui/product/managing_product_association_types.yml
     - suites/ui/product/managing_product_attributes.yml
     - suites/ui/product/managing_product_options.yml
@@ -103,8 +103,8 @@ imports:
     - suites/ui/product/managing_products.yml
     - suites/ui/product/viewing_product_reviews.yml
     - suites/ui/product/viewing_products.yml
-    - suites/ui/promotion/applying_promotion_coupon.yml
     - suites/ui/promotion/applying_catalog_promotions.yml
+    - suites/ui/promotion/applying_promotion_coupon.yml
     - suites/ui/promotion/applying_promotion_rules.yml
     - suites/ui/promotion/managing_catalog_promotions.yml
     - suites/ui/promotion/managing_promotion_coupons.yml
