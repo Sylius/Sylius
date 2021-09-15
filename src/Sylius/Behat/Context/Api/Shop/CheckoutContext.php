@@ -24,11 +24,9 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentMethod;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Model\ShippingMethod;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
@@ -1118,6 +1116,14 @@ final class CheckoutContext implements Context
         ));
     }
 
+    /**
+     * @When /^I should see (product "[^"]+") with unit price ("[^"]+")$/
+     */
+    public function iShouldSeeWithUnitPrice(ProductInterface $product, int $unitPrice): void
+    {
+        Assert::true($this->hasProductWithUnitPrice($product->getName(), $unitPrice));
+    }
+
     private function assertProvinceMessage(string $addressType): void
     {
         $response = $this->ordersClient->getLastResponse();
@@ -1262,6 +1268,20 @@ final class CheckoutContext implements Context
 
         foreach ($items as $item) {
             if ($item['productName'] === $productName && $item['quantity'] === $quantity) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function hasProductWithUnitPrice(string $productName, int $unitPrice): bool
+    {
+        /** @var array $items */
+        $items = $this->responseChecker->getValue($this->ordersClient->getLastResponse(), 'items');
+
+        foreach ($items as $item) {
+            if ($item['productName'] === $productName && $item['unitPrice'] === $unitPrice) {
                 return true;
             }
         }
