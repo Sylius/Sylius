@@ -2,12 +2,25 @@
 
 {% set variant = product|sylius_resolve_variant %}
 {% set hasDiscount = variant|sylius_has_discount({'channel': sylius.channel}) %}
+{% set channelPricing = variant.getChannelPricingForChannel(sylius.channel) %}
+{% set promotion = null %}
 
 <span class="ui small header" id="product-original-price" {{ sylius_test_html_attribute('product-original-price', money.calculateOriginalPrice(variant)) }}>
     {% if hasDiscount %}
         <del>{{ money.calculateOriginalPrice(variant) }}</del>
     {% endif %}
 </span>
+
+<div id="appliedPromotions" data-applied-promotions-locale="{{ sylius.localeCode }}">
+    {% for appliedPromotion in channelPricing.appliedPromotions %}
+    <div class="ui blue label" id="promotion_label" style="display: {{ channelPricing.appliedPromotions ? 'block' : none }}; margin: 1rem 0;">
+        {% set promotion = appliedPromotion[sylius.localeCode] %}
+        <div class="row ui small" id="sylius_catalog_promotion">
+            {{ promotion.name }} - {{ promotion.description }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
 <span class="ui huge header" id="product-price" {{ sylius_test_html_attribute('product-price', money.calculatePrice(variant)) }}>
     {{ money.calculatePrice(variant) }}

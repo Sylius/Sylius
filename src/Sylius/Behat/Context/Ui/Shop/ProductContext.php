@@ -352,7 +352,43 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then I should see :productName product discounted from :originalPrice to :price by :promotionLabel on the list
+     */
+    public function iShouldSeeProductDiscountedOnTheList(
+        string $productName,
+        string $originalPrice,
+        string $price,
+        string $promotionLabel
+    ): void {
+        Assert::same($this->indexPage->getProductPrice($productName), $price);
+        Assert::same($this->indexPage->getProductOriginalPrice($productName), $originalPrice);
+        Assert::same($this->indexPage->getProductPromotionLabel($productName), $promotionLabel);
+    }
+
+    /**
+     * @Then I should see :productName product not discounted on the list
+     */
+    public function iShouldSeeProductNotDiscountedOnTheList(string $productName): void
+    {
+        $originalPrice = $this->indexPage->getProductOriginalPrice($productName);
+
+        Assert::null($originalPrice);
+    }
+
+    /**
+     * @Then /^I should see ("[^"]+" variant) is not discounted$/
+     * @Then /^I should see (this variant) is not discounted$/
+     */
+    public function iShouldSeeVariantIsNotDiscounted(ProductVariantInterface $variant): void
+    {
+        $this->showPage->selectVariant($variant->getName());
+
+        Assert::null($this->showPage->getOriginalPrice());
+    }
+
+    /**
      * @Then I should not see any original price
+     * @Then I should see this product has no catalog promotion applied
      */
     public function iShouldNotSeeTheProductOriginalPrice(): void
     {
@@ -369,10 +405,37 @@ final class ProductContext implements Context
 
     /**
      * @When I select :variantName variant
+     * @When I view :variantName variant
      */
-    public function iSelectVariant($variantName)
+    public function iSelectVariant($variantName): void
     {
         $this->showPage->selectVariant($variantName);
+    }
+
+    /**
+     * @When I view :variantName variant of the :product product
+     */
+    public function iViewVariantOfProduct(string $variantName, ProductInterface $product): void
+    {
+        $this->showPage->open(['slug' => $product->getTranslation('en_US')->getSlug(), '_locale' => 'en_US']);
+        $this->showPage->selectVariant($variantName);
+    }
+
+    /**
+     * @Then /^I should see ("[^"]+" variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" promotion$/
+     * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" promotion$/
+     */
+    public function iShouldSeeVariantIsDiscountedFromToWithPromotion(
+        ProductVariantInterface $variant,
+        string $originalPrice,
+        string $price,
+        string $promotionName
+    ): void {
+        $this->showPage->selectVariant($variant->getName());
+
+        Assert::same($this->showPage->getCatalogPromotionName(), $promotionName);
+        Assert::same($this->showPage->getPrice(), $price);
+        Assert::same($this->showPage->getOriginalPrice(), $originalPrice);
     }
 
     /**

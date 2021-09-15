@@ -37,6 +37,7 @@ final class ProductVariantContext implements Context
     /**
      * @When I select :variant variant
      * @When I view :variant variant
+     * @When I view :variant variant of the :product product
      */
     public function iSelectVariant(ProductVariantInterface $variant): void
     {
@@ -73,6 +74,7 @@ final class ProductVariantContext implements Context
 
     /**
      * @Then /^I should see ("[^"]+" variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/
+     * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/
      */
     public function iShouldSeeVariantIsDiscountedFromToWithPromotion(
         ProductVariantInterface $variant,
@@ -95,6 +97,16 @@ final class ProductVariantContext implements Context
         $items = $this->responseChecker->getCollectionItemsWithValue($this->client->getLastResponse(), 'code', $variant->getCode());
         $item = array_pop($items);
         Assert::keyNotExists($item, 'appliedPromotions');
+    }
+
+    /**
+     * @Then /^I should see this variant is not discounted$/
+     */
+    public function iShouldSeeThisVariantIsNotDiscounted(): void
+    {
+        $content = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+
+        Assert::keyNotExists($content, 'appliedPromotions');
     }
 
     private function findVariant(?ProductVariantInterface $variant): array

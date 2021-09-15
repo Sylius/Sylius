@@ -1,10 +1,10 @@
-<div class="ui stackable grid">
-    <div class="four wide column">
+<div class="ui stackable grid" {{ sylius_test_html_attribute('product-price-content') }}>
+    <div class="seven wide column">
         {% if not product.enabledVariants.empty() %}
             {% include '@SyliusShop/Product/Show/_price.html.twig' %}
         {% endif %}
     </div>
-    <div class="twelve wide right aligned column">
+    <div class="nine wide right aligned column">
         <span class="ui sub header">{{ product.code }}</span>
     </div>
 </div>
