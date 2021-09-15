@@ -244,23 +244,3 @@ sylius_fixtures:
                                         configuration:
                                             FASHION_WEB:
                                                 amount: 10.00
-
-                catalog_promotion:
-                    options:
-                        custom:
-                            winter:
-                                code: 'winter'
-                                name: 'Winter sale'
-                                channels:
-                                    - 'FASHION_WEB'
-                                rules:
-                                    -   type: 'for_variants'
-                                        configuration:
-                                            variants:
-                                                - '000F_office_grey_jeans-variant-0'
-                                                - '000F_office_grey_jeans-variant-1'
-                                                - '000F_office_grey_jeans-variant-2'
-                                actions:
-                                    -   type: 'percentage_discount'
-                                        configuration:
-                                            amount: 0.5
