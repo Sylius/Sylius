@@ -403,6 +403,24 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then /^I should see(?:| also) "([^"]+)" with discounted unit price ("[^"]+") in my cart$/
+     */
+    public function iShouldSeeProductWithDiscountedUnitPriceInMyCart(string $productName, int $discountedUnitPrice): void
+    {
+        $response = $this->cartsClient->getLastResponse();
+
+        foreach ($this->responseChecker->getValue($response, 'items') as $item) {
+            if ($item['productName'] === $productName) {
+                Assert::same($item['discountedUnitPrice'], $discountedUnitPrice);
+
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf('The product %s does not exist', $productName));
+    }
+
+    /**
      * @Then there should be one item in my cart
      */
     public function thereShouldBeOneItemInMyCart(): void
@@ -829,6 +847,25 @@ final class CartContext implements Context
         foreach ($this->responseChecker->getValue($response, 'items') as $item) {
             if ($item['productName'] === $productName) {
                 Assert::same($item['originalPrice'], $originalPrice);
+
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf('The product %s does not exist', $productName));
+    }
+
+    /**
+     * @Then /^I should see "([^"]+)" only with unit price ("[^"]+") in my cart$/
+     */
+    public function iShouldSeeOnlyWithUnitPriceInMyCart(string $productName, int $unitPrice): void
+    {
+        $response = $this->cartsClient->getLastResponse();
+
+        foreach ($this->responseChecker->getValue($response, 'items') as $item) {
+            if ($item['productName'] === $productName) {
+                Assert::same($item['unitPrice'], $unitPrice);
+                Assert::true(!isset($item['originalPrice']));
 
                 return;
             }

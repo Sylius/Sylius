@@ -83,7 +83,6 @@ final class OrderItemNormalizerSpec extends ObjectBehavior
         $orderItem->getVariant()->willReturn($variant);
 
         $variant->getAppliedPromotionsForChannel($channel)->willReturn([]);
-
         $variant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
 
         $channelPricing->getOriginalPrice()->willReturn(20);
