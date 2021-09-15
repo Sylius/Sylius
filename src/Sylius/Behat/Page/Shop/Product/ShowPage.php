@@ -148,7 +148,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $originalPrice = $this->getElement('product_original_price');
 
-        return ($originalPrice !== null) ? $originalPrice->getText() : null;
+        if (
+            $originalPrice === null ||
+            ($originalPrice->getAttribute('style') !== null && strpos($originalPrice->getAttribute('style'), 'display: none') !== false)
+        ) {
+            return null;
+        }
+
+        return $originalPrice->getText();
     }
 
     public function isOriginalPriceVisible(): bool

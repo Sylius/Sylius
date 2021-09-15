@@ -377,6 +377,7 @@ final class ProductContext implements Context
 
     /**
      * @Then /^I should see ("[^"]+" variant) is not discounted$/
+     * @Then /^I should see (this variant) is not discounted$/
      */
     public function iShouldSeeVariantIsNotDiscounted(ProductVariantInterface $variant): void
     {
@@ -413,6 +414,7 @@ final class ProductContext implements Context
 
     /**
      * @Then /^I should see ("[^"]+" variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" promotion$/
+     * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" promotion$/
      */
     public function iShouldSeeVariantIsDiscountedFromToWithPromotion(
         ProductVariantInterface $variant,
