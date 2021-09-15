@@ -154,6 +154,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When I want to modify a catalog promotion :catalogPromotion
+     * @When I modify a catalog promotion :catalogPromotion
      */
     public function iWantToModifyACatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
@@ -164,7 +165,6 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When /^I add action that gives ("[^"]+") percentage discount$/
-     * @When /^I edit its action so that it reduces price by ("[^"]+")$/
      */
     public function iAddActionThatGivesPercentageDiscount(float $amount): void
     {
@@ -176,6 +176,16 @@ final class ManagingCatalogPromotionsContext implements Context
         ]];
 
         $this->client->addRequestData('actions', $actions);
+    }
+
+    /**
+     * @When /^I edit its action so that it reduces price by ("[^"]+")$/
+     */
+    public function iEditItsActionSoThatItReducesPriceBy(float $amount): void
+    {
+        $content = $this->client->getContent();
+        $content['actions'][0]['configuration']['amount'] = $amount;
+        $this->client->updateRequestData($content);
     }
 
     /**

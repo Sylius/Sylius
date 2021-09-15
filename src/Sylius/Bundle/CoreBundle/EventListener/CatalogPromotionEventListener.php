@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
+use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -32,7 +33,7 @@ final class CatalogPromotionEventListener
     {
         $entity = $args->getObject();
 
-        if ($entity instanceof CatalogPromotionInterface) {
+         if ($entity instanceof CatalogPromotionInterface) {
             $this->eventBus->dispatch(new CatalogPromotionCreated($entity->getCode()));
         }
     }
@@ -43,6 +44,10 @@ final class CatalogPromotionEventListener
 
         if ($entity instanceof CatalogPromotionInterface) {
             $this->eventBus->dispatch(new CatalogPromotionUpdated($entity->getCode()));
+        }
+
+        if ($entity instanceof CatalogPromotionActionInterface) {
+            $this->eventBus->dispatch(new CatalogPromotionUpdated($entity->getCatalogPromotion()->getCode()));
         }
     }
 }

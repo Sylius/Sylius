@@ -129,6 +129,8 @@ Example configuration for `percentage_discount` action type:
             </attribute>
         </property>
         <property name="rules" writable="true" />
-        <property name="actions" writable="true" />
+        <property name="actions" writable="true">
+            <subresource resourceClass="%sylius.model.catalog_promotion_action.class%" collection="true" />
+        </property>
     </resource>
 </resources>

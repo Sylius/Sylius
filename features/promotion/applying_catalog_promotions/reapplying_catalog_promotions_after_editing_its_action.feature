@@ -13,10 +13,9 @@ Feature: Reapplying catalog promotions after editing its action
 
     @api
     Scenario: Reapplying catalog promotion after editing action
-        Given I want to modify a catalog promotion "Winter sale"
-        When I edit its action so that it reduces price by "25%"
+        When I modify a catalog promotion "Winter sale"
+        And I edit its action so that it reduces price by "25%"
         And I save my changes
-        Then I log out
-        When I view "PHP T-Shirt" variant
+        Then the visitor view "PHP T-Shirt" variant
         Then the product variant price should be "$15.00"
         And the product original price should be "$20.00"
