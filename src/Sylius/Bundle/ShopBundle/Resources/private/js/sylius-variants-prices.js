@@ -15,7 +15,11 @@ function formatAppliedPromotions(appliedPromotions, locale = 'en_US') {
 
   if (appliedPromotions !== '[]') {
     $.each(appliedPromotions, (index, promotion) => {
-      appliedPromotionsElement += `<div class="ui blue label" id="promotion_label" style="margin: 1rem 0;">${promotion[locale].name} - ${promotion[locale].description}</div>`;
+      if (promotion[locale].description !== null) {
+        appliedPromotionsElement += `<div class="ui blue label" id="promotion_label" style="margin: 1rem 0;">${promotion[locale].name} - ${promotion[locale].description}</div>`;
+      } else {
+        appliedPromotionsElement += `<div class="ui blue label" id="promotion_label" style="margin: 1rem 0;">${promotion[locale].name}</div>`;
+      }
     });
     $('#appliedPromotions').html(appliedPromotionsElement);
   }
