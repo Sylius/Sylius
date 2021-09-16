@@ -31,29 +31,21 @@ use Webmozart\Assert\Assert;
 
 final class CartContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $cartsClient;
+    private ApiClientInterface $cartsClient;
 
-    /** @var ApiClientInterface */
-    private $ordersAdminClient;
+    private ApiClientInterface $ordersAdminClient;
 
-    /** @var ApiClientInterface */
-    private $productsClient;
+    private ApiClientInterface $productsClient;
 
-    /** @var ApiClientInterface */
-    private $productVariantsClient;
+    private ApiClientInterface $productVariantsClient;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var ProductVariantResolverInterface */
-    private $productVariantResolver;
+    private ProductVariantResolverInterface $productVariantResolver;
 
-    /** @var IriConverterInterface */
-    private $iriConverter;
+    private IriConverterInterface $iriConverter;
 
     public function __construct(
         ApiClientInterface $cartsClient,

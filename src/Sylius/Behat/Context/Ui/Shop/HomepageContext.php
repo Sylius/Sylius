@@ -20,11 +20,9 @@ use Webmozart\Assert\Assert;
 
 final class HomepageContext implements Context
 {
-    /** @var HomePageInterface */
-    private $homePage;
+    private HomePageInterface $homePage;
 
-    /** @var MenuElementInterface */
-    private $menuElement;
+    private MenuElementInterface $menuElement;
 
     public function __construct(HomePageInterface $homePage, MenuElementInterface $menuElement)
     {

@@ -48,50 +48,35 @@ use Webmozart\Assert\Assert;
 
 final class OrderContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var FactoryInterface */
-    private $orderFactory;
+    private \Sylius\Component\Resource\Factory\FactoryInterface $orderFactory;
 
-    /** @var FactoryInterface */
-    private $addressFactory;
+    private \Sylius\Component\Resource\Factory\FactoryInterface $addressFactory;
 
-    /** @var FactoryInterface */
-    private $customerFactory;
+    private \Sylius\Component\Resource\Factory\FactoryInterface $customerFactory;
 
-    /** @var FactoryInterface */
-    private $orderItemFactory;
+    private \Sylius\Component\Resource\Factory\FactoryInterface $orderItemFactory;
 
-    /** @var FactoryInterface */
-    private $shipmentFactory;
+    private \Sylius\Component\Resource\Factory\FactoryInterface $shipmentFactory;
 
-    /** @var StateMachineFactoryInterface */
-    private $stateMachineFactory;
+    private StateMachineFactoryInterface $stateMachineFactory;
 
-    /** @var RepositoryInterface */
-    private $countryRepository;
+    private RepositoryInterface $countryRepository;
 
-    /** @var RepositoryInterface */
-    private $customerRepository;
+    private RepositoryInterface $customerRepository;
 
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /** @var PaymentMethodRepositoryInterface */
-    private $paymentMethodRepository;
+    private PaymentMethodRepositoryInterface $paymentMethodRepository;
 
-    /** @var ShippingMethodRepositoryInterface */
-    private $shippingMethodRepository;
+    private ShippingMethodRepositoryInterface $shippingMethodRepository;
 
-    /** @var ProductVariantResolverInterface */
-    private $variantResolver;
+    private ProductVariantResolverInterface $variantResolver;
 
-    /** @var OrderItemQuantityModifierInterface */
-    private $itemQuantityModifier;
+    private OrderItemQuantityModifierInterface $itemQuantityModifier;
 
-    /** @var ObjectManager */
-    private $objectManager;
+    private ObjectManager $objectManager;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,

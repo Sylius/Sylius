@@ -25,23 +25,17 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPaymentMethodsContext implements Context
 {
-    /** @var CreatePageInterface */
-    private $createPage;
+    private CreatePageInterface $createPage;
 
-    /** @var IndexPageInterface */
-    private $indexPage;
+    private IndexPageInterface $indexPage;
 
-    /** @var UpdatePageInterface */
-    private $updatePage;
+    private UpdatePageInterface $updatePage;
 
-    /** @var CurrentPageResolverInterface */
-    private $currentPageResolver;
+    private CurrentPageResolverInterface $currentPageResolver;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
 
-    /** @var array */
-    private $gatewayFactories;
+    private array $gatewayFactories;
 
     public function __construct(
         CreatePageInterface $createPage,

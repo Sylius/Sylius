@@ -15,11 +15,9 @@ namespace Sylius\Behat\Service;
 
 class SharedStorage implements SharedStorageInterface
 {
-    /** @var array */
-    private $clipboard = [];
+    private array $clipboard = [];
 
-    /** @var string|null */
-    private $latestKey;
+    private ?string $latestKey = null;
 
     public function get($key)
     {

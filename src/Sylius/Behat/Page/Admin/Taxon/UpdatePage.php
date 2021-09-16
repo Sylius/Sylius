@@ -28,8 +28,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use ChecksCodeImmutability;
 
-    /** @var array */
-    private $imageUrls = [];
+    private array $imageUrls = [];
 
     public function chooseParent(TaxonInterface $taxon): void
     {

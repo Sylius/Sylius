@@ -27,8 +27,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class CompletePage extends SymfonyPage implements CompletePageInterface
 {
-    /** @var TableAccessorInterface */
-    private $tableAccessor;
+    private TableAccessorInterface $tableAccessor;
 
     public function __construct(
         Session $session,

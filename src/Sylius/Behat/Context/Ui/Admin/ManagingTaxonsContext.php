@@ -27,26 +27,19 @@ use Webmozart\Assert\Assert;
 
 final class ManagingTaxonsContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var CreatePageInterface */
-    private $createPage;
+    private CreatePageInterface $createPage;
 
-    /** @var CreateForParentPageInterface */
-    private $createForParentPage;
+    private CreateForParentPageInterface $createForParentPage;
 
-    /** @var UpdatePageInterface */
-    private $updatePage;
+    private UpdatePageInterface $updatePage;
 
-    /** @var CurrentPageResolverInterface */
-    private $currentPageResolver;
+    private CurrentPageResolverInterface $currentPageResolver;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
 
-    /** @var JavaScriptTestHelper */
-    private $testHelper;
+    private JavaScriptTestHelper $testHelper;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,

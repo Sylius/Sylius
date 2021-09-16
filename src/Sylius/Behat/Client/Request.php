@@ -17,17 +17,14 @@ use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 final class Request implements RequestInterface
 {
-    /** @var string */
-    private $url;
+    private string $url;
 
-    /** @var string */
-    private $method;
+    private string $method;
 
     /** @var array */
     private $headers = ['HTTP_ACCEPT' => 'application/ld+json'];
 
-    /** @var array */
-    private $content = [];
+    private array $content = [];
 
     /** @var array */
     private $parameters = [];

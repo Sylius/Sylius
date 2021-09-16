@@ -27,20 +27,15 @@ use Webmozart\Assert\Assert;
 
 final class ManagingChannelsContext implements Context
 {
-    /** @var IndexPageInterface */
-    private $indexPage;
+    private IndexPageInterface $indexPage;
 
-    /** @var CreatePageInterface */
-    private $createPage;
+    private CreatePageInterface $createPage;
 
-    /** @var UpdatePageInterface */
-    private $updatePage;
+    private UpdatePageInterface $updatePage;
 
-    /** @var CurrentPageResolverInterface */
-    private $currentPageResolver;
+    private CurrentPageResolverInterface $currentPageResolver;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
 
     public function __construct(
         IndexPageInterface $indexPage,

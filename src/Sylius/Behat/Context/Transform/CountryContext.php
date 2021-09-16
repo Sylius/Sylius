@@ -20,11 +20,9 @@ use Webmozart\Assert\Assert;
 
 final class CountryContext implements Context
 {
-    /** @var CountryNameConverterInterface */
-    private $countryNameConverter;
+    private CountryNameConverterInterface $countryNameConverter;
 
-    /** @var RepositoryInterface */
-    private $countryRepository;
+    private RepositoryInterface $countryRepository;
 
     public function __construct(
         CountryNameConverterInterface $countryNameConverter,

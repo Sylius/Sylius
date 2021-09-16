@@ -19,11 +19,9 @@ use Symfony\Component\Filesystem\Filesystem;
 
 final class EmailSpoolContext implements Context
 {
-    /** @var string */
-    private $spoolDirectory;
+    private string $spoolDirectory;
 
-    /** @var Filesystem */
-    private $filesystem;
+    private Filesystem $filesystem;
 
     public function __construct(EmailCheckerInterface $emailChecker, Filesystem $filesystem)
     {

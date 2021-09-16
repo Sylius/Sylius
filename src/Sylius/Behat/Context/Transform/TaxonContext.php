@@ -19,11 +19,9 @@ use Webmozart\Assert\Assert;
 
 final class TaxonContext implements Context
 {
-    /** @var TaxonRepositoryInterface */
-    private $taxonRepository;
+    private TaxonRepositoryInterface $taxonRepository;
 
-    /** @var string */
-    private $locale;
+    private string $locale;
 
     public function __construct(TaxonRepositoryInterface $taxonRepository, string $locale)
     {

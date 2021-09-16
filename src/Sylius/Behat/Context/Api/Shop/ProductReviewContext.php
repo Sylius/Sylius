@@ -24,17 +24,13 @@ use Webmozart\Assert\Assert;
 
 final class ProductReviewContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $client;
+    private ApiClientInterface $client;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var IriConverterInterface */
-    private $iriConverter;
+    private IriConverterInterface $iriConverter;
 
     public function __construct(
         ApiClientInterface $client,

@@ -23,17 +23,13 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CurrencyContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var RepositoryInterface */
-    private $currencyRepository;
+    private RepositoryInterface $currencyRepository;
 
-    /** @var FactoryInterface */
-    private $currencyFactory;
+    private FactoryInterface $currencyFactory;
 
-    /** @var ObjectManager */
-    private $channelManager;
+    private ObjectManager $channelManager;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,

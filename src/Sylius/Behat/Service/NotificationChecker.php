@@ -20,8 +20,7 @@ use Webmozart\Assert\Assert;
 
 final class NotificationChecker implements NotificationCheckerInterface
 {
-    /** @var NotificationAccessorInterface */
-    private $notificationAccessor;
+    private NotificationAccessorInterface $notificationAccessor;
 
     public function __construct(NotificationAccessorInterface $notificationAccessor)
     {

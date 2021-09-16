@@ -21,14 +21,11 @@ use Webmozart\Assert\Assert;
 
 final class ApiSecurityService implements SecurityServiceInterface
 {
-    /** @var AbstractBrowser */
-    private $client;
+    private AbstractBrowser $client;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var string */
-    private $loginEndpoint;
+    private string $loginEndpoint;
 
     public function __construct(AbstractBrowser $client, SharedStorageInterface $sharedStorage, string $loginEndpoint)
     {

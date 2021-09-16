@@ -20,14 +20,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ApiPlatformIriClient implements ApiIriClientInterface
 {
-    /** @var AbstractBrowser */
-    private $client;
+    private AbstractBrowser $client;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var string */
-    private $authorizationHeader;
+    private string $authorizationHeader;
 
     public function __construct(
         AbstractBrowser $client,

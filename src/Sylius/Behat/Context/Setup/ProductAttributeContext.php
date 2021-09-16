@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Faker\Generator;
+use Faker\Factory;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -27,23 +29,17 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ProductAttributeContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var RepositoryInterface */
-    private $productAttributeRepository;
+    private RepositoryInterface $productAttributeRepository;
 
-    /** @var AttributeFactoryInterface */
-    private $productAttributeFactory;
+    private AttributeFactoryInterface $productAttributeFactory;
 
-    /** @var FactoryInterface */
-    private $productAttributeValueFactory;
+    private FactoryInterface $productAttributeValueFactory;
 
-    /** @var ObjectManager */
-    private $objectManager;
+    private ObjectManager $objectManager;
 
-    /** @var \Faker\Generator */
-    private $faker;
+    private Generator $faker;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -58,7 +54,7 @@ final class ProductAttributeContext implements Context
         $this->productAttributeValueFactory = $productAttributeValueFactory;
         $this->objectManager = $objectManager;
 
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
     }
 
     /**

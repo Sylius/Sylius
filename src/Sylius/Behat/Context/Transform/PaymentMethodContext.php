@@ -19,8 +19,7 @@ use Webmozart\Assert\Assert;
 
 final class PaymentMethodContext implements Context
 {
-    /** @var PaymentMethodRepositoryInterface */
-    private $paymentMethodRepository;
+    private PaymentMethodRepositoryInterface $paymentMethodRepository;
 
     public function __construct(PaymentMethodRepositoryInterface $paymentMethodRepository)
     {

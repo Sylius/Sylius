@@ -21,11 +21,9 @@ use Webmozart\Assert\Assert;
 
 final class CartContext implements Context
 {
-    /** @var ObjectManager */
-    private $orderManager;
+    private ObjectManager $orderManager;
 
-    /** @var ExpiredCartsRemoverInterface */
-    private $expiredCartsRemover;
+    private ExpiredCartsRemoverInterface $expiredCartsRemover;
 
     public function __construct(
         ObjectManager $orderManager,

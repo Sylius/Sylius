@@ -20,11 +20,9 @@ use Webmozart\Assert\Assert;
 
 final class EmailContext implements Context
 {
-    /** @var EmailCheckerInterface */
-    private $emailChecker;
+    private EmailCheckerInterface $emailChecker;
 
-    /** @var TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
     public function __construct(EmailCheckerInterface $emailChecker, TranslatorInterface $translator)
     {

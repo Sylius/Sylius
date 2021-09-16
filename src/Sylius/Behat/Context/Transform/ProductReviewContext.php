@@ -20,8 +20,7 @@ use Webmozart\Assert\Assert;
 
 final class ProductReviewContext implements Context
 {
-    /** @var RepositoryInterface */
-    private $productReviewRepository;
+    private RepositoryInterface $productReviewRepository;
 
     public function __construct(RepositoryInterface $productReviewRepository)
     {

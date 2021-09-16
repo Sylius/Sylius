@@ -20,8 +20,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class DashboardPage extends SymfonyPage implements DashboardPageInterface
 {
-    /** @var TableAccessorInterface */
-    protected $tableAccessor;
+    protected TableAccessorInterface $tableAccessor;
 
     public function __construct(
         Session $session,

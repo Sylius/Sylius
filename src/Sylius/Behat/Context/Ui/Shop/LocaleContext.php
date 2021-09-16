@@ -20,8 +20,7 @@ use Webmozart\Assert\Assert;
 
 final class LocaleContext implements Context
 {
-    /** @var HomePageInterface */
-    private $homePage;
+    private HomePageInterface $homePage;
 
     public function __construct(HomePageInterface $homePage)
     {

@@ -30,8 +30,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 {
     use ChecksCodeImmutability;
 
-    /** @var array */
-    private $imageUrls = [];
+    private array $imageUrls = [];
 
     public function nameItIn(string $name, string $localeCode): void
     {

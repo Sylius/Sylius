@@ -22,11 +22,9 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductVariantsContext implements Context
 {
-    /** @var AbstractBrowser */
-    private $client;
+    private AbstractBrowser $client;
 
-    /** @var SessionInterface */
-    private $session;
+    private SessionInterface $session;
 
     public function __construct(AbstractBrowser $client, SessionInterface $session)
     {

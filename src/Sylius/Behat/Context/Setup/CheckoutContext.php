@@ -30,23 +30,17 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutContext implements Context
 {
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /** @var RepositoryInterface */
-    private $shippingMethodRepository;
+    private RepositoryInterface $shippingMethodRepository;
 
-    /** @var RepositoryInterface */
-    private $paymentMethodRepository;
+    private RepositoryInterface $paymentMethodRepository;
 
-    /** @var MessageBusInterface */
-    private $commandBus;
+    private MessageBusInterface $commandBus;
 
-    /** @var FactoryInterface */
-    private $addressFactory;
+    private FactoryInterface $addressFactory;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,

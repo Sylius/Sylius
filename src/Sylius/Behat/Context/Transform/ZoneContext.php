@@ -20,8 +20,7 @@ use Webmozart\Assert\Assert;
 
 final class ZoneContext implements Context
 {
-    /** @var RepositoryInterface */
-    private $zoneRepository;
+    private RepositoryInterface $zoneRepository;
 
     public function __construct(RepositoryInterface $zoneRepository)
     {

@@ -24,11 +24,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
-    /** @var TableAccessorInterface */
-    private $tableAccessor;
+    private TableAccessorInterface $tableAccessor;
 
-    /** @var MoneyFormatterInterface */
-    private $moneyFormatter;
+    private MoneyFormatterInterface $moneyFormatter;
 
     public function __construct(
         Session $session,

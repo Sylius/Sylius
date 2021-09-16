@@ -39,47 +39,33 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductsContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var CreateSimpleProductPageInterface */
-    private $createSimpleProductPage;
+    private CreateSimpleProductPageInterface $createSimpleProductPage;
 
-    /** @var CreateConfigurableProductPageInterface */
-    private $createConfigurableProductPage;
+    private CreateConfigurableProductPageInterface $createConfigurableProductPage;
 
-    /** @var IndexPageInterface */
-    private $indexPage;
+    private \Sylius\Behat\Page\Admin\Product\IndexPageInterface $indexPage;
 
-    /** @var UpdateSimpleProductPageInterface */
-    private $updateSimpleProductPage;
+    private UpdateSimpleProductPageInterface $updateSimpleProductPage;
 
-    /** @var UpdateConfigurableProductPageInterface */
-    private $updateConfigurableProductPage;
+    private UpdateConfigurableProductPageInterface $updateConfigurableProductPage;
 
-    /** @var ProductReviewIndexPageInterface */
-    private $productReviewIndexPage;
+    private ProductReviewIndexPageInterface $productReviewIndexPage;
 
-    /** @var IndexPerTaxonPageInterface */
-    private $indexPerTaxonPage;
+    private IndexPerTaxonPageInterface $indexPerTaxonPage;
 
-    /** @var VariantCreatePageInterface */
-    private $variantCreatePage;
+    private VariantCreatePageInterface $variantCreatePage;
 
-    /** @var GeneratePageInterface */
-    private $variantGeneratePage;
+    private GeneratePageInterface $variantGeneratePage;
 
-    /** @var CurrentPageResolverInterface */
-    private $currentPageResolver;
+    private CurrentPageResolverInterface $currentPageResolver;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
 
-    /** @var VariantUpdatePageInterface */
-    private $variantUpdatePage;
+    private VariantUpdatePageInterface $variantUpdatePage;
 
-    /** @var JavaScriptTestHelperInterface */
-    private $testHelper;
+    private JavaScriptTestHelperInterface $testHelper;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,

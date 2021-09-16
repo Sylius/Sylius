@@ -25,23 +25,17 @@ use Webmozart\Assert\Assert;
 
 final class ManagingAdministratorsContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $client;
+    private ApiClientInterface $client;
 
-    /** @var ApiClientInterface */
-    private $avatarImagesClient;
+    private ApiClientInterface $avatarImagesClient;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
-    /** @var IriConverterInterface */
-    private $iriConverter;
+    private IriConverterInterface $iriConverter;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var \ArrayAccess */
-    private $minkParameters;
+    private \ArrayAccess $minkParameters;
 
     public function __construct(
         ApiClientInterface $client,

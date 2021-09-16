@@ -29,8 +29,7 @@ use Webmozart\Assert\Assert;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
-    /** @var SummaryPageInterface */
-    private $summaryPage;
+    private SummaryPageInterface $summaryPage;
 
     public function __construct(Session $session, $minkParameters, RouterInterface $router, SummaryPageInterface $summaryPage)
     {
