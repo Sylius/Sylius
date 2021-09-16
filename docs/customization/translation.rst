@@ -69,4 +69,4 @@ After
     .. image:: ../_images/translations.png
         :align: center
 
-.. include:: /customization/plugins.rst.inc
+.. include:: /customization/plugins.rst

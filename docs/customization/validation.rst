@@ -59,4 +59,4 @@ not letting users add products with name shorter than 10 characters.
     When you would like to use group sequence validation, `like so <https://symfony.com/doc/current/validation/sequence_provider.html>`_.
     Be sure to use ``[Default]`` as validation group. Otherwise your ``getGroupSequence()`` method will not be called.
 
-.. include:: /customization/plugins.rst.inc
+.. include:: /customization/plugins.rst

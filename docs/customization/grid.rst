@@ -226,7 +226,7 @@ listener to the ``sylius.grid.admin_product`` event in the ``config/services.yam
 
 After these two steps your admin product grid should not have the image field.
 
-.. include:: /customization/plugins.rst.inc
+.. include:: /customization/plugins.rst
 
 Changes related to upgrade to GridBundle 1.10
 ---------------------------------------------

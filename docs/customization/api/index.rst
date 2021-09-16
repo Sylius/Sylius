@@ -6,7 +6,7 @@ API Platform allows configuring an endpoint by ``yaml`` and ``xml`` files or by 
 In this guide, you will learn how to customize Sylius API endpoints using ``xml`` configuration.
 
 Introduction
-============
+------------
 
 How to prepare project for customization?
 -----------------------------------------
