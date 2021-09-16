@@ -50,6 +50,31 @@ final class CustomersTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_registers_customers(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml']);
+
+        $this->client->request(
+            'POST',
+            '/api/v2/shop/customers',
+            [],
+            [],
+            self::CONTENT_TYPE_HEADER,
+            json_encode([
+                'firstName' => 'John',
+                'lastName' => 'Doe',
+                'email' => 'shop@example.com',
+                'password' => 'sylius',
+                'subscribedToNewsletter' => true,
+            ])
+        );
+
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /** @test */
     public function it_allows_customer_to_log_in(): void
     {
         $this->loadFixturesFromFiles(['authentication/customer.yaml']);
