@@ -405,4 +405,4 @@ Which we strongly recommend over updating the schema.
 **5.** If you need to add delivery conditions to your shipping methods in the admin panel,
 you'll need to update its form type. Check how to do it :doc:`here </customization/form>`.
 
-.. include:: /customization/plugins.rst.inc
+.. include:: /customization/plugins.rst

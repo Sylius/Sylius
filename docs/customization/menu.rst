@@ -393,6 +393,6 @@ After these two steps your admin panel variant menu should look like that (the n
 .. image:: ../_images/admin_panel_variant_menu.png
     :align: center
 
-.. include:: /customization/plugins.rst.inc
+.. include:: /customization/plugins.rst
 
 .. _KnpMenu: https://github.com/KnpLabs/KnpMenu
