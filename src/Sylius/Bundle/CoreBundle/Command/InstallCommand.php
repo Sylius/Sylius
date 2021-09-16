@@ -66,6 +66,10 @@ EOT
         $this->ensureDirectoryExistsAndIsWritable((string) $this->getContainer()->getParameter('kernel.cache_dir'), $output);
 
         $errored = false;
+        /**
+         * @var int $step
+         * @var array $command
+         */
         foreach ($this->commands as $step => $command) {
             try {
                 $outputStyle->newLine();
