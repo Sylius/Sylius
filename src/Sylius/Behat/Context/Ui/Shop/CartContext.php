@@ -410,6 +410,7 @@ final class CartContext implements Context
 
     /**
      * @Then /^I should see(?:| also) "([^"]+)" with unit price ("[^"]+") in my cart$/
+     * @Then /^I should see(?:| also) "([^"]+)" with discounted unit price ("[^"]+") in my cart$/
      */
     public function iShouldSeeProductWithUnitPriceInMyCart($productName, $unitPrice): void
     {

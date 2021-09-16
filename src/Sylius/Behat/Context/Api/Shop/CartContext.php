@@ -133,10 +133,14 @@ final class CartContext implements Context
     }
 
     /**
-     * @When /^I add ("[^"]+" variant of this product) to the (cart)$/
+     * @When /^I add ("[^"]+" variant) of (this product) to the (cart)$/
+     * @When /^I add ("[^"]+" variant) of (product "[^"]+") to the (cart)$/
      */
-    public function iAddVariantOfThisProductToTheCart(ProductVariantInterface $productVariant, ?string $tokenValue): void
-    {
+    public function iAddVariantOfThisProductToTheCart(
+        ProductVariantInterface $productVariant,
+        ProductInterface $product,
+        ?string $tokenValue
+    ): void {
         $this->putProductVariantToCart($productVariant, $tokenValue, 1);
     }
 
@@ -390,6 +394,24 @@ final class CartContext implements Context
         foreach ($this->responseChecker->getValue($response, 'items') as $item) {
             if ($item['productName'] === $productName) {
                 Assert::same($item['unitPrice'], $unitPrice);
+
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf('The product %s does not exist', $productName));
+    }
+
+    /**
+     * @Then /^I should see(?:| also) "([^"]+)" with discounted unit price ("[^"]+") in my cart$/
+     */
+    public function iShouldSeeProductWithDiscountedUnitPriceInMyCart(string $productName, int $discountedUnitPrice): void
+    {
+        $response = $this->cartsClient->getLastResponse();
+
+        foreach ($this->responseChecker->getValue($response, 'items') as $item) {
+            if ($item['productName'] === $productName) {
+                Assert::same($item['discountedUnitPrice'], $discountedUnitPrice);
 
                 return;
             }
@@ -825,6 +847,25 @@ final class CartContext implements Context
         foreach ($this->responseChecker->getValue($response, 'items') as $item) {
             if ($item['productName'] === $productName) {
                 Assert::same($item['originalPrice'], $originalPrice);
+
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf('The product %s does not exist', $productName));
+    }
+
+    /**
+     * @Then /^I should see "([^"]+)" only with unit price ("[^"]+") in my cart$/
+     */
+    public function iShouldSeeOnlyWithUnitPriceInMyCart(string $productName, int $unitPrice): void
+    {
+        $response = $this->cartsClient->getLastResponse();
+
+        foreach ($this->responseChecker->getValue($response, 'items') as $item) {
+            if ($item['productName'] === $productName) {
+                Assert::same($item['unitPrice'], $unitPrice);
+                Assert::false(isset($item['originalPrice']));
 
                 return;
             }

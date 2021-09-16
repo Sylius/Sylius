@@ -52,6 +52,10 @@
             <group>shop:order_item:read</group>
             <group>shop:cart:read</group>
         </attribute>
+        <attribute name="discountedUnitPrice">
+            <group>shop:order_item:read</group>
+            <group>shop:cart:read</group>
+        </attribute>
         <attribute name="units">
             <group>admin:order_item:read</group>
             <group>shop:order_item:read</group>
