@@ -80,7 +80,7 @@ class OrderController extends ResourceController
 
         $form = $this->resourceFormFactory->create($configuration, $resource);
 
-        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isSubmitted() && $form->isValid()) {
             $resource = $form->getData();
 
             $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
