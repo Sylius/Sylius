@@ -21,11 +21,9 @@ use Webmozart\Assert\Assert;
 
 final class LocaleContext implements Context
 {
-    /** @var LocaleConverterInterface */
-    private $localeNameConverter;
+    private LocaleConverterInterface $localeNameConverter;
 
-    /** @var RepositoryInterface */
-    private $localeRepository;
+    private RepositoryInterface $localeRepository;
 
     public function __construct(LocaleConverterInterface $localeNameConverter, RepositoryInterface $localeRepository)
     {

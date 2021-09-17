@@ -24,23 +24,17 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class GeographicalContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var FactoryInterface */
-    private $countryFactory;
+    private FactoryInterface $countryFactory;
 
-    /** @var FactoryInterface */
-    private $provinceFactory;
+    private FactoryInterface $provinceFactory;
 
-    /** @var RepositoryInterface */
-    private $countryRepository;
+    private RepositoryInterface $countryRepository;
 
-    /** @var CountryNameConverterInterface */
-    private $countryNameConverter;
+    private CountryNameConverterInterface $countryNameConverter;
 
-    /** @var ObjectManager */
-    private $countryManager;
+    private ObjectManager $countryManager;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,

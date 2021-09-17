@@ -21,8 +21,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use SpecifiesItsCode;
 
-    /** @var int */
-    private $choiceListIndex = 0;
+    private int $choiceListIndex = 0;
 
     public function nameIt(string $name, string $language): void
     {

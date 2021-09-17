@@ -23,8 +23,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
 {
     use ChecksCodeImmutability;
 
-    /** @var array */
-    private $imageUrls = [];
+    private array $imageUrls = [];
 
     public function nameItIn(string $name, string $localeCode): void
     {

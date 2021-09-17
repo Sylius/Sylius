@@ -43,50 +43,35 @@ use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var ProductRepositoryInterface */
-    private $productRepository;
+    private ProductRepositoryInterface $productRepository;
 
-    /** @var ProductFactoryInterface */
-    private $productFactory;
+    private ProductFactoryInterface $productFactory;
 
-    /** @var FactoryInterface */
-    private $productTranslationFactory;
+    private FactoryInterface $productTranslationFactory;
 
-    /** @var FactoryInterface */
-    private $productVariantFactory;
+    private FactoryInterface $productVariantFactory;
 
-    /** @var FactoryInterface */
-    private $productVariantTranslationFactory;
+    private FactoryInterface $productVariantTranslationFactory;
 
-    /** @var FactoryInterface */
-    private $channelPricingFactory;
+    private FactoryInterface $channelPricingFactory;
 
-    /** @var FactoryInterface */
-    private $productOptionFactory;
+    private FactoryInterface $productOptionFactory;
 
-    /** @var FactoryInterface */
-    private $productOptionValueFactory;
+    private FactoryInterface $productOptionValueFactory;
 
-    /** @var FactoryInterface */
-    private $productImageFactory;
+    private FactoryInterface $productImageFactory;
 
-    /** @var ObjectManager */
-    private $objectManager;
+    private ObjectManager $objectManager;
 
-    /** @var ProductVariantGeneratorInterface */
-    private $productVariantGenerator;
+    private ProductVariantGeneratorInterface $productVariantGenerator;
 
-    /** @var ProductVariantResolverInterface */
-    private $defaultVariantResolver;
+    private ProductVariantResolverInterface $defaultVariantResolver;
 
-    /** @var ImageUploaderInterface */
-    private $imageUploader;
+    private ImageUploaderInterface $imageUploader;
 
-    /** @var SlugGeneratorInterface */
-    private $slugGenerator;
+    private SlugGeneratorInterface $slugGenerator;
 
     /** @var array */
     private $minkParameters;

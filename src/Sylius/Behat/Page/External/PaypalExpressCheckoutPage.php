@@ -21,8 +21,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPageInterface
 {
-    /** @var RepositoryInterface */
-    private $securityTokenRepository;
+    private RepositoryInterface $securityTokenRepository;
 
     public function __construct(Session $session, $minkParameters, RepositoryInterface $securityTokenRepository)
     {

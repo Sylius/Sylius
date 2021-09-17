@@ -23,11 +23,9 @@ use Webmozart\Assert\Assert;
 
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
-    /** @var TableAccessorInterface */
-    private $tableAccessor;
+    private TableAccessorInterface $tableAccessor;
 
-    /** @var string */
-    private $routeName;
+    private string $routeName;
 
     public function __construct(
         Session $session,

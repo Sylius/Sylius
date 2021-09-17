@@ -26,26 +26,19 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ProductAssociationContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var FactoryInterface */
-    private $productAssociationTypeFactory;
+    private FactoryInterface $productAssociationTypeFactory;
 
-    /** @var FactoryInterface */
-    private $productAssociationTypeTranslationFactory;
+    private FactoryInterface $productAssociationTypeTranslationFactory;
 
-    /** @var FactoryInterface */
-    private $productAssociationFactory;
+    private FactoryInterface $productAssociationFactory;
 
-    /** @var ProductAssociationTypeRepositoryInterface */
-    private $productAssociationTypeRepository;
+    private ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository;
 
-    /** @var RepositoryInterface */
-    private $productAssociationRepository;
+    private RepositoryInterface $productAssociationRepository;
 
-    /** @var ObjectManager */
-    private $objectManager;
+    private ObjectManager $objectManager;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,

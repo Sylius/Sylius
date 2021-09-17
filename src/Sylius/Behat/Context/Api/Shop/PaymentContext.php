@@ -24,14 +24,11 @@ use Webmozart\Assert\Assert;
 
 final class PaymentContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $paymentsClient;
+    private ApiClientInterface $paymentsClient;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
     public function __construct(
         ApiClientInterface $paymentsClient,

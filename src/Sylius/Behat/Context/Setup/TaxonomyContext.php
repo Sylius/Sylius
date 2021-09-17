@@ -28,26 +28,19 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class TaxonomyContext implements Context
 {
-    /** @var RepositoryInterface */
-    private $taxonRepository;
+    private RepositoryInterface $taxonRepository;
 
-    /** @var FactoryInterface */
-    private $taxonFactory;
+    private FactoryInterface $taxonFactory;
 
-    /** @var FactoryInterface */
-    private $taxonTranslationFactory;
+    private FactoryInterface $taxonTranslationFactory;
 
-    /** @var FactoryInterface */
-    private $taxonImageFactory;
+    private FactoryInterface $taxonImageFactory;
 
-    /** @var ObjectManager */
-    private $objectManager;
+    private ObjectManager $objectManager;
 
-    /** @var ImageUploaderInterface */
-    private $imageUploader;
+    private ImageUploaderInterface $imageUploader;
 
-    /** @var TaxonSlugGeneratorInterface */
-    private $taxonSlugGenerator;
+    private TaxonSlugGeneratorInterface $taxonSlugGenerator;
 
     /** @var array */
     private $minkParameters;

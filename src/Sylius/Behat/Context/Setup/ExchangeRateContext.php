@@ -22,14 +22,11 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ExchangeRateContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var FactoryInterface */
-    private $exchangeRateFactory;
+    private FactoryInterface $exchangeRateFactory;
 
-    /** @var ExchangeRateRepositoryInterface */
-    private $exchangeRateRepository;
+    private ExchangeRateRepositoryInterface $exchangeRateRepository;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,

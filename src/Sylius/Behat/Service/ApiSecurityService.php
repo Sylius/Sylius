@@ -20,11 +20,9 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 final class ApiSecurityService implements SecurityServiceInterface
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var JWTTokenManagerInterface */
-    private $jwtTokenManager;
+    private JWTTokenManagerInterface $jwtTokenManager;
 
     public function __construct(SharedStorageInterface $sharedStorage, JWTTokenManagerInterface $jwtTokenManager)
     {

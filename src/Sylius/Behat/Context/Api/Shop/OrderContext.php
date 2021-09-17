@@ -35,23 +35,17 @@ use Webmozart\Assert\Assert;
 
 final class OrderContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $shopOrderClient;
+    private ApiClientInterface $shopOrderClient;
 
-    /** @var ApiClientInterface */
-    private $adminOrderClient;
+    private ApiClientInterface $adminOrderClient;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var IriConverterInterface */
-    private $iriConverter;
+    private IriConverterInterface $iriConverter;
 
-    /** @var SecurityServiceInterface */
-    private $securityService;
+    private SecurityServiceInterface $securityService;
 
     public function __construct(
         ApiClientInterface $shopOrderClient,

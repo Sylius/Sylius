@@ -35,29 +35,21 @@ use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
 final class PromotionContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var PromotionActionFactoryInterface */
-    private $actionFactory;
+    private PromotionActionFactoryInterface $actionFactory;
 
-    /** @var PromotionCouponFactoryInterface */
-    private $couponFactory;
+    private PromotionCouponFactoryInterface $couponFactory;
 
-    /** @var PromotionRuleFactoryInterface */
-    private $ruleFactory;
+    private PromotionRuleFactoryInterface $ruleFactory;
 
-    /** @var TestPromotionFactoryInterface */
-    private $testPromotionFactory;
+    private TestPromotionFactoryInterface $testPromotionFactory;
 
-    /** @var PromotionRepositoryInterface */
-    private $promotionRepository;
+    private PromotionRepositoryInterface $promotionRepository;
 
-    /** @var PromotionCouponGeneratorInterface */
-    private $couponGenerator;
+    private PromotionCouponGeneratorInterface $couponGenerator;
 
-    /** @var ObjectManager */
-    private $objectManager;
+    private ObjectManager $objectManager;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,

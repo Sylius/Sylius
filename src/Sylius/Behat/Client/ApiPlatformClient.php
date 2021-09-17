@@ -21,23 +21,17 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ApiPlatformClient implements ApiClientInterface
 {
-    /** @var AbstractBrowser */
-    private $client;
+    private AbstractBrowser $client;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var string */
-    private $authorizationHeader;
+    private string $authorizationHeader;
 
-    /** @var string */
-    private $resource;
+    private string $resource;
 
-    /** @var string|null */
-    private $section;
+    private ?string $section;
 
-    /** @var RequestInterface */
-    private $request;
+    private ?RequestInterface $request = null;
 
     public function __construct(
         AbstractBrowser $client,

@@ -19,8 +19,7 @@ use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
 {
-    /** @var ApiSecurityClientInterface */
-    private $client;
+    private ApiSecurityClientInterface $client;
 
     public function __construct(ApiSecurityClientInterface $client)
     {

@@ -23,11 +23,9 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPromotionCouponsContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var PromotionCouponRepositoryInterface */
-    private $couponRepository;
+    private PromotionCouponRepositoryInterface $couponRepository;
 
     public function __construct(SharedStorageInterface $sharedStorage, PromotionCouponRepositoryInterface $couponRepository)
     {
