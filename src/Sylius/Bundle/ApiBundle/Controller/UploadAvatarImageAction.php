@@ -27,17 +27,13 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class UploadAvatarImageAction
 {
-    /** @var FactoryInterface */
-    private $avatarImageFactory;
+    private FactoryInterface $avatarImageFactory;
 
-    /** @var AvatarImageRepositoryInterface */
-    private $avatarImageRepository;
+    private AvatarImageRepositoryInterface $avatarImageRepository;
 
-    /** @var ImageUploaderInterface */
-    private $imageUploader;
+    private ImageUploaderInterface $imageUploader;
 
-    /** @var IriConverterInterface */
-    private $iriConverter;
+    private IriConverterInterface $iriConverter;
 
     public function __construct(
         FactoryInterface $avatarImageFactory,

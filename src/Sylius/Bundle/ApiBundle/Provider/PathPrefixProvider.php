@@ -21,11 +21,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /** @experimental */
 final class PathPrefixProvider implements PathPrefixProviderInterface
 {
-    /** @var UserContextInterface */
-    private $userContext;
+    private UserContextInterface $userContext;
 
-    /** @var string */
-    private $apiRoute;
+    private string $apiRoute;
 
     public function __construct(UserContextInterface $userContext, string $apiRoute)
     {

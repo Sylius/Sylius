@@ -28,11 +28,9 @@ final class ProductNormalizer implements ContextAwareNormalizerInterface, Normal
 
     private const ALREADY_CALLED = 'sylius_product_normalizer_already_called';
 
-    /** @var ProductVariantResolverInterface */
-    private $defaultProductVariantResolver;
+    private ProductVariantResolverInterface $defaultProductVariantResolver;
 
-    /** @var IriConverterInterface */
-    private $iriConverter;
+    private IriConverterInterface $iriConverter;
 
     public function __construct(
         ProductVariantResolverInterface $defaultProductVariantResolver,

@@ -25,14 +25,11 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class RequestResetPasswordTokenHandler implements MessageHandlerInterface
 {
-    /** @var UserRepositoryInterface */
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
 
-    /** @var MessageBusInterface */
-    private $commandBus;
+    private MessageBusInterface $commandBus;
 
-    /** @var GeneratorInterface */
-    private $generator;
+    private GeneratorInterface $generator;
 
     public function __construct(
         UserRepositoryInterface $userRepository,

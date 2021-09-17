@@ -24,8 +24,7 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class LoggedInCustomerEmailAwareCommandDataTransformer implements CommandDataTransformerInterface
 {
-    /** @var UserContextInterface */
-    private $userContext;
+    private UserContextInterface $userContext;
 
     public function __construct(UserContextInterface $userContext)
     {

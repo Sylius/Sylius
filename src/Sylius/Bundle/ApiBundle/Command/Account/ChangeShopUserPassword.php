@@ -22,22 +22,19 @@ class ChangeShopUserPassword implements ShopUserIdAwareInterface
     public $shopUserId;
 
     /**
-     * @var string|null
      * @psalm-immutable
      */
-    public $newPassword;
+    public ?string $newPassword;
 
     /**
-     * @var string|null
      * @psalm-immutable
      */
-    public $confirmNewPassword;
+    public ?string $confirmNewPassword;
 
     /**
-     * @var string|null
      * @psalm-immutable
      */
-    public $currentPassword;
+    public ?string $currentPassword;
 
     public function __construct(?string $newPassword, ?string $confirmNewPassword, ?string $currentPassword)
     {

@@ -28,20 +28,15 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ChoosePaymentMethodHandler implements MessageHandlerInterface
 {
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /** @var PaymentMethodRepositoryInterface */
-    private $paymentMethodRepository;
+    private PaymentMethodRepositoryInterface $paymentMethodRepository;
 
-    /** @var PaymentRepositoryInterface */
-    private $paymentRepository;
+    private PaymentRepositoryInterface $paymentRepository;
 
-    /** @var FactoryInterface */
-    private $stateMachineFactory;
+    private FactoryInterface $stateMachineFactory;
 
-    /** @var PaymentMethodChangerInterface */
-    private $paymentMethodChanger;
+    private PaymentMethodChangerInterface $paymentMethodChanger;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,

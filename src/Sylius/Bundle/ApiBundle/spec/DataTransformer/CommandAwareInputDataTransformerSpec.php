@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\Order;
 
 final class CommandAwareInputDataTransformerSpec extends ObjectBehavior
 {
-    private static $CONTEXT = ['input' => ['class' => CommandAwareDataTransformerInterface::class]];
+    private static array $CONTEXT = ['input' => ['class' => CommandAwareDataTransformerInterface::class]];
 
     function let(CommandDataTransformerInterface $commandDataTransformer): void
     {

@@ -15,8 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Application\Command;
 
 final class FooCommand
 {
-    /** @var string */
-    private $bar;
+    private string $bar;
 
     public function __construct(string $bar)
     {

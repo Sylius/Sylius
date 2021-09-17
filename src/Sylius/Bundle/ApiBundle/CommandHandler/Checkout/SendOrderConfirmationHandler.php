@@ -23,11 +23,9 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /** @experimental */
 final class SendOrderConfirmationHandler implements MessageHandlerInterface
 {
-    /** @var SenderInterface */
-    private $emailSender;
+    private SenderInterface $emailSender;
 
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
     public function __construct(SenderInterface $emailSender, OrderRepositoryInterface $orderRepository)
     {

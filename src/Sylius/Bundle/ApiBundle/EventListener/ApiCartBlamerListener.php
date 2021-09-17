@@ -26,14 +26,11 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 final class ApiCartBlamerListener
 {
-    /** @var CartContextInterface */
-    private $cartContext;
+    private CartContextInterface $cartContext;
 
-    /** @var SectionProviderInterface */
-    private $uriBasedSectionContext;
+    private SectionProviderInterface $uriBasedSectionContext;
 
-    /** @var MessageBusInterface */
-    private $commandBus;
+    private MessageBusInterface $commandBus;
 
     public function __construct(
         CartContextInterface $cartContext,

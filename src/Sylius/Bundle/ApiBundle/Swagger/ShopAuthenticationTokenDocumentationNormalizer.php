@@ -19,11 +19,9 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 /** @experimental */
 final class ShopAuthenticationTokenDocumentationNormalizer implements NormalizerInterface
 {
-    /** @var NormalizerInterface */
-    private $decoratedNormalizer;
+    private NormalizerInterface $decoratedNormalizer;
 
-    /** @var string */
-    private $apiRoute;
+    private string $apiRoute;
 
     public function __construct(NormalizerInterface $decoratedNormalizer, string $apiRoute)
     {

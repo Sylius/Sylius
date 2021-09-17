@@ -22,11 +22,9 @@ use Symfony\Component\HttpFoundation\Request;
 /** @experimental */
 final class LocaleContextBuilder implements SerializerContextBuilderInterface
 {
-    /** @var SerializerContextBuilderInterface */
-    private $decoratedLocaleBuilder;
+    private SerializerContextBuilderInterface $decoratedLocaleBuilder;
 
-    /** @var LocaleContextInterface */
-    private $localeContext;
+    private LocaleContextInterface $localeContext;
 
     public function __construct(SerializerContextBuilderInterface $decoratedLocaleBuilder, LocaleContextInterface $localeContext)
     {

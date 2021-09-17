@@ -31,8 +31,7 @@ final class IriToIdentifierConverter implements IriToIdentifierConverterInterfac
 {
     use OperationDataProviderTrait;
 
-    /** @var RouterInterface */
-    private $router;
+    private RouterInterface $router;
 
     public function __construct(RouterInterface $router, IdentifierConverterInterface $identifierConverter)
     {

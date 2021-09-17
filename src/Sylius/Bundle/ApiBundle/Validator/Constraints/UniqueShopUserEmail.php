@@ -18,8 +18,7 @@ use Symfony\Component\Validator\Constraint;
 /** @experimental */
 final class UniqueShopUserEmail extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.user.email.unique';
+    public string $message = 'sylius.user.email.unique';
 
     public function validatedBy(): string
     {

@@ -19,8 +19,7 @@ namespace Sylius\Bundle\ApiBundle\Command\Account;
  */
 class VerifyCustomerAccount
 {
-    /** @var string */
-    public $token;
+    public string $token;
 
     public function __construct(string $token)
     {

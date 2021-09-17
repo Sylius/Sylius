@@ -20,8 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 /** @experimental */
 final class HttpRequestMethodTypeContextBuilder implements SerializerContextBuilderInterface
 {
-    /** @var SerializerContextBuilderInterface */
-    private $decoratedLocaleBuilder;
+    private SerializerContextBuilderInterface $decoratedLocaleBuilder;
 
     public function __construct(SerializerContextBuilderInterface $decoratedLocaleBuilder)
     {

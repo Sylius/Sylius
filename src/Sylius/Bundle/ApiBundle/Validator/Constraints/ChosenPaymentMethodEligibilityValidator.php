@@ -25,14 +25,11 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ChosenPaymentMethodEligibilityValidator extends ConstraintValidator
 {
-    /** @var PaymentRepositoryInterface */
-    private $paymentRepository;
+    private PaymentRepositoryInterface $paymentRepository;
 
-    /** @var PaymentMethodRepositoryInterface */
-    private $paymentMethodRepository;
+    private PaymentMethodRepositoryInterface $paymentMethodRepository;
 
-    /** @var PaymentMethodsResolverInterface */
-    private $paymentMethodsResolver;
+    private PaymentMethodsResolverInterface $paymentMethodsResolver;
 
     public function __construct(
         PaymentRepositoryInterface $paymentRepository,

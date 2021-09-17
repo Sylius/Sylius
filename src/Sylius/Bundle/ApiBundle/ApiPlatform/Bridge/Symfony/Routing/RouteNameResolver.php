@@ -26,11 +26,9 @@ use Symfony\Component\Routing\RouterInterface;
  */
 final class RouteNameResolver implements RouteNameResolverInterface
 {
-    /** @var RouterInterface */
-    private $router;
+    private RouterInterface $router;
 
-    /** @var PathPrefixProviderInterface */
-    private $pathPrefixProvider;
+    private PathPrefixProviderInterface $pathPrefixProvider;
 
     public function __construct(RouterInterface $router, PathPrefixProviderInterface $pathPrefixProvider)
     {

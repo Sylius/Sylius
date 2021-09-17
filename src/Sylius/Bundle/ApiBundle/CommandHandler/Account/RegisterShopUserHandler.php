@@ -30,23 +30,17 @@ use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 /** @experimental */
 final class RegisterShopUserHandler implements MessageHandlerInterface
 {
-    /** @var FactoryInterface */
-    private $shopUserFactory;
+    private FactoryInterface $shopUserFactory;
 
-    /** @var ObjectManager */
-    private $shopUserManager;
+    private ObjectManager $shopUserManager;
 
-    /** @var CustomerProviderInterface */
-    private $customerProvider;
+    private CustomerProviderInterface $customerProvider;
 
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
+    private ChannelRepositoryInterface $channelRepository;
 
-    /** @var GeneratorInterface */
-    private $tokenGenerator;
+    private GeneratorInterface $tokenGenerator;
 
-    /** @var MessageBusInterface */
-    private $commandBus;
+    private MessageBusInterface $commandBus;
 
     public function __construct(
         FactoryInterface $shopUserFactory,

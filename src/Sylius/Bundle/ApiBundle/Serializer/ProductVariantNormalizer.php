@@ -32,14 +32,11 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
 
     private const ALREADY_CALLED = 'sylius_product_variant_normalizer_already_called';
 
-    /** @var ProductVariantPricesCalculatorInterface */
-    private $priceCalculator;
+    private ProductVariantPricesCalculatorInterface $priceCalculator;
 
-    /** @var ChannelContextInterface */
-    private $channelContext;
+    private ChannelContextInterface $channelContext;
 
-    /** @var AvailabilityCheckerInterface */
-    private $availabilityChecker;
+    private AvailabilityCheckerInterface $availabilityChecker;
 
     /** @var SectionProviderInterface */
     private $uriBasedSectionContext;

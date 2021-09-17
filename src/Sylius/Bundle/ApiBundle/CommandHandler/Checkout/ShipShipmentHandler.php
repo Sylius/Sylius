@@ -27,14 +27,11 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ShipShipmentHandler implements MessageHandlerInterface
 {
-    /** @var ShipmentRepositoryInterface */
-    private $shipmentRepository;
+    private ShipmentRepositoryInterface $shipmentRepository;
 
-    /** @var FactoryInterface */
-    private $stateMachineFactory;
+    private FactoryInterface $stateMachineFactory;
 
-    /** @var MessageBusInterface */
-    private $eventBus;
+    private MessageBusInterface $eventBus;
 
     public function __construct(
         ShipmentRepositoryInterface $shipmentRepository,

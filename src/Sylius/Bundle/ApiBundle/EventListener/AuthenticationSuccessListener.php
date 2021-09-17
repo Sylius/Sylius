@@ -20,8 +20,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 
 final class AuthenticationSuccessListener
 {
-    /** @var IriConverterInterface */
-    private $iriConverter;
+    private IriConverterInterface $iriConverter;
 
     public function __construct(IriConverterInterface $iriConverter)
     {

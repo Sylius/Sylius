@@ -18,11 +18,9 @@ use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 /** @experimental */
 class CompleteOrder implements OrderTokenValueAwareInterface
 {
-    /** @var string|null */
-    public $orderTokenValue;
+    public ?string $orderTokenValue = null;
 
-    /** @var string|null */
-    public $notes;
+    public ?string $notes;
 
     public function __construct(?string $notes = null)
     {

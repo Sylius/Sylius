@@ -18,11 +18,9 @@ use Symfony\Component\Validator\Constraint;
 /** @experimental */
 final class ChosenShippingMethodEligibility extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.shipping_method.not_available';
+    public string $message = 'sylius.shipping_method.not_available';
 
-    /** @var string */
-    public $notFoundMessage = 'sylius.shipping_method.not_found';
+    public string $notFoundMessage = 'sylius.shipping_method.not_found';
 
     /** @var string */
     public $shippingAddressNotFoundMessage = 'sylius.shipping_method.shipping_address_not_found';

@@ -18,11 +18,9 @@ use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 /** @experimental */
 class ApplyCouponToCart implements OrderTokenValueAwareInterface
 {
-    /** @var string|null */
-    public $orderTokenValue;
+    public ?string $orderTokenValue = null;
 
-    /** @var string|null */
-    public $couponCode;
+    public ?string $couponCode;
 
     public function __construct(?string $couponCode)
     {

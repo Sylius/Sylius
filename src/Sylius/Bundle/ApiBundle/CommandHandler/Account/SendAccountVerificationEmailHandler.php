@@ -24,14 +24,11 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /** @experimental  */
 final class SendAccountVerificationEmailHandler implements MessageHandlerInterface
 {
-    /** @var UserRepositoryInterface */
-    private $shopUserRepository;
+    private UserRepositoryInterface $shopUserRepository;
 
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
+    private ChannelRepositoryInterface $channelRepository;
 
-    /** @var SenderInterface */
-    private $emailSender;
+    private SenderInterface $emailSender;
 
     public function __construct(
         UserRepositoryInterface $shopUserRepository,

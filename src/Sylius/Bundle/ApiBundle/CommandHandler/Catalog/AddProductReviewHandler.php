@@ -26,17 +26,13 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /** @experimental */
 final class AddProductReviewHandler implements MessageHandlerInterface
 {
-    /** @var FactoryInterface */
-    private $productReviewFactory;
+    private FactoryInterface $productReviewFactory;
 
-    /** @var RepositoryInterface */
-    private $productReviewRepository;
+    private RepositoryInterface $productReviewRepository;
 
-    /** @var ProductRepositoryInterface */
-    private $productRepository;
+    private ProductRepositoryInterface $productRepository;
 
-    /** @var CustomerProviderInterface */
-    private $customerProvider;
+    private CustomerProviderInterface $customerProvider;
 
     public function __construct(
         FactoryInterface $productReviewFactory,

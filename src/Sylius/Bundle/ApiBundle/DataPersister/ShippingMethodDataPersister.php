@@ -21,8 +21,7 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 /** @experimental */
 final class ShippingMethodDataPersister implements ContextAwareDataPersisterInterface
 {
-    /** @var ContextAwareDataPersisterInterface */
-    private $decoratedDataPersister;
+    private ContextAwareDataPersisterInterface $decoratedDataPersister;
 
     public function __construct(ContextAwareDataPersisterInterface $decoratedDataPersister)
     {

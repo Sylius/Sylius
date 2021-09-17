@@ -24,11 +24,9 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class UniqueReviewerEmailValidator extends ConstraintValidator
 {
-    /** @var UserRepositoryInterface */
-    private $shopUserRepository;
+    private UserRepositoryInterface $shopUserRepository;
 
-    /** @var UserContextInterface */
-    private $userContext;
+    private UserContextInterface $userContext;
 
     public function __construct(UserRepositoryInterface $shopUserRepository, UserContextInterface $userContext)
     {

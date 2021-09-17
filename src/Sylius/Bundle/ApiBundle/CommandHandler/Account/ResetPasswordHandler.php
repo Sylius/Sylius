@@ -24,14 +24,11 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ResetPasswordHandler implements MessageHandlerInterface
 {
-    /** @var UserRepositoryInterface */
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
 
-    /** @var MetadataInterface */
-    private $metadata;
+    private MetadataInterface $metadata;
 
-    /** @var PasswordUpdaterInterface */
-    private $passwordUpdater;
+    private PasswordUpdaterInterface $passwordUpdater;
 
     public function __construct(
         UserRepositoryInterface $userRepository,

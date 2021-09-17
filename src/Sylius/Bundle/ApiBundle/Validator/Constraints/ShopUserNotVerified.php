@@ -18,8 +18,7 @@ use Symfony\Component\Validator\Constraint;
 /** @experimental */
 final class ShopUserNotVerified extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.account.is_verified';
+    public string $message = 'sylius.account.is_verified';
 
     public function validatedBy(): string
     {

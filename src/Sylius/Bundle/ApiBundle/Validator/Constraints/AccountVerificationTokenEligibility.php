@@ -18,8 +18,7 @@ use Symfony\Component\Validator\Constraint;
 /** @experimental */
 final class AccountVerificationTokenEligibility extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.account.invalid_verification_token';
+    public string $message = 'sylius.account.invalid_verification_token';
 
     public function validatedBy(): string
     {

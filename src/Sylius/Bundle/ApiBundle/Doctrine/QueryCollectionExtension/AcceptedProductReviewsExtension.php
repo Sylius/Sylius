@@ -21,8 +21,7 @@ use Sylius\Component\Review\Model\ReviewInterface;
 /** @experimental */
 final class AcceptedProductReviewsExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    /** @var string */
-    private $productReviewClass;
+    private string $productReviewClass;
 
     public function __construct(string $productReviewClass)
     {

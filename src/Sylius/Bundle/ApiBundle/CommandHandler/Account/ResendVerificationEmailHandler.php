@@ -28,14 +28,11 @@ use Webmozart\Assert\Assert;
 /** @experimental  */
 final class ResendVerificationEmailHandler implements MessageHandlerInterface
 {
-    /** @var UserRepositoryInterface */
-    private $shopUserRepository;
+    private UserRepositoryInterface $shopUserRepository;
 
-    /** @var GeneratorInterface */
-    private $tokenGenerator;
+    private GeneratorInterface $tokenGenerator;
 
-    /** @var MessageBusInterface */
-    private $commandBus;
+    private MessageBusInterface $commandBus;
 
     public function __construct(
         UserRepositoryInterface $shopUserRepository,

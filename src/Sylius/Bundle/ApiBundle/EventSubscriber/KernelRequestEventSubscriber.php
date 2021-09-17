@@ -22,11 +22,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 /** @experimental  */
 final class KernelRequestEventSubscriber implements EventSubscriberInterface
 {
-    /** @var bool */
-    private $apiEnabled;
+    private bool $apiEnabled;
 
-    /** @var string */
-    private $apiRoute;
+    private string $apiRoute;
 
     public function __construct(bool $apiEnabled, string $apiRoute)
     {

@@ -20,7 +20,7 @@ use Sylius\Bundle\ApiBundle\Command\CommandAwareDataTransformerInterface;
 final class CommandAwareInputDataTransformer implements DataTransformerInterface
 {
     /** @var CommandDataTransformerInterface[] */
-    private $commandDataTransformers;
+    private array $commandDataTransformers;
 
     public function __construct(CommandDataTransformerInterface ...$commandDataTransformers)
     {

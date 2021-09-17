@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Command;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\CoreBundle\Command\Model\PluginInfo;
 use Sylius\Bundle\CoreBundle\Installer\Renderer\TableRenderer;
 use Symfony\Component\Console\Command\Command;
@@ -30,7 +31,7 @@ final class ShowAvailablePluginsCommand extends Command
      * @phpstan-var ArrayCollection<PluginInfo>
      * @psalm-var ArrayCollection<array-key, PluginInfo>
      */
-    private ArrayCollection $plugins;
+    private Collection $plugins;
 
     protected function configure(): void
     {

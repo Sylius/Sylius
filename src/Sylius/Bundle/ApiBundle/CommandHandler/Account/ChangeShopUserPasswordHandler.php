@@ -23,11 +23,9 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ChangeShopUserPasswordHandler implements MessageHandlerInterface
 {
-    /** @var PasswordUpdaterInterface */
-    private $passwordUpdater;
+    private PasswordUpdaterInterface $passwordUpdater;
 
-    /** @var UserRepositoryInterface */
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
 
     public function __construct(PasswordUpdaterInterface $passwordUpdater, UserRepositoryInterface $userRepository)
     {
