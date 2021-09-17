@@ -30,6 +30,7 @@
         </service>
 
         <service id="sylius.section_resolver.shop_uri_based_section_resolver" class="Sylius\Bundle\ShopBundle\SectionResolver\ShopUriBasedSectionResolver">
+            <argument>account</argument>
             <tag name="sylius.uri_based_section_resolver" priority="-10" />
         </service>
 
