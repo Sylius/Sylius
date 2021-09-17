@@ -1043,7 +1043,7 @@ final class CheckoutContext implements Context
             'shop',
             'orders',
             $tokenValue,
-            HTTPRequest::METHOD_PATCH,
+            HTTPRequest::METHOD_POST,
             'items'
         );
 
@@ -1361,7 +1361,7 @@ final class CheckoutContext implements Context
             'shop',
             'orders',
             $tokenValue,
-            HTTPRequest::METHOD_PATCH,
+            HTTPRequest::METHOD_POST,
             'items'
         );
 

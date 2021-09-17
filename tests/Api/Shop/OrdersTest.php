@@ -60,6 +60,29 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_allows_to_add_items_to_order(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+
+        $tokenValue = 'nAWw2jewpA';
+
+        /** @var MessageBusInterface $commandBus */
+        $commandBus = $this->get('sylius.command_bus');
+
+        $pickupCartCommand = new PickupCart($tokenValue, 'en_US');
+        $pickupCartCommand->setChannelCode('WEB');
+        $commandBus->dispatch($pickupCartCommand);
+
+        $this->client->request('POST', '/api/v2/shop/orders/nAWw2jewpA/items', [], [], self::CONTENT_TYPE_HEADER, json_encode([
+            'productVariant' => '/api/v2/shop/product-variants/MUG_BLUE',
+            'quantity' => 3,
+        ]));
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/add_item_response', Response::HTTP_CREATED);
+    }
+
+    /** @test */
     public function it_does_not_get_orders_collection_for_guest(): void
     {
         $this->client->request('GET', '/api/v2/shop/orders', [], [], self::CONTENT_TYPE_HEADER);

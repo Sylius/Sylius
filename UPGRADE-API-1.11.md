@@ -21,6 +21,8 @@
     sylius_api:
         product_image_prefix: 'media/image'
     ```
+   
+1. The method of the `/shop/orders/{tokenValue}/items` endpoint has been changed from `PATCH` to `POST`
 
 1. `Sylius\Bundle\ApiBundle\View\CartShippingMethodInterface` and `Sylius\Bundle\ApiBundle\View\CartShippingMethod` have been removed.
 

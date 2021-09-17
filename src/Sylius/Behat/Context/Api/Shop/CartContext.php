@@ -187,7 +187,7 @@ final class CartContext implements Context
 
         $tokenValue = $this->pickupCart();
 
-        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
+        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_POST, 'items');
 
         $request->updateContent([
             'productCode' => $productData['code'],
@@ -367,7 +367,7 @@ final class CartContext implements Context
     {
         $response = $this->cartsClient->getLastResponse();
         Assert::true(
-            $this->responseChecker->isUpdateSuccessful($response),
+            $this->responseChecker->isCreationSuccessful($response),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Item has not been added.', $response)
         );
     }
@@ -379,7 +379,7 @@ final class CartContext implements Context
     {
         $response = $this->cartsClient->getLastResponse();
         Assert::false(
-            $this->responseChecker->isUpdateSuccessful($response),
+            $this->responseChecker->isCreationSuccessful($response),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Quantity of an order item cannot be lower than 1.', $response)
         );
     }
@@ -678,7 +678,7 @@ final class CartContext implements Context
     {
         $tokenValue = $tokenValue ?? $this->pickupCart();
 
-        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
+        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_POST, 'items');
 
         $request->updateContent([
             'productVariant' => $this->iriConverter->getIriFromItem($this->productVariantResolver->getVariant($product)),
@@ -692,7 +692,7 @@ final class CartContext implements Context
     {
         $tokenValue = $tokenValue ?? $this->pickupCart();
 
-        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
+        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_POST, 'items');
 
         $request->updateContent([
             'productVariant' => $this->iriConverter->getIriFromItem($productVariant),

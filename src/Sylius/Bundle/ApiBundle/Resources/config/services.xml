@@ -58,6 +58,9 @@
             <argument>%api_platform.swagger.versions%</argument>
         </service>
 
+        <!--    TODO: Remove after bumping to Api Platform 3.0    -->
+        <service id="api_platform.action.post_item" alias="api_platform.action.placeholder" public="true" />
+
         <service id="Sylius\Bundle\ApiBundle\PropertyInfo\Extractor\EmptyPropertyListExtractor">
             <tag name="property_info.list_extractor" priority="-2000" />
         </service>
