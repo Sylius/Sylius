@@ -16,9 +16,9 @@ namespace Sylius\Bundle\ApiBundle\Command;
 /** @experimental */
 class ResetPassword
 {
-    public string $newPassword;
+    public ?string $newPassword = null;
 
-    public string $confirmNewPassword;
+    public ?string $confirmNewPassword = null;
 
     public string $resetPasswordToken;
 
