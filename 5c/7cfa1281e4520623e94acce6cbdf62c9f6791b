@@ -1,0 +1,11 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-09-17T08:41:37Z
+
+The `phoneNumber` field was never exposed via serialization, so it was never used from the API perspective. What is more, we do not have any behat scenario covering this value. As a result, it is dead code for me, thats why I'm proposing removal of it.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2021-09-17T10:55:29Z
+
+Thank you, Łukasz! :tada:
