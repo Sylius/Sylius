@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use Faker\Generator;
+use Faker\Factory;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -25,20 +27,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $taxRateFactory;
+    private FactoryInterface $taxRateFactory;
 
-    /** @var RepositoryInterface */
-    private $zoneRepository;
+    private RepositoryInterface $zoneRepository;
 
-    /** @var RepositoryInterface */
-    private $taxCategoryRepository;
+    private RepositoryInterface $taxCategoryRepository;
 
-    /** @var \Faker\Generator */
-    private $faker;
+    private Generator $faker;
 
-    /** @var OptionsResolver */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
         FactoryInterface $taxRateFactory,
@@ -49,7 +46,7 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
         $this->zoneRepository = $zoneRepository;
         $this->taxCategoryRepository = $taxCategoryRepository;
 
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);

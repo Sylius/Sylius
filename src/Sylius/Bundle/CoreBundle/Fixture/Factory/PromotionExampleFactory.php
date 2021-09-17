@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use Faker\Generator;
+use Faker\Factory;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -27,26 +29,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PromotionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $promotionFactory;
+    private FactoryInterface $promotionFactory;
 
-    /** @var ExampleFactoryInterface */
-    private $promotionRuleExampleFactory;
+    private ExampleFactoryInterface $promotionRuleExampleFactory;
 
-    /** @var ExampleFactoryInterface */
-    private $promotionActionExampleFactory;
+    private ExampleFactoryInterface $promotionActionExampleFactory;
 
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
+    private ChannelRepositoryInterface $channelRepository;
 
-    /** @var FactoryInterface|null */
-    private $couponFactory;
+    private ?FactoryInterface $couponFactory;
 
-    /** @var \Faker\Generator */
-    private $faker;
+    private Generator $faker;
 
-    /** @var OptionsResolver */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
         FactoryInterface $promotionFactory,
@@ -61,7 +56,7 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         $this->channelRepository = $channelRepository;
         $this->couponFactory = $couponFactory;
 
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);

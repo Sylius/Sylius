@@ -21,8 +21,7 @@ use Webmozart\Assert\Assert;
 
 final class RegisteredUserValidator extends ConstraintValidator
 {
-    /** @var RepositoryInterface */
-    private $customerRepository;
+    private RepositoryInterface $customerRepository;
 
     public function __construct(RepositoryInterface $customerRepository)
     {

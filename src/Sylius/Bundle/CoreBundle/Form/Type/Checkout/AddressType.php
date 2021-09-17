@@ -31,8 +31,7 @@ use Webmozart\Assert\Assert;
 
 final class AddressType extends AbstractResourceType
 {
-    /** @var AddressComparatorInterface|null */
-    private $addressComparator;
+    private ?AddressComparatorInterface $addressComparator;
 
     public function __construct(string $dataClass, array $validationGroups = [], ?AddressComparatorInterface $addressComparator = null)
     {

@@ -23,8 +23,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 {
     use PrependDoctrineMigrationsTrait;
 
-    /** @var array */
-    private static $bundles = [
+    private static array $bundles = [
         'sylius_addressing',
         'sylius_attribute',
         'sylius_channel',

@@ -26,8 +26,7 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
  */
 final class CartCollector extends DataCollector
 {
-    /** @var CartContextInterface */
-    private $cartContext;
+    private CartContextInterface $cartContext;
 
     public function __construct(CartContextInterface $cartContext)
     {

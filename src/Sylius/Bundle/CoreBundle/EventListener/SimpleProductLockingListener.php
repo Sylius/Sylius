@@ -22,8 +22,7 @@ use Webmozart\Assert\Assert;
 
 final class SimpleProductLockingListener
 {
-    /** @var EntityManagerInterface */
-    private $manager;
+    private EntityManagerInterface $manager;
 
     public function __construct(EntityManagerInterface $manager)
     {

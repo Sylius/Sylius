@@ -21,14 +21,11 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class CartSessionStorage implements CartStorageInterface
 {
-    /** @var SessionInterface */
-    private $session;
+    private SessionInterface $session;
 
-    /** @var string */
-    private $sessionKeyName;
+    private string $sessionKeyName;
 
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
     public function __construct(
         SessionInterface $session,

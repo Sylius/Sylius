@@ -19,8 +19,7 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class OrderEmailManager implements OrderEmailManagerInterface
 {
-    /** @var SenderInterface */
-    private $emailSender;
+    private SenderInterface $emailSender;
 
     public function __construct(SenderInterface $emailSender)
     {
