@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 final class CompositePaymentConfigurationProvider implements CompositePaymentConfigurationProviderInterface
 {
     /** @var iterable<PaymentConfigurationProviderInterface> */
-    private $apiPaymentMethodHandlers;
+    private iterable $apiPaymentMethodHandlers;
 
     public function __construct(iterable $apiPaymentMethodHandlers)
     {

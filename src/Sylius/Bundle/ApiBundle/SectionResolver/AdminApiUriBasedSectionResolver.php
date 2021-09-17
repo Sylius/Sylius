@@ -19,8 +19,7 @@ use Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionResolverInterface;
 
 final class AdminApiUriBasedSectionResolver implements UriBasedSectionResolverInterface
 {
-    /** @var string */
-    private $adminApiUriBeginning;
+    private string $adminApiUriBeginning;
 
     public function __construct(string $adminApiUriBeginning)
     {

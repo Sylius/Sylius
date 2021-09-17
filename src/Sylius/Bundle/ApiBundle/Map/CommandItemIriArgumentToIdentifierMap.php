@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Map;
 final class CommandItemIriArgumentToIdentifierMap implements CommandItemIriArgumentToIdentifierMapInterface
 {
     /** @psalm-var array<class-string, string> */
-    private $map;
+    private array $map;
 
     public function __construct(array $map)
     {

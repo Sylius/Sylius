@@ -21,14 +21,11 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
 
     private const ALREADY_CALLED = 'product_variant_normalizer_already_called';
 
-    /** @var ProductVariantPricesCalculatorInterface */
-    private $priceCalculator;
+    private ProductVariantPricesCalculatorInterface $priceCalculator;
 
-    /** @var ChannelContextInterface */
-    private $channelContext;
+    private ChannelContextInterface $channelContext;
 
-    /** @var AvailabilityCheckerInterface */
-    private $availabilityChecker;
+    private AvailabilityCheckerInterface $availabilityChecker;
 
     public function __construct(
         ProductVariantPricesCalculatorInterface $priceCalculator,

@@ -19,8 +19,7 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 /** @experimental */
 final class ArchivingShippingMethodApplicator implements ArchivingShippingMethodApplicatorInterface
 {
-    /** @var DateTimeProvider */
-    private $calendar;
+    private DateTimeProvider $calendar;
 
     public function __construct(DateTimeProvider $calendar)
     {

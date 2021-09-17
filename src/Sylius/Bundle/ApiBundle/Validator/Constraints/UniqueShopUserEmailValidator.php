@@ -22,11 +22,9 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class UniqueShopUserEmailValidator extends ConstraintValidator
 {
-    /** @var CanonicalizerInterface */
-    private $canonicalizer;
+    private CanonicalizerInterface $canonicalizer;
 
-    /** @var UserRepositoryInterface */
-    private $shopUserRepository;
+    private UserRepositoryInterface $shopUserRepository;
 
     public function __construct(CanonicalizerInterface $canonicalizer, UserRepositoryInterface $shopUserRepository)
     {

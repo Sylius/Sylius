@@ -26,14 +26,11 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ChosenShippingMethodEligibilityValidator extends ConstraintValidator
 {
-    /** @var ShipmentRepositoryInterface */
-    private $shipmentRepository;
+    private ShipmentRepositoryInterface $shipmentRepository;
 
-    /** @var ShippingMethodRepositoryInterface */
-    private $shippingMethodRepository;
+    private ShippingMethodRepositoryInterface $shippingMethodRepository;
 
-    /** @var ShippingMethodsResolverInterface */
-    private $shippingMethodsResolver;
+    private ShippingMethodsResolverInterface $shippingMethodsResolver;
 
     public function __construct(
         ShipmentRepositoryInterface $shipmentRepository,

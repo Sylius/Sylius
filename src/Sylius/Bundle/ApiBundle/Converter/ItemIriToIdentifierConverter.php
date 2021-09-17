@@ -26,8 +26,7 @@ final class ItemIriToIdentifierConverter implements ItemIriToIdentifierConverter
 {
     use OperationDataProviderTrait;
 
-    /** @var RouterInterface */
-    private $router;
+    private RouterInterface $router;
 
     public function __construct(RouterInterface $router, IdentifierConverterInterface $identifierConverter)
     {

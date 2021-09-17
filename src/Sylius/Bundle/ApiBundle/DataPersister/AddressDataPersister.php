@@ -23,11 +23,9 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 /** @experimental */
 final class AddressDataPersister implements ContextAwareDataPersisterInterface
 {
-    /** @var ContextAwareDataPersisterInterface */
-    private $decoratedDataPersister;
+    private ContextAwareDataPersisterInterface $decoratedDataPersister;
 
-    /** @var UserContextInterface */
-    private $userContext;
+    private UserContextInterface $userContext;
 
     public function __construct(
         ContextAwareDataPersisterInterface $decoratedDataPersister,

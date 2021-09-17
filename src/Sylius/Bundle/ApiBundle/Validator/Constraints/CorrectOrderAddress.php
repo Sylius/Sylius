@@ -17,11 +17,9 @@ use Symfony\Component\Validator\Constraint;
 
 final class CorrectOrderAddress extends Constraint
 {
-    /** @var string */
-    public $countryCodeNotExistMessage = 'sylius.country.not_exist';
+    public string $countryCodeNotExistMessage = 'sylius.country.not_exist';
 
-    /** @var string */
-    public $addressWithoutCountryCodeCanNotExistMessage = 'sylius.address.without_country';
+    public string $addressWithoutCountryCodeCanNotExistMessage = 'sylius.address.without_country';
 
     public function validatedBy(): string
     {

@@ -22,11 +22,9 @@ use Symfony\Component\HttpFoundation\Request;
 /** @experimental */
 final class ChannelContextBuilder implements SerializerContextBuilderInterface
 {
-    /** @var SerializerContextBuilderInterface */
-    private $decoratedContextBuilder;
+    private SerializerContextBuilderInterface $decoratedContextBuilder;
 
-    /** @var ChannelContextInterface */
-    private $channelContext;
+    private ChannelContextInterface $channelContext;
 
     public function __construct(SerializerContextBuilderInterface $decoratedContextBuilder, ChannelContextInterface $channelContext)
     {

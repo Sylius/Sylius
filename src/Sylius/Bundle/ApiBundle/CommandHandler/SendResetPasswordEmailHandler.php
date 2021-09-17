@@ -23,14 +23,11 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /** @experimental */
 final class SendResetPasswordEmailHandler implements MessageHandlerInterface
 {
-    /** @var SenderInterface */
-    private $emailSender;
+    private SenderInterface $emailSender;
 
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
+    private ChannelRepositoryInterface $channelRepository;
 
-    /** @var UserRepositoryInterface */
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
 
     public function __construct(
         SenderInterface $emailSender,

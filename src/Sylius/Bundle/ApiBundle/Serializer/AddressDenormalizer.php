@@ -19,14 +19,11 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 /** @experimental */
 final class AddressDenormalizer implements ContextAwareDenormalizerInterface
 {
-    /** @var DenormalizerInterface */
-    private $objectNormalizer;
+    private DenormalizerInterface $objectNormalizer;
 
-    /** @var string */
-    private $classType;
+    private string $classType;
 
-    /** @var string */
-    private $interfaceType;
+    private string $interfaceType;
 
     public function __construct(
         DenormalizerInterface $objectNormalizer,

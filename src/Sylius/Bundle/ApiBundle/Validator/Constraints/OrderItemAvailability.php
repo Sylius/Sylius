@@ -18,8 +18,7 @@ use Symfony\Component\Validator\Constraint;
 /** @experimental */
 final class OrderItemAvailability extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.product_variant.product_variant_with_name_not_sufficient';
+    public string $message = 'sylius.product_variant.product_variant_with_name_not_sufficient';
 
     public function validatedBy(): string
     {

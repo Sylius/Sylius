@@ -23,11 +23,9 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ChangePaymentMethodHandler implements MessageHandlerInterface
 {
-    /** @var PaymentMethodChangerInterface */
-    private $paymentMethodChanger;
+    private PaymentMethodChangerInterface $paymentMethodChanger;
 
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
     public function __construct(
         PaymentMethodChangerInterface $commandPaymentMethodChanger,

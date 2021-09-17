@@ -19,8 +19,7 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 /** @experimental */
 final class ChannelCodeAwareInputCommandDataTransformer implements CommandDataTransformerInterface
 {
-    /** @var ChannelContextInterface */
-    private $channelContext;
+    private ChannelContextInterface $channelContext;
 
     public function __construct(ChannelContextInterface $channelContext)
     {

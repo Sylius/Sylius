@@ -28,20 +28,15 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class AddressOrderHandler implements MessageHandlerInterface
 {
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /** @var CustomerRepositoryInterface */
-    private $customerRepository;
+    private CustomerRepositoryInterface $customerRepository;
 
-    /** @var FactoryInterface */
-    private $customerFactory;
+    private \Sylius\Component\Resource\Factory\FactoryInterface $customerFactory;
 
-    /** @var ObjectManager */
-    private $manager;
+    private ObjectManager $manager;
 
-    /** @var StateMachineFactoryInterface */
-    private $stateMachineFactory;
+    private StateMachineFactoryInterface $stateMachineFactory;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,

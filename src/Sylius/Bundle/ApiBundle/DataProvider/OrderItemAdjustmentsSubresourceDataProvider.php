@@ -23,8 +23,7 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class OrderItemAdjustmentsSubresourceDataProvider implements RestrictedDataProviderInterface, SubresourceDataProviderInterface
 {
-    /** @var OrderItemRepositoryInterface */
-    private $orderItemRepository;
+    private OrderItemRepositoryInterface $orderItemRepository;
 
     public function __construct(OrderItemRepositoryInterface $orderItemRepository)
     {

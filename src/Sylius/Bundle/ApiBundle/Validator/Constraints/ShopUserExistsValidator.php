@@ -22,8 +22,7 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ShopUserExistsValidator extends ConstraintValidator
 {
-    /** @var UserRepositoryInterface */
-    private $shopUserRepository;
+    private UserRepositoryInterface $shopUserRepository;
 
     public function __construct(UserRepositoryInterface $shopUserRepository)
     {

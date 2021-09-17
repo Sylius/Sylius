@@ -26,11 +26,9 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ProductItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
-    /** @var ProductRepositoryInterface */
-    private $productRepository;
+    private ProductRepositoryInterface $productRepository;
 
-    /** @var UserContextInterface */
-    private $userContext;
+    private UserContextInterface $userContext;
 
     public function __construct(ProductRepositoryInterface $productRepository, UserContextInterface $userContext)
     {

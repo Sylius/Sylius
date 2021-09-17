@@ -20,22 +20,17 @@ use Sylius\Bundle\ApiBundle\Command\SubresourceIdAwareInterface;
 /** @experimental */
 class ChoosePaymentMethod implements OrderTokenValueAwareInterface, SubresourceIdAwareInterface, PaymentMethodCodeAwareInterface
 {
-    /** @var string|null */
-    public $orderTokenValue;
+    public ?string $orderTokenValue = null;
 
     /**
      * @psalm-immutable
-     *
-     * @var string
      */
-    public $paymentId;
+    public ?string $paymentId = null;
 
     /**
      * @psalm-immutable
-     *
-     * @var string
      */
-    public $paymentMethodCode;
+    public ?string $paymentMethodCode;
 
     public function __construct(string $paymentMethodCode)
     {

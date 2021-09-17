@@ -28,20 +28,15 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class CartShippingMethodsSubresourceDataProvider implements RestrictedDataProviderInterface, SubresourceDataProviderInterface
 {
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /** @var ShipmentRepositoryInterface */
-    private $shipmentRepository;
+    private ShipmentRepositoryInterface $shipmentRepository;
 
-    /** @var ShippingMethodsResolverInterface */
-    private $shippingMethodsResolver;
+    private ShippingMethodsResolverInterface $shippingMethodsResolver;
 
-    /** @var ServiceRegistryInterface */
-    private $calculators;
+    private ServiceRegistryInterface $calculators;
 
-    /** @var CartShippingMethodFactoryInterface */
-    private $cartShippingMethodFactory;
+    private CartShippingMethodFactoryInterface $cartShippingMethodFactory;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,

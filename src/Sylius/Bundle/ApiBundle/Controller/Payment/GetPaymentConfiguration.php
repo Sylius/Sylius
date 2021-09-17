@@ -23,11 +23,9 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class GetPaymentConfiguration
 {
-    /** @var PaymentRepositoryInterface */
-    private $paymentRepository;
+    private PaymentRepositoryInterface $paymentRepository;
 
-    /** @var CompositePaymentConfigurationProviderInterface */
-    private $compositePaymentConfigurationProvider;
+    private CompositePaymentConfigurationProviderInterface $compositePaymentConfigurationProvider;
 
     public function __construct(
         PaymentRepositoryInterface $paymentRepository,

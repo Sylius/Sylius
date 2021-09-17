@@ -19,8 +19,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /** @experimental */
 final class TokenBasedUserContext implements UserContextInterface
 {
-    /** @var TokenStorageInterface */
-    private $tokenStorage;
+    private TokenStorageInterface $tokenStorage;
 
     public function __construct(TokenStorageInterface $tokenStorage)
     {

@@ -18,11 +18,9 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 /** @experimental */
 class CartShippingMethod implements CartShippingMethodInterface
 {
-    /** @var ShippingMethodInterface */
-    private $shippingMethod;
+    private ShippingMethodInterface $shippingMethod;
 
-    /** @var int */
-    private $price;
+    private int $price;
 
     public function __construct(ShippingMethodInterface $shippingMethod, int $price)
     {

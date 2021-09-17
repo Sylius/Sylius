@@ -18,8 +18,7 @@ use Symfony\Component\Validator\Constraint;
 /** @experimental */
 final class OrderNotEmpty extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.order.not_empty';
+    public string $message = 'sylius.order.not_empty';
 
     public function validatedBy(): string
     {

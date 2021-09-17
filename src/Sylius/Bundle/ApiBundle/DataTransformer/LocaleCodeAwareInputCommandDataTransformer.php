@@ -19,8 +19,7 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 /** @experimental */
 final class LocaleCodeAwareInputCommandDataTransformer implements CommandDataTransformerInterface
 {
-    /** @var LocaleContextInterface */
-    private $localeContext;
+    private LocaleContextInterface $localeContext;
 
     public function __construct(LocaleContextInterface $localeContext)
     {

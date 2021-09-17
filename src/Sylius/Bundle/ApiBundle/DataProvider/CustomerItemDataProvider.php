@@ -24,11 +24,9 @@ use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 /** @experimental */
 final class CustomerItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
-    /** @var UserContextInterface */
-    private $userContext;
+    private UserContextInterface $userContext;
 
-    /** @var CustomerRepositoryInterface */
-    private $customerRepository;
+    private CustomerRepositoryInterface $customerRepository;
 
     public function __construct(UserContextInterface $userContext, CustomerRepositoryInterface $customerRepository)
     {

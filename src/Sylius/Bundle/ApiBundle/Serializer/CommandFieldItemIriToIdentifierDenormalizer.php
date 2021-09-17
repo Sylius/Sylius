@@ -21,17 +21,13 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 final class CommandFieldItemIriToIdentifierDenormalizer implements ContextAwareDenormalizerInterface
 {
-    /** @var DenormalizerInterface */
-    private $objectNormalizer;
+    private DenormalizerInterface $objectNormalizer;
 
-    /** @var ItemIriToIdentifierConverterInterface */
-    private $itemIriToIdentifierConverter;
+    private ItemIriToIdentifierConverterInterface $itemIriToIdentifierConverter;
 
-    /** @var CommandAwareInputDataTransformer */
-    private $commandAwareInputDataTransformer;
+    private CommandAwareInputDataTransformer $commandAwareInputDataTransformer;
 
-    /** @var CommandItemIriArgumentToIdentifierMapInterface */
-    private $commandItemIriArgumentToIdentifierMap;
+    private CommandItemIriArgumentToIdentifierMapInterface $commandItemIriArgumentToIdentifierMap;
 
     public function __construct(
         DenormalizerInterface $objectNormalizer,

@@ -18,8 +18,7 @@ use Symfony\Component\Validator\Constraint;
 /** @experimental */
 final class ShopUserExists extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.account.invalid_email';
+    public string $message = 'sylius.account.invalid_email';
 
     public function validatedBy(): string
     {

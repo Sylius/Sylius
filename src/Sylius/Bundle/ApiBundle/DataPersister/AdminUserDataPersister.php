@@ -23,14 +23,11 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 /** @experimental */
 final class AdminUserDataPersister implements ContextAwareDataPersisterInterface
 {
-    /** @var ContextAwareDataPersisterInterface */
-    private $decoratedDataPersister;
+    private ContextAwareDataPersisterInterface $decoratedDataPersister;
 
-    /** @var TokenStorageInterface */
-    private $tokenStorage;
+    private TokenStorageInterface $tokenStorage;
 
-    /** @var PasswordUpdaterInterface */
-    private $passwordUpdater;
+    private PasswordUpdaterInterface $passwordUpdater;
 
     public function __construct(
         ContextAwareDataPersisterInterface $decoratedDataPersister,

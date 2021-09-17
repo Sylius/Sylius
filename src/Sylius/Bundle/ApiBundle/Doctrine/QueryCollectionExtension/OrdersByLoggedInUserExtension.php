@@ -26,8 +26,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 /** @experimental */
 final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    /** @var UserContextInterface */
-    private $userContext;
+    private UserContextInterface $userContext;
 
     public function __construct(UserContextInterface $userContext)
     {

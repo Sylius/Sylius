@@ -17,8 +17,7 @@ use Sylius\Component\Core\Model\Taxon as BaseTaxon;
 
 class Taxon extends BaseTaxon
 {
-    /** @var string */
-    private $type;
+    private ?string $type = null;
 
     public function __construct()
     {

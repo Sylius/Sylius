@@ -27,17 +27,13 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class PromotionCouponEligibilityValidator extends ConstraintValidator
 {
-    /** @var PromotionCouponRepositoryInterface */
-    private $promotionCouponRepository;
+    private PromotionCouponRepositoryInterface $promotionCouponRepository;
 
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /** @var PromotionEligibilityCheckerInterface */
-    private $promotionChecker;
+    private PromotionEligibilityCheckerInterface $promotionChecker;
 
-    /** @var PromotionCouponEligibilityCheckerInterface */
-    private $promotionCouponChecker;
+    private PromotionCouponEligibilityCheckerInterface $promotionCouponChecker;
 
     public function __construct(
         PromotionCouponRepositoryInterface $promotionCouponRepository,

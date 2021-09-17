@@ -9,8 +9,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 /** @experimental */
 final class ProductDocumentationNormalizer implements NormalizerInterface
 {
-    /** @var NormalizerInterface */
-    private $decoratedNormalizer;
+    private NormalizerInterface $decoratedNormalizer;
 
     public function __construct(NormalizerInterface $decoratedNormalizer)
     {
