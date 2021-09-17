@@ -66,7 +66,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         GeneratorInterface $generator,
         MessageBusInterface $commandBus
     ): void {
-        $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400', true);
+        $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', true);
         $command->setChannelCode('CHANNEL_CODE');
         $command->setLocaleCode('en_US');
 
@@ -80,7 +80,6 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         $customer->setFirstName('Will')->shouldBeCalled();
         $customer->setLastName('Smith')->shouldBeCalled();
         $customer->setSubscribedToNewsletter(true)->shouldBeCalled();
-        $customer->setPhoneNumber('+13104322400')->shouldBeCalled();
         $customer->setUser($shopUser)->shouldBeCalled();
 
         $channelRepository->findOneByCode('CHANNEL_CODE')->willReturn($channel);
@@ -117,7 +116,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         ChannelInterface $channel,
         MessageBusInterface $commandBus
     ): void {
-        $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400', true);
+        $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', true);
         $command->setChannelCode('CHANNEL_CODE');
         $command->setLocaleCode('en_US');
 
@@ -131,7 +130,6 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         $customer->setFirstName('Will')->shouldBeCalled();
         $customer->setLastName('Smith')->shouldBeCalled();
         $customer->setSubscribedToNewsletter(true)->shouldBeCalled();
-        $customer->setPhoneNumber('+13104322400')->shouldBeCalled();
         $customer->setUser($shopUser)->shouldBeCalled();
 
         $shopUserManager->persist($shopUser)->shouldBeCalled();
@@ -171,7 +169,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\DomainException::class)
-            ->during('__invoke', [new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400', true)])
+            ->during('__invoke', [new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', true)])
         ;
     }
 }
