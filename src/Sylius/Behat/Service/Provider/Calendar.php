@@ -17,8 +17,7 @@ use Sylius\Bundle\ShippingBundle\Provider\DateTimeProvider;
 
 final class Calendar implements DateTimeProvider
 {
-    /** @var string */
-    private $projectDirectory;
+    private string $projectDirectory;
 
     public function __construct(string $projectDirectory)
     {

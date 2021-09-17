@@ -21,9 +21,9 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 
 final class JavaScriptTestHelper implements JavaScriptTestHelperInterface
 {
-    private $microsecondsInterval;
+    private int $microsecondsInterval;
 
-    private $defaultTimeout;
+    private int $defaultTimeout;
 
     public function __construct(int $microsecondsInterval, int $defaultTimeout)
     {

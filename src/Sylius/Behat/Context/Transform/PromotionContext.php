@@ -20,11 +20,9 @@ use Webmozart\Assert\Assert;
 
 final class PromotionContext implements Context
 {
-    /** @var PromotionRepositoryInterface */
-    private $promotionRepository;
+    private PromotionRepositoryInterface $promotionRepository;
 
-    /** @var PromotionCouponRepositoryInterface */
-    private $promotionCouponRepository;
+    private PromotionCouponRepositoryInterface $promotionCouponRepository;
 
     public function __construct(
         PromotionRepositoryInterface $promotionRepository,

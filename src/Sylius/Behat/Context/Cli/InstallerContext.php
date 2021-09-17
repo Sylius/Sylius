@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Cli;
 
+use Symfony\Component\Console\Command\Command;
 use Behat\Behat\Context\Context;
 use Sylius\Bundle\CoreBundle\Command\InstallSampleDataCommand;
 use Sylius\Bundle\CoreBundle\Command\SetupCommand;
@@ -23,20 +24,15 @@ use Webmozart\Assert\Assert;
 
 final class InstallerContext implements Context
 {
-    /** @var KernelInterface */
-    private $kernel;
+    private KernelInterface $kernel;
 
-    /** @var Application */
-    private $application;
+    private ?Application $application = null;
 
-    /** @var CommandTester */
-    private $tester;
+    private ?CommandTester $tester = null;
 
-    /** @var SetupCommand */
-    private $command;
+    private ?Command $command = null;
 
-    /** @var array */
-    private $inputChoices = [
+    private array $inputChoices = [
         'currency' => 'USD',
         'locale' => 'en_US',
         'e-mail' => 'test@email.com',

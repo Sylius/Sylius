@@ -30,35 +30,25 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutContext implements Context
 {
-    /** @var AddressPageInterface */
-    private $addressPage;
+    private AddressPageInterface $addressPage;
 
-    /** @var SelectPaymentPageInterface */
-    private $selectPaymentPage;
+    private SelectPaymentPageInterface $selectPaymentPage;
 
-    /** @var SelectShippingPageInterface */
-    private $selectShippingPage;
+    private SelectShippingPageInterface $selectShippingPage;
 
-    /** @var CompletePageInterface */
-    private $completePage;
+    private CompletePageInterface $completePage;
 
-    /** @var RegisterPageInterface */
-    private $registerPage;
+    private RegisterPageInterface $registerPage;
 
-    /** @var RegisterElementInterface */
-    private $registerElement;
+    private RegisterElementInterface $registerElement;
 
-    /** @var CurrentPageResolverInterface */
-    private $currentPageResolver;
+    private CurrentPageResolverInterface $currentPageResolver;
 
-    /** @var CheckoutAddressingContext */
-    private $addressingContext;
+    private CheckoutAddressingContext $addressingContext;
 
-    /** @var CheckoutShippingContext */
-    private $shippingContext;
+    private CheckoutShippingContext $shippingContext;
 
-    /** @var CheckoutPaymentContext */
-    private $paymentContext;
+    private CheckoutPaymentContext $paymentContext;
 
     public function __construct(
         AddressPageInterface $addressPage,

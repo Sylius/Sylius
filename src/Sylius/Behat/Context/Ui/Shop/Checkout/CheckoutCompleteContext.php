@@ -31,14 +31,11 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutCompleteContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var CompletePageInterface */
-    private $completePage;
+    private CompletePageInterface $completePage;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,

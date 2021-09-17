@@ -27,29 +27,21 @@ use Webmozart\Assert\Assert;
 
 final class CustomerContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $customerClient;
+    private ApiClientInterface $customerClient;
 
-    /** @var ApiClientInterface */
-    private $orderShopClient;
+    private ApiClientInterface $orderShopClient;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
-    /** @var RegistrationContext */
-    private $registrationContext;
+    private RegistrationContext $registrationContext;
 
-    /** @var LoginContext */
-    private $loginContext;
+    private LoginContext $loginContext;
 
-    /** @var ShopSecurityContext */
-    private $shopApiSecurityContext;
+    private ShopSecurityContext $shopApiSecurityContext;
 
-    /** @var string */
-    private $verificationToken = '';
+    private ?string $verificationToken = '';
 
     public function __construct(
         ApiClientInterface $customerClient,

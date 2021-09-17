@@ -32,8 +32,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     public const TYPE_SHIPPING = 'shipping';
 
-    /** @var AddressFactoryInterface */
-    private $addressFactory;
+    private AddressFactoryInterface $addressFactory;
 
     public function __construct(
         Session $session,

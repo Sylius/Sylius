@@ -31,29 +31,21 @@ use Webmozart\Assert\Assert;
 
 final class AccountContext implements Context
 {
-    /** @var DashboardPageInterface */
-    private $dashboardPage;
+    private DashboardPageInterface $dashboardPage;
 
-    /** @var ProfileUpdatePageInterface */
-    private $profileUpdatePage;
+    private ProfileUpdatePageInterface $profileUpdatePage;
 
-    /** @var ChangePasswordPageInterface */
-    private $changePasswordPage;
+    private ChangePasswordPageInterface $changePasswordPage;
 
-    /** @var IndexPageInterface */
-    private $orderIndexPage;
+    private IndexPageInterface $orderIndexPage;
 
-    /** @var ShowPageInterface */
-    private $orderShowPage;
+    private ShowPageInterface $orderShowPage;
 
-    /** @var LoginPageInterface */
-    private $loginPage;
+    private LoginPageInterface $loginPage;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
     public function __construct(
         DashboardPageInterface $dashboardPage,

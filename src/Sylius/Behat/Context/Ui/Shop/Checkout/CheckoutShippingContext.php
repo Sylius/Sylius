@@ -23,14 +23,11 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutShippingContext implements Context
 {
-    /** @var SelectShippingPageInterface */
-    private $selectShippingPage;
+    private SelectShippingPageInterface $selectShippingPage;
 
-    /** @var SelectPaymentPageInterface */
-    private $selectPaymentPage;
+    private SelectPaymentPageInterface $selectPaymentPage;
 
-    /** @var CompletePageInterface */
-    private $completePage;
+    private CompletePageInterface $completePage;
 
     public function __construct(
         SelectShippingPageInterface $selectShippingPage,

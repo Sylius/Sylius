@@ -21,11 +21,9 @@ use Sylius\Behat\Service\ResponseLoaderInterface;
 
 class PaypalApiMocker
 {
-    /** @var MockerInterface */
-    private $mocker;
+    private MockerInterface $mocker;
 
-    /** @var ResponseLoaderInterface */
-    private $responseLoader;
+    private ResponseLoaderInterface $responseLoader;
 
     public function __construct(MockerInterface $mocker, ResponseLoaderInterface $responseLoader)
     {

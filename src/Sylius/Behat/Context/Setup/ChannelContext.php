@@ -28,23 +28,17 @@ use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 
 final class ChannelContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var ChannelContextSetterInterface */
-    private $channelContextSetter;
+    private ChannelContextSetterInterface $channelContextSetter;
 
-    /** @var DefaultChannelFactoryInterface */
-    private $unitedStatesChannelFactory;
+    private DefaultChannelFactoryInterface $unitedStatesChannelFactory;
 
-    /** @var DefaultChannelFactoryInterface */
-    private $defaultChannelFactory;
+    private DefaultChannelFactoryInterface $defaultChannelFactory;
 
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
+    private ChannelRepositoryInterface $channelRepository;
 
-    /** @var ObjectManager */
-    private $channelManager;
+    private ObjectManager $channelManager;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,

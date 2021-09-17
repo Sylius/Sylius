@@ -21,11 +21,9 @@ use Webmozart\Assert\Assert;
 
 final class ManagingShippingMethodsContext implements Context
 {
-    /** @var RepositoryInterface */
-    private $shippingMethodRepository;
+    private RepositoryInterface $shippingMethodRepository;
 
-    /** @var ObjectManager */
-    private $shippingMethodManager;
+    private ObjectManager $shippingMethodManager;
 
     public function __construct(RepositoryInterface $shippingMethodRepository, ObjectManager $shippingMethodManager)
     {

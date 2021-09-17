@@ -22,11 +22,9 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutPaymentContext implements Context
 {
-    /** @var SelectPaymentPageInterface */
-    private $selectPaymentPage;
+    private SelectPaymentPageInterface $selectPaymentPage;
 
-    /** @var CompletePageInterface */
-    private $completePage;
+    private CompletePageInterface $completePage;
 
     public function __construct(SelectPaymentPageInterface $selectPaymentPage, CompletePageInterface $completePage)
     {

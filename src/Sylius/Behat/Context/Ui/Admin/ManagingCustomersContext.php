@@ -28,20 +28,15 @@ final class ManagingCustomersContext implements Context
     /** @var CustomerIndexPageInterface */
     private $indexPage;
 
-    /** @var CreatePageInterface */
-    private $createPage;
+    private CreatePageInterface $createPage;
 
-    /** @var UpdatePageInterface */
-    private $updatePage;
+    private UpdatePageInterface $updatePage;
 
-    /** @var ShowPageInterface */
-    private $showPage;
+    private ShowPageInterface $showPage;
 
-    /** @var IndexPageInterface */
-    private $ordersIndexPage;
+    private \Sylius\Behat\Page\Admin\Crud\IndexPageInterface $ordersIndexPage;
 
-    /** @var CurrentPageResolverInterface */
-    private $currentPageResolver;
+    private CurrentPageResolverInterface $currentPageResolver;
 
     /**
      * @param CustomerIndexPageInterface $indexPage

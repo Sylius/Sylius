@@ -18,8 +18,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 
 final class CartTokenContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
     public function __construct(SharedStorageInterface $sharedStorage)
     {

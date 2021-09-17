@@ -27,20 +27,15 @@ use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
-    /** @var ShowPageInterface */
-    private $showPage;
+    private ShowPageInterface $showPage;
 
-    /** @var IndexPageInterface */
-    private $indexPage;
+    private \Sylius\Behat\Page\Shop\Product\IndexPageInterface $indexPage;
 
-    /** @var ProductReviewIndexPageInterface */
-    private $productReviewsIndexPage;
+    private ProductReviewIndexPageInterface $productReviewsIndexPage;
 
-    /** @var ErrorPageInterface */
-    private $errorPage;
+    private ErrorPageInterface $errorPage;
 
-    /** @var VerticalMenuElementInterface */
-    private $verticalMenuElement;
+    private VerticalMenuElementInterface $verticalMenuElement;
 
     public function __construct(
         ShowPageInterface $showPage,

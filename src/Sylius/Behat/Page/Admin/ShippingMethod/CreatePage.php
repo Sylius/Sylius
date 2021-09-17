@@ -135,7 +135,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * @throws ElementNotFoundException
      */
-    private function getFieldElement(string $element, array $parameters = []): ?\Behat\Mink\Element\NodeElement
+    private function getFieldElement(string $element, array $parameters = []): ?NodeElement
     {
         $element = $this->getElement(StringInflector::nameToCode($element), $parameters);
         while (null !== $element && !$element->hasClass('field')) {

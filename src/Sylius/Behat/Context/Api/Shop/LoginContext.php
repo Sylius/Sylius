@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use Sylius\Behat\Client\RequestInterface;
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
@@ -29,26 +30,19 @@ use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
 {
-    /** @var ApiSecurityClientInterface */
-    private $apiSecurityClient;
+    private ApiSecurityClientInterface $apiSecurityClient;
 
-    /** @var ApiClientInterface */
-    private $apiClient;
+    private ApiClientInterface $apiClient;
 
-    /** @var IriConverterInterface */
-    private $iriConverter;
+    private IriConverterInterface $iriConverter;
 
-    /** @var AbstractBrowser */
-    private $shopAuthenticationTokenClient;
+    private AbstractBrowser $shopAuthenticationTokenClient;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var Request|null */
-    private $request;
+    private ?RequestInterface $request = null;
 
     public function __construct(
         ApiSecurityClientInterface $apiSecurityClient,

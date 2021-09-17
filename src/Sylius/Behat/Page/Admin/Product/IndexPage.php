@@ -21,8 +21,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class IndexPage extends CrudIndexPage implements IndexPageInterface
 {
-    /** @var ImageExistenceCheckerInterface */
-    private $imageExistenceChecker;
+    private ImageExistenceCheckerInterface $imageExistenceChecker;
 
     public function __construct(
         Session $session,

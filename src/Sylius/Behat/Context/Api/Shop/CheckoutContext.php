@@ -47,41 +47,30 @@ final class CheckoutContext implements Context
         'payment' => OrderCheckoutStates::STATE_PAYMENT_SELECTED,
     ];
 
-    /** @var ApiClientInterface */
-    private $ordersClient;
+    private ApiClientInterface $ordersClient;
 
-    /** @var ApiClientInterface */
-    private $addressesClient;
+    private ApiClientInterface $addressesClient;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
-    /** @var RepositoryInterface */
-    private $shippingMethodRepository;
+    private RepositoryInterface $shippingMethodRepository;
 
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /** @var RepositoryInterface */
-    private $paymentMethodRepository;
+    private RepositoryInterface $paymentMethodRepository;
 
-    /** @var ProductVariantResolverInterface */
-    private $productVariantResolver;
+    private ProductVariantResolverInterface $productVariantResolver;
 
-    /** @var IriConverterInterface */
-    private $iriConverter;
+    private IriConverterInterface $iriConverter;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
     /** @var string[] */
-    private $content = [];
+    private array $content = [];
 
-    /** @var string */
-    private $paymentMethodClass;
+    private string $paymentMethodClass;
 
-    /** @var string */
-    private $shippingMethodClass;
+    private string $shippingMethodClass;
 
     public function __construct(
         ApiClientInterface $ordersClient,
