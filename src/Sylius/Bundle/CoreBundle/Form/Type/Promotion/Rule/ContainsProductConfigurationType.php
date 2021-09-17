@@ -24,8 +24,7 @@ use Symfony\Component\Validator\Constraints\Type;
 
 final class ContainsProductConfigurationType extends AbstractType
 {
-    /** @var RepositoryInterface */
-    private $productRepository;
+    private RepositoryInterface $productRepository;
 
     public function __construct(RepositoryInterface $productRepository)
     {

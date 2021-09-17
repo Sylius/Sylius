@@ -21,14 +21,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class LocaleFixture extends AbstractFixture
 {
-    /** @var FactoryInterface */
-    private $localeFactory;
+    private FactoryInterface $localeFactory;
 
-    /** @var ObjectManager */
-    private $localeManager;
+    private ObjectManager $localeManager;
 
-    /** @var string */
-    private $baseLocaleCode;
+    private string $baseLocaleCode;
 
     /**
      * @param string $baseLocaleCode

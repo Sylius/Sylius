@@ -22,14 +22,11 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ChannelSetup implements ChannelSetupInterface
 {
-    /** @var RepositoryInterface */
-    private $channelRepository;
+    private RepositoryInterface $channelRepository;
 
-    /** @var FactoryInterface */
-    private $channelFactory;
+    private FactoryInterface $channelFactory;
 
-    /** @var ObjectManager */
-    private $channelManager;
+    private ObjectManager $channelManager;
 
     public function __construct(
         RepositoryInterface $channelRepository,

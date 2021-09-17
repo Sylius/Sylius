@@ -17,8 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 final class OrderShippingMethodEligibility extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.order.shipping_method_eligibility';
+    public string $message = 'sylius.order.shipping_method_eligibility';
 
     public function validatedBy(): string
     {

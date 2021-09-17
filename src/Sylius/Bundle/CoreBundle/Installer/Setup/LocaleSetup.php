@@ -25,14 +25,11 @@ use Symfony\Component\Intl\Languages;
 
 final class LocaleSetup implements LocaleSetupInterface
 {
-    /** @var RepositoryInterface */
-    private $localeRepository;
+    private RepositoryInterface $localeRepository;
 
-    /** @var FactoryInterface */
-    private $localeFactory;
+    private FactoryInterface $localeFactory;
 
-    /** @var string */
-    private $locale;
+    private string $locale;
 
     public function __construct(RepositoryInterface $localeRepository, FactoryInterface $localeFactory, string $locale)
     {

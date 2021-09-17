@@ -20,8 +20,7 @@ use Symfony\Component\Templating\Helper\Helper;
 
 class VariantResolverHelper extends Helper
 {
-    /** @var ProductVariantResolverInterface */
-    private $productVariantResolver;
+    private ProductVariantResolverInterface $productVariantResolver;
 
     public function __construct(ProductVariantResolverInterface $productVariantResolver)
     {

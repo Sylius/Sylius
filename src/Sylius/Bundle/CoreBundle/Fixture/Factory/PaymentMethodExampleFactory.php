@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use Faker\Generator;
+use Faker\Factory;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
@@ -27,20 +29,15 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
 {
     public const DEFAULT_LOCALE = 'en_US';
 
-    /** @var PaymentMethodFactoryInterface */
-    private $paymentMethodFactory;
+    private PaymentMethodFactoryInterface $paymentMethodFactory;
 
-    /** @var RepositoryInterface */
-    private $localeRepository;
+    private RepositoryInterface $localeRepository;
 
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
+    private ChannelRepositoryInterface $channelRepository;
 
-    /** @var \Faker\Generator */
-    private $faker;
+    private Generator $faker;
 
-    /** @var OptionsResolver */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
         PaymentMethodFactoryInterface $paymentMethodFactory,
@@ -51,7 +48,7 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
         $this->localeRepository = $localeRepository;
         $this->channelRepository = $channelRepository;
 
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);

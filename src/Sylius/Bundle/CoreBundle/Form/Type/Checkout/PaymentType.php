@@ -22,8 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PaymentType extends AbstractType
 {
-    /** @var string */
-    private $dataClass;
+    private string $dataClass;
 
     public function __construct(string $dataClass)
     {

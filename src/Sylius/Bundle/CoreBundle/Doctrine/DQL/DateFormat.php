@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\DQL;
 
+use Doctrine\ORM\Query\AST\Node;
 use Doctrine\ORM\Query\AST\ArithmeticExpression;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
@@ -21,11 +22,9 @@ use Doctrine\ORM\Query\SqlWalker;
 
 final class DateFormat extends FunctionNode
 {
-    /** @var ArithmeticExpression|null */
-    public $date;
+    public ?ArithmeticExpression $date = null;
 
-    /** @var ArithmeticExpression|null */
-    public $pattern;
+    public ?Node $pattern = null;
 
     public function parse(Parser $parser)
     {

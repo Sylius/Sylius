@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use Faker\Generator;
+use Faker\Factory;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\Scope as AddressingScope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -32,29 +34,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /** @var ChannelFactoryInterface */
-    private $channelFactory;
+    private ChannelFactoryInterface $channelFactory;
 
-    /** @var RepositoryInterface */
-    private $localeRepository;
+    private RepositoryInterface $localeRepository;
 
-    /** @var RepositoryInterface */
-    private $currencyRepository;
+    private RepositoryInterface $currencyRepository;
 
-    /** @var RepositoryInterface */
-    private $zoneRepository;
+    private RepositoryInterface $zoneRepository;
 
-    /** @var \Faker\Generator */
-    private $faker;
+    private Generator $faker;
 
-    /** @var OptionsResolver */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
-    /** @var TaxonRepositoryInterface|null */
-    private $taxonRepository;
+    private ?TaxonRepositoryInterface $taxonRepository;
 
-    /** @var FactoryInterface|null */
-    private $shopBillingDataFactory;
+    private ?FactoryInterface $shopBillingDataFactory;
 
     public function __construct(
         ChannelFactoryInterface $channelFactory,
@@ -79,7 +73,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         $this->taxonRepository = $taxonRepository;
         $this->shopBillingDataFactory = $shopBillingDataFactory;
 
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);

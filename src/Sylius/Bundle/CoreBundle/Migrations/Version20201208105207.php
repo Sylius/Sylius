@@ -18,8 +18,7 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20201208105207 extends AbstractMigration
 {
-    /** @var array */
-    private $shippingName = [];
+    private array $shippingName = [];
 
     public function getDescription(): string
     {

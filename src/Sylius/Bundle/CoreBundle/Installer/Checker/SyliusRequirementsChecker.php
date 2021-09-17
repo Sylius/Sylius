@@ -22,11 +22,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class SyliusRequirementsChecker implements RequirementsCheckerInterface
 {
-    /** @var SyliusRequirements */
-    private $syliusRequirements;
+    private SyliusRequirements $syliusRequirements;
 
-    /** @var bool */
-    private $fulfilled = true;
+    private bool $fulfilled = true;
 
     public function __construct(SyliusRequirements $syliusRequirements)
     {

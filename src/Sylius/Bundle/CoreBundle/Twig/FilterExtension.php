@@ -19,8 +19,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class FilterExtension extends BaseFilterExtension
 {
-    /** @var string */
-    private $imagesPath;
+    private string $imagesPath;
 
     public function __construct(string $imagesPath, CacheManager $cache)
     {

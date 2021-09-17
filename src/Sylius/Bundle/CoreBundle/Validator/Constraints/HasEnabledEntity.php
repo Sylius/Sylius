@@ -17,20 +17,15 @@ use Symfony\Component\Validator\Constraint;
 
 final class HasEnabledEntity extends Constraint
 {
-    /** @var string|null */
-    public $objectManager;
+    public ?string $objectManager = null;
 
-    /** @var string */
-    public $message = 'Must have at least one enabled entity';
+    public string $message = 'Must have at least one enabled entity';
 
-    /** @var string */
-    public $repositoryMethod = 'findBy';
+    public string $repositoryMethod = 'findBy';
 
-    /** @var string|null */
-    public $errorPath;
+    public ?string $errorPath = null;
 
-    /** @var string */
-    public $enabledPath = 'enabled';
+    public string $enabledPath = 'enabled';
 
     public function getTargets(): string
     {
