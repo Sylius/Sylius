@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Kuvaus
+            name: Nimi
         promotion:
             actions: Toiminnot
             add_action: Lisää toiminto

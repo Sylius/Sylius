@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Описание
+            name: Име
         promotion:
             actions: Действия
             add_action: Добавяне на действие

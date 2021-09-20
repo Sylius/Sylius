@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Beskrivning
+            name: Namn
         promotion:
             actions: Åtgärder
             add_action: Lägg till åtgärd

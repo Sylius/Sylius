@@ -170,7 +170,6 @@ sylius:
         product_reviews: 'Preču atsauksmes'
         product_taxons: 'Produktu kategorijas'
         products: 'Preces'
-        promotions: 'Akcijas'
         province: 'Rajons'
         provinces: 'Rajoni'
         remember_me: 'Atcerēties mani'

@@ -9,6 +9,8 @@ sylius:
             title: Otsikko
         cart:
             coupon: Kuponki
+        catalog_promotion:
+            channels: Kanavat
         checkout:
             addressing:
                 different_billing_address: Käytä eri osoitetta laskutukseen?

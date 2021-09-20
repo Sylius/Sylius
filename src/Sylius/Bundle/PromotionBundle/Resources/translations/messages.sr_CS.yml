@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Opis
+            name: Ime
         promotion:
             actions: Akcije
             add_action: Dodajte akciju

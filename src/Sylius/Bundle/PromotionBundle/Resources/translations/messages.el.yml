@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Περιγραφή
+            name: Ονομασία
         promotion:
             actions: Ενέργειες
             add_action: Προσθήκη λειτουργίας

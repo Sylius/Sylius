@@ -8,6 +8,8 @@ sylius:
             id: Númer
         cart:
             coupon: Afsláttarkóði
+        catalog_promotion:
+            channels: Sölumátar
         promotion:
             channels: Sölumátar
         promotion_action:

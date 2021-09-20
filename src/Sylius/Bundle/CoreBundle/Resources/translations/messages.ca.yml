@@ -9,6 +9,8 @@ sylius:
             title: Títol
         cart:
             coupon: Cupó
+        catalog_promotion:
+            channels: Canals
         checkout:
             addressing:
                 different_billing_address: Utilitzar diferent adreça de facturació?

@@ -9,6 +9,8 @@ sylius:
             title: หัวข้อ
         cart:
             coupon: คูปอง
+        catalog_promotion:
+            channels: ช่องทางจำหน่าย
         checkout:
             addressing:
                 different_billing_address: ใช้ที่อยู่อื่นสำหรับเรียกเก็บเงินหรือไม่
