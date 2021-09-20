@@ -1,0 +1,71 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2020-12-29T11:18:28Z
+
+Hi @toofff! I believe such a customization option is already introduced a level higher [in this file](https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/AdminBundle/Resources/views/Crud/Index/_header.html.twig#L4). It, of course, is a little bit different - but the proposed solution seems as duplicated behaviour.
+
+---------------------------------------------------------------------------
+
+by toofff at 2020-12-29T11:46:26Z
+
+@Zales0123 I'm not thinking duplicating an existing solution.
+
+Currently we can directly change the `header` and the `subheader` with a translation key that we want to put.
+I just wanted to make the code homogeneous for the breadcrumb.
+
+```
+app_admin_page:
+    resource: |
+        alias: app.page
+        section: admin
+        path: /pages
+        templates: "@SyliusAdmin\\Crud"
+        redirect: update
+        grid: app_admin_page
+        permission: true
+        vars:
+            all:
+                breadcrumb: app.ui.page.breadcrumb
+                header: app.ui.page.header
+                subheader: app.ui.page.subheader
+    type: sylius.resource
+    prefix: admin
+```
+
+However for the `subheader` variable [we can define it with the `subheader` key](https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/AdminBundle/Resources/views/Crud/Index/_headerTitle.html.twig#L3) or [change the template with `header_title` key](https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/AdminBundle/Resources/views/Crud/Index/_header.html.twig#L3).
+
+---------------------------------------------------------------------------
+
+by toofff at 2021-01-26T07:37:16Z
+
+@Zales0123 do I have to keep the branch up to date or do I just delete my pull request?
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2021-01-26T08:09:20Z
+
+Hello, sorry for processing it long 🖖 Please, update to the master branch and I would like to see the opinion of other @Sylius/core-team members :)
+
+---------------------------------------------------------------------------
+
+by toofff at 2021-01-26T08:38:05Z
+
+@Zales0123 Done ;)
+
+---------------------------------------------------------------------------
+
+by stale[bot] at 2021-06-26T03:06:27Z
+
+This issue has been automatically marked as stale because it has not had any recent activity. It will be closed in a week if no further activity occurs. Thank you for your contributions.
+
+---------------------------------------------------------------------------
+
+by toofff at 2021-06-29T15:04:00Z
+
+@Zales0123 @lchrusciel are we closing my pull request or do you want to merge it? What do you need to merge it?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-09-20T11:00:50Z
+
+Thanks, @toofff! :tada:
