@@ -8,26 +8,15 @@ Feature: Reapplying catalog promotion after editing its action
         Given the store operates on a channel identified by "Web-US" code
         And the store has a "T-Shirt" configurable product
         And this product has "PHP T-Shirt" variant priced at "$20.00" in "Web-US" channel
-        And there is a catalog promotion "Winter sale" that reduces price by "50%" and applies on "PHP T-shirt" variant
+        And there is a catalog promotion with "Winter_sale" code and "Winter sale" name
+        And it applies on "PHP T-Shirt" variant
         And I am logged in as an administrator
 
     @api
-    Scenario: Reapplying catalog promotion after editing its action
+    Scenario: Reapplying catalog promotion after adding its action
         When I modify a catalog promotion "Winter sale"
-        And I edit its action so that it reduces price by "25%"
+        And I add action that gives "25%" percentage discount
         And I save my changes
         Then the visitor view "PHP T-Shirt" variant
         Then the product variant price should be "$15.00"
-        And the product original price should be "$20.00"
-
-    @api
-    Scenario: Reapplying catalog promotion after removing and adding its action
-        When I modify a catalog promotion "Winter sale"
-        And I remove its every action
-        And I save my changes
-        Then I modify a catalog promotion "Winter sale" again
-        And I add action that gives "10%" percentage discount
-        And I save my changes
-        Then the visitor view "PHP T-Shirt" variant
-        And the product variant price should be "$18.00"
         And the product original price should be "$20.00"

@@ -129,7 +129,6 @@ Example configuration for `percentage_discount` action type:
             </attribute>
         </property>
         <property name="rules" writable="true" />
-        <property name="actions" writable="true">
-        </property>
+        <property name="actions" writable="true" />
     </resource>
 </resources>

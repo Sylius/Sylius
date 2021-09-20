@@ -154,7 +154,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When I want to modify a catalog promotion :catalogPromotion
-     * @When I modify a catalog promotion :catalogPromotion
+     * @When I modify a catalog promotion :catalogPromotion (again)
      */
     public function iWantToModifyACatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
@@ -185,6 +185,16 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $content = $this->client->getContent();
         $content['actions'][0]['configuration']['amount'] = $amount;
+        $this->client->updateRequestData($content);
+    }
+
+    /**
+     * @When /^I remove its every action$/
+     */
+    public function iRemoveItsEveryAction(): void
+    {
+        $content = $this->client->getContent();
+        $content['actions'] = [];
         $this->client->updateRequestData($content);
     }
 

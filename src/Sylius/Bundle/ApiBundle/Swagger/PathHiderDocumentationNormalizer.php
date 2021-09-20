@@ -35,7 +35,7 @@ class PathHiderDocumentationNormalizer implements NormalizerInterface
     public function normalize($object, $format = null, array $context = [])
     {
         $docs = $this->decoratedNormalizer->normalize($object, $format, $context);
-        $paths = (array) $docs['paths'];
+        $paths = $docs['paths']->getArrayCopy();
 
         foreach ($this->apiRoutes as $apiRoute) {
             if (array_key_exists($apiRoute, $paths)) {
@@ -44,6 +44,7 @@ class PathHiderDocumentationNormalizer implements NormalizerInterface
         }
 
         $docs['paths'] = $paths;
+
         return $docs;
     }
 }

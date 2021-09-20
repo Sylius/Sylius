@@ -31,8 +31,5 @@
         <collectionOperations/>
 
         <property name="id" identifier="true" writable="false" />
-        <property name="catalogPromotion" readable="true" />
-        <property name="type" readable="true" />
-        <property name="configuration" readable="true" />
     </resource>
 </resources>
