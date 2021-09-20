@@ -335,7 +335,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When /^I make (this catalog promotion) unavailable in the ("[^"]+" channel)$/
-     * @When /^I make ("[^"]+" catalog promotion) unavailable in the ("[^"]+" channel)$/
+     * @When /^I make the ("[^"]+" catalog promotion) unavailable in the ("[^"]+" channel)$/
      */
     public function iMakeThisCatalogPromotionUnavailableInTheChannel(
         CatalogPromotionInterface $catalogPromotion,
