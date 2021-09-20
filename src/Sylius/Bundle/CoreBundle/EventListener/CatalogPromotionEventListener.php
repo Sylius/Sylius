@@ -33,7 +33,7 @@ final class CatalogPromotionEventListener
     {
         $entity = $args->getObject();
 
-         if ($entity instanceof CatalogPromotionInterface) {
+        if ($entity instanceof CatalogPromotionInterface) {
             $this->eventBus->dispatch(new CatalogPromotionCreated($entity->getCode()));
         }
     }
