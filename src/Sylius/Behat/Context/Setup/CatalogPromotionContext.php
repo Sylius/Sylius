@@ -178,6 +178,36 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
+     * @Given /^there is a another catalog promotion "([^"]*)" available in ("[^"]+" channel) and ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
+     */
+    public function thereIsAAnotherCatalogPromotionAvailableInChannelAndChannelThatReducesPriceByAndAppliesOnVariant(
+        string $name,
+        ChannelInterface $firstChannel,
+        ChannelInterface $secondChannel,
+        float $discount,
+        ProductVariantInterface $variant
+    ): void {
+        $this->createCatalogPromotion(
+            $name,
+            null,
+            [
+                $firstChannel->getCode(),
+                $secondChannel->getCode()
+            ],
+            [[
+                'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+                'configuration' => ['variants' => [$variant->getCode()]],
+            ]],
+            [[
+                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'configuration' => ['amount' => $discount],
+            ]]
+        );
+
+        $this->entityManager->flush();
+    }
+
+    /**
      * @When And the :catalogPromotion catalog promotion is no longer available
      */
     public function theAdministratorMakesThisCatalogPromotionUnavailableInTheChannel(
