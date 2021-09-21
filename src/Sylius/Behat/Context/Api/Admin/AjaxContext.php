@@ -20,7 +20,7 @@ use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingProductVariantsContext implements Context
+final class AjaxContext implements Context
 {
     private AbstractBrowser $client;
 

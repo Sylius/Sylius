@@ -18,6 +18,11 @@
     <services>
         <defaults public="true" />
 
+        <service id="sylius.behat.context.api.admin.ajax" class="Sylius\Behat\Context\Api\Admin\AjaxContext">
+            <argument type="service" id="test.client" />
+            <argument type="service" id="session" />
+        </service>
+
         <service id="sylius.behat.context.api.admin.login" class="Sylius\Behat\Context\Api\Admin\LoginContext">
             <argument type="service" id="sylius.behat.client.admin_api_platform_security_client" />
         </service>
@@ -71,11 +76,6 @@
             <argument type="service" id="sylius.behat.api_platform_client.admin.product_option" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
-        </service>
-
-        <service id="sylius.behat.context.api.admin.managing_product_variants" class="Sylius\Behat\Context\Api\Admin\ManagingProductVariantsContext">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="session" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_products" class="Sylius\Behat\Context\Api\Admin\ManagingProductsContext">
