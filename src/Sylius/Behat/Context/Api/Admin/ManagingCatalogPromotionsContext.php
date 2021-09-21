@@ -491,7 +491,16 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function thisCatalogPromotionShouldBeUsable(): void
     {
-        Assert::isInstanceOf($this->messageBus->getDispatchedMessages()[0]['message'], CatalogPromotionCreated::class);
+        $hasMessage = false;
+
+        foreach ($this->messageBus->getDispatchedMessages() as $dispatchedMessage) {
+            if ($dispatchedMessage['message'] instanceof CatalogPromotionCreated) {
+                $hasMessage = true;
+                break;
+            }
+        }
+
+        Assert::true($hasMessage, sprintf('There is no message dispatched of type %s', CatalogPromotionCreated::class));
     }
 
     /**
