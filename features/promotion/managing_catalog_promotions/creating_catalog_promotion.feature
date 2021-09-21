@@ -16,7 +16,6 @@ Feature: Creating a catalog promotion
         When I create a new catalog promotion with "winter_sale" code and "Winter sale" name
         Then there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name
-        And this catalog promotion should be usable
 
     @api @ui @javascript
     Scenario: Creating a catalog promotion
@@ -32,7 +31,6 @@ Feature: Creating a catalog promotion
         And it should have "winter_sale" code and "Winter sale" name
         And "Winter sale" catalog promotion should apply to "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And it should have "50%" discount
-        And this catalog promotion should be usable
 
     @api @ui
     Scenario: Creating a catalog promotion for channel
@@ -44,4 +42,3 @@ Feature: Creating a catalog promotion
         Then there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name
         And the catalog promotion "Winter sale" should be available in channel "United States"
-        And this catalog promotion should be usable

@@ -23,6 +23,7 @@ use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
+use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
@@ -174,6 +175,25 @@ final class ManagingCatalogPromotionsContext implements Context
                 'amount' => $amount
             ],
         ]];
+
+        $this->client->addRequestData('actions', $actions);
+    }
+
+    /**
+     * @When /^I add another action that gives ("[^"]+") percentage discount$/
+     */
+    public function iAddAnotherActionThatGivesPercentageDiscount(float $amount): void
+    {
+        $actions = $this->client->getContent()['actions'];
+
+        $additionalAction = [[
+            'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+            'configuration' => [
+                'amount' => $amount
+            ],
+        ]];
+
+        $actions = array_merge_recursive($actions, $additionalAction);
 
         $this->client->addRequestData('actions', $actions);
     }
@@ -484,23 +504,6 @@ final class ManagingCatalogPromotionsContext implements Context
             ['variants' => [$firstVariant->getCode(), $secondVariant->getCode()]],
             $this->responseChecker->getCollection($this->client->getLastResponse())[0]['rules'][0]['configuration']
         );
-    }
-
-    /**
-     * @Then this catalog promotion should be usable
-     */
-    public function thisCatalogPromotionShouldBeUsable(): void
-    {
-        $hasMessage = false;
-
-        foreach ($this->messageBus->getDispatchedMessages() as $dispatchedMessage) {
-            if ($dispatchedMessage['message'] instanceof CatalogPromotionCreated) {
-                $hasMessage = true;
-                break;
-            }
-        }
-
-        Assert::true($hasMessage, sprintf('There is no message dispatched of type %s', CatalogPromotionCreated::class));
     }
 
     /**

@@ -31,3 +31,12 @@ Feature: Reapplying catalog promotion after editing its action
         Then the visitor view "PHP T-Shirt" variant
         And the product variant price should be "$18.00"
         And the product original price should be "$20.00"
+
+    @api
+    Scenario: Reapplying catalog promotion after changing the effect of the promotion in action configuration
+        When I modify a catalog promotion "Winter sale"
+        And I add another action that gives "10%" percentage discount
+        And I save my changes
+        Then the visitor view "PHP T-Shirt" variant
+        And the product variant price should be "$9.00"
+        And the product original price should be "$20.00"
