@@ -328,6 +328,7 @@ final class ProductContext implements Context
     /**
      * @Then the product price should be :price
      * @Then the product variant price should be :price
+     * @Then this product variant price should be :price
      * @Then I should see the product price :price
      * @Then I should see that the combination is :price
      */
@@ -338,6 +339,7 @@ final class ProductContext implements Context
 
     /**
      * @Then the product original price should be :price
+     * @Then this product original price should be :price
      * @Then I should see the product original price :price
      */
     public function iShouldSeeTheProductOriginalPrice($price)

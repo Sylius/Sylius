@@ -31,6 +31,7 @@ Feature: Creating a catalog promotion
         And it should have "winter_sale" code and "Winter sale" name
         And "Winter sale" catalog promotion should apply to "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And it should have "50%" discount
+        And this catalog promotion should be usable
 
     @api @ui
     Scenario: Creating a catalog promotion for channel

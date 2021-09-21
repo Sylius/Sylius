@@ -67,7 +67,7 @@ final class ProductVariantContext implements Context
     }
 
     /**
-     * @Then /^the product variant price should be ("[^"]+")$/
+     * @Then /^(?:the|this) product variant price should be ("[^"]+")$/
      */
     public function theProductVariantPriceShouldBe(int $price): void
     {
@@ -77,7 +77,7 @@ final class ProductVariantContext implements Context
     }
 
     /**
-     * @Then /^the product original price should be ("[^"]+")$/
+     * @Then /^(?:the|this) product original price should be ("[^"]+")$/
      */
     public function theProductOriginalPriceShouldBe(int $originalPrice): void
     {

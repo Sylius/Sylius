@@ -22,6 +22,7 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
@@ -153,7 +154,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When I want to modify a catalog promotion :catalogPromotion
-     * @When I modify a catalog promotion :catalogPromotion (again)
+     * @When I modify a catalog promotion :catalogPromotion
      */
     public function iWantToModifyACatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
@@ -207,7 +208,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I remove its every action$/
+     * @When I remove its every action
      */
     public function iRemoveItsEveryAction(): void
     {
@@ -502,6 +503,14 @@ final class ManagingCatalogPromotionsContext implements Context
             ['variants' => [$firstVariant->getCode(), $secondVariant->getCode()]],
             $this->responseChecker->getCollection($this->client->getLastResponse())[0]['rules'][0]['configuration']
         );
+    }
+
+    /**
+     * @Then this catalog promotion should be usable
+     */
+    public function thisCatalogPromotionShouldBeUsable(): void
+    {
+        Assert::isInstanceOf($this->messageBus->getDispatchedMessages()[0]['message'], CatalogPromotionUpdated::class);
     }
 
     /**
