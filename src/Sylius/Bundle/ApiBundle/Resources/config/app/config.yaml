@@ -6,6 +6,7 @@ parameters:
     sylius.api.authorization_header: "%env(resolve:SYLIUS_API_AUTHORIZATION_HEADER)%"
     sylius.api.paths_to_hide: 
         - "/api/v2/admin/catalog-promotion-actions/{id}"
+        - "/api/v2/admin/catalog-promotion-rules/{id}"
         - "/api/v2/admin/channel-pricings/{id}"
     sylius.security.new_api_route: "/api/v2"
     sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
