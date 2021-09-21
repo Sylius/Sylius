@@ -17,6 +17,7 @@ use Doctrine\Persistence\Event\LifecycleEventArgs;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\EventListener\CatalogPromotionEventListener;
+use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
@@ -47,8 +48,6 @@ final class CatalogPromotionEventListenerSpec extends ObjectBehavior
 
         $message = new CatalogPromotionUpdated('winter_sale');
         $eventBus->dispatch($message)->willReturn(new Envelope($message))->shouldBeCalled();
-
-        $this->postPersist($args);
     }
 
     function it_does_not_send_catalog_promotion_updated_after_persisting_other_entity(
@@ -61,10 +60,42 @@ final class CatalogPromotionEventListenerSpec extends ObjectBehavior
         $this->postPersist($args);
     }
 
+    function it_sends_catalog_promotion_updated_after_persisting_catalog_promotion_rule(
+        MessageBusInterface $eventBus,
+        LifecycleEventArgs $args,
+        CatalogPromotionRuleInterface $entity,
+        CatalogPromotionInterface $catalogPromotion
+    ): void {
+        $args->getObject()->willReturn($entity);
+        $entity->getCatalogPromotion()->willReturn($catalogPromotion);
+        $catalogPromotion->getCode()->willReturn('winter_sale');
+
+        $message = new CatalogPromotionUpdated('winter_sale');
+        $eventBus->dispatch($message)->willReturn(new Envelope($message))->shouldBeCalled();
+
+        $this->postPersist($args);
+    }
+
     function it_sends_catalog_promotion_updated_after_updating_catalog_promotion(
         MessageBusInterface $eventBus,
         LifecycleEventArgs $args,
         CatalogPromotionActionInterface $entity,
+        CatalogPromotionInterface $catalogPromotion
+    ): void {
+        $args->getObject()->willReturn($entity);
+        $entity->getCatalogPromotion()->willReturn($catalogPromotion);
+        $catalogPromotion->getCode()->willReturn('winter_sale');
+
+        $message = new CatalogPromotionUpdated('winter_sale');
+        $eventBus->dispatch($message)->willReturn(new Envelope($message))->shouldBeCalled();
+
+        $this->postUpdate($args);
+    }
+
+    function it_sends_catalog_promotion_updated_after_updating_catalog_promotion_rule(
+        MessageBusInterface $eventBus,
+        LifecycleEventArgs $args,
+        CatalogPromotionRuleInterface $entity,
         CatalogPromotionInterface $catalogPromotion
     ): void {
         $args->getObject()->willReturn($entity);
