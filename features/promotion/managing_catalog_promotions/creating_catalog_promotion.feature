@@ -18,7 +18,7 @@ Feature: Creating a catalog promotion
         And it should have "winter_sale" code and "Winter sale" name
 
     @api @ui @javascript
-    Scenario: Creating a catalog promotion
+    Scenario: Creating a enabled catalog promotion
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
         And I name it "Winter sale"
@@ -26,12 +26,32 @@ Feature: Creating a catalog promotion
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
         And I add rule that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add action that gives "50%" percentage discount
+        And I enable it
         And I add it
         Then there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name
         And "Winter sale" catalog promotion should apply to "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And it should have "50%" discount
         And this catalog promotion should be usable
+        And "PHP T-Shirt" variant and "Kotlin T-Shirt" variant should be discounted
+
+    @api @ui @javascript
+    Scenario: Creating a disabled catalog promotion
+        When I want to create a new catalog promotion
+        And I specify its code as "winter_sale"
+        And I name it "Winter sale"
+        And I specify its label as "Winter -50%" in "English (United States)"
+        And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
+        And I add rule that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And I add action that gives "50%" percentage discount
+        And I disable it
+        And I add it
+        Then there should be 1 new catalog promotion on the list
+        And it should have "winter_sale" code and "Winter sale" name
+        And "Winter sale" catalog promotion should apply to "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And it should have "50%" discount
+        And this catalog promotion should be usable
+        And "PHP T-Shirt" variant and "Kotlin T-Shirt" variant should not be discounted
 
     @api @ui
     Scenario: Creating a catalog promotion for channel

@@ -13,6 +13,7 @@ Feature: Editing catalog promotion
         And there is a catalog promotion with "christmas_sale" code and "Christmas sale" name
         And it applies on "PHP T-Shirt" variant
         And it reduces price by "30%"
+        And it is enabled
         And I am logged in as an administrator
 
     @api @ui
@@ -57,3 +58,14 @@ Feature: Editing catalog promotion
         When I edit "Christmas sale" catalog promotion to have "40%" discount
         Then I should be notified that it has been successfully edited
         And this catalog promotion should have "40%" percentage discount
+
+    @api
+    Scenario: Disabling catalog promotion
+        When I disable this catalog promotion
+        Then this catalog promotion should not decrease price of "PHP T-Shirt" variant
+
+    @api
+    Scenario: Enabling catalog promotion
+        Given this catalog promotion is disabled
+        When I enable this catalog promotion
+        Then this catalog promotion should decrease price of "PHP T-Shirt" variant

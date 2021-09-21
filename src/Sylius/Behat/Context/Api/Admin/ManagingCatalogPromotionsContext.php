@@ -102,6 +102,26 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I disable this catalog promotion
+     */
+    public function iDisableCatalogPromotion(): void
+    {
+        $data = ['enabled' => false];
+
+        $this->client->updateRequestData($data);
+    }
+
+    /**
+     * @When I enable this catalog promotion
+     */
+    public function iEnableCatalogPromotion(): void
+    {
+        $data = ['enabled' => true];
+
+        $this->client->updateRequestData($data);
+    }
+
+    /**
      * @When I describe it as :description in :localeCode
      */
     public function iDescribeItAsIn(string $description, string $localeCode): void
