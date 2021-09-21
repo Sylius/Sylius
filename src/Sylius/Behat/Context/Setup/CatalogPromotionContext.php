@@ -178,9 +178,9 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^there is a another catalog promotion "([^"]*)" available in ("[^"]+" channel) and ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
+     * @Given /^there is another catalog promotion "([^"]*)" available in ("[^"]+" channel) and ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
      */
-    public function thereIsAAnotherCatalogPromotionAvailableInChannelAndChannelThatReducesPriceByAndAppliesOnVariant(
+    public function thereIsAnotherCatalogPromotionAvailableInChannelsThatReducesPriceByAndAppliesOnVariant(
         string $name,
         ChannelInterface $firstChannel,
         ChannelInterface $secondChannel,
@@ -194,6 +194,32 @@ final class CatalogPromotionContext implements Context
                 $firstChannel->getCode(),
                 $secondChannel->getCode()
             ],
+            [[
+                'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+                'configuration' => ['variants' => [$variant->getCode()]],
+            ]],
+            [[
+                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'configuration' => ['amount' => $discount],
+            ]]
+        );
+
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given /^there is another catalog promotion "([^"]*)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
+     */
+    public function thereIsAnotherCatalogPromotionAvailableInChannelThatReducesPriceByAndAppliesOnVariant(
+        string $name,
+        ChannelInterface $channel,
+        float $discount,
+        ProductVariantInterface $variant
+    ): void {
+        $this->createCatalogPromotion(
+            $name,
+            null,
+            [$channel->getCode()],
             [[
                 'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
                 'configuration' => ['variants' => [$variant->getCode()]],

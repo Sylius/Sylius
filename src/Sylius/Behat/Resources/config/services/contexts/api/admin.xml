@@ -87,6 +87,10 @@
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
+        <service id="sylius.behat.context.api.admin.managing_product_variants" class="Sylius\Behat\Context\Api\Admin\ManagingProductVariantsContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin.product_variant" />
+        </service>
+
         <service id="sylius.behat.context.api.admin.managing_tax_categories" class="Sylius\Behat\Context\Api\Admin\ManagingTaxCategoriesContext">
             <argument type="service" id="sylius.behat.api_platform_client.admin.tax_category" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
