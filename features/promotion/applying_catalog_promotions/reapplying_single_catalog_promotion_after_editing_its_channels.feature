@@ -20,7 +20,7 @@ Feature: Reapplying single catalog promotion after editing its channels
         Then the visitor should see "$20.00" as the price of the "T-Shirt" product in the "Web-US" channel
         And the visitor should see "$20.00" as the original price of the "T-Shirt" product in the "Web-US" channel
 
-    @api
+    @api @ui
     Scenario: Reapplying catalog promotion after adding new channel to them
         When I make this catalog promotion available in the "Web-GB" channel
         Then the visitor should see "$21.00" as the price of the "T-Shirt" product in the "Web-GB" channel
@@ -35,3 +35,15 @@ Feature: Reapplying single catalog promotion after editing its channels
         And the visitor should see "$20.00" as the original price of the "T-Shirt" product in the "Web-US" channel
         And the visitor should see "$21.00" as the price of the "T-Shirt" product in the "Web-GB" channel
         And the visitor should see "$30.00" as the original price of the "T-Shirt" product in the "Web-GB" channel
+
+    @ui
+    Scenario: Reapplying catalog promotion after switching availability in channels
+        When I switch this catalog promotion availability from the "Web-US" channel to the "Web-GB" channel
+        Then the visitor should see "$20.00" as the price of the "T-Shirt" product in the "Web-US" channel
+        And the visitor should see "$21.00" as the price of the "T-Shirt" product in the "Web-GB" channel
+        And the visitor should see "$30.00" as the original price of the "T-Shirt" product in the "Web-GB" channel
+
+    @ui
+    Scenario: Removing applied catalog promotion after removing its channel
+        When I make this catalog promotion unavailable in the "Web-US" channel
+        Then the visitor should see "$20.00" as the price of the "T-Shirt" product in the "Web-US" channel
