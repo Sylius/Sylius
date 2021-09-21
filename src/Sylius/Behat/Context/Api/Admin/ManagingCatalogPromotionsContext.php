@@ -335,6 +335,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When /^I make (this catalog promotion) unavailable in the ("[^"]+" channel)$/
+     * @When /^I make the ("[^"]+" catalog promotion) unavailable in the ("[^"]+" channel)$/
      */
     public function iMakeThisCatalogPromotionUnavailableInTheChannel(
         CatalogPromotionInterface $catalogPromotion,
@@ -355,6 +356,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When /^I make (this catalog promotion) available in the ("[^"]+" channel)$/
+     * @When /^I make ("[^"]+" catalog promotion) available in the ("[^"]+" channel)$/
      */
     public function iMakeThisCatalogPromotionAvailableInTheChannel(
         CatalogPromotionInterface $catalogPromotion,
@@ -369,6 +371,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When /^I switch (this catalog promotion) availability from the ("[^"]+" channel) to the ("[^"]+" channel)$/
+     * @When /^I switch ("[^"]+" catalog promotion) availability from the ("[^"]+" channel) to the ("[^"]+" channel)$/
      */
     public function iSwitchThisCatalogPromotionAvailabilityFromTheChannelToTheChannel(
         CatalogPromotionInterface $catalogPromotion,

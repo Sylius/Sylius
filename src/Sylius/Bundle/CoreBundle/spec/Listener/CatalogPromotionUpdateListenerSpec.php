@@ -35,13 +35,17 @@ final class CatalogPromotionUpdateListenerSpec extends ObjectBehavior
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionProcessorInterface $catalogPromotionProcessor,
         RepositoryInterface $catalogPromotionRepository,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $firstCatalogPromotion,
+        CatalogPromotionInterface $secondCatalogPromotion
     ): void {
         $catalogPromotionClearer->clear()->shouldBeCalled();
 
-        $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
+        $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($firstCatalogPromotion);
 
-        $catalogPromotionProcessor->process($catalogPromotion)->shouldBeCalled();
+        $catalogPromotionRepository->findAll()->willReturn([$firstCatalogPromotion, $secondCatalogPromotion]);
+
+        $catalogPromotionProcessor->process($firstCatalogPromotion)->shouldBeCalled();
+        $catalogPromotionProcessor->process($secondCatalogPromotion)->shouldBeCalled();
 
         $this->__invoke(new CatalogPromotionUpdated('WINTER_MUGS_SALE'));
     }

@@ -1,5 +1,5 @@
 @applying_catalog_promotions
-Feature: Reapplying catalog promotions after editing its channels
+Feature: Reapplying single catalog promotion after editing its channels
     In order to have proper discounts in different channels
     As a Store Owner
     I want to have discounts reapplied in product catalog once the channels of catalog promotion changes
