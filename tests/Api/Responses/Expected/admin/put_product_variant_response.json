@@ -11,8 +11,8 @@
             "@type": "ChannelPricing",
             "id": @integer@,
             "channelCode": "WEB",
-            "price": 2000,
-            "originalPrice": null
+            "price": 3000,
+            "originalPrice": 4000
         }
     },
     "optionValues":[],
