@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\Listener;
 
+use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
@@ -26,14 +27,21 @@ final class CatalogPromotionUpdateListenerSpec extends ObjectBehavior
     function let(
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionProcessorInterface $catalogPromotionProcessor,
-        RepositoryInterface $catalogPromotionRepository
+        RepositoryInterface $catalogPromotionRepository,
+        EntityManagerInterface $entityManager
     ): void {
-        $this->beConstructedWith($catalogPromotionClearer, $catalogPromotionProcessor, $catalogPromotionRepository);
+        $this->beConstructedWith(
+            $catalogPromotionClearer,
+            $catalogPromotionProcessor,
+            $catalogPromotionRepository,
+            $entityManager
+        );
     }
 
     function it_processes_catalog_promotion_that_has_just_been_updated(
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionProcessorInterface $catalogPromotionProcessor,
+        EntityManagerInterface $entityManager,
         RepositoryInterface $catalogPromotionRepository,
         CatalogPromotionInterface $firstCatalogPromotion,
         CatalogPromotionInterface $secondCatalogPromotion
@@ -46,6 +54,8 @@ final class CatalogPromotionUpdateListenerSpec extends ObjectBehavior
 
         $catalogPromotionProcessor->process($firstCatalogPromotion)->shouldBeCalled();
         $catalogPromotionProcessor->process($secondCatalogPromotion)->shouldBeCalled();
+
+        $entityManager->flush()->shouldBeCalled();
 
         $this->__invoke(new CatalogPromotionUpdated('WINTER_MUGS_SALE'));
     }

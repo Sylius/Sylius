@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Processor;
 
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
@@ -25,13 +26,11 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
 {
     function let(
         CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
-        CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
-        EntityManagerInterface $entityManager
+        CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator
     ): void {
         $this->beConstructedWith(
             $catalogPromotionVariantsProvider,
-            $productCatalogPromotionApplicator,
-            $entityManager
+            $productCatalogPromotionApplicator
         );
     }
 
@@ -43,7 +42,6 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
     function it_applies_catalog_promotion_on_eligible_variants(
         CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
         CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
-        EntityManagerInterface $entityManager,
         CatalogPromotionInterface $catalogPromotion,
         ProductVariantInterface $firstVariant,
         ProductVariantInterface $secondVariant
@@ -56,19 +54,17 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
         $productCatalogPromotionApplicator->applyCatalogPromotion($firstVariant, $catalogPromotion)->shouldBeCalled();
         $productCatalogPromotionApplicator->applyCatalogPromotion($secondVariant, $catalogPromotion)->shouldBeCalled();
 
-        $entityManager->flush()->shouldBeCalled();
-
         $this->process($catalogPromotion);
     }
 
     function it_does_nothing_if_there_are_no_eligible_variants(
         CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
-        EntityManagerInterface $entityManager,
+        CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
         CatalogPromotionInterface $catalogPromotion
     ): void {
         $catalogPromotionVariantsProvider->provideEligibleVariants($catalogPromotion)->willReturn([]);
 
-        $entityManager->flush()->shouldNotBeCalled();
+        $productCatalogPromotionApplicator->applyCatalogPromotion(Argument::any())->shouldNotBeCalled();
 
         $this->process($catalogPromotion);
     }

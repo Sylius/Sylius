@@ -25,16 +25,12 @@ final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterf
 
     private CatalogPromotionApplicatorInterface $catalogPromotionApplicator;
 
-    private EntityManagerInterface $entityManager;
-
     public function __construct(
         CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
-        CatalogPromotionApplicatorInterface $catalogPromotionApplicator,
-        EntityManagerInterface $entityManager
+        CatalogPromotionApplicatorInterface $catalogPromotionApplicator
     ) {
         $this->catalogPromotionVariantsProvider = $catalogPromotionVariantsProvider;
         $this->catalogPromotionApplicator = $catalogPromotionApplicator;
-        $this->entityManager = $entityManager;
     }
 
     public function process(CatalogPromotionInterface $catalogPromotion): void
@@ -48,7 +44,5 @@ final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterf
         foreach ($variants as $variant) {
             $this->catalogPromotionApplicator->applyCatalogPromotion($variant, $catalogPromotion);
         }
-
-        $this->entityManager->flush();
     }
 }

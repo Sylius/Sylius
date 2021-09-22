@@ -22,10 +22,9 @@ use Sylius\Component\Core\Repository\ChannelPricingRepositoryInterface;
 final class CatalogPromotionClearerSpec extends ObjectBehavior
 {
     function let(
-        ChannelPricingRepositoryInterface $channelPricingRepository,
-        EntityManagerInterface $entityManager
+        ChannelPricingRepositoryInterface $channelPricingRepository
     ): void {
-        $this->beConstructedWith($channelPricingRepository, $entityManager);
+        $this->beConstructedWith($channelPricingRepository);
     }
 
     function it_implements_catalog_promotion_clearer_interface(): void
@@ -35,7 +34,6 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
 
     function it_clears_channel_pricings_with_catalog_promotions_applied(
         ChannelPricingRepositoryInterface $channelPricingRepository,
-        EntityManagerInterface $entityManager,
         ChannelPricingInterface $firstChannelPricing,
         ChannelPricingInterface $secondChannelPricing
     ): void {
@@ -52,8 +50,6 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
         $secondChannelPricing->getAppliedPromotions()->willReturn([]);
         $secondChannelPricing->getOriginalPrice()->shouldNotBeCalled();
         $secondChannelPricing->clearAppliedPromotions()->shouldNotBeCalled();
-
-        $entityManager->flush()->shouldBeCalled();
 
         $this->clear();
     }
