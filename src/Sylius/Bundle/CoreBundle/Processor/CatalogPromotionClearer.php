@@ -20,14 +20,9 @@ final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
 {
     private ChannelPricingRepositoryInterface $channelPricingRepository;
 
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(
-        ChannelPricingRepositoryInterface $channelPricingRepository,
-        EntityManagerInterface $entityManager
-    ) {
+    public function __construct(ChannelPricingRepositoryInterface $channelPricingRepository)
+    {
         $this->channelPricingRepository = $channelPricingRepository;
-        $this->entityManager = $entityManager;
     }
 
     public function clear(): void
@@ -41,7 +36,5 @@ final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
             $channelPricing->setPrice($channelPricing->getOriginalPrice());
             $channelPricing->clearAppliedPromotions();
         }
-
-        $this->entityManager->flush();
     }
 }

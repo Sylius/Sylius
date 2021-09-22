@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Listener;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
@@ -27,14 +28,18 @@ final class CatalogPromotionUpdateListener
 
     private RepositoryInterface $catalogPromotionRepository;
 
+    private EntityManagerInterface $entityManager;
+
     public function __construct(
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionProcessorInterface $catalogPromotionProcessor,
-        RepositoryInterface $catalogPromotionRepository
+        RepositoryInterface $catalogPromotionRepository,
+        EntityManagerInterface $entityManager
     ) {
         $this->catalogPromotionClearer = $catalogPromotionClearer;
         $this->catalogPromotionProcessor = $catalogPromotionProcessor;
         $this->catalogPromotionRepository = $catalogPromotionRepository;
+        $this->entityManager = $entityManager;
     }
 
     public function __invoke(CatalogPromotionUpdated $event): void
@@ -50,5 +55,7 @@ final class CatalogPromotionUpdateListener
         foreach ($this->catalogPromotionRepository->findAll() as $catalogPromotion) {
             $this->catalogPromotionProcessor->process($catalogPromotion);
         }
+
+        $this->entityManager->flush();
     }
 }

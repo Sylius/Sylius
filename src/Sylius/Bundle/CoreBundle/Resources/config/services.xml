@@ -274,7 +274,6 @@
         >
             <argument type="service" id="Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface" />
-            <argument type="service" id="sylius.manager.product" />
         </service>
 
         <service
@@ -282,7 +281,6 @@
             class="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearer"
         >
             <argument type="service" id="sylius.repository.channel_pricing" />
-            <argument type="service" id="sylius.manager.channel_pricing" />
         </service>
     </services>
 </container>
