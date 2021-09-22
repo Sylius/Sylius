@@ -22,7 +22,8 @@
                     "label": "Mugs discount",
                     "description": @string@
                 }
-            }
+            },
+          "enabled": true
         }
     ],
     "hydra:totalItems": 1

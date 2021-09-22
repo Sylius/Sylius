@@ -106,7 +106,8 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     'locale' => 'en_US',
                     'label' => 'T-Shirts discount',
                     'description' => '50% discount on every T-Shirt',
-                ]]
+                ]],
+                "enabled" => true
             ], JSON_THROW_ON_ERROR)
         );
 
@@ -215,7 +216,8 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     'locale' => 'en_US',
                     'label' => 'T-Shirts discount',
                     'description' => '50% discount on every T-Shirt',
-                ]]
+                ]],
+                "enabled" => true
             ], JSON_THROW_ON_ERROR)
         );
 
@@ -282,7 +284,8 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     'locale' => 'en_US',
                     'label' => 'T-Shirts discount',
                     'description' => '50% discount on every T-Shirt',
-                ]]
+                ]],
+                "enabled" => true
             ], JSON_THROW_ON_ERROR)
         );
 
@@ -332,7 +335,8 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 'translations' => ['en_US' => [
                     '@id' => sprintf('/api/v2/admin/catalog-promotion-translations/%s', $catalogPromotion->getTranslation('en_US')->getId()),
                     'label' => 'T-Shirts discount',
-                ]]
+                ]],
+                "enabled" => true
             ], JSON_THROW_ON_ERROR)
         );
 

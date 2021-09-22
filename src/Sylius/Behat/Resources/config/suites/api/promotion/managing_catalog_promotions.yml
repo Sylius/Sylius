@@ -15,6 +15,7 @@ default:
                 - sylius.behat.context.transform.shared_storage
                 - Sylius\Behat\Context\Transform\CatalogPromotionContext
                 
+                - sylius.behat.context.api.shop.product_variant
                 - sylius.behat.context.setup.admin_api_security
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.product

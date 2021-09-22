@@ -123,6 +123,44 @@ final class ProductVariantContext implements Context
         Assert::keyNotExists($content, 'appliedPromotions');
     }
 
+    /**
+     * @Then /^("[^"]+" variant) and ("[^"]+" variant) should be discounted$/
+     * @Then /^("[^"]+" variant) should be discounted$/
+     */
+    public function variantAndVariantShouldBeDiscounted(ProductVariantInterface ...$variants): void
+    {
+        $this->sharedStorage->set('token', null);
+
+        /** @var ProductVariantInterface $variant */
+        foreach ($variants as $variant) {
+            $content = $this->responseChecker->getResponseContent($this->client->show($variant->getCode()));
+            Assert::keyExists(
+                $content,
+                'appliedPromotions',
+                sprintf('%s variant should be discounted', $variant->getName())
+            );
+        }
+    }
+
+    /**
+     * @Then /^("[^"]+" variant) and ("[^"]+" variant) should not be discounted$/
+     * @Then /^("[^"]+" variant) should not be discounted$/
+     */
+    public function variantAndVariantShouldNotBeDiscounted(ProductVariantInterface ...$variants): void
+    {
+        $this->sharedStorage->set('token', null);
+
+        /** @var ProductVariantInterface $variant */
+        foreach ($variants as $variant) {
+            $content = $this->responseChecker->getResponseContent($this->client->show($variant->getCode()));
+            Assert::keyNotExists(
+                $content,
+                'appliedPromotions',
+                sprintf('%s variant should not be discounted', $variant->getName())
+            );
+        }
+    }
+
     private function findVariant(?ProductVariantInterface $variant): array
     {
         $response = $this->client->getLastResponse();

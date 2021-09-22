@@ -41,6 +41,8 @@ class CatalogPromotion implements CatalogPromotionInterface
 
     protected Collection $actions;
 
+    protected ?bool $enabled = true;
+
     public function __construct()
     {
         $this->initializeTranslationsCollection();
@@ -154,5 +156,25 @@ class CatalogPromotion implements CatalogPromotionInterface
     {
         $action->setCatalogPromotion(null);
         $this->actions->removeElement($action);
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(?bool $enabled): void
+    {
+        $this->enabled = $enabled;
+    }
+
+    public function enable(): void
+    {
+        $this->setEnabled(true);
+    }
+
+    public function disable(): void
+    {
+        $this->setEnabled(false);
     }
 }

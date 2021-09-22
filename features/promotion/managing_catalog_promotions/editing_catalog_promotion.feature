@@ -6,7 +6,6 @@ Feature: Editing catalog promotion
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store operates on a channel named "Europe"
         And the store has a "T-Shirt" configurable product
         And this product has "PHP T-Shirt" variant priced at "$20.00"
         And this product has "Kotlin T-Shirt" variant priced at "$40.00"
@@ -34,6 +33,7 @@ Feature: Editing catalog promotion
     @api @ui
     Scenario: Changing availability in channels for catalog promotion
         Given the catalog promotion "Christmas sale" is available in "United States"
+        And the store operates on a channel named "Europe"
         When I want to modify a catalog promotion "Christmas sale"
         And I make it available in channel "Europe"
         And I make it unavailable in channel "United States"
@@ -61,11 +61,12 @@ Feature: Editing catalog promotion
 
     @api
     Scenario: Disabling catalog promotion
-        When I disable this catalog promotion
-        Then this catalog promotion should not decrease price of "PHP T-Shirt" variant
+        When I edit "Christmas sale" catalog promotion to be disabled
+        Then "PHP T-Shirt" variant should not be discounted
+
 
     @api
     Scenario: Enabling catalog promotion
         Given this catalog promotion is disabled
-        When I enable this catalog promotion
-        Then this catalog promotion should decrease price of "PHP T-Shirt" variant
+        When I edit "Christmas sale" catalog promotion to be enabled
+        Then "PHP T-Shirt" variant should be discounted

@@ -306,6 +306,28 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I edit ("[^"]*" catalog promotion) to be disabled$/
+     */
+    public function iEditCatalogPromotionToBeDisabled(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->client->buildUpdateRequest($catalogPromotion->getCode());
+
+        $this->client->updateRequestData(['enabled' => false]);
+        $this->client->update();
+    }
+
+    /**
+     * @When /^I edit ("[^"]*" catalog promotion) to be enabled$/
+     */
+    public function iEditCatalogPromotionToBeEnabled(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->client->buildUpdateRequest($catalogPromotion->getCode());
+
+        $this->client->updateRequestData(['enabled' => true]);
+        $this->client->update();
+    }
+
+    /**
      * @When /^I edit ("[^"]+" catalog promotion) to have ("[^"]+") discount$/
      */
     public function iEditCatalogPromotionToHaveDiscount(CatalogPromotionInterface $catalogPromotion, float $amount): void

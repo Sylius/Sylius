@@ -16,10 +16,11 @@ namespace Sylius\Component\Promotion\Model;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
-interface CatalogPromotionInterface extends ResourceInterface, CodeAwareInterface, TranslatableInterface
+interface CatalogPromotionInterface extends ResourceInterface, CodeAwareInterface, TranslatableInterface, ToggleableInterface
 {
     public function getName(): ?string;
 
