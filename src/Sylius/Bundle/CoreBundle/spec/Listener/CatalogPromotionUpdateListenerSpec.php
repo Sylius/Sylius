@@ -58,6 +58,7 @@ final class CatalogPromotionUpdateListenerSpec extends ObjectBehavior
         $catalogPromotionClearer->clear()->shouldNotBeCalled();
 
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn(null);
+        $catalogPromotionRepository->findAll()->shouldNotBeCalled();
 
         $catalogPromotionProcessor->process(Argument::any())->shouldNotBeCalled();
 

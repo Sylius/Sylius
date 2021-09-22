@@ -17,8 +17,8 @@ use Doctrine\Persistence\Event\LifecycleEventArgs;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\EventListener\CatalogPromotionEventListener;
-use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
+use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -35,15 +35,17 @@ final class CatalogPromotionEventListenerSpec extends ObjectBehavior
         $this->shouldHaveType(CatalogPromotionEventListener::class);
     }
 
-    function it_sends_catalog_promotion_created_after_persisting_catalog_promotion(
+    function it_sends_catalog_promotion_updated_after_persisting_catalog_promotion_action(
         MessageBusInterface $eventBus,
         LifecycleEventArgs $args,
-        CatalogPromotionInterface $entity
+        CatalogPromotionActionInterface $entity,
+        CatalogPromotionInterface $catalogPromotion
     ): void {
         $args->getObject()->willReturn($entity);
-        $entity->getCode()->willReturn('winter_sale');
+        $entity->getCatalogPromotion()->willReturn($catalogPromotion);
+        $catalogPromotion->getCode()->willReturn('winter_sale');
 
-        $message = new CatalogPromotionCreated('winter_sale');
+        $message = new CatalogPromotionUpdated('winter_sale');
         $eventBus->dispatch($message)->willReturn(new Envelope($message))->shouldBeCalled();
 
         $this->postPersist($args);
@@ -62,10 +64,12 @@ final class CatalogPromotionEventListenerSpec extends ObjectBehavior
     function it_sends_catalog_promotion_updated_after_updating_catalog_promotion(
         MessageBusInterface $eventBus,
         LifecycleEventArgs $args,
-        CatalogPromotionInterface $entity
+        CatalogPromotionActionInterface $entity,
+        CatalogPromotionInterface $catalogPromotion
     ): void {
         $args->getObject()->willReturn($entity);
-        $entity->getCode()->willReturn('winter_sale');
+        $entity->getCatalogPromotion()->willReturn($catalogPromotion);
+        $catalogPromotion->getCode()->willReturn('winter_sale');
 
         $message = new CatalogPromotionUpdated('winter_sale');
         $eventBus->dispatch($message)->willReturn(new Envelope($message))->shouldBeCalled();

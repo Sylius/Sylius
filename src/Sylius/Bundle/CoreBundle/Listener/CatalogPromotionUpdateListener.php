@@ -46,6 +46,7 @@ final class CatalogPromotionUpdateListener
         }
 
         $this->catalogPromotionClearer->clear();
+
         foreach ($this->catalogPromotionRepository->findAll() as $catalogPromotion) {
             $this->catalogPromotionProcessor->process($catalogPromotion);
         }

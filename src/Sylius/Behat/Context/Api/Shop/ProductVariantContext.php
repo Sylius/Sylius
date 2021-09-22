@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
@@ -26,12 +27,16 @@ final class ProductVariantContext implements Context
 
     private ResponseCheckerInterface $responseChecker;
 
+    private SharedStorageInterface $sharedStorage;
+
     public function __construct(
         ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker
+        ResponseCheckerInterface $responseChecker,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -45,6 +50,15 @@ final class ProductVariantContext implements Context
     }
 
     /**
+     * @When the visitor view :variant variant
+     */
+    public function visitorViewVariant(ProductVariantInterface $variant): void
+    {
+        $this->sharedStorage->set('token', null);
+        $this->client->show($variant->getCode());
+    }
+
+    /**
      * @When I view variants
      */
     public function iViewVariants(): void
@@ -53,7 +67,7 @@ final class ProductVariantContext implements Context
     }
 
     /**
-     * @Then /^the product variant price should be ("[^"]+")$/
+     * @Then /^(?:the|this) product variant price should be ("[^"]+")$/
      */
     public function theProductVariantPriceShouldBe(int $price): void
     {
@@ -63,7 +77,7 @@ final class ProductVariantContext implements Context
     }
 
     /**
-     * @Then /^the product original price should be ("[^"]+")$/
+     * @Then /^(?:the|this) product original price should be ("[^"]+")$/
      */
     public function theProductOriginalPriceShouldBe(int $originalPrice): void
     {
