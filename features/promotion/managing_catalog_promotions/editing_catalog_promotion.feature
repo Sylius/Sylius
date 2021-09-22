@@ -59,14 +59,13 @@ Feature: Editing catalog promotion
         Then I should be notified that it has been successfully edited
         And this catalog promotion should have "40%" percentage discount
 
-    @api
+    @api @ui
     Scenario: Disabling catalog promotion
-        When I edit "Christmas sale" catalog promotion to be disabled
+        When I disable "Christmas sale" catalog promotion
         Then "PHP T-Shirt" variant should not be discounted
 
-
-    @api
+    @api @ui
     Scenario: Enabling catalog promotion
         Given this catalog promotion is disabled
-        When I edit "Christmas sale" catalog promotion to be enabled
+        When I enable "Christmas sale" catalog promotion
         Then "PHP T-Shirt" variant should be discounted

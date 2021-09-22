@@ -77,7 +77,7 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^(this) catalog promotion is disabled$/
+     * @Given /^(this catalog promotion) is disabled$/
      */
     public function thisCatalogPromotionIsDisabled(CatalogPromotionInterface $catalogPromotion): void
     {

@@ -21,6 +21,7 @@ default:
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
                 - sylius.behat.context.ui.admin.notification
+                - sylius.behat.context.ui.shop.product
                 - Sylius\Behat\Context\Ui\Admin\ManagingCatalogPromotionsContext
 
             filters:

@@ -14,6 +14,7 @@
             ],
             "rules": [],
             "actions": [],
+            "enabled": @boolean@,
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/catalog-promotion-translations\/@integer@",
@@ -22,8 +23,7 @@
                     "label": "Mugs discount",
                     "description": @string@
                 }
-            },
-          "enabled": true
+            }
         }
     ],
     "hydra:totalItems": 1

@@ -106,19 +106,15 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iDisableCatalogPromotion(): void
     {
-        $data = ['enabled' => false];
-
-        $this->client->updateRequestData($data);
+        $this->client->updateRequestData(['enabled' => false]);
     }
 
     /**
      * @When I enable this catalog promotion
      */
-    public function iEnableCatalogPromotion(): void
+    public function iEnableThisCatalogPromotion(): void
     {
-        $data = ['enabled' => true];
-
-        $this->client->updateRequestData($data);
+        $this->client->updateRequestData(['enabled' => true]);
     }
 
     /**
@@ -306,25 +302,19 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I edit ("[^"]*" catalog promotion) to be disabled$/
+     * @When /^I disable ("[^"]*" catalog promotion)$/
      */
-    public function iEditCatalogPromotionToBeDisabled(CatalogPromotionInterface $catalogPromotion): void
+    public function iDisableThisCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
-        $this->client->buildUpdateRequest($catalogPromotion->getCode());
-
-        $this->client->updateRequestData(['enabled' => false]);
-        $this->client->update();
+        $this->toggleCatalogPromotion($catalogPromotion, false);
     }
 
     /**
-     * @When /^I edit ("[^"]*" catalog promotion) to be enabled$/
+     * @When /^I enable ("[^"]*" catalog promotion)$/
      */
-    public function iEditCatalogPromotionToBeEnabled(CatalogPromotionInterface $catalogPromotion): void
+    public function iEnableCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
-        $this->client->buildUpdateRequest($catalogPromotion->getCode());
-
-        $this->client->updateRequestData(['enabled' => true]);
-        $this->client->update();
+        $this->toggleCatalogPromotion($catalogPromotion, true);
     }
 
     /**
@@ -797,5 +787,13 @@ final class ManagingCatalogPromotionsContext implements Context
         }
 
         return false;
+    }
+
+    private function toggleCatalogPromotion(CatalogPromotionInterface $catalogPromotion, bool $enabled): void
+    {
+        $this->client->buildUpdateRequest($catalogPromotion->getCode());
+
+        $this->client->updateRequestData(['enabled' => $enabled]);
+        $this->client->update();
     }
 }

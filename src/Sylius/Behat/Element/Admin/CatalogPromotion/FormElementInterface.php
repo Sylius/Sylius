@@ -21,6 +21,8 @@ interface FormElementInterface
 
     public function describeIt(string $description, string $localeCode): void;
 
+    public function changeEnableTo(bool $enabled): void;
+
     public function checkChannel(string $channelName): void;
 
     public function uncheckChannel(string $channelName): void;
