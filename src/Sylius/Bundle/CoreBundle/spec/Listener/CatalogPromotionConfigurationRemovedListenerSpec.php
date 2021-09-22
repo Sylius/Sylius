@@ -32,19 +32,10 @@ final class CatalogPromotionConfigurationRemovedListenerSpec extends ObjectBehav
         $this->beConstructedWith($catalogPromotionClearer, $catalogPromotionProcessor, $catalogPromotionRepository);
     }
 
-    function it_processes_catalog_promotion_after_configuration_removal(
-        CatalogPromotionClearerInterface $catalogPromotionClearer,
-        CatalogPromotionProcessorInterface $catalogPromotionProcessor,
-        RepositoryInterface $catalogPromotionRepository,
-        CatalogPromotionInterface $firstCatalogPromotion,
-        CatalogPromotionInterface $secondCatalogPromotion
+    function it_removes_promotions(
+        CatalogPromotionClearerInterface $catalogPromotionClearer
     ): void {
         $catalogPromotionClearer->clear()->shouldBeCalled();
-
-        $catalogPromotionRepository->findAll()->willReturn([$firstCatalogPromotion, $secondCatalogPromotion]);
-
-        $catalogPromotionProcessor->process($firstCatalogPromotion)->shouldBeCalled();
-        $catalogPromotionProcessor->process($secondCatalogPromotion)->shouldBeCalled();
 
         $this->__invoke(new CatalogPromotionConfigurationRemoved());
     }
