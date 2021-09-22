@@ -20,6 +20,8 @@ use Sylius\Behat\Page\ErrorPageInterface;
 use Sylius\Behat\Page\Shop\Product\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
+use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -37,18 +39,22 @@ final class ProductContext implements Context
 
     private VerticalMenuElementInterface $verticalMenuElement;
 
+    private ChannelContextSetterInterface $channelContextSetter;
+
     public function __construct(
         ShowPageInterface $showPage,
         IndexPageInterface $indexPage,
         ProductReviewIndexPageInterface $productReviewsIndexPage,
         ErrorPageInterface $errorPage,
-        VerticalMenuElementInterface $verticalMenuElement
+        VerticalMenuElementInterface $verticalMenuElement,
+        ChannelContextSetterInterface $channelContextSetter
     ) {
         $this->showPage = $showPage;
         $this->indexPage = $indexPage;
         $this->productReviewsIndexPage = $productReviewsIndexPage;
         $this->errorPage = $errorPage;
         $this->verticalMenuElement = $verticalMenuElement;
+        $this->channelContextSetter = $channelContextSetter;
     }
 
     /**
@@ -422,6 +428,36 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then /^the visitor should(?:| still) see "([^"]+)" as the (price|original price) of the ("[^"]+" product) in the ("[^"]+" channel)$/
+     */
+    public function theVisitorShouldSeeAsThePriceOfTheProductInTheChannel(
+        string $price,
+        string $priceType,
+        ProductInterface $product,
+        ChannelInterface $channel
+    ): void {
+        $this->channelContextSetter->setChannel($channel);
+
+        $localeCode = $channel->getDefaultLocale()->getCode();
+
+        $this->showPage->open(['slug' => $product->getTranslation($localeCode)->getSlug(), '_locale' => $localeCode]);
+
+        if ($priceType === 'original price') {
+            Assert::same($this->showPage->getOriginalPrice(), $price);
+
+            return;
+        }
+
+        if ($priceType === 'price') {
+            Assert::same($this->showPage->getPrice(), $price);
+
+            return;
+        }
+
+        throw new \InvalidArgumentException('Not recognized price type');
+    }
+
+    /**
      * @When I select its :optionName as :optionValue
      */
     public function iSelectItsOptionAs(string $optionName, string $optionValue): void
@@ -432,6 +468,7 @@ final class ProductContext implements Context
     /**
      * @When I select :variantName variant
      * @When I view :variantName variant
+     * @When the visitor view :variantName variant
      */
     public function iSelectVariant($variantName): void
     {

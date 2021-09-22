@@ -15,7 +15,7 @@ Feature: Reapplying multiple catalog promotions after editing their channels
         And there is another catalog promotion "Christmas sale" available in "Web-US" channel and "Web-GB" channel that reduces price by "50%" and applies on "PHP T-shirt" variant
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Removing only modified catalog promotion after removing its channel
         When I make the "Winter sale" catalog promotion unavailable in the "Web-US" channel
         Then the visitor should see "$50.00" as the price of the "T-Shirt" product in the "Web-US" channel
