@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Persistence\Event\LifecycleEventArgs;
+use Sylius\Component\Promotion\Event\CatalogPromotionConfigurationRemoved;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
@@ -47,6 +48,15 @@ final class CatalogPromotionEventListener
 
         if ($entity instanceof CatalogPromotionActionInterface) {
             $this->eventBus->dispatch(new CatalogPromotionUpdated($entity->getCatalogPromotion()->getCode()));
+        }
+    }
+
+    public function postRemove(LifecycleEventArgs $args): void
+    {
+        $entity = $args->getObject();
+
+        if ($entity instanceof CatalogPromotionActionInterface) {
+            $this->eventBus->dispatch(new CatalogPromotionConfigurationRemoved());
         }
     }
 }

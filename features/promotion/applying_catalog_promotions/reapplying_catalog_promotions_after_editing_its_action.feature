@@ -50,3 +50,12 @@ Feature: Reapplying catalog promotion after editing its action
         Then the visitor view "PHP T-Shirt" variant
         And this product variant price should be "$9.00"
         And this product original price should be "$20.00"
+
+    @api
+    Scenario: Restoring original price after removing action from catalog promotion configuration
+        When I modify a catalog promotion "Winter sale"
+        And I remove its every action
+        And I save my changes
+        Then the visitor view "PHP T-Shirt" variant
+        And the product variant price should be "$20.00"
+        And the product original price should be "$20.00"

@@ -214,7 +214,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $content = $this->client->getContent();
         $content['actions'] = [];
-        $this->client->updateRequestData($content);
+        $this->client->setRequestData($content);
     }
 
     /**
