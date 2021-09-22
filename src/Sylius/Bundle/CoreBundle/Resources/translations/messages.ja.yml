@@ -8,6 +8,8 @@ sylius:
             title: タイトル
         cart:
             coupon: クーポン
+        catalog_promotion:
+            channels: 経路
         checkout:
             addressing:
                 different_billing_address: 請求先として別の住所を指定する

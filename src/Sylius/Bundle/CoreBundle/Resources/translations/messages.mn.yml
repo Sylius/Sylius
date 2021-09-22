@@ -9,6 +9,8 @@ sylius:
             title: Гарчиг
         cart:
             coupon: Купон
+        catalog_promotion:
+            channels: Сувгууд
         checkout:
             addressing:
                 different_billing_address: Захиалгын өөр хаяг ашиглах уу?

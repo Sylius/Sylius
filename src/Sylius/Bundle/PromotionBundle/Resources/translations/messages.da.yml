@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Beskrivelse
+            name: Navn
         promotion:
             actions: Handlinger
             add_action: Tilføj handling

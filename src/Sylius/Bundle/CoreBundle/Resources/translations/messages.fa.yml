@@ -9,6 +9,8 @@ sylius:
             title: عنوان
         cart:
             coupon: کد تخفیف
+        catalog_promotion:
+            channels: کانال های فروش
         checkout:
             addressing:
                 different_billing_address: آدرس گیرنده با خریدار متفاوت است؟

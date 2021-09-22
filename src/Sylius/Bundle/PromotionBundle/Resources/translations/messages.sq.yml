@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Përshkrimi
+            name: Emri
         promotion:
             actions: Veprimet
             add_action: Shto veprim

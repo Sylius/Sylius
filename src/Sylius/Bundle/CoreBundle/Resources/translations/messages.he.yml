@@ -5,6 +5,8 @@ sylius:
     form:
         block:
             title: כותרת
+        catalog_promotion:
+            channels: ערוצים
         checkout:
             addressing:
                 different_billing_address: השתמש בכתובת שונה על חשבונית?

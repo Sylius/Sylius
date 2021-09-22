@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Тодорхойлолт
+            name: Нэр
         promotion:
             actions: Үйлдэл
             add_action: Үйлдэл нэмэх

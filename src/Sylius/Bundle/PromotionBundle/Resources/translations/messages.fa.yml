@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: شرح
+            name: نام
         promotion:
             actions: طریقه اعمال
             add_action: افزودن عملیات

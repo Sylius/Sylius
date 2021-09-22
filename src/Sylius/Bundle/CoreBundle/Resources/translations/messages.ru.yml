@@ -9,6 +9,8 @@ sylius:
             title: Заголовок
         cart:
             coupon: Купон
+        catalog_promotion:
+            channels: Каналы
         checkout:
             addressing:
                 different_billing_address: Использовать другой адрес для выставления счета?

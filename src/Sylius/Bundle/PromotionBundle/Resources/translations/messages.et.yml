@@ -3,6 +3,8 @@
 
 sylius:
     form:
+        catalog_promotion:
+            name: Nimi
         promotion:
             name: Nimi
         promotion_action:

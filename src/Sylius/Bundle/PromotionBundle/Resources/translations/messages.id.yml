@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Keterangan
+            name: Nama
         promotion:
             actions: Tindakan
             add_action: Tambahkan tindakan
