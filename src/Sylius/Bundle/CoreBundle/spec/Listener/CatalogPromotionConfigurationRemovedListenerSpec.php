@@ -13,29 +13,27 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\Listener;
 
+use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
-use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
-use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionReprocessorInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionConfigurationRemoved;
-use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CatalogPromotionConfigurationRemovedListenerSpec extends ObjectBehavior
 {
     function let(
-        CatalogPromotionClearerInterface $catalogPromotionClearer,
-        CatalogPromotionProcessorInterface $catalogPromotionProcessor,
-        RepositoryInterface $catalogPromotionRepository
+        CatalogPromotionReprocessorInterface $catalogPromotionReprocessor,
+        EntityManagerInterface $entityManager
     ): void {
-        $this->beConstructedWith($catalogPromotionClearer, $catalogPromotionProcessor, $catalogPromotionRepository);
+        $this->beConstructedWith($catalogPromotionReprocessor, $entityManager);
     }
 
     function it_removes_promotions(
-        CatalogPromotionClearerInterface $catalogPromotionClearer
+        CatalogPromotionReprocessorInterface $catalogPromotionReprocessor,
+        EntityManagerInterface $entityManager
     ): void {
-        $catalogPromotionClearer->clear()->shouldBeCalled();
+        $catalogPromotionReprocessor->reprocess()->shouldBeCalled();
+
+        $entityManager->flush()->shouldBeCalled();
 
         $this->__invoke(new CatalogPromotionConfigurationRemoved());
     }

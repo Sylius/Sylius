@@ -13,21 +13,28 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Listener;
 
-use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionReprocessorInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionConfigurationRemoved;
 
 final class CatalogPromotionConfigurationRemovedListener
 {
-    private CatalogPromotionClearerInterface $catalogPromotionClearer;
+    private CatalogPromotionReprocessorInterface $catalogPromotionReprocessor;
+
+    private EntityManagerInterface $entityManager;
 
     public function __construct(
-        CatalogPromotionClearerInterface $catalogPromotionClearer
+        CatalogPromotionReprocessorInterface $catalogPromotionReprocessor,
+        EntityManagerInterface $entityManager
     ) {
-        $this->catalogPromotionClearer = $catalogPromotionClearer;
+        $this->catalogPromotionReprocessor = $catalogPromotionReprocessor;
+        $this->entityManager = $entityManager;
     }
 
     public function __invoke(CatalogPromotionConfigurationRemoved $event): void
     {
-        $this->catalogPromotionClearer->clear();
+        $this->catalogPromotionReprocessor->reprocess();
+
+        $this->entityManager->flush();
     }
 }

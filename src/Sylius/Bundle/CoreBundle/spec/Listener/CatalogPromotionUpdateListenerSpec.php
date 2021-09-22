@@ -18,6 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
+use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionReprocessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -25,35 +26,26 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class CatalogPromotionUpdateListenerSpec extends ObjectBehavior
 {
     function let(
-        CatalogPromotionClearerInterface $catalogPromotionClearer,
-        CatalogPromotionProcessorInterface $catalogPromotionProcessor,
+        CatalogPromotionReprocessorInterface $catalogPromotionReprocessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager
     ): void {
         $this->beConstructedWith(
-            $catalogPromotionClearer,
-            $catalogPromotionProcessor,
+            $catalogPromotionReprocessor,
             $catalogPromotionRepository,
             $entityManager
         );
     }
 
     function it_processes_catalog_promotion_that_has_just_been_updated(
-        CatalogPromotionClearerInterface $catalogPromotionClearer,
-        CatalogPromotionProcessorInterface $catalogPromotionProcessor,
+        CatalogPromotionReprocessorInterface $catalogPromotionReprocessor,
         EntityManagerInterface $entityManager,
         RepositoryInterface $catalogPromotionRepository,
-        CatalogPromotionInterface $firstCatalogPromotion,
-        CatalogPromotionInterface $secondCatalogPromotion
+        CatalogPromotionInterface $catalogPromotion
     ): void {
-        $catalogPromotionClearer->clear()->shouldBeCalled();
+        $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
 
-        $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($firstCatalogPromotion);
-
-        $catalogPromotionRepository->findAll()->willReturn([$firstCatalogPromotion, $secondCatalogPromotion]);
-
-        $catalogPromotionProcessor->process($firstCatalogPromotion)->shouldBeCalled();
-        $catalogPromotionProcessor->process($secondCatalogPromotion)->shouldBeCalled();
+        $catalogPromotionReprocessor->reprocess()->shouldBeCalled();
 
         $entityManager->flush()->shouldBeCalled();
 
@@ -61,16 +53,13 @@ final class CatalogPromotionUpdateListenerSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_there_is_not_catalog_promotion_with_given_code(
-        CatalogPromotionClearerInterface $catalogPromotionClearer,
-        CatalogPromotionProcessorInterface $catalogPromotionProcessor,
+        CatalogPromotionReprocessorInterface $catalogPromotionReprocessor,
         RepositoryInterface $catalogPromotionRepository
     ): void {
-        $catalogPromotionClearer->clear()->shouldNotBeCalled();
-
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn(null);
         $catalogPromotionRepository->findAll()->shouldNotBeCalled();
 
-        $catalogPromotionProcessor->process(Argument::any())->shouldNotBeCalled();
+        $catalogPromotionReprocessor->reprocess()->shouldNotBeCalled();
 
         $this->__invoke(new CatalogPromotionUpdated('WINTER_MUGS_SALE'));
     }

@@ -36,6 +36,7 @@ Feature: Reapplying catalog promotion after editing its action
     Scenario: Reapplying catalog promotion after removing and adding new action
         When I modify a catalog promotion "Winter sale"
         And I remove its every action
+        And I save my changes
         And I add action that gives "10%" percentage discount
         And I save my changes
         Then the visitor view "PHP T-Shirt" variant
