@@ -82,6 +82,7 @@ final class ProductContext implements Context
      * @When /^I check (this product)'s details in the ("([^"]+)" locale)$/
      * @When I view product :product
      * @When I view product :product in the :localeCode locale
+     * @When customer view product :product
      */
     public function iOpenProductPage(ProductInterface $product, $localeCode = 'en_US')
     {
@@ -366,6 +367,7 @@ final class ProductContext implements Context
      * @Then this product variant price should be :price
      * @Then I should see the product price :price
      * @Then I should see that the combination is :price
+     * @Then customer should see the product price :price
      */
     public function iShouldSeeTheProductPrice($price)
     {
@@ -376,6 +378,7 @@ final class ProductContext implements Context
      * @Then the product original price should be :price
      * @Then this product original price should be :price
      * @Then I should see the product original price :price
+     * @Then /^customer should see the product original price ("[^"]+")$/
      */
     public function iShouldSeeTheProductOriginalPrice($price)
     {
