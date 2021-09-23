@@ -42,7 +42,7 @@ final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterf
 
         /** @var ProductVariantInterface $variant */
         foreach ($variants as $variant) {
-            $this->catalogPromotionApplicator->applyCatalogPromotion($variant, $catalogPromotion);
+            $this->catalogPromotionApplicator->applyOnVariant($variant, $catalogPromotion);
         }
     }
 }

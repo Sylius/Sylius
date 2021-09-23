@@ -8,17 +8,17 @@ Feature: Reapplying catalog promotions on variant once its data changes
         Given the store operates on a channel named "Web-US" with hostname "web-us"
         And the store has a "T-Shirt" configurable product
         And this product has "PHP T-Shirt" variant priced at "$100.00" in "Web-US" channel
-        And there is a catalog promotion "Winter sale" available in "Web-US" channel that reduces price by "30%" and applies on "PHP T-shirt" variant
-        And there is another catalog promotion "Christmas sale" available in "Web-US" channel that reduces price by "50%" and applies on "PHP T-shirt" variant
+        And there is a catalog promotion "Winter sale" available in "Web-US" channel that reduces price by "30%" and applies on "PHP T-Shirt" variant
+        And there is another catalog promotion "Christmas sale" available in "Web-US" channel that reduces price by "50%" and applies on "PHP T-Shirt" variant
         And I am logged in as an administrator
 
-    @api @todo
+    @api
     Scenario: Changing the price of the variant
         When I change the price of the "PHP T-Shirt" product variant to "$50.00" in "Web-US" channel
         Then the visitor should still see "$35.00" as the price of the "T-Shirt" product in the "Web-US" channel
         And the visitor should still see "$100.00" as the original price of the "T-Shirt" product in the "Web-US" channel
 
-    @api @todo
+    @api
     Scenario: Changing the original price of the variant
         When I change the original price of the "PHP T-Shirt" product variant to "$50.00" in "Web-US" channel
         Then the visitor should see "$17.50" as the price of the "T-Shirt" product in the "Web-US" channel
