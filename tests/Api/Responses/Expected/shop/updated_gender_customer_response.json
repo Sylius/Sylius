@@ -8,10 +8,10 @@
         "@type": @string@,
         "verified": false
     },
-    "email": "oliver@doe.com",
+    "email": "john.wick@tarasov.mob",
     "firstName": "John",
-    "lastName": "Doe",
-    "gender": "u",
-    "subscribedToNewsletter": false,
-    "fullName": "John Doe"
+    "lastName": "Wick",
+    "gender": "m",
+    "subscribedToNewsletter": true,
+    "fullName": "John Wick"
 }

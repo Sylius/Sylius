@@ -95,4 +95,37 @@ final class CustomersTest extends JsonApiTestCase
 
         $this->assertResponse($response, 'shop/log_in_customer_response', Response::HTTP_OK);
     }
+
+    /** @test */
+    public function it_allows_customer_to_update_its_data(): void
+    {
+        $loadedData = $this->loadFixturesFromFiles(['authentication/customer.yaml']);
+        $token = $this->logInShopUser('oliver@doe.com');
+
+        /** @var CustomerInterface $customer */
+        $customer = $loadedData['customer_oliver'];
+
+        $this->client->request(
+            'PUT',
+            '/api/v2/shop/customers/' . $customer->getId(),
+            [],
+            [],
+            [
+                'CONTENT_TYPE' => 'application/ld+json',
+                'HTTP_ACCEPT' => 'application/ld+json',
+                'HTTP_Authorization' => sprintf('Bearer %s', $token)
+            ],
+            json_encode([
+                'email' => 'john.wick@tarasov.mob',
+                'firstName' => 'John',
+                'lastName' => 'Wick',
+                'gender' => 'm',
+                'subscribedToNewsletter' => true
+            ])
+        );
+
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/updated_gender_customer_response', Response::HTTP_OK);
+    }
 }
