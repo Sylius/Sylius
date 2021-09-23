@@ -35,6 +35,8 @@ parameters:
         - 'src/Sylius/Bundle/CoreBundle/Tests/DependencyInjection/CircularDependencyBreakingExceptionListenerPassTest.php'
         - 'src/Sylius/Bundle/CoreBundle/Tests/Listener/CircularDependencyBreakingExceptionListenerTest.php'
 
+        # PHP 7.4 fixes
         - 'src/Sylius/Component/Core/Formatter/StringInflector.php'
+
     ignoreErrors:
         - '/Access to an undefined property Doctrine\\Common\\Collections\\ArrayCollection/'
