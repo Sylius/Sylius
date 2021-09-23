@@ -265,6 +265,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I add rule that applies on ("[^"]+" variant) and ("[^"]+" variant)$/
      * @When /^I add rule that applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/
      */
     public function iAddRuleThatAppliesOnVariants(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
@@ -283,7 +284,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I remove its every rule
+     * @When I remove its every rules
      */
     public function iRemoveItsEveryRule(): void
     {

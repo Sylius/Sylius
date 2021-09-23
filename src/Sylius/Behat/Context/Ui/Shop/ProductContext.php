@@ -408,7 +408,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then /^He should see (this variant) is not discounted$/
      * @Then /^I should see ("[^"]+" variant) is not discounted$/
      * @Then /^I should see (this variant) is not discounted$/
      */
@@ -493,7 +492,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then /^He should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/
+     * @Then /^the visitor should see that the ("[^"]+" variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/
      * @Then /^I should see ("[^"]+" variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" promotion$/
      * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" promotion$/
      */

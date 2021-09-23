@@ -48,6 +48,8 @@ final class CatalogPromotionEventListenerSpec extends ObjectBehavior
 
         $message = new CatalogPromotionUpdated('winter_sale');
         $eventBus->dispatch($message)->willReturn(new Envelope($message))->shouldBeCalled();
+
+        $this->postPersist($args);
     }
 
     function it_does_not_send_catalog_promotion_updated_after_persisting_other_entity(
