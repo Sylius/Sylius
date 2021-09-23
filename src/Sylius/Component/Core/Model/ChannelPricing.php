@@ -92,6 +92,10 @@ class ChannelPricing implements ChannelPricingInterface
             return;
         }
 
+        if (array_key_exists(key($promotion), $this->appliedPromotions)) {
+            return;
+        }
+
         $this->appliedPromotions = array_merge_recursive($this->appliedPromotions, $promotion);
     }
 
