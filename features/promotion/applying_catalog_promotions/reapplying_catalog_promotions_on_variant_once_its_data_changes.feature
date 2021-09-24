@@ -12,13 +12,13 @@ Feature: Reapplying catalog promotions on variant once its data changes
         And there is another catalog promotion "Christmas sale" available in "Web-US" channel that reduces price by "50%" and applies on "PHP T-Shirt" variant
         And I am logged in as an administrator
 
-    @api
+    @api @ui
     Scenario: Changing the price of the variant
         When I change the price of the "PHP T-Shirt" product variant to "$50.00" in "Web-US" channel
         Then the visitor should still see "$35.00" as the price of the "T-Shirt" product in the "Web-US" channel
         And the visitor should still see "$100.00" as the original price of the "T-Shirt" product in the "Web-US" channel
 
-    @api
+    @api @ui
     Scenario: Changing the original price of the variant
         When I change the original price of the "PHP T-Shirt" product variant to "$50.00" in "Web-US" channel
         Then the visitor should see "$17.50" as the price of the "T-Shirt" product in the "Web-US" channel
