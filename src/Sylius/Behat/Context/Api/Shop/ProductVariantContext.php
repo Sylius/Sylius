@@ -114,11 +114,12 @@ final class ProductVariantContext implements Context
     }
 
     /**
-     * @Then /^I should see this variant is not discounted$/
+     * @Then /^I should see (this variant) is not discounted$/
+     * @Then /^the visitor should see (this variant) is not discounted$/
      */
-    public function iShouldSeeThisVariantIsNotDiscounted(): void
+    public function iShouldSeeThisVariantIsNotDiscounted(ProductVariantInterface $variant): void
     {
-        $content = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+        $content = $this->responseChecker->getResponseContent($this->client->show($variant->getCode()));
 
         Assert::keyNotExists($content, 'appliedPromotions');
     }

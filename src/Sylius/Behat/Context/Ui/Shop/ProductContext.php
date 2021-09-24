@@ -792,6 +792,14 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then the visitor should see this variant is not discounted
+     */
+    public function iShouldSeeThisVariantIsNotDiscounted(): void
+    {
+        Assert::null($this->showPage->getOriginalPrice());
+    }
+
+    /**
      * @param string $productName
      * @param string $productAssociationName
      *
