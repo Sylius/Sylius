@@ -95,7 +95,6 @@
             <argument type="service" id="sylius.event_bus" />
             <tag name="doctrine.event_listener" event="postPersist" connection="default" />
             <tag name="doctrine.event_listener" event="postUpdate" connection="default" />
-            <tag name="doctrine.event_listener" event="postRemove" connection="default" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Listener\CatalogPromotionUpdateListener">
@@ -111,12 +110,6 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface" />
             <argument type="service" id="sylius.manager.channel_pricing" />
-        <tag name="messenger.message_handler" bus="sylius.event_bus" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Listener\CatalogPromotionConfigurationRemovedListener">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionReprocessorInterface" />
-            <argument type="service" id="doctrine.orm.entity_manager" />
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
     </services>
