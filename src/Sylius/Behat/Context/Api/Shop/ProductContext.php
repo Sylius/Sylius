@@ -377,10 +377,10 @@ final class ProductContext implements Context
             }
 
             foreach ($product['variants'] as $variantIri) {
-                $this->client->executeCustomRequest(Request::custom($variantIri, HttpRequest::METHOD_GET));
+                $response = $this->client->executeCustomRequest(Request::custom($variantIri, HttpRequest::METHOD_GET));
 
                 /** @var int $variantPrice */
-                $variantPrice = $this->responseChecker->getValue($this->client->getLastResponse(), $priceType);
+                $variantPrice = $this->responseChecker->getValue($response, $priceType);
 
                 if ($price === $variantPrice) {
                     return true;

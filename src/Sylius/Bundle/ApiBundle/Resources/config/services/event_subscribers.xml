@@ -18,11 +18,17 @@
     <services>
         <defaults public="true" />
 
+        <service id="Sylius\Bundle\ApiBundle\EventSubscriber\ProductVariantEventSubscriber">
+            <argument type="service" id="sylius.event_bus" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\EventSubscriber\KernelRequestEventSubscriber">
             <argument>%sylius_api.enabled%</argument>
             <argument>%sylius.security.new_api_route%</argument>
             <tag name="kernel.event_subscriber" />
         </service>
+
         <service id="Sylius\Bundle\ApiBundle\EventSubscriber\ProductSlugEventSubscriber">
             <argument type="service" id="sylius.generator.slug" />
             <tag name="kernel.event_subscriber" />

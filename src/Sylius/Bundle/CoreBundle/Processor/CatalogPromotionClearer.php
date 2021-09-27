@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Processor;
 
-use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Repository\ChannelPricingRepositoryInterface;
 
 final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
@@ -29,12 +29,17 @@ final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
     {
         $channelPricings = $this->channelPricingRepository->findWithDiscountedPrice();
         foreach ($channelPricings as $channelPricing) {
-            if (empty($channelPricing->getAppliedPromotions())) {
-                continue;
-            }
-
-            $channelPricing->setPrice($channelPricing->getOriginalPrice());
-            $channelPricing->clearAppliedPromotions();
+            $this->clearChannelPricing($channelPricing);
         }
+    }
+
+    public function clearChannelPricing(ChannelPricingInterface $channelPricing): void
+    {
+        if (empty($channelPricing->getAppliedPromotions())) {
+            return;
+        }
+
+        $channelPricing->setPrice($channelPricing->getOriginalPrice());
+        $channelPricing->clearAppliedPromotions();
     }
 }

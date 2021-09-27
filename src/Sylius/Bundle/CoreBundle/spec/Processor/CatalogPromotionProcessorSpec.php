@@ -51,8 +51,8 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
             ->willReturn([$firstVariant, $secondVariant])
         ;
 
-        $productCatalogPromotionApplicator->applyCatalogPromotion($firstVariant, $catalogPromotion)->shouldBeCalled();
-        $productCatalogPromotionApplicator->applyCatalogPromotion($secondVariant, $catalogPromotion)->shouldBeCalled();
+        $productCatalogPromotionApplicator->applyOnVariant($firstVariant, $catalogPromotion)->shouldBeCalled();
+        $productCatalogPromotionApplicator->applyOnVariant($secondVariant, $catalogPromotion)->shouldBeCalled();
 
         $this->process($catalogPromotion);
     }
@@ -64,7 +64,7 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
     ): void {
         $catalogPromotionVariantsProvider->provideEligibleVariants($catalogPromotion)->willReturn([]);
 
-        $productCatalogPromotionApplicator->applyCatalogPromotion(Argument::any())->shouldNotBeCalled();
+        $productCatalogPromotionApplicator->applyOnVariant(Argument::any())->shouldNotBeCalled();
 
         $this->process($catalogPromotion);
     }

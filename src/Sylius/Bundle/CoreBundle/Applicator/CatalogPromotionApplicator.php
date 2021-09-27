@@ -15,6 +15,8 @@ namespace Sylius\Bundle\CoreBundle\Applicator;
 
 use Sylius\Bundle\CoreBundle\Formatter\AppliedPromotionInformationFormatterInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
@@ -27,12 +29,29 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
         $this->appliedPromotionInformationFormatter = $appliedPromotionInformationFormatter;
     }
 
-    public function applyCatalogPromotion(
+    public function applyOnVariant(
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion
     ): void {
         foreach ($catalogPromotion->getActions() as $action) {
             $this->applyDiscountFromAction($catalogPromotion, $action, $variant);
+        }
+    }
+
+    public function applyOnChannelPricing(
+        ChannelPricingInterface $channelPricing,
+        CatalogPromotionInterface $catalogPromotion
+    ): void {
+        if (!$this->hasCatalogPromotionChannelWithCode($catalogPromotion, $channelPricing->getChannelCode())) {
+            return;
+        }
+
+        foreach ($catalogPromotion->getActions() as $action) {
+            $this->applyDiscountFromActionOnChannelPricing(
+                $catalogPromotion,
+                $action->getConfiguration()['amount'],
+                $channelPricing
+            );
         }
     }
 
@@ -49,12 +68,31 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
                 continue;
             }
 
-            if ($channelPricing->getOriginalPrice() === null) {
-                $channelPricing->setOriginalPrice($channelPricing->getPrice());
-            }
-
-            $channelPricing->setPrice((int) ($channelPricing->getPrice() - ($channelPricing->getPrice() * $discount)));
-            $channelPricing->addAppliedPromotion($this->appliedPromotionInformationFormatter->format($catalogPromotion));
+            $this->applyDiscountFromActionOnChannelPricing($catalogPromotion, $discount, $channelPricing);
         }
+    }
+
+    private function applyDiscountFromActionOnChannelPricing(
+        CatalogPromotionInterface $catalogPromotion,
+        float $discount,
+        ChannelPricingInterface $channelPricing
+    ): void {
+        if ($channelPricing->getOriginalPrice() === null) {
+            $channelPricing->setOriginalPrice($channelPricing->getPrice());
+        }
+
+        $channelPricing->setPrice((int) ($channelPricing->getPrice() - ($channelPricing->getPrice() * $discount)));
+        $channelPricing->addAppliedPromotion($this->appliedPromotionInformationFormatter->format($catalogPromotion));
+    }
+
+    private function hasCatalogPromotionChannelWithCode(
+        CatalogPromotionInterface $catalogPromotion,
+        string $channelCode
+    ): bool {
+        $channels = $catalogPromotion->getChannels()->filter(function (ChannelInterface $channel) use ($channelCode) {
+            return $channel->getCode() === $channelCode;
+        });
+
+        return count($channels) === 1;
     }
 }

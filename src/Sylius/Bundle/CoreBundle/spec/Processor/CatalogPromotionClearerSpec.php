@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\Processor;
 
-use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -52,5 +51,17 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
         $secondChannelPricing->clearAppliedPromotions()->shouldNotBeCalled();
 
         $this->clear();
+    }
+
+    function it_clears_given_channel_pricing_with_catalog_promotions_applied(
+        ChannelPricingRepositoryInterface $channelPricingRepository,
+        ChannelPricingInterface $channelPricing
+    ): void {
+        $channelPricing->getAppliedPromotions()->willReturn(['winter_sale' => ['en_US' => ['name' => 'Winter sale']]]);
+        $channelPricing->getOriginalPrice()->willReturn(1000);
+        $channelPricing->setPrice(1000)->shouldBeCalled();
+        $channelPricing->clearAppliedPromotions()->shouldBeCalled();
+
+        $this->clearChannelPricing($channelPricing);
     }
 }

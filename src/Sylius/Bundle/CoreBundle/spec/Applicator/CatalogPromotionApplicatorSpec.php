@@ -36,7 +36,7 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $this->shouldImplement(CatalogPromotionApplicatorInterface::class);
     }
 
-    function it_applies_percentage_discount_on_all_products_variants(
+    function it_applies_percentage_discount_on_product_variant(
         AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter,
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion,
@@ -70,7 +70,7 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $secondChannelPricing->setPrice(980)->shouldBeCalled();
         $secondChannelPricing->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']])->shouldBeCalled();
 
-        $this->applyCatalogPromotion($variant, $catalogPromotion);
+        $this->applyOnVariant($variant, $catalogPromotion);
     }
 
     function it_does_not_set_original_price_during_application_if_its_already_there(
@@ -95,6 +95,55 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $channelPricing->setPrice(500)->shouldBeCalled();
         $channelPricing->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']])->shouldBeCalled();
 
-        $this->applyCatalogPromotion($variant, $catalogPromotion);
+        $this->applyOnVariant($variant, $catalogPromotion);
+    }
+
+    function it_applies_percentage_discount_on_channel_pricing(
+        AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter,
+        CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionActionInterface $catalogPromotionAction,
+        ChannelPricingInterface $channelPricing,
+        ChannelInterface $channel
+    ): void {
+        $channel->getCode()->willReturn('WEB');
+
+        $catalogPromotion->getActions()->willReturn(new ArrayCollection([$catalogPromotionAction->getWrappedObject()]));
+        $catalogPromotion->getChannels()->willReturn(new ArrayCollection([$channel->getWrappedObject()]));
+
+        $appliedPromotionInformationFormatter->format($catalogPromotion)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
+        $catalogPromotionAction->getConfiguration()->willReturn(['amount' => 0.3]);
+
+        $channelPricing->getPrice()->willReturn(1000);
+        $channelPricing->getOriginalPrice()->willReturn(null);
+        $channelPricing->getChannelCode()->willReturn('WEB');
+
+        $channelPricing->setOriginalPrice(1000)->shouldBeCalled();
+        $channelPricing->setPrice(700)->shouldBeCalled();
+        $channelPricing->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']])->shouldBeCalled();
+
+        $this->applyOnChannelPricing($channelPricing, $catalogPromotion);
+    }
+
+    function it_does_not_apply_percentage_discount_on_channel_pricing_if_catalog_promotion_does_not_have_the_proper_channel(
+        AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter,
+        CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionActionInterface $catalogPromotionAction,
+        ChannelPricingInterface $channelPricing,
+        ChannelInterface $channel
+    ): void {
+        $channel->getCode()->willReturn('WEB');
+
+        $catalogPromotion->getActions()->willReturn(new ArrayCollection([$catalogPromotionAction->getWrappedObject()]));
+        $catalogPromotion->getChannels()->willReturn(new ArrayCollection([$channel->getWrappedObject()]));
+
+        $channelPricing->getChannelCode()->willReturn('MOBILE');
+
+        $appliedPromotionInformationFormatter->format($catalogPromotion)->shouldNotBeCalled();
+
+        $channelPricing->setOriginalPrice(1000)->shouldNotBeCalled();
+        $channelPricing->setPrice(700)->shouldNotBeCalled();
+        $channelPricing->addAppliedPromotion(Argument::any())->shouldNotBeCalled();
+
+        $this->applyOnChannelPricing($channelPricing, $catalogPromotion);
     }
 }

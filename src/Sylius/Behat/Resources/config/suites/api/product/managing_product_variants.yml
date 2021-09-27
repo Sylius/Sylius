@@ -14,7 +14,7 @@ default:
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.admin_security
 
-                - sylius.behat.context.api.admin.managing_product_variants
+                - sylius.behat.context.api.admin.ajax
 
             filters:
                 tags: "@managing_product_variants && @api"
