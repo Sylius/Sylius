@@ -112,7 +112,8 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface" />
             <argument type="service" id="sylius.manager.channel_pricing" />
         <tag name="messenger.message_handler" bus="sylius.event_bus" />
-        
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\Listener\CatalogPromotionConfigurationRemovedListener">
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionReprocessorInterface" />
             <argument type="service" id="doctrine.orm.entity_manager" />
