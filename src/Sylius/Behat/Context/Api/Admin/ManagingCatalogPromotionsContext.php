@@ -102,6 +102,22 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I disable this catalog promotion
+     */
+    public function iDisableCatalogPromotion(): void
+    {
+        $this->client->updateRequestData(['enabled' => false]);
+    }
+
+    /**
+     * @When I enable this catalog promotion
+     */
+    public function iEnableThisCatalogPromotion(): void
+    {
+        $this->client->updateRequestData(['enabled' => true]);
+    }
+
+    /**
      * @When I describe it as :description in :localeCode
      */
     public function iDescribeItAsIn(string $description, string $localeCode): void
@@ -283,6 +299,22 @@ final class ManagingCatalogPromotionsContext implements Context
 
         $this->client->updateRequestData(['rules' => $rules]);
         $this->client->update();
+    }
+
+    /**
+     * @When /^I disable ("[^"]*" catalog promotion)$/
+     */
+    public function iDisableThisCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->toggleCatalogPromotion($catalogPromotion, false);
+    }
+
+    /**
+     * @When /^I enable ("[^"]*" catalog promotion)$/
+     */
+    public function iEnableCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->toggleCatalogPromotion($catalogPromotion, true);
     }
 
     /**
@@ -755,5 +787,13 @@ final class ManagingCatalogPromotionsContext implements Context
         }
 
         return false;
+    }
+
+    private function toggleCatalogPromotion(CatalogPromotionInterface $catalogPromotion, bool $enabled): void
+    {
+        $this->client->buildUpdateRequest($catalogPromotion->getCode());
+
+        $this->client->updateRequestData(['enabled' => $enabled]);
+        $this->client->update();
     }
 }

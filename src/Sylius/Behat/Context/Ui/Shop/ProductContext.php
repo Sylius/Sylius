@@ -94,6 +94,35 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then /^("[^"]+" variant) and ("[^"]+" variant) should be discounted$/
+     * @Then /^("[^"]+" variant) should be discounted$/
+     */
+    public function variantAndVariantShouldBeDiscounted(ProductVariantInterface ...$variants): void
+    {
+        /** @var ProductVariantInterface $variant */
+        foreach ($variants as $variant) {
+            $this->showPage->open(['slug' => $variant->getProduct()->getTranslation('en_US')->getSlug(), '_locale' => 'en_US']);
+            $this->showPage->selectVariant($variant->getName());
+            Assert::greaterThan($this->showPage->getOriginalPrice(), $this->showPage->getPrice());
+        }
+    }
+
+    /**
+     * @Then /^("[^"]+" variant) and ("[^"]+" variant) should not be discounted$/
+     * @Then /^("[^"]+" variant) should not be discounted$/
+     */
+    public function variantAndVariantShouldNotBeDiscounted(ProductVariantInterface ...$variants): void
+    {
+        /** @var ProductVariantInterface $variant */
+        foreach ($variants as $variant) {
+            $this->showPage->open(['slug' => $variant->getProduct()->getTranslation('en_US')->getSlug(), '_locale' => 'en_US']);
+            $this->showPage->selectVariant($variant->getName());
+
+            Assert::isEmpty($this->showPage->getOriginalPrice());
+        }
+    }
+
+    /**
      * @When I try to reach unexistent product
      */
     public function iTryToReachUnexistentProductPage($localeCode = 'en_US')

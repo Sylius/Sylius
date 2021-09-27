@@ -35,6 +35,11 @@ final class FormElement extends Element implements FormElementInterface
         $this->getElement('description', ['%localeCode%' => $localeCode])->setValue($description);
     }
 
+    public function changeEnableTo(bool $enabled): void
+    {
+        $this->getElement('enabled')->setValue($enabled);
+    }
+
     public function checkChannel(string $channelName): void
     {
         $this->getDocument()->checkField($channelName);
@@ -107,6 +112,7 @@ final class FormElement extends Element implements FormElementInterface
             'add_rule_button' => '#rules [data-form-collection="add"]',
             'channel' => '#sylius_catalog_promotion_code',
             'description' => '#sylius_catalog_promotion_translations_%localeCode%_description',
+            'enabled' => '#sylius_catalog_promotion_enabled',
             'label' => '#sylius_catalog_promotion_translations_%localeCode%_label',
             'last_action' => '#actions [data-form-collection="item"]:last-child',
             'last_rule' => '#rules [data-form-collection="item"]:last-child',

@@ -113,6 +113,22 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I enable this catalog promotion
+     */
+    public function iEnableCatalogPromotion(): void
+    {
+        $this->formElement->changeEnableTo(true);
+    }
+
+    /**
+     * @When I disable this catalog promotion
+     */
+    public function iDisableThisCatalogPromotion(): void
+    {
+        $this->formElement->changeEnableTo(false);
+    }
+
+    /**
      * @When I make it available in channel :channelName
      */
     public function iMakeItAvailableInChannel(string $channelName): void
@@ -204,6 +220,26 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
         $this->formElement->addAction();
         $this->formElement->specifyLastActionDiscount($amount);
+        $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @When /^I disable ("[^"]*" catalog promotion)$/
+     */
+    public function iDisableCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
+        $this->formElement->changeEnableTo(false);
+        $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @When /^I enable ("[^"]*" catalog promotion)$/
+     */
+    public function iEnableThisCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
+        $this->formElement->changeEnableTo(true);
         $this->updatePage->saveChanges();
     }
 

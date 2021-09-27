@@ -6,6 +6,7 @@ sylius:
             action:
                 percentage_discount: Percentage discount
             description: Description
+            enabled: Enabled
             label: Label
             name: Name
             translations: Translations

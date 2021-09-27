@@ -4,6 +4,7 @@ Sylius\Component\Core\Model\CatalogPromotion:
         code: 'mugs_discount'
         channels: ['@channel_web']
         translations: ['@catalog_promotion_translation']
+        enabled: true
 
 Sylius\Component\Promotion\Model\CatalogPromotionTranslation:
     catalog_promotion_translation:

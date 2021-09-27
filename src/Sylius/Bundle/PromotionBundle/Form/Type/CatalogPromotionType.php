@@ -16,6 +16,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -45,6 +46,9 @@ final class CatalogPromotionType extends AbstractResourceType
                 'entry_type' => $this->catalogPromotionTranslationType,
                 'label' => 'sylius.form.catalog_promotion.translations',
             ])
+            ->add('enabled', CheckboxType::class, [
+                'label' => 'sylius.form.catalog_promotion.enabled'
+            ] )
             ->add('rules', CollectionType::class, [
                 'label' => 'sylius.ui.rules',
                 'entry_type' => CatalogPromotionRuleType::class,

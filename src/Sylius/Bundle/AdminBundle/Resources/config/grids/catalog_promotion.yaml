@@ -23,6 +23,12 @@ sylius_grid:
                     label: sylius.ui.channels
                     options:
                         template: '@SyliusAdmin/Grid/Field/_channels.html.twig'
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
             actions:
                 main:
                     create:

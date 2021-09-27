@@ -67,6 +67,26 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
+     * @Given /^(it) is enabled$/
+     */
+    public function itIsEnabled(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $catalogPromotion->setEnabled(true);
+
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given /^(this catalog promotion) is disabled$/
+     */
+    public function thisCatalogPromotionIsDisabled(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $catalogPromotion->setEnabled(false);
+
+        $this->entityManager->flush();
+    }
+
+    /**
      * @Given there are catalog promotions named :firstName and :secondName
      */
     public function thereAreCatalogPromotionsNamed(string ...$names): void

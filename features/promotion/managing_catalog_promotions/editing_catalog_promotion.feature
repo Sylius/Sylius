@@ -6,13 +6,13 @@ Feature: Editing catalog promotion
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store operates on a channel named "Europe"
         And the store has a "T-Shirt" configurable product
         And this product has "PHP T-Shirt" variant priced at "$20.00"
         And this product has "Kotlin T-Shirt" variant priced at "$40.00"
         And there is a catalog promotion with "christmas_sale" code and "Christmas sale" name
         And it applies on "PHP T-Shirt" variant
         And it reduces price by "30%"
+        And it is enabled
         And I am logged in as an administrator
 
     @api @ui
@@ -33,6 +33,7 @@ Feature: Editing catalog promotion
     @api @ui
     Scenario: Changing availability in channels for catalog promotion
         Given the catalog promotion "Christmas sale" is available in "United States"
+        And the store operates on a channel named "Europe"
         When I want to modify a catalog promotion "Christmas sale"
         And I make it available in channel "Europe"
         And I make it unavailable in channel "United States"
@@ -57,3 +58,14 @@ Feature: Editing catalog promotion
         When I edit "Christmas sale" catalog promotion to have "40%" discount
         Then I should be notified that it has been successfully edited
         And this catalog promotion should have "40%" percentage discount
+
+    @api @ui
+    Scenario: Disabling catalog promotion
+        When I disable "Christmas sale" catalog promotion
+        Then "PHP T-Shirt" variant should not be discounted
+
+    @api @ui
+    Scenario: Enabling catalog promotion
+        Given this catalog promotion is disabled
+        When I enable "Christmas sale" catalog promotion
+        Then "PHP T-Shirt" variant should be discounted

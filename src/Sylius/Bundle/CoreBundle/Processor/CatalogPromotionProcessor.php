@@ -35,6 +35,10 @@ final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterf
 
     public function process(CatalogPromotionInterface $catalogPromotion): void
     {
+        if (!$catalogPromotion->isEnabled()) {
+            return;
+        }
+
         $variants = $this->catalogPromotionVariantsProvider->provideEligibleVariants($catalogPromotion);
         if (empty($variants)) {
             return;
