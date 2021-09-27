@@ -468,11 +468,19 @@ final class ProductContext implements Context
     /**
      * @When I select :variantName variant
      * @When I view :variantName variant
-     * @When the visitor view :variantName variant
      */
-    public function iSelectVariant($variantName): void
+    public function iSelectVariant(string $variantName): void
     {
         $this->showPage->selectVariant($variantName);
+    }
+
+    /**
+     * @When the visitor view :variant variant
+     */
+    public function theVisitorViewVariant(ProductVariantInterface $variant): void
+    {
+        $this->showPage->open(['slug' => $variant->getProduct()->getTranslation('en_US')->getSlug(), '_locale' => 'en_US']);
+        $this->showPage->selectVariant($variant->getName());
     }
 
     /**
