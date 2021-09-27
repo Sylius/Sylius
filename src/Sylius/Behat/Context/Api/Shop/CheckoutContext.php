@@ -659,6 +659,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Then I should be notified that address without country cannot exist
+     * @Then they should be notified that address without country cannot exist
      */
     public function iShouldBeNotifiedThatAddressWithoutCountryCannotExist(): void
     {
@@ -666,6 +667,17 @@ final class CheckoutContext implements Context
             $this->ordersClient->getLastResponse(),
             'The address without country cannot exist'
         );
+    }
+
+    /**
+     * @Then they should be notified that they cannot address an empty cart
+     */
+    public function theyShouldBeNotifiedThatTheyCannotAddressAnEmptyCart(): void
+    {
+        $response = $this->ordersClient->getLastResponse();
+
+        Assert::false($this->responseChecker->isUpdateSuccessful($response));
+        $this->responseChecker->hasViolationWithMessage($response, 'The empty cart cannot be addressed');
     }
 
     /**
