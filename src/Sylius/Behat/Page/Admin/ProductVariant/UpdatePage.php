@@ -28,9 +28,26 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('code');
     }
 
-    public function specifyPrice(int $price): void
+    public function specifyPrice(int $price, ?ChannelInterface $channel = null): void
     {
-        $this->getDocument()->fillField('Price', $price);
+        if ($channel === null) {
+            $this->getDocument()->fillField('Price', $price);
+
+            return;
+        }
+
+        $this->getElement('price', ['%channelCode%' => $channel->getCode()])->setValue($price);
+    }
+
+    public function specifyOriginalPrice(int $originalPrice, ?ChannelInterface $channel = null): void
+    {
+        if ($channel === null) {
+            $this->getDocument()->fillField('Original price', $originalPrice);
+
+            return;
+        }
+
+        $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
     }
 
     public function disableTracking(): void

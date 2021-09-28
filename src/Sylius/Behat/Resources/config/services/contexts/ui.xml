@@ -214,6 +214,10 @@
             <argument type="service" id="sylius.behat.notification_checker" />
         </service>
 
+        <service id="Sylius\Behat\Context\Ui\Admin\ManagingProductVariantsPricesContext">
+            <argument type="service" id="sylius.behat.page.admin.product_variant.update" />
+        </service>
+
         <service id="sylius.behat.context.ui.admin.browsing_product_variants" class="Sylius\Behat\Context\Ui\Admin\BrowsingProductVariantsContext">
             <argument type="service" id="sylius.behat.page.admin.product_variant.index" />
             <argument type="service" id="sylius.product_variant_resolver.default" />

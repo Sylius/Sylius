@@ -105,6 +105,11 @@
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\EventListener\ProductVariantEventListener">
+            <argument type="service" id="sylius.event_bus" />
+            <tag name="kernel.event_listener" event="sylius.product_variant.post_update" method="postUpdate" />
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\Listener\ProductVariantUpdateListener">
             <argument type="service" id="sylius.repository.product_variant" />
             <argument type="service" id="sylius.repository.catalog_promotion" />

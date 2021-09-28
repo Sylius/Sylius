@@ -31,7 +31,7 @@ final class ProductContext implements Context
 {
     private ShowPageInterface $showPage;
 
-    private \Sylius\Behat\Page\Shop\Product\IndexPageInterface $indexPage;
+    private IndexPageInterface $indexPage;
 
     private ProductReviewIndexPageInterface $productReviewsIndexPage;
 
@@ -439,7 +439,6 @@ final class ProductContext implements Context
         $this->channelContextSetter->setChannel($channel);
 
         $localeCode = $channel->getDefaultLocale()->getCode();
-
         $this->showPage->open(['slug' => $product->getTranslation($localeCode)->getSlug(), '_locale' => $localeCode]);
 
         if ($priceType === 'original price') {
