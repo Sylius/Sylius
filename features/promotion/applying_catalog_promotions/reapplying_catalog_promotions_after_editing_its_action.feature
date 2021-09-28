@@ -19,8 +19,8 @@ Feature: Reapplying catalog promotion after editing its action
         When I modify a catalog promotion "Summer sale"
         And I add action that gives "25%" percentage discount
         And I save my changes
-        Then the visitor view "Python T-Shirt" variant
-        And this product variant price should be "$7.50"
+        And the visitor view "Python T-Shirt" variant
+        Then this product variant price should be "$7.50"
         And this product original price should be "$10.00"
 
     @api
@@ -28,8 +28,8 @@ Feature: Reapplying catalog promotion after editing its action
         When I modify a catalog promotion "Winter sale"
         And I edit its action so that it reduces price by "25%"
         And I save my changes
-        Then the visitor view "PHP T-Shirt" variant
-        And this product variant price should be "$15.00"
+        And the visitor view "PHP T-Shirt" variant
+        Then this product variant price should be "$15.00"
         And this product original price should be "$20.00"
 
     @api
@@ -39,8 +39,8 @@ Feature: Reapplying catalog promotion after editing its action
         And I save my changes
         And I add action that gives "10%" percentage discount
         And I save my changes
-        Then the visitor view "PHP T-Shirt" variant
-        And this product variant price should be "$18.00"
+        And the visitor view "PHP T-Shirt" variant
+        Then this product variant price should be "$18.00"
         And this product original price should be "$20.00"
 
     @api
@@ -48,8 +48,8 @@ Feature: Reapplying catalog promotion after editing its action
         When I modify a catalog promotion "Winter sale"
         And I add another action that gives "10%" percentage discount
         And I save my changes
-        Then the visitor view "PHP T-Shirt" variant
-        And this product variant price should be "$9.00"
+        And the visitor view "PHP T-Shirt" variant
+        Then this product variant price should be "$9.00"
         And this product original price should be "$20.00"
 
     @api
@@ -57,6 +57,6 @@ Feature: Reapplying catalog promotion after editing its action
         When I modify a catalog promotion "Winter sale"
         And I remove its every action
         And I save my changes
-        Then the visitor view "PHP T-Shirt" variant
-        And the product variant price should be "$20.00"
+        And the visitor view "PHP T-Shirt" variant
+        Then the product variant price should be "$20.00"
         And the product original price should be "$20.00"

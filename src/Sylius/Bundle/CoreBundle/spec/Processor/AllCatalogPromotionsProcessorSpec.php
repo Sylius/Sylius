@@ -19,7 +19,7 @@ use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-class CatalogPromotionReprocessorSpec extends ObjectBehavior
+final class AllCatalogPromotionsProcessorSpec extends ObjectBehavior
 {
     function let(
         CatalogPromotionClearerInterface $catalogPromotionClearer,
@@ -33,7 +33,7 @@ class CatalogPromotionReprocessorSpec extends ObjectBehavior
         );
     }
 
-    function it_should_clear_and_calculate_catalog_promotions(
+    function it_clears_and_processes_catalog_promotions(
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionProcessorInterface $catalogPromotionProcessor,
         RepositoryInterface $catalogPromotionRepository,
@@ -47,6 +47,6 @@ class CatalogPromotionReprocessorSpec extends ObjectBehavior
         $catalogPromotionProcessor->process($firstCatalogPromotion)->shouldBeCalled();
         $catalogPromotionProcessor->process($secondCatalogPromotion)->shouldBeCalled();
 
-        $this->reprocess();
+        $this->process();
     }
 }

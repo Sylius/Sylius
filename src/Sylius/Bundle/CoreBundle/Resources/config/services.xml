@@ -277,8 +277,8 @@
         </service>
 
         <service
-            id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionReprocessorInterface"
-            class="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionReprocessor"
+            id="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessor"
+            class="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessor"
         >
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface" />

@@ -54,29 +54,6 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
         ));
     }
 
-    function it_dispatches_catalog_promotion_updated_after_writing_catalog_promotion_action(
-        MessageBusInterface $eventBus,
-        CatalogPromotionActionInterface $catalogPromotionAction,
-        CatalogPromotionInterface $catalogPromotion,
-        HttpKernelInterface $kernel,
-        Request $request
-    ): void {
-        $request->getMethod()->willReturn(Request::METHOD_PUT);
-
-        $catalogPromotionAction->getCatalogPromotion()->willReturn($catalogPromotion);
-        $catalogPromotion->getCode()->willReturn('Winter_sale');
-
-        $message = new CatalogPromotionUpdated('Winter_sale');
-        $eventBus->dispatch($message)->willReturn(new Envelope($message))->shouldBeCalled();
-
-        $this->postWrite(new ViewEvent(
-            $kernel->getWrappedObject(),
-            $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
-            $catalogPromotionAction->getWrappedObject()
-        ));
-    }
-
     function it_does_nothing_after_writing_other_entity(
         MessageBusInterface $eventBus,
         HttpKernelInterface $kernel,

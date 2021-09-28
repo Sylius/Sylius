@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\EventSubscriber;
 use ApiPlatform\Core\EventListener\EventPriorities;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
-use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
@@ -42,17 +41,15 @@ final class CatalogPromotionEventSubscriber implements EventSubscriberInterface
     public function postWrite(ViewEvent $event): void
     {
         $entity = $event->getControllerResult();
+
+        if (!$entity instanceof CatalogPromotionInterface) {
+            return;
+        }
+
         $method = $event->getRequest()->getMethod();
 
         if ($method === Request::METHOD_PUT || $method === Request::METHOD_PATCH) {
-            if ($entity instanceof CatalogPromotionInterface) {
-                $this->eventBus->dispatch(new CatalogPromotionUpdated($entity->getCode()));
-            }
-
-            if ($entity instanceof CatalogPromotionActionInterface) {
-                $this->eventBus->dispatch(new CatalogPromotionUpdated($entity->getCatalogPromotion()->getCode()));
-            }
+            $this->eventBus->dispatch(new CatalogPromotionUpdated($entity->getCode()));
         }
     }
 }
-

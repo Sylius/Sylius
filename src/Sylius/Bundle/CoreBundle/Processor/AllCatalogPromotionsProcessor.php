@@ -15,7 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Processor;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-class CatalogPromotionReprocessor implements CatalogPromotionReprocessorInterface
+final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcessorInterface
 {
     private CatalogPromotionClearerInterface $catalogPromotionClearer;
 
@@ -33,7 +33,7 @@ class CatalogPromotionReprocessor implements CatalogPromotionReprocessorInterfac
         $this->catalogPromotionRepository = $catalogPromotionRepository;
     }
 
-    public function reprocess(): void
+    public function process(): void
     {
         $this->catalogPromotionClearer->clear();
 
