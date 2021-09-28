@@ -81,7 +81,7 @@
             autoconfigure="false"
             decoration-priority="20"
         >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\AdminAuthenticationTokenDocumentationNormalizer.inner" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\PathHiderDocumentationNormalizer.inner" />
             <argument>%sylius.api.paths_to_hide%</argument>
         </service>
     </services>
