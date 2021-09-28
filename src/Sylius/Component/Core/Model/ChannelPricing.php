@@ -92,7 +92,7 @@ class ChannelPricing implements ChannelPricingInterface
             return;
         }
 
-        $this->appliedPromotions = array_merge_recursive($this->appliedPromotions, $promotion);
+        $this->appliedPromotions = array_merge($this->appliedPromotions, $promotion);
     }
 
     public function removeAppliedPromotion(string $promotionCode): void

@@ -19,6 +19,7 @@ use Sylius\Behat\Page\Admin\CatalogPromotion\CreatePageInterface;
 use Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
@@ -158,6 +159,15 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I remove its every action
+     */
+    public function iRemoveItsEveryAction(): void
+    {
+        $this->formElement->removeAllActions();
+    }
+
+    /**
+     * @When I add another action that gives ":discount%" percentage discount
      * @When I add action that gives ":discount%" percentage discount
      */
     public function iAddActionThatGivesPercentageDiscount(string $discount): void
@@ -185,6 +195,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I modify a catalog promotion :catalogPromotion
      * @When I want to modify a catalog promotion :catalogPromotion
      */
     public function iWantToModifyACatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
@@ -244,6 +255,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I edit its action so that it reduces price by ":discount%"
+     */
+    public function iEditItsActionSoThatItReducesPriceBy(string $discount): void
+    {
+        $this->formElement->specifyLastActionDiscount($discount);
+    }
+
+    /**
      * @When I add for variants rule without variants configured
      */
     public function iAddForVariantsRuleWithoutVariantsConfigured(): void
@@ -266,6 +285,53 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $this->formElement->addAction();
         $this->formElement->specifyLastActionDiscount('alot');
+    }
+
+    /**
+     * @When /^I make (this catalog promotion) unavailable in the ("[^"]+" channel)$/
+     * @When /^I make the ("[^"]+" catalog promotion) unavailable in the ("[^"]+" channel)$/
+     */
+    public function iMakeThisCatalogPromotionUnavailableInTheChannel(
+        CatalogPromotionInterface $catalogPromotion,
+        ChannelInterface $channel
+    ): void {
+        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
+
+        $this->formElement->uncheckChannel($channel->getName());
+
+        $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @When /^I make (this catalog promotion) available in the ("[^"]+" channel)$/
+     * @When /^I make ("[^"]+" catalog promotion) available in the ("[^"]+" channel)$/
+     */
+    public function iMakeThisCatalogPromotionAvailableInTheChannel(
+        CatalogPromotionInterface $catalogPromotion,
+        ChannelInterface $channel
+    ): void {
+        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
+
+        $this->formElement->checkChannel($channel->getName());
+
+        $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @When /^I switch (this catalog promotion) availability from the ("[^"]+" channel) to the ("[^"]+" channel)$/
+     * @When /^I switch ("[^"]+" catalog promotion) availability from the ("[^"]+" channel) to the ("[^"]+" channel)$/
+     */
+    public function iSwitchThisCatalogPromotionAvailabilityFromTheChannelToTheChannel(
+        CatalogPromotionInterface $catalogPromotion,
+        ChannelInterface $removedChannel,
+        ChannelInterface $addedChannel
+    ): void {
+        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
+
+        $this->formElement->uncheckChannel($removedChannel->getName());
+        $this->formElement->checkChannel($addedChannel->getName());
+
+        $this->updatePage->saveChanges();
     }
 
     /**

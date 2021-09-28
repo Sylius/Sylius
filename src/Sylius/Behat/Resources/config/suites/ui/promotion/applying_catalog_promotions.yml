@@ -7,6 +7,7 @@ default:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
+                - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.product_taxon
@@ -19,6 +20,7 @@ default:
                 - sylius.behat.context.transform.product_variant
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.taxon
+                - Sylius\Behat\Context\Transform\CatalogPromotionContext
 
                 - Sylius\Behat\Context\Ui\Admin\ManagingCatalogPromotionsContext
                 - sylius.behat.context.ui.shop.product
