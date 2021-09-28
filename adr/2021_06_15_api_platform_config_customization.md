@@ -34,7 +34,8 @@ in specified directory all we need to do is create config we want to overwrite, 
 ```yaml
 '%sylius.model.zone.class%':
     collectionOperations:
-        admin_get (unset): ~
+        admin_get:
+            enabled: false
 ```
 
 This is example config to remove specific operation, more examples can be found in docs (https://docs.sylius.com/en/latest/customization/api.html).

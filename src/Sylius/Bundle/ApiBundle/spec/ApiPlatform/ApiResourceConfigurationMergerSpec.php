@@ -68,7 +68,9 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
                 ]
             ],
             [
-                'admin_get (unset)' => null
+                'admin_get' => [
+                    'enabled' => false,
+                ],
             ]
         )->shouldReturn(
             [
@@ -127,8 +129,8 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
                 ]
             ],
             [
-                'admin_post (unset)' => null,
                 'admin_post' => [
+                    'enabled' => false,
                     'method' => 'POST',
                     'path' => 'admin/path-new'
                 ]

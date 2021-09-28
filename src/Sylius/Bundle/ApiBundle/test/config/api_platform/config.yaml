@@ -1,7 +1,9 @@
 '%sylius.model.zone.class%':
     collectionOperations:
-        admin_get (unset): ~
-        admin_post (unset): ~
+        admin_get:
+            enabled: false
+        admin_post:
+            enabled: false
 
 '%sylius.model.channel.class%':
     collectionOperations:
@@ -14,7 +16,8 @@
 
 '%sylius.model.order.class%':
     itemOperations:
-        shop_select_shipping_method (unset): ~
+        shop_select_shipping_method:
+            enabled: false
     collectionOperations:
         admin_get:
             path: /admin/orders/get/all

@@ -4,23 +4,25 @@ Configuring endpoints using yaml
 To remove an endpoint from the API using YAML you need to specify the operation of which resource
 should be removed in ``config/api_platform/config.yaml``.
 
-If you want to remove, for example, the admin ``GET`` endpoint of ``Zones``, you need to use the ``(unset)`` key in its yaml config.
+If you want to remove, for example, the admin ``GET`` endpoint of ``Zones``, you need to configure the ``enabled`` key in its yaml config.
 
 .. code-block:: yaml
 
     '%sylius.model.zone.class%':
         collectionOperations:
-            admin_get (unset): ~
+            admin_get:
+                enabled: false
 
 
-Using the ``(unset)`` key you can also remove filters you don't need.
+Using the ``enabled`` key you can also remove filters you don't need.
 
 .. code-block:: yaml
 
     '%sylius.model.product.class%':
         collectionOperations:
             shop_get:
-                filters (unset): ~
+                filters:
+                    enabled: false
 
 If you need to add a new filter in the yaml configuration, simply add this kind of code to ``config/api_platform/config.yaml``.
 
