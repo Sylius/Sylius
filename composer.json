@@ -167,7 +167,10 @@
         "symfony/doctrine-bridge": "4.4.16",
         "symfony/polyfill-mbstring": "^1.22.0",
         "symfony/property-info": "4.4.22 || 5.2.7",
-        "symfony/serializer": "4.4.19 || 5.2.2"
+        "symfony/serializer": "4.4.19 || 5.2.2",
+        "symfony/symfony": "5.3.8 || 4.4.31",
+        "symfony/translation": "5.3.8 || 4.4.31",
+        "symfony/messenger": "5.3.8 || 4.4.31"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",

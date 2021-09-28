@@ -62,3 +62,9 @@ references related issues.
    The potential solution would be to explicitly define these translation entities as API resources with proper serialization.
 
    Probably introduced in: https://github.com/symfony/symfony/pull/40811
+
+ - `symfony/symfony`, `symfony/messenger`, `symfony/translation` on versions `5.3.8` `4.4.31`:
+
+    This version of symfony/messenger creates issues on Static analysis as namespaces of them are possibly wrong.
+
+    Referenced issue: https://github.com/symfony/symfony/issues/43212
