@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
@@ -23,9 +24,14 @@ final class CatalogPromotionRuleValidator extends ConstraintValidator
 {
     private ProductVariantRepositoryInterface $variantRepository;
 
-    public function __construct(ProductVariantRepositoryInterface $variantRepository)
-    {
+    private RepositoryInterface $taxonRepository;
+
+    public function __construct(
+        ProductVariantRepositoryInterface $variantRepository,
+        RepositoryInterface $taxonRepository
+    ) {
         $this->variantRepository = $variantRepository;
+        $this->taxonRepository = $taxonRepository;
     }
 
     public function validate($value, Constraint $constraint): void
@@ -34,13 +40,28 @@ final class CatalogPromotionRuleValidator extends ConstraintValidator
         Assert::isInstanceOf($constraint, CatalogPromotionRule::class);
 
         /** @var CatalogPromotionRuleInterface $value */
-        if ($value->getType() !== CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS) {
+        if (
+            $value->getType() !== CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS &&
+            $value->getType() !== CatalogPromotionRuleInterface::TYPE_FOR_TAXONS
+        ) {
             $this->context->buildViolation($constraint->invalidType)->atPath('type')->addViolation();
 
             return;
         }
 
         $configuration = $value->getConfiguration();
+
+        if ($value->getType() === CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS) {
+            $this->validateForVariantsType($configuration, $constraint);
+
+            return;
+        }
+
+        $this->validateForTaxonType($configuration, $constraint);
+    }
+
+    private function validateForVariantsType(array $configuration, Constraint $constraint): void
+    {
         if (!array_key_exists('variants', $configuration) || empty($configuration['variants'])) {
             $this->context->buildViolation($constraint->notEmpty)->atPath('configuration.variants')->addViolation();
 
@@ -53,6 +74,19 @@ final class CatalogPromotionRuleValidator extends ConstraintValidator
 
                 break;
             }
+        }
+    }
+
+    private function validateForTaxonType(array $configuration, Constraint $constraint): void
+    {
+        if (!array_key_exists('taxon', $configuration) || empty($configuration['taxon']['taxonCode'])) {
+            $this->context->buildViolation($constraint->notEmpty)->atPath('configuration.variants')->addViolation();
+
+            return;
+        }
+
+        if (null === $this->taxonRepository->findOneBy(['code' => $configuration['taxon']['taxonCode']])) {
+            $this->context->buildViolation($constraint->invalidVariants)->atPath('configuration.variants')->addViolation();
         }
     }
 }

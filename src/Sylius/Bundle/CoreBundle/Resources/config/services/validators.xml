@@ -66,6 +66,7 @@
 
         <service id="Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionRuleValidator">
             <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="sylius.repository.taxon" />
             <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_rule" />
         </service>
     </services>
