@@ -15,22 +15,17 @@ namespace spec\Sylius\Bundle\CoreBundle\Provider;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Provider\VariantsProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
-use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
-use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 
 final class CatalogPromotionVariantsProviderSpec extends ObjectBehavior
 {
-    function let(
-        ProductVariantRepositoryInterface $productVariantRepository
-    ): void {
-        $this->beConstructedWith($productVariantRepository);
+    function let(VariantsProviderInterface $firstProvider, VariantsProviderInterface $secondProvider): void
+    {
+        $this->beConstructedWith([$firstProvider, $secondProvider]);
     }
 
     function it_implements_catalog_promotion_products_provider_interface(): void
@@ -38,22 +33,22 @@ final class CatalogPromotionVariantsProviderSpec extends ObjectBehavior
         $this->shouldImplement(CatalogPromotionVariantsProviderInterface::class);
     }
 
-    function it_provides_products_with_configured_variants(
-        ProductVariantRepositoryInterface $productVariantRepository,
+    function it_provides_variants_configured_in_catalog_promotion_rule(
         CatalogPromotionInterface $catalogPromotion,
         CatalogPromotionRuleInterface $rule,
+        VariantsProviderInterface $firstProvider,
+        VariantsProviderInterface $secondProvider,
         ProductVariantInterface $firstVariant,
         ProductVariantInterface $secondVariant
     ): void {
         $catalogPromotion->getRules()->willReturn(new ArrayCollection([$rule->getWrappedObject()]));
         $rule->getConfiguration()->willReturn(['variants' => ['PHP_T_SHIRT_XS_WHITE', 'PHP_T_SHIRT_XS_BLACK', 'PHP_MUG']]);
+        $rule->getType()->willReturn(CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS);
 
-        $productVariantRepository->findOneBy(['code' => 'PHP_T_SHIRT_XS_WHITE'])->willReturn($firstVariant);
-        $productVariantRepository->findOneBy(['code' => 'PHP_T_SHIRT_XS_BLACK'])->willReturn($secondVariant);
-        $productVariantRepository->findOneBy(['code' => 'PHP_MUG'])->willReturn(null);
-
-        $firstVariant->getCode()->willReturn('PHP_T_SHIRT_XS_WHITE');
-        $secondVariant->getCode()->willReturn('PHP_T_SHIRT_XS_BLACK');
+        $firstProvider->supports($rule)->willReturn(false);
+        $firstProvider->provideEligibleVariants($rule)->shouldNotBeCalled();
+        $secondProvider->supports($rule)->willReturn(true);
+        $secondProvider->provideEligibleVariants($rule)->willReturn([$firstVariant, $secondVariant]);
 
         $this
             ->provideEligibleVariants($catalogPromotion)
