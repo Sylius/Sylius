@@ -303,20 +303,22 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I remove its every rules
+     * @When I remove its every rule
      */
     public function iRemoveItsEveryRule(): void
     {
         $content = $this->client->getContent();
         $content['rules'] = [];
-        $this->client->updateRequestData($content);
+        $this->client->setRequestData($content);
     }
 
     /**
      * @When /^I edit ("[^"]+" catalog promotion) to be applied on ("[^"]+" variant)$/
      */
-    public function iEditCatalogPromotionToBeAppliedOn(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface $productVariant): void
-    {
+    public function iEditCatalogPromotionToBeAppliedOn(
+        CatalogPromotionInterface $catalogPromotion,
+        ProductVariantInterface $productVariant
+    ): void {
         $this->client->buildUpdateRequest($catalogPromotion->getCode());
         $rules = [[
             'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,

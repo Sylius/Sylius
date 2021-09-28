@@ -1,5 +1,5 @@
 @applying_catalog_promotions
-Feature: Reapplying catalog promotion after editing its action
+Feature: Reapplying catalog promotions after editing their actions
     In order to have proper discounts per catalog promotion action
     As a Store Owner
     I want to have discounts reapplied in product catalog once the action of catalog promotion changes

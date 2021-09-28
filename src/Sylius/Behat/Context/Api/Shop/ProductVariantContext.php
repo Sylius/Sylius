@@ -104,7 +104,7 @@ final class ProductVariantContext implements Context
     }
 
     /**
-     * @Then /^the visitor should see that the ("[^"]+" variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/
+     * @Then /^the visitor should(?:| still) see that the ("[^"]+" variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/
      */
     public function theVisitorShouldSeeThatTheVariantIsDiscountedWithPromotion(
         ProductVariantInterface $productVariant,
