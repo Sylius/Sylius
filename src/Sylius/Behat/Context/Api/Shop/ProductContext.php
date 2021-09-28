@@ -33,6 +33,8 @@ final class ProductContext implements Context
 {
     private ApiClientInterface $client;
 
+    private ApiClientInterface $productVariantClient;
+
     private ResponseCheckerInterface $responseChecker;
 
     private SharedStorageInterface $sharedStorage;
@@ -43,12 +45,14 @@ final class ProductContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
+        ApiClientInterface $productVariantClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
         IriConverterInterface $iriConverter,
         ChannelContextSetterInterface $channelContextSetter
     ) {
         $this->client = $client;
+        $this->productVariantClient = $productVariantClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
         $this->iriConverter = $iriConverter;
@@ -62,9 +66,12 @@ final class ProductContext implements Context
      */
     public function iOpenProductPage(ProductInterface $product): void
     {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = current($product->getVariants()->getValues());
         $this->client->show($product->getCode());
+        $this->productVariantClient->show($productVariant->getCode());
         $this->sharedStorage->set('product', $product);
-        $this->sharedStorage->set('product_variant', current($product->getVariants()->getValues()));
+        $this->sharedStorage->set('product_variant', $productVariant);
     }
 
     /**
@@ -140,7 +147,7 @@ final class ProductContext implements Context
 
     /**
      * @Then /^I should see the product price ("[^"]+")$/
-     * @Then customer should see the product price :price
+     * @Then /^customer should see the product price ("[^"]+")$/
      */
     public function iShouldSeeTheProductPrice(int $price): void
     {

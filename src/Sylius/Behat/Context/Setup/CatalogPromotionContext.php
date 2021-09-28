@@ -178,6 +178,32 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
+     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" taxon) and ("[^"]+" taxonomy)$/
+     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" taxonomy)$/
+     */
+    public function thereIsACatalogPromotionThatReducesPriceByAndAppliesOnTaxonomy(
+        string $name,
+        float $discount,
+        string $taxonName
+    ): void {
+        $this->createCatalogPromotion(
+            $name,
+            null,
+            [],
+            [[
+                'type' => CatalogPromotionRuleInterface::TYPE_FOR_TAXONS,
+                'configuration' => ['taxon' => ['taxonCode' => StringInflector::nameToCode($taxonName)]],
+            ]],
+            [[
+                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'configuration' => ['amount' => $discount],
+            ]]
+        );
+
+        $this->entityManager->flush();
+    }
+
+    /**
      * @Given /^there is a catalog promotion "([^"]*)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
      */
     public function thereIsACatalogPromotionAvailableInChannelThatReducesPriceByAndAppliesOnVariant(

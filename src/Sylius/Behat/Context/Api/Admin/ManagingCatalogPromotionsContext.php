@@ -18,6 +18,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -303,6 +304,23 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I add rule that applies on :taxon taxon
+     */
+    public function iAddRuleThatAppliesOnTaxon(string $taxonName): void
+    {
+        $rules = [[
+            'type' => CatalogPromotionRuleInterface::TYPE_FOR_TAXONS,
+            'configuration' => [
+                'taxon' => [
+                    'taxonCode' => StringInflector::nameToCode($taxonName)
+                ]
+            ],
+        ]];
+
+        $this->client->addRequestData('rules', $rules);
+    }
+
+    /**
      * @When I remove its every rule
      */
     public function iRemoveItsEveryRule(): void
@@ -565,6 +583,17 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::same(
             ['variants' => [$firstVariant->getCode(), $secondVariant->getCode()]],
+            $this->responseChecker->getCollection($this->client->getLastResponse())[0]['rules'][0]['configuration']
+        );
+    }
+
+    /**
+     * @Then :catalogPromotionName catalog promotion should apply to :taxonName taxon
+     */
+    public function catalogPromotionShouldApplyToTaxon(string $catalogPromotionName, string $taxonName): void
+    {
+        Assert::same(
+            ['taxon' => ['taxonCode' => StringInflector::nameToCode($taxonName)]],
             $this->responseChecker->getCollection($this->client->getLastResponse())[0]['rules'][0]['configuration']
         );
     }

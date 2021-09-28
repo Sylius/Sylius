@@ -68,6 +68,7 @@ final class ProductVariantContext implements Context
 
     /**
      * @Then /^(?:the|this) product variant price should be ("[^"]+")$/
+     * @Then /^I should see the variant price ("[^"]+")$/
      */
     public function theProductVariantPriceShouldBe(int $price): void
     {
