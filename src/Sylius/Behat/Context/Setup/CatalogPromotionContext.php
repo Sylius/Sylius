@@ -192,7 +192,7 @@ final class CatalogPromotionContext implements Context
             [],
             [[
                 'type' => CatalogPromotionRuleInterface::TYPE_FOR_TAXONS,
-                'configuration' => ['taxon' => ['taxonCode' => $taxon->getCode()]],
+                'configuration' => ['taxons' => [$taxon->getCode()]],
             ]],
             [[
                 'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
