@@ -67,9 +67,11 @@ final class ProductContext implements Context
     public function iOpenProductPage(ProductInterface $product): void
     {
         /** @var ProductVariantInterface $productVariant */
-        $productVariant = current($product->getVariants()->getValues());
+        $productVariant = $product->getVariants()->first();
+
         $this->client->show($product->getCode());
         $this->productVariantClient->show($productVariant->getCode());
+
         $this->sharedStorage->set('product', $product);
         $this->sharedStorage->set('product_variant', $productVariant);
     }

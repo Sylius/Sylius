@@ -23,6 +23,7 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -306,13 +307,13 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @When I add rule that applies on :taxon taxon
      */
-    public function iAddRuleThatAppliesOnTaxon(string $taxonName): void
+    public function iAddRuleThatAppliesOnTaxon(TaxonInterface $taxon): void
     {
         $rules = [[
             'type' => CatalogPromotionRuleInterface::TYPE_FOR_TAXONS,
             'configuration' => [
                 'taxon' => [
-                    'taxonCode' => StringInflector::nameToCode($taxonName)
+                    'taxonCode' => $taxon->getCode(),
                 ]
             ],
         ]];
@@ -579,7 +580,7 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @Then /^"[^"]+" catalog promotion should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
      */
-    public function itShouldHaveRule(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
+    public function catalogPromotionShouldApplyToVariants(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
     {
         Assert::same(
             ['variants' => [$firstVariant->getCode(), $secondVariant->getCode()]],
@@ -588,12 +589,12 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then :catalogPromotionName catalog promotion should apply to :taxonName taxon
+     * @Then :catalogPromotionName catalog promotion should apply to :taxon taxon
      */
-    public function catalogPromotionShouldApplyToTaxon(string $catalogPromotionName, string $taxonName): void
+    public function catalogPromotionShouldApplyToTaxon(string $catalogPromotionName, TaxonInterface $taxon): void
     {
         Assert::same(
-            ['taxon' => ['taxonCode' => StringInflector::nameToCode($taxonName)]],
+            ['taxon' => ['taxonCode' => $taxon->getCode()]],
             $this->responseChecker->getCollection($this->client->getLastResponse())[0]['rules'][0]['configuration']
         );
     }

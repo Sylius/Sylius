@@ -178,13 +178,13 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" taxon) and ("[^"]+" taxonomy)$/
-     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" taxonomy)$/
+     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" taxon) and ("[^"]+" taxon)$/
+     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" taxon)$/
      */
-    public function thereIsACatalogPromotionThatReducesPriceByAndAppliesOnTaxonomy(
+    public function thereIsACatalogPromotionThatReducesPriceByAndAppliesOnTaxon(
         string $name,
         float $discount,
-        string $taxonName
+        TaxonInterface $taxon
     ): void {
         $this->createCatalogPromotion(
             $name,
@@ -192,7 +192,7 @@ final class CatalogPromotionContext implements Context
             [],
             [[
                 'type' => CatalogPromotionRuleInterface::TYPE_FOR_TAXONS,
-                'configuration' => ['taxon' => ['taxonCode' => StringInflector::nameToCode($taxonName)]],
+                'configuration' => ['taxon' => ['taxonCode' => $taxon->getCode()]],
             ]],
             [[
                 'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
