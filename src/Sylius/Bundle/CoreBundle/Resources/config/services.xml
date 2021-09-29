@@ -282,6 +282,15 @@
         </service>
 
         <service
+            id="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessor"
+            class="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessor"
+        >
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface" />
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+        </service>
+
+        <service
             id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface"
             class="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearer"
         >

@@ -98,8 +98,7 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Listener\CatalogPromotionUpdateListener">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessor" />
             <argument type="service" id="sylius.repository.catalog_promotion" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
