@@ -44,4 +44,6 @@ interface FormElementInterface
     public function getValidationMessageForAction(): string;
 
     public function removeAllActions(): void;
+
+    public function removeAllRules(): void;
 }

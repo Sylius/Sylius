@@ -495,7 +495,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then /^the visitor should see that the ("[^"]+" variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/
      * @Then /^I should see ("[^"]+" variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" promotion$/
      * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" promotion$/
      */
@@ -510,6 +509,22 @@ final class ProductContext implements Context
         Assert::same($this->showPage->getCatalogPromotionName(), $promotionName);
         Assert::same($this->showPage->getPrice(), $price);
         Assert::same($this->showPage->getOriginalPrice(), $originalPrice);
+    }
+
+    /**
+     * @Then /^the visitor should(?:| still) see that the ("[^"]+" variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" promotion$/
+     */
+    public function theVisitorShouldSeeThatTheVariantIsDiscountedFromToWithPromotion(
+        ProductVariantInterface $variant,
+        string $originalPrice,
+        string $price,
+        string $promotionName
+    ): void {
+        /** @var ProductInterface $product */
+        $product = $variant->getProduct();
+
+        $this->iOpenProductPage($product);
+        $this->iShouldSeeVariantIsDiscountedFromToWithPromotion($variant, $originalPrice, $price, $promotionName);
     }
 
     /**
@@ -808,6 +823,18 @@ final class ProductContext implements Context
     public function iShouldSeeThisVariantIsNotDiscounted(): void
     {
         Assert::null($this->showPage->getOriginalPrice());
+    }
+
+    /**
+     * @Then /^the visitor should see that the ("([^"]*)" variant) is not discounted$/
+     */
+    public function theVisitorShouldSeeThatTheVariantIsNotDiscounted(ProductVariantInterface $variant): void
+    {
+        /** @var ProductInterface $product */
+        $product = $variant->getProduct();
+
+        $this->iOpenProductPage($product);
+        $this->iShouldSeeThisVariantIsNotDiscounted();
     }
 
     /**
