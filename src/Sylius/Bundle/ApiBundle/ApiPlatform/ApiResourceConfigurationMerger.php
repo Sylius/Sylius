@@ -22,13 +22,13 @@ final class ApiResourceConfigurationMerger implements ApiResourceConfigurationMe
 
         foreach ($configs as $config) {
             foreach ($config as $newKey => $newValue) {
-                if ($this->containsUnset($newKey, $matches)) {
-                    [, $newKey] = $matches;
-
+                if ($this->isDisabled($newKey, $newValue)) {
                     unset($resultingConfig[$newKey]);
-                    if (null === $newValue) {
+                    if (['enabled' => false] === $newValue) {
                         continue;
                     }
+
+                    unset($newValue['enabled']);
                 }
 
                 if (is_int($newKey)) {
@@ -50,8 +50,8 @@ final class ApiResourceConfigurationMerger implements ApiResourceConfigurationMe
         return $resultingConfig;
     }
 
-    private function containsUnset($key, &$matches): bool
+    private function isDisabled($key, $values): bool
     {
-        return is_string($key) && 1 === preg_match('/^(.*[^ ]) +\\(unset\\)$/', $key, $matches);
+        return is_string($key) && is_array($values) && isset($values['enabled']) && $values['enabled'] === false;
     }
 }

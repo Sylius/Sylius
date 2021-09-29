@@ -55,7 +55,9 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
                 ]
             ],
             [
-                'admin_get (unset)' => null,
+                'admin_get' => [
+                    'enabled' => false,
+                ],
             ]
         )->willReturn(
             [
@@ -70,7 +72,7 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
             'itemOperations',
             $resourceMetadata,
             [
-                'itemOperations' => ['admin_get (unset)' => null]
+                'itemOperations' => ['admin_get' => ['enabled' => false]]
             ]
         )->shouldReturn(
             [
