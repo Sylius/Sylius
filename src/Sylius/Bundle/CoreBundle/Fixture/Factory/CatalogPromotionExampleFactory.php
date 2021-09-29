@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
+use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
@@ -38,6 +39,8 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
 
     private ExampleFactoryInterface $catalogPromotionActionExampleFactory;
 
+    private CatalogPromotionProcessorInterface $catalogPromotionProcessor;
+
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
@@ -47,13 +50,15 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
         RepositoryInterface $localeRepository,
         ChannelRepositoryInterface $channelRepository,
         ExampleFactoryInterface $catalogPromotionRuleExampleFactory,
-        ExampleFactoryInterface $catalogPromotionActionExampleFactory
+        ExampleFactoryInterface $catalogPromotionActionExampleFactory,
+        CatalogPromotionProcessorInterface $catalogPromotionProcessor
     ) {
         $this->catalogPromotionFactory = $catalogPromotionFactory;
         $this->localeRepository = $localeRepository;
         $this->channelRepository = $channelRepository;
         $this->catalogPromotionRuleExampleFactory = $catalogPromotionRuleExampleFactory;
         $this->catalogPromotionActionExampleFactory = $catalogPromotionActionExampleFactory;
+        $this->catalogPromotionProcessor = $catalogPromotionProcessor;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -99,6 +104,8 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
                 $catalogPromotion->addAction($catalogPromotionAction);
             }
         }
+
+        $this->catalogPromotionProcessor->process($catalogPromotion);
 
         return $catalogPromotion;
     }

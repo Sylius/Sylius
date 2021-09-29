@@ -68,4 +68,22 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
             new \stdClass()
         ));
     }
+
+    function it_does_nothing_if_there_is_a_wrong_request_method(
+        MessageBusInterface $eventBus,
+        CatalogPromotionInterface $catalogPromotion,
+        HttpKernelInterface $kernel,
+        Request $request
+    ): void {
+        $request->getMethod()->willReturn(Request::METHOD_GET);
+
+        $eventBus->dispatch(Argument::any())->shouldNotBeCalled();
+
+        $this->postWrite(new ViewEvent(
+            $kernel->getWrappedObject(),
+            $request->getWrappedObject(),
+            HttpKernelInterface::MASTER_REQUEST,
+            $catalogPromotion->getWrappedObject()
+        ));
+    }
 }
