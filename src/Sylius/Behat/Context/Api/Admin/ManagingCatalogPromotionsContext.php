@@ -214,6 +214,25 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I add another rule that applies on ("[^"]+" variant)$/
+     */
+    public function iAddAnotherRuleThatGivesPercentageDiscount(ProductVariantInterface $productVariant): void
+    {
+        $rules = $this->client->getContent()['rules'];
+
+        $additionalRule = [[
+            'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+            'configuration' => [
+                'variants' => [$productVariant->getCode()],
+            ],
+        ]];
+
+        $rules = array_merge_recursive($rules, $additionalRule);
+
+        $this->client->addRequestData('rules', $rules);
+    }
+
+    /**
      * @When /^I edit its action so that it reduces price by ("[^"]+")$/
      */
     public function iEditItsActionSoThatItReducesPriceBy(float $amount): void
@@ -265,6 +284,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I add rule that applies on ("[^"]+" variant) and ("[^"]+" variant)$/
      * @When /^I add rule that applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/
      */
     public function iAddRuleThatAppliesOnVariants(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
@@ -283,10 +303,22 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I remove its every rule
+     */
+    public function iRemoveItsEveryRule(): void
+    {
+        $content = $this->client->getContent();
+        $content['rules'] = [];
+        $this->client->setRequestData($content);
+    }
+
+    /**
      * @When /^I edit ("[^"]+" catalog promotion) to be applied on ("[^"]+" variant)$/
      */
-    public function iEditCatalogPromotionToBeAppliedOn(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface $productVariant): void
-    {
+    public function iEditCatalogPromotionToBeAppliedOn(
+        CatalogPromotionInterface $catalogPromotion,
+        ProductVariantInterface $productVariant
+    ): void {
         $this->client->buildUpdateRequest($catalogPromotion->getCode());
         $rules = [[
             'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,

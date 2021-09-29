@@ -21,8 +21,7 @@ class ChannelPricingRepository extends EntityRepository implements ChannelPricin
     public function findWithDiscountedPrice(): array
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.originalPrice IS NOT NULL')
-            ->andWhere('o.originalPrice > o.price')
+            ->andWhere('o.appliedPromotions != \'[]\'')
             ->getQuery()
             ->getResult()
         ;
