@@ -114,7 +114,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that a discount amount should be a number and cannot be empty
         And there should be an empty list of catalog promotions
 
-    @api
+    @api @todo
     Scenario: Trying to create a catalog promotion with taxon type where is invalid taxon
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"

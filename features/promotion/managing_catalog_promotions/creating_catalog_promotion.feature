@@ -8,7 +8,7 @@ Feature: Creating a catalog promotion
         Given the store operates on a single channel in "United States"
         And the store has "Clothes" taxonomy
         And the store has a "T-Shirt" configurable product
-        And this product main taxon should be "Clothes"
+        And the product "T-Shirt" has a main taxon "Clothes"
         And this product has "PHP T-Shirt" variant priced at "$20.00"
         And this product has "Kotlin T-Shirt" variant priced at "$40.00"
         And I am logged in as an administrator
@@ -77,5 +77,5 @@ Feature: Creating a catalog promotion
         And I add it
         Then there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name
-        And "Winter sale" catalog promotion should apply to "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And "Winter sale" catalog promotion should apply to all products from "Clothes" taxon
         And the catalog promotion "Winter sale" should be available in channel "United States"

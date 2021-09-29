@@ -7,9 +7,8 @@ Feature: Editing catalog promotion
     Background:
         Given the store operates on a single channel in "United States"
         And the store has "Clothes" taxonomy
-        And the store operates on a channel named "Europe"
         And the store has a "T-Shirt" configurable product
-        And this product main taxon should be "Clothes"
+        And the product "T-Shirt" has a main taxon "Clothes"
         And this product has "PHP T-Shirt" variant priced at "$20.00"
         And this product has "Kotlin T-Shirt" variant priced at "$40.00"
         And there is a catalog promotion with "christmas_sale" code and "Christmas sale" name
@@ -56,10 +55,11 @@ Feature: Editing catalog promotion
         And this catalog promotion should be applied on "Kotlin T-shirt" variant
         And this catalog promotion should not be applied on "PHP T-Shirt" variant
 
-    @api @ui @javascript
+    @api @ui @javascript @todo
     Scenario: Editing catalog promotion taxon rule
         When I edit "Christmas sale" catalog promotion to be applied on "Clothes" taxon
         Then I should be notified that it has been successfully edited
+        And this catalog promotion should be applied on "Clothes" taxon
         And this catalog promotion should be applied on "Kotlin T-shirt" variant
         And this catalog promotion should not be applied on "PHP T-Shirt" variant
 
