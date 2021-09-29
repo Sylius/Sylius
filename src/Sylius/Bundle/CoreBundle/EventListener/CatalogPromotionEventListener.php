@@ -28,7 +28,7 @@ final class CatalogPromotionEventListener
         $this->eventBus = $eventBus;
     }
 
-    public function update(GenericEvent $event): void
+    public function dispatchCatalogPromotionUpdatedEvent(GenericEvent $event): void
     {
         $catalogPromotion = $event->getSubject();
         Assert::isInstanceOf($catalogPromotion, CatalogPromotionInterface::class);

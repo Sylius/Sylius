@@ -39,7 +39,7 @@ final class CatalogPromotionEventListenerSpec extends ObjectBehavior
         $message = new CatalogPromotionUpdated('SALE');
         $eventBus->dispatch($message)->willReturn(new Envelope($message))->shouldBeCalled();
 
-        $this->update($event);
+        $this->dispatchCatalogPromotionUpdatedEvent($event);
     }
 
     function it_throws_an_exception_if_event_object_is_not_a_catalog_promotion(GenericEvent $event): void
@@ -48,7 +48,7 @@ final class CatalogPromotionEventListenerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('update', [$event])
+            ->during('dispatchCatalogPromotionUpdatedEvent', [$event])
         ;
     }
 }
