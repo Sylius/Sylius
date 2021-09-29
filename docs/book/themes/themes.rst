@@ -87,12 +87,12 @@ In order to customize the login view you should take the content of ``@SyliusSho
 
 * Before theme-bundle v2,
   paste it to your theme directory: ``themes/CrimsonTheme/SyliusShopBundle/views/login.html.twig``
-  (There are more informations in the official documentation about `theme structure v1.5.1 <https://github.com/Sylius/SyliusThemeBundle/blob/v1.5.1/docs/your_first_theme.md#theme-structure>`_)
+  (There is more information in the official documentation about `theme structure v1.5.1 <https://github.com/Sylius/SyliusThemeBundle/blob/v1.5.1/docs/your_first_theme.md#theme-structure>`_)
 
 
 * From `theme-bundle v2 <https://github.com/Sylius/SyliusThemeBundle/releases/tag/v2.0.0>`_,
   paste it to your theme directory: ``themes/CrimsonTheme/templates/bundles/SyliusShopBundle/login.html.twig``
-  (There are more informations in the official documentation about `theme structure v2.0.0 <https://github.com/Sylius/SyliusThemeBundle/blob/v2.0.0/docs/your_first_theme.md#theme-structure>`_)
+  (There is more information in the official documentation about `theme structure v2.0.0 <https://github.com/Sylius/SyliusThemeBundle/blob/v2.0.0/docs/your_first_theme.md#theme-structure>`_)
 
 Let's remove the registration column in this example:
 
