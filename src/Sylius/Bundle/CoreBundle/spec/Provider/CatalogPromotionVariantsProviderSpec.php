@@ -33,26 +33,44 @@ final class CatalogPromotionVariantsProviderSpec extends ObjectBehavior
         $this->shouldImplement(CatalogPromotionVariantsProviderInterface::class);
     }
 
-    function it_provides_variants_configured_in_catalog_promotion_rule(
+    function it_provides_variants_configured_in_catalog_promotion_rules(
         CatalogPromotionInterface $catalogPromotion,
-        CatalogPromotionRuleInterface $rule,
+        CatalogPromotionRuleInterface $firstRule,
+        CatalogPromotionRuleInterface $secondRule,
         VariantsProviderInterface $firstProvider,
         VariantsProviderInterface $secondProvider,
         ProductVariantInterface $firstVariant,
-        ProductVariantInterface $secondVariant
+        ProductVariantInterface $secondVariant,
+        ProductVariantInterface $thirdVariant
     ): void {
-        $catalogPromotion->getRules()->willReturn(new ArrayCollection([$rule->getWrappedObject()]));
-        $rule->getConfiguration()->willReturn(['variants' => ['PHP_T_SHIRT_XS_WHITE', 'PHP_T_SHIRT_XS_BLACK', 'PHP_MUG']]);
-        $rule->getType()->willReturn(CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS);
+        $catalogPromotion->getRules()->willReturn(new ArrayCollection([
+            $firstRule->getWrappedObject(),
+            $secondRule->getWrappedObject()
+        ]));
 
-        $firstProvider->supports($rule)->willReturn(false);
-        $firstProvider->provideEligibleVariants($rule)->shouldNotBeCalled();
-        $secondProvider->supports($rule)->willReturn(true);
-        $secondProvider->provideEligibleVariants($rule)->willReturn([$firstVariant, $secondVariant]);
+        $firstRule->getType()->willReturn(CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS);
+        $firstRule->getConfiguration()->willReturn(['variants' => ['PHP_T_SHIRT', 'PHP_MUG']]);
+
+        $secondRule->getType()->willReturn(CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS);
+        $secondRule->getConfiguration()->willReturn(['variants' => ['PHP_MUG', 'PHP_CAP']]);
+
+        $firstProvider->supports($firstRule)->willReturn(false);
+        $firstProvider->supports($secondRule)->willReturn(false);
+        $firstProvider->provideEligibleVariants($firstRule)->shouldNotBeCalled();
+        $firstProvider->provideEligibleVariants($secondRule)->shouldNotBeCalled();
+
+        $secondProvider->supports($firstRule)->willReturn(true);
+        $secondProvider->supports($secondRule)->willReturn(true);
+        $secondProvider->provideEligibleVariants($firstRule)->willReturn([$firstVariant, $secondVariant]);
+        $secondProvider->provideEligibleVariants($secondRule)->willReturn([$secondVariant, $thirdVariant]);
+
+        $firstVariant->getCode()->willReturn('PHP_T_SHIRT');
+        $secondVariant->getCode()->willReturn('PHP_MUG');
+        $thirdVariant->getCode()->willReturn('PHP_CAP');
 
         $this
             ->provideEligibleVariants($catalogPromotion)
-            ->shouldReturn([$firstVariant, $secondVariant])
+            ->shouldReturn([$firstVariant, $secondVariant, $thirdVariant])
         ;
     }
 }
