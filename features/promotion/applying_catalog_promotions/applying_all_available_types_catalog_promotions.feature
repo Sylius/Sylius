@@ -18,8 +18,5 @@ Feature: Applying all available catalog promotions
     @todo
     Scenario: Applying multiple catalog promotions
         Given there is a catalog promotion "Winter sale" available in "Web-US" channel that reduces price by "30%" and applies on "PHP T-shirt" variant
-        When I view shop on "Web-US" channel
-        And I view product "T-Shirt"
-        Then I should see the product price "$9.80"
-        And I should see the product original price "$20.00"
-        And I shoud see catalog promotion label "Clothes sale"
+        When I view "PHP T-Shirt" variant of the "T-Shirt" product
+        Then I should see this variant is discounted from "$20.00" to "$9.80" with "Clothes sale" promotion
