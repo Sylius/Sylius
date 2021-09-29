@@ -114,14 +114,26 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that a discount amount should be a number and cannot be empty
         And there should be an empty list of catalog promotions
 
-    @api @todo
-    Scenario: Trying to create a catalog promotion with taxon type where is invalid taxon
+    @api
+    Scenario: Trying to create a catalog promotion with taxon type without taxons
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
         And I name it "Winter sale"
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
-        And I add catalog promotion rule for taxon with nonexistent taxon
+        And I add catalog promotion rule for taxon without taxons
         And I try to add it
-        Then I should be notified that type of rule is invalid
+        Then I should be notified that I must add at least one taxon
+        And there should be an empty list of catalog promotions
+
+    @api
+    Scenario: Trying to create a catalog promotion with taxon typ with is invalid taxons
+        When I want to create a new catalog promotion
+        And I specify its code as "winter_sale"
+        And I name it "Winter sale"
+        And I specify its label as "Winter -50%" in "English (United States)"
+        And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
+        And I add catalog promotion rule for taxon with nonexistent taxons
+        And I try to add it
+        Then I should be notified that I can add only existing taxon
         And there should be an empty list of catalog promotions

@@ -23,6 +23,8 @@ final class CatalogPromotionRule extends Constraint
 
     public string $variantsNotEmpty = 'sylius.catalog_promotion_rule.for_variants.not_empty';
 
+    public string $invalidTaxons = 'sylius.catalog_promotion_rule.for_taxons.invalid_taxons';
+
     public string $taxonsNotEmpty = 'sylius.catalog_promotion_rule.for_taxons.not_empty';
 
     public function validatedBy(): string

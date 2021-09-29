@@ -305,6 +305,37 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I add catalog promotion rule for taxon without taxons
+     */
+    public function iAddCatalogPromotionRuleForTaxonWithoutTaxons(): void
+    {
+        $rules = [[
+            'type' => CatalogPromotionRuleInterface::TYPE_FOR_TAXONS,
+            'configuration' => ['taxons' => []],
+        ]];
+
+        $this->client->addRequestData('rules', $rules);
+    }
+
+    /**
+     * @When I add catalog promotion rule for taxon with nonexistent taxons
+     */
+    public function iAddCatalogPromotionRuleForTaxonWithNonexistentTaxons(): void
+    {
+        $rules = [[
+            'type' => CatalogPromotionRuleInterface::TYPE_FOR_TAXONS,
+            'configuration' => [
+                'taxons' => [
+                    'BAD_TAXON',
+                    'EVEN_WORSE_TAXON',
+                ]
+            ],
+        ]];
+
+        $this->client->addRequestData('rules', $rules);
+    }
+
+    /**
      * @When I add rule that applies on :taxon taxon
      */
     public function iAddRuleThatAppliesOnTaxon(TaxonInterface $taxon): void
@@ -842,6 +873,28 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'Provided configuration contains errors. Please add only existing variants.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that I must add at least one taxon
+     */
+    public function iShouldBeNotifiedThatIMustAddAtLeastOneTaxon(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Provided configuration contains errors. Please add at least 1 taxon.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that I can add only existing taxon
+     */
+    public function iShouldBeNotifiedThatICanAddOnlyExistingTaxons(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Provided configuration contains errors. Please add only existing taxons.'
         );
     }
 
