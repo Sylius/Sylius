@@ -93,8 +93,8 @@
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\CatalogPromotionEventListener">
             <argument type="service" id="sylius.event_bus" />
-            <tag name="doctrine.event_listener" event="postPersist" connection="default" />
-            <tag name="doctrine.event_listener" event="postUpdate" connection="default" />
+            <tag name="kernel.event_listener" event="sylius.catalog_promotion.post_create" method="update" />
+            <tag name="kernel.event_listener" event="sylius.catalog_promotion.post_update" method="update" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Listener\CatalogPromotionUpdateListener">

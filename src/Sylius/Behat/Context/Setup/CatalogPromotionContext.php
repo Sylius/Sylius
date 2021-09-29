@@ -23,8 +23,10 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionContext implements Context
 {
@@ -38,6 +40,8 @@ final class CatalogPromotionContext implements Context
 
     private ChannelRepositoryInterface $channelRepository;
 
+    private MessageBusInterface $eventBus;
+
     private SharedStorageInterface $sharedStorage;
 
     public function __construct(
@@ -46,6 +50,7 @@ final class CatalogPromotionContext implements Context
         FactoryInterface $catalogPromotionActionFactory,
         EntityManagerInterface $entityManager,
         ChannelRepositoryInterface $channelRepository,
+        MessageBusInterface $eventBus,
         SharedStorageInterface $sharedStorage
     ) {
         $this->catalogPromotionExampleFactory = $catalogPromotionExampleFactory;
@@ -53,6 +58,7 @@ final class CatalogPromotionContext implements Context
         $this->catalogPromotionActionFactory = $catalogPromotionActionFactory;
         $this->entityManager = $entityManager;
         $this->channelRepository = $channelRepository;
+        $this->eventBus = $eventBus;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -254,7 +260,7 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @When And the :catalogPromotion catalog promotion is no longer available
+     * @When the :catalogPromotion catalog promotion is no longer available
      */
     public function theAdministratorMakesThisCatalogPromotionUnavailableInTheChannel(
         CatalogPromotionInterface $catalogPromotion
@@ -264,6 +270,8 @@ final class CatalogPromotionContext implements Context
         }
         $this->entityManager->persist($catalogPromotion);
         $this->entityManager->flush();
+
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
     private function createCatalogPromotion(

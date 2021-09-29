@@ -48,7 +48,7 @@ final class CatalogPromotionEventSubscriber implements EventSubscriberInterface
 
         $method = $event->getRequest()->getMethod();
 
-        if ($method === Request::METHOD_PUT || $method === Request::METHOD_PATCH) {
+        if (in_array($method, [Request::METHOD_POST, Request::METHOD_PUT, Request::METHOD_PATCH], true)) {
             $this->eventBus->dispatch(new CatalogPromotionUpdated($entity->getCode()));
         }
     }

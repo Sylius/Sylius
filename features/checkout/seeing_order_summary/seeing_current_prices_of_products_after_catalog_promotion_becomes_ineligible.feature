@@ -16,7 +16,7 @@ Feature: Seeing current prices of products after catalog promotion becomes ineli
     @ui @api
     Scenario: Processing order with valid prices after catalog promotion becomes ineligibly
         Given I have "PHP T-Shirt" variant of this product in the cart
-        When And the "Winter sale" catalog promotion is no longer available
+        When the "Winter sale" catalog promotion is no longer available
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed through checkout process
         Then I should be on the checkout summary step
