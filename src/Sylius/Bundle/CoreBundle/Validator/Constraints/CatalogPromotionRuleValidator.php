@@ -24,14 +24,9 @@ final class CatalogPromotionRuleValidator extends ConstraintValidator
 {
     private ProductVariantRepositoryInterface $variantRepository;
 
-    private RepositoryInterface $taxonRepository;
-
-    public function __construct(
-        ProductVariantRepositoryInterface $variantRepository,
-        RepositoryInterface $taxonRepository
-    ) {
+    public function __construct(ProductVariantRepositoryInterface $variantRepository)
+    {
         $this->variantRepository = $variantRepository;
-        $this->taxonRepository = $taxonRepository;
     }
 
     public function validate($value, Constraint $constraint): void
@@ -60,10 +55,10 @@ final class CatalogPromotionRuleValidator extends ConstraintValidator
         $this->validateForTaxonType($configuration, $constraint);
     }
 
-    private function validateForVariantsType(array $configuration, Constraint $constraint): void
+    private function validateForVariantsType(array $configuration, CatalogPromotionRule $constraint): void
     {
         if (!array_key_exists('variants', $configuration) || empty($configuration['variants'])) {
-            $this->context->buildViolation($constraint->notEmpty)->atPath('configuration.variants')->addViolation();
+            $this->context->buildViolation($constraint->variantsNotEmpty)->atPath('configuration.variants')->addViolation();
 
             return;
         }
@@ -77,16 +72,10 @@ final class CatalogPromotionRuleValidator extends ConstraintValidator
         }
     }
 
-    private function validateForTaxonType(array $configuration, Constraint $constraint): void
+    private function validateForTaxonType(array $configuration, CatalogPromotionRule $constraint): void
     {
-        if (!array_key_exists('taxon', $configuration) || empty($configuration['taxon']['taxonCode'])) {
-            $this->context->buildViolation($constraint->notEmpty)->atPath('configuration.variants')->addViolation();
-
-            return;
-        }
-
-        if (null === $this->taxonRepository->findOneBy(['code' => $configuration['taxon']['taxonCode']])) {
-            $this->context->buildViolation($constraint->invalidVariants)->atPath('configuration.variants')->addViolation();
+        if (!isset($configuration['taxons']) || empty($configuration['taxons'])) {
+            $this->context->buildViolation($constraint->taxonsNotEmpty)->atPath('configuration.taxons')->addViolation();
         }
     }
 }

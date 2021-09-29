@@ -417,7 +417,7 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @Then /^this catalog promotion should not be applied on ("[^"]+" variant)$/
      */
-    public function itShouldNotAppyToVariants(ProductVariantInterface ...$variants): void
+    public function itShouldNotApplyToVariants(ProductVariantInterface ...$variants): void
     {
         $selectedVariants = $this->formElement->getLastRuleVariantCodes();
 

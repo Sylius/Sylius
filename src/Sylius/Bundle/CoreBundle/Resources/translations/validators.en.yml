@@ -8,6 +8,8 @@ sylius:
         for_variants:
             invalid_variants: Provided configuration contains errors. Please add only existing variants.
             not_empty: Please add at least 1 variant.
+        for_taxons:
+            not_empty: Please add at least 1 taxon.
     channel:
         base_currency:
             not_blank: Please enter channel base currency.
