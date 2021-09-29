@@ -23,6 +23,7 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -167,6 +168,32 @@ final class CatalogPromotionContext implements Context
             [[
                 'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
                 'configuration' => ['variants' => $variantCodes],
+            ]],
+            [[
+                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'configuration' => ['amount' => $discount],
+            ]]
+        );
+
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" taxon) and ("[^"]+" taxon)$/
+     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" taxon)$/
+     */
+    public function thereIsACatalogPromotionThatReducesPriceByAndAppliesOnTaxon(
+        string $name,
+        float $discount,
+        TaxonInterface $taxon
+    ): void {
+        $this->createCatalogPromotion(
+            $name,
+            null,
+            [],
+            [[
+                'type' => CatalogPromotionRuleInterface::TYPE_FOR_TAXONS,
+                'configuration' => ['taxons' => [$taxon->getCode()]],
             ]],
             [[
                 'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,

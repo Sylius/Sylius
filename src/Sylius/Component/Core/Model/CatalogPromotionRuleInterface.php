@@ -18,4 +18,6 @@ use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface as BaseCatalo
 interface CatalogPromotionRuleInterface extends BaseCatalogPromotionRuleInterface
 {
     public const TYPE_FOR_VARIANTS = 'for_variants';
+
+    public const TYPE_FOR_TAXONS = 'for_taxons';
 }

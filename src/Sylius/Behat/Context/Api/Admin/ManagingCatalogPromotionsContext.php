@@ -18,10 +18,12 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -303,6 +305,52 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I add catalog promotion rule for taxon without taxons
+     */
+    public function iAddCatalogPromotionRuleForTaxonWithoutTaxons(): void
+    {
+        $rules = [[
+            'type' => CatalogPromotionRuleInterface::TYPE_FOR_TAXONS,
+            'configuration' => ['taxons' => []],
+        ]];
+
+        $this->client->addRequestData('rules', $rules);
+    }
+
+    /**
+     * @When I add catalog promotion rule for taxon with nonexistent taxons
+     */
+    public function iAddCatalogPromotionRuleForTaxonWithNonexistentTaxons(): void
+    {
+        $rules = [[
+            'type' => CatalogPromotionRuleInterface::TYPE_FOR_TAXONS,
+            'configuration' => [
+                'taxons' => [
+                    'BAD_TAXON',
+                    'EVEN_WORSE_TAXON',
+                ]
+            ],
+        ]];
+
+        $this->client->addRequestData('rules', $rules);
+    }
+
+    /**
+     * @When I add rule that applies on :taxon taxon
+     */
+    public function iAddRuleThatAppliesOnTaxon(TaxonInterface $taxon): void
+    {
+        $rules = [[
+            'type' => CatalogPromotionRuleInterface::TYPE_FOR_TAXONS,
+            'configuration' => [
+                'taxons' => [$taxon->getCode()]
+            ],
+        ]];
+
+        $this->client->addRequestData('rules', $rules);
+    }
+
+    /**
      * @When I remove its every rule
      */
     public function iRemoveItsEveryRule(): void
@@ -315,7 +363,7 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @When /^I edit ("[^"]+" catalog promotion) to be applied on ("[^"]+" variant)$/
      */
-    public function iEditCatalogPromotionToBeAppliedOn(
+    public function iEditCatalogPromotionToBeAppliedOnVariant(
         CatalogPromotionInterface $catalogPromotion,
         ProductVariantInterface $productVariant
     ): void {
@@ -330,6 +378,25 @@ final class ManagingCatalogPromotionsContext implements Context
         ]];
 
         $this->client->updateRequestData(['rules' => $rules]);
+        $this->client->update();
+    }
+
+    /**
+     * @When /^I edit ("[^"]+" catalog promotion) to be applied on ("[^"]+" taxon)$/
+     */
+    public function iEditCatalogPromotionToBeAppliedOnTaxon(
+        CatalogPromotionInterface $catalogPromotion,
+        TaxonInterface $taxon
+    ): void {
+        $this->client->buildUpdateRequest($catalogPromotion->getCode());
+
+        $content = $this->client->getContent();
+        unset($content['rules'][0]['configuration']['variants']);
+        $content['rules'][0]['type'] = CatalogPromotionRuleInterface::TYPE_FOR_TAXONS;
+        $content['rules'][0]['configuration']['taxons'] = [$taxon->getCode()];
+
+        $this->client->setRequestData($content);;
+
         $this->client->update();
     }
 
@@ -561,10 +628,21 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @Then /^"[^"]+" catalog promotion should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
      */
-    public function itShouldHaveRule(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
+    public function catalogPromotionShouldApplyToVariants(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
     {
         Assert::same(
             ['variants' => [$firstVariant->getCode(), $secondVariant->getCode()]],
+            $this->responseChecker->getCollection($this->client->getLastResponse())[0]['rules'][0]['configuration']
+        );
+    }
+
+    /**
+     * @Then :catalogPromotionName catalog promotion should apply to all products from :taxon taxon
+     */
+    public function catalogPromotionShouldApplyToTaxon(string $catalogPromotionName, TaxonInterface $taxon): void
+    {
+        Assert::same(
+            ['taxons' => [$taxon->getCode()]],
             $this->responseChecker->getCollection($this->client->getLastResponse())[0]['rules'][0]['configuration']
         );
     }
@@ -656,13 +734,25 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @Then /^(this catalog promotion) should be applied on ("[^"]+" variant)$/
      */
-    public function thisCatalogPromotionShouldBeAppliedOn(
+    public function thisCatalogPromotionShouldBeAppliedOnVariant(
         CatalogPromotionInterface $catalogPromotion,
         ProductVariantInterface $productVariant
     ): void {
         $this->client->show($catalogPromotion->getCode());
 
-        Assert::true($this->catalogPromotionAppliesOn($productVariant));
+        Assert::true($this->catalogPromotionAppliesOnVariants($productVariant));
+    }
+
+    /**
+     * @Then /^(this catalog promotion) should be applied on ("[^"]+" taxon)$/
+     */
+    public function thisCatalogPromotionShouldBeAppliedOnTaxon(
+        CatalogPromotionInterface $catalogPromotion,
+        TaxonInterface $taxon
+    ): void {
+        $this->client->show($catalogPromotion->getCode());
+
+        Assert::true($this->catalogPromotionAppliesOnTaxons($taxon));
     }
 
     /**
@@ -674,7 +764,7 @@ final class ManagingCatalogPromotionsContext implements Context
     ): void {
         $this->client->show($catalogPromotion->getCode());
 
-        Assert::false($this->catalogPromotionAppliesOn($productVariant));
+        Assert::false($this->catalogPromotionAppliesOnVariants($productVariant));
     }
 
     /**
@@ -787,6 +877,28 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then I should be notified that I must add at least one taxon
+     */
+    public function iShouldBeNotifiedThatIMustAddAtLeastOneTaxon(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Provided configuration contains errors. Please add at least 1 taxon.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that I can add only existing taxon
+     */
+    public function iShouldBeNotifiedThatICanAddOnlyExistingTaxons(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Provided configuration contains errors. Please add only existing taxons.'
+        );
+    }
+
+    /**
      * @Then I should be notified that at least 1 variant is required
      */
     public function iShouldBeNotifiedThatAtLeast1VariantIsRequired(): void
@@ -797,12 +909,29 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    private function catalogPromotionAppliesOn(ProductVariantInterface ...$productVariants): bool
+    private function catalogPromotionAppliesOnVariants(ProductVariantInterface ...$productVariants): bool
     {
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
         foreach ($productVariants as $productVariant) {
+            if (!isset($response['rules'][0]['configuration']['variants'])) {
+                return false;
+            }
+
             if ($this->hasVariantInConfiguration($response['rules'][0]['configuration']['variants'], $productVariant) === false) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function catalogPromotionAppliesOnTaxons(TaxonInterface ...$taxons): bool
+    {
+        $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+
+        foreach ($taxons as $taxon) {
+            if ($this->hasTaxonInConfiguration($response['rules'][0]['configuration']['taxons'], $taxon) === false) {
                 return false;
             }
         }
@@ -814,6 +943,17 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         foreach ($configuration as $productVariantIri) {
             if ($productVariantIri === $productVariant->getCode()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function hasTaxonInConfiguration(array $configuration, TaxonInterface $taxon): bool
+    {
+        foreach ($configuration as $configuredTaxon) {
+            if ($configuredTaxon === $taxon->getCode()) {
                 return true;
             }
         }

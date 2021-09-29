@@ -18,15 +18,19 @@ use Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionRule;
 use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
+use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class CatalogPromotionRuleValidatorSpec extends ObjectBehavior
 {
-    function let(ExecutionContextInterface $executionContext, ProductVariantRepositoryInterface $variantRepository): void
-    {
-        $this->beConstructedWith($variantRepository);
+    function let(
+        ExecutionContextInterface $executionContext,
+        ProductVariantRepositoryInterface $variantRepository,
+        TaxonRepositoryInterface $taxonRepository
+    ): void {
+        $this->beConstructedWith($variantRepository, $taxonRepository);
 
         $this->initialize($executionContext);
     }
@@ -65,6 +69,21 @@ final class CatalogPromotionRuleValidatorSpec extends ObjectBehavior
         $this->validate($rule, new CatalogPromotionRule());
     }
 
+    function it_adds_violation_if_catalog_promotion_rule_does_not_have_taxons_key_configured(
+        ExecutionContextInterface $executionContext,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
+        CatalogPromotionRuleInterface $rule
+    ): void {
+        $rule->getType()->willReturn(CatalogPromotionRuleInterface::TYPE_FOR_TAXONS);
+        $rule->getConfiguration()->willReturn([]);
+
+        $executionContext->buildViolation('sylius.catalog_promotion_rule.for_taxons.not_empty')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('configuration.taxons')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+
+        $this->validate($rule, new CatalogPromotionRule());
+    }
+
     function it_adds_violation_if_catalog_promotion_rule_has_empty_variants_configured(
         ExecutionContextInterface $executionContext,
         ConstraintViolationBuilderInterface $constraintViolationBuilder,
@@ -93,6 +112,24 @@ final class CatalogPromotionRuleValidatorSpec extends ObjectBehavior
 
         $executionContext->buildViolation('sylius.catalog_promotion_rule.for_variants.invalid_variants')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('configuration.variants')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+
+        $this->validate($rule, new CatalogPromotionRule());
+    }
+
+    function it_adds_violation_if_catalog_promotion_rule_has_not_existing_taxons_configured(
+        ExecutionContextInterface $executionContext,
+        TaxonRepositoryInterface $taxonRepository,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
+        CatalogPromotionRuleInterface $rule
+    ): void {
+        $rule->getType()->willReturn(CatalogPromotionRuleInterface::TYPE_FOR_TAXONS);
+        $rule->getConfiguration()->willReturn(['taxons' => ['not_existing_variant']]);
+
+        $taxonRepository->findOneBy(['code' => 'not_existing_variant'])->willReturn(null);
+
+        $executionContext->buildViolation('sylius.catalog_promotion_rule.for_taxons.invalid_taxons')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('configuration.taxons')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
         $this->validate($rule, new CatalogPromotionRule());

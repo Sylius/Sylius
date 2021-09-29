@@ -273,6 +273,12 @@
             <tag name="sylius.catalog_promotion.variants_provider" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\Provider\ForTaxonsRuleVariantsProvider">
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius.repository.product_variant" />
+            <tag name="sylius.catalog_promotion.variants_provider" />
+        </service>
+
         <service
             id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface"
             class="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessor"
