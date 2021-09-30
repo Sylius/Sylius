@@ -19,6 +19,7 @@ use Sylius\Behat\Page\Admin\CatalogPromotion\CreatePageInterface;
 use Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
@@ -146,6 +147,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I add(?:| another) rule that applies on ("[^"]+" variant)$/
      * @When /^I add rule that applies on ("[^"]+" variant) and ("[^"]+" variant)$/
      * @When /^I add rule that applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/
      */
@@ -219,9 +221,16 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
-        $this->formElement->addRule();
         $this->formElement->chooseLastRuleVariants([$productVariant->getCode()]);
         $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @When I remove its every rule
+     */
+    public function iRemoveItsEveryRule(): void
+    {
+        $this->formElement->removeAllRules();
     }
 
     /**

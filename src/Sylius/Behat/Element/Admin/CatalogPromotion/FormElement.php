@@ -113,6 +113,15 @@ final class FormElement extends Element implements FormElementInterface
         }
     }
 
+    public function removeAllRules(): void
+    {
+        $deleteButtons = $this->getDocument()->findAll('css', '#rules [data-form-collection="delete"]');
+
+        foreach ($deleteButtons as $deleteButton) {
+            $deleteButton->click();
+        }
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

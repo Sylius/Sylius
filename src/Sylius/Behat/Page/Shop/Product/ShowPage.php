@@ -249,7 +249,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function selectVariant(string $variantName): void
     {
-        $variantRadio = $this->getElement('variant_radio', ['%variantName%' => $variantName]);
+        try {
+            $variantRadio = $this->getElement('variant_radio', ['%variantName%' => $variantName]);
+        } catch (ElementNotFoundException $exception) {
+            return;
+        }
 
         $driver = $this->getDriver();
         if ($driver instanceof Selenium2Driver || $driver instanceof ChromeDriver) {
@@ -321,7 +325,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'association' => '[data-test-product-association="%associationName%"]',
             'attributes' => '[data-test-product-attributes]',
             'average_rating' => '[data-test-average-rating]',
-            'catalog_promotion' => '#sylius_catalog_promotion',
+            'catalog_promotion' => '#promotion_label',
             'current_variant_input' => '[data-test-product-variants] td input:checked',
             'details' => '[data-tab="details"]',
             'main_image' => '[data-test-main-image]',
