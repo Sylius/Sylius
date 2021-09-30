@@ -17,8 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 final class ValidTextAttributeConfiguration extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.attribute.configuration.max_length';
+    public string $message = 'sylius.attribute.configuration.max_length';
 
     public function getTargets(): string
     {

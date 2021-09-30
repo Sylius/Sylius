@@ -17,8 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 final class ZoneCannotContainItself extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.zone_member.cannot_be_the_same_as_zone';
+    public string $message = 'sylius.zone_member.cannot_be_the_same_as_zone';
 
     public function validatedBy(): string
     {

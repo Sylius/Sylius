@@ -22,15 +22,30 @@ class Payment implements PaymentInterface
     /** @var mixed */
     protected $id;
 
-    protected ?PaymentMethodInterface $method = null;
+    /**
+     * @var PaymentMethodInterface|null
+     */
+    protected $method;
 
-    protected ?string $currencyCode = null;
+    /**
+     * @var string|null
+     */
+    protected $currencyCode;
 
-    protected ?int $amount = 0;
+    /**
+     * @var int|null
+     */
+    protected $amount;
 
-    protected ?string $state = PaymentInterface::STATE_CART;
+    /**
+     * @var string|null
+     */
+    protected $state;
 
-    protected array $details = [];
+    /**
+     * @var mixed[]
+     */
+    protected $details = [];
 
     public function __construct()
     {

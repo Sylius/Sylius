@@ -23,50 +23,86 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 
 class Channel extends BaseChannel implements ChannelInterface
 {
-    protected ?CurrencyInterface $baseCurrency = null;
+    /**
+     * @var CurrencyInterface|null
+     */
+    protected $baseCurrency;
 
-    protected ?LocaleInterface $defaultLocale = null;
+    /**
+     * @var LocaleInterface|null
+     */
+    protected $defaultLocale;
 
-    protected ?ZoneInterface $defaultTaxZone = null;
+    /**
+     * @var ZoneInterface|null
+     */
+    protected $defaultTaxZone;
 
-    protected ?string $taxCalculationStrategy = null;
+    /**
+     * @var string|null
+     */
+    protected $taxCalculationStrategy;
 
     /**
      * @var Collection|CurrencyInterface[]
      *
      * @psalm-var Collection<array-key, CurrencyInterface>
      */
-    protected Collection $currencies;
+    protected $currencies;
 
     /**
      * @var Collection|LocaleInterface[]
      *
      * @psalm-var Collection<array-key, LocaleInterface>
      */
-    protected Collection $locales;
+    protected $locales;
 
     /**
      * @var Collection|CountryInterface[]
      *
      * @psalm-var Collection<array-key, CountryInterface>
      */
-    protected Collection $countries;
+    protected $countries;
 
-    protected ?string $themeName = null;
+    /**
+     * @var string|null
+     */
+    protected $themeName;
 
-    protected ?string $contactEmail = null;
+    /**
+     * @var string|null
+     */
+    protected $contactEmail;
 
-    protected ?string $contactPhoneNumber = null;
+    /**
+     * @var string|null
+     */
+    protected $contactPhoneNumber;
 
-    protected bool $skippingShippingStepAllowed = false;
+    /**
+     * @var bool
+     */
+    protected $skippingShippingStepAllowed = false;
 
-    protected bool $skippingPaymentStepAllowed = false;
+    /**
+     * @var bool
+     */
+    protected $skippingPaymentStepAllowed = false;
 
-    protected bool $accountVerificationRequired = true;
+    /**
+     * @var bool
+     */
+    protected $accountVerificationRequired = true;
 
-    protected ?ShopBillingDataInterface $shopBillingData = null;
+    /**
+     * @var ShopBillingDataInterface|null
+     */
+    protected $shopBillingData;
 
-    protected ?TaxonInterface $menuTaxon = null;
+    /**
+     * @var TaxonInterface|null
+     */
+    protected $menuTaxon;
 
     public function __construct()
     {

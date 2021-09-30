@@ -21,33 +21,54 @@ class OrderItem implements OrderItemInterface
     /** @var mixed */
     protected $id;
 
-    protected ?OrderInterface $order = null;
+    /**
+     * @var OrderInterface|null
+     */
+    protected $order;
 
-    protected int $quantity = 0;
+    /**
+     * @var int
+     */
+    protected $quantity = 0;
 
-    protected int $unitPrice = 0;
+    /**
+     * @var int
+     */
+    protected $unitPrice = 0;
 
-    protected int $total = 0;
+    /**
+     * @var int
+     */
+    protected $total = 0;
 
-    protected bool $immutable = false;
+    /**
+     * @var bool
+     */
+    protected $immutable = false;
 
     /**
      * @var Collection|OrderItemUnitInterface[]
      *
      * @psalm-var Collection<array-key, OrderItemUnitInterface>
      */
-    protected Collection $units;
+    protected $units;
 
-    protected int $unitsTotal = 0;
+    /**
+     * @var int
+     */
+    protected $unitsTotal = 0;
 
     /**
      * @var Collection|AdjustmentInterface[]
      *
      * @psalm-var Collection<array-key, AdjustmentInterface>
      */
-    protected Collection $adjustments;
+    protected $adjustments;
 
-    protected int $adjustmentsTotal = 0;
+    /**
+     * @var int
+     */
+    protected $adjustmentsTotal = 0;
 
     public function __construct()
     {

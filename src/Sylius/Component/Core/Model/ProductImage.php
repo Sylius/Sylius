@@ -23,7 +23,7 @@ class ProductImage extends Image implements ProductImageInterface
      *
      * @psalm-var Collection<array-key, ProductVariantInterface>
      */
-    protected Collection $productVariants;
+    protected $productVariants;
 
     public function __construct()
     {

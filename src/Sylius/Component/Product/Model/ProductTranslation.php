@@ -20,15 +20,30 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     /** @var mixed */
     protected $id;
 
-    protected ?string $name = null;
+    /**
+     * @var string|null
+     */
+    protected $name;
 
-    protected ?string $slug = null;
+    /**
+     * @var string|null
+     */
+    protected $slug;
 
-    protected ?string $description = null;
+    /**
+     * @var string|null
+     */
+    protected $description;
 
-    protected ?string $metaKeywords = null;
+    /**
+     * @var string|null
+     */
+    protected $metaKeywords;
 
-    protected ?string $metaDescription = null;
+    /**
+     * @var string|null
+     */
+    protected $metaDescription;
 
     public function getId()
     {

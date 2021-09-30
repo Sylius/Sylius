@@ -18,17 +18,35 @@ class ShopBillingData implements ShopBillingDataInterface
     /** @var mixed */
     protected $id = null;
 
-    protected ?string $company = null;
+    /**
+     * @var string|null
+     */
+    protected $company;
 
-    protected ?string $taxId = null;
+    /**
+     * @var string|null
+     */
+    protected $taxId;
 
-    protected ?string $countryCode = null;
+    /**
+     * @var string|null
+     */
+    protected $countryCode;
 
-    protected ?string $street = null;
+    /**
+     * @var string|null
+     */
+    protected $street;
 
-    protected ?string $city = null;
+    /**
+     * @var string|null
+     */
+    protected $city;
 
-    protected ?string $postcode = null;
+    /**
+     * @var string|null
+     */
+    protected $postcode;
 
     public function getId()
     {

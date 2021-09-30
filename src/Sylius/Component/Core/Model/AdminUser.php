@@ -17,13 +17,25 @@ use Sylius\Component\User\Model\User;
 
 class AdminUser extends User implements AdminUserInterface
 {
-    protected ?string $firstName = null;
+    /**
+     * @var string|null
+     */
+    protected $firstName;
 
-    protected ?string $lastName = null;
+    /**
+     * @var string|null
+     */
+    protected $lastName;
 
-    protected ?string $localeCode = null;
+    /**
+     * @var string|null
+     */
+    protected $localeCode;
 
-    protected ?ImageInterface $avatar = null;
+    /**
+     * @var ImageInterface|null
+     */
+    protected $avatar;
 
     public function __construct()
     {

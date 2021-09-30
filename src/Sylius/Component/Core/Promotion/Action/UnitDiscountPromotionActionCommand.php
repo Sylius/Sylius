@@ -26,7 +26,8 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 abstract class UnitDiscountPromotionActionCommand implements PromotionActionCommandInterface
 {
-    protected FactoryInterface $adjustmentFactory;
+    /** @var FactoryInterface */
+    protected $adjustmentFactory;
 
     public function __construct(FactoryInterface $adjustmentFactory)
     {

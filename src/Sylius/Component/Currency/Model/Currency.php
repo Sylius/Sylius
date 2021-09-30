@@ -23,7 +23,10 @@ class Currency implements CurrencyInterface
     /** @var mixed */
     protected $id;
 
-    protected ?string $code = null;
+    /**
+     * @var string|null
+     */
+    protected $code;
 
     public function __construct()
     {

@@ -29,9 +29,12 @@ class Shipment extends BaseShipment implements ShipmentInterface
      *
      * @psalm-var Collection<array-key, BaseAdjustmentInterface>
      */
-    protected Collection $adjustments;
+    protected $adjustments;
 
-    protected int $adjustmentsTotal = 0;
+    /**
+     * @var int
+     */
+    protected $adjustmentsTotal = 0;
 
     public function __construct()
     {

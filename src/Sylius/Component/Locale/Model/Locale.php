@@ -23,7 +23,10 @@ class Locale implements LocaleInterface
     /** @var mixed  */
     protected $id = null;
 
-    protected ?string $code = null;
+    /**
+     * @var string|null
+     */
+    protected $code;
 
     public function __construct()
     {
