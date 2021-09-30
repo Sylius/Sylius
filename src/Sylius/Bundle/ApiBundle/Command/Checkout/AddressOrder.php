@@ -19,22 +19,28 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 /** @experimental */
 class AddressOrder implements OrderTokenValueAwareInterface
 {
-    public ?string $orderTokenValue = null;
+    /**
+     * @var string|null
+     */
+    public $orderTokenValue;
 
     /**
      * @psalm-immutable
+     * @var string|null
      */
-    public ?string $email;
+    public $email;
 
     /**
      * @psalm-immutable
+     * @var AddressInterface
      */
-    public AddressInterface $billingAddress;
+    public $billingAddress;
 
     /**
      * @psalm-immutable
+     * @var AddressInterface|null
      */
-    public ?AddressInterface $shippingAddress;
+    public $shippingAddress;
 
     public function __construct(?string $email, AddressInterface $billingAddress, ?AddressInterface $shippingAddress = null)
     {

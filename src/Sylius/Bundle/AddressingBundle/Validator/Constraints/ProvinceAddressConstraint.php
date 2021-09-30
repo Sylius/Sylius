@@ -20,7 +20,8 @@ use Symfony\Component\Validator\Constraint;
  */
 class ProvinceAddressConstraint extends Constraint
 {
-    public string $message = 'sylius.address.province.valid';
+    /** @var string */
+    public $message = 'sylius.address.province.valid';
 
     public function getTargets(): string
     {

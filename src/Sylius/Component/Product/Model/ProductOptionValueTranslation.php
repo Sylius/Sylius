@@ -20,7 +20,10 @@ class ProductOptionValueTranslation extends AbstractTranslation implements Produ
     /** @var mixed */
     protected $id;
 
-    protected ?string $value = null;
+    /**
+     * @var string|null
+     */
+    protected $value;
 
     public function getId()
     {

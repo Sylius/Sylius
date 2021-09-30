@@ -21,16 +21,22 @@ class OrderItemUnit implements OrderItemUnitInterface
     /** @var mixed */
     protected $id = null;
 
-    protected OrderItemInterface $orderItem;
+    /**
+     * @var OrderItemInterface
+     */
+    protected $orderItem;
 
     /**
      * @var Collection|AdjustmentInterface[]
      *
      * @psalm-var Collection<array-key, AdjustmentInterface>
      */
-    protected Collection $adjustments;
+    protected $adjustments;
 
-    protected int $adjustmentsTotal = 0;
+    /**
+     * @var int
+     */
+    protected $adjustmentsTotal = 0;
 
     public function __construct(OrderItemInterface $orderItem)
     {

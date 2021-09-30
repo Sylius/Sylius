@@ -18,13 +18,15 @@ class BlameCart
 {
     /**
      * @psalm-immutable
+     * @var string
      */
-    public string $shopUserEmail;
+    public $shopUserEmail;
 
     /**
      * @psalm-immutable
+     * @var string
      */
-    public string $orderTokenValue;
+    public $orderTokenValue;
 
     public function __construct(string $shopUserEmail, string $orderTokenValue)
     {

@@ -16,17 +16,22 @@ namespace Sylius\Bundle\ApiBundle\Command;
 /** @experimental */
 class ResendVerificationEmail implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
 {
-    public string $email;
+    /**
+     * @var string
+     */
+    public $email;
 
     /**
      * @psalm-immutable
+     * @var string|null
      */
-    public ?string $channelCode = null;
+    public $channelCode;
 
     /**
      * @psalm-immutable
+     * @var string|null
      */
-    public ?string $localeCode = null;
+    public $localeCode;
 
     public function __construct(string $email)
     {

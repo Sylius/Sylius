@@ -24,16 +24,22 @@ class ProductAssociation implements ProductAssociationInterface
     /** @var mixed */
     protected $id;
 
-    protected ?ProductAssociationTypeInterface $type = null;
+    /**
+     * @var ProductAssociationTypeInterface|null
+     */
+    protected $type;
 
-    protected ?ProductInterface $owner = null;
+    /**
+     * @var ProductInterface|null
+     */
+    protected $owner;
 
     /**
      * @var Collection|ProductInterface[]
      *
      * @psalm-var Collection<array-key, ProductInterface>
      */
-    protected Collection $associatedProducts;
+    protected $associatedProducts;
 
     public function __construct()
     {

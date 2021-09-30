@@ -18,13 +18,25 @@ class Province implements ProvinceInterface
     /** @var mixed */
     protected $id;
 
-    protected ?string $code = null;
+    /**
+     * @var string|null
+     */
+    protected $code;
 
-    protected ?string $name = null;
+    /**
+     * @var string|null
+     */
+    protected $name;
 
-    protected ?string $abbreviation = null;
+    /**
+     * @var string|null
+     */
+    protected $abbreviation;
 
-    protected ?CountryInterface $country = null;
+    /**
+     * @var CountryInterface|null
+     */
+    protected $country;
 
     public function __toString(): string
     {

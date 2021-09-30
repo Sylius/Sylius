@@ -24,18 +24,27 @@ class TaxCategory implements TaxCategoryInterface
     /** @var mixed */
     protected $id;
 
-    protected ?string $code = null;
+    /**
+     * @var string|null
+     */
+    protected $code;
 
-    protected ?string $name = null;
+    /**
+     * @var string|null
+     */
+    protected $name;
 
-    protected ?string $description = null;
+    /**
+     * @var string|null
+     */
+    protected $description;
 
     /**
      * @var Collection|TaxRateInterface[]
      *
      * @psalm-var Collection<array-key, TaxRateInterface>
      */
-    protected Collection $rates;
+    protected $rates;
 
     public function __construct()
     {

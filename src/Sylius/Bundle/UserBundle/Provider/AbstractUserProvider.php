@@ -22,11 +22,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class AbstractUserProvider implements UserProviderInterface
 {
-    protected string $supportedUserClass = UserInterface::class;
+    /** @var string */
+    protected $supportedUserClass = UserInterface::class;
 
-    protected UserRepositoryInterface $userRepository;
+    /** @var UserRepositoryInterface */
+    protected $userRepository;
 
-    protected CanonicalizerInterface $canonicalizer;
+    /** @var CanonicalizerInterface */
+    protected $canonicalizer;
 
     /**
      * @param string $supportedUserClass FQCN

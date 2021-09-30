@@ -22,17 +22,35 @@ class Review implements ReviewInterface
     /** @var mixed */
     protected $id = null;
 
-    protected ?string $title = null;
+    /**
+     * @var string|null
+     */
+    protected $title;
 
-    protected ?int $rating = null;
+    /**
+     * @var int|null
+     */
+    protected $rating;
 
-    protected ?string $comment = null;
+    /**
+     * @var string|null
+     */
+    protected $comment;
 
-    protected ?ReviewerInterface $author = null;
+    /**
+     * @var ReviewerInterface|null
+     */
+    protected $author;
 
-    protected ?string $status = ReviewInterface::STATUS_NEW;
+    /**
+     * @var string
+     */
+    protected $status = ReviewInterface::STATUS_NEW;
 
-    protected ?ReviewableInterface $reviewSubject = null;
+    /**
+     * @var ReviewableInterface|null
+     */
+    protected $reviewSubject;
 
     public function __construct()
     {
