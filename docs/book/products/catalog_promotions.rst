@@ -231,6 +231,10 @@ We can also make it programmatically:
     $catalogPromotionAction->setCatalogPromotion($catalogPromotion);
     $catalogPromotion->addAction($catalogPromotionAction);
 
+    /** @var MessageBusInterface $eventBus */
+    $eventBus = $this->container->get('sylius.event_bus');
+    $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+
 And now you should be able to see created Catalog Promotion. You can check if it exists like in the last example (with GET endpoint).
 If you look into ``product-variant`` endpoint in shop you should see now that chosen variants have lowered price and added field ``appliedPromotions``:
 
@@ -257,6 +261,10 @@ If you look into ``product-variant`` endpoint in shop you should see now that ch
         "inStock": true
     }
 
+.. note::
+
+    If you create a Catalog Promotion programmatically, remember to manually dispatch ``CatalogPromotionUpdated``
+
 Catalog Promotion Rules configuration reference
 '''''''''''''''''''''''''''''''''''''''''''''''
 
@@ -278,9 +286,9 @@ Catalog Promotion Actions configuration reference
 How the Catalog Promotions are applied?
 ---------------------------------------
 
-The Catalog Promotion application process utilises `Doctrine events <https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html>`_.
-When a new Promotion is created there is an event ``postPersist()`` in `CatalogPromotionEventListener <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/EventListener/CatalogPromotionEventListener.php>`_
-that dispatches another ``CatalogPromotionUpdated`` event to event bus.
+The Catalog Promotion application process utilises `API Platform events <https://api-platform.com/docs/core/events/>`_ for an API.
+and `Resource events </book/architecture/events>`_ for UI. When a new Promotion is created or the existing one is edited
+there are services that listen on proper events and dispatch ``CatalogPromotionUpdated`` event to event bus.
 
 This event is handled by `CatalogPromotionUpdateListener <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Listener/CatalogPromotionUpdateListener.php>`_ which resolves the appropriate ``CatalogPromotion``.
 With the needed data and configuration from ``CatalogPromotion`` we can now process the ``Product`` and ``ProductVariant`` entities.
