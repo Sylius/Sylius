@@ -1,5 +1,11 @@
 # CHANGELOG FOR `1.10.X`
 
+## v1.10.4 (2021-09-30)
+
+#### Details
+
+- [#13160](https://github.com/Sylius/Sylius/issues/13160) Remove types in public and protected properties in not final classes ([@Zales0123](https://github.com/Zales0123))
+
 ## v1.10.3 (2021-09-30)
 
 #### Details
