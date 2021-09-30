@@ -648,6 +648,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Then I should be notified that :countryName country does not exist
+     * @Then they should be notified that :countryName country does not exist
      */
     public function iShouldBeNotifiedThatCountryDoesNotExist(string $countryName): void
     {
