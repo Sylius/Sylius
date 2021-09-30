@@ -16,7 +16,10 @@ namespace Sylius\Bundle\ApiBundle\Command;
 /** @experimental */
 class SendOrderConfirmation
 {
-    public string $orderToken;
+    /**
+     * @var string
+     */
+    public $orderToken;
 
     public function __construct(string $orderToken)
     {

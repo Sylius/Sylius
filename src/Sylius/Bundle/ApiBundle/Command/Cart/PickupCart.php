@@ -19,15 +19,20 @@ use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
 class PickupCart implements ChannelCodeAwareInterface
 {
     /**
-     * @psalm-immutable */
-    public ?string $tokenValue;
+     * @psalm-immutable
+     * @var string|null */
+    public $tokenValue;
 
     /**
      * @psalm-immutable
+     * @var string|null
      */
-    public ?string $localeCode;
+    public $localeCode;
 
-    private ?string $channelCode = null;
+    /**
+     * @var string|null
+     */
+    private $channelCode;
 
     public function __construct(?string $tokenValue = null, ?string $localeCode = null)
     {

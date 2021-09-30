@@ -30,9 +30,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class OrderFixture extends AbstractFixture
 {
-    protected OrderExampleFactory $orderExampleFactory;
+    /** @var OrderExampleFactory */
+    protected $orderExampleFactory;
 
-    protected ObjectManager $orderManager;
+    /** @var ObjectManager */
+    protected $orderManager;
 
     private Generator $faker;
 
