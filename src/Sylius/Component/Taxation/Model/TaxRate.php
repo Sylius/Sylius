@@ -40,12 +40,12 @@ class TaxRate implements TaxRateInterface
     /**
      * @var float|null
      */
-    protected $amount;
+    protected $amount = 0.0;
 
     /**
-     * @var bool|null
+     * @var bool
      */
-    protected $includedInPrice;
+    protected $includedInPrice = false;
 
     /**
      * @var string|null

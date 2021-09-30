@@ -43,9 +43,9 @@ class Review implements ReviewInterface
     protected $author;
 
     /**
-     * @var string|null
+     * @var string
      */
-    protected $status;
+    protected $status = ReviewInterface::STATUS_NEW;
 
     /**
      * @var ReviewableInterface|null

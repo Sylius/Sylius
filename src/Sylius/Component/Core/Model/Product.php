@@ -28,7 +28,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * @var string|null
      */
-    protected $variantSelectionMethod;
+    protected $variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
 
     /**
      * @var Collection|ProductTaxonInterface[]

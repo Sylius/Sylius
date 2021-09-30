@@ -47,9 +47,9 @@ class Promotion implements PromotionInterface
 
     /**
      * Cannot be applied together with other promotions
-     * @var bool|null
+     * @var bool
      */
-    protected $exclusive;
+    protected $exclusive = false;
 
     /**
      * @var int|null
@@ -57,9 +57,9 @@ class Promotion implements PromotionInterface
     protected $usageLimit;
 
     /**
-     * @var int|null
+     * @var int
      */
-    protected $used;
+    protected $used = 0;
 
     /**
      * @var \DateTimeInterface|null

@@ -48,9 +48,9 @@ class ShippingMethod implements ShippingMethodInterface
     protected $category;
 
     /**
-     * @var int|null
+     * @var int
      */
-    protected $categoryRequirement;
+    protected $categoryRequirement = ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY;
 
     /**
      * @var string|null

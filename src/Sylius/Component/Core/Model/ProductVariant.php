@@ -23,19 +23,19 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 class ProductVariant extends BaseVariant implements ProductVariantInterface, Comparable
 {
     /**
-     * @var int|null
+     * @var int
      */
-    protected $version;
+    protected $version = 1;
 
     /**
-     * @var int|null
+     * @var int
      */
-    protected $onHold;
+    protected $onHold = 0;
 
     /**
-     * @var int|null
+     * @var int
      */
-    protected $onHand;
+    protected $onHand = 0;
 
     /**
      * @var bool

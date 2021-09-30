@@ -79,19 +79,19 @@ class Order extends BaseOrder implements OrderInterface
     protected $promotionCoupon;
 
     /**
-     * @var string|null
+     * @var string
      */
-    protected $checkoutState;
+    protected $checkoutState = OrderCheckoutStates::STATE_CART;
 
     /**
-     * @var string|null
+     * @var string
      */
-    protected $paymentState;
+    protected $paymentState = OrderPaymentStates::STATE_CART;
 
     /**
-     * @var string|null
+     * @var string
      */
-    protected $shippingState;
+    protected $shippingState = OrderShippingStates::STATE_CART;
 
     /**
      * @var Collection|BasePromotionInterface[]

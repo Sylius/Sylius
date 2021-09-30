@@ -48,9 +48,9 @@ class Customer implements CustomerInterface
     protected $birthday;
 
     /**
-     * @var string|null
+     * @var string
      */
-    protected $gender;
+    protected $gender = CustomerInterface::UNKNOWN_GENDER;
 
     /**
      * @var CustomerGroupInterface|null

@@ -33,14 +33,14 @@ class Payment implements PaymentInterface
     protected $currencyCode;
 
     /**
-     * @var int|null
+     * @var int
      */
-    protected $amount;
+    protected $amount = 0;
 
     /**
      * @var string|null
      */
-    protected $state;
+    protected $state = PaymentInterface::STATE_CART;
 
     /**
      * @var mixed[]

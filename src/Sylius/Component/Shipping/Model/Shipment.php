@@ -25,9 +25,9 @@ class Shipment implements ShipmentInterface
     protected $id;
 
     /**
-     * @var string|null
+     * @var string
      */
-    protected $state;
+    protected $state = ShipmentInterface::STATE_CART;
 
     /**
      * @var ShippingMethodInterface|null
