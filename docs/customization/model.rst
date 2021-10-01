@@ -227,7 +227,7 @@ Apply the following changes to the ``src/Entity/Shipping/ShippingMethod.php`` fi
 Under the ``sylius_*`` where ``*`` is the name of the bundle of the model you are customizing,
 in our case it will be the ``SyliusShippingBundle`` -> ``sylius_shipping``.
 
-That in Sylius-Standard configuration is overridden already, but you may check if it correctly overridden.
+That in Sylius-Standard configuration is overridden already, but you may check if it is correctly overridden.
 
 .. code-block:: yaml
 
