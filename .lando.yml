@@ -1,0 +1,78 @@
+name: sylius
+recipe: symfony
+config:
+    php: '8.0'
+    xdebug: true
+    webroot: public
+    database: mysql
+    config:
+        php: lando/php.ini
+
+services:
+    database:
+        portforward: true
+        creds:
+            database: sylius_dev
+        host: database
+    appserver:
+        ports: 
+            - '8080:8080'
+        run_as_root: 
+            - lando/scripts/entrypoint.sh
+            - cp lando/files/.env .
+            - apt-get update -y
+            - apt-get install vim -y
+            # to run behat JS
+            - curl -sS https://get.symfony.com/cli/installer | bash
+            - mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+            - symfony server:ca:install
+            - APP_ENV=test symfony server:start --port=8080 --dir=public --allow-http --force-php-discovery -d
+        overrides:
+            environment:
+                LANDO_HOST_IP: "host.docker.internal"
+                XDEBUG_CONFIG: "remote_enable=1 remote_host=host.docker.internal"
+                PHP_IDE_CONFIG: "serverName=sylius.lndo.site"
+                PHP_INI_XDEBUG__REMOTE_PORT: "9003"
+            extra_hosts:
+                - ${LANDO_HOST_IP_DEV:-host}:host-gateway
+    blackfire:
+        type: blackfire
+        server_id: bfb278db-e405-417e-b6b0-80e45b4ed25c
+        server_token: 4dde45f62add612b51f5b2cf76671e273d054e58c5ed87a2f7c89832af2183b4
+        client_id: 50febe25-ce76-43ef-b77c-c48033a7e4e7
+        client_token: cb5ad6f4083547cc74ad2f7bc30b89f7eb2fdc3e2b177302d5df04cd19c9e3d7
+    # to run behat JS
+    chrome:
+        host: chrome
+        portforward: true
+        type: compose
+        services:
+            image: alpeware/chrome-headless-trunk
+            command: /usr/bin/google-chrome-unstable \
+                --disable-gpu --headless --no-sandbox --window-size=1440,900 \
+                --remote-debugging-address=0.0.0.0 \
+                --remote-debugging-port=9222 --user-data-dir=/data
+            ports:
+                - '9222:9222'
+
+tooling:
+    behat:
+        service: appserver
+        cmd: vendor/bin/behat
+        description: Runs behat tests
+    spec:
+        service: appserver
+        cmd: vendor/bin/phpspec
+        description: Runs PHPSpec
+    unit:
+        service: appserver
+        cmd: vendor/bin/phpunit
+        description: Runs PHPUnit
+    cc:
+        service: appserver
+        cmd: rm -fr var/cache
+        description: Forcefully Clears cache
+    blackfire:
+        service: appserver
+    blackfire-player:
+        service: appserver
