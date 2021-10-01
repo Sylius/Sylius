@@ -26,7 +26,7 @@ Feature: Creating a catalog promotion
         And I name it "Winter sale"
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
-        And I add rule that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add action that gives "50%" percentage discount
         And I make it available in channel "United States"
         And I enable this catalog promotion
@@ -45,7 +45,7 @@ Feature: Creating a catalog promotion
         And I name it "Winter sale"
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
-        And I add rule that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add action that gives "50%" percentage discount
         And I disable this catalog promotion
         And I add it
@@ -71,7 +71,7 @@ Feature: Creating a catalog promotion
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
         And I name it "Winter sale"
-        And I add rule that applies on "Clothes" taxon
+        And I add scope that applies on "Clothes" taxon
         And I add action that gives "50%" percentage discount
         And I make it available in channel "United States"
         And I add it

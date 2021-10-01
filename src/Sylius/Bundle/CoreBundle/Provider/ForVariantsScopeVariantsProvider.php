@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Provider;
 
-use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-final class ForVariantsRuleVariantsProvider implements VariantsProviderInterface
+final class ForVariantsScopeVariantsProvider implements VariantsProviderInterface
 {
     private ProductVariantRepositoryInterface $productVariantRepository;
 
@@ -27,14 +27,14 @@ final class ForVariantsRuleVariantsProvider implements VariantsProviderInterface
         $this->productVariantRepository = $productVariantRepository;
     }
 
-    public function supports(CatalogPromotionRuleInterface $catalogPromotionRule): bool
+    public function supports(CatalogPromotionScopeInterface $catalogPromotionScopeType): bool
     {
-        return $catalogPromotionRule->getType() === CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS;
+        return $catalogPromotionScopeType->getType() === CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS;
     }
 
-    public function provideEligibleVariants(CatalogPromotionRuleInterface $rule): array
+    public function provideEligibleVariants(CatalogPromotionScopeInterface $scope): array
     {
-        $configuration = $rule->getConfiguration();
+        $configuration = $scope->getConfiguration();
 
         Assert::keyExists($configuration, 'variants', 'This rule should have configured variants');
 
@@ -47,6 +47,6 @@ final class ForVariantsRuleVariantsProvider implements VariantsProviderInterface
             return $this->productVariantRepository->findOneBy(['code' => $variantCode]);
         }, $configuration);
 
-        return array_filter($variants, fn(?ProductVariantInterface $value) => $value !== null);
+        return array_filter($variants, static fn(?ProductVariantInterface $value) => $value !== null);
     }
 }

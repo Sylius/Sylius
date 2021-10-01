@@ -13,41 +13,41 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class CatalogPromotionRuleExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+final class CatalogPromotionScopeExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private FactoryInterface $catalogPromotionRuleFactory;
+    private FactoryInterface $catalogPromotionScopeFactory;
 
     private OptionsResolver $optionsResolver;
 
-    public function __construct(FactoryInterface $catalogPromotionRuleFactory)
+    public function __construct(FactoryInterface $catalogPromotionScopeFactory)
     {
-        $this->catalogPromotionRuleFactory = $catalogPromotionRuleFactory;
+        $this->catalogPromotionScopeFactory = $catalogPromotionScopeFactory;
 
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
     }
 
-    public function create(array $options = []): CatalogPromotionRuleInterface
+    public function create(array $options = []): CatalogPromotionScopeInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
-        /** @var CatalogPromotionRuleInterface $catalogPromotionRule */
-        $catalogPromotionRule = $this->catalogPromotionRuleFactory->createNew();
-        $catalogPromotionRule->setType($options['type']);
-        $catalogPromotionRule->setConfiguration($options['configuration']);
+        /** @var CatalogPromotionScopeInterface $catalogPromotionScope */
+        $catalogPromotionScope = $this->catalogPromotionScopeFactory->createNew();
+        $catalogPromotionScope->setType($options['type']);
+        $catalogPromotionScope->setConfiguration($options['configuration']);
 
-        return $catalogPromotionRule;
+        return $catalogPromotionScope;
     }
 
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('type', CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS)
+            ->setDefault('type', CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS)
             ->setAllowedTypes('type', 'string')
             ->setDefault('configuration', [])
             ->setAllowedTypes('configuration', 'array')

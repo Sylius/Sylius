@@ -20,7 +20,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -216,22 +216,22 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add another rule that applies on ("[^"]+" variant)$/
+     * @When /^I add another scope that applies on ("[^"]+" variant)$/
      */
-    public function iAddAnotherRuleThatGivesPercentageDiscount(ProductVariantInterface $productVariant): void
+    public function iAddAnotherScopeThatGivesPercentageDiscount(ProductVariantInterface $productVariant): void
     {
-        $rules = $this->client->getContent()['rules'];
+        $scopes = $this->client->getContent()['scopes'];
 
-        $additionalRule = [[
-            'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+        $additionalScope = [[
+            'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
             'configuration' => [
                 'variants' => [$productVariant->getCode()],
             ],
         ]];
 
-        $rules = array_merge_recursive($rules, $additionalRule);
+        $scopes = array_merge_recursive($scopes, $additionalScope);
 
-        $this->client->addRequestData('rules', $rules);
+        $this->client->addRequestData('scopes', $scopes);
     }
 
     /**
@@ -286,13 +286,13 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add rule that applies on ("[^"]+" variant) and ("[^"]+" variant)$/
-     * @When /^I add rule that applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/
+     * @When /^I add scope that applies on ("[^"]+" variant) and ("[^"]+" variant)$/
+     * @When /^I add scope that applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/
      */
-    public function iAddRuleThatAppliesOnVariants(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
+    public function iAddScopeThatAppliesOnVariants(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
     {
-        $rules = [[
-            'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+        $scopes = [[
+            'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
             'configuration' => [
                 'variants' => [
                     $firstVariant->getCode(),
@@ -301,29 +301,29 @@ final class ManagingCatalogPromotionsContext implements Context
             ],
         ]];
 
-        $this->client->addRequestData('rules', $rules);
+        $this->client->addRequestData('scopes', $scopes);
     }
 
     /**
-     * @When I add catalog promotion rule for taxon without taxons
+     * @When I add catalog promotion scope for taxon without taxons
      */
-    public function iAddCatalogPromotionRuleForTaxonWithoutTaxons(): void
+    public function iAddCatalogPromotionScopeForTaxonWithoutTaxons(): void
     {
-        $rules = [[
-            'type' => CatalogPromotionRuleInterface::TYPE_FOR_TAXONS,
+        $scopes = [[
+            'type' => CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
             'configuration' => ['taxons' => []],
         ]];
 
-        $this->client->addRequestData('rules', $rules);
+        $this->client->addRequestData('scopes', $scopes);
     }
 
     /**
-     * @When I add catalog promotion rule for taxon with nonexistent taxons
+     * @When I add catalog promotion scope for taxon with nonexistent taxons
      */
-    public function iAddCatalogPromotionRuleForTaxonWithNonexistentTaxons(): void
+    public function iAddCatalogPromotionScopeForTaxonWithNonexistentTaxons(): void
     {
-        $rules = [[
-            'type' => CatalogPromotionRuleInterface::TYPE_FOR_TAXONS,
+        $scopes = [[
+            'type' => CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
             'configuration' => [
                 'taxons' => [
                     'BAD_TAXON',
@@ -332,31 +332,31 @@ final class ManagingCatalogPromotionsContext implements Context
             ],
         ]];
 
-        $this->client->addRequestData('rules', $rules);
+        $this->client->addRequestData('scopes', $scopes);
     }
 
     /**
-     * @When I add rule that applies on :taxon taxon
+     * @When I add scope that applies on :taxon taxon
      */
-    public function iAddRuleThatAppliesOnTaxon(TaxonInterface $taxon): void
+    public function iAddScopeThatAppliesOnTaxon(TaxonInterface $taxon): void
     {
-        $rules = [[
-            'type' => CatalogPromotionRuleInterface::TYPE_FOR_TAXONS,
+        $scopes = [[
+            'type' => CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
             'configuration' => [
                 'taxons' => [$taxon->getCode()]
             ],
         ]];
 
-        $this->client->addRequestData('rules', $rules);
+        $this->client->addRequestData('scopes', $scopes);
     }
 
     /**
-     * @When I remove its every rule
+     * @When I remove its every scope
      */
-    public function iRemoveItsEveryRule(): void
+    public function iRemoveItsEveryScope(): void
     {
         $content = $this->client->getContent();
-        $content['rules'] = [];
+        $content['scopes'] = [];
         $this->client->setRequestData($content);
     }
 
@@ -368,8 +368,8 @@ final class ManagingCatalogPromotionsContext implements Context
         ProductVariantInterface $productVariant
     ): void {
         $this->client->buildUpdateRequest($catalogPromotion->getCode());
-        $rules = [[
-            'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+        $scopes = [[
+            'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
             'configuration' => [
                 'variants' => [
                     $productVariant->getCode(),
@@ -377,7 +377,7 @@ final class ManagingCatalogPromotionsContext implements Context
             ],
         ]];
 
-        $this->client->updateRequestData(['rules' => $rules]);
+        $this->client->updateRequestData(['scopes' => $scopes]);
         $this->client->update();
     }
 
@@ -391,9 +391,9 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->client->buildUpdateRequest($catalogPromotion->getCode());
 
         $content = $this->client->getContent();
-        unset($content['rules'][0]['configuration']['variants']);
-        $content['rules'][0]['type'] = CatalogPromotionRuleInterface::TYPE_FOR_TAXONS;
-        $content['rules'][0]['configuration']['taxons'] = [$taxon->getCode()];
+        unset($content['scopes'][0]['configuration']['variants']);
+        $content['scopes'][0]['type'] = CatalogPromotionScopeInterface::TYPE_FOR_TAXONS;
+        $content['scopes'][0]['configuration']['taxons'] = [$taxon->getCode()];
 
         $this->client->setRequestData($content);;
 
@@ -422,60 +422,60 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iEditCatalogPromotionToHaveDiscount(CatalogPromotionInterface $catalogPromotion, float $amount): void
     {
         $this->client->buildUpdateRequest($catalogPromotion->getCode());
-        $rules = [[
+        $scopes = [[
             'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
             'configuration' => [
                 'amount' => $amount,
             ],
         ]];
 
-        $this->client->updateRequestData(['actions' => $rules]);
+        $this->client->updateRequestData(['actions' => $scopes]);
         $this->client->update();
     }
 
     /**
-     * @When I add catalog promotion rule with nonexistent type
+     * @When I add catalog promotion scope with nonexistent type
      */
-    public function iAddCatalogPromotionRuleWithNonexistentType(): void
+    public function iAddCatalogPromotionScopeWithNonexistentType(): void
     {
-        $rules = [[
-            'type' => 'nonexistent_rule',
+        $scopes = [[
+            'type' => 'nonexistent_scope',
             'configuration' => [
                 'config' => 'config'
             ],
         ]];
 
-        $this->client->addRequestData('rules', $rules);
+        $this->client->addRequestData('scopes', $scopes);
     }
 
     /**
-     * @When I add for variants rule with the wrong configuration
+     * @When I add for variants scope with the wrong configuration
      */
-    public function iAddForVariantsRuleWithTheWrongConfiguration(): void
+    public function iAddForVariantsScopeWithTheWrongConfiguration(): void
     {
-        $rules = [[
-            'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+        $scopes = [[
+            'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
             'configuration' => [
                 'variants' => ['wrong_code'],
             ],
         ]];
 
-        $this->client->addRequestData('rules', $rules);
+        $this->client->addRequestData('scopes', $scopes);
     }
 
     /**
-     * @When I add for variants rule without variants configured
+     * @When I add for variants scope without variants configured
      */
-    public function iAddForVariantsRuleWithoutVariantsConfigured(): void
+    public function iAddForVariantsScopeWithoutVariantsConfigured(): void
     {
-        $rules = [[
-            'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+        $scopes = [[
+            'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
             'configuration' => [
                 'variants' => [],
             ],
         ]];
 
-        $this->client->addRequestData('rules', $rules);
+        $this->client->addRequestData('scopes', $scopes);
     }
 
     /**
@@ -632,7 +632,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::same(
             ['variants' => [$firstVariant->getCode(), $secondVariant->getCode()]],
-            $this->responseChecker->getCollection($this->client->getLastResponse())[0]['rules'][0]['configuration']
+            $this->responseChecker->getCollection($this->client->getLastResponse())[0]['scopes'][0]['configuration']
         );
     }
 
@@ -643,7 +643,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::same(
             ['taxons' => [$taxon->getCode()]],
-            $this->responseChecker->getCollection($this->client->getLastResponse())[0]['rules'][0]['configuration']
+            $this->responseChecker->getCollection($this->client->getLastResponse())[0]['scopes'][0]['configuration']
         );
     }
 
@@ -833,7 +833,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that type of (action|rule) is invalid$/
+     * @Then /^I should be notified that type of (action|scope) is invalid$/
      */
     public function iShouldBeNotifiedThatTypeIsInvalid(string $field): void
     {
@@ -866,9 +866,9 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that rule configuration is invalid
+     * @Then I should be notified that scope configuration is invalid
      */
-    public function iShouldBeNotifiedThatRuleConfigurationIsInvalid(): void
+    public function iShouldBeNotifiedThatScopeConfigurationIsInvalid(): void
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
@@ -914,11 +914,11 @@ final class ManagingCatalogPromotionsContext implements Context
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
         foreach ($productVariants as $productVariant) {
-            if (!isset($response['rules'][0]['configuration']['variants'])) {
+            if (!isset($response['scopes'][0]['configuration']['variants'])) {
                 return false;
             }
 
-            if ($this->hasVariantInConfiguration($response['rules'][0]['configuration']['variants'], $productVariant) === false) {
+            if ($this->hasVariantInConfiguration($response['scopes'][0]['configuration']['variants'], $productVariant) === false) {
                 return false;
             }
         }
@@ -931,7 +931,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
         foreach ($taxons as $taxon) {
-            if ($this->hasTaxonInConfiguration($response['rules'][0]['configuration']['taxons'], $taxon) === false) {
+            if ($this->hasTaxonInConfiguration($response['scopes'][0]['configuration']['taxons'], $taxon) === false) {
                 return false;
             }
         }

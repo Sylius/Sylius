@@ -31,7 +31,7 @@ class CatalogPromotionFixture extends AbstractResourceFixture
                 ->scalarNode('label')->cannotBeEmpty()->end()
                 ->scalarNode('description')->cannotBeEmpty()->end()
                 ->arrayNode('channels')->scalarPrototype()->end()->end()
-                ->arrayNode('rules')
+                ->arrayNode('scopes')
                     ->requiresAtLeastOneElement()
                     ->arrayPrototype()
                         ->children()

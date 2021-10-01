@@ -25,7 +25,7 @@
         <parameter key="sylius.form.type.promotion_action.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
-        <parameter key="sylius.form.type.promotion_rule.validation_groups" type="collection">
+        <parameter key="sylius.form.type.promotion_scope.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
         <parameter key="sylius.form.type.promotion_coupon.validation_groups" type="collection">
@@ -43,8 +43,8 @@
             <tag name="form.type" />
         </service>
 
-        <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionRuleType">
-            <argument>%sylius.model.catalog_promotion_rule.class%</argument>
+        <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType">
+            <argument>%sylius.model.catalog_promotion_scope.class%</argument>
             <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
             <tag name="form.type" />
         </service>
@@ -79,7 +79,7 @@
 
         <service id="sylius.form.type.promotion_rule" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType">
             <argument>%sylius.model.promotion_rule.class%</argument>
-            <argument>%sylius.form.type.promotion_rule.validation_groups%</argument>
+            <argument>%sylius.form.type.promotion_scope.validation_groups%</argument>
             <argument type="service" id="sylius.form_registry.promotion_rule_checker" />
             <tag name="form.type" />
         </service>

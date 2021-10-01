@@ -7,7 +7,7 @@ Catalog Promotions
 The **Catalog Promotions** system in **Sylius** is a new way of dealing with promotions on multiple products.
 If you get used to :doc:`Cart Promotions </book/orders/cart-promotions>` this will be something familiar to you.
 
-It is managed by combination of promotion rules and actions, where you can specify on which e.g. products or taxons
+It is managed by combination of promotion scopes and actions, where you can specify on which e.g. products or taxons
 you can specify the Catalog Promotion with your custom actions as well as actions like percentage discount.
 
 You can assign the needed channels too.
@@ -45,13 +45,13 @@ Rest of the fields are used for configuration:
         # ...
     }
 
-* **Rules** are used to define rules on which the catalog promotion will work:
+* **Scopes** are used to define scopes on which the catalog promotion will work:
 
 .. code-block:: bash
 
     {
         #...
-        "rules": [
+        "scopes": [
             {
                 "type": "for_variants",
                 "configuration": {
@@ -70,7 +70,7 @@ Rest of the fields are used for configuration:
     The usage of Variant Code over IRI is in this case dictated by the kind of relationship.
     Here it is a part of configuration, where e.g. channel is a relation to the resource.
 
-For possible rules see `Catalog Promotion Rules configuration reference`_
+For possible scopes see `Catalog Promotion Scopes configuration reference`_
 
 * **Actions** are used to defined what happens when the promotion is applied:
 
@@ -156,12 +156,12 @@ You can check if the catalog promotion exists by using GET endpoint
     Take into account that both the API and Programmatically added catalog promotions in this shape are not really useful.
     You need to add configurations to them so they make any business valued changes.
 
-.. _how-to-create-a-catalog-promotion-rule-and-action:
+.. _how-to-create-a-catalog-promotion-scope-and-action:
 
-How to create a Catalog Promotion Rule and Action?
---------------------------------------------------
+How to create a Catalog Promotion Scope and Action?
+---------------------------------------------------
 
-The creation of Catalog Promotion was quite simple but at this shape it has no real functionality. Let's add rule and action:
+The creation of Catalog Promotion was quite simple but at this shape it has no real functionality. Let's add scope and action:
 
 In API we will extend last command:
 
@@ -178,7 +178,7 @@ In API we will extend last command:
         "channels": [
             "/api/v2/admin/channels/FASHION_WEB"
         ],
-        "rules": [
+        "scopes": [
             {
               "type": "for_variants",
               "configuration": {
@@ -202,7 +202,7 @@ In API we will extend last command:
             }
         }'
 
-This will create a catalog promotions with relations to Rule ``for_variants``, Action ``percentage_discount`` and also
+This will create a catalog promotions with relations to Scope ``for_variants``, Action ``percentage_discount`` and also
 translation for ``en_US`` locale.
 
 We can also make it programmatically:
@@ -221,10 +221,10 @@ We can also make it programmatically:
 
     $catalogPromotion->addChannel('FASHION_WEB');
 
-    /** @var CatalogPromotionRuleInterface $catalogPromotionRule */
-    $catalogPromotionRule = $this->catalogPromotionRuleExampleFactory->create($rule);
-    $catalogPromotionRule->setCatalogPromotion($catalogPromotion);
-    $catalogPromotion->addRule($catalogPromotionRule);
+    /** @var CatalogPromotionScopeInterface $catalogPromotionScope */
+    $catalogPromotionScope = $this->catalogPromotionScopeExampleFactory->create($scope);
+    $catalogPromotionScope->setCatalogPromotion($catalogPromotion);
+    $catalogPromotion->addScope($catalogPromotionScope);
 
     /** @var CatalogPromotionActionInterface $catalogPromotionAction */
     $catalogPromotionAction = $this->catalogPromotionActionExampleFactory->create($action);
@@ -265,11 +265,11 @@ If you look into ``product-variant`` endpoint in shop you should see now that ch
 
     If you create a Catalog Promotion programmatically, remember to manually dispatch ``CatalogPromotionUpdated``
 
-Catalog Promotion Rules configuration reference
-'''''''''''''''''''''''''''''''''''''''''''''''
+Catalog Promotion Scopes configuration reference
+''''''''''''''''''''''''''''''''''''''''''''''''
 
 +-------------------------------+--------------------------------------------------------------------+
-| Rule type                     | Rule Configuration Array                                           |
+| Scope type                     | Scope Configuration Array                                         |
 +===============================+====================================================================+
 | ``for_variants``              | ``['variants' => [$variantCodes]]``                                |
 +-------------------------------+--------------------------------------------------------------------+
@@ -303,7 +303,7 @@ The **CatalogPromotionProcessor**'s method ``process()`` is executed on the elig
 
 .. note::
 
-    If you want to reapply Catalog Promotion manually you can refer to the :ref:`How to create a Catalog Promotion Rule and Action? <how-to-create-a-catalog-promotion-rule-and-action>` section
+    If you want to reapply Catalog Promotion manually you can refer to the :ref:`How to create a Catalog Promotion Scope and Action? <how-to-create-a-catalog-promotion-scope-and-action>` section
 
 Learn more
 ----------

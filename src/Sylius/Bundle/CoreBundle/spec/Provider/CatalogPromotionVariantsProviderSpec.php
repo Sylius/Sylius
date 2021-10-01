@@ -19,7 +19,7 @@ use Sylius\Bundle\CoreBundle\Provider\VariantsProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
-use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 
 final class CatalogPromotionVariantsProviderSpec extends ObjectBehavior
 {
@@ -33,36 +33,36 @@ final class CatalogPromotionVariantsProviderSpec extends ObjectBehavior
         $this->shouldImplement(CatalogPromotionVariantsProviderInterface::class);
     }
 
-    function it_provides_variants_configured_in_catalog_promotion_rules(
+    function it_provides_variants_configured_in_catalog_promotion_scopes(
         CatalogPromotionInterface $catalogPromotion,
-        CatalogPromotionRuleInterface $firstRule,
-        CatalogPromotionRuleInterface $secondRule,
+        CatalogPromotionScopeInterface $firstScope,
+        CatalogPromotionScopeInterface $secondScope,
         VariantsProviderInterface $firstProvider,
         VariantsProviderInterface $secondProvider,
         ProductVariantInterface $firstVariant,
         ProductVariantInterface $secondVariant,
         ProductVariantInterface $thirdVariant
     ): void {
-        $catalogPromotion->getRules()->willReturn(new ArrayCollection([
-            $firstRule->getWrappedObject(),
-            $secondRule->getWrappedObject()
+        $catalogPromotion->getScopes()->willReturn(new ArrayCollection([
+            $firstScope->getWrappedObject(),
+            $secondScope->getWrappedObject()
         ]));
 
-        $firstRule->getType()->willReturn(CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS);
-        $firstRule->getConfiguration()->willReturn(['variants' => ['PHP_T_SHIRT', 'PHP_MUG']]);
+        $firstScope->getType()->willReturn(CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS);
+        $firstScope->getConfiguration()->willReturn(['variants' => ['PHP_T_SHIRT', 'PHP_MUG']]);
 
-        $secondRule->getType()->willReturn(CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS);
-        $secondRule->getConfiguration()->willReturn(['variants' => ['PHP_MUG', 'PHP_CAP']]);
+        $secondScope->getType()->willReturn(CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS);
+        $secondScope->getConfiguration()->willReturn(['variants' => ['PHP_MUG', 'PHP_CAP']]);
 
-        $firstProvider->supports($firstRule)->willReturn(false);
-        $firstProvider->supports($secondRule)->willReturn(false);
-        $firstProvider->provideEligibleVariants($firstRule)->shouldNotBeCalled();
-        $firstProvider->provideEligibleVariants($secondRule)->shouldNotBeCalled();
+        $firstProvider->supports($firstScope)->willReturn(false);
+        $firstProvider->supports($secondScope)->willReturn(false);
+        $firstProvider->provideEligibleVariants($firstScope)->shouldNotBeCalled();
+        $firstProvider->provideEligibleVariants($secondScope)->shouldNotBeCalled();
 
-        $secondProvider->supports($firstRule)->willReturn(true);
-        $secondProvider->supports($secondRule)->willReturn(true);
-        $secondProvider->provideEligibleVariants($firstRule)->willReturn([$firstVariant, $secondVariant]);
-        $secondProvider->provideEligibleVariants($secondRule)->willReturn([$secondVariant, $thirdVariant]);
+        $secondProvider->supports($firstScope)->willReturn(true);
+        $secondProvider->supports($secondScope)->willReturn(true);
+        $secondProvider->provideEligibleVariants($firstScope)->willReturn([$firstVariant, $secondVariant]);
+        $secondProvider->provideEligibleVariants($secondScope)->willReturn([$secondVariant, $thirdVariant]);
 
         $firstVariant->getCode()->willReturn('PHP_T_SHIRT');
         $secondVariant->getCode()->willReturn('PHP_MUG');

@@ -49,14 +49,14 @@ Feature: Editing catalog promotion
         Then I should not be able to edit its code
 
     @api @ui @javascript
-    Scenario: Editing catalog promotion variant rule
+    Scenario: Editing catalog promotion variant scope
         When I edit "Christmas sale" catalog promotion to be applied on "Kotlin T-shirt" variant
         Then I should be notified that it has been successfully edited
         And this catalog promotion should be applied on "Kotlin T-shirt" variant
         And this catalog promotion should not be applied on "PHP T-Shirt" variant
 
     @api
-    Scenario: Editing catalog promotion taxon rule
+    Scenario: Editing catalog promotion taxon scope
         When I edit "Christmas sale" catalog promotion to be applied on "Clothes" taxon
         Then I should be notified that it has been successfully edited
         And this catalog promotion should be applied on "Clothes" taxon

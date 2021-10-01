@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 
 final class CatalogPromotionSpec extends ObjectBehavior
 {
@@ -77,32 +77,32 @@ final class CatalogPromotionSpec extends ObjectBehavior
         $this->getCode()->shouldReturn('mug_catalog_promotion');
     }
 
-    function it_initializes_rules_collection_by_default(): void
+    function it_initializes_scopes_collection_by_default(): void
     {
-        $this->getRules()->shouldHaveType(Collection::class);
+        $this->getScopes()->shouldHaveType(Collection::class);
     }
 
-    function it_adds_rules(CatalogPromotionRuleInterface $rule): void
+    function it_adds_scopes(CatalogPromotionScopeInterface $scope): void
     {
-        $this->hasRule($rule)->shouldReturn(false);
+        $this->hasScope($scope)->shouldReturn(false);
 
-        $rule->setCatalogPromotion($this)->shouldBeCalled();
-        $this->addRule($rule);
+        $scope->setCatalogPromotion($this)->shouldBeCalled();
+        $this->addScope($scope);
 
-        $this->hasRule($rule)->shouldReturn(true);
+        $this->hasScope($scope)->shouldReturn(true);
     }
 
-    function it_removes_rules(CatalogPromotionRuleInterface $rule): void
+    function it_removes_scopes(CatalogPromotionScopeInterface $scope): void
     {
-        $this->hasRule($rule)->shouldReturn(false);
+        $this->hasscope($scope)->shouldReturn(false);
 
-        $rule->setCatalogPromotion($this)->shouldBeCalled();
-        $this->addRule($rule);
+        $scope->setCatalogPromotion($this)->shouldBeCalled();
+        $this->addScope($scope);
 
-        $rule->setCatalogPromotion(null)->shouldBeCalled();
-        $this->removeRule($rule);
+        $scope->setCatalogPromotion(null)->shouldBeCalled();
+        $this->removeScope($scope);
 
-        $this->hasRule($rule)->shouldReturn(false);
+        $this->hasScope($scope)->shouldReturn(false);
     }
 
     function it_adds_actions(CatalogPromotionActionInterface $action): void

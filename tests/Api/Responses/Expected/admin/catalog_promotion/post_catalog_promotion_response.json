@@ -8,9 +8,9 @@
     "channels": [
         "\/api\/v2\/admin\/channels\/WEB"
     ],
-    "rules": [
+    "scopes": [
         {
-            "@type": "CatalogPromotionRule",
+            "@type": "CatalogPromotionScope",
             "@id": @string@,
             "id": @integer@,
             "type": "for_variants",

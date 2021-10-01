@@ -13,22 +13,22 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionRuleType;
-use Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionRule\ForVariantsRuleConfigurationType;
+use Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType;
+use Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionScope\ForVariantsScopeConfigurationType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
-final class CatalogPromotionRuleTypeExtension extends AbstractTypeExtension
+final class CatalogPromotionScopeTypeExtension extends AbstractTypeExtension
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('configuration', ForVariantsRuleConfigurationType::class, [
+        $builder->add('configuration', ForVariantsScopeConfigurationType::class, [
             'label' => false,
         ]);
     }
 
     public static function getExtendedTypes(): iterable
     {
-        return [CatalogPromotionRuleType::class];
+        return [CatalogPromotionScopeType::class];
     }
 }

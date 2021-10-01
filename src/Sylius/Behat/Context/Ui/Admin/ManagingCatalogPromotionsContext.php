@@ -19,7 +19,7 @@ use Sylius\Behat\Page\Admin\CatalogPromotion\CreatePageInterface;
 use Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
@@ -147,18 +147,18 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add(?:| another) rule that applies on ("[^"]+" variant)$/
-     * @When /^I add rule that applies on ("[^"]+" variant) and ("[^"]+" variant)$/
-     * @When /^I add rule that applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/
+     * @When /^I add(?:| another) scope that applies on ("[^"]+" variant)$/
+     * @When /^I add scope that applies on ("[^"]+" variant) and ("[^"]+" variant)$/
+     * @When /^I add scope that applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/
      */
-    public function iAddRuleThatAppliesOnVariants(ProductVariantInterface ...$variants): void
+    public function iAddScopeThatAppliesOnVariants(ProductVariantInterface ...$variants): void
     {
         $variantCodes = array_map(function(ProductVariantInterface $variant) {
             return $variant->getCode();
         }, $variants);
 
-        $this->formElement->addRule();
-        $this->formElement->chooseLastRuleVariants($variantCodes);
+        $this->formElement->addScope();
+        $this->formElement->chooseLastScopeVariants($variantCodes);
     }
 
     /**
@@ -221,16 +221,16 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
-        $this->formElement->chooseLastRuleVariants([$productVariant->getCode()]);
+        $this->formElement->chooseLastScopeVariants([$productVariant->getCode()]);
         $this->updatePage->saveChanges();
     }
 
     /**
-     * @When I remove its every rule
+     * @When I remove its every scope
      */
-    public function iRemoveItsEveryRule(): void
+    public function iRemoveItsEveryScope(): void
     {
-        $this->formElement->removeAllRules();
+        $this->formElement->removeAllScopes();
     }
 
     /**
@@ -273,11 +273,11 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I add for variants rule without variants configured
+     * @When I add for variants scope without variants configured
      */
-    public function iAddForVariantsRuleWithoutVariantsConfigured(): void
+    public function iAddForVariantsScopeWithoutVariantsConfigured(): void
     {
-        $this->formElement->addRule();
+        $this->formElement->addScope();
     }
 
     /**
@@ -399,11 +399,11 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @Then /^("[^"]+" catalog promotion) should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
      */
-    public function itShouldHaveRule(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface ...$variants): void
+    public function itShouldHaveScope(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface ...$variants): void
     {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
-        $selectedVariants = $this->formElement->getLastRuleVariantCodes();
+        $selectedVariants = $this->formElement->getLastScopeVariantCodes();
 
         foreach ($variants as $productVariant) {
             Assert::inArray($productVariant->getCode(), $selectedVariants);
@@ -416,7 +416,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function itShouldAppyToVariants(ProductVariantInterface ...$variants): void
     {
-        $selectedVariants = $this->formElement->getLastRuleVariantCodes();
+        $selectedVariants = $this->formElement->getLastScopeVariantCodes();
 
         foreach ($variants as $productVariant) {
             Assert::inArray($productVariant->getCode(), $selectedVariants);
@@ -428,7 +428,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function itShouldNotApplyToVariants(ProductVariantInterface ...$variants): void
     {
-        $selectedVariants = $this->formElement->getLastRuleVariantCodes();
+        $selectedVariants = $this->formElement->getLastScopeVariantCodes();
 
         foreach ($variants as $productVariant) {
             Assert::false(in_array($productVariant->getCode(), $selectedVariants));

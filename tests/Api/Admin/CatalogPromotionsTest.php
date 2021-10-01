@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -92,9 +92,9 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                         ]
                     ]
                 ],
-                'rules' => [
+                'scopes' => [
                     [
-                        'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+                        'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
                         'configuration' => [
                             'variants' => [
                                 'MUG'
@@ -166,7 +166,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_does_not_create_a_catalog_promotion_with_invalid_rules(): void
+    public function it_does_not_create_a_catalog_promotion_with_invalid_scopes(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product_variant.yaml']);
         $header = $this->getLoggedHeader();
@@ -191,22 +191,22 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                         ]
                     ]
                 ],
-                'rules' => [
+                'scopes' => [
                     [
                         'type' => 'invalid_type',
                         'configuration' => [
                             'variants' => ['MUG']
                         ],
                     ], [
-                        'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+                        'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
                         'configuration' => [],
                     ], [
-                        'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+                        'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
                         'configuration' => [
                             'variants' => []
                         ],
                     ], [
-                        'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+                        'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
                         'configuration' => [
                             'variants' => ['invalid_variant']
                         ],
@@ -223,7 +223,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/catalog_promotion/post_catalog_promotion_with_invalid_rules_response',
+            'admin/catalog_promotion/post_catalog_promotion_with_invalid_scopes_response',
             Response::HTTP_UNPROCESSABLE_ENTITY
         );
     }
@@ -270,9 +270,9 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                         ]
                     ]
                 ],
-                'rules' => [
+                'scopes' => [
                     [
-                        'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+                        'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
                         'configuration' => [
                             'variants' => [
                                 'MUG'
@@ -319,9 +319,9 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                         ]
                     ]
                 ],
-                'rules' => [
+                'scopes' => [
                     [
-                        'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+                        'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
                         'configuration' => [
                             'variants' => [
                                 'MUG'

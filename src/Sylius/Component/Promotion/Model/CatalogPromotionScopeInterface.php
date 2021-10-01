@@ -15,7 +15,7 @@ namespace Sylius\Component\Promotion\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface CatalogPromotionRuleInterface extends ResourceInterface
+interface CatalogPromotionScopeInterface extends ResourceInterface
 {
     public function setType(?string $type): void;
 

@@ -33,11 +33,11 @@ class CatalogPromotion implements CatalogPromotionInterface
     protected ?string $code = null;
 
     /**
-     * @var Collection|CatalogPromotionRuleInterface[]
+     * @var Collection|CatalogPromotionScopeInterface[]
      *
-     * @psalm-var Collection<array-key, CatalogPromotionRuleInterface>
+     * @psalm-var Collection<array-key, CatalogPromotionScopeInterface>
      */
-    protected Collection $rules;
+    protected Collection $scopes;
 
     protected Collection $actions;
 
@@ -47,7 +47,7 @@ class CatalogPromotion implements CatalogPromotionInterface
     {
         $this->initializeTranslationsCollection();
 
-        $this->rules = new ArrayCollection();
+        $this->scopes = new ArrayCollection();
         $this->actions = new ArrayCollection();
     }
 
@@ -110,28 +110,28 @@ class CatalogPromotion implements CatalogPromotionInterface
         return new CatalogPromotionTranslation();
     }
 
-    public function getRules(): Collection
+    public function getScopes(): Collection
     {
-        return $this->rules;
+        return $this->scopes;
     }
 
-    public function hasRule(CatalogPromotionRuleInterface $rule): bool
+    public function hasScope(CatalogPromotionScopeInterface $scope): bool
     {
-        return $this->rules->contains($rule);
+        return $this->scopes->contains($scope);
     }
 
-    public function addRule(CatalogPromotionRuleInterface $rule): void
+    public function addScope(CatalogPromotionScopeInterface $scope): void
     {
-        if (!$this->hasRule($rule)) {
-            $rule->setCatalogPromotion($this);
-            $this->rules->add($rule);
+        if (!$this->hasScope($scope)) {
+            $scope->setCatalogPromotion($this);
+            $this->scopes->add($scope);
         }
     }
 
-    public function removeRule(CatalogPromotionRuleInterface $rule): void
+    public function removeScope(CatalogPromotionScopeInterface $scope): void
     {
-        $rule->setCatalogPromotion(null);
-        $this->rules->removeElement($rule);
+        $scope->setCatalogPromotion(null);
+        $this->scopes->removeElement($scope);
     }
 
     public function getActions(): Collection

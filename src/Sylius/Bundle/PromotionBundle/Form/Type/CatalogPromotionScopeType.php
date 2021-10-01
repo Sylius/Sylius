@@ -17,7 +17,7 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-final class CatalogPromotionRuleType extends AbstractResourceType
+final class CatalogPromotionScopeType extends AbstractResourceType
 {
     private array $ruleTypes;
 
@@ -40,7 +40,7 @@ final class CatalogPromotionRuleType extends AbstractResourceType
 
     public function getBlockPrefix(): string
     {
-        return 'sylius_catalog_promotion_rule';
+        return 'sylius_catalog_promotion_scope';
     }
 
 }

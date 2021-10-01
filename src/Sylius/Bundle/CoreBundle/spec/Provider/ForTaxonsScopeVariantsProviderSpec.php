@@ -15,13 +15,13 @@ namespace spec\Sylius\Bundle\CoreBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Provider\VariantsProviderInterface;
-use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
-final class ForTaxonsRuleVariantsProviderSpec extends ObjectBehavior
+final class ForTaxonsScopeVariantsProviderSpec extends ObjectBehavior
 {
     function let(
         TaxonRepositoryInterface $taxonRepository,
@@ -35,39 +35,39 @@ final class ForTaxonsRuleVariantsProviderSpec extends ObjectBehavior
         $this->shouldImplement(VariantsProviderInterface::class);
     }
 
-    function it_supports_only_for_taxons_catalog_promotion_rule(
-        CatalogPromotionRuleInterface $forTaxonsRule,
-        CatalogPromotionRuleInterface $forVariantsRule
+    function it_supports_only_for_taxons_catalog_promotion_scope(
+        CatalogPromotionScopeInterface $forTaxonsScope,
+        CatalogPromotionScopeInterface $forVariantsScope
     ): void {
-        $forTaxonsRule->getType()->willReturn(CatalogPromotionRuleInterface::TYPE_FOR_TAXONS);
-        $forVariantsRule->getType()->willReturn(CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS);
+        $forTaxonsScope->getType()->willReturn(CatalogPromotionScopeInterface::TYPE_FOR_TAXONS);
+        $forVariantsScope->getType()->willReturn(CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS);
 
-        $this->supports($forTaxonsRule)->shouldReturn(true);
-        $this->supports($forVariantsRule)->shouldReturn(false);
+        $this->supports($forTaxonsScope)->shouldReturn(true);
+        $this->supports($forVariantsScope)->shouldReturn(false);
     }
 
-    function it_throws_an_exception_if_there_is_no_taxons_configured_in_the_rule_configuration(
-        CatalogPromotionRuleInterface $catalogPromotionRule
+    function it_throws_an_exception_if_there_is_no_taxons_configured_in_the_scope_configuration(
+        CatalogPromotionScopeInterface $catalogPromotionScope
     ): void {
-        $catalogPromotionRule->getConfiguration()->willReturn([]);
+        $catalogPromotionScope->getConfiguration()->willReturn([]);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('provideEligibleVariants', [$catalogPromotionRule])
+            ->during('provideEligibleVariants', [$catalogPromotionScope])
         ;
     }
 
     function it_provides_variants_for_given_taxon_codes_if_they_exist(
         TaxonRepositoryInterface $taxonRepository,
         ProductVariantRepositoryInterface $productVariantRepository,
-        CatalogPromotionRuleInterface $catalogPromotionRule,
+        CatalogPromotionScopeInterface $catalogPromotionScope,
         TaxonInterface $mugs,
         TaxonInterface $tShirts,
         ProductVariantInterface $firstMug,
         ProductVariantInterface $secondMug,
         ProductVariantInterface $tShirt
     ): void {
-        $catalogPromotionRule->getConfiguration()->willReturn(['taxons' => ['MUGS', 'DISHES', 'T-SHIRTS']]);
+        $catalogPromotionScope->getConfiguration()->willReturn(['taxons' => ['MUGS', 'DISHES', 'T-SHIRTS']]);
 
         $taxonRepository->findOneBy(['code' => 'MUGS'])->willReturn($mugs);
         $taxonRepository->findOneBy(['code' => 'DISHES'])->willReturn(null);
@@ -77,7 +77,7 @@ final class ForTaxonsRuleVariantsProviderSpec extends ObjectBehavior
         $productVariantRepository->findByTaxon($tShirts)->willReturn([$tShirt]);
 
         $this
-            ->provideEligibleVariants($catalogPromotionRule)
+            ->provideEligibleVariants($catalogPromotionScope)
             ->shouldReturn([$firstMug, $secondMug, $tShirt])
         ;
     }

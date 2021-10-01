@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Provider;
 
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
 
@@ -31,12 +31,12 @@ final class CatalogPromotionVariantsProvider implements CatalogPromotionVariants
     {
         $variants = [];
 
-        /** @var CatalogPromotionRuleInterface $rule */
-        foreach ($catalogPromotion->getRules() as $rule) {
+        /** @var CatalogPromotionScopeInterface $scope */
+        foreach ($catalogPromotion->getScopes() as $scope) {
             /** @var VariantsProviderInterface $provider */
             foreach ($this->variantsProviders as $provider) {
-                if ($provider->supports($rule)) {
-                    $variants = array_merge($variants, $provider->provideEligibleVariants($rule));
+                if ($provider->supports($scope)) {
+                    $variants = array_merge($variants, $provider->provideEligibleVariants($scope));
                 }
             }
         }

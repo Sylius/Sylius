@@ -64,11 +64,11 @@ $(document).ready(() => {
       $('select[name^="sylius_promotion[actions]"][name$="[type]"]').last().change();
     }, 50);
   });
-  $('#rules a[data-form-collection="add"]').on('click', (event) => {
+  $('#scopes a[data-form-collection="add"]').on('click', (event) => {
     const name = $(event.target).closest('form').attr('name');
 
     setTimeout(() => {
-      $(`select[name^="${name}[rules]"][name$="[type]"]`).last().change();
+      $(`select[name^="${name}[scopes]"][name$="[type]"]`).last().change();
     }, 50);
   });
 

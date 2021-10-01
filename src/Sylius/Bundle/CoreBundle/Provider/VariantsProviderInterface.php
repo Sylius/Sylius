@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Provider;
 
-use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 
 interface VariantsProviderInterface
 {
-    public function supports(CatalogPromotionRuleInterface $catalogPromotionRuleType): bool;
+    public function supports(CatalogPromotionScopeInterface $catalogPromotionScopeType): bool;
 
-    public function provideEligibleVariants(CatalogPromotionRuleInterface $rule): array;
+    public function provideEligibleVariants(CatalogPromotionScopeInterface $scope): array;
 }

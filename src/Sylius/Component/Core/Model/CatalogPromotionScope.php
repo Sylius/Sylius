@@ -13,11 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
-use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface as BaseCatalogPromotionRuleInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionScope as BaseCatalogPromotionScope;
 
-interface CatalogPromotionRuleInterface extends BaseCatalogPromotionRuleInterface
+class CatalogPromotionScope extends BaseCatalogPromotionScope implements CatalogPromotionScopeInterface
 {
-    public const TYPE_FOR_VARIANTS = 'for_variants';
-
-    public const TYPE_FOR_TAXONS = 'for_taxons';
 }

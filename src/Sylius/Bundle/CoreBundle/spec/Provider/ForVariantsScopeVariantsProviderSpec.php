@@ -17,9 +17,9 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Provider\VariantsProviderInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
-use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 
-final class ForVariantsRuleVariantsProviderSpec extends ObjectBehavior
+final class ForVariantsScopeVariantsProviderSpec extends ObjectBehavior
 {
     function let(ProductVariantRepositoryInterface $productVariantRepository): void
     {
@@ -31,20 +31,20 @@ final class ForVariantsRuleVariantsProviderSpec extends ObjectBehavior
         $this->shouldImplement(VariantsProviderInterface::class);
     }
 
-    function it_provides_eligible_variants_for_variants_base_catalog_promotion_rule(
+    function it_provides_eligible_variants_for_variants_base_catalog_promotion_scope(
         ProductVariantRepositoryInterface $productVariantRepository,
-        CatalogPromotionRuleInterface $rule,
+        CatalogPromotionScopeInterface $scope,
         ProductVariantInterface $firstVariant,
         ProductVariantInterface $secondVariant
     ): void {
-        $rule->getConfiguration()->willReturn(['variants' => ['PHP_T_SHIRT_XS_WHITE', 'PHP_T_SHIRT_XS_BLACK', 'PHP_MUG']]);
+        $scope->getConfiguration()->willReturn(['variants' => ['PHP_T_SHIRT_XS_WHITE', 'PHP_T_SHIRT_XS_BLACK', 'PHP_MUG']]);
 
         $productVariantRepository->findOneBy(['code' => 'PHP_T_SHIRT_XS_WHITE'])->willReturn($firstVariant);
         $productVariantRepository->findOneBy(['code' => 'PHP_T_SHIRT_XS_BLACK'])->willReturn($secondVariant);
         $productVariantRepository->findOneBy(['code' => 'PHP_MUG'])->willReturn(null);
 
         $this
-            ->provideEligibleVariants($rule)
+            ->provideEligibleVariants($scope)
             ->shouldReturn([$firstVariant, $secondVariant])
         ;
     }
