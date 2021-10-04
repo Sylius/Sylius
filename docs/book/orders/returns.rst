@@ -46,7 +46,7 @@ Overwrite the ``ReturnRequestResolutionsProvider`` service:
 
 In order to **add a custom Resolution**:
 
-Overwritthe ``ReturnRequestResolutionsProvider`` service and add a translation of the new resolution:
+Overwrite the ``ReturnRequestResolutionsProvider`` service and add a translation of the new resolution:
 
 .. code-block:: yaml
 
