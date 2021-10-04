@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Provider;
 
-use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-final class ForTaxonsRuleVariantsProvider implements VariantsProviderInterface
+final class ForTaxonsScopeVariantsProvider implements VariantsProviderInterface
 {
     private TaxonRepositoryInterface $taxonRepository;
 
@@ -33,19 +33,19 @@ final class ForTaxonsRuleVariantsProvider implements VariantsProviderInterface
         $this->productVariantRepository = $productVariantRepository;
     }
 
-    public function supports(CatalogPromotionRuleInterface $catalogPromotionRuleType): bool
+    public function supports(CatalogPromotionScopeInterface $catalogPromotionScopeType): bool
     {
-        return $catalogPromotionRuleType->getType() === CatalogPromotionRuleInterface::TYPE_FOR_TAXONS;
+        return $catalogPromotionScopeType->getType() === CatalogPromotionScopeInterface::TYPE_FOR_TAXONS;
     }
 
-    public function provideEligibleVariants(CatalogPromotionRuleInterface $rule): array
+    public function provideEligibleVariants(CatalogPromotionScopeInterface $scope): array
     {
-        $configuration = $rule->getConfiguration();
+        $configuration = $scope->getConfiguration();
         Assert::keyExists($configuration, 'taxons', 'This rule should have configured taxons');
 
         $variants = [];
         /** @var string $taxonCode */
-        foreach ($rule->getConfiguration()['taxons'] as $taxonCode) {
+        foreach ($scope->getConfiguration()['taxons'] as $taxonCode) {
             /** @var TaxonInterface|null $taxon */
             $taxon = $this->taxonRepository->findOneBy(['code' => $taxonCode]);
             if (null === $taxon) {

@@ -38,17 +38,17 @@ interface CatalogPromotionInterface extends ResourceInterface, CodeAwareInterfac
     public function getTranslation(?string $locale = null): TranslationInterface;
 
     /**
-     * @return Collection|CatalogPromotionRuleInterface[]
+     * @return Collection|CatalogPromotionScopeInterface[]
      *
-     * @psalm-return Collection<array-key, CatalogPromotionRuleInterface>
+     * @psalm-return Collection<array-key, CatalogPromotionScopeInterface>
      */
-    public function getRules(): Collection;
+    public function getScopes(): Collection;
 
-    public function hasRule(CatalogPromotionRuleInterface $rule): bool;
+    public function hasScope(CatalogPromotionScopeInterface $scope): bool;
 
-    public function addRule(CatalogPromotionRuleInterface $rule): void;
+    public function addScope(CatalogPromotionScopeInterface $scope): void;
 
-    public function removeRule(CatalogPromotionRuleInterface $rule): void;
+    public function removeScope(CatalogPromotionScopeInterface $scope): void;
 
     /**
      * @return Collection|CatalogPromotionActionInterface[]

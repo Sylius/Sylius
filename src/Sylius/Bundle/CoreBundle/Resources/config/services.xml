@@ -268,12 +268,12 @@
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.variants_provider" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Provider\ForVariantsRuleVariantsProvider">
+        <service id="Sylius\Bundle\CoreBundle\Provider\ForVariantsScopeVariantsProvider">
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="sylius.catalog_promotion.variants_provider" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Provider\ForTaxonsRuleVariantsProvider">
+        <service id="Sylius\Bundle\CoreBundle\Provider\ForTaxonsScopeVariantsProvider">
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="sylius.catalog_promotion.variants_provider" />

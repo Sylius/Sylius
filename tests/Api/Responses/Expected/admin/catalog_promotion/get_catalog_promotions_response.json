@@ -12,7 +12,7 @@
             "channels": [
                 "\/api\/v2\/admin\/channels\/WEB"
             ],
-            "rules": [],
+            "scopes": [],
             "actions": [],
             "enabled": @boolean@,
             "translations": {

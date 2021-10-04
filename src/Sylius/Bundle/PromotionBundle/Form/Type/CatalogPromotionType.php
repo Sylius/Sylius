@@ -49,9 +49,9 @@ final class CatalogPromotionType extends AbstractResourceType
             ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.catalog_promotion.enabled'
             ] )
-            ->add('rules', CollectionType::class, [
-                'label' => 'sylius.ui.rules',
-                'entry_type' => CatalogPromotionRuleType::class,
+            ->add('scopes', CollectionType::class, [
+                'label' => 'sylius.ui.scopes',
+                'entry_type' => CatalogPromotionScopeType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,

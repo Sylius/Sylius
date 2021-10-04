@@ -295,7 +295,7 @@
 
         <service id="Sylius\Behat\Context\Setup\CatalogPromotionContext">
             <argument type="service" id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionExampleFactory" />
-            <argument type="service" id="sylius.factory.catalog_promotion_rule" />
+            <argument type="service" id="sylius.factory.catalog_promotion_scope" />
             <argument type="service" id="sylius.factory.catalog_promotion_action" />
             <argument type="service" id="sylius.manager.catalog_promotion" />
             <argument type="service" id="sylius.repository.channel" />

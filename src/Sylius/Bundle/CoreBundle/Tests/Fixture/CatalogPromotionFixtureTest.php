@@ -61,9 +61,9 @@ final class CatalogPromotionFixtureTest extends TestCase
     }
 
     /** @test */
-    public function catalog_promotion_rules_can_be_set(): void
+    public function catalog_promotion_scopes_can_be_set(): void
     {
-        $this->assertConfigurationIsValid([['custom' => [['rules' => [['type' => 'some_rule_type', 'configuration' => ['first_variant', 'second_variant']]]]]]], 'custom.*.rules');
+        $this->assertConfigurationIsValid([['custom' => [['scopes' => [['type' => 'some_scope_type', 'configuration' => ['first_variant', 'second_variant']]]]]]], 'custom.*.scopes');
     }
 
     /** @test */

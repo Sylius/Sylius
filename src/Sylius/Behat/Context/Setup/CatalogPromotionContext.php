@@ -20,7 +20,7 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -33,7 +33,7 @@ final class CatalogPromotionContext implements Context
 {
     private ExampleFactoryInterface $catalogPromotionExampleFactory;
 
-    private FactoryInterface $catalogPromotionRuleFactory;
+    private FactoryInterface $catalogPromotionScopeFactory;
 
     private FactoryInterface $catalogPromotionActionFactory;
 
@@ -47,7 +47,7 @@ final class CatalogPromotionContext implements Context
 
     public function __construct(
         ExampleFactoryInterface $catalogPromotionExampleFactory,
-        FactoryInterface $catalogPromotionRuleFactory,
+        FactoryInterface $catalogPromotionScopeFactory,
         FactoryInterface $catalogPromotionActionFactory,
         EntityManagerInterface $entityManager,
         ChannelRepositoryInterface $channelRepository,
@@ -55,7 +55,7 @@ final class CatalogPromotionContext implements Context
         SharedStorageInterface $sharedStorage
     ) {
         $this->catalogPromotionExampleFactory = $catalogPromotionExampleFactory;
-        $this->catalogPromotionRuleFactory = $catalogPromotionRuleFactory;
+        $this->catalogPromotionScopeFactory = $catalogPromotionScopeFactory;
         $this->catalogPromotionActionFactory = $catalogPromotionActionFactory;
         $this->entityManager = $entityManager;
         $this->channelRepository = $channelRepository;
@@ -122,12 +122,12 @@ final class CatalogPromotionContext implements Context
      */
     public function itAppliesOnVariant(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface $variant): void
     {
-        /** @var CatalogPromotionRuleInterface $catalogPromotionRule */
-        $catalogPromotionRule = $this->catalogPromotionRuleFactory->createNew();
-        $catalogPromotionRule->setType(CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS);
-        $catalogPromotionRule->setConfiguration(['variants' => [$variant->getCode()]]);
+        /** @var CatalogPromotionScopeInterface $catalogPromotionScope */
+        $catalogPromotionScope = $this->catalogPromotionScopeFactory->createNew();
+        $catalogPromotionScope->setType(CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS);
+        $catalogPromotionScope->setConfiguration(['variants' => [$variant->getCode()]]);
 
-        $catalogPromotion->addRule($catalogPromotionRule);
+        $catalogPromotion->addScope($catalogPromotionScope);
 
         $this->entityManager->flush();
     }
@@ -166,7 +166,7 @@ final class CatalogPromotionContext implements Context
             null,
             [],
             [[
-                'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+                'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
                 'configuration' => ['variants' => $variantCodes],
             ]],
             [[
@@ -192,7 +192,7 @@ final class CatalogPromotionContext implements Context
             null,
             [],
             [[
-                'type' => CatalogPromotionRuleInterface::TYPE_FOR_TAXONS,
+                'type' => CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
                 'configuration' => ['taxons' => [$taxon->getCode()]],
             ]],
             [[
@@ -218,7 +218,7 @@ final class CatalogPromotionContext implements Context
             null,
             [$channel->getCode()],
             [[
-                'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+                'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
                 'configuration' => ['variants' => [$variant->getCode()]],
             ]],
             [[
@@ -248,7 +248,7 @@ final class CatalogPromotionContext implements Context
                 $secondChannel->getCode()
             ],
             [[
-                'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+                'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
                 'configuration' => ['variants' => [$variant->getCode()]],
             ]],
             [[
@@ -274,7 +274,7 @@ final class CatalogPromotionContext implements Context
             null,
             [$channel->getCode()],
             [[
-                'type' => CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS,
+                'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
                 'configuration' => ['variants' => [$variant->getCode()]],
             ]],
             [[
@@ -305,7 +305,7 @@ final class CatalogPromotionContext implements Context
         string $name,
         ?string $code = null,
         array $channels = [],
-        array $rules = [],
+        array $scopes = [],
         array $actions = []
     ): CatalogPromotionInterface {
         if (empty($channels) && $this->sharedStorage->has('channel')) {
@@ -318,7 +318,7 @@ final class CatalogPromotionContext implements Context
             'code' => $code,
             'channels' => $channels,
             'actions' => $actions,
-            'rules' => $rules,
+            'scopes' => $scopes,
             'description' => $name . ' description'
         ]);
 

@@ -50,9 +50,9 @@ final class FormElement extends Element implements FormElementInterface
         $this->getDocument()->uncheckField($channelName);
     }
 
-    public function addRule(): void
+    public function addScope(): void
     {
-        $this->addCollectionElement('rules', 'add_rule_button');
+        $this->addCollectionElement('scopes', 'add_scope_button');
     }
 
     public function addAction(): void
@@ -60,11 +60,11 @@ final class FormElement extends Element implements FormElementInterface
         $this->addCollectionElement('actions', 'add_action_button');
     }
 
-    public function chooseLastRuleVariants(array $variantCodes): void
+    public function chooseLastScopeVariants(array $variantCodes): void
     {
-        $lastRule = $this->getElement('last_rule');
+        $lastScope = $this->getElement('last_scope');
 
-        $lastRule->find('css', 'input[type="hidden"]')->setValue(implode(',', $variantCodes));
+        $lastScope->find('css', 'input[type="hidden"]')->setValue(implode(',', $variantCodes));
     }
 
     public function specifyLastActionDiscount(string $discount): void
@@ -79,11 +79,11 @@ final class FormElement extends Element implements FormElementInterface
         return $this->getElement($field, ['%localeCode%' => $localeCode])->getValue();
     }
 
-    public function getLastRuleVariantCodes(): array
+    public function getLastScopeVariantCodes(): array
     {
-        $lastRule = $this->getElement('last_rule');
+        $lastScope = $this->getElement('last_scope');
 
-        return explode(',', $lastRule->find('css', 'input[type="hidden"]')->getValue());
+        return explode(',', $lastScope->find('css', 'input[type="hidden"]')->getValue());
     }
 
     public function getLastActionDiscount(): string
@@ -113,9 +113,9 @@ final class FormElement extends Element implements FormElementInterface
         }
     }
 
-    public function removeAllRules(): void
+    public function removeAllScopes(): void
     {
-        $deleteButtons = $this->getDocument()->findAll('css', '#rules [data-form-collection="delete"]');
+        $deleteButtons = $this->getDocument()->findAll('css', '#scopes [data-form-collection="delete"]');
 
         foreach ($deleteButtons as $deleteButton) {
             $deleteButton->click();
@@ -127,15 +127,15 @@ final class FormElement extends Element implements FormElementInterface
         return array_merge(parent::getDefinedElements(), [
             'actions' => '#actions',
             'add_action_button' => '#actions [data-form-collection="add"]',
-            'add_rule_button' => '#rules [data-form-collection="add"]',
+            'add_scope_button' => '#scopes [data-form-collection="add"]',
             'channel' => '#sylius_catalog_promotion_code',
             'description' => '#sylius_catalog_promotion_translations_%localeCode%_description',
             'enabled' => '#sylius_catalog_promotion_enabled',
             'label' => '#sylius_catalog_promotion_translations_%localeCode%_label',
             'last_action' => '#actions [data-form-collection="item"]:last-child',
-            'last_rule' => '#rules [data-form-collection="item"]:last-child',
+            'last_scope' => '#scopes [data-form-collection="item"]:last-child',
             'name' => '#sylius_catalog_promotion_name',
-            'rules' => '#rules',
+            'scopes' => '#scopes',
         ]);
     }
 

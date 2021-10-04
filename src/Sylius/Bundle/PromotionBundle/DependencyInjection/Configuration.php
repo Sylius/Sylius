@@ -25,8 +25,8 @@ use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Promotion\Model\CatalogPromotion;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionRule;
-use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionScope;
+use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionTranslation;
 use Sylius\Component\Promotion\Model\CatalogPromotionTranslationInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionAction;
@@ -135,15 +135,15 @@ final class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                         ->end()
-                        ->arrayNode('catalog_promotion_rule')
+                        ->arrayNode('catalog_promotion_scope')
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->variableNode('options')->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue(CatalogPromotionRule::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(CatalogPromotionRuleInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(CatalogPromotionScope::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(CatalogPromotionScopeInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()

@@ -47,7 +47,7 @@ sylius_fixtures:
                                 name: 'Winter sale'
                                 channels:
                                     - 'FASHION_WEB'
-                                rules:
+                                scopes:
                                     -   type: 'for_variants'
                                         configuration:
                                             variants:

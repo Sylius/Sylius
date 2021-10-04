@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
-use Sylius\Component\Core\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-final class CatalogPromotionRuleValidator extends ConstraintValidator
+final class CatalogPromotionScopeValidator extends ConstraintValidator
 {
     private ProductVariantRepositoryInterface $variantRepository;
 
@@ -37,13 +37,13 @@ final class CatalogPromotionRuleValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint): void
     {
-        /** @var CatalogPromotionRule $constraint */
-        Assert::isInstanceOf($constraint, CatalogPromotionRule::class);
+        /** @var CatalogPromotionScope $constraint */
+        Assert::isInstanceOf($constraint, CatalogPromotionScope::class);
 
-        /** @var CatalogPromotionRuleInterface $value */
+        /** @var CatalogPromotionScopeInterface $value */
         if (
-            $value->getType() !== CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS &&
-            $value->getType() !== CatalogPromotionRuleInterface::TYPE_FOR_TAXONS
+            $value->getType() !== CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS &&
+            $value->getType() !== CatalogPromotionScopeInterface::TYPE_FOR_TAXONS
         ) {
             $this->context->buildViolation($constraint->invalidType)->atPath('type')->addViolation();
 
@@ -52,7 +52,7 @@ final class CatalogPromotionRuleValidator extends ConstraintValidator
 
         $configuration = $value->getConfiguration();
 
-        if ($value->getType() === CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS) {
+        if ($value->getType() === CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS) {
             $this->validateForVariantsType($configuration, $constraint);
 
             return;
@@ -61,7 +61,7 @@ final class CatalogPromotionRuleValidator extends ConstraintValidator
         $this->validateForTaxonType($configuration, $constraint);
     }
 
-    private function validateForVariantsType(array $configuration, CatalogPromotionRule $constraint): void
+    private function validateForVariantsType(array $configuration, CatalogPromotionScope $constraint): void
     {
         if (!array_key_exists('variants', $configuration) || empty($configuration['variants'])) {
             $this->context->buildViolation($constraint->variantsNotEmpty)->atPath('configuration.variants')->addViolation();
@@ -78,7 +78,7 @@ final class CatalogPromotionRuleValidator extends ConstraintValidator
         }
     }
 
-    private function validateForTaxonType(array $configuration, CatalogPromotionRule $constraint): void
+    private function validateForTaxonType(array $configuration, CatalogPromotionScope $constraint): void
     {
         if (!isset($configuration['taxons']) || empty($configuration['taxons'])) {
             $this->context->buildViolation($constraint->taxonsNotEmpty)->atPath('configuration.taxons')->addViolation();

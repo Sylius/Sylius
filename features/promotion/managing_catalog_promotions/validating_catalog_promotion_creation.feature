@@ -26,37 +26,37 @@ Feature: Validating a catalog promotion creation
         And there should still be only one catalog promotion with code "sale"
 
     @api
-    Scenario: Trying to create a catalog promotion with invalid type of rule
+    Scenario: Trying to create a catalog promotion with invalid type of scope
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
         And I name it "Winter sale"
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
-        And I add catalog promotion rule with nonexistent type
+        And I add catalog promotion scope with nonexistent type
         And I try to add it
-        Then I should be notified that type of rule is invalid
+        Then I should be notified that type of scope is invalid
         And there should be an empty list of catalog promotions
 
     @api
-    Scenario: Trying to create a catalog promotion with rule with invalid configuration
+    Scenario: Trying to create a catalog promotion with scope with invalid configuration
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
         And I name it "Winter sale"
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
-        And I add for variants rule with the wrong configuration
+        And I add for variants scope with the wrong configuration
         And I try to add it
-        Then I should be notified that rule configuration is invalid
+        Then I should be notified that scope configuration is invalid
         And there should be an empty list of catalog promotions
 
     @api @ui @javascript
-    Scenario: Trying to create a catalog promotion with not configured for variants rule
+    Scenario: Trying to create a catalog promotion with not configured for variants scope
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
         And I name it "Winter sale"
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
-        And I add for variants rule without variants configured
+        And I add for variants scope without variants configured
         And I try to add it
         Then I should be notified that at least 1 variant is required
         And there should be an empty list of catalog promotions
@@ -69,7 +69,7 @@ Feature: Validating a catalog promotion creation
         And I make it available in channel "United States"
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
-        And I add rule that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add catalog promotion action with nonexistent type
         And I try to add it
         Then I should be notified that type of action is invalid
@@ -83,7 +83,7 @@ Feature: Validating a catalog promotion creation
         And I make it available in channel "United States"
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
-        And I add rule that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add percentage discount action without amount configured
         And I try to add it
         Then I should be notified that a discount amount should be a number and cannot be empty
@@ -97,7 +97,7 @@ Feature: Validating a catalog promotion creation
         And I make it available in channel "United States"
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
-        And I add rule that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add action that gives "120%" percentage discount
         And I try to add it
         Then I should be notified that a discount amount should be between 0% and 100%
@@ -108,7 +108,7 @@ Feature: Validating a catalog promotion creation
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
         And I name it "Winter sale"
-        And I add rule that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add invalid percentage discount action with non number in amount
         And I try to add it
         Then I should be notified that a discount amount should be a number and cannot be empty
@@ -121,7 +121,7 @@ Feature: Validating a catalog promotion creation
         And I name it "Winter sale"
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
-        And I add catalog promotion rule for taxon without taxons
+        And I add catalog promotion scope for taxon without taxons
         And I try to add it
         Then I should be notified that I must add at least one taxon
         And there should be an empty list of catalog promotions
@@ -133,7 +133,7 @@ Feature: Validating a catalog promotion creation
         And I name it "Winter sale"
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
-        And I add catalog promotion rule for taxon with nonexistent taxons
+        And I add catalog promotion scope for taxon with nonexistent taxons
         And I try to add it
         Then I should be notified that I can add only existing taxon
         And there should be an empty list of catalog promotions

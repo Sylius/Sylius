@@ -11,14 +11,14 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionRule;
+namespace Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionScope;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
-final class ForVariantsRuleConfigurationType extends AbstractType
+final class ForVariantsScopeConfigurationType extends AbstractType
 {
     private DataTransformerInterface $productVariantsToCodesTransformer;
 
@@ -43,6 +43,6 @@ final class ForVariantsRuleConfigurationType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'sylius_catalog_promotion_rule_variant_configuration';
+        return 'sylius_catalog_promotion_scope_variant_configuration';
     }
 }

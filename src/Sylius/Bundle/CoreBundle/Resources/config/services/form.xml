@@ -78,8 +78,8 @@
         <service id="sylius.form.extension.type.cart" class="Sylius\Bundle\CoreBundle\Form\Extension\CartTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\OrderBundle\Form\Type\CartType" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\Form\Extension\CatalogPromotionRuleTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionRuleType" />
+        <service id="Sylius\Bundle\CoreBundle\Form\Extension\CatalogPromotionScopeTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType" />
         </service>
         <service id="sylius.form.extension.type.cart_item" class="Sylius\Bundle\CoreBundle\Form\Extension\CartItemTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\OrderBundle\Form\Type\CartItemType" />
@@ -159,7 +159,7 @@
             <argument>%sylius.model.avatar_image.class%</argument>
             <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.for_variants_rule" class="Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionRule\ForVariantsRuleConfigurationType">
+        <service id="sylius.form.type.for_variants_scope" class="Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionScope\ForVariantsScopeConfigurationType">
             <argument type="service" id="sylius.form.type.data_transformer.product_variants_to_codes" />
             <tag name="form.type" />
         </service>
@@ -272,11 +272,11 @@
             <tag name="form.type" />
         </service>
 
-        <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionRuleType">
-            <argument>%sylius.model.catalog_promotion_rule.class%</argument>
+        <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType">
+            <argument>%sylius.model.catalog_promotion_scope.class%</argument>
             <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
             <argument type="collection">
-                <argument type="constant" key="sylius.form.catalog_promotion.rule.for_variants">Sylius\Component\Core\Model\CatalogPromotionRuleInterface::TYPE_FOR_VARIANTS</argument>
+                <argument type="constant" key="sylius.form.catalog_promotion.scope.for_variants">Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS</argument>
             </argument>
             <tag name="form.type" />
         </service>

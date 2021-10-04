@@ -45,7 +45,7 @@
         <property name="actions">
             <constraint name="Valid" />
         </property>
-        <property name="rules">
+        <property name="scopes">
             <constraint name="Valid" />
         </property>
     </class>

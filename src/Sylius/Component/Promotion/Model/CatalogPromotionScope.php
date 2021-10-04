@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Promotion\Model;
 
-class CatalogPromotionRule implements CatalogPromotionRuleInterface
+class CatalogPromotionScope implements CatalogPromotionScopeInterface
 {
     /** @var mixed */
     protected $id;

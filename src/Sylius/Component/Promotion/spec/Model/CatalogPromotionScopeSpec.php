@@ -15,13 +15,13 @@ namespace spec\Sylius\Component\Promotion\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionRuleInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 
-final class CatalogPromotionRuleSpec extends ObjectBehavior
+final class CatalogPromotionScopeSpec extends ObjectBehavior
 {
-    function it_is_a_catalog_promotion_rule(): void
+    function it_is_a_catalog_promotion_scope(): void
     {
-        $this->shouldImplement(CatalogPromotionRuleInterface::class);
+        $this->shouldImplement(CatalogPromotionScopeInterface::class);
     }
 
     function it_does_not_have_id_by_default(): void
