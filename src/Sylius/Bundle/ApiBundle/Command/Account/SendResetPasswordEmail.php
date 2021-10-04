@@ -16,11 +16,20 @@ namespace Sylius\Bundle\ApiBundle\Command\Account;
 /** @experimental */
 class SendResetPasswordEmail
 {
-    public string $email;
+    /**
+     * @var string
+     */
+    public $email;
 
-    public string $channelCode;
+    /**
+     * @var string
+     */
+    public $channelCode;
 
-    public string $localeCode;
+    /**
+     * @var string
+     */
+    public $localeCode;
 
     public function __construct(
         string $email,

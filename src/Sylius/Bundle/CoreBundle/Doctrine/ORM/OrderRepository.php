@@ -30,7 +30,8 @@ use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 class OrderRepository extends BaseOrderRepository implements OrderRepositoryInterface
 {
-    protected AssociationHydrator $associationHydrator;
+    /** @var AssociationHydrator */
+    protected $associationHydrator;
 
     public function __construct(EntityManager $entityManager, ClassMetadata $class)
     {

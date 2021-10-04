@@ -15,7 +15,8 @@ namespace Sylius\Bundle\ApiBundle\Event;
 
 class OrderCompleted
 {
-    public string $orderToken;
+    /** @var string */
+    public $orderToken;
 
     public function __construct(string $orderToken)
     {

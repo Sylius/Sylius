@@ -33,35 +33,38 @@ class Product implements ProductInterface
     /** @var mixed */
     protected $id;
 
-    protected ?string $code = null;
+    /**
+     * @var string|null
+     */
+    protected $code;
 
     /**
      * @var Collection|AttributeValueInterface[]
      *
      * @psalm-var Collection<array-key, AttributeValueInterface>
      */
-    protected Collection $attributes;
+    protected $attributes;
 
     /**
      * @var Collection|ProductVariantInterface[]
      *
      * @psalm-var Collection<array-key, ProductVariantInterface>
      */
-    protected Collection $variants;
+    protected $variants;
 
     /**
      * @var Collection|ProductOptionInterface[]
      *
      * @psalm-var Collection<array-key, ProductOptionInterface>
      */
-    protected Collection $options;
+    protected $options;
 
     /**
      * @var Collection|ProductAssociationInterface[]
      *
      * @psalm-var Collection<array-key, ProductAssociationInterface>
      */
-    protected Collection $associations;
+    protected $associations;
 
     public function __construct()
     {

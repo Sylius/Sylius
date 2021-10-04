@@ -18,12 +18,12 @@ use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AttributeChoiceType extends AbstractType
 {
-    protected RepositoryInterface $attributeRepository;
+    /** @var RepositoryInterface */
+    protected $attributeRepository;
 
     public function __construct(RepositoryInterface $attributeRepository)
     {

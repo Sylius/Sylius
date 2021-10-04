@@ -20,7 +20,10 @@ class ProductVariantTranslation extends AbstractTranslation implements ProductVa
     /** @var mixed */
     protected $id;
 
-    protected ?string $name = null;
+    /**
+     * @var string|null
+     */
+    protected $name;
 
     public function getId()
     {

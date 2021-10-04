@@ -27,7 +27,8 @@ use Payum\Core\Storage\AbstractStorage;
  */
 class DoctrineStorage extends AbstractStorage
 {
-    protected ObjectManager $objectManager;
+    /** @var ObjectManager */
+    protected $objectManager;
 
     public function __construct(ObjectManager $objectManager, $modelClass)
     {

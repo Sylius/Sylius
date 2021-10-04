@@ -18,13 +18,25 @@ class ChannelPricing implements ChannelPricingInterface
     /** @var mixed */
     protected $id = null;
 
-    protected ?string $channelCode = null;
+    /**
+     * @var string|null
+     */
+    protected $channelCode;
 
-    protected ?ProductVariantInterface $productVariant = null;
+    /**
+     * @var ProductVariantInterface|null
+     */
+    protected $productVariant;
 
-    protected ?int $price = null;
+    /**
+     * @var int|null
+     */
+    protected $price;
 
-    protected ?int $originalPrice = null;
+    /**
+     * @var int|null
+     */
+    protected $originalPrice;
 
     /** @var ?array */
     protected $appliedPromotions = [];

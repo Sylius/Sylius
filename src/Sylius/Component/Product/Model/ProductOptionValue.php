@@ -26,9 +26,15 @@ class ProductOptionValue implements ProductOptionValueInterface
     /** @var mixed */
     protected $id;
 
-    protected ?string $code = null;
+    /**
+     * @var string|null
+     */
+    protected $code;
 
-    protected ?ProductOptionInterface $option = null;
+    /**
+     * @var ProductOptionInterface|null
+     */
+    protected $option;
 
     public function __construct()
     {

@@ -28,9 +28,15 @@ class ProductAssociationType implements ProductAssociationTypeInterface
     /** @var mixed */
     protected $id = null;
 
-    protected ?string $code = null;
+    /**
+     * @var string|null
+     */
+    protected $code;
 
-    protected ?string $name = null;
+    /**
+     * @var string|null
+     */
+    protected $name;
 
     public function __construct()
     {

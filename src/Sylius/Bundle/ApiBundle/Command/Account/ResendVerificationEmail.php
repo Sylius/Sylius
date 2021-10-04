@@ -25,14 +25,16 @@ class ResendVerificationEmail implements ShopUserIdAwareInterface, ChannelCodeAw
     public $shopUserId = null;
 
     /**
+     * @psalm-immutable
      * @var string|null
      */
-    public ?string $channelCode = null;
+    public $channelCode;
 
     /**
+     * @psalm-immutable
      * @var string|null
      */
-    public ?string $localeCode = null;
+    public $localeCode;
 
     public function getChannelCode(): string
     {

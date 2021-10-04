@@ -18,11 +18,20 @@ class Reviewer implements ReviewerInterface
     /** @var mixed */
     protected $id = null;
 
-    protected ?string $email = null;
+    /**
+     * @var string|null
+     */
+    protected $email;
 
-    protected ?string $firstName = null;
+    /**
+     * @var string|null
+     */
+    protected $firstName;
 
-    protected ?string $lastName = null;
+    /**
+     * @var string|null
+     */
+    protected $lastName;
 
     /**
      * @return mixed

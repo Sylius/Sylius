@@ -20,11 +20,20 @@ use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 /** @experimental */
 class RequestResetPasswordToken implements ChannelCodeAwareInterface, LocaleCodeAwareInterface, IriToIdentifierConversionAwareInterface
 {
-    public string $email;
+    /**
+     * @var string
+     */
+    public $email;
 
-    public ?string $channelCode = null;
+    /**
+     * @var string|null
+     */
+    public $channelCode;
 
-    public ?string $localeCode = null;
+    /**
+     * @var string|null
+     */
+    public $localeCode;
 
     public function __construct(string $email)
     {

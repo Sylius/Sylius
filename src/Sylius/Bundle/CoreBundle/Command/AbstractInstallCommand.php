@@ -36,7 +36,8 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     /** @deprecated */
     public const WEB_MEDIA_IMAGE_DIRECTORY = 'web/media/image/';
 
-    protected ?CommandExecutor $commandExecutor = null;
+    /** @var CommandExecutor|null */
+    protected $commandExecutor = null;
 
     protected function initialize(InputInterface $input, OutputInterface $output)
     {

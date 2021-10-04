@@ -19,14 +19,21 @@ use Sylius\Bundle\ApiBundle\Command\SubresourceIdAwareInterface;
 /** @experimental */
 class ChangeItemQuantityInCart implements OrderTokenValueAwareInterface, SubresourceIdAwareInterface
 {
-    public ?string $orderTokenValue = null;
+    /**
+     * @var string|null
+     */
+    public $orderTokenValue;
 
-    public ?string $orderItemId = null;
+    /**
+     * @var string|null
+     */
+    public $orderItemId;
 
     /**
      * @psalm-immutable
+     * @var int
      */
-    public int $quantity;
+    public $quantity;
 
     public function __construct(int $quantity)
     {

@@ -19,17 +19,22 @@ use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 /** @experimental */
 class AddItemToCart implements OrderTokenValueAwareInterface, IriToIdentifierConversionAwareInterface
 {
-    public ?string $orderTokenValue = null;
+    /**
+     * @var string|null
+     */
+    public $orderTokenValue;
 
     /**
      * @psalm-immutable
+     * @var string
      */
-    public string $productVariantCode;
+    public $productVariantCode;
 
     /**
      * @psalm-immutable
+     * @var int
      */
-    public int $quantity;
+    public $quantity;
 
     public function __construct(string $productVariantCode, int $quantity)
     {

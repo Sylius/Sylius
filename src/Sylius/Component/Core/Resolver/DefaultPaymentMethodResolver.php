@@ -24,7 +24,8 @@ use Webmozart\Assert\Assert;
 
 class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterface
 {
-    protected PaymentMethodRepositoryInterface $paymentMethodRepository;
+    /** @var PaymentMethodRepositoryInterface */
+    protected $paymentMethodRepository;
 
     public function __construct(PaymentMethodRepositoryInterface $paymentMethodRepository)
     {

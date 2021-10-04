@@ -20,11 +20,20 @@ class TaxonTranslation extends AbstractTranslation implements TaxonTranslationIn
     /** @var mixed */
     protected $id;
 
-    protected ?string $name = null;
+    /**
+     * @var string|null
+     */
+    protected $name;
 
-    protected ?string $slug = null;
+    /**
+     * @var string|null
+     */
+    protected $slug;
 
-    protected ?string $description = null;
+    /**
+     * @var string|null
+     */
+    protected $description;
 
     public function __toString(): string
     {

@@ -21,20 +21,32 @@ class Zone implements ZoneInterface
     /** @var mixed */
     protected $id;
 
-    protected ?string $code = null;
+    /**
+     * @var string|null
+     */
+    protected $code;
 
-    protected ?string $name = null;
+    /**
+     * @var string|null
+     */
+    protected $name;
 
-    protected ?string $type = null;
+    /**
+     * @var string|null
+     */
+    protected $type;
 
-    protected ?string $scope = Scope::ALL;
+    /**
+     * @var string
+     */
+    protected $scope = Scope::ALL;
 
     /**
      * @var Collection|ZoneMemberInterface[]
      *
      * @psalm-var Collection<array-key, ZoneMemberInterface>
      */
-    protected Collection $members;
+    protected $members;
 
     public function __construct()
     {

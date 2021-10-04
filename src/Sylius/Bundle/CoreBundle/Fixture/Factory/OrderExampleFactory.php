@@ -43,37 +43,53 @@ use Webmozart\Assert\Assert;
 
 class OrderExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    protected \Sylius\Component\Resource\Factory\FactoryInterface $orderFactory;
+    /** @var FactoryInterface */
+    protected $orderFactory;
 
-    protected \Sylius\Component\Resource\Factory\FactoryInterface $orderItemFactory;
+    /** @var FactoryInterface */
+    protected $orderItemFactory;
 
-    protected OrderItemQuantityModifierInterface $orderItemQuantityModifier;
+    /** @var OrderItemQuantityModifierInterface */
+    protected $orderItemQuantityModifier;
 
-    protected ObjectManager $orderManager;
+    /** @var ObjectManager */
+    protected $orderManager;
 
-    protected RepositoryInterface $channelRepository;
+    /** @var RepositoryInterface */
+    protected $channelRepository;
 
-    protected RepositoryInterface $customerRepository;
+    /** @var RepositoryInterface */
+    protected $customerRepository;
 
-    protected ProductRepositoryInterface $productRepository;
+    /** @var ProductRepositoryInterface */
+    protected $productRepository;
 
-    protected RepositoryInterface $countryRepository;
+    /** @var RepositoryInterface */
+    protected $countryRepository;
 
-    protected PaymentMethodRepositoryInterface $paymentMethodRepository;
+    /** @var PaymentMethodRepositoryInterface */
+    protected $paymentMethodRepository;
 
-    protected ShippingMethodRepositoryInterface $shippingMethodRepository;
+    /** @var ShippingMethodRepositoryInterface */
+    protected $shippingMethodRepository;
 
-    protected \Sylius\Component\Resource\Factory\FactoryInterface $addressFactory;
+    /** @var FactoryInterface */
+    protected $addressFactory;
 
-    protected StateMachineFactoryInterface $stateMachineFactory;
+    /** @var StateMachineFactoryInterface */
+    protected $stateMachineFactory;
 
-    protected OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker;
+    /** @var OrderShippingMethodSelectionRequirementCheckerInterface */
+    protected $orderShippingMethodSelectionRequirementChecker;
 
-    protected OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker;
+    /** @var OrderPaymentMethodSelectionRequirementCheckerInterface */
+    protected $orderPaymentMethodSelectionRequirementChecker;
 
-    protected OptionsResolver $optionsResolver;
+    /** @var OptionsResolver */
+    protected $optionsResolver;
 
-    protected Generator $faker;
+    /** @var Generator */
+    protected $faker;
 
     public function __construct(
         FactoryInterface $orderFactory,

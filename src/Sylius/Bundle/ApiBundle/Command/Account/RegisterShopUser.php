@@ -23,32 +23,43 @@ class RegisterShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInte
 {
     /**
      * @psalm-immutable
+     * @var string
      */
-    public string $firstName;
+    public $firstName;
 
     /**
      * @psalm-immutable
+     * @var string
      */
-    public string $lastName;
+    public $lastName;
 
     /**
      * @psalm-immutable
+     * @var string
      */
-    public string $email;
+    public $email;
 
     /**
      * @psalm-immutable
+     * @var string
      */
-    public string $password;
+    public $password;
 
     /**
      * @psalm-immutable
+     * @var bool
      */
-    public bool $subscribedToNewsletter;
+    public $subscribedToNewsletter;
 
-    public ?string $channelCode = null;
+    /**
+     * @var string|null
+     */
+    public $channelCode;
 
-    public ?string $localeCode = null;
+    /**
+     * @var string|null
+     */
+    public $localeCode;
 
     public function __construct(
         string $firstName,

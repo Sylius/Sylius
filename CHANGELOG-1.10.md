@@ -1,5 +1,36 @@
 # CHANGELOG FOR `1.10.X`
 
+## v1.10.4 (2021-09-30)
+
+#### Details
+
+- [#13160](https://github.com/Sylius/Sylius/issues/13160) Remove types in public and protected properties in not final classes ([@Zales0123](https://github.com/Zales0123))
+
+## v1.10.3 (2021-09-30)
+
+#### Details
+
+- [#12222](https://github.com/Sylius/Sylius/issues/12222) logo path corrected ([@Snowbaha](https://github.com/Snowbaha), [@CoderMaggie](https://github.com/CoderMaggie))
+- [#12452](https://github.com/Sylius/Sylius/issues/12452) [Doc] Customizing admin routes prefix ([@oallain](https://github.com/oallain), [@CoderMaggie](https://github.com/CoderMaggie))
+- [#12637](https://github.com/Sylius/Sylius/issues/12637) Missing Behat directory on the path to be excluded ([@tonicospinelli](https://github.com/tonicospinelli))
+- [#12786](https://github.com/Sylius/Sylius/issues/12786) [Documentation] Fixed Incorrect Theme Directory And Incorrect Import Paths ([@tugrulgencoglu](https://github.com/tugrulgencoglu))
+- [#12824](https://github.com/Sylius/Sylius/issues/12824) [Documentation] Fixed logo customization  (, [@CoderMaggie](https://github.com/CoderMaggie))
+- [#12849](https://github.com/Sylius/Sylius/issues/12849) [Docs] Webpack - Display logo on login page ([@Jibbarth](https://github.com/Jibbarth))
+- [#12863](https://github.com/Sylius/Sylius/issues/12863) Add yaml configuration examples to the "Custom Payment Gateway" cookbook ([@DennisCodeBuds](https://github.com/DennisCodeBuds))
+- [#12892](https://github.com/Sylius/Sylius/issues/12892) [DOCS] Add note about docker builder ([@arti0090](https://github.com/arti0090))
+- [#12982](https://github.com/Sylius/Sylius/issues/12982) [Docs] Fix link to token generation for API ([@lchrusciel](https://github.com/lchrusciel))
+- [#13012](https://github.com/Sylius/Sylius/issues/13012) Use PHP 7.4 syntax in Sylius components ([@Zales0123](https://github.com/Zales0123))
+- [#13038](https://github.com/Sylius/Sylius/issues/13038) PHP 7.4 syntax in Sylius bundles vol.1 ([@Zales0123](https://github.com/Zales0123))
+- [#13039](https://github.com/Sylius/Sylius/issues/13039) PHP 7.4 syntax in bundles vol.2 ([@Zales0123](https://github.com/Zales0123))
+- [#13040](https://github.com/Sylius/Sylius/issues/13040) PHP 7.4 syntax in bundles vol.3 ([@Zales0123](https://github.com/Zales0123))
+- [#13069](https://github.com/Sylius/Sylius/issues/13069) [API] Fix command denormalizer to not throw exception if command does not have constructor ([@lchrusciel](https://github.com/lchrusciel))
+- [#13070](https://github.com/Sylius/Sylius/issues/13070) [Minor][DI] Add interface alias to UriBasedSectionProvider ([@lchrusciel](https://github.com/lchrusciel))
+- [#13088](https://github.com/Sylius/Sylius/issues/13088) [Docs][Customization Guide][API] Headlines fix ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#13102](https://github.com/Sylius/Sylius/issues/13102) Check if the form is submitted before validation ([@jacquesbh](https://github.com/jacquesbh))
+- [#13116](https://github.com/Sylius/Sylius/issues/13116) PHP 7.4 syntax in Behat ([@Zales0123](https://github.com/Zales0123))
+- [#13154](https://github.com/Sylius/Sylius/issues/13154) [API] Do not allow to address empty cart ([@Zales0123](https://github.com/Zales0123))
+- [#13159](https://github.com/Sylius/Sylius/issues/13159) [Build][Hot-fix] Ignore PHPStan analysis for StringInflector ([@Zales0123](https://github.com/Zales0123))
+
 ## v1.10.2 (2021-09-02)
 
 #### Details

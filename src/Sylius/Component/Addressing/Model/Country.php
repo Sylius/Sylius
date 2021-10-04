@@ -27,15 +27,16 @@ class Country implements CountryInterface
 
     /**
      * Country code ISO 3166-1 alpha-2.
+     * @var string|null
      */
-    protected ?string $code = null;
+    protected $code;
 
     /**
      * @var Collection|ProvinceInterface[]
      *
      * @psalm-var Collection<array-key, ProvinceInterface>
      */
-    protected Collection $provinces;
+    protected $provinces;
 
     public function __construct()
     {

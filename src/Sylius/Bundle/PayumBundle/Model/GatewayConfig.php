@@ -17,7 +17,8 @@ use Payum\Core\Model\GatewayConfig as BaseGatewayConfig;
 
 class GatewayConfig extends BaseGatewayConfig implements GatewayConfigInterface
 {
-    protected int $id;
+    /** @var int */
+    protected $id;
 
     public function getId(): int
     {

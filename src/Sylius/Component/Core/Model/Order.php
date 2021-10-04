@@ -29,50 +29,86 @@ use Webmozart\Assert\Assert;
 
 class Order extends BaseOrder implements OrderInterface
 {
-    protected ?CustomerInterface $customer = null;
+    /**
+     * @var \Sylius\Component\Core\Model\CustomerInterface|null
+     */
+    protected $customer;
 
-    protected ?ChannelInterface $channel = null;
+    /**
+     * @var \Sylius\Component\Core\Model\ChannelInterface|null
+     */
+    protected $channel;
 
-    protected ?AddressInterface $shippingAddress = null;
+    /**
+     * @var AddressInterface|null
+     */
+    protected $shippingAddress;
 
-    protected ?AddressInterface $billingAddress = null;
+    /**
+     * @var AddressInterface|null
+     */
+    protected $billingAddress;
 
     /**
      * @var Collection|PaymentInterface[]
      *
      * @psalm-var Collection<array-key, PaymentInterface>
      */
-    protected Collection $payments;
+    protected $payments;
 
     /**
      * @var Collection|ShipmentInterface[]
      *
      * @psalm-var Collection<array-key, ShipmentInterface>
      */
-    protected Collection $shipments;
+    protected $shipments;
 
-    protected ?string $currencyCode = null;
+    /**
+     * @var string|null
+     */
+    protected $currencyCode;
 
-    protected ?string $localeCode = null;
+    /**
+     * @var string|null
+     */
+    protected $localeCode;
 
-    protected ?BaseCouponInterface $promotionCoupon = null;
+    /**
+     * @var BaseCouponInterface|null
+     */
+    protected $promotionCoupon;
 
-    protected ?string $checkoutState = OrderCheckoutStates::STATE_CART;
+    /**
+     * @var string
+     */
+    protected $checkoutState = OrderCheckoutStates::STATE_CART;
 
-    protected ?string $paymentState = OrderPaymentStates::STATE_CART;
+    /**
+     * @var string
+     */
+    protected $paymentState = OrderPaymentStates::STATE_CART;
 
-    protected ?string $shippingState = OrderShippingStates::STATE_CART;
+    /**
+     * @var string
+     */
+    protected $shippingState = OrderShippingStates::STATE_CART;
 
     /**
      * @var Collection|BasePromotionInterface[]
      *
      * @psalm-var Collection<array-key, BasePromotionInterface>
      */
-    protected Collection $promotions;
+    protected $promotions;
 
-    protected ?string $tokenValue = null;
+    /**
+     * @var string|null
+     */
+    protected $tokenValue;
 
-    protected ?string $customerIp = null;
+    /**
+     * @var string|null
+     */
+    protected $customerIp;
 
     public function __construct()
     {

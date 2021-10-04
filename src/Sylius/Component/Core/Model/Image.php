@@ -18,13 +18,25 @@ abstract class Image implements ImageInterface
     /** @var mixed */
     protected $id = null;
 
-    protected ?string $type = null;
+    /**
+     * @var string|null
+     */
+    protected $type;
 
-    protected ?\SplFileInfo $file = null;
+    /**
+     * @var \SplFileInfo|null
+     */
+    protected $file;
 
-    protected ?string $path = null;
+    /**
+     * @var string|null
+     */
+    protected $path;
 
-    protected ?object $owner = null;
+    /**
+     * @var object|null
+     */
+    protected $owner;
 
     public function getId()
     {

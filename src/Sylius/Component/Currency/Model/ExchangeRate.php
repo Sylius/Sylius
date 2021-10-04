@@ -22,11 +22,20 @@ class ExchangeRate implements ExchangeRateInterface
     /** @var mixed */
     protected $id;
 
-    protected ?float $ratio = null;
+    /**
+     * @var float|null
+     */
+    protected $ratio;
 
-    protected ?CurrencyInterface $sourceCurrency = null;
+    /**
+     * @var CurrencyInterface|null
+     */
+    protected $sourceCurrency;
 
-    protected ?CurrencyInterface $targetCurrency = null;
+    /**
+     * @var CurrencyInterface|null
+     */
+    protected $targetCurrency;
 
     public function __construct()
     {

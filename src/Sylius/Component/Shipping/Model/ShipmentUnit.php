@@ -22,9 +22,15 @@ class ShipmentUnit implements ShipmentUnitInterface
     /** @var mixed */
     protected $id;
 
-    protected ?ShipmentInterface $shipment = null;
+    /**
+     * @var ShipmentInterface|null
+     */
+    protected $shipment;
 
-    protected ?ShippableInterface $shippable = null;
+    /**
+     * @var ShippableInterface|null
+     */
+    protected $shippable;
 
     public function __construct()
     {

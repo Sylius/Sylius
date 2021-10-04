@@ -21,28 +21,33 @@ class AddProductReview implements IriToIdentifierConversionAwareInterface, Custo
 {
     /**
      * @psalm-immutable
+     * @var string|null
      */
-    public ?string $title;
+    public $title;
 
     /**
      * @psalm-immutable
+     * @var int|null
      */
-    public ?int $rating;
+    public $rating;
 
     /**
      * @psalm-immutable
+     * @var string|null
      */
-    public ?string $comment;
+    public $comment;
 
     /**
      * @psalm-immutable
+     * @var string
      */
-    public string $productCode;
+    public $productCode;
 
     /**
      * @psalm-immutable
+     * @var string|null
      */
-    public ?string $email;
+    public $email;
 
     public function __construct(
         ?string $title,

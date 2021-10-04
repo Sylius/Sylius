@@ -21,7 +21,8 @@ use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 class AttributeRepository extends EntityRepository
 {
-    protected AssociationHydrator $associationHydrator;
+    /** @var AssociationHydrator */
+    protected $associationHydrator;
 
     public function __construct(EntityManager $entityManager, ClassMetadata $class)
     {

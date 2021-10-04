@@ -1,5 +1,18 @@
 # CHANGELOG FOR `1.9.X`
 
+## v1.9.8 (2021-09-30)
+
+- [#12222](https://github.com/Sylius/Sylius/issues/12222) logo path corrected ([@Snowbaha](https://github.com/Snowbaha), [@CoderMaggie](https://github.com/CoderMaggie))
+- [#12452](https://github.com/Sylius/Sylius/issues/12452) [Doc] Customizing admin routes prefix ([@oallain](https://github.com/oallain), [@CoderMaggie](https://github.com/CoderMaggie))
+- [#12637](https://github.com/Sylius/Sylius/issues/12637) Missing Behat directory on the path to be excluded ([@tonicospinelli](https://github.com/tonicospinelli))
+- [#12824](https://github.com/Sylius/Sylius/issues/12824) [Documentation] Fixed logo customization  (, [@CoderMaggie](https://github.com/CoderMaggie))
+- [#12849](https://github.com/Sylius/Sylius/issues/12849) [Docs] Webpack - Display logo on login page ([@Jibbarth](https://github.com/Jibbarth))
+- [#12863](https://github.com/Sylius/Sylius/issues/12863) Add yaml configuration examples to the "Custom Payment Gateway" cookbook ([@DennisCodeBuds](https://github.com/DennisCodeBuds))
+- [#12892](https://github.com/Sylius/Sylius/issues/12892) [DOCS] Add note about docker builder ([@arti0090](https://github.com/arti0090))
+- [#13070](https://github.com/Sylius/Sylius/issues/13070) [Minor][DI] Add interface alias to UriBasedSectionProvider ([@lchrusciel](https://github.com/lchrusciel))
+- [#13102](https://github.com/Sylius/Sylius/issues/13102) Check if the form is submitted before validation ([@jacquesbh](https://github.com/jacquesbh))
+- [#13154](https://github.com/Sylius/Sylius/issues/13154) [API] Do not allow to address empty cart ([@Zales0123](https://github.com/Zales0123))
+
 ## v1.9.7 (2021-09-02)
 
 #### Details
