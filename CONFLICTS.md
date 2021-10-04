@@ -36,3 +36,9 @@ references related issues.
    The potential solution would be to explicitly define these translation entities as API resources with proper serialization.
 
    Probably introduced in: https://github.com/symfony/symfony/pull/40811
+
+- `doctrine/orm:2.10.0`:
+
+  This version causes a problem with the creation of nested taxons by throwing the exception:
+  
+  `Gedmo\Exception\UnexpectedValueException: Root cannot be changed manually, change parent instead in vendor/gedmo/doctrine-extensions/src/Tree/Strategy/ORM/Nested.php:145`
