@@ -19,13 +19,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class CatalogPromotionScopeType extends AbstractResourceType
 {
-    private array $ruleTypes;
+    private array $scopeTypes;
 
-    public function __construct(string $dataClass, array $validationGroups = [], array $ruleTypes = [])
+    public function __construct(string $dataClass, array $validationGroups = [], array $scopeTypes = [])
     {
         parent::__construct($dataClass, $validationGroups);
 
-        $this->ruleTypes = $ruleTypes;
+        $this->scopeTypes = $scopeTypes;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -33,7 +33,7 @@ final class CatalogPromotionScopeType extends AbstractResourceType
         $builder
             ->add('type', ChoiceType::class, [
                 'label' => 'sylius.ui.type',
-                'choices' => $this->ruleTypes,
+                'choices' => $this->scopeTypes,
             ])
         ;
     }
