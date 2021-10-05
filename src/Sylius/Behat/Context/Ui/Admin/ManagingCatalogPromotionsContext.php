@@ -19,7 +19,6 @@ use Sylius\Behat\Page\Admin\CatalogPromotion\CreatePageInterface;
 use Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
@@ -217,7 +216,7 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @When /^I edit ("[^"]+" catalog promotion) to be applied on ("[^"]+" variant)$/
      */
-    public function iEditCatalogPromotionToBeAppliedOn(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface $productVariant): void
+    public function iEditCatalogPromotionToBeAppliedOnVariant(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface $productVariant): void
     {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
