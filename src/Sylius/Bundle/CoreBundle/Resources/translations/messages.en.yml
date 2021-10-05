@@ -39,7 +39,7 @@ sylius:
             coupon: Coupon
         catalog_promotion:
             channels: Channels
-            rule:
+            scope:
                 for_variants: For variants
         checkout:
             addressing:
