@@ -725,6 +725,7 @@ sylius:
         save_changes: 'Save changes'
         save_positions: 'Save positions'
         scope: 'Scope'
+        scopes: 'Scopes'
         search: 'Search'
         search_products: 'Search products'
         security_settings: 'Security Settings'
