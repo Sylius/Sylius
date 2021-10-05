@@ -21,6 +21,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
@@ -158,6 +159,20 @@ final class ManagingCatalogPromotionsContext implements Context
 
         $this->formElement->addScope();
         $this->formElement->chooseLastScopeVariants($variantCodes);
+    }
+
+    /**
+     * @When /^I add scope that applies on ("[^"]+" taxon)$/
+     */
+    public function iAddScopeThatAppliesOnTaxons(TaxonInterface ...$taxons): void
+    {
+        $taxonsCodes = array_map(function(TaxonInterface $taxon) {
+            return $taxon->getCode();
+        }, $taxons);
+
+        $this->formElement->addScope();
+        $this->formElement->chooseScopeType('For Taxons');
+        $this->formElement->chooseLastScopeTaxons($taxonsCodes);
     }
 
     /**
@@ -398,14 +413,32 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @Then /^("[^"]+" catalog promotion) should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
      */
-    public function itShouldHaveScope(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface ...$variants): void
-    {
+    public function itShouldHaveVariantBasedScope(
+        CatalogPromotionInterface $catalogPromotion,
+        ProductVariantInterface ...$variants
+    ): void {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
         $selectedVariants = $this->formElement->getLastScopeVariantCodes();
 
         foreach ($variants as $productVariant) {
             Assert::inArray($productVariant->getCode(), $selectedVariants);
+        }
+    }
+
+    /**
+     * @Then /^("[^"]+" catalog promotion) should apply to all products from ("[^"]+" taxon)$/
+     */
+    public function itShouldHaveTaxonsBasedScope(
+        CatalogPromotionInterface $catalogPromotion,
+        TaxonInterface ...$taxons
+    ): void {
+        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
+
+        $selectedTaxons = $this->formElement->getLastScopeVariantCodes();
+
+        foreach ($taxons as $taxon) {
+            Assert::inArray($taxon->getCode(), $selectedTaxons);
         }
     }
 

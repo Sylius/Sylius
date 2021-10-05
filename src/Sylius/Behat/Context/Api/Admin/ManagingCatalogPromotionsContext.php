@@ -639,7 +639,7 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @Then :catalogPromotionName catalog promotion should apply to all products from :taxon taxon
      */
-    public function catalogPromotionShouldApplyToTaxon(string $catalogPromotionName, TaxonInterface $taxon): void
+    public function catalogPromotionShouldApplyToAllProductsFromTaxons(string $catalogPromotionName, TaxonInterface $taxon): void
     {
         Assert::same(
             ['taxons' => [$taxon->getCode()]],
