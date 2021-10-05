@@ -91,7 +91,7 @@ Apply the following changes to the ``src/Entity/Addressing/Country.php`` file th
 
 Under the ``sylius_*`` where ``*`` is the name of the bundle of the model you are customizing, in our case it will be the ``SyliusAddressingBundle`` -> ``sylius_addressing``.
 
-That in Sylius-Standard configuration is overriden already.
+That in Sylius-Standard configuration is overridden already.
 
 .. code-block:: yaml
 
@@ -227,7 +227,7 @@ Apply the following changes to the ``src/Entity/Shipping/ShippingMethod.php`` fi
 Under the ``sylius_*`` where ``*`` is the name of the bundle of the model you are customizing,
 in our case it will be the ``SyliusShippingBundle`` -> ``sylius_shipping``.
 
-That in Sylius-Standard configuration is overriden already, but you may check if it correctly overriden.
+That in Sylius-Standard configuration is overridden already, but you may check if it is correctly overridden.
 
 .. code-block:: yaml
 

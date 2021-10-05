@@ -87,7 +87,7 @@ You have the following parameters available:
 Contact Request
 ---------------
 
-This e-mail is sent when a customer validades contact form.
+This e-mail is sent when a customer validates contact form.
 
 **Code**: ``contact_request``
 
