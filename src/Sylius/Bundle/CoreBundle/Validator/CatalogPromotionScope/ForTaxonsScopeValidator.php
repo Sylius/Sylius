@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScope;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Webmozart\Assert\Assert;
 
 final class ForTaxonsScopeValidator implements ScopeValidatorInterface
@@ -27,21 +28,23 @@ final class ForTaxonsScopeValidator implements ScopeValidatorInterface
         $this->taxonRepository = $taxonRepository;
     }
 
-    public function validate(array $configuration, Constraint $constraint): array
+    public function validate(array $configuration, Constraint $constraint, ExecutionContextInterface $context): void
     {
         /** @var CatalogPromotionScope $constraint */
         Assert::isInstanceOf($constraint, CatalogPromotionScope::class);
 
         if (!isset($configuration['taxons']) || empty($configuration['taxons'])) {
-            return ['configuration.taxons' => $constraint->taxonsNotEmpty];
+            $context->buildViolation($constraint->taxonsNotEmpty)->atPath('configuration.taxons')->addViolation();
+
+            return;
         }
 
         foreach ($configuration['taxons'] as $taxonCode) {
             if (null === $this->taxonRepository->findOneBy(['code' => $taxonCode])) {
-                return ['configuration.taxons' => $constraint->invalidTaxons];
+                $context->buildViolation($constraint->invalidTaxons)->atPath('configuration.taxons')->addViolation();
+
+                return;
             }
         }
-
-        return [];
     }
 }

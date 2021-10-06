@@ -43,14 +43,15 @@ final class CatalogPromotionScopeValidator extends ConstraintValidator
             return;
         }
 
+        $type = $value->getType();
+        if (!key_exists($type, $this->scopeValidators)) {
+            return;
+        }
+
         $configuration = $value->getConfiguration();
 
         /** @var ScopeValidatorInterface $validator */
-        $validator = $this->scopeValidators[$value->getType()];
-        $violations = $validator->validate($configuration, $constraint);
-
-        foreach ($violations as $path => $message) {
-            $this->context->buildViolation($message)->atPath($path)->addViolation();
-        }
+        $validator = $this->scopeValidators[$type];
+        $validator->validate($configuration, $constraint, $this->context);
     }
 }

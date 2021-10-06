@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope;
 
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 interface ScopeValidatorInterface
 {
-    public function validate(array $configuration, Constraint $constraint): array;
+    public function validate(array $configuration, Constraint $constraint, ExecutionContextInterface $context): void;
 }

@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScope;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Webmozart\Assert\Assert;
 
 final class ForVariantsScopeValidator implements ScopeValidatorInterface
@@ -27,21 +28,23 @@ final class ForVariantsScopeValidator implements ScopeValidatorInterface
         $this->variantRepository = $variantRepository;
     }
 
-    public function validate(array $configuration, Constraint $constraint): array
+    public function validate(array $configuration, Constraint $constraint, ExecutionContextInterface $context): void
     {
         /** @var CatalogPromotionScope $constraint */
         Assert::isInstanceOf($constraint, CatalogPromotionScope::class);
 
         if (!array_key_exists('variants', $configuration) || empty($configuration['variants'])) {
-            return ['configuration.variants' => $constraint->variantsNotEmpty];
+            $context->buildViolation($constraint->variantsNotEmpty)->atPath('configuration.variants')->addViolation();
+
+            return;
         }
 
         foreach ($configuration['variants'] as $variantCode) {
             if (null === $this->variantRepository->findOneBy(['code' => $variantCode])) {
-                return ['configuration.variants' => $constraint->invalidVariants];
+                $context->buildViolation($constraint->invalidVariants)->atPath('configuration.variants')->addViolation();
+
+                return;
             }
         }
-
-        return [];
     }
 }

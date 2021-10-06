@@ -50,37 +50,29 @@ final class CatalogPromotionScopeValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_catalog_promotion_scope_has_invalid_type(
         ExecutionContextInterface $executionContext,
         ConstraintViolationBuilderInterface $constraintViolationBuilder,
-        CatalogPromotionScopeInterface $rule
+        CatalogPromotionScopeInterface $scope
     ): void {
-        $rule->getType()->willReturn('wrong_type');
+        $scope->getType()->willReturn('wrong_type');
 
         $executionContext->buildViolation('sylius.catalog_promotion_scope.invalid_type')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('type')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
-        $this->validate($rule, new CatalogPromotionScope());
+        $this->validate($scope, new CatalogPromotionScope());
     }
 
-    function it_adds_violation_if_scope_validator_returns_one(
+    function it_calls_a_proper_validator_to_validate_the_configuration(
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder,
-        CatalogPromotionScopeInterface $rule,
+        CatalogPromotionScopeInterface $scope,
         ScopeValidatorInterface $forVariantsValidator
     ): void {
         $constraint = new CatalogPromotionScope();
 
-        $rule->getType()->willReturn(CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS);
-        $rule->getConfiguration()->willReturn([]);
+        $scope->getType()->willReturn(CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS);
+        $scope->getConfiguration()->willReturn([]);
 
-        $forVariantsValidator
-            ->validate([], $constraint)
-            ->willReturn(['configuration.variants' => 'sylius.catalog_promotion_scope.for_variants.not_empty'])
-        ;
+        $forVariantsValidator->validate([], $constraint, $executionContext)->shouldBeCalled();
 
-        $executionContext->buildViolation('sylius.catalog_promotion_scope.for_variants.not_empty')->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->atPath('configuration.variants')->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->addViolation()->shouldBeCalled();
-
-        $this->validate($rule, $constraint);
+        $this->validate($scope, $constraint);
     }
 }

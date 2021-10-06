@@ -18,6 +18,8 @@ use Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ScopeValidatorInter
 use Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScope;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class ForTaxonsScopeValidatorSpec extends ObjectBehavior
 {
@@ -31,31 +33,41 @@ final class ForTaxonsScopeValidatorSpec extends ObjectBehavior
         $this->shouldHaveType(ScopeValidatorInterface::class);
     }
 
-    function it_prepares_array_with_violation_if_catalog_promotion_scope_does_not_have_taxons_key_configured(): void
-    {
-        $this
-            ->validate([], new CatalogPromotionScope())
-            ->shouldReturn(['configuration.taxons' => 'sylius.catalog_promotion_scope.for_taxons.not_empty'])
-        ;
+    function it_adds_violation_if_catalog_promotion_scope_does_not_have_taxons_key_configured(
+        ExecutionContextInterface $executionContext,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder
+    ): void {
+        $executionContext->buildViolation('sylius.catalog_promotion_scope.for_taxons.not_empty')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('configuration.taxons')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+
+        $this->validate([], new CatalogPromotionScope(), $executionContext);
     }
 
-    function it_prepares_array_with_violation_if_catalog_promotion_scope_has_not_existing_taxons_configured(
-        TaxonRepositoryInterface $taxonRepository
+    function it_adds_violation_if_catalog_promotion_scope_has_not_existing_taxons_configured(
+        TaxonRepositoryInterface $taxonRepository,
+        ExecutionContextInterface $executionContext,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder
     ): void {
         $taxonRepository->findOneBy(['code' => 'not_existing_taxon'])->willReturn(null);
 
-        $this
-            ->validate(['taxons' => ['not_existing_taxon']], new CatalogPromotionScope())
-            ->shouldReturn(['configuration.taxons' => 'sylius.catalog_promotion_scope.for_taxons.invalid_taxons'])
-        ;
+        $executionContext->buildViolation('sylius.catalog_promotion_scope.for_taxons.invalid_taxons')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('configuration.taxons')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+
+        $this->validate(['taxons' => ['not_existing_taxon']], new CatalogPromotionScope(), $executionContext);
     }
 
-    function it_returns_an_empty_array_if_catalog_promotion_scope_is_valid(
+    function it_does_nothing_if_catalog_promotion_scope_is_valid(
         TaxonRepositoryInterface $taxonRepository,
+        ExecutionContextInterface $executionContext,
         TaxonInterface $taxon
     ): void {
         $taxonRepository->findOneBy(['code' => 'taxon'])->willReturn($taxon);
 
-        $this->validate(['taxons' => ['taxon']], new CatalogPromotionScope())->shouldReturn([]);
+        $executionContext->buildViolation('sylius.catalog_promotion_scope.for_taxons.not_empty')->shouldNotBeCalled();
+        $executionContext->buildViolation('sylius.catalog_promotion_scope.for_taxons.invalid_taxons')->shouldNotBeCalled();
+
+        $this->validate(['taxons' => ['taxon']], new CatalogPromotionScope(), $executionContext);
     }
 }

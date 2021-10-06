@@ -66,8 +66,8 @@
 
         <service id="Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScopeValidator">
             <argument type="collection">
-                <argument>for_taxons</argument>
-                <argument>for_variants</argument>
+                <argument type="constant">Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_TAXONS</argument>
+                <argument type="constant">Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS</argument>
             </argument>
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_validator" index-by="key" />
             <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_scope" />
@@ -77,7 +77,6 @@
             <argument type="service" id="sylius.repository.taxon" />
             <tag name="sylius.catalog_promotion.scope_validator" key="for_taxons"/>
         </service>
-
 
         <service id="Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ForVariantsScopeValidator">
             <argument type="service" id="sylius.repository.product_variant" />

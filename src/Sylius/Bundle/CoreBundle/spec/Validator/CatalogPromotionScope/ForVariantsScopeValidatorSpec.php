@@ -18,6 +18,9 @@ use Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ScopeValidatorInter
 use Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScope;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class ForVariantsScopeValidatorSpec extends ObjectBehavior
 {
@@ -31,41 +34,54 @@ final class ForVariantsScopeValidatorSpec extends ObjectBehavior
         $this->shouldHaveType(ScopeValidatorInterface::class);
     }
 
-    function it_prepares_array_with_violation_if_catalog_promotion_scope_does_not_have_variants_key_configured(): void
-    {
-        $this
-            ->validate([], new CatalogPromotionScope())
-            ->shouldReturn(['configuration.variants' => 'sylius.catalog_promotion_scope.for_variants.not_empty'])
-        ;
+    function it_adds_violation_if_catalog_promotion_scope_does_not_have_variants_key_configured(
+        ExecutionContextInterface $executionContext,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder
+    ): void {
+        $executionContext->buildViolation('sylius.catalog_promotion_scope.for_variants.not_empty')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('configuration.variants')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+
+        $this->validate([], new CatalogPromotionScope(), $executionContext);
     }
 
-    function it_prepares_array_with_violation_if_catalog_promotion_scope_has_empty_variants_configured(): void
-    {
-        $this
-            ->validate(['variants' => []], new CatalogPromotionScope())
-            ->shouldReturn(['configuration.variants' => 'sylius.catalog_promotion_scope.for_variants.not_empty'])
-        ;
+    function it_adds_violation_if_catalog_promotion_scope_has_empty_variants_configured(
+        ExecutionContextInterface $executionContext,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder
+    ): void {
+        $executionContext->buildViolation('sylius.catalog_promotion_scope.for_variants.not_empty')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('configuration.variants')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+
+        $this->validate(['variants' => []], new CatalogPromotionScope(), $executionContext);
     }
 
-    function it_prepares_array_with_violation_if_catalog_promotion_scope_has_not_existing_variants_configured(
-        ProductVariantRepositoryInterface $variantRepository
+    function it_adds_violation_if_catalog_promotion_scope_has_not_existing_variants_configured(
+        ProductVariantRepositoryInterface $variantRepository,
+        ExecutionContextInterface $executionContext,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder
     ): void {
         $variantRepository->findOneBy(['code' => 'not_existing_variant'])->willReturn(null);
 
-        $this
-            ->validate(['variants' => ['not_existing_variant']], new CatalogPromotionScope())
-            ->shouldReturn(['configuration.variants' => 'sylius.catalog_promotion_scope.for_variants.invalid_variants'])
-        ;
+        $executionContext->buildViolation('sylius.catalog_promotion_scope.for_variants.invalid_variants')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('configuration.variants')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+
+        $this->validate(['variants' => ['not_existing_variant']], new CatalogPromotionScope(), $executionContext);
     }
 
-    function it_returns_an_empty_array_if_catalog_promotion_scope_is_valid(
+    function it_does_nothing_if_catalog_promotion_scope_is_valid(
         ProductVariantRepositoryInterface $variantRepository,
+        ExecutionContextInterface $executionContext,
         ProductVariantInterface $firstVariant,
         ProductVariantInterface $secondVariant
     ): void {
         $variantRepository->findOneBy(['code' => 'first_variant'])->willReturn($firstVariant);
         $variantRepository->findOneBy(['code' => 'second_variant'])->willReturn($secondVariant);
 
-        $this->validate(['variants' => ['first_variant', 'second_variant']], new CatalogPromotionScope())->shouldReturn([]);
+        $executionContext->buildViolation('sylius.catalog_promotion_scope.for_variants.not_empty')->shouldNotBeCalled();
+        $executionContext->buildViolation('sylius.catalog_promotion_scope.for_variants.invalid_variants')->shouldNotBeCalled();
+
+        $this->validate(['variants' => ['first_variant', 'second_variant']], new CatalogPromotionScope(), $executionContext);
     }
 }
