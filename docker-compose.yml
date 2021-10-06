@@ -19,7 +19,7 @@ services:
       MYSQL_USER: "${DATABASE_USER}"
       MYSQL_PASSWORD: "${DATABASE_PASSWORD}"
     volumes:
-      - mysql:/var/lib/mysql
+      - ./docker/mysql:/var/lib/mysql
     ports:
       - "3306:3306"
 
@@ -60,7 +60,7 @@ services:
     environment:
       - MH_STORAGE=maildir
     volumes:
-      - ./mailhog/maildir:/maildir:rw,delegated
+      - ./docker/mailhog/maildir:/maildir:rw,delegated
     ports:
       - "8025:8025"
 
