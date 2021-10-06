@@ -9,7 +9,7 @@ imports:
     - { resource: "@SyliusShopBundle/Resources/config/grids/product.yml" }
 
 parameters:
-    sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++"
+    sylius.security.shop_regex: "^(?:/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++)?"
     
 sylius_grid:
     templates:
