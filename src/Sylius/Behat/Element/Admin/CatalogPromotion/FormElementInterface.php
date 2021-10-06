@@ -27,6 +27,10 @@ interface FormElementInterface
 
     public function uncheckChannel(string $channelName): void;
 
+    public function specifyStartDate(string $startDate): void;
+
+    public function specifyEndDate(string $endDate): void;
+
     public function addScope(): void;
 
     public function addAction(): void;

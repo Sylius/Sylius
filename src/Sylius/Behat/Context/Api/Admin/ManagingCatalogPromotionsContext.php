@@ -270,6 +270,22 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I make it start at :startDate and ends at :endDate
+     */
+    public function iMakeCatalogPromotionOperateBetweenDates(string $startDate, string $endDate): void
+    {
+        $this->client->updateRequestData(['startDate' => $startDate, 'endDate' => $endDate]);
+    }
+
+    /**
+     * @When I make it start at :startDate
+     */
+    public function iMakeCatalogPromotionOperateFrom(string $startDate): void
+    {
+        $this->client->updateRequestData(['startDate' => $startDate]);
+    }
+
+    /**
      * @When I save my changes
      */
     public function iSaveMyChanges(): void
@@ -623,6 +639,28 @@ final class ManagingCatalogPromotionsContext implements Context
                 sprintf('Cannot find catalog promotions with name "%s" in the list', $name)
             );
         }
+    }
+
+    /**
+     * @Then the catalog promotions named :catalogPromotion should operate between :startDate and :endDate
+     * @Then /^(it) should operate between ("[^"]+") and ("[^"]+")$/
+     * @Then /^(this catalog promotion) should operate between ("[^"]+") and ("[^"]+")$/
+     */
+    public function theCatalogPromotionsNamedShouldOperateBetweenDates(
+        CatalogPromotionInterface $catalogPromotion,
+        string $startDate,
+        string $endDate
+    ): void {
+        Assert::true(
+            $this->responseChecker->hasItemWithValues(
+                $this->client->index(),
+                ['name' => $catalogPromotion->getName(), 'startDate' => $startDate, 'endDate' => $endDate]
+            ),
+            sprintf(
+                'Cannot find catalog promotions with name "%s" operating between "%s" and "%s" in the list',
+                $catalogPromotion->getName(), $startDate, $endDate
+            )
+        );
     }
 
     /**

@@ -301,6 +301,21 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
+    /**
+     * @Given the catalog promotion :catalogPromotion operates between :startDate and :endDate
+     */
+    public function theCatalogPromotionOperatesBetweenDates(
+        CatalogPromotionInterface $catalogPromotion,
+        string $startDate,
+        string $endDate
+    ) {
+        $catalogPromotion->setStartDate(new \DateTime($startDate));
+        $catalogPromotion->setEndDate(new \DateTime($endDate));
+
+        $this->entityManager->flush();
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
     private function createCatalogPromotion(
         string $name,
         ?string $code = null,

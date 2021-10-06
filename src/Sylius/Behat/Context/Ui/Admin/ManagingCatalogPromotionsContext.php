@@ -138,6 +138,23 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I make it start at :startDate and ends at :endDate
+     */
+    public function iMakeItOperateBetweenDates(string $startDate, string $endDate): void
+    {
+        $this->formElement->specifyStartDate($startDate);
+        $this->formElement->specifyEndDate($endDate);
+    }
+
+    /**
+     * @When I make it start at :startDate
+     */
+    public function iMakeItOperateFromDate(string $startDate): void
+    {
+        $this->formElement->specifyStartDate($startDate);
+    }
+
+    /**
      * @When I make it unavailable in channel :channelName
      */
     public function iMakeItUnavailableInChannel(string $channelName): void
@@ -385,6 +402,20 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then the catalog promotions named :name should operate between :startDate and :endDate
+     */
+    public function theCatalogPromotionsNamedShouldOperateBetweenDates(string $name, string $startDate, string $endDate): void
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['name' => $name, 'startDate' => $startDate, 'endDate' => $endDate]),
+            sprintf(
+                'Cannot find catalog promotions with name "%s" operating between "%s" and "%s" in the list',
+                $name, $startDate, $endDate
+            )
+        );
+    }
+
+    /**
      * @Then it should have :code code and :name name
      */
     public function itShouldHaveCodeAndName(string $code, string $name): void
@@ -467,6 +498,20 @@ final class ManagingCatalogPromotionsContext implements Context
     public function theCatalogPromotionShouldBeAvailableInChannel(string $catalogPromotionName, string $channelName): void
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $catalogPromotionName, 'channels' => $channelName]));
+    }
+
+    /**
+     * @Then /^(it) should operate between "([^"]+)" and "([^"]+)"$/
+     * @Then /^(this catalog promotion) should operate between "([^"]+)" and "([^"]+)"$/
+     */
+    public function theCatalogPromotionShouldOperateBetweenDates(
+        CatalogPromotionInterface $catalogPromotion,
+        string $startDate,
+        string $endDate
+    ): void {
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'name' => $catalogPromotion->getName(), 'startDate' => $startDate, 'endDate' => $endDate,
+        ]));
     }
 
     /**

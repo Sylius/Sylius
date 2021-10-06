@@ -92,6 +92,6 @@ Feature: Creating a catalog promotion
         And I add it
         Then there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name
-        And "Winter sale" catalog promotion should apply to all products from "Clothes" taxon
+        And "Winter sale" catalog promotion should apply to "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And the catalog promotion "Winter sale" should be available in channel "United States"
         And it should operate between "2021-11-10" and "2022-01-08"

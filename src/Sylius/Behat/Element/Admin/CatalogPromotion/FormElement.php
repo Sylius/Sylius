@@ -50,6 +50,20 @@ final class FormElement extends Element implements FormElementInterface
         $this->getDocument()->uncheckField($channelName);
     }
 
+    public function specifyStartDate(string $startDate): void
+    {
+        $element = $this->getElement('start_date');
+
+        $element->setValue($startDate);
+    }
+
+    public function specifyEndDate(string $endDate): void
+    {
+        $element = $this->getElement('end_date');
+
+        $element->setValue($endDate);
+    }
+
     public function addScope(): void
     {
         $this->addCollectionElement('scopes', 'add_scope_button');
@@ -128,14 +142,15 @@ final class FormElement extends Element implements FormElementInterface
             'actions' => '#actions',
             'add_action_button' => '#actions [data-form-collection="add"]',
             'add_scope_button' => '#scopes [data-form-collection="add"]',
-            'channel' => '#sylius_catalog_promotion_code',
             'description' => '#sylius_catalog_promotion_translations_%localeCode%_description',
             'enabled' => '#sylius_catalog_promotion_enabled',
+            'end_date' => '#sylius_catalog_promotion_endDate',
             'label' => '#sylius_catalog_promotion_translations_%localeCode%_label',
             'last_action' => '#actions [data-form-collection="item"]:last-child',
             'last_scope' => '#scopes [data-form-collection="item"]:last-child',
             'name' => '#sylius_catalog_promotion_name',
             'scopes' => '#scopes',
+            'start_date' => '#sylius_catalog_promotion_startDate',
         ]);
     }
 
