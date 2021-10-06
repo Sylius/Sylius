@@ -22,22 +22,20 @@ use Symfony\Component\Form\FormEvents;
 
 final class CatalogPromotionScopeType extends AbstractResourceType
 {
-    private array $scopeTypes;
+    private array $scopeTypes = [];
 
     private array $scopeConfigurationTypes;
 
     public function __construct(
-        iterable $scopeConfigurationTypes,
         string $dataClass,
-        array $validationGroups = [],
-        array $scopeTypes = []
+        array $validationGroups,
+        iterable $scopeConfigurationTypes
     ) {
-        parent::__construct($dataClass, $validationGroups);
-
-        $this->scopeTypes = $scopeTypes;
+        parent::__construct($dataClass, $validationGroups ?? []);
 
         foreach ($scopeConfigurationTypes as $type => $formType) {
             $this->scopeConfigurationTypes[$type] = get_class($formType);
+            $this->scopeTypes['sylius.form.catalog_promotion.scope.'.$type] = $type;
         }
     }
 

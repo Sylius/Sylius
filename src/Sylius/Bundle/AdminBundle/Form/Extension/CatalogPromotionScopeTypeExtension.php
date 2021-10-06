@@ -12,19 +12,19 @@ use Twig\Environment;
 
 final class CatalogPromotionScopeTypeExtension extends AbstractTypeExtension
 {
-    private array $scopeTypes;
+    private array $scopeTypes = [];
 
     private array $scopeConfigurationTypes;
 
     private Environment $twig;
 
-    public function __construct(array $scopeTypes, iterable $scopeConfigurationTypes, Environment $twig)
+    public function __construct(iterable $scopeConfigurationTypes, Environment $twig)
     {
         foreach ($scopeConfigurationTypes as $type => $formType) {
             $this->scopeConfigurationTypes[$type] = get_class($formType);
+            $this->scopeTypes['sylius.form.catalog_promotion.scope.'.$type] = $type;
         }
 
-        $this->scopeTypes = $scopeTypes;
         $this->twig = $twig;
     }
 

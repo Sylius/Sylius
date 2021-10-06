@@ -276,13 +276,9 @@
         </service>
 
         <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType">
-            <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_configuration_type" index-by="key" />
             <argument>%sylius.model.catalog_promotion_scope.class%</argument>
             <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
-            <argument type="collection">
-                <argument type="constant" key="sylius.form.catalog_promotion.scope.for_taxons">Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_TAXONS</argument>
-                <argument type="constant" key="sylius.form.catalog_promotion.scope.for_variants">Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS</argument>
-            </argument>
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_configuration_type" index-by="key" />
             <tag name="form.type" />
         </service>
     </services>

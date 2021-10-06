@@ -17,6 +17,7 @@ import 'sylius/ui/sylius-product-attributes';
 import 'sylius/ui/sylius-product-auto-complete';
 import 'sylius/ui/sylius-prototype-handler';
 
+import './sylius-catalog-promotion-scopes';
 import './sylius-compound-form-errors';
 import './sylius-lazy-choice-tree';
 import './sylius-menu-search';
@@ -78,6 +79,10 @@ $(document).ready(() => {
         $(element).autoComplete();
       }
     });
+
+    $(document).loadCatalogPromotionScopeConfiguration(
+      document.querySelector('#sylius_catalog_promotion_scopes [data-form-collection="item"]:last-child')
+    );
   });
   $(document).on('collection-form-update', () => {
     $('.sylius-autocomplete').each((index, element) => {
@@ -86,26 +91,6 @@ $(document).ready(() => {
       }
     });
   });
-
-  document.querySelector('#sylius_catalog_promotion_scopes_0_type').onchange = function () {
-    const parent = this.parentElement;
-    const newConfig = document.createElement('div');
-    newConfig.innerHTML = this.selectedOptions[0].getAttribute('data-configuration');
-    const oldConfig = parent.nextElementSibling;
-
-    parent.parentElement.replaceChild(newConfig, oldConfig);
-
-    let oldConfigInputName = oldConfig.querySelector('input').getAttribute('name');
-    let newConfigInputName = newConfig.querySelector('input').getAttribute('name');
-
-    newConfigInputName = oldConfigInputName.replace(
-        oldConfigInputName.substring(oldConfigInputName.lastIndexOf("[") + 1, oldConfigInputName.lastIndexOf("]")),
-        newConfigInputName.substring(newConfigInputName.indexOf("[") + 1, newConfigInputName.lastIndexOf("]"))
-    );
-
-    $(newConfig).find('input').attr('name', newConfigInputName);
-    $(newConfig).find('.sylius-autocomplete').autoComplete();
-  };
 
   $('.sylius-tabular-form').addTabErrors();
   $('.ui.accordion').addAccordionErrors();
@@ -116,6 +101,7 @@ $(document).ready(() => {
   $(document).taxonSlugGenerator();
   $(document).previewUploadedImage('#sylius_product_images');
   $(document).previewUploadedImage('#sylius_taxon_images');
+  $(document).loadCatalogPromotionScopeConfiguration(document.querySelector('#sylius_catalog_promotion_scopes'));
 
   $(document).previewUploadedImage('#add-avatar');
 

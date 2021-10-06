@@ -19,10 +19,6 @@
     </parameters>
     <services>
         <service id="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension">
-            <argument type="collection">
-                <argument type="constant" key="sylius.form.catalog_promotion.scope.for_taxons">Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_TAXONS</argument>
-                <argument type="constant" key="sylius.form.catalog_promotion.scope.for_variants">Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS</argument>
-            </argument>
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_configuration_type" index-by="key" />
             <argument type="service" id="twig" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType" />
