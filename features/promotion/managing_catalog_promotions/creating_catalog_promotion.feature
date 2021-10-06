@@ -79,3 +79,19 @@ Feature: Creating a catalog promotion
         And it should have "winter_sale" code and "Winter sale" name
         And "Winter sale" catalog promotion should apply to all products from "Clothes" taxon
         And the catalog promotion "Winter sale" should be available in channel "United States"
+
+    @api @ui
+    Scenario: Creating a catalog promotion with start and end date
+        When I want to create a new catalog promotion
+        And I specify its code as "winter_sale"
+        And I name it "Winter sale"
+        And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And I add action that gives "50%" percentage discount
+        And I make it available in channel "United States"
+        And I make it start at "2021-11-10" and ends at "2022-01-08"
+        And I add it
+        Then there should be 1 new catalog promotion on the list
+        And it should have "winter_sale" code and "Winter sale" name
+        And "Winter sale" catalog promotion should apply to all products from "Clothes" taxon
+        And the catalog promotion "Winter sale" should be available in channel "United States"
+        And it should operate between "2021-11-10" and "2022-01-08"
