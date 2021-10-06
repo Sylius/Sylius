@@ -5,13 +5,6 @@ services:
     build: docker/php
     depends_on:
       - mysql
-    environment:
-      - APP_ENV=dev
-      - APP_DEBUG=1
-      - APP_SECRET=EDITME
-      - DATABASE_URL=mysql://sylius:nopassword@mysql/sylius
-      - MAILER_URL=smtp://localhost
-      - PHP_DATE_TIMEZONE=${PHP_DATE_TIMEZONE:-UTC}
     volumes:
       - .:/var/www/html
       - ./docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
@@ -21,11 +14,10 @@ services:
   mysql:
     image: mysql:5.7.32
     environment:
-      MYSQL_ROOT_PASSWORD: "root"
-      MYSQL_DATABASE: "sylius"
-      MYSQL_USER: "sylius"
-      MYSQL_PASSWORD: "nopassword"
-      TZ: ${TZ:-"Europe/Paris"}
+      MYSQL_ROOT_PASSWORD: "${DATABASE_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${DATABASE_NAME}"
+      MYSQL_USER: "${DATABASE_USER}"
+      MYSQL_PASSWORD: "${DATABASE_PASSWORD}"
     volumes:
       - mysql:/var/lib/mysql
     ports:
@@ -75,7 +67,3 @@ services:
 volumes:
   mysql:
   public-media:
-
-networks:
-    mysql:
-    php:

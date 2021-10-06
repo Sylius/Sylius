@@ -7,8 +7,11 @@ parameters:
 
 doctrine:
     dbal:
+        dbname: '%env(DATABASE_NAME)%'
+        host: '%env(DATABASE_HOST)%'
+        port: '%env(DATABASE_PORT)%'
+        user: '%env(DATABASE_USER)%'
+        password: '%env(DATABASE_PASSWORD)%'
         driver: 'pdo_mysql'
         server_version: '5.7'
         charset: utf8mb4
-
-        url: '%env(resolve:DATABASE_URL)%'
