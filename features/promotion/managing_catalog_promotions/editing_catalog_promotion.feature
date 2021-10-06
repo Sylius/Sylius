@@ -49,7 +49,7 @@ Feature: Editing catalog promotion
         When I want to modify a catalog promotion "Christmas sale"
         And I make it start at "2021-12-10"
         And I save my changes
-        Then this catalog promotion should operate between "2021-12-20" and "2021-12-30"
+        Then this catalog promotion should operate between "2021-12-10" and "2021-12-30"
 
     @api @ui
     Scenario: Being unable to change code of catalog promotion

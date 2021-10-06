@@ -80,7 +80,7 @@ Feature: Creating a catalog promotion
         And "Winter sale" catalog promotion should apply to all products from "Clothes" taxon
         And the catalog promotion "Winter sale" should be available in channel "United States"
 
-    @api @ui
+    @api @ui @javascript
     Scenario: Creating a catalog promotion with start and end date
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"

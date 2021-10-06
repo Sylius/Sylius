@@ -643,8 +643,8 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @Then the catalog promotions named :catalogPromotion should operate between :startDate and :endDate
-     * @Then /^(it) should operate between ("[^"]+") and ("[^"]+")$/
-     * @Then /^(this catalog promotion) should operate between ("[^"]+") and ("[^"]+")$/
+     * @Then /^(it) should operate between "([^"]+)" and "([^"]+)"$/
+     * @Then /^(this catalog promotion) should operate between "([^"]+)" and "([^"]+)"$/
      */
     public function theCatalogPromotionsNamedShouldOperateBetweenDates(
         CatalogPromotionInterface $catalogPromotion,
@@ -707,6 +707,8 @@ final class ManagingCatalogPromotionsContext implements Context
             ),
             sprintf('Catalog promotion is not assigned to %s channel', $channel->getName())
         );
+
+        $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
     }
 
     /**
