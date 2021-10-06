@@ -26,6 +26,14 @@ interface CatalogPromotionInterface extends ResourceInterface, CodeAwareInterfac
 
     public function setName(?string $name): void;
 
+    public function getStartDate(): ?\DateTimeInterface;
+
+    public function setStartDate(?\DateTimeInterface $startDate): void;
+
+    public function getEndDate(): ?\DateTimeInterface;
+
+    public function setEndDate(?\DateTimeInterface $endDate): void;
+
     public function getLabel(): ?string;
 
     public function setLabel(?string $label): void;
