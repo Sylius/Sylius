@@ -21,10 +21,13 @@ use Webmozart\Assert\Assert;
 
 final class CatalogPromotionScopeValidator extends ConstraintValidator
 {
+    private array $scopeTypes;
+
     private array $scopeValidators;
 
-    public function __construct(iterable $scopeValidators)
+    public function __construct(array $scopeTypes, iterable $scopeValidators)
     {
+        $this->scopeTypes = $scopeTypes;
         $this->scopeValidators = $scopeValidators instanceof \Traversable ? iterator_to_array($scopeValidators) : $scopeValidators;
     }
 
@@ -34,10 +37,7 @@ final class CatalogPromotionScopeValidator extends ConstraintValidator
         Assert::isInstanceOf($constraint, CatalogPromotionScope::class);
 
         /** @var CatalogPromotionScopeInterface $value */
-        if (
-            $value->getType() !== CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS &&
-            $value->getType() !== CatalogPromotionScopeInterface::TYPE_FOR_TAXONS
-        ) {
+        if (!in_array($value->getType(), $this->scopeTypes, true)) {
             $this->context->buildViolation($constraint->invalidType)->atPath('type')->addViolation();
 
             return;

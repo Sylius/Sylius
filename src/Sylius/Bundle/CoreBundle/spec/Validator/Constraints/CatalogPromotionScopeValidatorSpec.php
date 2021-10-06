@@ -28,10 +28,16 @@ final class CatalogPromotionScopeValidatorSpec extends ObjectBehavior
         ScopeValidatorInterface $forTaxonsValidator,
         ScopeValidatorInterface $forVariantsValidator
     ): void {
-        $this->beConstructedWith([
-            CatalogPromotionScopeInterface::TYPE_FOR_TAXONS => $forTaxonsValidator,
-            CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS => $forVariantsValidator,
-        ]);
+        $this->beConstructedWith(
+            [
+                CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
+                CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS
+            ],
+            [
+                CatalogPromotionScopeInterface::TYPE_FOR_TAXONS => $forTaxonsValidator,
+                CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS => $forVariantsValidator,
+            ]
+        );
 
         $this->initialize($executionContext);
     }
