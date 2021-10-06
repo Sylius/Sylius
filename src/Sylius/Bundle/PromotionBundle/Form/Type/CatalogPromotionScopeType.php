@@ -54,7 +54,7 @@ final class CatalogPromotionScopeType extends AbstractResourceType
 
         $builder
             ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event): void {
-                /** @var CatalogPromotionScopeInterface $data */
+                /** @var CatalogPromotionScopeInterface|null $data */
                 $data = $event->getData();
                 $form = $event->getForm();
 
@@ -66,7 +66,7 @@ final class CatalogPromotionScopeType extends AbstractResourceType
                 $form->add('configuration', $scopeConfigurationType);
             })
             ->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event): void {
-                /** @var CatalogPromotionScopeInterface $data */
+                /** @var array|null $data */
                 $data = $event->getData();
                 $form = $event->getForm();
 

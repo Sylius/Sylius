@@ -293,6 +293,16 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddForVariantsScopeWithoutVariantsConfigured(): void
     {
         $this->formElement->addScope();
+        $this->formElement->chooseScopeType('For variants');
+    }
+
+    /**
+     * @When I add catalog promotion scope for taxon without taxons
+     */
+    public function iAddForTaxonScopeWithoutTaxonsConfigured(): void
+    {
+        $this->formElement->addScope();
+        $this->formElement->chooseScopeType('For taxons');
     }
 
     /**
@@ -588,5 +598,13 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldBeNotifiedThatAtLeast1VariantIsRequired(): void
     {
         Assert::same($this->formElement->getValidationMessageForAction(), 'Please add at least 1 variant.');
+    }
+
+    /**
+     * @Then I should be notified that I must add at least one taxon
+     */
+    public function iShouldBeNotifiedThatIMustAddAtLeastOneTaxon(): void
+    {
+        Assert::same($this->formElement->getValidationMessageForAction(), 'Provided configuration contains errors. Please add at least 1 taxon.');
     }
 }
