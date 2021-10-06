@@ -1,8 +1,8 @@
 @applying_catalog_promotions
-Feature: Reapplying catalog promotions on variant once its data changes
+Feature: Reapplying catalog promotions on variant once its prices changes
     In order to have proper discounts on variants
     As a Store Owner
-    I want to have discounts reapplied on variant once its data changes
+    I want to have discounts reapplied on variant once its prices changes
 
     Background:
         Given the store operates on a channel named "Web-US" with hostname "web-us"
