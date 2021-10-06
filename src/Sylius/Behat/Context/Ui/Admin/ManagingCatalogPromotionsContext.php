@@ -158,6 +158,7 @@ final class ManagingCatalogPromotionsContext implements Context
         }, $variants);
 
         $this->formElement->addScope();
+        $this->formElement->chooseScopeType('For variants');
         $this->formElement->chooseLastScopeVariants($variantCodes);
     }
 

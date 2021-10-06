@@ -31,7 +31,7 @@ final class CatalogPromotionScopeType extends AbstractResourceType
         array $validationGroups,
         iterable $scopeConfigurationTypes
     ) {
-        parent::__construct($dataClass, $validationGroups ?? []);
+        parent::__construct($dataClass, $validationGroups);
 
         foreach ($scopeConfigurationTypes as $type => $formType) {
             $this->scopeConfigurationTypes[$type] = get_class($formType);
