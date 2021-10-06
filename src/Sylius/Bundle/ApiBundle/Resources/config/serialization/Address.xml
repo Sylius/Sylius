@@ -114,5 +114,21 @@
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
         </attribute>
+        <attribute name="phoneNumber">
+            <group>admin:address:read</group>
+            <group>shop:address:read</group>
+            <group>shop:address:update</group>
+            <group>shop:cart:address</group>
+            <group>shop:cart:read</group>
+            <group>shop:order:account:read</group>
+        </attribute>
+        <attribute name="company">
+            <group>admin:address:read</group>
+            <group>shop:address:read</group>
+            <group>shop:address:update</group>
+            <group>shop:cart:address</group>
+            <group>shop:cart:read</group>
+            <group>shop:order:account:read</group>
+        </attribute>
     </class>
 </serializer>
