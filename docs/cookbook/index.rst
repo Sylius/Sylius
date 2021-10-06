@@ -76,6 +76,15 @@ Promotions
 
 .. include:: /cookbook/promotions/map.rst.inc
 
+Catalog Promotions
+------------------
+
+.. toctree::
+    :hidden:
+
+    catalog-promotions/custom-catalog-promotion-scope
+
+
 Inventory
 ---------
 
