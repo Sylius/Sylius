@@ -65,9 +65,19 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScopeValidator">
-            <argument type="service" id="sylius.repository.product_variant" />
-            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_validator" index-by="key"/>
             <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_scope" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ForTaxonsScopeValidator">
+            <argument type="service" id="sylius.repository.taxon" />
+            <tag name="sylius.catalog_promotion.scope_validator" key="for_taxons"/>
+        </service>
+
+
+        <service id="Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ForVariantsScopeValidator">
+            <argument type="service" id="sylius.repository.product_variant" />
+            <tag name="sylius.catalog_promotion.scope_validator" key="for_variants"/>
         </service>
     </services>
 </container>
