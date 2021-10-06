@@ -171,7 +171,7 @@ final class ManagingCatalogPromotionsContext implements Context
         }, $taxons);
 
         $this->formElement->addScope();
-        $this->formElement->chooseScopeType('For Taxons');
+        $this->formElement->chooseScopeType('For taxons');
         $this->formElement->chooseLastScopeTaxons($taxonsCodes);
     }
 
@@ -499,6 +499,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function theCatalogPromotionShouldBeAvailableInChannel(string $catalogPromotionName, string $channelName): void
     {
+        $this->indexPage->open();
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $catalogPromotionName, 'channels' => $channelName]));
     }
 

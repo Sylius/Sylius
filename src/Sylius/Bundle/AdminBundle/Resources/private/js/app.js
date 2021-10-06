@@ -87,6 +87,26 @@ $(document).ready(() => {
     });
   });
 
+  document.querySelector('#sylius_catalog_promotion_scopes_0_type').onchange = function () {
+    const parent = this.parentElement;
+    const newConfig = document.createElement('div');
+    newConfig.innerHTML = this.selectedOptions[0].getAttribute('data-configuration');
+    const oldConfig = parent.nextElementSibling;
+
+    parent.parentElement.replaceChild(newConfig, oldConfig);
+
+    let oldConfigInputName = oldConfig.querySelector('input').getAttribute('name');
+    let newConfigInputName = newConfig.querySelector('input').getAttribute('name');
+
+    newConfigInputName = oldConfigInputName.replace(
+        oldConfigInputName.substring(oldConfigInputName.lastIndexOf("[") + 1, oldConfigInputName.lastIndexOf("]")),
+        newConfigInputName.substring(newConfigInputName.indexOf("[") + 1, newConfigInputName.lastIndexOf("]"))
+    );
+
+    $(newConfig).find('input').attr('name', newConfigInputName);
+    $(newConfig).find('.sylius-autocomplete').autoComplete();
+  };
+
   $('.sylius-tabular-form').addTabErrors();
   $('.ui.accordion').addAccordionErrors();
   $('#sylius-product-taxonomy-tree').choiceTree('productTaxon', true, 1);
