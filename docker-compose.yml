@@ -1,0 +1,81 @@
+version: '3.4'
+
+services:
+  php:
+    build: docker/php
+    depends_on:
+      - mysql
+    environment:
+      - APP_ENV=dev
+      - APP_DEBUG=1
+      - APP_SECRET=EDITME
+      - DATABASE_URL=mysql://sylius:nopassword@mysql/sylius
+      - MAILER_URL=smtp://localhost
+      - PHP_DATE_TIMEZONE=${PHP_DATE_TIMEZONE:-UTC}
+    volumes:
+      - .:/var/www/html
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+      - ./public:/var/www/html/public:rw,delegated
+      - ./public/media:/var/www/html/public/media:rw
+
+  mysql:
+    image: mysql:5.7.32
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "sylius"
+      MYSQL_USER: "sylius"
+      MYSQL_PASSWORD: "nopassword"
+      TZ: ${TZ:-"Europe/Paris"}
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  # Outils de gestion de base de données
+  adminer:
+    image: adminer
+    ports:
+      - "${ADMINER_PORT:-8081}:8080"
+
+
+  nodejs:
+    build: docker/nodejs
+    depends_on:
+      - php
+    environment:
+      - GULP_ENV=dev
+      - PHP_HOST=php
+      - PHP_PORT=9000
+    volumes:
+      - .:/var/www/html:rw,cached
+      - ./public:/var/www/html/public:rw,delegated
+    ports:
+      - "35729:35729"
+
+  nginx:
+    build: docker/nginx
+    depends_on:
+      - php
+      - nodejs
+    volumes:
+      - ./public:/var/www/html/public:ro
+      - ./public/media:/var/www/html/public/media:ro
+    ports:
+      - "80:80"
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    environment:
+      - MH_STORAGE=maildir
+    volumes:
+      - ./mailhog/maildir:/maildir:rw,delegated
+    ports:
+      - "8025:8025"
+
+volumes:
+  mysql:
+  public-media:
+
+networks:
+    mysql:
+    php:
