@@ -5,8 +5,8 @@
     "id": @integer@,
     "name": "T-Shirts discount",
     "code": "tshirts_discount",
-    "startDate": "2022-01-01",
-    "endDate": "2022-02-01",
+    "startDate": "2022-01-01 00:00:00",
+    "endDate": "2022-02-01 00:00:00",
     "channels": [
         "\/api\/v2\/admin\/channels\/WEB"
     ],
