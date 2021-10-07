@@ -39,18 +39,12 @@
             <group>admin:catalog_promotion:read</group>
             <group>admin:catalog_promotion:create</group>
             <group>admin:catalog_promotion:update</group>
-            <context>
-                <entry name="datetime_format">Y-m-d</entry>
-            </context>
         </attribute>
 
         <attribute name="endDate">
             <group>admin:catalog_promotion:read</group>
             <group>admin:catalog_promotion:create</group>
             <group>admin:catalog_promotion:update</group>
-            <context>
-                <entry name="datetime_format">Y-m-d</entry>
-            </context>
         </attribute>
 
         <attribute name="translations">
