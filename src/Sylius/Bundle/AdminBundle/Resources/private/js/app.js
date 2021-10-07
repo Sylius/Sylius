@@ -101,7 +101,9 @@ $(document).ready(() => {
   $(document).taxonSlugGenerator();
   $(document).previewUploadedImage('#sylius_product_images');
   $(document).previewUploadedImage('#sylius_taxon_images');
-  $(document).loadCatalogPromotionScopeConfiguration(document.querySelector('#sylius_catalog_promotion_scopes'));
+  if ($('#sylius_catalog_promotion_scopes').length > 0) {
+    $(document).loadCatalogPromotionScopeConfiguration(document.querySelector('#sylius_catalog_promotion_scopes'));
+  }
 
   $(document).previewUploadedImage('#add-avatar');
 
