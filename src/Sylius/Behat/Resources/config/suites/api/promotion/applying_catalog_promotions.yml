@@ -8,6 +8,7 @@ default:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.setup.admin_api_security
+                - sylius.behat.context.setup.calendar
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.product_taxon
