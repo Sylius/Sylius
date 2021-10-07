@@ -27,9 +27,9 @@ interface FormElementInterface
 
     public function uncheckChannel(string $channelName): void;
 
-    public function specifyStartDate(string $startDate): void;
+    public function specifyStartDate(\DateTimeInterface $startDate): void;
 
-    public function specifyEndDate(string $endDate): void;
+    public function specifyEndDate(\DateTimeInterface $endDate): void;
 
     public function addScope(): void;
 

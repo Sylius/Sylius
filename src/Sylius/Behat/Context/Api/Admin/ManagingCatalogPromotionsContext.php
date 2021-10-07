@@ -664,14 +664,19 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then /^"[^"]+" catalog promotion should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
+     * @Then /^("[^"]+" catalog promotion) should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
      */
-    public function catalogPromotionShouldApplyToVariants(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
-    {
+    public function catalogPromotionShouldApplyToVariants(
+        CatalogPromotionInterface $catalogPromotion,
+        ProductVariantInterface $firstVariant,
+        ProductVariantInterface $secondVariant
+    ): void {
         Assert::same(
             ['variants' => [$firstVariant->getCode(), $secondVariant->getCode()]],
             $this->responseChecker->getCollection($this->client->getLastResponse())[0]['scopes'][0]['configuration']
         );
+
+        $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
     }
 
     /**
@@ -725,6 +730,17 @@ final class ManagingCatalogPromotionsContext implements Context
                 $this->iriConverter->getIriFromItem($channel)
             ),
             sprintf('Catalog promotion is assigned to %s channel', $channel->getName())
+        );
+    }
+
+    /**
+     * @Then I should be notified that catalog promotion has been successfully created
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
+    {
+        Assert::true(
+            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
+            'Catalog promotion could not be created'
         );
     }
 
