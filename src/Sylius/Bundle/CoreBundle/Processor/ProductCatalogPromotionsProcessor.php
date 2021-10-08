@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Processor;
 
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
+use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -22,7 +23,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ProductCatalogPromotionsProcessor implements ProductCatalogPromotionsProcessorInterface
 {
-    private RepositoryInterface $catalogPromotionRepository;
+    private EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider;
 
     private CatalogPromotionClearerInterface $catalogPromotionClearer;
 
@@ -31,12 +32,12 @@ final class ProductCatalogPromotionsProcessor implements ProductCatalogPromotion
     private CatalogPromotionApplicatorInterface $catalogPromotionApplicator;
 
     public function __construct(
-        RepositoryInterface $catalogPromotionRepository,
+        EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
         CatalogPromotionApplicatorInterface $catalogPromotionApplicator
     ) {
-        $this->catalogPromotionRepository = $catalogPromotionRepository;
+        $this->catalogPromotionsProvider = $catalogPromotionsProvider;
         $this->catalogPromotionClearer = $catalogPromotionClearer;
         $this->catalogPromotionVariantsProvider = $catalogPromotionVariantsProvider;
         $this->catalogPromotionApplicator = $catalogPromotionApplicator;
@@ -47,7 +48,7 @@ final class ProductCatalogPromotionsProcessor implements ProductCatalogPromotion
         $variants = $product->getVariants()->toArray();
         $this->clearVariants($variants);
 
-        foreach ($this->catalogPromotionRepository->findBy(['enabled' => true]) as $catalogPromotion) {
+        foreach ($this->catalogPromotionsProvider->provide() as $catalogPromotion) {
             $this->processCatalogPromotionOnVariants($catalogPromotion, $variants);
         }
     }

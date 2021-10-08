@@ -71,5 +71,12 @@
         <service id="sylius.promotion_coupon_generator.percentage_policy" class="Sylius\Component\Promotion\Generator\PercentageGenerationPolicy">
             <argument type="service" id="sylius.repository.promotion_coupon" />
         </service>
+
+        <service
+            id="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface"
+            class="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProvider"
+        >
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+        </service>
     </services>
 </container>

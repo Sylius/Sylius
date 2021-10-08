@@ -18,6 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
 use Sylius\Bundle\CoreBundle\Processor\ProductCatalogPromotionsProcessorInterface;
+use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -27,13 +28,13 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class ProductCatalogPromotionsProcessorSpec extends ObjectBehavior
 {
     function let(
-        RepositoryInterface $catalogPromotionRepository,
+        EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
         CatalogPromotionApplicatorInterface $catalogPromotionApplicator
     ): void {
         $this->beConstructedWith(
-            $catalogPromotionRepository,
+            $catalogPromotionsProvider,
             $catalogPromotionClearer,
             $catalogPromotionVariantsProvider,
             $catalogPromotionApplicator
@@ -46,7 +47,7 @@ final class ProductCatalogPromotionsProcessorSpec extends ObjectBehavior
     }
 
     function it_reapplies_catalog_promotion_on_products_variants(
-        RepositoryInterface $catalogPromotionRepository,
+        EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
         CatalogPromotionApplicatorInterface $catalogPromotionApplicator,
@@ -66,8 +67,8 @@ final class ProductCatalogPromotionsProcessorSpec extends ObjectBehavior
         $catalogPromotionClearer->clearVariant($firstVariant)->shouldBeCalled();
         $catalogPromotionClearer->clearVariant($secondVariant)->shouldBeCalled();
 
-        $catalogPromotionRepository->findBy(['enabled' => true])->willReturn([$catalogPromotion->getWrappedObject()]);
-        $catalogPromotionVariantsProvider->provideEligibleVariants($catalogPromotion)->willReturn([$secondVariant->getWrappedObject()]);
+        $catalogPromotionsProvider->provide()->willReturn([$catalogPromotion]);
+        $catalogPromotionVariantsProvider->provideEligibleVariants($catalogPromotion)->willReturn([$secondVariant]);
 
         $catalogPromotionApplicator->applyOnVariant($firstVariant, $catalogPromotion)->shouldNotBeCalled();
         $catalogPromotionApplicator->applyOnVariant($secondVariant, $catalogPromotion)->shouldBeCalled();
@@ -76,7 +77,7 @@ final class ProductCatalogPromotionsProcessorSpec extends ObjectBehavior
     }
 
     function it_does_not_apply_promotion_if_there_are_no_eligible_variants(
-        RepositoryInterface $catalogPromotionRepository,
+        EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
         CatalogPromotionApplicatorInterface $catalogPromotionApplicator,
@@ -96,7 +97,7 @@ final class ProductCatalogPromotionsProcessorSpec extends ObjectBehavior
         $catalogPromotionClearer->clearVariant($firstVariant)->shouldBeCalled();
         $catalogPromotionClearer->clearVariant($secondVariant)->shouldBeCalled();
 
-        $catalogPromotionRepository->findBy(['enabled' => true])->willReturn([$catalogPromotion->getWrappedObject()]);
+        $catalogPromotionsProvider->provide()->willReturn([$catalogPromotion]);
         $catalogPromotionVariantsProvider->provideEligibleVariants($catalogPromotion)->willReturn([]);
 
         $catalogPromotionApplicator->applyOnVariant($firstVariant, $catalogPromotion)->shouldNotBeCalled();
