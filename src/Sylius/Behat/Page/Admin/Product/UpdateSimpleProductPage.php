@@ -146,7 +146,8 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             $productTaxonsCodes = explode(',', $productTaxonsElement->getValue());
         }
 
-        if (($key = array_search($taxon->getCode(), $productTaxonsCodes)) !== false) {
+        $key = array_search($taxon->getCode(), $productTaxonsCodes);
+        if ($key !== false) {
             unset($productTaxonsCodes[$key]);
         }
 

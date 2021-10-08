@@ -25,21 +25,21 @@ final class ProductVariantUpdateListenerSpec extends ObjectBehavior
 {
     function let(
         ProductVariantRepositoryInterface $productVariantRepository,
-        ProductVariantCatalogPromotionsProcessorInterface $catalogPromotionsProcessor,
+        ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor,
         EntityManagerInterface $entityManager
     ): void {
-        $this->beConstructedWith($productVariantRepository, $catalogPromotionsProcessor, $entityManager);
+        $this->beConstructedWith($productVariantRepository, $productVariantCatalogPromotionsProcessor, $entityManager);
     }
 
     function it_processes_catalog_promotions_for_updated_product_variant(
         ProductVariantRepositoryInterface $productVariantRepository,
-        ProductVariantCatalogPromotionsProcessorInterface $catalogPromotionsProcessor,
+        ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor,
         EntityManagerInterface $entityManager,
         ProductVariantInterface $variant
     ): void {
         $productVariantRepository->findOneBy(['code' => 'PHP_MUG'])->willReturn($variant);
 
-        $catalogPromotionsProcessor->process($variant)->shouldBeCalled();
+        $productVariantCatalogPromotionsProcessor->process($variant)->shouldBeCalled();
         $entityManager->flush()->shouldBeCalled();
 
         $this(new ProductVariantUpdated('PHP_MUG'));
@@ -47,12 +47,12 @@ final class ProductVariantUpdateListenerSpec extends ObjectBehavior
 
     function it_does_nothing_if_there_is_no_product_variant_with_given_code(
         ProductVariantRepositoryInterface $productVariantRepository,
-        ProductVariantCatalogPromotionsProcessorInterface $catalogPromotionsProcessor,
+        ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor,
         EntityManagerInterface $entityManager
     ): void {
         $productVariantRepository->findOneBy(['code' => 'PHP_MUG'])->willReturn(null);
 
-        $catalogPromotionsProcessor->process(Argument::any())->shouldNotBeCalled();
+        $productVariantCatalogPromotionsProcessor->process(Argument::any())->shouldNotBeCalled();
         $entityManager->flush()->shouldNotBeCalled();
 
         $this(new ProductVariantUpdated('PHP_MUG'));

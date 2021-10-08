@@ -60,8 +60,8 @@ final class ProductCatalogPromotionsProcessorSpec extends ObjectBehavior
             $secondVariant->getWrappedObject(),
         ]));
 
-        $firstVariant->__toString()->willReturn('PHP MUG');
-        $secondVariant->__toString()->willReturn('Symfony Mug');
+        $firstVariant->getCode()->willReturn('PHP_MUG');
+        $secondVariant->getCode()->willReturn('SYMFONY_MUG');
 
         $catalogPromotionClearer->clearVariant($firstVariant)->shouldBeCalled();
         $catalogPromotionClearer->clearVariant($secondVariant)->shouldBeCalled();
@@ -90,8 +90,8 @@ final class ProductCatalogPromotionsProcessorSpec extends ObjectBehavior
             $secondVariant->getWrappedObject(),
         ]));
 
-        $firstVariant->__toString()->willReturn('PHP MUG');
-        $secondVariant->__toString()->willReturn('Symfony Mug');
+        $firstVariant->getCode()->willReturn('PHP_MUG');
+        $secondVariant->getCode()->willReturn('SYMFONY_MUG');
 
         $catalogPromotionClearer->clearVariant($firstVariant)->shouldBeCalled();
         $catalogPromotionClearer->clearVariant($secondVariant)->shouldBeCalled();

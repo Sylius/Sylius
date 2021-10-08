@@ -23,17 +23,17 @@ final class ProductUpdateListener
 {
     private ProductRepositoryInterface $productRepository;
 
-    private ProductCatalogPromotionsProcessorInterface $catalogPromotionsProcessor;
+    private ProductCatalogPromotionsProcessorInterface $productCatalogPromotionsProcessor;
 
     private EntityManagerInterface $entityManager;
 
     public function __construct(
         ProductRepositoryInterface $productRepository,
-        ProductCatalogPromotionsProcessorInterface $catalogPromotionsProcessor,
+        ProductCatalogPromotionsProcessorInterface $productCatalogPromotionsProcessor,
         EntityManagerInterface $entityManager
     ) {
         $this->productRepository = $productRepository;
-        $this->catalogPromotionsProcessor = $catalogPromotionsProcessor;
+        $this->productCatalogPromotionsProcessor = $productCatalogPromotionsProcessor;
         $this->entityManager = $entityManager;
     }
 
@@ -45,7 +45,7 @@ final class ProductUpdateListener
             return;
         }
 
-        $this->catalogPromotionsProcessor->process($product);
+        $this->productCatalogPromotionsProcessor->process($product);
 
         $this->entityManager->flush();
     }

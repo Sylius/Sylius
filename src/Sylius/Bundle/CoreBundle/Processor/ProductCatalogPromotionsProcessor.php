@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Processor;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -61,7 +62,17 @@ final class ProductCatalogPromotionsProcessor implements ProductCatalogPromotion
     private function processCatalogPromotionOnVariants(CatalogPromotionInterface $catalogPromotion, array $variants): void
     {
         $eligibleVariants = $this->catalogPromotionVariantsProvider->provideEligibleVariants($catalogPromotion);
-        $variantsToApplication = array_intersect($variants, $eligibleVariants);
+        $variantsToApplication = array_uintersect(
+            $variants,
+            $eligibleVariants,
+            function (ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): int {
+                if ($firstVariant->getCode() === $secondVariant->getCode()) {
+                    return 0;
+                }
+
+                return 1;
+            }
+        );
 
         foreach ($variantsToApplication as $variant) {
             $this->catalogPromotionApplicator->applyOnVariant($variant, $catalogPromotion);

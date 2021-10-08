@@ -23,17 +23,17 @@ final class ProductVariantUpdateListener
 {
     private ProductVariantRepositoryInterface $productVariantRepository;
 
-    private ProductVariantCatalogPromotionsProcessorInterface $catalogPromotionsProcessor;
+    private ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor;
 
     private EntityManagerInterface $entityManager;
 
     public function __construct(
         ProductVariantRepositoryInterface $productVariantRepository,
-        ProductVariantCatalogPromotionsProcessorInterface $catalogPromotionsProcessor,
+        ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor,
         EntityManagerInterface $entityManager
     ) {
         $this->productVariantRepository = $productVariantRepository;
-        $this->catalogPromotionsProcessor = $catalogPromotionsProcessor;
+        $this->productVariantCatalogPromotionsProcessor = $productVariantCatalogPromotionsProcessor;
         $this->entityManager = $entityManager;
     }
 
@@ -45,7 +45,7 @@ final class ProductVariantUpdateListener
             return;
         }
 
-        $this->catalogPromotionsProcessor->process($variant);
+        $this->productVariantCatalogPromotionsProcessor->process($variant);
 
         $this->entityManager->flush();
     }

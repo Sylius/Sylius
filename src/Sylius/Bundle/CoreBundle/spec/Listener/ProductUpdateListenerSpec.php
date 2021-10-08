@@ -25,21 +25,21 @@ final class ProductUpdateListenerSpec extends ObjectBehavior
 {
     function let(
         ProductRepositoryInterface $productRepository,
-        ProductCatalogPromotionsProcessorInterface $catalogPromotionsProcessor,
+        ProductCatalogPromotionsProcessorInterface $productCatalogPromotionsProcessor,
         EntityManagerInterface $entityManager
     ): void {
-        $this->beConstructedWith($productRepository, $catalogPromotionsProcessor, $entityManager);
+        $this->beConstructedWith($productRepository, $productCatalogPromotionsProcessor, $entityManager);
     }
 
     function it_processes_catalog_promotions_for_updated_product(
         ProductRepositoryInterface $productRepository,
-        ProductCatalogPromotionsProcessorInterface $catalogPromotionsProcessor,
+        ProductCatalogPromotionsProcessorInterface $productCatalogPromotionsProcessor,
         EntityManagerInterface $entityManager,
         ProductInterface $product
     ): void {
         $productRepository->findOneBy(['code' => 'MUG'])->willReturn($product);
 
-        $catalogPromotionsProcessor->process($product)->shouldBeCalled();
+        $productCatalogPromotionsProcessor->process($product)->shouldBeCalled();
         $entityManager->flush()->shouldBeCalled();
 
         $this(new ProductUpdated('MUG'));
@@ -47,12 +47,12 @@ final class ProductUpdateListenerSpec extends ObjectBehavior
 
     function it_does_nothing_if_there_is_no_product_with_given_code(
         ProductRepositoryInterface $productRepository,
-        ProductCatalogPromotionsProcessorInterface $catalogPromotionsProcessor,
+        ProductCatalogPromotionsProcessorInterface $productCatalogPromotionsProcessor,
         EntityManagerInterface $entityManager
     ): void {
         $productRepository->findOneBy(['code' => 'MUG'])->willReturn(null);
 
-        $catalogPromotionsProcessor->process(Argument::any())->shouldNotBeCalled();
+        $productCatalogPromotionsProcessor->process(Argument::any())->shouldNotBeCalled();
         $entityManager->flush()->shouldNotBeCalled();
 
         $this(new ProductUpdated('MUG'));
