@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Processor;
 
-use Sylius\Bundle\PromotionBundle\Criteria\Enabled;
 use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
 
 final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcessorInterface
@@ -24,20 +23,24 @@ final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcess
 
     private EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider;
 
+    private iterable $defaultCriteria;
+
     public function __construct(
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionProcessorInterface $catalogPromotionProcessor,
-        EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider
+        EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
+        iterable $defaultCriteria = []
     ) {
         $this->catalogPromotionClearer = $catalogPromotionClearer;
         $this->catalogPromotionProcessor = $catalogPromotionProcessor;
         $this->catalogPromotionsProvider = $catalogPromotionsProvider;
+        $this->defaultCriteria = $defaultCriteria;
     }
 
     public function process(): void
     {
         $this->catalogPromotionClearer->clear();
-        $eligibleCatalogPromotions = $this->catalogPromotionsProvider->provide([new Enabled()]);
+        $eligibleCatalogPromotions = $this->catalogPromotionsProvider->provide($this->defaultCriteria);
 
         foreach ($eligibleCatalogPromotions as $catalogPromotion) {
             $this->catalogPromotionProcessor->process($catalogPromotion);

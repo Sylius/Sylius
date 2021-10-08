@@ -16,6 +16,8 @@ namespace spec\Sylius\Bundle\CoreBundle\Processor;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
+use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
+use Sylius\Bundle\PromotionBundle\Criteria\Enabled;
 use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 
@@ -24,12 +26,15 @@ final class AllCatalogPromotionsProcessorSpec extends ObjectBehavior
     function let(
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionProcessorInterface $catalogPromotionProcessor,
-        EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider
+        EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
+        CriteriaInterface $firstCriteria,
+        CriteriaInterface $secondCriteria
     ): void {
         $this->beConstructedWith(
             $catalogPromotionClearer,
             $catalogPromotionProcessor,
-            $catalogPromotionsProvider
+            $catalogPromotionsProvider,
+            [$firstCriteria, $secondCriteria]
         );
     }
 
@@ -38,11 +43,16 @@ final class AllCatalogPromotionsProcessorSpec extends ObjectBehavior
         CatalogPromotionProcessorInterface $catalogPromotionProcessor,
         EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
         CatalogPromotionInterface $firstCatalogPromotion,
-        CatalogPromotionInterface $secondCatalogPromotion
+        CatalogPromotionInterface $secondCatalogPromotion,
+        CriteriaInterface $firstCriteria,
+        CriteriaInterface $secondCriteria
     ): void {
         $catalogPromotionClearer->clear()->shouldBeCalled();
 
-        $catalogPromotionsProvider->provide()->willReturn([$firstCatalogPromotion, $secondCatalogPromotion]);
+        $catalogPromotionsProvider
+            ->provide([$firstCriteria, $secondCriteria])
+            ->willReturn([$firstCatalogPromotion, $secondCatalogPromotion])
+        ;
 
         $catalogPromotionProcessor->process($firstCatalogPromotion)->shouldBeCalled();
         $catalogPromotionProcessor->process($secondCatalogPromotion)->shouldBeCalled();
