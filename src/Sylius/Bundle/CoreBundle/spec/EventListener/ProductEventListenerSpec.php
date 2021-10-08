@@ -14,41 +14,41 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Event\ProductVariantUpdated;
-use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Event\ProductUpdated;
+use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class ProductVariantEventListenerSpec extends ObjectBehavior
+final class ProductEventListenerSpec extends ObjectBehavior
 {
     function let(MessageBusInterface $eventBus): void
     {
         $this->beConstructedWith($eventBus);
     }
 
-    function it_dispatches_product_variant_updated_after_updating_product_variant(
+    function it_dispatches_product_updated_after_updating_product(
         MessageBusInterface $eventBus,
         GenericEvent $event,
-        ProductVariantInterface $variant
+        ProductInterface $product
     ): void {
-        $event->getSubject()->willReturn($variant);
+        $event->getSubject()->willReturn($product);
 
-        $variant->getCode()->willReturn('MUG');
+        $product->getCode()->willReturn('MUG');
 
-        $message = new ProductVariantUpdated('MUG');
+        $message = new ProductUpdated('MUG');
         $eventBus->dispatch($message)->willReturn(new Envelope($message))->shouldBeCalled();
 
-        $this->dispatchProductVariantUpdatedEvent($event);
+        $this->dispatchProductUpdatedEvent($event);
     }
 
-    function it_throws_exception_if_event_object_is_not_a_product_variant(GenericEvent $event): void
+    function it_throws_exception_if_event_object_is_not_a_product(GenericEvent $event): void
     {
         $event->getSubject()->willReturn('badObject')->shouldBeCalled();
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('dispatchProductVariantUpdatedEvent', [$event])
+            ->during('dispatchProductUpdatedEvent', [$event])
         ;
     }
 }

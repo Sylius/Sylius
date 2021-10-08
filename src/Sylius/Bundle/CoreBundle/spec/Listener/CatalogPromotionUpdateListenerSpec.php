@@ -27,37 +27,34 @@ final class CatalogPromotionUpdateListenerSpec extends ObjectBehavior
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager
     ): void {
-        $this->beConstructedWith(
-            $catalogPromotionReprocessor,
-            $catalogPromotionRepository,
-            $entityManager
-        );
+        $this->beConstructedWith($catalogPromotionReprocessor, $catalogPromotionRepository, $entityManager);
     }
 
     function it_processes_catalog_promotion_that_has_just_been_updated(
         AllCatalogPromotionsProcessorInterface $catalogPromotionReprocessor,
-        EntityManagerInterface $entityManager,
         RepositoryInterface $catalogPromotionRepository,
+        EntityManagerInterface $entityManager,
         CatalogPromotionInterface $catalogPromotion
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
 
         $catalogPromotionReprocessor->process()->shouldBeCalled();
-
         $entityManager->flush()->shouldBeCalled();
 
-        $this->__invoke(new CatalogPromotionUpdated('WINTER_MUGS_SALE'));
+        $this(new CatalogPromotionUpdated('WINTER_MUGS_SALE'));
     }
 
-    function it_does_nothing_if_there_is_not_catalog_promotion_with_given_code(
+    function it_does_nothing_if_there_is_no_catalog_promotion_with_given_code(
         AllCatalogPromotionsProcessorInterface $catalogPromotionReprocessor,
-        RepositoryInterface $catalogPromotionRepository
+        RepositoryInterface $catalogPromotionRepository,
+        EntityManagerInterface $entityManager
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn(null);
         $catalogPromotionRepository->findAll()->shouldNotBeCalled();
 
         $catalogPromotionReprocessor->process()->shouldNotBeCalled();
+        $entityManager->flush()->shouldNotBeCalled();
 
-        $this->__invoke(new CatalogPromotionUpdated('WINTER_MUGS_SALE'));
+        $this(new CatalogPromotionUpdated('WINTER_MUGS_SALE'));
     }
 }

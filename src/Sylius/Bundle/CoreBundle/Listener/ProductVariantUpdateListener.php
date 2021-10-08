@@ -14,38 +14,26 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
-use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
+use Sylius\Bundle\CoreBundle\Processor\ProductVariantCatalogPromotionsProcessorInterface;
 use Sylius\Component\Core\Event\ProductVariantUpdated;
-use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ProductVariantUpdateListener
 {
     private ProductVariantRepositoryInterface $productVariantRepository;
 
-    private RepositoryInterface $catalogPromotionRepository;
-
-    private CatalogPromotionClearerInterface $catalogPromotionClearer;
-
-    private CatalogPromotionApplicatorInterface $catalogPromotionApplicator;
+    private ProductVariantCatalogPromotionsProcessorInterface $catalogPromotionsProcessor;
 
     private EntityManagerInterface $entityManager;
 
     public function __construct(
         ProductVariantRepositoryInterface $productVariantRepository,
-        RepositoryInterface $catalogPromotionRepository,
-        CatalogPromotionClearerInterface $catalogPromotionClearer,
-        CatalogPromotionApplicatorInterface $catalogPromotionApplicator,
+        ProductVariantCatalogPromotionsProcessorInterface $catalogPromotionsProcessor,
         EntityManagerInterface $entityManager
     ) {
         $this->productVariantRepository = $productVariantRepository;
-        $this->catalogPromotionRepository = $catalogPromotionRepository;
-        $this->catalogPromotionClearer = $catalogPromotionClearer;
-        $this->catalogPromotionApplicator = $catalogPromotionApplicator;
+        $this->catalogPromotionsProcessor = $catalogPromotionsProcessor;
         $this->entityManager = $entityManager;
     }
 
@@ -57,29 +45,8 @@ final class ProductVariantUpdateListener
             return;
         }
 
-        foreach ($variant->getChannelPricings() as $channelPricing) {
-            $this->reapplyOnVariantsOnChannelPricing($channelPricing);
-        }
+        $this->catalogPromotionsProcessor->process($variant);
 
         $this->entityManager->flush();
-    }
-
-    private function reapplyOnVariantsOnChannelPricing(ChannelPricingInterface $channelPricing): void
-    {
-        $appliedPromotions = $channelPricing->getAppliedPromotions();
-        if (empty($appliedPromotions)) {
-            return;
-        }
-
-        $this->catalogPromotionClearer->clearChannelPricing($channelPricing);
-        foreach ($appliedPromotions as $promotionCode => $promotionData) {
-            /** @var CatalogPromotionInterface|null $catalogPromotion */
-            $catalogPromotion = $this->catalogPromotionRepository->findOneBy(['code' => $promotionCode]);
-            if ($catalogPromotion === null) {
-                continue;
-            }
-
-            $this->catalogPromotionApplicator->applyOnChannelPricing($channelPricing, $catalogPromotion);
-        }
     }
 }

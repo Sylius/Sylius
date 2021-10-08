@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Processor;
 
 use Sylius\Component\Core\Model\ChannelPricingInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ChannelPricingRepositoryInterface;
 
 final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
@@ -29,6 +30,13 @@ final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
     {
         $channelPricings = $this->channelPricingRepository->findWithDiscountedPrice();
         foreach ($channelPricings as $channelPricing) {
+            $this->clearChannelPricing($channelPricing);
+        }
+    }
+
+    public function clearVariant(ProductVariantInterface $variant): void
+    {
+        foreach ($variant->getChannelPricings() as $channelPricing) {
             $this->clearChannelPricing($channelPricing);
         }
     }

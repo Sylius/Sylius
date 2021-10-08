@@ -97,24 +97,34 @@
             <tag name="kernel.event_listener" event="sylius.catalog_promotion.post_update" method="dispatchCatalogPromotionUpdatedEvent" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\EventListener\ProductEventListener">
+            <argument type="service" id="sylius.event_bus" />
+            <tag name="kernel.event_listener" event="sylius.product.post_update" method="dispatchProductUpdatedEvent" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\ProductVariantEventListener">
+            <argument type="service" id="sylius.event_bus" />
+            <tag name="kernel.event_listener" event="sylius.product_variant.post_update" method="dispatchProductVariantUpdatedEvent" />
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\Listener\CatalogPromotionUpdateListener">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessor" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface" />
             <argument type="service" id="sylius.repository.catalog_promotion" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\EventListener\ProductVariantEventListener">
-            <argument type="service" id="sylius.event_bus" />
-            <tag name="kernel.event_listener" event="sylius.product_variant.post_update" method="postUpdate" />
+        <service id="Sylius\Bundle\CoreBundle\Listener\ProductUpdateListener">
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\ProductCatalogPromotionsProcessorInterface" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Listener\ProductVariantUpdateListener">
             <argument type="service" id="sylius.repository.product_variant" />
-            <argument type="service" id="sylius.repository.catalog_promotion" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface" />
-            <argument type="service" id="sylius.manager.channel_pricing" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\ProductVariantCatalogPromotionsProcessorInterface" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
     </services>

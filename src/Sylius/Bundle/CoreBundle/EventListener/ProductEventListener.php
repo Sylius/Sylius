@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Component\Core\Event\ProductVariantUpdated;
-use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Event\ProductUpdated;
+use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductVariantEventListener
+final class ProductEventListener
 {
     private MessageBusInterface $eventBus;
 
@@ -28,11 +28,11 @@ final class ProductVariantEventListener
         $this->eventBus = $eventBus;
     }
 
-    public function dispatchProductVariantUpdatedEvent(GenericEvent $event): void
+    public function dispatchProductUpdatedEvent(GenericEvent $event): void
     {
-        $variant = $event->getSubject();
-        Assert::isInstanceOf($variant, ProductVariantInterface::class);
+        $product = $event->getSubject();
+        Assert::isInstanceOf($product, ProductInterface::class);
 
-        $this->eventBus->dispatch(new ProductVariantUpdated($variant->getCode()));
+        $this->eventBus->dispatch(new ProductUpdated($product->getCode()));
     }
 }

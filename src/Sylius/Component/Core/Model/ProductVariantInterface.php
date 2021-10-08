@@ -28,7 +28,8 @@ interface ProductVariantInterface extends
     StockableInterface,
     TaxableInterface,
     VersionedInterface,
-    ProductImagesAwareInterface
+    ProductImagesAwareInterface,
+    \Stringable
 {
     public function getWeight(): ?float;
 

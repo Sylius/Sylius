@@ -12,16 +12,16 @@ Feature: Reapplying catalog promotions on variants once the product’s taxon ch
         And this product has "PHP T-Shirt" variant priced at "$100.00"
         And the store has a "Mug" configurable product
         And this product has "PHP Mug" variant priced at "$10.00"
-        And there is a catalog promotion "Winter sale" available in "Web-US" channel that reduces price by "30%" and applies on "Clothes" taxon
-        And there is another catalog promotion "Summer sale" available in "Web-US" channel that reduces price by "50%" and applies on "Dishes" taxon
+        And there is a catalog promotion "Winter sale" that reduces price by "30%" and applies on "Clothes" taxon
+        And there is another catalog promotion "Summer sale" that reduces price by "50%" and applies on "Dishes" taxon
         And I am logged in as an administrator
 
-    @todo
+    @ui
     Scenario: Removing a taxon from a product
-        When I remove the "Clothes" taxon from the "T-Shirt" product
+        When I change that the "T-Shirt" product does not belong to the "Clothes" taxon
         Then the visitor should see that the "PHP T-Shirt" variant is not discounted
 
-    @todo
+    @ui
     Scenario: Adding a taxon to a product
-        When I add the "Dishes" taxon to the "Mug" product
-        Then the visitor should see that the "PHP Mug" variant is discounted from "$10.00" to "$5.00" with "Winter sale" promotion
+        When I change that the "Mug" product belongs to the "Dishes" taxon
+        Then the visitor should see that the "PHP Mug" variant is discounted from "$10.00" to "$5.00" with "Summer sale" promotion

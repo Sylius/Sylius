@@ -204,6 +204,10 @@
             <argument type="service" id="sylius.behat.notification_checker" />
         </service>
 
+        <service id="Sylius\Behat\Context\Ui\Admin\ManagingProductTaxonsContext">
+            <argument type="service" id="sylius.behat.page.admin.product.update_simple" />
+        </service>
+
         <service id="sylius.behat.context.ui.admin.managing_product_variants" class="Sylius\Behat\Context\Ui\Admin\ManagingProductVariantsContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.product_variant.create" />

@@ -179,8 +179,8 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" taxon) and ("[^"]+" taxon)$/
-     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" taxon)$/
+     * @Given /^there is (?:a|another) catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" taxon) and ("[^"]+" taxon)$/
+     * @Given /^there is (?:a|another) catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" taxon)$/
      */
     public function thereIsACatalogPromotionThatReducesPriceByAndAppliesOnTaxon(
         string $name,
