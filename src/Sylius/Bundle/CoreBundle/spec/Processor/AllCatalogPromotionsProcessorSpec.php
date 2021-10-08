@@ -18,7 +18,6 @@ use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
 use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class AllCatalogPromotionsProcessorSpec extends ObjectBehavior
 {
