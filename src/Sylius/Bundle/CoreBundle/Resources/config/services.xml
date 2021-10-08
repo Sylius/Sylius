@@ -27,6 +27,7 @@
         <import resource="services/listeners.xml" />
         <import resource="services/order_processing.xml" />
         <import resource="services/payment.xml" />
+        <import resource="services/processors.xml" />
         <import resource="services/promotion.xml" />
         <import resource="services/shipping.xml" />
         <import resource="services/state_resolvers.xml" />
@@ -277,30 +278,6 @@
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="sylius.catalog_promotion.variants_provider" />
-        </service>
-
-        <service
-            id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface"
-            class="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessor"
-        >
-            <argument type="service" id="Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface" />
-        </service>
-
-        <service
-            id="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessor"
-            class="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessor"
-        >
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface" />
-            <argument type="service" id="sylius.repository.catalog_promotion" />
-        </service>
-
-        <service
-            id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface"
-            class="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearer"
-        >
-            <argument type="service" id="sylius.repository.channel_pricing" />
         </service>
     </services>
 </container>

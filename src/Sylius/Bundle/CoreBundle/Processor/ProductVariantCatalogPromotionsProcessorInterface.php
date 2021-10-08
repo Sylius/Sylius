@@ -13,14 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Processor;
 
-use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-interface CatalogPromotionClearerInterface
+interface ProductVariantCatalogPromotionsProcessorInterface
 {
-    public function clear(): void;
-
-    public function clearVariant(ProductVariantInterface $variant): void;
-
-    public function clearChannelPricing(ChannelPricingInterface $channelPricing): void;
+    public function process(ProductVariantInterface $variant): void;
 }

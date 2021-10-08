@@ -126,6 +126,34 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         AutocompleteHelper::chooseValue($this->getSession(), $mainTaxonElement, $taxon->getName());
     }
 
+    public function selectProductTaxon(TaxonInterface $taxon): void
+    {
+        $productTaxonsCodes = [];
+        $productTaxonsElement = $this->getElement('product_taxons');
+        if ($productTaxonsElement->getValue() !== '') {
+            $productTaxonsCodes = explode(',', $productTaxonsElement->getValue());
+        }
+        $productTaxonsCodes[] = $taxon->getCode();
+
+        $productTaxonsElement->setValue(implode(',', $productTaxonsCodes));
+    }
+
+    public function unselectProductTaxon(TaxonInterface $taxon): void
+    {
+        $productTaxonsCodes = [];
+        $productTaxonsElement = $this->getElement('product_taxons');
+        if ($productTaxonsElement->getValue() !== '') {
+            $productTaxonsCodes = explode(',', $productTaxonsElement->getValue());
+        }
+
+        $key = array_search($taxon->getCode(), $productTaxonsCodes);
+        if ($key !== false) {
+            unset($productTaxonsCodes[$key]);
+        }
+
+        $productTaxonsElement->setValue(implode(',', $productTaxonsCodes));
+    }
+
     public function isMainTaxonChosen(string $taxonName): bool
     {
         $this->openTaxonBookmarks();
@@ -436,6 +464,8 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'pricing_configuration' => '#sylius_calculator_container',
             'main_taxon' => '#sylius_product_mainTaxon',
             'non_translatable_attribute' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% "] input',
+            'product_taxon' => '#sylius-product-taxonomy-tree .item .header:contains("%taxonName%") input',
+            'product_taxons' => '#sylius_product_productTaxons',
             'shipping_required' => '#sylius_product_variant_shippingRequired',
             'show_product_dropdown' => '.scrolling.menu',
             'show_product_single_button' => 'a:contains("Show product in shop page")',
