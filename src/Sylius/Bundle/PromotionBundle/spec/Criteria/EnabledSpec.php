@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\PromotionBundle\Criteria;
 
+use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 
 final class EnabledSpec extends ObjectBehavior
 {
@@ -23,18 +23,14 @@ final class EnabledSpec extends ObjectBehavior
     {
         $this->shouldImplement(CriteriaInterface::class);
     }
-    function it_returns_only_enabled_catalog_promotions(
-        CatalogPromotionInterface $enabledCatalogPromotion,
-        CatalogPromotionInterface $disabledCatalogPromotion,
-        CatalogPromotionInterface $anotherEnabledCatalogPromotion
-    ): void {
-        $enabledCatalogPromotion->isEnabled()->willReturn(true);
-        $disabledCatalogPromotion->isEnabled()->willReturn(false);
-        $anotherEnabledCatalogPromotion->isEnabled()->willReturn(true);
 
-        $this
-            ->meets([$enabledCatalogPromotion, $disabledCatalogPromotion, $anotherEnabledCatalogPromotion])
-            ->shouldReturn([$enabledCatalogPromotion, $anotherEnabledCatalogPromotion])
-        ;
+    function it_adds_filters_to_query_builder(QueryBuilder $queryBuilder): void
+    {
+        $queryBuilder->getRootAliases()->willReturn(['catalog_promotion']);
+
+        $queryBuilder->andWhere('catalog_promotion.enabled = :enabled')->willReturn($queryBuilder)->shouldBeCalled();
+        $queryBuilder->setParameter('enabled', true)->willReturn($queryBuilder)->shouldBeCalled();
+
+        $this->filterQueryBuilder($queryBuilder)->shouldReturn($queryBuilder);
     }
 }

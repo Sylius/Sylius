@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\PromotionBundle\Criteria;
 
+use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Provider\DateTimeProviderInterface;
 
 final class DateRangeSpec extends ObjectBehavior
@@ -30,26 +30,17 @@ final class DateRangeSpec extends ObjectBehavior
         $this->shouldImplement(CriteriaInterface::class);
     }
 
-    function it_filters_out_catalog_promotions_which_has_not_started_yet_or_already_ended(
-        DateTimeProviderInterface $calendar,
-        CatalogPromotionInterface $firstCatalogPromotion,
-        CatalogPromotionInterface $secondCatalogPromotion,
-        CatalogPromotionInterface $thirdCatalogPromotion
-    ): void {
-        $calendar->now()->willReturn(new \DateTime());
+    function it_adds_filters_to_query_builder(DateTimeProviderInterface $calendar, QueryBuilder $queryBuilder): void
+    {
+        $queryBuilder->getRootAliases()->willReturn(['o']);
 
-        $firstCatalogPromotion->getStartDate()->willReturn(new \DateTime('-1 day'));
-        $firstCatalogPromotion->getEndDate()->willReturn(new \DateTime('+1 day'));
+        $now = new \DateTime();
+        $calendar->now()->willReturn($now);
 
-        $secondCatalogPromotion->getStartDate()->willReturn(new \DateTime('-10 days'));
-        $secondCatalogPromotion->getEndDate()->willReturn(new \DateTime('-3 days'));
+        $queryBuilder->andWhere('o.startDate IS NULL OR o.startDate < :date')->willReturn($queryBuilder)->shouldBeCalled();
+        $queryBuilder->andWhere('o.endDate IS NULL OR o.endDate > :date')->willReturn($queryBuilder)->shouldBeCalled();
+        $queryBuilder->setParameter('date', $now)->willReturn($queryBuilder)->shouldBeCalled();
 
-        $thirdCatalogPromotion->getStartDate()->willReturn(new \DateTime('+1 day'));
-        $thirdCatalogPromotion->getEndDate()->willReturn(new \DateTime('+5 days'));
-
-        $this
-            ->meets([$firstCatalogPromotion, $secondCatalogPromotion, $thirdCatalogPromotion])
-            ->shouldReturn([$firstCatalogPromotion])
-        ;
+        $this->filterQueryBuilder($queryBuilder)->shouldReturn($queryBuilder);
     }
 }

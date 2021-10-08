@@ -4,14 +4,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Criteria;
 
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
+use Doctrine\ORM\QueryBuilder;
 
 interface CriteriaInterface
 {
-    /**
-     * @param array|CatalogPromotionInterface[] $catalogPromotions
-     *
-     * @return array|CatalogPromotionInterface[]
-     */
-    public function meets(array $catalogPromotions): array;
+    public function filterQueryBuilder(QueryBuilder $queryBuilder): QueryBuilder;
 }

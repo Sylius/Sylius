@@ -17,11 +17,12 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
 use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
+use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class EligibleCatalogPromotionsProviderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $catalogPromotionRepository): void
+    function let(CatalogPromotionRepositoryInterface $catalogPromotionRepository): void
     {
         $this->beConstructedWith($catalogPromotionRepository);
     }
@@ -32,7 +33,7 @@ final class EligibleCatalogPromotionsProviderSpec extends ObjectBehavior
     }
 
     function it_provides_all_catalog_promotions_when_no_criteria_is_specified(
-        RepositoryInterface $catalogPromotionRepository,
+        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         CatalogPromotionInterface $firstCatalogPromotion,
         CatalogPromotionInterface $secondCatalogPromotion
     ): void {
@@ -45,31 +46,20 @@ final class EligibleCatalogPromotionsProviderSpec extends ObjectBehavior
     }
 
     function it_provides_catalog_promotions_based_on_criteria(
-        RepositoryInterface $catalogPromotionRepository,
+        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         CriteriaInterface $firstCriterion,
         CriteriaInterface $secondCriterion,
         CatalogPromotionInterface $firstCatalogPromotion,
-        CatalogPromotionInterface $secondCatalogPromotion,
-        CatalogPromotionInterface $thirdCatalogPromotion,
-        CatalogPromotionInterface $fourthCatalogPromotion
+        CatalogPromotionInterface $secondCatalogPromotion
     ): void {
-        $catalogPromotionRepository->findAll()->willReturn(
-            [$firstCatalogPromotion, $secondCatalogPromotion, $thirdCatalogPromotion, $fourthCatalogPromotion]
-        );
-
-        $firstCriterion
-            ->meets([$firstCatalogPromotion, $secondCatalogPromotion, $thirdCatalogPromotion, $fourthCatalogPromotion])
-            ->willReturn([$firstCatalogPromotion, $thirdCatalogPromotion, $fourthCatalogPromotion])
-        ;
-
-        $secondCriterion
-            ->meets([$firstCatalogPromotion, $thirdCatalogPromotion, $fourthCatalogPromotion])
-            ->willReturn([$firstCatalogPromotion, $thirdCatalogPromotion])
+        $catalogPromotionRepository
+            ->findByCriteria([$firstCriterion, $secondCriterion])
+            ->willReturn([$firstCatalogPromotion, $secondCatalogPromotion])
         ;
 
         $this
             ->provide([$firstCriterion, $secondCriterion])
-            ->shouldReturn([$firstCatalogPromotion, $thirdCatalogPromotion])
+            ->shouldReturn([$firstCatalogPromotion, $secondCatalogPromotion])
         ;
     }
 }

@@ -13,14 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Criteria;
 
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
+use Doctrine\ORM\QueryBuilder;
 
 final class Enabled implements CriteriaInterface
 {
-    public function meets(array $catalogPromotions): array
+    public function filterQueryBuilder(QueryBuilder $queryBuilder): QueryBuilder
     {
-        return array_values(array_filter($catalogPromotions, function(CatalogPromotionInterface $catalogPromotion): bool {
-            return $catalogPromotion->isEnabled();
-        }));
+        $root = $queryBuilder->getRootAliases()[0];
+
+        $queryBuilder
+            ->andWhere($root.'.enabled = :enabled')
+            ->setParameter('enabled', true)
+        ;
+
+        return $queryBuilder;
     }
 }

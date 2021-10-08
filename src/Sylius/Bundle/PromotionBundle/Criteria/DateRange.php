@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Criteria;
 
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Promotion\Provider\DateTimeProviderInterface;
 
 final class DateRange implements CriteriaInterface
@@ -25,22 +25,16 @@ final class DateRange implements CriteriaInterface
         $this->calendar = $calendar;
     }
 
-    public function meets(array $catalogPromotions): array
+    public function filterQueryBuilder(QueryBuilder $queryBuilder): QueryBuilder
     {
-        $now = $this->calendar->now();
-        /** @var CatalogPromotionInterface $catalogPromotion */
-        foreach ($catalogPromotions as $key => $catalogPromotion) {
-            $startDate = $catalogPromotion->getStartDate();
-            $endDate = $catalogPromotion->getEndDate();
+        $root = $queryBuilder->getRootAliases()[0];
 
-            if (
-                ($startDate !== null && $startDate > $now) ||
-                ($endDate !== null && $endDate < $now)
-            ) {
-                unset($catalogPromotions[$key]);
-            }
-        }
+        $queryBuilder
+            ->andWhere(sprintf('%s.startDate IS NULL OR %s.startDate < :date', $root, $root))
+            ->andWhere(sprintf('%s.endDate IS NULL OR %s.endDate > :date', $root, $root))
+            ->setParameter('date', $this->calendar->now())
+        ;
 
-        return $catalogPromotions;
+        return $queryBuilder;
     }
 }
