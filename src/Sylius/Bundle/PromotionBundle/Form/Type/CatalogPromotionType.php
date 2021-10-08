@@ -18,6 +18,7 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -48,7 +49,19 @@ final class CatalogPromotionType extends AbstractResourceType
             ])
             ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.catalog_promotion.enabled'
-            ] )
+            ])
+            ->add('startDate', DateTimeType::class, [
+                'label' => 'sylius.form.catalog_promotion.start_date',
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
+                'required' => false,
+            ])
+            ->add('endDate', DateTimeType::class, [
+                'label' => 'sylius.form.catalog_promotion.end_date',
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
+                'required' => false,
+            ])
             ->add('scopes', CollectionType::class, [
                 'label' => 'sylius.ui.scopes',
                 'entry_type' => CatalogPromotionScopeType::class,

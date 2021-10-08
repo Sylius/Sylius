@@ -270,6 +270,22 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I make it start at :startDate and ends at :endDate
+     */
+    public function iMakeCatalogPromotionOperateBetweenDates(string $startDate, string $endDate): void
+    {
+        $this->client->updateRequestData(['startDate' => $startDate, 'endDate' => $endDate]);
+    }
+
+    /**
+     * @When I make it start at :startDate
+     */
+    public function iMakeCatalogPromotionOperateFrom(string $startDate): void
+    {
+        $this->client->updateRequestData(['startDate' => $startDate]);
+    }
+
+    /**
      * @When I save my changes
      */
     public function iSaveMyChanges(): void
@@ -626,14 +642,43 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then /^"[^"]+" catalog promotion should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
+     * @Then the catalog promotions named :catalogPromotion should operate between :startDate and :endDate
+     * @Then /^(it) should operate between "([^"]+)" and "([^"]+)"$/
+     * @Then /^(this catalog promotion) should operate between "([^"]+)" and "([^"]+)"$/
      */
-    public function catalogPromotionShouldApplyToVariants(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
-    {
+    public function theCatalogPromotionsNamedShouldOperateBetweenDates(
+        CatalogPromotionInterface $catalogPromotion,
+        string $startDate,
+        string $endDate
+    ): void {
+        $response = $this->client->index();
+
+        Assert::true(
+            $this->responseChecker->hasItemWithValues(
+                $response,
+                ['name' => $catalogPromotion->getName(), 'startDate' => $startDate.' 00:00:00', 'endDate' => $endDate.' 00:00:00']
+            ),
+            sprintf(
+                'Cannot find catalog promotions with name "%s" operating between "%s" and "%s" in the list',
+                $catalogPromotion->getName(), $startDate, $endDate
+            )
+        );
+    }
+
+    /**
+     * @Then /^("[^"]+" catalog promotion) should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
+     */
+    public function catalogPromotionShouldApplyToVariants(
+        CatalogPromotionInterface $catalogPromotion,
+        ProductVariantInterface $firstVariant,
+        ProductVariantInterface $secondVariant
+    ): void {
         Assert::same(
             ['variants' => [$firstVariant->getCode(), $secondVariant->getCode()]],
             $this->responseChecker->getCollection($this->client->getLastResponse())[0]['scopes'][0]['configuration']
         );
+
+        $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
     }
 
     /**
@@ -669,6 +714,8 @@ final class ManagingCatalogPromotionsContext implements Context
             ),
             sprintf('Catalog promotion is not assigned to %s channel', $channel->getName())
         );
+
+        $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
     }
 
     /**
@@ -685,6 +732,17 @@ final class ManagingCatalogPromotionsContext implements Context
                 $this->iriConverter->getIriFromItem($channel)
             ),
             sprintf('Catalog promotion is assigned to %s channel', $channel->getName())
+        );
+    }
+
+    /**
+     * @Then I should be notified that catalog promotion has been successfully created
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
+    {
+        Assert::true(
+            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
+            'Catalog promotion could not be created'
         );
     }
 

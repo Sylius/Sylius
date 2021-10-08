@@ -77,6 +77,18 @@ final class CatalogPromotionSpec extends ObjectBehavior
         $this->getCode()->shouldReturn('mug_catalog_promotion');
     }
 
+    function its_start_date_is_mutable(): void
+    {
+        $this->setStartDate(new \DateTime('2021-01-01'));
+        $this->getStartDate()->shouldBeLike(new \DateTime('2021-01-01'));
+    }
+
+    function its_end_date_is_mutable(): void
+    {
+        $this->setEndDate(new \DateTime('2021-01-05'));
+        $this->getEndDate()->shouldBeLike(new \DateTime('2021-01-05'));
+    }
+
     function it_initializes_scopes_collection_by_default(): void
     {
         $this->getScopes()->shouldHaveType(Collection::class);

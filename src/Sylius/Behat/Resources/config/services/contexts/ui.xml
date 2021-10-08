@@ -50,6 +50,8 @@
             <argument type="service" id="sylius.behat.page.admin.catalog_promotion.create" />
             <argument type="service" id="sylius.behat.page.admin.catalog_promotion.update" />
             <argument type="service" id="Sylius\Behat\Element\Admin\CatalogPromotion\FormElement" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.notification_checker" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_channels" class="Sylius\Behat\Context\Ui\Admin\ManagingChannelsContext">

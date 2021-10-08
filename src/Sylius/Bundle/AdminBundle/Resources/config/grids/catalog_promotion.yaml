@@ -18,6 +18,18 @@ sylius_grid:
                     type: string
                     label: sylius.ui.label
                     sortable: ~
+                startDate:
+                    type: datetime
+                    label: sylius.ui.start_date
+                    sortable: ~
+                    options:
+                        format: Y-m-d
+                endDate:
+                    type: datetime
+                    label: sylius.ui.end_date
+                    sortable: ~
+                    options:
+                        format: Y-m-d
                 channels:
                     type: twig
                     label: sylius.ui.channels

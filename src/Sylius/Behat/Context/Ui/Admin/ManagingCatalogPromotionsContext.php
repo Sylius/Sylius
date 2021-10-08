@@ -15,9 +15,12 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Admin\CatalogPromotion\FormElementInterface;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\CatalogPromotion\CreatePageInterface;
 use Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -34,16 +37,24 @@ final class ManagingCatalogPromotionsContext implements Context
 
     private FormElementInterface $formElement;
 
+    private SharedStorageInterface $sharedStorage;
+
+    private NotificationCheckerInterface $notificationChecker;
+
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
-        FormElementInterface $formElement
+        FormElementInterface $formElement,
+        SharedStorageInterface $sharedStorage,
+        NotificationCheckerInterface $notificationChecker
     ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
         $this->formElement = $formElement;
+        $this->sharedStorage = $sharedStorage;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -136,6 +147,23 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iMakeItAvailableInChannel(string $channelName): void
     {
         $this->formElement->checkChannel($channelName);
+    }
+
+    /**
+     * @When I make it start at :startDate and ends at :endDate
+     */
+    public function iMakeItOperateBetweenDates(string $startDate, string $endDate): void
+    {
+        $this->formElement->specifyStartDate(new \DateTime($startDate));
+        $this->formElement->specifyEndDate(new \DateTime($endDate));
+    }
+
+    /**
+     * @When I make it start at :startDate
+     */
+    public function iMakeItOperateFromDate(string $startDate): void
+    {
+        $this->formElement->specifyStartDate(new \DateTime($startDate));
     }
 
     /**
@@ -411,6 +439,20 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then the catalog promotions named :name should operate between :startDate and :endDate
+     */
+    public function theCatalogPromotionsNamedShouldOperateBetweenDates(string $name, string $startDate, string $endDate): void
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['name' => $name, 'startDate' => $startDate, 'endDate' => $endDate]),
+            sprintf(
+                'Cannot find catalog promotions with name "%s" operating between "%s" and "%s" in the list',
+                $name, $startDate, $endDate
+            )
+        );
+    }
+
+    /**
      * @Then it should have :code code and :name name
      */
     public function itShouldHaveCodeAndName(string $code, string $name): void
@@ -435,6 +477,8 @@ final class ManagingCatalogPromotionsContext implements Context
         foreach ($variants as $productVariant) {
             Assert::inArray($productVariant->getCode(), $selectedVariants);
         }
+
+        $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
     }
 
     /**
@@ -515,6 +559,23 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then /^(it) should operate between "([^"]+)" and "([^"]+)"$/
+     * @Then /^(this catalog promotion) should operate between "([^"]+)" and "([^"]+)"$/
+     */
+    public function theCatalogPromotionShouldOperateBetweenDates(
+        CatalogPromotionInterface $catalogPromotion,
+        string $startDate,
+        string $endDate
+    ): void {
+        $this->indexPage->open();
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'name' => $catalogPromotion->getName(), 'startDate' => $startDate, 'endDate' => $endDate,
+        ]));
+
+        $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
+    }
+
+    /**
      * @Then /^(this catalog promotion) should be available in channel "([^"]+)"$/
      */
     public function thisCatalogPromotionShouldBeAvailableInChannel(
@@ -535,6 +596,17 @@ final class ManagingCatalogPromotionsContext implements Context
     ): void {
         Assert::false(
             $this->indexPage->isSingleResourceOnPage(['name' => $catalogPromotion->getName(), 'channels' => $channelName])
+        );
+    }
+
+    /**
+     * @Then I should be notified that catalog promotion has been successfully created
+     */
+    public function iShouldBeNotifiedThatCatalogPromotionHasBeenSuccessfullyCreated(): void
+    {
+        $this->notificationChecker->checkNotification(
+            'Catalog promotion has been successfully created.',
+            NotificationType::success()
         );
     }
 

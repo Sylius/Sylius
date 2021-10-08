@@ -7,8 +7,10 @@ sylius:
                 percentage_discount: Percentage discount
             description: Description
             enabled: Enabled
+            end_date: End date
             label: Label
             name: Name
+            start_date: Start date
             translations: Translations
         promotion:
             actions: Actions

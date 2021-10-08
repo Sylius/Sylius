@@ -75,5 +75,12 @@
             <argument type="service" id="sylius.registry.shipping_calculator" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
+
+        <service id="date_time_normalizer" class="Symfony\Component\Serializer\Normalizer\DateTimeNormalizer">
+            <argument type="collection">
+                <argument key="datetime_format">Y-m-d H:i:s</argument>
+            </argument>
+            <tag name="serializer.normalizer"/>
+        </service>
     </services>
 </container>

@@ -32,6 +32,10 @@ class CatalogPromotion implements CatalogPromotionInterface
 
     protected ?string $code = null;
 
+    protected ?\DateTimeInterface $startDate = null;
+
+    protected ?\DateTimeInterface $endDate = null;
+
     /**
      * @var Collection|CatalogPromotionScopeInterface[]
      *
@@ -74,6 +78,26 @@ class CatalogPromotion implements CatalogPromotionInterface
     public function setName(?string $name): void
     {
         $this->name = $name;
+    }
+
+    public function getStartDate(): ?\DateTimeInterface
+    {
+        return $this->startDate;
+    }
+
+    public function setStartDate(?\DateTimeInterface $startDate): void
+    {
+        $this->startDate = $startDate;
+    }
+
+    public function getEndDate(): ?\DateTimeInterface
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate(?\DateTimeInterface $endDate): void
+    {
+        $this->endDate = $endDate;
     }
 
     public function getLabel(): ?string

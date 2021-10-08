@@ -5,6 +5,8 @@
     "id": @integer@,
     "name": "T-Shirts discount",
     "code": "mugs_discount",
+    "startDate": null,
+    "endDate": null,
     "channels": [
         "\/api\/v2\/admin\/channels\/MOBILE"
     ],

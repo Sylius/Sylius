@@ -81,6 +81,8 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             json_encode([
                 'name' => 'T-Shirts discount',
                 'code' => 'tshirts_discount',
+                'startDate' => '2022-01-01',
+                'endDate' => '2022-02-01',
                 'channels' => [
                     '/api/v2/admin/channels/WEB',
                 ],

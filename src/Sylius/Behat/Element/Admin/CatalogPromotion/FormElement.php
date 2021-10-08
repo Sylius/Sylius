@@ -50,6 +50,22 @@ final class FormElement extends Element implements FormElementInterface
         $this->getDocument()->uncheckField($channelName);
     }
 
+    public function specifyStartDate(\DateTimeInterface $startDate): void
+    {
+        $timestamp = $startDate->getTimestamp();
+
+        $this->getElement('start_date')->setValue(date('Y-m-d', $timestamp));
+        $this->getElement('start_time')->setValue(date('H:i', $timestamp));
+    }
+
+    public function specifyEndDate(\DateTimeInterface $endDate): void
+    {
+        $timestamp = $endDate->getTimestamp();
+
+        $this->getElement('end_date')->setValue(date('Y-m-d', $timestamp));
+        $this->getElement('end_time')->setValue(date('H:i', $timestamp));
+    }
+
     public function addScope(): void
     {
         $this->addCollectionElement('scopes', 'add_scope_button');
@@ -149,14 +165,17 @@ final class FormElement extends Element implements FormElementInterface
             'actions' => '#actions',
             'add_action_button' => '#actions [data-form-collection="add"]',
             'add_scope_button' => '#scopes [data-form-collection="add"]',
-            'channel' => '#sylius_catalog_promotion_code',
             'description' => '#sylius_catalog_promotion_translations_%localeCode%_description',
             'enabled' => '#sylius_catalog_promotion_enabled',
+            'end_date' => '#sylius_catalog_promotion_endDate_date',
+            'end_time' => '#sylius_catalog_promotion_endDate_time',
             'label' => '#sylius_catalog_promotion_translations_%localeCode%_label',
             'last_action' => '#actions [data-form-collection="item"]:last-child',
             'last_scope' => '#scopes [data-form-collection="item"]:last-child',
             'name' => '#sylius_catalog_promotion_name',
             'scopes' => '#scopes',
+            'start_date' => '#sylius_catalog_promotion_startDate_date',
+            'start_time' => '#sylius_catalog_promotion_startDate_time',
         ]);
     }
 
