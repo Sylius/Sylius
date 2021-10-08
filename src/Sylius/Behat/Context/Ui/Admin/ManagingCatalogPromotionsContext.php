@@ -590,6 +590,18 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then /^(it) should be (inactive)$/
+     */
+    public function itShouldBeInactive(CatalogPromotionInterface $catalogPromotion, string $state): void
+    {
+        $this->indexPage->open();
+
+        Assert::true($this->indexPage->isSingleResourceOnPage(
+            ['name' => $catalogPromotion->getName(), 'state' => $state]
+        ));
+    }
+
+    /**
      * @Then /^(this catalog promotion) should be available in channel "([^"]+)"$/
      */
     public function thisCatalogPromotionShouldBeAvailableInChannel(

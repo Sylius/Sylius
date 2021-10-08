@@ -666,6 +666,17 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then /^(it) should be (inactive)$/
+     */
+    public function itShouldBeInactive(CatalogPromotionInterface $catalogPromotion, string $state): void
+    {
+        Assert::true($this->responseChecker->hasItemWithValues(
+            $this->client->getLastResponse(),
+            ['name' => $catalogPromotion->getName(), 'state' => $state]
+        ));
+    }
+
+    /**
      * @Then /^("[^"]+" catalog promotion) should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
      */
     public function catalogPromotionShouldApplyToVariants(
