@@ -28,9 +28,10 @@ interface ProductVariantInterface extends
     StockableInterface,
     TaxableInterface,
     VersionedInterface,
-    ProductImagesAwareInterface,
-    \Stringable
+    ProductImagesAwareInterface
 {
+    public function __toString(): string;
+
     public function getWeight(): ?float;
 
     public function setWeight(?float $weight): void;
