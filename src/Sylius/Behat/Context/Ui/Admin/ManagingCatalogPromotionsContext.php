@@ -269,6 +269,20 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I edit ("[^"]+" catalog promotion) to be applied on ("[^"]+" taxon)$/
+     */
+    public function iEditCatalogPromotionToBeAppliedOnTaxon(
+        CatalogPromotionInterface $catalogPromotion,
+        TaxonInterface $taxon
+    ): void {
+        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
+
+        $this->formElement->chooseScopeType('For taxons');
+        $this->formElement->chooseLastScopeTaxons([$taxon->getCode()]);
+        $this->updatePage->saveChanges();
+    }
+
+    /**
      * @When I remove its every scope
      */
     public function iRemoveItsEveryScope(): void
