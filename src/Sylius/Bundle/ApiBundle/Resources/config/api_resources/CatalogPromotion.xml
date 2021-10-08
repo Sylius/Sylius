@@ -117,6 +117,7 @@ Example configuration for `percentage_discount` action type:
         <property name="name" writable="true" />
         <property name="startDate" writable="true" />
         <property name="endDate" writable="true" />
+        <property name="state" writable="true" />
         <property name="channels" writable="true" />
         <property name="translations" readable="true" writable="true">
             <attribute name="openapi_context">
