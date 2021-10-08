@@ -21,6 +21,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
@@ -157,7 +158,22 @@ final class ManagingCatalogPromotionsContext implements Context
         }, $variants);
 
         $this->formElement->addScope();
+        $this->formElement->chooseScopeType('For variants');
         $this->formElement->chooseLastScopeVariants($variantCodes);
+    }
+
+    /**
+     * @When /^I add scope that applies on ("[^"]+" taxon)$/
+     */
+    public function iAddScopeThatAppliesOnTaxons(TaxonInterface ...$taxons): void
+    {
+        $taxonsCodes = array_map(function(TaxonInterface $taxon) {
+            return $taxon->getCode();
+        }, $taxons);
+
+        $this->formElement->addScope();
+        $this->formElement->chooseScopeType('For taxons');
+        $this->formElement->chooseLastScopeTaxons($taxonsCodes);
     }
 
     /**
@@ -277,6 +293,16 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddForVariantsScopeWithoutVariantsConfigured(): void
     {
         $this->formElement->addScope();
+        $this->formElement->chooseScopeType('For variants');
+    }
+
+    /**
+     * @When I add catalog promotion scope for taxon without taxons
+     */
+    public function iAddForTaxonScopeWithoutTaxonsConfigured(): void
+    {
+        $this->formElement->addScope();
+        $this->formElement->chooseScopeType('For taxons');
     }
 
     /**
@@ -398,14 +424,32 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @Then /^("[^"]+" catalog promotion) should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
      */
-    public function itShouldHaveScope(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface ...$variants): void
-    {
+    public function itShouldHaveVariantBasedScope(
+        CatalogPromotionInterface $catalogPromotion,
+        ProductVariantInterface ...$variants
+    ): void {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
         $selectedVariants = $this->formElement->getLastScopeVariantCodes();
 
         foreach ($variants as $productVariant) {
             Assert::inArray($productVariant->getCode(), $selectedVariants);
+        }
+    }
+
+    /**
+     * @Then /^("[^"]+" catalog promotion) should apply to all products from ("[^"]+" taxon)$/
+     */
+    public function itShouldHaveTaxonsBasedScope(
+        CatalogPromotionInterface $catalogPromotion,
+        TaxonInterface ...$taxons
+    ): void {
+        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
+
+        $selectedTaxons = $this->formElement->getLastScopeVariantCodes();
+
+        foreach ($taxons as $taxon) {
+            Assert::inArray($taxon->getCode(), $selectedTaxons);
         }
     }
 
@@ -466,6 +510,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function theCatalogPromotionShouldBeAvailableInChannel(string $catalogPromotionName, string $channelName): void
     {
+        $this->indexPage->open();
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $catalogPromotionName, 'channels' => $channelName]));
     }
 
@@ -553,5 +598,13 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldBeNotifiedThatAtLeast1VariantIsRequired(): void
     {
         Assert::same($this->formElement->getValidationMessageForAction(), 'Please add at least 1 variant.');
+    }
+
+    /**
+     * @Then I should be notified that I must add at least one taxon
+     */
+    public function iShouldBeNotifiedThatIMustAddAtLeastOneTaxon(): void
+    {
+        Assert::same($this->formElement->getValidationMessageForAction(), 'Provided configuration contains errors. Please add at least 1 taxon.');
     }
 }

@@ -31,13 +31,19 @@ interface FormElementInterface
 
     public function addAction(): void;
 
+    public function chooseScopeType(string $type): void;
+
     public function chooseLastScopeVariants(array $variantCodes): void;
+
+    public function chooseLastScopeTaxons(array $taxonsCodes): void;
 
     public function specifyLastActionDiscount(string $discount): void;
 
     public function getFieldValueInLocale(string $field, string $localeCode): string;
 
     public function getLastScopeVariantCodes(): array;
+
+    public function getLastScopeTaxonsCodes(): array;
 
     public function getLastActionDiscount(): string;
 

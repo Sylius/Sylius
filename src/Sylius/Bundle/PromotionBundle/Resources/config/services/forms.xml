@@ -46,6 +46,7 @@
         <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType">
             <argument>%sylius.model.catalog_promotion_scope.class%</argument>
             <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
+            <argument type="collection"/>
             <tag name="form.type" />
         </service>
 
