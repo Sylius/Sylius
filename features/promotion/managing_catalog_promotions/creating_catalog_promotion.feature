@@ -53,6 +53,7 @@ Feature: Creating a catalog promotion
         And it should have "winter_sale" code and "Winter sale" name
         And "Winter sale" catalog promotion should apply to "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And it should have "50%" discount
+        And it should be inactive
         And "PHP T-Shirt" variant and "Kotlin T-Shirt" variant should not be discounted
 
     @api @ui
@@ -94,3 +95,4 @@ Feature: Creating a catalog promotion
         And it should have "winter_sale" code and "Winter sale" name
         And "Winter sale" catalog promotion should apply to "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And it should operate between "2021-11-10" and "2022-01-08"
+        And it should be inactive

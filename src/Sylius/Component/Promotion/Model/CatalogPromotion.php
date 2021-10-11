@@ -36,6 +36,8 @@ class CatalogPromotion implements CatalogPromotionInterface
 
     protected ?\DateTimeInterface $endDate = null;
 
+    protected string $state = CatalogPromotionStates::STATE_INACTIVE;
+
     /**
      * @var Collection|CatalogPromotionScopeInterface[]
      *
@@ -98,6 +100,16 @@ class CatalogPromotion implements CatalogPromotionInterface
     public function setEndDate(?\DateTimeInterface $endDate): void
     {
         $this->endDate = $endDate;
+    }
+
+    public function getState(): ?string
+    {
+        return $this->state;
+    }
+
+    public function setState(?string $state): void
+    {
+        $this->state = $state;
     }
 
     public function getLabel(): ?string
