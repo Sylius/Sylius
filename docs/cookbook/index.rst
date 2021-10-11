@@ -71,19 +71,11 @@ Promotions
 .. toctree::
     :hidden:
 
+    promotions/custom-catalog-promotion-scope
     promotions/custom-promotion-rule
     promotions/custom-promotion-action
 
 .. include:: /cookbook/promotions/map.rst.inc
-
-Catalog Promotions
-------------------
-
-.. toctree::
-    :hidden:
-
-    catalog-promotions/custom-catalog-promotion-scope
-
 
 Inventory
 ---------

@@ -10,7 +10,7 @@ Let's try implementing the new **Catalog Promotion Scope** in this cookbook, tha
 .. note::
 
     If you are familiar with **Cart Promotions** and you know how **Cart Promotion Rules** work,
-    than the Catalog Promotion Scope should look familiar, as the concept of them is quite similar.
+    then the Catalog Promotion Scope should look familiar, as the concept of them is quite similar.
 
 Create a new catalog promotion scope
 ------------------------------------
@@ -56,8 +56,8 @@ Also as we are in this config file we can declare our Validator for this particu
     # config/services.yaml
 
     App\Validator\CatalogPromotionScope\ByPhraseScopeValidator:
-            tags:
-                - { name: 'sylius.catalog_promotion.scope_validator', key: 'by_phrase' }
+        tags:
+            - { name: 'sylius.catalog_promotion.scope_validator', key: 'by_phrase' }
 
 In this validator we will check only the case for the ``phrase`` key to exist. But you can also extend it with your own
 keys to check as well as their corresponding values.
@@ -82,12 +82,12 @@ keys to check as well as their corresponding values.
             Assert::isInstanceOf($constraint, CatalogPromotionScope::class);
 
             if (!array_key_exists('phrase', $configuration) || empty($configuration['phrase'])) {
-                $context->buildViolation("There is no phrase provided")->atPath('configuration.phrase')->addViolation();
+                $context->buildViolation('There is no phrase provided')->atPath('configuration.phrase')->addViolation();
             }
         }
     }
 
-Alright now we have a working basic validation, and our new type Scope exists. We should now create a Provider that will return
+Alright now we have a working basic validation, and our new type of Scope exists. We should now create a Provider that will return
 for us all of eligible product variants. We can start with config:
 
 .. code-block:: yaml
@@ -157,10 +157,10 @@ With current implementation first you need to create a twig template for new Sco
 .. code-block:: html
 
     # templates/bundles/SyliusAdminBundle/CatalogPromotion/Scope/by_phrase.html.twig
-    #BLA BLA CODE TODO AT THE MOMENT
+
     {% form_theme field '@SyliusAdmin/Form/theme.html.twig' %}
 
-    {{ form_row(field.taxons, {'remote_url': path('sylius_admin_ajax_taxon_by_name_phrase'), 'load_edit_url': path('sylius_admin_ajax_taxon_by_code')}) }}
+    {{ form_row(field.phrase, {}) }}
 
 Now let's create a form type and declare it service:
 
@@ -172,15 +172,52 @@ Now let's create a form type and declare it service:
         arguments:
             - '@sylius.repository.product_variant'
         tags:
-            - { name: 'sylius.catalog_promotion.scope_configuration_type', key: '%sylius.catalog_promotion.scope.by_phrase%' }
+            - { name: 'sylius.catalog_promotion.scope_configuration_type', key: 'by_phrase' }
             - { name: 'form.type' }
 
 .. code-block:: php
 
+    <?php
 
-That's all. You will now be able to choose the new Scope while creating a new Catalog Promotion.
+    namespace App\Form\Type\CatalogPromotionScope;
 
-#end todo
+    use Symfony\Component\Form\AbstractType;
+    use Symfony\Component\Form\Extension\Core\Type\TextType;
+    use Symfony\Component\Form\FormBuilderInterface;
+    use Symfony\Component\Validator\Constraints\NotBlank;
+
+    class ByPhraseScopeConfigurationType extends AbstractType
+    {
+        public function buildForm(FormBuilderInterface $builder, array $options): void
+        {
+            $builder->add('phrase', TextType::class, [
+                'label' => 'Phrase',
+                'constraints' => [
+                    new NotBlank(['groups' => ['sylius']]),
+                ],
+            ]);
+        }
+
+        public function getBlockPrefix(): string
+        {
+            return 'sylius_catalog_promotion_scope_by_phrase_configuration';
+        }
+    }
+
+And with current implementation, there is also a need to override a ``default.html.twig`` template with key that is first in alphabetical order.
+In our case - we have a template ``by_phrase.html.twig`` which is first before out of the box ``for_variants`` and ``for_taxons`` templates:
+
+.. code-block:: html+twig
+
+    {# templates/bundles/SyliusAdminBundle/CatalogPromotion/Scope/default.html.twig #}
+
+    {% include 'bundles/SyliusAdminBundle/CatalogPromotion/Scope/by_phrase.html.twig' %}
+
+.. note::
+
+    This overriding will be suspect of change, so there won't be need for declaring ``default.html.twig`` template anymore.
+
+That's all. You will now should be able to choose the new Scope while creating a new Catalog Promotion.
 
 Learn more
 ----------
