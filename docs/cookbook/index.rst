@@ -71,6 +71,7 @@ Promotions
 .. toctree::
     :hidden:
 
+    promotions/custom-catalog-promotion-scope
     promotions/custom-promotion-rule
     promotions/custom-promotion-action
 
