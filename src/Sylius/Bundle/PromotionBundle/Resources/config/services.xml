@@ -14,6 +14,7 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
         <import resource="services/eligibility_checkers.xml" />
+        <import resource="services/criteria.xml" />
         <import resource="services/forms.xml" />
         <import resource="services/command.xml" />
         <import resource="services/validators.xml" />
@@ -71,5 +72,14 @@
         <service id="sylius.promotion_coupon_generator.percentage_policy" class="Sylius\Component\Promotion\Generator\PercentageGenerationPolicy">
             <argument type="service" id="sylius.repository.promotion_coupon" />
         </service>
+
+        <service
+            id="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface"
+            class="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProvider"
+        >
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+        </service>
+
+        <service id="Sylius\Component\Promotion\Provider\DateTimeProviderInterface" class="Sylius\Component\Promotion\Provider\Calendar" />
     </services>
 </container>

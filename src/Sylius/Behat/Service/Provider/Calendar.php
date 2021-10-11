@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Service\Provider;
 
 use Sylius\Bundle\ShippingBundle\Provider\DateTimeProvider;
+use Sylius\Component\Promotion\Provider\DateTimeProviderInterface;
 
-final class Calendar implements DateTimeProvider
+final class Calendar implements DateTimeProvider, DateTimeProviderInterface
 {
     private string $projectDirectory;
 
@@ -25,6 +26,16 @@ final class Calendar implements DateTimeProvider
     }
 
     public function today(): \DateTimeInterface
+    {
+        return $this->provideFakeDateIfSet();
+    }
+
+    public function now(): \DateTimeInterface
+    {
+        return $this->provideFakeDateIfSet();
+    }
+
+    private function provideFakeDateIfSet(): \DateTimeInterface
     {
         if (file_exists($this->projectDirectory . '/var/temporaryDate.txt')) {
             $file = fopen($this->projectDirectory . '/var/temporaryDate.txt', 'r');
