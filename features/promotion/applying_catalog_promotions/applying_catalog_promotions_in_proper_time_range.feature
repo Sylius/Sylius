@@ -27,7 +27,7 @@ Feature: Applying catalog promotions in proper time range
         And I should see this product has no catalog promotion applied
 
     @api @ui
-    Scenario: Not applying catalog promotion if its end date has alread passed
+    Scenario: Not applying catalog promotion if its end date has already passed
         Given it is "2022-01-01" now
         And the catalog promotion "Winter sale" operates between "2021-12-20" and "2021-12-30"
         When I view product "T-Shirt"
