@@ -18,7 +18,6 @@ use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
 use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class EligibleCatalogPromotionsProviderSpec extends ObjectBehavior
 {
@@ -38,7 +37,7 @@ final class EligibleCatalogPromotionsProviderSpec extends ObjectBehavior
         CatalogPromotionInterface $secondCatalogPromotion
     ): void {
         $catalogPromotionRepository
-            ->findAll()
+            ->findByCriteria([])
             ->willReturn([$firstCatalogPromotion, $secondCatalogPromotion])
         ;
 

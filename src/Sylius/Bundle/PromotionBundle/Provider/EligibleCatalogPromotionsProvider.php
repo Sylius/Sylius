@@ -26,12 +26,8 @@ final class EligibleCatalogPromotionsProvider implements EligibleCatalogPromotio
         $this->catalogPromotionRepository = $catalogPromotionRepository;
     }
 
-    public function provide(iterable $criteria = []): iterable
+    public function provide(iterable $criteria = []): array
     {
-        if (empty($criteria)) {
-            return $this->catalogPromotionRepository->findAll();
-        }
-
-        return array_values($this->catalogPromotionRepository->findByCriteria($criteria));
+        return $this->catalogPromotionRepository->findByCriteria($criteria);
     }
 }

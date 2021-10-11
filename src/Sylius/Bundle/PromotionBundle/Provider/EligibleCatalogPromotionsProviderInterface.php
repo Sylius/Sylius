@@ -12,7 +12,7 @@ interface EligibleCatalogPromotionsProviderInterface
     /**
      * @param iterable|CriteriaInterface[] $criteria
      *
-     * @return iterable|CatalogPromotionInterface[]
+     * @return array|CatalogPromotionInterface[]
      */
-    public function provide(iterable $criteria = []): iterable;
+    public function provide(iterable $criteria = []): array;
 }
