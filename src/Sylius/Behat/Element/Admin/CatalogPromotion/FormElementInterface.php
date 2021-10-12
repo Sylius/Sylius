@@ -51,7 +51,7 @@ interface FormElementInterface
 
     public function getLastActionDiscount(): string;
 
-    public function getValidationMessageForAction(): string;
+    public function getValidationMessage(): string;
 
     public function removeAllActions(): void;
 

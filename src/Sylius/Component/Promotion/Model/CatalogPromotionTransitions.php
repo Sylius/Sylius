@@ -15,6 +15,8 @@ namespace Sylius\Component\Promotion\Model;
 
 final class CatalogPromotionTransitions
 {
+    public const GRAPH = 'sylius_catalog_promotion';
+
     public const TRANSITION_PROCESS = 'process';
 
     public const TRANSITION_ACTIVATE = 'activate';

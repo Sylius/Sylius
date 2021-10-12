@@ -3,6 +3,7 @@
 
 sylius:
     catalog_promotion:
+        processing_state: The catalog promotion cannot be edited as it is currently being processed.
         code:
             unique: The catalog promotion with given code already exists.
             regex: Catalog promotion code can only be comprised of letters, numbers, dashes and underscores.

@@ -87,3 +87,10 @@ Feature: Editing catalog promotion
         Given this catalog promotion is disabled
         When I enable "Christmas sale" catalog promotion
         Then "PHP T-Shirt" variant should be discounted
+
+    @todo @api @ui
+    Scenario: Being unable to edit catalog promotion if it is currently being processed
+        Given the catalog promotion "Christmas sale" is currently being processed
+        When I try to rename the "Christmas sale" catalog promotion to "Black Friday"
+        Then I should not be able to edit it due to wrong state
+        And this catalog promotion name should still be "Christmas sale"

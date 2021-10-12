@@ -232,6 +232,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When I rename the :catalogPromotion catalog promotion to :name
+     * @When I try to rename the :catalogPromotion catalog promotion to :name
      */
     public function iRenameTheCatalogPromotionTo(CatalogPromotionInterface $catalogPromotion, string $name): void
     {
@@ -416,7 +417,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatADiscountAmountShouldBeBetween0And100Percent(): void
     {
-        Assert::same($this->formElement->getValidationMessageForAction(), 'The percentage discount amount must be between 0% and 100%.');
+        Assert::same($this->formElement->getValidationMessage(), 'The percentage discount amount must be between 0% and 100%.');
     }
 
     /**
@@ -424,7 +425,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatADiscountAmountShouldBeANumber(): void
     {
-        Assert::same($this->formElement->getValidationMessageForAction(), 'The percentage discount amount must be a number and can not be empty.');
+        Assert::same($this->formElement->getValidationMessage(), 'The percentage discount amount must be a number and can not be empty.');
     }
 
     /**
@@ -654,7 +655,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then /^(this catalog promotion) name should be "([^"]+)"$/
+     * @Then /^(this catalog promotion) name should(?:| still) be "([^"]+)"$/
      */
     public function thisCatalogPromotionNameShouldBe(CatalogPromotionInterface $catalogPromotion, string $name): void
     {
@@ -695,7 +696,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatAtLeast1VariantIsRequired(): void
     {
-        Assert::same($this->formElement->getValidationMessageForAction(), 'Please add at least 1 variant.');
+        Assert::same($this->formElement->getValidationMessage(), 'Please add at least 1 variant.');
     }
 
     /**
@@ -703,6 +704,17 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatIMustAddAtLeastOneTaxon(): void
     {
-        Assert::same($this->formElement->getValidationMessageForAction(), 'Provided configuration contains errors. Please add at least 1 taxon.');
+        Assert::same($this->formElement->getValidationMessage(), 'Provided configuration contains errors. Please add at least 1 taxon.');
+    }
+
+    /**
+     * @Then I should not be able to edit it due to wrong state
+     */
+    public function iShouldNotBeAbleToEditItDueToWrongState(): void
+    {
+        Assert::same(
+            $this->formElement->getValidationMessage(),
+            'The catalog promotion cannot be edited as it is currently being processed.'
+        );
     }
 }
