@@ -117,7 +117,7 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^(it) applies on ("[^"]+" variant)$/
+     * @Given /^(it) applies(?:| also) on ("[^"]+" variant)$/
      */
     public function itAppliesOnVariant(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface $variant): void
     {
