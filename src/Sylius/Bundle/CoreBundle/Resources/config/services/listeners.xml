@@ -93,6 +93,7 @@
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\CatalogPromotionEventListener">
             <argument type="service" id="sylius.event_bus" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculator" />
             <tag name="kernel.event_listener" event="sylius.catalog_promotion.post_create" method="dispatchCatalogPromotionUpdatedEvent" />
             <tag name="kernel.event_listener" event="sylius.catalog_promotion.post_update" method="dispatchCatalogPromotionUpdatedEvent" />
         </service>
