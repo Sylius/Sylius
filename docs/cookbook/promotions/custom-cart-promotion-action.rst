@@ -1,12 +1,12 @@
-How to add a custom promotion action?
-=====================================
+How to add a custom cart promotion action?
+==========================================
 
-Let's assume that you would like to have a promotion that gives **100% discount on the cheapest item in the cart**.
+Let's assume that you would like to have a cart promotion that gives **100% discount on the cheapest item in the cart**.
 
 See what steps need to be taken to achieve that:
 
-Create a new promotion action
------------------------------
+Create a new cart promotion action
+----------------------------------
 
 You will need a new class ``CheapestProductDiscountPromotionActionCommand``.
 
@@ -85,7 +85,7 @@ This class needs also a ``isConfigurationValid()`` method which was omitted in t
 Prepare a configuration form type for the admin panel
 -----------------------------------------------------
 
-The new action needs a form type to be available in the admin panel, while creating a new promotion.
+The new action needs a form type to be available in the admin panel, while creating a new cart promotion.
 
 .. code-block:: php
 
@@ -134,8 +134,8 @@ In the ``config/services.yaml`` configure:
         tags:
             - { name: form.type }
 
-Create a new promotion with your action
----------------------------------------
+Create a new cart promotion with your action
+--------------------------------------------
 
 Go to the admin panel of your system. On the ``/admin/promotions/new`` url you can create a new promotion.
 
@@ -147,4 +147,4 @@ Learn more
 ----------
 
 * :doc:`Customization Guide </customization/index>`
-* :doc:`Promotions Concept Documentation </customization/index>`
+* :doc:`Cart Promotions Concept Documentation </book/orders/cart-promotions>`
