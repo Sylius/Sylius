@@ -71,9 +71,9 @@ Promotions
 .. toctree::
     :hidden:
 
+    promotions/custom-cart-promotion-rule
+    promotions/custom-cart-promotion-action
     promotions/custom-catalog-promotion-scope
-    promotions/custom-promotion-rule
-    promotions/custom-promotion-action
 
 .. include:: /cookbook/promotions/map.rst.inc
 

@@ -1,12 +1,12 @@
-How to add a custom promotion rule?
-===================================
+How to add a custom cart promotion rule?
+========================================
 
 Adding new, custom rules to your shop is a common usecase. You can imagine for instance, that you have some customers
 in your shop that you distinguish as premium. And for these premium customers you would like to give special promotions.
 For that you will need a new PromotionRule that will check if the customer is premium or not.
 
-Create a new promotion rule
----------------------------
+Create a new cart promotion rule
+--------------------------------
 
 The new Rule needs a RuleChecker class:
 
@@ -35,7 +35,7 @@ The new Rule needs a RuleChecker class:
 Prepare a configuration form type for your new rule
 ---------------------------------------------------
 
-To be able to configure a promotion with your new rule you will need a form type for the admin panel.
+To be able to configure a cart promotion with your new rule you will need a form type for the admin panel.
 
 Create the configuration form type class:
 
@@ -92,4 +92,4 @@ Learn more
 ----------
 
 * :doc:`Customization Guide </customization/index>`
-* :doc:`Promotions Concept Documentation </customization/index>`
+* :doc:`Cart Promotions Concept Documentation </book/orders/cart-promotions>`
