@@ -130,7 +130,7 @@ final class FormElement extends Element implements FormElementInterface
         return $lastAction->find('css', 'input')->getValue();
     }
 
-    public function getValidationMessageForAction(): string
+    public function getValidationMessage(): string
     {
         $foundElement = $this->getDocument()->find('css', '.sylius-validation-error');
 

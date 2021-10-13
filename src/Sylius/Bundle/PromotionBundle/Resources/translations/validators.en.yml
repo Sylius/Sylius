@@ -11,6 +11,8 @@ sylius:
             max_length: Catalog promotion name must not be longer than {{ limit }} characters.
             min_length: Catalog promotion name must be at least {{ limit }} characters long.
             not_blank: Please enter catalog promotion name.
+        state:
+            processing: The catalog promotion cannot be edited as it is currently being processed.
     catalog_promotion_action:
         invalid_type: Catalog promotion action type is invalid. Please choose a valid type.
         percentage_discount:

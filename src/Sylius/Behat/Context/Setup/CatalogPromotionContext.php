@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManagerInterface;
+use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
@@ -23,8 +24,10 @@ use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Core\ProductReviewTransitions;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -40,6 +43,8 @@ final class CatalogPromotionContext implements Context
 
     private ChannelRepositoryInterface $channelRepository;
 
+    private StateMachineFactoryInterface $stateMachineFactory;
+
     private MessageBusInterface $eventBus;
 
     private SharedStorageInterface $sharedStorage;
@@ -50,6 +55,7 @@ final class CatalogPromotionContext implements Context
         FactoryInterface $catalogPromotionActionFactory,
         EntityManagerInterface $entityManager,
         ChannelRepositoryInterface $channelRepository,
+        StateMachineFactoryInterface $stateMachineFactory,
         MessageBusInterface $eventBus,
         SharedStorageInterface $sharedStorage
     ) {
@@ -58,6 +64,7 @@ final class CatalogPromotionContext implements Context
         $this->catalogPromotionActionFactory = $catalogPromotionActionFactory;
         $this->entityManager = $entityManager;
         $this->channelRepository = $channelRepository;
+        $this->stateMachineFactory = $stateMachineFactory;
         $this->eventBus = $eventBus;
         $this->sharedStorage = $sharedStorage;
     }
@@ -307,12 +314,23 @@ final class CatalogPromotionContext implements Context
         CatalogPromotionInterface $catalogPromotion,
         string $startDate,
         string $endDate
-    ) {
+    ): void {
         $catalogPromotion->setStartDate(new \DateTime($startDate));
         $catalogPromotion->setEndDate(new \DateTime($endDate));
 
         $this->entityManager->flush();
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
+    /**
+     * @Given the catalog promotion :catalogPromotion is currently being processed
+     */
+    public function theCatalogPromotionIsCurrentlyBeingProcessed(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $stateMachine = $this->stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
+
+        $this->entityManager->flush();
     }
 
     private function createCatalogPromotion(

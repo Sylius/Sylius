@@ -162,6 +162,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When I rename the :catalogPromotion catalog promotion to :name
+     * @When I try to rename the :catalogPromotion catalog promotion to :name
      */
     public function iRenameTheCatalogPromotionTo(CatalogPromotionInterface $catalogPromotion, string $name): void
     {
@@ -769,7 +770,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then /^(this catalog promotion) name should be "([^"]+)"$/
+     * @Then /^(this catalog promotion) name should(?:| still) be "([^"]+)"$/
      */
     public function thisCatalogPromotionNameShouldBe(CatalogPromotionInterface $catalogPromotion, string $name): void
     {
@@ -975,6 +976,17 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'Please add at least 1 variant.'
+        );
+    }
+
+    /**
+     * @Then I should not be able to edit it due to wrong state
+     */
+    public function iShouldNotBeAbleToEditItDueToWrongState(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'The catalog promotion cannot be edited as it is currently being processed.'
         );
     }
 

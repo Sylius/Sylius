@@ -299,6 +299,7 @@
             <argument type="service" id="sylius.factory.catalog_promotion_action" />
             <argument type="service" id="sylius.manager.catalog_promotion" />
             <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sm.factory" />
             <argument type="service" id="sylius.event_bus" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
