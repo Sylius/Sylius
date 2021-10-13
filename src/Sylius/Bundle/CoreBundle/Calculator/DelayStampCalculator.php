@@ -15,13 +15,14 @@ namespace Sylius\Bundle\CoreBundle\Calculator;
 
 use DateTimeInterface;
 use Sylius\Bundle\CoreBundle\Exception\TargetTimeSmallerException;
+use Symfony\Component\Messenger\Stamp\DelayStamp;
 
 class DelayStampCalculator implements DelayStampCalculatorInterface
 {
     /**
      * @throws TargetTimeSmallerException
      */
-    public function calculate(DateTimeInterface $currentTime, DateTimeInterface $targetTime): int
+    public function calculate(DateTimeInterface $currentTime, DateTimeInterface $targetTime): DelayStamp
     {
         $timeDifference = $targetTime->getTimestamp() - $currentTime->getTimestamp();
 
@@ -29,6 +30,6 @@ class DelayStampCalculator implements DelayStampCalculatorInterface
             throw new TargetTimeSmallerException($currentTime, $targetTime);
         }
 
-        return $timeDifference * 1000;
+        return new DelayStamp($timeDifference * 1000);
     }
 }

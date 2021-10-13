@@ -18,5 +18,5 @@ use Symfony\Component\Messenger\Stamp\DelayStamp;
 
 interface DelayStampCalculatorInterface
 {
-    public function calculate(DateTimeInterface $currentTime, DateTimeInterface $targetTime): int;
+    public function calculate(DateTimeInterface $currentTime, DateTimeInterface $targetTime): DelayStamp;
 }

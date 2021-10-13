@@ -41,7 +41,7 @@ final class CatalogPromotionEventListener
 
         $this->eventBus->dispatch(
             new CatalogPromotionUpdated($catalogPromotion->getCode()),
-            [new DelayStamp($this->delayStampCalculator->calculate(new \DateTime('now'), $catalogPromotion->getStartDate()))]
+            [$this->delayStampCalculator->calculate(new \DateTime('now'), $catalogPromotion->getStartDate())]
         );
     }
 }
