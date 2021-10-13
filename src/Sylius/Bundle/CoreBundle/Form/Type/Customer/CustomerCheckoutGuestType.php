@@ -29,6 +29,7 @@ final class CustomerCheckoutGuestType extends AbstractResourceType
         array $validationGroups,
         private RepositoryInterface $customerRepository,
         private FactoryInterface $customerFactory,
+        private CanonicalizerInterface $canonicalizer
     ) {
         parent::__construct($dataClass, $validationGroups);
     }
@@ -46,8 +47,10 @@ final class CustomerCheckoutGuestType extends AbstractResourceType
                     return;
                 }
 
+                $emailCanonical = $this->canonicalizer->canonicalize($data['email']);
+
                 /** @var CustomerInterface|null $customer */
-                $customer = $this->customerRepository->findOneBy(['email' => $data['email']]);
+                $customer = $this->customerRepository->findOneBy(['emailCanonical' => $emailCanonical]);
 
                 // assign existing customer or create a new one
                 if (null === $customer) {
