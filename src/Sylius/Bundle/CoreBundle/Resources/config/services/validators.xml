@@ -19,30 +19,41 @@
             <argument type="service" id="doctrine" />
             <tag name="validator.constraint_validator" alias="sylius_has_enabled_entity" />
         </service>
+
         <service id="sylius.validator.customer_initializer" class="Sylius\Bundle\CoreBundle\Validator\Initializer\CustomerInitializer">
             <argument type="service" id="sylius.canonicalizer" />
             <tag name="validator.initializer" />
         </service>
+
         <service id="sylius.validator.unique.registered_user" class="Sylius\Bundle\CoreBundle\Validator\Constraints\RegisteredUserValidator">
             <argument type="service" id="sylius.repository.customer" />
             <tag name="validator.constraint_validator" alias="registered_user_validator" />
         </service>
+
         <service id="sylius.validator.cart_item_availability" class="Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemAvailabilityValidator">
             <argument type="service" id="sylius.availability_checker" />
             <tag name="validator.constraint_validator" alias="sylius_cart_item_availability" />
         </service>
+
         <service id="sylius.validator.has_all_prices_defined" class="Sylius\Bundle\CoreBundle\Validator\Constraints\HasAllPricesDefinedValidator">
             <tag name="validator.constraint_validator" alias="sylius_has_all_prices_defined" />
         </service>
+
+        <service id="sylius.validator.has_all_original_prices_defined" class="Sylius\Bundle\CoreBundle\Validator\Constraints\HasAllOriginalPricesDefinedValidator">
+            <tag name="validator.constraint_validator" alias="sylius_has_all_original_prices_defined" />
+        </service>
+
         <service id="sylius.validator.has_all_variant_prices_defined" class="Sylius\Bundle\CoreBundle\Validator\Constraints\HasAllVariantPricesDefinedValidator">
             <tag name="validator.constraint_validator" alias="sylius_has_all_variant_prices_defined" />
         </service>
+
         <service id="sylius.validator.unique_reviewer_email" class="Sylius\Bundle\CoreBundle\Validator\Constraints\UniqueReviewerEmailValidator">
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="security.authorization_checker" />
             <tag name="validator.constraint_validator" alias="sylius_unique_reviewer_email_validator" />
         </service>
+
         <service id="sylius.validator.locales_aware_valid_attribute_value" class="Sylius\Bundle\CoreBundle\Validator\Constraints\LocalesAwareValidAttributeValueValidator">
             <argument type="service" id="sylius.registry.attribute_type" />
             <argument type="service" id="sylius.translation_locale_provider" />
@@ -53,9 +64,11 @@
             <argument type="service" id="sylius.shipping_method_eligibility_checker" />
             <tag name="validator.constraint_validator" alias="sylius_order_shipping_method_eligibility_validator" />
         </service>
+
         <service id="sylius.validator.payment_method_integrity" class="Sylius\Bundle\CoreBundle\Validator\Constraints\OrderPaymentMethodEligibilityValidator">
             <tag name="validator.constraint_validator" alias="sylius_order_payment_method_eligibility_validator" />
         </service>
+
         <service id="sylius.validator.product_integrity" class="Sylius\Bundle\CoreBundle\Validator\Constraints\OrderProductEligibilityValidator">
             <tag name="validator.constraint_validator" alias="sylius_order_product_eligibility_validator" />
         </service>

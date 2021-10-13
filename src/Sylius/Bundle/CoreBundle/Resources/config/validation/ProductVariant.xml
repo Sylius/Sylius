@@ -57,7 +57,7 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\HasAllPricesDefined">
+        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\HasAllOriginalPricesDefined">
             <option name="groups">sylius</option>
         </constraint>
         <property name="channelPricings">

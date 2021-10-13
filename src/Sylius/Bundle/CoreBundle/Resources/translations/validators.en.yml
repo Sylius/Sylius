@@ -81,6 +81,7 @@ sylius:
             invalid: Depth must be a number.
         channel_pricing:
             all_defined: 'You must define price for every channel.'
+            all_original_prices_defined: 'You must define original price for every channel.'
     product_translation:
         short_description:
             max: Short description must not be longer then {{ limit }} characters.
