@@ -35,7 +35,7 @@ final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterf
 
     public function process(CatalogPromotionInterface $catalogPromotion): void
     {
-        if (!$catalogPromotion->isEnabled() && $catalogPromotion->getState() !== CatalogPromotionStates::STATE_INACTIVE) {
+        if (!$this->isCatalogPromotionEligible($catalogPromotion)) {
             return;
         }
 
@@ -48,5 +48,13 @@ final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterf
         foreach ($variants as $variant) {
             $this->catalogPromotionApplicator->applyOnVariant($variant, $catalogPromotion);
         }
+    }
+
+    private function isCatalogPromotionEligible(CatalogPromotionInterface $catalogPromotion): bool
+    {
+        return (
+            $catalogPromotion->isEnabled() &&
+            $catalogPromotion->getState() == CatalogPromotionStates::STATE_PROCESSING
+        );
     }
 }

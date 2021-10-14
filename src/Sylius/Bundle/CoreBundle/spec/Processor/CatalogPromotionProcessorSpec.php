@@ -21,6 +21,7 @@ use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionStates;
 
 final class CatalogPromotionProcessorSpec extends ObjectBehavior
 {
@@ -52,6 +53,8 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
             ->willReturn([$firstVariant, $secondVariant])
         ;
 
+        $catalogPromotion->getState()->willReturn(CatalogPromotionStates::STATE_PROCESSING);
+
         $productCatalogPromotionApplicator->applyOnVariant($firstVariant, $catalogPromotion)->shouldBeCalled();
         $productCatalogPromotionApplicator->applyOnVariant($secondVariant, $catalogPromotion)->shouldBeCalled();
 
@@ -65,6 +68,23 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
     ): void {
         $catalogPromotion->isEnabled()->willReturn(true);
         $catalogPromotionVariantsProvider->provideEligibleVariants($catalogPromotion)->willReturn([]);
+
+        $catalogPromotion->getState()->willReturn(CatalogPromotionStates::STATE_PROCESSING);
+
+        $productCatalogPromotionApplicator->applyOnVariant(Argument::any())->shouldNotBeCalled();
+
+        $this->process($catalogPromotion);
+    }
+
+    function it_does_nothing_if_catalog_promotion_is_not_in_processing_state(
+        CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
+        CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
+        CatalogPromotionInterface $catalogPromotion
+    ): void {
+        $catalogPromotion->isEnabled()->willReturn(true);
+        $catalogPromotionVariantsProvider->provideEligibleVariants($catalogPromotion)->willReturn([]);
+
+        $catalogPromotion->getState()->willReturn(CatalogPromotionStates::STATE_ACTIVE);
 
         $productCatalogPromotionApplicator->applyOnVariant(Argument::any())->shouldNotBeCalled();
 

@@ -44,9 +44,11 @@ final class CatalogPromotionEventListener
             [$this->delayStampCalculator->calculate(new \DateTime('now'), $catalogPromotion->getStartDate())]
         );
 
-        $this->eventBus->dispatch(
-            new CatalogPromotionEnded($catalogPromotion->getCode()),
-            [$this->delayStampCalculator->calculate(new \DateTime('now'), $catalogPromotion->getEndDate())]
-        );
+        if ($catalogPromotion->getEndDate() !== null) {
+            $this->eventBus->dispatch(
+                new CatalogPromotionEnded($catalogPromotion->getCode()),
+                [$this->delayStampCalculator->calculate(new \DateTime('now'), $catalogPromotion->getEndDate())]
+            );
+        }
     }
 }

@@ -22,8 +22,12 @@ class DelayStampCalculator implements DelayStampCalculatorInterface
     /**
      * @throws TargetTimeSmallerException
      */
-    public function calculate(DateTimeInterface $currentTime, DateTimeInterface $targetTime): DelayStamp
+    public function calculate(?DateTimeInterface $currentTime, ?DateTimeInterface $targetTime): DelayStamp
     {
+        if ($targetTime === null) {
+            return new DelayStamp(0);
+        }
+
         $timeDifference = $targetTime->getTimestamp() - $currentTime->getTimestamp();
 
         if ($timeDifference < 0) {

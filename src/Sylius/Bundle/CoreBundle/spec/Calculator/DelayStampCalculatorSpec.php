@@ -42,4 +42,11 @@ class DelayStampCalculatorSpec extends ObjectBehavior
 
         $this->shouldThrow(TargetTimeSmallerException::class)->during('calculate', [$currentTime, $targetTime]);
     }
+
+    function it_returns_0_delay_when_time_is_not_provided(): void
+    {
+        $delayStamp = new DelayStamp(0);
+
+        $this->calculate(null, null)->shouldBeLike($delayStamp);
+    }
 }

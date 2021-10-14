@@ -60,6 +60,35 @@ final class CatalogPromotionEventListenerSpec extends ObjectBehavior
         $this->dispatchCatalogPromotionUpdatedEvent($event);
     }
 
+    function it_does_not_dispatch_catalog_promotion_ended_after_updating_catalog_promotion_when_no_end_date_is_provided(
+        MessageBusInterface $eventBus,
+        GenericEvent $event,
+        CatalogPromotionInterface $catalogPromotion,
+        DelayStampCalculatorInterface $delayStampCalculator
+    ): void {
+        $event->getSubject()->willReturn($catalogPromotion);
+        $startDateTime = new \DateTime('@1634083200');
+        $endDateTime = new \DateTime('@1634085200');
+
+        $catalogPromotion->getCode()->willReturn('SALE');
+        $catalogPromotion->getStartDate()->willReturn($startDateTime);
+        $catalogPromotion->getEndDate()->willReturn(null);
+
+        $startDelayStamp = new DelayStamp(200000);
+        $endDelayStamp = new DelayStamp(300000);
+
+        $delayStampCalculator->calculate(Argument::any(), $startDateTime)->willReturn($startDelayStamp);
+        $delayStampCalculator->calculate(Argument::any(), $endDateTime)->willReturn($endDelayStamp);
+
+        $messageUpdate = new CatalogPromotionUpdated('SALE');
+        $messageEnd = new CatalogPromotionEnded('SALE');
+
+        $eventBus->dispatch($messageUpdate, [$startDelayStamp])->willReturn(new Envelope($messageUpdate))->shouldBeCalled();
+        $eventBus->dispatch($messageEnd, [$endDelayStamp])->willReturn(new Envelope($messageEnd))->shouldNotBeCalled();
+
+        $this->dispatchCatalogPromotionUpdatedEvent($event);
+    }
+
     function it_throws_an_exception_if_event_object_is_not_a_catalog_promotion(GenericEvent $event): void
     {
         $event->getSubject()->willReturn('badObject')->shouldBeCalled();
