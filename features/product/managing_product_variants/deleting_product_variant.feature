@@ -7,7 +7,7 @@ Feature: Deleting a product variant
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP Mug"
-        And the product "PHP Mug" has "Medium PHP Mug" variant priced at "$40.00"
+        And the product "PHP Mug" has "Medium PHP Mug" variant originally priced at "$40.00"
         And I am logged in as an administrator
 
     @domain @ui

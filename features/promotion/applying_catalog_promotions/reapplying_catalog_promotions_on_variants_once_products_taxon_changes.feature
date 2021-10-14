@@ -9,9 +9,9 @@ Feature: Reapplying catalog promotions on variants once the product’s taxon ch
         And the store classifies its products as "Clothes" and "Dishes"
         And the store has a "T-Shirt" configurable product
         And this product belongs to "Clothes"
-        And this product has "PHP T-Shirt" variant priced at "$100.00"
+        And this product has "PHP T-Shirt" variant originally priced at "$100.00"
         And the store has a "Mug" configurable product
-        And this product has "PHP Mug" variant priced at "$10.00"
+        And this product has "PHP Mug" variant originally priced at "$10.00"
         And there is a catalog promotion "Winter sale" that reduces price by "30%" and applies on "Clothes" taxon
         And there is another catalog promotion "Summer sale" that reduces price by "50%" and applies on "Dishes" taxon
         And I am logged in as an administrator

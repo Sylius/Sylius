@@ -8,8 +8,8 @@ Feature: Reapplying multiple catalog promotions after editing their channels
         Given the store operates on a channel named "Web-US" with hostname "web-us"
         And the store operates on another channel named "Web-GB" with hostname "web-gb"
         And the store has a "T-Shirt" configurable product
-        And this product has "PHP T-Shirt" variant priced at "$100.00" in "Web-US" channel
-        And "PHP T-Shirt" variant priced at "$100.00" in "Web-GB" channel
+        And this product has "PHP T-Shirt" variant originally priced at "$100.00" in "Web-US" channel
+        And "PHP T-Shirt" variant originally priced at "$100.00" in "Web-GB" channel
         And this product is available in "Web-US" channel and "Web-GB" channel
         And there is a catalog promotion "Winter sale" available in "Web-US" channel that reduces price by "30%" and applies on "PHP T-shirt" variant
         And there is another catalog promotion "Christmas sale" available in "Web-US" channel and "Web-GB" channel that reduces price by "50%" and applies on "PHP T-shirt" variant

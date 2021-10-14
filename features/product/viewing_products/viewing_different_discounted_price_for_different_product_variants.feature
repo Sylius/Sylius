@@ -7,8 +7,8 @@ Feature: Viewing different discounted price for different product variants
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a "Wyborowa Vodka" configurable product
-        And the product "Wyborowa Vodka" has "Wyborowa Vodka Exquisite" variant priced at "$40.00"
-        And the product "Wyborowa Vodka" has "Wyborowa Apple" variant priced at "$12.55"
+        And the product "Wyborowa Vodka" has "Wyborowa Vodka Exquisite" variant originally priced at "$40.00"
+        And the product "Wyborowa Vodka" has "Wyborowa Apple" variant originally priced at "$12.55"
         And the "Wyborowa Apple" product variant has original price at "$20.00"
 
     @ui @api

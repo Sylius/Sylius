@@ -7,8 +7,8 @@ Feature: Skipping shipping and payment step when order does not require any ship
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a "Guards! Guards!" configurable product
-        And this product has "Guards! Guards! - ebook" variant priced at "$12.55" which does not require shipping
-        And this product has "Guards! Guards! - book" variant priced at "$22.55"
+        And this product has "Guards! Guards! - ebook" variant originally priced at "$12.55" which does not require shipping
+        And this product has "Guards! Guards! - book" variant originally priced at "$22.55"
         And there is a promotion "Holiday promotion"
         And the promotion gives "$40.00" discount to every order with quantity at least 1
         And I am a logged in customer

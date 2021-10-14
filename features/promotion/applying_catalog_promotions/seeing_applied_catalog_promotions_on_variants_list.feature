@@ -7,9 +7,9 @@ Feature: Seeing applied catalog promotions on variants list
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a "T-Shirt" configurable product
-        And this product has "PHP T-Shirt" variant priced at "$20.00"
-        And this product has "Kotlin T-Shirt" variant priced at "$40.00"
-        And this product has "Python T-Shirt" variant priced at "$40.00"
+        And this product has "PHP T-Shirt" variant originally priced at "$20.00"
+        And this product has "Kotlin T-Shirt" variant originally priced at "$40.00"
+        And this product has "Python T-Shirt" variant originally priced at "$40.00"
         And there is a catalog promotion "Winter sale" that reduces price by "50%" and applies on "PHP T-shirt" variant and "Python T-Shirt" variant
 
     @api @no-ui

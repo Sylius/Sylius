@@ -47,7 +47,7 @@ Feature: Product variant validation
 
     @ui
     Scenario: Adding a new product variant with duplicated code
-        Given this product has "Wyborowa Exquisite" variant priced at "$90" identified by "VODKA_WYBOROWA_PREMIUM"
+        Given this product has "Wyborowa Exquisite" variant originally priced at "$90" identified by "VODKA_WYBOROWA_PREMIUM"
         And I want to create a new variant of this product
         When I set its original price to "$80.00" for "United States" channel
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"

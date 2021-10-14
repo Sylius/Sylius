@@ -9,13 +9,13 @@ Feature: Applying catalog promotions for taxon
         And the store classifies its products as "Clothes" and "Dishes"
         And the store has a "T-Shirt" configurable product
         And this product belongs to "Clothes"
-        And this product has "PHP T-Shirt" variant priced at "$20.00"
+        And this product has "PHP T-Shirt" variant originally priced at "$20.00"
         And the store has a "Pants" configurable product
         And this product belongs to "Clothes"
-        And this product has "Aladdin Pants" variant priced at "$100.00"
+        And this product has "Aladdin Pants" variant originally priced at "$100.00"
         And the store has a "Mug" configurable product
         And this product belongs to "Dishes"
-        And this product has "PHP Mug" variant priced at "$5.00"
+        And this product has "PHP Mug" variant originally priced at "$5.00"
         And there is a catalog promotion "Clothes sale" that reduces price by "30%" and applies on "Clothes" taxon
 
     @api @ui

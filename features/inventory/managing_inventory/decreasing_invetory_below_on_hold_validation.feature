@@ -7,7 +7,7 @@ Feature: Validation of decreasing inventory below on hold validation
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a "Wyborowa Vodka" configurable product
-        And the product "Wyborowa Vodka" has "Wyborowa Vodka Exquisite" variant priced at "$40.00"
+        And the product "Wyborowa Vodka" has "Wyborowa Vodka Exquisite" variant originally priced at "$40.00"
         And "Wyborowa Vodka" product is tracked by the inventory
         And there are 5 units of "Wyborowa Vodka Exquisite" variant of product "Wyborowa Vodka" available in the inventory
         And the store ships everywhere for free

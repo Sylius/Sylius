@@ -9,8 +9,8 @@ Feature: Editing catalog promotion
         And the store has "Clothes" taxonomy
         And the store has a "T-Shirt" configurable product
         And this product belongs to "Clothes"
-        And this product has "PHP T-Shirt" variant priced at "$20.00"
-        And this product has "Kotlin T-Shirt" variant priced at "$40.00"
+        And this product has "PHP T-Shirt" variant originally priced at "$20.00"
+        And this product has "Kotlin T-Shirt" variant originally priced at "$40.00"
         And there is a catalog promotion with "christmas_sale" code and "Christmas sale" name
         And it applies on "PHP T-Shirt" variant
         And it reduces price by "30%"

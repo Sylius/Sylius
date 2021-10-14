@@ -6,12 +6,12 @@ Feature: Viewing products sorted by first variant price
         And the store classifies its products as "Whiskey"
         And the store has a "Jack Daniel's" configurable product
         And this product belongs to "Whiskey"
-        And the product "Jack Daniel's" has "Gentleman Jack" variant priced at "$50.00"
-        And the product "Jack Daniel's" has "Jack Daniel's Old No.7" variant priced at "$30.00"
+        And the product "Jack Daniel's" has "Gentleman Jack" variant originally priced at "$50.00"
+        And the product "Jack Daniel's" has "Jack Daniel's Old No.7" variant originally priced at "$30.00"
         And the store has a "Johnnie Walker" configurable product
         And this product belongs to "Whiskey"
-        And the product "Johnnie Walker" has "Johnnie Walker Red Label" variant priced at "$20.00"
-        And the product "Johnnie Walker" has "Johnnie Walker Blue Label" variant priced at "$125.00"
+        And the product "Johnnie Walker" has "Johnnie Walker Red Label" variant originally priced at "$20.00"
+        And the product "Johnnie Walker" has "Johnnie Walker Blue Label" variant originally priced at "$125.00"
 
     @ui
     Scenario: Sorting products by price of their first variant with ascending order

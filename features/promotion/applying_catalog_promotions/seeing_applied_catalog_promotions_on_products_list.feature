@@ -8,12 +8,12 @@ Feature: Seeing applied catalog promotions on products list
         Given the store operates on a single channel in "United States"
         And the store classifies its products as "T-Shirts"
         And the store has a "Programming T-Shirt" configurable product
-        And this product has "PHP T-Shirt" variant priced at "$20.00"
-        And this product has "Kotlin T-Shirt" variant priced at "$40.00"
+        And this product has "PHP T-Shirt" variant originally priced at "$20.00"
+        And this product has "Kotlin T-Shirt" variant originally priced at "$40.00"
         And this product belongs to "T-Shirts"
         And the store has a "Nerd T-Shirt" configurable product
-        And this product has "The Witcher T-Shirt" variant priced at "$30.00"
-        And this product has "LotR T-Shirt" variant priced at "$50.00"
+        And this product has "The Witcher T-Shirt" variant originally priced at "$30.00"
+        And this product has "LotR T-Shirt" variant originally priced at "$50.00"
         And this product belongs to "T-Shirts"
         And there is a catalog promotion "Winter sale" that reduces price by "50%" and applies on "PHP T-shirt" variant
 

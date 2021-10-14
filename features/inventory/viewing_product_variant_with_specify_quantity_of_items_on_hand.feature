@@ -7,8 +7,8 @@ Feature: Seeing product's variant with specify quantity of items on hand
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a "T-shirt banana" configurable product
-        And the product "T-shirt banana" has "Yellow" variant priced at "€20.54"
-        And the product "T-shirt banana" has "Green" variant priced at "€5.54"
+        And the product "T-shirt banana" has "Yellow" variant originally priced at "€20.54"
+        And the product "T-shirt banana" has "Green" variant originally priced at "€5.54"
         And there are 5 units of "Yellow" variant of product "T-shirt banana" available in the inventory
         And there are 5 units of "Green" variant of product "T-shirt banana" available in the inventory
         And the store ships everywhere for free

@@ -9,8 +9,8 @@ Feature: Creating a catalog promotion
         And the store has "Clothes" taxonomy
         And the store has a "T-Shirt" configurable product
         And this product belongs to "Clothes"
-        And this product has "PHP T-Shirt" variant priced at "$20.00"
-        And this product has "Kotlin T-Shirt" variant priced at "$40.00"
+        And this product has "PHP T-Shirt" variant originally priced at "$20.00"
+        And this product has "Kotlin T-Shirt" variant originally priced at "$40.00"
         And I am logged in as an administrator
 
     @api @ui

@@ -26,7 +26,7 @@ Let's start with describing how **marking a product variant available on demand*
         Background:
             Given the store operates on a single channel in "United States"
             And the store has a "Iron Man Suite" configurable product
-            And the product "Iron Man Suite" has a "Mark XLVI" variant priced at "$400000"
+            And the product "Iron Man Suite" has a "Mark XLVI" variant originally priced at "$400000"
             And I am logged in as an administrator
 
         @ui

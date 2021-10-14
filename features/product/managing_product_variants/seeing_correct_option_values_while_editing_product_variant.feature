@@ -7,7 +7,7 @@ Feature: Seeing correct option values while editing product variant
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a "Wyborowa Vodka" configurable product
-        And the product "Wyborowa Vodka" has a "Wyborowa Vodka Exquisite" variant priced at "$40.00"
+        And the product "Wyborowa Vodka" has a "Wyborowa Vodka Exquisite" variant originally priced at "$40.00"
         And this product has option "Taste" with values "Orange", "Melon" and "Cactus"
         And this product has option "Type" with values "Clear" and "Color"
         And I am logged in as an administrator

@@ -7,7 +7,7 @@ Feature: Applying catalog promotions in proper time range
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a "T-Shirt" configurable product
-        And this product has "PHP T-Shirt" variant priced at "$20.00"
+        And this product has "PHP T-Shirt" variant originally priced at "$20.00"
         And there is a catalog promotion "Winter sale" that reduces price by "30%" and applies on "PHP T-Shirt" variant
 
     @api @ui

@@ -9,17 +9,17 @@ Feature: Viewing products with multiple variants sorted by price
         And the store classifies its products as "Alcohols"
         And the store has a "Wyborowa Vodka" configurable product
         And this product belongs to "Alcohols"
-        And the product "Wyborowa Vodka" has "Wyborowa Vodka Exquisite" variant priced at "$40.00"
-        And the product "Wyborowa Vodka" has "Wyborowa Apple" variant priced at "$12.55"
+        And the product "Wyborowa Vodka" has "Wyborowa Vodka Exquisite" variant originally priced at "$40.00"
+        And the product "Wyborowa Vodka" has "Wyborowa Apple" variant originally priced at "$12.55"
         And the store has a "Jack Daniel's" configurable product
         And this product belongs to "Alcohols"
-        And the product "Jack Daniel's" has "Jack Daniel's Old No.7" variant priced at "$30.00"
-        And the product "Jack Daniel's" has "Gentleman Jack" variant priced at "$50.00"
+        And the product "Jack Daniel's" has "Jack Daniel's Old No.7" variant originally priced at "$30.00"
+        And the product "Jack Daniel's" has "Gentleman Jack" variant originally priced at "$50.00"
         And the store has a "Johnnie Walker" configurable product
         And this product belongs to "Alcohols"
-        And the product "Johnnie Walker" has "Johnnie Walker White Label" variant priced at "$60.00"
-        And the product "Johnnie Walker" has "Johnnie Walker Red Label" variant priced at "$20.00"
-        And the product "Johnnie Walker" has "Johnnie Walker Black Label" variant priced at "$25.00"
+        And the product "Johnnie Walker" has "Johnnie Walker White Label" variant originally priced at "$60.00"
+        And the product "Johnnie Walker" has "Johnnie Walker Red Label" variant originally priced at "$20.00"
+        And the product "Johnnie Walker" has "Johnnie Walker Black Label" variant originally priced at "$25.00"
         And the "Johnnie Walker White Label" product variant is disabled
 
     @ui

@@ -86,7 +86,7 @@ Feature: Editing a product
         Given the store has a "Marvel's T-Shirt" configurable product
         And the store has a product option "T-Shirt size" with a code "t_shirt_size"
         And this product has this product option
-        And the product "Marvel's T-Shirt" has "Iron Man T-Shirt" variant priced at "$40.00"
+        And the product "Marvel's T-Shirt" has "Iron Man T-Shirt" variant originally priced at "$40.00"
         When I want to modify the "Marvel's T-Shirt" product
         Then the option field should be disabled
 
@@ -94,9 +94,9 @@ Feature: Editing a product
     Scenario: Enabling product in channel when all its variants already have specified price in this channel
         Given the store operates on another channel named "Mobile"
         And the store has a "7 Wonders" configurable product
-        And this product has "7 Wonders: Cities" variant priced at "$30" in "United States" channel
+        And this product has "7 Wonders: Cities" variant originally priced at "$30" in "United States" channel
         And this variant is also priced at "$25" in "Mobile" channel
-        And this product has "7 Wonders: Leaders" variant priced at "$20" in "United States" channel
+        And this product has "7 Wonders: Leaders" variant originally priced at "$20" in "United States" channel
         And this variant is also priced at "$20" in "Mobile" channel
         When I want to modify the "7 Wonders" product
         And I assign it to channel "Mobile"

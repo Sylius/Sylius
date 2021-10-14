@@ -321,6 +321,30 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^the (product "[^"]+") has(?:| a) "([^"]+)" variant originally priced at ("[^"]+")$/
+     * @Given /^(this product) has "([^"]+)" variant originally priced at ("[^"]+")$/
+     * @Given /^(this product) has "([^"]+)" variant originally priced at ("[^"]+") in ("([^"]+)" channel)$/
+     */
+    public function theProductHasVariantOriginallyPricedAt(
+        ProductInterface $product,
+        $productVariantName,
+        $originalPrice,
+        ChannelInterface $channel = null
+    ) {
+        $this->createProductVariant(
+            $product,
+            $productVariantName,
+            $originalPrice,
+            StringInflector::nameToUppercaseCode($productVariantName),
+            $channel ?? $this->sharedStorage->get('channel'),
+            null,
+             true,
+            0,
+            $originalPrice
+        );
+    }
+
+    /**
      * @Given /^("[^"]+" variant) priced at ("[^"]+") in ("[^"]+" channel)$/
      */
     public function variantPricedAtInChannel(
@@ -1093,7 +1117,7 @@ final class ProductContext implements Context
         $productVariant = $this->defaultVariantResolver->getVariant($product);
 
         if (null !== $channel) {
-            $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
+            $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel, $price));
         }
 
         $productVariant->setCode($product->getCode());
@@ -1156,7 +1180,8 @@ final class ProductContext implements Context
         ChannelInterface $channel = null,
         $position = null,
         $shippingRequired = true,
-        int $currentStock = 0
+        int $currentStock = 0,
+        ?int $originalPrice = null
     ) {
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_CHOICE);
 
@@ -1167,7 +1192,7 @@ final class ProductContext implements Context
         $variant->setCode($code);
         $variant->setProduct($product);
         $variant->setOnHand($currentStock);
-        $variant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
+        $variant->addChannelPricing($this->createChannelPricingForChannel($price, $channel, $originalPrice));
         $variant->setPosition((null === $position) ? null : (int) $position);
         $variant->setShippingRequired($shippingRequired);
 
@@ -1216,11 +1241,12 @@ final class ProductContext implements Context
     /**
      * @return ChannelPricingInterface
      */
-    private function createChannelPricingForChannel(int $price, ChannelInterface $channel = null)
+    private function createChannelPricingForChannel(int $price, ChannelInterface $channel = null, int $originalPrice = null)
     {
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $this->channelPricingFactory->createNew();
         $channelPricing->setPrice($price);
+        $channelPricing->setOriginalPrice($originalPrice);
         $channelPricing->setChannelCode($channel->getCode());
 
         return $channelPricing;

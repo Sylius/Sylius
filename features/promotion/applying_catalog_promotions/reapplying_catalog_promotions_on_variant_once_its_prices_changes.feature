@@ -7,7 +7,7 @@ Feature: Reapplying catalog promotions on variant once its prices changes
     Background:
         Given the store operates on a channel named "Web-US" with hostname "web-us"
         And the store has a "T-Shirt" configurable product
-        And this product has "PHP T-Shirt" variant priced at "$100.00" in "Web-US" channel
+        And this product has "PHP T-Shirt" variant originally priced at "$100.00" in "Web-US" channel
         And there is a catalog promotion "Winter sale" available in "Web-US" channel that reduces price by "30%" and applies on "PHP T-Shirt" variant
         And there is another catalog promotion "Christmas sale" available in "Web-US" channel that reduces price by "50%" and applies on "PHP T-Shirt" variant
         And I am logged in as an administrator

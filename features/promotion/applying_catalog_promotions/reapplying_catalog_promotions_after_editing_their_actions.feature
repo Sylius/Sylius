@@ -7,8 +7,8 @@ Feature: Reapplying catalog promotions after editing their actions
     Background:
         Given the store operates on a channel identified by "Web-US" code
         And the store has a "T-Shirt" configurable product
-        And this product has "PHP T-Shirt" variant priced at "$20.00" in "Web-US" channel
-        And this product has "Python T-Shirt" variant priced at "$10.00" in "Web-US" channel
+        And this product has "PHP T-Shirt" variant originally priced at "$20.00" in "Web-US" channel
+        And this product has "Python T-Shirt" variant originally priced at "$10.00" in "Web-US" channel
         And there is a catalog promotion "Winter sale" that reduces price by "50%" and applies on "PHP T-Shirt" variant
         And I am logged in as an administrator
 

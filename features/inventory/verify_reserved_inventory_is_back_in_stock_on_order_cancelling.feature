@@ -7,12 +7,12 @@ Feature: Inventory releasing on order cancellation
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "T-Shirt banana"
-        And the product "T-shirt banana" has "Green" variant priced at "€5.54"
-        And the product "T-shirt banana" has "Red" variant priced at "€5.54"
+        And the product "T-shirt banana" has "Green" variant originally priced at "€5.54"
+        And the product "T-shirt banana" has "Red" variant originally priced at "€5.54"
         And there are 5 units of "Green" variant of product "T-shirt banana" available in the inventory
         And there are 5 units of "Red" variant of product "T-shirt banana" available in the inventory
         And the store has a product "Skirt watermelon"
-        And the product "Skirt watermelon" has "Yellow" variant priced at "€500.43"
+        And the product "Skirt watermelon" has "Yellow" variant originally priced at "€500.43"
         And there are 5 units of "Yellow" variant of product "Skirt watermelon" available in the inventory
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"

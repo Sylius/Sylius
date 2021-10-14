@@ -7,8 +7,8 @@ Feature: Seeing order shipping total on order summary page
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a "Guards! Guards!" configurable product
-        And this product has "Guards! Guards! - book" variant priced at "$20.00"
-        And this product has "Guards! Guards! - ebook" variant priced at "$15.00" which does not require shipping
+        And this product has "Guards! Guards! - book" variant originally priced at "$20.00"
+        And this product has "Guards! Guards! - ebook" variant originally priced at "$15.00" which does not require shipping
         And the store has "UPS" shipping method with "$20.00" fee
         And the store allows paying offline
         And I am a logged in customer

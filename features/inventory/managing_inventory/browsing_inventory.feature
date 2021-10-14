@@ -7,7 +7,7 @@ Feature: Browsing inventory
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a "Wyborowa Vodka" configurable product
-        And the product "Wyborowa Vodka" has "Wyborowa Vodka Exquisite" variant priced at "$40.00"
+        And the product "Wyborowa Vodka" has "Wyborowa Vodka Exquisite" variant originally priced at "$40.00"
         And the store has a product "Iron Maiden T-Shirt"
         And "Iron Maiden T-Shirt" product is tracked by the inventory
         And there are 5 units of product "Iron Maiden T-Shirt" available in the inventory

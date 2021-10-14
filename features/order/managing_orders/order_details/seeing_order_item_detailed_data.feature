@@ -9,8 +9,8 @@ Feature: Seeing order item detailed data
         And the store has "VAT" tax rate of 10% for "T-Shirts" within the "US" zone
         And the store classifies its products as "T-Shirts"
         And the store has a product "Marvel T-Shirt"
-        And this product has "Iron Man T-Shirt" variant priced at "$49.00"
-        And this product has "Thor T-Shirt" variant priced at "$39.00"
+        And this product has "Iron Man T-Shirt" variant originally priced at "$49.00"
+        And this product has "Thor T-Shirt" variant originally priced at "$39.00"
         And "Iron Man T-Shirt" variant of product "Marvel T-Shirt" belongs to "T-Shirts" tax category
         And the store ships everything for free within the "US" zone
         And the store allows paying with "Cash on Delivery"

@@ -36,7 +36,7 @@ Feature: Products validation
     @ui
     Scenario: Adding a new simple product with duplicated code among product variants
         Given the store has a product "7 Wonders"
-        And this product has "7 Wonders: Cities" variant priced at "$30" identified by "AWESOME_GAME"
+        And this product has "7 Wonders: Cities" variant originally priced at "$30" identified by "AWESOME_GAME"
         And I want to create a new simple product
         When I specify its code as "AWESOME_GAME"
         And I name it "Dice Brewing" in "English (United States)"
@@ -125,8 +125,8 @@ Feature: Products validation
     @ui
     Scenario: Trying to assign new channel to an existing configurable product without specifying its all variant prices for this channel
         Given the store has a "7 Wonders" configurable product
-        And this product has "7 Wonders: Cities" variant priced at "$30"
-        And this product has "7 Wonders: Leaders" variant priced at "$20"
+        And this product has "7 Wonders: Cities" variant originally priced at "$30"
+        And this product has "7 Wonders: Leaders" variant originally priced at "$20"
         And the store operates on another channel named "Mobile Channel"
         When I want to modify the "7 Wonders" product
         And I assign it to channel "Mobile Channel"
