@@ -13,7 +13,7 @@ Feature: Adding a new product with images
         Given I want to create a new simple product
         When I specify its code as "LAMBORGHINI_GALLARDO"
         And I name it "Lamborghini Gallardo Model" in "English (United States)"
-        And I set its price to "$100.00" for "United States" channel
+        And I set its original price to "$100.00" for "United States" channel
         And I attach the "lamborghini.jpg" image with "banner" type
         And I add it
         Then I should be notified that it has been successfully created
@@ -24,7 +24,7 @@ Feature: Adding a new product with images
         Given I want to create a new simple product
         When I specify its code as "LAMBORGHINI_GALLARDO"
         And I name it "Lamborghini Gallardo Model" in "English (United States)"
-        And I set its price to "$100.00" for "United States" channel
+        And I set its original price to "$100.00" for "United States" channel
         And I attach the "lamborghini.jpg" image with "banner" type
         And I attach the "lamborghini.jpg" image with "thumbnail" type
         And I add it

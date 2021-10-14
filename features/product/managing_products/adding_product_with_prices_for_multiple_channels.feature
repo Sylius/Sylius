@@ -15,13 +15,13 @@ Feature: Adding product with prices for multiple channels
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
-        And I set its price to "$10.00" for "Web-US" channel
-        And I set its price to "£5.00" for "Web-GB" channel
+        And I set its original price to "$10.00" for "Web-US" channel
+        And I set its original price to "£5.00" for "Web-GB" channel
         And I set its slug to "dice-brewing"
         And I add it
         Then I should be notified that it has been successfully created
-        And product "Dice Brewing" should be priced at $10.00 for channel "Web-US"
-        And product "Dice Brewing" should be priced at £5.00 for channel "Web-GB"
+        And product "Dice Brewing" should be originally priced at $10.00 for channel "Web-US"
+        And product "Dice Brewing" should be originally priced at £5.00 for channel "Web-GB"
 
     @ui
     Scenario: Configure prices for each channel while adding a new simple product
@@ -39,11 +39,11 @@ Feature: Adding product with prices for multiple channels
         And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
         And I make it available in channel "Web-US"
-        And I set its price to "$10.00" for "Web-US" channel
+        And I set its original price to "$10.00" for "Web-US" channel
         And I set its slug to "dice-brewing"
         And I add it
         Then I should be notified that it has been successfully created
-        And product "Dice Brewing" should be priced at $10.00 for channel "Web-US"
+        And product "Dice Brewing" should be originally priced at $10.00 for channel "Web-US"
 
     @ui
     Scenario: Require prices for all chosen channels
@@ -52,7 +52,7 @@ Feature: Adding product with prices for multiple channels
         And I name it "Dice Brewing" in "English (United States)"
         And I make it available in channel "Web-US"
         And I make it available in channel "Web-GB"
-        And I set its price to "$10.00" for "Web-US" channel
+        And I set its original price to "$10.00" for "Web-US" channel
         And I set its slug to "dice-brewing"
         And I add it
         Then I should be notified that price must be defined for every channel

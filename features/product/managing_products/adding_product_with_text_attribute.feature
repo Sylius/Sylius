@@ -16,7 +16,7 @@ Feature: Adding a new product with text attribute
         Given I want to create a new simple product
         When I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
-        And I set its price to "$100.00" for "United States" channel
+        And I set its original price to "$100.00" for "United States" channel
         And I set its "Gun caliber" attribute to "11 mm" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
@@ -28,7 +28,7 @@ Feature: Adding a new product with text attribute
         When I want to create a new simple product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
-        And I set its price to "$100.00" for "United States" channel
+        And I set its original price to "$100.00" for "United States" channel
         And I set its non-translatable "Author" attribute to "Colt"
         And I add it
         Then I should be notified that it has been successfully created
@@ -40,7 +40,7 @@ Feature: Adding a new product with text attribute
         When I want to create a new simple product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
-        And I set its price to "$100.00" for "United States" channel
+        And I set its original price to "$100.00" for "United States" channel
         And I set its "Gun caliber" attribute to "11 mm" in "English (United States)"
         And I set its "Overall length" attribute to "30.5 cm" in "English (United States)"
         And I remove its "Gun caliber" attribute

@@ -27,7 +27,7 @@ Feature: Select taxon for a new product
         And I choose main taxon "Sad"
         And I name it "Mansion of Madness" in "English (United States)"
         And I specify its code as "BOARD_MANSION_OF_MADNESS"
-        And I set its price to "$100.00" for "United States" channel
+        And I set its original price to "$100.00" for "United States" channel
         And I set its slug to "mom-board-game" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created

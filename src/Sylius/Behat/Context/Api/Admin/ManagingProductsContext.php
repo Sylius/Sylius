@@ -152,6 +152,26 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for ("[^"]+" channel)$/
+     */
+    public function iSetItsOriginalPriceTo(string $originalPrice, ChannelInterface $channel): void
+    {
+        $localeCode = $channel->getLocales()->first()->getCode();
+
+        $data = [
+            'translations' => [
+                $localeCode => [
+                    'locale' => $localeCode,
+                    'original' => $originalPrice,
+                ],
+            ],
+            'channel' => $this->iriConverter->getIriFromItem($channel),
+        ];
+
+        $this->client->updateRequestData($data);
+    }
+
+    /**
      * @When I set its slug to :slug
      * @When I set its slug to :slug in :localeCode
      * @When I remove its slug

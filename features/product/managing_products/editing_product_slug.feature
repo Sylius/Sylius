@@ -13,7 +13,7 @@ Feature: Editing product's slug
         When I want to create a new simple product
         And I specify its code as "BOARD_MANSION_OF_MADNESS"
         And I name it "Mansion of Madness" in "English (United States)"
-        And I set its price to "$100.00" for "United States" channel
+        And I set its original price to "$100.00" for "United States" channel
         And I add it
         Then the slug of the "Mansion of Madness" product should be "mansion-of-madness"
 
@@ -22,7 +22,7 @@ Feature: Editing product's slug
         Given I want to create a new simple product
         When I specify its code as "BOARD_MANSION_OF_MADNESS"
         And I name it "Mansion of Madness" in "English (United States)"
-        And I set its price to "$100.00" for "United States" channel
+        And I set its original price to "$100.00" for "United States" channel
         And I set its slug to "mom-board-game" in "English (United States)"
         And I add it
         Then the slug of the "Mansion of Madness" product should be "mom-board-game"

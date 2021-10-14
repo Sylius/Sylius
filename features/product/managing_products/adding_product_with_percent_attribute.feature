@@ -15,7 +15,7 @@ Feature: Adding a new product with a percent attribute
         Given I want to create a new simple product
         When I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
-        And I set its price to "$100.00" for "United States" channel
+        And I set its original price to "$100.00" for "United States" channel
         And I set its "Awesomeness rating" attribute to "80" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
@@ -27,7 +27,7 @@ Feature: Adding a new product with a percent attribute
         When I want to create a new simple product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
-        And I set its price to "$100.00" for "United States" channel
+        And I set its original price to "$100.00" for "United States" channel
         And I set its non-translatable "Accuracy" attribute to "95"
         And I add it
         Then I should be notified that it has been successfully created

@@ -17,7 +17,7 @@ Feature: Adding text attributes in different locales to a product
         When I want to create a new simple product
         And I specify its code as "mug"
         And I name it "PHP Mug" in "English (United States)"
-        And I set its price to "$100.00" for "Web" channel
+        And I set its original price to "$100.00" for "Web" channel
         And I set its "Mug material" attribute to "Wood" in "English (United States)"
         And I set its "Mug material" attribute to "Drewno" in "Polish (Poland)"
         And I add it

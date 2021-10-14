@@ -17,7 +17,7 @@ Feature: Products validation
     Scenario: Adding a new simple product without specifying its code
         Given I want to create a new simple product
         When I name it "Dice Brewing" in "English (United States)"
-        And I set its price to "$10.00" for "Web" channel
+        And I set its original price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that code is required
         And product with name "Dice Brewing" should not be added
@@ -28,7 +28,7 @@ Feature: Products validation
         And I want to create a new simple product
         When I specify its code as "AWESOME_GAME"
         And I name it "Dice Brewing" in "English (United States)"
-        And I set its price to "$10.00" for "Web" channel
+        And I set its original price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that code has to be unique
         And product with name "Dice Brewing" should not be added
@@ -40,7 +40,7 @@ Feature: Products validation
         And I want to create a new simple product
         When I specify its code as "AWESOME_GAME"
         And I name it "Dice Brewing" in "English (United States)"
-        And I set its price to "$10.00" for "Web" channel
+        And I set its original price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that simple product code has to be unique
         And product with name "Dice Brewing" should not be added
@@ -50,7 +50,7 @@ Feature: Products validation
         Given I want to create a new simple product
         When I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
-        And I set its price to "$10.00" for "Web" channel
+        And I set its original price to "$10.00" for "Web" channel
         And I remove its slug
         And I try to add it
         Then I should be notified that slug is required
@@ -60,7 +60,7 @@ Feature: Products validation
     Scenario: Adding a new simple product without specifying its name
         Given I want to create a new simple product
         When I specify its code as "BOARD_DICE_BREWING"
-        And I set its price to "$10.00" for "Web" channel
+        And I set its original price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that name is required
         And product with code "BOARD_DICE_BREWING" should not be added
@@ -72,7 +72,7 @@ Feature: Products validation
         And I specify its code as "BOARD_DICE_BREWING"
         And I make it available in channel "Web"
         And I make it available in channel "Web-GB"
-        And I set its price to "$10.00" for "Web" channel
+        And I set its original price to "$10.00" for "Web" channel
         And I name it "Dice Brewing" in "English (United States)"
         And I try to add it
         Then I should be notified that price must be defined for every channel
@@ -149,7 +149,7 @@ Feature: Products validation
         When I want to create a new simple product
         And I specify its code as "X-18-MUG"
         And I name it "PHP Mug" in "English (United States)"
-        And I set its price to "$100.00" for "Web" channel
+        And I set its original price to "$100.00" for "Web" channel
         And I set its "Mug material" attribute to "Drewno" in "Polish (Poland)"
         But I do not set its "Mug material" attribute in "English (United States)"
         And I add it
@@ -161,7 +161,7 @@ Feature: Products validation
         When I want to create a new simple product
         And I specify its code as "X-18-MUG"
         And I name it "PHP Mug" in "English (United States)"
-        And I set its price to "$100.00" for "Web" channel
+        And I set its original price to "$100.00" for "Web" channel
         And I set its "Mug material" attribute to "Dr" in "Polish (Poland)"
         And I set its "Mug material" attribute to "Wood" in "English (United States)"
         And I add it
