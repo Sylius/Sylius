@@ -164,7 +164,7 @@ final class SwaggerUiAction
         }
 
         $swaggerData = [
-            'url' => $this->urlGenerator->generate('api_doc', ['format' => 'json']),
+            'url' => $this->urlGenerator->generate('api_doc', ['_format' => 'json'], $this->urlGenerator::ABSOLUTE_URL),
             'spec' => $this->normalizer->normalize($documentation, 'json', $swaggerContext),
         ];
 
