@@ -14,10 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
+use SM\Factory\FactoryInterface;
 use Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface;
-use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
-use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
-use Sylius\Component\Promotion\Model\CatalogPromotion;
+use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
 use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -29,13 +28,13 @@ final class CatalogPromotionEndedListener
 
     private EntityManagerInterface $entityManager;
 
-    private StateMachineFactoryInterface $stateMachine;
+    private FactoryInterface $stateMachine;
 
     public function __construct(
         AllCatalogPromotionsProcessorInterface $catalogPromotionsProcessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager,
-        StateMachineFactoryInterface $stateMachine
+        FactoryInterface $stateMachine
     ) {
         $this->catalogPromotionsProcessor = $catalogPromotionsProcessor;
         $this->catalogPromotionRepository = $catalogPromotionRepository;
@@ -43,12 +42,19 @@ final class CatalogPromotionEndedListener
         $this->stateMachine = $stateMachine;
     }
 
-    public function __invoke(CatalogPromotionUpdated $event): void
+    public function __invoke(CatalogPromotionEnded $event): void
     {
-        if (null === $this->catalogPromotionRepository->findOneBy(['code' => $event->code])) {
+        $catalogPromotion = $this->catalogPromotionRepository->findOneBy(['code' => $event->code]);
+
+        if (null === $catalogPromotion) {
             return;
         }
-        
+
+        $stateMachine = $this->stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
+
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE);
+
         $this->catalogPromotionsProcessor->process();
 
         $this->entityManager->flush();

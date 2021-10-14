@@ -10,6 +10,7 @@ framework:
 
         routing:
             'Sylius\Component\Promotion\Event\CatalogPromotionUpdated': async
+            'Sylius\Component\Promotion\Event\CatalogPromotionEnded': async
 
         default_bus: sylius.command_bus
         buses:

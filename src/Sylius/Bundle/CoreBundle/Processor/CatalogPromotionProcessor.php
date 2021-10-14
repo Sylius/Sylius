@@ -13,14 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Processor;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
-use Sylius\Bundle\ResourceBundle\Controller\StateMachine;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionStates;
-use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 
 final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterface
 {
@@ -38,7 +35,7 @@ final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterf
 
     public function process(CatalogPromotionInterface $catalogPromotion): void
     {
-        if (!$catalogPromotion->isEnabled() || $catalogPromotion->getState() === CatalogPromotionStates::STATE_INACTIVE) {
+        if (!$catalogPromotion->isEnabled() && $catalogPromotion->getState() !== CatalogPromotionStates::STATE_INACTIVE) {
             return;
         }
 

@@ -15,10 +15,10 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Messenger\Stamp\DelayStamp;
 use Webmozart\Assert\Assert;
 
 final class CatalogPromotionEventListener
@@ -42,6 +42,11 @@ final class CatalogPromotionEventListener
         $this->eventBus->dispatch(
             new CatalogPromotionUpdated($catalogPromotion->getCode()),
             [$this->delayStampCalculator->calculate(new \DateTime('now'), $catalogPromotion->getStartDate())]
+        );
+
+        $this->eventBus->dispatch(
+            new CatalogPromotionEnded($catalogPromotion->getCode()),
+            [$this->delayStampCalculator->calculate(new \DateTime('now'), $catalogPromotion->getEndDate())]
         );
     }
 }
