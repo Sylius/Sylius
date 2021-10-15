@@ -23,6 +23,7 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionStates;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -75,6 +76,7 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
         $catalogPromotion = $this->catalogPromotionFactory->createNew();
         $catalogPromotion->setCode($options['code']);
         $catalogPromotion->setName($options['name']);
+        $catalogPromotion->setState(CatalogPromotionStates::STATE_PROCESSING);
 
         foreach ($this->getLocales() as $localeCode) {
             $catalogPromotion->setCurrentLocale($localeCode);
@@ -108,6 +110,8 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
 
         $this->catalogPromotionProcessor->process($catalogPromotion);
 
+        $catalogPromotion->setState(CatalogPromotionStates::STATE_ACTIVE);
+        
         return $catalogPromotion;
     }
 

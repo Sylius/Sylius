@@ -54,7 +54,7 @@ final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterf
     {
         return (
             $catalogPromotion->isEnabled() &&
-            $catalogPromotion->getState() == CatalogPromotionStates::STATE_PROCESSING
+            $catalogPromotion->getState() !== CatalogPromotionStates::STATE_INACTIVE
         );
     }
 }

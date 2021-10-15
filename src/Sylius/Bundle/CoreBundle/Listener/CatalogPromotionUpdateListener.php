@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Listener;
 use Doctrine\ORM\EntityManagerInterface;
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -46,7 +47,7 @@ final class CatalogPromotionUpdateListener
     {
         $catalogPromotion = $this->catalogPromotionRepository->findOneBy(['code' => $event->code]);
 
-        if (null === $catalogPromotion) {
+        if (null === $catalogPromotion || $catalogPromotion->isEnabled() === false) {
             return;
         }
 
