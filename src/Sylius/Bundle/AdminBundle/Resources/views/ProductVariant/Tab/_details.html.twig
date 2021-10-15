@@ -9,13 +9,12 @@
         <div class="ui segment">
             {{ form_row(form.code) }}
             {{ form_row(form.enabled) }}
+        </div>
+        <div class="ui hidden divider"></div>
+        <div class="ui segment">
             <div class="two fields">
                 {{ form_row(form.shippingCategory) }}
             </div>
-            {{form_label(form.channelPricings)}}
-            {% include "@SyliusAdmin/Product/_channel_pricing.html.twig" with { product: product_variant.product, variantForm: form } only %}
-        </div>
-        <div class="ui segment">
             <div class="one field">
                 {{ form_row(form.shippingRequired) }}
             </div>
