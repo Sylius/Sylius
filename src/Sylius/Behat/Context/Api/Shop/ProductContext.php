@@ -27,10 +27,13 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
+    public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
+
     private ApiClientInterface $client;
 
     private ApiClientInterface $productVariantClient;
@@ -78,12 +81,32 @@ final class ProductContext implements Context
 
     /**
      * @When I browse products from taxon :taxon
+     * @When I browse products
      */
-    public function iBrowseProductsFromTaxon(TaxonInterface $taxon): void
+    public function iBrowseProductsFromTaxon(?TaxonInterface $taxon = null): void
     {
         $this->client->index();
-        $this->client->addFilter('taxon', $this->iriConverter->getIriFromItem($taxon));
-        $this->client->filter();
+
+        if ($taxon !== null) {
+            $this->client->addFilter('taxon', $this->iriConverter->getIriFromItem($taxon));
+            $this->client->filter();
+        }
+    }
+
+    /**
+     * @When I sort products by the lowest price first
+     */
+    public function iSortProductsByTheLowestPriceFirst(string $sortType = 'ascending'): void
+    {
+        $this->client->sort(['price' => self::SORT_TYPES[$sortType]]);
+    }
+
+    /**
+     * @When I sort products by the highest price first
+     */
+    public function iSortProductsByTheHighestPriceFirst(string $sortType = 'descending'): void
+    {
+        $this->client->sort(['price' => self::SORT_TYPES[$sortType]]);
     }
 
     /**
@@ -121,6 +144,17 @@ final class ProductContext implements Context
             $this->responseChecker->getCollection($this->client->getLastResponse()),
             $name
         ));
+    }
+
+    /**
+     * @Then I should see a product with :field :value
+     */
+    public function iShouldSeeProductWith(string $field, string $value): void
+    {
+        Assert::true(
+            $this->hasProductWithFieldValue($this->client->getLastResponse(), $field, $value),
+            sprintf('Product has not %s with %s', $field, $value)
+        );
     }
 
     /**
@@ -225,11 +259,23 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When I browse products
+     * @Then the first product on the list should have :field :value
      */
-    public function iViewProducts(): void
+    public function theFirstProductOnTheListShouldHave(string $field, string $value): void
     {
-        $this->client->index();
+        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same($this->getFieldValueOfFirstProduct($products[0], $field), $value);
+    }
+
+    /**
+     * @Then the last product on the list should have :field :value
+     */
+    public function theLastProductOnTheListShouldHave(string $field, string $value): void
+    {
+        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same($this->getFieldValueOfFirstProduct(end($products), $field), $value);
     }
 
     /**
@@ -427,5 +473,31 @@ final class ProductContext implements Context
         }
 
         return false;
+    }
+
+    private function hasProductWithFieldValue(Response $response, string $field, string $value): bool
+    {
+        if ($field === 'code') {
+            return $this->responseChecker->hasItemWithValue($response, $field, $value);
+        }
+
+        if ($field === 'name') {
+            return $this->responseChecker->hasItemWithTranslation($response, 'en_US', $field, $value);
+        }
+
+        return false;
+    }
+
+    private function getFieldValueOfFirstProduct(array $product, string $field): ?string
+    {
+        if ($field === 'code') {
+            return $product['code'];
+        }
+
+        if ($field === 'name') {
+            return $product['translations']['en_US']['name'];
+        }
+
+        return null;
     }
 }
