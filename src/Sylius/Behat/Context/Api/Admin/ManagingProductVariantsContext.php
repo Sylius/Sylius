@@ -49,10 +49,20 @@ final class ManagingProductVariantsContext implements Context
         $this->updateChannelPricingField($variant, $channel, $originalPrice, 'originalPrice');
     }
 
+    /**
+     * @When /^I remove the original price of the ("[^"]+" product variant) in ("[^"]+" channel)$/
+     */
+    public function iRemoveTheOriginalPriceOfTheProductVariantInChannel(
+        ProductVariantInterface $variant,
+        ChannelInterface $channel
+    ): void {
+        $this->updateChannelPricingField($variant, $channel, null, 'originalPrice');
+    }
+
     private function updateChannelPricingField(
         ProductVariantInterface $variant,
         ChannelInterface $channel,
-        int $price,
+        ?int $price,
         string $field
     ): void {
         $this->client->buildUpdateRequest($variant->getCode());

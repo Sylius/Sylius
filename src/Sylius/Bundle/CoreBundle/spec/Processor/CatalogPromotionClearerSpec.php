@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Processor;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -83,6 +84,17 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
         $channelPricing->getAppliedPromotions()->willReturn(['winter_sale' => ['en_US' => ['name' => 'Winter sale']]]);
         $channelPricing->getOriginalPrice()->willReturn(1000);
         $channelPricing->setPrice(1000)->shouldBeCalled();
+        $channelPricing->clearAppliedPromotions()->shouldBeCalled();
+
+        $this->clearChannelPricing($channelPricing);
+    }
+
+    function it_does_not_copy_update_price_when_original_price_is_null(
+        ChannelPricingInterface $channelPricing
+    ): void {
+        $channelPricing->getAppliedPromotions()->willReturn(['winter_sale' => ['en_US' => ['name' => 'Winter sale']]]);
+        $channelPricing->getOriginalPrice()->willReturn(null);
+        $channelPricing->setPrice(Argument::any())->shouldNotBeCalled();
         $channelPricing->clearAppliedPromotions()->shouldBeCalled();
 
         $this->clearChannelPricing($channelPricing);

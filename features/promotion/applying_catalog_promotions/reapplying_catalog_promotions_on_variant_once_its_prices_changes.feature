@@ -23,3 +23,9 @@ Feature: Reapplying catalog promotions on variant once its prices changes
         When I change the original price of the "PHP T-Shirt" product variant to "$50.00" in "Web-US" channel
         Then the visitor should see "$17.50" as the price of the "T-Shirt" product in the "Web-US" channel
         And the visitor should see "$50.00" as the original price of the "T-Shirt" product in the "Web-US" channel
+
+    @api @ui
+    Scenario: Removing the original price of the variant
+        When I remove the original price of the "PHP T-Shirt" product variant in "Web-US" channel
+        Then the visitor should see "$12.25" as the price of the "T-Shirt" product in the "Web-US" channel
+        And the visitor should see "$35.00" as the original price of the "T-Shirt" product in the "Web-US" channel
