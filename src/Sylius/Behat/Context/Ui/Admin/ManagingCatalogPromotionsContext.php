@@ -454,9 +454,9 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then the catalog promotions named :name should operate between :startDate and :endDate
+     * @Then the catalog promotion named :name should operate between :startDate and :endDate
      */
-    public function theCatalogPromotionsNamedShouldOperateBetweenDates(string $name, string $startDate, string $endDate): void
+    public function theCatalogPromotionNamedShouldOperateBetweenDates(string $name, string $startDate, string $endDate): void
     {
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['name' => $name, 'startDate' => $startDate, 'endDate' => $endDate]),
