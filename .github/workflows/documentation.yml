@@ -18,7 +18,7 @@ on:
 
 jobs:
     test:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
         
         name: "Build"
 
@@ -37,7 +37,7 @@ jobs:
                 run: docker run --rm sylius-docs
 
     notify-about-build-failure:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
 
         if: failure() && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'release')
 
