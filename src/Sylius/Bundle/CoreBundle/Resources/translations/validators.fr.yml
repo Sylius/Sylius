@@ -6,6 +6,14 @@ sylius:
         file:
             max_size: L'image est trop grande - {{ size }}{{ suffix }}. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
             upload_ini_size: L'image est trop grande. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
+    catalog_promotion_scope:
+        invalid_type: Le type de champ d'application pour la promotion catalogue est invalide. Veuillez choisir un type valide.
+        for_variants:
+            invalid_variants: La configuration fournie contient des erreurs. Veuillez ajouter uniquement des variantes existantes.
+            not_empty: Veuillez ajouter au moins une variante.
+        for_taxons:
+            invalid_taxons: La configuration fournie contient des erreurs. Veuillez ajouter uniquement des taxonomies existantes.
+            not_empty: La configuration fournie contient des erreurs. Veuillez ajouter au moins 1 taxonomie.
     channel:
         base_currency:
             not_blank: Saisissez la devise de référence du canal.
