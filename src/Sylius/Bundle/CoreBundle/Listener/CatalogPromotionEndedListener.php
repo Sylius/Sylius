@@ -53,9 +53,9 @@ final class CatalogPromotionEndedListener
         $stateMachine = $this->stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
         $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
 
-        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE);
-
         $this->catalogPromotionsProcessor->process();
+
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE);
 
         $this->entityManager->flush();
     }

@@ -17,7 +17,7 @@ use DateTimeInterface;
 use Sylius\Bundle\CoreBundle\Exception\TargetTimeSmallerException;
 use Symfony\Component\Messenger\Stamp\DelayStamp;
 
-class DelayStampCalculator implements DelayStampCalculatorInterface
+final class DelayStampCalculator implements DelayStampCalculatorInterface
 {
     /**
      * @throws TargetTimeSmallerException

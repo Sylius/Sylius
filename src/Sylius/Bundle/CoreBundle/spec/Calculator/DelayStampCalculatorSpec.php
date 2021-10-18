@@ -18,7 +18,7 @@ use Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface;
 use Sylius\Bundle\CoreBundle\Exception\TargetTimeSmallerException;
 use Symfony\Component\Messenger\Stamp\DelayStamp;
 
-class DelayStampCalculatorSpec extends ObjectBehavior
+final class DelayStampCalculatorSpec extends ObjectBehavior
 {
     function it_implements_delay_stamp_calculator_interface(): void
     {
@@ -27,18 +27,18 @@ class DelayStampCalculatorSpec extends ObjectBehavior
 
     function it_calculates_delay_stamp_from_given_dates(): void
     {
-        $currentTime = new \DateTime('@1634083200');
-        $targetTime = new \DateTime('@1634085200');
+        $currentTime = new \DateTime('2021-11-11 20:20');
+        $targetTime = new \DateTime('2021-11-11 20:21');
 
-        $delayStamp = new DelayStamp(2000000);
+        $delayStamp = new DelayStamp(60000);
 
         $this->calculate($currentTime, $targetTime)->shouldBeLike($delayStamp);
     }
 
     function it_returns_0_delay_if_dates_target_time_is_smaller_than_current_time(): void
     {
-        $currentTime = new \DateTime('@1634083200');
-        $targetTime = new \DateTime('@1634000000');
+        $currentTime = new \DateTime('2021-11-11 20:21');
+        $targetTime = new \DateTime('2021-11-11 19:05');
 
         $delayStamp = new DelayStamp(0);
 

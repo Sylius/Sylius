@@ -50,9 +50,11 @@ final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcess
 
         foreach ($eligibleCatalogPromotions as $catalogPromotion) {
             $stateMachine = $this->stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
-            $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
 
-            $this->catalogPromotionProcessor->process($catalogPromotion);
+            if ($stateMachine->can(CatalogPromotionTransitions::TRANSITION_PROCESS)) {
+                $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
+                $this->catalogPromotionProcessor->process($catalogPromotion);
+            }
         }
     }
 }

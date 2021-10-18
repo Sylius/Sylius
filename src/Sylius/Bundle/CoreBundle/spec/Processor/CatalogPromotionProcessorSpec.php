@@ -84,6 +84,7 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
         $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
 
         $catalogPromotion->getState()->willReturn(CatalogPromotionStates::STATE_PROCESSING);
+        $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldBeCalled();
 
         $productCatalogPromotionApplicator->applyOnVariant(Argument::any())->shouldNotBeCalled();
 
@@ -103,6 +104,7 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
         $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
 
         $catalogPromotion->getState()->willReturn(CatalogPromotionStates::STATE_ACTIVE);
+        $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldBeCalled();
 
         $productCatalogPromotionApplicator->applyOnVariant(Argument::any())->shouldNotBeCalled();
 

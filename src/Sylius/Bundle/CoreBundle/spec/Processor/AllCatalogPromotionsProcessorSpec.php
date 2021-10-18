@@ -65,6 +65,9 @@ final class AllCatalogPromotionsProcessorSpec extends ObjectBehavior
             ->willReturn([$firstCatalogPromotion, $secondCatalogPromotion])
         ;
 
+        $stateMachineInterfaceFirst->can(CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(true);
+        $stateMachineInterfaceSecond->can(CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(true);
+
         $stateMachineInterfaceFirst->apply(CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldBeCalled();
         $stateMachineInterfaceSecond->apply(CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldBeCalled();
 

@@ -51,6 +51,8 @@ final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterf
 
         $variants = $this->catalogPromotionVariantsProvider->provideEligibleVariants($catalogPromotion);
         if (empty($variants)) {
+            $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE);
+
             return;
         }
 

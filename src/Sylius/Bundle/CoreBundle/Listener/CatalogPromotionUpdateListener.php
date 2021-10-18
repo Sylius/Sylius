@@ -38,9 +38,7 @@ final class CatalogPromotionUpdateListener
 
     public function __invoke(CatalogPromotionUpdated $event): void
     {
-        $catalogPromotion = $this->catalogPromotionRepository->findOneBy(['code' => $event->code]);
-
-        if (null === $catalogPromotion || $catalogPromotion->isEnabled() === false) {
+        if (null === $this->catalogPromotionRepository->findOneBy(['code' => $event->code])) {
             return;
         }
 
