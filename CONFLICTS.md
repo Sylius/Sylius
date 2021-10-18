@@ -40,3 +40,26 @@ references related issues.
    `ParseError - vendor/symfony/polyfill-mbstring/bootstrap80.php:125:86 - Syntax error, unexpected '=' on line 125 (see https://psalm.dev/173) function mb_scrub(string $string, string $encoding = null): string { $encoding ??= mb_internal_encoding(); return mb_convert_encoding($string, $encoding, $encoding); }`
 
    References: https://github.com/vimeo/psalm/issues/4961
+
+   - `doctrine/dbal:^3`:
+   
+   Doctrine column type `json_array` has been removed creating error during a
+   doctrine migration
+   
+   ```
+   Error:  Migration Sylius\Bundle\CoreBundle\Migrations\Version20201130071338
+   failed during Execution.
+
+   In Exception.php line 125:
+
+   Unknown column type "json_array" requested. Any Doctrine type that you use   
+   has to be registered with \Doctrine\DBAL\Types\Type::addType(). You can get  
+   a list of all the known types with \Doctrine\DBAL\Types\Type::getTypesMap(  
+   ). If this error occurs during database introspection then you might have f  
+   orgotten to register all database types for a Doctrine Type. Use AbstractPl  
+   atform#registerDoctrineTypeMapping() or have your custom types implement Ty  
+   pe#getMappedDatabaseTypes(). If the type name is empty you might have a pro  
+   blem with the cache or forgot some mapping information.
+   ```
+   
+   References: https://github.com/Sylius/Sylius/issues/13211

@@ -159,6 +159,7 @@
     },
     "conflict": {
         "api-platform/core": "^2.6",
+        "doctrine/dbal": "^3",
         "laminas/laminas-code": "^4.0.0",
         "symfony/doctrine-bridge": "4.4.16",
         "symfony/polyfill-mbstring": "^1.22.0",
