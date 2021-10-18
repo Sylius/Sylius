@@ -53,4 +53,16 @@ final class ManagingProductVariantsPricesContext implements Context
         $this->updatePage->specifyOriginalPrice($originalPrice, $channel);
         $this->updatePage->saveChanges();
     }
+
+    /**
+     * @When /^I remove the original price of the ("[^"]+" product variant) in ("[^"]+" channel)$/
+     */
+    public function iRemoveTheOriginalPriceOfTheProductVariantInChannel(
+        ProductVariantInterface $variant,
+        ChannelInterface $channel
+    ): void {
+        $this->updatePage->open(['productId' => $variant->getProduct()->getId(), 'id' => $variant->getId()]);
+        $this->updatePage->specifyOriginalPrice(null, $channel);
+        $this->updatePage->saveChanges();
+    }
 }

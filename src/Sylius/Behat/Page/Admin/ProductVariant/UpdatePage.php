@@ -39,7 +39,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getElement('price', ['%channelCode%' => $channel->getCode()])->setValue($price);
     }
 
-    public function specifyOriginalPrice(int $originalPrice, ?ChannelInterface $channel = null): void
+    public function specifyOriginalPrice(?int $originalPrice, ?ChannelInterface $channel = null): void
     {
         if ($channel === null) {
             $this->getDocument()->fillField('Original price', $originalPrice);

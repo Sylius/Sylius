@@ -51,7 +51,7 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function specifyPrice(int $price, ?ChannelInterface $channelName = null): void;
 
-    public function specifyOriginalPrice(int $originalPrice, ?ChannelInterface $channel = null): void;
+    public function specifyOriginalPrice(?int $originalPrice, ?ChannelInterface $channel = null): void;
 
     public function disable(): void;
 

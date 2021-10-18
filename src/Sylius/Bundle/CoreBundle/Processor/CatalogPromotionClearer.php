@@ -47,7 +47,9 @@ final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
             return;
         }
 
-        $channelPricing->setPrice($channelPricing->getOriginalPrice());
+        if ($channelPricing->getOriginalPrice() !== null) {
+            $channelPricing->setPrice($channelPricing->getOriginalPrice());
+        }
         $channelPricing->clearAppliedPromotions();
     }
 }
