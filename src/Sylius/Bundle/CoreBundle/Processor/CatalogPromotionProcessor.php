@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Processor;
 
+use SM\Factory\FactoryInterface;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionStates;
+use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 
 final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterface
 {
@@ -25,17 +27,25 @@ final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterf
 
     private CatalogPromotionApplicatorInterface $catalogPromotionApplicator;
 
+    private FactoryInterface $stateMachine;
+
     public function __construct(
         CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
-        CatalogPromotionApplicatorInterface $catalogPromotionApplicator
+        CatalogPromotionApplicatorInterface $catalogPromotionApplicator,
+        FactoryInterface $stateMachine
     ) {
         $this->catalogPromotionVariantsProvider = $catalogPromotionVariantsProvider;
         $this->catalogPromotionApplicator = $catalogPromotionApplicator;
+        $this->stateMachine = $stateMachine;
     }
 
     public function process(CatalogPromotionInterface $catalogPromotion): void
     {
+        $stateMachine = $this->stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
+
         if (!$this->isCatalogPromotionEligible($catalogPromotion)) {
+            $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE);
+
             return;
         }
 
@@ -48,6 +58,8 @@ final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterf
         foreach ($variants as $variant) {
             $this->catalogPromotionApplicator->applyOnVariant($variant, $catalogPromotion);
         }
+
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_ACTIVATE);
     }
 
     private function isCatalogPromotionEligible(CatalogPromotionInterface $catalogPromotion): bool

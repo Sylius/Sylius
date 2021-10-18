@@ -16,22 +16,27 @@ namespace spec\Sylius\Bundle\CoreBundle\Processor;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use SM\Factory\FactoryInterface;
+use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionStates;
+use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 
 final class CatalogPromotionProcessorSpec extends ObjectBehavior
 {
     function let(
         CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
-        CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator
+        CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
+        FactoryInterface $stateMachine
     ): void {
         $this->beConstructedWith(
             $catalogPromotionVariantsProvider,
-            $productCatalogPromotionApplicator
+            $productCatalogPromotionApplicator,
+            $stateMachine
         );
     }
 
@@ -45,13 +50,18 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
         CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
         CatalogPromotionInterface $catalogPromotion,
         ProductVariantInterface $firstVariant,
-        ProductVariantInterface $secondVariant
+        ProductVariantInterface $secondVariant,
+        FactoryInterface $stateMachine,
+        StateMachineInterface $stateMachineInterface
     ): void {
         $catalogPromotion->isEnabled()->willReturn(true);
         $catalogPromotionVariantsProvider
             ->provideEligibleVariants($catalogPromotion)
             ->willReturn([$firstVariant, $secondVariant])
         ;
+
+        $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
+        $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_ACTIVATE)->shouldBeCalled();
 
         $catalogPromotion->getState()->willReturn(CatalogPromotionStates::STATE_PROCESSING);
 
@@ -64,10 +74,14 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
     function it_does_nothing_if_there_are_no_eligible_variants(
         CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
         CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
+        FactoryInterface $stateMachine,
+        StateMachineInterface $stateMachineInterface
     ): void {
         $catalogPromotion->isEnabled()->willReturn(true);
         $catalogPromotionVariantsProvider->provideEligibleVariants($catalogPromotion)->willReturn([]);
+
+        $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
 
         $catalogPromotion->getState()->willReturn(CatalogPromotionStates::STATE_PROCESSING);
 
@@ -79,10 +93,14 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
     function it_does_nothing_if_catalog_promotion_is_not_in_processing_state(
         CatalogPromotionVariantsProviderInterface $catalogPromotionVariantsProvider,
         CatalogPromotionApplicatorInterface $productCatalogPromotionApplicator,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
+        FactoryInterface $stateMachine,
+        StateMachineInterface $stateMachineInterface
     ): void {
         $catalogPromotion->isEnabled()->willReturn(true);
         $catalogPromotionVariantsProvider->provideEligibleVariants($catalogPromotion)->willReturn([]);
+
+        $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
 
         $catalogPromotion->getState()->willReturn(CatalogPromotionStates::STATE_ACTIVE);
 

@@ -38,18 +38,11 @@ final class CatalogPromotionUpdateListenerSpec extends ObjectBehavior
         AllCatalogPromotionsProcessorInterface $catalogPromotionReprocessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager,
-        CatalogPromotionInterface $catalogPromotion,
-        FactoryInterface $stateMachine,
-        StateMachineInterface $stateMachineInterface
+        CatalogPromotionInterface $catalogPromotion
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
 
-        $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
-        $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldBeCalled();
-
         $catalogPromotionReprocessor->process()->shouldBeCalled();
-
-        $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_ACTIVATE)->shouldBeCalled();
 
         $entityManager->flush()->shouldBeCalled();
 

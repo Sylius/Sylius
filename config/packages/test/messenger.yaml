@@ -1,5 +1,0 @@
-framework:
-    messenger:
-        routing:
-            'Sylius\Component\Promotion\Event\CatalogPromotionUpdated': sync
-            'Sylius\Component\Promotion\Event\CatalogPromotionEnded': sync

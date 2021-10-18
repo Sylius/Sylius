@@ -112,7 +112,6 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface" />
             <argument type="service" id="sylius.repository.catalog_promotion" />
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="sm.factory" />
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
 

@@ -35,12 +35,14 @@ class DelayStampCalculatorSpec extends ObjectBehavior
         $this->calculate($currentTime, $targetTime)->shouldBeLike($delayStamp);
     }
 
-    function it_throws_error_if_dates_target_time_is_smaller_than_current_time(): void
+    function it_returns_0_delay_if_dates_target_time_is_smaller_than_current_time(): void
     {
         $currentTime = new \DateTime('@1634083200');
         $targetTime = new \DateTime('@1634000000');
 
-        $this->shouldThrow(TargetTimeSmallerException::class)->during('calculate', [$currentTime, $targetTime]);
+        $delayStamp = new DelayStamp(0);
+
+        $this->calculate($currentTime, $targetTime)->shouldBeLike($delayStamp);
     }
 
     function it_returns_0_delay_when_time_is_not_provided(): void

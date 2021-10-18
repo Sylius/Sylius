@@ -31,7 +31,7 @@ class DelayStampCalculator implements DelayStampCalculatorInterface
         $timeDifference = $targetTime->getTimestamp() - $currentTime->getTimestamp();
 
         if ($timeDifference < 0) {
-            throw new TargetTimeSmallerException($currentTime, $targetTime);
+            $timeDifference = 0;
         }
 
         return new DelayStamp($timeDifference * 1000);

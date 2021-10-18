@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
-use SM\Factory\FactoryInterface;
 use Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface;
-use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
-use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CatalogPromotionUpdateListener
@@ -29,18 +26,14 @@ final class CatalogPromotionUpdateListener
 
     private EntityManagerInterface $entityManager;
 
-    private FactoryInterface $stateMachine;
-
     public function __construct(
         AllCatalogPromotionsProcessorInterface $catalogPromotionsProcessor,
         RepositoryInterface $catalogPromotionRepository,
-        EntityManagerInterface $entityManager,
-        FactoryInterface $stateMachine
+        EntityManagerInterface $entityManager
     ) {
         $this->catalogPromotionsProcessor = $catalogPromotionsProcessor;
         $this->catalogPromotionRepository = $catalogPromotionRepository;
         $this->entityManager = $entityManager;
-        $this->stateMachine = $stateMachine;
     }
 
     public function __invoke(CatalogPromotionUpdated $event): void
@@ -51,13 +44,7 @@ final class CatalogPromotionUpdateListener
             return;
         }
 
-        $stateMachine = $this->stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
-
-        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
-
         $this->catalogPromotionsProcessor->process();
-
-        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_ACTIVATE);
 
         $this->entityManager->flush();
     }

@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Processor;
 
+use SM\Factory\FactoryInterface;
 use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 
 final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcessorInterface
 {
@@ -23,17 +25,21 @@ final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcess
 
     private EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider;
 
+    private FactoryInterface $stateMachine;
+
     private iterable $defaultCriteria;
 
     public function __construct(
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionProcessorInterface $catalogPromotionProcessor,
         EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
+        FactoryInterface $stateMachine,
         iterable $defaultCriteria = []
     ) {
         $this->catalogPromotionClearer = $catalogPromotionClearer;
         $this->catalogPromotionProcessor = $catalogPromotionProcessor;
         $this->catalogPromotionsProvider = $catalogPromotionsProvider;
+        $this->stateMachine = $stateMachine;
         $this->defaultCriteria = $defaultCriteria;
     }
 
@@ -43,6 +49,9 @@ final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcess
         $eligibleCatalogPromotions = $this->catalogPromotionsProvider->provide($this->defaultCriteria);
 
         foreach ($eligibleCatalogPromotions as $catalogPromotion) {
+            $stateMachine = $this->stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
+            $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
+
             $this->catalogPromotionProcessor->process($catalogPromotion);
         }
     }
