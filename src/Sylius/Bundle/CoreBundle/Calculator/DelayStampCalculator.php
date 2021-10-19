@@ -14,14 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Calculator;
 
 use DateTimeInterface;
-use Sylius\Bundle\CoreBundle\Exception\TargetTimeSmallerException;
 use Symfony\Component\Messenger\Stamp\DelayStamp;
 
 final class DelayStampCalculator implements DelayStampCalculatorInterface
 {
-    /**
-     * @throws TargetTimeSmallerException
-     */
     public function calculate(?DateTimeInterface $currentTime, ?DateTimeInterface $targetTime): DelayStamp
     {
         if ($targetTime === null) {

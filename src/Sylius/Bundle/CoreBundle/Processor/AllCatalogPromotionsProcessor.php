@@ -25,21 +25,17 @@ final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcess
 
     private EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider;
 
-    private FactoryInterface $stateMachine;
-
     private iterable $defaultCriteria;
 
     public function __construct(
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionProcessorInterface $catalogPromotionProcessor,
         EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
-        FactoryInterface $stateMachine,
         iterable $defaultCriteria = []
     ) {
         $this->catalogPromotionClearer = $catalogPromotionClearer;
         $this->catalogPromotionProcessor = $catalogPromotionProcessor;
         $this->catalogPromotionsProvider = $catalogPromotionsProvider;
-        $this->stateMachine = $stateMachine;
         $this->defaultCriteria = $defaultCriteria;
     }
 
@@ -49,12 +45,7 @@ final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcess
         $eligibleCatalogPromotions = $this->catalogPromotionsProvider->provide($this->defaultCriteria);
 
         foreach ($eligibleCatalogPromotions as $catalogPromotion) {
-            $stateMachine = $this->stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
-
-            if ($stateMachine->can(CatalogPromotionTransitions::TRANSITION_PROCESS)) {
-                $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
-                $this->catalogPromotionProcessor->process($catalogPromotion);
-            }
+            $this->catalogPromotionProcessor->process($catalogPromotion);
         }
     }
 }

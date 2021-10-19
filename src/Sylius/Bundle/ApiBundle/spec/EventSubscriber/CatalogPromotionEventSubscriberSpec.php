@@ -15,9 +15,11 @@ namespace spec\Sylius\Bundle\ApiBundle\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface;
 use Sylius\Component\Core\Event\ProductVariantUpdated;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,26 +27,79 @@ use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DelayStamp;
 
 final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
 {
-    function let(MessageBusInterface $eventBus): void
+    function let(MessageBusInterface $eventBus, DelayStampCalculatorInterface $delayStampCalculator): void
     {
-        $this->beConstructedWith($eventBus);
+        $this->beConstructedWith($eventBus, $delayStampCalculator);
     }
 
-    function it_dispatches_catalog_promotion_updated_after_writing_catalog_promotion(
+    function it_dispatches_catalog_promotion_updated_and_catalog_promotion_ended_after_writing_catalog_promotion(
         MessageBusInterface $eventBus,
         CatalogPromotionInterface $catalogPromotion,
         HttpKernelInterface $kernel,
-        Request $request
+        Request $request,
+        DelayStampCalculatorInterface $delayStampCalculator
     ): void {
         $request->getMethod()->willReturn(Request::METHOD_PUT);
 
+        $startDateTime = new \DateTime('@1634083200');
+        $endDateTime = new \DateTime('@1634085200');
+
         $catalogPromotion->getCode()->willReturn('Winter_sale');
 
-        $message = new CatalogPromotionUpdated('Winter_sale');
-        $eventBus->dispatch($message)->willReturn(new Envelope($message))->shouldBeCalled();
+        $messageUpdate = new CatalogPromotionUpdated('Winter_sale');
+        $messageEnd = new CatalogPromotionEnded('Winter_sale');
+
+        $catalogPromotion->getStartDate()->willReturn($startDateTime);
+        $catalogPromotion->getEndDate()->willReturn($endDateTime);
+
+        $startDelayStamp = new DelayStamp(200000);
+        $endDelayStamp = new DelayStamp(300000);
+
+        $delayStampCalculator->calculate(Argument::any(), $startDateTime)->willReturn($startDelayStamp);
+        $delayStampCalculator->calculate(Argument::any(), $endDateTime)->willReturn($endDelayStamp);
+
+        $eventBus->dispatch($messageUpdate, [$startDelayStamp])->willReturn(new Envelope($messageUpdate))->shouldBeCalled();
+        $eventBus->dispatch($messageEnd, [$endDelayStamp])->willReturn(new Envelope($messageEnd))->shouldBeCalled();
+
+        $this->postWrite(new ViewEvent(
+            $kernel->getWrappedObject(),
+            $request->getWrappedObject(),
+            HttpKernelInterface::MASTER_REQUEST,
+            $catalogPromotion->getWrappedObject()
+        ));
+    }
+
+    function it_does_not_dispatch_catalog_promotion_ended_when_end_date_is_not_provided(
+        MessageBusInterface $eventBus,
+        CatalogPromotionInterface $catalogPromotion,
+        HttpKernelInterface $kernel,
+        Request $request,
+        DelayStampCalculatorInterface $delayStampCalculator
+    ): void {
+        $request->getMethod()->willReturn(Request::METHOD_PUT);
+
+        $startDateTime = new \DateTime('@1634083200');
+        $endDateTime = null;
+
+        $catalogPromotion->getCode()->willReturn('Winter_sale');
+
+        $messageUpdate = new CatalogPromotionUpdated('Winter_sale');
+        $messageEnd = new CatalogPromotionEnded('Winter_sale');
+
+        $catalogPromotion->getStartDate()->willReturn($startDateTime);
+        $catalogPromotion->getEndDate()->willReturn($endDateTime);
+
+        $startDelayStamp = new DelayStamp(200000);
+
+        $delayStampCalculator->calculate(Argument::any(), $startDateTime)->willReturn($startDelayStamp);
+        $delayStampCalculator->calculate(Argument::any(), $endDateTime)->shouldNotBeCalled();
+
+        $eventBus->dispatch($messageUpdate, [$startDelayStamp])->willReturn(new Envelope($messageUpdate))->shouldBeCalled();
+        $eventBus->dispatch($messageEnd, Argument::any())->willReturn(new Envelope($messageEnd))->shouldNotBeCalled();
 
         $this->postWrite(new ViewEvent(
             $kernel->getWrappedObject(),

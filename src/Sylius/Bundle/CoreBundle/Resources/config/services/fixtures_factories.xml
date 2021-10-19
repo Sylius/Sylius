@@ -22,7 +22,6 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionScopeExampleFactory" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionActionExampleFactory" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface" />
-            <argument type="service" id="SM\Factory\Factory" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionScopeExampleFactory">

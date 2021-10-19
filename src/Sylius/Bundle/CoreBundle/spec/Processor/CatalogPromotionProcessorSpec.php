@@ -61,9 +61,9 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
         ;
 
         $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
+        $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(true);
+        $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldBeCalled();
         $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_ACTIVATE)->shouldBeCalled();
-
-        $catalogPromotion->getState()->willReturn(CatalogPromotionStates::STATE_PROCESSING);
 
         $productCatalogPromotionApplicator->applyOnVariant($firstVariant, $catalogPromotion)->shouldBeCalled();
         $productCatalogPromotionApplicator->applyOnVariant($secondVariant, $catalogPromotion)->shouldBeCalled();
@@ -82,8 +82,8 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
         $catalogPromotionVariantsProvider->provideEligibleVariants($catalogPromotion)->willReturn([]);
 
         $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
-
-        $catalogPromotion->getState()->willReturn(CatalogPromotionStates::STATE_PROCESSING);
+        $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(true);
+        $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldBeCalled();
         $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldBeCalled();
 
         $productCatalogPromotionApplicator->applyOnVariant(Argument::any())->shouldNotBeCalled();
@@ -103,7 +103,8 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
 
         $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
 
-        $catalogPromotion->getState()->willReturn(CatalogPromotionStates::STATE_ACTIVE);
+        $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(true);
+        $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldBeCalled();
         $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldBeCalled();
 
         $productCatalogPromotionApplicator->applyOnVariant(Argument::any())->shouldNotBeCalled();

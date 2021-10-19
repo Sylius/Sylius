@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Faker\Factory;
 use Faker\Generator;
-use SM\Factory\FactoryInterface as StateMachine;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
@@ -24,8 +23,6 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionStates;
-use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -49,16 +46,13 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
 
     private OptionsResolver $optionsResolver;
 
-    private StateMachine $stateMachine;
-
     public function __construct(
         FactoryInterface $catalogPromotionFactory,
         RepositoryInterface $localeRepository,
         ChannelRepositoryInterface $channelRepository,
         ExampleFactoryInterface $catalogPromotionScopeExampleFactory,
         ExampleFactoryInterface $catalogPromotionActionExampleFactory,
-        CatalogPromotionProcessorInterface $catalogPromotionProcessor,
-        StateMachine $stateMachine
+        CatalogPromotionProcessorInterface $catalogPromotionProcessor
     ) {
         $this->catalogPromotionFactory = $catalogPromotionFactory;
         $this->localeRepository = $localeRepository;
@@ -66,8 +60,6 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
         $this->catalogPromotionScopeExampleFactory = $catalogPromotionScopeExampleFactory;
         $this->catalogPromotionActionExampleFactory = $catalogPromotionActionExampleFactory;
         $this->catalogPromotionProcessor = $catalogPromotionProcessor;
-        $this->stateMachine = $stateMachine;
-
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
@@ -82,10 +74,6 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
         $catalogPromotion = $this->catalogPromotionFactory->createNew();
         $catalogPromotion->setCode($options['code']);
         $catalogPromotion->setName($options['name']);
-
-        $stateMachine = $this->stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
-
-        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
 
         foreach ($this->getLocales() as $localeCode) {
             $catalogPromotion->setCurrentLocale($localeCode);

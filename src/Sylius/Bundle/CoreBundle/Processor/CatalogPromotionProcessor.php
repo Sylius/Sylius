@@ -43,6 +43,10 @@ final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterf
     {
         $stateMachine = $this->stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
 
+        if ($stateMachine->can(CatalogPromotionTransitions::TRANSITION_PROCESS)) {
+            $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
+        }
+
         if (!$this->isCatalogPromotionEligible($catalogPromotion)) {
             $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE);
 
@@ -66,9 +70,6 @@ final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterf
 
     private function isCatalogPromotionEligible(CatalogPromotionInterface $catalogPromotion): bool
     {
-        return (
-            $catalogPromotion->isEnabled() &&
-            $catalogPromotion->getState() !== CatalogPromotionStates::STATE_INACTIVE
-        );
+        return ($catalogPromotion->isEnabled());
     }
 }

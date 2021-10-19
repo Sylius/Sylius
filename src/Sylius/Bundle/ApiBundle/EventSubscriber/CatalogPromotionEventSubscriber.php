@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\EventSubscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
+use Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,9 +28,12 @@ final class CatalogPromotionEventSubscriber implements EventSubscriberInterface
 {
     private MessageBusInterface $eventBus;
 
-    public function __construct(MessageBusInterface $eventBus)
+    private DelayStampCalculatorInterface $delayStampCalculator;
+
+    public function __construct(MessageBusInterface $eventBus, DelayStampCalculatorInterface $delayStampCalculator)
     {
         $this->eventBus = $eventBus;
+        $this->delayStampCalculator = $delayStampCalculator;
     }
 
     public static function getSubscribedEvents(): array
@@ -49,7 +54,17 @@ final class CatalogPromotionEventSubscriber implements EventSubscriberInterface
         $method = $event->getRequest()->getMethod();
 
         if (in_array($method, [Request::METHOD_POST, Request::METHOD_PUT, Request::METHOD_PATCH], true)) {
-            $this->eventBus->dispatch(new CatalogPromotionUpdated($entity->getCode()));
+            $this->eventBus->dispatch(
+                new CatalogPromotionUpdated($entity->getCode()),
+                [$this->delayStampCalculator->calculate(new \DateTime('now'), $entity->getStartDate())]
+            );
+
+            if ($entity->getEndDate() !== null) {
+                $this->eventBus->dispatch(
+                    new CatalogPromotionEnded($entity->getCode()),
+                    [$this->delayStampCalculator->calculate(new \DateTime('now'), $entity->getEndDate())]
+                );
+            }
         }
     }
 }
