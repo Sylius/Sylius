@@ -45,10 +45,9 @@ sylius:
                     header: Sales
                     orders: Orders
     ui:
+        channel_pricings: Channel pricings
         product:
             product_not_active_in_channel: The product is not yet activated in this channel.
-        product_variant:
-            channel_pricings: Channel Pricings
         original_price_details: Original price - this is the price of the product variant It is displayed as crossed-out in the catalog. It is used as the base for current price calculations. If this value is not definded, Catalog Promotion logic will copy value from Price to Original Price. 
         price_details: Price - this is the current price of the product variant displayed in the catalog. It can be modified explicitly by i.e. catalog promotions. 
         gateway:

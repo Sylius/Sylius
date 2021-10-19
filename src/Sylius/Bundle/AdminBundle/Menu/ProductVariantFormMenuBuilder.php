@@ -61,9 +61,9 @@ final class ProductVariantFormMenuBuilder
         ;
 
         $menu
-            ->addChild('channelPricings')
+            ->addChild('channel_pricings')
             ->setAttribute('template', '@SyliusAdmin/ProductVariant/Tab/_channelPricings.html.twig')
-            ->setLabel('sylius.ui.product_variant.channel_pricings')
+            ->setLabel('sylius.ui.channel_pricings')
         ;
 
         $this->eventDispatcher->dispatch(
