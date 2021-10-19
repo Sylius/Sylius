@@ -15,3 +15,12 @@ sylius_admin_catalog_promotion:
             index:
                 icon: bookmark
     type: sylius.resource
+
+sylius_admin_catalog_promotion_show:
+    path: /catalog-promotions/{id}
+    defaults:
+        _controller: sylius.controller.catalog_promotion:showAction
+        _sylius:
+            section: admin
+            template: "@SyliusAdmin/CatalogPromotion/show.html.twig"
+            permission: true

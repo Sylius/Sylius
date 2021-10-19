@@ -12,10 +12,10 @@ Feature: Browsing catalog promotions
         And the catalog promotion "Winter sale" operates between "2021-11-10" and "2022-01-08"
         And I am logged in as an administrator
 
-    @api
+    @api @ui
     Scenario: Seeing catalog promotion's details
         When I view details of the catalog promotion "Winter sale"
         Then its name should be "Winter sale"
         And it should reduce price by "30%"
         And it should apply on "PHP T-shirt" variant
-        And it should operate between "2021-11-10" and "2022-01-08"
+        And it should start at "2021-11-10" and end at "2022-01-08"

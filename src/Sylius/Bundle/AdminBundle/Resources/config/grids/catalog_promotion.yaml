@@ -35,7 +35,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.state
                     options:
-                        template: "@SyliusAdmin/Common/Label/catalogPromotionState.html.twig"
+                        template: '@SyliusAdmin/Common/Label/catalogPromotionState.html.twig'
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
@@ -47,5 +47,7 @@ sylius_grid:
                     create:
                         type: create
                 item:
+                    show:
+                        type: show
                     update:
                         type: update

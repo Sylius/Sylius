@@ -656,6 +656,7 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @Then the catalog promotion named :catalogPromotion should operate between :startDate and :endDate
      * @Then /^(it) should operate between "([^"]+)" and "([^"]+)"$/
+     * @Then /^(it) should start at "([^"]+)" and end at "([^"]+)"$/
      * @Then /^(this catalog promotion) should operate between "([^"]+)" and "([^"]+)"$/
      */
     public function theCatalogPromotionNamedShouldOperateBetweenDates(

@@ -1,0 +1,10 @@
+<div class="ui stackable grid">
+    <div class="eight wide column">
+        <h4 class="ui top attached large header">{{ 'sylius.ui.details'|trans }}</h4>
+        {{ sylius_template_event('sylius.admin.catalog_promotion.show.content.left_bar', _context) }}
+    </div>
+
+    <div class="eight wide column">
+        {{ sylius_template_event('sylius.admin.catalog_promotion.show.content.right_bar', _context) }}
+    </div>
+</div>

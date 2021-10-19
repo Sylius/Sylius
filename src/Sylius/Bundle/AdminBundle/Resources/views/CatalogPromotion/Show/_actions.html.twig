@@ -1,0 +1,10 @@
+<div class="ui hidden divider"></div>
+
+<h4 class="ui top attached large header">{{ 'sylius.ui.actions'|trans }}</h4>
+<div class="ui attached segment">
+    <div>
+        {% for action in catalog_promotion.actions %}
+            {% include '@SyliusAdmin/CatalogPromotion/Show/Action/' ~ action.type ~ '.html.twig' %}
+        {% endfor %}
+    </div>
+</div>
