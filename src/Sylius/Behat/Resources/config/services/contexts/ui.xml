@@ -49,6 +49,7 @@
             <argument type="service" id="sylius.behat.page.admin.catalog_promotion.index" />
             <argument type="service" id="sylius.behat.page.admin.catalog_promotion.create" />
             <argument type="service" id="sylius.behat.page.admin.catalog_promotion.update" />
+            <argument type="service" id="sylius.behat.page.admin.catalog_promotion.show" />
             <argument type="service" id="Sylius\Behat\Element\Admin\CatalogPromotion\FormElement" />
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.notification_checker" />

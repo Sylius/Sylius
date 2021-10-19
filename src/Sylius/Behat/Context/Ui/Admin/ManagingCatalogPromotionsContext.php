@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Admin\CatalogPromotion\FormElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\CatalogPromotion\CreatePageInterface;
+use Sylius\Behat\Page\Admin\CatalogPromotion\ShowPageInterface;
 use Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
@@ -35,6 +36,8 @@ final class ManagingCatalogPromotionsContext implements Context
 
     private UpdatePageInterface $updatePage;
 
+    private ShowPageInterface $showPage;
+
     private FormElementInterface $formElement;
 
     private SharedStorageInterface $sharedStorage;
@@ -45,6 +48,7 @@ final class ManagingCatalogPromotionsContext implements Context
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
+        ShowPageInterface $showPage,
         FormElementInterface $formElement,
         SharedStorageInterface $sharedStorage,
         NotificationCheckerInterface $notificationChecker
@@ -52,6 +56,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
+        $this->showPage = $showPage;
         $this->formElement = $formElement;
         $this->sharedStorage = $sharedStorage;
         $this->notificationChecker = $notificationChecker;
@@ -413,6 +418,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I view details of the catalog promotion :catalogPromotion
+     */
+    public function iViewDetailsOfTheCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->showPage->open(['id' => $catalogPromotion->getId()]);
+    }
+
+    /**
      * @Then I should be notified that a discount amount should be between 0% and 100%
      */
     public function iShouldBeNotifiedThatADiscountAmountShouldBeBetween0And100Percent(): void
@@ -454,9 +467,9 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then the catalog promotions named :name should operate between :startDate and :endDate
+     * @Then the catalog promotion named :name should operate between :startDate and :endDate
      */
-    public function theCatalogPromotionsNamedShouldOperateBetweenDates(string $name, string $startDate, string $endDate): void
+    public function theCatalogPromotionNamedShouldOperateBetweenDates(string $name, string $startDate, string $endDate): void
     {
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['name' => $name, 'startDate' => $startDate, 'endDate' => $endDate]),
@@ -716,5 +729,38 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->formElement->getValidationMessage(),
             'The catalog promotion cannot be edited as it is currently being processed.'
         );
+    }
+
+    /**
+     * @Then its name should be :name
+     */
+    public function itsNameShouldBe(string $name): void
+    {
+        Assert::same($this->showPage->getName(), $name);
+    }
+
+    /**
+     * @Then it should reduce price by :amount
+     */
+    public function thisCatalogPromotionShouldHavePercentageDiscount(string $amount): void
+    {
+        Assert::true($this->showPage->hasActionWithPercentageDiscount($amount));
+    }
+
+    /**
+     * @Then it should apply on :variant variant
+     */
+    public function itShouldApplyOnVariant(ProductVariantInterface $variant): void
+    {
+        Assert::true($this->showPage->hasScopeWithVariant($variant));
+    }
+
+    /**
+     * @Then it should start at :startDate and end at :endDate
+     */
+    public function itShouldStartAtAndEndAt(string $startDate, string $endDate): void
+    {
+        Assert::contains($this->showPage->getStartDate(), $startDate);
+        Assert::contains($this->showPage->getEndDate(), $endDate);
     }
 }

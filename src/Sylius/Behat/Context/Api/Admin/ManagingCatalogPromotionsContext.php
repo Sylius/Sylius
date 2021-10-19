@@ -581,6 +581,16 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I view details of the catalog promotion :catalogPromotion
+     */
+    public function iViewDetailsOfTheCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->client->show($catalogPromotion->getCode());
+
+        $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
+    }
+
+    /**
      * @Then there should be :amount new catalog promotion on the list
      * @Then there should be :amount catalog promotions on the list
      * @Then there should be an empty list of catalog promotions
@@ -602,6 +612,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @Then /^this catalog promotion should have ("[^"]+") percentage discount$/
+     * @Then /^it should reduce price by ("[^"]+")$/
      */
     public function thisCatalogPromotionShouldHavePercentageDiscount(float $amount): void
     {
@@ -643,11 +654,12 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then the catalog promotions named :catalogPromotion should operate between :startDate and :endDate
+     * @Then the catalog promotion named :catalogPromotion should operate between :startDate and :endDate
      * @Then /^(it) should operate between "([^"]+)" and "([^"]+)"$/
+     * @Then /^(it) should start at "([^"]+)" and end at "([^"]+)"$/
      * @Then /^(this catalog promotion) should operate between "([^"]+)" and "([^"]+)"$/
      */
-    public function theCatalogPromotionsNamedShouldOperateBetweenDates(
+    public function theCatalogPromotionNamedShouldOperateBetweenDates(
         CatalogPromotionInterface $catalogPromotion,
         string $startDate,
         string $endDate
@@ -811,6 +823,14 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->client->show($catalogPromotion->getCode());
 
         Assert::true($this->catalogPromotionAppliesOnVariants($productVariant));
+    }
+
+    /**
+     * @Then it should apply on :variant variant
+     */
+    public function itShouldApplyOnVariant(ProductVariantInterface $variant): void
+    {
+        Assert::true($this->catalogPromotionAppliesOnVariants($variant));
     }
 
     /**
@@ -988,6 +1008,14 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->getError($this->client->getLastResponse()),
             'The catalog promotion cannot be edited as it is currently being processed.'
         );
+    }
+
+    /**
+     * @Then its name should be :name
+     */
+    public function itsNameShouldBe(string $name): void
+    {
+        Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $name));
     }
 
     private function catalogPromotionAppliesOnVariants(ProductVariantInterface ...$productVariants): bool
