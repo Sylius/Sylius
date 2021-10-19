@@ -114,7 +114,7 @@ jobs:
 
         name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgresSQL ${{ matrix.postgres }})"
         strategy:
-            matrix: 
+            matrix:
                 php: ["8.0"]
                 symfony: ["5.2.*"]
                 postgres: ["13.3"]
@@ -149,12 +149,12 @@ jobs:
                 run: |
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
-    
+
             -
                 name: Get Composer cache directory
                 id: composer-cache
                 run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-    
+
             -
                 name: Cache Composer
                 uses: actions/cache@v2
@@ -163,25 +163,25 @@ jobs:
                     key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
                     restore-keys: |
                         ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
-    
+
             -
                 name: Install PHP dependencies
                 run: composer update --no-interaction --no-scripts
-    
+
             -
                 name: Dump the environment
                 run: |
                     echo "DATABASE_URL=$DATABASE_URL" >> .env.$APP_ENV
                     composer dump-env $APP_ENV
-    
+
             -
                 name: Warmup cache
                 run: bin/console cache:warmup
-    
+
             -
                 name: Make filesystem readonly
                 run: chmod -R 555 app bin config docs features src templates tests translations vendor
-    
+
             -
                 name: Prepare application database
                 run: |
@@ -192,18 +192,18 @@ jobs:
 
     test-application-without-frontend-mariadb:
         runs-on: ubuntu-latest
-    
+
         name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }})"
         strategy:
             matrix:
                 php: ["8.0"]
                 symfony: ["5.2.*"]
                 mariadb: ["10.4.10"]
-    
+
         env:
             APP_ENV: test_cached
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=mariadb-${{ matrix.mariadb }}"
-    
+
         steps:
             -
                 uses: actions/checkout@v2
@@ -230,12 +230,12 @@ jobs:
                 run: |
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
-    
+
             -
                 name: Get Composer cache directory
                 id: composer-cache
                 run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-    
+
             -
                 name: Cache Composer
                 uses: actions/cache@v2
@@ -244,31 +244,31 @@ jobs:
                     key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
                     restore-keys: |
                         ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
-    
+
             -
                 name: Install PHP dependencies
                 run: composer update --no-interaction --no-scripts
-    
+
             -
                 name: Dump the environment
                 run: |
                     echo "DATABASE_URL=$DATABASE_URL" >> .env.$APP_ENV
                     composer dump-env $APP_ENV
-    
+
             -
                 name: Warmup cache
                 run: bin/console cache:warmup
-    
+
             -
                 name: Make filesystem readonly
                 run: chmod -R 555 app bin config docs features src templates tests translations vendor
-    
+
             -
                 name: Prepare application database
                 run: |
                     APP_DEBUG=1 bin/console doctrine:database:create -vvv
                     bin/console doctrine:migrations:migrate -n -vvv
-        
+
             -
                 name: Test provided migrations
                 run: |
@@ -281,16 +281,16 @@ jobs:
                 name: Test installer
                 run: bin/console sylius:install --no-interaction -vvv
                 continue-on-error: true
-    
+
             -
                 name: Load fixtures
                 run: bin/console sylius:fixtures:load default --no-interaction
                 continue-on-error: true
-    
+
             -
                 name: Run PHPSpec
                 run: vendor/bin/phpspec run --ansi --no-interaction -f dot
-    
+
             -
                 name: Run PHPUnit
                 run: vendor/bin/phpunit --colors=always
