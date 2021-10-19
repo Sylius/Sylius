@@ -20,8 +20,8 @@ on:
 
 jobs:
     list:
-        runs-on: ubuntu-18.04
-
+        runs-on: ubuntu-latest
+        
         name: "Create a list of packages"
 
         steps:
@@ -38,9 +38,9 @@ jobs:
 
     test:
         needs: list
-
-        runs-on: ubuntu-18.04
-
+        
+        runs-on: ubuntu-latest
+        
         name: "${{ matrix.package }}, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}"
 
         timeout-minutes: 10
@@ -103,7 +103,7 @@ jobs:
                 run: bin/test-package src/Sylius/${{ matrix.package }}
 
     notify-about-build-failure:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
 
         if: failure() && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'release')
 
