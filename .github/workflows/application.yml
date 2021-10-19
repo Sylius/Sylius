@@ -254,7 +254,7 @@ jobs:
             matrix:
                 php: [7.3, 7.4]
                 symfony: [^4.4, ^5.2]
-                node: [12.x]
+                node: [14.x]
                 mysql: [5.7, 8.0]
 
                 exclude:
