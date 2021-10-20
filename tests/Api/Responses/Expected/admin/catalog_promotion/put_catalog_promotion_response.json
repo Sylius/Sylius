@@ -7,7 +7,7 @@
     "code": "mugs_discount",
     "startDate": null,
     "endDate": null,
-    "state": "inactive",
+    "state": "active",
     "channels": [
         "\/api\/v2\/admin\/channels\/MOBILE"
     ],

@@ -93,6 +93,8 @@
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\CatalogPromotionEventListener">
             <argument type="service" id="sylius.event_bus" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" />
+            <argument type="service" id="Sylius\Component\Promotion\Provider\DateTimeProviderInterface" />
             <tag name="kernel.event_listener" event="sylius.catalog_promotion.post_create" method="dispatchCatalogPromotionUpdatedEvent" />
             <tag name="kernel.event_listener" event="sylius.catalog_promotion.post_update" method="dispatchCatalogPromotionUpdatedEvent" />
         </service>
@@ -111,6 +113,14 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface" />
             <argument type="service" id="sylius.repository.catalog_promotion" />
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="messenger.message_handler" bus="sylius.event_bus" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Listener\CatalogPromotionEndedListener">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface" />
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sm.factory" />
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
 

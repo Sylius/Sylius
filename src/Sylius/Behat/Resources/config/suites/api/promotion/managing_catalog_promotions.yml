@@ -5,6 +5,7 @@ default:
     suites:
         api_managing_catalog_promotions:
             contexts:
+                - sylius.behat.context.hook.calendar
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.channel

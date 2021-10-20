@@ -279,5 +279,7 @@
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="sylius.catalog_promotion.variants_provider" />
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" class="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculator"/>
     </services>
 </container>

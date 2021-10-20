@@ -279,6 +279,17 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I make it start yesterday and ends tomorrow
+     */
+    public function iMakeCatalogPromotionOperateBetweenYesterdayAndTomorrow(): void
+    {
+        $this->client->updateRequestData([
+            'startDate' => (new \DateTime('yesterday'))->format('Y-m-d H:i:s'),
+            'endDate' => (new \DateTime('tomorrow'))->format('Y-m-d H:i:s')
+        ]);
+    }
+
+    /**
      * @When I make it start at :startDate
      */
     public function iMakeCatalogPromotionOperateFrom(string $startDate): void
@@ -679,7 +690,31 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then /^(it) should be (inactive)$/
+     * @Then /^(it) should operate between yesterday and tomorrow$/
+     */
+    public function theCatalogPromotionsNamedShouldOperateBetweenYesterdayAndTomorrow(
+        CatalogPromotionInterface $catalogPromotion
+    ): void {
+        $response = $this->client->index();
+
+        Assert::true(
+            $this->responseChecker->hasItemWithValues(
+                $response,
+                [
+                    'name' => $catalogPromotion->getName(),
+                    'startDate' => (new \DateTime('yesterday'))->format('Y-m-d H:i:s'),
+                    'endDate' => (new \DateTime('tomorrow'))->format('Y-m-d H:i:s')
+                ]
+            ),
+            sprintf(
+                'Cannot find catalog promotions with name "%s" operating between "%s" and "%s" in the list',
+                $catalogPromotion->getName(), (new \DateTime('yesterday'))->format('Y-m-d H:i:s'), (new \DateTime('tomorrow'))->format('Y-m-d H:i:s')
+            )
+        );
+    }
+
+    /**
+     * @Then /^(it) should be (inactive|active)$/
      */
     public function itShouldBeInactive(CatalogPromotionInterface $catalogPromotion, string $state): void
     {

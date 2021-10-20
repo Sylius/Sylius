@@ -164,6 +164,15 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I make it start yesterday and ends tomorrow
+     */
+    public function iMakeItOperateBetweenYesterdayAndTomorrow(): void
+    {
+        $this->formElement->specifyStartDate(new \DateTime('yesterday'));
+        $this->formElement->specifyEndDate(new \DateTime('tomorrow'));
+    }
+
+    /**
      * @When I make it start at :startDate
      */
     public function iMakeItOperateFromDate(string $startDate): void
@@ -604,7 +613,23 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then /^(it) should be (inactive)$/
+     * @Then /^(it) should operate between yesterday and tomorrow$/
+     */
+    public function theCatalogPromotionShouldOperateBetweenYesterdayAndTomorrow(
+        CatalogPromotionInterface $catalogPromotion
+    ): void {
+        $this->indexPage->open();
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'name' => $catalogPromotion->getName(),
+            'startDate' => (new \DateTime('yesterday'))->format('Y-m-d'),
+            'endDate' => (new \DateTime('tomorrow'))->format('Y-m-d'),
+        ]));
+
+        $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
+    }
+
+    /**
+     * @Then /^(it) should be (inactive|active)$/
      */
     public function itShouldBeInactive(CatalogPromotionInterface $catalogPromotion, string $state): void
     {

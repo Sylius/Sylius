@@ -38,6 +38,7 @@
         >
             <argument type="service" id="Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface" />
+            <argument type="service" id="SM\Factory\Factory" />
         </service>
 
         <service

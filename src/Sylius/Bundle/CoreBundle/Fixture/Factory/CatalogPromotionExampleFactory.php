@@ -60,7 +60,6 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
         $this->catalogPromotionScopeExampleFactory = $catalogPromotionScopeExampleFactory;
         $this->catalogPromotionActionExampleFactory = $catalogPromotionActionExampleFactory;
         $this->catalogPromotionProcessor = $catalogPromotionProcessor;
-
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 

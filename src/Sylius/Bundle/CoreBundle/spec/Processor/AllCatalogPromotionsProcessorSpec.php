@@ -14,12 +14,14 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Processor;
 
 use PhpSpec\ObjectBehavior;
+use SM\Factory\FactoryInterface;
+use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
 use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
-use Sylius\Bundle\PromotionBundle\Criteria\Enabled;
 use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 
 final class AllCatalogPromotionsProcessorSpec extends ObjectBehavior
 {
