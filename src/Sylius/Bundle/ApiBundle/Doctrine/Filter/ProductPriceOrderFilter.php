@@ -39,7 +39,8 @@ final class ProductPriceOrderFilter extends AbstractContextAwareFilter
                 ->addSelect('channelPricing')
                 ->innerJoin('o.variants', 'variant')
                 ->innerJoin('variant.channelPricings', 'channelPricing')
-                ->orderBy('channelPricing.price', $value['price']);
+                ->orderBy('channelPricing.price', $value['price'])
+            ;
         }
     }
 
