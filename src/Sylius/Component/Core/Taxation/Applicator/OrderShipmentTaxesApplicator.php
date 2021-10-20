@@ -64,7 +64,10 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
                 continue;
             }
 
-            $taxAmount = $this->calculator->calculate($shipment->getAdjustmentsTotal(), $taxRate);
+            $shippingTotal = $shipment->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT)
+                + $shipment->getAdjustmentsTotal(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT);
+
+            $taxAmount = $this->calculator->calculate($shippingTotal, $taxRate);
             if (0.00 === $taxAmount) {
                 continue;
             }
