@@ -7,21 +7,16 @@ Feature: Applying catalog promotions with different states
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a "T-Shirt" configurable product
-        And the store has a "Mug" configurable product
         And this product has "PHP T-Shirt" variant priced at "$20.00"
-        And this product has "Python Mug" variant priced at "$20.00"
-        And there is a catalog promotion "Winter sale" that reduces price by "30%" and applies on "PHP T-Shirt" variant
-        And there is a catalog promotion "Python sale" that reduces price by "50%" and applies on "Python Mug" variant
-        And catalog promotion "Winter sale" has failed processing
+        And there is a catalog promotion "Winter sale" that reduces price by "50%" and applies on "PHP T-Shirt" variant
 
     @api @ui
     Scenario: Seeing catalog promotions that were processed successfully
-        When I view product "Mug"
-        Then I should see the product price "$10.00"
-        And I should see the product original price "$20.00"
+        When I view "PHP T-Shirt" variant of the "T-Shirt" product
+        Then I should see this variant is discounted from "$20.00" to "$10.00" with "Winter sale" promotion
 
     @api @ui
     Scenario: Not applying catalog promotion if it failed processing
-        When I view product "T-Shirt"
-        Then I should see the product price "$20.00"
-        And I should see this product has no catalog promotion applied
+        Given catalog promotion "Winter sale" has failed processing
+        When I view "PHP T-Shirt" variant of the "T-Shirt" product
+        Then I should see this variant is not discounted
