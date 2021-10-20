@@ -16,11 +16,14 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
+use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 final class CatalogPromotionType extends AbstractResourceType
 {
@@ -50,18 +53,6 @@ final class CatalogPromotionType extends AbstractResourceType
             ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.catalog_promotion.enabled'
             ])
-            ->add('startDate', DateTimeType::class, [
-                'label' => 'sylius.form.catalog_promotion.start_date',
-                'date_widget' => 'single_text',
-                'time_widget' => 'single_text',
-                'required' => false,
-            ])
-            ->add('endDate', DateTimeType::class, [
-                'label' => 'sylius.form.catalog_promotion.end_date',
-                'date_widget' => 'single_text',
-                'time_widget' => 'single_text',
-                'required' => false,
-            ])
             ->add('scopes', CollectionType::class, [
                 'label' => 'sylius.ui.scopes',
                 'entry_type' => CatalogPromotionScopeType::class,
@@ -77,6 +68,31 @@ final class CatalogPromotionType extends AbstractResourceType
                 'by_reference' => false,
             ])
         ;
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event): void {
+            /** @var CatalogPromotionInterface $catalogPromotion */
+            $catalogPromotion = $event->getData();
+            $startDateDisabled = $catalogPromotion->getStartDate() !== null;
+            $endDateDisabled = $catalogPromotion->getEndDate() !== null;
+
+            $form = $event->getForm();
+            $form
+                ->add('startDate', DateTimeType::class, [
+                    'label' => 'sylius.form.catalog_promotion.start_date',
+                    'date_widget' => 'single_text',
+                    'time_widget' => 'single_text',
+                    'required' => false,
+                    'disabled' => $startDateDisabled,
+                ])
+                ->add('endDate', DateTimeType::class, [
+                    'label' => 'sylius.form.catalog_promotion.end_date',
+                    'date_widget' => 'single_text',
+                    'time_widget' => 'single_text',
+                    'required' => false,
+                    'disabled' => $endDateDisabled,
+                ])
+            ;
+        });
     }
 
     public function getBlockPrefix(): string

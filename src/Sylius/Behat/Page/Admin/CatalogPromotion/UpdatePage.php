@@ -40,8 +40,8 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_catalog_promotion_code',
-            'end_date' => '#sylius_catalog_promotion_endDate',
-            'start_date' => '#sylius_catalog_promotion_startDate',
+            'end_date' => '#sylius_catalog_promotion_endDate_date',
+            'start_date' => '#sylius_catalog_promotion_startDate_date',
         ]);
     }
 }
