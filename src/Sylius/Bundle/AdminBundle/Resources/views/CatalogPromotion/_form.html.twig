@@ -8,6 +8,10 @@
         <div class="ui segment">
             {{ form_row(form.code) }}
             {{ form_row(form.name) }}
+            <div class="ui negative message">
+                <i class="close icon"></i>
+                {{ 'sylius.ui.catalog_promotion.dates_details'|trans }}
+            </div>
             {{ form_row(form.startDate) }}
             {{ form_row(form.endDate) }}
             {{ form_row(form.enabled) }}

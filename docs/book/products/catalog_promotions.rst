@@ -12,6 +12,11 @@ you can specify the Catalog Promotion with your custom actions as well as action
 
 You can assign the needed channels too.
 
+.. warning::
+
+    Be aware that processing a big catalog of products can be time consuming.
+    Please consider a 2-10 minutes delay starting from the specified dates (it depends how big catalog you have).
+
 Catalog Promotion Parameters
 ----------------------------
 
