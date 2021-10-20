@@ -44,17 +44,15 @@ Feature: Editing catalog promotion
         But this catalog promotion should not be available in channel "United States"
 
     @api @ui
-    Scenario: Editing catalog promotion's time range
-        Given the catalog promotion "Christmas sale" operates between "2021-12-20" and "2021-12-30"
-        When I want to modify a catalog promotion "Christmas sale"
-        And I make it start at "2021-12-10"
-        And I save my changes
-        Then this catalog promotion should operate between "2021-12-10" and "2021-12-30"
-
-    @api @ui
     Scenario: Being unable to change code of catalog promotion
         When I want to modify a catalog promotion "Christmas sale"
         Then I should not be able to edit its code
+
+    @api @ui
+    Scenario: Being unable to edit catalog promotion dates
+        Given the catalog promotion "Christmas sale" operates between "2021-12-20" and "2021-12-30"
+        When I want to modify a catalog promotion "Christmas sale"
+        Then I should not be able to edit its start and end date
 
     @api @ui @javascript
     Scenario: Editing catalog promotion variant scope
@@ -94,3 +92,4 @@ Feature: Editing catalog promotion
         When I try to rename the "Christmas sale" catalog promotion to "Black Friday"
         Then I should not be able to edit it due to wrong state
         And this catalog promotion name should still be "Christmas sale"
+        Then "PHP T-Shirt" variant should be discounted

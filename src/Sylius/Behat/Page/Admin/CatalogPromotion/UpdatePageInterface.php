@@ -18,4 +18,8 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
     public function isCodeDisabled(): bool;
+
+    public function isStartDateDisabled(): bool;
+
+    public function isEndDateDisabled(): bool;
 }
