@@ -48,7 +48,9 @@ final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterf
         }
 
         if (!$this->isCatalogPromotionEligible($catalogPromotion)) {
-            $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE);
+            if ($stateMachine->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)) {
+                $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE);
+            }
 
             return;
         }
@@ -70,6 +72,6 @@ final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterf
 
     private function isCatalogPromotionEligible(CatalogPromotionInterface $catalogPromotion): bool
     {
-        return $catalogPromotion->isEnabled();
+        return ($catalogPromotion->isEnabled() && $catalogPromotion->getState() !== CatalogPromotionStates::STATE_FAILED);
     }
 }

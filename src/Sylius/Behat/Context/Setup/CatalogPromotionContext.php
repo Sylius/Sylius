@@ -185,6 +185,19 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
+     * @Given catalog promotion :catalogPromotion has failed processing
+     */
+    public function catalogPromotionHasFailedProcessing(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $stateMachine = $this->stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
+
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_FAIL);
+
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
+    /**
      * @Given /^there is (?:a|another) catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" taxon) and ("[^"]+" taxon)$/
      * @Given /^there is (?:a|another) catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" taxon)$/
      */
