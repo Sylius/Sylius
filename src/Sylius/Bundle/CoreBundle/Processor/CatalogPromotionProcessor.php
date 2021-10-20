@@ -70,6 +70,6 @@ final class CatalogPromotionProcessor implements CatalogPromotionProcessorInterf
 
     private function isCatalogPromotionEligible(CatalogPromotionInterface $catalogPromotion): bool
     {
-        return ($catalogPromotion->isEnabled());
+        return $catalogPromotion->isEnabled();
     }
 }

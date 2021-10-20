@@ -18,6 +18,7 @@ use Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
+use Sylius\Component\Promotion\Provider\DateTimeProviderInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
@@ -30,10 +31,16 @@ final class CatalogPromotionEventSubscriber implements EventSubscriberInterface
 
     private DelayStampCalculatorInterface $delayStampCalculator;
 
-    public function __construct(MessageBusInterface $eventBus, DelayStampCalculatorInterface $delayStampCalculator)
-    {
+    private DateTimeProviderInterface $dateTimeProvider;
+
+    public function __construct(
+        MessageBusInterface $eventBus,
+        DelayStampCalculatorInterface $delayStampCalculator,
+        DateTimeProviderInterface $dateTimeProvider
+    ) {
         $this->eventBus = $eventBus;
         $this->delayStampCalculator = $delayStampCalculator;
+        $this->dateTimeProvider = $dateTimeProvider;
     }
 
     public static function getSubscribedEvents(): array
@@ -54,15 +61,19 @@ final class CatalogPromotionEventSubscriber implements EventSubscriberInterface
         $method = $event->getRequest()->getMethod();
 
         if (in_array($method, [Request::METHOD_POST, Request::METHOD_PUT, Request::METHOD_PATCH], true)) {
-            $this->eventBus->dispatch(
-                new CatalogPromotionUpdated($entity->getCode()),
-                [$this->delayStampCalculator->calculate(new \DateTime('now'), $entity->getStartDate())]
-            );
+            if ($entity->getStartDate() === null) {
+                $this->eventBus->dispatch(new CatalogPromotionUpdated($entity->getCode()));
+            } else {
+                $this->eventBus->dispatch(
+                    new CatalogPromotionUpdated($entity->getCode()),
+                    [$this->delayStampCalculator->calculate($this->dateTimeProvider->now(), $entity->getStartDate())]
+                );
+            }
 
             if ($entity->getEndDate() !== null) {
                 $this->eventBus->dispatch(
                     new CatalogPromotionEnded($entity->getCode()),
-                    [$this->delayStampCalculator->calculate(new \DateTime('now'), $entity->getEndDate())]
+                    [$this->delayStampCalculator->calculate($this->dateTimeProvider->now(), $entity->getEndDate())]
                 );
             }
         }

@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\CoreBundle\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface;
-use Sylius\Bundle\CoreBundle\Exception\TargetTimeSmallerException;
 use Symfony\Component\Messenger\Stamp\DelayStamp;
 
 final class DelayStampCalculatorSpec extends ObjectBehavior
@@ -43,12 +42,5 @@ final class DelayStampCalculatorSpec extends ObjectBehavior
         $delayStamp = new DelayStamp(0);
 
         $this->calculate($currentTime, $targetTime)->shouldBeLike($delayStamp);
-    }
-
-    function it_returns_0_delay_when_time_is_not_provided(): void
-    {
-        $delayStamp = new DelayStamp(0);
-
-        $this->calculate(null, null)->shouldBeLike($delayStamp);
     }
 }
