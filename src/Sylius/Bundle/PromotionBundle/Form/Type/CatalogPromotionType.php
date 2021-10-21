@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
+use Sylius\Bundle\PromotionBundle\Form\DataTransformer\DefaultTimeDataTransformer;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
@@ -91,6 +92,19 @@ final class CatalogPromotionType extends AbstractResourceType
                     'disabled' => $disabled,
                 ])
             ;
+        });
+
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event): void {
+            $data = $event->getData();
+
+            if ($data['startDate']['date'] !== '' && $data['startDate']['time'] === '') {
+                $data['startDate']['time'] = '00:00:00';
+            }
+            if ($data['endDate']['date'] !== '' && $data['endDate']['time'] === '') {
+                $data['endDate']['time'] = '23:59:59';
+            }
+
+            $event->setData($data);
         });
     }
 
