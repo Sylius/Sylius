@@ -72,8 +72,7 @@ final class CatalogPromotionType extends AbstractResourceType
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event): void {
             /** @var CatalogPromotionInterface $catalogPromotion */
             $catalogPromotion = $event->getData();
-            $startDateDisabled = $catalogPromotion->getStartDate() !== null;
-            $endDateDisabled = $catalogPromotion->getEndDate() !== null;
+            $disabled = $catalogPromotion->getId() !== null;
 
             $form = $event->getForm();
             $form
@@ -82,14 +81,14 @@ final class CatalogPromotionType extends AbstractResourceType
                     'date_widget' => 'single_text',
                     'time_widget' => 'single_text',
                     'required' => false,
-                    'disabled' => $startDateDisabled,
+                    'disabled' => $disabled,
                 ])
                 ->add('endDate', DateTimeType::class, [
                     'label' => 'sylius.form.catalog_promotion.end_date',
                     'date_widget' => 'single_text',
                     'time_widget' => 'single_text',
                     'required' => false,
-                    'disabled' => $endDateDisabled,
+                    'disabled' => $disabled,
                 ])
             ;
         });
