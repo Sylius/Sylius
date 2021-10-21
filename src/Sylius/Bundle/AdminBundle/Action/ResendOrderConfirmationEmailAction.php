@@ -56,7 +56,7 @@ final class ResendOrderConfirmationEmailAction
     {
         $orderId = $request->attributes->get('id');
 
-        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken($orderId, $request->query->get('_csrf_token')))) {
+        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken($orderId, (string) $request->query->get('_csrf_token')))) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 

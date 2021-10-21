@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
+use Sylius\Component\Resource\Model\VersionedInterface;
 
-interface OrderItemInterface extends BaseOrderItemInterface
+interface OrderItemInterface extends BaseOrderItemInterface, VersionedInterface
 {
     public function getProduct(): ?ProductInterface;
 

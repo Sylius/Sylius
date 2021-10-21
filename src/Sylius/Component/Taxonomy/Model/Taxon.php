@@ -182,7 +182,7 @@ class Taxon implements TaxonInterface
 
         return sprintf(
             '%s%s%s',
-            $this->getParent()->getFullname(),
+            $this->getParent()->getFullname($pathDelimiter),
             $pathDelimiter,
             $this->getName()
         );

@@ -1,93 +1,10 @@
-# UPGRADE FROM `v1.8.X` TO `v1.9.0`
- 
-1. To have better control over the serialization process, we introduced `shop` and `admin` prefixes to names of serialization groups on `src/Sylius/Bundle/ApiBundle/Resources/config/api_resources/*` and `src/Sylius/Bundle/ApiBundle/Resources/config/serialization/*`. 
-Several additional serialization groups have been rephrased, to improve readability and predictability of them.
-If you are using they on your custom entity `api_resource` configuration or serialization groups, you should check if one of these changes may affect on your app. If yes, change all occurs by this pattern:
-
-- created serialization groups for `Locale` resource as: `admin:locale:read` and `admin:locale:create`
-- `adjustment:read` changed to: `admin:adjustment:read` and `shop:adjustment:read`
-- `admin_user:create` changed to: `admin:admin_user:create`
-- `admin_user:read` changed to: `admin:admin_user:read`
-- `admin_user:update` changed to: `admin:admin_user:update`
-- `avatar_image:read` changed to: `admin:avatar_image:read`
-- `cart:add_item` changed to: `shop:cart:add_item`
-- `cart:address` changed to: `shop:cart:address`
-- `cart:apply_coupon` changed to: `shop:cart:apply_coupon`
-- `cart:change_quantity` changed to: `shop:cart:change_quantity`
-- `cart:complete` changed to: `shop:cart:complete`
-- `cart:remove_item` changed to: `shop:cart:remove_item`
-- `cart:select_payment_method` changed to: `shop:cart:select_payment_method`
-- `cart:select_shipping_method` changed to: `shop:cart:select_shipping_method`
-- `cart:update` changed to: `shop:cart:update`
-- `channel:create` changed to: `admin:channel:create`
-- `channel:read` changed to: `admin:channel:read`
-- `checkout:read` changed to: `shop:cart:read`
-- `country:read` changed to: `admin:country:read`
-- `currency:read` changed to: `admin:currency:read`
-- `customer:password:write` changed to: `shop:customer:password:update`
-- `customer:read` changed to: `admin:customer:read` and `shop:customer:read`
-- `customer:update` changed to: `shop:customer:update`
-- `customer_group:create` changed to: `admin:customer_group:create`
-- `customer_group:read` changed to: `admin:customer_group:read`
-- `customer_group:update` changed to: `admin:customer_group:update`
-- `exchange_rate:create` changed to: `admin:exchange_rate:create`
-- `exchange_rate:read` changed to: `admin:exchange_rate:read`
-- `exchange_rate:update` changed to: `admin:exchange_rate:update`
-- `order:create` changed to: `shop:order:create`
-- `order:read` changed to: `admin:order:read`
-- `order:update` changed to: `admin:order:update`
-- `order_item:read` changed to: `admin:order_item:read` and `shop:order_item:read`
-- `order_item_unit:read` changed to: `admin:order_item_unit:read` and `shop:order_item_unit:read`
-- `payment:read` changed to: `admin:payment:read` and `shop:payment:read`
-- `payment_method:read` changed to: `admin:payment_method:read` and `shop:payment_method:read`
-- `product:create` changed to: `admin:product:create`
-- `product:read` changed to: `admin:product:read` and `shop:product:read`
-- `product:update` changed to: `admin:product:update`
-- `province:read` changed to: `admin:province:read`
-- `province:update` changed to: `admin:province:update`
-- `shipment:read` changed to: `admin:shipment:read` and `shop:shipment:read`
-- `shipment:update` changed to: `admin:shipment:update`
-- `shipping_category:create` changed to: `admin:shipping_category:create`
-- `shipping_category:read` changed to: `admin:shipping_category:read`
-- `shipping_category:update` changed to: `admin:shipping_category:update`
-- `shipping_method:create` changed to: `admin:shipping_method:create`
-- `shipping_method:read` changed to: `admin:shipping_method:read`
-- `shipping_method:update` changed to: `admin:shipping_method:update`
-- `shop:currencies:read` changed to: `shop:currency:read`
-- `shop:customer:write` changed to: `shop:customer:create`
-- `shop_billing_data:read` changed to: `admin:shop_billing_data:read`
-- `tax_category:read` changed to: `admin:tax_category:read`
-- `tax_category:update` changed to: `admin:tax_category:update`
-- `tax_category:create` changed to: `admin:tax_category:create`
-- `taxon:read` changed to: `admin:taxon:read` and `shop:taxon:read` 
-- `taxon:update` changed to: `admin:taxon:update`
-- `taxon:create` changed to: `admin:taxon:create`
-- `zone:read` changed to: `admin:zone:read`
-- `zone:update` changed to: `admin:zone:update`
-- `zone:create` changed to: `admin:zone:create`
-- `zone_member:read` changed to: `admin:zone_member:read`
-- removed redundant `zone_member:write` 
-
 # UPGRADE FROM `v1.8.4` TO `v1.8.6`
 
-1. Change configuration of new ApiBundle in your `config/packages/security.yaml` file:
+1. API is disabled by default, to enable it you need to set flag to ``true`` in ``config/packages/_sylius.yaml``:
 
-    ```diff
-         security:
-             firewalls:
-                 new_api_admin_user:
-                     json_login:
-    -                    check_path: "%sylius.security.new_api_route%/admin/authentication-token"
-    +                    check_path: "%sylius.security.new_api_admin_route%/authentication-token"
-                 new_api_shop_user:
-                     json_login:
-    -                    check_path: "%sylius.security.new_api_route%/shop/authentication-token"
-    +                    check_path: "%sylius.security.new_api_shop_route%/authentication-token"
-             access_control:
-    -            - { path: "%sylius.security.new_api_route%/admin/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
-    +            - { path: "%sylius.security.new_api_admin_route%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
-    -            - { path: "%sylius.security.new_api_route%/shop/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
-    +            - { path: "%sylius.security.new_api_shop_route%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
+    ```yaml
+    sylius_api:
+        enabled: true
     ```
 
 # UPGRADE FROM `v1.8.3` TO `v1.8.4`
@@ -95,204 +12,25 @@ If you are using they on your custom entity `api_resource` configuration or seri
 1. The `sylius:cancel-unpaid-orders` command now continues to proceed even if an error occurred. The behavior here is now normal but it leads to a few issues for an upgrade:
 
     - Product variants with `on_hold = on_hand` will become available as soon as the uncancelled orders are now cancelled. This could lead to a lot of products on sale which were not previously on sale. This behavior is normal but the Merchant could be used to the previous behavior and could have acted around it.  
-    **Before** you upgrade on production you may want to verify the stocks of these products variants:
+      **Before** you upgrade on production you may want to verify the stocks of these products variants:
     ```sql
     SELECT code FROM sylius_product_variant WHERE on_hand = on_hold; -- These products will go back on "available" and may be sold
     ```
     - If the merchant is used to this (now gone) bug, then they should be careful about this situation as well: if they worked with the issue and considered that increasing the `on_hand` value to sale more since some on hand stocks were locked by the `on_hold` items, they may be in the situation of having more items on hand than the reality.
 
-# UPGRADE FROM `v1.8.0` TO `v1.8.1`
-
-1. Change configuration of new ApiBundle in your `config/packages/security.yaml` file:
-
-    ```diff
-        security:
-            providers:
-    -           sylius_api_chain_provider:
-    -               chain:
-    -                   providers: [sylius_api_shop_user_provider, sylius_api_admin_user_provider]
-            
-            firewalls:
-                new_api_admin_user:
-    -               pattern: "%sylius.security.new_api_route%/admin-user-authentication-token"
-    -               provider: sylius_admin_user_provider
-    +               pattern: "%sylius.security.new_api_admin_regex%/.*"
-    +               provider: sylius_api_admin_user_provider
-                    json_login:
-    -                   check_path: "%sylius.security.new_api_route%/admin-user-authentication-token"
-    +                   check_path: "%sylius.security.new_api_route%/admin/authentication-token"
-
-                new_api_shop_user:
-    -               pattern: "%sylius.security.new_api_route%/shop-user-authentication-token"
-    -               provider: sylius_shop_user_provider
-    +               pattern: "%sylius.security.new_api_shop_regex%/.*"
-    +               provider: sylius_api_shop_user_provider
-                    json_login:
-    -                   check_path: "%sylius.security.new_api_route%/shop-user-authentication-token"
-    +                   check_path: "%sylius.security.new_api_route%/shop/authentication-token"
-
-    -           new_api:
-    -               pattern: "%sylius.security.new_api_regex%/*"
-    -               provider: sylius_api_chain_provider
-    -               stateless: true
-    -               anonymous: lazy
-    -               guard:
-    -                   authenticators:
-    -                       - lexik_jwt_authentication.jwt_token_authenticator
-
-            access_control:
-    +            - { path: "%sylius.security.new_api_route%/admin/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
-    +            - { path: "%sylius.security.new_api_route%/shop/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
-    ```
-
 # UPGRADE FROM `v1.7.X` TO `v1.8.0`
 
-1. Add new bundles to your list of used bundles in `config/bundles.php` if you are not using it apart from Sylius:
-
-    ```diff
-    +   ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
-    +   Sylius\Bundle\ApiBundle\SyliusApiBundle::class => ['all' => true],
-    +   Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle::class => ['all' => true],
-    +   SyliusLabs\DoctrineMigrationsExtraBundle\SyliusLabsDoctrineMigrationsExtraBundle::class => ['all' => true],
-    ```
-
-1. Add configuration of new ApiBundle in your `config/packages/_sylius.yaml` file:
-
-    ```diff
-        imports:
-    +       - { resource: "@SyliusApiBundle/Resources/config/app/config.yaml" }
-    ```
-
-1. Add configuration of new ApiBundle in your `config/packages/security.yaml` file:
-
-    ```diff
-        parameters:
-    -       sylius.security.admin_regex: "^/admin"
-    -       sylius.security.shop_regex: "^/(?!admin|api/.*|api$|media/.*)[^/]++"
-    +       sylius.security.admin_regex: "^/%sylius_admin.path_name%"
-    +       sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|new-api|api/.*|api$|media/.*)[^/]++"
-    +       sylius.security.new_api_route: "/new-api"
-    +       sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
-    +       sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
-    +       sylius.security.new_api_admin_regex: "^%sylius.security.new_api_admin_route%"
-    +       sylius.security.new_api_shop_route: "%sylius.security.new_api_route%/shop"
-    +       sylius.security.new_api_shop_regex: "^%sylius.security.new_api_shop_route%"
-        
-        security:
-            providers:
-    +           sylius_api_admin_user_provider:
-    +               id: sylius.admin_user_provider.email_or_name_based
-    +           sylius_api_shop_user_provider:
-    +               id: sylius.shop_user_provider.email_or_name_based
-    +           sylius_api_chain_provider:
-    +               chain:
-    +                   providers: [sylius_api_shop_user_provider, sylius_api_admin_user_provider]
-            
-            firewalls:
-                admin:
-                    remember_me:
-    -                   path: /admin
-    +                   path: "/%sylius_admin.path_name%"
-    +           new_api_admin_user:
-    +               pattern: "%sylius.security.new_api_route%/admin-user-authentication-token"
-    +               provider: sylius_admin_user_provider
-    +               stateless: true
-    +               anonymous: true
-    +               json_login:
-    +                   check_path: "%sylius.security.new_api_route%/admin-user-authentication-token"
-    +                   username_path: email
-    +                   password_path: password
-    +                   success_handler: lexik_jwt_authentication.handler.authentication_success
-    +                   failure_handler: lexik_jwt_authentication.handler.authentication_failure
-    +               guard:
-    +                   authenticators:
-    +                       - lexik_jwt_authentication.jwt_token_authenticator
-    +   
-    +           new_api_shop_user:
-    +               pattern: "%sylius.security.new_api_route%/shop-user-authentication-token"
-    +               provider: sylius_shop_user_provider
-    +               stateless: true
-    +               anonymous: true
-    +               json_login:
-    +                   check_path: "%sylius.security.new_api_route%/shop-user-authentication-token"
-    +                   username_path: email
-    +                   password_path: password
-    +                   success_handler: lexik_jwt_authentication.handler.authentication_success
-    +                   failure_handler: lexik_jwt_authentication.handler.authentication_failure
-    +               guard:
-    +                   authenticators:
-    +                       - lexik_jwt_authentication.jwt_token_authenticator
-    +   
-    +           new_api:
-    +               pattern: "%sylius.security.new_api_regex%/*"
-    +               provider: sylius_api_chain_provider
-    +               stateless: true
-    +               anonymous: lazy
-    +               guard:
-    +                   authenticators:
-    +                       - lexik_jwt_authentication.jwt_token_authenticator
-    + 
-            access_control:
-    +            - { path: "%sylius.security.new_api_admin_regex%/.*", role: ROLE_API_ACCESS }
-    +            - { path: "%sylius.security.new_api_shop_regex%/.*", role: IS_AUTHENTICATED_ANONYMOUSLY }
-    ```
-1. Add `sylius_api.yaml` file to `config/routes/` directory:
-
-    ```yaml
-       sylius_api:
-           resource: "@SyliusApiBundle/Resources/config/routing.yml"
-           prefix: "%sylius.security.new_api_route%"
-    ```
-
-1. Add `lexik_jwt_authentication.yaml` file to `config/packages/` directory:
-
-    ```yaml
-       lexik_jwt_authentication:
-         secret_key: '%env(resolve:JWT_SECRET_KEY)%'
-         public_key: '%env(resolve:JWT_PUBLIC_KEY)%'
-         pass_phrase: '%env(JWT_PASSPHRASE)%'
-    ```
-
-1. Add configuration in your `.env` file:
-
-    ```diff
-    +       ###> lexik/jwt-authentication-bundle ###
-    +       JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
-    +       JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
-    +       JWT_PASSPHRASE=YOUR_SECRET_PASSPHRASE
-    +       ###< lexik/jwt-authentication-bundle ###
-   
-1. Add configuration in your `.env.test` file:
-
-    ```diff
-    +       ###> lexik/jwt-authentication-bundle ###
-    +       JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private-test.pem
-    +       JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public-test.pem
-    +       JWT_PASSPHRASE=ALL_THAT_IS_GOLD_DOES_NOT_GLITTER_NOT_ALL_THOSE_WHO_WANDER_ARE_LOST
-    +       ###< lexik/jwt-authentication-bundle ###
-   
-1. Add configuration in your `.env.test_cached` file:
-
-    ```diff
-    +       ###> lexik/jwt-authentication-bundle ###
-    +       JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private-test.pem
-    +       JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public-test.pem
-    +       JWT_PASSPHRASE=ALL_THAT_IS_GOLD_DOES_NOT_GLITTER_NOT_ALL_THOSE_WHO_WANDER_ARE_LOST
-    +       ###< lexik/jwt-authentication-bundle ###
-
-1. Sample JWT token generation is available [here](https://api-platform.com/docs/core/jwt/)
-   
 1. All consts classes has been changed from final classes to interfaces. As a result initialization of `\Sylius\Bundle\UserBundle\UserEvents` is not longer possible. The whole list of changed classes can be found [here](https://github.com/Sylius/Sylius/pull/11347).
 
 1. Service alias `Sylius\Component\Channel\Context\ChannelContextInterface` was changed from `sylius.context.channel.composite` to `sylius.context.channel`.
-The later is being decorated by `sylius.context.channel.cached` which caches the channel per request and reduces the amount of database queries.
+   The later is being decorated by `sylius.context.channel.cached` which caches the channel per request and reduces the amount of database queries.
 
 1. A serialization group has been added to the route `sylius_admin_ajax_product_index` to avoid an infinite loop, or a
-time out during this ajax request (previously no serialization group was defined on this route).
+   time out during this ajax request (previously no serialization group was defined on this route).
 
 1. We now use the parameter `sylius_admin.path_name` to retrieve the admin routes prefix. If you used the `/admin` prefix
-in some admin URLs you can now replace `/admin` by `/%sylius_admin.path_name%`.  
-Also the route is now dynamic. You can change the `SYLIUS_ADMIN_ROUTING_PATH_NAME` environment variable to custom the admin's URL.
+   in some admin URLs you can now replace `/admin` by `/%sylius_admin.path_name%`.  
+   Also the route is now dynamic. You can change the `SYLIUS_ADMIN_ROUTING_PATH_NAME` environment variable to custom the admin's URL.
 
 ## Special attention
 
@@ -323,26 +61,26 @@ As we switched to the `3.0` version of Doctrine Migrations, there are some thing
    ```
 
 1. Mark all migrations from **@SyliusCoreBundle** and **@SyliusAdminApiBundle** as executed
-(they're the same as legacy ones, just not recognized by the doctrine _yet_)
+   (they're the same as legacy ones, just not recognized by the doctrine _yet_)
 
    ```bash
    bin/console doctrine:migrations:version "Sylius\Bundle\CoreBundle\Migrations\Version20161202011555" --add --no-interaction
    #...
    ```
 
-    > BEWARE!
+   > BEWARE!
 
-    If you're using some Sylius plugins you'll probably need to handle their migrations as well.
-    You can either leave them in your `src/Migrations/` catalog and treat as _your own_ or use the migrations from the vendors.
-    However, it assumes that plugin provides a proper integration with Doctrine Migrations 3.0 - as, for example,
-    [Invoicing Plugin](https://github.com/Sylius/InvoicingPlugin/blob/master/src/DependencyInjection/SyliusInvoicingExtension.php#L33).
+   If you're using some Sylius plugins you'll probably need to handle their migrations as well.
+   You can either leave them in your `src/Migrations/` catalog and treat as _your own_ or use the migrations from the vendors.
+   However, it assumes that plugin provides a proper integration with Doctrine Migrations 3.0 - as, for example,
+   [Invoicing Plugin](https://github.com/Sylius/InvoicingPlugin/blob/master/src/DependencyInjection/SyliusInvoicingExtension.php#L33).
 
-    > TIP
+   > TIP
 
-    Take a look at [etc/migrations-1.8.sh](etc/migrations-1.8.sh) script - it would execute points 2) and 3) automatically.
+   Take a look at [etc/migrations-1.8.sh](etc/migrations-1.8.sh) script - it would execute points 2) and 3) automatically.
 
 1. Do the same for your own migrations. Assuming your migrations namespace is `DoctrineMigrations` and
-migrations catalog is `src/Migrations`, you can run such a script:
+   migrations catalog is `src/Migrations`, you can run such a script:
 
     ```bash
     #!/bin/bash
@@ -352,7 +90,7 @@ migrations catalog is `src/Migrations`, you can run such a script:
         bin/console doctrine:migrations:version "DoctrineMigrations\\${file}" --add --no-interaction
     done
     ```
-   
+
 1. Run `bin/console doctrine:migrations:migrate` to apply migrations added in Sylius 1.8
 
 #### Re-enable product variants and taxons
@@ -380,3 +118,7 @@ Some translations have changed, you may want to search for them in your project:
 - `sylius.email.shipment_confirmation.tracking_code` has been removed.
 - `sylius.email.shipment_confirmation.you_can_check_its_location` has been removed.
 - `sylius.email.shipment_confirmation.you_can_check_its_location_with_the_tracking_code` has been added instead of the two above.
+
+### API v2
+
+For changes according to the API v2, please visit [API v2 upgrade file](UPGRADE-API-1.8.md).

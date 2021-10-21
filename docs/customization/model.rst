@@ -109,7 +109,7 @@ If all is well the output should look like:
     ---------------------------- -------------------------------------------
      Parameter                    Value
     ---------------------------- -------------------------------------------
-     sylius.model.country.class   App\Entity\Country
+     sylius.model.country.class   App\Entity\Addressing\Country
     ---------------------------- -------------------------------------------
 
 .. tip::

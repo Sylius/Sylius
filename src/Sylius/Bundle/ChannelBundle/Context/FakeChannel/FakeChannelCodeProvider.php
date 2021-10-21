@@ -19,6 +19,16 @@ final class FakeChannelCodeProvider implements FakeChannelCodeProviderInterface
 {
     public function getCode(Request $request): ?string
     {
-        return $request->query->get('_channel_code') ?: $request->cookies->get('_channel_code');
+        $queryChannelCode = $request->query->get('_channel_code');
+        if (is_string($queryChannelCode) && $queryChannelCode !== '') {
+            return $queryChannelCode;
+        }
+
+        $cookiesChannelCode = $request->cookies->get('_channel_code');
+        if (is_string($cookiesChannelCode) && $cookiesChannelCode !== '') {
+            return $cookiesChannelCode;
+        }
+
+        return null;
     }
 }

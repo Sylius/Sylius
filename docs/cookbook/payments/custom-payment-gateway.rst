@@ -41,7 +41,7 @@ In the following example, a new gateway will be configured, which will send paym
             }
         }
 
-    And at the end of ``src/Resources/config/services.xml`` add such a configuration for your gateway:
+    And at the end of ``src/Resources/config/services.xml`` or ``src/Resources/config/services.yaml`` add such a configuration for your gateway:
 
     .. code-block:: xml
 
@@ -52,6 +52,17 @@ In the following example, a new gateway will be configured, which will send paym
             <tag name="payum.gateway_factory_builder" factory="sylius_payment" />
         </service>
 
+    .. code-block:: yaml
+
+        # src/Resources/config/services.yaml
+        
+        app.sylius_payment:
+            class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+            arguments: [ Acme\SyliusExamplePlugin\Payum\SyliusPaymentGatewayFactory ]
+            tags:
+              - { name: payum.gateway_factory_builder, factory: sylius_payment }
+
+    
 **3.** Next, one should create a configuration form, where authorization
 (or some additional information, like sandbox mode) can be specified.
 
@@ -79,7 +90,7 @@ In the following example, a new gateway will be configured, which will send paym
             }
         }
 
-    And add its configuration to `src/Resources/config/services.xml`:
+    And add its configuration to `src/Resources/config/services.xml` or ``src/Resources/config/services.yaml``:
 
     .. code-block:: xml
 
@@ -89,6 +100,15 @@ In the following example, a new gateway will be configured, which will send paym
             <tag name="sylius.gateway_configuration_type" type="sylius_payment" label="Sylius Payment" />
             <tag name="form.type" />
         </service>
+    
+    .. code-block:: yaml
+    
+        # src/Resources/config/services.yaml
+        
+        Acme\SyliusExamplePlugin\Form\Type\SyliusGatewayConfigurationType:
+            tags:
+              - { name: sylius.gateway_configuration_type, type: sylius_payment, label: 'Sylius Payment' }
+              - { name: form.type }
 
 **4.** To introduce support for new configuration fields, we need to create a value object which will be passed to action,
 so we can use an API Key provided in form.
@@ -347,7 +367,7 @@ so we can use an API Key provided in form.
             }
         }
 
-    And at the end of ``src/Resources/config/services.xml`` add such a configuration for your capture action:
+    And at the end of ``src/Resources/config/services.xml`` or `src/Resources/config/services.yaml`` add such a configuration for your capture action:
 
     .. code-block:: xml
 
@@ -357,6 +377,16 @@ so we can use an API Key provided in form.
             <argument type="service" id="sylius.http_client" />
             <tag name="payum.action" factory="sylius_payment" alias="payum.action.capture" />
         </service>
+    
+    .. code-block:: yaml
+    
+        # src/Resources/config/services.yaml
+        
+        Acme\SyliusExamplePlugin\Payum\Action\CaptureAction:
+            arguments:
+                - '@sylius.http_client'
+            tags:
+                - { name: payum.action, factory: sylius_payment, alias: payum.action.capture }
 
     Your shop is ready to handle the first checkout with your newly created gateway!
 

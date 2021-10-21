@@ -1,5 +1,42 @@
 # CHANGELOG FOR `1.8.X`
 
+## v1.8.12 (2021-04-22)
+
+#### Details
+
+- [#12469](https://github.com/Sylius/Sylius/issues/12469) Extract sylius/admin-api-bundle out of Sylius Core (but keep it installed by default in existing minor releases) ([@pamil](https://github.com/pamil))
+- [#12489](https://github.com/Sylius/Sylius/issues/12489) Build fix Change int to string in GenerateCouponsCommand ([@Tomanhez](https://github.com/Tomanhez))
+- [#12493](https://github.com/Sylius/Sylius/issues/12493) Update model.rst ([@mariogalan](https://github.com/mariogalan))
+- [#12501](https://github.com/Sylius/Sylius/issues/12501) [BUG] Product options null value returns 400 instead of 500 ([@lchrusciel](https://github.com/lchrusciel), [@SirDomin](https://github.com/SirDomin))
+- [#12504](https://github.com/Sylius/Sylius/issues/12504) Change app.php to index.php ([@stefandoorn](https://github.com/stefandoorn))
+- [#12516](https://github.com/Sylius/Sylius/issues/12516) Fix CustomerComponent Typo ([@DennisdeBest](https://github.com/DennisdeBest))
+- [#12522](https://github.com/Sylius/Sylius/issues/12522) Revert BC break in ProductVariantInterface ([@pamil](https://github.com/pamil))
+- [#12523](https://github.com/Sylius/Sylius/issues/12523) Remove Admin API Bundle-related tests ([@pamil](https://github.com/pamil))
+
+## v1.8.11 (2021-03-22)
+
+#### Details
+
+- [#12468](https://github.com/Sylius/Sylius/issues/12468) Fix the build by conflicting with doctrine/doctrine-bundle 2.3.0 ([@pamil](https://github.com/pamil))
+
+## v1.8.10 (2021-03-18)
+
+#### Details
+
+- [#12126](https://github.com/Sylius/Sylius/issues/12126) Fix incorrect money format being used ([@kayue](https://github.com/kayue))
+- [#12289](https://github.com/Sylius/Sylius/issues/12289) [Docs] Add docs for LoyaltyRule[Api] ([@Tomanhez](https://github.com/Tomanhez))
+- [#12312](https://github.com/Sylius/Sylius/issues/12312) [CI] Ignore changes in "adr" directory ([@pamil](https://github.com/pamil))
+- [#12313](https://github.com/Sylius/Sylius/issues/12313) Change package type from "project" to "library" ([@vvasiloi](https://github.com/vvasiloi))
+- [#12324](https://github.com/Sylius/Sylius/issues/12324) Removing hard timeout on edit while load selected values ([@christopherhero](https://github.com/christopherhero))
+- [#12352](https://github.com/Sylius/Sylius/issues/12352) [Frontend] add box with info about api identifiers ([@SirDomin](https://github.com/SirDomin))
+- [#12363](https://github.com/Sylius/Sylius/issues/12363) [Maintenance] Run test suite for MySQL 8.0 ([@lchrusciel](https://github.com/lchrusciel), [@GSadee](https://github.com/GSadee))
+- [#12367](https://github.com/Sylius/Sylius/issues/12367) change swagger API info color to blue ([@SirDomin](https://github.com/SirDomin))
+- [#12376](https://github.com/Sylius/Sylius/issues/12376) Pass path delimiter up to parent taxon ([@Jeroen-G](https://github.com/Jeroen-G), [@Jeroen](https://github.com/Jeroen), [@pamil](https://github.com/pamil))
+- [#12384](https://github.com/Sylius/Sylius/issues/12384) Doc: Fix Doctrine project url ([@n3wborn](https://github.com/n3wborn))
+- [#12397](https://github.com/Sylius/Sylius/issues/12397) Do not fail when mb_detect_encoding returns false ([@stefandoorn](https://github.com/stefandoorn))
+- [#12404](https://github.com/Sylius/Sylius/issues/12404) Fix nested accordion initialisation ([@DjLeChuck](https://github.com/DjLeChuck))
+- [#12407](https://github.com/Sylius/Sylius/issues/12407) [AttributeBundle] custom locale_code fixed ([@Mateuszry](https://github.com/Mateuszry))
+
 ## v1.8.9 (2021-02-01)
 
 #### TL;DR

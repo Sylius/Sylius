@@ -236,7 +236,7 @@ class RegistrationContext implements Context
     {
         $this->iLogInAsWithPassword($email, $password);
 
-        Assert::true($this->loginPage->hasValidationErrorWith('Error Account is disabled.'));
+        Assert::true($this->loginPage->hasValidationErrorWith('Error Invalid credentials.'));
     }
 
     /**

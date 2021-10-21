@@ -299,6 +299,14 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Then I should be denied an access to order list
+     */
+    public function iShouldDeniedAnAccessToOrderList(): void
+    {
+        Assert::true($this->responseChecker->hasAccessDenied($this->client->getLastResponse()));
+    }
+
+    /**
      * @Then I should have :paymentMethod payment method on my order
      */
     public function iShouldHavePaymentMethodOnMyOrder(PaymentMethodInterface $paymentMethod): void

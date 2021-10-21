@@ -22,7 +22,7 @@ on:
 
 jobs:
     static-checks:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
 
         name: "Static checks (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
 
@@ -52,7 +52,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.13.4"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -
@@ -76,7 +76,7 @@ jobs:
 
             -
                 name: Validate composer.json
-                run: composer validate --strict
+                run: composer validate --strict --no-check-version
                 if: always() && steps.end-of-setup.outcome == 'success'
 
             -
@@ -110,7 +110,7 @@ jobs:
                 if: always() && steps.end-of-setup.outcome == 'success'
 
     test-application-without-frontend:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
 
         name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }})"
 
@@ -161,7 +161,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.13.4"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -
@@ -243,7 +243,7 @@ jobs:
                     if-no-files-found: ignore
 
     test-application-with-frontend:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
 
         name: "Test JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }})"
 
@@ -254,7 +254,7 @@ jobs:
             matrix:
                 php: [7.3, 7.4]
                 symfony: [^4.4, ^5.2]
-                node: [10.x]
+                node: [14.x]
                 mysql: [5.7, 8.0]
 
                 exclude:
@@ -295,7 +295,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.13.4"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -
@@ -396,7 +396,7 @@ jobs:
                     if-no-files-found: ignore
 
     notify-about-build-failure:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
 
         if: failure() && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'release')
 

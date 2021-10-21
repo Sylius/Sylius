@@ -180,7 +180,6 @@ Having a grid prepared we can configure routing for the entity administration:
         resource: |
             alias: app.supplier
             section: admin
-            path: admin
             templates: "@SyliusAdmin\\Crud"
             redirect: update
             grid: app_admin_supplier
@@ -190,28 +189,8 @@ Having a grid prepared we can configure routing for the entity administration:
                 index:
                     icon: 'file image outline'
         type: sylius.resource
+        prefix: /admin
 
-.. note::
-
-    You can replace ``path: admin`` with ``prefix: /admin``
-
-    .. code-block:: yaml
-
-        # config/routes.yaml
-        app_admin_supplier:
-            resource: |
-                alias: app.supplier
-                section: admin
-                templates: "@SyliusAdmin\\Crud"
-                redirect: update
-                grid: app_admin_supplier
-                vars:
-                    all:
-                        subheader: app.ui.supplier
-                    index:
-                        icon: 'file image outline'
-            type: sylius.resource
-            prefix: /admin
 
 10. Add entity administration to the admin menu
 -----------------------------------------------

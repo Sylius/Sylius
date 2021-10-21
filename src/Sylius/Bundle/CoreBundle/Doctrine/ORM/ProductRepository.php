@@ -87,9 +87,10 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
 
         $queryBuilder
             ->andWhere(':channel MEMBER OF o.channels')
-            ->andWhere('o.enabled = true')
+            ->andWhere('o.enabled = :enabled')
             ->setParameter('locale', $locale)
             ->setParameter('channel', $channel)
+            ->setParameter('enabled', true)
         ;
 
         // Grid hack, we do not need to join these if we don't sort by price
@@ -128,10 +129,11 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->addSelect('translation')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->andWhere(':channel MEMBER OF o.channels')
-            ->andWhere('o.enabled = true')
+            ->andWhere('o.enabled = :enabled')
             ->addOrderBy('o.createdAt', 'DESC')
             ->setParameter('channel', $channel)
             ->setParameter('locale', $locale)
+            ->setParameter('enabled', true)
             ->setMaxResults($count)
             ->getQuery()
             ->getResult()
@@ -145,10 +147,11 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->andWhere('translation.slug = :slug')
             ->andWhere(':channel MEMBER OF o.channels')
-            ->andWhere('o.enabled = true')
+            ->andWhere('o.enabled = :enabled')
             ->setParameter('channel', $channel)
             ->setParameter('locale', $locale)
             ->setParameter('slug', $slug)
+            ->setParameter('enabled', true)
             ->getQuery()
             ->getOneOrNullResult()
         ;
@@ -171,9 +174,10 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         $product = $this->createQueryBuilder('o')
             ->where('o.code = :code')
             ->andWhere(':channel MEMBER OF o.channels')
-            ->andWhere('o.enabled = true')
+            ->andWhere('o.enabled = :enabled')
             ->setParameter('channel', $channel)
             ->setParameter('code', $code)
+            ->setParameter('enabled', true)
             ->getQuery()
             ->getOneOrNullResult()
         ;

@@ -22,6 +22,7 @@
         <service id="sylius.behat.context.ui.admin.locale" class="Sylius\Behat\Context\Ui\Admin\LocaleContext">
             <argument type="service" id="sylius.behat.page.admin.dashboard" />
             <argument type="service" id="translator" />
+            <argument type="service" id="sylius.behat.page.admin.administrator.create" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.login" class="Sylius\Behat\Context\Ui\Admin\LoginContext">

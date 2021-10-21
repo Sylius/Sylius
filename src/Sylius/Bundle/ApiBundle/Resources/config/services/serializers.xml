@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="Sylius\Bundle\ApiBundle\Serializer\AddressDenormalizer">
+            <argument type="service" id="serializer.normalizer.object" />
+            <argument type="string">%sylius.model.address.class%</argument>
+            <argument type="string">%sylius.model.address.interface%</argument>
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandNormalizer">
+            <argument type="service" id="serializer.normalizer.object" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandDenormalizer">
+            <argument type="service" id="api_platform.serializer.normalizer.item" />
+            <tag name="serializer.normalizer" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductVariantNormalizer">
+            <argument type="service" id="sylius.calculator.product_variant_price" />
+            <argument type="service" id="sylius.context.channel" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+    </services>
+</container>

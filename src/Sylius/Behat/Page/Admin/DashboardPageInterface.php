@@ -31,6 +31,8 @@ interface DashboardPageInterface extends SymfonyPageInterface
 
     public function getSubHeader(): string;
 
+    public function isSectionWithLabelVisible(string $name): bool;
+
     public function logOut(): void;
 
     public function chooseChannel(string $channelName): void;

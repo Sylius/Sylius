@@ -188,6 +188,7 @@
             <argument type="service" id="request_stack" />
             <argument type="collection" />
         </service>
+        <service id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" alias="sylius.section_resolver.uri_based_section_resolver" />
 
         <service id="sylius.reviewer_reviews_remover" class="Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemover">
             <argument type="service" id="sylius.repository.product_review" />
@@ -225,6 +226,11 @@
 
         <service id="sylius.custom_resource_controller.resource_update_handler" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceUpdateHandler" decorates="sylius.resource_controller.resource_update_handler" public="false">
             <argument type="service" id="sylius.custom_resource_controller.resource_update_handler.inner" />
+        </service>
+
+        <service id="sylius.custom_resource_controller.resource_delete_handler" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceDeleteHandler" decorates="sylius.resource_controller.resource_delete_handler" public="false">
+            <argument type="service" id="sylius.custom_resource_controller.resource_delete_handler.inner" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <service id="sylius.order_item_names_setter" class="Sylius\Component\Core\Order\OrderItemNamesSetter" />

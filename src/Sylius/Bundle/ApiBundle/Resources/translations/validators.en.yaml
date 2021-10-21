@@ -1,3 +1,13 @@
 sylius:
+    address:
+        without_country: 'The address without country cannot exist'
+    country:
+        not_exist: 'The country %countryCode% does not exist.'
     order:
         not_empty: 'An empty order cannot be completed.'
+    product:
+        not_exist: 'The product %productName% does not exist.'
+    product_variant:
+        not_exist: 'The product variant with %productVariantCode% does not exist.'
+    shipment:
+        shipped: 'You cannot ship a shipment that was shipped before.'

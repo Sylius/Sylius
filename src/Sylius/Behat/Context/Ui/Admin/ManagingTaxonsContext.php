@@ -406,6 +406,17 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @Then I should be notified that I cannot delete a taxon in use
+     */
+    public function iShouldBeNotifiedThatICannotDeleteATaxonInUse(): void
+    {
+        $this->notificationChecker->checkNotification(
+            'Cannot delete, the taxon is in use.',
+            NotificationType::failure()
+        );
+    }
+
+    /**
      * @When I move up :taxonName taxon
      */
     public function iMoveUpTaxon(string $taxonName)

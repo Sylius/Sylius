@@ -19,5 +19,5 @@ Feature: Viewing different price for different product variants selected with op
     @ui @javascript
     Scenario: Viewing a detailed page with product's price for different option
         When I view product "Wyborowa Vodka"
-        And I set its volume to "0,7L"
+        And I select its volume as "0,7L"
         Then I should see the product price "$25.00"

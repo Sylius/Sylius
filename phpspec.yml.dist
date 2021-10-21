@@ -19,7 +19,6 @@ suites:
 
     AddressingBundle: { namespace: Sylius\Bundle\AddressingBundle, psr4_prefix: Sylius\Bundle\AddressingBundle, spec_path: src/Sylius/Bundle/AddressingBundle, src_path: src/Sylius/Bundle/AddressingBundle }
     AdminBundle: { namespace: Sylius\Bundle\AdminBundle, psr4_prefix: Sylius\Bundle\AdminBundle, spec_path: src/Sylius/Bundle/AdminBundle, src_path: src/Sylius/Bundle/AdminBundle }
-    AdminApiBundle: { namespace: Sylius\Bundle\AdminApiBundle, psr4_prefix: Sylius\Bundle\AdminApiBundle, spec_path: src/Sylius/Bundle/AdminApiBundle, src_path: src/Sylius/Bundle/AdminApiBundle }
     ApiBundle: { namespace: Sylius\Bundle\ApiBundle, psr4_prefix: Sylius\Bundle\ApiBundle, spec_path: src/Sylius/Bundle/ApiBundle, src_path: src/Sylius/Bundle/ApiBundle }
     AttributeBundle: { namespace: Sylius\Bundle\AttributeBundle, psr4_prefix: Sylius\Bundle\AttributeBundle, spec_path: src/Sylius/Bundle/AttributeBundle, src_path: src/Sylius/Bundle/AttributeBundle }
     ChannelBundle: { namespace: Sylius\Bundle\ChannelBundle, psr4_prefix: Sylius\Bundle\ChannelBundle, spec_path: src/Sylius/Bundle/ChannelBundle, src_path: src/Sylius/Bundle/ChannelBundle }

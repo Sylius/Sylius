@@ -54,7 +54,7 @@ final class SendOrderConfirmationHandlerSpec extends ObjectBehavior
         $customer->getEmail()->willReturn('johnny.bravo@email.com');
 
         $sender->send(
-            Emails::ORDER_CONFIRMATION_RESENT,
+            Emails::ORDER_CONFIRMATION,
             ['johnny.bravo@email.com'],
             [
                 'order' => $order->getWrappedObject(),

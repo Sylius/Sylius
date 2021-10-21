@@ -61,6 +61,11 @@ class UserLogin implements UserLoginInterface
 
     protected function createToken(UserInterface $user, string $firewallName): UsernamePasswordToken
     {
-        return new UsernamePasswordToken($user, null, $firewallName, $user->getRoles());
+        return new UsernamePasswordToken(
+            $user,
+            null,
+            $firewallName,
+            array_map(/** @param object|string $role */ static function ($role): string { return (string) $role; }, $user->getRoles())
+        );
     }
 }

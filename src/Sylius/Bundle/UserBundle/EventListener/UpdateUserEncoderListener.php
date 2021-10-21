@@ -72,7 +72,7 @@ final class UpdateUserEncoderListener
         }
 
         $user->setEncoderName($this->recommendedEncoderName);
-        $user->setPlainPassword($plainPassword);
+        $user->setPlainPassword((string) $plainPassword);
 
         $this->objectManager->persist($user);
         $this->objectManager->flush();

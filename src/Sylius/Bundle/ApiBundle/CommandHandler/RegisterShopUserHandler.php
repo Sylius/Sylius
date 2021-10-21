@@ -49,7 +49,7 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         $this->channelContext = $channelContext;
     }
 
-    public function __invoke(RegisterShopUser $command): void
+    public function __invoke(RegisterShopUser $command): ShopUserInterface
     {
         /** @var ShopUserInterface $user */
         $user = $this->shopUserFactory->createNew();
@@ -69,6 +69,8 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         $this->handleVerification($user);
 
         $this->shopUserManager->persist($user);
+
+        return $user;
     }
 
     private function handleVerification(ShopUserInterface $user): void

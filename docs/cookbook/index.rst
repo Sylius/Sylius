@@ -10,6 +10,7 @@ Entities
     :hidden:
 
     entities/custom-model
+    entities/custom-model-accessible-for-channel-admin
     entities/custom-translatable-model
 
 .. include:: /cookbook/entities/map.rst.inc
@@ -52,6 +53,12 @@ Payments
     payments/encrypting-gateway-config
     payments/authorize
     payments/custom-payment-gateway
+    payments/customizing-credit-memo
+    payments/refund-process
+    payments/custom-field-on-refund-payment
+    payments/custom-type-of-refund
+    payments/custom-invoice
+    payments/generating-invoice-after-payment
 
 .. include:: /cookbook/payments/map.rst.inc
 
@@ -133,6 +140,7 @@ Configuration
     configuration/disabling-shop-admin-api
     configuration/installation-commands
     configuration/disabling-admin-notifications
+    configuration/admin-prefix
 
 .. include:: /cookbook/configuration/map.rst.inc
 
@@ -147,3 +155,13 @@ Frontend
     frontend/webpack.rst
 
 .. include:: /cookbook/frontend/map.rst.inc
+
+Taxation
+--------
+
+.. toctree::
+    :hidden:
+
+    taxation/customize-tax-by-address
+
+.. include:: /cookbook/taxation/map.rst.inc

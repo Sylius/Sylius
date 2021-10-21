@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Webmozart\Assert\Assert;
 
@@ -27,10 +28,25 @@ final class ChannelContext implements Context
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
-    public function __construct(ApiClientInterface $client, ResponseCheckerInterface $responseChecker)
-    {
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
+    public function __construct(
+        ApiClientInterface $client,
+        ResponseCheckerInterface $responseChecker,
+        SharedStorageInterface $sharedStorage
+    ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
+        $this->sharedStorage = $sharedStorage;
+    }
+
+    /**
+     * @Given I am browsing channel :channel
+     */
+    public function iAmBrowsingChannel(ChannelInterface $channel): void
+    {
+        $this->sharedStorage->set('hostname', $channel->getHostname());
     }
 
     /**

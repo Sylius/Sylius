@@ -35,6 +35,24 @@
         </service>
 
         <service
+            id="sylius.api.doctrine.query_collection_extension.orders_by_logged_in_user"
+            class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrdersByLoggedInUserExtension"
+            public="true"
+        >
+            <argument type="service" id="sylius.api.context.user" />
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+        </service>
+
+        <service
+            id="sylius.api.doctrine.query_collection_extension.products_with_enable_flag"
+            class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsWithEnableFlagExtension"
+            public="true"
+        >
+            <argument type="service" id="sylius.api.context.user" />
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+        </service>
+
+        <service
             id="sylius.api.doctrine.query_item_extension.get_order"
             class="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderGetMethodItemExtension"
             public="true"

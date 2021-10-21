@@ -146,6 +146,7 @@ final class CartContext implements Context
     /**
      * @When I pick up my cart (again)
      * @When I pick up cart in the :localeCode locale
+     * @When the visitor picks up the cart
      */
     public function iPickUpMyCart(?string $localeCode = null): void
     {

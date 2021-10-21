@@ -24,7 +24,6 @@ class AppKernel extends Kernel
             new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),

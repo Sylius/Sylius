@@ -50,10 +50,11 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
     protected function createEnabledForChannelQueryBuilder(ChannelInterface $channel): QueryBuilder
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.enabled = true')
+            ->andWhere('o.enabled = :enabled')
             ->andWhere('o.archivedAt IS NULL')
             ->andWhere(':channel MEMBER OF o.channels')
             ->setParameter('channel', $channel)
+            ->setParameter('enabled', true)
         ;
     }
 }

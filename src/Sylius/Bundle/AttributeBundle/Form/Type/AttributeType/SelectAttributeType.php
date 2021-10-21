@@ -80,7 +80,7 @@ final class SelectAttributeType extends AbstractType
                     $localeCode = $options['locale_code'] ?? $this->defaultLocaleCode;
 
                     foreach ($options['configuration']['choices'] as $key => $choice) {
-                        if (isset($options[$localeCode]) && '' !== $choice[$localeCode] && null !== $choice[$localeCode]) {
+                        if (isset($choice[$localeCode]) && '' !== $choice[$localeCode] && null !== $choice[$localeCode]) {
                             $choices[$key] = $choice[$localeCode];
 
                             continue;

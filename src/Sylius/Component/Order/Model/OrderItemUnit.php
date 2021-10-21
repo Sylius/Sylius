@@ -125,6 +125,8 @@ class OrderItemUnit implements OrderItemUnitInterface
         foreach ($this->getAdjustments($type) as $adjustment) {
             $this->removeAdjustment($adjustment);
         }
+
+        $this->recalculateAdjustmentsTotal();
     }
 
     public function recalculateAdjustmentsTotal(): void

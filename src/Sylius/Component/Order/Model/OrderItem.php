@@ -276,6 +276,8 @@ class OrderItem implements OrderItemInterface
         foreach ($this->getAdjustments($type) as $adjustment) {
             $this->removeAdjustment($adjustment);
         }
+
+        $this->recalculateAdjustmentsTotal();
     }
 
     public function removeAdjustmentsRecursively(?string $type = null): void

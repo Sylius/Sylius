@@ -13,7 +13,7 @@
         <tbody>
         <tr>
             <td>{{ 'sylius.ui.items_total'|trans }}:</td>
-            <td class="right aligned">{{ money.convertAndFormat(itemsSubtotal) }}</td>
+            <td class="right aligned" {{ sylius_test_html_attribute('cart-items-total') }}>{{ money.convertAndFormat(itemsSubtotal) }}</td>
         </tr>
         {% if cart.orderPromotionTotal %}
             <tr>

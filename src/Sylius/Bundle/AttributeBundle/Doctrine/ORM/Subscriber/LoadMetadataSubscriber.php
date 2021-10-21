@@ -62,7 +62,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
             'inversedBy' => 'attributes',
             'joinColumns' => [[
                 'name' => $subject . '_id',
-                'referencedColumnName' => $targetEntityMetadata->fieldMappings['id']['columnName'],
+                'referencedColumnName' => $targetEntityMetadata->fieldMappings['id']['columnName'] ?? $targetEntityMetadata->fieldMappings['id']['fieldName'],
                 'nullable' => false,
                 'onDelete' => 'CASCADE',
             ]],
@@ -83,7 +83,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
             'targetEntity' => $attributeClass,
             'joinColumns' => [[
                 'name' => 'attribute_id',
-                'referencedColumnName' => $attributeMetadata->fieldMappings['id']['columnName'],
+                'referencedColumnName' => $attributeMetadata->fieldMappings['id']['columnName'] ?? $attributeMetadata->fieldMappings['id']['fieldName'],
                 'nullable' => false,
                 'onDelete' => 'CASCADE',
             ]],

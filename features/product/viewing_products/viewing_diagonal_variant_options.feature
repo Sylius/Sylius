@@ -26,7 +26,7 @@ Feature: Viewing diagonal variants options
     @ui @javascript
     Scenario: Viewing an "Unavailable" message when selecting an unavailable combination
         When I view product "Extra Cool T-Shirt"
-        And I set its color to "Blue"
-        And I set its size to "Small"
+        And I select its color as "Blue"
+        And I select its size as "Small"
         Then I should see that the combination is "Unavailable"
         And I should be unable to add it to the cart

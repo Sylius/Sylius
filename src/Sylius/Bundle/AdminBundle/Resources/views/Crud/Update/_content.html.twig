@@ -10,7 +10,9 @@
     {% include '@SyliusAdmin/Crud/form_validation_errors_checker.html.twig' %}
     {% if configuration.vars.templates.form is defined %}
         {% include configuration.vars.templates.form %}
-        {{ form_row(form._token) }}
+        {% if not form._token.isRendered %}
+            {{ form_row(form._token) }}
+        {% endif %}
     {% else %}
         {{ form_widget(form) }}
     {% endif %}

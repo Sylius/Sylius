@@ -1,3 +1,0 @@
-Sylius\Component\Core\Model\OrderItemUnit:
-    exclusion_policy: ALL
-    xml_root_name: order-item-unit

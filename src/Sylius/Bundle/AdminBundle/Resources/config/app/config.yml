@@ -49,7 +49,7 @@ sylius_grid:
             update_product_variant_positions: "@SyliusAdmin/ProductVariant/Grid/Action/updatePositions.html.twig"
         filter:
             entities: '@SyliusUi/Grid/Filter/entities.html.twig'
-            
+
 liip_imagine:
     filter_sets:
         sylius_admin_product_original: ~

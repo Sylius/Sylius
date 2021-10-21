@@ -1,5 +1,5 @@
 {% if order.billingAddress is not null %}
-    <h4 class="ui attached styled header{% if order.shippingAddress is null %} top{% endif %}">
+    <h4 class="ui attached styled header top">
         {{ 'sylius.ui.billing_address'|trans }}
     </h4>
     <div class="ui attached segment" id="billing-address">
@@ -7,7 +7,7 @@
     </div>
 {% endif %}
 {% if order.shippingAddress is not null %}
-    <h4 class="ui top attached styled header">
+    <h4 class="ui attached styled header{% if order.billingAddress is null %} top{% endif %}">
         {{ 'sylius.ui.shipping_address'|trans }}
     </h4>
     <div class="ui attached segment" id="shipping-address">

@@ -16,9 +16,15 @@ namespace spec\Sylius\Component\Core\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Resource\Model\VersionedInterface;
 
 final class OrderItemSpec extends ObjectBehavior
 {
+    function it_implements_versioned_interface(): void
+    {
+        $this->shouldImplement(VersionedInterface::class);
+    }
+
     function it_returns_0_tax_total_when_there_are_no_units(): void
     {
         $this->getTaxTotal()->shouldReturn(0);
@@ -114,5 +120,10 @@ final class OrderItemSpec extends ObjectBehavior
     function it_has_no_variant_by_default(): void
     {
         $this->getVariant()->shouldReturn(null);
+    }
+
+    function it_has_version_1_by_default(): void
+    {
+        $this->getVersion()->shouldReturn(1);
     }
 }

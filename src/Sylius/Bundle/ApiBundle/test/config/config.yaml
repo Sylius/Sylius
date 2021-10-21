@@ -14,6 +14,9 @@ api_platform:
             - '%kernel.api_bundle_path%/Resources/config/api_resources'
             - '%kernel.project_dir%/config/api_resources'
 
+sylius_api:
+    enabled: '%env(bool:SYLIUS_API_ENABLED)%'
+
 framework:
     assets: ~
     secret: "ch4mb3r0f5ecr3ts"
@@ -54,6 +57,13 @@ lexik_jwt_authentication:
     public_key: "%kernel.project_dir%/config/jwt/public-test.pem"
     pass_phrase: "ALL_THAT_IS_GOLD_DOES_NOT_GLITTER_NOT_ALL_THOSE_WHO_WANDER_ARE_LOST"
 
+swiftmailer:
+    disable_delivery: true
+    logging: true
+    spool:
+        type: file
+        path: '%kernel.cache_dir%/spool'
+
 sylius_taxonomy:
     resources:
         taxon:
@@ -65,3 +75,8 @@ sylius_resource:
         test.foo_sylius_resource:
             classes:
                 model: Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource
+
+services:
+    Sylius\Bundle\ApiBundle\Application\CommandHandler\FooHandler:
+        tags:
+            - { name: messenger.message_handler, bus: sylius_default.bus }

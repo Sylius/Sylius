@@ -84,7 +84,5 @@
         <property name="provinces" readable="true" writable="true">
             <subresource resourceClass="%sylius.model.province.class%" collection="true" />
         </property>
-        <property name="createdAt" writable="false" />
-        <property name="updatedAt" writable="false" />
     </resource>
 </resources>

@@ -25,6 +25,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
@@ -179,6 +180,33 @@ final class CheckoutContext implements Context
     public function iSpecifyTheBillingAddressAs(AddressInterface $address): void
     {
         $this->fillAddress('billingAddress', $address);
+    }
+
+    /**
+     * @When /^the visitor try to specify the incorrect billing address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
+     */
+    public function iTryToSpecifyTheIncorrectBillingAddressAs(
+        string $city,
+        string $street,
+        string $postcode,
+        string $countryName,
+        string $customerName
+    ): void {
+        $addressType = 'billingAddress';
+
+        $this->addAddress($addressType, $city, $street, $postcode, $customerName, $countryName);
+    }
+
+    /**
+     * @When /^the visitor try to specify the billing address without country as "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
+     */
+    public function iTryToSpecifyTheBillingAddressWithoutCountryAs(
+        string $city,
+        string $street,
+        string $postcode,
+        string $customerName
+    ): void {
+        $this->addAddress('billingAddress', $city, $street, $postcode, $customerName);
     }
 
     /**
@@ -619,6 +647,41 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should be notified that :countryName country does not exist
+     * @Then they should be notified that :countryName country does not exist
+     */
+    public function iShouldBeNotifiedThatCountryDoesNotExist(string $countryName): void
+    {
+        $this->responseChecker->hasViolationWithMessage(
+            $this->ordersClient->getLastResponse(),
+            sprintf('The country %s does not exist.', StringInflector::nameToLowercaseCode($countryName))
+        );
+    }
+
+    /**
+     * @Then I should be notified that address without country cannot exist
+     * @Then they should be notified that address without country cannot exist
+     */
+    public function iShouldBeNotifiedThatAddressWithoutCountryCannotExist(): void
+    {
+        $this->responseChecker->hasViolationWithMessage(
+            $this->ordersClient->getLastResponse(),
+            'The address without country cannot exist'
+        );
+    }
+
+    /**
+     * @Then they should be notified that they cannot address an empty cart
+     */
+    public function theyShouldBeNotifiedThatTheyCannotAddressAnEmptyCart(): void
+    {
+        $response = $this->ordersClient->getLastResponse();
+
+        Assert::false($this->responseChecker->isUpdateSuccessful($response));
+        $this->responseChecker->hasViolationWithMessage($response, 'The empty cart cannot be addressed');
+    }
+
+    /**
      * @Then I should see the thank you page
      * @Then /^the (?:visitor|customer) should see the thank you page$/
      */
@@ -771,12 +834,46 @@ final class CheckoutContext implements Context
 
     /**
      * @Then /^I should be informed that (this product) has been disabled$/
+     * @Then /^I should be informed that (product "[^"]+") is disabled$/
      */
     public function iShouldBeInformedThatThisProductHasBeenDisabled(ProductInterface $product): void
     {
         Assert::true($this->isViolationWithMessageInResponse(
             $this->ordersClient->getLastResponse(),
             sprintf('This product %s has been disabled.', $product->getName())
+        ));
+    }
+
+    /**
+     * @Then /^I should be informed that (product "[^"]+") does not exist$/
+     */
+    public function iShouldBeInformedThatThisProductDoesNotExist(ProductInterface $product): void
+    {
+        Assert::true($this->isViolationWithMessageInResponse(
+            $this->ordersClient->getLastResponse(),
+            sprintf('The product %s does not exist.', $product->getName())
+        ));
+    }
+
+    /**
+     * @Then /^I should be informed that ("([^"]*)" product variant) does not exist$/
+     */
+    public function iShouldBeInformedThatProductVariantDoesNotExist(ProductVariantInterface $productVariant): void
+    {
+        Assert::true($this->isViolationWithMessageInResponse(
+            $this->ordersClient->getLastResponse(),
+            sprintf('The product variant with %s does not exist.', $productVariant->getCode())
+        ));
+    }
+
+    /**
+     * @Then I should be informed that product variant with code :code does not exist
+     */
+    public function iShouldBeInformedThatProductVariantWithCodeDoesNotExist(string $code): void
+    {
+        Assert::true($this->isViolationWithMessageInResponse(
+            $this->ordersClient->getLastResponse(),
+            sprintf('The product variant with %s does not exist.', $code)
         ));
     }
 
@@ -831,6 +928,25 @@ final class CheckoutContext implements Context
     public function iTryToAddProductToCart(ProductInterface $product, string $tokenValue): void
     {
         $this->putProductToCart($product, $tokenValue);
+    }
+
+    /**
+     * @When /^I try to add ("([^"]+)" product variant)$/
+     * @When /^I try to add ("([^"]+)" variant of product "([^"]+)")$/
+     */
+    public function iTryToAddProductVariant(ProductVariantInterface $productVariant): void
+    {
+        $tokenValue = $this->getCartTokenValue();
+        $this->putVariantToCart($productVariant, $tokenValue);
+    }
+
+    /**
+     * @When /^I try to add (product "[^"]+") with variant code "([^"]+)"$/
+     */
+    public function iTryToAddProductVariantWithCode(ProductInterface $product, string $code): void
+    {
+        $tokenValue = $this->getCartTokenValue();
+        $this->putProductWithVariantCode($product, $tokenValue, $code);
     }
 
     /**
@@ -1094,6 +1210,11 @@ final class CheckoutContext implements Context
     {
         Assert::notNull($productVariant = $this->productVariantResolver->getVariant($product));
 
+        $this->putVariantToCart($productVariant, $tokenValue, $quantity);
+    }
+
+    private function putVariantToCart(ProductVariantInterface $productVariant, string $tokenValue, int $quantity = 1): void
+    {
         $request = Request::customItemAction(
             'shop',
             'orders',
@@ -1103,12 +1224,36 @@ final class CheckoutContext implements Context
         );
 
         $request->setContent([
-            'productCode' => $product->getCode(),
+            'productCode' => $productVariant->getProduct()->getCode(),
             'productVariantCode' => $productVariant->getCode(),
             'quantity' => $quantity,
         ]);
 
         $this->sharedStorage->set('response', $this->ordersClient->executeCustomRequest($request));
+    }
+
+    private function putProductWithVariantCode(ProductInterface $product, string $tokenValue, string $code): void
+    {
+        $request = $this->preparePutProductRequest($tokenValue);
+
+        $request->setContent([
+            'productCode' => $product->getCode(),
+            'productVariantCode' => $code,
+            'quantity' => 1,
+        ]);
+
+        $this->sharedStorage->set('response', $this->ordersClient->executeCustomRequest($request));
+    }
+
+    private function preparePutProductRequest(string $tokenValue): Request
+    {
+        return Request::customItemAction(
+            'shop',
+            'orders',
+            $tokenValue,
+            HTTPRequest::METHOD_PATCH,
+            'items'
+        );
     }
 
     private function removeOrderItemFromCart(int $orderItemId, string $tokenValue): void
@@ -1177,5 +1322,23 @@ final class CheckoutContext implements Context
         $request->setContent(['notes' => $notes]);
 
         return $this->ordersClient->executeCustomRequest($request);
+    }
+
+    private function addAddress(
+        string $addressType,
+        string $city,
+        string $street,
+        string $postcode,
+        string $customerName,
+        ?string $countryName = null
+    ): void {
+        [$firstName, $lastName] = explode(' ', $customerName);
+
+        $this->content[$addressType]['city'] = $city;
+        $this->content[$addressType]['street'] = $street;
+        $this->content[$addressType]['postcode'] = $postcode;
+        $this->content[$addressType]['firstName'] = $firstName;
+        $this->content[$addressType]['lastName'] = $lastName;
+        $this->content[$addressType]['countryCode'] = $countryName !== null ? StringInflector::nameToLowercaseCode($countryName) : null;
     }
 }

@@ -43,7 +43,8 @@
     },
     "conflict": {
         "api-platform/core": "^2.6",
-        "symfony/doctrine-bridge": "4.4.20 || 5.2.4"
+        "doctrine/doctrine-bundle": "2.3.0",
+        "symfony/doctrine-bridge": "4.4.20 || 5.2.4 || 5.2.5"
     },
     "extra": {
         "branch-alias": {

@@ -15,7 +15,7 @@ Every time a customer registers via the registration form, a user registration e
 
 **Code**: ``user_registration``
 
-**The default template**: ``@SyliusShopBundle/Email/userRegistration.html.twig``
+**The default template**: ``@SyliusShop/Email/userRegistration.html.twig``
 
 You also have the following parameters available:
 
@@ -30,7 +30,7 @@ When a customer registers via the registration form, besides the User Confirmati
 
 **Code**: ``verification_token``
 
-**The default template**: ``@SyliusShopBundle/Email/verification.html.twig``
+**The default template**: ``@SyliusShop/Email/verification.html.twig``
 
 You also have the following parameters available:
 
@@ -45,7 +45,7 @@ This e-mail is used when the user requests to reset their password in the login 
 
 **Code**: ``reset_password_token``
 
-**The default template**: ``@SyliusShopBundle/Email/passwordReset.html.twig``
+**The default template**: ``@SyliusShop/Email/passwordReset.html.twig``
 
 You also have the following parameters available:
 
@@ -60,7 +60,7 @@ This e-mail is sent when order is placed.
 
 **Code**: ``order_confirmation``
 
-**The default template**: ``@SyliusShopBundle/Email/orderConfirmation.html.twig``
+**The default template**: ``@SyliusShop/Email/orderConfirmation.html.twig``
 
 You also have the following parameters available:
 
@@ -75,12 +75,27 @@ This e-mail is sent when the order's shipping process has started.
 
 **Code**: ``shipment_confirmation``
 
-**The default template**: ``@SyliusAdminBundle/Email/shipmentConfirmation.html.twig``
+**The default template**: ``@SyliusAdmin/Email/shipmentConfirmation.html.twig``
 
 You have the following parameters available:
 
 * ``shipment``: Shipment instance
 * ``order``: Instance of the order, with all its data
+* ``channel``: Channel in which an order was placed
+* ``localeCode``: Locale code in which an order was placed
+
+Contact Request
+---------------
+
+This e-mail is sent when a customer validades contact form.
+
+**Code**: ``contact_request``
+
+**The default template**: ``@SyliusShop/Email/contactRequest.html.twig``
+
+You have the following parameters available:
+
+* ``data``: An array of submitted data from form
 * ``channel``: Channel in which an order was placed
 * ``localeCode``: Locale code in which an order was placed
 

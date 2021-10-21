@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
 use Doctrine\Persistence\ObjectManager;
-use Sylius\Bundle\AdminApiBundle\Model\UserInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
@@ -27,6 +26,7 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 /** @experimental */
@@ -131,7 +131,10 @@ final class PickupCartHandler implements MessageHandlerInterface
         }
 
         if (!$this->hasLocaleWithLocaleCode($channel, $localeCode)) {
-            throw new \InvalidArgumentException('Choosen localeCode doesn\'t exist.');
+            throw new \InvalidArgumentException(sprintf(
+                'Cannot pick up cart, locale code "%s" does not exist.',
+                $localeCode
+            ));
         }
 
         return $localeCode;

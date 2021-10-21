@@ -69,6 +69,11 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         return trim($this->getElement('sub_header')->getText());
     }
 
+    public function isSectionWithLabelVisible(string $name): bool
+    {
+        return $this->getElement('admin_menu')->find('css', sprintf('div:contains(%s)', $name)) !== null;
+    }
+
     public function logOut(): void
     {
         $this->getElement('logout')->click();
@@ -97,6 +102,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
             'total_sales' => '#total-sales',
             'sub_header' => '.ui.header .content .sub.header',
             'channel_choosing_link' => 'a:contains("%channelName%")',
+            'admin_menu' => '.sylius-admin-menu',
         ]);
     }
 }

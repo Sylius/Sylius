@@ -18,7 +18,11 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 
 class GetStatus extends BaseGetStatus
 {
-    /** @var string */
+    /**
+     * @psalm-suppress NonInvariantDocblockPropertyType
+     *
+     * @var string
+     */
     protected $status;
 
     public function markNew(): void

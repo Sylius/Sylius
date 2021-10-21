@@ -669,6 +669,9 @@
     "sylius-labs/sensio-distribution-bundle": {
         "version": "v6.0.1"
     },
+    "sylius/admin-api-bundle": {
+        "version": "v1.9.1"
+    },
     "sylius/fixtures-bundle": {
         "version": "v1.4.1"
     },
@@ -688,7 +691,7 @@
         "version": "v1.4.2"
     },
     "symfony/amqp-messenger": {
-        "version": "v5.2.1"
+        "version": "v5.2.4"
     },
     "symfony/asset": {
         "version": "v4.1.3"
@@ -739,7 +742,7 @@
         "version": "v4.1.3"
     },
     "symfony/doctrine-messenger": {
-        "version": "v5.2.1"
+        "version": "v5.2.5"
     },
     "symfony/dom-crawler": {
         "version": "v4.1.3"
@@ -880,7 +883,7 @@
         "version": "v4.4.13"
     },
     "symfony/redis-messenger": {
-        "version": "v5.2.1"
+        "version": "v5.2.4"
     },
     "symfony/routing": {
         "version": "4.2",

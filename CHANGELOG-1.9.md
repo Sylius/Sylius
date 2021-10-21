@@ -1,5 +1,179 @@
 # CHANGELOG FOR `1.9.X`
 
+## v1.9.8 (2021-09-30)
+
+- [#12222](https://github.com/Sylius/Sylius/issues/12222) logo path corrected ([@Snowbaha](https://github.com/Snowbaha), [@CoderMaggie](https://github.com/CoderMaggie))
+- [#12452](https://github.com/Sylius/Sylius/issues/12452) [Doc] Customizing admin routes prefix ([@oallain](https://github.com/oallain), [@CoderMaggie](https://github.com/CoderMaggie))
+- [#12637](https://github.com/Sylius/Sylius/issues/12637) Missing Behat directory on the path to be excluded ([@tonicospinelli](https://github.com/tonicospinelli))
+- [#12824](https://github.com/Sylius/Sylius/issues/12824) [Documentation] Fixed logo customization  (, [@CoderMaggie](https://github.com/CoderMaggie))
+- [#12849](https://github.com/Sylius/Sylius/issues/12849) [Docs] Webpack - Display logo on login page ([@Jibbarth](https://github.com/Jibbarth))
+- [#12863](https://github.com/Sylius/Sylius/issues/12863) Add yaml configuration examples to the "Custom Payment Gateway" cookbook ([@DennisCodeBuds](https://github.com/DennisCodeBuds))
+- [#12892](https://github.com/Sylius/Sylius/issues/12892) [DOCS] Add note about docker builder ([@arti0090](https://github.com/arti0090))
+- [#13070](https://github.com/Sylius/Sylius/issues/13070) [Minor][DI] Add interface alias to UriBasedSectionProvider ([@lchrusciel](https://github.com/lchrusciel))
+- [#13102](https://github.com/Sylius/Sylius/issues/13102) Check if the form is submitted before validation ([@jacquesbh](https://github.com/jacquesbh))
+- [#13154](https://github.com/Sylius/Sylius/issues/13154) [API] Do not allow to address empty cart ([@Zales0123](https://github.com/Zales0123))
+
+## v1.9.7 (2021-09-02)
+
+#### Details
+
+- [#11623](https://github.com/Sylius/Sylius/issues/11623) Fix #11603, Update documentation to replace use of removed function ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#12085](https://github.com/Sylius/Sylius/issues/12085) [Doc] Add contact email ([@MatthieuCutin](https://github.com/MatthieuCutin), [@CoderMaggie](https://github.com/CoderMaggie))
+- [#12223](https://github.com/Sylius/Sylius/issues/12223) Remove security.yaml change when disabling localized URLs ([@maximehuran](https://github.com/maximehuran))
+- [#12852](https://github.com/Sylius/Sylius/issues/12852) [API] Do not check command arguments if there is an object to populate ([@GSadee](https://github.com/GSadee))
+- [#12873](https://github.com/Sylius/Sylius/issues/12873) [Docs] sylius performance boost ([@SirDomin](https://github.com/SirDomin), [@arti0090](https://github.com/arti0090))
+- [#12875](https://github.com/Sylius/Sylius/issues/12875) [Admin] Fix shipping totals in order summary ([@aleho](https://github.com/aleho))
+- [#12881](https://github.com/Sylius/Sylius/issues/12881) [Documentation] Note about changes related to upgrade to GridBundle 1.10 ([@AdamKasp](https://github.com/AdamKasp), [@GSadee](https://github.com/GSadee))
+- [#12973](https://github.com/Sylius/Sylius/issues/12973) Fix borders in order - show - addresses ([@pavol-tk](https://github.com/pavol-tk))
+- [#12975](https://github.com/Sylius/Sylius/issues/12975) [Docs] fix annotations ([@SirDomin](https://github.com/SirDomin))
+- [#12976](https://github.com/Sylius/Sylius/issues/12976) [Documentation] Minor fix in grids docs ([@GSadee](https://github.com/GSadee))
+- [#12977](https://github.com/Sylius/Sylius/issues/12977) [Docs] add prefix to sylius customer table ([@SirDomin](https://github.com/SirDomin))
+- [#12984](https://github.com/Sylius/Sylius/issues/12984) [Documentation] Move invoice cookbooks to payments section ([@GSadee](https://github.com/GSadee))
+- [#12993](https://github.com/Sylius/Sylius/issues/12993) [Build] Force symfony flex in github actions ([@SirDomin](https://github.com/SirDomin))
+- [#13018](https://github.com/Sylius/Sylius/issues/13018) [Bug] Fix default sylius config file path in Sylius 1.8 ([@lchrusciel](https://github.com/lchrusciel))
+- [#13019](https://github.com/Sylius/Sylius/issues/13019) [Bug] Fix default sylius config file path in Sylius 1.9 ([@lchrusciel](https://github.com/lchrusciel))
+- [#13032](https://github.com/Sylius/Sylius/issues/13032) [Docs] Choosing the right branch - fix ([@CoderMaggie](https://github.com/CoderMaggie))
+
+## v1.9.6 (2021-07-30)
+
+#### Details
+
+- [#12751](https://github.com/Sylius/Sylius/issues/12751) [Docs] Describe API customization requirement for SyliusPlus with Sylius 1.9 ([@Zales0123](https://github.com/Zales0123), [@Tomanhez](https://github.com/Tomanhez))
+- [#12763](https://github.com/Sylius/Sylius/issues/12763) [Docs] Remove redundant refund interfaces ([@Tomanhez](https://github.com/Tomanhez))
+- [#12764](https://github.com/Sylius/Sylius/issues/12764) [Taxon] Wrap resource deletion operation with a transaction to fix a problem with removing used taxon ([@GSadee](https://github.com/GSadee))
+- [#12767](https://github.com/Sylius/Sylius/issues/12767) [Documentation] Fix warning about version of Sylius in Plus installation guide ([@GSadee](https://github.com/GSadee))
+- [#12770](https://github.com/Sylius/Sylius/issues/12770) [Documentation] One more fix for warning about version of Sylius in Plus installation guide ([@GSadee](https://github.com/GSadee))
+- [#12771](https://github.com/Sylius/Sylius/issues/12771) [API] Turn on/off api endpoints with parameter ([@SirDomin](https://github.com/SirDomin))
+- [#12776](https://github.com/Sylius/Sylius/issues/12776) [Docs][Plus] Modify plus installation guide ([@Tomanhez](https://github.com/Tomanhez))
+- [#12784](https://github.com/Sylius/Sylius/issues/12784) [Documentation][Cookbook] How to add another type of refund? ([@GSadee](https://github.com/GSadee))
+- [#12789](https://github.com/Sylius/Sylius/issues/12789) [API] Disable API by default ([@GSadee](https://github.com/GSadee))
+- [#12801](https://github.com/Sylius/Sylius/issues/12801) [Documentation] Update Plus installation guide for Sylius 1.9 ([@GSadee](https://github.com/GSadee))
+- [#12804](https://github.com/Sylius/Sylius/issues/12804) Enable API by default in dev environment ([@Zales0123](https://github.com/Zales0123))
+- [#12807](https://github.com/Sylius/Sylius/issues/12807) Optimizing the attribute loading in product edit ([@mamazu](https://github.com/mamazu))
+- [#12811](https://github.com/Sylius/Sylius/issues/12811) [API] Test not providing required fields during registration ([@Zales0123](https://github.com/Zales0123))
+- [#12816](https://github.com/Sylius/Sylius/issues/12816) [Maintenance] Fix 1.8 build ([@GSadee](https://github.com/GSadee), [@SirDomin](https://github.com/SirDomin))
+- [#12817](https://github.com/Sylius/Sylius/issues/12817) [Taxation] Add scenarios for applying proper taxes for shipping ([@GSadee](https://github.com/GSadee))
+- [#12818](https://github.com/Sylius/Sylius/issues/12818) [Core] Bring back String u function ([@GSadee](https://github.com/GSadee))
+- [#12819](https://github.com/Sylius/Sylius/issues/12819) [API] 1.8 api as opt ([@SirDomin](https://github.com/SirDomin))
+- [#12823](https://github.com/Sylius/Sylius/issues/12823) [API] Allow creation of commands with no arguments with a default value ([@GSadee](https://github.com/GSadee))
+- [#12833](https://github.com/Sylius/Sylius/issues/12833) [API] Disable API by default ([@GSadee](https://github.com/GSadee))
+- [#12837](https://github.com/Sylius/Sylius/issues/12837) [UPGRADE] Split API and non API upgrade files ([@lchrusciel](https://github.com/lchrusciel))
+- [#12838](https://github.com/Sylius/Sylius/issues/12838) [UPGRADE] Split API and non API upgrade files ([@lchrusciel](https://github.com/lchrusciel))
+- [#12839](https://github.com/Sylius/Sylius/issues/12839) [UI] Add bottom scroll to the order summary table ([@kulczy](https://github.com/kulczy))
+- [#12843](https://github.com/Sylius/Sylius/issues/12843) [Documentation] Change version of Plus in installation guide ([@GSadee](https://github.com/GSadee))
+- [#12845](https://github.com/Sylius/Sylius/issues/12845) Quick Typo update :) ([@FaithlessLooting](https://github.com/FaithlessLooting))
+
+## v1.9.5 (2021-06-28)
+
+#### TL;DR
+
+**This is a security release!**
+
+Fixes the follwing vulnerability:
+
+- [List of order ids, number, items total and token value exposed for unauthorized uses via new API](https://github.com/Sylius/Sylius/security/advisories/GHSA-rpxh-vg2x-526v)
+
+#### Details
+
+- [#12596](https://github.com/Sylius/Sylius/issues/12596) Country api resource shouldn't have created/updated at ([@kayue](https://github.com/kayue))
+- [#12618](https://github.com/Sylius/Sylius/issues/12618) [Docs] Fix cookbook for custom entity ([@Tomanhez](https://github.com/Tomanhez))
+- [#12682](https://github.com/Sylius/Sylius/issues/12682) Use Symfony 5.2.* instead of ^5.2 for GitHub Actions ([@pamil](https://github.com/pamil))
+- [#12686](https://github.com/Sylius/Sylius/issues/12686) [DOCS] Cookbook for customizing refund process ([@arti0090](https://github.com/arti0090))
+- [#12687](https://github.com/Sylius/Sylius/issues/12687) Fix typo and imporve error message ([@dantleech](https://github.com/dantleech))
+- [#12690](https://github.com/Sylius/Sylius/issues/12690) [Doctrine] Fix problem with explicitly defining entity managers ([@GSadee](https://github.com/GSadee))
+- [#12698](https://github.com/Sylius/Sylius/issues/12698) Fix the build with Symfony 5.3 ([@pamil](https://github.com/pamil))
+- [#12699](https://github.com/Sylius/Sylius/issues/12699) [Documentation] Update templates directory in Themes doc ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#12702](https://github.com/Sylius/Sylius/issues/12702) [Documentation] Fix Refund Process Cookbook ([@GSadee](https://github.com/GSadee))
+- [#12706](https://github.com/Sylius/Sylius/issues/12706) [Documentation] Tweaks on the refunds process cookbook ([@CoderMaggie](https://github.com/CoderMaggie), [@GSadee](https://github.com/GSadee))
+- [#12707](https://github.com/Sylius/Sylius/issues/12707) [Documentation] Fix links in the refunds process cookbook ([@GSadee](https://github.com/GSadee))
+- [#12715](https://github.com/Sylius/Sylius/issues/12715) [Dql] Add parameter instead of hardcoding it in where statement ([@SirDomin](https://github.com/SirDomin))
+- [#12720](https://github.com/Sylius/Sylius/issues/12720) [DQL] Change hardcoded enabled value to parameter in where statements ([@GSadee](https://github.com/GSadee))
+- [#12726](https://github.com/Sylius/Sylius/issues/12726) [DQL] Change hardcoded tracked value to parameter in where statements ([@lchrusciel](https://github.com/lchrusciel))
+- [#12731](https://github.com/Sylius/Sylius/issues/12731) Add cookbook with how to change tax address ([@arti0090](https://github.com/arti0090))
+- [#12748](https://github.com/Sylius/Sylius/issues/12748) [Documentation][Refund] Add cookbook about refund customization with improvements ([@AdamKasp](https://github.com/AdamKasp), [@GSadee](https://github.com/GSadee))
+
+## v1.9.4 (2021-05-27)
+
+#### Details
+
+- [#12557](https://github.com/Sylius/Sylius/issues/12557) update Plus installation guide ([@AdamKasp](https://github.com/AdamKasp))
+- [#12558](https://github.com/Sylius/Sylius/issues/12558) [Order] Fix race condition problem with multiple order recalculations ([@GSadee](https://github.com/GSadee))
+- [#12564](https://github.com/Sylius/Sylius/issues/12564) [Docs] add minor improvement to Plus installation guide ([@AdamKasp](https://github.com/AdamKasp))
+- [#12565](https://github.com/Sylius/Sylius/issues/12565) [API][Order] Fix possibility to limit orders by refactoring from data provider to extension ([@GSadee](https://github.com/GSadee))
+- [#12569](https://github.com/Sylius/Sylius/issues/12569) Bugfix | Filter out not enabled products in API collection ([@stloyd](https://github.com/stloyd), [@arti0090](https://github.com/arti0090))
+- [#12604](https://github.com/Sylius/Sylius/issues/12604) [API] Cherry pick commits on 1.9 branch for validating if product is enabled during adding to cart ([@arti0090](https://github.com/arti0090), [@GSadee](https://github.com/GSadee))
+- [#12609](https://github.com/Sylius/Sylius/issues/12609) Adding product from another channel bugfix ([@arti0090](https://github.com/arti0090))
+- [#12612](https://github.com/Sylius/Sylius/issues/12612) [Documentation] Update cookbook about Facebook login ([@GSadee](https://github.com/GSadee))
+- [#12613](https://github.com/Sylius/Sylius/issues/12613) [API] Adding inexistent variant ([@arti0090](https://github.com/arti0090), [@GSadee](https://github.com/GSadee))
+- [#12619](https://github.com/Sylius/Sylius/issues/12619) [Docs] Add docs for custom entity with access per admin channel ([@Tomanhez](https://github.com/Tomanhez), [@GSadee](https://github.com/GSadee))
+- [#12628](https://github.com/Sylius/Sylius/issues/12628) [API] Conflict with symfony/property-info due to problem with wrong namespaces of some translation entities ([@GSadee](https://github.com/GSadee))
+- [#12632](https://github.com/Sylius/Sylius/issues/12632) [Docs] Mention localhost exposure for easier Facebook login ([@Zales0123](https://github.com/Zales0123))
+- [#12633](https://github.com/Sylius/Sylius/issues/12633) [Bug] [Temporary solution] Comment out 2 behats steps for checking notifications ([@SirDomin](https://github.com/SirDomin))
+- [#12643](https://github.com/Sylius/Sylius/issues/12643) [README] Fix link to plugin list ([@lchrusciel](https://github.com/lchrusciel))
+- [#12650](https://github.com/Sylius/Sylius/issues/12650) [API][ProductVariant] Fix product variant response by using proper normalizer ([@GSadee](https://github.com/GSadee))
+- [#12651](https://github.com/Sylius/Sylius/issues/12651) [API][ProductVariant] Add additional specs for product variant normalizer ([@GSadee](https://github.com/GSadee))
+- [#12655](https://github.com/Sylius/Sylius/issues/12655) [Documentation][Plus] Minor improvements in cookbook for accessing to entities by channel admins ([@GSadee](https://github.com/GSadee))
+- [#12667](https://github.com/Sylius/Sylius/issues/12667) [Documentation] Customizing CreditMemo entity by adding a new field ([@GSadee](https://github.com/GSadee))
+- [#12668](https://github.com/Sylius/Sylius/issues/12668) [API] write order email send test in api bundle ([@pamil](https://github.com/pamil), [@SirDomin](https://github.com/SirDomin))
+- [#12671](https://github.com/Sylius/Sylius/issues/12671) [Api] Tests adding incorrect county code to address order ([@Tomanhez](https://github.com/Tomanhez))
+- [#12674](https://github.com/Sylius/Sylius/issues/12674) [Minor] Return shop user after registration command to improve extendibility ([@lchrusciel](https://github.com/lchrusciel))
+
+## v1.9.3 (2021-04-22)
+
+#### Details
+
+- [#12458](https://github.com/Sylius/Sylius/issues/12458) [Locale] Current locale set on request ([@lchrusciel](https://github.com/lchrusciel), [@SirDomin](https://github.com/SirDomin))
+- [#12469](https://github.com/Sylius/Sylius/issues/12469) Extract sylius/admin-api-bundle out of Sylius Core (but keep it installed by default in existing minor releases) ([@pamil](https://github.com/pamil))
+- [#12475](https://github.com/Sylius/Sylius/issues/12475) [Taxation] Fix applying shipment taxes for multiple shipments ([@GSadee](https://github.com/GSadee))
+- [#12489](https://github.com/Sylius/Sylius/issues/12489) Build fix Change int to string in GenerateCouponsCommand ([@Tomanhez](https://github.com/Tomanhez))
+- [#12493](https://github.com/Sylius/Sylius/issues/12493) Update model.rst ([@mariogalan](https://github.com/mariogalan))
+- [#12494](https://github.com/Sylius/Sylius/issues/12494) [Behat][Customer] Fix assertions ([@GSadee](https://github.com/GSadee))
+- [#12500](https://github.com/Sylius/Sylius/issues/12500) [Documentation] Customizing credit memo ([@pamil](https://github.com/pamil))
+- [#12501](https://github.com/Sylius/Sylius/issues/12501) [BUG] Product options null value returns 400 instead of 500 ([@lchrusciel](https://github.com/lchrusciel), [@SirDomin](https://github.com/SirDomin))
+- [#12504](https://github.com/Sylius/Sylius/issues/12504) Change app.php to index.php ([@stefandoorn](https://github.com/stefandoorn))
+- [#12508](https://github.com/Sylius/Sylius/issues/12508) Fix the build by solving errors reported by static analysis tools ([@pamil](https://github.com/pamil))
+- [#12516](https://github.com/Sylius/Sylius/issues/12516) Fix CustomerComponent Typo ([@DennisdeBest](https://github.com/DennisdeBest))
+- [#12522](https://github.com/Sylius/Sylius/issues/12522) Revert BC break in ProductVariantInterface ([@pamil](https://github.com/pamil))
+- [#12523](https://github.com/Sylius/Sylius/issues/12523) Remove Admin API Bundle-related tests ([@pamil](https://github.com/pamil))
+- [#12525](https://github.com/Sylius/Sylius/issues/12525) Move note from UPGRADE-1.8 to UPGRADE-1.9 file ([@GSadee](https://github.com/GSadee))
+- [#12535](https://github.com/Sylius/Sylius/issues/12535) [API] Add prefix to subresource endpoint of order item's adjustments ([@GSadee](https://github.com/GSadee))
+- [#12546](https://github.com/Sylius/Sylius/issues/12546) [Minor] Use explicit bus instead of the default one ([@lchrusciel](https://github.com/lchrusciel))
+
+## v1.9.2 (2021-03-23)
+
+#### Details
+
+- [#12439](https://github.com/Sylius/Sylius/issues/12439) Don't render _token field if it's already rendered ([@maximehuran](https://github.com/maximehuran))
+- [#12454](https://github.com/Sylius/Sylius/issues/12454) Don't render _token field if it's already rendered in update template ([@pamil](https://github.com/pamil))
+- [#12461](https://github.com/Sylius/Sylius/issues/12461) Fix packages builds: ResourceBundle v1.8 does not require StofDoctrineExtensionsBundle anymore ([@pamil](https://github.com/pamil))
+- [#12468](https://github.com/Sylius/Sylius/issues/12468) Fix the build by conflicting with doctrine/doctrine-bundle 2.3.0 ([@pamil](https://github.com/pamil))
+- [#12471](https://github.com/Sylius/Sylius/issues/12471) [Maintenance] Conflict with JMSSerializer 3.9.0 due to issues with mapping of persistent collection ([@lchrusciel](https://github.com/lchrusciel))
+
+## v1.9.1 (2021-03-18)
+
+#### Details
+
+- [#12324](https://github.com/Sylius/Sylius/issues/12324) Removing hard timeout on edit while load selected values ([@christopherhero](https://github.com/christopherhero))
+- [#12376](https://github.com/Sylius/Sylius/issues/12376) Pass path delimiter up to parent taxon ([@Jeroen-G](https://github.com/Jeroen-G), [@Jeroen](https://github.com/Jeroen), [@pamil](https://github.com/pamil))
+- [#12384](https://github.com/Sylius/Sylius/issues/12384) Doc: Fix Doctrine project url ([@n3wborn](https://github.com/n3wborn))
+- [#12393](https://github.com/Sylius/Sylius/issues/12393) [ApiBundle] Fixes in test application ([@GSadee](https://github.com/GSadee))
+- [#12397](https://github.com/Sylius/Sylius/issues/12397) Do not fail when mb_detect_encoding returns false ([@stefandoorn](https://github.com/stefandoorn))
+- [#12398](https://github.com/Sylius/Sylius/issues/12398) [API] add missing spec ([@AdamKasp](https://github.com/AdamKasp))
+- [#12401](https://github.com/Sylius/Sylius/issues/12401) Use bold to alert on some changes in the README ([@jacquesbh](https://github.com/jacquesbh))
+- [#12403](https://github.com/Sylius/Sylius/issues/12403) Minor fixes and CS ([@AdamKasp](https://github.com/AdamKasp))
+- [#12404](https://github.com/Sylius/Sylius/issues/12404) Fix nested accordion initialisation ([@DjLeChuck](https://github.com/DjLeChuck))
+- [#12407](https://github.com/Sylius/Sylius/issues/12407) [AttributeBundle] custom locale_code fixed ([@Mateuszry](https://github.com/Mateuszry))
+- [#12410](https://github.com/Sylius/Sylius/issues/12410) [ApiBundle] Improve tests for custom Sylius resource in test application ([@GSadee](https://github.com/GSadee))
+- [#12411](https://github.com/Sylius/Sylius/issues/12411) [API] improve tests for overwriting api configs ([@AdamKasp](https://github.com/AdamKasp))
+- [#12412](https://github.com/Sylius/Sylius/issues/12412) [API][DOCS] custom path ([@AdamKasp](https://github.com/AdamKasp))
+- [#12416](https://github.com/Sylius/Sylius/issues/12416) [ApiBundle] Improve tests for custom entity in test application ([@GSadee](https://github.com/GSadee))
+- [#12417](https://github.com/Sylius/Sylius/issues/12417) [API][Documentation] Fix link to jwt documentation ([@GSadee](https://github.com/GSadee))
+- [#12418](https://github.com/Sylius/Sylius/issues/12418) [API][Documentation] Fix path to security file ([@GSadee](https://github.com/GSadee))
+- [#12423](https://github.com/Sylius/Sylius/issues/12423) Temporarily conflict to symfony/doctrine-bridge in Core and Api bundles ([@GSadee](https://github.com/GSadee))
+- [#12427](https://github.com/Sylius/Sylius/issues/12427) [FOSOAuthServerBundle] Remove incompatible version ([@Prometee](https://github.com/Prometee))
+- [#12447](https://github.com/Sylius/Sylius/issues/12447) Fix build for CoreBundle and ApiBundle packages ([@pamil](https://github.com/pamil))
+- [#12448](https://github.com/Sylius/Sylius/issues/12448) [ApiBundle] Fix displaying testing section in README file ([@GSadee](https://github.com/GSadee))
+
 ## v1.9.0 (2021-03-01)
 
 #### TL;DR

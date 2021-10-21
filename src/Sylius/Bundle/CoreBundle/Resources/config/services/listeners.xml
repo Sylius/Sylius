@@ -91,6 +91,10 @@
             <tag name="kernel.event_listener" event="sylius.address.pre_create" method="preCreate" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\EventListener\LocaleAwareListener" decorates="locale_aware_listener">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\EventListener\LocaleAwareListener.inner" />
+        </service>
+
         <service id="sylius.listener.taxon_deletion" class="Sylius\Bundle\CoreBundle\EventListener\TaxonDeletionListener">
             <argument type="service" id="session" />
             <argument type="service" id="sylius.repository.channel" />

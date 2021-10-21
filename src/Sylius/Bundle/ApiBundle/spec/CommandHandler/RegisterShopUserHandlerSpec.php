@@ -66,7 +66,9 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
 
         $shopUserManager->persist($shopUser)->shouldBeCalled();
 
-        $this(new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400'));
+        $this(
+            new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400')
+        )->shouldReturn($shopUser);
     }
 
     function it_creates_a_shop_user_with_given_data_and_verifies_it(
@@ -96,7 +98,9 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
 
         $shopUserManager->persist($shopUser)->shouldBeCalled();
 
-        $this(new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400'));
+        $this(
+            new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400')
+        )->shouldReturn($shopUser);
     }
 
     function it_throws_an_exception_if_customer_with_user_already_exists(

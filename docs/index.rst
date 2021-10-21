@@ -107,6 +107,18 @@ Components & Bundles
 
 .. include:: /components_and_bundles/map.rst.inc
 
+The Performance Guide
+---------------------
+
+With :doc:`The Performance Guide </performance/index>` you can decrease page loading times.
+
+.. toctree::
+   :hidden:
+
+   performance/index
+
+.. include:: /performance/map.rst.inc
+
 .. _Sylius: https://sylius.com
 .. _`Symfony Framework`: https://symfony.com
 .. _`Quick Tour`: https://symfony.com/doc/current/quick_tour
