@@ -131,17 +131,17 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I enable this catalog promotion
+     * @When I enable it
      */
-    public function iEnableCatalogPromotion(): void
+    public function iEnableIt(): void
     {
         $this->formElement->changeEnableTo(true);
     }
 
     /**
-     * @When I disable this catalog promotion
+     * @When I disable it
      */
-    public function iDisableThisCatalogPromotion(): void
+    public function iDisableIt(): void
     {
         $this->formElement->changeEnableTo(false);
     }

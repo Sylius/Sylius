@@ -104,17 +104,17 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I disable this catalog promotion
+     * @When I disable it
      */
-    public function iDisableCatalogPromotion(): void
+    public function iDisableIt(): void
     {
         $this->client->updateRequestData(['enabled' => false]);
     }
 
     /**
-     * @When I enable this catalog promotion
+     * @When I enable it
      */
-    public function iEnableThisCatalogPromotion(): void
+    public function iEnableIt(): void
     {
         $this->client->updateRequestData(['enabled' => true]);
     }
