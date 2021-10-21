@@ -257,7 +257,7 @@ jobs:
             matrix:
                 php: ["7.4", "8.0"]
                 symfony: ["^4.4", "5.2.*"]
-                node: ["10.x"]
+                node: ["14.x"]
                 mysql: ["8.0"]
 
                 include:
