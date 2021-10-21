@@ -17,7 +17,7 @@ winzou_state_machine:
                 from: [processing]
                 to: active
             deactivate:
-                from: [processing]
+                from: [processing, active]
                 to: inactive
             fail:
                 from: [processing]
