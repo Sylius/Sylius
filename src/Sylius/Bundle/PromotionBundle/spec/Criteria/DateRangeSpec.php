@@ -37,8 +37,8 @@ final class DateRangeSpec extends ObjectBehavior
         $now = new \DateTime();
         $calendar->now()->willReturn($now);
 
-        $queryBuilder->andWhere('o.startDate IS NULL OR o.startDate < :date')->willReturn($queryBuilder)->shouldBeCalled();
-        $queryBuilder->andWhere('o.endDate IS NULL OR o.endDate > :date')->willReturn($queryBuilder)->shouldBeCalled();
+        $queryBuilder->andWhere('o.startDate IS NULL OR o.startDate <= :date')->willReturn($queryBuilder)->shouldBeCalled();
+        $queryBuilder->andWhere('o.endDate IS NULL OR o.endDate >= :date')->willReturn($queryBuilder)->shouldBeCalled();
         $queryBuilder->setParameter('date', $now)->willReturn($queryBuilder)->shouldBeCalled();
 
         $this->filterQueryBuilder($queryBuilder)->shouldReturn($queryBuilder);
