@@ -4,8 +4,7 @@ framework:
 
         transports:
         # https://symfony.com/doc/current/messenger.html#transport-configuration
-            main: 
-                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+            main: '%env(MESSENGER_TRANSPORT_DSN)%'
 
         routing:
             'Sylius\Component\Promotion\Event\CatalogPromotionUpdated': main

@@ -148,7 +148,7 @@
 
         <service id="Sylius\Bundle\CoreBundle\Listener\FailedMessageListener">
             <argument type="service" id="sylius.event_bus" />
-            <tag name="kernel.event_subscriber" />
+            <tag name="kernel.event_listener" event="Symfony\Component\Messenger\Event\WorkerMessageFailedEvent" method="onMessageFailed" />
         </service>
     </services>
 </container>
