@@ -45,6 +45,8 @@ sylius:
                     header: Sales
                     orders: Orders
     ui:
+        catalog_promotion:
+            dates_details: This operation is time-consuming! Please consider a 2-10 minutes delay starting from the specified dates. The delay depends on the size of the catalog.
         channel_pricings: Channel pricings
         product:
             product_not_active_in_channel: The product is not yet activated in this channel.
