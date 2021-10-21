@@ -38,13 +38,11 @@
         <attribute name="startDate">
             <group>admin:catalog_promotion:read</group>
             <group>admin:catalog_promotion:create</group>
-            <group>admin:catalog_promotion:update</group>
         </attribute>
 
         <attribute name="endDate">
             <group>admin:catalog_promotion:read</group>
             <group>admin:catalog_promotion:create</group>
-            <group>admin:catalog_promotion:update</group>
         </attribute>
 
         <attribute name="state">

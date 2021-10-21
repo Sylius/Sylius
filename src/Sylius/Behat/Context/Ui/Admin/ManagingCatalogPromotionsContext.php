@@ -730,6 +730,15 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then I should not be able to edit its start and end date
+     */
+    public function iShouldNotBeAbleToEditItsStartAndEndDate(): void
+    {
+        Assert::true($this->updatePage->isStartDateDisabled());
+        Assert::true($this->updatePage->isEndDateDisabled());
+    }
+
+    /**
      * @Then I should be notified that at least 1 variant is required
      */
     public function iShouldBeNotifiedThatAtLeast1VariantIsRequired(): void
