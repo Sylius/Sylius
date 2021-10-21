@@ -87,6 +87,8 @@ final class CatalogPromotionContext implements Context
         $catalogPromotion->setEnabled(true);
 
         $this->entityManager->flush();
+
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
     /**
@@ -97,6 +99,8 @@ final class CatalogPromotionContext implements Context
         $catalogPromotion->setEnabled(false);
 
         $this->entityManager->flush();
+
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
     /**
@@ -317,6 +321,17 @@ final class CatalogPromotionContext implements Context
     ): void {
         $catalogPromotion->setStartDate(new \DateTime($startDate));
         $catalogPromotion->setEndDate(new \DateTime($endDate));
+
+        $this->entityManager->flush();
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
+    /**
+     * @Given the catalog promotion :catalogPromotion starts at :startDate
+     */
+    public function theCatalogPromotionStartsAt(CatalogPromotionInterface $catalogPromotion, string $startDate): void
+    {
+        $catalogPromotion->setStartDate(new \DateTime($startDate));
 
         $this->entityManager->flush();
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));

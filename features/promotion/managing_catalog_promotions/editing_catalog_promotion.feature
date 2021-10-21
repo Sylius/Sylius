@@ -76,17 +76,6 @@ Feature: Editing catalog promotion
         And this catalog promotion should have "40%" percentage discount
 
     @api @ui
-    Scenario: Disabling catalog promotion
-        When I disable "Christmas sale" catalog promotion
-        Then "PHP T-Shirt" variant should not be discounted
-
-    @api @ui
-    Scenario: Enabling catalog promotion
-        Given this catalog promotion is disabled
-        When I enable "Christmas sale" catalog promotion
-        Then "PHP T-Shirt" variant should be discounted
-
-    @api @ui
     Scenario: Being unable to edit catalog promotion if it is currently being processed
         Given the catalog promotion "Christmas sale" is currently being processed
         When I try to rename the "Christmas sale" catalog promotion to "Black Friday"
