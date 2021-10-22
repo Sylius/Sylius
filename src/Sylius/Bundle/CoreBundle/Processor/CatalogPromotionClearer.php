@@ -54,7 +54,9 @@ final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
         $catalogPromotions = $this->catalogPromotionRepository->findByCodes($appliedPromotionsCodes);
         foreach ($catalogPromotions as $catalogPromotion) {
             $stateMachine = $this->stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
-            $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE);
+            if ($stateMachine->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)) {
+                $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE);
+            }
         }
     }
 

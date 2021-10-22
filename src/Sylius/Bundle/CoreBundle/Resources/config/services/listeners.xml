@@ -146,7 +146,7 @@
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Listener\FailedMessageListener">
+        <service id="Sylius\Bundle\CoreBundle\Listener\CatalogPromotionUpdateFailedMessageListener">
             <argument type="service" id="sylius.event_bus" />
             <tag name="kernel.event_listener" event="Symfony\Component\Messenger\Event\WorkerMessageFailedEvent" method="onMessageFailed" />
         </service>

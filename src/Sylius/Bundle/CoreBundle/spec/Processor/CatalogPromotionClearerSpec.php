@@ -67,6 +67,7 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
         $catalogPromotionRepository->findByCodes(['winter_sale'])->willReturn([$catalogPromotion]);
 
         $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
+        $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->willReturn(true);
         $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldBeCalled();
 
         $this->clear();

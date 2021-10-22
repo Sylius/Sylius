@@ -70,4 +70,33 @@ class EligibleCatalogPromotionsProcessorTest extends WebTestCase
 
         unlink(self::$kernel->getProjectDir() . '/var/temporaryDate.txt');
     }
+
+    /** @test */
+    public function it_provides_catalog_promotions_with_precision_to_seconds_for_end_date(): void
+    {
+        /** @var EligibleCatalogPromotionsProvider $eligibleCatalogPromotionsProvider */
+        $eligibleCatalogPromotionsProvider = self::$container->get('Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface');
+
+        file_put_contents(self::$kernel->getProjectDir() . '/var/temporaryDate.txt', '2021-10-12 23:59:58');
+
+        $dateRangeCriteria = self::$container->get('sylius.catalog_promotion.criteria.date_range');
+
+        $eligibleCatalogPromotions = $eligibleCatalogPromotionsProvider->provide([$dateRangeCriteria]);
+
+        $expectedDateTimes = [
+            new \DateTime('2021-10-12 23:59:59'),
+            new \DateTime('2021-10-12 23:59:59'),
+        ];
+
+        $actualDateTimes = [];
+
+        /** @var CatalogPromotionInterface $eligibleCatalogPromotion */
+        foreach ($eligibleCatalogPromotions as $eligibleCatalogPromotion) {
+            $actualDateTimes[] = $eligibleCatalogPromotion->getEndDate();
+        }
+
+        $this->assertTrue(($expectedDateTimes == $actualDateTimes));
+
+        unlink(self::$kernel->getProjectDir() . '/var/temporaryDate.txt');
+    }
 }
