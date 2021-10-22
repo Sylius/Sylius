@@ -186,6 +186,18 @@ class Order extends BaseOrder implements OrderInterface
         return $units;
     }
 
+    public function getTotalItemsQuantity(): int
+    {
+        $itemCount = 0;
+
+        /** @var OrderItem $item */
+        foreach ($this->getItems() as $item) {
+            $itemCount += $item->getQuantity();
+        }
+
+        return $itemCount;
+    }
+
     public function getItemUnitsByVariant(ProductVariantInterface $variant): Collection
     {
         return $this->getItemUnits()->filter(function (OrderItemUnitInterface $itemUnit) use ($variant): bool {
