@@ -19,5 +19,5 @@ default:
                 - sylius.behat.context.api.admin.managing_countries
 
             filters:
-                tags: "@managing_countries && @api"
+                tags: "@managing_countries&&@api"
             javascript: false

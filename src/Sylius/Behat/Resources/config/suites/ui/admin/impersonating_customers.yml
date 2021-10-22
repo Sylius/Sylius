@@ -30,4 +30,4 @@ default:
                 - sylius.behat.context.ui.shop.login
 
             filters:
-                tags: "@impersonating_customers && @ui"
+                tags: "@impersonating_customers&&@ui"

@@ -24,4 +24,4 @@ default:
                 - sylius.behat.context.ui.shop.product
 
             filters:
-                tags: "@managing_product_reviews && @ui"
+                tags: "@managing_product_reviews&&@ui"

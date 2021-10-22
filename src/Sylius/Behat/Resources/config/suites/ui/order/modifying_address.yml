@@ -47,4 +47,4 @@ default:
                 - sylius.behat.context.ui.shop.currency
 
             filters:
-                tags: "@modifying_address && @ui"
+                tags: "@modifying_address&&@ui"

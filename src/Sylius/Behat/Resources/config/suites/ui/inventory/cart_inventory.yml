@@ -19,4 +19,4 @@ default:
 
 
             filters:
-                tags: "@cart_inventory && @ui"
+                tags: "@cart_inventory&&@ui"

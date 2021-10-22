@@ -33,4 +33,4 @@ default:
                 - sylius.behat.context.ui.shop.checkout.thank_you
 
             filters:
-                tags: "@checkout_inventory && @ui"
+                tags: "@checkout_inventory&&@ui"

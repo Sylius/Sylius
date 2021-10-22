@@ -23,4 +23,4 @@ default:
                 - sylius.behat.context.ui.admin.login
 
             filters:
-                tags: "@managing_administrators && @ui"
+                tags: "@managing_administrators&&@ui"

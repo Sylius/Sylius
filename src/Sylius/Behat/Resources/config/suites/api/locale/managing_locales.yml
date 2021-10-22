@@ -17,5 +17,5 @@ default:
 
                 - sylius.behat.context.api.admin.managing_locales
             filters:
-                tags: "@managing_locales && @api"
+                tags: "@managing_locales&&@api"
             javascript: false

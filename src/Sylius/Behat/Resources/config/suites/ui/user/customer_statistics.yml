@@ -23,4 +23,4 @@ default:
                 - sylius.behat.context.ui.admin.managing_customers
 
             filters:
-                tags: "@customer_statistics && @ui"
+                tags: "@customer_statistics&&@ui"

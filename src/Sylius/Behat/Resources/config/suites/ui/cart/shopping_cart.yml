@@ -37,4 +37,4 @@ default:
                 - sylius.behat.context.ui.user
 
             filters:
-                tags: "@shopping_cart && @ui"
+                tags: "@shopping_cart&&@ui"

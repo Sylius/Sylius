@@ -20,4 +20,4 @@ default:
 
 
             filters:
-                tags: "@products_accessibility_in_multiple_channels && @ui"
+                tags: "@products_accessibility_in_multiple_channels&&@ui"

@@ -19,5 +19,5 @@ default:
                 - sylius.behat.context.api.admin.managing_exchange_rates
 
             filters:
-                tags: "@managing_exchange_rates && @api"
+                tags: "@managing_exchange_rates&&@api"
             javascript: false
