@@ -104,17 +104,17 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I disable this catalog promotion
+     * @When I disable it
      */
-    public function iDisableCatalogPromotion(): void
+    public function iDisableIt(): void
     {
         $this->client->updateRequestData(['enabled' => false]);
     }
 
     /**
-     * @When I enable this catalog promotion
+     * @When I enable it
      */
-    public function iEnableThisCatalogPromotion(): void
+    public function iEnableIt(): void
     {
         $this->client->updateRequestData(['enabled' => true]);
     }
@@ -429,7 +429,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I disable ("[^"]*" catalog promotion)$/
+     * @When I disable :catalogPromotion catalog promotion
      */
     public function iDisableThisCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
@@ -437,7 +437,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I enable ("[^"]*" catalog promotion)$/
+     * @When I enable :catalogPromotion catalog promotion
      */
     public function iEnableCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
@@ -716,12 +716,22 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @Then /^(it) should be (inactive|active)$/
      */
-    public function itShouldBeInactive(CatalogPromotionInterface $catalogPromotion, string $state): void
+    public function itShouldBe(CatalogPromotionInterface $catalogPromotion, string $state): void
     {
         Assert::true($this->responseChecker->hasItemWithValues(
             $this->client->getLastResponse(),
             ['name' => $catalogPromotion->getName(), 'state' => $state]
         ));
+    }
+
+    /**
+     * @Then /^(this catalog promotion) should(?:| still) be (inactive|active)$/
+     */
+    public function thisCatalogPromotionShouldBe(CatalogPromotionInterface $catalogPromotion, string $state): void
+    {
+        $response = $this->client->show($catalogPromotion->getCode());
+
+        Assert::true($this->responseChecker->hasValue($response, 'state', $state));
     }
 
     /**
@@ -1129,5 +1139,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
         $this->client->updateRequestData(['enabled' => $enabled]);
         $this->client->update();
+
+        $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
     }
 }

@@ -16,17 +16,24 @@ namespace spec\Sylius\Bundle\CoreBundle\Processor;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use SM\Factory\FactoryInterface;
+use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ChannelPricingRepositoryInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
+use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 
 final class CatalogPromotionClearerSpec extends ObjectBehavior
 {
     function let(
-        ChannelPricingRepositoryInterface $channelPricingRepository
+        ChannelPricingRepositoryInterface $channelPricingRepository,
+        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
+        FactoryInterface $stateMachine
     ): void {
-        $this->beConstructedWith($channelPricingRepository);
+        $this->beConstructedWith($channelPricingRepository, $catalogPromotionRepository, $stateMachine);
     }
 
     function it_implements_catalog_promotion_clearer_interface(): void
@@ -36,8 +43,12 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
 
     function it_clears_channel_pricings_with_catalog_promotions_applied(
         ChannelPricingRepositoryInterface $channelPricingRepository,
+        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
+        FactoryInterface $stateMachine,
         ChannelPricingInterface $firstChannelPricing,
-        ChannelPricingInterface $secondChannelPricing
+        ChannelPricingInterface $secondChannelPricing,
+        CatalogPromotionInterface $catalogPromotion,
+        StateMachineInterface $stateMachineInterface
     ): void {
         $channelPricingRepository->findWithDiscountedPrice()->willReturn([
             $firstChannelPricing->getWrappedObject(),
@@ -52,6 +63,11 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
         $secondChannelPricing->getAppliedPromotions()->willReturn([]);
         $secondChannelPricing->getOriginalPrice()->shouldNotBeCalled();
         $secondChannelPricing->clearAppliedPromotions()->shouldNotBeCalled();
+
+        $catalogPromotionRepository->findByCodes(['winter_sale'])->willReturn([$catalogPromotion]);
+
+        $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
+        $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldBeCalled();
 
         $this->clear();
     }

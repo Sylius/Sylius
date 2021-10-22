@@ -131,17 +131,17 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I enable this catalog promotion
+     * @When I enable it
      */
-    public function iEnableCatalogPromotion(): void
+    public function iEnableIt(): void
     {
         $this->formElement->changeEnableTo(true);
     }
 
     /**
-     * @When I disable this catalog promotion
+     * @When I disable it
      */
-    public function iDisableThisCatalogPromotion(): void
+    public function iDisableIt(): void
     {
         $this->formElement->changeEnableTo(false);
     }
@@ -317,17 +317,19 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I disable ("[^"]*" catalog promotion)$/
+     * @When I disable :catalogPromotion catalog promotion
      */
     public function iDisableCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
         $this->formElement->changeEnableTo(false);
         $this->updatePage->saveChanges();
+
+        $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
     }
 
     /**
-     * @When /^I enable ("[^"]*" catalog promotion)$/
+     * @When I enable :catalogPromotion catalog promotion
      */
     public function iEnableThisCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
@@ -630,6 +632,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @Then /^(it) should be (inactive|active)$/
+     * @Then /^(this catalog promotion) should(?:| still) be (inactive|active)$/
      */
     public function itShouldBeInactive(CatalogPromotionInterface $catalogPromotion, string $state): void
     {
