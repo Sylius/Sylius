@@ -184,7 +184,10 @@ final class ResponseChecker implements ResponseCheckerInterface
 
     public function getResponseContent(Response $response): array
     {
-        return json_decode($response->getContent(), true);
+        $decodedResponse = json_decode($response->getContent(), true);
+        $decodedResponse['code'] = $response->getStatusCode();
+
+        return $decodedResponse;
     }
 
     public function hasViolationWithMessage(Response $response, string $message, ?string $property = null): bool
