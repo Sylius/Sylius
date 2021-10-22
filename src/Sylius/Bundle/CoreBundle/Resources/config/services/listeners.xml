@@ -124,6 +124,14 @@
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\Listener\CatalogPromotionFailedListener">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface" />
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sm.factory" />
+            <tag name="messenger.message_handler" bus="sylius.event_bus" />
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\Listener\ProductUpdateListener">
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\ProductCatalogPromotionsProcessorInterface" />
@@ -136,6 +144,11 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\ProductVariantCatalogPromotionsProcessorInterface" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Listener\FailedMessageListener">
+            <argument type="service" id="sylius.event_bus" />
+            <tag name="kernel.event_listener" event="Symfony\Component\Messenger\Event\WorkerMessageFailedEvent" method="onMessageFailed" />
         </service>
     </services>
 </container>

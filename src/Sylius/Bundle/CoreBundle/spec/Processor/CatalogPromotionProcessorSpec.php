@@ -60,6 +60,8 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
             ->willReturn([$firstVariant, $secondVariant])
         ;
 
+        $catalogPromotion->getState()->willReturn(CatalogPromotionStates::STATE_PROCESSING);
+
         $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
         $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(true);
         $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldBeCalled();
@@ -80,8 +82,11 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
     ): void {
         $catalogPromotion->isEnabled()->willReturn(true);
         $catalogPromotionVariantsProvider->provideEligibleVariants($catalogPromotion)->willReturn([]);
+        $catalogPromotion->getState()->willReturn(CatalogPromotionStates::STATE_PROCESSING);
 
         $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
+        $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->willReturn(true);
+
         $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(true);
         $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldBeCalled();
         $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldBeCalled();
@@ -99,10 +104,13 @@ final class CatalogPromotionProcessorSpec extends ObjectBehavior
         StateMachineInterface $stateMachineInterface
     ): void {
         $catalogPromotion->isEnabled()->willReturn(true);
+        $catalogPromotion->getState()->willReturn(CatalogPromotionStates::STATE_FAILED);
+
         $catalogPromotionVariantsProvider->provideEligibleVariants($catalogPromotion)->willReturn([]);
 
         $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
 
+        $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->willReturn(true);
         $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(true);
         $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldBeCalled();
         $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldBeCalled();
