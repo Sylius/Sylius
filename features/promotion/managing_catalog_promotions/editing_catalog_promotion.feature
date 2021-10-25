@@ -49,10 +49,18 @@ Feature: Editing catalog promotion
         Then I should not be able to edit its code
 
     @api @ui
-    Scenario: Being unable to edit catalog promotion dates
+    Scenario: Editing catalog promotion start date
         Given the catalog promotion "Christmas sale" operates between "2021-12-20" and "2021-12-30"
         When I want to modify a catalog promotion "Christmas sale"
-        Then I should not be able to edit its start and end date
+        And I change its start date to "2021-12-25"
+        Then this catalog promotion should be active between "2021-12-25" and "2021-12-30"
+
+    @api @ui
+    Scenario: Editing catalog promotion end date
+        Given the catalog promotion "Christmas sale" operates between "2021-12-20" and "2021-12-30"
+        When I want to modify a catalog promotion "Christmas sale"
+        And I change its end date to "2022-01-10"
+        Then this catalog promotion should be active between "2021-12-25" and "2022-01-10"
 
     @api @ui @javascript
     Scenario: Editing catalog promotion variant scope

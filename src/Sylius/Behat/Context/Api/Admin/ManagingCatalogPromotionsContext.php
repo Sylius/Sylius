@@ -952,24 +952,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should not be able to edit its start and end date
-     */
-    public function iShouldNotBeAbleToEditItsStartAndEndDate(): void
-    {
-        $this->client->updateRequestData(['startDate' => '2022-01-01 00:00:00', 'endDate' => '2022-01-08 00:00:00']);
-        $this->client->update();
-
-        Assert::false(
-            $this->responseChecker->hasValue($this->client->getLastResponse(), 'startDate', '2022-01-01 00:00:00'),
-            'The start date has been changed, but it should not'
-        );
-        Assert::false(
-            $this->responseChecker->hasValue($this->client->getLastResponse(), 'endDate', '2022-01-08 00:00:00'),
-            'The end date has been changed, but it should not'
-        );
-    }
-
-    /**
      * @Then I should be notified that a discount amount is required
      */
     public function iShouldBeNotifiedThatADiscountAmountIsRequired(): void
