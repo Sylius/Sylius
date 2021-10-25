@@ -21,6 +21,6 @@ With 3 000 000 customers this method allows you to load page up to 70% faster.
 
     This solution may slow down loading page with small tables as it will create additional database queries.
 
-This solution will be turned on by default on `SyliusGridBundle` since version 1.10.
+This solution is turned on by default on `SyliusGridBundle` since version 1.10.
 For the earlier versions, the `Pagerfanta\Adapter\DoctrineORMAdapter` has to be adjusted manually,
 by overriding the `Sylius\Bundle\GridBundle\Doctrine\ORM\DataSource` class.
