@@ -47,14 +47,14 @@ ElasticSearch
 When the grids filtering is not enough for you, and your needs are more complex you should go for the
 `ElasticSearch <https://www.elastic.co/products/elasticsearch>`_ integration.
 
-There is the `Sylius/SyliusElasticSearchPlugin <https://github.com/Sylius/SyliusElasticSearchPlugin>`_ integration extension,
+There is the `BitBagCommerce/SyliusElasticsearchPlugin <https://github.com/BitBagCommerce/SyliusElasticsearchPlugin>`_ integration extension,
 which you can use to extend Sylius functionalities with ElasticSearch.
 
 All you have to do is require the plugin in your project via composer, install the ElasticSearch server, and configure ElasticSearch
-in your application. Everything is well described in the Sylius/SyliusElasticSearchPlugin's readme.
+in your application. Everything is well described in the BitBagCommerce/SyliusElasticsearchPlugin's readme.
 
 Learn more
 ----------
 
-* `SyliusElasticSearchPlugin <https://github.com/Sylius/SyliusElasticSearchPlugin>`_
+* `SyliusElasticSearchPlugin <https://github.com/BitBagCommerce/SyliusElasticsearchPlugin>`_
 * `GridBundle documentation <https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md>`_
