@@ -17,6 +17,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Common\Filter\OrderFilterInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\AbstractContextAwareFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Component\Core\Model\ProductInterface;
 
 /** @experimental */
 final class ProductPriceOrderFilter extends AbstractContextAwareFilter
@@ -34,11 +35,28 @@ final class ProductPriceOrderFilter extends AbstractContextAwareFilter
                 return;
             }
 
+            $entityRepository = $queryBuilder->getEntityManager()->getRepository(ProductInterface::class);
+
+            $subQuery = $entityRepository->createQueryBuilder('m')
+                ->select('min(v.position)')
+                ->innerJoin('m.variants', 'v')
+                ->andWhere('m.id = :product_id')
+                ->andWhere('v.enabled = true')
+            ;
+
+            $rootAlias = $queryBuilder->getRootAliases()[0];
+
             $queryBuilder
                 ->addSelect('variant')
                 ->addSelect('channelPricing')
-                ->innerJoin('o.variants', 'variant')
+                ->innerJoin(sprintf('%s.variants', $rootAlias), 'variant')
                 ->innerJoin('variant.channelPricings', 'channelPricing')
+                ->andWhere(
+                    $queryBuilder->expr()->in(
+                        'variant.position',
+                        str_replace(':product_id', 'o.id', $subQuery->getDQL())
+                    )
+                )
                 ->orderBy('channelPricing.price', $value['price'])
             ;
         }
