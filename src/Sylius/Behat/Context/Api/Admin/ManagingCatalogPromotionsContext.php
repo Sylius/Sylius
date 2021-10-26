@@ -18,7 +18,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -291,10 +290,29 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When I make it start at :startDate
+     * @When I change its start date to :startDate
      */
     public function iMakeCatalogPromotionOperateFrom(string $startDate): void
     {
         $this->client->updateRequestData(['startDate' => $startDate]);
+    }
+
+    /**
+     * @When I try change its start date to yesterday
+     */
+    public function iTryChangeItsStartDateToYesterday(): void
+    {
+        $currentDate = new \DateTime();
+
+        $this->client->updateRequestData(['startDate' => $currentDate->format('Y-m-d')]);
+    }
+
+    /**
+     * @When I( try) change its end date to :endDate
+     */
+    public function iChangeItsEndDateTo(string $endDate): void
+    {
+        $this->client->updateRequestData(['endDate' => $endDate]);
     }
 
     /**
@@ -1061,6 +1079,28 @@ final class ManagingCatalogPromotionsContext implements Context
     public function itsNameShouldBe(string $name): void
     {
         Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $name));
+    }
+
+    /**
+     * @Then I should get information that the start date can not be earlier than the current date
+     */
+    public function iShouldGetInformationThatTheStartDateCanNotBeEarlierThanTheCurrentDate(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'startDate: Start date can not be earlier than current date.'
+        );
+    }
+
+    /**
+     * @Then I should get information that the end date can not be before start date
+     */
+    public function iShouldGetInformationThatTheEndDateCanNotBeBeforeStartDate(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'endDate: End date can not be before start date.'
+        );
     }
 
     private function catalogPromotionAppliesOnVariants(ProductVariantInterface ...$productVariants): bool
