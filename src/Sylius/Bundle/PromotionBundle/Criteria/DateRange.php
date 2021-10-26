@@ -31,7 +31,7 @@ final class DateRange implements CriteriaInterface
 
         $queryBuilder
             ->andWhere(sprintf('%s.startDate IS NULL OR %s.startDate <= :date', $root, $root))
-            ->andWhere(sprintf('%s.endDate IS NULL OR %s.endDate >= :date', $root, $root))
+            ->andWhere(sprintf('%s.endDate IS NULL OR %s.endDate > :date', $root, $root))
             ->setParameter('date', $this->calendar->now())
         ;
 
