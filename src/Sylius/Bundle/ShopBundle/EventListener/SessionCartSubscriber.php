@@ -45,7 +45,12 @@ final class SessionCartSubscriber implements EventSubscriberInterface
 
     public function onKernelResponse(ResponseEvent $event): void
     {
-        if (!$event->isMasterRequest()) {
+        if (\method_exists($event, 'isMainRequest')) {
+            $isMainRequest = $event->isMainRequest();
+        } else {
+            $isMainRequest = $event->isMasterRequest();
+        }
+        if (!$isMainRequest) {
             return;
         }
 

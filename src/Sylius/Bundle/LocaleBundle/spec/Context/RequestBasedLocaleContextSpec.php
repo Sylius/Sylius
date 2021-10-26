@@ -35,7 +35,11 @@ final class RequestBasedLocaleContextSpec extends ObjectBehavior
 
     function it_throws_locale_not_found_exception_if_master_request_is_not_found(RequestStack $requestStack): void
     {
-        $requestStack->getMasterRequest()->willReturn(null);
+        if (\method_exists(RequestStack::class, 'getMainRequest')) {
+            $requestStack->getMainRequest()->willReturn(null);
+        } else {
+            $requestStack->getMasterRequest()->willReturn(null);
+        }
 
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }
@@ -44,7 +48,11 @@ final class RequestBasedLocaleContextSpec extends ObjectBehavior
         RequestStack $requestStack,
         Request $request
     ): void {
-        $requestStack->getMasterRequest()->willReturn($request);
+        if (\method_exists(RequestStack::class, 'getMainRequest')) {
+            $requestStack->getMainRequest()->willReturn($request);
+        } else {
+            $requestStack->getMasterRequest()->willReturn($request);
+        }
 
         $request->attributes = new ParameterBag();
 
@@ -56,7 +64,11 @@ final class RequestBasedLocaleContextSpec extends ObjectBehavior
         LocaleProviderInterface $localeProvider,
         Request $request
     ): void {
-        $requestStack->getMasterRequest()->willReturn($request);
+        if (\method_exists(RequestStack::class, 'getMainRequest')) {
+            $requestStack->getMainRequest()->willReturn($request);
+        } else {
+            $requestStack->getMasterRequest()->willReturn($request);
+        }
 
         $request->attributes = new ParameterBag(['_locale' => 'en_US']);
 
@@ -70,7 +82,11 @@ final class RequestBasedLocaleContextSpec extends ObjectBehavior
         LocaleProviderInterface $localeProvider,
         Request $request
     ): void {
-        $requestStack->getMasterRequest()->willReturn($request);
+        if (\method_exists(RequestStack::class, 'getMainRequest')) {
+            $requestStack->getMainRequest()->willReturn($request);
+        } else {
+            $requestStack->getMasterRequest()->willReturn($request);
+        }
 
         $request->attributes = new ParameterBag(['_locale' => 'pl_PL']);
 
