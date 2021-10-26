@@ -292,18 +292,17 @@ Catalog Promotion asynchronicity
 --------------------------------
 
 Applying Catalog Promotion to the product catalog is an asynchronous operation.
-What does it mean?
 It means that new prices will not be updated right after confirmation of creating or updating Catalog Promotion but after some time.
 This delay depends on the size of the product catalog in the shop.
-Other effect of this approach is possibility to create Catalog Promotion with future date (processing will start working in provided start date).
+Another effect of this approach is the possibility to create Catalog Promotion with the future date (processing will start in given start date).
 
 To make the Catalog Promotion application asynchronously we are using `SymfonyMessenger` and queue provided by `Doctrine`.
 After changes in CatalogPromotion, we dispatch proper message with delay calculated from provided dates.
 
 .. warning::
 
-    For enable asynchronous Catalog Promotion remember about running messenger consumer in a separate process, use command: `php bin/console messenger:consume async`
-    For more information check official `Symfony docs <https://symfony.com/doc/4.4/messenger.html#consuming-messages-running-the-worker>`_
+    To enable asynchronous Catalog Promotion, remember about running messenger consumer in a separate process, use the command: ``php bin/console messenger:consume async``
+    For more information check official `Symfony docs <https://symfony.com/doc/current/messenger.html#consuming-messages-running-the-worker>`_
 
 How the Catalog Promotions are applied?
 ---------------------------------------
