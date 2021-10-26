@@ -302,7 +302,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iTryChangeItsStartDateToYesterday(): void
     {
-        $currentDate = new \DateTime();
+        $currentDate = new \DateTime('yesterday');
 
         $this->client->updateRequestData(['startDate' => $currentDate->format('Y-m-d')]);
     }

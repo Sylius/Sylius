@@ -181,6 +181,22 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I try change its start date to yesterday
+     */
+    public function iTryChangeItsStartDateToYesterday(): void
+    {
+        $this->formElement->specifyStartDate(new \DateTime('yesterday'));
+    }
+
+    /**
+     * @When I( try) change its end date to :endDate
+     */
+    public function iChangeItsEndDateTo(string $endDate): void
+    {
+        $this->formElement->specifyEndDate(new \DateTime($endDate));
+    }
+
+    /**
      * @When I make it unavailable in channel :channelName
      */
     public function iMakeItUnavailableInChannel(string $channelName): void
@@ -693,6 +709,22 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldBeNotifiedThatCatalogPromotionWithThisCodeAlreadyExists(): void
     {
         Assert::same($this->createPage->getValidationMessage('code'), 'The catalog promotion with given code already exists.');
+    }
+
+    /**
+     * @Then I should get information that the start date can not be earlier than the current date
+     */
+    public function iShouldGetInformationThatTheStartDateCanNotBeEarlierThanTheCurrentDate(): void
+    {
+        Assert::same($this->createPage->getValidationMessage('startDate'), 'Start date can not be earlier than current date.');
+    }
+
+    /**
+     * @Then I should get information that the end date can not be before start date
+     */
+    public function iShouldGetInformationThatTheEndDateCanNotBeBeforeStartDate(): void
+    {
+        Assert::same($this->createPage->getValidationMessage('endDate'), 'End date can not be before start date.');
     }
 
     /**
