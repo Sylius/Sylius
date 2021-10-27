@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class CachedPerRequestChannelContext implements ChannelContextInterface
 {
-    private ChannelContextInterface$decoratedChannelContext;
+    private ChannelContextInterface $decoratedChannelContext;
 
     private RequestStack $requestStack;
 
