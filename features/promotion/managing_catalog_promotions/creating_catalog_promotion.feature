@@ -88,11 +88,11 @@ Feature: Creating a catalog promotion
         And I name it "Winter sale"
         And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add action that gives "50%" percentage discount
-        And I make it start yesterday and ends tomorrow
+        And I make it start "tomorrow" and ends "tomorrow +1 day"
         And I add it
         Then I should be notified that catalog promotion has been successfully created
         And there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name
         And "Winter sale" catalog promotion should apply to "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
-        And it should operate between yesterday and tomorrow
-        And it should be active
+        And "Winter sale" catalog promotion should operate between tomorrow and day after tomorrow
+        And "Winter sale" catalog promotion should be inactive

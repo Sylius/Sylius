@@ -164,28 +164,21 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I make it start yesterday and ends tomorrow
+     * @When I make it start :startDate and ends :endDate
      */
-    public function iMakeItOperateBetweenYesterdayAndTomorrow(): void
+    public function iMakeItOperateBetweenYesterdayAndTomorrow(string $startDate, string $endDate): void
     {
-        $this->formElement->specifyStartDate(new \DateTime('yesterday'));
-        $this->formElement->specifyEndDate(new \DateTime('tomorrow'));
+        $this->formElement->specifyStartDate(new \DateTime($startDate));
+        $this->formElement->specifyEndDate(new \DateTime($endDate));
     }
 
     /**
      * @When I make it start at :startDate
+     * @When I( try) change its start date to :startDate
      */
     public function iMakeItOperateFromDate(string $startDate): void
     {
         $this->formElement->specifyStartDate(new \DateTime($startDate));
-    }
-
-    /**
-     * @When I try change its start date to yesterday
-     */
-    public function iTryChangeItsStartDateToYesterday(): void
-    {
-        $this->formElement->specifyStartDate(new \DateTime('yesterday'));
     }
 
     /**
@@ -647,8 +640,25 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then /^("[^"]+" catalog promotion) should operate between tomorrow and day after tomorrow$/
+     */
+    public function theCatalogPromotionShouldOperateBetweenTomorrowAndDayAfterTomorrow(
+        CatalogPromotionInterface $catalogPromotion
+    ): void {
+        $this->indexPage->open();
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'name' => $catalogPromotion->getName(),
+            'startDate' => (new \DateTime('tomorrow'))->format('Y-m-d'),
+            'endDate' => (new \DateTime('tomorrow +1 day'))->format('Y-m-d'),
+        ]));
+
+        $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
+    }
+
+    /**
      * @Then /^(it) should be (inactive|active)$/
      * @Then /^(this catalog promotion) should(?:| still) be (inactive|active)$/
+     * @Then /^("[^"]+" catalog promotion) should(?:| still) be (inactive|active)$/
      */
     public function itShouldBeInactive(CatalogPromotionInterface $catalogPromotion, string $state): void
     {
@@ -822,5 +832,23 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::contains($this->showPage->getStartDate(), $startDate);
         Assert::contains($this->showPage->getEndDate(), $endDate);
+    }
+
+    /**
+     * @Then /^(this catalog promotion) should operate between tomorrow and day after tomorrow$/
+     */
+    public function theCatalogPromotionNamedShouldOperateBetweenTomorrowAndAfterTomorrow(
+        CatalogPromotionInterface $catalogPromotion
+    ): void {
+        $startDate = new \DateTime('tomorrow');
+        $startDateFormatted = $startDate->format('Y-m-d');
+
+        $endDate = new \DateTime('tomorrow');
+        $endDate->modify('+1 day');
+        $endDateFormatted = $endDate->format('Y-m-d');
+
+        $this->showPage->open(['id' => $catalogPromotion->getId()]);
+        Assert::contains($this->showPage->getStartDate(), $startDateFormatted);
+        Assert::contains($this->showPage->getEndDate(), $endDateFormatted);
     }
 }

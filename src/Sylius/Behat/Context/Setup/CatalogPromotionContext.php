@@ -340,6 +340,23 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
+     * @Given the catalog promotion :catalogPromotion operates between yesterday and two days after tomorrow
+     */
+    public function theCatalogPromotionOperatesBetweenTwoDaysAgeAndTomorrow(
+        CatalogPromotionInterface $catalogPromotion
+    ): void {
+        $startDate = new \DateTime('yesterday');
+        $catalogPromotion->setStartDate($startDate);
+
+        $endDate = new \DateTime('today');
+        $endDate->modify('+3 day');
+        $catalogPromotion->setEndDate($endDate);
+
+        $this->entityManager->flush();
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
+    /**
      * @Given the catalog promotion :catalogPromotion starts at :startDate
      */
     public function theCatalogPromotionStartsAt(CatalogPromotionInterface $catalogPromotion, string $startDate): void

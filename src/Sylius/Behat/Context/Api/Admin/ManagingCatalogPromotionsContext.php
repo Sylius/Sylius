@@ -278,13 +278,13 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I make it start yesterday and ends tomorrow
+     * @When I make it start :startDate and ends :endDate
      */
-    public function iMakeCatalogPromotionOperateBetweenYesterdayAndTomorrow(): void
+    public function iMakeCatalogPromotionOperateBetweenYesterdayAndTomorrow(string $startDate, string $endDate): void
     {
         $this->client->updateRequestData([
-            'startDate' => (new \DateTime('yesterday'))->format('Y-m-d H:i:s'),
-            'endDate' => (new \DateTime('tomorrow'))->format('Y-m-d H:i:s')
+            'startDate' => (new \DateTime($startDate))->format('Y-m-d H:i:s'),
+            'endDate' => (new \DateTime($endDate))->format('Y-m-d H:i:s')
         ]);
     }
 
@@ -298,7 +298,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I try change its start date to yesterday
+     * @When I( try) change its start date to yesterday
      */
     public function iTryChangeItsStartDateToYesterday(): void
     {
@@ -693,6 +693,7 @@ final class ManagingCatalogPromotionsContext implements Context
         string $startDate,
         string $endDate
     ): void {
+        $res  = $this->client->getLastResponse();
         $response = $this->client->index();
 
         Assert::true(
@@ -703,6 +704,33 @@ final class ManagingCatalogPromotionsContext implements Context
             sprintf(
                 'Cannot find catalog promotions with name "%s" operating between "%s" and "%s" in the list',
                 $catalogPromotion->getName(), $startDate, $endDate
+            )
+        );
+    }
+
+    /**
+     * @Then /^(this catalog promotion) should operate between tomorrow and day after tomorrow$/
+     * @Then /^("[^"]+" catalog promotion) should operate between tomorrow and day after tomorrow$/
+     */
+    public function theCatalogPromotionNamedShouldOperateBetweenTomorrowAndAfterTomorrow(
+        CatalogPromotionInterface $catalogPromotion
+    ): void {
+        $response = $this->client->index();
+
+        $startDate = new \DateTime('tomorrow');
+        $startDateFormatted = $startDate->format('Y-m-d');
+
+        $endDate = new \DateTime('tomorrow');
+        $endDate->modify('+1 day');
+        $endDateFormatted = $endDate->format('Y-m-d');
+        Assert::true(
+            $this->responseChecker->hasItemWithValues(
+                $response,
+                ['name' => $catalogPromotion->getName(), 'startDate' => $startDateFormatted. ' 00:00:00' , 'endDate' => $endDateFormatted.' 00:00:00']
+            ),
+            sprintf(
+                'Cannot find catalog promotions with name "%s" operating between "%s" and "%s" in the list',
+                $catalogPromotion->getName(), $startDateFormatted, $endDateFormatted
             )
         );
     }
@@ -733,9 +761,11 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @Then /^(it) should be (inactive|active)$/
+     * @Then /^("[^"]+" catalog promotion) should be (inactive|active)$/
      */
     public function itShouldBe(CatalogPromotionInterface $catalogPromotion, string $state): void
     {
+        $res = $this->client->getLastResponse();
         Assert::true($this->responseChecker->hasItemWithValues(
             $this->client->getLastResponse(),
             ['name' => $catalogPromotion->getName(), 'state' => $state]

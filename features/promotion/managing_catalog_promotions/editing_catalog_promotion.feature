@@ -49,20 +49,13 @@ Feature: Editing catalog promotion
         Then I should not be able to edit its code
 
     @api @ui
-    Scenario: Editing catalog promotion start date
-        Given the catalog promotion "Christmas sale" operates between "2021-12-20" and "2021-12-30"
+    Scenario: Editing catalog promotion dates
+        Given the catalog promotion "Christmas sale" operates between yesterday and two days after tomorrow
         When I want to modify a catalog promotion "Christmas sale"
-        And I change its start date to "2020-12-25"
+        And I change its start date to "tomorrow"
+        And I change its end date to "tomorrow + 1 day"
         And I save my changes
-        Then this catalog promotion should operate between "2021-12-25" and "2021-12-30"
-
-    @api @ui
-    Scenario: Editing catalog promotion end date
-        Given the catalog promotion "Christmas sale" operates between "2021-12-20" and "2021-12-30"
-        When I want to modify a catalog promotion "Christmas sale"
-        And I change its end date to "2022-01-10"
-        And I save my changes
-        Then this catalog promotion should operate between "2021-12-20" and "2022-01-10"
+        Then this catalog promotion should operate between tomorrow and day after tomorrow
 
     @api @ui @javascript
     Scenario: Editing catalog promotion variant scope
@@ -101,7 +94,7 @@ Feature: Editing catalog promotion
         Then I should get information that the start date can not be earlier than the current date
 
     @api @ui
-    Scenario: Being unable to change start date to earlier then current date
+    Scenario: Being unable to change end date to earlier then current date
         Given the catalog promotion "Christmas sale" operates between "2021-12-20" and "2021-12-30"
         When I want to modify a catalog promotion "Christmas sale"
         And I try change its end date to "2021-12-15"
