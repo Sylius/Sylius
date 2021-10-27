@@ -161,6 +161,7 @@
     },
     "conflict": {
         "api-platform/core": "^2.6",
+        "doctrine/dbal": "^3",
         "doctrine/doctrine-bundle": "2.3.0",
         "doctrine/orm": "^2.10.0",
         "jms/serializer-bundle": "3.9.0",
@@ -171,6 +172,7 @@
         "symfony/serializer": "4.4.19 || 5.2.2"
     },
     "require-dev": {
+        "ext-json": "*",
         "behat/behat": "^3.6.1",
         "behat/mink-selenium2-driver": "^1.4",
         "dmore/behat-chrome-extension": "^1.3",
