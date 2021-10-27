@@ -168,6 +168,7 @@
         "friendsofsymfony/rest-bundle": "3.1.0"
     },
     "require-dev": {
+        "ext-json": "*",
         "behat/behat": "^3.6.1",
         "behat/mink-selenium2-driver": "^1.4",
         "dmore/behat-chrome-extension": "^1.3",
