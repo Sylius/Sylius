@@ -166,6 +166,7 @@
         "symfony/serializer": "4.4.19 || 5.2.2"
     },
     "require-dev": {
+        "ext-json": "*",
         "behat/behat": "^3.6.1",
         "behat/mink-selenium2-driver": "^1.4",
         "dmore/behat-chrome-extension": "^1.3",
