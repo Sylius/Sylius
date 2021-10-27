@@ -383,7 +383,8 @@ final class CheckoutContext implements Context
      */
     public function theVisitorHasNoProceedWithShippingMethodInTheCustomerCart(): void
     {
-        Assert::same($this->getCart()['code'], 404);
+        $this->getCart();
+        $this->iShouldBeInformedThatCartIsNoLongerAvailable();
     }
 
     /**
@@ -974,7 +975,7 @@ final class CheckoutContext implements Context
 
         Assert::same($response->getStatusCode(), 404);
 
-        Assert::same($this->responseChecker->getResponseContent($response)['message'], 'Not Found');
+        Assert::same($this->responseChecker->getResponseContent($response)['hydra:description'], 'Not Found');
     }
 
     /**
