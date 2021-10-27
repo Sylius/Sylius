@@ -161,6 +161,7 @@
     },
     "conflict": {
         "api-platform/core": "^2.6",
+        "doctrine/dbal": "^3",
         "doctrine/doctrine-bundle": "2.3.0",
         "doctrine/orm": "^2.10.0",
         "jms/serializer-bundle": "3.9.0",
