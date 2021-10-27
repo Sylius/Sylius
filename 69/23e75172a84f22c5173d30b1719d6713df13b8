@@ -1,0 +1,58 @@
+---------------------------------------------------------------------------
+
+by 4c0n at 2021-10-21T13:49:43Z
+
+@Prometee Wouldn't it be better to add a conflict to the conflict section and document it in `CONFLICTS.md`?
+If not, why version `2.6` and not the currently maintained version `2.13`?
+
+https://github.com/Sylius/Sylius/blob/1.9/CONFLICTS.md
+
+---------------------------------------------------------------------------
+
+by Prometee at 2021-10-21T14:02:32Z
+
+@4c0n yes you are right it will be better to know when and why to remove it one day.
+About the version, I take advise from this comment : https://github.com/Sylius/Sylius/issues/13211#issuecomment-945615575
+Can you test the package version you suggested, I'l update the PR if it's the case.
+
+---------------------------------------------------------------------------
+
+by 4c0n at 2021-10-21T14:14:01Z
+
+@Prometee If you use `^2.6` I think it would resolve to the latest minor version of major version 2 anyway, so even if you use `^2.6` you are already getting `2.13.4` (https://packagist.org/packages/doctrine/dbal#2.13.4) unless there is a lock file stating otherwise. Was just wondering if there was a specific reason to specify that version. So I guess there's not much of a point testing it, especially if you are going to change it to a conflict.
+
+Hope this can get resolved soon, it's causing a lot of extra work for us all, thanks for taking charge. :smiley:
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2021-10-21T15:34:39Z
+
+@4c0n @Prometee  I think that the minimum version should be the same as the one from `doctrine/orm`, because that's where Sylius gets `doctrine/dbal`. Sylius 1.9 requires `doctrine/orm:^2.7`, which in turn requires `doctrine/dbal:^2.9.3`, so that should be the minimum requirement in Sylius too.  WDYT?
+
+---------------------------------------------------------------------------
+
+by 4c0n at 2021-10-21T16:10:50Z
+
+@vvasiloi So ^2.7 can/will resolve to https://github.com/doctrine/orm/blob/f346379c7bf39a9f46771cfd9043e0eb2dd98793/composer.json#L26 (https://github.com/doctrine/orm/blob/2.10.1/composer.json)
+especially without lock file. Which in turn has the problem of also allowing the dbal version with the issue at hand.
+
+So specifying the conflict on 3.x versions solves the problem and still allows for all the other versions of dbal to be installed.
+Unless this package directly uses dbal somehow/somewhere it should not be listed as a direct dependency. If that was the case I think it would make sense what you're suggesting :smiley:
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2021-10-21T16:25:22Z
+
+@4c0n There shouldn't be an issue if Sylius requires `doctrine/dbal ^2.9.3`, which is the requirement for `doctrine/orm 2.7.0`, which in turn is the current minimum requirement in Sylius. A conflict with `doctrine/dbal >= 3` is much better though.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2021-10-21T16:27:29Z
+
+Either way, it's better to eventually add an explicit requirement to `doctrine/dbal` in Sylius.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-10-27T12:26:27Z
+
+Thanks, Francis! :1st_place_medal:
