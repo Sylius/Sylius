@@ -20,11 +20,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class RequestBasedLocaleContext implements LocaleContextInterface
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    /** @var LocaleProviderInterface */
-    private $localeProvider;
+    private LocaleProviderInterface $localeProvider;
 
     public function __construct(RequestStack $requestStack, LocaleProviderInterface $localeProvider)
     {

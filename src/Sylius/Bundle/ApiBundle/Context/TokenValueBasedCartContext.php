@@ -23,14 +23,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /** @experimental */
 final class TokenValueBasedCartContext implements CartContextInterface
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /** @var string */
-    private $newApiRoute;
+    private string $newApiRoute;
 
     public function __construct(
         RequestStack $requestStack,

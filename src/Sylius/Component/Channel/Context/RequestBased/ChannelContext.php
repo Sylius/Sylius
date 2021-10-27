@@ -21,11 +21,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class ChannelContext implements ChannelContextInterface
 {
-    /** @var RequestResolverInterface */
-    private $requestResolver;
+    private RequestResolverInterface $requestResolver;
 
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
     public function __construct(RequestResolverInterface $requestResolver, RequestStack $requestStack)
     {
