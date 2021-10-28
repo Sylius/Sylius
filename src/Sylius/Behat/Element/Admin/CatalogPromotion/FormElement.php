@@ -35,6 +35,11 @@ final class FormElement extends Element implements FormElementInterface
         $this->getElement('description', ['%localeCode%' => $localeCode])->setValue($description);
     }
 
+    public function prioritizeIt(int $priority): void
+    {
+        $this->getElement('priority')->setValue($priority);
+    }
+
     public function changeEnableTo(bool $enabled): void
     {
         $this->getElement('enabled')->setValue($enabled);

@@ -115,6 +115,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I set its priority to :priority
+     */
+    public function iSetItsPriorityTo(int $priority): void
+    {
+        $this->formElement->prioritizeIt($priority);
+    }
+
+    /**
      * @When I specify its label as :label in :localeCode
      */
     public function iSpecifyItsLabelAsIn(string $label, string $localeCode): void
@@ -499,6 +507,17 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['name' => $name, 'code' => $code]),
             sprintf('Cannot find catalog promotions with code "%s" and name "%s" in the list', $code, $name)
+        );
+    }
+
+    /**
+     * @Then it should have priority equal to :priority
+     */
+    public function itShouldHavePriorityEqualTo(int $priority): void
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['priority' => $priority]),
+            sprintf('Cannot find catalog promotions with priority "%d"', $priority)
         );
     }
 

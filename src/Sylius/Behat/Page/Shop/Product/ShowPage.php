@@ -121,6 +121,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return explode(' - ', $this->getElement('catalog_promotion')->getText())[0];
     }
 
+    public function getCatalogPromotionNames(): string
+    {
+        // TODO: Get all promotion names
+    }
+
     public function getCurrentUrl(): string
     {
         return $this->getDriver()->getCurrentUrl();

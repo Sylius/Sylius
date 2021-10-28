@@ -20,4 +20,4 @@ Feature: Browsing catalog promotions
         And it should reduce price by "30%"
         And it should apply on "PHP T-shirt" variant
         And it should start at "2021-11-10" and end at "2022-01-08"
-        And it should have priority equal to 10
+        And its priority should be 1200

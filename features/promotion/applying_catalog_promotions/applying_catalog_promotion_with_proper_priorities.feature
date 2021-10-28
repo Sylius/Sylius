@@ -6,11 +6,9 @@ Feature: Applying catalog promotion with proper priorities
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store classifies its products as "Clothes" and "Dishes"
         And the store has a "T-Shirt" configurable product
-        And this product belongs to "Clothes"
         And this product has "PHP T-Shirt" variant priced at "$1000.00"
-        And there is a catalog promotion "Clothes sale" with priority 10 that reduces price by "30%" and applies on "Clothes" taxon
+        And there is a catalog promotion "Clothes sale" with priority 10 that reduces price by "30%" and applies on "PHP T-Shirt" variant
         And there is a catalog promotion "Winter sale" with priority 100 that reduces price by "50%" and applies on "PHP T-Shirt" variant
         And it applies also on "PHP T-Shirt" variant
 
