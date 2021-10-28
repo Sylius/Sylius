@@ -109,6 +109,25 @@ final class ProductVariantContext implements Context
     }
 
     /**
+     * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" and "([^"]+)" promotions$/
+     */
+    public function iShouldSeeVariantIsDiscountedFromToWithPromotions(
+        ProductVariantInterface $variant,
+        int $originalPrice,
+        int $price,
+        string $promotionName
+    ): void {
+        $content = $this->findVariant($variant);
+
+        $appliedPromotions = array_values($content['appliedPromotions']);
+
+        Assert::same($content['price'], $price);
+        Assert::same($content['originalPrice'], $originalPrice);
+        Assert::same(['en_US' => ['name' => $promotionName, 'description' => $promotionName . ' description']], $appliedPromotions[0]);
+        Assert::same(['en_US' => ['name' => $promotionName, 'description' => $promotionName . ' description']], $appliedPromotions[1]);
+    }
+
+    /**
      * @Then /^the visitor should(?:| still) see that the ("[^"]+" variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/
      */
     public function theVisitorShouldSeeThatTheVariantIsDiscountedWithPromotion(

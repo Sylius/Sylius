@@ -22,4 +22,4 @@ Feature: Browsing catalog promotions
         And it should apply on "PHP T-Shirt" variant
         And it should apply on "T-Shirt" product
         And it should start at "2021-11-10" and end at "2022-01-08"
-        And it should have priority equal to 10
+        And its priority should be 1200

@@ -353,6 +353,35 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
+     * @Given /^there is a catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
+     */
+    public function thereIsACatalogPromotionWithPriorityThatReducesPriceByAndAppliesOnVarian(
+        string $name,
+        int $priority,
+        float $discount,
+        ProductVariantInterface $variant
+    ): void {
+        $catalogPromotion = $this->createCatalogPromotion(
+            $name,
+            null,
+            [],
+            [[
+                'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
+                'configuration' => ['variants' => [$variant->getCode()]],
+            ]],
+            [[
+                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'configuration' => ['amount' => $discount],
+            ]],
+            $priority
+        );
+
+        $this->entityManager->flush();
+
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
+    /**
      * @When the :catalogPromotion catalog promotion is no longer available
      */
     public function theAdministratorMakesThisCatalogPromotionUnavailableInTheChannel(
@@ -407,6 +436,17 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
+     * @Given /^(its) priority is ([^"]+)$/
+     */
+    public function theCatalogPromotionPriorityIs(CatalogPromotionInterface $catalogPromotion, int $priority): void
+    {
+        $catalogPromotion->setPriority($priority);
+
+        $this->entityManager->flush();
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
+    /**
      * @Given the catalog promotion :catalogPromotion is currently being processed
      */
     public function theCatalogPromotionIsCurrentlyBeingProcessed(CatalogPromotionInterface $catalogPromotion): void
@@ -422,7 +462,8 @@ final class CatalogPromotionContext implements Context
         ?string $code = null,
         array $channels = [],
         array $scopes = [],
-        array $actions = []
+        array $actions = [],
+        int $priority = null
     ): CatalogPromotionInterface {
         if (empty($channels) && $this->sharedStorage->has('channel')) {
             $channels = [$this->sharedStorage->get('channel')];
@@ -435,7 +476,8 @@ final class CatalogPromotionContext implements Context
             'channels' => $channels,
             'actions' => $actions,
             'scopes' => $scopes,
-            'description' => $name . ' description'
+            'description' => $name . ' description',
+            $priority
         ]);
 
         $this->entityManager->persist($catalogPromotion);

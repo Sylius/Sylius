@@ -17,4 +17,4 @@ Feature: Browsing catalog promotions
         Then there should be 2 catalog promotions on the list
         And the catalog promotions named "Summer sale" and "Winter sale" should be in the registry
         And the catalog promotion named "Winter sale" should operate between "2021-11-10" and "2022-01-08"
-        And its priority should be 100
+        And it should have priority equal to 10
