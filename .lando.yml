@@ -21,13 +21,12 @@ services:
             - '8080:8080'
         run_as_root:
             - lando/scripts/entrypoint.sh
-            - cp lando/files/.env .
             - apt-get update -y
-            # to run behat JS
-            - curl -sS https://get.symfony.com/cli/installer | bash
-            - mv /root/.symfony/bin/symfony /usr/local/bin/symfony
-            - symfony server:ca:install
-            - APP_ENV=test symfony server:start --port=8080 --dir=public --allow-http --force-php-discovery -d
+#            uncomment to run behat JS
+#            - curl -sS https://get.symfony.com/cli/installer | bash
+#            - mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+#            - symfony server:ca:install
+#            - APP_ENV=test symfony server:start --port=8080 --dir=public --allow-http --force-php-discovery -d
         overrides:
             environment:
                 LANDO_HOST_IP: "host.docker.internal"
@@ -36,19 +35,21 @@ services:
                 PHP_INI_XDEBUG__REMOTE_PORT: "9003"
             extra_hosts:
                 - ${LANDO_HOST_IP_DEV:-host}:host-gateway
-    # to run behat JS
-    chrome:
-        host: chrome
-        portforward: true
-        type: compose
-        services:
-            image: alpeware/chrome-headless-trunk
-            command: /usr/bin/google-chrome-unstable \
-                --disable-gpu --headless --no-sandbox --window-size=1440,900 \
-                --remote-debugging-address=0.0.0.0 \
-                --remote-debugging-port=9222 --user-data-dir=/data
-            ports:
-                - '9222:9222'
+    node:
+        type: node
+#    uncomment to run behat JS
+#    chrome:
+#        host: chrome
+#        portforward: true
+#        type: compose
+#        services:
+#            image: alpeware/chrome-headless-trunk
+#            command: /usr/bin/google-chrome-unstable \
+#                --disable-gpu --headless --no-sandbox --window-size=1440,900 \
+#                --remote-debugging-address=0.0.0.0 \
+#                --remote-debugging-port=9222 --user-data-dir=/data
+#            ports:
+#                - '9222:9222'
 
 tooling:
     behat:
@@ -67,3 +68,7 @@ tooling:
         service: appserver
         cmd: rm -fr var/cache
         description: Forcefully Clears cache
+    yarn:
+        service: node
+        cmd: yarn
+        description: run yarn commands
