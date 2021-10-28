@@ -15,13 +15,14 @@ services:
             database: sylius_dev
         host: database
     appserver:
-        ports: 
+        # for behat config
+        host: appserver
+        ports:
             - '8080:8080'
-        run_as_root: 
+        run_as_root:
             - lando/scripts/entrypoint.sh
             - cp lando/files/.env .
             - apt-get update -y
-            - apt-get install vim -y
             # to run behat JS
             - curl -sS https://get.symfony.com/cli/installer | bash
             - mv /root/.symfony/bin/symfony /usr/local/bin/symfony
@@ -35,12 +36,6 @@ services:
                 PHP_INI_XDEBUG__REMOTE_PORT: "9003"
             extra_hosts:
                 - ${LANDO_HOST_IP_DEV:-host}:host-gateway
-    blackfire:
-        type: blackfire
-        server_id: bfb278db-e405-417e-b6b0-80e45b4ed25c
-        server_token: 4dde45f62add612b51f5b2cf76671e273d054e58c5ed87a2f7c89832af2183b4
-        client_id: 50febe25-ce76-43ef-b77c-c48033a7e4e7
-        client_token: cb5ad6f4083547cc74ad2f7bc30b89f7eb2fdc3e2b177302d5df04cd19c9e3d7
     # to run behat JS
     chrome:
         host: chrome
@@ -72,7 +67,3 @@ tooling:
         service: appserver
         cmd: rm -fr var/cache
         description: Forcefully Clears cache
-    blackfire:
-        service: appserver
-    blackfire-player:
-        service: appserver
