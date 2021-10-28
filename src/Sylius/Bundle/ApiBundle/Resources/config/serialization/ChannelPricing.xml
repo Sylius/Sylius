@@ -33,5 +33,10 @@
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:update</group>
         </attribute>
+
+        <attribute name="minimumPrice">
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:update</group>
+        </attribute>
     </class>
 </serializer>

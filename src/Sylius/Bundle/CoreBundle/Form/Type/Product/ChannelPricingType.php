@@ -51,6 +51,11 @@ final class ChannelPricingType extends AbstractResourceType
                 'required' => false,
                 'currency' => $options['channel']->getBaseCurrency()->getCode(),
             ])
+            ->add('minimumPrice', MoneyType::class, [
+                'label' => 'sylius.ui.minimum_price',
+                'required' => false,
+                'currency' => $options['channel']->getBaseCurrency()->getCode(),
+            ])
         ;
 
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($options): void {

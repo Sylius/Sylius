@@ -89,3 +89,13 @@ Feature: Adding a new product variant
         Then I should be notified that it has been successfully created
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should appear in the store
         And the variant with code "VODKA_WYBOROWA_PREMIUM" should be priced at $0.00 for channel "United States"
+
+    @ui
+    Scenario: Adding a new product variant with minimum price
+        When I want to create a new variant of this product
+        And I specify its code as "VODKA_WYBOROWA"
+        And I set its minimum price to "$0.00" for "United States" channel
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should appear in the store
+        And the variant with code "VODKA_WYBOROWA_PREMIUM" should be priced at $0.00 for channel "United States"
