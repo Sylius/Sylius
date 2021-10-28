@@ -11,6 +11,7 @@ Feature: Browsing catalog promotions
         And there is a catalog promotion "Winter sale" available in "Web-US" channel that reduces price by "30%" and applies on "PHP T-shirt" variant
         And it applies also on "T-Shirt" product
         And the catalog promotion "Winter sale" operates between "2021-11-10" and "2022-01-08"
+        And its priority is 1200
         And I am logged in as an administrator
 
     @api @ui
@@ -21,3 +22,4 @@ Feature: Browsing catalog promotions
         And it should apply on "PHP T-Shirt" variant
         And it should apply on "T-Shirt" product
         And it should start at "2021-11-10" and end at "2022-01-08"
+        And it should have priority equal to 10
