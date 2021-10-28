@@ -8,6 +8,7 @@ Feature: Browsing catalog promotions
         Given the store operates on a single channel in "United States"
         And there are catalog promotions named "Summer sale" and "Winter sale"
         And the catalog promotion "Winter sale" operates between "2021-11-10" and "2022-01-08"
+        And its priority is 100
         And I am logged in as an administrator
 
     @api @ui
@@ -16,3 +17,4 @@ Feature: Browsing catalog promotions
         Then there should be 2 catalog promotions on the list
         And the catalog promotions named "Summer sale" and "Winter sale" should be in the registry
         And the catalog promotion named "Winter sale" should operate between "2021-11-10" and "2022-01-08"
+        And its priority should be 100
