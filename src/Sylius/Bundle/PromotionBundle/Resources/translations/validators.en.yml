@@ -7,6 +7,8 @@ sylius:
             unique: The catalog promotion with given code already exists.
             regex: Catalog promotion code can only be comprised of letters, numbers, dashes and underscores.
             not_blank: Please enter catalog promotion code.
+        date:
+            greater_than_start_date: End date can not be before start date.
         name:
             max_length: Catalog promotion name must not be longer than {{ limit }} characters.
             min_length: Catalog promotion name must be at least {{ limit }} characters long.

@@ -21,16 +21,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use ChecksCodeImmutability;
 
-    public function isStartDateDisabled(): bool
-    {
-        return 'disabled' === $this->getElement('start_date')->getAttribute('disabled');
-    }
-
-    public function isEndDateDisabled(): bool
-    {
-        return 'disabled' === $this->getElement('start_date')->getAttribute('disabled');
-    }
-
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
@@ -40,8 +30,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_catalog_promotion_code',
-            'end_date' => '#sylius_catalog_promotion_endDate_date',
-            'start_date' => '#sylius_catalog_promotion_startDate_date',
         ]);
     }
 }

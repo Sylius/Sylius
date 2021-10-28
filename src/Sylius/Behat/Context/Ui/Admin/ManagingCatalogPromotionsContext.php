@@ -189,6 +189,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I( try) change its end date to :endDate
+     */
+    public function iChangeItsEndDateTo(string $endDate): void
+    {
+        $this->formElement->specifyEndDate(new \DateTime($endDate));
+    }
+
+    /**
      * @When /^I add(?:| another) scope that applies on ("[^"]+" variant)$/
      * @When /^I add scope that applies on ("[^"]+" variant) and ("[^"]+" variant)$/
      * @When /^I add scope that applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/
@@ -733,15 +741,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should not be able to edit its start and end date
-     */
-    public function iShouldNotBeAbleToEditItsStartAndEndDate(): void
-    {
-        Assert::true($this->updatePage->isStartDateDisabled());
-        Assert::true($this->updatePage->isEndDateDisabled());
-    }
-
-    /**
      * @Then I should be notified that at least 1 variant is required
      */
     public function iShouldBeNotifiedThatAtLeast1VariantIsRequired(): void
@@ -799,5 +798,13 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::contains($this->showPage->getStartDate(), $startDate);
         Assert::contains($this->showPage->getEndDate(), $endDate);
+    }
+
+    /**
+     * @Then I should get information that the end date can not be before start date
+     */
+    public function iShouldGetInformationThatTheEndDateCanNotBeBeforeStartDate(): void
+    {
+        Assert::same($this->createPage->getValidationMessage('endDate'), 'End date can not be before start date.');
     }
 }

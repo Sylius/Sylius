@@ -42,6 +42,13 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="endDate">
+            <constraint name="GreaterThan">
+                <option name="propertyPath">startDate</option>
+                <option name="message">sylius.catalog_promotion.date.greater_than_start_date</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
         <property name="state">
             <constraint name="NotEqualTo">
                 <option name="value">processing</option>

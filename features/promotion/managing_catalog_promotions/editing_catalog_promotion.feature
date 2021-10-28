@@ -48,12 +48,6 @@ Feature: Editing catalog promotion
         When I want to modify a catalog promotion "Christmas sale"
         Then I should not be able to edit its code
 
-    @api @ui
-    Scenario: Being unable to edit catalog promotion dates
-        Given the catalog promotion "Christmas sale" operates between "2021-12-20" and "2021-12-30"
-        When I want to modify a catalog promotion "Christmas sale"
-        Then I should not be able to edit its start and end date
-
     @api @ui @javascript
     Scenario: Editing catalog promotion variant scope
         When I edit "Christmas sale" catalog promotion to be applied on "Kotlin T-shirt" variant
@@ -81,3 +75,11 @@ Feature: Editing catalog promotion
         When I try to rename the "Christmas sale" catalog promotion to "Black Friday"
         Then I should not be able to edit it due to wrong state
         And this catalog promotion name should still be "Christmas sale"
+
+    @api @ui
+    Scenario: Being unable to change end date to earlier then current date
+        Given the catalog promotion "Christmas sale" operates between "2021-12-20" and "2021-12-30"
+        When I want to modify a catalog promotion "Christmas sale"
+        And I try change its end date to "2021-12-15"
+        And I save my changes
+        Then I should get information that the end date can not be before start date
