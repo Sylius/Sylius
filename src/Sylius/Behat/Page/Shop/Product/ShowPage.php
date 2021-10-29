@@ -121,9 +121,13 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return explode(' - ', $this->getElement('catalog_promotion')->getText())[0];
     }
 
-    public function getCatalogPromotionNames(): string
+    public function getCatalogPromotionNames(): array
     {
-        // TODO: Get all promotion names
+        $catalogPromotions = $this->getDocument()->findAll('css', '.promotion_label');
+
+        return array_map(function (NodeElement $element): string {
+            return $element->getText();
+        }, $catalogPromotions);
     }
 
     public function getCurrentUrl(): string
@@ -330,7 +334,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'association' => '[data-test-product-association="%associationName%"]',
             'attributes' => '[data-test-product-attributes]',
             'average_rating' => '[data-test-average-rating]',
-            'catalog_promotion' => '#promotion_label',
+            'catalog_promotion' => '.promotion_label',
             'current_variant_input' => '[data-test-product-variants] td input:checked',
             'details' => '[data-tab="details"]',
             'main_image' => '[data-test-main-image]',

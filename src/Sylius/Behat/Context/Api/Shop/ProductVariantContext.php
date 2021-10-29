@@ -111,7 +111,8 @@ final class ProductVariantContext implements Context
         ProductVariantInterface $variant,
         int $originalPrice,
         int $price,
-        string $promotionName
+        string $firstPromotionName,
+        string $secondPromotionName
     ): void {
         $content = $this->findVariant($variant);
 
@@ -119,8 +120,8 @@ final class ProductVariantContext implements Context
 
         Assert::same($content['price'], $price);
         Assert::same($content['originalPrice'], $originalPrice);
-        Assert::same(['en_US' => ['name' => $promotionName, 'description' => $promotionName . ' description']], $appliedPromotions[0]);
-        Assert::same(['en_US' => ['name' => $promotionName, 'description' => $promotionName . ' description']], $appliedPromotions[1]);
+        Assert::same(['en_US' => ['name' => $firstPromotionName, 'description' => $firstPromotionName . ' description']], $appliedPromotions[0]);
+        Assert::same(['en_US' => ['name' => $secondPromotionName, 'description' => $secondPromotionName . ' description']], $appliedPromotions[1]);
     }
 
     /**
