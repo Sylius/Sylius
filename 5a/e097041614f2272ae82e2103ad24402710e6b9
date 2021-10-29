@@ -1,0 +1,13 @@
+---------------------------------------------------------------------------
+
+by mynameisbogdan at 2021-10-29T12:46:25Z
+
+`liip/imagine-bundle` `v2.7.0` is currently broken, resolving to a broken webp link even if you have webp generation disabled.
+
+I would add a conflict until a fix it's released.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-10-29T14:09:52Z
+
+Thank you, Mateusz! :tada:
