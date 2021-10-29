@@ -45,6 +45,12 @@
             <group>admin:catalog_promotion:create</group>
         </attribute>
 
+        <attribute name="priority">
+            <group>admin:catalog_promotion:create</group>
+            <group>admin:catalog_promotion:update</group>
+            <group>admin:catalog_promotion:read</group>
+        </attribute>
+
         <attribute name="state">
             <group>admin:catalog_promotion:read</group>
         </attribute>

@@ -1,5 +1,5 @@
 @managing_catalog_promotions
-Feature: Browsing catalog promotions
+Feature: Seeing catalog promotion's details
     In order to have an overview of one of defined catalog promotions
     As an Administrator
     I want to be able to see its details

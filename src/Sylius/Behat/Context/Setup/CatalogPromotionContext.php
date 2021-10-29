@@ -419,7 +419,7 @@ final class CatalogPromotionContext implements Context
             'actions' => $actions,
             'scopes' => $scopes,
             'description' => $name . ' description',
-            $priority
+            'priority' => $priority,
         ]);
 
         $this->entityManager->persist($catalogPromotion);
