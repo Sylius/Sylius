@@ -526,9 +526,10 @@ final class ProductContext implements Context
         string $secondPromotionName
     ): void {
         $this->showPage->selectVariant($variant->getName());
+        $catalogPromotionNames = $this->showPage->getCatalogPromotionNames();
 
-        Assert::same($this->showPage->getCatalogPromotionNames()[0], $firstPromotionName);
-        Assert::same($this->showPage->getCatalogPromotionNames()[1], $secondPromotionName);
+        Assert::contains($catalogPromotionNames[0], $firstPromotionName);
+        Assert::contains($catalogPromotionNames[1], $secondPromotionName);
 
         Assert::same($this->showPage->getPrice(), $price);
         Assert::same($this->showPage->getOriginalPrice(), $originalPrice);

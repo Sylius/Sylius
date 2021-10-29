@@ -19,6 +19,7 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -468,6 +469,8 @@ final class CatalogPromotionContext implements Context
         if (empty($channels) && $this->sharedStorage->has('channel')) {
             $channels = [$this->sharedStorage->get('channel')];
         }
+
+        $code = $code ?? StringInflector::nameToCode($name);
 
         /** @var CatalogPromotionInterface $catalogPromotion */
         $catalogPromotion = $this->catalogPromotionExampleFactory->create([

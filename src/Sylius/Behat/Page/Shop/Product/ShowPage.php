@@ -134,9 +134,13 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return false;
     }
 
-    public function getCatalogPromotionNames(): string
+    public function getCatalogPromotionNames(): array
     {
-        // TODO: Get all promotion names
+        $catalogPromotions = $this->getDocument()->findAll('css', '.promotion_label');
+
+        return array_map(function (NodeElement $element): string {
+            return $element->getText();
+        }, $catalogPromotions);
     }
 
     public function getCurrentUrl(): string
