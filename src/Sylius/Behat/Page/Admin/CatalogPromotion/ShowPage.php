@@ -38,6 +38,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getElement('end_date')->getText();
     }
 
+    public function getPriority(): int
+    {
+        return (int) $this->getElement('priority')->getText();
+    }
+
     public function hasActionWithPercentageDiscount(string $amount): bool
     {
         $amountsElements = $this->getDocument()->findAll('css', '[data-test-action-amount]');
@@ -67,6 +72,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return array_merge(parent::getDefinedElements(), [
             'end_date' => '[data-test-end-date]',
             'name' => '[data-test-name]',
+            'priority' => '[data-test-priority]',
             'start_date' => '[data-test-start-date]',
         ]);
     }

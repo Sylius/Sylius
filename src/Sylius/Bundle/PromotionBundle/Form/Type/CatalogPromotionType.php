@@ -21,6 +21,7 @@ use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -52,7 +53,11 @@ final class CatalogPromotionType extends AbstractResourceType
                 'label' => 'sylius.form.catalog_promotion.translations',
             ])
             ->add('enabled', CheckboxType::class, [
-                'label' => 'sylius.form.catalog_promotion.enabled'
+                'label' => 'sylius.form.catalog_promotion.enabled',
+            ])
+            ->add('priority', NumberType::class, [
+                'label' => 'sylius.form.catalog_promotion.priority',
+                'required' => false,
             ])
             ->add('scopes', CollectionType::class, [
                 'label' => 'sylius.ui.scopes',

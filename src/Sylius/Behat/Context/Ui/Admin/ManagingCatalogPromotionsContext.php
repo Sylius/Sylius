@@ -819,4 +819,12 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::contains($this->showPage->getStartDate(), $startDate);
         Assert::contains($this->showPage->getEndDate(), $endDate);
     }
+
+    /**
+     * @Then its priority should be :priority
+     */
+    public function itsPriorityShouldBe(int $priority): void
+    {
+        Assert::same($this->showPage->getPriority(), $priority);
+    }
 }
