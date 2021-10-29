@@ -1169,17 +1169,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that priority should be a number
-     */
-    public function iShouldBeNotifiedThaPriorityShouldBeNumber(): void
-    {
-        Assert::contains(
-            $this->responseChecker->getError($this->client->getLastResponse()),
-            'Provided configuration contains errors. Priority should be a number.'
-        );
-    }
-
-    /**
      * @Then I should be notified that at least 1 variant is required
      */
     public function iShouldBeNotifiedThatAtLeast1VariantIsRequired(): void

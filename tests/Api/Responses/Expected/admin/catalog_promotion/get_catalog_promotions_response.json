@@ -12,6 +12,7 @@
             "startDate": null,
             "endDate": null,
             "state": "inactive",
+            "priority": 0,
             "channels": [
                 "\/api\/v2\/admin\/channels\/WEB"
             ],
