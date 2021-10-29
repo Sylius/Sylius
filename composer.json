@@ -169,7 +169,8 @@
         "symfony/doctrine-bridge": "4.4.16",
         "symfony/polyfill-mbstring": "^1.22.0",
         "symfony/property-info": "4.4.22 || 5.2.7",
-        "symfony/serializer": "4.4.19 || 5.2.2"
+        "symfony/serializer": "4.4.19 || 5.2.2",
+        "liip/imagine-bundle": "^2.7"
     },
     "require-dev": {
         "ext-json": "*",
