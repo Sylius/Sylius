@@ -902,4 +902,12 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::same($this->createPage->getValidationMessage('endDate'), 'End date cannot be set before start date.');
     }
+
+    /**
+     * @Then its priority should be :priority
+     */
+    public function itsPriorityShouldBe(int $priority): void
+    {
+        Assert::same($this->showPage->getPriority(), $priority);
+    }
 }

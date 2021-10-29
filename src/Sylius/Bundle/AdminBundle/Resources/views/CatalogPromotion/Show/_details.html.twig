@@ -33,6 +33,10 @@
             </tr>
             {% endif %}
             <tr>
+                <td class="five wide"><strong class="gray text">{{ 'sylius.ui.priority'|trans }}</strong></td>
+                <td {{ sylius_test_html_attribute('priority') }}>{{ catalog_promotion.priority }}</td>
+            </tr>
+            <tr>
                 <td class="five wide"><strong class="gray text">{{ 'sylius.ui.channels'|trans }}</strong></td>
                 <td>
                     {% for channel in catalog_promotion.channels %}
