@@ -168,6 +168,33 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_does_not_create_a_catalog_promotion_with_end_date_earlier_than_start_date(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'catalog_promotion.yaml']);
+        $header = $this->getLoggedHeader();
+
+        $this->client->request(
+            'POST',
+            '/api/v2/admin/catalog-promotions',
+            [],
+            [],
+            $header,
+            json_encode([
+                'name' => 'calatog Promotion',
+                'code' => 'catalog_promotion',
+                'startDate' => '2021-11-04 10:42:00',
+                'endDate' => '2021-10-04 10:42:00'
+            ], JSON_THROW_ON_ERROR)
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/catalog_promotion/post_catalog_promotion_with_invalid_dates_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY
+        );
+    }
+
+    /** @test */
     public function it_does_not_create_a_catalog_promotion_with_invalid_scopes(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product_variant.yaml']);
