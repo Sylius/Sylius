@@ -313,7 +313,7 @@ final class CatalogPromotionContext implements Context
     /**
      * @Given /^there is a catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
      */
-    public function thereIsACatalogPromotionWithPriorityThatReducesPriceByAndAppliesOnVarian(
+    public function thereIsACatalogPromotionWithPriorityThatReducesPriceByAndAppliesOnVariant(
         string $name,
         int $priority,
         float $discount,
@@ -332,6 +332,36 @@ final class CatalogPromotionContext implements Context
                 'configuration' => ['amount' => $discount],
             ]],
             $priority
+        );
+
+        $this->entityManager->flush();
+
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
+    /**
+     * @Given /^there is (?:an|another) exclusive catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
+     */
+    public function thereIsAnExclusiveCatalogPromotionWithPriorityThatReducesPriceByAndAppliesOnVariant(
+        string $name,
+        int $priority,
+        float $discount,
+        ProductVariantInterface $variant
+    ): void {
+        $catalogPromotion = $this->createCatalogPromotion(
+            $name,
+            null,
+            [],
+            [[
+                'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
+                'configuration' => ['variants' => [$variant->getCode()]],
+            ]],
+            [[
+                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'configuration' => ['amount' => $discount],
+            ]],
+            $priority,
+            true
         );
 
         $this->entityManager->flush();
@@ -408,7 +438,8 @@ final class CatalogPromotionContext implements Context
         array $channels = [],
         array $scopes = [],
         array $actions = [],
-        int $priority = null
+        int $priority = null,
+        bool $exclusive = false
     ): CatalogPromotionInterface {
         if (empty($channels) && $this->sharedStorage->has('channel')) {
             $channels = [$this->sharedStorage->get('channel')];
@@ -425,6 +456,7 @@ final class CatalogPromotionContext implements Context
             'scopes' => $scopes,
             'description' => $name . ' description',
             'priority' => $priority,
+            'exclusive' => $exclusive,
         ]);
 
         $this->entityManager->persist($catalogPromotion);
