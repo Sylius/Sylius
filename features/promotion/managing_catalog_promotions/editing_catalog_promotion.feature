@@ -77,9 +77,9 @@ Feature: Editing catalog promotion
         And this catalog promotion name should still be "Christmas sale"
 
     @api @ui
-    Scenario: Being unable to change end date to earlier then current date
+    Scenario: Being unable to change end date to earlier then start date
         Given the catalog promotion "Christmas sale" operates between "2021-12-20" and "2021-12-30"
         When I want to modify a catalog promotion "Christmas sale"
-        And I try change its end date to "2021-12-15"
+        And I try to change its end date to "2021-12-15"
         And I save my changes
-        Then I should get information that the end date can not be before start date
+        Then I should get information that the end date cannot be set before start date

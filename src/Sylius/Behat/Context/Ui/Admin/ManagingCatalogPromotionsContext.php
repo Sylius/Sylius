@@ -189,7 +189,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I( try) change its end date to :endDate
+     * @When I( try to) change its end date to :endDate
      */
     public function iChangeItsEndDateTo(string $endDate): void
     {
@@ -801,10 +801,10 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should get information that the end date can not be before start date
+     * @Then I should get information that the end date cannot be set before start date
      */
-    public function iShouldGetInformationThatTheEndDateCanNotBeBeforeStartDate(): void
+    public function iShouldGetInformationThatTheEndDateCannotBeSetBeforeStartDate(): void
     {
-        Assert::same($this->createPage->getValidationMessage('endDate'), 'End date can not be before start date.');
+        Assert::same($this->createPage->getValidationMessage('endDate'), 'End date cannot be set before start date.');
     }
 }

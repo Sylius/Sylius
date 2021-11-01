@@ -71,7 +71,6 @@ final class AdminSecurityContext implements Context
 
     /**
      * @Given I have been logged out from administration
-     * @When I am logged out
      */
     public function iHaveBeenLoggedOutFromAdministration()
     {

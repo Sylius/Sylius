@@ -2,11 +2,11 @@
     "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
     "@type": "ConstraintViolationList",
     "hydra:title": "An error occurred",
-    "hydra:description": "endDate: End date can not be before start date.",
+    "hydra:description": "endDate: End date cannot be set before start date.",
     "violations": [
         {
             "propertyPath": "endDate",
-            "message": "End date can not be before start date.",
+            "message": "End date cannot be set before start date.",
             "code": @string@
         }
     ]
