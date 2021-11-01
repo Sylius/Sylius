@@ -131,7 +131,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I set its minimum price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
-    public function iSetItsMinimumPriceTo(string $price, ChannelInterface $channel)
+    public function iSetItsMinimumPriceTo(string $price, ChannelInterface $channel): void
     {
         $this->createPage->specifyMinimumPrice($price, $channel);
     }
@@ -237,7 +237,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then /^the (variant with code "[^"]+") should have minimum price (?:€|£|\$)([^"]+) for (channel "([^"]+)")$/
      */
-    public function theVariantWithCodeShouldHaveMinimumPriceForChannel(ProductVariantInterface $productVariant, string $price, ChannelInterface $channel)
+    public function theVariantWithCodeShouldHaveMinimumPriceForChannel(ProductVariantInterface $productVariant, string $price, ChannelInterface $channel): void
     {
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
 

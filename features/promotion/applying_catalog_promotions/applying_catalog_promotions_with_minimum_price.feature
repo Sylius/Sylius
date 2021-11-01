@@ -8,7 +8,7 @@ Feature: Applying catalog promotions with minimum price
         Given the store operates on a single channel in "United States"
         And the store has a "T-Shirt" configurable product
         And this product has "PHP T-Shirt" variant priced at "$20.00"
-        And "PHP T-Shirt" variant has minimum price "$15.00" in "United States" channel
+        And the "PHP T-Shirt" variant has minimum price "$15.00" in "United States" channel
         And there is a catalog promotion "Winter sale" that reduces price by "80%" and applies on "PHP T-Shirt" variant
 
     @api @ui

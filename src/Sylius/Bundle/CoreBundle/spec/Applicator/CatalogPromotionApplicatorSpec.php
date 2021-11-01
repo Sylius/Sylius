@@ -193,14 +193,14 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $appliedPromotionInformationFormatter->format($catalogPromotion)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
         $catalogPromotionAction->getConfiguration()->willReturn(['amount' => 0.3]);
 
-        $channelPricing->getPrice()->willReturn(1000);
+        $channelPricing->getPrice()->willReturn(900);
         $channelPricing->getMinimumPrice()->willReturn(900);
         $channelPricing->getOriginalPrice()->willReturn(900);
         $channelPricing->getChannelCode()->willReturn('WEB');
 
         $channelPricing->setOriginalPrice(Argument::any())->shouldNotBeCalled();
         $channelPricing->setPrice(Argument::any())->shouldNotBeCalled();
-        $channelPricing->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']])->shouldNotBeCalled();
+        $channelPricing->addAppliedPromotion(Argument::any())->shouldNotBeCalled();
 
         $this->applyOnChannelPricing($channelPricing, $catalogPromotion);
     }
