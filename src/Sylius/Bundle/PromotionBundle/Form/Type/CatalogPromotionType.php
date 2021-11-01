@@ -59,6 +59,10 @@ final class CatalogPromotionType extends AbstractResourceType
                 'label' => 'sylius.form.catalog_promotion.priority',
                 'required' => false,
             ])
+            ->add('exclusive', CheckboxType::class, [
+              'label' => 'sylius.form.catalog_promotion.exclusive',
+              'required' => false,
+            ])
             ->add('scopes', CollectionType::class, [
                 'label' => 'sylius.ui.scopes',
                 'entry_type' => CatalogPromotionScopeType::class,
