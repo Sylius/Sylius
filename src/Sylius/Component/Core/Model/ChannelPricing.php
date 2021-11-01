@@ -46,6 +46,9 @@ class ChannelPricing implements ChannelPricingInterface
     /** @var ?array */
     protected $appliedPromotions = [];
 
+    /** @var bool|null  */
+    protected $hasExclusiveCatalogPromotionApplied = false;
+
     public function __toString(): string
     {
         return (string) $this->getPrice();
@@ -135,5 +138,16 @@ class ChannelPricing implements ChannelPricingInterface
     public function clearAppliedPromotions(): void
     {
         $this->appliedPromotions = [];
+        $this->setExclusiveCatalogPromotionApplied(false);
+    }
+
+    public function hasExclusiveCatalogPromotionApplied(): bool
+    {
+        return $this->hasExclusiveCatalogPromotionApplied;
+    }
+
+    public function setExclusiveCatalogPromotionApplied(bool $exclusivePromotionApplied): void
+    {
+        $this->hasExclusiveCatalogPromotionApplied = $exclusivePromotionApplied;
     }
 }

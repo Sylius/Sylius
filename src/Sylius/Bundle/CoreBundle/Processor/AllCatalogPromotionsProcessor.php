@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Processor;
 
-use SM\Factory\FactoryInterface;
 use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 
 final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcessorInterface
 {
@@ -44,8 +43,34 @@ final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcess
         $this->catalogPromotionClearer->clear();
         $eligibleCatalogPromotions = $this->catalogPromotionsProvider->provide($this->defaultCriteria);
 
-        foreach ($eligibleCatalogPromotions as $catalogPromotion) {
+        $sortedCatalogPromotion = $this->sortWithPrioritiesAndExclusiveness($eligibleCatalogPromotions);
+
+        foreach ($sortedCatalogPromotion as $catalogPromotion) {
             $this->catalogPromotionProcessor->process($catalogPromotion);
         }
+    }
+
+    private function sortWithPrioritiesAndExclusiveness(array $catalogPromotions): array
+    {
+        usort(
+            $catalogPromotions,
+            function(CatalogPromotionInterface $a, CatalogPromotionInterface $b): int {
+                if (($a->isExclusive() && $b->isExclusive()) && ($a->getPriority() > $b->getPriority())) {
+                    return -1;
+                }
+
+                if (!$a->isExclusive() && !$b->isExclusive() && ($a->getPriority() > $b->getPriority())) {
+                    return -1;
+                }
+
+                if ($a->isExclusive() && !$b->isExclusive()) {
+                    return -1;
+                }
+
+                return 1;
+
+            });
+
+        return $catalogPromotions;
     }
 }

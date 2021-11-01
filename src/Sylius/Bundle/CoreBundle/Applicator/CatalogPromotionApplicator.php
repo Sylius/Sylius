@@ -77,6 +77,10 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
         float $discount,
         ChannelPricingInterface $channelPricing
     ): void {
+        if ($channelPricing->hasExclusiveCatalogPromotionApplied()) {
+            return;
+        }
+
         if ($channelPricing->getOriginalPrice() === null) {
             $channelPricing->setOriginalPrice($channelPricing->getPrice());
         }
@@ -93,6 +97,9 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
 
         $channelPricing->setPrice($price);
         $channelPricing->addAppliedPromotion($this->appliedPromotionInformationFormatter->format($catalogPromotion));
+        if ($catalogPromotion->isExclusive()) {
+            $channelPricing->setExclusiveCatalogPromotionApplied(true);
+        }
     }
 
     private function hasCatalogPromotionChannelWithCode(

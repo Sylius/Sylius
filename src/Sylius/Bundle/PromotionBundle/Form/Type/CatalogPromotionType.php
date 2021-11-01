@@ -69,6 +69,10 @@ final class CatalogPromotionType extends AbstractResourceType
                 'time_widget' => 'single_text',
                 'required' => false,
             ])
+            ->add('exclusive', CheckboxType::class, [
+              'label' => 'sylius.form.catalog_promotion.exclusive',
+              'required' => false,
+            ])
             ->add('scopes', CollectionType::class, [
                 'label' => 'sylius.ui.scopes',
                 'entry_type' => CatalogPromotionScopeType::class,

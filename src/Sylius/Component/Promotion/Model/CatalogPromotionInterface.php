@@ -38,6 +38,10 @@ interface CatalogPromotionInterface extends ResourceInterface, CodeAwareInterfac
 
     public function setPriority(int $priority): void;
 
+    public function isExclusive(): bool;
+
+    public function setExclusive(bool $exclusive): void;
+
     public function getState(): ?string;
 
     public function setState(?string $state): void;
