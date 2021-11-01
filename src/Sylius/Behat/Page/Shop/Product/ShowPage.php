@@ -133,6 +133,18 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         return false;
     }
+    
+    public function getCatalogPromotions(): array
+    {
+        $catalogPromotions = [];
+
+        /** @var NodeElement $catalogPromotion */
+        foreach ($this->getElement('applied_promotions')->findAll('css', '#promotion_label') as $catalogPromotion) {
+            $catalogPromotions[] = explode(' - ', $catalogPromotion->getText())[0];
+        }
+
+        return $catalogPromotions;
+    }
 
     public function getCatalogPromotionNames(): array
     {
@@ -344,6 +356,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'add_to_cart_button' => '[data-test-add-to-cart-button]',
+            'applied_promotions' => '#appliedPromotions',
             'association' => '[data-test-product-association="%associationName%"]',
             'attributes' => '[data-test-product-attributes]',
             'average_rating' => '[data-test-average-rating]',

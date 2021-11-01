@@ -60,12 +60,14 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
 
         $firstChannelPricing->getPrice()->willReturn(1000);
         $firstChannelPricing->getOriginalPrice()->willReturn(null);
+        $firstChannelPricing->getMinimumPrice()->willReturn(0);
         $firstChannelPricing->setOriginalPrice(1000)->shouldBeCalled();
         $firstChannelPricing->setPrice(700)->shouldBeCalled();
         $firstChannelPricing->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']])->shouldBeCalled();
 
         $secondChannelPricing->getPrice()->willReturn(1400);
         $secondChannelPricing->getOriginalPrice()->willReturn(null);
+        $secondChannelPricing->getMinimumPrice()->willReturn(0);
         $secondChannelPricing->setOriginalPrice(1400)->shouldBeCalled();
         $secondChannelPricing->setPrice(980)->shouldBeCalled();
         $secondChannelPricing->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']])->shouldBeCalled();
@@ -91,6 +93,7 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
 
         $channelPricing->getPrice()->willReturn(1000);
         $channelPricing->getOriginalPrice()->willReturn(2000);
+        $channelPricing->getMinimumPrice()->willReturn(0);
         $channelPricing->setOriginalPrice(Argument::any())->shouldNotBeCalled();
         $channelPricing->setPrice(500)->shouldBeCalled();
         $channelPricing->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']])->shouldBeCalled();
@@ -114,6 +117,7 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $catalogPromotionAction->getConfiguration()->willReturn(['amount' => 0.3]);
 
         $channelPricing->getPrice()->willReturn(1000);
+        $channelPricing->getMinimumPrice()->willReturn(0);
         $channelPricing->getOriginalPrice()->willReturn(null);
         $channelPricing->getChannelCode()->willReturn('WEB');
 
@@ -143,6 +147,60 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $channelPricing->setOriginalPrice(1000)->shouldNotBeCalled();
         $channelPricing->setPrice(700)->shouldNotBeCalled();
         $channelPricing->addAppliedPromotion(Argument::any())->shouldNotBeCalled();
+
+        $this->applyOnChannelPricing($channelPricing, $catalogPromotion);
+    }
+
+    function it_does_not_apply_catalog_promotion_below_minimum_price(
+        AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter,
+        CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionActionInterface $catalogPromotionAction,
+        ChannelPricingInterface $channelPricing,
+        ChannelInterface $channel
+    ): void {
+        $channel->getCode()->willReturn('WEB');
+
+        $catalogPromotion->getActions()->willReturn(new ArrayCollection([$catalogPromotionAction->getWrappedObject()]));
+        $catalogPromotion->getChannels()->willReturn(new ArrayCollection([$channel->getWrappedObject()]));
+
+        $appliedPromotionInformationFormatter->format($catalogPromotion)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
+        $catalogPromotionAction->getConfiguration()->willReturn(['amount' => 0.3]);
+
+        $channelPricing->getPrice()->willReturn(1000);
+        $channelPricing->getMinimumPrice()->willReturn(900);
+        $channelPricing->getOriginalPrice()->willReturn(null);
+        $channelPricing->getChannelCode()->willReturn('WEB');
+
+        $channelPricing->setOriginalPrice(1000)->shouldBeCalled();
+        $channelPricing->setPrice(900)->shouldBeCalled();
+        $channelPricing->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']])->shouldBeCalled();
+
+        $this->applyOnChannelPricing($channelPricing, $catalogPromotion);
+    }
+
+    function it_does_not_apply_catalog_promotion_if_product_variant_is_at_its_minimum_price(
+        AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter,
+        CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionActionInterface $catalogPromotionAction,
+        ChannelPricingInterface $channelPricing,
+        ChannelInterface $channel
+    ): void {
+        $channel->getCode()->willReturn('WEB');
+
+        $catalogPromotion->getActions()->willReturn(new ArrayCollection([$catalogPromotionAction->getWrappedObject()]));
+        $catalogPromotion->getChannels()->willReturn(new ArrayCollection([$channel->getWrappedObject()]));
+
+        $appliedPromotionInformationFormatter->format($catalogPromotion)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
+        $catalogPromotionAction->getConfiguration()->willReturn(['amount' => 0.3]);
+
+        $channelPricing->getPrice()->willReturn(1000);
+        $channelPricing->getMinimumPrice()->willReturn(900);
+        $channelPricing->getOriginalPrice()->willReturn(900);
+        $channelPricing->getChannelCode()->willReturn('WEB');
+
+        $channelPricing->setOriginalPrice(Argument::any())->shouldNotBeCalled();
+        $channelPricing->setPrice(Argument::any())->shouldNotBeCalled();
+        $channelPricing->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']])->shouldNotBeCalled();
 
         $this->applyOnChannelPricing($channelPricing, $catalogPromotion);
     }
