@@ -13,6 +13,8 @@ We're using full-stack Behavior-Driven-Development, with [phpspec](https://phpsp
 
 Enjoy being an eCommerce Developer again!
 
+![Sylius](docs/_images/readme-sylius.png)
+
 ⚙️ Installation
 --------------
 
