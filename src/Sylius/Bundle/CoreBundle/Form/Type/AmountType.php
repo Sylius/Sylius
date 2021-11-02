@@ -47,9 +47,7 @@ final class AmountType extends AbstractType
             ->setAllowedTypes('channel', [ChannelInterface::class])
 
             ->setDefaults([
-                'label' => static function (Options $options): string {
-                    return $options['channel']->getName();
-                },
+                'label' => static fn(Options $options): string => $options['channel']->getName(),
             ])
         ;
     }

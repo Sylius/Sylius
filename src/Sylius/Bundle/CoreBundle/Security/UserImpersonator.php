@@ -45,14 +45,14 @@ final class UserImpersonator implements UserImpersonatorInterface
             $token = new UsernamePasswordToken(
                 $user,
                 $this->firewallContextName,
-                array_map(/** @param object|string $role */ static function ($role): string { return (string) $role; }, $user->getRoles())
+                array_map(/** @param object|string $role */ static fn($role): string => (string) $role, $user->getRoles())
             );
         } else {
             $token = new UsernamePasswordToken(
                 $user,
                 $user->getPassword(),
                 $this->firewallContextName,
-                array_map(/** @param object|string $role */ static function ($role): string { return (string) $role; }, $user->getRoles())
+                array_map(/** @param object|string $role */ static fn($role): string => (string) $role, $user->getRoles())
             );
         }
 

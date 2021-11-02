@@ -73,22 +73,16 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('code', function (Options $options): string {
-                return StringInflector::nameToCode($options['name']);
-            })
+            ->setDefault('code', fn(Options $options): string => StringInflector::nameToCode($options['name']))
             ->setDefault('name', function (Options $options): string {
                 /** @var string $words */
                 $words = $this->faker->words(3, true);
 
                 return $words;
             })
-            ->setDefault('amount', function (Options $options): float {
-                return $this->faker->randomFloat(2, 0, 0.4);
-            })
+            ->setDefault('amount', fn(Options $options): float => $this->faker->randomFloat(2, 0, 0.4))
             ->setAllowedTypes('amount', 'float')
-            ->setDefault('included_in_price', function (Options $options): bool {
-                return $this->faker->boolean();
-            })
+            ->setDefault('included_in_price', fn(Options $options): bool => $this->faker->boolean())
             ->setAllowedTypes('included_in_price', 'bool')
             ->setDefault('calculator', 'default')
             ->setDefault('zone', LazyOption::randomOne($this->zoneRepository))

@@ -32,9 +32,7 @@ final class ChannelCollectionType extends AbstractType
     {
         $resolver->setDefaults([
             'entries' => $this->channelRepository->findAll(),
-            'entry_name' => function (ChannelInterface $channel) {
-                return $channel->getCode();
-            },
+            'entry_name' => fn(ChannelInterface $channel) => $channel->getCode(),
             'error_bubbling' => false,
         ]);
     }

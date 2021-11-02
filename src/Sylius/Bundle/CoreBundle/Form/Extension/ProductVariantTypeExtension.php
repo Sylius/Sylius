@@ -81,13 +81,11 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
 
             $event->getForm()->add('channelPricings', ChannelCollectionType::class, [
                 'entry_type' => ChannelPricingType::class,
-                'entry_options' => function (ChannelInterface $channel) use ($productVariant) {
-                    return [
-                        'channel' => $channel,
-                        'product_variant' => $productVariant,
-                        'required' => false,
-                    ];
-                },
+                'entry_options' => fn(ChannelInterface $channel) => [
+                    'channel' => $channel,
+                    'product_variant' => $productVariant,
+                    'required' => false,
+                ],
                 'label' => 'sylius.form.variant.price',
             ]);
         });

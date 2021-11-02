@@ -41,13 +41,9 @@ final class CustomerChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'choices' => function (Options $options): array {
-                return $this->customerRepository->findAll();
-            },
+            'choices' => fn(Options $options): array => $this->customerRepository->findAll(),
             'choice_value' => 'email',
-            'choice_label' => function (CustomerInterface $customer): string {
-                return sprintf('%s (%s)', $customer->getFullName(), $customer->getEmail());
-            },
+            'choice_label' => fn(CustomerInterface $customer): string => sprintf('%s (%s)', $customer->getFullName(), $customer->getEmail()),
             'choice_translation_domain' => false,
         ]);
     }

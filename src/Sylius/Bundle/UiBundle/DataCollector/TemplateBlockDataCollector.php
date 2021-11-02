@@ -48,16 +48,12 @@ final class TemplateBlockDataCollector extends DataCollector
 
     public function getNumberOfRenderedBlocks(): int
     {
-        return array_reduce($this->data['renderedEvents'], static function (int $accumulator, array $event): int {
-            return $accumulator + count($event['blocks']);
-        }, 0);
+        return array_reduce($this->data['renderedEvents'], static fn(int $accumulator, array $event): int => $accumulator + count($event['blocks']), 0);
     }
 
     public function getTotalDuration(): float
     {
-        return array_reduce($this->data['renderedEvents'], static function (float $accumulator, array $event): float {
-            return $accumulator + $event['time'];
-        }, 0.0);
+        return array_reduce($this->data['renderedEvents'], static fn(float $accumulator, array $event): float => $accumulator + $event['time'], 0.0);
     }
 
     public function getName(): string

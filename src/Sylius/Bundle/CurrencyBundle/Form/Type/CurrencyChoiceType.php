@@ -40,9 +40,7 @@ final class CurrencyChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'choices' => function (Options $options): array {
-                return $this->currencyRepository->findAll();
-            },
+            'choices' => fn(Options $options): array => $this->currencyRepository->findAll(),
             'choice_value' => 'code',
             'choice_label' => 'name',
             'choice_translation_domain' => false,

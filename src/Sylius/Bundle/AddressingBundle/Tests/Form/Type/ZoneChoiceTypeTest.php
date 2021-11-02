@@ -136,8 +136,6 @@ final class ZoneChoiceTypeTest extends TypeTestCase
         $form = $this->factory->create(ZoneChoiceType::class, null, $formConfiguration);
         $view = $form->createView();
 
-        Assert::assertSame($expectedLabels, array_map(function (ChoiceView $choiceView): string {
-            return $choiceView->label;
-        }, $view->vars['choices']));
+        Assert::assertSame($expectedLabels, array_map(fn(ChoiceView $choiceView): string => $choiceView->label, $view->vars['choices']));
     }
 }

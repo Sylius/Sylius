@@ -62,12 +62,8 @@ class ShippingCategoryExampleFactory extends AbstractExampleFactory implements E
 
                 return $words;
             })
-            ->setDefault('code', function (Options $options): string {
-                return StringInflector::nameToCode($options['name']);
-            })
-            ->setDefault('description', function (Options $options): string {
-                return $this->faker->paragraph;
-            })
+            ->setDefault('code', fn(Options $options): string => StringInflector::nameToCode($options['name']))
+            ->setDefault('description', fn(Options $options): string => $this->faker->paragraph)
         ;
     }
 }

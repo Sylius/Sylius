@@ -24,12 +24,10 @@ final class ChannelBasedTotalOfItemsFromTaxonConfigurationType extends AbstractT
     {
         $resolver->setDefaults([
             'entry_type' => TotalOfItemsFromTaxonConfigurationType::class,
-            'entry_options' => function (ChannelInterface $channel): array {
-                return [
-                    'label' => $channel->getName(),
-                    'currency' => $channel->getBaseCurrency()->getCode(),
-                ];
-            },
+            'entry_options' => fn(ChannelInterface $channel): array => [
+                'label' => $channel->getName(),
+                'currency' => $channel->getBaseCurrency()->getCode(),
+            ],
         ]);
     }
 

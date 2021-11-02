@@ -35,14 +35,10 @@ final class SelectAttributeValueTranslationsType extends AbstractType
     {
         $resolver->setDefaults([
             'entries' => $this->definedLocalesCodes,
-            'entry_name' => function (string $localeCode): string {
-                return $localeCode;
-            },
-            'entry_options' => function (string $localeCode): array {
-                return [
-                    'required' => $localeCode === $this->defaultLocaleCode,
-                ];
-            },
+            'entry_name' => fn(string $localeCode): string => $localeCode,
+            'entry_options' => fn(string $localeCode): array => [
+                'required' => $localeCode === $this->defaultLocaleCode,
+            ],
         ]);
     }
 

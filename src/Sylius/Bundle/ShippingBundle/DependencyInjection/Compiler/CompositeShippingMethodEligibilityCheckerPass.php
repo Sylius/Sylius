@@ -27,9 +27,7 @@ final class CompositeShippingMethodEligibilityCheckerPass implements CompilerPas
 
         $container->getDefinition('sylius.shipping_method_eligibility_checker')->setArguments([
             array_map(
-                static function ($id): Reference {
-                    return new Reference($id);
-                },
+                static fn($id): Reference => new Reference($id),
                 array_keys($container->findTaggedServiceIds('sylius.shipping_method_eligibility_checker'))
             ),
         ]);
