@@ -1,5 +1,17 @@
 # CHANGELOG FOR `1.9.X`
 
+## v1.9.9 (2021-11-03)
+
+- [#13165](https://github.com/Sylius/Sylius/issues/13165) [HotFix] Add conflict to doctrine/orm to fix the problem with creating taxons ([@GSadee](https://github.com/GSadee))
+- [#13173](https://github.com/Sylius/Sylius/issues/13173) [HotFix] Update conflict to doctrine/orm to fix the problem with creating taxons ([@GSadee](https://github.com/GSadee))
+- [#13215](https://github.com/Sylius/Sylius/issues/13215) Add conflict with doctrine/dbal ^3 to avoid missing `json_array` doctrine type error ([@Prometee](https://github.com/Prometee))
+- [#13216](https://github.com/Sylius/Sylius/issues/13216) [Maintenance] Bump node version in CI ([@lchrusciel](https://github.com/lchrusciel))
+- [#13243](https://github.com/Sylius/Sylius/issues/13243) BUGFIX: #12859 Fix link to ResourceController in documentation ([@Jashi](https://github.com/Jashi))
+- [#13244](https://github.com/Sylius/Sylius/issues/13244) Fix builds ([@nedac-sorbo](https://github.com/nedac-sorbo))
+- [#13252](https://github.com/Sylius/Sylius/issues/13252) [Maintenance] Replace dbal conflict with explicit requirement ([@lchrusciel](https://github.com/lchrusciel))
+- [#13261](https://github.com/Sylius/Sylius/issues/13261) Conflict liip/imagine-bundle ^2.7 ([@Zales0123](https://github.com/Zales0123))
+- [#13263](https://github.com/Sylius/Sylius/issues/13263) Remove undocumented conflict on laminas-code ^4.0 ([@4c0n](https://github.com/4c0n))
+
 ## v1.9.8 (2021-09-30)
 
 - [#12222](https://github.com/Sylius/Sylius/issues/12222) logo path corrected ([@Snowbaha](https://github.com/Snowbaha), [@CoderMaggie](https://github.com/CoderMaggie))
