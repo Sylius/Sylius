@@ -28,7 +28,11 @@ class CatalogPromotionRepository extends EntityRepository implements CatalogProm
             $criterion->filterQueryBuilder($queryBuilder);
         }
 
-        return $queryBuilder->orderBy('catalogPromotion.priority', 'desc')->getQuery()->getResult();
+        return $queryBuilder
+            ->orderBy('catalogPromotion.exclusive', 'desc')
+            ->addOrderBy('catalogPromotion.priority', 'desc')
+            ->getQuery()
+            ->getResult();
     }
 
     public function findByCodes(array $codes): array
