@@ -21,4 +21,4 @@ default:
                 - sylius.behat.context.ui.shop.product
 
             filters:
-                tags: "@locales && @ui"
+                tags: "@locales&&@ui"

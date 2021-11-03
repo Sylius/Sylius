@@ -34,4 +34,4 @@ default:
                 - sylius.behat.context.ui.shop.login
 
             filters:
-                tags: "@managing_customers && @ui"
+                tags: "@managing_customers&&@ui"

@@ -26,4 +26,4 @@ default:
                 - sylius.behat.context.ui.shop.product
 
             filters:
-                tags: "@managing_taxons && @ui"
+                tags: "@managing_taxons&&@ui"

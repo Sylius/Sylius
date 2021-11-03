@@ -34,4 +34,4 @@ default:
                 - sylius.behat.context.ui.admin.notification
 
             filters:
-                tags: "@managing_shipping_methods && @ui"
+                tags: "@managing_shipping_methods&&@ui"

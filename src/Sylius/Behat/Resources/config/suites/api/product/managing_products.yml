@@ -45,5 +45,5 @@ default:
                 - sylius.behat.context.api.admin.managing_products
 
             filters:
-                tags: "@managing_products && @api"
+                tags: "@managing_products&&@api"
             javascript: false

@@ -29,4 +29,4 @@ default:
                 - sylius.behat.context.api.shop.order
 
             filters:
-                tags: "@paying_for_order && @api"
+                tags: "@paying_for_order&&@api"

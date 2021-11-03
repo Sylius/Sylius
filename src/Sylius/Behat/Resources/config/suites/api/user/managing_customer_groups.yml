@@ -16,5 +16,5 @@ default:
                 - sylius.behat.context.api.admin.managing_customer_groups
 
             filters:
-                tags: "@managing_customer_groups && @api"
+                tags: "@managing_customer_groups&&@api"
             javascript: false

@@ -26,4 +26,4 @@ default:
                 - sylius.behat.context.api.shop.cart
                 - sylius.behat.context.api.shop.checkout
             filters:
-                tags: "@receiving_discount && @api"
+                tags: "@receiving_discount&&@api"

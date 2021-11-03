@@ -34,4 +34,4 @@ default:
                 - sylius.behat.context.api.shop.checkout
 
             filters:
-                tags: "@address_book && @api"
+                tags: "@address_book&&@api"

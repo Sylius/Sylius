@@ -42,4 +42,4 @@ default:
                 - sylius.behat.context.api.shop.shipment
 
             filters:
-                tags: "@customer_account && @api"
+                tags: "@customer_account&&@api"

@@ -16,5 +16,5 @@ default:
                 - sylius.behat.context.api.admin.managing_tax_categories
 
             filters:
-                tags: "@managing_tax_categories && @api"
+                tags: "@managing_tax_categories&&@api"
             javascript: false

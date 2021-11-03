@@ -57,4 +57,4 @@ default:
                 - sylius.behat.context.ui.email
 
             filters:
-                tags: "@checkout && @api"
+                tags: "@checkout&&@api"

@@ -17,5 +17,5 @@ default:
                 - sylius.behat.context.api.admin.managing_shipping_categories
 
             filters:
-                tags: "@managing_shipping_categories && @api"
+                tags: "@managing_shipping_categories&&@api"
             javascript: false

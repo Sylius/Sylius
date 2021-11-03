@@ -17,5 +17,5 @@ default:
                 - sylius.behat.context.api.admin.login
 
             filters:
-                tags: "@administrator_login && @api"
+                tags: "@administrator_login&&@api"
             javascript: false

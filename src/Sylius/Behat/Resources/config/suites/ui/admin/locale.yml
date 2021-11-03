@@ -25,4 +25,4 @@ default:
                 - sylius.behat.context.ui.channel
 
             filters:
-                tags: "@admin_locale && @ui"
+                tags: "@admin_locale&&@ui"

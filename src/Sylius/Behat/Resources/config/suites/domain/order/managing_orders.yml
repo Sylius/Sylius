@@ -35,4 +35,4 @@ default:
 
 
             filters:
-                tags: "@managing_orders && @domain"
+                tags: "@managing_orders&&@domain"
