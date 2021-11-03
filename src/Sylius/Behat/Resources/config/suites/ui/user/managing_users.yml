@@ -21,4 +21,4 @@ default:
                 - sylius.behat.context.ui.user
 
             filters:
-                tags: "@managing_users && @ui"
+                tags: "@managing_users&&@ui"

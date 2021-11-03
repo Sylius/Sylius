@@ -19,5 +19,5 @@ default:
                 - sylius.behat.context.api.admin.managing_administrators
 
             filters:
-                tags: "@managing_administrators && @api"
+                tags: "@managing_administrators&&@api"
             javascript: false

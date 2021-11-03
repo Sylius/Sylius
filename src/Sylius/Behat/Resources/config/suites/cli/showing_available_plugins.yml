@@ -9,4 +9,4 @@ default:
 
 
             filters:
-                tags: "@showing_available_plugins && @cli"
+                tags: "@showing_available_plugins&&@cli"

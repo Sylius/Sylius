@@ -31,5 +31,5 @@ default:
                 - sylius.behat.context.api.admin.managing_shipping_methods
 
             filters:
-                tags: "@managing_shipping_methods && @api"
+                tags: "@managing_shipping_methods&&@api"
             javascript: false

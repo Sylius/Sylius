@@ -22,4 +22,4 @@ default:
                 - sylius.behat.context.ui.shop.homepage
 
             filters:
-                tags: "@homepage && @ui"
+                tags: "@homepage&&@ui"

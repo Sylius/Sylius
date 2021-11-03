@@ -17,5 +17,5 @@ default:
                 - sylius.behat.context.api.admin.managing_product_variants
 
             filters:
-                tags: "@managing_product_variants && @api"
+                tags: "@managing_product_variants&&@api"
             javascript: false

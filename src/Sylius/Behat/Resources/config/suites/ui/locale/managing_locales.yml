@@ -21,4 +21,4 @@ default:
 
 
             filters:
-                tags: "@managing_locales && @ui"
+                tags: "@managing_locales&&@ui"

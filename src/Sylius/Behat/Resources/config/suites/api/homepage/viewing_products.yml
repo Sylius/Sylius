@@ -19,4 +19,4 @@ default:
                 - sylius.behat.context.api.shop.homepage
 
             filters:
-                tags: "@homepage && @api"
+                tags: "@homepage&&@api"

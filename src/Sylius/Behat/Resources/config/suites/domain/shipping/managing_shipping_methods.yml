@@ -17,4 +17,4 @@ default:
 
 
             filters:
-                tags: "@managing_shipping_methods && @domain"
+                tags: "@managing_shipping_methods&&@domain"

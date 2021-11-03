@@ -32,4 +32,4 @@ default:
 
 
             filters:
-                tags: "@managing_products && @domain"
+                tags: "@managing_products&&@domain"

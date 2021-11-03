@@ -30,4 +30,4 @@ default:
 
 
             filters:
-                tags: "@managing_promotion_coupons && @domain"
+                tags: "@managing_promotion_coupons&&@domain"

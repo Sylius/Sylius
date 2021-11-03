@@ -35,4 +35,4 @@ default:
                 - sylius.behat.context.api.shop.checkout
 
             filters:
-                tags: "@applying_shipping_method_rules && @api"
+                tags: "@applying_shipping_method_rules&&@api"

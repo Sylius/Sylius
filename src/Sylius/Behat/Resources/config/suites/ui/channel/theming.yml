@@ -21,4 +21,4 @@ default:
 
 
             filters:
-                tags: "@theming && @ui"
+                tags: "@theming&&@ui"

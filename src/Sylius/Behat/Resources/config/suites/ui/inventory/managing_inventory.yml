@@ -34,4 +34,4 @@ default:
 
 
             filters:
-                tags: "@managing_inventory && @ui"
+                tags: "@managing_inventory&&@ui"
