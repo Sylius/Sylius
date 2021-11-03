@@ -45,12 +45,9 @@ final class NthOrderRuleChecker implements RuleCheckerInterface
         }
 
         $customer = $subject->getCustomer();
-        if (null === $customer) {
-            return false;
-        }
 
-        //eligible if it is first order of guest and the promotion is on first order
-        if (null === $customer->getId()) {
+        // Eligible if it is first order of guest and the promotion is on first order
+        if (null === $customer) {
             return 1 === $configuration['nth'];
         }
 
