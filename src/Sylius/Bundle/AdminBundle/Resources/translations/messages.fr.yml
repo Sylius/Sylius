@@ -35,6 +35,8 @@ sylius:
                     tax_rates: Taux de taxe
                     zones: Zones
                 marketing:
+                    cart_promotions: Promotions panier
+                    catalog_promotions: Promotions catalogue
                     header: Marketing
                     product_reviews: Avis produit
                     promotions: Promotions

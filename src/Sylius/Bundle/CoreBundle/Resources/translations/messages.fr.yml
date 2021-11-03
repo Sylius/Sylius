@@ -42,6 +42,9 @@ sylius:
             coupon: Code promo
         catalog_promotion:
             channels: Canaux
+            scope:
+                for_taxons: Pour les taxonomies
+                for_variants: Pour les variantes
         checkout:
             addressing:
                 different_billing_address: Utiliser une adresse différente pour la facturation ?
