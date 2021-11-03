@@ -43,34 +43,8 @@ final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcess
         $this->catalogPromotionClearer->clear();
         $eligibleCatalogPromotions = $this->catalogPromotionsProvider->provide($this->defaultCriteria);
 
-        $sortedCatalogPromotion = $this->sortWithPrioritiesAndExclusiveness($eligibleCatalogPromotions);
-
-        foreach ($sortedCatalogPromotion as $catalogPromotion) {
+        foreach ($eligibleCatalogPromotions as $catalogPromotion) {
             $this->catalogPromotionProcessor->process($catalogPromotion);
         }
-    }
-
-    private function sortWithPrioritiesAndExclusiveness(array $catalogPromotions): array
-    {
-        usort(
-            $catalogPromotions,
-            function(CatalogPromotionInterface $a, CatalogPromotionInterface $b): int {
-                if (($a->isExclusive() && $b->isExclusive()) && ($a->getPriority() > $b->getPriority())) {
-                    return -1;
-                }
-
-                if (!$a->isExclusive() && !$b->isExclusive() && ($a->getPriority() > $b->getPriority())) {
-                    return -1;
-                }
-
-                if ($a->isExclusive() && !$b->isExclusive()) {
-                    return -1;
-                }
-
-                return 1;
-
-            });
-
-        return $catalogPromotions;
     }
 }

@@ -98,7 +98,7 @@ final class ChannelPricingSpec extends ObjectBehavior
     function its_has_exclusive_promotion_applied_flag_mutable(): void
     {
         $this->setExclusiveCatalogPromotionApplied(true);
-        $this->hasExclusiveCatalogPromotionApplied()->willReturn(true);
+        $this->hasExclusiveCatalogPromotionApplied()->shouldReturn(true);
     }
 
     function it_can_clear_applied_promotions(): void
