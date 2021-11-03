@@ -23,5 +23,5 @@ default:
                 - sylius.behat.context.api.shop.login
 
             filters:
-                tags: "@customer_login && @api"
+                tags: "@customer_login&&@api"
             javascript: false

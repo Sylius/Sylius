@@ -41,5 +41,5 @@ default:
                 - sylius.behat.context.ui.email
 
             filters:
-                tags: "@managing_orders && @api"
+                tags: "@managing_orders&&@api"
             javascript: false

@@ -19,5 +19,5 @@ default:
                 - sylius.behat.context.api.admin.managing_taxons
 
             filters:
-                tags: "@managing_taxons && @api"
+                tags: "@managing_taxons&&@api"
             javascript: false

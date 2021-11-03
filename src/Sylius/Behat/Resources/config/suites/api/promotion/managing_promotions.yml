@@ -19,4 +19,4 @@ default:
                 - sylius.behat.context.api.admin.managing_promotions
 
             filters:
-                tags: "@managing_promotions && @api"
+                tags: "@managing_promotions&&@api"

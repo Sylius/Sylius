@@ -46,4 +46,4 @@ default:
                 - sylius.behat.context.ui.shop.browsing_product
 
             filters:
-                tags: "@viewing_products && @ui"
+                tags: "@viewing_products&&@ui"

@@ -65,4 +65,4 @@ default:
                 - sylius.behat.context.ui.shop.locale
 
             filters:
-                tags: "@checkout && @ui"
+                tags: "@checkout&&@ui"

@@ -46,4 +46,4 @@ default:
                 - sylius.behat.context.ui.shop.homepage
 
             filters:
-                tags: "@customer_account && @ui"
+                tags: "@customer_account&&@ui"

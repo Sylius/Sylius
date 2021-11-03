@@ -24,4 +24,4 @@ default:
                 - sylius.behat.context.ui.shop.registration
 
             filters:
-                tags: "@customer_registration && @ui"
+                tags: "@customer_registration&&@ui"

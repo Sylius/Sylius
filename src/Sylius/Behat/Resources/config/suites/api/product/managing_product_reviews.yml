@@ -22,5 +22,5 @@ default:
                 - sylius.behat.context.api.admin.managing_product_reviews
 
             filters:
-                tags: "@managing_product_reviews && @api"
+                tags: "@managing_product_reviews&&@api"
             javascript: false

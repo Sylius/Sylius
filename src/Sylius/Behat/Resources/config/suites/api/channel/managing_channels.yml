@@ -29,5 +29,5 @@ default:
                 - sylius.behat.context.api.admin.managing_channels
 
             filters:
-                tags: "@managing_channels && @api"
+                tags: "@managing_channels&&@api"
             javascript: false

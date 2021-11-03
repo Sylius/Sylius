@@ -35,4 +35,4 @@ default:
                 - sylius.behat.context.ui.user
 
             filters:
-                tags: "@applying_taxes && @ui"
+                tags: "@applying_taxes&&@ui"

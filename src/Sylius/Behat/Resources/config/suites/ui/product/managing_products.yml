@@ -49,4 +49,4 @@ default:
                 - sylius.behat.context.ui.shop.browsing_product
 
             filters:
-                tags: "@managing_products && @ui"
+                tags: "@managing_products&&@ui"

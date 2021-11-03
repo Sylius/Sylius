@@ -30,4 +30,4 @@ default:
                 - sylius.behat.context.api.shop.registration
 
             filters:
-                tags: "@shopping_cart && @api"
+                tags: "@shopping_cart&&@api"

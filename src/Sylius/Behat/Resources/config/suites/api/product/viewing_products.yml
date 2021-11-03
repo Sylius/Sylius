@@ -28,5 +28,5 @@ default:
                 - sylius.behat.context.api.shop.product_variant
 
             filters:
-                tags: "@viewing_products && @api"
+                tags: "@viewing_products&&@api"
             javascript: false
