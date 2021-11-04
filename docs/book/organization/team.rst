@@ -142,7 +142,8 @@ This role is currently held by:
 Sylius Technical Libraries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Releases new versions of Sylius (`Sylius`_, `Sylius-Standard`_, `PluginSkeleton`_ repositories)
+* Developing and maintaining Sylius Technical Libraries
+* Developing and maintaining `SyliusLabs`_ organization repositories
 
 This role is currently held by:
 
@@ -153,15 +154,6 @@ Docker Master
 
 * Reviews the Docker related PRs and issues
 * Maintains the Sylius Docker image
-
-This role is currently held by:
-
-* **Arkadiusz Krakowiak** (`Arminek`_)
-
-Sylius Cloud R&D
-~~~~~~~~~~~~~~~~
-
-* Researches and develops PaaS/SaaS solutions for Sylius
 
 This role is currently held by:
 
@@ -180,6 +172,7 @@ This role is currently held by:
 .. _`PluginSkeleton`: https://github.com/Sylius/PluginSkeleton
 .. _`Sylius-Standard`: https://github.com/Sylius/Sylius-Standard
 .. _`Sylius`: https://github.com/Sylius/Sylius
+.. _`SyliusLabs`: https://github.com/SyliusLabs
 .. _`the Sylius Roadmap`: https://sylius.com/roadmap/
 .. _`Zales0123`: https://github.com/Zales0123/
 .. _`SirDomin`: https://github.com/SirDomin/
