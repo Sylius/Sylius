@@ -1,4 +1,5 @@
 sphinx==1.8.5
+docutils<0.18
 pyOpenSSL
 requests[security]
 sphinx-copybutton
