@@ -121,19 +121,19 @@ jobs:
             matrix:
                 php: ["7.4", "8.0"]
                 symfony: ["^4.4", "5.2.*", "5.3.*"]
-                node: ["10.x"]
+                node: ["14.x"]
                 mysql: ["8.0"]
 
                 include:
                     -
                         php: "8.0"
                         symfony: "5.2.*"
-                        node: "10.x"
+                        node: "14.x"
                         mysql: "5.7"
                     -
                         php: "8.0"
                         symfony: "5.3.*"
-                        node: "10.x"
+                        node: "14.x"
                         mysql: "5.7"
 
         env:
@@ -269,12 +269,12 @@ jobs:
                     -
                         php: "8.0"
                         symfony: "5.2.*"
-                        node: "10.x"
+                        node: "14.x"
                         mysql: "5.7"
                     -
                         php: "8.0"
                         symfony: "5.3.*"
-                        node: "10.x"
+                        node: "14.x"
                         mysql: "5.7"
 
         env:
