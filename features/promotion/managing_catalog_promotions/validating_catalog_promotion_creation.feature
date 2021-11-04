@@ -137,3 +137,28 @@ Feature: Validating a catalog promotion creation
         And I try to add it
         Then I should be notified that I can add only existing taxon
         And there should be an empty list of catalog promotions
+        And there should be an empty list of catalog promotions
+
+    @api @ui @javascript
+    Scenario: Trying to create a catalog promotion with product type without products
+        When I want to create a new catalog promotion
+        And I specify its code as "winter_sale"
+        And I name it "Winter sale"
+        And I specify its label as "Winter -50%" in "English (United States)"
+        And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
+        And I add catalog promotion scope for product without products
+        And I try to add it
+        Then I should be notified that I must add at least one product
+        And there should be an empty list of catalog promotions
+
+    @api
+    Scenario: Trying to create a catalog promotion with product type with invalid products
+        When I want to create a new catalog promotion
+        And I specify its code as "winter_sale"
+        And I name it "Winter sale"
+        And I specify its label as "Winter -50%" in "English (United States)"
+        And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
+        And I add catalog promotion scope for product with nonexistent products
+        And I try to add it
+        Then I should be notified that I can add only existing product
+        And there should be an empty list of catalog promotions
