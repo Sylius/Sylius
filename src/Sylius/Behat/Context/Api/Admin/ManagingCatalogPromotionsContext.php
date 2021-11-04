@@ -476,6 +476,25 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I edit ("[^"]+" catalog promotion) to be applied on ("[^"]+" product)$/
+     */
+    public function iEditCatalogPromotionToBeAppliedOnProduct(
+        CatalogPromotionInterface $catalogPromotion,
+        ProductInterface $product
+    ): void {
+        $this->client->buildUpdateRequest($catalogPromotion->getCode());
+
+        $content = $this->client->getContent();
+        unset($content['scopes'][0]['configuration']['variants']);
+        $content['scopes'][0]['type'] = CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS;
+        $content['scopes'][0]['configuration']['products'] = [$product->getCode()];
+
+        $this->client->setRequestData($content);;
+
+        $this->client->update();
+    }
+
+    /**
      * @When I disable :catalogPromotion catalog promotion
      */
     public function iDisableThisCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
@@ -969,6 +988,18 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then /^(this catalog promotion) should be applied on ("[^"]+" product)$/
+     */
+    public function thisCatalogPromotionShouldBeAppliedOnProduct(
+        CatalogPromotionInterface $catalogPromotion,
+        ProductInterface $product
+    ): void {
+        $this->client->show($catalogPromotion->getCode());
+
+        Assert::true($this->catalogPromotionAppliesOnProducts($product));
+    }
+
+    /**
      * @Then I should be notified that code and name are required
      */
     public function iShouldBeNotifiedThatCodeAndNameAreRequired(): void
@@ -1170,6 +1201,19 @@ final class ManagingCatalogPromotionsContext implements Context
         return true;
     }
 
+    private function catalogPromotionAppliesOnProducts(ProductInterface ...$products): bool
+    {
+        $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+
+        foreach ($products as $product) {
+            if ($this->hasProductInConfiguration($response['scopes'][0]['configuration']['products'], $product) === false) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     private function hasVariantInConfiguration(array $configuration, ProductVariantInterface $productVariant): bool
     {
         foreach ($configuration as $productVariantIri) {
@@ -1185,6 +1229,17 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         foreach ($configuration as $configuredTaxon) {
             if ($configuredTaxon === $taxon->getCode()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function hasProductInConfiguration(array $configuration, ProductInterface $product): bool
+    {
+        foreach ($configuration as $configuredProduct) {
+            if ($configuredProduct === $product->getCode()) {
                 return true;
             }
         }

@@ -210,7 +210,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
         $this->formElement->addScope();
         $this->formElement->chooseScopeType('For variants');
-        $this->formElement->chooseLastScopeVariants($variantCodes);
+        $this->formElement->chooseLastScopeCodes($variantCodes);
     }
 
     /**
@@ -224,7 +224,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
         $this->formElement->addScope();
         $this->formElement->chooseScopeType('For taxons');
-        $this->formElement->chooseLastScopeTaxons($taxonsCodes);
+        $this->formElement->chooseLastScopeCodes($taxonsCodes);
     }
 
     /**
@@ -234,7 +234,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $this->formElement->addScope();
         $this->formElement->chooseScopeType('For product');
-        $this->formElement->chooseLastScopeTaxons([$product->getCode()]);
+        $this->formElement->chooseLastScopeCodes([$product->getCode()]);
     }
 
     /**
@@ -298,7 +298,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
-        $this->formElement->chooseLastScopeVariants([$productVariant->getCode()]);
+        $this->formElement->chooseLastScopeCodes([$productVariant->getCode()]);
         $this->updatePage->saveChanges();
     }
 
@@ -312,7 +312,21 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
         $this->formElement->chooseScopeType('For taxons');
-        $this->formElement->chooseLastScopeTaxons([$taxon->getCode()]);
+        $this->formElement->chooseLastScopeCodes([$taxon->getCode()]);
+        $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @When /^I edit ("[^"]+" catalog promotion) to be applied on ("[^"]+" product)$/
+     */
+    public function iEditCatalogPromotionToBeAppliedOnProduct(
+        CatalogPromotionInterface $catalogPromotion,
+        ProductInterface $product
+    ): void {
+        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
+
+        $this->formElement->chooseScopeType('For products');
+        $this->formElement->chooseLastScopeCodes([$product->getCode()]);
         $this->updatePage->saveChanges();
     }
 
@@ -565,6 +579,16 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then /^this catalog promotion should be applied on ("[^"]+" taxon)$/
+     */
+    public function thisCatalogPromotionShouldBeAppliedOnTaxon(TaxonInterface $taxon): void
+    {
+        $selectedTaxons = $this->formElement->getLastScopeCodes();
+
+        Assert::inArray($taxon->getCode(), $selectedTaxons);
+    }
+
+    /**
      * @Then /^the ("[^"]+" catalog promotion) should apply to all variants of ("[^"]+" product)$/
      */
     public function theCatalogPromotionShouldApplyToAllVariantsOfProduct(
@@ -573,6 +597,14 @@ final class ManagingCatalogPromotionsContext implements Context
     ): void {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
+        $this->thisCatalogPromotionShouldBeAppliedOnProduct($product);
+    }
+
+    /**
+     * @Then /^this catalog promotion should be applied on ("[^"]+" product)$/
+     */
+    public function thisCatalogPromotionShouldBeAppliedOnProduct(ProductInterface $product): void
+    {
         $selectedProducts = $this->formElement->getLastScopeCodes();
         Assert::inArray($product->getCode(), $selectedProducts);
     }
@@ -581,7 +613,7 @@ final class ManagingCatalogPromotionsContext implements Context
      * @Then /^it should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
      * @Then /^this catalog promotion should be applied on ("[^"]+" variant)$/
      */
-    public function itShouldAppyToVariants(ProductVariantInterface ...$variants): void
+    public function itShouldApplyToVariants(ProductVariantInterface ...$variants): void
     {
         $selectedVariants = $this->formElement->getLastScopeCodes();
 

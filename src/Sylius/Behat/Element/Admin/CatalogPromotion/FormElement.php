@@ -81,18 +81,11 @@ final class FormElement extends Element implements FormElementInterface
         $lastScope->selectFieldOption('Type', $type);
     }
 
-    public function chooseLastScopeVariants(array $variantCodes): void
+    public function chooseLastScopeCodes(array $codes): void
     {
         $lastScope = $this->getElement('last_scope');
 
-        $lastScope->find('css', 'input[type="hidden"]')->setValue(implode(',', $variantCodes));
-    }
-
-    public function chooseLastScopeTaxons(array $taxonsCodes): void
-    {
-        $lastScope = $this->getElement('last_scope');
-
-        $lastScope->find('css', 'input[type="hidden"]')->setValue(implode(',', $taxonsCodes));
+        $lastScope->find('css', 'input[type="hidden"]')->setValue(implode(',', $codes));
     }
 
     public function specifyLastActionDiscount(string $discount): void

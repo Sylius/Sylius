@@ -37,9 +37,7 @@ interface FormElementInterface
 
     public function chooseScopeType(string $type): void;
 
-    public function chooseLastScopeVariants(array $variantCodes): void;
-
-    public function chooseLastScopeTaxons(array $taxonsCodes): void;
+    public function chooseLastScopeCodes(array $codes): void;
 
     public function specifyLastActionDiscount(string $discount): void;
 
