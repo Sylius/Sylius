@@ -122,19 +122,7 @@ jobs:
                 php: ["7.4", "8.0"]
                 symfony: ["^4.4", "5.2.*", "5.3.*"]
                 node: ["14.x"]
-                mysql: ["8.0"]
-
-                include:
-                    -
-                        php: "8.0"
-                        symfony: "5.2.*"
-                        node: "14.x"
-                        mysql: "5.7"
-                    -
-                        php: "8.0"
-                        symfony: "5.3.*"
-                        node: "14.x"
-                        mysql: "5.7"
+                mysql: ["5.7", "8.0"]
 
         env:
             APP_ENV: test_cached
@@ -263,19 +251,7 @@ jobs:
                 php: ["7.4", "8.0"]
                 symfony: ["^4.4", "5.2.*", "5.3.*"]
                 node: ["14.x"]
-                mysql: ["8.0"]
-
-                include:
-                    -
-                        php: "8.0"
-                        symfony: "5.2.*"
-                        node: "14.x"
-                        mysql: "5.7"
-                    -
-                        php: "8.0"
-                        symfony: "5.3.*"
-                        node: "14.x"
-                        mysql: "5.7"
+                mysql: ["5.7", "8.0"]
 
         env:
             APP_ENV: test_cached
