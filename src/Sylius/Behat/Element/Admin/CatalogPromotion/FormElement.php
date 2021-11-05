@@ -107,14 +107,7 @@ final class FormElement extends Element implements FormElementInterface
         return $this->getElement($field, ['%localeCode%' => $localeCode])->getValue();
     }
 
-    public function getLastScopeVariantCodes(): array
-    {
-        $lastScope = $this->getElement('last_scope');
-
-        return explode(',', $lastScope->find('css', 'input[type="hidden"]')->getValue());
-    }
-
-    public function getLastScopeTaxonsCodes(): array
+    public function getLastScopeCodes(): array
     {
         $lastScope = $this->getElement('last_scope');
 

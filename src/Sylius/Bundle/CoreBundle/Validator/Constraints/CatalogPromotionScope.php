@@ -27,6 +27,10 @@ final class CatalogPromotionScope extends Constraint
 
     public string $taxonsNotEmpty = 'sylius.catalog_promotion_scope.for_taxons.not_empty';
 
+    public string $invalidProducts = 'sylius.catalog_promotion_scope.for_products.invalid_products';
+
+    public string $productsNotEmpty = 'sylius.catalog_promotion_scope.for_products.not_empty';
+
     public function validatedBy(): string
     {
         return 'sylius_catalog_promotion_scope';

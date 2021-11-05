@@ -24,6 +24,7 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -227,6 +228,16 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I add scope that applies on ("[^"]+" product)$/
+     */
+    public function iAddScopeThatAppliesOnProduct(ProductInterface $product): void
+    {
+        $this->formElement->addScope();
+        $this->formElement->chooseScopeType('For product');
+        $this->formElement->chooseLastScopeTaxons([$product->getCode()]);
+    }
+
+    /**
      * @When I remove its every action
      */
     public function iRemoveItsEveryAction(): void
@@ -370,6 +381,15 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $this->formElement->addScope();
         $this->formElement->chooseScopeType('For taxons');
+    }
+
+    /**
+     * @When I add catalog promotion scope for product without products
+     */
+    public function iAddCatalogPromotionScopeForProductWithoutProducts(): void
+    {
+        $this->formElement->addScope();
+        $this->formElement->chooseScopeType('For products');
     }
 
     /**
@@ -519,7 +539,7 @@ final class ManagingCatalogPromotionsContext implements Context
     ): void {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
-        $selectedVariants = $this->formElement->getLastScopeVariantCodes();
+        $selectedVariants = $this->formElement->getLastScopeCodes();
 
         foreach ($variants as $productVariant) {
             Assert::inArray($productVariant->getCode(), $selectedVariants);
@@ -537,11 +557,24 @@ final class ManagingCatalogPromotionsContext implements Context
     ): void {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
-        $selectedTaxons = $this->formElement->getLastScopeVariantCodes();
+        $selectedTaxons = $this->formElement->getLastScopeCodes();
 
         foreach ($taxons as $taxon) {
             Assert::inArray($taxon->getCode(), $selectedTaxons);
         }
+    }
+
+    /**
+     * @Then /^the ("[^"]+" catalog promotion) should apply to all variants of ("[^"]+" product)$/
+     */
+    public function theCatalogPromotionShouldApplyToAllVariantsOfProduct(
+        CatalogPromotionInterface $catalogPromotion,
+        ProductInterface $product
+    ): void {
+        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
+
+        $selectedProducts = $this->formElement->getLastScopeCodes();
+        Assert::inArray($product->getCode(), $selectedProducts);
     }
 
     /**
@@ -550,7 +583,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function itShouldAppyToVariants(ProductVariantInterface ...$variants): void
     {
-        $selectedVariants = $this->formElement->getLastScopeVariantCodes();
+        $selectedVariants = $this->formElement->getLastScopeCodes();
 
         foreach ($variants as $productVariant) {
             Assert::inArray($productVariant->getCode(), $selectedVariants);
@@ -562,7 +595,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function itShouldNotApplyToVariants(ProductVariantInterface ...$variants): void
     {
-        $selectedVariants = $this->formElement->getLastScopeVariantCodes();
+        $selectedVariants = $this->formElement->getLastScopeCodes();
 
         foreach ($variants as $productVariant) {
             Assert::false(in_array($productVariant->getCode(), $selectedVariants));
@@ -749,11 +782,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that I must add at least one taxon
+     * @Then /^I should be notified that I must add at least one (product|taxon)$/
      */
-    public function iShouldBeNotifiedThatIMustAddAtLeastOneTaxon(): void
+    public function iShouldBeNotifiedThatIMustAddAtLeastOne(string $entity): void
     {
-        Assert::same($this->formElement->getValidationMessage(), 'Provided configuration contains errors. Please add at least 1 taxon.');
+        Assert::same(
+            $this->formElement->getValidationMessage(),
+            sprintf('Provided configuration contains errors. Please add at least 1 %s.', $entity)
+        );
     }
 
     /**

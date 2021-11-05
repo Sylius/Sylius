@@ -45,9 +45,7 @@ interface FormElementInterface
 
     public function getFieldValueInLocale(string $field, string $localeCode): string;
 
-    public function getLastScopeVariantCodes(): array;
-
-    public function getLastScopeTaxonsCodes(): array;
+    public function getLastScopeCodes(): array;
 
     public function getLastActionDiscount(): string;
 

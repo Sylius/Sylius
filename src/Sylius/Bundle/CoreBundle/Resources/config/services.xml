@@ -269,6 +269,11 @@
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.variants_provider" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\Provider\ForProductsScopeVariantsProvider">
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="sylius.catalog_promotion.variants_provider" />
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\Provider\ForVariantsScopeVariantsProvider">
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="sylius.catalog_promotion.variants_provider" />

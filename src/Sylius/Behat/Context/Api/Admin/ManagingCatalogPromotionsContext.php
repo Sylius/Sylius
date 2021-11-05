@@ -22,6 +22,7 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
@@ -364,6 +365,37 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I add catalog promotion scope for product without products
+     */
+    public function iAddCatalogPromotionScopeForProductWithoutProducts(): void
+    {
+        $scopes = [[
+            'type' => CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS,
+            'configuration' => ['products' => []],
+        ]];
+
+        $this->client->addRequestData('scopes', $scopes);
+    }
+
+    /**
+     * @When I add catalog promotion scope for product with nonexistent products
+     */
+    public function iAddCatalogPromotionScopeForProductsWithNonexistentProducts(): void
+    {
+        $scopes = [[
+            'type' => CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS,
+            'configuration' => [
+                'products' => [
+                    'BAD_PRODUCT',
+                    'EVEN_WORSE_PRODUCT',
+                ]
+            ],
+        ]];
+
+        $this->client->addRequestData('scopes', $scopes);
+    }
+
+    /**
      * @When I add scope that applies on :taxon taxon
      */
     public function iAddScopeThatAppliesOnTaxon(TaxonInterface $taxon): void
@@ -372,6 +404,21 @@ final class ManagingCatalogPromotionsContext implements Context
             'type' => CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
             'configuration' => [
                 'taxons' => [$taxon->getCode()]
+            ],
+        ]];
+
+        $this->client->addRequestData('scopes', $scopes);
+    }
+
+    /**
+     * @When I add scope that applies on :product product
+     */
+    public function iAddScopeThatAppliesOnProduct(ProductInterface $product): void
+    {
+        $scopes = [[
+            'type' => CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS,
+            'configuration' => [
+                'products' => [$product->getCode()]
             ],
         ]];
 
@@ -770,6 +817,17 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then the :catalogPromotionName catalog promotion should apply to all variants of :product product
+     */
+    public function theCatalogPromotionShouldApplyToAllVariantsOfProduct(string $catalogPromotionName, ProductInterface $product): void
+    {
+        Assert::same(
+            ['products' => [$product->getCode()]],
+            $this->responseChecker->getCollection($this->client->getLastResponse())[0]['scopes'][0]['configuration']
+        );
+    }
+
+    /**
      * @Then this catalog promotion should be usable
      */
     public function thisCatalogPromotionShouldBeUsable(): void
@@ -1020,24 +1078,24 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that I must add at least one taxon
+     * @Then /^I should be notified that I must add at least one (product|taxon)$/
      */
-    public function iShouldBeNotifiedThatIMustAddAtLeastOneTaxon(): void
+    public function iShouldBeNotifiedThatIMustAddAtLeastOne(string $entity): void
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Provided configuration contains errors. Please add at least 1 taxon.'
+            sprintf('Provided configuration contains errors. Please add at least 1 %s.', $entity)
         );
     }
 
     /**
-     * @Then I should be notified that I can add only existing taxon
+     * @Then /^I should be notified that I can add only existing (product|taxon)$/
      */
-    public function iShouldBeNotifiedThatICanAddOnlyExistingTaxons(): void
+    public function iShouldBeNotifiedThatICanAddOnlyExisting(string $entity): void
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Provided configuration contains errors. Please add only existing taxons.'
+            sprintf('Provided configuration contains errors. Please add only existing %ss.', $entity)
         );
     }
 

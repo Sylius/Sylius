@@ -88,11 +88,9 @@ Feature: Creating a catalog promotion
         And I name it "Winter sale"
         And I add scope that applies on "T-Shirt" product
         And I add action that gives "50%" percentage discount
-        And I make it available in channel "United States"
         And I add it
         Then there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name
-        And it should be available in channel "United States"
         And the "Winter sale" catalog promotion should apply to all variants of "T-Shirt" product
 
     @api @ui @javascript

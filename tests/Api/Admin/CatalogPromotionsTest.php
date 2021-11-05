@@ -239,6 +239,32 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                         'configuration' => [
                             'variants' => ['invalid_variant']
                         ],
+                    ], [
+                        'type' => CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS,
+                        'configuration' => [],
+                    ], [
+                        'type' => CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS,
+                        'configuration' => [
+                            'products' => []
+                        ],
+                    ], [
+                        'type' => CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS,
+                        'configuration' => [
+                            'products' => ['invalid_product']
+                        ],
+                    ], [
+                        'type' => CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
+                        'configuration' => [],
+                    ], [
+                        'type' => CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
+                        'configuration' => [
+                            'taxons' => []
+                        ],
+                    ], [
+                        'type' => CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
+                        'configuration' => [
+                            'taxons' => ['invalid_taxon']
+                        ],
                     ]
                 ],
                 'translations' => ['en_US' => [
