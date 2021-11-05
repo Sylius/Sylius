@@ -14,18 +14,15 @@ Feature: Applying catalog promotions for product
     @api @ui
     Scenario: Applying simple catalog promotion
         When I view "PHP T-Shirt" variant of the "T-Shirt" product
-        Then I should see the product price "$10.00"
-        And I should see the product original price "$20.00"
+        Then I should see this variant is discounted from "$20.00" to "$10.00" with "Winter sale" promotion
 
-    @api @ui
+    @api @ui @javascript
     Scenario: Applying simple catalog promotion on another variant
         When I view "Java T-Shirt" variant of the "T-Shirt" product
-        Then I should see the product price "$15.00"
-        And I should see the product original price "$30.00"
+        Then I should see this variant is discounted from "$30.00" to "$15.00" with "Winter sale" promotion
 
     @api @ui
     Scenario: Applying multiple catalog promotions
         Given there is a catalog promotion "Christmas sale" that reduces price by "10%" and applies on "T-Shirt" product
         When I view "PHP T-Shirt" variant of the "T-Shirt" product
-        Then I should see the product price "$9.00"
-        And I should see the product original price "$20.00"
+        Then I should see this variant is discounted from "$20.00" to "$9.00" with "Winter sale" and "Christmas sale" promotions

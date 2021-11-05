@@ -328,6 +328,31 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
+     * @Given /^there is(?: a| another) catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" product)$/
+     */
+    public function thereIsACatalogPromotionThatReducesPriceByAndAppliesOnProduct(
+        string $name,
+        float $discount,
+        ProductInterface $product
+    ): void {
+        $this->createCatalogPromotion(
+            $name,
+            null,
+            [],
+            [[
+                'type' => CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS,
+                'configuration' => ['products' => [$product->getCode()]],
+            ]],
+            [[
+                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'configuration' => ['amount' => $discount],
+            ]]
+        );
+
+        $this->entityManager->flush();
+    }
+
+    /**
      * @When the :catalogPromotion catalog promotion is no longer available
      */
     public function theAdministratorMakesThisCatalogPromotionUnavailableInTheChannel(

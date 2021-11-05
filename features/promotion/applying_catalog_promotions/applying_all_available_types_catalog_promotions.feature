@@ -20,4 +20,4 @@ Feature: Applying all available catalog promotions
     @api @ui
     Scenario: Applying multiple catalog promotions
         When I view "PHP T-Shirt" variant of the "T-Shirt" product
-        Then I should see this variant is discounted from "$20.00" to "$6.86" with "Clothes sale" promotion
+        Then I should see this variant is discounted from "$20.00" to "$6.86" with "Clothes sale", "T-Shirt sale" and "Winter sale" promotions
