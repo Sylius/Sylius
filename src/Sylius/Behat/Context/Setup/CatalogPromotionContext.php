@@ -22,6 +22,7 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\ProductReviewTransitions;
@@ -140,6 +141,23 @@ final class CatalogPromotionContext implements Context
         $catalogPromotion->addScope($catalogPromotionScope);
 
         $this->entityManager->flush();
+    }
+
+    /**
+     * @Given /^(it) applies(?:| also) on ("[^"]+" product)$/
+     */
+    public function itAppliesOnProduct(CatalogPromotionInterface $catalogPromotion, ProductInterface $product): void
+    {
+        /** @var CatalogPromotionScopeInterface $catalogPromotionScope */
+        $catalogPromotionScope = $this->catalogPromotionScopeFactory->createNew();
+        $catalogPromotionScope->setType(CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS);
+        $catalogPromotionScope->setConfiguration(['products' => [$product->getCode()]]);
+
+        $catalogPromotion->addScope($catalogPromotionScope);
+
+        $this->entityManager->flush();
+
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
     /**

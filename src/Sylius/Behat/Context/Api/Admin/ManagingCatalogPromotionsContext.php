@@ -964,6 +964,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then it should apply on :product product
+     */
+    public function itShouldApplyOnProduct(ProductInterface $product): void
+    {
+        Assert::true($this->catalogPromotionAppliesOnProducts($product));
+    }
+
+    /**
      * @Then /^(this catalog promotion) should be applied on ("[^"]+" taxon)$/
      */
     public function thisCatalogPromotionShouldBeAppliedOnTaxon(
@@ -1206,12 +1214,14 @@ final class ManagingCatalogPromotionsContext implements Context
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
         foreach ($products as $product) {
-            if ($this->hasProductInConfiguration($response['scopes'][0]['configuration']['products'], $product) === false) {
-                return false;
+            foreach ($response['scopes'] as $scope) {
+                if (isset($scope['configuration']['products']) && $this->hasProductInConfiguration($scope['configuration']['products'], $product) === true) {
+                    return true;
+                }
             }
         }
 
-        return true;
+        return false;
     }
 
     private function hasVariantInConfiguration(array $configuration, ProductVariantInterface $productVariant): bool

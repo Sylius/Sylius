@@ -860,6 +860,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then it should apply on :product product
+     */
+    public function itShouldApplyOnProduct(ProductInterface $product): void
+    {
+        Assert::true($this->showPage->hasScopeWithProduct($product));
+    }
+
+    /**
      * @Then it should start at :startDate and end at :endDate
      */
     public function itShouldStartAtAndEndAt(string $startDate, string $endDate): void
