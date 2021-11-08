@@ -22,4 +22,4 @@ default:
                 - sylius.behat.context.api.shop.product_review
 
             filters:
-                tags: "@viewing_product_reviews && @api"
+                tags: "@viewing_product_reviews&&@api"
