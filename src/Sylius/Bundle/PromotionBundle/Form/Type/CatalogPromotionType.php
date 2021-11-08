@@ -13,11 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
-use Sylius\Bundle\PromotionBundle\Form\DataTransformer\DefaultTimeDataTransformer;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -54,6 +52,18 @@ final class CatalogPromotionType extends AbstractResourceType
             ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.catalog_promotion.enabled'
             ])
+            ->add('startDate', DateTimeType::class, [
+                'label' => 'sylius.form.catalog_promotion.start_date',
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
+                'required' => false,
+            ])
+            ->add('endDate', DateTimeType::class, [
+                'label' => 'sylius.form.catalog_promotion.end_date',
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
+                'required' => false,
+            ])
             ->add('scopes', CollectionType::class, [
                 'label' => 'sylius.ui.scopes',
                 'entry_type' => CatalogPromotionScopeType::class,
@@ -69,30 +79,6 @@ final class CatalogPromotionType extends AbstractResourceType
                 'by_reference' => false,
             ])
         ;
-
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event): void {
-            /** @var CatalogPromotionInterface $catalogPromotion */
-            $catalogPromotion = $event->getData();
-            $disabled = $catalogPromotion->getId() !== null;
-
-            $form = $event->getForm();
-            $form
-                ->add('startDate', DateTimeType::class, [
-                    'label' => 'sylius.form.catalog_promotion.start_date',
-                    'date_widget' => 'single_text',
-                    'time_widget' => 'single_text',
-                    'required' => false,
-                    'disabled' => $disabled,
-                ])
-                ->add('endDate', DateTimeType::class, [
-                    'label' => 'sylius.form.catalog_promotion.end_date',
-                    'date_widget' => 'single_text',
-                    'time_widget' => 'single_text',
-                    'required' => false,
-                    'disabled' => $disabled,
-                ])
-            ;
-        });
 
         $builder->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event): void {
             $data = $event->getData();

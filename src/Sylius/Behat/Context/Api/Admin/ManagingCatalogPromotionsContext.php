@@ -602,6 +602,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I( try to) change its end date to :endDate
+     */
+    public function iChangeItsEndDateTo(string $endDate): void
+    {
+        $this->client->updateRequestData(['endDate' => $endDate]);
+    }
+
+    /**
      * @Then there should be :amount new catalog promotion on the list
      * @Then there should be :amount catalog promotions on the list
      * @Then there should be an empty list of catalog promotions
@@ -952,24 +960,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should not be able to edit its start and end date
-     */
-    public function iShouldNotBeAbleToEditItsStartAndEndDate(): void
-    {
-        $this->client->updateRequestData(['startDate' => '2022-01-01 00:00:00', 'endDate' => '2022-01-08 00:00:00']);
-        $this->client->update();
-
-        Assert::false(
-            $this->responseChecker->hasValue($this->client->getLastResponse(), 'startDate', '2022-01-01 00:00:00'),
-            'The start date has been changed, but it should not'
-        );
-        Assert::false(
-            $this->responseChecker->hasValue($this->client->getLastResponse(), 'endDate', '2022-01-08 00:00:00'),
-            'The end date has been changed, but it should not'
-        );
-    }
-
-    /**
      * @Then I should be notified that a discount amount is required
      */
     public function iShouldBeNotifiedThatADiscountAmountIsRequired(): void
@@ -1079,6 +1069,17 @@ final class ManagingCatalogPromotionsContext implements Context
     public function itsNameShouldBe(string $name): void
     {
         Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $name));
+    }
+
+    /**
+     * @Then I should get information that the end date cannot be set before start date
+     */
+    public function iShouldGetInformationThatTheEndDateCannotBeSetBeforeStartDate(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'endDate: End date cannot be set before start date.'
+        );
     }
 
     private function catalogPromotionAppliesOnVariants(ProductVariantInterface ...$productVariants): bool

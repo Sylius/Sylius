@@ -33,3 +33,11 @@ Feature: Applying catalog promotions in proper time range
         When I view product "T-Shirt"
         Then I should see the product price "$20.00"
         And I should see this product has no catalog promotion applied
+
+    @api @ui
+    Scenario: Not applying catalog promotion if its end date has already passed after end date modification
+        Given it is "2021-12-25" now
+        And the catalog promotion "Winter sale" operates between "2021-12-20" and "2021-12-30"
+        And the end date of catalog promotion "Winter sale" was changed to "2021-12-23"
+        When I view product "T-Shirt"
+        Then I should see the product price "$20.00"

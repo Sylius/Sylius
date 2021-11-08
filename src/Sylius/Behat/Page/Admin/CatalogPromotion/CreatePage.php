@@ -24,6 +24,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_catalog_promotion_code',
+            'endDate' => '#sylius_catalog_promotion_endDate',
             'name' => '#sylius_catalog_promotion_name',
         ]);
     }
