@@ -31,4 +31,4 @@ default:
                 - sylius.behat.context.api.shop.product_variant
 
             filters:
-                tags: "@applying_catalog_promotions && @api"
+                tags: "@applying_catalog_promotions&&@api"
