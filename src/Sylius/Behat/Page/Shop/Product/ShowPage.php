@@ -124,7 +124,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasCatalogPromotionApplied(string $name): bool
     {
-        $catalogPromotions = $this->getDocument()->findAll('css', '#promotion_label');
+        $catalogPromotions = $this->getDocument()->findAll('css', '.promotion_label');
         foreach ($catalogPromotions as $catalogPromotion) {
             if (explode(' - ', $catalogPromotion->getText())[0] === $name) {
                 return true;
@@ -338,7 +338,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'association' => '[data-test-product-association="%associationName%"]',
             'attributes' => '[data-test-product-attributes]',
             'average_rating' => '[data-test-average-rating]',
-            'catalog_promotion' => '#promotion_label',
+            'catalog_promotion' => '.promotion_label',
             'current_variant_input' => '[data-test-product-variants] td input:checked',
             'details' => '[data-tab="details"]',
             'main_image' => '[data-test-main-image]',
