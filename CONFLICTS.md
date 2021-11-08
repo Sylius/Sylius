@@ -71,3 +71,25 @@ references related issues.
 
   References: https://github.com/doctrine-extensions/DoctrineExtensions/issues/2155
 
+In this section we keep track of the reasons, why some restrictions were added to the `requires` section of `composer.json`
+
+- `doctrine/dbal:^2`:
+
+  In `doctrine/dbal:^3` doctrine column type `json_array` has been removed creating error during a
+  doctrine migration
+
+   ```
+   Error:  Migration Sylius\Bundle\CoreBundle\Migrations\Version20201130071338
+   failed during Execution.
+   In Exception.php line 125:
+   Unknown column type "json_array" requested. Any Doctrine type that you use   
+   has to be registered with \Doctrine\DBAL\Types\Type::addType(). You can get  
+   a list of all the known types with \Doctrine\DBAL\Types\Type::getTypesMap(  
+   ). If this error occurs during database introspection then you might have f  
+   orgotten to register all database types for a Doctrine Type. Use AbstractPl  
+   atform#registerDoctrineTypeMapping() or have your custom types implement Ty  
+   pe#getMappedDatabaseTypes(). If the type name is empty you might have a pro  
+   blem with the cache or forgot some mapping information.
+   ```
+
+  References: https://github.com/Sylius/Sylius/issues/13211
