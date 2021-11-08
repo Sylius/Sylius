@@ -31,6 +31,14 @@
             <argument type="service" id="api_platform.iri_converter" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction" public="true">
+            <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="request_stack" />
+        </service>
+
         <service id="api_platform.swagger.action.ui" class="Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Bundle\Action\SwaggerUiAction" public="true">
             <argument type="service" id="api_platform.metadata.resource.name_collection_factory" />
             <argument type="service" id="api_platform.metadata.resource.metadata_factory" />
