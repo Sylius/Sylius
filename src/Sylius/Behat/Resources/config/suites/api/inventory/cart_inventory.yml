@@ -20,4 +20,4 @@ default:
                 - sylius.behat.context.api.shop.product
 
             filters:
-                tags: "@cart_inventory && @api"
+                tags: "@cart_inventory&&@api"

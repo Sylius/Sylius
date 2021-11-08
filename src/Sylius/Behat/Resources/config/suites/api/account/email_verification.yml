@@ -21,4 +21,4 @@ default:
                 - sylius.behat.context.api.shop.login
 
             filters:
-                tags: "@email_verification && @api"
+                tags: "@email_verification&&@api"
