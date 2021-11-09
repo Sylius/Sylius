@@ -27,4 +27,4 @@ default:
                 - sylius.behat.context.api.shop.checkout
 
             filters:
-                tags: "@checkout_inventory && @api"
+                tags: "@checkout_inventory&&@api"
