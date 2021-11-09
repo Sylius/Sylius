@@ -5,6 +5,9 @@ sylius:
             upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
     catalog_promotion_scope:
         invalid_type: Catalog promotion scope type is invalid. Please choose a valid type.
+        for_products:
+            invalid_products: Provided configuration contains errors. Please add only existing products.
+            not_empty: Provided configuration contains errors. Please add at least 1 product.
         for_variants:
             invalid_variants: Provided configuration contains errors. Please add only existing variants.
             not_empty: Please add at least 1 variant.

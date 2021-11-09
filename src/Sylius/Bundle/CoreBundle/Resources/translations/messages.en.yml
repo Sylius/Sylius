@@ -40,6 +40,7 @@ sylius:
         catalog_promotion:
             channels: Channels
             scope:
+                for_products: For products
                 for_taxons: For taxons
                 for_variants: For variants
         checkout:

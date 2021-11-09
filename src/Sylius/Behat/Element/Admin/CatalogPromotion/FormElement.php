@@ -81,18 +81,11 @@ final class FormElement extends Element implements FormElementInterface
         $lastScope->selectFieldOption('Type', $type);
     }
 
-    public function chooseLastScopeVariants(array $variantCodes): void
+    public function chooseLastScopeCodes(array $codes): void
     {
         $lastScope = $this->getElement('last_scope');
 
-        $lastScope->find('css', 'input[type="hidden"]')->setValue(implode(',', $variantCodes));
-    }
-
-    public function chooseLastScopeTaxons(array $taxonsCodes): void
-    {
-        $lastScope = $this->getElement('last_scope');
-
-        $lastScope->find('css', 'input[type="hidden"]')->setValue(implode(',', $taxonsCodes));
+        $lastScope->find('css', 'input[type="hidden"]')->setValue(implode(',', $codes));
     }
 
     public function specifyLastActionDiscount(string $discount): void
@@ -107,14 +100,7 @@ final class FormElement extends Element implements FormElementInterface
         return $this->getElement($field, ['%localeCode%' => $localeCode])->getValue();
     }
 
-    public function getLastScopeVariantCodes(): array
-    {
-        $lastScope = $this->getElement('last_scope');
-
-        return explode(',', $lastScope->find('css', 'input[type="hidden"]')->getValue());
-    }
-
-    public function getLastScopeTaxonsCodes(): array
+    public function getLastScopeCodes(): array
     {
         $lastScope = $this->getElement('last_scope');
 

@@ -20,6 +20,7 @@ use Behat\Mink\Session;
 use DMore\ChromeDriver\ChromeDriver;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use PhpSpec\Exception\Example\PendingException;
 use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
 use Sylius\Behat\Service\JQueryHelper;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -119,6 +120,18 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function getCatalogPromotionName(): string
     {
         return explode(' - ', $this->getElement('catalog_promotion')->getText())[0];
+    }
+
+    public function hasCatalogPromotionApplied(string $name): bool
+    {
+        $catalogPromotions = $this->getDocument()->findAll('css', '.promotion_label');
+        foreach ($catalogPromotions as $catalogPromotion) {
+            if (explode(' - ', $catalogPromotion->getText())[0] === $name) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function getCurrentUrl(): string
@@ -325,7 +338,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'association' => '[data-test-product-association="%associationName%"]',
             'attributes' => '[data-test-product-attributes]',
             'average_rating' => '[data-test-average-rating]',
-            'catalog_promotion' => '#promotion_label',
+            'catalog_promotion' => '.promotion_label',
             'current_variant_input' => '[data-test-product-variants] td input:checked',
             'details' => '[data-tab="details"]',
             'main_image' => '[data-test-main-image]',

@@ -41,6 +41,7 @@ atomic validator for our Scope:
     Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScopeValidator:
         arguments:
             - [
+                !php/const Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS,
                 !php/const Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
                 !php/const Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
                 !php/const App\Model\CatalogPromotionScopeInterface::TYPE_BY_PHRASE
@@ -205,7 +206,7 @@ Now let's create a form type and declare it service:
     }
 
 And with current implementation, there is also a need to override a ``default.html.twig`` template with key that is first in alphabetical order.
-In our case - we have a template ``by_phrase.html.twig`` which is first before out of the box ``for_variants`` and ``for_taxons`` templates:
+In our case - we have a template ``by_phrase.html.twig`` which is first before out of the box ``for_products``, ``for_variants`` and ``for_taxons`` templates:
 
 .. code-block:: html+twig
 

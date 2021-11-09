@@ -24,6 +24,7 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -209,7 +210,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
         $this->formElement->addScope();
         $this->formElement->chooseScopeType('For variants');
-        $this->formElement->chooseLastScopeVariants($variantCodes);
+        $this->formElement->chooseLastScopeCodes($variantCodes);
     }
 
     /**
@@ -223,7 +224,17 @@ final class ManagingCatalogPromotionsContext implements Context
 
         $this->formElement->addScope();
         $this->formElement->chooseScopeType('For taxons');
-        $this->formElement->chooseLastScopeTaxons($taxonsCodes);
+        $this->formElement->chooseLastScopeCodes($taxonsCodes);
+    }
+
+    /**
+     * @When /^I add scope that applies on ("[^"]+" product)$/
+     */
+    public function iAddScopeThatAppliesOnProduct(ProductInterface $product): void
+    {
+        $this->formElement->addScope();
+        $this->formElement->chooseScopeType('For product');
+        $this->formElement->chooseLastScopeCodes([$product->getCode()]);
     }
 
     /**
@@ -287,7 +298,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
-        $this->formElement->chooseLastScopeVariants([$productVariant->getCode()]);
+        $this->formElement->chooseLastScopeCodes([$productVariant->getCode()]);
         $this->updatePage->saveChanges();
     }
 
@@ -301,7 +312,21 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
         $this->formElement->chooseScopeType('For taxons');
-        $this->formElement->chooseLastScopeTaxons([$taxon->getCode()]);
+        $this->formElement->chooseLastScopeCodes([$taxon->getCode()]);
+        $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @When /^I edit ("[^"]+" catalog promotion) to be applied on ("[^"]+" product)$/
+     */
+    public function iEditCatalogPromotionToBeAppliedOnProduct(
+        CatalogPromotionInterface $catalogPromotion,
+        ProductInterface $product
+    ): void {
+        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
+
+        $this->formElement->chooseScopeType('For products');
+        $this->formElement->chooseLastScopeCodes([$product->getCode()]);
         $this->updatePage->saveChanges();
     }
 
@@ -370,6 +395,15 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $this->formElement->addScope();
         $this->formElement->chooseScopeType('For taxons');
+    }
+
+    /**
+     * @When I add catalog promotion scope for product without products
+     */
+    public function iAddCatalogPromotionScopeForProductWithoutProducts(): void
+    {
+        $this->formElement->addScope();
+        $this->formElement->chooseScopeType('For products');
     }
 
     /**
@@ -519,7 +553,7 @@ final class ManagingCatalogPromotionsContext implements Context
     ): void {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
-        $selectedVariants = $this->formElement->getLastScopeVariantCodes();
+        $selectedVariants = $this->formElement->getLastScopeCodes();
 
         foreach ($variants as $productVariant) {
             Assert::inArray($productVariant->getCode(), $selectedVariants);
@@ -537,7 +571,7 @@ final class ManagingCatalogPromotionsContext implements Context
     ): void {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
-        $selectedTaxons = $this->formElement->getLastScopeVariantCodes();
+        $selectedTaxons = $this->formElement->getLastScopeCodes();
 
         foreach ($taxons as $taxon) {
             Assert::inArray($taxon->getCode(), $selectedTaxons);
@@ -545,12 +579,43 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then /^this catalog promotion should be applied on ("[^"]+" taxon)$/
+     */
+    public function thisCatalogPromotionShouldBeAppliedOnTaxon(TaxonInterface $taxon): void
+    {
+        $selectedTaxons = $this->formElement->getLastScopeCodes();
+
+        Assert::inArray($taxon->getCode(), $selectedTaxons);
+    }
+
+    /**
+     * @Then /^the ("[^"]+" catalog promotion) should apply to all variants of ("[^"]+" product)$/
+     */
+    public function theCatalogPromotionShouldApplyToAllVariantsOfProduct(
+        CatalogPromotionInterface $catalogPromotion,
+        ProductInterface $product
+    ): void {
+        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
+
+        $this->thisCatalogPromotionShouldBeAppliedOnProduct($product);
+    }
+
+    /**
+     * @Then /^this catalog promotion should be applied on ("[^"]+" product)$/
+     */
+    public function thisCatalogPromotionShouldBeAppliedOnProduct(ProductInterface $product): void
+    {
+        $selectedProducts = $this->formElement->getLastScopeCodes();
+        Assert::inArray($product->getCode(), $selectedProducts);
+    }
+
+    /**
      * @Then /^it should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
      * @Then /^this catalog promotion should be applied on ("[^"]+" variant)$/
      */
-    public function itShouldAppyToVariants(ProductVariantInterface ...$variants): void
+    public function itShouldApplyToVariants(ProductVariantInterface ...$variants): void
     {
-        $selectedVariants = $this->formElement->getLastScopeVariantCodes();
+        $selectedVariants = $this->formElement->getLastScopeCodes();
 
         foreach ($variants as $productVariant) {
             Assert::inArray($productVariant->getCode(), $selectedVariants);
@@ -562,7 +627,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function itShouldNotApplyToVariants(ProductVariantInterface ...$variants): void
     {
-        $selectedVariants = $this->formElement->getLastScopeVariantCodes();
+        $selectedVariants = $this->formElement->getLastScopeCodes();
 
         foreach ($variants as $productVariant) {
             Assert::false(in_array($productVariant->getCode(), $selectedVariants));
@@ -749,11 +814,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that I must add at least one taxon
+     * @Then /^I should be notified that I must add at least one (product|taxon)$/
      */
-    public function iShouldBeNotifiedThatIMustAddAtLeastOneTaxon(): void
+    public function iShouldBeNotifiedThatIMustAddAtLeastOne(string $entity): void
     {
-        Assert::same($this->formElement->getValidationMessage(), 'Provided configuration contains errors. Please add at least 1 taxon.');
+        Assert::same(
+            $this->formElement->getValidationMessage(),
+            sprintf('Provided configuration contains errors. Please add at least 1 %s.', $entity)
+        );
     }
 
     /**
@@ -789,6 +857,14 @@ final class ManagingCatalogPromotionsContext implements Context
     public function itShouldApplyOnVariant(ProductVariantInterface $variant): void
     {
         Assert::true($this->showPage->hasScopeWithVariant($variant));
+    }
+
+    /**
+     * @Then it should apply on :product product
+     */
+    public function itShouldApplyOnProduct(ProductInterface $product): void
+    {
+        Assert::true($this->showPage->hasScopeWithProduct($product));
     }
 
     /**

@@ -14,9 +14,10 @@ Feature: Applying all available catalog promotions
         And this product belongs to "Dishes"
         And this product has "Coffee Mug" variant priced at "$5.00" in "Web-US" channel
         And there is a catalog promotion "Clothes sale" that reduces price by "30%" and applies on "Clothes" taxon
+        And there is a catalog promotion "T-Shirt sale" that reduces price by "30%" and applies on "T-Shirt" product
+        And there is a catalog promotion "Winter sale" that reduces price by "30%" and applies on "PHP T-Shirt" variant
 
-    @api
+    @api @ui
     Scenario: Applying multiple catalog promotions
-        Given there is a catalog promotion "Winter sale" available in "Web-US" channel that reduces price by "30%" and applies on "PHP T-shirt" variant
         When I view "PHP T-Shirt" variant of the "T-Shirt" product
-        Then I should see this variant is discounted from "$20.00" to "$9.80" with "Clothes sale" promotion
+        Then I should see this variant is discounted from "$20.00" to "$6.86" with "Clothes sale", "T-Shirt sale" and "Winter sale" promotions

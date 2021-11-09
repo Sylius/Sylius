@@ -56,6 +56,14 @@ Feature: Reapplying catalog promotion after editing their scopes
         And the visitor should see that the "PHP T-Shirt" variant is discounted from "$20.00" to "$10.00" with "Summer sale" promotion
 
     @api @ui @javascript
+    Scenario: Reapplying catalog promotion after editing the product in its scope
+        Given there is a catalog promotion "Winter sale" that reduces price by "30%" and applies on "T-Shirt" product
+        When I edit "Winter sale" catalog promotion to be applied on "Mug" product
+        Then the visitor should see that the "PHP Mug" variant is discounted from "$5.00" to "$3.50" with "Winter sale" promotion
+        And the visitor should see that the "Expensive Mug" variant is discounted from "$50.00" to "$35.00" with "Winter sale" promotion
+        And the visitor should see that the "PHP T-Shirt" variant is discounted from "$20.00" to "$10.00" with "Summer sale" promotion
+
+    @api @ui @javascript
     Scenario: Reapplying catalog promotion after editing the type of its scope
         Given there is a catalog promotion "Winter sale" that reduces price by "30%" and applies on "PHP T-Shirt" variant
         When I edit "Winter sale" catalog promotion to be applied on "Dishes" taxon

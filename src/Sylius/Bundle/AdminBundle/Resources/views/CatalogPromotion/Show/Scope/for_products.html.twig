@@ -1,0 +1,18 @@
+<table class="ui very basic celled table">
+    <tbody>
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ 'sylius.ui.type'|trans }}</strong></td>
+        <td>{{ 'sylius.ui.for_products'|trans }}</td>
+    </tr>
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ 'sylius.ui.products'|trans }}</strong></td>
+        <td {{ sylius_test_html_attribute('scope-products') }}>
+            <ul class="ui bulleted list">
+                {% for product in scope.configuration.products %}
+                    <li>{{ product }}</li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>

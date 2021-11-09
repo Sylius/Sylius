@@ -13,9 +13,9 @@
 
 <div id="appliedPromotions" data-applied-promotions-locale="{{ sylius.localeCode }}">
     {% for appliedPromotion in channelPricing.appliedPromotions %}
-    <div class="ui blue label" id="promotion_label" style="margin: 1rem 0;">
+    <div class="ui blue label promotion_label" style="margin: 1rem 0;">
         {% set promotion = appliedPromotion[sylius.localeCode] %}
-        <div class="row ui small" id="sylius_catalog_promotion">
+        <div class="row ui small sylius_catalog_promotion">
             {{ promotion.name }}{% if promotion.description %} - {{ promotion.description }}{% endif %}
         </div>
     </div>

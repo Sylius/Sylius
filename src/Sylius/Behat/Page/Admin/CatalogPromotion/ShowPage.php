@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\CatalogPromotion;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
@@ -55,6 +56,18 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $variantsElements = $this->getDocument()->findAll('css', '[data-test-scope-variants]');
         foreach ($variantsElements as $variantElement) {
             if ($variantElement->getText() === $variant->getCode()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function hasScopeWithProduct(ProductInterface $product): bool
+    {
+        $productsElements = $this->getDocument()->findAll('css', '[data-test-scope-products]');
+        foreach ($productsElements as $productElement) {
+            if ($productElement->getText() === $product->getCode()) {
                 return true;
             }
         }

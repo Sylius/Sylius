@@ -55,12 +55,19 @@ Feature: Editing catalog promotion
         And this catalog promotion should be applied on "Kotlin T-shirt" variant
         And this catalog promotion should not be applied on "PHP T-Shirt" variant
 
-    @api
+    @api @ui @javascript
     Scenario: Editing catalog promotion taxon scope
         When I edit "Christmas sale" catalog promotion to be applied on "Clothes" taxon
         Then I should be notified that it has been successfully edited
         And this catalog promotion should be applied on "Clothes" taxon
         And this catalog promotion should not be applied on "Kotlin T-shirt" variant
+        And this catalog promotion should not be applied on "PHP T-Shirt" variant
+
+    @api @ui @javascript
+    Scenario: Editing catalog promotion product scope
+        When I edit "Christmas sale" catalog promotion to be applied on "T-Shirt" product
+        Then I should be notified that it has been successfully edited
+        And this catalog promotion should be applied on "T-Shirt" product
         And this catalog promotion should not be applied on "PHP T-Shirt" variant
 
     @api @ui @javascript
