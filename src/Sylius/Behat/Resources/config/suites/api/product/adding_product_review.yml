@@ -23,4 +23,4 @@ default:
                 - sylius.behat.context.api.shop.product_review
 
             filters:
-                tags: "@adding_product_review && @api"
+                tags: "@adding_product_review&&@api"
