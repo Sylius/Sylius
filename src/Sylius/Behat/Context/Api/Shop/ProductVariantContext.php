@@ -93,7 +93,7 @@ final class ProductVariantContext implements Context
      * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" and "([^"]+)" promotions$/
      * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)", "([^"]+)" and "([^"]+)" promotions$/
      */
-    public function iShouldSeeVariantIsDiscountedFromToWithPromotion(
+    public function iShouldSeeVariantIsDiscountedFromToWithPromotions(
         ProductVariantInterface $variant,
         int $originalPrice,
         int $price,
@@ -109,26 +109,6 @@ final class ProductVariantContext implements Context
     }
 
     /**
-     * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" and "([^"]+)" promotions$/
-     */
-    public function iShouldSeeVariantIsDiscountedFromToWithPromotions(
-        ProductVariantInterface $variant,
-        int $originalPrice,
-        int $price,
-        string $firstPromotionName,
-        string $secondPromotionName
-    ): void {
-        $content = $this->findVariant($variant);
-
-        $appliedPromotions = array_values($content['appliedPromotions']);
-
-        Assert::same($content['price'], $price);
-        Assert::same($content['originalPrice'], $originalPrice);
-        Assert::same(['en_US' => ['name' => $firstPromotionName, 'description' => $firstPromotionName . ' description']], $appliedPromotions[0]);
-        Assert::same(['en_US' => ['name' => $secondPromotionName, 'description' => $secondPromotionName . ' description']], $appliedPromotions[1]);
-    }
-
-    /**
      * @Then /^the visitor should(?:| still) see that the ("[^"]+" variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/
      */
     public function theVisitorShouldSeeThatTheVariantIsDiscountedWithPromotion(
@@ -140,7 +120,7 @@ final class ProductVariantContext implements Context
         $this->sharedStorage->set('token', null);
         $this->client->show($productVariant->getCode());
 
-        $this->iShouldSeeVariantIsDiscountedFromToWithPromotion($productVariant, $originalPrice, $price, $promotionName);
+        $this->iShouldSeeVariantIsDiscountedFromToWithPromotions($productVariant, $originalPrice, $price, $promotionName);
     }
 
     /**

@@ -500,7 +500,7 @@ final class ProductContext implements Context
      * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" and "([^"]+)" promotions$/
      * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)", "([^"]+)" and "([^"]+)" promotions$/
      */
-    public function iShouldSeeVariantIsDiscountedFromToWithPromotion(
+    public function iShouldSeeVariantIsDiscountedFromToWithPromotions(
         ProductVariantInterface $variant,
         string $originalPrice,
         string $price,
@@ -516,26 +516,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" and "([^"]+)" promotions$/
-     */
-    public function iShouldSeeVariantIsDiscountedFromToWithPromotions(
-        ProductVariantInterface $variant,
-        string $originalPrice,
-        string $price,
-        string $firstPromotionName,
-        string $secondPromotionName
-    ): void {
-        $this->showPage->selectVariant($variant->getName());
-        $catalogPromotionNames = $this->showPage->getCatalogPromotionNames();
-
-        Assert::contains($catalogPromotionNames[0], $firstPromotionName);
-        Assert::contains($catalogPromotionNames[1], $secondPromotionName);
-
-        Assert::same($this->showPage->getPrice(), $price);
-        Assert::same($this->showPage->getOriginalPrice(), $originalPrice);
-    }
-
-    /**
      * @Then /^the visitor should(?:| still) see that the ("[^"]+" variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" promotion$/
      */
     public function theVisitorShouldSeeThatTheVariantIsDiscountedFromToWithPromotion(
@@ -548,7 +528,7 @@ final class ProductContext implements Context
         $product = $variant->getProduct();
 
         $this->iOpenProductPage($product);
-        $this->iShouldSeeVariantIsDiscountedFromToWithPromotion($variant, $originalPrice, $price, $promotionName);
+        $this->iShouldSeeVariantIsDiscountedFromToWithPromotions($variant, $originalPrice, $price, $promotionName);
     }
 
     /**
