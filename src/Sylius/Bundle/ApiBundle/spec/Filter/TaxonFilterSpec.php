@@ -39,11 +39,10 @@ final class TaxonFilterSpec extends ObjectBehavior
 
         $queryBuilder->distinct()->willReturn($queryBuilder);
         $queryBuilder->addSelect('productTaxon')->willReturn($queryBuilder);
-        $queryBuilder->join('o.productTaxons', 'p')->willReturn($queryBuilder);
-        $queryBuilder->innerJoin('p.taxon', 'taxon')->willReturn($queryBuilder);
         $queryBuilder->innerJoin('o.productTaxons', 'productTaxon')->willReturn($queryBuilder);
         $queryBuilder->andWhere('taxon.left >= :taxonLeft')->willReturn($queryBuilder);
         $queryBuilder->andWhere('taxon.right <= :taxonRight')->willReturn($queryBuilder);
+        $queryBuilder->innerJoin('productTaxon.taxon', 'taxon')->willReturn($queryBuilder);
         $queryBuilder->andWhere('taxon.root = :taxonRoot')->willReturn($queryBuilder);
         $queryBuilder->addOrderBy('productTaxon.position')->willReturn($queryBuilder);
 

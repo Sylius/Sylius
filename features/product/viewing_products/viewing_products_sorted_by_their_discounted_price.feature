@@ -6,21 +6,20 @@ Feature: Viewing products sorted by discounted price
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store classifies its products as "Alcohol"
-        And the store has a "Wyborowa Vodka" configurable product
-        And this product belongs to "Alcohol"
-        And the product "Wyborowa Vodka" has "Wyborowa Vodka Exquisite" variant priced at "$30.00"
-        And the product "Wyborowa Vodka" has "Wyborowa Apple" variant priced at "$20.00"
-        And the store has a "Jack Daniels Whiskey" configurable product
-        And this product belongs to "Alcohol"
-        And the product "Jack Daniels Whiskey" has "Jack Daniels Original" variant priced at "$25.00"
-        And the product "Jack Daniels Whiskey" has "Jack Daniels Red" variant priced at "$40.00"
-        And there is a catalog promotion "Worker Monday" that reduces price by "10%" and applies on "Alcohol" taxon
+        And the store classifies its products as "Merchandise"
+        And the store has a "T-Shirt" configurable product
+        And this product belongs to "Merchandise"
+        And the product "T-Shirt" has "PHP T-Shirt" variant priced at "$20.00"
+        And the product "T-Shirt" has "Symfony T-Shirt" variant priced at "$40.00"
+        And the store has a "Mug" configurable product
+        And this product belongs to "Merchandise"
+        And the product "Mug" has "PHP Mug" variant priced at "$25.00"
+        And the product "Mug" has "Symfony Mug" variant priced at "$30.00"
+        And there is a catalog promotion "Mugs sale" that reduces price by "25%" and applies on "PHP Mug" variant and "Symfony Mug" variant
 
     @api @ui
-    Scenario: Viewing a products with default variant's price sorted with discounted price
-        When I browse products from taxon "Alcohol"
+    Scenario: Sorting products by discounted price of their first variant with ascending order
+        When I browse products from taxon "Merchandise"
         And I sort products by the lowest price first
-        Then the first product on the list should have name "Jack Daniels Whiskey"
-        And the last product on the list should have name "Wyborowa Vodka"
-
+        Then the first product on the list should have name "Mug"
+        And the last product on the list should have name "T-Shirt"
