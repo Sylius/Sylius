@@ -226,6 +226,7 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @Then /^the (variant with code "[^"]+") should be priced at (?:€|£|\$)([^"]+) for (channel "([^"]+)")$/
+     * @Then /^the (variant with code "[^"]+") should be priced at "(?:€|£|\$)([^"]+)" for (channel "([^"]+)")$/
      */
     public function theVariantWithCodeShouldBePricedAtForChannel(ProductVariantInterface $productVariant, string $price, ChannelInterface $channel)
     {
@@ -236,6 +237,7 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @Then /^the (variant with code "[^"]+") should have minimum price (?:€|£|\$)([^"]+) for (channel "([^"]+)")$/
+     * @Then /^the (variant with code "[^"]+") should have minimum price "(?:€|£|\$)([^"]+)" for (channel "([^"]+)")$/
      */
     public function theVariantWithCodeShouldHaveMinimumPriceForChannel(ProductVariantInterface $productVariant, string $price, ChannelInterface $channel): void
     {

@@ -22,21 +22,25 @@
 
         <attribute name="channelCode">
             <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
         </attribute>
 
         <attribute name="price">
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:update</group>
+            <group>admin:product_variant:create</group>
         </attribute>
 
         <attribute name="originalPrice">
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:update</group>
+            <group>admin:product_variant:create</group>
         </attribute>
 
         <attribute name="minimumPrice">
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:update</group>
+            <group>admin:product_variant:create</group>
         </attribute>
     </class>
 </serializer>
