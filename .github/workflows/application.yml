@@ -298,12 +298,12 @@ jobs:
 
             -
                 name: Run CLI Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli && ~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli && ~@todo" --rerun
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --rerun
                 continue-on-error: true
 
             -
                 name: Run non-JS Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript && ~@todo && ~@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript && ~@todo && ~@cli" --rerun
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli" --rerun
                 continue-on-error: true
 
             -

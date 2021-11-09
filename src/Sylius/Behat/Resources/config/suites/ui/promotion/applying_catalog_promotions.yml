@@ -29,4 +29,4 @@ default:
                 - sylius.behat.context.ui.shop.product
 
             filters:
-                tags: "@applying_catalog_promotions && @ui"
+                tags: "@applying_catalog_promotions&&@ui"

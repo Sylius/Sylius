@@ -35,4 +35,4 @@ default:
                 - sylius.behat.context.api.shop.checkout
 
             filters:
-                tags: "@applying_taxes && @api"
+                tags: "@applying_taxes&&@api"
