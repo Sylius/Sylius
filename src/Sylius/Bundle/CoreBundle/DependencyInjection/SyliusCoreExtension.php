@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
+use Doctrine\DBAL\Types\JsonArrayType;
+use Doctrine\DBAL\Types\JsonType;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -65,6 +67,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $config = $container->getExtensionConfig($this->getAlias());
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
 
+        $this->prependDoctrine($container);
         $this->prependSyliusThemeBundle($container, $config['driver']);
         $this->prependHwiOauth($container);
         $this->prependDoctrineMigrations($container);
@@ -83,6 +86,25 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
     protected function getNamespacesOfMigrationsExecutedBefore(): array
     {
         return [];
+    }
+
+    private function prependDoctrine(ContainerBuilder $container): void
+    {
+        if (!$container->hasExtension('doctrine')) {
+            return;
+        }
+        
+        if (class_exists(JsonArrayType::class)) {
+            return;
+        }
+
+        $container->prependExtensionConfig('doctrine', [
+            'dbal' => [
+                'types' => [
+                    'json_array' => JsonType::class,
+                ]
+            ]
+        ]);
     }
 
     private function prependHwiOauth(ContainerBuilder $container): void
