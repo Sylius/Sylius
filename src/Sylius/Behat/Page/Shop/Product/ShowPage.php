@@ -133,13 +133,13 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         return false;
     }
-    
+
     public function getCatalogPromotions(): array
     {
         $catalogPromotions = [];
 
         /** @var NodeElement $catalogPromotion */
-        foreach ($this->getElement('applied_promotions')->findAll('css', '#promotion_label') as $catalogPromotion) {
+        foreach ($this->getElement('applied_promotions')->findAll('css', '.promotion_label') as $catalogPromotion) {
             $catalogPromotions[] = explode(' - ', $catalogPromotion->getText())[0];
         }
 

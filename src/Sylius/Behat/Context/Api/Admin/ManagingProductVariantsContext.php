@@ -41,7 +41,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Given /^I want to create a new variant of (this product)$/
+     * @When /^I want to create a new variant of (this product)$/
      */
     public function iWantToCreateANewProductVariant(ProductInterface $product): void
     {
@@ -60,7 +60,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I set its price to ("[^"]+") for ("[^"]+" channel)$/
      */
-    public function iSetItsPriceToForChannel(int $price, ChannelInterface $channel)
+    public function iSetItsPriceToForChannel(int $price, ChannelInterface $channel): void
     {
         $this->client->addRequestData('channelPricings', [
             $channel->getCode() => [
@@ -73,7 +73,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I set its minimum price to ("[^"]+") for ("[^"]+" channel)$/
      */
-    public function iSetItsMinimumPriceToForChannel(int $minimumPrice, ChannelInterface $channel)
+    public function iSetItsMinimumPriceToForChannel(int $minimumPrice, ChannelInterface $channel): void
     {
         $content = $this->client->getContent();
         $content['channelPricings'][$channel->getCode()]['minimumPrice'] = $minimumPrice;
@@ -84,7 +84,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->client->create();
     }
@@ -124,7 +124,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then I should be notified that it has been successfully created
      */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated()
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
@@ -149,7 +149,7 @@ final class ManagingProductVariantsContext implements Context
     {
         $response = $this->responseChecker->getCollection($this->client->index());
 
-        Assert::true($response[0]['channelPricings'][$channel->getCode()]['price'] === $price);
+        Assert::same($response[0]['channelPricings'][$channel->getCode()]['price'], $price);
     }
 
     /**
@@ -159,7 +159,7 @@ final class ManagingProductVariantsContext implements Context
     {
         $response = $this->responseChecker->getCollection($this->client->index());
 
-        Assert::true($response[0]['channelPricings'][$channel->getCode()]['minimumPrice'] === $minimumPrice);
+        Assert::same($response[0]['channelPricings'][$channel->getCode()]['minimumPrice'], $minimumPrice);
     }
 
     private function updateChannelPricingField(

@@ -1,0 +1,21 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        managing_product_variants_ajax:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.shared_storage
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.admin_security
+        
+                - sylius.behat.context.api.admin.ajax
+
+            filters:
+                tags: "@managing_product_variants_ajax&&@api"
+            javascript: false
