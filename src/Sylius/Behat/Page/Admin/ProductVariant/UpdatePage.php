@@ -136,7 +136,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'on_hand' => '#sylius_product_variant_onHand',
             'option_values' => '#sylius_product_variant_optionValues_%optionName%',
             'original_price' => '#sylius_product_variant_channelPricings input[name$="[originalPrice]"][id*="%channelCode%"]',
-            'minimum_price' => '#sylius_product_variant_channelPricings input[name$="[minimumPrice]"][id*="%channelCode%"]',
             'price' => '#sylius_product_variant_channelPricings input[id*="%channelCode%"]',
             'pricing_configuration' => '#sylius_calculator_container',
             'shipping_required' => '#sylius_product_variant_shippingRequired',
