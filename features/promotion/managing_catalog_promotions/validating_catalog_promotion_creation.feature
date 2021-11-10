@@ -160,13 +160,3 @@ Feature: Validating a catalog promotion creation
         And I add catalog promotion scope for product with nonexistent products
         And I try to add it
         Then I should be notified that I can add only existing product
-
-    @api
-    Scenario: Trying to create a catalog promotion with invalid priority
-        When I want to create a new catalog promotion
-        And I specify its code as "winter_sale"
-        And I name it "Winter sale"
-        And I set its priority to "wubba lubba dub dub"
-        And I try to add it
-        Then I should be notified that priority should be a number
-        And there should be an empty list of catalog promotions
