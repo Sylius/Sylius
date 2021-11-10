@@ -67,6 +67,7 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
     protected function addAdjustmentToUnit(OrderItemUnitInterface $unit, int $amount, PromotionInterface $promotion): void
     {
         $adjustment = $this->createAdjustment($promotion, AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
+        //tu
         $adjustment->setAmount(-$amount);
 
         $unit->addAdjustment($adjustment);
