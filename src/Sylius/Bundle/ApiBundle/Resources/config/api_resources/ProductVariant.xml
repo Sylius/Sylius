@@ -62,6 +62,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_variant:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_variant:create</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="shop_get">
