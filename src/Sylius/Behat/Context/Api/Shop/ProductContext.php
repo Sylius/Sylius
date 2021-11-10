@@ -32,8 +32,6 @@ use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
-    public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
-
     private ApiClientInterface $client;
 
     private ApiClientInterface $productVariantClient;
@@ -96,17 +94,17 @@ final class ProductContext implements Context
     /**
      * @When I sort products by the lowest price first
      */
-    public function iSortProductsByTheLowestPriceFirst(string $sortType = 'ascending'): void
+    public function iSortProductsByTheLowestPriceFirst(): void
     {
-        $this->client->sort(['price' => self::SORT_TYPES[$sortType]]);
+        $this->client->sort(['price' => 'asc']);
     }
 
     /**
      * @When I sort products by the highest price first
      */
-    public function iSortProductsByTheHighestPriceFirst(string $sortType = 'descending'): void
+    public function iSortProductsByTheHighestPriceFirst(): void
     {
-        $this->client->sort(['price' => self::SORT_TYPES[$sortType]]);
+        $this->client->sort(['price' => 'desc']);
     }
 
     /**
@@ -147,13 +145,20 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then I should see a product with :field :value
+     * @Then I should see a product with code :code
      */
-    public function iShouldSeeProductWith(string $field, string $value): void
+    public function iShouldSeeAProductWithCode(string $code): void
+    {
+        Assert::true($this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'code', $code));
+    }
+
+    /**
+     * @Then I should see a product with name :name
+     */
+    public function iShouldSeeAProductWithName(string $name): void
     {
         Assert::true(
-            $this->hasProductWithFieldValue($this->client->getLastResponse(), $field, $value),
-            sprintf('Product has not %s with %s', $field, $value)
+            $this->responseChecker->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', 'name', $name)
         );
     }
 
@@ -259,23 +264,43 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then the first product on the list should have :field :value
+     * @Then the first product on the list should have code :code
      */
-    public function theFirstProductOnTheListShouldHave(string $field, string $value): void
+    public function theFirstProductOnTheListShouldHaveCode(string $code): void
     {
         $products = $this->responseChecker->getCollection($this->client->getLastResponse());
 
-        Assert::same($this->getFieldValueOfFirstProduct($products[0], $field), $value);
+        Assert::same($products[0]['code'], $code);
     }
 
     /**
-     * @Then the last product on the list should have :field :value
+     * @Then the last product on the list should have code :value
      */
-    public function theLastProductOnTheListShouldHave(string $field, string $value): void
+    public function theLastProductOnTheListShouldHaveCode(string $code): void
     {
         $products = $this->responseChecker->getCollection($this->client->getLastResponse());
 
-        Assert::same($this->getFieldValueOfFirstProduct(end($products), $field), $value);
+        Assert::same(end($products)['code'], $code);
+    }
+
+    /**
+     * @Then the first product on the list should have name :name
+     */
+    public function theFirstProductOnTheListShouldHaveName(string $name): void
+    {
+        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same($products[0]['translations']['en_US']['name'], $name);
+    }
+
+    /**
+     * @Then the last product on the list should have name :name
+     */
+    public function theLastProductOnTheListShouldHaveName(string $name): void
+    {
+        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same(end($products)['translations']['en_US']['name'], $name);
     }
 
     /**
@@ -473,31 +498,5 @@ final class ProductContext implements Context
         }
 
         return false;
-    }
-
-    private function hasProductWithFieldValue(Response $response, string $field, string $value): bool
-    {
-        if ($field === 'code') {
-            return $this->responseChecker->hasItemWithValue($response, $field, $value);
-        }
-
-        if ($field === 'name') {
-            return $this->responseChecker->hasItemWithTranslation($response, 'en_US', $field, $value);
-        }
-
-        return false;
-    }
-
-    private function getFieldValueOfFirstProduct(array $product, string $field): ?string
-    {
-        if ($field === 'code') {
-            return $product['code'];
-        }
-
-        if ($field === 'name') {
-            return $product['translations']['en_US']['name'];
-        }
-
-        return null;
     }
 }

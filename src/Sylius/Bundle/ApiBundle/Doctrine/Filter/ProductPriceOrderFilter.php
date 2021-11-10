@@ -36,12 +36,14 @@ final class ProductPriceOrderFilter extends AbstractContextAwareFilter
 
         $entityRepository = $queryBuilder->getEntityManager()->getRepository(ProductInterface::class);
 
+        $productIdParameterName = $queryNameGenerator->generateParameterName('productId');
+        $enabledParameterName = $queryNameGenerator->generateParameterName('enabled');
+
         $subQuery = $entityRepository->createQueryBuilder('m')
             ->select('min(v.position)')
             ->innerJoin('m.variants', 'v')
-            ->andWhere('m.id = :product_id')
-            ->andWhere('v.enabled = :enabled')
-            ->setParameter('enabled', true)
+            ->andWhere(sprintf('m.id = :%s', $productIdParameterName))
+            ->andWhere(sprintf('v.enabled = :%s', $enabledParameterName))
         ;
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
@@ -54,10 +56,11 @@ final class ProductPriceOrderFilter extends AbstractContextAwareFilter
             ->andWhere(
                 $queryBuilder->expr()->in(
                     'variant.position',
-                    str_replace(':product_id', sprintf('%s.id', $rootAlias), $subQuery->getDQL())
+                    str_replace(sprintf(':%s', $productIdParameterName), sprintf('%s.id', $rootAlias), $subQuery->getDQL())
                 )
             )
             ->orderBy('channelPricing.price', $value['price'])
+            ->setParameter($enabledParameterName, true)
         ;
     }
 
