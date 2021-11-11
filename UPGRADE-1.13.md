@@ -12,3 +12,5 @@
 
 4. Not passing `Doctrine\Persistence\ObjectManager` to `Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater`
    as a fifth argument is deprecated.
+
+5. Argument `$salesDataProvider` on `Sylius\Bundle\AdminBundle\Controller\DashboardController` is deprecated and will be removed in version `2.0`

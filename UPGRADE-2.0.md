@@ -1,5 +1,9 @@
 # UPGRADE FROM `v1.X.X` TO `v2.0.0`
 
+## Main update
+
+1. Argument `$salesDataProvider` on `Sylius\Bundle\AdminBundle\Controller\DashboardController` was removed,
+
 ## Codebase
 
 * Doctrine MongoDB and PHPCR is not longer supported in ResourceBundle and GridBundle:
