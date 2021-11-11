@@ -33,6 +33,9 @@ final class DashboardController
         private ?SalesDataProviderInterface $salesDataProvider = null,
         private ?StatisticsDataProviderInterface $statisticsDataProvider = null
     ) {
+        if ($salesDataProvider instanceof SalesDataProviderInterface) {
+            @trigger_error('Passing a sales data provider is deprecated since 1.12 and will be prohibited in 2.0', \E_USER_DEPRECATED);
+        }
     }
 
     public function indexAction(Request $request): Response
