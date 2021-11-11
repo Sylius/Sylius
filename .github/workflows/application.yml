@@ -32,7 +32,7 @@ jobs:
             fail-fast: false
             matrix:
                 php: ["7.4", "8.0"]
-                symfony: ["^4.4", "5.2.*", "5.3.*"]
+                symfony: ["^4.4", "5.3.*"]
 
         steps:
             -
@@ -116,7 +116,7 @@ jobs:
         strategy:
             matrix:
                 php: ["8.0"]
-                symfony: ["5.2.*"]
+                symfony: ["5.3.*"]
                 postgres: ["13.3"]
 
         env:
@@ -197,7 +197,7 @@ jobs:
         strategy:
             matrix:
                 php: ["8.0"]
-                symfony: ["5.2.*"]
+                symfony: ["5.3.*"]
                 mariadb: ["10.4.10"]
 
         env:
@@ -327,7 +327,7 @@ jobs:
             fail-fast: false
             matrix:
                 php: ["7.4", "8.0"]
-                symfony: ["^4.4", "5.2.*", "5.3.*"]
+                symfony: ["^4.4", "5.3.*"]
                 node: ["14.x"]
                 mysql: ["5.7", "8.0"]
 
@@ -456,7 +456,7 @@ jobs:
             fail-fast: false
             matrix:
                 php: ["7.4", "8.0"]
-                symfony: ["^4.4", "5.2.*", "5.3.*"]
+                symfony: ["^4.4", "5.3.*"]
                 node: ["14.x"]
                 mysql: ["5.7", "8.0"]
 
