@@ -157,6 +157,17 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver" />
         </service>
 
+        <service
+            id="api_platform.metadata.resource.merging_metadata_factory.xml"
+            class="Sylius\Bundle\ApiBundle\ApiPlatform\Factory\MergingExtractorResourceMetadataFactory"
+            decorates="api_platform.metadata.resource.metadata_factory.xml"
+            decoration-priority="40"
+        >
+            <argument type="service" id="api_platform.metadata.extractor.xml" />
+            <argument type="service" id="api_platform.metadata.resource.merging_metadata_factory.xml.inner" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface" class="Sylius\Bundle\ApiBundle\Mapper\AddressMapper" public="true"/>
 
         <service id="Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface" class="Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityChecker">
