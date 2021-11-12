@@ -74,6 +74,7 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
         $catalogPromotion = $this->catalogPromotionFactory->createNew();
         $catalogPromotion->setCode($options['code']);
         $catalogPromotion->setName($options['name']);
+        $catalogPromotion->setPriority($options['priority'] ?? 0);
 
         foreach ($this->getLocales() as $localeCode) {
             $catalogPromotion->setCurrentLocale($localeCode);
@@ -140,6 +141,8 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
             ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))
             ->setDefined('scopes')
             ->setDefined('actions')
+            ->setDefault('priority', 0)
+            ->setAllowedTypes('priority', ['integer', 'null'])
         ;
     }
 

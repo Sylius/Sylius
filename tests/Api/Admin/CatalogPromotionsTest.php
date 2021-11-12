@@ -109,7 +109,8 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     'label' => 'T-Shirts discount',
                     'description' => '50% discount on every T-Shirt',
                 ]],
-                "enabled" => true
+                "enabled" => true,
+                'priority' => 100,
             ], JSON_THROW_ON_ERROR)
         );
 
@@ -391,7 +392,8 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     '@id' => sprintf('/api/v2/admin/catalog-promotion-translations/%s', $catalogPromotion->getTranslation('en_US')->getId()),
                     'label' => 'T-Shirts discount',
                 ]],
-                "enabled" => true
+                "enabled" => true,
+                'priority' => 1000,
             ], JSON_THROW_ON_ERROR)
         );
 

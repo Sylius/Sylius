@@ -116,6 +116,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I set its priority to :priority
+     */
+    public function iSetItsPriorityTo(int $priority): void
+    {
+        $this->formElement->prioritizeIt($priority);
+    }
+
+    /**
      * @When I specify its label as :label in :localeCode
      */
     public function iSpecifyItsLabelAsIn(string $label, string $localeCode): void
@@ -545,6 +553,17 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then it should have priority equal to :priority
+     */
+    public function itShouldHavePriorityEqualTo(int $priority): void
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['priority' => $priority]),
+            sprintf('Cannot find catalog promotions with priority "%d"', $priority)
+        );
+    }
+
+    /**
      * @Then /^("[^"]+" catalog promotion) should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
      */
     public function itShouldHaveVariantBasedScope(
@@ -882,5 +901,13 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldGetInformationThatTheEndDateCannotBeSetBeforeStartDate(): void
     {
         Assert::same($this->createPage->getValidationMessage('endDate'), 'End date cannot be set before start date.');
+    }
+
+    /**
+     * @Then its priority should be :priority
+     */
+    public function itsPriorityShouldBe(int $priority): void
+    {
+        Assert::same($this->showPage->getPriority(), $priority);
     }
 }

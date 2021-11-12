@@ -50,6 +50,8 @@ interface ShowPageInterface extends PageInterface
 
     public function hasCatalogPromotionApplied(string $name): bool;
 
+    public function getCatalogPromotionNames(): array;
+
     public function getCurrentUrl(): string;
 
     public function getCurrentVariantName(): string;

@@ -93,7 +93,7 @@ final class ProductVariantContext implements Context
      * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" and "([^"]+)" promotions$/
      * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)", "([^"]+)" and "([^"]+)" promotions$/
      */
-    public function iShouldSeeVariantIsDiscountedFromToWithPromotion(
+    public function iShouldSeeVariantIsDiscountedFromToWithPromotions(
         ProductVariantInterface $variant,
         int $originalPrice,
         int $price,
@@ -120,7 +120,7 @@ final class ProductVariantContext implements Context
         $this->sharedStorage->set('token', null);
         $this->client->show($productVariant->getCode());
 
-        $this->iShouldSeeVariantIsDiscountedFromToWithPromotion($productVariant, $originalPrice, $price, $promotionName);
+        $this->iShouldSeeVariantIsDiscountedFromToWithPromotions($productVariant, $originalPrice, $price, $promotionName);
     }
 
     /**

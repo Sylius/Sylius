@@ -137,7 +137,6 @@ Feature: Validating a catalog promotion creation
         And I try to add it
         Then I should be notified that I can add only existing taxon
         And there should be an empty list of catalog promotions
-        And there should be an empty list of catalog promotions
 
     @api @ui @javascript
     Scenario: Trying to create a catalog promotion with product type without products
@@ -161,4 +160,3 @@ Feature: Validating a catalog promotion creation
         And I add catalog promotion scope for product with nonexistent products
         And I try to add it
         Then I should be notified that I can add only existing product
-        And there should be an empty list of catalog promotions

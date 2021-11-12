@@ -26,6 +26,10 @@ sylius_grid:
                     sortable: ~
                     options:
                         format: Y-m-d
+                priority:
+                    type: string
+                    label: sylius.ui.priority
+                    sortable: ~
                 channels:
                     type: twig
                     label: sylius.ui.channels

@@ -35,6 +35,11 @@ final class FormElement extends Element implements FormElementInterface
         $this->getElement('description', ['%localeCode%' => $localeCode])->setValue($description);
     }
 
+    public function prioritizeIt(int $priority): void
+    {
+        $this->getElement('priority')->setValue($priority);
+    }
+
     public function changeEnableTo(bool $enabled): void
     {
         $this->getElement('enabled')->setValue($enabled);
@@ -156,6 +161,7 @@ final class FormElement extends Element implements FormElementInterface
             'last_action' => '#actions [data-form-collection="item"]:last-child',
             'last_scope' => '#scopes [data-form-collection="item"]:last-child',
             'name' => '#sylius_catalog_promotion_name',
+            'priority' => '#sylius_catalog_promotion_priority',
             'scopes' => '#scopes',
             'start_date' => '#sylius_catalog_promotion_startDate_date',
         ]);

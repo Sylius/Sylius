@@ -25,6 +25,8 @@ interface ShowPageInterface extends PageInterface
 
     public function getEndDate(): string;
 
+    public function getPriority(): int;
+
     public function hasActionWithPercentageDiscount(string $amount): bool;
 
     public function hasScopeWithVariant(ProductVariantInterface $variant): bool;
