@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Promotion\Calculator\MinimumPriceBasedPromotionAmountCalculatorInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -35,9 +36,10 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
-        FilterInterface $productFilter
+        FilterInterface $productFilter,
+        MinimumPriceBasedPromotionAmountCalculatorInterface $minimumPriceBasedPromotionAmountCalculator
     ) {
-        parent::__construct($adjustmentFactory);
+        parent::__construct($adjustmentFactory, $minimumPriceBasedPromotionAmountCalculator);
 
         $this->priceRangeFilter = $priceRangeFilter;
         $this->taxonFilter = $taxonFilter;

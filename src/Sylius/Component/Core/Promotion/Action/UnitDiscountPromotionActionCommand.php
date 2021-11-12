@@ -17,6 +17,8 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Promotion\Calculator\MinimumPriceBasedPromotionAmountCalculatorInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface as OrderAdjustmentInterface;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -26,12 +28,16 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 abstract class UnitDiscountPromotionActionCommand implements PromotionActionCommandInterface
 {
-    /** @var FactoryInterface */
-    protected $adjustmentFactory;
+    protected FactoryInterface $adjustmentFactory;
 
-    public function __construct(FactoryInterface $adjustmentFactory)
-    {
+    protected MinimumPriceBasedPromotionAmountCalculatorInterface $minimumPriceBasedPromotionAmountCalculator;
+
+    public function __construct(
+        FactoryInterface $adjustmentFactory,
+        MinimumPriceBasedPromotionAmountCalculatorInterface $minimumPriceBasedPromotionAmountCalculator
+    ) {
         $this->adjustmentFactory = $adjustmentFactory;
+        $this->minimumPriceBasedPromotionAmountCalculator = $minimumPriceBasedPromotionAmountCalculator;
     }
 
     /**
@@ -67,8 +73,21 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
     protected function addAdjustmentToUnit(OrderItemUnitInterface $unit, int $amount, PromotionInterface $promotion): void
     {
         $adjustment = $this->createAdjustment($promotion, AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
-        //tu
-        $adjustment->setAmount(-$amount);
+
+        /** @var OrderItemInterface $orderItem */
+        $orderItem = $unit->getOrderItem();
+
+        /** @var ProductVariantInterface $variant */
+        $variant = $orderItem->getVariant();
+
+        /** @var OrderInterface $order */
+        $order = $orderItem->getOrder();
+
+        $channel = $order->getChannel();
+
+        $minimumPrice = $variant->getChannelPricingForChannel($channel)->getMinimumPrice() ?? 0;
+
+        $adjustment->setAmount($this->minimumPriceBasedPromotionAmountCalculator->calculate($unit->getTotal(), $minimumPrice, -$amount));
 
         $unit->addAdjustment($adjustment);
     }

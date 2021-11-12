@@ -15,8 +15,10 @@ namespace Sylius\Component\Core\Promotion\Applicator;
 
 use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Promotion\Calculator\MinimumPriceBasedPromotionAmountCalculatorInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
@@ -29,12 +31,16 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
 
     private IntegerDistributorInterface $distributor;
 
+    private MinimumPriceBasedPromotionAmountCalculatorInterface $minimumPriceBasedPromotionAmountCalculator;
+
     public function __construct(
         AdjustmentFactoryInterface $adjustmentFactory,
-        IntegerDistributorInterface $distributor
+        IntegerDistributorInterface $distributor,
+        MinimumPriceBasedPromotionAmountCalculatorInterface $minimumPriceBasedPromotionAmountCalculator
     ) {
         $this->adjustmentFactory = $adjustmentFactory;
         $this->distributor = $distributor;
+        $this->minimumPriceBasedPromotionAmountCalculator = $minimumPriceBasedPromotionAmountCalculator;
     }
 
     /**
@@ -51,16 +57,19 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
                 continue;
             }
 
-            $this->applyAdjustmentsOnItemUnits($item, $promotion, $adjustmentAmount);
+            $this->applyAdjustmentsOnItemUnits($item, $promotion, $adjustmentAmount, $order->getChannel());
         }
     }
 
     private function applyAdjustmentsOnItemUnits(
         OrderItemInterface $item,
         PromotionInterface $promotion,
-        int $itemPromotionAmount
+        int $itemPromotionAmount,
+        ChannelInterface $channel
     ): void {
         $splitPromotionAmount = $this->distributor->distribute($itemPromotionAmount, $item->getQuantity());
+
+        $variantMinimumPrice = $item->getVariant()->getChannelPricingForChannel($channel)->getMinimumPrice();
 
         $i = 0;
         foreach ($item->getUnits() as $unit) {
@@ -69,7 +78,11 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
                 continue;
             }
 
-            $this->addAdjustment($promotion, $unit, $promotionAmount);
+            $this->addAdjustment(
+                $promotion,
+                $unit,
+                $this->minimumPriceBasedPromotionAmountCalculator->calculate($unit->getTotal(), $variantMinimumPrice, $promotionAmount)
+            );
         }
     }
 

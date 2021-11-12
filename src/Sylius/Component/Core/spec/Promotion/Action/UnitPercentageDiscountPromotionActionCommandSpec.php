@@ -16,13 +16,16 @@ namespace spec\Sylius\Component\Core\Promotion\Action;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Action\UnitDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Calculator\MinimumPriceBasedPromotionAmountCalculatorInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -34,9 +37,16 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
-        FilterInterface $productFilter
+        FilterInterface $productFilter,
+        MinimumPriceBasedPromotionAmountCalculatorInterface $minimumPriceBasedPromotionAmountCalculator
     ): void {
-        $this->beConstructedWith($adjustmentFactory, $priceRangeFilter, $taxonFilter, $productFilter);
+        $this->beConstructedWith(
+            $adjustmentFactory,
+            $priceRangeFilter,
+            $taxonFilter,
+            $productFilter,
+            $minimumPriceBasedPromotionAmountCalculator
+        );
     }
 
     function it_is_an_item_discount_action(): void
@@ -58,10 +68,35 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         OrderItemInterface $orderItem1,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
+        OrderItemInterface $orderItem2,
+        ProductVariantInterface $productVariant1,
+        ProductVariantInterface $productVariant2,
+        ChannelPricingInterface $channelPricing1,
+        ChannelPricingInterface $channelPricing2,
+        MinimumPriceBasedPromotionAmountCalculatorInterface $minimumPriceBasedPromotionAmountCalculator
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
+
+        $unit1->getOrderItem()->willReturn($orderItem1);
+        $unit2->getOrderItem()->willReturn($orderItem2);
+
+        $unit1->getTotal()->willReturn(500);
+        $unit2->getTotal()->willReturn(500);
+
+        $orderItem1->getVariant()->willReturn($productVariant1);
+        $orderItem2->getVariant()->willReturn($productVariant2);
+        $orderItem1->getOrder()->willReturn($order);
+        $orderItem2->getOrder()->willReturn($order);
+
+        $productVariant1->getChannelPricingForChannel($channel)->willReturn($channelPricing1);
+        $productVariant2->getChannelPricingForChannel($channel)->willReturn($channelPricing2);
+
+        $channelPricing1->getMinimumPrice()->willReturn(0);
+        $channelPricing2->getMinimumPrice()->willReturn(0);
+
+        $minimumPriceBasedPromotionAmountCalculator->calculate(500, 0, -100)->willReturn(-100);
 
         $order->getItems()->willReturn($originalItems);
         $originalItems->toArray()->willReturn([$orderItem1]);
