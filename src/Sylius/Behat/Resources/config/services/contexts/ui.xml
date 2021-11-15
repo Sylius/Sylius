@@ -177,6 +177,7 @@
             <argument type="service" id="sylius.behat.notification_checker" />
             <argument type="service" id="sylius.behat.page.admin.product_variant.update" />
             <argument type="service" id="sylius.behat.java_script_test_helper" />
+            <argument type="service" id="sylius.behat.page.admin.product.show_page" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_product_association_types" class="Sylius\Behat\Context\Ui\Admin\ManagingProductAssociationTypesContext">

@@ -22,6 +22,8 @@ interface ShowPageInterface extends SymfonyPageInterface
 
     public function getBreadcrumb(): string;
 
+    public function getAppliedCatalogPromotionsOnVariant(string $variantName): array;
+
     public function isSimpleProductPage(): bool;
 
     public function isShowInShopButtonDisabled(): bool;

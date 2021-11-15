@@ -27,6 +27,7 @@ use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewInd
 use Sylius\Behat\Page\Admin\ProductVariant\CreatePageInterface as VariantCreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\GeneratePageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\UpdatePageInterface as VariantUpdatePageInterface;
+use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
 use Sylius\Behat\Service\Helper\JavaScriptTestHelperInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
@@ -67,6 +68,8 @@ final class ManagingProductsContext implements Context
 
     private JavaScriptTestHelperInterface $testHelper;
 
+    private ShowPageInterface $showPage;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CreateSimpleProductPageInterface $createSimpleProductPage,
@@ -81,7 +84,8 @@ final class ManagingProductsContext implements Context
         CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker,
         VariantUpdatePageInterface $variantUpdatePage,
-        JavaScriptTestHelperInterface $testHelper
+        JavaScriptTestHelperInterface $testHelper,
+        ShowPageInterface $showPage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->createSimpleProductPage = $createSimpleProductPage;
@@ -97,6 +101,7 @@ final class ManagingProductsContext implements Context
         $this->notificationChecker = $notificationChecker;
         $this->variantUpdatePage = $variantUpdatePage;
         $this->testHelper = $testHelper;
+        $this->showPage = $showPage;
     }
 
     /**

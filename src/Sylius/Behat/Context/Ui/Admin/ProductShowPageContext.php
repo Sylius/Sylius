@@ -125,6 +125,22 @@ final class ProductShowPageContext implements Context
     }
 
     /**
+     * @When I access :product product
+     */
+    public function iAccessProduct(ProductInterface $product): void
+    {
+        $this->productShowPage->open(['id' => $product->getId()]);
+    }
+
+    /**
+     * @Then :variantName variant price should be decreased by catalog promotion :catalogPromotionName
+     */
+    public function variantPriceShouldBeDecreasedByCatalogPromotion(string $variantName, string $catalogPromotionName): void
+    {
+        Assert::inArray($catalogPromotionName, $this->productShowPage->getAppliedCatalogPromotionsOnVariant($variantName));
+    }
+
+    /**
      * @When I go to edit page of :variant variant
      */
     public function iGoToEditPageOfVariant(ProductVariantInterface $variant): void
