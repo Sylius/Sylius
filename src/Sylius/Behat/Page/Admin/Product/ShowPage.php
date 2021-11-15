@@ -39,7 +39,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getElement('breadcrumb')->getText();
     }
 
-    public function getAppliedCatalogPromotionsOnVariant(string $variantName): array
+    public function getAppliedCatalogPromotionsNames(string $variantName): array
     {
         $pricingElement = $this
             ->getDocument()
@@ -52,6 +52,21 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             return $element->getText();
         }, $appliedPromotions);
     }
+
+    public function getAppliedCatalogPromotionsLinks(string $variantName): array
+    {
+        $pricingElement = $this
+            ->getDocument()
+            ->find('css', sprintf('tr:contains("%s") + tr', $variantName))
+        ;
+
+        $appliedPromotions = $pricingElement->findAll('css', '.applied-promotion');
+
+        return array_map(function(NodeElement $element): string {
+            return $element->getAttribute('href');
+        }, $appliedPromotions);
+    }
+
 
     public function getRouteName(): string
     {

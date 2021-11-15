@@ -26,8 +26,10 @@ use Sylius\Behat\Element\Product\ShowPage\TaxonomyElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\VariantsElementInterface;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductShowPageContext implements Context
@@ -56,6 +58,8 @@ final class ProductShowPageContext implements Context
 
     private VariantsElementInterface $variantsElement;
 
+    private UrlGeneratorInterface $urlGenerator;
+
     public function __construct(
         IndexPageInterface $indexPage,
         ShowPageInterface $productShowPage,
@@ -68,7 +72,8 @@ final class ProductShowPageContext implements Context
         ShippingElementInterface $shippingElement,
         TaxonomyElementInterface $taxonomyElement,
         OptionsElementInterface $optionsElement,
-        VariantsElementInterface $variantsElement
+        VariantsElementInterface $variantsElement,
+        UrlGeneratorInterface $urlGenerator
     ) {
         $this->indexPage = $indexPage;
         $this->productShowPage = $productShowPage;
@@ -82,6 +87,7 @@ final class ProductShowPageContext implements Context
         $this->taxonomyElement = $taxonomyElement;
         $this->optionsElement = $optionsElement;
         $this->variantsElement = $variantsElement;
+        $this->urlGenerator = $urlGenerator;
     }
 
     /**
@@ -133,11 +139,14 @@ final class ProductShowPageContext implements Context
     }
 
     /**
-     * @Then :variantName variant price should be decreased by catalog promotion :catalogPromotionName
+     * @Then :variantName variant price should be decreased by catalog promotion :catalogPromotion
      */
-    public function variantPriceShouldBeDecreasedByCatalogPromotion(string $variantName, string $catalogPromotionName): void
+    public function variantPriceShouldBeDecreasedByCatalogPromotion(string $variantName, CatalogPromotionInterface $catalogPromotion): void
     {
-        Assert::inArray($catalogPromotionName, $this->productShowPage->getAppliedCatalogPromotionsOnVariant($variantName));
+        Assert::inArray($catalogPromotion->getName(), $this->productShowPage->getAppliedCatalogPromotionsNames($variantName));
+
+        $url = $this->urlGenerator->generate('sylius_admin_catalog_promotion_show', ['id' => $catalogPromotion->getId()]);
+        Assert::inArray($url, $this->productShowPage->getAppliedCatalogPromotionsLinks($variantName));
     }
 
     /**

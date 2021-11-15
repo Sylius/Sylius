@@ -22,7 +22,9 @@ interface ShowPageInterface extends SymfonyPageInterface
 
     public function getBreadcrumb(): string;
 
-    public function getAppliedCatalogPromotionsOnVariant(string $variantName): array;
+    public function getAppliedCatalogPromotionsNames(string $variantName): array;
+
+    public function getAppliedCatalogPromotionsLinks(string $variantName): array;
 
     public function isSimpleProductPage(): bool;
 
