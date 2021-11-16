@@ -9,7 +9,11 @@ Feature: Seeing applied catalog promotions details within variant
         And the store has a "Wyborowa Vodka" configurable product
         And the product "Wyborowa Vodka" has a "Wyborowa Vodka Exquisite" variant priced at "$40.00"
         And the product "Wyborowa Vodka" has a "Wyborowa Vodka Lemon" variant priced at "$10.00"
-        And there is a catalog promotion "Winter sale" available in "United States" channel that reduces price by "50%" and applies on "Wyborowa Vodka Exquisite" variant
+        And there is a catalog promotion with "winter_sale" code and "Winter sale" name
+        And the catalog promotion "Winter sale" is available in "United States"
+        And it applies on "Wyborowa Vodka Exquisite" variant
+        And it reduces price by "50%"
+        And it is enabled
         And I am logged in as an administrator
 
     @ui
