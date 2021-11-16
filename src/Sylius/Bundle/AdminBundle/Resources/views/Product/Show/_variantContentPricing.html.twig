@@ -29,7 +29,7 @@
                 <td>Discounted by:</td>
                 <td>
                     {% for appliedPromotion in channelPricing.appliedPromotions %}
-                        <span class="ui label purple applied-promotion">{{ appliedPromotion[sylius_base_locale].name }}</span>
+                    <a href="{{ path('sylius_admin_catalog_promotion_show', {'id': appliedPromotion['id']}) }}" class="ui label purple applied-promotion">{{ appliedPromotion[sylius_base_locale].name }}</a>
                     {% endfor %}
                 </td>
             </tr>
