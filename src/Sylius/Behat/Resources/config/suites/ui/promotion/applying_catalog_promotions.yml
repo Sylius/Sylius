@@ -12,6 +12,7 @@ default:
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.product_taxon
+                - sylius.behat.context.setup.promotion
                 - sylius.behat.context.setup.taxonomy
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
@@ -26,6 +27,7 @@ default:
                 - Sylius\Behat\Context\Ui\Admin\ManagingCatalogPromotionsContext
                 - Sylius\Behat\Context\Ui\Admin\ManagingProductTaxonsContext
                 - Sylius\Behat\Context\Ui\Admin\ManagingProductVariantsPricesContext
+                - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.shop.product
 
             filters:

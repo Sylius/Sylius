@@ -200,6 +200,16 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^(this promotion) can not be applied on discounted products$/
+     */
+    public function promotionCanNotBeAppliedOnDiscountedProducts(PromotionInterface $promotion)
+    {
+        $promotion->setApplyOnDiscounted(true);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(this promotion) expires tomorrow$/
      */
     public function thisPromotionExpiresTomorrow(PromotionInterface $promotion): void
