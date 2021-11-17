@@ -97,6 +97,8 @@ class Promotion implements PromotionInterface
      */
     protected $actions;
 
+    protected bool $applyOnDiscounted = true;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -311,5 +313,15 @@ class Promotion implements PromotionInterface
     {
         $action->setPromotion(null);
         $this->actions->removeElement($action);
+    }
+
+    public function canApplyOnDiscounted(): bool
+    {
+        return $this->applyOnDiscounted;
+    }
+
+    public function setApplyOnDiscounted(bool $applyOnDiscounted): void
+    {
+        $this->applyOnDiscounted = $applyOnDiscounted;
     }
 }
