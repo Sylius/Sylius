@@ -66,6 +66,12 @@
             <tag name="api_platform.collection_data_provider" priority="10" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\CurrencyCollectionDataProvider">
+            <argument type="service" id="sylius.repository.currency" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="api_platform.collection_data_provider" priority="10" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\DataProvider\ProductItemDataProvider">
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
