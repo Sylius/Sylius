@@ -100,9 +100,9 @@ final class CatalogPromotionContext implements Context
     {
         $catalogPromotion->setEnabled(false);
 
-        $this->entityManager->flush();
-
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+
+        $this->entityManager->flush();
     }
 
     /**

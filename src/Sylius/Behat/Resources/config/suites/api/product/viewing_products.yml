@@ -22,6 +22,7 @@ default:
                 - sylius.behat.context.setup.product_taxon
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.taxonomy
+                - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
                 - sylius.behat.context.api.shop.channel
                 - sylius.behat.context.api.shop.product
