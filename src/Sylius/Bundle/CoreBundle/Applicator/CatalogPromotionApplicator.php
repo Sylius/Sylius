@@ -81,7 +81,17 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
             $channelPricing->setOriginalPrice($channelPricing->getPrice());
         }
 
-        $channelPricing->setPrice((int) ($channelPricing->getPrice() - ($channelPricing->getPrice() * $discount)));
+        if ($channelPricing->getPrice() === $channelPricing->getMinimumPrice()) {
+            return;
+        }
+
+        $price = (int) ($channelPricing->getPrice() - ($channelPricing->getPrice() * $discount));
+
+        if ($price < $channelPricing->getMinimumPrice()) {
+            $price = $channelPricing->getMinimumPrice();
+        }
+
+        $channelPricing->setPrice($price);
         $channelPricing->addAppliedPromotion($this->appliedPromotionInformationFormatter->format($catalogPromotion));
     }
 

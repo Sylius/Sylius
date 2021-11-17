@@ -38,6 +38,11 @@ class ChannelPricing implements ChannelPricingInterface
      */
     protected $originalPrice;
 
+    /**
+     * @var int|null
+     */
+    protected $minimumPrice;
+
     /** @var ?array */
     protected $appliedPromotions = [];
 
@@ -94,6 +99,16 @@ class ChannelPricing implements ChannelPricingInterface
     public function isPriceReduced(): bool
     {
         return $this->originalPrice > $this->price;
+    }
+
+    public function getMinimumPrice(): ?int
+    {
+        return $this->minimumPrice;
+    }
+
+    public function setMinimumPrice(?int $minimumPrice): void
+    {
+        $this->minimumPrice = $minimumPrice;
     }
 
     public function addAppliedPromotion(array $promotion): void

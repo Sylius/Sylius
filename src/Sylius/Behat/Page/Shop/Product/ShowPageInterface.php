@@ -52,6 +52,8 @@ interface ShowPageInterface extends PageInterface
 
     public function getCatalogPromotionNames(): array;
 
+    public function getCatalogPromotions(): array;
+
     public function getCurrentUrl(): string;
 
     public function getCurrentVariantName(): string;

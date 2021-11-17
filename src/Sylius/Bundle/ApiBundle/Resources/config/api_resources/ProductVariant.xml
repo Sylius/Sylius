@@ -56,6 +56,17 @@
                 </attribute>
             </collectionOperation>
 
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/product-variants</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:product_variant:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_variant:create</attribute>
+                </attribute>
+            </collectionOperation>
+
             <collectionOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-variants</attribute>
@@ -84,6 +95,7 @@
                 </attribute>
             </attribute>
         </property>
+        <property name="channelPricings" />
         <property name="optionValues" readable="true" />
     </resource>
 </resources>

@@ -30,6 +30,7 @@ imports:
     - suites/api/product/managing_product_options.yml
     - suites/api/product/managing_product_reviews.yml
     - suites/api/product/managing_product_variants.yml
+    - suites/api/product/managing_product_variants_ajax.yml
     - suites/api/product/managing_products.yml
     - suites/api/product/viewing_products.yml
     - suites/api/product/viewing_product_reviews.yml

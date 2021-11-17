@@ -22,10 +22,12 @@
         </attribute>
         <attribute name="code">
             <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
             <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="product">
             <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
             <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="translations">
@@ -38,6 +40,7 @@
             <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="channelPricings">
+            <group>admin:product_variant:create</group>
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:update</group>
         </attribute>
