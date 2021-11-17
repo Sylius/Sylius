@@ -1,0 +1,20 @@
+---------------------------------------------------------------------------
+
+by arti0090 at 2021-10-26T06:24:11Z
+
+There is still a problem with sorting,
+The sorting by Price (with getting the first variant) works with this implementation, but the problem is happening when we also try to filter by Taxon.
+
+Behat from features/product/viewing_products/viewing_products_sorted_by_their_discounted_price.feature:21
+covers this scenario.
+
+Maybe someone from the community has any idea why this SQL error pops up?
+
+🤔🤔🤔🤔🤔
+![image](https://user-images.githubusercontent.com/35863747/138820076-ef3e3e4c-329a-4425-94a1-e2ce4f02e0fd.png)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-11-17T12:18:26Z
+
+Thanks, @arti0090! :tada:
