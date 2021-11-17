@@ -77,6 +77,26 @@ final class ProductContext implements Context
     }
 
     /**
+     * @When I view product :product using slug
+     */
+    public function iViewProductUsingSlug(ProductInterface $product): void
+    {
+        $this->client->showByIri('/api/v2/shop/products-by-slug/'.$product->getSlug());
+
+        $this->sharedStorage->set('product', $product);
+    }
+
+    /**
+     * @Then I should be redirected to :product product
+     */
+    public function iShouldBeRedirectedToProduct(ProductInterface $product): void
+    {
+        $response = $this->client->getLastResponse();
+
+        Assert::eq($response->headers->get('Location'), '/api/v2/shop/products/'.$product->getCode());
+    }
+
+    /**
      * @When I browse products from taxon :taxon
      */
     public function iBrowseProductsFromTaxon(TaxonInterface $taxon): void

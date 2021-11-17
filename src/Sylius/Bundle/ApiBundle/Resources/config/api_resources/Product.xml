@@ -84,6 +84,29 @@
                 </attribute>
             </itemOperation>
 
+            <itemOperation name="shop_get_by_slug">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/products-by-slug/{slug}</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction</attribute>
+                <attribute name="read">false</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Use slug to retrieve a product resource.</attribute>
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">slug</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product:read</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/products/{code}</attribute>
