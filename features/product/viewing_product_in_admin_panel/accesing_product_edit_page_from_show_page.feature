@@ -12,6 +12,7 @@ Feature: Accessing to product edit page from show page
         And I am logged in as an administrator
         And I am browsing products
 
+        
     @ui
     Scenario: Accessing to product edit page from product show page
         When I access "Iron shield" product page
