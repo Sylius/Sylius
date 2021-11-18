@@ -70,7 +70,7 @@ final class CatalogPromotionType extends AbstractResourceType
                 'required' => false,
             ])
             ->add('exclusive', CheckboxType::class, [
-              'label' => 'sylius.form.catalog_promotion.exclusive',
+              'label' => 'sylius.form.promotion.exclusive',
               'required' => false,
             ])
             ->add('scopes', CollectionType::class, [
