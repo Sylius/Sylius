@@ -141,9 +141,14 @@ final class ProductShowPageContext implements Context
     /**
      * @Then :variantName variant price should be decreased by catalog promotion :catalogPromotion
      */
-    public function variantPriceShouldBeDecreasedByCatalogPromotion(string $variantName, CatalogPromotionInterface $catalogPromotion): void
-    {
-        Assert::inArray($catalogPromotion->getName(), $this->productShowPage->getAppliedCatalogPromotionsNames($variantName));
+    public function variantPriceShouldBeDecreasedByCatalogPromotion(
+        string $variantName,
+        CatalogPromotionInterface $catalogPromotion
+    ): void {
+        Assert::inArray(
+            $catalogPromotion->getName(),
+            $this->productShowPage->getAppliedCatalogPromotionsNames($variantName)
+        );
 
         $url = $this->urlGenerator->generate('sylius_admin_catalog_promotion_show', ['id' => $catalogPromotion->getId()]);
         Assert::inArray($url, $this->productShowPage->getAppliedCatalogPromotionsLinks($variantName));
