@@ -46,12 +46,12 @@ final class CurrencyContext implements Context
      * @Then I should see :firstCurrency and :secondCurrency in the list
      * @Then I should see :firstCurrency, :secondCurrency and :thirdCurrency in the list
      */
-    public function iShouldSeeCurrenciesInTheList(... $currencies): void
+    public function iShouldSeeCurrenciesInTheList(string ...$currenciesCodes): void
     {
         $response = $this->client->getLastResponse();
 
-        foreach ($currencies as $currency) {
-            $this->responseChecker->getCollectionItemsWithValue($response, 'code', $currency);
+        foreach ($currenciesCodes as $currencyCode) {
+            $this->responseChecker->getCollectionItemsWithValue($response, 'code', $currencyCode);
         }
     }
 }
