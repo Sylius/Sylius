@@ -30,6 +30,10 @@
         </service>
 
         <service id="Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionValidator">
+            <argument type="collection">
+                <argument type="constant">Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT</argument>
+                <argument type="constant">Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT</argument>
+            </argument>
             <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_action" />
         </service>
     </services>

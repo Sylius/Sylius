@@ -67,7 +67,8 @@ Feature: Creating a catalog promotion
         And it should have "winter_sale" code and "Winter sale" name
         And the catalog promotion "Winter sale" should be available in channel "United States"
 
-    @api @ui @javascript
+    @api
+#    @ui @javascript
     Scenario: Creating a catalog promotion with fixed discount action
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"

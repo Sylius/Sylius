@@ -207,6 +207,21 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I add action that gives ("[^"]+") fixed discount$/
+     */
+    public function iAddActionThatGivesFixedDiscount(int $amount): void
+    {
+        $actions = [[
+            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'configuration' => [
+                'amount' => $amount
+            ],
+        ]];
+
+        $this->client->addRequestData('actions', $actions);
+    }
+
+    /**
      * @When /^I add another action that gives ("[^"]+") percentage discount$/
      */
     public function iAddAnotherActionThatGivesPercentageDiscount(float $amount): void
@@ -536,6 +551,23 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I edit ("[^"]+" catalog promotion) to have ("[^"]+") fixed discount$/
+     */
+    public function iEditCatalogPromotionToHaveFixedDiscount(CatalogPromotionInterface $catalogPromotion, int $amount): void
+    {
+        $this->client->buildUpdateRequest($catalogPromotion->getCode());
+        $scopes = [[
+            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'configuration' => [
+                'amount' => $amount,
+            ],
+        ]];
+
+        $this->client->updateRequestData(['actions' => $scopes]);
+        $this->client->update();
+    }
+
+    /**
      * @When I add catalog promotion scope with nonexistent type
      */
     public function iAddCatalogPromotionScopeWithNonexistentType(): void
@@ -701,6 +733,27 @@ final class ManagingCatalogPromotionsContext implements Context
         $catalogPromotion = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
 
         Assert::same($catalogPromotion['actions'][0]['configuration']['amount'], $amount);
+    }
+
+    /**
+     * @Then /^it should have ("[^"]+") fixed discount$/
+     */
+    public function itShouldHaveFixedDiscount(int $amount): void
+    {
+        $catalogPromotion = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
+
+        Assert::same($catalogPromotion['actions'][0]['configuration']['amount'], $amount);
+    }
+
+    /**
+     * @Then /^this catalog promotion should have ("[^"]+") fixed discount$/
+     */
+    public function thisCatalogPromotionShouldHaveFixedDiscount(int $amount): void
+    {
+        $catalogPromotionActions = $this->responseChecker->getValue($this->client->getLastResponse(), 'actions');
+
+        Assert::same($catalogPromotionActions[0]['type'], CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT);
+        Assert::same($catalogPromotionActions[0]['configuration']['amount'], $amount);
     }
 
     /**

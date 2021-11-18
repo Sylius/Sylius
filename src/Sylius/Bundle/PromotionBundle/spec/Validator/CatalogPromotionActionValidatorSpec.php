@@ -24,6 +24,11 @@ final class CatalogPromotionActionValidatorSpec extends ObjectBehavior
 {
     function let(ExecutionContextInterface $executionContext): void
     {
+        $this->beConstructedWith([
+            CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+        ]);
+
         $this->initialize($executionContext);
     }
 

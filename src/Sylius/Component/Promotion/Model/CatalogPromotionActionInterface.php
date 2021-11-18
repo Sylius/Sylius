@@ -17,6 +17,8 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface CatalogPromotionActionInterface extends ResourceInterface
 {
+    public const TYPE_FIXED_DISCOUNT = 'fixed_discount';
+
     public const TYPE_PERCENTAGE_DISCOUNT = 'percentage_discount';
 
     public function setType(?string $type): void;
