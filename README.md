@@ -4,6 +4,7 @@
     </a>
 </h1>
 
+
 Sylius is an Open Source eCommerce platform on top of [**Symfony**](https://symfony.com). 
 
 The highest quality of code, strong testing culture, built-in Agile (BDD) workflow and exceptional flexibility make it the best solution for applications tailored to your business requirements. 
