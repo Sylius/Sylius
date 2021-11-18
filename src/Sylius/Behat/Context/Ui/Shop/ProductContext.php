@@ -499,6 +499,7 @@ final class ProductContext implements Context
      * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" promotion$/
      * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" and "([^"]+)" promotions$/
      * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)", "([^"]+)" and "([^"]+)" promotions$/
+     * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" and "([^"]+)" promotions$/
      */
     public function iShouldSeeVariantIsDiscountedFromToWithPromotions(
         ProductVariantInterface $variant,
@@ -510,9 +511,10 @@ final class ProductContext implements Context
 
         Assert::same($this->showPage->getPrice(), $price);
         Assert::same($this->showPage->getOriginalPrice(), $originalPrice);
-        foreach ($promotionsNames as $promotionName) {
-            Assert::true($this->showPage->hasCatalogPromotionApplied($promotionName));
-        }
+
+        $catalogPromotionNames = $this->showPage->getCatalogPromotionNames();
+        $catalogPromotionNames = array_map(fn (string $name) => explode(' - ', $name)[0], $catalogPromotionNames);
+        Assert::same($promotionsNames, $catalogPromotionNames);
     }
 
     /**

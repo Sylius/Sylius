@@ -106,7 +106,8 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
             }
         }
 
-        $this->catalogPromotionProcessor->process($catalogPromotion);
+        //it is probably redundant
+//        $this->catalogPromotionProcessor->process($catalogPromotion);
 
         return $catalogPromotion;
     }

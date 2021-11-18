@@ -247,6 +247,35 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
+     * @Given /^there is (?:a|another) catalog promotion "([^"]*)" with priority ([^"]+) that reduces price by ("[^"]+") and applies on ("[^"]+" taxon)$/
+     */
+    public function thereIsACatalogPromotionWithPriorityThatReducesPriceByAndAppliesOnTaxon(
+        string $name,
+        int $priority,
+        float $discount,
+        TaxonInterface $taxon
+    ): void {
+        $catalogPromotion = $this->createCatalogPromotion(
+            $name,
+            null,
+            [],
+            [[
+                'type' => CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
+                'configuration' => ['taxons' => [$taxon->getCode()]],
+            ]],
+            [[
+                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'configuration' => ['amount' => $discount],
+            ]],
+            $priority
+        );
+
+        $this->entityManager->flush();
+
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
+    /**
      * @Given /^there is a catalog promotion "([^"]*)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
      */
     public function thereIsACatalogPromotionAvailableInChannelThatReducesPriceByAndAppliesOnVariant(
@@ -351,6 +380,35 @@ final class CatalogPromotionContext implements Context
         );
 
         $this->entityManager->flush();
+    }
+
+    /**
+     * @Given /^there is(?: a| another) catalog promotion "([^"]*)" with priority ([^"]+) that reduces price by ("[^"]+") and applies on ("[^"]+" product)$/
+     */
+    public function thereIsACatalogPromotionWithPriorityThatReducesPriceByAndAppliesOnProduct(
+        string $name,
+        int $priority,
+        float $discount,
+        ProductInterface $product
+    ): void {
+        $catalogPromotion =  $this->createCatalogPromotion(
+            $name,
+            null,
+            [],
+            [[
+                'type' => CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS,
+                'configuration' => ['products' => [$product->getCode()]],
+            ]],
+            [[
+                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'configuration' => ['amount' => $discount],
+            ]],
+            $priority
+        );
+
+        $this->entityManager->flush();
+
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
     /**
