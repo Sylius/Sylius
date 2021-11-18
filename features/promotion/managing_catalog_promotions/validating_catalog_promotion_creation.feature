@@ -115,6 +115,20 @@ Feature: Validating a catalog promotion creation
         And there should be an empty list of catalog promotions
 
     @api @ui @javascript
+    Scenario: Trying to create a catalog promotion with not configured fixed discount action
+        When I want to create a new catalog promotion
+        And I specify its code as "winter_sale"
+        And I name it "Winter sale"
+        And I make it available in channel "United States"
+        And I specify its label as "Winter -50%" in "English (United States)"
+        And I describe it as "This promotion gives a $10.00 discount on every product" in "English (United States)"
+        And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And I add fixed discount action without amount configured
+        And I try to add it
+        Then I should be notified that a discount amount should be a number and cannot be empty
+        And there should be an empty list of catalog promotions
+
+    @api @ui @javascript
     Scenario: Trying to create a catalog promotion with taxon type without taxons
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
