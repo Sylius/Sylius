@@ -36,11 +36,38 @@ Feature: Receiving discounts with product minimum price specified
         And my cart total should be "$45.00"
 
     @ui @api
-    Scenario: Receiving different discounts on items from different price ranges
+    Scenario: Distributing promotion when product price reaches minimum
         Given this promotion gives "50%" off on every product with minimum price at "$10.00"
         And there is a promotion "Mugs promotion"
         When I add product "T-Shirt" to the cart
         And I add product "PHP Mug" to the cart
         Then product "T-Shirt" price should be decreased by "$5.00"
-        And product "PHP Mug" price should be decreased by "$10.00"
-        And my cart total should be "$55.00"
+        And product "PHP Mug" price should be decreased by "$15.00"
+        And my cart total should be "$50.00"
+
+    @ui @api
+    Scenario: Distributing fixed discount promotion
+        And this promotion gives "$10.00" off on every product with minimum price at "$10.00"
+        When I add product "T-Shirt" to the cart
+        And I add product "PHP Mug" to the cart
+        Then product "T-Shirt" price should be decreased by "$5.00"
+        And product "PHP Mug" price should be decreased by "$15.00"
+        And my cart total should be "$50.00"
+
+    @ui @api
+    Scenario: Distributing fixed order discount promotion
+        Given the promotion gives "$20.00" discount to every order with quantity at least 2
+        When I add product "T-Shirt" to the cart
+        And I add product "PHP Mug" to the cart
+        Then product "T-Shirt" price should be decreased by "$5.00"
+        And product "PHP Mug" price should be decreased by "$15.00"
+        And my cart total should be "$50.00"
+
+    @ui @api
+    Scenario: Distributing fixed order discount promotion
+        Given it gives "20%" discount to every order
+        When I add product "T-Shirt" to the cart
+        And I add product "PHP Mug" to the cart
+        Then product "T-Shirt" price should be decreased by "$5.00"
+        And product "PHP Mug" price should be decreased by "$9.00"
+        And my cart total should be "$56.00"
