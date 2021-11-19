@@ -30,9 +30,9 @@ final class AppliedPromotionInformationFormatter implements AppliedPromotionInfo
         /** @var string $code */
         $code = $catalogPromotion->getCode();
 
-        return [$code => array_merge(
-            ['id' => $catalogPromotion->getId()],
-            $translationLabels
-        )];
+        return [$code => [
+            'id' => $catalogPromotion->getId(),
+            'translations' => $translationLabels
+        ]];
     }
 }
