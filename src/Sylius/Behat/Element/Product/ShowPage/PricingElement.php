@@ -21,7 +21,7 @@ final class PricingElement extends Element implements PricingElementInterface
     public function getPriceForChannel(string $channelName): string
     {
         /** @var NodeElement|null $priceForChannel */
-        $channelPriceRow = $this->getDocument()->find('css', sprintf('#pricing tr:contains("%s")', $channelName));
+        $channelPriceRow = $this->getChannelPriceRow($channelName);
 
         if (null === $channelPriceRow) {
             return '';
@@ -35,10 +35,40 @@ final class PricingElement extends Element implements PricingElementInterface
     public function getOriginalPriceForChannel(string $channelName): string
     {
         /** @var NodeElement $priceForChannel */
-        $channelPriceRow = $this->getDocument()->find('css', sprintf('#pricing tr:contains("%s")', $channelName));
+        $channelPriceRow = $this->getChannelPriceRow($channelName);
 
         $priceForChannel = $channelPriceRow->find('css', 'td:nth-child(3)');
 
         return $priceForChannel->getText();
+    }
+
+    public function getCatalogPromotionsNamesForChannel(string $channelName): array
+    {
+        $appliedPromotions = $this->getAppliedPromotionsForChannel($channelName);
+
+        return array_map(function(NodeElement $element): string {
+            return $element->getText();
+        }, $appliedPromotions);
+    }
+
+    public function getCatalogPromotionLinksForChannel(string $channelName): array
+    {
+        $appliedPromotions = $this->getAppliedPromotionsForChannel($channelName);
+
+        return array_map(function(NodeElement $element): string {
+            return $element->getAttribute('href');
+        }, $appliedPromotions);
+    }
+
+    private function getChannelPriceRow(string $channelName): ?NodeElement
+    {
+        return $this->getDocument()->find('css', sprintf('#pricing tr:contains("%s")', $channelName));
+    }
+
+    private function getAppliedPromotionsForChannel(string $channelName): array
+    {
+        $channelPriceRow = $this->getChannelPriceRow($channelName);
+
+        return $channelPriceRow->findAll('css', '.applied-promotion');
     }
 }

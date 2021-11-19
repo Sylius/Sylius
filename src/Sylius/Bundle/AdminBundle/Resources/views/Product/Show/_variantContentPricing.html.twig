@@ -10,12 +10,7 @@
             <td class="gray text"><strong>{{ 'sylius.ui.channels'|trans }}</strong></td>
             <td class="gray text"><strong>{{ 'sylius.ui.price'|trans }}</strong></td>
             <td class="gray text"><strong>{{ 'sylius.ui.original_price'|trans }}</strong></td>
-            {% for channelPricing in variant.channelPricings %}
-                {# TODO - Translations #}
-                {% if channelPricing.appliedPromotions is defined %}
-                    <td><strong class="gray text">{{ 'Discounted By' }}</strong></td>
-                {% endif %}
-            {% endfor %}
+            <td class="gray text"><strong>{{ 'sylius.ui.discounted_by'|trans }}</strong></td>
         </tr>
         {% set currencies = sylius_channels_currencies() %}
         {% for channelPricing in variant.channelPricings %}
@@ -30,13 +25,15 @@
                 {% else %}
                     <td><span class="gray text">-</span></td>
                 {% endif %}
-                <td>
-                    {% for appliedPromotion in channelPricing.appliedPromotions %}
-                        <a href="{{ path('sylius_admin_catalog_promotion_show', {'id': appliedPromotion['id']}) }}"
-                           class="ui label purple applied-promotion">{{ appliedPromotion[sylius_base_locale].name }}
-                        </a>
-                    {% endfor %}
-                </td>
+                {% if channelPricing.appliedPromotions is defined %}
+                    <td>
+                        {% for appliedPromotion in channelPricing.appliedPromotions %}
+                            <a href="{{ path('sylius_admin_catalog_promotion_show', {'id': appliedPromotion['id']}) }}" class="ui label purple applied-promotion">{{ appliedPromotion[sylius_base_locale].name }}</a>
+                        {% endfor %}
+                    </td>
+                {% else %}
+                    <td>-</td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>

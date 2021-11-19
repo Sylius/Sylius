@@ -8,6 +8,7 @@
                     <th><strong class="gray text">{{ 'sylius.ui.channels'|trans }}</strong></th>
                     <th><strong class="gray text">{{ 'sylius.ui.price'|trans }}</strong></th>
                     <th><strong class="gray text">{{ 'sylius.ui.original_price'|trans }}</strong></th>
+                    <th><strong class="gray text">{{ 'sylius.ui.discounted_by'|trans }}</strong></th>
                 </tr>
             </thead>
             <tbody>
@@ -15,11 +16,20 @@
                 {% if product.channels.first != false %}
                     <tr>
                         <td class="five wide gray text">
-                            <strong>{{ channelPricing.channelCode|sylius_channel_name }} </strong>
+                            <strong>{{ channelPricing.channelCode|sylius_channel_name }}</strong>
                         </td>
                         <td>{{ money.format(channelPricing.price, product.channels.first.baseCurrency) }}</td>
                         {% if channelPricing.originalPrice != null %}
                             <td>{{ money.format(channelPricing.originalPrice, product.channels.first.baseCurrency) }}</td>
+                        {% else %}
+                            <td>-</td>
+                        {% endif %}
+                        {% if channelPricing.appliedPromotions is defined %}
+                            <td>
+                                {% for appliedPromotion in channelPricing.appliedPromotions %}
+                                    <a href="{{ path('sylius_admin_catalog_promotion_show', {'id': appliedPromotion['id']}) }}" class="ui label purple applied-promotion">{{ appliedPromotion[sylius_base_locale].name }}</a>
+                                {% endfor %}
+                            </td>
                         {% else %}
                             <td>-</td>
                         {% endif %}
