@@ -28,21 +28,31 @@ final class AppliedPromotionInformationFormatterSpec extends ObjectBehavior
 
     function it_formats_applied_promotion_information(
         CatalogPromotionInterface $catalogPromotion,
-        CatalogPromotionTranslationInterface $translation
+        CatalogPromotionTranslationInterface $firstTranslation,
+        CatalogPromotionTranslationInterface $secondTranslation
     ): void {
-        $catalogPromotion->getTranslations()->willReturn(new ArrayCollection([$translation->getWrappedObject()]));
-        $catalogPromotion->getId()->willReturn(420);
-        $translation->getLabel()->willReturn('Winter sale');
-        $translation->getLocale()->willReturn('en_US');
-        $translation->getDescription()->willReturn('Winter sale description');
+        $catalogPromotion->getTranslations()->willReturn(
+            new ArrayCollection([$firstTranslation->getWrappedObject(), $secondTranslation->getWrappedObject()])
+        );
+        $firstTranslation->getLabel()->willReturn('Winter sale');
+        $firstTranslation->getLocale()->willReturn('en_US');
+        $firstTranslation->getDescription()->willReturn('Winter sale description');
+
+        $secondTranslation->getLabel()->willReturn('Wyprzedaż zimowa');
+        $secondTranslation->getLocale()->willReturn('pl_PL');
+        $secondTranslation->getDescription()->willReturn('Opis zimowej wyprzedaży');
+
         $catalogPromotion->getCode()->willReturn('winter_sale');
+        $catalogPromotion->getId()->willReturn(420);
 
         $this->format($catalogPromotion)->shouldReturn([
             'winter_sale' => [
                 'id' => 420,
-                'en_US' => ['name' => 'Winter sale', 'description' => 'Winter sale description']
+                'translations' => [
+                    'en_US' => ['name' => 'Winter sale', 'description' => 'Winter sale description'],
+                    'pl_PL' => ['name' => 'Wyprzedaż zimowa', 'description' => 'Opis zimowej wyprzedaży']
+                ]
             ]
         ]);
-
     }
 }
