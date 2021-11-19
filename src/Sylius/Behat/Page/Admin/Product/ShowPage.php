@@ -45,7 +45,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             ->getDocument()
             ->find('css', sprintf('tr:contains("%s") + tr', $variantName))
         ;
+
         $appliedPromotions = $pricingElement->findAll('css', '.applied-promotion');
+
         return array_map(function(NodeElement $element): string {
             return $element->getText();
         }, $appliedPromotions);

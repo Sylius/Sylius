@@ -139,6 +139,14 @@ final class ProductShowPageContext implements Context
     }
 
     /**
+     * @When I go to edit page of :variant variant
+     */
+    public function iGoToEditPageOfVariant(ProductVariantInterface $variant): void
+    {
+        $this->productShowPage->showVariantEditPage($variant);
+    }
+
+    /**
      * @Then :variantName variant price should be decreased by catalog promotion :catalogPromotion
      */
     public function variantPriceShouldBeDecreasedByCatalogPromotion(string $variantName, CatalogPromotionInterface $catalogPromotion): void
@@ -150,14 +158,6 @@ final class ProductShowPageContext implements Context
 
         $url = $this->urlGenerator->generate('sylius_admin_catalog_promotion_show', ['id' => $catalogPromotion->getId()]);
         Assert::inArray($url, $this->productShowPage->getAppliedCatalogPromotionsLinks($variantName));
-    }
-
-    /**
-     * @When I go to edit page of :variant variant
-     */
-    public function iGoToEditPageOfVariant(ProductVariantInterface $variant): void
-    {
-        $this->productShowPage->showVariantEditPage($variant);
     }
 
     /**
@@ -422,5 +422,21 @@ final class ProductShowPageContext implements Context
     public function iShouldNotBeAbleToShowThisProductInShop(): void
     {
         Assert::true($this->productShowPage->isShowInShopButtonDisabled());
+    }
+
+    /**
+     * @Then this product price should be decreased by catalog promotion :catalogPromotion in :channelName channel
+     */
+    public function thisProductPriceShouldBeDecreasedByCatalogPromotion(
+        CatalogPromotionInterface $catalogPromotion,
+        string $channelName
+    ): void {
+        Assert::inArray(
+            $catalogPromotion->getName(),
+            $this->pricingElement->getCatalogPromotionsNamesForChannel($channelName)
+        );
+
+        $url = $this->urlGenerator->generate('sylius_admin_catalog_promotion_show', ['id' => $catalogPromotion->getId()]);
+        Assert::inArray($url, $this->pricingElement->getCatalogPromotionLinksForChannel($channelName));
     }
 }
