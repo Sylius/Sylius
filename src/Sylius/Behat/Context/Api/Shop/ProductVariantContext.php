@@ -105,6 +105,7 @@ final class ProductVariantContext implements Context
         Assert::same($content['originalPrice'], $originalPrice);
         foreach ($promotionsNames as $promotionName) {
             Assert::inArray(['en_US' => ['name' => $promotionName, 'description' => $promotionName . ' description']], $content['appliedPromotions']);
+            Assert::inArray(['id' => null, 'en_US' => ['name' => $promotionName, 'description' => $promotionName . ' description']], $content['appliedPromotions']);
         }
     }
 

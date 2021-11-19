@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Product;
 
+use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
@@ -36,6 +37,32 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function getBreadcrumb(): string
     {
         return $this->getElement('breadcrumb')->getText();
+    }
+
+    public function getAppliedCatalogPromotionsNames(string $variantName): array
+    {
+        $pricingElement = $this
+            ->getDocument()
+            ->find('css', sprintf('tr:contains("%s") + tr', $variantName))
+        ;
+        $appliedPromotions = $pricingElement->findAll('css', '.applied-promotion');
+        return array_map(function(NodeElement $element): string {
+            return $element->getText();
+        }, $appliedPromotions);
+    }
+
+    public function getAppliedCatalogPromotionsLinks(string $variantName): array
+    {
+        $pricingElement = $this
+            ->getDocument()
+            ->find('css', sprintf('tr:contains("%s") + tr', $variantName))
+        ;
+
+        $appliedPromotions = $pricingElement->findAll('css', '.applied-promotion');
+
+        return array_map(function(NodeElement $element): string {
+            return $element->getAttribute('href');
+        }, $appliedPromotions);
     }
 
     public function getRouteName(): string
