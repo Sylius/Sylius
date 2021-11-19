@@ -31,7 +31,7 @@ final class AppliedPromotionInformationFormatterSpec extends ObjectBehavior
         CatalogPromotionTranslationInterface $translation
     ): void {
         $catalogPromotion->getTranslations()->willReturn(new ArrayCollection([$translation->getWrappedObject()]));
-
+        $catalogPromotion->getId()->willReturn(420);
         $translation->getLabel()->willReturn('Winter sale');
         $translation->getLocale()->willReturn('en_US');
         $translation->getDescription()->willReturn('Winter sale description');
@@ -39,8 +39,10 @@ final class AppliedPromotionInformationFormatterSpec extends ObjectBehavior
 
         $this->format($catalogPromotion)->shouldReturn([
             'winter_sale' => [
+                'id' => 420,
                 'en_US' => ['name' => 'Winter sale', 'description' => 'Winter sale description']
             ]
         ]);
+
     }
 }
