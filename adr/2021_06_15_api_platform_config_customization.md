@@ -38,7 +38,7 @@ in specified directory all we need to do is create config we want to overwrite, 
             enabled: false
 ```
 
-This is example config to remove specific operation, more examples can be found in docs (https://docs.sylius.com/en/latest/customization/api.html).
+This is example config to remove specific operation, more examples can be found in docs (https://docs.sylius.com/en/latest/customization/api/index.html).
 
 * Good, because it's easy to understand, you can overwrite any endpoint in just a few lines from any place specified in api platform config.
 * Bad, because we need to overwrite and modify services provided by API Platform, differences between API Platform versions can break our application.
