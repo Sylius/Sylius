@@ -17,7 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
@@ -104,7 +104,9 @@ final class ProductVariantContext implements Context
         Assert::same($content['price'], $price);
         Assert::same($content['originalPrice'], $originalPrice);
         foreach ($promotionsNames as $promotionName) {
-            Assert::inArray(['en_US' => ['name' => $promotionName, 'description' => $promotionName . ' description']], $content['appliedPromotions']);
+            $catalogPromotionCode = StringInflector::nameToCode($promotionName);
+            Assert::same($promotionName, $content['appliedPromotions'][$catalogPromotionCode]['translations']['en_US']['name']);
+            Assert::same($promotionName . ' description', $content['appliedPromotions'][$catalogPromotionCode]['translations']['en_US']['description']);
         }
     }
 
