@@ -194,7 +194,7 @@
         "psalm/plugin-mockery": "0.7.0",
         "psr/event-dispatcher": "^1.0",
         "rector/rector": "^0.11.52",
-        "stripe/stripe-php": "^6.43",
+        "stripe/stripe-php": "^7.102",
         "sylius-labs/coding-standard": "^4.0",
         "symfony/browser-kit": "^4.4 || ^5.3",
         "symfony/debug-bundle": "^4.4 || ^5.3",
