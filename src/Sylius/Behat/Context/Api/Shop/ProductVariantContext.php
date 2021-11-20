@@ -121,10 +121,13 @@ final class ProductVariantContext implements Context
     ): void {
         $content = $this->findVariant($variant);
 
+        $catalogPromotionCode = StringInflector::nameToCode($promotionName);
         Assert::same(sizeof($content['appliedPromotions']), 1);
         Assert::same($content['price'], $price);
         Assert::same($content['originalPrice'], $originalPrice);
-        Assert::inArray(['en_US' => ['name' => $promotionName, 'description' => $promotionName . ' description']], $content['appliedPromotions']);
+        Assert::same($promotionName, $content['appliedPromotions'][$catalogPromotionCode]['translations']['en_US']['name']);
+        Assert::same($promotionName . ' description', $content['appliedPromotions'][$catalogPromotionCode]['translations']['en_US']['description']);
+
     }
 
     /**
