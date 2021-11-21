@@ -70,6 +70,16 @@ final class AdminUserContext implements Context
     }
 
     /**
+     * @Given /^(this administrator) account is disabled$/
+     */
+    public function thisAccountIsDisabled(AdminUserInterface $administrator): void
+    {
+        $administrator->setEnabled(false);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(this administrator) is using ("[^"]+" locale)$/
      * @Given /^(I) am using ("[^"]+" locale) for my panel$/
      */
