@@ -10,7 +10,7 @@ If you get used to :doc:`Cart Promotions </book/orders/cart-promotions>` this wi
 It is managed by combination of promotion scopes and actions, where you can specify on which e.g. products or taxons
 you can specify the Catalog Promotion with your custom actions as well as actions like percentage discount.
 
-It is possible to set start and end date for Catalog Promotions, their priority (Promotion will be applied on descending order of priority).
+It is possible to set start and end date for Catalog Promotions and their priority (Promotion will be applied on descending order of priority).
 You can also set exclusiveness of promotion, in this case only one catalog promotion will be applied - exclusive one with highest priority.
 
 You can assign the needed channels too.

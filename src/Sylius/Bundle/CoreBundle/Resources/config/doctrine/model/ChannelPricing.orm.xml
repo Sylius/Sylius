@@ -30,7 +30,6 @@
         <field name="minimumPrice" column="minimum_price" type="integer" nullable="true" />
         <field name="channelCode" column="channel_code" type="string" />
         <field name="appliedPromotions" column="applied_promotions" type="json" nullable="true" />
-        <field name="hasExclusiveCatalogPromotionApplied" column="has_exclusive_catalog_promotions" type="boolean" nullable="true" />
 
         <many-to-one field="productVariant" target-entity="Sylius\Component\Product\Model\ProductVariantInterface" inversed-by="channelPricings">
             <join-column name="product_variant_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />

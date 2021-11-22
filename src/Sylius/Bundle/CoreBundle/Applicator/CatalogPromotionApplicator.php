@@ -97,9 +97,6 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
 
         $channelPricing->setPrice($price);
         $channelPricing->addAppliedPromotion($this->appliedPromotionInformationFormatter->format($catalogPromotion));
-        if ($catalogPromotion->isExclusive()) {
-            $channelPricing->setExclusiveCatalogPromotionApplied(true);
-        }
     }
 
     private function hasCatalogPromotionChannelWithCode(

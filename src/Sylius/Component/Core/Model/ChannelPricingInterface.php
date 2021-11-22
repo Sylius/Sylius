@@ -51,6 +51,4 @@ interface ChannelPricingInterface extends ResourceInterface
     public function clearAppliedPromotions(): void;
 
     public function hasExclusiveCatalogPromotionApplied(): bool;
-
-    public function setExclusiveCatalogPromotionApplied(bool $exclusivePromotionApplied): void;
 }

@@ -117,37 +117,6 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $this->applyOnVariant($variant, $catalogPromotion);
     }
 
-    function it_sets_exclusive_catalog_promotion_applied_flag_to_true_if_applied_promotion_on_variant_is_exclusive(
-        AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter,
-        ProductVariantInterface $variant,
-        CatalogPromotionInterface $catalogPromotion,
-        CatalogPromotionActionInterface $catalogPromotionAction,
-        ChannelInterface $channel,
-        ChannelPricingInterface $channelPricing
-    ): void {
-        $catalogPromotion->getActions()->willReturn(new ArrayCollection([$catalogPromotionAction->getWrappedObject()]));
-        $catalogPromotion->getChannels()->willReturn(new ArrayCollection([
-            $channel->getWrappedObject(),
-        ]));
-        $variant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
-
-        $appliedPromotionInformationFormatter->format($catalogPromotion)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
-        $catalogPromotionAction->getConfiguration()->willReturn(['amount' => 0.3]);
-
-        $channelPricing->hasExclusiveCatalogPromotionApplied()->willReturn(false);
-        $channelPricing->getPrice()->willReturn(1400);
-        $channelPricing->getOriginalPrice()->willReturn(null);
-        $channelPricing->getMinimumPrice()->willReturn(0);
-        $channelPricing->setOriginalPrice(1400)->shouldBeCalled();
-        $channelPricing->setPrice(980)->shouldBeCalled();
-        $channelPricing->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']])->shouldBeCalled();
-
-        $catalogPromotion->isExclusive()->willReturn(true);
-        $channelPricing->setExclusiveCatalogPromotionApplied(true);
-
-        $this->applyOnVariant($variant, $catalogPromotion);
-    }
-
     function it_does_not_set_original_price_during_application_if_its_already_there(
         AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter,
         ProductVariantInterface $variant,

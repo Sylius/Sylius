@@ -1,7 +1,7 @@
 @applying_catalog_promotions
 Feature: Applying only exclusive catalog promotion
     In order to buy product with proper promotions
-    As a Visitor
+    As a Shop Owner
     I want to be able to set catalog promotion as exclusive
 
     Background:

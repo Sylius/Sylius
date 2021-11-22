@@ -30,6 +30,9 @@ final class AppliedPromotionInformationFormatter implements AppliedPromotionInfo
         /** @var string $code */
         $code = $catalogPromotion->getCode();
 
-        return [$code => $translationLabels];
+        return [$code => [
+            'is_exclusive' => $catalogPromotion->isExclusive(),
+            'translations' => $translationLabels
+        ]];
     }
 }

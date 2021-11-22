@@ -95,16 +95,15 @@ final class ChannelPricingSpec extends ObjectBehavior
         ]);
     }
 
-    function its_has_exclusive_promotion_applied_flag_mutable(): void
+    function it_has_information_about_applied_exclusive_catalog_promotion_applied(): void
     {
-        $this->setExclusiveCatalogPromotionApplied(true);
+        $this->addAppliedPromotion(['winter_sale' => ['is_exclusive' => true, 'translations' => ['name' => 'Winter sale']]]);
         $this->hasExclusiveCatalogPromotionApplied()->shouldReturn(true);
     }
 
     function it_can_clear_applied_promotions(): void
     {
         $this->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']]);
-        $this->setExclusiveCatalogPromotionApplied(true);
         $this->clearAppliedPromotions();
         $this->getAppliedPromotions()->shouldReturn([]);
         $this->hasExclusiveCatalogPromotionApplied()->shouldReturn(false);
