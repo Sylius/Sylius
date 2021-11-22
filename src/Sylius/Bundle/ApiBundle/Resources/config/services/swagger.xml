@@ -80,6 +80,15 @@
         </service>
 
         <service
+            id="Sylius\Bundle\ApiBundle\Swagger\ProductSlugDocumentationNormalizer"
+            decorates="api_platform.swagger.normalizer.documentation"
+            autoconfigure="false"
+            decoration-priority="20"
+        >
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ProductSlugDocumentationNormalizer.inner" />
+        </service>
+
+        <service
             id="Sylius\Bundle\ApiBundle\Swagger\ProductVariantDocumentationNormalizer"
             decorates="api_platform.swagger.normalizer.documentation"
             autoconfigure="false"
