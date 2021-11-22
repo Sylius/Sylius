@@ -21,6 +21,10 @@ references related issues.
    These versions of Symfony Serializer introduces a bug with trying to access some private properties that don't have getters.
    
    References: https://github.com/symfony/symfony/pull/40004
+ 
+ - `jms/metadata:2.6.0`:
+
+   This version caused error with ChromeDevTools when running javascript behats.
 
  - `symfony/doctrine-bridge:4.4.16`:
 
