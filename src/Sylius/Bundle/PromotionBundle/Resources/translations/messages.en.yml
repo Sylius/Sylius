@@ -4,6 +4,7 @@ sylius:
     form:
         catalog_promotion:
             action:
+                fixed_discount: Fixed discount
                 percentage_discount: Percentage discount
             description: Description
             enabled: Enabled

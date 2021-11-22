@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\CatalogPromotion;
 
+use Sylius\Component\Core\Model\ChannelInterface;
+
 interface FormElementInterface
 {
     public function nameIt(string $name): void;
@@ -39,15 +41,21 @@ interface FormElementInterface
 
     public function chooseScopeType(string $type): void;
 
+    public function chooseActionType(string $type): void;
+
     public function chooseLastScopeCodes(array $codes): void;
 
     public function specifyLastActionDiscount(string $discount): void;
+
+    public function specifyLastActionDiscountForChannel(string $discount, ChannelInterface $channel): void;
 
     public function getFieldValueInLocale(string $field, string $localeCode): string;
 
     public function getLastScopeCodes(): array;
 
     public function getLastActionDiscount(): string;
+
+    public function getLastActionFixedDiscount(ChannelInterface $channel): string;
 
     public function getValidationMessage(): string;
 

@@ -34,6 +34,10 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
         CatalogPromotionInterface $catalogPromotion
     ): void {
         foreach ($catalogPromotion->getActions() as $action) {
+            if ($action->getType() === CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT) {
+                continue;
+            }
+
             $this->applyDiscountFromAction($catalogPromotion, $action, $variant);
         }
     }
@@ -47,6 +51,10 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
         }
 
         foreach ($catalogPromotion->getActions() as $action) {
+            if ($action->getType() === CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT) {
+                continue;
+            }
+
             $this->applyDiscountFromActionOnChannelPricing(
                 $catalogPromotion,
                 $action->getConfiguration()['amount'],

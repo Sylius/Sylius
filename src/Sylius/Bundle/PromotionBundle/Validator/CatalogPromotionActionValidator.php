@@ -41,6 +41,10 @@ final class CatalogPromotionActionValidator extends ConstraintValidator
             return;
         }
 
+        if ($value->getType() !== CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT) {
+            return;
+        }
+
         $configuration = $value->getConfiguration();
 
         if (!array_key_exists('amount', $configuration)) {
@@ -55,10 +59,8 @@ final class CatalogPromotionActionValidator extends ConstraintValidator
             return;
         }
 
-        if ($value->getType() === CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT) {
-            if ($configuration['amount'] < 0 || $configuration['amount'] > 1) {
-                $this->context->buildViolation($constraint->notInRangeDiscount)->atPath('configuration.amount')->addViolation();
-            }
+        if ($configuration['amount'] < 0 || $configuration['amount'] > 1) {
+            $this->context->buildViolation($constraint->notInRangeDiscount)->atPath('configuration.amount')->addViolation();
         }
     }
 }

@@ -207,14 +207,16 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add action that gives ("[^"]+") fixed discount$/
+     * @When /^I add action that gives ("[^"]+") fixed discount in the ("[^"]+" channel)$/
      */
-    public function iAddActionThatGivesFixedDiscount(int $amount): void
+    public function iAddActionThatGivesFixedDiscount(int $amount, ChannelInterface $channel): void
     {
         $actions = [[
             'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
             'configuration' => [
-                'amount' => $amount
+                $channel->getCode() => [
+                    'amount' => $amount
+                ],
             ],
         ]];
 
@@ -551,10 +553,13 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I edit ("[^"]+" catalog promotion) to have ("[^"]+") fixed discount$/
+     * @When /^I edit ("[^"]+" catalog promotion) to have ("[^"]+") fixed discount in the ("[^"]+" channel)$/
      */
-    public function iEditCatalogPromotionToHaveFixedDiscount(CatalogPromotionInterface $catalogPromotion, int $amount): void
-    {
+    public function iEditCatalogPromotionToHaveFixedDiscountInTheChannel(
+        CatalogPromotionInterface $catalogPromotion,
+        int $amount,
+        ChannelInterface $channel
+    ): void {
         $this->client->buildUpdateRequest($catalogPromotion->getCode());
         $scopes = [[
             'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
@@ -736,19 +741,22 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then /^it should have ("[^"]+") fixed discount$/
+     * @Then /^the ("[^"]+" catalog promotion) should have ("[^"]+") fixed discount in the ("[^"]+" channel)$/
      */
-    public function itShouldHaveFixedDiscount(int $amount): void
-    {
+    public function theCatalogPromotionShouldHaveFixedDiscountInTheChannel(
+        CatalogPromotionInterface $catalogPromotion,
+        int $amount,
+        ChannelInterface $channel
+    ): void {
         $catalogPromotion = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
 
-        Assert::same($catalogPromotion['actions'][0]['configuration']['amount'], $amount);
+        Assert::same($catalogPromotion['actions'][0]['configuration'][$channel->getCode()]['amount'], $amount);
     }
 
     /**
-     * @Then /^this catalog promotion should have ("[^"]+") fixed discount$/
+     * @Then /^this catalog promotion should have ("[^"]+") fixed discount in the ("[^"]+" channel)$/
      */
-    public function thisCatalogPromotionShouldHaveFixedDiscount(int $amount): void
+    public function thisCatalogPromotionShouldHaveFixedDiscountInTheChannel(int $amount, ChannelInterface $channel): void
     {
         $catalogPromotionActions = $this->responseChecker->getValue($this->client->getLastResponse(), 'actions');
 

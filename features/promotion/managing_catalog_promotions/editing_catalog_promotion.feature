@@ -76,12 +76,11 @@ Feature: Editing catalog promotion
         Then I should be notified that it has been successfully edited
         And this catalog promotion should have "40%" percentage discount
 
-    @api
-#    @ui @javascript
+    @api @ui @javascript
     Scenario: Editing catalog promotion action to be a fixed discount
-        When I edit "Christmas sale" catalog promotion to have "$10.00" fixed discount
+        When I edit "Christmas sale" catalog promotion to have "$10.00" fixed discount in the "United States" channel
         Then I should be notified that it has been successfully edited
-        And this catalog promotion should have "$10.00" fixed discount
+        And this catalog promotion should have "$10.00" fixed discount in the "United States" channel
 
     @api @ui
     Scenario: Being unable to edit catalog promotion if it is currently being processed

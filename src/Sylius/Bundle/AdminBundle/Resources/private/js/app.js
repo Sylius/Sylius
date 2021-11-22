@@ -17,6 +17,7 @@ import 'sylius/ui/sylius-product-attributes';
 import 'sylius/ui/sylius-product-auto-complete';
 import 'sylius/ui/sylius-prototype-handler';
 
+import './sylius-catalog-promotion-actions';
 import './sylius-catalog-promotion-scopes';
 import './sylius-compound-form-errors';
 import './sylius-lazy-choice-tree';
@@ -80,6 +81,10 @@ $(document).ready(() => {
       }
     });
 
+    $(document).loadCatalogPromotionActionConfiguration(
+      document.querySelector('#sylius_catalog_promotion_actions [data-form-collection="item"]:last-child')
+    );
+
     $(document).loadCatalogPromotionScopeConfiguration(
       document.querySelector('#sylius_catalog_promotion_scopes [data-form-collection="item"]:last-child')
     );
@@ -101,6 +106,9 @@ $(document).ready(() => {
   $(document).taxonSlugGenerator();
   $(document).previewUploadedImage('#sylius_product_images');
   $(document).previewUploadedImage('#sylius_taxon_images');
+  if ($('#sylius_catalog_promotion_actions').length > 0) {
+    $(document).loadCatalogPromotionActionConfiguration(document.querySelector('#sylius_catalog_promotion_actions'));
+  }
   if ($('#sylius_catalog_promotion_scopes').length > 0) {
     $(document).loadCatalogPromotionScopeConfiguration(document.querySelector('#sylius_catalog_promotion_scopes'));
   }
