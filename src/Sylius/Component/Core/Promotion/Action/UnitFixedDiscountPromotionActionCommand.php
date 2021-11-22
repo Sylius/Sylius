@@ -36,10 +36,9 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
-        FilterInterface $productFilter,
-        MinimumPriceBasedPromotionAmountCalculatorInterface $minimumPriceBasedPromotionAmountCalculator
+        FilterInterface $productFilter
     ) {
-        parent::__construct($adjustmentFactory, $minimumPriceBasedPromotionAmountCalculator);
+        parent::__construct($adjustmentFactory);
 
         $this->priceRangeFilter = $priceRangeFilter;
         $this->taxonFilter = $taxonFilter;

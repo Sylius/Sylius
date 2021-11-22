@@ -25,7 +25,6 @@ use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Action\UnitDiscountPromotionActionCommand;
-use Sylius\Component\Core\Promotion\Calculator\MinimumPriceBasedPromotionAmountCalculatorInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -37,15 +36,13 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
-        FilterInterface $productFilter,
-        MinimumPriceBasedPromotionAmountCalculatorInterface $minimumPriceBasedPromotionAmountCalculator
+        FilterInterface $productFilter
     ): void {
         $this->beConstructedWith(
             $adjustmentFactory,
             $priceRangeFilter,
             $taxonFilter,
-            $productFilter,
-            $minimumPriceBasedPromotionAmountCalculator
+            $productFilter
         );
     }
 
@@ -73,8 +70,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         ProductVariantInterface $productVariant1,
         ProductVariantInterface $productVariant2,
         ChannelPricingInterface $channelPricing1,
-        ChannelPricingInterface $channelPricing2,
-        MinimumPriceBasedPromotionAmountCalculatorInterface $minimumPriceBasedPromotionAmountCalculator
+        ChannelPricingInterface $channelPricing2
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -95,8 +91,6 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
 
         $channelPricing1->getMinimumPrice()->willReturn(0);
         $channelPricing2->getMinimumPrice()->willReturn(0);
-
-        $minimumPriceBasedPromotionAmountCalculator->calculate(500, 0, -100)->willReturn(-100);
 
         $order->getItems()->willReturn($originalItems);
         $originalItems->toArray()->willReturn([$orderItem1]);

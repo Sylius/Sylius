@@ -1,8 +1,8 @@
 @applying_promotion_rules
-Feature: Applying promotion with minimum price
-    In order to pay proper amount after using the promotion coupon when product's minimum price is specified
+Feature: Applying promotion on a product with minimum price specified
+    In order to pay the proper amount when the product's minimum price is specified
     As a Visitor
-    I want to have promotion discounts applied to my cart specified up to product's minimum price
+    I want to have promotion discounts applied to my cart, taking into account the product's minimum price
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -11,7 +11,6 @@ Feature: Applying promotion with minimum price
         And it belongs to "T-Shirts"
         And this product has "PHP T-Shirt" variant priced at "$20.00"
         And the "PHP T-Shirt" variant has minimum price "$15.00" in "United States" channel
-
 
     @ui @api
     Scenario: Receiving fixed discount for my cart

@@ -18,7 +18,6 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Promotion\Calculator\MinimumPriceBasedPromotionAmountCalculatorInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
@@ -31,16 +30,12 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
 
     private IntegerDistributorInterface $distributor;
 
-    private MinimumPriceBasedPromotionAmountCalculatorInterface $minimumPriceBasedPromotionAmountCalculator;
-
     public function __construct(
         AdjustmentFactoryInterface $adjustmentFactory,
-        IntegerDistributorInterface $distributor,
-        MinimumPriceBasedPromotionAmountCalculatorInterface $minimumPriceBasedPromotionAmountCalculator
+        IntegerDistributorInterface $distributor
     ) {
         $this->adjustmentFactory = $adjustmentFactory;
         $this->distributor = $distributor;
-        $this->minimumPriceBasedPromotionAmountCalculator = $minimumPriceBasedPromotionAmountCalculator;
     }
 
     /**
@@ -81,7 +76,7 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
             $this->addAdjustment(
                 $promotion,
                 $unit,
-                $this->minimumPriceBasedPromotionAmountCalculator->calculate($unit->getTotal(), $variantMinimumPrice, $promotionAmount)
+                $this->calculate($unit->getTotal(), $variantMinimumPrice, $promotionAmount)
             );
         }
     }
@@ -94,5 +89,14 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
         $adjustment->setOriginCode($promotion->getCode());
 
         $unit->addAdjustment($adjustment);
+    }
+
+    private function calculate(int $itemTotal, int $minimumPrice, int $promotionAmount): int
+    {
+        if ($itemTotal + $promotionAmount <= $minimumPrice) {
+            return $minimumPrice - $itemTotal;
+        }
+
+        return $promotionAmount;
     }
 }

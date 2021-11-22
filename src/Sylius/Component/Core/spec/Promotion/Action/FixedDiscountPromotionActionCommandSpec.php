@@ -19,9 +19,11 @@ use Prophecy\Argument;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -51,7 +53,11 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemInterface $secondItem,
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
+        ProductVariantInterface $productVariantOne,
+        ProductVariantInterface $productVariantTwo,
+        ChannelPricingInterface $channelPricingOne,
+        ChannelPricingInterface $channelPricingTwo
     ): void {
         $order->getCurrencyCode()->willReturn('USD');
         $order->getChannel()->willReturn($channel);
@@ -63,6 +69,14 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
             ->getItems()
             ->willReturn(new ArrayCollection([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]))
         ;
+
+        $firstItem->getVariant()->willReturn($productVariantOne);
+        $secondItem->getVariant()->willReturn($productVariantTwo);
+        $productVariantOne->getChannelPricingForChannel($channel)->willReturn($channelPricingOne);
+        $productVariantTwo->getChannelPricingForChannel($channel)->willReturn($channelPricingTwo);
+
+        $channelPricingOne->getMinimumPrice()->willReturn(0);
+        $channelPricingTwo->getMinimumPrice()->willReturn(0);
 
         $order->getPromotionSubjectTotal()->willReturn(10000);
         $firstItem->getTotal()->willReturn(6000);
@@ -74,14 +88,18 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(true);
     }
 
-    function it_does_not_apply_bigger_discount_than_promotion_subject_total(
+    function it_distributes_promotion_up_to_minimum_price_of_variant(
         ChannelInterface $channel,
         OrderInterface $order,
         OrderItemInterface $firstItem,
         OrderItemInterface $secondItem,
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
+        ProductVariantInterface $productVariantOne,
+        ProductVariantInterface $productVariantTwo,
+        ChannelPricingInterface $channelPricingOne,
+        ChannelPricingInterface $channelPricingTwo
     ): void {
         $order->getCurrencyCode()->willReturn('USD');
         $order->getChannel()->willReturn($channel);
@@ -93,6 +111,56 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
             ->getItems()
             ->willReturn(new ArrayCollection([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]))
         ;
+
+        $firstItem->getVariant()->willReturn($productVariantOne);
+        $secondItem->getVariant()->willReturn($productVariantTwo);
+        $productVariantOne->getChannelPricingForChannel($channel)->willReturn($channelPricingOne);
+        $productVariantTwo->getChannelPricingForChannel($channel)->willReturn($channelPricingTwo);
+
+        $channelPricingOne->getMinimumPrice()->willReturn(5800);
+        $channelPricingTwo->getMinimumPrice()->willReturn(0);
+
+        $order->getPromotionSubjectTotal()->willReturn(10000);
+        $firstItem->getTotal()->willReturn(6000);
+        $secondItem->getTotal()->willReturn(4000);
+
+        $proportionalIntegerDistributor->distribute([6000, 4000], -1000)->willReturn([-400, -600]);
+        $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-200, -800])->shouldBeCalled();
+
+        $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(true);
+    }
+
+    function it_does_not_apply_bigger_discount_than_promotion_subject_total(
+        ChannelInterface $channel,
+        OrderInterface $order,
+        OrderItemInterface $firstItem,
+        OrderItemInterface $secondItem,
+        PromotionInterface $promotion,
+        ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
+        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
+        ProductVariantInterface $productVariantOne,
+        ProductVariantInterface $productVariantTwo,
+        ChannelPricingInterface $channelPricingOne,
+        ChannelPricingInterface $channelPricingTwo
+    ): void {
+        $order->getCurrencyCode()->willReturn('USD');
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+
+        $order->countItems()->willReturn(2);
+
+        $order
+            ->getItems()
+            ->willReturn(new ArrayCollection([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]))
+        ;
+
+        $firstItem->getVariant()->willReturn($productVariantOne);
+        $secondItem->getVariant()->willReturn($productVariantTwo);
+        $productVariantOne->getChannelPricingForChannel($channel)->willReturn($channelPricingOne);
+        $productVariantTwo->getChannelPricingForChannel($channel)->willReturn($channelPricingTwo);
+
+        $channelPricingOne->getMinimumPrice()->willReturn(0);
+        $channelPricingTwo->getMinimumPrice()->willReturn(0);
 
         $order->getPromotionSubjectTotal()->willReturn(10000);
         $firstItem->getTotal()->willReturn(6000);

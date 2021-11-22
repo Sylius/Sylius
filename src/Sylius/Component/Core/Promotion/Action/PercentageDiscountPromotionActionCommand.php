@@ -58,11 +58,15 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
         }
 
         $itemsTotal = [];
+        $minimumPrices = [];
         foreach ($subject->getItems() as $orderItem) {
             $itemsTotal[] = $orderItem->getTotal();
+            $minimumPrices[] = $orderItem->getVariant()->getChannelPricingForChannel($subject->getChannel())->getMinimumPrice();
         }
 
         $splitPromotion = $this->distributor->distribute($itemsTotal, $promotionAmount);
+        $this->distributeWithMinimumPrice($splitPromotion, $itemsTotal, $minimumPrices);
+
         $this->unitsPromotionAdjustmentsApplicator->apply($subject, $promotion, $splitPromotion);
 
         return true;

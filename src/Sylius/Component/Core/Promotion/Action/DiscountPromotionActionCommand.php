@@ -55,6 +55,21 @@ abstract class DiscountPromotionActionCommand implements PromotionActionCommandI
         return 0 !== $subject->countItems();
     }
 
+    protected function distributeWithMinimumPrice(array &$splitPromotion, array $itemTotals, array $minimumPrices): void
+    {
+        $promotionAmountLeft = 0;
+        foreach ($splitPromotion as $key => $splitPromotionAmount) {
+            $splitPromotion[$key] += $promotionAmountLeft;
+
+            if ($itemTotals[$key] + $splitPromotion[$key] < $minimumPrices[$key]) {
+                $availableAmount = $itemTotals[$key] - $minimumPrices[$key];
+                $splitPromotion[$key] = -$availableAmount;
+
+                $promotionAmountLeft += ($splitPromotionAmount + $availableAmount);
+            }
+        }
+    }
+
     private function removeUnitOrderPromotionAdjustmentsByOrigin(
         OrderItemUnitInterface $unit,
         PromotionInterface $promotion

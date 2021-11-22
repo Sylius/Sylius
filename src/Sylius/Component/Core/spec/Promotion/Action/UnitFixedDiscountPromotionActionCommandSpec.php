@@ -25,7 +25,6 @@ use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Action\UnitDiscountPromotionActionCommand;
-use Sylius\Component\Core\Promotion\Calculator\MinimumPriceBasedPromotionAmountCalculatorInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -37,15 +36,13 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
-        FilterInterface $productFilter,
-        MinimumPriceBasedPromotionAmountCalculatorInterface $minimumPriceBasedPromotionAmountCalculator
+        FilterInterface $productFilter
     ): void {
         $this->beConstructedWith(
             $adjustmentFactory,
             $priceRangeFilter,
             $taxonFilter,
             $productFilter,
-            $minimumPriceBasedPromotionAmountCalculator
         );
     }
 
@@ -72,8 +69,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ProductVariantInterface $productVariant2,
         PromotionInterface $promotion,
         ChannelPricingInterface $channelPricing1,
-        ChannelPricingInterface $channelPricing2,
-        MinimumPriceBasedPromotionAmountCalculatorInterface $minimumPriceBasedPromotionAmountCalculator
+        ChannelPricingInterface $channelPricing2
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -91,8 +87,6 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 
         $channelPricing1->getMinimumPrice()->willReturn(0);
         $channelPricing2->getMinimumPrice()->willReturn(0);
-
-        $minimumPriceBasedPromotionAmountCalculator->calculate(1000, 0, -500)->willReturn(-500);
 
         $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
         $order->getChannel()->willReturn($channel);
@@ -188,8 +182,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ProductVariantInterface $productVariant2,
         PromotionInterface $promotion,
         ChannelPricingInterface $channelPricing1,
-        ChannelPricingInterface $channelPricing2,
-        MinimumPriceBasedPromotionAmountCalculatorInterface $minimumPriceBasedPromotionAmountCalculator
+        ChannelPricingInterface $channelPricing2
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -207,9 +200,6 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 
         $channelPricing1->getMinimumPrice()->willReturn(0);
         $channelPricing2->getMinimumPrice()->willReturn(0);
-
-        $minimumPriceBasedPromotionAmountCalculator->calculate(300, 0, -300)->willReturn(-300);
-        $minimumPriceBasedPromotionAmountCalculator->calculate(200, 0, -200)->willReturn(-200);
 
         $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
         $order->getChannel()->willReturn($channel);
@@ -264,8 +254,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ProductVariantInterface $productVariant2,
         PromotionInterface $promotion,
         ChannelPricingInterface $channelPricing1,
-        ChannelPricingInterface $channelPricing2,
-        MinimumPriceBasedPromotionAmountCalculatorInterface $minimumPriceBasedPromotionAmountCalculator
+        ChannelPricingInterface $channelPricing2
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -283,9 +272,6 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 
         $channelPricing1->getMinimumPrice()->willReturn(200);
         $channelPricing2->getMinimumPrice()->willReturn(150);
-
-        $minimumPriceBasedPromotionAmountCalculator->calculate(300, 200, -300)->willReturn(-100);
-        $minimumPriceBasedPromotionAmountCalculator->calculate(200, 150, -200)->willReturn(-50);
 
         $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
         $order->getChannel()->willReturn($channel);

@@ -20,12 +20,13 @@ Feature: Receiving discounts with product minimum price specified
         Then its price should be decreased by "$5.00"
         And my cart total should be "$45.00"
 
-    @ui @api
+    @api
     Scenario: Receiving fixed discount for my cart
         Given there is a promotion "Holiday promotion"
         And it gives "$10.00" discount to every order
         When I add product "T-Shirt" to the cart
-        Then my cart total should be "$45.00"
+        Then its price should be decreased by "$5.00"
+        And my cart total should be "$45.00"
         And my discount should be "-$5.00"
 
     @ui @api
@@ -42,8 +43,8 @@ Feature: Receiving discounts with product minimum price specified
         When I add product "T-Shirt" to the cart
         And I add product "PHP Mug" to the cart
         Then product "T-Shirt" price should be decreased by "$5.00"
-        And product "PHP Mug" price should be decreased by "$15.00"
-        And my cart total should be "$50.00"
+        And product "PHP Mug" price should be decreased by "$10.00"
+        And my cart total should be "$55.00"
 
     @ui @api
     Scenario: Distributing fixed discount promotion
@@ -51,10 +52,10 @@ Feature: Receiving discounts with product minimum price specified
         When I add product "T-Shirt" to the cart
         And I add product "PHP Mug" to the cart
         Then product "T-Shirt" price should be decreased by "$5.00"
-        And product "PHP Mug" price should be decreased by "$15.00"
-        And my cart total should be "$50.00"
+        And product "PHP Mug" price should be decreased by "$10.00"
+        And my cart total should be "$55.00"
 
-    @ui @api
+    @api
     Scenario: Distributing fixed order discount promotion
         Given the promotion gives "$20.00" discount to every order with quantity at least 2
         When I add product "T-Shirt" to the cart
@@ -63,7 +64,7 @@ Feature: Receiving discounts with product minimum price specified
         And product "PHP Mug" price should be decreased by "$15.00"
         And my cart total should be "$50.00"
 
-    @ui @api
+    @api
     Scenario: Distributing fixed order discount promotion
         Given it gives "20%" discount to every order
         When I add product "T-Shirt" to the cart

@@ -15,6 +15,8 @@ namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -66,11 +68,15 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
         }
 
         $itemsTotals = [];
+        $minimumPrices = [];
         foreach ($subject->getItems() as $item) {
             $itemsTotals[] = $item->getTotal();
+            $minimumPrices[] = $item->getVariant()->getChannelPricingForChannel($subject->getChannel())->getMinimumPrice();
         }
 
         $splitPromotion = $this->proportionalDistributor->distribute($itemsTotals, $promotionAmount);
+        $this->distributeWithMinimumPrice($splitPromotion, $itemsTotals, $minimumPrices);
+
         $this->unitsPromotionAdjustmentsApplicator->apply($subject, $promotion, $splitPromotion);
 
         return true;

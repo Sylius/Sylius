@@ -18,9 +18,12 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -46,18 +49,70 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemInterface $secondItem,
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $distributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
+        ProductVariantInterface $productVariantOne,
+        ProductVariantInterface $productVariantTwo,
+        ChannelPricingInterface $channelPricingOne,
+        ChannelPricingInterface $channelPricingTwo,
+        ChannelInterface $channel
     ): void {
         $order->countItems()->willReturn(2);
+        $order->getChannel()->willReturn($channel);
+
         $order->getItems()->willReturn(new ArrayCollection([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]));
 
         $firstItem->getTotal()->willReturn(200);
         $secondItem->getTotal()->willReturn(800);
 
+        $firstItem->getVariant()->willReturn($productVariantOne);
+        $secondItem->getVariant()->willReturn($productVariantTwo);
+        $productVariantOne->getChannelPricingForChannel($channel)->willReturn($channelPricingOne);
+        $productVariantTwo->getChannelPricingForChannel($channel)->willReturn($channelPricingTwo);
+
+        $channelPricingOne->getMinimumPrice()->willReturn(0);
+        $channelPricingTwo->getMinimumPrice()->willReturn(0);
+
         $order->getPromotionSubjectTotal()->willReturn(10000);
 
         $distributor->distribute([200, 800], -1000)->willReturn([-200, -800]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-200, -800])->shouldBeCalled();
+
+        $this->execute($order, ['percentage' => 0.1], $promotion)->shouldReturn(true);
+    }
+
+    function it_distributes_promotion_amount_taking_minimum_price_to_account(
+        OrderInterface $order,
+        OrderItemInterface $firstItem,
+        OrderItemInterface $secondItem,
+        PromotionInterface $promotion,
+        ProportionalIntegerDistributorInterface $distributor,
+        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
+        ProductVariantInterface $productVariantOne,
+        ProductVariantInterface $productVariantTwo,
+        ChannelPricingInterface $channelPricingOne,
+        ChannelPricingInterface $channelPricingTwo,
+        ChannelInterface $channel
+    ): void {
+        $order->countItems()->willReturn(2);
+        $order->getChannel()->willReturn($channel);
+
+        $order->getItems()->willReturn(new ArrayCollection([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]));
+
+        $firstItem->getTotal()->willReturn(200);
+        $secondItem->getTotal()->willReturn(800);
+
+        $firstItem->getVariant()->willReturn($productVariantOne);
+        $secondItem->getVariant()->willReturn($productVariantTwo);
+        $productVariantOne->getChannelPricingForChannel($channel)->willReturn($channelPricingOne);
+        $productVariantTwo->getChannelPricingForChannel($channel)->willReturn($channelPricingTwo);
+
+        $channelPricingOne->getMinimumPrice()->willReturn(100);
+        $channelPricingTwo->getMinimumPrice()->willReturn(0);
+
+        $order->getPromotionSubjectTotal()->willReturn(10000);
+
+        $distributor->distribute([200, 800], -1000)->willReturn([-200, -800]);
+        $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-100, -800])->shouldBeCalled();
 
         $this->execute($order, ['percentage' => 0.1], $promotion)->shouldReturn(true);
     }

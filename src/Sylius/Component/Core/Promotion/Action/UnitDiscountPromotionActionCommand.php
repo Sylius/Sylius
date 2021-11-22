@@ -18,7 +18,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Promotion\Calculator\MinimumPriceBasedPromotionAmountCalculatorInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface as OrderAdjustmentInterface;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -30,14 +29,9 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
 {
     protected FactoryInterface $adjustmentFactory;
 
-    protected MinimumPriceBasedPromotionAmountCalculatorInterface $minimumPriceBasedPromotionAmountCalculator;
-
-    public function __construct(
-        FactoryInterface $adjustmentFactory,
-        MinimumPriceBasedPromotionAmountCalculatorInterface $minimumPriceBasedPromotionAmountCalculator
-    ) {
+    public function __construct(FactoryInterface $adjustmentFactory)
+    {
         $this->adjustmentFactory = $adjustmentFactory;
-        $this->minimumPriceBasedPromotionAmountCalculator = $minimumPriceBasedPromotionAmountCalculator;
     }
 
     /**
@@ -85,9 +79,9 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
 
         $channel = $order->getChannel();
 
-        $minimumPrice = $variant->getChannelPricingForChannel($channel)->getMinimumPrice() ?? 0;
+        $minimumPrice = $variant->getChannelPricingForChannel($channel)->getMinimumPrice();
 
-        $adjustment->setAmount($this->minimumPriceBasedPromotionAmountCalculator->calculate($unit->getTotal(), $minimumPrice, -$amount));
+        $adjustment->setAmount($this->calculate($unit->getTotal(), $minimumPrice, -$amount));
 
         $unit->addAdjustment($adjustment);
     }
@@ -103,5 +97,14 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
         $adjustment->setOriginCode($promotion->getCode());
 
         return $adjustment;
+    }
+
+    private function calculate(int $itemTotal, ?int $minimumPrice, int $promotionAmount): int
+    {
+        if ($itemTotal + $promotionAmount <= $minimumPrice) {
+            return $minimumPrice - $itemTotal;
+        }
+
+        return $promotionAmount;
     }
 }

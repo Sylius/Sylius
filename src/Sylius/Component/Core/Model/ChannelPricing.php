@@ -39,9 +39,9 @@ class ChannelPricing implements ChannelPricingInterface
     protected $originalPrice;
 
     /**
-     * @var int|null
+     * @var int
      */
-    protected $minimumPrice;
+    protected $minimumPrice = 0;
 
     /** @var ?array */
     protected $appliedPromotions = [];

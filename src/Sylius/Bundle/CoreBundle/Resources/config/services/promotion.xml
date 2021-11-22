@@ -68,7 +68,6 @@
             <argument type="service" id="sylius.promotion_filter.price_range" />
             <argument type="service" id="sylius.promotion_filter.taxon" />
             <argument type="service" id="sylius.promotion_filter.product" />
-            <argument type="service" id="Sylius\Component\Core\Promotion\Calculator\MinimumPriceBasedPromotionAmountCalculatorInterface" />
             <tag name="sylius.promotion_action" type="unit_fixed_discount" label="sylius.form.promotion_action.item_fixed_discount" form-type="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\ChannelBasedUnitFixedDiscountConfigurationType" />
         </service>
         <service id="sylius.promotion_action.percentage_discount" class="Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand">
@@ -81,7 +80,6 @@
             <argument type="service" id="sylius.promotion_filter.price_range" />
             <argument type="service" id="sylius.promotion_filter.taxon" />
             <argument type="service" id="sylius.promotion_filter.product" />
-            <argument type="service" id="Sylius\Component\Core\Promotion\Calculator\MinimumPriceBasedPromotionAmountCalculatorInterface" />
             <tag name="sylius.promotion_action" type="unit_percentage_discount" label="sylius.form.promotion_action.item_percentage_discount" form-type="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\ChannelBasedUnitPercentageDiscountConfigurationType" />
         </service>
         <service id="sylius.promotion_action.shipping_percentage_discount" class="Sylius\Component\Core\Promotion\Action\ShippingPercentageDiscountPromotionActionCommand">
@@ -105,7 +103,6 @@
         <service id="sylius.promotion.units_promotion_adjustments_applicator" class="Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicator">
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.integer_distributor" />
-            <argument type="service" id="Sylius\Component\Core\Promotion\Calculator\MinimumPriceBasedPromotionAmountCalculatorInterface" />
         </service>
         <service id="Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface" alias="sylius.promotion.units_promotion_adjustments_applicator" />
 
