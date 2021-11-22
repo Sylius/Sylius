@@ -15,7 +15,7 @@
         {% set currencies = sylius_channels_currencies() %}
         {% for channelPricing in variant.channelPricings %}
             <tr class="pricing">
-                <td class="five wide gray text">
+                <td class="gray text">
                     <strong>{{ channelPricing.channelCode }}</strong>
                 </td>
                 {% set channelCode = channelPricing.channelCode %}
@@ -25,16 +25,7 @@
                 {% else %}
                     <td><span class="gray text">-</span></td>
                 {% endif %}
-                {% if channelPricing.appliedPromotions is empty %}
-                    <td>-</td>
-                {% else %}
-                    <td>
-                        {% for appliedPromotion in channelPricing.appliedPromotions %}
-                            <a href="{{ path('sylius_admin_catalog_promotion_show', {'id': appliedPromotion['id'] | default(2137)}) }}"
-                               class="ui label purple applied-promotion">{{ appliedPromotion['translations'][sylius_base_locale].name }}</a>
-                        {% endfor %}
-                    </td>
-                {% endif %}
+                {% include '@SyliusAdmin/Product/Show/_appliedPromotions.html.twig' %}
             </tr>
         {% endfor %}
         </tbody>

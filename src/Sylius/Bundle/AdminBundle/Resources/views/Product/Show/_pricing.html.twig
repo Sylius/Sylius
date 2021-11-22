@@ -24,16 +24,7 @@
                         {% else %}
                             <td>-</td>
                         {% endif %}
-                        {% if channelPricing.appliedPromotions is empty %}
-                            <td>-</td>
-                        {% else %}
-                            <td>
-                                {% for appliedPromotion in channelPricing.appliedPromotions %}
-                                    <a href="{{ path('sylius_admin_catalog_promotion_show', {'id': appliedPromotion['id']}) }}"
-                                       class="ui label purple applied-promotion">{{ appliedPromotion['translations'][sylius_base_locale].name }}</a>
-                                {% endfor %}
-                            </td>
-                        {% endif %}
+                        {% include '@SyliusAdmin/Product/Show/_appliedPromotions.html.twig' %}
                     </tr>
                 {% endif %}
             {% endfor %}
