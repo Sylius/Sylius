@@ -6,6 +6,7 @@ sylius:
         catalog_promotion:
             description: Descrizione
             name: "Nome\n"
+            priority: Priorità
         promotion:
             actions: Azioni
             add_action: Aggiungi azione

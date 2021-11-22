@@ -11,6 +11,7 @@ sylius:
             end_date: Date de fin
             label: Libellé
             name: Nom
+            priority: Priorité
             start_date: Date de début
             translations: Traductions
         promotion:
