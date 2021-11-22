@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "priority: Priority should be a number.",
+    "violations": [
+        {
+            "propertyPath": "priority",
+            "message": "Priority should be a number.",
+            "code": @string@
+        }
+    ]
+}

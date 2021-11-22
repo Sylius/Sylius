@@ -27,6 +27,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
@@ -77,13 +78,53 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When I browse products from taxon :taxon
+     * @When I view product :product using slug
      */
-    public function iBrowseProductsFromTaxon(TaxonInterface $taxon): void
+    public function iViewProductUsingSlug(ProductInterface $product): void
+    {
+        $this->client->showByIri('/api/v2/shop/products-by-slug/'.$product->getSlug());
+
+        $this->sharedStorage->set('product', $product);
+    }
+
+    /**
+     * @Then I should be redirected to :product product
+     */
+    public function iShouldBeRedirectedToProduct(ProductInterface $product): void
+    {
+        $response = $this->client->getLastResponse();
+
+        Assert::eq($response->headers->get('Location'), '/api/v2/shop/products/'.$product->getCode());
+    }
+
+    /**
+     * @When I browse products from taxon :taxon
+     * @When I browse products
+     */
+    public function iBrowseProductsFromTaxon(?TaxonInterface $taxon = null): void
     {
         $this->client->index();
-        $this->client->addFilter('taxon', $this->iriConverter->getIriFromItem($taxon));
-        $this->client->filter();
+
+        if ($taxon !== null) {
+            $this->client->addFilter('taxon', $this->iriConverter->getIriFromItem($taxon));
+            $this->client->filter();
+        }
+    }
+
+    /**
+     * @When I sort products by the lowest price first
+     */
+    public function iSortProductsByTheLowestPriceFirst(): void
+    {
+        $this->client->sort(['price' => 'asc']);
+    }
+
+    /**
+     * @When I sort products by the highest price first
+     */
+    public function iSortProductsByTheHighestPriceFirst(): void
+    {
+        $this->client->sort(['price' => 'desc']);
     }
 
     /**
@@ -121,6 +162,24 @@ final class ProductContext implements Context
             $this->responseChecker->getCollection($this->client->getLastResponse()),
             $name
         ));
+    }
+
+    /**
+     * @Then I should see a product with code :code
+     */
+    public function iShouldSeeAProductWithCode(string $code): void
+    {
+        Assert::true($this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'code', $code));
+    }
+
+    /**
+     * @Then I should see a product with name :name
+     */
+    public function iShouldSeeAProductWithName(string $name): void
+    {
+        Assert::true(
+            $this->responseChecker->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', 'name', $name)
+        );
     }
 
     /**
@@ -225,11 +284,43 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When I browse products
+     * @Then the first product on the list should have code :code
      */
-    public function iViewProducts(): void
+    public function theFirstProductOnTheListShouldHaveCode(string $code): void
     {
-        $this->client->index();
+        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same($products[0]['code'], $code);
+    }
+
+    /**
+     * @Then the last product on the list should have code :value
+     */
+    public function theLastProductOnTheListShouldHaveCode(string $code): void
+    {
+        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same(end($products)['code'], $code);
+    }
+
+    /**
+     * @Then the first product on the list should have name :name
+     */
+    public function theFirstProductOnTheListShouldHaveName(string $name): void
+    {
+        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same($products[0]['translations']['en_US']['name'], $name);
+    }
+
+    /**
+     * @Then the last product on the list should have name :name
+     */
+    public function theLastProductOnTheListShouldHaveName(string $name): void
+    {
+        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same(end($products)['translations']['en_US']['name'], $name);
     }
 
     /**

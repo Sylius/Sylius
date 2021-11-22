@@ -36,6 +36,8 @@ class CatalogPromotion implements CatalogPromotionInterface
 
     protected ?\DateTimeInterface $endDate = null;
 
+    protected int $priority = 0;
+
     protected string $state = CatalogPromotionStates::STATE_INACTIVE;
 
     /**
@@ -100,6 +102,16 @@ class CatalogPromotion implements CatalogPromotionInterface
     public function setEndDate(?\DateTimeInterface $endDate): void
     {
         $this->endDate = $endDate;
+    }
+
+    public function getPriority(): int
+    {
+        return $this->priority;
+    }
+
+    public function setPriority(int $priority): void
+    {
+        $this->priority = $priority;
     }
 
     public function getState(): ?string

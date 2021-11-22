@@ -94,6 +94,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I set its priority to :priority
+     */
+    public function iSetsItsPriorityTo(int $priority): void
+    {
+        $this->client->addRequestData('priority', $priority);
+    }
+
+    /**
      * @When I specify its :field as :value in :localeCode
      */
     public function iSpecifyItsAsIn(string $field, string $value, string $localeCode): void
@@ -726,6 +734,17 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then it should have priority equal to :priority
+     */
+    public function itShouldHavePriorityEqualTo(int $priority): void
+    {
+        Assert::true(
+            $this->responseChecker->hasItemWithValues($this->client->index(), ['priority' => $priority]),
+            sprintf('Cannot find catalog promotions with priority "%d"', $priority)
+        );
+    }
+
+    /**
      * @Then the catalog promotions named :firstName and :secondName should be in the registry
      */
     public function theCatalogPromotionsNamedShouldBeInTheRegistry(string ...$names): void
@@ -795,6 +814,17 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::true($this->responseChecker->hasItemWithValues(
             $this->client->getLastResponse(),
             ['name' => $catalogPromotion->getName(), 'state' => $state]
+        ));
+    }
+
+    /**
+     * @Then /^(its) priority should be ([^"]+)$/
+     */
+    public function itPriorityShouldBe(CatalogPromotionInterface $catalogPromotion, int $priority): void
+    {
+        Assert::true($this->responseChecker->hasItemWithValues(
+            $this->client->getLastResponse(),
+            ['priority' => $priority]
         ));
     }
 

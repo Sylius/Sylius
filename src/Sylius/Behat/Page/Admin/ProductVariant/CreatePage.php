@@ -27,6 +27,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getElement('price', ['%channelCode%' => $channel->getCode()])->setValue($price);
     }
 
+    public function specifyMinimumPrice(string $price, ChannelInterface $channel): void
+    {
+        $this->getElement('minimum_price', ['%channelCode%' => $channel->getCode()])->setValue($price);
+    }
+
     public function specifyOriginalPrice(string $originalPrice, ChannelInterface $channel): void
     {
         $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
@@ -107,6 +112,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'depth' => '#sylius_product_variant_depth',
             'form' => 'form[name="sylius_product_variant"]',
             'height' => '#sylius_product_variant_height',
+            'minimum_price' => '#sylius_product_variant_channelPricings input[name$="[minimumPrice]"][id*="%channelCode%"]',
             'on_hand' => '#sylius_product_variant_onHand',
             'option_select' => '#sylius_product_variant_optionValues_%option-name%',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',

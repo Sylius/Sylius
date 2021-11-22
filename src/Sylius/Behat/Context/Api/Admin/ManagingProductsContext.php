@@ -290,7 +290,6 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
-        $res = $this->client->getLastResponse();
         Assert::true($this->responseChecker->isCreationSuccessful($this->client->getLastResponse()));
     }
 

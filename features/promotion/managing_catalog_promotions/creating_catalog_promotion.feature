@@ -108,3 +108,14 @@ Feature: Creating a catalog promotion
         And "Winter sale" catalog promotion should apply to "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And it should operate between yesterday and tomorrow
         And it should be active
+
+    @api @ui
+    Scenario: Creating a simple catalog promotion with code, name and priority
+        When I want to create a new catalog promotion
+        And I specify its code as "winter_sale"
+        And I name it "Winter sale"
+        And I set its priority to 10
+        And I add it
+        Then there should be 1 new catalog promotion on the list
+        And it should have "winter_sale" code and "Winter sale" name
+        And it should have priority equal to 10

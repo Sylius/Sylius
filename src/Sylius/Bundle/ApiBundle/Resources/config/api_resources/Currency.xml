@@ -31,6 +31,15 @@
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/currencies</attribute>
             </collectionOperation>
+
+            <collectionOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="route_prefix">shop</attribute>
+                <attribute name="path">/shop/currencies</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:currency:read</attribute>
+                </attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>

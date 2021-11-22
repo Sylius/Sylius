@@ -12,7 +12,8 @@
             "id": @integer@,
             "channelCode": "WEB",
             "price": 3000,
-            "originalPrice": 4000
+            "originalPrice": 4000,
+            "minimumPrice": null
         }
     },
     "optionValues":[],

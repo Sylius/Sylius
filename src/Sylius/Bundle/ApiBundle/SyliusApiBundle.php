@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle;
 
 use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\CommandDataTransformerPass;
 use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\ReflectionExtractorHotfixPass;
+use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\SwaggerDecoratorsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -25,5 +26,6 @@ final class SyliusApiBundle extends Bundle
     {
         $builder->addCompilerPass(new CommandDataTransformerPass());
         $builder->addCompilerPass(new ReflectionExtractorHotfixPass());
+        $builder->addCompilerPass(new SwaggerDecoratorsPass());
     }
 }

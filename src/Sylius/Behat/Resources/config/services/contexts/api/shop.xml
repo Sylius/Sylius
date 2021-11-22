@@ -32,6 +32,12 @@
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
+        <service id="sylius.behat.context.api.shop.currency" class="Sylius\Behat\Context\Api\Shop\CurrencyContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop.currency" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
+
         <service id="sylius.behat.context.api.shop.cart" class="Sylius\Behat\Context\Api\Shop\CartContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop.cart" />
             <argument type="service" id="sylius.behat.api_platform_client.admin.order" />

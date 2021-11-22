@@ -77,6 +77,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('price', ['%channelCode%' => $channel->getCode()])->getValue();
     }
 
+    public function getMinimumPriceForChannel(ChannelInterface $channel): string
+    {
+        return $this->getElement('minimum_price', ['%channelCode%' => $channel->getCode()])->getValue();
+    }
+
     public function getOriginalPriceForChannel(ChannelInterface $channel): string
     {
         return $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->getValue();
@@ -126,6 +131,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_variant_code',
+            'minimum_price' => '#sylius_product_variant_channelPricings input[name$="[minimumPrice]"][id*="%channelCode%"]',
             'name' => '#sylius_product_variant_translations_%language%_name',
             'on_hand' => '#sylius_product_variant_onHand',
             'option_values' => '#sylius_product_variant_optionValues_%optionName%',

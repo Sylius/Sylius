@@ -31,7 +31,7 @@ Feature: Sorting listed products
         And I should see a product with name "Berserk Pug"
         But the first product on the list should have name "Xtreme Pug"
 
-    @ui
+    @ui @api
     Scenario: Sorting products by their prices with descending order
         When I browse products from taxon "Fluffy Pets"
         And I sort products by the lowest price first
@@ -39,7 +39,7 @@ Feature: Sorting listed products
         And I should see a product with name "Xtreme Pug"
         But the first product on the list should have name "Berserk Pug"
 
-    @ui
+    @ui @api
     Scenario: Sorting products by their prices with ascending order
         When I browse products from taxon "Fluffy Pets"
         And I sort products by the highest price first

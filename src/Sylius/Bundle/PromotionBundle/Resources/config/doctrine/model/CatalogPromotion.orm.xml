@@ -22,6 +22,11 @@
         <field name="startDate" type="datetime" column="start_date" nullable="true"/>
         <field name="endDate" type="datetime" column="end_date" nullable="true"/>
         <field name="enabled" type="boolean" />
+        <field name="priority" type="integer">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
         <field name="state" column="state" />
 
         <one-to-many field="scopes" target-entity="Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface" mapped-by="catalogPromotion" orphan-removal="true">

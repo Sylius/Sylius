@@ -89,6 +89,13 @@ final class CatalogPromotionSpec extends ObjectBehavior
         $this->getEndDate()->shouldBeLike(new \DateTime('2021-01-05'));
     }
 
+    function its_priority_is_mutable(): void
+    {
+        $this->getPriority()->shouldReturn(0);
+        $this->setPriority(200);
+        $this->getPriority()->shouldReturn(200);
+    }
+
     function it_initializes_scopes_collection_by_default(): void
     {
         $this->getScopes()->shouldHaveType(Collection::class);

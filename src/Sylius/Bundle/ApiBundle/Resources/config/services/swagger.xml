@@ -26,6 +26,7 @@
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\AdminAuthenticationTokenDocumentationNormalizer.inner" />
             <argument>%sylius.security.new_api_route%</argument>
+            <tag name="sylius.swagger.normalizer.documentation"/>
         </service>
 
         <service
@@ -36,6 +37,7 @@
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ShopAuthenticationTokenDocumentationNormalizer.inner" />
             <argument>%sylius.security.new_api_route%</argument>
+            <tag name="sylius.swagger.normalizer.documentation"/>
         </service>
 
         <service
@@ -45,6 +47,7 @@
             decoration-priority="20"
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ProductDocumentationNormalizer.inner" />
+            <tag name="sylius.swagger.normalizer.documentation"/>
         </service>
 
         <service
@@ -55,6 +58,25 @@
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ProductImageDocumentationNormalizer.inner" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\ProductImageFilterProviderInterface" />
+            <tag name="sylius.swagger.normalizer.documentation"/>
+        </service>
+
+        <service
+            id="Sylius\Bundle\ApiBundle\Swagger\ProductSlugDocumentationNormalizer"
+            decorates="api_platform.swagger.normalizer.documentation"
+            autoconfigure="false"
+            decoration-priority="20"
+        >
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ProductSlugDocumentationNormalizer.inner" />
+        </service>
+
+        <service
+            id="Sylius\Bundle\ApiBundle\Swagger\ProductSlugDocumentationNormalizer"
+            decorates="api_platform.swagger.normalizer.documentation"
+            autoconfigure="false"
+            decoration-priority="20"
+        >
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ProductSlugDocumentationNormalizer.inner" />
         </service>
 
         <service
@@ -64,6 +86,7 @@
             decoration-priority="20"
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ProductVariantDocumentationNormalizer.inner" />
+            <tag name="sylius.swagger.normalizer.documentation"/>
         </service>
 
         <service
@@ -73,6 +96,7 @@
             decoration-priority="20"
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ShippingMethodDocumentationNormalizer.inner" />
+            <tag name="sylius.swagger.normalizer.documentation"/>
         </service>
 
         <service
@@ -83,6 +107,7 @@
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\PathHiderDocumentationNormalizer.inner" />
             <argument>%sylius.api.paths_to_hide%</argument>
+            <tag name="sylius.swagger.normalizer.documentation"/>
         </service>
     </services>
 </container>

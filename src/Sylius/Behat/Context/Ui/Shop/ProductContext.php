@@ -500,7 +500,7 @@ final class ProductContext implements Context
      * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" and "([^"]+)" promotions$/
      * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)", "([^"]+)" and "([^"]+)" promotions$/
      */
-    public function iShouldSeeVariantIsDiscountedFromToWithPromotion(
+    public function iShouldSeeVariantIsDiscountedFromToWithPromotions(
         ProductVariantInterface $variant,
         string $originalPrice,
         string $price,
@@ -516,6 +516,23 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with only "([^"]+)" promotion$/
+     */
+    public function iShouldSeeVariantIsDiscountedFromToWithOnlyPromotion(
+        ProductVariantInterface $variant,
+        string $originalPrice,
+        string $price,
+        string $promotionName
+    ): void {
+        $this->showPage->selectVariant($variant->getName());
+
+        Assert::same(sizeof($this->showPage->getCatalogPromotions()), 1);
+        Assert::same($this->showPage->getCatalogPromotionName(), $promotionName);
+        Assert::same($this->showPage->getPrice(), $price);
+        Assert::same($this->showPage->getOriginalPrice(), $originalPrice);
+    }
+
+    /**
      * @Then /^the visitor should(?:| still) see that the ("[^"]+" variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" promotion$/
      */
     public function theVisitorShouldSeeThatTheVariantIsDiscountedFromToWithPromotion(
@@ -528,7 +545,7 @@ final class ProductContext implements Context
         $product = $variant->getProduct();
 
         $this->iOpenProductPage($product);
-        $this->iShouldSeeVariantIsDiscountedFromToWithPromotion($variant, $originalPrice, $price, $promotionName);
+        $this->iShouldSeeVariantIsDiscountedFromToWithPromotions($variant, $originalPrice, $price, $promotionName);
     }
 
     /**

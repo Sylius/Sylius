@@ -10,6 +10,7 @@ sylius:
             end_date: End date
             label: Label
             name: Name
+            priority: Priority
             start_date: Start date
             translations: Translations
         promotion:

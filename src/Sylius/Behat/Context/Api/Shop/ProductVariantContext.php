@@ -93,7 +93,7 @@ final class ProductVariantContext implements Context
      * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" and "([^"]+)" promotions$/
      * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)", "([^"]+)" and "([^"]+)" promotions$/
      */
-    public function iShouldSeeVariantIsDiscountedFromToWithPromotion(
+    public function iShouldSeeVariantIsDiscountedFromToWithPromotions(
         ProductVariantInterface $variant,
         int $originalPrice,
         int $price,
@@ -109,6 +109,23 @@ final class ProductVariantContext implements Context
     }
 
     /**
+     * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with only "([^"]+)" promotion$/
+     */
+    public function iShouldSeeVariantIsDiscountedFromToWithOnlyPromotion(
+        ProductVariantInterface $variant,
+        int $originalPrice,
+        int $price,
+        string $promotionName
+    ): void {
+        $content = $this->findVariant($variant);
+
+        Assert::same(sizeof($content['appliedPromotions']), 1);
+        Assert::same($content['price'], $price);
+        Assert::same($content['originalPrice'], $originalPrice);
+        Assert::inArray(['en_US' => ['name' => $promotionName, 'description' => $promotionName . ' description']], $content['appliedPromotions']);
+    }
+
+    /**
      * @Then /^the visitor should(?:| still) see that the ("[^"]+" variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/
      */
     public function theVisitorShouldSeeThatTheVariantIsDiscountedWithPromotion(
@@ -120,7 +137,7 @@ final class ProductVariantContext implements Context
         $this->sharedStorage->set('token', null);
         $this->client->show($productVariant->getCode());
 
-        $this->iShouldSeeVariantIsDiscountedFromToWithPromotion($productVariant, $originalPrice, $price, $promotionName);
+        $this->iShouldSeeVariantIsDiscountedFromToWithPromotions($productVariant, $originalPrice, $price, $promotionName);
     }
 
     /**
