@@ -24,15 +24,15 @@
                         {% else %}
                             <td>-</td>
                         {% endif %}
-                        {% if channelPricing.appliedPromotions is defined %}
+                        {% if channelPricing.appliedPromotions is empty %}
+                            <td>-</td>
+                        {% else %}
                             <td>
                                 {% for appliedPromotion in channelPricing.appliedPromotions %}
                                     <a href="{{ path('sylius_admin_catalog_promotion_show', {'id': appliedPromotion['id']}) }}"
                                        class="ui label purple applied-promotion">{{ appliedPromotion['translations'][sylius_base_locale].name }}</a>
                                 {% endfor %}
                             </td>
-                        {% else %}
-                            <td>-</td>
                         {% endif %}
                     </tr>
                 {% endif %}
