@@ -631,6 +631,46 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I add fixed discount action without amount configured
+     */
+    public function iAddFixedDiscountActionWithoutAmountConfigured(): void
+    {
+        $actions = [[
+            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'configuration' => [],
+        ]];
+
+        $this->client->addRequestData('actions', $actions);
+    }
+
+    /**
+     * @When I add invalid fixed discount action with non number in amount for the :channel channel
+     */
+    public function iAddInvalidFixedDiscountActionWithNonNumberInAmountForTheChannel(
+        ChannelInterface $channel
+    ): void {
+        $actions = [[
+            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'configuration' => [$channel->getCode() => ['amount' => 'wrong value']],
+        ]];
+
+        $this->client->addRequestData('actions', $actions);
+    }
+
+    /**
+     * @When I add invalid fixed discount action configured for nonexistent channel
+     */
+    public function iAddInvalidFixedDiscountActionConfiguredForNonexistentChannel(): void
+    {
+        $actions = [[
+            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'configuration' => ['nonexistent_action' => ['amount' => 1000]],
+        ]];
+
+        $this->client->addRequestData('actions', $actions);
+    }
+
+    /**
      * @When I add catalog promotion action with nonexistent type
      */
     public function iAddCatalogPromotionActionWithNonexistentType(): void
@@ -1193,6 +1233,28 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'The percentage discount amount must be a number and can not be empty.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that a discount amount should be configured for at least one channel
+     */
+    public function iShouldBeNotifiedThatADiscountAmountShouldBeConfiguredForAtLeasOneChannel(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Provided configuration contains errors. Please add the fixed discount amount greater than 0 for at least 1 channel.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that at least one of the provided channel codes does not exist
+     */
+    public function iShouldBeNotifiedThatAtLeastOneOfTheProvidedChannelCodesDoesNotExist(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Provided configuration contains errors. At least one of the provided channel codes does not exist.'
         );
     }
 

@@ -59,6 +59,8 @@ interface FormElementInterface
 
     public function getValidationMessage(): string;
 
+    public function hasValidationMessage(string $message): bool;
+
     public function removeAllActions(): void;
 
     public function removeAllScopes(): void;

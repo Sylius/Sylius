@@ -443,8 +443,9 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When I add percentage discount action without amount configured
+     * @When I add fixed discount action without amount configured
      */
-    public function iAddPercentageDiscountActionWithoutAmountConfigured(): void
+    public function iAddDiscountActionWithoutAmountConfigured(): void
     {
         $this->formElement->addAction();
     }
@@ -456,6 +457,18 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $this->formElement->addAction();
         $this->formElement->specifyLastActionDiscount('alot');
+    }
+
+
+    /**
+     * @When I add invalid fixed discount action with non number in amount for the :channel channel
+     */
+    public function iAddInvalidFixedDiscountActionWithNonNumberInAmountForTheChannel(
+        ChannelInterface $channel
+    ): void {
+        $this->formElement->addAction();
+        $this->formElement->chooseActionType('Fixed discount');
+        $this->formElement->specifyLastActionDiscountForChannel('wrong value', $channel);
     }
 
     /**
@@ -527,6 +540,16 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldBeNotifiedThatADiscountAmountShouldBeANumber(): void
     {
         Assert::same($this->formElement->getValidationMessage(), 'The percentage discount amount must be a number and can not be empty.');
+    }
+
+    /**
+     * @Then I should be notified that a discount amount should be configured for at least one channel
+     */
+    public function iShouldBeNotifiedThatADiscountAmountShouldBeConfiguredForAtLeasOneChannel(): void
+    {
+        Assert::true($this->formElement->hasValidationMessage(
+            'Provided configuration contains errors. Please add the fixed discount amount greater than 0 for at least 1 channel.'
+        ));
     }
 
     /**
