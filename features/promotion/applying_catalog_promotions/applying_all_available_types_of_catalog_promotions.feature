@@ -9,7 +9,7 @@ Feature: Applying all available catalog promotions
         And the store classifies its products as "Clothes"
         And the store has a "T-Shirt" configurable product
         And this product belongs to "Clothes"
-        And this product has "PHP T-Shirt" variant priced at "$20.00" in "Web-US" channel
+        And this product has "PHP T-Shirt" variant priced at "$100.00" in "Web-US" channel
         And there is a catalog promotion "PHP sale" that reduces price by "10%" and applies on "PHP T-Shirt" variant
         And there is a catalog promotion "T-Shirt sale" that reduces price by "10%" and applies on "T-Shirt" product
         And there is a catalog promotion "Clothes sale" that reduces price by "10%" and applies on "Clothes" taxon

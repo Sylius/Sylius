@@ -37,7 +37,7 @@ final class FixedDiscountActionValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         ConstraintViolationBuilderInterface $constraintViolationBuilder
     ): void {
-        $executionContext->buildViolation('sylius.catalog_promotion_action.fixed_discount.not_empty')->willReturn($constraintViolationBuilder);
+        $executionContext->buildViolation('sylius.catalog_promotion_action.fixed_discount.not_valid')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('configuration')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 

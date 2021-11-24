@@ -13,6 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
+        <import resource="services/calculators.xml" />
         <import resource="services/checkers.xml" />
         <import resource="services/checkout.xml" />
         <import resource="services/commands.xml" />
@@ -259,6 +260,7 @@
             id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface"
             class="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicator"
         >
+            <argument type="service" id="Sylius\Component\CoreBundle\Calculator\CatalogPromotionPriceCalculatorInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Formatter\AppliedPromotionInformationFormatterInterface" />
         </service>
 

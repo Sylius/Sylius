@@ -499,6 +499,7 @@ final class ProductContext implements Context
      * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" promotion$/
      * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)" and "([^"]+)" promotions$/
      * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)", "([^"]+)" and "([^"]+)" promotions$/
+     * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with "([^"]+)", "([^"]+)", "([^"]+)" and "([^"]+)" promotions$/
      */
     public function iShouldSeeVariantIsDiscountedFromToWithPromotions(
         ProductVariantInterface $variant,
@@ -513,6 +514,22 @@ final class ProductContext implements Context
         foreach ($promotionsNames as $promotionName) {
             Assert::true($this->showPage->hasCatalogPromotionApplied($promotionName));
         }
+    }
+
+    /**
+     * @Then /^I should see (this variant) is discounted from "([^"]+)" to "([^"]+)" with ([^"]+) promotions$/
+     */
+    public function iShouldSeeVariantIsDiscountedFromToWithNumberOfPromotions(
+        ProductVariantInterface $variant,
+        string $originalPrice,
+        string $price,
+        int $numberOfPromotions
+    ): void {
+        $this->showPage->selectVariant($variant->getName());
+
+        Assert::same($this->showPage->getPrice(), $price);
+        Assert::same($this->showPage->getOriginalPrice(), $originalPrice);
+        Assert::count($this->showPage->getCatalogPromotionNames(), $numberOfPromotions);
     }
 
     /**
