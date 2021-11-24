@@ -50,11 +50,11 @@ final class CatalogPromotionActionType extends AbstractResourceType
             ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event): void {
                 /** @var CatalogPromotionActionInterface|null $data */
                 $data = $event->getData();
-                $form = $event->getForm();
-
                 if ($data === null) {
                     return;
                 }
+
+                $form = $event->getForm();
 
                 $actionConfigurationType = $this->actionConfigurationTypes[$data->getType()];
                 $form->add('configuration', $actionConfigurationType, [
@@ -64,10 +64,16 @@ final class CatalogPromotionActionType extends AbstractResourceType
             ->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event): void {
                 /** @var array|null $data */
                 $data = $event->getData();
-                $form = $event->getForm();
-
                 if ($data === null) {
                     return;
+                }
+
+                $form = $event->getForm();
+                $formData = $form->getData();
+                if ($formData !== null) {
+                    $formData->setType($data['type']);
+                    $formData->setConfiguration($data['configuration']);
+                    $form->setData($formData);
                 }
 
                 $actionConfigurationType = $this->actionConfigurationTypes[$data['type']];

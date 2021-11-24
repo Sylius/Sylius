@@ -561,14 +561,14 @@ final class ManagingCatalogPromotionsContext implements Context
         ChannelInterface $channel
     ): void {
         $this->client->buildUpdateRequest($catalogPromotion->getCode());
-        $scopes = [[
+        $content = $this->client->getContent();
+
+        $content['actions'] = [[
             'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
-            'configuration' => [
-                'amount' => $amount,
-            ],
+            'configuration' => [$channel->getCode() => ['amount' => $amount]],
         ]];
 
-        $this->client->updateRequestData(['actions' => $scopes]);
+        $this->client->setRequestData($content);
         $this->client->update();
     }
 
@@ -801,7 +801,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $catalogPromotionActions = $this->responseChecker->getValue($this->client->getLastResponse(), 'actions');
 
         Assert::same($catalogPromotionActions[0]['type'], CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT);
-        Assert::same($catalogPromotionActions[0]['configuration']['amount'], $amount);
+        Assert::same($catalogPromotionActions[0]['configuration'][$channel->getCode()]['amount'], $amount);
     }
 
     /**
@@ -1036,6 +1036,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
+        $res = $this->client->getLastResponse();
         Assert::true(
             $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
             'Catalog promotion could not be edited'
