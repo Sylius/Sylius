@@ -80,7 +80,9 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 
         $order->getPromotionSubjectTotal()->willReturn(10000);
         $firstItem->getTotal()->willReturn(6000);
+        $firstItem->getQuantity()->willReturn(1);
         $secondItem->getTotal()->willReturn(4000);
+        $secondItem->getQuantity()->willReturn(1);
 
         $proportionalIntegerDistributor->distribute([6000, 4000], -1000)->willReturn([-600, -400]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-600, -400])->shouldBeCalled();
@@ -122,7 +124,9 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 
         $order->getPromotionSubjectTotal()->willReturn(10000);
         $firstItem->getTotal()->willReturn(6000);
+        $firstItem->getQuantity()->willReturn(1);
         $secondItem->getTotal()->willReturn(4000);
+        $secondItem->getQuantity()->willReturn(1);
 
         $proportionalIntegerDistributor->distribute([6000, 4000], -1000)->willReturn([-400, -600]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-200, -800])->shouldBeCalled();
@@ -164,7 +168,9 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 
         $order->getPromotionSubjectTotal()->willReturn(10000);
         $firstItem->getTotal()->willReturn(6000);
+        $firstItem->getQuantity()->willReturn(1);
         $secondItem->getTotal()->willReturn(4000);
+        $secondItem->getQuantity()->willReturn(1);
 
         $proportionalIntegerDistributor->distribute([6000, 4000], -10000)->willReturn([-6000, -4000]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-6000, -4000])->shouldBeCalled();

@@ -297,6 +297,38 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Then /^the ("[^"]+" product) should have unit prices discounted by ("[^"]+"), ("[^"]+") and ("[^"]+")$/
+     */
+    public function theShouldHaveUnitPricesDiscountedFor(ProductInterface $product, int $amountOne, int $amountTwo, int $amountThree): void
+    {
+        $amounts = [$amountOne, $amountTwo, $amountThree];
+        $itemId = $this->geOrderItemIdForProductInCart($product, $this->sharedStorage->get('cart_token'));
+        $adjustments = $this->getAdjustmentsForOrderItem($itemId);
+
+        /** @var int $index */
+        foreach ($adjustments as $index => $adjustment) {
+            $adj[] = $adjustment['amount'];
+            Assert::same(-$amounts[$index], $adjustment['amount']);
+        }
+    }
+
+    /**
+     * @Then /^the ("[^"]+" product) should have unit prices discounted by ("[^"]+") and ("[^"]+")$/
+     */
+    public function theShouldHaveUnitPricesDiscountedForAnd(ProductInterface $product, int $amountOne, int $amountTwo): void
+    {
+        $amounts = [$amountOne, $amountTwo];
+
+        $itemId = $this->geOrderItemIdForProductInCart($product, $this->sharedStorage->get('cart_token'));
+        $adjustments = $this->getAdjustmentsForOrderItem($itemId);
+
+        /** @var int $index */
+        foreach ($adjustments as $index => $adjustment) {
+            Assert::same(-$amounts[$index], $adjustment['amount']);
+        }
+    }
+
+    /**
      * @Then I should have chosen :paymentMethod payment method
      */
     public function iShouldHaveChosenPaymentMethodForMyOrder(PaymentMethodInterface $paymentMethod): void

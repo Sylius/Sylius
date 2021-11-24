@@ -488,6 +488,20 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then /^(product "[^"]+") prices should be decreased by ("[^"]+"), ("[^"]+") and ("[^"]+")$/
+     */
+    public function itsPricesShouldBeDecreasedBy(ProductInterface $product, int $firstAmount, int $secondAmount, int $thirdAmount): void
+    {
+//        $pricing = $this->getExpectedPriceOfProductTimesQuantity($product);
+        $cartResponse = $this->cartsClient->show($this->sharedStorage->get('cart_token'));
+
+        $response = $this->responseChecker->getResponseContent($this->cartsClient->getLastResponse());
+        dd($product);
+
+//        $this->compareItemSubtotal($product->getName(), $pricing - $amount);
+    }
+
+    /**
      * @Then product :product price should not be decreased
      */
     public function productPriceShouldNotBeDecreased(ProductInterface $product): void

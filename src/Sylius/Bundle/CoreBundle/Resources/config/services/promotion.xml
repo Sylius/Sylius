@@ -68,6 +68,7 @@
             <argument type="service" id="sylius.promotion_filter.price_range" />
             <argument type="service" id="sylius.promotion_filter.taxon" />
             <argument type="service" id="sylius.promotion_filter.product" />
+            <argument type="service" id="sylius.currency_converter" />
             <tag name="sylius.promotion_action" type="unit_fixed_discount" label="sylius.form.promotion_action.item_fixed_discount" form-type="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\ChannelBasedUnitFixedDiscountConfigurationType" />
         </service>
         <service id="sylius.promotion_action.percentage_discount" class="Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand">
@@ -120,7 +121,5 @@
         <service id="sylius.promotion_rule_updater.total_of_items_from_taxon" class="Sylius\Component\Core\Promotion\Updater\Rule\TotalOfItemsFromTaxonRuleUpdater">
             <argument type="service" id="sylius.repository.promotion_rule" />
         </service>
-
-        <service id="Sylius\Component\Core\Promotion\Calculator\MinimumPriceBasedPromotionAmountCalculatorInterface" class="Sylius\Component\Core\Promotion\Calculator\MinimumPriceBasedPromotionAmountCalculator" />
     </services>
 </container>

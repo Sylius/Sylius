@@ -6,6 +6,9 @@ Feature: Receiving discounts with product minimum price specified
 
     Background:
         Given the store operates on a single channel in "United States"
+        And the store ships everywhere for free
+        And the store allows paying offline
+        And I am a logged in customer
         And the store classifies its products as "T-Shirts"
         And the store has a "T-Shirt" configurable product
         And this product has "PHP T-Shirt" variant priced at "$50.00"
@@ -80,10 +83,32 @@ Feature: Receiving discounts with product minimum price specified
         And my cart total should be "$50.00"
 
     @api
-    Scenario: Distributing fixed order discount promotion
+    Scenario: Distributing percentage order discount promotion
         Given it gives "20%" discount to every order
         When I add product "T-Shirt" to the cart
         And I add product "PHP Mug" to the cart
         Then product "T-Shirt" price should be decreased by "$5.00"
         And product "PHP Mug" price should be decreased by "$9.00"
         And my cart total should be "$56.00"
+
+    @api
+    Scenario: Distributing discount evenly between different products when one has minimum price specified
+        Given it gives "$25" discount to every order
+        And I add product "T-Shirt" to the cart
+        And I add 3 products "PHP Mug" to the cart
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I proceed with "Free" shipping method and "Offline" payment
+        Then I should be on the checkout summary step
+        And the "T-Shirt" product should have unit price discounted by "$5.00"
+        And the "PHP Mug" product should have unit prices discounted by "$6.67", "$6.67" and "$6.66"
+
+    @api
+    Scenario: Distributing discount evenly between different products when one has minimum price specified
+        Given it gives "$20" discount to every order
+        And I add 2 products "T-Shirt" to the cart
+        And I add 3 products "PHP Mug" to the cart
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I proceed with "Free" shipping method and "Offline" payment
+        Then I should be on the checkout summary step
+        And the "T-Shirt" product should have unit prices discounted by "$5.00" and "$5.00"
+        And the "PHP Mug" product should have unit prices discounted by "$3.34", "$3.33" and "$3.33"

@@ -99,10 +99,10 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
         return $adjustment;
     }
 
-    private function calculate(int $itemTotal, ?int $minimumPrice, int $promotionAmount): int
+    private function calculate(int $unitTotal, ?int $minimumPrice, int $promotionAmount): int
     {
-        if ($itemTotal + $promotionAmount <= $minimumPrice) {
-            return $minimumPrice - $itemTotal;
+        if ($unitTotal + $promotionAmount <= $minimumPrice) {
+            return $minimumPrice - $unitTotal;
         }
 
         return $promotionAmount;

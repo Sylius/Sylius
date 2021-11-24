@@ -62,7 +62,9 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $order->getItems()->willReturn(new ArrayCollection([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]));
 
         $firstItem->getTotal()->willReturn(200);
+        $firstItem->getQuantity()->willReturn(1);
         $secondItem->getTotal()->willReturn(800);
+        $secondItem->getQuantity()->willReturn(1);
 
         $firstItem->getVariant()->willReturn($productVariantOne);
         $secondItem->getVariant()->willReturn($productVariantTwo);
@@ -99,7 +101,9 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $order->getItems()->willReturn(new ArrayCollection([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]));
 
         $firstItem->getTotal()->willReturn(200);
+        $firstItem->getQuantity()->willReturn(1);
         $secondItem->getTotal()->willReturn(800);
+        $secondItem->getQuantity()->willReturn(1);
 
         $firstItem->getVariant()->willReturn($productVariantOne);
         $secondItem->getVariant()->willReturn($productVariantTwo);

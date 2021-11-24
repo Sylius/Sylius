@@ -71,7 +71,7 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
         $minimumPrices = [];
         foreach ($subject->getItems() as $item) {
             $itemsTotals[] = $item->getTotal();
-            $minimumPrices[] = $item->getVariant()->getChannelPricingForChannel($subject->getChannel())->getMinimumPrice();
+            $minimumPrices[] = $item->getVariant()->getChannelPricingForChannel($subject->getChannel())->getMinimumPrice() * $item->getQuantity();
         }
 
         $splitPromotion = $this->proportionalDistributor->distribute($itemsTotals, $promotionAmount);
