@@ -1,6 +1,6 @@
 @receiving_discount
 Feature: Receiving discounts with product minimum price specified
-    In order to pay avoid paying less than product minimum price
+    In order to avoid paying less than product minimum price
     As a Visitor
     I want to receive discount for my purchase up to product minimum price
 
@@ -54,6 +54,21 @@ Feature: Receiving discounts with product minimum price specified
         Then product "T-Shirt" price should be decreased by "$5.00"
         And product "PHP Mug" price should be decreased by "$10.00"
         And my cart total should be "$55.00"
+
+    @ui @api
+    Scenario: Receiving fixed discount for my cart
+        And the promotion gives "$10.00" discount to every order with items total at least "$20.00"
+        When I add product "T-Shirt" to the cart
+        Then my cart total should be "$45.00"
+        And my discount should be "-$5.00"
+
+    @ui @api
+    Scenario: Receiving discount when buying more than required quantity
+        Given there is a promotion "T-Shirts promotion"
+        And the promotion gives "$50.00" discount to every order with quantity at least 2
+        When I add 2 products "T-Shirt" to the cart
+        Then my cart total should be "$90.00"
+        And my discount should be "-$10.00"
 
     @api
     Scenario: Distributing fixed order discount promotion
