@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface;
-use Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart;
+use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\PromotionCouponEligibility;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
@@ -65,7 +65,7 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
         $this->initialize($executionContext);
         $constraint = new PromotionCouponEligibility();
 
-        $value = new ApplyCouponToCart('couponCode');
+        $value = UpdateCart::createWithCouponData('couponCode');
         $value->setOrderTokenValue('token');
 
         $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotionCoupon);
@@ -93,7 +93,7 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
         $constraint = new PromotionCouponEligibility();
         $constraint->message = 'message';
 
-        $value = new ApplyCouponToCart('couponCode');
+        $value = UpdateCart::createWithCouponData('couponCode');
         $value->setOrderTokenValue('token');
 
         $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotionCoupon);

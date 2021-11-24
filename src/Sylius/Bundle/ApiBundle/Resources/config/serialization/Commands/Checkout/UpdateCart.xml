@@ -15,9 +15,18 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
-    <class name="Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart">
+    <class name="Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart">
+        <attribute name="billingAddress">
+            <group>shop:cart:update</group>
+        </attribute>
+        <attribute name="shippingAddress">
+            <group>shop:cart:update</group>
+        </attribute>
+        <attribute name="email">
+            <group>shop:cart:update</group>
+        </attribute>
         <attribute name="couponCode">
-            <group>shop:cart:apply_coupon</group>
+            <group>shop:cart:update</group>
         </attribute>
     </class>
 </serializer>

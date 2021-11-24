@@ -29,7 +29,7 @@
             <group>shop:address:create</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:cart:address</group>
+            <group>shop:cart:update</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
         </attribute>
@@ -39,7 +39,7 @@
             <group>shop:address:create</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:cart:address</group>
+            <group>shop:cart:update</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
         </attribute>
@@ -61,7 +61,7 @@
             <group>shop:address:create</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:cart:address</group>
+            <group>shop:cart:update</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
         </attribute>
@@ -71,7 +71,7 @@
             <group>shop:address:create</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:cart:address</group>
+            <group>shop:cart:update</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
         </attribute>
@@ -81,7 +81,7 @@
             <group>shop:address:create</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:cart:address</group>
+            <group>shop:cart:update</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
         </attribute>
@@ -91,7 +91,7 @@
             <group>shop:address:create</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:cart:address</group>
+            <group>shop:cart:update</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
         </attribute>
@@ -100,7 +100,7 @@
             <group>shop:address:create</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:cart:address</group>
+            <group>shop:cart:update</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
         </attribute>
@@ -110,7 +110,7 @@
             <group>shop:address:create</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:cart:address</group>
+            <group>shop:cart:update</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
         </attribute>

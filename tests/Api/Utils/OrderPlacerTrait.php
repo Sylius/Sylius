@@ -15,10 +15,10 @@ namespace Sylius\Tests\Api\Utils;
 
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
-use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
+use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -48,9 +48,9 @@ trait OrderPlacerTrait
         $address->setCountryCode('US');
         $address->setPostcode('90000');
 
-        $addressOrderCommand = new AddressOrder($email, $address);
-        $addressOrderCommand->setOrderTokenValue($tokenValue);
-        $commandBus->dispatch($addressOrderCommand);
+        $updateCartCommand = new UpdateCart($email, $address);
+        $updateCartCommand->setOrderTokenValue($tokenValue);
+        $commandBus->dispatch($updateCartCommand);
 
         /** @var OrderRepositoryInterface $orderRepository */
         $orderRepository = $this->get('sylius.repository.order');

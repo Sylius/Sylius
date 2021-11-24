@@ -35,6 +35,8 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Please select shipping method.
+        email:
+            not_changeable: Email can't be changed for logged in customer.
     contact:
         email:
             invalid: This email is invalid.

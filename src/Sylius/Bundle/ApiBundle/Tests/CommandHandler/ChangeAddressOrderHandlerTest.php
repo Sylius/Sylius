@@ -17,10 +17,10 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Persistence\ObjectManager;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
-use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
-use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
-use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\AddressOrderHandler;
-use Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface;
+use Sylius\Bundle\ApiBundle\Assigner\OrderPromoCodeAssignerInterface;
+use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
+use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\UpdateCartHandler;
+use Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface;
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -39,17 +39,17 @@ final class ChangeAddressOrderHandlerTest extends KernelTestCase
         /** @var RepositoryInterface $addressRepository */
         $addressRepository = $container->get('sylius.repository.address');
 
-        /** @var CustomerProviderInterface $customerProvider */
-        $customerProvider = $container->get('Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface');
-
         /** @var OrderRepositoryInterface $orderRepository */
         $orderRepository = $container->get('sylius.repository.order');
 
         /** @var ObjectManager $manager */
         $manager = $container->get('doctrine.orm.default_entity_manager');
 
-        /** @var StateMachineFactoryInterface $stateMachineFactory */
-        $stateMachineFactory = $container->get('sm.factory');
+        $orderAddressModifier = $container->get(OrderAddressModifierInterface::class);
+
+        $orderPromoCodeAssigner = $container->get(OrderPromoCodeAssignerInterface::class);
+
+        $customerProvider = $container->get(CustomerProviderInterface::class);
 
         $purger = new ORMPurger($manager);
         $purger->purge();
@@ -70,14 +70,10 @@ final class ChangeAddressOrderHandlerTest extends KernelTestCase
             PurgeMode::createDeleteMode()
         );
 
-        /** @var AddressMapperInterface $addressMapper */
-        $addressMapper = $container->get('Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface');
-
-        $addressOrderHandler = new AddressOrderHandler(
+        $updateCartHandler = new UpdateCartHandler(
             $orderRepository,
-            $manager,
-            $stateMachineFactory,
-            $addressMapper,
+            $orderAddressModifier,
+            $orderPromoCodeAssigner,
             $customerProvider
         );
 
@@ -93,10 +89,10 @@ final class ChangeAddressOrderHandlerTest extends KernelTestCase
         $address->setProvinceName('111');
         $address->setPhoneNumber('west');
 
-        $addressOrder = new AddressOrder('john@doe.com', $newBillingAddress);
-        $addressOrder->setOrderTokenValue('token');
+        $updateCart = new UpdateCart('john@doe.com', $newBillingAddress);
+        $updateCart->setOrderTokenValue('token');
 
-        $addressOrderHandler($addressOrder);
+        $updateCartHandler($updateCart);
 
         $this->assertSame(1, count($addressRepository->findAll()));
     }
