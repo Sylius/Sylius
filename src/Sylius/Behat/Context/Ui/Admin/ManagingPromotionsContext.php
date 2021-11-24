@@ -361,6 +361,17 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I set it as not applicable on discounted by catalog promotion items
+     */
+    public function iSetItAsNotApplicableOnDiscountedByCatalogPromotionItems(): void
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->makeNotApplicableOnDiscountedItem();
+    }
+
+    /**
      * @Then the :promotion promotion should be exclusive
      */
     public function thePromotionShouldBeExclusive(PromotionInterface $promotion)

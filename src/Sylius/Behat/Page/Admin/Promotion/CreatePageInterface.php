@@ -47,6 +47,8 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function makeExclusive(): void;
 
+    public function makeNotApplicableOnDiscountedItem(): void;
+
     public function checkCouponBased(): void;
 
     public function checkChannel(string $name): void;
