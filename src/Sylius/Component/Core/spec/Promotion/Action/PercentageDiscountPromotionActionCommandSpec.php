@@ -82,7 +82,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['percentage' => 0.1], $promotion)->shouldReturn(true);
     }
 
-    function it_distributes_promotion_amount_taking_minimum_price_to_account(
+    function it_distributes_promotion_amount_taking_minimum_price_into_account(
         OrderInterface $order,
         OrderItemInterface $firstItem,
         OrderItemInterface $secondItem,

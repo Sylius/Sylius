@@ -40,16 +40,6 @@ Feature: Receiving discounts with product minimum price specified
         And my cart total should be "$45.00"
 
     @ui @api
-    Scenario: Distributing promotion when product price reaches minimum
-        Given this promotion gives "50%" off on every product with minimum price at "$10.00"
-        And there is a promotion "Mugs promotion"
-        When I add product "T-Shirt" to the cart
-        And I add product "PHP Mug" to the cart
-        Then product "T-Shirt" price should be decreased by "$5.00"
-        And product "PHP Mug" price should be decreased by "$10.00"
-        And my cart total should be "$55.00"
-
-    @ui @api
     Scenario: Distributing fixed discount promotion
         And this promotion gives "$10.00" off on every product with minimum price at "$10.00"
         When I add product "T-Shirt" to the cart

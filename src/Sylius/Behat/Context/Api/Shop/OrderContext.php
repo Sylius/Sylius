@@ -307,7 +307,6 @@ final class OrderContext implements Context
 
         /** @var int $index */
         foreach ($adjustments as $index => $adjustment) {
-            $adj[] = $adjustment['amount'];
             Assert::same(-$amounts[$index], $adjustment['amount']);
         }
     }

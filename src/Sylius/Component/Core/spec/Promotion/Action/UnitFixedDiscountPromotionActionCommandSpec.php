@@ -260,12 +260,11 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $channel->getCode()->willReturn('WEB_US');
 
         $unit1->getOrderItem()->willReturn($orderItem1);
-        $unit2->getOrderItem()->willReturn($orderItem2);
+        $unit2->getOrderItem()->willReturn($orderItem1);
 
         $orderItem1->getVariant()->willReturn($productVariant1);
-        $orderItem2->getVariant()->willReturn($productVariant2);
+
         $orderItem1->getOrder()->willReturn($order);
-        $orderItem2->getOrder()->willReturn($order);
 
         $productVariant1->getChannelPricingForChannel($channel)->willReturn($channelPricing1);
         $productVariant2->getChannelPricingForChannel($channel)->willReturn($channelPricing2);
@@ -273,15 +272,17 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $channelPricing1->getMinimumPrice()->willReturn(200);
         $channelPricing2->getMinimumPrice()->willReturn(150);
 
-        $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
-        $order->getChannel()->willReturn($channel);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem1, $orderItem2]));
 
-        $priceRangeFilter->filter([$orderItem], ['amount' => 1000, 'channel' => $channel])->willReturn([$orderItem]);
-        $taxonFilter->filter([$orderItem], ['amount' => 1000])->willReturn([$orderItem]);
-        $productFilter->filter([$orderItem], ['amount' => 1000])->willReturn([$orderItem]);
+        $priceRangeFilter->filter([$orderItem1, $orderItem2], ['amount' => 1000, 'channel' => $channel])->willReturn([$orderItem1, $orderItem2]);
+        $taxonFilter->filter([$orderItem1, $orderItem2], ['amount' => 1000])->willReturn([$orderItem1, $orderItem2]);
+        $productFilter->filter([$orderItem1, $orderItem2], ['amount' => 1000])->willReturn([$orderItem1, $orderItem2]);
 
-        $orderItem->getQuantity()->willReturn(2);
-        $orderItem->getUnits()->willReturn(new ArrayCollection([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
+        $orderItem1->getQuantity()->willReturn(2);
+        $orderItem1->getUnits()->willReturn(new ArrayCollection([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
+
+        $orderItem2->getQuantity()->willReturn(1);
+        $orderItem2->getUnits()->willReturn(new ArrayCollection([$unit2->getWrappedObject()]));
 
         $promotion->getName()->willReturn('Test promotion');
         $promotion->getCode()->willReturn('TEST_PROMOTION');
@@ -295,10 +296,10 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 
         $promotionAdjustment1->setOriginCode('TEST_PROMOTION')->shouldBeCalled();
 
-        $unit2->getTotal()->willReturn(200);
+        $unit2->getTotal()->willReturn(300);
         $promotionAdjustment2->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment2->setLabel('Test promotion')->shouldBeCalled();
-        $promotionAdjustment2->setAmount(-50)->shouldBeCalled();
+        $promotionAdjustment2->setAmount(-100)->shouldBeCalled();
 
         $promotionAdjustment2->setOriginCode('TEST_PROMOTION')->shouldBeCalled();
 

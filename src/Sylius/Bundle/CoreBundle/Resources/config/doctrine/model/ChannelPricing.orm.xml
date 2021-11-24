@@ -27,7 +27,7 @@
         </id>
         <field name="price" column="price" type="integer" nullable="true" />
         <field name="originalPrice" column="original_price" type="integer" nullable="true" />
-        <field name="minimumPrice" column="minimum_price" type="integer" nullable="true" />
+        <field name="minimumPrice" column="minimum_price" type="integer" nullable="false" />
         <field name="channelCode" column="channel_code" type="string" />
         <field name="appliedPromotions" column="applied_promotions" type="json" nullable="true" />
 

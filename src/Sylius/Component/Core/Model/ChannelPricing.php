@@ -101,14 +101,14 @@ class ChannelPricing implements ChannelPricingInterface
         return $this->originalPrice > $this->price;
     }
 
-    public function getMinimumPrice(): ?int
+    public function getMinimumPrice(): int
     {
         return $this->minimumPrice;
     }
 
     public function setMinimumPrice(?int $minimumPrice): void
     {
-        $this->minimumPrice = $minimumPrice;
+        $this->minimumPrice = $minimumPrice ?: 0;
     }
 
     public function addAppliedPromotion(array $promotion): void
