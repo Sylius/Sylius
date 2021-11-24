@@ -43,7 +43,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When I create a new promotion
+     * @When I want to create a new promotion
      */
     public function iWantToCreateANewPromotion(): void
     {
@@ -64,7 +64,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSetItAsNotApplicableOnDiscountedByCatalogPromotionItems(): void
     {
-        $this->client->addRequestData('applyOnDiscounted', false);
+        $this->client->updateRequestData(['applyOnDiscounted' => false]);
     }
 
     /**
@@ -130,7 +130,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iDeletePromotion(PromotionInterface $promotion): void
     {
-        $this->client->delete((string) $promotion->getId());
+        $this->client->delete($promotion->getCode());
     }
 
     /**
@@ -174,5 +174,13 @@ final class ManagingPromotionsContext implements Context
         Assert::false(
             $this->responseChecker->getValue($this->client->show($promotion->getCode()), 'applyOnDiscounted')
         );
+    }
+
+    /**
+     * @When I add it
+     */
+    public function iAddIt(): void
+    {
+        $this->client->create();
     }
 }

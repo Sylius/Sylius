@@ -66,7 +66,7 @@ Feature: Adding a new promotion
         And I add it
         Then I should be notified that it has been successfully created
 
-    @api @ui
+    @api
     Scenario: Adding a promotion not applicable on discounted by catalog promotion items
         When I want to create a new promotion
         And I specify its code as "FULL_METAL_PROMOTION"

@@ -21,6 +21,13 @@
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:promotion:create</attribute>
+                </attribute>
+            </collectionOperation>
+
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
@@ -41,11 +48,13 @@
             </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="true" writable="false" />
+        <property name="id" identifier="false" writable="false" />
+        <property name="code" identifier="true" readable="true" />
         <property name="name" readable="true" />
         <property name="description" readable="true" />
         <property name="priority" readable="true" />
         <property name="exclusive" readable="true" />
+        <property name="applyOnDiscounted" readable="true" />
         <property name="usageLimit" readable="true" />
         <property name="startsAt" readable="true" />
         <property name="endsAt" readable="true" />
