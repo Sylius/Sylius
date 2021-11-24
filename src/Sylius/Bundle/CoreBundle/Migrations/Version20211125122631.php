@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20211124101833 extends AbstractMigration
+final class Version20211125122631 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,7 +20,7 @@ final class Version20211124101833 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE sylius_promotion ADD apply_on_discounted TINYINT(1) NOT NULL');
+        $this->addSql('ALTER TABLE sylius_promotion ADD apply_on_discounted TINYINT(1) DEFAULT \'0\' NOT NULL');
     }
 
     public function down(Schema $schema): void

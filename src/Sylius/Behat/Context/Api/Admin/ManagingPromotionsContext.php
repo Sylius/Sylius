@@ -68,6 +68,14 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I add it
+     */
+    public function iAddIt(): void
+    {
+        $this->client->create();
+    }
+
+    /**
      * @Then I should see a single promotion in the list
      * @Then there should be :amount promotions
      */
@@ -174,13 +182,5 @@ final class ManagingPromotionsContext implements Context
         Assert::false(
             $this->responseChecker->getValue($this->client->show($promotion->getCode()), 'applyOnDiscounted')
         );
-    }
-
-    /**
-     * @When I add it
-     */
-    public function iAddIt(): void
-    {
-        $this->client->create();
     }
 }

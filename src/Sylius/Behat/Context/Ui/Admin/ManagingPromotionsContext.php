@@ -380,6 +380,14 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @Then the :promotion promotion should not be applicable on discounted items
+     */
+    public function thePromotionShouldNotBeApplicableOnDiscountedItems(PromotionInterface $promotion): void
+    {
+        $this->assertIfFieldIsFalse($promotion, 'apply_on_discounted');
+    }
+
+    /**
      * @When I make it coupon based
      */
     public function iMakeItCouponBased()
@@ -706,5 +714,12 @@ final class ManagingPromotionsContext implements Context
         $this->iWantToModifyAPromotion($promotion);
 
         Assert::true($this->updatePage->hasResourceValues([$field => 1]));
+    }
+
+    private function assertIfFieldIsFalse(PromotionInterface $promotion, $field): void
+    {
+        $this->iWantToModifyAPromotion($promotion);
+
+        Assert::false($this->updatePage->hasResourceValues([$field => 1]));
     }
 }

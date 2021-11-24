@@ -74,8 +74,5 @@
         <attribute name="channels">
             <group>admin:promotion:read</group>
         </attribute>
-
-        <attribute name="createdAt" />
-        <attribute name="updatedAt" />
     </class>
 </serializer>
