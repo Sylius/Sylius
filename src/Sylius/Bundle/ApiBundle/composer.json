@@ -24,6 +24,7 @@
     ],
     "require": {
         "php": "^7.4 || ^8.0",
+        "doctrine/dbal": "^2.7",
         "api-platform/core": "^2.6",
         "lexik/jwt-authentication-bundle": "^2.6",
         "sylius/core-bundle": "^1.7",
