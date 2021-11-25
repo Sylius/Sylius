@@ -540,8 +540,8 @@ final class CatalogPromotionContext implements Context
                 'configuration' => ['taxons' => [$taxon->getCode()]],
             ]],
             [[
-                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
-                'configuration' => ['amount' => $discount],
+                'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                'configuration' => [$channel->getCode() => ['amount' => $discount]],
             ]],
             $priority,
         );
