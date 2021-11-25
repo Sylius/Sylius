@@ -9,7 +9,7 @@
 </div>
 {% if product.hasOptions() %}
     <div class="ui horizontal divided list sylius-product-options">
-        {% for optionValue in variant.optionValues %}
+        {% for optionValue in variant.optionValues|sort((a, b) => a.option.position <=> b.option.position) %}
             <div class="item" data-sylius-option-name="{{ optionValue.name }}">
                 {{ optionValue.value }}
             </div>

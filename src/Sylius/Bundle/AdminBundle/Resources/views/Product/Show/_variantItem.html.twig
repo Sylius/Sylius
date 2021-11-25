@@ -22,7 +22,7 @@
         </div>
     </td>
     <td>
-        {% for optionValue in variant.optionValues %}
+        {% for optionValue in variant.optionValues|sort((a, b) => a.option.position <=> b.option.position) %}
             <div><span class="gray text">{{ optionValue.option.name }}:</span> {{ optionValue.value }}</div>
         {% endfor %}
     </td>

@@ -17,7 +17,7 @@
 </div>
 {% if product.hasOptions() %}
     <div class="ui horizontal divided list sylius-product-options" {{ sylius_test_html_attribute('product-options') }}>
-        {% for optionValue in variant.optionValues %}
+        {% for optionValue in variant.optionValues|sort((a, b) => a.option.position <=> b.option.position) %}
             <div class="item" data-sylius-option-name="{{ optionValue.name }}" {{ sylius_test_html_attribute('option-name', optionValue.name) }}>
                 {{ optionValue.value }}
             </div>

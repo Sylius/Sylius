@@ -5,7 +5,7 @@
 {% if data.optionValues|length > 0 %}
     <br>
     <div class="ui horizontal divided list">
-        {% for optionValue in data.optionValues %}
+        {% for optionValue in data.optionValues|sort((a, b) => a.option.position <=> b.option.position) %}
             <div class="item">
                 {{ optionValue.value }}
             </div>

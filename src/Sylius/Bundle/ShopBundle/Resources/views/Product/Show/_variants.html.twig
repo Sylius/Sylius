@@ -15,7 +15,7 @@
                 {{ variant.name }}
                 {% if product.hasOptions() %}
                     <div class="ui horizontal divided list">
-                        {% for optionValue in variant.optionValues %}
+                        {% for optionValue in variant.optionValues|sort((a, b) => a.option.position <=> b.option.position) %}
                             <div class="item">
                                 {{ optionValue.value }}
                             </div>
