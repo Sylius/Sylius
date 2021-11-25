@@ -81,12 +81,12 @@ $(document).ready(() => {
       }
     });
 
-    $(document).loadCatalogPromotionActionConfiguration(
-      document.querySelector('#sylius_catalog_promotion_actions [data-form-collection="item"]:last-child')
-    );
-
     $(document).loadCatalogPromotionScopeConfiguration(
       document.querySelector('#sylius_catalog_promotion_scopes [data-form-collection="item"]:last-child')
+    );
+
+    $(document).loadCatalogPromotionActionConfiguration(
+      document.querySelector('#sylius_catalog_promotion_actions [data-form-collection="item"]:last-child')
     );
   });
   $(document).on('collection-form-update', () => {
