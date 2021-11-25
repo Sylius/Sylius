@@ -13,11 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
@@ -41,16 +44,20 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
     /** @var SectionProviderInterface */
     private $uriBasedSectionContext;
 
+    private IriConverterInterface $iriConverter;
+
     public function __construct(
         ProductVariantPricesCalculatorInterface $priceCalculator,
         ChannelContextInterface $channelContext,
         AvailabilityCheckerInterface $availabilityChecker,
-        SectionProviderInterface $uriBasedSectionContext
+        SectionProviderInterface $uriBasedSectionContext,
+        IriConverterInterface $iriConverter
     ) {
         $this->priceCalculator = $priceCalculator;
         $this->channelContext = $channelContext;
         $this->availabilityChecker = $availabilityChecker;
         $this->uriBasedSectionContext = $uriBasedSectionContext;
+        $this->iriConverter = $iriConverter;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -59,7 +66,6 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         Assert::keyNotExists($context, self::ALREADY_CALLED);
 
         $context[self::ALREADY_CALLED] = true;
-
         $data = $this->normalizer->normalize($object, $format, $context);
         $channel = $this->channelContext->getChannel();
 
@@ -71,9 +77,13 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
             unset($data['originalPrice']);
         }
 
+        /** @var ArrayCollection $appliedPromotions */
         $appliedPromotions = $object->getAppliedPromotionsForChannel($channel);
-        if (!empty($appliedPromotions)) {
-            $data['appliedPromotions'] = $appliedPromotions;
+        if (!$appliedPromotions->isEmpty()) {
+            $data['appliedPromotions'] = array_map(fn (CatalogPromotionInterface $catalogPromotion) =>
+                $this->iriConverter->getIriFromItem($catalogPromotion),
+                $appliedPromotions->toArray()
+            );
         }
 
         $data['inStock'] = $this->availabilityChecker->isStockAvailable($object);

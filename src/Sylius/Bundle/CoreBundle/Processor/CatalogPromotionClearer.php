@@ -18,40 +18,31 @@ use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ChannelPricingRepositoryInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
-use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 
 final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
 {
     private ChannelPricingRepositoryInterface $channelPricingRepository;
 
-    private CatalogPromotionRepositoryInterface $catalogPromotionRepository;
-
     private FactoryInterface $stateMachine;
 
     public function __construct(
         ChannelPricingRepositoryInterface $channelPricingRepository,
-        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         FactoryInterface $stateMachine
     ) {
         $this->channelPricingRepository = $channelPricingRepository;
-        $this->catalogPromotionRepository = $catalogPromotionRepository;
         $this->stateMachine = $stateMachine;
     }
 
     public function clear(): void
     {
-        $appliedPromotionsCodes = [];
         $channelPricings = $this->channelPricingRepository->findWithDiscountedPrice();
-        foreach ($channelPricings as $channelPricing) {
-            $appliedPromotionsCodes = array_unique(array_merge(
-                $appliedPromotionsCodes,
-                array_keys($channelPricing->getAppliedPromotions())
-            ));
+        $catalogPromotions = [];
 
+        foreach ($channelPricings as $channelPricing) {
+            $catalogPromotions = array_merge($catalogPromotions, $channelPricing->getAppliedPromotions()->toArray());
             $this->clearChannelPricing($channelPricing);
         }
 
-        $catalogPromotions = $this->catalogPromotionRepository->findByCodes($appliedPromotionsCodes);
         foreach ($catalogPromotions as $catalogPromotion) {
             $stateMachine = $this->stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
             if ($stateMachine->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)) {
@@ -69,7 +60,7 @@ final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
 
     public function clearChannelPricing(ChannelPricingInterface $channelPricing): void
     {
-        if (empty($channelPricing->getAppliedPromotions())) {
+        if ($channelPricing->getAppliedPromotions()->isEmpty()) {
             return;
         }
 

@@ -30,7 +30,6 @@
             class="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearer"
         >
             <argument type="service" id="sylius.repository.channel_pricing" />
-            <argument type="service" id="sylius.repository.catalog_promotion" />
             <argument type="service" id="SM\Factory\Factory" />
         </service>
 
@@ -57,7 +56,6 @@
             id="Sylius\Bundle\CoreBundle\Processor\ProductVariantCatalogPromotionsProcessorInterface"
             class="Sylius\Bundle\CoreBundle\Processor\ProductVariantCatalogPromotionsProcessor"
         >
-            <argument type="service" id="sylius.repository.catalog_promotion" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface" />
         </service>

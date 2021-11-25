@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface as BaseVariantInterface;
@@ -71,5 +72,5 @@ interface ProductVariantInterface extends
 
     public function setShippingRequired(bool $shippingRequired): void;
 
-    public function getAppliedPromotionsForChannel(ChannelInterface $channel): array;
+    public function getAppliedPromotionsForChannel(ChannelInterface $channel): Collection;
 }

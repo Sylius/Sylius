@@ -467,7 +467,7 @@ class Order extends BaseOrder implements OrderInterface
         /** @var OrderItemInterface $item */
         foreach ($this->items as $item) {
             $variant = $item->getVariant();
-            if (empty($variant->getAppliedPromotionsForChannel($this->channel))) {
+            if ($variant->getAppliedPromotionsForChannel($this->channel)->isEmpty()) {
                 $total += $item->getTotal();
             }
         }

@@ -20,7 +20,7 @@
             {% set originalPrice = money.calculateOriginalPrice(product|sylius_resolve_variant) %}
 
             {% for promotion in appliedPromotions %}
-            <a class="ui blue label" {{ sylius_test_html_attribute('product-promotion-label') }}>{{ promotion['translations'][sylius.localeCode]['name'] }}</a>
+            <a class="ui blue label" {{ sylius_test_html_attribute('product-promotion-label') }}>{{ promotion.label}}</a>
             {% endfor %}
 
             {% if price != originalPrice %}

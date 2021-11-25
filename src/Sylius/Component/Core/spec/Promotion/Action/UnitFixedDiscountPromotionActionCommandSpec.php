@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -139,7 +140,8 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ProductVariantInterface $variant2,
         AdjustmentInterface $promotionAdjustment,
         ChannelPricingInterface $channelPricing1,
-        ChannelPricingInterface $channelPricing2
+        ChannelPricingInterface $channelPricing2,
+        CatalogPromotionInterface $catalogPromotion
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -154,7 +156,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $orderItem1->getUnits()->willReturn(new ArrayCollection([$unit1->getWrappedObject()]));
         $orderItem1->getVariant()->willReturn($variant1);
         $orderItem1->getOrder()->willReturn($order);
-        $variant1->getAppliedPromotionsForChannel($channel)->willReturn([]);
+        $variant1->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
         $unit1->getTotal()->willReturn(1000);
         $unit1->getOrderItem()->willReturn($orderItem1);
 
@@ -162,7 +164,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $orderItem2->getUnits()->willReturn(new ArrayCollection([$unit2->getWrappedObject()]));
         $orderItem2->getVariant()->willReturn($variant2);
         $orderItem2->getOrder()->willReturn($order);
-        $variant2->getAppliedPromotionsForChannel($channel)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
+        $variant2->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([$catalogPromotion->getWrappedObject()]));
         $unit2->getTotal()->willReturn(1000);
         $unit2->getOrderItem()->willReturn($orderItem2);
 
