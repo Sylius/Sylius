@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class ChannelPricing implements ChannelPricingInterface
 {
     /** @var mixed */
@@ -43,8 +45,17 @@ class ChannelPricing implements ChannelPricingInterface
      */
     protected $minimumPrice = 0;
 
-    /** @var ?array */
-    protected $appliedPromotions = [];
+
+    /**
+     * @var CatalogPromotionInterface[]
+     * @psalm-var ArrayCollection<array-key, CatalogPromotionInterface>
+     */
+    protected $appliedPromotions;
+
+    public function __construct()
+    {
+        $this->appliedPromotions = new ArrayCollection();
+    }
 
     public function __toString(): string
     {
@@ -111,30 +122,34 @@ class ChannelPricing implements ChannelPricingInterface
         $this->minimumPrice = $minimumPrice ?: 0;
     }
 
-    public function addAppliedPromotion(array $promotion): void
+    public function clearAppliedPromotions(): void
     {
-        if ($this->appliedPromotions === null) {
-            $this->appliedPromotions = $promotion;
-
-            return;
-        }
-
-        $this->appliedPromotions = array_merge($this->appliedPromotions, $promotion);
+        $this->appliedPromotions->clear();
     }
 
-    public function removeAppliedPromotion(string $promotionCode): void
+    public function addAppliedPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
-        unset($this->appliedPromotions[$promotionCode]);
+        $this->appliedPromotions->add($catalogPromotion);
     }
 
-    public function getAppliedPromotions(): array
+    public function removeAppliedPromotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->appliedPromotions->removeElement($catalogPromotion);
+    }
+
+    public function getAppliedPromotions(): ArrayCollection
     {
         return $this->appliedPromotions;
     }
 
-    public function clearAppliedPromotions(): void
+    public function hasPromotionApplied(CatalogPromotionInterface $catalogPromotion): bool
     {
-        $this->appliedPromotions = [];
+        return $this->appliedPromotions->contains($catalogPromotion);
+    }
+
+    public function hasAnyPromotionApplied($argument1)
+    {
+        // TODO: write logic here
     }
 
     public function hasExclusiveCatalogPromotionApplied(): bool
