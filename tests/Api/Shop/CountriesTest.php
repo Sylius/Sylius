@@ -21,7 +21,7 @@ final class CountriesTest extends JsonApiTestCase
     /** @test */
     public function it_gets_countries(): void
     {
-        $this->loadFixturesFromFiles(['country.yaml']);
+        $this->loadFixturesFromFiles(['channel.yaml', 'country.yaml']);
 
         $this->client->request('GET', '/api/v2/shop/countries', [], [], self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
