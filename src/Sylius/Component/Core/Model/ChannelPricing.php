@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 class ChannelPricing implements ChannelPricingInterface
 {
     /** @var mixed */
@@ -43,8 +46,16 @@ class ChannelPricing implements ChannelPricingInterface
      */
     protected $minimumPrice = 0;
 
-    /** @var ?array */
-    protected $appliedPromotions = [];
+    /**
+     * @var ArrayCollection
+     * @psalm-var ArrayCollection<array-key, CatalogPromotionInterface>
+     */
+    protected $appliedPromotions;
+
+    public function __construct()
+    {
+        $this->appliedPromotions = new ArrayCollection();
+    }
 
     public function __toString(): string
     {
@@ -111,41 +122,41 @@ class ChannelPricing implements ChannelPricingInterface
         $this->minimumPrice = $minimumPrice ?: 0;
     }
 
-    public function addAppliedPromotion(array $promotion): void
-    {
-        if ($this->appliedPromotions === null) {
-            $this->appliedPromotions = $promotion;
-
-            return;
-        }
-
-        $this->appliedPromotions = array_merge($this->appliedPromotions, $promotion);
-    }
-
-    public function removeAppliedPromotion(string $promotionCode): void
-    {
-        unset($this->appliedPromotions[$promotionCode]);
-    }
-
-    public function getAppliedPromotions(): array
+    public function getAppliedPromotions(): Collection
     {
         return $this->appliedPromotions;
     }
 
+    public function addAppliedPromotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        if($this->appliedPromotions->contains($catalogPromotion)) {
+            return;
+        }
+
+        $this->appliedPromotions->add($catalogPromotion);
+    }
+
+    public function removeAppliedPromotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->appliedPromotions->removeElement($catalogPromotion);
+    }
+
+    public function hasPromotionApplied(CatalogPromotionInterface $catalogPromotion): bool
+    {
+        return $this->appliedPromotions->contains($catalogPromotion);
+    }
+
     public function clearAppliedPromotions(): void
     {
-        $this->appliedPromotions = [];
+        $this->appliedPromotions->clear();
     }
 
     public function hasExclusiveCatalogPromotionApplied(): bool
     {
-        if ($this->appliedPromotions === []) {
-            return false;
-        }
-
-        if (reset($this->appliedPromotions)['is_exclusive'])
-        {
-            return true;
+        foreach ($this->appliedPromotions as $appliedPromotion) {
+            if($appliedPromotion->isExclusive()) {
+                return true;
+            }
         }
 
         return false;

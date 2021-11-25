@@ -27,11 +27,10 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class ProductVariantCatalogPromotionsProcessorSpec extends ObjectBehavior
 {
     function let(
-        RepositoryInterface $catalogPromotionRepository,
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionApplicatorInterface $catalogPromotionApplicator
     ): void {
-        $this->beConstructedWith($catalogPromotionRepository, $catalogPromotionClearer, $catalogPromotionApplicator);
+        $this->beConstructedWith($catalogPromotionClearer, $catalogPromotionApplicator);
     }
 
     function it_implements_product_catalog_promotions_processor_interface(): void
@@ -40,7 +39,6 @@ final class ProductVariantCatalogPromotionsProcessorSpec extends ObjectBehavior
     }
 
     function it_reapplies_catalog_promotion_on_variant(
-        RepositoryInterface $catalogPromotionRepository,
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionApplicatorInterface $catalogPromotionApplicator,
         ProductVariantInterface $variant,
@@ -52,14 +50,12 @@ final class ProductVariantCatalogPromotionsProcessorSpec extends ObjectBehavior
             $firstChannelPricing->getWrappedObject(),
             $secondChannelPricing->getWrappedObject(),
         ]));
-
-        $firstChannelPricing->getAppliedPromotions()->willReturn(['winter_sale' => ['en_US' => ['name' => 'Winter sale']]]);
-        $secondChannelPricing->getAppliedPromotions()->willReturn([]);
+        $catalogPromotion->isEnabled()->willReturn(true);
+        $firstChannelPricing->getAppliedPromotions()->willReturn(new ArrayCollection([$catalogPromotion->getWrappedObject()]));
+        $secondChannelPricing->getAppliedPromotions()->willReturn(new ArrayCollection());
 
         $catalogPromotionClearer->clearChannelPricing($firstChannelPricing)->shouldBeCalled();
         $catalogPromotionClearer->clearChannelPricing($secondChannelPricing)->shouldNotBeCalled();
-
-        $catalogPromotionRepository->findOneBy(['code' => 'winter_sale', 'enabled' => true])->willReturn($catalogPromotion);
 
         $catalogPromotionApplicator->applyOnChannelPricing($firstChannelPricing, $catalogPromotion)->shouldBeCalled();
 
@@ -78,8 +74,8 @@ final class ProductVariantCatalogPromotionsProcessorSpec extends ObjectBehavior
             $secondChannelPricing->getWrappedObject(),
         ]));
 
-        $firstChannelPricing->getAppliedPromotions()->willReturn([]);
-        $secondChannelPricing->getAppliedPromotions()->willReturn([]);
+        $firstChannelPricing->getAppliedPromotions()->willReturn(new ArrayCollection());
+        $secondChannelPricing->getAppliedPromotions()->willReturn(new ArrayCollection());
 
         $catalogPromotionClearer->clearChannelPricing($firstChannelPricing)->shouldNotBeCalled();
         $catalogPromotionClearer->clearChannelPricing($secondChannelPricing)->shouldNotBeCalled();

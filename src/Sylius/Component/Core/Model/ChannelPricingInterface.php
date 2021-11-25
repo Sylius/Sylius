@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface ChannelPricingInterface extends ResourceInterface
@@ -42,11 +43,13 @@ interface ChannelPricingInterface extends ResourceInterface
 
     public function isPriceReduced(): bool;
 
-    public function addAppliedPromotion(array $promotion): void;
+    public function addAppliedPromotion(CatalogPromotionInterface $catalogPromotion): void;
 
-    public function removeAppliedPromotion(string $promotionCode): void;
+    public function removeAppliedPromotion(CatalogPromotionInterface $catalogPromotion): void;
 
-    public function getAppliedPromotions(): array;
+    public function getAppliedPromotions(): Collection;
+
+    public function hasPromotionApplied(CatalogPromotionInterface $catalogPromotion): bool;
 
     public function clearAppliedPromotions(): void;
 

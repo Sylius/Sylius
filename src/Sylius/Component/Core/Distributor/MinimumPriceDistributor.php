@@ -111,7 +111,7 @@ final class MinimumPriceDistributor implements MinimumPriceDistributorInterface
     private function getTotalPrice(OrderItemInterface $orderItem, bool $appliesOnDiscounted, ChannelInterface $channel): int
     {
         $variant = $orderItem->getVariant();
-        if ($appliesOnDiscounted === false && !empty($variant->getAppliedPromotionsForChannel($channel))) {
+        if ($appliesOnDiscounted === false && !$variant->getAppliedPromotionsForChannel($channel)->isEmpty()) {
             return 0;
         }
 

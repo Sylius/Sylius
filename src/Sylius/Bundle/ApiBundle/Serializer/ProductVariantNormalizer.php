@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
@@ -59,7 +61,6 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         Assert::keyNotExists($context, self::ALREADY_CALLED);
 
         $context[self::ALREADY_CALLED] = true;
-
         $data = $this->normalizer->normalize($object, $format, $context);
         $channel = $this->channelContext->getChannel();
 
@@ -71,9 +72,15 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
             unset($data['originalPrice']);
         }
 
+        /** @var ArrayCollection $appliedPromotions */
         $appliedPromotions = $object->getAppliedPromotionsForChannel($channel);
-        if (!empty($appliedPromotions)) {
-            $data['appliedPromotions'] = $appliedPromotions;
+        if (!$appliedPromotions->isEmpty()) {
+            $data['appliedPromotions'] = array_map(fn (CatalogPromotionInterface $catalogPromotion) => sprintf(
+                '/api/v2/shop/catalog-promotions/%s',
+                $catalogPromotion->getCode()
+            ),
+                $appliedPromotions->toArray()
+            );
         }
 
         $data['inStock'] = $this->availabilityChecker->isStockAvailable($object);

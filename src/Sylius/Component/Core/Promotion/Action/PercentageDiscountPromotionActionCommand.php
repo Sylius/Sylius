@@ -76,7 +76,7 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
                 }
 
                 $variant = $orderItem->getVariant();
-                if (!empty($variant->getAppliedPromotionsForChannel($subject->getChannel()))) {
+                if (!$variant->getAppliedPromotionsForChannel($subject->getChannel())->isEmpty()) {
                     $itemsTotal[] = 0;
 
                     continue;

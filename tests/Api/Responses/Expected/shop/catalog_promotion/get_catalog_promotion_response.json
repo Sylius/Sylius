@@ -1,0 +1,7 @@
+{
+  "@context": "\/api\/v2\/contexts\/CatalogPromotion",
+  "@id": "\/api\/v2\/shop\/catalog-promotions\/mugs_discount",
+  "@type": "CatalogPromotion",
+  "id": @integer@,
+  "label": "Mugs discount"
+}

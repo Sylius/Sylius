@@ -18,6 +18,7 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -732,15 +733,16 @@ final class OrderSpec extends ObjectBehavior
         OrderItemInterface $item2,
         ProductVariantInterface $variant1,
         ProductVariantInterface $variant2,
-        ChannelInterface $channel
+        ChannelInterface $channel,
+        CatalogPromotionInterface $catalogPromotion
     ): void {
         $item1->getTotal()->willReturn(500);
         $item1->getVariant()->willReturn($variant1);
         $item2->getTotal()->willReturn(800);
         $item2->getVariant()->willReturn($variant2);
 
-        $variant1->getAppliedPromotionsForChannel($channel)->willReturn([]);
-        $variant2->getAppliedPromotionsForChannel($channel)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
+        $variant1->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
+        $variant2->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([$catalogPromotion]));
 
         $item1->setOrder($this)->shouldBeCalled();
         $item2->setOrder($this)->shouldBeCalled();
