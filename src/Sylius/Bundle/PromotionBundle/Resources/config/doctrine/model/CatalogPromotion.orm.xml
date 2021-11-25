@@ -27,11 +27,6 @@
                 <option name="default">0</option>
             </options>
         </field>
-        <field name="exclusive" type="boolean">
-            <options>
-                <option name="default">0</option>
-            </options>
-        </field>
         <field name="state" column="state" />
 
         <one-to-many field="scopes" target-entity="Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface" mapped-by="catalogPromotion" orphan-removal="true">

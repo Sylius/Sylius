@@ -38,8 +38,6 @@ class CatalogPromotion implements CatalogPromotionInterface
 
     protected int $priority = 0;
 
-    protected bool $exclusive = false;
-
     protected string $state = CatalogPromotionStates::STATE_INACTIVE;
 
     /**
@@ -114,16 +112,6 @@ class CatalogPromotion implements CatalogPromotionInterface
     public function setPriority(int $priority): void
     {
         $this->priority = $priority;
-    }
-
-    public function isExclusive(): bool
-    {
-        return $this->exclusive;
-    }
-
-    public function setExclusive(bool $exclusive): void
-    {
-        $this->exclusive = $exclusive;
     }
 
     public function getState(): ?string

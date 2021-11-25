@@ -136,18 +136,4 @@ class ChannelPricing implements ChannelPricingInterface
     {
         $this->appliedPromotions = [];
     }
-
-    public function hasExclusiveCatalogPromotionApplied(): bool
-    {
-        if ($this->appliedPromotions === []) {
-            return false;
-        }
-
-        if (reset($this->appliedPromotions)['is_exclusive'])
-        {
-            return true;
-        }
-
-        return false;
-    }
 }

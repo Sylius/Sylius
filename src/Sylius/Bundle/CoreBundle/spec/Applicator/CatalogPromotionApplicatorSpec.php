@@ -58,61 +58,19 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $appliedPromotionInformationFormatter->format($catalogPromotion)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
         $catalogPromotionAction->getConfiguration()->willReturn(['amount' => 0.3]);
 
-        $firstChannelPricing->hasExclusiveCatalogPromotionApplied()->willReturn(false);
         $firstChannelPricing->getPrice()->willReturn(1000);
         $firstChannelPricing->getOriginalPrice()->willReturn(null);
         $firstChannelPricing->getMinimumPrice()->willReturn(0);
         $firstChannelPricing->setOriginalPrice(1000)->shouldBeCalled();
         $firstChannelPricing->setPrice(700)->shouldBeCalled();
         $firstChannelPricing->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']])->shouldBeCalled();
-        $catalogPromotion->isExclusive()->willReturn(false);
 
-        $secondChannelPricing->hasExclusiveCatalogPromotionApplied()->willReturn(false);
         $secondChannelPricing->getPrice()->willReturn(1400);
         $secondChannelPricing->getOriginalPrice()->willReturn(null);
         $secondChannelPricing->getMinimumPrice()->willReturn(0);
         $secondChannelPricing->setOriginalPrice(1400)->shouldBeCalled();
         $secondChannelPricing->setPrice(980)->shouldBeCalled();
         $secondChannelPricing->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']])->shouldBeCalled();
-        $catalogPromotion->isExclusive()->willReturn(false);
-
-        $this->applyOnVariant($variant, $catalogPromotion);
-    }
-
-    function it_applies_discount_on_product_variant_only_if_exclusive_promotion_is_not_already_applied(
-        AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter,
-        ProductVariantInterface $variant,
-        CatalogPromotionInterface $catalogPromotion,
-        CatalogPromotionActionInterface $catalogPromotionAction,
-        ChannelInterface $firstChannel,
-        ChannelInterface $secondChannel,
-        ChannelPricingInterface $firstChannelPricing,
-        ChannelPricingInterface $secondChannelPricing
-    ): void {
-        $catalogPromotion->getActions()->willReturn(new ArrayCollection([$catalogPromotionAction->getWrappedObject()]));
-        $catalogPromotion->getChannels()->willReturn(new ArrayCollection([
-            $firstChannel->getWrappedObject(),
-            $secondChannel->getWrappedObject(),
-        ]));
-
-        $variant->getChannelPricingForChannel($firstChannel)->willReturn($firstChannelPricing);
-        $variant->getChannelPricingForChannel($secondChannel)->willReturn($secondChannelPricing);
-
-        $appliedPromotionInformationFormatter->format($catalogPromotion)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
-        $catalogPromotionAction->getConfiguration()->willReturn(['amount' => 0.3]);
-
-        $firstChannelPricing->hasExclusiveCatalogPromotionApplied()->willReturn(true);
-
-        $firstChannelPricing->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']])->shouldNotBeCalled();
-
-        $secondChannelPricing->hasExclusiveCatalogPromotionApplied()->willReturn(false);
-        $secondChannelPricing->getPrice()->willReturn(1400);
-        $secondChannelPricing->getOriginalPrice()->willReturn(null);
-        $secondChannelPricing->getMinimumPrice()->willReturn(0);
-        $secondChannelPricing->setOriginalPrice(1400)->shouldBeCalled();
-        $secondChannelPricing->setPrice(980)->shouldBeCalled();
-        $secondChannelPricing->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']])->shouldBeCalled();
-        $catalogPromotion->isExclusive()->willReturn(false);
 
         $this->applyOnVariant($variant, $catalogPromotion);
     }
@@ -133,14 +91,12 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $appliedPromotionInformationFormatter->format($catalogPromotion)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
         $catalogPromotionAction->getConfiguration()->willReturn(['amount' => 0.5]);
 
-        $channelPricing->hasExclusiveCatalogPromotionApplied()->willReturn(false);
         $channelPricing->getPrice()->willReturn(1000);
         $channelPricing->getOriginalPrice()->willReturn(2000);
         $channelPricing->getMinimumPrice()->willReturn(0);
         $channelPricing->setOriginalPrice(Argument::any())->shouldNotBeCalled();
         $channelPricing->setPrice(500)->shouldBeCalled();
         $channelPricing->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']])->shouldBeCalled();
-        $catalogPromotion->isExclusive()->willReturn(false);
 
         $this->applyOnVariant($variant, $catalogPromotion);
     }
@@ -160,7 +116,6 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $appliedPromotionInformationFormatter->format($catalogPromotion)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
         $catalogPromotionAction->getConfiguration()->willReturn(['amount' => 0.3]);
 
-        $channelPricing->hasExclusiveCatalogPromotionApplied()->willReturn(false);
         $channelPricing->getPrice()->willReturn(1000);
         $channelPricing->getMinimumPrice()->willReturn(0);
         $channelPricing->getOriginalPrice()->willReturn(null);
@@ -169,7 +124,6 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $channelPricing->setOriginalPrice(1000)->shouldBeCalled();
         $channelPricing->setPrice(700)->shouldBeCalled();
         $channelPricing->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']])->shouldBeCalled();
-        $catalogPromotion->isExclusive()->willReturn(false);
 
         $this->applyOnChannelPricing($channelPricing, $catalogPromotion);
     }
@@ -212,7 +166,6 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $appliedPromotionInformationFormatter->format($catalogPromotion)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
         $catalogPromotionAction->getConfiguration()->willReturn(['amount' => 0.3]);
 
-        $channelPricing->hasExclusiveCatalogPromotionApplied()->willReturn(false);
         $channelPricing->getPrice()->willReturn(1000);
         $channelPricing->getMinimumPrice()->willReturn(900);
         $channelPricing->getOriginalPrice()->willReturn(null);
@@ -221,7 +174,6 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $channelPricing->setOriginalPrice(1000)->shouldBeCalled();
         $channelPricing->setPrice(900)->shouldBeCalled();
         $channelPricing->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']])->shouldBeCalled();
-        $catalogPromotion->isExclusive()->willReturn(false);
 
         $this->applyOnChannelPricing($channelPricing, $catalogPromotion);
     }
@@ -241,7 +193,6 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $appliedPromotionInformationFormatter->format($catalogPromotion)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
         $catalogPromotionAction->getConfiguration()->willReturn(['amount' => 0.3]);
 
-        $channelPricing->hasExclusiveCatalogPromotionApplied()->willReturn(false);
         $channelPricing->getPrice()->willReturn(900);
         $channelPricing->getMinimumPrice()->willReturn(900);
         $channelPricing->getOriginalPrice()->willReturn(900);

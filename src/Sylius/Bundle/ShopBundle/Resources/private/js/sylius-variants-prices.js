@@ -15,10 +15,10 @@ function formatAppliedPromotions(appliedPromotions, locale = 'en_US') {
 
   if (appliedPromotions !== '[]') {
     $.each(appliedPromotions, (index, promotion) => {
-      if (promotion['translations'][locale].description !== null) {
-        appliedPromotionsElement += `<div class="ui blue label promotion_label" style="margin: 1rem 0;"><div class="row ui small sylius_catalog_promotion">${promotion['translations'][locale].name} - ${promotion['translations'][locale].description}</div></div>`;
+      if (promotion[locale].description !== null) {
+        appliedPromotionsElement += `<div class="ui blue label promotion_label" style="margin: 1rem 0;"><div class="row ui small sylius_catalog_promotion">${promotion[locale].name} - ${promotion[locale].description}</div></div>`;
       } else {
-        appliedPromotionsElement += `<div class="ui blue label promotion_label" style="margin: 1rem 0;"><div class="row ui small sylius_catalog_promotion">${promotion['translations'][locale].name}</div></div>`;
+        appliedPromotionsElement += `<div class="ui blue label promotion_label" style="margin: 1rem 0;"><div class="row ui small sylius_catalog_promotion">${promotion[locale].name}</div></div>`;
       }
     });
     $('#appliedPromotions').html(appliedPromotionsElement);

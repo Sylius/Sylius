@@ -75,7 +75,6 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
         $catalogPromotion->setCode($options['code']);
         $catalogPromotion->setName($options['name']);
         $catalogPromotion->setPriority($options['priority'] ?? 0);
-        $catalogPromotion->setExclusive($options['exclusive'] ?? false);
 
         foreach ($this->getLocales() as $localeCode) {
             $catalogPromotion->setCurrentLocale($localeCode);
@@ -144,8 +143,6 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
             ->setDefined('actions')
             ->setDefault('priority', 0)
             ->setAllowedTypes('priority', ['integer', 'null'])
-            ->setDefault('exclusive', false)
-            ->setAllowedTypes('exclusive', ['boolean', 'null'])
         ;
     }
 

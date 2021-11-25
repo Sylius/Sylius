@@ -19,7 +19,7 @@ Feature: Reapplying catalog promotion after editing their scopes
 
     @api @ui @javascript
     Scenario: Reapplying catalog promotion after adding a new scope to it
-        Given there is a catalog promotion named "Mug sale"
+        Given there is a catalog promotion with "mug_sale" code and "Mug sale" name
         When I modify a catalog promotion "Mug sale"
         And I add scope that applies on "Expensive Mug" variant and "PHP Mug" variant
         And I add action that gives "50%" percentage discount
