@@ -154,7 +154,7 @@ class ChannelPricing implements ChannelPricingInterface, \Stringable
     public function hasExclusiveCatalogPromotionApplied(): bool
     {
         foreach ($this->appliedPromotions as $appliedPromotion) {
-            if($appliedPromotion->isExclusive()) {
+            if ($appliedPromotion->isExclusive()) {
                 return true;
             }
         }
