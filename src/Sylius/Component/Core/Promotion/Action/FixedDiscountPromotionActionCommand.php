@@ -75,7 +75,7 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
         }
 
         $splitPromotion = $this->proportionalDistributor->distribute($itemsTotals, $promotionAmount);
-        $this->distributeWithMinimumPrice($splitPromotion, $itemsTotals, $minimumPrices);
+        $splitPromotion = $this->distributeWithMinimumPrice($splitPromotion, $itemsTotals, $minimumPrices);
 
         $this->unitsPromotionAdjustmentsApplicator->apply($subject, $promotion, $splitPromotion);
 
