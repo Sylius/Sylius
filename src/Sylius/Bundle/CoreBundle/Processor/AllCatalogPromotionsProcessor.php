@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Processor;
 
-use SM\Factory\FactoryInterface;
 use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 
 final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcessorInterface
 {
