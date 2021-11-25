@@ -28,7 +28,6 @@ final class CatalogPromotionActionType extends AbstractResourceType
             $this->actionConfigurationTypes[$type] = get_class($formType);
             $this->actionTypes['sylius.form.catalog_promotion.action.' . $type] = $type;
         }
-        ksort($this->actionTypes);
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

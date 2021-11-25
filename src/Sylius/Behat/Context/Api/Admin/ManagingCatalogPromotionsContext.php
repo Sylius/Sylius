@@ -207,7 +207,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add action that gives ("[^"]+") fixed discount in the ("[^"]+" channel)$/
+     * @When /^I add action that gives ("[^"]+") of fixed discount in the ("[^"]+" channel)$/
      */
     public function iAddActionThatGivesFixedDiscount(int $amount, ChannelInterface $channel): void
     {
@@ -553,7 +553,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I edit ("[^"]+" catalog promotion) to have ("[^"]+") fixed discount in the ("[^"]+" channel)$/
+     * @When /^I edit ("[^"]+" catalog promotion) to have ("[^"]+") of fixed discount in the ("[^"]+" channel)$/
      */
     public function iEditCatalogPromotionToHaveFixedDiscountInTheChannel(
         CatalogPromotionInterface $catalogPromotion,
@@ -781,7 +781,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then /^the ("[^"]+" catalog promotion) should have ("[^"]+") fixed discount in the ("[^"]+" channel)$/
+     * @Then /^the ("[^"]+" catalog promotion) should have ("[^"]+") of fixed discount in the ("[^"]+" channel)$/
      */
     public function theCatalogPromotionShouldHaveFixedDiscountInTheChannel(
         CatalogPromotionInterface $catalogPromotion,
@@ -794,7 +794,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then /^this catalog promotion should have ("[^"]+") fixed discount in the ("[^"]+" channel)$/
+     * @Then /^this catalog promotion should have ("[^"]+") of fixed discount in the ("[^"]+" channel)$/
      */
     public function thisCatalogPromotionShouldHaveFixedDiscountInTheChannel(int $amount, ChannelInterface $channel): void
     {
@@ -1036,7 +1036,6 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
-        $res = $this->client->getLastResponse();
         Assert::true(
             $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
             'Catalog promotion could not be edited'

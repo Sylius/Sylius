@@ -47,4 +47,16 @@ final class PercentageDiscountPriceCalculatorSpec extends ObjectBehavior
 
         $this->calculate($channelPricing, $action)->shouldReturn(700);
     }
+
+    function it_calculates_price_for_given_channel_pricing_and_action_with_taking_minimum_price_into_account(
+        ChannelPricingInterface $channelPricing,
+        CatalogPromotionActionInterface $action
+    ): void {
+        $action->getConfiguration()->willReturn(['amount' => 0.7]);
+
+        $channelPricing->getPrice()->willReturn(1000);
+        $channelPricing->getMinimumPrice()->willReturn(500);
+
+        $this->calculate($channelPricing, $action)->shouldReturn(500);
+    }
 }

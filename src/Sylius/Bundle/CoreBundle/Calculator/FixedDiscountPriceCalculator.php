@@ -31,10 +31,20 @@ final class FixedDiscountPriceCalculator implements ActionBasedPriceCalculatorIn
 
         $price = $channelPricing->getPrice() - $action->getConfiguration()[$channelPricing->getChannelCode()]['amount'];
 
-        if ($price < $channelPricing->getMinimumPrice()) {
-            return $channelPricing->getMinimumPrice();
+        $minimumPrice = $this->provideMinimumPrice($channelPricing);
+        if ($price < $minimumPrice) {
+            return $minimumPrice;
         }
 
         return $price;
+    }
+
+    private function provideMinimumPrice(ChannelPricingInterface $channelPricing): int
+    {
+        if ($channelPricing->getMinimumPrice() === null || $channelPricing->getMinimumPrice() <= 0) {
+            return 0;
+        }
+
+        return $channelPricing->getMinimumPrice();
     }
 }

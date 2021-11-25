@@ -33,7 +33,6 @@ final class CatalogPromotionActionTypeExtension extends AbstractTypeExtension
             $this->actionConfigurationTypes[$type] = get_class($formType);
             $this->actionTypes['sylius.form.catalog_promotion.action.' . $type] = $type;
         }
-        ksort($this->actionTypes);
 
         $this->twig = $twig;
     }

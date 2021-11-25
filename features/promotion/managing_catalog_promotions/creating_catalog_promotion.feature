@@ -73,11 +73,11 @@ Feature: Creating a catalog promotion
         And I specify its code as "winter_sale"
         And I name it "Winter sale"
         And I add scope that applies on "Clothes" taxon
-        And I add action that gives "$10.00" fixed discount in the "United States" channel
+        And I add action that gives "$10.00" of fixed discount in the "United States" channel
         And I add it
         Then there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name
-        And the "Winter sale" catalog promotion should have "$10.00" fixed discount in the "United States" channel
+        And the "Winter sale" catalog promotion should have "$10.00" of fixed discount in the "United States" channel
 
     @api @ui @javascript
     Scenario: Creating a catalog promotion for taxon

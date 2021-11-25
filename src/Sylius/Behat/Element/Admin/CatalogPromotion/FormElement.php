@@ -89,9 +89,9 @@ final class FormElement extends Element implements FormElementInterface
 
     public function chooseActionType(string $type): void
     {
-        $lastScope = $this->getElement('last_action');
+        $lastAction = $this->getElement('last_action');
 
-        $lastScope->selectFieldOption('Type', $type);
+        $lastAction->selectFieldOption('Type', $type);
     }
 
     public function chooseLastScopeCodes(array $codes): void
@@ -104,7 +104,7 @@ final class FormElement extends Element implements FormElementInterface
     public function specifyLastActionDiscount(string $discount): void
     {
         $lastAction = $this->getElement('last_action');
-//
+
         $lastAction->find('css', 'input')->setValue($discount);
     }
 

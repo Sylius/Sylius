@@ -1,5 +1,5 @@
 @applying_catalog_promotions
-Feature: Applying all available catalog promotions
+Feature: Applying all available types of catalog promotions
     In order to see products in best prices
     As a Customer
     I want to see discounted products in the catalog
@@ -13,9 +13,9 @@ Feature: Applying all available catalog promotions
         And there is a catalog promotion "PHP sale" that reduces price by "10%" and applies on "PHP T-Shirt" variant
         And there is a catalog promotion "T-Shirt sale" that reduces price by "10%" and applies on "T-Shirt" product
         And there is a catalog promotion "Clothes sale" that reduces price by "10%" and applies on "Clothes" taxon
-        And there is a catalog promotion "Fixed PHP sale" that reduces price by fixed "$5.00" and applies on "PHP T-Shirt" variant
-        And there is a catalog promotion "Fixed T-Shirt sale" that reduces price by fixed "$5.00" and applies on "T-Shirt" product
-        And there is a catalog promotion "Fixed Clothes sale" that reduces price by fixed "$5.00" and applies on "Clothes" taxon
+        And there is a catalog promotion "Fixed PHP sale" that reduces price by fixed "$5.00" in the "Web-US" channel and applies on "PHP T-Shirt" variant
+        And there is a catalog promotion "Fixed T-Shirt sale" that reduces price by fixed "$5.00" in the "Web-US" channel and applies on "T-Shirt" product
+        And there is a catalog promotion "Fixed Clothes sale" that reduces price by fixed "$5.00" in the "Web-US" channel and applies on "Clothes" taxon
 
     @api @ui
     Scenario: Applying multiple catalog promotions

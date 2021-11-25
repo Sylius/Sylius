@@ -347,7 +347,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^the ("[^"]+" variant) has minimum price ("[^"]+") in ("[^"]+" channel)$/
+     * @Given /^the ("[^"]+" variant) has minimum price of ("[^"]+") in the ("[^"]+" channel)$/
      */
     public function variantHasMinimumPriceInChannel(
         ProductVariantInterface $productVariant,

@@ -48,4 +48,30 @@ final class FixedDiscountPriceCalculatorSpec extends ObjectBehavior
 
         $this->calculate($channelPricing, $action)->shouldReturn(800);
     }
+
+    function it_calculates_price_for_given_channel_pricing_and_action_with_taking_minimum_price_into_account(
+        ChannelPricingInterface $channelPricing,
+        CatalogPromotionActionInterface $action
+    ): void {
+        $action->getConfiguration()->willReturn(['WEB' => ['amount' => 600]]);
+
+        $channelPricing->getChannelCode()->willReturn('WEB');
+        $channelPricing->getPrice()->willReturn(1000);
+        $channelPricing->getMinimumPrice()->willReturn(500);
+
+        $this->calculate($channelPricing, $action)->shouldReturn(500);
+    }
+
+    function it_calculates_price_for_given_channel_pricing_and_action_without_minimum_price_specified(
+        ChannelPricingInterface $channelPricing,
+        CatalogPromotionActionInterface $action
+    ): void {
+        $action->getConfiguration()->willReturn(['WEB' => ['amount' => 1100]]);
+
+        $channelPricing->getChannelCode()->willReturn('WEB');
+        $channelPricing->getPrice()->willReturn(1000);
+        $channelPricing->getMinimumPrice()->willReturn(null);
+
+        $this->calculate($channelPricing, $action)->shouldReturn(0);
+    }
 }

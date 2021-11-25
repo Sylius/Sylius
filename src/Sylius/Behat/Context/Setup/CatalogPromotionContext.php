@@ -209,16 +209,14 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by fixed ("[^"]+") and applies on ("[^"]+" variant)$/
+     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" variant)$/
      */
-    public function thereIsACatalogPromotionThatReducesPriceByFixedAndAppliesOnVariant(
+    public function thereIsACatalogPromotionThatReducesPriceByFixedInTheChannelAndAppliesOnVariant(
         string $name,
         int $discount,
+        ChannelInterface $channel,
         ProductVariantInterface $variant
     ): void {
-        /** @var ChannelInterface $channel */
-        $channel = $this->sharedStorage->get('channel');
-
         $this->createCatalogPromotion(
             $name,
             null,
@@ -237,16 +235,14 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by fixed ("[^"]+") and applies on ("[^"]+" product)$/
+     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" product)$/
      */
-    public function thereIsACatalogPromotionThatReducesPriceByFixedAndAppliesOnProduct(
+    public function thereIsACatalogPromotionThatReducesPriceByFixedInTheChannelAndAppliesOnProduct(
         string $name,
         int $discount,
+        ChannelInterface $channel,
         ProductInterface $product
     ): void {
-        /** @var ChannelInterface $channel */
-        $channel = $this->sharedStorage->get('channel');
-
         $this->createCatalogPromotion(
             $name,
             null,
@@ -265,16 +261,14 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by fixed ("[^"]+") and applies on ("[^"]+" taxon)$/
+     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" taxon)$/
      */
-    public function thereIsACatalogPromotionThatReducesPriceByFixedAndAppliesOnTaxon(
+    public function thereIsACatalogPromotionThatReducesPriceByFixedInTheChannelAndAppliesOnTaxon(
         string $name,
         int $discount,
+        ChannelInterface $channel,
         TaxonInterface $taxon
     ): void {
-        /** @var ChannelInterface $channel */
-        $channel = $this->sharedStorage->get('channel');
-
         $this->createCatalogPromotion(
             $name,
             null,
@@ -498,17 +492,15 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^there is a catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by fixed ("[^"]+") and applies on ("[^"]+" product)$/
+     * @Given /^there is a catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" product)$/
      */
-    public function thereIsACatalogPromotionWithPriorityThatReducesPriceByFixedAndAppliesOnProduct(
+    public function thereIsACatalogPromotionWithPriorityThatReducesPriceByFixedInTheChannelAndAppliesOnProduct(
         string $name,
         int $priority,
         int $discount,
+        ChannelInterface $channel,
         ProductInterface $product
     ): void {
-        /** @var ChannelInterface $channel */
-        $channel = $this->sharedStorage->get('channel');
-
         $catalogPromotion = $this->createCatalogPromotion(
             $name,
             null,
@@ -530,17 +522,15 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^there is a catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by fixed ("[^"]+") and applies on ("[^"]+" taxon)$/
+     * @Given /^there is a catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" taxon)$/
      */
-    public function thereIsACatalogPromotionWithPriorityThatReducesPriceByFixedAndAppliesOnTaxon(
+    public function thereIsACatalogPromotionWithPriorityThatReducesPriceByFixedInTheChannelAndAppliesOnTaxon(
         string $name,
         int $priority,
         int $discount,
+        ChannelInterface $channel,
         TaxonInterface $taxon
     ): void {
-        /** @var ChannelInterface $channel */
-        $channel = $this->sharedStorage->get('channel');
-
         $catalogPromotion = $this->createCatalogPromotion(
             $name,
             null,

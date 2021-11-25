@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use http\Exception\InvalidArgumentException;
 use Sylius\Behat\Element\Admin\CatalogPromotion\FormElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\CatalogPromotion\CreatePageInterface;
@@ -266,7 +265,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add action that gives "(?:€|£|\$)([^"]+)" fixed discount in the ("[^"]+" channel)$/
+     * @When /^I add action that gives "(?:€|£|\$)([^"]+)" of fixed discount in the ("[^"]+" channel)$/
      */
     public function iAddActionThatGivesFixedDiscount(string $discount, ChannelInterface $channel): void
     {
@@ -370,7 +369,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I edit ("[^"]+" catalog promotion) to have "(?:€|£|\$)([^"]+)" fixed discount in the ("[^"]+" channel)$/
+     * @When /^I edit ("[^"]+" catalog promotion) to have "(?:€|£|\$)([^"]+)" of fixed discount in the ("[^"]+" channel)$/
      */
     public function iEditCatalogPromotionToHaveFixedDiscountInTheChannel(
         CatalogPromotionInterface $catalogPromotion,
@@ -444,11 +443,20 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When I add percentage discount action without amount configured
-     * @When I add fixed discount action without amount configured
      */
-    public function iAddDiscountActionWithoutAmountConfigured(): void
+    public function iAddPercentageDiscountActionWithoutAmountConfigured(): void
     {
         $this->formElement->addAction();
+        $this->formElement->chooseActionType('Percentage discount');
+    }
+
+    /**
+     * @When I add fixed discount action without amount configured
+     */
+    public function iAddFixedDiscountActionWithoutAmountConfigured(): void
+    {
+        $this->formElement->addAction();
+        $this->formElement->chooseActionType('Fixed discount');
     }
 
     /**
@@ -459,7 +467,6 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->formElement->addAction();
         $this->formElement->specifyLastActionDiscount('alot');
     }
-
 
     /**
      * @When I add invalid fixed discount action with non number in amount for the :channel channel
@@ -714,8 +721,8 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then /^the ("[^"]+" catalog promotion) should have "(?:€|£|\$)([^"]+)" fixed discount in the ("[^"]+" channel)$/
-     * @Then /^(this catalog promotion) should have "(?:€|£|\$)([^"]+)" fixed discount in the ("[^"]+" channel)$/
+     * @Then /^the ("[^"]+" catalog promotion) should have "(?:€|£|\$)([^"]+)" of fixed discount in the ("[^"]+" channel)$/
+     * @Then /^(this catalog promotion) should have "(?:€|£|\$)([^"]+)" of fixed discount in the ("[^"]+" channel)$/
      */
     public function theCatalogPromotionShouldHaveFixedDiscountInTheChannel(
         CatalogPromotionInterface $catalogPromotion,

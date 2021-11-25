@@ -25,12 +25,22 @@ final class PercentageDiscountPriceCalculator implements ActionBasedPriceCalcula
 
     public function calculate(ChannelPricingInterface $channelPricing, CatalogPromotionActionInterface $action): int
     {
-        $price = (int) ($channelPricing->getPrice() - ($channelPricing->getPrice() * $action->getConfiguration()['amount']));
+        $price = (int)($channelPricing->getPrice() - ($channelPricing->getPrice() * $action->getConfiguration()['amount']));
 
-        if ($price < $channelPricing->getMinimumPrice()) {
-            return $channelPricing->getMinimumPrice();
+        $minimumPrice = $this->provideMinimumPrice($channelPricing);
+        if ($price < $minimumPrice) {
+            return $minimumPrice;
         }
 
         return $price;
+    }
+
+    private function provideMinimumPrice(ChannelPricingInterface $channelPricing): int
+    {
+        if ($channelPricing->getMinimumPrice() === null || $channelPricing->getMinimumPrice() <= 0) {
+            return 0;
+        }
+
+        return $channelPricing->getMinimumPrice();
     }
 }
