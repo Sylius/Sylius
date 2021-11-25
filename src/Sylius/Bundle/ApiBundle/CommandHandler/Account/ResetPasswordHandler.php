@@ -54,10 +54,6 @@ final class ResetPasswordHandler implements MessageHandlerInterface
             throw new \InvalidArgumentException('Password reset token has expired');
         }
 
-        if ($command->resetPasswordToken !== $user->getPasswordResetToken()) {
-            throw new \InvalidArgumentException('Password reset token does not match.');
-        }
-
         $user->setPlainPassword($command->newPassword);
 
         $this->passwordUpdater->updatePassword($user);
