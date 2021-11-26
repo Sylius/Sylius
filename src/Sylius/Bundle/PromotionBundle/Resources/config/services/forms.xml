@@ -31,6 +31,8 @@
         <parameter key="sylius.form.type.promotion_coupon.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
+        <parameter key="sylius.catalog_promotion.action.fixed_discount" type="constant">Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT</parameter>
+        <parameter key="sylius.catalog_promotion.action.percentage_discount" type="constant">Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT</parameter>
     </parameters>
 
     <services>
@@ -50,12 +52,15 @@
             <tag name="form.type" />
         </service>
 
+        <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType">
+            <tag name="sylius.catalog_promotion.action_configuration_type" key="%sylius.catalog_promotion.action.percentage_discount%" />
+            <tag name="form.type" />
+        </service>
+
         <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType">
             <argument>%sylius.model.catalog_promotion_action.class%</argument>
             <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
-            <argument type="collection">
-                <argument type="constant" key="sylius.form.catalog_promotion.action.percentage_discount">Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT</argument>
-            </argument>
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.action_configuration_type" index-by="key" />
             <tag name="form.type" />
         </service>
 

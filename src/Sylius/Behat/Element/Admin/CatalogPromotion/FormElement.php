@@ -16,6 +16,7 @@ namespace Sylius\Behat\Element\Admin\CatalogPromotion;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Webmozart\Assert\Assert;
 
 final class FormElement extends Element implements FormElementInterface
@@ -86,6 +87,13 @@ final class FormElement extends Element implements FormElementInterface
         $lastScope->selectFieldOption('Type', $type);
     }
 
+    public function chooseActionType(string $type): void
+    {
+        $lastAction = $this->getElement('last_action');
+
+        $lastAction->selectFieldOption('Type', $type);
+    }
+
     public function chooseLastScopeCodes(array $codes): void
     {
         $lastScope = $this->getElement('last_scope');
@@ -98,6 +106,13 @@ final class FormElement extends Element implements FormElementInterface
         $lastAction = $this->getElement('last_action');
 
         $lastAction->find('css', 'input')->setValue($discount);
+    }
+
+    public function specifyLastActionDiscountForChannel(string $discount, ChannelInterface $channel): void
+    {
+        $lastAction = $this->getElement('last_action');
+
+        $lastAction->find('css', sprintf('.field:contains("%s") input', $channel->getName()))->setValue($discount);
     }
 
     public function getFieldValueInLocale(string $field, string $localeCode): string
@@ -119,6 +134,13 @@ final class FormElement extends Element implements FormElementInterface
         return $lastAction->find('css', 'input')->getValue();
     }
 
+    public function getLastActionFixedDiscount(ChannelInterface $channel): string
+    {
+        $lastAction = $this->getElement('last_action');
+
+        return $lastAction->find('css', 'input')->getValue();
+    }
+
     public function getValidationMessage(): string
     {
         $foundElement = $this->getDocument()->find('css', '.sylius-validation-error');
@@ -128,6 +150,19 @@ final class FormElement extends Element implements FormElementInterface
         }
 
         return $foundElement->getText();
+    }
+
+    public function hasValidationMessage(string $message): bool
+    {
+        $validationElements = $this->getDocument()->findAll('css', '.sylius-validation-error');
+
+        foreach ($validationElements as $validationElement) {
+            if ($validationElement->getText() === $message) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function removeAllActions(): void

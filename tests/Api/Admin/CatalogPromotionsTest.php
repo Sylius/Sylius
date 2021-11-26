@@ -324,6 +324,32 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                         'configuration' => [
                             'amount' => 'text'
                         ]
+                    ],
+                    [
+                        'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                        'configuration' => []
+                    ],
+                    [
+                        'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                        'configuration' => [
+                            'WEB' => [],
+                        ]
+                    ],
+                    [
+                        'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                        'configuration' => [
+                            'invalid_channel' => [
+                                'amount' => 1000,
+                            ],
+                        ]
+                    ],
+                    [
+                        'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                        'configuration' => [
+                            'WEB' => [
+                                'amount' => 'text',
+                            ]
+                        ]
                     ]
                 ],
                 'scopes' => [

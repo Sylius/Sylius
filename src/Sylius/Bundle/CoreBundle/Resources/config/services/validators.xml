@@ -74,6 +74,11 @@
             <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_scope" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\Validator\CatalogPromotionAction\FixedDiscountActionValidator">
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="sylius.catalog_promotion.action_validator" key="fixed_discount"/>
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ForProductsScopeValidator">
             <argument type="service" id="sylius.repository.product" />
             <tag name="sylius.catalog_promotion.scope_validator" key="for_products"/>

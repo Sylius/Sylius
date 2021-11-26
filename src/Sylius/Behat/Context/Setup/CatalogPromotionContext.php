@@ -209,6 +209,84 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
+     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" variant)$/
+     */
+    public function thereIsACatalogPromotionThatReducesPriceByFixedInTheChannelAndAppliesOnVariant(
+        string $name,
+        int $discount,
+        ChannelInterface $channel,
+        ProductVariantInterface $variant
+    ): void {
+        $this->createCatalogPromotion(
+            $name,
+            null,
+            [],
+            [[
+                'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
+                'configuration' => ['variants' => [$variant->getCode()]],
+            ]],
+            [[
+                'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                'configuration' => [$channel->getCode() => ['amount' => $discount]],
+            ]]
+        );
+
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" product)$/
+     */
+    public function thereIsACatalogPromotionThatReducesPriceByFixedInTheChannelAndAppliesOnProduct(
+        string $name,
+        int $discount,
+        ChannelInterface $channel,
+        ProductInterface $product
+    ): void {
+        $this->createCatalogPromotion(
+            $name,
+            null,
+            [],
+            [[
+                'type' => CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS,
+                'configuration' => ['products' => [$product->getCode()]],
+            ]],
+            [[
+                'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                'configuration' => [$channel->getCode() => ['amount' => $discount]],
+            ]]
+        );
+
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" taxon)$/
+     */
+    public function thereIsACatalogPromotionThatReducesPriceByFixedInTheChannelAndAppliesOnTaxon(
+        string $name,
+        int $discount,
+        ChannelInterface $channel,
+        TaxonInterface $taxon
+    ): void {
+        $this->createCatalogPromotion(
+            $name,
+            null,
+            [],
+            [[
+                'type' => CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
+                'configuration' => ['taxons' => [$taxon->getCode()]],
+            ]],
+            [[
+                'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                'configuration' => [$channel->getCode() => ['amount' => $discount]],
+            ]]
+        );
+
+        $this->entityManager->flush();
+    }
+
+    /**
      * @Given catalog promotion :catalogPromotion has failed processing
      */
     public function catalogPromotionHasFailedProcessing(CatalogPromotionInterface $catalogPromotion): void
@@ -406,6 +484,66 @@ final class CatalogPromotionContext implements Context
             ]],
             $priority,
             true
+        );
+
+        $this->entityManager->flush();
+
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
+    /**
+     * @Given /^there is a catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" product)$/
+     */
+    public function thereIsACatalogPromotionWithPriorityThatReducesPriceByFixedInTheChannelAndAppliesOnProduct(
+        string $name,
+        int $priority,
+        int $discount,
+        ChannelInterface $channel,
+        ProductInterface $product
+    ): void {
+        $catalogPromotion = $this->createCatalogPromotion(
+            $name,
+            null,
+            [],
+            [[
+                'type' => CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS,
+                'configuration' => ['products' => [$product->getCode()]],
+            ]],
+            [[
+                'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                'configuration' => [$channel->getCode() => ['amount' => $discount]],
+            ]],
+            $priority
+        );
+
+        $this->entityManager->flush();
+
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
+    /**
+     * @Given /^there is a catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" taxon)$/
+     */
+    public function thereIsACatalogPromotionWithPriorityThatReducesPriceByFixedInTheChannelAndAppliesOnTaxon(
+        string $name,
+        int $priority,
+        int $discount,
+        ChannelInterface $channel,
+        TaxonInterface $taxon
+    ): void {
+        $catalogPromotion = $this->createCatalogPromotion(
+            $name,
+            null,
+            [],
+            [[
+                'type' => CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
+                'configuration' => ['taxons' => [$taxon->getCode()]],
+            ]],
+            [[
+                'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                'configuration' => [$channel->getCode() => ['amount' => $discount]],
+            ]],
+            $priority,
         );
 
         $this->entityManager->flush();

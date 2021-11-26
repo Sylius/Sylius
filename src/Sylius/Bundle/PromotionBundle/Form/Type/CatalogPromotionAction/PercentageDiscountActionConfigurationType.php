@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PromotionBundle\Form\Type\CatalogAction;
+namespace Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PercentType;

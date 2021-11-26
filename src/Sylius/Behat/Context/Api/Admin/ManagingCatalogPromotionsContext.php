@@ -207,6 +207,23 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I add action that gives ("[^"]+") of fixed discount in the ("[^"]+" channel)$/
+     */
+    public function iAddActionThatGivesFixedDiscount(int $amount, ChannelInterface $channel): void
+    {
+        $actions = [[
+            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'configuration' => [
+                $channel->getCode() => [
+                    'amount' => $amount
+                ],
+            ],
+        ]];
+
+        $this->client->addRequestData('actions', $actions);
+    }
+
+    /**
      * @When /^I add another action that gives ("[^"]+") percentage discount$/
      */
     public function iAddAnotherActionThatGivesPercentageDiscount(float $amount): void
@@ -536,6 +553,26 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I edit ("[^"]+" catalog promotion) to have ("[^"]+") of fixed discount in the ("[^"]+" channel)$/
+     */
+    public function iEditCatalogPromotionToHaveFixedDiscountInTheChannel(
+        CatalogPromotionInterface $catalogPromotion,
+        int $amount,
+        ChannelInterface $channel
+    ): void {
+        $this->client->buildUpdateRequest($catalogPromotion->getCode());
+        $content = $this->client->getContent();
+
+        $content['actions'] = [[
+            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'configuration' => [$channel->getCode() => ['amount' => $amount]],
+        ]];
+
+        $this->client->setRequestData($content);
+        $this->client->update();
+    }
+
+    /**
      * @When I add catalog promotion scope with nonexistent type
      */
     public function iAddCatalogPromotionScopeWithNonexistentType(): void
@@ -588,6 +625,46 @@ final class ManagingCatalogPromotionsContext implements Context
         $actions = [[
             'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
             'configuration' => [],
+        ]];
+
+        $this->client->addRequestData('actions', $actions);
+    }
+
+    /**
+     * @When I add fixed discount action without amount configured
+     */
+    public function iAddFixedDiscountActionWithoutAmountConfigured(): void
+    {
+        $actions = [[
+            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'configuration' => [],
+        ]];
+
+        $this->client->addRequestData('actions', $actions);
+    }
+
+    /**
+     * @When I add invalid fixed discount action with non number in amount for the :channel channel
+     */
+    public function iAddInvalidFixedDiscountActionWithNonNumberInAmountForTheChannel(
+        ChannelInterface $channel
+    ): void {
+        $actions = [[
+            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'configuration' => [$channel->getCode() => ['amount' => 'wrong value']],
+        ]];
+
+        $this->client->addRequestData('actions', $actions);
+    }
+
+    /**
+     * @When I add invalid fixed discount action configured for nonexistent channel
+     */
+    public function iAddInvalidFixedDiscountActionConfiguredForNonexistentChannel(): void
+    {
+        $actions = [[
+            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'configuration' => ['nonexistent_action' => ['amount' => 1000]],
         ]];
 
         $this->client->addRequestData('actions', $actions);
@@ -701,6 +778,30 @@ final class ManagingCatalogPromotionsContext implements Context
         $catalogPromotion = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
 
         Assert::same($catalogPromotion['actions'][0]['configuration']['amount'], $amount);
+    }
+
+    /**
+     * @Then /^the ("[^"]+" catalog promotion) should have ("[^"]+") of fixed discount in the ("[^"]+" channel)$/
+     */
+    public function theCatalogPromotionShouldHaveFixedDiscountInTheChannel(
+        CatalogPromotionInterface $catalogPromotion,
+        int $amount,
+        ChannelInterface $channel
+    ): void {
+        $catalogPromotion = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
+
+        Assert::same($catalogPromotion['actions'][0]['configuration'][$channel->getCode()]['amount'], $amount);
+    }
+
+    /**
+     * @Then /^this catalog promotion should have ("[^"]+") of fixed discount in the ("[^"]+" channel)$/
+     */
+    public function thisCatalogPromotionShouldHaveFixedDiscountInTheChannel(int $amount, ChannelInterface $channel): void
+    {
+        $catalogPromotionActions = $this->responseChecker->getValue($this->client->getLastResponse(), 'actions');
+
+        Assert::same($catalogPromotionActions[0]['type'], CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT);
+        Assert::same($catalogPromotionActions[0]['configuration'][$channel->getCode()]['amount'], $amount);
     }
 
     /**
@@ -1132,6 +1233,28 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'The percentage discount amount must be a number and can not be empty.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that a discount amount should be configured for at least one channel
+     */
+    public function iShouldBeNotifiedThatADiscountAmountShouldBeConfiguredForAtLeasOneChannel(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Provided configuration contains errors. Please add the fixed discount amount greater than 0 for at least 1 channel.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that at least one of the provided channel codes does not exist
+     */
+    public function iShouldBeNotifiedThatAtLeastOneOfTheProvidedChannelCodesDoesNotExist(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Provided configuration contains errors. At least one of the provided channel codes does not exist.'
         );
     }
 

@@ -29,7 +29,16 @@
             <tag name="validator.constraint_validator" alias="sylius_coupon_generation_amount_validator" />
         </service>
 
+        <service id="Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction\PercentageDiscountActionValidator">
+            <tag name="sylius.catalog_promotion.action_validator" key="percentage_discount"/>
+        </service>
+
         <service id="Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionValidator">
+            <argument type="collection">
+                <argument type="constant">Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT</argument>
+                <argument type="constant">Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT</argument>
+            </argument>
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.action_validator" index-by="key" />
             <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_action" />
         </service>
     </services>

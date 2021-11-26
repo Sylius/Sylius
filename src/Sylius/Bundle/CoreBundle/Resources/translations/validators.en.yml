@@ -3,6 +3,10 @@ sylius:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
             upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
+    catalog_promotion_action:
+        fixed_discount:
+            invalid_channel: Provided configuration contains errors. At least one of the provided channel codes does not exist.
+            not_valid: Provided configuration contains errors. Please add the fixed discount amount greater than 0 for at least 1 channel.
     catalog_promotion_scope:
         invalid_type: Catalog promotion scope type is invalid. Please choose a valid type.
         for_products:

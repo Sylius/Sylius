@@ -93,6 +93,7 @@ final class ProductVariantContext implements Context
      * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/
      * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" and "([^"]+)" promotions$/
      * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)", "([^"]+)" and "([^"]+)" promotions$/
+     * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)", "([^"]+)", "([^"]+)" and "([^"]+)" promotions$/
      */
     public function iShouldSeeVariantIsDiscountedFromToWithPromotions(
         ProductVariantInterface $variant,
@@ -109,6 +110,22 @@ final class ProductVariantContext implements Context
             Assert::same($content['appliedPromotions'][$catalogPromotionCode]['translations']['en_US']['name'], $promotionName);
             Assert::same($content['appliedPromotions'][$catalogPromotionCode]['translations']['en_US']['description'], $promotionName . ' description');
         }
+    }
+
+    /**
+     * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with ([^"]+) promotions$/
+     */
+    public function iShouldSeeVariantIsDiscountedFromToWithNumberOfPromotions(
+        ProductVariantInterface $variant,
+        int $originalPrice,
+        int $price,
+        int $numberOfPromotions
+    ): void {
+        $content = $this->findVariant($variant);
+
+        Assert::same($content['price'], $price);
+        Assert::same($content['originalPrice'], $originalPrice);
+        Assert::count($content['appliedPromotions'], $numberOfPromotions);
     }
 
     /**

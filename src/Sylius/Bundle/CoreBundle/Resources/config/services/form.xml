@@ -160,6 +160,11 @@
             <tag name="form.type" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionAction\ChannelBasedFixedDiscountActionConfigurationType">
+            <tag name="sylius.catalog_promotion.action_configuration_type" key="%sylius.catalog_promotion.action.fixed_discount%" />
+            <tag name="form.type" />
+        </service>
+
         <service id="sylius.form.type.for_products_scope" class="Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionScope\ForProductsScopeConfigurationType">
             <argument type="service" id="sylius.form.type.data_transformer.products_to_codes" />
             <tag name="sylius.catalog_promotion.scope_configuration_type" key="%sylius.catalog_promotion.scope.for_products%" />

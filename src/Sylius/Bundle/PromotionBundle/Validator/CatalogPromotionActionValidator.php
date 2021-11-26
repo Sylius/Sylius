@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Validator;
 
+use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction\ActionValidatorInterface;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionAction;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\Validator\Constraint;
@@ -21,34 +22,37 @@ use Webmozart\Assert\Assert;
 
 final class CatalogPromotionActionValidator extends ConstraintValidator
 {
+    private array $actionTypes;
+
+    private array $actionValidators;
+
+    public function __construct(array $actionTypes, iterable $actionValidators)
+    {
+        $this->actionTypes = $actionTypes;
+        $this->actionValidators = $actionValidators instanceof \Traversable ? iterator_to_array($actionValidators) : $actionValidators;
+    }
+
     public function validate($value, Constraint $constraint): void
     {
         /** @var CatalogPromotionAction $constraint */
         Assert::isInstanceOf($constraint, CatalogPromotionAction::class);
 
         /** @var CatalogPromotionActionInterface $value */
-        if ($value->getType() !== CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT) {
+        if (!in_array($value->getType(), $this->actionTypes, true)) {
             $this->context->buildViolation($constraint->invalidType)->atPath('type')->addViolation();
 
             return;
         }
 
+        $type = $value->getType();
+        if (!key_exists($type, $this->actionValidators)) {
+            return;
+        }
+
         $configuration = $value->getConfiguration();
 
-        if (!array_key_exists('amount', $configuration)) {
-            $this->context->buildViolation($constraint->notNumberOrEmpty)->atPath('configuration.amount')->addViolation();
-
-            return;
-        }
-
-        if (!is_float($configuration['amount']) && !is_integer($configuration['amount'])) {
-            $this->context->buildViolation($constraint->notNumberOrEmpty)->atPath('configuration.amount')->addViolation();
-
-            return;
-        }
-
-        if ($configuration['amount'] < 0 || $configuration['amount'] > 1) {
-            $this->context->buildViolation($constraint->notInRangeDiscount)->atPath('configuration.amount')->addViolation();
-        }
+        /** @var ActionValidatorInterface $validator */
+        $validator = $this->actionValidators[$type];
+        $validator->validate($configuration, $constraint, $this->context);
     }
 }

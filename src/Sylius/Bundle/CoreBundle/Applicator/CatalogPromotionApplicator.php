@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Applicator;
 
+use Sylius\Bundle\CoreBundle\Calculator\CatalogPromotionPriceCalculatorInterface;
 use Sylius\Bundle\CoreBundle\Formatter\AppliedPromotionInformationFormatterInterface;
+use Sylius\Component\Core\Exception\ActionBasedPriceCalculatorNotFoundException;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -22,10 +24,15 @@ use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
 final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInterface
 {
+    private CatalogPromotionPriceCalculatorInterface $priceCalculator;
+
     private AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter;
 
-    public function __construct(AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter)
-    {
+    public function __construct(
+        CatalogPromotionPriceCalculatorInterface $priceCalculator,
+        AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter
+    ) {
+        $this->priceCalculator = $priceCalculator;
         $this->appliedPromotionInformationFormatter = $appliedPromotionInformationFormatter;
     }
 
@@ -47,11 +54,7 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
         }
 
         foreach ($catalogPromotion->getActions() as $action) {
-            $this->applyDiscountFromActionOnChannelPricing(
-                $catalogPromotion,
-                $action->getConfiguration()['amount'],
-                $channelPricing
-            );
+            $this->applyDiscountFromActionOnChannelPricing($catalogPromotion, $action, $channelPricing);
         }
     }
 
@@ -60,21 +63,19 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
         CatalogPromotionActionInterface $action,
         ProductVariantInterface $variant
     ): void {
-        $discount = $action->getConfiguration()['amount'];
-
         foreach ($catalogPromotion->getChannels() as $channel) {
             $channelPricing = $variant->getChannelPricingForChannel($channel);
             if ($channelPricing === null) {
                 continue;
             }
 
-            $this->applyDiscountFromActionOnChannelPricing($catalogPromotion, $discount, $channelPricing);
+            $this->applyDiscountFromActionOnChannelPricing($catalogPromotion, $action, $channelPricing);
         }
     }
 
     private function applyDiscountFromActionOnChannelPricing(
         CatalogPromotionInterface $catalogPromotion,
-        float $discount,
+        CatalogPromotionActionInterface $action,
         ChannelPricingInterface $channelPricing
     ): void {
         if ($channelPricing->hasExclusiveCatalogPromotionApplied()) {
@@ -89,10 +90,10 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
             return;
         }
 
-        $price = (int) ($channelPricing->getPrice() - ($channelPricing->getPrice() * $discount));
-
-        if ($price < $channelPricing->getMinimumPrice()) {
-            $price = $channelPricing->getMinimumPrice();
+        try {
+            $price = $this->priceCalculator->calculate($channelPricing, $action);
+        } catch (ActionBasedPriceCalculatorNotFoundException $exception) {
+            return;
         }
 
         $channelPricing->setPrice($price);
