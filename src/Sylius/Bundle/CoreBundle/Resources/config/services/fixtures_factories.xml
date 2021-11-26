@@ -58,6 +58,7 @@
             <argument>%locale%</argument>
             <argument type="service" id="file_locator" />
             <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="sylius.factory.avatar_image" />
         </service>
 
         <service id="sylius.fixture.example_factory.promotion" class="Sylius\Bundle\CoreBundle\Fixture\Factory\PromotionExampleFactory">
