@@ -11,7 +11,7 @@ Feature: Preventing starting checkout with an empty cart
         And the store has a product "PHP T-Shirt"
         And I am a logged in customer
 
-    @ui
+    @ui @no-api
     Scenario: Being unable to start checkout addressing step with an empty cart
         When I try to open checkout addressing page
         Then I should be redirected to my cart summary page
