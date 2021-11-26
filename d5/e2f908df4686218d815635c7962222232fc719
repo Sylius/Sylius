@@ -1,0 +1,41 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-09-01T09:32:55Z
+
+The build should be green after merging #11780
+
+---------------------------------------------------------------------------
+
+by foxou33 at 2020-09-01T18:25:17Z
+
+I think I messed up trying to merge #11780. I'm not sure how to revert.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-09-08T08:44:35Z
+
+I've rebased your PR and fixed commits. All of them are still yours, of course :) Let's wait for green build and it is good to go
+
+---------------------------------------------------------------------------
+
+by stale[bot] at 2020-12-25T13:03:20Z
+
+This issue has been automatically marked as stale because it has not had any recent activity. It will be closed in a week if no further activity occurs. Thank you for your contributions.
+
+---------------------------------------------------------------------------
+
+by igormukhingmailcom at 2021-11-03T06:56:49Z
+
+Not stale. Very useful and looks ready to merge, isn't it?
+
+---------------------------------------------------------------------------
+
+by igormukhingmailcom at 2021-11-22T16:41:36Z
+
+Thanks, @foxou33  and @lchrusciel :)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-11-26T10:25:57Z
+
+Thank you, @foxou33! :tada:
