@@ -63,7 +63,7 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
         }
 
         if ($this->avatarImageFactory === null) {
-            @trigger_error(sprintf('Not passing a $avatarImageFactory to %s constructor is deprecated since Sylius 1.7 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+            @trigger_error(sprintf('Not passing a $avatarImageFactory to %s constructor is deprecated since Sylius 1.10 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
         }
     }
 
