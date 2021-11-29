@@ -6,6 +6,7 @@ sylius:
         catalog_promotion:
             description: Тодорхойлолт
             name: Нэр
+            priority: Нэн тэргүүнд
         promotion:
             actions: Үйлдэл
             add_action: Үйлдэл нэмэх

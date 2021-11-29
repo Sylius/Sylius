@@ -6,6 +6,7 @@ sylius:
         catalog_promotion:
             description: Popis
             name: Jméno
+            priority: Priorita
         promotion:
             actions: Akce
             add_action: Přidat akci

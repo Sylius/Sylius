@@ -6,6 +6,7 @@ sylius:
         catalog_promotion:
             description: الوصف
             name: الاسم
+            priority: الأولوية
         promotion:
             actions: الاجراءت
             add_action: إضافة فعل
