@@ -1,5 +1,9 @@
 # UPGRADE FROM `v1.10.X` TO `v1.11.0`
 
+### Drop support for PHP 7.4
+
+Due to the drop of support PHP `7.4` Sylius also will not support it since version `1.11`.
+
 ### Potential BC-break
 
 In Sylius we are using WinzouStateMachine where as example `sylius_order` state machine has declared 14 callbacks on one state.
