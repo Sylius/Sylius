@@ -6,6 +6,7 @@ sylius:
         catalog_promotion:
             description: Beskrivning
             name: Namn
+            priority: Prioritet
         promotion:
             actions: Åtgärder
             add_action: Lägg till åtgärd

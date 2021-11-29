@@ -6,6 +6,7 @@ sylius:
         catalog_promotion:
             description: Описание
             name: Име
+            priority: Приоритет
         promotion:
             actions: Действия
             add_action: Добавяне на действие

@@ -6,6 +6,7 @@ sylius:
         catalog_promotion:
             description: คำอธิบาย
             name: ชื่อภาษา
+            priority: ระดับความสำคัญ
         promotion:
             actions: ดำเนินการ
             add_action: เพิ่มการลดราคา

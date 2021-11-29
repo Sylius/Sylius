@@ -6,6 +6,7 @@ sylius:
         catalog_promotion:
             description: Përshkrimi
             name: Emri
+            priority: Përparësia
         promotion:
             actions: Veprimet
             add_action: Shto veprim

@@ -6,6 +6,7 @@ sylius:
         catalog_promotion:
             description: Keterangan
             name: Nama
+            priority: Prioritas
         promotion:
             actions: Tindakan
             add_action: Tambahkan tindakan

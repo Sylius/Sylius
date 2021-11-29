@@ -6,6 +6,7 @@ sylius:
         catalog_promotion:
             description: 描述
             name: 名称
+            priority: 优先级
         promotion:
             actions: 操作
             add_action: 添加操作

@@ -6,6 +6,7 @@ sylius:
         catalog_promotion:
             description: Beskrivelse
             name: Navn
+            priority: Prioritet
         promotion:
             actions: Handlinger
             add_action: Legg til handling

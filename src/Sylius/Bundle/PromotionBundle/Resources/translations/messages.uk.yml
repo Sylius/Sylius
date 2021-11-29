@@ -6,6 +6,7 @@ sylius:
         catalog_promotion:
             description: Опис
             name: Назва регіону
+            priority: Пріоритет
         promotion:
             actions: Дії
             add_action: Додати дію
