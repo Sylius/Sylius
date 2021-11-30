@@ -58,8 +58,18 @@ class UserLogin implements UserLoginInterface
 
     protected function createToken(UserInterface $user, string $firewallName): UsernamePasswordToken
     {
+        /** @deprecated parameter credential was deprecated in Symfony 5.4, so in Sylius 1.11 too, in Sylius 2.0 providing 4 arguments will be prohibited. */
+        if (3 === (new \ReflectionClass(UsernamePasswordToken::class))->getConstructor()->getNumberOfParameters()) {
+            return new UsernamePasswordToken(
+                $user,
+                $firewallName,
+                array_map(/** @param object|string $role */ static function ($role): string { return (string) $role; }, $user->getRoles())
+            );
+        }
+
         return new UsernamePasswordToken(
             $user,
+            null,
             $firewallName,
             array_map(/** @param object|string $role */ static function ($role): string { return (string) $role; }, $user->getRoles())
         );
