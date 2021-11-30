@@ -37,7 +37,7 @@ final class AddressItemExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         AdminUserInterface $admin,
         QueryNameGeneratorInterface $queryNameGenerator
-    ):void {
+    ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($admin);
@@ -62,7 +62,7 @@ final class AddressItemExtensionSpec extends ObjectBehavior
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
         QueryNameGeneratorInterface $queryNameGenerator
-    ):void {
+    ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);

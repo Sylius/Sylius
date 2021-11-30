@@ -51,7 +51,7 @@ final class CurrencyCollectionExtension implements ContextAwareQueryCollectionEx
         Assert::keyExists($context, ContextKeys::CHANNEL);
         $channel = $context[ContextKeys::CHANNEL];
 
-        if ($channel !== null && $channel->getCurrencies()->count() > 0) {
+        if ($channel->getCurrencies()->count() > 0) {
             $rootAlias = $queryBuilder->getRootAliases()[0];
             $queryBuilder
                 ->andWhere($rootAlias . '.id in (:currencies)')

@@ -49,7 +49,7 @@ final class CurrencyCollectionExtensionSpec extends ObjectBehavior
         AdminUserInterface $admin,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel
-    ):void {
+    ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($admin);
@@ -76,7 +76,7 @@ final class CurrencyCollectionExtensionSpec extends ObjectBehavior
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel,
         CurrencyInterface $currency
-    ):void {
+    ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn(null);

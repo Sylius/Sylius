@@ -303,3 +303,10 @@
      * `sylius.api.swagger_product_image_documentation_normalizer` => `Sylius\Bundle\ApiBundle\Swagger\ProductImageDocumentationNormalizer`
      * `sylius.api.swagger_product_variant_documentation_normalizer` => `Sylius\Bundle\ApiBundle\Swagger\ProductVariantDocumentationNormalizer`
      * `sylius.api.swagger_shipping_method_documentation_normalizer` => `Sylius\Bundle\ApiBundle\Swagger\ShippingMethodDocumentationNormalizer`
+
+1. Following Data Providers have been transformed to Doctrine Extensions:
+    * `Sylius\Bundle\ApiBundle\DataProvider\AddressItemDataProvider` => `Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\AddressItemExtension`
+    * `Sylius\Bundle\ApiBundle\DataProvider\CountryCollectionDataProvider` => `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\CountryCollectionExtension`
+    * `Sylius\Bundle\ApiBundle\DataProvider\CurrencyCollectionDataProvider` => `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\CurrencyCollectionExtension`
+    * `Sylius\Bundle\ApiBundle\DataProvider\LocaleCollectionDataProvider` => `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\LocaleCollectionExtension`
+    * `Sylius\Bundle\ApiBundle\DataProvider\TaxonCollectionDataProvider` => `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\TaxonCollectionExtension`
