@@ -45,6 +45,12 @@
                     <attribute name="groups">admin:order_item:read</attribute>
                 </attribute>
             </subresourceOperation>
+
+            <subresourceOperation name="api_orders_items_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:cart:read</attribute>
+                </attribute>
+            </subresourceOperation>
         </subresourceOperations>
 
         <property name="id" identifier="true" writable="false" />
