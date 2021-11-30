@@ -114,7 +114,7 @@ class ProductTaxonController extends ResourceController
      * @deprecated This function will be removed in Sylius 2.0, since Symfony 5.4, use explicit input sources instead
      * based on Symfony\Component\HttpFoundation\Request::get
      */
-    public function getParameterFromRequest(Request $request, string $key)
+    private function getParameterFromRequest(Request $request, string $key)
     {
         if ($request !== $result = $request->attributes->get($key, $request)) {
             return $result;
@@ -124,7 +124,7 @@ class ProductTaxonController extends ResourceController
             return $request->query->all()[$key];
         }
 
-        if ($request->request->has('key')) {
+        if ($request->request->has($key)) {
             return $request->request->all()[$key];
         }
 

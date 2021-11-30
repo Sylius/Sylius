@@ -33,14 +33,14 @@
         "php": "^8.0",
         "sylius/core-bundle": "^1.6",
         "sylius/ui-bundle": "^1.6",
-        "symfony/framework-bundle": "^4.4 || ^5.4.0-RC1",
+        "symfony/framework-bundle": "^4.4 || ^5.4",
         "twig/intl-extra": "^2.12",
         "twig/twig": "^2.12"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.0",
         "phpunit/phpunit": "^8.5",
-        "symfony/dependency-injection": "^4.4 || ^5.4.0-RC1"
+        "symfony/dependency-injection": "^4.4 || ^5.4"
     },
     "config": {
         "bin-dir": "bin"

@@ -1,5 +1,4 @@
 security:
-    always_authenticate_before_granting: true
     providers:
         sylius_admin_user_provider:
             id: sylius.admin_user_provider.email_or_name_based

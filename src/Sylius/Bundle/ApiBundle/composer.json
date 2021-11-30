@@ -28,7 +28,7 @@
         "api-platform/core": "^2.6",
         "lexik/jwt-authentication-bundle": "^2.6",
         "sylius/core-bundle": "^1.7",
-        "symfony/messenger": "^4.4 || ^5.4.0-RC1"
+        "symfony/messenger": "^4.4 || ^5.4"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.2",
@@ -36,9 +36,9 @@
         "nelmio/alice": "^3.8",
         "phpspec/phpspec": "^7.0",
         "phpunit/phpunit": "^8.5",
-        "symfony/browser-kit": "^4.4 || ^5.4.0-RC1",
-        "symfony/debug-bundle": "^4.4 || ^5.4.0-RC1",
-        "symfony/dotenv": "^4.4 || ^5.4.0-RC1",
+        "symfony/browser-kit": "^4.4 || ^5.4",
+        "symfony/debug-bundle": "^4.4 || ^5.4",
+        "symfony/dotenv": "^4.4 || ^5.4",
         "symfony/http-client": "^5.2",
         "theofidry/alice-data-fixtures": "^1.4"
     },
