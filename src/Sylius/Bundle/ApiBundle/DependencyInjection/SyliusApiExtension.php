@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
@@ -30,5 +31,11 @@ final class SyliusApiExtension extends Extension
         $container->setParameter('sylius_api.product_image_prefix', $config['product_image_prefix']);
 
         $loader->load('services.xml');
+
+        if (!$container->hasParameter('enable_swagger') || !$container->getParameter('enable_swagger')) {
+            return;
+        }
+
+        $loader->load('integrations/swagger.xml');
     }
 }

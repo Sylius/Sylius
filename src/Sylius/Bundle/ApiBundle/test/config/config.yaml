@@ -9,6 +9,11 @@ parameters:
     database_path: "%kernel.project_dir%/var/db.sql"
 
 api_platform:
+    enable_swagger_ui: false
+    enable_re_doc: false
+    enable_swagger: false
+    enable_entrypoint: false
+    enable_docs: false
     mapping:
         paths:
             - '%kernel.api_bundle_path%/Resources/config/api_resources'

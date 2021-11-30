@@ -39,33 +39,6 @@
             <argument type="service" id="request_stack" />
         </service>
 
-        <service id="api_platform.swagger.action.ui" class="Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Bundle\Action\SwaggerUiAction" public="true">
-            <argument type="service" id="api_platform.metadata.resource.name_collection_factory" />
-            <argument type="service" id="api_platform.metadata.resource.metadata_factory" />
-            <argument type="service" id="api_platform.serializer" />
-            <argument type="service" id="twig" />
-            <argument type="service" id="router" />
-            <argument>%api_platform.title%</argument>
-            <argument>%api_platform.description%</argument>
-            <argument>%api_platform.version%</argument>
-            <argument>%api_platform.formats%</argument>
-            <argument>%api_platform.oauth.enabled%</argument>
-            <argument>%api_platform.oauth.clientId%</argument>
-            <argument>%api_platform.oauth.clientSecret%</argument>
-            <argument>%api_platform.oauth.type%</argument>
-            <argument>%api_platform.oauth.flow%</argument>
-            <argument>%api_platform.oauth.tokenUrl%</argument>
-            <argument>%api_platform.oauth.authorizationUrl%</argument>
-            <argument>%api_platform.oauth.scopes%</argument>
-            <argument>%api_platform.show_webby%</argument>
-            <argument>%api_platform.enable_swagger_ui%</argument>
-            <argument>%api_platform.enable_re_doc%</argument>
-            <argument>%api_platform.graphql.enabled%</argument>
-            <argument>%api_platform.graphql.graphiql.enabled%</argument>
-            <argument>%api_platform.graphql.graphql_playground.enabled%</argument>
-            <argument>%api_platform.swagger.versions%</argument>
-        </service>
-
         <!--    TODO: Remove after bumping to Api Platform 3.0    -->
         <service id="api_platform.action.post_item" alias="api_platform.action.placeholder" public="true" />
 
