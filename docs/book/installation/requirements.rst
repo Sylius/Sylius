@@ -29,7 +29,7 @@ PHP required modules and configuration
 **PHP version**:
 
 +---------------+-----------------------+
-| PHP           | ^7.4|^8.0             |
+| PHP           | ^8.0                  |
 +---------------+-----------------------+
 
 **PHP extensions**:
