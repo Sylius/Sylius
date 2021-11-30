@@ -44,5 +44,7 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
+        <many-to-many field="channelPricings" target-entity="Sylius\Component\Core\Model\ChannelPricing"
+                      mapped-by="appliedPromotions"/>
     </mapped-superclass>
 </doctrine-mapping>
