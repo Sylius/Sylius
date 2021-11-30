@@ -52,9 +52,9 @@ final class ProductVariantCatalogPromotionsProcessorSpec extends ObjectBehavior
             $firstChannelPricing->getWrappedObject(),
             $secondChannelPricing->getWrappedObject(),
         ]));
-
-        $firstChannelPricing->getAppliedPromotions()->willReturn(['winter_sale' => ['en_US' => ['name' => 'Winter sale']]]);
-        $secondChannelPricing->getAppliedPromotions()->willReturn([]);
+        $catalogPromotion->getCode()->willReturn('winter_sale');
+        $firstChannelPricing->getAppliedPromotions()->willReturn(new ArrayCollection([$catalogPromotion->getWrappedObject()]));
+        $secondChannelPricing->getAppliedPromotions()->willReturn(new ArrayCollection());
 
         $catalogPromotionClearer->clearChannelPricing($firstChannelPricing)->shouldBeCalled();
         $catalogPromotionClearer->clearChannelPricing($secondChannelPricing)->shouldNotBeCalled();
@@ -78,8 +78,8 @@ final class ProductVariantCatalogPromotionsProcessorSpec extends ObjectBehavior
             $secondChannelPricing->getWrappedObject(),
         ]));
 
-        $firstChannelPricing->getAppliedPromotions()->willReturn([]);
-        $secondChannelPricing->getAppliedPromotions()->willReturn([]);
+        $firstChannelPricing->getAppliedPromotions()->willReturn(new ArrayCollection());
+        $secondChannelPricing->getAppliedPromotions()->willReturn(new ArrayCollection());
 
         $catalogPromotionClearer->clearChannelPricing($firstChannelPricing)->shouldNotBeCalled();
         $catalogPromotionClearer->clearChannelPricing($secondChannelPricing)->shouldNotBeCalled();

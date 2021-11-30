@@ -45,4 +45,13 @@ class CatalogPromotionRepository extends EntityRepository implements CatalogProm
             ->getResult()
         ;
     }
+
+    public function findAllHavingRelatedChannelPricings(): array
+    {
+        return $this->createQueryBuilder('catalogPromotion')
+            ->leftJoin('catalogPromotion.channelPricings', 'channelPricings')
+            ->andWhere('catalogPromotion.channelPricings IS NOT NULL')
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Processor;
 
 use SM\Factory\FactoryInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ChannelPricingRepositoryInterface;
@@ -40,18 +41,20 @@ final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
 
     public function clear(): void
     {
-        $appliedPromotionsCodes = [];
-        $channelPricings = $this->channelPricingRepository->findWithDiscountedPrice();
-        foreach ($channelPricings as $channelPricing) {
-            $appliedPromotionsCodes = array_unique(array_merge(
-                $appliedPromotionsCodes,
-                array_keys($channelPricing->getAppliedPromotions())
-            ));
+        $catalogPromotions = $this->catalogPromotionRepository->findAllHavingRelatedChannelPricings();
+//        $catalogPromotions = $this->catalogPromotionRepository->findByCodes($appliedPromotionsCodes);
 
+        $channelPricings = [];
+        /** @var CatalogPromotionInterface $catalogPromotion */
+        foreach($catalogPromotions as $catalogPromotion)
+        {
+            $channelPricings = array_merge($channelPricings, $catalogPromotion->getChannelPricings()->toArray());
+        }
+        // HAVE TO SET ORIGINAL PRICE TO NULL for each channel
+        foreach ($channelPricings as $channelPricing) {
             $this->clearChannelPricing($channelPricing);
         }
 
-        $catalogPromotions = $this->catalogPromotionRepository->findByCodes($appliedPromotionsCodes);
         foreach ($catalogPromotions as $catalogPromotion) {
             $stateMachine = $this->stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
             if ($stateMachine->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)) {
@@ -69,7 +72,7 @@ final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
 
     public function clearChannelPricing(ChannelPricingInterface $channelPricing): void
     {
-        if (empty($channelPricing->getAppliedPromotions())) {
+        if ($channelPricing->getAppliedPromotions()->isEmpty()) {
             return;
         }
 
