@@ -116,6 +116,8 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $order->getPromotionSubjectTotal()->willReturn(10000);
 
         $distributor->distribute([200, 800], -1000)->willReturn([-200, -800]);
+
+        $distributor->distribute([800], -900)->willReturn([-800]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-100, -800])->shouldBeCalled();
 
         $this->execute($order, ['percentage' => 0.1], $promotion)->shouldReturn(true);

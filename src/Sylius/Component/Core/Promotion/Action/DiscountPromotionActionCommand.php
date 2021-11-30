@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Promotion\Action;
 
+use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
@@ -58,18 +59,30 @@ abstract class DiscountPromotionActionCommand implements PromotionActionCommandI
     protected function distributeWithMinimumPrice(array $splitPromotion, array $itemTotals, array $minimumPrices): array
     {
         $promotionAmountLeft = 0;
-        foreach ($splitPromotion as $key => $splitPromotionAmount) {
-            $splitPromotion[$key] += $promotionAmountLeft;
+        $distributed = [];
+        $toDistribute = [];
 
-            if ($itemTotals[$key] + $splitPromotion[$key] < $minimumPrices[$key]) {
+        foreach ($splitPromotion as $key => $splitPromotionAmount) {
+            if ($itemTotals[$key] + $splitPromotionAmount < $minimumPrices[$key] && $minimumPrices[$key] > 0) {
                 $availableAmount = $itemTotals[$key] - $minimumPrices[$key];
                 $splitPromotion[$key] = -$availableAmount;
 
                 $promotionAmountLeft += ($splitPromotionAmount + $availableAmount);
             }
+
+            if ($minimumPrices[$key] === 0) {
+                $toDistribute[] = $itemTotals[$key];
+                $promotionAmountLeft += $splitPromotion[$key];
+            } else {
+                $distributed[] = $splitPromotion[$key];
+            }
         }
 
-        return $splitPromotion;
+        return [
+            'distributedPromotion' => $distributed,
+            'toDistribute' => $toDistribute,
+            'amountLeft' => $promotionAmountLeft
+        ];
     }
 
     private function removeUnitOrderPromotionAdjustmentsByOrigin(

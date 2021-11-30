@@ -13,6 +13,7 @@ Feature: Receiving discounts with product minimum price specified
         And the store has a "T-Shirt" configurable product
         And this product has "PHP T-Shirt" variant priced at "$50.00"
         And the "PHP T-Shirt" variant has minimum price "$45.00" in "United States" channel
+        And the store has a product "Symfony Mug" priced at "$40.00"
         And the store has a product "PHP Mug" priced at "$20.00"
         And there is a promotion "Christmas sale"
 
@@ -102,3 +103,16 @@ Feature: Receiving discounts with product minimum price specified
         Then I should be on the checkout summary step
         And the "T-Shirt" product should have unit prices discounted by "$5.00" and "$5.00"
         And the "PHP Mug" product should have unit prices discounted by "$3.34", "$3.33" and "$3.33"
+
+    @api
+    Scenario: Distributing discount proportionally between different products when one has minimum price specified
+        Given it gives "$27" discount to every order
+        And I add 2 products "T-Shirt" to the cart
+        And I add 2 products "PHP Mug" to the cart
+        And I add product "Symfony Mug" to the cart
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I proceed with "Free" shipping method and "Offline" payment
+        Then I should be on the checkout summary step
+        And the "T-Shirt" product should have unit prices discounted by "$5.00" and "$5.00"
+        And the "PHP Mug" product should have unit prices discounted by "$4.25" and "$4.25"
+        And the "Symfony Mug" product should have unit price discounted by "$8.5"

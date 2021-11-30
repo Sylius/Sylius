@@ -129,6 +129,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $secondItem->getQuantity()->willReturn(1);
 
         $proportionalIntegerDistributor->distribute([6000, 4000], -1000)->willReturn([-400, -600]);
+        $proportionalIntegerDistributor->distribute([4000], -800)->willReturn([-800]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-200, -800])->shouldBeCalled();
 
         $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(true);
