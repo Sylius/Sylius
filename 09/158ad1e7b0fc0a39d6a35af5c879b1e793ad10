@@ -1,0 +1,29 @@
+---------------------------------------------------------------------------
+
+by soyuka at 2021-11-29T10:26:18Z
+
+Hi, what's the reasoning behind this? In my opinion the provider is the place to fetch data. Maybe that by decorating our provider you should find an in-between solution? On top of that the "Extension" part is quite doctrine-specific and its implementation is, in my opinion, not the cleanest. I'd really suggest not to use it for the use case I see in this PR.
+
+---------------------------------------------------------------------------
+
+by paullla at 2021-11-29T10:31:55Z
+
+@soyuka when using data providers we are not able to use filters and doctrine extensions for that endpoint. Is there a way to make it happen with data providers?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-11-29T11:22:40Z
+
+Hey @soyuka, I had the impression that with data providers we are short-cutting api platform logic. When one would like to take advantage of limiting functionalities, filters etc. These changes seems to bring our solution closer to yours
+
+---------------------------------------------------------------------------
+
+by soyuka at 2021-11-29T13:05:22Z
+
+I read the code again and indeed I understand. My bad the code is fine, the PR should be named differently though ^^. The goal here is to add a doctrine extension point (for example add a WHERE clause on the country if needed). This is better indeed!
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-11-30T08:01:13Z
+
+Thank you, Paula! :1st_place_medal:
