@@ -28,11 +28,20 @@ class CatalogPromotion extends BaseCatalogPromotion implements CatalogPromotionI
      */
     protected Collection $channels;
 
+    /**
+     * @var Collection<array-key, ChannelInterface>
+     *
+     * @psalm-var Collection<array-key, ChannelInterface>
+     */
+    protected Collection $channelPricings;
+
+
     public function __construct()
     {
         parent::__construct();
 
         $this->channels = new ArrayCollection();
+        $this->channelPricings = new ArrayCollection();
     }
 
     /**
@@ -60,6 +69,30 @@ class CatalogPromotion extends BaseCatalogPromotion implements CatalogPromotionI
     {
         if ($this->hasChannel($channel)) {
             $this->channels->removeElement($channel);
+        }
+    }
+
+    public function getChannelPricings(): Collection
+    {
+        return $this->channelPricings;
+    }
+
+    public function hasChannelPricing(ChannelPricingInterface $channelPricing): bool
+    {
+        return $this->channelPricings->contains($channelPricing);
+    }
+
+    public function addChannelPricing(ChannelPricingInterface $channelPricing): void
+    {
+        if (!$this->hasChannelPricing($channelPricing)) {
+            $this->channelPricings->add($channelPricing);
+        }
+    }
+
+    public function removeChannelPricing(ChannelPricingInterface $channelPricing): void
+    {
+        if ($this->hasChannelPricing($channelPricing)) {
+            $this->channelPricings->removeElement($channelPricing);
         }
     }
 

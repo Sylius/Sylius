@@ -46,15 +46,15 @@ final class ProductVariantCatalogPromotionsProcessor implements ProductVariantCa
 
     private function reapplyOnChannelPricing(ChannelPricingInterface $channelPricing): void
     {
+        /** @var CatalogPromotionInterface[] $appliedPromotions */
         $appliedPromotions = $channelPricing->getAppliedPromotions();
-        if (empty($appliedPromotions)) {
+        if ($appliedPromotions->isEmpty()) {
             return;
         }
-
         $this->catalogPromotionClearer->clearChannelPricing($channelPricing);
-        foreach ($appliedPromotions as $promotionCode => $promotionData) {
+        foreach ($appliedPromotions as $appliedPromotion) {
             /** @var CatalogPromotionInterface|null $catalogPromotion */
-            $catalogPromotion = $this->catalogPromotionRepository->findOneBy(['code' => $promotionCode, 'enabled' => true]);
+            $catalogPromotion = $this->catalogPromotionRepository->findOneBy(['code' => $appliedPromotion->getCode(), 'enabled' => true]);
             if ($catalogPromotion === null) {
                 continue;
             }

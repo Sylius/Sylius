@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -71,9 +72,10 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
             unset($data['originalPrice']);
         }
 
+        /** @var ArrayCollection $appliedPromotions */
         $appliedPromotions = $object->getAppliedPromotionsForChannel($channel);
-        if (!empty($appliedPromotions)) {
-            $data['appliedPromotions'] = $appliedPromotions;
+        if (!$appliedPromotions->isEmpty()) {
+            $data['appliedPromotions'] = $appliedPromotions->toArray();
         }
 
         $data['inStock'] = $this->availabilityChecker->isStockAvailable($object);

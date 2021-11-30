@@ -8,5 +8,5 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 
 interface AppliedPromotionInformationFormatterInterface
 {
-    public function format(CatalogPromotionInterface $catalogPromotion): array;
+    public function format(CatalogPromotionInterface $catalogPromotion): CatalogPromotionInterface;
 }

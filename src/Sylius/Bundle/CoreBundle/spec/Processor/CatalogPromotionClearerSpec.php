@@ -55,16 +55,17 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
             $secondChannelPricing->getWrappedObject(),
         ]);
 
-        $firstChannelPricing->getAppliedPromotions()->willReturn(['winter_sale' => ['en_US' => ['name' => 'Winter sale']]]);
+        $firstChannelPricing->getAppliedPromotions()->willReturn(new ArrayCollection([$catalogPromotion->getWrappedObject()]));
         $firstChannelPricing->getOriginalPrice()->willReturn(1000);
         $firstChannelPricing->setPrice(1000)->shouldBeCalled();
         $firstChannelPricing->clearAppliedPromotions()->shouldBeCalled();
 
-        $secondChannelPricing->getAppliedPromotions()->willReturn([]);
+        $secondChannelPricing->getAppliedPromotions()->willReturn(new ArrayCollection());
         $secondChannelPricing->getOriginalPrice()->shouldNotBeCalled();
         $secondChannelPricing->clearAppliedPromotions()->shouldNotBeCalled();
 
-        $catalogPromotionRepository->findByCodes(['winter_sale'])->willReturn([$catalogPromotion]);
+        $catalogPromotionRepository->findAllHavingRelatedChannelPricings()->willReturn([$catalogPromotion]);
+        $catalogPromotion->getChannelPricings()->willReturn(new ArrayCollection([$firstChannelPricing->getWrappedObject(), $secondChannelPricing->getWrappedObject()]));
 
         $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
         $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->willReturn(true);
@@ -76,19 +77,20 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
     function it_clears_given_variant_with_catalog_promotions_applied(
         ProductVariantInterface $variant,
         ChannelPricingInterface $firstChannelPricing,
-        ChannelPricingInterface $secondChannelPricing
+        ChannelPricingInterface $secondChannelPricing,
+        CatalogPromotionInterface $catalogPromotion
     ): void {
         $variant->getChannelPricings()->willReturn(new ArrayCollection([
             $firstChannelPricing->getWrappedObject(),
             $secondChannelPricing->getWrappedObject(),
         ]));
 
-        $firstChannelPricing->getAppliedPromotions()->willReturn(['winter_sale' => ['en_US' => ['name' => 'Winter sale']]]);
+        $firstChannelPricing->getAppliedPromotions()->willReturn(new ArrayCollection([$catalogPromotion]));
         $firstChannelPricing->getOriginalPrice()->willReturn(1000);
         $firstChannelPricing->setPrice(1000)->shouldBeCalled();
         $firstChannelPricing->clearAppliedPromotions()->shouldBeCalled();
 
-        $secondChannelPricing->getAppliedPromotions()->willReturn([]);
+        $secondChannelPricing->getAppliedPromotions()->willReturn(new ArrayCollection());
         $secondChannelPricing->getOriginalPrice()->shouldNotBeCalled();
         $secondChannelPricing->clearAppliedPromotions()->shouldNotBeCalled();
 
@@ -96,9 +98,10 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
     }
 
     function it_clears_given_channel_pricing_with_catalog_promotions_applied(
-        ChannelPricingInterface $channelPricing
+        ChannelPricingInterface $channelPricing,
+        CatalogPromotionInterface $catalogPromotion
     ): void {
-        $channelPricing->getAppliedPromotions()->willReturn(['winter_sale' => ['en_US' => ['name' => 'Winter sale']]]);
+        $channelPricing->getAppliedPromotions()->willReturn(new ArrayCollection([$catalogPromotion]));
         $channelPricing->getOriginalPrice()->willReturn(1000);
         $channelPricing->setPrice(1000)->shouldBeCalled();
         $channelPricing->clearAppliedPromotions()->shouldBeCalled();
@@ -107,9 +110,10 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
     }
 
     function it_does_not_copy_update_price_when_original_price_is_null(
-        ChannelPricingInterface $channelPricing
+        ChannelPricingInterface $channelPricing,
+        CatalogPromotionInterface $catalogPromotion
     ): void {
-        $channelPricing->getAppliedPromotions()->willReturn(['winter_sale' => ['en_US' => ['name' => 'Winter sale']]]);
+        $channelPricing->getAppliedPromotions()->willReturn(new ArrayCollection([$catalogPromotion]));
         $channelPricing->getOriginalPrice()->willReturn(null);
         $channelPricing->setPrice(Argument::any())->shouldNotBeCalled();
         $channelPricing->clearAppliedPromotions()->shouldBeCalled();

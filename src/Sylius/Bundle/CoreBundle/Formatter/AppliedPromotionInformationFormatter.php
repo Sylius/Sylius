@@ -18,7 +18,7 @@ use Sylius\Component\Promotion\Model\CatalogPromotionTranslationInterface;
 
 final class AppliedPromotionInformationFormatter implements AppliedPromotionInformationFormatterInterface
 {
-    public function format(CatalogPromotionInterface $catalogPromotion): array
+    public function format(CatalogPromotionInterface $catalogPromotion): CatalogPromotionInterface
     {
         $translationLabels = [];
 
@@ -27,12 +27,7 @@ final class AppliedPromotionInformationFormatter implements AppliedPromotionInfo
             $translationLabels[$translation->getLocale()] = ['name' => $translation->getLabel(), 'description' => $translation->getDescription()];
         }
 
-        /** @var string $code */
-        $code = $catalogPromotion->getCode();
 
-        return [$code => [
-            'is_exclusive' => $catalogPromotion->isExclusive(),
-            'translations' => $translationLabels
-        ]];
+        return $catalogPromotion;
     }
 }
