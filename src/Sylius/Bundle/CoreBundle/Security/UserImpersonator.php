@@ -42,7 +42,6 @@ final class UserImpersonator implements UserImpersonatorInterface
     {
         $token = new UsernamePasswordToken(
             $user,
-            $user->getPassword(),
             $this->firewallContextName,
             array_map(/** @param object|string $role */ static function ($role): string { return (string) $role; }, $user->getRoles())
         );

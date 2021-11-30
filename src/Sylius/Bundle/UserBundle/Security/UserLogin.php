@@ -60,7 +60,6 @@ class UserLogin implements UserLoginInterface
     {
         return new UsernamePasswordToken(
             $user,
-            null,
             $firewallName,
             array_map(/** @param object|string $role */ static function ($role): string { return (string) $role; }, $user->getRoles())
         );
