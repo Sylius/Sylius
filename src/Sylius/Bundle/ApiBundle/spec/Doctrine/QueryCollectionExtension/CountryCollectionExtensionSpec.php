@@ -35,8 +35,7 @@ final class CountryCollectionExtensionSpec extends ObjectBehavior
     function it_throws_an_exception_if_context_has_not_channel(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
-    ): void
-    {
+    ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, CountryInterface::class, 'get', []])
@@ -76,7 +75,7 @@ final class CountryCollectionExtensionSpec extends ObjectBehavior
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel,
         CountryInterface $country
-    ):void {
+    ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn(null);

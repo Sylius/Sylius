@@ -48,7 +48,7 @@ final class LocaleCollectionExtensionSpec extends ObjectBehavior
         AdminUserInterface $admin,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel
-    ):void {
+    ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($admin);
@@ -75,7 +75,7 @@ final class LocaleCollectionExtensionSpec extends ObjectBehavior
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel,
         LocaleInterface $locale
-    ):void {
+    ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn(null);
