@@ -15,7 +15,7 @@ namespace Sylius\Tests\Api\Shop;
 
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
-use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
+use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Core\Model\Address;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,9 +49,9 @@ final class OrdersTest extends JsonApiTestCase
         $address->setCountryCode('US');
         $address->setPostcode('90000');
 
-        $addressOrderCommand = new AddressOrder('sylius@example.com', $address);
-        $addressOrderCommand->setOrderTokenValue($tokenValue);
-        $commandBus->dispatch($addressOrderCommand);
+        $updateCartCommand = new UpdateCart('sylius@example.com', $address);
+        $updateCartCommand->setOrderTokenValue($tokenValue);
+        $commandBus->dispatch($updateCartCommand);
 
         $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
