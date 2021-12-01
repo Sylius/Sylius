@@ -135,7 +135,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements(): array
     {
         return [
-            'apply_on_discounted' => '#sylius_promotion_applyOnDiscounted',
+            'applicable_on_discounted' => '#sylius_promotion_applicableOnDiscounted',
             'code' => '#sylius_promotion_code',
             'coupon_based' => '#sylius_promotion_couponBased',
             'ends_at' => '#sylius_promotion_endsAt',

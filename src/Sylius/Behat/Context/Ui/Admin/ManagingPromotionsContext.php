@@ -384,7 +384,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function thePromotionShouldNotBeApplicableOnDiscountedItems(PromotionInterface $promotion): void
     {
-        $this->assertIfFieldIsFalse($promotion, 'apply_on_discounted');
+        $this->assertIfFieldIsFalse($promotion, 'applicable_on_discounted');
     }
 
     /**

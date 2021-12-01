@@ -14,18 +14,18 @@ final class Version20211125122631 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Add \'apply on discounted\' toggle to promotion';
+        return 'Add \'applicable on discounted\' toggle to promotion';
     }
 
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE sylius_promotion ADD apply_on_discounted TINYINT(1) DEFAULT \'0\' NOT NULL');
+        $this->addSql('ALTER TABLE sylius_promotion ADD applicable_on_discounted TINYINT(1) DEFAULT \'1\' NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE sylius_promotion DROP apply_on_discounted');
+        $this->addSql('ALTER TABLE sylius_promotion DROP applicable_on_discounted');
     }
 }

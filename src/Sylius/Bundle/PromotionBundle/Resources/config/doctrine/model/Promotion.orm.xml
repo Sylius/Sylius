@@ -29,9 +29,9 @@
         <field name="couponBased" column="coupon_based" type="boolean" />
         <field name="startsAt" column="starts_at" type="datetime" nullable="true"/>
         <field name="endsAt" column="ends_at" type="datetime" nullable="true"/>
-        <field name="applyOnDiscounted" column="apply_on_discounted" type="boolean">
+        <field name="applicableOnDiscounted" column="applicable_on_discounted" type="boolean">
             <options>
-                <option name="default">0</option>
+                <option name="default">1</option>
             </options>
         </field>
 

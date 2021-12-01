@@ -38,7 +38,7 @@
             <group>admin:promotion:read</group>
         </attribute>
 
-        <attribute name="applyOnDiscounted">
+        <attribute name="applicableOnDiscounted">
             <group>admin:promotion:read</group>
             <group>admin:promotion:create</group>
         </attribute>

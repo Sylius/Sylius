@@ -17,7 +17,7 @@ sylius:
             actions: Actions
             add_action: Add action
             add_rule: Add rule
-            apply_on_discounted: Apply on discounted
+            applicable_on_discounted: Applicable on discounted
             coupon_based: Coupon based
             description: Description
             ends_at: Ends at
