@@ -29,9 +29,9 @@ class CatalogPromotion extends BaseCatalogPromotion implements CatalogPromotionI
     protected Collection $channels;
 
     /**
-     * @var Collection<array-key, ChannelInterface>
+     * @var Collection<array-key, ChannelPricingInterface>
      *
-     * @psalm-var Collection<array-key, ChannelInterface>
+     * @psalm-var Collection<array-key, ChannelPricingInterface>
      */
     protected Collection $channelPricings;
 
