@@ -24,3 +24,15 @@ sylius_admin_catalog_promotion_show:
             section: admin
             template: "@SyliusAdmin/CatalogPromotion/show.html.twig"
             permission: true
+            
+sylius_admin_catalog_promotion_show_product_variants_with_applied_promo:
+    path: /catalog-promotions/{id}/product-variants
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_variant:indexAction
+        _sylius:
+            section: admin
+            permission: true
+            grid: sylius_admin_catalog_promotion_product_variant_list
+            #TODO
+            template: "@SyliusAdmin/Product/index.html.twig"

@@ -55,3 +55,19 @@ sylius_grid:
                         type: show
                     update:
                         type: update
+        sylius_admin_catalog_promotion_product_variant_list:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product_variant.class%"
+                    repository:
+                        method: findByCatalogPromotion
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                    sortable: ~
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    sortable: ~
