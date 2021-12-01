@@ -97,7 +97,7 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
         }
 
         $channelPricing->setPrice($price);
-        $channelPricing->addAppliedPromotion($this->appliedPromotionInformationFormatter->format($catalogPromotion));
+        $channelPricing->addAppliedPromotion($catalogPromotion);
     }
 
     private function hasCatalogPromotionChannelWithCode(

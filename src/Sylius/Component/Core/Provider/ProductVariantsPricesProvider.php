@@ -62,8 +62,8 @@ final class ProductVariantsPricesProvider implements ProductVariantsPricesProvid
         }
 
         $appliedPromotions = $variant->getAppliedPromotionsForChannel($channel);
-        if (!empty($appliedPromotions)) {
-            $optionMap['applied_promotions'] = $appliedPromotions;
+        if (!$appliedPromotions->isEmpty()) {
+            $optionMap['applied_promotions'] = $appliedPromotions->toArray();
         }
 
         return $optionMap;

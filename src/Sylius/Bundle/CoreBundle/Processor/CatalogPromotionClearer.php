@@ -40,19 +40,15 @@ final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
 
     public function clear(): void
     {
-        $appliedPromotionsCodes = [];
-        $channelPricings = $this->channelPricingRepository->findWithDiscountedPrice();
+        $appliedPromotions = [];
+        $channelPricings = $this->catalogPromotionRepository->findBy( );
+        /** @var ChannelPricingInterface $channelPricing */
         foreach ($channelPricings as $channelPricing) {
-            $appliedPromotionsCodes = array_unique(array_merge(
-                $appliedPromotionsCodes,
-                array_keys($channelPricing->getAppliedPromotions())
-            ));
-
+            $appliedPromotions[] = $channelPricing->getAppliedPromotions();
             $this->clearChannelPricing($channelPricing);
         }
 
-        $catalogPromotions = $this->catalogPromotionRepository->findByCodes($appliedPromotionsCodes);
-        foreach ($catalogPromotions as $catalogPromotion) {
+        foreach ($appliedPromotions as $catalogPromotion) {
             $stateMachine = $this->stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
             if ($stateMachine->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)) {
                 $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE);
@@ -69,7 +65,7 @@ final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
 
     public function clearChannelPricing(ChannelPricingInterface $channelPricing): void
     {
-        if (empty($channelPricing->getAppliedPromotions())) {
+        if ($channelPricing->getAppliedPromotions()->isEmpty()) {
             return;
         }
 

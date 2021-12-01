@@ -72,8 +72,8 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         }
 
         $appliedPromotions = $object->getAppliedPromotionsForChannel($channel);
-        if (!empty($appliedPromotions)) {
-            $data['appliedPromotions'] = $appliedPromotions;
+        if (!$appliedPromotions->isEmpty()) {
+            $data['appliedPromotions'] = $appliedPromotions->toArray();
         }
 
         $data['inStock'] = $this->availabilityChecker->isStockAvailable($object);

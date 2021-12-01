@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
@@ -82,7 +83,7 @@ final class OrderItemNormalizerSpec extends ObjectBehavior
 
         $orderItem->getVariant()->willReturn($variant);
 
-        $variant->getAppliedPromotionsForChannel($channel)->willReturn([]);
+        $variant->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
         $variant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
 
         $channelPricing->getOriginalPrice()->willReturn(20);

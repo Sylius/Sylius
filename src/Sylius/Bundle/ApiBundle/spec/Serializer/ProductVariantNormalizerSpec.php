@@ -20,11 +20,13 @@ use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 final class ProductVariantNormalizerSpec extends ObjectBehavior
 {
@@ -85,7 +87,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(1000);
         $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willReturn(1000);
 
-        $variant->getAppliedPromotionsForChannel($channel)->willReturn([]);
+        $variant->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
 
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 
@@ -108,7 +110,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(500);
         $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willReturn(1000);
 
-        $variant->getAppliedPromotionsForChannel($channel)->willReturn([]);
+        $variant->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
 
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 
@@ -121,7 +123,8 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         AvailabilityCheckerInterface $availabilityChecker,
         NormalizerInterface $normalizer,
         ChannelInterface $channel,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
+        CatalogPromotionInterface $winterCatalogPromotion
     ): void {
         $this->setNormalizer($normalizer);
 
@@ -131,13 +134,13 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(500);
         $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willReturn(1000);
 
-        $variant->getAppliedPromotionsForChannel($channel)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
+        $variant->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([$winterCatalogPromotion->getWrappedObject()]));
 
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 
         $this
             ->normalize($variant)
-            ->shouldReturn(['price' => 500, 'originalPrice' => 1000, 'appliedPromotions' => ['winter_sale' => ['name' => 'Winter sale']], 'inStock' => true])
+            ->shouldReturn(['price' => 500, 'originalPrice' => 1000, 'appliedPromotions' => [$winterCatalogPromotion], 'inStock' => true])
         ;
     }
 
@@ -157,7 +160,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willThrow(ChannelNotFoundException::class);
         $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willThrow(ChannelNotFoundException::class);
 
-        $variant->getAppliedPromotionsForChannel($channel)->willReturn([]);
+        $variant->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
 
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 

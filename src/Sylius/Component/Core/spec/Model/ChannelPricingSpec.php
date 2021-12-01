@@ -13,12 +13,20 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 
 final class ChannelPricingSpec extends ObjectBehavior
 {
+
+    function it_should_return_collection(): void
+    {
+        $this->getAppliedPromotions()->shouldHaveType(ArrayCollection::class);
+    }
+
     function it_implements_channel_pricing_interface(): void
     {
         $this->shouldImplement(ChannelPricingInterface::class);
@@ -80,32 +88,45 @@ final class ChannelPricingSpec extends ObjectBehavior
         $this->isPriceReduced()->shouldReturn(false);
     }
 
-    function it_can_have_promotions_applied(): void
+    function it_can_have_multiple_promotions_applied(
+        CatalogPromotionInterface $first,
+        CatalogPromotionInterface $second
+    ): void
     {
-        $this->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']]);
-        $this->addAppliedPromotion(['extra_sale' => ['name' => 'Extra sale']]);
-        $this->getAppliedPromotions()->shouldReturn([
-            'winter_sale' => ['name' => 'Winter sale'],
-            'extra_sale' => ['name' => 'Extra sale'],
-        ]);
+        $this->addAppliedPromotion($first);
+        $this->addAppliedPromotion($second);
 
-        $this->removeAppliedPromotion('winter_sale');
-        $this->getAppliedPromotions()->shouldReturn([
-            'extra_sale' => ['name' => 'Extra sale'],
-        ]);
+        $this->getAppliedPromotions()->shouldBeLike(new ArrayCollection([
+            $first->getWrappedObject(),
+            $second->getWrappedObject()
+        ]));
     }
 
-    function it_has_information_about_applied_exclusive_catalog_promotion_applied(): void
+    function it_has_information_about_applied_exclusive_catalog_promotion_applied(CatalogPromotionInterface $catalogPromotion): void
     {
-        $this->addAppliedPromotion(['winter_sale' => ['is_exclusive' => true, 'translations' => ['name' => 'Winter sale']]]);
+        $catalogPromotion->isExclusive()->willReturn(true);
+        $this->addAppliedPromotion($catalogPromotion);
         $this->hasExclusiveCatalogPromotionApplied()->shouldReturn(true);
     }
 
-    function it_can_clear_applied_promotions(): void
+    function it_can_clear_applied_promotions(CatalogPromotionInterface $catalogPromotion): void
     {
-        $this->addAppliedPromotion(['winter_sale' => ['name' => 'Winter sale']]);
+        $this->addAppliedPromotion($catalogPromotion);
         $this->clearAppliedPromotions();
-        $this->getAppliedPromotions()->shouldReturn([]);
-        $this->hasExclusiveCatalogPromotionApplied()->shouldReturn(false);
+        $this->getAppliedPromotions()->shouldHaveCount(0);
+    }
+
+    function it_can_remove_applied_promotion(
+        CatalogPromotionInterface $first,
+        CatalogPromotionInterface $second
+    )
+    {
+        $this->addAppliedPromotion($first);
+        $this->addAppliedPromotion($second);
+
+        $this->removeAppliedPromotion($second);
+        $this->getAppliedPromotions()->shouldBeLike(new ArrayCollection([
+            $first->getWrappedObject()
+        ]));
     }
 }
