@@ -73,6 +73,7 @@ final class PromotionContext implements Context
 
     /**
      * @Given there is (also) a promotion :name
+     * @Given there is a promotion :name that is applicable to discounted products
      * @Given there is a promotion :name identified by :code code
      */
     public function thereIsPromotion(string $name, ?string $code = null): void
@@ -172,6 +173,19 @@ final class PromotionContext implements Context
 
         $this->sharedStorage->set('promotion', $promotion);
         $this->sharedStorage->set('coupon', $coupon);
+    }
+
+    /**
+     * @Given there is a promotion :name that is not applicable to discounted products
+     */
+    public function thereIsAPromotionThatIsNotApplicableToDiscountedProducts(string $name): void
+    {
+        $promotion = $this->createPromotion($name);
+        $promotion->setApplicableOnDiscounted(false);
+
+        $this->promotionRepository->add($promotion);
+
+        $this->sharedStorage->set('promotion', $promotion);
     }
 
     /**

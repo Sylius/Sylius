@@ -307,6 +307,7 @@ final class CartContext implements Context
     /**
      * @Then /^my (cart)'s total should be ("[^"]+")$/
      * @Then /^my (cart) total should be ("[^"]+")$/
+     * @Then /^the (cart) total should be ("[^"]+")$/
      */
     public function myCartSTotalShouldBe(string $tokenValue, int $total): void
     {
@@ -397,6 +398,7 @@ final class CartContext implements Context
 
     /**
      * @Then /^I should see(?:| also) "([^"]+)" with discounted unit price ("[^"]+") in my cart$/
+     * @Then /^the product "([^"]+)" should have discounted unit price ("[^"]+") in the cart$/
      */
     public function iShouldSeeProductWithDiscountedUnitPriceInMyCart(string $productName, int $discountedUnitPrice): void
     {
