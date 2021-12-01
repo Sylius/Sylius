@@ -45,9 +45,11 @@ final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollection
         }
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
+        $stateParameterName = $queryNameGenerator->generateParameterName('state');
+
         $queryBuilder
-            ->andWhere(sprintf('%s.state != :state', $rootAlias))
-            ->setParameter('state', OrderInterface::STATE_CART)
+            ->andWhere(sprintf('%s.state != :%s', $rootAlias, $stateParameterName))
+            ->setParameter($stateParameterName, OrderInterface::STATE_CART)
         ;
 
         $user = $this->userContext->getUser();
@@ -60,9 +62,11 @@ final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollection
             /** @var CustomerInterface $customer */
             $customer = $user->getCustomer();
 
+            $customerParameterName = $queryNameGenerator->generateParameterName('customer');
+
             $queryBuilder
-                ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
-                ->setParameter('customer', $customer)
+                ->andWhere(sprintf('%s.customer = :%s', $rootAlias, $customerParameterName))
+                ->setParameter($customerParameterName, $customer)
             ;
 
             return;

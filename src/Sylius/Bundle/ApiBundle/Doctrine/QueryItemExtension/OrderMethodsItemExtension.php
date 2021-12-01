@@ -56,20 +56,20 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
         $user = $this->userContext->getUser();
 
         if ($user === null) {
-            $this->applyForVisitor($queryBuilder, $rootAlias, $operationName);
+            $this->applyForVisitor($queryBuilder, $queryNameGenerator, $rootAlias, $operationName);
 
             return;
         }
 
         if ($user instanceof ShopUserInterface && in_array('ROLE_USER', $user->getRoles(), true)) {
-            $this->applyForShopUser($queryBuilder, $rootAlias, $operationName, $user);
+            $this->applyForShopUser($queryBuilder, $queryNameGenerator, $rootAlias, $operationName, $user);
 
             return;
         }
 
         if (
             $user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
-            $this->applyForAdminUser($queryBuilder, $rootAlias, $httpRequestMethodType);
+            $this->applyForAdminUser($queryBuilder, $queryNameGenerator, $rootAlias, $httpRequestMethodType);
 
             return;
         }
@@ -77,7 +77,7 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
         throw new AccessDeniedHttpException('Requested method is not allowed.');
     }
 
-    private function applyForVisitor(QueryBuilder $queryBuilder, string $rootAlias, string $operationName): void
+    private function applyForVisitor(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $rootAlias, string $operationName): void
     {
         $queryBuilder
             ->leftJoin(sprintf('%s.customer', $rootAlias), 'customer')
@@ -86,12 +86,13 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
         ;
 
         if ($operationName !== 'shop_select_payment_method') {
-            $this->filterCart($queryBuilder, $rootAlias);
+            $this->filterCart($queryBuilder, $queryNameGenerator, $rootAlias);
         }
     }
 
     private function applyForShopUser(
         QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
         string $rootAlias,
         string $operationName,
         ShopUserInterface $user
@@ -105,22 +106,24 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
             $operationName !== 'shop_select_payment_method' &&
             $operationName !== 'shop_account_change_payment_method'
         ) {
-            $this->filterCart($queryBuilder, $rootAlias);
+            $this->filterCart($queryBuilder, $queryNameGenerator, $rootAlias);
         }
     }
 
-    private function applyForAdminUser(QueryBuilder $queryBuilder, string $rootAlias, string $httpRequestMethodType): void
+    private function applyForAdminUser(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $rootAlias, string $httpRequestMethodType): void
     {
         if ($httpRequestMethodType === Request::METHOD_DELETE) {
-            $this->filterCart($queryBuilder, $rootAlias);
+            $this->filterCart($queryBuilder, $queryNameGenerator, $rootAlias);
         }
     }
 
-    private function filterCart(QueryBuilder $queryBuilder, string $rootAlias): void
+    private function filterCart(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $rootAlias): void
     {
+        $stateParameterName = $queryNameGenerator->generateParameterName('state');
+
         $queryBuilder
-            ->andWhere(sprintf('%s.state = :state', $rootAlias))
-            ->setParameter('state', OrderInterface::STATE_CART)
+            ->andWhere(sprintf('%s.state = :%s', $rootAlias, $stateParameterName))
+            ->setParameter($stateParameterName, OrderInterface::STATE_CART)
         ;
     }
 }

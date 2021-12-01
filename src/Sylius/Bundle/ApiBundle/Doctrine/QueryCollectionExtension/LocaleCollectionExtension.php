@@ -51,11 +51,13 @@ final class LocaleCollectionExtension implements ContextAwareQueryCollectionExte
         Assert::keyExists($context, ContextKeys::CHANNEL);
         $channel = $context[ContextKeys::CHANNEL];
 
+        $localesParameterName = $queryNameGenerator->generateParameterName('locales');
+
         if ($channel->getLocales()->count() > 0) {
             $rootAlias = $queryBuilder->getRootAliases()[0];
             $queryBuilder
-                ->andWhere($rootAlias . '.id in (:locales)')
-                ->setParameter('locales', $channel->getLocales());
+                ->andWhere(sprintf('%s.id in (:%s)', $rootAlias, $localesParameterName))
+                ->setParameter($localesParameterName, $channel->getLocales());
         }
     }
 }

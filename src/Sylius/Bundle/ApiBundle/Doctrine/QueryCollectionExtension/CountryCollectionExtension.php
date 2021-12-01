@@ -51,11 +51,13 @@ final class CountryCollectionExtension implements ContextAwareQueryCollectionExt
         Assert::keyExists($context, ContextKeys::CHANNEL);
         $channel = $context[ContextKeys::CHANNEL];
 
+        $countriesParameterName = $queryNameGenerator->generateParameterName('countries');
+
         if ($channel->getCountries()->count() > 0) {
             $rootAlias = $queryBuilder->getRootAliases()[0];
             $queryBuilder
-                ->andWhere($rootAlias.'.id in (:countries)' )
-                ->setParameter('countries', $channel->getCountries())
+                ->andWhere(sprintf('%s.id in (:%s)',$rootAlias, $countriesParameterName))
+                ->setParameter($countriesParameterName, $channel->getCountries())
             ;
         }
     }

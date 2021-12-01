@@ -45,9 +45,11 @@ final class AcceptedProductReviewsExtension implements ContextAwareQueryCollecti
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
 
+        $statusParameterName = $queryNameGenerator->generateParameterName('status');
+
         $queryBuilder
-            ->andWhere(sprintf('%s.status = :status', $rootAlias))
-            ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
+            ->andWhere(sprintf('%s.status = :%s', $rootAlias, $statusParameterName))
+            ->setParameter($statusParameterName, ReviewInterface::STATUS_ACCEPTED)
         ;
     }
 }

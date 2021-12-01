@@ -98,6 +98,9 @@ class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
         $userContext->getUser()->willReturn($user);
         $user->getRoles()->willReturn([]);
 
+        $queryNameGenerator->generateParameterName('channel')->shouldBeCalled()->willReturn('channel');
+        $queryNameGenerator->generateParameterName('localeCode')->shouldBeCalled()->willReturn('localeCode');
+
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->addSelect('translation')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :localeCode')->shouldBeCalled()->willReturn($queryBuilder);

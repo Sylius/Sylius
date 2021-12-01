@@ -65,6 +65,8 @@ class ProductsWithEnableFlagExtensionSpec extends ObjectBehavior
         $userContext->getUser()->willReturn($user);
         $user->getRoles()->willReturn([]);
 
+        $queryNameGenerator->generateParameterName('enabled')->shouldBeCalled()->willReturn('enabled');
+
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->andWhere('o.enabled = :enabled')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->setParameter('enabled', true)->shouldBeCalled()->willReturn($queryBuilder);
