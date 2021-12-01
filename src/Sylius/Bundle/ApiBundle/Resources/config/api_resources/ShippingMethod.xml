@@ -109,6 +109,14 @@
                     </attribute>
                 </attribute>
             </subresourceOperation>
+            <subresourceOperation name="api_shipments_methods_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>shop:shipping_method:read</attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
         </subresourceOperations>
 
         <property name="id" identifier="false" writable="false" />

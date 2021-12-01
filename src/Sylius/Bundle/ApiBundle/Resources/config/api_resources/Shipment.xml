@@ -70,9 +70,6 @@
             <subresourceOperation name="methods_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/shipments/{id}/methods</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">shop:shipment:read</attribute>
-                </attribute>
             </subresourceOperation>
         </subresourceOperations>
 
