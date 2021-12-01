@@ -88,9 +88,13 @@ final class ChannelPricingSpec extends ObjectBehavior
         $this->getAppliedPromotions()->shouldHaveType(ArrayCollection::class);
     }
 
-    function it_has_information_about_applied_exclusive_catalog_promotion_applied(): void
+    function it_has_information_about_applied_exclusive_catalog_promotion_applied(
+        CatalogPromotionInterface $catalogPromotion
+    ): void
     {
-        $this->addAppliedPromotion(['winter_sale' => ['is_exclusive' => true, 'translations' => ['name' => 'Winter sale']]]);
+        $catalogPromotion->isExclusive()->willReturn(true);
+
+        $this->addAppliedPromotion($catalogPromotion);
         $this->hasExclusiveCatalogPromotionApplied()->shouldReturn(true);
     }
 
@@ -126,7 +130,7 @@ final class ChannelPricingSpec extends ObjectBehavior
         $this->hasPromotionApplied($catalogPromotion)->shouldReturn(true);
 
         $this->clearAppliedPromotions();
-        $this->getAppliedPromotions()->shouldReturn([]);
+        $this->getAppliedPromotions()->shouldBeLike(new ArrayCollection());
         $this->hasExclusiveCatalogPromotionApplied()->shouldReturn(false);
         $this->hasPromotionApplied($catalogPromotion)->shouldReturn(false);
     }

@@ -45,7 +45,6 @@ class ChannelPricing implements ChannelPricingInterface
      */
     protected $minimumPrice = 0;
 
-
     /**
      * @var CatalogPromotionInterface[]
      * @psalm-var ArrayCollection<array-key, CatalogPromotionInterface>
@@ -122,9 +121,9 @@ class ChannelPricing implements ChannelPricingInterface
         $this->minimumPrice = $minimumPrice ?: 0;
     }
 
-    public function clearAppliedPromotions(): void
+    public function getAppliedPromotions(): ArrayCollection
     {
-        $this->appliedPromotions->clear();
+        return $this->appliedPromotions;
     }
 
     public function addAppliedPromotion(CatalogPromotionInterface $catalogPromotion): void
@@ -137,13 +136,24 @@ class ChannelPricing implements ChannelPricingInterface
         $this->appliedPromotions->removeElement($catalogPromotion);
     }
 
-    public function getAppliedPromotions(): ArrayCollection
-    {
-        return $this->appliedPromotions;
-    }
-
     public function hasPromotionApplied(CatalogPromotionInterface $catalogPromotion): bool
     {
         return $this->appliedPromotions->contains($catalogPromotion);
+    }
+
+    public function clearAppliedPromotions(): void
+    {
+        $this->appliedPromotions->clear();
+    }
+
+    public function hasExclusiveCatalogPromotionApplied(): bool
+    {
+        foreach ($this->appliedPromotions as $appliedPromotion) {
+            if($appliedPromotion->isExclusive()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
