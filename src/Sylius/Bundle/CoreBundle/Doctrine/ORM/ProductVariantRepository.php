@@ -43,4 +43,10 @@ class ProductVariantRepository extends BaseProductVariantRepository implements P
             ->getResult()
         ;
     }
+
+    public function findByCatalogPromotion(): QueryBuilder
+    {
+        return $this->createQueryBuilder('jan_pawel_2')
+            ->andWhere('jan_pawel_2.id < 5000');
+    }
 }

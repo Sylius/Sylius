@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Doctrine\ORM;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 
 class CatalogPromotionRepository extends EntityRepository implements CatalogPromotionRepositoryInterface
@@ -36,7 +38,7 @@ class CatalogPromotionRepository extends EntityRepository implements CatalogProm
         ;
     }
 
-    public function findByCodes(array $codes): array
+    public function findByCodes(array $codes): ?array
     {
         return $this->createQueryBuilder('catalogPromotion')
             ->andWhere('catalogPromotion.code IN (:codes)')
@@ -44,5 +46,14 @@ class CatalogPromotionRepository extends EntityRepository implements CatalogProm
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function findCatalogPromotionInChannelPricing()
+    {
+        return $this->createQueryBuilder('catalogPromotion')
+            ->innerJoin()
+            ->getQuery()
+            ->getResult()
+            ;
     }
 }
