@@ -361,14 +361,14 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When I set it as not applicable on discounted by catalog promotion items
+     * @When I set it as not applies to discounted by catalog promotion items
      */
-    public function iSetItAsNotApplicableOnDiscountedByCatalogPromotionItems(): void
+    public function iSetItAsNotAppliesToDiscountedByCatalogPromotionItems(): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->makeNotApplicableOnDiscountedItem();
+        $currentPage->makeNotAppliesToDiscountedItem();
     }
 
     /**
@@ -380,11 +380,11 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then the :promotion promotion should not be applicable on discounted items
+     * @Then the :promotion promotion should not applies to discounted items
      */
-    public function thePromotionShouldNotBeApplicableOnDiscountedItems(PromotionInterface $promotion): void
+    public function thePromotionShouldNotAppliesToDiscountedItems(PromotionInterface $promotion): void
     {
-        $this->assertIfFieldIsFalse($promotion, 'applicable_on_discounted');
+        $this->assertIfFieldIsFalse($promotion, 'applies_to_discounted');
     }
 
     /**

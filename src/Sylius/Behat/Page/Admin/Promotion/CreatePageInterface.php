@@ -47,7 +47,7 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function makeExclusive(): void;
 
-    public function makeNotApplicableOnDiscountedItem(): void;
+    public function makeNotAppliesToDiscountedItem(): void;
 
     public function checkCouponBased(): void;
 

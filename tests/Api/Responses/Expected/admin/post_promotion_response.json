@@ -17,7 +17,7 @@
     "coupons": [],
     "rules": [],
     "actions": [],
-    "applicableOnDiscounted": false,
+    "appliesToDiscounted": false,
     "createdAt": @string@,
     "updatedAt": @string@
 }

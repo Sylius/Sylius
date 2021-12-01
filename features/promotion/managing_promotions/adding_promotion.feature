@@ -67,11 +67,11 @@ Feature: Adding a new promotion
         Then I should be notified that it has been successfully created
 
     @api @ui
-    Scenario: Adding a promotion not applicable on discounted by catalog promotion items
+    Scenario: Adding a promotion not applies to discounted by catalog promotion items
         When I want to create a new promotion
         And I specify its code as "FULL_METAL_PROMOTION"
         And I name it "Full metal promotion"
-        And I set it as not applicable on discounted by catalog promotion items
+        And I set it as not applies to discounted by catalog promotion items
         And I add it
         Then I should be notified that it has been successfully created
-        And the "Full metal promotion" promotion should not be applicable on discounted items
+        And the "Full metal promotion" promotion should not applies to discounted items

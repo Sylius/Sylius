@@ -60,11 +60,11 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When I set it as not applicable on discounted by catalog promotion items
+     * @When I set it as not applies to discounted by catalog promotion items
      */
-    public function iSetItAsNotApplicableOnDiscountedByCatalogPromotionItems(): void
+    public function iSetItAsNotAppliesToDiscountedByCatalogPromotionItems(): void
     {
-        $this->client->updateRequestData(['applicableOnDiscounted' => false]);
+        $this->client->updateRequestData(['appliesToDiscounted' => false]);
     }
 
     /**
@@ -175,12 +175,12 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then the :promotion promotion should not be applicable on discounted items
+     * @Then the :promotion promotion should not applies to discounted items
      */
-    public function thePromotionShouldNotBeApplicableOnDiscountedItems(PromotionInterface $promotion): void
+    public function thePromotionShouldNotAppliesToDiscountedItems(PromotionInterface $promotion): void
     {
         Assert::false(
-            $this->responseChecker->getValue($this->client->show($promotion->getCode()), 'applicableOnDiscounted')
+            $this->responseChecker->getValue($this->client->show($promotion->getCode()), 'appliesToDiscounted')
         );
     }
 }

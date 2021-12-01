@@ -54,7 +54,7 @@
         <property name="description" readable="true" />
         <property name="priority" readable="true" />
         <property name="exclusive" readable="true" />
-        <property name="applicableOnDiscounted" readable="true" />
+        <property name="appliesToDiscounted" readable="true" />
         <property name="usageLimit" readable="true" />
         <property name="startsAt" readable="true" />
         <property name="endsAt" readable="true" />

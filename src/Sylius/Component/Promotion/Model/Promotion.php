@@ -97,7 +97,7 @@ class Promotion implements PromotionInterface
      */
     protected $actions;
 
-    protected bool $applicableOnDiscounted = true;
+    protected bool $appliesToDiscounted = true;
 
     public function __construct()
     {
@@ -315,13 +315,13 @@ class Promotion implements PromotionInterface
         $this->actions->removeElement($action);
     }
 
-    public function canApplyOnDiscounted(): bool
+    public function getAppliesToDiscounted(): bool
     {
-        return $this->applicableOnDiscounted;
+        return $this->appliesToDiscounted;
     }
 
-    public function setApplicableOnDiscounted(bool $applicableOnDiscounted): void
+    public function setAppliesToDiscounted(bool $appliesToDiscounted): void
     {
-        $this->applicableOnDiscounted = $applicableOnDiscounted;
+        $this->appliesToDiscounted = $appliesToDiscounted;
     }
 }

@@ -105,7 +105,7 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
 
     public function removeAction(PromotionActionInterface $action): void;
 
-    public function canApplyOnDiscounted(): bool;
+    public function getAppliesToDiscounted(): bool;
 
-    public function setApplicableOnDiscounted(bool $applyOnDiscounted): void;
+    public function setAppliesToDiscounted(bool $applyOnDiscounted): void;
 }

@@ -36,7 +36,7 @@ final class PromotionTest extends JsonApiTestCase
             json_encode([
                 'name' => 'T-Shirts discount',
                 'code' => 'tshirts_discount',
-                'applicableOnDiscounted' => false,
+                'appliesToDiscounted' => false,
 
             ], JSON_THROW_ON_ERROR)
         );
