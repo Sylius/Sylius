@@ -1,0 +1,17 @@
+{
+  "@context": "\/api\/v2\/contexts\/Adjustment",
+  "@id": "/api/v2/shop/orders/nAWw2jewpA/adjustments",
+  "@type": "hydra:Collection",
+  "hydra:member": [
+    {
+      "@id": "\/api\/v2\/shop\/adjustments\/@integer@",
+      "@type": "Adjustment",
+      "id": @integer@,
+      "type": "shipping",
+      "label": "UPS",
+      "amount": 500,
+      "neutral": false
+    }
+  ],
+  "hydra:totalItems": 1
+}
