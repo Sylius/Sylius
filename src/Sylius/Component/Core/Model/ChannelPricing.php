@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 class ChannelPricing implements ChannelPricingInterface
 {
@@ -121,7 +122,7 @@ class ChannelPricing implements ChannelPricingInterface
         $this->minimumPrice = $minimumPrice ?: 0;
     }
 
-    public function getAppliedPromotions(): ArrayCollection
+    public function getAppliedPromotions(): Collection
     {
         return $this->appliedPromotions;
     }

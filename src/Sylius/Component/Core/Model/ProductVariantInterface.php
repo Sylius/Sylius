@@ -72,5 +72,5 @@ interface ProductVariantInterface extends
 
     public function setShippingRequired(bool $shippingRequired): void;
 
-    public function getAppliedPromotionsForChannel(ChannelInterface $channel): ArrayCollection;
+    public function getAppliedPromotionsForChannel(ChannelInterface $channel): Collection;
 }
