@@ -14,28 +14,44 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 class ChannelPricing implements ChannelPricingInterface
 {
     /** @var mixed */
     protected $id = null;
 
-    protected ?string $channelCode;
+    /**
+     * @var string|null
+     */
+    protected $channelCode;
 
-    protected ?ProductVariantInterface $productVariant;
+    /**
+     * @var ProductVariantInterface|null
+     */
+    protected $productVariant;
 
-    protected ?int $price;
+    /**
+     * @var int|null
+     */
+    protected $price;
+
     /**
     * @var int|null
     */
     protected $originalPrice;
 
-    protected ?int $minimumPrice;
+    /**
+     * @var int|null
+     */
+    protected $minimumPrice;
 
-    protected ?ArrayCollection $appliedPromotions;
-
-    protected ?CatalogPromotionInterface $catalogPromotion;
-
+    /**
+     * @var Collection|CatalogPromotionInterface[]
+     *
+     * @psalm-var Collection<array-key, CatalogPromotionInterface>
+     */
+    protected $appliedPromotions;
 
     public function __construct()
     {
@@ -117,7 +133,7 @@ class ChannelPricing implements ChannelPricingInterface
         $this->appliedPromotions->removeElement($promotion);
     }
 
-    public function getAppliedPromotions(): ArrayCollection
+    public function getAppliedPromotions(): Collection
     {
         return $this->appliedPromotions;
     }
