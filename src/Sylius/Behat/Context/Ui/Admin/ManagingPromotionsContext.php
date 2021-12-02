@@ -361,11 +361,30 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I set it as not applies to discounted by catalog promotion items
+     */
+    public function iSetItAsNotAppliesToDiscountedByCatalogPromotionItems(): void
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->makeNotAppliesToDiscountedItem();
+    }
+
+    /**
      * @Then the :promotion promotion should be exclusive
      */
     public function thePromotionShouldBeExclusive(PromotionInterface $promotion)
     {
         $this->assertIfFieldIsTrue($promotion, 'exclusive');
+    }
+
+    /**
+     * @Then the :promotion promotion should not applies to discounted items
+     */
+    public function thePromotionShouldNotAppliesToDiscountedItems(PromotionInterface $promotion): void
+    {
+        $this->assertIfFieldIsFalse($promotion, 'applies_to_discounted');
     }
 
     /**
@@ -695,5 +714,12 @@ final class ManagingPromotionsContext implements Context
         $this->iWantToModifyAPromotion($promotion);
 
         Assert::true($this->updatePage->hasResourceValues([$field => 1]));
+    }
+
+    private function assertIfFieldIsFalse(PromotionInterface $promotion, $field): void
+    {
+        $this->iWantToModifyAPromotion($promotion);
+
+        Assert::false($this->updatePage->hasResourceValues([$field => 1]));
     }
 }

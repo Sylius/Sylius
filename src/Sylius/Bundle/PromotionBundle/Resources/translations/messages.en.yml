@@ -18,6 +18,8 @@ sylius:
             actions: Actions
             add_action: Add action
             add_rule: Add rule
+            applies_to_discounted: Applies to already discounted order items
+            applies_to_discounted_details: With this option the cart promotion will be applied to order items already discounted by catalog promotion(s).
             coupon_based: Coupon based
             description: Description
             ends_at: Ends at
