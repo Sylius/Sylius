@@ -29,6 +29,11 @@
         <field name="couponBased" column="coupon_based" type="boolean" />
         <field name="startsAt" column="starts_at" type="datetime" nullable="true"/>
         <field name="endsAt" column="ends_at" type="datetime" nullable="true"/>
+        <field name="appliesToDiscounted" column="applies_to_discounted" type="boolean">
+            <options>
+                <option name="default">1</option>
+            </options>
+        </field>
 
         <one-to-many field="coupons" target-entity="Sylius\Component\Promotion\Model\PromotionCouponInterface" mapped-by="promotion">
             <cascade>

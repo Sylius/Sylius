@@ -1161,17 +1161,9 @@ final class CheckoutContext implements Context
             $content['email'] = null;
         }
 
-        $request = Request::customItemAction(
-            'shop',
-            'orders',
-            $this->getCartTokenValue(),
-            HTTPRequest::METHOD_PATCH,
-            'address'
-        );
-
-        $request->setContent($content);
-
-        $this->ordersClient->executeCustomRequest($request);
+        $this->ordersClient->buildUpdateRequest($this->getCartTokenValue());
+        $this->ordersClient->setRequestData($content);
+        $this->ordersClient->update();
     }
 
     private function getCart(): array

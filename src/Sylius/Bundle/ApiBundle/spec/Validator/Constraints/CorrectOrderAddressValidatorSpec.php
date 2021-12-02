@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
+use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectOrderAddress;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -51,7 +51,7 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('validate', [
-                new AddressOrder('john@doe.com', $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject()),
+                new UpdateCart('john@doe.com', $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject()),
                 new class() extends Constraint {
                 }
             ])
@@ -72,7 +72,7 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            new AddressOrder('john@doe.com', $billingAddress->getWrappedObject()),
+            new UpdateCart('john@doe.com', $billingAddress->getWrappedObject()),
             new CorrectOrderAddress()
         );
     }
@@ -91,7 +91,7 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            new AddressOrder('john@doe.com', $billingAddress->getWrappedObject()),
+            new UpdateCart('john@doe.com', $billingAddress->getWrappedObject()),
             new CorrectOrderAddress()
         );
     }
@@ -117,7 +117,7 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            new AddressOrder('john@doe.com', $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject()),
+            new UpdateCart('john@doe.com', $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject()),
             new CorrectOrderAddress()
         );
     }
@@ -147,7 +147,7 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            new AddressOrder('john@doe.com', $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject()),
+            new UpdateCart('john@doe.com', $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject()),
             new CorrectOrderAddress()
         );
     }

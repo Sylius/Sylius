@@ -144,5 +144,16 @@
             <argument type="service" id="sylius.promotion_eligibility_checker" />
             <argument type="service" id="sylius.promotion_coupon_eligibility_checker" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface" class="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifier" public="true">
+            <argument type="service" id="sm.factory" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Assigner\OrderPromoCodeAssignerInterface" class="Sylius\Bundle\ApiBundle\Assigner\OrderPromoCodeAssigner" public="true">
+            <argument type="service" id="sylius.repository.promotion_coupon" />
+            <argument type="service" id="sylius.order_processing.order_processor" />
+        </service>
     </services>
 </container>

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface;
-use Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart;
+use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -44,7 +44,7 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint): void
     {
-        Assert::isInstanceOf($value, ApplyCouponToCart::class);
+        Assert::isInstanceOf($value, UpdateCart::class);
 
         /** @var PromotionCouponEligibility $constraint */
         Assert::isInstanceOf($constraint, PromotionCouponEligibility::class);

@@ -23,18 +23,18 @@ use Webmozart\Assert\Assert;
 
 final class PromotionContext implements Context
 {
-    private ApiClientInterface $cartsClient;
+    private ApiClientInterface $ordersClient;
 
     private SharedStorageInterface $sharedStorage;
 
     private ResponseCheckerInterface $responseChecker;
 
     public function __construct(
-        ApiClientInterface $cartsClient,
+        ApiClientInterface $ordersClient,
         SharedStorageInterface $sharedStorage,
         ResponseCheckerInterface $responseChecker
     ) {
-        $this->cartsClient = $cartsClient;
+        $this->ordersClient = $ordersClient;
         $this->sharedStorage = $sharedStorage;
         $this->responseChecker = $responseChecker;
     }
@@ -53,7 +53,7 @@ final class PromotionContext implements Context
      */
     public function iShouldBeNotifiedThatCouponIsInvalid(): void
     {
-        $response = $this->cartsClient->getLastResponse();
+        $response = $this->ordersClient->getLastResponse();
 
         Assert::same($response->getStatusCode(), 422);
         Assert::same($this->responseChecker->getError($response), 'couponCode: Coupon code is invalid.');
@@ -70,10 +70,8 @@ final class PromotionContext implements Context
 
     private function useCouponCode(?string $couponCode): void
     {
-        $request = Request::customItemAction('shop', 'orders', $this->getCartTokenValue(), HttpRequest::METHOD_PATCH, 'apply-coupon');
-
-        $request->updateContent(['couponCode' => $couponCode]);
-
-        $this->cartsClient->executeCustomRequest($request);
+        $this->ordersClient->buildUpdateRequest($this->getCartTokenValue());
+        $this->ordersClient->setRequestData(['couponCode' => $couponCode]);
+        $this->ordersClient->update();
     }
 }

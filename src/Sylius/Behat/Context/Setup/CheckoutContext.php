@@ -15,9 +15,9 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
+use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -71,7 +71,7 @@ final class CheckoutContext implements Context
 
         $cart->setLocaleCode($localeCode);
 
-        $command = new AddressOrder($email, $this->getDefaultAddress());
+        $command = new UpdateCart($email, $this->getDefaultAddress());
         $command->setOrderTokenValue($cartToken);
         $this->commandBus->dispatch($command);
 
@@ -89,7 +89,7 @@ final class CheckoutContext implements Context
         $cart = $this->orderRepository->findCartByTokenValue($cartToken);
         Assert::notNull($cart);
 
-        $command = new AddressOrder('rich@sylius.com', $this->getDefaultAddress());
+        $command = new UpdateCart(null, $this->getDefaultAddress());
         $command->setOrderTokenValue($cartToken);
         $this->commandBus->dispatch($command);
 
