@@ -64,7 +64,6 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
         $secondChannelPricing->getOriginalPrice()->shouldNotBeCalled();
         $secondChannelPricing->clearAppliedPromotions()->shouldNotBeCalled();
 
-        $catalogPromotionRepository->findAllHavingRelatedChannelPricings()->willReturn([$catalogPromotion]);
         $catalogPromotion->getChannelPricings()->willReturn(new ArrayCollection([$firstChannelPricing->getWrappedObject(), $secondChannelPricing->getWrappedObject()]));
 
         $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
