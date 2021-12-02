@@ -13,7 +13,7 @@ Feature: Receiving fixed discount from cart promotions only on non discounted pr
 
     @todo @ui @api
     Scenario: Receiving product discount from cart promotions also on discounted products
-        Given there is a promotion "Christmas sale" that is applicable to discounted products
+        Given there is a promotion "Christmas sale" that applies to discounted products
         And this promotion gives "$10.00" off on every product priced between "$10.00" and "$50.00"
         When the customer adds "T-Shirt" product to the cart
         And the customer adds "Mug" product to the cart
@@ -23,7 +23,7 @@ Feature: Receiving fixed discount from cart promotions only on non discounted pr
 
     @todo @ui @api
     Scenario: Receiving product discount from cart promotions only on non discounted products
-        Given there is a promotion "Christmas sale" that is not applicable to discounted products
+        Given there is a promotion "Christmas sale" that does not apply to discounted products
         And this promotion gives "$10.00" off on every product priced between "$10.00" and "$50.00"
         When the customer adds "T-Shirt" product to the cart
         And the customer adds "Mug" product to the cart
@@ -33,7 +33,7 @@ Feature: Receiving fixed discount from cart promotions only on non discounted pr
 
     @todo @ui @api
     Scenario: Receiving order discount from cart promotions distributed only on non discounted products
-        Given there is a promotion "Christmas sale" that is not applicable to discounted products
+        Given there is a promotion "Christmas sale" that does not apply to discounted products
         And this promotion gives "$10.00" discount to every order
         When the customer adds "T-Shirt" product to the cart
         And the customer adds "Mug" product to the cart
