@@ -66,6 +66,10 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
 
     protected function addAdjustmentToUnit(OrderItemUnitInterface $unit, int $amount, PromotionInterface $promotion): void
     {
+        if (!$this->canPromotionBeApplied($unit, $promotion)) {
+            return;
+        }
+
         $adjustment = $this->createAdjustment($promotion, AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
 
         /** @var OrderItemInterface $orderItem */
@@ -106,5 +110,24 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
         }
 
         return $promotionAmount;
+    }
+
+    private function canPromotionBeApplied(OrderItemUnitInterface $unit, PromotionInterface $promotion): bool
+    {
+        if ($promotion->getAppliesToDiscounted()) {
+            return true;
+        }
+
+        /** @var OrderItemInterface $item */
+        $item = $unit->getOrderItem();
+        $variant = $item->getVariant();
+        if ($variant === null) {
+            return false;
+        }
+
+        /** @var OrderInterface $order */
+        $order = $item->getOrder();
+
+        return empty($variant->getAppliedPromotionsForChannel($order->getChannel()));
     }
 }
