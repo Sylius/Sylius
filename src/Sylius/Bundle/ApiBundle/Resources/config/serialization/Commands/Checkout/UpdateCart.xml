@@ -17,16 +17,16 @@
 >
     <class name="Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart">
         <attribute name="billingAddress">
-            <group>shop:cart:update</group>
+            <group>shop:order:update</group>
         </attribute>
         <attribute name="shippingAddress">
-            <group>shop:cart:update</group>
+            <group>shop:order:update</group>
         </attribute>
         <attribute name="email">
-            <group>shop:cart:update</group>
+            <group>shop:order:update</group>
         </attribute>
         <attribute name="couponCode">
-            <group>shop:cart:update</group>
+            <group>shop:order:update</group>
         </attribute>
     </class>
 </serializer>

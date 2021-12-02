@@ -17,10 +17,10 @@
 >
     <class name="Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart">
         <attribute name="productVariantCode" serialized-name="productVariant">
-            <group>shop:cart:add_item</group>
+            <group>shop:order_item:create</group>
         </attribute>
         <attribute name="quantity">
-            <group>shop:cart:add_item</group>
+            <group>shop:order_item:create</group>
         </attribute>
     </class>
 </serializer>

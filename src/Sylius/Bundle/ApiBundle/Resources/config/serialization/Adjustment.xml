@@ -19,25 +19,25 @@
         <attribute name="id">
             <group>admin:adjustment:read</group>
             <group>shop:adjustment:read</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:read:item</group>
         </attribute>
 
         <attribute name="type">
             <group>admin:adjustment:read</group>
             <group>shop:adjustment:read</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:read:item</group>
        </attribute>
 
         <attribute name="label">
             <group>admin:adjustment:read</group>
             <group>shop:adjustment:read</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:read:item</group>
        </attribute>
 
        <attribute name="amount">
            <group>admin:adjustment:read</group>
            <group>shop:adjustment:read</group>
-           <group>shop:cart:read</group>
+           <group>shop:order:read:item</group>
        </attribute>
 
        <attribute name="order">
@@ -58,7 +58,7 @@
        <attribute name="neutral">
            <group>admin:adjustment:read</group>
            <group>shop:adjustment:read</group>
-           <group>shop:cart:read</group>
+           <group>shop:order:read:item</group>
        </attribute>
 
        <attribute name="locked">

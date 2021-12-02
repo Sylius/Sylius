@@ -25,22 +25,22 @@
         </attribute>
         <attribute name="firstName">
             <group>admin:address:read</group>
-            <group>admin:order:read</group>
+            <group>admin:order:read:list</group>
             <group>shop:address:create</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:update</group>
+            <group>shop:order:read:list</group>
             <group>shop:order:account:read</group>
         </attribute>
         <attribute name="lastName">
             <group>admin:address:read</group>
-            <group>admin:order:read</group>
+            <group>admin:order:read:list</group>
             <group>shop:address:create</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:update</group>
+            <group>shop:order:read:list</group>
             <group>shop:order:account:read</group>
         </attribute>
         <attribute name="phoneNumber">
@@ -57,42 +57,42 @@
         </attribute>
         <attribute name="city">
             <group>admin:address:read</group>
-            <group>admin:order:read</group>
+            <group>admin:order:read:item</group>
             <group>shop:address:create</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:update</group>
+            <group>shop:order:read:item</group>
             <group>shop:order:account:read</group>
         </attribute>
         <attribute name="street">
             <group>admin:address:read</group>
-            <group>admin:order:read</group>
+            <group>admin:order:read:item</group>
             <group>shop:address:create</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:update</group>
+            <group>shop:order:read:item</group>
             <group>shop:order:account:read</group>
         </attribute>
         <attribute name="postcode">
             <group>admin:address:read</group>
-            <group>admin:order:read</group>
+            <group>admin:order:read:item</group>
             <group>shop:address:create</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:update</group>
+            <group>shop:order:read:item</group>
             <group>shop:order:account:read</group>
         </attribute>
         <attribute name="countryCode">
             <group>admin:address:read</group>
-            <group>admin:order:read</group>
+            <group>admin:order:read:item</group>
             <group>shop:address:create</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:update</group>
+            <group>shop:order:read:item</group>
             <group>shop:order:account:read</group>
         </attribute>
         <attribute name="provinceCode">
@@ -100,18 +100,18 @@
             <group>shop:address:create</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:update</group>
+            <group>shop:order:read:item</group>
             <group>shop:order:account:read</group>
         </attribute>
         <attribute name="provinceName">
             <group>admin:address:read</group>
-            <group>admin:order:read</group>
+            <group>admin:order:read:item</group>
             <group>shop:address:create</group>
             <group>shop:address:read</group>
             <group>shop:address:update</group>
-            <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:update</group>
+            <group>shop:order:read:item</group>
             <group>shop:order:account:read</group>
         </attribute>
     </class>

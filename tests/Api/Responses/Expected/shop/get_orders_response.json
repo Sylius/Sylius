@@ -1,0 +1,31 @@
+{
+  "@context": "\/api\/v2\/contexts\/Order",
+  "@id": "\/api\/v2\/shop\/orders",
+  "@type": "hydra:Collection",
+  "hydra:member": [
+    {
+      "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA",
+      "@type": "Order",
+      "billingAddress": {
+        "@id": "\/api\/v2\/shop\/addresses\/@integer@",
+        "@type": "Address",
+        "firstName": "John",
+        "lastName": "Doe"
+      },
+      "currencyCode": "USD",
+      "localeCode": "en_US",
+      "checkoutState": "completed",
+      "paymentState": "awaiting_payment",
+      "shippingState": "ready",
+      "tokenValue": "nAWw2jewpA",
+      "id": @integer@,
+      "number": "000000001",
+      "itemsTotal": 6000,
+      "total": 6500,
+      "taxTotal": 0,
+      "shippingTotal": 500,
+      "orderPromotionTotal": 0
+    }
+  ],
+  "hydra:totalItems": 1
+}

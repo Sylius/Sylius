@@ -17,14 +17,14 @@
 >
     <class name="Sylius\Component\Core\Model\OrderItem">
         <attribute name="id">
-            <group>admin:order:read</group>
+            <group>admin:order:read:item</group>
             <group>admin:order_item:read</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:read:item</group>
             <group>shop:order:account:read</group>
             <group>shop:order_item:read</group>
         </attribute>
         <attribute name="code">
-            <group>admin:order:read</group>
+            <group>admin:order:read:item</group>
             <group>admin:order_item:read</group>
             <group>shop:order_item:read</group>
         </attribute>
@@ -33,28 +33,28 @@
             <group>shop:order_item:read</group>
         </attribute>
         <attribute name="variant">
-            <group>admin:order:read</group>
+            <group>admin:order:read:item</group>
             <group>admin:order_item:read</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:read:item</group>
             <group>shop:order:account:read</group>
             <group>shop:order_item:read</group>
         </attribute>
         <attribute name="quantity">
-            <group>admin:order:read</group>
+            <group>admin:order:read:item</group>
             <group>admin:order_item:read</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:read:item</group>
             <group>shop:order:account:read</group>
             <group>shop:order_item:read</group>
         </attribute>
         <attribute name="unitPrice">
-            <group>admin:order:read</group>
+            <group>admin:order:read:item</group>
             <group>admin:order_item:read</group>
             <group>shop:order_item:read</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:read:item</group>
         </attribute>
         <attribute name="discountedUnitPrice">
             <group>shop:order_item:read</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:read:item</group>
         </attribute>
         <attribute name="units">
             <group>admin:order_item:read</group>
@@ -81,23 +81,23 @@
             <group>shop:order_item:read</group>
         </attribute>
         <attribute name="productName">
-            <group>admin:order:read</group>
+            <group>admin:order:read:item</group>
             <group>admin:order_item:read</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:read:item</group>
             <group>shop:order:account:read</group>
             <group>shop:order_item:read</group>
         </attribute>
         <attribute name="subtotal">
-            <group>admin:order:read</group>
+            <group>admin:order:read:item</group>
             <group>admin:order_item:read</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:read:item</group>
             <group>shop:order_item:read</group>
         </attribute>
         <attribute name="total">
-            <group>admin:order:read</group>
+            <group>admin:order:read:item</group>
             <group>admin:order_item:read</group>
             <group>shop:order_item:read</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:read:item</group>
         </attribute>
     </class>
 </serializer>

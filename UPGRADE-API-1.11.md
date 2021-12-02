@@ -314,3 +314,16 @@
 24. `Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart` and `Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder` commands have been replaced with `Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart`.
 
 25. `Sylius\Bundle\ApiBundle\CommandHandler\Cart\ApplyCouponToCartHandler` and `Sylius\Bundle\ApiBundle\CommandHandler\Checkout\AddressOrderHandler` command handlers have been replaced with `Sylius\Bundle\ApiBundle\CommandHandler\Checkout\UpdateCartHandler`.
+
+26. Following changes were made for normalization groups in `Sylius\Component\Core\Model\Order`:
+    * Renamed `shop:order:add_item` to `shop:order_item:create`
+    * Renamed `shop:order:select_payment_method` to `shop:payment:update`
+    * Renamed `shop:order:select_shipping_method` to `shop:shipment:update`
+    * Renamed `shop:cart:change_quantity` to `shop:order_item:update`
+    * Renamed `shop:cart:remove_item` to `shop:order:remove_item`
+    * Removed `shop:cart:read` and `shop:shipment:update` groups
+    * New groups added for item endpoints are `shop:order:read:item` and `admin:order:read:item`
+    * New groups added for collection endpoints are `shop:order:read:list` and `admin:order:read:list`
+    * Removed following fields from `Order` collection response:
+        * `channel`, `customer`, `payments`, `shipments`, `items` and  `shippingAddress` fully removed
+        * from `billingAddress` field following fields removed: `city`, `street`, `postCode`, `provinceCode`, `provinceName`

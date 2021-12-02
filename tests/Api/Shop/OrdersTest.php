@@ -20,11 +20,16 @@ use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
+use Sylius\Tests\Api\Utils\OrderPlacerTrait;
+use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class OrdersTest extends JsonApiTestCase
 {
+    use ShopUserLoginTrait;
+    use OrderPlacerTrait;
+
     /** @test */
     public function it_gets_an_order(): void
     {
@@ -59,6 +64,25 @@ final class OrdersTest extends JsonApiTestCase
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/get_order_response', Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function it_gets_orders_list(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml', 'authentication/customer.yaml']);
+
+        $token = $this->logInShopUser('oliver@doe.com');
+        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
+        $header = array_merge($header, self::CONTENT_TYPE_HEADER);
+
+        $tokenValue = 'nAWw2jewpA';
+        $this->placeOrder($tokenValue, 'oliver@doe.com');
+
+        $this->client->request('GET', '/api/v2/shop/orders', [], [], $header);
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/get_orders_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -147,6 +171,101 @@ final class OrdersTest extends JsonApiTestCase
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/get_order_item_adjustments_response', Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function it_picks_up_a_cart(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+
+        $this->client->request('POST', '/api/v2/shop/orders', [], [], self::CONTENT_TYPE_HEADER, json_encode([]));
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/pickup_cart_response', Response::HTTP_CREATED);
+    }
+
+    /** @test */
+    public function it_allows_to_change_item_quantity(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+
+        $tokenValue = 'nAWw2jewpA';
+
+        /** @var MessageBusInterface $commandBus */
+        $commandBus = $this->get('sylius.command_bus');
+
+        $pickupCartCommand = new PickupCart($tokenValue, 'en_US');
+        $pickupCartCommand->setChannelCode('WEB');
+        $commandBus->dispatch($pickupCartCommand);
+
+        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
+        $addItemToCartCommand->setOrderTokenValue($tokenValue);
+        $commandBus->dispatch($addItemToCartCommand);
+
+        /** @var OrderInterface $order */
+        $order = $this->get('sylius.repository.order')->findCartByTokenValue($tokenValue);
+        $orderItem = $order->getItems()->first();
+
+        $this->client->request(
+            'PATCH',
+            '/api/v2/shop/orders/nAWw2jewpA/items/'.$orderItem->getId(),
+            [],
+            [],
+            self::PATCH_CONTENT_TYPE_HEADER,
+            json_encode(['quantity' => 5])
+        );
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/change_item_quantity_response', Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function it_drops_the_cart(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+
+        $tokenValue = 'nAWw2jewpA';
+
+        /** @var MessageBusInterface $commandBus */
+        $commandBus = $this->get('sylius.command_bus');
+
+        $pickupCartCommand = new PickupCart($tokenValue, 'en_US');
+        $pickupCartCommand->setChannelCode('WEB');
+        $commandBus->dispatch($pickupCartCommand);
+
+        $this->client->request('DELETE', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::CONTENT_TYPE_HEADER,);
+
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /** @test */
+    public function it_allows_to_remove_items_from_order(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+
+        $tokenValue = 'nAWw2jewpA';
+
+        /** @var MessageBusInterface $commandBus */
+        $commandBus = $this->get('sylius.command_bus');
+
+        $pickupCartCommand = new PickupCart($tokenValue, 'en_US');
+        $pickupCartCommand->setChannelCode('WEB');
+        $commandBus->dispatch($pickupCartCommand);
+
+        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
+        $addItemToCartCommand->setOrderTokenValue($tokenValue);
+        $commandBus->dispatch($addItemToCartCommand);
+
+        /** @var OrderInterface $order */
+        $order = $this->get('sylius.repository.order')->findCartByTokenValue($tokenValue);
+        $orderItem = $order->getItems()->first();
+
+        $this->client->request('DELETE', '/api/v2/shop/orders/nAWw2jewpA/items/'.$orderItem->getId(), [], [], self::CONTENT_TYPE_HEADER);
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
 
     /** @test */

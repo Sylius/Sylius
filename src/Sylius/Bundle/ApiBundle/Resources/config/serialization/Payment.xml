@@ -17,15 +17,15 @@
 >
     <class name="Sylius\Component\Core\Model\Payment">
         <attribute name="id">
-            <group>admin:order:read</group>
+            <group>admin:order:read:item</group>
             <group>admin:payment:read</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:read:item</group>
             <group>shop:payment:read</group>
         </attribute>
         <attribute name="method">
-            <group>admin:order:read</group>
+            <group>admin:order:read:item</group>
             <group>admin:payment:read</group>
-            <group>shop:cart:read</group>
+            <group>shop:order:read:item</group>
             <group>shop:order:account:read</group>
             <group>shop:payment:read</group>
         </attribute>
