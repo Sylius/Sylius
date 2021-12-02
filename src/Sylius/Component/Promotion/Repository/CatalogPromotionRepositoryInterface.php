@@ -24,6 +24,4 @@ interface CatalogPromotionRepositoryInterface extends RepositoryInterface
     public function findByCriteria(iterable $criteria): array;
 
     public function findByCodes(array $codes): array;
-
-    public function findAllHavingRelatedChannelPricings(): array;
 }
