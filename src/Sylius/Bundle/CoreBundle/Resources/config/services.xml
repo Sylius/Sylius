@@ -243,5 +243,7 @@
         <service class="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager" id="sylius.mailer.order_email_manager">
             <argument type="service" id="sylius.email_sender" />
         </service>
+
+        <service id="security.authentication_manager" alias="security.authentication.manager" />
     </services>
 </container>

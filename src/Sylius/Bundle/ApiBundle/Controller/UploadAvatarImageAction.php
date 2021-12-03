@@ -57,7 +57,7 @@ final class UploadAvatarImageAction
         $image->setFile($file);
 
         /** @var string $ownerIri */
-        $ownerIri = $request->get('owner');
+        $ownerIri = $request->request->get('owner');
         Assert::notEmpty($ownerIri);
 
         /** @var ResourceInterface|AdminUserInterface $owner */
