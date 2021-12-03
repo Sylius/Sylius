@@ -59,15 +59,20 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
 
         $subresourceIdentifiers = $context['subresource_identifiers'];
 
-        /** @var OrderInterface|null $cart */
-        $cart = $this->orderRepository->findCartByTokenValue($subresourceIdentifiers['tokenValue']);
-        Assert::notNull($cart);
+        $shipmentId = isset($subresourceIdentifiers['shipments']) ? $subresourceIdentifiers['shipments'] : $subresourceIdentifiers['id'];
 
         /** @var ShipmentInterface $shipment */
-        $shipment = $this->shipmentRepository->find($subresourceIdentifiers['shipments']);
+        $shipment = $this->shipmentRepository->find($shipmentId);
+
         Assert::notNull($shipment);
 
-        Assert::true($cart->hasShipment($shipment), 'Shipment doesn\'t match for order');
+        if(isset($subresourceIdentifiers['tokenValue'])) {
+            /** @var OrderInterface|null $cart */
+            $cart = $this->orderRepository->findCartByTokenValue($subresourceIdentifiers['tokenValue']);
+            Assert::notNull($cart);
+
+            Assert::true($cart->hasShipment($shipment), 'Shipment doesn\'t match for order');
+        }
 
         $data = $this->normalizer->normalize($object, $format, $context);
 
@@ -88,7 +93,10 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
         return
             $data instanceof ShippingMethodInterface &&
             $this->isNotAdminGetOperation($context) &&
-            isset($subresourceIdentifiers['tokenValue'], $subresourceIdentifiers['shipments'])
+            (
+                isset($subresourceIdentifiers['tokenValue'], $subresourceIdentifiers['shipments']) ||
+                isset($subresourceIdentifiers['id'])
+            )
         ;
     }
 
