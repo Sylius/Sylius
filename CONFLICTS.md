@@ -3,6 +3,10 @@
 This document explains why certain conflicts were added to `composer.json` and
 references related issues.
 
+- `symfony/password-hasher": "^6.0`:
+
+  Symfony in version 5.3 change password hashing logic, and in version 6.0 they removed BC layer
+
  - `doctrine/doctrine-bundle:2.3.0`:
 
    This version makes Gedmo Doctrine Extensions fail (tree and position behaviour mostly).
