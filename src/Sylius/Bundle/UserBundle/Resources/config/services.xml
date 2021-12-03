@@ -40,6 +40,8 @@
 
         <!-- Controllers -->
         <service id="sylius.controller.user_security" class="Sylius\Bundle\UserBundle\Controller\SecurityController">
+            <argument type="service" id="security.authentication_utils" />
+            <argument type="service" id="form.factory" />
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

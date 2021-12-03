@@ -32,7 +32,7 @@
         "stof/doctrine-extensions-bundle": "^1.4",
         "sylius/resource-bundle": "^1.7",
         "sylius/taxonomy": "^1.6",
-        "symfony/framework-bundle": "^4.4 || ^5.2"
+        "symfony/framework-bundle": "^4.4 || ^5.4"
     },
     "conflict": {
         "twig/twig": "^3.0"
@@ -41,7 +41,7 @@
         "doctrine/orm": "^2.7",
         "phpspec/phpspec": "^7.0",
         "phpunit/phpunit": "^8.5",
-        "symfony/dependency-injection": "^4.4 || ^5.2"
+        "symfony/dependency-injection": "^4.4 || ^5.4"
     },
     "config": {
         "bin-dir": "bin"
