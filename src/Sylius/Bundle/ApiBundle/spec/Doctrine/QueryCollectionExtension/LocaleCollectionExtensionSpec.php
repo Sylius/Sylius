@@ -76,6 +76,7 @@ final class LocaleCollectionExtensionSpec extends ObjectBehavior
         ChannelInterface $channel,
         LocaleInterface $locale
     ): void {
+        $queryNameGenerator->generateParameterName('locales')->shouldBeCalled()->willReturn('locales');
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn(null);

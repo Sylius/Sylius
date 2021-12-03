@@ -55,8 +55,9 @@ class AcceptedProductReviewsExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
-        $queryBuilder->getRootAliases()->willReturn(['o']);
+        $queryNameGenerator->generateParameterName('status')->shouldBeCalled()->willReturn('status');
 
+        $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->andWhere('o.status = :status')->willReturn($queryBuilder);
         $queryBuilder->setParameter('status', ReviewInterface::STATUS_ACCEPTED)->shouldBeCalled();
 

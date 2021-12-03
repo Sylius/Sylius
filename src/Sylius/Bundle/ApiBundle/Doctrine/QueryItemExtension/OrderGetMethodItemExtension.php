@@ -54,12 +54,13 @@ final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
         $rootAlias = $queryBuilder->getRootAliases()[0];
         $user = $this->userContext->getUser();
 
-        $this->applyToItemForGetMethod($user, $queryBuilder, $rootAlias);
+        $this->applyToItemForGetMethod($user, $queryBuilder, $queryNameGenerator, $rootAlias);
     }
 
     private function applyToItemForGetMethod(
         ?UserInterface $user,
         QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
         string $rootAlias
     ): void {
         if ($user === null) {
@@ -73,9 +74,11 @@ final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
         }
 
         if ($user instanceof ShopUserInterface && in_array('ROLE_USER', $user->getRoles(), true)) {
+            $customerParameterName = $queryNameGenerator->generateParameterName('customer');
+
             $queryBuilder
-                ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
-                ->setParameter('customer', $user->getCustomer()->getId())
+                ->andWhere(sprintf('%s.customer = :%s', $rootAlias, $customerParameterName))
+                ->setParameter($customerParameterName, $user->getCustomer()->getId())
             ;
 
             return;

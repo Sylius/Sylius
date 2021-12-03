@@ -51,11 +51,13 @@ final class CurrencyCollectionExtension implements ContextAwareQueryCollectionEx
         Assert::keyExists($context, ContextKeys::CHANNEL);
         $channel = $context[ContextKeys::CHANNEL];
 
+        $currenciesParameterName = $queryNameGenerator->generateParameterName('currencies');
+
         if ($channel->getCurrencies()->count() > 0) {
             $rootAlias = $queryBuilder->getRootAliases()[0];
             $queryBuilder
-                ->andWhere($rootAlias . '.id in (:currencies)')
-                ->setParameter('currencies', $channel->getCurrencies());
+                ->andWhere(sprintf('%s.id in (:%s)',$rootAlias, $currenciesParameterName))
+                ->setParameter($currenciesParameterName, $channel->getCurrencies());
         }
     }
 }
