@@ -65,7 +65,14 @@ final class AdminProductAjaxTest extends JsonApiTestCase
         $session = self::$container->get('session');
         $firewallName = 'admin';
         $firewallContext = 'admin';
-        $token = new UsernamePasswordToken($user, null, $firewallName, $user->getRoles());
+
+        /** @deprecated parameter credential was deprecated in Symfony 5.4, so in Sylius 1.11 too, in Sylius 2.0 providing 4 arguments will be prohibited. */
+        if (3 === (new \ReflectionClass(UsernamePasswordToken::class))->getConstructor()->getNumberOfParameters()) {
+            $token = new UsernamePasswordToken($user, $firewallName, $user->getRoles());
+        } else {
+            $token = new UsernamePasswordToken($user, null, $firewallName, $user->getRoles());
+        }
+
         $session->set(sprintf('_security_%s', $firewallContext), serialize($token));
         $session->save();
 

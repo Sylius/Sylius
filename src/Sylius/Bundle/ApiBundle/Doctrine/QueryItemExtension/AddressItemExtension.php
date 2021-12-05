@@ -53,10 +53,10 @@ final class AddressItemExtension implements QueryItemExtensionInterface
             throw new MissingTokenException('JWT Token not found');
         }
 
-        $this->applyToItemForGetMethod($user, $queryBuilder);
+        $this->applyToItemForGetMethod($user, $queryBuilder, $queryNameGenerator);
     }
 
-    private function applyToItemForGetMethod(?UserInterface $user, QueryBuilder $queryBuilder): void
+    private function applyToItemForGetMethod(?UserInterface $user, QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator): void
     {
         if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
             return;
@@ -72,10 +72,12 @@ final class AddressItemExtension implements QueryItemExtensionInterface
         ) {
             $rootAlias = $queryBuilder->getRootAliases()[0];
 
+            $customerParameterName = $queryNameGenerator->generateParameterName('customer');
+
             $queryBuilder
                 ->innerJoin($rootAlias.'.customer', 'customer')
-                ->andWhere('customer = :customer')
-                ->setParameter('customer', $customer);
+                ->andWhere(sprintf('customer = :%s',$customerParameterName))
+                ->setParameter($customerParameterName, $customer);
 
             return;
         }

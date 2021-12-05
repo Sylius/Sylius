@@ -86,6 +86,8 @@ final class CountryCollectionExtensionSpec extends ObjectBehavior
 
         $channel->getCountries()->shouldBeCalled()->willReturn($countriesCollection);
 
+        $queryNameGenerator->generateParameterName('countries')->shouldBeCalled()->willReturn('countries');
+
         $queryBuilder->setParameter('countries', $countriesCollection)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
 
         $this->applyToCollection(

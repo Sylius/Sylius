@@ -87,6 +87,8 @@ final class CurrencyCollectionExtensionSpec extends ObjectBehavior
 
         $channel->getCurrencies()->shouldBeCalled()->willReturn($currenciesCollection);
 
+        $queryNameGenerator->generateParameterName('currencies')->shouldBeCalled()->willReturn('currencies');
+
         $queryBuilder->setParameter('currencies', $currenciesCollection)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
 
         $this->applyToCollection(

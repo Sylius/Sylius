@@ -38,7 +38,10 @@ final class GetPaymentConfiguration
     public function __invoke(Request $request): JsonResponse
     {
         /** @var PaymentInterface|null $payment */
-        $payment = $this->paymentRepository->findOneByOrderToken($request->get('paymentId'), $request->get('id'));
+        $payment = $this->paymentRepository->findOneByOrderToken(
+            $request->attributes->get('paymentId'),
+            $request->attributes->get('id')
+        );
 
         Assert::notNull($payment);
 

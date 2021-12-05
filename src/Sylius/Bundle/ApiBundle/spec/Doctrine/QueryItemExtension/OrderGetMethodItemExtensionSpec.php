@@ -88,6 +88,7 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
         CustomerInterface $customer,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
+        $queryNameGenerator->generateParameterName('customer')->shouldBeCalled()->willReturn('customer');
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);

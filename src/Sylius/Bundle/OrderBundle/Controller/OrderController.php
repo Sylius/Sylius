@@ -127,6 +127,9 @@ class OrderController extends ResourceController
         );
     }
 
+    /**
+     * @psalm-suppress DeprecatedMethod
+     */
     public function clearAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -134,7 +137,7 @@ class OrderController extends ResourceController
         $this->isGrantedOr403($configuration, ResourceActions::DELETE);
         $resource = $this->getCurrentCart();
 
-        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid((string) $resource->getId(), $request->get('_csrf_token'))) {
+        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid((string) $resource->getId(), $this->getParameterFromRequest($request, '_csrf_token'))) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 
@@ -193,5 +196,28 @@ class OrderController extends ResourceController
     protected function getEventDispatcher(): EventDispatcherInterface
     {
         return $this->container->get('event_dispatcher');
+    }
+
+    /**
+     * @return mixed
+     *
+     * @deprecated This function will be removed in Sylius 2.0, since Symfony 5.4, use explicit input sources instead
+     * based on Symfony\Component\HttpFoundation\Request::get
+     */
+    private function getParameterFromRequest(Request $request, string $key)
+    {
+        if ($request !== $result = $request->attributes->get($key, $request)) {
+            return $result;
+        }
+
+        if ($request->query->has($key)) {
+            return $request->query->all()[$key];
+        }
+
+        if ($request->request->has($key)) {
+            return $request->request->all()[$key];
+        }
+
+        return null;
     }
 }

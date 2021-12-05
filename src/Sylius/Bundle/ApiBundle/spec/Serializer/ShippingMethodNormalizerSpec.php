@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
@@ -105,6 +106,40 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         $this
             ->normalize($shippingMethod, null, [
                 'subresource_identifiers' => ['tokenValue' => '666', 'shipments' => '999'],
+            ])
+            ->shouldReturn(['price' => 1000])
+        ;
+    }
+
+    public function it_serializes_shipping_method_if_subresource_identifier_is_id(
+        ShipmentRepositoryInterface $shipmentRepository,
+        ServiceRegistryInterface $shippingCalculators,
+        CalculatorInterface $calculator,
+        NormalizerInterface $normalizer,
+        ShipmentInterface $shipment,
+        ShippingMethodInterface $shippingMethod
+    ): void {
+        $shipmentRepository->find('999')->willReturn($shipment);
+
+        $this->setNormalizer($normalizer);
+
+        $normalizer
+            ->normalize($shippingMethod, null, [
+                'sylius_shipping_method_normalizer_already_called' => true,
+                'subresource_identifiers' => [ 'id' => '999'],
+            ])
+            ->willReturn([])
+        ;
+
+        $shippingMethod->getCalculator()->willReturn('default_calculator');
+        $shippingMethod->getConfiguration()->willReturn([]);
+
+        $shippingCalculators->get('default_calculator')->willReturn($calculator);
+        $calculator->calculate($shipment, [])->willReturn(1000);
+
+        $this
+            ->normalize($shippingMethod, null, [
+                'subresource_identifiers' => ['id' => '999'],
             ])
             ->shouldReturn(['price' => 1000])
         ;

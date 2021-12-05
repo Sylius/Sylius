@@ -39,6 +39,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         QueryNameGeneratorInterface $queryNameGenerator,
         Expr $expr
     ): void {
+        $queryNameGenerator->generateParameterName('state')->shouldBeCalled()->willReturn('state');
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn(null);
@@ -101,6 +102,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         Expr $expr
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
+        $queryNameGenerator->generateParameterName('state')->shouldBeCalled()->willReturn('state');
 
         $userContext->getUser()->willReturn(null);
 
@@ -161,6 +163,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         QueryNameGeneratorInterface $queryNameGenerator,
         Expr $expr
     ): void {
+        $queryNameGenerator->generateParameterName('state')->shouldBeCalled()->willReturn('state');
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn(null);
@@ -223,6 +226,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         CustomerInterface $customer,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
+        $queryNameGenerator->generateParameterName('state')->shouldBeCalled()->willReturn('state');
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);
@@ -391,6 +395,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         CustomerInterface $customer,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
+        $queryNameGenerator->generateParameterName('state')->shouldBeCalled()->willReturn('state');
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);
@@ -439,6 +444,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         CustomerInterface $customer,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
+        $queryNameGenerator->generateParameterName('state')->shouldBeCalled()->willReturn('state');
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);
@@ -488,6 +494,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         CustomerInterface $customer,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
+        $queryNameGenerator->generateParameterName('state')->shouldBeCalled()->willReturn('state');
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);
@@ -537,6 +544,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         CustomerInterface $customer,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
+        $queryNameGenerator->generateParameterName('state')->shouldBeCalled()->willReturn('state');
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);
@@ -586,6 +594,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         CustomerInterface $customer,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
+        $queryNameGenerator->generateParameterName('state')->shouldBeCalled()->willReturn('state');
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);
@@ -665,6 +674,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         AdminUserInterface $adminUser,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
+        $queryNameGenerator->generateParameterName('state')->shouldBeCalled()->willReturn('state');
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($adminUser);

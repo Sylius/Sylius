@@ -59,6 +59,9 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
 
         $menuTaxon->getCode()->willReturn('code');
 
+        $queryNameGenerator->generateParameterName('parentCode')->shouldBeCalled()->willReturn('parentCode');
+        $queryNameGenerator->generateParameterName('enabled')->shouldBeCalled()->willReturn('enabled');
+
         $queryBuilder->getRootAliases()->shouldBeCalled()->willReturn('o');
         $queryBuilder->addSelect('child')->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->innerJoin('o.parent', 'parent')->willReturn($queryBuilder->getWrappedObject());
@@ -98,6 +101,9 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
         $channel->getMenuTaxon()->willReturn($menuTaxon);
 
         $menuTaxon->getCode()->willReturn('code');
+
+        $queryNameGenerator->generateParameterName('parentCode')->shouldBeCalled()->willReturn('parentCode');
+        $queryNameGenerator->generateParameterName('enabled')->shouldBeCalled()->willReturn('enabled');
 
         $queryBuilder->getRootAliases()->shouldBeCalled()->willReturn('o');
         $queryBuilder->addSelect('child')->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());

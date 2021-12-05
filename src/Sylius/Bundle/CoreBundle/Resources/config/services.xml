@@ -288,5 +288,7 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" class="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculator"/>
+
+        <service id="security.authentication_manager" alias="security.authentication.manager" />
     </services>
 </container>

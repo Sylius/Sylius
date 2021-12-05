@@ -29,8 +29,8 @@
         "php": "^8.0",
         "sylius/locale": "^1.6",
         "sylius/resource-bundle": "^1.7",
-        "symfony/framework-bundle": "^4.4 || ^5.2",
-        "symfony/templating": "^4.4 || ^5.2"
+        "symfony/framework-bundle": "^4.4 || ^5.4",
+        "symfony/templating": "^4.4 || ^5.4"
     },
     "conflict": {
         "twig/twig": "^1.0"

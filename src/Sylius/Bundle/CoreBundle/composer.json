@@ -63,11 +63,11 @@
         "sylius/theme-bundle": "^2.1.1",
         "sylius/ui-bundle": "^1.6",
         "sylius/user-bundle": "^1.6",
-        "symfony/framework-bundle": "^4.4 || ^5.2",
-        "symfony/intl": "^4.4 || ^5.2",
-        "symfony/messenger": "^4.4 || ^5.2",
+        "symfony/framework-bundle": "^4.4 || ^5.4",
+        "symfony/intl": "^4.4 || ^5.4",
+        "symfony/messenger": "^4.4 || ^5.4",
         "symfony/swiftmailer-bundle": "^3.4",
-        "symfony/templating": "^4.4 || ^5.2",
+        "symfony/templating": "^4.4 || ^5.4",
         "winzou/state-machine-bundle": "^0.5"
     },
     "require-dev": {
@@ -77,7 +77,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "phpspec/phpspec": "^7.0",
         "phpunit/phpunit": "^8.5",
-        "symfony/dependency-injection": "^4.4 || ^5.2"
+        "symfony/dependency-injection": "^4.4 || ^5.4"
     },
     "conflict": {
         "symfony/doctrine-bridge": "4.4.20 || 5.2.4 || 5.2.5"

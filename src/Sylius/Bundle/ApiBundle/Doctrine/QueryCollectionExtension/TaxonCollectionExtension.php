@@ -51,15 +51,18 @@ final class TaxonCollectionExtension implements ContextAwareQueryCollectionExten
             return;
         }
 
+        $enabledParameterName = $queryNameGenerator->generateParameterName('enabled');
+        $parentCodeParameterName = $queryNameGenerator->generateParameterName('parentCode');
+
         $rootAlias = $queryBuilder->getRootAliases()[0];
         $queryBuilder
             ->addSelect('child')
-            ->innerJoin($rootAlias . '.parent', 'parent')
-            ->leftJoin($rootAlias . '.children', 'child')
-            ->andWhere($rootAlias . '.enabled = :enabled')
-            ->andWhere('parent.code = :parentCode')
-            ->addOrderBy($rootAlias . '.position')
-            ->setParameter('parentCode', ($channelMenuTaxon !== null) ? $channelMenuTaxon->getCode() : 'category')
-            ->setParameter('enabled', true);
+            ->innerJoin(sprintf('%s.parent', $rootAlias), 'parent')
+            ->leftJoin(sprintf('%s.children',$rootAlias), 'child')
+            ->andWhere(sprintf('%s.enabled = :%s',$rootAlias, $enabledParameterName))
+            ->andWhere(sprintf('parent.code = :%s',$parentCodeParameterName))
+            ->addOrderBy(sprintf('%s.position', $rootAlias))
+            ->setParameter($parentCodeParameterName, ($channelMenuTaxon !== null) ? $channelMenuTaxon->getCode() : 'category')
+            ->setParameter($enabledParameterName, true);
     }
 }
