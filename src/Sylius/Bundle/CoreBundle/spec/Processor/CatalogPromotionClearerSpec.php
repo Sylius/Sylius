@@ -63,7 +63,7 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
         $secondChannelPricing->getAppliedPromotions()->willReturn(new ArrayCollection());
         $secondChannelPricing->getOriginalPrice()->shouldNotBeCalled();
         $secondChannelPricing->clearAppliedPromotions()->shouldNotBeCalled();
-        
+
         $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
         $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->willReturn(true);
         $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldBeCalled();

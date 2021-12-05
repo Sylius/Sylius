@@ -16,12 +16,12 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.catalog_promotion.class%" shortName="CatalogPromotion">
-        <attribute name="route_prefix">admin</attribute>
 
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
             <collectionOperation name="admin_get">
+                <attribute name="path">/admin/catalog-promotions</attribute>
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
@@ -29,6 +29,7 @@
             </collectionOperation>
 
             <collectionOperation name="admin_post">
+                <attribute name="path">/admin/catalog-promotions</attribute>
                 <attribute name="method">POST</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
@@ -68,6 +69,14 @@ Example configuration for `percentage_discount` action type:
 
         <itemOperations>
             <itemOperation name="admin_get">
+                <attribute name="path">/admin/catalog-promotions/{code}</attribute>
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:catalog_promotion:read</attribute>
+                </attribute>
+            </itemOperation>
+            <itemOperation name="shop_get">
+                <attribute name="path">/shop/catalog-promotions/{code}</attribute>
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
@@ -75,6 +84,7 @@ Example configuration for `percentage_discount` action type:
             </itemOperation>
 
             <itemOperation name="admin_put">
+                <attribute name="path">/admin/catalog-promotions/{code}</attribute>
                 <attribute name="method">PUT</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
