@@ -61,10 +61,8 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
             return false;
         }
 
-        $promotionAmount = $this->calculateAdjustmentAmount(
-            $subject->getPromotionSubjectTotal(),
-            $configuration[$channelCode]['amount']
-        );
+        $subjectTotal = $promotion->getAppliesToDiscounted() ? $subject->getPromotionSubjectTotal() : $subject->getNonDiscountedItemsTotal();
+        $promotionAmount = $this->calculateAdjustmentAmount($subjectTotal, $configuration[$channelCode]['amount']);
 
         if (0 === $promotionAmount) {
             return false;
@@ -75,6 +73,19 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
         } else {
             $itemsTotal = [];
             foreach ($subject->getItems() as $orderItem) {
+                if ($promotion->getAppliesToDiscounted()) {
+                    $itemsTotal[] = $orderItem->getTotal();
+
+                    continue;
+                }
+
+                $variant = $orderItem->getVariant();
+                if (!empty($variant->getAppliedPromotionsForChannel($subject->getChannel()))) {
+                    $itemsTotal[] = 0;
+
+                    continue;
+                }
+
                 $itemsTotal[] = $orderItem->getTotal();
             }
 
@@ -95,5 +106,10 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
     private function calculateAdjustmentAmount(int $promotionSubjectTotal, int $targetPromotionAmount): int
     {
         return -1 * min($promotionSubjectTotal, $targetPromotionAmount);
+    }
+
+    private function getSubjectTotal(OrderInterface $order, PromotionInterface $promotion): int
+    {
+        return $promotion->getAppliesToDiscounted() ? $order->getPromotionSubjectTotal() : $order->getNonDiscountedItemsTotal();
     }
 }

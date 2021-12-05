@@ -22,6 +22,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
@@ -724,5 +725,29 @@ final class OrderSpec extends ObjectBehavior
     {
         $this->setCustomerIp('172.16.254.1');
         $this->getCustomerIp()->shouldReturn('172.16.254.1');
+    }
+
+    function it_calculates_total_of_non_discounted_items(
+        OrderItemInterface $item1,
+        OrderItemInterface $item2,
+        ProductVariantInterface $variant1,
+        ProductVariantInterface $variant2,
+        ChannelInterface $channel
+    ): void {
+        $item1->getTotal()->willReturn(500);
+        $item1->getVariant()->willReturn($variant1);
+        $item2->getTotal()->willReturn(800);
+        $item2->getVariant()->willReturn($variant2);
+
+        $variant1->getAppliedPromotionsForChannel($channel)->willReturn([]);
+        $variant2->getAppliedPromotionsForChannel($channel)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
+
+        $item1->setOrder($this)->shouldBeCalled();
+        $item2->setOrder($this)->shouldBeCalled();
+        $this->addItem($item1);
+        $this->addItem($item2);
+        $this->setChannel($channel);
+
+        $this->getNonDiscountedItemsTotal()->shouldReturn(500);
     }
 }

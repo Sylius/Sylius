@@ -30,12 +30,12 @@ use Webmozart\Assert\Assert;
 class Order extends BaseOrder implements OrderInterface
 {
     /**
-     * @var \Sylius\Component\Core\Model\CustomerInterface|null
+     * @var CustomerInterface|null
      */
     protected $customer;
 
     /**
-     * @var \Sylius\Component\Core\Model\ChannelInterface|null
+     * @var ChannelInterface|null
      */
     protected $channel;
 
@@ -459,5 +459,19 @@ class Order extends BaseOrder implements OrderInterface
     public function setCustomerIp(?string $customerIp): void
     {
         $this->customerIp = $customerIp;
+    }
+
+    public function getNonDiscountedItemsTotal(): int
+    {
+        $total = 0;
+        /** @var OrderItemInterface $item */
+        foreach ($this->items as $item) {
+            $variant = $item->getVariant();
+            if (empty($variant->getAppliedPromotionsForChannel($this->channel))) {
+                $total += $item->getTotal();
+            }
+        }
+
+        return $total;
     }
 }

@@ -31,7 +31,7 @@ Feature: Receiving fixed discount from cart promotions only on non discounted pr
         And the product "Mug" should have discounted unit price "$30.00" in the cart
         And the cart total should be "$45.00"
 
-    @todo @ui @api
+    @ui @api
     Scenario: Receiving order discount from cart promotions distributed only on non discounted products
         Given there is a promotion "Christmas sale" that does not apply to discounted products
         And this promotion gives "$10.00" discount to every order

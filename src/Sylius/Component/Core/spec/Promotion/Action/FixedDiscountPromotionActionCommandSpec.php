@@ -62,12 +62,11 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ChannelPricingInterface $channelPricingOne,
         ChannelPricingInterface $channelPricingTwo
     ): void {
-        $order->getCurrencyCode()->willReturn('USD');
-        $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
+        $order->getCurrencyCode()->willReturn('USD');
+        $order->getChannel()->willReturn($channel);
         $order->countItems()->willReturn(2);
-
         $order
             ->getItems()
             ->willReturn(new ArrayCollection([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]))
@@ -82,6 +81,9 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $channelPricingTwo->getMinimumPrice()->willReturn(0);
 
         $order->getPromotionSubjectTotal()->willReturn(10000);
+
+        $promotion->getAppliesToDiscounted()->willReturn(true);
+
         $firstItem->getTotal()->willReturn(6000);
         $firstItem->getQuantity()->willReturn(1);
         $secondItem->getTotal()->willReturn(4000);
@@ -190,25 +192,66 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(true);
     }
 
+    function it_uses_a_distributor_and_applicator_to_execute_promotion_action_only_for_non_discounted_items(
+        ChannelInterface $channel,
+        OrderInterface $order,
+        OrderItemInterface $firstItem,
+        OrderItemInterface $secondItem,
+        ProductVariantInterface $firstVariant,
+        ProductVariantInterface $secondVariant,
+        PromotionInterface $promotion,
+        MinimumPriceDistributorInterface $minimumPriceDistributor,
+        ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
+        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
+    ): void {
+        $channel->getCode()->willReturn('WEB_US');
+
+        $order->getCurrencyCode()->willReturn('USD');
+        $order->getChannel()->willReturn($channel);
+        $order->countItems()->willReturn(2);
+        $order
+            ->getItems()
+            ->willReturn(new ArrayCollection([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]))
+        ;
+        $order->getNonDiscountedItemsTotal()->willReturn(6000);
+
+        $promotion->getAppliesToDiscounted()->willReturn(false);
+
+        $firstItem->getTotal()->willReturn(6000);
+        $firstItem->getVariant()->willReturn($firstVariant);
+        $secondItem->getTotal()->willReturn(4000);
+        $secondItem->getVariant()->willReturn($secondVariant);
+
+        $firstVariant->getAppliedPromotionsForChannel($channel)->willReturn([]);
+        $secondVariant->getAppliedPromotionsForChannel($channel)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
+
+        $proportionalIntegerDistributor->distribute([6000, 0], -1000)->shouldNotBeCalled();
+        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -10000, $channel)->willReturn([-6000, 0]);
+
+        $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-1000, 0])->shouldBeCalled();
+
+        $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(true);
+    }
+
     function it_does_not_apply_bigger_discount_than_promotion_subject_total(
         ChannelInterface $channel,
         OrderInterface $order,
         OrderItemInterface $firstItem,
         OrderItemInterface $secondItem,
         PromotionInterface $promotion,
-        MinimumPriceDistributorInterface $minimumPriceDistributor,
+        ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
+        MinimumPriceDistributorInterface $minimumPriceDistributor,
         ProductVariantInterface $productVariantOne,
         ProductVariantInterface $productVariantTwo,
         ChannelPricingInterface $channelPricingOne,
         ChannelPricingInterface $channelPricingTwo
     ): void {
-        $order->getCurrencyCode()->willReturn('USD');
-        $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
+        $order->getCurrencyCode()->willReturn('USD');
+        $order->getChannel()->willReturn($channel);
         $order->countItems()->willReturn(2);
-
         $order
             ->getItems()
             ->willReturn(new ArrayCollection([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]))
@@ -223,6 +266,9 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $channelPricingTwo->getMinimumPrice()->willReturn(0);
 
         $order->getPromotionSubjectTotal()->willReturn(10000);
+
+        $promotion->getAppliesToDiscounted()->willReturn(true);
+
         $firstItem->getTotal()->willReturn(6000);
         $firstItem->getQuantity()->willReturn(1);
         $secondItem->getTotal()->willReturn(4000);
