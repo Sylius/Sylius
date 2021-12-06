@@ -33,6 +33,8 @@ sylius_admin_product_index:
 sylius_admin_product_update:
     path: /products/{id}/edit
     methods: [GET, PUT, PATCH]
+    requirements:
+        id: '\d+'
     defaults:
         _controller: sylius.controller.product:updateAction
         _sylius:
@@ -100,6 +102,8 @@ sylius_admin_product_create_simple:
 sylius_admin_product_show:
     path: /products/{id}
     methods: [GET]
+    requirements:
+        id: '\d+'
     defaults:
         _controller: sylius.controller.product:showAction
         _sylius:
