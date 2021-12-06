@@ -46,9 +46,8 @@ final class ProductVariantCatalogPromotionsProcessor implements ProductVariantCa
 
     private function reapplyOnChannelPricing(ChannelPricingInterface $channelPricing): void
     {
-//        /** @var  $appliedPromotions */
-        $appliedPromotions = $channelPricing->getAppliedPromotions();
-        if ($appliedPromotions->isEmpty()) {
+        $appliedPromotions = $channelPricing->getAppliedPromotions()->toArray();
+        if (empty($appliedPromotions)) {
             return;
         }
         $this->catalogPromotionClearer->clearChannelPricing($channelPricing);
