@@ -39,8 +39,8 @@ final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
         $catalogPromotions = [];
 
         foreach ($channelPricings as $channelPricing) {
-            $this->clearChannelPricing($channelPricing);
             $catalogPromotions = array_merge($catalogPromotions, $channelPricing->getAppliedPromotions()->toArray());
+            $this->clearChannelPricing($channelPricing);
         }
 
         foreach ($catalogPromotions as $catalogPromotion) {
