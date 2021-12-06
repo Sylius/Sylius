@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -30,10 +31,11 @@ final class ProductVariantContext implements Context
 
     private SharedStorageInterface $sharedStorage;
 
+
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
@@ -119,13 +121,17 @@ final class ProductVariantContext implements Context
         ProductVariantInterface $variant,
         int $originalPrice,
         int $price,
-        int $numberOfPromotions
+        int $promotionsNames
     ): void {
         $content = $this->findVariant($variant);
 
         Assert::same($content['price'], $price);
         Assert::same($content['originalPrice'], $originalPrice);
-        Assert::count($content['appliedPromotions'], $numberOfPromotions);
+        foreach ($content['appliedPromotions'] as $iri){
+            $catalogPromotionResponse = $this->client->showByIri($iri);
+            $catalogPromotion = $this->responseChecker->getResponseContent($catalogPromotionResponse);
+            Assert::inArray($catalogPromotion['name'], $promotionsNames);
+        }
     }
 
     /**
@@ -138,13 +144,16 @@ final class ProductVariantContext implements Context
         string $promotionName
     ): void {
         $content = $this->findVariant($variant);
+        $iriResponse = $this->client->showByIri($content['appliedPromotions'][0]);
+
+        $catalogPromotion = $this->responseChecker->getResponseContent(($iriResponse));
+
 
         Assert::same(sizeof($content['appliedPromotions']), 1);
         Assert::same($content['price'], $price);
         Assert::same($content['originalPrice'], $originalPrice);
-        $catalogPromotionCode = StringInflector::nameToCode($promotionName);
-        Assert::same($content['appliedPromotions'][$catalogPromotionCode]['translations']['en_US']['name'], $promotionName);
-        Assert::same($content['appliedPromotions'][$catalogPromotionCode]['translations']['en_US']['description'], $promotionName . ' description');    }
+        Assert::same($catalogPromotion['name'], $promotionName);
+    }
 
     /**
      * @Then /^the visitor should(?:| still) see that the ("[^"]+" variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/

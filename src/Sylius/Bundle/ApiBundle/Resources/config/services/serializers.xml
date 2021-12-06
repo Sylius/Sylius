@@ -60,6 +60,7 @@
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.availability_checker" />
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="api_platform.iri_converter" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
