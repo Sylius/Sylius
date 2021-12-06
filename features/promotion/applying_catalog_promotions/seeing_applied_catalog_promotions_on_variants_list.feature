@@ -15,6 +15,6 @@ Feature: Seeing applied catalog promotions on variants list
     @api @no-ui
     Scenario: Seeing applied catalog promotion on variant
         When I view variants
+        And I should see "Kotlin T-Shirt" variant is not discounted
         Then I should see "PHP T-Shirt" variant is discounted from "$20.00" to "$10.00" with "Winter sale" promotion
         And I should see "Python T-Shirt" variant is discounted from "$40.00" to "$20.00" with "Winter sale" promotion
-        And I should see "Kotlin T-Shirt" variant is not discounted
