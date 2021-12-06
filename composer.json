@@ -164,7 +164,8 @@
         "symfony/doctrine-bridge": "4.4.16",
         "symfony/property-info": "4.4.22 || 5.2.7",
         "symfony/serializer": "4.4.19 || 5.2.2",
-        "liip/imagine-bundle": "^2.7"
+        "liip/imagine-bundle": "^2.7",
+        "symfony/security-hasher": "^6.0"
     },
     "require-dev": {
         "ext-json": "*",
