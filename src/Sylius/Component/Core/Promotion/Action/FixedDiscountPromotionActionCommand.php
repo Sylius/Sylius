@@ -82,7 +82,7 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
 
 //        $splitPromotion = $this->proportionalDistributor->distribute($itemsTotals, $promotionAmount);
 
-        $splitPromotion = $this->minimumPriceDistributor->distributeWithMinimumPrice($promotionAmount, $itemsTotals, $minimumPrices);
+        $splitPromotion = $this->minimumPriceDistributor->distribute($subject->getItems()->toArray(), $promotionAmount, $subject->getChannel());
 
         if (sizeof($minimumPrices) === 4) {
             $debug = true;

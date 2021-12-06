@@ -2,6 +2,9 @@
 
 namespace Sylius\Component\Core\Distributor;
 
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+
 class MinimumPriceDistributor implements MinimumPriceDistributorInterface
 {
     private ProportionalIntegerDistributorInterface $proportionalIntegerDistributor;
@@ -11,60 +14,83 @@ class MinimumPriceDistributor implements MinimumPriceDistributorInterface
         $this->proportionalIntegerDistributor = $proportionalIntegerDistributor;
     }
 
-    public function distributeWithMinimumPrice(int $promotionAmount, array $itemTotals, array $minimumPrices, $distributed = [], $toDistribute = []): array
+    public function distribute(array $orderItems, int $amount, $channel): array
     {
-//        array_multisort($minimumPrices, SORT_DESC, $itemTotals);
+        $orderItemsToProcess = [];
+        foreach ($orderItems as $index => $orderItem) {
+            /** @var ProductVariantInterface $variant */
+            $variant = $orderItem->getVariant();
 
-        $splitPromotion = $this->proportionalIntegerDistributor->distribute($itemTotals, $promotionAmount);
+            $minimumPrice = $variant->getChannelPricingForChannel($channel)->getMinimumPrice();
 
-        $exceedsMinimumPrice = false;
-//        $promotionAmountLeft = 0;
-        $minimumPrices2 = [];
-        $newDiscounts = [];
-        foreach ($splitPromotion as $key => $splitPromotionAmount) {
-            if ($itemTotals[$key] + $splitPromotionAmount <= $minimumPrices[$key] && $minimumPrices[$key] > 0 && $exceedsMinimumPrice === false) {
-                $availableAmount = $itemTotals[$key] - $minimumPrices[$key];
-                $splitPromotion[$key] = -$availableAmount;
-                $promotionAmount += $availableAmount;
-//                $promotionAmountLeft += ($splitPromotionAmount + $availableAmount);
-                $distributed[] = $splitPromotion[$key];
-                $exceedsMinimumPrice = true;
-            } else {
-                $toDistribute[] = $itemTotals[$key];
-                $minimumPrices2[] = $minimumPrices[$key];
-//                $promotionAmountLeft += $splitPromotionAmount;
-            }
+            $minimumPrice *= $orderItem->getQuantity();
+
+            $orderItemsToProcess['order-item-' . $index] = [
+                'orderItem' => $orderItem,
+                'minimumPrice' => $minimumPrice,
+            ];
         }
 
-        if ($exceedsMinimumPrice === true && array_sum($toDistribute) > 0) {
-            return array_merge($distributed, $this->distributeWithMinimumPrice($promotionAmount, $toDistribute, $minimumPrices2));
-//            return $this->merge($distributed, $this->distributeWithMinimumPrice($promotionAmount, $toDistribute, $minimumPrices2), $newDiscounts);
-
-        }
-
-        return $splitPromotion;
+        return array_values(array_map(
+            function (array $processedOrderItem): int { return $processedOrderItem['promotion']; },
+            $this->processDistributionWithMinimumPrice($orderItemsToProcess, $amount, $channel)
+        ));
     }
 
+    private function processDistributionWithMinimumPrice(array $orderItems, int $amount, $channel): array
+    {
+        $totals = array_values(array_map(function (array $orderItemData): int {
+            return $orderItemData['orderItem']->getTotal();
+        }, $orderItems));
 
-//    private function merge(array $distributed, array $splitPromotion, array $newDiscounts): array
-//    {
-////        $temp = array_merge($distributed, $splitPromotion);
-//            $temp = $splitPromotion;
-////        $retArr = [];
-////
-////        for ($x = 0; $x < sizeof($temp) + sizeof($newDiscounts); $x++) {
-////            $value = $temp[$x];
-////
-////            if (isset($newDiscounts[$x])) {
-////
-////            }
-////        }
-////        return $temp;
-//
-//        foreach ($newDiscounts as $key => $newDiscount) {
-//            array_splice($temp, $key, 0, $newDiscount);
-//        }
-//
-//        return $temp;
-//    }
+        $promotionsToDistribute = array_combine(
+            array_keys($orderItems),
+            $this->proportionalIntegerDistributor->distribute($totals, $amount)
+        );
+
+        foreach ($promotionsToDistribute as $index => $promotion) {
+            $orderItems[$index]['promotion'] = $promotion;
+        }
+
+        $leftAmount = 0;
+        $distributableItems = [];
+        foreach ($orderItems as $index => $distribution) {
+            /** @var OrderItemInterface $orderItem */
+            $orderItem = $distribution['orderItem'];
+            $minimumPriceAdjustedByCurrentDiscount = $distribution['minimumPrice'];
+            $proposedPromotion = $distribution['promotion'];
+
+            if ($this->exceedsOrderItemMinimumPrice($orderItem->getTotal(), $minimumPriceAdjustedByCurrentDiscount, $proposedPromotion)) {
+                $leftAmount += ($orderItem->getTotal() + $proposedPromotion) - ($minimumPriceAdjustedByCurrentDiscount);
+                $orderItems[$index]['promotion'] = $minimumPriceAdjustedByCurrentDiscount - $orderItem->getTotal();
+
+                continue;
+            }
+
+            $distributableItems[$index] = [
+                'orderItem' => $orderItem,
+                'minimumPrice' => $distribution['minimumPrice'] - $proposedPromotion,
+            ];
+        }
+
+        if ($leftAmount === 0 || empty($distributableItems)) {
+            return $orderItems;
+        }
+
+        $nestedDistributions = $this->processDistributionWithMinimumPrice($distributableItems, $leftAmount, $channel);
+
+        foreach ($nestedDistributions as $index => $distribution) {
+            $orderItems[$index]['promotion'] += $distribution['promotion'];
+        }
+
+        return $orderItems;
+    }
+
+    private function exceedsOrderItemMinimumPrice(
+        int $orderItemTotal,
+        int $minimumPriceAdjustedByCurrentDiscount,
+        int $proposedPromotion
+    ): bool {
+        return $minimumPriceAdjustedByCurrentDiscount >= ($orderItemTotal + $proposedPromotion);
+    }
 }

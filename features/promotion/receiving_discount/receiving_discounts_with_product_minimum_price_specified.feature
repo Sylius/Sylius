@@ -159,5 +159,55 @@ Feature: Receiving discounts with product minimum price specified
         Then I should be on the checkout summary step
         And the "Cup" product should have unit price discounted by "$10.00"
         And the "Keyboard" product should have unit price discounted by "$1.00"
-        And the "Mouse" product should have unit price discounted by "$1.00"
-        And the "Headphones" product should have unit price discounted by "$0.00"
+        And the "Mouse" product should have unit price discounted by "$0.00"
+        And the "Headphones" product should have unit price discounted by "$1.00"
+
+    @api
+    Scenario: Distributing discount proportionally between different products when one has minimum price specified
+        Given it gives "$12" discount to every order
+        And the store has a product "Cup" priced at "$10.00"
+        And the store has a "Keyboard" configurable product
+        And this product has "RGB Keyboard" variant priced at "$20.00"
+        And the "RGB Keyboard" variant has minimum price of "$19.00" in the "United States" channel
+        And the store has a "Mouse" configurable product
+        And this product has "RGB Mouse" variant priced at "$50.00"
+        And the "RGB Mouse" variant has minimum price of "$50.00" in the "United States" channel
+        And the store has a "Headphones" configurable product
+        And this product has "RGB Headphones" variant priced at "$30.00"
+        And the "RGB Headphones" variant has minimum price of "$26.00" in the "United States" channel
+        When I add product "Cup" to the cart
+        And I add product "Keyboard" to the cart
+        And I add product "Mouse" to the cart
+        And I add product "Headphones" to the cart
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I proceed with "Free" shipping method and "Offline" payment
+        Then I should be on the checkout summary step
+        And the "Cup" product should have unit price discounted by "$7.00"
+        And the "Keyboard" product should have unit price discounted by "$1.00"
+        And the "Mouse" product should have unit price discounted by "$0.00"
+        And the "Headphones" product should have unit price discounted by "$4.00"
+
+    @api
+    Scenario: Distributing more than allowed discount proportionally between different products when one has minimum price specified
+        Given it gives "$20" discount to every order
+        And the store has a product "Cup" priced at "$10.00"
+        And the store has a "Keyboard" configurable product
+        And this product has "RGB Keyboard" variant priced at "$20.00"
+        And the "RGB Keyboard" variant has minimum price of "$19.00" in the "United States" channel
+        And the store has a "Mouse" configurable product
+        And this product has "RGB Mouse" variant priced at "$50.00"
+        And the "RGB Mouse" variant has minimum price of "$50.00" in the "United States" channel
+        And the store has a "Headphones" configurable product
+        And this product has "RGB Headphones" variant priced at "$30.00"
+        And the "RGB Headphones" variant has minimum price of "$26.00" in the "United States" channel
+        When I add product "Cup" to the cart
+        And I add product "Keyboard" to the cart
+        And I add product "Mouse" to the cart
+        And I add product "Headphones" to the cart
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I proceed with "Free" shipping method and "Offline" payment
+        Then I should be on the checkout summary step
+        And the "Cup" product should have unit price discounted by "$10.00"
+        And the "Keyboard" product should have unit price discounted by "$1.00"
+        And the "Mouse" product should have unit price discounted by "$0.00"
+        And the "Headphones" product should have unit price discounted by "$4.00"
