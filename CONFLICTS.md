@@ -3,9 +3,9 @@
 This document explains why certain conflicts were added to `composer.json` and
 references related issues.
 
-- `symfony/password-hasher": "^6.0`:
+ - `symfony/password-hasher": "^6.0`:
 
-  Symfony in version 5.3 change password hashing logic, and in version 6.0 they removed BC layer
+   Symfony in version 5.3 change password hashing logic, and in version 6.0 they removed BC layer
 
  - `doctrine/doctrine-bundle:2.3.0`:
 
