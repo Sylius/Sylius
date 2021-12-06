@@ -16,4 +16,6 @@ namespace Sylius\Behat\Element\Product\ShowPage;
 interface AttributesElementInterface
 {
     public function hasAttributeInLocale(string $attribute, string $locale, string $value): bool;
+
+    public function hasNonTranslatableAttribute(string $attribute, string $value): bool;
 }

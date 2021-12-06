@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    promotion_coupon:
+        code:
+            not_blank: Si us plau, introduïu el codi del cupó.
+            unique: Aquest cupó ja existeix.
+        is_invalid: El codi de cupó no és vàlid.
+        usage_limit:
+            min: El límit d'ús del cupó ha de ser com a mínim {{ limit }}.
+    promotion_coupon_generator_instruction:
+        amount:
+            min: La quantitat de cupons per generar ha de ser com a mínim {{ limit }}.
+            not_blank: Introduïu la quantitat de cupons per generar.

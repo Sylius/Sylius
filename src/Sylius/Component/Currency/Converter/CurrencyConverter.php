@@ -18,37 +18,33 @@ use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 
 final class CurrencyConverter implements CurrencyConverterInterface
 {
-    /** @var ExchangeRateRepositoryInterface */
-    private $exchangeRateRepository;
+    private ExchangeRateRepositoryInterface $exchangeRateRepository;
 
     /** @var array|ExchangeRateInterface[] */
-    private $cache;
+    private ?array $cache = null;
 
     public function __construct(ExchangeRateRepositoryInterface $exchangeRateRepository)
     {
         $this->exchangeRateRepository = $exchangeRateRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function convert(int $amount, string $sourceCurrencyCode, string $targetCurrencyCode): int
+    public function convert(int $value, string $sourceCurrencyCode, string $targetCurrencyCode): int
     {
         if ($sourceCurrencyCode === $targetCurrencyCode) {
-            return $amount;
+            return $value;
         }
 
         $exchangeRate = $this->findExchangeRate($sourceCurrencyCode, $targetCurrencyCode);
 
         if (null === $exchangeRate) {
-            return $amount;
+            return $value;
         }
 
         if ($exchangeRate->getSourceCurrency()->getCode() === $sourceCurrencyCode) {
-            return (int) round($amount * $exchangeRate->getRatio());
+            return (int) round($value * $exchangeRate->getRatio());
         }
 
-        return (int) round($amount / $exchangeRate->getRatio());
+        return (int) round($value / $exchangeRate->getRatio());
     }
 
     private function findExchangeRate(string $sourceCode, string $targetCode): ?ExchangeRateInterface

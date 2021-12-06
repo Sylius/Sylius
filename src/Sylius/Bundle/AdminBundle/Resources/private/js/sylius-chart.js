@@ -1,16 +1,12 @@
 import 'chart.js/dist/Chart.min';
 
-const drawChart = function drawChart(canvas) {
-  const labels = canvas.getAttribute('data-labels');
-  const values = canvas.getAttribute('data-values');
-  const currency = canvas.getAttribute('data-currency');
-
-  const chartElement = new Chart(canvas, {
+const drawChart = function drawChart(canvas, labels = [], values = [], currency) {
+  return new Chart(canvas, {
     type: 'bar',
     data: {
-      labels: JSON.parse(labels),
+      labels,
       datasets: [{
-        data: JSON.parse(values),
+        data: values,
         backgroundColor: 'rgba(26, 187, 156, 0.3)',
         borderColor: 'rgba(26, 187, 156, 1)',
         borderWidth: 1,
@@ -19,10 +15,15 @@ const drawChart = function drawChart(canvas) {
     options: {
       scales: {
         yAxes: [{
+          gridLines: {
+            color: 'rgba(0, 0, 0, 0.05)',
+          },
           ticks: {
             beginAtZero: true,
-            callback: function (value) {
-              return currency + value;
+            callback(value) {
+              const prefix = currency && currency.prefix ? currency.prefix : '';
+              const suffix = currency && currency.suffix ? currency.suffix : '';
+              return prefix + value + suffix;
             },
           },
         }],
@@ -31,6 +32,12 @@ const drawChart = function drawChart(canvas) {
             display: false,
           },
         }],
+      },
+      layout: {
+        padding: {
+          left: 20,
+          right: 20,
+        },
       },
       responsive: true,
       maintainAspectRatio: false,
@@ -41,7 +48,4 @@ const drawChart = function drawChart(canvas) {
   });
 };
 
-const canvas = document.getElementById('dashboard-chart');
-if (canvas) {
-  drawChart(canvas);
-}
+export default drawChart;

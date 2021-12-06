@@ -22,6 +22,8 @@ imports:
     - { resource: "@SyliusCoreBundle/Resources/config/app/sylius.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/fixtures.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/messenger.yaml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/doctrine_migrations.yaml" }
 
 parameters:
     sylius_core.public_dir: "%kernel.project_dir%/web"
@@ -32,6 +34,14 @@ doctrine:
         entity_managers:
             default:
                 auto_mapping: true
+                dql:
+                    string_functions:
+                        DATE_FORMAT: Sylius\Bundle\CoreBundle\Doctrine\DQL\DateFormat
+                        DAY: Sylius\Bundle\CoreBundle\Doctrine\DQL\Day
+                        HOUR: Sylius\Bundle\CoreBundle\Doctrine\DQL\Hour
+                        MONTH: Sylius\Bundle\CoreBundle\Doctrine\DQL\Month
+                        WEEK: Sylius\Bundle\CoreBundle\Doctrine\DQL\Week
+                        YEAR: Sylius\Bundle\CoreBundle\Doctrine\DQL\Year
 
 knp_gaufrette:
     adapters:

@@ -105,7 +105,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
-     * @return \Behat\Mink\Element\NodeElement[]
+     * @return NodeElement[]
      *
      * @throws ElementNotFoundException
      */

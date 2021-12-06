@@ -2,53 +2,62 @@
     "name": "sylius/taxonomy",
     "type": "library",
     "description": "Taxonomies - categorization of domain models in PHP projects.",
-    "keywords": ["taxonomy", "ecommerce", "categorization", "taxon", "classification"],
-    "homepage": "http://sylius.com",
+    "keywords": [
+        "taxonomy",
+        "ecommerce",
+        "categorization",
+        "taxon",
+        "classification"
+    ],
+    "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "homepage": "http://pjedrzejewski.com"
+            "homepage": "https://pjedrzejewski.com"
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.com"
+            "homepage": "https://sylius.com"
         },
         {
             "name": "Community contributions",
-            "homepage": "http://github.com/Sylius/Sylius/contributors"
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": "^7.3",
-
-        "behat/transliterator": "^1.1",
-        "sylius/resource": "^1.2",
-        "webmozart/assert": "^1.0"
+        "php": "^8.0",
+        "behat/transliterator": "^1.3",
+        "sylius/resource": "^1.7",
+        "webmozart/assert": "^1.8"
     },
     "require-dev": {
-        "phpspec/phpspec": "^5.0"
+        "phpspec/phpspec": "^7.0"
     },
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.9-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Component\\Taxonomy\\": "" }
+        "psr-4": {
+            "Sylius\\Component\\Taxonomy\\": ""
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Component\\Taxonomy\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Component\\Taxonomy\\spec\\": "spec/"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

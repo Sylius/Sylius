@@ -4,6 +4,7 @@
 sylius:
     form:
         taxon:
+            enabled: Lubatud
             name: Nimi
         taxonomy:
             name: Nimi

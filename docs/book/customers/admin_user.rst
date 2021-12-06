@@ -197,7 +197,7 @@ You can also use a twig function:
    {% endif %}
 
 Administrators per Channel
---------------------------
+''''''''''''''''''''''''''
 
 It is a possible to choose a channel to which an Administrator has access. It is done on the Administrator's configuration page.
 If a channel is not chosen on an Administrator then they will have access to all channels.
@@ -231,7 +231,7 @@ They can be configured as below:
 
 .. image:: ../../_images/sylius_plus/banner.png
    :align: center
-   :target: http://sylius.com/plus/?utm_source=docs
+   :target: https://sylius.com/plus/?utm_source=docs
 
 Learn more
 ----------

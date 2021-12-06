@@ -10,4 +10,4 @@ to a currency which is not present in the provided repository.
 .. note::
    This exception extends the `\\InvalidArgumentException`_.
 
-.. _\\InvalidArgumentException: http://php.net/manual/en/class.invalidargumentexception.php
+.. _\\InvalidArgumentException: https://php.net/manual/en/class.invalidargumentexception.php

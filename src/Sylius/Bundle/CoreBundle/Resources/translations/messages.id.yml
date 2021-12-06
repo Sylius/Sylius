@@ -9,6 +9,8 @@ sylius:
             title: Judul
         cart:
             coupon: Kupon
+        catalog_promotion:
+            channels: Saluran
         checkout:
             addressing:
                 different_billing_address: Menggunakan alamat berbeda untuk penagihan?
@@ -102,7 +104,7 @@ sylius:
         user:
             billing_address: Alamat Penagihan
             enabled: Diaktifkan
-            first_name: Nama Depan
+            first_name: Nama depan
             groups: Kelompok
             roles: Peran
             last_name: Nama belakang

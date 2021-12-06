@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: تصویر بسیار بزرگ است -{{ size }}{{ suffix }}. حداکثر اندازه مجاز {{ limit }}{{ suffix }} می باشد.
+            upload_ini_size: این تصویر بسیار بزرگ است. حداکثر اندازی مجاز {{ suffix }}{{ limit }} است.
     channel:
         base_currency:
             not_blank: لطفا ارز پایه کانال را وارد کنید.
@@ -13,7 +17,6 @@ sylius:
             min: ایمیل باید حداقل {{ limit }} حرف داشته باشد.
     channel_pricing:
         price:
-            min: قیمت باید حداقل {{ limit }} باشد.
             not_blank: لطفا قیمت را وارد کنید.
     checkout:
         shipping_method:
@@ -38,9 +41,6 @@ sylius:
         payment_method_eligibility: 'این روش پرداخت %paymentMethodName% غیرفعال شده است. لطفا نحوه پرداخت را مجددا انتخاب کنید.'
         product_eligibility: 'این محصول %productName% غیرفعال شده است.'
     locale:
-        code:
-            not_blank: لطفاً کد زبان را وارد کنید.
-            unique: این زبان قبلا در سیستم ثبت شده است.
         enabled:
             cannot_disable_base: زبان پایه را نمی توانید غیر فعال کنید.
     product_attribute:
@@ -72,6 +72,9 @@ sylius:
     product_translation:
         short_description:
             max: معرفی کوتاه نباید بیش از {{ limit }} حرف باشد.
+    review:
+        author:
+            not_blank: لطفا ایمیل خود را وارد کنید.
     taxon_image:
         file:
             max_size: تصویر بسیار بزرگ است -{{ size }}{{ suffix }}. حداکثر اندازه مجاز {{ limit }}{{ suffix }} می باشد.

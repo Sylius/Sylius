@@ -1,0 +1,22 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        api_currencies:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.channel
+                - sylius.behat.context.transform.currency
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.lexical
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.currency
+
+                - sylius.behat.context.api.shop.channel
+                - sylius.behat.context.api.shop.currency
+
+            filters:
+                tags: "@currencies&&@api"

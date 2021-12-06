@@ -18,25 +18,18 @@ use Symfony\Component\Templating\Helper\Helper;
 
 class ConvertMoneyHelper extends Helper implements ConvertMoneyHelperInterface
 {
-    /** @var CurrencyConverterInterface */
-    private $currencyConverter;
+    private CurrencyConverterInterface $currencyConverter;
 
     public function __construct(CurrencyConverterInterface $currencyConverter)
     {
         $this->currencyConverter = $currencyConverter;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function convertAmount(int $amount, ?string $sourceCurrencyCode, ?string $targetCurrencyCode): string
     {
         return (string) $this->currencyConverter->convert($amount, $sourceCurrencyCode, $targetCurrencyCode);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'sylius_money_converter';

@@ -19,14 +19,11 @@ use Webmozart\Assert\Assert;
 
 final class UniquePinGenerator implements GeneratorInterface
 {
-    /** @var RandomnessGeneratorInterface */
-    private $generator;
+    private RandomnessGeneratorInterface $generator;
 
-    /** @var UniquenessCheckerInterface */
-    private $uniquenessChecker;
+    private UniquenessCheckerInterface $uniquenessChecker;
 
-    /** @var int */
-    private $pinLength;
+    private int $pinLength;
 
     /**
      * @throws \InvalidArgumentException
@@ -43,9 +40,6 @@ final class UniquePinGenerator implements GeneratorInterface
         $this->uniquenessChecker = $uniquenessChecker;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function generate(): string
     {
         do {

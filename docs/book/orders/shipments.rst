@@ -28,7 +28,7 @@ there remains one shipment in state ``ready``.
 
 .. image:: ../../_images/sylius_plus/banner.png
     :align: center
-    :target: http://sylius.com/plus/?utm_source=docs
+    :target: https://sylius.com/plus/?utm_source=docs
 
 The Shipment State Machine
 --------------------------
@@ -87,6 +87,29 @@ In order to have your shipping method available in checkout add it to a desired 
     $channel = $this->container->get('sylius.repository.channel')->findOneByCode('channel_code');
     $channel->addShippingMethod($shippingMethod);
 
+Shipping method rules
+'''''''''''''''''''''
+
+The shipping method **Rules** restrict in what circumstances a shipping method is available.
+An appropriate **RuleChecker** (each Rule type has its own RuleChecker) may check if:
+
+* All products belong to a certain taxon
+* The order total is greater than a given amount
+* The total weight is below a given number
+* The total volume is below a given value
+
+And many more similar, suitable to your needs.
+
+Rule Types
+''''''''''
+
+The types of rules that are configured in **Sylius** by default are:
+
+* **Order total greater than or equal** - checks if the order total is greater than or equal to a given amount
+* **Order total less than or equal** - checks if the order total is less than or equal to a given amount
+* **Total weight greater than or equal** - checks if the total weight of the order is greater than or equal to a given number
+* **Total weight less than or equal** - checks if the total weight of the order is less than or equal to a given number
+
 Shipping Zones
 --------------
 
@@ -139,3 +162,4 @@ Learn more
 ----------
 
 * :doc:`Shipping - Component Documentation </components_and_bundles/components/Shipping/index>`
+* :doc:`How to create a custom shipping method rule? </cookbook/shipping-methods/custom-shipping-method-rule>`

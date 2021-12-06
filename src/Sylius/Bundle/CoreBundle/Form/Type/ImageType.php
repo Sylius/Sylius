@@ -20,9 +20,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 abstract class ImageType extends AbstractResourceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -36,9 +33,6 @@ abstract class ImageType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_image';

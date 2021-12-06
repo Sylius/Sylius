@@ -2,6 +2,21 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        contact_request:
+            content: 'Turinys'
+            subject: 'Kontaktų užklausa'
+        order_confirmation:
+            subject: 'Užsakymo patvirtinimas'
+            view_order_or_change_payment_method: 'Peržiūrėti užsakymą arba pakeisti mokėjimo būdą'
+        password_reset:
+            hello: 'Sveiki'
+            subject: 'Slaptažodžio atstatymas'
+        user_registration:
+            welcome_to_our_store: 'Sveiki atvykę į mūsų parduotuvę!'
+        verification_token:
+            hello: 'Sveiki'
+            subject: 'El. pašto adreso patvirtinimas'
     menu:
         shop:
             account:

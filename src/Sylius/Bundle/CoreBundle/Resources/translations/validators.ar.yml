@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: يتم الصورة كبيرة جداً--{{ size }}{{ suffix }}. الحد الأقصى المسموح به لحجم هو {{ limit }}{{ suffix }}.
+            upload_ini_size: الصورة كبير جداً. الحد الأقصى المسموح به لحجم هو {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: الرجاء إدخال العملة الرئيسية.
@@ -13,14 +17,13 @@ sylius:
             min: البريد الإلكتروني يجب أن يكون على الأقل {{ limit }} حرفاً.
     channel_pricing:
         price:
-            min: يجب أن تكون الأسعار على الأقل {{ limit }}.
             not_blank: يجب أن تدخل المحتوى.
     checkout:
         shipping_method:
             not_blank: يرجى تحديد أسلوب الشحن.
     contact:
         email:
-            invalid: البريد الإلكتروني غير صالح.
+            invalid: هذا البريد الإلكتروني غير صالح.
             not_blank: الرجاء إدخال البريدك الإلكتروني.
         message:
             not_blank: الرجاء إدخال رسالتك.
@@ -39,9 +42,6 @@ sylius:
         product_eligibility: 'تم تعطيل هذا المنتج %productName%.'
         shipping_method_eligibility: 'المنتج لا تتناسب مع متطلبات %shippingMethodName% أسلوب الشحن. الرجاء إعادة تحديد أسلوب الشحن الخاص بك.'
     locale:
-        code:
-            not_blank: الرجاء إدخال رمز المنطقة.
-            unique: هذا الاسم موجود بالفعل.
         enabled:
             cannot_disable_base: لا يمكن تعطيل للعملة الأساسية.
     product:
@@ -77,6 +77,9 @@ sylius:
     product_translation:
         short_description:
             max: البريد الإلكتروني يجب أن لا تكون أطول من أحرف {{ limit }}.
+    review:
+        author:
+            not_blank: الرجاء إدخال البريدك الإلكتروني.
     taxon_image:
         file:
             max_size: يتم الصورة كبيرة جداً--{{ size }}{{ suffix }}. الحد الأقصى المسموح به لحجم هو {{ limit }}{{ suffix }}.

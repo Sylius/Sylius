@@ -30,26 +30,19 @@ use Webmozart\Assert\Assert;
 
 final class ManagingOrdersContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var IndexPageInterface */
-    private $indexPage;
+    private IndexPageInterface $indexPage;
 
-    /** @var ShowPageInterface */
-    private $showPage;
+    private ShowPageInterface $showPage;
 
-    /** @var UpdatePageInterface */
-    private $updatePage;
+    private UpdatePageInterface $updatePage;
 
-    /** @var HistoryPageInterface */
-    private $historyPage;
+    private HistoryPageInterface $historyPage;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
 
-    /** @var SharedSecurityServiceInterface */
-    private $sharedSecurityService;
+    private SharedSecurityServiceInterface $sharedSecurityService;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -158,6 +151,14 @@ final class ManagingOrdersContext implements Context
     public function iChooseChannelAsAChannelFilter($channelName)
     {
         $this->indexPage->chooseChannelFilter($channelName);
+    }
+
+    /**
+     * @When I choose :methodName as a shipping method filter
+     */
+    public function iChooseMethodAsAShippingMethodFilter($methodName)
+    {
+        $this->indexPage->chooseShippingMethodFilter($methodName);
     }
 
     /**
@@ -329,11 +330,19 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then there should be a shipping charge :shippingCharge
+     * @Then there should be a shipping charge :shippingCharge for :shippingMethodName method
      */
-    public function theOrdersShippingChargesShouldBe($shippingCharge)
+    public function thereShouldBeAShippingChargeForMethod(string $shippingCharge, string $shippingMethodName): void
     {
-        Assert::true($this->showPage->hasShippingCharge($shippingCharge));
+        Assert::true($this->showPage->hasShippingCharge($shippingCharge, $shippingMethodName));
+    }
+
+    /**
+     * @Then there should be a shipping tax :shippingTax for :shippingMethodName method
+     */
+    public function thereShouldBeAShippingTaxForMethod(string $shippingTax, string $shippingMethodName): void
+    {
+        Assert::true($this->showPage->hasShippingTax($shippingTax, $shippingMethodName));
     }
 
     /**

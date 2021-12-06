@@ -5,6 +5,8 @@ sylius:
     form:
         block:
             title: כותרת
+        catalog_promotion:
+            channels: ערוצים
         checkout:
             addressing:
                 different_billing_address: השתמש בכתובת שונה על חשבונית?
@@ -25,6 +27,7 @@ sylius:
                 country: מדינה
                 postcode: מיקוד
                 street: רחוב
+            countries: ארצות
             currencies: מטבעות
             currency_base: מטבע בסיס
         image:
@@ -59,7 +62,6 @@ sylius:
             file: בחר תמונה
         user:
             billing_address: כתובת לחשבונית
-            different_billing_address: השתמש בכתובת שונה על חשבונית?
             enabled: הופעל
             first_name: שם פרטי
             groups: קבוצות
@@ -106,3 +108,5 @@ sylius:
         settings:
             off: false
             on: true
+    payum_gateway:
+        offline: תנותק

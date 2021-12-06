@@ -7,10 +7,10 @@ Feature: Customer profile validation
     Background:
         Given the store operates on a single channel in "United States"
         And the store has customer "claire@underwood.com"
-        And there is a customer "Francis Underwood" identified by an email "francis@underwood.com" and a password "whitehouse"
+        And there is a customer "Francis Underwood" identified by an email "francis@underwood.com" and a password "sylius"
         And I am logged in as "francis@underwood.com"
 
-    @ui
+    @ui @api
     Scenario: Trying to remove my first name
         When I want to modify my profile
         And I remove the first name
@@ -18,7 +18,7 @@ Feature: Customer profile validation
         Then I should be notified that the first name is required
         And my name should still be "Francis Underwood"
 
-    @ui
+    @ui @api
     Scenario: Trying to remove my last name
         When I want to modify my profile
         And I remove the last name
@@ -26,7 +26,7 @@ Feature: Customer profile validation
         Then I should be notified that the last name is required
         And my name should still be "Francis Underwood"
 
-    @ui
+    @ui @api
     Scenario: Trying to remove my email
         When I want to modify my profile
         And I remove the customer email
@@ -34,7 +34,7 @@ Feature: Customer profile validation
         Then I should be notified that the email is required
         And my email should still be "francis@underwood.com"
 
-    @ui
+    @ui @api
     Scenario: Trying to change my email to an existing value
         When I want to modify my profile
         And I specify the customer email as "claire@underwood.com"
@@ -42,7 +42,7 @@ Feature: Customer profile validation
         Then I should be notified that the email is already used
         And my email should still be "francis@underwood.com"
 
-    @ui
+    @ui @api
     Scenario: Trying to change my email to an invalid value
         When I want to modify my profile
         And I specify the customer email as "francisunderwood"

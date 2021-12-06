@@ -1,0 +1,23 @@
+{
+    "@context": "\/api\/v2\/contexts\/Promotion",
+    "@id": "\/api\/v2\/admin\/promotions\/tshirts_discount",
+    "@type": "Promotion",
+    "channels": [],
+    "id":"@integer@",
+    "code": "tshirts_discount",
+    "name": "T-Shirts discount",
+    "description": null,
+    "priority": 0,
+    "exclusive": false,
+    "usageLimit": null,
+    "used": 0,
+    "startsAt": null,
+    "endsAt": null,
+    "couponBased": false,
+    "coupons": [],
+    "rules": [],
+    "actions": [],
+    "appliesToDiscounted": false,
+    "createdAt": @string@,
+    "updatedAt": @string@
+}

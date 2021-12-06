@@ -1,0 +1,102 @@
+{% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
+
+{% set labels, values = sales_summary.intervals, sales_summary.sales %}
+
+<div class="ui grid">
+    <div class="column">
+        <div class="stats">
+            <div class="ui top attached action header">
+                {{ 'sylius.ui.sales_summary'|trans }}
+                <div class="ui buttons">
+                    <button
+                        class="ui basic button"
+                        data-stats-button="week"
+                        data-stats-url="{{ url('sylius_admin_dashboard_statistics', {channelCode: channel.channel_code}) }}">
+                        {{ 'sylius.ui.statistics.2weeks'|trans }}
+                    </button>
+                    <button
+                        class="ui basic button"
+                        data-stats-button="month"
+                        data-stats-url="{{ url('sylius_admin_dashboard_statistics', {channelCode: channel.channel_code}) }}">
+                        {{ 'sylius.ui.statistics.month'|trans }}
+                    </button>
+                    <button
+                        class="ui basic button"
+                        data-stats-button="year"
+                        data-stats-url="{{ url('sylius_admin_dashboard_statistics', {channelCode: channel.channel_code}) }}">
+                        {{ 'sylius.ui.statistics.year'|trans }}
+                    </button>
+                </div>
+            </div>
+            <div class="ui attached segment spaceless">
+                <div class="stats-grid">
+                    <div class="stats-column">
+                        <div class="ui tiny statistic">
+                            <div id="total-sales" data-stats-summary="total_sales" class="value" style="padding-bottom: 10px;">
+                                {{ statistics.total_sales }}
+                            </div>
+                            <div class="label">
+                                {{ 'sylius.ui.sales'|trans }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stats-column">
+                        <div class="ui tiny statistic">
+                            <div id="new-orders" data-stats-summary="number_of_new_orders" class="value" style="padding-bottom: 10px;">
+                                {{ statistics.number_of_new_orders }}
+                            </div>
+                            <div class="label">
+                                {{ 'sylius.ui.paid_orders'|trans }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stats-column">
+                        <div class="ui tiny statistic">
+                            <div id="new-customers" data-stats-summary="number_of_new_customers" class="value" style="padding-bottom: 10px;">
+                                {{ statistics.number_of_new_customers }}
+                            </div>
+                            <div class="label">
+                                {{ 'sylius.ui.customers'|trans }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stats-column">
+                        <div class="ui tiny statistic">
+                            <div id="average-order-value" data-stats-summary="average_order_value" class="value" style="padding-bottom: 10px;">
+                                {{ statistics.average_order_value }}
+                            </div>
+                            <div class="label">
+                                {{ 'sylius.ui.average_order_value'|trans }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if labels and values %}
+                <div class="ui bottom attached segment stats-graph">
+                    <button id="navigation-prev"
+                            class="navigation navigation-prev"
+                            interval="year"
+                            data-stats-url="{{ url('sylius_admin_dashboard_statistics', {channelCode: channel.channel_code}) }}">
+                        <i class="angle left icon"></i>
+                    </button>
+                    <canvas
+                        id="stats-graph"
+                        data-labels="{{ labels|json_encode() }}"
+                        data-values="{{ values|json_encode() }}"
+                        data-currency="{{ channel.base_currency_code|sylius_currency_symbol }}">
+                    </canvas>
+                    <button id="navigation-next"
+                            class="navigation navigation-next"
+                            interval="year"
+                            data-stats-url="{{ url('sylius_admin_dashboard_statistics', {channelCode: channel.channel_code}) }}">
+                        <i class="angle right icon"></i>
+                    </button>
+                </div>
+            {% endif %}
+            <div class="ui inverted dimmer stats-loader">
+                <div class="ui loader"></div>
+            </div>
+        </div>
+    </div>
+</div>

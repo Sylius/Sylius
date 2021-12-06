@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Leírás
+            name: Név
+            priority: Fontosság
         promotion:
             actions: Műveletek
             add_action: Művelet hozzáadása
@@ -17,6 +21,11 @@ sylius:
             starts_at: Kezdődik
             usage_limit: Felhasználhatóság korlátozása
         promotion_action:
+            item_fixed_discount: Rögzített értékű termék ár engedmény
+            item_percentage_discount: Százalékos termék ár engedmény
+            order_fixed_discount: Rögzített értékű rendelési összeg engedmény
+            order_percentage_discount: Százalékos rendelési összeg engedmény
+            shipping_percentage_discount: Százalékos kiszállítási ár engedmény
             fixed_discount_configuration:
                 amount: Összeg
             percentage_discount_configuration:
@@ -30,9 +39,18 @@ sylius:
             code_length: A kód hossza
             expires_at: Lejárat
             usage_limit: Felhasználhatóság korlátozása
+        promotion_filter:
+            price_range: Árkategória szűrő
         promotion_rule:
+            cart_quantity: Kosár mennyiség
+            contains_product: Tartalmaz terméket
             customer_group: Felhasználói csoport
+            has_at_least_one_from_taxons: Van legalább egy termék a megadott taxonból
+            item_total: Tétel végösszege
+            nth_order: N-edik rendelés
+            shipping_country: Szállítás országa
             taxonomy: Taxonómia
+            total_price_of_items_from_taxon: Adott taxonba tartozó termékek végösszege
             cart_quantity_configuration:
                 count: Mennyiség
                 equal: Egyenlő

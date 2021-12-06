@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use Faker\Generator;
+use Faker\Factory;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
-use Sylius\Component\Customer\Model\CustomerInterface as CustotmerComponent;
+use Sylius\Component\Customer\Model\CustomerInterface as CustomerComponent;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -25,20 +27,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $shopUserFactory;
+    private FactoryInterface $shopUserFactory;
 
-    /** @var FactoryInterface */
-    private $customerFactory;
+    private FactoryInterface $customerFactory;
 
-    /** @var RepositoryInterface */
-    private $customerGroupRepository;
+    private RepositoryInterface $customerGroupRepository;
 
-    /** @var \Faker\Generator */
-    private $faker;
+    private Generator $faker;
 
-    /** @var OptionsResolver */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
         FactoryInterface $shopUserFactory,
@@ -49,15 +46,12 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
         $this->customerFactory = $customerFactory;
         $this->customerGroupRepository = $customerGroupRepository;
 
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): ShopUserInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -82,9 +76,6 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
         return $user;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -103,10 +94,10 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
             ->setDefault('customer_group', LazyOption::randomOneOrNull($this->customerGroupRepository, 100))
             ->setAllowedTypes('customer_group', ['null', 'string', CustomerGroupInterface::class])
             ->setNormalizer('customer_group', LazyOption::findOneBy($this->customerGroupRepository, 'code'))
-            ->setDefault('gender', CustotmerComponent::UNKNOWN_GENDER)
+            ->setDefault('gender', CustomerComponent::UNKNOWN_GENDER)
             ->setAllowedValues(
                 'gender',
-                [CustotmerComponent::UNKNOWN_GENDER, CustotmerComponent::MALE_GENDER, CustotmerComponent::FEMALE_GENDER]
+                [CustomerComponent::UNKNOWN_GENDER, CustomerComponent::MALE_GENDER, CustomerComponent::FEMALE_GENDER]
             )
             ->setDefault('phone_number', function (Options $options): string {
                 return $this->faker->phoneNumber;

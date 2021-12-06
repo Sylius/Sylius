@@ -11,6 +11,7 @@ This is a guide to understanding products handling in Sylius together with surro
     product_associations
     attributes
     pricing
+    catalog_promotions
     taxons
     inventory
     multi_source_inventory

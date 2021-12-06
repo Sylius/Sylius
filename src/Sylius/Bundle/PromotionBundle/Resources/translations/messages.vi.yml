@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Mô tả
+            name: Tên
         promotion:
             description: Mô tả
             name: Tên

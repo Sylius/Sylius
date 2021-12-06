@@ -23,6 +23,11 @@ class ErrorPage extends Page implements ErrorPageInterface
         return '';
     }
 
+    public function getCode(): int
+    {
+        return $this->getSession()->getStatusCode();
+    }
+
     public function getTitle(): string
     {
         return $this->getElement('title')->getText();
@@ -31,7 +36,7 @@ class ErrorPage extends Page implements ErrorPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'title' => 'h1.exception-message',
+            'title' => 'h2.header',
         ]);
     }
 }

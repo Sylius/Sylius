@@ -77,7 +77,7 @@ Neither template events, block or templates themselves cannot be deleted or rena
 Deprecations
 ------------
 
-Before we remove or replace code covered by this backwards compatiblity promise, it is
+Before we remove or replace code covered by this backwards compatibility promise, it is
 first deprecated in the next minor release before being removed in the next major release.
 
 A code is marked as deprecated by adding a ``@deprecated`` PHPDoc to

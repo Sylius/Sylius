@@ -4,6 +4,8 @@
 sylius:
     form:
         taxon:
+            description: Beskrywing
+            enabled: Aktief
             name: Naam
         taxonomy:
             name: Naam

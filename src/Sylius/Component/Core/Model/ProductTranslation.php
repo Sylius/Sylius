@@ -17,20 +17,16 @@ use Sylius\Component\Product\Model\ProductTranslation as BaseProductTranslation;
 
 class ProductTranslation extends BaseProductTranslation implements ProductTranslationInterface
 {
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     protected $shortDescription;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getShortDescription(): ?string
     {
         return $this->shortDescription;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setShortDescription(?string $shortDescription): void
     {
         $this->shortDescription = $shortDescription;

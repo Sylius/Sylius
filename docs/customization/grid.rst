@@ -3,8 +3,7 @@ Customizing Grids
 
 .. note::
 
-    We assume that you are familiar with grids. If not check the documentation of the :doc:`Grid Bundle </components_and_bundles/bundles/SyliusGridBundle/index>`
-    and :doc:`Grid Component </components_and_bundles/components/Grid/index>` first.
+    We assume that you are familiar with grids. If not check the documentation of the `GridBundle <https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md>`_ first.
 
 .. tip::
 
@@ -175,16 +174,16 @@ Every grid configuration dispatches an event when its definition is being conver
 
 For example, **sylius_admin_product** grid dispatches such an event:
 
-.. code-block:: php
+.. code-block:: yaml
 
     sylius.grid.admin_product # For the grid of products in admin
 
-To show you an example of a grid customization using events, we will remove a field from a grid using that method.
+To show you an example of a grid customization using events, we will modify fields from a grid using that method.
 Here are the steps, that you need to take:
 
-**1.** In order to remove fields from the product grid in **Sylius** you have to create a ``App\Grid\AdminProductsGridListener`` class.
+**1.** In order to modify fields from the product grid in **Sylius** you have to create a ``App\Grid\AdminProductsGridListener`` class.
 
-In the example below we are removing the ``images`` field from the ``sylius_admin_product`` grid.
+In the example below we are removing the ``image`` field and adding the ``code`` field to the ``sylius_admin_product`` grid.
 
 .. code-block:: php
 
@@ -193,14 +192,22 @@ In the example below we are removing the ``images`` field from the ``sylius_admi
     namespace App\Grid;
 
     use Sylius\Component\Grid\Event\GridDefinitionConverterEvent;
+    use Sylius\Component\Grid\Definition\Field;
 
     final class AdminProductsGridListener
     {
-        public function removeImageField(GridDefinitionConverterEvent $event): void
+        public function editFields(GridDefinitionConverterEvent $event): void
         {
             $grid = $event->getGrid();
 
+            // Remove
             $grid->removeField('image');
+
+            // Add
+            $codeField = Field::fromNameAndType('code', 'string');
+            $codeField->setLabel('Code');
+            // ...
+            $grid->addField($codeField);
         }
     }
 
@@ -213,16 +220,246 @@ listener to the ``sylius.grid.admin_product`` event in the ``config/services.yam
     services:
         App\Grid\AdminProductsGridListener:
             tags:
-                - { name: kernel.event_listener, event: sylius.grid.admin_product, method: removeImageField }
+                - { name: kernel.event_listener, event: sylius.grid.admin_product, method: editFields }
 
 **3.** Result:
 
 After these two steps your admin product grid should not have the image field.
 
-.. include:: /customization/plugins.rst.inc
+.. include:: /customization/plugins.rst
+
+Changes related to upgrade to GridBundle 1.10
+---------------------------------------------
+
+Since the SyliusGridBundle v1.10, all grids has options `fetch_join_collection` and `use_output_walkers` enabled by default.
+According to our research it may fix a lot of pagination issues and improve big-database performance (1M+ rows) up to 70%,
+but with the price of more queries required to be performed. If this trade-off is not worth it for you,
+you may disable it by using the following configuration snippet:
+
+.. code-block:: yaml
+
+    # config/packages/_sylius.yaml
+    sylius_grid:
+        grids:
+            sylius_admin_address_log_entry:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_admin_user:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_channel:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_country:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_currency:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_customer:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_customer_group:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_customer_order:
+                extends: sylius_admin_order
+                driver:
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_exchange_rate:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_inventory:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_locale:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_order:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_payment:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_payment_method:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_product:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_product_association_type:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_product_attribute:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_product_option:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_product_review:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_product_variant:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_promotion:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_promotion_coupon:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_shipment:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_shipping_category:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_shipping_method:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_tax_category:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_tax_rate:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_taxon:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_admin_zone:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_shop_account_order:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
+            sylius_shop_product:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        pagination:
+                            fetch_join_collection: false
+                            use_output_walkers: false
 
 Learn more
 ----------
 
-* :doc:`Grid - Component Documentation </components_and_bundles/components/Grid/index>`
-* :doc:`Grid - Bundle Documentation </components_and_bundles/bundles/SyliusGridBundle/index>`
+* `GridBundle documentation <https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md>`_

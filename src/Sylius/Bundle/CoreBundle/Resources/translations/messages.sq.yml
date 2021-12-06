@@ -9,6 +9,8 @@ sylius:
             title: Titulli
         cart:
             coupon: Kuponi
+        catalog_promotion:
+            channels: Kanalet
         checkout:
             addressing:
                 different_billing_address: Përdor adresë tjetër për faturën?
@@ -31,6 +33,7 @@ sylius:
                 country: Shteti
                 postcode: Kodi postar
                 street: Rruga
+            countries: Vendet
             currencies: Monedhat
             currency_base: Valuta baze
             hostname: Emri i hostit
@@ -64,7 +67,7 @@ sylius:
             restricted_zone: Zonë e kufizuar
             short_description: Përshkrim i shkurtër
             variant_selection_method: Metoda rezervë e përzgjedhjes
-            main_taxon: Tipologjia kryesore
+            main_taxon: Kategoria kryesore
             channels: Kanalet
             enabled: E aktivizuar
         product_filter:
@@ -95,7 +98,6 @@ sylius:
             file: Zgjidh imazhin
         user:
             billing_address: Adresa e faturimit
-            different_billing_address: Përdor adresë tjetër për faturën?
             enabled: E aktivizuar
             first_name: Emri
             groups: Grupet

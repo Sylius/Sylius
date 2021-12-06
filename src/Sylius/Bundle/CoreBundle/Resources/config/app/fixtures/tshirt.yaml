@@ -10,7 +10,7 @@ sylius_fixtures:
                     options:
                         custom:
                             category:
-                                code: 'category'
+                                code: 'MENU_CATEGORY'
                                 name: 'Category'
                                 translations:
                                     en_US:
@@ -61,6 +61,11 @@ sylius_fixtures:
                                 code: 't_shirt_material'
                                 type: 'text'
 
+                            -   name: 'Damage reduction'
+                                code: 'damage_reduction'
+                                type: 'percent'
+                                translatable: false
+
                 tshirt_option:
                     name: product_option
                     options:
@@ -90,6 +95,7 @@ sylius_fixtures:
                                     t_shirt_brand: 'You are breathtaking'
                                     t_shirt_collection: 'Sylius Summer 2019'
                                     t_shirt_material: '100% cotton'
+                                    damage_reduction: 0.1
                                 product_options:
                                     - 't_shirt_size'
                                 images:

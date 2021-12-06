@@ -1,0 +1,231 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        block:
+            body: Боди
+            id: ID
+            title: Гарчиг
+        cart:
+            coupon: Купон
+        catalog_promotion:
+            channels: Сувгууд
+        checkout:
+            addressing:
+                different_billing_address: Захиалгын өөр хаяг ашиглах уу?
+                different_shipping_address: Хүргэлтийн өөр хаяг ашиглах уу?
+            payment_method: Төлбөрийн хэрэгсэл
+            shipping_method: Хүргэлтийн төрөл
+        promotion:
+            channels: Сувгууд
+        promotion_action:
+            add_product_configuration:
+                product: Бүтээгдэхүүн
+        promotion_coupon:
+            per_customer_usage_limit: Үйлчлүүлэгч бүрийн хэрэглээний хязгаарлалт
+            reusable_from_cancelled_orders: Цуцлагдсан захиалгаас дахин ашиглах боломжтой
+        group:
+            name: Нэр
+            roles: Дүрүүд
+        channel:
+            billing_data:
+                city: Хот
+                company: Компани
+                country: Улс
+                postcode: Шуудангийн код
+                street: Гудамж
+                tax_id: Такс ID
+            contact_email: Холбоо барих имэйл
+            countries: Улсууд
+            currencies: Мөнгөн тэмдэгтүүд
+            currency_base: Үндсэн валют
+            account_verification_required: Акаунт баталгаажуулалт шаардлагатай юу?
+            hostname: Хостын нэр
+            locale_default: Анхдагч байршил
+            locales: Хэл
+            menu_taxon: Цэсний таксон
+            payment_methods: Төлбөрийн нөхцөл
+            shipping_methods: Тээвэрлэх төрөл
+            shop_billing_data: Дэлгүүрийн тооцооны мэдээлэл
+            skipping_shipping_step_allowed: Зөвхөн ганц тээврийн төрлийг ашиглах боломжтой бол тээвэрлэлтийн алхамыг алгасах уу?
+            skipping_payment_step_allowed: Зөвхөн нэг төлбөрийн хэрэгсэл боломжтой бол төлбөрийн алхамыг алгасах уу?
+            tax_calculation_strategy: Такс тооцох стратеги
+            tax_zone_default: Анхдагч таксийн бүс
+            taxonomies: Таксономууд
+            theme: Загвар
+        image:
+            type: Төрөл
+            file: Зураг
+        locale:
+            code: Код
+            enabled: Идэвхтэй
+        order_filter:
+            created_at_from: Дараа нь үүсгэсэн
+            created_at_to: Өмнө нь үүсгэсэн
+            number: Дугаар
+            total_from: '-с'
+            total_to: Руу
+            payment_state: Төлбөрийн төлөв
+            channel: Бүх суваг
+        page:
+            body: Боди
+            id: ID
+            title: Гарчиг
+        product:
+            images: Зургууд
+            restricted_zone: Хязгаарлагдмал бүс
+            short_description: Товч тодорхойлолт
+            variant_selection_method: Хувилбарын сонголтын төрөл
+            main_taxon: Үндсэн таксон
+            channels: Сувгууд
+            enabled: Идэвхтэй
+        product_filter:
+            name: Нэр
+            code: Код
+        product_variant:
+            tax_category: Таксийн ангилал
+            shipping_category: Хүргэлтийн ангилал
+        shipment_filter:
+            created_at_from: '-с'
+            created_at_to: Руу
+            number: Захиалгын дугаар
+            shipping_address: Илгээх нэр
+            channel: Бүх суваг
+        payment_filter:
+            created_at_from: '-с'
+            created_at_to: Руу
+            number: Захиалгын дугаар
+            billing_address: Дансны нэр
+            channel: Бүх суваг
+        shipping_method:
+            zone: Бүс
+        taxon:
+            code: Код
+            file: Зураг сонгох
+            images: Зургууд
+        taxonomy:
+            file: Зураг сонгох
+        user:
+            billing_address: Нэхэмжлэх хаяг
+            different_shipping_address: Хүргэлтийн өөр хаяг ашиглах уу?
+            enabled: Идэвхтэй
+            first_name: Нэр
+            groups: Бүлгүүд
+            roles: Дүрүүд
+            last_name: Овог
+            password: Нууц үг
+            shipping_address: Хүргэлтийн хаяг
+        user_filter:
+            query: Хайх
+        variant:
+            depth: Гүн
+            height: Өндөр
+            on_hand: Одоогийн нөөц
+            price: Үнэ
+            sku: SKU
+            shipping_required: Тээвэрлэлт шаардлагатай юу?
+            weight: Жин
+            width: Өргөн
+            tracked_help: Хэрэв энэ тохиргоог идэвхжүүлсэн бол Sylius дэлгүүрийн үлдэгдлийг хянаж 0-т хүрмэгц бүтээгдэхүүнийг борлуулахаа зогсооно.
+        attribute:
+            product_attribute_value:
+                attribute: Атрибут
+                value: Утга
+        guest:
+            email: Имэйл
+        product_association:
+            product: Холбоотой бүтээгдэхүүн
+            type: Холбооны төрөл
+        product_association_type:
+            name: Нэр
+        promotion_filter:
+            products: Барааны шүүлтүүр
+            taxons: Таксоны шүүлтүүр
+        promotion_rule:
+            customer_group:
+                group: Харилцагчийн бүлэг
+            has_taxon:
+                taxons: Таксонууд
+            product:
+                products: Бүтээгдэхүүнүүд
+            total_of_items_from_taxon:
+                taxon: Таксон
+                amount: Нийт дүн
+        payment_method:
+            channels: Сувгууд
+        product_attribute:
+            position: Байрлал
+        zone:
+            scopes:
+                shipping: Хүргэлт тээвэрлэлт
+                tax: Такс
+    installer:
+        extensions:
+            header: өргөтгөлүүд
+            accelerator:
+                header: Хурдасгагч
+                help: Zend OpCache-ийг идэвхжүүлэх (зөвлөж байна).
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            help: '% Extension% өргөтгөлийг суулгаж идэвхжүүл.'
+            iconv: Iconv
+            exif: Exif
+            fileinfo: Fileinfo
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Multibyte String
+            off: false
+            on: true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Хугацаа
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: Файлийн систем
+            cache:
+                header: кэш
+                help: "Зөвшөөрлийг тохируулах: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            exists: байгаа
+            logs:
+                header: түүх
+                help: "Зөвшөөрлийг тохируулах: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            not_exists: байхгүй
+            not_writable: бичих боломжгүй
+            parameters:
+                header: parameters.yml
+                help: "Зөвшөөрлийг тохируулах: sudo chmod a+w %path%"
+            vendors: борлуулагч
+            writable: бичих боломжтой
+        settings:
+            header: PHP хувилбар ба тохиргоо
+            any: ямар нэгэн
+            detect_unicode: detect_unicode
+            detect_unicode_help: php.ini файлын 'detect_unicode = Off' -ийг тохируул.
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: ашиглаагүй
+            off: false
+            on: true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+                auto_start_help: php.ini файлын 'session.auto_start  = Off' -ийг тохируул.
+            short_open_tag: short_open_tag
+            timezone: Цагийн бүс
+            timezone_help: 'php.ini файлын ''date.timezone'' in your php.ini file -ийг тохируул. (жишээ нь: date.timezone = "Europe/Amsterdam")'
+            timezone_deprecated:
+                header: Хуучин цагийн бүс
+                help: Цагийн бүс %timezone% буруу байна. php.ini файлийг зас (list of deprecated timezones http://php.net/manual/en/timezones.others.php).
+            version: PHP хувилбар
+            version_recommended: Санал болгож буй PHP хувилбар
+            version_help: Таны одоогийн хувилбар %current% байна. Sylius %recommended% PHP хувилбар санал болгож байна. Шинэчилнэ үү.
+    payum_gateway:
+        cash_on_delivery: Хүргэлтээр бэлэн мөнгөөр тооцоо хийх
+        offline: Интернэтэд холбогдоогүй
+        paypal_express_checkout: Paypal Express-ээр төлбөр хийх
+    shipping_method_resolver:
+        by_zones_and_channel: Бүсүүд ба сувгуудаар

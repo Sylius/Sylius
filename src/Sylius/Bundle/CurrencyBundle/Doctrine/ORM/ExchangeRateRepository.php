@@ -21,8 +21,6 @@ use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 class ExchangeRateRepository extends EntityRepository implements ExchangeRateRepositoryInterface
 {
     /**
-     * {@inheritdoc}
-     *
      * @throws NonUniqueResultException
      */
     public function findOneWithCurrencyPair(string $firstCurrencyCode, string $secondCurrencyCode): ?ExchangeRateInterface

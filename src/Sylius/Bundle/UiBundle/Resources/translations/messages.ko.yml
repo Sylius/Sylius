@@ -36,5 +36,6 @@ sylius:
         roles: '역할'
         scope: '범위'
         search: '검색'
+        select: '선택하기'
         type: '타입'
         zone: '영역'

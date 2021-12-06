@@ -22,28 +22,28 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Twig\Environment;
 
 final class SecurityController
 {
-    /** @var AuthenticationUtils */
-    private $authenticationUtils;
+    private AuthenticationUtils $authenticationUtils;
 
-    /** @var FormFactoryInterface */
-    private $formFactory;
+    private FormFactoryInterface $formFactory;
 
-    /** @var EngineInterface */
+    /** @var EngineInterface|Environment */
     private $templatingEngine;
 
-    /** @var AuthorizationCheckerInterface */
-    private $authorizationChecker;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
-    /** @var RouterInterface */
-    private $router;
+    private RouterInterface $router;
 
+    /**
+     * @param EngineInterface|Environment $templatingEngine
+     */
     public function __construct(
         AuthenticationUtils $authenticationUtils,
         FormFactoryInterface $formFactory,
-        EngineInterface $templatingEngine,
+        object $templatingEngine,
         AuthorizationCheckerInterface $authorizationChecker,
         RouterInterface $router
     ) {
@@ -71,11 +71,11 @@ final class SecurityController
         $formType = $options['form'] ?? SecurityLoginType::class;
         $form = $this->formFactory->createNamed('', $formType);
 
-        return $this->templatingEngine->renderResponse($template, [
+        return new Response($this->templatingEngine->render($template, [
             'form' => $form->createView(),
             'last_username' => $lastUsername,
             'last_error' => $lastError,
-        ]);
+        ]));
     }
 
     public function checkAction(Request $request): void

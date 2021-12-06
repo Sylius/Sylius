@@ -15,15 +15,10 @@ namespace Sylius\Behat\Service;
 
 class SharedStorage implements SharedStorageInterface
 {
-    /** @var array */
-    private $clipboard = [];
+    private array $clipboard = [];
 
-    /** @var string|null */
-    private $latestKey;
+    private ?string $latestKey = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function get($key)
     {
         if (!isset($this->clipboard[$key])) {
@@ -33,26 +28,17 @@ class SharedStorage implements SharedStorageInterface
         return $this->clipboard[$key];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function has($key): bool
     {
         return isset($this->clipboard[$key]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function set($key, $resource): void
     {
         $this->clipboard[$key] = $resource;
         $this->latestKey = $key;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLatestResource()
     {
         if (!isset($this->clipboard[$this->latestKey])) {
@@ -62,9 +48,6 @@ class SharedStorage implements SharedStorageInterface
         return $this->clipboard[$this->latestKey];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setClipboard(array $clipboard): void
     {
         $this->clipboard = array_merge($this->clipboard, $clipboard);

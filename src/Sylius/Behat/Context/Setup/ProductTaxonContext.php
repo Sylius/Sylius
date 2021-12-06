@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -22,11 +22,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ProductTaxonContext implements Context
 {
-    /** @var FactoryInterface */
-    private $productTaxonFactory;
+    private FactoryInterface $productTaxonFactory;
 
-    /** @var ObjectManager */
-    private $objectManager;
+    private ObjectManager $objectManager;
 
     public function __construct(
         FactoryInterface $productTaxonFactory,

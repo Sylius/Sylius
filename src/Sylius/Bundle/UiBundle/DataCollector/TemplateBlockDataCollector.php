@@ -23,8 +23,7 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
  */
 final class TemplateBlockDataCollector extends DataCollector
 {
-    /** @var TemplateBlockRenderingHistory */
-    private $templateBlockRenderingHistory;
+    private TemplateBlockRenderingHistory $templateBlockRenderingHistory;
 
     public function __construct(TemplateBlockRenderingHistory $templateBlockRenderingHistory)
     {
@@ -32,7 +31,7 @@ final class TemplateBlockDataCollector extends DataCollector
         $this->reset();
     }
 
-    public function collect(Request $request, Response $response): void
+    public function collect(Request $request, Response $response, \Throwable $exception = null): void
     {
         $this->data['renderedEvents'] = $this->templateBlockRenderingHistory->getRenderedEvents();
     }

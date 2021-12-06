@@ -25,7 +25,7 @@ Sylius\Component\Addressing\Model\Zone:
             groups: [Detailed]
         members:
             expose: true
-            type: array
+            type: iterable
             groups: [Detailed]
         createdAt:
             expose: true
@@ -35,10 +35,3 @@ Sylius\Component\Addressing\Model\Zone:
             expose: true
             type: DateTime
             groups: [Detailed]
-    relations:
-        -   rel: self
-            href:
-                route: sylius_admin_api_zone_show
-                parameters:
-                    code: expr(object.getCode())
-                    version: 1

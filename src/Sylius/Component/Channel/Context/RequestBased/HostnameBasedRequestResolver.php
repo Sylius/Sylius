@@ -19,17 +19,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class HostnameBasedRequestResolver implements RequestResolverInterface
 {
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
+    private ChannelRepositoryInterface $channelRepository;
 
     public function __construct(ChannelRepositoryInterface $channelRepository)
     {
         $this->channelRepository = $channelRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findChannel(Request $request): ?ChannelInterface
     {
         return $this->channelRepository->findOneByHostname($request->getHost());

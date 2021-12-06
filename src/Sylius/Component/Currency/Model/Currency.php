@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Currency\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Currencies;
 
 class Currency implements CurrencyInterface
 {
@@ -23,7 +23,9 @@ class Currency implements CurrencyInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     protected $code;
 
     public function __construct()
@@ -36,33 +38,25 @@ class Currency implements CurrencyInterface
         return (string) $this->getCode();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): ?string
     {
-        return Intl::getCurrencyBundle()->getCurrencyName($this->getCode());
+        if (null === $code = $this->getCode()) {
+            return null;
+        }
+
+        return Currencies::getName($code);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;

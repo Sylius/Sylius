@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
+use Sylius\Behat\Service\Helper\JavaScriptTestHelperInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Comparator\AddressComparatorInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -25,33 +26,40 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutAddressingContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var AddressPageInterface */
-    private $addressPage;
+    private AddressPageInterface $addressPage;
 
-    /** @var FactoryInterface */
-    private $addressFactory;
+    private FactoryInterface $addressFactory;
 
-    /** @var AddressComparatorInterface */
-    private $addressComparator;
+    private AddressComparatorInterface $addressComparator;
 
-    /** @var SelectShippingPageInterface */
-    private $selectShippingPage;
+    private SelectShippingPageInterface $selectShippingPage;
+
+    private JavaScriptTestHelperInterface $testHelper;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
         AddressPageInterface $addressPage,
         FactoryInterface $addressFactory,
         AddressComparatorInterface $addressComparator,
-        SelectShippingPageInterface $selectShippingPage
+        SelectShippingPageInterface $selectShippingPage,
+        JavaScriptTestHelperInterface $testHelper
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->addressPage = $addressPage;
         $this->addressFactory = $addressFactory;
         $this->addressComparator = $addressComparator;
         $this->selectShippingPage = $selectShippingPage;
+        $this->testHelper = $testHelper;
+    }
+
+    /**
+     * @Given my billing address is fulfilled automatically through default address
+     */
+    public function myBillingAddressIsFulfilledAutomaticallyThroughDefaultAddress(): void
+    {
+        //intentionally blank line for api tests
     }
 
     /**
@@ -148,19 +156,19 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
-     * @When I specify shipping country province as :province
+     * @When I specify shipping country province as :provinceName
      */
-    public function iSpecifyShippingCountryProvinceAs($province)
+    public function iSpecifyShippingCountryProvinceAs(string $provinceName): void
     {
-        $this->addressPage->selectShippingAddressProvince($province);
+        $this->addressPage->selectShippingAddressProvince($provinceName);
     }
 
     /**
-     * @When I specify billing country province as :province
+     * @When I specify billing country province as :provinceName
      */
-    public function iSpecifyBillingCountryProvinceAs($province)
+    public function iSpecifyBillingCountryProvinceAs(string $provinceName): void
     {
-        $this->addressPage->selectBillingAddressProvince($province);
+        $this->addressPage->selectBillingAddressProvince($provinceName);
     }
 
     /**
@@ -181,7 +189,9 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
+     * @When I specified the billing address
      * @When /^I specified the billing (address as "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
+     * @When /^I define the billing (address as "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
      */
     public function iSpecifiedTheBillingAddress(AddressInterface $address = null)
     {
@@ -210,7 +220,7 @@ final class CheckoutAddressingContext implements Context
     /**
      * @When I specify the first and last name as :fullName for billing address
      */
-    public function iSpecifyTheStreetAsForBillingAddress(string $fullName): void
+    public function iSpecifyTheFirstAndLastNameAsForBillingAddress(string $fullName): void
     {
         $this->addressPage->specifyBillingAddressFullName($fullName);
     }
@@ -276,6 +286,14 @@ final class CheckoutAddressingContext implements Context
     public function iSpecifyThePasswordAs($password)
     {
         $this->addressPage->specifyPassword($password);
+    }
+
+    /**
+     * @Then I should be making an order as :purchaserIdentifier
+     */
+    public function iShouldSeeInCheckoutHeader(string $purchaserIdentifier): void
+    {
+        Assert::contains($this->selectShippingPage->getPurchaserIdentifier(), $purchaserIdentifier);
     }
 
     /**
@@ -366,7 +384,9 @@ final class CheckoutAddressingContext implements Context
      */
     public function addressShouldBeFilledAsShippingAddress(AddressInterface $address)
     {
-        Assert::true($this->addressComparator->equal($address, $this->addressPage->getPreFilledShippingAddress()));
+        $this->testHelper->waitUntilAssertionPasses(function () use ($address): void {
+            Assert::true($this->addressComparator->equal($address, $this->addressPage->getPreFilledShippingAddress()));
+        });
     }
 
     /**
@@ -374,7 +394,41 @@ final class CheckoutAddressingContext implements Context
      */
     public function addressShouldBeFilledAsBillingAddress(AddressInterface $address)
     {
-        Assert::true($this->addressComparator->equal($address, $this->addressPage->getPreFilledBillingAddress()));
+        $this->testHelper->waitUntilAssertionPasses(function () use ($address): void {
+            Assert::true($this->addressComparator->equal($address, $this->addressPage->getPreFilledBillingAddress()));
+        });
+    }
+
+    /**
+     * @Then different shipping address should be checked
+     */
+    public function differentShippingAddressShouldBeChecked(): void
+    {
+        Assert::true($this->addressPage->isDifferentShippingAddressChecked());
+    }
+
+    /**
+     * @Then different shipping address should not be checked
+     */
+    public function differentShippingAddressShouldNotBeChecked(): void
+    {
+        Assert::false($this->addressPage->isDifferentShippingAddressChecked());
+    }
+
+    /**
+     * @Then shipping address should be visible
+     */
+    public function shippingAddressShouldBeVisible(): void
+    {
+        Assert::true($this->addressPage->isShippingAddressVisible());
+    }
+
+    /**
+     * @Then shipping address should not be visible
+     */
+    public function shippingAddressShouldNotBeVisible(): void
+    {
+        Assert::false($this->addressPage->isShippingAddressVisible());
     }
 
     /**

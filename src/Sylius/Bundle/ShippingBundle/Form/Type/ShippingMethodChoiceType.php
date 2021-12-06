@@ -31,14 +31,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ShippingMethodChoiceType extends AbstractType
 {
-    /** @var ShippingMethodsResolverInterface */
-    private $shippingMethodsResolver;
+    private ShippingMethodsResolverInterface $shippingMethodsResolver;
 
-    /** @var ServiceRegistryInterface */
-    private $calculators;
+    private ServiceRegistryInterface $calculators;
 
-    /** @var RepositoryInterface */
-    private $repository;
+    private RepositoryInterface $repository;
 
     public function __construct(
         ShippingMethodsResolverInterface $shippingMethodsResolver,
@@ -50,9 +47,6 @@ final class ShippingMethodChoiceType extends AbstractType
         $this->repository = $repository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['multiple']) {
@@ -60,9 +54,6 @@ final class ShippingMethodChoiceType extends AbstractType
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -112,17 +103,11 @@ final class ShippingMethodChoiceType extends AbstractType
         $view->vars['shipping_costs'] = $shippingCosts;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_shipping_method_choice';

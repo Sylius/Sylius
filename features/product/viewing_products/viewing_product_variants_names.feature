@@ -11,7 +11,7 @@ Feature: Viewing product's variants names
         And it has variant named "Die Hard - Extended Cut" in "English (United States)" locale and "Szklana Pułapka - Wersja Reżyserska" in "Polish (Poland)" locale
         And this product has also variant named "Die Hard - Theatrical Cut" in "English (United States)" locale and "Szklana Pułapka - Wersja Kinowa" in "Polish (Poland)" locale
 
-    @ui
+    @ui @api
     Scenario: Seeing variant's name in default locale
         When I view product "Die Hard Movie"
         Then its current variant should be named "Die Hard - Extended Cut"

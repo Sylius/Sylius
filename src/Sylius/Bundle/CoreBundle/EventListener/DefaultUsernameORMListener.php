@@ -18,6 +18,7 @@ use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\UnitOfWork;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 
 /**
  * Keeps user's username synchronized with email.
@@ -35,13 +36,20 @@ final class DefaultUsernameORMListener
 
     private function processEntities(array $entities, EntityManagerInterface $entityManager, UnitOfWork $unitOfWork): void
     {
-        foreach ($entities as $customer) {
-            if (!$customer instanceof CustomerInterface) {
+        foreach ($entities as $entity) {
+            if (!$entity instanceof ShopUserInterface && !$entity instanceof CustomerInterface) {
                 continue;
             }
 
-            $user = $customer->getUser();
-            if (null === $user) {
+            if ($entity instanceof ShopUserInterface) {
+                $user = $entity;
+                $customer = $user->getCustomer();
+            } else {
+                $customer = $entity;
+                $user = $customer->getUser();
+            }
+
+            if (!$customer || !$user) {
                 continue;
             }
 

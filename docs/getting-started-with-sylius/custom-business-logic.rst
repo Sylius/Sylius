@@ -129,6 +129,101 @@ For 4 products:
 
 |
 
+This customization will also work when using unified API without any extra steps:
+
+First, you need to pick up a new cart:
+
+.. code-block:: bash
+
+    curl -X POST "https://master.demo.sylius.com/api/v2/shop/orders" -H "accept: application/ld+json"
+
+With body:
+
+.. code-block:: json
+
+    {
+        "localeCode": "string"
+    }
+
+.. note::
+
+    The ``localeCode`` value is optional in the body of cart pickup. This means that if you won't provide it, the default locale from the channel will be used.
+
+This should return a response with ``tokenValue`` which we would need for the next API calls:
+
+.. code-block:: javascript
+
+    {
+        //...
+        "shippingState": "string",
+        "tokenValue": "CART_TOKEN",
+        "id": 123,
+        //...
+    }
+
+Then we need to add a product to the cart but first, it would be good to have any. You can use this call to retrieve some products:
+
+.. code-block:: bash
+
+    curl -X GET "https://master.demo.sylius.com/api/v2/shop/products?page=1&itemsPerPage=30" -H  "accept: application/ld+json"
+
+And choose any product variant IRI that you would like to add to your cart:
+
+.. code-block:: bash
+
+    curl --location --request PATCH 'https://master.demo.sylius.com/api/v2/shop/orders/CART_TOKEN/items' -H 'Content-Type: application/merge-patch+json'
+
+With a chosen product variant in the body:
+
+.. code-block:: json
+
+    {
+        "productVariant": "/api/v2/shop/product-variants/PRODUCT_VARIANT_CODE",
+        "quantity": 1
+    }
+
+This should return a response with the cart that should contain a ``shippingTotal``:
+
+.. code-block:: javascript
+
+    {
+        //...
+        "taxTotal": 0,
+        "shippingTotal": 500,
+        "orderPromotionTotal": 0,
+        //...
+    }
+
+.. attention::
+
+    API returns costs in decimal numbers that's why in response it is 500 currency unit shipping total (which stands for 5 USD in this case).
+
+Now let's change the quantity of our product variant. We can do it by calling the endpoint above once again, or by utilizing the ``changeQuantity`` endpoint:
+
+.. code-block:: bash
+
+    curl --location --request PATCH 'https://master.demo.sylius.com/api/v2/shop/orders/CART_TOKEN/items/ORDER_ITEM_ID' -H 'Content-Type: application/merge-patch+json'
+
+With new quantity in the body:
+
+.. code-block:: json
+
+    {
+      "quantity": 4
+    }
+
+Which should return a response with the cart:
+
+.. code-block:: javascript
+
+    {
+        //...
+        "taxTotal": 0,
+        "shippingTotal": 1000,
+        "orderPromotionTotal": 0,
+        //...
+    }
+
 Amazing job! You've just provided your own logic into a Sylius-based system. Therefore, your store can provide a unique
 experience for your Customers. Basing on this knowledge, you're ready to customize your shop even more and make it as suitable
 to your business needs as possible.
@@ -141,3 +236,4 @@ Learn more
 * :doc:`Checkout </book/orders/checkout>`
 * :doc:`Orders </book/orders/orders>`
 * :doc:`Adjustments </book/orders/adjustments>`
+* :doc:`Unified API </book/api/index>`

@@ -20,11 +20,9 @@ use Symfony\Component\Templating\Helper\Helper;
 
 final class LocaleHelper extends Helper implements LocaleHelperInterface
 {
-    /** @var LocaleConverterInterface */
-    private $localeConverter;
+    private LocaleConverterInterface $localeConverter;
 
-    /** @var LocaleContextInterface|null */
-    private $localeContext;
+    private ?LocaleContextInterface $localeContext;
 
     public function __construct(LocaleConverterInterface $localeConverter, ?LocaleContextInterface $localeContext = null)
     {
@@ -36,17 +34,15 @@ final class LocaleHelper extends Helper implements LocaleHelperInterface
         $this->localeContext = $localeContext;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function convertCodeToName(string $code, ?string $localeCode = null): ?string
     {
-        return $this->localeConverter->convertCodeToName($code, $this->getLocaleCode($localeCode));
+        try {
+            return $this->localeConverter->convertCodeToName($code, $this->getLocaleCode($localeCode));
+        } catch (\InvalidArgumentException $e) {
+            return $code;
+        }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'sylius_locale';

@@ -17,7 +17,28 @@
 >
     <class name="Sylius\Component\Core\Model\PaymentMethod">
         <attribute name="id">
-            <group>payment_method:read</group>
+            <group>admin:payment_method:read</group>
+            <group>shop:payment_method:read</group>
+        </attribute>
+        <attribute name="name">
+            <group>admin:payment:read</group>
+            <group>admin:payment_method:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:payment:read</group>
+            <group>shop:payment_method:read</group>
+        </attribute>
+        <attribute name="code">
+            <group>admin:payment_method:read</group>
+            <group>shop:payment_method:read</group>
+        </attribute>
+        <attribute name="description">
+            <group>shop:payment_method:read</group>
+        </attribute>
+        <attribute name="instructions">
+            <group>shop:payment_method:read</group>
+        </attribute>
+        <attribute name="position">
+            <group>shop:payment_method:read</group>
         </attribute>
     </class>
 </serializer>

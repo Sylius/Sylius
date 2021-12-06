@@ -9,9 +9,12 @@ sylius:
             title: Заголовок
         cart:
             coupon: Купон
+        catalog_promotion:
+            channels: Канали
         checkout:
             addressing:
                 different_billing_address: Використати іншу адресу для виставлення рахунків?
+                different_shipping_address: Використати іншу адресу для доставки?
             payment_method: Спосіб оплати
             shipping_method: Спосіб доставки
         promotion:
@@ -21,8 +24,9 @@ sylius:
                 product: Товар
         promotion_coupon:
             per_customer_usage_limit: Ліміт використання на клієнта
+            reusable_from_cancelled_orders: Повторно використовується для скасованих замовлень
         group:
-            name: Назва
+            name: Назва регіону
             roles: Ролі
         channel:
             billing_data:
@@ -31,15 +35,19 @@ sylius:
                 country: Країна
                 postcode: Поштовий індекс
                 street: Вулиця
+                tax_id: Індивідуальний податковий номер
             contact_email: Контактна електронна пошта
+            countries: Країни
             currencies: Валюти
             currency_base: Основна валюта
             account_verification_required: Потрібна перевірка акаунту?
             hostname: Ім'я хоста
             locale_default: Типова локаль
             locales: Локалі
+            menu_taxon: Меню таксонів
             payment_methods: Способи оплати
             shipping_methods: Методи доставки
+            shop_billing_data: Дані оплати магазину
             skipping_shipping_step_allowed: Пропустити крок доставки, якщо доступний лише один метод доставки?
             skipping_payment_step_allowed: Пропустити крок доставки, якщо доступний лише один метод доставки?
             tax_calculation_strategy: Стратегія податкового розрахунку
@@ -63,7 +71,7 @@ sylius:
         page:
             body: Тіло
             id: ID
-            title: Заголовок
+            title: Назва
         product:
             images: Зображення
             restricted_zone: Заборонена зона
@@ -73,7 +81,7 @@ sylius:
             channels: Канали
             enabled: Ввімкнено
         product_filter:
-            name: Назва
+            name: Назва регіону
             code: Код
         product_variant:
             tax_category: Категорія податку
@@ -100,8 +108,8 @@ sylius:
             file: Вибрати зображення
         user:
             billing_address: Адреса для рахунків
-            different_billing_address: Використати іншу адресу для виставлення рахунків?
-            enabled: Ввімкнено
+            different_shipping_address: Використати іншу адресу для доставки?
+            enabled: Увімкнено
             first_name: Iм'я
             groups: Групи
             roles: Ролі
@@ -129,7 +137,7 @@ sylius:
             product: Асоційований продукт
             type: Тип асоціювання
         product_association_type:
-            name: Назва
+            name: Назва регіону
         promotion_filter:
             products: Фільтр товарів
             taxons: Фільтр таксонів
@@ -196,6 +204,7 @@ sylius:
             header: Версія PHP та налаштування
             any: будь-які
             detect_unicode: detect_unicode
+            detect_unicode_help: Встановіть 'detect_unicode = Off' у файлі php.ini
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: не є застарілим
             off: false
@@ -203,13 +212,16 @@ sylius:
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
+                auto_start_help: Встановіть 'session.auto_start = Off' у файлі php.ini
             short_open_tag: short_open_tag
             timezone: часовий пояс
+            timezone_help: Встановіть 'date.timezone' у файлі php.ini (напр. date.timezone = "Europe/Amsterdam")
             timezone_deprecated:
                 header: Застарілий часовий пояс
                 help: Часовий пояс %timezone% застарілий. Виправте ваш файл php.ini (перелік застарілих часових поясів http://php.net/manual/en/timezones.others.php).
             version: Версія PHP
             version_recommended: Рекомендована версія PHP
+            version_help: Sylius рекомендує %recommended% версію PHP. Ваша поточна версія %current%. Оновіть її.
     payum_gateway:
         cash_on_delivery: Накладений платіж
         offline: Автономний

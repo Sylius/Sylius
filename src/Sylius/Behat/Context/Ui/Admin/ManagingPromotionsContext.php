@@ -27,26 +27,19 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPromotionsContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var IndexPageInterface */
-    private $indexPage;
+    private \Sylius\Behat\Page\Admin\Promotion\IndexPageInterface $indexPage;
 
-    /** @var IndexPageCouponInterface */
-    private $indexCouponPage;
+    private IndexPageCouponInterface $indexCouponPage;
 
-    /** @var CreatePageInterface */
-    private $createPage;
+    private CreatePageInterface $createPage;
 
-    /** @var UpdatePageInterface */
-    private $updatePage;
+    private UpdatePageInterface $updatePage;
 
-    /** @var CurrentPageResolverInterface */
-    private $currentPageResolver;
+    private CurrentPageResolverInterface $currentPageResolver;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -272,7 +265,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function thereShouldBePromotion(int $amount = 1): void
     {
-        Assert::same($amount, $this->indexPage->countItems());
+        Assert::same($this->indexPage->countItems(), $amount);
     }
 
     /**
@@ -368,11 +361,30 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I set it as not applies to discounted by catalog promotion items
+     */
+    public function iSetItAsNotAppliesToDiscountedByCatalogPromotionItems(): void
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->makeNotAppliesToDiscountedItem();
+    }
+
+    /**
      * @Then the :promotion promotion should be exclusive
      */
     public function thePromotionShouldBeExclusive(PromotionInterface $promotion)
     {
         $this->assertIfFieldIsTrue($promotion, 'exclusive');
+    }
+
+    /**
+     * @Then the :promotion promotion should not applies to discounted items
+     */
+    public function thePromotionShouldNotAppliesToDiscountedItems(PromotionInterface $promotion): void
+    {
+        $this->assertIfFieldIsFalse($promotion, 'applies_to_discounted');
     }
 
     /**
@@ -672,6 +684,17 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When /^I filter promotions by coupon code equal "([^"]+)"/
+     */
+    public function iFilterPromotionsByCouponCodeEqual(string $value): void
+    {
+        $this->indexPage->specifyFilterType('coupon_code', 'equal');
+        $this->indexPage->specifyFilterValue('coupon_code', $value);
+
+        $this->indexPage->filter();
+    }
+
+    /**
      * @param string $element
      * @param string $expectedMessage
      */
@@ -691,5 +714,12 @@ final class ManagingPromotionsContext implements Context
         $this->iWantToModifyAPromotion($promotion);
 
         Assert::true($this->updatePage->hasResourceValues([$field => 1]));
+    }
+
+    private function assertIfFieldIsFalse(PromotionInterface $promotion, $field): void
+    {
+        $this->iWantToModifyAPromotion($promotion);
+
+        Assert::false($this->updatePage->hasResourceValues([$field => 1]));
     }
 }

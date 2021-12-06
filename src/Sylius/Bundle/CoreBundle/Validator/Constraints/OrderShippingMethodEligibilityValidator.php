@@ -14,15 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
+use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
 final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
 {
-    /** @var ShippingMethodEligibilityCheckerInterface */
-    private $methodEligibilityChecker;
+    private ShippingMethodEligibilityCheckerInterface $methodEligibilityChecker;
 
     public function __construct(ShippingMethodEligibilityCheckerInterface $methodEligibilityChecker)
     {
@@ -30,19 +29,17 @@ final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
-    public function validate($order, Constraint $constraint): void
+    public function validate($value, Constraint $constraint): void
     {
-        /** @var OrderInterface $order */
-        Assert::isInstanceOf($order, OrderInterface::class);
+        /** @var OrderInterface $value */
+        Assert::isInstanceOf($value, OrderInterface::class);
 
         /** @var OrderShippingMethodEligibility $constraint */
         Assert::isInstanceOf($constraint, OrderShippingMethodEligibility::class);
 
-        $shipments = $order->getShipments();
+        $shipments = $value->getShipments();
         if ($shipments->isEmpty()) {
             return;
         }

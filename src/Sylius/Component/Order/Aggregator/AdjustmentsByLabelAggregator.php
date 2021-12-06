@@ -18,9 +18,6 @@ use Webmozart\Assert\Assert;
 
 final class AdjustmentsByLabelAggregator implements AdjustmentsAggregatorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function aggregate(iterable $adjustments): array
     {
         $aggregatedAdjustments = [];

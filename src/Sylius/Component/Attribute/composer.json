@@ -2,54 +2,62 @@
     "name": "sylius/attribute",
     "type": "library",
     "description": "Component for handling object attributes in PHP projects.",
-    "keywords": ["shop", "ecommerce", "attribute", "feature"],
-    "homepage": "http://sylius.com",
+    "keywords": [
+        "shop",
+        "ecommerce",
+        "attribute",
+        "feature"
+    ],
+    "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "homepage": "http://pjedrzejewski.com"
+            "homepage": "https://pjedrzejewski.com"
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.com"
+            "homepage": "https://sylius.com"
         },
         {
             "name": "Community contributions",
-            "homepage": "http://github.com/Sylius/Sylius/contributors"
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": "^7.3",
-
-        "doctrine/collections": "^1.3",
-        "sylius/registry": "^1.2",
-        "sylius/resource": "^1.2",
-        "symfony/validator": "^4.4"
+        "php": "^8.0",
+        "doctrine/collections": "^1.6",
+        "sylius/registry": "^1.5",
+        "sylius/resource": "^1.7",
+        "symfony/validator": "^4.4 || ^5.4"
     },
     "require-dev": {
-        "phpspec/phpspec": "^5.0"
+        "phpspec/phpspec": "^7.0"
     },
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.9-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Component\\Attribute\\": "" }
+        "psr-4": {
+            "Sylius\\Component\\Attribute\\": ""
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Component\\Attribute\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Component\\Attribute\\spec\\": "spec/"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

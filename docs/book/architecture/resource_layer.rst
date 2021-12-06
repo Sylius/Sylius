@@ -100,8 +100,8 @@ The repository service is available via the *sylius.repository.product* id and c
     An important feature of the repositories are the ``add($resource)`` and ``remove($resource)`` methods,
     which take a resource as an argument and perform the adding/removing action with a flush inside.
 
-    These actions can be used when the performance of operations may be neglected. If you are willing
-    to perform operations on sets of data we are suggesting to use the manager instead.
+    These actions can be used when the performance of operations is negligible. If you want
+    to perform operations on large sets of data we recommend using the manager instead.
 
 Every Sylius repository supports paginating resources. To create a `Pagerfanta instance <https://github.com/whiteoctober/Pagerfanta>`_ use the ``createPaginator`` method:
 
@@ -156,7 +156,7 @@ Displaying a resource with a custom template and repository methods:
 
 .. code-block:: yaml
 
-    # routing.yml
+    # config/routes.yaml
     app_product_show:
         path: /products/{slug}
         methods: [GET]
@@ -172,7 +172,7 @@ Creating a product using custom form and a redirection method:
 
 .. code-block:: yaml
 
-    # routing.yml
+    # config/routes.yaml
     app_product_create:
         path: /my-stores/{store}/products/new
         methods: [GET, POST]
@@ -188,6 +188,6 @@ Creating a product using custom form and a redirection method:
                     route: app_product_index # Redirect the user to their products.
                     parameters: [$store]
 
-All other methods have the same level of flexibility and are documented in the :doc:`Resource Bundle Guide </components_and_bundles/bundles/SyliusResourceBundle/index>`.
+All other methods have the same level of flexibility and are documented in the `SyliusResourceBundle <https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md>`_.
 
 .. _`ObjectManager`: http://www.doctrine-project.org/api/common/2.4/class-Doctrine.Common.Persistence.ObjectManager.html

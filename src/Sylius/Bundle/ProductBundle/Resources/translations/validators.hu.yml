@@ -6,8 +6,12 @@ sylius:
         sku:
             not_blank: Kérjük, írja be a termék SKU azonosítóját.
             unique: Az SKU azonosító egyedi kell legyen.
+        slug:
+            not_blank: Kérem adja meg a termék url kompatibilis megnevezését.
+            unique: A termék url kompatibilis megnevezésének egyedinek kell lennie.
         code:
             not_blank: Kérjük, adja meg a termék kódját.
+            regex: A termék kódja csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.
             unique: A termék kódjának egyedinek kell lennie.
         name:
             not_blank: Kérjük, írja be a termék nevét.
@@ -15,9 +19,18 @@ sylius:
             max_length: Termék neve nem lehet hosszabb, mint 1 karakter. |Termék neve nem lehet hosszabb, mint {{ limit }} karakter.
     product_variant:
         combination: A változat ebben a választék készletben már létezik.
+        code:
+            not_blank: Adja meg a kódot.
+            regex: A termék változat kódja csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.
+            unique: A termék változat kódjának egyedinek kell lennie.
+            within_product_unique: Ennek a kódnak egyedinek kell lennie ezen a terméken belül.
+    simple_product:
+        code:
+            unique: Az egyszerű termék kódnak egyedinek kell lennie az összes terméket és termékváltozatot figyelembe véve.
     option:
         code:
             not_blank: Kérjük, írja be az opció kódját.
+            regex: Az opció kódja csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.
             unique: Az opció az adott kóddal már létezik.
         name:
             not_blank: Kérjük, adja meg az opció nevét.
@@ -28,6 +41,16 @@ sylius:
     option_value:
         code:
             not_blank: Kérjük adja meg az opció értékének kódját.
+            regex: Az opció érték kódja csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.
             unique: Az opció értéke az adott kóddal már létezik.
         value:
             not_blank: Kérjük, adja meg az opció értékét.
+    association_type:
+        name:
+            not_blank: Kérjük, adja meg a kapcsolat típus megnevezését.
+            min_length: A kapcsolat típus megnevezésének legalább 1 karakter hosszúnak kell lennie.|A kapcsolat megnevezésének legalább {{ limit }} karakter hosszúnak kell lennie.
+            max_length: A kapcsolat típus megnevezése nem lehet 1 karakternél hosszabb.|A kapcsolat megnevezése nem lehet {{ limit }} karakternél hosszabb.
+        code:
+            not_blank: Kérjük, adja meg a kapcsolat típus kódját.
+            regex: A kapcsolat típus kódja csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.
+            unique: Már létezik kapcsolat típus ezzel a kóddal.

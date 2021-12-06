@@ -221,7 +221,7 @@ This gap will be more understandable on the below code example.
 
         protected function getDefinedElements(): array
         {
-            return ['sidebar' => ['css' => '.sidebar']]
+            return ['sidebar' => ['css' => '.sidebar']];
         }
 
         protected function getUrl(): string
@@ -240,12 +240,12 @@ This gap will be more understandable on the below code example.
 
         protected function getDefinedElements(): array
         {
-            return ['sidebar' => ['css' => '.sidebar']]
+            return ['sidebar' => ['css' => '.sidebar']];
         }
 
         protected function getUrl(): string
         {
-            return 'http://your_domain.com/leagues/'
+            return 'http://your_domain.com/leagues/';
         }
     }
 
@@ -267,7 +267,7 @@ This gap will be more understandable on the below code example.
          */
         public function iWantToReadSideBarOnHomePage($someInformation): void // Still "http://your_domain.com".
         {
-            $someInformation === $this->leagueIndexPage->readMatchResults() // This returns true, but wait a second we are on home page (dummy pages).
+            $someInformation === $this->leagueIndexPage->readMatchResults(); // This returns true, but wait a second we are on home page (dummy pages).
 
             $someInformation === $this->homePage->readWeather() // This also returns true.
         }
@@ -359,7 +359,7 @@ Ui contexts
 
 .. code-block:: php
 
-    namespace Sylius\Behat\Context\Ui\Admin
+    namespace Sylius\Behat\Context\Ui\Admin;
 
     final class NotificationContext implements Context
     {

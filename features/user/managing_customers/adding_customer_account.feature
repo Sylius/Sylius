@@ -26,5 +26,6 @@ Feature: Adding a new customer account
         And I specify their password as "killSauron"
         And I save my changes
         Then I should be notified that it has been successfully edited
+        And I should not see create account option
         And the customer "f.baggins@example.com" should appear in the store
         And this customer should have an account created

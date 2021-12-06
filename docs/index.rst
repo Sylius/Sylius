@@ -42,46 +42,12 @@ The Book
 The Developer's guide to leveraging the flexibility of Sylius. Here you will find all the concepts used in the Sylius platform.
 :doc:`The Book </book/index>` helps to understand how Sylius works.
 
-.. image:: _images/introduction.png
-   :target: `Introduction`_
-   :scale: 55%
-
-.. image:: _images/installation.png
-   :target: `Installation`_
-   :scale: 55%
-
-.. image:: _images/architecture.png
-   :target: `Architecture`_
-   :scale: 55%
-
-.. image:: _images/configuration.png
-   :target: `Configuration`_
-   :scale: 55%
-
-|
-
-.. image:: _images/customers.png
-   :target: `Customers`_
-   :scale: 55%
-
-.. image:: _images/products.png
-   :target: `Products`_
-   :scale: 55%
-
-.. image:: _images/carts_and_orders.png
-   :target: `Carts & Orders`_
-   :scale: 55%
-
-.. image:: _images/themes.png
-   :target: `Themes`_
-   :scale: 55%
-
 .. toctree::
    :hidden:
 
    book/index
 
-|
+.. include:: /book/map.rst.inc
 
 The Customization Guide
 -----------------------
@@ -95,32 +61,6 @@ The Customization Guide
 
 .. include:: /customization/map.rst.inc
 
-Theming Guide
--------------
-
-:doc:`The Theming Guide </theming/index>` is useful when trying do develop custom layout for Sylius shops.
-
-.. toctree::
-   :hidden:
-
-   theming/index
-
-.. include:: /theming/map.rst.inc
-
-Plugin Development Guide
-------------------------
-
-If you're wondering how to share awesome features you have/want to have for Sylius with the Open Source community,
-here you will find a comprehensive guide to plugins development from the idea to sharing the plugin with the world.
-Remember that you can use all the :doc:`customization techniques </customization/index>` in Plugins.
-
-.. toctree::
-   :hidden:
-
-   plugin-development-guide/index
-
-.. include:: /plugin-development-guide/map.rst.inc
-
 The Cookbook
 ------------
 
@@ -130,18 +70,6 @@ The Cookbook
    :hidden:
 
    cookbook/index
-
-The Sylius API
---------------
-
-In :doc:`the Sylius API chapter </api/index>` you'll understand both the new Sylius API and the old Admin API.
-
-.. toctree::
-   :hidden:
-
-   api/index
-
-.. include:: /api/map.rst.inc
 
 The BDD Guide
 -------------
@@ -155,28 +83,6 @@ In :doc:`the BDD Guide </bdd/index>` you will learn how to write clean and reusa
 
 .. include:: /bdd/map.rst.inc
 
-The Contribution Guide
-----------------------
-
-:doc:`The Contribution Guide </contributing/index>` to Sylius.
-
-.. toctree::
-   :hidden:
-
-   contributing/index
-
-.. include:: /contributing/map.rst.inc
-
-Support
--------
-
-:doc:`The Support section </support/index>` for Sylius.
-
-.. toctree::
-   :hidden:
-
-   support/index
-
 Components & Bundles
 --------------------
 
@@ -189,14 +95,18 @@ Components & Bundles
 
 .. include:: /components_and_bundles/map.rst.inc
 
-.. _Sylius: http://sylius.com
-.. _`Symfony Framework`: http://symfony.com
-.. _`Quick Tour`: http://symfony.com/doc/current/quick_tour
-.. _`Introduction`: http://docs.sylius.com/en/latest/book/introduction/index.html
-.. _`Installation`: http://docs.sylius.com/en/latest/book/installation/index.html
-.. _`Architecture`: http://docs.sylius.com/en/latest/book/architecture/index.html
-.. _`Configuration`: http://docs.sylius.com/en/latest/book/configuration/index.html
-.. _`Customers`: http://docs.sylius.com/en/latest/book/customers/index.html
-.. _`Products`: http://docs.sylius.com/en/latest/book/products/index.html
-.. _`Carts & Orders`: http://docs.sylius.com/en/latest/book/orders/index.html
-.. _`Themes`: http://docs.sylius.com/en/latest/book/themes/index.html
+The Performance Guide
+---------------------
+
+With :doc:`The Performance Guide </performance/index>` you can decrease page loading times.
+
+.. toctree::
+   :hidden:
+
+   performance/index
+
+.. include:: /performance/map.rst.inc
+
+.. _Sylius: https://sylius.com
+.. _`Symfony Framework`: https://symfony.com
+.. _`Quick Tour`: https://symfony.com/doc/current/quick_tour

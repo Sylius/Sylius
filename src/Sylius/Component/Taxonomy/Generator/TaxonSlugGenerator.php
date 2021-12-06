@@ -19,9 +19,6 @@ use Webmozart\Assert\Assert;
 
 final class TaxonSlugGenerator implements TaxonSlugGeneratorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function generate(TaxonInterface $taxon, ?string $locale = null): string
     {
         $name = $taxon->getTranslation($locale)->getName();

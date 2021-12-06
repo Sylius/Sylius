@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Aprašymas
+            enabled: Įjungta
             name: Pavadinimas
             parent: Motininis elementas
             slug: Šliužas (nuorodos dalis)

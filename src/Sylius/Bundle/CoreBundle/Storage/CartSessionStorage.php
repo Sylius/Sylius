@@ -21,14 +21,11 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class CartSessionStorage implements CartStorageInterface
 {
-    /** @var SessionInterface */
-    private $session;
+    private SessionInterface $session;
 
-    /** @var string */
-    private $sessionKeyName;
+    private string $sessionKeyName;
 
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
     public function __construct(
         SessionInterface $session,
@@ -40,17 +37,11 @@ final class CartSessionStorage implements CartStorageInterface
         $this->orderRepository = $orderRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasForChannel(ChannelInterface $channel): bool
     {
         return $this->session->has($this->getCartKeyName($channel));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getForChannel(ChannelInterface $channel): ?OrderInterface
     {
         if ($this->hasForChannel($channel)) {
@@ -62,17 +53,11 @@ final class CartSessionStorage implements CartStorageInterface
         return null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setForChannel(ChannelInterface $channel, OrderInterface $cart): void
     {
         $this->session->set($this->getCartKeyName($channel), $cart->getId());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeForChannel(ChannelInterface $channel): void
     {
         $this->session->remove($this->getCartKeyName($channel));

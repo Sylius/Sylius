@@ -58,6 +58,8 @@ interface AddressPageInterface extends SymfonyPageInterface
 
     public function hasBillingAddressInput(): bool;
 
+    public function hasEmailInput(): bool;
+
     public function selectShippingAddressFromAddressBook(AddressInterface $address): void;
 
     public function selectBillingAddressFromAddressBook(AddressInterface $address): void;
@@ -71,4 +73,8 @@ interface AddressPageInterface extends SymfonyPageInterface
 
     /** @return string[] */
     public function getAvailableBillingCountries(): array;
+
+    public function isDifferentShippingAddressChecked(): bool;
+
+    public function isShippingAddressVisible(): bool;
 }

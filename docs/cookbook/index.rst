@@ -10,19 +10,10 @@ Entities
     :hidden:
 
     entities/custom-model
+    entities/custom-model-accessible-for-channel-admin
     entities/custom-translatable-model
 
 .. include:: /cookbook/entities/map.rst.inc
-
-Api
----
-
-.. toctree::
-    :hidden:
-
-    api/api
-
-.. include:: /cookbook/api/map.rst.inc
 
 Shop
 ----
@@ -52,6 +43,12 @@ Payments
     payments/encrypting-gateway-config
     payments/authorize
     payments/custom-payment-gateway
+    payments/customizing-credit-memo
+    payments/refund-process
+    payments/custom-field-on-refund-payment
+    payments/custom-type-of-refund
+    payments/custom-invoice
+    payments/generating-invoice-after-payment
 
 .. include:: /cookbook/payments/map.rst.inc
 
@@ -74,8 +71,9 @@ Promotions
 .. toctree::
     :hidden:
 
-    promotions/custom-promotion-rule
-    promotions/custom-promotion-action
+    promotions/custom-cart-promotion-rule
+    promotions/custom-cart-promotion-action
+    promotions/custom-catalog-promotion-scope
 
 .. include:: /cookbook/promotions/map.rst.inc
 
@@ -88,6 +86,16 @@ Inventory
     inventory/custom-inventory-sources-filter
 
 .. include:: /cookbook/inventory/map.rst.inc
+
+Shipping methods
+----------------
+
+.. toctree::
+    :hidden:
+
+    shipping-methods/custom-shipping-method-rule
+
+.. include:: /cookbook/shipping-methods/map.rst.inc
 
 Images
 ------
@@ -123,6 +131,7 @@ Configuration
     configuration/disabling-shop-admin-api
     configuration/installation-commands
     configuration/disabling-admin-notifications
+    configuration/admin-prefix
 
 .. include:: /cookbook/configuration/map.rst.inc
 
@@ -134,5 +143,26 @@ Frontend
 
     frontend/admin-js-and-css
     frontend/google-analytics.rst
+    frontend/webpack.rst
 
 .. include:: /cookbook/frontend/map.rst.inc
+
+Taxation
+--------
+
+.. toctree::
+    :hidden:
+
+    taxation/customize-tax-by-address
+
+.. include:: /cookbook/taxation/map.rst.inc
+
+API
+---
+
+.. toctree::
+    :hidden:
+
+    api/add_to_cart_product_chosen_by_product_options
+
+.. include:: /cookbook/api/map.rst.inc

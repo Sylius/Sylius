@@ -23,14 +23,11 @@ use Webmozart\Assert\Assert;
 
 final class EmailContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var EmailCheckerInterface */
-    private $emailChecker;
+    private EmailCheckerInterface $emailChecker;
 
-    /** @var TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -151,12 +148,9 @@ final class EmailContext implements Context
 
         if ($this->sharedStorage->has('tracking_code')) {
             $this->assertEmailContainsMessageTo(
-                sprintf(
-                    '%s %s %s',
-                    $this->sharedStorage->get('tracking_code'),
-                    $this->translator->trans('sylius.email.shipment_confirmation.tracking_code', [], null, $localeCode),
-                    $this->translator->trans('sylius.email.shipment_confirmation.thank_you_for_transaction', [], null, $localeCode)
-                ),
+                $this->translator->trans('sylius.email.shipment_confirmation.you_can_check_its_location_with_the_tracking_code', [
+                    '%tracking_code%' => $this->sharedStorage->get('tracking_code'),
+                ], null, $localeCode),
                 $recipient
             );
         }

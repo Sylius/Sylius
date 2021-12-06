@@ -28,20 +28,15 @@ final class ManagingCustomersContext implements Context
     /** @var CustomerIndexPageInterface */
     private $indexPage;
 
-    /** @var CreatePageInterface */
-    private $createPage;
+    private CreatePageInterface $createPage;
 
-    /** @var UpdatePageInterface */
-    private $updatePage;
+    private UpdatePageInterface $updatePage;
 
-    /** @var ShowPageInterface */
-    private $showPage;
+    private ShowPageInterface $showPage;
 
-    /** @var IndexPageInterface */
-    private $ordersIndexPage;
+    private \Sylius\Behat\Page\Admin\Crud\IndexPageInterface $ordersIndexPage;
 
-    /** @var CurrentPageResolverInterface */
-    private $currentPageResolver;
+    private CurrentPageResolverInterface $currentPageResolver;
 
     /**
      * @param CustomerIndexPageInterface $indexPage
@@ -155,6 +150,24 @@ final class ManagingCustomersContext implements Context
     public function iWantToEditThisCustomer(CustomerInterface $customer)
     {
         $this->updatePage->open(['id' => $customer->getId()]);
+    }
+
+    /**
+     * @When I verify it
+     */
+    public function iTryToVerifyIt(): void
+    {
+        $this->updatePage->verifyUser();
+    }
+
+    /**
+     * @Then /^(this customer) should be verified$/
+     */
+    public function thisCustomerShouldBeVerified(CustomerInterface $customer): void
+    {
+        $this->indexPage->open();
+
+        Assert::true($this->indexPage->isCustomerVerified($customer));
     }
 
     /**
@@ -299,8 +312,9 @@ final class ManagingCustomersContext implements Context
     /**
      * @Given I want to enable :customer
      * @Given I want to disable :customer
+     * @Given I want to verify :customer
      */
-    public function iWantToChangeStatusOf(CustomerInterface $customer)
+    public function iWantToChangeStatusOf(CustomerInterface $customer): void
     {
         $this->updatePage->open(['id' => $customer->getId()]);
     }

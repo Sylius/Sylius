@@ -11,16 +11,18 @@ sylius:
             last_name: Họ
             phone_number: Số điện thoại
             postcode: Mã bưu chính
+            street: Tên đường
             province: Tỉnh
             zone: Khu vực
         country:
             add_province: Thêm tỉnh
-            name: Tên
+            name: Sản phẩm
             provinces: Tỉnh
             select: Chọn
             enabled: Đã kích hoạt
         province:
             name: Tên
+            abbreviation: Viết tắt
             select: Chọn
         zone:
             add_member: Thêm thành viên
@@ -32,6 +34,9 @@ sylius:
                 province: Tỉnh
                 zone: Khu vực
             scope: Phạm vi
+            scopes:
+                all: Tất cả
             select: Chọn
+            select_scope: Chọn phạm vi
         zone_member:
             select: Chọn

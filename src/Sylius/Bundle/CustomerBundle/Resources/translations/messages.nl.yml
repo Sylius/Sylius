@@ -12,7 +12,7 @@ sylius:
             gender: Geslacht
             birthday: Verjaardag
             billing_address: Factuuradres
-            different_billing_address: Gebruik een ander factuuradres?
+            different_shipping_address: Gebruik een ander adres voor verzending?
             only_customer_registration: Account aanmaken?
             subscribed_to_newsletter: Abonneer op de nieuwsbrief
         customer_group:

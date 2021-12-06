@@ -24,6 +24,7 @@ sylius:
         code:
             regex: Kürzel der Kundengruppe darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Code der Kundengruppe muss eindeutig sein.
+            not_blank: Bitte geben Sie einen Code für die Kundengruppe ein.
         name:
             max: Name der Kundengruppe darf nicht länger als {{ limit }} Zeichen sein.
             min: Name der Kundengruppe muss mindestens {{ limit }} Zeichen lang sein.

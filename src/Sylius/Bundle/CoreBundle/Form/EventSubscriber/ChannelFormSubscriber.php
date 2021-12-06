@@ -19,9 +19,6 @@ use Symfony\Component\Form\FormEvents;
 
 final class ChannelFormSubscriber implements EventSubscriberInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -39,12 +36,14 @@ final class ChannelFormSubscriber implements EventSubscriberInterface
 
         $data['locales'] = $this->resolveLocales(
             $data['locales'] ?? [],
-            $data['defaultLocale'])
+            $data['defaultLocale']
+        )
         ;
 
         $data['currencies'] = $this->resolveCurrencies(
             $data['currencies'] ?? [],
-            $data['baseCurrency'])
+            $data['baseCurrency']
+        )
         ;
 
         $event->setData($data);

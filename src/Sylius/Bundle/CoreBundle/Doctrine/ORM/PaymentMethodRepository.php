@@ -20,9 +20,6 @@ use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 
 class PaymentMethodRepository extends BasePaymentMethodRepository implements PaymentMethodRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function createListQueryBuilder(string $locale): QueryBuilder
     {
         return $this->createQueryBuilder('o')
@@ -32,15 +29,13 @@ class PaymentMethodRepository extends BasePaymentMethodRepository implements Pay
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findEnabledForChannel(ChannelInterface $channel): array
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.enabled = true')
+            ->andWhere('o.enabled = :enabled')
             ->andWhere(':channel MEMBER OF o.channels')
             ->setParameter('channel', $channel)
+            ->setParameter('enabled', true)
             ->addOrderBy('o.position')
             ->getQuery()
             ->getResult()

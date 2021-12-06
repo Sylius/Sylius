@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: תיאור
+            name: שם
         promotion:
             actions: פעולות
             add_action: הוסף פעולה
@@ -11,12 +14,18 @@ sylius:
             ends_at: מסתיים ב
             name: שם
             rules: כללים
+            usage_limit: מגבלת שימוש
         promotion_action:
             fixed_discount_configuration:
                 amount: כמות
             type: סוג
+        promotion_coupon:
+            expires_at: תאריך תפוגה
+            usage_limit: מגבלת שימוש
         promotion_coupon_generator_instruction:
             amount: כמות
+            expires_at: תאריך תפוגה
+            usage_limit: מגבלת שימוש
         promotion_filter:
             price_range: מסנן טווח מחיר
         promotion_rule:

@@ -15,12 +15,6 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.listener.cart_blamer" class="Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener">
-            <argument type="service" id="sylius.manager.order" />
-            <argument type="service" id="sylius.context.cart" />
-            <tag name="kernel.event_listener" event="sylius.user.security.implicit_login" method="onImplicitLogin" />
-            <tag name="kernel.event_listener" event="security.interactive_login" method="onInteractiveLogin" />
-        </service>
         <service id="sylius.listener.channel" class="Sylius\Bundle\CoreBundle\EventListener\ChannelDeletionListener">
             <argument type="service" id="sylius.repository.channel" />
             <tag name="kernel.event_listener" event="sylius.channel.pre_delete" method="onChannelPreDelete" />
@@ -48,12 +42,6 @@
             <argument type="service" id="sylius.order_processing.order_processor" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculateOrder" />
         </service>
-        <service id="sylius.listener.user_cart_recalculation" class="Sylius\Bundle\CoreBundle\EventListener\UserCartRecalculationListener">
-            <argument type="service" id="sylius.context.cart" />
-            <argument type="service" id="sylius.order_processing.order_processor" />
-            <tag name="kernel.event_listener" event="sylius.user.security.implicit_login" method="recalculateCartWhileLogin" />
-            <tag name="kernel.event_listener" event="security.interactive_login" method="recalculateCartWhileLogin" />
-        </service>
         <service id="sylius.listener.default_username" class="Sylius\Bundle\CoreBundle\EventListener\DefaultUsernameORMListener">
             <tag name="doctrine.event_listener" event="onFlush" lazy="true" />
         </service>
@@ -71,11 +59,6 @@
             <tag name="doctrine.event_listener" event="prePersist" lazy="true" />
             <tag name="doctrine.event_listener" event="preUpdate" lazy="true" />
         </service>
-        <service id="sylius.translator.listener" class="Symfony\Component\HttpKernel\EventListener\TranslatorListener">
-            <argument type="service" id="translator" />
-            <argument type="service" id="request_stack" />
-            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="2" />
-        </service>
         <service id="sylius.listener.review_create" class="Sylius\Bundle\CoreBundle\EventListener\ReviewCreateListener">
             <argument type="service" id="sylius.context.customer" />
             <tag name="kernel.event_listener" event="sylius.product_review.pre_create" method="ensureReviewHasAuthor" />
@@ -88,12 +71,15 @@
 
         <service id="sylius.listener.simple_product_locking" class="Sylius\Bundle\CoreBundle\EventListener\SimpleProductLockingListener">
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="sylius.product_variant_resolver.default" />
             <tag name="kernel.event_listener" event="sylius.product.initialize_update" method="lock" />
         </service>
 
         <service id="sylius.listener.customer_default_address" class="Sylius\Bundle\CoreBundle\EventListener\CustomerDefaultAddressListener">
             <tag name="kernel.event_listener" event="sylius.address.pre_create" method="preCreate" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\LocaleAwareListener" decorates="locale_aware_listener">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\EventListener\LocaleAwareListener.inner" />
         </service>
 
         <service id="sylius.listener.taxon_deletion" class="Sylius\Bundle\CoreBundle\EventListener\TaxonDeletionListener">
@@ -103,6 +89,66 @@
             <argument type="service" id="sylius.promotion_rule_updater.has_taxon" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="protectFromRemovingMenuTaxon" />
             <tag name="kernel.event_listener" event="sylius.taxon.post_delete" method="removeTaxonFromPromotionRules" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\CatalogPromotionEventListener">
+            <argument type="service" id="sylius.event_bus" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" />
+            <argument type="service" id="Sylius\Component\Promotion\Provider\DateTimeProviderInterface" />
+            <tag name="kernel.event_listener" event="sylius.catalog_promotion.post_create" method="dispatchCatalogPromotionUpdatedEvent" />
+            <tag name="kernel.event_listener" event="sylius.catalog_promotion.post_update" method="dispatchCatalogPromotionUpdatedEvent" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\ProductEventListener">
+            <argument type="service" id="sylius.event_bus" />
+            <tag name="kernel.event_listener" event="sylius.product.post_update" method="dispatchProductUpdatedEvent" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\ProductVariantEventListener">
+            <argument type="service" id="sylius.event_bus" />
+            <tag name="kernel.event_listener" event="sylius.product_variant.post_update" method="dispatchProductVariantUpdatedEvent" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Listener\CatalogPromotionUpdateListener">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface" />
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="messenger.message_handler" bus="sylius.event_bus" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Listener\CatalogPromotionEndedListener">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface" />
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sm.factory" />
+            <tag name="messenger.message_handler" bus="sylius.event_bus" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Listener\CatalogPromotionFailedListener">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface" />
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sm.factory" />
+            <tag name="messenger.message_handler" bus="sylius.event_bus" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Listener\ProductUpdateListener">
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\ProductCatalogPromotionsProcessorInterface" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="messenger.message_handler" bus="sylius.event_bus" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Listener\ProductVariantUpdateListener">
+            <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\ProductVariantCatalogPromotionsProcessorInterface" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="messenger.message_handler" bus="sylius.event_bus" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Listener\CatalogPromotionUpdateFailedMessageListener">
+            <argument type="service" id="sylius.event_bus" />
+            <tag name="kernel.event_listener" event="Symfony\Component\Messenger\Event\WorkerMessageFailedEvent" method="onMessageFailed" />
         </service>
     </services>
 </container>

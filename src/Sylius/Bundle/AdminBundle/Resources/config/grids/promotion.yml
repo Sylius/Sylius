@@ -46,6 +46,11 @@ sylius_grid:
                 couponBased:
                     type: boolean
                     label: sylius.ui.coupon_based
+                coupon_code:
+                    type: string
+                    label: sylius.ui.coupon
+                    options:
+                        fields: [coupons.code]
             actions:
                 main:
                     create:

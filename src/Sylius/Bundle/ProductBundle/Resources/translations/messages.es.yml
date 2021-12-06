@@ -7,7 +7,7 @@ sylius:
             name: Nombre
             description: Descripción
             attributes: Atributos
-            options: Opciones de producto
+            options: Opciones
             meta_keywords: Meta palabras clave
             meta_description: Meta descripción
             slug: Slug

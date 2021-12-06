@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    payum_action:
+        payment:
+            description: '{items, plural, one {Betaling bevat # item voor een totaal van {total}} other {Betaling bevat # items voor een totaal van {total}}}'

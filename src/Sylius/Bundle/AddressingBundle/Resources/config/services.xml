@@ -56,5 +56,9 @@
             <argument type="service" id="sylius.repository.province" />
             <tag name="validator.constraint_validator" alias="sylius_province_address_validator" />
         </service>
+
+        <service id="sylius.validator.zone_cannot_contain_itself" class="Sylius\Bundle\AddressingBundle\Validator\Constraints\ZoneCannotContainItselfValidator">
+            <tag name="validator.constraint_validator" alias="sylius_zone_cannot_contain_itself_validator" />
+        </service>
     </services>
 </container>

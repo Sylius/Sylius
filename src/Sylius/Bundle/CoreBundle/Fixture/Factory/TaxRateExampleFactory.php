@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use Faker\Generator;
+use Faker\Factory;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -25,20 +27,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $taxRateFactory;
+    private FactoryInterface $taxRateFactory;
 
-    /** @var RepositoryInterface */
-    private $zoneRepository;
+    private RepositoryInterface $zoneRepository;
 
-    /** @var RepositoryInterface */
-    private $taxCategoryRepository;
+    private RepositoryInterface $taxCategoryRepository;
 
-    /** @var \Faker\Generator */
-    private $faker;
+    private Generator $faker;
 
-    /** @var OptionsResolver */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
         FactoryInterface $taxRateFactory,
@@ -49,15 +46,12 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
         $this->zoneRepository = $zoneRepository;
         $this->taxCategoryRepository = $taxCategoryRepository;
 
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): TaxRateInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -76,9 +70,6 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
         return $taxRate;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -86,7 +77,10 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
                 return StringInflector::nameToCode($options['name']);
             })
             ->setDefault('name', function (Options $options): string {
-                return $this->faker->words(3, true);
+                /** @var string $words */
+                $words = $this->faker->words(3, true);
+
+                return $words;
             })
             ->setDefault('amount', function (Options $options): float {
                 return $this->faker->randomFloat(2, 0, 0.4);
@@ -99,10 +93,10 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('calculator', 'default')
             ->setDefault('zone', LazyOption::randomOne($this->zoneRepository))
             ->setAllowedTypes('zone', ['null', 'string', ZoneInterface::class])
-            ->setNormalizer('zone', LazyOption::findOneBy($this->zoneRepository, 'code'))
+            ->setNormalizer('zone', LazyOption::getOneBy($this->zoneRepository, 'code'))
             ->setDefault('category', LazyOption::randomOne($this->taxCategoryRepository))
             ->setAllowedTypes('category', ['null', 'string', TaxCategoryInterface::class])
-            ->setNormalizer('category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'))
+            ->setNormalizer('category', LazyOption::getOneBy($this->taxCategoryRepository, 'code'))
         ;
     }
 }

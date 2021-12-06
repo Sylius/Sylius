@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    ui:
+        item.choice: '{count, plural, =0 {} one {, 1 елемент} few {, # елементи} many {, # елементів} other {, # елементи}}'

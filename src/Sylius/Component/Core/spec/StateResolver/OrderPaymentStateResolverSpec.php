@@ -268,4 +268,26 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
 
         $this->resolve($order);
     }
+
+    function it_marks_an_order_as_awaiting_payment_if_payments_is_processing(
+        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        PaymentInterface $firstPayment
+    ): void {
+        $firstPayment->getAmount()->willReturn(6000);
+        $firstPayment->getState()->willReturn(PaymentInterface::STATE_PROCESSING);
+
+        $order
+            ->getPayments()
+            ->willReturn(new ArrayCollection([$firstPayment->getWrappedObject()]))
+        ;
+        $order->getTotal()->willReturn(6000);
+
+        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)->willReturn(true);
+        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)->shouldBeCalled();
+
+        $this->resolve($order);
+    }
 }

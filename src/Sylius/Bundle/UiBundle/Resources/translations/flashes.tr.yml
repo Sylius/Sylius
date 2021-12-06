@@ -24,3 +24,5 @@ sylius:
         out_of_stock: 'Stokta bu üründen %quantity% adet var.'
     product_variant:
         update_error: 'Ürün varyantını güncelleme konusunda beklenmedik bir sorun oluştu. Lütfen, ürün varyantını tekrar güncellemeyi deneyin.'
+    promotion:
+        update_rules: '%codes% kodlu promosyonların bazı kuralları güncellendi.'

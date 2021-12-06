@@ -16,7 +16,7 @@ sylius:
             zone: โซน
         country:
             add_province: เพิ่มจังหวัด
-            name: ชื่อภาษา
+            name: Name
             provinces: จังหวัด
             select: เลือก
             enabled: เปิดใช้งาน
@@ -27,7 +27,7 @@ sylius:
         zone:
             add_member: เพิ่มสมาชิก
             members: สมาชิก
-            name: ชื่อภาษา
+            name: ชื่อ
             type: ชนิด
             types:
                 country: ประเทศ

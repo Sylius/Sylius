@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Form\EventListener;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectRepository;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceCodeChoiceType;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -29,11 +29,9 @@ use Symfony\Component\Form\FormInterface;
  */
 final class BuildAddressFormSubscriber implements EventSubscriberInterface
 {
-    /** @var ObjectRepository */
-    private $countryRepository;
+    private ObjectRepository $countryRepository;
 
-    /** @var FormFactoryInterface */
-    private $formFactory;
+    private FormFactoryInterface $formFactory;
 
     public function __construct(ObjectRepository $countryRepository, FormFactoryInterface $factory)
     {
@@ -41,9 +39,6 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
         $this->formFactory = $factory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

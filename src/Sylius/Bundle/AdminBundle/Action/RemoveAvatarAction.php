@@ -25,14 +25,11 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 final class RemoveAvatarAction
 {
-    /** @var AvatarImageRepositoryInterface */
-    private $avatarRepository;
+    private AvatarImageRepositoryInterface $avatarRepository;
 
-    /** @var RouterInterface */
-    private $router;
+    private RouterInterface $router;
 
-    /** @var CsrfTokenManagerInterface */
-    private $csrfTokenManager;
+    private CsrfTokenManagerInterface $csrfTokenManager;
 
     public function __construct(
         AvatarImageRepositoryInterface $avatarRepository,
@@ -48,7 +45,7 @@ final class RemoveAvatarAction
     {
         $userId = $request->attributes->get('id');
 
-        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken($userId, $request->query->get('_csrf_token')))) {
+        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken($userId, (string) $request->query->get('_csrf_token')))) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 

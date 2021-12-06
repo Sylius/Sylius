@@ -16,7 +16,7 @@ sylius:
             zone: Strefa
         country:
             add_province: Dodaj województwo
-            name: Nazwa
+            name: nazwa
             provinces: Województwa
             select: Wybierz
             enabled: Dostępny

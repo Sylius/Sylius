@@ -26,7 +26,7 @@ interface ApiClientInterface
 
     public function show(string $id): Response;
 
-    public function create(): Response;
+    public function create(?RequestInterface $request = null): Response;
 
     public function update(): Response;
 
@@ -44,17 +44,23 @@ interface ApiClientInterface
 
     public function upload(): Response;
 
+    public function executeCustomRequest(RequestInterface $request): Response;
+
     public function buildCreateRequest(): void;
 
     public function buildUpdateRequest(string $id): void;
 
     public function buildUploadRequest(): void;
 
+    public function setRequestData(array $data): void;
+
     /** @param string|int $value */
     public function addParameter(string $key, $value): void;
 
     /** @param string|int $value */
     public function addFilter(string $key, $value): void;
+
+    public function clearParameters(): void;
 
     public function addFile(string $key, UploadedFile $file): void;
 
@@ -63,7 +69,13 @@ interface ApiClientInterface
 
     public function addSubResourceData(string $key, array $data): void;
 
+    public function removeSubResource(string $subResource, string $id): void;
+
     public function updateRequestData(array $data): void;
 
+    public function getContent(): array;
+
     public function getLastResponse(): Response;
+
+    public function getToken(): ?string;
 }

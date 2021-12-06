@@ -1,0 +1,8 @@
+<h4 class="ui top attached large header">{{ 'sylius.ui.scopes'|trans }}</h4>
+<div class="ui attached segment">
+    <div>
+        {% for scope in catalog_promotion.scopes %}
+            {% include '@SyliusAdmin/CatalogPromotion/Show/Scope/' ~ scope.type ~ '.html.twig' %}
+        {% endfor %}
+    </div>
+</div>

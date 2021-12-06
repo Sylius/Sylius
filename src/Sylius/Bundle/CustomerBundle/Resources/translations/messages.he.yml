@@ -12,7 +12,6 @@ sylius:
             gender: מין
             birthday: תאריך לידה
             billing_address: כתובת לחשבונית
-            different_billing_address: השתמש בכתובת שונה על חשבונית?
             only_customer_registration: צור חשבון?
             subscribed_to_newsletter: הצטרף לרשימת הדיוור
         customer_group:

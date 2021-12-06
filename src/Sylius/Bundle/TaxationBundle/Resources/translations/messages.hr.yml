@@ -7,7 +7,7 @@ sylius:
             name: Naziv regije
             description: Opis
         tax_rate:
-            category: Kategorija
+            category: Kategorija porezne stope
             name: Naziv regije
             amount: Iznos
             included_in_price: Uključeno u cijenu?

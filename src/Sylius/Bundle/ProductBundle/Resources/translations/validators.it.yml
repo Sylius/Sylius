@@ -9,6 +9,7 @@ sylius:
         slug:
             not_blank: Inserisci lo slug del prodotto.
             unique: Lo slug del prodotto deve essere unico.
+            max_length: L'url del prodotto non deve essere più lungo di 1 carattere. |Il nome del prodotto non deve essere più lungo di {{ limit }} caratteri.
         code:
             not_blank: Inserisci il codice prodotto.
             regex: Il codice prodotto può contenere solo lettere, numeri, trattini e underscore.

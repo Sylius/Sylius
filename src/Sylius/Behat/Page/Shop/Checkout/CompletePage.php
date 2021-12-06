@@ -16,18 +16,18 @@ namespace Sylius\Behat\Page\Shop\Checkout;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
+use DMore\ChromeDriver\ChromeDriver;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Countries;
 use Symfony\Component\Routing\RouterInterface;
 
 class CompletePage extends SymfonyPage implements CompletePageInterface
 {
-    /** @var TableAccessorInterface */
-    private $tableAccessor;
+    private TableAccessorInterface $tableAccessor;
 
     public function __construct(
         Session $session,
@@ -89,6 +89,11 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     public function hasPaymentMethod(): bool
     {
         return $this->hasElement('payment_method');
+    }
+
+    public function getProductUnitPrice(ProductInterface $product): int
+    {
+        return $this->getPriceFromString($this->getElement('product_unit_price', ['%name%' => $product->getName()])->getText());
     }
 
     public function hasProductDiscountedUnitPriceBy(ProductInterface $product, int $amount): bool
@@ -233,7 +238,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
 
     public function tryToOpen(array $urlParameters = []): void
     {
-        if ($this->getDriver() instanceof Selenium2Driver) {
+        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
             $start = microtime(true);
             $end = $start + 15;
             do {
@@ -304,7 +309,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
 
     private function getCountryName(string $countryCode): string
     {
-        return strtoupper(Intl::getRegionBundle()->getCountryName($countryCode, 'en'));
+        return strtoupper(Countries::getName($countryCode, 'en'));
     }
 
     private function getPriceFromString(string $price): int

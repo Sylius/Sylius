@@ -22,7 +22,7 @@ Fullstack Symfony
 developers to work better and faster by providing them with certainty of developing an application that is fully compatible
 with the business rules, that is structured, maintainable and upgradable, but also it allows to save time by providing generic re-usable modules.
 
-`Learn more about Symfony <http://symfony.com/what-is-symfony>`_.
+`Learn more about Symfony <https://symfony.com/what-is-symfony>`_.
 
 Doctrine
 --------
@@ -34,7 +34,7 @@ Doctrine
 The most important are the object-relational mapper (ORM) and the database abstraction layer (DBAL).
 One of Doctrine's key features is the possibility to write database queries in Doctrine Query Language (DQL) - an object-oriented dialect of SQL.
 
-To learn more about Doctrine - see `their documentation <http://www.doctrine-project.org/about.html>`_.
+To learn more about Doctrine - see `their documentation <https://www.doctrine-project.org/>`_.
 
 Twig
 ----
@@ -46,6 +46,15 @@ Twig
 **Twig** is a modern template engine for PHP that is really fast, secure and flexible. Twig is being used by Symfony.
 
 To read more about Twig, `go here <http://twig.sensiolabs.org/>`_.
+
+API Platform
+------------
+
+.. image:: ../../_images/api_platform.png
+    :scale: 25%
+    :align: center
+
+**API Platform** is a modern solution for developing high quality APIs. API Platform works by default with Symfony and depends on its components.
 
 Architecture
 ------------
@@ -123,10 +132,14 @@ Also here views have been built using the `SemanticUI <http://semantic-ui.com/>`
 Api
 ~~~
 
-The API available in Sylius Core is called the **Admin API** as it is operating from the Admin perspective.
-Our API uses the REST approach. Since our controllers are format agnostic they have become reusable in the API.
-Therefore if you request products in the shop frontend you are using exactly the same action as when you are placing the api request.
-Read more about our REST API in the :doc:`Sylius API Guide </api/index>`.
+When we created our API based on API Platform framework we have done everything to offer API as easy as possible to use by developer.
+The most important features of our API:
+
+    * All operations are grouped by `shop` and `admin` context (two prefixes)
+    * Developers can enable or disable entire API by changing single parameter (check :doc:`this </book/api/introduction>` chapter)
+    * We create all endpoints implementing the REST principles and we are using http verbs (POST, GET, PUT, PATCH, DELETE)
+    * Returned responses contain minimal information (developer should extend serialization if need more data)
+    * Entire business logic is separated from API - if it necessary we dispatch command instead mixing API logic with business logic
 
 .. tip::
 
@@ -141,7 +154,7 @@ Third Party Libraries
 Sylius uses a lot of libraries for various tasks:
 
 * `Payum <https://github.com/Payum/Payum>`_ for payments
-* `KnpMenu <http://symfony.com/doc/current/bundles/KnpMenuBundle/index.html>`_ - for shop and admin menus
+* `KnpMenu <https://symfony.com/doc/current/bundles/KnpMenuBundle/index.html>`_ - for shop and admin menus
 * `Gaufrette <https://github.com/KnpLabs/Gaufrette>`_ for filesystem abstraction (store images locally, Amazon S3 or external server)
 * `Imagine <https://github.com/liip/LiipImagineBundle>`_ for images processing, generating thumbnails and cropping
 * `Pagerfanta <https://github.com/whiteoctober/Pagerfanta>`_ for pagination

@@ -6,6 +6,6 @@ sylius:
         channel:
             color: Couleur
             description: Description
-            enabled: Activé
+            enabled: Activée
             name: Nom
             url: URL

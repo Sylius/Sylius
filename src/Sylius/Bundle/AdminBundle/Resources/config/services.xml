@@ -18,6 +18,7 @@
         <import resource="services/listener.xml" />
         <import resource="services/menu.xml" />
         <import resource="services/form.xml" />
+        <import resource="services/provider.xml" />
     </imports>
 
     <services>
@@ -26,6 +27,11 @@
         <service id="sylius.context.locale.admin_based" class="Sylius\Bundle\AdminBundle\Context\AdminBasedLocaleContext">
             <argument type="service" id="security.token_storage" />
             <tag name="sylius.context.locale" priority="128" />
+        </service>
+
+        <service id="sylius.section_resolver.admin_uri_based_section_resolver" class="Sylius\Bundle\AdminBundle\SectionResolver\AdminUriBasedSectionResolver">
+            <argument>/admin</argument>
+            <tag name="sylius.uri_based_section_resolver" priority="20" />
         </service>
 
         <service id="sylius.twig.extension.widget.admin_notification" class="Sylius\Bundle\AdminBundle\Twig\NotificationWidgetExtension">

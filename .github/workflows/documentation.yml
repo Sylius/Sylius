@@ -1,0 +1,80 @@
+name: Documentation
+
+on:
+    push:
+        branches-ignore:
+            - 'dependabot/**'
+        paths:
+            - "docs/**"
+    pull_request:
+        paths:
+            - "docs/**"
+    release:
+        types: [created]
+    schedule:
+        -
+            cron: "0 1 * * 6" # Run at 1am every Saturday
+    workflow_dispatch: ~
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        
+        name: "Build"
+
+        timeout-minutes: 10
+        
+        steps:
+            -
+                uses: actions/checkout@v2
+
+            -
+                name: Install documentation dependencies
+                run: docker build -t sylius-docs docs
+
+            -
+                name: Build the documentation
+                run: docker run --rm sylius-docs
+
+    notify-about-build-failure:
+        runs-on: ubuntu-latest
+
+        if: failure() && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'release')
+
+        needs: [test]
+
+        name: "Notify about build failure"
+
+        timeout-minutes: 5
+
+        steps:
+            -   
+                name: "Process data"
+                id: process-data
+                shell: bash
+                run: |
+                    echo "::set-output name=branch::$(echo ${{ github.ref }} | sed 's/refs\/heads\///g' | sed 's/refs\/tags\///g')"
+                    echo "::set-output name=sha::$(echo ${{ github.sha }} | cut -c 1-12)"
+
+            -   
+                name: "Notify on Slack"
+                uses: edge/simple-slack-notify@master
+                env:
+                    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+                if: env.SLACK_WEBHOOK_URL != null
+                with:
+                    channel: "#builds"
+                    username: "GitHub Actions"
+                    text: |
+                        *<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} | ${{ github.workflow }} #${{ github.run_number }} build on ${{ github.repository }} repository has failed for ${{ steps.process-data.outputs.branch }} branch.>*
+
+                        _ _ _ _ _ _ _
+                    color: "danger"
+                    fields: |
+                        [
+                            { "title": "Repository", "value": "<https://github.com/${{ github.repository }} | ${{ github.repository }}>", "short": true },
+                            { "title": "Action", "value": "<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} | ${{ github.workflow }} #${{ github.run_number }}>", "short": true },
+                            { "title": "Reference", "value": "<https://github.com/${{ github.repository }}/tree/${{ steps.process-data.outputs.branch }} | ${{ steps.process-data.outputs.branch }}>", "short": true },
+                            { "title": "Commit", "value": "<https://github.com/${{ github.repository }}/commit/${{ github.sha }} | ${{ steps.process-data.outputs.sha }}>", "short": true },
+                            { "title": "Event", "value": "${{ github.event_name }}", "short": true }
+                        ]

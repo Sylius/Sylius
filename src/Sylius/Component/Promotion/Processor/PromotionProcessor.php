@@ -20,14 +20,11 @@ use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 
 final class PromotionProcessor implements PromotionProcessorInterface
 {
-    /** @var PreQualifiedPromotionsProviderInterface */
-    private $preQualifiedPromotionsProvider;
+    private PreQualifiedPromotionsProviderInterface $preQualifiedPromotionsProvider;
 
-    /** @var PromotionEligibilityCheckerInterface */
-    private $promotionEligibilityChecker;
+    private PromotionEligibilityCheckerInterface $promotionEligibilityChecker;
 
-    /** @var PromotionApplicatorInterface */
-    private $promotionApplicator;
+    private PromotionApplicatorInterface $promotionApplicator;
 
     public function __construct(
         PreQualifiedPromotionsProviderInterface $preQualifiedPromotionsProvider,
@@ -39,9 +36,6 @@ final class PromotionProcessor implements PromotionProcessorInterface
         $this->promotionApplicator = $promotionApplicator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(PromotionSubjectInterface $subject): void
     {
         foreach ($subject->getPromotions() as $promotion) {

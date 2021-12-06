@@ -45,11 +45,11 @@ Sylius\Component\Promotion\Model\Promotion:
             groups: [Detailed]
         rules:
             expose: true
-            type: array
+            type: iterable
             groups: [Detailed]
         actions:
             expose: true
-            type: array
+            type: iterable
             groups: [Detailed]
         createdAt:
             expose: true

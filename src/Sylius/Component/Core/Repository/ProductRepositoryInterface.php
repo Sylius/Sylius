@@ -21,9 +21,7 @@ use Sylius\Component\Product\Repository\ProductRepositoryInterface as BaseProduc
 
 interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 {
-    /**
-     * @param mixed|null $taxonId
-     */
+    /** @param mixed|null $taxonId */
     public function createListQueryBuilder(string $locale, $taxonId = null): QueryBuilder;
 
     public function createShopListQueryBuilder(
@@ -41,5 +39,9 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 
     public function findOneByChannelAndSlug(ChannelInterface $channel, string $locale, string $slug): ?ProductInterface;
 
+    public function findOneByChannelAndCode(ChannelInterface $channel, string $code): ?ProductInterface;
+
     public function findOneByCode(string $code): ?ProductInterface;
+
+    public function findByTaxon(TaxonInterface $taxon): array;
 }

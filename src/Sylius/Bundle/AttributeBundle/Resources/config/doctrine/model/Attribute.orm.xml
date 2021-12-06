@@ -32,5 +32,11 @@
         <field name="position" type="integer">
             <gedmo:sortable-position />
         </field>
+
+        <field name="translatable" column="translatable" type="boolean">
+            <options>
+                <option name="default">1</option>
+            </options>
+        </field>
     </mapped-superclass>
 </doctrine-mapping>

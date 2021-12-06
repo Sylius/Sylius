@@ -7,7 +7,7 @@ Feature: Subscribing to the newsletter during registration
     Background:
         Given the store operates on a single channel in "United States"
 
-    @ui
+    @ui @api
     Scenario: Subscribing to the newsletter during registration
         When I want to register a new account
         And I specify the first name as "Saul"

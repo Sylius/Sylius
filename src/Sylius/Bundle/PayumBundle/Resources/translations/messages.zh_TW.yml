@@ -17,4 +17,3 @@ sylius:
     payum_gateway_factory:
         offline: 離線
         paypal_express_checkout: PayPal 快速結帳
-        stripe_checkout: Stripe 結帳

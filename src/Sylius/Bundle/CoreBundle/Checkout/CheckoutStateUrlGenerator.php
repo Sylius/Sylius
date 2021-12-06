@@ -20,11 +20,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterface
 {
-    /** @var RouterInterface */
-    private $router;
+    private RouterInterface $router;
 
-    /** @var array */
-    private $routeCollection = [];
+    private array $routeCollection = [];
 
     public function __construct(RouterInterface $router, array $routeCollection)
     {
@@ -32,17 +30,11 @@ final class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterf
         $this->routeCollection = $routeCollection;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function generate($name, $parameters = [], $referenceType = self::ABSOLUTE_PATH): string
     {
         return $this->router->generate($name, $parameters, $referenceType);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function generateForOrderCheckoutState(
         OrderInterface $order,
         array $parameters = [],
@@ -55,9 +47,6 @@ final class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterf
         return $this->router->generate($this->routeCollection[$order->getCheckoutState()]['route'], $parameters, $referenceType);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function generateForCart(array $parameters = [], int $referenceType = self::ABSOLUTE_PATH): string
     {
         if (!isset($this->routeCollection['empty_order']['route'])) {
@@ -67,17 +56,11 @@ final class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterf
         return $this->router->generate($this->routeCollection['empty_order']['route'], $parameters, $referenceType);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setContext(RequestContext $context): void
     {
         $this->router->setContext($context);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContext(): RequestContext
     {
         return $this->router->getContext();

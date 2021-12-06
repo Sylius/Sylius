@@ -22,10 +22,11 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Twig\Environment;
 
 final class CurrencySwitchController
 {
-    /** @var EngineInterface */
+    /** @var EngineInterface|Environment */
     private $templatingEngine;
 
     /** @var CurrencyContextInterface */
@@ -37,8 +38,11 @@ final class CurrencySwitchController
     /** @var ChannelContextInterface */
     private $channelContext;
 
+    /**
+     * @param EngineInterface|Environment $templatingEngine
+     */
     public function __construct(
-        EngineInterface $templatingEngine,
+        object $templatingEngine,
         CurrencyContextInterface $currencyContext,
         CurrencyStorageInterface $currencyStorage,
         ChannelContextInterface $channelContext
@@ -61,10 +65,10 @@ final class CurrencySwitchController
             $channel->getCurrencies()->toArray()
         );
 
-        return $this->templatingEngine->renderResponse('@SyliusShop/Menu/_currencySwitch.html.twig', [
+        return new Response($this->templatingEngine->render('@SyliusShop/Menu/_currencySwitch.html.twig', [
             'active' => $this->currencyContext->getCurrencyCode(),
             'currencies' => $availableCurrencies,
-        ]);
+        ]));
     }
 
     public function switchAction(Request $request, string $code): Response

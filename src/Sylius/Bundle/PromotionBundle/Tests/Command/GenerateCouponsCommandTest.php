@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Tests\Command;
 
+use Symfony\Component\Console\Command\Command;
 use InvalidArgumentException;
 use Sylius\Bundle\PromotionBundle\Command\GenerateCouponsCommand;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
@@ -25,11 +26,9 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class GenerateCouponsCommandTest extends KernelTestCase
 {
-    /** @var GenerateCouponsCommand */
-    private $command;
+    private Command $command;
 
-    /** @var CommandTester */
-    private $commandTester;
+    private CommandTester $commandTester;
 
     /** @var PromotionRepositoryInterface */
     private $promotionRepository;

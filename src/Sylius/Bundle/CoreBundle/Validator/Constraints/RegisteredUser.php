@@ -17,20 +17,13 @@ use Symfony\Component\Validator\Constraint;
 
 final class RegisteredUser extends Constraint
 {
-    /** @var string */
-    public $message = 'This email is already registered. Please log in.';
+    public string $message = 'This email is already registered. Please log in.';
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'registered_user_validator';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;

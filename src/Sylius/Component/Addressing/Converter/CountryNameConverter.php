@@ -13,21 +13,20 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Converter;
 
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Countries;
 
 final class CountryNameConverter implements CountryNameConverterInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function convertToCode(string $name, string $locale = 'en'): string
     {
-        $names = Intl::getRegionBundle()->getCountryNames($locale);
+        $names = Countries::getNames($locale);
         $countryCode = array_search($name, $names, true);
 
         if (false === $countryCode) {
             throw new \InvalidArgumentException(sprintf(
-                'Country "%s" not found! Available names: %s.', $name, implode(', ', $names)
+                'Country "%s" not found! Available names: %s.',
+                $name,
+                implode(', ', $names)
             ));
         }
 

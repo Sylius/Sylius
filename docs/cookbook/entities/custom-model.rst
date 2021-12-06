@@ -14,20 +14,13 @@ A Supplier needs three essential fields: ``name``, ``description`` and ``enabled
 2. Generate the entity
 ----------------------
 
-Symfony, the framework Sylius uses, provides the `SensioGeneratorBundle <http://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html>`_,
-that simplifies the process of adding a model, or the `SymfonyMakerBundle <https://symfony.com/doc/current/bundles/SymfonyMakerBundle/index.html>`_ for Symfony 4.
+Symfony, the framework Sylius uses, provides the `SymfonyMakerBundle <https://symfony.com/doc/current/bundles/SymfonyMakerBundle/index.html>`_ that simplifies the process of adding a model.
 
 .. warning::
 
-    Remember to have the ``SensioGeneratorBundle`` (or SymfonyMakerBundle depending on your Symfony version) imported in the AppKernel, as it is not there by default.
+    Remember to have the ``SymfonyMakerBundle`` imported in the AppKernel, as it is not there by default.
 
 You need to use such a command in your project directory.
-
-With the Generator Bundle
-
-.. code-block:: bash
-
-    php bin/console generate:doctrine:entity
 
 With the Maker Bundle
 
@@ -39,6 +32,13 @@ The generator will ask you for the entity name and fields. See how it should loo
 
 .. image:: ../../_images/generating_entity.png
     :align: center
+
+.. note::
+
+    You can encounter error when generating entity with Maker Bundle, this can be fixed with `Maker bundle force annotation fix <https://github.com/vklux/maker-bundle-force-annotation>`_
+
+    .. image:: ../../_images/make_entity_error.png
+        :align: center
 
 3. Update the database using migrations
 ---------------------------------------
@@ -74,7 +74,28 @@ Go to the generated class file and make it implement the ``ResourceInterface``:
         // ...
     }
 
-5. Register your entity as a Sylius resource
+5. Change repository to extend EntityRepository
+-----------------------------------------------
+
+Go to generated repository and make it extend ``EntityRepository`` and remove ``__construct``:
+
+.. code-block:: php
+
+    <?php
+
+    namespace App\Repository\Supply;
+
+    use App\Entity\Supply\Supplier;
+    use Doctrine\Persistence\ManagerRegistry;
+    use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+
+    class SupplierRepository extends EntityRepository
+    {
+        // ...
+    }
+
+
+6. Register your entity as a Sylius resource
 --------------------------------------------
 
 If you don't have it yet, create a file ``config/packages/sylius_resource.yaml``.
@@ -88,6 +109,7 @@ If you don't have it yet, create a file ``config/packages/sylius_resource.yaml``
                 driver: doctrine/orm # You can use also different driver here
                 classes:
                     model: App\Entity\Supplier
+                    repository: App\Repository\SupplierRepository
 
 To check if the process was run correctly run such a command:
 
@@ -99,15 +121,6 @@ The output should be:
 
 .. image:: ../../_images/container_debug_supplier.png
     :align: center
-
-6. Optionally try to use Sylius API to create new resource
-----------------------------------------------------------
-
-See how to work with API in :doc:`the separate cookbook here </cookbook/api/api>`.
-
-.. note::
-
-    Using API is not mandatory. It is just a nice moment for you to try it out. If you are not interested go to the next point of this cookbook.
 
 7. Define grid structure for the new entity
 -------------------------------------------
@@ -158,8 +171,7 @@ Having a grid prepared we can configure routing for the entity administration:
         resource: |
             alias: app.supplier
             section: admin
-            path: admin
-            templates: SyliusAdminBundle:Crud
+            templates: "@SyliusAdmin\\Crud"
             redirect: update
             grid: app_admin_supplier
             vars:
@@ -168,16 +180,18 @@ Having a grid prepared we can configure routing for the entity administration:
                 index:
                     icon: 'file image outline'
         type: sylius.resource
+        prefix: /admin
+
 
 9. Add entity administration to the admin menu
-----------------------------------------------
+-----------------------------------------------
 
 .. tip::
 
     See :doc:`how to add links to your new entity administration in the administration menu </customization/menu>`.
 
-9. Check the admin panel for your changes
------------------------------------------
+10. Check the admin panel for your changes
+------------------------------------------
 
 .. tip::
 
@@ -186,6 +200,6 @@ Having a grid prepared we can configure routing for the entity administration:
 Learn more
 ----------
 
-* :doc:`GridBundle documentation </components_and_bundles/bundles/SyliusGridBundle/index>`
-* :doc:`ResourceBundle documentation </components_and_bundles/bundles/SyliusResourceBundle/index>`
+* `GridBundle documentation <https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md>`_
+* `ResourceBundle documentation <https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md>`_
 * :doc:`Customization Guide </customization/index>`

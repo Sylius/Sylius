@@ -16,10 +16,6 @@ sylius:
             max_length: Nome do produto não deve ser superior a 1 caractere. |Nome do produto não deve ter mais de {{limit}} caracteres.
             min_length: Nome do produto deve ter pelo menos 1 caracter. |Nome do produto deve ter pelo menos {{limit}} caracteres.
             not_blank: Por favor, digite o nome da promoção.
-    promotion_action:
-        percentage_discount_configuration:
-            min: O valor de um percentual de desconto deve ser no mínimo de 0%.
-            max: O valor máximo de um percentagem de desconto é de 100%.
     promotion_coupon:
         code:
             max_length: Código de cupom não deve ter mais de 1 caractere. |Código de cupom não deve ter mais de {{limit}} caracteres.
@@ -38,6 +34,5 @@ sylius:
             min: Código do cupom deve ter pelo menos {{ limit }} caracteres.
             max: Código de cupom não deve ter mais de {{ limit }} caracteres.
             not_blank: Por favor digite o tamanho do código de cupom.
-        possible_generation_amount: Cupom Inválido pelo código ou valor. Não é possível gerar único %expectedAmount% de cupons com tamanho de comprimento igual a %codeLength%. Possibilidade de gerar é no valor de %possibleAmount%.
         usage_limit:
             min: Limite de uso de cupons gerados deve ser pelo menos {{ limit }}.

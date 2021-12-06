@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        taxon:
+            description: Lýsing
+            enabled: Virkt
+            name: Nafn
+            parent: Yfirflokkur
+            slug: Vefslóðarheiti
+        taxonomy:
+            name: Nafn

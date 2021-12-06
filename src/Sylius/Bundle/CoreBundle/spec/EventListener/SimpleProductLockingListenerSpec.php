@@ -13,31 +13,30 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class SimpleProductLockingListenerSpec extends ObjectBehavior
 {
-    function let(EntityManagerInterface $manager, ProductVariantResolverInterface $variantResolver): void
+    function let(EntityManagerInterface $manager): void
     {
-        $this->beConstructedWith($manager, $variantResolver);
+        $this->beConstructedWith($manager);
     }
 
     function it_locks_variant_of_a_simple_product_entity(
         EntityManagerInterface $manager,
-        ProductVariantResolverInterface $variantResolver,
         GenericEvent $event,
         ProductInterface $product,
         ProductVariantInterface $productVariant
     ): void {
         $event->getSubject()->willReturn($product);
         $product->isSimple()->willReturn(true);
-        $variantResolver->getVariant($product)->willReturn($productVariant);
+        $product->getVariants()->willReturn(new ArrayCollection([$productVariant->getWrappedObject()]));
         $productVariant->getVersion()->willReturn(7);
 
         $manager->lock($productVariant, LockMode::OPTIMISTIC, 7);

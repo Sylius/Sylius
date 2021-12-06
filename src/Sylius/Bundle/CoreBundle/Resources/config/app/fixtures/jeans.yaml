@@ -10,7 +10,7 @@ sylius_fixtures:
                     options:
                         custom:
                             category:
-                                code: 'category'
+                                code: 'MENU_CATEGORY'
                                 name: 'Category'
                                 translations:
                                     en_US:
@@ -144,7 +144,7 @@ sylius_fixtures:
                                 product_options:
                                     - 'jeans_size'
                                 images:
-                                    - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_04.jpg', type: 'main' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_04.svg', type: 'main' }
 
                             -   name: '727F patched cropped jeans'
                                 tax_category: 'clothing'

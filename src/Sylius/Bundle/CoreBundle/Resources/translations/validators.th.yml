@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: ภาพใหญ่เกินไป - {{ size }}{{ suffix }} ขนาดสูงสุดคือ {{ limit }}{{ suffix }}
+            upload_ini_size: ภาพใหญ่เกินไป ขนาดสูงสุดคือ {{ limit }}{{ suffix }}
     channel:
         base_currency:
             not_blank: กรุณาระบุสกุลเงินเริ่มต้น
@@ -13,7 +17,6 @@ sylius:
             min: อีเมลล์จะต้องมีความยาวไม่น้อยกว่า {{ limit }} ตัวอักษร
     channel_pricing:
         price:
-            min: ราคาต้องอย่างน้อย {{ limit }}
             not_blank: กรุณาระบุราคา
     checkout:
         shipping_method:
@@ -39,9 +42,6 @@ sylius:
         product_eligibility: '%productName% สินค้านี้ถูกปิดใช้งาน'
         shipping_method_eligibility: 'สินค้าไม่สามารถจัดส่งด้วยวิธีจัดส่ง %shippingMethodName% กรุณาเลือกวิธีการจัดส่งใหม่'
     locale:
-        code:
-            not_blank: กรุณาระบุรหัสภาษา
-            unique: มีภาษานี้อยู่แล้ว
         enabled:
             cannot_disable_base: ไม่สามารถปิดใช้งานภาษาที่เป็นค่าเริ่มต้นได้
     product:
@@ -77,6 +77,9 @@ sylius:
     product_translation:
         short_description:
             max: คำอธิบายสั้น ต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร
+    review:
+        author:
+            not_blank: กรุณาระบุอีเมลของคุณ
     taxon_image:
         file:
             max_size: ภาพใหญ่เกินไป - {{ size }}{{ suffix }} ขนาดสูงสุดคือ {{ limit }}{{ suffix }}

@@ -4,11 +4,13 @@
 sylius:
     form:
         block:
-            body: Poruka
+            body: Sadržaj
             id: ID
             title: Naslov
         cart:
             coupon: Kupon
+        catalog_promotion:
+            channels: Kanali
         checkout:
             addressing:
                 different_billing_address: Želim koristiti drugu adresu za račun.
@@ -23,7 +25,7 @@ sylius:
             per_customer_usage_limit: Ograničenje korištenja po kupcu
         group:
             name: Naziv regije
-            roles: Role (korisnička prava)
+            roles: Uloge
         channel:
             billing_data:
                 city: Grad
@@ -32,6 +34,7 @@ sylius:
                 postcode: Poštanski broj
                 street: Ulica
             contact_email: Kontaktna email adresa
+            countries: Države
             currencies: Valute
             currency_base: Osnovna valuta
             account_verification_required: Je li potrebna potvrda računa?
@@ -61,14 +64,14 @@ sylius:
             payment_state: Stanje plaćanja
             channel: Svi kanali
         page:
-            body: Poruka
+            body: Sadržaj
             id: ID
             title: Naslov
         product:
             images: Slike
             restricted_zone: Ograničena zona pristupa
             short_description: Kratak opis
-            variant_selection_method: Način odabira varijante
+            variant_selection_method: Odabir varijante artikla
             main_taxon: Glavna taksonomija
             channels: Kanali
             enabled: Omogućeno
@@ -91,7 +94,7 @@ sylius:
             billing_address: Naplati na ime
             channel: Svi kanali
         shipping_method:
-            zone: Regija
+            zone: Zona
         taxon:
             code: ISO kod
             file: Odaberite sliku
@@ -99,21 +102,20 @@ sylius:
         taxonomy:
             file: Odaberite sliku
         user:
-            billing_address: Adresa za dostavu
-            different_billing_address: Želim koristiti drugu adresu za račun.
+            billing_address: Adresa
             enabled: Omogućeno
             first_name: Ime
             groups: Grupe
-            roles: Role (korisnička prava)
+            roles: Uloge
             last_name: Prezime
             password: Lozinka
-            shipping_address: Adresa za dostavu
+            shipping_address: Adresa za slanje
         user_filter:
             query: Pretraga
         variant:
             depth: Dubina
             height: Visina
-            on_hand: Treutno dostupno
+            on_hand: Skladište
             price: Cijena
             sku: KOD (SKU)
             shipping_required: Je li potrebna dostava?

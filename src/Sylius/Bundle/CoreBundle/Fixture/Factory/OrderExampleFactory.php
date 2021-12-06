@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Faker\Generator;
+use Faker\Factory;
+use Doctrine\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -86,7 +88,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
     /** @var OptionsResolver */
     protected $optionsResolver;
 
-    /** @var \Faker\Generator */
+    /** @var Generator */
     protected $faker;
 
     public function __construct(
@@ -121,7 +123,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $this->orderPaymentMethodSelectionRequirementChecker = $orderPaymentMethodSelectionRequirementChecker;
 
         $this->optionsResolver = new OptionsResolver();
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->configureOptions($this->optionsResolver);
     }
 
@@ -145,11 +147,11 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
             ->setDefault('channel', LazyOption::randomOne($this->channelRepository))
             ->setAllowedTypes('channel', ['null', 'string', ChannelInterface::class])
-            ->setNormalizer('channel', LazyOption::findOneBy($this->channelRepository, 'code'))
+            ->setNormalizer('channel', LazyOption::getOneBy($this->channelRepository, 'code'))
 
             ->setDefault('customer', LazyOption::randomOne($this->customerRepository))
             ->setAllowedTypes('customer', ['null', 'string', CustomerInterface::class])
-            ->setNormalizer('customer', LazyOption::findOneBy($this->customerRepository, 'email'))
+            ->setNormalizer('customer', LazyOption::getOneBy($this->customerRepository, 'email'))
 
             ->setDefault('country', LazyOption::randomOne($this->countryRepository))
             ->setAllowedTypes('country', ['null', 'string', CountryInterface::class])
@@ -316,7 +318,10 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         return sprintf(
             "No enabled %s method was found for the channel '%s'. " .
             "Set 'skipping_%s_step_allowed' option to true for this channel if you want to skip %s method selection.",
-            $type, $channelCode, $type, $type
+            $type,
+            $channelCode,
+            $type,
+            $type
         );
     }
 

@@ -17,20 +17,13 @@ use Symfony\Component\Validator\Constraint;
 
 final class HasAllPricesDefined extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.product_variant.channel_pricing.all_defined';
+    public string $message = 'sylius.product_variant.channel_pricing.all_defined';
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'sylius_has_all_prices_defined';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return Constraint::CLASS_CONSTRAINT;

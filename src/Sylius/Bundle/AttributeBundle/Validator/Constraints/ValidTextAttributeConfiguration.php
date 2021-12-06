@@ -17,20 +17,13 @@ use Symfony\Component\Validator\Constraint;
 
 final class ValidTextAttributeConfiguration extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.attribute.configuration.max_length';
+    public string $message = 'sylius.attribute.configuration.max_length';
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'sylius_valid_text_attribute_validator';

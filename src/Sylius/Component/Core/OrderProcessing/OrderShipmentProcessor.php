@@ -25,14 +25,11 @@ use Webmozart\Assert\Assert;
 
 final class OrderShipmentProcessor implements OrderProcessorInterface
 {
-    /** @var DefaultShippingMethodResolverInterface */
-    private $defaultShippingMethodResolver;
+    private DefaultShippingMethodResolverInterface $defaultShippingMethodResolver;
 
-    /** @var FactoryInterface */
-    private $shipmentFactory;
+    private FactoryInterface $shipmentFactory;
 
-    /** @var ShippingMethodsResolverInterface|null */
-    private $shippingMethodsResolver;
+    private ?ShippingMethodsResolverInterface $shippingMethodsResolver;
 
     public function __construct(
         DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
@@ -51,13 +48,14 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(BaseOrderInterface $order): void
     {
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
+
+        if (OrderInterface::STATE_CART !== $order->getState()) {
+            return;
+        }
 
         if ($order->isEmpty() || !$order->isShippingRequired()) {
             $order->removeShipments();

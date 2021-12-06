@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    email:
+        order_confirmation_resent: 'Potvrzení objednávky bylo úspěšně znovu odesláno zákazníkovi.'
+        shipment_confirmation_resent: 'Potvrzení zásilky bylo úspěšně znovu odesláno zákazníkovi.'
+    product_variant:
+        cannot_generate_variants: 'Nelze vygenerovat varianty produktu bez hodnot možností.'

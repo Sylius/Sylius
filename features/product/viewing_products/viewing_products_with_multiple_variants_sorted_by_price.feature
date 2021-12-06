@@ -2,7 +2,7 @@
 Feature: Viewing products with multiple variants sorted by price
     In order to change the order in which products are displayed
     As a Customer
-    I want to be able to sort products with multiple variants by the price of their first variant
+    I want to be able to sort products with multiple variants by the price of their first enabled variant
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -17,8 +17,10 @@ Feature: Viewing products with multiple variants sorted by price
         And the product "Jack Daniel's" has "Gentleman Jack" variant priced at "$50.00"
         And the store has a "Johnnie Walker" configurable product
         And this product belongs to "Alcohols"
+        And the product "Johnnie Walker" has "Johnnie Walker White Label" variant priced at "$60.00"
         And the product "Johnnie Walker" has "Johnnie Walker Red Label" variant priced at "$20.00"
         And the product "Johnnie Walker" has "Johnnie Walker Black Label" variant priced at "$25.00"
+        And the "Johnnie Walker White Label" product variant is disabled
 
     @ui
     Scenario: Sorting products by price of their first variant with ascending order

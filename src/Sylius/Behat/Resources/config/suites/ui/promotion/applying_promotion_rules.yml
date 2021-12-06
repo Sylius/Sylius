@@ -35,4 +35,4 @@ default:
                 - sylius.behat.context.ui.shop.checkout.addressing
 
             filters:
-                tags: "@applying_promotion_rules && @ui"
+                tags: "@applying_promotion_rules&&@ui"

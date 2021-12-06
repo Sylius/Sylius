@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Popis
+            name: Názov
+            priority: Priorita
         promotion:
             actions: Akcie
             add_action: Pridať podmienku

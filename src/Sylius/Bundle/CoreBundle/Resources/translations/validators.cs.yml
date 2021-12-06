@@ -10,6 +10,7 @@ sylius:
         base_currency:
             not_blank: Zadejt základní měnu kanálu.
         default_locale:
+            enabled: Výchozí locale musí být povoleno.
             not_blank: Zadejte výchozí národní prostředí kanálu.
         contact_email:
             invalid: Tento email je neplatný.
@@ -17,6 +18,7 @@ sylius:
             min: E-mail musí být alespoň {{ limit }} znaků.
     channel_pricing:
         price:
+            min: Cena nemůže být nižší než 0.
             not_blank: Prosím vložte cenu.
     checkout:
         shipping_method:
@@ -37,14 +39,11 @@ sylius:
         not_available: '%itemName% nemá žádné dostatečné skladové zásoby.'
     order:
         currency_code:
-            not_valid: Kód měny, kterou jste zadali, je neplatný.
+            not_valid: Zadaný kód měny je neplatný.
         payment_method_eligibility: 'Tato platební metoda %paymentMethodName% byla zakázána. Prosím znovu vyberte způsob platby.'
         product_eligibility: 'Tento produkt %productName% byl zakázán.'
         shipping_method_eligibility: 'Produkt se nevejde požadavky na %shippingMethodName% způsob dopravy. Prosím znovu vyberte způsob dopravy.'
     locale:
-        code:
-            not_blank: Prosím vložte místní (locale) kód.
-            unique: Tento locale již existuje.
         enabled:
             cannot_disable_base: Základní prostředí nemůže být zakázán.
     product:
@@ -80,6 +79,9 @@ sylius:
     product_translation:
         short_description:
             max: Stručný popis nesmí být delší než {{ limit }} znaků.
+    review:
+        author:
+            not_blank: Prosím vložte Váš email.
     taxon_image:
         file:
             max_size: Obrázek je příliš velký - {{ size }}{{ suffix }}. Maximální povolená velikost je {{ limit }}{{ suffix }}.

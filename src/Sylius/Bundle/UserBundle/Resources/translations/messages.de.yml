@@ -12,8 +12,9 @@ sylius:
             remember_me: Angemeldet bleiben
             shipping_address: Lieferadresse
             username: Benutzername
+            verified: Überprüft
         user_filter:
-            query: Suche
+            query: Suchen
         user_change_password:
             confirmation: Bestätigung
             current: Aktuelles Passwort

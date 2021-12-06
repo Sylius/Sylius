@@ -15,17 +15,3 @@ Sylius\Component\Shipping\Model\ShipmentUnit:
         updatedAt:
             expose: true
             type: DateTime
-    relations:
-        -   rel: self
-            href:
-                route: sylius_admin_api_shipment_unit_show
-                parameters:
-                    shipmentId: expr(object.getShipment().getId())
-                    id: expr(object.getId())
-                    version: 1
-        -   rel: shipment
-            href:
-                route: sylius_admin_api_shipment_show
-                parameters:
-                    id: expr(object.getShipment().getId())
-                    version: 1

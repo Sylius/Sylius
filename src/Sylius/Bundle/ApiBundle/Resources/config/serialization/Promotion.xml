@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+
+<!--
+ This file is part of the Sylius package.
+ (c) Paweł Jędrzejewski
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+-->
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Sylius\Component\Core\Model\Promotion">
+        <attribute name="id">
+            <group>admin:promotion:read</group>
+        </attribute>
+
+        <attribute name="name">
+            <group>admin:promotion:read</group>
+            <group>admin:promotion:create</group>
+        </attribute>
+
+        <attribute name="code">
+            <group>admin:promotion:read</group>
+            <group>admin:promotion:create</group>
+        </attribute>
+
+        <attribute name="description">
+            <group>admin:promotion:read</group>
+        </attribute>
+
+        <attribute name="priority">
+            <group>admin:promotion:read</group>
+        </attribute>
+
+        <attribute name="exclusive">
+            <group>admin:promotion:read</group>
+        </attribute>
+
+        <attribute name="appliesToDiscounted">
+            <group>admin:promotion:read</group>
+            <group>admin:promotion:create</group>
+        </attribute>
+
+        <attribute name="usageLimit">
+            <group>admin:promotion:read</group>
+        </attribute>
+
+        <attribute name="startsAt">
+            <group>admin:promotion:read</group>
+        </attribute>
+
+        <attribute name="endsAt">
+            <group>admin:promotion:read</group>
+        </attribute>
+
+        <attribute name="couponBased">
+            <group>admin:promotion:read</group>
+        </attribute>
+
+        <attribute name="coupons">
+            <group>admin:promotion:read</group>
+        </attribute>
+
+        <attribute name="rules">
+            <group>admin:promotion:read</group>
+        </attribute>
+
+        <attribute name="actions">
+            <group>admin:promotion:read</group>
+        </attribute>
+
+        <attribute name="channels">
+            <group>admin:promotion:read</group>
+        </attribute>
+    </class>
+</serializer>

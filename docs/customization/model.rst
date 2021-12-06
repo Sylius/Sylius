@@ -8,6 +8,11 @@ All models in Sylius are placed in the ``Sylius\Component\*ComponentName*\Model`
     Many models in Sylius are **extended in the Core component**.
     If the model you are willing to override exists in the ``Core`` you should be extending the ``Core`` one, not the base model from the component.
 
+.. warning::
+
+    Removing the generated and executed doctrine migration may cause warnings while a new migration is executed.
+    To avoid it, we suggest you do not delete the migration.
+
 .. note::
 
     Note that there are **translatable models** in Sylius also. The guide to translatable entities can be found below the regular one.
@@ -86,7 +91,7 @@ Apply the following changes to the ``src/Entity/Addressing/Country.php`` file th
 
 Under the ``sylius_*`` where ``*`` is the name of the bundle of the model you are customizing, in our case it will be the ``SyliusAddressingBundle`` -> ``sylius_addressing``.
 
-That in Sylius-Standard configuration is overriden already.
+That in Sylius-Standard configuration is overridden already.
 
 .. code-block:: yaml
 
@@ -109,7 +114,7 @@ If all is well the output should look like:
     ---------------------------- -------------------------------------------
      Parameter                    Value
     ---------------------------- -------------------------------------------
-     sylius.model.country.class   App\Entity\Country
+     sylius.model.country.class   App\Entity\Addressing\Country
     ---------------------------- -------------------------------------------
 
 .. tip::
@@ -137,7 +142,7 @@ Which we strongly recommend over updating the schema.
 
 .. tip::
 
-    Read more about the database modifications and migrations in the `Symfony documentation here <http://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema>`_.
+    Read more about the database modifications and migrations in the `Symfony documentation here <https://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema>`_.
 
 **4.** Additionally if you want to give the administrator an ability to add the ``flag`` to any of countries,
 you'll need to update its form type. Check how to do it :doc:`here </customization/form>`.
@@ -222,7 +227,7 @@ Apply the following changes to the ``src/Entity/Shipping/ShippingMethod.php`` fi
 Under the ``sylius_*`` where ``*`` is the name of the bundle of the model you are customizing,
 in our case it will be the ``SyliusShippingBundle`` -> ``sylius_shipping``.
 
-That in Sylius-Standard configuration is overriden already, but you may check if it correctly overriden.
+That in Sylius-Standard configuration is overridden already, but you may check if it is correctly overridden.
 
 .. code-block:: yaml
 
@@ -253,7 +258,7 @@ Which we strongly recommend over updating the schema.
 
 .. tip::
 
-    Read more about the database modifications and migrations in the `Symfony documentation here <http://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema>`_.
+    Read more about the database modifications and migrations in the `Symfony documentation here <https://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema>`_.
 
 **4.** Additionally if you need  to add the ``estimatedDeliveryTime`` to any of your shipping methods in the admin panel,
 you'll need to update its form type. Check how to do it :doc:`here </customization/form>`.
@@ -395,9 +400,9 @@ Which we strongly recommend over updating the schema.
 
 .. tip::
 
-    Read more about the database modifications and migrations in the `Symfony documentation here <http://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema>`_.
+    Read more about the database modifications and migrations in the `Symfony documentation here <https://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema>`_.
 
 **5.** If you need to add delivery conditions to your shipping methods in the admin panel,
 you'll need to update its form type. Check how to do it :doc:`here </customization/form>`.
 
-.. include:: /customization/plugins.rst.inc
+.. include:: /customization/plugins.rst

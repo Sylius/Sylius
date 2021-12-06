@@ -15,69 +15,57 @@ namespace Sylius\Component\Review\Model;
 
 class Reviewer implements ReviewerInterface
 {
-    /** @var int|null */
-    protected $id;
+    /** @var mixed */
+    protected $id = null;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     protected $email;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     protected $firstName;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     protected $lastName;
 
     /**
-     * @return int|null
+     * @return mixed
      */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setEmail(?string $email): void
     {
         $this->email = $email;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setFirstName(?string $firstName): void
     {
         $this->firstName = $firstName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setLastName(?string $lastName): void
     {
         $this->lastName = $lastName;

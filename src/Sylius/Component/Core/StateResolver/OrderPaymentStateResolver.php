@@ -25,17 +25,13 @@ use Webmozart\Assert\Assert;
 
 final class OrderPaymentStateResolver implements StateResolverInterface
 {
-    /** @var FactoryInterface */
-    private $stateMachineFactory;
+    private FactoryInterface $stateMachineFactory;
 
     public function __construct(FactoryInterface $stateMachineFactory)
     {
         $this->stateMachineFactory = $stateMachineFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function resolve(BaseOrderInterface $order): void
     {
         /** @var OrderInterface $order */
@@ -91,6 +87,7 @@ final class OrderPaymentStateResolver implements StateResolverInterface
             return OrderPaymentTransitions::TRANSITION_PARTIALLY_PAY;
         }
 
+        // Authorized payments
         $authorizedPaymentTotal = 0;
         $authorizedPayments = $this->getPaymentsWithState($order, PaymentInterface::STATE_AUTHORIZED);
 
@@ -104,6 +101,18 @@ final class OrderPaymentStateResolver implements StateResolverInterface
 
         if ($authorizedPaymentTotal < $order->getTotal() && 0 < $authorizedPaymentTotal) {
             return OrderPaymentTransitions::TRANSITION_PARTIALLY_AUTHORIZE;
+        }
+
+        // Processing payments
+        $processingPaymentTotal = 0;
+        $processingPayments = $this->getPaymentsWithState($order, PaymentInterface::STATE_PROCESSING);
+
+        foreach ($processingPayments as $payment) {
+            $processingPaymentTotal += $payment->getAmount();
+        }
+
+        if (0 < $processingPayments->count() && $processingPaymentTotal >= $order->getTotal()) {
+            return OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT;
         }
 
         return null;

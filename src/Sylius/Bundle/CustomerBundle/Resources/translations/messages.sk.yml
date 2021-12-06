@@ -16,7 +16,7 @@ sylius:
             subscribed_to_newsletter: Prihlásiť sa k odberu noviniek
         customer_group:
             name: Názov
-            roles: Role
+            roles: Rola
     gender:
         unknown: Neznáme
         male: Muž

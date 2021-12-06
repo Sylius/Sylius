@@ -9,7 +9,6 @@ sylius:
             email: Email
             phone_number: Нумар тэлефону
             billing_address: Адрас для аплаты
-            different_billing_address: Выкарыстоўваць іншы адрас для аплаты?
         customer_group:
             name: Назва
             roles: Ролі

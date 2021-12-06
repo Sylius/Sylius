@@ -12,6 +12,8 @@ sylius:
             regex: 'Código da Categoria de Postagem somente pode ser composto por letras, números, hifens e traços.'
             unique: 'A categoria de envio com esse código já existe.'
     shipping_method:
+        calculator:
+            not_blank: 'Por favor selecione uma calculadora de método de envio.'
         name:
             max_length: 'Nome do método de envio não deve ter mais de {{limit}} caracteres.'
             min_length: 'Nome do método de envio deve ter pelo menos {{limit}} caracteres de comprimento.'

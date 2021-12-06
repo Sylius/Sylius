@@ -22,17 +22,11 @@ class TaxRateResolver implements TaxRateResolverInterface
     /** @var RepositoryInterface */
     protected $taxRateRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
     public function __construct(RepositoryInterface $taxRateRepository)
     {
         $this->taxRateRepository = $taxRateRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function resolve(TaxableInterface $taxable, array $criteria = []): ?TaxRateInterface
     {
         if (null === $category = $taxable->getTaxCategory()) {

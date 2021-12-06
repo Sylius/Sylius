@@ -73,43 +73,13 @@ It's possible to add more inventory sources filter, with higher or lower priorit
 
    How to create a custom Inventory Sources Filter? Read :doc:`this Cookbook </cookbook/index>`.
 
-Inventory API
--------------
-
-The synchronization of Inventory Source stock levels can be done via API: you can send an API request to Sylius with
-inventory stocks in a chosen IS for chosen products and get them updated. This allows for straightforward integration
-with your ERP & WMS systems.
-
-Sylius Plus provides a route that allows changing inventory source stock with an API call:
-
-.. code-block:: bash
-
-   POST /api/v1/inventory-sources/{code}/update-stocks
-
-The ``code`` is a code of inventory source on which stock is to be updated. Content of the request should contain an array
-of updated stocks, with the product variant code and target on hand value.
-
-Example:
-
-.. code-block:: json
-
-   {
-       "stocks": [
-           {
-               "productVariantCode": "LASER_SWORD",
-               "onHand": 20
-           },
-           {
-               "productVariantCode": "LIGHT_SABRE",
-               "onHand": 15
-           }
-       ]
-   }
+Resolving InventorySourceStock for ordered products
+---------------------------------------------------
 
 .. warning::
 
-   To use the Sylius Plus API, you need to be authorized as an administrator with the ``ROLE_API_ACCESS`` role.
-   Check out the :doc:`API Authorization chapter </api/admin_api/authorization>`.
+    Standard Sylius distribution is releasing a stock inventory when the whole order is paid, while in Plus version,
+    it has been switched to be released after shipment has been shipped.
 
 How does Multi-Source Inventory work on examples?
 -------------------------------------------------
@@ -166,4 +136,4 @@ Learn more
 
 .. image:: ../../_images/sylius_plus/banner.png
    :align: center
-   :target: http://sylius.com/plus/?utm_source=docs
+   :target: https://sylius.com/plus/?utm_source=docs

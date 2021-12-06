@@ -9,6 +9,8 @@ sylius:
             title: Cím
         cart:
             coupon: Kupon
+        catalog_promotion:
+            channels: Csatornák
         checkout:
             addressing:
                 different_billing_address: A számlázási címe különbözik a megadott címtől?
@@ -31,13 +33,18 @@ sylius:
                 country: Ország
                 postcode: Irányítószám
                 street: Utca
+            contact_email: Kapcsolattartó email
+            countries: Országok
             currencies: Pénznemek
             currency_base: Alapértelmezett pénznem
+            account_verification_required: Kötelező a fiók megerősítése?
             hostname: Hoszt neve
             locale_default: Alapértelmezett nyelv
             locales: Területi beállítások
             payment_methods: Fizetési módok
             shipping_methods: Szállítási módok
+            skipping_shipping_step_allowed: Kihagyható a szállítási mód megadása ha csak egyetlen szállítási mód elérhető?
+            skipping_payment_step_allowed: Kihagyható a fizetési mód megadása, ha csak egyetlen fizetési mód elérhető?
             tax_calculation_strategy: Adó számítási stratégia
             tax_zone_default: Alapértelmezett adósáv
             taxonomies: Taxonómiák
@@ -96,7 +103,6 @@ sylius:
             file: Kép kiválasztása
         user:
             billing_address: Számlázási cím
-            different_billing_address: A számlázási címe különbözik a megadott címtől?
             enabled: Engedélyezve
             first_name: Keresztnév
             groups: Csoportok
@@ -112,6 +118,7 @@ sylius:
             on_hand: Aktuális készlet
             price: Ár
             sku: SKU
+            shipping_required: Szükség van szállításra?
             weight: Súly
             width: Szélesség
         attribute:
@@ -125,6 +132,9 @@ sylius:
             type: Kapcsolódó típus
         product_association_type:
             name: Név
+        promotion_filter:
+            products: Termék szűrő
+            taxons: Taxon szűrő
         promotion_rule:
             customer_group:
                 group: Felhasználói csoport
@@ -137,6 +147,8 @@ sylius:
                 amount: Összeg
         payment_method:
             channels: Csatornák
+        product_attribute:
+            position: Pozíció
         zone:
             scopes:
                 shipping: Szállítás
@@ -170,13 +182,16 @@ sylius:
             header: fájlrendszer
             cache:
                 header: gyorsítótár
+                help: "Hozzáférési jogosultságok beállításához futtassa: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: létezik
             logs:
                 header: naplók
+                help: "Hozzáférési jogosultságok beállításához futtassa: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: nem létezik
             not_writable: nem írható
             parameters:
                 header: parameters.yml
+                help: "Hozzáférési jogosultságok beállításához futtassa: sudo chmod a+w %path%"
             vendors: vendors
             writable: írható
         settings:

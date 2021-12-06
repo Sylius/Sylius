@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Опис
+            name: Назва регіону
+            priority: Пріоритет
         promotion:
             actions: Дії
             add_action: Додати дію
@@ -11,12 +15,17 @@ sylius:
             description: Опис
             ends_at: Кінець дії
             exclusive: Ексклюзивно
-            name: Назва
+            name: Назва регіону
             priority: Пріоритет
             rules: Правила
             starts_at: Початок дії
             usage_limit: Обмеження використання
         promotion_action:
+            item_fixed_discount: Фіксована знижка для позиції
+            item_percentage_discount: Відсоткова знижка для позиції
+            order_fixed_discount: Фіксована знижка для замовлення
+            order_percentage_discount: Відсоткова знижка для замовлення
+            shipping_percentage_discount: Відсоткова знижка для доставки
             fixed_discount_configuration:
                 amount: Обсяг
             percentage_discount_configuration:
@@ -26,15 +35,24 @@ sylius:
             expires_at: Дійсний до
             usage_limit: Обмеження використання
         promotion_coupon_generator_instruction:
-            amount: Обсяг
+            amount: Обсяг купонів
             code_length: Довжина коду
             expires_at: Дійсний до
+            prefix: Префікс
+            suffix: Суфікс
             usage_limit: Обмеження використання
         promotion_filter:
             price_range: Фільтр цінових діапазонів
         promotion_rule:
+            cart_quantity: Кількість позицій в кошику
+            contains_product: Містить продукт
             customer_group: Група клієнтів
+            has_at_least_one_from_taxons: Містить хоча б один товар з таксону
+            item_total: Товарів на загальну суму
+            nth_order: N-не замовлення
+            shipping_country: Країна доставки
             taxonomy: Таксономія
+            total_price_of_items_from_taxon: Загальна сума товарів з таксону
             cart_quantity_configuration:
                 count: Кількість
                 equal: Дорівнює

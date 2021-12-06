@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    locale:
+        code:
+            not_blank: Газрын кодоо оруулна уу.
+            regex: Газрын код нь зөвхөн үсэг, тоо, дундуур зураас, доогуур зурааснаас бүрдэнэ.
+            unique: Газрын код давтагдахгүй байх ёстой.

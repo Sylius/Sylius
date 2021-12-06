@@ -7,6 +7,12 @@ sylius:
             not_blank: Introduïu el nom d'atribut.
             min_length: Nom d'atribut ha de ser com a mínim 1 caràcter llarg. |Nom d'atribut ha de ser com a mínim {{ limit }} caràcters de longitud.
             max_length: Nom d'atribut no ha de ser superior a 1 caràcter. |Nom d'atribut no ha de ser més de caràcters {{ limit }}.
+        code:
+            not_blank: Si us plau, introduïu el codi de l'atribut.
+            regex: El codi de l'atribut només pot constar de lletres, números, guions i guions baixos.
+            unique: Aquest codi ja està en ús.
+        configuration:
+            multiple: La configuració múltiple ha de ser certa si s'especifiquen valors d'entrada mínima o màxima.
         presentation:
             not_blank: Introduïu la presentació d'atribut.
             min_length: Presentació de l'atribut ha de ser almenys un caràcter llarg. |Presentació de l'atribut ha de ser com a mínim {{ limit }} caràcters de longitud.

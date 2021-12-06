@@ -3,6 +3,12 @@
 
 sylius_promotion:
     resources:
+        catalog_promotion:
+            classes:
+                model: Sylius\Component\Core\Model\CatalogPromotion
+        catalog_promotion_scope:
+            classes:
+                model: Sylius\Component\Core\Model\CatalogPromotionScope
         promotion_subject:
             classes:
                 model: "%sylius.model.order.class%"

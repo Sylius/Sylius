@@ -10,42 +10,84 @@ Feature: Viewing product's attributes
     @ui
     Scenario: Viewing a detailed page with product's text attribute
         Given the store has a product "T-shirt banana"
-        And this product has text attribute "T-shirt material" with value "Banana skin"
+        And this product has a text attribute "T-shirt material" with value "Banana skin"
         When I check this product's details
         Then I should see the product attribute "T-shirt material" with value "Banana skin"
 
     @ui
+    Scenario: Viewing a detailed page with product's non-translatable text attribute
+        Given the store has a product "T-shirt banana"
+        And this product has non-translatable text attribute "T-shirt details" with value "Banana is a very good material."
+        When I check this product's details
+        Then I should see the product attribute "T-shirt details" with value "Banana is a very good material."
+
+    @ui
     Scenario: Viewing a detailed page with product's textarea attribute
         Given the store has a product "T-shirt banana"
-        And this product has textarea attribute "T-shirt details" with value "Banana is a very good material."
+        And this product has a textarea attribute "T-shirt details" with value "Banana is a very good material."
+        When I check this product's details
+        Then I should see the product attribute "T-shirt details" with value "Banana is a very good material."
+
+    @ui
+    Scenario: Viewing a detailed page with product's non-translatable textarea attribute
+        Given the store has a product "T-shirt banana"
+        And this product has non-translatable textarea attribute "T-shirt details" with value "Banana is a very good material."
         When I check this product's details
         Then I should see the product attribute "T-shirt details" with value "Banana is a very good material."
 
     @ui
     Scenario: Viewing a detailed page with product's checkbox attribute
         Given the store has a product "T-shirt banana"
-        And this product has checkbox attribute "T-shirt with cotton" set to "Yes"
+        And this product has a "checkbox" attribute "T-shirt with cotton" set to "Yes"
+        When I check this product's details
+        Then I should see the product attribute "T-shirt with cotton" with value "Yes"
+
+    @ui
+    Scenario: Viewing a detailed page with product's checkbox non-translatable attribute
+        Given the store has a product "T-shirt banana"
+        And this product has non-translatable "checkbox" attribute "T-shirt with cotton" set to "Yes"
         When I check this product's details
         Then I should see the product attribute "T-shirt with cotton" with value "Yes"
 
     @ui
     Scenario: Viewing a detailed page with product's date attribute
         Given the store has a product "T-shirt banana"
-        And this product has date attribute "T-shirt date of production" with date "12 December 2015"
+        And this product has a date attribute "T-shirt date of production" with date "12 December 2015"
+        When I check this product's details
+        Then I should see the product attribute "T-shirt date of production" with date "Dec 12, 2015"
+
+    @ui
+    Scenario: Viewing a detailed page with product's date non-translatable attribute
+        Given the store has a product "T-shirt banana"
+        And this product has non-translatable date attribute "T-shirt date of production" with date "12 December 2015"
         When I check this product's details
         Then I should see the product attribute "T-shirt date of production" with date "Dec 12, 2015"
 
     @ui
     Scenario: Viewing a detailed page with product's datetime attribute
         Given the store has a product "T-shirt banana"
-        And this product has datetime attribute "T-shirt date of production" with date "12 December 2015 12:34"
+        And this product has non-translatable datetime attribute "T-shirt date of production" with date "12 December 2015 12:34"
+        When I check this product's details
+        Then I should see the product attribute "T-shirt date of production" with date "Dec 12, 2015 12:34:00 PM"
+
+    @ui
+    Scenario: Viewing a detailed page with product's datetime non-translatable attribute
+        Given the store has a product "T-shirt banana"
+        And this product has non-translatable datetime attribute "T-shirt date of production" with date "12 December 2015 12:34"
         When I check this product's details
         Then I should see the product attribute "T-shirt date of production" with date "Dec 12, 2015 12:34:00 PM"
 
     @ui
     Scenario: Viewing a detailed page with product's percent attribute
         Given the store has a product "T-shirt banana"
-        And this product has percent attribute "T-shirt cotton content" with value 50%
+        And this product has a percent attribute "T-shirt cotton content" with value 50%
+        When I check this product's details
+        Then I should see the product attribute "T-shirt cotton content" with value "50 %"
+
+    @ui
+    Scenario: Viewing a detailed page with product's percent non-translatable attribute
+        Given the store has a product "T-shirt banana"
+        And this product has non-translatable percent attribute "T-shirt cotton content" with value 50%
         When I check this product's details
         Then I should see the product attribute "T-shirt cotton content" with value "50 %"
 

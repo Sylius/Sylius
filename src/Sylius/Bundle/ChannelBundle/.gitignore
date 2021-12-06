@@ -4,8 +4,11 @@
 /composer.phar
 /composer.lock
 
-test/app/cache
-test/app/logs
+/test/app/cache
+/test/app/logs
+/test/var/cache
+/test/var/logs
 
 /phpspec.yml
 /phpunit.xml
+/.phpunit.result.cache

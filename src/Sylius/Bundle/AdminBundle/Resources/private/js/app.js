@@ -17,16 +17,19 @@ import 'sylius/ui/sylius-product-attributes';
 import 'sylius/ui/sylius-product-auto-complete';
 import 'sylius/ui/sylius-prototype-handler';
 
+import './sylius-catalog-promotion-actions';
+import './sylius-catalog-promotion-scopes';
 import './sylius-compound-form-errors';
 import './sylius-lazy-choice-tree';
+import './sylius-menu-search';
 import './sylius-move-product-variant';
 import './sylius-move-taxon';
 import './sylius-notification';
 import './sylius-product-images-preview';
 import './sylius-product-slug';
 import './sylius-taxon-slug';
-import './sylius-chart';
 
+import StatisticsComponent from './sylius-statistics';
 import SyliusTaxonomyTree from './sylius-taxon-tree';
 import formsList from './sylius-forms-list';
 
@@ -63,9 +66,11 @@ $(document).ready(() => {
       $('select[name^="sylius_promotion[actions]"][name$="[type]"]').last().change();
     }, 50);
   });
-  $('#rules a[data-form-collection="add"]').on('click', () => {
+  $('#scopes a[data-form-collection="add"]').on('click', (event) => {
+    const name = $(event.target).closest('form').attr('name');
+
     setTimeout(() => {
-      $('select[name^="sylius_promotion[rules]"][name$="[type]"]').last().change();
+      $(`select[name^="${name}[scopes]"][name$="[type]"]`).last().change();
     }, 50);
   });
 
@@ -75,6 +80,14 @@ $(document).ready(() => {
         $(element).autoComplete();
       }
     });
+
+    $(document).loadCatalogPromotionScopeConfiguration(
+      document.querySelector('#sylius_catalog_promotion_scopes [data-form-collection="item"]:last-child')
+    );
+
+    $(document).loadCatalogPromotionActionConfiguration(
+      document.querySelector('#sylius_catalog_promotion_actions [data-form-collection="item"]:last-child')
+    );
   });
   $(document).on('collection-form-update', () => {
     $('.sylius-autocomplete').each((index, element) => {
@@ -93,12 +106,18 @@ $(document).ready(() => {
   $(document).taxonSlugGenerator();
   $(document).previewUploadedImage('#sylius_product_images');
   $(document).previewUploadedImage('#sylius_taxon_images');
+  if ($('#sylius_catalog_promotion_actions').length > 0) {
+    $(document).loadCatalogPromotionActionConfiguration(document.querySelector('#sylius_catalog_promotion_actions'));
+  }
+  if ($('#sylius_catalog_promotion_scopes').length > 0) {
+    $(document).loadCatalogPromotionScopeConfiguration(document.querySelector('#sylius_catalog_promotion_scopes'));
+  }
 
   $(document).previewUploadedImage('#add-avatar');
 
   $('body').on('DOMNodeInserted', '[data-form-collection="item"]', (event) => {
-    if ($(event.target).find('.accordion').length > 0) {
-      $(event.target).find('.accordion').accordion();
+    if ($(event.target).find('.ui.accordion').length > 0) {
+      $(event.target).find('.ui.accordion').accordion();
     }
   });
 
@@ -106,10 +125,16 @@ $(document).ready(() => {
 
   $(`${formsList}, .check-unsaved`).dirtyForms();
 
+  $('#more-details').accordion({ exclusive: false });
+
   $('.variants-accordion__title').on('click', '.icon.button', function(e) {
     $(e.delegateTarget).next('.variants-accordion__content').toggle();
     $(this).find('.dropdown.icon').toggleClass('counterclockwise rotated');
   });
+
+  const dashboardStatistics = new StatisticsComponent(document.querySelector('.stats'));
+
+  $('.sylius-admin-menu').searchable('.sylius-admin-menu-search-input');
 });
 
 window.$ = $;

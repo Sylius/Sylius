@@ -10,7 +10,7 @@ sylius_fixtures:
                     options:
                         custom:
                             category:
-                                code: 'category'
+                                code: 'MENU_CATEGORY'
                                 name: 'Category'
                                 translations:
                                     en_US:
@@ -40,6 +40,11 @@ sylius_fixtures:
                             -   name: 'Dress material'
                                 code: 'dress_material'
                                 type: 'text'
+
+                            -   name: 'Length'
+                                code: 'length'
+                                type: 'integer'
+                                translatable: false
 
                 dress_option:
                     name: product_option
@@ -110,6 +115,7 @@ sylius_fixtures:
                                     dress_brand: 'You are breathtaking'
                                     dress_collection: 'Sylius Summer 2019'
                                     dress_material: '100% polyester'
+                                    length: 100
                                 product_options:
                                     - 'dress_size'
                                     - 'dress_height'

@@ -9,6 +9,9 @@ sylius:
         email:
             invalid: E-posti aadress on vigane.
             not_blank: Palun sisesta oma e-post.
+    review:
+        author:
+            not_blank: Palun sisesta oma e-post.
     user:
         email:
             invalid: E-posti aadress on vigane.

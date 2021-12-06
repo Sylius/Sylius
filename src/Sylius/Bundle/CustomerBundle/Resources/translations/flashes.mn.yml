@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    customer:
+        register: 'Бүртгүүлсэнд баярлалаа. Акаунтаа баталгаажуулахын тулд имэйлээ шалгана уу.'

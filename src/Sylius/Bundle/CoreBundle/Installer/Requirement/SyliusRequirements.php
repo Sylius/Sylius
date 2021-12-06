@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Installer\Requirement;
 final class SyliusRequirements implements \IteratorAggregate
 {
     /** @var array|RequirementCollection[] */
-    private $collections = [];
+    private array $collections = [];
 
     /**
      * @param array|RequirementCollection[] $requirementCollections

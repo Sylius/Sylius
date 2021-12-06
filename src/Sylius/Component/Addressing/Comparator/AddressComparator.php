@@ -17,9 +17,6 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 
 final class AddressComparator implements AddressComparatorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function equal(AddressInterface $firstAddress, AddressInterface $secondAddress): bool
     {
         return $this->normalizeAddress($firstAddress) === $this->normalizeAddress($secondAddress);

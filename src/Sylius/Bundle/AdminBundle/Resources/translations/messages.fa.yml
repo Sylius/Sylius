@@ -2,6 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        shipment_confirmation:
+            has_been_sent_using: 'ارسال شده با استفاده از'
+            subject: 'تایید ارسال'
+            thank_you_for_transaction: 'با سپاس بابت تراکنش موفق'
+            your_order_with_number: 'سفارشتان با شماره'
     menu:
         admin:
             main:
@@ -38,3 +44,7 @@ sylius:
                 sales:
                     header: فروش‌ها
                     orders: سفارش‌ها
+    ui:
+        gateway:
+            no_sca_support_notice: درگاه پرداخت انتخابی SCA را پشتیبانی نمی کند.
+        sales_summary: خلاصه فروش

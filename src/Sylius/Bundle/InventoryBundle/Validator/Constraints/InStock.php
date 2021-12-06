@@ -17,26 +17,17 @@ use Symfony\Component\Validator\Constraint;
 
 final class InStock extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.cart_item.not_available';
+    public string $message = 'sylius.cart_item.not_available';
 
-    /** @var string */
-    public $stockablePath = 'stockable';
+    public string $stockablePath = 'stockable';
 
-    /** @var string */
-    public $quantityPath = 'quantity';
+    public string $quantityPath = 'quantity';
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'sylius_in_stock';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;

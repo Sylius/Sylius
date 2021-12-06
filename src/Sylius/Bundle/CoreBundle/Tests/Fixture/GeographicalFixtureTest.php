@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\GeographicalFixture;
 use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Countries;
 
 final class GeographicalFixtureTest extends TestCase
 {
@@ -40,7 +40,7 @@ final class GeographicalFixtureTest extends TestCase
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
-            ['countries' => array_keys(Intl::getRegionBundle()->getCountryNames())],
+            ['countries' => array_keys(Countries::getNames())],
             'countries'
         );
     }
@@ -165,9 +165,6 @@ final class GeographicalFixtureTest extends TestCase
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): GeographicalFixture
     {
         return new GeographicalFixture(

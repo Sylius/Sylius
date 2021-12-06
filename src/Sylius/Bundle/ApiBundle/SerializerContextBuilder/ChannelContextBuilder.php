@@ -19,13 +19,12 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 
+/** @experimental */
 final class ChannelContextBuilder implements SerializerContextBuilderInterface
 {
-    /** @var SerializerContextBuilderInterface  */
-    private $decoratedContextBuilder;
+    private SerializerContextBuilderInterface $decoratedContextBuilder;
 
-    /** @var ChannelContextInterface  */
-    private $channelContext;
+    private ChannelContextInterface $channelContext;
 
     public function __construct(SerializerContextBuilderInterface $decoratedContextBuilder, ChannelContextInterface $channelContext)
     {
@@ -36,9 +35,11 @@ final class ChannelContextBuilder implements SerializerContextBuilderInterface
     public function createFromRequest(Request $request, bool $normalization, ?array $extractedAttributes = null): array
     {
         $context = $this->decoratedContextBuilder->createFromRequest($request, $normalization, $extractedAttributes);
+
         try {
             $context[ContextKeys::CHANNEL] = $this->channelContext->getChannel();
-        } catch (ChannelNotFoundException $exception) {}
+        } catch (ChannelNotFoundException $exception) {
+        }
 
         return $context;
     }

@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Descrizione
+            name: "Nome\n"
+            priority: Priorità
         promotion:
             actions: Azioni
             add_action: Aggiungi azione
@@ -58,8 +62,8 @@ sylius:
             nth_order_configuration:
                 nth: Ennesimo
             shipping_country_configuration:
-                country: Paese
+                country: Nazione
             taxonomy_configuration:
                 exclude: Escludi
-                taxons: Taxons
+                taxons: Tassonomia
             type: Tipo

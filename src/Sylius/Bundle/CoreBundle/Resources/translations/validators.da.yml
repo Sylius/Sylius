@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: Billedet er for stort - {{ size }}{{ suffix }}. Maksimalt tilladte størrelse er {{ limit }}{{ suffix }}.
+            upload_ini_size: Billedet er for stort. Maksimalt tilladte størrelse er {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: Angiv venligst kanalens basisvaluta.
@@ -13,7 +17,6 @@ sylius:
             min: Emailen skal være mindst {{ limit }} tegn.
     channel_pricing:
         price:
-            min: Prisen skal være mindst {{ limit }}.
             not_blank: Angiv prisen.
     checkout:
         shipping_method:
@@ -39,9 +42,6 @@ sylius:
         product_eligibility: 'Dette produkt %productName% er blevet deaktiveret.'
         shipping_method_eligibility: 'Produktet passer ikke krav til %shippingMethodName% forsendelsesmetode. Vælg venligst din forsendelsesmetode.'
     locale:
-        code:
-            not_blank: Venligst angiv landekode.
-            unique: Denne landekode eksisterer allerede.
         enabled:
             cannot_disable_base: Grundvalutaen kan ikke deaktiveres.
     product:
@@ -77,6 +77,9 @@ sylius:
     product_translation:
         short_description:
             max: Den korte beskrivelse må ikke være længere end {{ limit }} tegn.
+    review:
+        author:
+            not_blank: Indtast venligst din email.
     taxon_image:
         file:
             max_size: Billedet er for stort - {{ size }}{{ suffix }}. Maksimalt tilladte størrelse er {{ limit }}{{ suffix }}.

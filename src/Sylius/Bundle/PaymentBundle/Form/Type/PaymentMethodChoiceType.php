@@ -25,11 +25,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PaymentMethodChoiceType extends AbstractType
 {
-    /** @var PaymentMethodsResolverInterface */
-    private $paymentMethodsResolver;
+    private PaymentMethodsResolverInterface $paymentMethodsResolver;
 
-    /** @var RepositoryInterface */
-    private $paymentMethodRepository;
+    private RepositoryInterface $paymentMethodRepository;
 
     public function __construct(
         PaymentMethodsResolverInterface $paymentMethodsResolver,
@@ -39,9 +37,6 @@ final class PaymentMethodChoiceType extends AbstractType
         $this->paymentMethodRepository = $paymentMethodRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['multiple']) {
@@ -49,9 +44,6 @@ final class PaymentMethodChoiceType extends AbstractType
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -74,17 +66,11 @@ final class PaymentMethodChoiceType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_payment_method_choice';

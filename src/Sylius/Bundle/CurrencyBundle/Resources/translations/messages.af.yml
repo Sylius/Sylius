@@ -5,3 +5,4 @@ sylius:
     form:
         currency:
             code: Naam
+            enabled: Aktief

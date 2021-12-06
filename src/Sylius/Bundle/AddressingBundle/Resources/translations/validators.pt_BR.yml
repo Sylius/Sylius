@@ -4,29 +4,19 @@
 sylius:
     address:
         city:
-            max_length: O campo cidade não deve ser maior que 255 caracteres.
-            min_length: A cidade deve ter no mínimo 2 caracteres| A cidade deve ter no mínimo 2 caracteres.
             not_blank: Por favor, digite a cidade.
         country:
             not_blank: Por favor, selecione um país.
             disabled: O país selecionado está desabilitado. Por favor, selecione um diferente.
         first_name:
-            max_length: O nome não deve ter mais de 255 caracteres | O nome não deve ter mais que 255 caracteres.
-            min_length: O nome deve ter no mínimo 2 caracteres| O nome deve ter no mínimo 2 caracteres.
             not_blank: Por favor, digite o nome.
         last_name:
-            max_length: O nome não pode ter mais que 255 caracteres|O nome não pode ter mais que 255 caracteres.
-            min_length: O sobrenome deve ter no mínimo 2 caracteres|O sobrenome deve ter no mínimo 2 caracteres.
             not_blank: Por favor, digite seu sobrenome.
         postcode:
-            max_length: O CEP não pode ter mais que 255 caracteres|O CEP não pode ter mais que 255 caracteres.
-            min_length: O CEP deve ter pelo menos 2 caracteres|O CEP deve ter pelo menos 2 caracteres.
             not_blank: Por favor, digite o CEP.
         province:
             valid: Por favor, selecione o estado.
         street:
-            max_length: O campo rua não pode ter mais que 255 caracteres|O campo rua não pode ter mais que 255 caracteres.
-            min_length: O campo rua deve ter pelo menos 2 caracteres|O campo rua deve ter pelo menos 2 caracteres.
             not_blank: Por favor, digite a rua.
         not_shippable: Este endereço não é um endereço válido para envio.
     country:
@@ -41,8 +31,6 @@ sylius:
             regex: O código de província deve ter o seguinte formato XX-XX (por exemplo, U.S.-FL).
             unique: O código da província deve ser único.
         name:
-            max_length: O campo estado deve ter no máximo 255 caracteres|O campo estado deve ter no máximo 255 caracteres.
-            min_length: O campo estado deve ter pelo menos 2 caracteres|O campo estado deve ter pelo menos 2 caracteres.
             not_blank: Por favor, digite o nome do estado.
             unique: Nome da província deve ser único.
     zone:
@@ -55,8 +43,6 @@ sylius:
         members:
             min_count: Por favor, adicione pelo menos {{ limit }} membro da região.
         name:
-            max_length: O nome da região não pode ter mais que 255 caracteres|O nome da região não pode ter mais que 255 caracteres.
-            min_length: O sobrenome deve ter no mínimo 2 caracteres|O sobrenome deve ter no mínimo 2 caracteres.
             not_blank: Por favor, digite o nome da região.
     zone_member:
         code:

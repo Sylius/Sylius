@@ -14,10 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\ShippingMethod;
 
 use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use DMore\ChromeDriver\ChromeDriver;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Webmozart\Assert\Assert;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
@@ -36,7 +39,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function describeIt(string $description, string $languageCode): void
     {
         $this->getDocument()->fillField(
-            sprintf('sylius_shipping_method_translations_%s_description', $languageCode), $description
+            sprintf('sylius_shipping_method_translations_%s_description', $languageCode),
+            $description
         );
     }
 
@@ -57,7 +61,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function checkChannel($channelName): void
     {
-        if ($this->getDriver() instanceof Selenium2Driver) {
+        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
             $this->getElement('channel', ['%channel%' => $channelName])->click();
 
             return;
@@ -86,6 +90,35 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return $validationMessage->getText();
     }
 
+    public function addRule(string $ruleName): void
+    {
+        $count = count($this->getCollectionItems('rules'));
+
+        $this->getDocument()->clickLink('Add rule');
+
+        $this->getDocument()->waitFor(5, function () use ($count) {
+            return $count + 1 === count($this->getCollectionItems('rules'));
+        });
+
+        $this->selectRuleOption('Type', $ruleName);
+    }
+
+    public function selectRuleOption(string $option, string $value, bool $multiple = false): void
+    {
+        $this->getLastCollectionItem('rules')->find('named', ['select', $option])->selectOption($value, $multiple);
+    }
+
+    public function fillRuleOption(string $option, string $value): void
+    {
+        $this->getLastCollectionItem('rules')->fillField($option, $value);
+    }
+
+    public function fillRuleOptionForChannel(string $channelName, string $option, string $value): void
+    {
+        $lastAction = $this->getChannelConfigurationOfLastRule($channelName);
+        $lastAction->fillField($option, $value);
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -95,13 +128,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'code' => '#sylius_shipping_method_code',
             'name' => '#sylius_shipping_method_translations_en_US_name',
             'zone' => '#sylius_shipping_method_zone',
+            'rules' => '#sylius_shipping_method_rules',
         ]);
     }
 
     /**
      * @throws ElementNotFoundException
      */
-    private function getFieldElement(string $element, array $parameters = []): ?\Behat\Mink\Element\NodeElement
+    private function getFieldElement(string $element, array $parameters = []): ?NodeElement
     {
         $element = $this->getElement(StringInflector::nameToCode($element), $parameters);
         while (null !== $element && !$element->hasClass('field')) {
@@ -109,5 +143,34 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         }
 
         return $element;
+    }
+
+    private function getLastCollectionItem(string $collection): NodeElement
+    {
+        $items = $this->getCollectionItems($collection);
+
+        Assert::notEmpty($items);
+
+        return end($items);
+    }
+
+    /**
+     * @return NodeElement[]
+     */
+    private function getCollectionItems(string $collection): array
+    {
+        $items = $this->getElement($collection)->findAll('css', 'div[data-form-collection="item"]');
+
+        Assert::isArray($items);
+
+        return $items;
+    }
+
+    private function getChannelConfigurationOfLastRule(string $channelName): NodeElement
+    {
+        return $this
+            ->getLastCollectionItem('rules')
+            ->find('css', sprintf('[id$="configuration"] .field:contains("%s")', $channelName))
+        ;
     }
 }

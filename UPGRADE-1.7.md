@@ -1,3 +1,7 @@
+# UPGRADE FROM `v1.7.4` TO `v1.7.5`
+
+We've brought back the attribute types templates to SyliusAttributeBundle after BC break in v1.7.0.
+
 # UPGRADE FROM `v1.6.X` TO `v1.7.0`
 
 1. Require upgraded Sylius version using Composer:
@@ -69,7 +73,33 @@ Those are excluded from our BC promise:
 
 - `Sylius\Bundle\ShopBundle\EventListener\UserMailerListener` has been removed and replaced with `Sylius\Bundle\CoreBundle\EventListener\MailerListener`
 
+## Templates moved
+
+We've moved the following templates:
+
+- `@SyliusAttribute/Types/*.html.twig`  
+    You should search for `SyliusAttribute/Types` and `SyliusAttributeBundle:Types` in your templates and make the changes accordingly:
+    - in the Admin area: `@SyliusAdmin/Product/Show/Types/*.html.twig`
+    - in the Shop area: `@SyliusShop/Product/Show/Types/*.html.twig`
+
 ## Billing and shipping addresses have been switched with one another
 
 Until now shipping address used to be the default address of an Order. We have changed that, so now the billing address 
 became the default address during checkout. It is an important change in our checkout process, please have that in mind.
+
+⚠️ This change also implies that the Tax calculation is now done on the billing address and not on the shipping address anymore.
+
+## Postgres support
+
+In case when you are using Postgres in your project, function `DATE_FORMAT` should be overridden.
+Adjust configuration in `config/packages/doctrine.yaml` to change `DATE_FORMAT` implementation:
+
+```yaml
+doctrine:
+    orm:
+        entity_managers:
+            default:
+                dql:
+                    string_functions:
+                        DATE_FORMAT: App\Doctrine\DQL\DateFormat # OR any other path to your implementation
+```

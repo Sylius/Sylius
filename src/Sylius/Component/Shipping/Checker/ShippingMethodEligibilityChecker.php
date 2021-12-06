@@ -13,29 +13,34 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Shipping\Checker;
 
+use const E_USER_DEPRECATED;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
+@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.8, use "%s" instead.', 'Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker', 'Sylius\Component\Shipping\Checker\Eligibility\CompositeShippingMethodEligibilityChecker'), E_USER_DEPRECATED);
+
+/**
+ * @deprecated since Sylius 1.8. Use Sylius\Component\Shipping\Checker\Eligibility\CompositeShippingMethodEligibilityChecker instead
+ *
+ * @psalm-suppress DeprecatedInterface
+ */
 final class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheckerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method): bool
+    public function isEligible(ShippingSubjectInterface $shippingSubject, ShippingMethodInterface $shippingMethod): bool
     {
-        if (!$category = $method->getCategory()) {
+        if (!$category = $shippingMethod->getCategory()) {
             return true;
         }
 
         $numMatches = $numShippables = 0;
-        foreach ($subject->getShippables() as $shippable) {
+        foreach ($shippingSubject->getShippables() as $shippable) {
             ++$numShippables;
             if ($category === $shippable->getShippingCategory()) {
                 ++$numMatches;
             }
         }
 
-        switch ($method->getCategoryRequirement()) {
+        switch ($shippingMethod->getCategoryRequirement()) {
             case ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE:
                 return 0 === $numMatches;
             case ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY:

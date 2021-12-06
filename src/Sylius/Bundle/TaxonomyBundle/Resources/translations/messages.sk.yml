@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Popis
+            enabled: Zapnuté
             name: Názov
             parent: Nadradený prototyp
             slug: Slug

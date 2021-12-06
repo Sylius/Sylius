@@ -16,7 +16,7 @@ sylius:
             zone: Зона
         country:
             add_province: Додати регіон
-            name: Назва
+            name: Назва країни
             provinces: Регіони
             select: Виберіть
             enabled: Ввімкнено
@@ -27,7 +27,7 @@ sylius:
         zone:
             add_member: Додати учасника
             members: Учасники
-            name: Назва
+            name: Ім’я
             type: Тип
             types:
                 country: Країна

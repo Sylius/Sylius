@@ -20,10 +20,11 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Twig\Environment;
 
 final class LocaleSwitchController
 {
-    /** @var EngineInterface */
+    /** @var EngineInterface|Environment */
     private $templatingEngine;
 
     /** @var LocaleContextInterface */
@@ -35,8 +36,11 @@ final class LocaleSwitchController
     /** @var LocaleSwitcherInterface */
     private $localeSwitcher;
 
+    /**
+     * @param EngineInterface|Environment $templatingEngine
+     */
     public function __construct(
-        EngineInterface $templatingEngine,
+        object $templatingEngine,
         LocaleContextInterface $localeContext,
         LocaleProviderInterface $localeProvider,
         LocaleSwitcherInterface $localeSwitcher
@@ -49,10 +53,10 @@ final class LocaleSwitchController
 
     public function renderAction(): Response
     {
-        return $this->templatingEngine->renderResponse('@SyliusShop/Menu/_localeSwitch.html.twig', [
+        return new Response($this->templatingEngine->render('@SyliusShop/Menu/_localeSwitch.html.twig', [
             'active' => $this->localeContext->getLocaleCode(),
             'locales' => $this->localeProvider->getAvailableLocalesCodes(),
-        ]);
+        ]));
     }
 
     public function switchAction(Request $request, ?string $code = null): Response

@@ -72,9 +72,6 @@ final class UniquePinGeneratorSpec extends ObjectBehavior
         $this->generate()->shouldBeNumeric();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMatchers(): array
     {
         return [

@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        shipment_confirmation:
+            subject: 'รายละเอียดการจัดส่ง'
     menu:
         admin:
             main:

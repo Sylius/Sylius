@@ -22,8 +22,6 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 final class ExecuteSameRequestWithPaymentDetailsAction extends GatewayAwareAction
 {
     /**
-     * {@inheritdoc}
-     *
      * @param Generic $request
      */
     public function execute($request): void
@@ -43,9 +41,6 @@ final class ExecuteSameRequestWithPaymentDetailsAction extends GatewayAwareActio
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($request): bool
     {
         return

@@ -17,11 +17,87 @@
 >
     <class name="Sylius\Component\Core\Model\Channel">
         <attribute name="code">
-            <group>channel:read</group>
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+            <group>shop:channel:read</group>
         </attribute>
-
         <attribute name="name">
-            <group>channel:read</group>
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+            <group>shop:channel:read</group>
+        </attribute>
+        <attribute name="description">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+        </attribute>
+        <attribute name="hostname">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+        </attribute>
+        <attribute name="color">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+        </attribute>
+        <attribute name="baseCurrency">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+            <group>shop:channel:read</group>
+        </attribute>
+        <attribute name="defaultLocale">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+        </attribute>
+        <attribute name="defaultTaxZone">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+        </attribute>
+        <attribute name="taxCalculationStrategy">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+        </attribute>
+        <attribute name="currencies">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+        </attribute>
+        <attribute name="locales">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+        </attribute>
+        <attribute name="countries">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+        </attribute>
+        <attribute name="themeName">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+        </attribute>
+        <attribute name="contactEmail">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+        </attribute>
+        <attribute name="contactPhoneNumber">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+        </attribute>
+        <attribute name="skippingShippingStepAllowed">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+        </attribute>
+        <attribute name="skippingPaymentStepAllowed">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+        </attribute>
+        <attribute name="accountVerificationRequired">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+        </attribute>
+        <attribute name="shopBillingData">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+        </attribute>
+        <attribute name="menuTaxon">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
         </attribute>
     </class>
 </serializer>

@@ -25,17 +25,13 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
  */
 /* final */ class ShopperContext implements ShopperContextInterface
 {
-    /** @var ChannelContextInterface */
-    private $channelContext;
+    private ChannelContextInterface $channelContext;
 
-    /** @var CurrencyContextInterface */
-    private $currencyContext;
+    private CurrencyContextInterface $currencyContext;
 
-    /** @var LocaleContextInterface */
-    private $localeContext;
+    private LocaleContextInterface $localeContext;
 
-    /** @var CustomerContextInterface */
-    private $customerContext;
+    private CustomerContextInterface $customerContext;
 
     public function __construct(
         ChannelContextInterface $channelContext,
@@ -49,33 +45,21 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
         $this->customerContext = $customerContext;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getChannel(): ChannelInterface
     {
         return $this->channelContext->getChannel();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrencyCode(): string
     {
         return $this->currencyContext->getCurrencyCode();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLocaleCode(): string
     {
         return $this->localeContext->getLocaleCode();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCustomer(): ?CustomerInterface
     {
         return $this->customerContext->getCustomer();

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -27,24 +27,19 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Countries;
 
 final class ZoneContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var RepositoryInterface */
-    private $zoneRepository;
+    private RepositoryInterface $zoneRepository;
 
-    /** @var ObjectManager */
-    private $objectManager;
+    private ObjectManager $objectManager;
 
-    /** @var ZoneFactoryInterface */
-    private $zoneFactory;
+    private ZoneFactoryInterface $zoneFactory;
 
-    /** @var FactoryInterface */
-    private $zoneMemberFactory;
+    private FactoryInterface $zoneMemberFactory;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -65,7 +60,7 @@ final class ZoneContext implements Context
      */
     public function thereIsAZoneTheRestOfTheWorldContainingAllOtherCountries()
     {
-        $restOfWorldCountries = Intl::getRegionBundle()->getCountryNames('en');
+        $restOfWorldCountries = Countries::getNames('en');
         unset($restOfWorldCountries['US']);
 
         $zone = $this->zoneFactory->createWithMembers(array_keys($restOfWorldCountries));

@@ -15,7 +15,7 @@ namespace Sylius\Behat\Page\Admin\Shipment;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
-final class ShowPage extends SymfonyPage implements ShowPageInterface
+class ShowPage extends SymfonyPage implements ShowPageInterface
 {
     public function getRouteName(): string
     {

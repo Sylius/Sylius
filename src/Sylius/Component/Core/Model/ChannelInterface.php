@@ -51,6 +51,10 @@ interface ChannelInterface extends
 
     public function setContactEmail(?string $contactEmail): void;
 
+    public function getContactPhoneNumber(): ?string;
+
+    public function setContactPhoneNumber(?string $contactPhoneNumber): void;
+
     public function isSkippingShippingStepAllowed(): bool;
 
     public function setSkippingShippingStepAllowed(bool $skippingShippingStepAllowed): void;

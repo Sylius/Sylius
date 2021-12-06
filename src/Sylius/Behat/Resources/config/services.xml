@@ -37,9 +37,9 @@
             <argument type="string">admin</argument>
         </service>
 
-        <service id="sylius.behat.admin_api_security" class="Sylius\Behat\Service\ApiSecurityService" public="true">
-            <argument type="service" id="test.client" />
+        <service id="sylius.behat.api_security" class="Sylius\Behat\Service\ApiSecurityService" public="true">
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="lexik_jwt_authentication.jwt_manager" />
         </service>
 
         <service id="sylius.behat.shop_security" class="Sylius\Behat\Service\SecurityService" public="false">
@@ -81,7 +81,18 @@
 
         <service id="sylius.behat.shared_storage" class="Sylius\Behat\Service\SharedStorage" public="false"/>
 
+        <service id="sylius.behat.java_script_test_helper" class="Sylius\Behat\Service\Helper\JavaScriptTestHelper" >
+            <argument>100000</argument>
+            <argument>7</argument>
+        </service>
+
         <service id="sylius.calendar" class="Sylius\Behat\Service\Provider\Calendar">
+            <argument>%kernel.project_dir%</argument>
+        </service>
+        <service
+            id="Sylius\Component\Promotion\Provider\DateTimeProviderInterface"
+            class="Sylius\Behat\Service\Provider\Calendar"
+        >
             <argument>%kernel.project_dir%</argument>
         </service>
     </services>

@@ -21,33 +21,23 @@ use Symfony\Component\Form\ReversedTransformer;
 
 final class CustomerGroupCodeChoiceType extends AbstractType
 {
-    /** @var RepositoryInterface */
-    private $customerGroupRepository;
+    private RepositoryInterface $customerGroupRepository;
 
     public function __construct(RepositoryInterface $customerGroupRepository)
     {
         $this->customerGroupRepository = $customerGroupRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addModelTransformer(new ReversedTransformer(new ResourceToIdentifierTransformer($this->customerGroupRepository, 'code')));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return CustomerGroupChoiceType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_customer_group_code_choice';

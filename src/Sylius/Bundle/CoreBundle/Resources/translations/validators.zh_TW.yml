@@ -16,6 +16,9 @@ sylius:
         currency_code:
             not_valid: 您輸入的貨幣代碼不正確。
         payment_method_eligibility: '%paymentMethodName% 此一付款方法已被禁用。請重新選擇您的付款方式。'
+    review:
+        author:
+            not_blank: 請輸入您的電郵地址。
     user:
         email:
             unique: 此電郵位址已被使用。

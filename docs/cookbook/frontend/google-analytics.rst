@@ -4,7 +4,7 @@ How to add Google Analytics script to shop?
 All shops tend to observe traffic on their websites, the most popular tool for that is Google Analytics.
 In Sylius we have two ways to enable it:
 
-*If you have the Sylius layout overriden completely then:*
+*If you have the Sylius layout overridden completely then:*
 
 * paste the script directly into :ref:`head section of the layout <google_analytics_to_head_section>`
 

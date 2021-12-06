@@ -9,6 +9,8 @@ sylius:
             title: Tytuł
         cart:
             coupon: Kupon
+        catalog_promotion:
+            channels: Kanały
         checkout:
             addressing:
                 different_billing_address: Użyć innego adresu do rozliczeń?
@@ -69,7 +71,7 @@ sylius:
             images: Zdjęcia
             restricted_zone: Strefa
             short_description: Krótki opis
-            variant_selection_method: Metody wyboru wariantu
+            variant_selection_method: Metoda wyboru wariantu
             main_taxon: Główne grupy
             channels: Kanały
             enabled: Dostępny
@@ -101,7 +103,7 @@ sylius:
             file: Wybierz zdjęcie
         user:
             billing_address: Adres do rachunku
-            enabled: Dostępny
+            enabled: Aktywne
             first_name: Imię
             groups: Grupy
             roles: Role

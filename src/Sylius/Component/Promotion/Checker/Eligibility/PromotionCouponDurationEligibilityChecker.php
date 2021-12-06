@@ -18,9 +18,6 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 final class PromotionCouponDurationEligibilityChecker implements PromotionCouponEligibilityCheckerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon): bool
     {
         $endsAt = $promotionCoupon->getExpiresAt();

@@ -25,23 +25,17 @@ use Webmozart\Assert\Assert;
 
 final class ChannelContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var ChannelContextSetterInterface */
-    private $channelContextSetter;
+    private ChannelContextSetterInterface $channelContextSetter;
 
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
+    private ChannelRepositoryInterface $channelRepository;
 
-    /** @var CreatePageInterface */
-    private $channelCreatePage;
+    private CreatePageInterface $channelCreatePage;
 
-    /** @var HomePageInterface */
-    private $homePage;
+    private HomePageInterface $homePage;
 
-    /** @var MainPageInterface */
-    private $pluginMainPage;
+    private MainPageInterface $pluginMainPage;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -57,15 +51,6 @@ final class ChannelContext implements Context
         $this->channelCreatePage = $channelCreatePage;
         $this->homePage = $homePage;
         $this->pluginMainPage = $pluginMainPage;
-    }
-
-    /**
-     * @Given /^I changed (?:|back )my current (channel to "([^"]+)")$/
-     * @When /^I change (?:|back )my current (channel to "([^"]+)")$/
-     */
-    public function iChangeMyCurrentChannelTo(ChannelInterface $channel): void
-    {
-        $this->channelContextSetter->setChannel($channel);
     }
 
     /**

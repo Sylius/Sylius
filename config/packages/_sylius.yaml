@@ -2,7 +2,6 @@ imports:
     - { resource: "@SyliusCoreBundle/Resources/config/app/config.yml" }
 
     - { resource: "@SyliusAdminBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusAdminApiBundle/Resources/config/app/config.yml" }
 
     - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
 
@@ -10,6 +9,9 @@ imports:
 
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
+
+sylius_api:
+    enabled: false
 
 sylius_shop:
     product_grid:

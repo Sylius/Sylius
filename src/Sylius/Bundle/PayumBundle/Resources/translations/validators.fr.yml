@@ -7,7 +7,7 @@ sylius:
             password:
                 not_blank: Veuillez entrer votre mot de passe PayPal.
             signature:
-                not_blank: Veuillez entrer la signature Paypal.
+                not_blank: Veuillez entrer la signature PayPal.
             username:
                 not_blank: Veuillez entrer votre nom d'utilisateur PayPal.
         stripe:

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core;
 
-final class OrderCheckoutStates
+interface OrderCheckoutStates
 {
     public const STATE_ADDRESSED = 'addressed';
 
@@ -28,8 +28,4 @@ final class OrderCheckoutStates
     public const STATE_SHIPPING_SELECTED = 'shipping_selected';
 
     public const STATE_SHIPPING_SKIPPED = 'shipping_skipped';
-
-    private function __construct()
-    {
-    }
 }

@@ -1,0 +1,44 @@
+{
+    "@context": "\/api\/v2\/contexts\/ShippingMethod",
+    "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA\/shipments\/@integer@\/methods",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/shipping-methods\/UPS",
+            "@type": "ShippingMethod",
+            "id": @integer@,
+            "code": "UPS",
+            "position": 0,
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/shop\/shipping-method-translations\/@integer@",
+                    "@type": "ShippingMethodTranslation",
+                    "id": @integer@,
+                    "name": "UPS",
+                    "description": @string@
+                }
+            },
+            "name": "UPS",
+            "price": 500
+        },
+        {
+            "@id": "\/api\/v2\/shop\/shipping-methods\/DHL",
+            "@type": "ShippingMethod",
+            "id": @integer@,
+            "code": "DHL",
+            "position": 1,
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/shop\/shipping-method-translations\/@integer@",
+                    "@type": "ShippingMethodTranslation",
+                    "id": @integer@,
+                    "name": "DHL",
+                    "description": @string@
+                }
+            },
+            "name": "DHL",
+            "price": 1000
+        }
+    ],
+    "hydra:totalItems": 2
+}

@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Περιγραφή
+            enabled: Ενεργοποιημένο
             name: Ονομασία
             parent: Γονέας
             slug: Slug

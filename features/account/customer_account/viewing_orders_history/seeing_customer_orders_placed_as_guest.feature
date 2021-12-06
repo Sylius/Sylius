@@ -11,19 +11,11 @@ Feature: Seeing customer's orders placed as guest
         And the store ships everywhere for free
         And the store allows paying offline
         And the guest customer placed order with "PHP T-Shirt" product for "john@snow.com" and "United States" based billing address with "Free" shipping method and "Offline" payment
+        And the another guest customer placed order with "PHP T-Shirt" product for "ned@stark.com" and "United States" based billing address with "Free" shipping method and "Offline" payment
 
-    @ui
+    @ui @api
     Scenario: Not being able to hijack another customer's orders
-        Given I have product "PHP T-Shirt" in the cart
-        When I complete addressing step with email "john@snow.com" and "United States" based billing address
-        And I decide to change my address
-        And I specify the email as "ned@stark.com"
-        And I complete the addressing step
-        And I select "Free" shipping method
-        And I complete the shipping step
-        And I select "Offline" payment method
-        And I complete the payment step
-        And I confirm my order
-        And I register with previously used "ned@stark.com" email and "lannistersAreDumb" password
+        Given I registered with previously used "ned@stark.com" email and "lannistersAreDumb" password
+        When I log in as "ned@stark.com" with "lannistersAreDumb" password
         And I browse my orders
         Then I should see a single order in the list

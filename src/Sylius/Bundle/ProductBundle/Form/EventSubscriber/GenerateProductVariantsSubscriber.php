@@ -24,11 +24,9 @@ use Webmozart\Assert\Assert;
 
 final class GenerateProductVariantsSubscriber implements EventSubscriberInterface
 {
-    /** @var ProductVariantGeneratorInterface */
-    private $generator;
+    private ProductVariantGeneratorInterface $generator;
 
-    /** @var Session */
-    private $session;
+    private Session $session;
 
     public function __construct(ProductVariantGeneratorInterface $generator, Session $session)
     {
@@ -36,9 +34,6 @@ final class GenerateProductVariantsSubscriber implements EventSubscriberInterfac
         $this->session = $session;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

@@ -1,4 +1,4 @@
-SyliusReviewBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusReviewBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusReviewBundle)
+SyliusReviewBundle
 ====================
 
 Sylius
@@ -6,17 +6,17 @@ Sylius
 
 ![Sylius](https://demo.sylius.com/assets/shop/img/logo.png)
 
-Sylius is an Open Source eCommerce solution built from decoupled components with powerful API and the highest quality code. [Read more on sylius.com](http://sylius.com).
+Sylius is an Open Source eCommerce solution built from decoupled components with powerful API and the highest quality code. [Read more on sylius.com](https://sylius.com).
 
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.com**](http://docs.sylius.com).
+Documentation is available on [**docs.sylius.com**](https://docs.sylius.com).
 
 Contributing
 ------------
 
-[This page](http://docs.sylius.com/en/latest/contributing/index.html) contains all the information about contributing to Sylius.
+[This page](https://docs.sylius.com/en/latest/contributing/index.html) contains all the information about contributing to Sylius.
 
 Follow Sylius' Development
 --------------------------

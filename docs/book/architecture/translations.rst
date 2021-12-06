@@ -133,5 +133,5 @@ Let's see how to do it on the example of a ProductTranslation.
 Learn more
 ----------
 
-* :doc:`Resource - translations documentation </components_and_bundles/components/Resource/translation>`
+* `Resource - translations documentation <https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md>`_
 * :doc:`Locales - concept documentation </book/configuration/locales>`

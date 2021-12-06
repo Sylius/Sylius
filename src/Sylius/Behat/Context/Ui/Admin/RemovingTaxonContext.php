@@ -21,11 +21,9 @@ use Sylius\Component\Core\Model\PromotionInterface;
 
 final class RemovingTaxonContext implements Context
 {
-    /** @var CreatePageInterface */
-    private $createPage;
+    private CreatePageInterface $createPage;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
 
     public function __construct(CreatePageInterface $createPage, NotificationCheckerInterface $notificationChecker)
     {

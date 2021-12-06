@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Beskrivelse
+            name: Navn
+            priority: Prioritet
         promotion:
             actions: Handlinger
             add_action: Tilføj handling
@@ -10,6 +14,7 @@ sylius:
             coupon_based: Kupon baseret
             description: Beskrivelse
             ends_at: Slutter den
+            exclusive: Eksklusivt
             name: Navn
             priority: Prioritet
             rules: Regler
@@ -45,6 +50,7 @@ sylius:
             nth_order: N'te ordre
             shipping_country: Leveringsland
             taxonomy: Taksonomi
+            total_price_of_items_from_taxon: Samlet pris for varer fra taksonomien
             cart_quantity_configuration:
                 count: Antal
                 equal: Lige

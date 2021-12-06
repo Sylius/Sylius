@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class ProvinceContext implements Context
 {
-    /** @var RepositoryInterface */
-    private $provinceRepository;
+    private RepositoryInterface $provinceRepository;
 
     public function __construct(RepositoryInterface $provinceRepository)
     {
@@ -30,9 +30,12 @@ final class ProvinceContext implements Context
     /**
      * @Transform /^province "([^"]+)"$/
      * @Transform /^"([^"]+)" province$/
+     * @Transform /^province as "([^"]+)"$/
+     * @Transform :province
      */
-    public function getProvinceByName($provinceName)
+    public function getProvinceByName(string $provinceName): ProvinceInterface
     {
+        /** @var ProvinceInterface|null $province */
         $province = $this->provinceRepository->findOneBy(['name' => $provinceName]);
         Assert::notNull(
             $province,

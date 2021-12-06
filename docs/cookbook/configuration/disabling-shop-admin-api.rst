@@ -16,11 +16,11 @@ How to disable Sylius shop?
     // # config/bundles.php
 
     return [
-        ...
+        //...
 
         // Sylius\Bundle\ShopBundle\SyliusShopBundle::class => ['all' => true], // - remove or leave this line commented
 
-        ...
+        //...
     ];
 
 **2.** Remove SyliusShopBundle's configs from ``config/packages/_sylius.yaml``.
@@ -31,7 +31,9 @@ Here you've got the lines that should disappear from this file:
 
     imports:
     #    - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" } # remove or leave this line commented
-    ...
+
+    #...
+
     #sylius_shop:
     #    product_grid:
     #        include_all_descendants: true
@@ -103,11 +105,11 @@ How to disable Sylius Admin?
     // # config/bundles.php
 
     return [
-        ...
+        //...
 
         // Sylius\Bundle\AdminBundle\SyliusAdminBundle::class => ['all' => true], // - remove or leave this line commented
 
-        ...
+        //...
     ];
 
 **2.** Remove SyliusAdminBundle's config import from ``config/packages/_sylius.yaml``.
@@ -182,12 +184,12 @@ How to disable Sylius API?
     // # config/bundles.php
 
     return [
-        ...
+        //...
 
         // FOS\OAuthServerBundle\FOSOAuthServerBundle::class => ['all' => true],
         // Sylius\Bundle\AdminApiBundle\SyliusAdminApiBundle::class => ['all' => true], // - remove or leave this line commented
 
-        ...
+        //...
     ];
 
 **2.** Remove SyliusAdminApiBundle's config import from ``config/packages/_sylius.yaml``.

@@ -44,15 +44,13 @@ class OrderController extends ResourceController
 
         $form = $this->resourceFormFactory->create($configuration, $cart);
 
-        $view = View::create()
-            ->setTemplate($configuration->getTemplate('summary.html'))
-            ->setData([
+        return $this->render(
+            $configuration->getTemplate('summary.html'),
+            [
                 'cart' => $cart,
                 'form' => $form->createView(),
-            ])
-        ;
-
-        return $this->viewHandler->handle($configuration, $view);
+            ]
+        );
     }
 
     public function widgetAction(Request $request): Response
@@ -65,12 +63,12 @@ class OrderController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create($cart));
         }
 
-        $view = View::create()
-            ->setTemplate($configuration->getTemplate('summary.html'))
-            ->setData(['cart' => $cart])
-        ;
-
-        return $this->viewHandler->handle($configuration, $view);
+        return $this->render(
+            $configuration->getTemplate('summary.html'),
+            [
+                'cart' => $cart,
+            ]
+        );
     }
 
     public function saveAction(Request $request): Response
@@ -82,7 +80,7 @@ class OrderController extends ResourceController
 
         $form = $this->resourceFormFactory->create($configuration, $resource);
 
-        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isSubmitted() && $form->isValid()) {
             $resource = $form->getData();
 
             $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
@@ -102,7 +100,7 @@ class OrderController extends ResourceController
 
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
-            $this->getEventDispatcher()->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($resource));
+            $this->getEventDispatcher()->dispatch(new GenericEvent($resource), SyliusCartEvents::CART_CHANGE);
             $this->manager->flush();
 
             if (!$configuration->isHtmlRequest()) {
@@ -118,19 +116,20 @@ class OrderController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
 
-        $view = View::create()
-            ->setData([
+        return $this->render(
+            $configuration->getTemplate(ResourceActions::UPDATE . '.html'),
+            [
                 'configuration' => $configuration,
                 $this->metadata->getName() => $resource,
                 'form' => $form->createView(),
                 'cart' => $resource,
-            ])
-            ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE . '.html'))
-        ;
-
-        return $this->viewHandler->handle($configuration, $view);
+            ]
+        );
     }
 
+    /**
+     * @psalm-suppress DeprecatedMethod
+     */
     public function clearAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -138,7 +137,7 @@ class OrderController extends ResourceController
         $this->isGrantedOr403($configuration, ResourceActions::DELETE);
         $resource = $this->getCurrentCart();
 
-        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid((string) $resource->getId(), $request->get('_csrf_token'))) {
+        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid((string) $resource->getId(), $this->getParameterFromRequest($request, '_csrf_token'))) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 
@@ -197,5 +196,28 @@ class OrderController extends ResourceController
     protected function getEventDispatcher(): EventDispatcherInterface
     {
         return $this->container->get('event_dispatcher');
+    }
+
+    /**
+     * @return mixed
+     *
+     * @deprecated This function will be removed in Sylius 2.0, since Symfony 5.4, use explicit input sources instead
+     * based on Symfony\Component\HttpFoundation\Request::get
+     */
+    private function getParameterFromRequest(Request $request, string $key)
+    {
+        if ($request !== $result = $request->attributes->get($key, $request)) {
+            return $result;
+        }
+
+        if ($request->query->has($key)) {
+            return $request->query->all()[$key];
+        }
+
+        if ($request->request->has($key)) {
+            return $request->request->all()[$key];
+        }
+
+        return null;
     }
 }

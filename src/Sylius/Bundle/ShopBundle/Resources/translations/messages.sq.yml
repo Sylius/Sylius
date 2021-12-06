@@ -2,6 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        contact_request:
+            content: 'Përmbajtja'
+            subject: 'Kërkesë kontakti'
+        order_confirmation:
+            subject: 'Konfirmimi i porosisë'
+        password_reset:
+            subject: 'Ricakto Fjalëkalimin'
+        user_registration:
+            welcome_to_our_store: 'Mirë se erdhët në dyqanin tonë!'
     menu:
         shop:
             account:

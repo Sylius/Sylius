@@ -238,7 +238,8 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
             new ArrayCollection([
                 $promotionAdjustment1->getWrappedObject(),
                 $promotionAdjustment2->getWrappedObject(),
-            ]))
+            ])
+        )
         ;
 
         $promotion->getCode()->willReturn('PROMOTION');

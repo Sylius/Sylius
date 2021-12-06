@@ -11,29 +11,29 @@ Feature: Skipping payment step when only one payment method is available
         And the store has a product "Guards! Guards!" priced at "$20.00"
         And the store allows paying with "Paypal Express Checkout"
 
-    @ui
+    @ui @api
     Scenario: Seeing checkout completion page after shipping if only one payment method is available
-        Given I have product "Guards! Guards!" in the cart
-        And I have completed addressing step with email "guest@example.com" and "United States" based billing address
-        And I try to complete the shipping step
+        When I add product "Guards! Guards!" to the cart
+        And I complete addressing step with email "guest@example.com" and "United States" based billing address
+        And I complete the shipping step with first shipping method
         Then I should be on the checkout complete step
         And my order's payment method should be "Paypal Express Checkout"
 
-    @ui
+    @ui @api
     Scenario: Seeing checkout completion page after shipping if only one payment method is available
         Given the store has "Offline" payment method not assigned to any channel
-        And I have product "Guards! Guards!" in the cart
-        And I have completed addressing step with email "guest@example.com" and "United States" based billing address
-        And I try to complete the shipping step
+        When I add product "Guards! Guards!" to the cart
+        And I complete addressing step with email "guest@example.com" and "United States" based billing address
+        And I complete the shipping step with first shipping method
         Then I should be on the checkout complete step
         And my order's payment method should be "Paypal Express Checkout"
 
-    @ui
+    @ui @api
     Scenario: Seeing checkout completion page after shipping if only one payment method is available
         Given the store allows paying with "Offline"
         And the payment method "Offline" is disabled
-        And I have product "Guards! Guards!" in the cart
-        And I have completed addressing step with email "guest@example.com" and "United States" based billing address
-        And I try to complete the shipping step
+        When I add product "Guards! Guards!" to the cart
+        And I complete addressing step with email "guest@example.com" and "United States" based billing address
+        And I complete the shipping step with first shipping method
         Then I should be on the checkout complete step
         And my order's payment method should be "Paypal Express Checkout"

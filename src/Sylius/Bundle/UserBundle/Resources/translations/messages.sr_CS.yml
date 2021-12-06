@@ -4,7 +4,7 @@
 sylius:
     form:
         user:
-            email: E-mail
+            email: E-pošta
             enabled: Omogućeno
             password:
                 label: Lozinka

@@ -8,7 +8,9 @@ sylius:
             id: ИД
             title: Заглавие
         cart:
-            coupon: Ваучер
+            coupon: Талон
+        catalog_promotion:
+            channels: Канали
         checkout:
             addressing:
                 different_billing_address: Използвайте различен адрес за фактуриране?
@@ -32,6 +34,7 @@ sylius:
                 postcode: Пощенски код
                 street: Улица
             contact_email: Имейл за контакт
+            countries: Държави
             currencies: Валути
             currency_base: Основна валута
             account_verification_required: Изисква се проверка на профила?
@@ -58,7 +61,7 @@ sylius:
             number: Номер
             total_from: Oт
             total_to: До
-            payment_state: Състояние на плащане
+            payment_state: Състояние на плащането
             channel: Всички канали
         page:
             body: Тяло
@@ -100,8 +103,7 @@ sylius:
             file: Избери изображение
         user:
             billing_address: Адрес на плащане
-            different_billing_address: Използвайте различен адрес за фактуриране?
-            enabled: Активирано
+            enabled: Активно
             first_name: Собствено име
             groups: Групи
             roles: Роли
@@ -137,7 +139,7 @@ sylius:
             customer_group:
                 group: Клиентска група
             has_taxon:
-                taxons: Категории
+                taxons: Класификации
             product:
                 products: Продукти
             total_of_items_from_taxon:

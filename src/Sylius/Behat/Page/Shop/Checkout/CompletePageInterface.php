@@ -30,6 +30,8 @@ interface CompletePageInterface extends SymfonyPageInterface
 
     public function hasPaymentMethod(): bool;
 
+    public function getProductUnitPrice(ProductInterface $product): int;
+
     public function hasProductDiscountedUnitPriceBy(ProductInterface $product, int $amount): bool;
 
     public function hasOrderTotal(int $total): bool;

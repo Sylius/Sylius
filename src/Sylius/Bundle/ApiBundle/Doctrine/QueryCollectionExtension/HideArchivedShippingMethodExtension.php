@@ -17,10 +17,10 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionEx
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 
+/** @experimental */
 final class HideArchivedShippingMethodExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    /** @var string */
-    private $shippingMethodClass;
+    private string $shippingMethodClass;
 
     public function __construct(string $shippingMethodClass)
     {
@@ -42,7 +42,7 @@ final class HideArchivedShippingMethodExtension implements ContextAwareQueryColl
             return;
         }
 
-        $rootAlias  = $queryBuilder->getRootAliases()[0];
+        $rootAlias = $queryBuilder->getRootAliases()[0];
 
         $queryBuilder->andWhere(sprintf('%s.archivedAt IS NULL', $rootAlias));
     }

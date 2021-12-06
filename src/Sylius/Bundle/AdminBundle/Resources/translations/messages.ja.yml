@@ -6,24 +6,35 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: 関連タイプ
+                    attributes: 属性
+                    header: カタログ
                     inventory: sylius.breadcrumb.inventory.index
                     options: sylius.breadcrumb.option.index
                     products: sylius.breadcrumb.product.index
+                    taxons: タクソン(分類群)
                 configuration:
+                    admin_users: 管理者
+                    channels: 経路
                     countries: 国の設定
                     currencies: 通貨
                     exchange_rates: 為替レート
                     header: 条件設定
+                    locales: 地域
                     payment_methods: 支払い方法の管理
                     shipping_categories: 配送カテゴリ
                     shipping_methods: 配送方法管理
+                    tax_categories: 税カテゴリー
                     tax_rates: 税管理
                     zones: ゾーン管理
                 marketing:
+                    header: マーケティング
+                    product_reviews: 商品レビュー
                     promotions: sylius.breadcrumb.promotion.index
                 customers:
                     customers: sylius.breadcrumb.customers
                     groups: グループ
+                    header: 顧客
                 sales:
                     header: sylius.breadcrumb.sales
                     orders: sylius.breadcrumb.order.index

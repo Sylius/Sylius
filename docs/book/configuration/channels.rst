@@ -23,7 +23,8 @@ Or pretty much any other channel type you can imagine.
 * themes,
 * hostnames,
 * taxes,
-* payment and shipping methods.
+* payment and shipping methods,
+* menu.
 
 A **Channel** has a ``code``, a ``name`` and a ``color``.
 
@@ -34,7 +35,25 @@ In order to make the system more convenient for the administrator - there is jus
    In the dev environment you can easily check what channel you are currently on in the Symfony debug toolbar.
 
    .. image:: ../../_images/channel_toolbar.png
-         :align: center
+    :align: center
+
+Different menu root
+-------------------
+
+By default, Sylius will render the same menu for all channels defined in the store, which will be all the children of the
+taxon with the code `category`. You can customize this behaviour by specifying a menu taxon in the "Look & feel" section
+of desired channel.
+
+.. image:: ../../_images/channel_menu_taxon.png
+    :align: center
+
+With this configuration, this particular channel will expose a menu starting from the children of the chosen taxon
+(T-Shirt taxon in this example):
+
+.. image:: ../../_images/channel_menu_with_menu_taxon.png
+    :align: center
+
+Rest of the channels will still render only children of `category` taxon.
 
 **How to get the current channel?**
 
@@ -90,7 +109,7 @@ on the Channel form.
 
 .. image:: ../../_images/sylius_plus/banner.png
     :align: center
-    :target: http://sylius.com/plus/?utm_source=docs
+    :target: https://sylius.com/plus/?utm_source=docs
 
 Learn more
 ----------

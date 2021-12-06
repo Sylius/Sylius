@@ -20,7 +20,7 @@ abstract class JQueryHelper
 {
     public static function waitForAsynchronousActionsToFinish(Session $session): void
     {
-        $session->wait(1000, '0 === jQuery.active');
+        $session->wait(1000, 'typeof jQuery !== "undefined" && 0 === jQuery.active');
     }
 
     public static function waitForFormToStopLoading(DocumentElement $document, int $timeout = 10): void

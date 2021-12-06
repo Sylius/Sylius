@@ -3,10 +3,15 @@
 
 sylius:
     promotion:
+        code:
+            unique: Kampagne med den angivne kode findes i forvejen.
+            regex: Kampagnekode skal bestå af bogstaver, tal, streg og underscore.
+            not_blank: Venligst angiv kampagnekode.
         description:
             max_length: Kampagne beskrivelse må ikke være længere end 1 karakter.|Kampagne beskrivelse må ikke være længere end {{ limit }} karakterer.
             min_length: Kampagne beskrivelse skal være mindst ét tegn langt.|Kampagne beskrivelse skal være mindst {{ limit }} tegn langt.
             not_blank: Angiv kampagne beskrivelse.
+        end_date_cannot_be_set_prior_start_date: Slutdato kan ikke være før startdato.
         name:
             max_length: Kampagne navn må ikke være længere end 1 karakter. |Kampagne navn må ikke være længere end {{ limit }} tegn.
             min_length: Kampagne navn skal være mindst ét tegn langt.|Kampagne navn skal være mindst {{ limit }} tegn langt.
@@ -16,11 +21,18 @@ sylius:
             max_length: Kuponkode må ikke være længere end 1 tegn. |Kuponkode må ikke være længere end {{ limit }} tegn.
             min_length: Kuponkode skal være mindst ét tegn langt. |Kuponkode skal mindst {{ limit }} tegn langt.
             not_blank: Indtast kuponkode.
+            regex: Kuponkoden kan bestå af bogstaver, tal, streg og underscore.
+            unique: Denne kupon eksisterer i forvejen.
+        is_invalid: Kuponkode er ugyldig.
         usage_limit:
             min: Kupon brugsgrænse skal være mindst {{ limit }}.
     promotion_coupon_generator_instruction:
         amount:
             min: Mængden af kuponer skal være mindst {{ limit }}.
             not_blank: Angiv mængden af kuponer til at generere.
+        code_length:
+            min: Kuponkode skal være mindst {{ limit }} tegn lang.
+            max: Kuponkode kan ikke være længere end {{ limit }} tegn.
+            not_blank: Angiv venligst kuponkode længde.
         usage_limit:
             min: Brugsgrænse for genererede kuponer skal mindst {{ limit }}.

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Behat\Tester;
@@ -14,10 +23,10 @@ use Behat\Testwork\Tester\Result\TestResult;
 use Behat\Testwork\Tester\Setup\Setup;
 use Behat\Testwork\Tester\Setup\Teardown;
 
+/** @experimental */
 final class ApiScenarioEventDispatchingScenarioTester implements ScenarioTester
 {
-    /** @var ScenarioTester */
-    private $baseTester;
+    private ScenarioTester $baseTester;
 
     public function __construct(ScenarioTester $baseTester)
     {

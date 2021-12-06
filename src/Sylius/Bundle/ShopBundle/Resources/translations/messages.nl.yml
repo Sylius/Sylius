@@ -2,6 +2,39 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        contact_request:
+            content: 'Inhoud'
+            message_from: 'Bericht van'
+            subject: 'Contactverzoek'
+        order_confirmation:
+            has_been_successfully_placed: 'is met succes geplaatst.'
+            subject: 'Order bevestiging'
+            view_order_or_change_payment_method: 'Bestelling bekijken of betalingsmethode wijzigen'
+            thank_you: 'Bedankt voor uw bestelling in onze winkel!'
+            your_order_number: 'Uw ordernummer'
+        password_reset:
+            hello: 'Hallo'
+            reset_your_password: 'Uw wachtwoord opnieuw instellen'
+            subject: 'Wachtwoord opnieuw instellen'
+            to_reset_your_password: 'Om uw wachtwoord opnieuw in te stellen - klik op de onderstaande link'
+        user_registration:
+            start_shopping: 'Begin met winkelen'
+            subject: 'Gebruikersregistratie'
+            welcome_to_our_store: 'Welkom in onze winkel!'
+            you_have_just_been_registered: 'U bent zojuist geregistreerd. Dank u'
+        verification_token:
+            hello: 'Hallo'
+            subject: 'Verificatie van e-mailadres'
+            to_verify_your_email_address: 'Om uw e-mailadres te verifiëren - klik op de onderstaande link'
+            verify_your_email_address: 'Verifieer uw e-mailadres'
+    homepage:
+        about_us: 'Over ons'
+        about_us_content: 'Welkom bij onze winkel, uw nummer één webwinkel die u de beste producten biedt. U kunt kiezen uit de allerbeste kleding en schoenen uit ons aanbod. (<i>U kunt deze inhoud wijzigen door de sleutel "sylius.homepage.about_us_content" in uw vertaalbestand te overschrijven</i>)'
+        carousel_header: 'Zet je schrap! De winter komt eraan'
+        newsletter: 'Nieuwsbrief'
+        newsletter_description: 'Schrijf u in op onze nieuwsbrief om nieuwe aanbiedingen te zien die op u wachten! (<i>U kunt deze inhoud wijzigen door de sleutel "sylius.homepage.newsletter_description" in uw vertaalbestand te overschrijven</i>)'
+        subscribe: 'Abonneren'
     lightbox:
         image_album_label: 'Afbeelding %1 van %2'
     menu:

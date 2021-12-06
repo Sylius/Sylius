@@ -20,7 +20,7 @@
         </service>
 
         <service id="sylius.behat.context.hook.test_theme" class="Sylius\Behat\Context\Hook\TestThemeContext">
-            <argument type="service" id="sylius.theme.test_theme_configuration_manager" />
+            <argument type="service" id="Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface" />
         </service>
 
         <service id="sylius.behat.context.hook.email_spool" class="Sylius\Behat\Context\Hook\EmailSpoolContext">

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ShopBundle\EmailManager;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface as CoreOrderEmailManagerInterface;
 use Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -22,9 +23,9 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class OrderEmailManagerSpec extends ObjectBehavior
 {
-    function let(SenderInterface $sender): void
+    function let(SenderInterface $sender, CoreOrderEmailManagerInterface $decoratedEmailManager): void
     {
-        $this->beConstructedWith($sender);
+        $this->beConstructedWith($sender, $decoratedEmailManager);
     }
 
     function it_implements_an_order_email_manager_interface(): void
@@ -32,12 +33,23 @@ final class OrderEmailManagerSpec extends ObjectBehavior
         $this->shouldImplement(OrderEmailManagerInterface::class);
     }
 
-    function it_sends_an_order_confirmation_email(
+    function it_delegates_email_sending_to_core_implementation(
+        CoreOrderEmailManagerInterface $decoratedEmailManager,
+        OrderInterface $order
+    ): void {
+        $decoratedEmailManager->sendConfirmationEmail($order)->shouldBeCalled();
+
+        $this->sendConfirmationEmail($order);
+    }
+
+    function it_sends_an_order_confirmation_email_if_core_email_manager_is_not_set(
         SenderInterface $sender,
         OrderInterface $order,
         ChannelInterface $channel,
         CustomerInterface $customer
     ): void {
+        $this->beConstructedWith($sender, null);
+
         $order->getChannel()->willReturn($channel);
         $order->getLocaleCode()->willReturn('en_US');
         $order->getCustomer()->willReturn($customer);

@@ -18,6 +18,9 @@ sylius:
     order:
         currency_code:
             not_valid: Ilmoittamasi valuuttakoodi ei kelpaa.
+    review:
+        author:
+            not_blank: Kirjoita sähköpostiosoitteesi.
     user:
         email:
             unique: Sähköpostiosoite on jo käytössä.

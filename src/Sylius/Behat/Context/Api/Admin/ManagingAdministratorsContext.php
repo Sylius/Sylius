@@ -25,23 +25,17 @@ use Webmozart\Assert\Assert;
 
 final class ManagingAdministratorsContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $client;
+    private ApiClientInterface $client;
 
-    /** @var ApiClientInterface */
-    private $avatarImagesClient;
+    private ApiClientInterface $avatarImagesClient;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
-    /** @var IriConverterInterface */
-    private $iriConverter;
+    private IriConverterInterface $iriConverter;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var \ArrayAccess */
-    private $minkParameters;
+    private \ArrayAccess $minkParameters;
 
     public function __construct(
         ApiClientInterface $client,
@@ -57,6 +51,15 @@ final class ManagingAdministratorsContext implements Context
         $this->iriConverter = $iriConverter;
         $this->sharedStorage = $sharedStorage;
         $this->minkParameters = $minkParameters;
+    }
+
+    /**
+     * @Given /^I am editing (my) details$/
+     * @When /^I want to edit (this administrator)$/
+     */
+    public function iWantToEditThisAdministrator(AdminUserInterface $adminUser): void
+    {
+        $this->client->buildUpdateRequest((string) $adminUser->getId());
     }
 
     /**
@@ -129,8 +132,7 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @When I add it
-     * @When I try to add it
+     * @When I (try to) add it
      */
     public function iAddIt(): void
     {
@@ -152,15 +154,6 @@ final class ManagingAdministratorsContext implements Context
     public function iDeleteAdministratorWithEmail(AdminUserInterface $adminUser): void
     {
         $this->client->delete((string) $adminUser->getId());
-    }
-
-    /**
-     * @Given /^I am editing (my) details$/
-     * @When /^I want to edit (this administrator)$/
-     */
-    public function iWantToEditThisAdministrator(AdminUserInterface $adminUser): void
-    {
-        $this->client->buildUpdateRequest((string) $adminUser->getId());
     }
 
     /**

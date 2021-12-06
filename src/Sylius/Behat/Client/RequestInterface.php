@@ -15,23 +15,58 @@ namespace Sylius\Behat\Client;
 
 interface RequestInterface
 {
-    public static function index(string $resource, string $token): self;
+    public static function index(
+        ?string $section,
+        string $resource,
+        string $authorizationHeader,
+        ?string $token = null
+    ): self;
 
-    public static function subResourceIndex(string $resource, string $id, string $subResource, string $token): self;
+    public static function subResourceIndex(?string $section, string $resource, string $id, string $subResource): self;
 
-    public static function show(string $resource, string $id, string $token): self;
+    public static function show(
+        ?string $section,
+        string $resource,
+        string $id,
+        string $authorizationHeader,
+        ?string $token = null
+    ): self;
 
-    public static function create(string $resource, string $token): self;
+    public static function create(
+        ?string $section,
+        string $resource,
+        string $authorizationHeader,
+        ?string $token = null
+    ): self;
 
-    public static function update(string $resource, string $id, string $token): self;
+    public static function update(
+        ?string $section,
+        string $resource,
+        string $id,
+        string $authorizationHeader,
+        ?string $token = null
+    ): self;
 
-    public static function delete(string $resource, string $id, string $token): self;
+    public static function delete(
+        ?string $section,
+        string $resource,
+        string $id,
+        string $authorizationHeader,
+        ?string $token = null
+    ): self;
 
-    public static function transition(string $resource, string $id, string $transition, string $token): self;
+    public static function transition(?string $section, string $resource, string $id, string $transition): self;
 
-    public static function upload(string $resource, string $token): RequestInterface;
+    public static function customItemAction(?string $section, string $resource, string $id, string $type, string $action): self;
 
-    public static function custom(string $url, string $method, ?string $token): self;
+    public static function upload(
+        ?string $section,
+        string $resource,
+        string $authorizationHeader,
+        ?string $token = null
+    ): self;
+
+    public static function custom(string $url, string $method, ?string $token = null): self;
 
     public function url(): string;
 
@@ -41,6 +76,8 @@ interface RequestInterface
 
     public function content(): string;
 
+    public function getContent(): array;
+
     public function setContent(array $content): void;
 
     public function updateContent(array $newValues): void;
@@ -49,9 +86,15 @@ interface RequestInterface
 
     public function updateParameters(array $newParameters): void;
 
+    public function clearParameters(): void;
+
     public function files(): array;
 
     public function updateFiles(array $newFiles): void;
 
     public function addSubResource(string $key, array $subResource): void;
+
+    public function removeSubResource(string $subResource, string $id): void;
+
+    public function authorize(?string $token, string $authorizationHeader): void;
 }

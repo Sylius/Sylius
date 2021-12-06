@@ -33,7 +33,10 @@ The following code applies 10% discount adjustment to orders above 100€.
         {
             if($order->getTotal() > 10000) {
                 $discount10Percent = new Adjustment();
-                $discount10Percent->setAmount(-$order->getTotal() / 100 * 10);
+                $discount10Percent->setAmount($order->getTotal() / 100 * 10);
+                $discount10Percent->setType('Percent Discount');
+                // It would be good practice to set `label` but it's not mandatory
+                $discount10Percent->setLabel('10% discount');
                 $order->addAdjustment($discount10Percent);
             }
         }

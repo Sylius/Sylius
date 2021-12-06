@@ -10,4 +10,5 @@ sylius:
         verify_email: 'Din e-mail er nu bekræftet.'
         verify_email_by_invalid_token: 'Bekræftelsestoken er ugyldigt.'
         verify_email_request: 'En e-mail med et bekræftelseslink er blevet sendt til din e-mail adresse.'
+        verify_no_user: 'Der er ikke registreret nogle brugere.'
         verify_verified_email: 'Denne e-mail er allerede verificeret.'

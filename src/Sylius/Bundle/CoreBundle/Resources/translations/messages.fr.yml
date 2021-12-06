@@ -2,6 +2,37 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        order_confirmation:
+            has_been_successfully_placed: 'a été passée avec succès.'
+            subject: 'Confirmation de commande'
+            view_order_or_change_payment_method: 'Voir la commande ou modifier le mode de paiement'
+            thank_you: 'Merci d''avoir acheté dans notre boutique !'
+            your_order_number: 'Votre commande n°'
+        password_reset:
+            hello: 'Bonjour'
+            reset_your_password: 'Réinitialiser votre mot de passe'
+            subject: 'Réinitialisation du mot de passe'
+            to_reset_your_password: 'Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous'
+            to_reset_your_password_token: 'Pour réinitialiser votre mot de passe, utilisez le jeton ci-dessous'
+            token: 'Votre jeton de réinitialisation de mot de passe est'
+        shipment_confirmation:
+            has_been_sent_using: 'a été envoyé en utilisant'
+            subject: 'Confirmation d''expédition'
+            thank_you_for_transaction: 'Merci pour votre transaction réussie.'
+            you_can_check_its_location_with_the_tracking_code: 'Vous pouvez vérifier sa progression avec le code de suivi %tracking_code%.'
+            your_order_with_number: 'Votre commande numéro'
+        user_registration:
+            start_shopping: 'Commencer le shopping'
+            subject: 'Inscription utilisateur'
+            welcome_to_our_store: 'Bienvenue dans notre boutique !'
+            you_have_just_been_registered: 'Vous venez d''être enregistré(e). Merci'
+        verification_token:
+            hello: 'Bonjour'
+            message: 'Vérifiez votre compte avec le jeton : '
+            subject: 'Vérification de l''adresse e-mail'
+            to_verify_your_email_address: 'Pour vérifier votre adresse e-mail - cliquez sur le lien ci-dessous'
+            verify_your_email_address: 'Vérifiez votre adresse e-mail'
     form:
         block:
             body: Corps
@@ -9,9 +40,15 @@ sylius:
             title: Titre
         cart:
             coupon: Code promo
+        catalog_promotion:
+            channels: Canaux
+            scope:
+                for_taxons: Pour les taxonomies
+                for_variants: Pour les variantes
         checkout:
             addressing:
                 different_billing_address: Utiliser une adresse différente pour la facturation ?
+                different_shipping_address: Utiliser une adresse différente pour la livraison ?
             payment_method: Moyen de paiement
             shipping_method: Mode de livraison
         promotion:
@@ -21,6 +58,7 @@ sylius:
                 product: Produit
         promotion_coupon:
             per_customer_usage_limit: Limite d'utilisation par client
+            reusable_from_cancelled_orders: Réutilisable suite à commandes annulées
         group:
             name: Nom
             roles: Rôles
@@ -31,15 +69,20 @@ sylius:
                 country: Pays
                 postcode: Code postal
                 street: Adresse
+                tax_id: N° de TVA
             contact_email: Email de contact
+            contact_phone_number: Numéro de téléphone de contact
+            countries: Pays
             currencies: Devises
             currency_base: Devise de référence
             account_verification_required: La vérification des comptes est-elle requise ?
             hostname: Nom d'hôte
             locale_default: Paramètres régionaux par défaut
-            locales: Locales
+            locales: Paramètres régionaux
+            menu_taxon: Taxonomie de menu
             payment_methods: Moyens de paiement
             shipping_methods: Modes de livraison
+            shop_billing_data: Données de facturation du magasin
             skipping_shipping_step_allowed: Ignorez l’étape expédition si un seul mode de livraison est disponible ?
             skipping_payment_step_allowed: Ignorez l’étape paiement si un seul mode de paiement est disponible ?
             tax_calculation_strategy: Stratégie de calcul de la TVA
@@ -51,7 +94,7 @@ sylius:
             file: Image
         locale:
             code: Code
-            enabled: Activé
+            enabled: Activée
         order_filter:
             created_at_from: Créé après le
             created_at_to: Créé avant le
@@ -69,9 +112,9 @@ sylius:
             restricted_zone: Restriction de zone
             short_description: Brève description
             variant_selection_method: Méthode de sélection de variante
-            main_taxon: Taxinomie principale
+            main_taxon: Taxonomie principale
             channels: Canaux
-            enabled: Activé
+            enabled: Activée
         product_filter:
             name: Nom
             code: Code
@@ -100,8 +143,8 @@ sylius:
             file: Sélectionnez une image
         user:
             billing_address: Adresse de facturation
-            different_billing_address: Utiliser une adresse différente pour la facturation ?
-            enabled: Activé
+            different_shipping_address: Utiliser une adresse différente pour la livraison ?
+            enabled: Activée
             first_name: Prénom
             groups: Groupes
             roles: Rôles
@@ -119,12 +162,13 @@ sylius:
             shipping_required: Expédition requise ?
             weight: Poids
             width: Largeur
+            tracked_help: Si cette option est activée, Sylius gardera une trace du stock et cessera de vendre le produit une fois que le stock aura atteint 0.
         attribute:
             product_attribute_value:
                 attribute: Attribut 
                 value: Valeur
         guest:
-            email: E-mail
+            email: Courriel
         product_association:
             product: Produits associés
             type: Type d'association
@@ -196,6 +240,7 @@ sylius:
             header: Paramètres et version de PHP
             any: N'importe quel
             detect_unicode: detect_unicode
+            detect_unicode_help: Définir 'detect_unicode = Off' dans votre fichier php.ini
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: Non obsolète
             off: false
@@ -203,13 +248,16 @@ sylius:
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
+                auto_start_help: Définir 'session.auto_start = Off' dans votre fichier php.ini
             short_open_tag: short_open_tag
             timezone: fuseau horaire
+            timezone_help: Définissez 'date.timezone' dans votre fichier php.ini (par exemple date.timezone = "Europe/Amsterdam")
             timezone_deprecated:
                 header: Fuseau horaire obsolète
                 help: Le fuseau horaire %timezone% est déconseillé. Corrigez votre fichier php.ini (liste des fuseaux horaires obsolètes http://php.net/manual/fr/timezones.others.php).
             version: Version de PHP
             version_recommended: Version de PHP recommandée
+            version_help: Sylius recommande la version %recommended% de PHP, votre version actuelle est la %current%. Veuillez la mettre à jour.
     payum_gateway:
         cash_on_delivery: Paiement à la livraison
         offline: Hors-ligne

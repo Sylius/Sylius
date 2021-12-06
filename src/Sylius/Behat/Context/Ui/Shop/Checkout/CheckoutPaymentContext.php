@@ -14,17 +14,17 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Exception\ElementNotFoundException;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Webmozart\Assert\Assert;
 
 final class CheckoutPaymentContext implements Context
 {
-    /** @var SelectPaymentPageInterface */
-    private $selectPaymentPage;
+    private SelectPaymentPageInterface $selectPaymentPage;
 
-    /** @var CompletePageInterface */
-    private $completePage;
+    private CompletePageInterface $completePage;
 
     public function __construct(SelectPaymentPageInterface $selectPaymentPage, CompletePageInterface $completePage)
     {
@@ -49,9 +49,10 @@ final class CheckoutPaymentContext implements Context
     }
 
     /**
+     * @Given I completed the payment step with :paymentMethodName payment method
      * @When /^I choose "([^"]*)" payment method$/
      */
-    public function iChoosePaymentMethod($paymentMethodName)
+    public function iChoosePaymentMethod(string $paymentMethodName): void
     {
         $this->selectPaymentPage->selectPaymentMethod($paymentMethodName ?: 'Offline');
         $this->selectPaymentPage->nextStep();
@@ -74,7 +75,7 @@ final class CheckoutPaymentContext implements Context
     }
 
     /**
-     * @When I complete the payment step
+     * @When /^I complete(?:|d) the payment step$/
      */
     public function iCompleteThePaymentStep()
     {
@@ -84,7 +85,7 @@ final class CheckoutPaymentContext implements Context
     /**
      * @When I select :name payment method
      */
-    public function iSelectPaymentMethod($name)
+    public function iSelectPaymentMethod($name): void
     {
         $this->selectPaymentPage->selectPaymentMethod($name);
     }
@@ -149,5 +150,21 @@ final class CheckoutPaymentContext implements Context
         $paymentMethods = $this->selectPaymentPage->getPaymentMethods();
 
         Assert::same(end($paymentMethods), $paymentMethodName);
+    }
+
+    /**
+     * @Then I should not be able to proceed checkout payment step
+     */
+    public function iShouldNotBeAbleToProceedCheckoutPaymentStep(): void
+    {
+        $this->selectPaymentPage->tryToOpen();
+
+        try {
+            $this->selectPaymentPage->nextStep();
+        } catch (ElementNotFoundException $exception) {
+            return;
+        }
+
+        throw new UnexpectedPageException('It should not be possible to complete checkout payment step.');
     }
 }

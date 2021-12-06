@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Omschrijving
+            enabled: Ingeschakeld
             name: Naam
             parent: Ouder
             slug: Slug

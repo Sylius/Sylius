@@ -6,6 +6,9 @@ sylius:
         product:
             name: Nosaukums
             description: Apraksts
+            attributes: Atribūti
+            options: Iestatījumi
+            taxons: Sadaļas
         product_variant:
             name: Nosaukums
         association_type:
@@ -14,3 +17,5 @@ sylius:
             name: Nosaukums
         option:
             name: Nosaukums
+        option_value:
+            add_value: Pievienot vērtību

@@ -2,6 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        shipment_confirmation:
+            has_been_sent_using: 'is verzonden met'
+            subject: 'Bevestiging van de verzending'
+            thank_you_for_transaction: 'Bedankt voor een succesvolle transactie.'
+            you_can_check_its_location_with_the_tracking_code: 'U kunt de verzending volgen met de trackingcode van %tracking_code%.'
+            your_order_with_number: 'Uw ordernummer'
     menu:
         admin:
             main:
@@ -22,7 +29,7 @@ sylius:
                     header: Configuratie
                     locales: Talen/Regio's
                     payment_methods: Betaalmethoden
-                    shipping_categories: Verzend categorieën
+                    shipping_categories: Verzendcategorieën
                     shipping_methods: Verzendmethoden
                     tax_categories: Belastingcategorieën
                     tax_rates: BTW-tarieven
@@ -38,3 +45,16 @@ sylius:
                 sales:
                     header: Verkoop
                     orders: Bestellingen
+    ui:
+        product:
+            product_not_active_in_channel: Het product is nog niet geactiveerd in dit kanaal.
+        gateway:
+            no_sca_support_notice: De gekozen betalingsgateway ondersteunt geen SCA.
+        sales_summary: Verkoopoverzicht
+        statistics:
+            day: Dag
+            lifetime: Levensduur
+            month: Maand
+            week: Week
+            2weeks: 2 weken
+            year: Jaar

@@ -9,6 +9,8 @@ sylius:
             title: Naslov
         cart:
             coupon: Kupon
+        catalog_promotion:
+            channels: Kanali
         checkout:
             addressing:
                 different_billing_address: Uporabimo drug naslov za račun?
@@ -31,6 +33,7 @@ sylius:
                 country: Država
                 postcode: Poštna številka
                 street: Ulica
+            countries: Države
             currencies: Valute
             hostname: Ime gostitelja
             locale_default: Privzeto območje
@@ -94,7 +97,6 @@ sylius:
             file: Izberite sliko
         user:
             billing_address: Naslov za račun
-            different_billing_address: Uporabimo drug naslov za račun?
             enabled: Omogočeno
             first_name: Ime
             groups: Skupine
@@ -138,6 +140,7 @@ sylius:
         zone:
             scopes:
                 shipping: Dostava
+                tax: DDV
     installer:
         extensions:
             header: razširitve

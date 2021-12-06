@@ -6,7 +6,7 @@
 
 {% set header = 'sylius.ui.your_shopping_cart' %}
 
-{% block title %}{{ parent() }} | {{ header|trans }}{% endblock %}
+{% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
 
 {% block content %}
     {% if not cart.empty %}

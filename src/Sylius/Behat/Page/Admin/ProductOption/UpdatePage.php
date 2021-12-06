@@ -25,7 +25,8 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function nameItIn(string $name, string $language): void
     {
         $this->getDocument()->fillField(
-            sprintf('sylius_product_option_translations_%s_name', $language), $name
+            sprintf('sylius_product_option_translations_%s_name', $language),
+            $name
         );
     }
 

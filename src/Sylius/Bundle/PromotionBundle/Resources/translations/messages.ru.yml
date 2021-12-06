@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Описание
+            name: Округ
+            priority: Приоритет
         promotion:
             actions: Действия
             add_action: Добавить действие
@@ -11,6 +15,7 @@ sylius:
             description: Описание
             ends_at: Конец
             exclusive: Эксклюзив
+            name: Название
             priority: Приоритет
             rules: Правила
             starts_at: Начало
@@ -33,6 +38,8 @@ sylius:
             amount: Количество
             code_length: Длина кода
             expires_at: Истекает
+            prefix: Префикс
+            suffix: Суффикс
             usage_limit: Предел
         promotion_filter:
             price_range: Фильтр диапазона цен
@@ -60,5 +67,5 @@ sylius:
                 country: Страна
             taxonomy_configuration:
                 exclude: Исключить
-                taxons: Категории
+                taxons: Таксоны
             type: Тип

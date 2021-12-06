@@ -14,6 +14,7 @@ default:
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.shipping_method
+                - sylius.behat.context.transform.user
 
                 - sylius.behat.context.setup.address
                 - sylius.behat.context.setup.admin_security
@@ -33,4 +34,4 @@ default:
                 - sylius.behat.context.ui.shop.login
 
             filters:
-                tags: "@managing_customers && @ui"
+                tags: "@managing_customers&&@ui"

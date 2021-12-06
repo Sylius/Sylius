@@ -33,6 +33,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getElement('product_name')->getText();
     }
 
+    public function getBreadcrumb(): string
+    {
+        return $this->getElement('breadcrumb')->getText();
+    }
+
     public function getRouteName(): string
     {
         return 'sylius_admin_product_show';
@@ -67,6 +72,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'show_product_dropdown' => '.scrolling.menu',
             'show_product_single_button' => '.ui.labeled.icon.button',
             'variants' => '#variants',
+            'breadcrumb' => '.breadcrumb > div',
         ]);
     }
 }

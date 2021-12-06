@@ -9,6 +9,8 @@ sylius:
             title: Tittel
         cart:
             coupon: Kupong
+        catalog_promotion:
+            channels: Kanaler
         checkout:
             addressing:
                 different_billing_address: Bruk annen adresse for fakturering?
@@ -32,6 +34,7 @@ sylius:
                 postcode: Postnummer
                 street: Gate
             contact_email: Kontakt e-post
+            countries: Land
             currencies: Valutaer
             currency_base: Standardvaluta
             account_verification_required: Er kontobekreftelse påkrevet?
@@ -61,7 +64,7 @@ sylius:
             payment_state: Betalingsstatus
             channel: Alle kanaler
         page:
-            body: Kropp
+            body: Brødtekst
             id: ID
             title: Tittel
         product:
@@ -100,7 +103,6 @@ sylius:
             file: Velg bilde
         user:
             billing_address: Fakturaadresse
-            different_billing_address: Bruk annen adresse for fakturering?
             enabled: Aktivert
             first_name: Fornavn
             groups: Grupper

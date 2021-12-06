@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    email:
+        order_confirmation_resent: 'Auftragsbestätigung wurde erfolgreich erneut an den Kunden gesendet.'
+        shipment_confirmation_resent: 'Versandbestätigung wurde erfolgreich erneut an den Kunden versandt.'
+    product_variant:
+        cannot_generate_variants: 'Varianten für ein Produkt ohne Optionen können nicht generiert werden.'

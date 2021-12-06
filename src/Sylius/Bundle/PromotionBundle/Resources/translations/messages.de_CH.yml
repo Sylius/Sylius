@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Beschreibung
+            name: Name
+            priority: Priorität
         promotion:
             actions: Aktionen
             add_action: Aktion hinzufügen
@@ -31,9 +35,11 @@ sylius:
             expires_at: Verfällt am
             usage_limit: Nutzungslimit
         promotion_coupon_generator_instruction:
-            amount: Steuersatz
+            amount: Betrag
             code_length: Codelänge
             expires_at: Verfällt am
+            prefix: Präfix
+            suffix: Suffix
             usage_limit: Nutzungslimit
         promotion_filter:
             price_range: Preisspanne Filter
@@ -54,7 +60,7 @@ sylius:
                 exclude: Ausgenommen
                 variants: Produkte
             item_total_configuration:
-                amount: Steuersatz
+                amount: Betrag
             nth_order_configuration:
                 nth: N-ter
             shipping_country_configuration:

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Command;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\CoreBundle\Command\Model\PluginInfo;
 use Sylius\Bundle\CoreBundle\Installer\Renderer\TableRenderer;
 use Symfony\Component\Console\Command\Command;
@@ -22,17 +23,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class ShowAvailablePluginsCommand extends Command
 {
+    protected static $defaultName = 'sylius:show-available-plugins';
+
     /**
      * @var iterable<PluginInfo>
      *
      * @phpstan-var ArrayCollection<PluginInfo>
      * @psalm-var ArrayCollection<array-key, PluginInfo>
      */
-    private $plugins;
+    private Collection $plugins;
 
     protected function configure(): void
     {
-        $this->setName('sylius:show-available-plugins');
         $this->setDescription('Shows official Sylius Plugins');
         $this->configurePlugins();
     }

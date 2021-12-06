@@ -7,11 +7,11 @@ sylius:
             name: Nazwa
             description: Opis
             attributes: Cechy
-            options: Warianty
+            options: Opcje
             meta_keywords: Słowa kluczowe w sekcji meta
             meta_description: Opis w sekcji meta
             slug: Fragment URL
-            taxons: Taksonomie
+            taxons: Kategorie
         product_variant:
             name: Nazwa
         association_type:
@@ -24,7 +24,7 @@ sylius:
             name: Nazwa
         option:
             name: Nazwa
-            position: Położenie
+            position: Pozycja
             values: Możliwe wartości
         option_value:
             add_value: Dodaj wartość

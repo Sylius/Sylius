@@ -2,6 +2,6 @@
 
 <div id="sylius-variants-pricing" data-unavailable-text="{{ 'sylius.ui.unavailable'|trans }}">
 {% for price in pricing %}
-    <div {% for option, value in price %}data-{{ option }}="{% if option == 'value' %}{{ money.convertAndFormat(value) }}{% else %}{{ value|replace({'\"': '\''}) }}{% endif %}" {{ sylius_test_html_attribute('variant-price') }}{% endfor %}></div>
+    <div {% for option, value in price %}data-{{ option }}="{% if option == 'value' or option == 'original-price' %}{{ money.convertAndFormat(value) }}{% elseif option == 'applied_promotions' %}{{ value|json_encode }}{% else %}{{ value|replace({'\"': '\''}) }}{% endif %}" {{ sylius_test_html_attribute('variant-price') }}{% endfor %}></div>
 {% endfor %}
 </div>

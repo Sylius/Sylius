@@ -21,13 +21,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PromoteUserCommand extends AbstractRoleCommand
 {
-    /**
-     * {@inheritdoc}
-     */
+    protected static $defaultName = 'sylius:user:promote';
+
     protected function configure(): void
     {
         $this
-            ->setName('sylius:user:promote')
             ->setDescription('Promotes a user by adding roles.')
             ->setDefinition([
                 new InputArgument('email', InputArgument::REQUIRED, 'Email'),
@@ -35,7 +33,8 @@ class PromoteUserCommand extends AbstractRoleCommand
                 new InputOption('super-admin', null, InputOption::VALUE_NONE, 'Set the user as a super admin'),
                 new InputOption('user-type', null, InputOption::VALUE_REQUIRED, 'User type'),
             ])
-            ->setHelp(<<<EOT
+            ->setHelp(
+                <<<EOT
 The <info>sylius:user:promote</info> command promotes a user by adding security roles
 
   <info>php app/console sylius:user:promote matthieu@email.com</info>
@@ -43,9 +42,6 @@ EOT
             );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function executeRoleCommand(InputInterface $input, OutputInterface $output, UserInterface $user, array $securityRoles): void
     {
         $error = false;

@@ -4,8 +4,7 @@ sylius:
             has_been_sent_using: 'has been sent using'
             subject: 'Shipment confirmation'
             thank_you_for_transaction: 'Thank you for a successful transaction.'
-            tracking_code: 'tracking code.'
-            you_can_check_its_location: 'You can check it''s location with the'
+            you_can_check_its_location_with_the_tracking_code: 'You can check it''s location with the %tracking_code% tracking code.'
             your_order_with_number: 'Your order with number'
     menu:
         admin:
@@ -33,6 +32,8 @@ sylius:
                     tax_rates: Tax rates
                     zones: Zones
                 marketing:
+                    cart_promotions: Cart promotions
+                    catalog_promotions: Catalog promotions
                     header: Marketing
                     product_reviews: Product reviews
                     promotions: Promotions
@@ -44,6 +45,23 @@ sylius:
                     header: Sales
                     orders: Orders
     ui:
+        catalog_promotion:
+            dates_details: This operation is time-consuming! Please consider a 2-10 minutes delay starting from the specified dates. The delay depends on the size of the catalog.
+        channel_pricings: Channel pricings
+        product:
+            product_not_active_in_channel: The product is not yet activated in this channel.
+        original_price_details: Original price - this is the price of the product variant It is displayed as crossed-out in the catalog. It is used as the base for current price calculations. If this value is not definded, Catalog Promotion logic will copy value from Price to Original Price. 
+        price_details: Price - this is the current price of the product variant displayed in the catalog. It can be modified explicitly by i.e. catalog promotions. 
         gateway:
             no_sca_support_notice: The chosen payment gateway does not support SCA.
+            pay_pal_express_checkout_deprecation_notice: >
+                PayPal Express Checkout is deprecated. Please, use new
+                <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Commerce Platform</a> integration.
         sales_summary: Sales summary
+        statistics:
+            day: Day
+            lifetime: Lifetime
+            month: Month
+            week: Week
+            2weeks: 2 Weeks
+            year: Year

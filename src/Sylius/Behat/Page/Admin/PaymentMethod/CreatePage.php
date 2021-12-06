@@ -28,7 +28,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function nameIt(string $name, string $languageCode): void
     {
         $this->getDocument()->fillField(
-            sprintf('sylius_payment_method_translations_%s_name', $languageCode), $name
+            sprintf('sylius_payment_method_translations_%s_name', $languageCode),
+            $name
         );
     }
 
@@ -40,14 +41,16 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function describeIt(string $description, string $languageCode): void
     {
         $this->getDocument()->fillField(
-            sprintf('sylius_payment_method_translations_%s_description', $languageCode), $description
+            sprintf('sylius_payment_method_translations_%s_description', $languageCode),
+            $description
         );
     }
 
     public function setInstructions(string $instructions, string $languageCode): void
     {
         $this->getDocument()->fillField(
-            sprintf('sylius_payment_method_translations_%s_instructions', $languageCode), $instructions
+            sprintf('sylius_payment_method_translations_%s_instructions', $languageCode),
+            $instructions
         );
     }
 

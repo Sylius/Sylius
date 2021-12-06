@@ -40,3 +40,6 @@ sylius:
             position: 位置
             tax_category: 税别
             translations: 翻譯
+        shipping_method_rule:
+            type: 類型
+            amount: 金額

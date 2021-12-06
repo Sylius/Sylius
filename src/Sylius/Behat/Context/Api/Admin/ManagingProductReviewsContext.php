@@ -22,14 +22,11 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductReviewsContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $client;
+    private ApiClientInterface $client;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
     public function __construct(
         ApiClientInterface $client,
@@ -42,8 +39,7 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @When I browse product reviews
-     * @When I want to browse product reviews
+     * @When I (want to) browse product reviews
      */
     public function iWantToBrowseProductReviews(): void
     {
@@ -77,8 +73,7 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
+     * @When I (try to) save my changes
      */
     public function iSaveMyChanges(): void
     {
@@ -168,11 +163,11 @@ final class ManagingProductReviewsContext implements Context
      */
     public function thisProductReviewShouldNoLongerExistInTheRegistry(): void
     {
-       $id = (string) $this->sharedStorage->get('product_review_id');
-       Assert::false(
-           $this->isItemOnIndex('id', $id),
-           sprintf('Product review with id %s exist', $id)
-       );
+        $id = (string) $this->sharedStorage->get('product_review_id');
+        Assert::false(
+            $this->isItemOnIndex('id', $id),
+            sprintf('Product review with id %s exist', $id)
+        );
     }
 
     /**

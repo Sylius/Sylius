@@ -22,17 +22,13 @@ use Webmozart\Assert\Assert;
 
 final class ShopSecurityContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var SecurityServiceInterface */
-    private $securityService;
+    private SecurityServiceInterface $securityService;
 
-    /** @var ExampleFactoryInterface */
-    private $userFactory;
+    private ExampleFactoryInterface $userFactory;
 
-    /** @var UserRepositoryInterface */
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -49,20 +45,33 @@ final class ShopSecurityContext implements Context
     /**
      * @Given I am logged in as :email
      */
-    public function iAmLoggedInAs($email)
+    public function iAmLoggedInAs(string $email): void
     {
         $user = $this->userRepository->findOneByEmail($email);
         Assert::notNull($user);
 
         $this->securityService->logIn($user);
+
+        $this->sharedStorage->set('user', $user);
     }
 
     /**
+     * @Given I am a logged in customer with name :fullName
      * @Given I am a logged in customer
+     * @Given the customer logged in
      */
-    public function iAmLoggedInCustomer()
+    public function iAmLoggedInCustomer(?string $fullName = null): void
     {
-        $user = $this->userFactory->create(['email' => 'sylius@example.com', 'password' => 'sylius', 'enabled' => true]);
+        $userData = ['email' => 'sylius@example.com', 'password' => 'sylius', 'enabled' => true];
+
+        if ($fullName !== null) {
+            $names = explode(' ', $fullName);
+
+            $userData['first_name'] = $names[0];
+            $userData['last_name'] = $names[1];
+        }
+
+        $user = $this->userFactory->create($userData);
         $this->userRepository->add($user);
 
         $this->securityService->logIn($user);

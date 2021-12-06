@@ -17,19 +17,17 @@ use Sylius\Component\Attribute\Factory\AttributeFactory;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 final class RegisterAttributeFactoryPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('sylius.registry.attribute_type')) {
             return;
         }
 
-        $registry = $container->getDefinition('sylius.registry.attribute_type');
+        $registry = new Reference('sylius.registry.attribute_type');
 
         foreach (array_keys($container->getParameter('sylius.attribute.subjects')) as $subject) {
             $oldAttributeFactory = $container->getDefinition(sprintf('sylius.factory.%s_attribute', $subject));

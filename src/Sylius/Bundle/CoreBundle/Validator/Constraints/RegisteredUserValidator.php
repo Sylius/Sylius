@@ -21,27 +21,23 @@ use Webmozart\Assert\Assert;
 
 final class RegisteredUserValidator extends ConstraintValidator
 {
-    /** @var RepositoryInterface */
-    private $customerRepository;
+    private RepositoryInterface $customerRepository;
 
     public function __construct(RepositoryInterface $customerRepository)
     {
         $this->customerRepository = $customerRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function validate($customer, Constraint $constraint): void
+    public function validate($value, Constraint $constraint): void
     {
-        /** @var CustomerInterface $customer */
-        Assert::isInstanceOf($customer, CustomerInterface::class);
+        /** @var CustomerInterface $value */
+        Assert::isInstanceOf($value, CustomerInterface::class);
 
         /** @var RegisteredUser $constraint */
         Assert::isInstanceOf($constraint, RegisteredUser::class);
 
         /** @var CustomerInterface|null $existingCustomer */
-        $existingCustomer = $this->customerRepository->findOneBy(['email' => $customer->getEmail()]);
+        $existingCustomer = $this->customerRepository->findOneBy(['email' => $value->getEmail()]);
         if (null !== $existingCustomer && null !== $existingCustomer->getUser()) {
             $this->context->buildViolation($constraint->message)->atPath('email')->addViolation();
         }

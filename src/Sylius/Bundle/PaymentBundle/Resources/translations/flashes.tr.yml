@@ -3,6 +3,7 @@
 
 sylius:
     payment:
+        authorized: 'Ödeme onaylandı.'
         cancelled: 'Ödeme iptal edildi.'
         completed: 'Ödeme tamamlandı.'
         failed: 'Ödeme başarısız oldu.'

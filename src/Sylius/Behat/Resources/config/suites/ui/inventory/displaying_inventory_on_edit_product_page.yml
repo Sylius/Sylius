@@ -19,4 +19,4 @@ default:
                 - sylius.behat.context.ui.admin.notification
 
             filters:
-                tags: "@inventory_on_product_page && @ui"
+                tags: "@inventory_on_product_page&&@ui"

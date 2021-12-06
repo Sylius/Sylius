@@ -21,8 +21,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use SpecifiesItsCode;
 
-    /** @var int */
-    private $choiceListIndex = 0;
+    private int $choiceListIndex = 0;
 
     public function nameIt(string $name, string $language): void
     {
@@ -32,6 +31,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function isTypeDisabled(): bool
     {
         return 'disabled' === $this->getElement('type')->getAttribute('disabled');
+    }
+
+    public function disableTranslation(): void
+    {
+        $this->getElement('translation')->uncheck();
     }
 
     public function addAttributeValue(string $value, string $localeCode): void
@@ -83,6 +87,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'multiple' => 'label[for=sylius_product_attribute_configuration_multiple]',
             'name' => '#sylius_product_attribute_translations_en_US_name',
             'type' => '#sylius_product_attribute_type',
+            'translation' => '#sylius_product_attribute_translatable',
         ]);
     }
 }

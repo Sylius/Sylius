@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -23,17 +23,13 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CurrencyContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var RepositoryInterface */
-    private $currencyRepository;
+    private RepositoryInterface $currencyRepository;
 
-    /** @var FactoryInterface */
-    private $currencyFactory;
+    private FactoryInterface $currencyFactory;
 
-    /** @var ObjectManager */
-    private $channelManager;
+    private ObjectManager $channelManager;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,

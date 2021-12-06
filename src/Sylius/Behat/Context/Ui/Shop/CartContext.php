@@ -26,17 +26,13 @@ use Webmozart\Assert\Assert;
 
 final class CartContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var SummaryPageInterface */
-    private $summaryPage;
+    private SummaryPageInterface $summaryPage;
 
-    /** @var ShowPageInterface */
-    private $productShowPage;
+    private ShowPageInterface $productShowPage;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -51,9 +47,10 @@ final class CartContext implements Context
     }
 
     /**
-     * @When I see the summary of my cart
+     * @When /^I see the summary of my (?:|previous )cart$/
+     * @When /^I check details of my cart$/
      */
-    public function iOpenCartSummaryPage()
+    public function iOpenCartSummaryPage(): void
     {
         $this->summaryPage->open();
     }
@@ -68,6 +65,7 @@ final class CartContext implements Context
 
     /**
      * @Then my cart should be empty
+     * @Then my cart should be cleared
      * @Then cart should be empty with no value
      */
     public function iShouldBeNotifiedThatMyCartIsEmpty()
@@ -89,6 +87,7 @@ final class CartContext implements Context
 
     /**
      * @Given I change :productName quantity to :quantity
+     * @Given I change product :productName quantity to :quantity in my cart
      */
     public function iChangeQuantityTo($productName, $quantity)
     {
@@ -118,6 +117,14 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then my cart items total should be :total
+     */
+    public function myCartItemsTotalShouldBe(string $itemsTotal): void
+    {
+        Assert::same($this->summaryPage->getItemsTotal(), $itemsTotal);
+    }
+
+    /**
      * @Then my cart taxes should be :taxTotal
      */
     public function myCartTaxesShouldBe(string $taxTotal): void
@@ -129,6 +136,7 @@ final class CartContext implements Context
 
     /**
      * @Then my included in price taxes should be :taxTotal
+     * @Then my cart included in price taxes should be :taxTotal
      */
     public function myIncludedInPriceTaxesShouldBe(string $taxTotal): void
     {
@@ -150,8 +158,9 @@ final class CartContext implements Context
     /**
      * @Then my cart shipping total should be :shippingTotal
      * @Then my cart shipping should be for free
+     * @Then my cart estimated shipping cost should be :shippingTotal
      */
-    public function myCartShippingFeeShouldBe($shippingTotal = '$0.00')
+    public function myCartShippingFeeShouldBe(string $shippingTotal = '$0.00'): void
     {
         $this->summaryPage->open();
 
@@ -237,9 +246,11 @@ final class CartContext implements Context
 
     /**
      * @Given /^I (?:add|added) (this product) to the cart$/
+     * @Given /^I have (product "[^"]+") added to the cart$/
      * @Given I added product :product to the cart
      * @Given /^I (?:have|had) (product "[^"]+") in the cart$/
      * @Given the customer added :product product to the cart
+     * @Given /^I (?:add|added) ("[^"]+" product) to the (cart)$/
      * @When I add product :product to the cart
      */
     public function iAddProductToTheCart(ProductInterface $product): void
@@ -265,6 +276,7 @@ final class CartContext implements Context
      * @When I add :variantName variant of product :product to the cart
      * @When /^I add "([^"]+)" variant of (this product) to the cart$/
      * @Given I have :variantName variant of product :product in the cart
+     * @Given /^I have "([^"]+)" variant of (this product) in the cart$/
      */
     public function iAddProductToTheCartSelectingVariant($variantName, ProductInterface $product)
     {
@@ -272,6 +284,13 @@ final class CartContext implements Context
         $this->productShowPage->addToCartWithVariant($variantName);
 
         $this->sharedStorage->set('product', $product);
+        foreach ($product->getVariants() as $variant) {
+            if ($variant->getName() === $variantName) {
+                $this->sharedStorage->set('variant', $variant);
+
+                break;
+            }
+        }
     }
 
     /**
@@ -297,6 +316,7 @@ final class CartContext implements Context
 
     /**
      * @Then /^I should be(?: on| redirected to) my cart summary page$/
+     * @Then I should not be able to address an order with an empty cart
      */
     public function shouldBeOnMyCartSummaryPage()
     {
@@ -347,10 +367,14 @@ final class CartContext implements Context
 
     /**
      * @Given I have :product with :productOption :productOptionValue in the cart
+     * @Given I have product :product with product option :productOption :productOptionValue in the cart
      * @When I add :product with :productOption :productOptionValue to the cart
      */
-    public function iAddThisProductWithToTheCart(ProductInterface $product, ProductOptionInterface $productOption, $productOptionValue)
-    {
+    public function iAddThisProductWithToTheCart(
+        ProductInterface $product,
+        ProductOptionInterface $productOption,
+        string $productOptionValue
+    ): void {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
 
         $this->productShowPage->addToCartWithOption($productOption, $productOptionValue);
@@ -381,11 +405,29 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^I should see "([^"]+)" with unit price ("[^"]+") in my cart$/
+     * @Then /^I should see(?:| also) "([^"]+)" with unit price ("[^"]+") in my cart$/
+     * @Then /^I should see(?:| also) "([^"]+)" with discounted unit price ("[^"]+") in my cart$/
      */
-    public function iShouldSeeProductWithUnitPriceInMyCart($productName, $unitPrice)
+    public function iShouldSeeProductWithUnitPriceInMyCart($productName, $unitPrice): void
     {
         Assert::same($this->summaryPage->getItemUnitPrice($productName), $unitPrice);
+    }
+
+    /**
+     * @Then /^I should see "([^"]+)" with original price ("[^"]+") in my cart$/
+     */
+    public function iShouldSeeWithOriginalPriceInMyCart(string $productName, int $originalPrice): void
+    {
+        Assert::same($this->summaryPage->getItemUnitRegularPrice($productName), $originalPrice);
+    }
+
+    /**
+     * @Then /^I should see "([^"]+)" only with unit price ("[^"]+") in my cart$/
+     */
+    public function iShouldSeeOnlyWithUnitPriceInMyCart(string $productName, int $unitPrice): void
+    {
+        $this->iShouldSeeProductWithUnitPriceInMyCart($productName, $unitPrice);
+        Assert::false($this->summaryPage->hasOriginalPrice($productName));
     }
 
     /**

@@ -20,9 +20,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class StripeGatewayConfigurationType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

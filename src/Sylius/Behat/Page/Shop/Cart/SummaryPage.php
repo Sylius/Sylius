@@ -82,6 +82,13 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return $shippingTotalElement->getText();
     }
 
+    public function getItemsTotal(): string
+    {
+        $itemsTotalElement = $this->getElement('items_total');
+
+        return $itemsTotalElement->getText();
+    }
+
     public function getItemTotal(string $productName): string
     {
         $itemTotalElement = $this->getElement('product_total', ['%name%' => $productName]);
@@ -101,6 +108,11 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         $unitPrice = $this->getElement('product_unit_price', ['%name%' => $productName]);
 
         return $this->getPriceFromString(trim($unitPrice->getText()));
+    }
+
+    public function hasOriginalPrice(string $productName): bool
+    {
+        return $this->hasElement('product_unit_regular_price', ['%name%' => $productName]);
     }
 
     public function getItemImage(int $itemNumber): string
@@ -236,6 +248,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'grand_total' => '[data-test-cart-grand-total]',
             'item_image' => '[data-test-cart-item="%number%"] [data-test-main-image]',
             'item_quantity_input' => '[data-test-cart-item-quantity-input="%name%"]',
+            'items_total' => '[data-test-cart-items-total]',
             'no_taxes' => '[data-test-cart-no-tax]',
             'product_row' => '[data-test-cart-product-row="%name%"]',
             'product_total' => '[data-test-cart-product-row="%name%"] [data-test-cart-product-subtotal]',

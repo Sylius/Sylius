@@ -1,0 +1,30 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        api_checkout_inventory:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+                    
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.payment
+                - sylius.behat.context.setup.shop_api_security
+
+                - sylius.behat.context.transform.address
+                - sylius.behat.context.transform.cart
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.order
+                - sylius.behat.context.transform.payment
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.shipping_method
+                    
+                - sylius.behat.context.api.shop.cart
+                - sylius.behat.context.api.shop.checkout
+
+            filters:
+                tags: "@checkout_inventory&&@api"

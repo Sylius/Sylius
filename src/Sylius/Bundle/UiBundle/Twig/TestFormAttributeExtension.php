@@ -18,8 +18,7 @@ use Twig\TwigFunction;
 
 final class TestFormAttributeExtension extends AbstractExtension
 {
-    /** @var string */
-    private $environment;
+    private string $environment;
 
     public function __construct(string $environment)
     {

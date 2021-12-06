@@ -9,6 +9,8 @@ sylius:
             title: عنوان
         cart:
             coupon: کد تخفیف
+        catalog_promotion:
+            channels: کانال های فروش
         checkout:
             addressing:
                 different_billing_address: آدرس گیرنده با خریدار متفاوت است؟
@@ -32,6 +34,7 @@ sylius:
                 postcode: کد پستی
                 street: خیابان
             contact_email: ایمیل مخاطب
+            countries: كشور‌ها
             currencies: واحدهای پول
             currency_base: ارز پایه
             account_verification_required: تأیید صحت حساب، ضروری است؟
@@ -100,7 +103,6 @@ sylius:
             file: انتخاب تصویر
         user:
             billing_address: مشخصات پرداخت کننده
-            different_billing_address: آدرس گیرنده با خریدار متفاوت است؟
             enabled: فعال
             first_name: نام
             groups: گروه‌ها

@@ -42,9 +42,6 @@ sylius:
         product_eligibility: 'Produkt o nazwie %productName% został dezaktywowany.'
         shipping_method_eligibility: 'Wybrany produkt nie może być użyty z metodą wysyłki o nazwie %shippingMethodName%. Wybierz ponownie metodę wysyłki.'
     locale:
-        code:
-            not_blank: Proszę podać kod ISO języka.
-            unique: Ten język jest już skonfigurowany.
         enabled:
             cannot_disable_base: Nie można wyłączyć podstawowych ustawień regionalnych.
     product:
@@ -80,6 +77,9 @@ sylius:
     product_translation:
         short_description:
             max: Krótki opis nie może być dłuższy niż {{ limit }} znaków.
+    review:
+        author:
+            not_blank: Proszę podać swój e-mail.
     taxon_image:
         file:
             max_size: Wybrane zdjęcie jest za duże - {{ size }}{{ suffix }}. Maksymalny dozwolony rozmiar to {{ limit }}{{ suffix }}.

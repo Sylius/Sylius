@@ -21,9 +21,6 @@ use Webmozart\Assert\Assert;
 
 class DifferentSourceTargetCurrencyValidator extends ConstraintValidator
 {
-    /**
-     * {@inheritdoc}
-     */
     public function validate($value, Constraint $constraint)
     {
         /** @var DifferentSourceTargetCurrency $constraint */

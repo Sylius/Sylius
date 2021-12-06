@@ -1,0 +1,69 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        catalog_promotion:
+            description: Lýsing
+            name: Nafn
+            priority: Forgangur
+        promotion:
+            actions: Aðgerðir
+            add_action: Skrá aðgerð
+            add_rule: Skrá reglu
+            coupon_based: Byggt á afsláttarkóðum
+            description: Lýsing
+            ends_at: Lokadagsetning
+            exclusive: Gildir ekki með öðrum tilboðum
+            name: Nafn
+            priority: Forgangur
+            rules: Reglur
+            starts_at: Upphafsdagsetning
+            usage_limit: Notkunartakmörkun
+        promotion_action:
+            item_fixed_discount: Afsláttur af vöru, föst upphæð
+            item_percentage_discount: Afsláttur af vöru, prósenta
+            order_fixed_discount: Afsláttur af pöntun, föst upphæð
+            order_percentage_discount: Afsláttur af pöntun, prósenta
+            shipping_percentage_discount: Afsláttur af sendingarkostnaði, prósenta
+            fixed_discount_configuration:
+                amount: Upphæð
+            percentage_discount_configuration:
+                percentage: Prósenta
+            type: Tegund
+        promotion_coupon:
+            expires_at: Rennur út
+            usage_limit: Notkunartakmörkun
+        promotion_coupon_generator_instruction:
+            amount: Upphæð
+            code_length: Lengd kóða
+            expires_at: Rennur út
+            usage_limit: Notkunartakmörkun
+        promotion_filter:
+            price_range: Sía eftir verði
+        promotion_rule:
+            cart_quantity: Magn í körfu
+            contains_product: Inniheldur vöru
+            customer_group: Viðskiptavinahópur
+            has_at_least_one_from_taxons: Er í a.m.k. einum af eftirfarandi vöruflokkum
+            item_total: Samtals
+            nth_order: Pöntun númer
+            shipping_country: Land sem sent er til
+            taxonomy: Flokkunarkerfi
+            total_price_of_items_from_taxon: Verslað fyrir upphæð í vöruflokki
+            cart_quantity_configuration:
+                count: Fjöldi
+                equal: Jafnt og
+            contains_product_configuration:
+                exclude: Sleppa
+                variants: Vörur
+            item_total_configuration:
+                amount: Upphæð
+            nth_order_configuration:
+                nth: Númer
+            shipping_country_configuration:
+                country: Land
+            taxonomy_configuration:
+                exclude: Sleppa
+                taxons: Vöruflokkar
+            type: Tegund

@@ -26,11 +26,9 @@ use Webmozart\Assert\Assert;
 
 final class BuildAttributesFormSubscriber implements EventSubscriberInterface
 {
-    /** @var FactoryInterface */
-    private $attributeValueFactory;
+    private FactoryInterface $attributeValueFactory;
 
-    /** @var TranslationLocaleProviderInterface */
-    private $localeProvider;
+    private TranslationLocaleProviderInterface $localeProvider;
 
     public function __construct(
         FactoryInterface $attributeValueFactory,
@@ -40,9 +38,6 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
         $this->localeProvider = $localeProvider;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -69,6 +64,7 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
             }
         );
 
+        /** @var ProductAttributeValueInterface $attribute */
         foreach ($attributes as $attribute) {
             $this->resolveLocalizedAttributes($product, $attribute);
         }

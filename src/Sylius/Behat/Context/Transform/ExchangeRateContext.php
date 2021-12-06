@@ -22,14 +22,11 @@ use Webmozart\Assert\Assert;
 
 final class ExchangeRateContext implements Context
 {
-    /** @var CurrencyNameConverterInterface */
-    private $currencyNameConverter;
+    private CurrencyNameConverterInterface $currencyNameConverter;
 
-    /** @var RepositoryInterface */
-    private $currencyRepository;
+    private RepositoryInterface $currencyRepository;
 
-    /** @var ExchangeRateRepositoryInterface */
-    private $exchangeRateRepository;
+    private ExchangeRateRepositoryInterface $exchangeRateRepository;
 
     public function __construct(
         CurrencyNameConverterInterface $currencyNameConverter,
@@ -51,7 +48,7 @@ final class ExchangeRateContext implements Context
         $sourceCurrencyCode = $this->currencyNameConverter->convertToCode($sourceCurrencyName);
         $targetCurrencyCode = $this->currencyNameConverter->convertToCode($targetCurrencyName);
 
-        /** @var ExchangeRateInterface|null */
+        /** @var ExchangeRateInterface|null $exchangeRate */
         $exchangeRate = $this
             ->exchangeRateRepository
             ->findOneWithCurrencyPair($sourceCurrencyCode, $targetCurrencyCode)

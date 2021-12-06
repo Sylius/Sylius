@@ -15,7 +15,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\NodeElement;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -28,26 +28,19 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class TaxonomyContext implements Context
 {
-    /** @var RepositoryInterface */
-    private $taxonRepository;
+    private RepositoryInterface $taxonRepository;
 
-    /** @var FactoryInterface */
-    private $taxonFactory;
+    private FactoryInterface $taxonFactory;
 
-    /** @var FactoryInterface */
-    private $taxonTranslationFactory;
+    private FactoryInterface $taxonTranslationFactory;
 
-    /** @var FactoryInterface */
-    private $taxonImageFactory;
+    private FactoryInterface $taxonImageFactory;
 
-    /** @var ObjectManager */
-    private $objectManager;
+    private ObjectManager $objectManager;
 
-    /** @var ImageUploaderInterface */
-    private $imageUploader;
+    private ImageUploaderInterface $imageUploader;
 
-    /** @var TaxonSlugGeneratorInterface */
-    private $taxonSlugGenerator;
+    private TaxonSlugGeneratorInterface $taxonSlugGenerator;
 
     /** @var array */
     private $minkParameters;
@@ -127,15 +120,38 @@ final class TaxonomyContext implements Context
     }
 
     /**
+     * @Given /^the ("[^"]+" taxon) has child taxon "([^"]+)"$/
      * @Given /^the ("[^"]+" taxon) has children taxon "([^"]+)" and "([^"]+)"$/
      * @Given /^the ("[^"]+" taxon) has children taxons "([^"]+)" and "([^"]+)"$/
+     * @Given /^the ("[^"]+" taxon) has children taxons "([^"]+)", "([^"]+)" and "([^"]+)"$/
      */
-    public function theTaxonHasChildrenTaxonAnd(TaxonInterface $taxon, $firstTaxonName, $secondTaxonName)
+    public function theTaxonHasChildrenTaxonAnd(TaxonInterface $taxon, string ...$taxonsNames): void
     {
-        $taxon->addChild($this->createTaxon($firstTaxonName));
-        $taxon->addChild($this->createTaxon($secondTaxonName));
+        foreach ($taxonsNames as $taxonName) {
+            $taxon->addChild($this->createTaxon($taxonName));
+        }
 
         $this->objectManager->persist($taxon);
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the ("[^"]+" taxon)(?:| also) is enabled/
+     */
+    public function theTaxonIsEnabled(TaxonInterface $taxon): void
+    {
+        $taxon->setEnabled(true);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the ("[^"]+" taxon)(?:| also) is disabled$/
+     */
+    public function theTaxonIsDisabled(TaxonInterface $taxon): void
+    {
+        $taxon->setEnabled(false);
+
         $this->objectManager->flush();
     }
 

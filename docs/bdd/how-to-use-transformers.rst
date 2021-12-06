@@ -65,7 +65,7 @@ used in the same step definition. Is it all? No! The following example will also
         // some logic here
     }
 
-It is worth to mention, that in such a case, transformer would be matched depending on a name after ':' sign. So many transformes could be used when using this signature also.
+It is worth to mention, that in such a case, transformer would be matched depending on a name after ':' sign. So many transformers could be used when using this signature also.
 This style gives an opportunity to write simple steps with transformers, without any regex, which would boost context readability.
 
 .. note::

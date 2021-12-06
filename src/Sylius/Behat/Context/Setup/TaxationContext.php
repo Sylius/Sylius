@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -27,23 +27,17 @@ use Webmozart\Assert\Assert;
 
 final class TaxationContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var FactoryInterface */
-    private $taxRateFactory;
+    private FactoryInterface $taxRateFactory;
 
-    /** @var FactoryInterface */
-    private $taxCategoryFactory;
+    private FactoryInterface $taxCategoryFactory;
 
-    /** @var RepositoryInterface */
-    private $taxRateRepository;
+    private RepositoryInterface $taxRateRepository;
 
-    /** @var TaxCategoryRepositoryInterface */
-    private $taxCategoryRepository;
+    private TaxCategoryRepositoryInterface $taxCategoryRepository;
 
-    /** @var ObjectManager */
-    private $objectManager;
+    private ObjectManager $objectManager;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,

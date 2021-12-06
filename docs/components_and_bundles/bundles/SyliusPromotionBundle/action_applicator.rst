@@ -27,7 +27,7 @@ As ``SyliusPromotionBundle`` is totally independent, it does not provide actions
 
     ``Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand`` from ``Sylius/Sylius-Standard`` is an example of action for a discount based on percentage. The related service is called  ``sylius.promotion_action.percentage_discount``.
 
-Learn more about actions in the :doc:`promotions concept documentation </book/orders/promotions>` and in the :doc:`Cookbook </cookbook/index>`.
+Learn more about actions in the :doc:`cart promotions concept documentation </book/orders/cart-promotions>` and in the :doc:`Cookbook </cookbook/index>`.
 
 Applying actions to promotions
 ------------------------------

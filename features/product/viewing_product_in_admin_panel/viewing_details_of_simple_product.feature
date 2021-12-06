@@ -16,6 +16,7 @@ Feature: Viewing details of a simple product
         When I access "Iron shield" product page
         Then I should see product show page without variants
         And I should see product name "Iron shield"
+        And I should see product breadcrumb "Iron shield"
 
     @ui
     Scenario: Viewing pricing block
@@ -23,6 +24,14 @@ Feature: Viewing details of a simple product
         When I access "Iron Shield" product page
         Then I should see price "$20.00" for channel "United States"
         And I should see original price "$25.00" for channel "United States"
+
+    @ui
+    Scenario: Viewing price block without channel enable
+        Given this product is unavailable in "United States" channel
+        When I access "Iron shield" product page
+        Then I should see product name "Iron shield"
+        And I should see the product in neither channel
+        And I should not see price for channel "United States"
 
     @ui
     Scenario: Viewing details block

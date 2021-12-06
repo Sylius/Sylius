@@ -17,7 +17,3 @@ sylius:
     payum_gateway_factory:
         offline: Offline
         paypal_express_checkout: PayPal Express Checkout
-        stripe_checkout: Checkout Stripe
-    payum_action:
-        payment:
-            description: Il pagamento contiene %items% elemento per un totale di %total% | Il pagamento contiene %items% articoli per un totale di %total%

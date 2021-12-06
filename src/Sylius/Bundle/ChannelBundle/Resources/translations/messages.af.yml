@@ -4,4 +4,6 @@
 sylius:
     form:
         channel:
+            description: Beskrywing
+            enabled: Aktief
             name: Naam

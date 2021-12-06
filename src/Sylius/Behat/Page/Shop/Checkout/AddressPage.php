@@ -16,7 +16,9 @@ namespace Sylius\Behat\Page\Shop\Checkout;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\Mink\Session;
+use DMore\ChromeDriver\ChromeDriver;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\JQueryHelper;
 use Sylius\Component\Core\Factory\AddressFactoryInterface;
@@ -30,8 +32,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     public const TYPE_SHIPPING = 'shipping';
 
-    /** @var AddressFactoryInterface */
-    private $addressFactory;
+    private AddressFactoryInterface $addressFactory;
 
     public function __construct(
         Session $session,
@@ -52,7 +53,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     public function chooseDifferentShippingAddress(): void
     {
         $driver = $this->getDriver();
-        if ($driver instanceof Selenium2Driver) {
+        if ($driver instanceof Selenium2Driver || $driver instanceof ChromeDriver) {
             $this->getElement('different_shipping_address_label')->click();
 
             return;
@@ -65,6 +66,21 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         );
 
         $billingAddressSwitch->check();
+    }
+
+    public function isDifferentShippingAddressChecked(): bool
+    {
+        return $this->getElement('different_shipping_address')->isChecked();
+    }
+
+    public function isShippingAddressVisible(): bool
+    {
+        try {
+            return $this->getElement('shipping_address')->isVisible();
+        } catch (UnsupportedDriverActionException $e) {
+            // it's visible by default and is being hidden with JS
+            return true;
+        }
     }
 
     public function checkInvalidCredentialsValidation(): bool
@@ -201,6 +217,11 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         return $this->waitForElement(5, 'shipping_province');
     }
 
+    public function hasEmailInput(): bool
+    {
+        return $this->hasElement('customer_email');
+    }
+
     public function hasBillingAddressInput(): bool
     {
         return $this->waitForElement(5, 'billing_province');
@@ -284,6 +305,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'login_password' => '[data-test-password-input]',
             'login_validation_error' => '[data-test-login-validation-error]',
             'next_step' => '[data-test-next-step]',
+            'shipping_address' => '[data-test-shipping-address]',
             'shipping_address_book' => '[data-test-shipping-address] [data-test-address-book]',
             'shipping_city' => '[data-test-shipping-city]',
             'shipping_country' => '[data-test-shipping-country]',

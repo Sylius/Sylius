@@ -11,6 +11,11 @@ sylius:
             not_blank: Inserisci il codice di attributo.
             regex: L'attributo del codice può essere composto solo da lettere, numeri, trattini e underscore.
             unique: Questo codice è già in uso.
+        configuration:
+            max_entries: Il valore massimo delle voci di configurazione deve essere maggiore o uguale al valore minimo delle voci.
+            max_length: La lunghezza massima della configurazione deve essere maggiore o uguale alla lunghezza minima
+            min_entries: Il valore massimo delle voci di configurazione deve essere maggiore o uguale al valore minimo delle voci.
+            multiple: Configurazione multipla deve essere abilitata se sono stati specificati valori di min o max.
         presentation:
             not_blank: Si prega di inserire un attributo di presentazione.
             min_length: L' Attributo di presentazione deve essere lungo almeno 1 carattere.|Attributo di presentazione deve essere lungo almeno {{ limit }} caratteri.

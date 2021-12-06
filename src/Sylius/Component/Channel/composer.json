@@ -2,55 +2,64 @@
     "name": "sylius/channel",
     "type": "library",
     "description": "E-Commerce PHP component for managing different sales channels.",
-    "keywords": ["channel", "multichannel", "multistore", "stores", "ecommerce", "sylius"],
-    "homepage": "http://sylius.com",
+    "keywords": [
+        "channel",
+        "multichannel",
+        "multistore",
+        "stores",
+        "ecommerce",
+        "sylius"
+    ],
+    "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "homepage": "http://pjedrzejewski.com"
+            "homepage": "https://pjedrzejewski.com"
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.com"
+            "homepage": "https://sylius.com"
         },
         {
             "name": "Community contributions",
-            "homepage": "http://github.com/Sylius/Sylius/contributors"
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": "^7.3",
-
-        "sylius/resource": "^1.2",
-        "symfony/form": "^4.4",
-        "symfony/http-foundation": "^4.4",
-        "zendframework/zend-stdlib": "^3.1"
+        "php": "^8.0",
+        "sylius/resource": "^1.7",
+        "symfony/form": "^4.4 || ^5.4",
+        "symfony/http-foundation": "^4.4 || ^5.4",
+        "laminas/laminas-stdlib": "^3.2"
     },
     "require-dev": {
-        "pamil/prophecy-common": "^0.1",
-        "phpspec/phpspec": "^5.0"
+        "phpspec/phpspec": "^7.0"
     },
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.9-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Component\\Channel\\": "" }
+        "psr-4": {
+            "Sylius\\Component\\Channel\\": ""
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Component\\Channel\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Component\\Channel\\spec\\": "spec/"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

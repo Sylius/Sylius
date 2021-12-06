@@ -4,7 +4,7 @@
 sylius:
     form:
         user:
-            email: דואר אלקטרוני
+            email: דוא"ל
             enabled: הופעל
             password:
                 label: סיסמה
@@ -19,5 +19,5 @@ sylius:
             current: סיסמה נוכחית
             new: סיסמה חדשה
         user_reset_password:
-            confirmation: אישור
+            confirmation: אימות
             new: סיסמה חדשה

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\OAuth;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
@@ -35,23 +35,17 @@ use Webmozart\Assert\Assert;
  */
 class UserProvider extends BaseUserProvider implements AccountConnectorInterface, OAuthAwareUserProviderInterface
 {
-    /** @var FactoryInterface */
-    private $oauthFactory;
+    private FactoryInterface $oauthFactory;
 
-    /** @var RepositoryInterface */
-    private $oauthRepository;
+    private RepositoryInterface $oauthRepository;
 
-    /** @var FactoryInterface */
-    private $customerFactory;
+    private FactoryInterface $customerFactory;
 
-    /** @var FactoryInterface */
-    private $userFactory;
+    private FactoryInterface $userFactory;
 
-    /** @var ObjectManager */
-    private $userManager;
+    private ObjectManager $userManager;
 
-    /** @var CustomerRepositoryInterface */
-    private $customerRepository;
+    private CustomerRepositoryInterface $customerRepository;
 
     public function __construct(
         string $supportedUserClass,
@@ -74,9 +68,6 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         $this->customerRepository = $customerRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface
     {
         $oauth = $this->oauthRepository->findOneBy([
@@ -100,9 +91,6 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         throw new UsernameNotFoundException('Email is null or not provided');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function connect(UserInterface $user, UserResponseInterface $response): void
     {
         $this->updateUserByOAuthUserResponse($user, $response);

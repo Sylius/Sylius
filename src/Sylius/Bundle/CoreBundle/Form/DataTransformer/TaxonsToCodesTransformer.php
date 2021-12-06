@@ -22,8 +22,7 @@ use Webmozart\Assert\Assert;
 
 final class TaxonsToCodesTransformer implements DataTransformerInterface
 {
-    /** @var TaxonRepositoryInterface */
-    private $taxonRepository;
+    private TaxonRepositoryInterface $taxonRepository;
 
     public function __construct(TaxonRepositoryInterface $taxonRepository)
     {
@@ -31,8 +30,6 @@ final class TaxonsToCodesTransformer implements DataTransformerInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function transform($value): Collection
@@ -47,8 +44,6 @@ final class TaxonsToCodesTransformer implements DataTransformerInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function reverseTransform($taxons): array

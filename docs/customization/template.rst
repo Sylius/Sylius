@@ -54,7 +54,7 @@ In order to override it you need to create your own: ``templates/bundles/SyliusS
 
 Copy the contents of the original template to make your work easier. And then modify it to your needs.
 
-.. code-block:: php
+.. code-block:: twig
 
     {% extends '@SyliusShop/layout.html.twig' %}
 
@@ -99,7 +99,7 @@ In order to override it you need to create your own: ``templates/bundles/SyliusA
 
 Copy the contents of the original template to make your work easier. And then modify it to your needs.
 
-.. code-block:: php
+.. code-block:: twig
 
     <div class="ui segment">
         {{ form_errors(form) }}
@@ -200,7 +200,7 @@ How to use themes for customizations?
 
 You can refer to the theme documentation available here:
 - :doc:`Themes (The book) </book/themes/themes>`
-- :doc:`SyliusThemeBundle (Bundle documentation) </components_and_bundles/bundles/SyliusThemeBundle/index>`
+- `SyliusThemeBundle (Bundle documentation) <https://github.com/Sylius/SyliusThemeBundle/blob/master/docs/index.md>`_
 
 Global Twig variables
 ---------------------
@@ -236,4 +236,4 @@ You can check for example what is the current channel by dumping the ``sylius.ch
 
 That's it, this will dump the content of the current Channel object.
 
-.. include:: /customization/plugins.rst.inc
+.. include:: /customization/plugins.rst

@@ -2,13 +2,16 @@
     "name": "sylius/customer",
     "type": "library",
     "description": "Customer handling for PHP applications.",
-    "keywords": ["customer", "groups"],
-    "homepage": "http://sylius.com",
+    "keywords": [
+        "customer",
+        "groups"
+    ],
+    "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "homepage": "http://pjedrzejewski.com"
+            "homepage": "https://pjedrzejewski.com"
         },
         {
             "name": "Michał Marcinkowski",
@@ -20,42 +23,45 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.com"
+            "homepage": "https://sylius.com"
         },
         {
             "name": "Community contributions",
-            "homepage": "http://github.com/Sylius/Sylius/contributors"
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": "^7.3",
-
-        "doctrine/collections": "^1.3",
+        "php": "^8.0",
+        "doctrine/collections": "^1.6",
         "sylius/resource": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^5.0"
+        "phpspec/phpspec": "^7.0"
     },
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.9-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Component\\Customer\\": "" }
+        "psr-4": {
+            "Sylius\\Component\\Customer\\": ""
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Component\\Customer\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Component\\Customer\\spec\\": "spec/"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

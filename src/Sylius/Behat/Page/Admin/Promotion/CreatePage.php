@@ -113,6 +113,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getDocument()->checkField('Exclusive');
     }
 
+    public function makeNotAppliesToDiscountedItem(): void
+    {
+        $this->getDocument()->unCheckField('Applies to already discounted order items');
+    }
+
     public function checkCouponBased(): void
     {
         $this->getDocument()->checkField('Coupon based');

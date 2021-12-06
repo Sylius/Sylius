@@ -2,6 +2,8 @@
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
+{% block title %}{{ 'sylius.ui.address'|trans }} | {{ parent() }}{% endblock %}
+
 {% block content %}
     {{ sylius_template_event(['sylius.shop.checkout.address.steps', 'sylius.shop.checkout.steps'], _context) }}
 

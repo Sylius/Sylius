@@ -18,8 +18,7 @@ sylius:
             not_blank: Vă rugăm să completați numele promoţiei.
     promotion_action:
         percentage_discount_configuration:
-            min: Valoarea discount-ului procentual trebuie să fie de cel puțin 0%.
-            max: Valoarea maximă a discount-ului procentual este de 100%.
+            not_in_range: Reducerea procentuală trebuie să fie între 0% şi 100%.
     promotion_coupon:
         code:
             max_length: Codul promoţional nu poate depăși un caracter.|Codul promoţional nu poate depăși {{ limit }} de caractere.
@@ -38,6 +37,6 @@ sylius:
             min: Codul cuponului trebuie să conțină cel puţin {{ limit }} caractere.
             max: Codul cuponului nu poate depăși {{ limit }} de caractere.
             not_blank: Vă rugăm să introduceţi lungimea codului promoţional.
-        possible_generation_amount: Valorile "Lungimea codului cuponului" sau "numărul de cupoane" sunt invalide. Nu putem genera %expectedAmount% cupoane unice cu lungimea codului egală cu %codeLength%. Putem genera maxim %possibleAmount%.
+        possible_generation_amount: Valoare gresita pentru lungime sau valoare cod cupoane. Nu putem genera cupoane unice in valoare de %expectedAmount% avand lungime cod cupon %codeLength%. Putem genera cupoane de maxim %possibleAmount%.
         usage_limit:
             min: Limita de utilizare a codurilor promoționale generate trebuie să fie de cel puţin {{ limit }}.

@@ -9,6 +9,7 @@ sylius:
         slug:
             not_blank: Lütfen ürün bilgisi girin.
             unique: Ürün kütle birimi benzersiz olmalıdır.
+            max_length: Ürün indirimi 1 karakterden uzun olmamalıdır.|Ürün indirimi {{ limit }} karakterinden uzun olmamalıdır.
         code:
             not_blank: Lütfen ürün kodunu giriniz.
             regex: Ürün kodu sadece harflerden, numaralardan, tirelerden ve alt çizgilerden oluşabilir.

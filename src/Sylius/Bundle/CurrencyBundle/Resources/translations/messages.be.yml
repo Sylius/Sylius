@@ -6,5 +6,5 @@ sylius:
         currency:
             base: Базавая валюта
             code: Назва
-            enabled: Уключана
+            enabled: Уключаны
             exchange_rate: Абменны курс

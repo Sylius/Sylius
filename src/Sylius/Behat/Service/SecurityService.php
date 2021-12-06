@@ -22,17 +22,13 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class SecurityService implements SecurityServiceInterface
 {
-    /** @var SessionInterface */
-    private $session;
+    private SessionInterface $session;
 
-    /** @var CookieSetterInterface */
-    private $cookieSetter;
+    private CookieSetterInterface $cookieSetter;
 
-    /** @var string */
-    private $sessionTokenVariable;
+    private string $sessionTokenVariable;
 
-    /** @var string */
-    private $firewallContextName;
+    private string $firewallContextName;
 
     /**
      * @param string $firewallContextName
@@ -47,7 +43,13 @@ final class SecurityService implements SecurityServiceInterface
 
     public function logIn(UserInterface $user): void
     {
-        $token = new UsernamePasswordToken($user, $user->getPassword(), $this->firewallContextName, $user->getRoles());
+        /** @deprecated parameter credential was deprecated in Symfony 5.4, so in Sylius 1.11 too, in Sylius 2.0 providing 4 arguments will be prohibited. */
+        if (3 === (new \ReflectionClass(UsernamePasswordToken::class))->getConstructor()->getNumberOfParameters()) {
+            $token = new UsernamePasswordToken($user, $this->firewallContextName, $user->getRoles());
+        } else {
+            $token = new UsernamePasswordToken($user, $user->getPassword(), $this->firewallContextName, $user->getRoles());
+        }
+
         $this->setToken($token);
     }
 

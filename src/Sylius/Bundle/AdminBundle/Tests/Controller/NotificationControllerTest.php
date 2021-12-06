@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Tests\Controller;
 
+use Prophecy\Prophecy\ObjectProphecy;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use Http\Message\MessageFactory;
@@ -28,17 +29,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class NotificationControllerTest extends TestCase
 {
-    /** @var ProphecyInterface|ClientInterface */
-    private $client;
+    private ObjectProphecy $client;
 
-    /** @var ProphecyInterface|MessageFactory */
-    private $messageFactory;
+    private ObjectProphecy $messageFactory;
 
-    /** @var NotificationController */
-    private $controller;
+    private NotificationController $controller;
 
-    /** @var string */
-    private static $hubUri = 'www.doesnotexist.test.com';
+    private static string $hubUri = 'www.doesnotexist.test.com';
 
     /**
      * @test
@@ -84,9 +81,6 @@ final class NotificationControllerTest extends TestCase
         $this->assertEquals($content, $response->getContent());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp(): void
     {
         $this->client = $this->prophesize(ClientInterface::class);

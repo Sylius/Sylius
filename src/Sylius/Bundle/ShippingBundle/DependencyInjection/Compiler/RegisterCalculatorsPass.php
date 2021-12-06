@@ -19,9 +19,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class RegisterCalculatorsPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('sylius.registry.shipping_calculator') || !$container->hasDefinition('sylius.form_registry.shipping_calculator')) {
@@ -33,17 +30,19 @@ final class RegisterCalculatorsPass implements CompilerPassInterface
         $calculators = [];
 
         foreach ($container->findTaggedServiceIds('sylius.shipping_calculator') as $id => $attributes) {
-            if (!isset($attributes[0]['calculator'], $attributes[0]['label'])) {
-                throw new \InvalidArgumentException('Tagged shipping calculators needs to have `calculator` and `label` attributes.');
-            }
+            foreach ($attributes as $attribute) {
+                if (!isset($attribute['calculator'], $attribute['label'])) {
+                    throw new \InvalidArgumentException('Tagged shipping calculators needs to have `calculator` and `label` attributes.');
+                }
 
-            $name = $attributes[0]['calculator'];
-            $calculators[$name] = $attributes[0]['label'];
+                $name = $attribute['calculator'];
+                $calculators[$name] = $attribute['label'];
 
-            $registry->addMethodCall('register', [$name, new Reference($id)]);
+                $registry->addMethodCall('register', [$name, new Reference($id)]);
 
-            if (isset($attributes[0]['form_type'])) {
-                $formTypeRegistry->addMethodCall('add', [$name, 'default', $attributes[0]['form_type']]);
+                if (isset($attribute['form_type'])) {
+                    $formTypeRegistry->addMethodCall('add', [$name, 'default', $attribute['form_type']]);
+                }
             }
         }
 

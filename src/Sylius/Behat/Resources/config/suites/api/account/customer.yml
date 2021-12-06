@@ -1,0 +1,45 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        api_customer_account:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.address
+                - sylius.behat.context.transform.channel
+                - sylius.behat.context.transform.country
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.order
+                - sylius.behat.context.transform.payment
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.shipping_method
+                - sylius.behat.context.transform.user
+                - sylius.behat.context.transform.zone
+
+                - sylius.behat.context.setup.cart
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.currency
+                - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.geographical
+                - sylius.behat.context.setup.order
+                - sylius.behat.context.setup.payment
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.shop_api_security
+                - sylius.behat.context.setup.user
+                - sylius.behat.context.setup.zone
+
+                - sylius.behat.context.api.shop.customer
+                - sylius.behat.context.api.shop.order
+                - sylius.behat.context.api.shop.order_item
+                - sylius.behat.context.api.shop.checkout
+                - sylius.behat.context.api.shop.login
+                - sylius.behat.context.api.shop.payment
+                - sylius.behat.context.api.shop.shipment
+
+            filters:
+                tags: "@customer_account&&@api"

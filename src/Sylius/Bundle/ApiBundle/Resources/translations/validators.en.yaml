@@ -1,0 +1,26 @@
+sylius:
+    account:
+        invalid_verification_token: 'There is no shop user with %verificationToken% email verification token.'
+        is_verified: 'Account with email %email% is currently verified.'
+    address:
+        without_country: 'The address without country cannot exist'
+    country:
+        not_exist: 'The country %countryCode% does not exist.'
+    order:
+        not_empty: 'An empty order cannot be completed.'
+    payment_method:
+        not_available: 'The payment method %name% is not available for this order. Please choose another one.'
+        not_exist: 'The payment method with %code% code does not exist.'
+    product:
+        not_exist: 'The product %productName% does not exist.'
+    product_variant:
+        not_exist: 'The product variant with %productVariantCode% does not exist.'
+        not_longer_available: 'The product variant with name %productVariantName% does not exist.'
+        not_sufficient: 'The product variant with %productVariantCode% code does not have sufficient stock.'
+        product_variant_with_name_not_sufficient: 'The product variant with %productVariantName% name does not have sufficient stock.'
+    shipment:
+        shipped: 'You cannot ship a shipment that was shipped before.'
+    shipping_method:
+        not_found: 'The shipping method with %code% code does not exist.'
+        not_available: 'The shipping method %name% is not available for this order. Please reselect your shipping method.'
+        shipping_address_not_found: 'Order should be addressed first.'

@@ -24,11 +24,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
-    /** @var TableAccessorInterface */
-    private $tableAccessor;
+    private TableAccessorInterface $tableAccessor;
 
-    /** @var MoneyFormatterInterface */
-    private $moneyFormatter;
+    private MoneyFormatterInterface $moneyFormatter;
 
     public function __construct(
         Session $session,
@@ -175,15 +173,34 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return trim(str_replace('Tax total:', '', $taxTotalElement->getText()));
     }
 
-    public function hasShippingCharge(string $shippingCharge): bool
+    public function hasShippingCharge(string $shippingCharge, string $shippingMethodName): bool
     {
-        $shippingChargesText = sprintf(
-            '%s %s',
-            substr($this->getElement('shipping_adjustment_name')->getText(), 0, -1),
-            $this->getElement('shipping_charges')->getText()
-        );
+        $shippingBaseValues = $this->getDocument()->findAll('css', '#shipping-base-value');
+        foreach ($shippingBaseValues as $shippingBaseValueElement) {
+            $shippingBaseValueWithLabel = $shippingBaseValueElement->getParent()->getText();
+            if (stripos($shippingBaseValueWithLabel, $shippingCharge) !== false &&
+                stripos($shippingBaseValueWithLabel, $shippingMethodName) !== false
+            ) {
+                return true;
+            }
+        }
 
-        return stripos($shippingChargesText, $shippingCharge) !== false;
+        return false;
+    }
+
+    public function hasShippingTax(string $shippingTax, string $shippingMethodName): bool
+    {
+        $shippingTaxes = $this->getDocument()->findAll('css', '#shipping-tax-value');
+        foreach ($shippingTaxes as $shippingTaxElement) {
+            $shippingTaxWithLabel = $shippingTaxElement->getParent()->getParent()->getText();
+            if (stripos($shippingTaxWithLabel, $shippingTax) !== false &&
+                stripos($shippingTaxWithLabel, $shippingMethodName) !== false
+            ) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function getOrderPromotionTotal(): string
@@ -405,6 +422,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'shipping_address' => '#shipping-address',
             'shipping_adjustment_name' => '#shipping-adjustment-label',
             'shipping_charges' => '#shipping-base-value',
+            'shipping_tax' => '#shipping-tax-value',
             'shipping_total' => '#shipping-total',
             'table' => '.table',
             'tax_total' => '#tax-total',

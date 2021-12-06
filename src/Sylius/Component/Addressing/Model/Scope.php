@@ -13,11 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Model;
 
-final class Scope
+interface Scope
 {
     public const ALL = 'all';
-
-    private function __construct()
-    {
-    }
 }

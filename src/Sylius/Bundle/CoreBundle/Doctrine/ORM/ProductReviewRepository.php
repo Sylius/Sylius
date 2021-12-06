@@ -21,9 +21,6 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 class ProductReviewRepository extends EntityRepository implements ProductReviewRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function findLatestByProductId($productId, int $count): array
     {
         return $this->createQueryBuilder('o')
@@ -38,9 +35,6 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findAcceptedByProductSlugAndChannel(string $slug, string $locale, ChannelInterface $channel): array
     {
         return $this->createQueryBuilder('o')
@@ -59,9 +53,6 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createQueryBuilderByProductCode(string $locale, string $productCode): QueryBuilder
     {
         return $this->createQueryBuilder('o')
@@ -74,9 +65,6 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findOneByIdAndProductCode($id, string $productCode): ?ReviewInterface
     {
         return $this->createQueryBuilder('o')

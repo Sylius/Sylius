@@ -9,6 +9,8 @@ sylius:
             title: Názov
         cart:
             coupon: Kupón
+        catalog_promotion:
+            channels: Kanály
         checkout:
             addressing:
                 different_billing_address: Použiť inú fakturačnú adresu?
@@ -23,14 +25,14 @@ sylius:
             per_customer_usage_limit: Limit pre použitie jedným zákazníkom
         group:
             name: Názov
-            roles: Role
+            roles: Rola
         channel:
             billing_data:
                 city: Mesto
                 company: Spoločnosť
                 country: Krajina
                 postcode: PSČ
-                street: Ulica
+                street: Adresa
             contact_email: Kontaktný e-mail
             countries: Krajiny
             currencies: Meny
@@ -104,7 +106,7 @@ sylius:
             enabled: Zapnuté
             first_name: Meno
             groups: Zákaznícke skupiny
-            roles: Role
+            roles: Rola
             last_name: Priezvisko
             password: Heslo
             shipping_address: Adresa doručenia

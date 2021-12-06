@@ -2,54 +2,65 @@
     "name": "sylius/admin-bundle",
     "type": "symfony-bundle",
     "description": "Sylius eCommerce administration panel component.",
-    "keywords": ["shop", "ecommerce", "store", "webshop", "sylius", "ui", "admin interface", "admin", "backend"],
-    "homepage": "http://sylius.com",
+    "keywords": [
+        "shop",
+        "ecommerce",
+        "store",
+        "webshop",
+        "sylius",
+        "ui",
+        "admin interface",
+        "admin",
+        "backend"
+    ],
+    "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "homepage": "http://pjedrzejewski.com"
+            "homepage": "https://pjedrzejewski.com"
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.com"
+            "homepage": "https://sylius.com"
         },
         {
             "name": "Community contributions",
-            "homepage": "http://github.com/Sylius/Sylius/contributors"
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": "^7.3",
-
-        "sylius/core-bundle": "^1.2",
-        "sylius/ui-bundle": "^1.2",
-        "symfony/framework-bundle": "^4.4",
+        "php": "^8.0",
+        "sylius/core-bundle": "^1.6",
+        "sylius/ui-bundle": "^1.6",
+        "symfony/framework-bundle": "^4.4 || ^5.4",
         "twig/intl-extra": "^2.12",
         "twig/twig": "^2.12"
     },
     "require-dev": {
-        "phpspec/phpspec": "^5.0",
-        "phpunit/phpunit": "^7.0",
-        "symfony/dependency-injection": "^4.4"
+        "phpspec/phpspec": "^7.0",
+        "phpunit/phpunit": "^8.5",
+        "symfony/dependency-injection": "^4.4 || ^5.4"
     },
     "config": {
         "bin-dir": "bin"
     },
-    "autoload": {
-        "psr-4": { "Sylius\\Bundle\\AdminBundle\\": "" }
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.9-dev"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Sylius\\Bundle\\AdminBundle\\": ""
+        }
+    },
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

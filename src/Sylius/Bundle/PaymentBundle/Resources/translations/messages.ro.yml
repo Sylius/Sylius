@@ -12,17 +12,17 @@ sylius:
             type: Tipul cardului
         payment:
             amount: Suma de plată
-            method: Modul de plată
+            method: Mod de plată
             state:
-                header: Status plată
-                checkout: Trimite comanda
-                completed: Finalizată
+                header: Statusul plății
+                checkout: Finalizare comandă
+                completed: Finalizat
                 authorized: Autorizată
                 failed: Eșuată
-                new: Nouă
+                new: Nou
                 pending: În așteptare
                 processing: În curs de procesare
-                unknown: Necunoscută
+                unknown: Necunoscut
                 void: Nulă
                 cancelled: Anulată
                 refunded: Rambursată
@@ -31,4 +31,4 @@ sylius:
             enabled: Activată?
             instructions: Instrucțiuni
             name: Nume produs
-            position: Poziţie
+            position: Poziție

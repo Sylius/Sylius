@@ -29,9 +29,13 @@ Sylius\Component\Attribute\Model\Attribute:
             groups: [Detailed]
         translations:
             expose: true
-            type: array
+            type: iterable
             groups: [Default, Detailed]
         configuration:
             expose: true
-            type: array
+            type: iterable
             groups: [Detailed]
+        translatable:
+            expose: true
+            type: boolean
+            groups: [Default, Detailed]

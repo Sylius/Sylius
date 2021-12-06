@@ -4,8 +4,8 @@ How to customize email templates per channel?
 .. note::
 
     This cookbook is suitable for a clean :doc:`sylius-standard installation </book/installation/installation>`.
-    For more general tips, while using :doc:`SyliusMailerBundle </components_and_bundles/bundles/SyliusMailerBundle/index>`
-    go to `Sending configurable e-mails in Symfony Blogpost <http://sylius.com/blog/sending-configurable-e-mails-in-symfony>`_.
+    For more general tips, while using `SyliusMailerBundle <https://github.com/Sylius/SyliusMailerBundle/blob/master/docs/index.md>`_
+    go to `Sending configurable e-mails in Symfony Blogpost <https://sylius.com/blog/sending-configurable-e-mails-in-symfony>`_.
 
 It is a common use-case to customize email templates depending on a channel in which an action was performed.
 

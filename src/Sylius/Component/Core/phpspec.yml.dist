@@ -3,3 +3,5 @@ suites:
         namespace: Sylius\Component\Core
         psr4_prefix: Sylius\Component\Core
         src_path: .
+
+runner.maintainers.errors.level: 14335 # E_ALL & ~E_USER_DEPRECATED ^ E_STRICT

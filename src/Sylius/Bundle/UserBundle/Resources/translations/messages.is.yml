@@ -1,0 +1,22 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        user:
+            email: Tölvupóstur
+            enabled: Virkt
+            password:
+                label: Lykilorð
+            remember_me: Muna eftir mér
+            shipping_address: Heimilisfang viðtakanda
+            username: Notandanafn
+        user_filter:
+            query: Leita
+        user_change_password:
+            confirmation: Staðfesting
+            current: Núverandi lykilorð
+            new: Nýtt lykilorð
+        user_reset_password:
+            confirmation: Staðfesting
+            new: Nýtt lykilorð

@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: L'immagine è troppo grande - {{ size }}{{ suffix }}. La dimensione massima consentita è {{ limit }}{{ suffix }}.
+            upload_ini_size: L'immagine è troppo grande. La dimensione massima consentita è {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: Inserisci la valuta di base del canale.
@@ -13,7 +17,6 @@ sylius:
             min: L'e-mail dovrebbe contenere almeno {{ limit }} caratteri.
     channel_pricing:
         price:
-            min: Il prezzo deve essere almeno {{ limit }}.
             not_blank: Inserisci il prezzo.
     checkout:
         shipping_method:
@@ -39,9 +42,6 @@ sylius:
         product_eligibility: 'Questo prodotto %productName% è stato disattivato.'
         shipping_method_eligibility: 'Il prodotto non risponde alle richieste di %shippingMethodName% metodo di spedizione. Riseleziona il tuo metodo di spedizione.'
     locale:
-        code:
-            not_blank: Per favore inserisci il CAP.
-            unique: Questo locale esiste già.
         enabled:
             cannot_disable_base: Le impostazioni locali di base non possono essere disattivate.
     product:
@@ -77,6 +77,9 @@ sylius:
     product_translation:
         short_description:
             max: La descrizione breve non deve superare i {{ limit }} caratteri.
+    review:
+        author:
+            not_blank: Inserisci la tua email.
     taxon_image:
         file:
             max_size: L'immagine è troppo grande - {{ size }}{{ suffix }}. La dimensione massima consentita è {{ limit }}{{ suffix }}.

@@ -38,7 +38,7 @@
         </service>
 
         <service id="sylius.context.channel.composite" class="Sylius\Component\Channel\Context\CompositeChannelContext" public="false" />
-        <service id="Sylius\Component\Channel\Context\ChannelContextInterface" alias="sylius.context.channel.composite" />
+        <service id="Sylius\Component\Channel\Context\ChannelContextInterface" alias="sylius.context.channel" />
 
         <service id="sylius.context.channel.request_based" class="Sylius\Component\Channel\Context\RequestBased\ChannelContext" public="false">
             <argument type="service" id="sylius.context.channel.request_based.resolver" />

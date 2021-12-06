@@ -1,0 +1,5 @@
+{% if attribute.attribute.configuration['format'] is defined %}
+    {{ attribute.value|format_datetime(attribute.attribute.configuration['format']) }}
+{% else %}
+    {{ attribute.value|format_datetime }}
+{% endif %}

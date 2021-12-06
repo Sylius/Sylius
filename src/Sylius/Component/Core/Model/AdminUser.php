@@ -17,16 +17,24 @@ use Sylius\Component\User\Model\User;
 
 class AdminUser extends User implements AdminUserInterface
 {
-    /** @var string */
+    /**
+     * @var string|null
+     */
     protected $firstName;
 
-    /** @var string */
+    /**
+     * @var string|null
+     */
     protected $lastName;
 
-    /** @var string */
+    /**
+     * @var string|null
+     */
     protected $localeCode;
 
-    /** @var ImageInterface */
+    /**
+     * @var ImageInterface|null
+     */
     protected $avatar;
 
     public function __construct()
@@ -36,49 +44,31 @@ class AdminUser extends User implements AdminUserInterface
         $this->roles = [AdminUserInterface::DEFAULT_ADMIN_ROLE];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setFirstName(?string $firstName): void
     {
         $this->firstName = $firstName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setLastName(?string $lastName): void
     {
         $this->lastName = $lastName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLocaleCode(): ?string
     {
         return $this->localeCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setLocaleCode(?string $code): void
     {
         $this->localeCode = $code;

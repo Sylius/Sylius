@@ -6,15 +6,16 @@ Feature: Accessing order right after completing checkout
 
     Background:
         Given the store operates on a single channel in "United States"
-        And there is a user "john@example.com" identified by "password123"
-        And the store allows paying "Cash on delivery"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
+        And the store allows paying "Cash on delivery"
         And the store ships everywhere for free
+        And there is a user "john@example.com"
         And I am logged in as "john@example.com"
 
-    @ui
+    @ui @api
     Scenario: Being able to access my order right after completing checkout
         Given I added product "PHP T-Shirt" to the cart
-        And I have proceeded selecting "Cash on delivery" payment method
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I proceeded with "Free" shipping method and "Cash on delivery" payment
         When I confirm my order
         Then I should be able to access this order's details

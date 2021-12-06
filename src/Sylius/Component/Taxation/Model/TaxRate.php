@@ -22,22 +22,34 @@ class TaxRate implements TaxRateInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
+    /**
+     * @var string|null
+     */
     protected $code;
 
-    /** @var TaxCategoryInterface */
+    /**
+     * @var TaxCategoryInterface|null
+     */
     protected $category;
 
-    /** @var string */
+    /**
+     * @var string|null
+     */
     protected $name;
 
-    /** @var float */
+    /**
+     * @var float|null
+     */
     protected $amount = 0.0;
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     protected $includedInPrice = false;
 
-    /** @var string */
+    /**
+     * @var string|null
+     */
     protected $calculator;
 
     public function __construct()
@@ -45,113 +57,72 @@ class TaxRate implements TaxRateInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCategory(): ?TaxCategoryInterface
     {
         return $this->category;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCategory(?TaxCategoryInterface $category): void
     {
         $this->category = $category;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** @psalm-suppress RedundantCastGivenDocblockType */
     public function getAmount(): float
     {
         return (float) $this->amount;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAmountAsPercentage(): float
     {
         return $this->amount * 100;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setAmount(?float $amount): void
     {
         $this->amount = $amount;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isIncludedInPrice(): bool
     {
         return $this->includedInPrice;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setIncludedInPrice(?bool $includedInPrice): void
     {
         $this->includedInPrice = $includedInPrice;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCalculator(): ?string
     {
         return $this->calculator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCalculator(?string $calculator): void
     {
         $this->calculator = $calculator;

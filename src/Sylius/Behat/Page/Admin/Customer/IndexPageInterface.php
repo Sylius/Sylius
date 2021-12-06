@@ -19,4 +19,6 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 interface IndexPageInterface extends BaseIndexPageInterface
 {
     public function getCustomerAccountStatus(CustomerInterface $customer): string;
+
+    public function isCustomerVerified(CustomerInterface $customer): bool;
 }

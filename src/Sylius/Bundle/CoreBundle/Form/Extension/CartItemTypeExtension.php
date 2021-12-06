@@ -31,9 +31,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class CartItemTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('quantity', IntegerType::class, [
@@ -58,8 +55,6 @@ final class CartItemTypeExtension extends AbstractTypeExtension
      * We need to override this method to allow setting 'product'
      * option, by default it will be null so we don't get the variant choice
      * when creating full cart form.
-     *
-     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
@@ -71,11 +66,13 @@ final class CartItemTypeExtension extends AbstractTypeExtension
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtendedType(): string
     {
         return CartItemType::class;
+    }
+
+    public static function getExtendedTypes(): iterable
+    {
+        return [CartItemType::class];
     }
 }

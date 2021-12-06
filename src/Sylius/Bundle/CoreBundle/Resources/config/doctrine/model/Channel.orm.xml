@@ -20,6 +20,7 @@
         <field name="themeName" column="theme_name" type="string" nullable="true" />
         <field name="taxCalculationStrategy" column="tax_calculation_strategy" type="string" />
         <field name="contactEmail" column="contact_email" type="string" nullable="true" />
+        <field name="contactPhoneNumber" column="contact_phone_number" type="string" nullable="true" />
         <field name="skippingShippingStepAllowed" column="skipping_shipping_step_allowed" type="boolean" />
         <field name="skippingPaymentStepAllowed" column="skipping_payment_step_allowed" type="boolean" />
         <field name="accountVerificationRequired" column="account_verification_required" type="boolean" />
@@ -67,7 +68,7 @@
             </join-table>
         </many-to-many>
 
-        <one-to-one field="shopBillingData" target-entity="Sylius\Component\Core\Model\ShopBillingData">
+        <one-to-one field="shopBillingData" target-entity="Sylius\Component\Core\Model\ShopBillingDataInterface">
             <join-column name="shop_billing_data_id" on-delete="CASCADE"/>
             <cascade>
                 <cascade-all />

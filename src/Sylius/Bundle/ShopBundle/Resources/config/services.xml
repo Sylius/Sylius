@@ -24,9 +24,13 @@
 
         <service id="sylius.handler.shop_user_logout" class="Sylius\Bundle\ShopBundle\EventListener\ShopUserLogoutHandler">
             <argument type="service" id="security.http_utils" />
-            <argument>/</argument>
+            <argument>sylius_shop_homepage</argument>
             <argument type="service" id="sylius.context.channel.composite" />
             <argument type="service" id="sylius.storage.cart_session" />
+        </service>
+
+        <service id="sylius.section_resolver.shop_uri_based_section_resolver" class="Sylius\Bundle\ShopBundle\SectionResolver\ShopUriBasedSectionResolver">
+            <tag name="sylius.uri_based_section_resolver" priority="-10" />
         </service>
 
         <service id="sylius.context.cart.session_and_channel_based" class="Sylius\Bundle\CoreBundle\Context\SessionAndChannelBasedCartContext">
@@ -46,5 +50,9 @@
         <service id="sylius.grid_filter.shop_string" class="Sylius\Component\Grid\Filter\StringFilter">
             <tag name="sylius.grid_filter" type="shop_string" form-type="Sylius\Bundle\GridBundle\Form\Type\Filter\StringFilterType" />
         </service>
+
+        <service id="sylius.calculator.order_items_subtotal" class="Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculator" />
+
+        <service id="Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculatorInterface" alias="sylius.calculator.order_items_subtotal" />
     </services>
 </container>

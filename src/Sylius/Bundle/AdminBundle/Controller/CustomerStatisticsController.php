@@ -20,22 +20,24 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Twig\Environment;
 
 final class CustomerStatisticsController
 {
-    /** @var CustomerStatisticsProviderInterface */
-    private $statisticsProvider;
+    private CustomerStatisticsProviderInterface $statisticsProvider;
 
-    /** @var RepositoryInterface */
-    private $customerRepository;
+    private RepositoryInterface $customerRepository;
 
-    /** @var EngineInterface */
+    /** @var EngineInterface|Environment */
     private $templatingEngine;
 
+    /**
+     * @param EngineInterface|Environment $templatingEngine
+     */
     public function __construct(
         CustomerStatisticsProviderInterface $statisticsProvider,
         RepositoryInterface $customerRepository,
-        EngineInterface $templatingEngine
+        object $templatingEngine
     ) {
         $this->statisticsProvider = $statisticsProvider;
         $this->customerRepository = $customerRepository;
@@ -54,15 +56,15 @@ final class CustomerStatisticsController
         if (null === $customer) {
             throw new HttpException(
                 Response::HTTP_BAD_REQUEST,
-                sprintf('Customer with id %s doesn\'t exist.', $customerId)
+                sprintf('Customer with id %s doesn\'t exist.', (string) $customerId)
             );
         }
 
         $customerStatistics = $this->statisticsProvider->getCustomerStatistics($customer);
 
-        return $this->templatingEngine->renderResponse(
+        return new Response($this->templatingEngine->render(
             '@SyliusAdmin/Customer/Show/Statistics/index.html.twig',
             ['statistics' => $customerStatistics]
-        );
+        ));
     }
 }

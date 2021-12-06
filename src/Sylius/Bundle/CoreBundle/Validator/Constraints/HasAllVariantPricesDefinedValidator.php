@@ -23,25 +23,22 @@ use Webmozart\Assert\Assert;
 
 final class HasAllVariantPricesDefinedValidator extends ConstraintValidator
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function validate($product, Constraint $constraint): void
+    public function validate($value, Constraint $constraint): void
     {
-        /** @var ProductInterface $product */
-        Assert::isInstanceOf($product, ProductInterface::class);
+        /** @var ProductInterface $value */
+        Assert::isInstanceOf($value, ProductInterface::class);
 
         /** @var HasAllVariantPricesDefined $constraint */
         Assert::isInstanceOf($constraint, HasAllVariantPricesDefined::class);
 
-        if ($product->isSimple()) {
+        if ($value->isSimple()) {
             return;
         }
 
-        $channels = $product->getChannels();
+        $channels = $value->getChannels();
 
         /** @var ProductVariantInterface $productVariant */
-        foreach ($product->getVariants() as $productVariant) {
+        foreach ($value->getVariants() as $productVariant) {
             /** @var ChannelInterface $channel */
             foreach ($channels as $channel) {
                 /** @var ChannelPricingInterface|null $channelPricing */

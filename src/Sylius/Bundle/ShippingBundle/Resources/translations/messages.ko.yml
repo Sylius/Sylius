@@ -8,3 +8,5 @@ sylius:
         shipping_method:
             enabled: 사용
             name: 이름
+        shipping_method_rule:
+            type: 타입

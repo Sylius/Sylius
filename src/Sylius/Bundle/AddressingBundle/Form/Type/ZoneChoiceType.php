@@ -22,11 +22,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ZoneChoiceType extends AbstractType
 {
-    /** @var RepositoryInterface */
-    private $zoneRepository;
+    private RepositoryInterface $zoneRepository;
 
     /** @var string[] */
-    private $scopeTypes;
+    private array $scopeTypes;
 
     public function __construct(RepositoryInterface $zoneRepository, array $scopeTypes = [])
     {
@@ -38,9 +37,6 @@ final class ZoneChoiceType extends AbstractType
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -63,17 +59,11 @@ final class ZoneChoiceType extends AbstractType
         $resolver->setAllowedValues('zone_scope', array_keys($this->scopeTypes));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_zone_choice';

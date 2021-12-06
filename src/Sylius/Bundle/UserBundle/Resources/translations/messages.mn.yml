@@ -1,0 +1,24 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        user:
+            email: Имэйл
+            enabled: Идэвхтэй
+            password:
+                label: Нууц үг
+                confirmation: Баталгаажуулалт
+            remember_me: Хэрэглэгчий нэр, нууц үгийг сана.
+            shipping_address: Хүргэлтийн хаяг
+            username: Хэрэглэгчийн нэр
+            verified: Баталгаажуулсан
+        user_filter:
+            query: Хайх
+        user_change_password:
+            confirmation: Баталгаажуулалт
+            current: Одоогийн нууц үг
+            new: Шинэ нууц үг
+        user_reset_password:
+            confirmation: Баталгаажуулалт
+            new: Шинэ нууц үг

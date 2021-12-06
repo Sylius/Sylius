@@ -4,7 +4,7 @@
 sylius:
     form:
         tax_category:
-            name: ゾーン名
+            name: 区分名
             description: 説明
         tax_rate:
             category: 税区分

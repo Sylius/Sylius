@@ -8,7 +8,7 @@ Feature: Editing product's attributes
         Given the store operates on a single channel in "United States"
         And the store has a product "44 Magnum"
         And the store has a text product attribute "Overall length"
-        And this product has text attribute "Gun caliber" with value "11 mm"
+        And this product has a text attribute "Gun caliber" with value "11 mm"
         And I am logged in as an administrator
 
     @ui @javascript

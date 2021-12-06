@@ -7,7 +7,7 @@ sylius_grid:
                     class: "%sylius.model.shipping_method.class%"
                     repository:
                         method: createListQueryBuilder
-                        arguments: ["%locale%"]
+                        arguments: ["expr:service('sylius.context.locale').getLocaleCode()"]
             sorting:
                 position: asc
             fields:

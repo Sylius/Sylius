@@ -19,11 +19,9 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 class DashboardStatisticsProvider implements DashboardStatisticsProviderInterface
 {
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /** @var CustomerRepositoryInterface */
-    private $customerRepository;
+    private CustomerRepositoryInterface $customerRepository;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,
@@ -38,7 +36,20 @@ class DashboardStatisticsProvider implements DashboardStatisticsProviderInterfac
         return new DashboardStatistics(
             $this->orderRepository->getTotalPaidSalesForChannel($channel),
             $this->orderRepository->countPaidByChannel($channel),
-            $this->customerRepository->countCustomers()
+            $this->customerRepository->countCustomers(),
+            $channel
+        );
+    }
+
+    public function getStatisticsForChannelInPeriod(
+        ChannelInterface $channel,
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate
+    ): DashboardStatistics {
+        return new DashboardStatistics(
+            $this->orderRepository->getTotalPaidSalesForChannelInPeriod($channel, $startDate, $endDate),
+            $this->orderRepository->countPaidForChannelInPeriod($channel, $startDate, $endDate),
+            $this->customerRepository->countCustomersInPeriod($startDate, $endDate)
         );
     }
 }

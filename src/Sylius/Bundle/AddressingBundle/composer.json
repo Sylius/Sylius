@@ -2,68 +2,77 @@
     "name": "sylius/addressing-bundle",
     "type": "symfony-bundle",
     "description": "Addressing and zone management for Symfony applications.",
-    "keywords": ["shop", "ecommerce", "address", "addressing", "zones"],
-    "homepage": "http://sylius.com",
+    "keywords": [
+        "shop",
+        "ecommerce",
+        "address",
+        "addressing",
+        "zones"
+    ],
+    "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "homepage": "http://pjedrzejewski.com"
+            "homepage": "https://pjedrzejewski.com"
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.com"
+            "homepage": "https://sylius.com"
         },
         {
             "name": "Community contributions",
-            "homepage": "http://github.com/Sylius/Sylius/contributors"
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": "^7.3",
-
-        "stof/doctrine-extensions-bundle": "^1.2",
-        "sylius/addressing": "^1.2",
-        "sylius/resource-bundle": "^1.2",
-        "symfony/framework-bundle": "^4.4",
-        "symfony/intl": "^4.4"
-    },
-    "require-dev": {
-        "doctrine/orm": "^2.5",
-        "phpspec/phpspec": "^5.0",
-        "symfony/dependency-injection": "^4.4",
-        "symfony/form": "^4.4",
-        "symfony/validator": "^4.4",
-        "phpunit/phpunit": "^7.0",
-        "symfony/browser-kit": "^4.4",
-        "polishsymfonycommunity/symfony-mocker-container": "^1.0"
+        "php": "^8.0",
+        "stof/doctrine-extensions-bundle": "^1.4",
+        "sylius/addressing": "^1.6",
+        "sylius/resource-bundle": "^1.7",
+        "symfony/framework-bundle": "^4.4 || ^5.4",
+        "symfony/intl": "^4.4 || ^5.4"
     },
     "conflict": {
-        "twig/twig": "^1.0|^3.0"
+        "twig/twig": "^1.0 || ^3.0"
+    },
+    "require-dev": {
+        "doctrine/orm": "^2.7",
+        "phpspec/phpspec": "^7.0",
+        "phpunit/phpunit": "^8.5",
+        "polishsymfonycommunity/symfony-mocker-container": "^1.0",
+        "symfony/browser-kit": "^4.4 || ^5.4",
+        "symfony/dependency-injection": "^4.4 || ^5.4",
+        "symfony/form": "^4.4 || ^5.4",
+        "symfony/validator": "^4.4 || ^5.4"
     },
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.9-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Bundle\\AddressingBundle\\": "" }
+        "psr-4": {
+            "Sylius\\Bundle\\AddressingBundle\\": ""
+        }
     },
     "autoload-dev": {
         "psr-4": {
             "Sylius\\Bundle\\AddressingBundle\\spec\\": "spec/"
         },
-        "classmap": ["test/app/AppKernel.php"]
+        "classmap": [
+            "test/app/AppKernel.php"
+        ]
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

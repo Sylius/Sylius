@@ -26,8 +26,7 @@ use Sylius\Component\Core\Model\PaymentInterface as SyliusPaymentInterface;
 
 final class CapturePaymentAction extends GatewayAwareAction
 {
-    /** @var PaymentDescriptionProviderInterface */
-    private $paymentDescriptionProvider;
+    private PaymentDescriptionProviderInterface $paymentDescriptionProvider;
 
     public function __construct(PaymentDescriptionProviderInterface $paymentDescriptionProvider)
     {
@@ -35,8 +34,6 @@ final class CapturePaymentAction extends GatewayAwareAction
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param Capture $request
      */
     public function execute($request): void
@@ -79,9 +76,6 @@ final class CapturePaymentAction extends GatewayAwareAction
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($request): bool
     {
         return

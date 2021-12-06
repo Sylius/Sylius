@@ -4,7 +4,7 @@
 sylius:
     review:
         author:
-            already_exists: Dit e-mailadres is al in gebruik, gelieve in te loggen of wachtwoord vergeten gebruiken.
+            already_exists: Dit e-mailadres is al in gebruik, gelieve in te loggen of wachtwoord vergeten functionaliteit te gebruiken.
         comment:
             not_blank: Beoordeling commentaar mag niet leeg zijn.
         rating:

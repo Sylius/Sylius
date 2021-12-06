@@ -17,9 +17,6 @@ use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInte
 
 final class FailedGenerationException extends \InvalidArgumentException
 {
-    /**
-     * {@inheritdoc}
-     */
     public function __construct(
         PromotionCouponGeneratorInstructionInterface $instruction,
         int $exceptionCode = 0,

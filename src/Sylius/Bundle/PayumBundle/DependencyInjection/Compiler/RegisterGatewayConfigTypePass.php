@@ -18,9 +18,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class RegisterGatewayConfigTypePass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         if (!$container->has('sylius.form_registry.payum_gateway_config')) {
@@ -28,26 +25,38 @@ final class RegisterGatewayConfigTypePass implements CompilerPassInterface
         }
 
         $formRegistry = $container->findDefinition('sylius.form_registry.payum_gateway_config');
-        $gatewayFactories = [];
+        $gatewayFactories = [['priority' => 0, 'label' => 'sylius.payum_gateway_factory.offline', 'type' => 'offline']];
 
         $gatewayConfigurationTypes = $container->findTaggedServiceIds('sylius.gateway_configuration_type');
 
         foreach ($gatewayConfigurationTypes as $id => $attributes) {
-            if (!isset($attributes[0]['type']) || !isset($attributes[0]['label'])) {
-                throw new \InvalidArgumentException('Tagged gateway configuration type needs to have `type` and `label` attributes.');
+            foreach ($attributes as $attribute) {
+                if (!isset($attribute['type'], $attribute['label'])) {
+                    throw new \InvalidArgumentException('Tagged gateway configuration type needs to have `type` and `label` attributes.');
+                }
+
+                $gatewayFactories[] = [
+                    'label' => $attribute['label'],
+                    'priority' => $attribute['priority'] ?? 0,
+                    'type' => $attribute['type'],
+                ];
+
+                $formRegistry->addMethodCall(
+                    'add',
+                    ['gateway_config', $attribute['type'], $container->getDefinition($id)->getClass()]
+                );
             }
-
-            $gatewayFactories[$attributes[0]['type']] = $attributes[0]['label'];
-
-            $formRegistry->addMethodCall(
-                'add',
-                ['gateway_config', $attributes[0]['type'], $container->getDefinition($id)->getClass()]
-            );
         }
 
-        $gatewayFactories = array_merge($gatewayFactories, ['offline' => 'sylius.payum_gateway_factory.offline']);
-        ksort($gatewayFactories);
+        usort($gatewayFactories, function (array $firstGateway, array $secondGateway): int {
+            return $secondGateway['priority'] - $firstGateway['priority'];
+        });
 
-        $container->setParameter('sylius.gateway_factories', $gatewayFactories);
+        $sortedGatewayFactories = [];
+        foreach ($gatewayFactories as $key => $factory) {
+            $sortedGatewayFactories[$factory['type']] = $factory['label'];
+        }
+
+        $container->setParameter('sylius.gateway_factories', $sortedGatewayFactories);
     }
 }

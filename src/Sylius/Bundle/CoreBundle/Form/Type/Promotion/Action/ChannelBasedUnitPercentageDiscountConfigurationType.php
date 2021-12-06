@@ -21,9 +21,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ChannelBasedUnitPercentageDiscountConfigurationType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -37,9 +34,6 @@ final class ChannelBasedUnitPercentageDiscountConfigurationType extends Abstract
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ChannelCollectionType::class;

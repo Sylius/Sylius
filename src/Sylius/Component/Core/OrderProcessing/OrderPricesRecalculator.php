@@ -15,35 +15,31 @@ namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Webmozart\Assert\Assert;
 
 final class OrderPricesRecalculator implements OrderProcessorInterface
 {
-    /** @var ProductVariantPriceCalculatorInterface */
-    private $productVariantPriceCalculator;
+    private ProductVariantPriceCalculatorInterface $productVariantPriceCalculator;
 
     public function __construct(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
     {
         $this->productVariantPriceCalculator = $productVariantPriceCalculator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(BaseOrderInterface $order): void
     {
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
+        if (OrderInterface::STATE_CART !== $order->getState()) {
+            return;
+        }
+
         $channel = $order->getChannel();
 
         foreach ($order->getItems() as $item) {
-            /** @var OrderItemInterface $item */
-            Assert::isInstanceOf($item, OrderItemInterface::class);
-
             if ($item->isImmutable()) {
                 continue;
             }

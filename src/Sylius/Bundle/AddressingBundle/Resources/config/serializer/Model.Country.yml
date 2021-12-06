@@ -17,12 +17,5 @@ Sylius\Component\Addressing\Model\Country:
             groups: [Detailed]
         provinces:
             expose: true
-            type: array
+            type: iterable
             groups: [Detailed]
-    relations:
-        -   rel: self
-            href:
-                route: sylius_admin_api_country_show
-                parameters:
-                    code: expr(object.getCode())
-                    version: 1

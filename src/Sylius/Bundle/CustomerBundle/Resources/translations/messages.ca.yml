@@ -9,9 +9,9 @@ sylius:
             email: Correu electrònic
             phone_number: Telèfon
             billing_address: Adreça de facturació
-            different_billing_address: Utilitzar diferent adreça de facturació?
         customer_group:
             name: Nom
             roles: Rols
     gender:
         unknown: Desconegut
+        male: Home

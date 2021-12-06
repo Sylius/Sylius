@@ -20,8 +20,6 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 final class ResolveNextRouteAction implements ActionInterface
 {
     /**
-     * {@inheritdoc}
-     *
      * @param ResolveNextRoute $request
      */
     public function execute($request): void
@@ -29,9 +27,6 @@ final class ResolveNextRouteAction implements ActionInterface
         $request->setRouteName('sylius_shop_order_thank_you');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($request): bool
     {
         return

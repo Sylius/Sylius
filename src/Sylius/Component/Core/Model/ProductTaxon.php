@@ -18,66 +18,51 @@ class ProductTaxon implements ProductTaxonInterface
     /** @var mixed */
     protected $id;
 
-    /** @var ProductInterface|null */
+    /**
+     * @var ProductInterface|null
+     */
     protected $product;
 
-    /** @var TaxonInterface|null */
+    /**
+     * @var TaxonInterface|null
+     */
     protected $taxon;
 
-    /** @var int|null */
+    /**
+     * @var int|null
+     */
     protected $position;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTaxon(): ?TaxonInterface
     {
         return $this->taxon;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setTaxon(?TaxonInterface $taxon): void
     {
         $this->taxon = $taxon;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPosition(): ?int
     {
         return $this->position;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPosition(?int $position): void
     {
         $this->position = $position;

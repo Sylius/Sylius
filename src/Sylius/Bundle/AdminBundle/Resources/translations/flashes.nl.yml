@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    email:
+        order_confirmation_resent: 'Bestelbevestiging is opnieuw verzonden naar de klant.'
+        shipment_confirmation_resent: 'Verzendbevestiging is opnieuw verzonden naar de klant.'
+    product_variant:
+        cannot_generate_variants: 'Kan geen varianten genereren voor een product zonder opties.'

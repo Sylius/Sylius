@@ -1,0 +1,24 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        product:
+            name: Nafn
+            description: Lýsing
+            attributes: Eiginleikar
+            options: Valkostir
+            slug: Vefslóðarheiti
+            taxons: Vöruflokkar
+        product_variant:
+            name: Nafn
+        association_type:
+            name: Nafn
+            translations: Þýðingar
+        variant:
+            name: Nafn
+        option:
+            name: Nafn
+            position: Staðsetning
+        option_value:
+            add_value: Skrá nýtt gildi

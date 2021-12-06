@@ -7,7 +7,7 @@ Feature: Adding a product with selected variant to the cart
     Background:
         Given the store operates on a single channel in "United States"
 
-    @ui
+    @ui @api
     Scenario: Adding a product with multiple variants to the cart
         Given the store has a product "T-shirt banana"
         And this product has "Small logo" variant priced at "$12.35"

@@ -1,6 +1,6 @@
 | Q               | A
 | --------------- | -----
-| Branch?         | 1.6, 1.7 or master <!-- see the comment below -->
+| Branch?         | 1.10 or master <!-- see the comment below -->
 | Bug fix?        | no/yes
 | New feature?    | no/yes
 | BC breaks?      | no/yes
@@ -9,7 +9,10 @@
 | License         | MIT
 
 <!--
- - Bug fixes must be submitted against the 1.6 or 1.7 branches (the lowest possible)
+ - Bug fixes must be submitted against the 1.10 branch
  - Features and deprecations must be submitted against the master branch
  - Make sure that the correct base branch is set
+
+ To be sure you are not breaking any Backward Compatibilities, check the documentation:
+ https://docs.sylius.com/en/latest/book/organization/backward-compatibility-promise.html
 -->

@@ -2,6 +2,33 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        contact_request:
+            content: 'Содержимое'
+            subject: 'Новый контактный запрос'
+        order_confirmation:
+            has_been_successfully_placed: 'успешно кикнут!'
+            subject: 'Подтверждение заказа'
+            view_order_or_change_payment_method: 'Просмотреть заказ или изменить способ оплаты'
+            thank_you: 'Благодарим Вас за покупки у нас!'
+            your_order_number: 'Номер заказа'
+        password_reset:
+            hello: 'Здравствуйте'
+            reset_your_password: 'Сбросить пароль'
+            subject: 'Сброс пароля'
+            to_reset_your_password: 'Для сброса пароля нажмите ссылку ниже:'
+        user_registration:
+            subject: 'Регистрация пользователя'
+            welcome_to_our_store: 'Добро пожаловать в наш магазин!'
+            you_have_just_been_registered: 'Вы успешно зарегистрировались'
+        verification_token:
+            hello: 'Здравствуйте'
+            subject: 'Подтверждение электронной почты'
+            verify_your_email_address: 'Подтвердите ваш email'
+    homepage:
+        about_us: 'О нас'
+    lightbox:
+        image_album_label: 'Изображение %1 из %2'
     menu:
         shop:
             account:

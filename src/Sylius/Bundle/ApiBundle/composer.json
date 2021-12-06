@@ -2,32 +2,55 @@
     "name": "sylius/api-bundle",
     "type": "symfony-bundle",
     "description": "APIs management for Symfony projects.",
-    "keywords": ["api", "rest"],
-    "homepage": "http://sylius.com",
+    "keywords": [
+        "api",
+        "rest"
+    ],
+    "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "homepage": "http://pjedrzejewski.com"
+            "homepage": "https://pjedrzejewski.com"
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.com"
+            "homepage": "https://sylius.com"
         },
         {
             "name": "Community contributions",
-            "homepage": "http://github.com/Sylius/Sylius/contributors"
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": "^7.3",
-
-        "api-platform/core": "^2.5",
-        "sylius/core-bundle": "^1.7"
+        "php": "^8.0",
+        "doctrine/dbal": "^2.7",
+        "api-platform/core": "^2.6",
+        "lexik/jwt-authentication-bundle": "^2.6",
+        "sylius/core-bundle": "^1.7",
+        "symfony/messenger": "^4.4 || ^5.4"
     },
     "require-dev": {
-        "phpspec/phpspec": "^5.0",
-        "phpunit/phpunit": "^7.0"
+        "matthiasnoback/symfony-config-test": "^4.2",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "nelmio/alice": "^3.8",
+        "phpspec/phpspec": "^7.0",
+        "phpunit/phpunit": "^8.5",
+        "symfony/browser-kit": "^4.4 || ^5.4",
+        "symfony/debug-bundle": "^4.4 || ^5.4",
+        "symfony/dotenv": "^4.4 || ^5.4",
+        "symfony/http-client": "^5.2",
+        "theofidry/alice-data-fixtures": "^1.4"
+    },
+    "conflict": {
+        "doctrine/dbal": "3.*",
+        "doctrine/doctrine-bundle": "2.3.0",
+        "symfony/doctrine-bridge": "4.4.20 || 5.2.4 || 5.2.5"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.7-dev"
+        }
     },
     "autoload": {
         "psr-4": {
@@ -41,20 +64,16 @@
     "autoload-dev": {
         "psr-4": {
             "Sylius\\Bundle\\ApiBundle\\spec\\": "spec/",
-            "Sylius\\Bundle\\ApiBundle\\Tests\\": "Tests/"
+            "Sylius\\Bundle\\ApiBundle\\Tests\\": "Tests/",
+            "Sylius\\Bundle\\ApiBundle\\Application\\": "test/src/"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.7-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

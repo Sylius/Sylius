@@ -7,16 +7,18 @@ Feature: Account registration
     Background:
         Given the store operates on a single channel in "United States"
 
-    @ui
+    @ui @api
     Scenario: Trying to register a new account with email that has been already used
         Given there is a user "goodman@gmail.com" identified by "heisenberg"
         When I want to register a new account
+        And I specify the first name as "Saul"
+        And I specify the last name as "Goodman"
         And I specify the email as "goodman@gmail.com"
         And I try to register this account
         Then I should be notified that the email is already used
         And I should not be logged in
 
-    @ui
+    @ui @api
     Scenario: Trying to register a new account without specifying first name
         When I want to register a new account
         And I do not specify the first name
@@ -27,7 +29,7 @@ Feature: Account registration
         Then I should be notified that the first name is required
         And I should not be logged in
 
-    @ui
+    @ui @api
     Scenario: Trying to register a new account without specifying last name
         When I want to register a new account
         And I do not specify the last name
@@ -39,7 +41,7 @@ Feature: Account registration
         Then I should be notified that the last name is required
         And I should not be logged in
 
-    @ui
+    @ui @api
     Scenario: Trying to register a new account without specifying password
         When I want to register a new account
         And I do not specify the password
@@ -62,7 +64,7 @@ Feature: Account registration
         Then I should be notified that the password do not match
         And I should not be logged in
 
-    @ui
+    @ui @api
     Scenario: Trying to register a new account without specifying email
         When I want to register a new account
         And I do not specify the email
@@ -70,4 +72,13 @@ Feature: Account registration
         And I specify the last name as "Goodman"
         And I try to register this account
         Then I should be notified that the email is required
+        And I should not be logged in
+
+    @api
+    Scenario: Trying to register a new account without providing required fields
+        When I want to register a new account
+        And I specify the email as "goodman@gmail.com"
+        And I specify the password as "heisenberg"
+        And I try to register this account
+        Then I should be notified that the "first name" and "last name" have to be provided
         And I should not be logged in

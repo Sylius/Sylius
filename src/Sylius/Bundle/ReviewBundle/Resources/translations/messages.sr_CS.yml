@@ -10,4 +10,4 @@ sylius:
                 approved: Odobreno
                 new: Novo
                 rejected: Odbijeno
-            title: Naslov
+            title: Naziv

@@ -2,6 +2,38 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        contact_request:
+            content: 'Вміст'
+            message_from: 'Повідомлення від'
+        order_confirmation:
+            has_been_successfully_placed: 'було успішно розміщено.'
+            subject: 'Підтвердження замовлення'
+            view_order_or_change_payment_method: 'Перегляньте порядок або змініть спосіб оплати'
+            thank_you: 'Дякуємо за покупку в нашій крамниці!'
+            your_order_number: '№ вашого замовлення.'
+        password_reset:
+            hello: 'Вітаємо'
+            reset_your_password: 'Скинути пароль'
+            subject: 'Відновлення паролю'
+            to_reset_your_password: 'Щоб скинути свій пароль - натисніть на посилання нижче'
+        user_registration:
+            start_shopping: 'Розпочати покупки'
+            subject: 'Реєстрація користувача'
+            welcome_to_our_store: 'Ласкаво просимо до нашого магазину!'
+            you_have_just_been_registered: 'Ви тільки що зареєструвалися. Дякуємо'
+        verification_token:
+            hello: 'Вітаємо'
+            subject: 'Перевірка адреси електронної пошти'
+            to_verify_your_email_address: 'Для підтвердження вашої адреси електронної пошти - натисніть на посилання нижче'
+            verify_your_email_address: 'Підтердіть вашу електронну пошту'
+    homepage:
+        about_us: 'Про нас'
+        carousel_header: 'Приготуйтесь! Зима наближається'
+        newsletter: 'Розсилка новин'
+        subscribe: 'Підписатися'
+    lightbox:
+        image_album_label: 'Зображення %1 із %2'
     menu:
         shop:
             account:

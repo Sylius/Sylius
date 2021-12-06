@@ -25,8 +25,7 @@ use Symfony\Component\Form\FormEvents;
 
 final class ZoneType extends AbstractResourceType
 {
-    /** @var array */
-    private $scopeChoices;
+    private array $scopeChoices;
 
     /**
      * @param string[] $validationGroups
@@ -39,9 +38,6 @@ final class ZoneType extends AbstractResourceType
         $this->scopeChoices = $scopeChoices;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -75,8 +71,8 @@ final class ZoneType extends AbstractResourceType
             ];
 
             if ($zone->getType() === ZoneInterface::TYPE_ZONE) {
-                $entryOptions['entry_options']['choice_filter'] = function (ZoneInterface $subZone) use ($zone): bool {
-                    return $zone->getId() !== $subZone->getId();
+                $entryOptions['entry_options']['choice_filter'] = static function (?ZoneInterface $subZone) use ($zone): bool {
+                    return $subZone !== null && $zone->getId() !== $subZone->getId();
                 };
             }
 
@@ -92,9 +88,6 @@ final class ZoneType extends AbstractResourceType
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_zone';

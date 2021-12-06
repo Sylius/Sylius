@@ -16,20 +16,39 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.payment_method.class%" shortName="PaymentMethod">
-        <attribute name="route_prefix">admin</attribute>
-
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>payment_method:read</attribute>
-            </attribute>
-        </attribute>
-
         <collectionOperations />
 
         <itemOperations>
-            <itemOperation name="get" />
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/payment-methods/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:payment_method:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/payment-methods/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:payment_method:read</attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="true" writable="false" />
+        <subresourceOperations>
+            <subresourceOperation name="api_orders_payments_methods_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>shop:payment_method:read</attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
+        <property name="id" identifier="false" writable="false" />
+        <property name="code" identifier="true" writable="false" />
+        <property name="name" writable="true" />
     </resource>
 </resources>

@@ -7,10 +7,3 @@ Sylius\Component\Product\Model\ProductAttribute:
             type: integer
             xml_attribute: true
             groups: [Default, Detailed]
-    relations:
-        -   rel: self
-            href:
-                route: sylius_admin_api_product_attribute_show
-                parameters:
-                    code: expr(object.getCode())
-                    version: 1

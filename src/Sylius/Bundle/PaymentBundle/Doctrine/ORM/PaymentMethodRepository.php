@@ -18,9 +18,6 @@ use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 
 class PaymentMethodRepository extends EntityRepository implements PaymentMethodRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function findByName(string $name, string $locale): array
     {
         return $this->createQueryBuilder('o')
@@ -34,9 +31,6 @@ class PaymentMethodRepository extends EntityRepository implements PaymentMethodR
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createPaginator(array $criteria = [], array $sorting = []): iterable
     {
         $queryBuilder = $this->createQueryBuilder('o')

@@ -26,11 +26,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class ResourceDeleteSubscriber implements EventSubscriberInterface
 {
-    /** @var UrlGeneratorInterface */
-    private $router;
+    private UrlGeneratorInterface $router;
 
-    /** @var SessionInterface */
-    private $session;
+    private SessionInterface $session;
 
     public function __construct(UrlGeneratorInterface $router, SessionInterface $session)
     {
@@ -38,9 +36,6 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
         $this->session = $session;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -50,7 +45,7 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
 
     public function onResourceDelete(ExceptionEvent $event): void
     {
-        $exception = $event->getException();
+        $exception = $event->getThrowable();
         if (!$exception instanceof ForeignKeyConstraintViolationException) {
             return;
         }

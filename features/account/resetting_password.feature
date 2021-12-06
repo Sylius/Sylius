@@ -9,20 +9,20 @@ Feature: Resetting a password
         And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
         And there is a user "goodman@example.com" identified by "heisenberg"
 
-    @ui @email
+    @ui @email @api
     Scenario: Resetting an account password
         When I want to reset password
-        And I specify the email as "goodman@example.com"
+        And I specify customer email as "goodman@example.com"
         And I reset it
         Then I should be notified that email with reset instruction has been sent
         And an email with reset token should be sent to "goodman@example.com"
 
-    @ui @email
+    @ui @email @api
     Scenario: Resetting an account password in different locale than the default one
         When I reset password for email "goodman@example.com" in "Polish (Poland)" locale
         Then an email with reset token should be sent to "goodman@example.com" in "Polish (Poland)" locale
 
-    @ui @email
+    @ui @email @api
     Scenario: Changing my account password with token I received
         Given I have already received a resetting password email
         When I follow link on my email to reset my password

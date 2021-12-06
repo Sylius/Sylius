@@ -20,11 +20,9 @@ use Webmozart\Assert\Assert;
 
 final class HomepageContext implements Context
 {
-    /** @var HomePageInterface */
-    private $homePage;
+    private HomePageInterface $homePage;
 
-    /** @var MenuElementInterface */
-    private $menuElement;
+    private MenuElementInterface $menuElement;
 
     public function __construct(HomePageInterface $homePage, MenuElementInterface $menuElement)
     {
@@ -58,6 +56,7 @@ final class HomepageContext implements Context
     }
 
     /**
+     * @Then I should see :firstMenuItem in the menu
      * @Then I should see :firstMenuItem and :secondMenuItem in the menu
      */
     public function iShouldSeeAndInTheMenu(string ...$menuItems): void
@@ -67,6 +66,8 @@ final class HomepageContext implements Context
 
     /**
      * @Then I should not see :firstMenuItem and :secondMenuItem in the menu
+     * @Then I should not see :firstMenuItem, :secondMenuItem and :thirdMenuItem in the menu
+     * @Then I should not see :firstMenuItem, :secondMenuItem, :thirdMenuItem and :fourthMenuItem in the menu
      */
     public function iShouldNotSeeAndInTheMenu(string ...$menuItems): void
     {
@@ -76,5 +77,14 @@ final class HomepageContext implements Context
                 throw new \InvalidArgumentException(sprintf('Menu should not contain %s element', $menuItem));
             }
         }
+    }
+
+    /**
+     * @Then I should be logged in
+     */
+    public function iShouldBeLoggedIn(): void
+    {
+        $this->homePage->verify();
+        Assert::true($this->homePage->hasLogoutButton());
     }
 }

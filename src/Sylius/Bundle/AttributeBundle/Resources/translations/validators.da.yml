@@ -11,6 +11,11 @@ sylius:
             not_blank: Angiv venligst egenskabskode.
             regex: Egenskabskode må kun udgøre bogstaver, tal, bindestreger og understregninger.
             unique: Koden benyttes allerede.
+        configuration:
+            max_entries: Konfigurationen af 'max'-værdien skal være større eller lig med værdien af 'min'.
+            max_length: Max. længde af konfigurationen skal være større end eller lig med min. længde.
+            min_entries: Konfigurationen af 'min'-værdien skal være mindre eller lig med antallet af muligheder.
+            multiple: Konfigurationen af 'multiple' skal være sand, hvis 'min' og 'max' værdier er angivet.
         presentation:
             not_blank: Angiv venligst egenskabspræsentation.
             min_length: Attributpræsentation skal minimum udgøre 1 tegn. | Attributpræsentation skal minimum udgøre {{ limit }} tegn.

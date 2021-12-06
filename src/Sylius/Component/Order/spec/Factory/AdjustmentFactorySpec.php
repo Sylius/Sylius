@@ -48,7 +48,11 @@ final class AdjustmentFactorySpec extends ObjectBehavior
         $adjustment->setLabel('Tax description')->shouldBeCalled();
         $adjustment->setAmount(1000)->shouldBeCalled();
         $adjustment->setNeutral(false)->shouldBeCalled();
+        $adjustment->setDetails(['taxRateAmount' => 0.1])->shouldBeCalled();
 
-        $this->createWithData('tax', 'Tax description', 1000, false)->shouldReturn($adjustment);
+        $this
+            ->createWithData('tax', 'Tax description', 1000, false, ['taxRateAmount' => 0.1])
+            ->shouldReturn($adjustment)
+        ;
     }
 }

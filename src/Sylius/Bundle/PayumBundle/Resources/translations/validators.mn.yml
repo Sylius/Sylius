@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    gateway_config:
+        paypal:
+            password:
+                not_blank: Paypal-ийн нууц үгээ оруулна уу.
+            signature:
+                not_blank: Paypal-ийн гарын үсгээ оруулна уу.
+            username:
+                not_blank: Paypal-ийн хэрэглэгчийн оруулна уу.
+        stripe:
+            secret_key:
+                not_blank: Түр зуурын нууц түлхүүрийг оруулна уу
+            publishable_key:
+                not_blank: Түр зуурын нийтлэх боломжтой түлхүүрийг оруулна уу.

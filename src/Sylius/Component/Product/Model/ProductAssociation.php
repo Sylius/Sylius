@@ -24,10 +24,14 @@ class ProductAssociation implements ProductAssociationInterface
     /** @var mixed */
     protected $id;
 
-    /** @var ProductAssociationTypeInterface */
+    /**
+     * @var ProductAssociationTypeInterface|null
+     */
     protected $type;
 
-    /** @var ProductInterface */
+    /**
+     * @var ProductInterface|null
+     */
     protected $owner;
 
     /**
@@ -46,65 +50,41 @@ class ProductAssociation implements ProductAssociationInterface
         $this->associatedProducts = new ArrayCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): ?ProductAssociationTypeInterface
     {
         return $this->type;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setType(?ProductAssociationTypeInterface $type): void
     {
         $this->type = $type;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOwner(): ?ProductInterface
     {
         return $this->owner;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setOwner(?ProductInterface $owner): void
     {
         $this->owner = $owner;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAssociatedProducts(): Collection
     {
         return $this->associatedProducts;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasAssociatedProduct(ProductInterface $product): bool
     {
         return $this->associatedProducts->contains($product);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addAssociatedProduct(ProductInterface $product): void
     {
         if (!$this->hasAssociatedProduct($product)) {
@@ -112,9 +92,6 @@ class ProductAssociation implements ProductAssociationInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeAssociatedProduct(ProductInterface $product): void
     {
         if ($this->hasAssociatedProduct($product)) {
@@ -122,9 +99,6 @@ class ProductAssociation implements ProductAssociationInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function clearAssociatedProducts(): void
     {
         $this->associatedProducts->clear();

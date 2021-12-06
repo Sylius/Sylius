@@ -2,9 +2,23 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        contact_request:
+            content: 'Περιεχόμενο'
+        order_confirmation:
+            subject: 'Επιβεβαίωση παραγγελίας'
+        password_reset:
+            hello: 'Χαίρεται'
+        verification_token:
+            hello: 'Χαίρεται'
+    lightbox:
+        image_album_label: 'Εικόνα %1 από %2'
     menu:
         shop:
             account:
                 address_book: 'Βιβλίο διευθύνσεων'
                 change_password: 'Αλλαγή κωδικού πρόσβασης'
                 dashboard: 'Dashboard'
+                header: 'Ο Λογαριασμός σας'
+                order_history: 'Ιστορικό παραγγελιών'
+                personal_information: 'Προσωπικά στοιχεία'

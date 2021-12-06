@@ -3,9 +3,16 @@
 
 sylius:
     taxon:
+        code:
+            not_blank: Angiv taksonomi kode.
+            regex: Taksonomi kode kan bestå af bogstaver, tal, streg og underscore.
+            unique: Taksonomi med den angivne kode findes i forvejen.
         name:
             max_length: Navnet på den taksionomiske gruppe må ikke være længere end 255 tegn.
             not_blank: Angiv navnet for den taksionomiske gruppe.
+        slug:
+            not_blank: Angiv taksonomi slug.
+            unique: Taksonomi slug skal være unik.
     taxonomy:
         name:
             max_length: Taksonominavn må ikke være længere end 255 tegn.

@@ -17,8 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 final class ChannelDefaultLocaleEnabled extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.channel.default_locale.enabled';
+    public string $message = 'sylius.channel.default_locale.enabled';
 
     public function getTargets(): string
     {

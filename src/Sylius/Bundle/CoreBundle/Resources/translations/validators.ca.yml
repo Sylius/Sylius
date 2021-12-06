@@ -20,10 +20,6 @@ sylius:
     currency:
         enabled:
             cannot_disable_base: No es pot desactivar la moneda base.
-    locale:
-        code:
-            not_blank: Introduïu un codi local.
-            unique: Aquest codi local ja existeix.
     product_attribute:
         invalid: Posició ha de ser un nombre sencer.
     product_variant:
@@ -36,6 +32,9 @@ sylius:
         depth:
             min: La profunditat no pot ser negativa.
             invalid: La profunditat ha de ser un nombre.
+    review:
+        author:
+            not_blank: Escriu el teu correu electrònic.
     user:
         email:
             unique: Aquest correu electrònic ja té un compte associat.

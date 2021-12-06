@@ -20,9 +20,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class SyliusLocaleBundle extends AbstractResourceBundle
 {
-    /**
-     * {@inheritdoc}
-     */
     public function build(ContainerBuilder $container): void
     {
         parent::build($container);
@@ -30,9 +27,6 @@ final class SyliusLocaleBundle extends AbstractResourceBundle
         $container->addCompilerPass(new CompositeLocaleContextPass());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSupportedDrivers(): array
     {
         return [

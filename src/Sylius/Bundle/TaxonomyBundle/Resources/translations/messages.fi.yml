@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Kuvaus
+            enabled: Aktiivinen
             name: Nimi
             parent: Vanhempi
         taxonomy:

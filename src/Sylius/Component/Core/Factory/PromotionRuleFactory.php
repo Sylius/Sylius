@@ -24,68 +24,47 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class PromotionRuleFactory implements PromotionRuleFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $decoratedFactory;
+    private FactoryInterface $decoratedFactory;
 
     public function __construct(FactoryInterface $decoratedFactory)
     {
         $this->decoratedFactory = $decoratedFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createNew(): PromotionRuleInterface
     {
         return $this->decoratedFactory->createNew();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createCartQuantity(int $count): PromotionRuleInterface
     {
         return $this->createPromotionRule(CartQuantityRuleChecker::TYPE, ['count' => $count]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createItemTotal(string $channelCode, int $amount): PromotionRuleInterface
     {
         return $this->createPromotionRule(ItemTotalRuleChecker::TYPE, [$channelCode => ['amount' => $amount]]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createHasTaxon(array $taxons): PromotionRuleInterface
     {
         return $this->createPromotionRule(HasTaxonRuleChecker::TYPE, ['taxons' => $taxons]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createItemsFromTaxonTotal(string $channelCode, string $taxonCode, int $amount): PromotionRuleInterface
     {
         return $this->createPromotionRule(
             TotalOfItemsFromTaxonRuleChecker::TYPE,
-            [$channelCode => ['taxon' => $taxonCode, 'amount' => $amount]])
+            [$channelCode => ['taxon' => $taxonCode, 'amount' => $amount]]
+        )
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createNthOrder(int $nth): PromotionRuleInterface
     {
         return $this->createPromotionRule(NthOrderRuleChecker::TYPE, ['nth' => $nth]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createContainsProduct(string $productCode): PromotionRuleInterface
     {
         return $this->createPromotionRule(ContainsProductRuleChecker::TYPE, ['product_code' => $productCode]);

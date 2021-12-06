@@ -48,7 +48,7 @@
 
 * Scalar and return typehints have been introduced in the codebase. Please introduce these in your codebase for classes 
   that implement Sylius interfaces or extend Sylius classes. It is also highly recommended to add `declare(strict_types=1);` declaration to your PHP files.
-  Learn more about PHP 7.1 features here: http://php.net/manual/de/migration71.new-features.php
+  Learn more about PHP 7.1 features here: https://php.net/manual/de/migration71.new-features.php
 
 * Starting with Symfony version 3.3.8, the custom autoloader is not needed anymore and therefore it has been removed in favour of the Composer
   autoloader. Apply the following changes (reference: https://github.com/Sylius/Sylius/pull/8340):
@@ -179,7 +179,7 @@
 
 ### Order / OrderBundle
 
-* In order to be compatibile with Doctrine ORM 2.6+ and be more consistent,
+* In order to be compatible with Doctrine ORM 2.6+ and be more consistent,
   `OrderRepositoryInterface::count()` signature was changed to `OrderRepositoryInterface::countPlacedOrders()`.
   
 * The following methods no longer have a default null argument and require one to be explicitly passed:
@@ -276,7 +276,7 @@
 * ImagineBundle has been upgraded from ^1.6 to ^1.9.1 to move past a BC break in console commands: https://github.com/liip/LiipImagineBundle/releases/tag/1.9.1.
 
 * If `sylius_shop.locale_switcher` is set to `storage`, `LocaleStrippingRouter` is loaded, which strips out `_locale` parameter
-  from the URL if it's the same as the one already in the storage. In order to disable localized urls, follow this cookbook entry: http://docs.sylius.com/en/latest/cookbook/disabling-localised-urls.html
+  from the URL if it's the same as the one already in the storage. In order to disable localized urls, follow this cookbook entry: https://docs.sylius.com/en/latest/cookbook/disabling-localised-urls.html
  
 * `ShopUserLogoutHandler` has different parameters in constructor:
     * `HttpUtils $httpUtils`

@@ -16,17 +16,15 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.product_option_value.class%" shortName="ProductOptionValue">
-        <attribute name="route_prefix">admin</attribute>
-
         <attribute name="normalization_context">
             <attribute name="groups">
-                <attribute>product_option_value:read</attribute>
+                <attribute>admin:product_option_value:read</attribute>
             </attribute>
         </attribute>
 
         <attribute name="denormalization_context">
             <attribute name="groups">
-                <attribute>product_option_value:write</attribute>
+                <attribute>admin:product_option_value:write</attribute>
             </attribute>
         </attribute>
 
@@ -35,12 +33,30 @@
         <collectionOperations />
 
         <itemOperations>
-            <itemOperation name="get" />
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-option-values/{code}</attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/product-option-values/{code}</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
-        <property name="translations" readable="true" writable="true" />
+        <property name="translations" readable="true" writable="true" >
+            <attribute name="openapi_context">
+                <attribute name="type">array</attribute>
+                <attribute name="example">
+                    <attribute name="en_US">
+                        <attribute name="value">string</attribute>
+                        <attribute name="locale">string</attribute>
+                    </attribute>
+                </attribute>
+            </attribute>
+        </property>
     </resource>
 
 </resources>

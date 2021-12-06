@@ -11,13 +11,12 @@ sylius:
             phone_number: Numero di telefono
             gender: Sesso
             birthday: Data di nascita
-            billing_address: Indirizzo di fatturazione
-            different_billing_address: Vuoi usare un indirizzo diverso per la fatturazione?
+            billing_address: Indirizzo fatturazione
             only_customer_registration: Crea un account?
             subscribed_to_newsletter: Iscriviti alla newsletter
         customer_group:
             name: "Nome\n"
-            roles: Regole
+            roles: Ruoli
     gender:
         unknown: Sconosciuto
         male: Maschile

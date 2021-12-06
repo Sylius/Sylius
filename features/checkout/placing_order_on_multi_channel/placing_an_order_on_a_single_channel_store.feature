@@ -24,7 +24,7 @@ Feature: Placing an order on a single channel store
         And I confirm my order
         Then the administrator should see that order placed by "customer@example.com" has "USD" currency
 
-    @ui
+    @ui @no-api
     Scenario: Placing an order in a channels base currency displaying prices in other currency
         Given that channel also allows to shop using the "CAD" currency
         And I had product "PHP T-Shirt" in the cart

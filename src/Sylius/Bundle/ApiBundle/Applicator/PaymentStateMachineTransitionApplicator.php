@@ -17,10 +17,10 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 
+/** @experimental */
 final class PaymentStateMachineTransitionApplicator implements PaymentStateMachineTransitionApplicatorInterface
 {
-    /** @var StateMachineFactoryInterface $stateMachineFactory */
-    private $stateMachineFactory;
+    private StateMachineFactoryInterface $stateMachineFactory;
 
     public function __construct(StateMachineFactoryInterface $stateMachineFactory)
     {

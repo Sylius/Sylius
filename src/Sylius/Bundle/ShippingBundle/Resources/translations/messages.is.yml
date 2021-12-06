@@ -1,0 +1,40 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        rule:
+            unit_count_configuration:
+                count: Fjöldi
+        shipment:
+            state: Staða
+            states:
+                checkout: Ganga frá kaupum
+                pending: Í biðstöðu
+                ready: Tilbúið
+                shipped: Sent
+                returned: Skilað
+                cancelled: Hætt við
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Upphæð
+            per_unit_rate_configuration:
+                amount: Upphæð
+        shipping_category:
+            description: Lýsing
+            name: Nafn
+        shipping_method:
+            add_rule: Skrá reglu
+            calculator: Reiknivél
+            category: Flokkur
+            channels: Sölumátar
+            configuration: Stillingar
+            description: Lýsing
+            enabled: Virkt
+            name: Nafn
+            position: Staðsetning
+            rules: Reglur
+            translations: Þýðingar
+        shipping_method_rule:
+            type: Tegund
+            amount: Upphæð

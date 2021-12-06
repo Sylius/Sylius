@@ -17,4 +17,3 @@ sylius:
     payum_gateway_factory:
         offline: Offline
         paypal_express_checkout: Paypal express
-        stripe_checkout: Stripe

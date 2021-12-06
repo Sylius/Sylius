@@ -83,39 +83,50 @@ When you create a new asset or delete an existing one, it is required to rerun t
 
 4. Customize a template:
 
-In order to customize the login view you should take the content of ``@SyliusShopBundle/views/login.html.twig`` file
-and paste it to your theme directory: ``themes/CrimsonTheme/SyliusShopBundle/views/login.html.twig``
+In order to customize the login view you should take the content of ``@SyliusShopBundle/views/login.html.twig`` file and ...
+
+* Before theme-bundle v2,
+  paste it to your theme directory: ``themes/CrimsonTheme/SyliusShopBundle/views/login.html.twig``
+  (There is more information in the official documentation about `theme structure v1.5.1 <https://github.com/Sylius/SyliusThemeBundle/blob/v1.5.1/docs/your_first_theme.md#theme-structure>`_)
+
+
+* From `theme-bundle v2 <https://github.com/Sylius/SyliusThemeBundle/releases/tag/v2.0.0>`_,
+  paste it to your theme directory: ``themes/CrimsonTheme/templates/bundles/SyliusShopBundle/login.html.twig``
+  (There is more information in the official documentation about `theme structure v2.0.0 <https://github.com/Sylius/SyliusThemeBundle/blob/v2.0.0/docs/your_first_theme.md#theme-structure>`_)
 
 Let's remove the registration column in this example:
 
 .. code-block:: twig
 
-   {% extends '@SyliusShop/layout.html.twig' %}
+    {% extends '@SyliusShop/layout.html.twig' %}
 
-   {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+    {% form_theme form '@SyliusUi/Form/theme.html.twig' %}
 
-   {% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
+    {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
 
-   {% block content %}
-       {% include '@SyliusShop/Login/_header.html.twig' %}
-       <div class="ui padded segment">
-           <div class="ui one column very relaxed stackable grid">
-               <div class="column">
-                   <h4 class="ui dividing header">{{ 'sylius.ui.registered_customers'|trans }}</h4>
-                   <p>{{ 'sylius.ui.if_you_have_an_account_sign_in_with_your_email_address'|trans }}.</p>
-                   {{ form_start(form, {'action': path('sylius_shop_login_check'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-                       {% include '@SyliusShop/Login/_form.html.twig' %}
-                       <button type="submit" class="ui blue submit button">{{ 'sylius.ui.login'|trans }}</button>
-                       <a href="{{ path('sylius_shop_request_password_reset_token') }}" class="ui right floated button">{{ 'sylius.ui.forgot_password'|trans }}</a>
-                   {{ form_end(form, {'render_rest': false}) }}
-               </div>
-           </div>
-       </div>
-   {% endblock %}
+    {% block content %}
+        {% include '@SyliusShop/Login/_header.html.twig' %}
+        <div class="ui padded segment">
+            <div class="ui one column very relaxed stackable grid">
+                <div class="column">
+                    <h4 class="ui dividing header">{{ 'sylius.ui.registered_customers'|trans }}</h4>
+                    <p>{{ 'sylius.ui.if_you_have_an_account_sign_in_with_your_email_address'|trans }}.</p>
+                    {{ form_start(form, {'action': path('sylius_shop_login_check'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+                    {% include '@SyliusShop/Login/_form.html.twig' %}
+                    <button type="submit" class="ui blue submit button">{{ 'sylius.ui.login'|trans }}</button>
+                    <a href="{{ path('sylius_shop_request_password_reset_token') }}" class="ui right floated button">{{ 'sylius.ui.forgot_password'|trans }}</a>
+                    {{ form_end(form, {'render_rest': false}) }}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
 
 .. tip::
 
    Learn more about customizing templates :doc:`here </customization/template>`.
+
+   You can check major modifications in theme-bundle structure and configuration `here <https://github.com/Sylius/SyliusThemeBundle/blob/master/docs/important_changes.md>`_
 
 5. Choose your new theme on the channel:
 
@@ -133,4 +144,4 @@ In the administration panel go to channels and change the theme of your desired 
 Learn more
 ----------
 
-* :doc:`Theme - Bundle Documentation </components_and_bundles/bundles/SyliusThemeBundle/index>`.
+* `Theme - Bundle Documentation <https://github.com/Sylius/SyliusThemeBundle/blob/master/docs/index.md>`_.

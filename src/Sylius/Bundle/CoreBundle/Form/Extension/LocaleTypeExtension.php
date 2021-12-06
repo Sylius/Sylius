@@ -20,21 +20,17 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Locales;
 
 final class LocaleTypeExtension extends AbstractTypeExtension
 {
-    /** @var RepositoryInterface */
-    private $localeRepository;
+    private RepositoryInterface $localeRepository;
 
     public function __construct(RepositoryInterface $localeRepository)
     {
         $this->localeRepository = $localeRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
@@ -47,6 +43,7 @@ final class LocaleTypeExtension extends AbstractTypeExtension
             if ($locale instanceof LocaleInterface && null !== $locale->getCode()) {
                 $options['disabled'] = true;
 
+                /** @psalm-suppress InvalidArrayOffset */
                 $options['choices'] = [$this->getLocaleName($locale->getCode()) => $locale->getCode()];
             } else {
                 $options['choices'] = array_flip($this->getAvailableLocales());
@@ -57,17 +54,19 @@ final class LocaleTypeExtension extends AbstractTypeExtension
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtendedType(): string
     {
         return LocaleType::class;
     }
 
+    public static function getExtendedTypes(): iterable
+    {
+        return [LocaleType::class];
+    }
+
     private function getLocaleName(string $code): ?string
     {
-        return Intl::getLocaleBundle()->getLocaleName($code);
+        return Locales::getName($code);
     }
 
     /**
@@ -75,7 +74,7 @@ final class LocaleTypeExtension extends AbstractTypeExtension
      */
     private function getAvailableLocales(): array
     {
-        $availableLocales = Intl::getLocaleBundle()->getLocaleNames();
+        $availableLocales = Locales::getNames();
 
         /** @var LocaleInterface[] $definedLocales */
         $definedLocales = $this->localeRepository->findAll();

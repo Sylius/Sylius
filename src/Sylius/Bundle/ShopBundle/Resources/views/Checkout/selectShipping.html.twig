@@ -2,6 +2,8 @@
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
+{% block title %}{{ 'sylius.ui.shipping'|trans }} | {{ parent() }}{% endblock %}
+
 {% block content %}
     {{ sylius_template_event(['sylius.shop.checkout.select_shipping.steps', 'sylius.shop.checkout.steps'], _context|merge({'active': 'select_shipping', 'orderTotal': order.total})) }}
 

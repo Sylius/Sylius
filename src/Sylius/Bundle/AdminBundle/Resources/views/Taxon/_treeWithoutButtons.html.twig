@@ -11,7 +11,7 @@
                         <i class="{{ taxon.children is not empty ? 'caret down' : 'angle left' }} icon"></i>
                     </div>
                     <div class="sylius-tree__title">
-                        <a href="{{ path('sylius_admin_product_per_taxon_index', {'taxonId': taxon.id}) }}">
+                        <a href="{{ path('sylius_admin_product_per_taxon_index', {'taxonId': taxon.id}) }}"{% if not taxon.enabled %} class="text gray"{% endif %}>
                             {{ taxon.name }}
                         </a>
                     </div>

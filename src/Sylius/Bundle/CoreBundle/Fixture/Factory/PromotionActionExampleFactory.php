@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use Faker\Generator;
+use Faker\Factory;
 use Sylius\Component\Core\Factory\PromotionActionFactoryInterface;
 use Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
@@ -21,28 +23,22 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PromotionActionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /** @var PromotionActionFactoryInterface */
-    private $promotionActionFactory;
+    private PromotionActionFactoryInterface $promotionActionFactory;
 
-    /** @var \Faker\Generator */
-    private $faker;
+    private Generator $faker;
 
-    /** @var OptionsResolver */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(PromotionActionFactoryInterface $promotionActionFactory)
     {
         $this->promotionActionFactory = $promotionActionFactory;
 
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): PromotionActionInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -55,9 +51,6 @@ class PromotionActionExampleFactory extends AbstractExampleFactory implements Ex
         return $promotionAction;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver

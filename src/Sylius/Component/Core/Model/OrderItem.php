@@ -19,26 +19,41 @@ use Webmozart\Assert\Assert;
 
 class OrderItem extends BaseOrderItem implements OrderItemInterface
 {
-    /** @var ProductVariantInterface */
-    protected $variant;
-
-    /** @var string */
-    protected $productName;
-
-    /** @var string */
-    protected $variantName;
+    /**
+     * @var int
+     */
+    protected $version = 1;
 
     /**
-     * {@inheritdoc}
+     * @var ProductVariantInterface|null
      */
+    protected $variant;
+
+    /**
+     * @var string|null
+     */
+    protected $productName;
+
+    /**
+     * @var string|null
+     */
+    protected $variantName;
+
+    public function getVersion(): ?int
+    {
+        return $this->version;
+    }
+
+    public function setVersion(?int $version): void
+    {
+        $this->version = $version;
+    }
+
     public function getVariant(): ?ProductVariantInterface
     {
         return $this->variant;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setVariant(?ProductVariantInterface $variant): void
     {
         $this->variant = $variant;
@@ -49,41 +64,26 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
         return $this->variant->getProduct();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProductName(): ?string
     {
         return $this->productName ?: $this->variant->getProduct()->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProductName(?string $productName): void
     {
         $this->productName = $productName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVariantName(): ?string
     {
         return $this->variantName ?: $this->variant->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setVariantName(?string $variantName): void
     {
         $this->variantName = $variantName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function equals(BaseOrderItemInterface $item): bool
     {
         return parent::equals($item) || ($item instanceof static && $item->getVariant() === $this->variant);
@@ -91,8 +91,6 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
 
     /**
      * Returns sum of neutral and non neutral tax adjustments on order item and total tax of units.
-     *
-     * {@inheritdoc}
      */
     public function getTaxTotal(): int
     {
@@ -114,8 +112,6 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
 
     /**
      * Returns single unit price lowered by order unit promotions (each unit must have the same unit promotion discount)
-     *
-     * {@inheritdoc}
      */
     public function getDiscountedUnitPrice(): int
     {
@@ -152,9 +148,6 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSubtotal(): int
     {
         return $this->getDiscountedUnitPrice() * $this->quantity;

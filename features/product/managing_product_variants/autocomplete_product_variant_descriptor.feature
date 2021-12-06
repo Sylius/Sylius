@@ -1,4 +1,4 @@
-@managing_product_variants
+@managing_product_variants_ajax
 Feature: Product variants autocomplete
     In order to get hints when looking for named product variants
     As an Administrator

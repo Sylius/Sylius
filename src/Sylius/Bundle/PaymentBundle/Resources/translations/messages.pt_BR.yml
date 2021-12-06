@@ -31,4 +31,4 @@ sylius:
             enabled: Habilitado?
             instructions: Instruções
             name: Nome
-            position: Posição
+            position: Função

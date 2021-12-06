@@ -17,3 +17,6 @@ sylius:
             description: Опис
             enabled: Овозможено
             name: Име
+        shipping_method_rule:
+            type: Вид
+            amount: Износ

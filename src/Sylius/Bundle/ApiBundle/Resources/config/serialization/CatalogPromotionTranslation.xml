@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Sylius\Component\Promotion\Model\CatalogPromotionTranslation">
+        <attribute name="id">
+            <group>admin:catalog_promotion:read</group>
+        </attribute>
+
+        <attribute name="label">
+            <group>admin:catalog_promotion:read</group>
+            <group>admin:catalog_promotion:create</group>
+            <group>admin:catalog_promotion:update</group>
+        </attribute>
+
+        <attribute name="description">
+            <group>admin:catalog_promotion:read</group>
+            <group>admin:catalog_promotion:create</group>
+            <group>admin:catalog_promotion:update</group>
+        </attribute>
+
+        <attribute name="locale">
+            <group>admin:catalog_promotion:create</group>
+            <group>admin:catalog_promotion:update</group>
+        </attribute>
+    </class>
+</serializer>

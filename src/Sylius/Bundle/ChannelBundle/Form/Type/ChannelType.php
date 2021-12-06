@@ -23,9 +23,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class ChannelType extends AbstractResourceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -52,9 +49,6 @@ final class ChannelType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_channel';

@@ -9,6 +9,7 @@ sylius:
             choices: Auswahlmöglichkeiten
             code: Code
             name: Name
+            translatable: Übersetzbar
             translations: Übersetzungen
             type: Typ
         attribute_type:
@@ -18,11 +19,11 @@ sylius:
             datetime: Datum / Zeit
             integer: Integer
             percent: Prozent
-            select: Bundesland auswählen
+            select: Auswahl
             text: Text
             textarea: Textfeld
-            title: Attributtyp
-            validation: Überprüfung
+            title: Attributtypen
+            validation: Validierung
         attribute_type_configuration:
             datetime:
                 format: Format

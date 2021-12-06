@@ -2,6 +2,25 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    catalog_promotion:
+        code:
+            unique: The catalog promotion with given code already exists.
+            regex: Catalog promotion code can only be comprised of letters, numbers, dashes and underscores.
+            not_blank: Please enter catalog promotion code.
+        date:
+            greater_than_start_date: End date cannot be set before start date.
+        name:
+            max_length: Catalog promotion name must not be longer than {{ limit }} characters.
+            min_length: Catalog promotion name must be at least {{ limit }} characters long.
+            not_blank: Please enter catalog promotion name.
+        state:
+            processing: The catalog promotion cannot be edited as it is currently being processed.
+    catalog_promotion_action:
+        invalid_type: Catalog promotion action type is invalid. Please choose a valid type.
+        percentage_discount:
+            not_in_range: The percentage discount amount must be between 0% and 100%.
+            not_number_or_empty: The percentage discount amount must be a number and can not be empty.
+            not_valid: The percentage discount amount must be configured.
     promotion:
         code:
             unique: The promotion with given code already exists.
@@ -12,13 +31,14 @@ sylius:
             min_length: Promotion description must be at least 1 character long.|Promotion description must be at least {{ limit }} characters long.
             not_blank: Please enter promotion description.
         end_date_cannot_be_set_prior_start_date: End date cannot be set prior start date.
+        is_invalid: Promotion is invalid.
         name:
             max_length: Promotion name must not be longer than 1 character.|Promotion name must not be longer than {{ limit }} characters.
             min_length: Promotion name must be at least 1 character long.|Promotion name must be at least {{ limit }} characters long.
             not_blank: Please enter promotion name.
     promotion_action:
         percentage_discount_configuration:
-            not_in_range: The percentage discount must be between 0% and 100%. 
+            not_in_range: The percentage discount must be between 0% and 100%.
     promotion_coupon:
         code:
             max_length: Coupon code must not be longer than 1 character.|Coupon code must not be longer than {{ limit }} characters.

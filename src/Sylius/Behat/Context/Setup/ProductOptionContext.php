@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Product\Model\ProductOptionInterface;
@@ -24,20 +24,15 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ProductOptionContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var ProductOptionRepositoryInterface */
-    private $productOptionRepository;
+    private ProductOptionRepositoryInterface $productOptionRepository;
 
-    /** @var FactoryInterface */
-    private $productOptionFactory;
+    private FactoryInterface $productOptionFactory;
 
-    /** @var FactoryInterface */
-    private $productOptionValueFactory;
+    private FactoryInterface $productOptionValueFactory;
 
-    /** @var ObjectManager */
-    private $objectManager;
+    private ObjectManager $objectManager;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,

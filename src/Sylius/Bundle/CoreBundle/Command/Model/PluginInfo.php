@@ -15,14 +15,11 @@ namespace Sylius\Bundle\CoreBundle\Command\Model;
 
 final class PluginInfo
 {
-    /** @var string */
-    private $name;
+    private string $name;
 
-    /** @var string */
-    private $description;
+    private string $description;
 
-    /** @var string */
-    private $url;
+    private string $url;
 
     public function __construct(string $name, string $description, string $url)
     {

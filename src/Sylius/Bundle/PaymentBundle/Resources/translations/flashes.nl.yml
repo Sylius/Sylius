@@ -3,6 +3,7 @@
 
 sylius:
     payment:
+        authorized: 'Betaling is geautoriseerd.'
         cancelled: 'Betaling werd geannuleerd.'
         completed: 'Betaling is voltooid.'
         failed: 'Betaling is mislukt.'

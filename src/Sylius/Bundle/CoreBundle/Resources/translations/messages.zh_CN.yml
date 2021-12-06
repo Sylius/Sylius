@@ -9,6 +9,8 @@ sylius:
             title: 标题
         cart:
             coupon: 优惠券
+        catalog_promotion:
+            channels: 门店
         checkout:
             addressing:
                 different_billing_address: 使用不同地址的帐单吗？
@@ -32,6 +34,7 @@ sylius:
                 postcode: 邮编
                 street: 街道
             contact_email: 联系邮件
+            countries: 国家
             currencies: 货币
             currency_base: 基础货币
             account_verification_required: 账号验证是否必须
@@ -100,12 +103,11 @@ sylius:
             file: 选择图像
         user:
             billing_address: 账单地址
-            different_billing_address: 使用不同地址的帐单吗？
             enabled: 已启用
-            first_name: 名字
+            first_name: 名
             groups: 团体
             roles: 角色
-            last_name: 姓氏
+            last_name: 姓
             password: 密码
             shipping_address: 送货地址
         user_filter:
@@ -142,11 +144,11 @@ sylius:
                 products: 商品
             total_of_items_from_taxon:
                 taxon: 分类
-                amount: 金额
+                amount: 折扣金额
         payment_method:
             channels: 门店
         product_attribute:
-            position: 优先级
+            position: 位置
         zone:
             scopes:
                 shipping: 运费

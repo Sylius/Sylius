@@ -16,41 +16,54 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="Sylius\Component\Core\Model\Shipment">
+        <attribute name="id">
+            <group>admin:order:read</group>
+            <group>admin:shipment:read</group>
+            <group>shop:cart:read</group>
+            <group>shop:shipment:read</group>
+        </attribute>
+
         <attribute name="createdAt">
-            <group>shipment:read</group>
+            <group>admin:shipment:read</group>
+            <group>shop:shipment:read</group>
         </attribute>
 
         <attribute name="updatedAt">
-            <group>shipment:read</group>
-        </attribute>
-
-        <attribute name="id">
-            <group>shipment:read</group>
+            <group>admin:shipment:read</group>
+            <group>shop:shipment:read</group>
         </attribute>
 
         <attribute name="state">
-            <group>shipment:read</group>
+            <group>admin:shipment:read</group>
+            <group>shop:shipment:read</group>
         </attribute>
 
         <attribute name="method">
-            <group>shipment:read</group>
+            <group>admin:order:read</group>
+            <group>admin:shipment:read</group>
+            <group>shop:cart:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:shipment:read</group>
         </attribute>
 
         <attribute name="units">
-            <group>shipment:read</group>
+            <group>admin:shipment:read</group>
+            <group>shop:shipment:read</group>
         </attribute>
 
         <attribute name="tracking">
-            <group>shipment:read</group>
-            <group>shipment:update</group>
+            <group>admin:shipment:read</group>
+            <group>shop:shipment:read</group>
         </attribute>
 
         <attribute name="shippedAt">
-            <group>shipment:read</group>
+            <group>admin:shipment:read</group>
+            <group>shop:shipment:read</group>
         </attribute>
 
         <attribute name="order">
-            <group>shipment:read</group>
+            <group>admin:shipment:read</group>
+            <group>shop:shipment:read</group>
         </attribute>
     </class>
 </serializer>

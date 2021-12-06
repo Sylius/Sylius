@@ -33,7 +33,7 @@ Overwrite the state machine of Checkout
 
 Open the `CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml>`_
 and place its content in the ``src/Resources/SyliusCoreBundle/config/app/state_machine/sylius_order_checkout.yml``
-which is a `standard procedure of overriding configs in Symfony <http://symfony.com/doc/current/bundles/inheritance.html#overriding-resources-templates-routing-etc>`_.
+which is a `standard procedure of overriding configs in Symfony <https://symfony.com/doc/current/bundles/inheritance.html#overriding-resources-templates-routing-etc>`_.
 Remove the ``shipping_selected`` and ``shipping_skipped`` states, ``select_shipping`` and ``skip_shipping`` transitions.
 Remove the ``select_shipping`` and ``skip_shipping`` transition from the ``sylius_process_cart`` callback.
 
@@ -203,7 +203,7 @@ to the ``app/Resources/SyliusShopBundle/config/routing/checkout.yml`` file.
         path: /
         methods: [GET]
         defaults:
-            _controller: FrameworkBundle:Redirect:redirect
+            _controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController:redirectAction
             route: sylius_shop_checkout_address
 
     sylius_shop_checkout_address:

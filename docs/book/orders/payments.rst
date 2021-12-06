@@ -42,14 +42,17 @@ The available transitions between these states are:
         process:
             from: [new]
             to: processing
-        complete:
+        authorize:
             from: [new, processing]
+            to: authorized
+        complete:
+            from: [new, processing, authorized]
             to: completed
         fail:
             from: [new, processing]
             to: failed
         cancel:
-            from: [new, processing]
+            from: [new, processing, authorized]
             to: cancelled
         refund:
             from: [completed]
@@ -105,7 +108,7 @@ In order to have your new payment method available in the checkout remember to *
 
 .. code-block:: php
 
-    $paymentMethod->addChannel($channel)
+    $paymentMethod->addChannel($channel);
 
 Payment Gateway configuration
 -----------------------------
@@ -114,8 +117,10 @@ Payment Gateways that already have a Sylius bridge
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 First you need to create the configuration form type for your gateway. Have a look at the configuration form types of
-`Paypal <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/PayumBundle/Form/Type/PaypalGatewayConfigurationType.php>`_
-and `Stripe <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/PayumBundle/Form/Type/StripeGatewayConfigurationType.php>`_.
+
+* `Paypal Commerce Platform <https://github.com/Sylius/PayPalPlugin/blob/master/src/Form/Type/PayPalConfigurationType.php>`_
+* `Paypal Express Checkout <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/PayumBundle/Form/Type/PaypalGatewayConfigurationType.php>`_
+* `Stripe <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/PayumBundle/Form/Type/StripeGatewayConfigurationType.php>`_
 
 Then you should register its configuration form type with ``sylius.gateway_configuration_type`` tag.
 After that it will be available in the Admin panel in the gateway choice dropdown.
@@ -132,7 +137,7 @@ Other Payment Gateways
     Learn more about integrating payment gateways in the :doc:`dedicated guide </cookbook/payments/custom-payment-gateway>` and in `the Payum docs <https://github.com/Payum/Payum/blob/master/docs/index.md>`_.
 
 When the Payment Gateway you are trying to use does have a bridge available and you integrate them on your own,
-use our guide on :doc:`extension development </plugin-development-guide/index>`.
+use our guide on :doc:`extension development </book/plugins/guide/index>`.
 
 Troubleshooting
 ---------------

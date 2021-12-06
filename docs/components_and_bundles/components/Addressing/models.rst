@@ -74,7 +74,7 @@ It should contain all data concerning a country and as default has the following
 
 .. note::
    This model implements the :ref:`component_addressing_model_country-interface`
-   and :ref:`component_resource_model_code-aware-interface`.
+   and `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_.
 
    For more detailed information go to `Sylius API Country`_.
 
@@ -103,7 +103,7 @@ It should contain all data concerning a province and as default has the followin
 
 .. note::
    This model implements the :ref:`component_addressing_model_province-interface`
-   and :ref:`component_resource_model_code-aware-interface`.
+   and `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_.
 
    For more detailed information go to `Sylius API Province`_.
 
@@ -135,7 +135,7 @@ It should contain all data concerning a zone and as default has the following pr
 
 .. note::
    This model implements the :ref:`component_addressing_model_zone-interface`
-   and :ref:`component_resource_model_code-aware-interface`.
+   and `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_.
 
    For more detailed information go to `Sylius API Zone`_.
 
@@ -162,7 +162,7 @@ On default this model has the following properties:
 
 .. note::
    This model implements :ref:`component_addressing_model_zone-member-interface`
-   and :ref:`component_resource_model_code-aware-interface`.
+   and `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_.
 
    For more detailed information go to `Sylius API ZoneMember`_.
 

@@ -46,6 +46,14 @@ interface ShowPageInterface extends PageInterface
 
     public function getAverageRating(): float;
 
+    public function getCatalogPromotionName(): string;
+
+    public function hasCatalogPromotionApplied(string $name): bool;
+
+    public function getCatalogPromotionNames(): array;
+
+    public function getCatalogPromotions(): array;
+
     public function getCurrentUrl(): string;
 
     public function getCurrentVariantName(): string;
@@ -53,6 +61,10 @@ interface ShowPageInterface extends PageInterface
     public function getName(): string;
 
     public function getPrice(): string;
+
+    public function getOriginalPrice(): ?string;
+
+    public function isOriginalPriceVisible(): bool;
 
     public function hasAddToCartButton(): bool;
 
@@ -75,4 +87,10 @@ interface ShowPageInterface extends PageInterface
     public function selectVariant(string $variantName): void;
 
     public function visit(string $url): void;
+
+    public function getVariantsNames(): array;
+
+    public function getOptionValues(string $optionName): array;
+
+    public function getDescription(): string;
 }

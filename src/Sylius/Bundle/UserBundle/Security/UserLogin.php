@@ -24,14 +24,11 @@ use Symfony\Component\Security\Core\User\UserCheckerInterface;
 
 class UserLogin implements UserLoginInterface
 {
-    /** @var TokenStorageInterface */
-    private $tokenStorage;
+    private TokenStorageInterface $tokenStorage;
 
-    /** @var UserCheckerInterface */
-    private $userChecker;
+    private UserCheckerInterface $userChecker;
 
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(
         TokenStorageInterface $tokenStorage,
@@ -43,9 +40,6 @@ class UserLogin implements UserLoginInterface
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function login(UserInterface $user, ?string $firewallName = null): void
     {
         $firewallName = $firewallName ?? 'main';
@@ -59,11 +53,25 @@ class UserLogin implements UserLoginInterface
         }
 
         $this->tokenStorage->setToken($token);
-        $this->eventDispatcher->dispatch(UserEvents::SECURITY_IMPLICIT_LOGIN, new UserEvent($user));
+        $this->eventDispatcher->dispatch(new UserEvent($user), UserEvents::SECURITY_IMPLICIT_LOGIN);
     }
 
     protected function createToken(UserInterface $user, string $firewallName): UsernamePasswordToken
     {
-        return new UsernamePasswordToken($user, null, $firewallName, $user->getRoles());
+        /** @deprecated parameter credential was deprecated in Symfony 5.4, so in Sylius 1.11 too, in Sylius 2.0 providing 4 arguments will be prohibited. */
+        if (3 === (new \ReflectionClass(UsernamePasswordToken::class))->getConstructor()->getNumberOfParameters()) {
+            return new UsernamePasswordToken(
+                $user,
+                $firewallName,
+                array_map(/** @param object|string $role */ static function ($role): string { return (string) $role; }, $user->getRoles())
+            );
+        }
+
+        return new UsernamePasswordToken(
+            $user,
+            null,
+            $firewallName,
+            array_map(/** @param object|string $role */ static function ($role): string { return (string) $role; }, $user->getRoles())
+        );
     }
 }

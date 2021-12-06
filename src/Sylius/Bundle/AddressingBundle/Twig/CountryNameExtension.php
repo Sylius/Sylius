@@ -14,15 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AddressingBundle\Twig;
 
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Countries;
+use Symfony\Component\Intl\Exception\MissingResourceException;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
 class CountryNameExtension extends AbstractExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getFilters(): array
     {
         return [
@@ -34,10 +32,16 @@ class CountryNameExtension extends AbstractExtension
     {
         $countryCode = $country instanceof CountryInterface ? $country->getCode() : $country;
 
-        if ($countryName = Intl::getRegionBundle()->getCountryName($countryCode, $locale)) {
-            return $countryName;
+        if (null === $countryCode) {
+            return '';
         }
 
-        return $countryCode ?? '';
+        try {
+            $countryName = Countries::getName($countryCode, $locale);
+        } catch (MissingResourceException $exception) {
+            return $countryCode;
+        }
+
+        return $countryName;
     }
 }

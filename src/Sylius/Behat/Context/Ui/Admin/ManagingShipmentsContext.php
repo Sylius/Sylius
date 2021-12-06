@@ -26,17 +26,13 @@ use Webmozart\Assert\Assert;
 
 final class ManagingShipmentsContext implements Context
 {
-    /** @var IndexPageInterface */
-    private $indexPage;
+    private IndexPageInterface $indexPage;
 
-    /** @var OrderShowPageInterface */
-    private $orderShowPage;
+    private OrderShowPageInterface $orderShowPage;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
 
-    /** @var ShowPageInterface */
-    private $showPage;
+    private \Sylius\Behat\Page\Admin\Shipment\ShowPageInterface $showPage;
 
     public function __construct(
         IndexPageInterface $indexPage,
@@ -95,6 +91,14 @@ final class ManagingShipmentsContext implements Context
     public function iChooseChannelAsAChannelFilter(string $channelName): void
     {
         $this->indexPage->chooseChannelFilter($channelName);
+    }
+
+    /**
+     * @When I choose :shippingMethodName as a shipping method filter
+     */
+    public function iChooseAsAShippingMethodFilter(string $shippingMethodName): void
+    {
+        $this->indexPage->chooseShippingMethodFilter($shippingMethodName);
     }
 
     /**

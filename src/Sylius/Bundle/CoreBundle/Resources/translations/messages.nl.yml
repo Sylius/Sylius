@@ -9,9 +9,12 @@ sylius:
             title: Titel
         cart:
             coupon: Coupon
+        catalog_promotion:
+            channels: Kanalen
         checkout:
             addressing:
-                different_billing_address: Gebruik een ander factuuradres?
+                different_billing_address: Gebruik een ander adres voor facturering?
+                different_shipping_address: Gebruik een ander adres voor verzending?
             payment_method: Betalingsmethode
             shipping_method: Verzendmethode
         promotion:
@@ -21,6 +24,7 @@ sylius:
                 product: Product
         promotion_coupon:
             per_customer_usage_limit: Gebruikslimiet per klant
+            reusable_from_cancelled_orders: Herbruikbaar vanuit geannuleerde bestellingen
         group:
             name: Naam
             roles: Rollen
@@ -31,15 +35,20 @@ sylius:
                 country: Land
                 postcode: Postcode
                 street: Straat
+                tax_id: BTW-nummer
             contact_email: Contact e-mail
+            contact_phone_number: Telefoonnummer voor contact
+            countries: Landen
             currencies: Valuta's
             currency_base: Standaardvaluta
             account_verification_required: Is account verificatie vereist?
             hostname: Hostnaam
             locale_default: Standaardlandinstelling
             locales: Talen/Regio's
+            menu_taxon: Menu categorie
             payment_methods: Betaalmethodes
             shipping_methods: Verzendmethodes
+            shop_billing_data: Facturatiegegevens winkel
             skipping_shipping_step_allowed: Verzending stap overslaan indien er slechts 1 verzendmethode beschikbaar is?
             skipping_payment_step_allowed: Sla betaalstap over als er maar een enkele betaalmethode is?
             tax_calculation_strategy: Belastingberekeningsstrategie
@@ -58,7 +67,7 @@ sylius:
             number: Nummer
             total_from: Van
             total_to: Tot
-            payment_state: Betaalstatus
+            payment_state: Betaal status
             channel: Alle kanalen
         page:
             body: Inhoud
@@ -76,7 +85,7 @@ sylius:
             name: Naam
             code: Code
         product_variant:
-            tax_category: Belasting categorie
+            tax_category: Belastingcategorie
             shipping_category: Verzend categorie
         shipment_filter:
             created_at_from: Van
@@ -100,7 +109,7 @@ sylius:
             file: Selecteer afbeelding
         user:
             billing_address: Factuuradres
-            different_billing_address: Gebruik een ander factuuradres?
+            different_shipping_address: Gebruik een ander adres voor verzending?
             enabled: Ingeschakeld
             first_name: Voornaam
             groups: Groepen
@@ -196,6 +205,7 @@ sylius:
             header: PHP-versie en -instellingen
             any: elke
             detect_unicode: detect_unicode
+            detect_unicode_help: Configureer 'detect_unicode = Off' in uw php.ini bestand
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: niet verouderd
             off: false
@@ -203,13 +213,16 @@ sylius:
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
+                auto_start_help: Configureer 'session.auto_start = Off' in uw php.ini bestand
             short_open_tag: short_open_tag
             timezone: tijdzone
+            timezone_help: Configureer 'date.timezone' in uw php.ini bestand (bijv. date.timezone = "Europe/Amsterdam")
             timezone_deprecated:
                 header: Verouderde tijdzone
                 help: Tijdzone %timezone% is verouderd. Fix je php.ini bestand (lijst met verouderde tijdzones http://php.net/manual/en/timezones.others.php).
             version: PHP versie
             version_recommended: Aanbevolen PHP versie
+            version_help: Sylius raadt PHP-versie %recommended% aan, uw huidige versie is %current%. Upgrade alstublieft.
     payum_gateway:
         cash_on_delivery: Onder rembours
         offline: Offline

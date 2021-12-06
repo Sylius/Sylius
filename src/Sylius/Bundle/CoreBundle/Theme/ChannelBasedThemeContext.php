@@ -22,11 +22,9 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 final class ChannelBasedThemeContext implements ThemeContextInterface
 {
-    /** @var ChannelContextInterface */
-    private $channelContext;
+    private ChannelContextInterface $channelContext;
 
-    /** @var ThemeRepositoryInterface */
-    private $themeRepository;
+    private ThemeRepositoryInterface $themeRepository;
 
     public function __construct(ChannelContextInterface $channelContext, ThemeRepositoryInterface $themeRepository)
     {
@@ -34,9 +32,6 @@ final class ChannelBasedThemeContext implements ThemeContextInterface
         $this->themeRepository = $themeRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTheme(): ?ThemeInterface
     {
         try {

@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        api_managing_countries:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.country
+                - sylius.behat.context.transform.province
+
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.lexical
+
+                - sylius.behat.context.setup.admin_api_security
+                - sylius.behat.context.setup.geographical
+
+                - sylius.behat.context.api.admin.managing_countries
+
+            filters:
+                tags: "@managing_countries&&@api"
+            javascript: false

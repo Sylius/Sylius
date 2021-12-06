@@ -28,9 +28,6 @@ use Symfony\Component\Form\FormEvents;
 
 final class ProductTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -68,11 +65,13 @@ final class ProductTypeExtension extends AbstractTypeExtension
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtendedType(): string
     {
         return ProductType::class;
+    }
+
+    public static function getExtendedTypes(): iterable
+    {
+        return [ProductType::class];
     }
 }

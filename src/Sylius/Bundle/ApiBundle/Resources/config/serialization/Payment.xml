@@ -17,31 +17,45 @@
 >
     <class name="Sylius\Component\Core\Model\Payment">
         <attribute name="id">
-            <group>payment:read</group>
+            <group>admin:order:read</group>
+            <group>admin:payment:read</group>
+            <group>shop:cart:read</group>
+            <group>shop:payment:read</group>
         </attribute>
         <attribute name="method">
-            <group>payment:read</group>
+            <group>admin:order:read</group>
+            <group>admin:payment:read</group>
+            <group>shop:cart:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:payment:read</group>
         </attribute>
         <attribute name="currencyCode">
-            <group>payment:read</group>
+            <group>admin:payment:read</group>
+            <group>shop:payment:read</group>
         </attribute>
         <attribute name="amount">
-            <group>payment:read</group>
+            <group>admin:payment:read</group>
+            <group>shop:payment:read</group>
         </attribute>
         <attribute name="state">
-            <group>payment:read</group>
+            <group>admin:payment:read</group>
+            <group>shop:payment:read</group>
         </attribute>
         <attribute name="details">
-            <group>payment:read</group>
+            <group>admin:payment:read</group>
+            <group>shop:payment:read</group>
         </attribute>
         <attribute name="createdAt">
-            <group>payment:read</group>
+            <group>admin:payment:read</group>
+            <group>shop:payment:read</group>
         </attribute>
         <attribute name="updatedAt">
-            <group>payment:read</group>
+            <group>admin:payment:read</group>
+            <group>shop:payment:read</group>
         </attribute>
         <attribute name="order">
-            <group>payment:read</group>
+            <group>admin:payment:read</group>
+            <group>shop:payment:read</group>
         </attribute>
     </class>
 </serializer>

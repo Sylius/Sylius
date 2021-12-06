@@ -37,7 +37,7 @@ The configuration looks like that:
                                    code: "default"
 
 Customer Pool can be assigned to a Channel, but only during its _creation_ in Admin panel. Currently it is not possible
-to modify the User Pool after the channel is created, as it would lead to certain edge cases with customers loosing access to channels,
+to modify the User Pool after the channel is created, as it would lead to certain edge cases with customers losing access to channels,
 after improper admin operations.
 
 There is also a possibility to choose a specific customer pool during channel or shop customer creation in fixtures
@@ -103,4 +103,4 @@ Learn more
 
 .. image:: ../../_images/sylius_plus/banner.png
    :align: center
-   :target: http://sylius.com/plus/?utm_source=docs
+   :target: https://sylius.com/plus/?utm_source=docs

@@ -21,9 +21,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class PromotionFilterCollectionTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('taxons_filter', TaxonFilterConfigurationType::class, [
@@ -36,11 +33,13 @@ final class PromotionFilterCollectionTypeExtension extends AbstractTypeExtension
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtendedType(): string
     {
         return PromotionFilterCollectionType::class;
+    }
+
+    public static function getExtendedTypes(): iterable
+    {
+        return [PromotionFilterCollectionType::class];
     }
 }

@@ -22,7 +22,9 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.behat.page.shop.product.show" class="%sylius.behat.page.shop.product.show.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.product.show" class="%sylius.behat.page.shop.product.show.class%" parent="sylius.behat.symfony_page" public="false">
+            <argument type="service" id="sylius.behat.page.shop.cart_summary" />
+        </service>
         <service id="sylius.behat.page.shop.product.index" class="%sylius.behat.page.shop.product.index.class%" parent="sylius.behat.symfony_page" public="false" />
         <service id="sylius.behat.page.shop.product_reviews.create" class="%sylius.behat.page.shop.product_reviews.create.class%" parent="sylius.behat.symfony_page" public="false" />
         <service id="sylius.behat.page.shop.product_reviews.index" class="%sylius.behat.page.shop.product_reviews.index.class%" parent="sylius.behat.symfony_page" public="false" />

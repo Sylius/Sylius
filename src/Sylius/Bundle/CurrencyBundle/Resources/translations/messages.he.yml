@@ -7,3 +7,8 @@ sylius:
             base: מטבע בסיס
             code: שם
             enabled: הופעל
+            exchange_rate: שער החליפין
+        exchange_rate:
+            source_currency: מטבע המקור
+            target_currency: מטבע המטרה
+            ratio: יחס

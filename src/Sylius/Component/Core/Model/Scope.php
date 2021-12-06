@@ -13,13 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
-final class Scope
+use Sylius\Component\Addressing\Model\Scope as BaseScope;
+
+interface Scope extends BaseScope
 {
     public const SHIPPING = 'shipping';
 
     public const TAX = 'tax';
-
-    private function __construct()
-    {
-    }
 }

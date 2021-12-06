@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius.validator.promotion_subject_coupon" class="Sylius\Bundle\PromotionBundle\Validator\PromotionSubjectCouponValidator">
+            <argument type="service" id="sylius.promotion_eligibility_checker" />
+            <tag name="validator.constraint_validator" alias="sylius_promotion_subject_validator" />
+        </service>
+
+        <service id="sylius.validator.date_range" class="Sylius\Bundle\PromotionBundle\Validator\PromotionDateRangeValidator">
+            <tag name="validator.constraint_validator" alias="sylius_promotion_date_range_validator" />
+        </service>
+
+        <service id="sylius.validator.promotion_coupon_generation_amount" class="Sylius\Bundle\PromotionBundle\Validator\CouponGenerationAmountValidator">
+            <argument type="service" id="sylius.promotion_coupon_generator.percentage_policy" />
+            <tag name="validator.constraint_validator" alias="sylius_coupon_generation_amount_validator" />
+        </service>
+
+        <service id="Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction\PercentageDiscountActionValidator">
+            <tag name="sylius.catalog_promotion.action_validator" key="percentage_discount"/>
+        </service>
+
+        <service id="Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionValidator">
+            <argument type="collection">
+                <argument type="constant">Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT</argument>
+                <argument type="constant">Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT</argument>
+            </argument>
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.action_validator" index-by="key" />
+            <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_action" />
+        </service>
+    </services>
+</container>

@@ -15,7 +15,7 @@ Feature: Apply correct taxes on visitor cart
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And it belongs to "Clothes" tax category
 
-    @ui
+    @ui @api
     Scenario: Proper taxes for taxed product
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$123.00"

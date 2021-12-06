@@ -25,20 +25,15 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductAttributesContext implements Context
 {
-    /** @var CreatePageInterface */
-    private $createPage;
+    private CreatePageInterface $createPage;
 
-    /** @var IndexPageInterface */
-    private $indexPage;
+    private IndexPageInterface $indexPage;
 
-    /** @var UpdatePageInterface */
-    private $updatePage;
+    private UpdatePageInterface $updatePage;
 
-    /** @var CurrentPageResolverInterface */
-    private $currentPageResolver;
+    private CurrentPageResolverInterface $currentPageResolver;
 
-    /** @var SharedSecurityServiceInterface */
-    private $sharedSecurityService;
+    private SharedSecurityServiceInterface $sharedSecurityService;
 
     public function __construct(
         CreatePageInterface $createPage,
@@ -77,6 +72,14 @@ final class ManagingProductAttributesContext implements Context
     public function iSpecifyItsNameAs($name, $language)
     {
         $this->createPage->nameIt($name, $language);
+    }
+
+    /**
+     * @When I disable its translatability
+     */
+    public function iDisableItsTranslatability(): void
+    {
+        $this->createPage->disableTranslation();
     }
 
     /**

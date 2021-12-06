@@ -24,19 +24,16 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class UploadAvatarImageAction
 {
-    /** @var FactoryInterface */
-    private $avatarImageFactory;
+    private FactoryInterface $avatarImageFactory;
 
-    /** @var AvatarImageRepositoryInterface */
-    private $avatarImageRepository;
+    private AvatarImageRepositoryInterface $avatarImageRepository;
 
-    /** @var ImageUploaderInterface */
-    private $imageUploader;
+    private ImageUploaderInterface $imageUploader;
 
-    /** @var IriConverterInterface */
-    private $iriConverter;
+    private IriConverterInterface $iriConverter;
 
     public function __construct(
         FactoryInterface $avatarImageFactory,
@@ -60,7 +57,7 @@ final class UploadAvatarImageAction
         $image->setFile($file);
 
         /** @var string $ownerIri */
-        $ownerIri = $request->get('owner');
+        $ownerIri = $request->request->get('owner');
         Assert::notEmpty($ownerIri);
 
         /** @var ResourceInterface|AdminUserInterface $owner */

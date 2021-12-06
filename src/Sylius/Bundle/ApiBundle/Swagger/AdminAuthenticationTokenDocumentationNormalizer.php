@@ -16,22 +16,25 @@ namespace Sylius\Bundle\ApiBundle\Swagger;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
+/** @experimental */
 final class AdminAuthenticationTokenDocumentationNormalizer implements NormalizerInterface
 {
-    /** @var NormalizerInterface */
-    private $decoratedNormalizer;
+    private NormalizerInterface $decoratedNormalizer;
 
-    public function __construct(NormalizerInterface $decoratedNormalizer)
+    private string $apiRoute;
+
+    public function __construct(NormalizerInterface $decoratedNormalizer, string $apiRoute)
     {
         $this->decoratedNormalizer = $decoratedNormalizer;
+        $this->apiRoute = $apiRoute;
     }
 
-    public function supportsNormalization($data, string $format = null): bool
+    public function supportsNormalization($data, $format = null): bool
     {
         return $this->decoratedNormalizer->supportsNormalization($data, $format);
     }
 
-    public function normalize($object, string $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = [])
     {
         $docs = $this->decoratedNormalizer->normalize($object, $format, $context);
 
@@ -61,7 +64,7 @@ final class AdminAuthenticationTokenDocumentationNormalizer implements Normalize
 
         $tokenDocumentation = [
             'paths' => [
-                '/new-api/admin/authentication-token' => [
+                $this->apiRoute . '/admin/authentication-token' => [
                     'post' => [
                         'tags' => ['AdminUserToken'],
                         'operationId' => 'postCredentialsItem',

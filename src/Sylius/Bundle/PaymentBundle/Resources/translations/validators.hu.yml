@@ -22,6 +22,8 @@ sylius:
     payment:
         currency_code:
             not_valid: A megadott pénznem érvénytelen.
+        method:
+            not_blank: 'Kérem, válassza ki a fizetési módot.'
     payment_method:
         gateway:
             not_blank: Kérjük, válasszon fizetési módot.
@@ -39,4 +41,5 @@ sylius:
                 not_blank: Kérjük, írja be a százalék díjat.
         code:
             not_blank: 'Kérjük, írja be a fizetési mód kódját.'
+            regex: 'Fizetési mód kódja csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.'
             unique: 'A fizetési mód a megadott kóddal már létezik.'

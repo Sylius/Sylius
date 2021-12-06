@@ -1,5 +1,4 @@
 doctrine_migrations:
-    dir_name: "%kernel.project_dir%/app/migrations"
-    namespace: Sylius\Migrations
-    table_name: sylius_migrations
-    name: Sylius Migrations
+    storage:
+        table_storage:
+            table_name: sylius_migrations

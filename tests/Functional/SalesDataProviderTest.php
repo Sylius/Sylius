@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Tests\Functional;
@@ -7,6 +16,7 @@ namespace Sylius\Tests\Functional;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Dashboard\Interval;
 use Sylius\Component\Core\Dashboard\SalesDataProviderInterface;
 use Sylius\Component\Core\Dashboard\SalesSummary;
 use Sylius\Component\Core\Dashboard\SalesSummaryInterface;
@@ -45,15 +55,68 @@ final class SalesDataProviderTest extends WebTestCase
     }
 
     /** @test */
-    public function it_provides_simple_year_sales_summary_grouped_per_month(): void
+    public function it_provides_year_sales_summary_grouped_by_year(): void
     {
-        $salesSummary = $this->getSummaryForChannel('CHANNEL');
-        $expectedMonths = $this->getExpectedMonths();
+        $startDate = new \DateTime('2019-01-01 00:00:01');
+        $endDate = new \DateTime('2020-12-31 23:59:59');
+
+        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, Interval::year(), 'CHANNEL');
+
+        $expectedPeriods = $this->getExpectedPeriods($startDate, $endDate, '1 year', 'Y');
 
         $this->assertInstanceOf(SalesSummary::class, $salesSummary);
-        $this->assertSame($expectedMonths, $salesSummary->getMonths());
+        $this->assertSame($expectedPeriods, $salesSummary->getIntervals());
+        $this->assertSame(['20.00', '110.00'], $salesSummary->getSales());
+    }
+
+    /** @test */
+    public function it_provides_year_sales_summary_in_chosen_year(): void
+    {
+        $startDate = new \DateTime('2020-01-01 00:00:01');
+        $endDate = new \DateTime('2020-12-31 23:59:59');
+
+        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, Interval::year(), 'CHANNEL');
+
+        $expectedPeriods = $this->getExpectedPeriods($startDate, $endDate, '1 year', 'Y');
+
+        $this->assertInstanceOf(SalesSummary::class, $salesSummary);
+        $this->assertSame($expectedPeriods, $salesSummary->getIntervals());
+        $this->assertSame(['110.00'], $salesSummary->getSales());
+    }
+
+    /** @test */
+    public function it_provides_year_sales_summary_grouped_per_month(): void
+    {
+        $startDate = new \DateTime('2020-01-01 00:00:01');
+        $endDate = new \DateTime('2020-12-31 23:59:59');
+
+        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, Interval::month(), 'CHANNEL');
+        $expectedPeriods = $this->getExpectedPeriods($startDate, $endDate, '1 month', 'n.Y');
+
+        $this->assertInstanceOf(SalesSummary::class, $salesSummary);
+        $this->assertSame($expectedPeriods, $salesSummary->getIntervals());
         $this->assertSame(
-            ['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '30.00', '20.00', '20.00', '0.00'],
+            ['70.00', '40.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00'],
+            $salesSummary->getSales()
+        );
+    }
+
+    /** @test */
+    public function it_provides_years_sales_summary_grouped_per_month(): void
+    {
+        $startDate = new \DateTime('2019-01-01 00:00:01');
+        $endDate = new \DateTime('2020-12-31 23:59:59');
+
+        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, Interval::month(), 'CHANNEL');
+        $expectedPeriods = $this->getExpectedPeriods($startDate, $endDate, '1 month', 'n.Y');
+
+        $this->assertInstanceOf(SalesSummary::class, $salesSummary);
+        $this->assertSame($expectedPeriods, $salesSummary->getIntervals());
+        $this->assertSame(
+            [
+                '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '20.00',
+                '70.00', '40.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00',
+            ],
             $salesSummary->getSales()
         );
     }
@@ -61,18 +124,21 @@ final class SalesDataProviderTest extends WebTestCase
     /** @test */
     public function it_provides_different_data_for_each_channel_and_only_paid_orders(): void
     {
-        $salesSummary = $this->getSummaryForChannel('EXPENSIVE_CHANNEL');
-        $expectedMonths = $this->getExpectedMonths();
+        $startDate = new \DateTime('2019-01-01 00:00:01');
+        $endDate = new \DateTime('2019-12-31 23:59:59');
+
+        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, Interval::year(), 'EXPENSIVE_CHANNEL');
+        $expectedMonths = $this->getExpectedPeriods($startDate, $endDate, '1 year', 'Y');
 
         $this->assertInstanceOf(SalesSummary::class, $salesSummary);
-        $this->assertSame($expectedMonths, $salesSummary->getMonths());
+        $this->assertSame($expectedMonths, $salesSummary->getIntervals());
         $this->assertSame(
-            ['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '330.00', '0.00'],
+            ['330.00'],
             $salesSummary->getSales()
         );
     }
 
-    private function getSummaryForChannel(string $channelCode): SalesSummaryInterface
+    private function getSummaryForChannel(\DateTimeInterface $startDate, \DateTimeInterface $endDate, Interval $interval, string $channelCode): SalesSummaryInterface
     {
         /** @var ChannelRepositoryInterface $channelRepository */
         $channelRepository = self::$container->get('sylius.repository.channel');
@@ -82,23 +148,23 @@ final class SalesDataProviderTest extends WebTestCase
         /** @var SalesDataProviderInterface $salesDataProvider */
         $salesDataProvider = self::$container->get(SalesDataProviderInterface::class);
 
-        return $salesDataProvider->getLastYearSalesSummary($channel);
+        return $salesDataProvider->getSalesSummary($channel, $startDate, $endDate, $interval);
     }
 
-    private function getExpectedMonths(): array
+    private function getExpectedPeriods(\DateTimeInterface $startDate, \DateTimeInterface $endDate, string $interval, string $dateFormat): array
     {
-        $expectedMonths = [];
-        $period = new \DatePeriod(
-            new \DateTime('first day of next month last year'),
-            \DateInterval::createFromDateString('1 month'),
-            new \DateTime('last day of this month')
+        $expectedPeriods = [];
+        $interval = new \DatePeriod(
+            $startDate,
+            \DateInterval::createFromDateString($interval),
+            $endDate
         );
 
         /** @var \DateTimeInterface $date */
-        foreach ($period as $date) {
-            $expectedMonths[] = $date->format('m.y');
+        foreach ($interval as $date) {
+            $expectedPeriods[$date->format($dateFormat)] = 0;
         }
 
-        return $expectedMonths;
+        return array_keys($expectedPeriods);
     }
 }

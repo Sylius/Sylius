@@ -12,7 +12,6 @@ sylius:
             gender: Spol
             birthday: Rojstni dan
             billing_address: Naslov za račun
-            different_billing_address: Uporabimo drug naslov za račun?
             only_customer_registration: Ustvari račun
             subscribed_to_newsletter: Prijava na prejemanje novic
         customer_group:

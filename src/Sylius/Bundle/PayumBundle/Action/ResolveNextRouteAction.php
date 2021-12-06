@@ -20,8 +20,6 @@ use Sylius\Component\Core\Model\PaymentInterface;
 final class ResolveNextRouteAction implements ActionInterface
 {
     /**
-     * {@inheritdoc}
-     *
      * @param ResolveNextRoute $request
      */
     public function execute($request): void
@@ -44,9 +42,6 @@ final class ResolveNextRouteAction implements ActionInterface
         $request->setRouteParameters(['tokenValue' => $payment->getOrder()->getTokenValue()]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($request): bool
     {
         return

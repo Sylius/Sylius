@@ -15,23 +15,26 @@ namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Order\ShowPageInterface;
+use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
 
 final class CheckoutOrderDetailsContext implements Context
 {
-    /** @var ShowPageInterface */
-    private $orderDetails;
+    private ShowPageInterface $orderDetails;
 
-    public function __construct(ShowPageInterface $orderDetails)
+    private ThankYouPageInterface $thankYouPage;
+
+    public function __construct(ShowPageInterface $orderDetails, ThankYouPageInterface $thankYouPage)
     {
         $this->orderDetails = $orderDetails;
+        $this->thankYouPage = $thankYouPage;
     }
 
     /**
      * @When /^I want to browse order details for (this order)$/
      */
-    public function iWantToBrowseOrderDetailsForThisOrder(OrderInterface $order)
+    public function iWantToBrowseOrderDetailsForThisOrder(OrderInterface $order): void
     {
         $this->orderDetails->open(['tokenValue' => $order->getTokenValue()]);
     }
@@ -39,8 +42,18 @@ final class CheckoutOrderDetailsContext implements Context
     /**
      * @When I try to pay with :paymentMethodName payment method
      */
-    public function iChangePaymentMethodTo($paymentMethodName)
+    public function iChangePaymentMethodTo(string $paymentMethodName): void
     {
+        $this->orderDetails->choosePaymentMethod($paymentMethodName);
+        $this->orderDetails->pay();
+    }
+
+    /**
+     * @When I retry the payment with :paymentMethodName payment method
+     */
+    public function iChangePaymentMethodAfterCheckout(string $paymentMethodName): void
+    {
+        $this->thankYouPage->goToTheChangePaymentMethodPage();
         $this->orderDetails->choosePaymentMethod($paymentMethodName);
         $this->orderDetails->pay();
     }
@@ -48,7 +61,7 @@ final class CheckoutOrderDetailsContext implements Context
     /**
      * @Then I should be able to pay (again)
      */
-    public function iShouldBeAbleToPay()
+    public function iShouldBeAbleToPay(): void
     {
         Assert::true($this->orderDetails->hasPayAction());
     }
@@ -56,7 +69,7 @@ final class CheckoutOrderDetailsContext implements Context
     /**
      * @Then I should not be able to pay (again)
      */
-    public function iShouldNotBeAbleToPay()
+    public function iShouldNotBeAbleToPay(): void
     {
         Assert::false($this->orderDetails->hasPayAction());
     }
@@ -67,5 +80,14 @@ final class CheckoutOrderDetailsContext implements Context
     public function iShouldSeeAsNumberOfItems(int $quantity): void
     {
         Assert::same($this->orderDetails->getAmountOfItems(), $quantity);
+    }
+
+    /**
+     * @Then I should have chosen :paymentMethodName payment method
+     */
+    public function iShouldHaveChosenPaymentMethod(string $paymentMethodName): void
+    {
+        $this->thankYouPage->goToTheChangePaymentMethodPage();
+        Assert::same($this->orderDetails->getChosenPaymentMethod(), $paymentMethodName);
     }
 }

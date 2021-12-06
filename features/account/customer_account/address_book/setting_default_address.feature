@@ -10,25 +10,25 @@ Feature: Marking an address as default
         And I have an address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" in my address book
         And I have an address "Archangelo Prime", "Mountain Av", "90640", "Isla del Muerte", "United States" in my address book
 
-    @ui
+    @ui @api
     Scenario: Having no address marked as default at first
-        Given I am browsing my address book
-        Then I should not have a default address
-        And I should have 2 addresses in my address book
+        When I browse my address book
+        Then I should have 2 addresses in my address book
+        And I should not have a default address
 
-    @ui
+    @ui @api
     Scenario: Setting an address as default
-        Given I am browsing my address book
-        When I set the address of "Lucifer Morningstar" as default
+        When I browse my address book
+        And I set the address of "Lucifer Morningstar" as default
         Then I should be notified that the address has been set as default
         And I should have 2 addresses in my address book
-        And address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" should be marked as my default address
+        And address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" should be set as my default address
 
-    @ui
+    @ui @api
     Scenario: Only one address can be default
         Given my default address is of "Lucifer Morningstar"
-        And I am browsing my address book
-        When I set the address of "Archangelo Prime" as default
+        When I browse my address book
+        And I set the address of "Archangelo Prime" as default
         Then I should be notified that the address has been set as default
-        And address "Archangelo Prime", "Mountain Av", "90640", "Isla del Muerte", "United States" should be marked as my default address
+        And address "Archangelo Prime", "Mountain Av", "90640", "Isla del Muerte", "United States" should be set as my default address
         And the address assigned to "Lucifer Morningstar" should be in my book

@@ -14,7 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
+use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -27,29 +28,28 @@ use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 
 final class ChannelContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var DefaultChannelFactoryInterface */
-    private $unitedStatesChannelFactory;
+    private ChannelContextSetterInterface $channelContextSetter;
 
-    /** @var DefaultChannelFactoryInterface */
-    private $defaultChannelFactory;
+    private DefaultChannelFactoryInterface $unitedStatesChannelFactory;
 
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
+    private DefaultChannelFactoryInterface $defaultChannelFactory;
 
-    /** @var ObjectManager */
-    private $channelManager;
+    private ChannelRepositoryInterface $channelRepository;
+
+    private ObjectManager $channelManager;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
+        ChannelContextSetterInterface $channelContextSetter,
         DefaultChannelFactoryInterface $unitedStatesChannelFactory,
         DefaultChannelFactoryInterface $defaultChannelFactory,
         ChannelRepositoryInterface $channelRepository,
         ObjectManager $channelManager
     ) {
         $this->sharedStorage = $sharedStorage;
+        $this->channelContextSetter = $channelContextSetter;
         $this->unitedStatesChannelFactory = $unitedStatesChannelFactory;
         $this->defaultChannelFactory = $defaultChannelFactory;
         $this->channelRepository = $channelRepository;
@@ -80,9 +80,10 @@ final class ChannelContext implements Context
     /**
      * @Given the store operates on a single channel in the "United States" named :channelIdentifier
      */
-    public function storeOperatesOnASingleChannelInTheUnitedStatesNamed($channelIdentifier)
+    public function storeOperatesOnASingleChannelInTheUnitedStatesNamed(string $channelName)
     {
-        $defaultData = $this->unitedStatesChannelFactory->create($channelIdentifier, $channelIdentifier);
+        $channelCode = StringInflector::nameToLowercaseCode($channelName);
+        $defaultData = $this->unitedStatesChannelFactory->create($channelCode, $channelName);
 
         $this->sharedStorage->setClipboard($defaultData);
         $this->sharedStorage->set('channel', $defaultData['channel']);
@@ -103,8 +104,9 @@ final class ChannelContext implements Context
     /**
      * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)"$/
      * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)" in "([^"]+)" currency$/
+     * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)" in "([^"]+)" currency and with hostname "([^"]+)"$/
      * @Given the store operates on a channel identified by :code code
-     * @Given the store (also) operates on a channel named :channelName with hostname :hostname
+     * @Given the store (also) operates on a(nother) channel named :channelName with hostname :hostname
      */
     public function theStoreOperatesOnAChannelNamed(string $channelName, string $currencyCode = null, string $hostname = null): void
     {
@@ -248,6 +250,19 @@ final class ChannelContext implements Context
         }
 
         $this->channelManager->flush();
+    }
+
+    /**
+     * @Given /^I changed (?:|back )my current (channel to "([^"]+)")$/
+     * @When /^I change (?:|back )my current (channel to "([^"]+)")$/
+     * @When customer view shop on :channel channel
+     * @When I view shop on :channel channel
+     */
+    public function iChangeMyCurrentChannelTo(ChannelInterface $channel): void
+    {
+        $this->sharedStorage->set('channel', $channel);
+        $this->sharedStorage->set('hostname', $channel->getHostname());
+        $this->channelContextSetter->setChannel($channel);
     }
 
     /**

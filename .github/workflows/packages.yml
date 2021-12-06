@@ -1,0 +1,146 @@
+name: Packages
+
+on:
+    push:
+        branches-ignore:
+            - 'dependabot/**'
+        paths:
+            - "src/Sylius/Bundle/**"
+            - "src/Sylius/Component/**"
+    pull_request:
+        paths:
+            - "src/Sylius/Bundle/**"
+            - "src/Sylius/Component/**"
+    release:
+        types: [created]
+    schedule:
+        -
+            cron: "0 1 * * 6" # Run at 1am every Saturday
+    workflow_dispatch: ~
+
+jobs:
+    list:
+        runs-on: ubuntu-latest
+
+        name: "Create a list of packages"
+
+        steps:
+            -
+                uses: actions/checkout@v2
+
+            -
+                name: "Provide the list"
+                id: create-list
+                run: echo "::set-output name=packages::$(find src/Sylius -mindepth 3 -maxdepth 3 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Sylius\///g' | sort | jq  --raw-input . | jq --slurp . | jq -c .)"
+
+        outputs:
+            packages: "${{ steps.create-list.outputs.packages }}"
+
+    test:
+        needs: list
+
+        runs-on: ubuntu-latest
+
+        name: "${{ matrix.package }}, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}"
+
+        timeout-minutes: 10
+
+        strategy:
+            fail-fast: false
+            matrix:
+                php: ["8.0"]
+                symfony: ["^4.4", "^5.4"]
+                package: "${{ fromJson(needs.list.outputs.packages) }}"
+
+        steps:
+            -
+                uses: actions/checkout@v2
+
+            -
+                name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: "${{ matrix.php }}"
+                    coverage: none
+
+            -
+                name: Get Composer cache directory
+                id: composer-cache
+                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            -
+                name: Cache Composer
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: ${{ runner.os }}-php-${{ matrix.php }}-package-${{ matrix.package }}-composer-${{ hashFiles(format('src/Sylius/{0}/composer.json', matrix.package)) }}
+                    restore-keys: |
+                        ${{ runner.os }}-php-${{ matrix.php }}-package-${{ matrix.package }}-composer-
+                        ${{ runner.os }}-php-${{ matrix.php }}-package-
+
+            -
+                name: Restrict Symfony version
+                if: matrix.symfony != ''
+                run: |
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.13.4"
+                    composer config extra.symfony.require "${{ matrix.symfony }}"
+                working-directory: "src/Sylius/${{ matrix.package }}"
+
+            -
+                name: Validate composer.json
+                run: composer validate --ansi --strict
+                working-directory: "src/Sylius/${{ matrix.package }}"
+
+            -
+                name: Install dependencies
+                run: composer install --ansi --no-interaction
+                env:
+                    COMPOSER_ROOT_VERSION: dev-master
+                working-directory: "src/Sylius/${{ matrix.package }}"
+
+            -
+                name: Test package
+                run: bin/test-package src/Sylius/${{ matrix.package }}
+
+    notify-about-build-failure:
+        runs-on: ubuntu-latest
+
+        if: failure() && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'release')
+
+        needs: [test]
+
+        name: "Notify about build failure"
+
+        timeout-minutes: 5
+
+        steps:
+            -
+                name: "Process data"
+                id: process-data
+                shell: bash
+                run: |
+                    echo "::set-output name=branch::$(echo ${{ github.ref }} | sed 's/refs\/heads\///g' | sed 's/refs\/tags\///g')"
+                    echo "::set-output name=sha::$(echo ${{ github.sha }} | cut -c 1-12)"
+
+            -
+                name: "Notify on Slack"
+                uses: edge/simple-slack-notify@master
+                env:
+                    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+                if: env.SLACK_WEBHOOK_URL != null
+                with:
+                    channel: "#builds"
+                    username: "GitHub Actions"
+                    text: |
+                        *<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} | ${{ github.workflow }} #${{ github.run_number }} build on ${{ github.repository }} repository has failed for ${{ steps.process-data.outputs.branch }} branch.>*
+
+                        _ _ _ _ _ _ _
+                    color: "danger"
+                    fields: |
+                        [
+                            { "title": "Repository", "value": "<https://github.com/${{ github.repository }} | ${{ github.repository }}>", "short": true },
+                            { "title": "Action", "value": "<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} | ${{ github.workflow }} #${{ github.run_number }}>", "short": true },
+                            { "title": "Reference", "value": "<https://github.com/${{ github.repository }}/tree/${{ steps.process-data.outputs.branch }} | ${{ steps.process-data.outputs.branch }}>", "short": true },
+                            { "title": "Commit", "value": "<https://github.com/${{ github.repository }}/commit/${{ github.sha }} | ${{ steps.process-data.outputs.sha }}>", "short": true },
+                            { "title": "Event", "value": "${{ github.event_name }}", "short": true }
+                        ]

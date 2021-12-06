@@ -22,36 +22,32 @@ use Webmozart\Assert\Assert;
 
 final class CouponGenerationAmountValidator extends ConstraintValidator
 {
-    /** @var GenerationPolicyInterface */
-    private $generationPolicy;
+    private GenerationPolicyInterface $generationPolicy;
 
     public function __construct(GenerationPolicyInterface $generationPolicy)
     {
         $this->generationPolicy = $generationPolicy;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function validate($instruction, Constraint $constraint): void
+    public function validate($value, Constraint $constraint): void
     {
-        if (null === $instruction->getCodeLength() || null === $instruction->getAmount()) {
+        if (null === $value->getCodeLength() || null === $value->getAmount()) {
             return;
         }
 
         /** @var PromotionCouponGeneratorInstructionInterface $value */
-        Assert::isInstanceOf($instruction, PromotionCouponGeneratorInstructionInterface::class);
+        Assert::isInstanceOf($value, PromotionCouponGeneratorInstructionInterface::class);
 
         /** @var CouponPossibleGenerationAmount $constraint */
         Assert::isInstanceOf($constraint, CouponPossibleGenerationAmount::class);
 
-        if (!$this->generationPolicy->isGenerationPossible($instruction)) {
+        if (!$this->generationPolicy->isGenerationPossible($value)) {
             $this->context->addViolation(
                 $constraint->message,
                 [
-                    '%expectedAmount%' => $instruction->getAmount(),
-                    '%codeLength%' => $instruction->getCodeLength(),
-                    '%possibleAmount%' => $this->generationPolicy->getPossibleGenerationAmount($instruction),
+                    '%expectedAmount%' => $value->getAmount(),
+                    '%codeLength%' => $value->getCodeLength(),
+                    '%possibleAmount%' => $this->generationPolicy->getPossibleGenerationAmount($value),
                 ]
             );
         }

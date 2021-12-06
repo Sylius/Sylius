@@ -19,23 +19,29 @@
         <defaults public="false" />
 
         <service
-            id="sylius_api.serializer_context_builder.channel"
-            class="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelContextBuilder"
+            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
-            <argument type="service" id="sylius_api.serializer_context_builder.channel.inner" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelContextBuilder.inner" />
             <argument type="service" id="sylius.context.channel" />
         </service>
 
         <service
-            id="sylius_api.serializer_context_builder.locale"
-            class="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LocaleContextBuilder"
+            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LocaleContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
-            <argument type="service" id="sylius_api.serializer_context_builder.locale.inner" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LocaleContextBuilder.inner" />
             <argument type="service" id="sylius.context.locale" />
+        </service>
+
+        <service
+            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\HttpRequestMethodTypeContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\HttpRequestMethodTypeContextBuilder.inner" />
         </service>
     </services>
 </container>

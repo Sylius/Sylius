@@ -21,22 +21,19 @@ use Webmozart\Assert\Assert;
 
 final class ValidTextAttributeConfigurationValidator extends ConstraintValidator
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function validate($attribute, Constraint $constraint): void
+    public function validate($value, Constraint $constraint): void
     {
-        /** @var AttributeInterface $attribute */
-        Assert::isInstanceOf($attribute, AttributeInterface::class);
+        /** @var AttributeInterface $value */
+        Assert::isInstanceOf($value, AttributeInterface::class);
 
         /** @var ValidTextAttributeConfiguration $constraint */
         Assert::isInstanceOf($constraint, ValidTextAttributeConfiguration::class);
 
-        if (TextAttributeType::TYPE !== $attribute->getType()) {
+        if (TextAttributeType::TYPE !== $value->getType()) {
             return;
         }
 
-        $configuration = $attribute->getConfiguration();
+        $configuration = $value->getConfiguration();
 
         $min = null;
         if (!empty($configuration['min'])) {

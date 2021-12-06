@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\Controller;
 
-use FOS\RestBundle\View\View;
 use Payum\Core\Model\GatewayConfigInterface;
 use Payum\Core\Payum;
 use Payum\Core\Request\Generic;
@@ -39,29 +38,21 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class PayumController
 {
-    /** @var Payum */
-    private $payum;
+    private Payum $payum;
 
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /** @var MetadataInterface */
-    private $orderMetadata;
+    private MetadataInterface $orderMetadata;
 
-    /** @var RequestConfigurationFactoryInterface */
-    private $requestConfigurationFactory;
+    private RequestConfigurationFactoryInterface $requestConfigurationFactory;
 
-    /** @var ViewHandlerInterface */
-    private $viewHandler;
+    private ViewHandlerInterface $viewHandler;
 
-    /** @var RouterInterface */
-    private $router;
+    private RouterInterface $router;
 
-    /** @var GetStatusFactoryInterface */
-    private $getStatusRequestFactory;
+    private GetStatusFactoryInterface $getStatusRequestFactory;
 
-    /** @var ResolveNextRouteFactoryInterface */
-    private $resolveNextRouteRequestFactory;
+    private ResolveNextRouteFactoryInterface $resolveNextRouteRequestFactory;
 
     public function __construct(
         Payum $payum,
@@ -105,9 +96,7 @@ final class PayumController
 
         $token = $this->provideTokenBasedOnPayment($payment, $configuration->getParameters()->get('redirect'));
 
-        $view = View::createRedirect($token->getTargetUrl());
-
-        return $this->viewHandler->handle($configuration, $view);
+        return new RedirectResponse($token->getTargetUrl());
     }
 
     public function afterCaptureAction(Request $request): Response
@@ -131,10 +120,7 @@ final class PayumController
             $flashBag->add('info', sprintf('sylius.payment.%s', $status->getValue()));
         }
 
-        return $this->viewHandler->handle(
-            $configuration,
-            View::createRouteRedirect($resolveNextRoute->getRouteName(), $resolveNextRoute->getRouteParameters())
-        );
+        return new RedirectResponse($this->router->generate($resolveNextRoute->getRouteName(), $resolveNextRoute->getRouteParameters()));
     }
 
     private function getTokenFactory(): GenericTokenFactoryInterface

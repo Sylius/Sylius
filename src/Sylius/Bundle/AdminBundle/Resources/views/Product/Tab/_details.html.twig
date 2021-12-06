@@ -22,20 +22,23 @@
                     <div class="ui hidden element">
                         {% if product.simple %}
                             {{ form_row(form.variant.translations) }}
+                            {{ form_row(form.variantSelectionMethod) }}
                         {% endif %}
-                        {{ form_row(form.variantSelectionMethod) }}
                     </div>
                 </div>
             </div>
             <div class="column">
                 {{ form_row(form.channels) }}
-
-                {% if product.simple %}
-                    <h4 class="ui dividing header">{{ 'sylius.ui.pricing'|trans }}</h4>
-                    {{ form_row(form.variant.channelPricings, {'label': false}) }}
-                {% endif %}
             </div>
         </div>
+        {% if product.simple %}
+            <div class="ui one column stackable grid">
+                <div class="column">
+                    <h4 class="ui dividing header">{{ 'sylius.ui.pricing'|trans }}</h4>
+                    {% include "@SyliusAdmin/Product/_channel_pricing.html.twig" with { product: product, variantForm: form.variant } only %}
+                </div>
+            </div>
+        {% endif %}
         <div class="ui hidden divider"></div>
         {{ translationFormWithSlug(form.translations, '@SyliusAdmin/Product/_slugField.html.twig', product) }}
         {% if product.simple %}

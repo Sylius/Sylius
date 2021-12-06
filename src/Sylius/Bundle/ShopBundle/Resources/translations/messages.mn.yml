@@ -1,0 +1,48 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    email:
+        contact_request:
+            content: 'Агуулга'
+            message_from: 'Ирсэн зурвас'
+            subject: 'Холбоо барих хүсэлт'
+        order_confirmation:
+            has_been_successfully_placed: 'амжилттай байрлууллаа.'
+            subject: 'Захиалгын баталгаажуулалт'
+            view_order_or_change_payment_method: 'Захиалгаа үзэх эсвэл төлбөрийн хэрэгсэлийг өөрчлөх'
+            thank_you: 'Манай дэлгүүрээр үйлчлүүлсэнд баярлалаа!'
+            your_order_number: 'Таны захиалгын дугаар'
+        password_reset:
+            hello: 'Сайн байна уу?'
+            reset_your_password: 'Нууц үгээ шинэчлэнэ үү'
+            subject: 'Нууц үг шинэчлэх'
+            to_reset_your_password: 'Нууц үгээ шинэчлэхийн тулд доор холбоос дээр товчино уу'
+        user_registration:
+            start_shopping: 'Дэлгүүр хэсч эхлэх'
+            subject: 'Хэрэглэгчийн бүртгэл'
+            welcome_to_our_store: 'Манай дэлгүүрт тавтай морил!'
+            you_have_just_been_registered: 'Та саяхан бүртгэгдлээ. Баярлалаа.'
+        verification_token:
+            hello: 'Сайн байна уу?'
+            subject: 'Имэйл хаягийн баталгаажуулалт'
+            to_verify_your_email_address: 'Имэйлээ баталгаажуулахын тулд доорх холбоос дээр дарна уу'
+            verify_your_email_address: 'Имэйл хаягаа баталгаажуулна уу'
+    homepage:
+        about_us: 'Бидний тухай'
+        about_us_content: 'Танд хамгийн шилдэг бүтээгдэхүүнийг санал болгодог номер нэг онлайн дэлгүүр болох манай дэлгүүрт тавтай морилно уу. Та манай санал болгож буй хамгийн сайн хувцас, гутлыг сонгож болно. (<i>Та орчуулгын файл доторх "sylius.homepage.about_us_content" энэ агуулгыг өөрчлөх боломжтой.</i>)'
+        carousel_header: 'Дулаалаарай! Өвөл хаяанд ирж байна.'
+        newsletter: 'Мэдээллийн товхимол'
+        newsletter_description: 'Таныг хүлээж буй шинэ саналуудыг үзэхийн тулд манай мэдээллийн товхимолд бүртгүүлээрэй! (<i> Та орчуулгын файл доторх "sylius.homepage.newsletter_description" энэ агуулгыг өөрчлөх боломжтой </i>)'
+        subscribe: 'Бүртгүүлэх'
+    lightbox:
+        image_album_label: '%2 -н %1 зураг'
+    menu:
+        shop:
+            account:
+                address_book: 'Хаягийн жагсаалт'
+                change_password: 'Нууц үг солих'
+                dashboard: 'Хяналтын самбар'
+                header: 'Таны акаунт'
+                order_history: 'Захиалгын түүх'
+                personal_information: 'Хувийн мэдээлэл'

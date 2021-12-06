@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\ChangePasswordPageInterface;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
@@ -22,32 +23,29 @@ use Sylius\Behat\Page\Shop\Account\Order\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Webmozart\Assert\Assert;
 
 final class AccountContext implements Context
 {
-    /** @var DashboardPageInterface */
-    private $dashboardPage;
+    private DashboardPageInterface $dashboardPage;
 
-    /** @var ProfileUpdatePageInterface */
-    private $profileUpdatePage;
+    private ProfileUpdatePageInterface $profileUpdatePage;
 
-    /** @var ChangePasswordPageInterface */
-    private $changePasswordPage;
+    private ChangePasswordPageInterface $changePasswordPage;
 
-    /** @var IndexPageInterface */
-    private $orderIndexPage;
+    private IndexPageInterface $orderIndexPage;
 
-    /** @var ShowPageInterface */
-    private $orderShowPage;
+    private ShowPageInterface $orderShowPage;
 
-    /** @var LoginPageInterface */
-    private $loginPage;
+    private LoginPageInterface $loginPage;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
+
+    private SharedStorageInterface $sharedStorage;
 
     public function __construct(
         DashboardPageInterface $dashboardPage,
@@ -56,7 +54,8 @@ final class AccountContext implements Context
         IndexPageInterface $orderIndexPage,
         ShowPageInterface $orderShowPage,
         LoginPageInterface $loginPage,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->dashboardPage = $dashboardPage;
         $this->profileUpdatePage = $profileUpdatePage;
@@ -65,6 +64,7 @@ final class AccountContext implements Context
         $this->orderShowPage = $orderShowPage;
         $this->loginPage = $loginPage;
         $this->notificationChecker = $notificationChecker;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -263,6 +263,19 @@ final class AccountContext implements Context
     }
 
     /**
+     * @When I change my payment method to :paymentMethod
+     */
+    public function iChangeMyPaymentMethodTo(PaymentMethodInterface $paymentMethod): void
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $this->orderIndexPage->changePaymentMethod($order);
+        $this->orderShowPage->choosePaymentMethod($paymentMethod);
+        $this->orderShowPage->pay();
+    }
+
+    /**
      * @Then I should see a single order in the list
      */
     public function iShouldSeeASingleOrderInTheList()
@@ -280,8 +293,9 @@ final class AccountContext implements Context
 
     /**
      * @When I view the summary of the order :order
+     * @When I view the summary of my order :order
      */
-    public function iViewTheSummaryOfTheOrder(OrderInterface $order)
+    public function iViewTheSummaryOfTheOrder(OrderInterface $order): void
     {
         $this->orderShowPage->open(['number' => $order->getNumber()]);
     }
@@ -296,9 +310,21 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Then it should has number :orderNumber
+     * @When I log in as :email with :password password
      */
-    public function itShouldHasNumber($orderNumber)
+    public function iLogInAsWithPassword(string $email, string $password): void
+    {
+        $this->loginPage->open();
+        $this->loginPage->specifyUsername($email);
+        $this->loginPage->specifyPassword($password);
+        $this->loginPage->logIn();
+    }
+
+    /**
+     * @Then it should has number :orderNumber
+     * @Then it should have the number :orderNumber
+     */
+    public function itShouldHasNumber(string $orderNumber): void
     {
         Assert::same($this->orderShowPage->getNumber(), $orderNumber);
     }
@@ -361,6 +387,21 @@ final class AccountContext implements Context
     }
 
     /**
+     * @Then I should have :paymentMethod payment method on my order
+     */
+    public function iShouldHavePaymentMethodOnMyOrder(PaymentMethodInterface $paymentMethod): void
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $this->orderIndexPage->open();
+        $this->orderIndexPage->changePaymentMethod($order);
+        $this->orderShowPage->choosePaymentMethod($paymentMethod);
+
+        Assert::same($this->orderShowPage->getChosenPaymentMethod(), $paymentMethod->getName());
+    }
+
+    /**
      * @Then I should see :itemPrice as item price
      */
     public function iShouldSeeAsItemPrice($itemPrice)
@@ -398,14 +439,6 @@ final class AccountContext implements Context
     public function iShouldSeeAsProvinceInTheBillingAddress($provinceName)
     {
         Assert::true($this->orderShowPage->hasBillingProvinceName($provinceName));
-    }
-
-    /**
-     * @Then /^I should be able to change payment method for (this order)$/
-     */
-    public function iShouldBeAbleToChangePaymentMethodForThisOrder(OrderInterface $order)
-    {
-        Assert::true($this->orderIndexPage->isItPossibleToChangePaymentMethodForOrder($order));
     }
 
     /**
@@ -454,5 +487,40 @@ final class AccountContext implements Context
     public function theShipmentStatusShouldBe(string $shipmentStatus): void
     {
         Assert::same($this->orderShowPage->getShipmentStatus(), $shipmentStatus);
+    }
+
+    /**
+     * @Then I should be notified that the verification email has been sent
+     */
+    public function iShouldBeNotifiedThatTheVerificationEmailHasBeenSent(): void
+    {
+        $this->notificationChecker->checkNotification(
+            'An email with the verification link has been sent to your email address.',
+            NotificationType::success()
+        );
+    }
+
+    /**
+     * @Then /^(?:my|his|her) account should not be verified$/
+     */
+    public function myAccountShouldNotBeVerified(): void
+    {
+        $this->dashboardPage->open();
+
+        Assert::false($this->dashboardPage->isVerified());
+    }
+
+    /**
+     * @Then I should not be logged in
+     */
+    public function iShouldNotBeLoggedIn(): void
+    {
+        try {
+            $this->dashboardPage->open();
+        } catch (UnexpectedPageException $exception) {
+            return;
+        }
+
+        throw new \InvalidArgumentException('Dashboard has been openned, but it shouldn\'t as customer should not be logged in');
     }
 }

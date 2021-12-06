@@ -93,9 +93,9 @@ As you can see in the ``_sylius.yaml`` you already have a basic configuration, n
         resources:
             product:
                 classes:
-                ...
+                #...
                     repository: App\Repository\ProductRepository
-                ...
+                #...
 
 **3.** After configuring the ``sylius.repository.product`` service has your ``findByOnHand()`` method available.
 You can now use your method in anywhere when you are operating on the Product repository.
@@ -124,6 +124,6 @@ What happens while overriding Repositories?
 * The repository service ``sylius.repository.product`` is using your new class.
 * Under the ``sylius.repository.product`` service you have got all methods from the base repository available plus the one you have added.
 
-.. include:: /customization/plugins.rst.inc
+.. include:: /customization/plugins.rst
 
 .. _`Query Builder`: http://doctrine-orm.readthedocs.io/projects/doctrine-orm/en/latest/reference/query-builder.html

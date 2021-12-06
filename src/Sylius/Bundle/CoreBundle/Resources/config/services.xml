@@ -13,6 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
+        <import resource="services/calculators.xml" />
         <import resource="services/checkers.xml" />
         <import resource="services/checkout.xml" />
         <import resource="services/commands.xml" />
@@ -27,6 +28,7 @@
         <import resource="services/listeners.xml" />
         <import resource="services/order_processing.xml" />
         <import resource="services/payment.xml" />
+        <import resource="services/processors.xml" />
         <import resource="services/promotion.xml" />
         <import resource="services/shipping.xml" />
         <import resource="services/state_resolvers.xml" />
@@ -34,6 +36,10 @@
         <import resource="services/templating.xml" />
         <import resource="services/validators.xml" />
     </imports>
+
+    <parameters>
+        <parameter key="sylius.order_item_quantity_modifier.limit">9999</parameter>
+    </parameters>
 
     <services>
         <defaults public="true" />
@@ -72,10 +78,15 @@
             <tag name="data_collector" template="@SyliusCore/Collector/sylius.html.twig" id="sylius_core" priority="-512" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\Collector\CartCollector" public="false">
+            <argument type="service" id="sylius.context.cart" />
+            <tag name="data_collector" template="@SyliusCore/Collector/cart.html.twig" id="sylius_cart" priority="-512" />
+        </service>
+
         <service id="sylius.shipping_methods_resolver.zones_and_channel_based" class="Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.zone_matcher" />
-            <argument type="service" id="sylius.shipping_eligibility_checker" />
+            <argument type="service" id="sylius.shipping_method_eligibility_checker" />
             <tag name="sylius.shipping_method_resolver" type="zones_and_channel_based" label="sylius.shipping_methods_resolver.zones_and_channel_based" priority="1" />
         </service>
 
@@ -91,10 +102,14 @@
 
         <service id="sylius.shipping_method_resolver.default" class="Sylius\Component\Core\Resolver\EligibleDefaultShippingMethodResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
-            <argument type="service" id="sylius.shipping_eligibility_checker" />
+            <argument type="service" id="sylius.shipping_method_eligibility_checker" />
             <argument type="service" id="sylius.zone_matcher" />
         </service>
         <service id="Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface" alias="sylius.shipping_method_resolver.default" />
+
+        <service id="sylius.taxation_address_resolver" class="Sylius\Component\Core\Resolver\TaxationAddressResolver">
+            <argument>%sylius_core.taxation.shipping_address_based_taxation%</argument>
+        </service>
 
         <service id="sylius.context.customer" class="Sylius\Bundle\CoreBundle\Context\CustomerContext">
             <argument type="service" id="security.token_storage" />
@@ -117,6 +132,11 @@
         <service id="sylius.factory.cart_item" alias="sylius.custom_factory.order_item" />
         <service id="sylius.custom_factory.address" class="Sylius\Component\Core\Factory\AddressFactory" decorates="sylius.factory.address" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.address.inner" />
+        </service>
+
+        <service id="sylius.custom_factory.channel" class="Sylius\Component\Core\Factory\ChannelFactory" decorates="sylius.factory.channel" decoration-priority="256" public="false">
+            <argument type="service" id="sylius.custom_factory.channel.inner" />
+            <argument>order_items_based</argument>
         </service>
 
         <service id="sylius.factory.customer_after_checkout" class="Sylius\Component\Core\Factory\CustomerAfterCheckoutFactory">
@@ -156,7 +176,7 @@
 
         <service id="sylius.order_item_quantity_modifier.limiting" class="Sylius\Component\Core\Cart\Modifier\LimitingOrderItemQuantityModifier" decorates="sylius.order_item_quantity_modifier" decoration-priority="256">
             <argument type="service" id="sylius.order_item_quantity_modifier.limiting.inner" />
-            <argument>9999</argument>
+            <argument>%sylius.order_item_quantity_modifier.limit%</argument>
         </service>
 
         <service id="sylius.customer_ip_assigner" class="Sylius\Bundle\CoreBundle\Assigner\CustomerIpAssigner" />
@@ -170,6 +190,12 @@
             <argument type="string">%locale%</argument>
         </service>
 
+        <service id="sylius.section_resolver.uri_based_section_resolver" class="Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionProvider">
+            <argument type="service" id="request_stack" />
+            <argument type="collection" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" alias="sylius.section_resolver.uri_based_section_resolver" />
+
         <service id="sylius.reviewer_reviews_remover" class="Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemover">
             <argument type="service" id="sylius.repository.product_review" />
             <argument type="service" id="sylius.manager.product_review" />
@@ -181,6 +207,7 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sm.factory" />
             <argument>%sylius_order.order_expiration_period%</argument>
+            <argument type="service" id="logger" />
         </service>
         <service id="Sylius\Component\Core\Updater\UnpaidOrdersStateUpdaterInterface" alias="sylius.unpaid_orders_state_updater" />
 
@@ -205,9 +232,63 @@
 
         <service id="sylius.custom_resource_controller.resource_update_handler" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceUpdateHandler" decorates="sylius.resource_controller.resource_update_handler" public="false">
             <argument type="service" id="sylius.custom_resource_controller.resource_update_handler.inner" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <service id="sylius.custom_resource_controller.resource_delete_handler" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceDeleteHandler" decorates="sylius.resource_controller.resource_delete_handler" public="false">
+            <argument type="service" id="sylius.custom_resource_controller.resource_delete_handler.inner" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <service id="sylius.order_item_names_setter" class="Sylius\Component\Core\Order\OrderItemNamesSetter" />
         <service id="Sylius\Component\Core\Order\OrderItemNamesSetterInterface" alias="sylius.order_item_names_setter" />
+
+        <service id="sylius.grid_filter.entities" class="Sylius\Component\Core\Grid\Filter\EntitiesFilter">
+            <tag name="sylius.grid_filter" type="entities" form-type="Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\EntitiesFilterType" />
+        </service>
+
+        <service class="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager" id="sylius.mailer.order_email_manager">
+            <argument type="service" id="sylius.email_sender" />
+        </service>
+
+        <service
+            id="Sylius\Bundle\CoreBundle\Formatter\AppliedPromotionInformationFormatterInterface"
+            class="Sylius\Bundle\CoreBundle\Formatter\AppliedPromotionInformationFormatter"
+        />
+
+        <service
+            id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface"
+            class="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicator"
+        >
+            <argument type="service" id="Sylius\Component\CoreBundle\Calculator\CatalogPromotionPriceCalculatorInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Formatter\AppliedPromotionInformationFormatterInterface" />
+        </service>
+
+        <service
+            id="Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface"
+            class="Sylius\Bundle\CoreBundle\Provider\CatalogPromotionVariantsProvider"
+        >
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.variants_provider" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Provider\ForProductsScopeVariantsProvider">
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="sylius.catalog_promotion.variants_provider" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Provider\ForVariantsScopeVariantsProvider">
+            <argument type="service" id="sylius.repository.product_variant" />
+            <tag name="sylius.catalog_promotion.variants_provider" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Provider\ForTaxonsScopeVariantsProvider">
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius.repository.product_variant" />
+            <tag name="sylius.catalog_promotion.variants_provider" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" class="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculator"/>
+
+        <service id="security.authentication_manager" alias="security.authentication.manager" />
     </services>
 </container>

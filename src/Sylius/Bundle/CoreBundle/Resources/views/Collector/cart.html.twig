@@ -1,0 +1,108 @@
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% block toolbar %}
+    {% if collector.hasCart %}
+        {% import "@SyliusCore/Common/Macro/money.html.twig" as money %}
+
+        {% set icon %}
+            {{ include('@SyliusCore/Collector/Icon/cart.svg') }}
+            <span class="sf-toolbar-value">{{ collector.quantity|default(0) }}</span>
+        {% endset %}
+
+        {% set text %}
+            <div class="sf-toolbar-info-group">
+                <div class="sf-toolbar-info-piece">
+                    <b>ID</b>
+                    <span>{{ collector.id }}</span>
+                </div>
+                <div class="sf-toolbar-info-piece">
+                    <b>Subtotal</b>
+                    <span>{{ money.format(collector.subtotal, collector.currency) }}</span>
+                </div>
+                <div class="sf-toolbar-info-piece">
+                    <b>Total</b>
+                    <span>{{ money.format(collector.total, collector.currency) }}</span>
+                </div>
+            </div>
+            <div class="sf-toolbar-info-group">
+                <div class="sf-toolbar-info-piece">
+                    <span><a href="{{ profiler_url ~ '?panel=sylius_cart' }}" rel="help">View details</a></span>
+                </div>
+            </div>
+        {% endset %}
+
+        {% include '@WebProfiler/Profiler/toolbar_item.html.twig' with {'link': profiler_url} %}
+    {% endif %}
+{% endblock %}
+
+{% block menu %}
+    {% if collector.hasCart %}
+        <span class="label {% if collector.quantity|default(0) == 0 %}disabled{% endif %}">
+            <span class="icon">{{ include('@SyliusCore/Collector/Icon/cart.svg') }}</span>
+            <strong>Cart</strong>
+            <span class="count">
+                <span>{{ collector.quantity|default(0) }}</span>
+            </span>
+        </span>
+    {% endif %}
+{% endblock %}
+
+{% block panel %}
+    {% if collector.hasCart %}
+        {% import "@SyliusCore/Common/Macro/money.html.twig" as money %}
+
+        <h2>Cart</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Currency</th>
+                <th>Locale</th>
+                <th>Subtotal</th>
+                <th>Total</th>
+            </tr>
+            <tr>
+                <td>{{ collector.id }}</td>
+                <td>{{ collector.currency }}</td>
+                <td>{{ collector.locale }}</td>
+                <td>{{ money.format(collector.subtotal, collector.currency) }}</td>
+                <td>{{ money.format(collector.total, collector.currency) }}</td>
+            </tr>
+        </table>
+
+        <h2>States</h2>
+        <table>
+            <tr>
+                <th>Main</th>
+                <th>Checkout</th>
+                <th>Shipping</th>
+                <th>Payment</th>
+            </tr>
+            <tr>
+                <td>{{ collector.states.main }}</td>
+                <td>{{ collector.states.checkout }}</td>
+                <td>{{ collector.states.shipping }}</td>
+                <td>{{ collector.states.payment }}</td>
+            </tr>
+        </table>
+
+        {% if collector.items|length > 0 %}
+            <h2>Items</h2>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Product (Code, ID)</th>
+                    <th>Variant (Code, ID)</th>
+                    <th>Quantity</th>
+                </tr>
+                {% for item in collector.items %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.productName }} ({{ item.productCode }}, {{ item.productId }})</td>
+                    <td>{{ item.variantName }} ({{ item.variantCode }}, {{ item.variantId }})</td>
+                    <td>{{ item.quantity }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    {% endif %}
+{% endblock %}

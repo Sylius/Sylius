@@ -26,14 +26,11 @@ use Webmozart\Assert\Assert;
 
 class UniqueReviewerEmailValidator extends ConstraintValidator
 {
-    /** @var UserRepository */
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
 
-    /** @var TokenStorageInterface */
-    private $tokenStorage;
+    private TokenStorageInterface $tokenStorage;
 
-    /** @var AuthorizationCheckerInterface */
-    private $authorizationChecker;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         UserRepositoryInterface $userRepository,
@@ -45,16 +42,13 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
         $this->authorizationChecker = $authorizationChecker;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function validate($review, Constraint $constraint): void
+    public function validate($value, Constraint $constraint): void
     {
         /** @var UniqueReviewerEmail $constraint */
         Assert::isInstanceOf($constraint, UniqueReviewerEmail::class);
 
         /** @var ReviewerInterface|null $customer */
-        $customer = $review->getAuthor();
+        $customer = $value->getAuthor();
 
         $token = $this->tokenStorage->getToken();
         if (null !== $customer) {

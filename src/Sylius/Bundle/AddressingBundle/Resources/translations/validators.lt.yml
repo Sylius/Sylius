@@ -4,29 +4,19 @@
 sylius:
     address:
         city:
-            max_length: Miesto pavadinimas neturi būti ilgesnis negu 255 simboliai|Miesto pavadinimas neturi būti ilgesnis negu 255 simboliai.
-            min_length: Miesto pavadinimas turi būti mažiausiai 2 simbolių ilgio|Miesto pavadinimas turi būti mažiausiai 2 simbolių ilgio.
             not_blank: Įveskite miestą.
         country:
             not_blank: Pasirinkite šalį.
             disabled: Pasirinkta šalis yra išjungta. Prašome pasirinkti kitą.
         first_name:
-            max_length: Vardas neturėtų būti ilgesnis nei 255 simboliai|Vardas neturėtų būti ilgesnis nei 255 simboliai.
-            min_length: Vardas turi būti ne trumpesnis nei 2 simbolių ilgio|Vardas turi būti ne trumpesnis nei 2 simbolių ilgio.
             not_blank: Įveskite vardą.
         last_name:
-            max_length: Pavardė neturėtų būti ilgesnė nei 255 simboliai|Pavardė neturėtų būti ilgesnė nei 255 simboliai.
-            min_length: Pavardė turi būti ne trumpesnė nei 2 simbolių ilgio|Pavardė turi būti ne trumpesnė nei 2 simbolių ilgio.
             not_blank: Įveskite pavardę.
         postcode:
-            max_length: Pašto kodas turi būti ne ilgesnis nei 255 simboliai|Pašto kodas turi būti ne ilgesnis nei 255 simboliai.
-            min_length: Pašto kodas turi būti bent 2 simbolių ilgio|Pašto kodas turi būti bent 2 simbolių ilgio.
             not_blank: Įveskite pašto kodą.
         province:
             valid: Pasirinkite tinkamą provinciją.
         street:
-            max_length: Gatvės pavadinimas turi būti ne ilgesnis nei 255 simboliai|Gatvės pavadinimas turi būti ne ilgesnis nei 255 simboliai.
-            min_length: Gatvės pavadinimas turi būti bent 2 simbolių ilgio|Gatvės pavadinimas turi būti bent 2 simbolių ilgio.
             not_blank: Įveskite gatvę.
         not_shippable: Šis adresas nėra tinkamas pristatymui.
     country:
@@ -41,8 +31,6 @@ sylius:
             regex: Provincijos kodas turėtų būti formato XX-XX (pvz., JAV-FL).
             unique: Provincijos kodas turi būti unikalus.
         name:
-            max_length: Provincijos pavadinimas neturi būti ilgesnis negu 255 simboliai|Provincijos pavadinimas neturi būti ilgesnis negu 255 simboliai.
-            min_length: Provincijos pavadinimas turi būti ne mažiau kaip 2 simbolių ilgio|Provincijos pavadinimas turi būti ne mažiau kaip 2 simbolių ilgio.
             not_blank: Įveskite provincijos pavadinimą.
             unique: Provincijos pavadinimas turi būti unikalus.
     zone:
@@ -55,8 +43,6 @@ sylius:
         members:
             min_count: Pridėkite bent {{ limit }} zonos valstybes.
         name:
-            max_length: Zonos pavadinimas neturi būti ilgesnis negu 255 simboliai|Zonos pavadinimas neturi būti ilgesnis negu 255 simboliai.
-            min_length: Zonos pavadinimas turi būti mažiausiai iš 2 simbolių | Zonos pavadinimas turi būti mažiausiai 2 simbolių ilgio.
             not_blank: Įveskite zonos pavadinimą.
     zone_member:
         code:

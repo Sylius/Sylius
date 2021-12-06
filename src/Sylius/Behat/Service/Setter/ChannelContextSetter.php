@@ -17,17 +17,13 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 
 final class ChannelContextSetter implements ChannelContextSetterInterface
 {
-    /** @var CookieSetterInterface */
-    private $cookieSetter;
+    private CookieSetterInterface $cookieSetter;
 
     public function __construct(CookieSetterInterface $cookieSetter)
     {
         $this->cookieSetter = $cookieSetter;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setChannel(ChannelInterface $channel)
     {
         $this->cookieSetter->setCookie('_channel_code', $channel->getCode());

@@ -11,7 +11,7 @@ Basic Usage
 Getting a Currency name
 -----------------------
 
-.. _Intl: http://symfony.com/doc/current/components/intl.html
+.. _Intl: https://symfony.com/doc/current/components/intl.html
 
 .. code-block:: php
 

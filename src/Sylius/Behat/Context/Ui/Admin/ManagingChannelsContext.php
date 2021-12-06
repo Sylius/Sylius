@@ -27,20 +27,15 @@ use Webmozart\Assert\Assert;
 
 final class ManagingChannelsContext implements Context
 {
-    /** @var IndexPageInterface */
-    private $indexPage;
+    private IndexPageInterface $indexPage;
 
-    /** @var CreatePageInterface */
-    private $createPage;
+    private CreatePageInterface $createPage;
 
-    /** @var UpdatePageInterface */
-    private $updatePage;
+    private UpdatePageInterface $updatePage;
 
-    /** @var CurrentPageResolverInterface */
-    private $currentPageResolver;
+    private CurrentPageResolverInterface $currentPageResolver;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
 
     public function __construct(
         IndexPageInterface $indexPage,
@@ -57,9 +52,9 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @Given I want to create a new channel
+     * @When I want to create a new channel
      */
-    public function iWantToCreateANewChannel()
+    public function iWantToCreateANewChannel(): void
     {
         $this->createPage->open();
     }
@@ -68,7 +63,7 @@ final class ManagingChannelsContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs(string $code = null)
     {
         $this->createPage->specifyCode($code ?? '');
     }
@@ -79,7 +74,7 @@ final class ManagingChannelsContext implements Context
      * @When I do not name it
      * @When I remove its name
      */
-    public function iNameIt($name = null)
+    public function iNameIt(string $name = null): void
     {
         $this->createPage->nameIt($name ?? '');
     }
@@ -88,18 +83,18 @@ final class ManagingChannelsContext implements Context
      * @When I choose :currency as the base currency
      * @When I do not choose base currency
      */
-    public function iChooseAsABaseCurrency(?CurrencyInterface $currency = null)
+    public function iChooseAsABaseCurrency(?CurrencyInterface $currency = null): void
     {
         $this->createPage->chooseBaseCurrency($currency ? $currency->getName() : null);
     }
 
     /**
-     * @When I choose :locale as a default locale
+     * @When I choose :defaultLocaleName as a default locale
      * @When I do not choose default locale
      */
-    public function iChooseAsADefaultLocale($locale = null)
+    public function iChooseAsADefaultLocale(string $defaultLocaleName = null): void
     {
-        $this->createPage->chooseDefaultLocale($locale);
+        $this->createPage->chooseDefaultLocale($defaultLocaleName);
     }
 
     /**
@@ -129,7 +124,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @When I allow to skip shipping step if only one shipping method is available
      */
-    public function iAllowToSkipShippingStepIfOnlyOneShippingMethodIsAvailable()
+    public function iAllowToSkipShippingStepIfOnlyOneShippingMethodIsAvailable(): void
     {
         $this->createPage->allowToSkipShippingStep();
     }
@@ -137,7 +132,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @When I allow to skip payment step if only one payment method is available
      */
-    public function iAllowToSkipPaymentStepIfOnlyOnePaymentMethodIsAvailable()
+    public function iAllowToSkipPaymentStepIfOnlyOnePaymentMethodIsAvailable(): void
     {
         $this->createPage->allowToSkipPaymentStep();
     }
@@ -146,7 +141,7 @@ final class ManagingChannelsContext implements Context
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -166,7 +161,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then /^(this channel) should still be in the registry$/
      */
-    public function thisChannelShouldAppearInTheRegistry(ChannelInterface $channel)
+    public function thisChannelShouldAppearInTheRegistry(ChannelInterface $channel): void
     {
         $this->theChannelShouldAppearInTheRegistry($channel->getName());
     }
@@ -174,7 +169,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @When I describe it as :description
      */
-    public function iDescribeItAs($description)
+    public function iDescribeItAs(string $description): void
     {
         $this->createPage->describeItAs($description);
     }
@@ -182,7 +177,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @When I set its hostname as :hostname
      */
-    public function iSetItsHostnameAs($hostname)
+    public function iSetItsHostnameAs(string $hostname): void
     {
         $this->createPage->setHostname($hostname);
     }
@@ -190,15 +185,23 @@ final class ManagingChannelsContext implements Context
     /**
      * @When I set its contact email as :contactEmail
      */
-    public function iSetItsContactEmailAs($contactEmail)
+    public function iSetItsContactEmailAs(string $contactEmail): void
     {
         $this->createPage->setContactEmail($contactEmail);
     }
 
     /**
+     * @When I set its contact phone number as :contactPhoneNumber
+     */
+    public function iSetItsContactPhoneNumberAs(string $contactPhoneNumber): void
+    {
+        $this->createPage->setContactPhoneNumber($contactPhoneNumber);
+    }
+
+    /**
      * @When I define its color as :color
      */
-    public function iDefineItsColorAs($color)
+    public function iDefineItsColorAs(string $color): void
     {
         $this->createPage->defineColor($color);
     }
@@ -206,7 +209,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @When I enable it
      */
-    public function iEnableIt()
+    public function iEnableIt(): void
     {
         $this->updatePage->enable();
     }
@@ -214,7 +217,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @When I disable it
      */
-    public function iDisableIt()
+    public function iDisableIt(): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -225,7 +228,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then I should be notified that at least one channel has to be defined
      */
-    public function iShouldBeNotifiedThatAtLeastOneChannelHasToBeDefinedIsRequired()
+    public function iShouldBeNotifiedThatAtLeastOneChannelHasToBeDefinedIsRequired(): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -236,7 +239,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then channel with :element :value should not be added
      */
-    public function channelWithShouldNotBeAdded($element, $value)
+    public function channelWithShouldNotBeAdded(string $element, string $value): void
     {
         $this->iWantToBrowseChannels();
 
@@ -246,7 +249,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then /^I should be notified that ([^"]+) is required$/
      */
-    public function iShouldBeNotifiedThatIsRequired($element)
+    public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -271,7 +274,7 @@ final class ManagingChannelsContext implements Context
      * @Then /^(this channel) name should be "([^"]+)"$/
      * @Then /^(this channel) should still be named "([^"]+)"$/
      */
-    public function thisChannelNameShouldBe(ChannelInterface $channel, $channelName)
+    public function thisChannelNameShouldBe(ChannelInterface $channel, string $channelName): void
     {
         $this->iWantToBrowseChannels();
 
@@ -285,7 +288,7 @@ final class ManagingChannelsContext implements Context
      * @When I save my changes
      * @When I try to save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -293,7 +296,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then I should be notified that channel with this code already exists
      */
-    public function iShouldBeNotifiedThatChannelWithThisCodeAlreadyExists()
+    public function iShouldBeNotifiedThatChannelWithThisCodeAlreadyExists(): void
     {
         Assert::same($this->createPage->getValidationMessage('code'), 'Channel code has to be unique.');
     }
@@ -301,7 +304,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then there should still be only one channel with :element :value
      */
-    public function thereShouldStillBeOnlyOneChannelWithCode($element, $value)
+    public function thereShouldStillBeOnlyOneChannelWithCode(string $element, string $value)
     {
         $this->iWantToBrowseChannels();
 
@@ -345,7 +348,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then the code field should be disabled
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function theCodeFieldShouldBeDisabled(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
@@ -353,7 +356,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then /^(this channel) should be disabled$/
      */
-    public function thisChannelShouldBeDisabled(ChannelInterface $channel)
+    public function thisChannelShouldBeDisabled(ChannelInterface $channel): void
     {
         $this->assertChannelState($channel, false);
     }
@@ -362,7 +365,7 @@ final class ManagingChannelsContext implements Context
      * @Then /^(this channel) should be enabled$/
      * @Then channel with name :channel should still be enabled
      */
-    public function thisChannelShouldBeEnabled(ChannelInterface $channel)
+    public function thisChannelShouldBeEnabled(ChannelInterface $channel): void
     {
         $this->assertChannelState($channel, true);
     }
@@ -370,7 +373,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @When I delete channel :channel
      */
-    public function iDeleteChannel(ChannelInterface $channel)
+    public function iDeleteChannel(ChannelInterface $channel): void
     {
         $this->indexPage->open();
         $this->indexPage->deleteResourceOnPage(['nameAndDescription' => $channel->getName()]);
@@ -379,7 +382,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then the :channelName channel should no longer exist in the registry
      */
-    public function thisChannelShouldNoLongerExistInTheRegistry($channelName)
+    public function thisChannelShouldNoLongerExistInTheRegistry(string $channelName): void
     {
         Assert::false($this->indexPage->isSingleResourceOnPage(['nameAndDescription' => $channelName]));
     }
@@ -387,7 +390,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then I should be notified that it cannot be deleted
      */
-    public function iShouldBeNotifiedThatItCannotBeDeleted()
+    public function iShouldBeNotifiedThatItCannotBeDeleted(): void
     {
         $this->notificationChecker->checkNotification(
             'The channel cannot be deleted. At least one enabled channel is required.',
@@ -396,30 +399,30 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When I make it available (only) in :locale
+     * @When I make it available (only) in :nameOfLocale
      */
-    public function iMakeItAvailableIn(string $localeName): void
+    public function iMakeItAvailableIn(string $nameOfLocale): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->chooseLocale($localeName);
+        $currentPage->chooseLocale($nameOfLocale);
     }
 
     /**
-     * @Then the channel :channel should be available in :locale
+     * @Then the channel :channel should be available in :nameOfLocale
      */
-    public function theChannelShouldBeAvailableIn(ChannelInterface $channel, $locale)
+    public function theChannelShouldBeAvailableIn(ChannelInterface $channel, string $nameOfLocale): void
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
-        Assert::true($this->updatePage->isLocaleChosen($locale));
+        Assert::true($this->updatePage->isLocaleChosen($nameOfLocale));
     }
 
     /**
      * @When I allow for paying in :currencyCode
      */
-    public function iAllowToPayingForThisChannel($currencyCode)
+    public function iAllowToPayingForThisChannel(string $currencyCode): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -430,7 +433,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then paying in :currencyCode should be possible for the :channel channel
      */
-    public function payingInEuroShouldBePossibleForTheChannel($currencyCode, ChannelInterface $channel)
+    public function payingInEuroShouldBePossibleForTheChannel(string $currencyCode, ChannelInterface $channel): void
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
@@ -440,7 +443,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @When I select the :taxZone as default tax zone
      */
-    public function iSelectDefaultTaxZone($taxZone)
+    public function iSelectDefaultTaxZone(string $taxZone): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -451,7 +454,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Given I remove its default tax zone
      */
-    public function iRemoveItsDefaultTaxZone()
+    public function iRemoveItsDefaultTaxZone(): void
     {
         $this->updatePage->chooseDefaultTaxZone('');
     }
@@ -459,7 +462,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @When I select the :taxCalculationStrategy as tax calculation strategy
      */
-    public function iSelectTaxCalculationStrategy($taxCalculationStrategy)
+    public function iSelectTaxCalculationStrategy(string $taxCalculationStrategy): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -470,7 +473,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then the default tax zone for the :channel channel should be :taxZone
      */
-    public function theDefaultTaxZoneForTheChannelShouldBe(ChannelInterface $channel, $taxZone)
+    public function theDefaultTaxZoneForTheChannelShouldBe(ChannelInterface $channel, string $taxZone): void
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
@@ -480,7 +483,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Given channel :channel should not have default tax zone
      */
-    public function channelShouldNotHaveDefaultTaxZone(ChannelInterface $channel)
+    public function channelShouldNotHaveDefaultTaxZone(ChannelInterface $channel): void
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
@@ -490,8 +493,10 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then the tax calculation strategy for the :channel channel should be :taxCalculationStrategy
      */
-    public function theTaxCalculationStrategyForTheChannelShouldBe(ChannelInterface $channel, $taxCalculationStrategy)
-    {
+    public function theTaxCalculationStrategyForTheChannelShouldBe(
+        ChannelInterface $channel,
+        string $taxCalculationStrategy
+    ): void {
         $this->updatePage->open(['id' => $channel->getId()]);
 
         Assert::true($this->updatePage->isTaxCalculationStrategyChosen($taxCalculationStrategy));
@@ -500,7 +505,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then the base currency field should be disabled
      */
-    public function theBaseCurrencyFieldShouldBeDisabled()
+    public function theBaseCurrencyFieldShouldBeDisabled(): void
     {
         Assert::true($this->updatePage->isBaseCurrencyDisabled());
     }
@@ -529,10 +534,7 @@ final class ManagingChannelsContext implements Context
         Assert::same($this->updatePage->getMenuTaxon(), $menuTaxon);
     }
 
-    /**
-     * @param bool $state
-     */
-    private function assertChannelState(ChannelInterface $channel, $state)
+    private function assertChannelState(ChannelInterface $channel, bool $state): void
     {
         $this->iWantToBrowseChannels();
 

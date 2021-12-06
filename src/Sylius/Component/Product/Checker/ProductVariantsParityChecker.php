@@ -18,9 +18,6 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 
 final class ProductVariantsParityChecker implements ProductVariantsParityCheckerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function checkParity(ProductVariantInterface $variant, ProductInterface $product): bool
     {
         foreach ($product->getVariants() as $existingVariant) {

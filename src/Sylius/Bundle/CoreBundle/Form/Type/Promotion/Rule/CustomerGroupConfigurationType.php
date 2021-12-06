@@ -21,9 +21,6 @@ use Symfony\Component\Validator\Constraints\Type;
 
 final class CustomerGroupConfigurationType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -37,9 +34,6 @@ final class CustomerGroupConfigurationType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_promotion_rule_customer_group_configuration';

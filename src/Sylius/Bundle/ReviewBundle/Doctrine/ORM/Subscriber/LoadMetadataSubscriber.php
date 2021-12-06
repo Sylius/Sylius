@@ -19,17 +19,13 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 
 final class LoadMetadataSubscriber implements EventSubscriber
 {
-    /** @var array */
-    private $subjects;
+    private array $subjects;
 
     public function __construct(array $subjects)
     {
         $this->subjects = $subjects;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSubscribedEvents(): array
     {
         return [
@@ -73,7 +69,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
             'inversedBy' => 'reviews',
             'joinColumns' => [[
                 'name' => $subject . '_id',
-                'referencedColumnName' => $reviewableEntityMetadata->fieldMappings['id']['columnName'],
+                'referencedColumnName' => $reviewableEntityMetadata->fieldMappings['id']['columnName'] ?? $reviewableEntityMetadata->fieldMappings['id']['fieldName'],
                 'nullable' => false,
                 'onDelete' => 'CASCADE',
             ]],
@@ -87,7 +83,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
             'targetEntity' => $reviewerEntity,
             'joinColumns' => [[
                 'name' => 'author_id',
-                'referencedColumnName' => $reviewerEntityMetadata->fieldMappings['id']['columnName'],
+                'referencedColumnName' => $reviewerEntityMetadata->fieldMappings['id']['columnName'] ?? $reviewerEntityMetadata->fieldMappings['id']['fieldName'],
                 'nullable' => false,
                 'onDelete' => 'CASCADE',
             ]],

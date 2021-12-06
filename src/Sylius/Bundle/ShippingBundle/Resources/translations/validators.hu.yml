@@ -9,14 +9,18 @@ sylius:
             not_blank: 'Kérjük, írja be a szállítási kategória nevét.'
         code:
             not_blank: 'Kérjük, írja be a szállítási kategória kódját.'
+            regex: 'A kiszállítási kategória kódja csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.'
             unique: 'A szállítási kategória az adott kóddal már létezik.'
     shipping_method:
+        calculator:
+            not_blank: 'Kérjük, válassza ki a szállítási mód kalkulátorát.'
         name:
             max_length: 'Szállítási mód neve nem lehet hosszabb, mint {{ limit }} karakter.'
             min_length: 'Szállítás mód neve legalább {{ limit }} karakter hosszú kell legyen.'
             not_blank: 'Kérjük, adja meg a szállítás módját.'
         code:
             not_blank: 'Kérjük, adja meg a szállítási típus kódját.'
+            regex: 'A kiszállítási mód kódja csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.'
             unique: 'A szállítási módszer a megadott kóddal már létezik.'
         zone:
             not_blank: 'Kérjük, válassza ki a szállítási típus zónáját.'

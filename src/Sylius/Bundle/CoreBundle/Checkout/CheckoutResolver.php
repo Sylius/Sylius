@@ -25,17 +25,13 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class CheckoutResolver implements EventSubscriberInterface
 {
-    /** @var CartContextInterface */
-    private $cartContext;
+    private CartContextInterface $cartContext;
 
-    /** @var CheckoutStateUrlGeneratorInterface */
-    private $urlGenerator;
+    private CheckoutStateUrlGeneratorInterface $urlGenerator;
 
-    /** @var RequestMatcherInterface */
-    private $requestMatcher;
+    private RequestMatcherInterface $requestMatcher;
 
-    /** @var FactoryInterface */
-    private $stateMachineFactory;
+    private FactoryInterface $stateMachineFactory;
 
     public function __construct(
         CartContextInterface $cartContext,
@@ -76,9 +72,6 @@ final class CheckoutResolver implements EventSubscriberInterface
         $event->setResponse(new RedirectResponse($this->urlGenerator->generateForOrderCheckoutState($order)));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

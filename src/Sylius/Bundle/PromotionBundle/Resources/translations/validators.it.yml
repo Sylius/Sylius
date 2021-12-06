@@ -16,10 +16,6 @@ sylius:
             max_length: Il nome della promozione non deve essere più lungo di 1 carattere. | Il nome della promozione non deve essere più lungo di {{ limit }} caratteri.
             min_length: Il nome della promozione deve essere lungo almeno di 1 carattere. | Il nome della promozione deve essere lunga almeno {{ limit }} caratteri.
             not_blank: Inserisci il nome della promozione.
-    promotion_action:
-        percentage_discount_configuration:
-            min: Il valore di una percentuale di sconto deve essere almeno 0%.
-            max: Il valore massimo di una percentuale di sconto è 100%.
     promotion_coupon:
         code:
             max_length: Il codice del coupon non deve essere più lungo di 1 carattere. |Il codice del coupon non deve essere più lungo di {{ limit }} caratteri.
@@ -38,6 +34,5 @@ sylius:
             min: Il codice coupon deve contenere almeno {{ limit }} caratteri.
             max: Il codice coupon non deve contenere più di {{ limit }} caratteri.
             not_blank: Inserisci la lunghezza del codice coupon.
-        possible_generation_amount: Quantità di coupon o lunghezza di codice coupon non valido. Non è possibile generare %expectedAmount% coupon unici con codice lunghezza uguale a %codeLength%. La quantità che è possibile generare è %possibleAmount%.
         usage_limit:
             min: Il limite di utilizzo dei coupon generati deve essere almeno {{ limit }}.

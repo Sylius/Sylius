@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Description
+            enabled: Activée
             name: Nom
             parent: Parent
             slug: Slug

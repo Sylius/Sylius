@@ -19,12 +19,12 @@ sylius:
         user_registration:
             start_shopping: 'Rozpocznij zakupy'
             subject: 'Rejestracja użytkownika'
+            welcome_to_our_store: 'Zapraszamy do naszego sklepu!'
         verification_token:
             hello: 'Witaj'
             subject: 'Weryfikacja adresu e-mail'
     homepage:
         about_us: 'O nas'
-        about_us_content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad adipisci aperiam consectetur cum dicta dolores ducimus, eveniet ex exercitationem harum in iure labore libero magnam minima neque, numquam officiis possimus quasi reiciendis rem repellat repellendus rerum ut vel veniam vitae? Beatae consectetur culpa debitis ex laudantium porro unde? Modi.'
         newsletter: 'Newsletter'
         subscribe: 'Subskrybuj'
     lightbox:

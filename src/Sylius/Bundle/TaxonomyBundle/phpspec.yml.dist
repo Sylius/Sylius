@@ -3,3 +3,5 @@ suites:
         namespace: Sylius\Bundle\TaxonomyBundle
         psr4_prefix: Sylius\Bundle\TaxonomyBundle
         src_path: .
+
+runner.maintainers.errors.level: 14335 # E_ALL & ~E_USER_DEPRECATED ^ E_STRICT

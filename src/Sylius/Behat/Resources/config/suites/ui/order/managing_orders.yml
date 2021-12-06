@@ -59,4 +59,4 @@ default:
                 - sylius.behat.context.ui.shop.currency
 
             filters:
-                tags: "@managing_orders && @ui"
+                tags: "@managing_orders&&@ui"

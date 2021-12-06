@@ -8,7 +8,7 @@ Sylius\Component\Order\Model\Order:
             groups: [Default, Detailed, DetailedCart]
         items:
             expose: true
-            type: array
+            type: iterable
             groups: [Default, Detailed, DetailedCart]
         itemsTotal:
             expose: true
@@ -16,7 +16,7 @@ Sylius\Component\Order\Model\Order:
             groups: [Default, Detailed, DetailedCart]
         adjustments:
             expose: true
-            type: array
+            type: iterable
             groups: [Default, Detailed, DetailedCart]
         adjustmentsTotal:
             expose: true

@@ -40,7 +40,7 @@ Give it a new, custom validation group - ``[app_product]``.
 
 .. tip::
 
-    When using custom validation messages see `here how to add them <http://symfony.com/doc/current/validation/translations.html>`_.
+    When using custom validation messages see `here how to add them <https://symfony.com/doc/current/validation/translations.html>`_.
 
 **2.** Configure the new validation group in the ``config/services.yaml``.
 
@@ -59,4 +59,4 @@ not letting users add products with name shorter than 10 characters.
     When you would like to use group sequence validation, `like so <https://symfony.com/doc/current/validation/sequence_provider.html>`_.
     Be sure to use ``[Default]`` as validation group. Otherwise your ``getGroupSequence()`` method will not be called.
 
-.. include:: /customization/plugins.rst.inc
+.. include:: /customization/plugins.rst

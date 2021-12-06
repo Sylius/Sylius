@@ -27,31 +27,21 @@ use Webmozart\Assert\Assert;
 
 final class UpdatePaymentStateExtension implements ExtensionInterface
 {
-    /** @var FactoryInterface */
-    private $factory;
+    private FactoryInterface $factory;
 
     public function __construct(FactoryInterface $factory)
     {
         $this->factory = $factory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function onPreExecute(Context $context): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function onExecute(Context $context): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function onPostExecute(Context $context): void
     {
         $previousStack = $context->getPrevious();
@@ -80,7 +70,6 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
 
         $payment = $request->getFirstModel();
 
-        /** @var PaymentInterface $payment */
         if (!$payment instanceof PaymentInterface) {
             return;
         }

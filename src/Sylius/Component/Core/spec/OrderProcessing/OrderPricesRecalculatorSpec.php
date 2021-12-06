@@ -46,6 +46,8 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
     ): void {
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
         $order->getCustomer()->willReturn($customer);
         $order->getChannel()->willReturn(null);
         $order->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
@@ -74,5 +76,15 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('process', [$order])
         ;
+    }
+
+    function it_does_nothing_if_the_order_is_in_a_state_different_than_cart(OrderInterface $order): void
+    {
+        $order->getState()->willReturn(OrderInterface::STATE_NEW);
+
+        $order->getChannel()->shouldNotBeCalled();
+        $order->getItems()->shouldNotBeCalled();
+
+        $this->process($order);
     }
 }

@@ -18,4 +18,4 @@ default:
                 - sylius.behat.context.ui.admin.login
 
             filters:
-                tags: "@administrator_login && @ui"
+                tags: "@administrator_login&&@ui"

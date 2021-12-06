@@ -2,10 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: Изображение слишком велико - {{ size }}{{ suffix }}. Максимально допустимый размер равен {{ limit }}{{ suffix }}.
+            upload_ini_size: Изображение слишком велико. Максимально допустимый размер равен {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: Пожалуйста, установите основную валюту.
         default_locale:
+            enabled: Язык по умолчанию должен быть активным.
             not_blank: Пожалуйста, введите язык по умолчанию для канала.
         contact_email:
             invalid: Не правильный e-mail адрес.
@@ -13,7 +18,6 @@ sylius:
             min: E-mail должн быть по крайней мере {{ limit }} символов.
     channel_pricing:
         price:
-            min: Цена должна быть не менее {{ limit }}.
             not_blank: Пожалуйста введите стоимость.
     checkout:
         shipping_method:
@@ -39,9 +43,6 @@ sylius:
         product_eligibility: 'Продукт %productName% был выключен.'
         shipping_method_eligibility: 'Продукт не соответствует требованиям способа доставки %shippingMethodName%. Пожалуйста выберете другой способ доставки.'
     locale:
-        code:
-            not_blank: Пожалуйста, введите код языка.
-            unique: Этот язык уже существует.
         enabled:
             cannot_disable_base: Базовый язык не может быть отключен.
     product:
@@ -77,6 +78,9 @@ sylius:
     product_translation:
         short_description:
             max: Краткое описание не должно быть длинее {{ limit }} символов.
+    review:
+        author:
+            not_blank: Пожалуйста, введите ваш email.
     taxon_image:
         file:
             max_size: Изображение слишком велико - {{ size }}{{ suffix }}. Максимально допустимый размер равен {{ limit }}{{ suffix }}.

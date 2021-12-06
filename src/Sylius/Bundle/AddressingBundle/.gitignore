@@ -1,8 +1,12 @@
-vendor/
-bin/
+/vendor/
+/bin/
 
-composer.phar
-composer.lock
+/composer.phar
+/composer.lock
 
-test/app/cache
-test/app/logs
+/test/app/cache
+/test/app/logs
+/test/var/cache
+/test/var/logs
+
+/.phpunit.result.cache

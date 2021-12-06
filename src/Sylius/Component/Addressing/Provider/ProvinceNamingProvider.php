@@ -20,17 +20,13 @@ use Webmozart\Assert\Assert;
 
 class ProvinceNamingProvider implements ProvinceNamingProviderInterface
 {
-    /** @var RepositoryInterface */
-    private $provinceRepository;
+    private RepositoryInterface $provinceRepository;
 
     public function __construct(RepositoryInterface $provinceRepository)
     {
         $this->provinceRepository = $provinceRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(AddressInterface $address): string
     {
         if (null !== $address->getProvinceName()) {
@@ -48,9 +44,6 @@ class ProvinceNamingProvider implements ProvinceNamingProviderInterface
         return $province->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAbbreviation(AddressInterface $address): string
     {
         if (null !== $address->getProvinceName()) {

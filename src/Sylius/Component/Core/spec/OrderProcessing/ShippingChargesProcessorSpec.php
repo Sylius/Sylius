@@ -18,10 +18,10 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
-use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 final class ShippingChargesProcessorSpec extends ObjectBehavior
@@ -38,6 +38,9 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
 
     function it_removes_existing_shipping_adjustments(OrderInterface $order): void
     {
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
+
         $order->getShipments()->willReturn(new ArrayCollection([]));
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
 
@@ -46,6 +49,8 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
 
     function it_does_not_apply_any_shipping_charge_if_order_has_no_shipments(OrderInterface $order): void
     {
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $order->getShipments()->willReturn(new ArrayCollection([]));
         $order->addAdjustment(Argument::any())->shouldNotBeCalled();
@@ -61,20 +66,41 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod
     ): void {
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
         $adjustmentFactory->createNew()->willReturn($adjustment);
         $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
 
         $calculator->calculate($shipment)->willReturn(450);
 
         $shipment->getMethod()->willReturn($shippingMethod);
+        $shippingMethod->getCode()->willReturn('fedex');
         $shippingMethod->getName()->willReturn('FedEx');
 
         $adjustment->setAmount(450)->shouldBeCalled();
         $adjustment->setType(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $adjustment->setLabel('FedEx')->shouldBeCalled();
+        $adjustment
+            ->setDetails([
+                'shippingMethodCode' => 'fedex',
+                'shippingMethodName' => 'FedEx',
+            ])
+            ->shouldBeCalled()
+        ;
 
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
-        $order->addAdjustment($adjustment)->shouldBeCalled();
+        $shipment->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
+        $shipment->addAdjustment($adjustment)->shouldBeCalled();
+
+        $this->process($order);
+    }
+
+    function it_does_nothing_if_the_order_is_in_a_state_different_than_cart(OrderInterface $order): void
+    {
+        $order->getState()->willReturn(OrderInterface::STATE_NEW);
+
+        $order->getShipments()->shouldNotBeCalled();
+        $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldNotBeCalled();
 
         $this->process($order);
     }

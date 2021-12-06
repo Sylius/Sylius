@@ -17,4 +17,3 @@ sylius:
     payum_gateway_factory:
         offline: Çevirim dışı
         paypal_express_checkout: Paypal Express ödemesi
-        stripe_checkout: Stripe ödemesi

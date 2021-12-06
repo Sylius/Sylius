@@ -16,64 +16,108 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.shipping_method.class%" shortName="ShippingMethod">
-        <attribute name="route_prefix">admin</attribute>
-
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>shipping_method:read</attribute>
-            </attribute>
-        </attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
         <attribute name="order">
             <attribute name="position">ASC</attribute>
         </attribute>
 
+        <attribute name="normalization_context">
+            <attribute name="groups">admin:shipping_method:read</attribute>
+        </attribute>
+
         <itemOperations>
-            <itemOperation name="get" />
-            <itemOperation name="put">
-                <attribute name="denormalization_context">
-                    <attribute name="groups">shipping_method:update</attribute>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/shipping-methods/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shipping_method:read</attribute>
                 </attribute>
             </itemOperation>
-            <itemOperation name="delete" />
 
-            <itemOperation name="archive">
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/shipping-methods/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:shipping_method:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/shipping-methods/{code}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:shipping_method:update</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/shipping-methods/{code}</attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_archive">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/admin/shipping-methods/{code}/archive</attribute>
+                <attribute name="input">false</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface:archive</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Archives Shipping Method</attribute>
                 </attribute>
-                <attribute name="method">PATCH</attribute>
-                <attribute name="input">false</attribute>
-                <attribute name="path">/shipping-methods/{id}/archive</attribute>
-                <attribute name="controller">sylius.api.archiving_shipping_method_applicator:archive</attribute>
             </itemOperation>
 
-            <itemOperation name="restore">
+            <itemOperation name="admin_restore">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/admin/shipping-methods/{code}/restore</attribute>
+                <attribute name="input">false</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface:restore</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Restores archived Shipping Method</attribute>
                 </attribute>
-                <attribute name="method">PATCH</attribute>
-                <attribute name="input">false</attribute>
-                <attribute name="path">/shipping-methods/{id}/restore</attribute>
-                <attribute name="controller">sylius.api.archiving_shipping_method_applicator:restore</attribute>
             </itemOperation>
         </itemOperations>
 
         <collectionOperations>
-            <collectionOperation name="get">
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/shipping-methods</attribute>
                 <attribute name="filters">
-                    <attribute>sylius.api.shipping_method_order_filter</attribute>
-                    <attribute>sylius.api.translation_order_filter</attribute>
                     <attribute>sylius.api.filter_archived_shipping_methods</attribute>
+                    <attribute>sylius.api.shipping_method_order_filter</attribute>
+                    <attribute>Sylius\Bundle\ApiBundle\Doctrine\Filter\TranslationOrderNameAndLocaleFilter</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shipping_method:read</attribute>
                 </attribute>
             </collectionOperation>
-            <collectionOperation name="post">
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/shipping-methods</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shipping_method:create</attribute>
+                    <attribute name="groups">admin:shipping_method:create</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="api_orders_shipments_methods_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>shop:shipping_method:read</attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
+            <subresourceOperation name="api_shipments_methods_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>shop:shipping_method:read</attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
@@ -87,6 +131,17 @@
         <property name="channels" writable="true" />
         <property name="calculator" writable="true" />
         <property name="configuration" writable="true" />
-        <property name="translations" readable="true" writable="true" />
+        <property name="translations" readable="true" writable="true">
+            <attribute name="openapi_context">
+                <attribute name="type">object</attribute>
+                <attribute name="example">
+                    <attribute name="en_US">
+                        <attribute name="name">string</attribute>
+                        <attribute name="description">string</attribute>
+                        <attribute name="locale">string</attribute>
+                    </attribute>
+                </attribute>
+            </attribute>
+        </property>
     </resource>
 </resources>

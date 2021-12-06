@@ -3,6 +3,11 @@
     <div class="ui segment">
         {{ form_row(form.onHand) }}
         {{ form_row(form.tracked) }}
+
+        <div class="ui pointing above ignored label">
+            {{ form_help(form.tracked) }}
+        </div>
+
         {{ form_row(form.version) }}
     </div>
 

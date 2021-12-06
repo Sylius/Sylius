@@ -20,8 +20,7 @@ use Sylius\Component\User\Model\UserInterface;
 
 final class CanonicalizerListener
 {
-    /** @var CanonicalizerInterface */
-    private $canonicalizer;
+    private CanonicalizerInterface $canonicalizer;
 
     public function __construct(CanonicalizerInterface $canonicalizer)
     {

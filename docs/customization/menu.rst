@@ -7,7 +7,7 @@ You have got the ``Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent`` with ``F
 
 You've got eight events that you should be subscribing to:
 
-.. code-block:: php
+.. code-block:: yaml
 
     sylius.menu.shop.account # For the menu of the MyAccount section in shop
     sylius.menu.admin.main # For the Admin Panel menu
@@ -55,7 +55,7 @@ In the example below we are adding a one new item and sub-item to the Admin pane
 
             $newSubmenu
                 ->addChild('new-subitem')
-                ->setLabel('Custom Admin Menu Itemu')
+                ->setLabel('Custom Admin Menu Item')
             ;
         }
     }
@@ -393,6 +393,6 @@ After these two steps your admin panel variant menu should look like that (the n
 .. image:: ../_images/admin_panel_variant_menu.png
     :align: center
 
-.. include:: /customization/plugins.rst.inc
+.. include:: /customization/plugins.rst
 
 .. _KnpMenu: https://github.com/KnpLabs/KnpMenu

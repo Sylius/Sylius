@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: 説明
+            name: 名稱
         promotion:
             description: 説明
             name: 名稱

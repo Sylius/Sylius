@@ -14,12 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\ProductVariant;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 interface CreatePageInterface extends BaseCreatePageInterface
 {
-    public function specifyPrice(string $price, string $channelName): void;
+    public function specifyPrice(string $price, ChannelInterface $channelName): void;
 
-    public function specifyOriginalPrice(string $originalPrice, string $channelName): void;
+    public function specifyMinimumPrice(string $price, ChannelInterface $channelName): void;
+
+    public function specifyOriginalPrice(string $originalPrice, ChannelInterface $channelName): void;
 
     public function specifyHeightWidthDepthAndWeight(string $height, string $width, string $depth, string $weight): void;
 

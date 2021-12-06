@@ -17,20 +17,13 @@ use Symfony\Component\Validator\Constraint;
 
 final class UniqueSimpleProductCode extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.simple_product.code.unique';
+    public string $message = 'sylius.simple_product.code.unique';
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'sylius.validator.unique_simple_product_code';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;

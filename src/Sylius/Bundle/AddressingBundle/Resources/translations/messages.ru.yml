@@ -16,18 +16,18 @@ sylius:
             zone: Зона
         country:
             add_province: Добавить регион
-            name: Округ
+            name: Страна
             provinces: Области
             select: Выбрать
             enabled: Активен
         province:
-            name: Округ
+            name: Название
             abbreviation: Аббревиатура
             select: Выбрать
         zone:
             add_member: Добавить
             members: Области
-            name: Округ
+            name: Имя
             type: Тип
             types:
                 country: Страна

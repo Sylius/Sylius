@@ -18,17 +18,13 @@ use Sylius\Component\Order\Model\OrderInterface;
 
 final class OrderNumberAssigner implements OrderNumberAssignerInterface
 {
-    /** @var OrderNumberGeneratorInterface */
-    private $numberGenerator;
+    private OrderNumberGeneratorInterface $numberGenerator;
 
     public function __construct(OrderNumberGeneratorInterface $numberGenerator)
     {
         $this->numberGenerator = $numberGenerator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function assignNumber(OrderInterface $order): void
     {
         if (null !== $order->getNumber()) {

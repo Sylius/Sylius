@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    gateway_config:
+        paypal:
+            password:
+                not_blank: נא להזין סיסמת Paypal.
+            signature:
+                not_blank: נא להזין חתימת Paypal.
+            username:
+                not_blank: נא להזין שם משתמש ב-Paypal.
+        stripe:
+            secret_key:
+                not_blank: נא להזין מפתח סודי של Stripe.
+            publishable_key:
+                not_blank: נא להזין מפתח שיטופי של Stripe.

@@ -17,7 +17,7 @@ Sylius\Component\Payment\Model\PaymentMethod:
             groups: [Default, Detailed]
         translations:
             expose: true
-            type: array
+            type: iterable
             groups: [Default, Detailed]
         enabled:
             expose: true

@@ -23,11 +23,9 @@ use Webmozart\Assert\Assert;
 
 class ProvinceAddressConstraintValidator extends ConstraintValidator
 {
-    /** @var RepositoryInterface */
-    private $countryRepository;
+    private RepositoryInterface $countryRepository;
 
-    /** @var RepositoryInterface */
-    private $provinceRepository;
+    private RepositoryInterface $provinceRepository;
 
     public function __construct(RepositoryInterface $countryRepository, RepositoryInterface $provinceRepository)
     {
@@ -35,9 +33,6 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
         $this->provinceRepository = $provinceRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate($value, Constraint $constraint): void
     {
         if (!$value instanceof AddressInterface) {
@@ -71,6 +66,10 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
 
         if (null === $country) {
             return true;
+        }
+
+        if (!$country->hasProvinces() && null !== $address->getProvinceCode()) {
+            return false;
         }
 
         if (!$country->hasProvinces()) {

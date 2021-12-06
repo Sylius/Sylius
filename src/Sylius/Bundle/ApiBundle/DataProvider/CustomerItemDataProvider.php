@@ -1,0 +1,64 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Sylius\Bundle\ApiBundle\DataProvider;
+
+use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
+use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
+use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
+
+/** @experimental */
+final class CustomerItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
+{
+    private UserContextInterface $userContext;
+
+    private CustomerRepositoryInterface $customerRepository;
+
+    public function __construct(UserContextInterface $userContext, CustomerRepositoryInterface $customerRepository)
+    {
+        $this->userContext = $userContext;
+        $this->customerRepository = $customerRepository;
+    }
+
+    public function getItem(string $resourceClass, $id, string $operationName = null, array $context = [])
+    {
+        /** @var ShopUserInterface|null $user */
+        $user = $this->userContext->getUser();
+
+        if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
+            return $this->customerRepository->find($id);
+        }
+
+        if (
+            $user instanceof ShopUserInterface &&
+            $id === $user->getCustomer()->getId()
+        ) {
+            return $this->customerRepository->find($id);
+        }
+
+        if ($user === null && $operationName === 'shop_verify_customer_account') {
+            return $this->customerRepository->find($id);
+        }
+
+        return null;
+    }
+
+    public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
+    {
+        return is_a($resourceClass, CustomerInterface::class, true);
+    }
+}

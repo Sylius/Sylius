@@ -126,7 +126,8 @@ final class ConfigurationTest extends TestCase
      */
     public function its_checkout_route_map_it_is_configurable(): void
     {
-        $this->assertProcessedConfigurationEquals([
+        $this->assertProcessedConfigurationEquals(
+            [
             ['checkout_resolver' => [
                 'route_map' => [
                     'addressed' => [
@@ -161,9 +162,6 @@ final class ConfigurationTest extends TestCase
         ]]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): Configuration
     {
         return new Configuration();

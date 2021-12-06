@@ -11,4 +11,4 @@ sylius:
             name: Name
             amount: Steuersatz
             included_in_price: Im Preis enthalten?
-            calculator: Rechner
+            calculator: Steuersatzrechner

@@ -17,17 +17,13 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 final class ProviderBasedLocaleContext implements LocaleContextInterface
 {
-    /** @var LocaleProviderInterface */
-    private $localeProvider;
+    private LocaleProviderInterface $localeProvider;
 
     public function __construct(LocaleProviderInterface $localeProvider)
     {
         $this->localeProvider = $localeProvider;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLocaleCode(): string
     {
         $availableLocalesCodes = $this->localeProvider->getAvailableLocalesCodes();

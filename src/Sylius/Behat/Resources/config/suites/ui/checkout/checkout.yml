@@ -19,6 +19,7 @@ default:
                 - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.product_option
+                - sylius.behat.context.transform.product_variant
                 - sylius.behat.context.transform.province
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.shipping_category
@@ -26,6 +27,7 @@ default:
                 - sylius.behat.context.transform.tax_category
                 - sylius.behat.context.transform.user
                 - sylius.behat.context.transform.zone
+                - Sylius\Behat\Context\Transform\CatalogPromotionContext
 
                 - sylius.behat.context.setup.address
                 - sylius.behat.context.setup.admin_user
@@ -44,6 +46,7 @@ default:
                 - sylius.behat.context.setup.taxation
                 - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.zone
+                - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
                 - sylius.behat.context.ui.admin.managing_orders
                 - sylius.behat.context.ui.channel
@@ -62,4 +65,4 @@ default:
                 - sylius.behat.context.ui.shop.locale
 
             filters:
-                tags: "@checkout && @ui"
+                tags: "@checkout&&@ui"

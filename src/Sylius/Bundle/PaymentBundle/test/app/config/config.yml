@@ -9,8 +9,6 @@ framework:
         resource: "%kernel.project_dir%/app/config/routing.yml"
     form: ~
     csrf_protection: true
-    templating:
-        engines: ['twig']
     default_locale: "%locale%"
     session:
         handler_id: ~

@@ -20,104 +20,81 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     /** @var mixed */
     protected $id;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     protected $name;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     protected $slug;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     protected $description;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     protected $metaKeywords;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     protected $metaDescription;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSlug(?string $slug): void
     {
         $this->slug = $slug;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMetaKeywords(): ?string
     {
         return $this->metaKeywords;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setMetaKeywords(?string $metaKeywords): void
     {
         $this->metaKeywords = $metaKeywords;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMetaDescription(): ?string
     {
         return $this->metaDescription;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setMetaDescription(?string $metaDescription): void
     {
         $this->metaDescription = $metaDescription;

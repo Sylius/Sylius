@@ -8,5 +8,5 @@ Sylius\Component\Product\Model\ProductOptionValue:
             groups: [Default, Detailed, DetailedCart]
         translations:
             expose: true
-            type: array
+            type: iterable
             groups: [Default, Detailed, DetailedCart]

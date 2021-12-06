@@ -17,17 +17,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class ChannelFixture extends AbstractResourceFixture
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'channel';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {
         $resourceNode
@@ -48,6 +42,7 @@ class ChannelFixture extends AbstractResourceFixture
                 ->arrayNode('currencies')->scalarPrototype()->end()->end()
                 ->scalarNode('theme_name')->end()
                 ->scalarNode('contact_email')->end()
+                ->scalarNode('contact_phone_number')->end()
                 ->arrayNode('shop_billing_data')
                     ->children()
                         ->scalarNode('company')->end()
@@ -58,6 +53,7 @@ class ChannelFixture extends AbstractResourceFixture
                         ->scalarNode('postcode')->end()
                     ->end()
                 ->end()
+                ->scalarNode('menu_taxon')->end()
         ;
     }
 }

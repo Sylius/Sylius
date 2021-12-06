@@ -12,7 +12,6 @@ sylius:
             gender: الجنس
             birthday: عيد ميلاد
             billing_address: عنوان الفاتورة
-            different_billing_address: استخدام عنوان مختلف للفوترة؟
             only_customer_registration: إنشاء حساب؟
             subscribed_to_newsletter: الاشتراك في نشرتنا الإخبارية
         customer_group:

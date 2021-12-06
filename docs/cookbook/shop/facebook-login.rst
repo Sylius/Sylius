@@ -11,7 +11,10 @@ Set up the HWIOAuthBundle
 
 .. code-block:: bash
 
-    composer require hwi/oauth-bundle
+    composer require hwi/oauth-bundle php-http/httplug-bundle
+
+`php-http/httplug-bundle` is optional, require this dependency if you don't want to provide your own services.
+For more information, please visit `Setting up HWIOAuthBundle <https://github.com/hwi/HWIOAuthBundle/blob/master/Resources/doc/1-setting_up_the_bundle.md#a-add-hwioauthbundle-to-your-project>`_.
 
 * Enable the bundle:
 
@@ -21,7 +24,8 @@ Set up the HWIOAuthBundle
 
     return [
         // ...
-        new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+        Http\HttplugBundle\HttplugBundle::class => ['all' => true], // If you require the php-http/httplug-bundle package.
+        HWI\Bundle\OAuthBundle\HWIOAuthBundle::class => ['all' => true],
     ];
 
 * Import the routing:
@@ -76,6 +80,12 @@ Sylius uses email as the username, that's why we choose emails as ``scope`` for 
     * Click ``+Add Platform`` and choose "Website" type.
     * Provide the **Site URL** of the platform - your local server on which you run Sylius: ``http://localhost:8000``
 
+    Alternatively, you could temporarily expose your localhost to be publicly accessible, using a tool like `ngrok <https://ngrok.com/>`_.
+    Facebook app configuration would be similar to:
+
+    * **App Domain**: ``abcde12345.ngrok.io``
+    * **Site URL** ``http://abcde12345.ngrok.io``
+
 Configure the security layer
 ----------------------------
 
@@ -92,9 +102,9 @@ Under the ``security: firewalls: shop:`` keys in the ``security.yaml`` configure
                 oauth:
                     resource_owners:
                         facebook: "/login/check-facebook"
-                    login_path: /login
+                    login_path: sylius_shop_login
                     use_forward: false
-                    failure_path: /login
+                    failure_path: sylius_shop_login
 
                     oauth_user_provider:
                         service: sylius.oauth.user_provider

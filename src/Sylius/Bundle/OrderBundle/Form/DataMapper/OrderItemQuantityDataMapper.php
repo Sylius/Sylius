@@ -21,11 +21,9 @@ use Symfony\Component\Form\DataMapperInterface;
  */
 class OrderItemQuantityDataMapper implements DataMapperInterface
 {
-    /** @var OrderItemQuantityModifierInterface */
-    private $orderItemQuantityModifier;
+    private OrderItemQuantityModifierInterface $orderItemQuantityModifier;
 
-    /** @var DataMapperInterface */
-    private $propertyPathDataMapper;
+    private DataMapperInterface $propertyPathDataMapper;
 
     public function __construct(
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
@@ -35,24 +33,18 @@ class OrderItemQuantityDataMapper implements DataMapperInterface
         $this->propertyPathDataMapper = $propertyPathDataMapper;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function mapDataToForms($data, $forms): void
+    public function mapDataToForms($viewData, $forms): void
     {
-        $this->propertyPathDataMapper->mapDataToForms($data, $forms);
+        $this->propertyPathDataMapper->mapDataToForms($viewData, $forms);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function mapFormsToData($forms, &$data): void
+    public function mapFormsToData($forms, &$viewData): void
     {
         $formsOtherThanQuantity = [];
         foreach ($forms as $form) {
             if ('quantity' === $form->getName()) {
                 $targetQuantity = $form->getData();
-                $this->orderItemQuantityModifier->modify($data, (int) $targetQuantity);
+                $this->orderItemQuantityModifier->modify($viewData, (int) $targetQuantity);
 
                 continue;
             }
@@ -61,7 +53,7 @@ class OrderItemQuantityDataMapper implements DataMapperInterface
         }
 
         if (!empty($formsOtherThanQuantity)) {
-            $this->propertyPathDataMapper->mapFormsToData($formsOtherThanQuantity, $data);
+            $this->propertyPathDataMapper->mapFormsToData($formsOtherThanQuantity, $viewData);
         }
     }
 }

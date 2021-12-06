@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Beschreibung
+            name: Name
+            priority: Priorität
         promotion:
             actions: Aktionen
             add_action: Aktion hinzufügen
@@ -17,13 +21,13 @@ sylius:
             starts_at: Beginnt am
             usage_limit: Nutzungslimit
         promotion_action:
-            item_fixed_discount: Fixer Rabatt
-            item_percentage_discount: Prozentualer Rabatt
+            item_fixed_discount: Fixer Rabatt - Bestellposition
+            item_percentage_discount: Prozentualer Rabatt - Bestellposition
             order_fixed_discount: Fester Rabatt
             order_percentage_discount: Prozentualer Rabatt
             shipping_percentage_discount: Prozentualer Versandrabatt
             fixed_discount_configuration:
-                amount: Steuersatz
+                amount: Betrag
             percentage_discount_configuration:
                 percentage: Prozent
             type: Typ
@@ -31,9 +35,11 @@ sylius:
             expires_at: Verfällt am
             usage_limit: Nutzungslimit
         promotion_coupon_generator_instruction:
-            amount: Steuersatz
+            amount: Betrag
             code_length: Codelänge
             expires_at: Verfällt am
+            prefix: Präfix
+            suffix: Suffix
             usage_limit: Nutzungslimit
         promotion_filter:
             price_range: Preisspanne Filter
@@ -42,11 +48,11 @@ sylius:
             contains_product: Enthält Produkt
             customer_group: Kundengruppe
             has_at_least_one_from_taxons: Hat mindestens eine aus der Klassifizierung
-            item_total: Stückzahl gesamt
+            item_total: Artikelsumme
             nth_order: N-te Bestellung
             shipping_country: Lieferadresse Land
             taxonomy: Klassifizierung
-            total_price_of_items_from_taxon: Gesamtpreis aller Produkte
+            total_price_of_items_from_taxon: Gesamtpreis aller Produkte aus Klassifizierung
             cart_quantity_configuration:
                 count: Anzahl
                 equal: Gleich
@@ -54,7 +60,7 @@ sylius:
                 exclude: Ausgenommen
                 variants: Produkte
             item_total_configuration:
-                amount: Steuersatz
+                amount: Betrag
             nth_order_configuration:
                 nth: N-ter
             shipping_country_configuration:

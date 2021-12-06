@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+
+<!--
+ This file is part of the Sylius package.
+ (c) Paweł Jędrzejewski
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="Sylius\Bundle\ApiBundle\Application\Entity\Foo" shortName="Foo">
+        <collectionOperations>
+            <collectionOperation name="get">
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">foo:read</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="post">
+                <attribute name="method">POST</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">foo:create</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="post_with_command">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/foo-api-command</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Application\Command\FooCommand</attribute>
+                <attribute name="output">false</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">foo:read</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="get">
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">foo:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/foos/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">foo:read</attribute>
+                </attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="id" identifier="true" writable="false" />
+        <property name="name" writable="true" />
+        <property name="owner" writable="true" readable="true" />
+        <property name="fooSyliusResource" writable="true" readable="true" />
+    </resource>
+</resources>

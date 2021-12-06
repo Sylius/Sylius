@@ -102,4 +102,4 @@ Learn more
 ----------
 
 * :doc:`The Book: Fixtures </book/architecture/fixtures>`
-* :doc:`FixturesBundle </components_and_bundles/bundles/SyliusFixturesBundle/index>`
+* `FixturesBundle <https://github.com/Sylius/SyliusFixturesBundle/blob/master/docs/index.md>`_

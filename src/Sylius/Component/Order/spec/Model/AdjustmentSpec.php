@@ -57,26 +57,32 @@ final class AdjustmentSpec extends ObjectBehavior
         $order->addAdjustment($this->getWrappedObject())->shouldBeCalled();
         $this->setAdjustable($order);
         $this->getAdjustable()->shouldReturn($order);
+        $this->getOrder()->shouldReturn($order);
 
         $order->removeAdjustment($this->getWrappedObject())->shouldBeCalled();
         $this->setAdjustable(null);
         $this->getAdjustable()->shouldReturn(null);
+        $this->getOrder()->shouldReturn(null);
 
         $orderItem->addAdjustment($this->getWrappedObject())->shouldBeCalled();
         $this->setAdjustable($orderItem);
         $this->getAdjustable()->shouldReturn($orderItem);
+        $this->getOrderItem()->shouldReturn($orderItem);
 
         $orderItem->removeAdjustment($this->getWrappedObject())->shouldBeCalled();
         $this->setAdjustable(null);
         $this->getAdjustable()->shouldReturn(null);
+        $this->getOrderItem()->shouldReturn(null);
 
         $orderItemUnit->addAdjustment($this->getWrappedObject())->shouldBeCalled();
         $this->setAdjustable($orderItemUnit);
         $this->getAdjustable()->shouldReturn($orderItemUnit);
+        $this->getOrderItemUnit()->shouldReturn($orderItemUnit);
 
         $orderItemUnit->removeAdjustment($this->getWrappedObject())->shouldBeCalled();
         $this->setAdjustable(null);
         $this->getAdjustable()->shouldReturn(null);
+        $this->getOrderItemUnit()->shouldReturn(null);
     }
 
     function it_throws_an_exception_during_not_supported_adjustable_class_set(AdjustableInterface $adjustable): void
@@ -227,5 +233,11 @@ final class AdjustmentSpec extends ObjectBehavior
     function it_has_no_last_update_date_by_default(): void
     {
         $this->getUpdatedAt()->shouldReturn(null);
+    }
+
+    function its_details_are_mutable(): void
+    {
+        $this->setDetails(['taxRateAmount' => 0.1]);
+        $this->getDetails()->shouldReturn(['taxRateAmount' => 0.1]);
     }
 }

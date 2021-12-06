@@ -9,6 +9,8 @@ sylius:
             title: عنوان
         cart:
             coupon: قسيمة شرائية
+        catalog_promotion:
+            channels: القنوات
         checkout:
             addressing:
                 different_billing_address: استخدام عنوان مختلف للفوترة؟
@@ -21,6 +23,7 @@ sylius:
                 product: المنتج
         promotion_coupon:
             per_customer_usage_limit: حد استخدام لكل عميل
+            reusable_from_cancelled_orders: قابل لاعادة الاستخدام من الطلبات الملغاة
         group:
             name: الاسم
             roles: الأدوار
@@ -28,10 +31,12 @@ sylius:
             billing_data:
                 city: المدينة
                 company: الشركة
-                country: البلد
+                country: الدولة
                 postcode: الرقم البريدي
                 street: الشارع
+                tax_id: معرّف الضريبة
             contact_email: البريد الإلكتروني لجهة الإتصال
+            countries: البلدان
             currencies: العملات
             currency_base: العملة الأساسية
             account_verification_required: هل التحقق من الحساب مطلوب؟
@@ -40,6 +45,7 @@ sylius:
             locales: محلي
             payment_methods: طرق الدفع
             shipping_methods: طرق الشحن
+            shop_billing_data: بيانات الدفع
             skipping_shipping_step_allowed: تخطي الخطوة الشحن إلا إذا كان يتوفر أسلوب الشحن واحد؟
             skipping_payment_step_allowed: تخطي الخطوة الشحن إلا إذا كان يتوفر أسلوب الشحن واحد؟
             tax_calculation_strategy: استراتيجية حساب الضرائب
@@ -70,7 +76,7 @@ sylius:
             short_description: وصف مختصر
             variant_selection_method: أسلوب اختيار البديل
             main_taxon: الأصناف الرئيسية
-            channels: القنوات
+            channels: قنوات
             enabled: تفعيل
         product_filter:
             name: الاسم
@@ -100,13 +106,12 @@ sylius:
             file: قم بإختيارالصورة
         user:
             billing_address: عنوان الفاتورة
-            different_billing_address: استخدام عنوان مختلف للفوترة؟
-            enabled: تفعيل
+            enabled: تمكين
             first_name: الاسم الأول
             groups: المجموعات
             roles: الأدوار
             last_name: اسم العائلة
-            password: كلمة السر
+            password: كلمة المرور
             shipping_address: عنوان الشحن
         user_filter:
             query: بحث
@@ -137,14 +142,14 @@ sylius:
             customer_group:
                 group: مجموعة العميل
             has_taxon:
-                taxons: تاكسونس
+                taxons: الاصناف
             product:
                 products: المنتجات
             total_of_items_from_taxon:
                 taxon: تاكسون
                 amount: القيمة
         payment_method:
-            channels: القنوات
+            channels: قنوات
         product_attribute:
             position: المهنة
         zone:

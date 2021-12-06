@@ -13,22 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CurrencyBundle\Templating\Helper;
 
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Currencies;
 use Symfony\Component\Templating\Helper\Helper;
 
 class CurrencyHelper extends Helper implements CurrencyHelperInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function convertCurrencyCodeToSymbol(string $code): string
     {
-        return Intl::getCurrencyBundle()->getCurrencySymbol($code);
+        return Currencies::getSymbol($code);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'sylius_currency';

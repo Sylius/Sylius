@@ -24,8 +24,7 @@ final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'total_of_items_from_taxon';
 
-    /** @var TaxonRepositoryInterface */
-    private $taxonRepository;
+    private TaxonRepositoryInterface $taxonRepository;
 
     public function __construct(TaxonRepositoryInterface $taxonRepository)
     {
@@ -33,8 +32,6 @@ final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws UnsupportedTypeException
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool

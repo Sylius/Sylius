@@ -19,17 +19,13 @@ use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 final class OrderShippingMethodSelectionRequirementChecker implements OrderShippingMethodSelectionRequirementCheckerInterface
 {
-    /** @var ShippingMethodsResolverInterface */
-    private $shippingMethodsResolver;
+    private ShippingMethodsResolverInterface $shippingMethodsResolver;
 
     public function __construct(ShippingMethodsResolverInterface $shippingMethodsResolver)
     {
         $this->shippingMethodsResolver = $shippingMethodsResolver;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isShippingMethodSelectionRequired(OrderInterface $order): bool
     {
         if (!$order->isShippingRequired()) {

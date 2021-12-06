@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\ChannelFixture;
@@ -107,9 +107,6 @@ final class ChannelFixtureTest extends TestCase
         $this->assertConfigurationIsValid([['custom' => [['account_verification_required' => false]]]], 'custom.*.account_verification_required');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): ChannelFixture
     {
         return new ChannelFixture(

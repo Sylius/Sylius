@@ -96,6 +96,26 @@ You should also have a look here if you are looking for Cart, which is in Sylius
 
 .. include:: /book/orders/map.rst.inc
 
+API
+---
+
+.. warning::
+
+    The new, unified Sylius API is still under development, that's why the whole ``ApiBundle`` is tagged with ``@experimental``.
+    This means that all code from ``ApiBundle`` is excluded from :doc:`Backward Compatibility Promise </book/organization/backward-compatibility-promise>`.
+
+This chapter will explain to you how to start with our new API, show concepts used in it, and you will inform you why we have decided to rebuild entire api from scratch.
+To use this API remember to generate JWT token. For more information, please visit `jwt package documentation <https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/index.md#generate-the-ssh-keys/>`_
+
+This part of the documentation is about the currently developed unified API for the Sylius platform.
+
+.. toctree::
+    :hidden:
+
+    api/index
+
+.. include:: /book/api/map.rst.inc
+
 Themes
 ------
 
@@ -129,11 +149,13 @@ Documentation sections of The Book referring to Sylius Plus features are:
     customers/customer_pools
     orders/shipments
     orders/returns
+    products/multi_source_inventory
+    loyalty/loyalty_rule
 
 
 .. image:: ../_images/sylius_plus/banner.png
     :align: center
-    :target: http://sylius.com/plus/?utm_source=docs
+    :target: https://sylius.com/plus/?utm_source=docs
 
 Sylius Plugins
 --------------
@@ -158,3 +180,27 @@ This chapter describes the rules and processes we use to organize our work.
     organization/index
 
 .. include:: /book/organization/map.rst.inc
+
+Support
+-------
+
+How to get support for Sylius?
+
+.. toctree::
+   :hidden:
+
+   support/index
+
+.. include:: /book/support/map.rst.inc
+
+Contributing
+------------
+
+Guides you how to contribute to Sylius.
+
+.. toctree::
+   :hidden:
+
+   contributing/index
+
+.. include:: /book/contributing/map.rst.inc

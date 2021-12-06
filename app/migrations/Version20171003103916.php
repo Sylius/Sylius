@@ -37,7 +37,18 @@ class Version20171003103916 extends AbstractMigration implements ContainerAwareI
         $defaultLocale = $this->container->getParameter('locale');
         $productAttributeRepository = $this->container->get('sylius.repository.product_attribute');
 
-        $productAttributes = $productAttributeRepository->findBy(['type' => SelectAttributeType::TYPE]);
+        $productAttributes = $productAttributeRepository
+            ->createQueryBuilder('o')
+                ->select([
+                    'o.id',
+                    'o.configuration',
+                ])
+                ->where('o.type = :type')
+                ->setParameter('type', SelectAttributeType::TYPE)
+                ->getQuery()
+            ->getResult()
+        ;
+
         /** @var ProductAttributeInterface $productAttribute */
         foreach ($productAttributes as $productAttribute) {
             $configuration = $productAttribute->getConfiguration();

@@ -12,7 +12,7 @@ Sylius\Component\Order\Model\OrderItemUnit:
             groups: [Default, Detailed, DetailedCart]
         adjustments:
             expose: true
-            type: array
+            type: iterable
             groups: [Default, Detailed, DetailedCart]
         adjustmentsTotal:
             expose: true

@@ -6,12 +6,15 @@ sylius:
         block:
             body: Содержание
             id: ID
-            title: Название
+            title: Заголовок
         cart:
             coupon: Купон
+        catalog_promotion:
+            channels: Каналы
         checkout:
             addressing:
                 different_billing_address: Использовать другой адрес для выставления счета?
+                different_shipping_address: Выбрать другой адрес доставки?
             payment_method: Способ оплаты
             shipping_method: Способ доставки
         promotion:
@@ -21,8 +24,9 @@ sylius:
                 product: Продукт
         promotion_coupon:
             per_customer_usage_limit: Лимит использования на клиента
+            reusable_from_cancelled_orders: Повторное использование из отмененных заказов
         group:
-            name: Округ
+            name: Название
             roles: Роли
         channel:
             billing_data:
@@ -31,7 +35,9 @@ sylius:
                 country: Страна
                 postcode: Индекс
                 street: Улица
+                tax_id: ID Налога
             contact_email: Контактный email
+            countries: Страны
             currencies: Валюты
             currency_base: Базовая валюта
             account_verification_required: Требуется ли подтверждение аккаунта?
@@ -40,6 +46,7 @@ sylius:
             locales: Языки
             payment_methods: Список методов оплаты
             shipping_methods: Список способов доставки
+            shop_billing_data: Выставление счетов
             skipping_shipping_step_allowed: Пропустить шаг доставки, если доступен только один способ доставки?
             skipping_payment_step_allowed: Пропустить шаг оплаты, если только один способ оплаты доступен?
             tax_calculation_strategy: Способ расчета налогов
@@ -68,12 +75,12 @@ sylius:
             images: Изображения
             restricted_zone: Зона ограничений
             short_description: Короткое описание
-            variant_selection_method: Метод выбора вариантов
+            variant_selection_method: Метод выборки вариантов
             main_taxon: Основной таксон
             channels: Каналы
             enabled: Активен
         product_filter:
-            name: Округ
+            name: Название
             code: Код
         product_variant:
             tax_category: Категория налогов
@@ -100,7 +107,7 @@ sylius:
             file: Выберите изображение
         user:
             billing_address: Адрес для выставления счета
-            different_billing_address: Использовать другой адрес для выставления счета?
+            different_shipping_address: Выбрать другой адрес доставки?
             enabled: Активен
             first_name: Имя
             groups: Группы
@@ -113,7 +120,7 @@ sylius:
         variant:
             depth: Глубина
             height: Высота
-            on_hand: Количество на складе
+            on_hand: Наличие
             price: Цена
             sku: Идентификатор товарной позиции
             shipping_required: Требуется ли доставка?
@@ -210,6 +217,7 @@ sylius:
                 help: Часовой пояс %timezone% является устаревшим. Исправьте файл php.ini (список устаревших часовых поясов http://php.net/manual/en/timezones.others.php).
             version: Версия PHP
             version_recommended: Рекомендуемая версия PHP
+            version_help: Sylius рекомендует PHP версии %recommended%, ваша текущая версия %current%. Пожалуйста, обновите.
     payum_gateway:
         cash_on_delivery: Наличными при доставке
         offline: Офлайн

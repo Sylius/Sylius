@@ -41,15 +41,13 @@ class OrderController extends BaseOrderController
 
         $form = $this->resourceFormFactory->create($configuration, $cart);
 
-        $view = View::create()
-            ->setTemplate($configuration->getTemplate('summary.html'))
-            ->setData([
+        return $this->render(
+            $configuration->getTemplate('summary.html'),
+            [
                 'cart' => $cart,
                 'form' => $form->createView(),
-            ])
-        ;
-
-        return $this->viewHandler->handle($configuration, $view);
+            ]
+        );
     }
 
     public function thankYouAction(Request $request): Response
@@ -72,13 +70,11 @@ class OrderController extends BaseOrderController
         $order = $this->repository->find($orderId);
         Assert::notNull($order);
 
-        $view = View::create()
-            ->setData([
+        return $this->render(
+            $configuration->getParameters()->get('template'),
+            [
                 'order' => $order,
-            ])
-            ->setTemplate($configuration->getParameters()->get('template'))
-        ;
-
-        return $this->viewHandler->handle($configuration, $view);
+            ]
+        );
     }
 }

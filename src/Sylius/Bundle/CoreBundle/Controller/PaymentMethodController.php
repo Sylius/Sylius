@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
-use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,17 +21,12 @@ class PaymentMethodController extends ResourceController
 {
     public function getPaymentGatewaysAction(Request $request, string $template): Response
     {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
-        $view = View::create()
-            ->setTemplate($template)
-            ->setTemplateVar($this->metadata->getPluralName())
-            ->setData([
+        return $this->render(
+            $template,
+            [
                 'gatewayFactories' => $this->getParameter('sylius.gateway_factories'),
                 'metadata' => $this->metadata,
-            ])
-        ;
-
-        return $this->viewHandler->handle($configuration, $view);
+            ]
+        );
     }
 }

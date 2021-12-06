@@ -17,10 +17,16 @@ sylius:
             description: Опис
             name: Име
         shipping_method:
+            add_rule: Додајте правило
             calculator: Калкулатор
             category: Категорија пореске стопе
             configuration: Подешавања
             description: Опис
             enabled: Омогућено
             name: Име
+            rules: Правила
             tax_category: Категорија производа
+        shipping_method_rule:
+            type: Тип
+            total: Укупно
+            amount: Количина

@@ -1,9 +1,9 @@
+/test/var/
 vendor/
 bin/
 
 composer.phar
 composer.lock
 
-test/app/cache
-test/app/logs
 test/app/db.sql
+/.phpunit.result.cache

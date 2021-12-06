@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        accept: 'Үнэлгээг амжилттай хүлээн авлаа.'
+        reject: 'Үнэлэгээг амжилттай цуцаллаа.'
+        wait_for_the_acceptation: 'Таны үнэлгээг хүлээн авч байна.'

@@ -1,0 +1,51 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    address:
+        city:
+            not_blank: Vinsamlegast sláðu inn stað.
+        country:
+            not_blank: Vinsamlegast veldu land.
+            disabled: Landið sem þú valdir er ekki í boði. Vinsamlega veldu annað land.
+        first_name:
+            not_blank: Vinsamlega sláðu inn fyrra nafn.
+        last_name:
+            not_blank: Vinsamlega sláðu inn seinna nafn.
+        postcode:
+            not_blank: Vinsamlega sláðu inn póstnúmer.
+        province:
+            valid: Vinsamlegast veldu ríki/hérað.
+        street:
+            not_blank: Vinsamlegast sláðu inn heimilisfang.
+        not_shippable: Því miður getum við ekki boðið heimsendingu á þetta heimilisfang.
+    country:
+        code:
+            not_blank: Vinsamlega skráðu ISO kóða.
+            regex: Landskódi má aðeins innihalda stafi, tölur, bandstrik og undirstrik.
+            unique: Landskódi verður að vera einstakur.
+    province:
+        code:
+            min_length: Kóði ríkis/héraðs verður að vera a.m.k. 2 stafir á lengd|Kóði ríkis/héraðs verður að vera a.m.k. 2 stafir á lengd.
+            not_blank: Vinsamlega skráðu kóða ríkis/héraðs.
+            regex: 'Ríki/hérað á að vera á eftirfarandi formi: XX-XX (t.d. US-FL)'
+            unique: Kóði ríkis/héraðs verður að vera einstakur.
+        name:
+            not_blank: Vinsamlega skráðu nafn ríkis/héraðs.
+            unique: Nafn ríkis/héraðs verður að vera einstakt.
+    zone:
+        scope:
+            not_blank: Vinsamlega veldu umfang.
+        code:
+            not_blank: Vinsamlega sláðu inn svæðiskóda.
+            regex: Svæðiskódi má aðeins innihalda stafi, tölur, bandstrik og undirstrik.
+            unique: Svæðiskódi verður að vera einstakur.
+        members:
+            min_count: Vinsamlegast bætið við a.m.k. {{ limit }} undirsvæðum.
+        name:
+            not_blank: Vinsamlega sláðu inn nafn svæðis.
+    zone_member:
+        code:
+            not_blank: Vinsamlega veldu undirsvæði.
+            regex: Kódi undirsvæðis má aðeins innihalda stafi, tölur, bandstrik og undirstrik.
+        unique: Þessu undirsvæði hefur þegar verið bætt við.

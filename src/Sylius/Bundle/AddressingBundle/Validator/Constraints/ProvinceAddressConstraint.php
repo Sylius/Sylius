@@ -23,17 +23,11 @@ class ProvinceAddressConstraint extends Constraint
     /** @var string */
     public $message = 'sylius.address.province.valid';
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'sylius_province_address_validator';

@@ -1,0 +1,26 @@
+{
+    "@context": "\/api\/v2\/contexts\/ShippingMethod",
+    "@id": "\/api\/v2\/shop\/shipments\/@integer@\/methods",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/shipping-methods\/UPS",
+            "@type": "ShippingMethod",
+            "id": @integer@,
+            "code": "UPS",
+            "position": 0,
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/shop\/shipping-method-translations\/@integer@",
+                    "@type": "ShippingMethodTranslation",
+                    "id": @integer@,
+                    "name": "UPS",
+                    "description": @string@
+                }
+            },
+            "name": "UPS",
+            "price": 500
+        }
+    ],
+    "hydra:totalItems": 1
+}

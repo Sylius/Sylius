@@ -9,7 +9,7 @@ Feature: Adding product review as a customer
         And the store has a product "Necronomicon"
         And I am a logged in customer
 
-    @ui
+    @ui @api
     Scenario: Adding product reviews as a logged in customer
         When I want to review product "Necronomicon"
         And I leave a comment "Great book for every advanced sorcerer.", titled "Scary but astonishing"

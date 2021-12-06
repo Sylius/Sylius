@@ -5,13 +5,18 @@ sylius:
     email:
         contact_request:
             content: 'Obsah'
+            subject: 'Žiadosť'
         order_confirmation:
             subject: 'Potvrdenie objednávky'
             view_order_or_change_payment_method: 'Zobraziť objednávku alebo zmeniť spôsob platby'
         password_reset:
             hello: 'Ahoj'
+            subject: 'Obnoviť heslo'
+        user_registration:
+            welcome_to_our_store: 'Vitajte v našom obchode!'
         verification_token:
             hello: 'Ahoj'
+            subject: 'Overenie e-mailovej adresy'
     lightbox:
         image_album_label: 'Obrázok %1 z %2'
     menu:

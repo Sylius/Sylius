@@ -12,3 +12,12 @@ sylius_shop_default_locale:
     methods: [GET]
     defaults:
         _controller: sylius.controller.shop.locale_switch:switchAction
+
+# see https://web.dev/change-password-url/
+sylius_shop_request_password_reset_token_redirect:
+    path: /.well-known/change-password
+    methods: [GET]
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
+    defaults:
+        route: sylius_shop_request_password_reset_token
+        permanent: false

@@ -4,14 +4,15 @@
 sylius:
     form:
         user:
-            email: Endereço de email
+            email: Endereço de e-mail
             enabled: Ativado
             password:
                 label: Palavra-passe
                 confirmation: Verificação
             remember_me: Lembrar-me
-            shipping_address: Endereço de entrega
+            shipping_address: Morada de expedição
             username: Nome de utilizador
+            verified: Verificado
         user_filter:
             query: Pesquisar
         user_change_password:

@@ -13,22 +13,62 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
+        <parameter key="sylius.form.type.catalog_promotion.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.catalog_promotion_translation.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
         <parameter key="sylius.form.type.promotion.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
         <parameter key="sylius.form.type.promotion_action.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
-        <parameter key="sylius.form.type.promotion_rule.validation_groups" type="collection">
+        <parameter key="sylius.form.type.promotion_scope.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
         <parameter key="sylius.form.type.promotion_coupon.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
+        <parameter key="sylius.catalog_promotion.action.fixed_discount" type="constant">Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT</parameter>
+        <parameter key="sylius.catalog_promotion.action.percentage_discount" type="constant">Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT</parameter>
     </parameters>
 
     <services>
         <defaults public="true" />
+
+        <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionType">
+            <argument>%sylius.model.catalog_promotion.class%</argument>
+            <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
+            <argument>Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionTranslationType</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType">
+            <argument>%sylius.model.catalog_promotion_scope.class%</argument>
+            <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
+            <argument type="collection"/>
+            <tag name="form.type" />
+        </service>
+
+        <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType">
+            <tag name="sylius.catalog_promotion.action_configuration_type" key="%sylius.catalog_promotion.action.percentage_discount%" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType">
+            <argument>%sylius.model.catalog_promotion_action.class%</argument>
+            <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.action_configuration_type" index-by="key" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionTranslationType">
+            <argument>%sylius.model.catalog_promotion_translation.class%</argument>
+            <argument>%sylius.form.type.catalog_promotion_translation.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
 
         <service id="sylius.form.type.promotion" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionType">
             <argument>%sylius.model.promotion.class%</argument>
@@ -45,7 +85,7 @@
 
         <service id="sylius.form.type.promotion_rule" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType">
             <argument>%sylius.model.promotion_rule.class%</argument>
-            <argument>%sylius.form.type.promotion_rule.validation_groups%</argument>
+            <argument>%sylius.form.type.promotion_scope.validation_groups%</argument>
             <argument type="service" id="sylius.form_registry.promotion_rule_checker" />
             <tag name="form.type" />
         </service>

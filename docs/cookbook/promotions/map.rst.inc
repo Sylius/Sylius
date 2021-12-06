@@ -1,2 +1,3 @@
-* :doc:`/cookbook/promotions/custom-promotion-action`
-* :doc:`/cookbook/promotions/custom-promotion-rule`
+* :doc:`/cookbook/promotions/custom-cart-promotion-action`
+* :doc:`/cookbook/promotions/custom-cart-promotion-rule`
+* :doc:`/cookbook/promotions/custom-catalog-promotion-scope`

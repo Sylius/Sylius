@@ -14,18 +14,16 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
 use Webmozart\Assert\Assert;
 
 final class CartContext implements Context
 {
-    /** @var ObjectManager */
-    private $orderManager;
+    private ObjectManager $orderManager;
 
-    /** @var ExpiredCartsRemoverInterface */
-    private $expiredCartsRemover;
+    private ExpiredCartsRemoverInterface $expiredCartsRemover;
 
     public function __construct(
         ObjectManager $orderManager,

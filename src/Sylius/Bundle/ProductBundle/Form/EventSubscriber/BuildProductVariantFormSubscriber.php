@@ -22,11 +22,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 final class BuildProductVariantFormSubscriber implements EventSubscriberInterface
 {
-    /** @var FormFactoryInterface */
-    private $factory;
+    private FormFactoryInterface $factory;
 
-    /** @var bool */
-    private $disabled;
+    private bool $disabled;
 
     public function __construct(FormFactoryInterface $factory, bool $disabled = false)
     {
@@ -34,9 +32,6 @@ final class BuildProductVariantFormSubscriber implements EventSubscriberInterfac
         $this->disabled = $disabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

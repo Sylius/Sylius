@@ -22,8 +22,7 @@ use Webmozart\Assert\Assert;
 
 final class ProductsToCodesTransformer implements DataTransformerInterface
 {
-    /** @var ProductRepositoryInterface */
-    private $productRepository;
+    private ProductRepositoryInterface $productRepository;
 
     public function __construct(ProductRepositoryInterface $productRepository)
     {
@@ -31,8 +30,6 @@ final class ProductsToCodesTransformer implements DataTransformerInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function transform($value): Collection
@@ -47,8 +44,6 @@ final class ProductsToCodesTransformer implements DataTransformerInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function reverseTransform($products): array

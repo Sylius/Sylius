@@ -9,6 +9,8 @@ sylius:
             title: Título
         cart:
             coupon: Cupão
+        catalog_promotion:
+            channels: Canais
         checkout:
             addressing:
                 different_billing_address: Usar uma morada diferente para a faturação?
@@ -32,6 +34,7 @@ sylius:
                 postcode: Código postal
                 street: Rua
             contact_email: E-mail de Contacto
+            countries: Países
             currencies: Moedas
             currency_base: Moeda base
             account_verification_required: É necessária a verificação da conta?
@@ -98,14 +101,13 @@ sylius:
             file: Selecionar imagem
         user:
             billing_address: Endereço de faturação
-            different_billing_address: Usar uma morada diferente para a faturação?
             enabled: Ativado
-            first_name: Nome próprio
+            first_name: Primeiro nome
             groups: Grupos
             roles: Funções
             last_name: Apelido
             password: Palavra-passe
-            shipping_address: Endereço de entrega
+            shipping_address: Morada de expedição
         user_filter:
             query: Pesquisar
         variant:

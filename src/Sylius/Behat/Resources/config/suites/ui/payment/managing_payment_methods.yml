@@ -31,4 +31,4 @@ default:
                 - sylius.behat.context.ui.shop.locale
 
             filters:
-                tags: "@managing_payment_methods && @ui"
+                tags: "@managing_payment_methods&&@ui"

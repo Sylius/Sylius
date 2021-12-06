@@ -20,11 +20,9 @@ use Webmozart\Assert\Assert;
 
 final class ManagingLocalesContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $client;
+    private ApiClientInterface $client;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
     public function __construct(
         ApiClientInterface $client,
@@ -35,8 +33,7 @@ final class ManagingLocalesContext implements Context
     }
 
     /**
-     * @When I want to create a new locale
-     * @Given I want to add a new locale
+     * @Given /^I want to (?:create|add) a new locale$/
      */
     public function iWantToAddNewLocale(): void
     {
@@ -53,8 +50,7 @@ final class ManagingLocalesContext implements Context
     }
 
     /**
-     * @When I add it
-     * @When I try to add it
+     * @When I (try to) add it
      */
     public function iAddIt(): void
     {
@@ -95,7 +91,7 @@ final class ManagingLocalesContext implements Context
             $this->responseChecker->isCreationSuccessful($response),
             'Locale has been created successfully, but it should not'
         );
-        Assert::same($this->responseChecker->getError($response), 'code: This locale already exists.');
+        Assert::same($this->responseChecker->getError($response), 'code: Locale code must be unique.');
     }
 
     /**
@@ -108,6 +104,6 @@ final class ManagingLocalesContext implements Context
             $this->responseChecker->isCreationSuccessful($response),
             'Locale has been created successfully, but it should not'
         );
-        Assert::same($this->responseChecker->getError($response), 'code: Please enter locale code.');
+        Assert::same($this->responseChecker->getError($response), 'code: Please choose locale code.');
     }
 }

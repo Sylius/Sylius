@@ -13,14 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Product\ShowPage;
 
+use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
 final class PricingElement extends Element implements PricingElementInterface
 {
     public function getPriceForChannel(string $channelName): string
     {
-        /** @var NodeElement $priceForChannel */
+        /** @var NodeElement|null $priceForChannel */
         $channelPriceRow = $this->getDocument()->find('css', sprintf('#pricing tr:contains("%s")', $channelName));
+
+        if (null === $channelPriceRow) {
+            return '';
+        }
 
         $priceForChannel = $channelPriceRow->find('css', 'td:nth-child(2)');
 

@@ -34,20 +34,14 @@ final class LocaleStrippingRouter implements RouterInterface, WarmableInterface
         $this->localeContext = $localeContext;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function match($pathinfo): array
     {
         return $this->router->match($pathinfo);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function generate($name, $parameters = [], $absolute = UrlGeneratorInterface::ABSOLUTE_PATH): string
+    public function generate($name, $parameters = [], $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH): string
     {
-        $url = $this->router->generate($name, $parameters, $absolute);
+        $url = $this->router->generate($name, $parameters, $referenceType);
 
         if (false === strpos($url, '_locale')) {
             return $url;
@@ -56,33 +50,21 @@ final class LocaleStrippingRouter implements RouterInterface, WarmableInterface
         return $this->removeUnusedQueryArgument($url, '_locale', $this->localeContext->getLocaleCode());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setContext(RequestContext $context): void
     {
         $this->router->setContext($context);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContext(): RequestContext
     {
         return $this->router->getContext();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteCollection(): RouteCollection
     {
         return $this->router->getRouteCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function warmUp($cacheDir): void
     {
         if ($this->router instanceof WarmableInterface) {

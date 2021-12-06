@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    order_item:
+        quantity:
+            min: Egy rendelési tétel mennyisége nem lehet kevesebb, mint 1.

@@ -21,6 +21,7 @@ There are a few available types of an Attribute:
 * textarea
 * date
 * datetime
+* select
 
 What these types may be useful for?
 
@@ -31,6 +32,17 @@ What these types may be useful for?
 - textarea - display more detailed information about a product
 - date - release date of a movie
 - datetime - accurate date and time of an event
+- select - genre(s) of a book. one or more of them can be selected
+
+Non-translatable attribute
+--------------------------
+
+Some attributes (dates, author name) don't need a different value in each locale. For those attributes, we introduced the possibility to disable translation.
+Shop Owner declares values only once and regardless of the chosen locale customer will see a proper attribute value.
+
+.. warning::
+
+    Once the attribute has disabled translatability it will erase attribute values in all locales for this attribute.
 
 How to create an Attribute?
 ---------------------------

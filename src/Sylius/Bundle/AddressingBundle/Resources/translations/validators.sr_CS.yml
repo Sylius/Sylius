@@ -4,29 +4,19 @@
 sylius:
     address:
         city:
-            max_length: Naziv grada ne sme biti duži od 255 karaktera|Naziv grada ne sme biti duži od 255 karaktera.
-            min_length: Naziv grada mora biti najmanje 2 karaktera dugačak|Naziv grada mora biti najmanje 2 karaktera dugačak.
             not_blank: Unesite naziv grada.
         country:
             not_blank: Odaberite državu.
             disabled: Izabrana država nije omogućena. Izaberite neku drugu državu.
         first_name:
-            max_length: Ime ne sme biti duže od 255 karaktera|Ime ne sme biti duže od 255 karaktera.
-            min_length: Ime mora biti najmanje 2 karaktera dugačko|Ime mora biti najmanje 2 karaktera dugačko.
             not_blank: Unesite ime.
         last_name:
-            max_length: Prezime ne sme biti duže od 255 karaktera|Prezime ne sme biti duže od 255 karaktera.
-            min_length: Prezime mora biti najmanje 2 karaktera dugačko|Prezime mora biti najmanje 2 karaktera dugačko.
             not_blank: Unesite prezime.
         postcode:
-            max_length: Poštanski broj ne sme biti duži od 255 karaktera|Poštanski broj ne sme biti duže od 255 karaktera.
-            min_length: Poštanski broj mora biti najmanje 2 karaktera dugačak|Poštanski broj mora biti najmanje 2 karaktera dugačak.
             not_blank: Unesite poštanski broj.
         province:
             valid: Izaberite odgovarajuću provinciju.
         street:
-            max_length: Naziv ulice ne sme biti duži od 255 karaktera|Naziv ulice ne sme biti duži od 255 karaktera.
-            min_length: Naziv ulice mora biti najmanje 2 karaktera dugačak|Naziv ulice mora biti najmanje 2 karaktera dugačak.
             not_blank: Unesite naziv ulice.
         not_shippable: Ova adresa nije validna destinacija za isporuku.
     country:
@@ -38,7 +28,5 @@ sylius:
             not_blank: Unesite kod provincije.
             unique: Kod provincije mora biti jedinstven.
         name:
-            max_length: Naziv provincije ne sme biti duži od 255 karaktera|Naziv provincije ne sme biti duži od 255 karaktera.
-            min_length: Naziv provincije mora biti najmanje 2 karaktera dugačak|Naziv provincije mora biti najmanje 2 karaktera dugačak.
             not_blank: Unesite naziv provincije.
             unique: Naziv provincije mora biti jedinstven.

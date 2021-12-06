@@ -25,64 +25,80 @@ winzou_state_machine:
                     on: ["create"]
                     do: ["@sylius.order_number_assigner", "assignNumber"]
                     args: ["object"]
+                    priority: -200
                 sylius_assign_token:
                     on: ["create"]
                     do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValueIfNotSet"]
                     args: ["object"]
+                    priority: -100
             after:
                 sylius_request_shipping:
                     on: ["create"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object", "event", "'request_shipping'", "'sylius_order_shipping'"]
+                    priority: -800
                 sylius_request_payment:
                     on: ["create"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object", "event", "'request_payment'", "'sylius_order_payment'"]
+                    priority: -700
                 sylius_create_payment:
                     on: ["create"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object.getPayments()", "event", "'create'", "'sylius_payment'"]
+                    priority: -600
                 sylius_create_shipment:
                     on: ["create"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object.getShipments()", "event", "'create'", "'sylius_shipment'"]
+                    priority: -500
                 sylius_hold_inventory:
                     on: ["create"]
                     do: ["@sylius.inventory.order_inventory_operator", "hold"]
                     args: ["object"]
+                    priority: -400
                 sylius_increment_promotions_usages:
                     on: ["create"]
                     do: ["@sylius.promotion_usage_modifier", "increment"]
                     args: ["object"]
+                    priority: -300
                 sylius_save_addresses_on_customer:
                     on: ["create"]
                     do: ["@sylius.customer_order_addresses_saver", "saveAddresses"]
                     args: ["object"]
+                    priority: -200
                 sylius_set_order_immutable_names:
                     on: ["create"]
                     do: ["@sylius.order_item_names_setter", "__invoke"]
                     args: ["object"]
+                    priority: -100
                 sylius_cancel_payment:
                     on: ["cancel"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object.getPayments()", "event", "'cancel'", "'sylius_payment'"]
+                    priority: -600
                 sylius_cancel_shipment:
                     on: ["cancel"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object.getShipments()", "event", "'cancel'", "'sylius_shipment'"]
+                    priority: -500
                 sylius_cancel_order_payment:
                     on: ["cancel"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object", "event", "'cancel'", "'sylius_order_payment'"]
+                    priority: -400
                 sylius_cancel_order_shipment:
                     on: ["cancel"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object", "event", "'cancel'", "'sylius_order_shipping'"]
+                    priority: -300
                 sylis_cancel_order:
                     on: ["cancel"]
                     do: ["@sylius.inventory.order_inventory_operator", "cancel"]
                     args: ["object"]
+                    priority: -200
                 sylius_decrement_promotions_usages:
                     on: ["cancel"]
                     do: ["@sylius.promotion_usage_modifier", "decrement"]
                     args: ["object"]
+                    priority: -100

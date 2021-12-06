@@ -20,6 +20,7 @@ use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
 use Sylius\Behat\Page\Shop\Account\RequestPasswordResetPageInterface;
 use Sylius\Behat\Page\Shop\Account\ResetPasswordPageInterface;
+use Sylius\Behat\Page\Shop\Account\WellKnownPasswordChangePageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
@@ -28,29 +29,23 @@ use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
 {
-    /** @var HomePageInterface */
-    private $homePage;
+    private HomePageInterface $homePage;
 
-    /** @var LoginPageInterface */
-    private $loginPage;
+    private LoginPageInterface $loginPage;
 
-    /** @var RegisterPageInterface */
-    private $registerPage;
+    private RegisterPageInterface $registerPage;
 
-    /** @var RequestPasswordResetPageInterface */
-    private $requestPasswordResetPage;
+    private RequestPasswordResetPageInterface $requestPasswordResetPage;
 
-    /** @var ResetPasswordPageInterface */
-    private $resetPasswordPage;
+    private ResetPasswordPageInterface $resetPasswordPage;
 
-    /** @var RegisterElementInterface */
-    private $registerElement;
+    private WellKnownPasswordChangePageInterface $wellKnownPasswordChangePage;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private RegisterElementInterface $registerElement;
 
-    /** @var CurrentPageResolverInterface */
-    private $currentPageResolver;
+    private NotificationCheckerInterface $notificationChecker;
+
+    private CurrentPageResolverInterface $currentPageResolver;
 
     public function __construct(
         HomePageInterface $homePage,
@@ -58,6 +53,7 @@ final class LoginContext implements Context
         RegisterPageInterface $registerPage,
         RequestPasswordResetPageInterface $requestPasswordResetPage,
         ResetPasswordPageInterface $resetPasswordPage,
+        WellKnownPasswordChangePageInterface $wellKnownPasswordChangePage,
         RegisterElementInterface $registerElement,
         NotificationCheckerInterface $notificationChecker,
         CurrentPageResolverInterface $currentPageResolver
@@ -67,6 +63,7 @@ final class LoginContext implements Context
         $this->registerPage = $registerPage;
         $this->requestPasswordResetPage = $requestPasswordResetPage;
         $this->resetPasswordPage = $resetPasswordPage;
+        $this->wellKnownPasswordChangePage = $wellKnownPasswordChangePage;
         $this->registerElement = $registerElement;
         $this->notificationChecker = $notificationChecker;
         $this->currentPageResolver = $currentPageResolver;
@@ -89,6 +86,14 @@ final class LoginContext implements Context
     }
 
     /**
+     * @When I want to reset password from my password manager
+     */
+    public function iWantToResetPasswordFromMyPasswordManager(): void
+    {
+        $this->wellKnownPasswordChangePage->tryToOpen();
+    }
+
+    /**
      * @When /^I follow link on (my) email to reset my password$/
      */
     public function iFollowLinkOnMyEmailToResetPassword(UserInterface $user): void
@@ -105,7 +110,7 @@ final class LoginContext implements Context
     }
 
     /**
-     * @When I specify the email as :email
+     * @When I specify customer email as :email
      * @When I do not specify the email
      */
     public function iSpecifyTheEmail(?string $email = null): void
@@ -226,7 +231,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeNotifiedAboutDisabledAccount(): void
     {
-        Assert::true($this->loginPage->hasValidationErrorWith('Error Account is disabled.'));
+        Assert::true($this->loginPage->hasValidationErrorWith('Error Invalid credentials.'));
     }
 
     /**
@@ -290,5 +295,13 @@ final class LoginContext implements Context
             'password',
             'Password must be at least 4 characters long.'
         ));
+    }
+
+    /**
+     * @Then I should be redirected to the forgotten password page
+     */
+    public function iShouldBeRedirectedToTheForgottenPasswordPage()
+    {
+        Assert::true($this->requestPasswordResetPage->isOpen(), 'User should be on the forgotten password page but they are not.');
     }
 }

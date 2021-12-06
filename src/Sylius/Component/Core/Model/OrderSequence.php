@@ -17,20 +17,16 @@ use Sylius\Component\Order\Model\OrderSequence as BaseOrderSequence;
 
 class OrderSequence extends BaseOrderSequence implements OrderSequenceInterface
 {
-    /** @var int */
+    /**
+     * @var int
+     */
     protected $version = 1;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVersion(): ?int
     {
         return $this->version;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setVersion(?int $version): void
     {
         $this->version = $version;

@@ -15,6 +15,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
+use DMore\ChromeDriver\ChromeDriver;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
@@ -31,10 +32,11 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         $this->clickTabIfItsNotActive('details');
 
         $this->getDocument()->fillField(
-            sprintf('sylius_product_translations_%s_name', $localeCode), $name
+            sprintf('sylius_product_translations_%s_name', $localeCode),
+            $name
         );
 
-        if ($this->getDriver() instanceof Selenium2Driver) {
+        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
             SlugGenerationHelper::waitForSlugGeneration($this->getSession(), $this->getElement('slug'));
         }
     }

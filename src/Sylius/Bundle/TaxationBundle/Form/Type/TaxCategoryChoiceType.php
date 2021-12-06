@@ -23,17 +23,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class TaxCategoryChoiceType extends AbstractType
 {
-    /** @var RepositoryInterface */
-    private $taxCategoryRepository;
+    private RepositoryInterface $taxCategoryRepository;
 
     public function __construct(RepositoryInterface $taxCategoryRepository)
     {
         $this->taxCategoryRepository = $taxCategoryRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['multiple']) {
@@ -41,9 +37,6 @@ final class TaxCategoryChoiceType extends AbstractType
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -56,17 +49,11 @@ final class TaxCategoryChoiceType extends AbstractType
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_tax_category_choice';

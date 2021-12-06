@@ -9,6 +9,8 @@ sylius:
             title: หัวข้อ
         cart:
             coupon: คูปอง
+        catalog_promotion:
+            channels: ช่องทางจำหน่าย
         checkout:
             addressing:
                 different_billing_address: ใช้ที่อยู่อื่นสำหรับเรียกเก็บเงินหรือไม่
@@ -32,11 +34,12 @@ sylius:
                 postcode: รหัสไปรษณีย์
                 street: ที่อยู่
             contact_email: ติดต่ออีเมล์
+            countries: ประเทศ
             currencies: สกุลเงิน
             currency_base: ฐานสกุลเงิน
             account_verification_required: จำเป็นต้องยืนยันบัญชีหรือไม่?
             hostname: Hostname
-            locale_default: ตำแหน่งที่ตั้งเริ่มต้น
+            locale_default: ภาษาเริ่มต้น
             locales: ภาษาที่ใช้
             payment_methods: วิธีการชำระเงิน
             shipping_methods: วิธีการจัดส่ง
@@ -68,7 +71,7 @@ sylius:
             images: ภาพ
             restricted_zone: จำกัดโซน
             short_description: คำอธิบายโดยย่อ
-            variant_selection_method: วิธีการเลือกตัวแปร
+            variant_selection_method: Variant selection method
             main_taxon: หมวดหมู่หลัก
             channels: ช่องทางจำหน่าย
             enabled: เปิดใช้งาน
@@ -100,8 +103,7 @@ sylius:
             file: เลือกรูปภาพ
         user:
             billing_address: ที่อยู่สำหรับออกใบเสร็จ
-            different_billing_address: ใช้ที่อยู่อื่นสำหรับเรียกเก็บเงินหรือไม่
-            enabled: เปิดใช้งาน
+            enabled: เปิดใช้งานแล้ว
             first_name: ชื่อ
             groups: กลุ่ม
             roles: Roles

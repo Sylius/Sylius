@@ -1,0 +1,38 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    promotion:
+        code:
+            unique: Afsláttarkóði með þessu gildi er þegar til.
+            regex: Afsláttarkóðar mega aðeins innihalda stafi, tölur, bandstrik og undirstrik.
+            not_blank: Vinsamlega sláðu inn afsláttarkóða.
+        description:
+            max_length: Lýsing tilboðs má ekki vera lengri en 1 stafur.|Lýsing tilboðs má ekki vera lengri en {{ limit }} stafir.
+            min_length: Lýsing tilboðs verður að vera 1 stafur eða lengri.|Lýsing tilboðs verður að vera {{ limit }} stafir eða lengri.
+            not_blank: Vinsamlega sláðu inn lýsingu tilboðs.
+        end_date_cannot_be_set_prior_start_date: Lokadagsetning má ekki vera á undan upphafsdagsetningu.
+        name:
+            max_length: Nafn tilboðs má ekki vera lengra en 1 stafur.|Nafn tilboðs má ekki vera lengra en {{ limit }} stafir.
+            min_length: Nafn tilboðs verður að vera 1 stafur eða lengra.|Nafn tilboðs verður að vera {{ limit }} stafir eða lengra.
+            not_blank: Vinsamlega sláðu inn nafn tilboðs.
+    promotion_coupon:
+        code:
+            max_length: Afsláttarkóði má ekki vera lengri en 1 stafur.|Afsláttarkóði má ekki vera lengri en {{ limit }} stafir.
+            min_length: Afsláttarkóði verður að vera 1 stafur eða lengri.|Afsláttarkóði verður að vera {{ limit }} stafir eða lengri.
+            not_blank: Vinsamlega sláðu inn afsláttarkóða.
+            regex: Afsláttarkóði má aðeins innihalda stafi, tölur, bandstrik og undirstrik.
+            unique: Þessi afsláttarkóði er þegar til.
+        is_invalid: Afsláttarkóðinn er ekki gildur.
+        usage_limit:
+            min: Notkunartakmörkun verður að vera a.m.k. {{ limit }}.
+    promotion_coupon_generator_instruction:
+        amount:
+            min: Fjöldi afsláttarkóða verður að vera a.m.k. {{ limit }}.
+            not_blank: Vinsamlega sláðu inn fjölda afsláttarkóða.
+        code_length:
+            min: Afsláttarkóði þarf að vera að minnsta kosti {{ limit }} stafir.
+            max: Afsláttarkóði má ekki vera lengri en {{ limit }} stafir.
+            not_blank: Vinsamlega sláðu inn lengd afsláttarkóða.
+        usage_limit:
+            min: Notkunartakmörkun verður að vera a.m.k. {{ limit }}.

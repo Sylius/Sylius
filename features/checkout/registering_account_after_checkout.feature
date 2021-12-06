@@ -10,7 +10,7 @@ Feature: Registering a new account after checkout
         And the store ships everywhere for free
         And the store allows paying offline
 
-    @ui
+    @ui @no-api
     Scenario: Registering a new account after checkout
         Given I have product "PHP T-Shirt" in the cart
         And I have completed addressing step with email "john@example.com" and "United States" based billing address

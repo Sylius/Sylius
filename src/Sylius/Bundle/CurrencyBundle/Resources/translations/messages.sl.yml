@@ -7,3 +7,5 @@ sylius:
             code: Ime
             enabled: Omogočeno
             exchange_rate: Menjalni tečaj
+        exchange_rate:
+            ratio: Razmerje

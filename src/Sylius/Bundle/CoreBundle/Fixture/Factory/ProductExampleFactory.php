@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use Faker\Generator;
+use Faker\Factory;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -40,59 +42,41 @@ use Webmozart\Assert\Assert;
 
 class ProductExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $productFactory;
+    private FactoryInterface $productFactory;
 
-    /** @var FactoryInterface */
-    private $productVariantFactory;
+    private FactoryInterface $productVariantFactory;
 
-    /** @var FactoryInterface */
-    private $channelPricingFactory;
+    private FactoryInterface $channelPricingFactory;
 
-    /** @var FactoryInterface */
-    private $productTaxonFactory;
+    private FactoryInterface $productTaxonFactory;
 
-    /** @var ProductVariantGeneratorInterface */
-    private $variantGenerator;
+    private ProductVariantGeneratorInterface $variantGenerator;
 
-    /** @var FactoryInterface */
-    private $productAttributeValueFactory;
+    private FactoryInterface $productAttributeValueFactory;
 
-    /** @var FactoryInterface */
-    private $productImageFactory;
+    private FactoryInterface $productImageFactory;
 
-    /** @var ImageUploaderInterface */
-    private $imageUploader;
+    private ImageUploaderInterface $imageUploader;
 
-    /** @var SlugGeneratorInterface */
-    private $slugGenerator;
+    private SlugGeneratorInterface $slugGenerator;
 
-    /** @var RepositoryInterface */
-    private $taxonRepository;
+    private RepositoryInterface $taxonRepository;
 
-    /** @var RepositoryInterface */
-    private $productAttributeRepository;
+    private RepositoryInterface $productAttributeRepository;
 
-    /** @var RepositoryInterface */
-    private $productOptionRepository;
+    private RepositoryInterface $productOptionRepository;
 
-    /** @var RepositoryInterface */
-    private $channelRepository;
+    private RepositoryInterface $channelRepository;
 
-    /** @var RepositoryInterface */
-    private $localeRepository;
+    private RepositoryInterface $localeRepository;
 
-    /** @var RepositoryInterface|null */
-    private $taxCategoryRepository;
+    private ?RepositoryInterface $taxCategoryRepository;
 
-    /** @var FileLocatorInterface|null */
-    private $fileLocator;
+    private ?FileLocatorInterface $fileLocator;
 
-    /** @var \Faker\Generator */
-    private $faker;
+    private Generator $faker;
 
-    /** @var OptionsResolver */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
         FactoryInterface $productFactory,
@@ -134,15 +118,12 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
         $this->fileLocator = $fileLocator;
 
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): ProductInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -164,14 +145,14 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         return $product;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefault('name', function (Options $options): string {
-                return $this->faker->words(3, true);
+                /** @var string $words */
+                $words = $this->faker->words(3, true);
+
+                return $words;
             })
 
             ->setDefault('code', function (Options $options): string {
@@ -193,7 +174,10 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             })
 
             ->setDefault('description', function (Options $options): string {
-                return $this->faker->paragraphs(3, true);
+                /** @var string $paragraphs */
+                $paragraphs = $this->faker->paragraphs(3, true);
+
+                return $paragraphs;
             })
 
             ->setDefault('main_taxon', LazyOption::randomOne($this->taxonRepository))
@@ -360,21 +344,27 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         $productAttributesValues = [];
         foreach ($productAttributes as $code => $value) {
+            /** @var ProductAttributeInterface|null $productAttribute */
+            $productAttribute = $this->productAttributeRepository->findOneBy(['code' => $code]);
+
+            Assert::notNull($productAttribute, sprintf('Can not find product attribute with code: "%s"', $code));
+
+            if (!$productAttribute->isTranslatable()) {
+                $productAttributesValues[] = $this->configureProductAttributeValue($productAttribute, null, $value);
+
+                continue;
+            }
+
             foreach ($this->getLocales() as $localeCode) {
-                $productAttributesValues[] = $this->configureProductAttributeValue($code, $localeCode, $value);
+                $productAttributesValues[] = $this->configureProductAttributeValue($productAttribute, $localeCode, $value);
             }
         }
 
         return $productAttributesValues;
     }
 
-    private function configureProductAttributeValue(string $code, string $localeCode, $value): ProductAttributeValueInterface
+    private function configureProductAttributeValue(ProductAttributeInterface $productAttribute, ?string $localeCode, $value): ProductAttributeValueInterface
     {
-        /** @var ProductAttributeInterface|null $productAttribute */
-        $productAttribute = $this->productAttributeRepository->findOneBy(['code' => $code]);
-
-        Assert::notNull($productAttribute);
-
         /** @var ProductAttributeValueInterface $productAttributeValue */
         $productAttributeValue = $this->productAttributeValueFactory->createNew();
         $productAttributeValue->setAttribute($productAttribute);

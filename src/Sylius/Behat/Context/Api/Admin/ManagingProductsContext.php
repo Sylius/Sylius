@@ -18,7 +18,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -32,23 +31,17 @@ final class ManagingProductsContext implements Context
 {
     public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
 
-    /** @var ApiClientInterface */
-    private $client;
+    private ApiClientInterface $client;
 
-    /** @var ApiClientInterface */
-    private $adminUsersClient;
+    private ApiClientInterface $adminUsersClient;
 
-    /** @var ApiClientInterface */
-    private $productReviewsClient;
+    private ApiClientInterface $productReviewsClient;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
-    /** @var IriConverterInterface */
-    private $iriConverter;
+    private IriConverterInterface $iriConverter;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
     public function __construct(
         ApiClientInterface $client,
@@ -64,6 +57,30 @@ final class ManagingProductsContext implements Context
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
         $this->sharedStorage = $sharedStorage;
+    }
+
+    /**
+     * @When I start sorting products by name
+     * @When I sort the products :sortType by name
+     * @When I switch the way products are sorted :sortType by name
+     * @Given the products are already sorted :sortType by name
+     */
+    public function iStartSortingProductsByName(string $sortType = 'ascending'): void
+    {
+        $this->client->sort([
+            'translation.name' => self::SORT_TYPES[$sortType],
+            'localeCode' => $this->getAdminLocaleCode(),
+        ]);
+    }
+
+    /**
+     * @Given I am browsing products
+     * @When I browse products
+     * @When I want to browse products
+     */
+    public function iWantToBrowseProducts(): void
+    {
+        $this->client->index();
     }
 
     /**
@@ -154,8 +171,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I add it
-     * @When I try to add it
+     * @When I (try to) add it
      */
     public function iAddIt(): void
     {
@@ -186,8 +202,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
+     * @When I (try to) save my changes
      */
     public function iSaveMyChanges(): void
     {
@@ -213,32 +228,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I start sorting products by name
-     * @When I sort the products :sortType by name
-     * @When I switch the way products are sorted :sortType by name
-     * @Given the products are already sorted :sortType by name
-     */
-    public function iStartSortingProductsByName(string $sortType = 'ascending'): void
-    {
-        $this->client->sort([
-            'translation.name' => self::SORT_TYPES[$sortType],
-            'localeCode' => $this->getAdminLocaleCode(),
-        ]);
-    }
-
-    /**
-     * @Given I am browsing products
-     * @When I browse products
-     * @When I want to browse products
-     */
-    public function iWantToBrowseProducts(): void
-    {
-        $this->client->index();
-    }
-
-    /**
-     * @When I delete the :product product
-     * @When I try to delete the :product product
+     * @When I (try to) delete the :product product
      */
     public function iDeleteProduct(ProductInterface $product): void
     {
@@ -246,9 +236,8 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I want to modify the :product product
      * @When /^I want to modify (this product)$/
-     * @When I modify the :product product
+     * @When I (want to) modify the :product product
      */
     public function iWantToModifyAProduct(ProductInterface $product): void
     {
@@ -368,7 +357,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should( still) see a product with :field :value
+     * @Then I should see a product with :field :value
      */
     public function iShouldSeeProductWith(string $field, string $value): void
     {
@@ -386,8 +375,7 @@ final class ManagingProductsContext implements Context
         Assert::false(
             $this
                 ->responseChecker
-                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value)
-            ,
+                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value),
             sprintf('Product with %s set as %s still exists, but it should not', $field, $value)
         );
     }
@@ -406,7 +394,7 @@ final class ManagingProductsContext implements Context
                 $this->client->getLastResponse(),
                 0,
                 'code',
-                '/new-api/admin/products/_NEW'
+                '/api/v2/admin/products/_NEW'
             ),
             sprintf('It was possible to change %s', '_NEW')
         );
@@ -461,7 +449,7 @@ final class ManagingProductsContext implements Context
         $productFromResponse = $this->responseChecker->getResponseContent($response);
 
         Assert::true(
-            in_array($this->iriConverter->getIriFromItem($productOption), $productFromResponse['options']),
+            in_array($this->iriConverter->getIriFromItem($productOption), $productFromResponse['options'], true),
             sprintf('Product with option %s does not exist', $productOption->getName())
         );
     }
@@ -568,7 +556,7 @@ final class ManagingProductsContext implements Context
 
         return
             isset($productFromResponse['images'][0]) &&
-            $productFromResponse['images'][0]['path'] === $product->getImages()->first()->getPath()
+            str_contains($productFromResponse['images'][0]['path'], $product->getImages()->first()->getPath())
         ;
     }
 

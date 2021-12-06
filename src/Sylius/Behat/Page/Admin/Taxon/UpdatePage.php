@@ -16,6 +16,7 @@ namespace Sylius\Behat\Page\Admin\Taxon;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use DMore\ChromeDriver\ChromeDriver;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
@@ -27,8 +28,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use ChecksCodeImmutability;
 
-    /** @var array */
-    private $imageUrls = [];
+    private array $imageUrls = [];
 
     public function chooseParent(TaxonInterface $taxon): void
     {
@@ -45,7 +45,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->activateLanguageTab($languageCode);
         $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_name', $languageCode), $name);
 
-        if ($this->getDriver() instanceof Selenium2Driver) {
+        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
             SlugGenerationHelper::waitForSlugGeneration(
                 $this->getSession(),
                 $this->getElement('slug', ['%language%' => $languageCode])
@@ -82,10 +82,10 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         }
 
         $this->getDriver()->visit($imageUrl);
-        $pageText = $this->getDocument()->getText();
+        $statusCode = $this->getDriver()->getStatusCode();
         $this->getDriver()->back();
 
-        return false === stripos($pageText, '404 Not Found');
+        return in_array($statusCode, [200, 304], true);
     }
 
     public function isSlugReadonly(string $languageCode = 'en_US'): bool
@@ -190,7 +190,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function activateLanguageTab(string $locale): void
     {
-        if (!$this->getDriver() instanceof Selenium2Driver) {
+        if (!$this->getDriver() instanceof Selenium2Driver && !$this->getDriver() instanceof ChromeDriver) {
             return;
         }
 
@@ -202,6 +202,21 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getDocument()->waitFor(10, function () use ($languageTabTitle) {
             return $languageTabTitle->hasClass('active');
         });
+    }
+
+    public function enable(): void
+    {
+        $this->getElement('enabled')->check();
+    }
+
+    public function disable(): void
+    {
+        $this->getElement('enabled')->uncheck();
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->getElement('enabled')->isChecked();
     }
 
     protected function getElement(string $name, array $parameters = []): NodeElement
@@ -223,6 +238,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_taxon_code',
             'description' => '#sylius_taxon_translations_en_US_description',
+            'enabled' => '#sylius_taxon_enabled',
             'images' => '#sylius_taxon_images',
             'language_tab' => '[data-locale="%locale%"] .title',
             'name' => '#sylius_taxon_translations_en_US_name',

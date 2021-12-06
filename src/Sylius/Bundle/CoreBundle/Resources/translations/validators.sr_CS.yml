@@ -14,6 +14,9 @@ sylius:
         email:
             invalid: E-mail nije validan.
             not_blank: Unеsite vaš e-mail.
+    review:
+        author:
+            not_blank: Unеsite vaš e-mail.
     user:
         email:
             unique: Ova e-mail adresa je već iskorišćena.

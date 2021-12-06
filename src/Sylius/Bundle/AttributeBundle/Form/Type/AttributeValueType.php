@@ -56,9 +56,6 @@ abstract class AttributeValueType extends AbstractResourceType
         $this->formTypeRegistry = $formTypeTypeRegistry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

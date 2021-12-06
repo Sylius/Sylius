@@ -25,3 +25,8 @@ Feature: Browsing product variants
         Given the "Wyborowa Vodka Exquisite" product variant is tracked by the inventory
         When I want to view all variants of this product
         Then I should see that the "Wyborowa Vodka Exquisite" variant has zero on hand quantity
+
+    @ui
+    Scenario: Being informed that product variant is enabled
+        When I want to view all variants of this product
+        Then I should see that the "Wyborowa Vodka Exquisite" variant is enabled

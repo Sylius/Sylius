@@ -22,14 +22,11 @@ use Webmozart\Assert\Assert;
 
 class ManagingShippingCategoriesContext implements Context
 {
-    /** @var IndexPageInterface */
-    private $indexPage;
+    private IndexPageInterface $indexPage;
 
-    /** @var CreatePageInterface */
-    private $createPage;
+    private CreatePageInterface $createPage;
 
-    /** @var UpdatePageInterface */
-    private $updatePage;
+    private UpdatePageInterface $updatePage;
 
     public function __construct(
         IndexPageInterface $indexPage,

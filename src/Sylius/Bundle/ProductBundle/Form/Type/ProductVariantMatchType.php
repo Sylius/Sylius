@@ -24,17 +24,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductVariantMatchType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addModelTransformer(new ProductVariantToProductOptionsTransformer($options['product']));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -49,11 +43,15 @@ final class ProductVariantMatchType extends AbstractType
                 'entry_name' => function (ProductOptionInterface $productOption) {
                     return $productOption->getCode();
                 },
-                'entry_options' => function (ProductOptionInterface $productOption) {
-                    return [
-                        'label' => $productOption->getName(),
-                        'option' => $productOption,
-                    ];
+                'entry_options' => function (Options $options) {
+                    return function (ProductOptionInterface $productOption) use ($options) {
+                        return [
+                            'label' => $productOption->getName(),
+                            'option' => $productOption,
+                            'only_available_values' => true,
+                            'product' => $options['product'],
+                        ];
+                    };
                 },
             ])
 
@@ -62,17 +60,11 @@ final class ProductVariantMatchType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return FixedCollectionType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_product_variant_match';

@@ -24,3 +24,7 @@ sylius:
         out_of_stock: 'Sunt numai %quantity% ale acestui produs în stoc.'
     product_variant:
         update_error: 'A apărut o problemă la actualizarea variantei produsului. Te rugăm, mai încearcă o dată.'
+    promotion:
+        update_rules: 'Unele reguli pentru promoțiile cu codurile %codes% au fost actualizate.'
+    taxon:
+        menu_taxon_delete: 'Pentru niciun canal nu puteţi şterge un meniu cateogire.'

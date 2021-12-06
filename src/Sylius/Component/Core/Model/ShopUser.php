@@ -22,17 +22,11 @@ class ShopUser extends BaseUser implements ShopUserInterface
     /** @var BaseCustomerInterface|null */
     protected $customer;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCustomer(): ?BaseCustomerInterface
     {
         return $this->customer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCustomer(?BaseCustomerInterface $customer): void
     {
         if ($this->customer === $customer) {
@@ -51,9 +45,6 @@ class ShopUser extends BaseUser implements ShopUserInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEmail(): ?string
     {
         if (null === $this->customer) {
@@ -63,9 +54,6 @@ class ShopUser extends BaseUser implements ShopUserInterface
         return $this->customer->getEmail();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setEmail(?string $email): void
     {
         if (null === $this->customer) {
@@ -75,9 +63,6 @@ class ShopUser extends BaseUser implements ShopUserInterface
         $this->customer->setEmail($email);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEmailCanonical(): ?string
     {
         if (null === $this->customer) {
@@ -87,9 +72,6 @@ class ShopUser extends BaseUser implements ShopUserInterface
         return $this->customer->getEmailCanonical();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setEmailCanonical(?string $emailCanonical): void
     {
         if (null === $this->customer) {

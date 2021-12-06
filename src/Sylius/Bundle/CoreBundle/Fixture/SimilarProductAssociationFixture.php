@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
+use Faker\Generator;
+use Faker\Factory;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
@@ -21,20 +23,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SimilarProductAssociationFixture extends AbstractFixture
 {
-    /** @var AbstractResourceFixture */
-    private $productAssociationTypeFixture;
+    private AbstractResourceFixture $productAssociationTypeFixture;
 
-    /** @var AbstractResourceFixture */
-    private $productAssociationFixture;
+    private AbstractResourceFixture $productAssociationFixture;
 
-    /** @var ProductRepositoryInterface */
-    private $productRepository;
+    private ProductRepositoryInterface $productRepository;
 
-    /** @var \Faker\Generator */
-    private $faker;
+    private Generator $faker;
 
-    /** @var OptionsResolver */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
         AbstractResourceFixture $productAssociationTypeFixture,
@@ -45,7 +42,7 @@ class SimilarProductAssociationFixture extends AbstractFixture
         $this->productAssociationFixture = $productAssociationFixture;
         $this->productRepository = $productRepository;
 
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver =
             (new OptionsResolver())
                 ->setRequired('amount')
@@ -53,17 +50,11 @@ class SimilarProductAssociationFixture extends AbstractFixture
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'similar_product_association';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $options): void
     {
         $options = $this->optionsResolver->resolve($options);
@@ -89,9 +80,6 @@ class SimilarProductAssociationFixture extends AbstractFixture
         $this->productAssociationFixture->load(['custom' => $productAssociations]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode

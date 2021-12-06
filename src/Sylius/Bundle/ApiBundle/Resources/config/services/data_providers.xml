@@ -16,14 +16,78 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="sylius.api.collection_data_provider.product" class="Sylius\Bundle\ApiBundle\DataProvider\LatestProductCollectionDataProvider">
-            <argument type="service" id="sylius.repository.product" />
-            <tag name="api_platform.collection_data_provider" priority="10" />
+        <defaults public="true" />
+
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\OrderItemItemDataProvider">
+            <argument type="service" id="sylius.repository.order_item" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="api_platform.item_data_provider" priority="10" />
         </service>
 
-        <service id="sylius.api.collection_data_provider.taxon" class="Sylius\Bundle\ApiBundle\DataProvider\TaxonFromChannelMenuTaxonCollectionDataProvider">
-            <argument type="service" id="sylius.repository.taxon" />
-            <tag name="api_platform.collection_data_provider" priority="10" />
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\OrderItemUnitItemDataProvider">
+            <argument type="service" id="sylius.repository.order_item_unit" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\PaymentItemDataProvider">
+            <argument type="service" id="sylius.repository.payment" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\ShipmentItemDataProvider">
+            <argument type="service" id="sylius.repository.shipment" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\ProductItemDataProvider">
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\CustomerItemDataProvider">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <argument type="service" id="sylius.repository.customer" />
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\ResetPasswordItemDataProvider">
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\CartShippingMethodsSubresourceDataProvider">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.repository.shipment" />
+            <argument type="service" id="sylius.shipping_methods_resolver" />
+            <tag name="api_platform.subresource_data_provider" priority="10" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\CartPaymentMethodsSubresourceDataProvider">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.repository.payment" />
+            <argument type="service" id="sylius.payment_methods_resolver.channel_based" />
+            <tag name="api_platform.subresource_data_provider" priority="10" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\OrderAdjustmentsSubresourceDataProvider">
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="api_platform.subresource_data_provider" priority="10" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\OrderItemAdjustmentsSubresourceDataProvider">
+            <argument type="service" id="sylius.repository.order_item" />
+            <tag name="api_platform.subresource_data_provider" priority="10" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" class="Sylius\Bundle\ApiBundle\Context\TokenBasedUserContext">
+            <argument type="service" id="security.token_storage" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\VerifyCustomerAccountItemDataProvider">
+            <tag name="api_platform.item_data_provider" priority="10" />
         </service>
     </services>
 </container>

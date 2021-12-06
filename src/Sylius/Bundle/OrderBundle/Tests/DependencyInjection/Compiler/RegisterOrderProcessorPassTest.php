@@ -42,7 +42,8 @@ final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
 
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.order_processing.order_processor',
-            'addProcessor', [
+            'addProcessor',
+            [
                 new Reference('sylius.order_processing.order_adjustments_clearer'),
                 0,
             ]
@@ -66,7 +67,8 @@ final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
 
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.order_processing.order_processor',
-            'addProcessor', [
+            'addProcessor',
+            [
                 new Reference('sylius.order_processing.order_adjustments_clearer'),
                 10,
             ]
@@ -97,9 +99,6 @@ final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new RegisterProcessorsPass());

@@ -1,0 +1,18 @@
+<table class="ui very basic celled table">
+    <tbody>
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ 'sylius.ui.type'|trans }}</strong></td>
+        <td>{{ 'sylius.ui.for_variants'|trans }}</td>
+    </tr>
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ 'sylius.ui.variants'|trans }}</strong></td>
+        <td {{ sylius_test_html_attribute('scope-variants') }}>
+            <ul class="ui bulleted list">
+                {% for variant in scope.configuration.variants %}
+                    <li>{{ variant }}</li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>

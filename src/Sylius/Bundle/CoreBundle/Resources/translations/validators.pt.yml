@@ -26,11 +26,7 @@ sylius:
             not_valid: O código de moeda introduzido é inválido.
     order:
         currency_code:
-            not_valid: O código de moeda introduzido é inválido.
-    locale:
-        code:
-            not_blank: Introduza o código de localidade.
-            unique: Esta localidade já existe.
+            not_valid: O código de moeda inserido é inválido.
     product_attribute:
         invalid: Posição deve ser um número inteiro.
     product_variant:
@@ -56,6 +52,9 @@ sylius:
     product_translation:
         short_description:
             max: A descrição curta não pode ter mais que {{ limit }} caracteres.
+    review:
+        author:
+            not_blank: Por favor introduza o seu endereço de e-mail.
     user:
         email:
             unique: Este endereço de e-mail já está registado.

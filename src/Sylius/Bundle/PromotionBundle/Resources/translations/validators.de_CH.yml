@@ -12,14 +12,14 @@ sylius:
             min_length: Die Beschreibung muss länger als 1 Zeichen sein.|Die Beschreibung muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie eine Beschreibung an.
         end_date_cannot_be_set_prior_start_date: Enddatum kann nicht vor dem Startdatum liegen.
+        is_invalid: Aktion ist ungültig.
         name:
             max_length: Der Name darf nicht länger als 1 Zeichen sein.|Der Name darf nicht länger als {{ limit }} Zeichen sein.
             min_length: Der Name muss mindestens 1 Zeichen lang sein.|Der Name muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie einen Namen an.
     promotion_action:
         percentage_discount_configuration:
-            min: Der Wert eines prozentualen Rabattes muss mindestens 0% sein.
-            max: Der maximale prozentuale Rabatt beträgt 100%.
+            not_in_range: Prozentualer Rabatt sollte zwischen 0% und 100% sein.
     promotion_coupon:
         code:
             max_length: Der Gutscheincode darf nicht länger als 1 Zeichen sein.|Der Gutscheincode darf nicht länger als {{ limit }} sein.

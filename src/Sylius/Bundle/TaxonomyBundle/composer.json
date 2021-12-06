@@ -2,75 +2,77 @@
     "name": "sylius/taxonomy-bundle",
     "type": "symfony-bundle",
     "description": "Flexible categorization system for Symfony.",
-    "keywords": ["shop", "ecommerce", "taxonomies", "taxonomy", "category", "categorization", "sylius"],
-    "homepage": "http://sylius.com",
+    "keywords": [
+        "shop",
+        "ecommerce",
+        "taxonomies",
+        "taxonomy",
+        "category",
+        "categorization",
+        "sylius"
+    ],
+    "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "homepage": "http://pjedrzejewski.com"
+            "homepage": "https://pjedrzejewski.com"
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.com"
+            "homepage": "https://sylius.com"
         },
         {
             "name": "Community contributions",
-            "homepage": "http://github.com/Sylius/Sylius/contributors"
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": "^7.3",
-
-        "stof/doctrine-extensions-bundle": "^1.2",
-        "sylius/resource-bundle": "^1.2",
-        "sylius/taxonomy": "^1.2",
-        "symfony/framework-bundle": "^4.4"
-    },
-    "require-dev": {
-        "doctrine/orm": "^2.5",
-        "phpspec/phpspec": "^5.0",
-        "phpunit/phpunit": "^7.0",
-        "symfony/dependency-injection": "^4.4"
+        "php": "^8.0",
+        "stof/doctrine-extensions-bundle": "^1.4",
+        "sylius/resource-bundle": "^1.7",
+        "sylius/taxonomy": "^1.6",
+        "symfony/framework-bundle": "^4.4 || ^5.4"
     },
     "conflict": {
-        "symfony/dependency-injection": "3.4.22",
         "twig/twig": "^3.0"
+    },
+    "require-dev": {
+        "doctrine/orm": "^2.7",
+        "phpspec/phpspec": "^7.0",
+        "phpunit/phpunit": "^8.5",
+        "symfony/dependency-injection": "^4.4 || ^5.4"
     },
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.9-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Bundle\\TaxonomyBundle\\": "" },
-        "exclude-from-classmap": ["/Tests/"]
+        "psr-4": {
+            "Sylius\\Bundle\\TaxonomyBundle\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
             "Sylius\\Bundle\\TaxonomyBundle\\Tests\\": "tests/"
         },
-        "files": ["Tests/Functional/app/AppKernel.php"]
+        "files": [
+            "Tests/Functional/app/AppKernel.php"
+        ]
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "scripts": {
-        "test": [
-            "@composer validate --strict",
-            "Tests/Functional/bin/console cache:clear --no-warmup --ansi --no-interaction",
-            "Tests/Functional/bin/console doctrine:database:create --if-not-exists --ansi --no-interaction",
-            "Tests/Functional/bin/console doctrine:schema:update --force --ansi --no-interaction",
-            "bin/phpunit --colors=always",
-            "bin/phpspec run --ansi --no-interaction"
-        ]
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

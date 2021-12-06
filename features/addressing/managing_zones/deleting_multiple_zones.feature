@@ -8,7 +8,7 @@ Feature: Deleting multiple zones
         Given the store has zones "North America", "South America" and "Europe"
         And I am logged in as an administrator
 
-    @ui
+    @ui @api @javascript
     Scenario: Deleting multiple zones at once
         When I browse zones
         And I check the "North America" zone
@@ -16,4 +16,4 @@ Feature: Deleting multiple zones
         And I delete them
         Then I should be notified that they have been successfully deleted
         And I should see a single zone in the list
-        And I should see the zone "Europe" in the list
+        And I should see the zone named "Europe" in the list

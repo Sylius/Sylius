@@ -18,11 +18,9 @@ use Webmozart\Assert\Assert;
 
 final class PercentageGenerationPolicy implements GenerationPolicyInterface
 {
-    /** @var PromotionCouponRepositoryInterface */
-    private $couponRepository;
+    private PromotionCouponRepositoryInterface $couponRepository;
 
-    /** @var float */
-    private $ratio;
+    private float $ratio;
 
     public function __construct(PromotionCouponRepositoryInterface $couponRepository, float $ratio = 0.5)
     {
@@ -30,9 +28,6 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
         $this->ratio = $ratio;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isGenerationPossible(PromotionCouponGeneratorInstructionInterface $instruction): bool
     {
         $expectedGenerationAmount = $instruction->getAmount();
@@ -41,9 +36,6 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
         return $possibleGenerationAmount >= $expectedGenerationAmount;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPossibleGenerationAmount(PromotionCouponGeneratorInstructionInterface $instruction): int
     {
         return $this->calculatePossibleGenerationAmount($instruction);

@@ -24,8 +24,6 @@ final class ContainsProductRuleChecker implements RuleCheckerInterface
     public const TYPE = 'contains_product';
 
     /**
-     * {@inheritdoc}
-     *
      * @throws UnsupportedTypeException
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool

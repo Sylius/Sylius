@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: La imagen es demasiado grande - {{ size }}{{ suffix }}. El tamaño máximo permitido es {{ limit }}{{ suffix }}.
+            upload_ini_size: La imagen es demasiado grande. El tamaño máximo permitido es {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: Por favor, introduce la moneda base del canal.
@@ -13,11 +17,10 @@ sylius:
             min: El correo electrónico debe tener al menos {{ limit }} caracteres.
     channel_pricing:
         price:
-            min: El precio debe ser al menos {{ limit }}.
             not_blank: Por favor, introduzca el precio.
     checkout:
         shipping_method:
-            not_blank: Por favor seleccione el método de envío.
+            not_blank: Por favor, seleccione el método de envío.
     contact:
         email:
             invalid: Este email no es válido.
@@ -34,14 +37,11 @@ sylius:
         not_available: '%itemName% no tiene suficiente stock.'
     order:
         currency_code:
-            not_valid: El código de la moneda que introdujo no es válido.
+            not_valid: El código de la moneda que ingreso no es válido.
         payment_method_eligibility: 'El método de pago %paymentMethodName% no está activo. Por favor, seleccione otro método de pago.'
         product_eligibility: 'El producto %productName% ha sido desactivado.'
         shipping_method_eligibility: 'El producto no cumple los requisitos para el método de envío %shippingMethodName%. Por favor, seleccionar otro método de envío.'
     locale:
-        code:
-            not_blank: Por favor, introduzca el código del idioma.
-            unique: Este idioma ya existe.
         enabled:
             cannot_disable_base: El código de idioma base no se puede desactivar.
     product:
@@ -77,6 +77,9 @@ sylius:
     product_translation:
         short_description:
             max: La descripción corta no debe superar los {{ limit }} caracteres.
+    review:
+        author:
+            not_blank: Por favor, introduzca su dirección de correo electrónico.
     taxon_image:
         file:
             max_size: La imagen es demasiado grande - {{ size }}{{ suffix }}. El tamaño máximo permitido es {{ limit }}{{ suffix }}.

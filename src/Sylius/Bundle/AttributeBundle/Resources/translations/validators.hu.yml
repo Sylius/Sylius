@@ -9,7 +9,13 @@ sylius:
             max_length: Az értéknek hosszabbnak kell lennie 1 karakternél.|Az értéknek hosszabbnak kell lennie {{ limit }} karakternél.
         code:
             not_blank: Kérjük, írja be az attribútum kódját.
+            regex: A tulajdonság kódja csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.
             unique: Ez a kód már használatban van.
+        configuration:
+            max_entries: A Konfiguráció bejegyzések maximális száma értékének nagyobb vagy egyenlőnek kell lennie a bejegyzések minimális száma értékénél.
+            max_length: A konfiguráció maximális hosszúságának nagyobbnak vagy egyenlőnek kell lennie a minimális hosszúságnál.
+            min_entries: A konfiguráció bejegyzések minimális száma értékének kisebbnek vagy egyenlőnek kell lennie a hozzáadott lehetőségek számánál.
+            multiple: A konfiguráció többszörös mezőjének igaznak kell lenni, ha a minimum vagy maximum értékei meg vannak adva.
         presentation:
             not_blank: Kérjük, adja meg az attribútum bemutatását.
             min_length: Attribútum bemutatása, legalább 1 karakter hosszúnak kell lennie. | Attribútum bemutatása, legalább {{ limit }} karakter hosszúnak kell lennie.

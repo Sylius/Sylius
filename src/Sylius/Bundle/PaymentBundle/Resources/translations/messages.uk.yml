@@ -12,7 +12,7 @@ sylius:
             type: Тип картки
         payment:
             amount: Сума платежу
-            method: Спосіб оплати
+            method: Метод оплати
             state:
                 header: Статус платежу
                 checkout: Підрахунок
@@ -24,11 +24,11 @@ sylius:
                 processing: В процесі
                 unknown: Невідомо
                 void: Порожньо
-                cancelled: Скасовано
+                cancelled: Скасоване
                 refunded: Відшкодовано
         payment_method:
             description: Опис
             enabled: Увімкнено?
             instructions: Інструкції
-            name: Назва
+            name: Назва регіону
             position: Позиція

@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            channels: Kanale
+        promotion:
+            channels: Kanale
         group:
             name: Naam
         channel:
@@ -12,17 +16,35 @@ sylius:
                 country: Land
                 postcode: Poskode
                 street: Straat
+            countries: Lande
+            currencies: Geldeenhede
         image:
             type: Tipe
+        locale:
+            code: Kode
+            enabled: Aktief
+        product:
+            channels: Kanale
+            enabled: Aktief
         product_filter:
             name: Naam
+            code: Kode
         shipping_method:
             zone: Area
+        taxon:
+            code: Kode
         user:
+            enabled: Aktief
             first_name: Naam
+            groups: Groepe
             last_name: Van
         product_association_type:
             name: Naam
+        promotion_rule:
+            product:
+                products: Produkte
+        payment_method:
+            channels: Kanale
     installer:
         extensions:
             off: false

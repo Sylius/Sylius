@@ -167,7 +167,7 @@ Decrease
 
 .. _InsufficientStockException: http://api.sylius.com/Sylius/Component/Inventory/Operator/InsufficientStockException.html
 
-.. _InvalidArgumentException: http://php.net/manual/en/class.invalidargumentexception.php
+.. _InvalidArgumentException: https://php.net/manual/en/class.invalidargumentexception.php
 
 .. note::
     For more detailed information go to `Sylius API InventoryOperator`_.
@@ -177,7 +177,7 @@ Decrease
 .. hint::
     To understand how events work check `Symfony EventDispatcher`_.
 
-.. _Symfony EventDispatcher: http://symfony.com/doc/current/components/event_dispatcher/introduction.html
+.. _Symfony EventDispatcher: https://symfony.com/doc/current/components/event_dispatcher/introduction.html
 
 .. _component_inventory_operator_noop-inventory-operator:
 

@@ -3,15 +3,54 @@
 
 sylius:
     form:
+        block:
+            body: Saturs
+        catalog_promotion:
+            channels: Kanāli
+        promotion:
+            channels: Kanāli
         group:
             name: Nosaukums
+        channel:
+            billing_data:
+                city: Pilsēta
+                company: Kompānija
+                country: Valsts
+                postcode: Pasta indekss
+            countries: Valstis
+            currencies: Valūta
+            locales: Atrašanās vietas valodas
+        locale:
+            enabled: Ieslēgts
+        page:
+            body: Saturs
+        product:
+            channels: Kanāli
+            enabled: Ieslēgts
         product_filter:
             name: Nosaukums
+        shipping_method:
+            zone: Zona
+        user:
+            billing_address: Rēķina adrese
+            enabled: Ieslēgts
+            first_name: Vārds
+            groups: Grupas
+            last_name: Uzvārds
+            password: Parole
+        variant:
+            on_hand: Pašreizeja pieejamība
         product_association_type:
             name: Nosaukums
         promotion_rule:
+            has_taxon:
+                taxons: Sadaļas
+            product:
+                products: Preces
             total_of_items_from_taxon:
                 amount: Summa
+        payment_method:
+            channels: Kanāli
     installer:
         extensions:
             off: false

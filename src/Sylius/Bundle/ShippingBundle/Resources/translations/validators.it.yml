@@ -12,6 +12,8 @@ sylius:
             regex: 'Il codice della categoria di spedizione può contenere solo lettere, numeri, trattini e underscore.'
             unique: 'La categoria di spedizione con il codice dato esiste già.'
     shipping_method:
+        calculator:
+            not_blank: 'Si prega di scegliere un metodo di calcolo per la spedizione.'
         name:
             max_length: 'Il nome del metodo di spedizione non deve essere più lungo di {{ limit }} caratteri.'
             min_length: 'Il nome del metodo di spedizione deve essere lungo almeno {{ limit }} caratteri.'

@@ -1,0 +1,71 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        catalog_promotion:
+            description: Тодорхойлолт
+            name: Нэр
+            priority: Нэн тэргүүнд
+        promotion:
+            actions: Үйлдэл
+            add_action: Үйлдэл нэмэх
+            add_rule: Дүрэм нэмэх
+            coupon_based: Купон дээр суурилсан
+            description: Тодорхойлолт
+            ends_at: Дуусах
+            exclusive: Онцгой
+            name: Нэр
+            priority: Нэн тэргүүнд
+            rules: Дүрмүүд
+            starts_at: Эхлэх
+            usage_limit: Ашиглалтын хязгаар
+        promotion_action:
+            item_fixed_discount: Барааны тогтмол хөнгөлөлт
+            item_percentage_discount: Барааны хувийн хөнгөлөлт
+            order_fixed_discount: Тогтмол хямдрал зарлах
+            order_percentage_discount: Захиалгын хувийн хөнгөлөлт
+            shipping_percentage_discount: Хүргэлтийн хувь хөнгөлөлт
+            fixed_discount_configuration:
+                amount: Нийт дүн
+            percentage_discount_configuration:
+                percentage: Хувь
+            type: Төрөл
+        promotion_coupon:
+            expires_at: Дуусах хугацаа
+            usage_limit: Ашиглалтын хязгаар
+        promotion_coupon_generator_instruction:
+            amount: Нийт дүн
+            code_length: Кодын урт
+            expires_at: Дуусах хугацаа
+            prefix: Угтвар
+            suffix: Дагавар
+            usage_limit: Ашиглалтын хязгаар
+        promotion_filter:
+            price_range: Үнийн хязгаарын шүүлтүүр
+        promotion_rule:
+            cart_quantity: Сагсны тоо хэмжээ
+            contains_product: Агуулахын бараа
+            customer_group: Харилцагчийн бүлэг
+            has_at_least_one_from_taxons: Таксоноос дор хаяж нэг байна
+            item_total: Нийт бараа
+            nth_order: Nth захиалга
+            shipping_country: Хүргэх улс
+            taxonomy: Таксономи
+            total_price_of_items_from_taxon: Таксоны барааны нийт үнэ
+            cart_quantity_configuration:
+                count: Тоо ширхэг
+                equal: Тэнцүү
+            contains_product_configuration:
+                exclude: Гаргах
+                variants: Бүтээгдэхүүнүүд
+            item_total_configuration:
+                amount: Нийт дүн
+            nth_order_configuration:
+                nth: Nth
+            shipping_country_configuration:
+                country: Улс
+            taxonomy_configuration:
+                exclude: Гаргах
+                taxons: Таксонууд
+            type: Төрөл

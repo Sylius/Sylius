@@ -18,16 +18,18 @@ default:
                 - sylius.behat.context.transform.tax_category
                 - sylius.behat.context.transform.zone
 
-                - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.exchange_rate
                 - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.promotion
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.shipping_category
+                - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.taxation
                 - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.zone
+                - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
                 - sylius.behat.context.ui.channel
                 - sylius.behat.context.ui.shop.cart
@@ -37,4 +39,4 @@ default:
                 - sylius.behat.context.ui.user
 
             filters:
-                tags: "@shopping_cart && @ui"
+                tags: "@shopping_cart&&@ui"

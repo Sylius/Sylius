@@ -2,53 +2,62 @@
     "name": "sylius/locale",
     "type": "library",
     "description": "Locale handling for PHP applications.",
-    "keywords": ["language", "localization", "locale", "i18n", "internationalization"],
-    "homepage": "http://sylius.com",
+    "keywords": [
+        "language",
+        "localization",
+        "locale",
+        "i18n",
+        "internationalization"
+    ],
+    "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "homepage": "http://pjedrzejewski.com"
+            "homepage": "https://pjedrzejewski.com"
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.com"
+            "homepage": "https://sylius.com"
         },
         {
             "name": "Community contributions",
-            "homepage": "http://github.com/Sylius/Sylius/contributors"
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": "^7.3",
-
-        "sylius/resource": "^1.2",
-        "symfony/intl": "^4.4",
-        "zendframework/zend-stdlib": "^3.1"
+        "php": "^8.0",
+        "sylius/resource": "^1.7",
+        "symfony/intl": "^4.4 || ^5.4",
+        "laminas/laminas-stdlib": "^3.2"
     },
     "require-dev": {
-        "phpspec/phpspec": "^5.0"
+        "phpspec/phpspec": "^7.0"
     },
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.9-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Component\\Locale\\": "" }
+        "psr-4": {
+            "Sylius\\Component\\Locale\\": ""
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Component\\Locale\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Component\\Locale\\spec\\": "spec/"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

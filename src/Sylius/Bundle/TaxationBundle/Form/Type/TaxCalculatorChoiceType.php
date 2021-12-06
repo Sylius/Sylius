@@ -19,8 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class TaxCalculatorChoiceType extends AbstractType
 {
-    /** @var array */
-    private $calculators;
+    private array $calculators;
 
     /**
      * @param array $calculators
@@ -30,9 +29,6 @@ final class TaxCalculatorChoiceType extends AbstractType
         $this->calculators = $calculators;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -42,17 +38,11 @@ final class TaxCalculatorChoiceType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_tax_calculator_choice';

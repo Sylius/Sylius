@@ -15,7 +15,7 @@ sylius:
             zone: Sone
         country:
             add_province: Legg til fylke
-            name: Navn
+            name: navn
             provinces: Fylker
             select: Velg
             enabled: Aktivert

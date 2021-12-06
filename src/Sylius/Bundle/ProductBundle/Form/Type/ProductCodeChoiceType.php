@@ -21,17 +21,13 @@ use Symfony\Component\Form\ReversedTransformer;
 
 final class ProductCodeChoiceType extends AbstractType
 {
-    /** @var RepositoryInterface */
-    private $productRepository;
+    private RepositoryInterface $productRepository;
 
     public function __construct(RepositoryInterface $productRepository)
     {
         $this->productRepository = $productRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addModelTransformer(
@@ -39,17 +35,11 @@ final class ProductCodeChoiceType extends AbstractType
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ProductChoiceType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_product_code_choice';

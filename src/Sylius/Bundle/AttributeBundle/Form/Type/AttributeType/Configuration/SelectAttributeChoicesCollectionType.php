@@ -23,8 +23,7 @@ use Symfony\Component\Form\FormEvents;
 
 class SelectAttributeChoicesCollectionType extends AbstractType
 {
-    /** @var string */
-    private $defaultLocaleCode;
+    private string $defaultLocaleCode;
 
     public function __construct(TranslationLocaleProviderInterface $localeProvider)
     {
@@ -53,6 +52,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
                         continue;
                     }
 
+                    $key = (string) $key;
                     $newKey = $this->getUniqueKey();
                     $fixedData[$newKey] = $this->resolveValues($values);
 
@@ -70,17 +70,11 @@ class SelectAttributeChoicesCollectionType extends AbstractType
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return CollectionType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_select_attribute_choices_collection';

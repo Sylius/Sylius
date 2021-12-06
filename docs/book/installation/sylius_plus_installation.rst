@@ -13,19 +13,21 @@ Installing Sylius Plus as a plugin to a Sylius application
 **Important Requirements**
 
 +---------------+-----------------------+
-| PHP           | ^7.2                  |
+| PHP           | ^7.3                  |
 +---------------+-----------------------+
-| sylius/sylius | ^1.6                  |
+| sylius/sylius | ^1.9                  |
++---------------+-----------------------+
+| Symfony       | ^5.2                  |
 +---------------+-----------------------+
 
 **0.** Prepare project:
 
 .. tip::
 
-    If it is a new project you are initiating, then first install Sylius-Standard in **version ^1.6** according to
+    If it is a new project you are initiating, then first install Sylius-Standard in **version ^1.10** according to
     :doc:`these instructions </book/installation/installation>`.
 
-    If you're installing Plus package to an existing project, then make sure you're upgraded to ``sylius/sylius ^1.6``.
+    If you're installing Plus package to an existing project, then make sure you're upgraded to ``sylius/sylius ^1.10``.
 
 **1.** Configure access to the private Packagist package in composer by using the Access Token you have been given with your license.
 
@@ -38,8 +40,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 .. code-block:: bash
 
     composer config repositories.plus composer https://sylius.repo.packagist.com/ShortNameOfYourOrganization/
-    composer require sylius/plus --no-update
-    composer config minimum-stability rc #due to the usage of some pre-stable packages (like SyliusRefundPlugin)
+    composer require "sylius/plus:^1.0.0-ALPHA.1" --no-update
     composer update --no-scripts
     composer sync-recipes
 
@@ -50,7 +51,7 @@ Installing Sylius Plus as a plugin to a Sylius application
     // config/bundles.php
 
     return [
-       ...
+       //...
        Sylius\Plus\SyliusPlusPlugin::class => ['all' => true],
     ];
 
@@ -58,23 +59,16 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: yaml
 
-    // config/packages/_sylius.yaml
+    # config/packages/_sylius.yaml
     imports:
     ...
         - { resource: "@SyliusPlusPlugin/Resources/config/config.yaml" }
-
-.. code-block:: yaml
-
-    // config/packages/messenger.yaml
-    framework:
-        messenger:
-            default_bus: sylius_invoicing_plugin.command_bus
 
 **5.** Configure Shop, Admin and Admin API routing:
 
 .. code-block:: yaml
 
-    // config/routes/sylius_shop.yaml
+    # config/routes/sylius_shop.yaml
     ...
 
     sylius_plus_shop:
@@ -85,21 +79,24 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: yaml
 
-    // config/routes/sylius_admin.yaml:
+    # config/routes/sylius_admin.yaml:
     ...
 
     sylius_plus_admin:
         resource: "@SyliusPlusPlugin/Resources/config/admin_routing.yaml"
         prefix: /admin
+.. warning::
 
-.. code-block:: yaml
+    Not needed for Sylius Plus >= `1.0.0-ALPHA.1`
 
-    // config/routes/sylius_admin_api.yaml:
-    ...
+    .. code-block:: yaml
 
-    sylius_plus_admin_api:
-        resource: "@SyliusPlusPlugin/Resources/config/api_routing.yaml"
-        prefix: /api/v1
+        # config/routes/sylius_admin_api.yaml:
+        ...
+
+        sylius_plus_admin_api:
+            resource: "@SyliusPlusPlugin/Resources/config/api_routing.yaml"
+            prefix: /api/v1
 
 **6.** Add traits that enhance Sylius models:
 
@@ -287,16 +284,18 @@ Installing Sylius Plus as a plugin to a Sylius application
         use ShipmentTrait;
     }
 
-**7.** Copy and apply migrations:
+**7.** Add wkhtmltopdf binary for Invoicing purposes.
 
-Copy Sylius Plus migrations from ``vendor/sylius/plus/migrations/`` to your migrations directory (e.g. ``src/Migrations``)
-and apply them to your database:
+If you do not have the ``wkhtmltopdf`` binary, download it `here <https://wkhtmltopdf.org/downloads.html>`_.
 
-.. code-block:: bash
+In case wkhtmltopdf is not located in ``/usr/local/bin/wkhtmltopdf``, add the following snippet at the end of
+your application's ``.env`` file:
 
-    bin/console doctrine:database:create --if-not-exists
-    cp -f vendor/sylius/plus/migrations/* src/Migrations
-    bin/console doctrine:migrations:migrate -n
+.. code-block:: yaml
+
+    ###> knplabs/knp-snappy-bundle ###
+    WKHTMLTOPDF_PATH=/your-path
+    ###< knplabs/knp-snappy-bundle ###
 
 **8.** Install Sylius with Sylius Plus fixtures:
 
@@ -312,26 +311,13 @@ and apply them to your database:
 
         bin/console sylius:install --fixture-suite plus -n
 
-**9.** Add wkhtmltopdf binary for Invoicing purposes.
-
-If you do not have the ``wkhtmltopdf`` binary, download it `here <https://wkhtmltopdf.org/downloads.html>`_.
-
-In case wkhtmltopdf is not located in ``/usr/local/bin/wkhtmltopdf``, add the following snippet at the end of
-your application's ``.env`` file:
-
-.. code-block:: yaml
-
-    ###> knplabs/knp-snappy-bundle ###
-    WKHTMLTOPDF_PATH=/your-path
-    ###< knplabs/knp-snappy-bundle ###
-
-**10.** Copy templates that are overriden by Sylius Plus into ``templates/bundles``:
+**9.** Copy templates that are overridden by Sylius Plus into ``templates/bundles``:
 
 .. code-block:: bash
 
     cp -fr vendor/sylius/plus/src/Resources/templates/bundles/* templates/bundles
 
-**11.** Install JS libraries using Yarn:
+**10.** Install JS libraries using Yarn:
 
 .. code-block:: bash
 
@@ -339,13 +325,26 @@ your application's ``.env`` file:
     yarn build
     bin/console assets:install --ansi
 
-**12.** Additionally check the installation guides for all plugins installed as dependencies with Sylius Plus.
+**11.** Rebuild cache for proper display of all translations:
+
+.. code-block:: bash
+
+    bin/console cache:clear
+    bin/console cache:warmup
+
+**12.** For more details check the installation guides for all plugins installed as dependencies with Sylius Plus.
 
 * `Sylius/InvoicingPlugin <https://github.com/Sylius/InvoicingPlugin/blob/master/README.md#installation>`_
 * `Sylius/RefundPlugin <https://github.com/Sylius/RefundPlugin/blob/master/README.md#installation>`_
 
 **Phew! That's all, you can now run the application just like you usually do with Sylius (using Symfony Server for example).**
 
+Upgrading Sylius Plus
+---------------------
+
+To upgrade Sylius Plus in an existing application, please follow upgrade instructions from
+`Sylius/PlusInformationCenter <https://github.com/Sylius/PlusInformationCenter>`_ repository.
+
 .. image:: ../../_images/sylius_plus/banner.png
     :align: center
-    :target: http://sylius.com/plus/?utm_source=docs
+    :target: https://sylius.com/plus/?utm_source=docs

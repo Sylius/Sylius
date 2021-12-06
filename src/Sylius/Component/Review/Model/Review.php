@@ -19,25 +19,37 @@ class Review implements ReviewInterface
 {
     use TimestampableTrait;
 
-    /** @var int */
-    protected $id;
+    /** @var mixed */
+    protected $id = null;
 
-    /** @var string */
+    /**
+     * @var string|null
+     */
     protected $title;
 
-    /** @var int */
+    /**
+     * @var int|null
+     */
     protected $rating;
 
-    /** @var string */
+    /**
+     * @var string|null
+     */
     protected $comment;
 
-    /** @var ReviewerInterface */
+    /**
+     * @var ReviewerInterface|null
+     */
     protected $author;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $status = ReviewInterface::STATUS_NEW;
 
-    /** @var ReviewableInterface */
+    /**
+     * @var ReviewableInterface|null
+     */
     protected $reviewSubject;
 
     public function __construct()
@@ -45,105 +57,66 @@ class Review implements ReviewInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setTitle(?string $title): void
     {
         $this->title = $title;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRating(): ?int
     {
         return $this->rating;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setRating(?int $rating): void
     {
         $this->rating = $rating;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getComment(): ?string
     {
         return $this->comment;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setComment(?string $comment): void
     {
         $this->comment = $comment;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAuthor(): ?ReviewerInterface
     {
         return $this->author;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setAuthor(?ReviewerInterface $author): void
     {
         $this->author = $author;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setStatus(?string $status): void
     {
         $this->status = $status;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getReviewSubject(): ?ReviewableInterface
     {
         return $this->reviewSubject;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setReviewSubject(?ReviewableInterface $reviewSubject): void
     {
         $this->reviewSubject = $reviewSubject;

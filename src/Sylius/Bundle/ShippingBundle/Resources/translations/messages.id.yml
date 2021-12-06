@@ -29,6 +29,7 @@ sylius:
             description: Keterangan
             name: Nama
         shipping_method:
+            add_rule: Tambahkan aturan
             calculator: Kalkulator
             category: Kategori
             category_requirement: Kebutuhan kategori
@@ -41,5 +42,11 @@ sylius:
             match_none_category_requirement: Tak satu pun unit harus sesuai dengan kategori metode
             name: Nama
             position: Posisi
+            rules: Aturan
             tax_category: Kategori Pajak
             translations: Terjemahan
+        shipping_method_rule:
+            type: Jenis
+            total: Total
+            weight: Berat
+            amount: Jumlah

@@ -23,25 +23,16 @@ final class TextAttributeType implements AttributeTypeInterface
 {
     public const TYPE = 'text';
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStorageType(): string
     {
         return AttributeValueInterface::STORAGE_TEXT;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return self::TYPE;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate(
         AttributeValueInterface $attributeValue,
         ExecutionContextInterface $context,
@@ -84,7 +75,8 @@ final class TextAttributeType implements AttributeTypeInterface
         }
 
         return $validator->validate(
-            $value, $constraints
+            $value,
+            $constraints
         );
     }
 }

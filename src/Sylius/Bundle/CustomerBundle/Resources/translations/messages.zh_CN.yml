@@ -4,15 +4,14 @@
 sylius:
     form:
         customer:
-            first_name: 名字
+            first_name: 名
             group: 分组
-            last_name: 姓氏
+            last_name: 姓
             email: 电子邮件
             phone_number: 电话号码
             gender: 性别
             birthday: 出生日期
             billing_address: 账单地址
-            different_billing_address: 使用不同地址的帐单吗？
             only_customer_registration: 创建用户
             subscribed_to_newsletter: 订阅
         customer_group:
@@ -20,5 +19,5 @@ sylius:
             roles: 角色
     gender:
         unknown: 未知
-        male: 男
-        female: 女
+        male: 男性
+        female: 女性

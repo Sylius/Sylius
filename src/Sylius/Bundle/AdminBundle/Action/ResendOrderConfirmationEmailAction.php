@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Csrf\CsrfToken;
@@ -28,23 +27,19 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 final class ResendOrderConfirmationEmailAction
 {
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /** @var OrderEmailManagerInterface */
-    private $orderEmailManager;
+    private OrderEmailManagerInterface $orderEmailManager;
 
-    /** @var CsrfTokenManagerInterface */
-    private $csrfTokenManager;
+    private CsrfTokenManagerInterface $csrfTokenManager;
 
-    /** @var Session */
-    private $session;
+    private Session $session;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         OrderEmailManagerInterface $orderEmailManager,
         CsrfTokenManagerInterface $csrfTokenManager,
-        SessionInterface $session
+        Session $session
     ) {
         $this->orderRepository = $orderRepository;
         $this->orderEmailManager = $orderEmailManager;
@@ -56,7 +51,7 @@ final class ResendOrderConfirmationEmailAction
     {
         $orderId = $request->attributes->get('id');
 
-        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken($orderId, $request->query->get('_csrf_token')))) {
+        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken($orderId, (string) $request->query->get('_csrf_token')))) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 

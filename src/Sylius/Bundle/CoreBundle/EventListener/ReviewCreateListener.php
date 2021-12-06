@@ -21,8 +21,7 @@ use Webmozart\Assert\Assert;
 
 final class ReviewCreateListener
 {
-    /** @var CustomerContextInterface */
-    private $customerContext;
+    private CustomerContextInterface $customerContext;
 
     public function __construct(CustomerContextInterface $customerContext)
     {

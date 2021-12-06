@@ -4,6 +4,7 @@
     <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
         {{- form_label(form) -}}
         {{- form_widget(form) -}}
+        {{- form_help(form) -}}
         {{- form_errors(form) -}}
     </div>
 {%- endblock form_row %}
@@ -60,8 +61,8 @@
             {%- for child in form %}
                 <div class="field">
                     <div class="ui toggle checkbox">
-                        {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
                         {{- form_widget(child, sylius_test_form_attribute('option')) -}}
+                        {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
                     </div>
                 </div>
             {% endfor -%}
@@ -84,14 +85,18 @@
     {% apply spaceless %}
         <div data-form-type="collection" {{ block('widget_container_attributes') }}
             {% if prototype is defined and allow_add %}
-                data-prototype='{{ self.collection_item(prototype, allow_delete, button_delete_label, '__name__')|e }}'
+                data-prototype='{{ self.collection_item(prototype, allow_delete, button_delete_label, prototype.vars.name)|e }}'
+                data-prototype-name='{{ prototype.vars.name }}'
             {%- endif -%}
         >
             {{ error(form.vars.errors) }}
 
             {% if prototypes|default is iterable %}
                 {% for key, subPrototype in prototypes %}
-                    <input type="hidden" data-form-prototype="{{ key }}" value="{{ self.collection_item(subPrototype, allow_delete, button_delete_label, '__name__')|e }}" />
+                    <input type="hidden" data-form-prototype="{{ key }}"
+                           value="{{ self.collection_item(subPrototype, allow_delete, button_delete_label, subPrototype.vars.name)|e }}"
+                           data-subprototype-name="{{ subPrototype.vars.name }}"
+                    />
                 {% endfor %}
             {% endif %}
 
@@ -145,13 +150,13 @@
 
 {% block sylius_promotion_rule_widget %}
     <div class="ui segment">
-        {{ form_widget(form) }}
+        {{ block('form_widget') }}
     </div>
 {% endblock %}
 
 {% block sylius_promotion_action_widget %}
     <div class="ui segment">
-        {{ form_widget(form) }}
+        {{ block('form_widget') }}
     </div>
 {% endblock %}
 

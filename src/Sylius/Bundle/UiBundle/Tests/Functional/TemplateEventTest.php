@@ -19,8 +19,7 @@ use Twig\Environment;
 
 final class TemplateEventTest extends KernelTestCase
 {
-    /** @var Environment */
-    private $twig;
+    private ?object $twig = null;
 
     protected function setUp(): void
     {

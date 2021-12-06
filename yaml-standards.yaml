@@ -1,10 +1,10 @@
 -   pathsToCheck:
-        - ./
+        - ./*{.yml,.yaml,.yml.dist,.yaml.dist}
     excludedPaths:
-        - ./node_modules
-        - ./public
-        - ./var
-        - ./vendor
+        - ./node_modules/*{.yml,.yaml,.yml.dist,.yaml.dist}
+        - ./public/*{.yml,.yaml,.yml.dist,.yaml.dist}
+        - ./var/*{.yml,.yaml,.yml.dist,.yaml.dist}
+        - ./vendor/*{.yml,.yaml,.yml.dist,.yaml.dist}
     checkers:
         -   pathToChecker: YamlStandards\Model\YamlIndent\YamlIndentChecker
             parameters:

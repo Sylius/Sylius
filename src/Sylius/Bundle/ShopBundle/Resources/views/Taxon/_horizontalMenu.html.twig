@@ -1,12 +1,12 @@
 {% macro item(taxon) %}
     {% import _self as macros %}
 
-    {% if taxon.children|length > 0 %}
+    {% if taxon.enabledChildren|length > 0 %}
         <div class="ui dropdown item" {{ sylius_test_html_attribute('menu-item') }}>
             <span class="text">{{ taxon.name }}</span>
             <i class="dropdown icon"></i>
             <div class="menu">
-                {% for childTaxon in taxon.children %}
+                {% for childTaxon in taxon.enabledChildren %}
                     {{ macros.item(childTaxon) }}
                 {% endfor %}
             </div>

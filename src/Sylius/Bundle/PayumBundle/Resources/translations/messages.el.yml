@@ -8,6 +8,7 @@ sylius:
         gateway_configuration:
             paypal:
                 password: Κωδικός πρόσβασης
+                signature: Υπογραφή
                 username: Όνομα χρήστη
     payum_gateway_factory:
         offline: Εκτός σύνδεσης

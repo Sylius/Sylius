@@ -16,6 +16,7 @@ namespace Sylius\Behat\Page\Shop\Checkout;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use DMore\ChromeDriver\ChromeDriver;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterface
@@ -27,7 +28,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
 
     public function selectShippingMethod(string $shippingMethod): void
     {
-        if ($this->getDriver() instanceof Selenium2Driver) {
+        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
             $this->getElement('shipping_method_select', ['%shipping_method%' => $shippingMethod])->click();
 
             return;
@@ -105,7 +106,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         $this->getElement('address')->click();
     }
 
-    public function getPurchaserEmail(): string
+    public function getPurchaserIdentifier(): string
     {
         return $this->getElement('purchaser_email')->getText();
     }

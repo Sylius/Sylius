@@ -65,4 +65,10 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function getValidationMessageForImageAtPlace(int $place): string;
 
     public function activateLanguageTab(string $locale): void;
+
+    public function enable(): void;
+
+    public function disable(): void;
+
+    public function isEnabled(): bool;
 }

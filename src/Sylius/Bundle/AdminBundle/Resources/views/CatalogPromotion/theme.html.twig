@@ -1,0 +1,10 @@
+{% extends '@SyliusAdmin/Form/theme.html.twig' %}
+
+{% block sylius_catalog_promotion_scope_widget %}
+    {{ form_row(form.type) }}
+    {% if form.vars.value != null %}
+        {% include '@SyliusAdmin/CatalogPromotion/Scope/'~form.vars.value.type~'.html.twig' with {'field': form.configuration} %}
+    {% else %}
+        {% include '@SyliusAdmin/CatalogPromotion/Scope/default.html.twig' with {'field': form.configuration} %}
+    {% endif %}
+{% endblock %}

@@ -20,12 +20,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class OrderItemType extends AbstractResourceType
 {
-    /** @var DataMapperInterface */
-    private $dataMapper;
+    private DataMapperInterface $dataMapper;
 
     public function __construct(
         string $dataClass,
-        array $validationGroups = [],
+        array $validationGroups,
         DataMapperInterface $dataMapper
     ) {
         parent::__construct($dataClass, $validationGroups);
@@ -33,9 +32,6 @@ final class OrderItemType extends AbstractResourceType
         $this->dataMapper = $dataMapper;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -47,9 +43,6 @@ final class OrderItemType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_order_item';

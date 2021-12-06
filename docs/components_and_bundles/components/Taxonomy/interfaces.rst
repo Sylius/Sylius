@@ -20,8 +20,8 @@ The **TaxonInterface** gives an object an ability to have Taxons assigned as chi
 
 .. note::
 
-    This interface extends the :ref:`component_resource_model_code-aware-interface`,
-    :ref:`component_resource_model_translatable-interface`
+    This interface extends the `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_,
+    `TranslatableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TranslatableInterface.php>`_
     and the :ref:`component_taxonomy_model_taxon-translation-interface`.
 
     You will find more information about that interface in `Sylius API TaxonInterface`_.

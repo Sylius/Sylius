@@ -18,15 +18,10 @@
     <resource class="%sylius.model.avatar_image.class%" shortName="AvatarImage">
         <attribute name="route_prefix">admin</attribute>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>avatar_image:read</attribute>
-            </attribute>
-        </attribute>
-
         <collectionOperations>
-            <collectionOperation name="post">
-                <attribute name="controller">sylius.api.upload_avatar_image_action</attribute>
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction</attribute>
                 <attribute name="deserialize">false</attribute>
                 <attribute name="openapi_context">
                     <attribute name="requestBody">
@@ -49,12 +44,23 @@
                         </attribute>
                     </attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:avatar_image:read</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get" />
-            <itemOperation name="delete" />
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:avatar_image:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />

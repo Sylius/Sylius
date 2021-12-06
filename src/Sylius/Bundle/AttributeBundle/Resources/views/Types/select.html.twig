@@ -1,0 +1,18 @@
+{% if attribute.value is not null %}
+    {% set values = attribute.attribute.configuration.choices %}
+    {% if attribute.value is iterable %}
+        {% for value in attribute.value %}
+            {% if locale in values[value]|keys and values[value][locale] is not empty %}
+                {{ values[value][locale] }}{% if loop.last == false %}, {% endif %}
+            {% else %}
+                {{ values[value][fallbackLocale] }}{% if loop.last == false %}, {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        {% if values[attribute.value][locale] is not empty %}
+            {{ values[attribute.value][locale] }}
+        {% elseif values[attribute.value][fallbackLocale] is not empty %}
+            {{ values[attribute.value][fallbackLocale] }}
+        {% endif %}
+    {% endif %}
+{% endif %}

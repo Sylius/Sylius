@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
@@ -25,14 +26,11 @@ use Webmozart\Assert\Assert;
 
 class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
 {
-    /** @var CalculatorInterface */
-    private $calculator;
+    private CalculatorInterface $calculator;
 
-    /** @var AdjustmentFactoryInterface */
-    private $adjustmentFactory;
+    private AdjustmentFactoryInterface $adjustmentFactory;
 
-    /** @var TaxRateResolverInterface */
-    private $taxRateResolver;
+    private TaxRateResolverInterface $taxRateResolver;
 
     public function __construct(
         CalculatorInterface $calculator,
@@ -44,49 +42,60 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
         $this->taxRateResolver = $taxRateResolver;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function apply(OrderInterface $order, ZoneInterface $zone): void
     {
-        $shippingTotal = $order->getShippingTotal();
-        if (0 === $shippingTotal) {
+        if (0 === $order->getShippingTotal()) {
             return;
         }
 
-        $taxRate = $this->taxRateResolver->resolve($this->getShippingMethod($order), ['zone' => $zone]);
-        if (null === $taxRate) {
-            return;
+        if (!$order->hasShipments()) {
+            throw new \LogicException('Order should have at least one shipment.');
         }
 
-        $taxAmount = $this->calculator->calculate($shippingTotal, $taxRate);
-        if (0.00 === $taxAmount) {
-            return;
-        }
+        foreach ($order->getShipments() as $shipment) {
+            $shippingMethod = $this->getShippingMethod($shipment);
 
-        $this->addAdjustment($order, (int) $taxAmount, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
+            /** @var TaxRateInterface|null $taxRate */
+            $taxRate = $this->taxRateResolver->resolve($shippingMethod, ['zone' => $zone]);
+            if (null === $taxRate) {
+                continue;
+            }
+
+            $taxAmount = $this->calculator->calculate($shipment->getAdjustmentsTotal(), $taxRate);
+            if (0.00 === $taxAmount) {
+                continue;
+            }
+
+            $this->addAdjustment($shipment, (int) $taxAmount, $taxRate, $shippingMethod);
+        }
     }
 
-    private function addAdjustment(OrderInterface $order, int $taxAmount, string $label, bool $included): void
-    {
-        /** @var AdjustmentInterface $shippingTaxAdjustment */
-        $shippingTaxAdjustment = $this->adjustmentFactory
-            ->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, $label, $taxAmount, $included)
-        ;
-        $order->addAdjustment($shippingTaxAdjustment);
+    private function addAdjustment(
+        ShipmentInterface $shipment,
+        int $taxAmount,
+        TaxRateInterface $taxRate,
+        ShippingMethodInterface $shippingMethod
+    ): void {
+        $shipment->addAdjustment($this->adjustmentFactory->createWithData(
+            AdjustmentInterface::TAX_ADJUSTMENT,
+            $taxRate->getLabel(),
+            $taxAmount,
+            $taxRate->isIncludedInPrice(),
+            [
+                'shippingMethodCode' => $shippingMethod->getCode(),
+                'shippingMethodName' => $shippingMethod->getName(),
+                'taxRateCode' => $taxRate->getCode(),
+                'taxRateName' => $taxRate->getName(),
+                'taxRateAmount' => $taxRate->getAmount(),
+            ]
+        ));
     }
 
     /**
      * @throws \LogicException
      */
-    private function getShippingMethod(OrderInterface $order): ShippingMethodInterface
+    private function getShippingMethod(ShipmentInterface $shipment): ShippingMethodInterface
     {
-        /** @var ShipmentInterface|bool $shipment */
-        $shipment = $order->getShipments()->first();
-        if (false === $shipment) {
-            throw new \LogicException('Order should have at least one shipment.');
-        }
-
         $method = $shipment->getMethod();
 
         /** @var ShippingMethodInterface $method */

@@ -24,10 +24,14 @@ class Shipment implements ShipmentInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $state = ShipmentInterface::STATE_CART;
 
-    /** @var ShippingMethodInterface|null */
+    /**
+     * @var ShippingMethodInterface|null
+     */
     protected $method;
 
     /**
@@ -37,10 +41,14 @@ class Shipment implements ShipmentInterface
      */
     protected $units;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     protected $tracking;
 
-    /** @var \DateTimeInterface|null */
+    /**
+     * @var \DateTimeInterface|null
+     */
     protected $shippedAt;
 
     public function __construct()
@@ -55,65 +63,41 @@ class Shipment implements ShipmentInterface
         return (string) $this->getId();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getState(): ?string
     {
         return $this->state;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setState(?string $state): void
     {
         $this->state = $state;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMethod(): ?ShippingMethodInterface
     {
         return $this->method;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setMethod(?ShippingMethodInterface $method): void
     {
         $this->method = $method;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUnits(): Collection
     {
         return $this->units;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasUnit(ShipmentUnitInterface $unit): bool
     {
         return $this->units->contains($unit);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addUnit(ShipmentUnitInterface $unit): void
     {
         if (!$this->hasUnit($unit)) {
@@ -122,9 +106,6 @@ class Shipment implements ShipmentInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeUnit(ShipmentUnitInterface $unit): void
     {
         if ($this->hasUnit($unit)) {
@@ -133,33 +114,21 @@ class Shipment implements ShipmentInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTracking(): ?string
     {
         return $this->tracking;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setTracking(?string $tracking): void
     {
         $this->tracking = $tracking;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isTracked(): bool
     {
         return null !== $this->tracking;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getShippables(): Collection
     {
         /** @var ArrayCollection<array-key, ShippableInterface> $shippables */
@@ -175,9 +144,6 @@ class Shipment implements ShipmentInterface
         return $shippables;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getShippingWeight(): float
     {
         $weight = 0;
@@ -189,9 +155,6 @@ class Shipment implements ShipmentInterface
         return $weight;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getShippingVolume(): float
     {
         $volume = 0;
@@ -203,17 +166,11 @@ class Shipment implements ShipmentInterface
         return $volume;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getShippingUnitCount(): int
     {
         return $this->units->count();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getShippingUnitTotal(): int
     {
         return 0;

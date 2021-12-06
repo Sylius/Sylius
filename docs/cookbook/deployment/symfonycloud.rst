@@ -122,7 +122,7 @@ git repository and create your first commit:
             (>&2
                 # Setup everything to use the Node installation
                 unset NPM_CONFIG_PREFIX
-                export NVM_DIR=$HOME/.nvm GULP_ENV=prod
+                export NVM_DIR=${SYMFONY_APP_DIR}/.nvm GULP_ENV=prod
                 set +x && . "${NVM_DIR}/nvm.sh" use --lts && set -x
                 # Starting from here, everything is setup to use the same Node
                 yarn build

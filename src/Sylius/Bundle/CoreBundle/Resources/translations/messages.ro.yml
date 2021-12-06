@@ -9,9 +9,12 @@ sylius:
             title: Titlu
         cart:
             coupon: Cod promoțional
+        catalog_promotion:
+            channels: Canale
         checkout:
             addressing:
                 different_billing_address: Folosiți o adresă de facturare diferită?
+                different_shipping_address: Folosiți o adresă diferită pentru livrare?
             payment_method: Metoda de plată
             shipping_method: Metoda de livrare
         promotion:
@@ -21,6 +24,7 @@ sylius:
                 product: Produs
         promotion_coupon:
             per_customer_usage_limit: Limita de utilizare per client
+            reusable_from_cancelled_orders: Reutilizabil din comenzile anulate
         group:
             name: Nume produs
             roles: Roluri
@@ -31,15 +35,19 @@ sylius:
                 country: Țară
                 postcode: Cod poștal
                 street: Adresă
+                tax_id: Cod Unic de identificare fiscală
             contact_email: E-mail de contact
+            countries: Țări
             currencies: Monede
             currency_base: Monedă de bază
             account_verification_required: Este necesară verificarea conturilor?
             hostname: Nume domeniu
             locale_default: Setări regionale implicite
             locales: Setări regionale
+            menu_taxon: Meniu categorie
             payment_methods: Metode de plată
             shipping_methods: Metode de livrare
+            shop_billing_data: Date de facturare magazin
             skipping_shipping_step_allowed: Treci peste pasul de livrare dacă există o singură metodă disponibilă?
             skipping_payment_step_allowed: Treci peste pasul de plată dacă există o singură metodă disponibilă?
             tax_calculation_strategy: Strategia de calcul a taxelor
@@ -58,7 +66,7 @@ sylius:
             number: Număr
             total_from: De la
             total_to: Până la
-            payment_state: Status plată
+            payment_state: Statusul plății
             channel: Toate canalele
         page:
             body: Corp
@@ -68,7 +76,7 @@ sylius:
             images: Imagini
             restricted_zone: Zonă cu restricție
             short_description: Descriere scurtă
-            variant_selection_method: Metoda de selectare a variantei
+            variant_selection_method: Metoda de selecţie a variantei
             main_taxon: Taxonul principal
             channels: Canale
             enabled: Activat
@@ -99,15 +107,15 @@ sylius:
         taxonomy:
             file: Alege imagine
         user:
-            billing_address: Adresa de facturare
-            different_billing_address: Folosiți o adresă de facturare diferită?
+            billing_address: Adresă de facturare
+            different_shipping_address: Folosiți o adresă diferită pentru livrare?
             enabled: Activat
             first_name: Prenume
             groups: Grupuri
             roles: Roluri
             last_name: Nume
             password: Parolă
-            shipping_address: Adresa de livrare
+            shipping_address: Adresă de livrare
         user_filter:
             query: Căutare
         variant:
@@ -124,7 +132,7 @@ sylius:
                 attribute: Atribut
                 value: Valoare
         guest:
-            email: Adresă e-mail
+            email: E-mail
         product_association:
             product: Produs asociat
             type: Tipul de asociere
@@ -196,6 +204,7 @@ sylius:
             header: Versiunea PHP şi setări
             any: oricare
             detect_unicode: detect_unicode
+            detect_unicode_help: Setați 'detect_unicode = Off' în fișierul dvs. php.ini
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: nu este deprecat
             off: false
@@ -203,13 +212,16 @@ sylius:
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
+                auto_start_help: Seteaza 'session.auto_start = Off' in fisierul php.ini
             short_open_tag: short_open_tag
             timezone: Fus orar
+            timezone_help: Setați 'date.timezone' în fișierul dvs. php.ini (de ex. date.timezone = "Europe/Amsterdam")
             timezone_deprecated:
                 header: Fus orar învechit
                 help: Fusul orar %timezone% este învechit. Corectează fişierul php.ini (lista fusuri orere învechite http://php.net/manual/en/timezones.others.php).
             version: Versiunea PHP
             version_recommended: Versiunea PHP recomandată
+            version_help: Sylius recomandă versiunea %recommended% de PHP, versiunea curentă este %current%. Vă rugăm să actualizați.
     payum_gateway:
         cash_on_delivery: Plată la livrare (ramburs)
         offline: Offline

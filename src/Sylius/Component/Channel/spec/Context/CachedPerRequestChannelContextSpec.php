@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Channel\Context;
 
-use Pamil\ProphecyCommon\Promise\CompositePromise;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
@@ -116,7 +115,29 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
 
         $decoratedChannelContext
             ->getChannel()
-            ->will(CompositePromise::it()->willThrow(ChannelNotFoundException::class)->andThenReturn($channel))
+            ->will(new class($channel->getWrappedObject()) {
+                private int $counter = 0;
+
+                private ChannelInterface $channel;
+
+                public function __construct(ChannelInterface $channel)
+                {
+                    $this->channel = $channel;
+                }
+
+                /** @throws ChannelNotFoundException */
+                public function __invoke(): ChannelInterface
+                {
+                    $currentCounter = $this->counter;
+                    ++$this->counter;
+
+                    if ($currentCounter === 0) {
+                        throw new ChannelNotFoundException();
+                    }
+
+                    return $this->channel;
+                }
+            })
             ->shouldBeCalledTimes(2)
         ;
 

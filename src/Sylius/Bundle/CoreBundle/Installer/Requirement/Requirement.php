@@ -15,17 +15,13 @@ namespace Sylius\Bundle\CoreBundle\Installer\Requirement;
 
 final class Requirement
 {
-    /** @var string */
-    private $label;
+    private string $label;
 
-    /** @var bool */
-    private $fulfilled;
+    private bool $fulfilled;
 
-    /** @var bool */
-    private $required;
+    private bool $required;
 
-    /** @var string|null */
-    private $help;
+    private ?string $help;
 
     public function __construct(string $label, bool $fulfilled, bool $required = true, ?string $help = null)
     {

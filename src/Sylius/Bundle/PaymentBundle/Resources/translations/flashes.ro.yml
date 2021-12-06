@@ -3,6 +3,7 @@
 
 sylius:
     payment:
+        authorized: 'Plata a fost autorizată.'
         cancelled: 'Plata a fost anulată.'
         completed: 'Plata a fost finalizată.'
         failed: 'Plata a eșuat.'

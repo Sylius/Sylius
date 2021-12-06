@@ -24,11 +24,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductAssociationsType extends AbstractType
 {
-    /** @var RepositoryInterface */
-    private $productAssociationTypeRepository;
+    private RepositoryInterface $productAssociationTypeRepository;
 
-    /** @var DataTransformerInterface */
-    private $productsToProductAssociationsTransformer;
+    private DataTransformerInterface $productsToProductAssociationsTransformer;
 
     public function __construct(
         RepositoryInterface $productAssociationTypeRepository,
@@ -38,17 +36,11 @@ final class ProductAssociationsType extends AbstractType
         $this->productsToProductAssociationsTransformer = $productsToProductAssociationsTransformer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addModelTransformer($this->productsToProductAssociationsTransformer);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -65,17 +57,11 @@ final class ProductAssociationsType extends AbstractType
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return FixedCollectionType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_product_associations';

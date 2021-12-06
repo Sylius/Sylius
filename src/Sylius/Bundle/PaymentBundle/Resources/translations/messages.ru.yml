@@ -12,7 +12,7 @@ sylius:
             type: Тип карты
         payment:
             amount: Сумма платежа
-            method: Метод платежа
+            method: Способ оплаты
             state:
                 header: Статус платежа
                 checkout: Сверка

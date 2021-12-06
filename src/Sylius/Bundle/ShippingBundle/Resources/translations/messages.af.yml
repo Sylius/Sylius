@@ -3,7 +3,23 @@
 
 sylius:
     form:
+        shipment:
+            state: Staat
+            states:
+                pending: Hangende
+                ready: Gereed
+                returned: Teruggestuur
+                cancelled: Gekanselleer
         shipping_category:
+            description: Beskrywing
             name: Naam
         shipping_method:
+            calculator: Sakrekenaar
+            channels: Kanale
+            configuration: Konfigurasie
+            description: Beskrywing
+            enabled: Aktief
             name: Naam
+            translations: Vertalings
+        shipping_method_rule:
+            type: Tipe

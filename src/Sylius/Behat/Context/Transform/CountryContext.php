@@ -20,11 +20,9 @@ use Webmozart\Assert\Assert;
 
 final class CountryContext implements Context
 {
-    /** @var CountryNameConverterInterface */
-    private $countryNameConverter;
+    private CountryNameConverterInterface $countryNameConverter;
 
-    /** @var RepositoryInterface */
-    private $countryRepository;
+    private RepositoryInterface $countryRepository;
 
     public function __construct(
         CountryNameConverterInterface $countryNameConverter,
@@ -40,6 +38,7 @@ final class CountryContext implements Context
      * @Transform /^"([^"]+)" as shipping country$/
      * @Transform /^"([^"]+)" as billing country$/
      * @Transform :country
+     * @Transform :otherCountry
      */
     public function getCountryByName($countryName)
     {
@@ -52,5 +51,13 @@ final class CountryContext implements Context
         );
 
         return $country;
+    }
+
+    /**
+     * @Transform :countryCode
+     */
+    public function getCountryCodeByName(string $countryName): string
+    {
+        return $this->countryNameConverter->convertToCode($countryName);
     }
 }

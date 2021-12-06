@@ -26,11 +26,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class GenerateCouponsCommand extends Command
 {
-    /** @var PromotionRepositoryInterface */
-    private $promotionRepository;
+    protected static $defaultName = 'sylius:promotion:generate-coupons';
 
-    /** @var PromotionCouponGeneratorInterface */
-    private $couponGenerator;
+    private PromotionRepositoryInterface $promotionRepository;
+
+    private PromotionCouponGeneratorInterface $couponGenerator;
 
     public function __construct(
         PromotionRepositoryInterface $promotionRepository,
@@ -45,11 +45,10 @@ final class GenerateCouponsCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setName('sylius:promotion:generate-coupons')
             ->setDescription('Generates coupons for a given promotion')
             ->addArgument('promotion-code', InputArgument::REQUIRED, 'Code of the promotion')
             ->addArgument('count', InputArgument::REQUIRED, 'Amount of coupons to generate')
-            ->addOption('length', 'len', InputOption::VALUE_OPTIONAL, 'Length of the coupon code (default 10)', 10)
+            ->addOption('length', 'len', InputOption::VALUE_OPTIONAL, 'Length of the coupon code (default 10)', '10')
         ;
     }
 

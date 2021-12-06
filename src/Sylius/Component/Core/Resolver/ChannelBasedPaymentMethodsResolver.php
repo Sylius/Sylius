@@ -21,17 +21,13 @@ use Webmozart\Assert\Assert;
 
 final class ChannelBasedPaymentMethodsResolver implements PaymentMethodsResolverInterface
 {
-    /** @var PaymentMethodRepositoryInterface */
-    private $paymentMethodRepository;
+    private PaymentMethodRepositoryInterface $paymentMethodRepository;
 
     public function __construct(PaymentMethodRepositoryInterface $paymentMethodRepository)
     {
         $this->paymentMethodRepository = $paymentMethodRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSupportedMethods(BasePaymentInterface $payment): array
     {
         /** @var PaymentInterface $payment */
@@ -41,9 +37,6 @@ final class ChannelBasedPaymentMethodsResolver implements PaymentMethodsResolver
         return $this->paymentMethodRepository->findEnabledForChannel($payment->getOrder()->getChannel());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(BasePaymentInterface $payment): bool
     {
         return $payment instanceof PaymentInterface &&

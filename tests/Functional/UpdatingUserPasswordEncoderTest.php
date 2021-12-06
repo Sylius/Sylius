@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\AbstractResourceOwner;
@@ -59,7 +59,7 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
 
         $shopUser = $shopUserRepository->findOneByEmail('Oliver@doe.com');
         $shopUser->setPlainPassword('testpassword');
-        $shopUser->setEncoderName('sha512');
+        $shopUser->setEncoderName('argon2i');
 
         $shopUserManager->persist($shopUser);
         $shopUserManager->flush();
@@ -73,7 +73,7 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
 
         Assert::assertSame(200, $this->client->getResponse()->getStatusCode());
         Assert::assertSame('/en_US/', parse_url($this->client->getCrawler()->getUri(), \PHP_URL_PATH));
-        Assert::assertSame('argon2i', $shopUserRepository->findOneByEmail('Oliver@doe.com')->getEncoderName());
+        Assert::assertSame('sha512', $shopUserRepository->findOneByEmail('Oliver@doe.com')->getEncoderName());
     }
 
     /** @test */
@@ -87,7 +87,7 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
 
         $adminUser = $adminUserRepository->findOneByEmail('user@example.com');
         $adminUser->setPlainPassword('testpassword');
-        $adminUser->setEncoderName('sha512');
+        $adminUser->setEncoderName('argon2i');
 
         $adminUserManager->persist($adminUser);
         $adminUserManager->flush();
@@ -101,7 +101,7 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
 
         Assert::assertSame(200, $this->client->getResponse()->getStatusCode());
         Assert::assertSame('/admin/', parse_url($this->client->getCrawler()->getUri(), \PHP_URL_PATH));
-        Assert::assertSame('argon2i', $adminUserRepository->findOneByEmail('user@example.com')->getEncoderName());
+        Assert::assertSame('sha512', $adminUserRepository->findOneByEmail('user@example.com')->getEncoderName());
     }
 
     /** @test */

@@ -34,6 +34,10 @@ In order to customize a translation in your project:
     You can create different files for different locales (languages). For example ``messages.pl.yaml`` should hold only Polish translations,
     as they will be visible when the current locale is ``PL``. Check the :doc:`Locales </book/configuration/locales>` docs for more information.
 
+.. tip::
+
+    Don't forget to clear the cache to see your new translations appear: ``php bin/console cache:clear``.
+
 **2.** In this file, configure the desired key and give it a translation.
 
 If you would like to change the translation of "Email" into "Username" on the login form you have to
@@ -65,4 +69,4 @@ After
     .. image:: ../_images/translations.png
         :align: center
 
-.. include:: /customization/plugins.rst.inc
+.. include:: /customization/plugins.rst

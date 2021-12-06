@@ -22,4 +22,8 @@ interface IndexPageInterface extends CrudIndexPageInterface
     public function hasProductAccessibleImage(string $productCode): bool;
 
     public function showProductPage(string $productName): void;
+
+    public function chooseChannelFilter(string $channelName): void;
+
+    public function filter(): void;
 }

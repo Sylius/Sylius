@@ -20,11 +20,9 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 
 final class ManagingAdministratorLocalesContext implements Context
 {
-    /** @var UpdatePageInterface */
-    private $updatePage;
+    private UpdatePageInterface $updatePage;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
     public function __construct(UpdatePageInterface $updatePage, SharedStorageInterface $sharedStorage)
     {

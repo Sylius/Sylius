@@ -1,0 +1,87 @@
+{
+    "@context": "\/api\/v2\/contexts\/Taxon",
+    "@id": "\/api\/v2\/shop\/taxons",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/MUG",
+            "@type": "Taxon",
+            "id": "@integer@",
+            "code": "MUG",
+            "children": [],
+            "translations": {
+                "de_DE": {
+                    "@id": "\/api\/v2\/shop\/taxon-translations\/@integer@",
+                    "@type": "TaxonTranslation",
+                    "id": "@integer@",
+                    "name": "Tassen",
+                    "slug": "tassen",
+                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet."
+                },
+                "en_US": {
+                    "@id": "\/api\/v2\/shop\/taxon-translations\/@integer@",
+                    "@type": "TaxonTranslation",
+                    "id": "@integer@",
+                    "name": "Mugs",
+                    "slug": "categories\/mugs",
+                    "description": "Some description Lorem ipsum dolor sit amet."
+                }
+            }
+        },
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/HAT",
+            "@type": "Taxon",
+            "id": "@integer@",
+            "code": "HAT",
+            "children": [],
+            "translations": {
+                "de_DE": {
+                    "@id": "\/api\/v2\/shop\/taxon-translations\/@integer@",
+                    "@type": "TaxonTranslation",
+                    "id": "@integer@",
+                    "name": "H\u00fcte",
+                    "slug": "hute",
+                    "description": null
+                },
+                "en_US": {
+                    "@id": "\/api\/v2\/shop\/taxon-translations\/@integer@",
+                    "@type": "TaxonTranslation",
+                    "id": "@integer@",
+                    "name": "Hats",
+                    "slug": "categories\/hats",
+                    "description": "Some description Lorem ipsum dolor sit amet."
+                }
+            }
+        },
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/T_SHIRTS",
+            "@type": "Taxon",
+            "id": "@integer@",
+            "code": "T_SHIRTS",
+            "children": [
+                "\/api\/v2\/shop\/taxons\/MEN_T_SHIRTS",
+                "\/api\/v2\/shop\/taxons\/WOMEN_T_SHIRTS"
+            ],
+            "translations": {
+                "de_DE": {
+                    "@id": "\/api\/v2\/shop\/taxon-translations\/@integer@",
+                    "@type": "TaxonTranslation",
+                    "id": "@integer@",
+                    "name": "T-Shirts",
+                    "slug": "t-shirts",
+                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet."
+                },
+                "en_US": {
+                    "@id": "\/api\/v2\/shop\/taxon-translations\/@integer@",
+                    "@type": "TaxonTranslation",
+                    "id": "@integer@",
+                    "name": "T-Shirts",
+                    "slug": "categories\/t-shirts",
+                    "description": "Some description Lorem ipsum dolor sit amet."
+                }
+            }
+        }
+    ],
+    "hydra:totalItems": 3
+
+}

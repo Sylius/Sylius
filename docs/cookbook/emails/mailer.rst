@@ -22,11 +22,11 @@ on by default, so there is nothing to worry about if you did not change anything
 
 .. warning::
 
-    Remember that the parameters like username or password must not be commited publicly to your repository.
+    Remember that the parameters like username or password must not be committed publicly to your repository.
     Save them as environment variables on your server.
 
 Learn More
 ----------
 
 * :doc:`Emails Concept </book/architecture/emails>`
-* `Sending configurable e-mails in Symfony Blogpost <http://sylius.com/blog/sending-configurable-e-mails-in-symfony>`_
+* `Sending configurable e-mails in Symfony Blogpost <https://sylius.com/blog/sending-configurable-e-mails-in-symfony>`_

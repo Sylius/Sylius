@@ -14,19 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Resource\Metadata\RegistryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Webmozart\Assert\Assert;
 
 final class ShippingCalculatorContext implements Context
 {
-    /** @var array */
-    private $shippingCalculators;
+    private array $shippingCalculators;
 
-    /** @var TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
     public function __construct(array $shippingCalculators, TranslatorInterface $translator)
     {

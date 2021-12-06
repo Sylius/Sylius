@@ -19,8 +19,7 @@ use Webmozart\Assert\Assert;
 
 final class ChannelContext implements Context
 {
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
+    private ChannelRepositoryInterface $channelRepository;
 
     public function __construct(ChannelRepositoryInterface $channelRepository)
     {

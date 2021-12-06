@@ -17,21 +17,30 @@
 >
     <class name="Sylius\Component\Shipping\Model\ShippingMethodTranslation">
         <attribute name="id">
-            <group>shipping_method:read</group>
+            <group>admin:shipping_method:read</group>
+            <group>shop:shipping_method:read</group>
         </attribute>
+
         <attribute name="name">
-            <group>shipping_method:read</group>
-            <group>shipping_method:create</group>
-            <group>shipping_method:update</group>
+            <group>admin:shipping_method:create</group>
+            <group>admin:shipping_method:read</group>
+            <group>admin:shipping_method:update</group>
+            <group>shop:cart:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:shipping_method:read</group>
+            <group>shop:shipment:read</group>
         </attribute>
+
         <attribute name="description">
-            <group>shipping_method:read</group>
-            <group>shipping_method:create</group>
-            <group>shipping_method:update</group>
+            <group>admin:shipping_method:create</group>
+            <group>admin:shipping_method:read</group>
+            <group>admin:shipping_method:update</group>
+            <group>shop:shipping_method:read</group>
         </attribute>
+
         <attribute name="locale">
-            <group>shipping_method:create</group>
-            <group>shipping_method:update</group>
+            <group>admin:shipping_method:create</group>
+            <group>admin:shipping_method:update</group>
         </attribute>
     </class>
 </serializer>

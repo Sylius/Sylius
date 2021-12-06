@@ -1,0 +1,6 @@
+Sylius\Component\Core\Model\TaxRate:
+    exclusion_policy: ALL
+    xml_root_name: tax-rate
+    properties:
+        zone:
+            expose: false

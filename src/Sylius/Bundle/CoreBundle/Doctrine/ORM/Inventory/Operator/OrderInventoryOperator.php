@@ -22,11 +22,9 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 
 final class OrderInventoryOperator implements OrderInventoryOperatorInterface
 {
-    /** @var OrderInventoryOperatorInterface */
-    private $decoratedOperator;
+    private OrderInventoryOperatorInterface $decoratedOperator;
 
-    /** @var EntityManagerInterface */
-    private $productVariantManager;
+    private EntityManagerInterface $productVariantManager;
 
     public function __construct(
         OrderInventoryOperatorInterface $decoratedOperator,
@@ -37,8 +35,6 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws OptimisticLockException
      */
     public function cancel(OrderInterface $order): void
@@ -49,8 +45,6 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws OptimisticLockException
      */
     public function hold(OrderInterface $order): void
@@ -61,8 +55,6 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws OptimisticLockException
      */
     public function sell(OrderInterface $order): void

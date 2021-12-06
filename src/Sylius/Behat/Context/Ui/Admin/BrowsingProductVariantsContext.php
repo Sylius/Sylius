@@ -22,11 +22,9 @@ use Webmozart\Assert\Assert;
 
 final class BrowsingProductVariantsContext implements Context
 {
-    /** @var IndexPageInterface */
-    private $indexPage;
+    private IndexPageInterface $indexPage;
 
-    /** @var ProductVariantResolverInterface */
-    private $defaultProductVariantResolver;
+    private ProductVariantResolverInterface $defaultProductVariantResolver;
 
     public function __construct(
         IndexPageInterface $indexPage,
@@ -269,6 +267,17 @@ final class BrowsingProductVariantsContext implements Context
     public function iShouldBeOnTheListOfThisProductVariants(ProductInterface $product): void
     {
         Assert::true($this->indexPage->isOpen(['productId' => $product->getId()]));
+    }
+
+    /**
+     * @Then /^I should see that the ("([^"]*)" variant) is enabled$/
+     */
+    public function iShouldSeeThatTheVariantIsEnabled(ProductVariantInterface $productVariant): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'name' => $productVariant->getName(),
+            'enabled' => 'Enabled',
+        ]));
     }
 
     /**

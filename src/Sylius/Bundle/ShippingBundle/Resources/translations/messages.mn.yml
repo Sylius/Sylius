@@ -1,0 +1,52 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        rule:
+            unit_count_configuration:
+                count: Тоо ширхэг
+                equal: Тэнцүү
+            type: Дүрмийн төрөл
+        shipment:
+            state: Муж
+            states:
+                checkout: Төлбөр төлөх
+                pending: Хүлээгдэж байгаа
+                ready: Бэлэн
+                shipped: Илгээгдсэн
+                returned: Буцаагдсан
+                cancelled: Цуцлагдсан
+            tracking_code: Хяналтын код
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Нийт дүн
+            per_unit_rate_configuration:
+                amount: Нийт дүн
+        shipping_category:
+            description: Тодорхойлолт
+            name: Нэр
+        shipping_method:
+            add_rule: Дүрэм нэмэх
+            calculator: Тооцоологч
+            category: Ангилал
+            category_requirement: Ангиллын шаардлага
+            channels: Сувгууд
+            configuration: Тохируулга
+            description: Тодорхойлолт
+            enabled: Идэвхтэй
+            name: Нэр
+            position: Байрлал
+            rules: Дүрмүүд
+            rules_help: Энэхүү хүргэлтийн төрлийн тухайн захиалгад ашиглаж болох эсэхийг шийдэхийн тулд дүрмийг ашиглана уу. Дүрэм үнэн бол энэ хүргэлтийн төрлийг ашиглаж болно. Хэрэв та олон дүрмийг нэмж оруулбал бүх дүрмүүд үнэн байх ёстойг анхаарна уу.
+            tax_category: Таксийн ангилал
+            translations: Орчуулгууд
+        shipping_method_rule:
+            order_total_greater_than_or_equal: Нийт захиалга их эсвэл тэнцүү
+            order_total_less_than_or_equal: Нийт захиалга бага эсвэл тэнцүү
+            type: Төрөл
+            total: Нийт
+            total_weight_greater_than_or_equal: Нийт жин их эсвэл тэнцүү
+            total_weight_less_than_or_equal: Нийт жин бага эсвэл тэнцүү
+            weight: Жин
+            amount: Нийт дүн

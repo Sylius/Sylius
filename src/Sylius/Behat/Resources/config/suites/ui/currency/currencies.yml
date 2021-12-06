@@ -19,4 +19,4 @@ default:
                 - sylius.behat.context.ui.shop.currency
 
             filters:
-                tags: "@currencies && @ui"
+                tags: "@currencies&&@ui"

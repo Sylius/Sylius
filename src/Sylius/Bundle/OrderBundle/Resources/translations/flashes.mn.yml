@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: 'Барааг сагсанд нэмсэн.'
+        cannot_modify: 'Таны өөрчлөх гэж байсан сагсны захиалгыг аль хэдийн илгээсэн байна.'
+        remove_item: 'Барааг сагснаас хассан.'
+        save: 'Энэ сагс амжилттай шинэчлэгдлээ.'

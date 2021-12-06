@@ -17,9 +17,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 
 final class OrderType extends AbstractResourceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_order';

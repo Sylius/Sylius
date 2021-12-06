@@ -6,3 +6,4 @@
 
 /phpunit.xml
 /phpspec.yml
+/.phpunit.result.cache

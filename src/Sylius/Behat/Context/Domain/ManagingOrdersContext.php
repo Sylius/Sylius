@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -26,29 +27,21 @@ use Webmozart\Assert\Assert;
 
 final class ManagingOrdersContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /** @var RepositoryInterface */
-    private $orderItemRepository;
+    private RepositoryInterface $orderItemRepository;
 
-    /** @var RepositoryInterface */
-    private $addressRepository;
+    private RepositoryInterface $addressRepository;
 
-    /** @var RepositoryInterface */
-    private $adjustmentRepository;
+    private RepositoryInterface $adjustmentRepository;
 
-    /** @var ObjectManager */
-    private $orderManager;
+    private ObjectManager $orderManager;
 
-    /** @var ProductVariantResolverInterface */
-    private $variantResolver;
+    private ProductVariantResolverInterface $variantResolver;
 
-    /** @var UnpaidOrdersStateUpdaterInterface */
-    private $unpaidOrdersStateUpdater;
+    private UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -88,6 +81,14 @@ final class ManagingOrdersContext implements Context
 
         $this->sharedStorage->set('order_id', $order->getId());
         $this->orderRepository->remove($order);
+    }
+
+    /**
+     * @When I view the summary of the order :order
+     */
+    public function iViewTheSummaryOfTheOrder(OrderInterface $order): void
+    {
+        $this->sharedStorage->set('order', $order);
     }
 
     /**
@@ -160,5 +161,69 @@ final class ManagingOrdersContext implements Context
     public function thisOrderShouldNotBeCancelled(OrderInterface $order)
     {
         Assert::notSame($order->getState(), OrderInterface::STATE_CANCELLED);
+    }
+
+    /**
+     * @Then /^(the order)'s items total should be ("[^"]+")$/
+     */
+    public function theOrdersItemsTotalShouldBe(OrderInterface $order, int $itemsTotal): void
+    {
+        Assert::same($order->getItemsTotal(), $itemsTotal);
+    }
+
+    /**
+     * @Then /^there should be a shipping charge ("[^"]+") for "([^"]+)" method$/
+     */
+    public function thereShouldBeAShippingChargeForMethod(int $shippingCharge, string $shippingMethodName): void
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+        foreach ($order->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT) as $adjustment) {
+            if ($adjustment->getAmount() === $shippingCharge && $adjustment->getDetails()['shippingMethodName'] === $shippingMethodName) {
+                return;
+            }
+        }
+
+        throw new \DomainException('The given order has no shipping adjustment with proper amount and method');
+    }
+
+    /**
+     * @Then /^there should be a shipping tax ("[^"]+") for "([^"]+)" method$/
+     */
+    public function thereShouldBeAShippingTaxForMethod(int $shippingTax, string $shippingMethodName): void
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+        foreach ($order->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT) as $adjustment) {
+            if ($adjustment->getAmount() === $shippingTax && $adjustment->getDetails()['shippingMethodName'] === $shippingMethodName) {
+                return;
+            }
+        }
+
+        throw new \DomainException('The given order has no shipping adjustment with proper amount and method');
+    }
+
+    /**
+     * @Then /^(the order)'s shipping total should be ("[^"]+")$/
+     */
+    public function theOrdersShippingTotalShouldBe(OrderInterface $order, int $shippingTotal): void
+    {
+        Assert::same($order->getShippingTotal(), $shippingTotal);
+    }
+
+    /**
+     * @Then /^(the order)'s tax total should be ("[^"]+")$/
+     */
+    public function theOrdersTaxTotalShouldBe(OrderInterface $order, int $taxTotal): void
+    {
+        Assert::same($order->getTaxTotal(), $taxTotal);
+    }
+
+    /**
+     * @Then /^(the order)'s total should be ("[^"]+")$/
+     */
+    public function theOrdersTotalShouldBe(OrderInterface $order, int $total): void
+    {
+        Assert::same($order->getTotal(), $total);
     }
 }

@@ -1,4 +1,35 @@
 sylius:
+    email:
+        order_confirmation:
+            has_been_successfully_placed: 'has been successfully placed.'
+            subject: 'Order confirmation'
+            view_order_or_change_payment_method: 'View order or change payment method'
+            thank_you: 'Thank you for shopping at our store!'
+            your_order_number: 'Your order no.'
+        password_reset:
+            hello: 'Hello'
+            reset_your_password: 'Reset your password'
+            subject: 'Password reset'
+            to_reset_your_password: 'To reset your password - click the link below'
+            to_reset_your_password_token: 'To reset your password - use the token below'
+            token: 'Your password reset token is'
+        shipment_confirmation:
+            has_been_sent_using: 'has been sent using'
+            subject: 'Shipment confirmation'
+            thank_you_for_transaction: 'Thank you for a successful transaction.'
+            you_can_check_its_location_with_the_tracking_code: 'You can check it''s location with the %tracking_code% tracking code.'
+            your_order_with_number: 'Your order with number'
+        user_registration:
+            start_shopping: 'Start shopping'
+            subject: 'User registration'
+            welcome_to_our_store: 'Welcome to our store!'
+            you_have_just_been_registered: 'You have just been registered. Thank you'
+        verification_token:
+            hello: 'Hello'
+            message: 'Verify your account with token: '
+            subject: 'Email address verification'
+            to_verify_your_email_address: 'To verify your email address - click the link below'
+            verify_your_email_address: 'Verify your email address'
     form:
         block:
             body: Body
@@ -6,6 +37,12 @@ sylius:
             title: Title
         cart:
             coupon: Coupon
+        catalog_promotion:
+            channels: Channels
+            scope:
+                for_products: For products
+                for_taxons: For taxons
+                for_variants: For variants
         checkout:
             addressing:
                 different_billing_address: Use different address for billing?
@@ -32,6 +69,7 @@ sylius:
                 street: Street
                 tax_id: Tax ID
             contact_email: Contact email
+            contact_phone_number: Contact phone number
             countries: Countries
             currencies: Currencies
             currency_base: Base currency
@@ -122,6 +160,7 @@ sylius:
             shipping_required: Is shipping required?
             weight: Weight
             width: Width
+            tracked_help: If this option is enabled Sylius will keep track of the stock and will stop selling the product once stock reaches 0.
         attribute:
             product_attribute_value:
                 attribute: Attribute

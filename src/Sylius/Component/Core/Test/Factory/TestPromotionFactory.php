@@ -20,17 +20,13 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class TestPromotionFactory implements TestPromotionFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $promotionFactory;
+    private FactoryInterface $promotionFactory;
 
     public function __construct(FactoryInterface $promotionFactory)
     {
         $this->promotionFactory = $promotionFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(string $name): PromotionInterface
     {
         /** @var PromotionInterface $promotion */
@@ -44,9 +40,6 @@ final class TestPromotionFactory implements TestPromotionFactoryInterface
         return $promotion;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createForChannel(string $name, ChannelInterface $channel): PromotionInterface
     {
         $promotion = $this->create($name);

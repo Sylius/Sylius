@@ -11,11 +11,12 @@ sylius:
             last_name: Prezime
             phone_number: Broj telefona
             postcode: Poštanski broj
+            street: Ulica
             province: Pokrajina
             zone: Zona
         country:
             add_province: Dodaj provinciju
-            name: Ime
+            name: ime
             provinces: Provincije
             select: Izaberite
             enabled: Omogućeno

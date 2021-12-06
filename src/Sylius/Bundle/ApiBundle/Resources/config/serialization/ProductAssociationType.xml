@@ -17,25 +17,25 @@
 >
     <class name="Sylius\Component\Product\Model\ProductAssociationType">
         <attribute name="id">
-            <group>product_association_type:read</group>
+            <group>admin:product_association_type:read</group>
         </attribute>
         <attribute name="code">
-            <group>product_association_type:read</group>
-            <group>product_association_type:create</group>
+            <group>admin:product_association_type:read</group>
+            <group>admin:product_association_type:create</group>
         </attribute>
         <attribute name="name">
-            <group>product_association_type:read</group>
+            <group>admin:product_association_type:read</group>
         </attribute>
         <attribute name="createdAt">
-            <group>product_association_type:read</group>
+            <group>admin:product_association_type:read</group>
         </attribute>
         <attribute name="updatedAt">
-            <group>product_association_type:read</group>
+            <group>admin:product_association_type:read</group>
         </attribute>
         <attribute name="translations">
-            <group>product_association_type:read</group>
-            <group>product_association_type:create</group>
-            <group>product_association_type:update</group>
+            <group>admin:product_association_type:read</group>
+            <group>admin:product_association_type:create</group>
+            <group>admin:product_association_type:update</group>
         </attribute>
     </class>
 </serializer>

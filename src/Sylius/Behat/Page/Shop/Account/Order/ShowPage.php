@@ -16,12 +16,12 @@ namespace Sylius\Behat\Page\Shop\Account\Order;
 use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
-    /** @var TableAccessorInterface */
-    private $tableAccessor;
+    private TableAccessorInterface $tableAccessor;
 
     public function __construct(
         Session $session,
@@ -69,6 +69,30 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $billingAddressText = $this->getElement('billing_address')->getText();
 
         return $this->hasAddress($billingAddressText, $customerName, $street, $postcode, $city, $countryName);
+    }
+
+    public function choosePaymentMethod(PaymentMethodInterface $paymentMethod): void
+    {
+        $paymentMethodElement = $this->getElement('payment_method', ['%name%' => $paymentMethod->getName()]);
+        $paymentMethodElement->selectOption($paymentMethodElement->getAttribute('value'));
+    }
+
+    public function pay(): void
+    {
+        $this->getElement('pay_link')->click();
+    }
+
+    public function getChosenPaymentMethod(): string
+    {
+        $paymentMethodItems = $this->getDocument()->findAll('css', '[data-test-payment-item]');
+
+        foreach ($paymentMethodItems as $method) {
+            if ($method->find('css', '[data-test-payment-method-select]')->hasAttribute('checked')) {
+                return $method->find('css', 'a')->getText();
+            }
+        }
+
+        return '';
     }
 
     public function getTotal(): string
@@ -147,6 +171,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'order_items' => '[data-test-order-table]',
             'order_payment_state' => '[data-test-order-payment-state]',
             'order_shipment_state' => '[data-test-order-shipment-state]',
+            'pay_link' => '[data-test-pay-link]',
+            'payment_method' => '[data-test-payment-item]:contains("%name%") [data-test-payment-method-select]',
             'payment_price' => '[data-test-payment-price]',
             'payment_state' => '[data-test-payment-state]',
             'product_name' => '[data-test-order-table] [data-test-product-name="%productName%"]',

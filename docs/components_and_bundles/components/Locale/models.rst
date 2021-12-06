@@ -38,4 +38,4 @@ Locale has the following properties:
 
 .. _Sylius API Locale: http://api.sylius.com/Sylius/Component/Locale/Model/Locale.html
 
-.. _Symfony Intl component: http://symfony.com/doc/current/components/intl.html
+.. _Symfony Intl component: https://symfony.com/doc/current/components/intl.html

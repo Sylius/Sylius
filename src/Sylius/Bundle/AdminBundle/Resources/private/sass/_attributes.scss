@@ -1,0 +1,99 @@
+.attributes-group {
+    border: 1px solid rgba(34, 36, 38, 0.1);
+
+    &:not(:last-child) {
+        border-bottom: 0;
+    }
+
+    &:first-child {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+
+    &:last-child {
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+    }
+}
+
+.attributes-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(0, 0, 0, 0.03);
+    padding: 0.5em 1.8em;
+    border-bottom: 1px solid rgba(34, 36, 38, 0.1);
+
+    .ui.basic.red.button {
+        box-shadow: none !important;
+
+        &:hover {
+            background: rgba(255, 0, 0, 0.1) !important;
+        }
+    }
+}
+
+.attributes-list {
+    padding: 1.4em 1.8em;
+}
+
+.attribute-row {
+    flex-wrap: wrap;
+    margin: 10px 0;
+
+    @media (min-width: 1152px) {
+        display: flex;
+    }
+}
+
+.attribute-label {
+    align-self: center;
+    width: 200px;
+    margin-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    i {
+        width: 20px;
+        text-align: left;
+    }
+}
+
+.attribute-input {
+    flex-grow: 1;
+}
+
+.attribute-input, .attribute-input div:not(.checkbox) {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+}
+
+.attribute-input *:not(:last-child) {
+    margin-right: 5px;
+}
+
+.attribute-input *:not(:first-child) {
+    margin-left: 5px;
+}
+
+.attribute-input textarea {
+    height: 6em !important;
+    min-height: 6em !important;
+}
+
+.attribute-action > * {
+    margin: 4px 0 !important;
+
+    @media (min-width: 1152px) {
+        margin: 0 0 0 10px !important;
+    }
+}
+
+.attribute-error {
+    width: 100%;
+    text-align: center;
+}

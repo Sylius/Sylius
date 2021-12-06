@@ -17,7 +17,6 @@ default:
                 - sylius.behat.context.setup.taxonomy
 
                 - sylius.behat.context.api.shop.homepage
-                - sylius.behat.context.ui.channel
 
             filters:
-                tags: "@homepage && @api"
+                tags: "@homepage&&@api"

@@ -10,10 +10,10 @@
             <group>shop:product:read</group>
         </attribute>
         <attribute name="name">
-            <group>admin:product:read</group>
-            <group>shop:product:read</group>
             <group>admin:product:create</group>
+            <group>admin:product:read</group>
             <group>admin:product:update</group>
+            <group>shop:product:read</group>
         </attribute>
         <attribute name="locale">
             <group>admin:product:create</group>
@@ -21,8 +21,14 @@
         <attribute name="slug">
             <group>admin:product:create</group>
             <group>admin:product:read</group>
-            <group>shop:product:read</group>
             <group>admin:product:update</group>
+            <group>shop:product:read</group>
+        </attribute>
+        <attribute name="description">
+            <group>shop:product:read</group>
+        </attribute>
+        <attribute name="shortDescription">
+            <group>shop:product:read</group>
         </attribute>
     </class>
 </serializer>

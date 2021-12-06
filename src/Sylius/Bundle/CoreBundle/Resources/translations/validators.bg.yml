@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: Изображението е твърде голям - {{ size }}{{ suffix }}. Максимално допустима размер е {{ limit }}{{ suffix }}.
+            upload_ini_size: Изображението е твърде голям. Максимално допустима размер е {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: Моля въведете основната валута за този канал.
@@ -13,7 +17,6 @@ sylius:
             min: Имейлът трябва да бъде поне {{ limit }} знака.
     channel_pricing:
         price:
-            min: Цена трябва да бъде поне {{ limit }}.
             not_blank: Моля въведете цена.
     checkout:
         shipping_method:
@@ -34,14 +37,11 @@ sylius:
         not_available: '%itemName% не разполага с достатъчна наличност.'
     order:
         currency_code:
-            not_valid: Кода на валутата, която въведохте е невалиден.
+            not_valid: Въведеният от вас валутен код е невалиден.
         payment_method_eligibility: 'Този метод на плащане %paymentMethodName% не е активен. Моля изберете друг метод на плащане.'
         product_eligibility: 'Този продукт %productName% не е активен.'
         shipping_method_eligibility: 'Продукт не покрива изисквания за метод на доставка %shippingMethodName%. Моля изберете друг метод на доставка.'
     locale:
-        code:
-            not_blank: Моля, въведете код на езика.
-            unique: Този езиков код вече съществува.
         enabled:
             cannot_disable_base: Базовия езиков код не може да бъде забранен.
     product:
@@ -77,6 +77,9 @@ sylius:
     product_translation:
         short_description:
             max: Кратко описание трябва да бъде по-дълго от {{ limit }} знака.
+    review:
+        author:
+            not_blank: Моля, въведете вашия имейл.
     taxon_image:
         file:
             max_size: Изображението е твърде голям - {{ size }}{{ suffix }}. Максимално допустима размер е {{ limit }}{{ suffix }}.

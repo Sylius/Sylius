@@ -13,40 +13,56 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Updater;
 
+use Psr\Log\LoggerInterface;
 use SM\Factory\Factory;
+use SM\SMException;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 
 final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterface
 {
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /** @var Factory */
-    private $stateMachineFactory;
+    private Factory $stateMachineFactory;
 
-    /** @var string */
-    private $expirationPeriod;
+    private string $expirationPeriod;
 
-    /**
-     * @param string $expirationPeriod
-     */
+    private ?LoggerInterface $logger;
+
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         Factory $stateMachineFactory,
-        $expirationPeriod
+        string $expirationPeriod,
+        LoggerInterface $logger = null
     ) {
         $this->orderRepository = $orderRepository;
         $this->stateMachineFactory = $stateMachineFactory;
         $this->expirationPeriod = $expirationPeriod;
+        if (null === $logger) {
+            @trigger_error(
+                'Not passing a logger is deprecated since 1.7',
+                \E_USER_DEPRECATED
+            );
+        }
+
+        $this->logger = $logger;
     }
 
     public function cancel(): void
     {
         $expiredUnpaidOrders = $this->orderRepository->findOrdersUnpaidSince(new \DateTime('-' . $this->expirationPeriod));
         foreach ($expiredUnpaidOrders as $expiredUnpaidOrder) {
-            $this->cancelOrder($expiredUnpaidOrder);
+            try {
+                $this->cancelOrder($expiredUnpaidOrder);
+            } catch (SMException $e) {
+                if (null !== $this->logger) {
+                    $this->logger->error(
+                        sprintf('An error occurred while cancelling unpaid order #%s', $expiredUnpaidOrder->getId()),
+                        ['exception' => $e, 'message' => $e->getMessage()]
+                    );
+                }
+            }
         }
     }
 

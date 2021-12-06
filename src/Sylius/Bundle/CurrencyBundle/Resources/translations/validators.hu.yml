@@ -6,6 +6,18 @@ sylius:
         code:
             exact_length: A pénznem kódjának pontosan 3 karakter hosszúnak kell lennie.
             not_blank: Kérjük adja meg a pénznem kódját!
+            regex: A pénznem kódja csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.
             unique: A pénznem kódja már meg lett adva.
         exchange_rate:
             not_blank: Kérjük adja meg az árfolyamot!
+    exchange_rate:
+        ratio:
+            greater_than: A váltási aránynak nagyobbnak kell lennie, mint 0.
+            invalid: A váltási aránynak számnak kell lennie.
+            not_blank: Kérjük adja meg az átváltási arányt.
+        source_currency:
+            not_blank: Kérjük adja meg, az átváltási arány forrás pénznemét.
+        target_currency:
+            not_blank: Kérjük adja meg az átváltási arány cél pénznemét.
+        unique_currency_pair: A pénznem párnak egyedinek kell lennie.
+        different_source_target_currency: A forrás és a cél pénznemnek különbözőknek kell lennie.

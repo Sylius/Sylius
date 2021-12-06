@@ -16,6 +16,8 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 use Sylius\Bundle\AddressingBundle\Form\Type\AddressType as SyliusAddressType;
 use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerCheckoutGuestType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Addressing\Comparator\AddressComparatorInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Customer\Model\CustomerAwareInterface;
@@ -29,6 +31,25 @@ use Webmozart\Assert\Assert;
 
 final class AddressType extends AbstractResourceType
 {
+    private ?AddressComparatorInterface $addressComparator;
+
+    public function __construct(string $dataClass, array $validationGroups = [], ?AddressComparatorInterface $addressComparator = null)
+    {
+        parent::__construct($dataClass, $validationGroups);
+
+        if (null === $addressComparator) {
+            @trigger_error(
+                sprintf(
+                    'Not passing an $addressComparator to "%s" constructor is deprecated since Sylius 1.8 and will be impossible in Sylius 2.0.',
+                    __CLASS__,
+                ),
+                \E_USER_DEPRECATED
+            );
+        }
+
+        $this->addressComparator = $addressComparator;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -47,11 +68,11 @@ final class AddressType extends AbstractResourceType
             ])
             ->addEventListener(FormEvents::PRE_SET_DATA, static function (FormEvent $event): void {
                 $form = $event->getForm();
-                $order = $event->getData();
+
+                Assert::isInstanceOf($event->getData(), OrderInterface::class);
 
                 /** @var OrderInterface $order */
-                Assert::isInstanceOf($order, OrderInterface::class);
-
+                $order = $event->getData();
                 $channel = $order->getChannel();
 
                 $form
@@ -66,6 +87,18 @@ final class AddressType extends AbstractResourceType
                     ])
                 ;
             })
+            ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {
+                $form = $event->getForm();
+
+                Assert::isInstanceOf($event->getData(), OrderInterface::class);
+
+                /** @var OrderInterface $order */
+                $order = $event->getData();
+                $areAddressesDifferent = $this->areAddressesDifferent($order->getBillingAddress(), $order->getShippingAddress());
+
+                $form->get('differentBillingAddress')->setData($areAddressesDifferent);
+                $form->get('differentShippingAddress')->setData($areAddressesDifferent);
+            })
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options): void {
                 $form = $event->getForm();
                 $resource = $event->getData();
@@ -78,7 +111,8 @@ final class AddressType extends AbstractResourceType
 
                 if (
                     (null === $customer && null === $resourceCustomer) ||
-                    (null !== $resourceCustomer && null === $resourceCustomer->getUser())
+                    (null !== $resourceCustomer && null === $resourceCustomer->getUser()) ||
+                    ($resourceCustomer !== $customer)
                 ) {
                     $form->add('customer', CustomerCheckoutGuestType::class, ['constraints' => [new Valid()]]);
                 }
@@ -102,9 +136,6 @@ final class AddressType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
@@ -116,11 +147,17 @@ final class AddressType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_checkout_address';
+    }
+
+    private function areAddressesDifferent(?AddressInterface $firstAddress, ?AddressInterface $secondAddress): bool
+    {
+        if (null === $this->addressComparator || null === $firstAddress || null === $secondAddress) {
+            return false;
+        }
+
+        return !$this->addressComparator->equal($firstAddress, $secondAddress);
     }
 }

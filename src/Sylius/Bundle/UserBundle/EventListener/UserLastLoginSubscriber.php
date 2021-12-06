@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UserBundle\EventListener;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
@@ -23,11 +23,9 @@ use Symfony\Component\Security\Http\SecurityEvents;
 
 final class UserLastLoginSubscriber implements EventSubscriberInterface
 {
-    /** @var ObjectManager */
-    private $userManager;
+    private ObjectManager $userManager;
 
-    /** @var string */
-    private $userClass;
+    private string $userClass;
 
     public function __construct(ObjectManager $userManager, string $userClass)
     {
@@ -35,9 +33,6 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
         $this->userClass = $userClass;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

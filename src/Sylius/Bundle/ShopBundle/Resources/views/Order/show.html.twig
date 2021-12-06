@@ -4,6 +4,8 @@
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
+{% block title %}{{ 'sylius.ui.summary_of_your_order'|trans }} | {{ parent() }}{% endblock %}
+
 {% block content %}
     <div class="ui segment">
         {% include '@SyliusShop/Order/_summary.html.twig' %}

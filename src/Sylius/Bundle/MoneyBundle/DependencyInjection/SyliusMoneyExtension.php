@@ -21,12 +21,9 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 final class SyliusMoneyExtension extends Extension implements PrependExtensionInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function load(array $config, ContainerBuilder $container): void
+    public function load(array $configs, ContainerBuilder $container): void
     {
-        $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
+        $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $container->setParameter('sylius_money.locale', $config['locale']);
@@ -34,9 +31,6 @@ final class SyliusMoneyExtension extends Extension implements PrependExtensionIn
         $loader->load('services.xml');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function prepend(ContainerBuilder $container): void
     {
         if (!$container->hasExtension('sylius_currency')) {

@@ -22,23 +22,26 @@ use Webmozart\Assert\Assert;
 final class OrderProductEligibilityValidator extends ConstraintValidator
 {
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
-    public function validate($order, Constraint $constraint): void
+    public function validate($value, Constraint $constraint): void
     {
-        /** @var OrderInterface $order */
-        Assert::isInstanceOf($order, OrderInterface::class);
+        /** @var OrderInterface $value */
+        Assert::isInstanceOf($value, OrderInterface::class);
 
         /** @var OrderProductEligibility $constraint */
         Assert::isInstanceOf($constraint, OrderProductEligibility::class);
 
         /** @var OrderItemInterface[] $orderItems */
-        $orderItems = $order->getItems();
+        $orderItems = $value->getItems();
 
         foreach ($orderItems as $orderItem) {
-            if (!$orderItem->getProduct()->isEnabled()) {
+            if (!$orderItem->getVariant()->isEnabled()) {
+                $this->context->addViolation(
+                    $constraint->message,
+                    ['%productName%' => $orderItem->getVariant()->getName()]
+                );
+            } elseif (!$orderItem->getProduct()->isEnabled()) {
                 $this->context->addViolation(
                     $constraint->message,
                     ['%productName%' => $orderItem->getProduct()->getName()]

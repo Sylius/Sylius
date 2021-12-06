@@ -20,7 +20,7 @@ Feature: Seeing shipping fees of an order
         When I view the summary of the order "#00000666"
         Then the product named "Angel T-Shirt" should be in the items list
         And the order's items total should be "$39.00"
-        And there should be a shipping charge "Free $0.00"
+        And there should be a shipping charge "$0.00" for "Free" method
         And the order's shipping total should be "$0.00"
         And the order's total should be "$39.00"
 
@@ -30,6 +30,6 @@ Feature: Seeing shipping fees of an order
         When I view the summary of the order "#00000666"
         Then the product named "Angel T-Shirt" should be in the items list
         And the order's items total should be "$39.00"
-        And there should be a shipping charge "DHL $10.00"
+        And there should be a shipping charge "$10.00" for "DHL" method
         And the order's shipping total should be "$10.00"
         And the order's total should be "$49.00"

@@ -5,13 +5,14 @@ sylius:
     form:
         user:
             email: Email
-            enabled: Dostępny
+            enabled: Aktywne
             password:
                 label: Hasło
                 confirmation: Weryfikacja
             remember_me: Zapamiętaj mnie
             shipping_address: Adres dostawy
             username: Nazwa użytkownika
+            verified: Zweryfikowany
         user_filter:
             query: Szukaj
         user_change_password:
@@ -19,5 +20,5 @@ sylius:
             current: Obecne hasło
             new: Nowe hasło
         user_reset_password:
-            confirmation: Potwierdzenie
+            confirmation: Powtórz nowe hasło
             new: Nowe hasło

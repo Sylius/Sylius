@@ -22,11 +22,9 @@ final class MainMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.main';
 
-    /** @var FactoryInterface */
-    private $factory;
+    private FactoryInterface $factory;
 
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(FactoryInterface $factory, EventDispatcherInterface $eventDispatcher)
     {
@@ -44,7 +42,7 @@ final class MainMenuBuilder
         $this->addMarketingSubMenu($menu);
         $this->addConfigurationSubMenu($menu);
 
-        $this->eventDispatcher->dispatch(self::EVENT_NAME, new MenuBuilderEvent($this->factory, $menu));
+        $this->eventDispatcher->dispatch(new MenuBuilderEvent($this->factory, $menu), self::EVENT_NAME);
 
         return $menu;
     }
@@ -122,8 +120,14 @@ final class MainMenuBuilder
 
         $marketing
             ->addChild('promotions', ['route' => 'sylius_admin_promotion_index'])
-            ->setLabel('sylius.menu.admin.main.marketing.promotions')
+            ->setLabel('sylius.menu.admin.main.marketing.cart_promotions')
             ->setLabelAttribute('icon', 'in cart')
+        ;
+
+        $marketing
+            ->addChild('catalog_promotions', ['route' => 'sylius_admin_catalog_promotion_index'])
+            ->setLabel('sylius.menu.admin.main.marketing.catalog_promotions')
+            ->setLabelAttribute('icon', 'bookmark')
         ;
 
         $marketing

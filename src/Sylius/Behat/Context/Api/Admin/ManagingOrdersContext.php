@@ -17,7 +17,9 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
@@ -27,23 +29,19 @@ use Webmozart\Assert\Assert;
 
 final class ManagingOrdersContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $client;
+    private ApiClientInterface $client;
 
-    /** @var ApiClientInterface */
-    private $shipmentsClient;
+    private ApiClientInterface $shipmentsClient;
 
-    /** @var ApiClientInterface */
-    private $paymentsClient;
+    private ApiClientInterface $paymentsClient;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
-    /** @var IriConverterInterface */
-    private $iriConverter;
+    private IriConverterInterface $iriConverter;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SecurityServiceInterface $adminSecurityService;
+
+    private SharedStorageInterface $sharedStorage;
 
     public function __construct(
         ApiClientInterface $client,
@@ -51,6 +49,7 @@ final class ManagingOrdersContext implements Context
         ApiClientInterface $paymentsClient,
         ResponseCheckerInterface $responseChecker,
         IriConverterInterface $iriConverter,
+        SecurityServiceInterface $adminSecurityService,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
@@ -58,7 +57,17 @@ final class ManagingOrdersContext implements Context
         $this->paymentsClient = $paymentsClient;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
+        $this->adminSecurityService = $adminSecurityService;
         $this->sharedStorage = $sharedStorage;
+    }
+
+    /**
+     * @Given /^I am viewing the summary of (this order)$/
+     * @When I view the summary of the order :order
+     */
+    public function iSeeTheOrder(OrderInterface $order): void
+    {
+        $this->client->show($order->getTokenValue());
     }
 
     /**
@@ -70,21 +79,12 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Given /^I am viewing the summary of (this order)$/
-     * @When I view the summary of the order :order
-     */
-    public function iSeeTheOrder(OrderInterface $order): void
-    {
-        $this->client->show($order->getNumber());
-    }
-
-    /**
      * @When /^I cancel (this order)$/
      */
     public function iCancelThisOrder(OrderInterface $order): void
     {
         $this->client->applyTransition(
-            $this->responseChecker->getValue($this->client->show($order->getNumber()), 'number'),
+            $this->responseChecker->getValue($this->client->show($order->getTokenValue()), 'tokenValue'),
             OrderTransitions::TRANSITION_CANCEL
         );
     }
@@ -112,16 +112,35 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I limit number of items to :limit
+     */
+    public function iLimitNumberOfItemsTo(int $limit): void
+    {
+        $this->client->addFilter('itemsPerPage', $limit);
+        $this->client->filter();
+    }
+
+    /**
      * @Then I should see a single order from customer :customer
      */
     public function iShouldSeeASingleOrderFromCustomer(CustomerInterface $customer): void
     {
-        Assert::true($this->responseChecker->hasItemWithValue(
+        Assert::true(
+            $this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'customer',
-            $this->iriConverter->getIriFromItem($customer)),
+            $this->iriConverter->getIriFromItem($customer)
+        ),
             sprintf('There is no order for customer %s', $customer->getEmail())
         );
+    }
+
+    /**
+     * @Then I should see a single order in the list
+     */
+    public function iShouldSeeASingleOrderInTheList(): void
+    {
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), 1);
     }
 
     /**
@@ -129,9 +148,10 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldBeNotifiedAboutItHasBeenSuccessfullyCanceled(): void
     {
+        $response = $this->client->getLastResponse();
         Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Resource could not be completed'
+            $this->responseChecker->isUpdateSuccessful($response),
+            'Resource could not be completed. Reason: ' . $response->getContent()
         );
     }
 
@@ -143,7 +163,7 @@ final class ManagingOrdersContext implements Context
     {
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
-        $orderState = $this->responseChecker->getValue($this->client->show($order->getNumber()), 'state');
+        $orderState = $this->responseChecker->getValue($this->client->show($order->getTokenValue()), 'state');
 
         Assert::same($orderState, strtolower($state));
     }
@@ -153,13 +173,13 @@ final class ManagingOrdersContext implements Context
      */
     public function itShouldHaveShipmentState(string $state): void
     {
-        $shipmentsIri = $this->responseChecker->getValue(
-            $this->client->show($this->sharedStorage->get('order')->getNumber()),
+        $shipmentIri = $this->responseChecker->getValue(
+            $this->client->show($this->sharedStorage->get('order')->getTokenValue()),
             'shipments'
-        );
+        )[0];
 
         Assert::true(
-            $this->responseChecker->hasValue($this->client->showByIri($shipmentsIri[0]), 'state', strtolower($state)),
+            $this->responseChecker->hasValue($this->client->showByIri($shipmentIri['@id']), 'state', strtolower($state)),
             sprintf('Shipment for this order is not %s', $state)
         );
     }
@@ -169,13 +189,13 @@ final class ManagingOrdersContext implements Context
      */
     public function itShouldHavePaymentState($state): void
     {
-        $paymentsIri = $this->responseChecker->getValue(
-            $this->client->show($this->sharedStorage->get('order')->getNumber()),
+        $paymentIri = $this->responseChecker->getValue(
+            $this->client->show($this->sharedStorage->get('order')->getTokenValue()),
             'payments'
-        );
+        )[0];
 
         Assert::true(
-            $this->responseChecker->hasValue($this->client->showByIri($paymentsIri[0]), 'state', strtolower($state)),
+            $this->responseChecker->hasValue($this->client->showByIri($paymentIri['@id']), 'state', strtolower($state)),
             sprintf('payment for this order is not %s', $state)
         );
     }
@@ -186,7 +206,7 @@ final class ManagingOrdersContext implements Context
     public function theOrderShouldHaveNumberOfPayments(int $number): void
     {
         Assert::count(
-            $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('order')->getNumber()), 'payments'),
+            $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('order')->getTokenValue()), 'payments'),
             $number
         );
     }
@@ -197,9 +217,69 @@ final class ManagingOrdersContext implements Context
     public function theOrderShouldHavePaymentState(OrderInterface $order, string $paymentState): void
     {
         Assert::true(
-            $this->responseChecker->hasValue($this->client->show($order->getNumber()), 'paymentState', strtolower($paymentState)),
-            sprintf('Order %s does not have %s payment state', $order->getNumber(), $paymentState)
+            $this->responseChecker->hasValue($this->client->show($order->getTokenValue()), 'paymentState', strtolower($paymentState)),
+            sprintf('Order %s does not have %s payment state', $order->getTokenValue(), $paymentState)
         );
+    }
+
+    /**
+     * @Then it should have :amount items
+     */
+    public function itShouldHaveAmountOfItems(int $amount): void
+    {
+        Assert::count($this->responseChecker->getValue($this->client->getLastResponse(), 'items'), $amount);
+    }
+
+    /**
+     * @Then the product named :productName should be in the items list
+     */
+    public function theProductShouldBeInTheItemsList(string $productName): void
+    {
+        $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'items');
+
+        foreach ($items as $item) {
+            if ($item['productName'] === $productName) {
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException('There is no product with given name.');
+    }
+
+    /**
+     * @Then /^the order's shipping total should be ("[^"]+")$/
+     */
+    public function theOrdersShippingTotalShouldBe(int $shippingTotal): void
+    {
+        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'shippingTotal'), $shippingTotal);
+    }
+
+    /**
+     * @Then /^the order's tax total should(?:| still) be ("[^"]+")$/
+     */
+    public function theOrdersTaxTotalShouldBe(int $taxTotal): void
+    {
+        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'taxTotal'), $taxTotal);
+    }
+
+    /**
+     * @Then /^the order's items total should be ("[^"]+")$/
+     */
+    public function theOrdersItemsTotalShouldBe(int $itemsTotal): void
+    {
+        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'itemsTotal'), $itemsTotal);
+    }
+
+    /**
+     * @Then /^the order's payment should(?:| also) be ("[^"]+")$/
+     */
+    public function theOrdersPaymentShouldBe(int $paymentAmount): void
+    {
+        $response = $this->paymentsClient->showByIri(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'payments')[0]['@id']
+        );
+
+        Assert::same($this->responseChecker->getValue($response, 'amount'), $paymentAmount);
     }
 
     /**
@@ -234,5 +314,20 @@ final class ManagingOrdersContext implements Context
             $this->responseChecker->getValue($this->client->getLastResponse(), 'orderPromotionTotal'),
             $promotionTotal
         );
+    }
+
+    /**
+     * @Then /^(the administrator) should see that (order placed by "[^"]+") has "([^"]+)" currency$/
+     */
+    public function theAdministratorShouldSeeThatThisOrderHasBeenPlacedIn(
+        AdminUserInterface $user,
+        OrderInterface $order,
+        string $currency
+    ): void {
+        $this->adminSecurityService->logIn($user);
+
+        $currencyCode = $this->responseChecker->getValue($this->client->show($order->getTokenValue()), 'currencyCode');
+
+        Assert::same($currencyCode, $currency);
     }
 }

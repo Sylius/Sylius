@@ -16,10 +16,10 @@ Feature: Viewing details of an order
         And I addressed it to "Lucifer Morningstar", "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
         And I chose "Free" shipping method with "Cash on Delivery" payment
 
-    @ui
+    @ui @api
     Scenario: Viewing basic information about an order
-        When I view the summary of the order "#00000666"
-        And it should has number "#00000666"
+        When I view the summary of my order "#00000666"
+        Then it should have the number "#00000666"
         And I should see 2 items in the list
         And the product named "Angel T-Shirt" should be in the items list
         And the product named "Angel Mug" should be in the items list

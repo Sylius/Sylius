@@ -17,10 +17,18 @@ sylius:
             description: 説明
             name: ゾーン名
         shipping_method:
-            calculator: 計算方法
+            add_rule: 条件を追加
+            calculator: 算出方法
             category: 税区分
+            channels: 経路
             configuration: 条件設定
             description: 説明
             enabled: 有効
             name: ゾーン名
+            rules: 条件
             tax_category: 税区分
+            translations: 翻訳
+        shipping_method_rule:
+            type: タイプ
+            total: 小計
+            amount: 税率

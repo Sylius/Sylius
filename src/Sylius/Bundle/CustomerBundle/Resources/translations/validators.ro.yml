@@ -17,13 +17,14 @@ sylius:
             already_used: Această adresă e deja folosită, autentifică-te sau resetează parola.
             max: Adresa de email nu trebuie să aibă mai mult de {{ limit }} caractere.
             not_blank: Vă rugăm să completați adresa de e-mail.
-            invalid: Adresa de email nu este validă.
+            invalid: Această adresă de e-mail este invalidă.
             unique: Acest e-mail este deja folosit.
             registered: Acest e-mail este deja înregistrat, vă rugăm să vă autentificați sau să vă resetați parola.
     customer_group:
         code:
             regex: Codul grupului de clienți poate conține doar litere, numere, - și _.
             unique: Codul grupului de clienți trebuie să fie unic.
+            not_blank: Introdu codul grupului de clienți.
         name:
             max: Numele grupului de clienți nu poate fi mai lung de {{ limit }} caractere.
             min: Numele grupului de clienți poate avea maxim {{ limit }} caractere.

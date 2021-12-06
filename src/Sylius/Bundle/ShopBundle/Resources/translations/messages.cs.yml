@@ -5,13 +5,36 @@ sylius:
     email:
         contact_request:
             content: 'Obsah'
+            message_from: 'Zpráva od'
+            subject: 'Žádost kontaktu'
         order_confirmation:
+            has_been_successfully_placed: 'byl úspěšně umístěn.'
             subject: 'Potvrzení objednávky'
             view_order_or_change_payment_method: 'Zobrazit objednávku nebo změnit způsob platby'
+            thank_you: 'Děkujeme za nákup v našem obchodě!'
+            your_order_number: 'Číslo vaší objednávky.'
         password_reset:
             hello: 'Ahoj'
+            reset_your_password: 'Resetovat heslo'
+            subject: 'Obnovení hesla'
+            to_reset_your_password: 'Chcete-li obnovit své heslo - klikněte na odkaz níže'
+        user_registration:
+            start_shopping: 'Začít nakupovat'
+            subject: 'Registrace uživatele'
+            welcome_to_our_store: 'Vítejte v našem obchodě!'
+            you_have_just_been_registered: 'Právě jste se zaregistrovali. Děkujeme'
         verification_token:
             hello: 'Ahoj'
+            subject: 'Ověření e-mailové adresy'
+            to_verify_your_email_address: 'Pro ověření vaší e-mailové adresy - klikněte na odkaz níže'
+            verify_your_email_address: 'Ověřte svou e-mailovou adresu'
+    homepage:
+        about_us: 'O nás'
+        about_us_content: 'Vítejte v našem obchodě, Váš e-shop číslo jedna, který vám dává ty nejlepší produkty. Z naší nabídky si můžete vybrat ty nejlepší oblečení a boty. (<i>Tento obsah můžete upravit přepsáním klíče "sylius.homepage.about_us_content" ve vašem překladovém souboru</i>)'
+        carousel_header: 'Brace yourself! Winter is coming'
+        newsletter: 'Odběr novinek'
+        newsletter_description: 'Přihlaste se k odběru našeho newsletteru a uvidíte nové nabídky, které na vás čekají! (<i>Můžete upravit tento obsah přepsáním klíče "sylius. homepage.newsletter_description" ve vašem překladovém souboru</i>)'
+        subscribe: 'Odebírat'
     lightbox:
         image_album_label: 'Obrázek %1 z %2'
     menu:

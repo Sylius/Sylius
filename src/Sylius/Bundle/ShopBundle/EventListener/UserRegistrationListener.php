@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\UserBundle\Security\UserLoginInterface;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -91,7 +91,7 @@ final class UserRegistrationListener
         $this->userManager->persist($user);
         $this->userManager->flush();
 
-        $this->eventDispatcher->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, new GenericEvent($user));
+        $this->eventDispatcher->dispatch(new GenericEvent($user), UserEvents::REQUEST_VERIFICATION_TOKEN);
     }
 
     private function enableAndLogin(ShopUserInterface $user): void

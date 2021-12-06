@@ -17,4 +17,17 @@
             <parameter>sylius</parameter>
         </parameter>
     </parameters>
+    <services>
+        <service id="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionActionTypeExtension">
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.action_configuration_type" index-by="key" />
+            <argument type="service" id="twig" />
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension">
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_configuration_type" index-by="key" />
+            <argument type="service" id="twig" />
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType" />
+        </service>
+    </services>
 </container>

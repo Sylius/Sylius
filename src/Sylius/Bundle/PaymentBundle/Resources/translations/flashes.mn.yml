@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    payment:
+        authorized: 'Төлбөрийг зөвшөөрсөн болно.'
+        cancelled: 'Төлбөрийг цуцаллаа.'
+        completed: 'Төлбөр амжилттай дууслаа.'
+        failed: 'Төлбөр амжилтгүй боллоо.'
+        processing: 'Төлбөрийг боловсруулж байна.'
+        refunded: 'Төлбөрийг амжилттай буцаан олголоо.'
+        unknown: 'Төлбөр хийхэд үл мэдэгдэх асуудал гарсан.'

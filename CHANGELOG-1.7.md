@@ -1,5 +1,166 @@
 # CHANGELOG FOR `1.7.X`
 
+## v1.7.11 (2020-11-12)
+
+#### Details
+
+- [#12009](https://github.com/Sylius/Sylius/issues/12009) Updated translation.rst ([@Romain](https://github.com/Romain))
+- [#12011](https://github.com/Sylius/Sylius/issues/12011) Customize a controller fix typo in services config ([@Oipnet](https://github.com/Oipnet))
+- [#11974](https://github.com/Sylius/Sylius/issues/11974) [UI] Fix broken checkboxes that dont change state ([@misaon](https://github.com/misaon))
+- [#11899](https://github.com/Sylius/Sylius/issues/11899) Update Github PR template ([@Zales0123](https://github.com/Zales0123))
+- [#12019](https://github.com/Sylius/Sylius/issues/12019) [AUTO] Updated translations from Crowdin (1.7) ()
+- [#12022](https://github.com/Sylius/Sylius/issues/12022) Suggest PayPalPlugin as the default PayPal integration ([@Zales0123](https://github.com/Zales0123))
+
+## v1.7.10 (2020-11-05)
+
+#### Details
+
+- [#11940](https://github.com/Sylius/Sylius/issues/11940) [Maintenance] Adjusting symfony.lock to lowest supported PHP version ([@lchrusciel](https://github.com/lchrusciel))
+- [#11957](https://github.com/Sylius/Sylius/issues/11957) Minor CS fixes detected by ECS ([@Zales0123](https://github.com/Zales0123))
+- [#11972](https://github.com/Sylius/Sylius/issues/11972) [Maintenance] Conflict symfony doctrine bridge ([@lchrusciel](https://github.com/lchrusciel))
+- [#11871](https://github.com/Sylius/Sylius/issues/11871) Patch for Unable to extends ShopBillingData [#11625] ([@jbcr](https://github.com/jbcr))
+- [#11991](https://github.com/Sylius/Sylius/issues/11991) Remove nikic/php-parser as a conflict ([@loevgaard](https://github.com/loevgaard))
+- [#11894](https://github.com/Sylius/Sylius/issues/11894) [Order] Do not stop cancelling unpaid orders on exception during canc… ([@twojtylak](https://github.com/twojtylak))
+
+## v1.7.9 (2020-10-20)
+
+#### Details
+
+- [#11452](https://github.com/Sylius/Sylius/issues/11452) [Docs] Fix redirection for backwards compatibility promise ([@pamil](https://github.com/pamil))
+- [#11919](https://github.com/Sylius/Sylius/issues/11919) [AUTO] Updated translations from Crowdin (1.7) ([@Sylius](https://github.com/Sylius) [@Bot](https://github.com/Bot))
+- [#11944](https://github.com/Sylius/Sylius/issues/11944) [Shop] Disabling customer when email has been changed ([@lchrusciel](https://github.com/lchrusciel))
+
+## v1.7.8 (2020-10-02)
+
+#### Details
+
+- [#11418](https://github.com/Sylius/Sylius/issues/11418) set default value for Channel taxCalculationStrategy ([@oallain](https://github.com/oallain))
+- [#11814](https://github.com/Sylius/Sylius/issues/11814) [Channel] Fix bc-breaking changes in ChannelFactory and minor improvements ([@lchrusciel](https://github.com/lchrusciel))
+- [#11792](https://github.com/Sylius/Sylius/issues/11792) Fixed: Parent taxon selection on taxon creation ([@igormukhingmailcom](https://github.com/igormukhingmailcom))
+- [#11835](https://github.com/Sylius/Sylius/issues/11835) [ChannelPricing] Remove channel pricing 1.7 ([@AdamKasp](https://github.com/AdamKasp), [@Tomanhez](https://github.com/Tomanhez), [@lchrusciel](https://github.com/lchrusciel))
+- [#11844](https://github.com/Sylius/Sylius/issues/11844) [Minor] Dead code removal ([@lchrusciel](https://github.com/lchrusciel))
+- [#11848](https://github.com/Sylius/Sylius/issues/11848) [Product] Add possibility to create product/variant without price in disabled channels ([@AdamKasp](https://github.com/AdamKasp))
+
+## v1.7.7 (2020-09-07)
+
+#### Details
+
+- [#11612](https://github.com/Sylius/Sylius/issues/11612) Don't call the backend if the notification bar is disabled ([@mikemix](https://github.com/mikemix))
+- [#11580](https://github.com/Sylius/Sylius/issues/11580) make product variant comparable ([@oallain](https://github.com/oallain))
+- [#11626](https://github.com/Sylius/Sylius/issues/11626) [Docs] Fix build - Downgrade sphinx to v1.8.5 ([@Tomanhez](https://github.com/Tomanhez))
+- [#11633](https://github.com/Sylius/Sylius/issues/11633) Add slick-carousel to ShopBundle entry.js ([@MatthieuCutin](https://github.com/MatthieuCutin))
+- [#11631](https://github.com/Sylius/Sylius/issues/11631) Add missing images in entry.js ([@jacquesbh](https://github.com/jacquesbh))
+- [#11624](https://github.com/Sylius/Sylius/issues/11624) Fix migration ([@jacquesbh](https://github.com/jacquesbh))
+- [#11643](https://github.com/Sylius/Sylius/issues/11643) Update custom-redirect-after-cart-add-action.rst ([@danakil](https://github.com/danakil))
+- [#11654](https://github.com/Sylius/Sylius/issues/11654) [Fixtures] Add Poland to fixtures ([@Zales0123](https://github.com/Zales0123))
+- [#11150](https://github.com/Sylius/Sylius/issues/11150) Add default value on default local ([@macintoshplus](https://github.com/macintoshplus))
+- [#11637](https://github.com/Sylius/Sylius/issues/11637) [DOC] Fix webpack usage with appropriate _logo.html.twig template ([@MatthieuCutin](https://github.com/MatthieuCutin))
+- [#11694](https://github.com/Sylius/Sylius/issues/11694) [Hot-Fix] Add conflict to symfonyą/form 4.11 and nikic/php-parser 4.7 ([@Tomanhez](https://github.com/Tomanhez))
+- [#11691](https://github.com/Sylius/Sylius/issues/11691) Update dates for 1.7 and 1.8 release cycle ([@pamil](https://github.com/pamil))
+- [#11710](https://github.com/Sylius/Sylius/issues/11710) [Hot-fix] Handle extra docblocks in Psalm ([@Zales0123](https://github.com/Zales0123))
+- [#11048](https://github.com/Sylius/Sylius/issues/11048) Bug #10951 [Account] fix sync username with customer email ([@hatem20](https://github.com/hatem20))
+- [#11722](https://github.com/Sylius/Sylius/issues/11722) [Documentation] fix typo in fixture docs ([@foxou33](https://github.com/foxou33))
+- [#11730](https://github.com/Sylius/Sylius/issues/11730) Fix docs for custom resource controllers ([@ivaskad](https://github.com/ivaskad))
+- [#11731](https://github.com/Sylius/Sylius/issues/11731) [Account] Add spec to sync username with customer email ([@hatem20](https://github.com/hatem20))
+- [#11696](https://github.com/Sylius/Sylius/issues/11696) [Shop] Add form in add to cart template event args ([@SebLours](https://github.com/SebLours))
+- [#11681](https://github.com/Sylius/Sylius/issues/11681) [Admin] Convert newlines in product description to breaklines  ([@adamwojs](https://github.com/adamwojs))
+- [#11704](https://github.com/Sylius/Sylius/issues/11704) [BEHAT] Injecting locale parameter instead of having it harcdoded ([@Roshyo](https://github.com/Roshyo))
+- [#11713](https://github.com/Sylius/Sylius/issues/11713) [Behat] Unfinalize some Behat pages ([@Zales0123](https://github.com/Zales0123))
+- [#11732](https://github.com/Sylius/Sylius/issues/11732) [Admin] removed duplicated id attribute ([@foxou33](https://github.com/foxou33))
+- [#11736](https://github.com/Sylius/Sylius/issues/11736) [Documentation] bumped maintenance branches in docs ([@foxou33](https://github.com/foxou33), [@lchrusciel](https://github.com/lchrusciel))
+- [#11708](https://github.com/Sylius/Sylius/issues/11708) Revert "[Behat] Remove js requirement for bulk delete scenarios" ([@GalloisLuca](https://github.com/GalloisLuca))
+- [#11739](https://github.com/Sylius/Sylius/issues/11739) Fix Customer form_errors display ([@s4iya](https://github.com/s4iya))
+- [#11767](https://github.com/Sylius/Sylius/issues/11767) Add warning on tax calculation in 1.7's upgrade ([@jacquesbh](https://github.com/jacquesbh))
+- [#11780](https://github.com/Sylius/Sylius/issues/11780) [Maintenance] Adjust variable names to interfaces ([@lchrusciel](https://github.com/lchrusciel))
+- [#11801](https://github.com/Sylius/Sylius/issues/11801) [Maintenance] [Travis] Use composer 2.0 ([@lchrusciel](https://github.com/lchrusciel))
+- [#11802](https://github.com/Sylius/Sylius/issues/11802) [Maintenance] Remove redundant conflict ([@lchrusciel](https://github.com/lchrusciel))
+
+## v1.7.6 (2020-06-25)
+
+#### Details
+
+- [#11522](https://github.com/Sylius/Sylius/issues/11522) [Homepage] Change lorem ipsum description and fix carousel header ([@arti0090](https://github.com/arti0090))
+- [#11534](https://github.com/Sylius/Sylius/issues/11534) Add Sylius template event ([@tavy315](https://github.com/tavy315))
+- [#11549](https://github.com/Sylius/Sylius/issues/11549) Behat for reordering taxon feature ([@titomtd](https://github.com/titomtd))
+- [#11553](https://github.com/Sylius/Sylius/issues/11553) Fix Psalm errors ([@Tomanhez](https://github.com/Tomanhez))
+- [#11578](https://github.com/Sylius/Sylius/issues/11578) [HotFix]Add symfony/form conflict ([@Tomanhez](https://github.com/Tomanhez))
+- [#11581](https://github.com/Sylius/Sylius/issues/11581) [Doc] Sylius 1.4 end of security support ([@oallain](https://github.com/oallain))
+- [#11582](https://github.com/Sylius/Sylius/issues/11582) [Maintenance] Update github PR template ([@oallain](https://github.com/oallain))
+- [#11584](https://github.com/Sylius/Sylius/issues/11584) [Fix] Less strict symfony form conflict ([@lchrusciel](https://github.com/lchrusciel))
+- [#11589](https://github.com/Sylius/Sylius/issues/11589) [Docs] fix sylius plus deployment ([@AdamKasp](https://github.com/AdamKasp))
+
+## v1.7.5 (2020-06-02)
+
+#### TL;DR
+
+- Support for PHP 7.4 ([#11509](https://github.com/Sylius/Sylius/issues/11509), [#11510](https://github.com/Sylius/Sylius/issues/11510))
+- Brought back backwards compatibility with attribute templates broken with v1.7.0 ([#11473](https://github.com/Sylius/Sylius/issues/11473))
+
+#### Details
+
+- [#11468](https://github.com/Sylius/Sylius/issues/11468) Fix for product translation tabs to be folded by default ([@arti0090](https://github.com/arti0090))
+- [#11473](https://github.com/Sylius/Sylius/issues/11473) [Attribute] Bring back attribute types templates after BC break in 1.7 ([@GSadee](https://github.com/GSadee))
+- [#11476](https://github.com/Sylius/Sylius/issues/11476) change product translation tab opening behavior ([@arti0090](https://github.com/arti0090))
+- [#11489](https://github.com/Sylius/Sylius/issues/11489) Fix route id typo ([@antiseptikk](https://github.com/antiseptikk))
+- [#11492](https://github.com/Sylius/Sylius/issues/11492) Making error messages in example factories more descriptive ([@mamazu](https://github.com/mamazu))
+- [#11509](https://github.com/Sylius/Sylius/issues/11509) [1.7] Travis Bionic + Chrome Headless + PHP 7.4 support ([@pamil](https://github.com/pamil))
+- [#11510](https://github.com/Sylius/Sylius/issues/11510) Make packages installable with PHP 7.4 ([@pamil](https://github.com/pamil))
+- [#11511](https://github.com/Sylius/Sylius/issues/11511) Change function that orders grid fields ([@arti0090](https://github.com/arti0090))
+- [#11523](https://github.com/Sylius/Sylius/issues/11523) Fix Psalm errors ([@pamil](https://github.com/pamil))
+- [#11525](https://github.com/Sylius/Sylius/issues/11525) [Docs][Plus] Add Docs with Sylius Plus deployment ([@AdamKasp](https://github.com/AdamKasp))
+- [#11527](https://github.com/Sylius/Sylius/issues/11527) [Docs][Plus] Missing information about authentication ([@AdamKasp](https://github.com/AdamKasp))
+- [#11540](https://github.com/Sylius/Sylius/issues/11540) [Docs] Update order processor documentation ([@arti0090](https://github.com/arti0090))
+- [#11542](https://github.com/Sylius/Sylius/issues/11542) [Maintenance] Add conflict to the 4.4.9 version of symfony/form ([@GSadee](https://github.com/GSadee))
+
+## v1.7.4 (2020-05-14)
+
+#### Details
+
+- [#11369](https://github.com/Sylius/Sylius/issues/11369) [Docs] Don't use $HOME in SymfonyCloud deployment cookbook ([@tucksaun](https://github.com/tucksaun))
+- [#11387](https://github.com/Sylius/Sylius/issues/11387) Remove the doc reference to a promotion action that no longer exists in Core. ([@gabiudrescu](https://github.com/gabiudrescu))
+- [#11390](https://github.com/Sylius/Sylius/issues/11390) Bug #9738 Fix nested form collections ([@vic-blt](https://github.com/vic-blt))
+- [#11391](https://github.com/Sylius/Sylius/issues/11391) Fallback to the locale code if the associated name isn't found ([@dunglas](https://github.com/dunglas))
+- [#11398](https://github.com/Sylius/Sylius/issues/11398) [Docs] Fix typos ([@pgrimaud](https://github.com/pgrimaud))
+- [#11400](https://github.com/Sylius/Sylius/issues/11400) Error on show product without pricing ([@oallain](https://github.com/oallain), [@pamil](https://github.com/pamil))
+- [#11403](https://github.com/Sylius/Sylius/issues/11403) Fix Autolabeler configuration ([@Zales0123](https://github.com/Zales0123))
+- [#11409](https://github.com/Sylius/Sylius/issues/11409) Typo in code block in documentation ([@jacquesbh](https://github.com/jacquesbh))
+- [#11415](https://github.com/Sylius/Sylius/issues/11415) Doc : add renaming bundle in bundles.php ([@davidroberto](https://github.com/davidroberto), [@pamil](https://github.com/pamil))
+- [#11416](https://github.com/Sylius/Sylius/issues/11416) doc : add the composer dump-autoload instruction ([@davidroberto](https://github.com/davidroberto))
+- [#11425](https://github.com/Sylius/Sylius/issues/11425) [UI] Add tabs wrapping on Product show page > Attributes section ()
+- [#11427](https://github.com/Sylius/Sylius/issues/11427) [Maintenance] Upgrade psalm version ([@lchrusciel](https://github.com/lchrusciel))
+- [#11430](https://github.com/Sylius/Sylius/issues/11430) Fix all Psalm errors ([@pamil](https://github.com/pamil))
+- [#11441](https://github.com/Sylius/Sylius/issues/11441) [Composer] Add conflict to doctrine/inflector ^1.4 to fix taxons ([@GSadee](https://github.com/GSadee))
+- [#11446](https://github.com/Sylius/Sylius/issues/11446) [Docs] Remove unexisting "staging" environment section ([@pamil](https://github.com/pamil))
+- [#11449](https://github.com/Sylius/Sylius/issues/11449) synchronise dependencies ([@arti0090](https://github.com/arti0090))
+- [#11450](https://github.com/Sylius/Sylius/issues/11450) [Docs] Enable redirections on ReadTheDocs ([@pamil](https://github.com/pamil))
+- [#11453](https://github.com/Sylius/Sylius/issues/11453) [Documentation][Cookbook] Fix login & failure path ([@bchatard](https://github.com/bchatard))
+- [#11454](https://github.com/Sylius/Sylius/issues/11454) [Docs] Extract technical packages documentation to an external URLs ([@pamil](https://github.com/pamil))
+- [#11461](https://github.com/Sylius/Sylius/issues/11461) [Docs][Plus] Add Plus upgrading guide ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#11462](https://github.com/Sylius/Sylius/issues/11462) [Dashboard] Add DQL to sales provider ([@oliver-schulz](https://github.com/oliver-schulz), [@AdamKasp](https://github.com/AdamKasp))
+- [#11463](https://github.com/Sylius/Sylius/issues/11463) [Admin] Use findOneBy() instead of findAll() to get the first channel ([@pamil](https://github.com/pamil))
+- [#11464](https://github.com/Sylius/Sylius/issues/11464) [Docs] Update order related state machine diagrams in the Book ([@CoderMaggie](https://github.com/CoderMaggie))
+
+## v1.7.3 (2020-04-21)
+
+#### Details
+
+- [#11018](https://github.com/Sylius/Sylius/issues/11018) Fix: Check PropertyPath value for add error to form ([@Coosos](https://github.com/Coosos))
+- [#11068](https://github.com/Sylius/Sylius/issues/11068) redirect to default locale ([@oallain](https://github.com/oallain))
+- [#11129](https://github.com/Sylius/Sylius/issues/11129) impersonate user in new tab ([@oallain](https://github.com/oallain))
+- [#11191](https://github.com/Sylius/Sylius/issues/11191) Separated order items subtotal calculation logic from twig extension ([@4c0n](https://github.com/4c0n))
+- [#11203](https://github.com/Sylius/Sylius/issues/11203) Add Important information in documentation when change name of plugin ([@MathieuDelmarre](https://github.com/MathieuDelmarre), [@pamil](https://github.com/pamil))
+- [#11329](https://github.com/Sylius/Sylius/issues/11329) Make taxon comparable ([@oallain](https://github.com/oallain))
+- [#11334](https://github.com/Sylius/Sylius/issues/11334) [ShopBundle] Add missing form_theme declaration ([@misaon](https://github.com/misaon))
+- [#11341](https://github.com/Sylius/Sylius/issues/11341) [Maintenance] Upgrade packages dependencies & fix 1.6 build ([@lchrusciel](https://github.com/lchrusciel))
+- [#11342](https://github.com/Sylius/Sylius/issues/11342) [Maintenance] Remove memory swap ([@lchrusciel](https://github.com/lchrusciel))
+- [#11346](https://github.com/Sylius/Sylius/issues/11346) [ADMIN] fix closed gateway config field in payment method form ([@bigboss86](https://github.com/bigboss86))
+- [#11351](https://github.com/Sylius/Sylius/issues/11351) [HOTFIX] Travis memory upgrade & turned off composer scripts ([@lchrusciel](https://github.com/lchrusciel))
+- [#11354](https://github.com/Sylius/Sylius/issues/11354) [Doc] Describe menu taxon on channel ([@lchrusciel](https://github.com/lchrusciel))
+- [#11357](https://github.com/Sylius/Sylius/issues/11357) Add notice about moved templates during upgrade ([@jacquesbh](https://github.com/jacquesbh))
+- [#11363](https://github.com/Sylius/Sylius/issues/11363) Introduce Probot Autolabeler ([@Zales0123](https://github.com/Zales0123))
+- [#11364](https://github.com/Sylius/Sylius/issues/11364) fix #11362 : ignore channel locale listener on profiler routes ([@thi3rry](https://github.com/thi3rry))
+- [#11380](https://github.com/Sylius/Sylius/issues/11380) Use !default for SCSS variables to allow overriding them ([@pamil](https://github.com/pamil))
+
 ## v1.7.2 (2020-04-02)
 
 #### Details

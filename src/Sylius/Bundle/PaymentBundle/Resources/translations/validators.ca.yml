@@ -8,7 +8,7 @@ sylius:
             not_blank: Si us plau, introduïu el nom de la titular de la targeta.
         expiry_month:
             max_range: Mes de caducitat de la targeta de crèdit ha de ser entre {{ min }} i {{ max }}.
-            min_range: Mes de caducitat de la targeta de crèdit ha de ser entre {{ min }} i {{ max }}.
+            min_range: El Mes de caducitat de la targeta de crèdit ha de ser entre {{ min }} i {{ max }}.
             not_blank: Si us plau seleccioni el mes de venciment.
         number:
             not_blank: Si us plau, introduïu el número de targeta.

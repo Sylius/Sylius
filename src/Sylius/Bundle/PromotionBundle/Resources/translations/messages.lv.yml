@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Apraksts
+            name: Nosaukums
         promotion:
             description: Apraksts
             name: Nosaukums
@@ -12,5 +15,11 @@ sylius:
         promotion_coupon_generator_instruction:
             amount: Summa
         promotion_rule:
+            contains_product_configuration:
+                variants: Preces
             item_total_configuration:
                 amount: Summa
+            shipping_country_configuration:
+                country: Valsts
+            taxonomy_configuration:
+                taxons: Sadaļas

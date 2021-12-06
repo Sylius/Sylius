@@ -17,6 +17,7 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShipmentType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryType;
+use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodRuleType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodTranslationType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType;
 use Sylius\Component\Resource\Factory\Factory;
@@ -29,6 +30,8 @@ use Sylius\Component\Shipping\Model\ShippingCategory;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
+use Sylius\Component\Shipping\Model\ShippingMethodRule;
+use Sylius\Component\Shipping\Model\ShippingMethodRuleInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodTranslation;
 use Sylius\Component\Shipping\Model\ShippingMethodTranslationInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -37,9 +40,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 final class Configuration implements ConfigurationInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('sylius_shipping');
@@ -128,6 +128,23 @@ final class Configuration implements ConfigurationInterface
                                                 ->scalarNode('form')->defaultValue(ShippingMethodTranslationType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('shipping_method_rule')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(ShippingMethodRule::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(ShippingMethodRuleInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('form')->defaultValue(ShippingMethodRuleType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

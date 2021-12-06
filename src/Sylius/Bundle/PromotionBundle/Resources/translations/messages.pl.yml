@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Opis
+            name: Nazwa
+            priority: Priorytet
         promotion:
             actions: Akcje
             add_action: Dodaj akcje
@@ -63,5 +67,5 @@ sylius:
                 country: Kraj
             taxonomy_configuration:
                 exclude: Nie zawiera
-                taxons: Taksonomie
+                taxons: Kategorie
             type: Typ

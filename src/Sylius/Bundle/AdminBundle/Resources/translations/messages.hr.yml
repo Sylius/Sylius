@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        shipment_confirmation:
+            subject: 'Potvrda dostave'
     menu:
         admin:
             main:
@@ -19,7 +22,7 @@ sylius:
                     countries: Države
                     currencies: Valute
                     exchange_rates: Tečajne liste
-                    header: Postavke
+                    header: Podeševanje
                     locales: Lokaliteti
                     payment_methods: Načini plaćanja
                     shipping_categories: Kategorije pošiljki

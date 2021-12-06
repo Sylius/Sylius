@@ -18,7 +18,7 @@ abstract class RequirementCollection implements \IteratorAggregate
     /** @var string */
     protected $label;
 
-    /** @var Requirement[] */
+    /** @var array|Requirement[] */
     protected $requirements = [];
 
     public function __construct(string $label)

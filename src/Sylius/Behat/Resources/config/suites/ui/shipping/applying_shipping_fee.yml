@@ -32,4 +32,4 @@ default:
                 - sylius.behat.context.ui.shop.checkout.payment
 
             filters:
-                tags: "@applying_shipping_fee && @ui"
+                tags: "@applying_shipping_fee&&@ui"

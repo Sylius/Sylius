@@ -19,17 +19,13 @@ use Twig\TwigFilter;
 
 final class FormatMoneyExtension extends AbstractExtension
 {
-    /** @var FormatMoneyHelperInterface */
-    private $helper;
+    private FormatMoneyHelperInterface $helper;
 
     public function __construct(FormatMoneyHelperInterface $helper)
     {
         $this->helper = $helper;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFilters(): array
     {
         return [

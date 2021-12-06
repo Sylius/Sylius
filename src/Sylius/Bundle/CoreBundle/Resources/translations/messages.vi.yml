@@ -8,6 +8,8 @@ sylius:
             title: Tiêu đề
         cart:
             coupon: Phiếu giảm giá
+        catalog_promotion:
+            channels: Kênh
         promotion:
             channels: Kênh
         group:
@@ -20,6 +22,7 @@ sylius:
                 country: Quốc gia
                 postcode: Mã bưu chính
                 street: Đường Phố
+            countries: Quốc gia
             locales: Miền địa phương
             payment_methods: Phương thức thanh toán
             shipping_methods: Phương thức vận chuyển

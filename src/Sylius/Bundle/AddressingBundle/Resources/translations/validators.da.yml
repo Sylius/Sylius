@@ -4,29 +4,19 @@
 sylius:
     address:
         city:
-            max_length: By må ikke være længere end 255 tegn|By må ikke være længere end 255 tegn.
-            min_length: By skal være mindst 2 tegn|By skal være mindst 2 tegn.
             not_blank: Angiv venligst by.
         country:
             not_blank: Vælg venligst land.
             disabled: Valgte land er deaktiveret. Vælg venligst et andet.
         first_name:
-            max_length: Fornavn kan ikke udgøre flere end 255 tegn|Fornavn kan ikke udgøre flere end 255 tegn.
-            min_length: Fornavn skal udgøre minimum 2 tegn|Fornavn skal udgøre minimum 2 tegn.
             not_blank: Angiv venligst fornavn.
         last_name:
-            max_length: Efternavn kan ikke udgøre flere end 255 tegn|Efternavn kan ikke udgøre flere end 255 tegn.
-            min_length: Efternavn skal udgøre minimum 2 tegn|Efternavn skal udgøre minimum 2 tegn.
             not_blank: Angiv venligst efternavn.
         postcode:
-            max_length: Postnummer kan ikke udgøre flere end 255 tegn|Postnummer kan ikke udgøre flere end 255 tegn.
-            min_length: Postnummer skal udgøre minimum 2 tegn|Postnummer skal udgøre minimum 2 tegn.
             not_blank: Angiv venligst postnummer.
         province:
             valid: Vælg venligst provins.
         street:
-            max_length: Gade kan ikke udgøre flere end 255 tegn|Gade kan ikke udgøre flere end 255 tegn.
-            min_length: Gade skal udgøre minimum 2 tegn|Gade skal udgøre minimum 2 tegn.
             not_blank: Angiv venligst gade.
         not_shippable: Denne leveringsadresse er uugyldig.
     country:
@@ -41,8 +31,6 @@ sylius:
             regex: Provinskode skal have formatet XX-XX (f.eks. U.S.-FL).
             unique: Provinskode skal være unik.
         name:
-            max_length: Provinsnavn må maksimalt udgøre 255 tegn|Provinsnavn må maksimalt udgøre 255 tegn.
-            min_length: Provinsnavn skal minimum udgøre 2 tegn|Provinsnavn skal minimum udgøre 2 tegn.
             not_blank: Angiv venligst provinsnavn.
             unique: Provinsnavn skal være unik.
     zone:
@@ -55,8 +43,6 @@ sylius:
         members:
             min_count: Tilføj venligst mindst {{ limit }} zonemedlem.
         name:
-            max_length: Zonenavn må maksimalt udgøre 255 tegn|Zonenavn må maksimalt udgøre 255 tegn.
-            min_length: Zonenavn skal minimum udgøre 2 tegn|Zonenavn skal minimum udgøre 2 tegn.
             not_blank: Angiv venligst zonenavn.
     zone_member:
         code:

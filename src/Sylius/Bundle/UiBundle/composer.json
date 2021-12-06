@@ -2,73 +2,84 @@
     "name": "sylius/ui-bundle",
     "type": "symfony-bundle",
     "description": "Generic UI bundle for Sylius eCommerce components.",
-    "keywords": ["shop", "ecommerce", "store", "webshop", "sylius", "ui", "user interface"],
-    "homepage": "http://sylius.com",
+    "keywords": [
+        "shop",
+        "ecommerce",
+        "store",
+        "webshop",
+        "sylius",
+        "ui",
+        "user interface"
+    ],
+    "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "homepage": "http://pjedrzejewski.com"
+            "homepage": "https://pjedrzejewski.com"
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.com"
+            "homepage": "https://sylius.com"
         },
         {
             "name": "Community contributions",
-            "homepage": "http://github.com/Sylius/Sylius/contributors"
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": "^7.3",
-
-        "doctrine/collections": "^1.3",
+        "php": "^8.0",
+        "doctrine/collections": "^1.6",
         "knplabs/knp-menu": "^3.1",
         "knplabs/knp-menu-bundle": "^3.0",
-        "sonata-project/block-bundle": "^4.0",
-        "sylius/grid-bundle": "^1.2",
-        "symfony/framework-bundle": "^4.4",
-        "symfony/security": "^4.4",
-        "symfony/security-bundle": "^4.4",
-        "symfony/templating": "^4.4",
-        "zendframework/zend-stdlib": "^3.1"
-    },
-    "require-dev": {
-        "matthiasnoback/symfony-config-test": "^4.0",
-        "matthiasnoback/symfony-dependency-injection-test": "^3.0",
-        "phpspec/phpspec": "^5.0",
-        "phpunit/phpunit": "^7.0",
-        "symfony/dependency-injection": "^4.4",
-        "symfony/form": "^4.4",
-        "twig/twig": "^2.0"
+        "sonata-project/block-bundle": "^3.20|^4.0",
+        "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
+        "sylius/grid-bundle": "^1.8",
+        "symfony/config": "^4.4 || ^5.4",
+        "symfony/framework-bundle": "^4.4 || ^5.4",
+        "symfony/security-core": "^4.4 || ^5.4",
+        "symfony/security-bundle": "^4.4 || ^5.4",
+        "symfony/templating": "^4.4 || ^5.4",
+        "laminas/laminas-stdlib": "^3.2"
     },
     "conflict": {
         "twig/twig": "^1.0"
     },
+    "require-dev": {
+        "matthiasnoback/symfony-config-test": "^4.2",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "phpspec/phpspec": "^7.0",
+        "phpunit/phpunit": "^8.5",
+        "symfony/dependency-injection": "^4.4 || ^5.4",
+        "symfony/form": "^4.4 || ^5.4",
+        "twig/twig": "^2.12"
+    },
     "config": {
         "bin-dir": "bin"
     },
-    "autoload": {
-        "psr-4": { "Sylius\\Bundle\\UiBundle\\": "" }
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.9-dev"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Sylius\\Bundle\\UiBundle\\": ""
+        }
+    },
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
         "test": [
             "@composer validate --strict",
             "bin/phpunit --colors=always",
             "bin/phpspec run --ansi --no-interaction"
         ]
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
     }
 }

@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Faker\Generator;
+use Faker\Factory;
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
@@ -27,23 +29,17 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ProductAttributeContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var RepositoryInterface */
-    private $productAttributeRepository;
+    private RepositoryInterface $productAttributeRepository;
 
-    /** @var AttributeFactoryInterface */
-    private $productAttributeFactory;
+    private AttributeFactoryInterface $productAttributeFactory;
 
-    /** @var FactoryInterface */
-    private $productAttributeValueFactory;
+    private FactoryInterface $productAttributeValueFactory;
 
-    /** @var ObjectManager */
-    private $objectManager;
+    private ObjectManager $objectManager;
 
-    /** @var \Faker\Generator */
-    private $faker;
+    private Generator $faker;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -58,7 +54,7 @@ final class ProductAttributeContext implements Context
         $this->productAttributeValueFactory = $productAttributeValueFactory;
         $this->objectManager = $objectManager;
 
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
     }
 
     /**
@@ -88,6 +84,16 @@ final class ProductAttributeContext implements Context
     public function theStoreHasAProductAttribute(string $type, string $name): void
     {
         $productAttribute = $this->createProductAttribute($type, $name);
+
+        $this->saveProductAttribute($productAttribute);
+    }
+
+    /**
+     * @Given /^the store has(?:| also)(?:| a| an) non-translatable (text|textarea|integer|percent) product attribute "([^"]+)"$/
+     */
+    public function theStoreHasANonTranslatableProductAttribute(string $type, string $name): void
+    {
+        $productAttribute = $this->createProductAttribute($type, $name, null, false);
 
         $this->saveProductAttribute($productAttribute);
     }
@@ -202,8 +208,8 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @Given /^(this product) has (text|textarea) attribute "([^"]+)" with value "([^"]+)"$/
-     * @Given /^(this product) has (text|textarea) attribute "([^"]+)" with value "([^"]+)" in ("[^"]+" locale)$/
+     * @Given /^(this product) has a (text|textarea) attribute "([^"]+)" with value "([^"]+)"$/
+     * @Given /^(this product) has a (text|textarea) attribute "([^"]+)" with value "([^"]+)" in ("[^"]+" locale)$/
      */
     public function thisProductHasAttributeWithValue(
         ProductInterface $product,
@@ -220,7 +226,24 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @Given /^(this product) has percent attribute "([^"]+)" with value ([^"]+)%$/
+     * @Given /^(this product) has non-translatable (text|textarea) attribute "([^"]+)" with value "([^"]+)"$/
+     */
+    public function thisProductHasNonTranslatableTextAttributeWithValue(
+        ProductInterface $product,
+        string $productAttributeType,
+        string $productAttributeName,
+        string $value,
+        string $language = 'en_US'
+    ): void {
+        $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
+        $attributeValue = $this->createProductAttributeValue($value, $attribute, $language, false);
+        $product->addAttribute($attributeValue);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this product) has a percent attribute "([^"]+)" with value ([^"]+)%$/
      */
     public function thisProductHasPercentAttributeWithValue(ProductInterface $product, $productAttributeName, $value)
     {
@@ -232,7 +255,19 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @Given /^(this product) has ([^"]+) attribute "([^"]+)" set to "([^"]+)"$/
+     * @Given /^(this product) has non-translatable percent attribute "([^"]+)" with value ([^"]+)%$/
+     */
+    public function thisProductHasNonTranslatablePercentAttributeWithValue(ProductInterface $product, string $productAttributeName, int $value): void
+    {
+        $attribute = $this->provideProductAttribute('percent', $productAttributeName);
+        $attributeValue = $this->createProductAttributeValue($value / 100, $attribute, null, false);
+        $product->addAttribute($attributeValue);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this product) has a "([^"]+)" attribute "([^"]+)" set to "([^"]+)"$/
      */
     public function thisProductHasCheckboxAttributeWithValue(
         ProductInterface $product,
@@ -243,6 +278,23 @@ final class ProductAttributeContext implements Context
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $booleanValue = ('Yes' === $value);
         $attributeValue = $this->createProductAttributeValue($booleanValue, $attribute);
+        $product->addAttribute($attributeValue);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this product) has non-translatable "([^"]+)" attribute "([^"]+)" set to "([^"]+)"$/
+     */
+    public function thisProductHasNonTranslatableCheckboxAttributeWithValue(
+        ProductInterface $product,
+        string $productAttributeType,
+        string $productAttributeName,
+        $value
+    ) {
+        $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
+        $booleanValue = ('Yes' === $value);
+        $attributeValue = $this->createProductAttributeValue($booleanValue, $attribute, 'en_US', false);
         $product->addAttribute($attributeValue);
 
         $this->objectManager->flush();
@@ -266,7 +318,7 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @Given /^(this product) has ([^"]+) attribute "([^"]+)" with date "([^"]+)"$/
+     * @Given /^(this product) has a ([^"]+) attribute "([^"]+)" with date "([^"]+)"$/
      */
     public function thisProductHasDateTimeAttributeWithDate(
         ProductInterface $product,
@@ -283,19 +335,35 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @param string $type
-     * @param string $name
-     * @param string|null $code
-     *
-     * @return ProductAttributeInterface
+     * @Given /^(this product) has non-translatable ([^"]+) attribute "([^"]+)" with date "([^"]+)"$/
      */
-    private function createProductAttribute($type, $name, $code = null)
-    {
+    public function thisProductHasNonTranslatableDateTimeAttributeWithDate(
+        ProductInterface $product,
+        string $productAttributeType,
+        string $productAttributeName,
+        $date
+    ) {
+        $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
+        $attributeValue = $this->createProductAttributeValue(new \DateTime($date), $attribute, 'en_US', false);
+
+        $product->addAttribute($attributeValue);
+
+        $this->objectManager->flush();
+    }
+
+    private function createProductAttribute(
+        string $type,
+        string $name,
+        ?string $code = null,
+        bool $translatable = true
+    ): ProductAttributeInterface {
+        /** @var ProductAttributeInterface $productAttribute */
         $productAttribute = $this->productAttributeFactory->createTyped($type);
 
         $code = $code ?: StringInflector::nameToCode($name);
 
         $productAttribute->setCode($code);
+        $productAttribute->setTranslatable($translatable);
         $productAttribute->setName($name);
 
         return $productAttribute;
@@ -327,9 +395,13 @@ final class ProductAttributeContext implements Context
     private function createProductAttributeValue(
         $value,
         ProductAttributeInterface $attribute,
-        string $localeCode = 'en_US'
+        ?string $localeCode = 'en_US',
+        bool $translatable = true
     ): ProductAttributeValueInterface {
         /** @var ProductAttributeValueInterface $attributeValue */
+        $attribute->setTranslatable($translatable);
+        $this->objectManager->persist($attribute);
+
         $attributeValue = $this->productAttributeValueFactory->createNew();
         $attributeValue->setAttribute($attribute);
         $attributeValue->setValue($value);

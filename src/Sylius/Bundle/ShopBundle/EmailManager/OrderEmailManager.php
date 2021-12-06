@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\EmailManager;
 
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface as DecoratedOrderEmailManagerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
@@ -22,13 +23,34 @@ final class OrderEmailManager implements OrderEmailManagerInterface
     /** @var SenderInterface */
     private $emailSender;
 
-    public function __construct(SenderInterface $emailSender)
+    /** @var DecoratedOrderEmailManagerInterface|null */
+    private $decoratedEmailManager;
+
+    public function __construct(SenderInterface $emailSender, ?DecoratedOrderEmailManagerInterface $decoratedEmailManager)
     {
         $this->emailSender = $emailSender;
+        $this->decoratedEmailManager = $decoratedEmailManager;
+
+        if ($decoratedEmailManager === null) {
+            @trigger_error(
+                sprintf(
+                    'Not passing an instance of %s to %s constructor is deprecated since Sylius 1.8 and will be removed in Sylius 2.0.',
+                    DecoratedOrderEmailManagerInterface::class,
+                    self::class
+                ),
+                \E_USER_DEPRECATED
+            );
+        }
     }
 
     public function sendConfirmationEmail(OrderInterface $order): void
     {
+        if ($this->decoratedEmailManager !== null) {
+            $this->decoratedEmailManager->sendConfirmationEmail($order);
+
+            return;
+        }
+
         $this->emailSender->send(
             Emails::ORDER_CONFIRMATION,
             [$order->getCustomer()->getEmail()],
@@ -36,7 +58,8 @@ final class OrderEmailManager implements OrderEmailManagerInterface
                 'order' => $order,
                 'channel' => $order->getChannel(),
                 'localeCode' => $order->getLocaleCode(),
-            ])
+            ]
+        )
         ;
     }
 }

@@ -17,8 +17,8 @@ Payment method
 --------------
 
 Customer should also be able to choose, how they are willing to pay. At least one payment method is required - let's make it "Cash on delivery".
-Before creation, we need to specify the payment method gateway, which is a way for processing the payment (*Offline*, *PayPal Express Checkout*,
-and *Stripe* are supported by default).
+Before creation, we need to specify the payment method gateway, which is a way for processing the payment
+(*Offline*, *PayPal Commerce Platform*, *PayPal Express Checkout* and *Stripe* are supported by default).
 
 Gateway selection:
 

@@ -13,7 +13,7 @@ Feature: Apply correct taxes for an order with a discount for a shipping
         And the promotion gives "10%" discount on shipping to every order
         And I am a logged in customer
 
-    @ui
+    @ui @api
     Scenario: Properly rounded up tax
         Given the store has "DHL" shipping method with "$51.06" fee
         And shipping method "DHL" belongs to "Shipping" tax category
@@ -22,7 +22,7 @@ Feature: Apply correct taxes for an order with a discount for a shipping
         Then my cart total should be "$60.55"
         And my cart taxes should be "$4.60"
 
-    @ui
+    @ui @api
     Scenario: Properly rounded down tax
         Given the store has "DHL" shipping method with "$51.04" fee
         And shipping method "DHL" belongs to "Shipping" tax category
@@ -31,7 +31,7 @@ Feature: Apply correct taxes for an order with a discount for a shipping
         Then my cart total should be "$60.53"
         And my cart taxes should be "$4.59"
 
-    @ui
+    @ui @api
     Scenario: Properly calculated taxes when item belongs to different tax category
         Given the store has "Standard VAT" tax rate of 23% for "Mugs" within the "US" zone
         And the store has a product "Sonata Mug" priced at "$10.00"

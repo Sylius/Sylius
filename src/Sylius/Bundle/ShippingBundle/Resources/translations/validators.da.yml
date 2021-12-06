@@ -12,6 +12,8 @@ sylius:
             regex: 'Koden for forsendelseskategorien må kun bestå af bogstaver, tal, bindestreger og understregninger.'
             unique: 'Forsendelseskategorien med den angivne kode eksisterer i forvejen.'
     shipping_method:
+        calculator:
+            not_blank: 'Vælg venligst beregner til forsendelsesmetode.'
         name:
             max_length: 'Forsendelsesmetode navn må ikke være længere end {{ limit }} tegn.'
             min_length: 'Navnet på forsendelsesmetoden skal være mindst {{ limit }} tegn langt.'

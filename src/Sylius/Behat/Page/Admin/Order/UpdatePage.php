@@ -46,8 +46,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws ElementNotFoundException
      */
     public function checkValidationMessageFor(string $element, string $message): bool

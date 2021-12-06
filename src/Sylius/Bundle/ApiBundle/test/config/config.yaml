@@ -1,0 +1,92 @@
+imports:
+    - { resource: "@SyliusCoreBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusApiBundle/Resources/config/app/config.yaml" }
+    - { resource: "security.yaml" }
+
+parameters:
+    locale: en_US
+    database_driver: pdo_sqlite
+    database_path: "%kernel.project_dir%/var/db.sql"
+
+api_platform:
+    enable_swagger_ui: false
+    enable_re_doc: false
+    enable_swagger: false
+    enable_entrypoint: false
+    enable_docs: false
+    mapping:
+        paths:
+            - '%kernel.api_bundle_path%/Resources/config/api_resources'
+            - '%kernel.project_dir%/config/api_resources'
+
+sylius_api:
+    enabled: '%env(bool:SYLIUS_API_ENABLED)%'
+
+framework:
+    assets: ~
+    secret: "ch4mb3r0f5ecr3ts"
+    default_locale: "%locale%"
+    session:
+        handler_id: ~
+        storage_id: session.storage.mock_file
+    http_method_override: true
+    test: ~
+    serializer:
+        mapping:
+            paths: ['%kernel.project_dir%/config/serialization']
+
+doctrine_migrations:
+    storage:
+        table_storage:
+            table_name: sylius_migrations
+
+doctrine:
+    dbal:
+        driver: "%database_driver%"
+        path: "%database_path%"
+        charset: UTF8
+    orm:
+        entity_managers:
+            default:
+                mappings:
+                    test:
+                        mapping: true
+                        type: xml
+                        dir: '%kernel.project_dir%/config/doctrine'
+                        alias: ~
+                        prefix: Sylius\Bundle\ApiBundle\Application\Entity
+                        is_bundle: false
+
+lexik_jwt_authentication:
+    secret_key: "%kernel.project_dir%/config/jwt/private-test.pem"
+    public_key: "%kernel.project_dir%/config/jwt/public-test.pem"
+    pass_phrase: "ALL_THAT_IS_GOLD_DOES_NOT_GLITTER_NOT_ALL_THOSE_WHO_WANDER_ARE_LOST"
+
+swiftmailer:
+    disable_delivery: true
+    logging: true
+    spool:
+        type: file
+        path: '%kernel.cache_dir%/spool'
+
+sylius_taxonomy:
+    resources:
+        taxon:
+            classes:
+                model: Sylius\Bundle\ApiBundle\Application\Entity\Taxon
+
+sylius_resource:
+    resources:
+        test.foo_sylius_resource:
+            classes:
+                model: Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource
+
+services:
+    test.channel.id_filter:
+        parent: api_platform.doctrine.orm.search_filter
+        arguments: [{id: 'exact', hostname: 'partial'}]
+        tags: ['api_platform.filter']
+
+    Sylius\Bundle\ApiBundle\Application\CommandHandler\FooHandler:
+        tags:
+            - { name: messenger.message_handler, bus: sylius.command_bus }

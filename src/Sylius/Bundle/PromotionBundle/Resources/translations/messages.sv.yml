@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Beskrivning
+            name: Namn
+            priority: Prioritet
         promotion:
             actions: Åtgärder
             add_action: Lägg till åtgärd
@@ -17,6 +21,7 @@ sylius:
             starts_at: Startar vid
             usage_limit: Användningsbegränsning
         promotion_action:
+            order_percentage_discount: Beställning procentrabatt
             fixed_discount_configuration:
                 amount: Antal
             percentage_discount_configuration:
@@ -26,13 +31,17 @@ sylius:
             expires_at: Förfaller den
             usage_limit: Användningsbegränsning
         promotion_coupon_generator_instruction:
-            amount: Antal
+            amount: Belopp
             code_length: Kodlängd
             expires_at: Förfaller den
             usage_limit: Användningsbegränsning
         promotion_rule:
+            cart_quantity: Antal artiklar
             contains_product: Innehåller produkt
             customer_group: Kundgrupp
+            has_at_least_one_from_taxons: Har åtminstone en från taxa
+            item_total: Artiklars totala värde
+            shipping_country: Leveransland
             taxonomy: Taxonomi
             cart_quantity_configuration:
                 count: Antal
@@ -41,7 +50,7 @@ sylius:
                 exclude: Exkludera
                 variants: Produkter
             item_total_configuration:
-                amount: Antal
+                amount: Belopp
             shipping_country_configuration:
                 country: Land
             taxonomy_configuration:

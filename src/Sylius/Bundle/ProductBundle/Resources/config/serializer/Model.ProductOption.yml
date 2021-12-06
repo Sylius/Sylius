@@ -17,16 +17,9 @@ Sylius\Component\Product\Model\ProductOption:
             groups: [Default, Detailed]
         values:
             expose: true
-            type: array
+            type: iterable
             groups: [Default, Detailed]
         translations:
             expose: true
-            type: array
+            type: iterable
             groups: [Default, Detailed]
-    relations:
-        -   rel: self
-            href:
-                route: sylius_admin_api_product_option_show
-                parameters:
-                    code: expr(object.getCode())
-                    version: 1

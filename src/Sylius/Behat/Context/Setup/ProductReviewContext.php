@@ -25,17 +25,13 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 final class ProductReviewContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var FactoryInterface */
-    private $productReviewFactory;
+    private \Sylius\Component\Resource\Factory\FactoryInterface $productReviewFactory;
 
-    /** @var RepositoryInterface */
-    private $productReviewRepository;
+    private RepositoryInterface $productReviewRepository;
 
-    /** @var StateMachineFactoryInterface */
-    private $stateMachineFactory;
+    private StateMachineFactoryInterface $stateMachineFactory;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,

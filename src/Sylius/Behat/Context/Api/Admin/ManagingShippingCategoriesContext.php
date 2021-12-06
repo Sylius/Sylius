@@ -21,11 +21,9 @@ use Webmozart\Assert\Assert;
 
 final class ManagingShippingCategoriesContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $client;
+    private ApiClientInterface $client;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
     public function __construct(ApiClientInterface $client, ResponseCheckerInterface $responseChecker)
     {
@@ -50,8 +48,7 @@ final class ManagingShippingCategoriesContext implements Context
     }
 
     /**
-     * @When I add it
-     * @When I try to add it
+     * @When I (try to) add it
      */
     public function iAddIt(): void
     {

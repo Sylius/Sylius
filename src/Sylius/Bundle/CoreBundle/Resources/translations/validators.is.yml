@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        base_currency:
+            not_blank: Vinsamlega sláðu inn grunngjaldmiðil sölumáta.
+        default_locale:
+            not_blank: Vinsamlega sláðu inn sjálfgefið tungumálasvæði sölumáta.
+        contact_email:
+            min: Netfang má vera mest {{ limit }} stafir á lengd.
+    channel_pricing:
+        price:
+            not_blank: Vinsamlega skráðu verð.
+    product:
+        variants:
+            all_prices_defined: Þú þarft að skrá verð á hverri útfærslu vörunnar fyrir nýja sölumátann.
+    product_variant:
+        channel_pricing:
+            all_defined: 'Nauðsynlegt er að skrá verð fyrir hvern sölumáta.'

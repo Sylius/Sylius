@@ -9,6 +9,8 @@ sylius:
             title: Titel
         cart:
             coupon: Kupon
+        catalog_promotion:
+            channels: Kanaler
         checkout:
             addressing:
                 different_billing_address: Brug anden faktureringsadresse?
@@ -32,6 +34,7 @@ sylius:
                 postcode: Postnummer
                 street: Gade
             contact_email: Kontakt e-mail
+            countries: Lande
             currencies: Valutaer
             currency_base: Standardvaluta
             account_verification_required: Kræves kontobekræftelse?
@@ -61,7 +64,7 @@ sylius:
             payment_state: Betalingsstatus
             channel: Alle kanaler
         page:
-            body: Indhold
+            body: Krop
             id: ID
             title: Titel
         product:
@@ -100,7 +103,6 @@ sylius:
             file: Vælg billede
         user:
             billing_address: Faktureringsadresse
-            different_billing_address: Brug anden faktureringsadresse?
             enabled: Aktiveret
             first_name: Fornavn
             groups: Grupper
@@ -146,7 +148,7 @@ sylius:
         payment_method:
             channels: Kanaler
         product_attribute:
-            position: Placering
+            position: Position
         zone:
             scopes:
                 shipping: Forsendelse

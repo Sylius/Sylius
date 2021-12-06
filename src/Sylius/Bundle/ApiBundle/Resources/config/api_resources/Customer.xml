@@ -16,25 +16,77 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.customer.class%" shortName="Customer">
-        <attribute name="route_prefix">admin</attribute>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>customer:read</attribute>
-            </attribute>
-        </attribute>
+        <attribute name="validation_groups">sylius</attribute>
 
-        <collectionOperations />
+        <collectionOperations>
+            <collectionOperation name="shop_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/shop/customers</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Registers a new customer</attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:customer:create</attribute>
+                </attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser</attribute>
+                <attribute name="output">false</attribute>
+            </collectionOperation>
+        </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get">
-                <attribute name="groups">
-                    <attribute>customer:read</attribute>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/customers/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:customer:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/customers/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>shop:customer:read</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_password_update">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/shop/customers/{id}/password</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Account\ChangeShopUserPassword</attribute>
+                <attribute name="output">false</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:customer:password:update</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Change password for logged in customer</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/shop/customers/{id}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:customer:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:customer:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
-        <property name="email" writable="false" />
+        <property name="email" writable="true" />
+        <property name="firstName" writable="true" />
+        <property name="lastName" writable="true" />
+        <property name="fullName" writable="false" />
+        <property name="defaultAddress" writable="true" />
+        <property name="subscribedToNewsletter" writable="true" />
+        <property name="user" readable="true" />
     </resource>
 </resources>

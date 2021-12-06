@@ -1,0 +1,39 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        attribute:
+            add: ' Нэм'
+            add_attributes: Атрибут нэмэх
+            choices: Сонголтууд
+            code: Код
+            name: Нэр
+            translations: Орчуулгууд
+            type: Төрөл
+        attribute_type:
+            checkbox: Сонгож зөвлөх
+            configuration: Тохируулга
+            date: Огноо
+            datetime: Он сар өдөр цаг
+            integer: Бүхэл тоо
+            percent: Хувь
+            select: Сонгох
+            text: Текст
+            textarea: Текстийн талбар
+            title: Атрибутийн төрлүүд
+            validation: Хүчинтэй хугацаа
+        attribute_type_configuration:
+            datetime:
+                format: Формат
+            date:
+                format: Формат
+            select:
+                multiple: Олон тооны
+                values: Утга
+                choose: Сонголтыг сонгох
+                min: ' Хамгийн бага тэмдэглэгээ'
+                max: Хамгийн их тэмдэглэгээ
+            text:
+                min: Хамгийн бага урт
+                max: Хамгийн их урт

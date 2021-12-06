@@ -25,11 +25,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductTaxonAutocompleteChoiceType extends AbstractType
 {
-    /** @var FactoryInterface */
-    private $productTaxonFactory;
+    private FactoryInterface $productTaxonFactory;
 
-    /** @var RepositoryInterface */
-    private $productTaxonRepository;
+    private RepositoryInterface $productTaxonRepository;
 
     public function __construct(FactoryInterface $productTaxonFactory, RepositoryInterface $productTaxonRepository)
     {
@@ -37,9 +35,6 @@ final class ProductTaxonAutocompleteChoiceType extends AbstractType
         $this->productTaxonRepository = $productTaxonRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['multiple']) {
@@ -65,9 +60,6 @@ final class ProductTaxonAutocompleteChoiceType extends AbstractType
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -82,17 +74,11 @@ final class ProductTaxonAutocompleteChoiceType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ResourceAutocompleteChoiceType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_product_taxon_autocomplete_choice';

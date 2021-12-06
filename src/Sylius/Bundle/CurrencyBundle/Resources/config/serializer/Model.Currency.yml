@@ -19,10 +19,3 @@ Sylius\Component\Currency\Model\Currency:
             expose: true
             type: boolean
             groups: [Default, Detailed]
-    relations:
-        -   rel: self
-            href:
-                route: sylius_admin_api_currency_show
-                parameters:
-                    code: expr(object.getCode())
-                    version: 1

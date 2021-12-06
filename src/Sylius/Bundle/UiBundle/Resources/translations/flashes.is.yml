@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        delete_error: 'Ekki er hægt að eyða sölumátanum. A.m.k. einn sölumáti þarf að vera virkur.'
+    checkout:
+        complete_error: 'Óvænt vandamál kom upp við skráningu pöntunarinnar. Vinsamlegast reynið aftur.'
+    contact:
+        request_success: 'Fyrirspurnin hefur verið send.'
+        request_error: 'Villa kom upp við sendingu fyrirspurnar. Vinsamlegast reynið aftur síðar.'
+    customer:
+        add_address: 'Heimilisfang hefur verið skráð.'
+        impersonate: 'Þú ert nú innskráð/ur sem %name%.'
+        set_address_as_default: 'Sjálfgefið heimilisfang hefur verið valið.'
+    order:
+        apply_state_machine_transition_error: 'Óvænt vandamál kom upp við breytingu pöntunarinnar. Vinsamlegast reynið aftur.'
+        promotion_integrity: 'Tilboðið %promotionName% er því miður ekki lengur í gildi.'
+        total_integrity: 'Heildarupphæð pöntunar hefur breyst, vinsamlegast skoðaðu pöntunina og staðfestu hana aftur.'
+        update_error: 'Óvænt vandamál kom upp við breytingu pöntunarinnar. Vinsamlegast reynið aftur.'
+    payment:
+        apply_state_machine_transition_error: 'Óvænt vandamál kom upp við breytingu á greiðslu. Vinsamlegast reyndu aftur.'
+    product:
+        out_of_stock: 'Við eigum því miður aðeins %quantity% á lager.'
+    product_variant:
+        update_error: 'Óvænt vandamál kom upp við breytingu á útfærslu vöru. Vinsamlegast reyndu aftur.'

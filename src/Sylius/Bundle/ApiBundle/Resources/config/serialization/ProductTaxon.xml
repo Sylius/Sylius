@@ -6,10 +6,12 @@
 
     <class name="Sylius\Component\Core\Model\ProductTaxon">
         <attribute name="id">
-            <group>product_taxon:read</group>
+            <group>admin:product_taxon:read</group>
+            <group>shop:product_taxon:read</group>
         </attribute>
         <attribute name="taxon">
-            <group>product_taxon:read</group>
+            <group>admin:product_taxon:read</group>
+            <group>shop:product_taxon:read</group>
         </attribute>
     </class>
 </serializer>

@@ -2,10 +2,23 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: L'image est trop grande - {{ size }}{{ suffix }}. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
+            upload_ini_size: L'image est trop grande. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
+    catalog_promotion_scope:
+        invalid_type: Le type de champ d'application pour la promotion catalogue est invalide. Veuillez choisir un type valide.
+        for_variants:
+            invalid_variants: La configuration fournie contient des erreurs. Veuillez ajouter uniquement des variantes existantes.
+            not_empty: Veuillez ajouter au moins une variante.
+        for_taxons:
+            invalid_taxons: La configuration fournie contient des erreurs. Veuillez ajouter uniquement des taxonomies existantes.
+            not_empty: La configuration fournie contient des erreurs. Veuillez ajouter au moins 1 taxonomie.
     channel:
         base_currency:
             not_blank: Saisissez la devise de référence du canal.
         default_locale:
+            enabled: Les paramètres régionaux par défaut doivent être activés.
             not_blank: Veuillez renseigner la locale par défaut du canal.
         contact_email:
             invalid: Cet e-mail n'est pas valide.
@@ -13,7 +26,7 @@ sylius:
             min: L'e-mail doit contenir au moins {{ limit }} caractères.
     channel_pricing:
         price:
-            min: Le prix doit être au moins de {{ limit }}.
+            min: Le prix ne peut pas être inférieur à 0.
             not_blank: Veuillez saisir un prix.
     checkout:
         shipping_method:
@@ -39,14 +52,11 @@ sylius:
         product_eligibility: 'Le produit %productName% a été désactivé.'
         shipping_method_eligibility: 'Ce produit n''est pas éligible au mode de livraison %shippingMethodName%. Veuillez sélectionner une nouvelle fois votre mode de livraison.'
     locale:
-        code:
-            not_blank: Veuillez saisir le code de la locale.
-            unique: Ce paramètre régional existe déjà.
         enabled:
             cannot_disable_base: La base locale ne peut pas être désactivée.
     product:
         variants:
-            all_prices_defined: Vous avez d’abord définir le prix des variantes de produit pour les canaux nouvellement affectés.
+            all_prices_defined: Vous devez d’abord définir le prix des variantes de produit pour les canaux nouvellement affectés.
     product_attribute:
         invalid: La position doit être un entier positif.
     product_image:
@@ -77,6 +87,11 @@ sylius:
     product_translation:
         short_description:
             max: La description courte ne doit pas dépasser {{ limit }} caractères.
+    review:
+        author:
+            not_blank: Veuillez saisir votre adresse email.
+        rating:
+            range: La note de l'avis doit être un entier entre 1 et 5.
     taxon_image:
         file:
             max_size: L'image est trop grande - {{ size }}{{ suffix }}. La taille maximum autorisée est de {{ limit }}{{ suffix }}.

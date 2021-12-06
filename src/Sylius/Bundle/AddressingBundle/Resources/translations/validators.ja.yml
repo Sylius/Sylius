@@ -13,6 +13,16 @@ sylius:
             not_blank: 姓を入力してください。
         postcode:
             not_blank: 郵便番号を入力してください。
+        province:
+            valid: 地域を選択してください
+        street:
+            not_blank: 住所を入力してください。
     country:
         code:
             not_blank: 国の ISO コードを入力してください。
+    zone:
+        code:
+            not_blank: ゾーンコードを入力してください。
+            unique: ゾーンコードはユニークである必要があります。
+        name:
+            not_blank: ゾーン名を入力してください。

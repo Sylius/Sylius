@@ -19,10 +19,6 @@ sylius:
             not_blank: Shkruaj adresën e email-it.
         message:
             not_blank: Shkruaj mesazhin tënd.
-    locale:
-        code:
-            not_blank: Shkruaj kodin lokal.
-            unique: Ky kod lokal ekziston tashmë.
     product_variant:
         onHand:
             min: Drejtimi duhet të jetë më i madh se {{ limit }}.
@@ -32,6 +28,9 @@ sylius:
     product_translation:
         short_description:
             max: Përshkrimi i shkurtër nuk duhet të përmbajë më shumë se {{ limit }} karaktere.
+    review:
+        author:
+            not_blank: Shkruaj adresën e email-it.
     user:
         email:
             unique: Ky email është përdorur tashmë.

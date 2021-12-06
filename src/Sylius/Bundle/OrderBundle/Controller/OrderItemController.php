@@ -97,16 +97,14 @@ class OrderItemController extends ResourceController
             return $this->handleBadAjaxRequestView($configuration, $form);
         }
 
-        $view = View::create()
-            ->setData([
+        return $this->render(
+            $configuration->getTemplate(CartActions::ADD . '.html'),
+            [
                 'configuration' => $configuration,
                 $this->metadata->getName() => $orderItem,
                 'form' => $form->createView(),
-            ])
-            ->setTemplate($configuration->getTemplate(CartActions::ADD . '.html'))
-        ;
-
-        return $this->viewHandler->handle($configuration, $view);
+            ]
+        );
     }
 
     public function removeAction(Request $request): Response
@@ -119,7 +117,7 @@ class OrderItemController extends ResourceController
 
         $event = $this->eventDispatcher->dispatchPreEvent(CartActions::REMOVE, $configuration, $orderItem);
 
-        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid((string) $orderItem->getId(), $request->request->get('_csrf_token'))) {
+        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid((string) $orderItem->getId(), (string) $request->request->get('_csrf_token'))) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 
@@ -227,7 +225,11 @@ class OrderItemController extends ResourceController
     protected function getAddToCartFormWithErrors(ConstraintViolationListInterface $errors, FormInterface $form): FormInterface
     {
         foreach ($errors as $error) {
-            $form->get('cartItem')->get($error->getPropertyPath())->addError(new FormError($error->getMessage()));
+            $formSelected = empty($error->getPropertyPath())
+                ? $form->get('cartItem')
+                : $form->get('cartItem')->get($error->getPropertyPath());
+
+            $formSelected->addError(new FormError($error->getMessage()));
         }
 
         return $form;

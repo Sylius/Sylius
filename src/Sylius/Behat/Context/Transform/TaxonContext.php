@@ -19,12 +19,14 @@ use Webmozart\Assert\Assert;
 
 final class TaxonContext implements Context
 {
-    /** @var TaxonRepositoryInterface */
-    private $taxonRepository;
+    private TaxonRepositoryInterface $taxonRepository;
 
-    public function __construct(TaxonRepositoryInterface $taxonRepository)
+    private string $locale;
+
+    public function __construct(TaxonRepositoryInterface $taxonRepository, string $locale)
     {
         $this->taxonRepository = $taxonRepository;
+        $this->locale = $locale;
     }
 
     /**
@@ -41,7 +43,7 @@ final class TaxonContext implements Context
      */
     public function getTaxonByName($name)
     {
-        $taxons = $this->taxonRepository->findByName($name, 'en_US');
+        $taxons = $this->taxonRepository->findByName($name, $this->locale);
 
         Assert::eq(
             count($taxons),

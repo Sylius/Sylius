@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Açıklama
+            enabled: Etkin
             name: Ad
             parent: Üst
             slug: Kısa isim

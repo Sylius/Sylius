@@ -16,15 +16,11 @@ namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 
 final class TaxonType extends AbstractResourceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -32,23 +28,18 @@ final class TaxonType extends AbstractResourceType
                 'entry_type' => TaxonTranslationType::class,
                 'label' => 'sylius.form.taxon.name',
             ])
+            ->add('enabled', CheckboxType::class, [
+                'required' => false,
+                'label' => 'sylius.form.taxon.enabled',
+            ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
-                if (null === $event->getData()) {
-                    return;
-                }
-
-                $event->getForm()->add('parent', TaxonAutocompleteChoiceType::class, [
-                    'label' => 'sylius.form.taxon.parent',
-                    'required' => false,
-                ]);
-            })
+            ->add('parent', TaxonAutocompleteChoiceType::class, [
+                'label' => 'sylius.form.taxon.parent',
+                'required' => false,
+            ])
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_taxon';

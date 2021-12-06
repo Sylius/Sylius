@@ -4,29 +4,29 @@
 sylius:
     address:
         city:
-            max_length: Der Name der Stadt darf nicht länger als 255 Zeichen sein|Der Name der Stadt darf nicht länger als 255 Zeichen sein.
-            min_length: Der Name der Stadt muss mindestens 2 Zeichen lang sein|Der Name der Stadt muss mindestens 2 Zeichen lang sein.
+            max_length: Der Name der Stadt darf nicht länger als {{ limit }} Zeichen sein|Der Name der Stadt darf nicht länger als {{ limit }} Zeichen sein.
+            min_length: Der Name der Stadt muss mindestens {{ limit }} Zeichen lang sein|Der Name der Stadt muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie eine Stadt an.
         country:
             not_blank: Bitte wählen Sie ein Land aus.
             disabled: Das gewählte Land ist deaktiviert. Bitte wählen Sie ein anderes.
         first_name:
-            max_length: Der Vorname darf nicht länger als 255 Zeichen sein|Der Vorname darf nicht länger als 255 Zeichen sein.
-            min_length: Der Vorname muss mindestens 2 Zeichen lang sein|Der Vorname muss mindestens 2 Zeichen lang sein.
+            max_length: Der Vorname darf nicht länger als {{ limit }} Zeichen sein|Der Vorname darf nicht länger als {{ limit }} Zeichen sein.
+            min_length: Der Vorname muss mindestens {{ limit }} Zeichen lang sein|Der Vorname muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie einen Vornamen an.
         last_name:
-            max_length: Der Nachname darf nicht länger als 255 Zeichen sein|Der Nachname darf nicht länger als 255 Zeichen sein.
-            min_length: Der Nachname muss mindestens 2 Zeichen lang sein|Der Nachname muss mindestens 2 Zeichen lang sein.
+            max_length: Der Nachname darf nicht länger als {{ limit }} Zeichen sein|Der Nachname darf nicht länger als {{ limit }} Zeichen sein.
+            min_length: Der Nachname muss mindestens {{ limit }} Zeichen lang sein|Der Nachname muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie einen Nachnamen an.
         postcode:
-            max_length: Die Postleitzahl darf nicht länger als 255 Zeichen sein|Die Postleitzahl darf nicht länger als 255 Zeichen sein.
-            min_length: Die Postleitzahl muss mindestens 2 Zeichen lang sein|Die Postleitzahl muss mindestens 2 Zeichen lang sein.
+            max_length: Die Postleitzahl darf nicht länger als {{ limit }} Zeichen sein|Die Postleitzahl darf nicht länger als {{ limit }} Zeichen sein.
+            min_length: Die Postleitzahl muss mindestens {{ limit }} Zeichen lang sein|Die Postleitzahl muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie eine Postleitzahl an.
         province:
             valid: Bitte wählen Sie ein korrekten Kanton aus.
         street:
-            max_length: Die Strasse darf nicht länger als 255 Zeichen sein|Die Strasse darf nicht länger als 255 Zeichen sein.
-            min_length: Die Strasse muss mindestens 2 Zeichen lang sein|Die Strasse muss mindestens 2 Zeichen lang sein.
+            max_length: Der Straßenname darf nicht länger als {{ limit }} Zeichen sein|Der Straßenname darf nicht länger als {{ limit }} Zeichen sein.
+            min_length: Der Straßenname muss mindestens {{ limit }} Zeichen lang sein|Der Straßenname muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie eine Strasse an.
         not_shippable: Diese Adresse ist keine gültige Versandadresse.
     country:
@@ -41,8 +41,8 @@ sylius:
             regex: Der Code des Bundeslands sollte das Format XX-XX haben (z.B. CH-ZH).
             unique: Bundesland\Kanton-Code muss eindeutig sein.
         name:
-            max_length: Der Name des Kantons darf nicht länger als 255 Zeichen sein|Der Name des Kantons darf nicht länger als 255 Zeichen sein.
-            min_length: Der Name des Kantons muss mindestens 2 Zeichen lang sein|Der Name des Kantons muss mindestens 2 Zeichen lang sein.
+            max_length: Der Name des Bundeslandes darf nicht länger als {{ limit }} Zeichen sein|Der Name des Bundeslandes darf nicht länger als {{ limit }} Zeichen sein.
+            min_length: Der Name des Bundeslandes muss mindestens {{ limit }} Zeichen lang sein|Der Name des Bundeslandes muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie einen Kanton an.
             unique: Bundesland-Name/Kanton-Name muss eindeutig sein.
     zone:
@@ -55,10 +55,11 @@ sylius:
         members:
             min_count: Bitte geben Sie mindestens {{ limit }} Versandgebiete an.
         name:
-            max_length: Der Name eines Versandgebietes darf nicht länger als 255 Zeichen sein|Der Name eines Versandgebietes darf nicht länger als 255 Zeichen sein.
-            min_length: Der Name eines Versandgebietes muss mindestens zwei Zeichen lang sein|Der Name eines Versandgebietes muss mindestens zwei Zeichen lang sein.
+            max_length: Der Zonenname darf nicht länger als {{ limit }} Zeichen sein|Der Zonenname darf nicht länger als {{ limit }} Zeichen sein.
+            min_length: Der Zonenname muss mindestens {{ limit }} Zeichen lang sein|Der Zonenname muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie den Namen des Versandgebietes an.
     zone_member:
+        cannot_be_the_same_as_zone: Bereichsmitglied und Beriech müssen unterschiedlich sein.
         code:
             not_blank: Bitte wählen Sie ein Versandgebiet aus.
             regex: Kürzel des Versandgebietes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.

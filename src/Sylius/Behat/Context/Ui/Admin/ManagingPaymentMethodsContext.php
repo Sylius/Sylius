@@ -25,23 +25,17 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPaymentMethodsContext implements Context
 {
-    /** @var CreatePageInterface */
-    private $createPage;
+    private CreatePageInterface $createPage;
 
-    /** @var IndexPageInterface */
-    private $indexPage;
+    private IndexPageInterface $indexPage;
 
-    /** @var UpdatePageInterface */
-    private $updatePage;
+    private UpdatePageInterface $updatePage;
 
-    /** @var CurrentPageResolverInterface */
-    private $currentPageResolver;
+    private CurrentPageResolverInterface $currentPageResolver;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
 
-    /** @var array */
-    private $gatewayFactories;
+    private array $gatewayFactories;
 
     public function __construct(
         CreatePageInterface $createPage,
@@ -72,7 +66,7 @@ final class ManagingPaymentMethodsContext implements Context
      * @When I rename it to :name in :language
      * @When I remove its name from :language translation
      */
-    public function iNameItIn($name = null, $language)
+    public function iNameItIn(string $language, ?string $name = null): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -269,7 +263,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function iShouldSeePaymentMethodsInTheList(int $amount = 1): void
     {
-        Assert::same($this->indexPage->countItems(), (int) $amount);
+        Assert::same($this->indexPage->countItems(), $amount);
     }
 
     /**

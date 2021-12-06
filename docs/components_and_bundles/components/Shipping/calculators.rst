@@ -108,7 +108,7 @@ VolumeRateCalculator
 
 .. code-block:: php
 
-    <?
+    <?php
 
     use Sylius\Component\Shipping\Model\Shipment;
     use Sylius\Component\Shipping\Model\ShipmentItem;

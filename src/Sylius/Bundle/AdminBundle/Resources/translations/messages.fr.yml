@@ -2,6 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        shipment_confirmation:
+            has_been_sent_using: 'a été envoyé en utilisant'
+            subject: 'Confirmation d''expédition'
+            thank_you_for_transaction: 'Merci pour votre transaction réussie.'
+            you_can_check_its_location_with_the_tracking_code: 'Vous pouvez vérifier sa progression avec le code de suivi %tracking_code%.'
+            your_order_with_number: 'Votre commande numéro'
     menu:
         admin:
             main:
@@ -28,6 +35,8 @@ sylius:
                     tax_rates: Taux de taxe
                     zones: Zones
                 marketing:
+                    cart_promotions: Promotions panier
+                    catalog_promotions: Promotions catalogue
                     header: Marketing
                     product_reviews: Avis produit
                     promotions: Promotions
@@ -38,3 +47,18 @@ sylius:
                 sales:
                     header: Ventes
                     orders: Commandes
+    ui:
+        product:
+            product_not_active_in_channel: Le produit n'est pas encore activé pour ce canal.
+        gateway:
+            no_sca_support_notice: L'interface de paiement choisie ne prend pas en charge l'authentification forte du client.
+            pay_pal_express_checkout_deprecation_notice: >
+                PayPal Express Checkout est obsolète. Veuillez utiliser la nouvelle intégration de <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Commerce Platform</a>.
+        sales_summary: Récapitulatif des ventes
+        statistics:
+            day: Jour
+            lifetime: Durée de vie
+            month: Mois
+            week: Semaine
+            2weeks: 2 Semaines
+            year: Année

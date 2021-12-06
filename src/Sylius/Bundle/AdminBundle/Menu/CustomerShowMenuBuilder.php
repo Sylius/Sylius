@@ -23,11 +23,9 @@ final class CustomerShowMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.customer.show';
 
-    /** @var FactoryInterface */
-    private $factory;
+    private FactoryInterface $factory;
 
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(
         FactoryInterface $factory,
@@ -49,8 +47,8 @@ final class CustomerShowMenuBuilder
         $this->addChildren($menu, $customer);
 
         $this->eventDispatcher->dispatch(
-            self::EVENT_NAME,
-            new CustomerShowMenuBuilderEvent($this->factory, $menu, $customer)
+            new CustomerShowMenuBuilderEvent($this->factory, $menu, $customer),
+            self::EVENT_NAME
         );
 
         return $menu;

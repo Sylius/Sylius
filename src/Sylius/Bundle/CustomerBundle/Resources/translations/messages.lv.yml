@@ -3,5 +3,10 @@
 
 sylius:
     form:
+        customer:
+            first_name: Vārds
+            last_name: Uzvārds
+            phone_number: Telefona numurs
+            billing_address: Rēķina adrese
         customer_group:
             name: Nosaukums

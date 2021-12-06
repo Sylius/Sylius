@@ -2,10 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: Imaginea e prea mare - {{ size }} {{ suffix }}. Mărimea maximă admisă este {{ limit }} {{ suffix }}.
+            upload_ini_size: Imaginea e prea mare. Mărimea maximă admisă este {{ limit }} {{ suffix }}.
     channel:
         base_currency:
             not_blank: Vă rugăm să introduceţi moneda de bază a canalului.
         default_locale:
+            enabled: Localizarea regională implicită trebuie activată.
             not_blank: Vă rugăm să introduceţi setări regionale implicite de canal.
         contact_email:
             invalid: Adresa de email nu este validă.
@@ -13,14 +18,14 @@ sylius:
             min: Adresa de email trebuie să aibă minim {{ limit }} caractere.
     channel_pricing:
         price:
-            min: Prețul trebuie să fie cel puțin {{ limit }}.
+            min: Prețul nu poate fi mai mic decât 0.
             not_blank: Introdu un preț.
     checkout:
         shipping_method:
             not_blank: Vă rugăm să alegeți metoda de livrare.
     contact:
         email:
-            invalid: Adresa de email nu este validă.
+            invalid: Această adresă de e-mail este invalidă.
             not_blank: Vă rugăm să completați adresa de e-mail.
         message:
             not_blank: Scrie-ne un mesaj.
@@ -34,14 +39,11 @@ sylius:
         not_available: 'Nu există stoc suficient pentru %itemName%.'
     order:
         currency_code:
-            not_valid: Codul de valută pe care l-aţi introdus nu este valid.
+            not_valid: Codul valutei introdus este invalid.
         payment_method_eligibility: 'Metoda de plată %paymentMethodName% a fost dezactivată. Te rugăm să selectezi o altă metodă.'
         product_eligibility: 'Produsul %productName% a fost dezactivat.'
         shipping_method_eligibility: 'Metoda %shippingMethodName% nu poate fi folosită pentru acest produs. Te rugăm să selectezi o altă metodă de livrare.'
     locale:
-        code:
-            not_blank: Vă rugăm să completați codul localizării.
-            unique: Acest cod de localizare există deja.
         enabled:
             cannot_disable_base: Setările regionale de bază nu pot fi dezactivate.
     product:
@@ -77,6 +79,9 @@ sylius:
     product_translation:
         short_description:
             max: Descrierea scurtă nu poate fi mai lungă de {{ limit }} caractere.
+    review:
+        author:
+            not_blank: Vă rugăm să completați adresa de e-mail.
     taxon_image:
         file:
             max_size: Imaginea e prea mare - {{ size }} {{ suffix }}. Mărimea maximă admisă este {{ limit }} {{ suffix }}.
@@ -86,7 +91,7 @@ sylius:
             unique: Acest e-mail este deja folosit.
             min: Adresa de email trebuie să aibă minim {{ min }} caractere.
             max: Adresa de email poate să aibă maxim {{ max }} caractere.
-            invalid: Adresa de email nu este validă.
+            invalid: Această adresă de e-mail este invalidă.
         username:
             unique: Acest nume de utilizator este deja folosit.
             not_blank: Introdu un nume de utilizator.

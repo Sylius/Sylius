@@ -124,7 +124,7 @@ Need more information?
 
 .. warning::
 
-    Some of the forms already have extensions in Sylius. Learn more about Extensions `here <http://symfony.com/doc/current/form/create_form_type_extension.html>`_.
+    Some of the forms already have extensions in Sylius. Learn more about Extensions `here <https://symfony.com/doc/current/form/create_form_type_extension.html>`_.
 
 For instance the ``ProductVariant`` admin form is defined under ``Sylius/Bundle/ProductBundle/Form/Type/ProductVariantType.php`` and later extended in
 ``Sylius/Bundle/CoreBundle/Form/Extension/ProductVariantTypeExtension.php``. If you again extend the base type form like this:
@@ -154,13 +154,13 @@ as is done in the ``ProductVariantTypeExtension`` by the ``CoreBundle``:
 
     <?php
 
-    ...
+    // ...
 
     final class ProductVariantTypeExtension extends AbstractTypeExtension
     {
         public function buildForm(FormBuilderInterface $builder, array $options): void
         {
-            ...
+            // ...
 
             $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $productVariant = $event->getData();
@@ -179,7 +179,7 @@ as is done in the ``ProductVariantTypeExtension`` by the ``CoreBundle``:
             });
         }
 
-        ...
+        // ...
 
     }
 
@@ -190,15 +190,15 @@ you will also have to set up an event listener and then remove the field:
 
     <?php
 
-    ...
+    //...
 
     final class ProductVariantTypeMyExtension extends AbstractTypeExtension
     {
-        ...
+        // ...
 
         public function buildForm(FormBuilderInterface $builder, array $options): void
         {
-            ...
+            //...
 
             $builder
                 ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
@@ -207,7 +207,8 @@ you will also have to set up an event listener and then remove the field:
                 ->addEventSubscriber(new AddCodeFormSubscriber(NULL, ['label' => 'app.form.my_other_code_label']))
             ;
 
-            ...
+            // ...
+
 
         }
     }
@@ -232,16 +233,17 @@ has been added. The example below shows how to add the default `sylius` group to
 
     <?php
 
-    ...
+    // ...
 
     final class CustomerProfileTypeExtension extends AbstractTypeExtension
     {
-        ...
+        // ...
 
         public function buildForm(FormBuilderInterface $builder, array $options): void
         {
-            ...
+            //...
 
+            $builder
             // Adding new fields works just like in the parent form type.
             ->add('secondaryPhoneNumber', TextType::class, [
                 'required' => false,
@@ -255,11 +257,11 @@ has been added. The example below shows how to add the default `sylius` group to
                 ],
             ]);
 
-            ...
+            // ...
 
         }
 
-        ...
+        // ...
 
     }
 
@@ -269,6 +271,6 @@ Overriding forms completely
 .. tip::
 
     If you need to create a new form type on top of an existing one -  create this new alternative form type and define `getParent()`
-    to the old one. `See details in the Symfony docs <http://symfony.com/doc/current/form/create_custom_field_type.html>`_.
+    to the old one. `See details in the Symfony docs <https://symfony.com/doc/current/form/create_custom_field_type.html>`_.
 
-.. include:: /customization/plugins.rst.inc
+.. include:: /customization/plugins.rst

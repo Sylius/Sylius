@@ -20,8 +20,7 @@ use Webmozart\Assert\Assert;
 
 final class ImagesUploadListener
 {
-    /** @var ImageUploaderInterface */
-    private $uploader;
+    private ImageUploaderInterface $uploader;
 
     public function __construct(ImageUploaderInterface $uploader)
     {

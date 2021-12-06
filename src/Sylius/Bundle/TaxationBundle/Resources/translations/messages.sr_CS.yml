@@ -9,6 +9,6 @@ sylius:
         tax_rate:
             category: Kategorija poreske stope
             name: Ime
-            amount: Iznos
+            amount: Količina
             included_in_price: Uključeno u cenu?
             calculator: Kalkulator

@@ -18,5 +18,11 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 interface AdjustmentFactoryInterface extends FactoryInterface
 {
-    public function createWithData(string $type, string $label, int $amount, bool $neutral = false): AdjustmentInterface;
+    public function createWithData(
+        string $type,
+        string $label,
+        int $amount,
+        bool $neutral = false,
+        array $details = []
+    ): AdjustmentInterface;
 }

@@ -16,7 +16,7 @@ sylius:
             zone: Zone
         country:
             add_province: Ajouter une région
-            name: Nom
+            name: Désignation
             provinces: Etats
             select: Sélectionner
             enabled: Activé

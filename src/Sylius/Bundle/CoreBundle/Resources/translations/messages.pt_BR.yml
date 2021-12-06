@@ -9,6 +9,8 @@ sylius:
             title: Título
         cart:
             coupon: Cupom
+        catalog_promotion:
+            channels: Canais
         checkout:
             addressing:
                 different_billing_address: Utilizar um endereço diferente para cobrança?
@@ -32,6 +34,7 @@ sylius:
                 postcode: CEP
                 street: Rua
             contact_email: Email de contato
+            countries: Países
             currencies: Moedas
             currency_base: Moeda base
             account_verification_required: A verificação da conta é requerida?
@@ -69,7 +72,7 @@ sylius:
             restricted_zone: Zona restrita
             short_description: Breve descrição
             variant_selection_method: Método de seleção da variação
-            main_taxon: Táxon principal
+            main_taxon: Categoria principal
             channels: Canais
             enabled: Habilitado
         product_filter:
@@ -91,7 +94,7 @@ sylius:
             billing_address: Faturar a
             channel: Todos os canais
         shipping_method:
-            zone: Zona
+            zone: Região
         taxon:
             code: Código
             file: Selecione a imagem
@@ -100,7 +103,6 @@ sylius:
             file: Selecione a imagem
         user:
             billing_address: Endereço de cobrança
-            different_billing_address: Utilizar um endereço diferente para cobrança?
             enabled: Habilitado
             first_name: Nome
             groups: Grupos
@@ -137,7 +139,7 @@ sylius:
             customer_group:
                 group: Grupo de Cliente
             has_taxon:
-                taxons: Táxons
+                taxons: Taxas
             product:
                 products: Produtos
             total_of_items_from_taxon:
@@ -146,11 +148,11 @@ sylius:
         payment_method:
             channels: Canais
         product_attribute:
-            position: Posição
+            position: Função
         zone:
             scopes:
-                shipping: Expedição
-                tax: Imposto
+                shipping: Entrega
+                tax: Taxa
     installer:
         extensions:
             header: extensões

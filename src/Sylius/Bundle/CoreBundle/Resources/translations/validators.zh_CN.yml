@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: 图像的大小- {{ size }}{{ suffix }} 超过允许的最大大小 {{ limit }}{{ suffix }} 限制。
+            upload_ini_size: 图像的大小超过允许的最大大小 {{ limit }}{{ suffix }} 限制。
     channel:
         base_currency:
             not_blank: 请输入销售渠道的基础货币。
@@ -13,7 +17,6 @@ sylius:
             min: 电子邮件至少{{limit}}个字符
     channel_pricing:
         price:
-            min: 价格必须大于等于 {{ limit }}。
             not_blank: 请输入价格。
     checkout:
         shipping_method:
@@ -34,14 +37,11 @@ sylius:
         not_available: '%itemName% 没有足够的库存。'
     order:
         currency_code:
-            not_valid: 您输入的姓名无效
+            not_valid: 您输入的币种代码是无效的。
         payment_method_eligibility: '付款方式 %paymentMethodName% 已被禁用。请重新选择您的付款方式。'
         product_eligibility: '产品 %productName% 已被禁用。'
         shipping_method_eligibility: '此产品并不适合 %shippingMethodName% 运输方式。请重新选择您的运输方式。'
     locale:
-        code:
-            not_blank: 请输入区域设置代码。
-            unique: 此区域设置已存在。
         enabled:
             cannot_disable_base: 基础区域设置不能被禁用。
     product:
@@ -77,6 +77,9 @@ sylius:
     product_translation:
         short_description:
             max: 简短描述不能超过 {{ limit }} 个字符。
+    review:
+        author:
+            not_blank: 请输入您的电子邮件。
     taxon_image:
         file:
             max_size: 图像的大小- {{ size }}{{ suffix }} 超过允许的最大大小 {{ limit }}{{ suffix }} 限制。

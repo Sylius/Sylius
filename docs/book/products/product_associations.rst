@@ -64,7 +64,7 @@ To do that find a desired taxon by code and get all its products. Perfect access
     /** @var TaxonInterface $taxon */
     $taxon = $this->container->get('sylius.repository.taxon')->findOneBy(['code' => 'sd-cards']);
 
-    $associatedProducts = $taxon->getProducts();
+    $associatedProducts = $this->container->get('sylius.repository.product')->findByTaxon($taxon);
 
 Having a collection of products from the SD cards taxon iterate over them and add them one by one to the association.
 
@@ -85,6 +85,26 @@ And to save everything in the database you need to add the created association t
 .. code-block:: php
 
     $this->container->get('sylius.repository.product_association')->add($association);
+
+In the previous example we used a custom query in the product repository, here is the implementation:
+
+.. code-block:: php
+
+    use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
+
+    class ProductRepository extends BaseProductRepository
+    {
+        public function findByTaxon(Taxon $taxon): array
+        {
+            return $this->createQueryBuilder('p')
+                ->join('p.productTaxons', 'pt')
+                ->where('pt.taxon = :taxon')
+                ->setParameter('taxon', $taxon)
+                ->getQuery()
+                ->getResult()
+             ;
+        }
+    }
 
 Learn more:
 -----------

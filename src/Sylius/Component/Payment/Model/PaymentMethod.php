@@ -29,13 +29,19 @@ class PaymentMethod implements PaymentMethodInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
+    /**
+     * @var string|null
+     */
     protected $code;
 
-    /** @var string */
+    /**
+     * @var string|null
+     */
     protected $environment;
 
-    /** @var int */
+    /**
+     * @var int|null
+     */
     protected $position;
 
     public function __construct()
@@ -50,105 +56,66 @@ class PaymentMethod implements PaymentMethodInterface
         return (string) $this->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): ?string
     {
         return $this->getTranslation()->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName(?string $name): void
     {
         $this->getTranslation()->setName($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription(): ?string
     {
         return $this->getTranslation()->getDescription();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDescription(?string $description): void
     {
         $this->getTranslation()->setDescription($description);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getInstructions(): ?string
     {
         return $this->getTranslation()->getInstructions();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setInstructions(?string $instructions): void
     {
         $this->getTranslation()->setInstructions($instructions);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEnvironment(): ?string
     {
         return $this->environment;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setEnvironment(?string $environment): void
     {
         $this->environment = $environment;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPosition(): ?int
     {
         return $this->position;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPosition(?int $position): void
     {
         $this->position = $position;
@@ -165,9 +132,6 @@ class PaymentMethod implements PaymentMethodInterface
         return $translation;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function createTranslation(): PaymentMethodTranslationInterface
     {
         return new PaymentMethodTranslation();

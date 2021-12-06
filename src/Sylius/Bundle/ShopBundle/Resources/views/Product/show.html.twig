@@ -1,5 +1,7 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 
+{% block title %}{{ product.name }} | {{ parent() }}{% endblock %}
+
 {% block content %}
 {% include '@SyliusShop/Product/Show/_breadcrumb.html.twig' %}
 <div class="ui hidden divider"></div>

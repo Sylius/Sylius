@@ -11,7 +11,8 @@ sylius:
                 confirmation: Verifikasi
             remember_me: Ingat saya
             shipping_address: Alamat pengiriman
-            username: Username
+            username: Nama pengguna
+            verified: Diverifikasi
         user_filter:
             query: Cari
         user_change_password:

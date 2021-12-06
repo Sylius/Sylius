@@ -7,5 +7,5 @@
 | Sylius version   | 1.x.y
 
 <!--
- - For support requests and how-tos, visit http://docs.sylius.com/en/latest/support/
+ - For support requests and how-tos, visit https://docs.sylius.com/en/latest/book/support/
 -->

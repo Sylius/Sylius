@@ -19,9 +19,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class CompositePromotionEligibilityCheckerPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         if (!$container->has('sylius.promotion_eligibility_checker')) {

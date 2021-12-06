@@ -15,10 +15,13 @@ namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\Scope;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
+use Sylius\Component\Core\Resolver\TaxationAddressResolverInterface;
 use Sylius\Component\Core\Taxation\Exception\UnsupportedTaxCalculationStrategyException;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
@@ -28,32 +31,38 @@ use Webmozart\Assert\Assert;
 
 final class OrderTaxesProcessor implements OrderProcessorInterface
 {
-    /** @var ZoneProviderInterface */
-    private $defaultTaxZoneProvider;
+    private ZoneProviderInterface $defaultTaxZoneProvider;
 
-    /** @var ZoneMatcherInterface */
-    private $zoneMatcher;
+    private ZoneMatcherInterface $zoneMatcher;
 
-    /** @var PrioritizedServiceRegistryInterface */
-    private $strategyRegistry;
+    private PrioritizedServiceRegistryInterface $strategyRegistry;
+
+    /** @var TaxationAddressResolverInterface|null */
+    private $taxationAddressResolver;
 
     public function __construct(
         ZoneProviderInterface $defaultTaxZoneProvider,
         ZoneMatcherInterface $zoneMatcher,
-        PrioritizedServiceRegistryInterface $strategyRegistry
+        PrioritizedServiceRegistryInterface $strategyRegistry,
+        ?TaxationAddressResolverInterface $taxationAddressResolver = null
     ) {
         $this->defaultTaxZoneProvider = $defaultTaxZoneProvider;
         $this->zoneMatcher = $zoneMatcher;
         $this->strategyRegistry = $strategyRegistry;
+        $this->taxationAddressResolver = $taxationAddressResolver;
+        if ($this->taxationAddressResolver === null) {
+            @trigger_error(sprintf('Not passing a $taxationAddressResolver to %s constructor is deprecated since Sylius 1.11 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+        }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(BaseOrderInterface $order): void
     {
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
+
+        if (OrderInterface::STATE_CART !== $order->getState()) {
+            return;
+        }
 
         $this->clearTaxes($order);
         if ($order->isEmpty()) {
@@ -80,21 +89,32 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
 
     private function getTaxZone(OrderInterface $order): ?ZoneInterface
     {
-        $billingAddress = $order->getBillingAddress();
+        $taxationAddress = $order->getBillingAddress();
+
+        if ($this->taxationAddressResolver) {
+            $taxationAddress = $this->taxationAddressResolver->getTaxationAddressFromOrder($order);
+        }
+
         $zone = null;
 
-        if (null !== $billingAddress) {
-            $zone = $this->zoneMatcher->match($billingAddress, Scope::TAX);
+        if (null !== $taxationAddress) {
+            $zone = $this->zoneMatcher->match($taxationAddress, Scope::TAX);
         }
 
         return $zone ?: $this->defaultTaxZoneProvider->getZone($order);
     }
 
-    private function clearTaxes(BaseOrderInterface $order): void
+    private function clearTaxes(OrderInterface $order): void
     {
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
+
         foreach ($order->getItems() as $item) {
             $item->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT);
+        }
+
+        /** @var ShipmentInterface $shipment */
+        foreach ($order->getShipments() as $shipment) {
+            $shipment->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
         }
     }
 }

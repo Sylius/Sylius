@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -65,13 +65,11 @@ final class ProductAssociationFixtureTest extends TestCase
             [[
                 'custom' => [['associated_products' => ['product-1', 'product-2']]],
             ]],
-            'custom.*.associated_products')
+            'custom.*.associated_products'
+        )
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): ProductAssociationFixture
     {
         return new ProductAssociationFixture(

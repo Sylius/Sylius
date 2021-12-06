@@ -19,8 +19,8 @@ LocaleInterface
 This interface should be implemented by models representing a single **Locale**.
 
 .. note::
-    This interface extends :ref:`component_resource_model_code-aware-interface` and
-    :ref:`component_resource_model_timestampable-interface`.
+    This interface extends `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_ and
+    `TimestampableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TimestampableInterface.php>`_.
 
     For more detailed information go to `Sylius API LocaleInterface`_.
 

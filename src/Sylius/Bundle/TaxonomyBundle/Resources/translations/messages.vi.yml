@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Mô tả
+            enabled: Đã kích hoạt
             name: Tên
         taxonomy:
             name: Tên

@@ -16,7 +16,7 @@ sylius:
                 ready: Kész
                 shipped: Kiszállítva
                 returned: Visszaküldött
-                cancelled: Megszakítva
+                cancelled: Törölt
             tracking_code: Követési kód
         shipping_calculator:
             flat_rate_configuration:
@@ -29,6 +29,7 @@ sylius:
             description: Leírás
             name: Név
         shipping_method:
+            add_rule: Szabály hozzáadása
             calculator: Számológép
             category: Kategória
             category_requirement: Kategória követelmény
@@ -36,6 +37,16 @@ sylius:
             configuration: Konfiguráció
             description: Leírás
             enabled: Engedélyezve
+            match_all_category_requirement: Minden elemnek meg kell felelnie a szállítási mód feltételeinek
+            match_any_category_requirement: Legalább egy elemnek meg kell felelni szállítási mód feltételeinek
+            match_none_category_requirement: Egy elemnek sem kell megfelelnie a szállítási mód feltételeinek
             name: Név
-            tax_category: ÁFA-kategória
+            position: Pozíció
+            rules: Szabályok
+            tax_category: ÁFA kategória
             translations: Fordítások
+        shipping_method_rule:
+            type: Típus
+            total: Összesen
+            weight: Súly
+            amount: Összeg

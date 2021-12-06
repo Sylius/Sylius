@@ -12,6 +12,7 @@ sylius:
             remember_me: Emlékezzen rám
             shipping_address: Szállítási cím
             username: Felhasználónév
+            verified: Megerősítve
         user_filter:
             query: Keresés
         user_change_password:

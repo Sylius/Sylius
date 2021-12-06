@@ -16,7 +16,7 @@ namespace Sylius\Behat\Page\Admin\Payment;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 
-final class IndexPage extends BaseIndexPage implements IndexPageInterface
+class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
     public function completePaymentOfOrderWithNumber(string $orderNumber): void
     {

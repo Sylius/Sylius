@@ -2,6 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        shipment_confirmation:
+            has_been_sent_using: 'a fost trimis folosind'
+            subject: 'Confirmare livrare'
+            thank_you_for_transaction: 'Tranzacție reușită. Vă mulțumim'
+            you_can_check_its_location_with_the_tracking_code: 'Poți verifica locația acestuia cu codul %tracking_code% de urmărire.'
+            your_order_with_number: 'Comanda ta cu numarul'
     menu:
         admin:
             main:
@@ -38,3 +45,16 @@ sylius:
                 sales:
                     header: Vânzări
                     orders: Comenzi
+    ui:
+        product:
+            product_not_active_in_channel: Produsul nu este încă activat în acest canal.
+        gateway:
+            no_sca_support_notice: Gateway-ul de plată ales nu oferă suport pentru SCA.
+        sales_summary: Sumar vânzări
+        statistics:
+            day: Ziua
+            lifetime: Durată de viață
+            month: Luna
+            week: Saptamana
+            2weeks: 2 săptămâni
+            year: An

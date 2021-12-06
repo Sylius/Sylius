@@ -14,7 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -23,16 +24,20 @@ use Webmozart\Assert\Assert;
 
 final class AddressContext implements Context
 {
-    /** @var AddressRepositoryInterface */
-    private $addressRepository;
+    private AddressRepositoryInterface $addressRepository;
 
-    /** @var ObjectManager */
-    private $customerManager;
+    private ObjectManager $customerManager;
 
-    public function __construct(AddressRepositoryInterface $addressRepository, ObjectManager $customerManager)
-    {
+    private SharedStorageInterface $sharedStorage;
+
+    public function __construct(
+        AddressRepositoryInterface $addressRepository,
+        ObjectManager $customerManager,
+        SharedStorageInterface $sharedStorage
+    ) {
         $this->addressRepository = $addressRepository;
         $this->customerManager = $customerManager;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -76,7 +81,7 @@ final class AddressContext implements Context
      * @Given /^(this customer) has an (address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) in their address book$/
      * @Given /^(this customer) has an? ("[^"]+" based address) in their address book$/
      */
-    public function thisCustomerHasAnAddressInAddressBook(CustomerInterface $customer, AddressInterface $address)
+    public function thisCustomerHasAnAddressInAddressBook(CustomerInterface $customer, AddressInterface $address): void
     {
         $this->addAddressToCustomer($customer, $address);
     }
@@ -86,6 +91,8 @@ final class AddressContext implements Context
         $customer->addAddress($address);
 
         $this->customerManager->flush();
+
+        $this->sharedStorage->set('address_assigned_to_' . $customer->getFullName(), $address);
     }
 
     private function setDefaultAddressOfCustomer(CustomerInterface $customer, AddressInterface $address)

@@ -22,8 +22,6 @@ use Webmozart\Assert\Assert;
 final class FlatRateCalculator implements CalculatorInterface
 {
     /**
-     * {@inheritdoc}
-     *
      * @throws MissingChannelConfigurationException
      */
     public function calculate(BaseShipmentInterface $subject, array $configuration): int
@@ -43,9 +41,6 @@ final class FlatRateCalculator implements CalculatorInterface
         return (int) $configuration[$channelCode]['amount'];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'flat_rate';

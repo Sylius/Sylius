@@ -13,7 +13,7 @@ Sylius\Component\Product\Model\ProductAssociationType:
             groups: [Default, Detailed]
         translations:
             expose: true
-            type: array
+            type: iterable
             groups: [Default, Detailed]
         createdAt:
             expose: true
@@ -23,10 +23,3 @@ Sylius\Component\Product\Model\ProductAssociationType:
             expose: true
             type: DateTime
             groups: [Detailed]
-    relations:
-        -   rel: self
-            href:
-                route: sylius_admin_api_product_association_type_show
-                parameters:
-                    code: expr(object.getCode())
-                    version: 1

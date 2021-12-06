@@ -7,3 +7,6 @@ sylius:
             not_blank: Внесете ја вашата адреса за е-пошта.
         message:
             not_blank: Внесете порака.
+    review:
+        author:
+            not_blank: Внесете ја вашата адреса за е-пошта.

@@ -22,14 +22,11 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductAssociationTypesContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $client;
+    private ApiClientInterface $client;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
     public function __construct(
         ApiClientInterface $client,
@@ -67,15 +64,14 @@ final class ManagingProductAssociationTypesContext implements Context
             'translations' => [
                  $localeCode => [
                       'name' => $productAssociationTypeName,
-                      'locale' => $localeCode
-                 ]
-            ]
+                      'locale' => $localeCode,
+                 ],
+            ],
         ]);
     }
 
     /**
-     * @When I add it
-     * @When I try to add it
+     * @When I (try to) add it
      */
     public function iAddIt(): void
     {
@@ -143,13 +139,14 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully deleted
-     * @Then I should be notified that they have been successfully deleted
+     * @Then /^I should be notified that (?:it has|they have) been successfully deleted$/
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
-        Assert::true($this->responseChecker->isDeletionSuccessful(
-            $this->client->getLastResponse()),
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful(
+            $this->client->getLastResponse()
+        ),
             'Product association type could not be deleted'
         );
     }
@@ -182,8 +179,7 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
+     * @When I (try to) save my changes
      */
     public function iSaveMyChanges(): void
     {
@@ -226,8 +222,7 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @When I check the :productAssociationType product association type
-     * @When I check also the :productAssociationType product association type
+     * @When I check (also) the :productAssociationType product association type
      */
     public function iCheckTheProductAssociationType(ProductAssociationTypeInterface $productAssociationType): void
     {
@@ -294,7 +289,7 @@ final class ManagingProductAssociationTypesContext implements Context
         Assert::count(
             $this->responseChecker->getCollectionItemsWithValue($this->client->index(), 'code', $code),
             1,
-            sprintf("More then one Product association type have code %s.", $code)
+            sprintf('More then one Product association type have code %s.', $code)
         );
     }
 

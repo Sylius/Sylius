@@ -4,6 +4,7 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/app/sylius/sylius_mailer.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/address_log_entry.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/admin_user.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/catalog_promotion.yaml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/channel.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/country.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/currency.yml" }
@@ -33,6 +34,11 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/grids/taxon.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/zone.yml" }
 
+parameters:
+    env(SYLIUS_ADMIN_ROUTING_PATH_NAME): admin
+    sylius_admin.path_name: '%env(resolve:SYLIUS_ADMIN_ROUTING_PATH_NAME)%'
+    sylius.security.admin_regex: "^/%sylius_admin.path_name%"
+
 sylius_grid:
     templates:
         action:
@@ -42,6 +48,8 @@ sylius_grid:
             ship_with_tracking_code: "@SyliusAdmin/Shipment/Grid/Action/shipWithTrackingCode.html.twig"
             update_product_positions: "@SyliusAdmin/Product/Grid/Action/updatePositions.html.twig"
             update_product_variant_positions: "@SyliusAdmin/ProductVariant/Grid/Action/updatePositions.html.twig"
+        filter:
+            entities: '@SyliusUi/Grid/Filter/entities.html.twig'
 
 liip_imagine:
     filter_sets:
@@ -904,28 +912,25 @@ sylius_ui:
             blocks:
                 before_header_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 55
+                    priority: 45
                     context:
                         event: sylius.admin.dashboard.before_header
                 header:
                     template: "@SyliusAdmin/Dashboard/_header.html.twig"
-                    priority: 50
+                    priority: 40
                 after_header_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 45
+                    priority: 35
                     context:
                         event: sylius.admin.dashboard.after_header
                 statistics:
                     template: "@SyliusAdmin/Dashboard/_statistics.html.twig"
-                    priority: 40
+                    priority: 30
                 after_statistics_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 35
+                    priority: 25
                     context:
                         event: sylius.admin.customer.show.after_statistics
-                chart:
-                    template: "@SyliusAdmin/Dashboard/_chart.html.twig"
-                    priority: 30
                 menu:
                     template: "@SyliusAdmin/Dashboard/_menu.html.twig"
                     priority: 20
@@ -983,3 +988,42 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.admin.product.index.after_taxon_tree
+
+        sylius.admin.catalog_promotion.show.content:
+            blocks:
+                header:
+                    template: "@SyliusAdmin/CatalogPromotion/Show/_headerWidget.html.twig"
+                    priority: 15
+                breadcrumb:
+                    template: "@SyliusAdmin/CatalogPromotion/Show/_breadcrumb.html.twig"
+                    priority: 10
+                content:
+                    template: "@SyliusAdmin/CatalogPromotion/Show/_content.html.twig"
+                    priority: 5
+
+        sylius.admin.catalog_promotion.show.header.content:
+            blocks:
+                content:
+                    template: "@SyliusAdmin/CatalogPromotion/Show/_header.html.twig"
+                    priority: 10
+                menu:
+                    template: "@SyliusAdmin/CatalogPromotion/Show/_headerMenu.html.twig"
+                    priority: 5
+
+        sylius.admin.catalog_promotion.show.content.left_bar:
+            blocks:
+                content:
+                    template: "@SyliusAdmin/CatalogPromotion/Show/_details.html.twig"
+                    priority: 10
+                menu:
+                    template: "@SyliusAdmin/CatalogPromotion/Show/_translations.html.twig"
+                    priority: 5
+
+        sylius.admin.catalog_promotion.show.content.right_bar:
+            blocks:
+                content:
+                    template: "@SyliusAdmin/CatalogPromotion/Show/_scopes.html.twig"
+                    priority: 10
+                menu:
+                    template: "@SyliusAdmin/CatalogPromotion/Show/_actions.html.twig"
+                    priority: 5

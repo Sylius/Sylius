@@ -5,13 +5,14 @@ sylius:
     form:
         user:
             email: Имейл
-            enabled: Активирано
+            enabled: Активно
             password:
                 label: Парола
                 confirmation: Проверка
             remember_me: Запомни ме
             shipping_address: Адрес за доставка
             username: Потребителско име
+            verified: Проверено
         user_filter:
             query: Търсене
         user_change_password:

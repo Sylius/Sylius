@@ -22,15 +22,14 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class InstallSampleDataCommand extends AbstractInstallCommand
 {
-    /**
-     * {@inheritdoc}
-     */
+    protected static $defaultName = 'sylius:install:sample-data';
+
     protected function configure(): void
     {
         $this
-            ->setName('sylius:install:sample-data')
             ->setDescription('Install sample data into Sylius.')
-            ->setHelp(<<<EOT
+            ->setHelp(
+                <<<EOT
 The <info>%command.name%</info> command loads the sample data for Sylius.
 EOT
             )
@@ -38,10 +37,7 @@ EOT
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function execute(InputInterface $input, OutputInterface $output): ?int
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper('question');
@@ -85,6 +81,6 @@ EOT
         $this->runCommands($commands, $output);
         $outputStyle->newLine(2);
 
-        return null;
+        return 0;
     }
 }

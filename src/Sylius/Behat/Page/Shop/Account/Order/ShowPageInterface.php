@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Account\Order;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 
 interface ShowPageInterface extends SymfonyPageInterface
 {
@@ -34,6 +35,12 @@ interface ShowPageInterface extends SymfonyPageInterface
         string $city,
         string $countryName
     ): bool;
+
+    public function choosePaymentMethod(PaymentMethodInterface $paymentMethod): void;
+
+    public function pay(): void;
+
+    public function getChosenPaymentMethod(): string;
 
     public function getTotal(): string;
 

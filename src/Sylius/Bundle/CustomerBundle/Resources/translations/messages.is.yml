@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        customer:
+            first_name: Fornafn
+            last_name: Eftirnafn
+            email: Tölvupóstur
+            phone_number: Símanúmer
+            billing_address: Heimilsfang greiðanda
+        customer_group:
+            name: Nafn
+            roles: Hlutverk
+    gender:
+        male: Karl
+        female: Kona

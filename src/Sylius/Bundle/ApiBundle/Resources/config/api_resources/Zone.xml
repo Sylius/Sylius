@@ -18,22 +18,53 @@
     <resource class="%sylius.model.zone.class%" shortName="Zone">
         <attribute name="route_prefix">admin</attribute>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>zone:read</attribute>
-            </attribute>
-        </attribute>
+        <attribute name="validation_groups">sylius</attribute>
 
-        <collectionOperations />
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:zone:read</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:zone:create</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get" />
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:zone:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:zone:update</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="createdAt" writable="false" />
         <property name="updatedAt" writable="false" />
         <property name="code" identifier="true" required="true" />
-        <property name="name" writable="false" />
+        <property name="name" required="true" />
+        <property name="scope" readable="true" writable="true" />
+        <property name="type" readable="true" writable="true" />
+        <property name="members" readable="true" writable="true">
+            <subresource resourceClass="%sylius.model.zone_member.class%" collection="true" />
+        </property>
     </resource>
 </resources>

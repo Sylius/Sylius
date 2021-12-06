@@ -9,9 +9,12 @@ sylius:
             title: Název
         cart:
             coupon: Kupón
+        catalog_promotion:
+            channels: Kanály
         checkout:
             addressing:
                 different_billing_address: Použít jinou adresu pro fakturaci?
+                different_shipping_address: Použít jinou dodací adresu?
             payment_method: Způsob platby
             shipping_method: Způsoby dopravy
         promotion:
@@ -21,6 +24,7 @@ sylius:
                 product: Produkt
         promotion_coupon:
             per_customer_usage_limit: Omezení použití na zákazníka
+            reusable_from_cancelled_orders: Znovu použitelné ze zrušených objednávek
         group:
             name: Jméno
             roles: Role
@@ -31,7 +35,9 @@ sylius:
                 country: Země
                 postcode: PSČ
                 street: Ulice
+                tax_id: ID daně
             contact_email: Kontaktní e-mail
+            contact_phone_number: Kontaktní telefonní číslo
             countries: Země
             currencies: Měny
             currency_base: Základní měna
@@ -39,8 +45,10 @@ sylius:
             hostname: Hostname
             locale_default: Výchozí jazyk
             locales: Lokalizace
+            menu_taxon: Menu taxon
             payment_methods: Způsoby platby
             shipping_methods: Způsoby dopravy
+            shop_billing_data: Fakturační údaje obchodu
             skipping_shipping_step_allowed: Přeskočit výběr doručení pokud je k dispozici pouze jedna možnost?
             skipping_payment_step_allowed: Přeskočit výběr platby pokud je k dispozici pouze jedna možnost?
             tax_calculation_strategy: Strategie výpočtu daně
@@ -101,6 +109,7 @@ sylius:
             file: Vybrat obrázek
         user:
             billing_address: Fakturační adresa
+            different_shipping_address: Použít jinou dodací adresu?
             enabled: Povoleno
             first_name: Křestní Jméno
             groups: Skupiny
@@ -119,6 +128,7 @@ sylius:
             shipping_required: Je povinná doprava?
             weight: Hmotnost
             width: Šířka
+            tracked_help: Pokud je tato možnost povolena, Sylius bude sledovat zásoby a zastaví prodej produktu, jakmile zásoby dosáhnou 0.
         attribute:
             product_attribute_value:
                 attribute: Atribut
@@ -142,7 +152,7 @@ sylius:
                 products: Produkty
             total_of_items_from_taxon:
                 taxon: Taxonu
-                amount: Částka
+                amount: Množství
         payment_method:
             channels: Kanály
         product_attribute:
@@ -196,6 +206,7 @@ sylius:
             header: Verze PHP a nastavení
             any: jakýkoliv
             detect_unicode: detect_unicode
+            detect_unicode_help: Nastavte 'detect_unicode = Off' v souboru php.ini
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: nejsou zastaralé
             off: false
@@ -203,13 +214,16 @@ sylius:
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
+                auto_start_help: Nastavte 'session.auto_start = Off' v souboru php.ini
             short_open_tag: short_open_tag
             timezone: Časové pásmo
+            timezone_help: Nastavte "date.timezone" v souboru php.ini (např. date.timezone = "Europe/Prague")
             timezone_deprecated:
                 header: Zastaralé časové pásmo
                 help: Časové pásmo %timezone% je zastaralé. Spravte Váš php.ini soubor (seznam zastaralých časových pásem http://php.net/manual/en/timezones.others.php).
             version: Verze PHP
             version_recommended: Doporučená verze PHP
+            version_help: Sylius doporučuje PHP verzi %recommended%, vaše aktuální verze je %current%. Proveďte aktualizaci.
     payum_gateway:
         cash_on_delivery: Platba na dobírku
         offline: Offline

@@ -17,20 +17,13 @@ use Symfony\Component\Validator\Constraint;
 
 final class PromotionSubjectCoupon extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.promotion_coupon.is_invalid';
+    public string $message = 'sylius.promotion_coupon.is_invalid';
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'sylius_promotion_subject_validator';

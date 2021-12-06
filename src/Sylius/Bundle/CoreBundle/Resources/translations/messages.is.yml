@@ -2,6 +2,126 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    form:
+        block:
+            body: Meginmál
+            id: Númer
+        cart:
+            coupon: Afsláttarkóði
+        catalog_promotion:
+            channels: Sölumátar
+        promotion:
+            channels: Sölumátar
+        promotion_action:
+            add_product_configuration:
+                product: Vara
+        group:
+            name: Nafn
+            roles: Hlutverk
+        channel:
+            billing_data:
+                city: Staður
+                company: Fyrirtæki
+                country: Land
+                postcode: Póstnúmer
+                street: Gata
+                tax_id: Virðisaukaskattsnúmer
+            contact_email: Netfang til að hafa samband
+            countries: Lönd
+            currencies: Gjaldmiðlar
+            currency_base: Grunngjaldmiðill
+            account_verification_required: Sannreyna alla aðganga?
+            hostname: Vélarnafn
+            locale_default: Sjálfgefið tungumálasvæði
+            locales: Tungumálasvæði
+            payment_methods: Greiðslumátar
+            shipping_methods: Sendingarmátar
+            shop_billing_data: Greiðsluupplýsingar
+            skipping_shipping_step_allowed: Sleppa vali á sendingarmáta ef aðeins einn er í boði?
+            skipping_payment_step_allowed: Sleppa vali á greiðslumáta ef aðeins einn er í boði?
+            tax_calculation_strategy: Aðferð við útreikning skatta
+            tax_zone_default: Sjálfgefið skattasvæði
+            taxonomies: Flokkunarkerfi
+        image:
+            type: Tegund
+            file: Mynd
+        locale:
+            code: Kóði
+            enabled: Virkt
+        order_filter:
+            number: Númer
+            total_from: Frá
+            payment_state: Greiðslustaða
+            channel: Allir sölumátar
+        page:
+            body: Meginmál
+            id: Númer
+        product:
+            images: Myndir
+            main_taxon: Aðalflokkur
+            channels: Sölumátar
+            enabled: Virkt
+        product_filter:
+            name: Nafn
+            code: Kóði
+        product_variant:
+            shipping_category: Sendingarflokkur
+        shipment_filter:
+            created_at_from: Frá
+            shipping_address: Nafn viðtakanda
+            channel: Allir sölumátar
+        payment_filter:
+            created_at_from: Frá
+            channel: Allir sölumátar
+        shipping_method:
+            zone: Svæði
+        taxon:
+            code: Kóði
+            file: Velja mynd
+            images: Myndir
+        taxonomy:
+            file: Velja mynd
+        user:
+            billing_address: Heimilsfang greiðanda
+            enabled: Virkt
+            first_name: Fornafn
+            groups: Viðskiptavinahópar
+            roles: Hlutverk
+            last_name: Eftirnafn
+            password: Lykilorð
+            shipping_address: Heimilisfang viðtakanda
+        user_filter:
+            query: Leita
+        variant:
+            on_hand: Birgðastaða
+            price: Verð
+            sku: Vörunúmer
+        attribute:
+            product_attribute_value:
+                attribute: Eiginleiki
+        guest:
+            email: Tölvupóstur
+        product_association:
+            type: Tengslategund
+        product_association_type:
+            name: Nafn
+        promotion_rule:
+            customer_group:
+                group: Viðskiptavinahópur
+            has_taxon:
+                taxons: Vöruflokkar
+            product:
+                products: Vörur
+            total_of_items_from_taxon:
+                taxon: Vöruflokkur
+                amount: Upphæð
+        payment_method:
+            channels: Sölumátar
+        product_attribute:
+            position: Staðsetning
+        zone:
+            scopes:
+                shipping: Sending
     installer:
         extensions:
             off: false
@@ -9,3 +129,5 @@ sylius:
         settings:
             off: false
             on: true
+    shipping_method_resolver:
+        by_zones_and_channel: Eftir svæði og sölumáta

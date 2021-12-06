@@ -30,15 +30,13 @@ use Symfony\Component\Form\FormEvents;
 
 final class ProductVariantTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('version', HiddenType::class)
             ->add('tracked', CheckboxType::class, [
                 'label' => 'sylius.form.variant.tracked',
+                'help' => 'sylius.form.variant.tracked_help',
             ])
             ->add('shippingRequired', CheckboxType::class, [
                 'label' => 'sylius.form.variant.shipping_required',
@@ -95,11 +93,13 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtendedType(): string
     {
         return ProductVariantType::class;
+    }
+
+    public static function getExtendedTypes(): iterable
+    {
+        return [ProductVariantType::class];
     }
 }

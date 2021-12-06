@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: Görüntü çok büyük - {{ size }}{{ suffix }}. En fazla izin verilen boyut {{ limit }}{{ suffix }}.
+            upload_ini_size: Görüntü çok büyük . En fazla izin verilen boyut {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: Lütfen kanal para birimi girin.
@@ -13,7 +17,6 @@ sylius:
             min: E-posta {{ limit }} karakter uzunluğunda olmalıdır.
     channel_pricing:
         price:
-            min: Fiyatı en az olması gerekir {{ limit }}.
             not_blank: Lütfen fiyatı giriniz.
     checkout:
         shipping_method:
@@ -34,14 +37,11 @@ sylius:
         not_available: '%itemName% yeterli stoğa sahip değil.'
     order:
         currency_code:
-            not_valid: Girmiş olduğunuz döviz numarası geçersiz.
+            not_valid: Girdiğiniz para birimi kodu geçersiz.
         payment_method_eligibility: 'Bu ödeme şekli %paymentMethodName% devre dışı bırakılmıştır. Lütfen ödeme şeklinizi tekrar seçiniz.'
         product_eligibility: 'Bu ürün%productName% devre dışı bırakılmıştır.'
         shipping_method_eligibility: 'Ürün gereksinimleri %shippingMethodName% sevkiyat yöntemi için uygun değil. Lütfen, sevkiyat yöntemi yeniden seçin.'
     locale:
-        code:
-            not_blank: Lütfen bölge kodunu giriniz.
-            unique: Bu bölge kodu zaten var.
         enabled:
             cannot_disable_base: Ana mahal devre dışı bırakılamaz.
     product:
@@ -77,6 +77,9 @@ sylius:
     product_translation:
         short_description:
             max: Kısa açıklama daha sonra {{ limit }} karakter olmalıdır.
+    review:
+        author:
+            not_blank: Lütfen e-posta adresinizi girin.
     taxon_image:
         file:
             max_size: Görüntü çok büyük - {{ size }}{{ suffix }}. En fazla izin verilen boyut {{ limit }}{{ suffix }}.

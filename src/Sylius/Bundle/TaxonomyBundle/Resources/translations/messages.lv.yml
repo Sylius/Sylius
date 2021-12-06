@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Apraksts
+            enabled: Ieslēgts
             name: Nosaukums
         taxonomy:
             name: Nosaukums

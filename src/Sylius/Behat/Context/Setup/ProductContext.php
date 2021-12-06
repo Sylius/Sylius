@@ -16,7 +16,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -43,50 +43,35 @@ use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var ProductRepositoryInterface */
-    private $productRepository;
+    private ProductRepositoryInterface $productRepository;
 
-    /** @var ProductFactoryInterface */
-    private $productFactory;
+    private ProductFactoryInterface $productFactory;
 
-    /** @var FactoryInterface */
-    private $productTranslationFactory;
+    private FactoryInterface $productTranslationFactory;
 
-    /** @var FactoryInterface */
-    private $productVariantFactory;
+    private FactoryInterface $productVariantFactory;
 
-    /** @var FactoryInterface */
-    private $productVariantTranslationFactory;
+    private FactoryInterface $productVariantTranslationFactory;
 
-    /** @var FactoryInterface */
-    private $channelPricingFactory;
+    private FactoryInterface $channelPricingFactory;
 
-    /** @var FactoryInterface */
-    private $productOptionFactory;
+    private FactoryInterface $productOptionFactory;
 
-    /** @var FactoryInterface */
-    private $productOptionValueFactory;
+    private FactoryInterface $productOptionValueFactory;
 
-    /** @var FactoryInterface */
-    private $productImageFactory;
+    private FactoryInterface $productImageFactory;
 
-    /** @var ObjectManager */
-    private $objectManager;
+    private ObjectManager $objectManager;
 
-    /** @var ProductVariantGeneratorInterface */
-    private $productVariantGenerator;
+    private ProductVariantGeneratorInterface $productVariantGenerator;
 
-    /** @var ProductVariantResolverInterface */
-    private $defaultVariantResolver;
+    private ProductVariantResolverInterface $defaultVariantResolver;
 
-    /** @var ImageUploaderInterface */
-    private $imageUploader;
+    private ImageUploaderInterface $imageUploader;
 
-    /** @var SlugGeneratorInterface */
-    private $slugGenerator;
+    private SlugGeneratorInterface $slugGenerator;
 
     /** @var array */
     private $minkParameters;
@@ -150,6 +135,24 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product) is originally priced at ("[^"]+") in ("[^"]+" channel)$/
+     */
+    public function thisProductHasOriginallyPriceInChannel(
+        ProductInterface $product,
+        int $originalPrice,
+        ChannelInterface $channel
+    ): void {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+
+        /** @var ChannelPricingInterface $channelPricing */
+        $channelPricing = $productVariant->getChannelPricingForChannel($channel);
+        $channelPricing->setOriginalPrice($originalPrice);
+
+        $this->saveProduct($product);
+    }
+
+    /**
      * @Given /^(this product) is(?:| also) priced at ("[^"]+") in ("[^"]+" channel)$/
      */
     public function thisProductIsAlsoPricedAtInChannel(ProductInterface $product, int $price, ChannelInterface $channel)
@@ -158,7 +161,9 @@ final class ProductContext implements Context
 
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
-        $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
+        if (!$productVariant->hasChannelPricingForChannel($channel)) {
+            $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
+        }
 
         $this->objectManager->flush();
     }
@@ -170,6 +175,16 @@ final class ProductContext implements Context
     public function thisProductIsAlsoAvailableInChannel(ProductInterface $product, ChannelInterface $channel): void
     {
         $this->thisProductIsAlsoPricedAtInChannel($product, 0, $channel);
+    }
+
+    /**
+     * @Given /^(this product) is(?:| also) unavailable in ("[^"]+" channel)$/
+     * @Given /^(this product) is disabled in ("[^"]+" channel)$/
+     */
+    public function thisProductIsAlsoUnavailableInChannel(ProductInterface $product, ChannelInterface $channel): void
+    {
+        $product->removeChannel($channel);
+        $this->objectManager->flush();
     }
 
     /**
@@ -303,6 +318,45 @@ final class ProductContext implements Context
             StringInflector::nameToUppercaseCode($productVariantName),
             $channel ?? $this->sharedStorage->get('channel')
         );
+    }
+
+    /**
+     * @Given /^("[^"]+" variant) priced at ("[^"]+") in ("[^"]+" channel)$/
+     */
+    public function variantPricedAtInChannel(
+        ProductVariantInterface $productVariant,
+        int $price,
+        ChannelInterface $channel
+    ): void {
+        $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
+
+        $this->sharedStorage->set('variant', $productVariant);
+    }
+
+    /**
+     * @Given /^("[^"]+" variant) is originally priced at ("[^"]+") in ("[^"]+" channel)$/
+     */
+    public function variantIsOriginalPricedAtInChannel(
+        ProductVariantInterface $productVariant,
+        int $originalPrice,
+        ChannelInterface $channel
+    ): void {
+        /** @var ChannelPricingInterface $channelPricing */
+        $channelPricing = $productVariant->getChannelPricingForChannel($channel);
+        $channelPricing->setOriginalPrice($originalPrice);
+    }
+
+    /**
+     * @Given /^the ("[^"]+" variant) has minimum price of ("[^"]+") in the ("[^"]+" channel)$/
+     */
+    public function variantHasMinimumPriceInChannel(
+        ProductVariantInterface $productVariant,
+        int $minimumPrice,
+        ChannelInterface $channel
+    ): void {
+        /** @var ChannelPricingInterface $channelPricing */
+        $channelPricing = $productVariant->getChannelPricingForChannel($channel);
+        $channelPricing->setMinimumPrice($minimumPrice);
     }
 
     /**
@@ -694,6 +748,18 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product)'s weight is (\d+(?:\.\d+)?)$/
+     */
+    public function theProductChangedItsWeightTo(ProductInterface $product, float $weight): void
+    {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+        $productVariant->setWeight($weight);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(this product)(?:| also) has an image "([^"]+)" with "([^"]+)" type$/
      * @Given /^the ("[^"]+" product)(?:| also) has an image "([^"]+)" with "([^"]+)" type$/
      * @Given /^(it)(?:| also) has an image "([^"]+)" with "([^"]+)" type$/
@@ -717,6 +783,7 @@ final class ProductContext implements Context
 
     /**
      * @Given /^(this product) belongs to ("([^"]+)" shipping category)$/
+     * @Given product :product belongs to :shippingCategory shipping category
      * @Given product :product shipping category has been changed to :shippingCategory
      */
     public function thisProductBelongsToShippingCategory(ProductInterface $product, ShippingCategoryInterface $shippingCategory)
@@ -727,8 +794,9 @@ final class ProductContext implements Context
 
     /**
      * @Given /^(this product) has been disabled$/
+     * @Given the product :product has been disabled
      */
-    public function thisProductHasBeenDisabled(ProductInterface $product)
+    public function thisProductHasBeenDisabled(ProductInterface $product): void
     {
         $product->disable();
         $this->objectManager->flush();
@@ -867,6 +935,136 @@ final class ProductContext implements Context
 
         $priceValue = $this->getPriceFromString($price);
         $this->createProductVariant($product, $productVariantName, $priceValue, $code, $channel, null, true, $currentStock);
+    }
+
+    /**
+     * @Given /^the ("[^"]+" product variant) has original price at ("[^"]+")$/
+     */
+    public function productVariantHasOriginalPrice(ProductVariantInterface $productVariant, int $price): void
+    {
+        /** @var ChannelInterface $channel */
+        $channel = $this->sharedStorage->get('channel');
+
+        $productVariant->getChannelPricingForChannel($channel)->setOriginalPrice($price);
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the store has a product :productName in channel :channel
+     * @Given the store also has a product :productName in channel :channel
+     */
+    public function theStoreHasAProductWithChannel(string $productName, ChannelInterface $channel): void
+    {
+        $product = $this->createProduct($productName, 0, $channel);
+
+        $this->saveProduct($product);
+    }
+
+    /**
+     * @Given /^the ("[^"]+" product variant) is enabled$/
+     */
+    public function theProductVariantIsEnabled(ProductVariantInterface $productVariant): void
+    {
+        $productVariant->setEnabled(true);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the ("([^"]*)" product variant) is disabled$/
+     */
+    public function theProductVariantIsDisabled(ProductVariantInterface $productVariant): void
+    {
+        $productVariant->setEnabled(false);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the ("([^"]*)" product) is enabled$/
+     */
+    public function theProductIsEnabled(ProductInterface $product): void
+    {
+        $product->setEnabled(true);
+        Assert::count($product->getVariants(), 1);
+
+        /** @var ProductVariantInterface $variant */
+        $variant = $product->getVariants()->first();
+        $variant->setEnabled(true);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the ("([^"]*)" product) is disabled$/
+     */
+    public function theProductIsDisabled(ProductInterface $product): void
+    {
+        $product->setEnabled(false);
+        Assert::count($product->getVariants(), 1);
+
+        /** @var ProductVariantInterface $variant */
+        $variant = $product->getVariants()->first();
+        $variant->setEnabled(false);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^all (the product) variants with the "([^"]*)" ([^\s]+) are disabled$/
+     */
+    public function allTheProductVariantsWithTheColorAreDisabled(
+        ProductInterface $product,
+        string $optionValue,
+        string $optionName
+    ): void {
+        foreach ($product->getVariants() as $variant) {
+            foreach ($variant->getOptionValues() as $variantOptionValue) {
+                if (
+                    $variantOptionValue->getValue() === $optionValue &&
+                    $variantOptionValue->getOption()->getCode() === StringInflector::nameToUppercaseCode($optionName)
+                ) {
+                    $variant->setEnabled(false);
+                }
+            }
+        }
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the ("[^"]*" \w+ \/ "[^"]*" \w+ variant of product "[^"]*") is disabled$/
+     * @Given /^(this variant) has been disabled$/
+     */
+    public function theSizeColorVariantOfThisProductIsDisabled(ProductVariantInterface $productVariant): void
+    {
+        $productVariant->setEnabled(false);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^all variants of (this product) are disabled$/
+     */
+    public function allVariantsOfThisProductAreDisabled(ProductInterface $product): void
+    {
+        foreach ($product->getVariants() as $variant) {
+            $variant->setEnabled(false);
+        }
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this product) is available in ("[^"]+" channel) and ("[^"]+" channel)$/
+     */
+    public function thisProductIsAvailableInChannels(ProductInterface $product, ChannelInterface ...$channels): void
+    {
+        foreach ($channels as $channel) {
+            $product->addChannel($channel);
+        }
+
+        $this->saveProduct($product);
     }
 
     private function getPriceFromString(string $price): int

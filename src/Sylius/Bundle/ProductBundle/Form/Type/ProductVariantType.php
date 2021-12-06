@@ -17,16 +17,18 @@ use Sylius\Bundle\ProductBundle\Form\EventSubscriber\BuildProductVariantFormSubs
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 final class ProductVariantType extends AbstractResourceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('enabled', CheckboxType::class, [
+                'required' => false,
+                'label' => 'sylius.form.product.enabled',
+            ])
             ->add('translations', ResourceTranslationsType::class, [
                 'entry_type' => ProductVariantTranslationType::class,
                 'label' => 'sylius.form.product_variant.translations',
@@ -37,9 +39,6 @@ final class ProductVariantType extends AbstractResourceType
         $builder->addEventSubscriber(new BuildProductVariantFormSubscriber($builder->getFormFactory()));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_product_variant';

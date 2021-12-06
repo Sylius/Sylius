@@ -20,9 +20,6 @@ use Webmozart\Assert\Assert;
 
 final class OrderInventoryOperator implements OrderInventoryOperatorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function cancel(OrderInterface $order): void
     {
         if (in_array(
@@ -38,9 +35,6 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
         $this->release($order);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hold(OrderInterface $order): void
     {
         /** @var OrderItemInterface $orderItem */
@@ -55,9 +49,6 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function sell(OrderInterface $order): void
     {
         /** @var OrderItemInterface $orderItem */

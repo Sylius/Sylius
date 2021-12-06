@@ -19,6 +19,7 @@ use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Symfony\Component\Security\Core\Exception\RuntimeException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface as CoreUserInterface;
@@ -73,7 +74,7 @@ final class UsernameOrEmailProviderSpec extends ObjectBehavior
         $userRepository->findOneBy(['usernameCanonical' => 'testuser'])->willReturn(null);
         $userRepository->findOneByEmail('testuser')->willReturn(null);
 
-        $this->shouldThrow(new UsernameNotFoundException('Username "testuser" does not exist.'))->during('loadUserByUsername', ['testUser']);
+        $this->shouldThrow(new RuntimeException('Username "testuser" does not exist.'))->during('loadUserByUsername', ['testUser']);
     }
 
     function it_loads_user_by_email(

@@ -19,17 +19,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PaymentGatewayChoiceType extends AbstractType
 {
-    /** @var array */
-    private $gateways;
+    private array $gateways;
 
     public function __construct(array $gateways)
     {
         $this->gateways = $gateways;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -39,17 +35,11 @@ final class PaymentGatewayChoiceType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_payment_gateway_choice';

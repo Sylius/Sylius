@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Locale\Context;
 
-use Zend\Stdlib\PriorityQueue;
+use Laminas\Stdlib\PriorityQueue;
 
 final class CompositeLocaleContext implements LocaleContextInterface
 {
@@ -22,7 +22,7 @@ final class CompositeLocaleContext implements LocaleContextInterface
      *
      * @psalm-var PriorityQueue<LocaleContextInterface>
      */
-    private $localeContexts;
+    private PriorityQueue $localeContexts;
 
     public function __construct()
     {
@@ -34,9 +34,6 @@ final class CompositeLocaleContext implements LocaleContextInterface
         $this->localeContexts->insert($localeContext, $priority);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLocaleCode(): string
     {
         $lastException = null;

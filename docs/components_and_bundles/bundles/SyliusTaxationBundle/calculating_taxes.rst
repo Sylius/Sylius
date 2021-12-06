@@ -1,12 +1,5 @@
-.. rst-class:: outdated
-
 Calculating taxes
 =================
-
-.. danger::
-
-   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
-   You can help us making documentation up to date via Sylius Github. Thank you!
 
 .. warning::
 
@@ -23,11 +16,11 @@ Resolving rate and using calculator
 
     <?php
 
-    namespace Acme\ShopBundle\Taxation
+    namespace Acme\ShopBundle\Taxation;
 
-    use Acme\ShopBundle\Entity\Order;
-    use Sylius\Bundle\TaxationBundle\Calculator\CalculatorInterface;
-    use Sylius\Bundle\TaxationBundle\Resolver\TaxRateResolverInterface;
+    use Acme\ShopBundle\Entity\Order\Order;
+    use Sylius\Component\Taxation\Calculator\CalculatorInterface;
+    use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
     class TaxApplicator
     {
@@ -36,7 +29,7 @@ Resolving rate and using calculator
 
         public function __construct(
             CalculatorInterface $calculator,
-            TaxRateResolverInterface $taxRateResolver,
+            TaxRateResolverInterface $taxRateResolver
         )
         {
             $this->calculator = $calculator;
@@ -49,7 +42,7 @@ Resolving rate and using calculator
             $tax = 0;
 
             foreach ($order->getItems() as $item) {
-                $taxable = $item->getProduct();
+                $taxable = $item->getVariant();
                 $rate = $this->taxRateResolver->resolve($taxable);
 
                 if (null === $rate) {

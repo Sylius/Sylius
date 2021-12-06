@@ -23,11 +23,9 @@ final class PromotionUpdateMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.promotion.update';
 
-    /** @var FactoryInterface */
-    private $factory;
+    private FactoryInterface $factory;
 
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(FactoryInterface $factory, EventDispatcherInterface $eventDispatcher)
     {
@@ -46,8 +44,8 @@ final class PromotionUpdateMenuBuilder
 
         $this->addChildren($menu, $promotion);
         $this->eventDispatcher->dispatch(
-            self::EVENT_NAME,
-            new PromotionMenuBuilderEvent($this->factory, $menu, $promotion)
+            new PromotionMenuBuilderEvent($this->factory, $menu, $promotion),
+            self::EVENT_NAME
         );
 
         return $menu;

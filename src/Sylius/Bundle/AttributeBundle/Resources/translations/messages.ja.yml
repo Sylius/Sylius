@@ -4,8 +4,13 @@
 sylius:
     form:
         attribute:
+            add: 追加
             code: コード
             name: ゾーン名
+            translations: 翻訳
             type: タイプ
         attribute_type:
             configuration: 条件設定
+            date: 日付
+            percent: パーセント
+            select: 選択

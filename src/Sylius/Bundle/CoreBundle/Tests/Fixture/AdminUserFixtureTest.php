@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\AdminUserFixture;
@@ -64,9 +64,6 @@ final class AdminUserFixtureTest extends TestCase
         $this->assertConfigurationIsValid([['custom' => [['password' => 'I.<3.Krzysztof.Krawczyk']]]], 'custom.*.password');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): AdminUserFixture
     {
         return new AdminUserFixture(

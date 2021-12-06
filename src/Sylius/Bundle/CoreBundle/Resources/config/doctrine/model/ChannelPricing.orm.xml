@@ -21,13 +21,15 @@
         <unique-constraints>
             <unique-constraint columns="product_variant_id,channel_code" name="product_variant_channel_idx" />
         </unique-constraints>
-    
+
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        <field name="price" column="price" type="integer"/>
-        <field name="originalPrice" column="original_price" type="integer" nullable="true"/>
-        <field name="channelCode" column="channel_code" type="string"/>
+        <field name="price" column="price" type="integer" nullable="true" />
+        <field name="originalPrice" column="original_price" type="integer" nullable="true" />
+        <field name="minimumPrice" column="minimum_price" type="integer" nullable="true" />
+        <field name="channelCode" column="channel_code" type="string" />
+        <field name="appliedPromotions" column="applied_promotions" type="json" nullable="true" />
 
         <many-to-one field="productVariant" target-entity="Sylius\Component\Product\Model\ProductVariantInterface" inversed-by="channelPricings">
             <join-column name="product_variant_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />

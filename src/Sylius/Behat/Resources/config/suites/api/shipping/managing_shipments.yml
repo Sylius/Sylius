@@ -12,6 +12,7 @@ default:
                 - sylius.behat.context.transform.channel
                 - sylius.behat.context.transform.country
                 - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.order
                 - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.product
@@ -30,8 +31,8 @@ default:
                 - sylius.behat.context.setup.zone
 
                 - sylius.behat.context.ui.email
-                
+
                 - sylius.behat.context.api.admin.managing_shipments
             filters:
-                tags: "@managing_shipments && @api"
+                tags: "@managing_shipments&&@api"
             javascript: false

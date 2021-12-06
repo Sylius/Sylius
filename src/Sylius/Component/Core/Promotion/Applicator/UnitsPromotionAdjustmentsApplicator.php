@@ -25,11 +25,9 @@ use Webmozart\Assert\Assert;
 
 final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustmentsApplicatorInterface
 {
-    /** @var AdjustmentFactoryInterface */
-    private $adjustmentFactory;
+    private AdjustmentFactoryInterface $adjustmentFactory;
 
-    /** @var IntegerDistributorInterface */
-    private $distributor;
+    private IntegerDistributorInterface $distributor;
 
     public function __construct(
         AdjustmentFactoryInterface $adjustmentFactory,
@@ -40,8 +38,6 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws UnsupportedTypeException
      */
     public function apply(OrderInterface $order, PromotionInterface $promotion, array $adjustmentsAmounts): void

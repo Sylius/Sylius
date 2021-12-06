@@ -19,8 +19,7 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 final class ReviewChangeListener
 {
-    /** @var ReviewableRatingUpdaterInterface */
-    private $averageRatingUpdater;
+    private ReviewableRatingUpdaterInterface $averageRatingUpdater;
 
     public function __construct(ReviewableRatingUpdaterInterface $averageRatingUpdater)
     {

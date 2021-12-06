@@ -22,11 +22,9 @@ use Webmozart\Assert\Assert;
 
 final class ProductReviewContext implements Context
 {
-    /** @var CreatePageInterface */
-    private $createPage;
+    private CreatePageInterface $createPage;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
 
     public function __construct(
         CreatePageInterface $createPage,
@@ -86,6 +84,7 @@ final class ProductReviewContext implements Context
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt(): void
     {

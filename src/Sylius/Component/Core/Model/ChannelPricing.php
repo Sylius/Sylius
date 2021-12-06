@@ -15,106 +15,139 @@ namespace Sylius\Component\Core\Model;
 
 class ChannelPricing implements ChannelPricingInterface
 {
-    /** @var int|null */
-    protected $id;
+    /** @var mixed */
+    protected $id = null;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     protected $channelCode;
 
-    /** @var ProductVariantInterface|null */
+    /**
+     * @var ProductVariantInterface|null
+     */
     protected $productVariant;
 
-    /** @var int|null */
+    /**
+     * @var int|null
+     */
     protected $price;
 
-    /** @var int|null */
+    /**
+     * @var int|null
+     */
     protected $originalPrice;
 
     /**
-     * {@inheritdoc}
+     * @var int|null
      */
+    protected $minimumPrice;
+
+    /** @var ?array */
+    protected $appliedPromotions = [];
+
     public function __toString(): string
     {
         return (string) $this->getPrice();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getChannelCode(): ?string
     {
         return $this->channelCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setChannelCode(?string $channelCode): void
     {
         $this->channelCode = $channelCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProductVariant(): ?ProductVariantInterface
     {
         return $this->productVariant;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProductVariant(?ProductVariantInterface $productVariant): void
     {
         $this->productVariant = $productVariant;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPrice(): ?int
     {
         return $this->price;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPrice(?int $price): void
     {
         $this->price = $price;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOriginalPrice(): ?int
     {
         return $this->originalPrice;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setOriginalPrice(?int $originalPrice): void
     {
         $this->originalPrice = $originalPrice;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isPriceReduced(): bool
     {
         return $this->originalPrice > $this->price;
+    }
+
+    public function getMinimumPrice(): ?int
+    {
+        return $this->minimumPrice;
+    }
+
+    public function setMinimumPrice(?int $minimumPrice): void
+    {
+        $this->minimumPrice = $minimumPrice;
+    }
+
+    public function addAppliedPromotion(array $promotion): void
+    {
+        if ($this->appliedPromotions === null) {
+            $this->appliedPromotions = $promotion;
+
+            return;
+        }
+
+        $this->appliedPromotions = array_merge($this->appliedPromotions, $promotion);
+    }
+
+    public function removeAppliedPromotion(string $promotionCode): void
+    {
+        unset($this->appliedPromotions[$promotionCode]);
+    }
+
+    public function getAppliedPromotions(): array
+    {
+        return $this->appliedPromotions;
+    }
+
+    public function clearAppliedPromotions(): void
+    {
+        $this->appliedPromotions = [];
+    }
+
+    public function hasExclusiveCatalogPromotionApplied(): bool
+    {
+        if ($this->appliedPromotions === []) {
+            return false;
+        }
+
+        if (reset($this->appliedPromotions)['is_exclusive'])
+        {
+            return true;
+        }
+
+        return false;
     }
 }

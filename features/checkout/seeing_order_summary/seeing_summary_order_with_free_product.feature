@@ -17,17 +17,17 @@ Feature: Seeing a summary of the order with free product
         And it gives "$5.00" discount to every order
         And I am a logged in customer
 
-    @ui
+    @ui @api
     Scenario: Seeing free order
-        Given I have product "Greyjoy Coat" in the cart
-        When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I add "Greyjoy Coat" product to the cart
+        And I define the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed with "DHL" shipping method
         Then I should be on the checkout summary step
         And my order total should be "$0.00"
         And there should be no discount
         And there should be no taxes charged
 
-    @ui
+    @ui @api
     Scenario: Seeing order with both free and paid products
         Given I have product "Greyjoy Coat" in the cart
         And I have product "Lannister Coat" in the cart

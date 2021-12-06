@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        code:
+            not_blank: Сувгийн кодыг оруулна уу.
+            regex: Сувгийн код нь зөвхөн үсэг, тоо, дундуур зураас, доогуур зурааснаас бүрдэнэ.
+            unique: Сувгийн код давтагдахгүй байх ёстой.
+        name:
+            not_blank: Сувгийн нэрийг оруулна уу.

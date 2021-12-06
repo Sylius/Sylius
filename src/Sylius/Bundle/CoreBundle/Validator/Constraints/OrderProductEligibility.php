@@ -17,20 +17,13 @@ use Symfony\Component\Validator\Constraint;
 
 final class OrderProductEligibility extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.order.product_eligibility';
+    public string $message = 'sylius.order.product_eligibility';
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'sylius_order_product_eligibility_validator';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;

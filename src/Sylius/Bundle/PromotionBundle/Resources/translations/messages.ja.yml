@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: 説明
+            name: ゾーン名
         promotion:
             actions: 値引き設定
             add_action: 値引き設定を追加
@@ -29,4 +32,6 @@ sylius:
                 amount: 税率
             shipping_country_configuration:
                 country: 国
+            taxonomy_configuration:
+                taxons: タクソン(分類群)
             type: タイプ

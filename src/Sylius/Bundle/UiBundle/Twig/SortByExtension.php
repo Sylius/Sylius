@@ -20,9 +20,6 @@ use Twig\TwigFilter;
 
 class SortByExtension extends AbstractExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getFilters(): array
     {
         return [
@@ -49,7 +46,7 @@ class SortByExtension extends AbstractExtension
                 $firstProperty = (string) $accessor->getValue($firstElement, $field);
                 $secondProperty = (string) $accessor->getValue($secondElement, $field);
 
-                $result = strcasecmp($firstProperty, $secondProperty);
+                $result = strnatcasecmp($firstProperty, $secondProperty);
                 if ('DESC' === $order) {
                     $result *= -1;
                 }

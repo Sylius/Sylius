@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Installer\Setup;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -22,14 +22,11 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ChannelSetup implements ChannelSetupInterface
 {
-    /** @var RepositoryInterface */
-    private $channelRepository;
+    private RepositoryInterface $channelRepository;
 
-    /** @var FactoryInterface */
-    private $channelFactory;
+    private FactoryInterface $channelFactory;
 
-    /** @var ObjectManager */
-    private $channelManager;
+    private ObjectManager $channelManager;
 
     public function __construct(
         RepositoryInterface $channelRepository,
@@ -41,9 +38,6 @@ final class ChannelSetup implements ChannelSetupInterface
         $this->channelManager = $channelManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setup(LocaleInterface $locale, CurrencyInterface $currency): void
     {
         /** @var ChannelInterface|null $channel */

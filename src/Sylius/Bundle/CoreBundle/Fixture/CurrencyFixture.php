@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -21,11 +21,9 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class CurrencyFixture extends AbstractFixture
 {
-    /** @var FactoryInterface */
-    private $currencyFactory;
+    private FactoryInterface $currencyFactory;
 
-    /** @var ObjectManager */
-    private $currencyManager;
+    private ObjectManager $currencyManager;
 
     public function __construct(FactoryInterface $currencyFactory, ObjectManager $currencyManager)
     {
@@ -33,9 +31,6 @@ class CurrencyFixture extends AbstractFixture
         $this->currencyManager = $currencyManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $options): void
     {
         foreach ($options['currencies'] as $currencyCode) {
@@ -50,17 +45,11 @@ class CurrencyFixture extends AbstractFixture
         $this->currencyManager->flush();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'currency';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode

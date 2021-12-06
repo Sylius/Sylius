@@ -6,15 +6,16 @@ Feature: Maintaining previous cart after authorization
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a product "Stark T-shirt" priced at "$12.00"
+        And the store has "Stark T-Shirt" and "Targaryen T-Shirt" products
         And there is a user "robb@stark.com" identified by "KingInTheNorth"
         And I log in as "robb@stark.com" with "KingInTheNorth" password
 
-    @ui
+    @ui @api
     Scenario: Having cart maintained after logging out and then logging in
-        Given I have product "Stark T-Shirt" in the cart
-        When I log out
+        When I add "Stark T-Shirt" product to the cart
+        And I log out
+        And I add "Targaryen T-Shirt" product to the cart
         And I log in as "robb@stark.com" with "KingInTheNorth" password
-        And I see the summary of my cart
+        And I see the summary of my previous cart
         Then there should be one item in my cart
-        And this item should have name "Stark T-shirt"
+        And this item should have name "Stark T-Shirt"

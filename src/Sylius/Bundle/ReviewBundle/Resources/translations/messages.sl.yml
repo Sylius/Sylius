@@ -6,6 +6,8 @@ sylius:
         review:
             author: Avtor
             comment: Komentar
+            rating: Ocena
             status:
                 new: Novo
+                rejected: Zavrnjeno
             title: Naslov

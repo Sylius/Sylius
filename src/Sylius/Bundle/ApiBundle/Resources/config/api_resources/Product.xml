@@ -16,12 +16,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.product.class%" shortName="Product">
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>admin:product:read</attribute>
-                <attribute>shop:product:read</attribute>
-            </attribute>
-        </attribute>
         <attribute name="validation_groups">sylius</attribute>
 
         <attribute name="order">
@@ -29,49 +23,102 @@
         </attribute>
 
         <collectionOperations>
-            <collectionOperation name="get">
-                <attribute name="path">admin/products</attribute>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/products</attribute>
                 <attribute name="filters">
+                    <attribute>sylius.api.product_name_filter</attribute>
                     <attribute>sylius.api.product_order_filter</attribute>
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
-                    <attribute>sylius.api.translation_order_name_filter</attribute>
+                    <attribute>Sylius\Bundle\ApiBundle\Doctrine\Filter\TranslationOrderNameAndLocaleFilter</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product:read</attribute>
                 </attribute>
             </collectionOperation>
 
-            <collectionOperation name="post">
-                <attribute name="path">admin/products</attribute>
+            <collectionOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/products</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.product_name_filter</attribute>
+                    <attribute>sylius.api.product_order_filter</attribute>
+                    <attribute>sylius.api.product_taxon_code_filter</attribute>
+                    <attribute>Sylius\Bundle\ApiBundle\Doctrine\Filter\ProductPriceOrderFilter</attribute>
+                    <attribute>Sylius\Bundle\ApiBundle\Doctrine\Filter\TranslationOrderNameAndLocaleFilter</attribute>
+                    <attribute>Sylius\Bundle\ApiBundle\Filter\TaxonFilter</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product:read</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/products</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product:create</attribute>
-                </attribute>
-            </collectionOperation>
-
-            <collectionOperation name="get_latest">
-                <attribute name="openapi_context">
-                    <attribute name="summary">Retrives 3 latest Products</attribute>
-                </attribute>
-                <attribute name="method">GET</attribute>
-                <attribute name="path">shop/products/latest</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:product:read</attribute>
-                        <attribute>shop:product:read</attribute>
-                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get">
-                <attribute name="path">admin/products/{id}</attribute>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/products/{code}</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Use code to retrieve a product resource.</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product:read</attribute>
+                </attribute>
             </itemOperation>
-            <itemOperation name="put">
-                <attribute name="path">admin/products/{id}</attribute>
+
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/products/{code}</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Use code to retrieve a product resource.</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_get_by_slug">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/products-by-slug/{slug}</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction</attribute>
+                <attribute name="read">false</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Use slug to retrieve a product resource.</attribute>
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">slug</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/products/{code}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product:update</attribute>
                 </attribute>
             </itemOperation>
-            <itemOperation name="delete">
-                <attribute name="path">admin/products/{id}</attribute>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/products/{code}</attribute>
             </itemOperation>
         </itemOperations>
 
@@ -79,12 +126,25 @@
         <property name="code" identifier="true" required="true" />
         <property name="createdAt" writable="false" />
         <property name="updatedAt" writable="false" />
-        <property name="translations" readable="true" writable="true" />
+        <property name="translations" readable="true" writable="true">
+            <attribute name="openapi_context">
+                <attribute name="type">object</attribute>
+                <attribute name="example">
+                    <attribute name="en_US">
+                        <attribute name="name">string</attribute>
+                        <attribute name="slug">string</attribute>
+                        <attribute name="locale">string</attribute>
+                    </attribute>
+                </attribute>
+            </attribute>
+        </property>
         <property name="productTaxons" readable="true" writable="true" />
         <property name="reviews" required="false" />
         <property name="options" required="false" />
         <property name="channels" required="false" />
         <property name="images" required="false" />
         <property name="mainTaxon" required="false" />
+        <property name="variants" readable="true"/>
+        <property name="averageRating" readable="true" />
     </resource>
 </resources>

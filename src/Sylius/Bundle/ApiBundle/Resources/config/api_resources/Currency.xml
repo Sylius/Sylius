@@ -16,17 +16,49 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.currency.class%" shortName="Currency">
-        <attribute name="route_prefix">admin</attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
-            <collectionOperation name="get" />
-            <collectionOperation name="post" />
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/currencies</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:currency:read</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/currencies</attribute>
+            </collectionOperation>
+
+            <collectionOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="route_prefix">shop</attribute>
+                <attribute name="path">/shop/currencies</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:currency:read</attribute>
+                </attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get" />
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/currencies/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:currency:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="route_prefix">shop</attribute>
+                <attribute name="path">/shop/currencies/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:currency:read</attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />

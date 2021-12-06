@@ -12,10 +12,16 @@ Sylius\Component\Product\Model\ProductOption:
         currentLocale: en_US
         translations:
             - "@productOptionTranslation"
+        values:
+            - "@productOptionValue"
+            - "@productOptionValue2"
 
 Sylius\Component\Product\Model\ProductOptionValue:
     productOptionValue:
         code: MUG_TYPE_MEDIUM
+        option: "@productOption"
+    productOptionValue2:
+        code: MUG_TYPE_LARGE
         option: "@productOption"
 
 Sylius\Component\Core\Model\Product:
@@ -39,6 +45,10 @@ Sylius\Component\Product\Model\ProductVariantTranslation:
         name: "Small sticker"
         locale: en_US
         translatable: "@productVariant21"
+    productVariantTranslation22:
+        name: "Large Mug"
+        locale: en_US
+        translatable: "@productVariant22"
 
 Sylius\Component\Core\Model\ProductVariant:
     productVariant{1..20}:
@@ -50,6 +60,17 @@ Sylius\Component\Core\Model\ProductVariant:
         position: <current()>
         translations:
             - "@productVariantTranslation<current()>"
+    productVariant22:
+        code: LARGE_MUG
+        version: 1
+        product: "@product1"
+        optionValues:
+            - "@productOptionValue2"
+        fallbackLocale: en_US
+        currentLocale: de
+        position: 22
+        translations:
+            - "@productVariantTranslation22"
     productVariant21:
         code: SMALL_STICKER
         version: 1

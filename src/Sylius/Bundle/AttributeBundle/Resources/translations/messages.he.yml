@@ -9,6 +9,7 @@ sylius:
             translations: תרגומים
             type: סוג
         attribute_type:
+            configuration: הגדרות
             date: תאריך
             select: בחירה
             text: טקסט

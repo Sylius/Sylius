@@ -1,5 +1,32 @@
 # CHANGELOG FOR `1.6.X`
 
+## v1.6.9 (2020-10-19)
+
+#### Details
+
+- [#11369](https://github.com/Sylius/Sylius/issues/11369) [Docs] Don't use $HOME in SymfonyCloud deployment cookbook ([@tucksaun](https://github.com/tucksaun))
+- [#11387](https://github.com/Sylius/Sylius/issues/11387) Remove the doc reference to a promotion action that no longer exists in Core. ([@gabiudrescu](https://github.com/gabiudrescu))
+- [#11391](https://github.com/Sylius/Sylius/issues/11391) Fallback to the locale code if the associated name isn't found ([@dunglas](https://github.com/dunglas))
+- [#11390](https://github.com/Sylius/Sylius/issues/11390) Bug #9738 Fix nested form collections ([@vic-blt](https://github.com/vic-blt))
+- [#11403](https://github.com/Sylius/Sylius/issues/11403) Fix Autolabeler configuration ([@Zales0123](https://github.com/Zales0123))
+- [#11416](https://github.com/Sylius/Sylius/issues/11416) doc : add the composer dump-autoload instruction ([@davidroberto](https://github.com/davidroberto))
+- [#11450](https://github.com/Sylius/Sylius/issues/11450) [Docs] Enable redirections on ReadTheDocs ([@pamil](https://github.com/pamil))
+- [#11452](https://github.com/Sylius/Sylius/issues/11452) [Docs] Fix redirection for backwards compatibility promise ([@pamil](https://github.com/pamil))
+- [#11944](https://github.com/Sylius/Sylius/issues/11944) [Shop] Disabling customer when email has been changed ([@lchrusciel](https://github.com/lchrusciel))
+
+## v1.6.8 (2020-04-21)
+
+#### Details
+
+- [#11018](https://github.com/Sylius/Sylius/issues/11018) Fix: Check PropertyPath value for add error to form ([@Coosos](https://github.com/Coosos))
+- [#11191](https://github.com/Sylius/Sylius/issues/11191) Separated order items subtotal calculation logic from twig extension ([@4c0n](https://github.com/4c0n))
+- [#11341](https://github.com/Sylius/Sylius/issues/11341) [Maintenance] Upgrade packages dependencies & fix 1.6 build ([@lchrusciel](https://github.com/lchrusciel))
+- [#11342](https://github.com/Sylius/Sylius/issues/11342) [Maintenance] Remove memory swap ([@lchrusciel](https://github.com/lchrusciel))
+- [#11346](https://github.com/Sylius/Sylius/issues/11346) [ADMIN] fix closed gateway config field in payment method form ([@bigboss86](https://github.com/bigboss86))
+- [#11363](https://github.com/Sylius/Sylius/issues/11363) Introduce Probot Autolabeler ([@Zales0123](https://github.com/Zales0123))
+- [#11364](https://github.com/Sylius/Sylius/issues/11364) fix #11362 : ignore channel locale listener on profiler routes ([@thi3rry](https://github.com/thi3rry))
+- [#11380](https://github.com/Sylius/Sylius/issues/11380) Use !default for SCSS variables to allow overriding them ([@pamil](https://github.com/pamil))
+
 ## v1.6.7 (2020-03-31)
 
 #### Details

@@ -29,6 +29,7 @@ sylius:
             description: Popis
             name: Názov
         shipping_method:
+            add_rule: Pridať pravidlo
             calculator: Spôsob vypočtu
             category: Kategória
             category_requirement: Podmienka pre kategóriu doručenia
@@ -41,5 +42,11 @@ sylius:
             match_none_category_requirement: Žiadna jednotka nesmie byť zo zvolenej kategórie
             name: Názov
             position: Pozícia
+            rules: Pravidlá
             tax_category: Daňová kategória
             translations: Preklady
+        shipping_method_rule:
+            type: Typ
+            total: Spolu
+            weight: Hmotnosť
+            amount: Suma

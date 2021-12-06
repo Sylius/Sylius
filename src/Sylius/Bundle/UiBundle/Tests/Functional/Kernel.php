@@ -13,6 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Tests\Functional;
 
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Symfony\Bundle\SecurityBundle\SecurityBundle;
+use Symfony\Bundle\TwigBundle\TwigBundle;
+use Sonata\BlockBundle\SonataBlockBundle;
+use Sylius\Bundle\UiBundle\SyliusUiBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -26,11 +31,11 @@ final class Kernel extends HttpKernel
     public function registerBundles(): array
     {
         return [
-            new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
-            new \Symfony\Bundle\TwigBundle\TwigBundle(),
-            new \Sonata\BlockBundle\SonataBlockBundle(),
-            new \Sylius\Bundle\UiBundle\SyliusUiBundle(),
+            new FrameworkBundle(),
+            new SecurityBundle(),
+            new TwigBundle(),
+            new SonataBlockBundle(),
+            new SyliusUiBundle(),
         ];
     }
 
@@ -38,9 +43,6 @@ final class Kernel extends HttpKernel
     {
         $containerBuilder->loadFromExtension('framework', [
             'secret' => 'S0ME_SECRET',
-            'templating' => [
-                'engines' => ['twig'],
-            ],
         ]);
 
         $containerBuilder->loadFromExtension('security', ['firewalls' => ['main' => ['anonymous' => null]]]);

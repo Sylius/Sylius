@@ -27,8 +27,8 @@
         <field name="amount" column="amount" type="integer" />
         <field name="neutral" column="is_neutral" type="boolean" />
         <field name="locked" column="is_locked" type="boolean" />
-
         <field name="originCode" column="origin_code" type="string" nullable="true" />
+        <field name="details" type="json" />
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>

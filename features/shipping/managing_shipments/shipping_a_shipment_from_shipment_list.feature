@@ -37,3 +37,9 @@ Feature: Shipping a shipment from shipment list
         And I ship the shipment of order "#00000001"
         Then I should see the shipment of order "#00000001" as "Shipped"
         And I should see the shipment of order "#00000001" shipped at "20-02-2020 10:30:05"
+
+    @api
+    Scenario: Shipping a shipment that has been already shipped
+        Given this order has already been shipped
+        When I try to ship the shipment of order "#00000001"
+        Then I should be notified that shipment has been already shipped

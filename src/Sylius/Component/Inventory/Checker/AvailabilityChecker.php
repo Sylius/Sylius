@@ -17,17 +17,11 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 
 final class AvailabilityChecker implements AvailabilityCheckerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function isStockAvailable(StockableInterface $stockable): bool
     {
         return $this->isStockSufficient($stockable, 1);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isStockSufficient(StockableInterface $stockable, int $quantity): bool
     {
         return !$stockable->isTracked() || $quantity <= ($stockable->getOnHand() - $stockable->getOnHold());

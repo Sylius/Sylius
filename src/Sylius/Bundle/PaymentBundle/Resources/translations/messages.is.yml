@@ -1,0 +1,21 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        payment:
+            method: Greiðslumáti
+            state:
+                header: Greiðslustaða
+                checkout: Ganga frá kaupum
+                completed: Lokið
+                failed: Tókst ekki
+                new: Nýtt
+                pending: Í biðstöðu
+                processing: Í vinnslu
+                cancelled: Hætt við
+                refunded: Endurgreitt
+        payment_method:
+            description: Lýsing
+            name: Nafn
+            position: Staðsetning

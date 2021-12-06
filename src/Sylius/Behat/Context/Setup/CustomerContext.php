@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -26,23 +26,17 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class CustomerContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var CustomerRepositoryInterface */
-    private $customerRepository;
+    private CustomerRepositoryInterface $customerRepository;
 
-    /** @var ObjectManager */
-    private $customerManager;
+    private ObjectManager $customerManager;
 
-    /** @var FactoryInterface */
-    private $customerFactory;
+    private FactoryInterface $customerFactory;
 
-    /** @var FactoryInterface */
-    private $userFactory;
+    private FactoryInterface $userFactory;
 
-    /** @var FactoryInterface */
-    private $addressFactory;
+    private FactoryInterface $addressFactory;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -68,6 +62,8 @@ final class CustomerContext implements Context
         $partsOfName = explode(' ', $name);
         $customer = $this->createCustomer($email, $partsOfName[0], $partsOfName[1]);
         $this->customerRepository->add($customer);
+
+        $this->sharedStorage->set('customer', $customer);
     }
 
     /**
@@ -94,7 +90,7 @@ final class CustomerContext implements Context
      * @Given the store has customer :email with name :fullName since :since
      * @Given the store has customer :email with name :fullName and phone number :phoneNumber since :since
      */
-    public function theStoreHasCustomerWithNameAndRegistrationDate($email, $fullName, $phoneNumber = null, $since)
+    public function theStoreHasCustomerWithNameAndRegistrationDate($email, $fullName, $since, $phoneNumber = null)
     {
         $names = explode(' ', $fullName);
         $customer = $this->createCustomer($email, $names[0], $names[1], new \DateTime($since), $phoneNumber);
@@ -126,14 +122,17 @@ final class CustomerContext implements Context
      * @Given there is a customer :name identified by an email :email and a password :password
      * @Given there is a customer :name with an email :email and a password :password
      */
-    public function theStoreHasCustomerAccountWithEmailAndPassword($name, $email, $password)
+    public function theStoreHasCustomerAccountWithEmailAndPassword(string $name, string $email, string $password): void
     {
-        $names = explode(' ', $name);
-        $firstName = $names[0];
-        $lastName = count($names) > 1 ? $names[1] : null;
+        $this->createCustomerWithFullNameEmailAndPassword($name, $email, $password);
+    }
 
-        $customer = $this->createCustomerWithUserAccount($email, $password, true, $firstName, $lastName);
-        $this->customerRepository->add($customer);
+    /**
+     * @Given there is a customer :name with an email :email
+     */
+    public function theStoreHasCustomerAccountWithEmailAndName(string $name, string $email): void
+    {
+        $this->createCustomerWithFullNameEmailAndPassword($name, $email, 'sylius');
     }
 
     /**
@@ -257,5 +256,15 @@ final class CustomerContext implements Context
         $this->sharedStorage->set('customer', $customer);
 
         return $customer;
+    }
+
+    private function createCustomerWithFullNameEmailAndPassword(string $name, string $email, string $password): void
+    {
+        $names = explode(' ', $name);
+        $firstName = $names[0];
+        $lastName = count($names) > 1 ? $names[1] : null;
+
+        $customer = $this->createCustomerWithUserAccount($email, $password, true, $firstName, $lastName);
+        $this->customerRepository->add($customer);
     }
 }

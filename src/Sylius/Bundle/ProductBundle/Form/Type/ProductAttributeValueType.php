@@ -17,9 +17,6 @@ use Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType;
 
 final class ProductAttributeValueType extends AttributeValueType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_product_attribute_value';

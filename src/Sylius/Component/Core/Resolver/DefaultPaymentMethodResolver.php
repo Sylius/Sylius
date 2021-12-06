@@ -33,8 +33,6 @@ class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterf
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws UnresolvedDefaultPaymentMethodException
      */
     public function getDefaultPaymentMethod(BasePaymentInterface $subject): PaymentMethodInterface

@@ -5,6 +5,7 @@ sylius:
     channel:
         code:
             not_blank: Kérjük, írja be a csatorna kódját.
+            regex: A csatorna kódja csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.
             unique: Csatorna kódjának egyedinek kell lennie.
         name:
             not_blank: Kérjük, adja meg a csatorna nevét.

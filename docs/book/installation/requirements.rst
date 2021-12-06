@@ -5,7 +5,7 @@ System Requirements
 ===================
 
 Here you will find the list of system requirements that have to be adhered to be able to use **Sylius**.
-First of all have a look at the `requirements for running Symfony <http://symfony.com/doc/current/reference/requirements.html>`_.
+First of all have a look at the `requirements for running Symfony <https://symfony.com/doc/current/reference/requirements.html>`_.
 
 Read about the `LAMP stack <https://en.wikipedia.org/wiki/LAMP_(software_bundle)>`_ and the `MAMP stack <https://en.wikipedia.org/wiki/MAMP>`_.
 
@@ -21,7 +21,7 @@ In the production environment we do recommend using Apache web server ≥ 2.2.
 
 While developing the recommended way to work with your Symfony application is to use PHP's built-in web server.
 
-`Go there <http://symfony.com/doc/current/cookbook/configuration/web_server_configuration.html>`_ to see the full reference to the web server configuration.
+`Go there <https://symfony.com/doc/current/cookbook/configuration/web_server_configuration.html>`_ to see the full reference to the web server configuration.
 
 PHP required modules and configuration
 --------------------------------------
@@ -29,7 +29,7 @@ PHP required modules and configuration
 **PHP version**:
 
 +---------------+-----------------------+
-| PHP           | ^7.2                  |
+| PHP           | ^8.0                  |
 +---------------+-----------------------+
 
 **PHP extensions**:
@@ -54,7 +54,7 @@ PHP required modules and configuration
 
 .. warning::
 
-    Use your local timezone, for example America/Los_Angeles or Europe/Berlin. See http://php.net/manual/en/timezones.php for the list of all available timezones.
+    Use your local timezone, for example America/Los_Angeles or Europe/Berlin. See https://php.net/manual/en/timezones.php for the list of all available timezones.
 
 Database
 --------
@@ -78,9 +78,9 @@ Most of the application folders and files require only read access, but a few fo
 * ``var/log``
 * ``public/media``
 
-You can read how to set these permissions in the `Symfony - setting up permissions <http://symfony.com/doc/current/setup/file_permissions.html>`_ section.
+You can read how to set these permissions in the `Symfony - setting up permissions <https://symfony.com/doc/current/setup/file_permissions.html>`_ section.
 
-.. _`gd`: http://php.net/manual/en/book.fileinfo.php
-.. _`exif`: http://php.net/manual/en/book.exif.php
-.. _`fileinfo`: http://php.net/manual/en/book.fileinfo.php
-.. _`intl`: http://php.net/manual/en/book.intl.php
+.. _`gd`: https://php.net/manual/en/book.fileinfo.php
+.. _`exif`: https://php.net/manual/en/book.exif.php
+.. _`fileinfo`: https://php.net/manual/en/book.fileinfo.php
+.. _`intl`: https://php.net/manual/en/book.intl.php

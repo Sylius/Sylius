@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: 描述
+            name: 名称
+            priority: 优先级
         promotion:
             actions: 操作
             add_action: 添加操作
@@ -31,7 +35,7 @@ sylius:
             expires_at: 到期时间
             usage_limit: 使用次数
         promotion_coupon_generator_instruction:
-            amount: 金额
+            amount: 优惠金额
             code_length: 优惠码长度
             expires_at: 到期时间
             usage_limit: 使用次数

@@ -5,7 +5,11 @@ sylius:
     review:
         author:
             already_exists: Ez az e-mail már regisztrálva van. Kérjük, jelentkezzen be vagy igényeljen új jelszót.
+        comment:
+            not_blank: Az értékelés megjegyzés mezője nem lehet üres.
         rating:
             not_blank: Ellenőrizned kell az értékelés értékét.
         title:
             not_blank: Az értékelés címe nem lehet üres.
+            min_length: Az értékelés címének legalább 2 karakternek kell lennie.
+            max_length: Az értékelés címe maximum 255 karakter lehet.

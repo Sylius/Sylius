@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\UserBundle\Security\UserLoginInterface;
@@ -68,7 +68,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         $userManager->flush()->shouldBeCalled();
 
         $eventDispatcher
-            ->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, Argument::type(GenericEvent::class))
+            ->dispatch(Argument::type(GenericEvent::class), UserEvents::REQUEST_VERIFICATION_TOKEN)
             ->shouldBeCalled()
         ;
 
@@ -103,7 +103,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         $user->setEmailVerificationToken(Argument::any())->shouldNotBeCalled();
 
         $eventDispatcher
-            ->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, Argument::type(GenericEvent::class))
+            ->dispatch(Argument::type(GenericEvent::class), UserEvents::REQUEST_VERIFICATION_TOKEN)
             ->shouldNotBeCalled()
         ;
 
@@ -138,7 +138,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         $user->setEmailVerificationToken(Argument::any())->shouldNotBeCalled();
 
         $eventDispatcher
-            ->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, Argument::type(GenericEvent::class))
+            ->dispatch(Argument::type(GenericEvent::class), UserEvents::REQUEST_VERIFICATION_TOKEN)
             ->shouldNotBeCalled()
         ;
 

@@ -20,4 +20,4 @@ default:
                 - sylius.behat.context.ui.shop.registration
 
             filters:
-                tags: "@email_verification && @ui"
+                tags: "@email_verification&&@ui"

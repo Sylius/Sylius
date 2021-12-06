@@ -13,56 +13,59 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use Faker\Generator;
+use Faker\Factory;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Symfony\Component\OptionsResolver\Exception\InvalidArgumentException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PromotionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $promotionFactory;
+    private FactoryInterface $promotionFactory;
 
-    /** @var ExampleFactoryInterface */
-    private $promotionRuleExampleFactory;
+    private ExampleFactoryInterface $promotionRuleExampleFactory;
 
-    /** @var ExampleFactoryInterface */
-    private $promotionActionExampleFactory;
+    private ExampleFactoryInterface $promotionActionExampleFactory;
 
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
+    private ChannelRepositoryInterface $channelRepository;
 
-    /** @var \Faker\Generator */
-    private $faker;
+    private ?FactoryInterface $couponFactory;
 
-    /** @var OptionsResolver */
-    private $optionsResolver;
+    private Generator $faker;
+
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
         FactoryInterface $promotionFactory,
         ExampleFactoryInterface $promotionRuleExampleFactory,
         ExampleFactoryInterface $promotionActionExampleFactory,
-        ChannelRepositoryInterface $channelRepository
+        ChannelRepositoryInterface $channelRepository,
+        ?FactoryInterface $couponFactory = null
     ) {
         $this->promotionFactory = $promotionFactory;
         $this->promotionRuleExampleFactory = $promotionRuleExampleFactory;
         $this->promotionActionExampleFactory = $promotionActionExampleFactory;
         $this->channelRepository = $channelRepository;
+        $this->couponFactory = $couponFactory;
 
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
+
+        if ($this->couponFactory === null) {
+            @trigger_error(sprintf('Not passing a $couponFactory to %s constructor is deprecated since Sylius 1.8 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+        }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): PromotionInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -101,12 +104,13 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
             $promotion->addAction($promotionAction);
         }
 
+        foreach ($options['coupons'] as $coupon) {
+            $promotion->addCoupon($coupon);
+        }
+
         return $promotion;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -142,6 +146,41 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
 
                 return $actions;
             })
+
+            ->setDefault('coupons', [])
+            ->setAllowedTypes('coupons', 'array')
+            ->setNormalizer('coupons', self::getCouponNormalizer($this->couponFactory))
         ;
+    }
+
+    private static function getCouponNormalizer(?FactoryInterface $couponFactory): \Closure
+    {
+        return function (Options $options, array $couponDefinitions) use ($couponFactory): array {
+            if (null === $couponFactory) {
+                throw new \RuntimeException('You must configure a $couponFactory');
+            }
+
+            if (!$options['coupon_based'] && count($couponDefinitions) > 0) {
+                throw new InvalidArgumentException('Cannot define coupons for promotion that is not coupon based');
+            }
+
+            $coupons = [];
+            foreach ($couponDefinitions as $couponDefinition) {
+                /** @var PromotionCouponInterface $coupon */
+                $coupon = $couponFactory->createNew();
+                $coupon->setCode($couponDefinition['code']);
+                $coupon->setPerCustomerUsageLimit($couponDefinition['per_customer_usage_limit']);
+                $coupon->setReusableFromCancelledOrders($couponDefinition['reusable_from_cancelled_orders']);
+                $coupon->setUsageLimit($couponDefinition['usage_limit']);
+
+                if (null !== $couponDefinition['expires_at']) {
+                    $coupon->setExpiresAt(new \DateTime($couponDefinition['expires_at']));
+                }
+
+                $coupons[] = $coupon;
+            }
+
+            return $coupons;
+        };
     }
 }

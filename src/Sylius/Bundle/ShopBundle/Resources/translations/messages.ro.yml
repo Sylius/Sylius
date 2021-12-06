@@ -2,6 +2,41 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        contact_request:
+            content: 'Conţinut'
+            message_from: 'Mesaj de la'
+            subject: 'Solicitare de contact'
+        order_confirmation:
+            has_been_successfully_placed: 'a fost plasata cu succes.'
+            subject: 'Confirmare comandă'
+            view_order_or_change_payment_method: 'Vezi comanda sau modifică metoda de plată'
+            thank_you: 'Iti multumim ca ai cumparat la magazinul nostru!'
+            your_order_number: 'Comanda dvs. nr.'
+        password_reset:
+            hello: 'Salut'
+            reset_your_password: 'Resetați-vă parola'
+            subject: 'Resetare parolă'
+            to_reset_your_password: 'Pentru a reseta parola - faceţi clic pe link-ul de mai jos'
+        user_registration:
+            start_shopping: 'Începeți cumpărăturile'
+            subject: 'Înregistrare utilizator'
+            welcome_to_our_store: 'Bine ați venit la magazinul nostru!'
+            you_have_just_been_registered: 'Tocmai aţi fost înregistrat. Vă mulţumim'
+        verification_token:
+            hello: 'Salut'
+            subject: 'Verificare adresă e-mail'
+            to_verify_your_email_address: 'Pentru a vă verifica adresa de e-mail - faceți clic pe link-ul de mai jos'
+            verify_your_email_address: 'Verificați adresa dvs. de e-mail'
+    homepage:
+        about_us: 'Despre noi'
+        about_us_content: 'Bine ai venit la magazinul nostru, magazinul tău numărul unu online, care îți oferă cele mai bune produse. Poți alege din cele mai bune haine și pantofi din oferta noastră. (<i>Puteți modifica acest conținut suprascriind "sylius.homepage.about_us_content" în fișierul dvs. de traducere</i>)'
+        carousel_header: 'Pregătește-te! Iarna vine'
+        newsletter: 'Buletin Informativ'
+        newsletter_description: 'Abonează-te la newsletter-ul nostru pentru a vedea ofertele noi care te așteaptă! (<i>Poți modifica acest conținut suprascriind "sylius. cheia omepage.newsletter_description" în fișierul de traducere</i>)'
+        subscribe: 'Abonează-te'
+    lightbox:
+        image_album_label: 'Imaginea %1 din %2'
     menu:
         shop:
             account:

@@ -15,9 +15,6 @@ namespace Sylius\Behat\Service;
 
 class ResponseLoader implements ResponseLoaderInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getMockedResponse($source)
     {
         $source = $this->getMockedResponsesFolder() . '/' . $source;
@@ -25,9 +22,6 @@ class ResponseLoader implements ResponseLoaderInterface
         return (array) json_decode($this->getFileContents($source));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExpectedResponse($source)
     {
         $source = $this->getExpectedResponsesFolder() . '/' . $source;
@@ -64,7 +58,7 @@ class ResponseLoader implements ResponseLoaderInterface
      */
     private function getCalledClassFolder()
     {
-        $calledClass = get_called_class();
+        $calledClass = static::class;
 
         return \dirname((new \ReflectionClass($calledClass))->getFileName());
     }

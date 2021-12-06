@@ -29,8 +29,10 @@ final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCas
         $this->setDefinition('sylius.registry_promotion_action', new Definition());
         $this->setDefinition('sylius.form_registry.promotion_action', new Definition());
         $this->setDefinition(
-            'custom_promotion_action_command',
-            (new Definition())->addTag('sylius.promotion_action', ['type' => 'custom', 'label' => 'Label', 'form_type' => 'FQCN'])
+            'action',
+            (new Definition())
+                ->addTag('sylius.promotion_action', ['type' => 'custom', 'label' => 'Label 1', 'form_type' => 'FQCN1'])
+                ->addTag('sylius.promotion_action', ['type' => 'another_custom', 'label' => 'Label 2', 'form_type' => 'FQCN2'])
         );
 
         $this->compile();
@@ -38,7 +40,12 @@ final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCas
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.registry_promotion_action',
             'register',
-            ['custom', new Reference('custom_promotion_action_command')]
+            ['custom', new Reference('action')]
+        );
+        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
+            'sylius.registry_promotion_action',
+            'register',
+            ['another_custom', new Reference('action')]
         );
     }
 
@@ -50,15 +57,17 @@ final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCas
         $this->setDefinition('sylius.registry_promotion_action', new Definition());
         $this->setDefinition('sylius.form_registry.promotion_action', new Definition());
         $this->setDefinition(
-            'custom_promotion_action_command',
-            (new Definition())->addTag('sylius.promotion_action', ['type' => 'custom', 'label' => 'Label', 'form_type' => 'FQCN'])
+            'action',
+            (new Definition())
+                ->addTag('sylius.promotion_action', ['type' => 'custom', 'label' => 'Label 1', 'form_type' => 'FQCN1'])
+                ->addTag('sylius.promotion_action', ['type' => 'another_custom', 'label' => 'Label 2', 'form_type' => 'FQCN2'])
         );
 
         $this->compile();
 
         $this->assertContainerBuilderHasParameter(
             'sylius.promotion_actions',
-            ['custom' => 'Label']
+            ['custom' => 'Label 1', 'another_custom' => 'Label 2']
         );
     }
 
@@ -70,8 +79,10 @@ final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCas
         $this->setDefinition('sylius.registry_promotion_action', new Definition());
         $this->setDefinition('sylius.form_registry.promotion_action', new Definition());
         $this->setDefinition(
-            'custom_promotion_action_command',
-            (new Definition())->addTag('sylius.promotion_action', ['type' => 'custom', 'label' => 'Label', 'form_type' => 'FQCN'])
+            'action',
+            (new Definition())
+                ->addTag('sylius.promotion_action', ['type' => 'custom', 'label' => 'Label 1', 'form_type' => 'FQCN1'])
+                ->addTag('sylius.promotion_action', ['type' => 'another_custom', 'label' => 'Label 2', 'form_type' => 'FQCN2'])
         );
 
         $this->compile();
@@ -79,13 +90,15 @@ final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCas
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.form_registry.promotion_action',
             'add',
-            ['custom', 'default', 'FQCN']
+            ['custom', 'default', 'FQCN1']
+        );
+        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
+            'sylius.form_registry.promotion_action',
+            'add',
+            ['another_custom', 'default', 'FQCN2']
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new RegisterPromotionActionsPass());

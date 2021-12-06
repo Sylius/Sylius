@@ -1,0 +1,5 @@
+Admin: ['src/Sylius/Bundle/AdminBundle/']
+API: ['src/Sylius/Bundle/ApiBundle/']
+Documentation: ['docs/']
+Maintenance: ['etc/', '.github/', '*.md']
+Shop: ['src/Sylius/Bundle/ShopBundle/']

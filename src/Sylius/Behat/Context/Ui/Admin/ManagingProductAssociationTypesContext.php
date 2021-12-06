@@ -23,17 +23,13 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductAssociationTypesContext implements Context
 {
-    /** @var CreatePageInterface */
-    private $createPage;
+    private CreatePageInterface $createPage;
 
-    /** @var IndexPageInterface */
-    private $indexPage;
+    private IndexPageInterface $indexPage;
 
-    /** @var UpdatePageInterface */
-    private $updatePage;
+    private UpdatePageInterface $updatePage;
 
-    /** @var CurrentPageResolverInterface */
-    private $currentPageResolver;
+    private CurrentPageResolverInterface $currentPageResolver;
 
     public function __construct(
         CreatePageInterface $createPage,
@@ -92,7 +88,7 @@ final class ManagingProductAssociationTypesContext implements Context
      * @When I rename it to :name in :language
      * @When I remove its name from :language translation
      */
-    public function iRenameItToInLanguage($name = null, $language)
+    public function iRenameItToInLanguage(string $language, ?string $name = null): void
     {
         $this->updatePage->nameItIn($name ?? '', $language);
     }

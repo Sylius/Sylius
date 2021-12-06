@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Product;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
@@ -24,13 +23,13 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
 {
     use ChecksCodeImmutability;
 
-    /** @var array */
-    private $imageUrls = [];
+    private array $imageUrls = [];
 
     public function nameItIn(string $name, string $localeCode): void
     {
         $this->getDocument()->fillField(
-            sprintf('sylius_product_translations_%s_name', $localeCode), $name
+            sprintf('sylius_product_translations_%s_name', $localeCode),
+            $name
         );
     }
 
@@ -56,8 +55,6 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     {
         $this->openTaxonBookmarks();
 
-        Assert::isInstanceOf($this->getDriver(), Selenium2Driver::class);
-
         $this->getDriver()->executeScript(sprintf('$(\'input.search\').val(\'%s\')', $taxon->getName()));
         $this->getElement('search')->click();
         $this->getElement('search')->waitFor(10, function () {
@@ -82,10 +79,10 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         }
 
         $this->getDriver()->visit($imageUrl);
-        $pageText = $this->getDocument()->getText();
+        $statusCode = $this->getDriver()->getStatusCode();
         $this->getDriver()->back();
 
-        return false === stripos($pageText, '404 Not Found');
+        return in_array($statusCode, [200, 304], true);
     }
 
     public function attachImage(string $path, string $type = null): void

@@ -9,6 +9,8 @@ sylius:
             title: Otsikko
         cart:
             coupon: Kuponki
+        catalog_promotion:
+            channels: Kanavat
         checkout:
             addressing:
                 different_billing_address: Käytä eri osoitetta laskutukseen?
@@ -24,6 +26,7 @@ sylius:
                 country: Maa
                 postcode: Postinumero
                 street: Katuosoite
+            countries: Maat
             currencies: Valuutat
             currency_base: Perusvaluutta
             locales: Alueet
@@ -50,7 +53,6 @@ sylius:
             code: Koodi
         user:
             billing_address: Laskutusosoite
-            different_billing_address: Käytä eri osoitetta laskutukseen?
             enabled: Aktiivinen
             first_name: Etunimi
             groups: Ryhmät

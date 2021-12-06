@@ -16,37 +16,35 @@ namespace Sylius\Behat\Service;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
-use Webmozart\Assert\Assert;
+use DMore\ChromeDriver\ChromeDriver;
 
 abstract class SlugGenerationHelper
 {
-    public static function waitForSlugGeneration(Session $session, NodeElement $element)
+    public static function waitForSlugGeneration(Session $session, NodeElement $element): void
     {
-        Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
-
         JQueryHelper::waitForAsynchronousActionsToFinish($session);
+
         static::isElementReadonly($session, $element);
+
         JQueryHelper::waitForAsynchronousActionsToFinish($session);
     }
 
-    public static function enableSlugModification(Session $session, NodeElement $element)
+    public static function enableSlugModification(Session $session, NodeElement $element): void
     {
-        Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
-
         JQueryHelper::waitForAsynchronousActionsToFinish($session);
-        static::waitForElementToBeClickable($session, $element);
+
+        static::isElementReadonly($session, $element);
 
         $element->click();
 
+        static::isElementNotReadonly($session, $element);
+
         JQueryHelper::waitForAsynchronousActionsToFinish($session);
     }
 
-    /**
-     * @return bool
-     */
-    public static function isSlugReadonly(Session $session, NodeElement $element)
+    public static function isSlugReadonly(Session $session, NodeElement $element): bool
     {
-        if (!$session->getDriver() instanceof Selenium2Driver) {
+        if (!$session->getDriver() instanceof Selenium2Driver && !$session->getDriver() instanceof ChromeDriver) {
             return $element->hasAttribute('readonly');
         }
 
@@ -55,22 +53,19 @@ abstract class SlugGenerationHelper
         return static::isElementReadonly($session, $element);
     }
 
-    private static function waitForElementToBeClickable(Session $session, NodeElement $element)
-    {
-        $session->wait(1000, sprintf(
-            'false === $(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).hasClass("loading")',
-            $element->getParent()->getParent()->getXpath()
-        ));
-    }
-
-    /**
-     * @return bool
-     */
-    private static function isElementReadonly(Session $session, NodeElement $element)
+    private static function isElementReadonly(Session $session, NodeElement $element): bool
     {
         return $session->wait(1000, sprintf(
             'undefined != $(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).attr("readonly")',
-            $element->getXpath()
+            str_replace('"', '\"', $element->getXpath())
+        ));
+    }
+
+    private static function isElementNotReadonly(Session $session, NodeElement $element): bool
+    {
+        return $session->wait(1000, sprintf(
+            'undefined == $(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).attr("readonly")',
+            str_replace('"', '\"', $element->getXpath())
         ));
     }
 }

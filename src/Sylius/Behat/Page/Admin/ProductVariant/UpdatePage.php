@@ -28,9 +28,26 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('code');
     }
 
-    public function specifyPrice(int $price): void
+    public function specifyPrice(int $price, ?ChannelInterface $channel = null): void
     {
-        $this->getDocument()->fillField('Price', $price);
+        if ($channel === null) {
+            $this->getDocument()->fillField('Price', $price);
+
+            return;
+        }
+
+        $this->getElement('price', ['%channelCode%' => $channel->getCode()])->setValue($price);
+    }
+
+    public function specifyOriginalPrice(?int $originalPrice, ?ChannelInterface $channel = null): void
+    {
+        if ($channel === null) {
+            $this->getDocument()->fillField('Original price', $originalPrice);
+
+            return;
+        }
+
+        $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
     }
 
     public function disableTracking(): void
@@ -55,14 +72,19 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $priceElement->find('css', 'input')->getValue();
     }
 
-    public function getPriceForChannel(string $channelName): string
+    public function getPriceForChannel(ChannelInterface $channel): string
     {
-        return $this->getElement('price', ['%channelName%' => $channelName])->getValue();
+        return $this->getElement('price', ['%channelCode%' => $channel->getCode()])->getValue();
     }
 
-    public function getOriginalPriceForChannel(string $channelName): string
+    public function getMinimumPriceForChannel(ChannelInterface $channel): string
     {
-        return $this->getElement('original_price', ['%channelName%' => $channelName])->getValue();
+        return $this->getElement('minimum_price', ['%channelCode%' => $channel->getCode()])->getValue();
+    }
+
+    public function getOriginalPriceForChannel(ChannelInterface $channel): string
+    {
+        return $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->getValue();
     }
 
     public function getNameInLanguage(string $language): string
@@ -109,16 +131,33 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_variant_code',
+            'minimum_price' => '#sylius_product_variant_channelPricings input[name$="[minimumPrice]"][id*="%channelCode%"]',
             'name' => '#sylius_product_variant_translations_%language%_name',
             'on_hand' => '#sylius_product_variant_onHand',
             'option_values' => '#sylius_product_variant_optionValues_%optionName%',
-            'original_price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[originalPrice]"]',
-            'price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[price]"]',
+            'original_price' => '#sylius_product_variant_channelPricings input[name$="[originalPrice]"][id*="%channelCode%"]',
+            'price' => '#sylius_product_variant_channelPricings input[id*="%channelCode%"]',
             'pricing_configuration' => '#sylius_calculator_container',
             'shipping_required' => '#sylius_product_variant_shippingRequired',
             'show_product_dropdown' => '.scrolling.menu',
             'show_product_single_button' => 'a:contains("Show product in shop page")',
             'tracked' => '#sylius_product_variant_tracked',
+            'enabled' => '#sylius_product_variant_enabled',
         ]);
+    }
+
+    public function disable(): void
+    {
+        $this->getElement('enabled')->uncheck();
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->getElement('enabled')->isChecked();
+    }
+
+    public function enable(): void
+    {
+        $this->getElement('enabled')->check();
     }
 }

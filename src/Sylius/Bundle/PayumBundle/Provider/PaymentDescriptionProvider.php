@@ -15,21 +15,17 @@ namespace Sylius\Bundle\PayumBundle\Provider;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class PaymentDescriptionProvider implements PaymentDescriptionProviderInterface
 {
-    /** @var TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
     public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPaymentDescription(PaymentInterface $payment): string
     {
         /** @var OrderInterface $order */

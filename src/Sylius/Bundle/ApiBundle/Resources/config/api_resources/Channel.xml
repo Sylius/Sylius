@@ -16,26 +16,77 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.channel.class%" shortName="Channel">
-        <attribute name="route_prefix">admin</attribute>
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/channels</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:channel:read</attribute>
+                </attribute>
+            </collectionOperation>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>channel:read</attribute>
-            </attribute>
-        </attribute>
-
-        <collectionOperations />
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/channels</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:channel:create</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get">
-                <attribute name="groups">
-                    <attribute>channel:read</attribute>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/channels/{code}</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Use $code to retrieve a channel resource.</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:channel:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/channels/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:channel:read</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Use $code to retrieve a channel resource.</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="shop_billing_data_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/channels/{code}/shop-billing-data</attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="false" writable="false" />
-        <property name="code" identifier="true" writable="false" readable="true" />
-        <property name="name" writable="true"  readable="true"/>
+        <property name="code" identifier="true" required="true" />
+        <property name="name" writable="true" readable="true" />
+        <property name="description" writable="true" readable="true" />
+        <property name="hostname" writable="true" readable="true" />
+        <property name="color" writable="true" readable="true" />
+        <property name="baseCurrency" writable="true" readable="true" />
+        <property name="defaultLocale" writable="true" readable="true" />
+        <property name="defaultTaxZone" writable="true" readable="true" />
+        <property name="taxCalculationStrategy" writable="true" readable="true" />
+        <property name="currencies" writable="true" readable="true" />
+        <property name="locales" writable="true" readable="true" />
+        <property name="countries" writable="true" readable="true" />
+        <property name="themeName" writable="true" readable="true" />
+        <property name="contactEmail" writable="true" readable="true" />
+        <property name="contactPhoneNumber" writable="true" readable="true" />
+        <property name="skippingShippingStepAllowed" writable="true" readable="true" />
+        <property name="skippingPaymentStepAllowed" writable="true" readable="true" />
+        <property name="accountVerificationRequired" writable="true" readable="true" />
+        <property name="shopBillingData" readable="true" writable="true">
+            <subresource resourceClass="%sylius.model.shop_billing_data.class%" collection="false" />
+        </property>
+        <property name="menuTaxon" writable="true" readable="true" />
     </resource>
 </resources>

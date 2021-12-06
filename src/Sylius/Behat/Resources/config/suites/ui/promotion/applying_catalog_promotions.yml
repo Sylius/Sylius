@@ -1,0 +1,32 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_applying_catalog_promotions:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.setup.calendar
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.product_taxon
+                - sylius.behat.context.setup.taxonomy
+                - Sylius\Behat\Context\Setup\CatalogPromotionContext
+
+                - sylius.behat.context.transform.channel
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.product_variant
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.taxon
+                - Sylius\Behat\Context\Transform\CatalogPromotionContext
+
+                - Sylius\Behat\Context\Ui\Admin\ManagingCatalogPromotionsContext
+                - Sylius\Behat\Context\Ui\Admin\ManagingProductTaxonsContext
+                - Sylius\Behat\Context\Ui\Admin\ManagingProductVariantsPricesContext
+                - sylius.behat.context.ui.shop.product
+
+            filters:
+                tags: "@applying_catalog_promotions&&@ui"

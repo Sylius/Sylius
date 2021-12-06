@@ -33,4 +33,4 @@ default:
 
 
             filters:
-                tags: "@managing_product_variants && @domain"
+                tags: "@managing_product_variants&&@domain"

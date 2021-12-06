@@ -27,34 +27,16 @@ interface PaymentMethodInterface extends
     ToggleableInterface,
     TranslatableInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): ?string;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName(?string $name): void;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription(): ?string;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDescription(?string $description): void;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getInstructions(): ?string;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setInstructions(?string $instructions): void;
 
     public function getEnvironment(): ?string;

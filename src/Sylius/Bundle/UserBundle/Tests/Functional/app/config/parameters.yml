@@ -1,8 +1,6 @@
 parameters:
-    database_driver: pdo_mysql
-    database_host: 127.0.0.1
-    database_port: ~
-    database_name: sylius_user_test
-    database_user: root
-    database_password: ~
-    database_version: 5.5
+    database_driver: pdo_sqlite
+    database_path: "%kernel.project_dir%/app/db.sql"
+
+    locale: en_US
+    secret: "Three can keep a secret, if two of them are dead."

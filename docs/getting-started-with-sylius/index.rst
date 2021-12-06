@@ -38,6 +38,7 @@ and simplest way from an idea ("I want to sell some stuff online") to the first 
     first-product
     shop-customizations
     custom-business-logic
+    using-api
     plugin-installation
     deployment
     summary

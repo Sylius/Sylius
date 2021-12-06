@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: الوصف
+            name: الاسم
+            priority: الأولوية
         promotion:
             actions: الاجراءت
             add_action: إضافة فعل
@@ -58,7 +62,7 @@ sylius:
             nth_order_configuration:
                 nth: Nth
             shipping_country_configuration:
-                country: البلد
+                country: الدولة
             taxonomy_configuration:
                 exclude: استثناء
                 taxons: تاكسونس

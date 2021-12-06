@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -21,28 +21,22 @@ use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Countries;
 use Webmozart\Assert\Assert;
 
 class GeographicalFixture extends AbstractFixture
 {
-    /** @var FactoryInterface */
-    private $countryFactory;
+    private FactoryInterface $countryFactory;
 
-    /** @var ObjectManager */
-    private $countryManager;
+    private ObjectManager $countryManager;
 
-    /** @var FactoryInterface */
-    private $provinceFactory;
+    private FactoryInterface $provinceFactory;
 
-    /** @var ObjectManager */
-    private $provinceManager;
+    private ObjectManager $provinceManager;
 
-    /** @var ZoneFactoryInterface */
-    private $zoneFactory;
+    private ZoneFactoryInterface $zoneFactory;
 
-    /** @var ObjectManager */
-    private $zoneManager;
+    private ObjectManager $zoneManager;
 
     public function __construct(
         FactoryInterface $countryFactory,
@@ -60,9 +54,6 @@ class GeographicalFixture extends AbstractFixture
         $this->zoneManager = $zoneManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $options): void
     {
         $this->loadCountriesWithProvinces($options['countries'], $options['provinces']);
@@ -73,17 +64,11 @@ class GeographicalFixture extends AbstractFixture
         $this->zoneManager->flush();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'geographical';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNodeBuilder = $optionsNode->children();
@@ -91,7 +76,7 @@ class GeographicalFixture extends AbstractFixture
         $optionsNodeBuilder
             ->arrayNode('countries')
                 ->performNoDeepMerging()
-                ->defaultValue(array_keys(Intl::getRegionBundle()->getCountryNames()))
+                ->defaultValue(array_keys(Countries::getNames()))
                 ->scalarPrototype()
         ;
 

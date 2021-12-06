@@ -9,6 +9,6 @@ sylius:
         tax_rate:
             category: 税目
             name: 名称
-            amount: 金额
+            amount: 税率
             included_in_price: 包含在价格中？
             calculator: 计算器

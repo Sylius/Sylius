@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/7.0/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/8.5/phpunit.xsd"
          colors="true"
 >
+    <php>
+        <ini name="error_reporting" value="-1" />
+
+        <!-- ###+ symfony/framework-bundle ### -->
+        <env name="APP_ENV" value="test"/>
+        <env name="SHELL_VERBOSITY" value="-1" />
+        <!-- ###- symfony/framework-bundle ### -->
+
+        <server name="KERNEL_CLASS" value="Sylius\Bundle\ApiBundle\Application\Kernel" />
+        <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
+        <server name="DATABASE_URL" value="sqlite:///%kernel.project_dir%/var/db.sql" />
+    </php>
+
     <testsuites>
         <testsuite name="SyliusApiBundle Test Suite">
             <directory>./Tests/</directory>
+            <directory>./test/src/Tests/</directory>
         </testsuite>
     </testsuites>
 </phpunit>

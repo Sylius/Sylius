@@ -11,6 +11,11 @@ sylius_admin_dashboard:
     defaults:
         _controller: sylius.controller.admin.dashboard:indexAction
 
+sylius_admin_dashboard_statistics:
+    path: /statistics
+    defaults:
+        _controller: sylius.controller.admin.dashboard:getRawData
+
 sylius_admin_impersonate_user:
     path: /impersonate/{username}
     defaults:
@@ -19,6 +24,9 @@ sylius_admin_impersonate_user:
 
 sylius_admin_admin_user:
     resource: "@SyliusAdminBundle/Resources/config/routing/admin_user.yml"
+
+sylius_admin_catalog_promotion:
+    resource: "@SyliusAdminBundle/Resources/config/routing/catalog_promotion.yaml"
 
 sylius_admin_channel:
     resource: "@SyliusAdminBundle/Resources/config/routing/channel.yml"

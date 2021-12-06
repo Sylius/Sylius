@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    email:
+        order_confirmation_resent: 'Confirmarea comenzii a fost retrimisă cu succes clientului.'
+        shipment_confirmation_resent: 'Confirmarea expedierii a fost retrimisă cu succes clientului.'
+    product_variant:
+        cannot_generate_variants: 'Nu se pot genera variante pentru un produs fără valori opțiuni setate.'

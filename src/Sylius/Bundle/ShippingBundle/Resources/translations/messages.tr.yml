@@ -29,6 +29,7 @@ sylius:
             description: Açıklama
             name: Ad
         shipping_method:
+            add_rule: Kural ekle
             calculator: Hesaplayıcı
             category: Kategori
             category_requirement: Kategori gereksinimi
@@ -41,5 +42,11 @@ sylius:
             match_none_category_requirement: Hiçbir birim yöntem katagorisi ile eşleşmelidir
             name: Ad
             position: Konum
+            rules: Kurallar
             tax_category: Vergi kategorisi
             translations: Çeviriler
+        shipping_method_rule:
+            type: Tür
+            total: Toplam
+            weight: Ağırlığı
+            amount: Miktar

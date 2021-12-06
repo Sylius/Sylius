@@ -24,11 +24,9 @@ use Symfony\Component\Form\FormEvents;
 
 final class CustomerGuestType extends AbstractResourceType
 {
-    /** @var RepositoryInterface */
-    private $customerRepository;
+    private RepositoryInterface $customerRepository;
 
-    /** @var FactoryInterface */
-    private $customerFactory;
+    private FactoryInterface $customerFactory;
 
     public function __construct(
         string $dataClass,
@@ -42,9 +40,6 @@ final class CustomerGuestType extends AbstractResourceType
         $this->customerFactory = $customerFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options = []): void
     {
         $builder
@@ -79,9 +74,6 @@ final class CustomerGuestType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_customer_guest';

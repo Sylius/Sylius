@@ -9,6 +9,8 @@ sylius:
             title: Títol
         cart:
             coupon: Cupó
+        catalog_promotion:
+            channels: Canals
         checkout:
             addressing:
                 different_billing_address: Utilitzar diferent adreça de facturació?
@@ -32,6 +34,7 @@ sylius:
                 postcode: Codi postal
                 street: Carrer
             contact_email: Correu de contacte
+            countries: Països
             currencies: Monedes
             currency_base: Moneda base
             account_verification_required: Es requereix verificació del compte?
@@ -98,7 +101,6 @@ sylius:
             file: Seleccioneu la imatge
         user:
             billing_address: Adreça de facturació
-            different_billing_address: Utilitzar diferent adreça de facturació?
             enabled: Activat
             first_name: Nom
             groups: Grups

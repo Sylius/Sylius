@@ -18,5 +18,5 @@ default:
                 - sylius.behat.context.api.admin.managing_currencies
 
             filters:
-                tags: "@managing_currencies && @api"
+                tags: "@managing_currencies&&@api"
             javascript: false

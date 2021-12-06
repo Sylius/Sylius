@@ -22,14 +22,11 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductOptionsContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $client;
+    private ApiClientInterface $client;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
     public function __construct(
         ApiClientInterface $client,
@@ -42,19 +39,19 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @When I browse product options
-     */
-    public function iBrowseProductOptions(): void
-    {
-        $this->client->index();
-    }
-
-    /**
      * @Given I want to create a new product option
      */
     public function iWantToCreateANewProductOption(): void
     {
         $this->client->buildCreateRequest();
+    }
+
+    /**
+     * @When I browse product options
+     */
+    public function iBrowseProductOptions(): void
+    {
+        $this->client->index();
     }
 
     /**
@@ -127,8 +124,7 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @When I add it
-     * @When I try to add it
+     * @When I (try to) add it
      */
     public function iAddIt(): void
     {
@@ -136,8 +132,7 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
+     * @When I (try to) save my changes
      */
     public function iSaveMyChanges(): void
     {
@@ -187,8 +182,8 @@ final class ManagingProductOptionsContext implements Context
         $count = $this->responseChecker->countCollectionItems($this->client->getLastResponse());
 
         Assert::true(
-            $this->responseChecker->hasItemOnPositionWithValue($this->client->getLastResponse(), $count-1, $field, $value),
-            sprintf('There should be product option with %s "%s" on position %d, but it does not.', $field, $value, $count-1)
+            $this->responseChecker->hasItemOnPositionWithValue($this->client->getLastResponse(), $count - 1, $field, $value),
+            sprintf('There should be product option with %s "%s" on position %d, but it does not.', $field, $value, $count - 1)
         );
     }
 

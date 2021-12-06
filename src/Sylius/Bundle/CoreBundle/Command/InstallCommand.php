@@ -21,12 +21,9 @@ use Symfony\Component\Process\Exception\RuntimeException;
 
 final class InstallCommand extends AbstractInstallCommand
 {
-    /**
-     * @var array
-     *
-     * @psalm-var non-empty-list
-     */
-    private $commands = [
+    protected static $defaultName = 'sylius:install';
+
+    private array $commands = [
         [
             'command' => 'check-requirements',
             'message' => 'Checking system requirements.',
@@ -45,15 +42,12 @@ final class InstallCommand extends AbstractInstallCommand
         ],
     ];
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configure(): void
     {
         $this
-            ->setName('sylius:install')
             ->setDescription('Installs Sylius in your preferred environment.')
-            ->setHelp(<<<EOT
+            ->setHelp(
+                <<<EOT
 The <info>%command.name%</info> command installs Sylius.
 EOT
             )
@@ -61,9 +55,6 @@ EOT
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $suite = $input->getOption('fixture-suite');
@@ -72,9 +63,13 @@ EOT
         $outputStyle->writeln('<info>Installing Sylius...</info>');
         $outputStyle->writeln($this->getSyliusLogo());
 
-        $this->ensureDirectoryExistsAndIsWritable($this->getContainer()->getParameter('kernel.cache_dir'), $output);
+        $this->ensureDirectoryExistsAndIsWritable((string) $this->getContainer()->getParameter('kernel.cache_dir'), $output);
 
         $errored = false;
+        /**
+         * @var int $step
+         * @var array $command
+         */
         foreach ($this->commands as $step => $command) {
             try {
                 $outputStyle->newLine();

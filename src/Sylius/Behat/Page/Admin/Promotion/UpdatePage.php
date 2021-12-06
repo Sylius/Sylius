@@ -135,14 +135,15 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements(): array
     {
         return [
+            'applies_to_discounted' => '#sylius_promotion_appliesToDiscounted',
             'code' => '#sylius_promotion_code',
-            'priority' => '#sylius_promotion_priority',
             'coupon_based' => '#sylius_promotion_couponBased',
             'ends_at' => '#sylius_promotion_endsAt',
             'ends_at_date' => '#sylius_promotion_endsAt_date',
             'ends_at_time' => '#sylius_promotion_endsAt_time',
             'exclusive' => '#sylius_promotion_exclusive',
             'name' => '#sylius_promotion_name',
+            'priority' => '#sylius_promotion_priority',
             'rules' => '#rules',
             'starts_at' => '#sylius_promotion_startsAt',
             'starts_at_date' => '#sylius_promotion_startsAt_date',

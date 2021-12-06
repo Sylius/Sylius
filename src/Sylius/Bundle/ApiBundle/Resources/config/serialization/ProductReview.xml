@@ -17,34 +17,36 @@
 >
     <class name="Sylius\Component\Core\Model\ProductReview">
         <attribute name="id">
-            <group>product_review:read</group>
+            <group>admin:product_review:read</group>
         </attribute>
         <attribute name="createdAt">
-           <group>product_review:read</group>
+           <group>admin:product_review:read</group>
        </attribute>
         <attribute name="updatedAt">
-           <group>product_review:read</group>
+           <group>admin:product_review:read</group>
        </attribute>
        <attribute name="title">
-           <group>product_review:read</group>
-           <group>product_review:update</group>
+           <group>admin:product_review:read</group>
+           <group>admin:product_review:update</group>
        </attribute>
        <attribute name="rating">
-           <group>product_review:read</group>
-           <group>product_review:update</group>
+           <group>admin:product_review:read</group>
+           <group>admin:product_review:update</group>
        </attribute>
        <attribute name="comment">
-           <group>product_review:read</group>
-           <group>product_review:update</group>
+           <group>admin:product_review:read</group>
+           <group>admin:product_review:update</group>
+           <group>shop:product_review:create</group>
        </attribute>
        <attribute name="author">
-           <group>product_review:read</group>
+           <group>admin:product_review:read</group>
        </attribute>
        <attribute name="status">
-           <group>product_review:read</group>
+           <group>admin:product_review:read</group>
+           <group>shop:product_review:read</group>
        </attribute>
        <attribute name="reviewSubject">
-           <group>product_review:read</group>
+           <group>admin:product_review:read</group>
        </attribute>
     </class>
 </serializer>

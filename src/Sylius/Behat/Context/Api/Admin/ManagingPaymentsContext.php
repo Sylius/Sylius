@@ -26,14 +26,11 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPaymentsContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $client;
+    private ApiClientInterface $client;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
-    /** @var IriConverterInterface */
-    private $iriConverter;
+    private IriConverterInterface $iriConverter;
 
     public function __construct(
         ApiClientInterface $client,
@@ -135,12 +132,15 @@ final class ManagingPaymentsContext implements Context
     }
 
     /**
-     * @Then /^I should see payment for (the "[^"]+" order) as (\d+)(?:|st|nd|rd|th) in the list$/
+     * @Then /^I should see payment for the ("[^"]+" order) as (\d+)(?:|st|nd|rd|th) in the list$/
      */
-    public function iShouldSeePaymentForTheOrderInTheList(string $orderNumber, int $position): void
+    public function iShouldSeePaymentForTheOrderInTheList(OrderInterface $order, int $position): void
     {
         Assert::true($this->responseChecker->hasItemOnPositionWithValue(
-            $this->client->getLastResponse(), $position - 1, 'order', sprintf('/new-api/admin/orders/%s', $orderNumber)
+            $this->client->getLastResponse(),
+            $position - 1,
+            'order',
+            sprintf('/api/v2/admin/orders/%s', $order->getTokenValue())
         ));
     }
 

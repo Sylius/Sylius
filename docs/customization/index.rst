@@ -20,8 +20,9 @@ The Customization Guide is helpful while wanting to adapt Sylius to your persona
     grid
     fixtures
     fixture_suites
+    api/index
     tips_and_tricks
 
 .. include:: /customization/map.rst.inc
 
-.. include:: /customization/plugins.rst.inc
+.. include:: /customization/plugins.rst

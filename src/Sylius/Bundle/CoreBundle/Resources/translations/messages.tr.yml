@@ -9,6 +9,8 @@ sylius:
             title: Başlık
         cart:
             coupon: Kupon
+        catalog_promotion:
+            channels: Kanallar
         checkout:
             addressing:
                 different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
@@ -21,6 +23,7 @@ sylius:
                 product: Ürün
         promotion_coupon:
             per_customer_usage_limit: Müşteri Başına Kullanım Limiti
+            reusable_from_cancelled_orders: İptal edilen siparişlerden tekrar kullanılabilir
         group:
             name: Ad
             roles: Roller
@@ -31,7 +34,9 @@ sylius:
                 country: Ülke
                 postcode: Posta kodu
                 street: Sokak
+                tax_id: Vergi Numarası
             contact_email: İletişim e-maili
+            countries: Ülkeler
             currencies: Para birimi
             currency_base: Ana Para Birimi
             account_verification_required: Hesap doğrulaması gerekli mi?
@@ -40,6 +45,7 @@ sylius:
             locales: Diller
             payment_methods: Ödeme Yöntemleri
             shipping_methods: Kargolama Yöntemleri
+            shop_billing_data: Mağaza fatura verileri
             skipping_shipping_step_allowed: Tek bir gönderim yöntemi varsa, gönderim adımı atlansın mı?
             skipping_payment_step_allowed: Yalnızca bir ödeme yöntemi varsa ödeme adımını atlansın mı?
             tax_calculation_strategy: Vergi hesaplama stratejisi
@@ -100,7 +106,6 @@ sylius:
             file: Resim seç
         user:
             billing_address: Fatura adresi
-            different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
             enabled: Etkin
             first_name: Ad
             groups: Gruplar

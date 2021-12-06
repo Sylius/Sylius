@@ -23,11 +23,9 @@ final class ProductVariantFormMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.product_variant.form';
 
-    /** @var FactoryInterface */
-    private $factory;
+    private FactoryInterface $factory;
 
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(FactoryInterface $factory, EventDispatcherInterface $eventDispatcher)
     {
@@ -62,9 +60,15 @@ final class ProductVariantFormMenuBuilder
             ->setLabel('sylius.ui.inventory')
         ;
 
+        $menu
+            ->addChild('channel_pricings')
+            ->setAttribute('template', '@SyliusAdmin/ProductVariant/Tab/_channelPricings.html.twig')
+            ->setLabel('sylius.ui.channel_pricings')
+        ;
+
         $this->eventDispatcher->dispatch(
-            self::EVENT_NAME,
-            new ProductVariantMenuBuilderEvent($this->factory, $menu, $options['product_variant'])
+            new ProductVariantMenuBuilderEvent($this->factory, $menu, $options['product_variant']),
+            self::EVENT_NAME
         );
 
         return $menu;

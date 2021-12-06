@@ -29,8 +29,11 @@ sylius:
             date:
                 format: Formátum
             select:
+                multiple: Többszörös
                 values: Értékek
                 choose: Válassz egy lehetőséget
+                min: Minimum bejegyzés
+                max: Maximum bejegyzés
             text:
                 min: Minimális hossz
                 max: Maximális hossz

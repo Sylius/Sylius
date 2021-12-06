@@ -21,22 +21,19 @@ use Webmozart\Assert\Assert;
 
 final class ValidSelectAttributeConfigurationValidator extends ConstraintValidator
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function validate($attribute, Constraint $constraint): void
+    public function validate($value, Constraint $constraint): void
     {
-        /** @var AttributeInterface $attribute */
-        Assert::isInstanceOf($attribute, AttributeInterface::class);
+        /** @var AttributeInterface $value */
+        Assert::isInstanceOf($value, AttributeInterface::class);
 
         /** @var ValidSelectAttributeConfiguration $constraint */
         Assert::isInstanceOf($constraint, ValidSelectAttributeConfiguration::class);
 
-        if (SelectAttributeType::TYPE !== $attribute->getType()) {
+        if (SelectAttributeType::TYPE !== $value->getType()) {
             return;
         }
 
-        $configuration = $attribute->getConfiguration();
+        $configuration = $value->getConfiguration();
 
         $min = null;
         if (!empty($configuration['min'])) {
@@ -52,7 +49,7 @@ final class ValidSelectAttributeConfigurationValidator extends ConstraintValidat
             return;
         }
 
-        $multiple = $attribute->getConfiguration()['multiple'];
+        $multiple = $value->getConfiguration()['multiple'];
         if (!$multiple) {
             $this->context->addViolation($constraint->messageMultiple);
 
@@ -65,7 +62,7 @@ final class ValidSelectAttributeConfigurationValidator extends ConstraintValidat
             return;
         }
 
-        $numberOfChoices = count($attribute->getConfiguration()['choices']);
+        $numberOfChoices = count($value->getConfiguration()['choices']);
         if (null !== $min && $min > $numberOfChoices) {
             $this->context->addViolation($constraint->messageMinEntries);
         }

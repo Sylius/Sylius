@@ -1,11 +1,11 @@
 <div id="more-details" class="ui styled fluid accordion">
     {% for translation in product.translations %}
-        <div class="title active">
+        <div class="title">
             <i class="dropdown icon"></i>
             <i class="{{ translation.locale|slice(-2)|lower }} flag"></i>
             {{ translation.locale|sylius_locale_name }}
         </div>
-        <div class="ui content active">
+        <div class="ui content">
             <table class="ui very basic celled table">
                 <tbody>
                 <tr>
@@ -18,7 +18,7 @@
                 </tr>
                 <tr>
                     <td class="three wide"><strong class="gray text">{{ 'sylius.ui.description'|trans }}</strong></td>
-                    <td>{{ translation.description }}</td>
+                    <td>{{ translation.description|nl2br }}</td>
                 </tr>
                 <tr>
                     <td class="three wide"><strong class="gray text">{{ 'sylius.ui.meta_keywords'|trans }}</strong></td>

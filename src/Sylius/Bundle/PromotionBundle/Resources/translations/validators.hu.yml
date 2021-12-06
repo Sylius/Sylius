@@ -5,6 +5,7 @@ sylius:
     promotion:
         code:
             unique: A promóció a megadott kóddal már létezik.
+            regex: A promóció kódja csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.
             not_blank: Kérjük, írja be a promóció kódját.
         description:
             max_length: A promóció leírása nem lehet hosszabb, mint 1 karakter. |A promóció leírása nem lehet hosszabb, mint {{ limit }} karakterek.
@@ -20,7 +21,9 @@ sylius:
             max_length: A kupon kód nem lehet hosszabb, mint 1 karakter. |A kupon kód nem lehet hosszabb, mint {{ limit }} karakterek.
             min_length: A kupon kódnak legalább 1 karakter hosszúnak kell lennie. |A kupon kódmak  legalább {{ limit }} karakter hosszú kell legyen.
             not_blank: Kérjük, írja be a kupon kódot.
+            regex: A kupon kódja csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.
             unique: Ez a kupon már létezik.
+        is_invalid: A kupon kód érvénytelen.
         usage_limit:
             min: A kupon használati korlátozás legalább {{ limit }} kell legyen.
     promotion_coupon_generator_instruction:
@@ -31,6 +34,5 @@ sylius:
             min: A kupon kódjának legalább {{ limit }} karakter hosszúnak kell lennie.
             max: A kupon kódja nem lehet {{ limit }} karakternél hosszabb.
             not_blank: Kérjük, adja meg a kupon kód hosszát.
-        possible_generation_amount: 'Érvénytelen kuponkód hossz vagy kupon mennyiség. Nem lehet %expectedAmount% egyedi kupont generálni ezzel a kód hosszúsággal ( %codeLength%). A maximális mennyiség ami generálható: %possibleAmount%.'
         usage_limit:
             min: A létrehozott kuponok használati korlátozása legalább {{ limit }} kell legyen.

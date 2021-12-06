@@ -24,9 +24,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class PromotionType extends AbstractResourceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -39,6 +36,9 @@ final class PromotionType extends AbstractResourceType
             ])
             ->add('exclusive', CheckboxType::class, [
                 'label' => 'sylius.form.promotion.exclusive',
+            ])
+            ->add('appliesToDiscounted', CheckboxType::class, [
+                'label' => 'sylius.form.promotion.applies_to_discounted'
             ])
             ->add('usageLimit', IntegerType::class, [
                 'label' => 'sylius.form.promotion.usage_limit',
@@ -76,9 +76,6 @@ final class PromotionType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_promotion';

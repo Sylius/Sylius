@@ -51,4 +51,4 @@ After
 .. image:: ../_images/flash_after_customization.png
     :align: center
 
-.. include:: /customization/plugins.rst.inc
+.. include:: /customization/plugins.rst

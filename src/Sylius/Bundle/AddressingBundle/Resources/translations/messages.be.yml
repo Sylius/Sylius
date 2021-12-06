@@ -16,14 +16,14 @@ sylius:
             zone: Зона
         country:
             add_province: Дадаць вобласць
-            name: Назва
+            name: Імя
             provinces: Вобласці
-            select: Выбярыце
+            select: Выберыце
             enabled: Уключана
         province:
             name: Назва
             abbreviation: Абрэвіятура вобласці (рэгіёну)
-            select: Выбярыце
+            select: Выберыце
         zone:
             add_member: Дадаць удзельніка
             members: Удзельнікі
@@ -36,7 +36,7 @@ sylius:
             scope: Сфера ўжывання
             scopes:
                 all: Усе
-            select: Выбярыце
+            select: Выберыце
             select_scope: Выбярыце сферу ўжывання
         zone_member:
-            select: Выбярыце
+            select: Выберыце

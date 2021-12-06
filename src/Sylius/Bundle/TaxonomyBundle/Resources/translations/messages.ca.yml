@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Descripció
+            enabled: Activat
             name: Nom
         taxonomy:
             name: Nom

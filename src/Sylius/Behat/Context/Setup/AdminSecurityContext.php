@@ -22,17 +22,13 @@ use Webmozart\Assert\Assert;
 
 final class AdminSecurityContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var SecurityServiceInterface */
-    private $securityService;
+    private SecurityServiceInterface $securityService;
 
-    /** @var ExampleFactoryInterface */
-    private $userFactory;
+    private ExampleFactoryInterface $userFactory;
 
-    /** @var UserRepositoryInterface */
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -48,6 +44,7 @@ final class AdminSecurityContext implements Context
 
     /**
      * @Given I am logged in as an administrator
+     * @Given there is logged in the administrator
      */
     public function iAmLoggedInAsAnAdministrator()
     {

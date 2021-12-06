@@ -19,11 +19,9 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 final class OrderModifier implements OrderModifierInterface
 {
-    /** @var OrderProcessorInterface */
-    private $orderProcessor;
+    private OrderProcessorInterface $orderProcessor;
 
-    /** @var OrderItemQuantityModifierInterface */
-    private $orderItemQuantityModifier;
+    private OrderItemQuantityModifierInterface $orderItemQuantityModifier;
 
     public function __construct(
         OrderProcessorInterface $orderProcessor,
@@ -33,28 +31,22 @@ final class OrderModifier implements OrderModifierInterface
         $this->orderItemQuantityModifier = $orderItemQuantityModifier;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addToOrder(OrderInterface $order, OrderItemInterface $item): void
+    public function addToOrder(OrderInterface $cart, OrderItemInterface $cartItem): void
     {
-        $this->resolveOrderItem($order, $item);
+        $this->resolveOrderItem($cart, $cartItem);
 
-        $this->orderProcessor->process($order);
+        $this->orderProcessor->process($cart);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function removeFromOrder(OrderInterface $order, OrderItemInterface $item): void
+    public function removeFromOrder(OrderInterface $cart, OrderItemInterface $item): void
     {
-        $order->removeItem($item);
-        $this->orderProcessor->process($order);
+        $cart->removeItem($item);
+        $this->orderProcessor->process($cart);
     }
 
-    private function resolveOrderItem(OrderInterface $order, OrderItemInterface $item): void
+    private function resolveOrderItem(OrderInterface $cart, OrderItemInterface $item): void
     {
-        foreach ($order->getItems() as $existingItem) {
+        foreach ($cart->getItems() as $existingItem) {
             if ($item->equals($existingItem)) {
                 $this->orderItemQuantityModifier->modify(
                     $existingItem,
@@ -65,6 +57,6 @@ final class OrderModifier implements OrderModifierInterface
             }
         }
 
-        $order->addItem($item);
+        $cart->addItem($item);
     }
 }

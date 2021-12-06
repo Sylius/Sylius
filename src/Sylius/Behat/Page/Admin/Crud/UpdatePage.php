@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Crud;
 
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
@@ -21,8 +22,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class UpdatePage extends SymfonyPage implements UpdatePageInterface
 {
-    /** @var string */
-    private $routeName;
+    private string $routeName;
 
     public function __construct(Session $session, $minkParameters, RouterInterface $router, string $routeName)
     {
@@ -75,7 +75,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * @throws ElementNotFoundException
      */
-    private function getFieldElement(string $element): ?\Behat\Mink\Element\NodeElement
+    private function getFieldElement(string $element): ?NodeElement
     {
         $element = $this->getElement(StringInflector::nameToCode($element));
         while (null !== $element && !$element->hasClass('field')) {

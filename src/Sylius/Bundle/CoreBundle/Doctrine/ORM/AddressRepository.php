@@ -20,9 +20,6 @@ use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 
 class AddressRepository extends EntityRepository implements AddressRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function findByCustomer(CustomerInterface $customer): array
     {
         return $this->createQueryBuilder('o')
@@ -34,9 +31,6 @@ class AddressRepository extends EntityRepository implements AddressRepositoryInt
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findOneByCustomer(string $id, CustomerInterface $customer): ?AddressInterface
     {
         return $this->createQueryBuilder('o')

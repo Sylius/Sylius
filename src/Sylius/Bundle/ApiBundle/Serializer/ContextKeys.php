@@ -13,10 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
+/** @experimental */
 class ContextKeys
 {
     public const CHANNEL = 'sylius_api_channel';
+
     public const LOCALE_CODE = 'sylius_api_locale_code';
+
+    public const HTTP_REQUEST_METHOD_TYPE = 'sylius_api_http_method_request_type';
 
     private function __construct()
     {

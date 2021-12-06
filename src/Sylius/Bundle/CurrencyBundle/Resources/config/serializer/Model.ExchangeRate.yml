@@ -19,13 +19,3 @@ Sylius\Component\Currency\Model\ExchangeRate:
         updatedAt:
             expose: true
             groups: [Default, Detailed]
-    relations:
-        -   rel: self
-            href:
-                route: sylius_admin_api_exchange_rate_show
-                parameters:
-                    sourceCurrencyCode: expr(object.getSourceCurrency().getCode())
-                    targetCurrencyCode: expr(object.getTargetCurrency().getCode())
-                    version: 1
-                exclusion:
-                    groups: [Default, Detailed]

@@ -18,9 +18,6 @@ use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 
 class ShippingMethodRepository extends EntityRepository implements ShippingMethodRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function findByName(string $name, string $locale): array
     {
         return $this->createQueryBuilder('o')

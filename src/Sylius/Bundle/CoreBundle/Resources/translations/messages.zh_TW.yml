@@ -9,6 +9,8 @@ sylius:
             title: 標題
         cart:
             coupon: 折價券
+        catalog_promotion:
+            channels: 頻道
         checkout:
             addressing:
                 different_billing_address: 使用其他地址作為賬單地址嗎？
@@ -30,6 +32,7 @@ sylius:
                 postcode: 郵編
                 street: 街道
             contact_email: 聯繫郵箱
+            countries: 國家
             currencies: 貨幣
             currency_base: 基準幣別
             account_verification_required: 是否需要帳戸驗証？
@@ -90,7 +93,6 @@ sylius:
             code: 代碼
             images: 圖像
         user:
-            different_billing_address: 使用其他地址作為賬單地址嗎？
             enabled: 啓用
             first_name: 名
             groups: 群組

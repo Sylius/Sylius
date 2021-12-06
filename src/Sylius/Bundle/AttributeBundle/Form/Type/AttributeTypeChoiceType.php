@@ -19,17 +19,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class AttributeTypeChoiceType extends AbstractType
 {
-    /** @var array */
-    private $attributeTypes;
+    private array $attributeTypes;
 
     public function __construct(array $attributeTypes)
     {
         $this->attributeTypes = $attributeTypes;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -38,17 +34,11 @@ final class AttributeTypeChoiceType extends AbstractType
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_attribute_type_choice';

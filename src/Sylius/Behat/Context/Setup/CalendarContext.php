@@ -17,8 +17,7 @@ use Behat\Behat\Context\Context;
 
 final class CalendarContext implements Context
 {
-    /** @var string */
-    private $projectDirectory;
+    private string $projectDirectory;
 
     public function __construct(string $projectDirectory)
     {

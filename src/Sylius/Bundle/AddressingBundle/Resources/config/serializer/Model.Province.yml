@@ -27,21 +27,3 @@ Sylius\Component\Addressing\Model\Province:
             expose: true
             type: DateTime
             groups: [Detailed]
-    relations:
-        -   rel: self
-            href:
-                route: sylius_admin_api_province_show
-                parameters:
-                    countryCode: expr(object.getCountry().getCode())
-                    code: expr(object.getCode())
-                    version: 1
-            exclusion:
-                groups: [Default, Detailed]
-        -   rel: country
-            href:
-                route: sylius_admin_api_country_show
-                parameters:
-                    code: expr(object.getCountry().getCode())
-                    version: 1
-            exclusion:
-                groups: [Detailed]

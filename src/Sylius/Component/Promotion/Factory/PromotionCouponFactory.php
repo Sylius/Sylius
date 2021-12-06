@@ -20,25 +20,18 @@ use Webmozart\Assert\Assert;
 
 final class PromotionCouponFactory implements PromotionCouponFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $factory;
+    private FactoryInterface $factory;
 
     public function __construct(FactoryInterface $factory)
     {
         $this->factory = $factory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createNew(): PromotionCouponInterface
     {
         return $this->factory->createNew();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createForPromotion(PromotionInterface $promotion): PromotionCouponInterface
     {
         Assert::true(

@@ -21,17 +21,11 @@ class Address extends BaseAddress implements AddressInterface
     /** @var CustomerInterface|null */
     protected $customer;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCustomer(): ?BaseCustomerInterface
     {
         return $this->customer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCustomer(?BaseCustomerInterface $customer): void
     {
         $this->customer = $customer;

@@ -7,7 +7,9 @@ imports:
     - { resource: '@SyliusCoreBundle/Resources/config/app/fixtures/cap.yaml' }
     - { resource: '@SyliusCoreBundle/Resources/config/app/fixtures/dress.yaml' }
     - { resource: '@SyliusCoreBundle/Resources/config/app/fixtures/jeans.yaml' }
+    - { resource: '@SyliusCoreBundle/Resources/config/app/fixtures/promotion.yaml' }
     - { resource: '@SyliusCoreBundle/Resources/config/app/fixtures/custom_fixtures.yaml' }
 
 parameters:
     env(SYLIUS_FIXTURES_HOSTNAME): 'localhost'
+    env(SYLIUS_FIXTURES_THEME_NAME): ~

@@ -18,9 +18,6 @@ use Webmozart\Assert\Assert;
 
 final class TableAccessor implements TableAccessorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRowWithFields(NodeElement $table, array $fields)
     {
         try {
@@ -30,9 +27,6 @@ final class TableAccessor implements TableAccessorInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRowsWithFields(NodeElement $table, array $fields)
     {
         try {
@@ -42,9 +36,6 @@ final class TableAccessor implements TableAccessorInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFieldFromRow(NodeElement $table, NodeElement $row, $field)
     {
         $columnIndex = $this->getColumnIndex($table, $field);
@@ -57,9 +48,6 @@ final class TableAccessor implements TableAccessorInterface
         return $columns[$columnIndex];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getIndexedColumn(NodeElement $table, $fieldName)
     {
         $columnIndex = $this->getColumnIndex($table, $fieldName);
@@ -77,9 +65,6 @@ final class TableAccessor implements TableAccessorInterface
         return $columnFields;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSortableHeaders(NodeElement $table)
     {
         $sortableHeaders = $table->findAll('css', 'th.sortable');
@@ -96,9 +81,6 @@ final class TableAccessor implements TableAccessorInterface
         return $sortableArray;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function countTableBodyRows(NodeElement $table)
     {
         return count($table->findAll('css', 'tbody > tr'));

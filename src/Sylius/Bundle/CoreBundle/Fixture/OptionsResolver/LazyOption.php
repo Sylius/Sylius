@@ -45,7 +45,7 @@ final class LazyOption
                 $objects = $objects->toArray();
             }
 
-            Assert::notEmpty($objects);
+            Assert::notEmpty($objects, 'No entities found of type ' . $repository->getClassName());
 
             return $objects[array_rand($objects)];
         };
@@ -126,7 +126,7 @@ final class LazyOption
             /** @param mixed $previousValue */
             function (Options $options, $previousValue) use ($repository, $field, $criteria): ?object {
                 if (null === $previousValue || [] === $previousValue) {
-                    return $previousValue;
+                    return null;
                 }
 
                 if (is_object($previousValue)) {
@@ -134,6 +134,37 @@ final class LazyOption
                 }
 
                 return $repository->findOneBy(array_merge($criteria, [$field => $previousValue]));
+            }
+        ;
+    }
+
+    public static function getOneBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
+    {
+        return
+            /** @param mixed $previousValue */
+            function (Options $options, $previousValue) use ($repository, $field, $criteria): ?object {
+                if (null === $previousValue || [] === $previousValue) {
+                    return null;
+                }
+
+                if (is_object($previousValue)) {
+                    return $previousValue;
+                }
+
+                $resource = $repository->findOneBy(array_merge($criteria, [$field => $previousValue]));
+
+                if (null === $resource) {
+                    throw new ResourceNotFoundException(
+                        sprintf(
+                            'The %s resource for field %s with value %s was not found',
+                            $repository->getClassName(),
+                            $field,
+                            $previousValue
+                        )
+                    );
+                }
+
+                return $resource;
             }
         ;
     }

@@ -15,11 +15,11 @@ Feature: Seeing order promotion total on order summary page
         And it gives "$5.00" discount to every order
         And I am a logged in customer
 
-    @ui
+    @ui @api
     Scenario: Seeing the total discount on order summary page
         Given I have product "The Sorting Hat" in the cart
-        When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceed with "Free" shipping method and "Offline" payment
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And my order promotion total should be "-$9.00"
         And "Holiday promotion" should be applied to my order

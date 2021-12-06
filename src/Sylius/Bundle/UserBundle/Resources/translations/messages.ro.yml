@@ -10,8 +10,9 @@ sylius:
                 label: Parolă
                 confirmation: Verificare
             remember_me: Ţine-mă minte
-            shipping_address: Adresa de livrare
+            shipping_address: Adresă de livrare
             username: Nume de utilizator
+            verified: Verificat
         user_filter:
             query: Căutare
         user_change_password:

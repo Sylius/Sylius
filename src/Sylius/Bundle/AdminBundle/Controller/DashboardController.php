@@ -13,89 +13,87 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Controller;
 
+use Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
-use Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface;
 use Sylius\Component\Core\Dashboard\SalesDataProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
+use Twig\Environment;
 
 final class DashboardController
 {
-    /** @var DashboardStatisticsProviderInterface */
-    private $statisticsProvider;
+    private ChannelRepositoryInterface $channelRepository;
 
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
-
-    /** @var EngineInterface */
+    /** @var EngineInterface|Environment */
     private $templatingEngine;
 
-    /** @var RouterInterface */
-    private $router;
+    private RouterInterface $router;
 
-    /** @var SalesDataProviderInterface|null */
-    private $salesDataProvider;
+    private ?SalesDataProviderInterface $salesDataProvider;
 
+    private ?StatisticsDataProviderInterface $statisticsDataProvider;
+
+    /**
+     * @param EngineInterface|Environment $templatingEngine
+     */
     public function __construct(
-        DashboardStatisticsProviderInterface $statisticsProvider,
         ChannelRepositoryInterface $channelRepository,
-        EngineInterface $templatingEngine,
+        object $templatingEngine,
         RouterInterface $router,
-        ?SalesDataProviderInterface $salesDataProvider = null
+        ?SalesDataProviderInterface $salesDataProvider = null,
+        ?StatisticsDataProviderInterface $statisticsDataProvider = null
     ) {
-        $this->statisticsProvider = $statisticsProvider;
         $this->channelRepository = $channelRepository;
         $this->templatingEngine = $templatingEngine;
         $this->router = $router;
         $this->salesDataProvider = $salesDataProvider;
-
-        if ($this->salesDataProvider === null) {
-            @trigger_error(
-                sprintf('Not passing a $salesDataProvider to %s constructor is deprecated since Sylius 1.7 and will be removed in Sylius 2.0.', self::class),
-                \E_USER_DEPRECATED
-            );
-        }
+        $this->statisticsDataProvider = $statisticsDataProvider;
     }
 
     public function indexAction(Request $request): Response
     {
-        $channelCode = $request->query->get('channel');
-
         /** @var ChannelInterface|null $channel */
-        $channel = $this->findChannelByCodeOrFindFirst($channelCode);
+        $channel = $this->findChannelByCodeOrFindFirst($request->query->has('channel') ? (string) $request->query->get('channel') : null);
 
         if (null === $channel) {
             return new RedirectResponse($this->router->generate('sylius_admin_channel_create'));
         }
 
-        $statistics = $this->statisticsProvider->getStatisticsForChannel($channel);
-        $data = ['statistics' => $statistics, 'channel' => $channel];
+        return new Response($this->templatingEngine->render('@SyliusAdmin/Dashboard/index.html.twig', [
+            'channel' => $channel,
+        ]));
+    }
 
-        if ($this->salesDataProvider !== null) {
-            $data['sales_summary'] = $this->salesDataProvider->getLastYearSalesSummary($channel);
-            $data['currency'] = $channel->getBaseCurrency()->getCode();
+    public function getRawData(Request $request): Response
+    {
+        /** @var ChannelInterface|null $channel */
+        $channel = $this->findChannelByCodeOrFindFirst((string) $request->query->get('channelCode'));
+
+        if (null === $channel) {
+            return new RedirectResponse($this->router->generate('sylius_admin_channel_create'));
         }
 
-        return $this->templatingEngine->renderResponse('@SyliusAdmin/Dashboard/index.html.twig', $data);
+        return new JsonResponse(
+            $this->statisticsDataProvider->getRawData(
+                $channel,
+                (new \DateTime((string) $request->query->get('startDate'))),
+                (new \DateTime((string) $request->query->get('endDate'))),
+                (string) $request->query->get('interval')
+            )
+        );
     }
 
     private function findChannelByCodeOrFindFirst(?string $channelCode): ?ChannelInterface
     {
-        $channel = null;
         if (null !== $channelCode) {
-            $channel = $this->channelRepository->findOneByCode($channelCode);
+            return $this->channelRepository->findOneByCode($channelCode);
         }
 
-        if (null === $channel) {
-            $channels = $this->channelRepository->findAll();
-
-            $channel = current($channels) === false ? null : current($channels);
-        }
-
-        return $channel;
+        return $this->channelRepository->findOneBy([]);
     }
 }

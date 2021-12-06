@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        shipment_confirmation:
+            subject: 'אישור משלוח'
     menu:
         admin:
             main:
@@ -18,6 +21,7 @@ sylius:
                     countries: ארצות
                     currencies: מטבעות
                     exchange_rates: שערי החליפין
+                    header: הגדרות
                     shipping_methods: שיטות משלוח
                     tax_categories: קטגוריות מס
                     tax_rates: שיעורי מס

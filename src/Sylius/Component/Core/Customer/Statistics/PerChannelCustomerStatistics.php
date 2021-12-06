@@ -17,14 +17,11 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 final class PerChannelCustomerStatistics
 {
-    /** @var int */
-    private $ordersCount;
+    private int $ordersCount;
 
-    /** @var int */
-    private $ordersValue;
+    private int $ordersValue;
 
-    /** @var ChannelInterface */
-    private $channel;
+    private ChannelInterface $channel;
 
     /**
      * @throws \InvalidArgumentException

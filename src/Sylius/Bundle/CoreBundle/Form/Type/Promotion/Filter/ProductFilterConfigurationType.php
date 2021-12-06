@@ -20,17 +20,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class ProductFilterConfigurationType extends AbstractType
 {
-    /** @var DataTransformerInterface */
-    private $productsToCodesTransformer;
+    private DataTransformerInterface $productsToCodesTransformer;
 
     public function __construct(DataTransformerInterface $productsToCodesTransformer)
     {
         $this->productsToCodesTransformer = $productsToCodesTransformer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -43,9 +39,6 @@ final class ProductFilterConfigurationType extends AbstractType
         $builder->get('products')->addModelTransformer($this->productsToCodesTransformer);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_promotion_action_filter_product_configuration';

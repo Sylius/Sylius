@@ -1,0 +1,83 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Sylius\Behat\Service\Helper;
+
+use Behat\Mink\Exception\ElementNotFoundException;
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use Sylius\Behat\NotificationType;
+use Sylius\Behat\Service\NotificationCheckerInterface;
+
+final class JavaScriptTestHelper implements JavaScriptTestHelperInterface
+{
+    private int $microsecondsInterval;
+
+    private int $defaultTimeout;
+
+    public function __construct(int $microsecondsInterval, int $defaultTimeout)
+    {
+        $this->microsecondsInterval = $microsecondsInterval;
+        $this->defaultTimeout = $defaultTimeout;
+    }
+
+    public function waitUntilAssertionPasses(callable $callable, ?int $timeout = null): void
+    {
+        $this->waitUntilExceptionDisappears($callable, \InvalidArgumentException::class, $timeout);
+    }
+
+    public function waitUntilNotificationPopups(
+        NotificationCheckerInterface $notificationChecker,
+        NotificationType $type,
+        string $message,
+        ?int $timeout = null
+    ): void {
+        $callable = function () use ($notificationChecker, $message, $type): void {
+            $notificationChecker->checkNotification($message, $type);
+        };
+
+        $this->waitUntilExceptionDisappears($callable, ElementNotFoundException::class, $timeout);
+    }
+
+    public function waitUntilPageOpens(PageInterface $page, ?array $options = [], ?int $timeout = null): void
+    {
+        $callable = function () use ($page, $options): void {
+            $page->open($options);
+        };
+
+        $this->waitUntilExceptionDisappears($callable, UnexpectedPageException::class, $timeout);
+    }
+
+    private function waitUntilExceptionDisappears(callable $callable, string $exceptionClass, ?int $timeout = null): void
+    {
+        $start = microtime(true);
+        $timeout = $timeout ?? $this->defaultTimeout;
+        $end = $start + $timeout;
+
+        do {
+            try {
+                $callable();
+            } catch (\Exception $exception) {
+                if ($exception instanceof $exceptionClass) {
+                    usleep($this->microsecondsInterval);
+
+                    continue;
+                }
+            }
+
+            return;
+        } while (microtime(true) < $end);
+
+        throw new \InvalidArgumentException('Time has run out and the assertion has not passed yet.');
+    }
+}

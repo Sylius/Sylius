@@ -4,29 +4,19 @@
 sylius:
     address:
         city:
-            max_length: Qyteti nuk duhet të përmbajë më shumë se 255 karaktere.|Qyteti nuk duhet të përmbajë më shumë se {{ limit }} karaktere.
-            min_length: Qyteti duhet të përmbajë të paktën 2 karaktere.|Qyteti duhet të përmbajë të paktën {{ limit }} karaktere.
             not_blank: Shkruaj emrin e qytetit.
         country:
             not_blank: Përzgjidh vendin.
             disabled: Shteti i zgjedhur është i ç'aktivizuar. Ju lutem zgjidhni një tjetër.
         first_name:
-            max_length: Emri nuk duhet të përmbajë më shumë se 255 karaktere.|Emri nuk duhet të përmbajë më shumë se {{ limit }} karaktere.
-            min_length: Emri duhet të përmbajë të paktën 2 karaktere.|Emri duhet të përmbajë të paktën {{ limit }} karaktere.
             not_blank: Shkruaj emrin.
         last_name:
-            max_length: Mbiemri nuk duhet të përmbajë më shumë se 255 karaktere.|Mbiemri nuk duhet të përmbajë më shumë se {{ limit }} karaktere.
-            min_length: Mbiemri duhet të përmbajë të paktën 2 karaktere.|Mbiemri duhet të përmbajë të paktën {{ limit }} karaktere.
             not_blank: Shkruaj mbiemrin.
         postcode:
-            max_length: Kodi postar nuk duhet të përmbajë më shumë se 255 karaktere.|Kodi postar nuk duhet të përmbajë më shumë se {{ limit }} karaktere.
-            min_length: Kodi postar duhet të përmbajë të paktën 2 karaktere.|Kodi postar duhet të përmbajë të paktën {{limit}} karaktere.
             not_blank: Shkruaj kodin postar.
         province:
             valid: Përzgjidh qarkun e duhur.
         street:
-            max_length: Rruga nuk duhet të përmbajë më shumë se 255 karaktere.|Rruga nuk duhet të përmbajë më shumë se {{ limit }} karaktere.
-            min_length: Rruga duhet të përmbajë të paktën 2 karaktere.|Rruga duhet të përmbajë të paktën {{limit}} karaktere.
             not_blank: Shkruani adresen.
         not_shippable: Kjo adresë nuk është e vlefshme si destinacion dërgimi.
     country:
@@ -40,8 +30,6 @@ sylius:
             regex: Kodi i qarkut duhet te kete formatin XX-XX (e.g. AL-TR).
             unique: Kodi i Qytetit duhet të jetë unik.
         name:
-            max_length: Emri i qarkut nuk duhet të përmbajë më shumë se 255 karaktere.|Emri i qarkut nuk duhet të përmbajë më shumë se {{ limit }} karaktere.
-            min_length: Emri i qarkut duhet të përmbajë të paktën 2 karaktere.|Emri i qarkut duhet të përmbajë të paktën {{ limit }} karaktere.
             not_blank: Shkruaj emrin e qarkut.
             unique: Emri i Qytetit duhet të jetë unik.
     zone:
@@ -51,8 +39,6 @@ sylius:
         members:
             min_count: Shto të paktën {{ limit }} anëtarë në zonë.
         name:
-            max_length: Emri i zonës nuk duhet të përmbajë më shumë se 255 karaktere.|Emri i zonës nuk duhet të përmbajë më shumë se {{limit}} karaktere.
-            min_length: Emri i zones duhet të përmbajë të paktën 2 karaktere.|Emri i zones duhet të përmbajë të paktën {{ limit}} karaktere.
             not_blank: Shkruaj emrin e zonës.
     zone_member:
         code:

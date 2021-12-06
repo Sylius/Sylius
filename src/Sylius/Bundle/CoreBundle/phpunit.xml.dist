@@ -2,7 +2,7 @@
 
 <!-- http://phpunit.de/manual/4.1/en/appendixes.configuration.html -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/7.0/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/8.5/phpunit.xsd"
          colors="true"
 >
     <testsuites>
@@ -10,4 +10,15 @@
             <directory>./Tests</directory>
         </testsuite>
     </testsuites>
+
+    <php>
+        <ini name="error_reporting" value="-1" />
+
+        <!-- ###+ symfony/framework-bundle ### -->
+        <env name="APP_ENV" value="test"/>
+        <env name="SHELL_VERBOSITY" value="-1" />
+        <!-- ###- symfony/framework-bundle ### -->
+
+        <server name="KERNEL_CLASS" value="Sylius\Bundle\CoreBundle\Tests\TestKernel" />
+    </php>
 </phpunit>

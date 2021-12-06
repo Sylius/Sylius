@@ -19,9 +19,6 @@ use Sylius\Component\Core\Repository\ShippingCategoryRepositoryInterface;
 
 class ShippingCategoryRepository extends EntityRepository implements ShippingCategoryRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function createListQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('o');

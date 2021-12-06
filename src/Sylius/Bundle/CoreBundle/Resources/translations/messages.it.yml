@@ -9,6 +9,8 @@ sylius:
             title: Titolo
         cart:
             coupon: Codice sconto
+        catalog_promotion:
+            channels: Canali
         checkout:
             addressing:
                 different_billing_address: Vuoi usare un indirizzo diverso per la fatturazione?
@@ -23,15 +25,16 @@ sylius:
             per_customer_usage_limit: Limite di utilizzo per cliente
         group:
             name: "Nome\n"
-            roles: Regole
+            roles: Ruoli
         channel:
             billing_data:
                 city: Città
                 company: Azienda
-                country: Paese
+                country: Nazione
                 postcode: CAP
                 street: Indirizzo
             contact_email: Email di contatto
+            countries: Stati
             currencies: Valute
             currency_base: Valuta base
             account_verification_required: È richiesta la verifica dell'account?
@@ -100,11 +103,10 @@ sylius:
             file: Seleziona un'immagine
         user:
             billing_address: Indirizzo di fatturazione
-            different_billing_address: Vuoi usare un indirizzo diverso per la fatturazione?
             enabled: Abilitato
             first_name: Nome
             groups: Gruppi
-            roles: Regole
+            roles: Ruoli
             last_name: Cognome
             password: Password
             shipping_address: Indirizzo di spedizione
@@ -210,6 +212,7 @@ sylius:
                 help: Il timezone %timezone% è deprecato. Correggi il tuo file php.ini (lista di timezone deprecati http://php.net/manual/en/timezones.others.php).
             version: Versione PHP
             version_recommended: Versione PHP raccomandata
+            version_help: Sylius raccomanda %recommended% versione PHP, la tua versione attuale è %current%. Si prega di aggiornare.
     payum_gateway:
         cash_on_delivery: Contanti alla consegna
         offline: Offline

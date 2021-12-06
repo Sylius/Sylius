@@ -3,6 +3,9 @@
 
 sylius_order:
     resources:
+        adjustment:
+            classes:
+                model: Sylius\Component\Core\Model\Adjustment
         order:
             classes:
                 model: Sylius\Component\Core\Model\Order
@@ -11,9 +14,11 @@ sylius_order:
         order_item:
             classes:
                 model: Sylius\Component\Core\Model\OrderItem
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderItemRepository
         order_item_unit:
             classes:
                 model: Sylius\Component\Core\Model\OrderItemUnit
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderItemUnitRepository
         order_sequence:
             classes:
                 model: Sylius\Component\Core\Model\OrderSequence

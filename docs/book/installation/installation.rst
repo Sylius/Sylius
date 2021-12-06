@@ -88,7 +88,7 @@ command and then accessing ``http://127.0.0.1:8000`` in your web browser to see 
 
 .. note::
     Get to know more about using Symfony Local Web Server `in the Symfony server documentation <https://symfony.com/doc/current/setup/symfony_server.html>`_.
-    If you are using a built-in server check `here <http://symfony.com/doc/current/cookbook/web_server/built_in.html>`_.
+    If you are using a built-in server check `here <https://symfony.com/doc/current/cookbook/web_server/built_in.html>`_.
 
 You can log to the administrator panel located at ``/admin`` with the credentials you have provided during the installation process.
 
@@ -107,13 +107,13 @@ In the root directory of your project you will find these important subdirectori
 
 .. tip::
 
-    As it was mentioned before we are basing on Symfony, that is why we've adopted its approach to architecture. Read more `in the Symfony documentation <http://symfony.com/doc/current/quick_tour/the_architecture.html>`_.
-    Read also about the `best practices while structuring your project <http://symfony.com/doc/current/best_practices/creating-the-project.html#structuring-the-application>`_.
+    As it was mentioned before we are basing on Symfony, that is why we've adopted its approach to architecture. Read more `in the Symfony documentation <https://symfony.com/doc/current/quick_tour/the_architecture.html>`_.
+    Read also about the `best practices while structuring your project <https://symfony.com/doc/current/best_practices/creating-the-project.html#structuring-the-application>`_.
 
 Contributing
 ------------
 
-If you would like to contribute to Sylius - please go to the :doc:`Contribution Guide </contributing/index>`
+If you would like to contribute to Sylius - please go to the :doc:`Contribution Guide </book/contributing/index>`
 
 .. _Gulp: http://gulpjs.com/
 .. _Yarn: https://yarnpkg.com/lang/en/

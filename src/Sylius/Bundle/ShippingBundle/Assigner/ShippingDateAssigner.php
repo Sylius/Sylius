@@ -18,8 +18,7 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 final class ShippingDateAssigner implements ShippingDateAssignerInterface
 {
-    /** @var DateTimeProvider */
-    private $calendar;
+    private DateTimeProvider $calendar;
 
     public function __construct(DateTimeProvider $calendar)
     {

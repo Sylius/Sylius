@@ -14,47 +14,32 @@ declare(strict_types=1);
 namespace Sylius\Behat\Service;
 
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Authentication\Token\JWTUserToken;
-use Sylius\Behat\Service\Setter\CookieSetterInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Sylius\Component\User\Model\UserInterface;
-use Symfony\Component\BrowserKit\AbstractBrowser;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class ApiSecurityService implements SecurityServiceInterface
 {
-    /** @var AbstractBrowser */
-    private $client;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private JWTTokenManagerInterface $jwtTokenManager;
 
-    public function __construct(AbstractBrowser $client, SharedStorageInterface $sharedStorage)
+    public function __construct(SharedStorageInterface $sharedStorage, JWTTokenManagerInterface $jwtTokenManager)
     {
-        $this->client = $client;
         $this->sharedStorage = $sharedStorage;
+        $this->jwtTokenManager = $jwtTokenManager;
     }
 
     public function logIn(UserInterface $user): void
     {
-        $this->client->request(
-            'POST',
-            '/new-api/admin/authentication-token',
-            [],
-            [],
-            ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
-            json_encode(['email' => $user->getEmail(), 'password' => 'sylius'])
-        );
-
-        $token = json_decode($this->client->getResponse()->getContent(), true)['token'];
-
-        $this->sharedStorage->set('token', $token);
+        $this->sharedStorage->set('token', $this->jwtTokenManager->create($user));
+        $this->sharedStorage->set('user', $user);
     }
 
     public function logOut(): void
     {
         $this->sharedStorage->set('token', null);
+        $this->sharedStorage->set('user', null);
     }
 
     public function getCurrentToken(): TokenInterface

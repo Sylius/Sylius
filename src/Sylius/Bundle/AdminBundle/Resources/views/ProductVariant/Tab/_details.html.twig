@@ -8,12 +8,13 @@
         <div class="ui hidden divider"></div>
         <div class="ui segment">
             {{ form_row(form.code) }}
+            {{ form_row(form.enabled) }}
+        </div>
+        <div class="ui hidden divider"></div>
+        <div class="ui segment">
             <div class="two fields">
                 {{ form_row(form.shippingCategory) }}
             </div>
-            {{ form_row(form.channelPricings) }}
-        </div>
-        <div class="ui segment">
             <div class="one field">
                 {{ form_row(form.shippingRequired) }}
             </div>

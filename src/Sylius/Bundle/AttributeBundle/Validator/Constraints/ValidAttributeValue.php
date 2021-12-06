@@ -17,17 +17,11 @@ use Symfony\Component\Validator\Constraint;
 
 class ValidAttributeValue extends Constraint
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'sylius_valid_attribute_value_validator';

@@ -17,17 +17,11 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 final class FlatRateCalculator implements CalculatorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function calculate(ShipmentInterface $subject, array $configuration): int
     {
         return (int) $configuration['amount'];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'flat_rate';

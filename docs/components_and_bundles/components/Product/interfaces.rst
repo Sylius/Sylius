@@ -19,8 +19,8 @@ ProductInterface
 This interface should be implemented by models characterizing a product.
 
 .. note::
-   This interface extends :ref:`component_resource_model_slug-aware-interface`,
-   :ref:`component_resource_model_timestampable-interface`
+   This interface extends `SlugAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/SlugAwareInterface.php>`_,
+   `TimestampableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TimestampableInterface.php>`_
    and :ref:`component_product_model_product-translation-interface`.
 
    For more information go to `Sylius API ProductInterface`_.
@@ -35,7 +35,7 @@ ProductTranslationInterface
 This interface should be implemented by models used for storing a single translation of product fields.
 
 .. note::
-   This interface extends the :ref:`component_resource_model_slug-aware-interface`.
+   This interface extends the `SlugAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/SlugAwareInterface.php>`_.
 
    For more information go to `Sylius API ProductTranslationInterface`_.
 

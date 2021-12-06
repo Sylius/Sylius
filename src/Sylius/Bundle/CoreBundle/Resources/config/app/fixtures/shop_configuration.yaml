@@ -46,7 +46,8 @@ sylius_fixtures:
                             - 'PT'
                             - 'ES'
                             - 'CN'
-                            - 'UK'
+                            - 'GB'
+                            - 'PL'
                         zones:
                             US:
                                 name: 'United States of America'
@@ -65,7 +66,21 @@ sylius_fixtures:
                                     - 'PT'
                                     - 'ES'
                                     - 'CN'
-                                    - 'UK'
+                                    - 'GB'
+                                    - 'PL'
+
+                menu_taxon:
+                    name: taxon
+                    options:
+                        custom:
+                            category:
+                                code: 'MENU_CATEGORY'
+                                name: 'Category'
+                                translations:
+                                    en_US:
+                                        name: 'Category'
+                                    fr_FR:
+                                        name: 'Catégorie'
 
                 channel:
                     options:
@@ -79,6 +94,7 @@ sylius_fixtures:
                                     - 'USD'
                                 enabled: true
                                 hostname: '%env(resolve:SYLIUS_FIXTURES_HOSTNAME)%'
+                                theme_name: '%env(resolve:SYLIUS_FIXTURES_THEME_NAME)%'
                                 shop_billing_data:
                                     company: 'Sylius'
                                     tax_id: '0001112222'
@@ -86,6 +102,9 @@ sylius_fixtures:
                                     street: 'Test St. 15'
                                     city: 'eCommerce Town'
                                     postcode: '00 33 22'
+                                menu_taxon: 'MENU_CATEGORY'
+                                contact_phone_number: '+41 123 456 789'
+                                contact_email: 'contact@example.com'
 
                 payment_method:
                     options:
@@ -169,8 +188,8 @@ sylius_fixtures:
                     options:
                         custom:
                             clothing:
-                                code: "clothing"
-                                name: "Clothing"
+                                code: 'clothing'
+                                name: 'Clothing'
                             other:
                                 code: 'other'
                                 name: 'Other'
@@ -191,31 +210,3 @@ sylius_fixtures:
                                 zone: 'US'
                                 category: 'other'
                                 amount: 0.2
-
-                promotion:
-                    options:
-                        custom:
-                            christmas:
-                                code: 'christmas'
-                                name: 'Christmas'
-                                channels:
-                                    - 'FASHION_WEB'
-                            new_year:
-                                code: 'new_year'
-                                name: 'New Year'
-                                usage_limit: 10
-                                priority: 2
-                                starts_at: '-7 day'
-                                ends_at: '7 day'
-                                channels:
-                                    - 'FASHION_WEB'
-                                rules:
-                                    -   type: 'item_total'
-                                        configuration:
-                                            FASHION_WEB:
-                                                amount: 100.00
-                                actions:
-                                    -   type: 'order_fixed_discount'
-                                        configuration:
-                                            FASHION_WEB:
-                                                amount: 10.00

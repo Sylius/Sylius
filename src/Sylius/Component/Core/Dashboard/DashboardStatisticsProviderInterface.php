@@ -18,4 +18,10 @@ use Sylius\Component\Core\Model\ChannelInterface;
 interface DashboardStatisticsProviderInterface
 {
     public function getStatisticsForChannel(ChannelInterface $channel): DashboardStatistics;
+
+    public function getStatisticsForChannelInPeriod(
+        ChannelInterface $channel,
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate
+    ): DashboardStatistics;
 }

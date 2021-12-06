@@ -10,16 +10,16 @@ Feature: Verifying inventory quantity on cart summary
         And this product is tracked by the inventory
         And there are 5 units of product "Iron Maiden T-Shirt" available in the inventory
 
-    @ui
+    @ui @api
     Scenario: Being unable to save a cart with product that is out of stock
         Given I have added 3 products "Iron Maiden T-Shirt" in the cart
-        When I change "Iron Maiden T-Shirt" quantity to 6
+        When I change product "Iron Maiden T-Shirt" quantity to 6 in my cart
         And I update my cart
         Then I should be notified that this product cannot be updated
 
-    @ui
+    @ui @api
     Scenario: Placing an order with products that have sufficient quantity
         Given I have added 3 products "Iron Maiden T-Shirt" in the cart
-        When I change "Iron Maiden T-Shirt" quantity to 5
+        When I change product "Iron Maiden T-Shirt" quantity to 5 in my cart
         And I update my cart
         Then I should not be notified that this product cannot be updated

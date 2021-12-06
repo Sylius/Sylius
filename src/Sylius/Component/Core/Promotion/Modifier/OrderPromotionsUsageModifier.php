@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\PromotionCouponInterface;
 
 final class OrderPromotionsUsageModifier implements OrderPromotionsUsageModifierInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function increment(OrderInterface $order): void
     {
         foreach ($order->getPromotions() as $promotion) {
@@ -33,9 +30,6 @@ final class OrderPromotionsUsageModifier implements OrderPromotionsUsageModifier
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function decrement(OrderInterface $order): void
     {
         foreach ($order->getPromotions() as $promotion) {

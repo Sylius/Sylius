@@ -10,6 +10,9 @@ sylius:
         name:
             max_length: نام زیر رده نباید بیش از 255 حرف باشد.
             not_blank: لطفا نام رده را وارد کنید.
+        slug:
+            not_blank: لطفا علامت دسته را وارد کنید.
+            unique: علامت دسته باید یکتا باشد.
     taxonomy:
         name:
             max_length: رده نباید بیش از 255 حرف باشد.

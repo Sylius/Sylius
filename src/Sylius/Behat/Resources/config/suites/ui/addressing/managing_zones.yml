@@ -23,4 +23,4 @@ default:
                 - sylius.behat.context.ui.admin.notification
 
             filters:
-                tags: "@managing_zones && @ui"
+                tags: "@managing_zones&&@ui"

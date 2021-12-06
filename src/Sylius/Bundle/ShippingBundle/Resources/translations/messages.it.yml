@@ -11,7 +11,7 @@ sylius:
         shipment:
             state: Stato
             states:
-                checkout: Checkout
+                checkout: Vai alla cassa
                 pending: In attesa
                 ready: Pronto
                 shipped: Spedito
@@ -29,6 +29,7 @@ sylius:
             description: Descrizione
             name: "Nome\n"
         shipping_method:
+            add_rule: Aggiungi regola
             calculator: Calcolatore
             category: Categoria
             category_requirement: Requisito della categoria
@@ -36,7 +37,16 @@ sylius:
             configuration: Configurazione
             description: Descrizione
             enabled: Abilitato
+            match_all_category_requirement: Tutte le unità deve corrispondere alla categoria del metodo
+            match_any_category_requirement: Almeno 1 unità deve corrispondere alla categoria del metodo
+            match_none_category_requirement: Nessuna delle unità deve corrispondere alla categoria del metodo
             name: "Nome\n"
             position: Posizione
+            rules: Regole
             tax_category: Categoria fiscale
             translations: Traduzioni
+        shipping_method_rule:
+            type: Tipo
+            total: Totale
+            weight: Peso
+            amount: Importo

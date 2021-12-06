@@ -21,19 +21,18 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class TaxRateTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('zone', ZoneChoiceType::class, ['zone_scope' => Scope::TAX]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtendedType(): string
     {
         return TaxRateType::class;
+    }
+
+    public static function getExtendedTypes(): iterable
+    {
+        return [TaxRateType::class];
     }
 }

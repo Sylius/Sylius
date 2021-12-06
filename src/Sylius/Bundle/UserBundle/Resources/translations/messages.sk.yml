@@ -12,6 +12,7 @@ sylius:
             remember_me: Zapamätať si ma
             shipping_address: Adresa doručenia
             username: Používateľské meno
+            verified: Overené
         user_filter:
             query: Vyhľadať
         user_change_password:

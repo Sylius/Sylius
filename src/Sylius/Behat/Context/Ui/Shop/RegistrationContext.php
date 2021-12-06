@@ -30,32 +30,23 @@ use Webmozart\Assert\Assert;
 
 class RegistrationContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var DashboardPageInterface */
-    private $dashboardPage;
+    private DashboardPageInterface $dashboardPage;
 
-    /** @var HomePageInterface */
-    private $homePage;
+    private HomePageInterface $homePage;
 
-    /** @var LoginPageInterface */
-    private $loginPage;
+    private LoginPageInterface $loginPage;
 
-    /** @var RegisterPageInterface */
-    private $registerPage;
+    private RegisterPageInterface $registerPage;
 
-    /** @var VerificationPageInterface */
-    private $verificationPage;
+    private VerificationPageInterface $verificationPage;
 
-    /** @var ProfileUpdatePageInterface */
-    private $profileUpdatePage;
+    private ProfileUpdatePageInterface $profileUpdatePage;
 
-    /** @var RegisterElementInterface */
-    private $registerElement;
+    private RegisterElementInterface $registerElement;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -236,7 +227,7 @@ class RegistrationContext implements Context
     {
         $this->iLogInAsWithPassword($email, $password);
 
-        Assert::true($this->loginPage->hasValidationErrorWith('Error Account is disabled.'));
+        Assert::true($this->loginPage->hasValidationErrorWith('Error Invalid credentials.'));
     }
 
     /**

@@ -19,17 +19,13 @@ use Webmozart\Assert\Assert;
 
 final class PriceRangeFilter implements FilterInterface
 {
-    /** @var ProductVariantPriceCalculatorInterface */
-    private $productVariantPriceCalculator;
+    private ProductVariantPriceCalculatorInterface $productVariantPriceCalculator;
 
     public function __construct(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
     {
         $this->productVariantPriceCalculator = $productVariantPriceCalculator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function filter(array $items, array $configuration): array
     {
         if (!$this->isConfigured($configuration)) {

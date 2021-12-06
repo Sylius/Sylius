@@ -17,11 +17,9 @@ use Liip\ImagineBundle\Service\FilterService;
 
 final class ImageExistenceChecker implements ImageExistenceCheckerInterface
 {
-    /** @var FilterService */
-    private $filterService;
+    private FilterService $filterService;
 
-    /** @var string */
-    private $mediaRootPath;
+    private string $mediaRootPath;
 
     public function __construct(FilterService $filterService, string $mediaRootPath)
     {

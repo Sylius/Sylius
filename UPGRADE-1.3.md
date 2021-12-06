@@ -7,7 +7,7 @@
 
 * MongoDB and PHPCR drivers have been deprecated in `ResourceBundle` and `GridBundle`.
 
-* Refering to any file from `vendor/sylius/sylius/app` directory has been deprecated.
+* Referring to any file from `vendor/sylius/sylius/app` directory has been deprecated.
 
 ## Application
 

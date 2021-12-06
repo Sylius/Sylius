@@ -17,66 +17,77 @@
 >
     <class name="Sylius\Component\Core\Model\ShippingMethod">
         <attribute name="id">
-            <group>shipping_method:read</group>
+            <group>admin:shipping_method:read</group>
+            <group>shop:shipping_method:read</group>
         </attribute>
 
         <attribute name="translations">
-            <group>shipping_method:read</group>
-            <group>shipping_method:create</group>
-            <group>shipping_method:update</group>
+            <group>admin:shipping_method:create</group>
+            <group>admin:shipping_method:read</group>
+            <group>admin:shipping_method:update</group>
+            <group>shop:order:account:read</group>
+            <group>shop:shipping_method:read</group>
+            <group>shop:shipment:read</group>
         </attribute>
 
         <attribute name="code">
-            <group>shipping_method:read</group>
-            <group>shipping_method:create</group>
+            <group>admin:shipping_method:create</group>
+            <group>admin:shipping_method:read</group>
+            <group>shop:shipping_method:read</group>
+        </attribute>
+
+        <attribute name="name">
+            <group>admin:shipping_method:read</group>
+            <group>shop:shipping_method:read</group>
         </attribute>
 
         <attribute name="position">
-            <group>shipping_method:read</group>
-            <group>shipping_method:create</group>
-            <group>shipping_method:update</group>
+            <group>admin:shipping_method:create</group>
+            <group>admin:shipping_method:read</group>
+            <group>admin:shipping_method:update</group>
+            <group>shop:shipping_method:read</group>
         </attribute>
 
         <attribute name="zone">
-            <group>shipping_method:read</group>
-            <group>shipping_method:create</group>
-            <group>shipping_method:update</group>
+            <group>admin:shipping_method:create</group>
+            <group>admin:shipping_method:read</group>
+            <group>admin:shipping_method:update</group>
         </attribute>
 
         <attribute name="enabled">
-            <group>shipping_method:read</group>
-            <group>shipping_method:create</group>
-            <group>shipping_method:update</group>
+            <group>admin:shipping_method:create</group>
+            <group>admin:shipping_method:read</group>
+            <group>admin:shipping_method:update</group>
         </attribute>
 
         <attribute name="channels">
-            <group>shipping_method:read</group>
-            <group>shipping_method:create</group>
-            <group>shipping_method:update</group>
+            <group>admin:shipping_method:create</group>
+            <group>admin:shipping_method:read</group>
+            <group>admin:shipping_method:update</group>
         </attribute>
 
         <attribute name="calculator">
-            <group>shipping_method:read</group>
-            <group>shipping_method:create</group>
-            <group>shipping_method:update</group>
+            <group>admin:shipping_method:create</group>
+            <group>admin:shipping_method:read</group>
+            <group>admin:shipping_method:update</group>
         </attribute>
 
         <attribute name="configuration">
-            <group>shipping_method:read</group>
-            <group>shipping_method:create</group>
-            <group>shipping_method:update</group>
+            <group>admin:shipping_method:create</group>
+            <group>admin:shipping_method:read</group>
+            <group>admin:shipping_method:update</group>
         </attribute>
 
         <attribute name="createdAt">
-            <group>shipping_method:read</group>
+            <group>admin:shipping_method:read</group>
         </attribute>
 
         <attribute name="updatedAt">
-            <group>shipping_method:read</group>
+            <group>admin:shipping_method:read</group>
         </attribute>
 
         <attribute name="archivedAt">
-            <group>shipping_method:read</group>
+            <group>admin:shipping_method:read</group>
         </attribute>
     </class>
 </serializer>

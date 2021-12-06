@@ -18,9 +18,6 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 
 final class IdBasedInvoiceNumberGenerator implements InvoiceNumberGeneratorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function generate(OrderInterface $order, PaymentInterface $payment): string
     {
         return $order->getId() . '-' . $payment->getId();

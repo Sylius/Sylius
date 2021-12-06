@@ -13,13 +13,31 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Twig;
 
+use Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculator;
+use Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class OrderItemsSubtotalExtension extends AbstractExtension
 {
+    /** @var OrderItemsSubtotalCalculatorInterface */
+    private $calculator;
+
+    public function __construct(?OrderItemsSubtotalCalculatorInterface $calculator = null)
+    {
+        if (null === $calculator) {
+            $calculator = new OrderItemsSubtotalCalculator();
+
+            @trigger_error(
+                'Not passing a calculator is deprecated since 1.6. Argument will no longer be optional from 2.0.',
+                \E_USER_DEPRECATED
+            );
+        }
+
+        $this->calculator = $calculator;
+    }
+
     public function getFunctions(): array
     {
         return [
@@ -29,12 +47,6 @@ class OrderItemsSubtotalExtension extends AbstractExtension
 
     public function getSubtotal(OrderInterface $order): int
     {
-        return array_reduce(
-            $order->getItems()->toArray(),
-            static function (int $subtotal, OrderItemInterface $item) {
-                return $subtotal + $item->getSubtotal();
-            },
-            0
-        );
+        return $this->calculator->getSubtotal($order);
     }
 }

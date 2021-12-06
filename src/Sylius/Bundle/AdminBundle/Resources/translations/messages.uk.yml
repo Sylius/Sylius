@@ -2,6 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        shipment_confirmation:
+            has_been_sent_using: 'відправляється з використанням'
+            subject: 'Підтвердження відправки товару'
+            thank_you_for_transaction: 'Дякуємо за успішну транзакцію.'
+            your_order_with_number: 'Ваше замовлення з номером'
     menu:
         admin:
             main:
@@ -38,3 +44,14 @@ sylius:
                 sales:
                     header: Збут
                     orders: Замовлення
+    ui:
+        gateway:
+            no_sca_support_notice: Обраний платіжний шлюз не підтримує SCA.
+        sales_summary: Підсумки продажів
+        statistics:
+            day: День
+            lifetime: За весь час
+            month: Місяць
+            week: Тиждень
+            2weeks: 2 тижні
+            year: Рік

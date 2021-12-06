@@ -39,12 +39,12 @@ Sylius\Component\Core\Model\ChannelPricing:
     sw_mug_channel_pricing:
         channelCode: "CHANNEL"
         price: 2000
-    sw_mug_expensive_channel_pricing:
-        channelCode: "EXPENSIVE_CHANNEL"
-        price: 11000
     hard_available_mug_channel_pricing:
         channelCode: "CHANNEL"
         price: 3000
+    sw_mug_expensive_channel_pricing:
+        channelCode: "EXPENSIVE_CHANNEL"
+        price: 11000
 
 Sylius\Component\Product\Model\ProductVariantTranslation:
     sw_mug_translation:
@@ -62,46 +62,73 @@ Sylius\Component\Core\Model\Order:
         currencyCode: USD
         localeCode: en_US
         customer: "@customer_oliver"
-        state: new
+        state: cart
         checkoutState: completed
         paymentState: paid
-        checkoutCompletedAt: "<(new \\DateTime('first day of previous month'))>"
+        checkoutCompletedAt: "<(new \\DateTime('2019-12-27 00:00:01'))>"
     order_002:
         channel: "@channel"
         currencyCode: USD
         localeCode: en_US
         customer: "@customer_oliver"
-        state: new
+        state: cart
         checkoutState: completed
         paymentState: paid
-        checkoutCompletedAt: "<(new \\DateTime('first day of -2 months'))>"
+        checkoutCompletedAt: "<(new \\DateTime('2020-01-15 06:00:01'))>"
     order_003:
         channel: "@channel"
         currencyCode: USD
         localeCode: en_US
         customer: "@customer_oliver"
-        state: new
+        state: cart
         checkoutState: completed
         paymentState: paid
-        checkoutCompletedAt: "<(new \\DateTime('first day of -3 months'))>"
+        checkoutCompletedAt: "<(new \\DateTime('2020-01-15 15:00:01'))>"
+    order_004:
+        channel: "@channel"
+        currencyCode: USD
+        localeCode: en_US
+        customer: "@customer_oliver"
+        state: cart
+        checkoutState: completed
+        paymentState: paid
+        checkoutCompletedAt: "<(new \\DateTime('2020-01-18 06:00:01'))>"
+    order_005:
+        channel: "@channel"
+        currencyCode: USD
+        localeCode: en_US
+        customer: "@customer_oliver"
+        state: cart
+        checkoutState: completed
+        paymentState: paid
+        checkoutCompletedAt: "<(new \\DateTime('2020-02-18 08:00:01'))>"
+    order_006:
+        channel: "@channel"
+        currencyCode: USD
+        localeCode: en_US
+        customer: "@customer_oliver"
+        state: cart
+        checkoutState: completed
+        paymentState: paid
+        checkoutCompletedAt: "<(new \\DateTime('2020-02-18 09:30:01'))>"
     expensive_order_001:
         channel: "@expensive_channel"
         currencyCode: USD
         localeCode: en_US
         customer: "@customer_oliver"
-        state: new
+        state: cart
         checkoutState: completed
         paymentState: paid
-        checkoutCompletedAt: "<(new \\DateTime('first day of previous month'))>"
+        checkoutCompletedAt: "<(new \\DateTime('2019-12-29 09:30:01'))>"
     expensive_order_002:
         channel: "@expensive_channel"
         currencyCode: USD
         localeCode: en_US
         customer: "@customer_oliver"
-        state: new
+        state: cart
         checkoutState: completed
         paymentState: new
-        checkoutCompletedAt: "<(new \\DateTime('first day of previous month'))>"
+        checkoutCompletedAt: "<(new \\DateTime('2020-01-18 09:30:01'))>"
 
 Sylius\Component\Core\Model\OrderItem:
     sw_mug_item_1:
@@ -110,6 +137,15 @@ Sylius\Component\Core\Model\OrderItem:
     sw_mug_item_2:
         variant: "@mug_sw"
         order: "@order_002"
+    sw_mug_item_4:
+        variant: "@mug_sw"
+        order: "@order_004"
+    sw_mug_item_5:
+        variant: "@mug_sw"
+        order: "@order_005"
+    sw_mug_item_6:
+        variant: "@mug_sw"
+        order: "@order_006"
     hard_available_mug_item:
         variant: "@hard_available_mug"
         order: "@order_003"
@@ -125,6 +161,12 @@ Sylius\Component\Core\Model\OrderItemUnit:
         __construct: ["@sw_mug_item_1"]
     sw_mug_item_unit2:
         __construct: ["@sw_mug_item_2"]
+    sw_mug_item_unit4:
+        __construct: ["@sw_mug_item_4"]
+    sw_mug_item_unit5:
+        __construct: ["@sw_mug_item_5"]
+    sw_mug_item_unit6:
+        __construct: ["@sw_mug_item_6"]
     hard_available_mug_item_unit:
         __construct: ["@hard_available_mug_item"]
     expensive_sw_mug_item_unit1:

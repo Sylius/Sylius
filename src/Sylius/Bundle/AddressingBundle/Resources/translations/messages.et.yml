@@ -32,7 +32,7 @@ sylius:
             types:
                 country: Riik
                 province: Provints
-                zone: Piirkond
+                zone: Tsoon
             scope: Ulatus
             scopes:
                 all: Kõik

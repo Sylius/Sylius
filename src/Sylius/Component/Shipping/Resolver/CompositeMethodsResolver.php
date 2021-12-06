@@ -18,17 +18,13 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 final class CompositeMethodsResolver implements ShippingMethodsResolverInterface
 {
-    /** @var PrioritizedServiceRegistryInterface */
-    private $resolversRegistry;
+    private PrioritizedServiceRegistryInterface $resolversRegistry;
 
     public function __construct(PrioritizedServiceRegistryInterface $resolversRegistry)
     {
         $this->resolversRegistry = $resolversRegistry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSupportedMethods(ShippingSubjectInterface $shippingSubject): array
     {
         /** @var ShippingMethodsResolverInterface $resolver */
@@ -41,9 +37,6 @@ final class CompositeMethodsResolver implements ShippingMethodsResolverInterface
         return [];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(ShippingSubjectInterface $subject): bool
     {
         /** @var ShippingMethodsResolverInterface $resolver */

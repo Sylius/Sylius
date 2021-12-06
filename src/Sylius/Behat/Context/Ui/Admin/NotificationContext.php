@@ -15,47 +15,55 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
+use Sylius\Behat\Service\Helper\JavaScriptTestHelperInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 
 final class NotificationContext implements Context
 {
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
 
-    public function __construct(NotificationCheckerInterface $notificationChecker)
+    private JavaScriptTestHelperInterface $testHelper;
+
+    public function __construct(NotificationCheckerInterface $notificationChecker, JavaScriptTestHelperInterface $testHelper)
     {
         $this->notificationChecker = $notificationChecker;
+        $this->testHelper = $testHelper;
     }
 
     /**
      * @Then I should be notified that it has been successfully created
      */
-    public function iShouldBeNotifiedItHasBeenSuccessfullyCreated()
+    public function iShouldBeNotifiedItHasBeenSuccessfullyCreated(): void
     {
-        $this->notificationChecker->checkNotification('has been successfully created.', NotificationType::success());
+        $this->testHelper->waitUntilNotificationPopups(
+            $this->notificationChecker,
+            NotificationType::success(),
+            'has been successfully created.'
+        );
     }
 
     /**
      * @Then I should be notified that it has been successfully edited
      */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited()
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
-        $this->notificationChecker->checkNotification('has been successfully updated.', NotificationType::success());
+        $this->testHelper->waitUntilNotificationPopups(
+            $this->notificationChecker,
+            NotificationType::success(),
+            'has been successfully updated.'
+        );
     }
 
     /**
      * @Then I should be notified that it has been successfully deleted
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted()
-    {
-        $this->notificationChecker->checkNotification('has been successfully deleted.', NotificationType::success());
-    }
-
-    /**
      * @Then I should be notified that they have been successfully deleted
      */
-    public function iShouldBeNotifiedThatTheyHaveBeenSuccessfullyDeleted()
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
-        $this->notificationChecker->checkNotification('have been successfully deleted.', NotificationType::success());
+        $this->testHelper->waitUntilNotificationPopups(
+            $this->notificationChecker,
+            NotificationType::success(),
+            'has been successfully deleted.'
+        );
     }
 }

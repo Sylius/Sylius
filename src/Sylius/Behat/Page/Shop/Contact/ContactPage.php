@@ -48,7 +48,10 @@ class ContactPage extends SymfonyPage implements ContactPageInterface
         if (null === $errorLabel) {
             throw new ElementNotFoundException(
                 $this->getSession(),
-                'Validation message', 'css', '[data-test-validation-error]')
+                'Validation message',
+                'css',
+                '[data-test-validation-error]'
+            )
             ;
         }
 

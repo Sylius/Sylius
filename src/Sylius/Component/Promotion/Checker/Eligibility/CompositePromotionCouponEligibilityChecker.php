@@ -20,7 +20,7 @@ use Webmozart\Assert\Assert;
 final class CompositePromotionCouponEligibilityChecker implements PromotionCouponEligibilityCheckerInterface
 {
     /** @var PromotionCouponEligibilityCheckerInterface[] */
-    private $promotionCouponEligibilityCheckers;
+    private array $promotionCouponEligibilityCheckers;
 
     /**
      * @param PromotionCouponEligibilityCheckerInterface[] $promotionCouponEligibilityCheckers
@@ -33,9 +33,6 @@ final class CompositePromotionCouponEligibilityChecker implements PromotionCoupo
         $this->promotionCouponEligibilityCheckers = $promotionCouponEligibilityCheckers;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon): bool
     {
         foreach ($this->promotionCouponEligibilityCheckers as $promotionCouponEligibilityChecker) {

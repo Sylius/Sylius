@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Applicator;
 
 use Sylius\Component\Review\Model\ReviewInterface;
 
+/** @experimental */
 interface ProductReviewStateMachineTransitionApplicatorInterface
 {
     public function accept(ReviewInterface $data): ReviewInterface;

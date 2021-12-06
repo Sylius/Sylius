@@ -15,7 +15,7 @@ The **name and description** fields need to be translatable.
 2. Generate the SupplierTranslation entity
 ------------------------------------------
 
-Symfony, the framework Sylius uses, provides the `SensioGeneratorBundle <http://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html>`_,
+Symfony, the framework Sylius uses, provides the `SensioGeneratorBundle <https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html>`_,
 that simplifies the process of adding a model.
 
 .. warning::
@@ -429,7 +429,7 @@ To have templates for your Entity administration out of the box you can use Grid
 10. Create template
 -------------------
 
-.. code-block:: php
+.. code-block:: twig
 
     # App/Resources/views/Supplier/_form.html.twig
     {% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationForm %}
@@ -450,7 +450,7 @@ Having a grid prepared we can configure routing for the entity administration:
         resource: |
             alias: app.supplier
             section: admin
-            templates: SyliusAdminBundle:Crud
+            templates: "@SyliusAdmin\\Crud"
             redirect: update
             grid: app_admin_supplier
             vars:
@@ -480,6 +480,6 @@ Having a grid prepared we can configure routing for the entity administration:
 Learn more
 ----------
 
-* :doc:`GridBundle documentation </components_and_bundles/bundles/SyliusGridBundle/index>`
-* :doc:`ResourceBundle documentation </components_and_bundles/bundles/SyliusResourceBundle/index>`
+* `GridBundle documentation <https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md>`_
+* `ResourceBundle documentation <https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md>`_
 * :doc:`Customization Guide </customization/index>`

@@ -8,11 +8,15 @@ sylius:
             title: タイトル
         cart:
             coupon: クーポン
+        catalog_promotion:
+            channels: 経路
         checkout:
             addressing:
                 different_billing_address: 請求先として別の住所を指定する
             payment_method: お支払い方法
             shipping_method: 発送方法
+        promotion:
+            channels: 経路
         promotion_action:
             add_product_configuration:
                 product: 商品情報
@@ -25,8 +29,10 @@ sylius:
                 country: 国
                 postcode: 郵便番号
                 street: それ以降の住所
+            countries: 国の管理
             currencies: 通貨
             hostname: ホスト名
+            locales: 地域
             payment_methods: sylius.breadcrumb.payment_method.index
             shipping_methods: sylius.breadcrumb.shipping_method.index
             tax_zone_default: デフォルトの課税地域
@@ -49,10 +55,11 @@ sylius:
         product:
             images: 商品画像
             short_description: 商品概要
-            variant_selection_method: バリエーション指定方法
+            variant_selection_method: バリエーション選択方法
+            channels: 経路
             enabled: 有効
         product_filter:
-            name: ゾーン名
+            name: 商品名
             code: コード
         product_variant:
             tax_category: 税区分
@@ -65,7 +72,7 @@ sylius:
             created_at_to: 合計金額(上限)
             number: 注文番号
         shipping_method:
-            zone: 対象の地域
+            zone: 対象地域
         taxon:
             code: コード
             file: 画像を選択
@@ -74,7 +81,6 @@ sylius:
             file: 画像を選択
         user:
             billing_address: ご請求先住所
-            different_billing_address: 請求先として別の住所を指定する
             enabled: 有効
             first_name: 名
             groups: グループ
@@ -85,7 +91,7 @@ sylius:
             query: 検索
         variant:
             height: 高さ
-            on_hand: 在庫
+            on_hand: 現在の在庫数
             price: 価格
             width: 幅
         guest:
@@ -93,10 +99,14 @@ sylius:
         product_association_type:
             name: ゾーン名
         promotion_rule:
+            has_taxon:
+                taxons: タクソン(分類群)
             product:
                 products: sylius.breadcrumb.product.index
             total_of_items_from_taxon:
                 amount: 税率
+        payment_method:
+            channels: 経路
     installer:
         extensions:
             off: false

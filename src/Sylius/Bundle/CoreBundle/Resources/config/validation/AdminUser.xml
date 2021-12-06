@@ -30,7 +30,7 @@
             </constraint>
             <constraint name="Email">
                 <option name="message">sylius.user.email.invalid</option>
-                <option name="strict">true</option>
+                <option name="mode">strict</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

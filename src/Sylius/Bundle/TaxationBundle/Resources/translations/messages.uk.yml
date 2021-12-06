@@ -4,11 +4,11 @@
 sylius:
     form:
         tax_category:
-            name: Назва
+            name: Назва регіону
             description: Опис
         tax_rate:
             category: Категорія
-            name: Назва
-            amount: Обсяг
+            name: Назва регіону
+            amount: Кількість
             included_in_price: Включено в ціну?
             calculator: Калькулятор

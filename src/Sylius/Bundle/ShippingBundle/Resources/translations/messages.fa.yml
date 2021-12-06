@@ -29,6 +29,7 @@ sylius:
             description: شرح
             name: نام
         shipping_method:
+            add_rule: افزودن قانون
             calculator: نوع محاسبه
             category: دسته
             category_requirement: نیازمندی های دسته
@@ -38,5 +39,11 @@ sylius:
             enabled: فعال
             name: نام
             position: جایگاه
+            rules: قوانین
             tax_category: نوع مالیات
             translations: زبان های
+        shipping_method_rule:
+            type: نوع
+            total: قیمت کل
+            weight: وزن
+            amount: مقدار

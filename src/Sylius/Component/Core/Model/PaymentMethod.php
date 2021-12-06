@@ -29,7 +29,9 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
      */
     protected $channels;
 
-    /** @var GatewayConfigInterface */
+    /**
+     * @var GatewayConfigInterface|null
+     */
     protected $gatewayConfig;
 
     public function __construct()
@@ -40,25 +42,16 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
         $this->channels = new ArrayCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getChannels(): Collection
     {
         return $this->channels;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasChannel(BaseChannelInterface $channel): bool
     {
         return $this->channels->contains($channel);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addChannel(BaseChannelInterface $channel): void
     {
         if (!$this->hasChannel($channel)) {
@@ -66,9 +59,6 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeChannel(BaseChannelInterface $channel): void
     {
         if ($this->hasChannel($channel)) {
@@ -76,25 +66,16 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setGatewayConfig(?GatewayConfigInterface $gatewayConfig): void
     {
         $this->gatewayConfig = $gatewayConfig;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getGatewayConfig(): ?GatewayConfigInterface
     {
         return $this->gatewayConfig;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getTranslationClass(): string
     {
         return PaymentMethodTranslation::class;

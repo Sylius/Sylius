@@ -19,7 +19,7 @@ sylius:
                     countries: 國家
                     currencies: 貨幣
                     exchange_rates: 匯率
-                    header: 配置
+                    header: 設定
                     locales: 地區設定
                     payment_methods: 付款方式
                     shipping_categories: 配送類別

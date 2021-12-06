@@ -32,41 +32,29 @@ use Webmozart\Assert\Assert;
 
 final class ProductShowPageContext implements Context
 {
-    /** @var IndexPageInterface */
-    private $indexPage;
+    private IndexPageInterface $indexPage;
 
-    /** @var ShowPageInterface */
-    private $productShowPage;
+    private ShowPageInterface $productShowPage;
 
-    /** @var AssociationsElementInterface */
-    private $associationsElement;
+    private AssociationsElementInterface $associationsElement;
 
-    /** @var AttributesElementInterface */
-    private $attributesElement;
+    private AttributesElementInterface $attributesElement;
 
-    /** @var DetailsElementInterface */
-    private $detailsElement;
+    private DetailsElementInterface $detailsElement;
 
-    /** @var MediaElementInterface */
-    private $mediaElement;
+    private MediaElementInterface $mediaElement;
 
-    /** @var MoreDetailsElementInterface */
-    private $moreDetailsElement;
+    private MoreDetailsElementInterface $moreDetailsElement;
 
-    /** @var PricingElementInterface */
-    private $pricingElement;
+    private PricingElementInterface $pricingElement;
 
-    /** @var ShippingElementInterface */
-    private $shippingElement;
+    private ShippingElementInterface $shippingElement;
 
-    /** @var TaxonomyElementInterface */
-    private $taxonomyElement;
+    private TaxonomyElementInterface $taxonomyElement;
 
-    /** @var OptionsElementInterface */
-    private $optionsElement;
+    private OptionsElementInterface $optionsElement;
 
-    /** @var VariantsElementInterface */
-    private $variantsElement;
+    private VariantsElementInterface $variantsElement;
 
     public function __construct(
         IndexPageInterface $indexPage,
@@ -177,11 +165,27 @@ final class ProductShowPageContext implements Context
     }
 
     /**
+     * @Then I should see product breadcrumb :breadcrumb
+     */
+    public function iShouldSeeBreadcrumb(string $breadcrumb): void
+    {
+        Assert::same($breadcrumb, $this->productShowPage->getBreadcrumb());
+    }
+
+    /**
      * @Then I should see price :price for channel :channelName
      */
     public function iShouldSeePriceForChannel(string $price, string $channelName): void
     {
         Assert::same($this->pricingElement->getPriceForChannel($channelName), $price);
+    }
+
+    /**
+     * @Then I should not see price for channel :channelName
+     */
+    public function iShouldNotSeePriceForChannel(string $channelName): void
+    {
+        Assert::same($this->pricingElement->getPriceForChannel($channelName), '');
     }
 
     /**
@@ -206,6 +210,14 @@ final class ProductShowPageContext implements Context
     public function iShouldSeeProductIsEnabledForChannels(string $channel): void
     {
         Assert::true($this->detailsElement->hasChannel($channel));
+    }
+
+    /**
+     * @Then I should see the product in neither channel
+     */
+    public function iShouldSeeTheProductInNeitherChannel(): void
+    {
+        Assert::same($this->detailsElement->countChannels(), 0);
     }
 
     /**
@@ -361,11 +373,19 @@ final class ProductShowPageContext implements Context
     }
 
     /**
-     * @Then I should see attribute :attribute with value :value in :locale locale
+     * @Then I should see attribute :attribute with value :value in :nameOfLocale locale
      */
-    public function iShouldSeeAttributeWithValueInLocale(string $attribute, string $value, string $locale): void
+    public function iShouldSeeAttributeWithValueInLocale(string $attribute, string $value, string $nameOfLocale): void
     {
-        Assert::true($this->attributesElement->hasAttributeInLocale($attribute, $locale, $value));
+        Assert::true($this->attributesElement->hasAttributeInLocale($attribute, $nameOfLocale, $value));
+    }
+
+    /**
+     * @Then I should see non-translatable attribute :attribute with value :value
+     */
+    public function iShouldSeeNonTranslatableAttributeWithValue(string $attribute, string $value): void
+    {
+        Assert::true($this->attributesElement->hasNonTranslatableAttribute($attribute, $value));
     }
 
     /**

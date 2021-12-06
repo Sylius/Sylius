@@ -15,3 +15,8 @@ Feature: Clearing cart after logging out
         When I log out
         And I see the summary of my cart
         Then my cart should be empty
+
+    @api
+    Scenario: Clearing cart after logging out
+        When I log out
+        Then I don't have access to see the summary of my previous cart

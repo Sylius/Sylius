@@ -3,6 +3,17 @@
 
 sylius:
     form:
+        catalog_promotion:
+            action:
+                percentage_discount: Pourcentage de remise
+            description: Description
+            enabled: Activée
+            end_date: Date de fin
+            label: Libellé
+            name: Nom
+            priority: Priorité
+            start_date: Date de début
+            translations: Traductions
         promotion:
             actions: Actions
             add_action: Ajouter une action
@@ -34,6 +45,8 @@ sylius:
             amount: Montant
             code_length: Longueur du code
             expires_at: Expire le
+            prefix: Préfixe
+            suffix: Suffixe
             usage_limit: Limite d'utilisation
         promotion_filter:
             price_range: Filtre de gamme de prix
@@ -45,7 +58,7 @@ sylius:
             item_total: Total produit
             nth_order: N-ième commande
             shipping_country: Pays de livraison
-            taxonomy: Taxinomie
+            taxonomy: Taxonomie
             total_price_of_items_from_taxon: Prix total des Articles du taxon
             cart_quantity_configuration:
                 count: Nombre

@@ -13,7 +13,7 @@ Each minor release comes with an ``UPGRADE.md`` file, which is meant to help in 
 
         {
             "require": {
-                "sylius/sylius": "^1.4"
+                "sylius/sylius": "^1.7"
             }
         }
 

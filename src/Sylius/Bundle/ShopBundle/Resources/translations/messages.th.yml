@@ -2,6 +2,19 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        contact_request:
+            content: 'เนื้อหาในเว็บ'
+            subject: 'คำขอติดต่อ'
+        order_confirmation:
+            subject: 'รายละเอียดใบสั่งซื้อ'
+            view_order_or_change_payment_method: 'ดูใบสั่ง หรือเปลี่ยนวิธีการชำระเงิน'
+        password_reset:
+            hello: 'สวัสดี!'
+            subject: 'ตั้งรหัสผ่านใหม่'
+        verification_token:
+            hello: 'สวัสดี!'
+            subject: 'ยืนยันอีเมล'
     menu:
         shop:
             account:

@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        shipment_confirmation:
+            subject: 'Подтверждение посылки'
+            thank_you_for_transaction: 'Спасибо, Ваш заказ оформлен.'
     menu:
         admin:
             main:

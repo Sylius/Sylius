@@ -20,18 +20,16 @@ use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Exception\MissingResourceException;
+use Symfony\Component\Intl\Languages;
 
 final class LocaleSetup implements LocaleSetupInterface
 {
-    /** @var RepositoryInterface */
-    private $localeRepository;
+    private RepositoryInterface $localeRepository;
 
-    /** @var FactoryInterface */
-    private $localeFactory;
+    private FactoryInterface $localeFactory;
 
-    /** @var string */
-    private $locale;
+    private string $locale;
 
     public function __construct(RepositoryInterface $localeRepository, FactoryInterface $localeFactory, string $locale)
     {
@@ -40,9 +38,6 @@ final class LocaleSetup implements LocaleSetupInterface
         $this->locale = trim($locale);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): LocaleInterface
     {
         $code = $this->getLanguageCodeFromUser($input, $output, $questionHelper);
@@ -103,6 +98,10 @@ final class LocaleSetup implements LocaleSetupInterface
             [$language, $region] = explode('_', $code, 2);
         }
 
-        return Intl::getLanguageBundle()->getLanguageName($language, $region);
+        try {
+            return Languages::getName($language, $region);
+        } catch (MissingResourceException $exception) {
+            return null;
+        }
     }
 }

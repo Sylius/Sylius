@@ -42,11 +42,11 @@ Overwrite the ``ReturnRequestResolutionsProvider`` service:
   Sylius\Plus\Returns\Domain\Provider\ReturnRequestResolutionsProvider:
       class: Sylius\Plus\Returns\Application\Provider\StringReturnRequestResolutionsProvider
       arguments:
-          - ['refund', 'repair'] // the "replacement" resolution has been removed
+          - ['refund', 'repair'] # the "replacement" resolution has been removed
 
 In order to **add a custom Resolution**:
 
-Overwritthe ``ReturnRequestResolutionsProvider`` service and add a translation of the new resolution:
+Overwrite the ``ReturnRequestResolutionsProvider`` service and add a translation of the new resolution:
 
 .. code-block:: yaml
 
@@ -145,31 +145,33 @@ API coverage
 
 Sylius Plus provides a route that allows accepting or rejecting return request with an API call:
 
-.. code-block:: php
+.. code-block:: text
 
   POST /api/v1/return-requests/{id}/accept
 
 The ``id`` is an id of return request that we want to accept. Content of the request may contain response of return request:
 
-.. code-block:: php
+.. code-block:: json
 
   {
       "response": "Return request confirmed and accepted."
   }
 
-.. code-block:: php
+.. code-block:: text
 
   POST /api/v1/return-requests/{id}/reject
 
 The ``id`` is an id of return request that we want to accept. Content of the request may contain response of return request:
 
-.. code-block:: php
+.. code-block:: json
 
   {
       "response": "We are not able to replace this item."
   }
 
-  // The response can also be empty:
+The response can also be empty:
+
+.. code-block:: json
 
   {}
 
@@ -182,4 +184,4 @@ Learn more
 
 .. image:: ../../_images/sylius_plus/banner.png
   :align: center
-  :target: http://sylius.com/plus/?utm_source=docs
+  :target: https://sylius.com/plus/?utm_source=docs

@@ -6,10 +6,10 @@ Feature: Customer password validation
 
     Background:
         Given the store operates on a single channel in "United States"
-        And there is a customer account "francis@underwood.com" identified by "whitehouse"
+        And there is a customer account "francis@underwood.com" identified by "sylius"
         And I am logged in as "francis@underwood.com"
 
-    @ui
+    @ui @api
     Scenario: Trying to change my password with a wrong current password
         When I want to change my password
         And I specify the current password as "greenhouse"
@@ -18,19 +18,19 @@ Feature: Customer password validation
         And I try to save my changes
         Then I should be notified that provided password is different than the current one
 
-    @ui
-    Scenario: Trying to change my password with a wrong confirmation password2
+    @ui @api
+    Scenario: Trying to change my password with a wrong confirmation password
         When I want to change my password
-        And I specify the current password as "whitehouse"
+        And I specify the current password as "sylius"
         And I specify the new password as "blackhouse"
         And I confirm this password as "greenhouse"
         And I try to save my changes
         Then I should be notified that the entered passwords do not match
 
-    @ui
+    @ui @api
     Scenario: Trying to change my password with a too short password
         When I want to change my password
-        And I specify the current password as "whitehouse"
+        And I specify the current password as "sylius"
         And I specify the new password as "fu"
         And I confirm this password as "fu"
         And I try to save my changes

@@ -29,6 +29,7 @@ sylius:
             description: Omschrijving
             name: Naam
         shipping_method:
+            add_rule: Regel toevoegen
             calculator: Calculator
             category: Categorie
             category_requirement: Categorie vereisten
@@ -41,5 +42,11 @@ sylius:
             match_none_category_requirement: Geen van de eenheden hoeven overeen te komen met de methodecategorie
             name: Naam
             position: Positie
-            tax_category: Belasting categorie
+            rules: Regels
+            tax_category: Belastingcategorie
             translations: Vertalingen
+        shipping_method_rule:
+            type: Type
+            total: Totaal
+            weight: Gewicht
+            amount: Bedrag

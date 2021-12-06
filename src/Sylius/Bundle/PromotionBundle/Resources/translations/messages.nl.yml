@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Omschrijving
+            name: Naam
+            priority: Prioriteit
         promotion:
             actions: Acties
             add_action: Actie toevoegen
@@ -34,6 +38,8 @@ sylius:
             amount: Bedrag
             code_length: Lengte van de code
             expires_at: Verloopt op
+            prefix: Voorvoegsel
+            suffix: Achtervoegsel
             usage_limit: Gebruikslimiet
         promotion_filter:
             price_range: Prijs bereik filter

@@ -6,7 +6,7 @@ Events
 
 .. tip::
 
-    You can learn more about events in general in `the Symfony documentation <http://symfony.com/doc/current/event_dispatcher.html>`_.
+    You can learn more about events in general in `the Symfony documentation <https://symfony.com/doc/current/event_dispatcher.html>`_.
 
 What is the naming convention of Sylius events?
 -----------------------------------------------
@@ -19,7 +19,7 @@ The examples of such events are: ``sylius.product.pre_update``, ``sylius.shop_us
 Events reference
 ~~~~~~~~~~~~~~~~
 
-All Sylius bundles are using :doc:`SyliusResourceBundle </components_and_bundles/bundles/SyliusResourceBundle/index>`, which has some built-in events.
+All Sylius bundles are using `SyliusResourceBundle <https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md>`_, which has some built-in events.
 
 +-------------------------------------+----------------------+
 | Event                               | Description          |
@@ -54,6 +54,25 @@ And after the data storage is updated, ``sylius.<resource_name>.post_create`` is
 
 The same set of events is available for the ``update`` and ``delete`` operations.
 All the dispatches are using the ``GenericEvent`` class and return the resource object by the ``getSubject`` method.
+
+
+Checkout events rules
+~~~~~~~~~~~~~~~~~~~~~
+
+To dispatch checkout steps the events names are overloaded.
+See _sylius.event in src/Sylius/Bundle/ShopBundle/Resources/config/routing/checkout.yml
+
++--------------------------------------------+-------------------------------+
+| Event                                      | Description                   |
++============================================+===============================+
+| sylius.order.initialize_address            | Before creating address view  |
++--------------------------------------------+-------------------------------+
+| sylius.order.initialize_select_shipping    | Before creating shipping view |
++--------------------------------------------+-------------------------------+
+| sylius.order.initialize_payment            | Before creating payment view  |
++--------------------------------------------+-------------------------------+
+| sylius.order.initialize_complete           | Before creating complete view |
++--------------------------------------------+-------------------------------+
 
 What events are already used in Sylius?
 ---------------------------------------

@@ -28,6 +28,17 @@
             </div>
         </div>
     {% endif %}
+    {% if resource.gatewayConfig.factoryName == 'paypal_express_checkout' %}
+        <div class="ui icon negative orange message sylius-flash-message">
+            <i class="close icon"></i>
+            <i class="warning icon"></i>
+            <div class="content">
+                <div class="header">
+                    {% autoescape false %}{{ 'sylius.ui.gateway.pay_pal_express_checkout_deprecation_notice'|trans }}{% endautoescape %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
 
     {{ form_row(form.gatewayConfig.factoryName) }}
     {% if form.gatewayConfig.config is defined %}
@@ -41,11 +52,11 @@
 
 <div class="ui styled fluid accordion">
     {% for locale, translationForm in form.translations %}
-        <div class="title{% if 0 == loop.index0 %} active{% endif %}">
+        <div class="title{% if loop.first %} active{% endif %}">
             <i class="dropdown icon"></i>
             {{ flags.fromLocaleCode(locale) }} {{ locale|sylius_locale_name }}
         </div>
-        <div class="content{% if 0 == loop.index0 %} active{% endif %}">
+        <div class="content{% if loop.first %} active{% endif %}">
             {{ form_row(translationForm.name) }}
             {{ form_row(translationForm.description) }}
             <div class="ui compact message">

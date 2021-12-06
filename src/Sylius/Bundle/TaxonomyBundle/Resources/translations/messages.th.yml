@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: คำอธิบาย
+            enabled: เปิดใช้งาน
             name: ชื่อภาษา
             parent: หมวดหมู่หลัก
             slug: Slug

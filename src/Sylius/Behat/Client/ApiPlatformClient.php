@@ -16,53 +16,74 @@ namespace Sylius\Behat\Client;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ApiPlatformClient implements ApiClientInterface
 {
-    /** @var AbstractBrowser */
-    private $client;
+    private AbstractBrowser $client;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var string */
-    private $resource;
+    private string $authorizationHeader;
 
-    /** @var RequestInterface */
-    private $request;
+    private string $resource;
 
-    public function __construct(AbstractBrowser $client, SharedStorageInterface $sharedStorage, string $resource)
-    {
+    private ?string $section;
+
+    private ?RequestInterface $request = null;
+
+    public function __construct(
+        AbstractBrowser $client,
+        SharedStorageInterface $sharedStorage,
+        string $authorizationHeader,
+        string $resource,
+        ?string $section = null
+    ) {
         $this->client = $client;
         $this->sharedStorage = $sharedStorage;
+        $this->authorizationHeader = $authorizationHeader;
         $this->resource = $resource;
+        $this->section = $section;
     }
 
     public function index(): Response
     {
-        $this->request = Request::index($this->resource, $this->sharedStorage->get('token'));
+        $this->request = Request::index($this->section, $this->resource, $this->authorizationHeader, $this->getToken());
+
         return $this->request($this->request);
     }
 
     public function showByIri(string $iri): Response
     {
-        return $this->request(Request::custom($iri, 'GET', $this->sharedStorage->get('token')));
+        $request = Request::custom($iri, HttpRequest::METHOD_GET);
+        $request->authorize($this->getToken(), $this->authorizationHeader);
+
+        return $this->request($request);
     }
 
     public function subResourceIndex(string $subResource, string $id): Response
     {
-        return $this->request(Request::subResourceIndex($this->resource, $id, $subResource, $this->sharedStorage->get('token')));
+        $request = Request::subResourceIndex($this->section, $this->resource, $id, $subResource);
+        $request->authorize($this->getToken(), $this->authorizationHeader);
+
+        return $this->request($request);
     }
 
     public function show(string $id): Response
     {
-        return $this->request(Request::show($this->resource, $id, $this->sharedStorage->get('token')));
+        return $this->request(Request::show(
+            $this->section,
+            $this->resource,
+            $id,
+            $this->authorizationHeader,
+            $this->getToken()
+        ));
     }
 
-    public function create(): Response
+    public function create(?RequestInterface $request = null): Response
     {
-        return $this->request($this->request);
+        return $this->request($request ?? $this->request);
     }
 
     public function update(): Response
@@ -72,7 +93,13 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function delete(string $id): Response
     {
-        return $this->request(Request::delete($this->resource, $id, $this->sharedStorage->get('token')));
+        return $this->request(Request::delete(
+            $this->section,
+            $this->resource,
+            $id,
+            $this->authorizationHeader,
+            $this->getToken()
+        ));
     }
 
     public function filter(): Response
@@ -89,7 +116,8 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function applyTransition(string $id, string $transition, array $content = []): Response
     {
-        $request = Request::transition($this->resource, $id, $transition, $this->sharedStorage->get('token'));
+        $request = Request::transition($this->section, $this->resource, $id, $transition);
+        $request->authorize($this->getToken(), $this->authorizationHeader);
         $request->setContent($content);
 
         return $this->request($request);
@@ -97,15 +125,17 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function customItemAction(string $id, string $type, string $action): Response
     {
-        $request = Request::customItemAction($this->resource, $id, $type, $action, $this->sharedStorage->get('token'));
+        $request = Request::customItemAction($this->section, $this->resource, $id, $type, $action);
+        $request->authorize($this->getToken(), $this->authorizationHeader);
 
         return $this->request($request);
     }
 
     public function customAction(string $url, string $method): Response
     {
-        $token = $this->sharedStorage->has('token') ? $this->sharedStorage->get('token') : null;
-        $request = Request::custom($url, $method, $token);
+        $request = Request::custom($url, $method);
+
+        $request->authorize($this->getToken(), $this->authorizationHeader);
 
         return $this->request($request);
     }
@@ -115,22 +145,47 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request($this->request);
     }
 
+    public function executeCustomRequest(RequestInterface $request): Response
+    {
+        $request->authorize($this->getToken(), $this->authorizationHeader);
+
+        return $this->request($request);
+    }
+
     public function buildCreateRequest(): void
     {
-        $this->request = Request::create($this->resource, $this->sharedStorage->get('token'));
+        $this->request = Request::create($this->section, $this->resource, $this->authorizationHeader);
+        $this->request->authorize($this->getToken(), $this->authorizationHeader);
     }
 
     public function buildUpdateRequest(string $id): void
     {
         $this->show($id);
 
-        $this->request = Request::update($this->resource, $id, $this->sharedStorage->get('token'));
+        $this->request = Request::update(
+            $this->section,
+            $this->resource,
+            $id,
+            $this->authorizationHeader,
+            $this->getToken()
+        );
         $this->request->setContent(json_decode($this->client->getResponse()->getContent(), true));
+    }
+
+    public function buildCustomUpdateRequest(string $id, string $customSuffix): void
+    {
+        $this->request = Request::update(
+            $this->section,
+            $this->resource,
+            sprintf('%s/%s', $id, $customSuffix),
+            $this->authorizationHeader,
+            $this->getToken()
+        );
     }
 
     public function buildUploadRequest(): void
     {
-        $this->request = Request::upload($this->resource, $this->sharedStorage->get('token'));
+        $this->request = Request::upload($this->section, $this->resource, $this->authorizationHeader, $this->getToken());
     }
 
     /** @param string|int $value */
@@ -139,10 +194,20 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->updateParameters([$key => $value]);
     }
 
+    public function setRequestData(array $content): void
+    {
+        $this->request->setContent($content);
+    }
+
     /** @param string|int $value */
     public function addFilter(string $key, $value): void
     {
         $this->addParameter($key, $value);
+    }
+
+    public function clearParameters(): void
+    {
+        $this->request->clearParameters();
     }
 
     public function addFile(string $key, UploadedFile $file): void
@@ -166,13 +231,32 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->addSubResource($key, $data);
     }
 
+    public function removeSubResource(string $subResource, string $id): void
+    {
+        $this->request->removeSubResource($subResource, $id);
+    }
+
+    public function getContent(): array
+    {
+        return $this->request->getContent();
+    }
+
     public function getLastResponse(): Response
     {
         return $this->client->getResponse();
     }
 
+    public function getToken(): ?string
+    {
+        return $this->sharedStorage->has('token') ? $this->sharedStorage->get('token') : null;
+    }
+
     private function request(RequestInterface $request): Response
     {
+        if ($this->sharedStorage->has('hostname')) {
+            $this->client->setServerParameter('HTTP_HOST', $this->sharedStorage->get('hostname'));
+        }
+
         $this->client->request(
             $request->method(),
             $request->url(),

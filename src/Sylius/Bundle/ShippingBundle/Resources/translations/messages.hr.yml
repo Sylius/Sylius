@@ -29,11 +29,12 @@ sylius:
             description: Opis
             name: Naziv regije
         shipping_method:
+            add_rule: Dodajte pravilo
             calculator: Kalkulator
-            category: Kategorija
+            category: Kategorija porezne stope
             category_requirement: Zahtjevi kategorije
             channels: Kanali
-            configuration: Postavke
+            configuration: Podeševanje
             description: Opis
             enabled: Omogućeno
             match_all_category_requirement: Sve jedinice moraju odgovarati kategoriji metode
@@ -41,5 +42,11 @@ sylius:
             match_none_category_requirement: Nijedna jedinica ne mora odgovarati kategoriji metode
             name: Naziv regije
             position: Pozicija
+            rules: Pravila
             tax_category: Kategorija artikla
             translations: Prijevodi
+        shipping_method_rule:
+            type: Vrsta
+            total: Ukupno
+            weight: Težina
+            amount: Iznos

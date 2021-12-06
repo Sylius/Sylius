@@ -20,16 +20,16 @@ use Webmozart\Assert\Assert;
 
 final class ChannelDefaultLocaleEnabledValidator extends ConstraintValidator
 {
-    public function validate($channel, Constraint $constraint): void
+    public function validate($value, Constraint $constraint): void
     {
         /** @var ChannelDefaultLocaleEnabled $constraint */
         Assert::isInstanceOf($constraint, ChannelDefaultLocaleEnabled::class);
 
-        /** @var ChannelInterface $channel */
-        Assert::isInstanceOf($channel, ChannelInterface::class);
+        /** @var ChannelInterface $value */
+        Assert::isInstanceOf($value, ChannelInterface::class);
 
-        $defaultLocale = $channel->getDefaultLocale();
-        if ($defaultLocale !== null && !$channel->hasLocale($defaultLocale)) {
+        $defaultLocale = $value->getDefaultLocale();
+        if ($defaultLocale !== null && !$value->hasLocale($defaultLocale)) {
             $this->context->buildViolation($constraint->message)->atPath('defaultLocale')->addViolation();
         }
     }

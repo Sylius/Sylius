@@ -21,11 +21,9 @@ use Webmozart\Assert\Assert;
 
 final class OrderContext implements Context
 {
-    /** @var CustomerRepositoryInterface */
-    private $customerRepository;
+    private CustomerRepositoryInterface $customerRepository;
 
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
     public function __construct(
         CustomerRepositoryInterface $customerRepository,
@@ -81,6 +79,7 @@ final class OrderContext implements Context
     /**
      * @Transform :orderNumber
      * @Transform /^an order "([^"]+)"$/
+     * @Transform /^another order "([^"]+)"$/
      * @Transform /^the order "([^"]+)"$/
      * @Transform /^the "([^"]+)" order$/
      */

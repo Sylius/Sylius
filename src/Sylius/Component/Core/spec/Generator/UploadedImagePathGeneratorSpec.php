@@ -31,6 +31,6 @@ final class UploadedImagePathGeneratorSpec extends ObjectBehavior
 
         $image->getFile()->willReturn($file);
 
-        $this->generate($image)->shouldMatch('/[a-z0-9]{2}\/[a-z0-9]{2}\/[a-zA-Z0-9]+[_-]*[.]jpeg/i');
+        $this->generate($image)->shouldMatch('/[a-z0-9]{2}\/[a-z0-9]{2}\/[a-zA-Z0-9]+[_-]*[.]jpe?g/i');
     }
 }

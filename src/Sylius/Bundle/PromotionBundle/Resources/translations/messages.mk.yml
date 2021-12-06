@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Опис
+            name: Име
         promotion:
             description: Опис
             name: Име

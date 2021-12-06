@@ -18,9 +18,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class CustomerType extends AbstractResourceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -35,9 +32,6 @@ final class CustomerType extends AbstractResourceType
         return CustomerProfileType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_customer';

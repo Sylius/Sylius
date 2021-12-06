@@ -18,8 +18,7 @@ sylius:
             not_blank: Voer een promotie naam in.
     promotion_action:
         percentage_discount_configuration:
-            min: De waarde van een kortingspercentage moet ten minste 0% zijn.
-            max: De maximale waarde van een kortingspercentage is 100%.
+            not_in_range: Het kortingspercentage moet tussen 0% en 100% liggen.
     promotion_coupon:
         code:
             max_length: Coupon code mag niet langer zijn dan 1 teken.|Coupon code mag niet langer zijn dan {{ limit }} tekens.
@@ -38,6 +37,6 @@ sylius:
             min: Couponcode moet ten minste {{ limit }} tekens lang zijn.
             max: Couponcode mag niet meer dan {{ limit }} karakters bevatten.
             not_blank: Voer de lengte van de couponcode in.
-        possible_generation_amount: Ongeldige lengte van de coupon code of aantal codes. Het is niet mogelijk om %expectedAmount% unieke coupon codes te genereren met een lengte van %codeLength%. Mogelijk aantal gegenereerde codes is %possibleAmount%.
+        possible_generation_amount: Ongeldige lengte van de kortingscode of aantal kortingsbonnen. Het is niet mogelijk om %expectedAmount% unieke coupons met code lengte %codeLength%te genereren. De mogelijke hoeveelheid om te genereren is %possibleAmount%.
         usage_limit:
             min: Gebruikslimiet van de gegenereerde coupons moet minstens {{ limit }} zijn.

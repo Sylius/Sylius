@@ -18,32 +18,31 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class AdjustmentFactory implements AdjustmentFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $adjustmentFactory;
+    private FactoryInterface $adjustmentFactory;
 
     public function __construct(FactoryInterface $adjustmentFactory)
     {
         $this->adjustmentFactory = $adjustmentFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createNew(): AdjustmentInterface
     {
         return $this->adjustmentFactory->createNew();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function createWithData(string $type, string $label, int $amount, bool $neutral = false): AdjustmentInterface
-    {
+    public function createWithData(
+        string $type,
+        string $label,
+        int $amount,
+        bool $neutral = false,
+        array $details = []
+    ): AdjustmentInterface {
         $adjustment = $this->createNew();
         $adjustment->setType($type);
         $adjustment->setLabel($label);
         $adjustment->setAmount($amount);
         $adjustment->setNeutral($neutral);
+        $adjustment->setDetails($details);
 
         return $adjustment;
     }

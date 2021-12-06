@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Controller;
 
-use FOS\RestBundle\View\View;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceCodeChoiceType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -47,31 +46,31 @@ class ProvinceController extends ResourceController
         if (!$country->hasProvinces()) {
             $form = $this->createProvinceTextForm();
 
-            $view = View::create()
-                ->setData([
+            $content = $this->renderView(
+                $configuration->getTemplate('_provinceText.html'),
+                [
                     'metadata' => $this->metadata,
                     'form' => $form->createView(),
-                ])
-                ->setTemplate($configuration->getTemplate('_provinceText.html'))
-            ;
+                ]
+            );
 
             return new JsonResponse([
-                'content' => $this->viewHandler->handle($configuration, $view)->getContent(),
+                'content' => $content,
             ]);
         }
 
         $form = $this->createProvinceChoiceForm($country);
 
-        $view = View::create()
-            ->setData([
+        $content = $this->renderView(
+            $configuration->getTemplate('_provinceChoice.html'),
+            [
                 'metadata' => $this->metadata,
                 'form' => $form->createView(),
-            ])
-            ->setTemplate($configuration->getTemplate('_provinceChoice.html'))
-        ;
+            ]
+        );
 
         return new JsonResponse([
-            'content' => $this->viewHandler->handle($configuration, $view)->getContent(),
+            'content' => $content,
         ]);
     }
 

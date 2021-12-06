@@ -18,33 +18,45 @@
     <resource class="%sylius.model.customer_group.class%" shortName="CustomerGroup">
         <attribute name="route_prefix">admin</attribute>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>customer_group:read</attribute>
-            </attribute>
-        </attribute>
-
         <attribute name="denormalization_context">
             <attribute name="groups">
-                <attribute>customer_group:create</attribute>
+                <attribute>admin:customer_group:create</attribute>
             </attribute>
         </attribute>
 
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
-            <collectionOperation name="get" />
-            <collectionOperation name="post" />
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:customer_group:read</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get" />
-            <itemOperation name="put">
-                <attribute name="denormalization_context">
-                    <attribute name="groups">customer_group:update</attribute>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:customer_group:read</attribute>
                 </attribute>
             </itemOperation>
-            <itemOperation name="delete" />
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:customer_group:update</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />

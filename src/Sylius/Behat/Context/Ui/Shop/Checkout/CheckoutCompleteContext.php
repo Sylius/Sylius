@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Exception\ElementNotFoundException;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
@@ -21,20 +23,19 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
 
 final class CheckoutCompleteContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var CompletePageInterface */
-    private $completePage;
+    private CompletePageInterface $completePage;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -83,6 +84,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Given I have confirmed order
      * @When I confirm my order
+     * @When I try to confirm my order
      */
     public function iConfirmMyOrder()
     {
@@ -225,6 +227,7 @@ final class CheckoutCompleteContext implements Context
 
     /**
      * @Then /^I should be notified that (this product) does not have sufficient stock$/
+     * @Then I should be notified that product :product does not have sufficient stock
      */
     public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
     {
@@ -242,9 +245,9 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then my order's locale should be :locale
      */
-    public function myOrderLocaleShouldBe($locale)
+    public function myOrderLocaleShouldBe(LocaleInterface $locale): void
     {
-        Assert::true($this->completePage->hasLocale($locale));
+        Assert::true($this->completePage->hasLocale($locale->getName()));
     }
 
     /**
@@ -272,9 +275,9 @@ final class CheckoutCompleteContext implements Context
     }
 
     /**
-     * @Then I should not be able to confirm order because products does not fit :shippingMethod requirements
+     * @Then I should not be able to confirm order because products do not fit :shippingMethod requirements
      */
-    public function iShouldNotBeAbleToConfirmOrderBecauseDoesNotBelongsToShippingCategory(ShippingMethodInterface $shippingMethod)
+    public function iShouldNotBeAbleToConfirmOrderBecauseDoNotBelongsToShippingCategory(ShippingMethodInterface $shippingMethod)
     {
         $this->completePage->confirmOrder();
 
@@ -343,5 +346,43 @@ final class CheckoutCompleteContext implements Context
     public function thisPromotionShouldGiveDiscountOnShipping(PromotionInterface $promotion, string $discount): void
     {
         Assert::true($this->completePage->hasShippingPromotionWithDiscount($promotion->getName(), $discount));
+    }
+
+    /**
+     * @Then /^I should be informed that (this variant) has been disabled$/
+     */
+    public function iShouldBeInformedThatThisVariantHasBeenDisabled(ProductVariantInterface $productVariant)
+    {
+        Assert::same(
+            $this->completePage->getValidationErrors(),
+            sprintf(
+                'This product %s has been disabled.',
+                $productVariant->getName()
+            )
+        );
+    }
+
+    /**
+     * @Then I should not be able to proceed checkout complete step
+     */
+    public function iShouldNotBeAbleToProceedCheckoutCompleteStep(): void
+    {
+        $this->completePage->tryToOpen();
+
+        try {
+            $this->completePage->confirmOrder();
+        } catch (ElementNotFoundException $exception) {
+            return;
+        }
+
+        throw new UnexpectedPageException('It should not be possible to complete checkout complete step.');
+    }
+
+    /**
+     * @When /^I should see (product "[^"]+") with unit price ("[^"]+")$/
+     */
+    public function iShouldSeeWithUnitPrice(ProductInterface $product, int $unitPrice): void
+    {
+        Assert::same($this->completePage->getProductUnitPrice($product), $unitPrice);
     }
 }

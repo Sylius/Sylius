@@ -20,9 +20,6 @@ use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 
 class OrderRepository extends EntityRepository implements OrderRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function countPlacedOrders(): int
     {
         return (int) $this->createQueryBuilder('o')
@@ -34,9 +31,6 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createCartQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('o')
@@ -49,9 +43,6 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findLatest(int $count): array
     {
         return $this->createQueryBuilder('o')
@@ -64,9 +55,17 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function findLatestCart(): ?OrderInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.state = :state')
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->addOrderBy('o.checkoutCompletedAt', 'DESC')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     public function findOneByNumber(string $number): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
@@ -79,9 +78,6 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findOneByTokenValue(string $tokenValue): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
@@ -94,9 +90,19 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** @deprecated since 1.9 and  will be removed in Sylius 2.0, use src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepositoryInterface instead */
+    public function findCartByTokenValue(string $tokenValue): ?OrderInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.state = :state')
+            ->andWhere('o.tokenValue = :tokenValue')
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->setParameter('tokenValue', $tokenValue)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     public function findCartById($id): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
@@ -109,9 +115,6 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findCartsNotModifiedSince(\DateTimeInterface $terminalDate): array
     {
         return $this->createQueryBuilder('o')
@@ -119,6 +122,16 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
             ->andWhere('o.updatedAt < :terminalDate')
             ->setParameter('state', OrderInterface::STATE_CART)
             ->setParameter('terminalDate', $terminalDate)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findAllExceptCarts(): array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.state != :state')
+            ->setParameter('state', OrderInterface::STATE_CART)
             ->getQuery()
             ->getResult()
         ;

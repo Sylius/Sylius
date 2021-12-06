@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Opis
+            name: Ime
+            priority: Prednost
         promotion:
             actions: Dejanja
             add_action: Dodajte dejanje

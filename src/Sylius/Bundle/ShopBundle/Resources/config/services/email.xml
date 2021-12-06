@@ -22,6 +22,7 @@
 
         <service id="sylius.email_manager.order" class="Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManager">
             <argument type="service" id="sylius.email_sender" />
+            <argument type="service" id="sylius.mailer.order_email_manager" />
         </service>
         <service id="Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface" alias="sylius.email_manager.order" />
     </services>

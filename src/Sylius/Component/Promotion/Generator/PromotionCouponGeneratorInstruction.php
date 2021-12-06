@@ -15,35 +15,23 @@ namespace Sylius\Component\Promotion\Generator;
 
 final class PromotionCouponGeneratorInstruction implements PromotionCouponGeneratorInstructionInterface
 {
-    /** @var int */
-    private $amount = 5;
+    private ?int $amount = 5;
 
-    /** @var string|null */
-    private $prefix;
+    private ?string $prefix = null;
 
-    /** @var int */
-    private $codeLength = 6;
+    private ?int $codeLength = 6;
 
-    /** @var string|null */
-    private $suffix;
+    private ?string $suffix = null;
 
-    /** @var \DateTimeInterface|null */
-    private $expiresAt;
+    private ?\DateTimeInterface $expiresAt = null;
 
-    /** @var int|null */
-    private $usageLimit;
+    private ?int $usageLimit = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAmount(): ?int
     {
         return $this->amount;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setAmount(?int $amount): void
     {
         $this->amount = $amount;
@@ -59,17 +47,11 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
         $this->prefix = $prefix;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCodeLength(): ?int
     {
         return $this->codeLength;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCodeLength(?int $codeLength): void
     {
         $this->codeLength = $codeLength;
@@ -85,33 +67,21 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
         $this->suffix = $suffix;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExpiresAt(): ?\DateTimeInterface
     {
         return $this->expiresAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setExpiresAt(?\DateTimeInterface $expiresAt): void
     {
         $this->expiresAt = $expiresAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUsageLimit(): ?int
     {
         return $this->usageLimit;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUsageLimit(int $usageLimit): void
     {
         $this->usageLimit = $usageLimit;

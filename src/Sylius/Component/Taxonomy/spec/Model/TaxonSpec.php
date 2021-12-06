@@ -15,6 +15,7 @@ namespace spec\Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Taxonomy\Model\Taxon;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 final class TaxonSpec extends ObjectBehavior
@@ -128,16 +129,23 @@ final class TaxonSpec extends ObjectBehavior
         $this->getFullname()->shouldReturn('Category');
     }
 
-    function its_fullname_prepends_with_parents_fullname(TaxonInterface $root): void
+    function its_fullname_prepends_with_parents_fullname(): void
     {
-        $root->getFullname()->willReturn('Category');
+        $rootTaxon = new Taxon();
+        $rootTaxon->setCurrentLocale('en_US');
+        $rootTaxon->setName('Category');
+
+        $clothesTaxon = new Taxon();
+        $clothesTaxon->setCurrentLocale('en_US');
+        $clothesTaxon->setName('Clothes');
+        $clothesTaxon->setParent($rootTaxon);
+
+        $this->setCurrentLocale('en_US');
         $this->setName('T-shirts');
+        $this->setParent($clothesTaxon);
 
-        $root->addChild($this)->shouldBeCalled();
-        $this->setParent($root);
-
-        $this->getFullname()->shouldReturn('Category / T-shirts');
-        $this->getFullname(' -- ')->shouldReturn('Category -- T-shirts');
+        $this->getFullname()->shouldReturn('Category / Clothes / T-shirts');
+        $this->getFullname(' -- ')->shouldReturn('Category -- Clothes -- T-shirts');
     }
 
     function it_has_no_description_by_default(): void
@@ -208,5 +216,22 @@ final class TaxonSpec extends ObjectBehavior
         $this->addChild($taxon);
 
         $this->hasChildren()->shouldReturn(true);
+    }
+
+    function it_returns_enabled_children(
+        TaxonInterface $enabledChildTaxon,
+        TaxonInterface $disabledChildTaxon
+    ): void {
+        $enabledChildTaxon->isEnabled()->willReturn(true);
+        $enabledChildTaxon->getParent()->willReturn(null);
+        $enabledChildTaxon->setParent($this)->shouldBeCalled();
+        $this->addChild($enabledChildTaxon);
+
+        $disabledChildTaxon->isEnabled()->willReturn(false);
+        $disabledChildTaxon->getParent()->willReturn(null);
+        $disabledChildTaxon->setParent($this)->shouldBeCalled();
+        $this->addChild($disabledChildTaxon);
+
+        $this->getEnabledChildren()->shouldIterateAs([$enabledChildTaxon->getWrappedObject()]);
     }
 }

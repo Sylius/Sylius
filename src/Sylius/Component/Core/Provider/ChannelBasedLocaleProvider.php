@@ -21,11 +21,9 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 final class ChannelBasedLocaleProvider implements LocaleProviderInterface
 {
-    /** @var ChannelContextInterface */
-    private $channelContext;
+    private ChannelContextInterface $channelContext;
 
-    /** @var string */
-    private $defaultLocaleCode;
+    private string $defaultLocaleCode;
 
     public function __construct(ChannelContextInterface $channelContext, string $defaultLocaleCode)
     {
@@ -33,9 +31,6 @@ final class ChannelBasedLocaleProvider implements LocaleProviderInterface
         $this->defaultLocaleCode = $defaultLocaleCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAvailableLocalesCodes(): array
     {
         try {
@@ -54,9 +49,6 @@ final class ChannelBasedLocaleProvider implements LocaleProviderInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultLocaleCode(): string
     {
         try {

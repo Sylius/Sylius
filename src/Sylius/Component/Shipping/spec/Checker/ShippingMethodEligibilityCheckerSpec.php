@@ -15,7 +15,7 @@ namespace spec\Sylius\Component\Shipping\Checker;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
+use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippableInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
@@ -23,7 +23,7 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 final class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
 {
-    function it_implements_Sylius_shipping_method_eligibility_checker_interface(): void
+    function it_implements_shipping_method_eligibility_checker_interface(): void
     {
         $this->shouldImplement(ShippingMethodEligibilityCheckerInterface::class);
     }

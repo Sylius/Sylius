@@ -17,7 +17,9 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
@@ -25,23 +27,30 @@ use Webmozart\Assert\Assert;
 
 final class ManagingShippingMethodsContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $client;
+    public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ApiClientInterface $client;
 
-    /** @var IriConverterInterface */
-    private $iriConverter;
+    private ApiClientInterface $adminUsersClient;
+
+    private ResponseCheckerInterface $responseChecker;
+
+    private IriConverterInterface $iriConverter;
+
+    private SharedStorageInterface $sharedStorage;
 
     public function __construct(
         ApiClientInterface $client,
+        ApiClientInterface $adminUsersClient,
         ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter
+        IriConverterInterface $iriConverter,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
+        $this->adminUsersClient = $adminUsersClient;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -55,8 +64,37 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @When I sort the shipping methods :sortType by name
+     * @When I switch the way shipping methods are sorted :sortType by name
+     * @Given the shipping methods are already sorted :sortType by name
+     */
+    public function iSortShippingMethodsByName(string $sortType = 'ascending'): void
+    {
+        $this->client->sort([
+            'translation.name' => self::SORT_TYPES[$sortType],
+            'localeCode' => $this->getAdminLocaleCode(),
+        ]);
+    }
+
+    /**
+     * @When I change my locale to :localeCode
+     */
+    public function iSwitchTheLocaleToTheLocale(string $localeCode): void
+    {
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $this->sharedStorage->get('administrator');
+
+        $this->adminUsersClient->buildUpdateRequest((string) $adminUser->getId());
+
+        $this->adminUsersClient->updateRequestData(['localeCode' => $localeCode]);
+        $this->adminUsersClient->update();
+    }
+
+    /**
      * @When I am browsing shipping methods
      * @When I want to browse shipping methods
+     * @When I try to browse shipping methods
+     * @When I browse shipping methods
      */
     public function iBrowseShippingMethods(): void
     {
@@ -73,6 +111,7 @@ final class ManagingShippingMethodsContext implements Context
 
     /**
      * @When I want to create a new shipping method
+     * @When I try to create a new shipping method
      */
     public function iWantToCreateANewShippingMethod(): void
     {
@@ -80,8 +119,31 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I add it
-     * @When I try to add it
+     * @When I try to create a new shipping method with valid data
+     */
+    public function iTryToCreateANewShippingMethodWithValidData(): void
+    {
+        $this->client->buildCreateRequest();
+        $this->client->setRequestData([
+            'code' => 'FED_EX_CARRIER',
+            'position' => 0,
+            'translations' => ['en_US' => ['name' => 'FedEx Carrier', 'locale' => 'en_US']],
+            'zone' => $this->iriConverter->getIriFromItem($this->sharedStorage->get('zone')),
+            'calculator' => 'Flat rate per shipment',
+            'configuration' => [$this->sharedStorage->get('channel')->getCode() => ['amount' => 50]],
+        ]);
+    }
+
+    /**
+     * @When I try to show :shippingMethod shipping method
+     */
+    public function iTryToShowShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        $this->client->show($shippingMethod->getCode());
+    }
+
+    /**
+     * @When I (try to) add it
      */
     public function iAddIt(): void
     {
@@ -171,7 +233,7 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I archive the :shippingMethod shipping method
+     * @When I (try to) archive the :shippingMethod shipping method
      */
     public function iArchiveTheShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
@@ -180,12 +242,11 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I restore the :shippingMethod shipping method
+     * @When I (try to) restore the :shippingMethod shipping method
      */
-    public function iRestoreTheShippingMethod(ShippingMethodInterface $shippingMethod): void
+    public function iTryToRestoreTheShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         $this->client->customItemAction($shippingMethod->getCode(), HttpRequest::METHOD_PATCH, 'restore');
-        $this->client->index();
     }
 
     /**
@@ -198,6 +259,7 @@ final class ManagingShippingMethodsContext implements Context
 
     /**
      * @When I want to modify a shipping method :shippingMethod
+     * @When I try to modify a shipping method :shippingMethod
      * @When /^I want to modify (this shipping method)$/
      */
     public function iWantToModifyShippingMethod(ShippingMethodInterface $shippingMethod): void
@@ -206,8 +268,7 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
+     * @When I (try to) save my changes
      */
     public function iSaveMyChanges(): void
     {
@@ -215,20 +276,12 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I start sorting shipping methods by code
+     * @When I sort the shipping methods :sortType by code
+     * @When I switch the way shipping methods are sorted :sortType by code
      */
-    public function iSortShippingMethodsByCode(): void
+    public function iSortShippingMethodsByCode(string $sortType = 'ascending'): void
     {
-        $this->client->sort(['code' => 'asc']);
-    }
-
-    /**
-     * @When I start sorting shipping methods by name
-     * @Given the shipping methods are already sorted by name
-     */
-    public function iSortShippingMethodsByName(): void
-    {
-        $this->client->sort(['translation.name' => 'asc']);
+        $this->client->sort(['code' => self::SORT_TYPES[$sortType]]);
     }
 
     /**
@@ -303,7 +356,8 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then /^(this shipping method) should no longer exist in the registry$/
      */
-    public function thisShippingMethodShouldNoLongerExistInTheRegistry(ShippingMethodInterface $shippingMethod): void {
+    public function thisShippingMethodShouldNoLongerExistInTheRegistry(ShippingMethodInterface $shippingMethod): void
+    {
         $shippingMethodName = $shippingMethod->getName();
 
         Assert::false(
@@ -321,6 +375,14 @@ final class ManagingShippingMethodsContext implements Context
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
             'Shipping method could not be created'
         );
+    }
+
+    /**
+     * @Then I should be notified that my access has been denied
+     */
+    public function iShouldBeNotifiedThatMyAccessHasBeenDenied(): void
+    {
+        Assert::true($this->responseChecker->hasAccessDenied($this->client->getLastResponse()));
     }
 
     /**
@@ -454,6 +516,8 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iShouldSeeShippingMethodOnTheList(int $amount): void
     {
+        $this->client->index();
+
         $response = $this->client->getLastResponse();
         $itemsCount = $this->responseChecker->countCollectionItems($response);
 
@@ -521,7 +585,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         $shippingMethods = $this->responseChecker->getCollection($this->client->getLastResponse());
 
-        Assert::same(reset($shippingMethods)['translations']['en_US']['name'], $value);
+        Assert::same(reset($shippingMethods)['translations'][$this->getAdminLocaleCode()]['name'], $value);
     }
 
     /**
@@ -540,5 +604,15 @@ final class ManagingShippingMethodsContext implements Context
     public function iShouldBeViewingNonArchivalShippingMethods(): void
     {
         // Intentionally left blank
+    }
+
+    private function getAdminLocaleCode(): string
+    {
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $this->sharedStorage->get('administrator');
+
+        $response = $this->adminUsersClient->show((string) $adminUser->getId());
+
+        return $this->responseChecker->getValue($response, 'localeCode');
     }
 }

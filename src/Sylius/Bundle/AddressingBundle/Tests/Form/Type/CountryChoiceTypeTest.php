@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Tests\Form\Type;
 
+use Prophecy\Prophecy\ObjectProphecy;
 use PHPUnit\Framework\Assert;
 use Prophecy\Prophecy\ProphecyInterface;
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryChoiceType;
@@ -24,8 +25,7 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 final class CountryChoiceTypeTest extends TypeTestCase
 {
-    /** @var ProphecyInterface|RepositoryInterface */
-    private $countryRepository;
+    private ObjectProphecy $countryRepository;
 
     /** @var ProphecyInterface|CountryInterface */
     private $france;
@@ -33,9 +33,6 @@ final class CountryChoiceTypeTest extends TypeTestCase
     /** @var ProphecyInterface|CountryInterface */
     private $poland;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp(): void
     {
         $this->countryRepository = $this->prophesize(RepositoryInterface::class);
@@ -55,10 +52,7 @@ final class CountryChoiceTypeTest extends TypeTestCase
         parent::setUp();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getExtensions():array
+    protected function getExtensions(): array
     {
         $type = new CountryChoiceType($this->countryRepository->reveal());
 
@@ -116,8 +110,8 @@ final class CountryChoiceTypeTest extends TypeTestCase
             $this->poland->reveal(),
         ]);
 
-        $this->assertChoicesLabels(['Poland'], ['choice_filter' => function (CountryInterface $country): bool {
-            return $country->getName() === 'Poland';
+        $this->assertChoicesLabels(['Poland'], ['choice_filter' => static function (?CountryInterface $country): bool {
+            return $country !== null && $country->getName() === 'Poland';
         }]);
     }
 
@@ -126,7 +120,7 @@ final class CountryChoiceTypeTest extends TypeTestCase
         $form = $this->factory->create(CountryChoiceType::class, null, $formConfiguration);
         $view = $form->createView();
 
-        Assert::assertSame($expectedLabels, array_map(function (ChoiceView $choiceView): string {
+        Assert::assertSame($expectedLabels, array_map(static function (ChoiceView $choiceView): string {
             return $choiceView->label;
         }, $view->vars['choices']));
     }

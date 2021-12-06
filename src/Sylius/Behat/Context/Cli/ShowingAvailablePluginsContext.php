@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Cli;
 
+use Symfony\Component\Console\Command\Command;
 use Behat\Behat\Context\Context;
 use Sylius\Bundle\CoreBundle\Command\SetupCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -22,17 +23,13 @@ use Webmozart\Assert\Assert;
 
 final class ShowingAvailablePluginsContext implements Context
 {
-    /** @var KernelInterface */
-    private $kernel;
+    private KernelInterface $kernel;
 
-    /** @var Application */
-    private $application;
+    private ?Application $application = null;
 
-    /** @var CommandTester */
-    private $tester;
+    private ?CommandTester $tester = null;
 
-    /** @var SetupCommand */
-    private $command;
+    private ?Command $command = null;
 
     public function __construct(KernelInterface $kernel)
     {

@@ -17,6 +17,14 @@ sylius:
             already_used: Ez az e-mail már használatban van. Kérjük, jelentkezzen be vagy igényeljen új jelszót.
             max: E-mail nem lehet {{ limit }} karakternél hosszabb.
             not_blank: Kérjük adja meg e-mail címét!
-            invalid: Ez az e-mail cím érvénytelen.
+            invalid: Ez az email cím érvénytelen.
             unique: Ez az e-mail cím már használatban van.
             registered: Ez az e-mail már regisztrálva van. Kérjük, jelentkezzen be vagy igényeljen új jelszót.
+    customer_group:
+        code:
+            regex: Az ügyfélcsoport kódja csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.
+            unique: Az ügyfélcsoport kódjának egyedinek kell lennie.
+        name:
+            max: Az ügyfélcsoport megnevezése nem lehet több mint {{ limit }} karakter.
+            min: Az ügyfélcsoport megnevezésének legalább {{ limit }} karakter hosszúságúnak kell lennie.
+            not_blank: Kérjük adja meg az ügyfélcsoport megnevezését.

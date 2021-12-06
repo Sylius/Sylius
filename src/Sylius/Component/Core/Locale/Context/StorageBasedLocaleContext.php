@@ -22,14 +22,11 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 final class StorageBasedLocaleContext implements LocaleContextInterface
 {
-    /** @var ChannelContextInterface */
-    private $channelContext;
+    private ChannelContextInterface $channelContext;
 
-    /** @var LocaleStorageInterface */
-    private $localeStorage;
+    private LocaleStorageInterface $localeStorage;
 
-    /** @var LocaleProviderInterface */
-    private $localeProvider;
+    private LocaleProviderInterface $localeProvider;
 
     public function __construct(
         ChannelContextInterface $channelContext,
@@ -41,9 +38,6 @@ final class StorageBasedLocaleContext implements LocaleContextInterface
         $this->localeProvider = $localeProvider;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLocaleCode(): string
     {
         $availableLocalesCodes = $this->localeProvider->getAvailableLocalesCodes();

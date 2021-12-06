@@ -26,6 +26,13 @@ final class AttributesElement extends Element implements AttributesElementInterf
         return $attributeValue === $value;
     }
 
+    public function hasNonTranslatableAttribute(string $attribute, string $value): bool
+    {
+        $attributeValue = $this->getDocument()->find('css', sprintf('.ui.segment[data-tab="non-translatable"] tr:contains("%s") td:nth-child(2)', $attribute))->getText();
+
+        return $attributeValue === $value;
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

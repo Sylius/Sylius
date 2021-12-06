@@ -31,13 +31,13 @@ use Webmozart\Assert\Assert;
 
 class Kernel extends HttpKernel
 {
-    public const VERSION = '1.8.0-DEV';
+    public const VERSION = '1.11.0-DEV';
 
-    public const VERSION_ID = '10800';
+    public const VERSION_ID = '11100';
 
     public const MAJOR_VERSION = '1';
 
-    public const MINOR_VERSION = '8';
+    public const MINOR_VERSION = '11';
 
     public const RELEASE_VERSION = '0';
 
@@ -50,9 +50,6 @@ class Kernel extends HttpKernel
         parent::__construct($environment, $debug);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function registerBundles(): array
     {
         $bundles = [
@@ -100,7 +97,7 @@ class Kernel extends HttpKernel
             new \Liip\ImagineBundle\LiipImagineBundle(),
             new \Payum\Bundle\PayumBundle\PayumBundle(),
             new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new \BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
 
             new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
@@ -118,9 +115,6 @@ class Kernel extends HttpKernel
         return $bundles;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getContainerBaseClass(): string
     {
         if (in_array($this->getEnvironment(), ['test', 'test_cached'], true)) {
@@ -130,9 +124,6 @@ class Kernel extends HttpKernel
         return parent::getContainerBaseClass();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getContainerLoader(ContainerInterface $container): LoaderInterface
     {
         /** @var ContainerBuilder $container */
@@ -151,9 +142,6 @@ class Kernel extends HttpKernel
         return new DelegatingLoader($resolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load($this->getRootDir() . '/config/config_' . $this->getEnvironment() . '.yml');
@@ -164,9 +152,6 @@ class Kernel extends HttpKernel
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCacheDir(): string
     {
         if ($this->isVagrantEnvironment()) {
@@ -176,9 +161,6 @@ class Kernel extends HttpKernel
         return dirname($this->getRootDir()) . '/var/cache/' . $this->getEnvironment();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLogDir(): string
     {
         if ($this->isVagrantEnvironment()) {

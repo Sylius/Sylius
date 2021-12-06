@@ -22,17 +22,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ShipmentType extends AbstractType
 {
-    /** @var string */
-    private $dataClass;
+    private string $dataClass;
 
     public function __construct(string $dataClass)
     {
         $this->dataClass = $dataClass;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -49,9 +45,6 @@ final class ShipmentType extends AbstractType
             });
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -61,9 +54,6 @@ final class ShipmentType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_checkout_shipment';

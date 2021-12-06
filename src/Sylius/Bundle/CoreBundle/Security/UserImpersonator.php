@@ -22,17 +22,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 final class UserImpersonator implements UserImpersonatorInterface
 {
-    /** @var SessionInterface */
-    private $session;
+    private SessionInterface $session;
 
-    /** @var string */
-    private $sessionTokenParameter;
+    private string $sessionTokenParameter;
 
-    /** @var string */
-    private $firewallContextName;
+    private string $firewallContextName;
 
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(SessionInterface $session, string $firewallContextName, EventDispatcherInterface $eventDispatcher)
     {
@@ -42,15 +38,27 @@ final class UserImpersonator implements UserImpersonatorInterface
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function impersonate(UserInterface $user): void
     {
-        $token = new UsernamePasswordToken($user, $user->getPassword(), $this->firewallContextName, $user->getRoles());
+        /** @deprecated parameter credential was deprecated in Symfony 5.4, so in Sylius 1.11 too, in Sylius 2.0 providing 4 arguments will be prohibited. */
+        if (3 === (new \ReflectionClass(UsernamePasswordToken::class))->getConstructor()->getNumberOfParameters()) {
+            $token = new UsernamePasswordToken(
+                $user,
+                $this->firewallContextName,
+                array_map(/** @param object|string $role */ static function ($role): string { return (string) $role; }, $user->getRoles())
+            );
+        } else {
+            $token = new UsernamePasswordToken(
+                $user,
+                $user->getPassword(),
+                $this->firewallContextName,
+                array_map(/** @param object|string $role */ static function ($role): string { return (string) $role; }, $user->getRoles())
+            );
+        }
+
         $this->session->set($this->sessionTokenParameter, serialize($token));
         $this->session->save();
 
-        $this->eventDispatcher->dispatch(UserEvents::SECURITY_IMPERSONATE, new UserEvent($user));
+        $this->eventDispatcher->dispatch(new UserEvent($user), UserEvents::SECURITY_IMPERSONATE);
     }
 }

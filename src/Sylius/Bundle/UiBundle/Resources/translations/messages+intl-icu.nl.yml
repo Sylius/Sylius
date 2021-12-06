@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    ui:
+        item.choice: '{count, plural, =0 {} one {, 1 item} other {# items}}'
+        overall_this_customer_has_placed_orders_across_all_channels.choice: '{count, plural, =0 {Deze klant heeft geen bestelling geplaatst} one {Deze klant heeft een bestelling geplaatst} other {Over het geheel genomen heeft deze klant # bestellingen geplaatst via alle kanalen}}'

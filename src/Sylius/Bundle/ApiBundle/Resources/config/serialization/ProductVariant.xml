@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Sylius\Component\Core\Model\ProductVariant">
+        <attribute name="id">
+            <group>admin:product_variant:read</group>
+            <group>shop:product_variant:read</group>
+        </attribute>
+        <attribute name="code">
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>shop:product_variant:read</group>
+        </attribute>
+        <attribute name="product">
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>shop:product_variant:read</group>
+        </attribute>
+        <attribute name="translations">
+            <group>shop:order:account:read</group>
+            <group>admin:product_variant:read</group>
+            <group>shop:product_variant:read</group>
+        </attribute>
+        <attribute name="optionValues">
+            <group>admin:product_variant:read</group>
+            <group>shop:product_variant:read</group>
+        </attribute>
+        <attribute name="channelPricings">
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:update</group>
+        </attribute>
+    </class>
+</serializer>

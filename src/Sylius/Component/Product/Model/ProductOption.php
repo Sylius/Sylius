@@ -30,10 +30,14 @@ class ProductOption implements ProductOptionInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
+    /**
+     * @var string|null
+     */
     protected $code;
 
-    /** @var int */
+    /**
+     * @var int|null
+     */
     protected $position;
 
     /**
@@ -58,73 +62,46 @@ class ProductOption implements ProductOptionInterface
         return (string) $this->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): ?string
     {
         return $this->getTranslation()->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName(?string $name): void
     {
         $this->getTranslation()->setName($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPosition(): ?int
     {
         return $this->position;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPosition(?int $position): void
     {
         $this->position = $position;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getValues(): Collection
     {
         return $this->values;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addValue(ProductOptionValueInterface $value): void
     {
         if (!$this->hasValue($value)) {
@@ -133,9 +110,6 @@ class ProductOption implements ProductOptionInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeValue(ProductOptionValueInterface $value): void
     {
         if ($this->hasValue($value)) {
@@ -144,9 +118,6 @@ class ProductOption implements ProductOptionInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasValue(ProductOptionValueInterface $value): bool
     {
         return $this->values->contains($value);
@@ -163,9 +134,6 @@ class ProductOption implements ProductOptionInterface
         return $translation;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function createTranslation(): ProductOptionTranslationInterface
     {
         return new ProductOptionTranslation();

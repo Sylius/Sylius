@@ -40,6 +40,16 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return 'Yes' === $coupons->getText();
     }
 
+    public function specifyFilterType(string $field, string $type): void
+    {
+        $this->getDocument()->fillField(sprintf('criteria_%s_type', $field), $type);
+    }
+
+    public function specifyFilterValue(string $field, string $value): void
+    {
+        $this->getDocument()->fillField(sprintf('criteria_%s_value', $field), $value);
+    }
+
     private function getPromotionFieldsWithHeader(PromotionInterface $promotion, string $header): NodeElement
     {
         $tableAccessor = $this->getTableAccessor();

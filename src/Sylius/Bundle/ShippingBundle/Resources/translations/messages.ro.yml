@@ -11,7 +11,7 @@ sylius:
         shipment:
             state: Status
             states:
-                checkout: Trimite comanda
+                checkout: Finalizare comandă
                 pending: În așteptare
                 ready: Gata
                 shipped: Expediată
@@ -29,6 +29,7 @@ sylius:
             description: Descriere
             name: Nume produs
         shipping_method:
+            add_rule: Adaugă regulă
             calculator: Calculator
             category: Categorie
             category_requirement: Cerința categoriei
@@ -41,5 +42,11 @@ sylius:
             match_none_category_requirement: Nicio unitate nu trebuie să aibă aceeași categorie cu metoda
             name: Nume produs
             position: Poziţie
+            rules: Reguli
             tax_category: Categoria de taxă
             translations: Traduceri
+        shipping_method_rule:
+            type: Tip
+            total: Total
+            weight: Greutate
+            amount: Valoare

@@ -28,5 +28,5 @@ Sylius\Component\User\Model\User:
             groups: [Default, Detailed]
         roles:
             expose: true
-            type: array
+            type: iterable
             groups: [Detailed]

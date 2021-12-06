@@ -57,4 +57,14 @@ interface AdjustmentInterface extends ResourceInterface, TimestampableInterface
     public function getOriginCode(): ?string;
 
     public function setOriginCode(?string $originCode): void;
+
+    public function getOrder(): ?OrderInterface;
+
+    public function getOrderItem(): ?OrderItemInterface;
+
+    public function getOrderItemUnit(): ?OrderItemUnitInterface;
+
+    public function getDetails(): array;
+
+    public function setDetails(array $details): void;
 }
