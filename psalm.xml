@@ -119,6 +119,7 @@
                 <referencedMethod name="Symfony\Component\Security\Core\User\UserInterface::getUsername" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedMethod name="Symfony\Component\Security\Core\User\UserProviderInterface::loadUserByUsername" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedMethod name="Faker\Generator::__get"/>
+                <referencedMethod name="Symfony\Component\Security\Core\Authentication\Token\AbstractToken::isAuthenticated" /> <!-- deprecated in Symfony 5.4 -->
             </errorLevel>
         </DeprecatedMethod>
 
@@ -202,6 +203,7 @@
                 <referencedFunction name="Symfony\Contracts\EventDispatcher\EventDispatcherInterface::dispatch" />
                 <referencedFunction name="Symfony\Component\HttpKernel\Config\FileLocator::__construct" />
                 <referencedFunction name="Symfony\Contracts\EventDispatcher\EventDispatcherInterface::dispatch" />
+                <referencedFunction name="Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken::__construct" /> <!-- removed parameter in Symfony 5.4 -->
             </errorLevel>
             <errorLevel type="suppress">
                 <referencedFunction name="Doctrine\ORM\Query\Expr::andX" />
@@ -225,6 +227,7 @@
             <errorLevel type="info">
                 <referencedFunction name="Symfony\Component\EventDispatcher\EventDispatcherInterface::dispatch" />
                 <referencedFunction name="SyliusLabs\AssociationHydrator\AssociationHydrator::__construct" />
+                <referencedFunction name="Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken::__construct" />
             </errorLevel>
         </InvalidArgument>
 

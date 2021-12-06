@@ -3,6 +3,17 @@
 This document explains why certain conflicts were added to `composer.json` and
 references related issues.
 
+ - `symfony/cache": "^6.0`, "symfony/amqp-messenger": "^6.0", "symfony/doctrine-messenger": "^6.0", 
+"symfony/error-handler": "^6.0", "symfony/redis-messenger": "^6.0", "symfony/stopwatch": "^6.0", "symfony/twig-bridge": "^6.0", 
+"symfony/var-dumper": "^6.0", "symfony/var-exporter": "^6.0",:
+
+   Symfony in version 5.2 is installing amqp-messenger, doctrine-messenger, error-handler, redis-messenger, stopwatch, 
+twig-bridge, var-dumper, var-exporter 6.0, which is not compatible with the current version of Sylius. This is not happening for Sf4.4, Sf5.3, Sf5.4. 
+
+ - `symfony/password-hasher": "^6.0`:
+
+   Symfony in version 5.3 change password hashing logic, and in version 6.0 they removed BC layer
+
  - `doctrine/doctrine-bundle:2.3.0`:
 
    This version makes Gedmo Doctrine Extensions fail (tree and position behaviour mostly).
@@ -37,13 +48,13 @@ references related issues.
 
    Probably introduced in: https://github.com/symfony/symfony/pull/40811
 
-- `doctrine/orm:2.10.0`:
+ - `doctrine/orm:2.10.0`:
 
-  This version causes a problem with the creation of nested taxons by throwing the exception:
+   This version causes a problem with the creation of nested taxons by throwing the exception:
   
-  `Gedmo\Exception\UnexpectedValueException: Root cannot be changed manually, change parent instead in vendor/gedmo/doctrine-extensions/src/Tree/Strategy/ORM/Nested.php:145`
+   `Gedmo\Exception\UnexpectedValueException: Root cannot be changed manually, change parent instead in vendor/gedmo/doctrine-extensions/src/Tree/Strategy/ORM/Nested.php:145`
 
-  References: https://github.com/doctrine-extensions/DoctrineExtensions/issues/2155
+   References: https://github.com/doctrine-extensions/DoctrineExtensions/issues/2155
 
 In this section we keep track of the reasons, why some restrictions were added to the `requires` section of `composer.json`
 
