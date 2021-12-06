@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Applicator;
 
 use Sylius\Bundle\CoreBundle\Calculator\CatalogPromotionPriceCalculatorInterface;
-use Sylius\Bundle\CoreBundle\Formatter\AppliedPromotionInformationFormatterInterface;
 use Sylius\Component\Core\Exception\ActionBasedPriceCalculatorNotFoundException;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -26,14 +25,8 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
 {
     private CatalogPromotionPriceCalculatorInterface $priceCalculator;
 
-    private AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter;
-
-    public function __construct(
-        CatalogPromotionPriceCalculatorInterface $priceCalculator,
-        AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter
-    ) {
+    public function __construct(CatalogPromotionPriceCalculatorInterface $priceCalculator) {
         $this->priceCalculator = $priceCalculator;
-        $this->appliedPromotionInformationFormatter = $appliedPromotionInformationFormatter;
     }
 
     public function applyOnVariant(

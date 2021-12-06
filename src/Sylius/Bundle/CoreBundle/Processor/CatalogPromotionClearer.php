@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Processor;
 
 use SM\Factory\FactoryInterface;
-use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ChannelPricingRepositoryInterface;
@@ -25,17 +24,13 @@ final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
 {
     private ChannelPricingRepositoryInterface $channelPricingRepository;
 
-    private CatalogPromotionRepositoryInterface $catalogPromotionRepository;
-
     private FactoryInterface $stateMachine;
 
     public function __construct(
         ChannelPricingRepositoryInterface $channelPricingRepository,
-        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         FactoryInterface $stateMachine
     ) {
         $this->channelPricingRepository = $channelPricingRepository;
-        $this->catalogPromotionRepository = $catalogPromotionRepository;
         $this->stateMachine = $stateMachine;
     }
 
