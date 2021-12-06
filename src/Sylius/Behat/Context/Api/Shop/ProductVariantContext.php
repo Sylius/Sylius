@@ -17,8 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
@@ -137,14 +135,15 @@ final class ProductVariantContext implements Context
         int $price,
         string $promotionName
     ): void {
-        $content = $this->findVariant($variant);
+        $productVariant = $this->findVariant($variant);
+        $catalogPromotionResponse = $this->client->showByIri($productVariant['appliedPromotions'][0]);
+        $catalogPromotion = $this->responseChecker->getResponseContent($catalogPromotionResponse);
 
-        Assert::same(sizeof($content['appliedPromotions']), 1);
-        Assert::same($content['price'], $price);
-        Assert::same($content['originalPrice'], $originalPrice);
-        $catalogPromotionCode = StringInflector::nameToCode($promotionName);
-        Assert::same($content['appliedPromotions'][$catalogPromotionCode]['translations']['en_US']['name'], $promotionName);
-        Assert::same($content['appliedPromotions'][$catalogPromotionCode]['translations']['en_US']['description'], $promotionName . ' description');    }
+        Assert::same(sizeof($productVariant['appliedPromotions']), 1);
+        Assert::same($productVariant['price'], $price);
+        Assert::same($productVariant['originalPrice'], $originalPrice);
+        Assert::same($catalogPromotion['name'], $promotionName);
+    }
 
     /**
      * @Then /^the visitor should(?:| still) see that the ("[^"]+" variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/
