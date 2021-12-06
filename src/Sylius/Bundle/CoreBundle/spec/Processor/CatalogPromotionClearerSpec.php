@@ -24,16 +24,14 @@ use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ChannelPricingRepositoryInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
-use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 
 final class CatalogPromotionClearerSpec extends ObjectBehavior
 {
     function let(
         ChannelPricingRepositoryInterface $channelPricingRepository,
-        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         FactoryInterface $stateMachine
     ): void {
-        $this->beConstructedWith($channelPricingRepository, $catalogPromotionRepository, $stateMachine);
+        $this->beConstructedWith($channelPricingRepository, $stateMachine);
     }
 
     function it_implements_catalog_promotion_clearer_interface(): void
@@ -43,7 +41,6 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
 
     function it_clears_channel_pricings_with_catalog_promotions_applied(
         ChannelPricingRepositoryInterface $channelPricingRepository,
-        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         FactoryInterface $stateMachine,
         ChannelPricingInterface $firstChannelPricing,
         ChannelPricingInterface $secondChannelPricing,

@@ -18,7 +18,6 @@ use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ChannelPricingRepositoryInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
-use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 
 final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
 {
