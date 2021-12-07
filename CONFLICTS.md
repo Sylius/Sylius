@@ -9,10 +9,14 @@ references related issues.
 
    Symfony in version 5.2 is installing amqp-messenger, doctrine-messenger, error-handler, redis-messenger, stopwatch, 
 twig-bridge, var-dumper, var-exporter 6.0, which is not compatible with the current version of Sylius. This is not happening for Sf4.4, Sf5.3, Sf5.4. 
+   
+   References: https://github.com/Sylius/Sylius/pull/13357
 
  - `symfony/password-hasher": "^6.0`:
 
    Symfony in version 5.3 change password hashing logic, and in version 6.0 they removed BC layer
+   
+   References: https://github.com/Sylius/Sylius/pull/13358
 
  - `doctrine/doctrine-bundle:2.3.0`:
 
