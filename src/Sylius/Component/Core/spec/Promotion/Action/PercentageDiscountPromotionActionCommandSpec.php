@@ -16,7 +16,7 @@ namespace spec\Sylius\Component\Core\Promotion\Action;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
+use Sylius\Component\Core\Distributor\MinimumPriceDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -32,10 +32,10 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
 {
     function let(
-        ProportionalIntegerDistributorInterface $distributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
+        MinimumPriceDistributorInterface $minimumPriceDistributor
     ): void {
-        $this->beConstructedWith($distributor, $unitsPromotionAdjustmentsApplicator);
+        $this->beConstructedWith($unitsPromotionAdjustmentsApplicator, $minimumPriceDistributor);
     }
 
     function it_implements_a_promotion_action_interface(): void
@@ -48,7 +48,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemInterface $firstItem,
         OrderItemInterface $secondItem,
         PromotionInterface $promotion,
-        ProportionalIntegerDistributorInterface $distributor,
+        MinimumPriceDistributorInterface $minimumPriceDistributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
         ProductVariantInterface $productVariantOne,
         ProductVariantInterface $productVariantTwo,
@@ -76,7 +76,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
 
         $order->getPromotionSubjectTotal()->willReturn(10000);
 
-        $distributor->distribute([200, 800], -1000)->willReturn([-200, -800]);
+        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -1000, $channel)->willReturn([-200, -800]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-200, -800])->shouldBeCalled();
 
         $this->execute($order, ['percentage' => 0.1], $promotion)->shouldReturn(true);
@@ -87,7 +87,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemInterface $firstItem,
         OrderItemInterface $secondItem,
         PromotionInterface $promotion,
-        ProportionalIntegerDistributorInterface $distributor,
+        MinimumPriceDistributorInterface $minimumPriceDistributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
         ProductVariantInterface $productVariantOne,
         ProductVariantInterface $productVariantTwo,
@@ -115,9 +115,8 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
 
         $order->getPromotionSubjectTotal()->willReturn(10000);
 
-        $distributor->distribute([200, 800], -1000)->willReturn([-200, -800]);
+        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -1000, $channel)->willReturn([-100, -800]);
 
-        $distributor->distribute([800], -900)->willReturn([-800]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-100, -800])->shouldBeCalled();
 
         $this->execute($order, ['percentage' => 0.1], $promotion)->shouldReturn(true);
@@ -134,12 +133,12 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
     function it_does_not_apply_discount_if_adjustment_amount_would_be_0(
         OrderInterface $order,
         PromotionInterface $promotion,
-        ProportionalIntegerDistributorInterface $distributor
+        MinimumPriceDistributorInterface $minimumPriceDistributor
     ): void {
         $order->countItems()->willReturn(0);
 
         $order->getPromotionSubjectTotal()->willReturn(0);
-        $distributor->distribute(Argument::any())->shouldNotBeCalled();
+        $minimumPriceDistributor->distribute(Argument::any())->shouldNotBeCalled();
 
         $this->execute($order, ['percentage' => 0.1], $promotion)->shouldReturn(false);
     }

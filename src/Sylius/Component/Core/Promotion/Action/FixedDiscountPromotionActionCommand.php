@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Promotion\Action;
 
-use Sylius\Component\Core\Distributor\MinimumPriceDistributor;
+use Sylius\Component\Core\Distributor\MinimumPriceDistributorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -26,11 +26,11 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
 
     private UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator;
 
-    private MinimumPriceDistributor $minimumPriceDistributor;
+    private MinimumPriceDistributorInterface $minimumPriceDistributor;
 
     public function __construct(
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
-        MinimumPriceDistributor $minimumPriceDistributor
+        MinimumPriceDistributorInterface $minimumPriceDistributor
     ) {
         $this->unitsPromotionAdjustmentsApplicator = $unitsPromotionAdjustmentsApplicator;
         $this->minimumPriceDistributor = $minimumPriceDistributor;

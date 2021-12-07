@@ -16,7 +16,7 @@ namespace spec\Sylius\Component\Core\Promotion\Action;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
+use Sylius\Component\Core\Distributor\MinimumPriceDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -32,12 +32,12 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 {
     function let(
-        ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
+        MinimumPriceDistributorInterface $minimumPriceDistributor
     ): void {
         $this->beConstructedWith(
-            $proportionalIntegerDistributor,
-            $unitsPromotionAdjustmentsApplicator
+            $unitsPromotionAdjustmentsApplicator,
+            $minimumPriceDistributor
         );
     }
 
@@ -52,7 +52,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemInterface $firstItem,
         OrderItemInterface $secondItem,
         PromotionInterface $promotion,
-        ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
+        MinimumPriceDistributorInterface $minimumPriceDistributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
         ProductVariantInterface $productVariantOne,
         ProductVariantInterface $productVariantTwo,
@@ -84,7 +84,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $secondItem->getTotal()->willReturn(4000);
         $secondItem->getQuantity()->willReturn(1);
 
-        $proportionalIntegerDistributor->distribute([6000, 4000], -1000)->willReturn([-600, -400]);
+        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -1000, $channel)->willReturn([-600, -400]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-600, -400])->shouldBeCalled();
 
         $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(true);
@@ -96,7 +96,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemInterface $firstItem,
         OrderItemInterface $secondItem,
         PromotionInterface $promotion,
-        ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
+        MinimumPriceDistributorInterface $minimumPriceDistributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
         ProductVariantInterface $productVariantOne,
         ProductVariantInterface $productVariantTwo,
@@ -128,8 +128,8 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $secondItem->getTotal()->willReturn(4000);
         $secondItem->getQuantity()->willReturn(1);
 
-        $proportionalIntegerDistributor->distribute([6000, 4000], -1000)->willReturn([-400, -600]);
-        $proportionalIntegerDistributor->distribute([4000], -800)->willReturn([-800]);
+        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -1000, $channel)->willReturn([-200, -800]);
+
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-200, -800])->shouldBeCalled();
 
         $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(true);
@@ -141,7 +141,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemInterface $firstItem,
         OrderItemInterface $secondItem,
         PromotionInterface $promotion,
-        ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
+        MinimumPriceDistributorInterface $minimumPriceDistributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
         ProductVariantInterface $productVariantOne,
         ProductVariantInterface $productVariantTwo,
@@ -173,7 +173,8 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $secondItem->getTotal()->willReturn(4000);
         $secondItem->getQuantity()->willReturn(1);
 
-        $proportionalIntegerDistributor->distribute([6000, 4000], -10000)->willReturn([-6000, -4000]);
+        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -10000, $channel)->willReturn([-6000, -4000]);
+
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-6000, -4000])->shouldBeCalled();
 
         $this->execute($order, ['WEB_US' => ['amount' => 15000]], $promotion)->shouldReturn(true);
@@ -197,14 +198,14 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion,
-        ProportionalIntegerDistributorInterface $proportionalIntegerDistributor
+        MinimumPriceDistributorInterface $minimumPriceDistributor
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
         $order->countItems()->willReturn(0);
         $order->getPromotionSubjectTotal()->willReturn(0);
-        $proportionalIntegerDistributor->distribute(Argument::any())->shouldNotBeCalled();
+        $minimumPriceDistributor->distribute(Argument::any())->shouldNotBeCalled();
 
         $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(false);
     }
@@ -213,14 +214,14 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion,
-        ProportionalIntegerDistributorInterface $proportionalIntegerDistributor
+        MinimumPriceDistributorInterface $minimumPriceDistributor
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
         $order->countItems()->willReturn(0);
         $order->getPromotionSubjectTotal()->willReturn(1000);
-        $proportionalIntegerDistributor->distribute(Argument::any())->shouldNotBeCalled();
+        $minimumPriceDistributor->distribute(Argument::any())->shouldNotBeCalled();
 
         $this->execute($order, ['WEB_US' => ['amount' => 0]], $promotion)->shouldReturn(false);
     }
