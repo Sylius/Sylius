@@ -24,7 +24,8 @@
                     </div>
                 {% endif %}
             </td>
-            <td class="sylius-product-variant-price" data-applied-promotions="{{ channelPricing.appliedPromotions|json_encode }}"  {% if variant|sylius_has_discount({'channel': sylius.channel}) %}data-original-price="{{ money.calculateOriginalPrice(variant) }}"{% endif %}>
+            {% set appliedPromotions = channelPricing.appliedPromotions|map(promotion => ({'name': promotion.name, 'description': promotion.description})) %}
+            <td class="sylius-product-variant-price" data-applied-promotions="{{ appliedPromotions|json_encode }}"  {% if variant|sylius_has_discount({'channel': sylius.channel}) %}data-original-price="{{ money.calculateOriginalPrice(variant) }}"{% endif %}>
                 {{ money.calculatePrice(variant) }}
             </td>
             <td class="right aligned">

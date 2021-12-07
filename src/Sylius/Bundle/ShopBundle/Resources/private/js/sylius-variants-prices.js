@@ -9,17 +9,15 @@
 
 import $ from 'jquery';
 
-function formatAppliedPromotions(appliedPromotions, locale = 'en_US') {
+function formatAppliedPromotions(appliedPromotions) {
   let appliedPromotionsElement = '';
   $('#appliedPromotions').html('');
 
   if (appliedPromotions !== '[]') {
     $.each(appliedPromotions, (index, promotion) => {
-      if (promotion['translations'][locale].description !== null) {
-        appliedPromotionsElement += `<div class="ui blue label promotion_label" style="margin: 1rem 0;"><div class="row ui small sylius_catalog_promotion">${promotion['translations'][locale].name} - ${promotion['translations'][locale].description}</div></div>`;
-      } else {
-        appliedPromotionsElement += `<div class="ui blue label promotion_label" style="margin: 1rem 0;"><div class="row ui small sylius_catalog_promotion">${promotion['translations'][locale].name}</div></div>`;
-      }
+      let promotionInfo = promotion.name;
+      promotionInfo += promotion.description ? ` - ${promotion.description}` : '';
+      appliedPromotionsElement += `<div class="ui blue label promotion_label" style="margin: 1rem 0;"><div class="row ui small sylius_catalog_promotion">${promotionInfo}</div></div>`;
     });
     $('#appliedPromotions').html(appliedPromotionsElement);
   }
@@ -37,7 +35,6 @@ const handleProductOptionsChange = function handleProductOptionsChange() {
 
     const price = $('#sylius-variants-pricing').find(selector).attr('data-value');
     const originalPrice = $('#sylius-variants-pricing').find(selector).attr('data-original-price');
-    const locale = $('#appliedPromotions').attr('data-applied-promotions-locale');
     let appliedPromotions = $('#sylius-variants-pricing').find(selector).attr('data-applied_promotions');
     if (appliedPromotions !== undefined) {
       appliedPromotions = JSON.parse(appliedPromotions);
@@ -53,7 +50,7 @@ const handleProductOptionsChange = function handleProductOptionsChange() {
         $('#product-original-price').css('display', 'none');
       }
 
-      formatAppliedPromotions(appliedPromotions, locale);
+      formatAppliedPromotions(appliedPromotions);
     } else {
       $('#product-price').text($('#sylius-variants-pricing').attr('data-unavailable-text'));
       $('button[type=submit]').attr('disabled', 'disabled');
@@ -66,14 +63,13 @@ const handleProductVariantsChange = function handleProductVariantsChange() {
     const priceRow = $(event.currentTarget).parents('tr').find('.sylius-product-variant-price');
     const price = priceRow.text();
     const originalPrice = priceRow.attr('data-original-price');
-    const locale = $('#appliedPromotions').attr('data-applied-promotions-locale');
     let appliedPromotions = priceRow.attr('data-applied-promotions');
     if (appliedPromotions !== '[]') {
       appliedPromotions = JSON.parse(appliedPromotions);
     }
 
     $('#product-price').text(price);
-    formatAppliedPromotions(appliedPromotions, locale);
+    formatAppliedPromotions(appliedPromotions);
 
     if (originalPrice !== undefined) {
       $('#product-original-price').css('display', 'inline').html(`<del>${originalPrice}</del>`);
