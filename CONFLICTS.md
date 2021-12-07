@@ -3,13 +3,6 @@
 This document explains why certain conflicts were added to `composer.json` and
 references related issues.
 
- - `symfony/cache": "^6.0`, "symfony/amqp-messenger": "^6.0", "symfony/doctrine-messenger": "^6.0", 
-"symfony/error-handler": "^6.0", "symfony/redis-messenger": "^6.0", "symfony/stopwatch": "^6.0", "symfony/twig-bridge": "^6.0", 
-"symfony/var-dumper": "^6.0", "symfony/var-exporter": "^6.0",:
-
-   Symfony in version 5.2 is installing amqp-messenger, doctrine-messenger, error-handler, redis-messenger, stopwatch, 
-twig-bridge, var-dumper, var-exporter 6.0, which is not compatible with the current version of Sylius. This is not happening for Sf4.4, Sf5.3, Sf5.4. 
-
  - `symfony/password-hasher": "^6.0`:
 
    Symfony in version 5.3 change password hashing logic, and in version 6.0 they removed BC layer
