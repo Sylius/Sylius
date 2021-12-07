@@ -16,6 +16,11 @@ Please note that those priorities are being executed in ascending order. You can
 Be aware that if those priorities were customized, this would lead to problems. 
 You should check and adjust priorities on your application.
 
+### Minimum price & Promotions
+
+We added MinimumPrice to channelPricings entity, this price should be taken into account when customizing any promotions in Sylius.
+All calculating and distributing services provided by default depends on MinimumPrice.
+
 ### API v2
 
 For changes according to the API v2, please visit [API v2 upgrade file](UPGRADE-API-1.11.md).
