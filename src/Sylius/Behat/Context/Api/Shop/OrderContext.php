@@ -301,14 +301,7 @@ final class OrderContext implements Context
      */
     public function theShouldHaveUnitPricesDiscountedFor(ProductInterface $product, int $amountOne, int $amountTwo, int $amountThree): void
     {
-        $amounts = [$amountOne, $amountTwo, $amountThree];
-        $itemId = $this->geOrderItemIdForProductInCart($product, $this->sharedStorage->get('cart_token'));
-        $adjustments = $this->getAdjustmentsForOrderItem($itemId);
-
-        /** @var int $index */
-        foreach ($adjustments as $index => $adjustment) {
-            Assert::same(-$amounts[$index], $adjustment['amount']);
-        }
+        Assert::true($this->hasCorrectAmountsDistributedOnAdjustments([$amountOne, $amountTwo, $amountThree], $product));
     }
 
     /**
@@ -316,15 +309,7 @@ final class OrderContext implements Context
      */
     public function theShouldHaveUnitPricesDiscountedForAnd(ProductInterface $product, int $amountOne, int $amountTwo): void
     {
-        $amounts = [$amountOne, $amountTwo];
-
-        $itemId = $this->geOrderItemIdForProductInCart($product, $this->sharedStorage->get('cart_token'));
-        $adjustments = $this->getAdjustmentsForOrderItem($itemId);
-
-        /** @var int $index */
-        foreach ($adjustments as $index => $adjustment) {
-            Assert::same(-$amounts[$index], $adjustment['amount']);
-        }
+        Assert::true($this->hasCorrectAmountsDistributedOnAdjustments([$amountOne, $amountTwo], $product));
     }
 
     /**
@@ -460,5 +445,20 @@ final class OrderContext implements Context
     private function hasAdjustmentWithLabel(string $label): bool
     {
         return $this->getAdjustmentWithLabel($label) !== null;
+    }
+
+    private function hasCorrectAmountsDistributedOnAdjustments(array $amounts, ProductInterface $product): bool
+    {
+        $itemId = $this->geOrderItemIdForProductInCart($product, $this->sharedStorage->get('cart_token'));
+        $adjustments = $this->getAdjustmentsForOrderItem($itemId);
+
+        /** @var int $index */
+        foreach ($adjustments as $index => $adjustment) {
+            if (-$amounts[$index] !== $adjustment['amount']) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
