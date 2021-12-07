@@ -52,7 +52,7 @@
         <service id="sylius.proportional_integer_distributor" class="Sylius\Component\Core\Distributor\ProportionalIntegerDistributor" />
         <service id="Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface" alias="sylius.proportional_integer_distributor" />
 
-        <service id="Sylius\Component\Core\Distributor\MinimumPriceDistributor">
+        <service id="Sylius\Component\Core\Distributor\MinimumPriceDistributorInterface" class="Sylius\Component\Core\Distributor\MinimumPriceDistributor">
             <argument type="service" id="sylius.proportional_integer_distributor" />
         </service>
 

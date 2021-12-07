@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Promotion\Action;
 
-use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
@@ -55,45 +54,6 @@ abstract class DiscountPromotionActionCommand implements PromotionActionCommandI
 
         return 0 !== $subject->countItems();
     }
-
-//    protected function distributeWithMinimumPrice(array $splitPromotion, array $itemTotals, array $minimumPrices): array
-//    {
-//        $promotionAmountLeft = 0;
-//        $distributed = [];
-//        $toDistribute = [];
-//
-//        foreach ($splitPromotion as $key => $splitPromotionAmount) {
-//            if ($splitPromotionAmount === 0) continue;
-//            if ($itemTotals[$key] + $splitPromotionAmount < $minimumPrices[$key] && $minimumPrices[$key] > 0) {
-//                $availableAmount = $itemTotals[$key] - $minimumPrices[$key];
-//                $splitPromotion[$key] = -$availableAmount;
-//
-//                $promotionAmountLeft += ($splitPromotionAmount + $availableAmount);
-////                unset($minimumPrices[$key]);
-////                unset($itemTotals[$key]);
-//            }
-//
-//            if ($minimumPrices[$key] === 0) {
-//                $toDistribute[] = $itemTotals[$key];
-//                $promotionAmountLeft += $splitPromotion[$key];
-//            } else {
-//                $toDistribute[] = 0;
-//                $distributed[] = $splitPromotion[$key];
-//            }
-//        }
-//
-////        if (array_sum($toDistribute) > 0 && array_sum($minimumPrices) > 0) {
-////            $splitPromotion = $distributor->distribute($toDistribute, $promotionAmountLeft);
-////            return $this->distributeWithMinimumPrice($splitPromotion, $itemTotals, $minimumPrices, $distributor, $distributed);
-//////            $splitPromotion = array_merge($distributed, $splitPromotion);
-////        }
-//
-//        return [
-//            'distributedPromotion' => $distributed,
-//            'toDistribute' => $toDistribute,
-//            'amountLeft' => $promotionAmountLeft,
-//        ];
-//    }
 
     private function removeUnitOrderPromotionAdjustmentsByOrigin(
         OrderItemUnitInterface $unit,

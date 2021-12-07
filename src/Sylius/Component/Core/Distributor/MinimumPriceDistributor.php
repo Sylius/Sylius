@@ -1,11 +1,23 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Distributor;
 
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-class MinimumPriceDistributor implements MinimumPriceDistributorInterface
+final class MinimumPriceDistributor implements MinimumPriceDistributorInterface
 {
     private ProportionalIntegerDistributorInterface $proportionalIntegerDistributor;
 
@@ -14,7 +26,7 @@ class MinimumPriceDistributor implements MinimumPriceDistributorInterface
         $this->proportionalIntegerDistributor = $proportionalIntegerDistributor;
     }
 
-    public function distribute(array $orderItems, int $amount, $channel): array
+    public function distribute(array $orderItems, int $amount, ChannelInterface $channel): array
     {
         $orderItemsToProcess = [];
         foreach ($orderItems as $index => $orderItem) {

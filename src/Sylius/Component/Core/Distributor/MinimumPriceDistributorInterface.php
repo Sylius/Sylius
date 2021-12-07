@@ -1,10 +1,21 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
 
 namespace Sylius\Component\Core\Distributor;
 
+use Sylius\Component\Core\Model\ChannelInterface;
 
 interface MinimumPriceDistributorInterface
 {
-//    public function distributeWithMinimumPrice(int $promotionAmount, array $itemTotals, array $minimumPrices, $distributed = [], $toDistribute = []): array;
+    public function distribute(array $orderItems, int $amount, ChannelInterface $channel): array;
 }

@@ -27,27 +27,27 @@ final class MinimumPriceDistributorSpec extends ObjectBehavior
         $this->beConstructedWith($proportionalIntegerDistributor);
     }
 
-    function it_distributes_promotion_taking_into_account_minimal_price(
+    function it_distributes_promotion_taking_into_account_minimum_price(
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
-        OrderItemInterface $thsirt,
+        OrderItemInterface $tshirt,
         OrderItemInterface $book,
         OrderItemInterface $shoes,
         OrderItemInterface $boardGame,
-        ProductVariantInterface $thsirtVariant,
+        ProductVariantInterface $tshirtVariant,
         ProductVariantInterface $bookVariant,
         ProductVariantInterface $shoesVariant,
         ProductVariantInterface $boardGameVariant,
-        ChannelPricingInterface $thsirtVariantChannelPricing,
+        ChannelPricingInterface $tshirtVariantChannelPricing,
         ChannelPricingInterface $bookVariantChannelPricing,
         ChannelPricingInterface $shoesVariantChannelPricing,
         ChannelPricingInterface $boardGameVariantChannelPricing,
         ChannelInterface $channel
     ) {
-        $thsirt->getTotal()->willReturn(1000);
-        $thsirt->getQuantity()->willReturn(1);
-        $thsirt->getVariant()->willReturn($thsirtVariant);
-        $thsirtVariant->getChannelPricingForChannel($channel)->willReturn($thsirtVariantChannelPricing);
-        $thsirtVariantChannelPricing->getMinimumPrice()->willReturn(0);
+        $tshirt->getTotal()->willReturn(1000);
+        $tshirt->getQuantity()->willReturn(1);
+        $tshirt->getVariant()->willReturn($tshirtVariant);
+        $tshirtVariant->getChannelPricingForChannel($channel)->willReturn($tshirtVariantChannelPricing);
+        $tshirtVariantChannelPricing->getMinimumPrice()->willReturn(0);
 
         $book->getTotal()->willReturn(2000);
         $book->getQuantity()->willReturn(1);
@@ -71,24 +71,24 @@ final class MinimumPriceDistributorSpec extends ObjectBehavior
         $proportionalIntegerDistributor->distribute([1000, 3000], -663)->willReturn([-166, -497]);
         $proportionalIntegerDistributor->distribute([1000], -424)->willReturn([-424]);
 
-        $this->distribute([$thsirt, $book, $shoes, $boardGame], -1200, $channel)->shouldReturn([-700, -100, 0, -400]);
+        $this->distribute([$tshirt, $book, $shoes, $boardGame], -1200, $channel)->shouldReturn([-700, -100, 0, -400]);
     }
 
-    function it_distributes_promotion_taking_into_account_minimal_price_wuth_quantity(
+    function it_distributes_promotion_taking_into_account_minimum_price_with_quantity(
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
-        OrderItemInterface $thsirt,
+        OrderItemInterface $tshirt,
         OrderItemInterface $mug,
-        ProductVariantInterface $thsirtVariant,
+        ProductVariantInterface $tshirtVariant,
         ProductVariantInterface $mugVariant,
-        ChannelPricingInterface $thsirtVariantChannelPricing,
+        ChannelPricingInterface $tshirtVariantChannelPricing,
         ChannelPricingInterface $mugVariantChannelPricing,
         ChannelInterface $channel
     ) {
-        $thsirt->getTotal()->willReturn(5000);
-        $thsirt->getQuantity()->willReturn(1);
-        $thsirt->getVariant()->willReturn($thsirtVariant);
-        $thsirtVariant->getChannelPricingForChannel($channel)->willReturn($thsirtVariantChannelPricing);
-        $thsirtVariantChannelPricing->getMinimumPrice()->willReturn(4500);
+        $tshirt->getTotal()->willReturn(5000);
+        $tshirt->getQuantity()->willReturn(1);
+        $tshirt->getVariant()->willReturn($tshirtVariant);
+        $tshirtVariant->getChannelPricingForChannel($channel)->willReturn($tshirtVariantChannelPricing);
+        $tshirtVariantChannelPricing->getMinimumPrice()->willReturn(4500);
 
         $mug->getTotal()->willReturn(6000);
         $mug->getQuantity()->willReturn(3);
@@ -99,6 +99,34 @@ final class MinimumPriceDistributorSpec extends ObjectBehavior
         $proportionalIntegerDistributor->distribute([5000, 6000], -2500)->willReturn([-1136, -1364]);
         $proportionalIntegerDistributor->distribute([6000], -636)->willReturn([-636]);
 
-        $this->distribute([$thsirt, $mug], -2500, $channel)->shouldReturn([-500, -2000]);
+        $this->distribute([$tshirt, $mug], -2500, $channel)->shouldReturn([-500, -2000]);
+    }
+
+    function it_distributes_promotion_that_exceeds_possible_distribution_taking_into_account_minimum_price(
+        ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
+        OrderItemInterface $tshirt,
+        OrderItemInterface $mug,
+        ProductVariantInterface $tshirtVariant,
+        ProductVariantInterface $mugVariant,
+        ChannelPricingInterface $tshirtVariantChannelPricing,
+        ChannelPricingInterface $mugVariantChannelPricing,
+        ChannelInterface $channel
+    ) {
+        $tshirt->getTotal()->willReturn(5000);
+        $tshirt->getQuantity()->willReturn(1);
+        $tshirt->getVariant()->willReturn($tshirtVariant);
+        $tshirtVariant->getChannelPricingForChannel($channel)->willReturn($tshirtVariantChannelPricing);
+        $tshirtVariantChannelPricing->getMinimumPrice()->willReturn(4500);
+
+        $mug->getTotal()->willReturn(6000);
+        $mug->getQuantity()->willReturn(3);
+        $mug->getVariant()->willReturn($mugVariant);
+        $mugVariant->getChannelPricingForChannel($channel)->willReturn($mugVariantChannelPricing);
+        $mugVariantChannelPricing->getMinimumPrice()->willReturn(1500);
+
+        $proportionalIntegerDistributor->distribute([5000, 6000], -2500)->willReturn([-1136, -1364]);
+        $proportionalIntegerDistributor->distribute([6000], -636)->willReturn([-636]);
+
+        $this->distribute([$tshirt, $mug], -2500, $channel)->shouldReturn([-500, -1500]);
     }
 }
