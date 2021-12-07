@@ -45,6 +45,7 @@ final class ProductVariantContext implements Context
      */
     public function iSelectVariant(ProductVariantInterface $variant): void
     {
+        $this->sharedStorage->set('variant', $variant);
         $this->client->show($variant->getCode());
     }
 
