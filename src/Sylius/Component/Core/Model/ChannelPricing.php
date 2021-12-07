@@ -129,6 +129,10 @@ class ChannelPricing implements ChannelPricingInterface
 
     public function addAppliedPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
+        if($this->appliedPromotions->contains($catalogPromotion)) {
+            return;
+        }
+
         $this->appliedPromotions->add($catalogPromotion);
     }
 
