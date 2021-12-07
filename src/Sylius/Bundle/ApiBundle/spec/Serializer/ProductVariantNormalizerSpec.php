@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
@@ -34,9 +35,10 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         ProductVariantPricesCalculatorInterface $pricesCalculator,
         ChannelContextInterface $channelContext,
         AvailabilityCheckerInterface $availabilityChecker,
-        SectionProviderInterface $sectionProvider
+        SectionProviderInterface $sectionProvider,
+        IriConverterInterface $iriConverter
     ): void {
-        $this->beConstructedWith($pricesCalculator, $channelContext, $availabilityChecker, $sectionProvider);
+        $this->beConstructedWith($pricesCalculator, $channelContext, $availabilityChecker, $sectionProvider, $iriConverter);
     }
 
     function it_supports_only_product_variant_interface(ProductVariantInterface $variant, OrderInterface $order): void
@@ -124,7 +126,8 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         NormalizerInterface $normalizer,
         ChannelInterface $channel,
         ProductVariantInterface $variant,
-        CatalogPromotionInterface $winterCatalogPromotion
+        CatalogPromotionInterface $winterCatalogPromotion,
+        IriConverterInterface $iriConverter
     ): void {
         $this->setNormalizer($normalizer);
 
@@ -133,15 +136,20 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         $channelContext->getChannel()->willReturn($channel);
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(500);
         $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willReturn(1000);
+        $winterCatalogPromotion->getCode()->willReturn('winter_sale');
 
         $variant->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([$winterCatalogPromotion->getWrappedObject()]));
 
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
+        $iriConverter->getIriFromItem($winterCatalogPromotion)->willReturn('/api/v2/shop/catalog-promotions/winter_sale');
 
         $this
             ->normalize($variant)
-            ->shouldReturn(['price' => 500, 'originalPrice' => 1000, 'appliedPromotions' => [$winterCatalogPromotion], 'inStock' => true])
-        ;
+            ->shouldReturn([
+                'price' => 500, 'originalPrice' => 1000,
+                'appliedPromotions' => ['/api/v2/shop/catalog-promotions/winter_sale'],
+                'inStock' => true
+            ]);
     }
 
     function it_doesnt_return_prices_if_channel_is_not_found(

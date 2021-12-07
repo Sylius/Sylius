@@ -26,6 +26,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Webmozart\Assert\Assert;
 use ApiPlatform\Core\Api\IriConverterInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 
 /** @experimental */
 final class ProductVariantNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
@@ -79,7 +80,10 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         /** @var ArrayCollection $appliedPromotions */
         $appliedPromotions = $object->getAppliedPromotionsForChannel($channel);
         if (!$appliedPromotions->isEmpty()) {
-            $data['appliedPromotions'] = array_map(fn ($item) => $this->iriConverter->getIriFromItem($item),
+            $data['appliedPromotions'] = array_map(fn (CatalogPromotionInterface $catalogPromotion) => sprintf(
+                '/api/v2/shop/catalog-promotions/%s',
+                $catalogPromotion->getCode()
+            ),
                 $appliedPromotions->toArray()
             );
         }
