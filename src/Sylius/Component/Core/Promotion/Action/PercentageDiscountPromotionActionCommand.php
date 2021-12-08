@@ -57,7 +57,9 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
             return false;
         }
 
-        $promotionAmount = $this->calculateAdjustmentAmount($subject->getPromotionSubjectTotal(), $configuration['percentage']);
+        $subjectTotal = $promotion->getAppliesToDiscounted() ? $subject->getPromotionSubjectTotal() : $subject->getNonDiscountedItemsTotal();
+        $promotionAmount = $this->calculateAdjustmentAmount($subjectTotal, $configuration['percentage']);
+
         if (0 === $promotionAmount) {
             return false;
         }
@@ -67,6 +69,19 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
         } else {
             $itemsTotal = [];
             foreach ($subject->getItems() as $orderItem) {
+                if ($promotion->getAppliesToDiscounted()) {
+                    $itemsTotal[] = $orderItem->getTotal();
+
+                    continue;
+                }
+
+                $variant = $orderItem->getVariant();
+                if (!empty($variant->getAppliedPromotionsForChannel($subject->getChannel()))) {
+                    $itemsTotal[] = 0;
+
+                    continue;
+                }
+
                 $itemsTotal[] = $orderItem->getTotal();
             }
 

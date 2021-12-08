@@ -416,6 +416,24 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then /^the product "([^"]+)" should have total price ("[^"]+") in the cart$/
+     */
+    public function theProductShouldHaveTotalPriceInTheCart(string $productName, int $totalPrice): void
+    {
+        $response = $this->cartsClient->getLastResponse();
+
+        foreach ($this->responseChecker->getValue($response, 'items') as $item) {
+            if ($item['productName'] === $productName) {
+                Assert::same($item['total'], $totalPrice);
+
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf('The product %s does not exist', $productName));
+    }
+
+    /**
      * @Then there should be one item in my cart
      */
     public function thereShouldBeOneItemInMyCart(): void

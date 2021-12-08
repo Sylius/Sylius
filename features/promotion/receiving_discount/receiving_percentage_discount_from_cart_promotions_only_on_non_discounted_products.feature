@@ -31,7 +31,7 @@ Feature: Receiving percentage discount from cart promotions only on non discount
         And the product "Mug" should have discounted unit price "$20.00" in the cart
         And the cart total should be "$35.00"
 
-    @todo @ui @api
+    @api
     Scenario: Receiving order discount from cart promotions distributed only on non discounted products
         Given there is a promotion "Christmas sale" that does not apply to discounted products
         And this promotion gives "50%" discount to every order
@@ -39,6 +39,6 @@ Feature: Receiving percentage discount from cart promotions only on non discount
         And the customer adds "Mug" product to the cart
         And the customer adds "Cap" product to the cart
         Then the product "T-Shirt" should have discounted unit price "$15.00" in the cart
-        And the product "Mug" should have discounted unit price "$20.00" in the cart
-        And the product "Cap" should have discounted unit price "$5.00" in the cart
+        And the product "Mug" should have total price "$20.00" in the cart
+        And the product "Cap" should have total price "$5.00" in the cart
         And the cart total should be "$40.00"

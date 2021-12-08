@@ -416,6 +416,14 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then /^the product "([^"]+)" should have total price ("[^"]+") in the cart$/
+     */
+    public function theProductShouldHaveTotalPrice(string $productName, int $totalPrice): void
+    {
+        Assert::same($this->summaryPage->getItemTotal($productName), $totalPrice);
+    }
+
+    /**
      * @Then /^I should see "([^"]+)" with original price ("[^"]+") in my cart$/
      */
     public function iShouldSeeWithOriginalPriceInMyCart(string $productName, int $originalPrice): void
