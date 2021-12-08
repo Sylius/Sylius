@@ -29,4 +29,20 @@
     <div class="column">
         {{ translationForm(form.translations) }}
     </div>
+    <script>
+        document.querySelector('#sylius_catalog_promotion_startDate_date').addEventListener('change', event => {
+            setValueForTimeInput(event, '00:00');
+        })
+        document.querySelector('#sylius_catalog_promotion_endDate_date').addEventListener('change', event => {
+            setValueForTimeInput(event, '23:59');
+        })
+
+        function setValueForTimeInput(input, value) {
+            let time = input.target.nextSibling;
+
+            if (!time.value) {
+                time.value = value;
+            }
+        }
+    </script>
 </div>
