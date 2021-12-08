@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -29,18 +28,14 @@ final class ProductVariantContext implements Context
 
     private SharedStorageInterface $sharedStorage;
 
-    private IriConverterInterface $iriConverter;
-
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage,
-        IriConverterInterface $iriConverter
+        SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
-        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -238,7 +233,7 @@ final class ProductVariantContext implements Context
 
     private function findVariant(?ProductVariantInterface $variant): array
     {
-        $response = $this->client->showByIri($this->iriConverter->getIriFromItem($variant));
+        $response = $this->client->showByIri(sprintf('/api/v2/shop/product-variants/%s', $variant->getCode()));
 
         if ($variant !== null && $this->responseChecker->hasValue($response, '@type', 'hydra:Collection')) {
             $returnValue = $this->responseChecker->getCollectionItemsWithValue($response, 'code', $variant->getCode());

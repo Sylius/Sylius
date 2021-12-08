@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
@@ -44,20 +43,16 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
     /** @var SectionProviderInterface */
     private $uriBasedSectionContext;
 
-    private IriConverterInterface $iriConverter;
-
     public function __construct(
         ProductVariantPricesCalculatorInterface $priceCalculator,
         ChannelContextInterface $channelContext,
         AvailabilityCheckerInterface $availabilityChecker,
-        SectionProviderInterface $uriBasedSectionContext,
-        IriConverterInterface $iriConverter
+        SectionProviderInterface $uriBasedSectionContext
     ) {
         $this->priceCalculator = $priceCalculator;
         $this->channelContext = $channelContext;
         $this->availabilityChecker = $availabilityChecker;
         $this->uriBasedSectionContext = $uriBasedSectionContext;
-        $this->iriConverter = $iriConverter;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -80,8 +75,10 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         /** @var ArrayCollection $appliedPromotions */
         $appliedPromotions = $object->getAppliedPromotionsForChannel($channel);
         if (!$appliedPromotions->isEmpty()) {
-            $data['appliedPromotions'] = array_map(fn (CatalogPromotionInterface $catalogPromotion) =>
-                $this->iriConverter->getIriFromItem($catalogPromotion),
+            $data['appliedPromotions'] = array_map(fn (CatalogPromotionInterface $catalogPromotion) => sprintf(
+                '/api/v2/shop/catalog-promotions/%s',
+                $catalogPromotion->getCode()
+            ),
                 $appliedPromotions->toArray()
             );
         }
