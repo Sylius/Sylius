@@ -107,10 +107,11 @@ final class ProductVariantContext implements Context
 
         Assert::same($content['price'], $price);
         Assert::same($content['originalPrice'], $originalPrice);
-        foreach ($promotionsNames as $promotionName) {
-            $catalogPromotionCode = StringInflector::nameToCode($promotionName);
-            Assert::same($content['appliedPromotions'][$catalogPromotionCode]['translations']['en_US']['name'], $promotionName);
-            Assert::same($content['appliedPromotions'][$catalogPromotionCode]['translations']['en_US']['description'], $promotionName . ' description');
+        foreach ($content['appliedPromotions'] as $promotion) {
+            $catalogPromotion = $this->responseChecker->getResponseContent(
+                $this->client->showByIri($promotion)
+            );
+            Assert::inArray($catalogPromotion['name'], $promotionsNames);
         }
     }
 
@@ -121,17 +122,13 @@ final class ProductVariantContext implements Context
         ProductVariantInterface $variant,
         int $originalPrice,
         int $price,
-        int $promotionsNames
+        int $numberOfPromotions
     ): void {
         $content = $this->findVariant($variant);
 
         Assert::same($content['price'], $price);
         Assert::same($content['originalPrice'], $originalPrice);
-        foreach ($content['appliedPromotions'] as $iri){
-            $catalogPromotionResponse = $this->client->showByIri($iri);
-            $catalogPromotion = $this->responseChecker->getResponseContent($catalogPromotionResponse);
-            Assert::inArray($catalogPromotion['name'], $promotionsNames);
-        }
+        Assert::count($content['appliedPromotions'], $numberOfPromotions);
     }
 
     /**
@@ -241,7 +238,7 @@ final class ProductVariantContext implements Context
 
     private function findVariant(?ProductVariantInterface $variant): array
     {
-        $response = $this->client->getLastResponse();
+        $response = $this->client->showByIri(sprintf('/api/v2/shop/product-variants/%s', $variant->getCode()));
 
         if ($variant !== null && $this->responseChecker->hasValue($response, '@type', 'hydra:Collection')) {
             $returnValue = $this->responseChecker->getCollectionItemsWithValue($response, 'code', $variant->getCode());
