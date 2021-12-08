@@ -44,20 +44,16 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
     /** @var SectionProviderInterface */
     private $uriBasedSectionContext;
 
-    private IriConverterInterface $iriConverter;
-
     public function __construct(
         ProductVariantPricesCalculatorInterface $priceCalculator,
         ChannelContextInterface $channelContext,
         AvailabilityCheckerInterface $availabilityChecker,
         SectionProviderInterface $uriBasedSectionContext,
-        IriConverterInterface $iriConverter
     ) {
         $this->priceCalculator = $priceCalculator;
         $this->channelContext = $channelContext;
         $this->availabilityChecker = $availabilityChecker;
         $this->uriBasedSectionContext = $uriBasedSectionContext;
-        $this->iriConverter = $iriConverter;
     }
 
     public function normalize($object, $format = null, array $context = [])
