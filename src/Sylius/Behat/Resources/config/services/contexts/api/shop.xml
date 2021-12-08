@@ -107,7 +107,6 @@
             <argument type="service" id="sylius.behat.api_platform_client.shop.product_variant" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="api_platform.iri_converter" />
         </service>
 
         <service id="sylius.behat.context.api.shop.product_review" class="Sylius\Behat\Context\Api\Shop\ProductReviewContext">
