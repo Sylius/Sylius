@@ -70,7 +70,7 @@ final class FixedDiscountPriceCalculatorSpec extends ObjectBehavior
 
         $channelPricing->getChannelCode()->willReturn('WEB');
         $channelPricing->getPrice()->willReturn(1000);
-        $channelPricing->getMinimumPrice()->willReturn(null);
+        $channelPricing->getMinimumPrice()->willReturn(0);
 
         $this->calculate($channelPricing, $action)->shouldReturn(0);
     }

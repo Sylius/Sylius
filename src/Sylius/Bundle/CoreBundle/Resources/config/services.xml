@@ -52,6 +52,10 @@
         <service id="sylius.proportional_integer_distributor" class="Sylius\Component\Core\Distributor\ProportionalIntegerDistributor" />
         <service id="Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface" alias="sylius.proportional_integer_distributor" />
 
+        <service id="Sylius\Component\Core\Distributor\MinimumPriceDistributorInterface" class="Sylius\Component\Core\Distributor\MinimumPriceDistributor">
+            <argument type="service" id="sylius.proportional_integer_distributor" />
+        </service>
+
         <service id="sylius.invoice_number_generator" class="Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator" />
         <service id="Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface" alias="sylius.invoice_number_generator" />
 

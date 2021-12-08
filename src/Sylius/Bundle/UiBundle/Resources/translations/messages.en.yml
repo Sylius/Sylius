@@ -502,6 +502,7 @@ sylius:
         meta_keywords: 'Meta keywords'
         metadata_index: 'Metadata'
         method: 'Method'
+        minimum_price: 'Minimum price'
         modified: 'Modified'
         money: 'Money'
         most_expensive_first: 'Most expensive first'

@@ -18,9 +18,11 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Action\UnitDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
@@ -40,7 +42,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
             $adjustmentFactory,
             $priceRangeFilter,
             $taxonFilter,
-            $productFilter
+            $productFilter,
         );
     }
 
@@ -61,10 +63,30 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
-        PromotionInterface $promotion
+        OrderItemInterface $orderItem1,
+        OrderItemInterface $orderItem2,
+        ProductVariantInterface $productVariant1,
+        ProductVariantInterface $productVariant2,
+        PromotionInterface $promotion,
+        ChannelPricingInterface $channelPricing1,
+        ChannelPricingInterface $channelPricing2
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
+
+        $unit1->getOrderItem()->willReturn($orderItem1);
+        $unit2->getOrderItem()->willReturn($orderItem2);
+
+        $orderItem1->getVariant()->willReturn($productVariant1);
+        $orderItem2->getVariant()->willReturn($productVariant2);
+        $orderItem1->getOrder()->willReturn($order);
+        $orderItem2->getOrder()->willReturn($order);
+
+        $productVariant1->getChannelPricingForChannel($channel)->willReturn($channelPricing1);
+        $productVariant2->getChannelPricingForChannel($channel)->willReturn($channelPricing2);
+
+        $channelPricing1->getMinimumPrice()->willReturn(0);
+        $channelPricing2->getMinimumPrice()->willReturn(0);
 
         $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
         $order->getChannel()->willReturn($channel);
@@ -154,10 +176,30 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
-        PromotionInterface $promotion
+        OrderItemInterface $orderItem1,
+        OrderItemInterface $orderItem2,
+        ProductVariantInterface $productVariant1,
+        ProductVariantInterface $productVariant2,
+        PromotionInterface $promotion,
+        ChannelPricingInterface $channelPricing1,
+        ChannelPricingInterface $channelPricing2
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
+
+        $unit1->getOrderItem()->willReturn($orderItem1);
+        $unit2->getOrderItem()->willReturn($orderItem2);
+
+        $orderItem1->getVariant()->willReturn($productVariant1);
+        $orderItem2->getVariant()->willReturn($productVariant2);
+        $orderItem1->getOrder()->willReturn($order);
+        $orderItem2->getOrder()->willReturn($order);
+
+        $productVariant1->getChannelPricingForChannel($channel)->willReturn($channelPricing1);
+        $productVariant2->getChannelPricingForChannel($channel)->willReturn($channelPricing2);
+
+        $channelPricing1->getMinimumPrice()->willReturn(0);
+        $channelPricing2->getMinimumPrice()->willReturn(0);
 
         $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
         $order->getChannel()->willReturn($channel);
@@ -185,6 +227,79 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $promotionAdjustment2->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment2->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment2->setAmount(-200)->shouldBeCalled();
+
+        $promotionAdjustment2->setOriginCode('TEST_PROMOTION')->shouldBeCalled();
+
+        $unit1->addAdjustment($promotionAdjustment1)->shouldBeCalled();
+        $unit2->addAdjustment($promotionAdjustment2)->shouldBeCalled();
+
+        $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(true);
+    }
+
+    function it_does_not_apply_bigger_discount_than_variant_minimum_price(
+        ChannelInterface $channel,
+        FactoryInterface $adjustmentFactory,
+        FilterInterface $priceRangeFilter,
+        FilterInterface $taxonFilter,
+        FilterInterface $productFilter,
+        AdjustmentInterface $promotionAdjustment1,
+        AdjustmentInterface $promotionAdjustment2,
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        OrderItemUnitInterface $unit1,
+        OrderItemUnitInterface $unit2,
+        OrderItemInterface $orderItem1,
+        OrderItemInterface $orderItem2,
+        ProductVariantInterface $productVariant1,
+        ProductVariantInterface $productVariant2,
+        PromotionInterface $promotion,
+        ChannelPricingInterface $channelPricing1,
+        ChannelPricingInterface $channelPricing2
+    ): void {
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+
+        $unit1->getOrderItem()->willReturn($orderItem1);
+        $unit2->getOrderItem()->willReturn($orderItem1);
+
+        $orderItem1->getVariant()->willReturn($productVariant1);
+
+        $orderItem1->getOrder()->willReturn($order);
+
+        $productVariant1->getChannelPricingForChannel($channel)->willReturn($channelPricing1);
+        $productVariant2->getChannelPricingForChannel($channel)->willReturn($channelPricing2);
+
+        $channelPricing1->getMinimumPrice()->willReturn(200);
+        $channelPricing2->getMinimumPrice()->willReturn(150);
+
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem1, $orderItem2]));
+
+        $priceRangeFilter->filter([$orderItem1, $orderItem2], ['amount' => 1000, 'channel' => $channel])->willReturn([$orderItem1, $orderItem2]);
+        $taxonFilter->filter([$orderItem1, $orderItem2], ['amount' => 1000])->willReturn([$orderItem1, $orderItem2]);
+        $productFilter->filter([$orderItem1, $orderItem2], ['amount' => 1000])->willReturn([$orderItem1, $orderItem2]);
+
+        $orderItem1->getQuantity()->willReturn(2);
+        $orderItem1->getUnits()->willReturn(new ArrayCollection([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
+
+        $orderItem2->getQuantity()->willReturn(1);
+        $orderItem2->getUnits()->willReturn(new ArrayCollection([$unit2->getWrappedObject()]));
+
+        $promotion->getName()->willReturn('Test promotion');
+        $promotion->getCode()->willReturn('TEST_PROMOTION');
+
+        $adjustmentFactory->createNew()->willReturn($promotionAdjustment1, $promotionAdjustment2);
+
+        $unit1->getTotal()->willReturn(300);
+        $promotionAdjustment1->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $promotionAdjustment1->setLabel('Test promotion')->shouldBeCalled();
+        $promotionAdjustment1->setAmount(-100)->shouldBeCalled();
+
+        $promotionAdjustment1->setOriginCode('TEST_PROMOTION')->shouldBeCalled();
+
+        $unit2->getTotal()->willReturn(300);
+        $promotionAdjustment2->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $promotionAdjustment2->setLabel('Test promotion')->shouldBeCalled();
+        $promotionAdjustment2->setAmount(-100)->shouldBeCalled();
 
         $promotionAdjustment2->setOriginCode('TEST_PROMOTION')->shouldBeCalled();
 

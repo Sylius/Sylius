@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Promotion\Action;
 
+use Sylius\Component\Core\Distributor\MinimumPriceDistributorInterface;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
@@ -29,12 +30,16 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
 
     private UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator;
 
+    private ?MinimumPriceDistributorInterface $minimumPriceDistributor;
+
     public function __construct(
         ProportionalIntegerDistributorInterface $distributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
+        ?MinimumPriceDistributorInterface $minimumPriceDistributor = null
     ) {
         $this->distributor = $distributor;
         $this->unitsPromotionAdjustmentsApplicator = $unitsPromotionAdjustmentsApplicator;
+        $this->minimumPriceDistributor = $minimumPriceDistributor;
     }
 
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
@@ -57,12 +62,17 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
             return false;
         }
 
-        $itemsTotal = [];
-        foreach ($subject->getItems() as $orderItem) {
-            $itemsTotal[] = $orderItem->getTotal();
+        if ($this->minimumPriceDistributor !== null) {
+            $splitPromotion = $this->minimumPriceDistributor->distribute($subject->getItems()->toArray(), $promotionAmount, $subject->getChannel());
+        } else {
+            $itemsTotal = [];
+            foreach ($subject->getItems() as $orderItem) {
+                $itemsTotal[] = $orderItem->getTotal();
+            }
+
+            $splitPromotion = $this->distributor->distribute($itemsTotal, $promotionAmount);
         }
 
-        $splitPromotion = $this->distributor->distribute($itemsTotal, $promotionAmount);
         $this->unitsPromotionAdjustmentsApplicator->apply($subject, $promotion, $splitPromotion);
 
         return true;

@@ -18,9 +18,12 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -51,9 +54,25 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         OrderItemUnitInterface $firstColtUnit,
         OrderItemUnitInterface $magnumUnit,
         OrderItemUnitInterface $secondColtUnit,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
+        ChannelInterface $channel,
+        ProductVariantInterface $coltItemVariant,
+        ProductVariantInterface $magnumItemVariant,
+        ChannelPricingInterface $coltItemChannelPricing,
+        ChannelPricingInterface $magnumItemChannelPricing
     ): void {
         $order->countItems()->willReturn(2);
+        $order->getChannel()->willReturn($channel);
+        $coltItem->getVariant()->willReturn($coltItemVariant);
+        $magnumItem->getVariant()->willReturn($magnumItemVariant);
+        $coltItemVariant->getChannelPricingForChannel($channel)->willReturn($coltItemChannelPricing);
+        $magnumItemVariant->getChannelPricingForChannel($channel)->willReturn($magnumItemChannelPricing);
+        $coltItemChannelPricing->getMinimumPrice()->willReturn(0);
+        $magnumItemChannelPricing->getMinimumPrice()->willReturn(0);
+
+        $firstColtUnit->getTotal()->willReturn(1000);
+        $secondColtUnit->getTotal()->willReturn(1000);
+        $magnumUnit->getTotal()->willReturn(2000);
 
         $order
             ->getItems()
@@ -107,9 +126,24 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         OrderItemInterface $magnumItem,
         OrderItemUnitInterface $coltUnit,
         OrderItemUnitInterface $magnumUnit,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
+        ChannelInterface $channel,
+        ProductVariantInterface $coltItemVariant,
+        ProductVariantInterface $magnumItemVariant,
+        ChannelPricingInterface $coltItemChannelPricing,
+        ChannelPricingInterface $magnumItemChannelPricing
     ): void {
         $order->countItems()->willReturn(2);
+        $order->getChannel()->willReturn($channel);
+        $coltItem->getVariant()->willReturn($coltItemVariant);
+        $magnumItem->getVariant()->willReturn($magnumItemVariant);
+        $coltItemVariant->getChannelPricingForChannel($channel)->willReturn($coltItemChannelPricing);
+        $magnumItemVariant->getChannelPricingForChannel($channel)->willReturn($magnumItemChannelPricing);
+        $coltItemChannelPricing->getMinimumPrice()->willReturn(0);
+        $magnumItemChannelPricing->getMinimumPrice()->willReturn(0);
+
+        $coltUnit->getTotal()->willReturn(1000);
+        $magnumUnit->getTotal()->willReturn(2000);
 
         $order
             ->getItems()
@@ -158,9 +192,30 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         OrderItemUnitInterface $coltUnit,
         OrderItemUnitInterface $magnumUnit,
         OrderItemUnitInterface $winchesterUnit,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
+        ChannelInterface $channel,
+        ProductVariantInterface $coltItemVariant,
+        ProductVariantInterface $magnumItemVariant,
+        ProductVariantInterface $winchesterItemVariant,
+        ChannelPricingInterface $coltItemChannelPricing,
+        ChannelPricingInterface $magnumItemChannelPricing,
+        ChannelPricingInterface $winchesterItemChannelPricing
     ): void {
         $order->countItems()->willReturn(3);
+        $order->getChannel()->willReturn($channel);
+        $coltItem->getVariant()->willReturn($coltItemVariant);
+        $magnumItem->getVariant()->willReturn($magnumItemVariant);
+        $winchesterItem->getVariant()->willReturn($winchesterItemVariant);
+        $coltItemVariant->getChannelPricingForChannel($channel)->willReturn($coltItemChannelPricing);
+        $magnumItemVariant->getChannelPricingForChannel($channel)->willReturn($magnumItemChannelPricing);
+        $winchesterItemVariant->getChannelPricingForChannel($channel)->willReturn($winchesterItemChannelPricing);
+        $coltItemChannelPricing->getMinimumPrice()->willReturn(0);
+        $magnumItemChannelPricing->getMinimumPrice()->willReturn(0);
+        $winchesterItemChannelPricing->getMinimumPrice()->willReturn(0);
+
+        $coltUnit->getTotal()->willReturn(1000);
+        $magnumUnit->getTotal()->willReturn(2000);
+        $winchesterUnit->getTotal()->willReturn(1000);
 
         $order
             ->getItems()
@@ -218,9 +273,20 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         OrderItemUnitInterface $firstColtUnit,
         OrderItemUnitInterface $secondColtUnit,
         OrderItemUnitInterface $thirdColtUnit,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
+        ChannelInterface $channel,
+        ProductVariantInterface $coltItemVariant,
+        ChannelPricingInterface $coltItemChannelPricing
     ): void {
         $order->countItems()->willReturn(1);
+        $order->getChannel()->willReturn($channel);
+        $coltItem->getVariant()->willReturn($coltItemVariant);
+        $coltItemVariant->getChannelPricingForChannel($channel)->willReturn($coltItemChannelPricing);
+        $coltItemChannelPricing->getMinimumPrice()->willReturn(0);
+
+        $firstColtUnit->getTotal()->willReturn(1000);
+        $secondColtUnit->getTotal()->willReturn(1000);
+        $thirdColtUnit->getTotal()->willReturn(1000);
 
         $order
             ->getItems()
@@ -266,9 +332,19 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         OrderItemInterface $coltItem,
         OrderItemUnitInterface $firstColtUnit,
         OrderItemUnitInterface $secondColtUnit,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
+        ChannelInterface $channel,
+        ProductVariantInterface $coltItemVariant,
+        ChannelPricingInterface $coltItemChannelPricing
     ): void {
         $order->countItems()->willReturn(1);
+        $order->getChannel()->willReturn($channel);
+        $coltItem->getVariant()->willReturn($coltItemVariant);
+        $coltItemVariant->getChannelPricingForChannel($channel)->willReturn($coltItemChannelPricing);
+        $coltItemChannelPricing->getMinimumPrice()->willReturn(0);
+
+        $firstColtUnit->getTotal()->willReturn(1000);
+        $secondColtUnit->getTotal()->willReturn(1000);
 
         $order
             ->getItems()
@@ -298,6 +374,81 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         $secondColtUnit->addAdjustment(Argument::any())->shouldNotBeCalled();
 
         $this->apply($order, $promotion, [1]);
+    }
+
+    function it_does_not_apply_promotion_below_product_variant_minimum_price(
+        AdjustmentFactoryInterface $adjustmentFactory,
+        AdjustmentInterface $firstAdjustment,
+        AdjustmentInterface $secondAdjustment,
+        AdjustmentInterface $thirdAdjustment,
+        IntegerDistributorInterface $distributor,
+        OrderInterface $order,
+        OrderItemInterface $coltItem,
+        OrderItemInterface $magnumItem,
+        OrderItemUnitInterface $firstColtUnit,
+        OrderItemUnitInterface $magnumUnit,
+        OrderItemUnitInterface $secondColtUnit,
+        PromotionInterface $promotion,
+        ChannelInterface $channel,
+        ProductVariantInterface $coltItemVariant,
+        ProductVariantInterface $magnumItemVariant,
+        ChannelPricingInterface $coltItemChannelPricing,
+        ChannelPricingInterface $magnumItemChannelPricing
+    ): void {
+        $order->countItems()->willReturn(2);
+        $order->getChannel()->willReturn($channel);
+        $coltItem->getVariant()->willReturn($coltItemVariant);
+        $magnumItem->getVariant()->willReturn($magnumItemVariant);
+        $coltItemVariant->getChannelPricingForChannel($channel)->willReturn($coltItemChannelPricing);
+        $magnumItemVariant->getChannelPricingForChannel($channel)->willReturn($magnumItemChannelPricing);
+        $coltItemChannelPricing->getMinimumPrice()->willReturn(500);
+        $magnumItemChannelPricing->getMinimumPrice()->willReturn(1900);
+
+        $firstColtUnit->getTotal()->willReturn(1000);
+        $secondColtUnit->getTotal()->willReturn(1000);
+        $magnumUnit->getTotal()->willReturn(2000);
+
+        $order
+            ->getItems()
+            ->willReturn(new ArrayCollection([$coltItem->getWrappedObject(), $magnumItem->getWrappedObject()]))
+        ;
+
+        $coltItem->getQuantity()->willReturn(2);
+        $magnumItem->getQuantity()->willReturn(1);
+
+        $distributor->distribute(1000, 2)->willReturn([-500, -500]);
+        $distributor->distribute(999, 1)->willReturn([-999]);
+
+        $coltItem
+            ->getUnits()
+            ->willReturn(new ArrayCollection([$firstColtUnit->getWrappedObject(), $secondColtUnit->getWrappedObject()]))
+        ;
+        $magnumItem
+            ->getUnits()
+            ->willReturn(new ArrayCollection([$magnumUnit->getWrappedObject()]))
+        ;
+
+        $promotion->getName()->willReturn('Winter guns promotion!');
+        $promotion->getCode()->willReturn('WINTER_GUNS_PROMOTION');
+
+        $adjustmentFactory
+            ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, 'Winter guns promotion!', -500)
+            ->willReturn($firstAdjustment, $secondAdjustment)
+        ;
+        $adjustmentFactory
+            ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, 'Winter guns promotion!', -100)
+            ->willReturn($thirdAdjustment)
+        ;
+
+        $firstAdjustment->setOriginCode('WINTER_GUNS_PROMOTION')->shouldBeCalled();
+        $secondAdjustment->setOriginCode('WINTER_GUNS_PROMOTION')->shouldBeCalled();
+        $thirdAdjustment->setOriginCode('WINTER_GUNS_PROMOTION')->shouldBeCalled();
+
+        $firstColtUnit->addAdjustment($firstAdjustment)->shouldBeCalled();
+        $secondColtUnit->addAdjustment($secondAdjustment)->shouldBeCalled();
+        $magnumUnit->addAdjustment($thirdAdjustment)->shouldBeCalled();
+
+        $this->apply($order, $promotion, [1000, 999]);
     }
 
     function it_throws_exception_if_items_count_is_different_than_adjustment_amounts(

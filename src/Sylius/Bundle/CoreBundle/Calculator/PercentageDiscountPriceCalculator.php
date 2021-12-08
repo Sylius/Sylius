@@ -37,7 +37,7 @@ final class PercentageDiscountPriceCalculator implements ActionBasedPriceCalcula
 
     private function provideMinimumPrice(ChannelPricingInterface $channelPricing): int
     {
-        if ($channelPricing->getMinimumPrice() === null || $channelPricing->getMinimumPrice() <= 0) {
+        if ($channelPricing->getMinimumPrice() <= 0) {
             return 0;
         }
 

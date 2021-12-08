@@ -297,6 +297,22 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Then /^the ("[^"]+" product) should have unit prices discounted by ("[^"]+"), ("[^"]+") and ("[^"]+")$/
+     */
+    public function theShouldHaveUnitPricesDiscountedFor(ProductInterface $product, int $amountOne, int $amountTwo, int $amountThree): void
+    {
+        Assert::true($this->hasCorrectAmountsDistributedOnAdjustments([$amountOne, $amountTwo, $amountThree], $product));
+    }
+
+    /**
+     * @Then /^the ("[^"]+" product) should have unit prices discounted by ("[^"]+") and ("[^"]+")$/
+     */
+    public function theShouldHaveUnitPricesDiscountedForAnd(ProductInterface $product, int $amountOne, int $amountTwo): void
+    {
+        Assert::true($this->hasCorrectAmountsDistributedOnAdjustments([$amountOne, $amountTwo], $product));
+    }
+
+    /**
      * @Then I should have chosen :paymentMethod payment method
      */
     public function iShouldHaveChosenPaymentMethodForMyOrder(PaymentMethodInterface $paymentMethod): void
@@ -429,5 +445,20 @@ final class OrderContext implements Context
     private function hasAdjustmentWithLabel(string $label): bool
     {
         return $this->getAdjustmentWithLabel($label) !== null;
+    }
+
+    private function hasCorrectAmountsDistributedOnAdjustments(array $amounts, ProductInterface $product): bool
+    {
+        $itemId = $this->geOrderItemIdForProductInCart($product, $this->sharedStorage->get('cart_token'));
+        $adjustments = $this->getAdjustmentsForOrderItem($itemId);
+
+        /** @var int $index */
+        foreach ($adjustments as $index => $adjustment) {
+            if (-$amounts[$index] !== $adjustment['amount']) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
