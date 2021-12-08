@@ -80,10 +80,8 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         /** @var ArrayCollection $appliedPromotions */
         $appliedPromotions = $object->getAppliedPromotionsForChannel($channel);
         if (!$appliedPromotions->isEmpty()) {
-            $data['appliedPromotions'] = array_map(fn (CatalogPromotionInterface $catalogPromotion) => sprintf(
-                '/api/v2/shop/catalog-promotions/%s',
-                $catalogPromotion->getCode()
-            ),
+            $data['appliedPromotions'] = array_map(fn (CatalogPromotionInterface $catalogPromotion) =>
+                $this->iriConverter->getIriFromItem($catalogPromotion),
                 $appliedPromotions->toArray()
             );
         }
