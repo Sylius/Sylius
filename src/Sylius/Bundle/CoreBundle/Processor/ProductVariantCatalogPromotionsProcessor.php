@@ -17,22 +17,17 @@ use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ProductVariantCatalogPromotionsProcessor implements ProductVariantCatalogPromotionsProcessorInterface
 {
-    private RepositoryInterface $catalogPromotionRepository;
-
     private CatalogPromotionClearerInterface $catalogPromotionClearer;
 
     private CatalogPromotionApplicatorInterface $catalogPromotionApplicator;
 
     public function __construct(
-        RepositoryInterface $catalogPromotionRepository,
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionApplicatorInterface $catalogPromotionApplicator
     ) {
-        $this->catalogPromotionRepository = $catalogPromotionRepository;
         $this->catalogPromotionClearer = $catalogPromotionClearer;
         $this->catalogPromotionApplicator = $catalogPromotionApplicator;
     }
@@ -51,10 +46,9 @@ final class ProductVariantCatalogPromotionsProcessor implements ProductVariantCa
             return;
         }
         $this->catalogPromotionClearer->clearChannelPricing($channelPricing);
-        foreach ($appliedPromotions as $appliedPromotion) {
+        foreach ($appliedPromotions as $catalogPromotion) {
             /** @var CatalogPromotionInterface|null $catalogPromotion */
-            $catalogPromotion = $this->catalogPromotionRepository->findOneBy(['code' => $appliedPromotion->getCode(), 'enabled' => true]);
-            if ($catalogPromotion === null) {
+            if (!$catalogPromotion->isEnabled()) {
                 continue;
             }
 
