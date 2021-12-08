@@ -16,6 +16,7 @@ namespace Sylius\Component\Core\Distributor;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Webmozart\Assert\Assert;
 
 final class MinimumPriceDistributor implements MinimumPriceDistributorInterface
 {
@@ -28,6 +29,8 @@ final class MinimumPriceDistributor implements MinimumPriceDistributorInterface
 
     public function distribute(array $orderItems, int $amount, ChannelInterface $channel): array
     {
+        Assert::allIsInstanceOf($orderItems, OrderItemInterface::class);
+
         $orderItemsToProcess = [];
         foreach ($orderItems as $index => $orderItem) {
             /** @var ProductVariantInterface $variant */

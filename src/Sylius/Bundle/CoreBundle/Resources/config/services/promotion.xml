@@ -58,6 +58,7 @@
         </service>
 
         <service id="sylius.promotion_action.fixed_discount" class="Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand">
+            <argument type="service" id="sylius.proportional_integer_distributor" />
             <argument type="service" id="sylius.promotion.units_promotion_adjustments_applicator" />
             <argument type="service" id="Sylius\Component\Core\Distributor\MinimumPriceDistributorInterface" />
             <argument type="service" id="sylius.currency_converter" />
@@ -72,6 +73,7 @@
             <tag name="sylius.promotion_action" type="unit_fixed_discount" label="sylius.form.promotion_action.item_fixed_discount" form-type="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\ChannelBasedUnitFixedDiscountConfigurationType" />
         </service>
         <service id="sylius.promotion_action.percentage_discount" class="Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand">
+            <argument type="service" id="sylius.proportional_integer_distributor" />
             <argument type="service" id="sylius.promotion.units_promotion_adjustments_applicator" />
             <argument type="service" id="Sylius\Component\Core\Distributor\MinimumPriceDistributorInterface" />
             <tag name="sylius.promotion_action" type="order_percentage_discount" label="sylius.form.promotion_action.order_percentage_discount" form-type="Sylius\Bundle\PromotionBundle\Form\Type\Action\PercentageDiscountConfigurationType" />
