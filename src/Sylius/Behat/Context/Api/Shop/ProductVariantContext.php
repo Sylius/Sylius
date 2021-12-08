@@ -105,8 +105,9 @@ final class ProductVariantContext implements Context
         Assert::same($content['price'], $price);
         Assert::same($content['originalPrice'], $originalPrice);
         foreach ($content['appliedPromotions'] as $promotionIri) {
-            $catalogPromotionResponse = $this->client->showByIri($promotionIri);
-            $catalogPromotion = $this->responseChecker->getResponseContent($catalogPromotionResponse);
+            $catalogPromotion = $this->responseChecker->getResponseContent(
+                 $this->client->showByIri($promotionIri)
+             );
             Assert::inArray($catalogPromotion['name'], $promotionsNames);
         }
     }
