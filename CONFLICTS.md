@@ -3,6 +3,10 @@
 This document explains why certain conflicts were added to `composer.json` and
 references related issues.
 
+ - `symfony/password-hasher": "^6.0`:
+
+   Symfony in version 5.3 change password hashing logic, and in version 6.0 they removed BC layer
+
  - `doctrine/doctrine-bundle:2.3.0`:
 
    This version makes Gedmo Doctrine Extensions fail (tree and position behaviour mostly).
@@ -37,13 +41,13 @@ references related issues.
 
    Probably introduced in: https://github.com/symfony/symfony/pull/40811
 
-- `doctrine/orm:2.10.0`:
+ - `doctrine/orm:2.10.0`:
 
-  This version causes a problem with the creation of nested taxons by throwing the exception:
+   This version causes a problem with the creation of nested taxons by throwing the exception:
   
-  `Gedmo\Exception\UnexpectedValueException: Root cannot be changed manually, change parent instead in vendor/gedmo/doctrine-extensions/src/Tree/Strategy/ORM/Nested.php:145`
+   `Gedmo\Exception\UnexpectedValueException: Root cannot be changed manually, change parent instead in vendor/gedmo/doctrine-extensions/src/Tree/Strategy/ORM/Nested.php:145`
 
-  References: https://github.com/doctrine-extensions/DoctrineExtensions/issues/2155
+   References: https://github.com/doctrine-extensions/DoctrineExtensions/issues/2155
 
 In this section we keep track of the reasons, why some restrictions were added to the `requires` section of `composer.json`
 

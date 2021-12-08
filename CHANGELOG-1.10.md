@@ -1,5 +1,20 @@
 # CHANGELOG FOR `1.10.X`
 
+## v1.10.6 (2021-12-07)
+
+- [#11751](https://github.com/Sylius/Sylius/issues/11751) [Core] added default factory for avatar image ([@foxou33](https://github.com/foxou33), [@lchrusciel](https://github.com/lchrusciel))
+- [#13118](https://github.com/Sylius/Sylius/issues/13118) Move "polishsymfonycommunity/symfony-mocker-container" into dev dependencies ([@stloyd](https://github.com/stloyd))
+- [#13275](https://github.com/Sylius/Sylius/issues/13275) [Maintenance] Add note about doctrine/dbal requirement ([@lchrusciel](https://github.com/lchrusciel))
+- [#13278](https://github.com/Sylius/Sylius/issues/13278) [Behat] Remove deprecated whitespace from behat tags ([@GSadee](https://github.com/GSadee))
+- [#13282](https://github.com/Sylius/Sylius/issues/13282) [API] Revert changes of checked keys in cart and checkout responses to fix the build ([@GSadee](https://github.com/GSadee))
+- [#13307](https://github.com/Sylius/Sylius/issues/13307) [Docs] Drop 1.9 bug support ([@lchrusciel](https://github.com/lchrusciel))
+- [#13310](https://github.com/Sylius/Sylius/issues/13310) Corrections for adding a field to the response ([@j92](https://github.com/j92))
+- [#13320](https://github.com/Sylius/Sylius/issues/13320) Remove swagger decorators when docs are disabled ([@paullla](https://github.com/paullla))
+- [#13322](https://github.com/Sylius/Sylius/issues/13322) [Spec] change username to runtime exception ([@SirDomin](https://github.com/SirDomin), [@lchrusciel](https://github.com/lchrusciel))
+- [#13335](https://github.com/Sylius/Sylius/issues/13335) [Minor] Removal of additional spaces and deprecation version fix ([@lchrusciel](https://github.com/lchrusciel))
+- [#13357](https://github.com/Sylius/Sylius/issues/13357) Add Symfony 5.4 support for Sylius 1.10  ([@AdamKasp](https://github.com/AdamKasp), [@GSadee](https://github.com/GSadee), [@lchrusciel](https://github.com/lchrusciel))
+- [#13360](https://github.com/Sylius/Sylius/issues/13360) Minimize number of build for packages ([@Zales0123](https://github.com/Zales0123))
+
 ## v1.10.5 (2021-11-03)
 
 - [#13162](https://github.com/Sylius/Sylius/issues/13162) [docs] typofixes ([@nexxai](https://github.com/nexxai))

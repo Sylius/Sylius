@@ -80,12 +80,17 @@ First we need to create a new serializer that will support this resource. Let's 
     use Sylius\Component\Core\Model\CustomerInterface;
     use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
     use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
-    use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
+    use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
     use Webmozart\Assert\Assert;
 
     final class CustomerNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
     {
-        use NormalizerAwareTrait;
+        private NormalizerInterface $normalizer;
+
+        public function __construct(NormalizerInterface $normalizer)
+        {
+            $this->normalizer = $normalizer;
+        }
 
         private const ALREADY_CALLED = 'customer_normalizer_already_called';
 
@@ -117,6 +122,8 @@ And now let's declare its service in config files:
 
     # config/services.yaml
     App\Serializer\CustomerNormalizer:
+        arguments:
+            - '@api_platform.serializer.normalizer.item'
         tags:
             - { name: 'serializer.normalizer', priority: 100 }
 
@@ -161,14 +168,25 @@ Let's then copy the code of ProductNormalizer from ``vendor/sylius/sylius/src/Sy
     namespace App\Serializer;
 
     use Sylius\Component\Core\Model\ProductInterface;
+    use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
     use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
     use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
-    use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
+    use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
     use Webmozart\Assert\Assert;
 
     final class ProductNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
     {
-        use NormalizerAwareTrait;
+        private NormalizerInterface $normalizer;
+
+        private ProductVariantResolverInterface $productVariantResolver;
+    
+        public function __construct(
+            NormalizerInterface $normalizer,
+            ProductVariantResolverInterface $productVariantResolver
+        ) {
+            $this->normalizer = $normalizer;
+            $this->productVariantResolver = $productVariantResolver;
+        }
 
         private const ALREADY_CALLED = 'product_normalizer_already_called';
 
@@ -180,7 +198,7 @@ Let's then copy the code of ProductNormalizer from ``vendor/sylius/sylius/src/Sy
             $context[self::ALREADY_CALLED] = true;
 
             $data = $this->normalizer->normalize($object, $format, $context);
-            $variant = $this->defaultProductVariantResolver->getVariant($object);
+            $variant = $this->productVariantResolver->getVariant($object);
             $data['defaultVariant'] = $variant === null ? null : $this->iriConverter->getIriFromItem($variant);
 
             return $data;
@@ -202,6 +220,9 @@ And now let's declare its service in config files:
 
     # config/services.yaml
     App\Serializer\ProductNormalizer:
+        arguments:
+            - '@api_platform.serializer.normalizer.item'
+            - '@sylius.product_variant_resolver.default'
         tags:
             - { name: 'serializer.normalizer', priority: 100 }
 
