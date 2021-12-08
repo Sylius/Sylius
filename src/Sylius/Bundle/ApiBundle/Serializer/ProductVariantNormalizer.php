@@ -19,14 +19,13 @@ use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Webmozart\Assert\Assert;
-use ApiPlatform\Core\Api\IriConverterInterface;
-use Sylius\Component\Core\Model\CatalogPromotionInterface;
 
 /** @experimental */
 final class ProductVariantNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
@@ -48,7 +47,7 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         ProductVariantPricesCalculatorInterface $priceCalculator,
         ChannelContextInterface $channelContext,
         AvailabilityCheckerInterface $availabilityChecker,
-        SectionProviderInterface $uriBasedSectionContext,
+        SectionProviderInterface $uriBasedSectionContext
     ) {
         $this->priceCalculator = $priceCalculator;
         $this->channelContext = $channelContext;
@@ -62,7 +61,6 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         Assert::keyNotExists($context, self::ALREADY_CALLED);
 
         $context[self::ALREADY_CALLED] = true;
-
         $data = $this->normalizer->normalize($object, $format, $context);
         $channel = $this->channelContext->getChannel();
 
@@ -73,6 +71,7 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
             unset($data['price']);
             unset($data['originalPrice']);
         }
+
         /** @var ArrayCollection $appliedPromotions */
         $appliedPromotions = $object->getAppliedPromotionsForChannel($channel);
         if (!$appliedPromotions->isEmpty()) {

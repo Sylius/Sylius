@@ -30,10 +30,9 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
 {
     function let(
         ChannelPricingRepositoryInterface $channelPricingRepository,
-        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         FactoryInterface $stateMachine
     ): void {
-        $this->beConstructedWith($channelPricingRepository, $catalogPromotionRepository, $stateMachine);
+        $this->beConstructedWith($channelPricingRepository, $stateMachine);
     }
 
     function it_implements_catalog_promotion_clearer_interface(): void
@@ -43,7 +42,6 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
 
     function it_clears_channel_pricings_with_catalog_promotions_applied(
         ChannelPricingRepositoryInterface $channelPricingRepository,
-        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         FactoryInterface $stateMachine,
         ChannelPricingInterface $firstChannelPricing,
         ChannelPricingInterface $secondChannelPricing,
@@ -63,8 +61,6 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
         $secondChannelPricing->getAppliedPromotions()->willReturn(new ArrayCollection());
         $secondChannelPricing->getOriginalPrice()->shouldNotBeCalled();
         $secondChannelPricing->clearAppliedPromotions()->shouldNotBeCalled();
-
-        $catalogPromotionRepository->findByCodes(['winter_sale'])->willReturn([$catalogPromotion]);
 
         $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
         $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->willReturn(true);

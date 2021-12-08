@@ -18,23 +18,18 @@ use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ChannelPricingRepositoryInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
-use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 
 final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
 {
     private ChannelPricingRepositoryInterface $channelPricingRepository;
 
-    private CatalogPromotionRepositoryInterface $catalogPromotionRepository;
-
     private FactoryInterface $stateMachine;
 
     public function __construct(
         ChannelPricingRepositoryInterface $channelPricingRepository,
-        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         FactoryInterface $stateMachine
     ) {
         $this->channelPricingRepository = $channelPricingRepository;
-        $this->catalogPromotionRepository = $catalogPromotionRepository;
         $this->stateMachine = $stateMachine;
     }
 
@@ -44,8 +39,8 @@ final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
         $catalogPromotions = [];
 
         foreach ($channelPricings as $channelPricing) {
-            $this->clearChannelPricing($channelPricing);
             $catalogPromotions = array_merge($catalogPromotions, $channelPricing->getAppliedPromotions()->toArray());
+            $this->clearChannelPricing($channelPricing);
         }
 
         foreach ($catalogPromotions as $catalogPromotion) {

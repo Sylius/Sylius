@@ -30,9 +30,8 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
 {
     function let(
         CatalogPromotionPriceCalculatorInterface $priceCalculator,
-        AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter
     ): void {
-        $this->beConstructedWith($priceCalculator, $appliedPromotionInformationFormatter);
+        $this->beConstructedWith($priceCalculator);
     }
 
     function it_implements_catalog_promotion_applicator_interface(): void
@@ -42,7 +41,6 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
 
     function it_applies_percentage_discount_on_product_variant(
         CatalogPromotionPriceCalculatorInterface $priceCalculator,
-        AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter,
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion,
         CatalogPromotionActionInterface $catalogPromotionAction,
@@ -89,7 +87,6 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
 
     function it_applies_discount_on_product_variant_only_if_exclusive_promotion_is_not_already_applied(
         CatalogPromotionPriceCalculatorInterface $priceCalculator,
-        AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter,
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion,
         CatalogPromotionActionInterface $catalogPromotionAction,
@@ -106,8 +103,6 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
 
         $variant->getChannelPricingForChannel($firstChannel)->willReturn($firstChannelPricing);
         $variant->getChannelPricingForChannel($secondChannel)->willReturn($secondChannelPricing);
-
-        $appliedPromotionInformationFormatter->format($catalogPromotion)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
 
         $firstChannelPricing->hasExclusiveCatalogPromotionApplied()->willReturn(true);
 
@@ -130,7 +125,6 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
 
     function it_does_not_set_original_price_during_application_if_its_already_there(
         CatalogPromotionPriceCalculatorInterface $priceCalculator,
-        AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter,
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion,
         CatalogPromotionActionInterface $catalogPromotionAction,
@@ -238,7 +232,6 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
 
     function it_does_not_apply_catalog_promotion_if_product_variant_is_at_its_minimum_price(
         CatalogPromotionPriceCalculatorInterface $priceCalculator,
-        AppliedPromotionInformationFormatterInterface $appliedPromotionInformationFormatter,
         CatalogPromotionInterface $catalogPromotion,
         CatalogPromotionActionInterface $catalogPromotionAction,
         ChannelPricingInterface $channelPricing,
@@ -249,7 +242,6 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $catalogPromotion->getActions()->willReturn(new ArrayCollection([$catalogPromotionAction->getWrappedObject()]));
         $catalogPromotion->getChannels()->willReturn(new ArrayCollection([$channel->getWrappedObject()]));
 
-        $appliedPromotionInformationFormatter->format($catalogPromotion)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
         $catalogPromotionAction->getConfiguration()->willReturn(['amount' => 0.3]);
 
         $channelPricing->hasExclusiveCatalogPromotionApplied()->willReturn(false);

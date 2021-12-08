@@ -17,12 +17,9 @@ use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ProductVariantCatalogPromotionsProcessor implements ProductVariantCatalogPromotionsProcessorInterface
 {
-    private RepositoryInterface $catalogPromotionRepository;
-
     private CatalogPromotionClearerInterface $catalogPromotionClearer;
 
     private CatalogPromotionApplicatorInterface $catalogPromotionApplicator;
@@ -45,15 +42,13 @@ final class ProductVariantCatalogPromotionsProcessor implements ProductVariantCa
     private function reapplyOnChannelPricing(ChannelPricingInterface $channelPricing): void
     {
         $appliedPromotions = $channelPricing->getAppliedPromotions()->toArray();
-
         if (empty($appliedPromotions)) {
             return;
         }
-
         $this->catalogPromotionClearer->clearChannelPricing($channelPricing);
         foreach ($appliedPromotions as $catalogPromotion) {
             /** @var CatalogPromotionInterface|null $catalogPromotion */
-            if ($catalogPromotion->isEnabled()) {
+            if (!$catalogPromotion->isEnabled()) {
                 continue;
             }
 

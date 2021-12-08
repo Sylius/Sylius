@@ -13,13 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
@@ -31,11 +28,10 @@ final class ProductVariantContext implements Context
 
     private SharedStorageInterface $sharedStorage;
 
-
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
@@ -49,6 +45,7 @@ final class ProductVariantContext implements Context
      */
     public function iSelectVariant(ProductVariantInterface $variant): void
     {
+        $this->sharedStorage->set('variant', $variant);
         $this->client->show($variant->getCode());
     }
 
@@ -107,9 +104,9 @@ final class ProductVariantContext implements Context
 
         Assert::same($content['price'], $price);
         Assert::same($content['originalPrice'], $originalPrice);
-        foreach ($content['appliedPromotions'] as $promotion) {
+        foreach ($content['appliedPromotions'] as $promotionIri) {
             $catalogPromotion = $this->responseChecker->getResponseContent(
-                $this->client->showByIri($promotion)
+                $this->client->showByIri($promotionIri)
             );
             Assert::inArray($catalogPromotion['name'], $promotionsNames);
         }
@@ -140,15 +137,13 @@ final class ProductVariantContext implements Context
         int $price,
         string $promotionName
     ): void {
-        $content = $this->findVariant($variant);
-        $iriResponse = $this->client->showByIri($content['appliedPromotions'][0]);
+        $productVariant = $this->findVariant($variant);
+        $catalogPromotionResponse = $this->client->showByIri($productVariant['appliedPromotions'][0]);
+        $catalogPromotion = $this->responseChecker->getResponseContent($catalogPromotionResponse);
 
-        $catalogPromotion = $this->responseChecker->getResponseContent(($iriResponse));
-
-
-        Assert::same(sizeof($content['appliedPromotions']), 1);
-        Assert::same($content['price'], $price);
-        Assert::same($content['originalPrice'], $originalPrice);
+        Assert::same(sizeof($productVariant['appliedPromotions']), 1);
+        Assert::same($productVariant['price'], $price);
+        Assert::same($productVariant['originalPrice'], $originalPrice);
         Assert::same($catalogPromotion['name'], $promotionName);
     }
 
