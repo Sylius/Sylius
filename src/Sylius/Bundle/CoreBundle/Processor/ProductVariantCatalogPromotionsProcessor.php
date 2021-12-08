@@ -28,11 +28,9 @@ final class ProductVariantCatalogPromotionsProcessor implements ProductVariantCa
     private CatalogPromotionApplicatorInterface $catalogPromotionApplicator;
 
     public function __construct(
-        RepositoryInterface $catalogPromotionRepository,
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionApplicatorInterface $catalogPromotionApplicator
     ) {
-        $this->catalogPromotionRepository = $catalogPromotionRepository;
         $this->catalogPromotionClearer = $catalogPromotionClearer;
         $this->catalogPromotionApplicator = $catalogPromotionApplicator;
     }
@@ -53,10 +51,9 @@ final class ProductVariantCatalogPromotionsProcessor implements ProductVariantCa
         }
 
         $this->catalogPromotionClearer->clearChannelPricing($channelPricing);
-        foreach ($appliedPromotions as $appliedPromotion) {
+        foreach ($appliedPromotions as $catalogPromotion) {
             /** @var CatalogPromotionInterface|null $catalogPromotion */
-            $catalogPromotion = $this->catalogPromotionRepository->findOneBy(['code' => $appliedPromotion->getCode(), 'enabled' => true]);
-            if ($catalogPromotion === null) {
+            if ($catalogPromotion->isEnabled()) {
                 continue;
             }
 
