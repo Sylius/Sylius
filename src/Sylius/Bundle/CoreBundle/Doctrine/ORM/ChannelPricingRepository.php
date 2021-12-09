@@ -22,7 +22,7 @@ class ChannelPricingRepository extends EntityRepository implements ChannelPricin
     {
         return $this->createQueryBuilder('channelPricing')
             ->innerJoin('channelPricing.appliedPromotions', 'catalogPromotion')
-            ->addSelect('COUNT(catalogPromotion.id) as HIDDEN numberOfCatalogPromotion')
+            ->addSelect('COUNT(catalogPromotion.id) as HIDDEN numberOfCatalogPromotions')
             ->groupBy('channelPricing')
             ->having('numberOfCatalogPromotion > 0')
             ->getQuery()
