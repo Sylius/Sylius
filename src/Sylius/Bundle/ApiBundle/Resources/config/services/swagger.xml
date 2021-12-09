@@ -16,35 +16,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
-        <service id="api_platform.swagger.action.ui" class="Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Bundle\Action\SwaggerUiAction">
-            <argument type="service" id="api_platform.metadata.resource.name_collection_factory" />
-            <argument type="service" id="api_platform.metadata.resource.metadata_factory" />
-            <argument type="service" id="api_platform.serializer" />
-            <argument type="service" id="twig" />
-            <argument type="service" id="router" />
-            <argument>%api_platform.title%</argument>
-            <argument>%api_platform.description%</argument>
-            <argument>%api_platform.version%</argument>
-            <argument>%api_platform.formats%</argument>
-            <argument>%api_platform.oauth.enabled%</argument>
-            <argument>%api_platform.oauth.clientId%</argument>
-            <argument>%api_platform.oauth.clientSecret%</argument>
-            <argument>%api_platform.oauth.type%</argument>
-            <argument>%api_platform.oauth.flow%</argument>
-            <argument>%api_platform.oauth.tokenUrl%</argument>
-            <argument>%api_platform.oauth.authorizationUrl%</argument>
-            <argument>%api_platform.oauth.scopes%</argument>
-            <argument>%api_platform.show_webby%</argument>
-            <argument>%api_platform.enable_swagger_ui%</argument>
-            <argument>%api_platform.enable_re_doc%</argument>
-            <argument>%api_platform.graphql.enabled%</argument>
-            <argument>%api_platform.graphql.graphiql.enabled%</argument>
-            <argument>%api_platform.graphql.graphql_playground.enabled%</argument>
-            <argument>%api_platform.swagger.versions%</argument>
-        </service>
-
         <service
             id="sylius.api.swagger_admin_authentication_documentation_normalizer"
             class="Sylius\Bundle\ApiBundle\Swagger\AdminAuthenticationTokenDocumentationNormalizer"
