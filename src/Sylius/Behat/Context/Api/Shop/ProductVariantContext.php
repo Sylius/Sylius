@@ -24,16 +24,20 @@ final class ProductVariantContext implements Context
 {
     private ApiClientInterface $client;
 
+    private ApiClientInterface $catalogPromotionClient;
+
     private ResponseCheckerInterface $responseChecker;
 
     private SharedStorageInterface $sharedStorage;
 
     public function __construct(
         ApiClientInterface $client,
+        ApiClientInterface $catalogPromotionClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
+        $this->catalogPromotionClient = $catalogPromotionClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
     }
@@ -106,9 +110,9 @@ final class ProductVariantContext implements Context
         Assert::same($content['originalPrice'], $originalPrice);
         foreach ($content['appliedPromotions'] as $promotionIri) {
             $catalogPromotion = $this->responseChecker->getResponseContent(
-                 $this->client->showByIri($promotionIri)
+                 $this->catalogPromotionClient->showByIri($promotionIri)
              );
-            Assert::inArray($catalogPromotion['name'], $promotionsNames);
+            Assert::inArray($catalogPromotion['label'], $promotionsNames);
         }
     }
 

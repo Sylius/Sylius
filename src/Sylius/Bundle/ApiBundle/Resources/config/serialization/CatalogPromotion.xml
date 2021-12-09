@@ -16,6 +16,7 @@
             <group>admin:catalog_promotion:read</group>
             <group>admin:catalog_promotion:create</group>
             <group>admin:catalog_promotion:update</group>
+            <group>shop:catalog_promotion:read</group>
         </attribute>
 
         <attribute name="code">
@@ -57,21 +58,28 @@
             <group>admin:catalog_promotion:read</group>
         </attribute>
 
+        <attribute name="label">
+            <group>shop:catalog_promotion:read</group>
+        </attribute>
+
         <attribute name="translations">
             <group>admin:catalog_promotion:read</group>
             <group>admin:catalog_promotion:create</group>
             <group>admin:catalog_promotion:update</group>
         </attribute>
+
         <attribute name="scopes">
             <group>admin:catalog_promotion:read</group>
             <group>admin:catalog_promotion:create</group>
             <group>admin:catalog_promotion:update</group>
         </attribute>
+
         <attribute name="actions">
             <group>admin:catalog_promotion:read</group>
             <group>admin:catalog_promotion:create</group>
             <group>admin:catalog_promotion:update</group>
         </attribute>
+
         <attribute name="enabled">
             <group>admin:catalog_promotion:read</group>
             <group>admin:catalog_promotion:create</group>

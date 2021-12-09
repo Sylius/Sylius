@@ -79,7 +79,7 @@ Example configuration for `percentage_discount` action type:
                 <attribute name="path">/shop/catalog-promotions/{code}</attribute>
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:catalog_promotion:read</attribute>
+                    <attribute name="groups">shop:catalog_promotion:read</attribute>
                 </attribute>
             </itemOperation>
 
@@ -145,5 +145,6 @@ Example configuration for `percentage_discount` action type:
         <property name="scopes" writable="true" />
         <property name="actions" writable="true" />
         <property name="enabled" writable="true" />
+        <property name="label" writable="true" />
     </resource>
 </resources>
