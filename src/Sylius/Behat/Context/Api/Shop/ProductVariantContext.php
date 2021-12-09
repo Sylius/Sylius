@@ -141,14 +141,14 @@ final class ProductVariantContext implements Context
         int $price,
         string $promotionName
     ): void {
-        $productVariant = $this->findVariant($variant);
-        $catalogPromotionResponse = $this->client->showByIri($productVariant['appliedPromotions'][0]);
-        $catalogPromotion = $this->responseChecker->getResponseContent($catalogPromotionResponse);
+        $variantContent = $this->findVariant($variant);
+        $catalogPromotionResponse = $this->client->showByIri($variantContent['appliedPromotions'][0]);
+        $catalogPromotionContent = $this->responseChecker->getResponseContent($catalogPromotionResponse);
 
-        Assert::same(sizeof($productVariant['appliedPromotions']), 1);
-        Assert::same($productVariant['price'], $price);
-        Assert::same($productVariant['originalPrice'], $originalPrice);
-        Assert::same($catalogPromotion['name'], $promotionName);
+        Assert::count($variantContent['appliedPromotions'], 1);
+        Assert::same($variantContent['price'], $price);
+        Assert::same($variantContent['originalPrice'], $originalPrice);
+        Assert::same($catalogPromotionContent['label'], $promotionName);
     }
 
     /**
