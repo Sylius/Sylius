@@ -37,6 +37,10 @@ final class InstallCommand extends AbstractInstallCommand
             'message' => 'Shop configuration.',
         ],
         [
+            'command' => 'jwt-setup',
+            'message' => 'Configuring JWT token.',
+        ],
+        [
             'command' => 'assets',
             'message' => 'Installing assets.',
         ],

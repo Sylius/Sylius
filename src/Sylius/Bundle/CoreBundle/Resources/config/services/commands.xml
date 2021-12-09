@@ -50,5 +50,9 @@
         <service id="Sylius\Bundle\CoreBundle\Command\InformAboutGUSCommand">
             <tag name="console.command" />
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Command\JwtConfigurationCommand">
+            <tag name="console.command" />
+        </service>
     </services>
 </container>
