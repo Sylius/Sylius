@@ -61,12 +61,14 @@ final class CatalogPromotionType extends AbstractResourceType
                 'label' => 'sylius.form.catalog_promotion.start_date',
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text',
+                'with_seconds' => true,
                 'required' => false,
             ])
             ->add('endDate', DateTimeType::class, [
                 'label' => 'sylius.form.catalog_promotion.end_date',
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text',
+                'with_seconds' => true,
                 'required' => false,
             ])
             ->add('exclusive', CheckboxType::class, [
