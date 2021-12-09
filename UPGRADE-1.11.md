@@ -1,5 +1,21 @@
 # UPGRADE FROM `v1.10.X` TO `v1.11.0`
 
+### "polishsymfonycommunity/symfony-mocker-container" moved to dev-requirements
+
+This obvious dev dependency was part of Sylius requirements. In 1.11 we've moved it to proper place. However, it may lead to app break, as this container could be used in your Kernel, if you used Sylius-Standard as your template. In such a case, please update your `src/Kernel.php` class as follows:
+
+```diff
+     protected function getContainerBaseClass(): string
+     {
+-        if ($this->isTestEnvironment()) {
++        if ($this->isTestEnvironment() && class_exists(MockerContainer::class)) {
+            return MockerContainer::class;
+         }
+ 
+         return parent::getContainerBaseClass();
+     }
+```
+
 ### Drop support for PHP 7.4
 
 Due to the drop of support PHP `7.4` Sylius also will not support it since version `1.11`.
