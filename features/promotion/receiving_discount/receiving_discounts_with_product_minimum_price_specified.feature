@@ -211,3 +211,18 @@ Feature: Receiving discounts with product minimum price specified
         And the "Keyboard" product should have unit price discounted by "$1.00"
         And the "Mouse" product should have unit price discounted by "$0.00"
         And the "Headphones" product should have unit price discounted by "$4.00"
+
+    @api
+    Scenario: Distributing discount proportionally between different products when one has minimum price specified and promotion does not apply on discounted products
+        Given this promotion does not apply on discounted products
+        And it gives "$27" discount to every order
+        And there is a catalog promotion "Fixed T-Shirt sale" that reduces price by fixed "$2.50" in the "United States" channel and applies on "PHP Mug" product
+        And I add 2 products "T-Shirt" to the cart
+        And I add 2 products "PHP Mug" to the cart
+        And I add product "Symfony Mug" to the cart
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I proceed with "Free" shipping method and "Offline" payment
+        Then I should be on the checkout summary step
+        And the "T-Shirt" product should have unit prices discounted by "$5.00" and "$5.00"
+        And the "PHP Mug" product should have unit prices discounted by "$2.50" and "$2.50"
+        And the "Symfony Mug" product should have unit price discounted by "$17.00"

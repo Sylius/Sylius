@@ -57,16 +57,31 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
             return false;
         }
 
-        $promotionAmount = $this->calculateAdjustmentAmount($subject->getPromotionSubjectTotal(), $configuration['percentage']);
+        $subjectTotal = $this->getSubjectTotal($subject, $promotion);
+        $promotionAmount = $this->calculateAdjustmentAmount($subjectTotal, $configuration['percentage']);
+
         if (0 === $promotionAmount) {
             return false;
         }
 
         if ($this->minimumPriceDistributor !== null) {
-            $splitPromotion = $this->minimumPriceDistributor->distribute($subject->getItems()->toArray(), $promotionAmount, $subject->getChannel());
+            $splitPromotion = $this->minimumPriceDistributor->distribute($subject->getItems()->toArray(), $promotionAmount, $subject->getChannel(), $promotion->getAppliesToDiscounted());
         } else {
             $itemsTotal = [];
             foreach ($subject->getItems() as $orderItem) {
+                if ($promotion->getAppliesToDiscounted()) {
+                    $itemsTotal[] = $orderItem->getTotal();
+
+                    continue;
+                }
+
+                $variant = $orderItem->getVariant();
+                if (!empty($variant->getAppliedPromotionsForChannel($subject->getChannel()))) {
+                    $itemsTotal[] = 0;
+
+                    continue;
+                }
+
                 $itemsTotal[] = $orderItem->getTotal();
             }
 
@@ -88,5 +103,10 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
     private function calculateAdjustmentAmount(int $promotionSubjectTotal, float $percentage): int
     {
         return -1 * (int) round($promotionSubjectTotal * $percentage);
+    }
+
+    private function getSubjectTotal(OrderInterface $order, PromotionInterface $promotion): int
+    {
+        return $promotion->getAppliesToDiscounted() ? $order->getPromotionSubjectTotal() : $order->getNonDiscountedItemsTotal();
     }
 }

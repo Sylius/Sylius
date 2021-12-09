@@ -27,7 +27,7 @@ final class MinimumPriceDistributor implements MinimumPriceDistributorInterface
         $this->proportionalIntegerDistributor = $proportionalIntegerDistributor;
     }
 
-    public function distribute(array $orderItems, int $amount, ChannelInterface $channel): array
+    public function distribute(array $orderItems, int $amount, ChannelInterface $channel, bool $appliesOnDiscounted): array
     {
         Assert::allIsInstanceOf($orderItems, OrderItemInterface::class);
 
@@ -37,7 +37,6 @@ final class MinimumPriceDistributor implements MinimumPriceDistributorInterface
             $variant = $orderItem->getVariant();
 
             $minimumPrice = $variant->getChannelPricingForChannel($channel)->getMinimumPrice();
-
             $minimumPrice *= $orderItem->getQuantity();
 
             $orderItemsToProcess['order-item-' . $index] = [
@@ -48,14 +47,14 @@ final class MinimumPriceDistributor implements MinimumPriceDistributorInterface
 
         return array_values(array_map(
             function (array $processedOrderItem): int { return $processedOrderItem['promotion']; },
-            $this->processDistributionWithMinimumPrice($orderItemsToProcess, $amount, $channel)
+            $this->processDistributionWithMinimumPrice($orderItemsToProcess, $amount, $channel, $appliesOnDiscounted)
         ));
     }
 
-    private function processDistributionWithMinimumPrice(array $orderItems, int $amount, $channel): array
+    private function processDistributionWithMinimumPrice(array $orderItems, int $amount, $channel, bool $appliesOnDiscounted): array
     {
-        $totals = array_values(array_map(function (array $orderItemData): int {
-            return $orderItemData['orderItem']->getTotal();
+        $totals = array_values(array_map(function (array $orderItemData) use ($appliesOnDiscounted, $channel): int {
+            return $this->getTotalPrice($orderItemData['orderItem'], $appliesOnDiscounted, $channel);
         }, $orderItems));
 
         $promotionsToDistribute = array_combine(
@@ -92,7 +91,7 @@ final class MinimumPriceDistributor implements MinimumPriceDistributorInterface
             return $orderItems;
         }
 
-        $nestedDistributions = $this->processDistributionWithMinimumPrice($distributableItems, $leftAmount, $channel);
+        $nestedDistributions = $this->processDistributionWithMinimumPrice($distributableItems, $leftAmount, $channel, $appliesOnDiscounted);
 
         foreach ($nestedDistributions as $index => $distribution) {
             $orderItems[$index]['promotion'] += $distribution['promotion'];
@@ -107,5 +106,15 @@ final class MinimumPriceDistributor implements MinimumPriceDistributorInterface
         int $proposedPromotion
     ): bool {
         return $minimumPriceAdjustedByCurrentDiscount >= ($orderItemTotal + $proposedPromotion);
+    }
+
+    private function getTotalPrice(OrderItemInterface $orderItem, bool $appliesOnDiscounted, ChannelInterface $channel): int
+    {
+        $variant = $orderItem->getVariant();
+        if ($appliesOnDiscounted === false && !empty($variant->getAppliedPromotionsForChannel($channel))) {
+            return 0;
+        }
+
+        return $orderItem->getTotal();
     }
 }

@@ -68,6 +68,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $secondItem->getTotal()->willReturn(800);
         $secondItem->getQuantity()->willReturn(1);
 
+        $promotion->getAppliesToDiscounted()->willReturn(true);
         $firstItem->getVariant()->willReturn($productVariantOne);
         $secondItem->getVariant()->willReturn($productVariantTwo);
         $productVariantOne->getChannelPricingForChannel($channel)->willReturn($channelPricingOne);
@@ -78,7 +79,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
 
         $order->getPromotionSubjectTotal()->willReturn(10000);
 
-        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -1000, $channel)->willReturn([-200, -800]);
+        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -1000, $channel, true)->willReturn([-200, -800]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-200, -800])->shouldBeCalled();
 
         $this->execute($order, ['percentage' => 0.1], $promotion)->shouldReturn(true);
@@ -118,9 +119,11 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $channelPricingOne->getMinimumPrice()->willReturn(0);
         $channelPricingTwo->getMinimumPrice()->willReturn(0);
 
+        $promotion->getAppliesToDiscounted()->willReturn(true);
+
         $order->getPromotionSubjectTotal()->willReturn(10000);
 
-        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -1000, $channel)->shouldNotBeCalled();
+        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -1000, $channel, true)->shouldNotBeCalled();
         $distributor->distribute([200, 800], -1000)->willReturn([-200, -800]);
 
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-200, -800])->shouldBeCalled();
@@ -159,11 +162,48 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $channelPricingOne->getMinimumPrice()->willReturn(100);
         $channelPricingTwo->getMinimumPrice()->willReturn(0);
 
+        $order->getPromotionSubjectTotal()->willReturn(1000);
+        $promotion->getAppliesToDiscounted()->willReturn(true);
+
+        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -500, $channel, true)->willReturn([-100, -400]);
+
+        $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-100, -400])->shouldBeCalled();
+
+        $this->execute($order, ['percentage' => 0.5], $promotion)->shouldReturn(true);
+    }
+
+    function it_uses_a_distributor_and_applicator_to_execute_promotion_action_only_for_non_discounted_items(
+        ChannelInterface $channel,
+        OrderInterface $order,
+        OrderItemInterface $firstItem,
+        OrderItemInterface $secondItem,
+        ProductVariantInterface $firstVariant,
+        ProductVariantInterface $secondVariant,
+        PromotionInterface $promotion,
+        ProportionalIntegerDistributorInterface $distributor,
+        MinimumPriceDistributorInterface $minimumPriceDistributor,
+        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+    ): void {
+        $order->countItems()->willReturn(2);
+        $order->getItems()->willReturn(new ArrayCollection([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]));
+        $order->getChannel()->willReturn($channel);
+
+        $firstItem->getTotal()->willReturn(200);
+        $firstItem->getVariant()->willReturn($firstVariant);
+        $secondItem->getTotal()->willReturn(800);
+        $secondItem->getVariant()->willReturn($secondVariant);
+
+        $firstVariant->getAppliedPromotionsForChannel($channel)->willReturn([]);
+        $secondVariant->getAppliedPromotionsForChannel($channel)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
+
+        $order->getNonDiscountedItemsTotal()->willReturn(200);
+        $promotion->getAppliesToDiscounted()->willReturn(false);
+
         $order->getPromotionSubjectTotal()->willReturn(10000);
 
-        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -1000, $channel)->willReturn([-100, -800]);
-
-        $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-100, -800])->shouldBeCalled();
+        $distributor->distribute([200, 0], -20)->shouldNotBeCalled();
+        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -20, $channel, false)->willReturn([-20, 0]);
+        $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-20, 0])->shouldBeCalled();
 
         $this->execute($order, ['percentage' => 0.1], $promotion)->shouldReturn(true);
     }
