@@ -57,7 +57,7 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
             return false;
         }
 
-        $subjectTotal = $promotion->getAppliesToDiscounted() ? $subject->getPromotionSubjectTotal() : $subject->getNonDiscountedItemsTotal();
+        $subjectTotal = $this->getSubjectTotal($subject, $promotion);
         $promotionAmount = $this->calculateAdjustmentAmount($subjectTotal, $configuration['percentage']);
 
         if (0 === $promotionAmount) {
@@ -65,7 +65,7 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
         }
 
         if ($this->minimumPriceDistributor !== null) {
-            $splitPromotion = $this->minimumPriceDistributor->distribute($subject->getItems()->toArray(), $promotionAmount, $subject->getChannel());
+            $splitPromotion = $this->minimumPriceDistributor->distribute($subject->getItems()->toArray(), $promotionAmount, $subject->getChannel(), $promotion->getAppliesToDiscounted());
         } else {
             $itemsTotal = [];
             foreach ($subject->getItems() as $orderItem) {
@@ -103,5 +103,10 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
     private function calculateAdjustmentAmount(int $promotionSubjectTotal, float $percentage): int
     {
         return -1 * (int) round($promotionSubjectTotal * $percentage);
+    }
+
+    private function getSubjectTotal(OrderInterface $order, PromotionInterface $promotion): int
+    {
+        return $promotion->getAppliesToDiscounted() ? $order->getPromotionSubjectTotal() : $order->getNonDiscountedItemsTotal();
     }
 }

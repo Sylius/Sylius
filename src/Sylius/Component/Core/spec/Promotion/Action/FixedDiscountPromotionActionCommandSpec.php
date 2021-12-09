@@ -89,7 +89,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $secondItem->getTotal()->willReturn(4000);
         $secondItem->getQuantity()->willReturn(1);
 
-        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -1000, $channel)->willReturn([-600, -400]);
+        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -1000, $channel, true)->willReturn([-600, -400]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-600, -400])->shouldBeCalled();
 
         $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(true);
@@ -125,6 +125,8 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
             ->willReturn(new ArrayCollection([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]))
         ;
 
+        $promotion->getAppliesToDiscounted()->willReturn(true);
+
         $firstItem->getVariant()->willReturn($productVariantOne);
         $secondItem->getVariant()->willReturn($productVariantTwo);
         $productVariantOne->getChannelPricingForChannel($channel)->willReturn($channelPricingOne);
@@ -139,7 +141,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $secondItem->getTotal()->willReturn(4000);
         $secondItem->getQuantity()->willReturn(1);
 
-        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -1000, $channel)->shouldNotBeCalled();
+        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -1000, $channel, true)->shouldNotBeCalled();
         $distributor->distribute([6000, 4000], -1000)->willReturn([-200, -800]);
 
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-200, -800])->shouldBeCalled();
@@ -184,8 +186,9 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $firstItem->getQuantity()->willReturn(1);
         $secondItem->getTotal()->willReturn(4000);
         $secondItem->getQuantity()->willReturn(1);
+        $promotion->getAppliesToDiscounted()->willReturn(true);
 
-        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -1000, $channel)->willReturn([-200, -800]);
+        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -1000, $channel, true)->willReturn([-200, -800]);
 
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-200, -800])->shouldBeCalled();
 
@@ -226,7 +229,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $secondVariant->getAppliedPromotionsForChannel($channel)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
 
         $proportionalIntegerDistributor->distribute([6000, 0], -1000)->shouldNotBeCalled();
-        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -10000, $channel)->willReturn([-6000, 0]);
+        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -1000, $channel, false)->willReturn([-1000, 0]);
 
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-1000, 0])->shouldBeCalled();
 
@@ -274,7 +277,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $secondItem->getTotal()->willReturn(4000);
         $secondItem->getQuantity()->willReturn(1);
 
-        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -10000, $channel)->willReturn([-6000, -4000]);
+        $minimumPriceDistributor->distribute([$firstItem, $secondItem], -10000, $channel, true)->willReturn([-6000, -4000]);
 
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-6000, -4000])->shouldBeCalled();
 

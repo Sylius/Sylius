@@ -144,7 +144,9 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion,
         ProductVariantInterface $variant1,
-        ProductVariantInterface $variant2
+        ProductVariantInterface $variant2,
+        ChannelPricingInterface $channelPricing1,
+        ChannelPricingInterface $channelPricing2
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -162,6 +164,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $orderItem1->getOrder()->willReturn($order);
         $variant1->getAppliedPromotionsForChannel($channel)->willReturn([]);
         $unit1->getOrderItem()->willReturn($orderItem1);
+        $unit1->getTotal()->willReturn(500);
 
         $orderItem2->getQuantity()->willReturn(1);
         $orderItem2->getUnitPrice()->willReturn(500);
@@ -170,6 +173,13 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $orderItem2->getOrder()->willReturn($order);
         $variant2->getAppliedPromotionsForChannel($channel)->willReturn(['winter_sale' => ['name' => 'Winter sale']]);
         $unit2->getOrderItem()->willReturn($orderItem2);
+        $unit2->getTotal()->willReturn(500);
+
+        $variant1->getChannelPricingForChannel($channel)->willReturn($channelPricing1);
+        $variant2->getChannelPricingForChannel($channel)->willReturn($channelPricing2);
+
+        $channelPricing1->getMinimumPrice()->willReturn(0);
+        $channelPricing2->getMinimumPrice()->willReturn(0);
 
         $promotion->getName()->willReturn('Test promotion');
         $promotion->getCode()->willReturn('TEST_PROMOTION');

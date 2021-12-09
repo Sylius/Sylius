@@ -61,7 +61,7 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
             return false;
         }
 
-        $subjectTotal = $promotion->getAppliesToDiscounted() ? $subject->getPromotionSubjectTotal() : $subject->getNonDiscountedItemsTotal();
+        $subjectTotal = $this->getSubjectTotal($subject, $promotion);
         $promotionAmount = $this->calculateAdjustmentAmount($subjectTotal, $configuration[$channelCode]['amount']);
 
         if (0 === $promotionAmount) {
@@ -69,7 +69,7 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
         }
 
         if ($this->minimumPriceDistributor !== null) {
-            $splitPromotion = $this->minimumPriceDistributor->distribute($subject->getItems()->toArray(), $promotionAmount, $subject->getChannel());
+            $splitPromotion = $this->minimumPriceDistributor->distribute($subject->getItems()->toArray(), $promotionAmount, $subject->getChannel(), $promotion->getAppliesToDiscounted());
         } else {
             $itemsTotal = [];
             foreach ($subject->getItems() as $orderItem) {
