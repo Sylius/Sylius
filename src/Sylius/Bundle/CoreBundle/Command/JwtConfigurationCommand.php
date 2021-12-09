@@ -19,7 +19,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 final class JwtConfigurationCommand extends AbstractInstallCommand
 {
-    protected static $defaultName = 'sylius:install:jwt_setup';
+    protected static $defaultName = 'sylius:install:jwt-setup';
 
     protected function configure(): void
     {
@@ -37,7 +37,7 @@ EOT
     {
         $helper = $this->getHelper('question');
 
-        $output->writeln('Configuring API');
+        $output->writeln('Generating JWT token for Sylius API');
 
         $question = new ConfirmationQuestion('Do you want to generate JWT token? (y/N)', false);
 
@@ -48,6 +48,7 @@ EOT
         $this->commandExecutor->runCommand('lexik:jwt:generate-keypair', ['--overwrite' => true], $output);
 
         $output->writeln('Please, remember to enable Sylius API');
+        $output->writeln('https://docs.sylius.com/en/1.10/book/api/introduction.html');
 
         return 0;
     }

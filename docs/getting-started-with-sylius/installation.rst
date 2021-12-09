@@ -44,6 +44,7 @@ Run the Sylius installation command to do that.
 This command will do several things for you - the first two steps are checking if your environment fulfills technical requirements,
 and setting the project database. You will also be asked if you want to have default fixtures loaded into your database - let's say
 "No" to that, we will configure the store manually.
+You will be also asked if you want to generate API Tokens.
 
 .. image:: /_images/getting-started-with-sylius/installation1.png
 
