@@ -1,5 +1,10 @@
 # CHANGELOG FOR `1.10.X`
 
+## v1.10.7 (2021-12-09)
+- [#13365](https://github.com/Sylius/Sylius/issues/13365) Let's not release Sylius 1.11 on Sunday ([@Zales0123](https://github.com/Zales0123))
+- [#13372](https://github.com/Sylius/Sylius/issues/13372) Remove ORM 2.10 conflict ([@mbabker](https://github.com/mbabker))
+- [#13373](https://github.com/Sylius/Sylius/issues/13373) Revert "Move "polishsymfonycommunity/symfony-mocker-container" into dev dependencies" due to the BC break ([@lchrusciel](https://github.com/lchrusciel))
+
 ## v1.10.6 (2021-12-07)
 
 - [#11751](https://github.com/Sylius/Sylius/issues/11751) [Core] added default factory for avatar image ([@foxou33](https://github.com/foxou33), [@lchrusciel](https://github.com/lchrusciel))
