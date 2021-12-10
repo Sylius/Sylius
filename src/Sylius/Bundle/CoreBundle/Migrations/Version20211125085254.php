@@ -19,13 +19,11 @@ final class Version20211125085254 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE sylius_channel_pricing CHANGE minimum_price minimum_price INT DEFAULT 0 NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE sylius_channel_pricing CHANGE minimum_price minimum_price INT NOT NULL');
     }
 }
