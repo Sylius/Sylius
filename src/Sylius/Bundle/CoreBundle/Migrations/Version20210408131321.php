@@ -25,11 +25,15 @@ final class Version20210408131321 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+
         $this->addSql('CREATE UNIQUE INDEX UNIQ_6196A1F9BEA95C75 ON sylius_order (token_value)');
     }
 
     public function down(Schema $schema): void
     {
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+
         $this->addSql('DROP INDEX UNIQ_6196A1F9BEA95C75 ON sylius_order');
     }
 }
