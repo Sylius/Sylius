@@ -19,11 +19,15 @@ final class Version20211122104644 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+
         $this->addSql('ALTER TABLE sylius_catalog_promotion ADD exclusive TINYINT(1) DEFAULT \'0\' NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+
         $this->addSql('ALTER TABLE sylius_catalog_promotion DROP exclusive');
     }
 }
