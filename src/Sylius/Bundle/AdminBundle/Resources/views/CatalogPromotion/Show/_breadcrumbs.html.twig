@@ -1,0 +1,10 @@
+{% import '@SyliusAdmin/Macro/breadcrumb.html.twig' as breadcrumb %}
+
+{% set breadcrumbs = [
+    { label: 'sylius.ui.administration'|trans, url: path('sylius_admin_dashboard') },
+    { label: 'sylius.ui.catalog_promotions'|trans, url: path('sylius_admin_catalog_promotion_index') },
+    { label: configuration.vars.catalogPromotion.name, url: path('sylius_admin_catalog_promotion_show',{'id': configuration.vars.catalogPromotion.id}) },
+    { label: 'sylius.ui.discounted_variants'|trans },
+] %}
+
+{{ breadcrumb.crumble(breadcrumbs) }}

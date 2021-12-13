@@ -62,12 +62,17 @@ sylius_grid:
                     class: "%sylius.model.product_variant.class%"
                     repository:
                         method: findByCatalogPromotion
+                        arguments: 
+                            id: $id
             fields:
-                code:
-                    type: string
-                    label: sylius.ui.code
+                variants:
+                    type: twig
+                    label: sylius.ui.product
+                    path: .
                     sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/variantLinks.html.twig"
                 name:
                     type: string
-                    label: sylius.ui.name
+                    label: sylius.ui.variant
                     sortable: ~

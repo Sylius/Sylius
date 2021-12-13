@@ -1027,3 +1027,15 @@ sylius_ui:
                 menu:
                     template: "@SyliusAdmin/CatalogPromotion/Show/_actions.html.twig"
                     priority: 5
+                    
+        sylius.admin.catalog_promotion.show.discounted.variants:
+            blocks:
+                header:
+                    template: "@SyliusAdmin/CatalogPromotion/Show/_headerForVariantsWithAppliedPromotions.html.twig"
+                    priority: 15
+                breadcrumb:
+                    template: "@SyliusAdmin/CatalogPromotion/Show/_breadcrumbs.html.twig"
+                    priority: 10
+                content:
+                    template: "@SyliusAdmin/Crud/Index/_content.html.twig"
+                    priority: 5
