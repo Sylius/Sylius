@@ -41,5 +41,5 @@ sylius:
                 not_blank: Bitte geben Sie die prozentuale Gebühr ein.
         code:
             not_blank: 'Bitte geben Sie ein Kürzel für die Zahlungsmethode an.'
-            regex: 'Kürzel der Zahlungsweise darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            regex: 'Kürzel der Zahlungsart darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
             unique: 'Eine Zahlungsmethode mit diesem Kürzel existiert bereits.'
