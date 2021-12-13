@@ -6,6 +6,8 @@ references related issues.
  - `symfony/password-hasher": "^6.0`:
 
    Symfony in version 5.3 change password hashing logic, and in version 6.0 they removed BC layer
+   
+   References: https://github.com/Sylius/Sylius/pull/13358
 
  - `doctrine/doctrine-bundle:2.3.0`:
 
