@@ -23,3 +23,20 @@ Feature: Seeing catalog promotion's details
         And it should apply on "T-Shirt" product
         And it should start at "2021-11-10" and end at "2022-01-08"
         And its priority should be 1200
+
+    @ui
+    Scenario: Seeing discounted variants on separate page
+        When I view details of the catalog promotion "Winter sale"
+        And I view discounted variants page
+        Then its name should be "Winter sale"
+        And I should see a single product variant in the list
+        And I should see the product variant "PHP T-Shirt" in the list
+
+    @ui
+    Scenario: Being able to access product link
+        When I view details of the catalog promotion "Winter sale"
+        And I view discounted variants page
+        And I follow "T-Shirt" link
+        And I should see product show page without variants
+
+

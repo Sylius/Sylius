@@ -26,6 +26,8 @@ default:
                 - sylius.behat.context.ui.admin.notification
                 - sylius.behat.context.ui.shop.product
                 - Sylius\Behat\Context\Ui\Admin\ManagingCatalogPromotionsContext
-
+                - sylius.behat.context.ui.admin.browsing_product_variants
+                - sylius.behat.context.ui.admin.product_showpage
+                
             filters:
                 tags: "@managing_catalog_promotions&&@ui"

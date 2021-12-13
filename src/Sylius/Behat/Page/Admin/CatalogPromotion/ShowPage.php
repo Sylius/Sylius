@@ -80,6 +80,16 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return false;
     }
 
+    public function clickDiscountedVariants(): void
+    {
+        $this->getDocument()->clickLink("Discounted variants");
+    }
+
+    public function clickProductLink(string $product): void
+    {
+        $this->getDocument()->clickLink($product);
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -89,4 +99,5 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'start_date' => '[data-test-start-date]',
         ]);
     }
+
 }

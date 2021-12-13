@@ -535,6 +535,30 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I view discounted variants page
+     */
+    public function iViewDiscountedVariantsPageOfCatalogPromotion()
+    {
+        $this->showPage->clickDiscountedVariants();
+    }
+
+    /**
+     * @When I follow :product link
+     */
+    public function iFollowProductLink(string $product) :void
+    {
+        $this->showPage->clickProductLink($product);
+    }
+
+    /**
+     * @Then I should be redirected to my account dashboard
+     */
+    public function iShouldBeRedirectedToMyAccountDashboard()
+    {
+        Assert::true($this->dashboardPage->isOpen(), 'User should be on the account panel dashboard page but they are not.');
+    }
+
+    /**
      * @Then I should be notified that a discount amount should be between 0% and 100%
      */
     public function iShouldBeNotifiedThatADiscountAmountShouldBeBetween0And100Percent(): void
