@@ -32,4 +32,8 @@ interface ShowPageInterface extends PageInterface
     public function hasScopeWithVariant(ProductVariantInterface $variant): bool;
 
     public function hasScopeWithProduct(ProductInterface $product): bool;
+
+    public function clickDiscountedVariants(): void;
+
+    public function clickProductLink(string $product): void;
 }
