@@ -12,6 +12,13 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.catalog_promotion.actions" type="collection">
+            <parameter type="constant">Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT</parameter>
+            <parameter type="constant">Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT</parameter>
+        </parameter>
+    </parameters>
+
     <services>
         <defaults public="true" />
 
@@ -34,10 +41,7 @@
         </service>
 
         <service id="Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionValidator">
-            <argument type="collection">
-                <argument type="constant">Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT</argument>
-                <argument type="constant">Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT</argument>
-            </argument>
+            <argument>%sylius.catalog_promotion.actions%</argument>
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.action_validator" index-by="key" />
             <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_action" />
         </service>
