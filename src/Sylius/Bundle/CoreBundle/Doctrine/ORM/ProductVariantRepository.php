@@ -44,9 +44,13 @@ class ProductVariantRepository extends BaseProductVariantRepository implements P
         ;
     }
 
-    public function findByCatalogPromotion(): QueryBuilder
+    public function findByCatalogPromotion($id): QueryBuilder
     {
-        return $this->createQueryBuilder('jan_pawel_2')
-            ->andWhere('jan_pawel_2.id < 5000');
+        return $this->createQueryBuilder('productVariant')
+            ->innerJoin('productVariant.channelPricings', 'channelPricing')
+            ->innerJoin('channelPricing.appliedPromotions', 'appliedPromotion')
+            ->andWhere('appliedPromotion.id = :id')
+            ->setParameter('id', $id)
+        ;
     }
 }
