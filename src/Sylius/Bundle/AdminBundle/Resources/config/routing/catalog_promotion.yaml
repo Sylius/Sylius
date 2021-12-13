@@ -24,3 +24,19 @@ sylius_admin_catalog_promotion_show:
             section: admin
             template: "@SyliusAdmin/CatalogPromotion/show.html.twig"
             permission: true
+            
+sylius_admin_catalog_promotion_show_product_variants_with_applied_promo:
+    path: /catalog-promotions/{id}/discounted-variants/
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_variant:indexAction
+        _sylius:
+            grid: sylius_admin_catalog_promotion_product_variant_list
+            section: admin
+            permission: true
+            vars:
+                route:
+                    parameters:
+                        id: $id
+                catalogPromotion: "expr:service('sylius.repository.catalog_promotion').find($id)"
+            template: "@SyliusAdmin/CatalogPromotion/productVariantsWithAppliedPromotion.html.twig"

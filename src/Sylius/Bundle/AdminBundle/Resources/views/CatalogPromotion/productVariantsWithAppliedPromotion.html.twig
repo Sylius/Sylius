@@ -1,0 +1,12 @@
+{% extends '@SyliusAdmin/layout.html.twig' %}
+
+{% set definition = resources.definition %}
+{% set data = resources.data %}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+
+{% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
+
+{% block content %}
+    {{ sylius_template_event('sylius.admin.catalog_promotion.show.discounted.variants', _context) }}
+{% endblock %}
