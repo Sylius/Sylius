@@ -3,5 +3,3 @@ suites:
         namespace: Sylius\Component\Taxation
         psr4_prefix: Sylius\Component\Taxation
         src_path: .
-
-runner.maintainers.errors.level: 14335 # E_ALL & ~E_USER_DEPRECATED ^ E_STRICT

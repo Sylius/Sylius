@@ -32,7 +32,7 @@
         "symfony/intl": "^4.4 || ^5.4"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.0"
+        "phpspec/phpspec": "^7.1"
     },
     "config": {
         "bin-dir": "bin"

@@ -55,7 +55,7 @@
         "laminas/laminas-stdlib": "^3.2"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.0",
+        "phpspec/phpspec": "^7.1",
         "symfony/property-access": "^4.4 || ^5.4"
     },
     "config": {
