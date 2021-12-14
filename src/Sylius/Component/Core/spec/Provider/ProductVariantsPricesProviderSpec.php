@@ -16,6 +16,7 @@ namespace spec\Sylius\Component\Core\Provider;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -54,10 +55,10 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
             $whiteLargeTShirt->getWrappedObject(),
         ]));
 
-        $blackSmallTShirt->getAppliedPromotionsForChannel($channel)->willReturn([]);
-        $whiteSmallTShirt->getAppliedPromotionsForChannel($channel)->willReturn([]);
-        $blackLargeTShirt->getAppliedPromotionsForChannel($channel)->willReturn([]);
-        $whiteLargeTShirt->getAppliedPromotionsForChannel($channel)->willReturn([]);
+        $blackSmallTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
+        $whiteSmallTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
+        $blackLargeTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
+        $whiteLargeTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
 
         $blackSmallTShirt->getOptionValues()->willReturn(
             new ArrayCollection([$black->getWrappedObject(), $small->getWrappedObject()])
@@ -128,7 +129,9 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
         ProductVariantInterface $blackSmallTShirt,
         ProductVariantInterface $whiteLargeTShirt,
         ProductVariantInterface $whiteSmallTShirt,
-        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator
+        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
+        CatalogPromotionInterface $winterCatalogPromotion,
+        CatalogPromotionInterface $summerCatalogPromotion
     ): void {
         $tShirt->getEnabledVariants()->willReturn(new ArrayCollection([
             $blackSmallTShirt->getWrappedObject(),
@@ -137,16 +140,14 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
             $whiteLargeTShirt->getWrappedObject(),
         ]));
 
-        $blackSmallTShirt
-            ->getAppliedPromotionsForChannel($channel)
-            ->willReturn(['winter_sale' => ['en_US' => ['name' => 'Winter sale -50%']]])
-        ;
-        $whiteSmallTShirt->getAppliedPromotionsForChannel($channel)->willReturn([]);
-        $blackLargeTShirt
-            ->getAppliedPromotionsForChannel($channel)
-            ->willReturn(['summer_sale' => ['en_US' => ['name' => 'Summer sale -50%']]])
-        ;
-        $whiteLargeTShirt->getAppliedPromotionsForChannel($channel)->willReturn([]);
+        $blackSmallTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([
+            $winterCatalogPromotion->getWrappedObject()
+        ]));
+        $whiteSmallTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
+        $blackLargeTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([
+            $summerCatalogPromotion->getWrappedObject()]
+        ));
+        $whiteLargeTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
 
         $blackSmallTShirt->getOptionValues()->willReturn(
             new ArrayCollection([$black->getWrappedObject(), $small->getWrappedObject()])
@@ -185,7 +186,7 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
                 't_shirt_color' => 'black',
                 't_shirt_size' => 'small',
                 'value' => 1000,
-                'applied_promotions' => ['winter_sale' => ['en_US' => ['name' => 'Winter sale -50%']]],
+                'applied_promotions' => [$winterCatalogPromotion],
             ],
             [
                 't_shirt_color' => 'white',
@@ -197,7 +198,7 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
                 't_shirt_color' => 'black',
                 't_shirt_size' => 'large',
                 'value' => 2000,
-                'applied_promotions' => ['summer_sale' => ['en_US' => ['name' => 'Summer sale -50%']]],
+                'applied_promotions' => [$summerCatalogPromotion],
             ],
             [
                 't_shirt_color' => 'white',

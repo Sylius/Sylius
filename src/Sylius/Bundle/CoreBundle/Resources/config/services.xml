@@ -265,7 +265,6 @@
             class="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicator"
         >
             <argument type="service" id="Sylius\Component\CoreBundle\Calculator\CatalogPromotionPriceCalculatorInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Formatter\AppliedPromotionInformationFormatterInterface" />
         </service>
 
         <service

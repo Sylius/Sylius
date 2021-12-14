@@ -128,6 +128,6 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
         /** @var OrderInterface $order */
         $order = $item->getOrder();
 
-        return empty($variant->getAppliedPromotionsForChannel($order->getChannel()));
+        return $variant->getAppliedPromotionsForChannel($order->getChannel())->isEmpty();
     }
 }
