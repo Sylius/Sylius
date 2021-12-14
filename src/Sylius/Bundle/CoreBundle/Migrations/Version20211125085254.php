@@ -21,7 +21,7 @@ final class Version20211125085254 extends AbstractMigration
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE sylius_channel_pricing CHANGE minimum_price minimum_price INT DEFAULT 0 NOT NULL');
+        $this->addSql('ALTER TABLE sylius_channel_pricing CHANGE minimum_price minimum_price INT DEFAULT 0');
     }
 
     public function down(Schema $schema): void
