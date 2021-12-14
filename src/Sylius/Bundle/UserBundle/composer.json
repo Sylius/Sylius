@@ -55,7 +55,7 @@
         "hwi/oauth-bundle": "^1.1",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "php-http/guzzle6-adapter": "^2.0",
-        "phpspec/phpspec": "^7.0",
+        "phpspec/phpspec": "^7.1",
         "phpunit/phpunit": "^8.5",
         "symfony/dependency-injection": "^4.4 || ^5.4",
         "symfony/security-bundle": "^4.4 || ^5.4",
