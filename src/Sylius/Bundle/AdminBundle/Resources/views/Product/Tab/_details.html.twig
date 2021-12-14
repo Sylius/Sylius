@@ -31,14 +31,6 @@
                 {{ form_row(form.channels) }}
             </div>
         </div>
-        {% if product.simple %}
-            <div class="ui one column stackable grid">
-                <div class="column">
-                    <h4 class="ui dividing header">{{ 'sylius.ui.pricing'|trans }}</h4>
-                    {% include "@SyliusAdmin/Product/_channel_pricing.html.twig" with { product: product, variantForm: form.variant } only %}
-                </div>
-            </div>
-        {% endif %}
         <div class="ui hidden divider"></div>
         {{ translationFormWithSlug(form.translations, '@SyliusAdmin/Product/_slugField.html.twig', product) }}
         {% if product.simple %}

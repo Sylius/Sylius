@@ -78,6 +78,12 @@ final class ProductFormMenuBuilder
                 ->setAttribute('template', '@SyliusAdmin/Product/Tab/_inventory.html.twig')
                 ->setLabel('sylius.ui.inventory')
             ;
+
+            $menu
+                ->addChild('channel_pricings')
+                ->setAttribute('template', '@SyliusAdmin/Product/Tab/_channelPricings.html.twig')
+                ->setLabel('sylius.ui.channel_pricings')
+            ;
         }
 
         $this->eventDispatcher->dispatch(
