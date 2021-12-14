@@ -29,7 +29,7 @@ class Version20170109143010 extends AbstractMigration implements ContainerAwareI
 
     public function up(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $defaultLocale = $this->container->getParameter('locale');
 
@@ -39,7 +39,7 @@ class Version20170109143010 extends AbstractMigration implements ContainerAwareI
 
     public function down(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE sylius_product_attribute_value DROP locale_code');
     }
