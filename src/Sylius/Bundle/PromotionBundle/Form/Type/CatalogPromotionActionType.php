@@ -69,9 +69,19 @@ final class CatalogPromotionActionType extends AbstractResourceType
 
                 $form = $event->getForm();
                 $formData = $form->getData();
+
                 if ($formData !== null) {
                     $formData->setType($data['type']);
                     $formData->setConfiguration($data['configuration']);
+
+                    if ($data['type'] === CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT) {
+                        foreach ($data['configuration'] as $channelConfiguration) {
+                            if ($channelConfiguration['amount'] === '') {
+                                return;
+                            }
+                        }
+                    }
+
                     $form->setData($formData);
                 }
 
@@ -87,5 +97,4 @@ final class CatalogPromotionActionType extends AbstractResourceType
     {
         return 'sylius_catalog_promotion_action';
     }
-
 }
