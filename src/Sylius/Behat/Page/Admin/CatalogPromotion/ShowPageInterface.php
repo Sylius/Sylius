@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\CatalogPromotion;
 
 use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
@@ -28,6 +29,8 @@ interface ShowPageInterface extends PageInterface
     public function getPriority(): int;
 
     public function hasActionWithPercentageDiscount(string $amount): bool;
+
+    public function hasActionWithFixedDiscount(string $amount, ChannelInterface $channel): bool;
 
     public function hasScopeWithVariant(ProductVariantInterface $variant): bool;
 
