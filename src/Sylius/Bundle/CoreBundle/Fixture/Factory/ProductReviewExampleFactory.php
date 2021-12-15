@@ -84,9 +84,7 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
 
                 return $words;
             })
-            ->setDefault('rating', function (Options $options): int {
-                return $this->faker->numberBetween(1, 5);
-            })
+            ->setDefault('rating', fn(Options $options): int => $this->faker->numberBetween(1, 5))
             ->setDefault('comment', function (Options $options): string {
                 /** @var string $sentences */
                 $sentences = $this->faker->sentences(3, true);

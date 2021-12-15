@@ -91,9 +91,7 @@ final class ChannelPricingType extends AbstractResourceType
             ->setAllowedTypes('product_variant', ['null', ProductVariantInterface::class])
 
             ->setDefaults([
-                'label' => function (Options $options): string {
-                    return $options['channel']->getName();
-                },
+                'label' => fn(Options $options): string => $options['channel']->getName(),
             ])
         ;
     }

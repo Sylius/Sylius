@@ -59,9 +59,7 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
         $defaultLocaleCode = $this->localeProvider->getDefaultLocaleCode();
 
         $attributes = $product->getAttributes()->filter(
-            function (ProductAttributeValueInterface $attribute) use ($defaultLocaleCode) {
-                return $attribute->getLocaleCode() === $defaultLocaleCode;
-            }
+            fn(ProductAttributeValueInterface $attribute) => $attribute->getLocaleCode() === $defaultLocaleCode
         );
 
         /** @var ProductAttributeValueInterface $attribute */

@@ -40,9 +40,7 @@ final class ProductAssociationTypeChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'choices' => function (Options $options) {
-                return $this->productAssociationTypeRepository->findAll();
-            },
+            'choices' => fn(Options $options) => $this->productAssociationTypeRepository->findAll(),
             'choice_value' => 'code',
             'choice_label' => 'name',
             'choice_translation_domain' => false,

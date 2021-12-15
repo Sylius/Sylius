@@ -24,12 +24,10 @@ final class ChannelBasedOrderTotalLessThanOrEqualConfigurationType extends Abstr
     {
         $resolver->setDefaults([
             'entry_type' => OrderTotalLessThanOrEqualConfigurationType::class,
-            'entry_options' => function (ChannelInterface $channel): array {
-                return [
-                    'label' => $channel->getName(),
-                    'currency' => $channel->getBaseCurrency()->getCode(),
-                ];
-            },
+            'entry_options' => fn(ChannelInterface $channel): array => [
+                'label' => $channel->getName(),
+                'currency' => $channel->getBaseCurrency()->getCode(),
+            ],
         ]);
     }
 

@@ -111,21 +111,15 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('code', function (Options $options): string {
-                return StringInflector::nameToCode($options['name']);
-            })
+            ->setDefault('code', fn(Options $options): string => StringInflector::nameToCode($options['name']))
             ->setDefault('name', function (Options $options): string {
                 /** @var string $words */
                 $words = $this->faker->words(3, true);
 
                 return $words;
             })
-            ->setDefault('description', function (Options $options): string {
-                return $this->faker->sentence();
-            })
-            ->setDefault('enabled', function (Options $options): bool {
-                return $this->faker->boolean(90);
-            })
+            ->setDefault('description', fn(Options $options): string => $this->faker->sentence())
+            ->setDefault('enabled', fn(Options $options): bool => $this->faker->boolean(90))
             ->setAllowedTypes('enabled', 'bool')
             ->setDefault('zone', LazyOption::randomOne($this->zoneRepository))
             ->setAllowedTypes('zone', ['null', 'string', ZoneInterface::class])
