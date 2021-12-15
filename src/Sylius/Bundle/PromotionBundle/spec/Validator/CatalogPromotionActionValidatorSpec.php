@@ -14,8 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\PromotionBundle\Validator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Calculator\FixedDiscountPriceCalculator;
-use Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator;
 use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction\ActionValidatorInterface;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionAction;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
@@ -31,13 +29,10 @@ final class CatalogPromotionActionValidatorSpec extends ObjectBehavior
         ActionValidatorInterface $percentageDiscountValidator
     ): void {
         $this->beConstructedWith(
+            ['fixed_discount', 'percentage_discount'],
             [
-                FixedDiscountPriceCalculator::TYPE,
-                PercentageDiscountPriceCalculator::TYPE,
-            ],
-            [
-                FixedDiscountPriceCalculator::TYPE => $fixedDiscountValidator,
-                PercentageDiscountPriceCalculator::TYPE => $percentageDiscountValidator,
+                'fixed_discount' => $fixedDiscountValidator,
+                'percentage_discount' => $percentageDiscountValidator,
             ]
         );
 
@@ -70,7 +65,7 @@ final class CatalogPromotionActionValidatorSpec extends ObjectBehavior
     ): void {
         $constraint = new CatalogPromotionAction();
 
-        $action->getType()->willReturn(PercentageDiscountPriceCalculator::TYPE);
+        $action->getType()->willReturn('percentage_discount');
         $action->getConfiguration()->willReturn([]);
 
         $percentageDiscountValidator->validate([], $constraint, $executionContext)->shouldBeCalled();

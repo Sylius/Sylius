@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Promotion\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 
@@ -33,8 +32,8 @@ final class CatalogPromotionActionSpec extends ObjectBehavior
     function its_type_is_mutable(): void
     {
         $this->getType()->shouldReturn(null);
-        $this->setType(PercentageDiscountPriceCalculator::TYPE);
-        $this->getType()->shouldReturn(PercentageDiscountPriceCalculator::TYPE);
+        $this->setType('percentage_discount');
+        $this->getType()->shouldReturn('percentage_discount');
     }
 
     function its_configuration_is_mutable(): void
