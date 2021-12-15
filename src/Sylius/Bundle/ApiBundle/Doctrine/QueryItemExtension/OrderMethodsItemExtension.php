@@ -97,9 +97,11 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
         string $operationName,
         ShopUserInterface $user
     ): void {
+        $customerParameterName = $queryNameGenerator->generateParameterName('customer');
+
         $queryBuilder
-            ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
-            ->setParameter('customer', $user->getCustomer()->getId())
+            ->andWhere(sprintf('%s.customer = :%s', $rootAlias, $customerParameterName))
+            ->setParameter($customerParameterName, $user->getCustomer()->getId())
         ;
 
         if (

@@ -58,8 +58,9 @@ final class ProductVariantOptionValueFilter extends AbstractContextAwareFilter
             $optionValue = $this->iriConverter->getItemFromIri($optionValueIri);
 
             $parameterName = $queryNameGenerator->generateParameterName($property);
+            $rootAlias = $queryBuilder->getRootAliases()[0];
             $queryBuilder
-                ->andWhere(sprintf(':%s MEMBER OF o.optionValues', $parameterName))
+                ->andWhere(sprintf(':%s MEMBER OF %s.optionValues', $parameterName, $rootAlias))
                 ->setParameter($parameterName, $optionValue)
             ;
         }
