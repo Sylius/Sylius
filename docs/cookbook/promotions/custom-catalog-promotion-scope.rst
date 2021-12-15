@@ -30,66 +30,20 @@ The new Scope needs to be declared somewhere, it would be nice to extend the cur
         public const TYPE_BY_PHRASE = 'by_phrase';
     }
 
-Now lets declare the basic validator service, with added additional Scope. This first validation is necessary to check
-if the Scope is added to Catalog Promotion and also if the mandatory key fields exist. We will also declare a more
-atomic validator for our Scope:
+Now let's declare the parameter with scope types, with added our additional custom scope as the last one:
 
 .. code-block:: yaml
 
     # config/services.yaml
 
-    Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScopeValidator:
-        arguments:
-            - [
-                !php/const Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS,
-                !php/const Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
-                !php/const Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
-                !php/const App\Model\CatalogPromotionScopeInterface::TYPE_BY_PHRASE
-            ]
-            - !tagged_iterator { tag: 'sylius.catalog_promotion.scope_validator', index_by: 'key' }
-        tags:
-            - { name: 'validator.constraint_validator', alias: 'sylius_catalog_promotion_scope'}
+    parameters:
+        sylius.catalog_promotion.scopes:
+            - !php/const Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS
+            - !php/const Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_TAXONS
+            - !php/const Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS
+            - !php/const App\Model\CatalogPromotionScopeInterface::TYPE_BY_PHRASE
 
-Also as we are in this config file we can declare our Validator for this particular Scope:
-
-.. code-block:: yaml
-
-    # config/services.yaml
-
-    App\Validator\CatalogPromotionScope\ByPhraseScopeValidator:
-        tags:
-            - { name: 'sylius.catalog_promotion.scope_validator', key: 'by_phrase' }
-
-In this validator we will check only the case for the ``phrase`` key to exist. But you can also extend it with your own
-keys to check as well as their corresponding values.
-
-.. code-block:: php
-
-    <?php
-
-    namespace App\Validator\CatalogPromotionScope;
-
-    use Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ScopeValidatorInterface;
-    use Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScope;
-    use Symfony\Component\Validator\Constraint;
-    use Symfony\Component\Validator\Context\ExecutionContextInterface;
-    use Webmozart\Assert\Assert;
-
-    class ByPhraseScopeValidator implements ScopeValidatorInterface
-    {
-        public function validate(array $configuration, Constraint $constraint, ExecutionContextInterface $context): void
-        {
-            /** @var CatalogPromotionScope $constraint */
-            Assert::isInstanceOf($constraint, CatalogPromotionScope::class);
-
-            if (!array_key_exists('phrase', $configuration) || empty($configuration['phrase'])) {
-                $context->buildViolation('There is no phrase provided')->atPath('configuration.phrase')->addViolation();
-            }
-        }
-    }
-
-Alright now we have a working basic validation, and our new type of Scope exists. We should now create a Provider that will return
-for us all of eligible product variants. We can start with config:
+We should now create a Provider that will return for us all of eligible product variants. We can start with config:
 
 .. code-block:: yaml
 
@@ -103,7 +57,7 @@ for us all of eligible product variants. We can start with config:
 
 .. note::
 
-    Please take a note on tags of Validator and Provider, thanks to them declared those services are working properly.
+    Please take a note on tag of Provider, thanks to it those services are working properly.
 
 And the code for the provider itself:
 
@@ -147,7 +101,50 @@ And the code for the provider itself:
     or extend the code from this cookbook to e.g. consume key ``localeCode`` from configuration.
 
 Now the Catalog Promotion should work with your new Scope for programmatically and API created resource.
-Lets now prepare a validation for UI part by using form types.
+
+Prepare a custom validator for a new scope
+------------------------------------------
+
+We can start with configuration, declare our basic validator for this particular scope:
+
+.. code-block:: yaml
+
+    # config/services.yaml
+
+    App\Validator\CatalogPromotionScope\ByPhraseScopeValidator:
+        tags:
+            - { name: 'sylius.catalog_promotion.scope_validator', key: 'by_phrase' }
+
+In this validator we will check only the case for the ``phrase`` key to exist. But you can also extend it with your own
+keys to check as well as their corresponding values.
+
+.. code-block:: php
+
+    <?php
+
+    namespace App\Validator\CatalogPromotionScope;
+
+    use Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ScopeValidatorInterface;
+    use Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScope;
+    use Symfony\Component\Validator\Constraint;
+    use Symfony\Component\Validator\Context\ExecutionContextInterface;
+    use Webmozart\Assert\Assert;
+
+    class ByPhraseScopeValidator implements ScopeValidatorInterface
+    {
+        public function validate(array $configuration, Constraint $constraint, ExecutionContextInterface $context): void
+        {
+            /** @var CatalogPromotionScope $constraint */
+            Assert::isInstanceOf($constraint, CatalogPromotionScope::class);
+
+            if (!array_key_exists('phrase', $configuration) || empty($configuration['phrase'])) {
+                $context->buildViolation('There is no phrase provided')->atPath('configuration.phrase')->addViolation();
+            }
+        }
+    }
+
+Alright we have a working basic validation, and our new type of scope exists and can be created, and edited
+programmatically or by API. Let's now prepare a UI part of this new feature.
 
 Prepare a configuration form type for your new scope
 ----------------------------------------------------
@@ -218,7 +215,30 @@ In our case - we have a template ``by_phrase.html.twig`` which is first before o
 
     This overriding will be suspect of change, so there won't be need for declaring ``default.html.twig`` template anymore.
 
-That's all. You will now should be able to choose the new Scope while creating a new Catalog Promotion.
+Prepare a scope template for show page of catalog promotion
+-----------------------------------------------------------
+
+The last thing is to create a template to display our new scope properly. Remember to name it the same as the scope type.
+
+.. code-block:: html+twig
+
+    {# templates/bundles/SyliusAdminBundle/CatalogPromotion/Show/Scope/by_phrase.html.twig #}
+
+    <table class="ui very basic celled table">
+        <tbody>
+        <tr>
+            <td class="five wide"><strong class="gray text">Type</strong></td>
+            <td>By phrase</td>
+        </tr>
+        <tr>
+            <td class="five wide"><strong class="gray text">Phrase</strong></td>
+            <td>{{ scope.configuration.phrase }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+That's all. You will now should be able to choose the new scope while creating or editing a catalog promotion.
 
 Learn more
 ----------
