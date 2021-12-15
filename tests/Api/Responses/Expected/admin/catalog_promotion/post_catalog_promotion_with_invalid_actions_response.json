@@ -2,7 +2,7 @@
     "@context": "/api/v2/contexts/ConstraintViolationList",
     "@type": "ConstraintViolationList",
     "hydra:title": "An error occurred",
-    "hydra:description": "actions[0].type: Catalog promotion action type is invalid. Please choose a valid type.\nactions[1].configuration.amount: The percentage discount amount must be a number and can not be empty.\nactions[2].configuration.amount: The percentage discount amount must be between 0% and 100%.\nactions[3].configuration.amount: The percentage discount amount must be a number and can not be empty.\nactions[4].configuration: Provided configuration contains errors. Please add the fixed discount amount greater than 0 for at least 1 channel.\nactions[5].configuration: Provided configuration contains errors. Please add the fixed discount amount greater than 0 for at least 1 channel.\nactions[6].configuration: Provided configuration contains errors. At least one of the provided channel codes does not exist.\nactions[7].configuration: Provided configuration contains errors. Please add the fixed discount amount greater than 0 for at least 1 channel.",
+    "hydra:description": "actions[0].type: Catalog promotion action type is invalid. Please choose a valid type.\nactions[1].configuration.amount: The percentage discount amount must be a number and can not be empty.\nactions[2].configuration.amount: The percentage discount amount must be between 0% and 100%.\nactions[3].configuration.amount: The percentage discount amount must be a number and can not be empty.\nactions[4].configuration: Provided configuration contains errors. Please add the fixed discount amount greater than 0 for at least 1 channel.\nactions[5].configuration: One of required channels is not filled.\nactions[6].configuration: One of required channels is not filled.\nactions[7].configuration: Provided configuration contains errors. Please add the fixed discount amount greater than 0 for at least 1 channel.",
     "violations": [
         {
             "propertyPath": "actions[0].type",
@@ -31,12 +31,12 @@
         },
         {
             "propertyPath": "actions[5].configuration",
-            "message": "Provided configuration contains errors. Please add the fixed discount amount greater than 0 for at least 1 channel.",
+            "message": "One of required channels is not filled.",
             "code": null
         },
         {
             "propertyPath": "actions[6].configuration",
-            "message": "Provided configuration contains errors. At least one of the provided channel codes does not exist.",
+            "message": "One of required channels is not filled.",
             "code": null
         },
         {

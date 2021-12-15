@@ -125,10 +125,10 @@ Feature: Validating a catalog promotion creation
         And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add fixed discount action without amount configured
         And I try to add it
-        Then I should be notified that a discount amount should be configured for at least one channel
+        Then I should be notified that not all channels are filled
         And there should be an empty list of catalog promotions
 
-    @api @ui @javascript
+    @api
     Scenario: Trying to create a catalog promotion with wrong value of fixed discount action
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -153,7 +153,7 @@ Feature: Validating a catalog promotion creation
         And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add invalid fixed discount action configured for nonexistent channel
         And I try to add it
-        Then I should be notified that at least one of the provided channel codes does not exist
+        Then I should be notified that not all channels are filled
         And there should be an empty list of catalog promotions
 
     @api @ui @javascript

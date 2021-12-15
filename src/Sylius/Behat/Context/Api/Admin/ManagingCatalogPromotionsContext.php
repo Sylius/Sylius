@@ -654,7 +654,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $actions = [[
             'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
-            'configuration' => [],
+            'configuration' => ['channel' => ['amount' => null]],
         ]];
 
         $this->client->addRequestData('actions', $actions);
@@ -1066,7 +1066,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
-        Assert::same($response['violations'][0]['message'], 'One of required channels is not filled');
+        Assert::same($response['violations'][0]['message'], 'One of required channels is not filled.');
     }
 
     /**

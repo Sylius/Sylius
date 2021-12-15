@@ -991,7 +991,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatNotAllChannelsAreFilled(): void
     {
-        Assert::same($this->formElement->getValidationMessage(), 'One of required channels is not filled');
+        Assert::same($this->formElement->getValidationMessage(), 'One of required channels is not filled.');
     }
 
     /**
