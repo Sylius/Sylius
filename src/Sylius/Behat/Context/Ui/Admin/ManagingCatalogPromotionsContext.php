@@ -385,6 +385,17 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I edit it to have "(?:€|£|\$)([^"]+)" of fixed discount in the ("[^"]+" channel)$/
+     */
+    public function iEditItToHaveFixedDiscountInTheChannel(
+        string $discount,
+        ChannelInterface $channel
+    ): void {
+        $this->formElement->chooseActionType('Fixed discount');
+        $this->formElement->specifyLastActionDiscountForChannel($discount, $channel);
+    }
+
+    /**
      * @When I disable :catalogPromotion catalog promotion
      */
     public function iDisableCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
@@ -973,6 +984,14 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldGetInformationThatTheEndDateCannotBeSetBeforeStartDate(): void
     {
         Assert::same($this->createPage->getValidationMessage('endDate'), 'End date cannot be set before start date.');
+    }
+
+    /**
+     * @Then I should be notified that not all channels are filled
+     */
+    public function iShouldBeNotifiedThatNotAllChannelsAreFilled(): void
+    {
+        Assert::same($this->formElement->getValidationMessage(), 'One of required channels is not filled');
     }
 
     /**

@@ -46,7 +46,7 @@ final class FixedDiscountActionValidator implements ActionValidatorInterface
 
         foreach ($catalogPromotionAction->getCatalogPromotion()->getChannels() as $channel) {
             if (!$this->isChannelConfigured($channel->getCode(), $configuration)) {
-                $context->buildViolation('sylius.catalog_promotion_action.fixed_discount.channel_not_configured')->atPath('configuration.actions')->addViolation();
+                $context->buildViolation('sylius.catalog_promotion_action.fixed_discount.channel_not_configured')->atPath('configuration')->addViolation();
 
                 return;
             }
@@ -69,7 +69,7 @@ final class FixedDiscountActionValidator implements ActionValidatorInterface
 
     private function isChannelConfigured(string $channelCode, array $configuration): bool
     {
-        if (array_key_exists($channelCode, $configuration) && $configuration[$channelCode] > 0) {
+        if (array_key_exists($channelCode, $configuration) && $configuration[$channelCode]['amount'] > 0) {
             return true;
         }
 

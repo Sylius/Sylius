@@ -90,6 +90,20 @@ final class CatalogPromotionActionType extends AbstractResourceType
                     'label' => false,
                 ]);
             })
+            ->addEventListener(FormEvents::SUBMIT, function(FormEvent $event): void {
+                /** @var CatalogPromotionActionInterface|null $data */
+                $data = $event->getData();
+                if ($data === null) {
+                    return;
+                }
+
+                $form = $event->getForm();
+
+                $actionConfigurationType = $this->actionConfigurationTypes[$data->getType()];
+                $form->add('configuration', $actionConfigurationType, [
+                    'label' => false,
+                ]);
+            })
         ;
     }
 

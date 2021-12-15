@@ -573,6 +573,23 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I edit it to have ("[^"]+") of fixed discount in the ("[^"]+" channel)$/
+     */
+    public function iEditItToHaveFixedDiscountInTheChannel(
+        int $amount,
+        ChannelInterface $channel
+    ): void {
+        $content = $this->client->getContent();
+
+        $content['actions'] = [[
+            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'configuration' => [$channel->getCode() => ['amount' => $amount]],
+        ]];
+
+        $this->client->setRequestData($content);
+    }
+
+    /**
      * @When I add catalog promotion scope with nonexistent type
      */
     public function iAddCatalogPromotionScopeWithNonexistentType(): void
@@ -1040,6 +1057,16 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
             'Catalog promotion could not be edited'
         );
+    }
+
+    /**
+     * @Then I should be notified that not all channels are filled
+     */
+    public function iShouldBeNotifiedThatNotAllChannelsAreFilled(): void
+    {
+        $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+
+        Assert::same($response['violations'][0]['message'], 'One of required channels is not filled');
     }
 
     /**
