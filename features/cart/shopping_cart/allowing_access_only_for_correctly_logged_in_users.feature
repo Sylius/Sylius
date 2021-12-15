@@ -6,7 +6,7 @@ Feature: Allowing access only for correctly logged in users
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a product "Stark T-shirt" priced at "$12.00"
+        And the store has a product "Stark T-Shirt" priced at "$12.00"
         And the store allows paying offline
         And the store has "UPS" shipping method with "$20.00" fee
 
@@ -180,7 +180,7 @@ Feature: Allowing access only for correctly logged in users
         And the customer logged out
         And there is logged in the administrator
         When the administrator try to see the summary of customer's cart
-        Then the administrator should see "Stark T-shirt" product with quantity 1 in the customer cart
+        Then the administrator should see "Stark T-Shirt" product with quantity 1 in the customer cart
 
     @api
     Scenario: Accessing to the visitors cart by the admin
@@ -188,4 +188,4 @@ Feature: Allowing access only for correctly logged in users
         And the visitor has product "Stark T-Shirt" in the cart
         And there is logged in the administrator
         When the administrator try to see the summary of customer's cart
-        Then the administrator should see "Stark T-shirt" product with quantity 1 in the visitor cart
+        Then the administrator should see "Stark T-Shirt" product with quantity 1 in the visitor cart
