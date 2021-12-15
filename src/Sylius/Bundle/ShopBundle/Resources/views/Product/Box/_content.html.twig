@@ -19,9 +19,7 @@
             {% set price = money.calculatePrice(product|sylius_resolve_variant) %}
             {% set originalPrice = money.calculateOriginalPrice(product|sylius_resolve_variant) %}
 
-            {% for promotion in appliedPromotions %}
-            <a class="ui blue label" {{ sylius_test_html_attribute('product-promotion-label') }}>{{ promotion.label}}</a>
-            {% endfor %}
+            {% include '@SyliusShop/Product/Show/_catalogPromotionLabels.html.twig' with {'appliedPromotions': appliedPromotions, 'withDescription': false} %}
 
             {% if price != originalPrice %}
             <div class="sylius-product-original-price" {{ sylius_test_html_attribute('product-original-price') }}><del>{{ originalPrice }}</del></div>
