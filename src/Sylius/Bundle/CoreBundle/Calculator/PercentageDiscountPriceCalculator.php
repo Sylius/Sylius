@@ -18,9 +18,16 @@ use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
 final class PercentageDiscountPriceCalculator implements ActionBasedPriceCalculatorInterface
 {
+    public const TYPE = 'percentage_discount';
+
+    public function getType(): string
+    {
+        return self::TYPE;
+    }
+
     public function supports(CatalogPromotionActionInterface $action): bool
     {
-        return $action->getType() === CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT;
+        return $action->getType() === self::TYPE;
     }
 
     public function calculate(ChannelPricingInterface $channelPricing, CatalogPromotionActionInterface $action): int

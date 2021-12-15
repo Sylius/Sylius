@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use Sylius\Bundle\CoreBundle\Calculator\FixedDiscountPriceCalculator;
+use Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -88,7 +89,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 ],
                 'actions' => [
                     [
-                        'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                        'type' => PercentageDiscountPriceCalculator::TYPE,
                         'configuration' => [
                             'amount' => 0.5
                         ]
@@ -215,7 +216,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 ],
                 'actions' => [
                     [
-                        'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                        'type' => PercentageDiscountPriceCalculator::TYPE,
                         'configuration' => [
                             'amount' => 0.5
                         ]
@@ -310,33 +311,33 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                         ]
                     ],
                     [
-                        'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                        'type' => PercentageDiscountPriceCalculator::TYPE,
                         'configuration' => []
                     ],
                     [
-                        'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                        'type' => PercentageDiscountPriceCalculator::TYPE,
                         'configuration' => [
                             'amount' => 1.5
                         ]
                     ],
                     [
-                        'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                        'type' => PercentageDiscountPriceCalculator::TYPE,
                         'configuration' => [
                             'amount' => 'text'
                         ]
                     ],
                     [
-                        'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                        'type' => FixedDiscountPriceCalculator::TYPE,
                         'configuration' => []
                     ],
                     [
-                        'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                        'type' => FixedDiscountPriceCalculator::TYPE,
                         'configuration' => [
                             'WEB' => [],
                         ]
                     ],
                     [
-                        'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                        'type' => FixedDiscountPriceCalculator::TYPE,
                         'configuration' => [
                             'invalid_channel' => [
                                 'amount' => 1000,
@@ -344,7 +345,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                         ]
                     ],
                     [
-                        'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                        'type' => FixedDiscountPriceCalculator::TYPE,
                         'configuration' => [
                             'WEB' => [
                                 'amount' => 'text',
@@ -395,7 +396,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 'code' => 'new_code',
                 'actions' => [
                     [
-                        'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                        'type' => PercentageDiscountPriceCalculator::TYPE,
                         'configuration' => [
                             'amount' => 0.4
                         ]

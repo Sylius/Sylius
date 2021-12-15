@@ -17,6 +17,7 @@ use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\CompositePromotio
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\CompositePromotionEligibilityCheckerPass;
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\RegisterPromotionActionsPass;
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
+use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\SetCatalogPromotionActionTypesPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -39,6 +40,8 @@ final class SyliusPromotionBundle extends AbstractResourceBundle
 
         $container->addCompilerPass(new RegisterRuleCheckersPass());
         $container->addCompilerPass(new RegisterPromotionActionsPass());
+
+        $container->addCompilerPass(new SetCatalogPromotionActionTypesPass());
     }
 
     /**

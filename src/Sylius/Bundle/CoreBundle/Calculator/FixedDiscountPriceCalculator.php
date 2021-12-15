@@ -18,9 +18,16 @@ use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
 final class FixedDiscountPriceCalculator implements ActionBasedPriceCalculatorInterface
 {
+    public const TYPE = 'fixed_discount';
+
+    public function getType(): string
+    {
+        return self::TYPE;
+    }
+
     public function supports(CatalogPromotionActionInterface $action): bool
     {
-        return $action->getType() === CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT;
+        return $action->getType() === self::TYPE;
     }
 
     public function calculate(ChannelPricingInterface $channelPricing, CatalogPromotionActionInterface $action): int

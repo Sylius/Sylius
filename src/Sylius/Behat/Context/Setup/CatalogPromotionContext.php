@@ -17,6 +17,8 @@ use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManagerInterface;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\CoreBundle\Calculator\FixedDiscountPriceCalculator;
+use Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -169,7 +171,7 @@ final class CatalogPromotionContext implements Context
     {
         /** @var CatalogPromotionActionInterface $catalogPromotionAction */
         $catalogPromotionAction = $this->catalogPromotionActionFactory->createNew();
-        $catalogPromotionAction->setType(CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT);
+        $catalogPromotionAction->setType(PercentageDiscountPriceCalculator::TYPE);
         $catalogPromotionAction->setConfiguration(['amount' => $discount]);
 
         $catalogPromotion->addAction($catalogPromotionAction);
@@ -218,7 +220,7 @@ final class CatalogPromotionContext implements Context
                 'configuration' => ['variants' => $variantCodes],
             ]],
             [[
-                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'type' => PercentageDiscountPriceCalculator::TYPE,
                 'configuration' => ['amount' => $discount],
             ]]
         );
@@ -244,7 +246,7 @@ final class CatalogPromotionContext implements Context
                 'configuration' => ['variants' => [$variant->getCode()]],
             ]],
             [[
-                'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                'type' => FixedDiscountPriceCalculator::TYPE,
                 'configuration' => [$channel->getCode() => ['amount' => $discount]],
             ]]
         );
@@ -270,7 +272,7 @@ final class CatalogPromotionContext implements Context
                 'configuration' => ['products' => [$product->getCode()]],
             ]],
             [[
-                'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                'type' => FixedDiscountPriceCalculator::TYPE,
                 'configuration' => [$channel->getCode() => ['amount' => $discount]],
             ]]
         );
@@ -296,7 +298,7 @@ final class CatalogPromotionContext implements Context
                 'configuration' => ['taxons' => [$taxon->getCode()]],
             ]],
             [[
-                'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                'type' => FixedDiscountPriceCalculator::TYPE,
                 'configuration' => [$channel->getCode() => ['amount' => $discount]],
             ]]
         );
@@ -335,7 +337,7 @@ final class CatalogPromotionContext implements Context
                 'configuration' => ['taxons' => [$taxon->getCode()]],
             ]],
             [[
-                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'type' => PercentageDiscountPriceCalculator::TYPE,
                 'configuration' => ['amount' => $discount],
             ]]
         );
@@ -361,7 +363,7 @@ final class CatalogPromotionContext implements Context
                 'configuration' => ['variants' => [$variant->getCode()]],
             ]],
             [[
-                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'type' => PercentageDiscountPriceCalculator::TYPE,
                 'configuration' => ['amount' => $discount],
             ]]
         );
@@ -391,7 +393,7 @@ final class CatalogPromotionContext implements Context
                 'configuration' => ['variants' => [$variant->getCode()]],
             ]],
             [[
-                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'type' => PercentageDiscountPriceCalculator::TYPE,
                 'configuration' => ['amount' => $discount],
             ]]
         );
@@ -417,7 +419,7 @@ final class CatalogPromotionContext implements Context
                 'configuration' => ['variants' => [$variant->getCode()]],
             ]],
             [[
-                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'type' => PercentageDiscountPriceCalculator::TYPE,
                 'configuration' => ['amount' => $discount],
             ]]
         );
@@ -442,7 +444,7 @@ final class CatalogPromotionContext implements Context
                 'configuration' => ['products' => [$product->getCode()]],
             ]],
             [[
-                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'type' => PercentageDiscountPriceCalculator::TYPE,
                 'configuration' => ['amount' => $discount],
             ]]
         );
@@ -468,7 +470,7 @@ final class CatalogPromotionContext implements Context
                 'configuration' => ['variants' => [$variant->getCode()]],
             ]],
             [[
-                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'type' => PercentageDiscountPriceCalculator::TYPE,
                 'configuration' => ['amount' => $discount],
             ]],
             $priority
@@ -497,7 +499,7 @@ final class CatalogPromotionContext implements Context
                 'configuration' => ['variants' => [$variant->getCode()]],
             ]],
             [[
-                'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+                'type' => PercentageDiscountPriceCalculator::TYPE,
                 'configuration' => ['amount' => $discount],
             ]],
             $priority,
@@ -528,7 +530,7 @@ final class CatalogPromotionContext implements Context
                 'configuration' => ['products' => [$product->getCode()]],
             ]],
             [[
-                'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                'type' => FixedDiscountPriceCalculator::TYPE,
                 'configuration' => [$channel->getCode() => ['amount' => $discount]],
             ]],
             $priority
@@ -558,7 +560,7 @@ final class CatalogPromotionContext implements Context
                 'configuration' => ['taxons' => [$taxon->getCode()]],
             ]],
             [[
-                'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+                'type' => FixedDiscountPriceCalculator::TYPE,
                 'configuration' => [$channel->getCode() => ['amount' => $discount]],
             ]],
             $priority,
