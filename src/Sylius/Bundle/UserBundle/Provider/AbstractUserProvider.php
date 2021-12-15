@@ -58,6 +58,11 @@ abstract class AbstractUserProvider implements UserProviderInterface
         return $user;
     }
 
+    public function loadUserByIdentifier(string $identifier): UserInterface
+    {
+        return $this->loadUserByUsername($identifier);
+    }
+
     public function refreshUser(UserInterface $user): UserInterface
     {
         if (!$user instanceof SyliusUserInterface) {
