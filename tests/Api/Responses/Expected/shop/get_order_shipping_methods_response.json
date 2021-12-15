@@ -9,16 +9,8 @@
             "id": @integer@,
             "code": "UPS",
             "position": 0,
-            "translations": {
-                "en_US": {
-                    "@id": "\/api\/v2\/shop\/shipping-method-translations\/@integer@",
-                    "@type": "ShippingMethodTranslation",
-                    "id": @integer@,
-                    "name": "UPS",
-                    "description": @string@
-                }
-            },
             "name": "UPS",
+            "description": @string@,
             "price": 500
         },
         {
@@ -27,16 +19,8 @@
             "id": @integer@,
             "code": "DHL",
             "position": 1,
-            "translations": {
-                "en_US": {
-                    "@id": "\/api\/v2\/shop\/shipping-method-translations\/@integer@",
-                    "@type": "ShippingMethodTranslation",
-                    "id": @integer@,
-                    "name": "DHL",
-                    "description": @string@
-                }
-            },
             "name": "DHL",
+            "description": @string@,
             "price": 1000
         }
     ],
