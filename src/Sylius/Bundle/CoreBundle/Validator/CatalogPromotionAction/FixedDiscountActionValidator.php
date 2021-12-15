@@ -69,10 +69,6 @@ final class FixedDiscountActionValidator implements ActionValidatorInterface
 
     private function isChannelConfigured(string $channelCode, array $configuration): bool
     {
-        if (array_key_exists($channelCode, $configuration) && $configuration[$channelCode]['amount'] > 0) {
-            return true;
-        }
-
-        return false;
+        return (array_key_exists($channelCode, $configuration) && isset($configuration[$channelCode]['amount']) && $configuration[$channelCode]['amount'] > 0);
     }
 }
