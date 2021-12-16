@@ -795,13 +795,27 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @Then /^this catalog promotion should have ("[^"]+") of fixed discount in the ("[^"]+" channel)$/
+     * @Then /^it should reduce price by ("[^"]+") in the ("[^"]+" channel)$/
      */
     public function thisCatalogPromotionShouldHaveFixedDiscountInTheChannel(int $amount, ChannelInterface $channel): void
     {
         $catalogPromotionActions = $this->responseChecker->getValue($this->client->getLastResponse(), 'actions');
 
-        Assert::same($catalogPromotionActions[0]['type'], CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT);
-        Assert::same($catalogPromotionActions[0]['configuration'][$channel->getCode()]['amount'], $amount);
+        foreach ($catalogPromotionActions as $catalogPromotionAction) {
+            if (
+                $catalogPromotionAction['type'] === CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT &&
+                $catalogPromotionAction['configuration'][$channel->getCode()]['amount'] === $amount
+            ) {
+                return;
+            }
+        }
+
+        throw new \Exception(sprintf(
+            'There is no "%s" action with %d for "%s" channel',
+            CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            $amount,
+            $channel->getName()
+        ));
     }
 
     /**

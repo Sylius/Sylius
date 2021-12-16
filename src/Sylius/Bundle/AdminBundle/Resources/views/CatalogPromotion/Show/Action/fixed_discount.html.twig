@@ -1,0 +1,19 @@
+{% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
+
+<table class="ui very basic celled table">
+    <tbody>
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ 'sylius.ui.type'|trans }}</strong></td>
+        <td>{{ 'sylius.ui.fixed_discount'|trans }}</td>
+    </tr>
+    {% set currencies = sylius_channels_currencies() %}
+    {% for channelCode, channelConfiguration in action.configuration %}
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ channelCode }}</strong></td>
+        <td {{ sylius_test_html_attribute('action-' ~ channelCode ~ '-amount') }}>
+            {{ money.format(channelConfiguration.amount, currencies[channelCode]) }}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
