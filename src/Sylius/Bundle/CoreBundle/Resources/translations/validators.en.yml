@@ -7,7 +7,7 @@ sylius:
         fixed_discount:
             channel_not_configured: One of required channels is not filled.
             invalid_channel: Provided configuration contains errors. At least one of the provided channel codes does not exist.
-            not_valid: Provided configuration contains errors. Please add the fixed discount amount greater than 0 for at least 1 channel.
+            not_valid: Provided configuration contains errors. Please add the fixed discount amount must be a number.
     catalog_promotion_scope:
         invalid_type: Catalog promotion scope type is invalid. Please choose a valid type.
         for_products:

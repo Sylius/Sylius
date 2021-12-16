@@ -1270,7 +1270,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Provided configuration contains errors. Please add the fixed discount amount greater than 0 for at least 1 channel.'
+            'Provided configuration contains errors. Please add the fixed discount amount must be a number.'
         );
     }
 

@@ -151,9 +151,10 @@ Feature: Validating a catalog promotion creation
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a $10.00 discount on every product" in "English (United States)"
         And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And I edit it to have "$10.00" of fixed discount in the "United States" channel
         And I add invalid fixed discount action configured for nonexistent channel
         And I try to add it
-        Then I should be notified that not all channels are filled
+        Then I should be notified that at least one of the provided channel codes does not exist
         And there should be an empty list of catalog promotions
 
     @api @ui @javascript
