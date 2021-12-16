@@ -1066,7 +1066,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
-        Assert::same($response['violations'][0]['message'], 'One of required channels is not filled.');
+        Assert::same($response['violations'][0]['message'], 'Configuration for one of the required channels is not provided.');
     }
 
     /**
@@ -1270,7 +1270,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Provided configuration contains errors. Please add the fixed discount amount must be a number.'
+            'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.'
         );
     }
 

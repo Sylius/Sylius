@@ -5,9 +5,9 @@ sylius:
             upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
     catalog_promotion_action:
         fixed_discount:
-            channel_not_configured: One of required channels is not filled.
+            channel_not_configured: Configuration for one of the required channels is not provided.
             invalid_channel: Provided configuration contains errors. At least one of the provided channel codes does not exist.
-            not_valid: Provided configuration contains errors. Please add the fixed discount amount must be a number.
+            not_valid: Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.
     catalog_promotion_scope:
         invalid_type: Catalog promotion scope type is invalid. Please choose a valid type.
         for_products:

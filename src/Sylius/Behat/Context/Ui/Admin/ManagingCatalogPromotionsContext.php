@@ -567,7 +567,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldBeNotifiedThatADiscountAmountShouldBeConfiguredForAtLeasOneChannel(): void
     {
         Assert::true($this->formElement->hasValidationMessage(
-            'Provided configuration contains errors. Please add the fixed discount amount must be a number.'
+            'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.'
         ));
     }
 
@@ -991,7 +991,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatNotAllChannelsAreFilled(): void
     {
-        Assert::same($this->formElement->getValidationMessage(), 'One of required channels is not filled.');
+        Assert::same($this->formElement->getValidationMessage(), 'Configuration for one of the required channels is not provided.');
     }
 
     /**
