@@ -12,6 +12,14 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.catalog_promotion.scopes" type="collection">
+            <parameter type="constant">Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS</parameter>
+            <parameter type="constant">Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_TAXONS</parameter>
+            <parameter type="constant">Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS</parameter>
+        </parameter>
+    </parameters>
+
     <services>
         <defaults public="true" />
 
@@ -65,11 +73,7 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScopeValidator">
-            <argument type="collection">
-                <argument type="constant">Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS</argument>
-                <argument type="constant">Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_TAXONS</argument>
-                <argument type="constant">Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS</argument>
-            </argument>
+            <argument>%sylius.catalog_promotion.scopes%</argument>
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_validator" index-by="key" />
             <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_scope" />
         </service>
