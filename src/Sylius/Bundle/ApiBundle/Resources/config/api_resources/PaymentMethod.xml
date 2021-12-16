@@ -45,10 +45,21 @@
                     </attribute>
                 </attribute>
             </subresourceOperation>
+            <subresourceOperation name="api_payment_methods_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>shop:payment_method:read</attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
         </subresourceOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" writable="false" />
         <property name="name" writable="true" />
+        <property name="translations" readable="true" writable="true" >
+
+        </property>
     </resource>
 </resources>
