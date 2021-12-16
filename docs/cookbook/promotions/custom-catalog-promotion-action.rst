@@ -1,7 +1,7 @@
 How to add a custom catalog promotion action?
 =============================================
 
-Adding a new, custom catalog promotion action to your shop should become a quite helpful extension to your own Catalog Promotions.
+Adding a new, custom catalog promotion action to your shop may become a quite helpful extension to your own Catalog Promotions.
 You can create your own calculator tailored to your product catalog to attract as many people as possible.
 
 Let's try to implement the new **Catalog Promotion Action** in this cookbook that will lower the price of the product
@@ -32,7 +32,7 @@ The new action needs to be declared somewhere, the first step would be to extend
         public const TYPE_FIXED_PRICE = 'fixed_price';
     }
 
-Now let's declare the parameter with action types, with added our additional custom action as the last one:
+Now let's declare the parameter with action types, with our additional custom action added as the last one:
 
 .. code-block:: yaml
 
@@ -106,11 +106,11 @@ And the code for the calculator itself:
         }
     }
 
-Now the catalog promotion should work with your new action for programmatically and API created resources.
-Let's now prepare a custom validator for a created action.
+Now the catalog promotion should work with your new action for resources created both programmatically and via API.
+Let's now prepare a custom validator for the newly created action.
 
-Prepare a custom validator for a new action
--------------------------------------------
+Prepare a custom validator for the new action
+---------------------------------------------
 
 We can start with configuration, declare our basic validator for this particular action:
 
@@ -124,7 +124,7 @@ We can start with configuration, declare our basic validator for this particular
         tags:
             - { name: 'sylius.catalog_promotion.action_validator', key: 'fixed_price' }
 
-In this validator we will check the provided configuration if necessary data is provided and the configured channels exist.
+In this validator, we will check the provided configuration for necessary data and if the configured channels exist.
 
 .. code-block:: php
 
@@ -177,14 +177,14 @@ In this validator we will check the provided configuration if necessary data is 
         }
     }
 
-Alright we have a working basic validation, and our new type of action exists and can be created, and edited
-programmatically or by API. Let's now prepare a UI part of this new feature.
+Alright, we have a working basic validation, and our new type of action exists, can be created, and edited
+programmatically or by API. Let's now prepare the UI part of this new feature.
 
-Prepare a configuration form type for a new action
---------------------------------------------------
+Prepare a configuration form type for the new action
+----------------------------------------------------
 
 To be able to configure a catalog promotion with your new action you will need a form type for the admin panel.
-And with current implementation, as our action is channel based, you need to create 2 form types as below:
+And with the current implementation, as our action is channel-based, you need to create 2 form types as below:
 
 .. code-block:: yaml
 
@@ -307,7 +307,7 @@ The last thing is to create a template to display our new action properly. Remem
         </tbody>
     </table>
 
-That's all. You will now should be able to choose the new action while creating or editing a catalog promotion.
+That's all. You will now be able to choose the new action while creating or editing a catalog promotion.
 
 Learn more
 ----------

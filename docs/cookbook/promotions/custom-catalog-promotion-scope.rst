@@ -1,7 +1,7 @@
 How to add a custom catalog promotion scope?
 ============================================
 
-Adding a new, custom catalog promotion scope to your shop should become a quite helpful extension to your own Catalog Promotions.
+Adding a new, custom catalog promotion scope to your shop may become a quite helpful extension to your own Catalog Promotions.
 You can imagine for instance, that you have some custom way of aggregating products, or any other method of filtering them.
 These products that will fulfill your specific scope will become eligible for actions of Catalog Promotion, and as we know
 cheaper Products attract more customers.
@@ -30,7 +30,7 @@ The new Scope needs to be declared somewhere, it would be nice to extend the cur
         public const TYPE_BY_PHRASE = 'by_phrase';
     }
 
-Now let's declare the parameter with scope types, with added our additional custom scope as the last one:
+Now let's declare the parameter with scope types, with our additional custom scope added as the last one:
 
 .. code-block:: yaml
 
@@ -102,8 +102,8 @@ And the code for the provider itself:
 
 Now the Catalog Promotion should work with your new Scope for programmatically and API created resource.
 
-Prepare a custom validator for a new scope
-------------------------------------------
+Prepare a custom validator for the new scope
+--------------------------------------------
 
 We can start with configuration, declare our basic validator for this particular scope:
 
@@ -143,8 +143,8 @@ keys to check as well as their corresponding values.
         }
     }
 
-Alright we have a working basic validation, and our new type of scope exists and can be created, and edited
-programmatically or by API. Let's now prepare a UI part of this new feature.
+Alright, we have a working basic validation, and our new type of scope exists, can be created, and edited
+programmatically or by API. Let's now prepare the UI part of this new feature.
 
 Prepare a configuration form type for your new scope
 ----------------------------------------------------
@@ -238,7 +238,7 @@ The last thing is to create a template to display our new scope properly. Rememb
     </table>
 
 
-That's all. You will now should be able to choose the new scope while creating or editing a catalog promotion.
+That's all. You will now be able to choose the new scope while creating or editing a catalog promotion.
 
 Learn more
 ----------
