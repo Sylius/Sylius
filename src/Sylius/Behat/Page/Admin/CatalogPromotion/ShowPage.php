@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\CatalogPromotion;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
@@ -47,6 +48,18 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function hasActionWithPercentageDiscount(string $amount): bool
     {
         $amountsElements = $this->getDocument()->findAll('css', '[data-test-action-amount]');
+        foreach ($amountsElements as $amountElement) {
+            if ($amountElement->getText() === $amount) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function hasActionWithFixedDiscount(string $amount, ChannelInterface $channel): bool
+    {
+        $amountsElements = $this->getDocument()->findAll('css', '[data-test-action-' . $channel->getCode() . '-amount]');
         foreach ($amountsElements as $amountElement) {
             if ($amountElement->getText() === $amount) {
                 return true;

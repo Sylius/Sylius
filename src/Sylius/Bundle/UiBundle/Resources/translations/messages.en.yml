@@ -348,6 +348,7 @@ sylius:
         filter: 'Filter'
         filters: 'Filters'
         first_name: 'First name'
+        fixed_discount: 'Fixed discount'
         for_products: 'For products'
         for_taxons: 'For taxons'
         for_variants: 'For variants'

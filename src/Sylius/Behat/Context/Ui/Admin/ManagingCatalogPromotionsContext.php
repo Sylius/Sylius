@@ -943,6 +943,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then it should reduce price by :amount in the :channel channel
+     */
+    public function itShouldReducePriceByInTheChannel(string $amount, ChannelInterface $channel): void
+    {
+        Assert::true($this->showPage->hasActionWithFixedDiscount($amount, $channel));
+    }
+
+    /**
      * @Then it should apply on :variant variant
      */
     public function itShouldApplyOnVariant(ProductVariantInterface $variant): void
