@@ -573,6 +573,23 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I edit it to have ("[^"]+") of fixed discount in the ("[^"]+" channel)$/
+     */
+    public function iEditItToHaveFixedDiscountInTheChannel(
+        int $amount,
+        ChannelInterface $channel
+    ): void {
+        $content = $this->client->getContent();
+
+        $content['actions'] = [[
+            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'configuration' => [$channel->getCode() => ['amount' => $amount]],
+        ]];
+
+        $this->client->setRequestData($content);
+    }
+
+    /**
      * @When I add catalog promotion scope with nonexistent type
      */
     public function iAddCatalogPromotionScopeWithNonexistentType(): void
@@ -637,7 +654,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $actions = [[
             'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
-            'configuration' => [],
+            'configuration' => ['channel' => ['amount' => null]],
         ]];
 
         $this->client->addRequestData('actions', $actions);
@@ -1057,6 +1074,16 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then I should be notified that not all channels are filled
+     */
+    public function iShouldBeNotifiedThatNotAllChannelsAreFilled(): void
+    {
+        $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+
+        Assert::same($response['violations'][0]['message'], 'Configuration for one of the required channels is not provided.');
+    }
+
+    /**
      * @Then /^(this catalog promotion) name should(?:| still) be "([^"]+)"$/
      */
     public function thisCatalogPromotionNameShouldBe(CatalogPromotionInterface $catalogPromotion, string $name): void
@@ -1257,7 +1284,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Provided configuration contains errors. Please add the fixed discount amount greater than 0 for at least 1 channel.'
+            'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.'
         );
     }
 
