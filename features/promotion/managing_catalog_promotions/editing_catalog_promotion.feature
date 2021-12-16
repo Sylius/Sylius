@@ -96,3 +96,12 @@ Feature: Editing catalog promotion
         And I try to change its end date to "2021-12-15"
         And I save my changes
         Then I should get information that the end date cannot be set before start date
+
+    @api @ui @javascript
+    Scenario: Receiving error message after not filling price for all channels
+        Given the store operates on another channel named "Poland"
+        When I want to modify a catalog promotion "Christmas sale"
+        And I edit it to have "$10.00" of fixed discount in the "United States" channel
+        And I make it available in channel "Poland"
+        And I save my changes
+        Then I should be notified that not all channels are filled
