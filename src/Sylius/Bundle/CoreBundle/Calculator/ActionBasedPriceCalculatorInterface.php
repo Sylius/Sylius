@@ -18,7 +18,7 @@ use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
 interface ActionBasedPriceCalculatorInterface
 {
-    public function getType(): string;
+    public static function getType(): string;
 
     public function supports(CatalogPromotionActionInterface $action): bool;
 

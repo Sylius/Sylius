@@ -20,7 +20,7 @@ final class FixedDiscountPriceCalculator implements ActionBasedPriceCalculatorIn
 {
     public const TYPE = 'fixed_discount';
 
-    public function getType(): string
+    public static function getType(): string
     {
         return self::TYPE;
     }

@@ -35,7 +35,7 @@ final class ForTaxonsScopeVariantsProvider implements VariantsProviderInterface
         $this->productVariantRepository = $productVariantRepository;
     }
 
-    public function getType(): string
+    public static function getType(): string
     {
         return self::TYPE;
     }

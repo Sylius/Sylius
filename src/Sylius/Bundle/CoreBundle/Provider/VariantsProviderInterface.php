@@ -17,7 +17,7 @@ use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 
 interface VariantsProviderInterface
 {
-    public function getType(): string;
+    public static function getType(): string;
 
     public function supports(CatalogPromotionScopeInterface $catalogPromotionScopeType): bool;
 

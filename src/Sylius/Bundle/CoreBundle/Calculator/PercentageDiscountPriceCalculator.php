@@ -20,7 +20,7 @@ final class PercentageDiscountPriceCalculator implements ActionBasedPriceCalcula
 {
     public const TYPE = 'percentage_discount';
 
-    public function getType(): string
+    public static function getType(): string
     {
         return self::TYPE;
     }

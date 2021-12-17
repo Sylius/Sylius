@@ -29,7 +29,7 @@ final class ForVariantsScopeVariantsProvider implements VariantsProviderInterfac
         $this->productVariantRepository = $productVariantRepository;
     }
 
-    public function getType(): string
+    public static function getType(): string
     {
         return self::TYPE;
     }
