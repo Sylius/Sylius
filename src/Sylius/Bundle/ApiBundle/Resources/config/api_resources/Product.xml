@@ -146,5 +146,8 @@
         <property name="mainTaxon" required="false" />
         <property name="variants" readable="true"/>
         <property name="averageRating" readable="true" />
+        <property name="description" readable="true" />
+        <property name="shortDescription" readable="true" />
+        <property name="name" readable="true" />
     </resource>
 </resources>

@@ -6,7 +6,7 @@ Sylius\Component\Core\Model\Channel:
         description: 'Lorem ipsum'
         baseCurrency: '@currency_usd'
         defaultLocale: '@locale_en'
-        locales: ['@locale_en', '@locale_pl']
+        locales: ['@locale_en', '@locale_pl', '@locale_de']
         color: 'black'
         enabled: true
         taxCalculationStrategy: 'order_items_based'
@@ -19,7 +19,7 @@ Sylius\Component\Locale\Model\Locale:
     locale_en:
         code: 'en_US'
     locale_pl:
-        code: 'pl_PL'
+        code: 'pl_PL' 
     locale_de:
         code: 'de_DE'
 
@@ -29,16 +29,33 @@ Sylius\Component\Core\Model\Product:
         channels: ['@channel_web']
         currentLocale: 'en_US'
         translations:
-            en_US: '@product_translation_mug'
+            en_US: '@product_translation_mug_en_US'
+            pl_PL: '@product_translation_mug_pl_PL'
+            de_DE: '@product_translation_mug_de_DE'
         options: ['@product_option_color']
 
 Sylius\Component\Core\Model\ProductTranslation:
-    product_translation_mug:
+    product_translation_mug_en_US:
         slug: 'mug'
         locale: 'en_US'
         name: 'Mug'
-        description: '<paragraph(2)>'
-        translatable: '@product_mug'
+        description: 'This is a mug'
+        shortDescription: 'Short mug description'
+        translatable: '@product_mug'    
+    product_translation_mug_pl_PL:
+        slug: 'kubek'
+        locale: 'pl_PL'
+        name: 'Kubek'
+        description: 'To jest kubek'
+        shortDescription: 'Krótki opis kubka'
+        translatable: '@product_mug'    
+    product_translation_mug_de_DE:
+        slug: 'Becher'
+        locale: 'de_DE'
+        name: 'Becher'
+        description: 'das ist becher'
+        shortDescription: 'Kurzbeschreibung der Becher'
+        translatable: '@product_mug'    
 
 Sylius\Component\Core\Model\ProductVariant:
     product_variant_mug_blue:
@@ -46,27 +63,41 @@ Sylius\Component\Core\Model\ProductVariant:
         product: '@product_mug'
         currentLocale: 'en_US'
         translations:
-            en_US: '@product_variant_translation_mug'
+            en_US: '@product_variant_mug_blue_translation_en_EN'
+            pl_PL: '@product_variant_mug_blue_translation_pl_PL'
         optionValues: ['@product_option_value_color_blue']
         channelPricings:
             WEB: '@channel_pricing_product_variant_mug_blue_web'
-    
+
     product_variant_mug_red:
         code: 'MUG_RED'
         product: '@product_mug'
         currentLocale: 'en_US'
-        translations:
-            en_US: '@product_variant_translation_mug'
+        translations: 
+            en_US: '@product_variant_mug_red_translation_en_EN'
+            pl_PL: '@product_variant_mug_red_translation_pl_PL'
         optionValues: ['@product_option_value_color_red']
         channelPricings:
             WEB: '@channel_pricing_product_variant_mug_red_web'
 
 Sylius\Component\Product\Model\ProductVariantTranslation:
-    product_variant_translation_mug:
+    product_variant_mug_blue_translation_en_EN:
         locale: 'en_US'
-        name: 'Mug'
+        name: 'Blue Mug'
         translatable: '@product_variant_mug_blue'
-    
+    product_variant_mug_blue_translation_pl_PL:
+        locale: 'pl_PL'
+        name: 'Kubek niebieski'
+        translatable: '@product_variant_mug_blue'
+    product_variant_mug_red_translation_en_EN:
+        locale: 'en_US'
+        name: 'Red Mug'
+        translatable: '@product_variant_mug_red'
+    product_variant_mug_red_translation_pl_PL:
+        locale: 'pl_PL'
+        name: 'Kubek czerwony'
+        translatable: '@product_variant_mug_red'
+
 Sylius\Component\Core\Model\ChannelPricing:
     channel_pricing_product_variant_mug_blue_web:
         channelCode: 'WEB'
@@ -75,7 +106,7 @@ Sylius\Component\Core\Model\ChannelPricing:
     channel_pricing_product_variant_mug_red_web:
         channelCode: 'WEB'
         price: 2000
-    
+
 Sylius\Component\Product\Model\ProductOption:
     product_option_color:
         code: 'COLOR'

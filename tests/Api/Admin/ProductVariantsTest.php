@@ -24,7 +24,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     /** @test */
     public function it_denies_access_to_a_products_list_for_not_authenticated_user(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'product_variant.yaml']);
+        $this->loadFixturesFromFiles(['channel.yaml', 'product/product_variant.yaml']);
 
         $this->client->request('GET', '/api/v2/admin/product-variants/MUG');
 
@@ -35,7 +35,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_all_product_variants(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'product_variant.yaml', 'authentication/api_administrator.yaml']);
+        $this->loadFixturesFromFiles(['channel.yaml', 'product/product_variant.yaml', 'authentication/api_administrator.yaml']);
 
         $this->client->request(
             'POST',
@@ -66,7 +66,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     /** @test */
     public function it_updates_channel_pricing_of_product_variant(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'product_variant.yaml', 'authentication/api_administrator.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'product/product_variant.yaml', 'authentication/api_administrator.yaml']);
 
         $this->client->request(
             'POST',
@@ -112,7 +112,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     /** @test */
     public function it_creates_product_variant(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'product_variant.yaml', 'authentication/api_administrator.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'product/product_variant.yaml', 'authentication/api_administrator.yaml']);
 
         $this->client->request(
             'POST',
