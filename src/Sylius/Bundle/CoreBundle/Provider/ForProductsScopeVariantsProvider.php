@@ -13,13 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Provider;
 
-use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class ForProductsScopeVariantsProvider implements VariantsProviderInterface
 {
+    public const TYPE = 'for_products';
+
     private ProductRepositoryInterface $productRepository;
 
     public function __construct(ProductRepositoryInterface $productRepository)
@@ -27,9 +29,14 @@ final class ForProductsScopeVariantsProvider implements VariantsProviderInterfac
         $this->productRepository = $productRepository;
     }
 
+    public function getType(): string
+    {
+        return self::TYPE;
+    }
+
     public function supports(CatalogPromotionScopeInterface $catalogPromotionScopeType): bool
     {
-        return $catalogPromotionScopeType->getType() === CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS;
+        return $catalogPromotionScopeType->getType() === self::TYPE;
     }
 
     public function provideEligibleVariants(CatalogPromotionScopeInterface $scope): array

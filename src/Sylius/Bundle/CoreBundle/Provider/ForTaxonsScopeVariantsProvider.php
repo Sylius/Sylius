@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Provider;
 
-use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
@@ -21,6 +21,8 @@ use Webmozart\Assert\Assert;
 
 final class ForTaxonsScopeVariantsProvider implements VariantsProviderInterface
 {
+    public const TYPE = 'for_taxons';
+
     private TaxonRepositoryInterface $taxonRepository;
 
     private ProductVariantRepositoryInterface $productVariantRepository;
@@ -33,9 +35,14 @@ final class ForTaxonsScopeVariantsProvider implements VariantsProviderInterface
         $this->productVariantRepository = $productVariantRepository;
     }
 
+    public function getType(): string
+    {
+        return self::TYPE;
+    }
+
     public function supports(CatalogPromotionScopeInterface $catalogPromotionScopeType): bool
     {
-        return $catalogPromotionScopeType->getType() === CatalogPromotionScopeInterface::TYPE_FOR_TAXONS;
+        return $catalogPromotionScopeType->getType() === self::TYPE;
     }
 
     public function provideEligibleVariants(CatalogPromotionScopeInterface $scope): array

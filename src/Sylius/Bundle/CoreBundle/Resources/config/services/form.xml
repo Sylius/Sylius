@@ -54,9 +54,9 @@
         <parameter key="sylius.model.shop_billing_data.class">Sylius\Component\Core\Model\ShopBillingData</parameter>
         <parameter key="sylius.catalog_promotion.action.fixed_discount" type="constant">Sylius\Bundle\CoreBundle\Calculator\FixedDiscountPriceCalculator::TYPE</parameter>
         <parameter key="sylius.catalog_promotion.action.percentage_discount" type="constant">Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator::TYPE</parameter>
-        <parameter key="sylius.catalog_promotion.scope.for_products" type="constant">Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS</parameter>
-        <parameter key="sylius.catalog_promotion.scope.for_taxons" type="constant">Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_TAXONS</parameter>
-        <parameter key="sylius.catalog_promotion.scope.for_variants" type="constant">Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS</parameter>
+        <parameter key="sylius.catalog_promotion.scope.for_products" type="constant">Sylius\Bundle\CoreBundle\Provider\ForProductsScopeVariantsProvider::TYPE</parameter>
+        <parameter key="sylius.catalog_promotion.scope.for_taxons" type="constant">Sylius\Bundle\CoreBundle\Provider\ForTaxonsScopeVariantsProvider::TYPE</parameter>
+        <parameter key="sylius.catalog_promotion.scope.for_variants" type="constant">Sylius\Bundle\CoreBundle\Provider\ForVariantsScopeVariantsProvider::TYPE</parameter>
     </parameters>
 
     <services>

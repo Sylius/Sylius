@@ -70,7 +70,7 @@ And the code for the provider itself:
     use Sylius\Bundle\CoreBundle\Provider\VariantsProviderInterface;
     use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
     use Webmozart\Assert\Assert;
-    use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
+    use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 
     class ByPhraseVariantsProvider implements VariantsProviderInterface
     {

@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Provider;
 
-use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 
 interface VariantsProviderInterface
 {
+    public function getType(): string;
+
     public function supports(CatalogPromotionScopeInterface $catalogPromotionScopeType): bool;
 
     public function provideEligibleVariants(CatalogPromotionScopeInterface $scope): array;

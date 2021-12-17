@@ -20,9 +20,12 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Calculator\FixedDiscountPriceCalculator;
 use Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator;
+use Sylius\Bundle\CoreBundle\Provider\ForProductsScopeVariantsProvider;
+use Sylius\Bundle\CoreBundle\Provider\ForTaxonsScopeVariantsProvider;
+use Sylius\Bundle\CoreBundle\Provider\ForVariantsScopeVariantsProvider;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -252,7 +255,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $scopes = $this->client->getContent()['scopes'];
 
         $additionalScope = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
+            'type' => ForVariantsScopeVariantsProvider::TYPE,
             'configuration' => [
                 'variants' => [$productVariant->getCode()],
             ],
@@ -348,7 +351,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddScopeThatAppliesOnVariants(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
     {
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
+            'type' => ForVariantsScopeVariantsProvider::TYPE,
             'configuration' => [
                 'variants' => [
                     $firstVariant->getCode(),
@@ -366,7 +369,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddCatalogPromotionScopeForTaxonWithoutTaxons(): void
     {
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
+            'type' => ForTaxonsScopeVariantsProvider::TYPE,
             'configuration' => ['taxons' => []],
         ]];
 
@@ -379,7 +382,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddCatalogPromotionScopeForTaxonWithNonexistentTaxons(): void
     {
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
+            'type' => ForTaxonsScopeVariantsProvider::TYPE,
             'configuration' => [
                 'taxons' => [
                     'BAD_TAXON',
@@ -397,7 +400,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddCatalogPromotionScopeForProductWithoutProducts(): void
     {
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS,
+            'type' => ForProductsScopeVariantsProvider::TYPE,
             'configuration' => ['products' => []],
         ]];
 
@@ -410,7 +413,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddCatalogPromotionScopeForProductsWithNonexistentProducts(): void
     {
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS,
+            'type' => ForProductsScopeVariantsProvider::TYPE,
             'configuration' => [
                 'products' => [
                     'BAD_PRODUCT',
@@ -428,7 +431,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddScopeThatAppliesOnTaxon(TaxonInterface $taxon): void
     {
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
+            'type' => ForTaxonsScopeVariantsProvider::TYPE,
             'configuration' => [
                 'taxons' => [$taxon->getCode()]
             ],
@@ -443,7 +446,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddScopeThatAppliesOnProduct(ProductInterface $product): void
     {
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS,
+            'type' => ForProductsScopeVariantsProvider::TYPE,
             'configuration' => [
                 'products' => [$product->getCode()]
             ],
@@ -471,7 +474,7 @@ final class ManagingCatalogPromotionsContext implements Context
     ): void {
         $this->client->buildUpdateRequest($catalogPromotion->getCode());
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
+            'type' => ForVariantsScopeVariantsProvider::TYPE,
             'configuration' => [
                 'variants' => [
                     $productVariant->getCode(),
@@ -494,7 +497,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
         $content = $this->client->getContent();
         unset($content['scopes'][0]['configuration']['variants']);
-        $content['scopes'][0]['type'] = CatalogPromotionScopeInterface::TYPE_FOR_TAXONS;
+        $content['scopes'][0]['type'] = ForTaxonsScopeVariantsProvider::TYPE;
         $content['scopes'][0]['configuration']['taxons'] = [$taxon->getCode()];
 
         $this->client->setRequestData($content);;
@@ -513,7 +516,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
         $content = $this->client->getContent();
         unset($content['scopes'][0]['configuration']['variants']);
-        $content['scopes'][0]['type'] = CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS;
+        $content['scopes'][0]['type'] = ForProductsScopeVariantsProvider::TYPE;
         $content['scopes'][0]['configuration']['products'] = [$product->getCode()];
 
         $this->client->setRequestData($content);;
@@ -612,7 +615,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddForVariantsScopeWithTheWrongConfiguration(): void
     {
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
+            'type' => ForVariantsScopeVariantsProvider::TYPE,
             'configuration' => [
                 'variants' => ['wrong_code'],
             ],
@@ -627,7 +630,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddForVariantsScopeWithoutVariantsConfigured(): void
     {
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
+            'type' => ForVariantsScopeVariantsProvider::TYPE,
             'configuration' => [
                 'variants' => [],
             ],
