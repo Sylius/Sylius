@@ -24,7 +24,7 @@ to reflect your plugin functionality. Basing on the vendor and plugin names esta
 
 * In ``tests/Application/config/bundles.php``:
 
-    * ``Acme\SyliusExamplePlugin\AcmeSyliusExamplePlugin::class`` -> ``IronMan\SyliusProductOnDemandPlugin\SyliusProductOnDemandPlugin::class``
+    * ``Acme\SyliusExamplePlugin\AcmeSyliusExamplePlugin::class`` -> ``IronMan\SyliusProductOnDemandPlugin\IronManSyliusProductOnDemandPlugin::class``
 
 * In ``phpspec.yml.dist`` (if you want to use PHPSpec in your plugin):
 
