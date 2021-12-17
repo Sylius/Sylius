@@ -25,7 +25,7 @@ We should start from creating a provider that will return for us all of eligible
         arguments:
             - '@sylius.repository.product_variant'
         tags:
-            - { name: 'sylius.catalog_promotion.variants_provider' }
+            - { name: 'sylius.catalog_promotion.variants_provider', type: 'by_phrase' }
 
 .. note::
 
@@ -53,11 +53,6 @@ And the code for the provider itself:
         public function __construct(ProductVariantRepositoryInterface $productVariantRepository)
         {
             $this->productVariantRepository = $productVariantRepository;
-        }
-
-        public static function getType(): string
-        {
-            return self::TYPE;
         }
 
         public function supports(CatalogPromotionScopeInterface $catalogPromotionScopeType): bool

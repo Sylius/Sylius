@@ -23,7 +23,7 @@ We should start from creating a calculator that will return a proper price for g
 
      App\Calculator\FixedPriceCalculator:
         tags:
-            - { name: 'sylius.catalog_promotion.price_calculator' }
+            - { name: 'sylius.catalog_promotion.price_calculator', type: 'fixed_price' }
 
 .. note::
 
@@ -47,11 +47,6 @@ And the code for the calculator itself:
     final class FixedPriceCalculator implements ActionBasedPriceCalculatorInterface
     {
         public const TYPE = 'fixed_price';
-
-        public static function getType(): string
-        {
-            return self::TYPE;
-        }
 
         public function supports(BaseCatalogPromotionActionInterface $action): bool
         {
