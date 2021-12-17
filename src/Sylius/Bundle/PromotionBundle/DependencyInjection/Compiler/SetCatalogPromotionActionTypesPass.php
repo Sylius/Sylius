@@ -23,9 +23,10 @@ final class SetCatalogPromotionActionTypesPass implements CompilerPassInterface
     {
         $types = [];
         foreach ($container->findTaggedServiceIds('sylius.catalog_promotion.price_calculator') as $id => $attributes) {
-            /** @var ActionBasedPriceCalculatorInterface $calculator */
-            $calculator = $container->get($id);
-            $types[] = $calculator->getType();
+            $definition = $container->getDefinition($id);
+            /** @var ActionBasedPriceCalculatorInterface $class */
+            $class = $definition->getClass();
+            $types[] = $class::getType();
         }
 
         $container->setParameter('sylius.catalog_promotion.actions', $types);
