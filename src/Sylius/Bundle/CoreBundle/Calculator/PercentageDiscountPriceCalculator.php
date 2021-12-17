@@ -20,11 +20,6 @@ final class PercentageDiscountPriceCalculator implements ActionBasedPriceCalcula
 {
     public const TYPE = 'percentage_discount';
 
-    public static function getType(): string
-    {
-        return self::TYPE;
-    }
-
     public function supports(CatalogPromotionActionInterface $action): bool
     {
         return $action->getType() === self::TYPE;

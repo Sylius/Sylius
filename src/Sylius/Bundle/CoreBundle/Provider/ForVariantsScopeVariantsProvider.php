@@ -29,11 +29,6 @@ final class ForVariantsScopeVariantsProvider implements VariantsProviderInterfac
         $this->productVariantRepository = $productVariantRepository;
     }
 
-    public static function getType(): string
-    {
-        return self::TYPE;
-    }
-
     public function supports(CatalogPromotionScopeInterface $catalogPromotionScopeType): bool
     {
         return $catalogPromotionScopeType->getType() === self::TYPE;

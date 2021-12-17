@@ -18,8 +18,6 @@ use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
 interface ActionBasedPriceCalculatorInterface
 {
-    public static function getType(): string;
-
     public function supports(CatalogPromotionActionInterface $action): bool;
 
     public function calculate(ChannelPricingInterface $channelPricing, CatalogPromotionActionInterface $action): int;

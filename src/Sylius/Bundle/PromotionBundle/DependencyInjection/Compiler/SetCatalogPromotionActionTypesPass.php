@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler;
 
-use Sylius\Bundle\CoreBundle\Calculator\ActionBasedPriceCalculatorInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -23,10 +22,13 @@ final class SetCatalogPromotionActionTypesPass implements CompilerPassInterface
     {
         $types = [];
         foreach ($container->findTaggedServiceIds('sylius.catalog_promotion.price_calculator') as $id => $attributes) {
-            $definition = $container->getDefinition($id);
-            /** @var ActionBasedPriceCalculatorInterface $class */
-            $class = $definition->getClass();
-            $types[] = $class::getType();
+            foreach ($attributes as $attribute) {
+                if (!isset($attribute['type'])) {
+                    throw new \InvalidArgumentException('Tagged catalog promotion price calculator `' . $id . '` needs to have `type` attribute.');
+                }
+
+                $types[] = $attribute['type'];
+            }
         }
 
         $container->setParameter('sylius.catalog_promotion.actions', $types);

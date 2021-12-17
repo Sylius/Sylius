@@ -23,11 +23,11 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Calculator\FixedDiscountPriceCalculator">
-            <tag name="sylius.catalog_promotion.price_calculator" />
+            <tag name="sylius.catalog_promotion.price_calculator" type="fixed_discount" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator">
-            <tag name="sylius.catalog_promotion.price_calculator" />
+            <tag name="sylius.catalog_promotion.price_calculator" type="percentage_discount" />
         </service>
     </services>
 </container>

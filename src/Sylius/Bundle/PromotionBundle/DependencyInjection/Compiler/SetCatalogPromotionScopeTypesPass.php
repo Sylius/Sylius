@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler;
 
-use Sylius\Bundle\CoreBundle\Provider\VariantsProviderInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\VarDumper\VarDumper;
 
 final class SetCatalogPromotionScopeTypesPass implements CompilerPassInterface
 {
@@ -24,10 +22,13 @@ final class SetCatalogPromotionScopeTypesPass implements CompilerPassInterface
     {
         $types = [];
         foreach ($container->findTaggedServiceIds('sylius.catalog_promotion.variants_provider') as $id => $attributes) {
-            $definition = $container->getDefinition($id);
-            /** @var VariantsProviderInterface $class */
-            $class = $definition->getClass();
-            $types[] = $class::getType();
+            foreach ($attributes as $attribute) {
+                if (!isset($attribute['type'])) {
+                    throw new \InvalidArgumentException('Tagged catalog promotion variants provider `' . $id . '` needs to have `type` attribute.');
+                }
+
+                $types[] = $attribute['type'];
+            }
         }
 
         $container->setParameter('sylius.catalog_promotion.scopes', $types);
