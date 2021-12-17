@@ -15,36 +15,7 @@ or product variant to a specific value.
 Create a new catalog promotion action
 -------------------------------------
 
-The new action needs to be declared somewhere, the first step would be to extend the base interface:
-
-.. code-block:: php
-
-    <?php
-
-    declare(strict_types=1);
-
-    namespace App\Model;
-
-    use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface as BaseCatalogPromotionActionInterface;
-
-    interface CatalogPromotionActionInterface extends BaseCatalogPromotionActionInterface
-    {
-        public const TYPE_FIXED_PRICE = 'fixed_price';
-    }
-
-Now let's declare the parameter with action types, with our additional custom action added as the last one:
-
-.. code-block:: yaml
-
-    # config/services.yaml
-
-    parameters:
-        sylius.catalog_promotion.actions:
-            - !php/const Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT
-            - !php/const Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT
-            - !php/const App\Model\CatalogPromotionActionInterface::TYPE_FIXED_PRICE
-
-We should now create a calculator that will return a proper price for given channel pricing. We can start with configuration:
+We should start from creating a calculator that will return a proper price for given channel pricing. Let's declare the service:
 
 .. code-block:: yaml
 
@@ -75,9 +46,16 @@ And the code for the calculator itself:
 
     final class FixedPriceCalculator implements ActionBasedPriceCalculatorInterface
     {
+        public const TYPE = 'fixed_price';
+
+        public static function getType(): string
+        {
+            return self::TYPE;
+        }
+
         public function supports(BaseCatalogPromotionActionInterface $action): bool
         {
-            return $action->getType() === CatalogPromotionActionInterface::TYPE_FIXED_PRICE;
+            return $action->getType() === self::TYPE;
         }
 
         public function calculate(ChannelPricingInterface $channelPricing, BaseCatalogPromotionActionInterface $action): int

@@ -192,7 +192,7 @@ final class CatalogPromotionContext implements Context
     ): void {
         /** @var CatalogPromotionActionInterface $catalogPromotionAction */
         $catalogPromotionAction = $this->catalogPromotionActionFactory->createNew();
-        $catalogPromotionAction->setType(CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT);
+        $catalogPromotionAction->setType(FixedDiscountPriceCalculator::TYPE);
         $catalogPromotionAction->setConfiguration([$channel->getCode() => ['amount' => $discount]]);
 
         $catalogPromotion->addAction($catalogPromotionAction);

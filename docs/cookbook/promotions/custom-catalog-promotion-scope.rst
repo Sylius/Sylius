@@ -15,35 +15,7 @@ Let's try implementing the new **Catalog Promotion Scope** in this cookbook, tha
 Create a new catalog promotion scope
 ------------------------------------
 
-The new Scope needs to be declared somewhere, it would be nice to extend the current interface first:
-
-.. code-block:: php
-
-    <?php
-
-    namespace App\Model;
-
-    use Sylius\Component\Core\Model\CatalogPromotionScopeInterface as BaseCatalogPromotionScopeInterface;
-
-    interface CatalogPromotionScopeInterface extends BaseCatalogPromotionScopeInterface
-    {
-        public const TYPE_BY_PHRASE = 'by_phrase';
-    }
-
-Now let's declare the parameter with scope types, with our additional custom scope added as the last one:
-
-.. code-block:: yaml
-
-    # config/services.yaml
-
-    parameters:
-        sylius.catalog_promotion.scopes:
-            - !php/const Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS
-            - !php/const Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_TAXONS
-            - !php/const Sylius\Component\Core\Model\CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS
-            - !php/const App\Model\CatalogPromotionScopeInterface::TYPE_BY_PHRASE
-
-We should now create a Provider that will return for us all of eligible product variants. We can start with config:
+We should start from creating a provider that will return for us all of eligible product variants. Let's declare the service:
 
 .. code-block:: yaml
 
@@ -74,6 +46,8 @@ And the code for the provider itself:
 
     class ByPhraseVariantsProvider implements VariantsProviderInterface
     {
+        public const TYPE = 'by_phrase';
+
         private ProductVariantRepositoryInterface $productVariantRepository;
 
         public function __construct(ProductVariantRepositoryInterface $productVariantRepository)
@@ -81,9 +55,14 @@ And the code for the provider itself:
             $this->productVariantRepository = $productVariantRepository;
         }
 
+        public static function getType(): string
+        {
+            return self::TYPE;
+        }
+
         public function supports(CatalogPromotionScopeInterface $catalogPromotionScopeType): bool
         {
-            return $catalogPromotionScopeType->getType() === \App\Model\CatalogPromotionScopeInterface::TYPE_BY_PHRASE;
+            return $catalogPromotionScopeType->getType() === self::TYPE;
         }
 
         public function provideEligibleVariants(CatalogPromotionScopeInterface $scope): array

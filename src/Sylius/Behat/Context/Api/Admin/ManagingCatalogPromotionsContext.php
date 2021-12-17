@@ -587,7 +587,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $content = $this->client->getContent();
 
         $content['actions'] = [[
-            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'type' => FixedDiscountPriceCalculator::TYPE,
             'configuration' => [$channel->getCode() => ['amount' => $amount]],
         ]];
 
