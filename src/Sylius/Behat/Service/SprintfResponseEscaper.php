@@ -25,7 +25,7 @@ final class SprintfResponseEscaper
             str_replace(
                 '%',
                 '%%',
-                $response->getContent()
+                json_encode(json_decode($response->getContent(), true), JSON_PRETTY_PRINT)
             )
         );
     }

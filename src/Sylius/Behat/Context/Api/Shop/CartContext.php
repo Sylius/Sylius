@@ -465,7 +465,7 @@ final class CartContext implements Context
         $response = $this->getProductForItem($item);
 
         Assert::true(
-            $this->responseChecker->hasTranslation($response, 'en_US', 'name', $productName),
+            $this->responseChecker->hasValue($response, 'name', $productName),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Name not found.', $response)
         );
     }
@@ -478,7 +478,7 @@ final class CartContext implements Context
         $response = $this->getProductVariantForItem($item);
 
         Assert::true(
-            $this->responseChecker->hasTranslation($response, 'en_US', 'name', $variantName),
+            $this->responseChecker->hasValue($response, 'name', $variantName),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Name not found.', $response)
         );
     }
@@ -521,7 +521,7 @@ final class CartContext implements Context
      */
     public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void
     {
-        $this->checkProductQuantity($this->cartsClient->getLastResponse(), $productName, $quantity);
+        $this->checkProductQuantityByCustomer($this->cartsClient->getLastResponse(), $productName, $quantity);
     }
 
     /**
@@ -541,7 +541,7 @@ final class CartContext implements Context
      */
     public function theAdministratorShouldSeeProductWithQuantityInTheCart(string $productName, int $quantity): void
     {
-        $this->checkProductQuantity($this->ordersAdminClient->getLastResponse(), $productName, $quantity);
+        $this->checkProductQuantityByAdmin($this->ordersAdminClient->getLastResponse(), $productName, $quantity);
     }
 
     /**
@@ -794,17 +794,40 @@ final class CartContext implements Context
         return false;
     }
 
-    private function checkProductQuantity(
+    private function checkProductQuantityByAdmin(
         Response $cartResponse,
         string $productName,
         int $quantity
     ): void {
+        $this->checkProductQuantity($cartResponse, $productName, $quantity, 'admin');
+    }
+
+    private function checkProductQuantityByCustomer(
+        Response $cartResponse,
+        string $productName,
+        int $quantity,
+    ): void {
+        $this->checkProductQuantity($cartResponse, $productName, $quantity, 'customer');
+    }
+
+    private function checkProductQuantity(
+        Response $cartResponse,
+        string $productName,
+        int $quantity,
+        string $customerOrAdmin
+    ): void {
+        if (!($customerOrAdmin === 'customer' || $customerOrAdmin === 'admin')) {
+            throw new \InvalidArgumentException('Expected `customer` or `admin`, got: ' . $customerOrAdmin);
+        }
+
         $items = $this->responseChecker->getValue($cartResponse, 'items');
 
         foreach ($items as $item) {
             $productResponse = $this->getProductForItem($item);
-
-            if ($this->responseChecker->hasTranslation($productResponse, 'en_US', 'name', $productName)) {
+            if (
+                ($customerOrAdmin === 'customer' && $this->responseChecker->hasValue($productResponse, 'name', $productName)) ||
+                ($customerOrAdmin === 'admin' && $this->responseChecker->hasTranslation($productResponse, 'en_US', 'name', $productName))
+            ) {
                 Assert::same(
                     $item['quantity'],
                     $quantity,
@@ -813,6 +836,8 @@ final class CartContext implements Context
                         $cartResponse
                     )
                 );
+            } else {
+                throw new \InvalidArgumentException('Invalid item data');
             }
         }
     }
@@ -840,7 +865,7 @@ final class CartContext implements Context
         foreach ($items as $item) {
             $productResponse = $this->getProductForItem($item);
 
-            if ($this->responseChecker->hasTranslation($productResponse, 'en_US', 'name', $product->getName())) {
+            if ($this->responseChecker->hasValue($productResponse, 'name', $product->getName())) {
                 $variantForItem = $this->getProductVariantForItem($item);
 
                 return $this->responseChecker->getValue($variantForItem, 'price') * $item['quantity'];
