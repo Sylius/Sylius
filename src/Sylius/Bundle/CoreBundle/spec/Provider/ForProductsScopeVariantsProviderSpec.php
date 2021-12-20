@@ -15,8 +15,10 @@ namespace spec\Sylius\Bundle\CoreBundle\Provider;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Provider\ForProductsScopeVariantsProvider;
+use Sylius\Bundle\CoreBundle\Provider\ForVariantsScopeVariantsProvider;
 use Sylius\Bundle\CoreBundle\Provider\VariantsProviderInterface;
-use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
@@ -37,8 +39,8 @@ final class ForProductsScopeVariantsProviderSpec extends ObjectBehavior
         CatalogPromotionScopeInterface $forProductsScope,
         CatalogPromotionScopeInterface $forVariantsScope
     ): void {
-        $forProductsScope->getType()->willReturn(CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS);
-        $forVariantsScope->getType()->willReturn(CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS);
+        $forProductsScope->getType()->willReturn(ForProductsScopeVariantsProvider::TYPE);
+        $forVariantsScope->getType()->willReturn(ForVariantsScopeVariantsProvider::TYPE);
 
         $this->supports($forProductsScope)->shouldReturn(true);
         $this->supports($forVariantsScope)->shouldReturn(false);

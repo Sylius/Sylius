@@ -91,20 +91,14 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
 
                 return $words;
             })
-            ->setDefault('code', function (Options $options): string {
-                return StringInflector::nameToCode($options['name']);
-            })
-            ->setDefault('description', function (Options $options): string {
-                return $this->faker->sentence();
-            })
+            ->setDefault('code', fn(Options $options): string => StringInflector::nameToCode($options['name']))
+            ->setDefault('description', fn(Options $options): string => $this->faker->sentence())
             ->setDefault('instructions', null)
             ->setAllowedTypes('instructions', ['null', 'string'])
             ->setDefault('gatewayName', 'Offline')
             ->setDefault('gatewayFactory', 'offline')
             ->setDefault('gatewayConfig', [])
-            ->setDefault('enabled', function (Options $options): bool {
-                return $this->faker->boolean(90);
-            })
+            ->setDefault('enabled', fn(Options $options): bool => $this->faker->boolean(90))
             ->setDefault('channels', LazyOption::all($this->channelRepository))
             ->setAllowedTypes('channels', 'array')
             ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))

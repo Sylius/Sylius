@@ -1,2 +1,2 @@
-twig:
-    strict_variables: true
+imports:
+    - { resource: "../test/twig.yaml" }

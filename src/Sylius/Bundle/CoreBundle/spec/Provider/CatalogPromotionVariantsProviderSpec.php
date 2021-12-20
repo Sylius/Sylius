@@ -15,11 +15,12 @@ namespace spec\Sylius\Bundle\CoreBundle\Provider;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Provider\ForVariantsScopeVariantsProvider;
 use Sylius\Bundle\CoreBundle\Provider\VariantsProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface;
-use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 
 final class CatalogPromotionVariantsProviderSpec extends ObjectBehavior
 {
@@ -48,10 +49,10 @@ final class CatalogPromotionVariantsProviderSpec extends ObjectBehavior
             $secondScope->getWrappedObject()
         ]));
 
-        $firstScope->getType()->willReturn(CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS);
+        $firstScope->getType()->willReturn(ForVariantsScopeVariantsProvider::TYPE);
         $firstScope->getConfiguration()->willReturn(['variants' => ['PHP_T_SHIRT', 'PHP_MUG']]);
 
-        $secondScope->getType()->willReturn(CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS);
+        $secondScope->getType()->willReturn(ForVariantsScopeVariantsProvider::TYPE);
         $secondScope->getConfiguration()->willReturn(['variants' => ['PHP_MUG', 'PHP_CAP']]);
 
         $firstProvider->supports($firstScope)->willReturn(false);

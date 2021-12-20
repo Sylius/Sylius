@@ -22,7 +22,7 @@ final class ProductImagesTest extends JsonApiTestCase
     /** @test */
     public function it_denies_access_to_a_product_images_list_for_not_authenticated_user(): void
     {
-        $this->loadFixturesFromFile('product_image.yaml');
+        $this->loadFixturesFromFile('product/product_image.yaml');
 
         $this->client->request('GET', '/api/v2/admin/product-images');
 
@@ -33,7 +33,7 @@ final class ProductImagesTest extends JsonApiTestCase
     /** @test */
     public function it_gets_all_product_images(): void
     {
-        $this->loadFixturesFromFiles(['product_image.yaml', 'authentication/api_administrator.yaml']);
+        $this->loadFixturesFromFiles(['product/product_image.yaml', 'authentication/api_administrator.yaml']);
 
         $this->client->request(
             'POST',
@@ -64,7 +64,7 @@ final class ProductImagesTest extends JsonApiTestCase
     /** @test */
     public function it_gets_one_product_image(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['product_image.yaml', 'authentication/api_administrator.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['product/product_image.yaml', 'authentication/api_administrator.yaml']);
         /** @var ProductImageInterface $productImage */
         $productImage = $fixtures["product_thumbnail"];
 

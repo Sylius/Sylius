@@ -109,6 +109,51 @@ jobs:
                 run: vendor/bin/phpstan analyse
                 if: always() && steps.end-of-setup.outcome == 'success'
 
+    classes-specifictions:
+        runs-on: ubuntu-latest
+
+        name: "Classes specifications (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
+        strategy:
+            fail-fast: false
+            matrix:
+                php: [ "8.0" ]
+                symfony: [ "^4.4", "^5.2" ]
+
+        steps:
+            -   uses: actions/checkout@v2
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: "${{ matrix.php }}"
+                    ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=0, opcache.memory_consumption=512, opcache.max_accelerated_files=65407, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
+                    extensions: intl, gd, opcache, mysql, pdo_mysql
+                    tools: symfony
+                    coverage: none
+
+            -   name: Restrict Symfony version
+                if: matrix.symfony != ''
+                run: |
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.13.4"
+                    composer config extra.symfony.require "${{ matrix.symfony }}"
+            -   name: Get Composer cache directory
+                id: composer-cache
+                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            -   name: Cache Composer
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
+                    restore-keys: |
+                        ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
+            -   name: Install PHP dependencies
+                run: composer update --no-interaction --no-scripts
+                id: end-of-setup
+
+            -   name: Run PHPSpec
+                run: vendor/bin/phpspec run --ansi --no-interaction -f dot
+
     test-application-without-frontend-postgres:
         runs-on: ubuntu-latest
 
@@ -288,10 +333,6 @@ jobs:
                 continue-on-error: true
 
             -
-                name: Run PHPSpec
-                run: vendor/bin/phpspec run --ansi --no-interaction -f dot
-
-            -
                 name: Run PHPUnit
                 run: vendor/bin/phpunit --colors=always
                 continue-on-error: true
@@ -419,10 +460,6 @@ jobs:
             -
                 name: Load fixtures
                 run: bin/console sylius:fixtures:load default --no-interaction
-
-            -
-                name: Run PHPSpec
-                run: vendor/bin/phpspec run --ansi --no-interaction -f dot
 
             -
                 name: Run PHPUnit

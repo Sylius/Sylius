@@ -22,9 +22,7 @@ final class OrderItemsSubtotalCalculator implements OrderItemsSubtotalCalculator
     {
         return array_reduce(
             $order->getItems()->toArray(),
-            static function (int $subtotal, OrderItemInterface $item): int {
-                return $subtotal + $item->getSubtotal();
-            },
+            static fn(int $subtotal, OrderItemInterface $item): int => $subtotal + $item->getSubtotal(),
             0
         );
     }

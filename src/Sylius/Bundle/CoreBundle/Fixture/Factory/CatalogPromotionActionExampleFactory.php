@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -47,7 +48,7 @@ final class CatalogPromotionActionExampleFactory extends AbstractExampleFactory 
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('type', CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT)
+            ->setDefault('type', PercentageDiscountPriceCalculator::TYPE)
             ->setAllowedTypes('type', 'string')
             ->setDefault('configuration', [])
             ->setAllowedTypes('configuration', 'array')

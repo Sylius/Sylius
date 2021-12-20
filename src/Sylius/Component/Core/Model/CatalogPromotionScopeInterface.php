@@ -17,9 +17,4 @@ use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface as BaseCatal
 
 interface CatalogPromotionScopeInterface extends BaseCatalogPromotionScopeInterface
 {
-    public const TYPE_FOR_VARIANTS = 'for_variants';
-
-    public const TYPE_FOR_TAXONS = 'for_taxons';
-
-    public const TYPE_FOR_PRODUCTS = 'for_products';
 }

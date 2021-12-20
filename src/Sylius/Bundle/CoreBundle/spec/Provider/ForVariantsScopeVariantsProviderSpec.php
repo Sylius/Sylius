@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Provider\VariantsProviderInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
-use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 
 final class ForVariantsScopeVariantsProviderSpec extends ObjectBehavior
 {

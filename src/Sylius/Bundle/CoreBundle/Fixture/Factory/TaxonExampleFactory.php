@@ -117,13 +117,9 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
                 return $words;
             })
-            ->setDefault('code', function (Options $options): string {
-                return StringInflector::nameToCode($options['name']);
-            })
+            ->setDefault('code', fn(Options $options): string => StringInflector::nameToCode($options['name']))
             ->setDefault('slug', null)
-            ->setDefault('description', function (Options $options): string {
-                return $this->faker->paragraph;
-            })
+            ->setDefault('description', fn(Options $options): string => $this->faker->paragraph)
             ->setDefault('translations', [])
             ->setAllowedTypes('translations', ['array'])
             ->setDefault('children', [])

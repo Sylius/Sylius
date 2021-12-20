@@ -81,15 +81,9 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
                 return $words;
             })
             ->setDefault('translatable', true)
-            ->setDefault('code', function (Options $options): string {
-                return StringInflector::nameToCode($options['name']);
-            })
-            ->setDefault('type', function (Options $options): string {
-                return $this->faker->randomElement(array_keys($this->attributeTypes));
-            })
-            ->setDefault('configuration', function (Options $options): array {
-                return [];
-            })
+            ->setDefault('code', fn(Options $options): string => StringInflector::nameToCode($options['name']))
+            ->setDefault('type', fn(Options $options): string => $this->faker->randomElement(array_keys($this->attributeTypes)))
+            ->setDefault('configuration', fn(Options $options): array => [])
             ->setAllowedValues('type', array_keys($this->attributeTypes))
         ;
     }

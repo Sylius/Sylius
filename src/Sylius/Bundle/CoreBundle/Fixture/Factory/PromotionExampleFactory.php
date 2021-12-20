@@ -114,9 +114,7 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('code', function (Options $options): string {
-                return StringInflector::nameToCode($options['name']);
-            })
+            ->setDefault('code', fn(Options $options): string => StringInflector::nameToCode($options['name']))
             ->setDefault('name', $this->faker->words(3, true))
             ->setDefault('description', $this->faker->sentence())
             ->setDefault('usage_limit', null)

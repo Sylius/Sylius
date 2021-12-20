@@ -155,9 +155,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
                 return $words;
             })
 
-            ->setDefault('code', function (Options $options): string {
-                return StringInflector::nameToCode($options['name']);
-            })
+            ->setDefault('code', fn(Options $options): string => StringInflector::nameToCode($options['name']))
 
             ->setDefault('enabled', true)
             ->setAllowedTypes('enabled', 'bool')
@@ -165,13 +163,9 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('tracked', false)
             ->setAllowedTypes('tracked', 'bool')
 
-            ->setDefault('slug', function (Options $options): string {
-                return $this->slugGenerator->generate($options['name']);
-            })
+            ->setDefault('slug', fn(Options $options): string => $this->slugGenerator->generate($options['name']))
 
-            ->setDefault('short_description', function (Options $options): string {
-                return $this->faker->paragraph;
-            })
+            ->setDefault('short_description', fn(Options $options): string => $this->faker->paragraph)
 
             ->setDefault('description', function (Options $options): string {
                 /** @var string $paragraphs */
@@ -197,9 +191,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
             ->setDefault('product_attributes', [])
             ->setAllowedTypes('product_attributes', 'array')
-            ->setNormalizer('product_attributes', function (Options $options, array $productAttributes): array {
-                return $this->setAttributeValues($productAttributes);
-            })
+            ->setNormalizer('product_attributes', fn(Options $options, array $productAttributes): array => $this->setAttributeValues($productAttributes))
 
             ->setDefault('product_options', [])
             ->setAllowedTypes('product_options', 'array')
@@ -417,9 +409,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         return trim(array_reduce(
             $variant->getOptionValues()->toArray(),
-            static function (?string $variantName, ProductOptionValueInterface $variantOption) {
-                return $variantName . sprintf('%s ', $variantOption->getValue());
-            },
+            static fn(?string $variantName, ProductOptionValueInterface $variantOption) => $variantName . sprintf('%s ', $variantOption->getValue()),
             ''
         ));
     }

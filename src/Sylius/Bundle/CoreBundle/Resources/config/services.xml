@@ -276,18 +276,18 @@
 
         <service id="Sylius\Bundle\CoreBundle\Provider\ForProductsScopeVariantsProvider">
             <argument type="service" id="sylius.repository.product" />
-            <tag name="sylius.catalog_promotion.variants_provider" />
+            <tag name="sylius.catalog_promotion.variants_provider" type="for_products" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Provider\ForVariantsScopeVariantsProvider">
             <argument type="service" id="sylius.repository.product_variant" />
-            <tag name="sylius.catalog_promotion.variants_provider" />
+            <tag name="sylius.catalog_promotion.variants_provider" type="for_variants" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Provider\ForTaxonsScopeVariantsProvider">
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.repository.product_variant" />
-            <tag name="sylius.catalog_promotion.variants_provider" />
+            <tag name="sylius.catalog_promotion.variants_provider" type="for_taxons" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" class="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculator"/>

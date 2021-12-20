@@ -22,7 +22,7 @@ final class ProductImagesTest extends JsonApiTestCase
     /** @test */
     public function it_gets_one_product_image(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['product_image.yaml', 'authentication/api_administrator.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['product/product_image.yaml', 'authentication/api_administrator.yaml']);
         /** @var ProductImageInterface $productImage */
         $productImage = $fixtures["product_thumbnail"];
 
@@ -35,13 +35,13 @@ final class ProductImagesTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_product_image_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/product/get_product_image_response', Response::HTTP_OK);
     }
 
     /** @test */
     public function it_gets_one_filtered_product_image(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['product_image.yaml', 'authentication/api_administrator.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['product/product_image.yaml', 'authentication/api_administrator.yaml']);
         /** @var ProductImageInterface $productImage */
         $productImage = $fixtures["product_thumbnail"];
 
@@ -54,6 +54,6 @@ final class ProductImagesTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_filtered_product_image_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/product/get_filtered_product_image_response', Response::HTTP_OK);
     }
 }
