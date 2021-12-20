@@ -31,8 +31,6 @@
         <parameter key="sylius.form.type.promotion_coupon.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
-        <parameter key="sylius.catalog_promotion.action.fixed_discount" type="constant">Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT</parameter>
-        <parameter key="sylius.catalog_promotion.action.percentage_discount" type="constant">Sylius\Component\Promotion\Model\CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT</parameter>
     </parameters>
 
     <services>

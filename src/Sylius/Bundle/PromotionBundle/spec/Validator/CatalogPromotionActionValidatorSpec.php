@@ -29,13 +29,10 @@ final class CatalogPromotionActionValidatorSpec extends ObjectBehavior
         ActionValidatorInterface $percentageDiscountValidator
     ): void {
         $this->beConstructedWith(
+            ['fixed_discount', 'percentage_discount'],
             [
-                CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
-                CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
-            ],
-            [
-                CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT => $fixedDiscountValidator,
-                CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT => $percentageDiscountValidator,
+                'fixed_discount' => $fixedDiscountValidator,
+                'percentage_discount' => $percentageDiscountValidator,
             ]
         );
 
@@ -68,7 +65,7 @@ final class CatalogPromotionActionValidatorSpec extends ObjectBehavior
     ): void {
         $constraint = new CatalogPromotionAction();
 
-        $action->getType()->willReturn(CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT);
+        $action->getType()->willReturn('percentage_discount');
         $action->getConfiguration()->willReturn([]);
 
         $percentageDiscountValidator->validate([], $constraint, $executionContext)->shouldBeCalled();
