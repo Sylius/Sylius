@@ -14,9 +14,11 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Provider\ForTaxonsScopeVariantsProvider;
+use Sylius\Bundle\CoreBundle\Provider\ForVariantsScopeVariantsProvider;
 use Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ScopeValidatorInterface;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScope;
-use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
@@ -30,12 +32,12 @@ final class CatalogPromotionScopeValidatorSpec extends ObjectBehavior
     ): void {
         $this->beConstructedWith(
             [
-                CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
-                CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS
+                ForTaxonsScopeVariantsProvider::TYPE,
+                ForVariantsScopeVariantsProvider::TYPE
             ],
             [
-                CatalogPromotionScopeInterface::TYPE_FOR_TAXONS => $forTaxonsValidator,
-                CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS => $forVariantsValidator,
+                ForTaxonsScopeVariantsProvider::TYPE => $forTaxonsValidator,
+                ForVariantsScopeVariantsProvider::TYPE => $forVariantsValidator,
             ]
         );
 
@@ -68,7 +70,7 @@ final class CatalogPromotionScopeValidatorSpec extends ObjectBehavior
     ): void {
         $constraint = new CatalogPromotionScope();
 
-        $scope->getType()->willReturn(CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS);
+        $scope->getType()->willReturn(ForVariantsScopeVariantsProvider::TYPE);
         $scope->getConfiguration()->willReturn([]);
 
         $forVariantsValidator->validate([], $constraint, $executionContext)->shouldBeCalled();

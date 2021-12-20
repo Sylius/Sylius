@@ -32,8 +32,8 @@ final class CatalogPromotionActionSpec extends ObjectBehavior
     function its_type_is_mutable(): void
     {
         $this->getType()->shouldReturn(null);
-        $this->setType(CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT);
-        $this->getType()->shouldReturn(CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT);
+        $this->setType('percentage_discount');
+        $this->getType()->shouldReturn('percentage_discount');
     }
 
     function its_configuration_is_mutable(): void

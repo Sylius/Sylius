@@ -15,6 +15,8 @@ namespace spec\Sylius\Bundle\CoreBundle\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Calculator\ActionBasedPriceCalculatorInterface;
+use Sylius\Bundle\CoreBundle\Calculator\FixedDiscountPriceCalculator;
+use Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
@@ -29,8 +31,8 @@ final class PercentageDiscountPriceCalculatorSpec extends ObjectBehavior
         CatalogPromotionActionInterface $fixedDiscountAction,
         CatalogPromotionActionInterface $percentageDiscountAction
     ): void {
-        $fixedDiscountAction->getType()->willReturn(CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT);
-        $percentageDiscountAction->getType()->willReturn(CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT);
+        $fixedDiscountAction->getType()->willReturn(FixedDiscountPriceCalculator::TYPE);
+        $percentageDiscountAction->getType()->willReturn(PercentageDiscountPriceCalculator::TYPE);
 
         $this->supports($fixedDiscountAction)->shouldReturn(false);
         $this->supports($percentageDiscountAction)->shouldReturn(true);

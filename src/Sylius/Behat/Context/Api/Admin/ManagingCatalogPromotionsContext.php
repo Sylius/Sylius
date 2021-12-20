@@ -18,9 +18,14 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\CoreBundle\Calculator\FixedDiscountPriceCalculator;
+use Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator;
+use Sylius\Bundle\CoreBundle\Provider\ForProductsScopeVariantsProvider;
+use Sylius\Bundle\CoreBundle\Provider\ForTaxonsScopeVariantsProvider;
+use Sylius\Bundle\CoreBundle\Provider\ForVariantsScopeVariantsProvider;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -197,7 +202,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddActionThatGivesPercentageDiscount(float $amount): void
     {
         $actions = [[
-            'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+            'type' => PercentageDiscountPriceCalculator::TYPE,
             'configuration' => [
                 'amount' => $amount
             ],
@@ -212,7 +217,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddActionThatGivesFixedDiscount(int $amount, ChannelInterface $channel): void
     {
         $actions = [[
-            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'type' => FixedDiscountPriceCalculator::TYPE,
             'configuration' => [
                 $channel->getCode() => [
                     'amount' => $amount
@@ -231,7 +236,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $actions = $this->client->getContent()['actions'];
 
         $additionalAction = [[
-            'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+            'type' => PercentageDiscountPriceCalculator::TYPE,
             'configuration' => [
                 'amount' => $amount
             ],
@@ -250,7 +255,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $scopes = $this->client->getContent()['scopes'];
 
         $additionalScope = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
+            'type' => ForVariantsScopeVariantsProvider::TYPE,
             'configuration' => [
                 'variants' => [$productVariant->getCode()],
             ],
@@ -287,7 +292,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddInvalidPercentageDiscountActionWithNonNumberInAmount(): void
     {
         $actions = [[
-            'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+            'type' => PercentageDiscountPriceCalculator::TYPE,
             'configuration' => [
                 'amount' => 'text'
             ],
@@ -346,7 +351,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddScopeThatAppliesOnVariants(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
     {
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
+            'type' => ForVariantsScopeVariantsProvider::TYPE,
             'configuration' => [
                 'variants' => [
                     $firstVariant->getCode(),
@@ -364,7 +369,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddCatalogPromotionScopeForTaxonWithoutTaxons(): void
     {
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
+            'type' => ForTaxonsScopeVariantsProvider::TYPE,
             'configuration' => ['taxons' => []],
         ]];
 
@@ -377,7 +382,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddCatalogPromotionScopeForTaxonWithNonexistentTaxons(): void
     {
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
+            'type' => ForTaxonsScopeVariantsProvider::TYPE,
             'configuration' => [
                 'taxons' => [
                     'BAD_TAXON',
@@ -395,7 +400,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddCatalogPromotionScopeForProductWithoutProducts(): void
     {
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS,
+            'type' => ForProductsScopeVariantsProvider::TYPE,
             'configuration' => ['products' => []],
         ]];
 
@@ -408,7 +413,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddCatalogPromotionScopeForProductsWithNonexistentProducts(): void
     {
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS,
+            'type' => ForProductsScopeVariantsProvider::TYPE,
             'configuration' => [
                 'products' => [
                     'BAD_PRODUCT',
@@ -426,7 +431,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddScopeThatAppliesOnTaxon(TaxonInterface $taxon): void
     {
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_TAXONS,
+            'type' => ForTaxonsScopeVariantsProvider::TYPE,
             'configuration' => [
                 'taxons' => [$taxon->getCode()]
             ],
@@ -441,7 +446,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddScopeThatAppliesOnProduct(ProductInterface $product): void
     {
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS,
+            'type' => ForProductsScopeVariantsProvider::TYPE,
             'configuration' => [
                 'products' => [$product->getCode()]
             ],
@@ -469,7 +474,7 @@ final class ManagingCatalogPromotionsContext implements Context
     ): void {
         $this->client->buildUpdateRequest($catalogPromotion->getCode());
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
+            'type' => ForVariantsScopeVariantsProvider::TYPE,
             'configuration' => [
                 'variants' => [
                     $productVariant->getCode(),
@@ -492,7 +497,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
         $content = $this->client->getContent();
         unset($content['scopes'][0]['configuration']['variants']);
-        $content['scopes'][0]['type'] = CatalogPromotionScopeInterface::TYPE_FOR_TAXONS;
+        $content['scopes'][0]['type'] = ForTaxonsScopeVariantsProvider::TYPE;
         $content['scopes'][0]['configuration']['taxons'] = [$taxon->getCode()];
 
         $this->client->setRequestData($content);;
@@ -511,7 +516,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
         $content = $this->client->getContent();
         unset($content['scopes'][0]['configuration']['variants']);
-        $content['scopes'][0]['type'] = CatalogPromotionScopeInterface::TYPE_FOR_PRODUCTS;
+        $content['scopes'][0]['type'] = ForProductsScopeVariantsProvider::TYPE;
         $content['scopes'][0]['configuration']['products'] = [$product->getCode()];
 
         $this->client->setRequestData($content);;
@@ -542,7 +547,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $this->client->buildUpdateRequest($catalogPromotion->getCode());
         $scopes = [[
-            'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+            'type' => PercentageDiscountPriceCalculator::TYPE,
             'configuration' => [
                 'amount' => $amount,
             ],
@@ -564,7 +569,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $content = $this->client->getContent();
 
         $content['actions'] = [[
-            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'type' => FixedDiscountPriceCalculator::TYPE,
             'configuration' => [$channel->getCode() => ['amount' => $amount]],
         ]];
 
@@ -582,7 +587,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $content = $this->client->getContent();
 
         $content['actions'] = [[
-            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'type' => FixedDiscountPriceCalculator::TYPE,
             'configuration' => [$channel->getCode() => ['amount' => $amount]],
         ]];
 
@@ -610,7 +615,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddForVariantsScopeWithTheWrongConfiguration(): void
     {
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
+            'type' => ForVariantsScopeVariantsProvider::TYPE,
             'configuration' => [
                 'variants' => ['wrong_code'],
             ],
@@ -625,7 +630,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddForVariantsScopeWithoutVariantsConfigured(): void
     {
         $scopes = [[
-            'type' => CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS,
+            'type' => ForVariantsScopeVariantsProvider::TYPE,
             'configuration' => [
                 'variants' => [],
             ],
@@ -640,7 +645,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddPercentageDiscountActionWithoutAmountConfigured(): void
     {
         $actions = [[
-            'type' => CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT,
+            'type' => PercentageDiscountPriceCalculator::TYPE,
             'configuration' => [],
         ]];
 
@@ -653,7 +658,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddFixedDiscountActionWithoutAmountConfigured(): void
     {
         $actions = [[
-            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'type' => FixedDiscountPriceCalculator::TYPE,
             'configuration' => ['channel' => ['amount' => null]],
         ]];
 
@@ -667,7 +672,7 @@ final class ManagingCatalogPromotionsContext implements Context
         ChannelInterface $channel
     ): void {
         $actions = [[
-            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'type' => FixedDiscountPriceCalculator::TYPE,
             'configuration' => [$channel->getCode() => ['amount' => 'wrong value']],
         ]];
 
@@ -680,7 +685,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddInvalidFixedDiscountActionConfiguredForNonexistentChannel(): void
     {
         $actions = [[
-            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'type' => FixedDiscountPriceCalculator::TYPE,
             'configuration' => ['nonexistent_action' => ['amount' => 1000]],
         ]];
 
@@ -820,7 +825,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
         foreach ($catalogPromotionActions as $catalogPromotionAction) {
             if (
-                $catalogPromotionAction['type'] === CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT &&
+                $catalogPromotionAction['type'] === FixedDiscountPriceCalculator::TYPE &&
                 $catalogPromotionAction['configuration'][$channel->getCode()]['amount'] === $amount
             ) {
                 return;
@@ -829,7 +834,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
         throw new \Exception(sprintf(
             'There is no "%s" action with %d for "%s" channel',
-            CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            FixedDiscountPriceCalculator::TYPE,
             $amount,
             $channel->getName()
         ));
@@ -845,13 +850,13 @@ final class ManagingCatalogPromotionsContext implements Context
         foreach ($catalogPromotionActions as $catalogPromotionAction) {
             if (
                 $catalogPromotionAction['configuration']['amount'] === $amount &&
-                $catalogPromotionAction['type'] === CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT
+                $catalogPromotionAction['type'] === PercentageDiscountPriceCalculator::TYPE
             ) {
                 return;
             }
         }
 
-        throw new \Exception(sprintf('There is no "%s" action with %f', CatalogPromotionActionInterface::TYPE_PERCENTAGE_DISCOUNT, $amount));
+        throw new \Exception(sprintf('There is no "%s" action with %f', PercentageDiscountPriceCalculator::TYPE, $amount));
     }
 
     /**

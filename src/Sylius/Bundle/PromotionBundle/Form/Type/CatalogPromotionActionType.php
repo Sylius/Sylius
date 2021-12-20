@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
+use Sylius\Bundle\CoreBundle\Calculator\FixedDiscountPriceCalculator;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -74,7 +75,7 @@ final class CatalogPromotionActionType extends AbstractResourceType
                     $formData->setType($data['type']);
                     $formData->setConfiguration($data['configuration']);
 
-                    if ($data['type'] === CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT) {
+                    if ($data['type'] === FixedDiscountPriceCalculator::TYPE) {
                         foreach ($data['configuration'] as $channelConfiguration) {
                             if ($channelConfiguration['amount'] === '') {
                                 return;
