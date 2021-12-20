@@ -30,9 +30,7 @@ final class SyliusMoneyBundleTest extends WebTestCase
 
         $services = $container->getServiceIds();
 
-        $services = array_filter($services, function (string $serviceId): bool {
-            return 0 === strpos($serviceId, 'sylius.');
-        });
+        $services = array_filter($services, fn(string $serviceId): bool => 0 === strpos($serviceId, 'sylius.'));
 
         foreach ($services as $id) {
             Assert::assertNotNull($container->get($id, ContainerInterface::NULL_ON_INVALID_REFERENCE));

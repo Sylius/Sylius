@@ -93,9 +93,7 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
 
                 return $words;
             })
-            ->setDefault('code', function (Options $options): string {
-                return StringInflector::nameToCode($options['name']);
-            })
+            ->setDefault('code', fn(Options $options): string => StringInflector::nameToCode($options['name']))
             ->setDefault('values', null)
             ->setDefault('values', function (Options $options, ?array $values): array {
                 if (is_array($values)) {

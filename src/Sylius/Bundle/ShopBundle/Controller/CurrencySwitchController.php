@@ -59,9 +59,7 @@ final class CurrencySwitchController
         $channel = $this->channelContext->getChannel();
 
         $availableCurrencies = array_map(
-            function (CurrencyInterface $currency) {
-                return $currency->getCode();
-            },
+            fn(CurrencyInterface $currency) => $currency->getCode(),
             $channel->getCurrencies()->toArray()
         );
 

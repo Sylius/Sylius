@@ -136,18 +136,10 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
 
                 return $words;
             })
-            ->setDefault('code', function (Options $options): string {
-                return StringInflector::nameToCode($options['name']);
-            })
-            ->setDefault('hostname', function (Options $options): string {
-                return $options['code'] . '.localhost';
-            })
-            ->setDefault('color', function (Options $options): string {
-                return $this->faker->colorName;
-            })
-            ->setDefault('enabled', function (Options $options): bool {
-                return $this->faker->boolean(90);
-            })
+            ->setDefault('code', fn(Options $options): string => StringInflector::nameToCode($options['name']))
+            ->setDefault('hostname', fn(Options $options): string => $options['code'] . '.localhost')
+            ->setDefault('color', fn(Options $options): string => $this->faker->colorName)
+            ->setDefault('enabled', fn(Options $options): bool => $this->faker->boolean(90))
             ->setAllowedTypes('enabled', 'bool')
             ->setDefault('skipping_shipping_step_allowed', false)
             ->setAllowedTypes('skipping_shipping_step_allowed', 'bool')
@@ -166,17 +158,13 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             )
             ->setDefault('tax_calculation_strategy', 'order_items_based')
             ->setAllowedTypes('tax_calculation_strategy', 'string')
-            ->setDefault('default_locale', function (Options $options): LocaleInterface {
-                return $this->faker->randomElement($options['locales']);
-            })
+            ->setDefault('default_locale', fn(Options $options): LocaleInterface => $this->faker->randomElement($options['locales']))
             ->setAllowedTypes('default_locale', ['string', LocaleInterface::class])
             ->setNormalizer('default_locale', LazyOption::getOneBy($this->localeRepository, 'code'))
             ->setDefault('locales', LazyOption::all($this->localeRepository))
             ->setAllowedTypes('locales', 'array')
             ->setNormalizer('locales', LazyOption::findBy($this->localeRepository, 'code'))
-            ->setDefault('base_currency', function (Options $options): CurrencyInterface {
-                return $this->faker->randomElement($options['currencies']);
-            })
+            ->setDefault('base_currency', fn(Options $options): CurrencyInterface => $this->faker->randomElement($options['currencies']))
             ->setAllowedTypes('base_currency', ['string', CurrencyInterface::class])
             ->setNormalizer('base_currency', LazyOption::getOneBy($this->currencyRepository, 'code'))
             ->setDefault('currencies', LazyOption::all($this->currencyRepository))

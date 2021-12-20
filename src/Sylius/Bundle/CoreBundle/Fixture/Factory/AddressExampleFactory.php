@@ -57,27 +57,13 @@ class AddressExampleFactory extends AbstractExampleFactory
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('first_name', function (Options $options): string {
-                return $this->faker->firstName;
-            })
-            ->setDefault('last_name', function (Options $options): string {
-                return $this->faker->lastName;
-            })
-            ->setDefault('phone_number', function (Options $options): ?string {
-                return random_int(1, 100) > 50 ? $this->faker->phoneNumber : null;
-            })
-            ->setDefault('company', function (Options $options): ?string {
-                return random_int(1, 100) > 50 ? $this->faker->company : null;
-            })
-            ->setDefault('street', function (Options $options): string {
-                return $this->faker->streetAddress;
-            })
-            ->setDefault('city', function (Options $options): string {
-                return $this->faker->city;
-            })
-            ->setDefault('postcode', function (Options $options): string {
-                return $this->faker->postcode;
-            })
+            ->setDefault('first_name', fn(Options $options): string => $this->faker->firstName)
+            ->setDefault('last_name', fn(Options $options): string => $this->faker->lastName)
+            ->setDefault('phone_number', fn(Options $options): ?string => random_int(1, 100) > 50 ? $this->faker->phoneNumber : null)
+            ->setDefault('company', fn(Options $options): ?string => random_int(1, 100) > 50 ? $this->faker->company : null)
+            ->setDefault('street', fn(Options $options): string => $this->faker->streetAddress)
+            ->setDefault('city', fn(Options $options): string => $this->faker->city)
+            ->setDefault('postcode', fn(Options $options): string => $this->faker->postcode)
             ->setDefault('country_code', function (Options $options): string {
                 $countries = $this->countryRepository->findAll();
                 shuffle($countries);
