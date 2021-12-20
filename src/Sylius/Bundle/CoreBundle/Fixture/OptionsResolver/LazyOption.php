@@ -95,9 +95,7 @@ final class LazyOption
 
     public static function all(RepositoryInterface $repository): \Closure
     {
-        return function (Options $options) use ($repository): iterable {
-            return $repository->findAll();
-        };
+        return fn(Options $options): iterable => $repository->findAll();
     }
 
     public static function findBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure

@@ -60,9 +60,7 @@ class CustomerGroupExampleFactory extends AbstractExampleFactory implements Exam
 
                 return $words;
             })
-            ->setDefault('code', function (Options $options): string {
-                return StringInflector::nameToCode($options['name']);
-            })
+            ->setDefault('code', fn(Options $options): string => StringInflector::nameToCode($options['name']))
         ;
     }
 }
