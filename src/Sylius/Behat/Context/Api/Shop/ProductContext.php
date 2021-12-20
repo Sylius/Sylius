@@ -178,7 +178,7 @@ final class ProductContext implements Context
     public function iShouldSeeAProductWithName(string $name): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', 'name', $name)
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'name', $name)
         );
     }
 
@@ -310,7 +310,7 @@ final class ProductContext implements Context
     {
         $products = $this->responseChecker->getCollection($this->client->getLastResponse());
 
-        Assert::same($products[0]['translations']['en_US']['name'], $name);
+        Assert::same($products[0]['name'], $name);
     }
 
     /**
@@ -320,7 +320,7 @@ final class ProductContext implements Context
     {
         $products = $this->responseChecker->getCollection($this->client->getLastResponse());
 
-        Assert::same(end($products)['translations']['en_US']['name'], $name);
+        Assert::same(end($products)['name'], $name);
     }
 
     /**
@@ -340,14 +340,7 @@ final class ProductContext implements Context
      */
     public function iShouldNotSeeProductWithName(string $name): void
     {
-        Assert::false(
-            $this->responseChecker->hasItemWithTranslation(
-                $this->client->getLastResponse(),
-                'en_US',
-                'name',
-                $name
-            )
-        );
+        Assert::false($this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'name', $name));
     }
 
     /**
@@ -355,16 +348,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeProductName(string $name): void
     {
-        Assert::true(
-            $this->responseChecker->hasItemWithTranslation(
-                $this->client->getLastResponse(),
-                'en_US',
-                'name',
-                $name
-            )
-        );
-
-        Assert::same($this->responseChecker->getTranslationValue($this->client->getLastResponse(), 'name'), $name);
+        Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $name));
     }
 
     /**
@@ -377,14 +361,7 @@ final class ProductContext implements Context
         $productVariant = $this->responseChecker->getValue($response, 'variants');
         $this->client->executeCustomRequest(Request::custom($productVariant[0], HttpRequest::METHOD_GET));
 
-        Assert::true(
-            $this->responseChecker->hasTranslation(
-                $this->client->getLastResponse(),
-                'en_US',
-                'name',
-                $variantName
-            )
-        );
+        Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $variantName));
     }
 
     /**
@@ -411,7 +388,7 @@ final class ProductContext implements Context
         $productNamesFromResponse = new ArrayCollection();
 
         foreach ($this->responseChecker->getCollection($this->client->getLastResponse()) as $productItem) {
-            $productNamesFromResponse->add($productItem['translations']['en_US']['name']);
+            $productNamesFromResponse->add($productItem['name']);
         }
 
         foreach ($productNamesFromResponse as $key => $name) {
@@ -438,11 +415,6 @@ final class ProductContext implements Context
     {
         Assert::same(
             $this->responseChecker->getValue($this->client->getLastResponse(), 'description'),
-            $description
-        );
-
-        Assert::same(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'translations')['en_US']['description'],
             $description
         );
     }
@@ -497,10 +469,8 @@ final class ProductContext implements Context
     private function hasProductWithName(array $products, string $name): bool
     {
         foreach ($products as $product) {
-            foreach ($product['translations'] as $translation) {
-                if ($translation['name'] === $name) {
-                    return true;
-                }
+            if ($product['name'] === $name) {
+                return true;
             }
         }
 
@@ -510,10 +480,8 @@ final class ProductContext implements Context
     private function hasProductWithNameAndShortDescription(array $products, string $name, string $shortDescription): bool
     {
         foreach ($products as $product) {
-            foreach ($product['translations'] as $translation) {
-                if ($translation['name'] === $name && $translation['shortDescription'] === $shortDescription) {
-                    return true;
-                }
+            if ($product['name'] === $name && $product['shortDescription'] === $shortDescription) {
+                return true;
             }
         }
 

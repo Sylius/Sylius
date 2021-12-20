@@ -48,9 +48,7 @@ final class RegisterGatewayConfigTypePass implements CompilerPassInterface
             }
         }
 
-        usort($gatewayFactories, function (array $firstGateway, array $secondGateway): int {
-            return $secondGateway['priority'] - $firstGateway['priority'];
-        });
+        usort($gatewayFactories, fn(array $firstGateway, array $secondGateway): int => $secondGateway['priority'] - $firstGateway['priority']);
 
         $sortedGatewayFactories = [];
         foreach ($gatewayFactories as $key => $factory) {

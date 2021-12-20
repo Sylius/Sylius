@@ -74,6 +74,8 @@ Promotions
     promotions/custom-cart-promotion-rule
     promotions/custom-cart-promotion-action
     promotions/custom-catalog-promotion-scope
+    promotions/custom-catalog-promotion-action
+    promotions/catalog-promotion-labels
 
 .. include:: /cookbook/promotions/map.rst.inc
 

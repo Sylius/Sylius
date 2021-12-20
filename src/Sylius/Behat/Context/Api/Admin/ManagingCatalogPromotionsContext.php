@@ -573,6 +573,23 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I edit it to have ("[^"]+") of fixed discount in the ("[^"]+" channel)$/
+     */
+    public function iEditItToHaveFixedDiscountInTheChannel(
+        int $amount,
+        ChannelInterface $channel
+    ): void {
+        $content = $this->client->getContent();
+
+        $content['actions'] = [[
+            'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            'configuration' => [$channel->getCode() => ['amount' => $amount]],
+        ]];
+
+        $this->client->setRequestData($content);
+    }
+
+    /**
      * @When I add catalog promotion scope with nonexistent type
      */
     public function iAddCatalogPromotionScopeWithNonexistentType(): void
@@ -637,7 +654,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $actions = [[
             'type' => CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
-            'configuration' => [],
+            'configuration' => ['channel' => ['amount' => null]],
         ]];
 
         $this->client->addRequestData('actions', $actions);
@@ -795,13 +812,27 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @Then /^this catalog promotion should have ("[^"]+") of fixed discount in the ("[^"]+" channel)$/
+     * @Then /^it should reduce price by ("[^"]+") in the ("[^"]+" channel)$/
      */
     public function thisCatalogPromotionShouldHaveFixedDiscountInTheChannel(int $amount, ChannelInterface $channel): void
     {
         $catalogPromotionActions = $this->responseChecker->getValue($this->client->getLastResponse(), 'actions');
 
-        Assert::same($catalogPromotionActions[0]['type'], CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT);
-        Assert::same($catalogPromotionActions[0]['configuration'][$channel->getCode()]['amount'], $amount);
+        foreach ($catalogPromotionActions as $catalogPromotionAction) {
+            if (
+                $catalogPromotionAction['type'] === CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT &&
+                $catalogPromotionAction['configuration'][$channel->getCode()]['amount'] === $amount
+            ) {
+                return;
+            }
+        }
+
+        throw new \Exception(sprintf(
+            'There is no "%s" action with %d for "%s" channel',
+            CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT,
+            $amount,
+            $channel->getName()
+        ));
     }
 
     /**
@@ -1043,6 +1074,16 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then I should be notified that not all channels are filled
+     */
+    public function iShouldBeNotifiedThatNotAllChannelsAreFilled(): void
+    {
+        $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+
+        Assert::same($response['violations'][0]['message'], 'Configuration for one of the required channels is not provided.');
+    }
+
+    /**
      * @Then /^(this catalog promotion) name should(?:| still) be "([^"]+)"$/
      */
     public function thisCatalogPromotionNameShouldBe(CatalogPromotionInterface $catalogPromotion, string $name): void
@@ -1243,7 +1284,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Provided configuration contains errors. Please add the fixed discount amount greater than 0 for at least 1 channel.'
+            'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.'
         );
     }
 

@@ -29,12 +29,14 @@ final class ExchangeRateFilter extends AbstractContextAwareFilter
         string $operationName = null
     ) {
         if ($property === 'currencyCode') {
+            $rootAlias = $queryBuilder->getRootAliases()[0];
+            $codeParameterName = $queryNameGenerator->generateParameterName('code');
             $queryBuilder
-                ->innerJoin('o.sourceCurrency', 'sourceCurrency')
-                ->innerJoin('o.targetCurrency', 'targetCurrency')
-                ->where('sourceCurrency.code LIKE CONCAT(\'%\', :code, \'%\')')
-                ->orWhere('targetCurrency.code LIKE CONCAT(\'%\', :code, \'%\')')
-                ->setParameter('code', $value)
+                ->innerJoin(sprintf('%s.sourceCurrency', $rootAlias), 'sourceCurrency')
+                ->innerJoin(sprintf('%s.targetCurrency', $rootAlias), 'targetCurrency')
+                ->where('sourceCurrency.code LIKE CONCAT(\'%\', :' . $codeParameterName . ', \'%\')')
+                ->orWhere('targetCurrency.code LIKE CONCAT(\'%\', :' . $codeParameterName . ', \'%\')')
+                ->setParameter($codeParameterName, $value)
             ;
         }
     }

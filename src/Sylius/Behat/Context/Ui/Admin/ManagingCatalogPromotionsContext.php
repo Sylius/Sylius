@@ -385,6 +385,17 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I edit it to have "(?:€|£|\$)([^"]+)" of fixed discount in the ("[^"]+" channel)$/
+     */
+    public function iEditItToHaveFixedDiscountInTheChannel(
+        string $discount,
+        ChannelInterface $channel
+    ): void {
+        $this->formElement->chooseActionType('Fixed discount');
+        $this->formElement->specifyLastActionDiscountForChannel($discount, $channel);
+    }
+
+    /**
      * @When I disable :catalogPromotion catalog promotion
      */
     public function iDisableCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
@@ -556,7 +567,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldBeNotifiedThatADiscountAmountShouldBeConfiguredForAtLeasOneChannel(): void
     {
         Assert::true($this->formElement->hasValidationMessage(
-            'Provided configuration contains errors. Please add the fixed discount amount greater than 0 for at least 1 channel.'
+            'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.'
         ));
     }
 
@@ -943,6 +954,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then it should reduce price by :amount in the :channel channel
+     */
+    public function itShouldReducePriceByInTheChannel(string $amount, ChannelInterface $channel): void
+    {
+        Assert::true($this->showPage->hasActionWithFixedDiscount($amount, $channel));
+    }
+
+    /**
      * @Then it should apply on :variant variant
      */
     public function itShouldApplyOnVariant(ProductVariantInterface $variant): void
@@ -973,6 +992,14 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldGetInformationThatTheEndDateCannotBeSetBeforeStartDate(): void
     {
         Assert::same($this->createPage->getValidationMessage('endDate'), 'End date cannot be set before start date.');
+    }
+
+    /**
+     * @Then I should be notified that not all channels are filled
+     */
+    public function iShouldBeNotifiedThatNotAllChannelsAreFilled(): void
+    {
+        Assert::same($this->formElement->getValidationMessage(), 'Configuration for one of the required channels is not provided.');
     }
 
     /**

@@ -178,6 +178,24 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
+     * @Given /^(it) reduces(?:| also) price by fixed ("[^"]+") in the ("[^"]+" channel)$/
+     */
+    public function itReducesPriceByFixedInTheChannel(
+        CatalogPromotionInterface $catalogPromotion,
+        int $discount,
+        ChannelInterface $channel
+    ): void {
+        /** @var CatalogPromotionActionInterface $catalogPromotionAction */
+        $catalogPromotionAction = $this->catalogPromotionActionFactory->createNew();
+        $catalogPromotionAction->setType(CatalogPromotionActionInterface::TYPE_FIXED_DISCOUNT);
+        $catalogPromotionAction->setConfiguration([$channel->getCode() => ['amount' => $discount]]);
+
+        $catalogPromotion->addAction($catalogPromotionAction);
+
+        $this->entityManager->flush();
+    }
+
+    /**
      * @Given /^there is a catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" variant) and ("[^"]+" variant)$/
      * @Given /^there is a catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
      */

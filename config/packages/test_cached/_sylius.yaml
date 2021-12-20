@@ -1,2 +1,2 @@
-sylius_api:
-    enabled: true
+imports:
+    - { resource: "../test/_sylius.yaml" }

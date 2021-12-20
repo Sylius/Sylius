@@ -35,26 +35,28 @@ final class TranslationOrderNameAndLocaleFilter extends AbstractContextAwareFilt
             }
 
             $direction = $value['translation.name'];
+            $rootAlias = $queryBuilder->getRootAliases()[0];
 
             if (isset($value['localeCode'])) {
+                $localeParameterName = $queryNameGenerator->generateParameterName('locale');
+
                 $queryBuilder
                     ->addSelect('translation')
                     ->innerJoin(
-                        sprintf('%s.translations', $queryBuilder->getRootAliases()[0]),
+                        sprintf('%s.translations', $rootAlias),
                         'translation',
                         'WITH',
-                        'translation.locale = :locale'
+                        sprintf('translation.locale = :%s', $localeParameterName)
                     )
                     ->orderBy('translation.name', $direction)
-                    ->setParameter('locale', $value['localeCode'])
+                    ->setParameter($localeParameterName, $value['localeCode'])
                 ;
 
                 return;
             }
-
             $queryBuilder
                 ->addSelect('translation')
-                ->innerJoin('o.translations', 'translation')
+                ->innerJoin(sprintf('%s.translations', $rootAlias), 'translation')
                 ->orderBy('translation.name', $direction)
             ;
         }

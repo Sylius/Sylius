@@ -25,12 +25,10 @@ final class ChannelBasedPerUnitRateConfigurationType extends AbstractType
     {
         $resolver->setDefaults([
             'entry_type' => PerUnitRateConfigurationType::class,
-            'entry_options' => function (ChannelInterface $channel): array {
-                return [
-                    'label' => $channel->getName(),
-                    'currency' => $channel->getBaseCurrency()->getCode(),
-                ];
-            },
+            'entry_options' => fn(ChannelInterface $channel): array => [
+                'label' => $channel->getName(),
+                'currency' => $channel->getBaseCurrency()->getCode(),
+            ],
         ]);
     }
 

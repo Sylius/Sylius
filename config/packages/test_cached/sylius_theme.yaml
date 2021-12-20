@@ -1,3 +1,2 @@
-sylius_theme:
-    sources:
-        test: ~
+imports:
+    - { resource: "../test/sylius_theme.yaml" }

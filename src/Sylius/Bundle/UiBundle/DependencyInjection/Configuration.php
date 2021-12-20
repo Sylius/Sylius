@@ -40,9 +40,7 @@ final class Configuration implements ConfigurationInterface
                                     ->canBeDisabled()
                                     ->beforeNormalization()
                                         ->ifString()
-                                        ->then(static function (?string $template): array {
-                                            return ['template' => $template];
-                                        })
+                                        ->then(static fn(?string $template): array => ['template' => $template])
                                     ->end()
                                     ->children()
                                         ->booleanNode('enabled')->defaultNull()->end()

@@ -110,9 +110,7 @@ final class CountryChoiceTypeTest extends TypeTestCase
             $this->poland->reveal(),
         ]);
 
-        $this->assertChoicesLabels(['Poland'], ['choice_filter' => static function (?CountryInterface $country): bool {
-            return $country !== null && $country->getName() === 'Poland';
-        }]);
+        $this->assertChoicesLabels(['Poland'], ['choice_filter' => static fn(?CountryInterface $country): bool => $country !== null && $country->getName() === 'Poland']);
     }
 
     private function assertChoicesLabels(array $expectedLabels, array $formConfiguration = []): void
@@ -120,8 +118,6 @@ final class CountryChoiceTypeTest extends TypeTestCase
         $form = $this->factory->create(CountryChoiceType::class, null, $formConfiguration);
         $view = $form->createView();
 
-        Assert::assertSame($expectedLabels, array_map(static function (ChoiceView $choiceView): string {
-            return $choiceView->label;
-        }, $view->vars['choices']));
+        Assert::assertSame($expectedLabels, array_map(static fn(ChoiceView $choiceView): string => $choiceView->label, $view->vars['choices']));
     }
 }

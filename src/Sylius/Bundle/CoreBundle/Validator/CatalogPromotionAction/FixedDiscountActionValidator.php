@@ -16,6 +16,8 @@ namespace Sylius\Bundle\CoreBundle\Validator\CatalogPromotionAction;
 use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction\ActionValidatorInterface;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionAction;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Webmozart\Assert\Assert;
@@ -40,6 +42,20 @@ final class FixedDiscountActionValidator implements ActionValidatorInterface
             return;
         }
 
+        /** @var CatalogPromotionActionInterface $catalogPromotionAction */
+        $catalogPromotionAction = $context->getObject();
+
+        /** @var CatalogPromotionInterface $catalogPromotion */
+        $catalogPromotion = $catalogPromotionAction->getCatalogPromotion();
+
+        foreach ($catalogPromotion->getChannels() as $channel) {
+            if (!$this->isChannelConfigured($channel->getCode(), $configuration)) {
+                $context->buildViolation('sylius.catalog_promotion_action.fixed_discount.channel_not_configured')->atPath('configuration')->addViolation();
+
+                return;
+            }
+        }
+
         foreach ($configuration as $channelCode => $channelConfiguration) {
             if (null === $this->channelRepository->findOneBy(['code' => $channelCode])) {
                 $context->buildViolation('sylius.catalog_promotion_action.fixed_discount.invalid_channel')->atPath('configuration')->addViolation();
@@ -53,5 +69,10 @@ final class FixedDiscountActionValidator implements ActionValidatorInterface
                 return;
             }
         }
+    }
+
+    private function isChannelConfigured(string $channelCode, array $configuration): bool
+    {
+        return (array_key_exists($channelCode, $configuration) && isset($configuration[$channelCode]['amount']) && $configuration[$channelCode]['amount'] > 0);
     }
 }

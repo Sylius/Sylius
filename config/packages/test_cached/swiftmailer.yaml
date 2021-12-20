@@ -1,6 +1,2 @@
-swiftmailer:
-    disable_delivery: true
-    logging: true
-    spool:
-        type: file
-        path: "%kernel.cache_dir%/spool"
+imports:
+    - { resource: "../test/swiftmailer.yaml" }
