@@ -314,3 +314,24 @@
 24. `Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart` and `Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder` commands have been replaced with `Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart`.
 
 25. `Sylius\Bundle\ApiBundle\CommandHandler\Cart\ApplyCouponToCartHandler` and `Sylius\Bundle\ApiBundle\CommandHandler\Checkout\AddressOrderHandler` command handlers have been replaced with `Sylius\Bundle\ApiBundle\CommandHandler\Checkout\UpdateCartHandler`.
+26. Request body of `GET` `api/v2/shop/shipping-methods/{code}` endpoint has been changed:
+
+     ```diff
+         {
+             "@context": "string",
+             "@id": "string",
+             "@type": "string",
+             "id": 0,
+             "code": "string",
+             "position": 0,
+     -       "translations": {
+     -       "en_US": {
+     -          "name": "string",
+     -          "description": "string",
+     -          "locale": "string"
+     -         }
+     -       },
+             "name": "string"
+     +       "description": "string"
+         }
+     ```
