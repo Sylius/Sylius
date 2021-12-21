@@ -35,4 +35,25 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
 
         return parent::get($id);
     }
+
+    protected function getAuthorizationHeaderAsCustomer(string $email, string $password): array
+    {
+        $this->client->request(
+            'POST',
+            '/api/v2/shop/authentication-token',
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
+            json_encode(['email' => $email, 'password' => $password])
+        );
+        $this->assertResponseStatusCodeSame(200);
+
+        $token = json_decode($this->client->getResponse()->getContent(), true)['token'];
+        $this->assertIsString($token);
+
+        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $this->assertIsString($authorizationHeader);
+
+        return ['HTTP_' . $authorizationHeader => 'Bearer ' . $token];
+    }
 }
