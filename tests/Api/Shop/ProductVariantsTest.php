@@ -41,9 +41,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         $this->assertResponse($response, 'shop/product/get_product_variant_with_price_response', Response::HTTP_OK);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_returns_product_variant_with_translations(): void
     {
         $fixtures = $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
