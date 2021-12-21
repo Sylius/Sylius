@@ -18,6 +18,9 @@
         <attribute name="name">
             <group>shop:taxon:read</group>
         </attribute>
+        <attribute name="slug">
+            <group>shop:taxon:read</group>
+        </attribute>
         <attribute name="description">
             <group>shop:taxon:read</group>
         </attribute>

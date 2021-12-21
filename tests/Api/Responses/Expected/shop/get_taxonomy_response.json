@@ -10,6 +10,7 @@
             "code": "MUG",
             "children": [],
             "name": "Mugs",
+            "slug": "categories\/mugs",
             "description": "Some description Lorem ipsum dolor sit amet."
         },
         {
@@ -19,6 +20,7 @@
             "code": "HAT",
             "children": [],
             "name": "Hats",
+            "slug": "categories\/hats",
             "description": "Some description Lorem ipsum dolor sit amet."
         },
         {
@@ -31,6 +33,7 @@
                 "\/api\/v2\/shop\/taxons\/WOMEN_T_SHIRTS"
             ],
             "name": "T-Shirts",
+            "slug": "categories\/t-shirts",
             "description": "Some description Lorem ipsum dolor sit amet."
         }
     ],
