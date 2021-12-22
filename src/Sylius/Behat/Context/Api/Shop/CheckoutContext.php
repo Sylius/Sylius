@@ -671,7 +671,7 @@ final class CheckoutContext implements Context
         $shippingMethodName = $shippingMethod->getName();
 
         foreach ($shippingMethods as $method) {
-            if ($method['translations']['en_US']['name'] === $shippingMethodName) {
+            if ($method['name'] === $shippingMethodName) {
                 return;
             }
         }

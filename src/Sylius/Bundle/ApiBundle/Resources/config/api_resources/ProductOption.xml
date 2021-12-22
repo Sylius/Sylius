@@ -52,6 +52,9 @@
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-options/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product_option:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
