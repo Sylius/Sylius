@@ -147,6 +147,7 @@
         <property name="variants" readable="true"/>
         <property name="averageRating" readable="true" />
         <property name="description" readable="true" />
+        <property name="slug" readable="true" />
         <property name="shortDescription" readable="true" />
         <property name="name" readable="true" />
     </resource>

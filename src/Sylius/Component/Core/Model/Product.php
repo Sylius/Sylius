@@ -20,7 +20,6 @@ use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Product\Model\ProductTranslationInterface as BaseProductTranslationInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 use Webmozart\Assert\Assert;
 
 class Product extends BaseProduct implements ProductInterface, ReviewableProductInterface
