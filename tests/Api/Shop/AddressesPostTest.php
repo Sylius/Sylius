@@ -51,19 +51,7 @@ final class AddressesPostTest extends JsonApiTestCase
         /** @var CountryInterface $country */
         $country = $fixtures['country_US'];
 
-        $this->client->request(
-            'POST',
-            '/api/v2/shop/authentication-token',
-            [],
-            [],
-            ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
-            json_encode(['email' => $customer->getEmailCanonical(), 'password' => 'sylius'])
-        );
-
-        $token = json_decode($this->client->getResponse()->getContent(), true)['token'];
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
-
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
+        $authorizationHeader = $this->getAuthorizationHeaderAsCustomer($customer->getEmailCanonical(), 'sylius');
 
         $bodyRequest = $this->createBodyRequest($country->getCode());
 
@@ -72,7 +60,7 @@ final class AddressesPostTest extends JsonApiTestCase
             '/api/v2/shop/addresses',
             [],
             [],
-            array_merge($header, ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/json']),
+            array_merge($authorizationHeader, self::CONTENT_TYPE_HEADER),
             json_encode($bodyRequest)
         );
 

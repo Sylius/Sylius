@@ -21,7 +21,49 @@
     sylius_api:
         product_image_prefix: 'media/image'
     ```
-   
+
+1. The following resources' response format changed:
+    * Taxons
+    * Products
+    * ProductVariants
+    * ProductOptions
+    * ProductOptionValues
+    * ShippingMethods
+    * Payments
+    * PaymentMethods
+
+   Note that it concerns only `shop` endpoints. Now instead of returning an array of `translations` for a given resource, translation is done automatically based on the current locale. Before:
+    ```
+      {
+        ...
+        "translations": {
+            "en_US": {
+                ...
+                "name": "Hats",
+                "slug": "categories\/hats",
+                "description": "Sample description"
+            }
+            "pl_PL": {
+                ...
+                "name": "Czapki",
+                "slug": "kategorie\/czapki",
+                "description": "Przykładowy opis"
+            },
+        }
+      }
+    ```
+
+    Assuming that the current locale is set to `en_US` now response format will be:
+
+    ```
+      {
+          ...
+          "name": "Hats",
+          "slug": "categories\/hats",
+          "description": "Sample description"
+      } 
+    ```
+
 1. The method of the `/shop/orders/{tokenValue}/items` endpoint has been changed from `PATCH` to `POST`
 
 1. `Sylius\Bundle\ApiBundle\View\CartShippingMethodInterface` and `Sylius\Bundle\ApiBundle\View\CartShippingMethod` have been removed.
