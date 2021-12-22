@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Provider\ForTaxonsScopeVariantsProvider;
+use Sylius\Bundle\CoreBundle\Provider\ForVariantsScopeVariantsProvider;
 use Sylius\Bundle\CoreBundle\Provider\VariantsProviderInterface;
-use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
@@ -39,8 +41,8 @@ final class ForTaxonsScopeVariantsProviderSpec extends ObjectBehavior
         CatalogPromotionScopeInterface $forTaxonsScope,
         CatalogPromotionScopeInterface $forVariantsScope
     ): void {
-        $forTaxonsScope->getType()->willReturn(CatalogPromotionScopeInterface::TYPE_FOR_TAXONS);
-        $forVariantsScope->getType()->willReturn(CatalogPromotionScopeInterface::TYPE_FOR_VARIANTS);
+        $forTaxonsScope->getType()->willReturn(ForTaxonsScopeVariantsProvider::TYPE);
+        $forVariantsScope->getType()->willReturn(ForVariantsScopeVariantsProvider::TYPE);
 
         $this->supports($forTaxonsScope)->shouldReturn(true);
         $this->supports($forVariantsScope)->shouldReturn(false);

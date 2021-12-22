@@ -116,7 +116,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: [ "7.4", "8.0" ]
+                php: [ "8.0" ]
                 symfony: [ "^4.4", "^5.2" ]
 
         steps:
