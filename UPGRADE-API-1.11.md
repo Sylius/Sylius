@@ -64,6 +64,30 @@
       } 
     ```
 
+1. The `api/v2/shop/payment/{id}/methods` endpoint has now `shop:payment_method:read` serialization group assigned. Therefore its body will look like this by default:
+   
+    ```
+    {
+        "@context": "\/api\/v2\/contexts\/PaymentMethod",
+        "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA\/payments\/@integer@\/methods",
+        "@id": "\/api\/v2\/shop\/payments\/@integer@\/methods",
+        "@type": "hydra:Collection",
+        "hydra:member": [
+            {
+                "@id": "\/api\/v2\/shop\/payment-methods\/CASH_ON_DELIVERY",
+                "@type": "PaymentMethod",
+                "id": 1,
+                "code": "CASH_ON_DELIVERY",
+                "position": 0,
+                "name": "Cash on delivery",
+                "description": "Description",
+                "instructions": null
+            }
+        ],
+        "hydra:totalItems": 1
+    }
+    ```
+
 1. The method of the `/shop/orders/{tokenValue}/items` endpoint has been changed from `PATCH` to `POST`
 
 1. `Sylius\Bundle\ApiBundle\View\CartShippingMethodInterface` and `Sylius\Bundle\ApiBundle\View\CartShippingMethod` have been removed.
