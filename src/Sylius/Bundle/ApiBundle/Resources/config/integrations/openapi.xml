@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <defaults public="true" />
+
+        <service
+            id="sylius.api.openapi_admin_authentication_documentation_factory"
+            class="Sylius\Bundle\ApiBundle\OpenApi\AdminAuthenticationTokenDocumentationFactory"
+            decorates="api_platform.openapi.factory"
+            decoration-on-invalid="ignore"
+            public="true"
+            autoconfigure="false"
+            decoration-priority="20"
+        >
+            <argument type="service" id="sylius.api.openapi_admin_authentication_documentation_factory.inner" />
+            <argument>%sylius.security.new_api_route%</argument>
+        </service>
+
+        <service
+            id="sylius.api.openapi_shop_authentication_documentation_factory"
+            class="Sylius\Bundle\ApiBundle\OpenApi\ShopAuthenticationTokenDocumentationFactory"
+            decorates="api_platform.openapi.factory"
+            decoration-on-invalid="ignore"
+            public="true"
+            autoconfigure="false"
+            decoration-priority="10"
+        >
+            <argument type="service" id="sylius.api.openapi_shop_authentication_documentation_factory.inner" />
+            <argument>%sylius.security.new_api_route%</argument>
+        </service>
+
+        <service
+            id="sylius.api.openapi_product_documentation_factory"
+            class="Sylius\Bundle\ApiBundle\OpenApi\ProductDocumentationFactory"
+            decorates="api_platform.openapi.factory"
+            decoration-on-invalid="ignore"
+            public="true"
+            autoconfigure="false"
+            decoration-priority="20"
+        >
+            <argument type="service" id="sylius.api.openapi_product_documentation_factory.inner" />
+        </service>
+
+        <service
+            id="sylius.api.openapi_product_variant_documentation_factory"
+            class="Sylius\Bundle\ApiBundle\OpenApi\ProductVariantDocumentationFactory"
+            decorates="api_platform.openapi.factory"
+            decoration-on-invalid="ignore"
+            public="true"
+            autoconfigure="false"
+            decoration-priority="20"
+        >
+            <argument type="service" id="sylius.api.openapi_product_variant_documentation_factory.inner" />
+        </service>
+    </services>
+</container>

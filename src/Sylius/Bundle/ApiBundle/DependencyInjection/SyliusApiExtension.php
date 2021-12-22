@@ -31,10 +31,12 @@ final class SyliusApiExtension extends Extension
 
         $loader->load('services.xml');
 
-        if (!$container->hasParameter('enable_swagger') || !$container->getParameter('enable_swagger')) {
-            return;
+        if ($container->hasParameter('enable_swagger') && $container->getParameter('enable_swagger')) {
+            $loader->load('integrations/swagger.xml');
         }
 
-        $loader->load('integrations/swagger.xml');
+        if (class_exists(\ApiPlatform\Core\OpenApi\OpenApi::class)) {
+            $loader->load('integrations/openapi.xml');
+        }
     }
 }
