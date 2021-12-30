@@ -1,7 +1,7 @@
 SyliusChannelBundle
 ===================
 
-Symfony2 bundle for handling multiple channels in e-commerce applications.
+Symfony bundle for handling multiple channels in e-commerce applications.
 
 Sylius
 ------

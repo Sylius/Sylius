@@ -1,7 +1,7 @@
 SyliusShippingBundle
 ====================
 
-Shipping component integration for [**Symfony2**](https://symfony.com) eCommerce applications.
+Shipping component integration for [**Symfony**](https://symfony.com) eCommerce applications.
 It provides architecture for shipment management system.
 
 It includes flexible calculators engine, which already contains default
