@@ -109,6 +109,11 @@ jobs:
                 run: vendor/bin/phpstan analyse
                 if: always() && steps.end-of-setup.outcome == 'success'
 
+            -
+                name: Run PHPArkitect
+                run: vendor/phparkitect/phparkitect/bin-stub/phparkitect check
+                if: always() && steps.end-of-setup.outcome == 'success'
+
     classes-specifictions:
         runs-on: ubuntu-latest
 

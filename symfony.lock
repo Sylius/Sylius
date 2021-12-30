@@ -423,6 +423,9 @@
     "php-http/promise": {
         "version": "v1.0.0"
     },
+    "phparkitect/phparkitect": {
+        "version": "0.2.9"
+    },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
     },
