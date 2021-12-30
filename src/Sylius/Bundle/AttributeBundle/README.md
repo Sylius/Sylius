@@ -1,7 +1,7 @@
 SyliusAttributeBundle
 =====================
 
-Attributes system for entities in Symfony2 applications.
+Attributes system for entities in Symfony applications.
 
 Sylius
 ------

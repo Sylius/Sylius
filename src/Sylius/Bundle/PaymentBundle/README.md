@@ -1,7 +1,7 @@
 SyliusPaymentBundle
 ====================
 
-Payments component integration for [**Symfony2**](https://symfony.com) eCommerce applications.
+Payments component integration for [**Symfony**](https://symfony.com) eCommerce applications.
 
 Sylius
 ------

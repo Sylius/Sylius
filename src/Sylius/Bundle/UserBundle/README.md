@@ -1,7 +1,7 @@
 SyliusUserBundle
 ==================
 
-[**Symfony2**](https://symfony.com) integration of Sylius User management component.
+[**Symfony**](https://symfony.com) integration of Sylius User management component.
 
 Sylius
 ------
