@@ -193,16 +193,16 @@ In API we will extend last command:
                 "variants": ["Everyday_white_basic_T_Shirt-variant-1", "Everyday_white_basic_T_Shirt-variant-4"]
               }
             }
-          ],
-          "actions": [
+        ],
+        "actions": [
             {
               "type": "percentage_discount",
               "configuration": {
                 "amount": 0.5
               }
             }
-          ],
-          "translations": {
+        ],
+        "translations": {
             "en_US": {
               "label": "T-shirt Promotion",
               "description": "T-shirt Promotion description",

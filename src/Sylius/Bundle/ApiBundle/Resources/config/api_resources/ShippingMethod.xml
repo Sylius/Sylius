@@ -143,5 +143,6 @@
                 </attribute>
             </attribute>
         </property>
+        <property name="description" readable="true" />
     </resource>
 </resources>

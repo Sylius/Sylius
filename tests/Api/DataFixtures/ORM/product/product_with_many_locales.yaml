@@ -110,6 +110,15 @@ Sylius\Component\Core\Model\ChannelPricing:
 Sylius\Component\Product\Model\ProductOption:
     product_option_color:
         code: 'COLOR'
+        currentLocale: 'en_US'
+        translations:
+            - '@product_option_translation_en_EN'
+        
+Sylius\Component\Product\Model\ProductOptionTranslation:
+    product_option_translation_en_EN:
+        locale: 'en_US'
+        name: 'Color'
+        translatable: '@product_option_color'
 
 Sylius\Component\Product\Model\ProductOptionValue:
     product_option_value_color_blue:

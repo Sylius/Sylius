@@ -32,36 +32,51 @@
     * Payments
     * PaymentMethods
 
-   Note that it concerns only `shop` endpoints. Now instead of returning an array of `translations` for a given resource, translation is done automatically based on the current locale. Before:
+   Note that it concerns only `shop` endpoints. Now instead of returning an array of `translations` for a given resource, translation is done automatically based on the current locale.
+   For example changes in request body of `GET` `api/v2/shop/shipping-methods/{code}` endpoint: 
+    
+    ```diff
+         {
+             "@context": "string",
+             "@id": "string",
+             "@type": "string",
+             "id": 0,
+             "code": "string",
+             "position": 0,
+     -       "translations": {
+     -       "en_US": {
+     -          "name": "string",
+     -          "description": "string",
+     -          "locale": "string"
+     -         }
+     -       },
+             "name": "string"
+     +       "description": "string"
+         }
+     ```
+
+1. The `api/v2/shop/payment/{id}/methods` endpoint has now `shop:payment_method:read` serialization group assigned. Therefore its body will look like this by default:
+   
     ```
-      {
-        ...
-        "translations": {
-            "en_US": {
-                ...
-                "name": "Hats",
-                "slug": "categories\/hats",
-                "description": "Sample description"
+    {
+        "@context": "\/api\/v2\/contexts\/PaymentMethod",
+        "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA\/payments\/@integer@\/methods",
+        "@id": "\/api\/v2\/shop\/payments\/@integer@\/methods",
+        "@type": "hydra:Collection",
+        "hydra:member": [
+            {
+                "@id": "\/api\/v2\/shop\/payment-methods\/CASH_ON_DELIVERY",
+                "@type": "PaymentMethod",
+                "id": 1,
+                "code": "CASH_ON_DELIVERY",
+                "position": 0,
+                "name": "Cash on delivery",
+                "description": "Description",
+                "instructions": null
             }
-            "pl_PL": {
-                ...
-                "name": "Czapki",
-                "slug": "kategorie\/czapki",
-                "description": "Przykładowy opis"
-            },
-        }
-      }
-    ```
-
-    Assuming that the current locale is set to `en_US` now response format will be:
-
-    ```
-      {
-          ...
-          "name": "Hats",
-          "slug": "categories\/hats",
-          "description": "Sample description"
-      } 
+        ],
+        "hydra:totalItems": 1
+    }
     ```
 
 1. The method of the `/shop/orders/{tokenValue}/items` endpoint has been changed from `PATCH` to `POST`
@@ -353,6 +368,6 @@
     * `Sylius\Bundle\ApiBundle\DataProvider\LocaleCollectionDataProvider` => `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\LocaleCollectionExtension`
     * `Sylius\Bundle\ApiBundle\DataProvider\TaxonCollectionDataProvider` => `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\TaxonCollectionExtension`
 
-24. `Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart` and `Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder` commands have been replaced with `Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart`.
+1. `Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart` and `Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder` commands have been replaced with `Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart`.
 
-25. `Sylius\Bundle\ApiBundle\CommandHandler\Cart\ApplyCouponToCartHandler` and `Sylius\Bundle\ApiBundle\CommandHandler\Checkout\AddressOrderHandler` command handlers have been replaced with `Sylius\Bundle\ApiBundle\CommandHandler\Checkout\UpdateCartHandler`.
+1. `Sylius\Bundle\ApiBundle\CommandHandler\Cart\ApplyCouponToCartHandler` and `Sylius\Bundle\ApiBundle\CommandHandler\Checkout\AddressOrderHandler` command handlers have been replaced with `Sylius\Bundle\ApiBundle\CommandHandler\Checkout\UpdateCartHandler`.
