@@ -1,7 +1,7 @@
 SyliusCurrencyBundle
 ====================
 
-[**Symfony2**](https://symfony.com) integration of Sylius Currency processing component.
+[**Symfony**](https://symfony.com) integration of Sylius Currency processing component.
 
 Sylius
 ------

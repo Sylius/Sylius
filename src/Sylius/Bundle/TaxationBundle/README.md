@@ -1,7 +1,7 @@
 SyliusTaxationBundle
 ====================
 
-Customizable taxation system for [**Symfony2**](https://symfony.com) e-commerce applications.
+Customizable taxation system for [**Symfony**](https://symfony.com) e-commerce applications.
 
 Sylius
 ------

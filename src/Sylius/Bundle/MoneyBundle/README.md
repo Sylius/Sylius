@@ -1,7 +1,7 @@
 SyliusMoneyBundle
 =================
 
-[**Symfony2**](https://symfony.com) integration with PHP Money library.
+[**Symfony**](https://symfony.com) integration with PHP Money library.
 
 Sylius
 ------

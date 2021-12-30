@@ -1,7 +1,7 @@
 SyliusCoreBundle
 ================
 
-Sylius Core Bundle integrates all other bundles into complete eCommerce solution for [Symfony2](https://symfony.com).
+Sylius Core Bundle integrates all other bundles into complete eCommerce solution for [Symfony](https://symfony.com).
 
 Sylius
 ------
