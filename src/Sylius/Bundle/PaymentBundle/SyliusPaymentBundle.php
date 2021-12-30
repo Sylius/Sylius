@@ -19,7 +19,7 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Payments component for Symfony2 applications.
+ * Payments component for Symfony applications.
  */
 final class SyliusPaymentBundle extends AbstractResourceBundle
 {
