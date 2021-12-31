@@ -48,7 +48,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
                 $queryBuilder
                     ->addSelect('YEAR(o.checkoutCompletedAt) as year')
                     ->groupBy('year')
-                    ->andHaving('year >= :startYear AND year <= :endYear')
+                    ->andHaving('YEAR(o.checkoutCompletedAt) >= :startYear AND YEAR(o.checkoutCompletedAt) <= :endYear')
                     ->setParameter('startYear', $startDate->format('Y'))
                     ->setParameter('endYear', $endDate->format('Y'))
                 ;
@@ -67,10 +67,10 @@ final class SalesDataProvider implements SalesDataProviderInterface
                     ->groupBy('year')
                     ->addGroupBy('month')
                     ->andHaving($queryBuilder->expr()->orX(
-                        'year = :startYear AND year = :endYear AND month >= :startMonth AND month <= :endMonth',
-                        'year = :startYear AND year != :endYear AND month >= :startMonth',
-                        'year = :endYear AND year != :startYear AND month <= :endMonth',
-                        'year > :startYear AND year < :endYear'
+                        'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) = :endYear AND MONTH(o.checkoutCompletedAt) >= :startMonth AND MONTH(o.checkoutCompletedAt) <= :endMonth',
+                        'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) != :endYear AND MONTH(o.checkoutCompletedAt) >= :startMonth',
+                        'YEAR(o.checkoutCompletedAt) = :endYear AND YEAR(o.checkoutCompletedAt) != :startYear AND MONTH(o.checkoutCompletedAt) <= :endMonth',
+                        'YEAR(o.checkoutCompletedAt) > :startYear AND YEAR(o.checkoutCompletedAt) < :endYear'
                     ))
                     ->setParameter('startYear', $startDate->format('Y'))
                     ->setParameter('startMonth', $startDate->format('n'))
@@ -92,10 +92,10 @@ final class SalesDataProvider implements SalesDataProviderInterface
                     ->groupBy('year')
                     ->addGroupBy('week')
                     ->andHaving($queryBuilder->expr()->orX(
-                        'year = :startYear AND year = :endYear AND week >= :startWeek AND week <= :endWeek',
-                        'year = :startYear AND year != :endYear AND week >= :startWeek',
-                        'year = :endYear AND year != :startYear AND week <= :endWeek',
-                        'year > :startYear AND year < :endYear'
+                        'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) = :endYear AND WEEK(o.checkoutCompletedAt) >= :startWeek AND WEEK(o.checkoutCompletedAt) <= :endWeek',
+                        'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) != :endYear AND WEEK(o.checkoutCompletedAt) >= :startWeek',
+                        'YEAR(o.checkoutCompletedAt) = :endYear AND YEAR(o.checkoutCompletedAt) != :startYear AND WEEK(o.checkoutCompletedAt) <= :endWeek',
+                        'YEAR(o.checkoutCompletedAt) > :startYear AND YEAR(o.checkoutCompletedAt) < :endYear'
                     ))
                     ->setParameter('startYear', $startDate->format('Y'))
                     ->setParameter('startWeek', (ltrim($startDate->format('W'), '0') ?: '0'))
@@ -119,15 +119,15 @@ final class SalesDataProvider implements SalesDataProviderInterface
                     ->addGroupBy('month')
                     ->addGroupBy('day')
                     ->andHaving($queryBuilder->expr()->orX(
-                        'year = :startYear AND year = :endYear AND month = :startMonth AND month = :endMonth AND day >= :startDay AND day <= :endDay',
-                        'year = :startYear AND year = :endYear AND month = :startMonth AND month != :endMonth AND day >= :startDay',
-                        'year = :startYear AND year = :endYear AND month = :endMonth AND month != :startMonth AND day <= :endDay',
-                        'year = :startYear AND year = :endYear AND month > :startMonth AND month < :endMonth',
-                        'year = :startYear AND year != :endYear AND month = :startMonth AND day >= :startDay',
-                        'year = :startYear AND year != :endYear AND month > :startMonth',
-                        'year = :endYear AND year != :startYear AND month = :endMonth AND day <= :endDay',
-                        'year = :endYear AND year != :startYear AND month < :endMonth',
-                        'year > :startYear AND year < :endYear'
+                        'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) = :endYear AND MONTH(o.checkoutCompletedAt) = :startMonth AND MONTH(o.checkoutCompletedAt) = :endMonth AND DAY(o.checkoutCompletedAt) >= :startDay AND DAY(o.checkoutCompletedAt) <= :endDay',
+                        'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) = :endYear AND MONTH(o.checkoutCompletedAt) = :startMonth AND MONTH(o.checkoutCompletedAt) != :endMonth AND DAY(o.checkoutCompletedAt) >= :startDay',
+                        'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) = :endYear AND MONTH(o.checkoutCompletedAt) = :endMonth AND MONTH(o.checkoutCompletedAt) != :startMonth AND DAY(o.checkoutCompletedAt) <= :endDay',
+                        'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) = :endYear AND MONTH(o.checkoutCompletedAt) > :startMonth AND MONTH(o.checkoutCompletedAt) < :endMonth',
+                        'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) != :endYear AND MONTH(o.checkoutCompletedAt) = :startMonth AND DAY(o.checkoutCompletedAt) >= :startDay',
+                        'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) != :endYear AND MONTH(o.checkoutCompletedAt) > :startMonth',
+                        'YEAR(o.checkoutCompletedAt) = :endYear AND YEAR(o.checkoutCompletedAt) != :startYear AND MONTH(o.checkoutCompletedAt) = :endMonth AND DAY(o.checkoutCompletedAt) <= :endDay',
+                        'YEAR(o.checkoutCompletedAt) = :endYear AND YEAR(o.checkoutCompletedAt) != :startYear AND MONTH(o.checkoutCompletedAt) < :endMonth',
+                        'YEAR(o.checkoutCompletedAt) > :startYear AND YEAR(o.checkoutCompletedAt) < :endYear'
                     ))
                     ->setParameter('startYear', $startDate->format('Y'))
                     ->setParameter('startMonth', $startDate->format('n'))
