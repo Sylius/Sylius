@@ -62,6 +62,23 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->validate($address, $constraint);
     }
 
+    function it_does_not_add_violation_because_a_violation_exists_when_address_is_the_root_object(
+        AddressInterface $address,
+        ProvinceAddressConstraint $constraint,
+        ExecutionContextInterface $context
+    ): void {
+        $this->initialize($context);
+
+        $context->getPropertyPath()->willReturn('');
+        $context->getViolations()->willReturn(new \ArrayIterator([
+            $this->createViolation('property_path'),
+        ]));
+
+        $context->addViolation(Argument::any())->shouldNotBeCalled();
+
+        $this->validate($address, $constraint);
+    }
+
     function it_adds_violation_because_address_has_no_province(
         RepositoryInterface $countryRepository,
         AddressInterface $address,
