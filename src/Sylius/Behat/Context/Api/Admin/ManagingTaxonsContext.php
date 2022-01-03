@@ -93,6 +93,6 @@ final class ManagingTaxonsContext implements Context
         $response = $this->responseChecker->getResponseContent($this->client->getResponse());
         $taxonNames = array_column($response, 'name');
 
-        Assert::allOneOf($taxonNames, $expectedTaxonNames);
+        Assert::allOneOf($expectedTaxonNames, $taxonNames);
     }
 }
