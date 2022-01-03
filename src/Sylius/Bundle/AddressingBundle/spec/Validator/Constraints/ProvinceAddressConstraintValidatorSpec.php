@@ -19,6 +19,7 @@ use Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstrai
 use Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraintValidator;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\Country;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\Province;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
@@ -46,10 +47,19 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
     }
 
     function it_does_not_add_violation_because_a_violation_exists(
+        RepositoryInterface $countryRepository,
         AddressInterface $address,
+        Country $country,
         ProvinceAddressConstraint $constraint,
         ExecutionContextInterface $context
     ): void {
+        $country->getCode()->willReturn('PL');
+        $address->getCountryCode()->willReturn('PL');
+        $countryRepository->findOneBy(['code' => 'PL'])->willReturn($country);
+
+        $country->hasProvinces()->willReturn(true);
+        $address->getProvinceCode()->willReturn(null);
+
         $this->initialize($context);
 
         $context->getPropertyPath()->willReturn('property_path');
@@ -63,10 +73,19 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
     }
 
     function it_does_not_add_violation_because_a_violation_exists_when_address_is_the_root_object(
+        RepositoryInterface $countryRepository,
         AddressInterface $address,
+        Country $country,
         ProvinceAddressConstraint $constraint,
         ExecutionContextInterface $context
     ): void {
+        $country->getCode()->willReturn('PL');
+        $address->getCountryCode()->willReturn('PL');
+        $countryRepository->findOneBy(['code' => 'PL'])->willReturn($country);
+
+        $country->hasProvinces()->willReturn(true);
+        $address->getProvinceCode()->willReturn(null);
+
         $this->initialize($context);
 
         $context->getPropertyPath()->willReturn('');
