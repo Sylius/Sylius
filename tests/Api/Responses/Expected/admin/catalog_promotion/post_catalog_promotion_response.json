@@ -6,7 +6,7 @@
     "name": "T-Shirts discount",
     "code": "tshirts_discount",
     "startDate": "2022-01-01 00:00:00",
-    "endDate": "2022-02-01 00:00:00",
+    "endDate": "2022-01-02 00:00:00",
     "priority": 100,
     "state": "inactive",
     "channels": [
@@ -36,8 +36,8 @@
             }
         }
     ],
-  "enabled": @boolean@,
-  "translations": {
+    "enabled": @boolean@,
+    "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/catalog-promotion-translations\/@integer@",
             "@type": "CatalogPromotionTranslation",

@@ -86,7 +86,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 'name' => 'T-Shirts discount',
                 'code' => 'tshirts_discount',
                 'startDate' => '2022-01-01',
-                'endDate' => '2022-02-01',
+                'endDate' => '2022-01-02',
                 'channels' => [
                     '/api/v2/admin/channels/WEB',
                 ],
@@ -113,7 +113,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     'label' => 'T-Shirts discount',
                     'description' => '50% discount on every T-Shirt',
                 ]],
-                "enabled" => true,
+                'enabled' => true,
                 'priority' => 100,
             ], JSON_THROW_ON_ERROR)
         );
@@ -277,7 +277,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     'label' => 'T-Shirts discount',
                     'description' => '50% discount on every T-Shirt',
                 ]],
-                "enabled" => true
+                'enabled' => true
             ], JSON_THROW_ON_ERROR)
         );
 
@@ -371,7 +371,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     'label' => 'T-Shirts discount',
                     'description' => '50% discount on every T-Shirt',
                 ]],
-                "enabled" => true
+                'enabled' => true
             ], JSON_THROW_ON_ERROR)
         );
 
@@ -422,7 +422,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     '@id' => sprintf('/api/v2/admin/catalog-promotion-translations/%s', $catalogPromotion->getTranslation('en_US')->getId()),
                     'label' => 'T-Shirts discount',
                 ]],
-                "enabled" => true,
+                'enabled' => true,
                 'priority' => 1000,
             ], JSON_THROW_ON_ERROR)
         );
