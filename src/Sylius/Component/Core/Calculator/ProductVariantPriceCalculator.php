@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Calculator;
 
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
@@ -26,15 +27,7 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
         $channelPricing = $productVariant->getChannelPricingForChannel($context['channel']);
 
         if (null === $channelPricing || $channelPricing->getPrice() === null) {
-            $message = sprintf('Channel %s has no price defined for product variant', $context['channel']->getName());
-
-            if ($productVariant->getName() !== null) {
-                $message .= sprintf(' %s (%s)', $productVariant->getName(), $productVariant->getCode());
-            } else {
-                $message .= sprintf(' with code %s', $productVariant->getCode());
-            }
-
-            throw new MissingChannelConfigurationException($message);
+            throw new MissingChannelConfigurationException(MissingChannelConfigurationException::getMissingChannelProductVariantPriceMessage($context['channel'], $productVariant));
         }
 
         return $channelPricing->getPrice();
@@ -50,29 +43,17 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
         $channelPricing = $productVariant->getChannelPricingForChannel($context['channel']);
 
         if (null === $channelPricing) {
-            throw new MissingChannelConfigurationException(sprintf(
-                'Channel %s has no price defined for product variant %s',
-                $context['channel']->getName(),
-                $productVariant->getName()
-            ));
+            throw new MissingChannelConfigurationException(MissingChannelConfigurationException::getMissingChannelProductVariantPriceMessage($context['channel'], $productVariant));
         }
 
-        if (null === $channelPricing->getOriginalPrice()) {
-            if ($channelPricing->getPrice() === null) {
-                $message = sprintf('Channel %s has no price defined for product variant', $context['channel']->getName());
+        if (null !== $channelPricing->getOriginalPrice()) {
+            return $channelPricing->getOriginalPrice();
+        }
 
-                if ($productVariant->getName() !== null) {
-                    $message .= sprintf(' %s (%s)', $productVariant->getName(), $productVariant->getCode());
-                } else {
-                    $message .= sprintf(' with code %s', $productVariant->getCode());
-                }
-
-                throw new MissingChannelConfigurationException($message);
-            }
-
+        if ($channelPricing->getPrice() !== null) {
             return $channelPricing->getPrice();
         }
 
-        return $channelPricing->getOriginalPrice();
+        throw new MissingChannelConfigurationException(MissingChannelConfigurationException::getMissingChannelProductVariantPriceMessage($context['channel'], $productVariant));
     }
 }
