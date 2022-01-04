@@ -389,7 +389,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         $header = $this->getLoggedHeader();
 
         $this->client->request(
-            'PUT',
+            'PATCH',
             sprintf('/api/v2/admin/catalog-promotions/%s', $catalogPromotion->getCode()),
             [],
             [],

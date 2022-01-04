@@ -88,7 +88,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         $channel = $fixtures['channel_web'];
 
         $this->client->request(
-            'PUT',
+            'PATCH',
             sprintf('/api/v2/admin/product-variants/%s', $productVariant->getCode()),
             [],
             [],

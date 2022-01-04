@@ -57,8 +57,8 @@
                 </attribute>
             </itemOperation>
 
-            <itemOperation name="admin_put">
-                <attribute name="method">PUT</attribute>
+            <itemOperation name="admin_patch">
+                <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/product-options/{code}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_option:update</attribute>

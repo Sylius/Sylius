@@ -48,7 +48,7 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
         DelayStampCalculatorInterface $delayStampCalculator,
         DateTimeProviderInterface $dateTimeProvider
     ): void {
-        $request->getMethod()->willReturn(Request::METHOD_PUT);
+        $request->getMethod()->willReturn(Request::METHOD_PATCH);
 
         $startDateTime = new \DateTime('2021-10-09');
         $endDateTime = new \DateTime('2021-10-10');
@@ -87,7 +87,7 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
         DelayStampCalculatorInterface $delayStampCalculator,
         DateTimeProviderInterface $dateTimeProvider
     ): void {
-        $request->getMethod()->willReturn(Request::METHOD_PUT);
+        $request->getMethod()->willReturn(Request::METHOD_PATCH);
 
         $endDateTime = new \DateTime('2021-10-10');
         $dateTimeProvider->now()->willReturn(new \DateTime());
@@ -124,7 +124,7 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
         DelayStampCalculatorInterface $delayStampCalculator,
         DateTimeProviderInterface $dateTimeProvider
     ): void {
-        $request->getMethod()->willReturn(Request::METHOD_PUT);
+        $request->getMethod()->willReturn(Request::METHOD_PATCH);
 
         $startDateTime = new \DateTime('2021-10-10');
         $endDateTime = null;

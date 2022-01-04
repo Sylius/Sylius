@@ -34,8 +34,8 @@
                 </attribute>
             </itemOperation>
 
-            <itemOperation name="admin_put">
-                <attribute name="method">PUT</attribute>
+            <itemOperation name="admin_patch">
+                <attribute name="method">PATCH</attribute>
             </itemOperation>
         </itemOperations>
 

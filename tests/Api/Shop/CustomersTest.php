@@ -30,7 +30,7 @@ final class CustomersTest extends JsonApiTestCase
         $customer = $loadedData['customer_oliver'];
 
         $this->client->request(
-            'PUT',
+            'PATCH',
             '/api/v2/shop/customers/' . $customer->getId(),
             [],
             [],
@@ -106,7 +106,7 @@ final class CustomersTest extends JsonApiTestCase
         $customer = $loadedData['customer_oliver'];
 
         $this->client->request(
-            'PUT',
+            'PATCH',
             '/api/v2/shop/customers/' . $customer->getId(),
             [],
             [],

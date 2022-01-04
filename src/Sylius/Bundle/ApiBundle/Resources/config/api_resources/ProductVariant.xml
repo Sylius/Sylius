@@ -27,8 +27,8 @@
                 </attribute>
             </itemOperation>
 
-            <itemOperation name="admin_put">
-                <attribute name="method">PUT</attribute>
+            <itemOperation name="admin_patch">
+                <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/product-variants/{code}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:product_variant:read</attribute>
