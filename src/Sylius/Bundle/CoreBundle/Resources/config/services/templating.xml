@@ -55,6 +55,7 @@
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="url_helper" />
             <argument>%sylius.unsecured_urls%</argument>
+            <tag name="twig.extension" />
         </service>
     </services>
 </container>
