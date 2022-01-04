@@ -17,6 +17,7 @@ use Sylius\Bundle\ApiBundle\Command\Cart\RemoveItemFromCart;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Order\Repository\OrderItemRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
@@ -28,12 +29,16 @@ final class RemoveItemFromCartHandler implements MessageHandlerInterface
 
     private OrderModifierInterface $orderModifier;
 
+    private OrderProcessorInterface $orderProcessor;
+
     public function __construct(
         OrderItemRepositoryInterface $orderItemRepository,
-        OrderModifierInterface $orderModifier
+        OrderModifierInterface $orderModifier,
+        OrderProcessorInterface $orderProcessor
     ) {
         $this->orderItemRepository = $orderItemRepository;
         $this->orderModifier = $orderModifier;
+        $this->orderProcessor = $orderProcessor;
     }
 
     public function __invoke(RemoveItemFromCart $removeItemFromCart): OrderInterface
@@ -52,6 +57,8 @@ final class RemoveItemFromCartHandler implements MessageHandlerInterface
         Assert::same($cart->getTokenValue(), $removeItemFromCart->orderTokenValue);
 
         $this->orderModifier->removeFromOrder($cart, $orderItem);
+
+        $this->orderProcessor->process($cart);
 
         return $cart;
     }
