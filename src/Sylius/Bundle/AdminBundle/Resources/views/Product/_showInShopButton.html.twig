@@ -15,7 +15,7 @@
             <div class="menu">
                 <div class="scrolling menu">
                     {% for channel in enabledChannels %}
-                        {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_product_show', {'slug': product.slug, '_locale': channel.defaultLocale.code}) : url('sylius_shop_product_show', {'slug': product.slug, '_locale': channel.defaultLocale.code}) %}
+                        {% set url = sylius_channel_url(path('sylius_shop_product_show', {'slug': product.slug, '_locale': channel.defaultLocale.code}), channel) %}
                         <a href="{{ url|raw }}" class="item" target="_blank">
                             <i class="angle right icon"></i>
                             {{ 'sylius.ui.show_in'|trans }}
@@ -27,7 +27,7 @@
         </div>
     {% else %}
         {% for channel in enabledChannels %}
-            {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_product_show', {'slug': product.slug, '_locale': channel.defaultLocale.code}) : url('sylius_shop_product_show', {'slug': product.slug, '_locale': channel.defaultLocale.code}) %}
+            {% set url = sylius_channel_url(path('sylius_shop_product_show', {'slug': product.slug, '_locale': channel.defaultLocale.code}), channel) %}
             <a class="ui labeled icon button" href="{{ url|raw }}" target="_blank">
                 <i class="angle right icon"></i>
                 {{ 'sylius.ui.show_product_in_shop_page'|trans }}

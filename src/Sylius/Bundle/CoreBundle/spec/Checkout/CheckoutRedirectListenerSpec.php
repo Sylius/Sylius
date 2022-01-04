@@ -48,7 +48,7 @@ final class CheckoutRedirectListenerSpec extends ObjectBehavior
 
         $resourceControllerEvent->getSubject()->willReturn($order);
 
-        $checkoutStateUrlGenerator->generateForOrderCheckoutState($order)->willReturn('http://redirect-path');
+        $checkoutStateUrlGenerator->generateForOrderCheckoutState($order)->willReturn('https://redirect-path');
         $resourceControllerEvent->setResponse(Argument::type(RedirectResponse::class))->shouldBeCalled();
 
         $this->handleCheckoutRedirect($resourceControllerEvent);

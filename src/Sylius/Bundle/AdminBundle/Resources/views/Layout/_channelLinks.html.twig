@@ -6,7 +6,7 @@
         <i class="dropdown icon"></i>
         <div class="menu">
             {% for channel in channels|filter(channel => channel.hostname is not empty) %}
-            <a href="http://{{ channel.hostname }}" target="_blank" class="item">
+            <a href="{{ sylius_channel_url(path('sylius_shop_homepage'), channel) }}" target="_blank" class="item">
                 {% include '@SyliusAdmin/Common/_channel.html.twig' %}
             </a>
             {% endfor %}
@@ -15,7 +15,5 @@
 {% elseif channels|length == 1 %}
     {% set channel = channels|first %}
 
-    {% if channel.hostname is not empty %}
-    <a href="http://{{ channel.hostname }}" target="_blank" class="item">{{ 'sylius.ui.view_your_store'|trans }}</a>
-    {% endif %}
+    <a href="{{ sylius_channel_url(path('sylius_shop_homepage'), channel) }}" target="_blank" class="item">{{ 'sylius.ui.view_your_store'|trans }}</a>
 {% endif %}
