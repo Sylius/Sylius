@@ -84,7 +84,7 @@ Firstly if the **Customer** is not yet set on the Order it will be assigned depe
 
          <?xml version="1.0" encoding="UTF-8"?>
 
-        <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+        <constraint-mapping xmlns="https://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://symfony.com/schema/dic/constraint-mapping https://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
             <class name="Sylius\Component\Core\Model\Customer">
                 <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\RegisteredUser">
                     <option name="message">sylius.customer.email.registered</option>

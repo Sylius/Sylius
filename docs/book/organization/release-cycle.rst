@@ -113,5 +113,5 @@ Whenever keeping backward compatibility is not possible, the feature, the
 enhancement or the bug fix will be scheduled for the next major version.
 
 .. _repository: https://github.com/Sylius/Sylius
-.. _Semantic Versioning: http://semver.org/
+.. _Semantic Versioning: https://semver.org/
 .. _Symfony release cycle: https://symfony.com/releases

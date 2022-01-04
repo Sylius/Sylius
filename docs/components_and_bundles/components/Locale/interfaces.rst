@@ -24,7 +24,7 @@ This interface should be implemented by models representing a single **Locale**.
 
     For more detailed information go to `Sylius API LocaleInterface`_.
 
-.. _Sylius API LocaleInterface: http://api.sylius.com/Sylius/Component/Locale/Model/LocaleInterface.html
+.. _Sylius API LocaleInterface: https://api.sylius.com/Sylius/Component/Locale/Model/LocaleInterface.html
 
 .. _component_locale_model_locales-aware-interface:
 
@@ -37,7 +37,7 @@ If you want to have locales in your model just implement this interface.
 .. note::
     For more detailed information go to `Sylius API LocalesAwareInterface`_.
 
-.. _Sylius API LocalesAwareInterface: http://api.sylius.com/Sylius/Component/Locale/Model/LocalesAwareInterface.html
+.. _Sylius API LocalesAwareInterface: https://api.sylius.com/Sylius/Component/Locale/Model/LocalesAwareInterface.html
 
 Service Interfaces
 ------------------
@@ -52,7 +52,7 @@ This interface is implemented by the service responsible for managing the curren
 .. note::
     For more detailed information go to `Sylius API LocaleContextInterface`_.
 
-.. _Sylius API LocaleContextInterface: http://api.sylius.com/Sylius/Component/Locale/Context/LocaleContextInterface.html
+.. _Sylius API LocaleContextInterface: https://api.sylius.com/Sylius/Component/Locale/Context/LocaleContextInterface.html
 
 .. _component_locale_model_locale-provider-interface:
 

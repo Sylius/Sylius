@@ -48,7 +48,7 @@ Orders have the following properties:
     This model implements the :ref:`component_order_model_order-interface`
     For more detailed information go to `Sylius API Order`_.
 
-.. _Sylius API Order: http://api.sylius.com/Sylius/Component/Order/Model/Order.html
+.. _Sylius API Order: https://api.sylius.com/Sylius/Component/Order/Model/Order.html
 
 .. _component_order_model_order-item:
 

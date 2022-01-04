@@ -27,7 +27,7 @@ This interface should be implemented by model representing a single Order.
 
     For more detailed information go to `Sylius API OrderInterface`_.
 
-.. _Sylius API OrderInterface: http://api.sylius.com/Sylius/Component/Order/Model/OrderInterface.html
+.. _Sylius API OrderInterface: https://api.sylius.com/Sylius/Component/Order/Model/OrderInterface.html
 
 .. _component_order_model_order-aware-interface:
 
@@ -40,7 +40,7 @@ If you want to have orders in your model just implement this interface.
 .. note::
     For more detailed information go to `Sylius API OrderAwareInterface`_.
 
-.. _Sylius API OrderAwareInterface: http://api.sylius.com/Sylius/Component/Order/Model/OrderAwareInterface.html
+.. _Sylius API OrderAwareInterface: https://api.sylius.com/Sylius/Component/Order/Model/OrderAwareInterface.html
 
 .. _component_order_model_order-item-interface:
 
@@ -54,7 +54,7 @@ This interface should be implemented by model representing a single OrderItem.
 
     For more detailed information go to `Sylius API OrderItemInterface`_.
 
-.. _Sylius API OrderItemInterface: http://api.sylius.com/Sylius/Component/Order/Model/OrderItemInterface.html
+.. _Sylius API OrderItemInterface: https://api.sylius.com/Sylius/Component/Order/Model/OrderItemInterface.html
 
 
 .. _component_order_model_order-item-unit-interface:

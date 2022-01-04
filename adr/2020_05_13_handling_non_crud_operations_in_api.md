@@ -125,7 +125,7 @@ delivered with vanilla Sylius installation.
 ## References
 
 * [Json-LD & Hydra links to custom operations](https://stackoverflow.com/questions/41125810/json-ld-with-hydra-how-to-define-a-custom-operation-and-specify-its-url) 
-* [Hydra links representation](http://www.hydra-cg.com/spec/latest/core/#adding-affordances-to-representations)
+* [Hydra links representation](https://www.hydra-cg.com/spec/latest/core/#adding-affordances-to-representations)
 * [Command pattern in REST](https://allegro-restapi-guideline.readthedocs.io/en/latest/CommandPattern/)
 * Masse, M., REST API design rulebook. 2011:" O'Reilly Media. Chapter 2 - Identifier Design with URIs.
 * [Google custom endpoint design guide](https://cloud.google.com/apis/design/custom_methods)

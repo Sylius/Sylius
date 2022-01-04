@@ -25,7 +25,7 @@ Also it keeps all of the default :ref:`component_payment_payment-states`.
 
    For more detailed information go to `Sylius API PaymentInterface`_.
 
-.. _Sylius API PaymentInterface: http://api.sylius.com/Sylius/Component/Payment/Model/PaymentInterface.html
+.. _Sylius API PaymentInterface: https://api.sylius.com/Sylius/Component/Payment/Model/PaymentInterface.html
 
 .. _component_payment_model_payment-method-interface:
 
@@ -41,7 +41,7 @@ models or services from this component, it needs to implement this interface.
 
    For more detailed information go to `Sylius API PaymentMethodInterface`_.
 
-.. _Sylius API PaymentMethodInterface: http://api.sylius.com/Sylius/Component/Payment/Model/PaymentMethodInterface.html
+.. _Sylius API PaymentMethodInterface: https://api.sylius.com/Sylius/Component/Payment/Model/PaymentMethodInterface.html
 
 .. _component_payment_model_payment-methods-aware-interface:
 
