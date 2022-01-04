@@ -19,9 +19,9 @@ Once you have your own :ref:`component_order_processors_order-processor-interfac
 
     <?xml version="1.0" encoding="UTF-8"?>
 
-    <container xmlns="https://symfony.com/schema/dic/services"
+    <container xmlns="http://symfony.com/schema/dic/services"
                xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
-               xsi:schemaLocation="https://symfony.com/schema/dic/services
+               xsi:schemaLocation="http://symfony.com/schema/dic/services
                                    https://symfony.com/schema/dic/services/services-1.0.xsd">
 
         <services>
