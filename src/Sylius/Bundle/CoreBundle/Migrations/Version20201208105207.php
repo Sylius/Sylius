@@ -40,7 +40,7 @@ final class Version20201208105207 extends AbstractMigration
 
             $this->updateAdjustment(
                 (int) $adjustment['id'],
-                $adjustment['shipping_id'] ?? 'NULL',
+                (string) ($adjustment['shipping_id'] ?? 'NULL'),
                 $this->getParsedDetails(['taxRateCode' => $adjustment['tax_rate_code'], 'taxRateName' => $adjustment['tax_rate_name'], 'taxRateAmount' => ($adjustment['tax_rate_amount'] ? (float) $adjustment['tax_rate_amount'] : null), 'shippingMethodCode' => $adjustment['shipment_code'], 'shippingMethodName' => $this->getShippingMethodName($adjustment['shipment_code'])])
             );
         }
