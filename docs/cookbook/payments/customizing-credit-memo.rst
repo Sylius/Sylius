@@ -21,6 +21,30 @@ The first exemplary customization is to change background color of the heading o
             /* ... */
         </style>
 
+How to change the logo in the Credit Memo?
+------------------------------------------
+
+Credit Memo's logo is by default displayed as Sylius logo.
+Changing it is done by modifying the ``SYLIUS_REFUND_LOGO_FILE`` environment variable.
+You can achieve that by updating it's path in your ``.env`` file like in example below:
+
+    .. code-block:: text
+
+        SYLIUS_REFUND_LOGO_FILE=%kernel.project_dir%/assets/custom-logo.png
+
+If you have a permission issue when generating a credit memo, you may also need to update ``config/packages/knp_snappy.yaml`` file with an ``allow`` parameter:
+
+    .. code-block:: yaml
+
+        knp_snappy:
+            pdf:
+                options:
+                    allow: '%env(resolve:SYLIUS_REFUND_LOGO_FILE)%'
+
+Make sure to clear the cache each time the configuration is changed.
+
+.. image:: ../../_images/cookbook/custom-credit-memo/customized-pdf.png
+
 Displaying additional Customer's data on Credit Memo
 ----------------------------------------------------
 
