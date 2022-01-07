@@ -25,7 +25,7 @@ final class AddressesGetTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['authentication/customer.yaml']);
 
-        $this->client->request('GET', '/api/v2/shop/addresses', [], [], [self::CONTENT_TYPE_HEADER]);
+        $this->client->request('GET', '/api/v2/shop/addresses', [], [], [self::LD_CONTENT_TYPE_HEADER]);
 
         $response = $this->client->getResponse();
         $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
@@ -45,7 +45,7 @@ final class AddressesGetTest extends JsonApiTestCase
             '/api/v2/shop/addresses',
             [],
             [],
-            array_merge($authorizationHeader, self::CONTENT_TYPE_HEADER)
+            array_merge($authorizationHeader, self::LD_CONTENT_TYPE_HEADER)
         );
 
         $this->assertResponse($this->client->getResponse(), 'shop/get_addresses_response');
@@ -67,7 +67,7 @@ final class AddressesGetTest extends JsonApiTestCase
             '/api/v2/shop/addresses/' . $address->getId(),
             [],
             [],
-            array_merge($authorizationHeader, self::CONTENT_TYPE_HEADER)
+            array_merge($authorizationHeader, self::LD_CONTENT_TYPE_HEADER)
         );
 
         $this->assertResponse($this->client->getResponse(), 'shop/get_an_address_response');

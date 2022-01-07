@@ -23,7 +23,7 @@ final class TaxonsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('taxonomy.yaml');
 
-        $this->client->request('GET', '/api/v2/shop/taxons', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request('GET', '/api/v2/shop/taxons', [], [], self::LD_CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/get_taxonomy_response', Response::HTTP_OK);

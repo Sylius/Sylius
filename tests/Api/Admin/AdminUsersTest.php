@@ -30,7 +30,7 @@ final class AdminUsersTest extends JsonApiTestCase
             '/api/v2/admin/authentication-token',
             [],
             [],
-            self::CONTENT_TYPE_HEADER,
+            self::LD_CONTENT_TYPE_HEADER,
             json_encode([
                 'email' => 'api@example.com',
                 'password' => 'sylius'

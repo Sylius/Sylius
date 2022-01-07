@@ -54,6 +54,6 @@ final class PromotionTest extends JsonApiTestCase
         $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
 
-        return array_merge($header, self::CONTENT_TYPE_HEADER);
+        return array_merge($header, self::LD_CONTENT_TYPE_HEADER);
     }
 }

@@ -54,7 +54,7 @@ final class ProductImagesTest extends JsonApiTestCase
             'product-images',
             [],
             [],
-            array_merge($header, self::CONTENT_TYPE_HEADER)
+            array_merge($header, self::LD_CONTENT_TYPE_HEADER)
         );
         $response = $this->client->getResponse();
 
@@ -87,7 +87,7 @@ final class ProductImagesTest extends JsonApiTestCase
             sprintf('product-images/%s', (string) $productImage->getId()),
             [],
             [],
-            array_merge($header, self::CONTENT_TYPE_HEADER)
+            array_merge($header, self::LD_CONTENT_TYPE_HEADER)
         );
         $response = $this->client->getResponse();
 

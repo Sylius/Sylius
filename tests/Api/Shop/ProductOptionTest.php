@@ -22,7 +22,7 @@ final class ProductOptionTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
 
-        $this->client->request('GET', '/api/v2/shop/product-options/COLOR', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request('GET', '/api/v2/shop/product-options/COLOR', [], [], self::LD_CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/product/get_product_option');
@@ -33,7 +33,7 @@ final class ProductOptionTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
 
-        $this->client->request('GET', '/api/v2/shop/product-option-values/COLOR_RED', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request('GET', '/api/v2/shop/product-option-values/COLOR_RED', [], [], self::LD_CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/product/get_product_option_value');

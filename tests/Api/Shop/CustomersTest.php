@@ -35,7 +35,7 @@ final class CustomersTest extends JsonApiTestCase
             [],
             [],
             [
-                'CONTENT_TYPE' => 'application/ld+json',
+                'CONTENT_TYPE' => 'application/merge-patch+json',
                 'HTTP_ACCEPT' => 'application/ld+json',
                 'HTTP_Authorization' => sprintf('Bearer %s', $token)
             ],
@@ -59,7 +59,7 @@ final class CustomersTest extends JsonApiTestCase
             '/api/v2/shop/customers',
             [],
             [],
-            self::CONTENT_TYPE_HEADER,
+            self::LD_CONTENT_TYPE_HEADER,
             json_encode([
                 'firstName' => 'John',
                 'lastName' => 'Doe',
@@ -84,7 +84,7 @@ final class CustomersTest extends JsonApiTestCase
             '/api/v2/shop/authentication-token',
             [],
             [],
-            self::CONTENT_TYPE_HEADER,
+            self::LD_CONTENT_TYPE_HEADER,
             json_encode([
                 'email' => 'oliver@doe.com',
                 'password' => 'sylius'
@@ -111,7 +111,7 @@ final class CustomersTest extends JsonApiTestCase
             [],
             [],
             [
-                'CONTENT_TYPE' => 'application/ld+json',
+                'CONTENT_TYPE' => 'application/merge-patch+json',
                 'HTTP_ACCEPT' => 'application/ld+json',
                 'HTTP_Authorization' => sprintf('Bearer %s', $token)
             ],

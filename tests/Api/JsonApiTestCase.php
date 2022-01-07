@@ -17,7 +17,8 @@ use ApiTestCase\JsonApiTestCase as BaseJsonApiTestCase;
 
 abstract class JsonApiTestCase extends BaseJsonApiTestCase
 {
-    public const CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json'];
+    public const LD_CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json'];
+    public const MERGE_PATCH_CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_ACCEPT' => 'application/ld+json'];
 
     public function __construct(?string $name = null, array $data = [], string $dataName = '')
     {

@@ -53,7 +53,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         $updateCartCommand->setOrderTokenValue($tokenValue);
         $commandBus->dispatch($updateCartCommand);
 
-        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::LD_CONTENT_TYPE_HEADER);
         $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->client->request(
@@ -61,7 +61,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
             sprintf('/api/v2/shop/orders/nAWw2jewpA/shipments/%s/methods', $orderResponse['shipments'][0]['id']),
             [],
             [],
-            self::CONTENT_TYPE_HEADER
+            self::LD_CONTENT_TYPE_HEADER
         );
         $response = $this->client->getResponse();
 
@@ -98,7 +98,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         $addressOrderCommand->setOrderTokenValue($tokenValue);
         $commandBus->dispatch($addressOrderCommand);
 
-        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::LD_CONTENT_TYPE_HEADER);
         $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->client->request(
@@ -106,7 +106,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
             sprintf('/api/v2/shop/shipments/%s/methods', $orderResponse['shipments'][0]['id']),
             [],
             [],
-            self::CONTENT_TYPE_HEADER
+            self::LD_CONTENT_TYPE_HEADER
         );
         $response = $this->client->getResponse();
 

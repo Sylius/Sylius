@@ -56,7 +56,7 @@ final class ProductVariantsTest extends JsonApiTestCase
             'product-variants/MUG',
             [],
             [],
-            array_merge($header, self::CONTENT_TYPE_HEADER)
+            array_merge($header, self::LD_CONTENT_TYPE_HEADER)
         );
         $response = $this->client->getResponse();
 
@@ -92,7 +92,7 @@ final class ProductVariantsTest extends JsonApiTestCase
             sprintf('/api/v2/admin/product-variants/%s', $productVariant->getCode()),
             [],
             [],
-            array_merge($header, self::CONTENT_TYPE_HEADER),
+            array_merge($header, self::MERGE_PATCH_CONTENT_TYPE_HEADER),
             json_encode([
                 'channelPricings' => ['WEB' => [
                     '@id' => sprintf('/api/v2/admin/channel-pricings/%s', $productVariant->getChannelPricingForChannel($channel)->getId()),
@@ -136,7 +136,7 @@ final class ProductVariantsTest extends JsonApiTestCase
             '/api/v2/admin/product-variants',
             [],
             [],
-            array_merge($header, self::CONTENT_TYPE_HEADER),
+            array_merge($header, self::LD_CONTENT_TYPE_HEADER),
             json_encode([
                 'code' => 'MUG_2',
                 'position' => 1,

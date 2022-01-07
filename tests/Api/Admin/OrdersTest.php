@@ -31,7 +31,7 @@ final class OrdersTest extends JsonApiTestCase
         $token = $this->logInAdminUser('api@example.com');
         $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-        $header = array_merge($header, self::CONTENT_TYPE_HEADER);
+        $header = array_merge($header, self::LD_CONTENT_TYPE_HEADER);
 
         $tokenValue = 'nAWw2jewpA';
 

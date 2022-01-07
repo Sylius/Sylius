@@ -42,7 +42,7 @@ final class LocalesTest extends JsonApiTestCase
             '/api/v2/admin/locales',
             [],
             [],
-            array_merge($header, self::CONTENT_TYPE_HEADER)
+            array_merge($header, self::LD_CONTENT_TYPE_HEADER)
         );
 
         $response = $this->client->getResponse();

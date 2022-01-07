@@ -24,7 +24,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('product/product_variant_with_original_price.yaml');
 
-        $this->client->request('GET', '/api/v2/shop/product-variants/MUG_BLUE', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request('GET', '/api/v2/shop/product-variants/MUG_BLUE', [], [], self::LD_CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/product/get_product_variant_with_original_price_response', Response::HTTP_OK);
@@ -35,7 +35,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('product/product_variant_with_original_price.yaml');
 
-        $this->client->request('GET', '/api/v2/shop/product-variants/MUG_RED', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request('GET', '/api/v2/shop/product-variants/MUG_RED', [], [], self::LD_CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/product/get_product_variant_with_price_response', Response::HTTP_OK);
@@ -52,7 +52,7 @@ final class ProductVariantsTest extends JsonApiTestCase
             sprintf('/api/v2/shop/product-variants/%s', $product->getCode()),
             [],
             [],
-            self::CONTENT_TYPE_HEADER
+            self::LD_CONTENT_TYPE_HEADER
         );
 
         $this->assertResponse(
