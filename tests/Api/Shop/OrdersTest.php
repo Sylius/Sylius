@@ -20,11 +20,16 @@ use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
+use Sylius\Tests\Api\Utils\OrderPlacerTrait;
+use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class OrdersTest extends JsonApiTestCase
 {
+    use ShopUserLoginTrait;
+    use OrderPlacerTrait;
+
     /** @test */
     public function it_gets_an_order(): void
     {
@@ -179,5 +184,40 @@ final class OrdersTest extends JsonApiTestCase
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/error/jwt_token_not_found', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /** @test */
+    public function it_allows_to_patch_orders_payment_method(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/customer.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+
+        $loginData = $this->logInShopUser('oliver@doe.com');
+        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
+        $header = array_merge($header, self::CONTENT_TYPE_HEADER);
+
+        $tokenValue = 'nAWw2jewpA';
+
+        $this->placeOrder($tokenValue, 'oliver@doe.com');
+
+        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], $header);
+        $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->client->request(
+            'PATCH',
+            sprintf('/api/v2/shop/account/orders/nAWw2jewpA/payments/%s',$orderResponse['payments'][0]['id']),
+            [],
+            [],
+            [
+                'CONTENT_TYPE' => 'application/merge-patch+json',
+                'HTTP_Authorization' => sprintf('Bearer %s', $loginData)
+            ],
+                json_encode([
+                    'paymentMethod' => '/api/v2/shop/payment-methods/CASH_ON_DELIVERY',
+            ])
+        );
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/updated_payment_method_on_order_response', Response::HTTP_OK);
     }
 }
