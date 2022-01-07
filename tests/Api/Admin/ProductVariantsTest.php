@@ -104,7 +104,7 @@ final class ProductVariantsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/put_product_variant_response',
+            'admin/patch_product_variant_response',
             Response::HTTP_OK
         );
     }

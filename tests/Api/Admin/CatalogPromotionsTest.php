@@ -429,7 +429,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/catalog_promotion/put_catalog_promotion_response',
+            'admin/catalog_promotion/patch_catalog_promotion_response',
             Response::HTTP_OK
         );
     }
