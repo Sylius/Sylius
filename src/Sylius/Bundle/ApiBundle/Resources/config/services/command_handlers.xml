@@ -51,7 +51,6 @@
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\RemoveItemFromCartHandler">
             <argument type="service" id="sylius.repository.order_item" />
             <argument type="service" id="sylius.order_modifier" />
-            <argument type="service" id="sylius.order_processing.order_processor.composite" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>

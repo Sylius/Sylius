@@ -42,12 +42,11 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
         $this->shouldImplement(MessageHandlerInterface::class);
     }
 
-    function it_removes_order_item_from_cart_and_processes_it(
+    function it_removes_order_item_from_cart(
         OrderItemRepository $orderItemRepository,
         OrderModifierInterface $orderModifier,
         OrderInterface $cart,
-        OrderItemInterface $cartItem,
-        OrderProcessorInterface $orderProcessor
+        OrderItemInterface $cartItem
     ): void {
         $orderItemRepository->findOneByIdAndCartTokenValue(
             'ORDER_ITEM_ID',
@@ -59,8 +58,6 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
         $cart->getTokenValue()->willReturn('TOKEN_VALUE');
 
         $orderModifier->removeFromOrder($cart, $cartItem)->shouldBeCalled();
-
-        $orderProcessor->process($cart)->shouldBeCalled();
 
         $this(RemoveItemFromCart::removeFromData('TOKEN_VALUE', 'ORDER_ITEM_ID'))->shouldReturn($cart);
     }

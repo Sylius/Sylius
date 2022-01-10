@@ -114,6 +114,8 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         /** @var ShipmentInterface $shipment */
         $shipment = $order->getShipments()->first();
 
+        $this->processShipmentUnits($order, $shipment);
+
         if (null === $this->shippingMethodsResolver) {
             return $shipment;
         }
