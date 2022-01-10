@@ -1,0 +1,183 @@
+---------------------------------------------------------------------------
+
+by Prometee at 2021-10-18T14:22:22Z
+
+Their is still an issue with `sylius_gateway_config` table containing a remaining `json_array` type, we will have to wait for https://github.com/Payum/Payum/pull/920 to be merged and released to fix this issue.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2021-10-18T14:30:07Z
+
+Maybe add a constraint for `doctrine/dbal` for now?
+I was surprised that `"doctrine/orm": "^2.7"` installed `doctrine/dbal` v3.
+
+---------------------------------------------------------------------------
+
+by Prometee at 2021-10-18T14:34:25Z
+
+@vvasiloi you are right it's the temporary fix, maybe another PR is required because I also think this PR will be needed in the futur when https://github.com/Payum/Payum/pull/920 will be available.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2021-10-18T14:37:37Z
+
+@Prometee yes, better do it in a separate PR with either an explicit `require` constraint, or a `conflict`.
+This will also prevent the plugins without a composer.lock file (which are the most if not all) from breaking.
+
+---------------------------------------------------------------------------
+
+by Prometee at 2021-10-18T14:43:05Z
+
+@vvasiloi done !
+
+#13215
+
+---------------------------------------------------------------------------
+
+by mbabker at 2021-10-18T14:48:24Z
+
+> I was surprised that `"doctrine/orm": "^2.7"` installed `doctrine/dbal` v3.
+
+Why?  One of the main features of ORM 2.10 (which is already blocked on the 1.10 branch of this repo because of the `gedmo/doctrine-extensions` package being incompatible) is DBAL 3.x compatibility and DBAL 3.x should only be installed if all dependencies allow it.  ORM 2.9 and earlier don't allow DBAL 3.x.
+
+In general, Sylius' dependency declarations are really too loose IMO (in this repo, the standalone package repos, and the skeleton repos which these only declare `sylius/sylius` as their dependency (meaning out-of-the-box they rely on this repo to get the dependencies right) as a lot of direct dependencies seem to be not declared at all and things are relying heavily on transient dependencies to get it right (two practical examples include the dependencies on `babdev/pagerfanta-bundle` and `jms/serializer-bundle` but no declarations on `pagerfanta/*` or `jms/serializer`, which is where most of the code being used actually comes from).
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2021-10-18T16:06:26Z
+
+Maybe we should introduce Sylius to https://github.com/maglnet/ComposerRequireChecker?
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2021-10-22T06:23:40Z
+
+> Maybe we should introduce Sylius to https://github.com/maglnet/ComposerRequireChecker?
+
+@vvasiloi @mbabker Yes to avoid this kind of issues ComposerRequireChecker would be useful. Indeed I tried to introduce it in Sylius with https://github.com/Sylius/Sylius/pull/10664 2 years ago but the PR is still there, open and not reviewed.
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2021-10-22T07:04:53Z
+
+@vvasiloi @mbabker @Prometee note that even when this PR will be merged there will be also this issue with doctrine/dbal >= 3 and PHP 8: https://github.com/doctrine/migrations/issues/1202
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2021-10-22T07:16:21Z
+
+@mmenozzi there's this PR https://github.com/Sylius/Sylius/pull/13215 that will add a conflict with `doctrine/dbal >= 3` until all the issues are solved.
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2021-10-22T07:18:52Z
+
+> @mmenozzi there's this PR #13215 that will add a conflict with `doctrine/dbal >= 3` until all the issues are solved.
+
+Yes I noticed it. Do you think that we should open an issue here to keep track of that?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-11-09T19:25:21Z
+
+Hey Francis,
+
+can you fix the build, remove dbal conflict and add one additional workflow to check if the new configuration works properly with dbal 2.10/2.9 and 3.0?
+
+---------------------------------------------------------------------------
+
+by Prometee at 2021-11-12T17:56:49Z
+
+Hi @lchrusciel,
+
+I remove 1 commit about conflict and rebase the branch with the `1.9` one ~~, but the build seems to fail because of another issue.~~ (Nevermind it's failling because of `payum/payum` : https://github.com/Payum/Payum/blob/master/src/Payum/Core/Bridge/Doctrine/Resources/mapping/ArrayObject.orm.xml#L5)
+When you said "add one additional workflow", you mean GitHub Action workflow ? I can't see any existing workflow doing what you asked for. Can you enlighten me ?
+
+---------------------------------------------------------------------------
+
+by Prometee at 2021-12-02T08:46:21Z
+
+Waiting for this PR : https://github.com/Payum/Payum/pull/924 to be merged and released.
+
+---------------------------------------------------------------------------
+
+by maximehuran at 2022-01-07T15:36:09Z
+
+Hi,
+
+On a fresh Sylus installation with MySQL 8, I have a database schema is not in sync with the current mapping file.
+
+Here is the generated migration with a diff :
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Migrations;
+
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+
+/**
+ * Auto-generated Migration: Please modify to your needs!
+ */
+final class Version20220107153032 extends AbstractMigration
+{
+    public function getDescription(): string
+    {
+        return '';
+    }
+
+    public function up(Schema $schema): void
+    {
+        // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE sylius_gateway_config CHANGE config config JSON NOT NULL');
+    }
+
+    public function down(Schema $schema): void
+    {
+        // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE sylius_gateway_config CHANGE config config JSON CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci` COMMENT \'(DC2Type:json_array)\'');
+    }
+}
+```
+
+FYI I have added this on my `composer.json` :
+```json
+    "conflict": {
+        "doctrine/dbal": "^3"
+    }
+```
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-10T13:59:38Z
+
+@Prometee https://github.com/Payum/Payum/pull/924 was merged, Payum 1.7.0 released and all Sylius [builds fail](https://github.com/Sylius/Sylius/actions/runs/1664915145) now and all fresh installs as @maximehuran pointed out.
+I prepared the [changes](https://github.com/vvasiloi/Sylius/commit/45394b9cca477a7908d036a9e740d712b726f707) for a PR, but then I remembered about this one.
+We should probably combine them, WDYT?
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-10T17:32:30Z
+
+@lchrusciel the failed jobs don't seem to be related to the changes. Maybe we should restart the workflow.
+
+---------------------------------------------------------------------------
+
+by Prometee at 2022-01-10T17:44:22Z
+
+@lchrusciel yes I already retest it on my local env and all BeHat JS are green. I guess their is some weird network issue happening here. Restarting the build can help if it fails again...
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-10T18:08:55Z
+
+@lchrusciel all green.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-01-10T18:58:14Z
+
+Thank you, Francis! :tada:
