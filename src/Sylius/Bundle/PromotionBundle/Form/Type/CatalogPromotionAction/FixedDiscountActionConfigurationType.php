@@ -9,7 +9,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Type;
 
 final class FixedDiscountActionConfigurationType extends AbstractType
 {
@@ -18,7 +17,9 @@ final class FixedDiscountActionConfigurationType extends AbstractType
         $builder
             ->add('amount', MoneyType::class, [
                 'label' => 'sylius.ui.amount',
-                'currency' => $options['currency'],
+                'constraints' => [
+                    new NotBlank(['currency' => $options['currency']]),
+                ]
             ])
         ;
     }
