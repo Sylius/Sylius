@@ -91,6 +91,18 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I create a new catalog promotion with :code code and :name name and :priority priority
+     */
+    public function iCreateANewCatalogPromotionWithCodeAndNameAndPriority(string $code, string $name, int $priority): void
+    {
+        $this->createPage->open();
+        $this->createPage->specifyCode($code);
+        $this->formElement->nameIt($name);
+        $this->formElement->prioritizeIt($priority);
+        $this->createPage->create();
+    }
+
+    /**
      * @When I create a new catalog promotion without specifying its code and name
      */
     public function iCreateANewCatalogPromotionWithoutSpecifyingItsCodeAndName(): void
@@ -606,6 +618,20 @@ final class ManagingCatalogPromotionsContext implements Context
             sprintf(
                 'Cannot find catalog promotions with name "%s" operating between "%s" and "%s" in the list',
                 $name, $startDate, $endDate
+            )
+        );
+    }
+
+    /**
+     * @Then the catalog promotion named :name should have priority :priority
+     */
+    public function theCatalogPromotionNamedShouldHavePriority(string $name, int $priority): void
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['name' => $name, 'priority' => $priority]),
+            sprintf(
+                'Cannot find catalog promotions with name "%s" and priority %s in the list',
+                $name, $priority
             )
         );
     }
