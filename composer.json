@@ -47,7 +47,7 @@
         "laminas/laminas-stdlib": "^3.3.1",
         "lexik/jwt-authentication-bundle": "^2.11",
         "liip/imagine-bundle": "^2.3",
-        "payum/payum": "^1.6",
+        "payum/payum": "^1.7",
         "payum/payum-bundle": "^2.4",
         "php-http/guzzle6-adapter": "^2.0",
         "ramsey/uuid": "^3.9",
