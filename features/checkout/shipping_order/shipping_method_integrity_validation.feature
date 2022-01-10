@@ -19,16 +19,6 @@ Feature: Order shipping method integrity
         And this product belongs to "Small stuff" shipping category
 
     @ui @api
-    Scenario: Validate shipping method after adding item which does not fit shipping method requirements
-        Given I added product "Westworld host" to the cart
-        And I have completed addressing step with email "guest@example.com" and "United States" based billing address
-        And I have proceeded order with "DHL" shipping method and "Offline" payment
-        When I add product "T-shirt Breaking Bad" to the cart
-        And I want to complete checkout
-        Then I should not be able to confirm order because products do not fit "DHL" requirements
-        And I should not see the thank you page
-
-    @ui @api
     Scenario: Validate shipping method after administrator changes shipping method requirements
         Given I added product "Westworld host" to the cart
         And I have completed addressing step with email "guest@example.com" and "United States" based billing address

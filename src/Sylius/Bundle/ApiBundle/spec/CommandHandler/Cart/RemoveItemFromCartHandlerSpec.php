@@ -19,7 +19,6 @@ use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderItemRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
-use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
@@ -28,12 +27,12 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
     function let(
         OrderItemRepository $orderItemRepository,
         OrderModifierInterface $orderModifier,
-        OrderProcessorInterface $orderProcessor
+        ProductVariantResolverInterface $variantResolver
     ): void {
         $this->beConstructedWith(
             $orderItemRepository,
             $orderModifier,
-            $orderProcessor
+            $variantResolver
         );
     }
 
