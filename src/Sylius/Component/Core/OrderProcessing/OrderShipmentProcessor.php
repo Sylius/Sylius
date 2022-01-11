@@ -64,13 +64,7 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         }
 
         if ($order->hasShipments()) {
-            $shipment = $this->getExistingShipmentWithProperMethod($order);
-
-            if (null === $shipment) {
-                return;
-            }
-
-            $this->processShipmentUnits($order, $shipment);
+            $this->recalculateExistingShipmentWithProperMethod($order);
 
             return;
         }
@@ -113,23 +107,23 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         }
     }
 
-    private function getExistingShipmentWithProperMethod(OrderInterface $order): ?ShipmentInterface
+    private function recalculateExistingShipmentWithProperMethod(OrderInterface $order): void
     {
         /** @var ShipmentInterface $shipment */
         $shipment = $order->getShipments()->first();
 
+        $this->processShipmentUnits($order, $shipment);
+
         if (null === $this->shippingMethodsResolver) {
-            return $shipment;
+            return;
         }
 
         if (!in_array($shipment->getMethod(), $this->shippingMethodsResolver->getSupportedMethods($shipment), true)) {
             try {
                 $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment));
             } catch (UnresolvedDefaultShippingMethodException $exception) {
-                return null;
+                return;
             }
         }
-
-        return $shipment;
     }
 }
