@@ -26,21 +26,12 @@ final class SyliusOrderExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function it_autoconfigures_cart_contexts_and_order_processors(): void
+    public function it_autoconfigures_cart_contexts(): void
     {
-        $this->markTestSkipped('Symfony 4.4 makes it impossible to test autoconfigured services this way.');
-
         $this->container->setDefinition(
             'acme.cart_context_autoconfigured',
             (new Definition())
                 ->setClass($this->getMockClass(CartContextInterface::class))
-                ->setAutoconfigured(true)
-        );
-
-        $this->container->setDefinition(
-            'acme.processor_autoconfigured',
-            (new Definition())
-                ->setClass($this->getMockClass(OrderProcessorInterface::class))
                 ->setAutoconfigured(true)
         );
 
@@ -51,6 +42,22 @@ final class SyliusOrderExtensionTest extends AbstractExtensionTestCase
             'acme.cart_context_autoconfigured',
             RegisterCartContextsPass::CART_CONTEXT_SERVICE_TAG
         );
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_autoconfigure_order_processors(): void
+    {
+        $this->container->setDefinition(
+            'acme.processor_autoconfigured',
+            (new Definition())
+                ->setClass($this->getMockClass(OrderProcessorInterface::class))
+                ->setAutoconfigured(true)
+        );
+
+        $this->load();
+        $this->compile();
 
         $this->assertContainerBuilderHasServiceDefinitionWithTag(
             'acme.processor_autoconfigured',

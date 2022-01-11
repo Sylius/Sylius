@@ -1,7 +1,7 @@
 SyliusPromotionBundle
 ===================
 
-Promotions engine for [**Symfony2**](https://symfony.com) eCommerce applications.
+Promotions engine for [**Symfony**](https://symfony.com) eCommerce applications.
 
 Sylius
 ------

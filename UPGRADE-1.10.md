@@ -1,3 +1,25 @@
+# UPGRADE FROM `v1.10.x` TO `v1.10.8`
+
+1. Update `payum/payum` to `^1.7` and execute Doctrine Migrations
+
+If `payum/payum` is a root requirement (in the project's `composer.json`), then run:
+
+```shell
+composer require payum/payum:^1.7
+```
+
+otherwise, run:
+
+```shell
+composer update payum/payum
+```
+
+then execute the migrations:
+
+```shell
+bin/console doctrine:migrations:migrate
+```
+
 # UPGRADE FROM `v1.10.0` TO `v1.10.1`
 
 1. API is disabled by default, to enable it you need to set flag to ``true`` in ``config/packages/_sylius.yaml``:

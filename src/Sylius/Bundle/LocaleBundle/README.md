@@ -1,7 +1,7 @@
 SyliusLocaleBundle
 ==================
 
-[**Symfony2**](https://symfony.com) integration of Sylius Locale management component.
+[**Symfony**](https://symfony.com) integration of Sylius Locale management component.
 
 Sylius
 ------
