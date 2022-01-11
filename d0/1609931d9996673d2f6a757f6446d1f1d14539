@@ -1,0 +1,54 @@
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-03T18:09:20Z
+
+I was almost sure this was already merged...
+
+Edit: I also triggered a re-run of all checks, because one failed with a segmentation fault.
+
+---------------------------------------------------------------------------
+
+by Roshyo at 2022-01-04T05:49:03Z
+
+Yeah, me too :thinking: IDK what happened
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-04T06:01:39Z
+
+Looks like it didn't re-run the jobs...
+Can you rebase and push, @Roshyo?
+
+---------------------------------------------------------------------------
+
+by 4c0n at 2022-01-04T11:44:18Z
+
+So in the end there is no mention of having to remove the `if` statements at some point in the future anywhere?
+I don't want to block merging this PR, but I do feel we need at least something as a reminder that this requires work when `isMasterRequest()` is finally fased out.
+
+Could be a github issue or PR as well as far as I'm concerned.
+
+---------------------------------------------------------------------------
+
+by Roshyo at 2022-01-04T11:51:19Z
+
+I'm ok to write it somewhere, but I can't find any md file that would fit. Perhaps an issue is the way to go :thinking:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-01-05T14:34:34Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "main-request-change"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-01-11T15:37:50Z
+
+Thanks, Stephane! :1st_place_medal:
