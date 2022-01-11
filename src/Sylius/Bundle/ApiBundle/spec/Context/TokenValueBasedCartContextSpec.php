@@ -43,7 +43,11 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
         $request->attributes = new ParameterBag(['tokenValue' => 'TOKEN_VALUE']);
         $request->getRequestUri()->willReturn('/api/v2/orders/TOKEN_VALUE');
 
-        $requestStack->getMasterRequest()->willReturn($request);
+        if (\method_exists(RequestStack::class, 'getMainRequest')) {
+            $requestStack->getMainRequest()->willReturn($request);
+        } else {
+            $requestStack->getMasterRequest()->willReturn($request);
+        }
         $orderRepository->findCartByTokenValue('TOKEN_VALUE')->willReturn($cart);
 
         $this->getCart()->shouldReturn($cart);
@@ -51,10 +55,14 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_there_is_no_master_request_on_request_stack(RequestStack $requestStack): void
     {
-        $requestStack->getMasterRequest()->willReturn(null);
+        if (\method_exists(RequestStack::class, 'getMainRequest')) {
+            $requestStack->getMainRequest()->willReturn(null);
+        } else {
+            $requestStack->getMasterRequest()->willReturn(null);
+        }
 
         $this
-            ->shouldThrow(new CartNotFoundException('There is no master request on request stack.'))
+            ->shouldThrow(new CartNotFoundException('There is no main request on request stack.'))
             ->during('getCart')
         ;
     }
@@ -66,10 +74,14 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
         $request->attributes = new ParameterBag([]);
         $request->getRequestUri()->willReturn('/orders');
 
-        $requestStack->getMasterRequest()->willReturn($request);
+        if (\method_exists(RequestStack::class, 'getMainRequest')) {
+            $requestStack->getMainRequest()->willReturn($request);
+        } else {
+            $requestStack->getMasterRequest()->willReturn($request);
+        }
 
         $this
-            ->shouldThrow(new CartNotFoundException('The master request is not an API request.'))
+            ->shouldThrow(new CartNotFoundException('The main request is not an API request.'))
             ->during('getCart')
         ;
     }
@@ -81,7 +93,11 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
         $request->attributes = new ParameterBag([]);
         $request->getRequestUri()->willReturn('/api/v2/orders');
 
-        $requestStack->getMasterRequest()->willReturn($request);
+        if (\method_exists(RequestStack::class, 'getMainRequest')) {
+            $requestStack->getMainRequest()->willReturn($request);
+        } else {
+            $requestStack->getMasterRequest()->willReturn($request);
+        }
 
         $this
             ->shouldThrow(new CartNotFoundException('Sylius was not able to find the cart, as there is no passed token value.'))
@@ -97,7 +113,11 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
         $request->attributes = new ParameterBag(['tokenValue' => 'TOKEN_VALUE']);
         $request->getRequestUri()->willReturn('/api/v2/orders/TOKEN_VALUE');
 
-        $requestStack->getMasterRequest()->willReturn($request);
+        if (\method_exists(RequestStack::class, 'getMainRequest')) {
+            $requestStack->getMainRequest()->willReturn($request);
+        } else {
+            $requestStack->getMasterRequest()->willReturn($request);
+        }
         $orderRepository->findCartByTokenValue('TOKEN_VALUE')->willReturn(null);
 
         $this

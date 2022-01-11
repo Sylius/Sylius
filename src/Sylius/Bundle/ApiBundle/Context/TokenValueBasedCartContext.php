@@ -41,7 +41,7 @@ final class TokenValueBasedCartContext implements CartContextInterface
 
     public function getCart(): OrderInterface
     {
-        $request = $this->getMasterRequest();
+        $request = $this->getMainRequest();
         $this->checkApiRequest($request);
 
         $tokenValue = $request->attributes->get('tokenValue');
@@ -57,20 +57,24 @@ final class TokenValueBasedCartContext implements CartContextInterface
         return $cart;
     }
 
-    private function getMasterRequest(): Request
+    private function getMainRequest(): Request
     {
-        $masterRequest = $this->requestStack->getMasterRequest();
-        if (null === $masterRequest) {
-            throw new CartNotFoundException('There is no master request on request stack.');
+        if (\method_exists($this->requestStack, 'getMainRequest')) {
+            $mainRequest = $this->requestStack->getMainRequest();
+        } else {
+            $mainRequest = $this->requestStack->getMasterRequest();
+        }
+        if (null === $mainRequest) {
+            throw new CartNotFoundException('There is no main request on request stack.');
         }
 
-        return $masterRequest;
+        return $mainRequest;
     }
 
     private function checkApiRequest(Request $request): void
     {
         if (strpos($request->getRequestUri(), $this->newApiRoute) === false) {
-            throw new CartNotFoundException('The master request is not an API request.');
+            throw new CartNotFoundException('The main request is not an API request.');
         }
     }
 }
