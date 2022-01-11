@@ -21,27 +21,17 @@ use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 
 final class EligibleCatalogPromotionsProviderSpec extends ObjectBehavior
 {
-    function let(CatalogPromotionRepositoryInterface $catalogPromotionRepository): void
-    {
-        $this->beConstructedWith($catalogPromotionRepository);
+    function let(
+        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
+        CriteriaInterface $firstCriterion,
+        CriteriaInterface $secondCriterion
+    ): void {
+        $this->beConstructedWith($catalogPromotionRepository, [$firstCriterion, $secondCriterion]);
     }
 
     function it_implements_eligible_catalog_promotions_provider_interface(): void
     {
         $this->shouldImplement(EligibleCatalogPromotionsProviderInterface::class);
-    }
-
-    function it_provides_all_catalog_promotions_when_no_criteria_is_specified(
-        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
-        CatalogPromotionInterface $firstCatalogPromotion,
-        CatalogPromotionInterface $secondCatalogPromotion
-    ): void {
-        $catalogPromotionRepository
-            ->findByCriteria([])
-            ->willReturn([$firstCatalogPromotion, $secondCatalogPromotion])
-        ;
-
-        $this->provide()->shouldReturn([$firstCatalogPromotion, $secondCatalogPromotion]);
     }
 
     function it_provides_catalog_promotions_based_on_criteria(
@@ -57,7 +47,7 @@ final class EligibleCatalogPromotionsProviderSpec extends ObjectBehavior
         ;
 
         $this
-            ->provide([$firstCriterion, $secondCriterion])
+            ->provide()
             ->shouldReturn([$firstCatalogPromotion, $secondCatalogPromotion])
         ;
     }

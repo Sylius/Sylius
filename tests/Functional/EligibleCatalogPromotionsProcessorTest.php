@@ -49,9 +49,7 @@ class EligibleCatalogPromotionsProcessorTest extends WebTestCase
 
         file_put_contents(self::$kernel->getProjectDir() . '/var/temporaryDate.txt', '2021-10-12 00:00:02');
 
-        $dateRangeCriteria = self::$container->get('sylius.catalog_promotion.criteria.date_range');
-
-        $eligibleCatalogPromotions = $eligibleCatalogPromotionsProvider->provide([$dateRangeCriteria]);
+        $eligibleCatalogPromotions = $eligibleCatalogPromotionsProvider->provide();
 
         $expectedDateTimes = [
             new \DateTime('2021-10-12 00:00:00'),
@@ -79,9 +77,7 @@ class EligibleCatalogPromotionsProcessorTest extends WebTestCase
 
         file_put_contents(self::$kernel->getProjectDir() . '/var/temporaryDate.txt', '2021-10-12 23:59:58');
 
-        $dateRangeCriteria = self::$container->get('sylius.catalog_promotion.criteria.date_range');
-
-        $eligibleCatalogPromotions = $eligibleCatalogPromotionsProvider->provide([$dateRangeCriteria]);
+        $eligibleCatalogPromotions = $eligibleCatalogPromotionsProvider->provide();
 
         $expectedDateTimes = [
             new \DateTime('2021-10-12 23:59:59'),

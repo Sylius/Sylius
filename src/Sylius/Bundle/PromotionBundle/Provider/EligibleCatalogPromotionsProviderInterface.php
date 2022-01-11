@@ -10,9 +10,7 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 interface EligibleCatalogPromotionsProviderInterface
 {
     /**
-     * @param iterable|CriteriaInterface[] $criteria
-     *
      * @return array|CatalogPromotionInterface[]
      */
-    public function provide(iterable $criteria = []): array;
+    public function provide(): array;
 }

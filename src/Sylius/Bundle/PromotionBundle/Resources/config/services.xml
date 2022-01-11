@@ -78,6 +78,7 @@
             class="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProvider"
         >
             <argument type="service" id="sylius.repository.catalog_promotion" />
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.criteria" />
         </service>
 
         <service id="Sylius\Component\Promotion\Provider\DateTimeProviderInterface" class="Sylius\Component\Promotion\Provider\Calendar" />
