@@ -38,7 +38,7 @@ final class SetCatalogPromotionActionTypesPassTest extends AbstractCompilerPassT
         $this->compile();
 
         $this->assertContainerBuilderHasParameter(
-            'sylius.catalog_promotion.actions',
+            'sylius.catalog_promotion.actions_types',
             ['custom', 'another_custom', 'second_custom']
         );
     }

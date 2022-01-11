@@ -31,6 +31,6 @@ final class SetCatalogPromotionActionTypesPass implements CompilerPassInterface
             }
         }
 
-        $container->setParameter('sylius.catalog_promotion.actions', $types);
+        $container->setParameter('sylius.catalog_promotion.actions_types', $types);
     }
 }

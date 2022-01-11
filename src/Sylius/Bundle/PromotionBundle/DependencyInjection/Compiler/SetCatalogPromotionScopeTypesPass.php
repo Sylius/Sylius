@@ -31,6 +31,6 @@ final class SetCatalogPromotionScopeTypesPass implements CompilerPassInterface
             }
         }
 
-        $container->setParameter('sylius.catalog_promotion.scopes', $types);
+        $container->setParameter('sylius.catalog_promotion.scopes_types', $types);
     }
 }

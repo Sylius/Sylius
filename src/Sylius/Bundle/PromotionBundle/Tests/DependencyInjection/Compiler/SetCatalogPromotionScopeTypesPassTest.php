@@ -38,7 +38,7 @@ final class SetCatalogPromotionScopeTypesPassTest extends AbstractCompilerPassTe
         $this->compile();
 
         $this->assertContainerBuilderHasParameter(
-            'sylius.catalog_promotion.scopes',
+            'sylius.catalog_promotion.scopes_types',
             ['custom', 'another_custom', 'second_custom']
         );
     }
