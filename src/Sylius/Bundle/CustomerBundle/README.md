@@ -1,7 +1,7 @@
 SyliusCustomerBundle
 ==================
 
-[**Symfony2**](https://symfony.com) integration of Sylius Customer management component.
+[**Symfony**](https://symfony.com) integration of Sylius Customer management component.
 
 Sylius
 ------

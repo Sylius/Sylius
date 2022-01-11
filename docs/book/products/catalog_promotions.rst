@@ -193,16 +193,16 @@ In API we will extend last command:
                 "variants": ["Everyday_white_basic_T_Shirt-variant-1", "Everyday_white_basic_T_Shirt-variant-4"]
               }
             }
-          ],
-          "actions": [
+        ],
+        "actions": [
             {
               "type": "percentage_discount",
               "configuration": {
                 "amount": 0.5
               }
             }
-          ],
-          "translations": {
+        ],
+        "translations": {
             "en_US": {
               "label": "T-shirt Promotion",
               "description": "T-shirt Promotion description",
@@ -310,7 +310,7 @@ After changes in CatalogPromotion, we dispatch proper message with delay calcula
 
 .. warning::
 
-    To enable asynchronous Catalog Promotion, remember about running messenger consumer in a separate process, use the command: ``php bin/console messenger:consume async``
+    To enable asynchronous Catalog Promotion, remember about running messenger consumer in a separate process, use the command: ``php bin/console messenger:consume main``
     For more information check official `Symfony docs <https://symfony.com/doc/current/messenger.html#consuming-messages-running-the-worker>`_
 
 How the Catalog Promotions are applied?
