@@ -65,7 +65,7 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScopeValidator">
-            <argument>%sylius.catalog_promotion.scopes%</argument>
+            <argument>%sylius.catalog_promotion.scopes_types%</argument>
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_validator" index-by="key" />
             <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_scope" />
         </service>
