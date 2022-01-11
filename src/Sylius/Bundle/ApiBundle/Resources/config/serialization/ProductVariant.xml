@@ -31,7 +31,6 @@
             <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="translations">
-            <group>shop:order:account:read</group>
             <group>admin:product_variant:read</group>
         </attribute>
         <attribute name="optionValues">
