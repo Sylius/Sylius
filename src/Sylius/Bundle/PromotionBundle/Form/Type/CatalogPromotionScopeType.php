@@ -54,28 +54,10 @@ final class CatalogPromotionScopeType extends AbstractResourceType
 
         $builder
             ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event): void {
-                /** @var CatalogPromotionScopeInterface|null $data */
-                $data = $event->getData();
-                $form = $event->getForm();
-
-                if ($data === null) {
-                    return;
-                }
-
-                $scopeConfigurationType = $this->scopeConfigurationTypes[$data->getType()];
-                $form->add('configuration', $scopeConfigurationType);
+                $this->addScopeToForm($event);
             })
             ->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event): void {
-                /** @var array|null $data */
-                $data = $event->getData();
-                $form = $event->getForm();
-
-                if ($data === null) {
-                    return;
-                }
-
-                $scopeConfigurationType = $this->scopeConfigurationTypes[$data['type']];
-                $form->add('configuration', $scopeConfigurationType);
+                $this->addScopeToForm($event);
             })
         ;
     }
@@ -83,5 +65,21 @@ final class CatalogPromotionScopeType extends AbstractResourceType
     public function getBlockPrefix(): string
     {
         return 'sylius_catalog_promotion_scope';
+    }
+
+    private function addScopeToForm(FormEvent $event): void
+    {
+        /** @var CatalogPromotionScopeInterface|array|null $data */
+        $data = $event->getData();
+        $form = $event->getForm();
+
+        if ($data === null) {
+            return;
+        }
+
+        $dataType = $data instanceof CatalogPromotionScopeInterface ? $data->getType() : $data['type'];
+
+        $scopeConfigurationType = $this->scopeConfigurationTypes[$dataType];
+        $form->add('configuration', $scopeConfigurationType);
     }
 }
