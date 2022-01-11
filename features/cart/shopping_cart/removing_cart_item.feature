@@ -29,3 +29,19 @@ Feature: Removing cart item from cart
         And I added product "T-shirt strawberry" to the cart
         When I remove product "T-shirt banana" from the cart
         Then my cart's total should be "$17.22"
+
+    @ui @api
+    Scenario: Removing cart item which causes order shipping method recalculation
+        Given the store has "Paid" shipping category
+        And the store has "Free" shipping category
+        And product "T-shirt banana" belongs to "Paid" shipping category
+        And the store has a product "T-shirt small" priced at "$15.00"
+        And product "T-shirt small" belongs to "Free" shipping category
+        And the store has "FedEx" shipping method with "$30.00" fee
+        And this shipping method requires at least one unit matches to "Paid" shipping category
+        And the store has "UPS" shipping method with "$0.00" fee
+        And this shipping method requires that all units match to "Free" shipping category
+        And I have product "T-shirt small" in the cart
+        When I remove product "T-shirt banana" from the cart
+        And I see the summary of my cart
+        Then my cart shipping total should be "$0.00"
