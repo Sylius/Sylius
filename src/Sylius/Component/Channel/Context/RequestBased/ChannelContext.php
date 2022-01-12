@@ -34,7 +34,7 @@ final class ChannelContext implements ChannelContextInterface
     public function getChannel(): ChannelInterface
     {
         try {
-            return $this->getChannelForRequest($this->getMasterRequest());
+            return $this->getChannelForRequest($this->getMainRequest());
         } catch (\UnexpectedValueException $exception) {
             throw new ChannelNotFoundException(null, $exception);
         }
@@ -49,14 +49,18 @@ final class ChannelContext implements ChannelContextInterface
         return $channel;
     }
 
-    private function getMasterRequest(): Request
+    private function getMainRequest(): Request
     {
-        $masterRequest = $this->requestStack->getMasterRequest();
-        if (null === $masterRequest) {
+        if (\method_exists($this->requestStack, 'getMainRequest')) {
+            $mainRequest = $this->requestStack->getMainRequest();
+        } else {
+            $mainRequest = $this->requestStack->getMasterRequest();
+        }
+        if (null === $mainRequest) {
             throw new \UnexpectedValueException('There are not any requests on request stack');
         }
 
-        return $masterRequest;
+        return $mainRequest;
     }
 
     private function assertChannelWasFound(?ChannelInterface $channel): void
