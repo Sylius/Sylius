@@ -253,6 +253,14 @@ And define the translation for our new action type:
                 action:
                     fixed_price: 'Fixed price'
 
+Translations
+------------
+
+Translation keys for catalog promotion action are hardcoded to ``sylius.form.catalog_promotion.action.type`` where ``type`` is one of available catalog promotion actions:
+
+- percentage_discount
+- fixed_discount
+
 Prepare an action template for show page of catalog promotion
 -------------------------------------------------------------
 

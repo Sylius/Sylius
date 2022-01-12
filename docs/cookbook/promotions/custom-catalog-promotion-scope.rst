@@ -189,6 +189,15 @@ In our case - we have a template ``by_phrase.html.twig`` which is first before o
 
     This overriding will be suspect of change, so there won't be need for declaring ``default.html.twig`` template anymore.
 
+Translations
+------------
+
+Translation keys for catalog promotion scope are hardcoded to ``sylius.form.catalog_promotion.scope.type`` where ``type`` is one of available catalog promotion scopes:
+
+- for_products
+- for_taxons
+- for_variants
+
 Prepare a scope template for show page of catalog promotion
 -----------------------------------------------------------
 
