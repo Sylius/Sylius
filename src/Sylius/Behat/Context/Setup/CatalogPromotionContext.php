@@ -31,7 +31,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\ProductReviewTransitions;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
@@ -453,6 +452,20 @@ final class CatalogPromotionContext implements Context
         );
 
         $this->entityManager->flush();
+    }
+
+    /**
+     * @Given /^there is a catalog promotion "([^"]+)" with priority ([^"]+)$/
+     */
+    public function thereIsACatalogPromotionWithPriority(
+        string $name,
+        int $priority
+    ): void {
+        $catalogPromotion = $this->createCatalogPromotion(name: $name, priority: $priority);
+
+        $this->entityManager->flush();
+
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
     /**

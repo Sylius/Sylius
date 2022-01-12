@@ -23,6 +23,7 @@
         <field name="endDate" type="datetime" column="end_date" nullable="true"/>
         <field name="enabled" type="boolean" />
         <field name="priority" type="integer">
+            <gedmo:sortable-position/>
             <options>
                 <option name="default">0</option>
             </options>

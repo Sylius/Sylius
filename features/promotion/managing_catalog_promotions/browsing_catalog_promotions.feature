@@ -6,9 +6,9 @@ Feature: Browsing catalog promotions
 
     Background:
         Given the store operates on a single channel in "United States"
-        And there are catalog promotions named "Summer sale" and "Winter sale"
+        And there is a catalog promotion "Summer sale" with priority 50
+        And there is a catalog promotion "Winter sale" with priority 100
         And the catalog promotion "Winter sale" operates between "2021-11-10" and "2022-01-08"
-        And its priority is 100
         And I am logged in as an administrator
 
     @api @ui

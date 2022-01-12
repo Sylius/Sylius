@@ -7,7 +7,7 @@
     "code": "mugs_discount",
     "startDate": null,
     "endDate": null,
-    "priority": 1000,
+    "priority": 0,
     "state": "active",
     "channels": [
         "\/api\/v2\/admin\/channels\/MOBILE"
