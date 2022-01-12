@@ -12,7 +12,6 @@ Feature: Seeing catalog promotion's details
         And it applies also on "T-Shirt" product
         And it reduces also price by fixed "$10.00" in the "Web-US" channel
         And the catalog promotion "Winter sale" operates between "2021-11-10" and "2022-01-08"
-        And its priority is 1200
         And I am logged in as an administrator
 
     @api @ui
@@ -24,4 +23,3 @@ Feature: Seeing catalog promotion's details
         And it should apply on "PHP T-Shirt" variant
         And it should apply on "T-Shirt" product
         And it should start at "2021-11-10" and end at "2022-01-08"
-        And its priority should be 1200

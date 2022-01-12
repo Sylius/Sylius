@@ -335,6 +335,27 @@ The **CatalogPromotionProcessor**'s method ``process()`` is executed on the elig
 
     If you want to reapply Catalog Promotion manually you can refer to the :ref:`How to create a Catalog Promotion Scope and Action? <how-to-create-a-catalog-promotion-scope-and-action>` section
 
+How to manage catalog promotion priority?
+-----------------------------------------
+
+The main feature of prioritizing catalog promotions is ensuring the uniqueness of priorities.
+While it is obvious at first glance, there are some extreme cases that will be covered below
+
+Creating a new catalog promotion while other catalog promotions already exist
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+- adding a catalog promotion with a priority higher than all existing catalog promotions does not change priority values
+- adding a catalog promotion with a priority lower than all existing ones increases the priority value of other catalog promotions by 1
+- adding a catalog promotion with a priority equal to one of the existing catalog promotions increases the priority value of all catalog promotions with a priority greater equal than created catalog promotion by 1, but has no effect on the others
+- adding a catalog promotion with a priority equal -1 sets a priority value of the created promotion one greater than the current highest value
+- adding a catalog promotion with some negative priority lower than -1 determines the position of the created catalog promotion starting count backward and if calculated index is already taken increases the priority value of all catalog promotions with a priority greater equal than calculated priority value by 1
+
+
+Updating an existing catalog promotion
+''''''''''''''''''''''''''''''''''''''
+
+- updating a catalog promotion priority to one of the existing catalog promotions decreases its priority value by 1
+
 Learn more
 ----------
 
