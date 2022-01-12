@@ -48,18 +48,7 @@ final class CatalogPromotionActionType extends AbstractResourceType
 
         $builder
             ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event): void {
-                /** @var CatalogPromotionActionInterface|null $data */
-                $data = $event->getData();
-                if ($data === null) {
-                    return;
-                }
-
-                $form = $event->getForm();
-
-                $actionConfigurationType = $this->actionConfigurationTypes[$data->getType()];
-                $form->add('configuration', $actionConfigurationType, [
-                    'label' => false,
-                ]);
+               $this->addTypeToForm($event);
             })
             ->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event): void {
                 /** @var array|null $data */
@@ -92,18 +81,7 @@ final class CatalogPromotionActionType extends AbstractResourceType
                 ]);
             })
             ->addEventListener(FormEvents::SUBMIT, function(FormEvent $event): void {
-                /** @var CatalogPromotionActionInterface|null $data */
-                $data = $event->getData();
-                if ($data === null) {
-                    return;
-                }
-
-                $form = $event->getForm();
-
-                $actionConfigurationType = $this->actionConfigurationTypes[$data->getType()];
-                $form->add('configuration', $actionConfigurationType, [
-                    'label' => false,
-                ]);
+                $this->addTypeToForm($event);
             })
         ;
     }
@@ -111,5 +89,20 @@ final class CatalogPromotionActionType extends AbstractResourceType
     public function getBlockPrefix(): string
     {
         return 'sylius_catalog_promotion_action';
+    }
+
+    private function addTypeToForm(FormEvent $event): void {
+        /** @var CatalogPromotionActionInterface|null $data */
+        $data = $event->getData();
+        if ($data === null) {
+            return;
+        }
+
+        $form = $event->getForm();
+
+        $actionConfigurationType = $this->actionConfigurationTypes[$data->getType()];
+        $form->add('configuration', $actionConfigurationType, [
+            'label' => false,
+        ]);
     }
 }
