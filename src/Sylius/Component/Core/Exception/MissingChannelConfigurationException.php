@@ -23,13 +23,8 @@ final class MissingChannelConfigurationException extends \RuntimeException
         parent::__construct($message, 0, $previousException);
     }
 
-    public static function getMissingChannelProductVariantPriceMessage(ChannelInterface $channel, ProductVariantInterface $productVariant): string
+    public static function createForProductVariantChannelPricing(ProductVariantInterface $productVariant, ChannelInterface $channel): self
     {
-        $message = sprintf('Channel %s has no price defined for product variant', $channel->getName());
-        if ($productVariant->getName() !== null) {
-            return $message . sprintf(' %s (%s)', $productVariant->getName(), $productVariant->getCode());
-        }
-
-        return $message . sprintf(' with code %s', $productVariant->getCode());
+        return new self(sprintf('Product variant %s has no price defined for channel %s', $productVariant->getDescriptor(), $channel->getName()));
     }
 }

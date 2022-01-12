@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Calculator;
 
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
@@ -27,7 +26,7 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
         $channelPricing = $productVariant->getChannelPricingForChannel($context['channel']);
 
         if (null === $channelPricing || $channelPricing->getPrice() === null) {
-            throw new MissingChannelConfigurationException(MissingChannelConfigurationException::getMissingChannelProductVariantPriceMessage($context['channel'], $productVariant));
+            throw MissingChannelConfigurationException::createForProductVariantChannelPricing($productVariant, $context['channel']);
         }
 
         return $channelPricing->getPrice();
@@ -43,7 +42,7 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
         $channelPricing = $productVariant->getChannelPricingForChannel($context['channel']);
 
         if (null === $channelPricing) {
-            throw new MissingChannelConfigurationException(MissingChannelConfigurationException::getMissingChannelProductVariantPriceMessage($context['channel'], $productVariant));
+            throw MissingChannelConfigurationException::createForProductVariantChannelPricing($productVariant, $context['channel']);
         }
 
         if (null !== $channelPricing->getOriginalPrice()) {
@@ -54,6 +53,6 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
             return $channelPricing->getPrice();
         }
 
-        throw new MissingChannelConfigurationException(MissingChannelConfigurationException::getMissingChannelProductVariantPriceMessage($context['channel'], $productVariant));
+        throw MissingChannelConfigurationException::createForProductVariantChannelPricing($productVariant, $context['channel']);
     }
 }

@@ -45,8 +45,7 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
         $channel->getName()->willReturn('WEB');
 
         $productVariant->getChannelPricingForChannel($channel)->willReturn(null);
-        $productVariant->getName()->willReturn('Red variant');
-        $productVariant->getCode()->willReturn('RED_VARIANT');
+        $productVariant->getDescriptor()->willReturn('Red variant (RED_VARIANT)');
 
         $this
             ->shouldThrow(MissingChannelConfigurationException::class)
@@ -63,8 +62,7 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
 
         $productVariant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
         $channelPricing->getPrice()->willReturn(null);
-        $productVariant->getName()->willReturn('Red variant');
-        $productVariant->getCode()->willReturn('RED_VARIANT');
+        $productVariant->getDescriptor()->willReturn('Red variant (RED_VARIANT)');
 
         $this
             ->shouldThrow(MissingChannelConfigurationException::class)
@@ -110,8 +108,7 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
         $channel->getName()->willReturn('WEB');
 
         $productVariant->getChannelPricingForChannel($channel)->willReturn(null);
-        $productVariant->getName()->willReturn('Red variant');
-        $productVariant->getCode()->willReturn('RED_VARIANT');
+        $productVariant->getDescriptor()->willReturn('Red variant (RED_VARIANT)');
 
         $this
             ->shouldThrow(MissingChannelConfigurationException::class)
@@ -129,8 +126,7 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
         $productVariant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
         $channelPricing->getOriginalPrice()->willReturn(null);
         $channelPricing->getPrice()->willReturn(null);
-        $productVariant->getName()->willReturn('Red variant');
-        $productVariant->getCode()->willReturn('RED_VARIANT');
+        $productVariant->getDescriptor()->willReturn('Red variant (RED_VARIANT)');
 
         $this
             ->shouldThrow(MissingChannelConfigurationException::class)
