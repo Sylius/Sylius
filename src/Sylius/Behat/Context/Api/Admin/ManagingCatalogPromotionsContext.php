@@ -23,15 +23,12 @@ use Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator;
 use Sylius\Bundle\CoreBundle\Provider\ForProductsScopeVariantsProvider;
 use Sylius\Bundle\CoreBundle\Provider\ForTaxonsScopeVariantsProvider;
 use Sylius\Bundle\CoreBundle\Provider\ForVariantsScopeVariantsProvider;
-use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
+use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
-use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
@@ -1051,7 +1048,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function thisCatalogPromotionShouldBeUsable(): void
     {
-        Assert::isInstanceOf($this->messageBus->getDispatchedMessages()[0]['message'], CatalogPromotionUpdated::class);
+        Assert::isInstanceOf($this->messageBus->getDispatchedMessages()[0]['message'], CatalogPromotionCreated::class);
     }
 
     /**
