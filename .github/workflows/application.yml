@@ -532,7 +532,7 @@ jobs:
             matrix:
                 php: ["8.0"]
                 symfony: ["^4.4", "^5.4"]
-                node: ["14.x"]
+                node: ["14.x", "16.x"]
                 mysql: ["5.7", "8.0"]
 
         env:
