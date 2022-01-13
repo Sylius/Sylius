@@ -396,7 +396,7 @@ jobs:
     test-application-without-frontend-mysql:
         runs-on: ubuntu-latest
 
-        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }})"
+        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}), Node ${{ matrix.node }}"
 
         timeout-minutes: 25
 
