@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\EventSubscriber;
 use ApiPlatform\Core\EventListener\EventPriorities;
 use Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Provider\DateTimeProviderInterface;
@@ -59,23 +60,29 @@ final class CatalogPromotionEventSubscriber implements EventSubscriberInterface
         }
 
         $method = $event->getRequest()->getMethod();
+        if (!in_array($method, [Request::METHOD_POST, Request::METHOD_PUT, Request::METHOD_PATCH], true)) {
+            return;
+        }
 
-        if (in_array($method, [Request::METHOD_POST, Request::METHOD_PUT, Request::METHOD_PATCH], true)) {
-            if ($entity->getStartDate() === null) {
-                $this->eventBus->dispatch(new CatalogPromotionUpdated($entity->getCode()));
-            } else {
-                $this->eventBus->dispatch(
-                    new CatalogPromotionUpdated($entity->getCode()),
-                    [$this->delayStampCalculator->calculate($this->dateTimeProvider->now(), $entity->getStartDate())]
-                );
-            }
+        $stamps = [];
+        if ($entity->getStartDate() !== null) {
+            $stamps[] = $this->delayStampCalculator->calculate($this->dateTimeProvider->now(), $entity->getStartDate());
+        }
 
-            if ($entity->getEndDate() !== null) {
-                $this->eventBus->dispatch(
-                    new CatalogPromotionEnded($entity->getCode()),
-                    [$this->delayStampCalculator->calculate($this->dateTimeProvider->now(), $entity->getEndDate())]
-                );
-            }
+        $code = $entity->getCode();
+        if ($method === Request::METHOD_POST) {
+            $this->eventBus->dispatch(new CatalogPromotionCreated($code), $stamps);
+        }
+
+        if (in_array($method, [Request::METHOD_PUT, Request::METHOD_PATCH], true)) {
+            $this->eventBus->dispatch(new CatalogPromotionUpdated($code), $stamps);
+        }
+
+        if ($entity->getEndDate() !== null) {
+            $this->eventBus->dispatch(
+                new CatalogPromotionEnded($code),
+                [$this->delayStampCalculator->calculate($this->dateTimeProvider->now(), $entity->getEndDate())]
+            );
         }
     }
 }

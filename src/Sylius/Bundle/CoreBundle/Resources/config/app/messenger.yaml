@@ -7,6 +7,7 @@ framework:
             main: '%env(MESSENGER_TRANSPORT_DSN)%'
 
         routing:
+            'Sylius\Component\Promotion\Event\CatalogPromotionCreated': main
             'Sylius\Component\Promotion\Event\CatalogPromotionUpdated': main
             'Sylius\Component\Promotion\Event\CatalogPromotionEnded': main
 

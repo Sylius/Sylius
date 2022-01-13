@@ -14,35 +14,38 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface;
-use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
+use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-final class CatalogPromotionUpdateListener
+final class CatalogPromotionCreatedListener
 {
-    private AllCatalogPromotionsProcessorInterface $catalogPromotionsProcessor;
+    private CatalogPromotionProcessorInterface $catalogPromotionProcessor;
 
     private RepositoryInterface $catalogPromotionRepository;
 
     private EntityManagerInterface $entityManager;
 
     public function __construct(
-        AllCatalogPromotionsProcessorInterface $catalogPromotionsProcessor,
+        CatalogPromotionProcessorInterface $catalogPromotionProcessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager
     ) {
-        $this->catalogPromotionsProcessor = $catalogPromotionsProcessor;
+        $this->catalogPromotionProcessor = $catalogPromotionProcessor;
         $this->catalogPromotionRepository = $catalogPromotionRepository;
         $this->entityManager = $entityManager;
     }
 
-    public function __invoke(CatalogPromotionUpdated $event): void
+    public function __invoke(CatalogPromotionCreated $event): void
     {
-        if (null === $this->catalogPromotionRepository->findOneBy(['code' => $event->code])) {
+        /** @var CatalogPromotionInterface|null $catalogPromotion */
+        $catalogPromotion = $this->catalogPromotionRepository->findOneBy(['code' => $event->code]);
+        if (null === $catalogPromotion) {
             return;
         }
 
-        $this->catalogPromotionsProcessor->process();
+        $this->catalogPromotionProcessor->process($catalogPromotion);
 
         $this->entityManager->flush();
     }

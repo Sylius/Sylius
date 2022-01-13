@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Provider\DateTimeProviderInterface;
@@ -40,21 +41,45 @@ final class CatalogPromotionEventListener
         $this->dateTimeProvider = $dateTimeProvider;
     }
 
+    public function dispatchCatalogPromotionCreatedEvent(GenericEvent $event): void
+    {
+        /** @var CatalogPromotionInterface $catalogPromotion */
+        $catalogPromotion = $event->getSubject();
+        Assert::isInstanceOf($catalogPromotion, CatalogPromotionInterface::class);
+
+        $this->eventBus->dispatch(
+            new CatalogPromotionCreated($catalogPromotion->getCode()),
+            $this->calculateStartDateStamp($catalogPromotion)
+        );
+
+        $this->dispatchCatalogPromotionEndedEvent($catalogPromotion);
+    }
+
     public function dispatchCatalogPromotionUpdatedEvent(GenericEvent $event): void
     {
         /** @var CatalogPromotionInterface $catalogPromotion */
         $catalogPromotion = $event->getSubject();
         Assert::isInstanceOf($catalogPromotion, CatalogPromotionInterface::class);
 
-        if ($catalogPromotion->getStartDate() === null) {
-            $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
-        } else {
-            $this->eventBus->dispatch(
-                new CatalogPromotionUpdated($catalogPromotion->getCode()),
-                [$this->delayStampCalculator->calculate($this->dateTimeProvider->now(), $catalogPromotion->getStartDate())]
-            );
+        $this->eventBus->dispatch(
+            new CatalogPromotionUpdated($catalogPromotion->getCode()),
+            $this->calculateStartDateStamp($catalogPromotion)
+        );
+
+        $this->dispatchCatalogPromotionEndedEvent($catalogPromotion);
+    }
+
+    private function calculateStartDateStamp(CatalogPromotionInterface $catalogPromotion): array
+    {
+        if ($catalogPromotion->getStartDate() !== null) {
+            return [$this->delayStampCalculator->calculate($this->dateTimeProvider->now(), $catalogPromotion->getStartDate())];
         }
 
+        return [];
+    }
+
+    private function dispatchCatalogPromotionEndedEvent(CatalogPromotionInterface $catalogPromotion): void
+    {
         if ($catalogPromotion->getEndDate() !== null) {
             $this->eventBus->dispatch(
                 new CatalogPromotionEnded($catalogPromotion->getCode()),

@@ -17,6 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Provider\DateTimeProviderInterface;
@@ -33,6 +34,70 @@ final class CatalogPromotionEventListenerSpec extends ObjectBehavior
         DateTimeProviderInterface $dateTimeProvider
     ): void {
         $this->beConstructedWith($eventBus, $delayStampCalculator, $dateTimeProvider);
+    }
+
+    function it_dispatches_catalog_promotion_created_and_catalog_promotion_ended_after_creating_catalog_promotion(
+        MessageBusInterface $eventBus,
+        GenericEvent $event,
+        CatalogPromotionInterface $catalogPromotion,
+        DelayStampCalculatorInterface $delayStampCalculator,
+        DateTimeProviderInterface $dateTimeProvider
+    ): void {
+        $event->getSubject()->willReturn($catalogPromotion);
+        $startDateTime = new \DateTime('2021-10-10');
+        $endDateTime = new \DateTime('2021-10-11');
+
+        $dateTimeProvider->now()->willReturn(new \DateTime());
+
+        $catalogPromotion->getCode()->willReturn('SALE');
+        $catalogPromotion->getStartDate()->willReturn($startDateTime);
+        $catalogPromotion->getEndDate()->willReturn($endDateTime);
+
+        $startDelayStamp = new DelayStamp(200000);
+        $endDelayStamp = new DelayStamp(300000);
+
+        $delayStampCalculator->calculate(Argument::any(), $startDateTime)->willReturn($startDelayStamp);
+        $delayStampCalculator->calculate(Argument::any(), $endDateTime)->willReturn($endDelayStamp);
+
+        $messageUpdate = new CatalogPromotionCreated('SALE');
+        $messageEnd = new CatalogPromotionEnded('SALE');
+
+        $eventBus->dispatch($messageUpdate, [$startDelayStamp])->willReturn(new Envelope($messageUpdate))->shouldBeCalled();
+        $eventBus->dispatch($messageEnd, [$endDelayStamp])->willReturn(new Envelope($messageEnd))->shouldBeCalled();
+
+        $this->dispatchCatalogPromotionCreatedEvent($event);
+    }
+
+    function it_does_not_dispatch_catalog_promotion_ended_after_creating_catalog_promotion_when_no_end_date_is_provided(
+        MessageBusInterface $eventBus,
+        GenericEvent $event,
+        CatalogPromotionInterface $catalogPromotion,
+        DelayStampCalculatorInterface $delayStampCalculator,
+        DateTimeProviderInterface $dateTimeProvider
+    ): void {
+        $event->getSubject()->willReturn($catalogPromotion);
+        $startDateTime = new \DateTime('2021-10-10');
+        $endDateTime = new \DateTime('2021-10-11');
+
+        $dateTimeProvider->now()->willReturn(new \DateTime());
+
+        $catalogPromotion->getCode()->willReturn('SALE');
+        $catalogPromotion->getStartDate()->willReturn($startDateTime);
+        $catalogPromotion->getEndDate()->willReturn(null);
+
+        $startDelayStamp = new DelayStamp(200000);
+        $endDelayStamp = new DelayStamp(300000);
+
+        $delayStampCalculator->calculate(Argument::any(), $startDateTime)->willReturn($startDelayStamp);
+        $delayStampCalculator->calculate(Argument::any(), $endDateTime)->willReturn($endDelayStamp);
+
+        $messageUpdate = new CatalogPromotionCreated('SALE');
+        $messageEnd = new CatalogPromotionEnded('SALE');
+
+        $eventBus->dispatch($messageUpdate, [$startDelayStamp])->willReturn(new Envelope($messageUpdate))->shouldBeCalled();
+        $eventBus->dispatch($messageEnd, [Argument::any()])->shouldNotBeCalled();
+
+        $this->dispatchCatalogPromotionCreatedEvent($event);
     }
 
     function it_dispatches_catalog_promotion_updated_and_catalog_promotion_ended_after_updating_catalog_promotion(
@@ -123,7 +188,7 @@ final class CatalogPromotionEventListenerSpec extends ObjectBehavior
         $messageUpdate = new CatalogPromotionUpdated('SALE');
         $messageEnd = new CatalogPromotionEnded('SALE');
 
-        $eventBus->dispatch($messageUpdate)->willReturn(new Envelope($messageUpdate))->shouldBeCalled();
+        $eventBus->dispatch($messageUpdate, [])->willReturn(new Envelope($messageUpdate))->shouldBeCalled();
         $eventBus->dispatch($messageEnd, [$endDelayStamp])->willReturn(new Envelope($messageEnd))->shouldBeCalled();
 
         $this->dispatchCatalogPromotionUpdatedEvent($event);

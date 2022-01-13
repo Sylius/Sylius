@@ -241,7 +241,7 @@ We can also make it programmatically:
 
     /** @var MessageBusInterface $eventBus */
     $eventBus = $this->container->get('sylius.event_bus');
-    $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
 
 And now you should be able to see created Catalog Promotion. You can check if it exists like in the last example (with GET endpoint).
 If you look into ``product-variant`` endpoint in shop you should see now that chosen variants have lowered price and added field ``appliedPromotions``:
@@ -271,7 +271,7 @@ If you look into ``product-variant`` endpoint in shop you should see now that ch
 
 .. note::
 
-    If you create a Catalog Promotion programmatically, remember to manually dispatch ``CatalogPromotionUpdated``
+    If you create a Catalog Promotion programmatically, remember to manually dispatch ``CatalogPromotionCreated``
 
 Catalog Promotion Scopes configuration reference
 ''''''''''''''''''''''''''''''''''''''''''''''''
@@ -316,9 +316,10 @@ After changes in CatalogPromotion, we dispatch proper message with delay calcula
 How the Catalog Promotions are applied?
 ---------------------------------------
 
-The Catalog Promotion application process utilises `API Platform events <https://api-platform.com/docs/core/events/>`_ for an API.
-and `Resource events </book/architecture/events>`_ for UI. When a new Promotion is created or the existing one is edited
-there are services that listen on proper events and dispatch ``CatalogPromotionUpdated`` event to event bus.
+The Catalog Promotion application process utilises `API Platform events <https://api-platform.com/docs/core/events/>`_ for an API
+and `Resource events </book/architecture/events>`_ for UI. When a new Promotion is created there are services that listen
+on proper events and dispatch ``CatalogPromotionCreated`` event to event bus. The behaviour looks similar when the existing
+one is edited, then the ``CatalogPromotionUpdated`` event is dispatched to event bus.
 
 This event is handled by `CatalogPromotionUpdateListener <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Listener/CatalogPromotionUpdateListener.php>`_ which resolves the appropriate ``CatalogPromotion``.
 With the needed data and configuration from ``CatalogPromotion`` we can now process the ``Product`` and ``ProductVariant`` entities.
