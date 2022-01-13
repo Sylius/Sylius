@@ -1,5 +1,5 @@
 @managing_catalog_promotions
-Feature: Editing catalog promotion
+Feature: Toggling catalog promotion
     In order to manage which catalog promotions are available to customers
     As an Administrator
     I want to be able to enable or disable a catalog promotion
