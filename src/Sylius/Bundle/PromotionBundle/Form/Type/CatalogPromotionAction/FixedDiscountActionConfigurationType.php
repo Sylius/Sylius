@@ -19,6 +19,9 @@ final class FixedDiscountActionConfigurationType extends AbstractType
             ->add('amount', MoneyType::class, [
                 'label' => 'sylius.ui.amount',
                 'currency' => $options['currency'],
+                'constraints' => [
+                    new NotBlank(['groups' => ['sylius']]),
+                ]
             ])
         ;
     }
