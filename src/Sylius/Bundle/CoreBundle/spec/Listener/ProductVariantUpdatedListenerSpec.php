@@ -21,7 +21,7 @@ use Sylius\Component\Core\Event\ProductVariantUpdated;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
-final class ProductVariantUpdateListenerSpec extends ObjectBehavior
+final class ProductVariantUpdatedListenerSpec extends ObjectBehavior
 {
     function let(
         ProductVariantRepositoryInterface $productVariantRepository,

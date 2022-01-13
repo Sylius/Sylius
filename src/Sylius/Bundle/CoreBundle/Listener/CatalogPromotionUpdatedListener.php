@@ -18,7 +18,7 @@ use Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-final class CatalogPromotionUpdateListener
+final class CatalogPromotionUpdatedListener
 {
     private AllCatalogPromotionsProcessorInterface $catalogPromotionsProcessor;
 
