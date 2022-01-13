@@ -16,14 +16,12 @@ namespace spec\Sylius\Bundle\CoreBundle\Listener;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
-use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-final class CatalogPromotionUpdateListenerSpec extends ObjectBehavior
+final class CatalogPromotionUpdatedListenerSpec extends ObjectBehavior
 {
     function let(
         AllCatalogPromotionsProcessorInterface $catalogPromotionReprocessor,

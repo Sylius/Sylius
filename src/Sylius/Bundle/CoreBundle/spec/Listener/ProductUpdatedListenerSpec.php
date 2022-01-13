@@ -21,7 +21,7 @@ use Sylius\Component\Core\Event\ProductUpdated;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 
-final class ProductUpdateListenerSpec extends ObjectBehavior
+final class ProductUpdatedListenerSpec extends ObjectBehavior
 {
     function let(
         ProductRepositoryInterface $productRepository,

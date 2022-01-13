@@ -116,7 +116,7 @@
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Listener\CatalogPromotionUpdateListener">
+        <service id="Sylius\Bundle\CoreBundle\Listener\CatalogPromotionUpdatedListener">
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface" />
             <argument type="service" id="sylius.repository.catalog_promotion" />
             <argument type="service" id="doctrine.orm.entity_manager" />
@@ -139,14 +139,14 @@
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Listener\ProductUpdateListener">
+        <service id="Sylius\Bundle\CoreBundle\Listener\ProductUpdatedListener">
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\ProductCatalogPromotionsProcessorInterface" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Listener\ProductVariantUpdateListener">
+        <service id="Sylius\Bundle\CoreBundle\Listener\ProductVariantUpdatedListener">
             <argument type="service" id="sylius.repository.product_variant" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\ProductVariantCatalogPromotionsProcessorInterface" />
             <argument type="service" id="doctrine.orm.entity_manager" />
