@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
@@ -32,12 +31,8 @@ final class SyliusApiExtension extends Extension
 
         $loader->load('services.xml');
 
-        if ($container->hasParameter('enable_swagger') && $container->getParameter('enable_swagger')) {
+        if ($container->hasParameter('api_platform.enable_swagger_ui') && $container->getParameter('api_platform.enable_swagger_ui')) {
             $loader->load('integrations/swagger.xml');
-        }
-
-        if (class_exists(\ApiPlatform\Core\OpenApi\OpenApi::class)) {
-            $loader->load('integrations/openapi.xml');
         }
     }
 }
