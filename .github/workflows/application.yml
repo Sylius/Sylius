@@ -31,7 +31,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["7.4", "8.0"]
+                php: ["7.4", "8.0", "8.1"]
                 symfony: ["^4.4", "5.2.*", "5.3.*", "5.4.*"]
 
         steps:
