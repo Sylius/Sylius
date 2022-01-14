@@ -48,7 +48,7 @@ final class CatalogPromotionActionType extends AbstractResourceType
 
         $builder
             ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event): void {
-               $this->addTypeToForm($event);
+               $this->addConfigurationTypeToForm($event);
             })
             ->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event): void {
                 /** @var array|null $data */
@@ -80,9 +80,6 @@ final class CatalogPromotionActionType extends AbstractResourceType
                     'label' => false,
                 ]);
             })
-            ->addEventListener(FormEvents::SUBMIT, function(FormEvent $event): void {
-                $this->addTypeToForm($event);
-            })
         ;
     }
 
@@ -91,7 +88,8 @@ final class CatalogPromotionActionType extends AbstractResourceType
         return 'sylius_catalog_promotion_action';
     }
 
-    private function addTypeToForm(FormEvent $event): void {
+    private function addConfigurationTypeToForm(FormEvent $event): void
+    {
         /** @var CatalogPromotionActionInterface|null $data */
         $data = $event->getData();
         if ($data === null) {
