@@ -253,6 +253,10 @@ And define the translation for our new action type:
                 action:
                     fixed_price: 'Fixed price'
 
+.. note::
+    There is a need to define translation key in the proper format for every catalog promotion action as they are used in form types
+    to properly display different actions. The required type is: ``sylius.form.catalog_promotion.action.TYPE`` where ``TYPE`` is the catalog promotion action type.
+
 Prepare an action template for show page of catalog promotion
 -------------------------------------------------------------
 
