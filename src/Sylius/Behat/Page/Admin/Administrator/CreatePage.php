@@ -42,12 +42,18 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getElement('locale_code')->selectOption($localeCode);
     }
 
+    public function specifyTimezone(string $timezone): void
+    {
+        $this->getElement('timezone')->selectOption($timezone);
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'email' => '#sylius_admin_user_email',
             'enabled' => '#sylius_admin_user_enabled',
             'locale_code' => '#sylius_admin_user_localeCode',
+            'timezone' => '#sylius_admin_user_timezone',
             'name' => '#sylius_admin_user_username',
             'password' => '#sylius_admin_user_plainPassword',
         ]);

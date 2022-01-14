@@ -213,6 +213,22 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @When I specify its timezone as :timezone
+     */
+    public function iSpecifyItsTimezoneAs(string $timezone): void
+    {
+        $this->createPage->specifyTimezone($timezone);
+    }
+
+    /**
+     * @When I choose :timezone as my timezone
+     */
+    public function iChooseAsMyTimezone(string $timezone): void
+    {
+        $this->updatePage->changeTimezone($timezone);
+    }
+
+    /**
      * @Then the administrator :email should appear in the store
      * @Then I should see the administrator :email in the list
      * @Then there should still be only one administrator with an email :email
@@ -343,6 +359,16 @@ final class ManagingAdministratorsContext implements Context
 
         Assert::false($this->topBarElement->hasAvatarInMainBar($avatarPath));
         Assert::true($this->topBarElement->hasDefaultAvatarInMainBar());
+    }
+
+    /**
+     * @Then I should have my :timezone as my timezone
+     */
+    public function iShouldHaveTimezoneAsMyTimezone(string $timezone): void
+    {
+        Assert::same(
+            $this->updatePage->getTimezone(), $timezone
+        );
     }
 
     private function getAdministrator(AdminUserInterface $administrator): AdminUserInterface

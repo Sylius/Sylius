@@ -26,4 +26,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function specifyPassword(string $password): void;
 
     public function specifyLocale(string $localeCode): void;
+
+    public function specifyTimezone(string $timezone): void;
 }

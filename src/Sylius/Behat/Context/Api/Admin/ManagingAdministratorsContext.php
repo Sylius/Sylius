@@ -183,6 +183,22 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @When I specify its timezone as :timezone
+     */
+    public function iSpecifyItsTimezoneAs(string $timezone): void
+    {
+        $this->client->addRequestData('timezone', $timezone);
+    }
+
+    /**
+     * @When I choose :timezone as my timezone
+     */
+    public function iChooseAsMyTimezone(string $timezone): void
+    {
+        $this->client->addRequestData('timezone', $timezone);
+    }
+
+    /**
      * @Then I should see a single administrator in the list
      * @Then there should be :count administrators in the list
      */
@@ -365,5 +381,17 @@ final class ManagingAdministratorsContext implements Context
     public function iShouldSeeTheAvatarImageInTheTopBarNextToMyName(string $avatar): void
     {
         // intentionally left blank, as it is ui step
+    }
+
+    /**
+     * @Then I should have my :timezone as my timezone
+     */
+    public function iShouldHaveMyAsMyTimezone(string $timezone): void
+    {
+        $response = $this->client->getLastResponse();
+
+        Assert::true(
+            $this->responseChecker->hasValue($response, 'timezone', $timezone)
+        );
     }
 }

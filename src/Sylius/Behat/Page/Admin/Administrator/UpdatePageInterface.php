@@ -30,4 +30,8 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function removeAvatar(): void;
 
     public function hasAvatar(string $avatarPath): bool;
+
+    public function changeTimezone(string $timezone): void;
+
+    public function getTimezone(): string;
 }
