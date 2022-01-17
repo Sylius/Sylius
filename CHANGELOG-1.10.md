@@ -1,5 +1,26 @@
 # CHANGELOG FOR `1.10.X`
 
+## v1.10.8 (2022-01-17)
+
+#### Details
+
+- [#12549](https://github.com/Sylius/Sylius/issues/12549) [Product Variant] Price Calculator fixed to return always int ([@lruozzi9](https://github.com/lruozzi9))
+- [#12759](https://github.com/Sylius/Sylius/issues/12759) Use phpspec ^7.1 and avoid custom error reporting level in its configuration ([@pamil](https://github.com/pamil))
+- [#13214](https://github.com/Sylius/Sylius/issues/13214) Replace `json_array` with `json` type as requested by the deprecation ([@Prometee](https://github.com/Prometee))
+- [#13366](https://github.com/Sylius/Sylius/issues/13366) [Docs] Add missing references in CONFLICT.md ([@lchrusciel](https://github.com/lchrusciel))
+- [#13379](https://github.com/Sylius/Sylius/issues/13379) [Bug][Migrations] Add missing `mysql` check for our migrations to ensure proper syntax is available ([@lchrusciel](https://github.com/lchrusciel))
+- [#13392](https://github.com/Sylius/Sylius/issues/13392) [Minor] Update possible branch version in GitHub PR template ([@lchrusciel](https://github.com/lchrusciel))
+- [#13405](https://github.com/Sylius/Sylius/issues/13405) Class name typo ([@TheDevilOnLine](https://github.com/TheDevilOnLine))
+- [#13426](https://github.com/Sylius/Sylius/issues/13426) Architecture tests initialization  ([@Zales0123](https://github.com/Zales0123))
+- [#13428](https://github.com/Sylius/Sylius/issues/13428) Symfony2 is no more 💃 ([@Zales0123](https://github.com/Zales0123))
+- [#13430](https://github.com/Sylius/Sylius/issues/13430) [Maintenance] Do not skip auto-configuration tests ([@lchrusciel](https://github.com/lchrusciel))
+- [#13435](https://github.com/Sylius/Sylius/issues/13435) [Behat] [Taxons] Fixed issue with asserting Taxons ([@TheDevilOnLine](https://github.com/TheDevilOnLine))
+- [#13439](https://github.com/Sylius/Sylius/issues/13439) Recalculate cart on remove item ([@SirDomin](https://github.com/SirDomin))
+- [#13454](https://github.com/Sylius/Sylius/issues/13454) Using phparkitect github actions ([@AlessandroMinoccheri](https://github.com/AlessandroMinoccheri))
+- [#13455](https://github.com/Sylius/Sylius/issues/13455) Delay 1.11 one more time ([@Zales0123](https://github.com/Zales0123))
+- [#13459](https://github.com/Sylius/Sylius/issues/13459) [API] Bring back SwaggerUI overriding ([@lchrusciel](https://github.com/lchrusciel))
+- [#13490](https://github.com/Sylius/Sylius/issues/13490) Unify latest CHANGELOGs format with the previous ones ([@Zales0123](https://github.com/Zales0123))
+
 ## v1.10.7 (2021-12-09)
 
 #### Details
