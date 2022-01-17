@@ -30,7 +30,24 @@ final class ShippingMethodsTest extends JsonApiTestCase
     use ShopUserLoginTrait;
 
     /** @test */
-    public function it_gets_available_order_shipping_methods(): void
+    public function it_gets_all_available_shipping_methods_by_default_in_given_channel(): void // Cover case of shipping methods in other channel
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml']);
+
+        $this->client->request(
+            'GET',
+            '/api/v2/shop/shipping-methods',
+            [],
+            [],
+            self::CONTENT_TYPE_HEADER
+        );
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/get_shipping_methods_response', Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function it_gets_shipping_methods_available_for_given_shipment_and_order(): void
     {
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml']);
 
@@ -43,7 +60,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
 
         $this->client->request(
             'GET',
-            sprintf('/api/v2/shop/orders/nAWw2jewpA/shipments/%s/methods', $orderResponse['shipments'][0]['id']),
+            sprintf('/api/v2/shop/shipping-methods?shipmentId=%s&tokenValue=%s', $orderResponse['shipments'][0]['id'], $tokenValue),
             [],
             [],
             self::CONTENT_TYPE_HEADER
