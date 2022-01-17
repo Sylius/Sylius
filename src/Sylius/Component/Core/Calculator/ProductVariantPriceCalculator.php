@@ -25,16 +25,8 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
 
         $channelPricing = $productVariant->getChannelPricingForChannel($context['channel']);
 
-        if (null === $channelPricing) {
-            $message = sprintf('Channel %s has no price defined for product variant', $context['channel']->getName());
-
-            if ($productVariant->getName() !== null) {
-                $message .= sprintf(' %s (%s)', $productVariant->getName(), $productVariant->getCode());
-            } else {
-                $message .= sprintf(' with code %s', $productVariant->getCode());
-            }
-
-            throw new MissingChannelConfigurationException($message);
+        if (null === $channelPricing || $channelPricing->getPrice() === null) {
+            throw MissingChannelConfigurationException::createForProductVariantChannelPricing($productVariant, $context['channel']);
         }
 
         return $channelPricing->getPrice();
@@ -50,17 +42,17 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
         $channelPricing = $productVariant->getChannelPricingForChannel($context['channel']);
 
         if (null === $channelPricing) {
-            throw new MissingChannelConfigurationException(sprintf(
-                'Channel %s has no price defined for product variant %s',
-                $context['channel']->getName(),
-                $productVariant->getName()
-            ));
+            throw MissingChannelConfigurationException::createForProductVariantChannelPricing($productVariant, $context['channel']);
         }
 
-        if (null === $channelPricing->getOriginalPrice()) {
+        if (null !== $channelPricing->getOriginalPrice()) {
+            return $channelPricing->getOriginalPrice();
+        }
+
+        if ($channelPricing->getPrice() !== null) {
             return $channelPricing->getPrice();
         }
 
-        return $channelPricing->getOriginalPrice();
+        throw MissingChannelConfigurationException::createForProductVariantChannelPricing($productVariant, $context['channel']);
     }
 }
