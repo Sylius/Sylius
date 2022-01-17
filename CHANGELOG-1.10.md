@@ -1,11 +1,16 @@
 # CHANGELOG FOR `1.10.X`
 
 ## v1.10.7 (2021-12-09)
+
+#### Details
+
 - [#13365](https://github.com/Sylius/Sylius/issues/13365) Let's not release Sylius 1.11 on Sunday ([@Zales0123](https://github.com/Zales0123))
 - [#13372](https://github.com/Sylius/Sylius/issues/13372) Remove ORM 2.10 conflict ([@mbabker](https://github.com/mbabker))
 - [#13373](https://github.com/Sylius/Sylius/issues/13373) Revert "Move "polishsymfonycommunity/symfony-mocker-container" into dev dependencies" due to the BC break ([@lchrusciel](https://github.com/lchrusciel))
 
 ## v1.10.6 (2021-12-07)
+
+#### Details
 
 - [#11751](https://github.com/Sylius/Sylius/issues/11751) [Core] added default factory for avatar image ([@foxou33](https://github.com/foxou33), [@lchrusciel](https://github.com/lchrusciel))
 - [#13118](https://github.com/Sylius/Sylius/issues/13118) Move "polishsymfonycommunity/symfony-mocker-container" into dev dependencies ([@stloyd](https://github.com/stloyd))
@@ -21,6 +26,8 @@
 - [#13360](https://github.com/Sylius/Sylius/issues/13360) Minimize number of build for packages ([@Zales0123](https://github.com/Zales0123))
 
 ## v1.10.5 (2021-11-03)
+
+#### Details
 
 - [#13162](https://github.com/Sylius/Sylius/issues/13162) [docs] typofixes ([@nexxai](https://github.com/nexxai))
 - [#13165](https://github.com/Sylius/Sylius/issues/13165) [HotFix] Add conflict to doctrine/orm to fix the problem with creating taxons ([@GSadee](https://github.com/GSadee))
