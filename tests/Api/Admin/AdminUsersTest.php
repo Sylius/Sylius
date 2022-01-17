@@ -13,13 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
-use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 final class AdminUsersTest extends JsonApiTestCase
 {
+    use AdminUserLoginTrait;
+
     /** @test */
     public function it_allows_admin_users_to_log_in(): void
     {
@@ -40,5 +42,43 @@ final class AdminUsersTest extends JsonApiTestCase
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'admin/log_in_admin_response', Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function it_allows_admin_user_to_change_timezone(): void
+    {
+        $adminUser = $this->loadFixturesAndGetAdminUser();
+        $header = $this->getLoggedHeader();
+
+        $this->client->request(
+            'PUT',
+            sprintf('/api/v2/admin/administrators/%s', $adminUser->getId()),
+            [],
+            [],
+            $header,
+            json_encode([
+                'timezone' => 'Europe/Paris'
+            ])
+        );
+
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'admin/administrators/change_timezone_admin_response', Response::HTTP_OK);
+    }
+
+    private function loadFixturesAndGetAdminUser(): AdminUserInterface
+    {
+        $fixtures = $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+
+        return $fixtures['admin'];
+    }
+
+    private function getLoggedHeader(): array
+    {
+        $token = $this->logInAdminUser('api@example.com');
+        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
+
+        return array_merge($header, self::CONTENT_TYPE_HEADER);
     }
 }
