@@ -37,5 +37,5 @@ interface AdminUserInterface extends BaseUserInterface, ImageAwareInterface
 
     public function getTimezone(): ?string;
 
-    public function setTimezone(): void;
+    public function setTimezone(?string $timezone): void;
 }
