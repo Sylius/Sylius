@@ -76,20 +76,11 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
             return false;
         }
 
-        $subresourceIdentifiers = $context['subresource_identifiers'] ?? null;
-
-        return
-            $data instanceof ShippingMethodInterface &&
-            $this->isNotAdminGetOperation($context) &&
-            (
-                isset($subresourceIdentifiers['tokenValue'], $subresourceIdentifiers['shipments']) ||
-                isset($subresourceIdentifiers['id'])
-            )
-        ;
+        return $data instanceof ShippingMethodInterface && $this->isShopGetCollectionOperation($context);
     }
 
-    private function isNotAdminGetOperation(array $context): bool
+    private function isShopGetCollectionOperation(array $context): bool
     {
-        return !isset($context['item_operation_name']) || !($context['item_operation_name'] === 'admin_get');
+        return isset($context['collection_operation_name']) && \str_starts_with($context['collection_operation_name'], 'shop');
     }
 }

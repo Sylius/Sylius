@@ -27,6 +27,7 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
+use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
@@ -35,35 +36,45 @@ use Webmozart\Assert\Assert;
 final class CartShippingMethodsCollectionDataProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
 {
     private OrderRepositoryInterface $orderRepository;
+
     private ShipmentRepositoryInterface $shipmentRepository;
+
+    private ShippingMethodRepositoryInterface $shippingMethodsRepository;
+
     private ShippingMethodsResolverInterface $shippingMethodsResolver;
-    private RouterInterface $router;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         ShipmentRepositoryInterface $shipmentRepository,
-        ShippingMethodsResolverInterface $shippingMethodsResolver,
-        RouterInterface $router
+        ShippingMethodRepositoryInterface $shippingMethodsRepository,
+        ShippingMethodsResolverInterface $shippingMethodsResolver
     ) {
         $this->orderRepository = $orderRepository;
         $this->shipmentRepository = $shipmentRepository;
+        $this->shippingMethodsRepository = $shippingMethodsRepository;
         $this->shippingMethodsResolver = $shippingMethodsResolver;
-        $this->router = $router;
     }
 
     public function getCollection(string $resourceClass, string $operationName = null, array $context = []): array
     {
-        $parameters = $this->router->match($context['request_uri']);
+        if (!isset($context['filters'])) {
+            return $this->shippingMethodsRepository->findAll(); // Find by channel
+        }
+
+        $parameters = $context['filters'];
+
+        Assert::keyExists($context['filters'], 'tokenValue');
+        Assert::keyExists($context['filters'], 'shipmentId');
 
         /** @var OrderInterface|null $cart */
-        $cart = $this->orderRepository->findCartByTokenValue($parameters['tokenValue']);
-        Assert::notNull($cart);
+        $cart = $this->orderRepository->findCartByTokenValue($parameters['tokenValue']); // Search for cart by token & user is null || cart by token & user
+        Assert::notNull($cart); // return empty array if cart not found
 
         /** @var ShipmentInterface $shipment */
-        $shipment = $this->shipmentRepository->find($parameters['shipments']);
-        Assert::notNull($shipment);
+        $shipment = $this->shipmentRepository->find($parameters['shipmentId']);  // Search for shipment by cart and shipment id
+        Assert::notNull($shipment);  // return empty array if shipment not found
 
-        Assert::true($cart->hasShipment($shipment), 'Shipment doesn\'t match for order');
+        Assert::true($cart->hasShipment($shipment), 'Shipment doesn\'t match for order'); // won't be needed
 
         return $this->shippingMethodsResolver->getSupportedMethods($shipment);
     }
