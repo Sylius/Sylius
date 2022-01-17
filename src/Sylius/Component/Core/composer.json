@@ -29,7 +29,7 @@
         "php": "^8.0",
         "knplabs/gaufrette": "^0.8",
         "payum/payum": "^1.6",
-        "php-http/guzzle6-adapter": "^2.0",
+        "php-http/guzzle7-adapter": "^1.0",
         "sylius/addressing": "^1.6",
         "sylius/attribute": "^1.6",
         "sylius/channel": "^1.6",
