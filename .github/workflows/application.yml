@@ -116,7 +116,11 @@ jobs:
             
             -
                 name: Run ComposerRequireChecker
-                run: composer-require-checker check --config-file=composer-require-checker.json
+                run: |
+                    (cat composer.json | jq '.["autoload-dev"]["psr-4"] |= . + {"Sylius\\Behat\\": "src/Sylius/Behat/"}' | jq 'del(.autoload["psr-4"]["Sylius\\Behat\\"])') > _composer.json
+                    mv _composer.json composer.json
+                    composer dump-autoload
+                    composer-require-checker check --config-file=composer-require-checker.json
                 if: always() && steps.end-of-setup.outcome == 'success'
 
     architecture-tests:
