@@ -23,10 +23,35 @@ Before you start make sure that you have:
 #. `Sylius/InvoicingPlugin <https://github.com/Sylius/InvoicingPlugin/>`_ installed.
 #. `Wkhtmltopdf <https://wkhtmltopdf.org/>`_ package installed, because most of pdf generation is done with it.
 
+How to change the logo in the Invoice?
+----------------------------------------
+
+In order to change the logo on the invoice, set up the ``SYLIUS_INVOICING_LOGO_FILE`` environment variable.
+
+Example custom configuration:
+
+.. code-block:: text
+
+    SYLIUS_INVOICING_LOGO_FILE=%kernel.project_dir%/assets/custom-logo.png
+
+Make sure to clear the cache each time the configuration is changed.
+
+If you have a permission issue when generating an invoice, you may also need to update the ``config/packages/knp_snappy.yaml`` configuration file:
+
+.. code-block:: yaml
+
+    knp_snappy:
+        pdf:
+            options:
+                allow: '%env(resolve:SYLIUS_INVOICING_LOGO_FILE)%'
+
+
+.. image:: ../../_images/cookbook/custom-invoice/pdf_with_custom_logo.png
+
 How to customize the invoice appearance?
 ----------------------------------------
 
-There might be need to change how the invoices look like, f.e. shop is using its own logo, there might be some colours changed
+There might be need to change how the invoices look like, f.e. there might be different logo dimension, some colours changed
 on the tables, or maybe the order of fields might be changed.
 
 First let's prepare the HTML's so we can modify them. This command will copy only the PDF template:
