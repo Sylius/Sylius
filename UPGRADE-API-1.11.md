@@ -369,6 +369,8 @@
     * `Sylius\Bundle\ApiBundle\DataProvider\LocaleCollectionDataProvider` => `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\LocaleCollectionExtension`
     * `Sylius\Bundle\ApiBundle\DataProvider\TaxonCollectionDataProvider` => `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\TaxonCollectionExtension`
 
+1. The `\Sylius\Bundle\ApiBundle\Filter\TaxonFilter` service has been moved and renamed to `\Sylius\Bundle\ApiBundle\Doctrine\Filter\TaxonFilter`
+
 1. `Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart` and `Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder` commands have been replaced with `Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart`.
 
 1. `Sylius\Bundle\ApiBundle\CommandHandler\Cart\ApplyCouponToCartHandler` and `Sylius\Bundle\ApiBundle\CommandHandler\Checkout\AddressOrderHandler` command handlers have been replaced with `Sylius\Bundle\ApiBundle\CommandHandler\Checkout\UpdateCartHandler`.

@@ -46,7 +46,7 @@
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
                     <attribute>Sylius\Bundle\ApiBundle\Doctrine\Filter\ProductPriceOrderFilter</attribute>
                     <attribute>Sylius\Bundle\ApiBundle\Doctrine\Filter\TranslationOrderNameAndLocaleFilter</attribute>
-                    <attribute>Sylius\Bundle\ApiBundle\Filter\TaxonFilter</attribute>
+                    <attribute>Sylius\Bundle\ApiBundle\Doctrine\Filter\TaxonFilter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:product:read</attribute>
