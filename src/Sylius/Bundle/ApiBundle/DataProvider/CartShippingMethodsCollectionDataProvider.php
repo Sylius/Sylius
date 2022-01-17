@@ -81,6 +81,6 @@ final class CartShippingMethodsCollectionDataProvider implements ContextAwareCol
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
-        return is_a($resourceClass, ShippingMethodInterface::class, true);
+        return is_a($resourceClass, ShippingMethodInterface::class, true); // only for shop context
     }
 }
