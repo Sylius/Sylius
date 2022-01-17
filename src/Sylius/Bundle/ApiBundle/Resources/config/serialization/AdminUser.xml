@@ -53,6 +53,11 @@
             <group>admin:admin_user:create</group>
             <group>admin:admin_user:update</group>
         </attribute>
+        <attribute name="timezone">
+            <group>admin:admin_user:read</group>
+            <group>admin:admin_user:create</group>
+            <group>admin:admin_user:update</group>
+        </attribute>
         <attribute name="avatar">
             <group>admin:admin_user:read</group>
         </attribute>

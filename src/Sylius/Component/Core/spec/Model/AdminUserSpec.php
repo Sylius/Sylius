@@ -68,4 +68,11 @@ class AdminUserSpec extends ObjectBehavior
         $this->setAvatar($image);
         $this->getAvatar()->shouldReturn($image);
     }
+
+    function it_has_mutable_timezone(): void
+    {
+        $this->getTimezone()->shouldReturn(null);
+        $this->setTimezone('Europe/Warsaw');
+        $this->getTimezone()->shouldReturn('Europe/Warsaw');
+    }
 }

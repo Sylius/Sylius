@@ -37,6 +37,8 @@ class AdminUser extends User implements AdminUserInterface
      */
     protected $avatar;
 
+    protected ?string $timezone = null;
+
     public function __construct()
     {
         parent::__construct();
@@ -93,5 +95,15 @@ class AdminUser extends User implements AdminUserInterface
     public function setAvatar(?ImageInterface $avatar): void
     {
         $this->setImage($avatar);
+    }
+
+    public function getTimezone(): ?string
+    {
+        return $this->timezone;
+    }
+
+    public function setTimezone(?string $timezone): void
+    {
+        $this->timezone = $timezone;
     }
 }

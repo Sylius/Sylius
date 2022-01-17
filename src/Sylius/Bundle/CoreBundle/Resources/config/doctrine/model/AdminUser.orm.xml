@@ -20,6 +20,7 @@
         <field name="firstName" column="first_name" type="string" nullable="true" />
         <field name="lastName" column="last_name" type="string" nullable="true" />
         <field name="localeCode" column="locale_code" type="string" length="12" />
+        <field name="timezone" type="string" nullable="true" />
 
         <one-to-one field="avatar" target-entity="Sylius\Component\Core\Model\AvatarImageInterface" mapped-by="owner" orphan-removal="true">
             <cascade>

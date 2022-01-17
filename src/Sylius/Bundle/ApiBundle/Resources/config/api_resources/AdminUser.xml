@@ -68,6 +68,7 @@
         <property name="firstName" />
         <property name="lastName" />
         <property name="localeCode" />
+        <property name="timezone" />
         <property name="avatar" writable="true" />
         <property name="updatedAt" writable="false" />
         <property name="verifiedAt" writable="false" />
