@@ -12,4 +12,4 @@ Feature: Changing a timezone for administrator
         Given I am editing my details
         When I choose "Europe/Warsaw" as my timezone
         And I save my changes
-        Then I should have my "Europe/Warsaw" as my timezone
+        Then I should have "Europe/Warsaw" as my timezone

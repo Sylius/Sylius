@@ -63,7 +63,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getElement('timezone')->selectOption($timezone);
     }
 
-    public function getTimezone(): string
+    public function getTimezone(): ?string
     {
         return $this->getElement('timezone')->getValue();
     }
@@ -75,9 +75,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'email' => '#sylius_admin_user_email',
             'enabled' => '#sylius_admin_user_enabled',
             'locale_code' => '#sylius_admin_user_localeCode',
-            'timezone' => '#sylius_admin_user_timezone',
             'password' => '#sylius_admin_user_plainPassword',
             'remove_avatar' => '.ui.icon.red.labeled.button',
+            'timezone' => '#sylius_admin_user_timezone',
             'username' => '#sylius_admin_user_username',
         ]);
     }

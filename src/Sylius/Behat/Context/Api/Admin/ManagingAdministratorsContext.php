@@ -384,14 +384,15 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @Then I should have my :timezone as my timezone
+     * @Then I should have :timezone as my timezone
      */
     public function iShouldHaveMyAsMyTimezone(string $timezone): void
     {
         $response = $this->client->getLastResponse();
 
         Assert::true(
-            $this->responseChecker->hasValue($response, 'timezone', $timezone)
+            $this->responseChecker->hasValue($response, 'timezone', $timezone),
+            sprintf('Administrator does not have expected %s timezone', $timezone)
         );
     }
 }

@@ -145,10 +145,11 @@ sylius:
             enabled: Enabled
             first_name: First name
             groups: Groups
-            roles: Roles
             last_name: Last name
             password: Password
+            roles: Roles
             shipping_address: Shipping address
+            timezone: Timezone
         user_filter:
             query: Search
         variant:

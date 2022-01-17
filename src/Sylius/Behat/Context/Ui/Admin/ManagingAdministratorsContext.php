@@ -21,6 +21,7 @@ use Sylius\Behat\Page\Admin\Administrator\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\AdminUser;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -362,13 +363,13 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @Then I should have my :timezone as my timezone
+     * @Then /^(I) should have "([^"]+)" as my timezone$/
      */
-    public function iShouldHaveTimezoneAsMyTimezone(string $timezone): void
+    public function iShouldHaveTimezoneAsMyTimezone(AdminUserInterface $adminUser, string $timezone): void
     {
-        Assert::same(
-            $this->updatePage->getTimezone(), $timezone
-        );
+        $this->updatePage->open(['id' => $adminUser->getId()]);
+
+        Assert::same($this->updatePage->getTimezone(), $timezone);
     }
 
     private function getAdministrator(AdminUserInterface $administrator): AdminUserInterface

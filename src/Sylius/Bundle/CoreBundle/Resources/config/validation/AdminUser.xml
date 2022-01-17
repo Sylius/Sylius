@@ -51,5 +51,8 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="timezone">
+            <constraint name="Timezone"/>
+        </property>
     </class>
 </constraint-mapping>

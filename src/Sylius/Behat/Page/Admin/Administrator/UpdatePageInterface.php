@@ -33,5 +33,5 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function changeTimezone(string $timezone): void;
 
-    public function getTimezone(): string;
+    public function getTimezone(): ?string;
 }

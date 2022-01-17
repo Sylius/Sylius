@@ -16,7 +16,9 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\User;
 use Sylius\Bundle\UserBundle\Form\Type\UserType;
 use Symfony\Component\Form\Extension\Core\Type\LocaleType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Timezone;
 
 final class AdminUserType extends UserType
 {
@@ -43,6 +45,10 @@ final class AdminUserType extends UserType
                 'label' => 'sylius.form.user.last_name',
             ])
             ->add('localeCode', LocaleType::class, $this->provideLocaleCodeOptions())
+            ->add('timezone', TimezoneType::class, [
+                'label' => 'sylius.form.user.timezone',
+                'required' => false,
+            ])
             ->add('avatar', AvatarImageType::class, [
                 'label' => 'sylius.ui.avatar',
                 'required' => false,
