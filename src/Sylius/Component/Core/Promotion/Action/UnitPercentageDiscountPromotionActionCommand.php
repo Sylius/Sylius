@@ -25,23 +25,13 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
 {
     public const TYPE = 'unit_percentage_discount';
 
-    private FilterInterface $priceRangeFilter;
-
-    private FilterInterface $taxonFilter;
-
-    private FilterInterface $productFilter;
-
     public function __construct(
         FactoryInterface $adjustmentFactory,
-        FilterInterface $priceRangeFilter,
-        FilterInterface $taxonFilter,
-        FilterInterface $productFilter
+        private FilterInterface $priceRangeFilter,
+        private FilterInterface $taxonFilter,
+        private FilterInterface $productFilter
     ) {
         parent::__construct($adjustmentFactory);
-
-        $this->priceRangeFilter = $priceRangeFilter;
-        $this->taxonFilter = $taxonFilter;
-        $this->productFilter = $productFilter;
     }
 
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool

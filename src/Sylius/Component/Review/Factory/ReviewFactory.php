@@ -20,11 +20,8 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 final class ReviewFactory implements ReviewFactoryInterface
 {
-    private FactoryInterface $factory;
-
-    public function __construct(FactoryInterface $factory)
+    public function __construct(private FactoryInterface $factory)
     {
-        $this->factory = $factory;
     }
 
     public function createNew(): ReviewInterface

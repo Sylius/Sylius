@@ -15,10 +15,7 @@ namespace Sylius\Component\Promotion\Event;
 
 class CatalogPromotionFailed
 {
-    public string $code;
-
-    public function __construct(string $code)
+    public function __construct(public string $code)
     {
-        $this->code = $code;
     }
 }

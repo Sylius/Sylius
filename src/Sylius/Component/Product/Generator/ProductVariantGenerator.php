@@ -22,19 +22,13 @@ use Webmozart\Assert\Assert;
 
 final class ProductVariantGenerator implements ProductVariantGeneratorInterface
 {
-    private ProductVariantFactoryInterface $productVariantFactory;
-
     private CartesianSetBuilder $setBuilder;
 
-    private ProductVariantsParityCheckerInterface $variantsParityChecker;
-
     public function __construct(
-        ProductVariantFactoryInterface $productVariantFactory,
-        ProductVariantsParityCheckerInterface $variantsParityChecker
+        private ProductVariantFactoryInterface $productVariantFactory,
+        private ProductVariantsParityCheckerInterface $variantsParityChecker
     ) {
-        $this->productVariantFactory = $productVariantFactory;
         $this->setBuilder = new CartesianSetBuilder();
-        $this->variantsParityChecker = $variantsParityChecker;
     }
 
     public function generate(ProductInterface $product): void

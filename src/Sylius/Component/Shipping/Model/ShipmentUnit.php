@@ -15,7 +15,7 @@ namespace Sylius\Component\Shipping\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
-class ShipmentUnit implements ShipmentUnitInterface
+class ShipmentUnit implements ShipmentUnitInterface, \Stringable
 {
     use TimestampableTrait;
 
@@ -37,10 +37,7 @@ class ShipmentUnit implements ShipmentUnitInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->getId();
     }

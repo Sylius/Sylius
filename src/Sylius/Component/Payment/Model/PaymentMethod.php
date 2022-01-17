@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
-class PaymentMethod implements PaymentMethodInterface
+class PaymentMethod implements PaymentMethodInterface, \Stringable
 {
     use TimestampableTrait, ToggleableTrait;
     use TranslatableTrait {

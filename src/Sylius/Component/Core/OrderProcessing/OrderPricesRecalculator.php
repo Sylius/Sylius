@@ -21,11 +21,8 @@ use Webmozart\Assert\Assert;
 
 final class OrderPricesRecalculator implements OrderProcessorInterface
 {
-    private ProductVariantPriceCalculatorInterface $productVariantPriceCalculator;
-
-    public function __construct(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
+    public function __construct(private ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
     {
-        $this->productVariantPriceCalculator = $productVariantPriceCalculator;
     }
 
     public function process(BaseOrderInterface $order): void

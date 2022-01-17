@@ -20,11 +20,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class TotalOfItemsFromTaxonRuleUpdater implements TaxonAwareRuleUpdaterInterface
 {
-    private RepositoryInterface $promotionRuleRepository;
-
-    public function __construct(RepositoryInterface $promotionRuleRepository)
+    public function __construct(private RepositoryInterface $promotionRuleRepository)
     {
-        $this->promotionRuleRepository = $promotionRuleRepository;
     }
 
     public function updateAfterDeletingTaxon(TaxonInterface $taxon): array

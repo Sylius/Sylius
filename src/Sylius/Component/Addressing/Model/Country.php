@@ -18,7 +18,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Symfony\Component\Intl\Countries;
 
-class Country implements CountryInterface
+class Country implements CountryInterface, \Stringable
 {
     use ToggleableTrait;
 

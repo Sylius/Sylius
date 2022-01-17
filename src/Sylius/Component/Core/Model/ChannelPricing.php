@@ -16,7 +16,7 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class ChannelPricing implements ChannelPricingInterface
+class ChannelPricing implements ChannelPricingInterface, \Stringable
 {
     /** @var mixed */
     protected $id = null;

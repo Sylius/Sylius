@@ -15,7 +15,7 @@ namespace Sylius\Component\Taxonomy\Model;
 
 use Sylius\Component\Resource\Model\AbstractTranslation;
 
-class TaxonTranslation extends AbstractTranslation implements TaxonTranslationInterface
+class TaxonTranslation extends AbstractTranslation implements TaxonTranslationInterface, \Stringable
 {
     /** @var mixed */
     protected $id;

@@ -37,52 +37,8 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
 
     public const DEFAULT_CHANNEL_NAME = 'United States';
 
-    private RepositoryInterface $channelRepository;
-
-    private RepositoryInterface $countryRepository;
-
-    private RepositoryInterface $currencyRepository;
-
-    private RepositoryInterface $localeRepository;
-
-    private RepositoryInterface $zoneRepository;
-
-    private ChannelFactoryInterface $channelFactory;
-
-    private FactoryInterface $countryFactory;
-
-    private FactoryInterface $currencyFactory;
-
-    private FactoryInterface $localeFactory;
-
-    private ZoneFactoryInterface $zoneFactory;
-
-    private string $defaultLocaleCode;
-
-    public function __construct(
-        RepositoryInterface $channelRepository,
-        RepositoryInterface $countryRepository,
-        RepositoryInterface $currencyRepository,
-        RepositoryInterface $localeRepository,
-        RepositoryInterface $zoneRepository,
-        ChannelFactoryInterface $channelFactory,
-        FactoryInterface $countryFactory,
-        FactoryInterface $currencyFactory,
-        FactoryInterface $localeFactory,
-        ZoneFactoryInterface $zoneFactory,
-        string $defaultLocaleCode
-    ) {
-        $this->channelRepository = $channelRepository;
-        $this->countryRepository = $countryRepository;
-        $this->currencyRepository = $currencyRepository;
-        $this->localeRepository = $localeRepository;
-        $this->zoneRepository = $zoneRepository;
-        $this->channelFactory = $channelFactory;
-        $this->countryFactory = $countryFactory;
-        $this->currencyFactory = $currencyFactory;
-        $this->localeFactory = $localeFactory;
-        $this->zoneFactory = $zoneFactory;
-        $this->defaultLocaleCode = $defaultLocaleCode;
+    public function __construct(private RepositoryInterface $channelRepository, private RepositoryInterface $countryRepository, private RepositoryInterface $currencyRepository, private RepositoryInterface $localeRepository, private RepositoryInterface $zoneRepository, private ChannelFactoryInterface $channelFactory, private FactoryInterface $countryFactory, private FactoryInterface $currencyFactory, private FactoryInterface $localeFactory, private ZoneFactoryInterface $zoneFactory, private string $defaultLocaleCode)
+    {
     }
 
     public function create(?string $code = null, ?string $name = null, ?string $currencyCode = null): array

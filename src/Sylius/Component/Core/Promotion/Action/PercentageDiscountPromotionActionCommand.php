@@ -26,20 +26,8 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
 {
     public const TYPE = 'order_percentage_discount';
 
-    private ProportionalIntegerDistributorInterface $distributor;
-
-    private UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator;
-
-    private ?MinimumPriceDistributorInterface $minimumPriceDistributor;
-
-    public function __construct(
-        ProportionalIntegerDistributorInterface $distributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
-        ?MinimumPriceDistributorInterface $minimumPriceDistributor = null
-    ) {
-        $this->distributor = $distributor;
-        $this->unitsPromotionAdjustmentsApplicator = $unitsPromotionAdjustmentsApplicator;
-        $this->minimumPriceDistributor = $minimumPriceDistributor;
+    public function __construct(private ProportionalIntegerDistributorInterface $distributor, private UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator, private ?\Sylius\Component\Core\Distributor\MinimumPriceDistributorInterface $minimumPriceDistributor = null)
+    {
     }
 
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
@@ -53,7 +41,7 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
 
         try {
             $this->isConfigurationValid($configuration);
-        } catch (\InvalidArgumentException $exception) {
+        } catch (\InvalidArgumentException) {
             return false;
         }
 

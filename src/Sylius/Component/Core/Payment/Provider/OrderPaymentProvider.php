@@ -26,20 +26,8 @@ use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 
 final class OrderPaymentProvider implements OrderPaymentProviderInterface
 {
-    private DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver;
-
-    private PaymentFactoryInterface $paymentFactory;
-
-    private StateMachineFactoryInterface $stateMachineFactory;
-
-    public function __construct(
-        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
-        PaymentFactoryInterface $paymentFactory,
-        StateMachineFactoryInterface $stateMachineFactory
-    ) {
-        $this->defaultPaymentMethodResolver = $defaultPaymentMethodResolver;
-        $this->paymentFactory = $paymentFactory;
-        $this->stateMachineFactory = $stateMachineFactory;
+    public function __construct(private DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver, private PaymentFactoryInterface $paymentFactory, private StateMachineFactoryInterface $stateMachineFactory)
+    {
     }
 
     public function provideOrderPayment(OrderInterface $order, string $targetState): ?PaymentInterface
@@ -80,7 +68,7 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
             $payment->setOrder($order);
 
             return $this->defaultPaymentMethodResolver->getDefaultPaymentMethod($payment);
-        } catch (UnresolvedDefaultPaymentMethodException $exception) {
+        } catch (UnresolvedDefaultPaymentMethodException) {
             return null;
         }
     }

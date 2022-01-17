@@ -15,10 +15,7 @@ namespace Sylius\Component\Core\Event;
 
 class ProductVariantUpdated
 {
-    public string $code;
-
-    public function __construct(string $code)
+    public function __construct(public string $code)
     {
-        $this->code = $code;
     }
 }

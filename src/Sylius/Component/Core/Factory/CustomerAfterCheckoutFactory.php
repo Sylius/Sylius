@@ -19,11 +19,8 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class CustomerAfterCheckoutFactory implements CustomerAfterCheckoutFactoryInterface
 {
-    private FactoryInterface $baseCustomerFactory;
-
-    public function __construct(FactoryInterface $baseCustomerFactory)
+    public function __construct(private FactoryInterface $baseCustomerFactory)
     {
-        $this->baseCustomerFactory = $baseCustomerFactory;
     }
 
     public function createNew(): CustomerInterface

@@ -22,20 +22,8 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
 final class CheckoutStateResolver implements StateResolverInterface
 {
-    private FactoryInterface $stateMachineFactory;
-
-    private OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker;
-
-    private OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker;
-
-    public function __construct(
-        FactoryInterface $stateMachineFactory,
-        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
-        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
-    ) {
-        $this->stateMachineFactory = $stateMachineFactory;
-        $this->orderPaymentMethodSelectionRequirementChecker = $orderPaymentMethodSelectionRequirementChecker;
-        $this->orderShippingMethodSelectionRequirementChecker = $orderShippingMethodSelectionRequirementChecker;
+    public function __construct(private FactoryInterface $stateMachineFactory, private OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker, private OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker)
+    {
     }
 
     public function resolve(OrderInterface $order): void

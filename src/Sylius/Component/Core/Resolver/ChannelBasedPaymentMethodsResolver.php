@@ -21,11 +21,8 @@ use Webmozart\Assert\Assert;
 
 final class ChannelBasedPaymentMethodsResolver implements PaymentMethodsResolverInterface
 {
-    private PaymentMethodRepositoryInterface $paymentMethodRepository;
-
-    public function __construct(PaymentMethodRepositoryInterface $paymentMethodRepository)
+    public function __construct(private PaymentMethodRepositoryInterface $paymentMethodRepository)
     {
-        $this->paymentMethodRepository = $paymentMethodRepository;
     }
 
     public function getSupportedMethods(BasePaymentInterface $payment): array

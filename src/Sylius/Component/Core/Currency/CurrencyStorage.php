@@ -19,11 +19,8 @@ use Sylius\Component\Resource\Storage\StorageInterface;
 
 final class CurrencyStorage implements CurrencyStorageInterface
 {
-    private StorageInterface $storage;
-
-    public function __construct(StorageInterface $storage)
+    public function __construct(private StorageInterface $storage)
     {
-        $this->storage = $storage;
     }
 
     public function set(ChannelInterface $channel, string $currencyCode): void

@@ -15,7 +15,7 @@ namespace Sylius\Component\Shipping\Model;
 
 use Sylius\Component\Resource\Model\AbstractTranslation;
 
-class ShippingMethodTranslation extends AbstractTranslation implements ShippingMethodTranslationInterface
+class ShippingMethodTranslation extends AbstractTranslation implements ShippingMethodTranslationInterface, \Stringable
 {
     /** @var mixed */
     protected $id;

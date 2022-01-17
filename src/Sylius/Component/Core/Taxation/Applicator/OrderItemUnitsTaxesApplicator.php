@@ -24,20 +24,8 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
 {
-    private CalculatorInterface $calculator;
-
-    private AdjustmentFactoryInterface $adjustmentFactory;
-
-    private TaxRateResolverInterface $taxRateResolver;
-
-    public function __construct(
-        CalculatorInterface $calculator,
-        AdjustmentFactoryInterface $adjustmentFactory,
-        TaxRateResolverInterface $taxRateResolver
-    ) {
-        $this->calculator = $calculator;
-        $this->adjustmentFactory = $adjustmentFactory;
-        $this->taxRateResolver = $taxRateResolver;
+    public function __construct(private CalculatorInterface $calculator, private AdjustmentFactoryInterface $adjustmentFactory, private TaxRateResolverInterface $taxRateResolver)
+    {
     }
 
     public function apply(OrderInterface $order, ZoneInterface $zone): void

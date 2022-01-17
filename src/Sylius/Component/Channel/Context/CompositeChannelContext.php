@@ -40,7 +40,7 @@ final class CompositeChannelContext implements ChannelContextInterface
         foreach ($this->channelContexts as $channelContext) {
             try {
                 return $channelContext->getChannel();
-            } catch (ChannelNotFoundException $exception) {
+            } catch (ChannelNotFoundException) {
                 continue;
             }
         }

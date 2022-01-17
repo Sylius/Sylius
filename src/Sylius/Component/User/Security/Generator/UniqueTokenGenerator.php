@@ -19,25 +19,18 @@ use Webmozart\Assert\Assert;
 
 final class UniqueTokenGenerator implements GeneratorInterface
 {
-    private RandomnessGeneratorInterface $generator;
-
-    private UniquenessCheckerInterface $uniquenessChecker;
-
     private int $tokenLength;
 
     /**
      * @throws \InvalidArgumentException
      */
     public function __construct(
-        RandomnessGeneratorInterface $generator,
-        UniquenessCheckerInterface $uniquenessChecker,
+        private RandomnessGeneratorInterface $generator,
+        private UniquenessCheckerInterface $uniquenessChecker,
         int $tokenLength
     ) {
         Assert::greaterThanEq($tokenLength, 1, 'The value of token length has to be at least 1.');
-
-        $this->generator = $generator;
         $this->tokenLength = $tokenLength;
-        $this->uniquenessChecker = $uniquenessChecker;
     }
 
     public function generate(): string

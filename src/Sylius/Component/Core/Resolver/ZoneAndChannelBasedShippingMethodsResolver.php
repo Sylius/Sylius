@@ -25,20 +25,8 @@ use Webmozart\Assert\Assert;
 
 class ZoneAndChannelBasedShippingMethodsResolver implements ShippingMethodsResolverInterface
 {
-    private ShippingMethodRepositoryInterface $shippingMethodRepository;
-
-    private ZoneMatcherInterface $zoneMatcher;
-
-    private ShippingMethodEligibilityCheckerInterface $eligibilityChecker;
-
-    public function __construct(
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ZoneMatcherInterface $zoneMatcher,
-        ShippingMethodEligibilityCheckerInterface $eligibilityChecker
-    ) {
-        $this->shippingMethodRepository = $shippingMethodRepository;
-        $this->zoneMatcher = $zoneMatcher;
-        $this->eligibilityChecker = $eligibilityChecker;
+    public function __construct(private ShippingMethodRepositoryInterface $shippingMethodRepository, private ZoneMatcherInterface $zoneMatcher, private ShippingMethodEligibilityCheckerInterface $eligibilityChecker)
+    {
     }
 
     /**

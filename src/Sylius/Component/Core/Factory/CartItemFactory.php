@@ -21,14 +21,8 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class CartItemFactory implements CartItemFactoryInterface
 {
-    private FactoryInterface $decoratedFactory;
-
-    private ProductVariantResolverInterface $variantResolver;
-
-    public function __construct(FactoryInterface $decoratedFactory, ProductVariantResolverInterface $variantResolver)
+    public function __construct(private FactoryInterface $decoratedFactory, private ProductVariantResolverInterface $variantResolver)
     {
-        $this->decoratedFactory = $decoratedFactory;
-        $this->variantResolver = $variantResolver;
     }
 
     public function createNew(): OrderItemInterface

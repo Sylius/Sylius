@@ -18,7 +18,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 
-class User implements UserInterface
+class User implements UserInterface, \Stringable
 {
     use TimestampableTrait, ToggleableTrait;
 

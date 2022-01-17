@@ -17,23 +17,11 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 class DashboardStatistics
 {
-    private int $totalSales;
-
-    private int $numberOfNewOrders;
-
-    private int $numberOfNewCustomers;
-
-    private ?ChannelInterface $channel;
-
     /**
      * @throws \InvalidArgumentException
      */
-    public function __construct(int $totalSales, int $numberOfNewOrders, int $numberOfNewCustomers, ?ChannelInterface $channel = null)
+    public function __construct(private int $totalSales, private int $numberOfNewOrders, private int $numberOfNewCustomers, private ?\Sylius\Component\Core\Model\ChannelInterface $channel = null)
     {
-        $this->totalSales = $totalSales;
-        $this->numberOfNewOrders = $numberOfNewOrders;
-        $this->numberOfNewCustomers = $numberOfNewCustomers;
-        $this->channel = $channel;
     }
 
     public function getChannel(): ?ChannelInterface
