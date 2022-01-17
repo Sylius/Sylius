@@ -116,7 +116,7 @@ jobs:
             
             -
                 name: Run ComposerRequireChecker
-                run: composer-require-checker check
+                run: composer-require-checker check --config-file=composer-require-checker.json
                 if: always() && steps.end-of-setup.outcome == 'success'
 
     architecture-tests:
