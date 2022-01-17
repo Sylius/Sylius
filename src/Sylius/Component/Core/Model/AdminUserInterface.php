@@ -34,4 +34,8 @@ interface AdminUserInterface extends BaseUserInterface, ImageAwareInterface
     public function getAvatar(): ?ImageInterface;
 
     public function setAvatar(?ImageInterface $avatar);
+
+    public function getTimezone(): ?string;
+
+    public function setTimezone(): void;
 }
