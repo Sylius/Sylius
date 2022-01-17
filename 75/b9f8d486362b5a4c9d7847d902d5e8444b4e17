@@ -1,0 +1,65 @@
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-04T06:55:55Z
+
+Hey @lruozzi9, thank you for your contribution!
+Could you add some [tests ](https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/spec/Calculator/ProductVariantPriceCalculatorSpec.php)to cover these changes?
+
+---------------------------------------------------------------------------
+
+by lruozzi9 at 2022-01-04T08:03:01Z
+
+Sure 👍🏻
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-04T08:32:36Z
+
+@lruozzi9 Great! Thank you!
+WDYT about changing the conditions to `null !== X` and returning early, then throw an exception at the end.
+This will remove some unnecessary nesting...
+Also, the logic to construct the error message is duplicated.
+Maybe extract it to a factory method on the exception class, something like `createForVariant`?
+
+---------------------------------------------------------------------------
+
+by lruozzi9 at 2022-01-04T08:44:09Z
+
+I agree, it is more readable! I will change it.
+
+---------------------------------------------------------------------------
+
+by lruozzi9 at 2022-01-12T08:18:12Z
+
+Hey @vvasiloi! Sorry, I was a little busy these days! I will check your comments!
+
+---------------------------------------------------------------------------
+
+by lruozzi9 at 2022-01-12T10:24:23Z
+
+I have a doubt about the location of the factory exception folder. Perhaps it is more correct to create a Factory folder inside Exception? Or an Exception folder inside Factory?
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-12T12:42:27Z
+
+There's really no right or wrong here, it's all a matter of opinion, especially because there's no precedent for it in Sylius' codebase.
+Let's have the factory in the same namespace as the exception class, that's what I saw others practice and it seems convenient.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-12T12:55:21Z
+
+On the other hand, we only have one case and I don't it changing anytime soon,  so maybe it's better to just put the factory method inside the exception class.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-12T13:44:31Z
+
+@lruozzi9 I just noticed that you target branch 1.8 🤦‍♂️. Can you rebase your branch and change the target to 1.10?
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-01-17T07:22:21Z
+
+Thanks, Lorenzo! :tada:
