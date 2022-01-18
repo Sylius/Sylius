@@ -102,7 +102,25 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         $catalogPromotion->getActions()->willReturn(new ArrayCollection([$catalogPromotionAction->getWrappedObject()]));
         $catalogPromotion->getChannels()->willReturn(new ArrayCollection([$channel->getWrappedObject()]));
 
+        $actionBasedDiscountApplicator->applyDiscountOnChannelPricing($catalogPromotion, $catalogPromotionAction, $channelPricing)->shouldNotBeCalled();
+        $this->applyOnChannelPricing($channelPricing, $catalogPromotion);
+    }
+
+    function it_does_not_apply_percentage_discount_on_channel_pricing_if_channel_does_not_exist(
+        CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionActionInterface $catalogPromotionAction,
+        ChannelPricingInterface $channelPricing,
+        ChannelInterface $channel,
+        ChannelRepositoryInterface $channelRepository,
+        ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator
+    ): void {
         $channelPricing->getChannelCode()->willReturn('MOBILE');
+        $channelRepository->findOneByCode('MOBILE')->willReturn(null);
+
+        $catalogPromotion->hasChannel(null)->shouldNotBeCalled();
+
+        $catalogPromotion->getActions()->willReturn(new ArrayCollection([$catalogPromotionAction->getWrappedObject()]));
+        $catalogPromotion->getChannels()->willReturn(new ArrayCollection([$channel->getWrappedObject()]));
 
         $actionBasedDiscountApplicator->applyDiscountOnChannelPricing($catalogPromotion, $catalogPromotionAction, $channelPricing)->shouldNotBeCalled();
         $this->applyOnChannelPricing($channelPricing, $catalogPromotion);

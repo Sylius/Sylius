@@ -45,7 +45,7 @@ final class ActionBasedDiscountApplicator implements ActionBasedDiscountApplicat
             return;
         }
 
-        if ($channelPricing->getOriginalPrice() === null) {
+        if (null === $channelPricing->getOriginalPrice()) {
             $channelPricing->setOriginalPrice($channelPricing->getPrice());
         }
 

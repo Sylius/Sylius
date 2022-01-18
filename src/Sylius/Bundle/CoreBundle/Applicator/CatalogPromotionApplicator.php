@@ -41,7 +41,7 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
     ): void {
         $channel = $this->channelRepository->findOneByCode($channelPricing->getChannelCode());
 
-        if (!$catalogPromotion->hasChannel($channel)) {
+        if (null === $channel || !$catalogPromotion->hasChannel($channel)) {
             return;
         }
 
