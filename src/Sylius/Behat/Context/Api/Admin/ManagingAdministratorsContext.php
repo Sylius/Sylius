@@ -141,6 +141,7 @@ final class ManagingAdministratorsContext implements Context
 
     /**
      * @When I save my changes
+     * @When I (try to) save my changes
      */
     public function iSaveMyChanges(): void
     {
@@ -184,16 +185,9 @@ final class ManagingAdministratorsContext implements Context
 
     /**
      * @When I specify its timezone as :timezone
-     */
-    public function iSpecifyItsTimezoneAs(string $timezone): void
-    {
-        $this->client->addRequestData('timezone', $timezone);
-    }
-
-    /**
      * @When I choose :timezone as my timezone
      */
-    public function iChooseAsMyTimezone(string $timezone): void
+    public function iSpecifyItsTimezoneAs(string $timezone): void
     {
         $this->client->addRequestData('timezone', $timezone);
     }
@@ -393,6 +387,17 @@ final class ManagingAdministratorsContext implements Context
         Assert::true(
             $this->responseChecker->hasValue($response, 'timezone', $timezone),
             sprintf('Administrator does not have expected %s timezone', $timezone)
+        );
+    }
+
+    /**
+     * @Then I should be notified that the timezone is not valid
+     */
+    public function iShouldBeNotifiedThatTimezoneIsNotValid(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'timezone: This value is not a valid timezone.'
         );
     }
 }

@@ -47,7 +47,8 @@ final class AdminUsersTest extends JsonApiTestCase
     /** @test */
     public function it_allows_admin_user_to_change_timezone(): void
     {
-        $adminUser = $this->loadFixturesAndGetAdminUser();
+        $fixtures = $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+        $adminUser = $fixtures['admin'];
         $header = $this->getLoggedHeader();
 
         $this->client->request(
@@ -64,13 +65,6 @@ final class AdminUsersTest extends JsonApiTestCase
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'admin/administrators/change_timezone_admin_response', Response::HTTP_OK);
-    }
-
-    private function loadFixturesAndGetAdminUser(): AdminUserInterface
-    {
-        $fixtures = $this->loadFixturesFromFile('authentication/api_administrator.yaml');
-
-        return $fixtures['admin'];
     }
 
     private function getLoggedHeader(): array

@@ -52,7 +52,9 @@
             </constraint>
         </property>
         <property name="timezone">
-            <constraint name="Timezone"/>
+            <constraint name="Timezone">
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
     </class>
 </constraint-mapping>

@@ -53,9 +53,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'email' => '#sylius_admin_user_email',
             'enabled' => '#sylius_admin_user_enabled',
             'locale_code' => '#sylius_admin_user_localeCode',
-            'timezone' => '#sylius_admin_user_timezone',
             'name' => '#sylius_admin_user_username',
             'password' => '#sylius_admin_user_plainPassword',
+            'timezone' => '#sylius_admin_user_timezone',
         ]);
     }
 }
