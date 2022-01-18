@@ -140,7 +140,6 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @When I save my changes
      * @When I (try to) save my changes
      */
     public function iSaveMyChanges(): void
