@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Shipping;
 
+@trigger_error('This class is deprecated since Sylius 1.12 and will be removed in 2.0. Copy these constants if you use them.', \E_USER_DEPRECATED);
+
 class ShipmentUnitTransitions
 {
     public const GRAPH = 'sylius_shipment_unit';
