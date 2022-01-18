@@ -48,15 +48,15 @@
         "sylius/taxation": "^1.6",
         "sylius/taxonomy": "^1.6",
         "sylius/user": "^1.6",
-        "symfony/http-foundation": "^4.4 || ^5.4",
-        "symfony/mime": "^4.4 || ^5.4",
+        "symfony/http-foundation": "^5.4",
+        "symfony/mime": "^5.4",
         "symfony/string": "^5.2",
         "webmozart/assert": "^1.8",
         "laminas/laminas-stdlib": "^3.2"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.1",
-        "symfony/property-access": "^4.4 || ^5.4"
+        "symfony/property-access": "^5.4"
     },
     "config": {
         "bin-dir": "bin"

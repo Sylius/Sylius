@@ -27,9 +27,9 @@
     "require": {
         "php": "^8.0",
         "sylius/resource-bundle": "^1.7",
-        "symfony/framework-bundle": "^4.4 || ^5.4",
-        "symfony/intl": "^4.4 || ^5.4",
-        "symfony/templating": "^4.4 || ^5.2",
+        "symfony/framework-bundle": "^5.4",
+        "symfony/intl": "^5.4",
+        "symfony/templating": "^5.4",
         "webmozart/assert": "^1.8"
     },
     "conflict": {
@@ -41,9 +41,9 @@
         "phpunit/phpunit": "^8.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "sylius/currency-bundle": "^1.6",
-        "symfony/browser-kit": "^4.4 || ^5.2",
-        "symfony/dependency-injection": "^4.4 || ^5.2",
-        "symfony/form": "^4.4 || ^5.2",
+        "symfony/browser-kit": "^5.4",
+        "symfony/dependency-injection": "^5.4",
+        "symfony/form": "^5.4",
         "twig/twig": "^2.12"
     },
     "config": {
