@@ -28,7 +28,7 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
     public function __construct(
         private DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
         private FactoryInterface $shipmentFactory,
-        private ?\Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface $shippingMethodsResolver = null
+        private ?ShippingMethodsResolverInterface $shippingMethodsResolver = null
     ) {
         if (2 === func_num_args() || null === $shippingMethodsResolver) {
             @trigger_error(

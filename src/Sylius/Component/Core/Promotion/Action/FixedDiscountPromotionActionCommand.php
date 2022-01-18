@@ -25,8 +25,11 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
 {
     public const TYPE = 'order_fixed_discount';
 
-    public function __construct(private ProportionalIntegerDistributorInterface $distributor, private UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator, private ?\Sylius\Component\Core\Distributor\MinimumPriceDistributorInterface $minimumPriceDistributor = null)
-    {
+    public function __construct(
+        private ProportionalIntegerDistributorInterface $distributor,
+        private UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
+        private ?MinimumPriceDistributorInterface $minimumPriceDistributor = null
+    ) {
     }
 
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool

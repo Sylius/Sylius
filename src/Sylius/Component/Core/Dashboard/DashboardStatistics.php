@@ -20,8 +20,12 @@ class DashboardStatistics
     /**
      * @throws \InvalidArgumentException
      */
-    public function __construct(private int $totalSales, private int $numberOfNewOrders, private int $numberOfNewCustomers, private ?\Sylius\Component\Core\Model\ChannelInterface $channel = null)
-    {
+    public function __construct(
+        private int $totalSales,
+        private int $numberOfNewOrders,
+        private int $numberOfNewCustomers,
+        private ?ChannelInterface $channel = null
+    ) {
     }
 
     public function getChannel(): ?ChannelInterface

@@ -15,7 +15,6 @@ namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\Scope;
@@ -35,7 +34,7 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         private ZoneProviderInterface $defaultTaxZoneProvider,
         private ZoneMatcherInterface $zoneMatcher,
         private PrioritizedServiceRegistryInterface $strategyRegistry,
-        private ?\Sylius\Component\Core\Resolver\TaxationAddressResolverInterface $taxationAddressResolver = null
+        private ?TaxationAddressResolverInterface $taxationAddressResolver = null
     ) {
         if ($this->taxationAddressResolver === null) {
             @trigger_error(sprintf('Not passing a $taxationAddressResolver to %s constructor is deprecated since Sylius 1.11 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
