@@ -41,7 +41,7 @@ final class ActionBasedDiscountApplicator implements ActionBasedDiscountApplicat
 
         try {
             $price = $this->priceCalculator->calculate($channelPricing, $action);
-        } catch (ActionBasedPriceCalculatorNotFoundException $exception) {
+        } catch (ActionBasedPriceCalculatorNotFoundException) {
             return;
         }
 
