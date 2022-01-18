@@ -21,17 +21,10 @@ use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
 final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInterface
 {
-    private ChannelRepositoryInterface $channelRepository;
-
-    private ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator;
-
     public function __construct(
-        ChannelRepositoryInterface $channelRepository,
-        ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator
-    ) {
-        $this->channelRepository = $channelRepository;
-        $this->actionBasedDiscountApplicator = $actionBasedDiscountApplicator;
-    }
+        private ChannelRepositoryInterface $channelRepository,
+        private ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator
+    ) {}
 
     public function applyOnVariant(
         ProductVariantInterface $variant,

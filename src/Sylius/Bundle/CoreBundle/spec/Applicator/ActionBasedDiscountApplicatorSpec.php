@@ -141,7 +141,7 @@ final class ActionBasedDiscountApplicatorSpec extends ObjectBehavior
         $minimumPriceCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(true);
         $exclusiveCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(false);
 
-        $channelPricing->getOriginalPrice()->willReturn(300);
+        $channelPricing->getOriginalPrice()->shouldNotBeCalled();
 
         $priceCalculator->calculate($channelPricing, $action)->willThrow(ActionBasedPriceCalculatorNotFoundException::class);
 

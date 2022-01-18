@@ -22,17 +22,10 @@ use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
 final class ActionBasedDiscountApplicator implements ActionBasedDiscountApplicatorInterface
 {
-    private CatalogPromotionPriceCalculatorInterface $priceCalculator;
-
-    private iterable $discountApplicatorCriteria;
-
     public function __construct(
-        CatalogPromotionPriceCalculatorInterface $priceCalculator,
-        iterable $discountApplicatorCriteria
-    ) {
-        $this->priceCalculator = $priceCalculator;
-        $this->discountApplicatorCriteria = $discountApplicatorCriteria;
-    }
+        private CatalogPromotionPriceCalculatorInterface $priceCalculator,
+        private iterable $discountApplicatorCriteria
+    ) {}
 
     public function applyDiscountOnChannelPricing(
         CatalogPromotionInterface $catalogPromotion,
@@ -46,14 +39,14 @@ final class ActionBasedDiscountApplicator implements ActionBasedDiscountApplicat
             }
         }
 
-        if ($channelPricing->getOriginalPrice() === null) {
-            $channelPricing->setOriginalPrice($channelPricing->getPrice());
-        }
-
         try {
             $price = $this->priceCalculator->calculate($channelPricing, $action);
         } catch (ActionBasedPriceCalculatorNotFoundException $exception) {
             return;
+        }
+
+        if ($channelPricing->getOriginalPrice() === null) {
+            $channelPricing->setOriginalPrice($channelPricing->getPrice());
         }
 
         $channelPricing->setPrice($price);
