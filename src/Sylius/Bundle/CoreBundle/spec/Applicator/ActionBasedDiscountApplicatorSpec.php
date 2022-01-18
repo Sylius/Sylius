@@ -11,22 +11,143 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\spec\Applicator;
+namespace spec\Sylius\Bundle\CoreBundle\Applicator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Calculator\ActionBasedPriceCalculatorInterface;
-use Sylius\Bundle\CoreBundle\Calculator\CatalogPromotionPriceCalculator;
+use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Applicator\ActionBasedDiscountApplicatorInterface;
+use Sylius\Bundle\CoreBundle\Calculator\CatalogPromotionPriceCalculatorInterface;
+use Sylius\Bundle\CoreBundle\DiscountApplicationCriteria\DiscountApplicationCriteriaInterface;
+use Sylius\Component\Core\Exception\ActionBasedPriceCalculatorNotFoundException;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
 final class ActionBasedDiscountApplicatorSpec extends ObjectBehavior
 {
-    function let(CatalogPromotionPriceCalculator $priceCalculator)
-    {
-        $this->beConstructedWith($priceCalculator);
+    function let(
+        CatalogPromotionPriceCalculatorInterface $priceCalculator,
+        DiscountApplicationCriteriaInterface $minimumPriceCriteria,
+        DiscountApplicationCriteriaInterface $exclusiveCriteria
+    ): void {
+        $this->beConstructedWith($priceCalculator, [$minimumPriceCriteria, $exclusiveCriteria]);
     }
 
     function it_implements_action_based_discount_applicator_interface(): void
     {
-        $this->shouldImplement(ActionBasedPriceCalculatorInterface::class);
+        $this->shouldImplement(ActionBasedDiscountApplicatorInterface::class);
     }
 
+    function it_applies_discount_if_all_criteria_are_valid(
+        CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionActionInterface $action,
+        ChannelPricingInterface $channelPricing,
+        DiscountApplicationCriteriaInterface $minimumPriceCriteria,
+        DiscountApplicationCriteriaInterface $exclusiveCriteria,
+        CatalogPromotionPriceCalculatorInterface $priceCalculator
+    ): void {
+        $minimumPriceCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(true);
+        $exclusiveCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(true);
+
+        $channelPricing->getOriginalPrice()->willReturn(300);
+
+        $priceCalculator->calculate($channelPricing, $action)->willReturn(100);
+
+        $channelPricing->setPrice(100)->shouldBeCalled();
+        $channelPricing->addAppliedPromotion($catalogPromotion)->shouldBeCalled();
+
+        $this->applyDiscountOnChannelPricing($catalogPromotion, $action, $channelPricing);
+    }
+
+    function it_does_not_apply_discount_if_atleast_one_criteria_is_invalid(
+        CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionActionInterface $action,
+        ChannelPricingInterface $channelPricing,
+        DiscountApplicationCriteriaInterface $minimumPriceCriteria,
+        DiscountApplicationCriteriaInterface $exclusiveCriteria,
+        CatalogPromotionPriceCalculatorInterface $priceCalculator
+    ): void {
+        $minimumPriceCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(true);
+        $exclusiveCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(false);
+
+        $channelPricing->getOriginalPrice()->willReturn(300);
+
+        $priceCalculator->calculate($channelPricing, $action)->willReturn(100);
+
+        $channelPricing->setPrice(Argument::any())->shouldNotBeCalled();
+        $channelPricing->addAppliedPromotion(Argument::any())->shouldNotBeCalled();
+
+        $this->applyDiscountOnChannelPricing($catalogPromotion, $action, $channelPricing);
+    }
+
+    function it_does_not_set_original_price_during_application_if_its_already_there(
+        CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionActionInterface $action,
+        ChannelPricingInterface $channelPricing,
+        DiscountApplicationCriteriaInterface $minimumPriceCriteria,
+        DiscountApplicationCriteriaInterface $exclusiveCriteria,
+        CatalogPromotionPriceCalculatorInterface $priceCalculator
+    ): void {
+        $minimumPriceCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(true);
+        $exclusiveCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(true);
+
+        $channelPricing->getOriginalPrice()->willReturn(200);
+
+        $channelPricing->getPrice()->shouldNotBeCalled();
+
+        $channelPricing->setOriginalPrice(Argument::any())->shouldNotBeCalled();
+
+        $priceCalculator->calculate($channelPricing, $action)->willReturn(100);
+
+        $channelPricing->setPrice(100)->shouldBeCalled();
+        $channelPricing->addAppliedPromotion($catalogPromotion)->shouldBeCalled();
+
+        $this->applyDiscountOnChannelPricing($catalogPromotion, $action, $channelPricing);
+    }
+
+    function it_sets_original_price_on_channel_pricing_if_original_price_is_not_set(
+        CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionActionInterface $action,
+        ChannelPricingInterface $channelPricing,
+        DiscountApplicationCriteriaInterface $minimumPriceCriteria,
+        DiscountApplicationCriteriaInterface $exclusiveCriteria,
+        CatalogPromotionPriceCalculatorInterface $priceCalculator
+    ): void {
+        $minimumPriceCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(true);
+        $exclusiveCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(true);
+
+        $channelPricing->getOriginalPrice()->willReturn(null);
+
+        $channelPricing->getPrice()->willReturn(200);
+
+        $channelPricing->setOriginalPrice(200)->shouldBeCalled();
+
+        $priceCalculator->calculate($channelPricing, $action)->willReturn(100);
+
+        $channelPricing->setPrice(100)->shouldBeCalled();
+        $channelPricing->addAppliedPromotion($catalogPromotion)->shouldBeCalled();
+
+        $this->applyDiscountOnChannelPricing($catalogPromotion, $action, $channelPricing);
+    }
+
+    function it_does_not_apply_discount_if_price_calculator_throws_exception(
+        CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionActionInterface $action,
+        ChannelPricingInterface $channelPricing,
+        DiscountApplicationCriteriaInterface $minimumPriceCriteria,
+        DiscountApplicationCriteriaInterface $exclusiveCriteria,
+        CatalogPromotionPriceCalculatorInterface $priceCalculator
+    ): void {
+        $minimumPriceCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(true);
+        $exclusiveCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(false);
+
+        $channelPricing->getOriginalPrice()->willReturn(300);
+
+        $priceCalculator->calculate($channelPricing, $action)->willThrow(ActionBasedPriceCalculatorNotFoundException::class);
+
+        $channelPricing->setPrice(Argument::any())->shouldNotBeCalled();
+        $channelPricing->addAppliedPromotion(Argument::any())->shouldNotBeCalled();
+
+        $this->applyDiscountOnChannelPricing($catalogPromotion, $action, $channelPricing);
+    }
 }

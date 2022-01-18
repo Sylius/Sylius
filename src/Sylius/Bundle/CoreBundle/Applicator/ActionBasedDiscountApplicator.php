@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Applicator;
 
 use Sylius\Bundle\CoreBundle\Calculator\CatalogPromotionPriceCalculatorInterface;
-use Sylius\Bundle\PromotionBundle\DiscountApplicationCriteria\DiscountApplicationCriteriaInterface;
+use Sylius\Bundle\CoreBundle\DiscountApplicationCriteria\DiscountApplicationCriteriaInterface;
 use Sylius\Component\Core\Exception\ActionBasedPriceCalculatorNotFoundException;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -39,8 +39,7 @@ final class ActionBasedDiscountApplicator implements ActionBasedDiscountApplicat
         CatalogPromotionActionInterface $action,
         ChannelPricingInterface $channelPricing
     ): void {
-
-        /** @var $applicatorCriterion DiscountApplicationCriteriaInterface */
+        /** @var DiscountApplicationCriteriaInterface $applicatorCriterion  */
         foreach ($this->discountApplicatorCriteria as $applicatorCriterion) {
             if (!$applicatorCriterion->isApplicable($catalogPromotion, $action, $channelPricing)) {
                 return;

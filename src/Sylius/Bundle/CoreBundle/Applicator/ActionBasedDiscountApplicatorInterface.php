@@ -19,5 +19,9 @@ use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
 interface ActionBasedDiscountApplicatorInterface
 {
-    public function applyDiscountOnChannelPricing(CatalogPromotionInterface $catalogPromotion, CatalogPromotionActionInterface $action, ChannelPricingInterface $channelPricing): void;
+    public function applyDiscountOnChannelPricing(
+        CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionActionInterface $action,
+        ChannelPricingInterface $channelPricing
+    ): void;
 }

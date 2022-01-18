@@ -271,11 +271,11 @@
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.applicator_criteria" />
         </service>
 
-        <service id="Sylius\Bundle\PromotionBundle\DiscountApplicationCriteria\ExclusiveCriteria">
+        <service id="Sylius\Bundle\CoreBundle\DiscountApplicationCriteria\ExclusiveCriteria">
             <tag name="sylius.catalog_promotion.applicator_criteria" />
         </service>
 
-        <service id="Sylius\Bundle\PromotionBundle\DiscountApplicationCriteria\MinimumPriceCriteria">
+        <service id="Sylius\Bundle\CoreBundle\DiscountApplicationCriteria\MinimumPriceCriteria">
             <tag name="sylius.catalog_promotion.applicator_criteria" />
         </service>
 
