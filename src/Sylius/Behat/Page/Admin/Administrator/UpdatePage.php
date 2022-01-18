@@ -46,6 +46,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getElement('locale_code')->selectOption($localeCode);
     }
 
+    public function changeTimezone(string $timezone): void
+    {
+        $this->getElement('timezone')->selectOption($timezone);
+    }
+
     public function removeAvatar(): void
     {
         $this->getElement('remove_avatar')->click();
@@ -56,11 +61,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $srcPath = $this->getAvatarImagePath();
 
         return strpos($srcPath, $avatarPath) !== false;
-    }
-
-    public function changeTimezone(string $timezone): void
-    {
-        $this->getElement('timezone')->selectOption($timezone);
     }
 
     public function getTimezone(): ?string
