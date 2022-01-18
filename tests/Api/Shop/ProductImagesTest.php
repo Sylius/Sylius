@@ -31,7 +31,7 @@ final class ProductImagesTest extends JsonApiTestCase
             sprintf('/api/v2/shop/product-images/%s', (string) $productImage->getId()),
             [],
             [],
-            self::CONTENT_TYPE_HEADER
+            self::LD_CONTENT_TYPE_HEADER
         );
         $response = $this->client->getResponse();
 
@@ -50,7 +50,7 @@ final class ProductImagesTest extends JsonApiTestCase
             sprintf('/api/v2/shop/product-images/%s', (string) $productImage->getId()),
             ['filter' => 'sylius_small'],
             [],
-            self::CONTENT_TYPE_HEADER
+            self::LD_CONTENT_TYPE_HEADER
         );
         $response = $this->client->getResponse();
 

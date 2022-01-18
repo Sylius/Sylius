@@ -60,7 +60,7 @@ final class AddressesPostTest extends JsonApiTestCase
             '/api/v2/shop/addresses',
             [],
             [],
-            array_merge($authorizationHeader, self::CONTENT_TYPE_HEADER),
+            array_merge($authorizationHeader, self::LD_CONTENT_TYPE_HEADER),
             json_encode($bodyRequest)
         );
 

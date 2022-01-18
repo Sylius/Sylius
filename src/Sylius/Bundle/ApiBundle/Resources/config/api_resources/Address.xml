@@ -56,8 +56,8 @@
                 <attribute name="path">/shop/addresses/{id}</attribute>
             </itemOperation>
 
-            <itemOperation name="shop_put">
-                <attribute name="method">PUT</attribute>
+            <itemOperation name="shop_patch">
+                <attribute name="method">PATCH</attribute>
                 <attribute name="path">/shop/addresses/{id}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:address:update</attribute>

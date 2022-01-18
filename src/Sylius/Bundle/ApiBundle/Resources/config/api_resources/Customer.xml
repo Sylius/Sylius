@@ -55,7 +55,7 @@
             </itemOperation>
 
             <itemOperation name="shop_password_update">
-                <attribute name="method">PUT</attribute>
+                <attribute name="method">PATCH</attribute>
                 <attribute name="path">/shop/customers/{id}/password</attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Account\ChangeShopUserPassword</attribute>
@@ -68,8 +68,8 @@
                 </attribute>
             </itemOperation>
 
-            <itemOperation name="shop_put">
-                <attribute name="method">PUT</attribute>
+            <itemOperation name="shop_patch">
+                <attribute name="method">PATCH</attribute>
                 <attribute name="path">/shop/customers/{id}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:customer:update</attribute>

@@ -46,7 +46,7 @@ final class ProductSlugEventSubscriber implements EventSubscriberInterface
 
         if (
             !$product instanceof ProductInterface ||
-            !in_array($method, [Request::METHOD_POST, Request::METHOD_PUT], true)
+            !in_array($method, [Request::METHOD_POST, Request::METHOD_PUT, Request::METHOD_PATCH], true)
         ) {
             return;
         }

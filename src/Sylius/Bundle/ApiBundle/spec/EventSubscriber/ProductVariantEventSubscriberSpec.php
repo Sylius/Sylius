@@ -36,7 +36,7 @@ final class ProductVariantEventSubscriberSpec extends ObjectBehavior
         HttpKernelInterface $kernel,
         Request $request
     ): void {
-        $request->getMethod()->willReturn(Request::METHOD_PUT);
+        $request->getMethod()->willReturn(Request::METHOD_PATCH);
 
         $variant->getCode()->willReturn('MUG');
 

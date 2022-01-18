@@ -9,8 +9,6 @@
             "id": @integer@,
             "name": "Mugs discount",
             "code": "mugs_discount",
-            "startDate": null,
-            "endDate": null,
             "state": "inactive",
             "priority": 0,
             "channels": [

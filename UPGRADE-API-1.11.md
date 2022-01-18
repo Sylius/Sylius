@@ -82,6 +82,8 @@
 
 1. The method of the `/shop/orders/{tokenValue}/items` endpoint has been changed from `PATCH` to `POST`
 
+1. All other resource update requests, which used `PUT` method previously, have been switched to use `PATCH`
+
 1. `Sylius\Bundle\ApiBundle\View\CartShippingMethodInterface` and `Sylius\Bundle\ApiBundle\View\CartShippingMethod` have been removed.
 
 1. `Sylius\Bundle\ApiBundle\Applicator\ShipmentStateMachineTransitionApplicatorInterface` and `Sylius\Bundle\ApiBundle\Applicator\ShipmentStateMachineTransitionApplicator` have been removed.

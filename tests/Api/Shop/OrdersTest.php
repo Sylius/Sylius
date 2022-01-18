@@ -60,7 +60,7 @@ final class OrdersTest extends JsonApiTestCase
         $updateCartCommand->setOrderTokenValue($tokenValue);
         $commandBus->dispatch($updateCartCommand);
 
-        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::LD_CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/get_order_response', Response::HTTP_OK);
@@ -85,7 +85,7 @@ final class OrdersTest extends JsonApiTestCase
         $commandBus->dispatch($addItemToCartCommand);
 
 
-        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA/items', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA/items', [], [], self::LD_CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/get_order_items_response', Response::HTTP_OK);
@@ -109,7 +109,7 @@ final class OrdersTest extends JsonApiTestCase
         $addItemToCartCommand->setOrderTokenValue($tokenValue);
         $commandBus->dispatch($addItemToCartCommand);
 
-        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA/adjustments', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA/adjustments', [], [], self::LD_CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/get_order_adjustments_response', Response::HTTP_OK);
@@ -148,7 +148,7 @@ final class OrdersTest extends JsonApiTestCase
         $orderItem->addAdjustment($adjustment);
         $this->get('sylius.manager.order')->flush();
 
-        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA/items/'.$order->getItems()->first()->getId().'/adjustments', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA/items/'.$order->getItems()->first()->getId().'/adjustments', [], [], self::LD_CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/get_order_item_adjustments_response', Response::HTTP_OK);
@@ -168,7 +168,7 @@ final class OrdersTest extends JsonApiTestCase
         $pickupCartCommand->setChannelCode('WEB');
         $commandBus->dispatch($pickupCartCommand);
 
-        $this->client->request('POST', '/api/v2/shop/orders/nAWw2jewpA/items', [], [], self::CONTENT_TYPE_HEADER, json_encode([
+        $this->client->request('POST', '/api/v2/shop/orders/nAWw2jewpA/items', [], [], self::LD_CONTENT_TYPE_HEADER, json_encode([
             'productVariant' => '/api/v2/shop/product-variants/MUG_BLUE',
             'quantity' => 3,
         ]));
@@ -180,7 +180,7 @@ final class OrdersTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_get_orders_collection_for_guest(): void
     {
-        $this->client->request('GET', '/api/v2/shop/orders', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request('GET', '/api/v2/shop/orders', [], [], self::LD_CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/error/jwt_token_not_found', Response::HTTP_UNAUTHORIZED);

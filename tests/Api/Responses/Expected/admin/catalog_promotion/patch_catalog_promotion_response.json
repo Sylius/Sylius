@@ -5,8 +5,6 @@
     "id": @integer@,
     "name": "T-Shirts discount",
     "code": "mugs_discount",
-    "startDate": null,
-    "endDate": null,
     "priority": 0,
     "state": "active",
     "channels": [

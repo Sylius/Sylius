@@ -31,7 +31,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             sprintf('/api/v2/shop/catalog-promotions/%s', $catalogPromotion->getCode()),
             [],
             [],
-            self::CONTENT_TYPE_HEADER
+            self::LD_CONTENT_TYPE_HEADER
         );
         $this->assertResponse(
             $this->client->getResponse(),

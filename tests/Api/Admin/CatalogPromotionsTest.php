@@ -386,10 +386,10 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     public function it_updates_catalog_promotion(): void
     {
         $catalogPromotion = $this->loadFixturesAndGetCatalogPromotion();
-        $header = $this->getLoggedHeader();
+        $header = $this->getLoggedHeader(true);
 
         $this->client->request(
-            'PUT',
+            'PATCH',
             sprintf('/api/v2/admin/catalog-promotions/%s', $catalogPromotion->getCode()),
             [],
             [],
@@ -429,7 +429,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/catalog_promotion/put_catalog_promotion_response',
+            'admin/catalog_promotion/patch_catalog_promotion_response',
             Response::HTTP_OK
         );
     }
@@ -444,12 +444,12 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         return $catalogPromotion;
     }
 
-    private function getLoggedHeader(): array
+    private function getLoggedHeader(bool $mergePatch = false): array
     {
         $token = $this->logInAdminUser('api@example.com');
         $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
 
-        return array_merge($header, self::CONTENT_TYPE_HEADER);
+        return array_merge($header, $mergePatch ? self::MERGE_PATCH_CONTENT_TYPE_HEADER : self::LD_CONTENT_TYPE_HEADER);
     }
 }

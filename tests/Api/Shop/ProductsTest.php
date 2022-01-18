@@ -24,7 +24,7 @@ final class ProductsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('product/product_variant_with_original_price.yaml');
 
-        $this->client->request('GET', '/api/v2/shop/products-by-slug/mug?paramName=paramValue', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request('GET', '/api/v2/shop/products-by-slug/mug?paramName=paramValue', [], [], self::LD_CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
         $this->assertEquals('/api/v2/shop/products/MUG?paramName=paramValue', $response->headers->get(('Location')));
@@ -42,7 +42,7 @@ final class ProductsTest extends JsonApiTestCase
             sprintf('/api/v2/shop/products/%s', $product->getCode()),
             [],
             [],
-            self::CONTENT_TYPE_HEADER
+            self::LD_CONTENT_TYPE_HEADER
         );
 
         $this->assertResponse(

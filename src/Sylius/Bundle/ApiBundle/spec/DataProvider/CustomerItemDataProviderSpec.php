@@ -32,7 +32,9 @@ final class CustomerItemDataProviderSpec extends ObjectBehavior
     function it_supports_only_customer(): void
     {
         $this->supports(CustomerInterface::class, Request::METHOD_PUT)->shouldReturn(true);
+        $this->supports(CustomerInterface::class, Request::METHOD_PATCH)->shouldReturn(true);
         $this->supports(OrderInterface::class, Request::METHOD_PUT)->shouldReturn(false);
+        $this->supports(OrderInterface::class, Request::METHOD_PATCH)->shouldReturn(false);
     }
 
     function it_provides_customer_by_id_for_logged_in_admin_user(
@@ -50,7 +52,7 @@ final class CustomerItemDataProviderSpec extends ObjectBehavior
             ->getItem(
                 CustomerInterface::class,
                 '1',
-                Request::METHOD_PUT,
+                Request::METHOD_PATCH,
                 []
             )
             ->shouldReturn($customer)
@@ -73,7 +75,7 @@ final class CustomerItemDataProviderSpec extends ObjectBehavior
             ->getItem(
                 CustomerInterface::class,
                 '1',
-                Request::METHOD_PUT,
+                Request::METHOD_PATCH,
                 []
             )
             ->shouldReturn($customer)
@@ -96,7 +98,7 @@ final class CustomerItemDataProviderSpec extends ObjectBehavior
             ->getItem(
                 CustomerInterface::class,
                 '2',
-                Request::METHOD_PUT,
+                Request::METHOD_PATCH,
                 []
             )
             ->shouldReturn(null)

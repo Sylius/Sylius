@@ -39,7 +39,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         $addItemToCartCommand->setOrderTokenValue($tokenValue);
         $commandBus->dispatch($addItemToCartCommand);
 
-        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::LD_CONTENT_TYPE_HEADER);
         $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->client->request(
@@ -47,7 +47,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
             sprintf('/api/v2/shop/orders/nAWw2jewpA/payments/%s/methods', $orderResponse['payments'][0]['id']),
             [],
             [],
-            self::CONTENT_TYPE_HEADER
+            self::LD_CONTENT_TYPE_HEADER
         );
         $response = $this->client->getResponse();
 
@@ -72,7 +72,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         $addItemToCartCommand->setOrderTokenValue($tokenValue);
         $commandBus->dispatch($addItemToCartCommand);
 
-        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::LD_CONTENT_TYPE_HEADER);
         $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->client->request(
@@ -80,7 +80,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
             sprintf('/api/v2/shop/payments/%s/methods', $orderResponse['payments'][0]['id']),
             [],
             [],
-            self::CONTENT_TYPE_HEADER
+            self::LD_CONTENT_TYPE_HEADER
         );
         $response = $this->client->getResponse();
 

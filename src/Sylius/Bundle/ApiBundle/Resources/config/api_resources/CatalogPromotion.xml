@@ -83,9 +83,9 @@ Example configuration for `percentage_discount` action type:
                 </attribute>
             </itemOperation>
 
-            <itemOperation name="admin_put">
+            <itemOperation name="admin_patch">
                 <attribute name="path">/admin/catalog-promotions/{code}</attribute>
-                <attribute name="method">PUT</attribute>
+                <attribute name="method">PATCH</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
                 </attribute>

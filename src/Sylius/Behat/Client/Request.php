@@ -110,7 +110,7 @@ final class Request implements RequestInterface
 
         return new self(
             sprintf('/api/v2/%s%s/%s', self::prepareSection($section), $resource, $id),
-            HttpRequest::METHOD_PUT,
+            HttpRequest::METHOD_PATCH,
             $headers
         );
     }

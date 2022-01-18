@@ -43,7 +43,10 @@ final class ProductVariantEventSubscriber implements EventSubscriberInterface
         $variant = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
-        if ($variant instanceof ProductVariantInterface && $method === Request::METHOD_PUT) {
+        if (
+            $variant instanceof ProductVariantInterface &&
+            in_array($method, [Request::METHOD_PUT, Request::METHOD_PATCH], true)
+        ) {
             $this->eventBus->dispatch(new ProductVariantUpdated($variant->getCode()));
         }
     }
