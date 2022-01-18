@@ -53,6 +53,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:admin_user:update</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:admin_user:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_delete">

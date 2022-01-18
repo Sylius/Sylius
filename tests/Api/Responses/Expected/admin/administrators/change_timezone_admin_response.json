@@ -1,7 +1,7 @@
 {
-  "@context": "\/api\/v2\/contexts\/Administrator",
   "@id": @string@,
   "@type": "Administrator",
+  "@context": "\/api\/v2\/contexts\/Administrator",
   "firstName": null,
   "lastName": null,
   "localeCode": "en",
@@ -9,30 +9,10 @@
   "timezone": "Europe/Paris",
   "id": @integer@,
   "username": "sylius",
-  "usernameCanonical": "sylius",
-  "salt": @string@,
-  "password": @string@,
   "lastLogin": @string@,
-  "emailVerificationToken": null,
-  "passwordResetToken": null,
-  "passwordRequestedAt": null,
   "verifiedAt": null,
-  "expiresAt": null,
-  "credentialsExpireAt": null,
-  "roles": [
-    "ROLE_API_ACCESS"
-  ],
-  "oauthAccounts": [],
   "email": "api@example.com",
-  "emailCanonical": "api@example.com",
-  "encoderName": null,
   "createdAt": @string@,
   "updatedAt": @string@,
-  "enabled": true,
-  "image": null,
-  "credentialsNonExpired": true,
-  "accountNonExpired": true,
-  "accountNonLocked": true,
-  "verified": false,
-  "oAuthAccounts": []
+  "enabled": true
 }
