@@ -317,7 +317,7 @@
      * `sylius.api.item_data_provider.reset_password_item` => `Sylius\Bundle\ApiBundle\DataProvider\ResetPasswordItemDataProvider`
      * `sylius.api.kerner_request_event_subscriber` => `Sylius\Bundle\ApiBundle\EventSubscriber\KernelRequestEventSubscriber`
      * `sylius.api.product_slug_event_subscriber` => `Sylius\Bundle\ApiBundle\EventSubscriber\ProductSlugEventSubscriber`
-     * `sylius.api.product_taxon_filter` => `Sylius\Bundle\ApiBundle\Filter\TaxonFilter`
+     * `sylius.api.product_taxon_filter` => `Sylius\Bundle\ApiBundle\Filter\Doctrine\TaxonFilter`
      * `sylius.api.exchange_rate_filter` => `Sylius\Bundle\ApiBundle\Doctrine\Filter\ExchangeRateFilter`
      * `sylius.api.translation_order_name_and_locale_filter` => `Sylius\Bundle\ApiBundle\Doctrine\Filter\TranslationOrderNameAndLocaleFilter`
      * `sylius.api.product_variant_option_value_filter` => `Sylius\Bundle\ApiBundle\Doctrine\Filter\ProductVariantOptionValueFilter`
