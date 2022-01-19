@@ -25,21 +25,11 @@ use Webmozart\Assert\Assert;
 
 final class OrderShipmentProcessor implements OrderProcessorInterface
 {
-    private DefaultShippingMethodResolverInterface $defaultShippingMethodResolver;
-
-    private FactoryInterface $shipmentFactory;
-
-    private ?ShippingMethodsResolverInterface $shippingMethodsResolver;
-
     public function __construct(
-        DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
-        FactoryInterface $shipmentFactory,
-        ?ShippingMethodsResolverInterface $shippingMethodsResolver = null
+        private DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
+        private FactoryInterface $shipmentFactory,
+        private ?ShippingMethodsResolverInterface $shippingMethodsResolver = null
     ) {
-        $this->defaultShippingMethodResolver = $defaultShippingMethodResolver;
-        $this->shipmentFactory = $shipmentFactory;
-        $this->shippingMethodsResolver = $shippingMethodsResolver;
-
         if (2 === func_num_args() || null === $shippingMethodsResolver) {
             @trigger_error(
                 'Not passing ShippingMethodsResolverInterface explicitly is deprecated since 1.2 and will be prohibited in 2.0',
@@ -84,7 +74,7 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
             $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment));
 
             $order->addShipment($shipment);
-        } catch (UnresolvedDefaultShippingMethodException $exception) {
+        } catch (UnresolvedDefaultShippingMethodException) {
             foreach ($shipment->getUnits() as $unit) {
                 $shipment->removeUnit($unit);
             }
@@ -121,7 +111,7 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         if (!in_array($shipment->getMethod(), $this->shippingMethodsResolver->getSupportedMethods($shipment), true)) {
             try {
                 $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment));
-            } catch (UnresolvedDefaultShippingMethodException $exception) {
+            } catch (UnresolvedDefaultShippingMethodException) {
                 return;
             }
         }

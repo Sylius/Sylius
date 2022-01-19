@@ -19,11 +19,8 @@ use Webmozart\Assert\Assert;
 
 final class EmailChecker implements EmailCheckerInterface
 {
-    private string $spoolDirectory;
-
-    public function __construct(string $spoolDirectory)
+    public function __construct(private string $spoolDirectory)
     {
-        $this->spoolDirectory = $spoolDirectory;
     }
 
     public function hasRecipient(string $recipient): bool
@@ -51,7 +48,7 @@ final class EmailChecker implements EmailCheckerInterface
                 $body = str_replace("\n", ' ', $body);
                 $body = preg_replace('/ {2,}/', ' ', $body);
 
-                if (false !== strpos($body, $message)) {
+                if (str_contains($body, $message)) {
                     return true;
                 }
             }

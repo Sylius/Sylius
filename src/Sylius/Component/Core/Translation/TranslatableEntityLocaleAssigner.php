@@ -21,16 +21,8 @@ use Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssignerInterf
 
 final class TranslatableEntityLocaleAssigner implements TranslatableEntityLocaleAssignerInterface
 {
-    private LocaleContextInterface $localeContext;
-
-    private TranslationLocaleProviderInterface $translationLocaleProvider;
-
-    public function __construct(
-        LocaleContextInterface $localeContext,
-        TranslationLocaleProviderInterface $translationLocaleProvider
-    ) {
-        $this->localeContext = $localeContext;
-        $this->translationLocaleProvider = $translationLocaleProvider;
+    public function __construct(private LocaleContextInterface $localeContext, private TranslationLocaleProviderInterface $translationLocaleProvider)
+    {
     }
 
     public function assignLocale(TranslatableInterface $translatableEntity): void
@@ -39,7 +31,7 @@ final class TranslatableEntityLocaleAssigner implements TranslatableEntityLocale
 
         try {
             $currentLocale = $this->localeContext->getLocaleCode();
-        } catch (LocaleNotFoundException $e) {
+        } catch (LocaleNotFoundException) {
             $currentLocale = $fallbackLocale;
         }
 

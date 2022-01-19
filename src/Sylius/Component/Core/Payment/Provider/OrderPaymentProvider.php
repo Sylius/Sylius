@@ -26,26 +26,18 @@ use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 
 final class OrderPaymentProvider implements OrderPaymentProviderInterface
 {
-    private DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver;
-
-    private PaymentFactoryInterface $paymentFactory;
-
-    private StateMachineFactoryInterface $stateMachineFactory;
-
     public function __construct(
-        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
-        PaymentFactoryInterface $paymentFactory,
-        StateMachineFactoryInterface $stateMachineFactory
+        private DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
+        private PaymentFactoryInterface $paymentFactory,
+        private StateMachineFactoryInterface $stateMachineFactory
     ) {
-        $this->defaultPaymentMethodResolver = $defaultPaymentMethodResolver;
-        $this->paymentFactory = $paymentFactory;
-        $this->stateMachineFactory = $stateMachineFactory;
     }
 
     public function provideOrderPayment(OrderInterface $order, string $targetState): ?PaymentInterface
     {
         /** @var PaymentInterface $payment */
-        $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
+        $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(),
+            $order->getCurrencyCode());
 
         $paymentMethod = $this->getDefaultPaymentMethod($payment, $order);
         $lastPayment = $this->getLastPayment($order);
@@ -80,7 +72,7 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
             $payment->setOrder($order);
 
             return $this->defaultPaymentMethodResolver->getDefaultPaymentMethod($payment);
-        } catch (UnresolvedDefaultPaymentMethodException $exception) {
+        } catch (UnresolvedDefaultPaymentMethodException) {
             return null;
         }
     }

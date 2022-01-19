@@ -19,14 +19,8 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ZoneFactory implements ZoneFactoryInterface
 {
-    private FactoryInterface $factory;
-
-    private FactoryInterface $zoneMemberFactory;
-
-    public function __construct(FactoryInterface $factory, FactoryInterface $zoneMemberFactory)
+    public function __construct(private FactoryInterface $factory, private FactoryInterface $zoneMemberFactory)
     {
-        $this->factory = $factory;
-        $this->zoneMemberFactory = $zoneMemberFactory;
     }
 
     public function createNew(): ZoneInterface

@@ -20,7 +20,7 @@ use Sylius\Component\Product\Model\ProductVariant as BaseVariant;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
-class ProductVariant extends BaseVariant implements ProductVariantInterface, Comparable
+class ProductVariant extends BaseVariant implements ProductVariantInterface, Comparable, \Stringable
 {
     /**
      * @var int

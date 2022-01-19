@@ -23,11 +23,8 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
 final class OrderStateResolver implements StateResolverInterface
 {
-    private FactoryInterface $stateMachineFactory;
-
-    public function __construct(FactoryInterface $stateMachineFactory)
+    public function __construct(private FactoryInterface $stateMachineFactory)
     {
-        $this->stateMachineFactory = $stateMachineFactory;
     }
 
     public function resolve(BaseOrderInterface $order): void

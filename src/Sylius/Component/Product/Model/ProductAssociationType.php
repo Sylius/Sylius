@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
-class ProductAssociationType implements ProductAssociationTypeInterface
+class ProductAssociationType implements ProductAssociationTypeInterface, \Stringable
 {
     use TimestampableTrait;
     use TranslatableTrait {

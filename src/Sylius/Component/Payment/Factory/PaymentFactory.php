@@ -18,11 +18,8 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class PaymentFactory implements PaymentFactoryInterface
 {
-    private FactoryInterface $factory;
-
-    public function __construct(FactoryInterface $factory)
+    public function __construct(private FactoryInterface $factory)
     {
-        $this->factory = $factory;
     }
 
     public function createNew(): PaymentInterface

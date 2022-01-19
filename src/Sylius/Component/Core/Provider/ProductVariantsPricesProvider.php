@@ -23,11 +23,8 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 
 final class ProductVariantsPricesProvider implements ProductVariantsPricesProviderInterface
 {
-    private ProductVariantPriceCalculatorInterface $productVariantPriceCalculator;
-
-    public function __construct(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
+    public function __construct(private ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
     {
-        $this->productVariantPriceCalculator = $productVariantPriceCalculator;
     }
 
     public function provideVariantsPrices(ProductInterface $product, ChannelInterface $channel): array

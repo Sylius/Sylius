@@ -27,11 +27,8 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
 {
     public const TYPE = 'shipping_percentage_discount';
 
-    private FactoryInterface $adjustmentFactory;
-
-    public function __construct(FactoryInterface $adjustmentFactory)
+    public function __construct(private FactoryInterface $adjustmentFactory)
     {
-        $this->adjustmentFactory = $adjustmentFactory;
     }
 
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool

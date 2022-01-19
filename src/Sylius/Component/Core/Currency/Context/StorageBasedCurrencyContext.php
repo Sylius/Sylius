@@ -21,14 +21,8 @@ use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 
 final class StorageBasedCurrencyContext implements CurrencyContextInterface
 {
-    private ChannelContextInterface $channelContext;
-
-    private CurrencyStorageInterface $currencyStorage;
-
-    public function __construct(ChannelContextInterface $channelContext, CurrencyStorageInterface $currencyStorage)
+    public function __construct(private ChannelContextInterface $channelContext, private CurrencyStorageInterface $currencyStorage)
     {
-        $this->channelContext = $channelContext;
-        $this->currencyStorage = $currencyStorage;
     }
 
     public function getCurrencyCode(): string

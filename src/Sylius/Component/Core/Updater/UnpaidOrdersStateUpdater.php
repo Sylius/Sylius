@@ -22,23 +22,14 @@ use Sylius\Component\Order\OrderTransitions;
 
 final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterface
 {
-    private OrderRepositoryInterface $orderRepository;
-
-    private Factory $stateMachineFactory;
-
-    private string $expirationPeriod;
-
     private ?LoggerInterface $logger;
 
     public function __construct(
-        OrderRepositoryInterface $orderRepository,
-        Factory $stateMachineFactory,
-        string $expirationPeriod,
+        private OrderRepositoryInterface $orderRepository,
+        private Factory $stateMachineFactory,
+        private string $expirationPeriod,
         LoggerInterface $logger = null
     ) {
-        $this->orderRepository = $orderRepository;
-        $this->stateMachineFactory = $stateMachineFactory;
-        $this->expirationPeriod = $expirationPeriod;
         if (null === $logger) {
             @trigger_error(
                 'Not passing a logger is deprecated since 1.7',

@@ -18,11 +18,8 @@ use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 
 final class OrderPaymentMethodSelectionRequirementChecker implements OrderPaymentMethodSelectionRequirementCheckerInterface
 {
-    private PaymentMethodsResolverInterface $paymentMethodsResolver;
-
-    public function __construct(PaymentMethodsResolverInterface $paymentMethodsResolver)
+    public function __construct(private PaymentMethodsResolverInterface $paymentMethodsResolver)
     {
-        $this->paymentMethodsResolver = $paymentMethodsResolver;
     }
 
     public function isPaymentMethodSelectionRequired(OrderInterface $order): bool

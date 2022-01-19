@@ -19,16 +19,8 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 class DashboardStatisticsProvider implements DashboardStatisticsProviderInterface
 {
-    private OrderRepositoryInterface $orderRepository;
-
-    private CustomerRepositoryInterface $customerRepository;
-
-    public function __construct(
-        OrderRepositoryInterface $orderRepository,
-        CustomerRepositoryInterface $customerRepository
-    ) {
-        $this->orderRepository = $orderRepository;
-        $this->customerRepository = $customerRepository;
+    public function __construct(private OrderRepositoryInterface $orderRepository, private CustomerRepositoryInterface $customerRepository)
+    {
     }
 
     public function getStatisticsForChannel(ChannelInterface $channel): DashboardStatistics

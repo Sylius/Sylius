@@ -25,20 +25,11 @@ use Webmozart\Assert\Assert;
 
 class ZoneAndChannelBasedShippingMethodsResolver implements ShippingMethodsResolverInterface
 {
-    private ShippingMethodRepositoryInterface $shippingMethodRepository;
-
-    private ZoneMatcherInterface $zoneMatcher;
-
-    private ShippingMethodEligibilityCheckerInterface $eligibilityChecker;
-
     public function __construct(
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ZoneMatcherInterface $zoneMatcher,
-        ShippingMethodEligibilityCheckerInterface $eligibilityChecker
+        private ShippingMethodRepositoryInterface $shippingMethodRepository,
+        private ZoneMatcherInterface $zoneMatcher,
+        private ShippingMethodEligibilityCheckerInterface $eligibilityChecker
     ) {
-        $this->shippingMethodRepository = $shippingMethodRepository;
-        $this->zoneMatcher = $zoneMatcher;
-        $this->eligibilityChecker = $eligibilityChecker;
     }
 
     /**
@@ -75,7 +66,6 @@ class ZoneAndChannelBasedShippingMethodsResolver implements ShippingMethodsResol
         return $subject instanceof ShipmentInterface &&
             null !== $subject->getOrder() &&
             null !== $subject->getOrder()->getShippingAddress() &&
-            null !== $subject->getOrder()->getChannel()
-        ;
+            null !== $subject->getOrder()->getChannel();
     }
 }

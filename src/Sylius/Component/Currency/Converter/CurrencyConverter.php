@@ -18,14 +18,11 @@ use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 
 final class CurrencyConverter implements CurrencyConverterInterface
 {
-    private ExchangeRateRepositoryInterface $exchangeRateRepository;
-
     /** @var array|ExchangeRateInterface[] */
     private ?array $cache = null;
 
-    public function __construct(ExchangeRateRepositoryInterface $exchangeRateRepository)
+    public function __construct(private ExchangeRateRepositoryInterface $exchangeRateRepository)
     {
-        $this->exchangeRateRepository = $exchangeRateRepository;
     }
 
     public function convert(int $value, string $sourceCurrencyCode, string $targetCurrencyCode): int

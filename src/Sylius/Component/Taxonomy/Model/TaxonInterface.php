@@ -54,21 +54,12 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
      */
     public function getChildren(): Collection;
 
-    /**
-     * @param TaxonInterface $taxon
-     */
     public function hasChild(self $taxon): bool;
 
     public function hasChildren(): bool;
 
-    /**
-     * @param TaxonInterface $taxon
-     */
     public function addChild(self $taxon): void;
 
-    /**
-     * @param TaxonInterface $taxon
-     */
     public function removeChild(self $taxon): void;
 
     /**

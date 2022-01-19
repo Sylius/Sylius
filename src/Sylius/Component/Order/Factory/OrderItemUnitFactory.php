@@ -20,18 +20,10 @@ use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 class OrderItemUnitFactory implements OrderItemUnitFactoryInterface
 {
     /**
-     * @var string
-     *
-     * @psalm-var class-string
-     */
-    private $className;
-
-    /**
      * @psalm-param class-string $className
      */
-    public function __construct(string $className)
+    public function __construct(private string $className)
     {
-        $this->className = $className;
     }
 
     /**

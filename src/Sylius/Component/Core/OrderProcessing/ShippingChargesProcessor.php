@@ -24,16 +24,8 @@ use Webmozart\Assert\Assert;
 
 final class ShippingChargesProcessor implements OrderProcessorInterface
 {
-    private FactoryInterface $adjustmentFactory;
-
-    private DelegatingCalculatorInterface $shippingChargesCalculator;
-
-    public function __construct(
-        FactoryInterface $adjustmentFactory,
-        DelegatingCalculatorInterface $shippingChargesCalculator
-    ) {
-        $this->adjustmentFactory = $adjustmentFactory;
-        $this->shippingChargesCalculator = $shippingChargesCalculator;
+    public function __construct(private FactoryInterface $adjustmentFactory, private DelegatingCalculatorInterface $shippingChargesCalculator)
+    {
     }
 
     public function process(BaseOrderInterface $order): void
@@ -66,7 +58,7 @@ final class ShippingChargesProcessor implements OrderProcessorInterface
                 ]);
 
                 $shipment->addAdjustment($adjustment);
-            } catch (UndefinedShippingMethodException $exception) {
+            } catch (UndefinedShippingMethodException) {
             }
         }
     }

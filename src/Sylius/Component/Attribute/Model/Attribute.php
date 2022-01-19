@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
-class Attribute implements AttributeInterface
+class Attribute implements AttributeInterface, \Stringable
 {
     use TimestampableTrait;
     use TranslatableTrait {

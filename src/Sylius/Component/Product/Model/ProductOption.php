@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
-class ProductOption implements ProductOptionInterface
+class ProductOption implements ProductOptionInterface, \Stringable
 {
     use TimestampableTrait;
     use TranslatableTrait {

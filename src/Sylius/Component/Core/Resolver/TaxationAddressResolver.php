@@ -18,12 +18,8 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 final class TaxationAddressResolver Implements TaxationAddressResolverInterface
 {
-    /** @var bool */
-    private $shippingAddressBasedTaxation;
-
-    public function __construct(bool $shippingAddressBasedTaxation)
+    public function __construct(private bool $shippingAddressBasedTaxation)
     {
-        $this->shippingAddressBasedTaxation = $shippingAddressBasedTaxation;
     }
 
     public function getTaxationAddressFromOrder(OrderInterface $order): ?AddressInterface

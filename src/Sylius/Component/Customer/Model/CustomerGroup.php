@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Customer\Model;
 
-class CustomerGroup implements CustomerGroupInterface
+class CustomerGroup implements CustomerGroupInterface, \Stringable
 {
     /** @var mixed */
     protected $id;

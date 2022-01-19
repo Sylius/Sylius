@@ -24,11 +24,8 @@ final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'total_of_items_from_taxon';
 
-    private TaxonRepositoryInterface $taxonRepository;
-
-    public function __construct(TaxonRepositoryInterface $taxonRepository)
+    public function __construct(private TaxonRepositoryInterface $taxonRepository)
     {
-        $this->taxonRepository = $taxonRepository;
     }
 
     /**

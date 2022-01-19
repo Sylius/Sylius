@@ -21,14 +21,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CustomerStatisticsProvider implements CustomerStatisticsProviderInterface
 {
-    private OrderRepositoryInterface $orderRepository;
-
-    private RepositoryInterface $channelRepository;
-
-    public function __construct(OrderRepositoryInterface $orderRepository, RepositoryInterface $channelRepository)
+    public function __construct(private OrderRepositoryInterface $orderRepository, private RepositoryInterface $channelRepository)
     {
-        $this->orderRepository = $orderRepository;
-        $this->channelRepository = $channelRepository;
     }
 
     public function getCustomerStatistics(CustomerInterface $customer): CustomerStatistics

@@ -18,11 +18,8 @@ use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 
 final class UniqueIdBasedOrderTokenAssigner implements OrderTokenAssignerInterface
 {
-    private RandomnessGeneratorInterface $generator;
-
-    public function __construct(RandomnessGeneratorInterface $generator)
+    public function __construct(private RandomnessGeneratorInterface $generator)
     {
-        $this->generator = $generator;
     }
 
     public function assignTokenValue(OrderInterface $order): void

@@ -40,7 +40,7 @@ final class CompositeCartContext implements CartContextInterface
         foreach ($this->cartContexts as $cartContext) {
             try {
                 return $cartContext->getCart();
-            } catch (CartNotFoundException $exception) {
+            } catch (CartNotFoundException) {
                 continue;
             }
         }
