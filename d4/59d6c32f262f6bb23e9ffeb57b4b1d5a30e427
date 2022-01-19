@@ -1,0 +1,19 @@
+---------------------------------------------------------------------------
+
+by Roshyo at 2022-01-18T14:15:42Z
+
+Do you really think that promoted properties improve readability ?
+
+---------------------------------------------------------------------------
+
+by loic425 at 2022-01-18T14:32:39Z
+
+> Do you really think that promoted properties improve readability ?
+
+Less code is good, I'm in favor of that great PHP 8 feature. I was wondering if we should already use it on Sylius technical packages.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-01-19T12:48:46Z
+
+Thank you, Mateusz! :tada:
