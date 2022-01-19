@@ -15,59 +15,28 @@ namespace spec\Sylius\Bundle\ApiBundle\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface;
+use Sylius\Bundle\CoreBundle\Announcer\CatalogPromotionAnnouncerInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
-use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
-use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
-use Sylius\Component\Promotion\Provider\DateTimeProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
-use Symfony\Component\Messenger\Envelope;
-use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Messenger\Stamp\DelayStamp;
 
 final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
 {
-    function let(
-        MessageBusInterface $eventBus,
-        DelayStampCalculatorInterface $delayStampCalculator,
-        DateTimeProviderInterface $dateTimeProvider
-    ): void {
-        $this->beConstructedWith($eventBus, $delayStampCalculator, $dateTimeProvider);
+    function let(CatalogPromotionAnnouncerInterface $catalogPromotionAnnouncer): void
+    {
+        $this->beConstructedWith($catalogPromotionAnnouncer);
     }
 
-    function it_dispatches_catalog_promotion_created_and_catalog_promotion_ended_after_writing_catalog_promotion(
-        MessageBusInterface $eventBus,
+    function it_uses_announcer_to_dispatch_catalog_promotion_created_event_after_writing_catalog_promotion(
+        CatalogPromotionAnnouncerInterface $catalogPromotionAnnouncer,
         CatalogPromotionInterface $catalogPromotion,
         HttpKernelInterface $kernel,
-        Request $request,
-        DelayStampCalculatorInterface $delayStampCalculator,
-        DateTimeProviderInterface $dateTimeProvider
+        Request $request
     ): void {
         $request->getMethod()->willReturn(Request::METHOD_POST);
 
-        $startDateTime = new \DateTime('2021-10-09');
-        $endDateTime = new \DateTime('2021-10-10');
-        $dateTimeProvider->now()->willReturn(new \DateTime());
-
-        $catalogPromotion->getCode()->willReturn('Winter_sale');
-
-        $messageUpdate = new CatalogPromotionCreated('Winter_sale');
-        $messageEnd = new CatalogPromotionEnded('Winter_sale');
-
-        $catalogPromotion->getStartDate()->willReturn($startDateTime);
-        $catalogPromotion->getEndDate()->willReturn($endDateTime);
-
-        $startDelayStamp = new DelayStamp(200000);
-        $endDelayStamp = new DelayStamp(300000);
-
-        $delayStampCalculator->calculate(Argument::any(), $startDateTime)->willReturn($startDelayStamp);
-        $delayStampCalculator->calculate(Argument::any(), $endDateTime)->willReturn($endDelayStamp);
-
-        $eventBus->dispatch($messageUpdate, [$startDelayStamp])->willReturn(new Envelope($messageUpdate))->shouldBeCalled();
-        $eventBus->dispatch($messageEnd, [$endDelayStamp])->willReturn(new Envelope($messageEnd))->shouldBeCalled();
+        $catalogPromotionAnnouncer->dispatchCatalogPromotionCreatedEvent($catalogPromotion)->shouldBeCalled();
 
         $this->postWrite(new ViewEvent(
             $kernel->getWrappedObject(),
@@ -77,111 +46,15 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
         ));
     }
 
-    function it_dispatches_catalog_promotion_updated_and_catalog_promotion_ended_after_changing_catalog_promotion(
-        MessageBusInterface $eventBus,
+    function it_uses_announcer_to_dispatch_catalog_promotion_updated_event_after_changing_catalog_promotion(
+        CatalogPromotionAnnouncerInterface $catalogPromotionAnnouncer,
         CatalogPromotionInterface $catalogPromotion,
         HttpKernelInterface $kernel,
-        Request $request,
-        DelayStampCalculatorInterface $delayStampCalculator,
-        DateTimeProviderInterface $dateTimeProvider
+        Request $request
     ): void {
         $request->getMethod()->willReturn(Request::METHOD_PUT);
 
-        $startDateTime = new \DateTime('2021-10-09');
-        $endDateTime = new \DateTime('2021-10-10');
-        $dateTimeProvider->now()->willReturn(new \DateTime());
-
-        $catalogPromotion->getCode()->willReturn('Winter_sale');
-
-        $messageUpdate = new CatalogPromotionUpdated('Winter_sale');
-        $messageEnd = new CatalogPromotionEnded('Winter_sale');
-
-        $catalogPromotion->getStartDate()->willReturn($startDateTime);
-        $catalogPromotion->getEndDate()->willReturn($endDateTime);
-
-        $startDelayStamp = new DelayStamp(200000);
-        $endDelayStamp = new DelayStamp(300000);
-
-        $delayStampCalculator->calculate(Argument::any(), $startDateTime)->willReturn($startDelayStamp);
-        $delayStampCalculator->calculate(Argument::any(), $endDateTime)->willReturn($endDelayStamp);
-
-        $eventBus->dispatch($messageUpdate, [$startDelayStamp])->willReturn(new Envelope($messageUpdate))->shouldBeCalled();
-        $eventBus->dispatch($messageEnd, [$endDelayStamp])->willReturn(new Envelope($messageEnd))->shouldBeCalled();
-
-        $this->postWrite(new ViewEvent(
-            $kernel->getWrappedObject(),
-            $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
-            $catalogPromotion->getWrappedObject()
-        ));
-    }
-
-    function it_dispatches_catalog_promotion_updated_without_delay_if_start_date_is_not_provided(
-        MessageBusInterface $eventBus,
-        CatalogPromotionInterface $catalogPromotion,
-        HttpKernelInterface $kernel,
-        Request $request,
-        DelayStampCalculatorInterface $delayStampCalculator,
-        DateTimeProviderInterface $dateTimeProvider
-    ): void {
-        $request->getMethod()->willReturn(Request::METHOD_PUT);
-
-        $endDateTime = new \DateTime('2021-10-10');
-        $dateTimeProvider->now()->willReturn(new \DateTime());
-
-        $catalogPromotion->getCode()->willReturn('Winter_sale');
-
-        $messageUpdate = new CatalogPromotionUpdated('Winter_sale');
-        $messageEnd = new CatalogPromotionEnded('Winter_sale');
-
-        $catalogPromotion->getStartDate()->willReturn(null);
-        $catalogPromotion->getEndDate()->willReturn($endDateTime);
-
-        $endDelayStamp = new DelayStamp(300000);
-
-        $delayStampCalculator->calculate(Argument::any(), null)->shouldNotBeCalled();
-        $delayStampCalculator->calculate(Argument::any(), $endDateTime)->willReturn($endDelayStamp);
-
-        $eventBus->dispatch($messageUpdate, [])->willReturn(new Envelope($messageUpdate))->shouldBeCalled();
-        $eventBus->dispatch($messageEnd, [$endDelayStamp])->willReturn(new Envelope($messageEnd))->shouldBeCalled();
-
-        $this->postWrite(new ViewEvent(
-            $kernel->getWrappedObject(),
-            $request->getWrappedObject(),
-            HttpKernelInterface::MASTER_REQUEST,
-            $catalogPromotion->getWrappedObject()
-        ));
-    }
-
-    function it_does_not_dispatch_catalog_promotion_ended_when_end_date_is_not_provided(
-        MessageBusInterface $eventBus,
-        CatalogPromotionInterface $catalogPromotion,
-        HttpKernelInterface $kernel,
-        Request $request,
-        DelayStampCalculatorInterface $delayStampCalculator,
-        DateTimeProviderInterface $dateTimeProvider
-    ): void {
-        $request->getMethod()->willReturn(Request::METHOD_PUT);
-
-        $startDateTime = new \DateTime('2021-10-10');
-        $endDateTime = null;
-        $dateTimeProvider->now()->willReturn(new \DateTime());
-
-        $catalogPromotion->getCode()->willReturn('Winter_sale');
-
-        $messageUpdate = new CatalogPromotionUpdated('Winter_sale');
-        $messageEnd = new CatalogPromotionEnded('Winter_sale');
-
-        $catalogPromotion->getStartDate()->willReturn($startDateTime);
-        $catalogPromotion->getEndDate()->willReturn($endDateTime);
-
-        $startDelayStamp = new DelayStamp(200000);
-
-        $delayStampCalculator->calculate(Argument::any(), $startDateTime)->willReturn($startDelayStamp);
-        $delayStampCalculator->calculate(Argument::any(), $endDateTime)->shouldNotBeCalled();
-
-        $eventBus->dispatch($messageUpdate, [$startDelayStamp])->willReturn(new Envelope($messageUpdate))->shouldBeCalled();
-        $eventBus->dispatch($messageEnd, Argument::any())->willReturn(new Envelope($messageEnd))->shouldNotBeCalled();
+        $catalogPromotionAnnouncer->dispatchCatalogPromotionUpdatedEvent($catalogPromotion)->shouldBeCalled();
 
         $this->postWrite(new ViewEvent(
             $kernel->getWrappedObject(),
@@ -192,11 +65,11 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
     }
 
     function it_does_nothing_after_writing_other_entity(
-        MessageBusInterface $eventBus,
+        CatalogPromotionAnnouncerInterface $catalogPromotionAnnouncer,
         HttpKernelInterface $kernel,
         Request $request
     ): void {
-        $eventBus->dispatch(Argument::any())->shouldNotBeCalled();
+        $catalogPromotionAnnouncer->dispatchCatalogPromotionCreatedEvent(Argument::any())->shouldNotBeCalled();
 
         $this->postWrite(new ViewEvent(
             $kernel->getWrappedObject(),
@@ -207,14 +80,14 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_there_is_a_wrong_request_method(
-        MessageBusInterface $eventBus,
+        CatalogPromotionAnnouncerInterface $catalogPromotionAnnouncer,
         CatalogPromotionInterface $catalogPromotion,
         HttpKernelInterface $kernel,
         Request $request
     ): void {
         $request->getMethod()->willReturn(Request::METHOD_GET);
 
-        $eventBus->dispatch(Argument::any())->shouldNotBeCalled();
+        $catalogPromotionAnnouncer->dispatchCatalogPromotionCreatedEvent($catalogPromotion)->shouldNotBeCalled();
 
         $this->postWrite(new ViewEvent(
             $kernel->getWrappedObject(),

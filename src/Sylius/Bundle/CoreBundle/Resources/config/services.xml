@@ -254,7 +254,7 @@
         <service class="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager" id="sylius.mailer.order_email_manager">
             <argument type="service" id="sylius.email_sender" />
         </service>
-        
+
         <service
             id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface"
             class="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicator"
@@ -288,5 +288,14 @@
         <service id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" class="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculator"/>
 
         <service id="security.authentication_manager" alias="security.authentication.manager" />
+
+        <service
+            id="Sylius\Bundle\CoreBundle\Announcer\CatalogPromotionAnnouncerInterface"
+            class="Sylius\Bundle\CoreBundle\Announcer\CatalogPromotionAnnouncer"
+        >
+            <argument type="service" id="sylius.event_bus" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" />
+            <argument type="service" id="Sylius\Component\Promotion\Provider\DateTimeProviderInterface" />
+        </service>
     </services>
 </container>
