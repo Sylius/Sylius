@@ -92,11 +92,9 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\CatalogPromotionEventListener">
-            <argument type="service" id="sylius.event_bus" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" />
-            <argument type="service" id="Sylius\Component\Promotion\Provider\DateTimeProviderInterface" />
-            <tag name="kernel.event_listener" event="sylius.catalog_promotion.post_create" method="dispatchCatalogPromotionCreatedEvent" />
-            <tag name="kernel.event_listener" event="sylius.catalog_promotion.post_update" method="dispatchCatalogPromotionUpdatedEvent" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Announcer\CatalogPromotionAnnouncerInterface" />
+            <tag name="kernel.event_listener" event="sylius.catalog_promotion.post_create" method="handleCatalogPromotionCreatedEvent" />
+            <tag name="kernel.event_listener" event="sylius.catalog_promotion.post_update" method="handleCatalogPromotionUpdatedEvent" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\ProductEventListener">
