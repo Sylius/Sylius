@@ -20,11 +20,8 @@ use Webmozart\Assert\Assert;
 
 final class MinimumPriceDistributor implements MinimumPriceDistributorInterface
 {
-    private ProportionalIntegerDistributorInterface $proportionalIntegerDistributor;
-
-    public function __construct(ProportionalIntegerDistributorInterface $proportionalIntegerDistributor)
+    public function __construct(private ProportionalIntegerDistributorInterface $proportionalIntegerDistributor)
     {
-        $this->proportionalIntegerDistributor = $proportionalIntegerDistributor;
     }
 
     public function distribute(array $orderItems, int $amount, ChannelInterface $channel, bool $appliesOnDiscounted): array

@@ -20,14 +20,8 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ChannelFactory implements ChannelFactoryInterface
 {
-    private FactoryInterface $decoratedFactory;
-
-    private string $defaultCalculationStrategy;
-
-    public function __construct(FactoryInterface $decoratedFactory, string $defaultCalculationStrategy)
+    public function __construct(private FactoryInterface $decoratedFactory, private string $defaultCalculationStrategy)
     {
-        $this->decoratedFactory = $decoratedFactory;
-        $this->defaultCalculationStrategy = $defaultCalculationStrategy;
     }
 
     /**

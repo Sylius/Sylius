@@ -18,16 +18,8 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class ProductFactory implements ProductFactoryInterface
 {
-    private FactoryInterface $factory;
-
-    private FactoryInterface $variantFactory;
-
-    public function __construct(
-        FactoryInterface $factory,
-        FactoryInterface $variantFactory
-    ) {
-        $this->factory = $factory;
-        $this->variantFactory = $variantFactory;
+    public function __construct(private FactoryInterface $factory, private FactoryInterface $variantFactory)
+    {
     }
 
     public function createNew(): ProductInterface

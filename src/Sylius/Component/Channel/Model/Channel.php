@@ -16,7 +16,7 @@ namespace Sylius\Component\Channel\Model;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 
-class Channel implements ChannelInterface
+class Channel implements ChannelInterface, \Stringable
 {
     use TimestampableTrait, ToggleableTrait;
 

@@ -15,7 +15,7 @@ namespace Sylius\Component\Customer\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
-class Customer implements CustomerInterface
+class Customer implements CustomerInterface, \Stringable
 {
     use TimestampableTrait;
 

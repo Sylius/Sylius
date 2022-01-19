@@ -15,11 +15,8 @@ namespace Sylius\Component\Core\Dashboard;
 
 final class Interval
 {
-    private string $interval;
-
-    private function __construct(string $interval)
+    private function __construct(private string $interval)
     {
-        $this->interval = $interval;
     }
 
     public function asString(): string

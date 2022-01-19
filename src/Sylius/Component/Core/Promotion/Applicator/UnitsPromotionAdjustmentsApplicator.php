@@ -26,16 +26,8 @@ use Webmozart\Assert\Assert;
 
 final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustmentsApplicatorInterface
 {
-    private AdjustmentFactoryInterface $adjustmentFactory;
-
-    private IntegerDistributorInterface $distributor;
-
-    public function __construct(
-        AdjustmentFactoryInterface $adjustmentFactory,
-        IntegerDistributorInterface $distributor
-    ) {
-        $this->adjustmentFactory = $adjustmentFactory;
-        $this->distributor = $distributor;
+    public function __construct(private AdjustmentFactoryInterface $adjustmentFactory, private IntegerDistributorInterface $distributor)
+    {
     }
 
     /**

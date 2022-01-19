@@ -16,7 +16,7 @@ namespace Sylius\Component\Product\Model;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
-class ProductOptionValue implements ProductOptionValueInterface
+class ProductOptionValue implements ProductOptionValueInterface, \Stringable
 {
     use TranslatableTrait {
         __construct as private initializeTranslationCollection;

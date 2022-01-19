@@ -15,7 +15,7 @@ namespace Sylius\Component\Shipping\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
-class ShippingCategory implements ShippingCategoryInterface
+class ShippingCategory implements ShippingCategoryInterface, \Stringable
 {
     use TimestampableTrait;
 

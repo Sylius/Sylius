@@ -16,7 +16,7 @@ namespace Sylius\Component\Addressing\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class Zone implements ZoneInterface
+class Zone implements ZoneInterface, \Stringable
 {
     /** @var mixed */
     protected $id;

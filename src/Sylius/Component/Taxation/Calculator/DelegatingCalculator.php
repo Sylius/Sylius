@@ -18,11 +18,8 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 final class DelegatingCalculator implements CalculatorInterface
 {
-    private ServiceRegistryInterface $calculatorsRegistry;
-
-    public function __construct(ServiceRegistryInterface $serviceRegistry)
+    public function __construct(private ServiceRegistryInterface $calculatorsRegistry)
     {
-        $this->calculatorsRegistry = $serviceRegistry;
     }
 
     public function calculate(float $base, TaxRateInterface $rate): float

@@ -142,11 +142,8 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
             ->will(new class($channel->getWrappedObject()) {
                 private int $counter = 0;
 
-                private ChannelInterface $channel;
-
-                public function __construct(ChannelInterface $channel)
+                public function __construct(private ChannelInterface $channel)
                 {
-                    $this->channel = $channel;
                 }
 
                 /** @throws ChannelNotFoundException */

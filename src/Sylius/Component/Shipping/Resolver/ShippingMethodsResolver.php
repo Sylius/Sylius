@@ -19,16 +19,10 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 final class ShippingMethodsResolver implements ShippingMethodsResolverInterface
 {
-    private ObjectRepository $shippingMethodRepository;
-
-    private ShippingMethodEligibilityCheckerInterface $eligibilityChecker;
-
     public function __construct(
-        ObjectRepository $shippingMethodRepository,
-        ShippingMethodEligibilityCheckerInterface $eligibilityChecker
+        private ObjectRepository $shippingMethodRepository,
+        private ShippingMethodEligibilityCheckerInterface $eligibilityChecker
     ) {
-        $this->shippingMethodRepository = $shippingMethodRepository;
-        $this->eligibilityChecker = $eligibilityChecker;
     }
 
     public function getSupportedMethods(ShippingSubjectInterface $subject): array

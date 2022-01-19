@@ -20,11 +20,8 @@ use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 
 final class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInterface
 {
-    private ShippingMethodRepositoryInterface $shippingMethodRepository;
-
-    public function __construct(ShippingMethodRepositoryInterface $shippingMethodRepository)
+    public function __construct(private ShippingMethodRepositoryInterface $shippingMethodRepository)
     {
-        $this->shippingMethodRepository = $shippingMethodRepository;
     }
 
     public function getDefaultShippingMethod(ShipmentInterface $shipment): ShippingMethodInterface

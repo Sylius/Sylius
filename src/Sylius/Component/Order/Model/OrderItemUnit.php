@@ -22,11 +22,6 @@ class OrderItemUnit implements OrderItemUnitInterface
     protected $id = null;
 
     /**
-     * @var OrderItemInterface
-     */
-    protected $orderItem;
-
-    /**
      * @var Collection|AdjustmentInterface[]
      *
      * @psalm-var Collection<array-key, AdjustmentInterface>
@@ -38,11 +33,9 @@ class OrderItemUnit implements OrderItemUnitInterface
      */
     protected $adjustmentsTotal = 0;
 
-    public function __construct(OrderItemInterface $orderItem)
+    public function __construct(protected OrderItemInterface $orderItem)
     {
         $this->adjustments = new ArrayCollection();
-
-        $this->orderItem = $orderItem;
         $this->orderItem->addUnit($this);
     }
 

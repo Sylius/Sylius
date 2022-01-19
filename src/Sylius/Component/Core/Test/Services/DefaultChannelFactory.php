@@ -28,36 +28,15 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
 
     public const DEFAULT_CHANNEL_CURRENCY = 'USD';
 
-    private ChannelFactoryInterface $channelFactory;
-
-    private FactoryInterface $currencyFactory;
-
-    private FactoryInterface $localeFactory;
-
-    private RepositoryInterface $channelRepository;
-
-    private RepositoryInterface $currencyRepository;
-
-    private RepositoryInterface $localeRepository;
-
-    private string $defaultLocaleCode;
-
     public function __construct(
-        ChannelFactoryInterface $channelFactory,
-        FactoryInterface $currencyFactory,
-        FactoryInterface $localeFactory,
-        RepositoryInterface $channelRepository,
-        RepositoryInterface $currencyRepository,
-        RepositoryInterface $localeRepository,
-        string $defaultLocaleCode
+        private ChannelFactoryInterface $channelFactory,
+        private FactoryInterface $currencyFactory,
+        private FactoryInterface $localeFactory,
+        private RepositoryInterface $channelRepository,
+        private RepositoryInterface $currencyRepository,
+        private RepositoryInterface $localeRepository,
+        private string $defaultLocaleCode
     ) {
-        $this->channelFactory = $channelFactory;
-        $this->currencyFactory = $currencyFactory;
-        $this->localeFactory = $localeFactory;
-        $this->channelRepository = $channelRepository;
-        $this->currencyRepository = $currencyRepository;
-        $this->localeRepository = $localeRepository;
-        $this->defaultLocaleCode = $defaultLocaleCode;
     }
 
     public function create(?string $code = null, ?string $name = null, ?string $currencyCode = null): array
