@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Applicator\ActionBasedDiscountApplicatorInterface;
 use Sylius\Bundle\CoreBundle\Calculator\CatalogPromotionPriceCalculatorInterface;
-use Sylius\Bundle\CoreBundle\DiscountApplicationCriteria\DiscountApplicationCriteriaInterface;
+use Sylius\Bundle\PromotionBundle\DiscountApplicationCriteria\DiscountApplicationCriteriaInterface;
 use Sylius\Component\Core\Exception\ActionBasedPriceCalculatorNotFoundException;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -46,8 +46,8 @@ final class ActionBasedDiscountApplicatorSpec extends ObjectBehavior
         DiscountApplicationCriteriaInterface $exclusiveCriteria,
         CatalogPromotionPriceCalculatorInterface $priceCalculator
     ): void {
-        $minimumPriceCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(true);
-        $exclusiveCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(true);
+        $minimumPriceCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(true);
+        $exclusiveCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(true);
 
         $channelPricing->getOriginalPrice()->willReturn(300);
 
@@ -67,8 +67,8 @@ final class ActionBasedDiscountApplicatorSpec extends ObjectBehavior
         DiscountApplicationCriteriaInterface $exclusiveCriteria,
         CatalogPromotionPriceCalculatorInterface $priceCalculator
     ): void {
-        $minimumPriceCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(true);
-        $exclusiveCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(false);
+        $minimumPriceCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(true);
+        $exclusiveCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(false);
 
         $channelPricing->getOriginalPrice()->willReturn(300);
 
@@ -88,8 +88,8 @@ final class ActionBasedDiscountApplicatorSpec extends ObjectBehavior
         DiscountApplicationCriteriaInterface $exclusiveCriteria,
         CatalogPromotionPriceCalculatorInterface $priceCalculator
     ): void {
-        $minimumPriceCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(true);
-        $exclusiveCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(true);
+        $minimumPriceCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(true);
+        $exclusiveCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(true);
 
         $channelPricing->getOriginalPrice()->willReturn(200);
 
@@ -113,8 +113,8 @@ final class ActionBasedDiscountApplicatorSpec extends ObjectBehavior
         DiscountApplicationCriteriaInterface $exclusiveCriteria,
         CatalogPromotionPriceCalculatorInterface $priceCalculator
     ): void {
-        $minimumPriceCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(true);
-        $exclusiveCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(true);
+        $minimumPriceCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(true);
+        $exclusiveCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(true);
 
         $channelPricing->getOriginalPrice()->willReturn(null);
 
@@ -138,8 +138,8 @@ final class ActionBasedDiscountApplicatorSpec extends ObjectBehavior
         DiscountApplicationCriteriaInterface $exclusiveCriteria,
         CatalogPromotionPriceCalculatorInterface $priceCalculator
     ): void {
-        $minimumPriceCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(true);
-        $exclusiveCriteria->isApplicable($catalogPromotion, $action, $channelPricing)->willReturn(false);
+        $minimumPriceCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(true);
+        $exclusiveCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(false);
 
         $channelPricing->getOriginalPrice()->shouldNotBeCalled();
 

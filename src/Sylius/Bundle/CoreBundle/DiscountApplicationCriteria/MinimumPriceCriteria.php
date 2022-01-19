@@ -13,14 +13,20 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DiscountApplicationCriteria;
 
-use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Bundle\PromotionBundle\DiscountApplicationCriteria\DiscountApplicationCriteriaInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
+use Webmozart\Assert\Assert;
 
 final class MinimumPriceCriteria implements DiscountApplicationCriteriaInterface
 {
-    public function isApplicable(CatalogPromotionInterface $catalogPromotion, CatalogPromotionActionInterface $action, ChannelPricingInterface $channelPricing): bool
+    public function isApplicable(CatalogPromotionInterface $catalogPromotion, array $context): bool
     {
+        Assert::keyExists($context, 'channelPricing');
+
+        /** @var ChannelPricingInterface $channelPricing */
+        $channelPricing = $context['channelPricing'];
+
         return $channelPricing->getPrice() !== $channelPricing->getMinimumPrice();
     }
 }
