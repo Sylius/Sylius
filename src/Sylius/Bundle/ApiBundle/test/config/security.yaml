@@ -1,12 +1,12 @@
 security:
-    always_authenticate_before_granting: true
+    enable_authenticator_manager: true
     providers:
         sylius_api_admin_user_provider:
             id: sylius.admin_user_provider.email_or_name_based
         sylius_api_shop_user_provider:
             id: sylius.shop_user_provider.email_or_name_based
 
-    encoders:
+    password_hashers:
         sha512: sha512
         Sylius\Component\User\Model\UserInterface: sha512
 
@@ -15,31 +15,25 @@ security:
             pattern: "%sylius.security.new_api_admin_regex%/.*"
             provider: sylius_api_admin_user_provider
             stateless: true
-            anonymous: true
             json_login:
                 check_path: "%sylius.security.new_api_admin_route%/authentication-token"
                 username_path: email
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
-            guard:
-                authenticators:
-                    - lexik_jwt_authentication.jwt_token_authenticator
+            jwt: ~
 
         new_api_shop_user:
             pattern: "%sylius.security.new_api_shop_regex%/.*"
             provider: sylius_api_shop_user_provider
             stateless: true
-            anonymous: true
             json_login:
                 check_path: "%sylius.security.new_api_shop_route%/authentication-token"
                 username_path: email
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
-            guard:
-                authenticators:
-                    - lexik_jwt_authentication.jwt_token_authenticator
+            jwt: ~
 
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
@@ -47,10 +41,10 @@ security:
 
     access_control:
         - { path: "%sylius.security.new_api_admin_regex%/.*", role: ROLE_API_ACCESS }
-        - { path: "%sylius.security.new_api_admin_route%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "%sylius.security.new_api_admin_route%/authentication-token", role: PUBLIC_ACCESS }
         - { path: "%sylius.security.new_api_user_account_regex%/.*", role: ROLE_USER }
-        - { path: "%sylius.security.new_api_shop_route%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "%sylius.security.new_api_shop_regex%/.*", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "%sylius.security.new_api_shop_route%/authentication-token", role: PUBLIC_ACCESS }
+        - { path: "%sylius.security.new_api_shop_regex%/.*", role: PUBLIC_ACCESS }
 
 sylius_user:
     encoder: sha512
