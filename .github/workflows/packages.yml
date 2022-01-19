@@ -99,8 +99,20 @@ jobs:
                 working-directory: "src/Sylius/${{ matrix.package }}"
 
             -
-                name: Test package
-                run: bin/test-package src/Sylius/${{ matrix.package }}
+                name: Setup Database(for ApiBundle only)
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                run: test/bin/console doctrine:schema:update --force -e test
+                if: always() && matrix.package == 'Bundle/ApiBundle'
+
+            -
+                name: Run PHPSpec
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                run: vendor/bin/phpspec run --ansi --no-interaction -f dot
+
+            -
+                name: Run PHPUnit
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                run: vendor/bin/phpunit --colors=always
 
     notify-about-build-failure:
         runs-on: ubuntu-latest
