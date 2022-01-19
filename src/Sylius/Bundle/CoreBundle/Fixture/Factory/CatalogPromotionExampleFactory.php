@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Faker\Factory;
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
-use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
+use Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
@@ -40,7 +40,7 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
 
     private ExampleFactoryInterface $catalogPromotionActionExampleFactory;
 
-    private CatalogPromotionProcessorInterface $catalogPromotionProcessor;
+    private AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor;
 
     private Generator $faker;
 
@@ -52,14 +52,14 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
         ChannelRepositoryInterface $channelRepository,
         ExampleFactoryInterface $catalogPromotionScopeExampleFactory,
         ExampleFactoryInterface $catalogPromotionActionExampleFactory,
-        CatalogPromotionProcessorInterface $catalogPromotionProcessor
+        AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor
     ) {
         $this->catalogPromotionFactory = $catalogPromotionFactory;
         $this->localeRepository = $localeRepository;
         $this->channelRepository = $channelRepository;
         $this->catalogPromotionScopeExampleFactory = $catalogPromotionScopeExampleFactory;
         $this->catalogPromotionActionExampleFactory = $catalogPromotionActionExampleFactory;
-        $this->catalogPromotionProcessor = $catalogPromotionProcessor;
+        $this->allCatalogPromotionsProcessor = $allCatalogPromotionsProcessor;
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
@@ -74,6 +74,9 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
         $catalogPromotion = $this->catalogPromotionFactory->createNew();
         $catalogPromotion->setCode($options['code']);
         $catalogPromotion->setName($options['name']);
+        $catalogPromotion->setStartDate($options['startDate']);
+        $catalogPromotion->setEndDate($options['endDate']);
+        $catalogPromotion->setEnabled($options['enabled']);
         $catalogPromotion->setPriority($options['priority'] ?? 0);
         $catalogPromotion->setExclusive($options['exclusive'] ?? false);
 
@@ -107,7 +110,7 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
             }
         }
 
-        $this->catalogPromotionProcessor->process($catalogPromotion);
+        $this->allCatalogPromotionsProcessor->process();
 
         return $catalogPromotion;
     }
@@ -146,6 +149,12 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
             ->setAllowedTypes('priority', ['integer', 'null'])
             ->setDefault('exclusive', false)
             ->setAllowedTypes('exclusive', ['boolean', 'null'])
+            ->setDefault('startDate', null)
+            ->setAllowedTypes('startDate', [\DateTimeInterface::class, 'null'])
+            ->setDefault('endDate', null)
+            ->setAllowedTypes('endDate', [\DateTimeInterface::class, 'null'])
+            ->setDefault('enabled', true)
+            ->setAllowedTypes('enabled', 'boolean')
         ;
     }
 

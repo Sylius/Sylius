@@ -348,7 +348,7 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^there is a catalog promotion "([^"]*)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
+     * @Given /^there is (?:a|another) catalog promotion "([^"]*)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
      */
     public function thereIsACatalogPromotionAvailableInChannelThatReducesPriceByAndAppliesOnVariant(
         string $name,
@@ -357,17 +357,75 @@ final class CatalogPromotionContext implements Context
         ProductVariantInterface $variant
     ): void {
         $this->createCatalogPromotion(
-            $name,
-            null,
-            [$channel->getCode()],
-            [[
+            name: $name,
+            channels: [$channel->getCode()],
+            scopes: [[
                 'type' => ForVariantsScopeVariantsProvider::TYPE,
                 'configuration' => ['variants' => [$variant->getCode()]],
             ]],
-            [[
+            actions: [[
                 'type' => PercentageDiscountPriceCalculator::TYPE,
                 'configuration' => ['amount' => $discount],
             ]]
+        );
+
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given /^there is (?:a|another) catalog promotion "([^"]*)" between "([^"]+)" and "([^"]+)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
+     */
+    public function thereIsACatalogPromotionBetweenAvailableInChannelThatReducesPriceByAndAppliesOnVariant(
+        string $name,
+        string $startDate,
+        string $endDate,
+        ChannelInterface $channel,
+        float $discount,
+        ProductVariantInterface $variant
+    ): void {
+        $this->createCatalogPromotion(
+            name: $name,
+            channels: [$channel->getCode()],
+            scopes: [[
+                'type' => ForVariantsScopeVariantsProvider::TYPE,
+                'configuration' => ['variants' => [$variant->getCode()]],
+            ]],
+            actions: [[
+                'type' => PercentageDiscountPriceCalculator::TYPE,
+                'configuration' => ['amount' => $discount],
+            ]],
+            startDate: new \DateTimeImmutable($startDate),
+            endDate: new \DateTimeImmutable($endDate)
+        );
+
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given /^there is disabled catalog promotion "([^"]*)" between "([^"]+)" and "([^"]+)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
+     */
+    public function thereIsDisabledCatalogPromotionAvailableInChannelThatReducesPriceByAndAppliesOnVariant(
+        string $name,
+        string $startDate,
+        string $endDate,
+        ChannelInterface $channel,
+        float $discount,
+        ProductVariantInterface $variant
+    ): void {
+        $this->createCatalogPromotion(
+            name: $name,
+            channels: [$channel->getCode()],
+            scopes: [[
+                'type' => ForVariantsScopeVariantsProvider::TYPE,
+                'configuration' => ['variants' => [$variant->getCode()]],
+            ]],
+            actions: [[
+                'type' => PercentageDiscountPriceCalculator::TYPE,
+                'configuration' => ['amount' => $discount],
+            ]],
+            startDate: new \DateTimeImmutable($startDate),
+            endDate: new \DateTimeImmutable($endDate),
+            enabled: false
         );
 
         $this->entityManager->flush();
@@ -390,32 +448,6 @@ final class CatalogPromotionContext implements Context
                 $firstChannel->getCode(),
                 $secondChannel->getCode()
             ],
-            [[
-                'type' => ForVariantsScopeVariantsProvider::TYPE,
-                'configuration' => ['variants' => [$variant->getCode()]],
-            ]],
-            [[
-                'type' => PercentageDiscountPriceCalculator::TYPE,
-                'configuration' => ['amount' => $discount],
-            ]]
-        );
-
-        $this->entityManager->flush();
-    }
-
-    /**
-     * @Given /^there is another catalog promotion "([^"]*)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
-     */
-    public function thereIsAnotherCatalogPromotionAvailableInChannelThatReducesPriceByAndAppliesOnVariant(
-        string $name,
-        ChannelInterface $channel,
-        float $discount,
-        ProductVariantInterface $variant
-    ): void {
-        $this->createCatalogPromotion(
-            $name,
-            null,
-            [$channel->getCode()],
             [[
                 'type' => ForVariantsScopeVariantsProvider::TYPE,
                 'configuration' => ['variants' => [$variant->getCode()]],
@@ -604,6 +636,7 @@ final class CatalogPromotionContext implements Context
 
     /**
      * @Given the catalog promotion :catalogPromotion operates between :startDate and :endDate
+     * @Given /^(this catalog promotion) operates between ("[^"]+") and ("[^"]+")$/
      */
     public function theCatalogPromotionOperatesBetweenDates(
         CatalogPromotionInterface $catalogPromotion,
@@ -670,7 +703,10 @@ final class CatalogPromotionContext implements Context
         array $scopes = [],
         array $actions = [],
         int $priority = null,
-        bool $exclusive = false
+        bool $exclusive = false,
+        \DateTimeImmutable $startDate = null,
+        \DateTimeImmutable $endDate = null,
+        bool $enabled = true
     ): CatalogPromotionInterface {
         if (empty($channels) && $this->sharedStorage->has('channel')) {
             $channels = [$this->sharedStorage->get('channel')];
@@ -682,6 +718,9 @@ final class CatalogPromotionContext implements Context
         $catalogPromotion = $this->catalogPromotionExampleFactory->create([
             'name' => $name,
             'code' => $code,
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            'enabled' => $enabled,
             'channels' => $channels,
             'actions' => $actions,
             'scopes' => $scopes,
