@@ -1,20 +1,21 @@
 Sylius Team
 ===========
 
-Sylius Team members represent the following roles:
-
-Core Merger
-~~~~~~~~~~~
-
-* Reviews and merges pull requests
-* Triages and reacts to issues
-
-This role is currently held by:
+The following people are creating Sylius Core Team:
 
 * **Łukasz Chruściel** (`lchrusciel`_)
 * **Grzegorz Sadowski** (`GSadee`_)
 * **Mateusz Zalewski** (`Zales0123`_)
-* **Arkadiusz Krakowiak** (`Arminek`_)
+* **Loïc Frémont** (`loic425`_)
+* **Victor Vasiloi** (`vvasiloi`_)
+* **Stephane Decock** (`Roshyo`_)
+
+Theirs accountabilities are:
+
+* Reviews and merges pull requests
+* Triages and reacts to issues
+
+In addition, they are supported by:
 
 Product Owner
 ~~~~~~~~~~~~~
@@ -55,24 +56,6 @@ This role is currently held by:
 
 * **Grzegorz Sadowski** (`GSadee`_)
 
-Demon
-~~~~~
-
-* Deploys and maintains our public demos (`demo.sylius.com`_, `master.demo.sylius.com`_)
-
-This role is currently held by:
-
-* **Arkadiusz Krakowiak** (`Arminek`_)
-
-Open Source Scout
-~~~~~~~~~~~~~~~~~
-
-* Engages the top community members as maintainers
-
-This role is currently held by:
-
-* **Łukasz Chruściel** (`lchrusciel`_)
-
 Architect
 ~~~~~~~~~
 
@@ -84,7 +67,6 @@ This role is currently held by:
 
 * **Łukasz Chruściel** (`lchrusciel`_)
 * **Mateusz Zalewski** (`Zales0123`_)
-* **Arkadiusz Krakowiak** (`Arminek`_)
 
 API Designer
 ~~~~~~~~~~~~
@@ -99,25 +81,6 @@ This role is currently held by:
 
 * **Łukasz Chruściel** (`lchrusciel`_)
 
-CrowdIn Magician
-~~~~~~~~~~~~~~~~
-
-* Maintains translations and integration with `CrowdIn`_
-* Curates proofreaders team
-
-This role is currently held by:
-
-* **Dominik Garbulski** (`SirDomin`_)
-
-Documentation Mechanic
-~~~~~~~~~~~~~~~~~~~~~~
-
-* Maintains and configures documentation setup on Read The Docs
-
-This role is currently held by:
-
-* **Magdalena Sadowska** (`CoderMaggie`_)
-
 Documentation Editor-in-chief
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -130,15 +93,6 @@ This role is currently held by:
 
 * **Magdalena Sadowska** (`CoderMaggie`_)
 
-Frontend Developer
-~~~~~~~~~~~~~~~~~~
-
-* Provides frontend help upon request
-
-This role is currently held by:
-
-* **Szymon Kulczyński** (`kulczy`_)
-
 Sylius Technical Libraries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -149,30 +103,13 @@ This role is currently held by:
 
 * **Mateusz Zalewski** (`Zales0123`_)
 
-Docker Master
-~~~~~~~~~~~~~
-
-* Reviews the Docker related PRs and issues
-* Maintains the Sylius Docker image
-
-This role is currently held by:
-
-* **Arkadiusz Krakowiak** (`Arminek`_)
-
-.. _`AdamKasp`: https://github.com/AdamKasp/
 .. _`CoderMaggie`: https://github.com/CoderMaggie/
-.. _`CrowdIn`: https://crowdin.com/project/sylius
-.. _`demo.sylius.com`: https://demo.sylius.com/
 .. _`GSadee`: https://github.com/GSadee/
-.. _`kulczy`: https://github.com/kulczy/
 .. _`lchrusciel`: https://github.com/lchrusciel/
-.. _`master.demo.sylius.com`: https://master.demo.sylius.com/
-.. _`Arminek`: https://github.com/Arminek/
+.. _`loic425`: https://github.com/loic425
 .. _`pjedrzejewski`: https://github.com/pjedrzejewski/
-.. _`PluginSkeleton`: https://github.com/Sylius/PluginSkeleton
-.. _`Sylius-Standard`: https://github.com/Sylius/Sylius-Standard
+.. _`Roshyo`: https://github.com/Roshyo
 .. _`Sylius`: https://github.com/Sylius/Sylius
 .. _`SyliusLabs`: https://github.com/SyliusLabs
-.. _`the Sylius Roadmap`: https://sylius.com/roadmap/
+.. _`vvasiloi`: https://github.com/vvasiloi
 .. _`Zales0123`: https://github.com/Zales0123/
-.. _`SirDomin`: https://github.com/SirDomin/
