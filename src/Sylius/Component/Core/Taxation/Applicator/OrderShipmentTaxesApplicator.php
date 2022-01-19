@@ -26,8 +26,11 @@ use Webmozart\Assert\Assert;
 
 class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
 {
-    public function __construct(private CalculatorInterface $calculator, private AdjustmentFactoryInterface $adjustmentFactory, private TaxRateResolverInterface $taxRateResolver)
-    {
+    public function __construct(
+        private CalculatorInterface $calculator,
+        private AdjustmentFactoryInterface $adjustmentFactory,
+        private TaxRateResolverInterface $taxRateResolver
+    ) {
     }
 
     public function apply(OrderInterface $order, ZoneInterface $zone): void
@@ -54,7 +57,7 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
                 continue;
             }
 
-            $this->addAdjustment($shipment, (int) $taxAmount, $taxRate, $shippingMethod);
+            $this->addAdjustment($shipment, (int)$taxAmount, $taxRate, $shippingMethod);
         }
     }
 

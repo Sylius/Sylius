@@ -19,8 +19,10 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 final class OrderModifier implements OrderModifierInterface
 {
-    public function __construct(private OrderProcessorInterface $orderProcessor, private OrderItemQuantityModifierInterface $orderItemQuantityModifier)
-    {
+    public function __construct(
+        private OrderProcessorInterface $orderProcessor,
+        private OrderItemQuantityModifierInterface $orderItemQuantityModifier
+    ) {
     }
 
     public function addToOrder(OrderInterface $cart, OrderItemInterface $cartItem): void

@@ -21,8 +21,7 @@ final class SalesSummary implements SalesSummaryInterface
     public function __construct(
         /** @psalm-var array<string, string> */
         private array $intervalsSalesMap
-    )
-    {
+    ) {
     }
 
     public function getIntervals(): array

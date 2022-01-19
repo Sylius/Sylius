@@ -23,12 +23,18 @@ use Webmozart\Assert\Assert;
 
 final class PromotionCouponGenerator implements PromotionCouponGeneratorInterface
 {
-    public function __construct(private FactoryInterface $couponFactory, private PromotionCouponRepositoryInterface $couponRepository, private ObjectManager $objectManager, private GenerationPolicyInterface $generationPolicy)
-    {
+    public function __construct(
+        private FactoryInterface $couponFactory,
+        private PromotionCouponRepositoryInterface $couponRepository,
+        private ObjectManager $objectManager,
+        private GenerationPolicyInterface $generationPolicy
+    ) {
     }
 
-    public function generate(PromotionInterface $promotion, PromotionCouponGeneratorInstructionInterface $instruction): array
-    {
+    public function generate(
+        PromotionInterface $promotion,
+        PromotionCouponGeneratorInstructionInterface $instruction
+    ): array {
         $generatedCoupons = [];
 
         $this->assertGenerationIsPossible($instruction);

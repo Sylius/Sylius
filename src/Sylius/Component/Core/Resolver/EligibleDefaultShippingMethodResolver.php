@@ -29,8 +29,11 @@ use Webmozart\Assert\Assert;
 
 final class EligibleDefaultShippingMethodResolver implements DefaultShippingMethodResolverInterface
 {
-    public function __construct(private ShippingMethodRepositoryInterface $shippingMethodRepository, private ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker, private ZoneMatcherInterface $zoneMatcher)
-    {
+    public function __construct(
+        private ShippingMethodRepositoryInterface $shippingMethodRepository,
+        private ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker,
+        private ZoneMatcherInterface $zoneMatcher
+    ) {
     }
 
     public function getDefaultShippingMethod(ShipmentInterface $shipment): ShippingMethodInterface
