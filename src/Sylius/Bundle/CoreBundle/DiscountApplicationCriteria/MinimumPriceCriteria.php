@@ -23,6 +23,7 @@ final class MinimumPriceCriteria implements DiscountApplicationCriteriaInterface
     public function isApplicable(CatalogPromotionInterface $catalogPromotion, array $context): bool
     {
         Assert::keyExists($context, 'channelPricing');
+        Assert::isInstanceOf($context['channelPricing'], ChannelPricingInterface::class);
 
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $context['channelPricing'];

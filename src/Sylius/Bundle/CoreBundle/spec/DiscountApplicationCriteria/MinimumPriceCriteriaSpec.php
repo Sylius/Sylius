@@ -61,4 +61,14 @@ final class MinimumPriceCriteriaSpec extends ObjectBehavior
     ): void {
         $this->shouldThrow(InvalidArgumentException::class)->during('isApplicable', [$catalogPromotion, ['action' => $action->getWrappedObject()]]);
     }
+
+    function it_throws_exception_if_channel_pricing_is_not_instance_of_channel_pricing(
+        CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionActionInterface $action
+    ): void {
+        $this->shouldThrow(InvalidArgumentException::class)->during(
+            'isApplicable',
+            [$catalogPromotion, ['action' => $action->getWrappedObject(), 'channelPricing' => 'string']]
+        );
+    }
 }

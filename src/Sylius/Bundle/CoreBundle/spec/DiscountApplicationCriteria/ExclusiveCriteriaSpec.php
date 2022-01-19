@@ -15,7 +15,7 @@ namespace spec\Sylius\Bundle\CoreBundle\DiscountApplicationCriteria;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\PromotionBundle\DiscountApplicationCriteria\DiscountApplicationCriteriaInterface;
-use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Webmozart\Assert\InvalidArgumentException;
@@ -54,9 +54,19 @@ final class ExclusiveCriteriaSpec extends ObjectBehavior
     }
 
     function it_throws_exception_if_channel_pricing_is_not_provided(
-        \Sylius\Component\Promotion\Model\CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionInterface $catalogPromotion,
         CatalogPromotionActionInterface $action
     ): void {
         $this->shouldThrow(InvalidArgumentException::class)->during('isApplicable', [$catalogPromotion, ['action' => $action->getWrappedObject()]]);
+    }
+
+    function it_throws_exception_if_channel_pricing_is_not_instance_of_channel_pricing(
+        CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionActionInterface $action
+    ): void {
+        $this->shouldThrow(InvalidArgumentException::class)->during(
+            'isApplicable',
+            [$catalogPromotion, ['action' => $action->getWrappedObject(), 'channelPricing' => 'string']]
+        );
     }
 }
