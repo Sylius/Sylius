@@ -30,7 +30,7 @@ You can achieve that by updating it's path in your ``.env`` file like in example
 
     .. code-block:: text
 
-        SYLIUS_REFUND_LOGO_FILE=%kernel.project_dir%/assets/custom-logo.png
+        SYLIUS_REFUND_LOGO_FILE=%kernel.project_dir%/public/assets/custom-logo.png
 
 If you have a permission issue when generating a credit memo, you may also need to update ``config/packages/knp_snappy.yaml`` file with an ``allow`` parameter:
 
