@@ -17,6 +17,7 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -119,6 +120,29 @@ final class ManagingProductVariantsContext implements Context
         ChannelInterface $channel
     ): void {
         $this->updateChannelPricingField($variant, $channel, null, 'originalPrice');
+    }
+
+    /**
+     * @When /^I create a new ("[^"]+") variant priced at "(?:€|£|\$)([^"]+)" for ("[^"]+" product) in the ("[^"]+" channel)$/
+     */
+    public function iCreateANewVariantPricedAtForProductInTheChannel(
+        string $name,
+        int $price,
+        ProductInterface $product,
+        ChannelInterface $channel
+    ): void {
+        $this->client->buildCreateRequest();
+        $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
+        $this->client->addRequestData('code', str_replace('"', '', StringInflector::nameToUppercaseCode($name)));
+
+        $this->client->addRequestData('channelPricings', [
+            $channel->getCode() => [
+                'price' => $price,
+                'channelCode' => $channel->getCode()
+            ]
+        ]);
+
+        $this->client->create();
     }
 
     /**

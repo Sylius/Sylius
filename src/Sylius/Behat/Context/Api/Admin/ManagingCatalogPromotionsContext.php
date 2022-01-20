@@ -23,6 +23,7 @@ use Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator;
 use Sylius\Bundle\CoreBundle\Checker\InForProductScopeVariantChecker;
 use Sylius\Bundle\CoreBundle\Checker\InForTaxonsScopeVariantChecker;
 use Sylius\Bundle\CoreBundle\Checker\InForVariantsScopeVariantChecker;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -36,6 +37,8 @@ final class ManagingCatalogPromotionsContext implements Context
 {
     private ApiClientInterface $client;
 
+    private ApiClientInterface $productsClient;
+
     private ResponseCheckerInterface $responseChecker;
 
     private MessageBusInterface $messageBus;
@@ -46,12 +49,14 @@ final class ManagingCatalogPromotionsContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
+        ApiClientInterface $productsClient,
         ResponseCheckerInterface $responseChecker,
         MessageBusInterface $messageBus,
         IriConverterInterface $iriConverter,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
+        $this->productsClient = $productsClient;
         $this->responseChecker = $responseChecker;
         $this->messageBus = $messageBus;
         $this->iriConverter = $iriConverter;
@@ -789,6 +794,37 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iChangeItsEndDateTo(string $endDate): void
     {
         $this->client->updateRequestData(['endDate' => $endDate]);
+    }
+
+    /**
+     * @When /^I create a new simple product ("[^"]+") with ("[^"]+" taxon) in the ("[^"]+" channel)$/
+     * @When /^I create a new configurable product ("[^"]+") with ("[^"]+" taxon) in the ("[^"]+" channel)$/
+     */
+    public function iCreateANewSimpleProductWithTaxon(
+        string $name,
+        TaxonInterface $taxon,
+        ChannelInterface $channel
+    ): void {
+        $this->productsClient->buildCreateRequest();
+
+        $data = [
+            'code' => str_replace('"', '', StringInflector::nameToUppercaseCode($name)),
+            'mainTaxon' => $this->iriConverter->getIriFromItem($taxon),
+            'translations' => [
+                $channel->getDefaultLocale()->getCode() => [
+                    'price' => 2000,
+                    'locale' => $channel->getDefaultLocale()->getCode(),
+                    'name' => str_replace('"', '', $name),
+                    'slug' => StringInflector::nameToSlug($name)
+                ],
+            ],
+            'channels' => [
+                $this->iriConverter->getIriFromItem($channel),
+            ],
+        ];
+
+        $this->productsClient->setRequestData($data);
+        $this->productsClient->create();
     }
 
     /**
