@@ -131,3 +131,11 @@ Feature: Creating a catalog promotion
         Then there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name
         And it should have priority equal to 10
+
+    @ui @javascript
+    Scenario: Adding a new catalog promotion of default type with one action
+        When I want to create a new catalog promotion
+        And I add a new catalog promotion scope
+        And I add a new catalog promotion action
+        Then I should see the catalog promotion scope configuration form
+        And I should see the catalog promotion action configuration form
