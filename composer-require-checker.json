@@ -10,7 +10,9 @@
     "Doctrine\\Bundle\\FixturesBundle\\DoctrineFixturesBundle",
     "Sonata\\CoreBundle\\SonataCoreBundle",
     "Sonata\\IntlBundle\\SonataIntlBundle",
-    "PSS\\SymfonyMockerContainer\\DependencyInjection\\MockerContainer"
+    "PSS\\SymfonyMockerContainer\\DependencyInjection\\MockerContainer",
+    "Symfony\\Component\\HttpKernel\\Event\\GetResponseForExceptionEvent",
+    "Symfony\\Component\\HttpKernel\\EventListener\\ExceptionListener"
   ],
   "php-core-extensions" : [
     "Core",
