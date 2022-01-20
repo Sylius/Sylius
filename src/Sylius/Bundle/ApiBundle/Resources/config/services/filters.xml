@@ -40,7 +40,7 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Filter\TaxonFilter" public="true">
+        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\TaxonFilter" public="true">
             <argument type="service" id="doctrine" />
             <argument type="service" id="api_platform.iri_converter" />
             <tag name="api_platform.filter" />
@@ -104,23 +104,23 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\Filter\ExchangeRateFilter" public="true">
+        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ExchangeRateFilter" public="true">
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\Filter\TranslationOrderNameAndLocaleFilter" public="true">
+        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter" public="true">
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\Filter\ProductVariantOptionValueFilter" public="true">
+        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantOptionValueFilter" public="true">
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\Filter\ProductPriceOrderFilter" public="true">
+        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductPriceOrderFilter" public="true">
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />
         </service>
