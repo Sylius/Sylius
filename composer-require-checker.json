@@ -2,7 +2,15 @@
   "symbol-whitelist" : [
     "null", "true", "false",
     "static", "self", "parent",
-    "array", "string", "int", "float", "bool", "iterable", "callable", "void", "object", "mixed", "never"
+    "array", "string", "int", "float", "bool", "iterable", "callable", "void", "object", "mixed", "never",
+    "Symfony\\Bundle\\DebugBundle\\DebugBundle",
+    "Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle",
+    "Symfony\\Bundle\\WebServerBundle\\WebServerBundle",
+    "Doctrine\\Bundle\\DoctrineCacheBundle\\DoctrineCacheBundle",
+    "Doctrine\\Bundle\\FixturesBundle\\DoctrineFixturesBundle",
+    "Sonata\\CoreBundle\\SonataCoreBundle",
+    "Sonata\\IntlBundle\\SonataIntlBundle",
+    "PSS\\SymfonyMockerContainer\\DependencyInjection\\MockerContainer"
   ],
   "php-core-extensions" : [
     "Core",
