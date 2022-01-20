@@ -259,7 +259,24 @@
             id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface"
             class="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicator"
         >
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\ActionBasedDiscountApplicatorInterface" />
+        </service>
+
+        <service
+            id="Sylius\Bundle\CoreBundle\Applicator\ActionBasedDiscountApplicatorInterface"
+            class="Sylius\Bundle\CoreBundle\Applicator\ActionBasedDiscountApplicator"
+        >
             <argument type="service" id="Sylius\Component\CoreBundle\Calculator\CatalogPromotionPriceCalculatorInterface" />
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.applicator_criteria" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DiscountApplicationCriteria\ExclusiveCriteria">
+            <tag name="sylius.catalog_promotion.applicator_criteria" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DiscountApplicationCriteria\MinimumPriceCriteria">
+            <tag name="sylius.catalog_promotion.applicator_criteria" />
         </service>
 
         <service
