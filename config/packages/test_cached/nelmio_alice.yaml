@@ -1,0 +1,2 @@
+imports:
+    - { resource: ../dev/nelmio_alice.yaml }
