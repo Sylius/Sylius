@@ -112,8 +112,23 @@ jobs:
                 run: vendor/bin/phpspec run --ansi --no-interaction -f dot
 
             -
+                name: Check the existance of phpunit.xml.dist
+                id: phpunit_xml_dist_existance_check
+                uses: andstor/file-existence-action@v1
+                with:
+                    files: "src/Sylius/${{ matrix.package }}/phpunit.xml.dist"
+
+            -
+                name: Check the existance of phpunit.xml
+                id: phpunit_xml_existance_check
+                uses: andstor/file-existence-action@v1
+                with:
+                    files: "src/Sylius/${{ matrix.package }}/phpunit.xml"
+
+            -
                 name: Run PHPUnit
                 working-directory: "src/Sylius/${{ matrix.package }}"
+                if: steps.phpunit_xml_dist_existance_check.outputs.files_exists == 'true' || steps.phpunit_xml_existance_check.outputs.files_exists == 'true' 
                 run: vendor/bin/phpunit --colors=always
 
     notify-about-build-failure:
