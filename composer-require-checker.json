@@ -12,7 +12,8 @@
     "Sonata\\IntlBundle\\SonataIntlBundle",
     "PSS\\SymfonyMockerContainer\\DependencyInjection\\MockerContainer",
     "Symfony\\Component\\HttpKernel\\Event\\GetResponseForExceptionEvent",
-    "Symfony\\Component\\HttpKernel\\EventListener\\ExceptionListener"
+    "Symfony\\Component\\HttpKernel\\EventListener\\ExceptionListener",
+    "Swift_Message"
   ],
   "php-core-extensions" : [
     "Core",
