@@ -13,21 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Applicator;
 
-use Sylius\Bundle\CoreBundle\Calculator\CatalogPromotionPriceCalculatorInterface;
-use Sylius\Component\Core\Exception\ActionBasedPriceCalculatorNotFoundException;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
 final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInterface
 {
-    private CatalogPromotionPriceCalculatorInterface $priceCalculator;
-
-    public function __construct(CatalogPromotionPriceCalculatorInterface $priceCalculator) {
-        $this->priceCalculator = $priceCalculator;
-    }
+    public function __construct(
+        private ChannelRepositoryInterface $channelRepository,
+        private ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator
+    ) {}
 
     public function applyOnVariant(
         ProductVariantInterface $variant,
@@ -42,12 +39,14 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
         ChannelPricingInterface $channelPricing,
         CatalogPromotionInterface $catalogPromotion
     ): void {
-        if (!$this->hasCatalogPromotionChannelWithCode($catalogPromotion, $channelPricing->getChannelCode())) {
+        $channel = $this->channelRepository->findOneByCode($channelPricing->getChannelCode());
+
+        if (null === $channel || !$catalogPromotion->hasChannel($channel)) {
             return;
         }
 
         foreach ($catalogPromotion->getActions() as $action) {
-            $this->applyDiscountFromActionOnChannelPricing($catalogPromotion, $action, $channelPricing);
+            $this->actionBasedDiscountApplicator->applyDiscountOnChannelPricing($catalogPromotion, $action, $channelPricing);
         }
     }
 
@@ -62,45 +61,7 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
                 continue;
             }
 
-            $this->applyDiscountFromActionOnChannelPricing($catalogPromotion, $action, $channelPricing);
+            $this->actionBasedDiscountApplicator->applyDiscountOnChannelPricing($catalogPromotion, $action, $channelPricing);
         }
-    }
-
-    private function applyDiscountFromActionOnChannelPricing(
-        CatalogPromotionInterface $catalogPromotion,
-        CatalogPromotionActionInterface $action,
-        ChannelPricingInterface $channelPricing
-    ): void {
-        if ($channelPricing->hasExclusiveCatalogPromotionApplied()) {
-            return;
-        }
-
-        if ($channelPricing->getOriginalPrice() === null) {
-            $channelPricing->setOriginalPrice($channelPricing->getPrice());
-        }
-
-        if ($channelPricing->getPrice() === $channelPricing->getMinimumPrice()) {
-            return;
-        }
-
-        try {
-            $price = $this->priceCalculator->calculate($channelPricing, $action);
-        } catch (ActionBasedPriceCalculatorNotFoundException $exception) {
-            return;
-        }
-
-        $channelPricing->setPrice($price);
-        $channelPricing->addAppliedPromotion($catalogPromotion);
-    }
-
-    private function hasCatalogPromotionChannelWithCode(
-        CatalogPromotionInterface $catalogPromotion,
-        string $channelCode
-    ): bool {
-        $channels = $catalogPromotion->getChannels()->filter(function (ChannelInterface $channel) use ($channelCode) {
-            return $channel->getCode() === $channelCode;
-        });
-
-        return count($channels) === 1;
     }
 }
