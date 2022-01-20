@@ -38,5 +38,10 @@
             <argument type="service" id="sylius.generator.slug" />
             <tag name="kernel.event_subscriber" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\EventSubscriber\ProductEventSubscriber">
+            <argument type="service" id="sylius.event_bus" />
+            <tag name="kernel.event_subscriber" />
+        </service>
     </services>
 </container>

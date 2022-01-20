@@ -99,6 +99,7 @@
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\ProductEventListener">
             <argument type="service" id="sylius.event_bus" />
+            <tag name="kernel.event_listener" event="sylius.product.post_create" method="dispatchProductCreatedEvent" />
             <tag name="kernel.event_listener" event="sylius.product.post_update" method="dispatchProductUpdatedEvent" />
         </service>
 
@@ -134,6 +135,13 @@
             <argument type="service" id="sylius.repository.catalog_promotion" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sm.factory" />
+            <tag name="messenger.message_handler" bus="sylius.event_bus" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Listener\ProductCreatedListener">
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\ProductCatalogPromotionsProcessorInterface" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
 
