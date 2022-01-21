@@ -153,7 +153,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
 
         /** @var UserOAuthInterface $oauth */
         $oauth = $this->oauthFactory->createNew();
-        $oauth->setIdentifier($response->getUsername());
+        $oauth->setIdentifier((string) $response->getUsername());
         $oauth->setProvider($response->getResourceOwner()->getName());
         $oauth->setAccessToken($response->getAccessToken());
         $oauth->setRefreshToken($response->getRefreshToken());
