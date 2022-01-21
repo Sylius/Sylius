@@ -1,0 +1,30 @@
+---------------------------------------------------------------------------
+
+by CoderMaggie at 2022-01-20T21:14:38Z
+
+Doesn't the issue also occur in lower versions (1.10)?
+
+---------------------------------------------------------------------------
+
+by Roshyo at 2022-01-21T07:02:55Z
+
+@CoderMaggie Yes it does. Should this branch target 1.10 ? I'm never sure about what is the target branch :D
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-01-21T15:11:42Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "fix-customization-documentation-templat-path"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-01-21T15:25:08Z
+
+Thank you, Stephane! :tada:
