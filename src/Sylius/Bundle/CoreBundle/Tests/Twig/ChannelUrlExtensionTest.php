@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\UrlHelper;
 
-class ChannelUrlExtensionTest extends TestCase
+final class ChannelUrlExtensionTest extends TestCase
 {
     /** 
      * @test 
