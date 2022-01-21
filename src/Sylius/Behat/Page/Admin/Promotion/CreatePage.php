@@ -26,7 +26,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     use NamesIt;
     use SpecifiesItsCode;
 
-    public function addRule(string $ruleName): void
+    public function addRule(?string $ruleName): void
     {
         $count = count($this->getCollectionItems('rules'));
 
@@ -36,7 +36,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             return $count + 1 === count($this->getCollectionItems('rules'));
         });
 
-        $this->selectRuleOption('Type', $ruleName);
+        if (null !== $ruleName) {
+            $this->selectRuleOption('Type', $ruleName);
+        }
     }
 
     public function selectRuleOption(string $option, string $value, bool $multiple = false): void
@@ -74,7 +76,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $lastAction->fillField($option, $value);
     }
 
-    public function addAction(string $actionName): void
+    public function addAction(?string $actionName): void
     {
         $count = count($this->getCollectionItems('actions'));
 
@@ -84,7 +86,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             return $count + 1 === count($this->getCollectionItems('actions'));
         });
 
-        $this->selectActionOption('Type', $actionName);
+        if (null !== $actionName) {
+            $this->selectActionOption('Type', $actionName);
+        }
     }
 
     public function selectActionOption(string $option, string $value, bool $multiple = false): void
@@ -175,6 +179,16 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         AutocompleteHelper::chooseValue($this->getSession(), $filterAutocomplete, $value);
     }
 
+    public function checkIfRuleConfigurationFormIsVisible(): bool
+    {
+        return $this->hasElement('count');
+    }
+
+    public function checkIfActionConfigurationFormIsVisible(): bool
+    {
+        return $this->hasElement('amount');
+    }
+
     protected function getDefinedElements(): array
     {
         return [
@@ -186,6 +200,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'name' => '#sylius_promotion_name',
             'rules' => '#sylius_promotion_rules',
             'starts_at' => '#sylius_promotion_startsAt',
+            'count' => '#sylius_promotion_rules_0_configuration_count',
+            'amount' => '#sylius_promotion_actions_0_configuration_WEB-US_amount',
         ];
     }
 

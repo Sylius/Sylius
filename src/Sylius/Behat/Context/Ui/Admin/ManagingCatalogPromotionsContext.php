@@ -218,6 +218,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I add a new catalog promotion scope
+     */
+    public function iAddANewCatalogPromotionScope(): void
+    {
+        $this->formElement->addScope();
+    }
+
+    /**
      * @When /^I add(?:| another) scope that applies on ("[^"]+" variant)$/
      * @When /^I add scope that applies on ("[^"]+" variant) and ("[^"]+" variant)$/
      * @When /^I add scope that applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/
@@ -263,6 +271,14 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iRemoveItsEveryAction(): void
     {
         $this->formElement->removeAllActions();
+    }
+
+    /**
+     * @When I add a new catalog promotion action
+     */
+    public function iAddANewCatalogPromotionAction(): void
+    {
+        $this->formElement->addAction();
     }
 
     /**
@@ -1034,5 +1050,21 @@ final class ManagingCatalogPromotionsContext implements Context
     public function itsPriorityShouldBe(int $priority): void
     {
         Assert::same($this->showPage->getPriority(), $priority);
+    }
+
+    /**
+     * @Then I should see the catalog promotion scope configuration form
+     */
+    public function iShouldSeeTheCatalogPromotionScopeConfigurationForm(): void
+    {
+        Assert::true($this->createPage->checkIfScopeConfigurationFormIsVisible(), 'Catalog promotion scope configuration form is not visible.');
+    }
+
+    /**
+     * @Then I should see the catalog promotion action configuration form
+     */
+    public function iShouldSeeTheCatalogPromotionActionConfigurationForm(): void
+    {
+        Assert::true($this->createPage->checkIfActionConfigurationFormIsVisible(), 'Catalog promotion action configuration form is not visible.');
     }
 }
