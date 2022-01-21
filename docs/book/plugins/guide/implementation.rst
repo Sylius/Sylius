@@ -164,9 +164,9 @@ to ``src/Resources/views/SyliusAdminBundle/ProductVariant/Tab/`` directory, and 
 .. warning::
 
     Beware! Implementing a new template on the plugin level is **not** everything! You must remember that this template should be
-    copied to ``templates/SyliusAdminBundle/`` directory (with whole catalogs structure, means ``/ProductVariant/Tab``
+    copied to ``templates/bundles/SyliusAdminBundle/`` directory (with whole catalogs structure, means ``/ProductVariant/Tab``
     in the application that uses your plugin - and therefore it should be mentioned in installation instruction.
-    The same thing should be done for your test application (you should have ``tests/Application/templates/SyliusAdminBundle/`` catalog
+    The same thing should be done for your test application (you should have ``tests/Application/templates/bundles/SyliusAdminBundle/`` catalog
     with this template copied).
 
     Take a look at :doc:`customizing the templates</customization/template>` section in the documentation,
