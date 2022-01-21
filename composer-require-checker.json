@@ -25,7 +25,10 @@
     "Behat\\Testwork\\Suite\\Exception\\ParameterNotFoundException",
     "Behat\\Testwork\\Tester\\Result\\TestResult",
     "Behat\\Testwork\\Tester\\Setup\\Setup",
-    "Behat\\Testwork\\Tester\\Setup\\Teardown"
+    "Behat\\Testwork\\Tester\\Setup\\Teardown",
+    "HWI\\Bundle\\OAuthBundle\\Connect\\AccountConnectorInterface",
+    "HWI\\Bundle\\OAuthBundle\\OAuth\\Response\\UserResponseInterface",
+    "HWI\\Bundle\\OAuthBundle\\Security\\Core\\User\\OAuthAwareUserProviderInterface"
   ],
   "php-core-extensions" : [
     "Core",

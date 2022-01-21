@@ -231,7 +231,8 @@
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
         "ext-intl": "For better performance than using Symfony Polyfill Component",
-        "ext-mbstring": "For better performance than using Symfony Polyfill Component"
+        "ext-mbstring": "For better performance than using Symfony Polyfill Component",
+        "hwi/oauth-bundle": "If you want to use Facebook login (see https://docs.sylius.com/en/latest/cookbook/shop/facebook-login.html)"
     },
     "config": {
         "preferred-install": {
