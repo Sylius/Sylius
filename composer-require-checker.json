@@ -13,7 +13,19 @@
     "PSS\\SymfonyMockerContainer\\DependencyInjection\\MockerContainer",
     "Symfony\\Component\\HttpKernel\\Event\\GetResponseForExceptionEvent",
     "Symfony\\Component\\HttpKernel\\EventListener\\ExceptionListener",
-    "Swift_Message"
+    "Swift_Message",
+    "Behat\\Behat\\Tester\\ScenarioTester",
+    "Behat\\Behat\\Tester\\ServiceContainer\\TesterExtension",
+    "Behat\\Gherkin\\Node\\FeatureNode",
+    "Behat\\Gherkin\\Node\\ScenarioInterface",
+    "Behat\\Gherkin\\Node\\ScenarioNode",
+    "Behat\\Testwork\\Environment\\Environment",
+    "Behat\\Testwork\\ServiceContainer\\Extension",
+    "Behat\\Testwork\\ServiceContainer\\ExtensionManager",
+    "Behat\\Testwork\\Suite\\Exception\\ParameterNotFoundException",
+    "Behat\\Testwork\\Tester\\Result\\TestResult",
+    "Behat\\Testwork\\Tester\\Setup\\Setup",
+    "Behat\\Testwork\\Tester\\Setup\\Teardown"
   ],
   "php-core-extensions" : [
     "Core",
