@@ -23,7 +23,10 @@ use Symfony\Component\HttpFoundation\UrlHelper;
 
 class ChannelUrlExtensionTest extends TestCase
 {
-    public function testGenerateChannelUrlWithChannelHostname(): void
+    /** 
+     * @test 
+     */
+    public function it_generates_channel_url_with_channel_hostname(): void
     {
         $stack = new RequestStack();
         $stack->push(Request::create('https://shop.example.com'));
