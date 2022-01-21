@@ -317,7 +317,7 @@
      * `sylius.api.item_data_provider.reset_password_item` => `Sylius\Bundle\ApiBundle\DataProvider\ResetPasswordItemDataProvider`
      * `sylius.api.kerner_request_event_subscriber` => `Sylius\Bundle\ApiBundle\EventSubscriber\KernelRequestEventSubscriber`
      * `sylius.api.product_slug_event_subscriber` => `Sylius\Bundle\ApiBundle\EventSubscriber\ProductSlugEventSubscriber`
-     * `sylius.api.product_taxon_filter` => `Sylius\Bundle\ApiBundle\Filter\TaxonFilter`
+     * `sylius.api.product_taxon_filter` => `Sylius\Bundle\ApiBundle\Filter\Doctrine\TaxonFilter`
      * `sylius.api.exchange_rate_filter` => `Sylius\Bundle\ApiBundle\Doctrine\Filter\ExchangeRateFilter`
      * `sylius.api.translation_order_name_and_locale_filter` => `Sylius\Bundle\ApiBundle\Doctrine\Filter\TranslationOrderNameAndLocaleFilter`
      * `sylius.api.product_variant_option_value_filter` => `Sylius\Bundle\ApiBundle\Doctrine\Filter\ProductVariantOptionValueFilter`
@@ -368,6 +368,12 @@
     * `Sylius\Bundle\ApiBundle\DataProvider\CurrencyCollectionDataProvider` => `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\CurrencyCollectionExtension`
     * `Sylius\Bundle\ApiBundle\DataProvider\LocaleCollectionDataProvider` => `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\LocaleCollectionExtension`
     * `Sylius\Bundle\ApiBundle\DataProvider\TaxonCollectionDataProvider` => `Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\TaxonCollectionExtension`
+
+1. The following filters have been moved to new namespace:
+    *  `Sylius\Bundle\ApiBundle\Doctrine\Filter\ExchangeRateFilter` service has been moved and renamed to `Sylius\Bundle\ApiBundle\Filter\Doctrine\ExchangeRateFilter`
+    *  `Sylius\Bundle\ApiBundle\Doctrine\Filter\TranslationOrderNameAndLocaleFilter` service has been moved and renamed to `Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter`
+    *  `Sylius\Bundle\ApiBundle\Doctrine\Filter\ProductVariantOptionValueFilter` service has been moved and renamed to `Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantOptionValueFilter`
+    *  `Sylius\Bundle\ApiBundle\Doctrine\Filter\ProductPriceOrderFilter` service has been moved and renamed to `Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductPriceOrderFilter`
 
 1. `Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart` and `Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder` commands have been replaced with `Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart`.
 

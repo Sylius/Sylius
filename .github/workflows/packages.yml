@@ -97,10 +97,18 @@ jobs:
                 env:
                     COMPOSER_ROOT_VERSION: dev-master
                 working-directory: "src/Sylius/${{ matrix.package }}"
+                id: end-of-setup
 
             -
                 name: Test package
                 run: bin/test-package src/Sylius/${{ matrix.package }}
+                if: always() && steps.end-of-setup.outcome == 'success'
+
+            -
+                name: Run PHPArkitect
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                run: vendor/phparkitect/phparkitect/bin-stub/phparkitect check
+                if: always() && steps.end-of-setup.outcome == 'success' && matrix.package == 'Bundle/ApiBundle'
 
     notify-about-build-failure:
         runs-on: ubuntu-latest

@@ -84,7 +84,7 @@
                 <attribute name="filters">
                     <attribute>sylius.api.archived_shipping_methods_filter</attribute>
                     <attribute>sylius.api.shipping_method_order_filter</attribute>
-                    <attribute>Sylius\Bundle\ApiBundle\Doctrine\Filter\TranslationOrderNameAndLocaleFilter</attribute>
+                    <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:shipping_method:read</attribute>
