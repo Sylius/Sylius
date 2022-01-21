@@ -695,6 +695,38 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I add a new rule
+     */
+    public function iAddANewRule()
+    {
+        $this->createPage->addRule(null);
+    }
+
+    /**
+     * @When I add a new action
+     */
+    public function iAddANewAction()
+    {
+        $this->createPage->addAction(null);
+    }
+
+    /**
+     * @Then I should see the rule configuration form
+     */
+    public function iShouldSeeTheRuleConfigurationForm()
+    {
+        Assert::true($this->createPage->checkIfRuleConfigurationFormIsVisible(), 'Cart promotion rule configuration form is not visible.');
+    }
+
+    /**
+     * @Then I should see the action configuration form
+     */
+    public function iShouldSeeTheActionConfigurationForm()
+    {
+        Assert::true($this->createPage->checkIfActionConfigurationFormIsVisible(), 'Cart promotion action configuration form is not visible.');
+    }
+
+    /**
      * @param string $element
      * @param string $expectedMessage
      */

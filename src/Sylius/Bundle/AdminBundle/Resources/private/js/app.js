@@ -61,16 +61,24 @@ $(document).ready(() => {
     containerSelector: '.configuration',
   });
 
-  $('#actions a[data-form-collection="add"]').on('click', () => {
+  $('#sylius_promotion_actions > a[data-form-collection="add"]').on('click', () => {
     setTimeout(() => {
       $('select[name^="sylius_promotion[actions]"][name$="[type]"]').last().change();
     }, 50);
   });
-  $('#scopes a[data-form-collection="add"]').on('click', (event) => {
-    const name = $(event.target).closest('form').attr('name');
-
+  $('#sylius_promotion_rules > a[data-form-collection="add"]').on('click', () => {
     setTimeout(() => {
-      $(`select[name^="${name}[scopes]"][name$="[type]"]`).last().change();
+      $(`select[name^="sylius_promotion[rules]"][name$="[type]"]`).last().change();
+    }, 50);
+  });
+  $('#sylius_catalog_promotion_actions > a[data-form-collection="add"]').on('click', () => {
+    setTimeout(() => {
+      $('select[name^="sylius_catalog_promotion[actions]"][name$="[type]"]').last().change();
+    }, 50);
+  });
+  $('#sylius_catalog_promotion_scopes > a[data-form-collection="add"]').on('click', () => {
+    setTimeout(() => {
+      $(`select[name^="sylius_catalog_promotion[scopes]"][name$="[type]"]`).last().change();
     }, 50);
   });
 
