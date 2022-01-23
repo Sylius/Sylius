@@ -19,7 +19,7 @@ Let's assume that you want to have your own prefixes on paths (for example to be
 As the first step you need to change the ``paths`` or ``route_prefix`` attribute in all needed resources.
 The next step is to modify the security configuration in ``config/packages/security.yaml``, you need to overwrite the parameter:
 
-.. code-block:: xml
+.. code-block:: yaml
 
     parameters:
         sylius.security.new_api_shop_route: "%sylius.security.new_api_route%/retail"

@@ -90,7 +90,7 @@ in the calculator service, and a proper service registration in the ``services.y
     # config/services.yml
 
     services:
-        //...
+        # ...
 
         App\ShippingCalculator\ParcelCalculator:
             tags:

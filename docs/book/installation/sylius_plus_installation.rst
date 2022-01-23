@@ -61,7 +61,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 
     # config/packages/_sylius.yaml
     imports:
-    ...
+    #...
         - { resource: "@SyliusPlusPlugin/Resources/config/config.yaml" }
 
 **5.** Configure Shop, Admin and Admin API routing:
@@ -69,7 +69,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 .. code-block:: yaml
 
     # config/routes/sylius_shop.yaml
-    ...
+    #...
 
     sylius_plus_shop:
         resource: "@SyliusPlusPlugin/Resources/config/shop_routing.yaml"
@@ -80,7 +80,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 .. code-block:: yaml
 
     # config/routes/sylius_admin.yaml:
-    ...
+    #...
 
     sylius_plus_admin:
         resource: "@SyliusPlusPlugin/Resources/config/admin_routing.yaml"

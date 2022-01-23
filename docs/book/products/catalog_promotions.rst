@@ -30,47 +30,47 @@ Catalog Promotion has a few basic parameters that represent it - a unique ``code
     The parameter ``code`` should contain only letters, numbers, dashes and underscores (like all codes in Sylius).
     We encourage you to use ``snake_case`` codes.
 
-.. code-block:: bash
+.. code-block:: javascript
 
     {
-        "code": "t_shirt_promotion" # unique
+        "code": "t_shirt_promotion" // unique
         "name": "T-shirt Promotion"
-        # ...
+        // ...
     }
 
 Rest of the fields are used for configuration:
 
 * **Channels** are used to define channels on which given promotion is applied:
 
-.. code-block:: bash
+.. code-block:: javascript
 
     {
-        #...
+        //...
         "channels": [
-            "/api/v2/admin/channels/FASHION_WEB", #IRI
+            "/api/v2/admin/channels/FASHION_WEB", //IRI
             "/api/v2/admin/channels/HOME_WEB"
         ]
-        # ...
+        // ...
     }
 
 * **Scopes** are used to define scopes on which the catalog promotion will work:
 
-.. code-block:: bash
+.. code-block:: javascript
 
     {
-        #...
+        //...
         "scopes": [
             {
                 "type": "for_variants",
                 "configuration": {
                     "variants": [
-                        "Everyday_white_basic_T_Shirt-variant-1", #Variant Code
+                        "Everyday_white_basic_T_Shirt-variant-1", //Variant Code
                         "Everyday_white_basic_T_Shirt-variant-4"
                     ]
                 }
             }
         ]
-        # ...
+        // ...
     }
 
 .. note::
@@ -82,36 +82,36 @@ For possible scopes see `Catalog Promotion Scopes configuration reference`_
 
 * **Actions** are used to defined what happens when the promotion is applied:
 
-.. code-block:: bash
+.. code-block:: javascript
 
     {
-        #...
+        //...
         "actions": [
             {
                 "type": "percentage_discount",
                 "configuration": {
-                    "amount": 0.5 #float
+                    "amount": 0.5 //float
                 }
             }
         ]
-        # ...
+        // ...
     }
 
 * **Translations** are used to define labels and descriptions for languages you are configuring:
 
-.. code-block:: bash
+.. code-block:: javascript
 
     {
-        #...
+        //...
         "translations": {
             "en_US": {
                 "label": "Summer discount",
                 "description": "The grass so green, the sun so bright. Life seems a dream, no worries in sight.",
-                "locale": "en_US" #Locale Code
+                "locale": "en_US" //Locale Code
                 }
             }
         }
-        # ...
+        // ...
     }
 
 How to create a Catalog Promotion?
@@ -251,13 +251,13 @@ If you look into ``product-variant`` endpoint in shop you should see now that ch
     curl -X 'GET' \
     'https://hostname/api/v2/shop/product-variant/Everyday_white_basic_T_Shirt-variant-1'
 
-.. code-block:: bash
+.. code-block:: javascript
 
-    # response content
+    // response content
     {
         "@context": "/api/v2/contexts/ProductVariant",
         "@id": "/api/v2/shop/product-variants/Everyday_white_basic_T_Shirt-variant-1",
-        # ...
+        // ...
         "price": 2000,
         "originalPrice": 4000,
         "appliedPromotions": {

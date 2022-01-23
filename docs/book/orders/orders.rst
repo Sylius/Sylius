@@ -89,7 +89,7 @@ You can also change **maximum order item quantity** parameter in ``config/servic
 
 .. code-block:: xml
 
-    # config/services.xml
+    <!-- config/services.xml -->
     <parameters>
         <parameter key="sylius.order_item_quantity_modifier.limit">9999</parameter> # by default it is 9999
     </parameters>
