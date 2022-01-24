@@ -26,6 +26,7 @@ use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
+use Sylius\Component\User\Model\UserInterface;
 use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 class OrderRepository extends BaseOrderRepository implements OrderRepositoryInterface
@@ -430,5 +431,19 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->getQuery()
             ->getOneOrNullResult()
         ;
+    }
+
+    public function findCartByTokenValueAndCustomer(string $tokenValue, CustomerInterface $customer): ?BaseOrderInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.state = :state')
+            ->andWhere('o.tokenValue = :tokenValue')
+            ->andWhere('o.customer_id = :customer')
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->setParameter('tokenValue', $tokenValue)
+            ->setParameter('customer', $customer->getId())
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
     }
 }

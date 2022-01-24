@@ -22,9 +22,14 @@ use ApiPlatform\Core\Exception\InvalidArgumentException;
 use ApiPlatform\Core\Exception\InvalidIdentifierException;
 use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
 use ApiPlatform\Core\Util\AttributesExtractor;
+use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
@@ -43,38 +48,55 @@ final class CartShippingMethodsCollectionDataProvider implements ContextAwareCol
 
     private ShippingMethodsResolverInterface $shippingMethodsResolver;
 
+    private UserContextInterface $userContext;
+
+    private OrderInterface $order;
+
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         ShipmentRepositoryInterface $shipmentRepository,
         ShippingMethodRepositoryInterface $shippingMethodsRepository,
-        ShippingMethodsResolverInterface $shippingMethodsResolver
+        ShippingMethodsResolverInterface $shippingMethodsResolver,
+        UserContextInterface $userContext,
+        OrderInterface $order,
     ) {
         $this->orderRepository = $orderRepository;
         $this->shipmentRepository = $shipmentRepository;
         $this->shippingMethodsRepository = $shippingMethodsRepository;
         $this->shippingMethodsResolver = $shippingMethodsResolver;
+        $this->userContext = $userContext;
+        $this->order = $order;
     }
 
     public function getCollection(string $resourceClass, string $operationName = null, array $context = []): array
     {
         if (!isset($context['filters'])) {
-            return $this->shippingMethodsRepository->findAll(); // Find by channel
+            $channel = $this->order->getChannel();
+
+            return $this->shippingMethodsRepository->findEnabledForChannel($channel); // Find by channel
         }
 
         $parameters = $context['filters'];
 
-        Assert::keyExists($context['filters'], 'tokenValue');
-        Assert::keyExists($context['filters'], 'shipmentId');
+        Assert::keyExists($parameters, 'tokenValue');
+        Assert::keyExists($parameters, 'shipmentId');
+
+        $user = $this->userContext->getUser();
+
+        /** @var CustomerInterface|null $customer */
+        $customer = $user instanceof ShopUserInterface ? $user->getCustomer() : null;
 
         /** @var OrderInterface|null $cart */
-        $cart = $this->orderRepository->findCartByTokenValue($parameters['tokenValue']); // Search for cart by token & user is null || cart by token & user
-        Assert::notNull($cart); // return empty array if cart not found
+        $cart = $this->orderRepository->findCartByTokenValueAndCustomer($parameters['tokenValue'], $customer);// Search for cart by token & user is null || cart by token & user
+        if ($cart->isEmpty()) { // return empty array if cart not found
+            return [];
+        }
 
-        /** @var ShipmentInterface $shipment */
+        /** @var ShipmentInterface|null $shipment */
         $shipment = $this->shipmentRepository->find($parameters['shipmentId']);  // Search for shipment by cart and shipment id
-        Assert::notNull($shipment);  // return empty array if shipment not found
-
-        Assert::true($cart->hasShipment($shipment), 'Shipment doesn\'t match for order'); // won't be needed
+        if ($shipment === null) { // return empty array if shipment not found
+            return [];
+        }
 
         return $this->shippingMethodsResolver->getSupportedMethods($shipment);
     }
