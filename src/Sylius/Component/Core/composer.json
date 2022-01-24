@@ -58,9 +58,6 @@
         "phpspec/phpspec": "^7.1",
         "symfony/property-access": "^5.4"
     },
-    "config": {
-        "bin-dir": "bin"
-    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.9-dev"

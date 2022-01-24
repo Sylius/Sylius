@@ -43,9 +43,6 @@
         "phpunit/phpunit": "^8.5",
         "symfony/dependency-injection": "^5.4"
     },
-    "config": {
-        "bin-dir": "bin"
-    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.9-dev"
