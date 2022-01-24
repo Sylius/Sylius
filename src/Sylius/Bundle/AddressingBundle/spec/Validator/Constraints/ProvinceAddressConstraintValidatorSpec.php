@@ -53,6 +53,8 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         ProvinceAddressConstraint $constraint,
         ExecutionContextInterface $context
     ): void {
+        // DO NOT REMOVE THIS CODE: it ensures that there is a violation that can be added
+        // if the logic that is being tested (NOT adding a validation) does not work.
         $country->getCode()->willReturn('PL');
         $address->getCountryCode()->willReturn('PL');
         $countryRepository->findOneBy(['code' => 'PL'])->willReturn($country);
@@ -79,6 +81,8 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         ProvinceAddressConstraint $constraint,
         ExecutionContextInterface $context
     ): void {
+        // DO NOT REMOVE THIS CODE: it ensures that there is a violation that can be added
+        // if the logic that is being tested (NOT adding a validation) does not work.
         $country->getCode()->willReturn('PL');
         $address->getCountryCode()->willReturn('PL');
         $countryRepository->findOneBy(['code' => 'PL'])->willReturn($country);
