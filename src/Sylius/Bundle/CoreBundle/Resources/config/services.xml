@@ -39,6 +39,8 @@
 
     <parameters>
         <parameter key="sylius.order_item_quantity_modifier.limit">9999</parameter>
+        <parameter key="env(SYLIUS_UNSECURED_URLS)">true</parameter>
+        <parameter key="sylius.unsecured_urls">%env(bool:SYLIUS_UNSECURED_URLS)%</parameter>
     </parameters>
 
     <services>

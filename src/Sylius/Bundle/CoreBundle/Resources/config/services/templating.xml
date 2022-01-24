@@ -50,5 +50,12 @@
             <argument type="service" id="sylius.checker.order_shipping_method_selection_requirement" />
             <tag name="templating.helper" alias="sylius_checkout_steps" />
         </service>
+
+        <service id="sylius.twig.extension.channel_url" class="Sylius\Bundle\CoreBundle\Twig\ChannelUrlExtension" public="false">
+            <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="url_helper" />
+            <argument>%sylius.unsecured_urls%</argument>
+            <tag name="twig.extension" />
+        </service>
     </services>
 </container>
