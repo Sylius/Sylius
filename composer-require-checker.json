@@ -11,8 +11,6 @@
     "Sonata\\CoreBundle\\SonataCoreBundle",
     "Sonata\\IntlBundle\\SonataIntlBundle",
     "PSS\\SymfonyMockerContainer\\DependencyInjection\\MockerContainer",
-    "Symfony\\Component\\HttpKernel\\Event\\GetResponseForExceptionEvent",
-    "Symfony\\Component\\HttpKernel\\EventListener\\ExceptionListener",
     "Swift_Message",
     "Behat\\Behat\\Tester\\ScenarioTester",
     "Behat\\Behat\\Tester\\ServiceContainer\\TesterExtension",
