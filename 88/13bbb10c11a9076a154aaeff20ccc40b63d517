@@ -1,0 +1,26 @@
+---------------------------------------------------------------------------
+
+by Roshyo at 2022-01-24T05:42:13Z
+
+I believe this should target 1.10 branch, shouldn't it ?
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-01-24T14:06:43Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "better-documentation"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+EDIT: I've changed the base branch only to 1.11, because there were some conflicts in 1.10
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2022-01-24T15:34:42Z
+
+Thank you, @mamazu! :tada:
