@@ -1,0 +1,96 @@
+---------------------------------------------------------------------------
+
+by loic425 at 2022-01-19T08:50:34Z
+
+@Zales0123 @lchrusciel
+I checked the documentations, and everything seems ok. cf docs links below
+
+* [Public access](https://symfony.com/doc/current/security.html#allowing-unsecured-access-i-e-anonymous-users)
+* [JWT configuration](https://github.com/lexik/LexikJWTAuthenticationBundle/blob/2.x/Resources/doc/index.md#configuration)
+
+---------------------------------------------------------------------------
+
+by rimas-kudelis at 2022-01-19T08:52:05Z
+
+BTW i'm not sure about about password hashing config (the three lines with `sha512` in the security config). I didn't touch these lines, bet are they really necessary?
+
+---------------------------------------------------------------------------
+
+by loic425 at 2022-01-19T08:54:53Z
+
+> BTW i'm not sure about about password hashing config (the three lines with `sha512` in the security config). I didn't touch these lines, bet are they really necessary?
+
+Hum... In a Symfony app, that should be auto. I think we can do this in another PR.
+
+---------------------------------------------------------------------------
+
+by rimas-kudelis at 2022-01-19T09:03:45Z
+
+The lines were added in #12329, so I suppose it has something to do with tests maybe.
+But then I guess these lines should go into `test/security.yaml` instead.
+
+And there's no need to `auto` explicitly, it's the default anyway, isn't it? [Symfony docs](https://symfony.com/doc/5.4/reference/configuration/security.html) don't even mention these options anymore for some reason.
+
+---------------------------------------------------------------------------
+
+by loic425 at 2022-01-19T10:00:21Z
+
+> And there's no need to `auto` explicitly, it's the default anyway, isn't it? [Symfony docs](https://symfony.com/doc/5.4/reference/configuration/security.html) don't even mention these options anymore for some reason.
+
+For the auto configuration, it's configured via flex recipe => https://github.com/symfony/recipes/blob/master/symfony/security-bundle/5.3/config/packages/security.yaml
+
+---------------------------------------------------------------------------
+
+by rimas-kudelis at 2022-01-19T10:06:34Z
+
+So I guess I'll remove these lines in a separate PR then, and we'll see whether tests will still pass? :grin:  Does that sound okay?
+
+---------------------------------------------------------------------------
+
+by Roshyo at 2022-01-19T10:08:46Z
+
+I also agree to remove it in a separate PR
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-01-21T15:16:45Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "chore/update-security-config"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by rimas-kudelis at 2022-01-24T07:06:54Z
+
+@lchrusciel but this change is specific to Symfony 5.1+. Shouldn't it target master since that's the only place where Symfony 4.4 is no longer supported?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-01-24T09:20:57Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "chore/update-security-config"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-01-24T09:21:16Z
+
+Hey Rimas, my mistake. Thanks for mentioning it
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-01-24T13:18:14Z
+
+Thanks, Rimas! :tada:
