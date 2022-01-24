@@ -71,7 +71,7 @@ Let’s assume that you would like to add a new permission to ACL. You will need
 
 .. code-block:: yaml
 
-   // config/packages/_sylius.yaml
+   # config/packages/_sylius.yaml
    ...
 
    sylius_plus:
@@ -87,7 +87,7 @@ imported permissions with the same id in the ``config.yml``:
 
 .. code-block:: yaml
 
-   // config/routes/sylius_admin.yaml
+   # config/routes/sylius_admin.yaml
    ...
 
    app_admin_product_import:
@@ -113,8 +113,8 @@ If you would like to modify an existing permission of for example the permission
 
 .. code-block:: yaml
 
-   // config/packages/_sylius.yaml
-   ...
+   # config/packages/_sylius.yaml
+   # ...
 
    sylius_plus:
        permissions:
@@ -126,8 +126,8 @@ You can also modify the permission on the route is overwritten, only this will n
 
 .. code-block:: yaml
 
-   // config/routes/sylius_admin.yaml
-   ...
+   # config/routes/sylius_admin.yaml
+   # ...
 
    sylius_admin_order_payment_complete:
        path: /admin/orders/{orderId}/payments/{id}/complete
@@ -148,8 +148,8 @@ If you want to remove a permission, you have to overwrite the permission configu
 
 .. code-block:: yaml
 
-   // config/packages/_sylius.yaml
-   ...
+   # config/packages/_sylius.yaml
+   # ...
 
    sylius_plus:
        permissions:
@@ -161,7 +161,7 @@ id in the ``config.yml``:
 
 .. code-block:: yaml
 
-   // config/routes/sylius_admin.yaml
+   # config/routes/sylius_admin.yaml
    ...
 
    sylius_admin_order_payment_complete:

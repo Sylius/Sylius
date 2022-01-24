@@ -126,7 +126,7 @@ You will achieve that by overriding two files:
 * `ShopBundle/Resources/views/Checkout/_steps.html.twig <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ShopBundle/Resources/views/Checkout/_steps.html.twig>`_
 * `ShopBundle/Resources/views/Checkout/SelectPayment/_navigation.html.twig <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ShopBundle/Resources/views/Checkout/SelectPayment/_navigation.html.twig>`_
 
-.. code-block:: html
+.. code-block:: twig
 
     {# templates/SyliusShopBundle/Checkout/_steps.html.twig #}
     {% if active is not defined or active == 'address' %}
@@ -170,7 +170,7 @@ You will achieve that by overriding two files:
         </div>
     </div>
 
-.. code-block:: html
+.. code-block:: twig
 
     {# templates/SyliusShopBundle/Checkout/SelectPayment/_navigation.html.twig #}
     {% set enabled = order.payments|length %}

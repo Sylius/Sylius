@@ -82,6 +82,7 @@ Now with some magic of HTML and CSS we can modify this template, as an example w
     <!--...-->
     <div class="invoice-box" style="background-color: red">
     <!--...-->
+    </div>
 
 and after this change we are graced with this masterpiece:
 
@@ -108,7 +109,7 @@ Because we are basing upon the existing field, there should be no problem adding
 ``Download/pdf.html.twig`` file. The ``Phone Number`` field is quite nested so you need to add ``invoice.order.customer.phoneNumber``
 to retrieve it:
 
-.. code-block:: html
+.. code-block:: twig
 
     <!--...-->
         {{ invoice.billingData.city }}<br/>
@@ -133,7 +134,7 @@ Lets create now a new row where we will show ``Products total`` where only price
 
 First let's add the new table row between other ``totals`` in ``pdf.html.twig``
 
-.. code-block:: html
+.. code-block:: twig
 
     <!--...-->
         <tr class="totals">
@@ -148,6 +149,7 @@ First let's add the new table row between other ``totals`` in ``pdf.html.twig``
         </tr>
 
         <tr class="totals bold">
+        </tr>
     <!--...-->
 
 And now add the translation by creating file ``translations/messages.en.yaml`` and adding:
