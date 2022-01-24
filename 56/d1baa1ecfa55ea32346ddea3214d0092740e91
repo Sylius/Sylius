@@ -1,0 +1,29 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-01-21T15:05:31Z
+
+Early feedback? Let have it merged - it is already tested 👍
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-21T15:11:24Z
+
+I applied the changes! Thanks for your vigilance. Perhaps we should add some CS rules for things like that.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-01-21T15:22:40Z
+
+Absolutely we should. Same with `abortIf` in migration. Thanks 👍
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-01-24T09:19:09Z
+
+Perhaps, we should add note about this env variable in upgrade file & our documentation
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-01-24T09:19:13Z
+
+Thank you, Victor! :1st_place_medal:
