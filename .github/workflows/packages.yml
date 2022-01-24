@@ -102,16 +102,11 @@ jobs:
                 id: end-of-setup
 
             -
-                name: Test package
-                run: bin/test-package src/Sylius/${{ matrix.package }}
-                if: always() && steps.end-of-setup.outcome == 'success'
-
-            -
                 name: Run PHPArkitect
                 working-directory: "src/Sylius/${{ matrix.package }}"
                 run: vendor/phparkitect/phparkitect/bin-stub/phparkitect check
                 if: always() && steps.end-of-setup.outcome == 'success' && matrix.package == 'Bundle/ApiBundle'
-                
+
             -
                 name: Setup Database(for ApiBundle only)
                 working-directory: "src/Sylius/${{ matrix.package }}"
@@ -140,7 +135,7 @@ jobs:
             -
                 name: Run PHPUnit
                 working-directory: "src/Sylius/${{ matrix.package }}"
-                if: steps.phpunit_xml_dist_existance_check.outputs.files_exists == 'true' || steps.phpunit_xml_existance_check.outputs.files_exists == 'true' 
+                if: steps.phpunit_xml_dist_existance_check.outputs.files_exists == 'true' || steps.phpunit_xml_existance_check.outputs.files_exists == 'true'
                 run: vendor/bin/phpunit --colors=always
 
     notify-about-build-failure:
