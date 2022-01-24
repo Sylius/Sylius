@@ -113,9 +113,9 @@ Now let's add some product to this cart, first we need the ProductVariant IRI, w
 
 and let's take first variant `@id` from list:
 
-.. code-block:: bash
+.. code-block:: javascript
 
-    # ...
+    // ...
     {
       "@id": "/api/v2/shop/product-variants/Everyday_white_basic_T_Shirt-variant-0",
       "@type": "ProductVariant",
@@ -138,7 +138,7 @@ and let's take first variant `@id` from list:
       "originalPrice": 6420,
       "inStock": true
     }
-    # ...
+    // ...
 
 Then going back to cart - let's add the variant to our cart with:
 
@@ -268,9 +268,9 @@ We can get it from the address response or call once again all data about order 
 .. code-block:: bash
 
     curl -X 'GET' \
-  'https://master.demo.sylius.com/api/v2/shop/orders/rl1KwtiSLA' \
-  -H 'accept: application/ld+json' \
-  -H 'Authorization: Bearer token'
+      'https://master.demo.sylius.com/api/v2/shop/orders/rl1KwtiSLA' \
+      -H 'accept: application/ld+json' \
+      -H 'Authorization: Bearer token'
 
 In response we need to find payment and shipment where everyone of them has the required fields.
 

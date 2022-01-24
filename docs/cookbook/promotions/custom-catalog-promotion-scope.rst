@@ -21,7 +21,7 @@ We should start from creating a provider that will return for us all of eligible
 
     # config/services.yaml
 
-     App\Provider\ByPhraseVariantsProvider:
+    App\Provider\ByPhraseVariantsProvider:
         arguments:
             - '@sylius.repository.product_variant'
         tags:
@@ -126,9 +126,9 @@ Prepare a configuration form type for your new scope
 To be able to configure a Catalog Promotion with your new Scope you will need a form type for the admin panel.
 With current implementation first you need to create a twig template for new Scope:
 
-.. code-block:: html
+.. code-block:: twig
 
-    # templates/bundles/SyliusAdminBundle/CatalogPromotion/Scope/by_phrase.html.twig
+    {# templates/bundles/SyliusAdminBundle/CatalogPromotion/Scope/by_phrase.html.twig #}
 
     {% form_theme field '@SyliusAdmin/Form/theme.html.twig' %}
 
@@ -140,7 +140,7 @@ Now let's create a form type and declare it service:
 
     # config/services.yaml
 
-     App\Form\Type\CatalogPromotionScope\ByPhraseScopeConfigurationType:
+    App\Form\Type\CatalogPromotionScope\ByPhraseScopeConfigurationType:
         arguments:
             - '@sylius.repository.product_variant'
         tags:
