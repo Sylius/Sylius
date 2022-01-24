@@ -45,7 +45,7 @@ jobs:
                     php-version: "${{ matrix.php }}"
                     ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=0, opcache.memory_consumption=512, opcache.max_accelerated_files=65407, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
                     extensions: intl, gd, opcache, mysql, pdo_mysql
-                    tools: symfony
+                    tools: symfony, composer-require-checker
                     coverage: none
 
             -
@@ -112,6 +112,15 @@ jobs:
             -
                 name: Run PHPStan
                 run: vendor/bin/phpstan analyse
+                if: always() && steps.end-of-setup.outcome == 'success'
+            
+            -
+                name: Run ComposerRequireChecker
+                run: |
+                    (cat composer.json | jq '.["autoload-dev"]["psr-4"] |= . + {"Sylius\\Behat\\": "src/Sylius/Behat/"}' | jq 'del(.autoload["psr-4"]["Sylius\\Behat\\"])') > _composer.json
+                    mv _composer.json composer.json
+                    composer dump-autoload
+                    composer-require-checker check --config-file=composer-require-checker.json
                 if: always() && steps.end-of-setup.outcome == 'success'
 
     architecture-tests:
