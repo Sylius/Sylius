@@ -108,7 +108,7 @@ jobs:
                 if: always() && steps.end-of-setup.outcome == 'success' && matrix.package == 'Bundle/ApiBundle'
 
             -
-                name: Setup Database(for ApiBundle only)
+                name: Setup Database (for ApiBundle only)
                 working-directory: "src/Sylius/${{ matrix.package }}"
                 run: test/bin/console doctrine:schema:update --force -e test
                 if: always() && matrix.package == 'Bundle/ApiBundle'
@@ -119,15 +119,15 @@ jobs:
                 run: vendor/bin/phpspec run --ansi --no-interaction -f dot
 
             -
-                name: Check the existance of phpunit.xml.dist
-                id: phpunit_xml_dist_existance_check
+                name: Check the existence of phpunit.xml.dist
+                id: phpunit_xml_dist_existence_check
                 uses: andstor/file-existence-action@v1
                 with:
                     files: "src/Sylius/${{ matrix.package }}/phpunit.xml.dist"
 
             -
-                name: Check the existance of phpunit.xml
-                id: phpunit_xml_existance_check
+                name: Check the existence of phpunit.xml
+                id: phpunit_xml_existence_check
                 uses: andstor/file-existence-action@v1
                 with:
                     files: "src/Sylius/${{ matrix.package }}/phpunit.xml"
@@ -135,7 +135,7 @@ jobs:
             -
                 name: Run PHPUnit
                 working-directory: "src/Sylius/${{ matrix.package }}"
-                if: steps.phpunit_xml_dist_existance_check.outputs.files_exists == 'true' || steps.phpunit_xml_existance_check.outputs.files_exists == 'true'
+                if: steps.phpunit_xml_dist_existence_check.outputs.files_exists == 'true' || steps.phpunit_xml_existence_check.outputs.files_exists == 'true'
                 run: vendor/bin/phpunit --colors=always
 
     notify-about-build-failure:
