@@ -46,9 +46,6 @@
         "symfony/form": "^4.4 || ^5.2",
         "twig/twig": "^2.12"
     },
-    "config": {
-        "bin-dir": "bin"
-    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.9-dev"

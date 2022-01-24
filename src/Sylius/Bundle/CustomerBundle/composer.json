@@ -54,9 +54,6 @@
         "symfony/dependency-injection": "^4.4 || ^5.2",
         "symfony/form": "^4.4 || ^5.2"
     },
-    "config": {
-        "bin-dir": "bin"
-    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.9-dev"

@@ -7,10 +7,12 @@ on:
         paths:
             - "src/Sylius/Bundle/**"
             - "src/Sylius/Component/**"
+            - ".github/workflows/packages.yml"
     pull_request:
         paths:
             - "src/Sylius/Bundle/**"
             - "src/Sylius/Component/**"
+            - ".github/workflows/packages.yml"
     release:
         types: [created]
     schedule:
@@ -99,8 +101,35 @@ jobs:
                 working-directory: "src/Sylius/${{ matrix.package }}"
 
             -
-                name: Test package
-                run: bin/test-package src/Sylius/${{ matrix.package }}
+                name: Setup Database(for ApiBundle only)
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                run: test/bin/console doctrine:schema:update --force -e test
+                if: always() && matrix.package == 'Bundle/ApiBundle'
+
+            -
+                name: Run PHPSpec
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                run: vendor/bin/phpspec run --ansi --no-interaction -f dot
+
+            -
+                name: Check the existance of phpunit.xml.dist
+                id: phpunit_xml_dist_existance_check
+                uses: andstor/file-existence-action@v1
+                with:
+                    files: "src/Sylius/${{ matrix.package }}/phpunit.xml.dist"
+
+            -
+                name: Check the existance of phpunit.xml
+                id: phpunit_xml_existance_check
+                uses: andstor/file-existence-action@v1
+                with:
+                    files: "src/Sylius/${{ matrix.package }}/phpunit.xml"
+
+            -
+                name: Run PHPUnit
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                if: steps.phpunit_xml_dist_existance_check.outputs.files_exists == 'true' || steps.phpunit_xml_existance_check.outputs.files_exists == 'true' 
+                run: vendor/bin/phpunit --colors=always
 
     notify-about-build-failure:
         runs-on: ubuntu-latest
