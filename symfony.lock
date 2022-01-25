@@ -118,6 +118,18 @@
             "src/Repository/.gitignore"
         ]
     },
+    "doctrine/doctrine-fixtures-bundle": {
+        "version": "3.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "3.0",
+            "ref": "1f5514cfa15b947298df4d771e694e578d4c204d"
+        },
+        "files": [
+            "src/DataFixtures/AppFixtures.php"
+        ]
+    },
     "doctrine/doctrine-migrations-bundle": {
         "version": "2.2",
         "recipe": {
@@ -874,9 +886,6 @@
     "symfony/templating": {
         "version": "v4.4.13"
     },
-    "symfony/thanks": {
-        "version": "v1.2.9"
-    },
     "symfony/translation": {
         "version": "3.3",
         "recipe": {
@@ -1005,5 +1014,17 @@
     },
     "winzou/state-machine-bundle": {
         "version": "0.3.2"
+    },
+    "zenstruck/foundry": {
+        "version": "1.21",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.10",
+            "ref": "37c2f894cc098ab4c08874b80cccc8e2f8de7976"
+        },
+        "files": [
+            "config/packages/zenstruck_foundry.yaml"
+        ]
     }
 }
