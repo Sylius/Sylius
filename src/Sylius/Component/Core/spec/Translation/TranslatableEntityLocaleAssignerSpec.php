@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Translation;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Checker\CommandBasedContextChecker;
+use Sylius\Component\Core\Checker\CommandBasedContextCheckerInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Resource\Model\TranslatableInterface;
@@ -42,6 +44,61 @@ final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
 
         $translatableEntity->setCurrentLocale('de_DE')->shouldBeCalled();
         $translatableEntity->setFallbackLocale('en_US')->shouldBeCalled();
+
+        $this->assignLocale($translatableEntity);
+    }
+
+    function it_assigns_locale_if_command_based_context_checker_is_not_provided(
+        LocaleContextInterface $localeContext,
+        TranslationLocaleProviderInterface $translationLocaleProvider,
+        TranslatableInterface $translatableEntity,
+        CommandBasedContextCheckerInterface $commandBasedContextChecker
+    ): void {
+        $localeContext->getLocaleCode()->willReturn('de_DE');
+        $translationLocaleProvider->getDefaultLocaleCode()->willReturn('en_US');
+
+        $translatableEntity->setCurrentLocale('de_DE')->shouldBeCalled();
+        $translatableEntity->setFallbackLocale('en_US')->shouldBeCalled();
+
+        $commandBasedContextChecker->isRunningFromCommand()->shouldNotBeCalled();
+
+        $this->assignLocale($translatableEntity);
+    }
+
+    function it_assigns_fallback_locale_if_running_from_command(
+        LocaleContextInterface $localeContext,
+        TranslationLocaleProviderInterface $translationLocaleProvider,
+        TranslatableInterface $translatableEntity,
+        CommandBasedContextCheckerInterface $commandBasedContextChecker
+    ): void {
+        $this->beConstructedWith($localeContext, $translationLocaleProvider, $commandBasedContextChecker);
+
+        $commandBasedContextChecker->isRunningFromCommand()->willReturn(true);
+
+        $localeContext->getLocaleCode()->shouldNotBeCalled();
+        $translationLocaleProvider->getDefaultLocaleCode()->willReturn('en_US');
+
+        $translatableEntity->setCurrentLocale('en_US')->shouldBeCalled();
+        $translatableEntity->setFallbackLocale('en_US')->shouldBeCalled();
+
+        $this->assignLocale($translatableEntity);
+    }
+
+    function it_assigns_locale_if_process_is_not_running_from_cli(
+        LocaleContextInterface $localeContext,
+        TranslationLocaleProviderInterface $translationLocaleProvider,
+        TranslatableInterface $translatableEntity,
+        CommandBasedContextCheckerInterface $commandBasedContextChecker
+    ): void {
+        $this->beConstructedWith($localeContext, $translationLocaleProvider, $commandBasedContextChecker);
+
+        $localeContext->getLocaleCode()->willReturn('de_DE');
+        $translationLocaleProvider->getDefaultLocaleCode()->willReturn('en_US');
+
+        $translatableEntity->setCurrentLocale('de_DE')->shouldBeCalled();
+        $translatableEntity->setFallbackLocale('en_US')->shouldBeCalled();
+
+        $commandBasedContextChecker->isRunningFromCommand()->willReturn(false);
 
         $this->assignLocale($translatableEntity);
     }

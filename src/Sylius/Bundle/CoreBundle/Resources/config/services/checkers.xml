@@ -23,6 +23,11 @@
         <service id="sylius.checker.order_payment_method_selection_requirement" class="Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementChecker" >
             <argument type="service" id="sylius.payment_methods_resolver"/>
         </service>
+
+        <service id="Sylius\Component\Core\Checker\CommandBasedContextCheckerInterface" class="Sylius\Component\Core\Checker\CommandBasedContextChecker">
+            <argument type="string">%env(resolve:APP_ENV)%</argument>
+        </service>
+
         <service id="Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface" alias="sylius.checker.order_payment_method_selection_requirement" />
     </services>
 </container>
