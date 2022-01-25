@@ -44,18 +44,14 @@ final class CustomerGroupFactory extends ModelFactory implements CustomerGroupFa
         parent::__construct();
     }
 
-    public function withCode(string $code = null): self
+    public function withCode(string $code): self
     {
-        return $this->addState(function () use ($code) {
-            return ['code' => $code ?? StringInflector::nameToCode(self::faker()->words(3, true))];
-        });
+        return $this->addState(['code' => $code]);
     }
 
-    public function withName(string $name = null): self
+    public function withName(string $name): self
     {
-        return $this->addState(function () use ($name) {
-            return ['name' => $name ?? self::faker()->words(3, true)];
-        });
+        return $this->addState(['name' => $name]);
     }
 
     protected function getDefaults(): array

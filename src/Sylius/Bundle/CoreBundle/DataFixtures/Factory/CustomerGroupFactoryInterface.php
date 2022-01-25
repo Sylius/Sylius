@@ -39,7 +39,7 @@ use Zenstruck\Foundry\Proxy;
  */
 interface CustomerGroupFactoryInterface
 {
-    public function withCode(string $code = null): self;
+    public function withCode(string $code): self;
 
-    public function withName(string $name = null): self;
+    public function withName(string $name): self;
 }

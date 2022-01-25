@@ -37,10 +37,6 @@ final class CustomerGroupFactoryTest extends KernelTestCase
 
         $this->assertEquals('group_a', $customerGroup->getCode());
 
-        $customerGroup = CustomerGroupFactory::new()->withCode()->withoutPersisting()->create();
-
-        $this->assertNotNull($customerGroup->getCode());
-
         $customerGroup = CustomerGroupFactory::new()->withoutPersisting()->create();
 
         $this->assertNotNull($customerGroup->getCode());
@@ -52,10 +48,6 @@ final class CustomerGroupFactoryTest extends KernelTestCase
         $customerGroup = CustomerGroupFactory::new()->withName('Group A')->withoutPersisting()->create();
 
         $this->assertEquals('Group A', $customerGroup->getName());
-
-        $customerGroup = CustomerGroupFactory::new()->withName()->withoutPersisting()->create();
-
-        $this->assertNotNull($customerGroup->getName());
 
         $customerGroup = CustomerGroupFactory::new()->withoutPersisting()->create();
 
