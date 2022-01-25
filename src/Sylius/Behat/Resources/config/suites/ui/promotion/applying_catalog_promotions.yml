@@ -28,6 +28,7 @@ default:
                 - Sylius\Behat\Context\Ui\Admin\ManagingProductVariantsPricesContext
                 - sylius.behat.context.ui.shop.product
                 - Sylius\Behat\Context\Ui\Admin\ProductVariantsCreationContext
+                - Sylius\Behat\Context\Ui\Admin\ProductCreationContext
 
             filters:
                 tags: "@applying_catalog_promotions&&@ui"

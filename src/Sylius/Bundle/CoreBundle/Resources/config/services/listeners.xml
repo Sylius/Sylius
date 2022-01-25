@@ -152,6 +152,13 @@
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\Listener\ProductVariantCreatedListener">
+            <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\ProductVariantCatalogPromotionsProcessorInterface" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="messenger.message_handler" bus="sylius.event_bus" />
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\Listener\ProductVariantUpdatedListener">
             <argument type="service" id="sylius.repository.product_variant" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\ProductVariantCatalogPromotionsProcessorInterface" />

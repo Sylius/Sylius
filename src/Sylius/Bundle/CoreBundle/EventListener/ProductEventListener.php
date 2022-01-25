@@ -31,7 +31,6 @@ final class ProductEventListener
 
     public function dispatchProductCreatedEvent(GenericEvent $event): void
     {
-        /** @var ProductInterface $product */
         $product = $event->getSubject();
         Assert::isInstanceOf($product, ProductInterface::class);
 

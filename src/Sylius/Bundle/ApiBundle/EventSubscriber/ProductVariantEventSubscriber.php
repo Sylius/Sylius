@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\EventSubscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
+use Sylius\Component\Core\Event\ProductVariantCreated;
 use Sylius\Component\Core\Event\ProductVariantUpdated;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -42,6 +43,10 @@ final class ProductVariantEventSubscriber implements EventSubscriberInterface
     {
         $variant = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
+
+        if ($variant instanceof ProductVariantInterface && $method === Request::METHOD_POST) {
+            $this->eventBus->dispatch(new ProductVariantCreated($variant->getCode()));
+        }
 
         if ($variant instanceof ProductVariantInterface && $method === Request::METHOD_PUT) {
             $this->eventBus->dispatch(new ProductVariantUpdated($variant->getCode()));

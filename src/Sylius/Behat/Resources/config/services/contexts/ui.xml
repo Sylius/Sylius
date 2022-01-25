@@ -515,6 +515,10 @@
             <argument type="service" id="sylius.behat.page.admin.product_variant.update" />
         </service>
 
+        <service id="Sylius\Behat\Context\Ui\Admin\ProductCreationContext">
+            <argument type="service" id="sylius.behat.page.admin.product.create_simple" />
+        </service>
+
         <service id="Sylius\Behat\Context\Ui\Admin\ProductVariantsCreationContext">
             <argument type="service" id="sylius.behat.page.admin.product_variant.create" />
         </service>

@@ -123,7 +123,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I create a new ("[^"]+") variant priced at "(?:€|£|\$)([^"]+)" for ("[^"]+" product) in the ("[^"]+" channel)$/
+     * @When /^I create a new ("[^"]+") variant priced at ("[^"]+") for ("[^"]+" product) in the ("[^"]+" channel)$/
      */
     public function iCreateANewVariantPricedAtForProductInTheChannel(
         string $name,
@@ -131,18 +131,7 @@ final class ManagingProductVariantsContext implements Context
         ProductInterface $product,
         ChannelInterface $channel
     ): void {
-        $this->client->buildCreateRequest();
-        $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
-        $this->client->addRequestData('code', str_replace('"', '', StringInflector::nameToUppercaseCode($name)));
-
-        $this->client->addRequestData('channelPricings', [
-            $channel->getCode() => [
-                'price' => $price,
-                'channelCode' => $channel->getCode()
-            ]
-        ]);
-
-        $this->client->create();
+        $this->createNewVariantWithPrice($name, $price, $product, $channel);
     }
 
     /**
@@ -199,5 +188,26 @@ final class ManagingProductVariantsContext implements Context
         $this->client->updateRequestData($content);
 
         $this->client->update();
+    }
+
+    private function createNewVariantWithPrice(
+        string $name,
+        int $price,
+        ProductInterface $product,
+        ChannelInterface $channel
+    ): void {
+        $this->client->buildCreateRequest();
+        $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
+        $this->client->addRequestData('code', str_replace('"', '', StringInflector::nameToUppercaseCode($name)));
+
+        $this->client->addRequestData('channelPricings', [
+            $channel->getCode() => [
+                'price' => $price,
+                'channelCode' => $channel->getCode()
+            ]
+        ]);
+
+        $this->client->create();
+        $this->client->getLastResponse();
     }
 }
