@@ -39,14 +39,12 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
     function it_removes_existing_shipping_adjustments(OrderInterface $order): void
     {
         $order->getShipments()->willReturn(new ArrayCollection([]));
-        $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
 
         $this->process($order);
     }
 
     function it_does_not_apply_any_shipping_charge_if_order_has_no_shipments(OrderInterface $order): void
     {
-        $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $order->getShipments()->willReturn(new ArrayCollection([]));
         $order->addAdjustment(Argument::any())->shouldNotBeCalled();
 
@@ -81,7 +79,6 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $shipment->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $shipment->addAdjustment($adjustment)->shouldBeCalled();
 
