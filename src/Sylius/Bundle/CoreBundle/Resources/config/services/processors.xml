@@ -54,7 +54,7 @@
             class="Sylius\Bundle\CoreBundle\Processor\ProductVariantCatalogPromotionsProcessor"
         >
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Announcer\BatchedVariantsUpdateAnnouncerInterface" />
         </service>
     </services>
 </container>
