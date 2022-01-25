@@ -27,6 +27,7 @@ final class CatalogPromotionTypeExtension extends AbstractTypeExtension
                 'multiple' => true,
                 'expanded' => true,
                 'label' => 'sylius.form.catalog_promotion.channels',
+                'required' => false,
             ])
         ;
     }
