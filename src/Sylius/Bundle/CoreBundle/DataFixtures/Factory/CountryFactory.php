@@ -43,11 +43,9 @@ final class CountryFactory extends ModelFactory implements CountryFactoryInterfa
         parent::__construct();
     }
 
-    public function withCode(string $code = null): self
+    public function withCode(string $code): self
     {
-        return $this->addState(function () use ($code) {
-            return ['code' => $code ?? self::faker()->unique()->countryCode()];
-        });
+        return $this->addState(['code' => $code]);
     }
 
     public function enabled(): self

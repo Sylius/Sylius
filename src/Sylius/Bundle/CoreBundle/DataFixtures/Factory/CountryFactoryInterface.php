@@ -36,7 +36,7 @@ use Zenstruck\Foundry\Proxy;
  */
 interface CountryFactoryInterface
 {
-    public function withCode(string $code = null): self;
+    public function withCode(string $code): self;
 
     public function enabled(): self;
 

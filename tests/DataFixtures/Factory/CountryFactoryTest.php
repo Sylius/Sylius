@@ -38,10 +38,6 @@ final class CountryFactoryTest extends KernelTestCase
 
         $this->assertEquals('PL', $country->getCode());
 
-        $country = CountryFactory::new()->withoutPersisting()->withCode()->create();
-
-        $this->assertNotNull($country->getCode());
-
         $country = CountryFactory::new()->withoutPersisting()->create();
 
         $this->assertNotNull($country->getCode());
