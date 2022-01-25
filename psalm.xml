@@ -26,6 +26,7 @@
             <directory name="src/Sylius/Bundle/AttributeBundle/test" />
             <directory name="src/Sylius/Bundle/ChannelBundle/spec" />
             <directory name="src/Sylius/Bundle/ChannelBundle/test" />
+            <directory name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory" />
             <directory name="src/Sylius/Bundle/CoreBundle/spec" />
             <directory name="src/Sylius/Bundle/CoreBundle/Tests" />
             <directory name="src/Sylius/Bundle/CurrencyBundle/spec" />
