@@ -36,5 +36,5 @@ use Zenstruck\Foundry\Proxy;
  */
 interface CurrencyFactoryInterface
 {
-    public function withCode(string $code = null): self;
+    public function withCode(string $code): self;
 }

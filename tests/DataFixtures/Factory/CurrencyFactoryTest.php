@@ -37,10 +37,6 @@ final class CurrencyFactoryTest extends KernelTestCase
 
         $this->assertEquals('EUR', $currency->getCode());
 
-        $currency = CurrencyFactory::new()->withoutPersisting()->withCode()->create();
-
-        $this->assertNotNull($currency->getCode());
-
         $currency = CurrencyFactory::new()->withoutPersisting()->create();
 
         $this->assertNotNull($currency->getCode());

@@ -43,11 +43,9 @@ final class CurrencyFactory extends ModelFactory implements CurrencyFactoryInter
         parent::__construct();
     }
 
-    public function withCode(string $code = null): self
+    public function withCode(string $code): self
     {
-        return $this->addState(function () use ($code) {
-            return ['code' => $code ?? self::faker()->unique()->currencyCode()];
-        });
+        return $this->addState(['code' => $code]);
     }
 
     protected function getDefaults(): array
