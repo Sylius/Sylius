@@ -22,7 +22,7 @@ Due to the drop of support PHP `7.4` Sylius also will not support it since versi
 
 ### Potential BC-breaks
 
-#### WinzouStateMachine
+#### State machine callbacks
 
 In Sylius we are using WinzouStateMachine where as example `sylius_order` state machine has declared 14 callbacks on one state.
 If this will be customized and number of callbacks comes up to 16 and higher - the priority of callbacks will become randomized.
@@ -50,6 +50,14 @@ We've introduced promoted properties all over the code where it was possible. Pl
 In all of them constructor argument `$templatingEngine`, previously typed as `object` was changed to `EngineInterface|Environment`.
 It should not cause any problems (only such services would work in these controllers), but is theoretically making the type
 requirement stricter.
+
+#### Form type extensions
+
+All form type extensions supplied by Sylius now specify a priority of 100, instead of relying on the default value of 0.
+This means that your form type extensions, including autowired ones, may now consistently override the effect of these
+stock form type extensions without you having to explicitly specify their priorities. However, if you relied on the old
+default values, you might have to review priorities of your own form type extensions, as well as any that you have overridden.
+Please note that **unlike state machine callbacks**, form extension priorities are being executed in descending order.
 
 ### Minimum price & Promotions
 
