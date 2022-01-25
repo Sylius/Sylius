@@ -36,6 +36,7 @@
         "doctrine/common": "^3.2",
         "doctrine/dbal": "^2.7|^3.0",
         "doctrine/doctrine-bundle": "^1.12 || ^2.0",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "doctrine/doctrine-migrations-bundle": "^3.0.1",
         "doctrine/event-manager": "^1.1",
         "doctrine/inflector": "^1.4 || ^2.0",
@@ -134,7 +135,8 @@
         "willdurand/hateoas": "^3.0",
         "willdurand/hateoas-bundle": "^2.0",
         "winzou/state-machine": "^0.4",
-        "winzou/state-machine-bundle": "^0.6"
+        "winzou/state-machine-bundle": "^0.6",
+        "zenstruck/foundry": "^1.16"
     },
     "replace": {
         "sylius/addressing": "self.version",
@@ -249,7 +251,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "symfony/flex": true,
-            "dealerdirect/phpcodesniffer-composer-installer": false
+            "dealerdirect/phpcodesniffer-composer-installer": false,
+            "symfony/thanks": false
         }
     },
     "extra": {
