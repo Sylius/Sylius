@@ -17,7 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
 final class ProductCreationContext implements Context
@@ -35,15 +34,16 @@ final class ProductCreationContext implements Context
         TaxonInterface $taxon,
         ChannelInterface $channel
     ): void {
-        $locale = $channel->getDefaultLocale()->getCode();
+        $localeCode = $channel->getDefaultLocale()->getCode();
 
         $this->createPage->open();
 
-        $this->createPage->nameItIn($name, $locale);
-        $this->createPage->specifySlugIn(StringInflector::nameToSlug($name), $locale);
+        $this->createPage->nameItIn(str_replace('"', '', $name), $localeCode);
+        $this->createPage->specifySlugIn(StringInflector::nameToSlug($name), $localeCode);
         $this->createPage->specifyCode(str_replace('"', '', StringInflector::nameToUppercaseCode($name)));
         $this->createPage->specifyPrice($channel, $price);
-        $this->createPage->selectMainTaxon($taxon);
+        $this->createPage->checkChannel($channel->getName());
+        $this->createPage->checkProductTaxon($taxon);
 
         $this->createPage->create();
     }

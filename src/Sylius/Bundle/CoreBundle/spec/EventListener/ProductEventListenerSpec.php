@@ -40,7 +40,7 @@ final class ProductEventListenerSpec extends ObjectBehavior
         $message = new ProductCreated('MUG');
         $eventBus->dispatch($message)->willReturn(new Envelope($message))->shouldBeCalled();
 
-        $this->dispatchProductUpdatedEvent($event);
+        $this->dispatchProductCreatedEvent($event);
     }
 
     function it_dispatches_product_updated_after_updating_product(
@@ -61,6 +61,11 @@ final class ProductEventListenerSpec extends ObjectBehavior
     function it_throws_exception_if_event_object_is_not_a_product(GenericEvent $event): void
     {
         $event->getSubject()->willReturn('badObject')->shouldBeCalled();
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('dispatchProductCreatedEvent', [$event])
+        ;
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)

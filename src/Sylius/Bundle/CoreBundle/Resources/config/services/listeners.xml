@@ -105,6 +105,7 @@
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\ProductVariantEventListener">
             <argument type="service" id="sylius.event_bus" />
+            <tag name="kernel.event_listener" event="sylius.product_variant.post_create" method="dispatchProductVariantCreatedEvent" />
             <tag name="kernel.event_listener" event="sylius.product_variant.post_update" method="dispatchProductVariantUpdatedEvent" />
         </service>
 
