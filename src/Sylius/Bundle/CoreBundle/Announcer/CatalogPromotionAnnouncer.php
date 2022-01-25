@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
-use Sylius\Component\Promotion\Provider\DateTimeProviderInterface;
+use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionAnnouncer implements CatalogPromotionAnnouncerInterface

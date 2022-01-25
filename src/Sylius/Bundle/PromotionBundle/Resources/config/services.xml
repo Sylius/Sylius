@@ -79,7 +79,5 @@
         >
             <argument type="service" id="sylius.repository.catalog_promotion" />
         </service>
-
-        <service id="Sylius\Component\Promotion\Provider\DateTimeProviderInterface" class="Sylius\Component\Promotion\Provider\Calendar" />
     </services>
 </container>

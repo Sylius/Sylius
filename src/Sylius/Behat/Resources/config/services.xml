@@ -86,12 +86,12 @@
             <argument>7</argument>
         </service>
 
-        <service id="sylius.calendar" class="Sylius\Behat\Service\Provider\Calendar">
+        <service id="sylius.calendar" class="Sylius\Calendar\Tests\Behat\Provider\FakeCalendar">
             <argument>%kernel.project_dir%</argument>
         </service>
         <service
-            id="Sylius\Component\Promotion\Provider\DateTimeProviderInterface"
-            class="Sylius\Behat\Service\Provider\Calendar"
+            id="Sylius\Calendar\Provider\DateTimeProviderInterface"
+            class="Sylius\Calendar\Tests\Behat\Provider\FakeCalendar"
         >
             <argument>%kernel.project_dir%</argument>
         </service>

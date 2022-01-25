@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PromotionBundle\Criteria;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Component\Promotion\Provider\DateTimeProviderInterface;
+use Sylius\Calendar\Provider\DateTimeProviderInterface;
 
 final class DateRange implements CriteriaInterface
 {
