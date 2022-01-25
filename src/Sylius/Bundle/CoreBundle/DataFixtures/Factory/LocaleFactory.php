@@ -21,21 +21,21 @@ use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
 /**
- * @extends ModelFactory<Locale>
+ * @extends ModelFactory<LocaleInterface>
  *
- * @method static Locale|Proxy createOne(array $attributes = [])
- * @method static Locale[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static Locale|Proxy find(object|array|mixed $criteria)
- * @method static Locale|Proxy findOrCreate(array $attributes)
- * @method static Locale|Proxy first(string $sortedField = 'id')
- * @method static Locale|Proxy last(string $sortedField = 'id')
- * @method static Locale|Proxy random(array $attributes = [])
- * @method static Locale|Proxy randomOrCreate(array $attributes = [])
- * @method static Locale[]|Proxy[] all()
- * @method static Locale[]|Proxy[] findBy(array $attributes)
- * @method static Locale[]|Proxy[] randomSet(int $number, array $attributes = [])
- * @method static Locale[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method Locale|Proxy create(array|callable $attributes = [])
+ * @method static LocaleInterface|Proxy createOne(array $attributes = [])
+ * @method static LocaleInterface[]|Proxy[] createMany(int $number, array|callable $attributes = [])
+ * @method static LocaleInterface|Proxy find(object|array|mixed $criteria)
+ * @method static LocaleInterface|Proxy findOrCreate(array $attributes)
+ * @method static LocaleInterface|Proxy first(string $sortedField = 'id')
+ * @method static LocaleInterface|Proxy last(string $sortedField = 'id')
+ * @method static LocaleInterface|Proxy random(array $attributes = [])
+ * @method static LocaleInterface|Proxy randomOrCreate(array $attributes = [])
+ * @method static LocaleInterface[]|Proxy[] all()
+ * @method static LocaleInterface[]|Proxy[] findBy(array $attributes)
+ * @method static LocaleInterface[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static LocaleInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
+ * @method LocaleInterface|Proxy create(array|callable $attributes = [])
  */
 final class LocaleFactory extends ModelFactory implements LocaleFactoryInterface
 {
