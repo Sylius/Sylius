@@ -37,9 +37,6 @@ final class ShippingChargesProcessor implements OrderProcessorInterface
             return;
         }
 
-        // Remove all shipping adjustments, we recalculate everything from scratch.
-        $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT);
-
         foreach ($order->getShipments() as $shipment) {
             $shipment->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT);
 
