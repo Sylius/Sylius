@@ -13,26 +13,26 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-use Sylius\Component\Addressing\Model\Country;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
 /**
- * @extends ModelFactory<Country>
+ * @extends ModelFactory<CountryInterface>
  *
- * @method static Country|Proxy createOne(array $attributes = [])
- * @method static Country[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static Country|Proxy find(object|array|mixed $criteria)
- * @method static Country|Proxy findOrCreate(array $attributes)
- * @method static Country|Proxy first(string $sortedField = 'id')
- * @method static Country|Proxy last(string $sortedField = 'id')
- * @method static Country|Proxy random(array $attributes = [])
- * @method static Country|Proxy randomOrCreate(array $attributes = [])
- * @method static Country[]|Proxy[] all()
- * @method static Country[]|Proxy[] findBy(array $attributes)
- * @method static Country[]|Proxy[] randomSet(int $number, array $attributes = [])
- * @method static Country[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method Country|Proxy create(array|callable $attributes = [])
+ * @method static CountryInterface|Proxy createOne(array $attributes = [])
+ * @method static CountryInterface[]|Proxy[] createMany(int $number, array|callable $attributes = [])
+ * @method static CountryInterface|Proxy find(object|array|mixed $criteria)
+ * @method static CountryInterface|Proxy findOrCreate(array $attributes)
+ * @method static CountryInterface|Proxy first(string $sortedField = 'id')
+ * @method static CountryInterface|Proxy last(string $sortedField = 'id')
+ * @method static CountryInterface|Proxy random(array $attributes = [])
+ * @method static CountryInterface|Proxy randomOrCreate(array $attributes = [])
+ * @method static CountryInterface[]|Proxy[] all()
+ * @method static CountryInterface[]|Proxy[] findBy(array $attributes)
+ * @method static CountryInterface[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static CountryInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
+ * @method CountryInterface|Proxy create(array|callable $attributes = [])
  */
 interface CountryFactoryInterface
 {
