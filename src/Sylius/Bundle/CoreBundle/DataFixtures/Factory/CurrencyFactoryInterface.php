@@ -13,26 +13,26 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-use Sylius\Component\Currency\Model\Currency;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
 /**
- * @extends ModelFactory<Currency>
+ * @extends ModelFactory<CurrencyInterface>
  *
- * @method static Currency|Proxy createOne(array $attributes = [])
- * @method static Currency[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static Currency|Proxy find(object|array|mixed $criteria)
- * @method static Currency|Proxy findOrCreate(array $attributes)
- * @method static Currency|Proxy first(string $sortedField = 'id')
- * @method static Currency|Proxy last(string $sortedField = 'id')
- * @method static Currency|Proxy random(array $attributes = [])
- * @method static Currency|Proxy randomOrCreate(array $attributes = [])
- * @method static Currency[]|Proxy[] all()
- * @method static Currency[]|Proxy[] findBy(array $attributes)
- * @method static Currency[]|Proxy[] randomSet(int $number, array $attributes = [])
- * @method static Currency[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method Currency|Proxy create(array|callable $attributes = [])
+ * @method static CurrencyInterface|Proxy createOne(array $attributes = [])
+ * @method static CurrencyInterface[]|Proxy[] createMany(int $number, array|callable $attributes = [])
+ * @method static CurrencyInterface|Proxy find(object|array|mixed $criteria)
+ * @method static CurrencyInterface|Proxy findOrCreate(array $attributes)
+ * @method static CurrencyInterface|Proxy first(string $sortedField = 'id')
+ * @method static CurrencyInterface|Proxy last(string $sortedField = 'id')
+ * @method static CurrencyInterface|Proxy random(array $attributes = [])
+ * @method static CurrencyInterface|Proxy randomOrCreate(array $attributes = [])
+ * @method static CurrencyInterface[]|Proxy[] all()
+ * @method static CurrencyInterface[]|Proxy[] findBy(array $attributes)
+ * @method static CurrencyInterface[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static CurrencyInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
+ * @method CurrencyInterface|Proxy create(array|callable $attributes = [])
  */
 interface CurrencyFactoryInterface
 {
