@@ -38,5 +38,5 @@ interface LocaleFactoryInterface
 {
     public function withDefaultLocaleCode(): self;
 
-    public function withCode(string $code = null): self;
+    public function withCode(string $code): self;
 }

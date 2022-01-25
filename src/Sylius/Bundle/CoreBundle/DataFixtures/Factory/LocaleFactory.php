@@ -52,11 +52,9 @@ final class LocaleFactory extends ModelFactory implements LocaleFactoryInterface
         return $this->addState(['code' => $this->baseLocaleCode]);
     }
 
-    public function withCode(string $code = null): self
+    public function withCode(string $code): self
     {
-        return $this->addState(function () use ($code) {
-            return ['code' => $code ?? self::faker()->unique()->locale()];
-        });
+        return $this->addState(['code' => $code]);
     }
 
     protected function getDefaults(): array

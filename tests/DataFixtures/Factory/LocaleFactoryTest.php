@@ -37,10 +37,6 @@ final class LocaleFactoryTest extends KernelTestCase
 
         $this->assertEquals('fr_FR', $locale->getCode());
 
-        $locale = LocaleFactory::new()->withoutPersisting()->withCode()->create();
-
-        $this->assertNotNull($locale->getCode());
-
         $locale = LocaleFactory::new()->withoutPersisting()->create();
 
         $this->assertNotNull($locale->getCode());
