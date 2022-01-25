@@ -56,5 +56,20 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactoryInterface" alias="sylius.data_fixtures.factory.shop_user" />
+
+        <service id="sylius.data_fixtures.factory.zone" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactory">
+            <argument type="service" id="sylius.factory.zone" />
+            <tag name="foundry.factory" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactoryInterface" alias="sylius.data_fixtures.factory.zone" />
+
+        <service id="sylius.data_fixtures.factory.zone_member" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneMemberFactory">
+            <argument type="service" id="sylius.factory.zone_member" />
+            <argument type="service" id="sylius.data_fixtures.factory.zone" />
+            <tag name="foundry.factory" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneMemberFactoryInterface" alias="sylius.data_fixtures.factory.zone_member" />
     </services>
 </container>
