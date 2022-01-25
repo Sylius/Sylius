@@ -16,40 +16,35 @@ namespace spec\Sylius\Bundle\CoreBundle\Processor;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
+use Sylius\Bundle\CoreBundle\Announcer\BatchedVariantsUpdateAnnouncerInterface;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
 use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
 use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 
 final class AllCatalogPromotionsProcessorSpec extends ObjectBehavior
 {
     function let(
         CatalogPromotionClearerInterface $catalogPromotionClearer,
-        CatalogPromotionProcessorInterface $catalogPromotionProcessor,
-        EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider
+        ProductVariantRepositoryInterface $productVariantRepository,
+        BatchedVariantsUpdateAnnouncerInterface $announcer
     ): void {
-        $this->beConstructedWith(
-            $catalogPromotionClearer,
-            $catalogPromotionProcessor,
-            $catalogPromotionsProvider
-        );
+        $this->beConstructedWith($catalogPromotionClearer, $productVariantRepository, $announcer);
     }
 
     function it_clears_and_processes_catalog_promotions(
         CatalogPromotionClearerInterface $catalogPromotionClearer,
-        CatalogPromotionProcessorInterface $catalogPromotionProcessor,
-        EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
-        CatalogPromotionInterface $firstCatalogPromotion,
-        CatalogPromotionInterface $secondCatalogPromotion
+        ProductVariantRepositoryInterface $productVariantRepository,
+        BatchedVariantsUpdateAnnouncerInterface $announcer
     ): void {
         $catalogPromotionClearer->clear()->shouldBeCalled();
 
-        $catalogPromotionsProvider->provide()->willReturn([$firstCatalogPromotion, $secondCatalogPromotion]);
+        $productVariantRepository->getCodesOfAllVariants()->willReturn(['FIRST_VARIANT_CODE', 'SECOND_VARIANT_CODE']);
 
-        $catalogPromotionProcessor->process($firstCatalogPromotion)->shouldBeCalled();
-        $catalogPromotionProcessor->process($secondCatalogPromotion)->shouldBeCalled();
+        $announcer->dispatchVariantsUpdateCommand(['FIRST_VARIANT_CODE', 'SECOND_VARIANT_CODE'])->shouldBeCalled();
 
         $this->process();
     }

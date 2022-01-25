@@ -13,34 +13,24 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Processor;
 
-use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
-use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Bundle\CoreBundle\Announcer\BatchedVariantsUpdateAnnouncerInterface;
+use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcessorInterface
 {
-    private CatalogPromotionClearerInterface $catalogPromotionClearer;
-
-    private CatalogPromotionProcessorInterface $catalogPromotionProcessor;
-
-    private EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider;
-
     public function __construct(
-        CatalogPromotionClearerInterface $catalogPromotionClearer,
-        CatalogPromotionProcessorInterface $catalogPromotionProcessor,
-        EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
+        private CatalogPromotionClearerInterface $catalogPromotionClearer,
+        private ProductVariantRepositoryInterface $productVariantRepository,
+        private BatchedVariantsUpdateAnnouncerInterface $announcer
     ) {
-        $this->catalogPromotionClearer = $catalogPromotionClearer;
-        $this->catalogPromotionProcessor = $catalogPromotionProcessor;
-        $this->catalogPromotionsProvider = $catalogPromotionsProvider;
     }
 
     public function process(): void
     {
         $this->catalogPromotionClearer->clear();
-        $eligibleCatalogPromotions = $this->catalogPromotionsProvider->provide();
 
-        foreach ($eligibleCatalogPromotions as $catalogPromotion) {
-            $this->catalogPromotionProcessor->process($catalogPromotion);
-        }
+        $variantsCodes = $this->productVariantRepository->getCodesOfAllVariants();
+
+        $this->announcer->dispatchVariantsUpdateCommand($variantsCodes);
     }
 }

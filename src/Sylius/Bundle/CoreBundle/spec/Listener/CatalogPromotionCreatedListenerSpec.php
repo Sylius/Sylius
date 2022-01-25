@@ -26,21 +26,20 @@ final class CatalogPromotionCreatedListenerSpec extends ObjectBehavior
     function let(
         AllCatalogPromotionsProcessorInterface $allCatalogPromotionProcessor,
         RepositoryInterface $catalogPromotionRepository,
-        EntityManagerInterface $entityManager,
-        FactoryInterface $stateMachine
+        EntityManagerInterface $entityManager
     ): void {
-        $this->beConstructedWith($allCatalogPromotionProcessor, $catalogPromotionRepository, $entityManager, $stateMachine);
+        $this->beConstructedWith($allCatalogPromotionProcessor, $catalogPromotionRepository, $entityManager);
     }
 
     function it_processes_catalog_promotion_that_has_just_been_created(
-        AllCatalogPromotionsProcessorInterface $allCatalogPromotionProcessor,
+        AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager,
         CatalogPromotionInterface $catalogPromotion
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
 
-        $allCatalogPromotionProcessor->process()->shouldBeCalled();
+        $allCatalogPromotionsProcessor->process()->shouldBeCalled();
         $entityManager->flush()->shouldBeCalled();
 
         $this(new CatalogPromotionCreated('WINTER_MUGS_SALE'));

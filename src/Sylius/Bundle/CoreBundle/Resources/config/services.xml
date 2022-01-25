@@ -314,5 +314,12 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" />
             <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
         </service>
+
+        <service
+            id="Sylius\Bundle\CoreBundle\Announcer\BatchedVariantsUpdateAnnouncerInterface"
+            class="Sylius\Bundle\CoreBundle\Announcer\BatchedVariantsUpdateAnnouncer"
+        >
+            <argument type="service" id="sylius.command_bus" />
+        </service>
     </services>
 </container>

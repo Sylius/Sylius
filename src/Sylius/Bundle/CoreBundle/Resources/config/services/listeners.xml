@@ -155,5 +155,13 @@
             <argument type="service" id="sylius.event_bus" />
             <tag name="kernel.event_listener" event="Symfony\Component\Messenger\Event\WorkerMessageFailedEvent" method="onMessageFailed" />
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\CommandHandler\VariantsUpdateHandler">
+            <argument type="service" id="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface"/>
+            <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.criteria" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+        </service>
     </services>
 </container>

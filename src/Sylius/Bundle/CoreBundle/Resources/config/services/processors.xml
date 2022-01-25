@@ -20,8 +20,8 @@
             class="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessor"
         >
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface" />
-            <argument type="service" id="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface" />
+            <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Announcer\BatchedVariantsUpdateAnnouncerInterface" />
         </service>
 
         <service
