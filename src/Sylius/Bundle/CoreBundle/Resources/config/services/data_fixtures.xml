@@ -18,5 +18,14 @@
         <service id="sylius.data_fixtures.shop_configuration" class="Sylius\Bundle\CoreBundle\DataFixtures\ShopConfigurationFixtures">
             <tag name="doctrine.fixture.orm" />
         </service>
+
+        <service id="sylius.data_fixtures.factory.locale" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactory">
+            <argument type="service" id="sylius.factory.locale" />
+            <argument type="service" id="sylius.repository.locale" />
+            <argument>%sylius_locale.locale%</argument>
+            <tag name="foundry.factory" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface" alias="sylius.data_fixtures.factory.locale" />
     </services>
 </container>
