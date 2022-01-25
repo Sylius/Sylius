@@ -1,0 +1,4 @@
+# See full configuration: https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#full-default-bundle-configuration
+zenstruck_foundry:
+    # Whether to auto-refresh proxies by default (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#auto-refresh)
+    auto_refresh_proxies: true
