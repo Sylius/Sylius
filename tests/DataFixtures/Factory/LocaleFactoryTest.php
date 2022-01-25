@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Tests\DataFixtures;
+namespace Sylius\Tests\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactory;
 use Sylius\Component\Locale\Model\LocaleInterface;
