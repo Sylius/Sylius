@@ -260,7 +260,6 @@
             id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface"
             class="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicator"
         >
-            <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\ActionBasedDiscountApplicatorInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Checker\CatalogPromotionApplicableOnVariantCheckerInterface" />
         </service>

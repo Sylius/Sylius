@@ -12,7 +12,7 @@ Feature: Reapplying catalog promotions after editing their actions
         And there is a catalog promotion "Winter sale" that reduces price by "50%" and applies on "PHP T-Shirt" variant
         And I am logged in as an administrator
 
-    @api
+    @api @ui @javascript
     Scenario: Reapplying catalog promotion after adding a new action to it
         Given there is a catalog promotion with "Summer_sale" code and "Summer sale" name
         And it applies on "Python T-Shirt" variant
