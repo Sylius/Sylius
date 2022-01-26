@@ -29,12 +29,6 @@ parameters:
         - 'src/Sylius/Bundle/ApiBundle/DependencyInjection/Compiler/ReflectionExtractorHotfixPass.php'
         - 'src/Sylius/Bundle/ApiBundle/PropertyInfo/Extractor/ReflectionExtractor.php'
 
-        # Symfony 4.4-specific issues
-        - 'src/Sylius/Bundle/CoreBundle/DependencyInjection/Compiler/CircularDependencyBreakingExceptionListenerPass.php'
-        - 'src/Sylius/Bundle/CoreBundle/EventListener/CircularDependencyBreakingExceptionListener.php'
-        - 'src/Sylius/Bundle/CoreBundle/Tests/DependencyInjection/CircularDependencyBreakingExceptionListenerPassTest.php'
-        - 'src/Sylius/Bundle/CoreBundle/Tests/Listener/CircularDependencyBreakingExceptionListenerTest.php'
-
         # PHP 7.4-specific issues
         - 'src/Sylius/Component/Core/Formatter/StringInflector.php'
     ignoreErrors:
