@@ -28,7 +28,10 @@ final class TranslatableEntityLocaleAssigner implements TranslatableEntityLocale
         private ?CommandBasedContextCheckerInterface $commandBasedChecker = null
     ) {
         if ($this->commandBasedChecker === null) {
-            @trigger_error('Not passing 3rd argument is deprecated. Pass CommandBasedContextCheckedInterface', E_USER_DEPRECATED);
+            @trigger_error(
+                'Not passing CommandBasedContextCheckedInterface explicitly as the third argument is deprecated since 1.11 and will be prohibited in 2.0.',
+                E_USER_DEPRECATED
+            );
         }
     }
 
