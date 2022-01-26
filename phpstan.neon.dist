@@ -29,7 +29,5 @@ parameters:
         - 'src/Sylius/Bundle/ApiBundle/DependencyInjection/Compiler/ReflectionExtractorHotfixPass.php'
         - 'src/Sylius/Bundle/ApiBundle/PropertyInfo/Extractor/ReflectionExtractor.php'
 
-        # PHP 7.4-specific issues
-        - 'src/Sylius/Component/Core/Formatter/StringInflector.php'
     ignoreErrors:
         - '/Access to an undefined property Doctrine\\Common\\Collections\\ArrayCollection/'
