@@ -18,7 +18,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Uri;
 use Http\Message\MessageFactory;
 use Psr\Http\Message\UriInterface;
-use Sylius\Bundle\CoreBundle\Application\Kernel;
+use Sylius\Bundle\CoreBundle\SyliusCoreBundle;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -38,7 +38,7 @@ final class NotificationController
     public function getVersionAction(Request $request): JsonResponse
     {
         $content = [
-            'version' => Kernel::VERSION,
+            'version' => SyliusCoreBundle::VERSION,
             'hostname' => $request->getHost(),
             'locale' => $request->getLocale(),
             'user_agent' => $request->headers->get('User-Agent'),

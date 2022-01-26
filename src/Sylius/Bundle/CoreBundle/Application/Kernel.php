@@ -13,24 +13,36 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Application;
 
+use Sylius\Bundle\CoreBundle\SyliusCoreBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\HttpKernel\Kernel as HttpKernel;
 
+/**
+ * @deprecated Using "Sylius\Bundle\CoreBundle\Application\Kernel" as Symfony kernel is deprecated since Sylius 1.3.
+ *             Please migrate to Symfony 4 directory structure.
+ *             Upgrade guide: https://github.com/Sylius/Sylius/blob/1.3/UPGRADE-1.3.md#directory-structure-change
+ */
 class Kernel extends HttpKernel
 {
     use MicroKernelTrait;
 
-    public const VERSION = '1.12.0-DEV';
+    /** @deprecated Use Sylius\Bundle\CoreBundle\SyliusCoreBundle::VERSION instead */
+    public const VERSION = SyliusCoreBundle::VERSION;
 
-    public const VERSION_ID = '11200';
+    /** @deprecated Use Sylius\Bundle\CoreBundle\SyliusCoreBundle::VERSION_ID instead */
+    public const VERSION_ID = SyliusCoreBundle::VERSION_ID;
 
-    public const MAJOR_VERSION = '1';
+    /** @deprecated Use Sylius\Bundle\CoreBundle\SyliusCoreBundle:MAJOR_VERSION instead */
+    public const MAJOR_VERSION = SyliusCoreBundle::MAJOR_VERSION;
 
-    public const MINOR_VERSION = '12';
+    /** @deprecated Use Sylius\Bundle\CoreBundle\SyliusCoreBundle:MINOR_VERSION instead */
+    public const MINOR_VERSION = SyliusCoreBundle::MINOR_VERSION;
 
-    public const RELEASE_VERSION = '0';
+    /** @deprecated Use Sylius\Bundle\CoreBundle\SyliusCoreBundle:RELEASE_VERSION instead */
+    public const RELEASE_VERSION = SyliusCoreBundle::RELEASE_VERSION;
 
-    public const EXTRA_VERSION = 'DEV';
+    /** @deprecated Use Sylius\Bundle\CoreBundle\SyliusCoreBundle:EXTRA_VERSION instead */
+    public const EXTRA_VERSION = SyliusCoreBundle::EXTRA_VERSION;
 
     public function __construct(string $environment, bool $debug)
     {
