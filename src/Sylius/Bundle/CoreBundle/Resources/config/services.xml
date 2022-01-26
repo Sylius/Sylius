@@ -262,6 +262,7 @@
         >
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\ActionBasedDiscountApplicatorInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Checker\CatalogPromotionApplicableOnVariantCheckerInterface" />
         </service>
 
         <service
@@ -323,5 +324,13 @@
             <argument type="service" id="sylius.command_bus" />
             <argument>%sylius.messenger.product_variant.size_of_batches%</argument>
         </service>
+
+        <service
+            id="Sylius\Bundle\CoreBundle\Checker\CatalogPromotionApplicableOnVariantCheckerInterface"
+            class="Sylius\Bundle\CoreBundle\Checker\CatalogPromotionApplicableOnVariantChecker"
+        >
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.variants_provider" />
+        </service>
+
     </services>
 </container>

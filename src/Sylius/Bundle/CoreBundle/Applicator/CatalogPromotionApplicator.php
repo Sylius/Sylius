@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Applicator;
 
+use Sylius\Bundle\CoreBundle\Checker\CatalogPromotionApplicableOnVariantCheckerInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -23,13 +24,18 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
 {
     public function __construct(
         private ChannelRepositoryInterface $channelRepository,
-        private ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator
+        private ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator,
+        private CatalogPromotionApplicableOnVariantCheckerInterface $checker
     ) {}
 
     public function applyOnVariant(
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion
     ): void {
+        if (!$this->checker->isApplicableOnVariant($catalogPromotion, $variant)) {
+            return;
+        }
+
         foreach ($catalogPromotion->getActions() as $action) {
             $this->applyDiscountFromAction($catalogPromotion, $action, $variant);
         }
