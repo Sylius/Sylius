@@ -20,7 +20,7 @@ final class CommandBasedContextCheckerSpec extends ObjectBehavior
 {
     function let(): void
     {
-        $this->beConstructedWith('dev');
+        $this->beConstructedWith('dev', ['test', 'test_cached']);
     }
 
     function it_implements_command_based_context_checker_interface(): void
@@ -35,14 +35,14 @@ final class CommandBasedContextCheckerSpec extends ObjectBehavior
 
     function it_returns_false_if_process_is_running_in_test_environment_and_from_cli(): void
     {
-        $this->beConstructedWith('test');
+        $this->beConstructedWith('test', ['test', 'test_cached']);
 
         $this->isRunningFromCommand()->shouldReturn(false);
     }
 
     function it_returns_false_if_process_is_running_in_test_cached_environment_and_from_cli(): void
     {
-        $this->beConstructedWith('test_cached');
+        $this->beConstructedWith('test_cached', ['test', 'test_cached']);
 
         $this->isRunningFromCommand()->shouldReturn(false);
     }

@@ -26,7 +26,11 @@ final class TranslatableEntityLocaleAssigner implements TranslatableEntityLocale
         private LocaleContextInterface $localeContext,
         private TranslationLocaleProviderInterface $translationLocaleProvider,
         private ?CommandBasedContextCheckerInterface $commandBasedChecker = null
-    ) { }
+    ) {
+        if ($this->commandBasedChecker === null) {
+            @trigger_error('Not passing 3rd argument is deprecated. Pass CommandBasedContextCheckedInterface', E_USER_DEPRECATED);
+        }
+    }
 
     public function assignLocale(TranslatableInterface $translatableEntity): void
     {

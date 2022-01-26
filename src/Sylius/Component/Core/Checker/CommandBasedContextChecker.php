@@ -18,11 +18,12 @@ use Sylius\Component\Core\Context\ProcessContextInterface;
 final class CommandBasedContextChecker implements CommandBasedContextCheckerInterface
 {
     public function __construct(
-      private string $runningEnvironment
+        private string $runningEnvironment,
+        private array $restrictedEnvironments
     ) { }
 
     public function isRunningFromCommand(): bool
     {
-        return !str_contains($this->runningEnvironment, 'test') && \php_sapi_name() === ProcessContextInterface::CLI;
+        return !in_array($this->runningEnvironment, $this->restrictedEnvironments) && \php_sapi_name() === ProcessContextInterface::CLI;
     }
 }
