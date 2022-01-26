@@ -22,10 +22,12 @@ In the response you will see that this product has 2 product options:
 
 .. code-block:: json
 
-    "options": [
-        "/api/v2/shop/product-options/dress_size",
-        "/api/v2/shop/product-options/dress_height"
-      ],
+    {
+        "options": [
+            "/api/v2/shop/product-options/dress_size",
+            "/api/v2/shop/product-options/dress_height"
+        ]
+    }
 
 With this data you can check all the available product option values for each product option:
 
@@ -44,7 +46,7 @@ The response with all the available option values would contain:
             "/api/v2/shop/product-option-values/dress_l",
             "/api/v2/shop/product-option-values/dress_xl",
             "/api/v2/shop/product-option-values/dress_xxl"
-          ],
+        ]
     }
 
 In the same way, you can check values for the other option - ``dress_height``.
@@ -62,24 +64,26 @@ In the response you should get a collection with only one item:
 
     {
         "hydra:member": [
-        {
-          "id": 579960,
-          "code": "Beige_strappy_summer_dress-variant-0",
-          "product": "/api/v2/shop/products/Beige_strappy_summer_dress",
-          "optionValues": [
-            "/api/v2/shop/product-option-values/dress_s",
-            "/api/v2/shop/product-option-values/dress_height_petite"
-          ],
-          "translations": {
-            "en_US": {
-              "@id": "/api/v2/shop/product-variant-translation/579960",
-              "@type": "ProductVariantTranslation",
+            {
               "id": 579960,
-              "name": "S Petite",
-              "locale": "en_US"
+              "code": "Beige_strappy_summer_dress-variant-0",
+              "product": "/api/v2/shop/products/Beige_strappy_summer_dress",
+              "optionValues": [
+                "/api/v2/shop/product-option-values/dress_s",
+                "/api/v2/shop/product-option-values/dress_height_petite"
+              ],
+              "translations": {
+                "en_US": {
+                  "@id": "/api/v2/shop/product-variant-translation/579960",
+                  "@type": "ProductVariantTranslation",
+                  "id": 579960,
+                  "name": "S Petite",
+                  "locale": "en_US"
+                }
+              },
+              "price": 7693
             }
-          },
-          "price": 7693
+        ]
     }
 
 .. warning::

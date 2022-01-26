@@ -157,5 +157,5 @@ Assuming you are creating the invoicing plugin as used above, this will result i
             "psr-4": {
                 "Tests\\VendorName\\SyliusInvoicePlugin\\": "tests/"
             }
-        },
+        }
     }
