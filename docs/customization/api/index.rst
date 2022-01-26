@@ -32,7 +32,7 @@ Also, if you're planning to modify serialization add this code to framework conf
 .. code-block:: yaml
 
     # config/packages/framework.yaml
-    //...
+    #...
     serializer:
         mapping:
             paths: [ '%kernel.project_dir%/config/serialization' ]

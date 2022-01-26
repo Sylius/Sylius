@@ -269,7 +269,7 @@ This gap will be more understandable on the below code example.
         {
             $someInformation === $this->leagueIndexPage->readMatchResults(); // This returns true, but wait a second we are on home page (dummy pages).
 
-            $someInformation === $this->homePage->readWeather() // This also returns true.
+            $someInformation === $this->homePage->readWeather(); // This also returns true.
         }
     }
 

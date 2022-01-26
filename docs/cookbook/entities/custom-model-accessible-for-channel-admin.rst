@@ -97,7 +97,10 @@ is described in the section ``How to customize Admin Menu`` of :doc:`this guide 
 
     # config/services.yaml
     App\Form\Type\SupplierType:
-        arguments: ['App\Entity\Supplier', ['sylius'], '@Sylius\Plus\ChannelAdmin\Application\Provider\AvailableChannelsForAdminProviderInterface']
+        arguments:
+            - 'App\Entity\Supplier'
+            - 'sylius'
+            - '@Sylius\Plus\ChannelAdmin\Application\Provider\AvailableChannelsForAdminProviderInterface'
         tags: ['form.type']
 
 The ``Sylius\Plus\ChannelAdmin\Application\Provider\AvailableChannelsForAdminProviderInterface`` service allows getting
@@ -105,7 +108,7 @@ a list of proper channels for the currently logged in admin user.
 
 Remember to register ``App\Form\SupplierType`` for resource:
 
-.. code-block:: yaml
+.. code-block:: diff
 
     sylius_resource:
         resources:

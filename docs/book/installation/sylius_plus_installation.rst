@@ -61,7 +61,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 
     # config/packages/_sylius.yaml
     imports:
-    ...
+    # ...
         - { resource: "@SyliusPlusPlugin/Resources/config/config.yaml" }
 
 **5.** Configure Shop, Admin and Admin API routing:
@@ -69,7 +69,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 .. code-block:: yaml
 
     # config/routes/sylius_shop.yaml
-    ...
+    # ...
 
     sylius_plus_shop:
         resource: "@SyliusPlusPlugin/Resources/config/shop_routing.yaml"
@@ -80,7 +80,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 .. code-block:: yaml
 
     # config/routes/sylius_admin.yaml:
-    ...
+    # ...
 
     sylius_plus_admin:
         resource: "@SyliusPlusPlugin/Resources/config/admin_routing.yaml"
@@ -92,7 +92,7 @@ Installing Sylius Plus as a plugin to a Sylius application
     .. code-block:: yaml
 
         # config/routes/sylius_admin_api.yaml:
-        ...
+        # ...
 
         sylius_plus_admin_api:
             resource: "@SyliusPlusPlugin/Resources/config/api_routing.yaml"
@@ -109,9 +109,8 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: php
 
-    // src/Entity/User/AdminUser.php
-
     <?php
+    // src/Entity/User/AdminUser.php
 
     declare(strict_types=1);
 
@@ -146,9 +145,8 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: php
 
-    // src/Entity/Channel/Channel.php
-
     <?php
+    // src/Entity/Channel/Channel.php
 
     declare(strict_types=1);
 
@@ -171,9 +169,8 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: php
 
-    // src/Entity/Customer/Customer.php
-
     <?php
+    // src/Entity/Customer/Customer.php
 
     declare(strict_types=1);
 
@@ -196,9 +193,8 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: php
 
-    // src/Entity/Order/Order.php
-
     <?php
+    // src/Entity/Order/Order.php
 
     declare(strict_types=1);
 
@@ -221,9 +217,8 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: php
 
-    // src/Entity/Product/ProductVariant.php
-
     <?php
+    // src/Entity/Product/ProductVariant.php
 
     declare(strict_types=1);
 
@@ -261,9 +256,8 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. code-block:: php
 
-    // src/Entity/Shipping/Shipment.php
-
     <?php
+    // src/Entity/Shipping/Shipment.php
 
     declare(strict_types=1);
 

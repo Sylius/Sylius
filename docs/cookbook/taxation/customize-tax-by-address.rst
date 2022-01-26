@@ -20,7 +20,7 @@ Then register our new service:
 .. code-block:: yaml
 
     # app/config/services.yaml
-        App\OrderProcessing\OrderTaxesProcessor:
+    App\OrderProcessing\OrderTaxesProcessor:
         arguments:
             - '@sylius.provider.channel_based_default_zone_provider'
             - '@sylius.zone_matcher'
