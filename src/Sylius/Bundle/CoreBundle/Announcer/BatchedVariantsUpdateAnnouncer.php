@@ -18,13 +18,15 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class BatchedVariantsUpdateAnnouncer implements BatchedVariantsUpdateAnnouncerInterface
 {
-    public function __construct(private MessageBusInterface $messageBus)
-    {
+    public function __construct(
+        private MessageBusInterface $messageBus,
+        private int $size
+    ) {
     }
 
     public function dispatchVariantsUpdateCommand(array $variants): void
     {
-        $batchedVariants = array_chunk($variants, 100);
+        $batchedVariants = array_chunk($variants, $this->size);
 
         foreach ($batchedVariants as $batch) {
             $this->messageBus->dispatch(new UpdateBatchedVariants($batch));

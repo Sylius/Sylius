@@ -22,9 +22,9 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class BatchedVariantsUpdateAnnouncerSpec extends ObjectBehavior
 {
-    function let(MessageBusInterface $eventBus,): void
+    function let(MessageBusInterface $eventBus): void
     {
-        $this->beConstructedWith($eventBus);
+        $this->beConstructedWith($eventBus, 1);
     }
 
     function it_implements_catalog_promotion_announcer_interface(): void
@@ -36,8 +36,10 @@ final class BatchedVariantsUpdateAnnouncerSpec extends ObjectBehavior
         MessageBusInterface $eventBus
     ): void {
 
-        $command = new UpdateBatchedVariants(['first_code', 'second_code']);
-        $eventBus->dispatch($command)->willReturn(new Envelope($command))->shouldBeCalled();
+        $command1 = new UpdateBatchedVariants(['first_code']);
+        $command2 = new UpdateBatchedVariants(['second_code']);
+        $eventBus->dispatch($command1)->willReturn(new Envelope($command1))->shouldBeCalled();
+        $eventBus->dispatch($command2)->willReturn(new Envelope($command2))->shouldBeCalled();
 
         $this->dispatchVariantsUpdateCommand(['first_code', 'second_code']);
     }
