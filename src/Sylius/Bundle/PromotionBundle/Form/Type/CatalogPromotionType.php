@@ -52,6 +52,7 @@ final class CatalogPromotionType extends AbstractResourceType
             ])
             ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.catalog_promotion.enabled',
+                'required' => false,
             ])
             ->add('priority', NumberType::class, [
                 'label' => 'sylius.form.catalog_promotion.priority',
@@ -81,6 +82,7 @@ final class CatalogPromotionType extends AbstractResourceType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
+                'required' => false,
             ])
             ->add('actions', CollectionType::class, [
                 'label' => 'sylius.ui.actions',
@@ -88,6 +90,7 @@ final class CatalogPromotionType extends AbstractResourceType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
+                'required' => false,
             ])
         ;
 
