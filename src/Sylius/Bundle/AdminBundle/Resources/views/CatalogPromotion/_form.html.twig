@@ -19,14 +19,21 @@
             {{ form_row(form.exclusive) }}
             {{ form_row(form.channels) }}
         </div>
-        <div class="ui segment" id="scopes">
-            {{ form_row(form.scopes) }}
-        </div>
-        <div class="ui segment" id="actions">
-            {{ form_row(form.actions) }}
-        </div>
+
+
     </div>
     <div class="column">
         {{ translationForm(form.translations) }}
+    </div>
+    <div class="ui segment">
+        <h4 class="ui dividing header">{{ 'sylius.ui.configuration'|trans }}</h4>
+        <div class="ui two column stackable grid">
+            <div class="column" id="scopes">
+                {{ form_row(form.scopes) }}
+            </div>
+            <div class="column" id="actions">
+                {{ form_row(form.actions) }}
+            </div>
+        </div>
     </div>
 </div>
