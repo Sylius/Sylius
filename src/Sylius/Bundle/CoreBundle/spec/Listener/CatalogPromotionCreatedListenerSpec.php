@@ -15,9 +15,8 @@ namespace spec\Sylius\Bundle\CoreBundle\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
-use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
+use Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -25,36 +24,36 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class CatalogPromotionCreatedListenerSpec extends ObjectBehavior
 {
     function let(
-        CatalogPromotionProcessorInterface $catalogPromotionProcessor,
+        AllCatalogPromotionsProcessorInterface $allCatalogPromotionProcessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager,
         FactoryInterface $stateMachine
     ): void {
-        $this->beConstructedWith($catalogPromotionProcessor, $catalogPromotionRepository, $entityManager, $stateMachine);
+        $this->beConstructedWith($allCatalogPromotionProcessor, $catalogPromotionRepository, $entityManager, $stateMachine);
     }
 
     function it_processes_catalog_promotion_that_has_just_been_created(
-        CatalogPromotionProcessorInterface $catalogPromotionProcessor,
+        AllCatalogPromotionsProcessorInterface $allCatalogPromotionProcessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager,
         CatalogPromotionInterface $catalogPromotion
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
 
-        $catalogPromotionProcessor->process($catalogPromotion)->shouldBeCalled();
+        $allCatalogPromotionProcessor->process()->shouldBeCalled();
         $entityManager->flush()->shouldBeCalled();
 
         $this(new CatalogPromotionCreated('WINTER_MUGS_SALE'));
     }
 
     function it_does_nothing_if_there_is_no_catalog_promotion_with_given_code(
-        CatalogPromotionProcessorInterface $catalogPromotionProcessor,
+        AllCatalogPromotionsProcessorInterface $allCatalogPromotionProcessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn(null);
 
-        $catalogPromotionProcessor->process(Argument::any())->shouldNotBeCalled();
+        $allCatalogPromotionProcessor->process()->shouldNotBeCalled();
         $entityManager->flush()->shouldNotBeCalled();
 
         $this(new CatalogPromotionCreated('WINTER_MUGS_SALE'));
