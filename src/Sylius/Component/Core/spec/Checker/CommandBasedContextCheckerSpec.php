@@ -39,4 +39,11 @@ final class CommandBasedContextCheckerSpec extends ObjectBehavior
 
         $this->isRunningFromCommand()->shouldReturn(false);
     }
+
+    function it_returns_false_if_process_is_running_in_test_cached_environment_and_from_cli(): void
+    {
+        $this->beConstructedWith('test_cached');
+
+        $this->isRunningFromCommand()->shouldReturn(false);
+    }
 }

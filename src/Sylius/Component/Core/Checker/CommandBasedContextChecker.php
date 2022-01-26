@@ -23,6 +23,6 @@ final class CommandBasedContextChecker implements CommandBasedContextCheckerInte
 
     public function isRunningFromCommand(): bool
     {
-        return $this->runningEnvironment !== 'test' && \php_sapi_name() === ProcessContextInterface::CLI;
+        return !str_contains($this->runningEnvironment, 'test') && \php_sapi_name() === ProcessContextInterface::CLI;
     }
 }
