@@ -303,6 +303,74 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I create a new catalog promotion :promotion with priority :priority that reduces price by ":discount%" and applies on :variant variant
+     */
+    public function iCreateANewCatalogPromotionWithPriorityThatReducesPriceByAndAppliesOnVariant(string $promotion, int $priority, string $discount, ProductVariantInterface $variant): void
+    {
+        $this->createPage->open();
+        $this->formElement->nameIt($promotion);
+        $this->formElement->prioritizeIt($priority);
+        $this->iAddActionThatGivesPercentageDiscount($discount);
+        $this->iAddScopeThatAppliesOnVariants($variant);
+        $this->createPage->create();
+    }
+
+    /**
+     * @When /^I create an exclusive catalog promotion with "([^"]+)" code and "([^"]+)" name and ([^"]+) priority that applies on ("[^"]+" product) and reduces price by "((?:\d+\.)?\d+)%" in ("[^"]+" channel)$/
+     */
+    public function iCreateAnExclusiveCatalogPromotionWithCodeAndPriorityThatReducesPriceByInTheChannelAndAppliesOnProduct(
+        string $code,
+        string $promotion,
+        int $priority,
+        ProductInterface $product,
+        string $discount,
+        string $channel
+    ): void
+    {
+        $this->createPage->open();
+        $this->createPage->specifyCode($code);
+        $this->formElement->labelIt($promotion, "en_US");
+        $this->formElement->nameIt($promotion);
+        $this->formElement->prioritizeIt($priority);
+        $this->formElement->checkExclusive();
+        $this->formElement->checkChannel($channel);
+        $this->formElement->addScope();
+        $this->formElement->chooseScopeType('For product');
+        $this->formElement->chooseLastScopeCodes([$product->getCode()]);
+        $this->formElement->addAction();
+        $this->formElement->chooseActionType('Percentage discount');
+        $this->formElement->specifyLastActionDiscount($discount);
+        $this->createPage->create();
+    }
+
+    /**
+     * @When /^I create a catalog promotion with "([^"]+)" code and "([^"]+)" name and ([^"]+) priority that applies on ("[^"]+" product) and reduces price by "((?:\d+\.)?\d+)%" in ("[^"]+" channel)$/
+     */
+    public function iCreateACatalogPromotionWithCodeAndNameAndPriorityThatAppliesOnProductAndReducesPriceByInChannel(
+        string $code,
+        string $promotion,
+        int $priority,
+        ProductInterface $product,
+        string $discount,
+        string $channel
+    ): void
+    {
+        $this->createPage->open();
+        $this->createPage->specifyCode($code);
+        $this->formElement->labelIt($promotion, "en_US");
+        $this->formElement->nameIt($promotion);
+        $this->formElement->prioritizeIt($priority);
+        $this->formElement->checkChannel($channel);
+        $this->formElement->addScope();
+        $this->formElement->chooseScopeType('For product');
+        $this->formElement->chooseLastScopeCodes([$product->getCode()]);
+        $this->formElement->addAction();
+        $this->formElement->chooseActionType('Percentage discount');
+        $this->formElement->specifyLastActionDiscount($discount);
+        $this->createPage->create();
+    }
+
+    /**
      * @When I (try to) add it
      */
     public function iAddIt(): void

@@ -133,23 +133,12 @@ Feature: Creating a catalog promotion
         And it should have priority equal to 10
 
     @api @ui @javascript
-    Scenario: Creating a new catalog promotion with priorities with others already existing
+    Scenario: Adding a new catalog promotion with priorities with others already existing
         Given there is a catalog promotion "PHP stuff promotion" with priority 100 that reduces price by "30%" and applies on "PHP T-Shirt" variant
         And there is a catalog promotion "T-Shirt sale" with priority 200 that reduces price by "10%" and applies on "PHP T-Shirt" variant
-        When I want to create a new catalog promotion
-        And I specify its code as "winter_sale"
-        And I name it "Winter sale"
-        And I specify its label as "Winter sale" in "English (United States)"
-        And I describe it as "This promotion gives a 5$ discount on all products" in "English (United States)"
-        And I set its priority to 150
-        And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
-        And I add action that gives "$5" of fixed discount in the "United States" channel
-        And I make it start yesterday and ends tomorrow
-        And I make it available in channel "United States"
-        And I add it
-        Then I should be notified that catalog promotion has been successfully created
-        And the visitor should see that the "PHP T-Shirt" variant is discounted from "$20.00" to "$9.10" with 3 promotions
-        And the visitor should see that the "Kotlin T-Shirt" variant is discounted from "$40.00" to "$35.00" with "Winter sale" promotion
+        When I create a catalog promotion with "winter_sale" code and "Winter sale" name and 90 priority that applies on "T-Shirt" product and reduces price by "25%" in "United States" channel
+        Then the visitor should see that the "PHP T-Shirt" variant is discounted from "$20.00" to "$9.45" with 3 promotions
+        And the visitor should see that the "Kotlin T-Shirt" variant is discounted from "$40.00" to "$30.00" with "Winter sale" promotion
 
     @ui @javascript
     Scenario: Adding a new catalog promotion of default type with one action
@@ -158,3 +147,31 @@ Feature: Creating a catalog promotion
         And I add a new catalog promotion action
         Then I should see the catalog promotion scope configuration form
         And I should see the catalog promotion action configuration form
+
+    @api @ui @javascript
+    Scenario: Adding a new catalog promotion that applies on variant with exclusive catalog promotion that has lower priority already applied
+        Given there is an exclusive catalog promotion "Spring sale" with priority 120 that reduces price by "50%" and applies on "Kotlin T-Shirt" variant
+        When I create a catalog promotion with "php_stuff" code and "PHP stuff promotion" name and 100 priority that applies on "T-Shirt" product and reduces price by "25%" in "United States" channel
+        Then the visitor should see that the "Kotlin T-Shirt" variant is discounted from "$40.00" to "$20.00" with "Spring sale" promotion
+        And the visitor should see that the "PHP T-Shirt" variant is discounted from "$20.00" to "$15.00" with "PHP stuff promotion" promotion
+
+    @api @ui @javascript
+    Scenario: Adding a new catalog promotion that applies on product with exclusive catalog promotion that has higher priority already applied
+      Given there is an exclusive catalog promotion "Spring sale" with priority 90 that reduces price by "50%" and applies on "Kotlin T-Shirt" variant
+        When I create a catalog promotion with "php_stuff" code and "PHP stuff promotion" name and 100 priority that applies on "T-Shirt" product and reduces price by "25%" in "United States" channel
+        Then the visitor should see that the "Kotlin T-Shirt" variant is discounted from "$40.00" to "$20.00" with "Spring sale" promotion
+        And the visitor should see that the "PHP T-Shirt" variant is discounted from "$20.00" to "$15.00" with "PHP stuff promotion" promotion
+
+    @api @ui @javascript
+    Scenario: Adding an exclusive catalog promotion to existing basic catalog promotion with higher priority
+        Given there is a catalog promotion "PHP stuff promotion" with priority 100 that reduces price by "50%" and applies on "PHP T-Shirt" variant
+        When I create an exclusive catalog promotion with "spring_sale" code and "Spring sale" name and 120 priority that applies on "T-Shirt" product and reduces price by "25%" in "United States" channel
+        Then the visitor should see that the "PHP T-Shirt" variant is discounted from "$20.00" to "$15.00" with "Spring sale" promotion
+        And the visitor should see that the "Kotlin T-Shirt" variant is discounted from "$40.00" to "$30.00" with "Spring sale" promotion
+
+    @api @ui @javascript
+    Scenario: Adding an exclusive catalog promotion to existing basic catalog promotion with lower priority
+        Given there is a catalog promotion "PHP stuff promotion" with priority 100 that reduces price by "50%" and applies on "PHP T-Shirt" variant
+        When I create an exclusive catalog promotion with "spring_sale" code and "Spring sale" name and 90 priority that applies on "T-Shirt" product and reduces price by "75%" in "United States" channel
+        Then the visitor should see that the "PHP T-Shirt" variant is discounted from "$20.00" to "$5.00" with "Spring sale" promotion
+        And the visitor should see that the "Kotlin T-Shirt" variant is discounted from "$40.00" to "$10.00" with "Spring sale" promotion

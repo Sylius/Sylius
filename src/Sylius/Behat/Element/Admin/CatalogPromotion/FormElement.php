@@ -51,6 +51,11 @@ final class FormElement extends Element implements FormElementInterface
         $this->getDocument()->checkField($channelName);
     }
 
+    public function checkExclusive(): void
+    {
+        $this->getElement('exclusive')->setValue(true);
+    }
+
     public function uncheckChannel(string $channelName): void
     {
         $this->getDocument()->uncheckField($channelName);
@@ -191,6 +196,7 @@ final class FormElement extends Element implements FormElementInterface
             'add_scope_button' => '#scopes [data-form-collection="add"]',
             'description' => '#sylius_catalog_promotion_translations_%localeCode%_description',
             'enabled' => '#sylius_catalog_promotion_enabled',
+            'exclusive' => '#sylius_catalog_promotion_exclusive',
             'end_date' => '#sylius_catalog_promotion_endDate_date',
             'label' => '#sylius_catalog_promotion_translations_%localeCode%_label',
             'last_action' => '#actions [data-form-collection="item"]:last-child',

@@ -465,6 +465,99 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I create an exclusive catalog promotion with "([^"]+)" code and "([^"]+)" name and ([^"]+) priority that applies on ("[^"]+" product) and reduces price by ("[^"]+") in ("[^"]+" channel)$/
+     */
+    public function iCreateAnExclusiveCatalogPromotionWithCodeAndNameAndPriorityThatAppliesOnProductAndReducesPriceByInChannel(
+        string $code,
+        string $name,
+        int $priority,
+        ProductInterface $product,
+        float $discount,
+        ChannelInterface $channel
+    ): void
+    {
+        $this->client->buildCreateRequest();
+        $translations =  ['en_US' => [
+            'locale' => 'en_US',
+            'label' => $name
+        ]];
+
+        $actions = [[
+            'type' => PercentageDiscountPriceCalculator::TYPE,
+            'configuration' => [
+                'amount' => $discount
+            ],
+        ]];
+
+        $scopes = [[
+            'type' => ForProductsScopeVariantsProvider::TYPE,
+            'configuration' => [
+                'products' => [$product->getCode()]
+            ],
+        ]];
+
+        $this->client->updateRequestData([
+            'code' => $code,
+            'name' => $name,
+            'priority' => $priority,
+            'enabled' => true,
+            'channels' => [$this->iriConverter->getIriFromItem($channel)],
+            'exclusive' => true,
+            'translations' => $translations,
+            'actions' => $actions,
+            'scopes' => $scopes,
+        ]);
+
+        $this->client->create();
+    }
+
+    /**
+     * @When /^I create a catalog promotion with "([^"]+)" code and "([^"]+)" name and ([^"]+) priority that applies on ("[^"]+" product) and reduces price by ("[^"]+") in ("[^"]+" channel)$/
+     */
+    public function iCreateACatalogPromotionWithCodeAndNameAndPriorityThatAppliesOnProductAndReducesPriceByInChannel(
+        string $code,
+        string $name,
+        int $priority,
+        ProductInterface $product,
+        float $discount,
+        ChannelInterface $channel
+    ): void
+    {
+        $this->client->buildCreateRequest();
+        $translations =  ['en_US' => [
+            'locale' => 'en_US',
+            'label' => $name
+        ]];
+
+        $actions = [[
+            'type' => PercentageDiscountPriceCalculator::TYPE,
+            'configuration' => [
+                'amount' => $discount
+            ],
+        ]];
+
+        $scopes = [[
+            'type' => ForProductsScopeVariantsProvider::TYPE,
+            'configuration' => [
+                'products' => [$product->getCode()]
+            ],
+        ]];
+
+        $this->client->updateRequestData([
+            'code' => $code,
+            'name' => $name,
+            'priority' => $priority,
+            'enabled' => true,
+            'channels' => [$this->iriConverter->getIriFromItem($channel)],
+            'translations' => $translations,
+            'actions' => $actions,
+            'scopes' => $scopes
+        ]);
+
+        $this->client->create();
+    }
+
+    /**
      * @When I remove its every scope
      */
     public function iRemoveItsEveryScope(): void

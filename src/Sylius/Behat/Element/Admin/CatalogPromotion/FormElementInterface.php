@@ -29,6 +29,8 @@ interface FormElementInterface
 
     public function checkChannel(string $channelName): void;
 
+    public function checkExclusive(): void;
+
     public function uncheckChannel(string $channelName): void;
 
     public function specifyStartDate(\DateTimeInterface $startDate): void;
