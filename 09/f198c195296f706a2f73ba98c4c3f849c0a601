@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-26T00:05:01Z
+
+@SirDomin WDYT about an implementation similar to what I have described here: https://github.com/Sylius/Sylius/issues/9987#issuecomment-1021723690
+
+---------------------------------------------------------------------------
+
+by SirDomin at 2022-01-26T00:17:21Z
+
+@vvasiloi it could work too, but im not sure about different contexts when using cli from behat/specs. This way make it generic in case when we add more ideas of this type.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-01-27T14:17:46Z
+
+Thank you, @SirDomin! :tada:
