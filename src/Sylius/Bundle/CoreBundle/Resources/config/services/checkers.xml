@@ -24,7 +24,7 @@
             <argument type="service" id="sylius.payment_methods_resolver"/>
         </service>
 
-        <service id="Sylius\Component\Core\Checker\CommandBasedContextCheckerInterface" class="Sylius\Component\Core\Checker\CommandBasedContextChecker">
+        <service id="Sylius\Component\Core\Checker\CLIContextCheckerInterface" class="Sylius\Component\Core\Checker\CLIContextChecker">
             <argument type="string">%kernel.environment%</argument>
             <argument type="collection">
                 <argument type="string">test</argument>

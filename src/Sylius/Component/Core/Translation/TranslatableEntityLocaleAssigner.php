@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Translation;
 
-use Sylius\Component\Core\Checker\CommandBasedContextCheckerInterface;
+use Sylius\Component\Core\Checker\CLIContextCheckerInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Resource\Model\TranslatableInterface;
@@ -25,7 +25,7 @@ final class TranslatableEntityLocaleAssigner implements TranslatableEntityLocale
     public function __construct(
         private LocaleContextInterface $localeContext,
         private TranslationLocaleProviderInterface $translationLocaleProvider,
-        private ?CommandBasedContextCheckerInterface $commandBasedChecker = null
+        private ?CLIContextCheckerInterface $commandBasedChecker = null
     ) {
         if ($this->commandBasedChecker === null) {
             @trigger_error(
@@ -38,10 +38,10 @@ final class TranslatableEntityLocaleAssigner implements TranslatableEntityLocale
     public function assignLocale(TranslatableInterface $translatableEntity): void
     {
         $fallbackLocale = $this->translationLocaleProvider->getDefaultLocaleCode();
+        $translatableEntity->setFallbackLocale($fallbackLocale);
 
-        if ($this->commandBasedChecker !== null && $this->commandBasedChecker->isRunningFromCommand()) {
+        if ($this->commandBasedChecker !== null && $this->commandBasedChecker->isExecutedFromCLI()) {
             $translatableEntity->setCurrentLocale($fallbackLocale);
-            $translatableEntity->setFallbackLocale($fallbackLocale);
 
             return;
         }
@@ -53,6 +53,5 @@ final class TranslatableEntityLocaleAssigner implements TranslatableEntityLocale
         }
 
         $translatableEntity->setCurrentLocale($currentLocale);
-        $translatableEntity->setFallbackLocale($fallbackLocale);
     }
 }

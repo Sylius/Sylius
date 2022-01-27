@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Checker;
 
-interface CommandBasedContextCheckerInterface
+interface CLIContextCheckerInterface
 {
-    public function isRunningFromCommand(): bool;
+    public function isExecutedFromCLI(): bool;
 }

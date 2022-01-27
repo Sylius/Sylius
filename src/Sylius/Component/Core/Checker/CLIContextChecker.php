@@ -13,17 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Checker;
 
-use Sylius\Component\Core\Context\ProcessContextInterface;
-
-final class CommandBasedContextChecker implements CommandBasedContextCheckerInterface
+final class CLIContextChecker implements CLIContextCheckerInterface
 {
+    private const CLI = 'cli';
+
     public function __construct(
         private string $runningEnvironment,
         private array $restrictedEnvironments
     ) { }
 
-    public function isRunningFromCommand(): bool
+    public function isExecutedFromCLI(): bool
     {
-        return !in_array($this->runningEnvironment, $this->restrictedEnvironments) && \php_sapi_name() === ProcessContextInterface::CLI;
+        return !in_array($this->runningEnvironment, $this->restrictedEnvironments) && \php_sapi_name() === self::CLI;
     }
 }
