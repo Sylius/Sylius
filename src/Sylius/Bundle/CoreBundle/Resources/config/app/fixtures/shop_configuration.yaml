@@ -54,9 +54,8 @@ sylius_fixtures:
                                 countries:
                                     - 'US'
                             WORLD:
-                                name: 'World'
+                                name: 'Rest of the World'
                                 countries:
-                                    - 'US'
                                     - 'FR'
                                     - 'DE'
                                     - 'AU'
