@@ -14,28 +14,31 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\CommandHandler;
 
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
+use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
 use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
-use Sylius\Component\Product\Command\UpdateBatchedVariants;
-use Webmozart\Assert\Assert;
+use Sylius\Component\Product\Command\UpdateVariants;
 
-final class VariantsUpdateHandler
+final class UpdateVariantsHandler
 {
     public function __construct(
         private EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
         private CatalogPromotionApplicatorInterface $catalogPromotionApplicator,
         private ProductVariantRepositoryInterface $productVariantRepository,
-        private iterable $defaultCriteria
+        private CatalogPromotionClearerInterface $clearer
     ) {
     }
 
-    public function __invoke(UpdateBatchedVariants $updateBatchedVariants): void
+    public function __invoke(UpdateVariants $updateVariants): void
     {
-        $catalogPromotions = $this->catalogPromotionsProvider->provide($this->defaultCriteria);
+        $catalogPromotions = $this->catalogPromotionsProvider->provide();
 
-        foreach ($updateBatchedVariants->batch as $variantCode) {
+//        $variants = $this->productVariantRepository->findBy(['code' => $updateVariants->variantsCodes]);
+
+        foreach ($updateVariants->variantsCodes as $variantCode) {
             $variant = $this->productVariantRepository->findOneBy(['code' => $variantCode]);
-            Assert::notNull($variant);
+
+            $this->clearer->clearVariant($variant);
 
             foreach ($catalogPromotions as $promotion) {
                 $this->catalogPromotionApplicator->applyOnVariant($variant, $promotion);

@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Product\Command;
 
-final class UpdateBatchedVariants
+final class UpdateVariants
 {
-    public function __construct(public array $batch)
+    public function __construct(public array $variantsCodes)
     {
     }
 }

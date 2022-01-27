@@ -11,16 +11,15 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\Announcer;
+namespace spec\Sylius\Bundle\CoreBundle\Commander;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Announcer\BatchedVariantsUpdateAnnouncerInterface;
-use Sylius\Component\Product\Command\UpdateBatchedVariants;
+use Sylius\Bundle\CoreBundle\Commander\UpdateVariantsCommanderInterface;
+use Sylius\Component\Product\Command\UpdateVariants;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-
-final class BatchedVariantsUpdateAnnouncerSpec extends ObjectBehavior
+final class UpdateVariantsCommanderSpec extends ObjectBehavior
 {
     function let(MessageBusInterface $eventBus): void
     {
@@ -29,18 +28,16 @@ final class BatchedVariantsUpdateAnnouncerSpec extends ObjectBehavior
 
     function it_implements_catalog_promotion_announcer_interface(): void
     {
-        $this->shouldImplement(BatchedVariantsUpdateAnnouncerInterface::class);
+        $this->shouldImplement(UpdateVariantsCommanderInterface::class);
     }
 
-    function it_dispatches_command_with_batched_variants(
-        MessageBusInterface $eventBus
-    ): void {
-
-        $command1 = new UpdateBatchedVariants(['first_code']);
-        $command2 = new UpdateBatchedVariants(['second_code']);
+    function it_dispatches_command_with_batched_variants(MessageBusInterface $eventBus): void
+    {
+        $command1 = new UpdateVariants(['first_code']);
+        $command2 = new UpdateVariants(['second_code']);
         $eventBus->dispatch($command1)->willReturn(new Envelope($command1))->shouldBeCalled();
         $eventBus->dispatch($command2)->willReturn(new Envelope($command2))->shouldBeCalled();
 
-        $this->dispatchVariantsUpdateCommand(['first_code', 'second_code']);
+        $this->updateVariants(['first_code', 'second_code']);
     }
 }

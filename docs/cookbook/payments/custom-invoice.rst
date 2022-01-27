@@ -32,7 +32,7 @@ Example custom configuration:
 
 .. code-block:: text
 
-    SYLIUS_INVOICING_LOGO_FILE=%kernel.project_dir%/assets/custom-logo.png
+    SYLIUS_INVOICING_LOGO_FILE=%kernel.project_dir%/public/assets/custom-logo.png
 
 Make sure to clear the cache each time the configuration is changed.
 

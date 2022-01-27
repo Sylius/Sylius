@@ -317,8 +317,8 @@
         </service>
 
         <service
-            id="Sylius\Bundle\CoreBundle\Announcer\BatchedVariantsUpdateAnnouncerInterface"
-            class="Sylius\Bundle\CoreBundle\Announcer\BatchedVariantsUpdateAnnouncer"
+            id="Sylius\Bundle\CoreBundle\Commander\UpdateVariantsCommanderInterface"
+            class="Sylius\Bundle\CoreBundle\Commander\UpdateVariantsCommander"
         >
             <argument type="service" id="sylius.command_bus" />
             <argument>%sylius.messenger.product_variant.size_of_batches%</argument>

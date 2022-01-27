@@ -13,24 +13,21 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Processor;
 
-use Sylius\Bundle\CoreBundle\Announcer\BatchedVariantsUpdateAnnouncerInterface;
+use Sylius\Bundle\CoreBundle\Commander\UpdateVariantsCommanderInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcessorInterface
 {
     public function __construct(
-        private CatalogPromotionClearerInterface $catalogPromotionClearer,
         private ProductVariantRepositoryInterface $productVariantRepository,
-        private BatchedVariantsUpdateAnnouncerInterface $announcer
+        private UpdateVariantsCommanderInterface $commander
     ) {
     }
 
     public function process(): void
     {
-        $this->catalogPromotionClearer->clear();
-
         $variantsCodes = $this->productVariantRepository->getCodesOfAllVariants();
 
-        $this->announcer->dispatchVariantsUpdateCommand($variantsCodes);
+        $this->commander->updateVariants($variantsCodes);
     }
 }

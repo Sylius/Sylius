@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Announcer;
+namespace Sylius\Bundle\CoreBundle\Commander;
 
-interface BatchedVariantsUpdateAnnouncerInterface
+interface UpdateVariantsCommanderInterface
 {
-    public function dispatchVariantsUpdateCommand(array $variants): void;
+    public function updateVariants(array $variants): void;
 }

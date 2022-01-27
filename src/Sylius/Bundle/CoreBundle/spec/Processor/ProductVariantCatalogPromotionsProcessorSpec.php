@@ -14,18 +14,15 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Processor;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Announcer\BatchedVariantsUpdateAnnouncerInterface;
-use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
+use Sylius\Bundle\CoreBundle\Commander\UpdateVariantsCommanderInterface;
 use Sylius\Bundle\CoreBundle\Processor\ProductVariantCatalogPromotionsProcessorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class ProductVariantCatalogPromotionsProcessorSpec extends ObjectBehavior
 {
-    function let(
-        CatalogPromotionClearerInterface $catalogPromotionClearer,
-        BatchedVariantsUpdateAnnouncerInterface $announcer
-    ): void {
-        $this->beConstructedWith($catalogPromotionClearer, $announcer);
+    function let(UpdateVariantsCommanderInterface $commander): void
+    {
+        $this->beConstructedWith($commander);
     }
 
     function it_implements_product_catalog_promotions_processor_interface(): void
@@ -34,13 +31,11 @@ final class ProductVariantCatalogPromotionsProcessorSpec extends ObjectBehavior
     }
 
     function it_reapplies_catalog_promotion_on_variant(
-        CatalogPromotionClearerInterface $clearer,
         ProductVariantInterface $variant,
-        BatchedVariantsUpdateAnnouncerInterface $announcer
+        UpdateVariantsCommanderInterface $commander
     ): void {
-        $clearer->clearVariant($variant);
         $variant->getCode()->willReturn('VARIANT_CODE');
-        $announcer->dispatchVariantsUpdateCommand(['VARIANT_CODE']);
+        $commander->updateVariants(['VARIANT_CODE']);
 
         $this->process($variant);
     }

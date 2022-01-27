@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Announcer;
+namespace Sylius\Bundle\CoreBundle\Commander;
 
-use Sylius\Component\Product\Command\UpdateBatchedVariants;
+use Sylius\Component\Product\Command\UpdateVariants;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class BatchedVariantsUpdateAnnouncer implements BatchedVariantsUpdateAnnouncerInterface
+final class UpdateVariantsCommander implements UpdateVariantsCommanderInterface
 {
     public function __construct(
         private MessageBusInterface $messageBus,
@@ -24,12 +24,12 @@ final class BatchedVariantsUpdateAnnouncer implements BatchedVariantsUpdateAnnou
     ) {
     }
 
-    public function dispatchVariantsUpdateCommand(array $variants): void
+    public function updateVariants(array $variants): void
     {
         $batchedVariants = array_chunk($variants, $this->size);
 
         foreach ($batchedVariants as $batch) {
-            $this->messageBus->dispatch(new UpdateBatchedVariants($batch));
+            $this->messageBus->dispatch(new UpdateVariants($batch));
         }
     }
 }

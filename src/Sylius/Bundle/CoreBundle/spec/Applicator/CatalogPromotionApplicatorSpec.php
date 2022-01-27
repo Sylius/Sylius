@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Applicator\ActionBasedDiscountApplicatorInterface;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
-use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Bundle\CoreBundle\Checker\CatalogPromotionApplicableOnVariantCheckerInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -27,10 +27,10 @@ use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 final class CatalogPromotionApplicatorSpec extends ObjectBehavior
 {
     function let(
-        ChannelRepositoryInterface $channelRepository,
         ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator,
+        CatalogPromotionApplicableOnVariantCheckerInterface $checker
     ): void {
-        $this->beConstructedWith($channelRepository, $actionBasedDiscountApplicator);
+        $this->beConstructedWith($actionBasedDiscountApplicator, $checker);
     }
 
     function it_implements_catalog_promotion_applicator_interface(): void
@@ -41,6 +41,7 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
     function it_applies_percentage_discount_on_product_variant(
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionApplicableOnVariantCheckerInterface $checker,
         CatalogPromotionActionInterface $catalogPromotionAction,
         ChannelInterface $firstChannel,
         ChannelInterface $secondChannel,
@@ -48,6 +49,8 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         ChannelPricingInterface $secondChannelPricing,
         ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator
     ): void {
+        $checker->isApplicableOnVariant($catalogPromotion, $variant)->willReturn(true);
+
         $catalogPromotion->isExclusive()->willReturn(false);
         $catalogPromotion->getActions()->willReturn(new ArrayCollection([$catalogPromotionAction->getWrappedObject()]));
         $catalogPromotion->getChannels()->willReturn(new ArrayCollection([
@@ -61,6 +64,16 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
 
         $actionBasedDiscountApplicator->applyDiscountOnChannelPricing($catalogPromotion, $catalogPromotionAction, $firstChannelPricing)->shouldBeCalled();
         $actionBasedDiscountApplicator->applyDiscountOnChannelPricing($catalogPromotion, $catalogPromotionAction, $secondChannelPricing)->shouldBeCalled();
+
+        $this->applyOnVariant($variant, $catalogPromotion);
+    }
+
+    function it_does_nothing_if_promotion_is_not_applicable_on_variants(
+        ProductVariantInterface $variant,
+        CatalogPromotionInterface $catalogPromotion,
+        CatalogPromotionApplicableOnVariantCheckerInterface $checker,
+    ): void {
+        $checker->isApplicableOnVariant($catalogPromotion, $variant)->willReturn(false);
 
         $this->applyOnVariant($variant, $catalogPromotion);
     }

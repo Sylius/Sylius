@@ -19,9 +19,8 @@
             id="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface"
             class="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessor"
         >
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface" />
             <argument type="service" id="sylius.repository.product_variant" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Announcer\BatchedVariantsUpdateAnnouncerInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Commander\UpdateVariantsCommanderInterface" />
         </service>
 
         <service
@@ -45,16 +44,14 @@
             id="Sylius\Bundle\CoreBundle\Processor\ProductCatalogPromotionsProcessorInterface"
             class="Sylius\Bundle\CoreBundle\Processor\ProductCatalogPromotionsProcessor"
         >
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Announcer\BatchedVariantsUpdateAnnouncerInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Commander\UpdateVariantsCommanderInterface" />
         </service>
 
         <service
             id="Sylius\Bundle\CoreBundle\Processor\ProductVariantCatalogPromotionsProcessorInterface"
             class="Sylius\Bundle\CoreBundle\Processor\ProductVariantCatalogPromotionsProcessor"
         >
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Announcer\BatchedVariantsUpdateAnnouncerInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Commander\UpdateVariantsCommanderInterface" />
         </service>
     </services>
 </container>

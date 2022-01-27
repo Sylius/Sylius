@@ -14,37 +14,25 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Processor;
 
 use PhpSpec\ObjectBehavior;
-use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface;
-use Sylius\Bundle\CoreBundle\Announcer\BatchedVariantsUpdateAnnouncerInterface;
-use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
-use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface;
-use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
-use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
-use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Bundle\CoreBundle\Commander\UpdateVariantsCommanderInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 
 final class AllCatalogPromotionsProcessorSpec extends ObjectBehavior
 {
     function let(
-        CatalogPromotionClearerInterface $catalogPromotionClearer,
         ProductVariantRepositoryInterface $productVariantRepository,
-        BatchedVariantsUpdateAnnouncerInterface $announcer
+        UpdateVariantsCommanderInterface $commander
     ): void {
-        $this->beConstructedWith($catalogPromotionClearer, $productVariantRepository, $announcer);
+        $this->beConstructedWith($productVariantRepository, $commander);
     }
 
     function it_clears_and_processes_catalog_promotions(
-        CatalogPromotionClearerInterface $catalogPromotionClearer,
         ProductVariantRepositoryInterface $productVariantRepository,
-        BatchedVariantsUpdateAnnouncerInterface $announcer
+        UpdateVariantsCommanderInterface $commander
     ): void {
-        $catalogPromotionClearer->clear()->shouldBeCalled();
-
         $productVariantRepository->getCodesOfAllVariants()->willReturn(['FIRST_VARIANT_CODE', 'SECOND_VARIANT_CODE']);
 
-        $announcer->dispatchVariantsUpdateCommand(['FIRST_VARIANT_CODE', 'SECOND_VARIANT_CODE'])->shouldBeCalled();
+        $commander->updateVariants(['FIRST_VARIANT_CODE', 'SECOND_VARIANT_CODE'])->shouldBeCalled();
 
         $this->process();
     }

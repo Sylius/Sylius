@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Processor;
 
-use Sylius\Bundle\CoreBundle\Announcer\BatchedVariantsUpdateAnnouncerInterface;
+use Sylius\Bundle\CoreBundle\Commander\UpdateVariantsCommanderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
@@ -21,28 +21,19 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 final class ProductCatalogPromotionsProcessor implements ProductCatalogPromotionsProcessorInterface
 {
     public function __construct(
-        private CatalogPromotionClearerInterface $catalogPromotionClearer,
-        private BatchedVariantsUpdateAnnouncerInterface $announcer
+        private UpdateVariantsCommanderInterface $commander
     ) {
     }
 
     public function process(ProductInterface $product): void
     {
         $variants = $product->getVariants()->toArray();
-        $this->clearVariants($variants);
 
         $variantsCodes = array_map(
             fn (ProductVariantInterface $variant): string => $variant->getCode(),
             $variants
         );
 
-        $this->announcer->dispatchVariantsUpdateCommand($variantsCodes);
-    }
-
-    private function clearVariants(array $variants): void
-    {
-        foreach ($variants as $variant) {
-            $this->catalogPromotionClearer->clearVariant($variant);
-        }
+        $this->commander->updateVariants($variantsCodes);
     }
 }
