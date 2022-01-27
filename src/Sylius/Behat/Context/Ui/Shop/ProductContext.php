@@ -460,6 +460,21 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then the original price of the :product product in the :channel channel should be empty
+     */
+    public function theOriginalPriceOfTheProductInTheChannelShouldBeEmpty(
+        ProductInterface $product,
+        ChannelInterface $channel
+    ): void {
+        $this->channelContextSetter->setChannel($channel);
+
+        $localeCode = $channel->getDefaultLocale()->getCode();
+        $this->showPage->open(['slug' => $product->getTranslation($localeCode)->getSlug(), '_locale' => $localeCode]);
+
+        Assert::null($this->showPage->getOriginalPrice());
+    }
+
+    /**
      * @When I select its :optionName as :optionValue
      */
     public function iSelectItsOptionAs(string $optionName, string $optionValue): void
