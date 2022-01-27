@@ -13,31 +13,40 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Checker;
 
-use Sylius\Bundle\CoreBundle\Provider\VariantsProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
+use Webmozart\Assert\Assert;
 
 final class CatalogPromotionApplicableOnVariantChecker implements CatalogPromotionApplicableOnVariantCheckerInterface
 {
-    public function __construct(private iterable $variantsProviders)
+    public function __construct(private iterable $variantCheckers)
     {
     }
 
     public function isApplicableOnVariant(CatalogPromotionInterface $promotion, ProductVariantInterface $variant): bool
     {
-        $variants = [];
-
         /** @var CatalogPromotionScopeInterface $scope */
         foreach ($promotion->getScopes() as $scope) {
-            /** @var VariantsProviderInterface $provider */
-            foreach ($this->variantsProviders as $provider) {
-                if ($provider->supports($scope)) {
-                    $variants = array_merge($variants, $provider->provideEligibleVariants($scope));
-                }
+            $checker = $this->getCheckerForScope($scope);
+            Assert::notNull($checker, 'There is no supported catalog promotion scope');
+
+            if ($checker->inScope($scope, $variant)) {
+                return true;
             }
         }
 
-        return in_array($variant, $variants);
+        return false;
+    }
+
+    private function getCheckerForScope(CatalogPromotionScopeInterface $scope): ?VariantInScopeCheckerInterface
+    {
+        foreach ($this->variantCheckers as $checker) {
+            if ($checker->supports($scope)) {
+                return $checker;
+            }
+        }
+
+        return null;
     }
 }

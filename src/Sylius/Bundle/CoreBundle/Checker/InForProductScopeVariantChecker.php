@@ -1,0 +1,45 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Sylius\Bundle\CoreBundle\Checker;
+
+use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
+use Webmozart\Assert\Assert;
+
+final class InForProductScopeVariantChecker implements VariantInScopeCheckerInterface
+{
+    public const TYPE = 'for_products';
+
+    public function supports(CatalogPromotionScopeInterface $catalogPromotionScopeType): bool
+    {
+        return $catalogPromotionScopeType->getType() === self::TYPE;
+    }
+
+    public function inScope(CatalogPromotionScopeInterface $scope, ProductVariantInterface $productVariant): bool
+    {
+        $configuration = $scope->getConfiguration();
+        Assert::keyExists($configuration, 'products', 'This rule should have configured products');
+
+        $variantProductCode = $productVariant->getProduct()->getCode();
+
+        /** @var string $productCode */
+        foreach ($scope->getConfiguration()['products'] as $productCode) {
+            if ($variantProductCode ===$productCode) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}

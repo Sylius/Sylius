@@ -328,8 +328,19 @@
             id="Sylius\Bundle\CoreBundle\Checker\CatalogPromotionApplicableOnVariantCheckerInterface"
             class="Sylius\Bundle\CoreBundle\Checker\CatalogPromotionApplicableOnVariantChecker"
         >
-            <argument type="tagged_iterator" tag="sylius.catalog_promotion.variants_provider" />
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.variant_checker" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\Checker\InForProductScopeVariantChecker">
+            <tag name="sylius.catalog_promotion.variant_checker" type="for_products" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Checker\InForTaxonsScopeVariantChecker">
+            <tag name="sylius.catalog_promotion.variant_checker" type="for_taxons" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Checker\InForVariantsScopeVariantChecker">
+            <tag name="sylius.catalog_promotion.variant_checker" type="for_variants" />
+        </service>
     </services>
 </container>
