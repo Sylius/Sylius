@@ -15,7 +15,7 @@ Feature: Applying catalog promotions for product created in catalog promotions s
         When I create a new simple product "T-Shirt" priced at "$20.00" with "Clothes" taxon in the "United States" channel
         Then the visitor should see "$14.00" as the price of the "T-Shirt" product in the "United States" channel
 
-    @todo @api @ui
+    @api @ui
     Scenario: Applying catalog promotion
         Given there is a catalog promotion "Clothes sale" that reduces price by "30%" and applies on "Clothes" taxon
         And the store has a "T-Shirt" configurable product

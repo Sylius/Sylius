@@ -208,6 +208,5 @@ final class ManagingProductVariantsContext implements Context
         ]);
 
         $this->client->create();
-        $this->client->getLastResponse();
     }
 }

@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Listener;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Processor\ProductVariantCatalogPromotionsProcessorInterface;
+use Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface;
 use Sylius\Component\Core\Event\ProductVariantCreated;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
@@ -25,21 +25,21 @@ final class ProductVariantCreatedListenerSpec extends ObjectBehavior
 {
     function let(
         ProductVariantRepositoryInterface $productVariantRepository,
-        ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor,
+        AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
         EntityManagerInterface $entityManager
     ): void {
-        $this->beConstructedWith($productVariantRepository, $productVariantCatalogPromotionsProcessor, $entityManager);
+        $this->beConstructedWith($productVariantRepository, $allCatalogPromotionsProcessor, $entityManager);
     }
 
     function it_processes_catalog_promotions_for_created_product_variant(
         ProductVariantRepositoryInterface $productVariantRepository,
-        ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor,
+        AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
         EntityManagerInterface $entityManager,
         ProductVariantInterface $variant
     ): void {
         $productVariantRepository->findOneBy(['code' => 'PHP_MUG'])->willReturn($variant);
 
-        $productVariantCatalogPromotionsProcessor->process($variant)->shouldBeCalled();
+        $allCatalogPromotionsProcessor->process()->shouldBeCalled();
         $entityManager->flush()->shouldBeCalled();
 
         $this(new ProductVariantCreated('PHP_MUG'));
@@ -47,12 +47,12 @@ final class ProductVariantCreatedListenerSpec extends ObjectBehavior
 
     function it_does_nothing_if_there_is_no_product_variant_with_given_code(
         ProductVariantRepositoryInterface $productVariantRepository,
-        ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor,
+        AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
         EntityManagerInterface $entityManager
     ): void {
         $productVariantRepository->findOneBy(['code' => 'PHP_MUG'])->willReturn(null);
 
-        $productVariantCatalogPromotionsProcessor->process(Argument::any())->shouldNotBeCalled();
+        $allCatalogPromotionsProcessor->process()->shouldNotBeCalled();
         $entityManager->flush()->shouldNotBeCalled();
 
         $this(new ProductVariantCreated('PHP_MUG'));

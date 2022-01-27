@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Bundle\CoreBundle\Processor\ProductVariantCatalogPromotionsProcessorInterface;
+use Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface;
 use Sylius\Component\Core\Event\ProductVariantCreated;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
@@ -23,17 +23,17 @@ final class ProductVariantCreatedListener
 {
     private ProductVariantRepositoryInterface $productVariantRepository;
 
-    private ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor;
+    private AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor;
 
     private EntityManagerInterface $entityManager;
 
     public function __construct(
         ProductVariantRepositoryInterface $productVariantRepository,
-        ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor,
+        AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
         EntityManagerInterface $entityManager
     ) {
         $this->productVariantRepository = $productVariantRepository;
-        $this->productVariantCatalogPromotionsProcessor = $productVariantCatalogPromotionsProcessor;
+        $this->allCatalogPromotionsProcessor = $allCatalogPromotionsProcessor;
         $this->entityManager = $entityManager;
     }
 
@@ -45,7 +45,7 @@ final class ProductVariantCreatedListener
             return;
         }
 
-        $this->productVariantCatalogPromotionsProcessor->process($productVariant);
+        $this->allCatalogPromotionsProcessor->process();
 
         $this->entityManager->flush();
     }

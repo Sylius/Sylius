@@ -28,7 +28,7 @@ final class ProductCreationContext implements Context
     /**
      * @When /^I create a new simple product ("[^"]+") priced at "(?:€|£|\$)([^"]+)" with ("[^"]+" taxon) in the ("[^"]+" channel)$/
      */
-    public function iCreateANewVariantPricedAtForProductInTheChannel(
+    public function iCreateANewSimpleProductPricedAtWithTaxonInTheChannel(
         string $name,
         string $price,
         TaxonInterface $taxon,
@@ -43,6 +43,7 @@ final class ProductCreationContext implements Context
         $this->createPage->specifyCode(str_replace('"', '', StringInflector::nameToUppercaseCode($name)));
         $this->createPage->specifyPrice($channel, $price);
         $this->createPage->checkChannel($channel->getName());
+        $this->createPage->selectMainTaxon($taxon);
         $this->createPage->checkProductTaxon($taxon);
 
         $this->createPage->create();
