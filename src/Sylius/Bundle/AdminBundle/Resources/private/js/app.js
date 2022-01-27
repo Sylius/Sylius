@@ -68,17 +68,7 @@ $(document).ready(() => {
   });
   $('#sylius_promotion_rules > a[data-form-collection="add"]').on('click', () => {
     setTimeout(() => {
-      $(`select[name^="sylius_promotion[rules]"][name$="[type]"]`).last().change();
-    }, 50);
-  });
-  $('#sylius_catalog_promotion_actions > a[data-form-collection="add"]').on('click', () => {
-    setTimeout(() => {
-      $('select[name^="sylius_catalog_promotion[actions]"][name$="[type]"]').last().change();
-    }, 50);
-  });
-  $('#sylius_catalog_promotion_scopes > a[data-form-collection="add"]').on('click', () => {
-    setTimeout(() => {
-      $(`select[name^="sylius_catalog_promotion[scopes]"][name$="[type]"]`).last().change();
+      $('select[name^="sylius_promotion[rules]"][name$="[type]"]').last().change();
     }, 50);
   });
 
@@ -89,13 +79,17 @@ $(document).ready(() => {
       }
     });
 
-    $(document).loadCatalogPromotionScopeConfiguration(
-      document.querySelector('#sylius_catalog_promotion_scopes [data-form-collection="item"]:last-child')
-    );
+    if ($('#sylius_catalog_promotion_scopes').length > 0) {
+      $(document).loadCatalogPromotionScopeConfiguration(
+        document.querySelector('#sylius_catalog_promotion_scopes [data-form-collection="item"]:last-child')
+      );
+    }
 
-    $(document).loadCatalogPromotionActionConfiguration(
-      document.querySelector('#sylius_catalog_promotion_actions [data-form-collection="item"]:last-child')
-    );
+    if ($('#sylius_catalog_promotion_actions').length > 0) {
+      $(document).loadCatalogPromotionActionConfiguration(
+        document.querySelector('#sylius_catalog_promotion_actions [data-form-collection="item"]:last-child')
+      );
+    }
   });
   $(document).on('collection-form-update', () => {
     $('.sylius-autocomplete').each((index, element) => {

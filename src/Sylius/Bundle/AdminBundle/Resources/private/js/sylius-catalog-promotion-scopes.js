@@ -11,6 +11,10 @@ import $ from 'jquery';
 
 $.fn.extend({
   loadCatalogPromotionScopeConfiguration(target) {
+    if (target == null || target.querySelector('#sylius_catalog_promotion_scopes select[name*="type"]') == null) {
+      return;
+    }
+
     target.querySelector('#sylius_catalog_promotion_scopes select[name*="type"]').onchange = function () {
       const parent = this.parentElement;
       const newConfig = document.createElement('div');
