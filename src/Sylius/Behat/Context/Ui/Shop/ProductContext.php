@@ -566,6 +566,23 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then /^the visitor should(?:| still) see that the ("[^"]+" variant) is discounted from "([^"]+)" to "([^"]+)" with ([^"]+) promotions$/
+     */
+    public function theVisitorShouldSeeVariantIsDiscountedFromToWithNumberOfPromotions(
+        ProductVariantInterface $variant,
+        string $originalPrice,
+        string $price,
+        int $numberOfPromotions
+    ): void {
+        /** @var ProductInterface $product */
+        $product = $variant->getProduct();
+
+        $this->iOpenProductPage($product);
+
+        $this->iShouldSeeVariantIsDiscountedFromToWithNumberOfPromotions($variant, $originalPrice, $price, $numberOfPromotions);
+    }
+
+    /**
      * @Then its current variant should be named :name
      */
     public function itsCurrentVariantShouldBeNamed($name)

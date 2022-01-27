@@ -133,21 +133,23 @@ Feature: Creating a catalog promotion
         And it should have priority equal to 10
 
     @api @ui @javascript
-    Scenario: Creating a new catalog promotion with priorities with other exclusive already existing
-        Given there is an exclusive catalog promotion "Exclusive PHP stuff promotion" with priority 500 that reduces price by "30%" and applies on "PHP T-Shirt" variant
+    Scenario: Creating a new catalog promotion with priorities with others already existing
+        Given there is a catalog promotion "PHP stuff promotion" with priority 100 that reduces price by "30%" and applies on "PHP T-Shirt" variant
+        And there is a catalog promotion "T-Shirt sale" with priority 200 that reduces price by "10%" and applies on "PHP T-Shirt" variant
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
         And I name it "Winter sale"
         And I specify its label as "Winter sale" in "English (United States)"
-        And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
+        And I describe it as "This promotion gives a 5$ discount on all products" in "English (United States)"
+        And I set its priority to 150
         And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
-        And I add action that gives "50%" percentage discount
+        And I add action that gives "$5" of fixed discount in the "United States" channel
         And I make it start yesterday and ends tomorrow
         And I make it available in channel "United States"
         And I add it
         Then I should be notified that catalog promotion has been successfully created
-        And the visitor should see that the "PHP T-Shirt" variant is discounted from "$20.00" to "$14.00" with "Exclusive PHP stuff promotion" promotion
-        And the visitor should see that the "Kotlin T-Shirt" variant is discounted from "$40.00" to "$20.00" with "Winter sale" promotion
+        And the visitor should see that the "PHP T-Shirt" variant is discounted from "$20.00" to "$9.10" with 3 promotions
+        And the visitor should see that the "Kotlin T-Shirt" variant is discounted from "$40.00" to "$35.00" with "Winter sale" promotion
 
     @ui @javascript
     Scenario: Adding a new catalog promotion of default type with one action

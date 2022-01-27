@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
@@ -164,6 +165,21 @@ final class ProductVariantContext implements Context
         $this->variantClient->show($productVariant->getCode());
 
         $this->iShouldSeeVariantIsDiscountedFromToWithPromotions($productVariant, $originalPrice, $price, $promotionName);
+    }
+
+    /**
+     * @Then /^the visitor should(?:| still) see that the ("[^"]+" variant) is discounted from ("[^"]+") to ("[^"]+") with ([^"]+) promotions$/
+     */
+    public function theVisitorShouldSeeVariantIsDiscountedFromToWithNumberOfPromotions(
+        ProductVariantInterface $variant,
+        int $originalPrice,
+        int $price,
+        int $numberOfPromotions
+    ): void {
+        $this->sharedStorage->set('token', null);
+        $this->variantClient->show($variant->getCode());
+
+        $this->iShouldSeeVariantIsDiscountedFromToWithNumberOfPromotions($variant, $originalPrice, $price, $numberOfPromotions);
     }
 
     /**
