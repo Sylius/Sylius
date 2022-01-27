@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Translation;
 
+use Sylius\Component\Core\Checker\CLIContextCheckerInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Resource\Model\TranslatableInterface;
@@ -21,13 +22,29 @@ use Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssignerInterf
 
 final class TranslatableEntityLocaleAssigner implements TranslatableEntityLocaleAssignerInterface
 {
-    public function __construct(private LocaleContextInterface $localeContext, private TranslationLocaleProviderInterface $translationLocaleProvider)
-    {
+    public function __construct(
+        private LocaleContextInterface $localeContext,
+        private TranslationLocaleProviderInterface $translationLocaleProvider,
+        private ?CLIContextCheckerInterface $commandBasedChecker = null
+    ) {
+        if ($this->commandBasedChecker === null) {
+            @trigger_error(
+                'Not passing CommandBasedContextCheckedInterface explicitly as the third argument is deprecated since 1.11 and will be prohibited in 2.0.',
+                E_USER_DEPRECATED
+            );
+        }
     }
 
     public function assignLocale(TranslatableInterface $translatableEntity): void
     {
         $fallbackLocale = $this->translationLocaleProvider->getDefaultLocaleCode();
+        $translatableEntity->setFallbackLocale($fallbackLocale);
+
+        if ($this->commandBasedChecker !== null && $this->commandBasedChecker->isExecutedFromCLI()) {
+            $translatableEntity->setCurrentLocale($fallbackLocale);
+
+            return;
+        }
 
         try {
             $currentLocale = $this->localeContext->getLocaleCode();
@@ -36,6 +53,5 @@ final class TranslatableEntityLocaleAssigner implements TranslatableEntityLocale
         }
 
         $translatableEntity->setCurrentLocale($currentLocale);
-        $translatableEntity->setFallbackLocale($fallbackLocale);
     }
 }

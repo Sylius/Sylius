@@ -26,6 +26,7 @@ final class TranslatableEntityLocalePass implements CompilerPassInterface
         $translatableEntityLocaleAssignerDefinition = new Definition(TranslatableEntityLocaleAssigner::class);
         $translatableEntityLocaleAssignerDefinition->addArgument(new Reference('sylius.context.locale'));
         $translatableEntityLocaleAssignerDefinition->addArgument(new Reference('sylius.translation_locale_provider'));
+        $translatableEntityLocaleAssignerDefinition->addArgument(new Reference('Sylius\Component\Core\Checker\CLIContextCheckerInterface'));
 
         $container
             ->setDefinition('sylius.translatable_entity_locale_assigner', $translatableEntityLocaleAssignerDefinition)
