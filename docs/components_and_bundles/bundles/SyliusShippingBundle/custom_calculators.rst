@@ -17,8 +17,8 @@ All shipping cost calculators implement ``CalculatorInterface``. In our example 
 
 .. code-block:: php
 
-    # src/Shipping/Calculator/DHLCalculator.php
     <?php
+    # src/Shipping/Calculator/DHLCalculator.php
 
     declare(strict_types=1);
 
@@ -82,8 +82,8 @@ First step is to create a form type which will be displayed if our calculator is
 
 .. code-block:: php
 
-    # src/Form/Type/Shipping/Calculator/DHLConfigurationType.php
     <?php
+    # src/Form/Type/Shipping/Calculator/DHLConfigurationType.php
 
     declare(strict_types=1);
 
@@ -157,8 +157,8 @@ Perfect, now we're able to use the configuration inside the ``calculate`` method
 
 .. code-block:: php
 
-    # src/Shipping/Calculator/DHLCalculator.php
     <?php
+    # src/Shipping/Calculator/DHLCalculator.php
 
     declare(strict_types=1);
 
