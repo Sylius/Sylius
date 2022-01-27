@@ -28,15 +28,12 @@ final class AllCatalogPromotionsProcessorSpec extends ObjectBehavior
     function let(
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionProcessorInterface $catalogPromotionProcessor,
-        EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
-        CriteriaInterface $firstCriteria,
-        CriteriaInterface $secondCriteria
+        EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider
     ): void {
         $this->beConstructedWith(
             $catalogPromotionClearer,
             $catalogPromotionProcessor,
-            $catalogPromotionsProvider,
-            [$firstCriteria, $secondCriteria]
+            $catalogPromotionsProvider
         );
     }
 
@@ -45,16 +42,11 @@ final class AllCatalogPromotionsProcessorSpec extends ObjectBehavior
         CatalogPromotionProcessorInterface $catalogPromotionProcessor,
         EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
         CatalogPromotionInterface $firstCatalogPromotion,
-        CatalogPromotionInterface $secondCatalogPromotion,
-        CriteriaInterface $firstCriteria,
-        CriteriaInterface $secondCriteria
+        CatalogPromotionInterface $secondCatalogPromotion
     ): void {
         $catalogPromotionClearer->clear()->shouldBeCalled();
 
-        $catalogPromotionsProvider
-            ->provide([$firstCriteria, $secondCriteria])
-            ->willReturn([$firstCatalogPromotion, $secondCatalogPromotion])
-        ;
+        $catalogPromotionsProvider->provide()->willReturn([$firstCatalogPromotion, $secondCatalogPromotion]);
 
         $catalogPromotionProcessor->process($firstCatalogPromotion)->shouldBeCalled();
         $catalogPromotionProcessor->process($secondCatalogPromotion)->shouldBeCalled();

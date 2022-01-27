@@ -24,24 +24,20 @@ final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcess
 
     private EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider;
 
-    private iterable $defaultCriteria;
-
     public function __construct(
         CatalogPromotionClearerInterface $catalogPromotionClearer,
         CatalogPromotionProcessorInterface $catalogPromotionProcessor,
         EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
-        iterable $defaultCriteria = []
     ) {
         $this->catalogPromotionClearer = $catalogPromotionClearer;
         $this->catalogPromotionProcessor = $catalogPromotionProcessor;
         $this->catalogPromotionsProvider = $catalogPromotionsProvider;
-        $this->defaultCriteria = $defaultCriteria;
     }
 
     public function process(): void
     {
         $this->catalogPromotionClearer->clear();
-        $eligibleCatalogPromotions = $this->catalogPromotionsProvider->provide($this->defaultCriteria);
+        $eligibleCatalogPromotions = $this->catalogPromotionsProvider->provide();
 
         foreach ($eligibleCatalogPromotions as $catalogPromotion) {
             $this->catalogPromotionProcessor->process($catalogPromotion);

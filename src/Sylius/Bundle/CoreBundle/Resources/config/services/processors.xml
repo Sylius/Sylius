@@ -22,7 +22,6 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface" />
             <argument type="service" id="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface" />
-            <argument type="tagged_iterator" tag="sylius.catalog_promotion.criteria" />
         </service>
 
         <service
