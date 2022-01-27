@@ -77,10 +77,10 @@ Now, we need to configure a new service.
     # config/packages/_sylius.yaml
     app.block_event_listener.layout.after_stylesheets:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
-            arguments:
-                - 'googleScript.html.twig'
-            tags:
-                - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.stylesheets, method: onBlockEvent }
+        arguments:
+            - 'googleScript.html.twig'
+        tags:
+            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.stylesheets, method: onBlockEvent }
 
 Learn more
 ----------

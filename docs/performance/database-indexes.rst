@@ -11,7 +11,9 @@ In this file, add indexes attribute into the table configuration:
 
 .. code-block:: php
 
-    `@ORM\Table(name="sylius_customer", indexes={@ORM\Index(name="created_at_index", columns={"created_at"})})`.
+    /**
+    * @ORM\Table(name="sylius_customer", indexes={@ORM\Index(name="created_at_index", columns={"created_at"})})
+    */
 
 Your class should now look like this:
 
