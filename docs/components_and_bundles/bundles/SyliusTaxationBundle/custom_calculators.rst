@@ -18,8 +18,8 @@ All tax calculators implement the ``CalculatorInterface``. In our example we'll 
 
 .. code-block:: php
 
-    # src/Taxation/Calculator/FeeCalculator.php
     <?php
+    # src/Taxation/Calculator/FeeCalculator.php
 
     declare(strict_types=1);
 

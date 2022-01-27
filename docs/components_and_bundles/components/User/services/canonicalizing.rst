@@ -20,8 +20,8 @@ letters. Example usage:
 
 .. code-block:: php
 
-    // File example: src/script.php
     <?php
+    // src/script.php
 
     // update this to the path to the "vendor/"
     // directory, relative to this file
