@@ -316,6 +316,10 @@
             <argument type="tagged_locator" tag="sylius.catalog_promotion.variant_checker" index-by="type" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\Checker\CatalogPromotionEligibilityChecker">
+            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\Checker\InForProductScopeVariantChecker">
             <tag name="sylius.catalog_promotion.variant_checker" type="for_products" />
         </service>

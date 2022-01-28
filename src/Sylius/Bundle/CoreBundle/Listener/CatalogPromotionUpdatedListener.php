@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Processor\AllProductVariantsCatalogPromotionsProcessorInterface;
+use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionStateProcessorInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -22,6 +23,7 @@ final class CatalogPromotionUpdatedListener
 {
     public function __construct(
         private AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
+        private CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
         private RepositoryInterface $catalogPromotionRepository,
         private EntityManagerInterface $entityManager
     ) {
@@ -29,11 +31,15 @@ final class CatalogPromotionUpdatedListener
 
     public function __invoke(CatalogPromotionUpdated $event): void
     {
-        if (null === $this->catalogPromotionRepository->findOneBy(['code' => $event->code])) {
+        $catalogPromotion = $this->catalogPromotionRepository->findOneBy(['code' => $event->code]);
+
+        if (null === $catalogPromotion) {
             return;
         }
 
         $this->allProductVariantsCatalogPromotionsProcessor->process();
+
+        $this->catalogPromotionStateProcessor->process($catalogPromotion);
 
         $this->entityManager->flush();
     }
