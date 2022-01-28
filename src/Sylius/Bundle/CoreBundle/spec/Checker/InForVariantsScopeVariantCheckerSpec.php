@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\Checker;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Checker\VariantInScopeCheckerInterface;
 use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;

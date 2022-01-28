@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Checker;
 
+use Sylius\Bundle\CoreBundle\Provider\ForVariantInCatalogPromotionScopeCheckerProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
-use Webmozart\Assert\Assert;
+use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 
 final class ProductVariantForCatalogPromotionEligibility implements ProductVariantForCatalogPromotionEligibilityInterface
 {
-    public function __construct(private iterable $variantCheckers)
+    public function __construct(private ForVariantInCatalogPromotionScopeCheckerProviderInterface $checkerProvider)
     {
     }
 
@@ -28,8 +28,7 @@ final class ProductVariantForCatalogPromotionEligibility implements ProductVaria
     {
         /** @var CatalogPromotionScopeInterface $scope */
         foreach ($promotion->getScopes() as $scope) {
-            $checker = $this->getCheckerForScope($scope);
-            Assert::notNull($checker, 'There is no supported catalog promotion scope');
+            $checker = $this->checkerProvider->provide($scope);
 
             if ($checker->inScope($scope, $variant)) {
                 return true;
@@ -37,16 +36,5 @@ final class ProductVariantForCatalogPromotionEligibility implements ProductVaria
         }
 
         return false;
-    }
-
-    private function getCheckerForScope(CatalogPromotionScopeInterface $scope): ?VariantInScopeCheckerInterface
-    {
-        foreach ($this->variantCheckers as $checker) {
-            if ($checker->supports($scope)) {
-                return $checker;
-            }
-        }
-
-        return null;
     }
 }

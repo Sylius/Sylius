@@ -46,7 +46,7 @@ final class SetCatalogPromotionScopeTypesPassTest extends AbstractCompilerPassTe
     public function it_throws_an_exception_if_there_is_no_type_attribute_defined(): void
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Tagged catalog promotion variant checker `variants_provider` needs to have `type` attribute.');
+        $this->expectExceptionMessage('Tagged catalog promotion variant checker `variant_checker` needs to have `type` attribute.');
 
         $this->setDefinition(
             'variant_checker',
