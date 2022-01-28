@@ -11,7 +11,6 @@ default:
 
                 - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.admin_user
-                - sylius.behat.context.setup.calendar
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.customer
@@ -28,6 +27,7 @@ default:
                 - sylius.behat.context.setup.taxonomy
                 - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.zone
+                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.channel
