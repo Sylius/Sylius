@@ -14,15 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PromotionBundle\Criteria;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Component\Promotion\Provider\DateTimeProviderInterface;
+use Sylius\Calendar\Provider\DateTimeProviderInterface;
 
 final class DateRange implements CriteriaInterface
 {
-    private DateTimeProviderInterface $calendar;
-
-    public function __construct(DateTimeProviderInterface $calendar)
+    public function __construct(private DateTimeProviderInterface $calendar)
     {
-        $this->calendar = $calendar;
     }
 
     public function filterQueryBuilder(QueryBuilder $queryBuilder): QueryBuilder
