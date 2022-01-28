@@ -5,8 +5,8 @@ default:
     suites:
         api_applying_catalog_promotions:
             contexts:
-                - sylius.behat.context.hook.calendar
                 - sylius.behat.context.hook.doctrine_orm
+                - Sylius\Calendar\Tests\Behat\Context\Hook\CalendarContext
 
                 - sylius.behat.context.setup.admin_api_security
                 - sylius.behat.context.setup.channel

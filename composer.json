@@ -59,7 +59,7 @@
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0",
         "sylius-labs/polyfill-symfony-security": "^1.0",
-        "sylius/calendar": "^0.2",
+        "sylius/calendar": "^0.3",
         "sylius/fixtures-bundle": "^1.6.1",
         "sylius/grid": "^1.8",
         "sylius/grid-bundle": "^1.8",
