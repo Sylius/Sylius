@@ -27,11 +27,14 @@ use Webmozart\Assert\Assert;
 
 final class UserRegistrationListener
 {
-    /**
-     * @param string $firewallContextName
-     */
-    public function __construct(private ObjectManager $userManager, private GeneratorInterface $tokenGenerator, private EventDispatcherInterface $eventDispatcher, private ChannelContextInterface $channelContext, private UserLoginInterface $userLogin, private $firewallContextName)
-    {
+    public function __construct(
+        private ObjectManager $userManager,
+        private GeneratorInterface $tokenGenerator,
+        private EventDispatcherInterface $eventDispatcher,
+        private ChannelContextInterface $channelContext,
+        private UserLoginInterface $userLogin,
+        private string $firewallContextName
+    ) {
     }
 
     public function handleUserVerification(GenericEvent $event): void

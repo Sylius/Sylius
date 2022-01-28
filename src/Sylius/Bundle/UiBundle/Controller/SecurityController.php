@@ -29,8 +29,13 @@ final class SecurityController
     /**
      * @param EngineInterface|Environment $templatingEngine
      */
-    public function __construct(private AuthenticationUtils $authenticationUtils, private FormFactoryInterface $formFactory, private object $templatingEngine, private AuthorizationCheckerInterface $authorizationChecker, private RouterInterface $router)
-    {
+    public function __construct(
+        private AuthenticationUtils $authenticationUtils,
+        private FormFactoryInterface $formFactory,
+        private object $templatingEngine,
+        private AuthorizationCheckerInterface $authorizationChecker,
+        private RouterInterface $router
+    ) {
     }
 
     public function loginAction(Request $request): Response

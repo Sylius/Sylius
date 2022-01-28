@@ -24,8 +24,11 @@ use Symfony\Component\Security\Core\User\UserCheckerInterface;
 
 class UserLogin implements UserLoginInterface
 {
-    public function __construct(private TokenStorageInterface $tokenStorage, private UserCheckerInterface $userChecker, private EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        private TokenStorageInterface $tokenStorage,
+        private UserCheckerInterface $userChecker,
+        private EventDispatcherInterface $eventDispatcher
+    ) {
     }
 
     public function login(UserInterface $user, ?string $firewallName = null): void

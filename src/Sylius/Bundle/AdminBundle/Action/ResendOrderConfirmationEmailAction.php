@@ -27,8 +27,12 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 final class ResendOrderConfirmationEmailAction
 {
-    public function __construct(private OrderRepositoryInterface $orderRepository, private OrderEmailManagerInterface $orderEmailManager, private CsrfTokenManagerInterface $csrfTokenManager, private Session $session)
-    {
+    public function __construct(
+        private OrderRepositoryInterface $orderRepository,
+        private OrderEmailManagerInterface $orderEmailManager,
+        private CsrfTokenManagerInterface $csrfTokenManager,
+        private Session $session
+    ) {
     }
 
     public function __invoke(Request $request): Response

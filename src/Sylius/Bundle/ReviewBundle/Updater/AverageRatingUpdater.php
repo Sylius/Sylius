@@ -20,8 +20,10 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 class AverageRatingUpdater implements ReviewableRatingUpdaterInterface
 {
-    public function __construct(private ReviewableRatingCalculatorInterface $averageRatingCalculator, private ObjectManager $reviewSubjectManager)
-    {
+    public function __construct(
+        private ReviewableRatingCalculatorInterface $averageRatingCalculator,
+        private ObjectManager $reviewSubjectManager
+    ) {
     }
 
     public function update(ReviewableInterface $reviewSubject): void

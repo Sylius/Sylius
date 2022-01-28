@@ -32,8 +32,11 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
      */
     private ?Collection $productAssociations = null;
 
-    public function __construct(private FactoryInterface $productAssociationFactory, private ProductRepositoryInterface $productRepository, private RepositoryInterface $productAssociationTypeRepository)
-    {
+    public function __construct(
+        private FactoryInterface $productAssociationFactory,
+        private ProductRepositoryInterface $productRepository,
+        private RepositoryInterface $productAssociationTypeRepository
+    ) {
     }
 
     public function transform($value)

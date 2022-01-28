@@ -38,8 +38,16 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class PayumController
 {
-    public function __construct(private Payum $payum, private OrderRepositoryInterface $orderRepository, private MetadataInterface $orderMetadata, private RequestConfigurationFactoryInterface $requestConfigurationFactory, private ViewHandlerInterface $viewHandler, private RouterInterface $router, private GetStatusFactoryInterface $getStatusRequestFactory, private ResolveNextRouteFactoryInterface $resolveNextRouteRequestFactory)
-    {
+    public function __construct(
+        private Payum $payum,
+        private OrderRepositoryInterface $orderRepository,
+        private MetadataInterface $orderMetadata,
+        private RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        private ViewHandlerInterface $viewHandler,
+        private RouterInterface $router,
+        private GetStatusFactoryInterface $getStatusRequestFactory,
+        private ResolveNextRouteFactoryInterface $resolveNextRouteRequestFactory
+    ) {
     }
 
     public function prepareCaptureAction(Request $request, $tokenValue): Response

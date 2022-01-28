@@ -22,8 +22,11 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 class StatisticsDataProvider implements StatisticsDataProviderInterface
 {
-    public function __construct(private DashboardStatisticsProviderInterface $statisticsProvider, private SalesDataProviderInterface $salesDataProvider, private MoneyFormatterInterface $moneyFormatter)
-    {
+    public function __construct(
+        private DashboardStatisticsProviderInterface $statisticsProvider,
+        private SalesDataProviderInterface $salesDataProvider,
+        private MoneyFormatterInterface $moneyFormatter
+    ) {
     }
 
     public function getRawData(ChannelInterface $channel, \DateTimeInterface $startDate, \DateTimeInterface $endDate, string $interval): array

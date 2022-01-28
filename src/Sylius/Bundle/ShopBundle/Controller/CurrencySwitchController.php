@@ -29,8 +29,12 @@ final class CurrencySwitchController
     /**
      * @param EngineInterface|Environment $templatingEngine
      */
-    public function __construct(private object $templatingEngine, private CurrencyContextInterface $currencyContext, private CurrencyStorageInterface $currencyStorage, private ChannelContextInterface $channelContext)
-    {
+    public function __construct(
+        private object $templatingEngine,
+        private CurrencyContextInterface $currencyContext,
+        private CurrencyStorageInterface $currencyStorage,
+        private ChannelContextInterface $channelContext
+    ) {
     }
 
     public function renderAction(): Response

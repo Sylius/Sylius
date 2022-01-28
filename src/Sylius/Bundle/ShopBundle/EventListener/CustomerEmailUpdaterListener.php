@@ -29,8 +29,13 @@ use Webmozart\Assert\Assert;
 
 final class CustomerEmailUpdaterListener
 {
-    public function __construct(private GeneratorInterface $tokenGenerator, private ChannelContextInterface $channelContext, private EventDispatcherInterface $eventDispatcher, private SessionInterface $session, private SectionProviderInterface $uriBasedSectionContext)
-    {
+    public function __construct(
+        private GeneratorInterface $tokenGenerator,
+        private ChannelContextInterface $channelContext,
+        private EventDispatcherInterface $eventDispatcher,
+        private SessionInterface $session,
+        private SectionProviderInterface $uriBasedSectionContext
+    ) {
     }
 
     public function eraseVerification(GenericEvent $event): void

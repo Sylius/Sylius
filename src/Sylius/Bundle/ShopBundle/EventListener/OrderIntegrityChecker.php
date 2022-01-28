@@ -25,8 +25,11 @@ use Webmozart\Assert\Assert;
 
 final class OrderIntegrityChecker
 {
-    public function __construct(private RouterInterface $router, private OrderProcessorInterface $orderProcessor, private ObjectManager $manager)
-    {
+    public function __construct(
+        private RouterInterface $router,
+        private OrderProcessorInterface $orderProcessor,
+        private ObjectManager $manager
+    ) {
     }
 
     public function check(ResourceControllerEvent $event): void

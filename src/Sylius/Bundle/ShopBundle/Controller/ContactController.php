@@ -34,8 +34,15 @@ final class ContactController
     /**
      * @param EngineInterface|Environment $templatingEngine
      */
-    public function __construct(private RouterInterface $router, private FormFactoryInterface $formFactory, private object $templatingEngine, private ChannelContextInterface $channelContext, private CustomerContextInterface $customerContext, private LocaleContextInterface $localeContext, private ContactEmailManagerInterface $contactEmailManager)
-    {
+    public function __construct(
+        private RouterInterface $router,
+        private FormFactoryInterface $formFactory,
+        private object $templatingEngine,
+        private ChannelContextInterface $channelContext,
+        private CustomerContextInterface $customerContext,
+        private LocaleContextInterface $localeContext,
+        private ContactEmailManagerInterface $contactEmailManager
+    ) {
     }
 
     public function requestAction(Request $request): Response

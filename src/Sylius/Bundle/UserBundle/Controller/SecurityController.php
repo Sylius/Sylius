@@ -23,8 +23,10 @@ use Webmozart\Assert\Assert;
 
 class SecurityController extends AbstractController
 {
-    public function __construct(private ?\Symfony\Component\Security\Http\Authentication\AuthenticationUtils $authenticationUtils = null, private ?\Symfony\Component\Form\FormFactoryInterface $formFactory = null)
-    {
+    public function __construct(
+        private ?AuthenticationUtils $authenticationUtils = null,
+        private ?FormFactoryInterface $formFactory = null
+    ) {
         if ($this->authenticationUtils === null) {
             @trigger_error(sprintf('Not passing a $authenticationUtils to %s constructor is deprecated since Sylius 1.11 and will be prohibited in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
         }

@@ -27,8 +27,11 @@ final class CustomerStatisticsController
     /**
      * @param EngineInterface|Environment $templatingEngine
      */
-    public function __construct(private CustomerStatisticsProviderInterface $statisticsProvider, private RepositoryInterface $customerRepository, private object $templatingEngine)
-    {
+    public function __construct(
+        private CustomerStatisticsProviderInterface $statisticsProvider,
+        private RepositoryInterface $customerRepository,
+        private object $templatingEngine
+    ) {
     }
 
     /**

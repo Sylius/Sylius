@@ -22,8 +22,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class FakeChannelContext implements ChannelContextInterface
 {
-    public function __construct(private FakeChannelCodeProviderInterface $fakeChannelCodeProvider, private ChannelRepositoryInterface $channelRepository, private RequestStack $requestStack)
-    {
+    public function __construct(
+        private FakeChannelCodeProviderInterface $fakeChannelCodeProvider,
+        private ChannelRepositoryInterface $channelRepository,
+        private RequestStack $requestStack
+    ) {
     }
 
     public function getChannel(): ChannelInterface

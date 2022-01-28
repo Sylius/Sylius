@@ -27,8 +27,12 @@ final class LocaleSwitchController
     /**
      * @param EngineInterface|Environment $templatingEngine
      */
-    public function __construct(private object $templatingEngine, private LocaleContextInterface $localeContext, private LocaleProviderInterface $localeProvider, private LocaleSwitcherInterface $localeSwitcher)
-    {
+    public function __construct(
+        private object $templatingEngine,
+        private LocaleContextInterface $localeContext,
+        private LocaleProviderInterface $localeProvider,
+        private LocaleSwitcherInterface $localeSwitcher
+    ) {
     }
 
     public function renderAction(): Response

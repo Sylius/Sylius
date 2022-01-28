@@ -25,8 +25,11 @@ abstract class AbstractUserProvider implements UserProviderInterface
     /**
      * @param string $supportedUserClass FQCN
      */
-    public function __construct(protected string $supportedUserClass, protected UserRepositoryInterface $userRepository, protected CanonicalizerInterface $canonicalizer)
-    {
+    public function __construct(
+        protected string $supportedUserClass,
+        protected UserRepositoryInterface $userRepository,
+        protected CanonicalizerInterface $canonicalizer
+    ) {
     }
 
     public function loadUserByUsername($username): UserInterface

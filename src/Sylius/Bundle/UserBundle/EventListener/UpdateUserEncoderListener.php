@@ -19,8 +19,13 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 final class UpdateUserEncoderListener
 {
-    public function __construct(private ObjectManager $objectManager, private string $recommendedEncoderName, private string $className, private string $interfaceName, private string $passwordParameter)
-    {
+    public function __construct(
+        private ObjectManager $objectManager,
+        private string $recommendedEncoderName,
+        private string $className,
+        private string $interfaceName,
+        private string $passwordParameter
+    ) {
     }
 
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event): void

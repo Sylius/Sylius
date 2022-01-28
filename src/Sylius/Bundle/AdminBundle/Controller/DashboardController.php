@@ -30,8 +30,13 @@ final class DashboardController
     /**
      * @param EngineInterface|Environment $templatingEngine
      */
-    public function __construct(private ChannelRepositoryInterface $channelRepository, private object $templatingEngine, private RouterInterface $router, private ?\Sylius\Component\Core\Dashboard\SalesDataProviderInterface $salesDataProvider = null, private ?\Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface $statisticsDataProvider = null)
-    {
+    public function __construct(
+        private ChannelRepositoryInterface $channelRepository,
+        private object $templatingEngine,
+        private RouterInterface $router,
+        private ?SalesDataProviderInterface $salesDataProvider = null,
+        private ?StatisticsDataProviderInterface $statisticsDataProvider = null
+    ) {
     }
 
     public function indexAction(Request $request): Response

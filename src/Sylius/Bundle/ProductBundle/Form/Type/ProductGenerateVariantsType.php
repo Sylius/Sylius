@@ -23,8 +23,11 @@ final class ProductGenerateVariantsType extends AbstractResourceType
     /**
      * @param array|string[] $validationGroups
      */
-    public function __construct(string $dataClass, array $validationGroups, private EventSubscriberInterface $generateProductVariantsSubscriber)
-    {
+    public function __construct(
+        string $dataClass,
+        array $validationGroups,
+        private EventSubscriberInterface $generateProductVariantsSubscriber
+    ) {
         parent::__construct($dataClass, $validationGroups);
     }
 
