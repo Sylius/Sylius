@@ -19,18 +19,11 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 final class ShippingDateAssigner implements ShippingDateAssignerInterface
 {
-    public function __construct(private ?DateTimeProvider $calendar, private ?DateTimeProviderInterface $dateTimeProvider = null)
+    public function __construct(private DateTimeProvider|DateTimeProviderInterface $calendar)
     {
-        if ($this->calendar !== null) {
+        if ($calendar instanceof DateTimeProvider) {
             @trigger_error(
-                sprintf('Passing a $calendar to "%s" constructor as the first argument is deprecated since Sylius 1.11 and this argument will be removed in 2.0.', self::class),
-                \E_USER_DEPRECATED
-            );
-        }
-
-        if ($this->dateTimeProvider === null) {
-            @trigger_error(
-                sprintf('Not passing a $dateTimeProvider to %s constructor is deprecated since Sylius 1.11 and will be prohibited in Sylius 2.0.', self::class),
+                sprintf('Passing a "Sylius\Bundle\ShippingBundle\Provider\DateTimeProvider" to "%s" constructor is deprecated since Sylius 1.11 and will be prohibited in 2.0. Use "Sylius\Calendar\Provider\DateTimeProviderInterface" instead.', self::class),
                 \E_USER_DEPRECATED
             );
         }
@@ -38,8 +31,8 @@ final class ShippingDateAssigner implements ShippingDateAssignerInterface
 
     public function assign(ShipmentInterface $shipment): void
     {
-        if ($this->dateTimeProvider !== null) {
-            $shipment->setShippedAt($this->dateTimeProvider->now());
+        if ($this->calendar instanceof DateTimeProviderInterface) {
+            $shipment->setShippedAt($this->calendar->now());
 
             return;
         }

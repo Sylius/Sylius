@@ -78,7 +78,6 @@
         </service>
 
         <service id="sylius.shipping_date_assigner" class="Sylius\Bundle\ShippingBundle\Assigner\ShippingDateAssigner">
-            <argument type="service" id="sylius.calendar"/>
             <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface"/>
         </service>
 
