@@ -14,9 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Service\Provider;
 
 use Sylius\Bundle\ShippingBundle\Provider\DateTimeProvider;
-use Sylius\Component\Promotion\Provider\DateTimeProviderInterface;
 
-final class Calendar implements DateTimeProvider, DateTimeProviderInterface
+final class Calendar implements DateTimeProvider
 {
     private string $projectDirectory;
 

@@ -89,11 +89,5 @@
         <service id="sylius.calendar" class="Sylius\Behat\Service\Provider\Calendar">
             <argument>%kernel.project_dir%</argument>
         </service>
-        <service
-            id="Sylius\Component\Promotion\Provider\DateTimeProviderInterface"
-            class="Sylius\Behat\Service\Provider\Calendar"
-        >
-            <argument>%kernel.project_dir%</argument>
-        </service>
     </services>
 </container>

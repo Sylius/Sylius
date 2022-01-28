@@ -312,7 +312,7 @@
         >
             <argument type="service" id="sylius.event_bus" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" />
-            <argument type="service" id="Sylius\Component\Promotion\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
         </service>
     </services>
 </container>
