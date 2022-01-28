@@ -17,16 +17,8 @@ use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 
 final class EligibleCatalogPromotionsProvider implements EligibleCatalogPromotionsProviderInterface
 {
-    private CatalogPromotionRepositoryInterface $catalogPromotionRepository;
-
-    private iterable $defaultCriteria;
-
-    public function __construct(
-        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
-        iterable $defaultCriteria =  []
-    ) {
-        $this->catalogPromotionRepository = $catalogPromotionRepository;
-        $this->defaultCriteria = $defaultCriteria;
+    public function __construct(private CatalogPromotionRepositoryInterface $catalogPromotionRepository, private iterable $defaultCriteria =  [])
+    {
     }
 
     public function provide(): array

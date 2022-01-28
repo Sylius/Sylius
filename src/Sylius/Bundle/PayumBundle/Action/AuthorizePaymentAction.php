@@ -26,11 +26,8 @@ use Sylius\Component\Core\Model\PaymentInterface as SyliusPaymentInterface;
 
 final class AuthorizePaymentAction extends GatewayAwareAction
 {
-    private PaymentDescriptionProviderInterface $paymentDescriptionProvider;
-
-    public function __construct(PaymentDescriptionProviderInterface $paymentDescriptionProvider)
+    public function __construct(private PaymentDescriptionProviderInterface $paymentDescriptionProvider)
     {
-        $this->paymentDescriptionProvider = $paymentDescriptionProvider;
     }
 
     /**
@@ -48,7 +45,7 @@ final class AuthorizePaymentAction extends GatewayAwareAction
             try {
                 $this->gateway->execute($convert = new Convert($payment, 'array', $request->getToken()));
                 $payment->setDetails($convert->getResult());
-            } catch (RequestNotSupportedException $e) {
+            } catch (RequestNotSupportedException) {
                 $payumPayment = new PayumPayment();
                 $payumPayment->setNumber($order->getNumber());
                 $payumPayment->setTotalAmount($payment->getAmount());

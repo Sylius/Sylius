@@ -49,7 +49,7 @@ final class InjectContainerIntoControllersPass implements CompilerPassInterface
         foreach (self::SERVICES as $service) {
             try {
                 $definition = $container->findDefinition($service);
-            } catch (ServiceNotFoundException $exception) {
+            } catch (ServiceNotFoundException) {
                 $definition = new Definition($service);
 
                 $container->setDefinition($service, $definition);

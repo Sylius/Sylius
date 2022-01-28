@@ -20,16 +20,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class OrderItemType extends AbstractResourceType
 {
-    private DataMapperInterface $dataMapper;
-
     public function __construct(
         string $dataClass,
         array $validationGroups,
-        DataMapperInterface $dataMapper
+        private DataMapperInterface $dataMapper
     ) {
         parent::__construct($dataClass, $validationGroups);
-
-        $this->dataMapper = $dataMapper;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

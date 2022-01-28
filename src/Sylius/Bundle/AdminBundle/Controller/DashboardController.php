@@ -27,32 +27,11 @@ use Twig\Environment;
 
 final class DashboardController
 {
-    private ChannelRepositoryInterface $channelRepository;
-
-    /** @var EngineInterface|Environment */
-    private $templatingEngine;
-
-    private RouterInterface $router;
-
-    private ?SalesDataProviderInterface $salesDataProvider;
-
-    private ?StatisticsDataProviderInterface $statisticsDataProvider;
-
     /**
      * @param EngineInterface|Environment $templatingEngine
      */
-    public function __construct(
-        ChannelRepositoryInterface $channelRepository,
-        object $templatingEngine,
-        RouterInterface $router,
-        ?SalesDataProviderInterface $salesDataProvider = null,
-        ?StatisticsDataProviderInterface $statisticsDataProvider = null
-    ) {
-        $this->channelRepository = $channelRepository;
-        $this->templatingEngine = $templatingEngine;
-        $this->router = $router;
-        $this->salesDataProvider = $salesDataProvider;
-        $this->statisticsDataProvider = $statisticsDataProvider;
+    public function __construct(private ChannelRepositoryInterface $channelRepository, private object $templatingEngine, private RouterInterface $router, private ?\Sylius\Component\Core\Dashboard\SalesDataProviderInterface $salesDataProvider = null, private ?\Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface $statisticsDataProvider = null)
+    {
     }
 
     public function indexAction(Request $request): Response

@@ -27,41 +27,11 @@ use Webmozart\Assert\Assert;
 
 final class UserRegistrationListener
 {
-    /** @var ObjectManager */
-    private $userManager;
-
-    /** @var GeneratorInterface */
-    private $tokenGenerator;
-
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
-
-    /** @var ChannelContextInterface */
-    private $channelContext;
-
-    /** @var UserLoginInterface */
-    private $userLogin;
-
-    /** @var string */
-    private $firewallContextName;
-
     /**
      * @param string $firewallContextName
      */
-    public function __construct(
-        ObjectManager $userManager,
-        GeneratorInterface $tokenGenerator,
-        EventDispatcherInterface $eventDispatcher,
-        ChannelContextInterface $channelContext,
-        UserLoginInterface $userLogin,
-        $firewallContextName
-    ) {
-        $this->userManager = $userManager;
-        $this->tokenGenerator = $tokenGenerator;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->channelContext = $channelContext;
-        $this->userLogin = $userLogin;
-        $this->firewallContextName = $firewallContextName;
+    public function __construct(private ObjectManager $userManager, private GeneratorInterface $tokenGenerator, private EventDispatcherInterface $eventDispatcher, private ChannelContextInterface $channelContext, private UserLoginInterface $userLogin, private $firewallContextName)
+    {
     }
 
     public function handleUserVerification(GenericEvent $event): void

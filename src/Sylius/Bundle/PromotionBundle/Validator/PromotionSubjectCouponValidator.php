@@ -22,11 +22,8 @@ use Webmozart\Assert\Assert;
 
 final class PromotionSubjectCouponValidator extends ConstraintValidator
 {
-    private PromotionEligibilityCheckerInterface $promotionEligibilityChecker;
-
-    public function __construct(PromotionEligibilityCheckerInterface $promotionEligibilityChecker)
+    public function __construct(private PromotionEligibilityCheckerInterface $promotionEligibilityChecker)
     {
-        $this->promotionEligibilityChecker = $promotionEligibilityChecker;
     }
 
     public function validate($value, Constraint $constraint): void

@@ -23,11 +23,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ChannelChoiceType extends AbstractType
 {
-    private RepositoryInterface $channelRepository;
-
-    public function __construct(RepositoryInterface $channelRepository)
+    public function __construct(private RepositoryInterface $channelRepository)
     {
-        $this->channelRepository = $channelRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

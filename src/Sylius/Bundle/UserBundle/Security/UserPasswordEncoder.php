@@ -19,11 +19,8 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class UserPasswordEncoder implements UserPasswordEncoderInterface
 {
-    private EncoderFactoryInterface $encoderFactory;
-
-    public function __construct(EncoderFactoryInterface $encoderFactory)
+    public function __construct(private EncoderFactoryInterface $encoderFactory)
     {
-        $this->encoderFactory = $encoderFactory;
     }
 
     public function encode(CredentialsHolderInterface $user): string

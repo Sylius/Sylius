@@ -26,7 +26,7 @@ final class CatalogPromotionActionType extends AbstractResourceType
         parent::__construct($dataClass, $validationGroups);
 
         foreach ($actionConfigurationTypes as $type => $formType) {
-            $this->actionConfigurationTypes[$type] = get_class($formType);
+            $this->actionConfigurationTypes[$type] = $formType::class;
             $this->actionTypes['sylius.form.catalog_promotion.action.' . $type] = $type;
         }
     }

@@ -25,20 +25,8 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 final class RemoveAvatarAction
 {
-    private AvatarImageRepositoryInterface $avatarRepository;
-
-    private RouterInterface $router;
-
-    private CsrfTokenManagerInterface $csrfTokenManager;
-
-    public function __construct(
-        AvatarImageRepositoryInterface $avatarRepository,
-        RouterInterface $router,
-        CsrfTokenManagerInterface $csrfTokenManager
-    ) {
-        $this->avatarRepository = $avatarRepository;
-        $this->router = $router;
-        $this->csrfTokenManager = $csrfTokenManager;
+    public function __construct(private AvatarImageRepositoryInterface $avatarRepository, private RouterInterface $router, private CsrfTokenManagerInterface $csrfTokenManager)
+    {
     }
 
     public function __invoke(Request $request): Response

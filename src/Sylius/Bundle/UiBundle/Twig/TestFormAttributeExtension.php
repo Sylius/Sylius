@@ -18,11 +18,8 @@ use Twig\TwigFunction;
 
 final class TestFormAttributeExtension extends AbstractExtension
 {
-    private string $environment;
-
-    public function __construct(string $environment)
+    public function __construct(private string $environment)
     {
-        $this->environment = $environment;
     }
 
     /**
@@ -34,7 +31,7 @@ final class TestFormAttributeExtension extends AbstractExtension
             new TwigFunction(
                 'sylius_test_form_attribute',
                 function (string $name, ?string $value = null): array {
-                    if (strpos($this->environment, 'test') === 0) {
+                    if (str_starts_with($this->environment, 'test')) {
                         return ['attr' => ['data-test-' . $name => (string) $value]];
                     }
 

@@ -21,12 +21,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProductSlugController extends AbstractController
 {
-    private ?SlugGeneratorInterface $slugGenerator;
-
-    public function __construct(?SlugGeneratorInterface $slugGenerator = null)
+    public function __construct(private ?\Sylius\Component\Product\Generator\SlugGeneratorInterface $slugGenerator = null)
     {
-        $this->slugGenerator = $slugGenerator;
-
         if ($this->slugGenerator === null) {
             @trigger_error(sprintf('Not passing a $slugGenerator to %s constructor is deprecated since Sylius 1.11 and will be prohibited in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
         }

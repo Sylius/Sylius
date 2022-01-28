@@ -25,16 +25,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PaymentMethodChoiceType extends AbstractType
 {
-    private PaymentMethodsResolverInterface $paymentMethodsResolver;
-
-    private RepositoryInterface $paymentMethodRepository;
-
-    public function __construct(
-        PaymentMethodsResolverInterface $paymentMethodsResolver,
-        RepositoryInterface $paymentMethodRepository
-    ) {
-        $this->paymentMethodsResolver = $paymentMethodsResolver;
-        $this->paymentMethodRepository = $paymentMethodRepository;
+    public function __construct(private PaymentMethodsResolverInterface $paymentMethodsResolver, private RepositoryInterface $paymentMethodRepository)
+    {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

@@ -18,11 +18,8 @@ use SyliusLabs\Polyfill\Symfony\EventDispatcher\Event;
 
 class UserEvent extends Event
 {
-    private UserInterface $user;
-
-    public function __construct(UserInterface $user)
+    public function __construct(private UserInterface $user)
     {
-        $this->user = $user;
     }
 
     public function getUser(): UserInterface

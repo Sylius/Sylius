@@ -22,14 +22,8 @@ use Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface;
  */
 final class TraceableTemplateBlockRenderer implements TemplateBlockRendererInterface
 {
-    private TemplateBlockRendererInterface $templateBlockRenderer;
-
-    private TemplateBlockRenderingHistory $templateBlockRenderingHistory;
-
-    public function __construct(TemplateBlockRendererInterface $templateBlockRenderer, TemplateBlockRenderingHistory $templateBlockRenderingHistory)
+    public function __construct(private TemplateBlockRendererInterface $templateBlockRenderer, private TemplateBlockRenderingHistory $templateBlockRenderingHistory)
     {
-        $this->templateBlockRenderer = $templateBlockRenderer;
-        $this->templateBlockRenderingHistory = $templateBlockRenderingHistory;
     }
 
     public function render(TemplateBlock $templateBlock, array $context = []): string

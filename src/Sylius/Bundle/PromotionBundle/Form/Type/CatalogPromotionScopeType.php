@@ -34,7 +34,7 @@ final class CatalogPromotionScopeType extends AbstractResourceType
         parent::__construct($dataClass, $validationGroups);
 
         foreach ($scopeConfigurationTypes as $type => $formType) {
-            $this->scopeConfigurationTypes[$type] = get_class($formType);
+            $this->scopeConfigurationTypes[$type] = $formType::class;
             $this->scopeTypes['sylius.form.catalog_promotion.scope.'.$type] = $type;
         }
     }

@@ -21,20 +21,11 @@ use Twig\Environment;
 
 final class StatisticsController
 {
-    /** @var EngineInterface|Environment */
-    private $templatingEngine;
-
-    private StatisticsDataProviderInterface $statisticsDataProvider;
-
     /**
      * @param EngineInterface|Environment $templatingEngine
      */
-    public function __construct(
-        object $templatingEngine,
-        StatisticsDataProviderInterface $statisticsDataProvider
-    ) {
-        $this->templatingEngine = $templatingEngine;
-        $this->statisticsDataProvider = $statisticsDataProvider;
+    public function __construct(private object $templatingEngine, private StatisticsDataProviderInterface $statisticsDataProvider)
+    {
     }
 
     public function renderStatistics(ChannelInterface $channel): Response

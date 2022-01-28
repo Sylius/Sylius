@@ -26,16 +26,8 @@ use Webmozart\Assert\Assert;
 
 final class BuildAttributesFormSubscriber implements EventSubscriberInterface
 {
-    private FactoryInterface $attributeValueFactory;
-
-    private TranslationLocaleProviderInterface $localeProvider;
-
-    public function __construct(
-        FactoryInterface $attributeValueFactory,
-        TranslationLocaleProviderInterface $localeProvider
-    ) {
-        $this->attributeValueFactory = $attributeValueFactory;
-        $this->localeProvider = $localeProvider;
+    public function __construct(private FactoryInterface $attributeValueFactory, private TranslationLocaleProviderInterface $localeProvider)
+    {
     }
 
     public static function getSubscribedEvents(): array

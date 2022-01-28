@@ -24,31 +24,11 @@ use Twig\Environment;
 
 final class LocaleSwitchController
 {
-    /** @var EngineInterface|Environment */
-    private $templatingEngine;
-
-    /** @var LocaleContextInterface */
-    private $localeContext;
-
-    /** @var LocaleProviderInterface */
-    private $localeProvider;
-
-    /** @var LocaleSwitcherInterface */
-    private $localeSwitcher;
-
     /**
      * @param EngineInterface|Environment $templatingEngine
      */
-    public function __construct(
-        object $templatingEngine,
-        LocaleContextInterface $localeContext,
-        LocaleProviderInterface $localeProvider,
-        LocaleSwitcherInterface $localeSwitcher
-    ) {
-        $this->templatingEngine = $templatingEngine;
-        $this->localeContext = $localeContext;
-        $this->localeProvider = $localeProvider;
-        $this->localeSwitcher = $localeSwitcher;
+    public function __construct(private object $templatingEngine, private LocaleContextInterface $localeContext, private LocaleProviderInterface $localeProvider, private LocaleSwitcherInterface $localeSwitcher)
+    {
     }
 
     public function renderAction(): Response

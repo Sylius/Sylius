@@ -24,11 +24,8 @@ use Webmozart\Assert\Assert;
 
 final class UniqueSimpleProductCodeValidator extends ConstraintValidator
 {
-    private ProductVariantRepositoryInterface $productVariantRepository;
-
-    public function __construct(ProductVariantRepositoryInterface $productVariantRepository)
+    public function __construct(private ProductVariantRepositoryInterface $productVariantRepository)
     {
-        $this->productVariantRepository = $productVariantRepository;
     }
 
     public function validate($value, Constraint $constraint): void

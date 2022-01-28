@@ -27,24 +27,8 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 final class ResendShipmentConfirmationEmailAction
 {
-    private ShipmentRepositoryInterface $shipmentRepository;
-
-    private ShipmentEmailManagerInterface $shipmentEmailManager;
-
-    private CsrfTokenManagerInterface $csrfTokenManager;
-
-    private Session $session;
-
-    public function __construct(
-        ShipmentRepositoryInterface $shipmentRepository,
-        ShipmentEmailManagerInterface $shipmentEmailManager,
-        CsrfTokenManagerInterface $csrfTokenManager,
-        Session $session
-    ) {
-        $this->shipmentRepository = $shipmentRepository;
-        $this->shipmentEmailManager = $shipmentEmailManager;
-        $this->csrfTokenManager = $csrfTokenManager;
-        $this->session = $session;
+    public function __construct(private ShipmentRepositoryInterface $shipmentRepository, private ShipmentEmailManagerInterface $shipmentEmailManager, private CsrfTokenManagerInterface $csrfTokenManager, private Session $session)
+    {
     }
 
     public function __invoke(Request $request): Response

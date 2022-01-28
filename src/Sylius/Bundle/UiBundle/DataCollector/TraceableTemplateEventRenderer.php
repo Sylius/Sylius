@@ -21,14 +21,8 @@ use Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface;
  */
 final class TraceableTemplateEventRenderer implements TemplateEventRendererInterface
 {
-    private TemplateEventRendererInterface $templateEventRenderer;
-
-    private TemplateBlockRenderingHistory $templateBlockRenderingHistory;
-
-    public function __construct(TemplateEventRendererInterface $templateEventRenderer, TemplateBlockRenderingHistory $templateBlockRenderingHistory)
+    public function __construct(private TemplateEventRendererInterface $templateEventRenderer, private TemplateBlockRenderingHistory $templateBlockRenderingHistory)
     {
-        $this->templateEventRenderer = $templateEventRenderer;
-        $this->templateBlockRenderingHistory = $templateBlockRenderingHistory;
     }
 
     public function render(array $eventNames, array $context = []): string

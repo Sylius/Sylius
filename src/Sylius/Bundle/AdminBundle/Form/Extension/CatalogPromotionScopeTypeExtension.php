@@ -25,16 +25,12 @@ final class CatalogPromotionScopeTypeExtension extends AbstractTypeExtension
 
     private array $scopeConfigurationTypes;
 
-    private Environment $twig;
-
-    public function __construct(iterable $scopeConfigurationTypes, Environment $twig)
+    public function __construct(iterable $scopeConfigurationTypes, private Environment $twig)
     {
         foreach ($scopeConfigurationTypes as $type => $formType) {
-            $this->scopeConfigurationTypes[$type] = get_class($formType);
+            $this->scopeConfigurationTypes[$type] = $formType::class;
             $this->scopeTypes['sylius.form.catalog_promotion.scope.'.$type] = $type;
         }
-
-        $this->twig = $twig;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

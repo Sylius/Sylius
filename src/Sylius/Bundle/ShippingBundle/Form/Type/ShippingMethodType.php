@@ -31,24 +31,14 @@ use Symfony\Component\Form\FormView;
 
 final class ShippingMethodType extends AbstractResourceType
 {
-    private string $shippingMethodTranslationType;
-
-    private ServiceRegistryInterface $calculatorRegistry;
-
-    private FormTypeRegistryInterface $formTypeRegistry;
-
     public function __construct(
         string $dataClass,
         array $validationGroups,
-        string $shippingMethodTranslationType,
-        ServiceRegistryInterface $calculatorRegistry,
-        FormTypeRegistryInterface $formTypeRegistry
+        private string $shippingMethodTranslationType,
+        private ServiceRegistryInterface $calculatorRegistry,
+        private FormTypeRegistryInterface $formTypeRegistry
     ) {
         parent::__construct($dataClass, $validationGroups);
-
-        $this->shippingMethodTranslationType = $shippingMethodTranslationType;
-        $this->calculatorRegistry = $calculatorRegistry;
-        $this->formTypeRegistry = $formTypeRegistry;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

@@ -21,16 +21,8 @@ use Symfony\Component\Form\DataMapperInterface;
  */
 class OrderItemQuantityDataMapper implements DataMapperInterface
 {
-    private OrderItemQuantityModifierInterface $orderItemQuantityModifier;
-
-    private DataMapperInterface $propertyPathDataMapper;
-
-    public function __construct(
-        OrderItemQuantityModifierInterface $orderItemQuantityModifier,
-        DataMapperInterface $propertyPathDataMapper
-    ) {
-        $this->orderItemQuantityModifier = $orderItemQuantityModifier;
-        $this->propertyPathDataMapper = $propertyPathDataMapper;
+    public function __construct(private OrderItemQuantityModifierInterface $orderItemQuantityModifier, private DataMapperInterface $propertyPathDataMapper)
+    {
     }
 
     public function mapDataToForms($viewData, $forms): void

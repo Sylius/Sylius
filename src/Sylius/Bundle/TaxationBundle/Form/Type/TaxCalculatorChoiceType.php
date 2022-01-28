@@ -19,14 +19,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class TaxCalculatorChoiceType extends AbstractType
 {
-    private array $calculators;
-
     /**
      * @param array $calculators
      */
-    public function __construct($calculators)
+    public function __construct(private $calculators)
     {
-        $this->calculators = $calculators;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -27,16 +27,12 @@ use Symfony\Component\Form\FormEvents;
 
 final class CatalogPromotionType extends AbstractResourceType
 {
-    private string $catalogPromotionTranslationType;
-
     public function __construct(
         string $dataClass,
         array $validationGroups,
-        string $catalogPromotionTranslationType
+        private string $catalogPromotionTranslationType
     ) {
         parent::__construct($dataClass, $validationGroups);
-
-        $this->catalogPromotionTranslationType = $catalogPromotionTranslationType;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

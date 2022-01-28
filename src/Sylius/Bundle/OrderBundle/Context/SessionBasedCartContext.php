@@ -21,17 +21,8 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class SessionBasedCartContext implements CartContextInterface
 {
-    private SessionInterface $session;
-
-    private string $sessionKeyName;
-
-    private OrderRepositoryInterface $orderRepository;
-
-    public function __construct(SessionInterface $session, string $sessionKeyName, OrderRepositoryInterface $orderRepository)
+    public function __construct(private SessionInterface $session, private string $sessionKeyName, private OrderRepositoryInterface $orderRepository)
     {
-        $this->session = $session;
-        $this->sessionKeyName = $sessionKeyName;
-        $this->orderRepository = $orderRepository;
     }
 
     public function getCart(): OrderInterface

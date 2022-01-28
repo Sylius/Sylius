@@ -19,15 +19,11 @@ use Twig\Environment;
 
 final class SecurityWidgetController
 {
-    /** @var EngineInterface|Environment */
-    private $templatingEngine;
-
     /**
      * @param EngineInterface|Environment $templatingEngine
      */
-    public function __construct(object $templatingEngine)
+    public function __construct(private object $templatingEngine)
     {
-        $this->templatingEngine = $templatingEngine;
     }
 
     public function renderAction(): Response

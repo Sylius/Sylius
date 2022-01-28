@@ -25,29 +25,11 @@ use Webmozart\Assert\Assert;
 
 final class UserCartRecalculationListener
 {
-    /** @var CartContextInterface */
-    private $cartContext;
-
-    /** @var OrderProcessorInterface */
-    private $orderProcessor;
-
-    /** @var SectionProviderInterface */
-    private $uriBasedSectionContext;
-
-    public function __construct(
-        CartContextInterface $cartContext,
-        OrderProcessorInterface $orderProcessor,
-        SectionProviderInterface $uriBasedSectionContext
-    ) {
-        $this->cartContext = $cartContext;
-        $this->orderProcessor = $orderProcessor;
-        $this->uriBasedSectionContext = $uriBasedSectionContext;
+    public function __construct(private CartContextInterface $cartContext, private OrderProcessorInterface $orderProcessor, private SectionProviderInterface $uriBasedSectionContext)
+    {
     }
 
-    /**
-     * @param InteractiveLoginEvent|UserEvent $event
-     */
-    public function recalculateCartWhileLogin(object $event): void
+    public function recalculateCartWhileLogin(\Symfony\Component\Security\Http\Event\InteractiveLoginEvent|\Sylius\Bundle\UserBundle\Event\UserEvent $event): void
     {
         if (!$this->uriBasedSectionContext->getSection() instanceof ShopSection) {
             return;
@@ -64,7 +46,7 @@ final class UserCartRecalculationListener
 
         try {
             $cart = $this->cartContext->getCart();
-        } catch (CartNotFoundException $exception) {
+        } catch (CartNotFoundException) {
             return;
         }
 

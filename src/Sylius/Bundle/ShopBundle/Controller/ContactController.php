@@ -31,46 +31,11 @@ use Webmozart\Assert\Assert;
 
 final class ContactController
 {
-    /** @var RouterInterface */
-    private $router;
-
-    /** @var FormFactoryInterface */
-    private $formFactory;
-
-    /** @var EngineInterface|Environment */
-    private $templatingEngine;
-
-    /** @var ChannelContextInterface */
-    private $channelContext;
-
-    /** @var CustomerContextInterface */
-    private $customerContext;
-
-    /** @var LocaleContextInterface */
-    private $localeContext;
-
-    /** @var ContactEmailManagerInterface */
-    private $contactEmailManager;
-
     /**
      * @param EngineInterface|Environment $templatingEngine
      */
-    public function __construct(
-        RouterInterface $router,
-        FormFactoryInterface $formFactory,
-        object $templatingEngine,
-        ChannelContextInterface $channelContext,
-        CustomerContextInterface $customerContext,
-        LocaleContextInterface $localeContext,
-        ContactEmailManagerInterface $contactEmailManager
-    ) {
-        $this->router = $router;
-        $this->formFactory = $formFactory;
-        $this->templatingEngine = $templatingEngine;
-        $this->channelContext = $channelContext;
-        $this->customerContext = $customerContext;
-        $this->localeContext = $localeContext;
-        $this->contactEmailManager = $contactEmailManager;
+    public function __construct(private RouterInterface $router, private FormFactoryInterface $formFactory, private object $templatingEngine, private ChannelContextInterface $channelContext, private CustomerContextInterface $customerContext, private LocaleContextInterface $localeContext, private ContactEmailManagerInterface $contactEmailManager)
+    {
     }
 
     public function requestAction(Request $request): Response
