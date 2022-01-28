@@ -37,6 +37,16 @@ You should check and adjust priorities on your application.
 We added MinimumPrice to channelPricings entity, this price should be taken into account when customizing any promotions in Sylius.
 All calculating and distributing services provided by default depends on MinimumPrice.
 
+### Calendar & Shipping
+
+Service `sylius.calendar` has been deprecated. Use `Sylius\Calendar\Provider\DateTimeProviderInterface` instead.
+
+Add a new bundle to your list of used bundles in `config/bundles.php` if they are not already there:
+
+    ```diff
+    +   Sylius\Calendar\SyliusCalendarBundle::class => ['all' => true],
+    ```
+
 ### API v2
 
 For changes according to the API v2, please visit [API v2 upgrade file](UPGRADE-API-1.11.md).
