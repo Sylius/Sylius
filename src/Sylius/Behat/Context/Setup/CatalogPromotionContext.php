@@ -19,10 +19,10 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Calculator\FixedDiscountPriceCalculator;
 use Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator;
+use Sylius\Bundle\CoreBundle\Checker\InForProductScopeVariantChecker;
+use Sylius\Bundle\CoreBundle\Checker\InForTaxonsScopeVariantChecker;
+use Sylius\Bundle\CoreBundle\Checker\InForVariantsScopeVariantChecker;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
-use Sylius\Bundle\CoreBundle\Provider\ForProductsScopeVariantsProvider;
-use Sylius\Bundle\CoreBundle\Provider\ForTaxonsScopeVariantsProvider;
-use Sylius\Bundle\CoreBundle\Provider\ForVariantsScopeVariantsProvider;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
@@ -142,7 +142,7 @@ final class CatalogPromotionContext implements Context
     {
         /** @var CatalogPromotionScopeInterface $catalogPromotionScope */
         $catalogPromotionScope = $this->catalogPromotionScopeFactory->createNew();
-        $catalogPromotionScope->setType(ForVariantsScopeVariantsProvider::TYPE);
+        $catalogPromotionScope->setType(InForVariantsScopeVariantChecker::TYPE);
         $catalogPromotionScope->setConfiguration(['variants' => [$variant->getCode()]]);
 
         $catalogPromotion->addScope($catalogPromotionScope);
@@ -157,7 +157,7 @@ final class CatalogPromotionContext implements Context
     {
         /** @var CatalogPromotionScopeInterface $catalogPromotionScope */
         $catalogPromotionScope = $this->catalogPromotionScopeFactory->createNew();
-        $catalogPromotionScope->setType(ForProductsScopeVariantsProvider::TYPE);
+        $catalogPromotionScope->setType(InForProductScopeVariantChecker::TYPE);
         $catalogPromotionScope->setConfiguration(['products' => [$product->getCode()]]);
 
         $catalogPromotion->addScope($catalogPromotionScope);
@@ -219,7 +219,7 @@ final class CatalogPromotionContext implements Context
             null,
             [],
             [[
-                'type' => ForVariantsScopeVariantsProvider::TYPE,
+                'type' => InForVariantsScopeVariantChecker::TYPE,
                 'configuration' => ['variants' => $variantCodes],
             ]],
             [[
@@ -247,7 +247,7 @@ final class CatalogPromotionContext implements Context
             null,
             [],
             [[
-                'type' => ForVariantsScopeVariantsProvider::TYPE,
+                'type' => InForVariantsScopeVariantChecker::TYPE,
                 'configuration' => ['variants' => [$variant->getCode()]],
             ]],
             [[
@@ -275,7 +275,7 @@ final class CatalogPromotionContext implements Context
             null,
             [],
             [[
-                'type' => ForProductsScopeVariantsProvider::TYPE,
+                'type' => InForProductScopeVariantChecker::TYPE,
                 'configuration' => ['products' => [$product->getCode()]],
             ]],
             [[
@@ -303,7 +303,7 @@ final class CatalogPromotionContext implements Context
             null,
             [],
             [[
-                'type' => ForTaxonsScopeVariantsProvider::TYPE,
+                'type' => InForTaxonsScopeVariantChecker::TYPE,
                 'configuration' => ['taxons' => [$taxon->getCode()]],
             ]],
             [[
@@ -344,7 +344,7 @@ final class CatalogPromotionContext implements Context
             null,
             [],
             [[
-                'type' => ForTaxonsScopeVariantsProvider::TYPE,
+                'type' => InForTaxonsScopeVariantChecker::TYPE,
                 'configuration' => ['taxons' => [$taxon->getCode()]],
             ]],
             [[
@@ -371,7 +371,7 @@ final class CatalogPromotionContext implements Context
             name: $name,
             channels: [$channel->getCode()],
             scopes: [[
-                'type' => ForVariantsScopeVariantsProvider::TYPE,
+                'type' => InForVariantsScopeVariantChecker::TYPE,
                 'configuration' => ['variants' => [$variant->getCode()]],
             ]],
             actions: [[
@@ -400,7 +400,7 @@ final class CatalogPromotionContext implements Context
             name: $name,
             channels: [$channel->getCode()],
             scopes: [[
-                'type' => ForVariantsScopeVariantsProvider::TYPE,
+                'type' => InForVariantsScopeVariantChecker::TYPE,
                 'configuration' => ['variants' => [$variant->getCode()]],
             ]],
             actions: [[
@@ -429,7 +429,7 @@ final class CatalogPromotionContext implements Context
             name: $name,
             channels: [$channel->getCode()],
             scopes: [[
-                'type' => ForVariantsScopeVariantsProvider::TYPE,
+                'type' => InForVariantsScopeVariantChecker::TYPE,
                 'configuration' => ['variants' => [$variant->getCode()]],
             ]],
             actions: [[
@@ -462,7 +462,7 @@ final class CatalogPromotionContext implements Context
                 $secondChannel->getCode()
             ],
             [[
-                'type' => ForVariantsScopeVariantsProvider::TYPE,
+                'type' => InForVariantsScopeVariantChecker::TYPE,
                 'configuration' => ['variants' => [$variant->getCode()]],
             ]],
             [[
@@ -489,7 +489,7 @@ final class CatalogPromotionContext implements Context
             name: $name,
             channels: [$channel->getCode()],
             scopes: [[
-                'type' => ForTaxonsScopeVariantsProvider::TYPE,
+                'type' => InForTaxonsScopeVariantChecker::TYPE,
                 'configuration' => ['taxons' => [$taxon->getCode()]],
             ]],
             actions: [[
@@ -518,7 +518,7 @@ final class CatalogPromotionContext implements Context
             name: $name,
             channels: [$channel->getCode()],
             scopes: [[
-                'type' => ForTaxonsScopeVariantsProvider::TYPE,
+                'type' => InForTaxonsScopeVariantChecker::TYPE,
                 'configuration' => ['taxons' => [$taxon->getCode()]],
             ]],
             actions: [[
@@ -546,7 +546,7 @@ final class CatalogPromotionContext implements Context
             null,
             [],
             [[
-                'type' => ForProductsScopeVariantsProvider::TYPE,
+                'type' => InForProductScopeVariantChecker::TYPE,
                 'configuration' => ['products' => [$product->getCode()]],
             ]],
             [[
@@ -588,7 +588,7 @@ final class CatalogPromotionContext implements Context
             null,
             [],
             [[
-                'type' => ForVariantsScopeVariantsProvider::TYPE,
+                'type' => InForVariantsScopeVariantChecker::TYPE,
                 'configuration' => ['variants' => [$variant->getCode()]],
             ]],
             [[
@@ -617,7 +617,7 @@ final class CatalogPromotionContext implements Context
             null,
             [],
             [[
-                'type' => ForVariantsScopeVariantsProvider::TYPE,
+                'type' => InForVariantsScopeVariantChecker::TYPE,
                 'configuration' => ['variants' => [$variant->getCode()]],
             ]],
             [[
@@ -648,7 +648,7 @@ final class CatalogPromotionContext implements Context
             null,
             [],
             [[
-                'type' => ForProductsScopeVariantsProvider::TYPE,
+                'type' => InForProductScopeVariantChecker::TYPE,
                 'configuration' => ['products' => [$product->getCode()]],
             ]],
             [[
@@ -678,7 +678,7 @@ final class CatalogPromotionContext implements Context
             null,
             [],
             [[
-                'type' => ForTaxonsScopeVariantsProvider::TYPE,
+                'type' => InForTaxonsScopeVariantChecker::TYPE,
                 'configuration' => ['taxons' => [$taxon->getCode()]],
             ]],
             [[

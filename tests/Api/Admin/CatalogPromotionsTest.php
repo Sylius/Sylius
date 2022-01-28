@@ -15,11 +15,10 @@ namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Bundle\CoreBundle\Calculator\FixedDiscountPriceCalculator;
 use Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator;
-use Sylius\Bundle\CoreBundle\Provider\ForProductsScopeVariantsProvider;
-use Sylius\Bundle\CoreBundle\Provider\ForTaxonsScopeVariantsProvider;
-use Sylius\Bundle\CoreBundle\Provider\ForVariantsScopeVariantsProvider;
+use Sylius\Bundle\CoreBundle\Checker\InForProductScopeVariantChecker;
+use Sylius\Bundle\CoreBundle\Checker\InForTaxonsScopeVariantChecker;
+use Sylius\Bundle\CoreBundle\Checker\InForVariantsScopeVariantChecker;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -100,7 +99,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 ],
                 'scopes' => [
                     [
-                        'type' => ForVariantsScopeVariantsProvider::TYPE,
+                        'type' => InForVariantsScopeVariantChecker::TYPE,
                         'configuration' => [
                             'variants' => [
                                 'MUG'
@@ -232,41 +231,41 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                             'variants' => ['MUG']
                         ],
                     ], [
-                        'type' => ForVariantsScopeVariantsProvider::TYPE,
+                        'type' => InForVariantsScopeVariantChecker::TYPE,
                         'configuration' => [],
                     ], [
-                        'type' => ForVariantsScopeVariantsProvider::TYPE,
+                        'type' => InForVariantsScopeVariantChecker::TYPE,
                         'configuration' => [
                             'variants' => []
                         ],
                     ], [
-                        'type' => ForVariantsScopeVariantsProvider::TYPE,
+                        'type' => InForVariantsScopeVariantChecker::TYPE,
                         'configuration' => [
                             'variants' => ['invalid_variant']
                         ],
                     ], [
-                        'type' => ForProductsScopeVariantsProvider::TYPE,
+                        'type' => InForProductScopeVariantChecker::TYPE,
                         'configuration' => [],
                     ], [
-                        'type' => ForProductsScopeVariantsProvider::TYPE,
+                        'type' => InForProductScopeVariantChecker::TYPE,
                         'configuration' => [
                             'products' => []
                         ],
                     ], [
-                        'type' => ForProductsScopeVariantsProvider::TYPE,
+                        'type' => InForProductScopeVariantChecker::TYPE,
                         'configuration' => [
                             'products' => ['invalid_product']
                         ],
                     ], [
-                        'type' => ForTaxonsScopeVariantsProvider::TYPE,
+                        'type' => InForTaxonsScopeVariantChecker::TYPE,
                         'configuration' => [],
                     ], [
-                        'type' => ForTaxonsScopeVariantsProvider::TYPE,
+                        'type' => InForTaxonsScopeVariantChecker::TYPE,
                         'configuration' => [
                             'taxons' => []
                         ],
                     ], [
-                        'type' => ForTaxonsScopeVariantsProvider::TYPE,
+                        'type' => InForTaxonsScopeVariantChecker::TYPE,
                         'configuration' => [
                             'taxons' => ['invalid_taxon']
                         ],
@@ -358,7 +357,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 ],
                 'scopes' => [
                     [
-                        'type' => ForVariantsScopeVariantsProvider::TYPE,
+                        'type' => InForVariantsScopeVariantChecker::TYPE,
                         'configuration' => [
                             'variants' => [
                                 'MUG'
@@ -407,7 +406,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 ],
                 'scopes' => [
                     [
-                        'type' => ForVariantsScopeVariantsProvider::TYPE,
+                        'type' => InForVariantsScopeVariantChecker::TYPE,
                         'configuration' => [
                             'variants' => [
                                 'MUG'

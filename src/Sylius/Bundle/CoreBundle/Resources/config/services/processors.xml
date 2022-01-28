@@ -29,15 +29,6 @@
         />
 
         <service
-            id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessorInterface"
-            class="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionProcessor"
-        >
-            <argument type="service" id="Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface" />
-            <argument type="service" id="SM\Factory\Factory" />
-        </service>
-
-        <service
             id="Sylius\Bundle\CoreBundle\Processor\ProductCatalogPromotionsProcessorInterface"
             class="Sylius\Bundle\CoreBundle\Processor\ProductCatalogPromotionsProcessor"
         >
