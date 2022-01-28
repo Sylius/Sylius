@@ -13,17 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Checker;
 
+use Symfony\Component\HttpFoundation\RequestStack;
+
 final class CLIContextChecker implements CLIContextCheckerInterface
 {
-    private const CLI = 'cli';
-
-    public function __construct(
-        private string $runningEnvironment,
-        private array $restrictedEnvironments
-    ) { }
+    public function __construct(private RequestStack $requestStack)
+    { }
 
     public function isExecutedFromCLI(): bool
     {
-        return !in_array($this->runningEnvironment, $this->restrictedEnvironments) && \php_sapi_name() === self::CLI;
+        return null === $this->requestStack->getCurrentRequest();
     }
 }
