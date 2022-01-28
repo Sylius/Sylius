@@ -14,25 +14,25 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Processor;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Commander\UpdateVariantsCommanderInterface;
+use Sylius\Bundle\CoreBundle\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 final class AllCatalogPromotionsProcessorSpec extends ObjectBehavior
 {
     function let(
         ProductVariantRepositoryInterface $productVariantRepository,
-        UpdateVariantsCommanderInterface $commander
+        ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher
     ): void {
-        $this->beConstructedWith($productVariantRepository, $commander);
+        $this->beConstructedWith($productVariantRepository, $commandDispatcher);
     }
 
     function it_clears_and_processes_catalog_promotions(
         ProductVariantRepositoryInterface $productVariantRepository,
-        UpdateVariantsCommanderInterface $commander
+        ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher
     ): void {
         $productVariantRepository->getCodesOfAllVariants()->willReturn(['FIRST_VARIANT_CODE', 'SECOND_VARIANT_CODE']);
 
-        $commander->updateVariants(['FIRST_VARIANT_CODE', 'SECOND_VARIANT_CODE'])->shouldBeCalled();
+        $commandDispatcher->updateVariants(['FIRST_VARIANT_CODE', 'SECOND_VARIANT_CODE'])->shouldBeCalled();
 
         $this->process();
     }

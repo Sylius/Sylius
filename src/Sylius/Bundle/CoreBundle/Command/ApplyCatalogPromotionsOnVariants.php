@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Product\Command;
+namespace Sylius\Bundle\CoreBundle\Command;
 
-final class UpdateVariants
+final class ApplyCatalogPromotionsOnVariants
 {
     public function __construct(public array $variantsCodes)
     {

@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\CommandHandler;
 
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
+use Sylius\Bundle\CoreBundle\Command\ApplyCatalogPromotionsOnVariants;
 use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface;
 use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
-use Sylius\Component\Product\Command\UpdateVariants;
 
-final class UpdateVariantsHandler
+final class ApplyCatalogPromotionsOnVariantsHandler
 {
     public function __construct(
         private EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
@@ -29,7 +29,7 @@ final class UpdateVariantsHandler
     ) {
     }
 
-    public function __invoke(UpdateVariants $updateVariants): void
+    public function __invoke(ApplyCatalogPromotionsOnVariants $updateVariants): void
     {
         $catalogPromotions = $this->catalogPromotionsProvider->provide();
 

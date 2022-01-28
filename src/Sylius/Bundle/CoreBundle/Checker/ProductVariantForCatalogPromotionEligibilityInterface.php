@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Checker;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-interface CatalogPromotionApplicableOnVariantCheckerInterface
+interface ProductVariantForCatalogPromotionEligibilityInterface
 {
     public function isApplicableOnVariant(CatalogPromotionInterface $promotion, ProductVariantInterface $variant): bool;
 }

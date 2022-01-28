@@ -261,7 +261,7 @@
             class="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicator"
         >
             <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\ActionBasedDiscountApplicatorInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Checker\CatalogPromotionApplicableOnVariantCheckerInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibilityInterface" />
         </service>
 
         <service
@@ -317,16 +317,24 @@
         </service>
 
         <service
-            id="Sylius\Bundle\CoreBundle\Commander\UpdateVariantsCommanderInterface"
-            class="Sylius\Bundle\CoreBundle\Commander\UpdateVariantsCommander"
+            id="Sylius\Bundle\CoreBundle\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface"
+            class="Sylius\Bundle\CoreBundle\CommandDispatcher\BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher"
         >
             <argument type="service" id="sylius.command_bus" />
             <argument>%sylius.messenger.product_variant.size_of_batches%</argument>
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\CommandHandler\ApplyCatalogPromotionsOnVariantsHandler">
+            <argument type="service" id="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface"/>
+            <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+        </service>
+
         <service
-            id="Sylius\Bundle\CoreBundle\Checker\CatalogPromotionApplicableOnVariantCheckerInterface"
-            class="Sylius\Bundle\CoreBundle\Checker\CatalogPromotionApplicableOnVariantChecker"
+            id="Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibilityInterface"
+            class="Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibility"
         >
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.variant_checker" />
         </service>

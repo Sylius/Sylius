@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Applicator\ActionBasedDiscountApplicatorInterface;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
-use Sylius\Bundle\CoreBundle\Checker\CatalogPromotionApplicableOnVariantCheckerInterface;
+use Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibilityInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -28,7 +28,7 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
 {
     function let(
         ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator,
-        CatalogPromotionApplicableOnVariantCheckerInterface $checker
+        ProductVariantForCatalogPromotionEligibilityInterface $checker
     ): void {
         $this->beConstructedWith($actionBasedDiscountApplicator, $checker);
     }
@@ -41,7 +41,7 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
     function it_applies_percentage_discount_on_product_variant(
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion,
-        CatalogPromotionApplicableOnVariantCheckerInterface $checker,
+        ProductVariantForCatalogPromotionEligibilityInterface $checker,
         CatalogPromotionActionInterface $catalogPromotionAction,
         ChannelInterface $firstChannel,
         ChannelInterface $secondChannel,
@@ -71,7 +71,7 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
     function it_does_nothing_if_promotion_is_not_applicable_on_variants(
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion,
-        CatalogPromotionApplicableOnVariantCheckerInterface $checker,
+        ProductVariantForCatalogPromotionEligibilityInterface $checker,
     ): void {
         $checker->isApplicableOnVariant($catalogPromotion, $variant)->willReturn(false);
 

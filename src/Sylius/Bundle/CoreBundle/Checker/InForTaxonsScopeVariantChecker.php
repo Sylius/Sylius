@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Checker;
 
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
@@ -32,13 +33,10 @@ final class InForTaxonsScopeVariantChecker implements VariantInScopeCheckerInter
         $configuration = $scope->getConfiguration();
         Assert::keyExists($configuration, 'taxons', 'This rule should have configured taxons');
 
-         $variantTaxonsCodes = array_map(
-             fn (TaxonInterface $taxon): string => $taxon->getCode(),
-             $productVariant->getProduct()->getTaxons()->toArray()
-         );
-
-        $taxonsFromScope = $scope->getConfiguration()['taxons'];
-
-        return count(array_intersect($variantTaxonsCodes, $taxonsFromScope)) > 0;
+        /** @var ProductInterface $product */
+        $product = $productVariant->getProduct();
+        return $product->getTaxons()->exists(
+            fn($key, TaxonInterface $taxon): bool => \in_array($taxon->getCode(), $scope->getConfiguration()['taxons'], true)
+        );
     }
 }

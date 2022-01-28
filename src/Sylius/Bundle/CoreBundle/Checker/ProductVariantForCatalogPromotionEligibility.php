@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Webmozart\Assert\Assert;
 
-final class CatalogPromotionApplicableOnVariantChecker implements CatalogPromotionApplicableOnVariantCheckerInterface
+final class ProductVariantForCatalogPromotionEligibility implements ProductVariantForCatalogPromotionEligibilityInterface
 {
     public function __construct(private iterable $variantCheckers)
     {

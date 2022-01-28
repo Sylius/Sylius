@@ -15,16 +15,16 @@ namespace spec\Sylius\Bundle\CoreBundle\Processor;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Commander\UpdateVariantsCommanderInterface;
+use Sylius\Bundle\CoreBundle\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface;
 use Sylius\Bundle\CoreBundle\Processor\ProductCatalogPromotionsProcessorInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class ProductCatalogPromotionsProcessorSpec extends ObjectBehavior
 {
-    function let(UpdateVariantsCommanderInterface $commander): void
+    function let(ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher): void
     {
-        $this->beConstructedWith($commander);
+        $this->beConstructedWith($commandDispatcher);
     }
 
     function it_implements_product_catalog_promotions_processor_interface(): void
@@ -36,7 +36,7 @@ final class ProductCatalogPromotionsProcessorSpec extends ObjectBehavior
         ProductInterface $product,
         ProductVariantInterface $firstVariant,
         ProductVariantInterface $secondVariant,
-        UpdateVariantsCommanderInterface $commander
+        ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher
     ): void {
         $product->getVariants()->willReturn(new ArrayCollection([
             $firstVariant->getWrappedObject(),
@@ -46,7 +46,7 @@ final class ProductCatalogPromotionsProcessorSpec extends ObjectBehavior
         $firstVariant->getCode()->willReturn('PHP_MUG');
         $secondVariant->getCode()->willReturn('SYMFONY_MUG');
 
-        $commander->updateVariants(['PHP_MUG', 'SYMFONY_MUG'])->shouldBeCalled();
+        $commandDispatcher->updateVariants(['PHP_MUG', 'SYMFONY_MUG'])->shouldBeCalled();
 
         $this->process($product);
     }

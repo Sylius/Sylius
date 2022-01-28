@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Commander;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Commander\UpdateVariantsCommanderInterface;
-use Sylius\Component\Product\Command\UpdateVariants;
+use Sylius\Bundle\CoreBundle\Command\ApplyCatalogPromotionsOnVariants;
+use Sylius\Bundle\CoreBundle\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -28,13 +28,13 @@ final class UpdateVariantsCommanderSpec extends ObjectBehavior
 
     function it_implements_catalog_promotion_announcer_interface(): void
     {
-        $this->shouldImplement(UpdateVariantsCommanderInterface::class);
+        $this->shouldImplement(ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface::class);
     }
 
     function it_dispatches_command_with_batched_variants(MessageBusInterface $eventBus): void
     {
-        $command1 = new UpdateVariants(['first_code']);
-        $command2 = new UpdateVariants(['second_code']);
+        $command1 = new ApplyCatalogPromotionsOnVariants(['first_code']);
+        $command2 = new ApplyCatalogPromotionsOnVariants(['second_code']);
         $eventBus->dispatch($command1)->willReturn(new Envelope($command1))->shouldBeCalled();
         $eventBus->dispatch($command2)->willReturn(new Envelope($command2))->shouldBeCalled();
 

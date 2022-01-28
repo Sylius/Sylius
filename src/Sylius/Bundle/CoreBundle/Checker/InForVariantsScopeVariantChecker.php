@@ -31,6 +31,6 @@ final class InForVariantsScopeVariantChecker implements VariantInScopeCheckerInt
         $configuration = $scope->getConfiguration();
         Assert::keyExists($configuration, 'variants', 'This rule should have configured variants');
 
-        return in_array($productVariant->getCode(), $configuration['variants']);
+        return in_array($productVariant->getCode(), $configuration['variants'], true);
     }
 }

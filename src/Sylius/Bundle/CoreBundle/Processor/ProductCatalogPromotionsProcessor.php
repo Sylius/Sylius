@@ -13,15 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Processor;
 
-use Sylius\Bundle\CoreBundle\Commander\UpdateVariantsCommanderInterface;
+use Sylius\Bundle\CoreBundle\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-
 
 final class ProductCatalogPromotionsProcessor implements ProductCatalogPromotionsProcessorInterface
 {
     public function __construct(
-        private UpdateVariantsCommanderInterface $commander
+        private ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher
     ) {
     }
 
@@ -34,6 +33,6 @@ final class ProductCatalogPromotionsProcessor implements ProductCatalogPromotion
             $variants
         );
 
-        $this->commander->updateVariants($variantsCodes);
+        $this->commandDispatcher->updateVariants($variantsCodes);
     }
 }

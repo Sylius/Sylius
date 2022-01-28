@@ -14,15 +14,15 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Processor;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Commander\UpdateVariantsCommanderInterface;
+use Sylius\Bundle\CoreBundle\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface;
 use Sylius\Bundle\CoreBundle\Processor\ProductVariantCatalogPromotionsProcessorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class ProductVariantCatalogPromotionsProcessorSpec extends ObjectBehavior
 {
-    function let(UpdateVariantsCommanderInterface $commander): void
+    function let(ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher): void
     {
-        $this->beConstructedWith($commander);
+        $this->beConstructedWith($commandDispatcher);
     }
 
     function it_implements_product_catalog_promotions_processor_interface(): void
@@ -32,10 +32,10 @@ final class ProductVariantCatalogPromotionsProcessorSpec extends ObjectBehavior
 
     function it_reapplies_catalog_promotion_on_variant(
         ProductVariantInterface $variant,
-        UpdateVariantsCommanderInterface $commander
+        ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher
     ): void {
         $variant->getCode()->willReturn('VARIANT_CODE');
-        $commander->updateVariants(['VARIANT_CODE']);
+        $commandDispatcher->updateVariants(['VARIANT_CODE']);
 
         $this->process($variant);
     }

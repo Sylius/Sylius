@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Commander;
+namespace Sylius\Bundle\CoreBundle\CommandDispatcher;
 
-use Sylius\Component\Product\Command\UpdateVariants;
+use Sylius\Bundle\CoreBundle\Command\ApplyCatalogPromotionsOnVariants;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class UpdateVariantsCommander implements UpdateVariantsCommanderInterface
+final class BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher implements ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface
 {
     public function __construct(
         private MessageBusInterface $messageBus,
@@ -29,7 +29,7 @@ final class UpdateVariantsCommander implements UpdateVariantsCommanderInterface
         $batchedVariants = array_chunk($variants, $this->size);
 
         foreach ($batchedVariants as $batch) {
-            $this->messageBus->dispatch(new UpdateVariants($batch));
+            $this->messageBus->dispatch(new ApplyCatalogPromotionsOnVariants($batch));
         }
     }
 }

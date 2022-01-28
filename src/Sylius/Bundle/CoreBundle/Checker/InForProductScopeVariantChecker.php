@@ -33,13 +33,6 @@ final class InForProductScopeVariantChecker implements VariantInScopeCheckerInte
 
         $variantProductCode = $productVariant->getProduct()->getCode();
 
-        /** @var string $productCode */
-        foreach ($scope->getConfiguration()['products'] as $productCode) {
-            if ($variantProductCode ===$productCode) {
-                return true;
-            }
-        }
-
-        return false;
+        return \in_array($variantProductCode, $scope->getConfiguration()['products'], true);
     }
 }
