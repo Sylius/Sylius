@@ -1,0 +1,92 @@
+version: '3.4'
+
+services:
+    php:
+        build:
+            context: .
+            target: sylius_php
+              # Quay does not work, should be replaced in future with f.e. ghcr.io
+              # cache_from:
+              #   - quay.io/sylius/php:latest
+              #   - quay.io/sylius/nodejs:latest
+            #   - quay.io/sylius/nginx:latest
+        image: php:latest
+        depends_on:
+            - mysql
+        environment:
+            - APP_ENV=dev
+            - APP_DEBUG=1
+            - APP_SECRET=EDITME
+            - DATABASE_URL=mysql://sylius:nopassword@mysql/sylius
+            - MAILER_URL=smtp://mailhog:1025
+            - PHP_DATE_TIMEZONE=${PHP_DATE_TIMEZONE:-UTC}
+            - XDEBUG_MODE=debug
+            - XDEBUG_CONFIG = >-
+                  client_host=host.docker.internal
+                  idekey=PHPSTORM 
+            - PHP_IDE_CONFIG ="serverName=sylius.local"
+        volumes:
+            - .:/srv/sylius:rw,cached
+              # if you develop on Linux, you may use a bind-mounted host directory instead
+            - ./var:/srv/sylius/var:rw
+#            - ./public:/srv/sylius/public:rw,delegated
+#               if you develop on Linux, you may use a bind-mounted host directory instead
+            - ./public/media:/srv/sylius/public/media:rw
+#            - public-media:/srv/sylius/public/media:rw
+
+    mysql:
+        image: percona:5.7
+        environment:
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-nopassword}
+            - MYSQL_DATABASE=sylius
+            - MYSQL_USER=sylius
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD:-nopassword}
+        volumes:
+            - mysql-data:/var/lib/mysql:rw
+        ports:
+            - "3306:3306"
+
+    node:
+        build:
+            context: .
+            target: sylius_node
+        image: node:latest
+        depends_on:
+            - php
+        environment:
+            - GULP_ENV=dev
+            - PHP_HOST=php
+            - PHP_PORT=9000
+        volumes:
+            - .:/srv/sylius:rw,cached
+            - ./public:/srv/sylius/public:rw,delegated
+        ports:
+            - "35729:35729"
+
+    nginx:
+        build:
+            context: .
+            target: sylius_nginx
+        image: nginx:latest
+        depends_on:
+            - php
+            - node # to ensure correct build order
+        volumes:
+            - ./public:/srv/sylius/public:ro
+              # if you develop on Linux, you may use a bind-mounted host directory instead
+            - ./public/media:/srv/sylius/public/media:ro
+#            - public-media:/srv/sylius/public/media:ro
+        ports:
+            - "80:80"
+
+    mailhog:
+        # do not use in production!
+        image: mailhog/mailhog:latest
+        environment:
+            - MH_STORAGE=maildir
+        ports:
+            - "8025:8025"
+
+volumes:
+    mysql-data:
+    public-media:
