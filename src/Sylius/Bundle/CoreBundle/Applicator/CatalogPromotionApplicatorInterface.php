@@ -14,15 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Applicator;
 
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
 interface CatalogPromotionApplicatorInterface
 {
     public function applyOnVariant(ProductVariantInterface $variant, CatalogPromotionInterface $catalogPromotion): void;
-
-    public function applyOnChannelPricing(
-        ChannelPricingInterface $channelPricing,
-        CatalogPromotionInterface $catalogPromotion
-    ): void;
 }

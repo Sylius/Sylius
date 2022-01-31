@@ -156,4 +156,13 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
             ->getResult()
         ;
     }
+
+    public function getCodesOfAllVariants(): array
+    {
+        return $this->createQueryBuilder('o')
+            ->select('o.code')
+            ->getQuery()
+            ->getArrayResult()
+        ;
+    }
 }

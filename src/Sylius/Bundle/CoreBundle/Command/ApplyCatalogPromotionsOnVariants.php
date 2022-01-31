@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Processor;
+namespace Sylius\Bundle\CoreBundle\Command;
 
-use Sylius\Component\Core\Model\ProductVariantInterface;
-
-interface CatalogPromotionClearerInterface
+final class ApplyCatalogPromotionsOnVariants
 {
-    public function clearVariant(ProductVariantInterface $variant): void;
+    public function __construct(public array $variantsCodes)
+    {
+    }
 }

@@ -13,40 +13,28 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Applicator;
 
-use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibilityInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
 final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInterface
 {
     public function __construct(
-        private ChannelRepositoryInterface $channelRepository,
-        private ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator
+        private ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator,
+        private ProductVariantForCatalogPromotionEligibilityInterface $checker
     ) {}
 
     public function applyOnVariant(
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion
     ): void {
-        foreach ($catalogPromotion->getActions() as $action) {
-            $this->applyDiscountFromAction($catalogPromotion, $action, $variant);
-        }
-    }
-
-    public function applyOnChannelPricing(
-        ChannelPricingInterface $channelPricing,
-        CatalogPromotionInterface $catalogPromotion
-    ): void {
-        $channel = $this->channelRepository->findOneByCode($channelPricing->getChannelCode());
-
-        if (null === $channel || !$catalogPromotion->hasChannel($channel)) {
+        if (!$this->checker->isApplicableOnVariant($catalogPromotion, $variant)) {
             return;
         }
 
         foreach ($catalogPromotion->getActions() as $action) {
-            $this->actionBasedDiscountApplicator->applyDiscountOnChannelPricing($catalogPromotion, $action, $channelPricing);
+            $this->applyDiscountFromAction($catalogPromotion, $action, $variant);
         }
     }
 

@@ -27,45 +27,9 @@ use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 
 final class CatalogPromotionClearerSpec extends ObjectBehavior
 {
-    function let(
-        ChannelPricingRepositoryInterface $channelPricingRepository,
-        FactoryInterface $stateMachine
-    ): void {
-        $this->beConstructedWith($channelPricingRepository, $stateMachine);
-    }
-
     function it_implements_catalog_promotion_clearer_interface(): void
     {
         $this->shouldImplement(CatalogPromotionClearerInterface::class);
-    }
-
-    function it_clears_channel_pricings_with_catalog_promotions_applied(
-        ChannelPricingRepositoryInterface $channelPricingRepository,
-        FactoryInterface $stateMachine,
-        ChannelPricingInterface $firstChannelPricing,
-        ChannelPricingInterface $secondChannelPricing,
-        CatalogPromotionInterface $catalogPromotion,
-        StateMachineInterface $stateMachineInterface
-    ): void {
-        $channelPricingRepository->findWithDiscountedPrice()->willReturn([
-            $firstChannelPricing->getWrappedObject(),
-            $secondChannelPricing->getWrappedObject(),
-        ]);
-
-        $firstChannelPricing->getAppliedPromotions()->willReturn(new ArrayCollection([$catalogPromotion->getWrappedObject()]));
-        $firstChannelPricing->getOriginalPrice()->willReturn(1000);
-        $firstChannelPricing->setPrice(1000)->shouldBeCalled();
-        $firstChannelPricing->clearAppliedPromotions()->shouldBeCalled();
-
-        $secondChannelPricing->getAppliedPromotions()->willReturn(new ArrayCollection());
-        $secondChannelPricing->getOriginalPrice()->shouldNotBeCalled();
-        $secondChannelPricing->clearAppliedPromotions()->shouldNotBeCalled();
-
-        $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
-        $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->willReturn(true);
-        $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldBeCalled();
-
-        $this->clear();
     }
 
     function it_clears_given_variant_with_catalog_promotions_applied(
@@ -89,29 +53,5 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
         $secondChannelPricing->clearAppliedPromotions()->shouldNotBeCalled();
 
         $this->clearVariant($variant);
-    }
-
-    function it_clears_given_channel_pricing_with_catalog_promotions_applied(
-        ChannelPricingInterface $channelPricing,
-        CatalogPromotionInterface $catalogPromotion
-    ): void {
-        $channelPricing->getAppliedPromotions()->willReturn(new ArrayCollection([$catalogPromotion]));
-        $channelPricing->getOriginalPrice()->willReturn(1000);
-        $channelPricing->setPrice(1000)->shouldBeCalled();
-        $channelPricing->clearAppliedPromotions()->shouldBeCalled();
-
-        $this->clearChannelPricing($channelPricing);
-    }
-
-    function it_does_not_copy_update_price_when_original_price_is_null(
-        ChannelPricingInterface $channelPricing,
-        CatalogPromotionInterface $catalogPromotion
-    ): void {
-        $channelPricing->getAppliedPromotions()->willReturn(new ArrayCollection([$catalogPromotion]));
-        $channelPricing->getOriginalPrice()->willReturn(null);
-        $channelPricing->setPrice(Argument::any())->shouldNotBeCalled();
-        $channelPricing->clearAppliedPromotions()->shouldBeCalled();
-
-        $this->clearChannelPricing($channelPricing);
     }
 }

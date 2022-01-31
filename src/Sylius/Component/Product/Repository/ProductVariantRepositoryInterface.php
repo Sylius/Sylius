@@ -61,4 +61,9 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
      * @return array|ProductVariantInterface[]
      */
     public function findByPhrase(string $phrase, string $locale): array;
+
+    /**
+     * @return array|string[]
+     */
+    public function getCodesOfAllVariants(): array;
 }

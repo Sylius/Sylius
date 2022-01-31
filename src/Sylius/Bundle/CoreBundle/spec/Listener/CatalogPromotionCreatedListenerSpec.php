@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\CoreBundle\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
-use SM\Factory\FactoryInterface;
 use Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
@@ -24,23 +23,22 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class CatalogPromotionCreatedListenerSpec extends ObjectBehavior
 {
     function let(
-        AllCatalogPromotionsProcessorInterface $allCatalogPromotionProcessor,
+        AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
         RepositoryInterface $catalogPromotionRepository,
-        EntityManagerInterface $entityManager,
-        FactoryInterface $stateMachine
+        EntityManagerInterface $entityManager
     ): void {
-        $this->beConstructedWith($allCatalogPromotionProcessor, $catalogPromotionRepository, $entityManager, $stateMachine);
+        $this->beConstructedWith($allCatalogPromotionsProcessor, $catalogPromotionRepository, $entityManager);
     }
 
     function it_processes_catalog_promotion_that_has_just_been_created(
-        AllCatalogPromotionsProcessorInterface $allCatalogPromotionProcessor,
+        AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager,
         CatalogPromotionInterface $catalogPromotion
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
 
-        $allCatalogPromotionProcessor->process()->shouldBeCalled();
+        $allCatalogPromotionsProcessor->process()->shouldBeCalled();
         $entityManager->flush()->shouldBeCalled();
 
         $this(new CatalogPromotionCreated('WINTER_MUGS_SALE'));
