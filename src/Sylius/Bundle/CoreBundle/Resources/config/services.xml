@@ -262,6 +262,7 @@
         >
             <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\ActionBasedDiscountApplicatorInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibilityInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Checker\CatalogPromotionEligibilityChecker" />
         </service>
 
         <service

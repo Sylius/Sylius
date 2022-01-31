@@ -26,10 +26,6 @@ final class ProductVariantForCatalogPromotionEligibility implements ProductVaria
 
     public function isApplicableOnVariant(CatalogPromotionInterface $promotion, ProductVariantInterface $variant): bool
     {
-        if ($promotion->getState() === CatalogPromotionStates::STATE_FAILED) {
-            return false;
-        }
-
         /** @var CatalogPromotionScopeInterface $scope */
         foreach ($promotion->getScopes() as $scope) {
             $checker = $this->locator->get($scope->getType());
