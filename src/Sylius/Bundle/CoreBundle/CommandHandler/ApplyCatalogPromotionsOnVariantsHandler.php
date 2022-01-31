@@ -33,9 +33,9 @@ final class ApplyCatalogPromotionsOnVariantsHandler
     {
         $catalogPromotions = $this->catalogPromotionsProvider->provide();
 
-        foreach ($updateVariants->variantsCodes as $variantCode) {
-            $variant = $this->productVariantRepository->findOneBy(['code' => $variantCode]);
+        $variants = $this->productVariantRepository->findByCodes($updateVariants->variantsCodes);
 
+        foreach ($variants as $variant) {
             $this->clearer->clearVariant($variant);
 
             foreach ($catalogPromotions as $promotion) {

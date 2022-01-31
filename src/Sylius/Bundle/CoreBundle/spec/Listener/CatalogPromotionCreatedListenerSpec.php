@@ -23,11 +23,11 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class CatalogPromotionCreatedListenerSpec extends ObjectBehavior
 {
     function let(
-        AllCatalogPromotionsProcessorInterface $allCatalogPromotionProcessor,
+        AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager
     ): void {
-        $this->beConstructedWith($allCatalogPromotionProcessor, $catalogPromotionRepository, $entityManager);
+        $this->beConstructedWith($allCatalogPromotionsProcessor, $catalogPromotionRepository, $entityManager);
     }
 
     function it_processes_catalog_promotion_that_has_just_been_created(

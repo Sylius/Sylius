@@ -41,27 +41,31 @@ final class ApplyCatalogPromotionsOnVariantsHandlerSpec extends ObjectBehavior
     public function it_applies_catalog_promotion_on_provided_variants(
         CatalogPromotionInterface $firstPromotion,
         CatalogPromotionInterface $secondPromotion,
-        EligibleCatalogPromotionsProviderInterface $provider,
-        ProductVariantRepositoryInterface $repository,
+        EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
+        ProductVariantRepositoryInterface $productVariantRepository,
         ProductVariantInterface $firstVariant,
         ProductVariantInterface $secondVariant,
         CatalogPromotionClearerInterface $clearer,
         CatalogPromotionApplicatorInterface $catalogPromotionApplicator,
     ): void {
-        $provider->provide()->willReturn([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()]);
+        $catalogPromotionsProvider->provide()
+            ->willReturn([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
+        ;
 
-        $repository->findOneBy(['code' => 'FIRST_VARIANT'])->willReturn($firstVariant);
+        $productVariantRepository->findByCodes(['FIRST_VARIANT', 'SECOND_VARIANT'])
+            ->willReturn([$firstVariant->getWrappedObject(), $secondVariant->getWrappedObject()])
+        ;
+
         $clearer->clearVariant($firstVariant)->shouldBeCalled();
 
         $catalogPromotionApplicator->applyOnVariant($firstVariant, $firstPromotion)->shouldBeCalled();
         $catalogPromotionApplicator->applyOnVariant($firstVariant, $secondPromotion)->shouldBeCalled();
 
-        $repository->findOneBy(['code' => 'SECOND_VARIANT'])->willReturn($secondVariant);
         $clearer->clearVariant($secondVariant)->shouldBeCalled();
 
-        $catalogPromotionApplicator->applyOnVariant($secondVariant, $secondPromotion)->shouldBeCalled();
+        $catalogPromotionApplicator->applyOnVariant($secondVariant, $firstPromotion)->shouldBeCalled();
         $catalogPromotionApplicator->applyOnVariant($secondVariant, $secondPromotion)->shouldBeCalled();
 
-        $this->__invoke(new ApplyCatalogPromotionsOnVariants(['FIRST_VARIANT', 'SECOND_VARIANT']));
+        $this(new ApplyCatalogPromotionsOnVariants(['FIRST_VARIANT', 'SECOND_VARIANT']));
     }
 }

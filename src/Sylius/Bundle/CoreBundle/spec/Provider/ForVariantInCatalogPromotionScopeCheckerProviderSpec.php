@@ -28,15 +28,23 @@ final class ForVariantInCatalogPromotionScopeCheckerProviderSpec extends ObjectB
 
     public function it_returns_checker_for_scope(
         CatalogPromotionScopeInterface $scope,
-        VariantInScopeCheckerInterface $variantScopeChecker,
+        VariantInScopeCheckerInterface $firstChecker,
     ): void {
-        $variantScopeChecker->supports($scope)->willReturn(true);
+        $firstChecker->supports($scope)->willReturn(true);
 
-        $this->provide($scope)->shouldReturn($variantScopeChecker);
+        $this->provide($scope)->shouldReturn($firstChecker);
     }
 
-    public function it_throws_exception_if_there_is_no_checker_valid_for_scope(): void
+    public function it_throws_exception_if_there_is_no_checker_valid_for_scope(
+        CatalogPromotionScopeInterface $scope,
+        VariantInScopeCheckerInterface $firstChecker,
+        VariantInScopeCheckerInterface $secondChecker,
+    ): void
     {
-        /** @TODO */
+        $firstChecker->supports($scope)->willReturn(false);
+        $secondChecker->supports($scope)->willReturn(false);
+
+        $this->shouldThrow(\InvalidArgumentException::class)
+            ->during('provide', [$scope]);
     }
 }
