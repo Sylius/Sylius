@@ -85,9 +85,5 @@
             <argument>100000</argument>
             <argument>7</argument>
         </service>
-
-        <service id="sylius.calendar" class="Sylius\Behat\Service\Provider\Calendar">
-            <argument>%kernel.project_dir%</argument>
-        </service>
     </services>
 </container>

@@ -21,20 +21,11 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CatalogPromotionCreatedListener
 {
-    private AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor;
-
-    private RepositoryInterface $catalogPromotionRepository;
-
-    private EntityManagerInterface $entityManager;
-
     public function __construct(
-        AllCatalogPromotionsProcessorInterface $allCatalogPromotionProcessor,
-        RepositoryInterface $catalogPromotionRepository,
-        EntityManagerInterface $entityManager,
+        private AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
+        private RepositoryInterface $catalogPromotionRepository,
+        private EntityManagerInterface $entityManager
     ) {
-        $this->allCatalogPromotionsProcessor = $allCatalogPromotionProcessor;
-        $this->catalogPromotionRepository = $catalogPromotionRepository;
-        $this->entityManager = $entityManager;
     }
 
     public function __invoke(CatalogPromotionCreated $event): void

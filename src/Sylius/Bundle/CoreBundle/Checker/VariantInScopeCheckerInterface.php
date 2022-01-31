@@ -11,13 +11,14 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Provider;
+namespace Sylius\Bundle\CoreBundle\Checker;
 
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 
-interface VariantsProviderInterface
+interface VariantInScopeCheckerInterface
 {
     public function supports(CatalogPromotionScopeInterface $catalogPromotionScopeType): bool;
 
-    public function provideEligibleVariants(CatalogPromotionScopeInterface $scope): array;
+    public function inScope(CatalogPromotionScopeInterface $scope, ProductVariantInterface $productVariant): bool;
 }

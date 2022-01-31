@@ -21,10 +21,10 @@ final class SetCatalogPromotionScopeTypesPass implements CompilerPassInterface
     public function process(ContainerBuilder $container): void
     {
         $types = [];
-        foreach ($container->findTaggedServiceIds('sylius.catalog_promotion.variants_provider') as $id => $attributes) {
+        foreach ($container->findTaggedServiceIds('sylius.catalog_promotion.variant_checker') as $id => $attributes) {
             foreach ($attributes as $attribute) {
                 if (!isset($attribute['type'])) {
-                    throw new \InvalidArgumentException('Tagged catalog promotion variants provider `' . $id . '` needs to have `type` attribute.');
+                    throw new \InvalidArgumentException('Tagged catalog promotion variant checker `' . $id . '` needs to have `type` attribute.');
                 }
 
                 $types[] = $attribute['type'];

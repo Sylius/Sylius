@@ -380,3 +380,6 @@
 1. `Sylius\Bundle\ApiBundle\CommandHandler\Cart\ApplyCouponToCartHandler` and `Sylius\Bundle\ApiBundle\CommandHandler\Checkout\AddressOrderHandler` command handlers have been replaced with `Sylius\Bundle\ApiBundle\CommandHandler\Checkout\UpdateCartHandler`.
 
 1. The `sylius.api.filter_archived_shipping_methods` services has been renamed to `sylius.api.archived_shipping_methods_filter` to be coherent with rest of the filters
+
+1. The argument of `Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface` service has been changed
+   from `sylius.calendar` to `Sylius\Calendar\Provider\DateTimeProviderInterface`.
