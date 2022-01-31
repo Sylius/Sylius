@@ -5,6 +5,7 @@ Sylius\Component\Core\Model\CatalogPromotion:
         channels: ['@channel_web']
         translations: ['@catalog_promotion_translation']
         enabled: true
+        exclusive: false
 
 Sylius\Component\Promotion\Model\CatalogPromotionTranslation:
     catalog_promotion_translation:

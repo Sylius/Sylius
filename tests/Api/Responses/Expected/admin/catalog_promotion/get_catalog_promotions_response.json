@@ -19,7 +19,7 @@
             "scopes": [],
             "actions": [],
             "enabled": @boolean@,
-            "exclusive": @boolean@,
+            "exclusive": false,
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/catalog-promotion-translations\/@integer@",
