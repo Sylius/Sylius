@@ -14,14 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
+use Sylius\Behat\Page\Admin\Product\CreateSimpleProductPageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
 final class ProductCreationContext implements Context
 {
-    public function __construct(private CreatePageInterface $createPage)
+    public function __construct(private CreateSimpleProductPageInterface $createPage)
     {
     }
 
