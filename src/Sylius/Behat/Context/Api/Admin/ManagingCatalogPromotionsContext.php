@@ -490,7 +490,7 @@ final class ManagingCatalogPromotionsContext implements Context
         ]];
 
         $scopes = [[
-            'type' => ForProductsScopeVariantsProvider::TYPE,
+            'type' => InForProductScopeVariantChecker::TYPE,
             'configuration' => [
                 'products' => [$product->getCode()]
             ],
@@ -537,7 +537,7 @@ final class ManagingCatalogPromotionsContext implements Context
         ]];
 
         $scopes = [[
-            'type' => ForProductsScopeVariantsProvider::TYPE,
+            'type' => InForProductScopeVariantChecker::TYPE,
             'configuration' => [
                 'products' => [$product->getCode()]
             ],
