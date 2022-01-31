@@ -24,9 +24,8 @@ final class CommandDenormalizer implements ContextAwareDenormalizerInterface
 {
     private const OBJECT_TO_POPULATE = 'object_to_populate';
 
-    public function __construct(
-        private DenormalizerInterface $itemNormalizer
-    ) {
+    public function __construct(private DenormalizerInterface $itemNormalizer)
+    {
     }
 
     public function supportsDenormalization($data, $type, $format = null, array $context = []): bool

@@ -20,9 +20,8 @@ use Doctrine\ORM\QueryBuilder;
 /** @experimental */
 final class HideArchivedShippingMethodExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    public function __construct(
-        private string $shippingMethodClass
-    ) {
+    public function __construct(private string $shippingMethodClass)
+    {
     }
 
     public function applyToCollection(

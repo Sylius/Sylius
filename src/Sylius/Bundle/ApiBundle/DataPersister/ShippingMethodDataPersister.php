@@ -21,9 +21,8 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 /** @experimental */
 final class ShippingMethodDataPersister implements ContextAwareDataPersisterInterface
 {
-    public function __construct(
-        private ContextAwareDataPersisterInterface $decoratedDataPersister
-    ) {
+    public function __construct(private ContextAwareDataPersisterInterface $decoratedDataPersister)
+    {
     }
 
     public function supports($data, array $context = []): bool

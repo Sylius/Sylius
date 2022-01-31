@@ -23,9 +23,8 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class LoggedInCustomerEmailAwareCommandDataTransformer implements CommandDataTransformerInterface
 {
-    public function __construct(
-        private UserContextInterface $userContext
-    ) {
+    public function __construct(private UserContextInterface $userContext)
+    {
     }
 
     public function transform($object, string $to, array $context = [])

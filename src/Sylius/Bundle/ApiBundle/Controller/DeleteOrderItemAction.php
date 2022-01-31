@@ -21,9 +21,8 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class DeleteOrderItemAction
 {
-    public function __construct(
-        private MessageBusInterface $commandBus
-    ) {
+    public function __construct(private MessageBusInterface $commandBus)
+    {
     }
 
     public function __invoke(Request $request): Response

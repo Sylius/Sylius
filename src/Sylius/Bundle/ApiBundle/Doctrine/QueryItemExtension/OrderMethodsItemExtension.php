@@ -27,9 +27,8 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 /** @experimental */
 final class OrderMethodsItemExtension implements QueryItemExtensionInterface
 {
-    public function __construct(
-        private UserContextInterface $userContext
-    ) {
+    public function __construct(private UserContextInterface $userContext)
+    {
     }
 
     public function applyToItem(

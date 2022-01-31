@@ -20,9 +20,8 @@ final class ProductSlugDocumentationNormalizer implements NormalizerInterface
 {
     private const PRODUCT_SLUG_PATH = '/api/v2/shop/products-by-slug/{slug}';
 
-    public function __construct(
-        private NormalizerInterface $decoratedNormalizer
-    ) {
+    public function __construct(private NormalizerInterface $decoratedNormalizer)
+    {
     }
 
     public function supportsNormalization($data, $format = null): bool

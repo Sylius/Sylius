@@ -20,9 +20,8 @@ use Symfony\Component\Messenger\MessageBusInterface;
 /** @experimental */
 final class OrderCompletedHandler
 {
-    public function __construct(
-        private MessageBusInterface $commandBus
-    ) {
+    public function __construct(private MessageBusInterface $commandBus)
+    {
     }
 
     public function __invoke(OrderCompleted $orderCompleted): void

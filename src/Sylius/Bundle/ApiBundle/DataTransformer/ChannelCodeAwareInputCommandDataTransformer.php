@@ -19,9 +19,8 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 /** @experimental */
 final class ChannelCodeAwareInputCommandDataTransformer implements CommandDataTransformerInterface
 {
-    public function __construct(
-        private ChannelContextInterface $channelContext
-    ) {
+    public function __construct(private ChannelContextInterface $channelContext)
+    {
     }
 
     public function transform($object, string $to, array $context = [])

@@ -23,9 +23,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class CatalogPromotionEventSubscriber implements EventSubscriberInterface
 {
-    public function __construct(
-        private CatalogPromotionAnnouncerInterface $catalogPromotionAnnouncer
-    ) {
+    public function __construct(private CatalogPromotionAnnouncerInterface $catalogPromotionAnnouncer)
+    {
     }
 
     public static function getSubscribedEvents(): array

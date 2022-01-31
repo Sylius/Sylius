@@ -23,9 +23,8 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class OrderNotEmptyValidator extends ConstraintValidator
 {
-    public function __construct(
-        private OrderRepositoryInterface $orderRepository
-    ) {
+    public function __construct(private OrderRepositoryInterface $orderRepository)
+    {
     }
 
     /**

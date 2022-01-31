@@ -25,9 +25,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 /** @experimental */
 final class ProductSlugEventSubscriber implements EventSubscriberInterface
 {
-    public function __construct(
-        private SlugGeneratorInterface $slugGenerator
-    ) {
+    public function __construct(private SlugGeneratorInterface $slugGenerator)
+    {
     }
 
     public static function getSubscribedEvents(): array

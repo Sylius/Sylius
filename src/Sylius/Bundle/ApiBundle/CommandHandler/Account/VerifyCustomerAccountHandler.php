@@ -23,9 +23,8 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /** @experimental  */
 final class VerifyCustomerAccountHandler implements MessageHandlerInterface
 {
-    public function __construct(
-        private RepositoryInterface $shopUserRepository
-    ) {
+    public function __construct(private RepositoryInterface $shopUserRepository)
+    {
     }
 
     public function __invoke(VerifyCustomerAccount $command): JsonResponse

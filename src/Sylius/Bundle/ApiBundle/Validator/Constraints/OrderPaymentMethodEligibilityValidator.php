@@ -24,9 +24,8 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class OrderPaymentMethodEligibilityValidator extends ConstraintValidator
 {
-    public function __construct(
-        private OrderRepositoryInterface $orderRepository
-    ) {
+    public function __construct(private OrderRepositoryInterface $orderRepository)
+    {
     }
 
     public function validate($value, Constraint $constraint): void

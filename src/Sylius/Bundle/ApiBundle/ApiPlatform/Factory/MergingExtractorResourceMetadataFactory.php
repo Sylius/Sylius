@@ -46,12 +46,10 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
     public function create(string $resourceClass): ResourceMetadata
     {
         $parentResourceMetadata = null;
-        if ($this->decorated) {
-            try {
-                $parentResourceMetadata = $this->decorated->create($resourceClass);
-            } catch (ResourceClassNotFoundException) {
-                // Ignore not found exception from decorated factories
-            }
+        try {
+            $parentResourceMetadata = $this->decorated->create($resourceClass);
+        } catch (ResourceClassNotFoundException) {
+            // Ignore not found exception from decorated factories
         }
 
         if (!(class_exists($resourceClass) || interface_exists($resourceClass)) || !$resource = $this->extractor->getResources()[$resourceClass] ?? false) {

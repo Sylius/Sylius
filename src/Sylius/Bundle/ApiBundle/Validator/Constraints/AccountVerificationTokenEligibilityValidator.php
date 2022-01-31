@@ -23,9 +23,8 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class AccountVerificationTokenEligibilityValidator extends ConstraintValidator
 {
-    public function __construct(
-        private RepositoryInterface $shopUserRepository
-    ) {
+    public function __construct(private RepositoryInterface $shopUserRepository)
+    {
     }
 
     /** @param VerifyCustomerAccount|mixed $value */
