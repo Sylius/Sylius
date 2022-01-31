@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Core\Event\ProductVariantCreated;
 use Sylius\Component\Core\Event\ProductVariantUpdated;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,6 +29,27 @@ final class ProductVariantEventSubscriberSpec extends ObjectBehavior
     function let(MessageBusInterface $eventBus): void
     {
         $this->beConstructedWith($eventBus);
+    }
+
+    function it_dispatches_product_variant_created_after_creating_product_variant(
+        MessageBusInterface $eventBus,
+        ProductVariantInterface $variant,
+        HttpKernelInterface $kernel,
+        Request $request
+    ): void {
+        $request->getMethod()->willReturn(Request::METHOD_POST);
+
+        $variant->getCode()->willReturn('MUG');
+
+        $message = new ProductVariantCreated('MUG');
+        $eventBus->dispatch($message)->willReturn(new Envelope($message))->shouldBeCalled();
+
+        $this->postWrite(new ViewEvent(
+            $kernel->getWrappedObject(),
+            $request->getWrappedObject(),
+            HttpKernelInterface::MASTER_REQUEST,
+            $variant->getWrappedObject()
+        ));
     }
 
     function it_dispatches_product_variant_updated_after_writing_product_variant(

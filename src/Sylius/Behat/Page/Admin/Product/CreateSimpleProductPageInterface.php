@@ -46,6 +46,8 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
 
     public function selectMainTaxon(TaxonInterface $taxon): void;
 
+    public function checkProductTaxon(TaxonInterface $taxon): void;
+
     public function attachImage(string $path, ?string $type = null): void;
 
     /**
