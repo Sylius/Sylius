@@ -23,7 +23,6 @@ use Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator;
 use Sylius\Bundle\CoreBundle\Checker\InForProductScopeVariantChecker;
 use Sylius\Bundle\CoreBundle\Checker\InForTaxonsScopeVariantChecker;
 use Sylius\Bundle\CoreBundle\Checker\InForVariantsScopeVariantChecker;
-use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Core\Model\ChannelInterface;

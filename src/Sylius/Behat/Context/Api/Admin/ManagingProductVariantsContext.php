@@ -123,7 +123,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I create a new ("[^"]+") variant priced at ("[^"]+") for ("[^"]+" product) in the ("[^"]+" channel)$/
+     * @When /^I create a new "([^"]+)" variant priced at ("[^"]+") for ("[^"]+" product) in the ("[^"]+" channel)$/
      */
     public function iCreateANewVariantPricedAtForProductInTheChannel(
         string $name,
@@ -198,7 +198,7 @@ final class ManagingProductVariantsContext implements Context
     ): void {
         $this->client->buildCreateRequest();
         $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
-        $this->client->addRequestData('code', str_replace('"', '', StringInflector::nameToUppercaseCode($name)));
+        $this->client->addRequestData('code', StringInflector::nameToCode($name));
 
         $this->client->addRequestData('channelPricings', [
             $channel->getCode() => [

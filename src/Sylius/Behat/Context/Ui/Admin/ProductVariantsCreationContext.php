@@ -26,7 +26,7 @@ final class ProductVariantsCreationContext implements Context
     }
 
     /**
-     * @When /^I create a new ("[^"]+") variant priced at "(?:€|£|\$)([^"]+)" for ("[^"]+" product) in the ("[^"]+" channel)$/
+     * @When /^I create a new "([^"]+)" variant priced at "(?:€|£|\$)([^"]+)" for ("[^"]+" product) in the ("[^"]+" channel)$/
      */
     public function iCreateANewVariantPricedAtForProductInTheChannel(
         string $name,
