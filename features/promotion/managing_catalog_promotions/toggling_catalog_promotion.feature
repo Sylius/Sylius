@@ -24,20 +24,20 @@ Feature: Toggling catalog promotion
         Then this catalog promotion should be inactive
         And "PHP T-Shirt" variant should not be discounted
 
-#    @api @ui @todo
-#    Scenario: Enabling catalog promotion
-#        Given this catalog promotion is disabled
-#        When I enable "Christmas sale" catalog promotion
-#        Then this catalog promotion should be active
-#        And "PHP T-Shirt" variant should be discounted
+    @api @ui
+    Scenario: Enabling catalog promotion
+        Given this catalog promotion is disabled
+        When I enable "Christmas sale" catalog promotion
+        Then this catalog promotion should be active
+        And "PHP T-Shirt" variant should be discounted
 
-#    @api @ui @todo
-#    Scenario: Enabling catalog promotion during its operating time
-#        Given the catalog promotion "Christmas sale" operates between "yesterday" and "tomorrow"
-#        And this catalog promotion is disabled
-#        When I enable "Christmas sale" catalog promotion
-#        Then this catalog promotion should be active
-#        And "PHP T-Shirt" variant should be discounted
+    @api @ui
+    Scenario: Enabling catalog promotion during its operating time
+        Given the catalog promotion "Christmas sale" operates between "yesterday" and "tomorrow"
+        And this catalog promotion is disabled
+        When I enable "Christmas sale" catalog promotion
+        Then this catalog promotion should be active
+        And "PHP T-Shirt" variant should be discounted
 
     @api @ui
     Scenario: Enabling catalog promotion outside its operating time

@@ -15,8 +15,8 @@ Feature: Applying catalog promotions with different states
         When I view "PHP T-Shirt" variant of the "T-Shirt" product
         Then I should see this variant is discounted from "$20.00" to "$10.00" with "Winter sale" promotion
 
-#    @api @ui @todo
-#    Scenario: Not applying catalog promotion if it failed processing
-#        Given catalog promotion "Winter sale" has failed processing
-#        When I view "PHP T-Shirt" variant of the "T-Shirt" product
-#        Then I should see this variant is not discounted
+    @api @ui
+    Scenario: Not applying catalog promotion if it failed processing
+        Given catalog promotion "Winter sale" has failed processing
+        When I view "PHP T-Shirt" variant of the "T-Shirt" product
+        Then I should see this variant is not discounted
