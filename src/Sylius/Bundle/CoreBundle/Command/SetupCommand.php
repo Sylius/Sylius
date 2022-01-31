@@ -61,7 +61,7 @@ EOT
 
         try {
             $user = $this->configureNewUser($userFactory->createNew(), $input, $output);
-        } catch (\InvalidArgumentException $exception) {
+        } catch (\InvalidArgumentException) {
             return;
         }
 

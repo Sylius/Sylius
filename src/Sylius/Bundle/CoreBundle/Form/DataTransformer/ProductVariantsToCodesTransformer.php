@@ -24,11 +24,8 @@ use Webmozart\Assert\Assert;
 
 final class ProductVariantsToCodesTransformer implements DataTransformerInterface
 {
-    private ProductVariantRepositoryInterface $productVariantRepository;
-
-    public function __construct(ProductVariantRepositoryInterface $productVariantRepository)
+    public function __construct(private ProductVariantRepositoryInterface $productVariantRepository)
     {
-        $this->productVariantRepository = $productVariantRepository;
     }
 
     /** @throws \InvalidArgumentException */

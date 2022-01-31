@@ -25,24 +25,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class CheckoutResolver implements EventSubscriberInterface
 {
-    private CartContextInterface $cartContext;
-
-    private CheckoutStateUrlGeneratorInterface $urlGenerator;
-
-    private RequestMatcherInterface $requestMatcher;
-
-    private FactoryInterface $stateMachineFactory;
-
-    public function __construct(
-        CartContextInterface $cartContext,
-        CheckoutStateUrlGeneratorInterface $urlGenerator,
-        RequestMatcherInterface $requestMatcher,
-        FactoryInterface $stateMachineFactory
-    ) {
-        $this->cartContext = $cartContext;
-        $this->urlGenerator = $urlGenerator;
-        $this->requestMatcher = $requestMatcher;
-        $this->stateMachineFactory = $stateMachineFactory;
+    public function __construct(private CartContextInterface $cartContext, private CheckoutStateUrlGeneratorInterface $urlGenerator, private RequestMatcherInterface $requestMatcher, private FactoryInterface $stateMachineFactory)
+    {
     }
 
     public function onKernelRequest(RequestEvent $event): void

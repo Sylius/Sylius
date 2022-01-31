@@ -24,11 +24,8 @@ use Symfony\Component\Intl\Locales;
 
 final class LocaleTypeExtension extends AbstractTypeExtension
 {
-    private RepositoryInterface $localeRepository;
-
-    public function __construct(RepositoryInterface $localeRepository)
+    public function __construct(private RepositoryInterface $localeRepository)
     {
-        $this->localeRepository = $localeRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

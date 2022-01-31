@@ -29,25 +29,15 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
 {
     public const DEFAULT_LOCALE = 'en_US';
 
-    private PaymentMethodFactoryInterface $paymentMethodFactory;
-
-    private RepositoryInterface $localeRepository;
-
-    private ChannelRepositoryInterface $channelRepository;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
     public function __construct(
-        PaymentMethodFactoryInterface $paymentMethodFactory,
-        RepositoryInterface $localeRepository,
-        ChannelRepositoryInterface $channelRepository
+        private PaymentMethodFactoryInterface $paymentMethodFactory,
+        private RepositoryInterface $localeRepository,
+        private ChannelRepositoryInterface $channelRepository
     ) {
-        $this->paymentMethodFactory = $paymentMethodFactory;
-        $this->localeRepository = $localeRepository;
-        $this->channelRepository = $channelRepository;
-
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 

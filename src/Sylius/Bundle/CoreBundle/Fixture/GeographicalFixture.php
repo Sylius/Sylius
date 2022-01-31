@@ -26,32 +26,8 @@ use Webmozart\Assert\Assert;
 
 class GeographicalFixture extends AbstractFixture
 {
-    private FactoryInterface $countryFactory;
-
-    private ObjectManager $countryManager;
-
-    private FactoryInterface $provinceFactory;
-
-    private ObjectManager $provinceManager;
-
-    private ZoneFactoryInterface $zoneFactory;
-
-    private ObjectManager $zoneManager;
-
-    public function __construct(
-        FactoryInterface $countryFactory,
-        ObjectManager $countryManager,
-        FactoryInterface $provinceFactory,
-        ObjectManager $provinceManager,
-        ZoneFactoryInterface $zoneFactory,
-        ObjectManager $zoneManager
-    ) {
-        $this->countryFactory = $countryFactory;
-        $this->countryManager = $countryManager;
-        $this->provinceFactory = $provinceFactory;
-        $this->provinceManager = $provinceManager;
-        $this->zoneFactory = $zoneFactory;
-        $this->zoneManager = $zoneManager;
+    public function __construct(private FactoryInterface $countryFactory, private ObjectManager $countryManager, private FactoryInterface $provinceFactory, private ObjectManager $provinceManager, private ZoneFactoryInterface $zoneFactory, private ObjectManager $zoneManager)
+    {
     }
 
     public function load(array $options): void
@@ -202,32 +178,24 @@ class GeographicalFixture extends AbstractFixture
      */
     private function getZoneType(array $zoneOptions): string
     {
-        switch (true) {
-            case count($zoneOptions['countries']) > 0:
-                return ZoneInterface::TYPE_COUNTRY;
-            case count($zoneOptions['provinces']) > 0:
-                return ZoneInterface::TYPE_PROVINCE;
-            case count($zoneOptions['zones']) > 0:
-                return ZoneInterface::TYPE_ZONE;
-            default:
-                throw new \InvalidArgumentException('Cannot resolve zone type!');
-        }
+        return match (true) {
+            count($zoneOptions['countries']) > 0 => ZoneInterface::TYPE_COUNTRY,
+            count($zoneOptions['provinces']) > 0 => ZoneInterface::TYPE_PROVINCE,
+            count($zoneOptions['zones']) > 0 => ZoneInterface::TYPE_ZONE,
+            default => throw new \InvalidArgumentException('Cannot resolve zone type!'),
+        };
     }
 
     private function getZoneMembers(array $zoneOptions): array
     {
         $zoneType = $this->getZoneType($zoneOptions);
 
-        switch ($zoneType) {
-            case ZoneInterface::TYPE_COUNTRY:
-                return $zoneOptions['countries'];
-            case ZoneInterface::TYPE_PROVINCE:
-                return $zoneOptions['provinces'];
-            case ZoneInterface::TYPE_ZONE:
-                return $zoneOptions['zones'];
-            default:
-                throw new \InvalidArgumentException('Cannot resolve zone members!');
-        }
+        return match ($zoneType) {
+            ZoneInterface::TYPE_COUNTRY => $zoneOptions['countries'],
+            ZoneInterface::TYPE_PROVINCE => $zoneOptions['provinces'],
+            ZoneInterface::TYPE_ZONE => $zoneOptions['zones'],
+            default => throw new \InvalidArgumentException('Cannot resolve zone members!'),
+        };
     }
 
     private function provideZoneValidator(array $options): \Closure

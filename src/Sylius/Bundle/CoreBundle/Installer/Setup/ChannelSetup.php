@@ -22,20 +22,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ChannelSetup implements ChannelSetupInterface
 {
-    private RepositoryInterface $channelRepository;
-
-    private FactoryInterface $channelFactory;
-
-    private ObjectManager $channelManager;
-
-    public function __construct(
-        RepositoryInterface $channelRepository,
-        FactoryInterface $channelFactory,
-        ObjectManager $channelManager
-    ) {
-        $this->channelRepository = $channelRepository;
-        $this->channelFactory = $channelFactory;
-        $this->channelManager = $channelManager;
+    public function __construct(private RepositoryInterface $channelRepository, private FactoryInterface $channelFactory, private ObjectManager $channelManager)
+    {
     }
 
     public function setup(LocaleInterface $locale, CurrencyInterface $currency): void

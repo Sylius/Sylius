@@ -23,20 +23,8 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
 {
-    private FactoryInterface $productTaxonFactory;
-
-    private RepositoryInterface $productTaxonRepository;
-
-    private ProductInterface $product;
-
-    public function __construct(
-        FactoryInterface $productTaxonFactory,
-        RepositoryInterface $productTaxonRepository,
-        ProductInterface $product
-    ) {
-        $this->productTaxonFactory = $productTaxonFactory;
-        $this->productTaxonRepository = $productTaxonRepository;
-        $this->product = $product;
+    public function __construct(private FactoryInterface $productTaxonFactory, private RepositoryInterface $productTaxonRepository, private ProductInterface $product)
+    {
     }
 
     public function transform($value): ?TaxonInterface
@@ -81,7 +69,7 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
                 sprintf(
                     'Expected "%s", but got "%s"',
                     $expectedType,
-                    is_object($value) ? get_class($value) : gettype($value)
+                    get_debug_type($value)
                 )
             );
         }

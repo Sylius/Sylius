@@ -43,48 +43,6 @@ use Webmozart\Assert\Assert;
 
 class OrderExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /** @var FactoryInterface */
-    protected $orderFactory;
-
-    /** @var FactoryInterface */
-    protected $orderItemFactory;
-
-    /** @var OrderItemQuantityModifierInterface */
-    protected $orderItemQuantityModifier;
-
-    /** @var ObjectManager */
-    protected $orderManager;
-
-    /** @var RepositoryInterface */
-    protected $channelRepository;
-
-    /** @var RepositoryInterface */
-    protected $customerRepository;
-
-    /** @var ProductRepositoryInterface */
-    protected $productRepository;
-
-    /** @var RepositoryInterface */
-    protected $countryRepository;
-
-    /** @var PaymentMethodRepositoryInterface */
-    protected $paymentMethodRepository;
-
-    /** @var ShippingMethodRepositoryInterface */
-    protected $shippingMethodRepository;
-
-    /** @var FactoryInterface */
-    protected $addressFactory;
-
-    /** @var StateMachineFactoryInterface */
-    protected $stateMachineFactory;
-
-    /** @var OrderShippingMethodSelectionRequirementCheckerInterface */
-    protected $orderShippingMethodSelectionRequirementChecker;
-
-    /** @var OrderPaymentMethodSelectionRequirementCheckerInterface */
-    protected $orderPaymentMethodSelectionRequirementChecker;
-
     /** @var OptionsResolver */
     protected $optionsResolver;
 
@@ -92,36 +50,21 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
     protected $faker;
 
     public function __construct(
-        FactoryInterface $orderFactory,
-        FactoryInterface $orderItemFactory,
-        OrderItemQuantityModifierInterface $orderItemQuantityModifier,
-        ObjectManager $orderManager,
-        RepositoryInterface $channelRepository,
-        RepositoryInterface $customerRepository,
-        ProductRepositoryInterface $productRepository,
-        RepositoryInterface $countryRepository,
-        PaymentMethodRepositoryInterface $paymentMethodRepository,
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
-        FactoryInterface $addressFactory,
-        StateMachineFactoryInterface $stateMachineFactory,
-        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker
+        protected FactoryInterface $orderFactory,
+        protected FactoryInterface $orderItemFactory,
+        protected OrderItemQuantityModifierInterface $orderItemQuantityModifier,
+        protected ObjectManager $orderManager,
+        protected RepositoryInterface $channelRepository,
+        protected RepositoryInterface $customerRepository,
+        protected ProductRepositoryInterface $productRepository,
+        protected RepositoryInterface $countryRepository,
+        protected PaymentMethodRepositoryInterface $paymentMethodRepository,
+        protected ShippingMethodRepositoryInterface $shippingMethodRepository,
+        protected FactoryInterface $addressFactory,
+        protected StateMachineFactoryInterface $stateMachineFactory,
+        protected OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
+        protected OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker
     ) {
-        $this->orderFactory = $orderFactory;
-        $this->orderItemFactory = $orderItemFactory;
-        $this->orderItemQuantityModifier = $orderItemQuantityModifier;
-        $this->orderManager = $orderManager;
-        $this->channelRepository = $channelRepository;
-        $this->customerRepository = $customerRepository;
-        $this->productRepository = $productRepository;
-        $this->countryRepository = $countryRepository;
-        $this->paymentMethodRepository = $paymentMethodRepository;
-        $this->shippingMethodRepository = $shippingMethodRepository;
-        $this->addressFactory = $addressFactory;
-        $this->stateMachineFactory = $stateMachineFactory;
-        $this->orderShippingMethodSelectionRequirementChecker = $orderShippingMethodSelectionRequirementChecker;
-        $this->orderPaymentMethodSelectionRequirementChecker = $orderPaymentMethodSelectionRequirementChecker;
-
         $this->optionsResolver = new OptionsResolver();
         $this->faker = Factory::create();
         $this->configureOptions($this->optionsResolver);

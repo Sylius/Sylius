@@ -26,29 +26,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookProductFixture extends AbstractFixture
 {
-    private AbstractResourceFixture $taxonFixture;
-
-    private AbstractResourceFixture $productAttributeFixture;
-
-    private AbstractResourceFixture $productFixture;
-
-    private string $baseLocaleCode;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
     public function __construct(
-        AbstractResourceFixture $taxonFixture,
-        AbstractResourceFixture $productAttributeFixture,
-        AbstractResourceFixture $productFixture,
-        string $baseLocaleCode
+        private AbstractResourceFixture $taxonFixture,
+        private AbstractResourceFixture $productAttributeFixture,
+        private AbstractResourceFixture $productFixture,
+        private string $baseLocaleCode
     ) {
-        $this->taxonFixture = $taxonFixture;
-        $this->productAttributeFixture = $productAttributeFixture;
-        $this->productFixture = $productFixture;
-        $this->baseLocaleCode = $baseLocaleCode;
-
         $this->faker = Factory::create();
         $this->optionsResolver =
             (new OptionsResolver())

@@ -20,13 +20,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class AdminUserType extends UserType
 {
-    private ?string $fallbackLocale;
-
-    public function __construct(string $dataClass, array $validationGroups = [], ?string $fallbackLocale = null)
+    public function __construct(string $dataClass, array $validationGroups = [], private ?string $fallbackLocale = null)
     {
         parent::__construct($dataClass, $validationGroups);
-
-        $this->fallbackLocale = $fallbackLocale;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

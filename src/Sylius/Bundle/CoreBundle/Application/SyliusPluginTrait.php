@@ -44,7 +44,7 @@ trait SyliusPluginTrait
 
             if (null !== $extension) {
                 if (!$extension instanceof ExtensionInterface) {
-                    throw new \LogicException(sprintf('Extension %s must implement %s.', get_class($extension), ExtensionInterface::class));
+                    throw new \LogicException(sprintf('Extension %s must implement %s.', $extension::class, ExtensionInterface::class));
                 }
 
                 // check naming convention for Sylius Plugins

@@ -23,16 +23,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PromotionActionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private PromotionActionFactoryInterface $promotionActionFactory;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
-    public function __construct(PromotionActionFactoryInterface $promotionActionFactory)
+    public function __construct(private PromotionActionFactoryInterface $promotionActionFactory)
     {
-        $this->promotionActionFactory = $promotionActionFactory;
-
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 

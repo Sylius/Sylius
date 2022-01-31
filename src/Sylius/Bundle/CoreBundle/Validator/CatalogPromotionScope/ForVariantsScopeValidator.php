@@ -21,11 +21,8 @@ use Webmozart\Assert\Assert;
 
 final class ForVariantsScopeValidator implements ScopeValidatorInterface
 {
-    private ProductVariantRepositoryInterface $variantRepository;
-
-    public function __construct(ProductVariantRepositoryInterface $variantRepository)
+    public function __construct(private ProductVariantRepositoryInterface $variantRepository)
     {
-        $this->variantRepository = $variantRepository;
     }
 
     public function validate(array $configuration, Constraint $constraint, ExecutionContextInterface $context): void

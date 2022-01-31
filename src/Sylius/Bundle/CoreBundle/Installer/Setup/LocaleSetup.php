@@ -25,16 +25,10 @@ use Symfony\Component\Intl\Languages;
 
 final class LocaleSetup implements LocaleSetupInterface
 {
-    private RepositoryInterface $localeRepository;
-
-    private FactoryInterface $localeFactory;
-
     private string $locale;
 
-    public function __construct(RepositoryInterface $localeRepository, FactoryInterface $localeFactory, string $locale)
+    public function __construct(private RepositoryInterface $localeRepository, private FactoryInterface $localeFactory, string $locale)
     {
-        $this->localeRepository = $localeRepository;
-        $this->localeFactory = $localeFactory;
         $this->locale = trim($locale);
     }
 
@@ -100,7 +94,7 @@ final class LocaleSetup implements LocaleSetupInterface
 
         try {
             return Languages::getName($language, $region);
-        } catch (MissingResourceException $exception) {
+        } catch (MissingResourceException) {
             return null;
         }
     }

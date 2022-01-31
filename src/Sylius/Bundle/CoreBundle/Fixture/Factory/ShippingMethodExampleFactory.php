@@ -32,36 +32,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ShippingMethodExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private FactoryInterface $shippingMethodFactory;
-
-    private RepositoryInterface $zoneRepository;
-
-    private RepositoryInterface $shippingCategoryRepository;
-
-    private RepositoryInterface $localeRepository;
-
-    private ChannelRepositoryInterface $channelRepository;
-
-    private ?RepositoryInterface $taxCategoryRepository;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $shippingMethodFactory,
-        RepositoryInterface $zoneRepository,
-        RepositoryInterface $shippingCategoryRepository,
-        RepositoryInterface $localeRepository,
-        ChannelRepositoryInterface $channelRepository,
-        ?RepositoryInterface $taxCategoryRepository = null
+        private FactoryInterface $shippingMethodFactory,
+        private RepositoryInterface $zoneRepository,
+        private RepositoryInterface $shippingCategoryRepository,
+        private RepositoryInterface $localeRepository,
+        private ChannelRepositoryInterface $channelRepository,
+        private ?\Sylius\Component\Resource\Repository\RepositoryInterface $taxCategoryRepository = null
     ) {
-        $this->shippingMethodFactory = $shippingMethodFactory;
-        $this->zoneRepository = $zoneRepository;
-        $this->shippingCategoryRepository = $shippingCategoryRepository;
-        $this->localeRepository = $localeRepository;
-        $this->channelRepository = $channelRepository;
-        $this->taxCategoryRepository = $taxCategoryRepository;
         if ($this->taxCategoryRepository === null) {
             @trigger_error(sprintf('Not passing a $taxCategoryRepository to %s constructor is deprecated since Sylius 1.4 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
         }

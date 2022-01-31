@@ -23,28 +23,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterface
 {
-    private RepositoryInterface $sequenceRepository;
-
-    private FactoryInterface $sequenceFactory;
-
-    private EntityManagerInterface $sequenceManager;
-
-    private int $startNumber;
-
-    private int $numberLength;
-
-    public function __construct(
-        RepositoryInterface $sequenceRepository,
-        FactoryInterface $sequenceFactory,
-        EntityManagerInterface $sequenceManager,
-        int $startNumber = 1,
-        int $numberLength = 9
-    ) {
-        $this->sequenceRepository = $sequenceRepository;
-        $this->sequenceFactory = $sequenceFactory;
-        $this->sequenceManager = $sequenceManager;
-        $this->startNumber = $startNumber;
-        $this->numberLength = $numberLength;
+    public function __construct(private RepositoryInterface $sequenceRepository, private FactoryInterface $sequenceFactory, private EntityManagerInterface $sequenceManager, private int $startNumber = 1, private int $numberLength = 9)
+    {
     }
 
     public function generate(OrderInterface $order): string

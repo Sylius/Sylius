@@ -29,33 +29,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PromotionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private FactoryInterface $promotionFactory;
-
-    private ExampleFactoryInterface $promotionRuleExampleFactory;
-
-    private ExampleFactoryInterface $promotionActionExampleFactory;
-
-    private ChannelRepositoryInterface $channelRepository;
-
-    private ?FactoryInterface $couponFactory;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $promotionFactory,
-        ExampleFactoryInterface $promotionRuleExampleFactory,
-        ExampleFactoryInterface $promotionActionExampleFactory,
-        ChannelRepositoryInterface $channelRepository,
-        ?FactoryInterface $couponFactory = null
+        private FactoryInterface $promotionFactory,
+        private ExampleFactoryInterface $promotionRuleExampleFactory,
+        private ExampleFactoryInterface $promotionActionExampleFactory,
+        private ChannelRepositoryInterface $channelRepository,
+        private ?\Sylius\Component\Resource\Factory\FactoryInterface $couponFactory = null
     ) {
-        $this->promotionFactory = $promotionFactory;
-        $this->promotionRuleExampleFactory = $promotionRuleExampleFactory;
-        $this->promotionActionExampleFactory = $promotionActionExampleFactory;
-        $this->channelRepository = $channelRepository;
-        $this->couponFactory = $couponFactory;
-
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 

@@ -16,7 +16,6 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Faker\Factory;
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
-use Sylius\Bundle\CoreBundle\Processor\AllProductVariantsCatalogPromotionsProcessorInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
@@ -30,37 +29,23 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CatalogPromotionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private FactoryInterface $catalogPromotionFactory;
-
-    private RepositoryInterface $localeRepository;
-
-    private ChannelRepositoryInterface $channelRepository;
-
-    private ExampleFactoryInterface $catalogPromotionScopeExampleFactory;
-
-    private ExampleFactoryInterface $catalogPromotionActionExampleFactory;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $catalogPromotionFactory,
-        RepositoryInterface $localeRepository,
-        ChannelRepositoryInterface $channelRepository,
-        ExampleFactoryInterface $catalogPromotionScopeExampleFactory,
-        ExampleFactoryInterface $catalogPromotionActionExampleFactory
+        private FactoryInterface $catalogPromotionFactory,
+        private RepositoryInterface $localeRepository,
+        private ChannelRepositoryInterface $channelRepository,
+        private ExampleFactoryInterface $catalogPromotionScopeExampleFactory,
+        private ExampleFactoryInterface $catalogPromotionActionExampleFactory
     ) {
-        $this->catalogPromotionFactory = $catalogPromotionFactory;
-        $this->localeRepository = $localeRepository;
-        $this->channelRepository = $channelRepository;
-        $this->catalogPromotionScopeExampleFactory = $catalogPromotionScopeExampleFactory;
-        $this->catalogPromotionActionExampleFactory = $catalogPromotionActionExampleFactory;
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
     }
+
 
     public function create(array $options = []): CatalogPromotionInterface
     {

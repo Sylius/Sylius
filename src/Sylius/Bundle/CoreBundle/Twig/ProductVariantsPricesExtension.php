@@ -19,11 +19,8 @@ use Twig\TwigFunction;
 
 final class ProductVariantsPricesExtension extends AbstractExtension
 {
-    private ProductVariantsPricesHelper $productVariantsPricesHelper;
-
-    public function __construct(ProductVariantsPricesHelper $productVariantsPricesHelper)
+    public function __construct(private ProductVariantsPricesHelper $productVariantsPricesHelper)
     {
-        $this->productVariantsPricesHelper = $productVariantsPricesHelper;
     }
 
     public function getFunctions(): array

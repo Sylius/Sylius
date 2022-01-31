@@ -47,7 +47,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $user->setUsername('customer+extra@email.com')->shouldBeCalled();
         $user->setUsernameCanonical('customer@email.com')->shouldBeCalled();
 
-        $entityManager->getClassMetadata(get_class($user->getWrappedObject()))->willReturn($userMetadata);
+        $entityManager->getClassMetadata($user->getWrappedObject()::class)->willReturn($userMetadata);
         $unitOfWork->recomputeSingleEntityChangeSet($userMetadata, $user)->shouldBeCalled();
 
         $this->onFlush($onFlushEventArgs);
@@ -76,7 +76,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $user->setUsername('customer+extra@email.com')->shouldBeCalled();
         $user->setUsernameCanonical('customer@email.com')->shouldBeCalled();
 
-        $entityManager->getClassMetadata(get_class($user->getWrappedObject()))->willReturn($userMetadata);
+        $entityManager->getClassMetadata($user->getWrappedObject()::class)->willReturn($userMetadata);
         $unitOfWork->recomputeSingleEntityChangeSet($userMetadata, $user)->shouldBeCalled();
 
         $this->onFlush($onFlushEventArgs);
@@ -105,7 +105,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $user->setUsername('customer+extra@email.com')->shouldBeCalled();
         $user->setUsernameCanonical('customer@email.com')->shouldBeCalled();
 
-        $entityManager->getClassMetadata(get_class($user->getWrappedObject()))->willReturn($userMetadata);
+        $entityManager->getClassMetadata($user->getWrappedObject()::class)->willReturn($userMetadata);
         $unitOfWork->recomputeSingleEntityChangeSet($userMetadata, $user)->shouldBeCalled();
 
         $this->onFlush($onFlushEventArgs);
@@ -134,7 +134,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $user->setUsername('customer+extra@email.com')->shouldBeCalled();
         $user->setUsernameCanonical('customer@email.com')->shouldBeCalled();
 
-        $entityManager->getClassMetadata(get_class($user->getWrappedObject()))->willReturn($userMetadata);
+        $entityManager->getClassMetadata($user->getWrappedObject()::class)->willReturn($userMetadata);
         $unitOfWork->recomputeSingleEntityChangeSet($userMetadata, $user)->shouldBeCalled();
 
         $this->onFlush($onFlushEventArgs);

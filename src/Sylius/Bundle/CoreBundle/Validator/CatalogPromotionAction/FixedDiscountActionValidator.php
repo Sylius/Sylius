@@ -24,11 +24,8 @@ use Webmozart\Assert\Assert;
 
 final class FixedDiscountActionValidator implements ActionValidatorInterface
 {
-    private ChannelRepositoryInterface $channelRepository;
-
-    public function __construct(ChannelRepositoryInterface $channelRepository)
+    public function __construct(private ChannelRepositoryInterface $channelRepository)
     {
-        $this->channelRepository = $channelRepository;
     }
 
     public function validate(array $configuration, Constraint $constraint, ExecutionContextInterface $context): void

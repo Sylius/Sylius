@@ -21,14 +21,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 final class CustomerContext implements CustomerContextInterface
 {
-    private TokenStorageInterface $tokenStorage;
-
-    private AuthorizationCheckerInterface $authorizationChecker;
-
-    public function __construct(TokenStorageInterface $tokenStorage, AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(private TokenStorageInterface $tokenStorage, private AuthorizationCheckerInterface $authorizationChecker)
     {
-        $this->tokenStorage = $tokenStorage;
-        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function getCustomer(): ?BaseCustomerInterface

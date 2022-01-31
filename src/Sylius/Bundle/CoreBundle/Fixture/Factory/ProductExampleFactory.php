@@ -42,81 +42,31 @@ use Webmozart\Assert\Assert;
 
 class ProductExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private FactoryInterface $productFactory;
-
-    private FactoryInterface $productVariantFactory;
-
-    private FactoryInterface $channelPricingFactory;
-
-    private FactoryInterface $productTaxonFactory;
-
-    private ProductVariantGeneratorInterface $variantGenerator;
-
-    private FactoryInterface $productAttributeValueFactory;
-
-    private FactoryInterface $productImageFactory;
-
-    private ImageUploaderInterface $imageUploader;
-
-    private SlugGeneratorInterface $slugGenerator;
-
-    private RepositoryInterface $taxonRepository;
-
-    private RepositoryInterface $productAttributeRepository;
-
-    private RepositoryInterface $productOptionRepository;
-
-    private RepositoryInterface $channelRepository;
-
-    private RepositoryInterface $localeRepository;
-
-    private ?RepositoryInterface $taxCategoryRepository;
-
-    private ?FileLocatorInterface $fileLocator;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $productFactory,
-        FactoryInterface $productVariantFactory,
-        FactoryInterface $channelPricing,
-        ProductVariantGeneratorInterface $variantGenerator,
-        FactoryInterface $productAttributeValueFactory,
-        FactoryInterface $productImageFactory,
-        FactoryInterface $productTaxonFactory,
-        ImageUploaderInterface $imageUploader,
-        SlugGeneratorInterface $slugGenerator,
-        RepositoryInterface $taxonRepository,
-        RepositoryInterface $productAttributeRepository,
-        RepositoryInterface $productOptionRepository,
-        RepositoryInterface $channelRepository,
-        RepositoryInterface $localeRepository,
-        ?RepositoryInterface $taxCategoryRepository = null,
-        ?FileLocatorInterface $fileLocator = null
+        private FactoryInterface $productFactory,
+        private FactoryInterface $productVariantFactory,
+        private FactoryInterface $channelPricingFactory,
+        private ProductVariantGeneratorInterface $variantGenerator,
+        private FactoryInterface $productAttributeValueFactory,
+        private FactoryInterface $productImageFactory,
+        private FactoryInterface $productTaxonFactory,
+        private ImageUploaderInterface $imageUploader,
+        private SlugGeneratorInterface $slugGenerator,
+        private RepositoryInterface $taxonRepository,
+        private RepositoryInterface $productAttributeRepository,
+        private RepositoryInterface $productOptionRepository,
+        private RepositoryInterface $channelRepository,
+        private RepositoryInterface $localeRepository,
+        private ?\Sylius\Component\Resource\Repository\RepositoryInterface $taxCategoryRepository = null,
+        private ?\Symfony\Component\Config\FileLocatorInterface $fileLocator = null
     ) {
-        $this->productFactory = $productFactory;
-        $this->productVariantFactory = $productVariantFactory;
-        $this->channelPricingFactory = $channelPricing;
-        $this->variantGenerator = $variantGenerator;
-        $this->productAttributeValueFactory = $productAttributeValueFactory;
-        $this->productImageFactory = $productImageFactory;
-        $this->productTaxonFactory = $productTaxonFactory;
-        $this->imageUploader = $imageUploader;
-        $this->slugGenerator = $slugGenerator;
-        $this->taxonRepository = $taxonRepository;
-        $this->productAttributeRepository = $productAttributeRepository;
-        $this->productOptionRepository = $productOptionRepository;
-        $this->channelRepository = $channelRepository;
-        $this->localeRepository = $localeRepository;
-
-        $this->taxCategoryRepository = $taxCategoryRepository;
         if ($this->taxCategoryRepository === null) {
             @trigger_error(sprintf('Not passing a $taxCategoryRepository to %s constructor is deprecated since Sylius 1.6 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
         }
-
-        $this->fileLocator = $fileLocator;
 
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -243,7 +193,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         try {
             $this->variantGenerator->generate($product);
-        } catch (\InvalidArgumentException $exception) {
+        } catch (\InvalidArgumentException) {
             /** @var ProductVariantInterface $productVariant */
             $productVariant = $this->productVariantFactory->createNew();
 

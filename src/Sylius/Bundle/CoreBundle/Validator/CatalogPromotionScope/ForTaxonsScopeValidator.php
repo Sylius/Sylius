@@ -21,11 +21,8 @@ use Webmozart\Assert\Assert;
 
 final class ForTaxonsScopeValidator implements ScopeValidatorInterface
 {
-    private TaxonRepositoryInterface $taxonRepository;
-
-    public function __construct(TaxonRepositoryInterface $taxonRepository)
+    public function __construct(private TaxonRepositoryInterface $taxonRepository)
     {
-        $this->taxonRepository = $taxonRepository;
     }
 
     public function validate(array $configuration, Constraint $constraint, ExecutionContextInterface $context): void

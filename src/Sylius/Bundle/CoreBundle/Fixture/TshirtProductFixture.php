@@ -24,29 +24,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TshirtProductFixture extends AbstractFixture
 {
-    private AbstractResourceFixture $taxonFixture;
-
-    private AbstractResourceFixture $productAttributeFixture;
-
-    private AbstractResourceFixture $productOptionFixture;
-
-    private AbstractResourceFixture $productFixture;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
     public function __construct(
-        AbstractResourceFixture $taxonFixture,
-        AbstractResourceFixture $productAttributeFixture,
-        AbstractResourceFixture $productOptionFixture,
-        AbstractResourceFixture $productFixture
+        private AbstractResourceFixture $taxonFixture,
+        private AbstractResourceFixture $productAttributeFixture,
+        private AbstractResourceFixture $productOptionFixture,
+        private AbstractResourceFixture $productFixture
     ) {
-        $this->taxonFixture = $taxonFixture;
-        $this->productAttributeFixture = $productAttributeFixture;
-        $this->productOptionFixture = $productOptionFixture;
-        $this->productFixture = $productFixture;
-
         $this->faker = Factory::create();
         $this->optionsResolver =
             (new OptionsResolver())

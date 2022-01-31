@@ -22,20 +22,8 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutRedirectListener
 {
-    private RequestStack $requestStack;
-
-    private CheckoutStateUrlGeneratorInterface $checkoutStateUrlGenerator;
-
-    private RequestMatcherInterface $requestMatcher;
-
-    public function __construct(
-        RequestStack $requestStack,
-        CheckoutStateUrlGeneratorInterface $checkoutStateUrlGenerator,
-        RequestMatcherInterface $requestMatcher
-    ) {
-        $this->requestStack = $requestStack;
-        $this->checkoutStateUrlGenerator = $checkoutStateUrlGenerator;
-        $this->requestMatcher = $requestMatcher;
+    public function __construct(private RequestStack $requestStack, private CheckoutStateUrlGeneratorInterface $checkoutStateUrlGenerator, private RequestMatcherInterface $requestMatcher)
+    {
     }
 
     public function handleCheckoutRedirect(ResourceControllerEvent $resourceControllerEvent): void

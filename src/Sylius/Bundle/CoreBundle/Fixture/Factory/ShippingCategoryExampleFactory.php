@@ -23,16 +23,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ShippingCategoryExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private FactoryInterface $shippingCategoryFactory;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
-    public function __construct(FactoryInterface $shippingCategoryFactory)
+    public function __construct(private FactoryInterface $shippingCategoryFactory)
     {
-        $this->shippingCategoryFactory = $shippingCategoryFactory;
-
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 

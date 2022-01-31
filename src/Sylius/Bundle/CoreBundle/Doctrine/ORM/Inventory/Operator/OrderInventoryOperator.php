@@ -22,16 +22,8 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 
 final class OrderInventoryOperator implements OrderInventoryOperatorInterface
 {
-    private OrderInventoryOperatorInterface $decoratedOperator;
-
-    private EntityManagerInterface $productVariantManager;
-
-    public function __construct(
-        OrderInventoryOperatorInterface $decoratedOperator,
-        EntityManagerInterface $productVariantManager
-    ) {
-        $this->decoratedOperator = $decoratedOperator;
-        $this->productVariantManager = $productVariantManager;
+    public function __construct(private OrderInventoryOperatorInterface $decoratedOperator, private EntityManagerInterface $productVariantManager)
+    {
     }
 
     /**

@@ -24,11 +24,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProviderInterface
 {
-    private Registry $doctrineRegistry;
-
-    public function __construct(Registry $doctrineRegistry)
+    public function __construct(private Registry $doctrineRegistry)
     {
-        $this->doctrineRegistry = $doctrineRegistry;
     }
 
     public function getCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array
@@ -63,8 +60,8 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
 
-            $mysqlDatabaseError = false !== strpos($message, sprintf("Unknown database '%s'", $databaseName));
-            $postgresDatabaseError = false !== strpos($message, sprintf('database "%s" does not exist', $databaseName));
+            $mysqlDatabaseError = str_contains($message, sprintf("Unknown database '%s'", $databaseName));
+            $postgresDatabaseError = str_contains($message, sprintf('database "%s" does not exist', $databaseName));
 
             if ($mysqlDatabaseError || $postgresDatabaseError) {
                 return false;
