@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Checker;
 
-use Sylius\Bundle\CoreBundle\Provider\ForVariantInCatalogPromotionScopeCheckerProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
+use Symfony\Component\DependencyInjection\ServiceLocator;
 
 final class ProductVariantForCatalogPromotionEligibility implements ProductVariantForCatalogPromotionEligibilityInterface
 {
-    public function __construct(private ForVariantInCatalogPromotionScopeCheckerProviderInterface $checkerProvider)
+    public function __construct(private ServiceLocator $locator)
     {
     }
 
@@ -28,7 +28,7 @@ final class ProductVariantForCatalogPromotionEligibility implements ProductVaria
     {
         /** @var CatalogPromotionScopeInterface $scope */
         foreach ($promotion->getScopes() as $scope) {
-            $checker = $this->checkerProvider->provide($scope);
+            $checker = $this->locator->get($scope->getType());
 
             if ($checker->inScope($scope, $variant)) {
                 return true;

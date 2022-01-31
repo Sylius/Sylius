@@ -313,14 +313,7 @@
             id="Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibilityInterface"
             class="Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibility"
         >
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Provider\ForVariantInCatalogPromotionScopeCheckerProviderInterface" />
-        </service>
-
-        <service
-            id="Sylius\Bundle\CoreBundle\Provider\ForVariantInCatalogPromotionScopeCheckerProviderInterface"
-            class="Sylius\Bundle\CoreBundle\Provider\ForVariantInCatalogPromotionScopeCheckerProvider"
-        >
-            <argument type="tagged_iterator" tag="sylius.catalog_promotion.variant_checker" />
+            <argument type="tagged_locator" tag="sylius.catalog_promotion.variant_checker" index-by="type" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Checker\InForProductScopeVariantChecker">
