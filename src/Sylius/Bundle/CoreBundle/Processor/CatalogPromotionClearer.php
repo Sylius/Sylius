@@ -13,11 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Processor;
 
-use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Repository\ChannelPricingRepositoryInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 
 final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
 {
@@ -28,7 +25,7 @@ final class CatalogPromotionClearer implements CatalogPromotionClearerInterface
         }
     }
 
-    public function clearChannelPricing(ChannelPricingInterface $channelPricing): void
+    private function clearChannelPricing(ChannelPricingInterface $channelPricing): void
     {
         if ($channelPricing->getAppliedPromotions()->isEmpty()) {
             return;
