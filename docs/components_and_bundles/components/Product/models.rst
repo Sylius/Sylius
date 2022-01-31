@@ -46,10 +46,6 @@ By default it contains the following properties:
    This model uses the `TranslatableTrait <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TranslatableTrait.php>`_
    and implements the :ref:`component_product_model_product-interface`.
 
-   For more detailed information go to `Sylius API Product`_.
-
-.. _Sylius API Product: http://api.sylius.com/Sylius/Component/Product/Model/Product.html
-
 .. _component_product_model_product-translation:
 
 ProductTranslation
@@ -69,10 +65,6 @@ By default it has the following properties:
    This model extends the `AbstractTranslation <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/AbstractTranslation.php>`_ class
    and implements the :ref:`component_product_model_product-translation-interface`.
 
-   For more detailed information go to `Sylius API ProductTranslation`_.
-
-.. _Sylius API ProductTranslation: http://api.sylius.com/Sylius/Component/Product/Model/ProductTranslation.html
-
 .. _component_product_model_attribute-value:
 
 AttributeValue
@@ -84,10 +76,6 @@ is an instance of the :ref:`component_product_model_product-interface`.
 .. note::
    This model extends the :ref:`component_attribute_model_attribute-value`
    and implements the :ref:`component_product_model_attribute-value-interface`.
-
-   For more detailed information go to `Sylius API AttributeValue`_.
-
-.. _Sylius API AttributeValue: http://api.sylius.com/Sylius/Component/Product/Model/AttributeValue.html
 
 .. _component_product_model_variant:
 
@@ -106,7 +94,3 @@ and provides an additional property:
 
 .. note::
    This model implements the :ref:`component_product_model_variant-interface`.
-
-   For more detailed information go to `Sylius API Variant`_.
-
-.. _Sylius API Variant: http://api.sylius.com/Sylius/Component/Product/Model/Variant.html

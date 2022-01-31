@@ -32,6 +32,3 @@ InventoryUnits have the following properties:
 
 .. note::
     This model implements the :ref:`component_inventory_model_inventory-unit-interface`
-    For more detailed information go to `Sylius API InventoryUnit`_.
-
-.. _Sylius API InventoryUnit: http://api.sylius.com/Sylius/Component/Inventory/Model/InventoryUnitInterface.html
