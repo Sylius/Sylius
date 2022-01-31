@@ -27,8 +27,11 @@ final class CurrencySetup implements CurrencySetupInterface
 {
     private string $currency;
 
-    public function __construct(private RepositoryInterface $currencyRepository, private FactoryInterface $currencyFactory, string $currency = 'USD')
-    {
+    public function __construct(
+        private RepositoryInterface $currencyRepository,
+        private FactoryInterface $currencyFactory,
+        string $currency = 'USD'
+    ) {
         $this->currency = trim($currency);
     }
 

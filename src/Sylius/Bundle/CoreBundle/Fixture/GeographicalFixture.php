@@ -26,8 +26,14 @@ use Webmozart\Assert\Assert;
 
 class GeographicalFixture extends AbstractFixture
 {
-    public function __construct(private FactoryInterface $countryFactory, private ObjectManager $countryManager, private FactoryInterface $provinceFactory, private ObjectManager $provinceManager, private ZoneFactoryInterface $zoneFactory, private ObjectManager $zoneManager)
-    {
+    public function __construct(
+        private FactoryInterface $countryFactory,
+        private ObjectManager $countryManager,
+        private FactoryInterface $provinceFactory,
+        private ObjectManager $provinceManager,
+        private ZoneFactoryInterface $zoneFactory,
+        private ObjectManager $zoneManager
+    ) {
     }
 
     public function load(array $options): void

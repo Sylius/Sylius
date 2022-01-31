@@ -28,8 +28,11 @@ final class ImagesRemoveListener
     /** @var string[] */
     private array $imagesToDelete = [];
 
-    public function __construct(private ImageUploaderInterface $imageUploader, private CacheManager $cacheManager, private FilterManager $filterManager)
-    {
+    public function __construct(
+        private ImageUploaderInterface $imageUploader,
+        private CacheManager $cacheManager,
+        private FilterManager $filterManager
+    ) {
     }
 
     public function onFlush(OnFlushEventArgs $event): void

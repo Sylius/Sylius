@@ -26,8 +26,11 @@ use Webmozart\Assert\Assert;
 
 final class MailerListener
 {
-    public function __construct(private SenderInterface $emailSender, private ChannelContextInterface $channelContext, private LocaleContextInterface $localeContext)
-    {
+    public function __construct(
+        private SenderInterface $emailSender,
+        private ChannelContextInterface $channelContext,
+        private LocaleContextInterface $localeContext
+    ) {
     }
 
     public function sendResetPasswordTokenEmail(GenericEvent $event): void

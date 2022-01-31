@@ -22,8 +22,11 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 final class ReviewerReviewsRemover implements ReviewerReviewsRemoverInterface
 {
-    public function __construct(private EntityRepository $reviewRepository, private ObjectManager $reviewManager, private ReviewableRatingUpdaterInterface $averageRatingUpdater)
-    {
+    public function __construct(
+        private EntityRepository $reviewRepository,
+        private ObjectManager $reviewManager,
+        private ReviewableRatingUpdaterInterface $averageRatingUpdater
+    ) {
     }
 
     public function removeReviewerReviews(ReviewerInterface $author): void

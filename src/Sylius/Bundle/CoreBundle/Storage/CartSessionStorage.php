@@ -21,8 +21,11 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class CartSessionStorage implements CartStorageInterface
 {
-    public function __construct(private SessionInterface $session, private string $sessionKeyName, private OrderRepositoryInterface $orderRepository)
-    {
+    public function __construct(
+        private SessionInterface $session,
+        private string $sessionKeyName,
+        private OrderRepositoryInterface $orderRepository
+    ) {
     }
 
     public function hasForChannel(ChannelInterface $channel): bool

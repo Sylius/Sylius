@@ -21,8 +21,11 @@ use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 final class ProductVariantUpdatedListener
 {
-    public function __construct(private ProductVariantRepositoryInterface $productVariantRepository, private ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor, private EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        private ProductVariantRepositoryInterface $productVariantRepository,
+        private ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor,
+        private EntityManagerInterface $entityManager
+    ) {
     }
 
     public function __invoke(ProductVariantUpdated $event): void

@@ -20,8 +20,10 @@ use Symfony\Component\Templating\Helper\Helper;
 
 class CheckoutStepsHelper extends Helper
 {
-    public function __construct(private OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker, private OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker)
-    {
+    public function __construct(
+        private OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
+        private OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
+    ) {
     }
 
     public function isShippingRequired(OrderInterface $order): bool

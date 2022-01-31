@@ -23,8 +23,13 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterface
 {
-    public function __construct(private RepositoryInterface $sequenceRepository, private FactoryInterface $sequenceFactory, private EntityManagerInterface $sequenceManager, private int $startNumber = 1, private int $numberLength = 9)
-    {
+    public function __construct(
+        private RepositoryInterface $sequenceRepository,
+        private FactoryInterface $sequenceFactory,
+        private EntityManagerInterface $sequenceManager,
+        private int $startNumber = 1,
+        private int $numberLength = 9
+    ) {
     }
 
     public function generate(OrderInterface $order): string
