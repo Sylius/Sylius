@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Component\Core\Event\ProductVariantCreated;
 use Sylius\Component\Core\Event\ProductVariantUpdated;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -26,6 +27,14 @@ final class ProductVariantEventListener
     public function __construct(MessageBusInterface $eventBus)
     {
         $this->eventBus = $eventBus;
+    }
+
+    public function dispatchProductVariantCreatedEvent(GenericEvent $event): void
+    {
+        $variant = $event->getSubject();
+        Assert::isInstanceOf($variant, ProductVariantInterface::class);
+
+        $this->eventBus->dispatch(new ProductVariantCreated($variant->getCode()));
     }
 
     public function dispatchProductVariantUpdatedEvent(GenericEvent $event): void
