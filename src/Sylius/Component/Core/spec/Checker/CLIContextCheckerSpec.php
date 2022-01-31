@@ -15,12 +15,14 @@ namespace spec\Sylius\Component\Core\Checker;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Checker\CLIContextCheckerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 final class CLIContextCheckerSpec extends ObjectBehavior
 {
-    function let(): void
+    function let(RequestStack $requestStack): void
     {
-        $this->beConstructedWith('dev', ['test', 'test_cached']);
+        $this->beConstructedWith($requestStack);
     }
 
     function it_implements_command_based_context_checker_interface(): void
@@ -28,21 +30,18 @@ final class CLIContextCheckerSpec extends ObjectBehavior
         $this->shouldImplement(CLIContextCheckerInterface::class);
     }
 
-    function it_returns_true_if_process_is_not_running_in_test_environment_and_from_cli(): void
+    function it_returns_true_if_process_is_running_without_current_request(RequestStack $requestStack): void
     {
+        $requestStack->getCurrentRequest()->willReturn(null);
+
         $this->isExecutedFromCLI()->shouldReturn(true);
     }
 
-    function it_returns_false_if_process_is_running_in_test_environment_and_from_cli(): void
-    {
-        $this->beConstructedWith('test', ['test', 'test_cached']);
-
-        $this->isExecutedFromCLI()->shouldReturn(false);
-    }
-
-    function it_returns_false_if_process_is_running_in_test_cached_environment_and_from_cli(): void
-    {
-        $this->beConstructedWith('test_cached', ['test', 'test_cached']);
+    function it_returns_false_if_process_is_running_with_current_request_defined(
+        RequestStack $requestStack,
+        Request $request
+    ): void {
+        $requestStack->getCurrentRequest()->willReturn($request);
 
         $this->isExecutedFromCLI()->shouldReturn(false);
     }

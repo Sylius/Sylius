@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\PromotionBundle\Criteria;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
-use Sylius\Component\Promotion\Provider\DateTimeProviderInterface;
+use Sylius\Calendar\Provider\DateTimeProviderInterface;
 
 final class DateRangeSpec extends ObjectBehavior
 {

@@ -39,6 +39,7 @@
 
     <parameters>
         <parameter key="sylius.order_item_quantity_modifier.limit">9999</parameter>
+        <parameter key="sylius.messenger.product_variant.size_of_batches">100</parameter>
     </parameters>
 
     <services>
@@ -259,8 +260,8 @@
             id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface"
             class="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicator"
         >
-            <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\ActionBasedDiscountApplicatorInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibilityInterface" />
         </service>
 
         <service
@@ -279,29 +280,6 @@
             <tag name="sylius.catalog_promotion.applicator_criteria" />
         </service>
 
-        <service
-            id="Sylius\Component\Core\Provider\CatalogPromotionVariantsProviderInterface"
-            class="Sylius\Bundle\CoreBundle\Provider\CatalogPromotionVariantsProvider"
-        >
-            <argument type="tagged_iterator" tag="sylius.catalog_promotion.variants_provider" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Provider\ForProductsScopeVariantsProvider">
-            <argument type="service" id="sylius.repository.product" />
-            <tag name="sylius.catalog_promotion.variants_provider" type="for_products" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Provider\ForVariantsScopeVariantsProvider">
-            <argument type="service" id="sylius.repository.product_variant" />
-            <tag name="sylius.catalog_promotion.variants_provider" type="for_variants" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Provider\ForTaxonsScopeVariantsProvider">
-            <argument type="service" id="sylius.repository.taxon" />
-            <argument type="service" id="sylius.repository.product_variant" />
-            <tag name="sylius.catalog_promotion.variants_provider" type="for_taxons" />
-        </service>
-
         <service id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" class="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculator"/>
 
         <service id="security.authentication_manager" alias="security.authentication.manager" />
@@ -312,7 +290,42 @@
         >
             <argument type="service" id="sylius.event_bus" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" />
-            <argument type="service" id="Sylius\Component\Promotion\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+        </service>
+
+        <service
+            id="Sylius\Bundle\CoreBundle\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface"
+            class="Sylius\Bundle\CoreBundle\CommandDispatcher\BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher"
+        >
+            <argument type="service" id="sylius.command_bus" />
+            <argument>%sylius.messenger.product_variant.size_of_batches%</argument>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\CommandHandler\ApplyCatalogPromotionsOnVariantsHandler">
+            <argument type="service" id="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface"/>
+            <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+        </service>
+
+        <service
+            id="Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibilityInterface"
+            class="Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibility"
+        >
+            <argument type="tagged_locator" tag="sylius.catalog_promotion.variant_checker" index-by="type" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Checker\InForProductScopeVariantChecker">
+            <tag name="sylius.catalog_promotion.variant_checker" type="for_products" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Checker\InForTaxonsScopeVariantChecker">
+            <tag name="sylius.catalog_promotion.variant_checker" type="for_taxons" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Checker\InForVariantsScopeVariantChecker">
+            <tag name="sylius.catalog_promotion.variant_checker" type="for_variants" />
         </service>
     </services>
 </container>

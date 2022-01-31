@@ -8,7 +8,7 @@
     "startDate": "2022-01-01 00:00:00",
     "endDate": "2022-01-02 00:00:00",
     "priority": 100,
-    "state": "inactive",
+    "state": @string@,
     "channels": [
         "\/api\/v2\/admin\/channels\/WEB"
     ],

@@ -14,29 +14,20 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Announcer;
 
 use Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface;
+use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
-use Sylius\Component\Promotion\Provider\DateTimeProviderInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionAnnouncer implements CatalogPromotionAnnouncerInterface
 {
-    private MessageBusInterface $eventBus;
-
-    private DelayStampCalculatorInterface $delayStampCalculator;
-
-    private DateTimeProviderInterface $dateTimeProvider;
-
     public function __construct(
-        MessageBusInterface $eventBus,
-        DelayStampCalculatorInterface $delayStampCalculator,
-        DateTimeProviderInterface $dateTimeProvider
+        private MessageBusInterface $eventBus,
+        private DelayStampCalculatorInterface $delayStampCalculator,
+        private DateTimeProviderInterface $dateTimeProvider
     ) {
-        $this->eventBus = $eventBus;
-        $this->delayStampCalculator = $delayStampCalculator;
-        $this->dateTimeProvider = $dateTimeProvider;
     }
 
     public function dispatchCatalogPromotionCreatedEvent(CatalogPromotionInterface $catalogPromotion): void

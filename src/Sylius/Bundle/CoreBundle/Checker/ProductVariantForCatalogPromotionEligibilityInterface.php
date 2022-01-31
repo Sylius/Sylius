@@ -11,11 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Processor;
+namespace Sylius\Bundle\CoreBundle\Checker;
 
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 
-interface CatalogPromotionProcessorInterface
+interface ProductVariantForCatalogPromotionEligibilityInterface
 {
-    public function process(CatalogPromotionInterface $catalogPromotion): void;
+    public function isApplicableOnVariant(CatalogPromotionInterface $promotion, ProductVariantInterface $variant): bool;
 }

@@ -20,9 +20,9 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Calculator\FixedDiscountPriceCalculator;
 use Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator;
-use Sylius\Bundle\CoreBundle\Provider\ForProductsScopeVariantsProvider;
-use Sylius\Bundle\CoreBundle\Provider\ForTaxonsScopeVariantsProvider;
-use Sylius\Bundle\CoreBundle\Provider\ForVariantsScopeVariantsProvider;
+use Sylius\Bundle\CoreBundle\Checker\InForProductScopeVariantChecker;
+use Sylius\Bundle\CoreBundle\Checker\InForTaxonsScopeVariantChecker;
+use Sylius\Bundle\CoreBundle\Checker\InForVariantsScopeVariantChecker;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -264,7 +264,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $scopes = $this->client->getContent()['scopes'];
 
         $additionalScope = [[
-            'type' => ForVariantsScopeVariantsProvider::TYPE,
+            'type' => InForVariantsScopeVariantChecker::TYPE,
             'configuration' => [
                 'variants' => [$productVariant->getCode()],
             ],
@@ -360,7 +360,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddScopeThatAppliesOnVariants(ProductVariantInterface $firstVariant, ProductVariantInterface $secondVariant): void
     {
         $scopes = [[
-            'type' => ForVariantsScopeVariantsProvider::TYPE,
+            'type' => InForVariantsScopeVariantChecker::TYPE,
             'configuration' => [
                 'variants' => [
                     $firstVariant->getCode(),
@@ -378,7 +378,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddCatalogPromotionScopeForTaxonWithoutTaxons(): void
     {
         $scopes = [[
-            'type' => ForTaxonsScopeVariantsProvider::TYPE,
+            'type' => InForTaxonsScopeVariantChecker::TYPE,
             'configuration' => ['taxons' => []],
         ]];
 
@@ -391,7 +391,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddCatalogPromotionScopeForTaxonWithNonexistentTaxons(): void
     {
         $scopes = [[
-            'type' => ForTaxonsScopeVariantsProvider::TYPE,
+            'type' => InForTaxonsScopeVariantChecker::TYPE,
             'configuration' => [
                 'taxons' => [
                     'BAD_TAXON',
@@ -409,7 +409,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddCatalogPromotionScopeForProductWithoutProducts(): void
     {
         $scopes = [[
-            'type' => ForProductsScopeVariantsProvider::TYPE,
+            'type' => InForProductScopeVariantChecker::TYPE,
             'configuration' => ['products' => []],
         ]];
 
@@ -422,7 +422,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddCatalogPromotionScopeForProductsWithNonexistentProducts(): void
     {
         $scopes = [[
-            'type' => ForProductsScopeVariantsProvider::TYPE,
+            'type' => InForProductScopeVariantChecker::TYPE,
             'configuration' => [
                 'products' => [
                     'BAD_PRODUCT',
@@ -440,7 +440,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddScopeThatAppliesOnTaxon(TaxonInterface $taxon): void
     {
         $scopes = [[
-            'type' => ForTaxonsScopeVariantsProvider::TYPE,
+            'type' => InForTaxonsScopeVariantChecker::TYPE,
             'configuration' => [
                 'taxons' => [$taxon->getCode()]
             ],
@@ -455,7 +455,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddScopeThatAppliesOnProduct(ProductInterface $product): void
     {
         $scopes = [[
-            'type' => ForProductsScopeVariantsProvider::TYPE,
+            'type' => InForProductScopeVariantChecker::TYPE,
             'configuration' => [
                 'products' => [$product->getCode()]
             ],
@@ -576,7 +576,7 @@ final class ManagingCatalogPromotionsContext implements Context
     ): void {
         $this->client->buildUpdateRequest($catalogPromotion->getCode());
         $scopes = [[
-            'type' => ForVariantsScopeVariantsProvider::TYPE,
+            'type' => InForVariantsScopeVariantChecker::TYPE,
             'configuration' => [
                 'variants' => [
                     $productVariant->getCode(),
@@ -599,7 +599,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
         $content = $this->client->getContent();
         unset($content['scopes'][0]['configuration']['variants']);
-        $content['scopes'][0]['type'] = ForTaxonsScopeVariantsProvider::TYPE;
+        $content['scopes'][0]['type'] = InForTaxonsScopeVariantChecker::TYPE;
         $content['scopes'][0]['configuration']['taxons'] = [$taxon->getCode()];
 
         $this->client->setRequestData($content);;
@@ -618,7 +618,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
         $content = $this->client->getContent();
         unset($content['scopes'][0]['configuration']['variants']);
-        $content['scopes'][0]['type'] = ForProductsScopeVariantsProvider::TYPE;
+        $content['scopes'][0]['type'] = InForProductScopeVariantChecker::TYPE;
         $content['scopes'][0]['configuration']['products'] = [$product->getCode()];
 
         $this->client->setRequestData($content);;
@@ -717,7 +717,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddForVariantsScopeWithTheWrongConfiguration(): void
     {
         $scopes = [[
-            'type' => ForVariantsScopeVariantsProvider::TYPE,
+            'type' => InForVariantsScopeVariantChecker::TYPE,
             'configuration' => [
                 'variants' => ['wrong_code'],
             ],
@@ -732,7 +732,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddForVariantsScopeWithoutVariantsConfigured(): void
     {
         $scopes = [[
-            'type' => ForVariantsScopeVariantsProvider::TYPE,
+            'type' => InForVariantsScopeVariantChecker::TYPE,
             'configuration' => [
                 'variants' => [],
             ],

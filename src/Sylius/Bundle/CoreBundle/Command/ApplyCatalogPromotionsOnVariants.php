@@ -11,12 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Promotion\Provider;
+namespace Sylius\Bundle\CoreBundle\Command;
 
-final class Calendar implements DateTimeProviderInterface
+final class ApplyCatalogPromotionsOnVariants
 {
-    public function now(): \DateTimeInterface
+    public function __construct(public array $variantsCodes)
     {
-        return new \DateTimeImmutable();
     }
 }

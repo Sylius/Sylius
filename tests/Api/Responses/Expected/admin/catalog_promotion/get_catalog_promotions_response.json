@@ -11,7 +11,7 @@
             "code": "mugs_discount",
             "startDate": null,
             "endDate": null,
-            "state": "inactive",
+            "state": @string@,
             "priority": 0,
             "channels": [
                 "\/api\/v2\/admin\/channels\/WEB"

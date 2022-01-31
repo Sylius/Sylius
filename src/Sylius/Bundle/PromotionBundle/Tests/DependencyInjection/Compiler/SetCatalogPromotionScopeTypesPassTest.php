@@ -24,15 +24,15 @@ final class SetCatalogPromotionScopeTypesPassTest extends AbstractCompilerPassTe
     public function it_sets_scope_types_parameter(): void
     {
         $this->setDefinition(
-            'variants_provider',
+            'variant_checker',
             (new Definition())
-                ->addTag('sylius.catalog_promotion.variants_provider', ['type' => 'custom'])
-                ->addTag('sylius.catalog_promotion.variants_provider', ['type' => 'another_custom'])
+                ->addTag('sylius.catalog_promotion.variant_checker', ['type' => 'custom'])
+                ->addTag('sylius.catalog_promotion.variant_checker', ['type' => 'another_custom'])
         );
         $this->setDefinition(
-            'second_variants_provider',
+            'second_variant_checker',
             (new Definition())
-                ->addTag('sylius.catalog_promotion.variants_provider', ['type' => 'second_custom'])
+                ->addTag('sylius.catalog_promotion.variant_checker', ['type' => 'second_custom'])
         );
 
         $this->compile();
@@ -46,12 +46,12 @@ final class SetCatalogPromotionScopeTypesPassTest extends AbstractCompilerPassTe
     public function it_throws_an_exception_if_there_is_no_type_attribute_defined(): void
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Tagged catalog promotion variants provider `variants_provider` needs to have `type` attribute.');
+        $this->expectExceptionMessage('Tagged catalog promotion variant checker `variant_checker` needs to have `type` attribute.');
 
         $this->setDefinition(
-            'variants_provider',
+            'variant_checker',
             (new Definition())
-                ->addTag('sylius.catalog_promotion.variants_provider', [])
+                ->addTag('sylius.catalog_promotion.variant_checker', [])
         );
 
         $this->compile();

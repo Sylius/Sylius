@@ -8,7 +8,7 @@
     "startDate": null,
     "endDate": null,
     "priority": 0,
-    "state": "active",
+    "state": @string@,
     "channels": [
         "\/api\/v2\/admin\/channels\/MOBILE"
     ],
