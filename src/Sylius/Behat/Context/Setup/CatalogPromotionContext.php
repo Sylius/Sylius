@@ -736,6 +736,19 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
+     * @Given the start date of catalog promotion :catalogPromotion was changed to :startDate
+     */
+    public function theStartDateOfCatalogPromotionWasChangedTo(
+        CatalogPromotionInterface $catalogPromotion,
+        string $startDate
+    ): void {
+        $catalogPromotion->setStartDate(new \DateTime($startDate));
+
+        $this->entityManager->flush();
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
+    /**
      * @Given the end date of catalog promotion :catalogPromotion was changed to :endDate
      */
     public function theEndDateOfCatalogPromotionWasChangedTo(

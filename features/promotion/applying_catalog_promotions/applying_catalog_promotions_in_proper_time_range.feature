@@ -41,3 +41,11 @@ Feature: Applying catalog promotions in proper time range
         And the end date of catalog promotion "Winter sale" was changed to "2021-12-23"
         When I view product "T-Shirt"
         Then I should see the product price "$20.00"
+
+    @api @ui
+    Scenario: Remove catalog promotion if its start date has been postponed
+        Given it is "2021-12-25" now
+        And the catalog promotion "Winter sale" operates between "2021-12-20" and "2021-12-30"
+        And the start date of catalog promotion "Winter sale" was changed to "2021-12-27"
+        When I view product "T-Shirt"
+        Then I should see the product price "$20.00"
