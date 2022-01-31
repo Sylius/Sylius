@@ -97,6 +97,7 @@ jobs:
                 name: Install dependencies
                 run: composer install --ansi --no-interaction
                 env:
+                    COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{secrets.COMPOSER_AUTH}}"} }'
                     COMPOSER_ROOT_VERSION: dev-master
                 working-directory: "src/Sylius/${{ matrix.package }}"
                 id: end-of-setup
