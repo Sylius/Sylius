@@ -37,7 +37,7 @@
     },
     "require-dev": {
         "doctrine/orm": "^2.7",
-        "phpspec/phpspec": "^7.1",
+        "phpspec/phpspec": "dev-php81",
         "phpunit/phpunit": "^8.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "sylius/currency-bundle": "^1.6",
@@ -65,6 +65,7 @@
         ]
     },
     "repositories": [
+        { "type": "vcs", "url": "https://github.com/jaylinski/phpspec.git" },
         {
             "type": "path",
             "url": "../../*/*"

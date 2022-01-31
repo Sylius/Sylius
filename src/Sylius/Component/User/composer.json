@@ -41,7 +41,7 @@
         "symfony/security-core": "^5.4"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.1"
+        "phpspec/phpspec": "dev-php81"
     },
     "suggest": {
         "ext-mbstring": "For better performance than using Symfony Polyfill Component"
@@ -62,6 +62,7 @@
         }
     },
     "repositories": [
+        { "type": "vcs", "url": "https://github.com/jaylinski/phpspec.git" },
         {
             "type": "path",
             "url": "../../*/*"

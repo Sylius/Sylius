@@ -31,7 +31,7 @@
         "sylius/resource": "^1.7"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.1"
+        "phpspec/phpspec": "dev-php81"
     },
     "extra": {
         "branch-alias": {
@@ -49,6 +49,7 @@
         }
     },
     "repositories": [
+        { "type": "vcs", "url": "https://github.com/jaylinski/phpspec.git" },
         {
             "type": "path",
             "url": "../../*/*"

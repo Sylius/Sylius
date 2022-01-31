@@ -39,7 +39,7 @@
         "sylius/resource-bundle": "^1.7"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.1",
+        "phpspec/phpspec": "dev-php81",
         "symfony/dependency-injection": "^5.4"
     },
     "extra": {
@@ -58,6 +58,7 @@
         }
     },
     "repositories": [
+        { "type": "vcs", "url": "https://github.com/jaylinski/phpspec.git" },
         {
             "type": "path",
             "url": "../../*/*"

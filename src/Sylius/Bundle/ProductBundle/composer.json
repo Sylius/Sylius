@@ -37,7 +37,7 @@
     "require-dev": {
         "doctrine/orm": "^2.7",
         "mockery/mockery": "^1.4",
-        "phpspec/phpspec": "^7.1",
+        "phpspec/phpspec": "dev-php81",
         "phpunit/phpunit": "^8.5",
         "symfony/browser-kit": "^5.4",
         "symfony/dependency-injection": "^5.4",
@@ -63,6 +63,7 @@
         ]
     },
     "repositories": [
+        { "type": "vcs", "url": "https://github.com/jaylinski/phpspec.git" },
         {
             "type": "path",
             "url": "../../*/*"
