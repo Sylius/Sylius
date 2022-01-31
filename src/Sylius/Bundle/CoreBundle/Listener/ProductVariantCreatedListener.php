@@ -21,20 +21,11 @@ use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 final class ProductVariantCreatedListener
 {
-    private ProductVariantRepositoryInterface $productVariantRepository;
-
-    private AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor;
-
-    private EntityManagerInterface $entityManager;
-
     public function __construct(
-        ProductVariantRepositoryInterface $productVariantRepository,
-        AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
-        EntityManagerInterface $entityManager
+        private ProductVariantRepositoryInterface $productVariantRepository,
+        private AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
+        private EntityManagerInterface $entityManager
     ) {
-        $this->productVariantRepository = $productVariantRepository;
-        $this->allCatalogPromotionsProcessor = $allCatalogPromotionsProcessor;
-        $this->entityManager = $entityManager;
     }
 
     public function __invoke(ProductVariantCreated $event): void
