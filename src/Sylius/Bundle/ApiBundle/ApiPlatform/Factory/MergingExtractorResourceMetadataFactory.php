@@ -25,15 +25,6 @@ use Sylius\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver;
  */
 final class MergingExtractorResourceMetadataFactory implements ResourceMetadataFactoryInterface
 {
-    /** @var ExtractorInterface */
-    private $extractor;
-
-    /** @var ResourceMetadataFactoryInterface */
-    private $decorated;
-
-    /** @var ResourceMetadataPropertyValueResolver */
-    private $resourceMetadataPropertyValueResolver;
-
     /** @var array */
     private $defaults;
 
@@ -41,19 +32,16 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
     private const RESOURCES = ['shortName', 'description', 'iri', 'itemOperations', 'collectionOperations', 'subresourceOperations', 'graphql', 'attributes'];
 
     public function __construct(
-        ExtractorInterface $extractor,
-        ResourceMetadataFactoryInterface $decorated,
-        ResourceMetadataPropertyValueResolver $resourceMetadataPropertyValueResolver,
+        private ExtractorInterface $extractor,
+        private ResourceMetadataFactoryInterface $decorated,
+        private ResourceMetadataPropertyValueResolver $resourceMetadataPropertyValueResolver,
         array $defaults = []
     ) {
-        $this->extractor = $extractor;
-        $this->decorated = $decorated;
-        $this->resourceMetadataPropertyValueResolver = $resourceMetadataPropertyValueResolver;
         $this->defaults = $defaults + ['attributes' => []];
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function create(string $resourceClass): ResourceMetadata
     {
@@ -61,7 +49,7 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
         if ($this->decorated) {
             try {
                 $parentResourceMetadata = $this->decorated->create($resourceClass);
-            } catch (ResourceClassNotFoundException $resourceNotFoundException) {
+            } catch (ResourceClassNotFoundException) {
                 // Ignore not found exception from decorated factories
             }
         }

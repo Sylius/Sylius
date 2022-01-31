@@ -22,20 +22,11 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 /** @experimental */
 final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInterface
 {
-    private DenormalizerInterface $objectNormalizer;
-
-    private IriToIdentifierConverterInterface $iriToIdentifierConverter;
-
-    private DataTransformerInterface $commandAwareInputDataTransformer;
-
     public function __construct(
-        DenormalizerInterface $objectNormalizer,
-        IriToIdentifierConverterInterface $iriToIdentifierConverter,
-        DataTransformerInterface $commandAwareInputDataTransformer
+        private DenormalizerInterface $objectNormalizer,
+        private IriToIdentifierConverterInterface $iriToIdentifierConverter,
+        private DataTransformerInterface $commandAwareInputDataTransformer
     ) {
-        $this->objectNormalizer = $objectNormalizer;
-        $this->iriToIdentifierConverter = $iriToIdentifierConverter;
-        $this->commandAwareInputDataTransformer = $commandAwareInputDataTransformer;
     }
 
     public function supportsDenormalization($data, $type, $format = null, array $context = [])

@@ -28,28 +28,13 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ChoosePaymentMethodHandler implements MessageHandlerInterface
 {
-    private OrderRepositoryInterface $orderRepository;
-
-    private PaymentMethodRepositoryInterface $paymentMethodRepository;
-
-    private PaymentRepositoryInterface $paymentRepository;
-
-    private FactoryInterface $stateMachineFactory;
-
-    private PaymentMethodChangerInterface $paymentMethodChanger;
-
     public function __construct(
-        OrderRepositoryInterface $orderRepository,
-        PaymentMethodRepositoryInterface $paymentMethodRepository,
-        PaymentRepositoryInterface $paymentRepository,
-        FactoryInterface $stateMachineFactory,
-        PaymentMethodChangerInterface $paymentMethodChanger
+        private OrderRepositoryInterface $orderRepository,
+        private PaymentMethodRepositoryInterface $paymentMethodRepository,
+        private PaymentRepositoryInterface $paymentRepository,
+        private FactoryInterface $stateMachineFactory,
+        private PaymentMethodChangerInterface $paymentMethodChanger
     ) {
-        $this->orderRepository = $orderRepository;
-        $this->paymentMethodRepository = $paymentMethodRepository;
-        $this->paymentRepository = $paymentRepository;
-        $this->stateMachineFactory = $stateMachineFactory;
-        $this->paymentMethodChanger = $paymentMethodChanger;
     }
 
     public function __invoke(ChoosePaymentMethod $choosePaymentMethod): OrderInterface

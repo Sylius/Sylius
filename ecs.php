@@ -4,6 +4,7 @@ use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
 use PhpCsFixer\Fixer\Comment\HeaderCommentFixer;
 use SlevomatCodingStandard\Sniffs\Commenting\InlineDocCommentDeclarationSniff;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symplify\CodingStandard\Fixer\Spacing\StandaloneLinePromotedPropertyFixer;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -19,6 +20,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 //For the full copyright and license information, please view the LICENSE
 //file that was distributed with this source code.',
 //    ]);
+
+    $containerConfigurator->services()->set(StandaloneLinePromotedPropertyFixer::class);
 
     $containerConfigurator->parameters()->set(Option::SKIP, [
         InlineDocCommentDeclarationSniff::class . '.MissingVariable',

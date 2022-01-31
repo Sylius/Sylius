@@ -67,7 +67,7 @@ final class AppliedCouponEligibilityCheckerSpec extends ObjectBehavior
 
         $promotion->getChannels()->willReturn(new ArrayCollection([
             $secondChannel->getWrappedObject(),
-            $thirdChannel->getWrappedObject()
+            $thirdChannel->getWrappedObject(),
         ]));
         $cart->getChannel()->willReturn($firstChannel);
 
@@ -90,7 +90,7 @@ final class AppliedCouponEligibilityCheckerSpec extends ObjectBehavior
 
         $promotion->getChannels()->willReturn(new ArrayCollection([
             $firstChannel->getWrappedObject(),
-            $secondChannel->getWrappedObject()
+            $secondChannel->getWrappedObject(),
         ]));
         $cart->getChannel()->willReturn($firstChannel);
 
@@ -113,7 +113,7 @@ final class AppliedCouponEligibilityCheckerSpec extends ObjectBehavior
 
         $promotion->getChannels()->willReturn(new ArrayCollection([
             $firstChannel->getWrappedObject(),
-            $secondChannel->getWrappedObject()
+            $secondChannel->getWrappedObject(),
         ]));
         $cart->getChannel()->willReturn($firstChannel);
 
@@ -136,7 +136,7 @@ final class AppliedCouponEligibilityCheckerSpec extends ObjectBehavior
 
         $promotion->getChannels()->willReturn(new ArrayCollection([
             $firstChannel->getWrappedObject(),
-            $secondChannel->getWrappedObject()
+            $secondChannel->getWrappedObject(),
         ]));
         $cart->getChannel()->willReturn($firstChannel);
 

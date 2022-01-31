@@ -20,11 +20,9 @@ use Symfony\Component\HttpFoundation\Request;
 /** @experimental */
 final class HttpRequestMethodTypeContextBuilder implements SerializerContextBuilderInterface
 {
-    private SerializerContextBuilderInterface $decoratedLocaleBuilder;
-
-    public function __construct(SerializerContextBuilderInterface $decoratedLocaleBuilder)
-    {
-        $this->decoratedLocaleBuilder = $decoratedLocaleBuilder;
+    public function __construct(
+        private SerializerContextBuilderInterface $decoratedLocaleBuilder
+    ) {
     }
 
     public function createFromRequest(Request $request, bool $normalization, array $extractedAttributes = null): array

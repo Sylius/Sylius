@@ -31,23 +31,11 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
 
     private const ALREADY_CALLED = 'sylius_shipping_method_normalizer_already_called';
 
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
-
-    /** @var ShipmentRepositoryInterface */
-    private $shipmentRepository;
-
-    /** @var ServiceRegistryInterface */
-    private $shippingCalculators;
-
     public function __construct(
-        OrderRepositoryInterface $orderRepository,
-        ShipmentRepositoryInterface $shipmentRepository,
-        ServiceRegistryInterface $shippingCalculators
+        private OrderRepositoryInterface $orderRepository,
+        private ShipmentRepositoryInterface $shipmentRepository,
+        private ServiceRegistryInterface $shippingCalculators
     ) {
-        $this->orderRepository = $orderRepository;
-        $this->shipmentRepository = $shipmentRepository;
-        $this->shippingCalculators = $shippingCalculators;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -59,14 +47,14 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
 
         $subresourceIdentifiers = $context['subresource_identifiers'];
 
-        $shipmentId = isset($subresourceIdentifiers['shipments']) ? $subresourceIdentifiers['shipments'] : $subresourceIdentifiers['id'];
+        $shipmentId = $subresourceIdentifiers['shipments'] ?? $subresourceIdentifiers['id'];
 
         /** @var ShipmentInterface $shipment */
         $shipment = $this->shipmentRepository->find($shipmentId);
 
         Assert::notNull($shipment);
 
-        if(isset($subresourceIdentifiers['tokenValue'])) {
+        if (isset($subresourceIdentifiers['tokenValue'])) {
             /** @var OrderInterface|null $cart */
             $cart = $this->orderRepository->findCartByTokenValue($subresourceIdentifiers['tokenValue']);
             Assert::notNull($cart);

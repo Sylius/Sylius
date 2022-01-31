@@ -25,14 +25,10 @@ use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 /** @experimental */
 final class ShipmentItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
-    private ShipmentRepositoryInterface $shipmentRepository;
-
-    private UserContextInterface $userContext;
-
-    public function __construct(ShipmentRepositoryInterface $shipmentRepository, UserContextInterface $userContext)
-    {
-        $this->shipmentRepository = $shipmentRepository;
-        $this->userContext = $userContext;
+    public function __construct(
+        private ShipmentRepositoryInterface $shipmentRepository,
+        private UserContextInterface $userContext
+    ) {
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool

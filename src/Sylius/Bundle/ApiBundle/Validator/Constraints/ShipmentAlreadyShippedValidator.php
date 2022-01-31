@@ -23,11 +23,9 @@ use Webmozart\Assert\Assert;
 
 final class ShipmentAlreadyShippedValidator extends ConstraintValidator
 {
-    private ShipmentRepositoryInterface $shipmentRepository;
-
-    public function __construct(ShipmentRepositoryInterface $shipmentRepository)
-    {
-        $this->shipmentRepository = $shipmentRepository;
+    public function __construct(
+        private ShipmentRepositoryInterface $shipmentRepository
+    ) {
     }
 
     public function validate($value, Constraint $constraint): void

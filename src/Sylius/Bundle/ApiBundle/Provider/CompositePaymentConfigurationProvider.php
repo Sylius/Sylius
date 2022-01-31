@@ -13,19 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Provider;
 
-use Sylius\Bundle\ApiBundle\Payment\PaymentConfigurationProviderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
 /** @experimental */
 final class CompositePaymentConfigurationProvider implements CompositePaymentConfigurationProviderInterface
 {
-    /** @var iterable<PaymentConfigurationProviderInterface> */
-    private iterable $apiPaymentMethodHandlers;
-
-    public function __construct(iterable $apiPaymentMethodHandlers)
-    {
-        $this->apiPaymentMethodHandlers = $apiPaymentMethodHandlers;
+    public function __construct(
+        private iterable $apiPaymentMethodHandlers
+    ) {
     }
 
     public function provide(PaymentInterface $payment): array

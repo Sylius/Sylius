@@ -78,7 +78,7 @@ final class ProductPriceOrderFilter extends AbstractContextAwareFilter
                         strtolower(OrderFilterInterface::DIRECTION_DESC),
                     ],
                 ],
-            ]
+            ],
         ];
     }
 }

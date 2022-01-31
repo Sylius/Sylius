@@ -24,14 +24,10 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class SendShipmentConfirmationEmailHandler implements MessageHandlerInterface
 {
-    private SenderInterface $emailSender;
-
-    private ShipmentRepositoryInterface $shipmentRepository;
-
-    public function __construct(SenderInterface $emailSender, ShipmentRepositoryInterface $shipmentRepository)
-    {
-        $this->emailSender = $emailSender;
-        $this->shipmentRepository = $shipmentRepository;
+    public function __construct(
+        private SenderInterface $emailSender,
+        private ShipmentRepositoryInterface $shipmentRepository
+    ) {
     }
 
     public function __invoke(SendShipmentConfirmationEmail $sendShipmentConfirmationEmail): void

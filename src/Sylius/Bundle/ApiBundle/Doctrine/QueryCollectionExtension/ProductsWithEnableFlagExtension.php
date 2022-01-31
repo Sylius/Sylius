@@ -22,11 +22,9 @@ use Sylius\Component\Core\Model\ProductInterface;
 /** @experimental */
 final class ProductsWithEnableFlagExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    private UserContextInterface $userContext;
-
-    public function __construct(UserContextInterface $userContext)
-    {
-        $this->userContext = $userContext;
+    public function __construct(
+        private UserContextInterface $userContext
+    ) {
     }
 
     public function applyToCollection(

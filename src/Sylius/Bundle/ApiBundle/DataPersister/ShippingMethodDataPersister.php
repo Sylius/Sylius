@@ -21,11 +21,9 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 /** @experimental */
 final class ShippingMethodDataPersister implements ContextAwareDataPersisterInterface
 {
-    private ContextAwareDataPersisterInterface $decoratedDataPersister;
-
-    public function __construct(ContextAwareDataPersisterInterface $decoratedDataPersister)
-    {
-        $this->decoratedDataPersister = $decoratedDataPersister;
+    public function __construct(
+        private ContextAwareDataPersisterInterface $decoratedDataPersister
+    ) {
     }
 
     public function supports($data, array $context = []): bool
@@ -42,7 +40,7 @@ final class ShippingMethodDataPersister implements ContextAwareDataPersisterInte
     {
         try {
             return $this->decoratedDataPersister->remove($data, $context);
-        } catch (ForeignKeyConstraintViolationException $constraintViolationException) {
+        } catch (ForeignKeyConstraintViolationException) {
             throw new ShippingMethodCannotBeRemoved();
         }
     }

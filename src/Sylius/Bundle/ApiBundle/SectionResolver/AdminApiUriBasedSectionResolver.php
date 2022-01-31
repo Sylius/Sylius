@@ -19,16 +19,14 @@ use Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionResolverInterface;
 
 final class AdminApiUriBasedSectionResolver implements UriBasedSectionResolverInterface
 {
-    private string $adminApiUriBeginning;
-
-    public function __construct(string $adminApiUriBeginning)
-    {
-        $this->adminApiUriBeginning = $adminApiUriBeginning;
+    public function __construct(
+        private string $adminApiUriBeginning
+    ) {
     }
 
     public function getSection(string $uri): SectionInterface
     {
-        if (0 === strpos($uri, $this->adminApiUriBeginning)) {
+        if (str_starts_with($uri, $this->adminApiUriBeginning)) {
             return new AdminApiSection();
         }
 

@@ -31,11 +31,10 @@ final class IriToIdentifierConverter implements IriToIdentifierConverterInterfac
 {
     use OperationDataProviderTrait;
 
-    private RouterInterface $router;
-
-    public function __construct(RouterInterface $router, IdentifierConverterInterface $identifierConverter)
-    {
-        $this->router = $router;
+    public function __construct(
+        private RouterInterface $router,
+        IdentifierConverterInterface $identifierConverter
+    ) {
         $this->identifierConverter = $identifierConverter;
     }
 
@@ -82,7 +81,7 @@ final class IriToIdentifierConverter implements IriToIdentifierConverterInterfac
 
         try {
             $this->router->match($fieldValue);
-        } catch (RoutingExceptionInterface $e) {
+        } catch (RoutingExceptionInterface) {
             return false;
         }
 

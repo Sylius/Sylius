@@ -34,92 +34,50 @@ use Twig\Environment as TwigEnvironment;
  */
 final class SwaggerUiAction
 {
-    private ResourceNameCollectionFactoryInterface $resourceNameCollectionFactory;
-
-    private ResourceMetadataFactoryInterface $resourceMetadataFactory;
-
-    private NormalizerInterface $normalizer;
-
-    private TwigEnvironment $twig;
-
-    private UrlGeneratorInterface $urlGenerator;
-
-    private string $title;
-
-    private string $description;
-
-    private string $version;
-
-    private bool $showWebby;
-
     private ?array $formats;
 
-    private $oauthEnabled;
-
-    private $oauthClientId;
-
-    private $oauthClientSecret;
-
-    private $oauthType;
-
-    private $oauthFlow;
-
-    private $oauthTokenUrl;
-
-    private $oauthAuthorizationUrl;
-
-    private $oauthScopes;
-
     private $formatsProvider;
-
-    private bool $swaggerUiEnabled;
-
-    private bool $reDocEnabled;
-
-    private bool $graphqlEnabled;
-
-    private bool $graphiQlEnabled;
-
-    private bool $graphQlPlaygroundEnabled;
-
-    private array $swaggerVersions;
 
     /**
      * @param int[] $swaggerVersions
      */
-    public function __construct(ResourceNameCollectionFactoryInterface $resourceNameCollectionFactory, ResourceMetadataFactoryInterface $resourceMetadataFactory, NormalizerInterface $normalizer, TwigEnvironment $twig, UrlGeneratorInterface $urlGenerator, string $title = '', string $description = '', string $version = '', $formats = [], $oauthEnabled = false, $oauthClientId = '', $oauthClientSecret = '', $oauthType = '', $oauthFlow = '', $oauthTokenUrl = '', $oauthAuthorizationUrl = '', $oauthScopes = [], bool $showWebby = true, bool $swaggerUiEnabled = false, bool $reDocEnabled = false, bool $graphqlEnabled = false, bool $graphiQlEnabled = false, bool $graphQlPlaygroundEnabled = false, array $swaggerVersions = [2, 3])
-    {
-        $this->resourceNameCollectionFactory = $resourceNameCollectionFactory;
-        $this->resourceMetadataFactory = $resourceMetadataFactory;
-        $this->normalizer = $normalizer;
-        $this->twig = $twig;
-        $this->urlGenerator = $urlGenerator;
-        $this->title = $title;
-        $this->showWebby = $showWebby;
-        $this->description = $description;
-        $this->version = $version;
-        $this->oauthEnabled = $oauthEnabled;
-        $this->oauthClientId = $oauthClientId;
-        $this->oauthClientSecret = $oauthClientSecret;
-        $this->oauthType = $oauthType;
-        $this->oauthFlow = $oauthFlow;
-        $this->oauthTokenUrl = $oauthTokenUrl;
-        $this->oauthAuthorizationUrl = $oauthAuthorizationUrl;
-        $this->oauthScopes = $oauthScopes;
-        $this->swaggerUiEnabled = $swaggerUiEnabled;
-        $this->reDocEnabled = $reDocEnabled;
-        $this->graphqlEnabled = $graphqlEnabled;
-        $this->graphiQlEnabled = $graphiQlEnabled;
-        $this->graphQlPlaygroundEnabled = $graphQlPlaygroundEnabled;
-        $this->swaggerVersions = $swaggerVersions;
-
+    public function __construct(
+        private ResourceNameCollectionFactoryInterface $resourceNameCollectionFactory,
+        private ResourceMetadataFactoryInterface $resourceMetadataFactory,
+        private NormalizerInterface $normalizer,
+        private TwigEnvironment $twig,
+        private UrlGeneratorInterface $urlGenerator,
+        private string $title = '',
+        private string $description = '',
+        private string $version = '',
+        $formats = [],
+        private $oauthEnabled = false,
+        private $oauthClientId = '',
+        private $oauthClientSecret = '',
+        private $oauthType = '',
+        private $oauthFlow = '',
+        private $oauthTokenUrl = '',
+        private $oauthAuthorizationUrl = '',
+        private $oauthScopes = [],
+        private bool $showWebby = true,
+        private bool $swaggerUiEnabled = false,
+        private bool $reDocEnabled = false,
+        private bool $graphqlEnabled = false,
+        private bool $graphiQlEnabled = false,
+        private bool $graphQlPlaygroundEnabled = false,
+        private array $swaggerVersions = [2, 3]
+    ) {
         if (\is_array($formats)) {
             $this->formats = $formats;
 
             return;
         }
 
-        @trigger_error(sprintf('Passing an array or an instance of "%s" as 5th parameter of the constructor of "%s" is deprecated since API Platform 2.5, pass an array instead', FormatsProviderInterface::class, __CLASS__), \E_USER_DEPRECATED);
+        @trigger_error(sprintf(
+            'Passing an array or an instance of "%s" as 5th parameter of the constructor of "%s" is deprecated since API Platform 2.5, pass an array instead',
+            FormatsProviderInterface::class,
+            __CLASS__
+        ), \E_USER_DEPRECATED);
         $this->formatsProvider = $formats;
     }
 

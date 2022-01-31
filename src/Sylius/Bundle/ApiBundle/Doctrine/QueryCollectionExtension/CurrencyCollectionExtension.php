@@ -25,11 +25,9 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class CurrencyCollectionExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    private UserContextInterface $userContext;
-
-    public function __construct(UserContextInterface $userContext)
-    {
-        $this->userContext = $userContext;
+    public function __construct(
+        private UserContextInterface $userContext
+    ) {
     }
 
     public function applyToCollection(
@@ -56,7 +54,7 @@ final class CurrencyCollectionExtension implements ContextAwareQueryCollectionEx
         if ($channel->getCurrencies()->count() > 0) {
             $rootAlias = $queryBuilder->getRootAliases()[0];
             $queryBuilder
-                ->andWhere(sprintf('%s.id in (:%s)',$rootAlias, $currenciesParameterName))
+                ->andWhere(sprintf('%s.id in (:%s)', $rootAlias, $currenciesParameterName))
                 ->setParameter($currenciesParameterName, $channel->getCurrencies());
         }
     }

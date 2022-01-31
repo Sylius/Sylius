@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Provider;
 
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-
 /** @experimental */
 class LiipProductImageFilterProvider implements ProductImageFilterProviderInterface
 {
@@ -37,7 +35,8 @@ class LiipProductImageFilterProvider implements ProductImageFilterProviderInterf
         return $this->removeAdminFilters($filters);
     }
 
-    private function removeAdminFilters(array $filters): array {
+    private function removeAdminFilters(array $filters): array
+    {
         /** @var string $filter */
         foreach ($filters as $key => $filter) {
             if (str_contains($key, 'admin')) {

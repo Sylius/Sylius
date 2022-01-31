@@ -20,11 +20,8 @@ use Sylius\Component\Payment\PaymentTransitions;
 /** @experimental */
 final class PaymentStateMachineTransitionApplicator implements PaymentStateMachineTransitionApplicatorInterface
 {
-    private StateMachineFactoryInterface $stateMachineFactory;
-
-    public function __construct(StateMachineFactoryInterface $stateMachineFactory)
+    public function __construct(private StateMachineFactoryInterface $stateMachineFactory)
     {
-        $this->stateMachineFactory = $stateMachineFactory;
     }
 
     public function complete(PaymentInterface $data): PaymentInterface

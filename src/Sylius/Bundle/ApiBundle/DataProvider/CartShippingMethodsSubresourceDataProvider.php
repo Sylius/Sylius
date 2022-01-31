@@ -26,20 +26,11 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class CartShippingMethodsSubresourceDataProvider implements RestrictedDataProviderInterface, SubresourceDataProviderInterface
 {
-    private OrderRepositoryInterface $orderRepository;
-
-    private ShipmentRepositoryInterface $shipmentRepository;
-
-    private ShippingMethodsResolverInterface $shippingMethodsResolver;
-
     public function __construct(
-        OrderRepositoryInterface $orderRepository,
-        ShipmentRepositoryInterface $shipmentRepository,
-        ShippingMethodsResolverInterface $shippingMethodsResolver
+        private OrderRepositoryInterface $orderRepository,
+        private ShipmentRepositoryInterface $shipmentRepository,
+        private ShippingMethodsResolverInterface $shippingMethodsResolver
     ) {
-        $this->orderRepository = $orderRepository;
-        $this->shipmentRepository = $shipmentRepository;
-        $this->shippingMethodsResolver = $shippingMethodsResolver;
     }
 
     public function getSubresource(string $resourceClass, array $identifiers, array $context, string $operationName = null)

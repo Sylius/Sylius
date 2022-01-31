@@ -19,11 +19,9 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 /** @experimental */
 final class LocaleCodeAwareInputCommandDataTransformer implements CommandDataTransformerInterface
 {
-    private LocaleContextInterface $localeContext;
-
-    public function __construct(LocaleContextInterface $localeContext)
-    {
-        $this->localeContext = $localeContext;
+    public function __construct(
+        private LocaleContextInterface $localeContext
+    ) {
     }
 
     public function transform($object, string $to, array $context = [])

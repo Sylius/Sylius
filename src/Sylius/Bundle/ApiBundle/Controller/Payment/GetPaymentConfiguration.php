@@ -23,16 +23,10 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class GetPaymentConfiguration
 {
-    private PaymentRepositoryInterface $paymentRepository;
-
-    private CompositePaymentConfigurationProviderInterface $compositePaymentConfigurationProvider;
-
     public function __construct(
-        PaymentRepositoryInterface $paymentRepository,
-        CompositePaymentConfigurationProviderInterface $compositePaymentConfigurationProvider
+        private PaymentRepositoryInterface $paymentRepository,
+        private CompositePaymentConfigurationProviderInterface $compositePaymentConfigurationProvider
     ) {
-        $this->paymentRepository = $paymentRepository;
-        $this->compositePaymentConfigurationProvider = $compositePaymentConfigurationProvider;
     }
 
     public function __invoke(Request $request): JsonResponse

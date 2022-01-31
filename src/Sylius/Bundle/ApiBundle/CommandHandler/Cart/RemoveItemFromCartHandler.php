@@ -24,16 +24,10 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class RemoveItemFromCartHandler implements MessageHandlerInterface
 {
-    private OrderItemRepositoryInterface $orderItemRepository;
-
-    private OrderModifierInterface $orderModifier;
-
     public function __construct(
-        OrderItemRepositoryInterface $orderItemRepository,
-        OrderModifierInterface $orderModifier
+        private OrderItemRepositoryInterface $orderItemRepository,
+        private OrderModifierInterface $orderModifier
     ) {
-        $this->orderItemRepository = $orderItemRepository;
-        $this->orderModifier = $orderModifier;
     }
 
     public function __invoke(RemoveItemFromCart $removeItemFromCart): OrderInterface

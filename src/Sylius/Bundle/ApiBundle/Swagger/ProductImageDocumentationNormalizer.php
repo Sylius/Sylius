@@ -21,16 +21,10 @@ class ProductImageDocumentationNormalizer implements NormalizerInterface
 {
     private const SHOP_ITEM_PATH = '/api/v2/shop/product-images/{id}';
 
-    /** @var NormalizerInterface */
-    private $decoratedNormalizer;
-
-    /** @var ProductImageFilterProviderInterface */
-    private $filterProvider;
-
-    public function __construct(NormalizerInterface $decoratedNormalizer, ProductImageFilterProviderInterface $filterProvider)
-    {
-        $this->decoratedNormalizer = $decoratedNormalizer;
-        $this->filterProvider = $filterProvider;
+    public function __construct(
+        private NormalizerInterface $decoratedNormalizer,
+        private ProductImageFilterProviderInterface $filterProvider
+    ) {
     }
 
     public function supportsNormalization($data, $format = null)
@@ -51,6 +45,7 @@ class ProductImageDocumentationNormalizer implements NormalizerInterface
             if ($param['in'] === 'query') {
                 if (is_string($param['schema']['enum']) || $param['schema']['enum'] === null) {
                     $docs['paths'][self::SHOP_ITEM_PATH]['get']['parameters'][$index]['schema']['enum'] = $enums;
+
                     break;
                 }
 

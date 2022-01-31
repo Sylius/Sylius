@@ -21,18 +21,10 @@ use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerIn
 
 final class AppliedCouponEligibilityChecker implements AppliedCouponEligibilityCheckerInterface
 {
-    /** @var PromotionEligibilityCheckerInterface */
-    private $promotionChecker;
-
-    /** @var PromotionCouponEligibilityCheckerInterface */
-    private $promotionCouponChecker;
-
     public function __construct(
-        PromotionEligibilityCheckerInterface $promotionChecker,
-        PromotionCouponEligibilityCheckerInterface $promotionCouponChecker
+        private PromotionEligibilityCheckerInterface $promotionChecker,
+        private PromotionCouponEligibilityCheckerInterface $promotionCouponChecker
     ) {
-        $this->promotionChecker = $promotionChecker;
-        $this->promotionCouponChecker = $promotionCouponChecker;
     }
 
     public function isEligible(?PromotionCouponInterface $promotionCoupon, OrderInterface $cart): bool

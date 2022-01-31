@@ -25,20 +25,11 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ChosenPaymentMethodEligibilityValidator extends ConstraintValidator
 {
-    private PaymentRepositoryInterface $paymentRepository;
-
-    private PaymentMethodRepositoryInterface $paymentMethodRepository;
-
-    private PaymentMethodsResolverInterface $paymentMethodsResolver;
-
     public function __construct(
-        PaymentRepositoryInterface $paymentRepository,
-        PaymentMethodRepositoryInterface $paymentMethodRepository,
-        PaymentMethodsResolverInterface $paymentMethodsResolver
+        private PaymentRepositoryInterface $paymentRepository,
+        private PaymentMethodRepositoryInterface $paymentMethodRepository,
+        private PaymentMethodsResolverInterface $paymentMethodsResolver
     ) {
-        $this->paymentRepository = $paymentRepository;
-        $this->paymentMethodRepository = $paymentMethodRepository;
-        $this->paymentMethodsResolver = $paymentMethodsResolver;
     }
 
     public function validate($value, Constraint $constraint): void

@@ -35,29 +35,13 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
 
     private const ALREADY_CALLED = 'sylius_product_variant_normalizer_already_called';
 
-    private ProductVariantPricesCalculatorInterface $priceCalculator;
-
-    private ChannelContextInterface $channelContext;
-
-    private AvailabilityCheckerInterface $availabilityChecker;
-
-    /** @var SectionProviderInterface */
-    private $uriBasedSectionContext;
-
-    private IriConverterInterface $iriConverter;
-
     public function __construct(
-        ProductVariantPricesCalculatorInterface $priceCalculator,
-        ChannelContextInterface $channelContext,
-        AvailabilityCheckerInterface $availabilityChecker,
-        SectionProviderInterface $uriBasedSectionContext,
-        IriConverterInterface $iriConverter
+        private ProductVariantPricesCalculatorInterface $priceCalculator,
+        private ChannelContextInterface $channelContext,
+        private AvailabilityCheckerInterface $availabilityChecker,
+        private SectionProviderInterface $uriBasedSectionContext,
+        private IriConverterInterface $iriConverter
     ) {
-        $this->priceCalculator = $priceCalculator;
-        $this->channelContext = $channelContext;
-        $this->availabilityChecker = $availabilityChecker;
-        $this->uriBasedSectionContext = $uriBasedSectionContext;
-        $this->iriConverter = $iriConverter;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -72,16 +56,15 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         try {
             $data['price'] = $this->priceCalculator->calculate($object, ['channel' => $channel]);
             $data['originalPrice'] = $this->priceCalculator->calculateOriginal($object, ['channel' => $channel]);
-        } catch (ChannelNotFoundException $exception) {
-            unset($data['price']);
-            unset($data['originalPrice']);
+        } catch (ChannelNotFoundException) {
+            unset($data['price'], $data['originalPrice']);
         }
 
         /** @var ArrayCollection $appliedPromotions */
         $appliedPromotions = $object->getAppliedPromotionsForChannel($channel);
         if (!$appliedPromotions->isEmpty()) {
-            $data['appliedPromotions'] = array_map(fn (CatalogPromotionInterface $catalogPromotion) =>
-                $this->iriConverter->getIriFromItem($catalogPromotion),
+            $data['appliedPromotions'] = array_map(
+                fn (CatalogPromotionInterface $catalogPromotion) => $this->iriConverter->getIriFromItem($catalogPromotion),
                 $appliedPromotions->toArray()
             );
         }

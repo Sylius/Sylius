@@ -18,12 +18,9 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 /** @experimental */
 final class ShippingMethodDocumentationNormalizer implements NormalizerInterface
 {
-    /** @var NormalizerInterface */
-    private $decoratedNormalizer;
-
-    public function __construct(NormalizerInterface $decoratedNormalizer)
-    {
-        $this->decoratedNormalizer = $decoratedNormalizer;
+    public function __construct(
+        private NormalizerInterface $decoratedNormalizer
+    ) {
     }
 
     public function supportsNormalization($data, $format = null): bool

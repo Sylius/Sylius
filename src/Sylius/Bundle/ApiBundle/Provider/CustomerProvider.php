@@ -21,20 +21,11 @@ use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 /** @experimental */
 final class CustomerProvider implements CustomerProviderInterface
 {
-    private CanonicalizerInterface $canonicalizer;
-
-    private FactoryInterface $customerFactory;
-
-    private CustomerRepositoryInterface $customerRepository;
-
     public function __construct(
-        CanonicalizerInterface $canonicalizer,
-        FactoryInterface $customerFactory,
-        CustomerRepositoryInterface $customerRepository
+        private CanonicalizerInterface $canonicalizer,
+        private FactoryInterface $customerFactory,
+        private CustomerRepositoryInterface $customerRepository
     ) {
-        $this->canonicalizer = $canonicalizer;
-        $this->customerFactory = $customerFactory;
-        $this->customerRepository = $customerRepository;
     }
 
     public function provide(string $email): CustomerInterface

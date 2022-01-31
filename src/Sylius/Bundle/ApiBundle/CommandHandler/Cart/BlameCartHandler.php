@@ -23,20 +23,11 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class BlameCartHandler implements MessageHandlerInterface
 {
-    private UserRepositoryInterface $shopUserRepository;
-
-    private OrderRepositoryInterface $orderRepository;
-
-    private OrderProcessorInterface $orderProcessor;
-
     public function __construct(
-        UserRepositoryInterface $shopUserRepository,
-        OrderRepositoryInterface $orderRepository,
-        OrderProcessorInterface $orderProcessor
+        private UserRepositoryInterface $shopUserRepository,
+        private OrderRepositoryInterface $orderRepository,
+        private OrderProcessorInterface $orderProcessor
     ) {
-        $this->shopUserRepository = $shopUserRepository;
-        $this->orderRepository = $orderRepository;
-        $this->orderProcessor = $orderProcessor;
     }
 
     public function __invoke(BlameCart $blameCart): void

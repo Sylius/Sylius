@@ -24,11 +24,9 @@ final class CommandNormalizer implements ContextAwareNormalizerInterface
 {
     private const ALREADY_CALLED = 'sylius_command_normalizer_already_called';
 
-    private NormalizerInterface $objectNormalizer;
-
-    public function __construct(NormalizerInterface $objectNormalizer)
-    {
-        $this->objectNormalizer = $objectNormalizer;
+    public function __construct(
+        private NormalizerInterface $objectNormalizer
+    ) {
     }
 
     public function supportsNormalization($data, $format = null, $context = []): bool

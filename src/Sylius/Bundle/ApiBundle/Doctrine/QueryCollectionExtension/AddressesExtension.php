@@ -26,11 +26,9 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 /** @experimental */
 final class AddressesExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    private UserContextInterface $userContext;
-
-    public function __construct(UserContextInterface $userContext)
-    {
-        $this->userContext = $userContext;
+    public function __construct(
+        private UserContextInterface $userContext
+    ) {
     }
 
     public function applyToCollection(

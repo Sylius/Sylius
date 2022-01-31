@@ -25,24 +25,12 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class UpdateCartHandler implements MessageHandlerInterface
 {
-    private OrderRepositoryInterface $orderRepository;
-
-    private OrderAddressModifierInterface $orderAddressModifier;
-
-    private OrderPromoCodeAssignerInterface $orderPromoCodeAssigner;
-
-    private CustomerProviderInterface $customerProvider;
-
     public function __construct(
-        OrderRepositoryInterface $orderRepository,
-        OrderAddressModifierInterface $orderAddressModifier,
-        OrderPromoCodeAssignerInterface $orderPromoCodeAssigner,
-        CustomerProviderInterface $customerProvider
+        private OrderRepositoryInterface $orderRepository,
+        private OrderAddressModifierInterface $orderAddressModifier,
+        private OrderPromoCodeAssignerInterface $orderPromoCodeAssigner,
+        private CustomerProviderInterface $customerProvider
     ) {
-        $this->orderRepository = $orderRepository;
-        $this->orderAddressModifier = $orderAddressModifier;
-        $this->orderPromoCodeAssigner = $orderPromoCodeAssigner;
-        $this->customerProvider = $customerProvider;
     }
 
     public function __invoke(UpdateCart $updateCart): OrderInterface
@@ -57,7 +45,7 @@ final class UpdateCartHandler implements MessageHandlerInterface
             $order->setCustomer($this->customerProvider->provide($updateCart->getEmail()));
         }
 
-        if($updateCart->getBillingAddress()) {
+        if ($updateCart->getBillingAddress()) {
             $order = $this->orderAddressModifier->modify(
                 $order,
                 $updateCart->getBillingAddress(),
