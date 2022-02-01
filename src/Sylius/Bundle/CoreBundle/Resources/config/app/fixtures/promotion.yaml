@@ -4,6 +4,8 @@
 sylius_fixtures:
     suites:
         default:
+            listeners:
+                catalog_promotion_processor_executor: ~
             fixtures:
                 promotion:
                     options:
