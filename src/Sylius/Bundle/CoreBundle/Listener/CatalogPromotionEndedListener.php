@@ -15,14 +15,14 @@ namespace Sylius\Bundle\CoreBundle\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use SM\Factory\FactoryInterface;
-use Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface;
+use Sylius\Bundle\CoreBundle\Processor\RequestProductVariantCatalogPromotionRecalculateInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
 use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CatalogPromotionEndedListener
 {
-    private AllCatalogPromotionsProcessorInterface $catalogPromotionsProcessor;
+    private RequestProductVariantCatalogPromotionRecalculateInterface $catalogPromotionsProcessor;
 
     private RepositoryInterface $catalogPromotionRepository;
 
@@ -31,10 +31,10 @@ final class CatalogPromotionEndedListener
     private FactoryInterface $stateMachine;
 
     public function __construct(
-        AllCatalogPromotionsProcessorInterface $catalogPromotionsProcessor,
-        RepositoryInterface $catalogPromotionRepository,
-        EntityManagerInterface $entityManager,
-        FactoryInterface $stateMachine
+        RequestProductVariantCatalogPromotionRecalculateInterface $catalogPromotionsProcessor,
+        RepositoryInterface                                       $catalogPromotionRepository,
+        EntityManagerInterface                                    $entityManager,
+        FactoryInterface                                          $stateMachine
     ) {
         $this->catalogPromotionsProcessor = $catalogPromotionsProcessor;
         $this->catalogPromotionRepository = $catalogPromotionRepository;
@@ -55,7 +55,7 @@ final class CatalogPromotionEndedListener
         $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
         $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE);
 
-        $this->catalogPromotionsProcessor->process();
+        $this->catalogPromotionsProcessor->recalculate();
 
         $this->entityManager->flush();
     }

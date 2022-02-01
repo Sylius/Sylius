@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Faker\Factory;
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
-use Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface;
+use Sylius\Bundle\CoreBundle\Processor\RequestProductVariantCatalogPromotionRecalculateInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
@@ -40,7 +40,7 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
 
     private ExampleFactoryInterface $catalogPromotionActionExampleFactory;
 
-    private AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor;
+    private RequestProductVariantCatalogPromotionRecalculateInterface $allCatalogPromotionsProcessor;
 
     private Generator $faker;
 
@@ -52,7 +52,7 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
         ChannelRepositoryInterface $channelRepository,
         ExampleFactoryInterface $catalogPromotionScopeExampleFactory,
         ExampleFactoryInterface $catalogPromotionActionExampleFactory,
-        AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor
+        RequestProductVariantCatalogPromotionRecalculateInterface $allCatalogPromotionsProcessor
     ) {
         $this->catalogPromotionFactory = $catalogPromotionFactory;
         $this->localeRepository = $localeRepository;
@@ -110,7 +110,7 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
             }
         }
 
-        $this->allCatalogPromotionsProcessor->process();
+        $this->allCatalogPromotionsProcessor->recalculate();
 
         return $catalogPromotion;
     }

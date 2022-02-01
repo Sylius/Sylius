@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Listener;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
-use Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface;
+use Sylius\Bundle\CoreBundle\Processor\RequestProductVariantCatalogPromotionRecalculateInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -24,23 +24,23 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class CatalogPromotionUpdatedListenerSpec extends ObjectBehavior
 {
     function let(
-        AllCatalogPromotionsProcessorInterface $catalogPromotionReprocessor,
-        RepositoryInterface $catalogPromotionRepository,
-        EntityManagerInterface $entityManager,
-        FactoryInterface $stateMachine
+        RequestProductVariantCatalogPromotionRecalculateInterface $catalogPromotionReprocessor,
+        RepositoryInterface                                       $catalogPromotionRepository,
+        EntityManagerInterface                                    $entityManager,
+        FactoryInterface                                          $stateMachine
     ): void {
         $this->beConstructedWith($catalogPromotionReprocessor, $catalogPromotionRepository, $entityManager, $stateMachine);
     }
 
     function it_processes_catalog_promotion_that_has_just_been_updated(
-        AllCatalogPromotionsProcessorInterface $catalogPromotionReprocessor,
-        RepositoryInterface $catalogPromotionRepository,
-        EntityManagerInterface $entityManager,
-        CatalogPromotionInterface $catalogPromotion
+        RequestProductVariantCatalogPromotionRecalculateInterface $catalogPromotionReprocessor,
+        RepositoryInterface                                       $catalogPromotionRepository,
+        EntityManagerInterface                                    $entityManager,
+        CatalogPromotionInterface                                 $catalogPromotion
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
 
-        $catalogPromotionReprocessor->process()->shouldBeCalled();
+        $catalogPromotionReprocessor->recalculate()->shouldBeCalled();
 
         $entityManager->flush()->shouldBeCalled();
 
@@ -48,14 +48,14 @@ final class CatalogPromotionUpdatedListenerSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_there_is_no_catalog_promotion_with_given_code(
-        AllCatalogPromotionsProcessorInterface $catalogPromotionReprocessor,
-        RepositoryInterface $catalogPromotionRepository,
-        EntityManagerInterface $entityManager
+        RequestProductVariantCatalogPromotionRecalculateInterface $catalogPromotionReprocessor,
+        RepositoryInterface                                       $catalogPromotionRepository,
+        EntityManagerInterface                                    $entityManager
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn(null);
         $catalogPromotionRepository->findAll()->shouldNotBeCalled();
 
-        $catalogPromotionReprocessor->process()->shouldNotBeCalled();
+        $catalogPromotionReprocessor->recalculate()->shouldNotBeCalled();
         $entityManager->flush()->shouldNotBeCalled();
 
         $this(new CatalogPromotionUpdated('WINTER_MUGS_SALE'));

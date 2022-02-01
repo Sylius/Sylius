@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
-final class AllCatalogPromotionsProcessorSpec extends ObjectBehavior
+final class RequestProductVariantCatalogPromotionRecalculateSpec extends ObjectBehavior
 {
     function let(
         ProductVariantRepositoryInterface $productVariantRepository,
@@ -34,6 +34,6 @@ final class AllCatalogPromotionsProcessorSpec extends ObjectBehavior
 
         $commandDispatcher->updateVariants(['FIRST_VARIANT_CODE', 'SECOND_VARIANT_CODE'])->shouldBeCalled();
 
-        $this->process();
+        $this->recalculate();
     }
 }

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Processor;
 
-interface AllCatalogPromotionsProcessorInterface
+interface RequestProductVariantCatalogPromotionRecalculateInterface
 {
-    public function process(): void;
+    public function recalculate(): void;
 }

@@ -17,7 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
-use Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface;
+use Sylius\Bundle\CoreBundle\Processor\RequestProductVariantCatalogPromotionRecalculateInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionFailed;
 use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
@@ -26,28 +26,28 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class CatalogPromotionFailedListenerSpec extends ObjectBehavior
 {
     function let(
-        AllCatalogPromotionsProcessorInterface $catalogPromotionReprocessor,
-        RepositoryInterface $catalogPromotionRepository,
-        EntityManagerInterface $entityManager,
-        FactoryInterface $stateMachine
+        RequestProductVariantCatalogPromotionRecalculateInterface $catalogPromotionReprocessor,
+        RepositoryInterface                                       $catalogPromotionRepository,
+        EntityManagerInterface                                    $entityManager,
+        FactoryInterface                                          $stateMachine
     ): void {
         $this->beConstructedWith($catalogPromotionReprocessor, $catalogPromotionRepository, $entityManager, $stateMachine);
     }
 
     function it_dispatches_transition_failed_on_a_failed_message(
-        AllCatalogPromotionsProcessorInterface $catalogPromotionReprocessor,
-        RepositoryInterface $catalogPromotionRepository,
-        EntityManagerInterface $entityManager,
-        CatalogPromotionInterface $catalogPromotion,
-        FactoryInterface $stateMachine,
-        StateMachineInterface $stateMachineInterface
+        RequestProductVariantCatalogPromotionRecalculateInterface $catalogPromotionReprocessor,
+        RepositoryInterface                                       $catalogPromotionRepository,
+        EntityManagerInterface                                    $entityManager,
+        CatalogPromotionInterface                                 $catalogPromotion,
+        FactoryInterface                                          $stateMachine,
+        StateMachineInterface                                     $stateMachineInterface
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
 
         $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
         $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(true);
 
-        $catalogPromotionReprocessor->process()->shouldBeCalled();
+        $catalogPromotionReprocessor->recalculate()->shouldBeCalled();
 
         $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldBeCalled();
         $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_FAIL)->shouldBeCalled();
@@ -58,14 +58,14 @@ final class CatalogPromotionFailedListenerSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_there_is_no_catalog_promotion_with_given_code(
-        AllCatalogPromotionsProcessorInterface $catalogPromotionReprocessor,
-        RepositoryInterface $catalogPromotionRepository,
-        EntityManagerInterface $entityManager
+        RequestProductVariantCatalogPromotionRecalculateInterface $catalogPromotionReprocessor,
+        RepositoryInterface                                       $catalogPromotionRepository,
+        EntityManagerInterface                                    $entityManager
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn(null);
         $catalogPromotionRepository->findAll()->shouldNotBeCalled();
 
-        $catalogPromotionReprocessor->process()->shouldNotBeCalled();
+        $catalogPromotionReprocessor->recalculate()->shouldNotBeCalled();
         $entityManager->flush()->shouldNotBeCalled();
 
         $this(new CatalogPromotionFailed('WINTER_MUGS_SALE'));
