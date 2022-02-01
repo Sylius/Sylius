@@ -101,6 +101,16 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
     public function findByCodes(array $codes): array
     {
         return $this->createQueryBuilder('o')
+            ->addSelect('product')
+            ->addSelect('channelPricings')
+            ->addSelect('appliedPromotions')
+            ->addSelect('productTaxon')
+            ->addSelect('taxon')
+            ->leftJoin('o.channelPricings', 'channelPricings')
+            ->leftJoin('channelPricings.appliedPromotions', 'appliedPromotions')
+            ->leftJoin('o.product', 'product')
+            ->leftJoin('product.productTaxons', 'productTaxon')
+            ->leftJoin('productTaxon.taxon', 'taxon')
             ->andWhere('o.code IN (:codes)')
             ->setParameter('codes', $codes)
             ->getQuery()
