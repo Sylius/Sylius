@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Processor;
+namespace Sylius\Bundle\PromotionBundle\Provider;
 
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 
-interface CatalogPromotionStateProcessorInterface
+interface EligibleCatalogPromotionProviderInterface
 {
-    public function process(CatalogPromotionInterface $catalogPromotion): void;
+    public function provide(CatalogPromotionInterface $catalogPromotion): ?CatalogPromotionInterface;
 }

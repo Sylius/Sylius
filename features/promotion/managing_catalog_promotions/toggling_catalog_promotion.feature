@@ -40,9 +40,16 @@ Feature: Toggling catalog promotion
         And "PHP T-Shirt" variant should be discounted
 
     @api @ui
-    Scenario: Enabling catalog promotion outside its operating time
+    Scenario: Enabling catalog promotion outside its operating time starts tomorrow
         Given the catalog promotion "Christmas sale" starts at "tomorrow"
         And this catalog promotion is disabled
+        When I enable "Christmas sale" catalog promotion
+        Then this catalog promotion should still be inactive
+        And "PHP T-Shirt" variant should not be discounted
+
+    @api @ui
+    Scenario: Enabling catalog promotion outside its operating time ended yesterday
+        Given the catalog promotion "Christmas sale" ended "yesterday"
         When I enable "Christmas sale" catalog promotion
         Then this catalog promotion should still be inactive
         And "PHP T-Shirt" variant should not be discounted

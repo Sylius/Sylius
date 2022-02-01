@@ -318,7 +318,7 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Checker\CatalogPromotionEligibilityChecker">
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionProviderInterface" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Checker\InForProductScopeVariantChecker">

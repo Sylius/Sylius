@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Processor;
@@ -21,14 +30,7 @@ final class CatalogPromotionStateProcessor implements CatalogPromotionStateProce
     {
         $stateMachine = $this->stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
 
-        if ($stateMachine->can(CatalogPromotionTransitions::TRANSITION_PROCESS)) {
-            $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
-        }
-
-        if (
-            !$this->catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion) ||
-            !$this->catalogPromotionEligibilityChecker->isCatalogPromotionEligibleOperatingTime($catalogPromotion)
-        ) {
+        if (!$this->catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)) {
             if ($stateMachine->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)) {
                 $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE);
             }
@@ -36,6 +38,8 @@ final class CatalogPromotionStateProcessor implements CatalogPromotionStateProce
             return;
         }
 
-        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_ACTIVATE);
+        if ($stateMachine->can(CatalogPromotionTransitions::TRANSITION_ACTIVATE)) {
+            $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_ACTIVATE);
+        }
     }
 }

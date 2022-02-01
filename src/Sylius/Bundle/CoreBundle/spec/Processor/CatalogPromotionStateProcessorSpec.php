@@ -37,36 +37,31 @@ final class CatalogPromotionStateProcessorSpec extends ObjectBehavior
         $this->shouldImplement(CatalogPromotionStateProcessorInterface::class);
     }
 
-    function it_activate_catalog_promotion(
+    function it_activates_a_catalog_promotion(
         CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
         CatalogPromotionInterface $catalogPromotion,
         FactoryInterface $stateMachine,
         StateMachineInterface $stateMachineInterface
     ): void {
         $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
-        $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(true);
-        $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldBeCalled();
 
         $catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)->willReturn(true);
-        $catalogPromotionEligibilityChecker->isCatalogPromotionEligibleOperatingTime($catalogPromotion)->willReturn(true);
 
+        $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_ACTIVATE)->willReturn(true);
         $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_ACTIVATE)->shouldBeCalled();
 
         $this->process($catalogPromotion);
     }
 
-    function it_deactivate_catalog_promotion(
+    function it_deactivates_a_catalog_promotion(
         CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
         CatalogPromotionInterface $catalogPromotion,
         FactoryInterface $stateMachine,
         StateMachineInterface $stateMachineInterface
     ): void {
         $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
-        $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(true);
-        $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldBeCalled();
 
         $catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)->willReturn(false);
-        $catalogPromotionEligibilityChecker->isCatalogPromotionEligibleOperatingTime($catalogPromotion)->willReturn(true);
 
         $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->willReturn(true);
         $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldBeCalled();
