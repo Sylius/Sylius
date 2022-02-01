@@ -29,6 +29,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
@@ -465,96 +466,29 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I create an exclusive catalog promotion with "([^"]+)" code and "([^"]+)" name and ([^"]+) priority that applies on ("[^"]+" product) and reduces price by ("[^"]+") in ("[^"]+" channel)$/
+     * @When /^I create an exclusive "([^"]+)" catalog promotion with ([^"]+) priority that applies on ("[^"]+" product) and reduces price by ("[^"]+") in ("[^"]+" channel)$/
      */
     public function iCreateAnExclusiveCatalogPromotionWithCodeAndNameAndPriorityThatAppliesOnProductAndReducesPriceByInChannel(
-        string $code,
         string $name,
         int $priority,
         ProductInterface $product,
         float $discount,
         ChannelInterface $channel
-    ): void
-    {
-        $this->client->buildCreateRequest();
-        $translations =  ['en_US' => [
-            'locale' => 'en_US',
-            'label' => $name
-        ]];
-
-        $actions = [[
-            'type' => PercentageDiscountPriceCalculator::TYPE,
-            'configuration' => [
-                'amount' => $discount
-            ],
-        ]];
-
-        $scopes = [[
-            'type' => InForProductScopeVariantChecker::TYPE,
-            'configuration' => [
-                'products' => [$product->getCode()]
-            ],
-        ]];
-
-        $this->client->updateRequestData([
-            'code' => $code,
-            'name' => $name,
-            'priority' => $priority,
-            'enabled' => true,
-            'channels' => [$this->iriConverter->getIriFromItem($channel)],
-            'exclusive' => true,
-            'translations' => $translations,
-            'actions' => $actions,
-            'scopes' => $scopes,
-        ]);
-
-        $this->client->create();
+    ): void {
+        $this->createCatalogPromotion($name, $priority, true, $product, $discount, $channel);
     }
 
     /**
-     * @When /^I create a catalog promotion with "([^"]+)" code and "([^"]+)" name and ([^"]+) priority that applies on ("[^"]+" product) and reduces price by ("[^"]+") in ("[^"]+" channel)$/
+     * @When /^I create a "([^"]+)" catalog promotion with ([^"]+) priority that applies on ("[^"]+" product) and reduces price by ("[^"]+") in ("[^"]+" channel)$/
      */
     public function iCreateACatalogPromotionWithCodeAndNameAndPriorityThatAppliesOnProductAndReducesPriceByInChannel(
-        string $code,
         string $name,
         int $priority,
         ProductInterface $product,
         float $discount,
         ChannelInterface $channel
-    ): void
-    {
-        $this->client->buildCreateRequest();
-        $translations =  ['en_US' => [
-            'locale' => 'en_US',
-            'label' => $name
-        ]];
-
-        $actions = [[
-            'type' => PercentageDiscountPriceCalculator::TYPE,
-            'configuration' => [
-                'amount' => $discount
-            ],
-        ]];
-
-        $scopes = [[
-            'type' => InForProductScopeVariantChecker::TYPE,
-            'configuration' => [
-                'products' => [$product->getCode()]
-            ],
-        ]];
-
-        $this->client->updateRequestData([
-            'code' => $code,
-            'name' => $name,
-            'priority' => $priority,
-            'enabled' => true,
-            'channels' => [$this->iriConverter->getIriFromItem($channel)],
-            'translations' => $translations,
-            'actions' => $actions,
-            'scopes' => $scopes
-        ]);
-
-        $this->client->create();
+    ): void {
+        $this->createCatalogPromotion($name, $priority, false, $product, $discount, $channel);
     }
 
     /**
@@ -1587,5 +1521,43 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->client->update();
 
         $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
+    }
+
+    private function createCatalogPromotion(
+        string $name,
+        int $priority,
+        bool $exclusive,
+        ProductInterface $product,
+        float $discount,
+        ChannelInterface $channel
+    ): void {
+        $this->client->buildCreateRequest();
+
+        $this->client->updateRequestData([
+            'code' => StringInflector::nameToCode($name),
+            'name' => $name,
+            'priority' => $priority,
+            'enabled' => true,
+            'channels' => [$this->iriConverter->getIriFromItem($channel)],
+            'exclusive' => $exclusive,
+            'translations' => ['en_US' => [
+                'locale' => 'en_US',
+                'label' => $name
+            ]],
+            'actions' => [[
+                'type' => PercentageDiscountPriceCalculator::TYPE,
+                'configuration' => [
+                    'amount' => $discount
+                ],
+            ]],
+            'scopes' => [[
+                'type' => InForProductScopeVariantChecker::TYPE,
+                'configuration' => [
+                    'products' => [$product->getCode()]
+                ],
+            ]],
+        ]);
+
+        $this->client->create();
     }
 }

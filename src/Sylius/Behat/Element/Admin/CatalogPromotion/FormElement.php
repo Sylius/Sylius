@@ -51,9 +51,9 @@ final class FormElement extends Element implements FormElementInterface
         $this->getDocument()->checkField($channelName);
     }
 
-    public function checkExclusive(): void
+    public function setExclusiveness(bool $isExclusive): void
     {
-        $this->getElement('exclusive')->setValue(true);
+        $this->getElement('exclusive')->setValue($isExclusive);
     }
 
     public function uncheckChannel(string $channelName): void

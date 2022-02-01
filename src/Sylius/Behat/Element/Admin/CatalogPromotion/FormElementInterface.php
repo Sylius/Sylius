@@ -29,7 +29,7 @@ interface FormElementInterface
 
     public function checkChannel(string $channelName): void;
 
-    public function checkExclusive(): void;
+    public function setExclusiveness(bool $isExclusive): void;
 
     public function uncheckChannel(string $channelName): void;
 
