@@ -57,7 +57,7 @@
             "total": 6000,
             "subtotal": 6000,
             "discountedUnitPrice": 2000,
-            "originalPrice": null
+            "originalUnitPrice": 2000
         }
     ],
     "itemsTotal": 6000,
