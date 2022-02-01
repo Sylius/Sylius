@@ -164,4 +164,4 @@ Overwriting templates
 
 To overwrite the template, copy the selected twig file from BootstrapTheme and paste it into the same place
 in your theme. For example, if you want to change something in the ``layout.html.twig`` file,
-copy it to ``themes/BootstrapChildTheme/SyliusShopBundle/views``
+copy it to ``themes/BootstrapChildTheme/templates/bundles/SyliusShopBundle``
