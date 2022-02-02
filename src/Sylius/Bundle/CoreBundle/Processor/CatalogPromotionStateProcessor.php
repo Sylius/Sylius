@@ -22,13 +22,13 @@ final class CatalogPromotionStateProcessor implements CatalogPromotionStateProce
 {
     public function __construct(
         private CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
-        private FactoryInterface $stateMachine
+        private FactoryInterface $stateMachineFactory
     ) {
     }
 
     public function process(CatalogPromotionInterface $catalogPromotion): void
     {
-        $stateMachine = $this->stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
+        $stateMachine = $this->stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
 
         if (!$this->catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)) {
             if ($stateMachine->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)) {

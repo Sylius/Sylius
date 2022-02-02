@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Processor\AllProductVariantsCatalogPromotionsProcessorInterface;
-use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionStateProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -24,7 +23,6 @@ final class CatalogPromotionCreatedListener
 {
     public function __construct(
         private AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
-        private CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
         private RepositoryInterface $catalogPromotionRepository,
         private EntityManagerInterface $entityManager
     ) {
@@ -39,8 +37,6 @@ final class CatalogPromotionCreatedListener
         }
 
         $this->allProductVariantsCatalogPromotionsProcessor->process();
-
-        $this->catalogPromotionStateProcessor->process($catalogPromotion);
 
         $this->entityManager->flush();
     }

@@ -15,7 +15,6 @@ namespace Sylius\Bundle\PromotionBundle\Doctrine\ORM;
 
 use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 
 class CatalogPromotionRepository extends EntityRepository implements CatalogPromotionRepositoryInterface
@@ -38,23 +37,6 @@ class CatalogPromotionRepository extends EntityRepository implements CatalogProm
             ->addOrderBy('o.priority', 'desc')
             ->getQuery()
             ->getResult()
-        ;
-    }
-
-    public function findOneByIdAndCriteria($id, iterable $criteria): ?CatalogPromotionInterface
-    {
-        $queryBuilder = $this->createQueryBuilder('catalogPromotion');
-
-        /** @var CriteriaInterface $criterion */
-        foreach ($criteria as $criterion) {
-            $criterion->filterQueryBuilder($queryBuilder);
-        }
-
-        return $queryBuilder
-            ->andWhere('catalogPromotion.id = :id')
-            ->setParameter('id', $id)
-            ->getQuery()
-            ->getOneOrNullResult()
         ;
     }
 }

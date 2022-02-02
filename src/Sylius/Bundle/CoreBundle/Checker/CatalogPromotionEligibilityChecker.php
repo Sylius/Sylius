@@ -13,17 +13,22 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Checker;
 
-use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 
 final class CatalogPromotionEligibilityChecker implements CatalogPromotionEligibilityCheckerInterface
 {
-    public function __construct(private EligibleCatalogPromotionProviderInterface $eligibleCatalogPromotionProvider)
+    public function __construct(private iterable $defaultCriteria = [])
     {
     }
 
-    public function isCatalogPromotionEligible(CatalogPromotionInterface $promotion): bool
+    public function isCatalogPromotionEligible(CatalogPromotionInterface $catalogPromotion): bool
     {
-        return $this->eligibleCatalogPromotionProvider->provide($promotion) !== null;
+        foreach ($this->defaultCriteria as $criterion) {
+            if (!$criterion->verify($catalogPromotion)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

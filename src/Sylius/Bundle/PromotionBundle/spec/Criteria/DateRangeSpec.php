@@ -17,6 +17,7 @@ use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 
 final class DateRangeSpec extends ObjectBehavior
 {
@@ -42,5 +43,20 @@ final class DateRangeSpec extends ObjectBehavior
         $queryBuilder->setParameter('date', $now)->willReturn($queryBuilder)->shouldBeCalled();
 
         $this->filterQueryBuilder($queryBuilder)->shouldReturn($queryBuilder);
+    }
+
+    function it_verify_catalog_promotion(
+        CatalogPromotionInterface $catalogPromotion,
+        DateTimeProviderInterface $calendar
+    ): void {
+        $tomorrow = new \DateTime('+1day');
+        $yesterday = new \DateTime('-1day');
+        $now = new \DateTime();
+        $calendar->now()->willReturn($now);
+
+        $catalogPromotion->getStartDate()->willReturn($yesterday);
+        $catalogPromotion->getEndDate()->willReturn($tomorrow);
+
+        $this->verify($catalogPromotion)->shouldReturn(true);
     }
 }

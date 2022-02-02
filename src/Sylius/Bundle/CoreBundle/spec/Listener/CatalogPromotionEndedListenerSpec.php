@@ -15,8 +15,6 @@ namespace spec\Sylius\Bundle\CoreBundle\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
-use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\CoreBundle\Processor\AllProductVariantsCatalogPromotionsProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
@@ -26,24 +24,21 @@ final class CatalogPromotionEndedListenerSpec extends ObjectBehavior
 {
     function let(
         AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
-        CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager,
     ): void {
-        $this->beConstructedWith($allProductVariantsCatalogPromotionsProcessor, $catalogPromotionStateProcessor, $catalogPromotionRepository, $entityManager);
+        $this->beConstructedWith($allProductVariantsCatalogPromotionsProcessor, $catalogPromotionRepository, $entityManager);
     }
 
     function it_processes_catalog_promotion_that_has_just_ended(
         AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
-        CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager,
         CatalogPromotionInterface $catalogPromotion
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
 
-        $catalogPromotionReprocessor->process()->shouldBeCalled();
-        $catalogPromotionStateProcessor->process($catalogPromotion)->shouldBeCalled();
+        $allProductVariantsCatalogPromotionsProcessor->process()->shouldBeCalled();
 
         $entityManager->flush()->shouldBeCalled();
 
@@ -52,7 +47,6 @@ final class CatalogPromotionEndedListenerSpec extends ObjectBehavior
 
     function it_does_nothing_if_there_is_no_catalog_promotion_with_given_code(
         AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
-        CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager
     ): void {
@@ -60,7 +54,6 @@ final class CatalogPromotionEndedListenerSpec extends ObjectBehavior
         $catalogPromotionRepository->findAll()->shouldNotBeCalled();
 
         $allProductVariantsCatalogPromotionsProcessor->process()->shouldNotBeCalled();
-        $catalogPromotionStateProcessor->process(Argument::any())->shouldNotBeCalled();
         $entityManager->flush()->shouldNotBeCalled();
 
         $this(new CatalogPromotionEnded('WINTER_MUGS_SALE'));

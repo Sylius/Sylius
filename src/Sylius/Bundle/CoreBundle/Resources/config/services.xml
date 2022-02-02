@@ -318,7 +318,7 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Checker\CatalogPromotionEligibilityChecker">
-            <argument type="service" id="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionProviderInterface" />
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.criteria" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Checker\InForProductScopeVariantChecker">

@@ -17,5 +17,5 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 
 interface CatalogPromotionEligibilityCheckerInterface
 {
-    public function isCatalogPromotionEligible(CatalogPromotionInterface $promotion): bool;
+    public function isCatalogPromotionEligible(CatalogPromotionInterface $catalogPromotion): bool;
 }

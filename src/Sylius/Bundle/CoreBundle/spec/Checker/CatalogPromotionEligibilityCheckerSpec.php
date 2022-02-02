@@ -15,14 +15,14 @@ namespace spec\Sylius\Bundle\CoreBundle\Checker;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Checker\CatalogPromotionEligibilityCheckerInterface;
-use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionProviderInterface;
+use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 
 final class CatalogPromotionEligibilityCheckerSpec extends ObjectBehavior
 {
-    function let(EligibleCatalogPromotionProviderInterface $eligibleCatalogPromotionProvider): void
+    function let(CriteriaInterface $firstCriterion, CriteriaInterface $secondCriterion): void
     {
-        $this->beConstructedWith($eligibleCatalogPromotionProvider);
+        $this->beConstructedWith([$firstCriterion, $secondCriterion]);
     }
 
     function it_implements_catalog_promotion_eligibility_checker_interface(): void
@@ -31,20 +31,24 @@ final class CatalogPromotionEligibilityCheckerSpec extends ObjectBehavior
     }
 
     public function it_returns_true_if_catalog_promotion_eligible(
-        CatalogPromotionInterface $promotion,
-        EligibleCatalogPromotionProviderInterface $eligibleCatalogPromotionProvider
+        CriteriaInterface $firstCriterion,
+        CriteriaInterface $secondCriterion,
+        CatalogPromotionInterface $promotion
     ): void {
-        $eligibleCatalogPromotionProvider->provide($promotion)->willReturn($promotion);
+        $firstCriterion->verify($promotion)->willReturn(true);
+        $secondCriterion->verify($promotion)->willReturn(true);
 
-        $this->isCatalogPromotionEligible($promotion);
+        $this->isCatalogPromotionEligible($promotion)->shouldReturn(true);
     }
 
     public function it_returns_false_if_catalog_promotion_not_eligible(
-        CatalogPromotionInterface $promotion,
-        EligibleCatalogPromotionProviderInterface $eligibleCatalogPromotionProvider
+        CriteriaInterface $firstCriterion,
+        CriteriaInterface $secondCriterion,
+        CatalogPromotionInterface $promotion
     ): void {
-        $eligibleCatalogPromotionProvider->provide($promotion)->willReturn(null);
+        $firstCriterion->verify($promotion)->willReturn(false);
+        $secondCriterion->verify($promotion)->willReturn(true);
 
-        $this->isCatalogPromotionEligible($promotion);
+        $this->isCatalogPromotionEligible($promotion)->shouldReturn(false);
     }
 }

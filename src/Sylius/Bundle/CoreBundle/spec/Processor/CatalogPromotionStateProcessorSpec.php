@@ -27,9 +27,9 @@ final class CatalogPromotionStateProcessorSpec extends ObjectBehavior
 {
     function let(
         CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
-        FactoryInterface $stateMachine
+        FactoryInterface $stateMachineFactory
     ): void {
-        $this->beConstructedWith($catalogPromotionEligibilityChecker, $stateMachine);
+        $this->beConstructedWith($catalogPromotionEligibilityChecker, $stateMachineFactory);
     }
 
     function it_implements_catalog_promotion_state_processor_interface(): void
@@ -40,15 +40,15 @@ final class CatalogPromotionStateProcessorSpec extends ObjectBehavior
     function it_activates_a_catalog_promotion(
         CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
         CatalogPromotionInterface $catalogPromotion,
-        FactoryInterface $stateMachine,
-        StateMachineInterface $stateMachineInterface
+        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine
     ): void {
-        $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
+        $stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachine);
 
         $catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)->willReturn(true);
 
-        $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_ACTIVATE)->willReturn(true);
-        $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_ACTIVATE)->shouldBeCalled();
+        $stateMachine->can(CatalogPromotionTransitions::TRANSITION_ACTIVATE)->willReturn(true);
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_ACTIVATE)->shouldBeCalled();
 
         $this->process($catalogPromotion);
     }
@@ -56,10 +56,10 @@ final class CatalogPromotionStateProcessorSpec extends ObjectBehavior
     function it_deactivates_a_catalog_promotion(
         CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
         CatalogPromotionInterface $catalogPromotion,
-        FactoryInterface $stateMachine,
+        FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachineInterface
     ): void {
-        $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
+        $stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
 
         $catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)->willReturn(false);
 
