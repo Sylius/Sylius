@@ -145,6 +145,7 @@ Example configuration for `percentage_discount` action type:
         <property name="scopes" writable="true" />
         <property name="actions" writable="true" />
         <property name="enabled" writable="true" />
+        <property name="exclusive" writable="true" />
         <property name="label" writable="true" />
     </resource>
 </resources>
