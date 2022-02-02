@@ -113,6 +113,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     'description' => '50% discount on every T-Shirt',
                 ]],
                 'enabled' => true,
+                'exclusive' => false,
                 'priority' => 100,
             ], JSON_THROW_ON_ERROR)
         );
@@ -276,7 +277,8 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     'label' => 'T-Shirts discount',
                     'description' => '50% discount on every T-Shirt',
                 ]],
-                'enabled' => true
+                'enabled' => true,
+                'exclusive' => false,
             ], JSON_THROW_ON_ERROR)
         );
 
@@ -370,7 +372,8 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     'label' => 'T-Shirts discount',
                     'description' => '50% discount on every T-Shirt',
                 ]],
-                'enabled' => true
+                'enabled' => true,
+                'exclusive' => false,
             ], JSON_THROW_ON_ERROR)
         );
 
@@ -422,6 +425,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     'label' => 'T-Shirts discount',
                 ]],
                 'enabled' => true,
+                'exclusive' => false,
                 'priority' => 1000,
             ], JSON_THROW_ON_ERROR)
         );

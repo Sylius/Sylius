@@ -27,6 +27,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
@@ -300,6 +301,32 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->formElement->addAction();
         $this->formElement->chooseActionType('Fixed discount');
         $this->formElement->specifyLastActionDiscountForChannel($discount, $channel);
+    }
+
+    /**
+     * @When /^I create an exclusive "([^"]+)" catalog promotion with ([^"]+) priority that applies on ("[^"]+" product) and reduces price by "((?:\d+\.)?\d+)%" in ("[^"]+" channel)$/
+     */
+    public function iCreateAnExclusiveCatalogPromotionWithCodeAndPriorityThatReducesPriceByInTheChannelAndAppliesOnProduct(
+        string $name,
+        int $priority,
+        ProductInterface $product,
+        string $discount,
+        string $channel
+    ): void {
+        $this->createCatalogPromotion($name, $priority, true, $product, $discount, $channel);
+    }
+
+    /**
+     * @When /^I create a "([^"]+)" catalog promotion with ([^"]+) priority that applies on ("[^"]+" product) and reduces price by "((?:\d+\.)?\d+)%" in ("[^"]+" channel)$/
+     */
+    public function iCreateACatalogPromotionWithCodeAndNameAndPriorityThatAppliesOnProductAndReducesPriceByInChannel(
+        string $name,
+        int $priority,
+        ProductInterface $product,
+        string $discount,
+        string $channel
+    ): void {
+        $this->createCatalogPromotion($name, $priority, false, $product, $discount, $channel);
     }
 
     /**
@@ -1066,5 +1093,29 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldSeeTheCatalogPromotionActionConfigurationForm(): void
     {
         Assert::true($this->createPage->checkIfActionConfigurationFormIsVisible(), 'Catalog promotion action configuration form is not visible.');
+    }
+
+    private function createCatalogPromotion(
+        string $name,
+        int $priority,
+        bool $exclusive,
+        ProductInterface $product,
+        string $discount,
+        string $channel
+    ): void {
+        $this->createPage->open();
+        $this->createPage->specifyCode(StringInflector::nameToCode($name));
+        $this->formElement->labelIt($name, 'en_US');
+        $this->formElement->nameIt($name);
+        $this->formElement->prioritizeIt($priority);
+        $this->formElement->setExclusiveness($exclusive);
+        $this->formElement->checkChannel($channel);
+        $this->formElement->addScope();
+        $this->formElement->chooseScopeType('For product');
+        $this->formElement->chooseLastScopeCodes([$product->getCode()]);
+        $this->formElement->addAction();
+        $this->formElement->chooseActionType('Percentage discount');
+        $this->formElement->specifyLastActionDiscount($discount);
+        $this->createPage->create();
     }
 }
