@@ -68,6 +68,30 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         $this->testNotPrependingDoctrineMigrations('dev');
     }
 
+    /**
+     * @test
+     */
+    public function it_loads_batch_size_parameter_value_properly(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+
+        $this->load(['catalog_promotions' => ['batch_size' => 200]]);
+
+        $this->assertContainerBuilderHasParameter('sylius_core.catalog_promotions.batch_size', 200);
+    }
+
+    /**
+     * @test
+     */
+    public function it_loads_default_batch_size_properly(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+
+        $this->load();
+
+        $this->assertContainerBuilderHasParameter('sylius_core.catalog_promotions.batch_size', 100);
+    }
+
     protected function getContainerExtensions(): array
     {
         return [new SyliusCoreExtension()];
