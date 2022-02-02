@@ -23,6 +23,7 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
+use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -30,36 +31,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CatalogPromotionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private FactoryInterface $catalogPromotionFactory;
-
-    private RepositoryInterface $localeRepository;
-
-    private ChannelRepositoryInterface $channelRepository;
-
-    private ExampleFactoryInterface $catalogPromotionScopeExampleFactory;
-
-    private ExampleFactoryInterface $catalogPromotionActionExampleFactory;
-
-    private AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $catalogPromotionFactory,
-        RepositoryInterface $localeRepository,
-        ChannelRepositoryInterface $channelRepository,
-        ExampleFactoryInterface $catalogPromotionScopeExampleFactory,
-        ExampleFactoryInterface $catalogPromotionActionExampleFactory,
-        AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor
+        private FactoryInterface $catalogPromotionFactory,
+        private RepositoryInterface $localeRepository,
+        private ChannelRepositoryInterface $channelRepository,
+        private CatalogPromotionRepositoryInterface $catalogPromotionRepository,
+        private ExampleFactoryInterface $catalogPromotionScopeExampleFactory,
+        private ExampleFactoryInterface $catalogPromotionActionExampleFactory,
+        private AllCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor
     ) {
-        $this->catalogPromotionFactory = $catalogPromotionFactory;
-        $this->localeRepository = $localeRepository;
-        $this->channelRepository = $channelRepository;
-        $this->catalogPromotionScopeExampleFactory = $catalogPromotionScopeExampleFactory;
-        $this->catalogPromotionActionExampleFactory = $catalogPromotionActionExampleFactory;
-        $this->allCatalogPromotionsProcessor = $allCatalogPromotionsProcessor;
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
@@ -110,6 +94,7 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
             }
         }
 
+        $this->catalogPromotionRepository->add($catalogPromotion);
         $this->allCatalogPromotionsProcessor->process();
 
         return $catalogPromotion;

@@ -19,6 +19,7 @@
             <argument type="service" id="sylius.factory.catalog_promotion" />
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sylius.repository.catalog_promotion" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionScopeExampleFactory" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionActionExampleFactory" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface" />
