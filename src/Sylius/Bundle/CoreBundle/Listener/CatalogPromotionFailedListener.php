@@ -15,31 +15,19 @@ namespace Sylius\Bundle\CoreBundle\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use SM\Factory\FactoryInterface;
-use Sylius\Bundle\CoreBundle\Processor\RequestProductVariantCatalogPromotionRecalculateInterface;
+use Sylius\Bundle\CoreBundle\Processor\AllProductVariantsCatalogPromotionsProcessorInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionFailed;
 use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CatalogPromotionFailedListener
 {
-    private RequestProductVariantCatalogPromotionRecalculateInterface $catalogPromotionsProcessor;
-
-    private RepositoryInterface $catalogPromotionRepository;
-
-    private EntityManagerInterface $entityManager;
-
-    private FactoryInterface $stateMachine;
-
     public function __construct(
-        RequestProductVariantCatalogPromotionRecalculateInterface $catalogPromotionsProcessor,
-        RepositoryInterface                                       $catalogPromotionRepository,
-        EntityManagerInterface                                    $entityManager,
-        FactoryInterface                                          $stateMachine
+        private AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
+        private RepositoryInterface $catalogPromotionRepository,
+        private EntityManagerInterface $entityManager,
+        private FactoryInterface $stateMachine
     ) {
-        $this->catalogPromotionsProcessor = $catalogPromotionsProcessor;
-        $this->catalogPromotionRepository = $catalogPromotionRepository;
-        $this->entityManager = $entityManager;
-        $this->stateMachine = $stateMachine;
     }
 
     public function __invoke(CatalogPromotionFailed $event): void
@@ -57,7 +45,7 @@ final class CatalogPromotionFailedListener
 
         $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_FAIL);
 
-        $this->catalogPromotionsProcessor->recalculate();
+        $this->allProductVariantsCatalogPromotionsProcessor->process();
 
         $this->entityManager->flush();
     }

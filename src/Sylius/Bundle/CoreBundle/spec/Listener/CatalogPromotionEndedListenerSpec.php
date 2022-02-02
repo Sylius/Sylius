@@ -17,7 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
-use Sylius\Bundle\CoreBundle\Processor\RequestProductVariantCatalogPromotionRecalculateInterface;
+use Sylius\Bundle\CoreBundle\Processor\AllProductVariantsCatalogPromotionsProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
 use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
@@ -26,27 +26,27 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class CatalogPromotionEndedListenerSpec extends ObjectBehavior
 {
     function let(
-        RequestProductVariantCatalogPromotionRecalculateInterface $catalogPromotionReprocessor,
-        RepositoryInterface                                       $catalogPromotionRepository,
-        EntityManagerInterface                                    $entityManager,
-        FactoryInterface                                          $stateMachine
+        AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
+        RepositoryInterface $catalogPromotionRepository,
+        EntityManagerInterface $entityManager,
+        FactoryInterface $stateMachine
     ): void {
-        $this->beConstructedWith($catalogPromotionReprocessor, $catalogPromotionRepository, $entityManager, $stateMachine);
+        $this->beConstructedWith($allProductVariantsCatalogPromotionsProcessor, $catalogPromotionRepository, $entityManager, $stateMachine);
     }
 
     function it_processes_catalog_promotion_that_has_just_ended(
-        RequestProductVariantCatalogPromotionRecalculateInterface $catalogPromotionReprocessor,
-        RepositoryInterface                                       $catalogPromotionRepository,
-        EntityManagerInterface                                    $entityManager,
-        CatalogPromotionInterface                                 $catalogPromotion,
-        FactoryInterface                                          $stateMachine,
-        StateMachineInterface                                     $stateMachineInterface
+        AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
+        RepositoryInterface $catalogPromotionRepository,
+        EntityManagerInterface $entityManager,
+        CatalogPromotionInterface $catalogPromotion,
+        FactoryInterface $stateMachine,
+        StateMachineInterface $stateMachineInterface
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
 
         $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
 
-        $catalogPromotionReprocessor->recalculate()->shouldBeCalled();
+        $allProductVariantsCatalogPromotionsProcessor->process()->shouldBeCalled();
 
         $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldBeCalled();
         $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldBeCalled();
@@ -57,14 +57,14 @@ final class CatalogPromotionEndedListenerSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_there_is_no_catalog_promotion_with_given_code(
-        RequestProductVariantCatalogPromotionRecalculateInterface $catalogPromotionReprocessor,
-        RepositoryInterface                                       $catalogPromotionRepository,
-        EntityManagerInterface                                    $entityManager
+        AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
+        RepositoryInterface $catalogPromotionRepository,
+        EntityManagerInterface $entityManager
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn(null);
         $catalogPromotionRepository->findAll()->shouldNotBeCalled();
 
-        $catalogPromotionReprocessor->recalculate()->shouldNotBeCalled();
+        $allProductVariantsCatalogPromotionsProcessor->process()->shouldNotBeCalled();
         $entityManager->flush()->shouldNotBeCalled();
 
         $this(new CatalogPromotionEnded('WINTER_MUGS_SALE'));

@@ -16,8 +16,8 @@
         <defaults public="true" />
 
         <service
-            id="Sylius\Bundle\CoreBundle\Processor\RequestProductVariantCatalogPromotionRecalculateInterface"
-            class="Sylius\Bundle\CoreBundle\Processor\RequestProductVariantCatalogPromotionRecalculate"
+            id="Sylius\Bundle\CoreBundle\Processor\AllProductVariantsCatalogPromotionsProcessorInterface"
+            class="Sylius\Bundle\CoreBundle\Processor\AllProductVariantsCatalogPromotionsProcessor"
         >
             <argument type="service" id="sylius.repository.product_variant" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface" />

@@ -14,26 +14,17 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Bundle\CoreBundle\Processor\RequestProductVariantCatalogPromotionRecalculateInterface;
+use Sylius\Bundle\CoreBundle\Processor\AllProductVariantsCatalogPromotionsProcessorInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CatalogPromotionUpdatedListener
 {
-    private RequestProductVariantCatalogPromotionRecalculateInterface $catalogPromotionsProcessor;
-
-    private RepositoryInterface $catalogPromotionRepository;
-
-    private EntityManagerInterface $entityManager;
-
     public function __construct(
-        RequestProductVariantCatalogPromotionRecalculateInterface $catalogPromotionsProcessor,
-        RepositoryInterface                                       $catalogPromotionRepository,
-        EntityManagerInterface                                    $entityManager
+        private AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
+        private RepositoryInterface $catalogPromotionRepository,
+        private EntityManagerInterface $entityManager
     ) {
-        $this->catalogPromotionsProcessor = $catalogPromotionsProcessor;
-        $this->catalogPromotionRepository = $catalogPromotionRepository;
-        $this->entityManager = $entityManager;
     }
 
     public function __invoke(CatalogPromotionUpdated $event): void
@@ -42,7 +33,7 @@ final class CatalogPromotionUpdatedListener
             return;
         }
 
-        $this->catalogPromotionsProcessor->recalculate();
+        $this->allProductVariantsCatalogPromotionsProcessor->process();
 
         $this->entityManager->flush();
     }
