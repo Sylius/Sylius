@@ -38,7 +38,9 @@ final class DateRange implements CriteriaInterface
 
     public function verify(CatalogPromotionInterface $catalogPromotion): bool
     {
-        return ($catalogPromotion->getStartDate() === null || $catalogPromotion->getStartDate() <= $this->calendar->now()) &&
-            ($catalogPromotion->getEndDate() === null || $catalogPromotion->getEndDate() > $this->calendar->now());
+        return
+            ($catalogPromotion->getStartDate() === null || $catalogPromotion->getStartDate() <= $this->calendar->now()) &&
+            ($catalogPromotion->getEndDate() === null || $catalogPromotion->getEndDate() > $this->calendar->now())
+        ;
     }
 }

@@ -45,7 +45,7 @@ final class DateRangeSpec extends ObjectBehavior
         $this->filterQueryBuilder($queryBuilder)->shouldReturn($queryBuilder);
     }
 
-    function it_verify_catalog_promotion(
+    function it_verifies_catalog_promotion(
         CatalogPromotionInterface $catalogPromotion,
         DateTimeProviderInterface $calendar
     ): void {

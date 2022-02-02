@@ -35,7 +35,7 @@ final class EnabledSpec extends ObjectBehavior
         $this->filterQueryBuilder($queryBuilder)->shouldReturn($queryBuilder);
     }
 
-    function it_verify_catalog_promotion(CatalogPromotionInterface $catalogPromotion): void
+    function it_verifies_catalog_promotion(CatalogPromotionInterface $catalogPromotion): void
     {
         $catalogPromotion->isEnabled()->willReturn(true);
 
