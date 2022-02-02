@@ -22,12 +22,12 @@ final class CompositeMethodsResolver implements ShippingMethodsResolverInterface
     {
     }
 
-    public function getSupportedMethods(ShippingSubjectInterface $shippingSubject): array
+    public function getSupportedMethods(ShippingSubjectInterface $subject): array
     {
         /** @var ShippingMethodsResolverInterface $resolver */
         foreach ($this->resolversRegistry->all() as $resolver) {
-            if ($resolver->supports($shippingSubject)) {
-                return $resolver->getSupportedMethods($shippingSubject);
+            if ($resolver->supports($subject)) {
+                return $resolver->getSupportedMethods($subject);
             }
         }
 
