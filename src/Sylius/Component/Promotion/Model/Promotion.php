@@ -320,8 +320,8 @@ class Promotion implements PromotionInterface
         return $this->appliesToDiscounted;
     }
 
-    public function setAppliesToDiscounted(bool $appliesToDiscounted): void
+    public function setAppliesToDiscounted(bool $applyOnDiscounted): void
     {
-        $this->appliesToDiscounted = $appliesToDiscounted;
+        $this->appliesToDiscounted = $applyOnDiscounted;
     }
 }

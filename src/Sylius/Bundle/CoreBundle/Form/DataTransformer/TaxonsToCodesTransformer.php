@@ -46,10 +46,10 @@ final class TaxonsToCodesTransformer implements DataTransformerInterface
     /**
      * @throws \InvalidArgumentException
      */
-    public function reverseTransform($taxons): array
+    public function reverseTransform($value): array
     {
-        Assert::isInstanceOf($taxons, Collection::class);
+        Assert::isInstanceOf($value, Collection::class);
 
-        return array_map(fn(TaxonInterface $taxon) => $taxon->getCode(), $taxons->toArray());
+        return array_map(fn(TaxonInterface $taxon) => $taxon->getCode(), $value->toArray());
     }
 }

@@ -66,9 +66,9 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
         }
     }
 
-    public function setGatewayConfig(?GatewayConfigInterface $gatewayConfig): void
+    public function setGatewayConfig(?GatewayConfigInterface $gateway): void
     {
-        $this->gatewayConfig = $gatewayConfig;
+        $this->gatewayConfig = $gateway;
     }
 
     public function getGatewayConfig(): ?GatewayConfigInterface

@@ -17,12 +17,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UsernameOrEmailProvider extends AbstractUserProvider
 {
-    protected function findUser(string $usernameOrEmail): ?UserInterface
+    protected function findUser(string $uniqueIdentifier): ?UserInterface
     {
-        if (filter_var($usernameOrEmail, \FILTER_VALIDATE_EMAIL)) {
-            return $this->userRepository->findOneByEmail($usernameOrEmail);
+        if (filter_var($uniqueIdentifier, \FILTER_VALIDATE_EMAIL)) {
+            return $this->userRepository->findOneByEmail($uniqueIdentifier);
         }
 
-        return $this->userRepository->findOneBy(['usernameCanonical' => $usernameOrEmail]);
+        return $this->userRepository->findOneBy(['usernameCanonical' => $uniqueIdentifier]);
     }
 }
