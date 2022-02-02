@@ -25,23 +25,23 @@ final class CompositeMethodsResolver implements PaymentMethodsResolverInterface
         $this->resolversRegistry = $resolversRegistry;
     }
 
-    public function getSupportedMethods(PaymentInterface $payment): array
+    public function getSupportedMethods(PaymentInterface $subject): array
     {
         /** @var PaymentMethodsResolverInterface $resolver */
         foreach ($this->resolversRegistry->all() as $resolver) {
-            if ($resolver->supports($payment)) {
-                return $resolver->getSupportedMethods($payment);
+            if ($resolver->supports($subject)) {
+                return $resolver->getSupportedMethods($subject);
             }
         }
 
         return [];
     }
 
-    public function supports(PaymentInterface $payment): bool
+    public function supports(PaymentInterface $subject): bool
     {
         /** @var PaymentMethodsResolverInterface $resolver */
         foreach ($this->resolversRegistry->all() as $resolver) {
-            if ($resolver->supports($payment)) {
+            if ($resolver->supports($subject)) {
                 return true;
             }
         }
