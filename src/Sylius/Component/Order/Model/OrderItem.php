@@ -36,6 +36,8 @@ class OrderItem implements OrderItemInterface
      */
     protected $unitPrice = 0;
 
+    protected ?int $originalUnitPrice = 0;
+
     /**
      * @var int
      */
@@ -124,6 +126,16 @@ class OrderItem implements OrderItemInterface
     {
         $this->unitPrice = $unitPrice;
         $this->recalculateUnitsTotal();
+    }
+
+    public function getOriginalUnitPrice(): ?int
+    {
+        return $this->originalUnitPrice;
+    }
+
+    public function setOriginalUnitPrice(?int $originalUnitPrice): void
+    {
+        $this->originalUnitPrice = $originalUnitPrice;
     }
 
     public function getTotal(): int

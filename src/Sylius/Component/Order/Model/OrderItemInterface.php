@@ -24,6 +24,10 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
 
     public function setUnitPrice(int $unitPrice): void;
 
+    public function getOriginalUnitPrice(): ?int;
+
+    public function setOriginalUnitPrice(?int $originalUnitPrice): void;
+
     public function getTotal(): int;
 
     /**

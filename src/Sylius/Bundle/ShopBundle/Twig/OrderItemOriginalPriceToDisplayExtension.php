@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Twig;
 
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderItem;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -27,23 +26,17 @@ final class OrderItemOriginalPriceToDisplayExtension extends AbstractExtension
         ];
     }
 
-    public function getOriginalPriceToDisplay(OrderItem $item, ChannelInterface $channel): ?int
+    public function getOriginalPriceToDisplay(OrderItem $item): ?int
     {
-        $variant = $item->getVariant();
-
-        $channelPricing = $variant->getChannelPricingForChannel($channel);
-        $originalPrice = $channelPricing->getOriginalPrice();
-        $price = $channelPricing->getPrice();
-
-        $regularPrice = $item->getUnitPrice();
-        $discountedPrice = $item->getDiscountedUnitPrice();
-
-        if ($originalPrice !== null && $originalPrice > $price) {
-            return $originalPrice;
+        if (
+            $item->getOriginalUnitPrice() !== null &&
+            ($item->getOriginalUnitPrice() > $item->getUnitPrice() || $item->getOriginalUnitPrice() > $item->getDiscountedUnitPrice())
+        ) {
+            return $item->getOriginalUnitPrice();
         }
 
-        if ($originalPrice === null && $regularPrice > $discountedPrice) {
-            return $regularPrice;
+        if ($item->getOriginalUnitPrice() === null && $item->getUnitPrice() > $item->getDiscountedUnitPrice()) {
+            return $item->getUnitPrice();
         }
 
         return null;

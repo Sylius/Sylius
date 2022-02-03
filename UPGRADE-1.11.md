@@ -47,6 +47,11 @@ Add a new bundle to your list of used bundles in `config/bundles.php` if they ar
     +   Sylius\Calendar\SyliusCalendarBundle::class => ['all' => true],
     ```
 
+### Order prices recalculator
+
+Passing a `Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface` to `Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator` constructor is deprecated since Sylius 1.11 and will be prohibited in 2.0.
+Use `Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface` instead.
+
 ### Behat
 
 - Service `sylius.behat.context.hook.calendar` has been removed, use in your suites `Sylius\Calendar\Tests\Behat\Context\Hook\CalendarContext` instead.

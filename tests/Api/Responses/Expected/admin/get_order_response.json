@@ -57,6 +57,7 @@
             "id": @integer@,
             "quantity": 3,
             "unitPrice": 2000,
+            "originalUnitPrice": 2000,
             "total": 6000,
             "subtotal": 6000
         }

@@ -37,8 +37,7 @@
             "variant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
             "productName": "Mug",
             "id": @integer@,
-            "quantity": 3,
-            "originalPrice": null
+            "quantity": 3
         }
     ],
     "itemsTotal": 6000,
