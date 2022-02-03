@@ -93,6 +93,9 @@ As a result you will get the ``Sylius\Bundle\CustomerBundle\Form\Type\CustomerPr
 
 **3.** After creating your class, register this extension as a service in the ``config/services.yaml``:
 
+.. caution::
+    Remember! Service registration is not needed if you have autoconfiguration enabled in your services container.
+
 .. code-block:: yaml
 
     services:
