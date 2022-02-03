@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
@@ -126,7 +125,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         $normalizer
             ->normalize($shippingMethod, null, [
                 'sylius_shipping_method_normalizer_already_called' => true,
-                'subresource_identifiers' => [ 'id' => '999'],
+                'subresource_identifiers' => ['id' => '999'],
             ])
             ->willReturn([])
         ;

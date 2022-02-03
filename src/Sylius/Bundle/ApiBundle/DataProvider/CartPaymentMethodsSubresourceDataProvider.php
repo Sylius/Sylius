@@ -26,20 +26,11 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class CartPaymentMethodsSubresourceDataProvider implements RestrictedDataProviderInterface, SubresourceDataProviderInterface
 {
-    private OrderRepositoryInterface $orderRepository;
-
-    private PaymentRepositoryInterface $paymentRepository;
-
-    private PaymentMethodsResolverInterface $paymentMethodsResolver;
-
     public function __construct(
-        OrderRepositoryInterface $orderRepository,
-        PaymentRepositoryInterface $paymentRepository,
-        PaymentMethodsResolverInterface $paymentMethodsResolver
+        private OrderRepositoryInterface $orderRepository,
+        private PaymentRepositoryInterface $paymentRepository,
+        private PaymentMethodsResolverInterface $paymentMethodsResolver
     ) {
-        $this->orderRepository = $orderRepository;
-        $this->paymentRepository = $paymentRepository;
-        $this->paymentMethodsResolver = $paymentMethodsResolver;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool

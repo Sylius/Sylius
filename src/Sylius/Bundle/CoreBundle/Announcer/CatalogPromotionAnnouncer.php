@@ -42,6 +42,10 @@ final class CatalogPromotionAnnouncer implements CatalogPromotionAnnouncerInterf
 
     public function dispatchCatalogPromotionUpdatedEvent(CatalogPromotionInterface $catalogPromotion): void
     {
+        if ($catalogPromotion->getStartDate() > $this->dateTimeProvider->now()) {
+            $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()), []);
+        }
+
         $this->eventBus->dispatch(
             new CatalogPromotionUpdated($catalogPromotion->getCode()),
             $this->calculateStartDateStamp($catalogPromotion)

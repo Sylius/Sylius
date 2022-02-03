@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
-use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
 use Sylius\Bundle\ApiBundle\Command\CustomerEmailAwareInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -24,11 +23,8 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class LoggedInCustomerEmailAwareCommandDataTransformer implements CommandDataTransformerInterface
 {
-    private UserContextInterface $userContext;
-
-    public function __construct(UserContextInterface $userContext)
+    public function __construct(private UserContextInterface $userContext)
     {
-        $this->userContext = $userContext;
     }
 
     public function transform($object, string $to, array $context = [])

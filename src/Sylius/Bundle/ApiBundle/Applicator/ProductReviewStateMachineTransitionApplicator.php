@@ -20,11 +20,8 @@ use Sylius\Component\Review\Model\ReviewInterface;
 /** @experimental */
 final class ProductReviewStateMachineTransitionApplicator implements ProductReviewStateMachineTransitionApplicatorInterface
 {
-    private StateMachineFactoryInterface $stateMachineFactory;
-
-    public function __construct(StateMachineFactoryInterface $stateMachineFactory)
+    public function __construct(private StateMachineFactoryInterface $stateMachineFactory)
     {
-        $this->stateMachineFactory = $stateMachineFactory;
     }
 
     public function accept(ReviewInterface $data): ReviewInterface

@@ -34,7 +34,8 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
         );
     }
 
-    function it_supports_denormalization_add_product_review(): void {
+    function it_supports_denormalization_add_product_review(): void
+    {
         $context['input']['class'] = AddProductReview::class;
 
         $this
@@ -48,7 +49,8 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_not_support_denormalization_for_not_supported_class(): void {
+    function it_does_not_support_denormalization_for_not_supported_class(): void
+    {
         $context['input']['class'] = Order::class;
 
         $this

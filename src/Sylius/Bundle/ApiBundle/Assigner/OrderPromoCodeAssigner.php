@@ -21,16 +21,10 @@ use Webmozart\Assert\Assert;
 
 final class OrderPromoCodeAssigner implements OrderPromoCodeAssignerInterface
 {
-    private PromotionCouponRepositoryInterface $promotionCouponRepository;
-
-    private OrderProcessorInterface $orderProcessor;
-
     public function __construct(
-        PromotionCouponRepositoryInterface $promotionCouponRepository,
-        OrderProcessorInterface $orderProcessor
+        private PromotionCouponRepositoryInterface $promotionCouponRepository,
+        private OrderProcessorInterface $orderProcessor
     ) {
-        $this->promotionCouponRepository = $promotionCouponRepository;
-        $this->orderProcessor = $orderProcessor;
     }
 
     public function assign(OrderInterface $cart, ?string $couponCode = null): OrderInterface

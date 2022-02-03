@@ -24,24 +24,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class GetProductBySlugAction
 {
-    private ChannelContextInterface $channelContext;
-    private LocaleContextInterface $localeContext;
-    private ProductRepositoryInterface $productRepository;
-    private IriConverterInterface $iriConverter;
-    private RequestStack $requestStack;
-
     public function __construct(
-        ChannelContextInterface $channelContext,
-        LocaleContextInterface $localeContext,
-        ProductRepositoryInterface $productRepository,
-        IriConverterInterface $iriConverter,
-        RequestStack $requestStack
+        private ChannelContextInterface $channelContext,
+        private LocaleContextInterface $localeContext,
+        private ProductRepositoryInterface $productRepository,
+        private IriConverterInterface $iriConverter,
+        private RequestStack $requestStack
     ) {
-        $this->channelContext = $channelContext;
-        $this->localeContext = $localeContext;
-        $this->productRepository = $productRepository;
-        $this->iriConverter = $iriConverter;
-        $this->requestStack = $requestStack;
     }
 
     public function __invoke(string $slug): RedirectResponse

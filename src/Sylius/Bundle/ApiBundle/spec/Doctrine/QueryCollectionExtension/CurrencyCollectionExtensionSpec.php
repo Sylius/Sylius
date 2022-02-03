@@ -35,8 +35,7 @@ final class CurrencyCollectionExtensionSpec extends ObjectBehavior
     function it_throws_an_exception_if_context_has_not_channel(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
-    ): void
-    {
+    ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, CurrencyInterface::class, 'get', []])

@@ -18,12 +18,8 @@ use ApiPlatform\Core\Metadata\Resource\ResourceMetadata;
 /** @experimental */
 final class ResourceMetadataPropertyValueResolver implements ResourceMetadataPropertyValueResolverInteface
 {
-    /** @var ApiResourceConfigurationMergerInterface */
-    private $apiResourceConfigurationMerger;
-
-    public function __construct(ApiResourceConfigurationMergerInterface $apiResourceConfigurationMerger)
+    public function __construct(private ApiResourceConfigurationMergerInterface $apiResourceConfigurationMerger)
     {
-        $this->apiResourceConfigurationMerger = $apiResourceConfigurationMerger;
     }
 
     /**

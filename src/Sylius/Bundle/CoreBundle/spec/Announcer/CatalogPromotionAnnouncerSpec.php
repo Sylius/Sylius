@@ -127,4 +127,35 @@ final class CatalogPromotionAnnouncerSpec extends ObjectBehavior
 
         $this->dispatchCatalogPromotionUpdatedEvent($catalogPromotion);
     }
+
+    function it_dispatches_catalog_promotion_updated_twice_if_catalog_promotion_is_updated_with_delayed_start(
+        MessageBusInterface $eventBus,
+        DelayStampCalculatorInterface $delayStampCalculator,
+        DateTimeProviderInterface $dateTimeProvider,
+        CatalogPromotionInterface $catalogPromotion
+    ): void {
+        $startDateTime = new \DateTime('2021-10-10');
+        $endDateTime = new \DateTime('2021-10-11');
+
+        $dateTimeProvider->now()->willReturn(new \DateTime('2021-10-09'));
+
+        $catalogPromotion->getCode()->willReturn('SALE');
+        $catalogPromotion->getStartDate()->willReturn($startDateTime);
+        $catalogPromotion->getEndDate()->willReturn($endDateTime);
+
+        $startDelayStamp = new DelayStamp(200000);
+        $endDelayStamp = new DelayStamp(300000);
+
+        $delayStampCalculator->calculate(Argument::any(), $startDateTime)->willReturn($startDelayStamp);
+        $delayStampCalculator->calculate(Argument::any(), $endDateTime)->willReturn($endDelayStamp);
+
+        $messageUpdate = new CatalogPromotionUpdated('SALE');
+        $messageEnd = new CatalogPromotionEnded('SALE');
+
+        $eventBus->dispatch($messageUpdate, [])->willReturn(new Envelope($messageUpdate))->shouldBeCalled();
+        $eventBus->dispatch($messageUpdate, [$startDelayStamp])->willReturn(new Envelope($messageUpdate))->shouldBeCalled();
+        $eventBus->dispatch($messageEnd, [$endDelayStamp])->willReturn(new Envelope($messageEnd))->shouldBeCalled();
+
+        $this->dispatchCatalogPromotionUpdatedEvent($catalogPromotion);
+    }
 }

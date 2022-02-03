@@ -22,16 +22,10 @@ use Webmozart\Assert\Assert;
 
 final class OrderAddressModifier implements OrderAddressModifierInterface
 {
-    private StateMachineFactoryInterface $stateMachineFactory;
-
-    private AddressMapperInterface $addressMapper;
-
     public function __construct(
-        StateMachineFactoryInterface $stateMachineFactory,
-        AddressMapperInterface $addressMapper
+        private StateMachineFactoryInterface $stateMachineFactory,
+        private AddressMapperInterface $addressMapper
     ) {
-        $this->stateMachineFactory = $stateMachineFactory;
-        $this->addressMapper = $addressMapper;
     }
 
     public function modify(OrderInterface $order, AddressInterface $billingAddress, ?AddressInterface $shippingAddress = null): OrderInterface

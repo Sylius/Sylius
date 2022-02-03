@@ -21,14 +21,10 @@ use Sylius\Component\Channel\Context\ChannelNotFoundException;
 /** @experimental */
 final class ChannelAwareItemDataProvider implements ItemDataProviderInterface
 {
-    private ItemDataProviderInterface $itemDataProvider;
-
-    private ChannelContextInterface $channelContext;
-
-    public function __construct(ItemDataProviderInterface $itemDataProvider, ChannelContextInterface $channelContext)
-    {
-        $this->itemDataProvider = $itemDataProvider;
-        $this->channelContext = $channelContext;
+    public function __construct(
+        private ItemDataProviderInterface $itemDataProvider,
+        private ChannelContextInterface $channelContext
+    ) {
     }
 
     public function getItem(string $resourceClass, $id, string $operationName = null, array $context = []): ?object
@@ -44,7 +40,7 @@ final class ChannelAwareItemDataProvider implements ItemDataProviderInterface
 
         try {
             $context[ContextKeys::CHANNEL] = $this->channelContext->getChannel();
-        } catch (ChannelNotFoundException $exception) {
+        } catch (ChannelNotFoundException) {
         }
 
         return $context;

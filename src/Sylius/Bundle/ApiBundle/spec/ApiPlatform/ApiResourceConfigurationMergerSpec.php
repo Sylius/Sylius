@@ -23,32 +23,32 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
             [
                 'admin_get' => [
                     'method' => 'GET',
-                    'path' => 'admin/path/{tokenValue}'
+                    'path' => 'admin/path/{tokenValue}',
                 ],
                 'admin_post' => [
                     'method' => 'POST',
-                    'path' => 'admin/path'
-                ]
+                    'path' => 'admin/path',
+                ],
             ],
             [
                 'admin_patch' => [
                     'method' => 'PATCH',
-                    'path' => 'admin/path/patch'
+                    'path' => 'admin/path/patch',
                 ],
             ]
         )->shouldReturn(
             [
                 'admin_get' => [
                     'method' => 'GET',
-                    'path' => 'admin/path/{tokenValue}'
+                    'path' => 'admin/path/{tokenValue}',
                 ],
                 'admin_post' => [
                     'method' => 'POST',
-                    'path' => 'admin/path'
+                    'path' => 'admin/path',
                 ],
                 'admin_patch' => [
                     'method' => 'PATCH',
-                    'path' => 'admin/path/patch'
+                    'path' => 'admin/path/patch',
                 ],
             ]
         );
@@ -60,12 +60,12 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
             [
                 'admin_get' => [
                     'method' => 'GET',
-                    'path' => 'admin/path/{tokenValue}'
+                    'path' => 'admin/path/{tokenValue}',
                 ],
                 'admin_post' => [
                     'method' => 'POST',
-                    'path' => 'admin/path'
-                ]
+                    'path' => 'admin/path',
+                ],
             ],
             [
                 'admin_get' => [
@@ -76,8 +76,8 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
             [
                 'admin_post' => [
                     'method' => 'POST',
-                    'path' => 'admin/path'
-                ]
+                    'path' => 'admin/path',
+                ],
             ]
         );
     }
@@ -88,29 +88,29 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
             [
                 'admin_get' => [
                     'method' => 'GET',
-                    'path' => 'admin/path/{tokenValue}'
+                    'path' => 'admin/path/{tokenValue}',
                 ],
                 'admin_post' => [
                     'method' => 'POST',
-                    'path' => 'admin/path-old'
-                ]
+                    'path' => 'admin/path-old',
+                ],
             ],
             [
                 'admin_post' => [
                     'method' => 'POST',
-                    'path' => 'admin/path-new'
-                ]
+                    'path' => 'admin/path-new',
+                ],
             ]
         )->shouldReturn(
             [
                 'admin_get' => [
                     'method' => 'GET',
-                    'path' => 'admin/path/{tokenValue}'
+                    'path' => 'admin/path/{tokenValue}',
                 ],
                 'admin_post' => [
                     'method' => 'POST',
-                    'path' => 'admin/path-new'
-                ]
+                    'path' => 'admin/path-new',
+                ],
             ]
         );
     }
@@ -121,30 +121,30 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
             [
                 'admin_get' => [
                     'method' => 'GET',
-                    'path' => 'admin/path/{tokenValue}'
+                    'path' => 'admin/path/{tokenValue}',
                 ],
                 'admin_post' => [
                     'method' => 'POST',
-                    'path' => 'admin/path-old'
-                ]
+                    'path' => 'admin/path-old',
+                ],
             ],
             [
                 'admin_post' => [
                     'enabled' => false,
                     'method' => 'POST',
-                    'path' => 'admin/path-new'
-                ]
+                    'path' => 'admin/path-new',
+                ],
             ]
         )->shouldReturn(
             [
                 'admin_get' => [
                     'method' => 'GET',
-                    'path' => 'admin/path/{tokenValue}'
+                    'path' => 'admin/path/{tokenValue}',
                 ],
                 'admin_post' => [
                     'method' => 'POST',
-                    'path' => 'admin/path-new'
-                ]
+                    'path' => 'admin/path-new',
+                ],
             ]
         );
     }
@@ -155,33 +155,33 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
             [
                 [
                     'method' => 'GET',
-                    'path' => 'admin/path/{tokenValue}'
+                    'path' => 'admin/path/{tokenValue}',
                 ],
                 [
                     'method' => 'POST',
-                    'path' => 'admin/path-old'
-                ]
+                    'path' => 'admin/path-old',
+                ],
             ],
             [
                 [
                     'method' => 'POST',
-                    'path' => 'admin/path-new'
-                ]
+                    'path' => 'admin/path-new',
+                ],
             ]
         )->shouldReturn(
             [
                 [
                     'method' => 'GET',
-                    'path' => 'admin/path/{tokenValue}'
+                    'path' => 'admin/path/{tokenValue}',
                 ],
                 [
                     'method' => 'POST',
-                    'path' => 'admin/path-old'
+                    'path' => 'admin/path-old',
                 ],
                 [
                     'method' => 'POST',
-                    'path' => 'admin/path-new'
-                ]
+                    'path' => 'admin/path-new',
+                ],
             ]
         );
     }
@@ -190,15 +190,15 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
     {
         $this->mergeConfigs(
             [
-                'test_config_one' => 'test_value_one'
+                'test_config_one' => 'test_value_one',
             ],
             [
-                'test_config_two' => 'test_value_two'
+                'test_config_two' => 'test_value_two',
             ]
         )->shouldReturn(
             [
                 'test_config_one' => 'test_value_one',
-                'test_config_two' => 'test_value_two'
+                'test_config_two' => 'test_value_two',
             ]
         );
     }

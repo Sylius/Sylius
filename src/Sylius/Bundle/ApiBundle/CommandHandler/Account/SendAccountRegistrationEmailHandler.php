@@ -24,20 +24,11 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /** @experimental  */
 final class SendAccountRegistrationEmailHandler implements MessageHandlerInterface
 {
-    private UserRepositoryInterface $shopUserRepository;
-
-    private ChannelRepositoryInterface $channelRepository;
-
-    private SenderInterface $emailSender;
-
     public function __construct(
-        UserRepositoryInterface $shopUserRepository,
-        ChannelRepositoryInterface $channelRepository,
-        SenderInterface $emailSender
+        private UserRepositoryInterface $shopUserRepository,
+        private ChannelRepositoryInterface $channelRepository,
+        private SenderInterface $emailSender
     ) {
-        $this->shopUserRepository = $shopUserRepository;
-        $this->channelRepository = $channelRepository;
-        $this->emailSender = $emailSender;
     }
 
     public function __invoke(SendAccountRegistrationEmail $command): void

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\Account\ResendVerificationEmail;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserNotVerified;
@@ -57,7 +56,6 @@ final class ShopUserNotVerifiedValidatorSpec extends ObjectBehavior
     function it_throws_an_exception_if_shop_user_does_not_exist(UserRepositoryInterface $userRepository): void
     {
         $value = new class() implements ShopUserIdAwareInterface {
-
             public function getShopUserId()
             {
                 return 42;
@@ -85,7 +83,6 @@ final class ShopUserNotVerifiedValidatorSpec extends ObjectBehavior
         $this->initialize($executionContext);
 
         $value = new class() implements ShopUserIdAwareInterface {
-
             public function getShopUserId()
             {
                 return 42;
@@ -117,7 +114,6 @@ final class ShopUserNotVerifiedValidatorSpec extends ObjectBehavior
         $this->initialize($executionContext);
 
         $value = new class() implements ShopUserIdAwareInterface {
-
             public function getShopUserId()
             {
                 return 42;

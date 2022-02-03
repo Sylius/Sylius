@@ -27,18 +27,12 @@ final class CachedRouteNameResolver implements RouteNameResolverInterface
 {
     use CachedTrait;
 
-    private RouteNameResolverInterface $decorated;
-
-    private PathPrefixProviderInterface $pathPrefixProvider;
-
     public function __construct(
         CacheItemPoolInterface $cacheItemPool,
-        RouteNameResolverInterface $decorated,
-        PathPrefixProviderInterface $pathPrefixProvider
+        private RouteNameResolverInterface $decorated,
+        private PathPrefixProviderInterface $pathPrefixProvider
     ) {
         $this->cacheItemPool = $cacheItemPool;
-        $this->decorated = $decorated;
-        $this->pathPrefixProvider = $pathPrefixProvider;
     }
 
     public function getRouteName(string $resourceClass, $operationType /*, array $context = []*/): string

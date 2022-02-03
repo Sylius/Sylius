@@ -23,16 +23,10 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class PaymentMethodChanger implements PaymentMethodChangerInterface
 {
-    private PaymentRepositoryInterface $paymentRepository;
-
-    private PaymentMethodRepositoryInterface $paymentMethodRepository;
-
     public function __construct(
-        PaymentRepositoryInterface $paymentRepository,
-        PaymentMethodRepositoryInterface $paymentMethodRepository
+        private PaymentRepositoryInterface $paymentRepository,
+        private PaymentMethodRepositoryInterface $paymentMethodRepository
     ) {
-        $this->paymentRepository = $paymentRepository;
-        $this->paymentMethodRepository = $paymentMethodRepository;
     }
 
     public function changePaymentMethod(

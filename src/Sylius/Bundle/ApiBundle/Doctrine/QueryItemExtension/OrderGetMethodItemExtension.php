@@ -28,11 +28,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /** @experimental */
 final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
 {
-    private UserContextInterface $userContext;
-
-    public function __construct(UserContextInterface $userContext)
+    public function __construct(private UserContextInterface $userContext)
     {
-        $this->userContext = $userContext;
     }
 
     public function applyToItem(

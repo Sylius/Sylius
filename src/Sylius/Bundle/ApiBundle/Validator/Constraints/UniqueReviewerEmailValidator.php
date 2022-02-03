@@ -24,14 +24,10 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class UniqueReviewerEmailValidator extends ConstraintValidator
 {
-    private UserRepositoryInterface $shopUserRepository;
-
-    private UserContextInterface $userContext;
-
-    public function __construct(UserRepositoryInterface $shopUserRepository, UserContextInterface $userContext)
-    {
-        $this->shopUserRepository = $shopUserRepository;
-        $this->userContext = $userContext;
+    public function __construct(
+        private UserRepositoryInterface $shopUserRepository,
+        private UserContextInterface $userContext
+    ) {
     }
 
     public function validate($value, Constraint $constraint): void

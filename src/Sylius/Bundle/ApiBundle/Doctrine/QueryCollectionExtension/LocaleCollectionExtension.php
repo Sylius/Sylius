@@ -25,11 +25,8 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class LocaleCollectionExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    private UserContextInterface $userContext;
-
-    public function __construct(UserContextInterface $userContext)
+    public function __construct(private UserContextInterface $userContext)
     {
-        $this->userContext = $userContext;
     }
 
     public function applyToCollection(

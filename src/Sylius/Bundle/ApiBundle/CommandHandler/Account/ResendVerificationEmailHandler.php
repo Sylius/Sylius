@@ -17,7 +17,6 @@ use Sylius\Bundle\ApiBundle\Command\Account\ResendVerificationEmail;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -28,20 +27,11 @@ use Webmozart\Assert\Assert;
 /** @experimental  */
 final class ResendVerificationEmailHandler implements MessageHandlerInterface
 {
-    private UserRepositoryInterface $shopUserRepository;
-
-    private GeneratorInterface $tokenGenerator;
-
-    private MessageBusInterface $commandBus;
-
     public function __construct(
-        UserRepositoryInterface $shopUserRepository,
-        GeneratorInterface $tokenGenerator,
-        MessageBusInterface $commandBus
+        private UserRepositoryInterface $shopUserRepository,
+        private GeneratorInterface $tokenGenerator,
+        private MessageBusInterface $commandBus
     ) {
-        $this->shopUserRepository = $shopUserRepository;
-        $this->tokenGenerator = $tokenGenerator;
-        $this->commandBus = $commandBus;
     }
 
     public function __invoke(ResendVerificationEmail $command): void

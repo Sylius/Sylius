@@ -19,11 +19,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /** @experimental */
 final class TokenBasedUserContext implements UserContextInterface
 {
-    private TokenStorageInterface $tokenStorage;
-
-    public function __construct(TokenStorageInterface $tokenStorage)
+    public function __construct(private TokenStorageInterface $tokenStorage)
     {
-        $this->tokenStorage = $tokenStorage;
     }
 
     public function getUser(): ?UserInterface

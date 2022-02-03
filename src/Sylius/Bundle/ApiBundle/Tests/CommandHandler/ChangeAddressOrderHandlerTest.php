@@ -94,6 +94,6 @@ final class ChangeAddressOrderHandlerTest extends KernelTestCase
 
         $updateCartHandler($updateCart);
 
-        $this->assertSame(1, count($addressRepository->findAll()));
+        $this->assertCount(1, $addressRepository->findAll());
     }
 }

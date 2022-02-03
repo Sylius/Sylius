@@ -23,14 +23,10 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /** @experimental */
 final class SendOrderConfirmationHandler implements MessageHandlerInterface
 {
-    private SenderInterface $emailSender;
-
-    private OrderRepositoryInterface $orderRepository;
-
-    public function __construct(SenderInterface $emailSender, OrderRepositoryInterface $orderRepository)
-    {
-        $this->emailSender = $emailSender;
-        $this->orderRepository = $orderRepository;
+    public function __construct(
+        private SenderInterface $emailSender,
+        private OrderRepositoryInterface $orderRepository
+    ) {
     }
 
     public function __invoke(SendOrderConfirmation $sendOrderConfirmation): void

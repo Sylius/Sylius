@@ -23,16 +23,10 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ChangePaymentMethodHandler implements MessageHandlerInterface
 {
-    private PaymentMethodChangerInterface $paymentMethodChanger;
-
-    private OrderRepositoryInterface $orderRepository;
-
     public function __construct(
-        PaymentMethodChangerInterface $commandPaymentMethodChanger,
-        OrderRepositoryInterface $orderRepository
+        private PaymentMethodChangerInterface $paymentMethodChanger,
+        private OrderRepositoryInterface $orderRepository
     ) {
-        $this->paymentMethodChanger = $commandPaymentMethodChanger;
-        $this->orderRepository = $orderRepository;
     }
 
     public function __invoke(ChangePaymentMethod $changePaymentMethod): OrderInterface

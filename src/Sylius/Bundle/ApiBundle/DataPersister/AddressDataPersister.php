@@ -23,16 +23,10 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 /** @experimental */
 final class AddressDataPersister implements ContextAwareDataPersisterInterface
 {
-    private ContextAwareDataPersisterInterface $decoratedDataPersister;
-
-    private UserContextInterface $userContext;
-
     public function __construct(
-        ContextAwareDataPersisterInterface $decoratedDataPersister,
-        UserContextInterface $userContext
+        private ContextAwareDataPersisterInterface $decoratedDataPersister,
+        private UserContextInterface $userContext
     ) {
-        $this->decoratedDataPersister = $decoratedDataPersister;
-        $this->userContext = $userContext;
     }
 
     public function supports($data, array $context = []): bool

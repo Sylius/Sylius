@@ -17,14 +17,10 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class PathHiderDocumentationNormalizer implements NormalizerInterface
 {
-    private NormalizerInterface $decoratedNormalizer;
-
-    private array $apiRoutes;
-
-    public function __construct(NormalizerInterface $decoratedNormalizer, array $apiRoutes)
-    {
-        $this->decoratedNormalizer = $decoratedNormalizer;
-        $this->apiRoutes = $apiRoutes;
+    public function __construct(
+        private NormalizerInterface $decoratedNormalizer,
+        private array $apiRoutes
+    ) {
     }
 
     public function supportsNormalization($data, $format = null): bool

@@ -32,16 +32,10 @@ final class OrderItemNormalizer implements ContextAwareNormalizerInterface, Norm
 
     private const ALREADY_CALLED = 'sylius_order_item_normalizer_already_called';
 
-    /** @var ChannelContextInterface */
-    private $channelContext;
-
-    /** @var SectionProviderInterface */
-    private $uriBasedSectionContext;
-
-    public function __construct(ChannelContextInterface $channelContext, SectionProviderInterface $uriBasedSectionContext)
-    {
-        $this->channelContext = $channelContext;
-        $this->uriBasedSectionContext = $uriBasedSectionContext;
+    public function __construct(
+        private ChannelContextInterface $channelContext,
+        private SectionProviderInterface $uriBasedSectionContext
+    ) {
     }
 
     public function normalize($object, $format = null, array $context = [])

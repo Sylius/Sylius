@@ -18,11 +18,8 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 /** @experimental */
 final class ProductDocumentationNormalizer implements NormalizerInterface
 {
-    private NormalizerInterface $decoratedNormalizer;
-
-    public function __construct(NormalizerInterface $decoratedNormalizer)
+    public function __construct(private NormalizerInterface $decoratedNormalizer)
     {
-        $this->decoratedNormalizer = $decoratedNormalizer;
     }
 
     public function supportsNormalization($data, $format = null)

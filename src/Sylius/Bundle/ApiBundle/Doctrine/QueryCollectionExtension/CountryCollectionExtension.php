@@ -25,11 +25,8 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class CountryCollectionExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    private UserContextInterface $userContext;
-
-    public function __construct(UserContextInterface $userContext)
+    public function __construct(private UserContextInterface $userContext)
     {
-        $this->userContext = $userContext;
     }
 
     public function applyToCollection(
@@ -56,7 +53,7 @@ final class CountryCollectionExtension implements ContextAwareQueryCollectionExt
         if ($channel->getCountries()->count() > 0) {
             $rootAlias = $queryBuilder->getRootAliases()[0];
             $queryBuilder
-                ->andWhere(sprintf('%s.id in (:%s)',$rootAlias, $countriesParameterName))
+                ->andWhere(sprintf('%s.id in (:%s)', $rootAlias, $countriesParameterName))
                 ->setParameter($countriesParameterName, $channel->getCountries())
             ;
         }
