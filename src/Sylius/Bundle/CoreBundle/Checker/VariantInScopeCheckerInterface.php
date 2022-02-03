@@ -18,7 +18,5 @@ use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 
 interface VariantInScopeCheckerInterface
 {
-    public function supports(CatalogPromotionScopeInterface $catalogPromotionScopeType): bool;
-
     public function inScope(CatalogPromotionScopeInterface $scope, ProductVariantInterface $productVariant): bool;
 }
