@@ -1,0 +1,13 @@
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-31T21:59:03Z
+
+WDYT about adding a method on the Order model to get the items total based on original unit price?
+
+Edit: it would also require additional methods on the order item to calculate it's total first, plus a property to store the result and methods to recalculate the total. Just like with the current units and items total.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-02-03T09:57:14Z
+
+Thanks, Rafał! :tada:
