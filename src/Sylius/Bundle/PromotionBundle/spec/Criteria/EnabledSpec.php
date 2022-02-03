@@ -37,8 +37,9 @@ final class EnabledSpec extends ObjectBehavior
 
     function it_verifies_catalog_promotion(CatalogPromotionInterface $catalogPromotion): void
     {
-        $catalogPromotion->isEnabled()->willReturn(true);
+        $catalogPromotion->isEnabled()->willReturn(true, false);
 
         $this->verify($catalogPromotion)->shouldReturn(true);
+        $this->verify($catalogPromotion)->shouldReturn(false);
     }
 }

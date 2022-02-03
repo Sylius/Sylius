@@ -58,5 +58,15 @@ final class DateRangeSpec extends ObjectBehavior
         $catalogPromotion->getEndDate()->willReturn($tomorrow);
 
         $this->verify($catalogPromotion)->shouldReturn(true);
+
+        $catalogPromotion->getStartDate()->willReturn(null);
+        $catalogPromotion->getEndDate()->willReturn(null);
+
+        $this->verify($catalogPromotion)->shouldReturn(true);
+
+        $catalogPromotion->getStartDate()->willReturn($tomorrow);
+        $catalogPromotion->getEndDate()->willReturn($yesterday);
+
+        $this->verify($catalogPromotion)->shouldReturn(false);
     }
 }
