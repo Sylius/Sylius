@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+
+by stloyd at 2022-02-02T08:01:03Z
+
+This looks dangerous for me cause cleaning whole entity manager means that you remove **everything** that was put in it, either it was already saved or not into database, which means side effects in live applications can be unpredictable IMHO.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-02-02T10:19:39Z
+
+I agree with @stloyd. Usually it's flush then clear, doing just a clear is not a good idea.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-02-03T09:39:37Z
+
+Thanks, Łukasz! :tada:
