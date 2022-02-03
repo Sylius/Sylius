@@ -42,7 +42,6 @@
         <parameter key="sylius.order_item_quantity_modifier.limit">9999</parameter>
         <parameter key="env(SYLIUS_UNSECURED_URLS)">true</parameter>
         <parameter key="sylius.unsecured_urls">%env(bool:SYLIUS_UNSECURED_URLS)%</parameter>
-        <parameter key="sylius.messenger.product_variant.size_of_batches">100</parameter>
     </parameters>
 
     <services>
@@ -302,7 +301,7 @@
             class="Sylius\Bundle\CoreBundle\CommandDispatcher\BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher"
         >
             <argument type="service" id="sylius.command_bus" />
-            <argument>%sylius.messenger.product_variant.size_of_batches%</argument>
+            <argument>%sylius_core.catalog_promotions.batch_size%</argument>
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\CommandHandler\ApplyCatalogPromotionsOnVariantsHandler">

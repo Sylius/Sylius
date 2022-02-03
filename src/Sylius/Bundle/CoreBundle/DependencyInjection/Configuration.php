@@ -51,6 +51,12 @@ final class Configuration implements ConfigurationInterface
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->booleanNode('prepend_doctrine_migrations')->defaultTrue()->end()
                 ->booleanNode('shipping_address_based_taxation')->defaultFalse()->end()
+                ->arrayNode('catalog_promotions')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->integerNode('batch_size')->defaultValue(100)->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 
