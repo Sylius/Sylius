@@ -155,6 +155,7 @@
 
         <service id="sylius.behat.context.api.shop.locale" class="Sylius\Behat\Context\Api\Shop\LocaleContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop.locale" />
+            <argument type="service" id="sylius.behat.api_platform_client.shop.channel" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
         </service>
     </services>

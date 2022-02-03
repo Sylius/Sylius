@@ -40,17 +40,13 @@ final class ChannelContext implements Context
 
     /**
      * @Given I am browsing channel :channel
-     */
-    public function iAmBrowsingChannel(ChannelInterface $channel): void
-    {
-        $this->sharedStorage->set('hostname', $channel->getHostname());
-    }
-
-    /**
      * @When /^I (?:start browsing|try to browse|browse) (that channel)$/
+     * @When I browse the :channel channel
      */
     public function iVisitChannelHomepage(ChannelInterface $channel): void
     {
+        $this->sharedStorage->set('hostname', $channel->getHostname());
+
         $this->client->show($channel->getCode());
     }
 

@@ -5,10 +5,10 @@ Feature: Handling different locales on multiple channels
     I want to browse channels with a valid locale only
 
     Background:
-        Given the store operates on a channel named "Web"
+        Given the store operates on a channel named "Web" with hostname "web.com"
         And that channel allows to shop using "English (United States)", "Polish (Poland)" and "Norwegian (Norway)" locales
         And it uses the "English (United States)" locale by default
-        And the store operates on another channel named "Mobile"
+        And the store operates on another channel named "Mobile" with hostname "mobile.com"
         And that channel allows to shop using "Polish (Poland)" and "Norwegian (Norway)" locales
         And it uses the "Polish (Poland)" locale by default
 

@@ -22,14 +22,18 @@ use Webmozart\Assert\Assert;
 final class LocaleContext implements Context
 {
     /** @var ApiClientInterface */
-    private $client;
+    private $localeClient;
+
+    /** @var ApiClientInterface */
+    private $channelClient;
 
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
-    public function __construct(ApiClientInterface $client, ResponseCheckerInterface $responseChecker)
+    public function __construct(ApiClientInterface $localeClient, ApiClientInterface $channelClient, ResponseCheckerInterface $responseChecker)
     {
-        $this->client = $client;
+        $this->localeClient = $localeClient;
+        $this->channelClient = $channelClient;
         $this->responseChecker = $responseChecker;
     }
 
@@ -38,7 +42,7 @@ final class LocaleContext implements Context
      */
     public function iGetAvailableLocales(): void
     {
-       $this->client->index();
+       $this->localeClient->index();
     }
 
     /**
@@ -46,7 +50,7 @@ final class LocaleContext implements Context
      */
     public function iGetLocale(LocaleInterface $locale): void
     {
-        $this->client->show($locale->getCode());
+        $this->localeClient->show($locale->getCode());
     }
 
     /**
@@ -55,7 +59,7 @@ final class LocaleContext implements Context
     public function iShouldHaveLocales(int $count): void
     {
         Assert::same(
-            $this->responseChecker->countCollectionItems($this->client->getLastResponse()),
+            $this->responseChecker->countCollectionItems($this->localeClient->getLastResponse()),
             $count
         );
     }
@@ -66,7 +70,7 @@ final class LocaleContext implements Context
     public function theLocaleWithCodeShouldBeAvailable(string $name, string $code): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValues($this->client->getLastResponse(), ['name' => $name, 'code' => $code])
+            $this->responseChecker->hasItemWithValues($this->localeClient->getLastResponse(), ['name' => $name, 'code' => $code])
         );
     }
 
@@ -76,7 +80,7 @@ final class LocaleContext implements Context
     public function theLocaleWithCodeShouldNotBeAvailable(string $name, string $code): void
     {
         Assert::false(
-            $this->responseChecker->hasItemWithValues($this->client->getLastResponse(), ['name' => $name, 'code' => $code])
+            $this->responseChecker->hasItemWithValues($this->localeClient->getLastResponse(), ['name' => $name, 'code' => $code])
         );
     }
 
@@ -85,9 +89,51 @@ final class LocaleContext implements Context
      */
     public function iShouldHaveWithCode(string $name, string $code): void
     {
-        $response = $this->client->getLastResponse();
+        $response = $this->localeClient->getLastResponse();
 
         Assert::true($this->responseChecker->hasValue($response, 'name', $name));
         Assert::true($this->responseChecker->hasValue($response, 'code', $code));
+    }
+
+    /**
+     * @Then I should be informed that :rawLocaleName locale is default one
+     */
+    public function iShouldShopUsingTheLocale(string $rawLocaleName): void
+    {
+        $channelResponse = $this->channelClient->getLastResponse();
+
+        $this->localeClient->showByIri($this->responseChecker->getValue($channelResponse, 'defaultLocale'));
+
+        $localeResponse = $this->localeClient->getLastResponse();
+
+        Assert::same($this->responseChecker->getValue($localeResponse, 'name'), $rawLocaleName);
+    }
+
+    /**
+     * @Then I should be able to shop using the :rawLocaleName locale
+     */
+    public function iShouldBeAbleToShopUsingTheLocale(string $rawLocaleName): void
+    {
+        $this->assertAmountOfLocalesWithGivenNameInCollection($rawLocaleName, 1);
+    }
+
+    /**
+     * @Then I should not be able to shop using the :rawLocaleName locale
+     */
+    public function iShouldNotBeAbleToShopUsingTheLocale($rawLocaleName): void
+    {
+        $this->assertAmountOfLocalesWithGivenNameInCollection($rawLocaleName, 0);
+    }
+
+    private function assertAmountOfLocalesWithGivenNameInCollection(string $rawLocaleName, int $amount): void
+    {
+        $this->localeClient->index();
+
+        $localeResponse = $this->localeClient->getLastResponse();
+
+        Assert::count(
+            $this->responseChecker->getCollectionItemsWithValue($localeResponse, 'name', $rawLocaleName),
+            $amount
+        );
     }
 }
