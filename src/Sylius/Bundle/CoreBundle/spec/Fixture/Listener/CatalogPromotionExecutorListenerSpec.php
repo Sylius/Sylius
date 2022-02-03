@@ -22,20 +22,24 @@ use Sylius\Bundle\FixturesBundle\Listener\AfterFixtureListenerInterface;
 use Sylius\Bundle\FixturesBundle\Listener\FixtureEvent;
 use Sylius\Bundle\FixturesBundle\Listener\ListenerInterface;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
+use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 
 final class CatalogPromotionExecutorListenerSpec extends ObjectBehavior
 {
     function let(
         AllProductVariantsCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
         CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
-        RepositoryInterface $catalogPromotionRepository
+        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
+        CriteriaInterface $firstCriterion,
+        CriteriaInterface $secondCriterion
     ): void {
         $this->beConstructedWith(
             $allCatalogPromotionsProcessor,
             $catalogPromotionStateProcessor,
-            $catalogPromotionRepository
+            $catalogPromotionRepository,
+            [$firstCriterion, $secondCriterion]
         );
     }
 
@@ -54,11 +58,16 @@ final class CatalogPromotionExecutorListenerSpec extends ObjectBehavior
         CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
         SuiteInterface $suite,
         CatalogPromotionFixture $catalogPromotionFixture,
-        RepositoryInterface $catalogPromotionRepository,
+        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         CatalogPromotionInterface $firstCatalogPromotion,
-        CatalogPromotionInterface $secondCatalogPromotion
+        CatalogPromotionInterface $secondCatalogPromotion,
+        CriteriaInterface $firstCriterion,
+        CriteriaInterface $secondCriterion
     ): void {
-        $catalogPromotionRepository->findAll()->willReturn([$firstCatalogPromotion, $secondCatalogPromotion]);
+        $catalogPromotionRepository
+            ->findByCriteria([$firstCriterion, $secondCriterion])
+            ->willReturn([$firstCatalogPromotion, $secondCatalogPromotion])
+        ;
 
         $this->afterFixture(new FixtureEvent($suite->getWrappedObject(), $catalogPromotionFixture->getWrappedObject(), []), []);
 
@@ -72,9 +81,11 @@ final class CatalogPromotionExecutorListenerSpec extends ObjectBehavior
         CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
         SuiteInterface $suite,
         FixtureInterface $fixture,
-        RepositoryInterface $catalogPromotionRepository
+        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
+        CriteriaInterface $firstCriterion,
+        CriteriaInterface $secondCriterion
     ): void {
-        $catalogPromotionRepository->findAll()->willReturn([]);
+        $catalogPromotionRepository->findByCriteria([$firstCriterion, $secondCriterion])->shouldNotBeCalled();
 
         $this->afterFixture(new FixtureEvent($suite->getWrappedObject(), $fixture->getWrappedObject(), []), []);
 
