@@ -21,11 +21,6 @@ final class InForProductScopeVariantChecker implements VariantInScopeCheckerInte
 {
     public const TYPE = 'for_products';
 
-    public function supports(CatalogPromotionScopeInterface $catalogPromotionScopeType): bool
-    {
-        return $catalogPromotionScopeType->getType() === self::TYPE;
-    }
-
     public function inScope(CatalogPromotionScopeInterface $scope, ProductVariantInterface $productVariant): bool
     {
         $configuration = $scope->getConfiguration();

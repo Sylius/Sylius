@@ -23,11 +23,6 @@ final class InForTaxonsScopeVariantChecker implements VariantInScopeCheckerInter
 {
     public const TYPE = 'for_taxons';
 
-    public function supports(CatalogPromotionScopeInterface $catalogPromotionScopeType): bool
-    {
-        return $catalogPromotionScopeType->getType() === self::TYPE;
-    }
-
     public function inScope(CatalogPromotionScopeInterface $scope, ProductVariantInterface $productVariant): bool
     {
         $configuration = $scope->getConfiguration();
