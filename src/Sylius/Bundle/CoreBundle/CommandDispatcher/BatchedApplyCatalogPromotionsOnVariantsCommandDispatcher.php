@@ -24,9 +24,9 @@ final class BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher implements 
     ) {
     }
 
-    public function updateVariants(array $variants): void
+    public function updateVariants(array $variantsCodes): void
     {
-        $batchedVariants = array_chunk($variants, $this->size);
+        $batchedVariants = array_chunk($variantsCodes, $this->size);
 
         foreach ($batchedVariants as $batch) {
             $this->messageBus->dispatch(new ApplyCatalogPromotionsOnVariants($batch));
