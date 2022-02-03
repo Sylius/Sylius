@@ -40,8 +40,6 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
 
     private ExampleFactoryInterface $catalogPromotionActionExampleFactory;
 
-    private AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
@@ -51,15 +49,13 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
         RepositoryInterface $localeRepository,
         ChannelRepositoryInterface $channelRepository,
         ExampleFactoryInterface $catalogPromotionScopeExampleFactory,
-        ExampleFactoryInterface $catalogPromotionActionExampleFactory,
-        AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor
+        ExampleFactoryInterface $catalogPromotionActionExampleFactory
     ) {
         $this->catalogPromotionFactory = $catalogPromotionFactory;
         $this->localeRepository = $localeRepository;
         $this->channelRepository = $channelRepository;
         $this->catalogPromotionScopeExampleFactory = $catalogPromotionScopeExampleFactory;
         $this->catalogPromotionActionExampleFactory = $catalogPromotionActionExampleFactory;
-        $this->allProductVariantsCatalogPromotionsProcessor = $allProductVariantsCatalogPromotionsProcessor;
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
@@ -109,8 +105,6 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
                 $catalogPromotion->addAction($catalogPromotionAction);
             }
         }
-
-        $this->allProductVariantsCatalogPromotionsProcessor->process();
 
         return $catalogPromotion;
     }
