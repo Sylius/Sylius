@@ -21,7 +21,6 @@
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionScopeExampleFactory" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionActionExampleFactory" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\AllProductVariantsCatalogPromotionsProcessorInterface" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionScopeExampleFactory">
