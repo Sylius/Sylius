@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\PromotionBundle\Criteria;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 
 final class EnabledSpec extends ObjectBehavior
 {
@@ -32,5 +33,13 @@ final class EnabledSpec extends ObjectBehavior
         $queryBuilder->setParameter('enabled', true)->willReturn($queryBuilder)->shouldBeCalled();
 
         $this->filterQueryBuilder($queryBuilder)->shouldReturn($queryBuilder);
+    }
+
+    function it_verifies_catalog_promotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $catalogPromotion->isEnabled()->willReturn(true, false);
+
+        $this->verify($catalogPromotion)->shouldReturn(true);
+        $this->verify($catalogPromotion)->shouldReturn(false);
     }
 }

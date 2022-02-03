@@ -6,19 +6,11 @@ winzou_state_machine:
         state_machine_class: "%sylius.state_machine.class%"
         states:
             inactive: ~
-            processing: ~
             active: ~
-            failed: ~
         transitions:
-            process:
-                from: [inactive, active]
-                to: processing
             activate:
-                from: [processing]
+                from: [inactive]
                 to: active
             deactivate:
-                from: [processing, active]
+                from: [active]
                 to: inactive
-            fail:
-                from: [processing]
-                to: failed

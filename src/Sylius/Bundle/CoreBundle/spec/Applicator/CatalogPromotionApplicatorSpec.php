@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Applicator\ActionBasedDiscountApplicatorInterface;
 use Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface;
+use Sylius\Bundle\CoreBundle\Checker\CatalogPromotionEligibilityCheckerInterface;
 use Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibilityInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -28,9 +29,10 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
 {
     function let(
         ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator,
-        ProductVariantForCatalogPromotionEligibilityInterface $checker
+        ProductVariantForCatalogPromotionEligibilityInterface $checker,
+        CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker
     ): void {
-        $this->beConstructedWith($actionBasedDiscountApplicator, $checker);
+        $this->beConstructedWith($actionBasedDiscountApplicator, $checker, $catalogPromotionEligibilityChecker);
     }
 
     function it_implements_catalog_promotion_applicator_interface(): void
@@ -47,10 +49,12 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         ChannelInterface $secondChannel,
         ChannelPricingInterface $firstChannelPricing,
         ChannelPricingInterface $secondChannelPricing,
-        ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator
+        ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator,
+        CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker
     ): void {
         $checker->isApplicableOnVariant($catalogPromotion, $variant)->willReturn(true);
 
+        $catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)->willReturn(true);
         $catalogPromotion->isExclusive()->willReturn(false);
         $catalogPromotion->getActions()->willReturn(new ArrayCollection([$catalogPromotionAction->getWrappedObject()]));
         $catalogPromotion->getChannels()->willReturn(new ArrayCollection([
@@ -72,7 +76,9 @@ final class CatalogPromotionApplicatorSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion,
         ProductVariantForCatalogPromotionEligibilityInterface $checker,
+        CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker
     ): void {
+        $catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)->willReturn(false);
         $checker->isApplicableOnVariant($catalogPromotion, $variant)->willReturn(false);
 
         $this->applyOnVariant($variant, $catalogPromotion);

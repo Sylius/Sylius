@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PromotionBundle\Criteria;
 
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 
 final class Enabled implements CriteriaInterface
 {
@@ -27,5 +28,10 @@ final class Enabled implements CriteriaInterface
         ;
 
         return $queryBuilder;
+    }
+
+    public function verify(CatalogPromotionInterface $catalogPromotion): bool
+    {
+        return $catalogPromotion->isEnabled();
     }
 }

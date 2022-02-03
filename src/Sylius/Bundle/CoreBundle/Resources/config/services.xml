@@ -263,6 +263,7 @@
         >
             <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\ActionBasedDiscountApplicatorInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibilityInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Checker\CatalogPromotionEligibilityChecker" />
         </service>
 
         <service
@@ -315,6 +316,10 @@
             class="Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibility"
         >
             <argument type="tagged_locator" tag="sylius.catalog_promotion.variant_checker" index-by="type" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Checker\CatalogPromotionEligibilityChecker">
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.criteria" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Checker\InForProductScopeVariantChecker">

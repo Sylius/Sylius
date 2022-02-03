@@ -105,21 +105,21 @@ Feature: Creating a catalog promotion
         And it should have "winter_sale" code and "Winter sale" name
         And the "Winter sale" catalog promotion should apply to all variants of "T-Shirt" product
 
-#    @api @ui @javascript @todo
-#    Scenario: Creating a catalog promotion with start and end date
-#        When I want to create a new catalog promotion
-#        And I specify its code as "winter_sale"
-#        And I name it "Winter sale"
-#        And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
-#        And I add action that gives "50%" percentage discount
-#        And I make it start yesterday and ends tomorrow
-#        And I add it
-#        Then I should be notified that catalog promotion has been successfully created
-#        And there should be 1 new catalog promotion on the list
-#        And it should have "winter_sale" code and "Winter sale" name
-#        And "Winter sale" catalog promotion should apply to "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
-#        And it should operate between yesterday and tomorrow
-#        And it should be active
+    @api @ui @javascript
+    Scenario: Creating a catalog promotion with start and end date
+        When I want to create a new catalog promotion
+        And I specify its code as "winter_sale"
+        And I name it "Winter sale"
+        And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And I add action that gives "50%" percentage discount
+        And I make it start yesterday and ends tomorrow
+        And I add it
+        Then I should be notified that catalog promotion has been successfully created
+        And there should be 1 new catalog promotion on the list
+        And it should have "winter_sale" code and "Winter sale" name
+        And "Winter sale" catalog promotion should apply to "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
+        And it should operate between yesterday and tomorrow
+        And it should be active
 
     @api @ui
     Scenario: Creating a simple catalog promotion with code, name and priority
