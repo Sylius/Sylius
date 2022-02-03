@@ -17,8 +17,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UsernameProvider extends AbstractUserProvider
 {
-    protected function findUser(string $username): ?UserInterface
+    protected function findUser(string $uniqueIdentifier): ?UserInterface
     {
-        return $this->userRepository->findOneBy(['usernameCanonical' => $username]);
+        return $this->userRepository->findOneBy(['usernameCanonical' => $uniqueIdentifier]);
     }
 }

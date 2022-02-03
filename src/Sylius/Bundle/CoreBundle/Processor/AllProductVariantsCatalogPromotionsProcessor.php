@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Processor;
 use Sylius\Bundle\CoreBundle\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
-final class AllCatalogPromotionsProcessor implements AllCatalogPromotionsProcessorInterface
+final class AllProductVariantsCatalogPromotionsProcessor implements AllProductVariantsCatalogPromotionsProcessorInterface
 {
     public function __construct(
         private ProductVariantRepositoryInterface $productVariantRepository,

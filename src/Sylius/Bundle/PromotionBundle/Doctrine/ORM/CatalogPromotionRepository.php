@@ -35,14 +35,4 @@ class CatalogPromotionRepository extends EntityRepository implements CatalogProm
             ->getResult()
         ;
     }
-
-    public function findByCodes(array $codes): array
-    {
-        return $this->createQueryBuilder('catalogPromotion')
-            ->andWhere('catalogPromotion.code IN (:codes)')
-            ->setParameter('codes', $codes)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
 }
