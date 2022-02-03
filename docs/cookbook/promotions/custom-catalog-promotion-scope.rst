@@ -21,32 +21,31 @@ We should start from creating a provider that will return for us all of eligible
 
     # config/services.yaml
 
-    App\Provider\ByPhraseVariantsProvider:
+    App\Checker\InByPhraseScopeVariantsChecker:
         arguments:
             - '@sylius.repository.product_variant'
         tags:
-            - { name: 'sylius.catalog_promotion.variants_provider', type: 'by_phrase' }
+            - { name: 'sylius.catalog_promotion.variant_checker', type: 'for_phrase' }
 
 .. note::
 
-    Please take a note on tag of Provider, thanks to it those services are working properly.
+    Please take a note on tag of Checker, thanks to it those services are working properly.
 
-And the code for the provider itself:
+And the code for the checker itself:
 
 .. code-block:: php
 
     <?php
 
-    namespace App\Provider;
+    namespace App\Checker;
 
-    use Sylius\Bundle\CoreBundle\Provider\VariantsProviderInterface;
     use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
     use Webmozart\Assert\Assert;
     use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 
-    class ByPhraseVariantsProvider implements VariantsProviderInterface
+    class InByPhraseScopeVariantsChecker implements VariantInScopeCheckerInterface
     {
-        public const TYPE = 'by_phrase';
+        public const TYPE = 'for_phrase';
 
         private ProductVariantRepositoryInterface $productVariantRepository;
 
@@ -55,17 +54,16 @@ And the code for the provider itself:
             $this->productVariantRepository = $productVariantRepository;
         }
 
-        public function supports(CatalogPromotionScopeInterface $catalogPromotionScopeType): bool
-        {
-            return $catalogPromotionScopeType->getType() === self::TYPE;
-        }
-
-        public function provideEligibleVariants(CatalogPromotionScopeInterface $scope): array
+        public function inScope(CatalogPromotionScopeInterface $scope, ProductVariantInterface $productVariant): bool
         {
             $configuration = $scope->getConfiguration();
             Assert::keyExists($configuration, 'phrase', 'This rule should have configured phrase');
 
-            return $this->productVariantRepository->findByPhrase($configuration['phrase'], 'en_US');
+            return in_array(
+                $productVariant,
+                $this->productVariantRepository->findByPhrase($configuration['phrase'], 'en_US'),
+                true
+            );
         }
     }
 
