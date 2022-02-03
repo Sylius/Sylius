@@ -25,16 +25,10 @@ use Sylius\Component\Core\Repository\OrderItemUnitRepositoryInterface;
 /** @experimental */
 final class OrderItemUnitItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
-    private OrderItemUnitRepositoryInterface $orderItemUnitRepository;
-
-    private UserContextInterface $userContext;
-
     public function __construct(
-        OrderItemUnitRepositoryInterface $orderItemUnitRepository,
-        UserContextInterface $userContext
+        private OrderItemUnitRepositoryInterface $orderItemUnitRepository,
+        private UserContextInterface $userContext
     ) {
-        $this->orderItemUnitRepository = $orderItemUnitRepository;
-        $this->userContext = $userContext;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool

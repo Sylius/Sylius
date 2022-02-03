@@ -59,7 +59,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
             ->during('validate', [
                 new AddItemToCart('productVariantCode', 1),
                 new class() extends Constraint {
-                }
+                },
             ])
         ;
     }

@@ -48,7 +48,7 @@ final class CountryCollectionExtensionSpec extends ObjectBehavior
         AdminUserInterface $admin,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel
-    ):void {
+    ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($admin);

@@ -23,11 +23,8 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class OrderItemAdjustmentsSubresourceDataProvider implements RestrictedDataProviderInterface, SubresourceDataProviderInterface
 {
-    private OrderItemRepositoryInterface $orderItemRepository;
-
-    public function __construct(OrderItemRepositoryInterface $orderItemRepository)
+    public function __construct(private OrderItemRepositoryInterface $orderItemRepository)
     {
-        $this->orderItemRepository = $orderItemRepository;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool

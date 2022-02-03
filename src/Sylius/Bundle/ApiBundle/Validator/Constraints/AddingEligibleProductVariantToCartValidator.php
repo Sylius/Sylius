@@ -27,20 +27,11 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class AddingEligibleProductVariantToCartValidator extends ConstraintValidator
 {
-    private ProductVariantRepositoryInterface $productVariantRepository;
-
-    private OrderRepositoryInterface $orderRepository;
-
-    private AvailabilityCheckerInterface $availabilityChecker;
-
     public function __construct(
-        ProductVariantRepositoryInterface $productVariantRepository,
-        OrderRepositoryInterface $orderRepository,
-        AvailabilityCheckerInterface $availabilityChecker
+        private ProductVariantRepositoryInterface $productVariantRepository,
+        private OrderRepositoryInterface $orderRepository,
+        private AvailabilityCheckerInterface $availabilityChecker
     ) {
-        $this->productVariantRepository = $productVariantRepository;
-        $this->orderRepository = $orderRepository;
-        $this->availabilityChecker = $availabilityChecker;
     }
 
     public function validate($value, Constraint $constraint)

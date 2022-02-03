@@ -23,20 +23,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /** @experimental */
 final class TokenValueBasedCartContext implements CartContextInterface
 {
-    private RequestStack $requestStack;
-
-    private OrderRepositoryInterface $orderRepository;
-
-    private string $newApiRoute;
-
     public function __construct(
-        RequestStack $requestStack,
-        OrderRepositoryInterface $orderRepository,
-        string $newApiRoute
+        private RequestStack $requestStack,
+        private OrderRepositoryInterface $orderRepository,
+        private string $newApiRoute
     ) {
-        $this->requestStack = $requestStack;
-        $this->orderRepository = $orderRepository;
-        $this->newApiRoute = $newApiRoute;
     }
 
     public function getCart(): OrderInterface
@@ -73,7 +64,7 @@ final class TokenValueBasedCartContext implements CartContextInterface
 
     private function checkApiRequest(Request $request): void
     {
-        if (strpos($request->getRequestUri(), $this->newApiRoute) === false) {
+        if (!str_contains($request->getRequestUri(), $this->newApiRoute)) {
             throw new CartNotFoundException('The main request is not an API request.');
         }
     }

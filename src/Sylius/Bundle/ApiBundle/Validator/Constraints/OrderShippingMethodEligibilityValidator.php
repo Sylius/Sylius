@@ -26,16 +26,10 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
 {
-    private OrderRepositoryInterface $orderRepository;
-
-    private ShippingMethodEligibilityCheckerInterface $eligibilityChecker;
-
     public function __construct(
-        OrderRepositoryInterface $orderRepository,
-        ShippingMethodEligibilityCheckerInterface $eligibilityChecker
+        private OrderRepositoryInterface $orderRepository,
+        private ShippingMethodEligibilityCheckerInterface $eligibilityChecker
     ) {
-        $this->orderRepository = $orderRepository;
-        $this->eligibilityChecker = $eligibilityChecker;
     }
 
     public function validate($value, Constraint $constraint)

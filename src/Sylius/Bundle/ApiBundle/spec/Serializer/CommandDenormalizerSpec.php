@@ -44,7 +44,7 @@ final class CommandDenormalizerSpec extends ObjectBehavior
                     ['email' => 'test@example.com', 'password' => 'pa$$word'],
                     '',
                     null,
-                    ['input' => ['class' => RegisterShopUser::class]]
+                    ['input' => ['class' => RegisterShopUser::class]],
                 ]
             )
         ;
@@ -81,7 +81,7 @@ final class CommandDenormalizerSpec extends ObjectBehavior
                 null,
                 [
                     'input' => ['class' => VerifyCustomerAccount::class],
-                    'object_to_populate' => new VerifyCustomerAccount('TOKEN')
+                    'object_to_populate' => new VerifyCustomerAccount('TOKEN'),
                 ]
             )
             ->willReturn(['key' => 'value'])
@@ -94,7 +94,7 @@ final class CommandDenormalizerSpec extends ObjectBehavior
                 null,
                 [
                     'input' => ['class' => VerifyCustomerAccount::class],
-                    'object_to_populate' => new VerifyCustomerAccount('TOKEN')
+                    'object_to_populate' => new VerifyCustomerAccount('TOKEN'),
                 ]
             )
             ->shouldReturn(['key' => 'value'])

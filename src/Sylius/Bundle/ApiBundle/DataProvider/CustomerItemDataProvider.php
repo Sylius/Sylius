@@ -24,14 +24,10 @@ use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 /** @experimental */
 final class CustomerItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
-    private UserContextInterface $userContext;
-
-    private CustomerRepositoryInterface $customerRepository;
-
-    public function __construct(UserContextInterface $userContext, CustomerRepositoryInterface $customerRepository)
-    {
-        $this->userContext = $userContext;
-        $this->customerRepository = $customerRepository;
+    public function __construct(
+        private UserContextInterface $userContext,
+        private CustomerRepositoryInterface $customerRepository
+    ) {
     }
 
     public function getItem(string $resourceClass, $id, string $operationName = null, array $context = [])

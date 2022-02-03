@@ -25,10 +25,8 @@ use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 /** @experimental */
 final class ProductVariantOptionValueFilter extends AbstractContextAwareFilter
 {
-    private IriConverterInterface $iriConverter;
-
     public function __construct(
-        IriConverterInterface $iriConverter,
+        private IriConverterInterface $iriConverter,
         ManagerRegistry $managerRegistry,
         ?RequestStack $requestStack = null,
         LoggerInterface $logger = null,
@@ -36,8 +34,6 @@ final class ProductVariantOptionValueFilter extends AbstractContextAwareFilter
         NameConverterInterface $nameConverter = null
     ) {
         parent::__construct($managerRegistry, $requestStack, $logger, $properties, $nameConverter);
-
-        $this->iriConverter = $iriConverter;
     }
 
     protected function filterProperty(

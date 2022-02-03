@@ -25,11 +25,8 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class ProductVariantEventSubscriber implements EventSubscriberInterface
 {
-    private MessageBusInterface $eventBus;
-
-    public function __construct(MessageBusInterface $eventBus)
+    public function __construct(private MessageBusInterface $eventBus)
     {
-        $this->eventBus = $eventBus;
     }
 
     public static function getSubscribedEvents(): array

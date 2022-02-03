@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use Doctrine\Persistence\ObjectManager;
+use Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail;
-use Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser;
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -30,32 +30,14 @@ use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 /** @experimental */
 final class RegisterShopUserHandler implements MessageHandlerInterface
 {
-    private FactoryInterface $shopUserFactory;
-
-    private ObjectManager $shopUserManager;
-
-    private CustomerProviderInterface $customerProvider;
-
-    private ChannelRepositoryInterface $channelRepository;
-
-    private GeneratorInterface $tokenGenerator;
-
-    private MessageBusInterface $commandBus;
-
     public function __construct(
-        FactoryInterface $shopUserFactory,
-        ObjectManager $shopUserManager,
-        CustomerProviderInterface $customerProvider,
-        ChannelRepositoryInterface $channelRepository,
-        GeneratorInterface $tokenGenerator,
-        MessageBusInterface $commandBus
+        private FactoryInterface $shopUserFactory,
+        private ObjectManager $shopUserManager,
+        private CustomerProviderInterface $customerProvider,
+        private ChannelRepositoryInterface $channelRepository,
+        private GeneratorInterface $tokenGenerator,
+        private MessageBusInterface $commandBus
     ) {
-        $this->shopUserFactory = $shopUserFactory;
-        $this->shopUserManager = $shopUserManager;
-        $this->customerProvider = $customerProvider;
-        $this->channelRepository = $channelRepository;
-        $this->tokenGenerator = $tokenGenerator;
-        $this->commandBus = $commandBus;
     }
 
     public function __invoke(RegisterShopUser $command): ShopUserInterface

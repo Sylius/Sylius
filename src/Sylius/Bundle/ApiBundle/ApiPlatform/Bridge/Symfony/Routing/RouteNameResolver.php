@@ -26,14 +26,10 @@ use Symfony\Component\Routing\RouterInterface;
  */
 final class RouteNameResolver implements RouteNameResolverInterface
 {
-    private RouterInterface $router;
-
-    private PathPrefixProviderInterface $pathPrefixProvider;
-
-    public function __construct(RouterInterface $router, PathPrefixProviderInterface $pathPrefixProvider)
-    {
-        $this->router = $router;
-        $this->pathPrefixProvider = $pathPrefixProvider;
+    public function __construct(
+        private RouterInterface $router,
+        private PathPrefixProviderInterface $pathPrefixProvider
+    ) {
     }
 
     public function getRouteName(string $resourceClass, $operationType /*, array $context = [] */): string

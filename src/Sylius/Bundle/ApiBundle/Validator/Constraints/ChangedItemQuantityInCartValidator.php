@@ -26,20 +26,11 @@ use Webmozart\Assert\Assert;
 
 final class ChangedItemQuantityInCartValidator extends ConstraintValidator
 {
-    private RepositoryInterface $orderItemRepository;
-
-    private OrderRepositoryInterface $orderRepository;
-
-    private AvailabilityCheckerInterface $availabilityChecker;
-
     public function __construct(
-        RepositoryInterface $orderItemRepository,
-        OrderRepositoryInterface $orderRepository,
-        AvailabilityCheckerInterface $availabilityChecker
+        private RepositoryInterface $orderItemRepository,
+        private OrderRepositoryInterface $orderRepository,
+        private AvailabilityCheckerInterface $availabilityChecker
     ) {
-        $this->orderItemRepository = $orderItemRepository;
-        $this->orderRepository = $orderRepository;
-        $this->availabilityChecker = $availabilityChecker;
     }
 
     public function validate($value, Constraint $constraint)

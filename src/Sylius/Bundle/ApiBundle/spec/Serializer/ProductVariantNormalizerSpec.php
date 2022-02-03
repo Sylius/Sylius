@@ -148,7 +148,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
                 'price' => 500,
                 'originalPrice' => 1000,
                 'appliedPromotions' => ['/api/v2/shop/catalog-promotions/winter_sale'],
-                'inStock' => true
+                'inStock' => true,
             ]);
     }
 

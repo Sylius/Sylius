@@ -22,14 +22,10 @@ use Symfony\Component\HttpKernel\KernelEvents;
 /** @experimental  */
 final class KernelRequestEventSubscriber implements EventSubscriberInterface
 {
-    private bool $apiEnabled;
-
-    private string $apiRoute;
-
-    public function __construct(bool $apiEnabled, string $apiRoute)
-    {
-        $this->apiEnabled = $apiEnabled;
-        $this->apiRoute = $apiRoute;
+    public function __construct(
+        private bool $apiEnabled,
+        private string $apiRoute
+    ) {
     }
 
     public static function getSubscribedEvents()
@@ -43,7 +39,7 @@ final class KernelRequestEventSubscriber implements EventSubscriberInterface
     {
         $pathInfo = $event->getRequest()->getPathInfo();
 
-        if ($this->apiEnabled === false && strpos($pathInfo, $this->apiRoute) !== false) {
+        if ($this->apiEnabled === false && str_contains($pathInfo, $this->apiRoute)) {
             throw new NotFoundHttpException('Route not found');
         }
     }

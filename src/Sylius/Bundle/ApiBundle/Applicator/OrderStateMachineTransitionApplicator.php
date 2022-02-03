@@ -20,11 +20,8 @@ use Sylius\Component\Order\OrderTransitions;
 /** @experimental */
 final class OrderStateMachineTransitionApplicator implements OrderStateMachineTransitionApplicatorInterface
 {
-    private StateMachineFactoryInterface $stateMachineFactory;
-
-    public function __construct(StateMachineFactoryInterface $stateMachineFactory)
+    public function __construct(private StateMachineFactoryInterface $stateMachineFactory)
     {
-        $this->stateMachineFactory = $stateMachineFactory;
     }
 
     public function cancel(OrderInterface $data): OrderInterface

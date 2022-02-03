@@ -25,11 +25,8 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class TaxonCollectionExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    private UserContextInterface $userContext;
-
-    public function __construct(UserContextInterface $userContext)
+    public function __construct(private UserContextInterface $userContext)
     {
-        $this->userContext = $userContext;
     }
 
     public function applyToCollection(
@@ -58,9 +55,9 @@ final class TaxonCollectionExtension implements ContextAwareQueryCollectionExten
         $queryBuilder
             ->addSelect('child')
             ->innerJoin(sprintf('%s.parent', $rootAlias), 'parent')
-            ->leftJoin(sprintf('%s.children',$rootAlias), 'child')
-            ->andWhere(sprintf('%s.enabled = :%s',$rootAlias, $enabledParameterName))
-            ->andWhere(sprintf('parent.code = :%s',$parentCodeParameterName))
+            ->leftJoin(sprintf('%s.children', $rootAlias), 'child')
+            ->andWhere(sprintf('%s.enabled = :%s', $rootAlias, $enabledParameterName))
+            ->andWhere(sprintf('parent.code = :%s', $parentCodeParameterName))
             ->addOrderBy(sprintf('%s.position', $rootAlias))
             ->setParameter($parentCodeParameterName, ($channelMenuTaxon !== null) ? $channelMenuTaxon->getCode() : 'category')
             ->setParameter($enabledParameterName, true);

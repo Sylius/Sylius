@@ -30,33 +30,14 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /** @experimental */
 final class PickupCartHandler implements MessageHandlerInterface
 {
-    private FactoryInterface $cartFactory;
-
-    private OrderRepositoryInterface $cartRepository;
-
-    private ChannelRepositoryInterface $channelRepository;
-
-    private ObjectManager $orderManager;
-
-    private RandomnessGeneratorInterface $generator;
-
-    /** @var CustomerRepositoryInterface */
-    private $customerRepository;
-
     public function __construct(
-        FactoryInterface $cartFactory,
-        OrderRepositoryInterface $cartRepository,
-        ChannelRepositoryInterface $channelRepository,
-        ObjectManager $orderManager,
-        RandomnessGeneratorInterface $generator,
-        CustomerRepositoryInterface $customerRepository
+        private FactoryInterface $cartFactory,
+        private OrderRepositoryInterface $cartRepository,
+        private ChannelRepositoryInterface $channelRepository,
+        private ObjectManager $orderManager,
+        private RandomnessGeneratorInterface $generator,
+        private CustomerRepositoryInterface $customerRepository
     ) {
-        $this->cartFactory = $cartFactory;
-        $this->cartRepository = $cartRepository;
-        $this->channelRepository = $channelRepository;
-        $this->orderManager = $orderManager;
-        $this->generator = $generator;
-        $this->customerRepository = $customerRepository;
     }
 
     public function __invoke(PickupCart $pickupCart)

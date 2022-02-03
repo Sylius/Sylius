@@ -51,6 +51,7 @@ class ProductImageDocumentationNormalizer implements NormalizerInterface
             if ($param['in'] === 'query') {
                 if (is_string($param['schema']['enum']) || $param['schema']['enum'] === null) {
                     $docs['paths'][self::SHOP_ITEM_PATH]['get']['parameters'][$index]['schema']['enum'] = $enums;
+
                     break;
                 }
 

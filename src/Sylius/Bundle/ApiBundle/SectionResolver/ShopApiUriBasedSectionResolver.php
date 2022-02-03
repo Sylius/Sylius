@@ -19,19 +19,15 @@ use Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionResolverInterface;
 
 final class ShopApiUriBasedSectionResolver implements UriBasedSectionResolverInterface
 {
-    private string $shopApiUriBeginning;
-
-    private string $shopApiOrdersResourceUri;
-
-    public function __construct(string $shopApiUriBeginning, string $shopApiOrdersResourceUri)
-    {
-        $this->shopApiUriBeginning = $shopApiUriBeginning;
-        $this->shopApiOrdersResourceUri = $shopApiOrdersResourceUri;
+    public function __construct(
+        private string $shopApiUriBeginning,
+        private string $shopApiOrdersResourceUri
+    ) {
     }
 
     public function getSection(string $uri): SectionInterface
     {
-        if (0 !== strpos($uri, $this->shopApiUriBeginning)) {
+        if (!str_starts_with($uri, $this->shopApiUriBeginning)) {
             throw new SectionCannotBeResolvedException();
         }
 

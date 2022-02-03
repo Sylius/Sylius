@@ -24,11 +24,8 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class OrderProductEligibilityValidator extends ConstraintValidator
 {
-    private OrderRepositoryInterface $orderRepository;
-
-    public function __construct(OrderRepositoryInterface $orderRepository)
+    public function __construct(private OrderRepositoryInterface $orderRepository)
     {
-        $this->orderRepository = $orderRepository;
     }
 
     /**

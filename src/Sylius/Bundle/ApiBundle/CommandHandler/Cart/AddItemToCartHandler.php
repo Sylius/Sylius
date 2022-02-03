@@ -28,28 +28,13 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class AddItemToCartHandler implements MessageHandlerInterface
 {
-    private OrderRepositoryInterface $orderRepository;
-
-    private ProductVariantRepositoryInterface $productVariantRepository;
-
-    private OrderModifierInterface $orderModifier;
-
-    private CartItemFactoryInterface $cartItemFactory;
-
-    private OrderItemQuantityModifierInterface $orderItemQuantityModifier;
-
     public function __construct(
-        OrderRepositoryInterface $orderRepository,
-        ProductVariantRepositoryInterface $productVariantRepository,
-        OrderModifierInterface $orderModifier,
-        CartItemFactoryInterface $cartItemFactory,
-        OrderItemQuantityModifierInterface $orderItemQuantityModifier
+        private OrderRepositoryInterface $orderRepository,
+        private ProductVariantRepositoryInterface $productVariantRepository,
+        private OrderModifierInterface $orderModifier,
+        private CartItemFactoryInterface $cartItemFactory,
+        private OrderItemQuantityModifierInterface $orderItemQuantityModifier
     ) {
-        $this->orderRepository = $orderRepository;
-        $this->productVariantRepository = $productVariantRepository;
-        $this->orderModifier = $orderModifier;
-        $this->cartItemFactory = $cartItemFactory;
-        $this->orderItemQuantityModifier = $orderItemQuantityModifier;
     }
 
     public function __invoke(AddItemToCart $addItemToCart): OrderInterface

@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraint;
 /** @experimental */
 final class CorrectChangeShopUserConfirmPassword extends Constraint
 {
-    /** @var string  */
+    /** @var string */
     public $message = 'sylius.user.plainPassword.mismatch';
 
     public function validatedBy(): string

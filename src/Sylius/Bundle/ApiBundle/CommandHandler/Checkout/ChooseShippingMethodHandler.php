@@ -28,28 +28,13 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ChooseShippingMethodHandler implements MessageHandlerInterface
 {
-    private OrderRepositoryInterface $orderRepository;
-
-    private ShippingMethodRepositoryInterface $shippingMethodRepository;
-
-    private ShipmentRepositoryInterface $shipmentRepository;
-
-    private ShippingMethodEligibilityCheckerInterface $eligibilityChecker;
-
-    private FactoryInterface $stateMachineFactory;
-
     public function __construct(
-        OrderRepositoryInterface $orderRepository,
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ShipmentRepositoryInterface $shipmentRepository,
-        ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
-        FactoryInterface $stateMachineFactory
+        private OrderRepositoryInterface $orderRepository,
+        private ShippingMethodRepositoryInterface $shippingMethodRepository,
+        private ShipmentRepositoryInterface $shipmentRepository,
+        private ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
+        private FactoryInterface $stateMachineFactory
     ) {
-        $this->orderRepository = $orderRepository;
-        $this->shippingMethodRepository = $shippingMethodRepository;
-        $this->shipmentRepository = $shipmentRepository;
-        $this->eligibilityChecker = $eligibilityChecker;
-        $this->stateMachineFactory = $stateMachineFactory;
     }
 
     public function __invoke(ChooseShippingMethod $chooseShippingMethod): OrderInterface

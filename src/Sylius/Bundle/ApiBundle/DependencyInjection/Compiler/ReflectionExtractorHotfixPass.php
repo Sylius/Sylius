@@ -37,7 +37,7 @@ final class ReflectionExtractorHotfixPass implements CompilerPassInterface
         try {
             /** @psalm-suppress MissingDependency */
             $container->findDefinition('property_info.reflection_extractor')->setClass(ReflectionExtractor::class);
-        } catch (ServiceNotFoundException $exception) {
+        } catch (ServiceNotFoundException) {
             return;
         }
     }

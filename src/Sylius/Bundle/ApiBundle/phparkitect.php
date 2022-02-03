@@ -20,16 +20,14 @@ use Arkitect\Expression\ForClasses\NotResideInTheseNamespaces;
 use Arkitect\Expression\ForClasses\ResideInOneOfTheseNamespaces;
 use Arkitect\Rules\Rule;
 
-return static function (Config $config): void
-{
-    $classSet = ClassSet::fromDir(__DIR__.'/');
+return static function (Config $config): void {
+    $classSet = ClassSet::fromDir(__DIR__ . '/');
     $classSet->excludePath('vendor/**');
     $classSet->excludePath('test/**');
 
     $rules = [];
 
     /** Filtration rules */
-
     $rules[] = Rule::allClasses()
         ->that(new ResideInOneOfTheseNamespaces('Sylius\Bundle\ApiBundle\Filter\Doctrine'))
         ->should(new Extend(AbstractContextAwareFilter::class))
