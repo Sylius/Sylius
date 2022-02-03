@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
-final class AllCatalogPromotionsProcessorSpec extends ObjectBehavior
+final class AllProductVariantsCatalogPromotionsProcessorSpec extends ObjectBehavior
 {
     function let(
         ProductVariantRepositoryInterface $productVariantRepository,

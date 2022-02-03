@@ -17,7 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
-use Sylius\Bundle\CoreBundle\Processor\AllCatalogPromotionsProcessorInterface;
+use Sylius\Bundle\CoreBundle\Processor\AllProductVariantsCatalogPromotionsProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionFailed;
 use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
@@ -26,16 +26,16 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class CatalogPromotionFailedListenerSpec extends ObjectBehavior
 {
     function let(
-        AllCatalogPromotionsProcessorInterface $catalogPromotionReprocessor,
+        AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager,
         FactoryInterface $stateMachine
     ): void {
-        $this->beConstructedWith($catalogPromotionReprocessor, $catalogPromotionRepository, $entityManager, $stateMachine);
+        $this->beConstructedWith($allProductVariantsCatalogPromotionsProcessor, $catalogPromotionRepository, $entityManager, $stateMachine);
     }
 
     function it_dispatches_transition_failed_on_a_failed_message(
-        AllCatalogPromotionsProcessorInterface $catalogPromotionReprocessor,
+        AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager,
         CatalogPromotionInterface $catalogPromotion,
@@ -47,7 +47,7 @@ final class CatalogPromotionFailedListenerSpec extends ObjectBehavior
         $stateMachine->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
         $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(true);
 
-        $catalogPromotionReprocessor->process()->shouldBeCalled();
+        $allProductVariantsCatalogPromotionsProcessor->process()->shouldBeCalled();
 
         $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldBeCalled();
         $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_FAIL)->shouldBeCalled();
@@ -58,14 +58,14 @@ final class CatalogPromotionFailedListenerSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_there_is_no_catalog_promotion_with_given_code(
-        AllCatalogPromotionsProcessorInterface $catalogPromotionReprocessor,
+        AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn(null);
         $catalogPromotionRepository->findAll()->shouldNotBeCalled();
 
-        $catalogPromotionReprocessor->process()->shouldNotBeCalled();
+        $allProductVariantsCatalogPromotionsProcessor->process()->shouldNotBeCalled();
         $entityManager->flush()->shouldNotBeCalled();
 
         $this(new CatalogPromotionFailed('WINTER_MUGS_SALE'));
