@@ -90,10 +90,21 @@ final class OrderItemSpec extends ObjectBehavior
         $this->getUnitPrice()->shouldReturn(0);
     }
 
+    function it_has_original_unit_price_equal_to_0_by_default(): void
+    {
+        $this->getOriginalUnitPrice()->shouldReturn(0);
+    }
+
     function its_unit_price_should_accept_only_integer(): void
     {
         $this->setUnitPrice(4498);
         $this->getUnitPrice()->shouldReturn(4498);
+    }
+
+    function its_original_unit_price_should_accept_only_integer(): void
+    {
+        $this->setOriginalUnitPrice(4498);
+        $this->getOriginalUnitPrice()->shouldReturn(4498);
     }
 
     function it_has_total_equal_to_0_by_default(): void

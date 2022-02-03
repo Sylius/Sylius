@@ -383,3 +383,11 @@
 
 1. The argument of `Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface` service has been changed
    from `sylius.calendar` to `Sylius\Calendar\Provider\DateTimeProviderInterface`.
+
+1. Renamed response body field `originalPrice` to `originalUnitPrice` of the following endpoints:
+   - `'POST', '/api/v2/shop/orders/{tokenValue}/items'`
+   - `'GET', '/api/v2/shop/orders/{tokenValue}/items'`
+   - `'GET', '/api/v2/shop/orders/{tokenValue}'`
+
+1. Added response body field `originalUnitPrice` to the following endpoint:
+   - `'GET', '/api/v2/admin/orders/{tokenValue}'`

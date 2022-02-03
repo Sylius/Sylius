@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
@@ -21,8 +22,14 @@ use Webmozart\Assert\Assert;
 
 final class OrderPricesRecalculator implements OrderProcessorInterface
 {
-    public function __construct(private ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
+    public function __construct(private ProductVariantPriceCalculatorInterface|ProductVariantPricesCalculatorInterface $productVariantPriceCalculator)
     {
+        if ($this->productVariantPriceCalculator instanceof ProductVariantPriceCalculatorInterface) {
+            @trigger_error(
+                sprintf('Passing a "Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" to "%s" constructor is deprecated since Sylius 1.11 and will be prohibited in 2.0. Use "Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface" instead.', self::class),
+                \E_USER_DEPRECATED
+            );
+        }
     }
 
     public function process(BaseOrderInterface $order): void
@@ -45,6 +52,13 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
                 $item->getVariant(),
                 ['channel' => $channel]
             ));
+
+            if ($this->productVariantPriceCalculator instanceof ProductVariantPricesCalculatorInterface) {
+                $item->setOriginalUnitPrice($this->productVariantPriceCalculator->calculateOriginal(
+                    $item->getVariant(),
+                    ['channel' => $channel]
+                ));
+            }
         }
     }
 }

@@ -23,6 +23,7 @@
 
         <field name="quantity" column="quantity" type="integer" />
         <field name="unitPrice" column="unit_price" type="integer" />
+        <field name="originalUnitPrice" column="original_unit_price" type="integer" nullable="true"/>
         <field name="unitsTotal" column="units_total" type="integer" />
         <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
         <field name="total" column="total" type="integer" />
