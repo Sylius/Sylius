@@ -154,7 +154,7 @@ You can check if the catalog promotion exists by using GET endpoint
 .. code-block:: php
 
    /** @var CatalogPromotionInterface $promotion */
-   $promotion = $this->container->get('sylius.factory.t_shirt_promotion')->createNew();
+   $promotion = $this->container->get('sylius.factory.catalog_promotion')->createNew();
 
    $promotion->setCode('t_shirt_promotion');
    $promotion->setName('T-shirt Promotion');
@@ -230,12 +230,12 @@ We can also make it programmatically:
     $catalogPromotion->addChannel('FASHION_WEB');
 
     /** @var CatalogPromotionScopeInterface $catalogPromotionScope */
-    $catalogPromotionScope = $this->catalogPromotionScopeExampleFactory->create($scope);
+    $catalogPromotionScope = $this->container->get('sylius.factory.catalog_promotion_scope')->createNew();
     $catalogPromotionScope->setCatalogPromotion($catalogPromotion);
     $catalogPromotion->addScope($catalogPromotionScope);
 
     /** @var CatalogPromotionActionInterface $catalogPromotionAction */
-    $catalogPromotionAction = $this->catalogPromotionActionExampleFactory->create($action);
+    $catalogPromotionAction = $this->container->get('sylius.factory.catalog_promotion_action')->createNew();
     $catalogPromotionAction->setCatalogPromotion($catalogPromotion);
     $catalogPromotion->addAction($catalogPromotionAction);
 
@@ -322,15 +322,9 @@ on proper events and dispatch ``CatalogPromotionCreated`` event to event bus. Th
 one is edited, then the ``CatalogPromotionUpdated`` event is dispatched to event bus.
 
 This event is handled by `CatalogPromotionUpdateListener <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Listener/CatalogPromotionUpdateListener.php>`_ which resolves the appropriate ``CatalogPromotion``.
-With the needed data and configuration from ``CatalogPromotion`` we can now process the ``Product`` and ``ProductVariant`` entities.
+With the needed data and configuration from ``CatalogPromotion`` we can now process the Product Catalog.
 
-The changes are first handled in `CatalogPromotionProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Processor/CatalogPromotionProcessor.php>`_
-which inside uses the `CatalogPromotionApplicator <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Applicator/CatalogPromotionApplicator.php>`_.
-
-The **CatalogPromotionProcessor**'s method ``process()`` is executed on the eligible items:
-
-* firstly it iterates over eligible items: ``Product Variants``,
-* then it calculates and applies the ``CatalogPromotionAction`` for given item
+Any changes in Catalog Promotion cause recalculations of entire Product Catalog (`BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/CommandDispatcher/BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher.php>`_ is called, which dispatch events `ApplyCatalogPromotionsOnVariants <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Command/ApplyCatalogPromotionsOnVariants.php>`_)
 
 .. note::
 
