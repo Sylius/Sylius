@@ -28,11 +28,6 @@ final class Version20220203115813 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-
-        if ($this->isUsingDoctrineTransport()) {
-            $this->addSql('DROP TABLE messenger_messages');
-        }
     }
 
     private function isUsingDoctrineTransport(): bool
