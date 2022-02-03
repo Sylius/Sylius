@@ -31,13 +31,10 @@ use Webmozart\Assert\Assert;
 
 final class ContactController
 {
-    /**
-     * @param EngineInterface|Environment $templatingEngine
-     */
     public function __construct(
         private RouterInterface $router,
         private FormFactoryInterface $formFactory,
-        private object $templatingEngine,
+        private EngineInterface|Environment $templatingEngine,
         private ChannelContextInterface $channelContext,
         private CustomerContextInterface $customerContext,
         private LocaleContextInterface $localeContext,

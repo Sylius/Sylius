@@ -27,12 +27,9 @@ use Twig\Environment;
 
 final class DashboardController
 {
-    /**
-     * @param EngineInterface|Environment $templatingEngine
-     */
     public function __construct(
         private ChannelRepositoryInterface $channelRepository,
-        private object $templatingEngine,
+        private EngineInterface|Environment $templatingEngine,
         private RouterInterface $router,
         private ?SalesDataProviderInterface $salesDataProvider = null,
         private ?StatisticsDataProviderInterface $statisticsDataProvider = null

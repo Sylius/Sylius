@@ -26,11 +26,8 @@ use Twig\Environment;
 
 final class CurrencySwitchController
 {
-    /**
-     * @param EngineInterface|Environment $templatingEngine
-     */
     public function __construct(
-        private object $templatingEngine,
+        private EngineInterface|Environment $templatingEngine,
         private CurrencyContextInterface $currencyContext,
         private CurrencyStorageInterface $currencyStorage,
         private ChannelContextInterface $channelContext

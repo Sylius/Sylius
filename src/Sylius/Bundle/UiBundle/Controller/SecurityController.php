@@ -26,13 +26,10 @@ use Twig\Environment;
 
 final class SecurityController
 {
-    /**
-     * @param EngineInterface|Environment $templatingEngine
-     */
     public function __construct(
         private AuthenticationUtils $authenticationUtils,
         private FormFactoryInterface $formFactory,
-        private object $templatingEngine,
+        private EngineInterface|Environment $templatingEngine,
         private AuthorizationCheckerInterface $authorizationChecker,
         private RouterInterface $router
     ) {
