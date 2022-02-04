@@ -25,7 +25,7 @@ We should start from creating a provider that will return for us all of eligible
         arguments:
             - '@sylius.repository.product_variant'
         tags:
-            - { name: 'sylius.catalog_promotion.variant_checker', type: 'for_phrase' }
+            - { name: 'sylius.catalog_promotion.variant_checker', type: 'by_phrase' }
 
 .. note::
 
@@ -45,7 +45,7 @@ And the code for the checker itself:
 
     class InByPhraseScopeVariantsChecker implements VariantInScopeCheckerInterface
     {
-        public const TYPE = 'for_phrase';
+        public const TYPE = 'by_phrase';
 
         private ProductVariantRepositoryInterface $productVariantRepository;
 
@@ -57,20 +57,11 @@ And the code for the checker itself:
         public function inScope(CatalogPromotionScopeInterface $scope, ProductVariantInterface $productVariant): bool
         {
             $configuration = $scope->getConfiguration();
-            Assert::keyExists($configuration, 'phrase', 'This rule should have configured phrase');
+            Assert::keyExists($configuration, 'phrase', 'This scope should have configured phrase');
 
-            return in_array(
-                $productVariant,
-                $this->productVariantRepository->findByPhrase($configuration['phrase'], 'en_US'),
-                true
-            );
+            return str_contains($productVariant->getName(), $configuration['phrase']);
         }
     }
-
-.. note::
-
-    In this example there is hardcoded locale in ``->findByPhrase($configuration['amount'], 'en_US')`` but you can use LocaleContextInterface
-    or extend the code from this cookbook to e.g. consume key ``localeCode`` from configuration.
 
 Now the Catalog Promotion should work with your new Scope for programmatically and API created resource.
 
