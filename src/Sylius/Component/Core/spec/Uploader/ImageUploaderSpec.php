@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Uploader;
 
-use Gaufrette\Filesystem;
+use Gaufrette\FilesystemInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Generator\ImagePathGeneratorInterface;
@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\File\File;
 final class ImageUploaderSpec extends ObjectBehavior
 {
     function let(
-        Filesystem $filesystem,
+        FilesystemInterface $filesystem,
         ImagePathGeneratorInterface $imagePathGenerator,
         ImageInterface $image
     ): void {
@@ -41,8 +41,8 @@ final class ImageUploaderSpec extends ObjectBehavior
         $this->shouldImplement(ImageUploaderInterface::class);
     }
 
-    function it_triggers_a_deprecation_exception_if_not_image_path_generator_is_passed(
-        Filesystem $filesystem,
+    function it_triggers_a_deprecation_exception_if_no_image_path_generator_is_passed(
+        FilesystemInterface $filesystem,
         ImageInterface $image
     ): void {
         $filesystem->has(Argument::any())->willReturn(false);
@@ -57,7 +57,7 @@ final class ImageUploaderSpec extends ObjectBehavior
     }
 
     function it_uploads_an_image(
-        Filesystem $filesystem,
+        FilesystemInterface $filesystem,
         ImagePathGeneratorInterface $imagePathGenerator,
         ImageInterface $image
     ): void {
@@ -80,7 +80,7 @@ final class ImageUploaderSpec extends ObjectBehavior
     }
 
     function it_replaces_an_image(
-        Filesystem $filesystem,
+        FilesystemInterface $filesystem,
         ImagePathGeneratorInterface $imagePathGenerator,
         ImageInterface $image
     ): void {
@@ -102,7 +102,7 @@ final class ImageUploaderSpec extends ObjectBehavior
         $this->upload($image);
     }
 
-    function it_removes_an_image_if_exists(Filesystem $filesystem): void
+    function it_removes_an_image_if_one_exists(FilesystemInterface $filesystem): void
     {
         $filesystem->has('path/to/img')->willReturn(true);
         $filesystem->delete('path/to/img')->willReturn(true);
@@ -110,7 +110,7 @@ final class ImageUploaderSpec extends ObjectBehavior
         $this->remove('path/to/img');
     }
 
-    function it_does_not_remove_an_image_if_does_not_exist(FileSystem $filesystem): void
+    function it_does_not_remove_an_image_if_one_does_not_exist(FilesystemInterface $filesystem): void
     {
         $filesystem->has('path/to/img')->willReturn(false);
         $filesystem->delete('path/to/img')->shouldNotBeCalled();
