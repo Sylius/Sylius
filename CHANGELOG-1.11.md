@@ -1,10 +1,63 @@
 # CHANGELOG FOR `1.11.X`
 
+## v1.11.0-BETA.1 (2022-02-04)
+
+#### TL;DR
+
+- process variants instead of promotions to allow easier batching and performance improvements
+- general improvements and fixes for Catalog Promotion and Shop API
+
+#### Details
+
+- [#13466](https://github.com/Sylius/Sylius/issues/13466) move default criteria to catalog promotion provider ([@AdamKasp](https://github.com/AdamKasp), [@Rafikooo](https://github.com/Rafikooo))
+- [#13523](https://github.com/Sylius/Sylius/issues/13523) Improving the documentation ([@mamazu](https://github.com/mamazu))
+- [#13535](https://github.com/Sylius/Sylius/issues/13535) [Minor] Removal of logic duplication in shipping charges processor ([@lchrusciel](https://github.com/lchrusciel))
+- [#13536](https://github.com/Sylius/Sylius/issues/13536) Refactor catalog promotions - process variants instead promotion ([@AdamKasp](https://github.com/AdamKasp))
+- [#13538](https://github.com/Sylius/Sylius/issues/13538) [CatalogPromotion] Apply catalog promotions for product created in catalog promotions scope ([@ernestWarwas](https://github.com/ernestWarwas), [@GSadee](https://github.com/GSadee))
+- [#13542](https://github.com/Sylius/Sylius/issues/13542) Specify explicit priorities for all form type extensions ([@rimas-kudelis](https://github.com/rimas-kudelis))
+- [#13545](https://github.com/Sylius/Sylius/issues/13545) [Core][Optimalization] Assign fallback locale for command based requests ([@SirDomin](https://github.com/SirDomin))
+- [#13546](https://github.com/Sylius/Sylius/issues/13546) [Admin][UI] Catalog promotions UI fixes ([@SirDomin](https://github.com/SirDomin))
+- [#13547](https://github.com/Sylius/Sylius/issues/13547) [Promotion] Fix js errors associated with actions/rules/scopes ([@GSadee](https://github.com/GSadee))
+- [#13548](https://github.com/Sylius/Sylius/issues/13548) [Maintenance] Remove phpstan exclude for PHP7.4 ([@lchrusciel](https://github.com/lchrusciel))
+- [#13550](https://github.com/Sylius/Sylius/issues/13550) [CatalogPromotion] Process all catalog promotions when catalog promotion is created ([@SirDomin](https://github.com/SirDomin))
+- [#13551](https://github.com/Sylius/Sylius/issues/13551) [UI][Admin] add divider after form elements ([@SirDomin](https://github.com/SirDomin))
+- [#13552](https://github.com/Sylius/Sylius/issues/13552) Fixing the documentation (1.10) ([@mamazu](https://github.com/mamazu))
+- [#13553](https://github.com/Sylius/Sylius/issues/13553) [Fixtures] USA deleted from the World zone ([@TheMilek](https://github.com/TheMilek))
+- [#13555](https://github.com/Sylius/Sylius/issues/13555) [Core][Optimalization] Assign fallback locale for command based requests ([@lchrusciel](https://github.com/lchrusciel))
+- [#13556](https://github.com/Sylius/Sylius/issues/13556) [Behat] Scenario for creating an exclusive catalog promotion ([@TheMilek](https://github.com/TheMilek))
+- [#13557](https://github.com/Sylius/Sylius/issues/13557) [Promotion] Use sylius/calendar instead of the existing Calendar ([@GSadee](https://github.com/GSadee))
+- [#13558](https://github.com/Sylius/Sylius/issues/13558) [Shipping][Behat] Use sylius/calendar instead of the existing Calendar ([@GSadee](https://github.com/GSadee))
+- [#13561](https://github.com/Sylius/Sylius/issues/13561) [Docs] Mention autoconfiguration case when extending the form ([@Zales0123](https://github.com/Zales0123))
+- [#13562](https://github.com/Sylius/Sylius/issues/13562) PHP 8.0 syntax in bundles (without CoreBundle and ApiBundle) ([@Zales0123](https://github.com/Zales0123))
+- [#13563](https://github.com/Sylius/Sylius/issues/13563) [API][UI][Behat][Refactor] OriginalUnitPrice property on the OrderItem entity ([@Rafikooo](https://github.com/Rafikooo))
+- [#13565](https://github.com/Sylius/Sylius/issues/13565) PHP 8.0 syntax in Core Bundle ([@Zales0123](https://github.com/Zales0123))
+- [#13566](https://github.com/Sylius/Sylius/issues/13566) [Catalog Promotion] Privatize function in CP clearer and remove redundant channelPricing repository ([@AdamKasp](https://github.com/AdamKasp))
+- [#13567](https://github.com/Sylius/Sylius/issues/13567) [Catalog Promotion] ProductVariantForCatalogPromotionEligibility refactored ([@AdamKasp](https://github.com/AdamKasp))
+- [#13569](https://github.com/Sylius/Sylius/issues/13569) [Catalog Promotion] Catalog promotion states refactor ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13570](https://github.com/Sylius/Sylius/issues/13570) PHP 8.0 syntax in ApiBundle ([@Zales0123](https://github.com/Zales0123))
+- [#13576](https://github.com/Sylius/Sylius/issues/13576) [Catalog Promotion] Select more data during processing to avoid inefficient db calls ([@lchrusciel](https://github.com/lchrusciel))
+- [#13577](https://github.com/Sylius/Sylius/issues/13577) [Catalog Promotion] Removal of unused function ([@lchrusciel](https://github.com/lchrusciel))
+- [#13578](https://github.com/Sylius/Sylius/issues/13578) [Catalog Promotion] add update variant event to messenger routing ([@AdamKasp](https://github.com/AdamKasp))
+- [#13579](https://github.com/Sylius/Sylius/issues/13579) [Catalog Promotion] Move catalog promotion processing after the fixture execution ([@lchrusciel](https://github.com/lchrusciel))
+- [#13580](https://github.com/Sylius/Sylius/issues/13580) Bump Psalm version to 4.19 (php 8.1 support) ([@loic425](https://github.com/loic425))
+- [#13581](https://github.com/Sylius/Sylius/issues/13581) [Catalog Promotion] Refactor - rename AllCatalogPromotionsProcessor ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13584](https://github.com/Sylius/Sylius/issues/13584) Update catalog promotion instantly if date is set on future ([@SirDomin](https://github.com/SirDomin))
+- [#13585](https://github.com/Sylius/Sylius/issues/13585) [Catalog Promotion] [Docs] docs updated ([@AdamKasp](https://github.com/AdamKasp))
+- [#13587](https://github.com/Sylius/Sylius/issues/13587) [CatalogPromotion] batch configuration size made a part of config ([@TheMilek](https://github.com/TheMilek))
+- [#13589](https://github.com/Sylius/Sylius/issues/13589) [Catalog Promotion] remove redundant method ([@AdamKasp](https://github.com/AdamKasp))
+- [#13591](https://github.com/Sylius/Sylius/issues/13591) [Catalog Promotion][Docs] update CP scopes docs ([@AdamKasp](https://github.com/AdamKasp))
+- [#13592](https://github.com/Sylius/Sylius/issues/13592) [Migration] add migration to messenger if transport is configured to doctrine ([@SirDomin](https://github.com/SirDomin))
+- [#13593](https://github.com/Sylius/Sylius/issues/13593) [Catalog Promotions] State processing after fixtures load ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13594](https://github.com/Sylius/Sylius/issues/13594) [Catalog Promotion][Test] Assert proper batch size configuration ([@lchrusciel](https://github.com/lchrusciel))
+- [#13595](https://github.com/Sylius/Sylius/issues/13595) [Docs] Configuring catalog promotions batch sizes explained ([@TheMilek](https://github.com/TheMilek))
+- [#13596](https://github.com/Sylius/Sylius/issues/13596) [Cookbook] Minor fixes in custom catalog promotion scope ([@GSadee](https://github.com/GSadee))
+- [#13597](https://github.com/Sylius/Sylius/issues/13597) Core Configuration style and tests improvements ([@Zales0123](https://github.com/Zales0123))
+
 ## v1.11.0-ALPHA.2 (2022-01-24)
 
 #### TL;DR
 
-Improvements and fixed in Catalog Promotion and Shop API
+Improvements and fixes in Catalog Promotion and Shop API
 
 #### Details
 
