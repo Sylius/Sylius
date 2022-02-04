@@ -18,6 +18,7 @@ Feature: Checking out as guest with existing email, while email owner starts a n
         Given I have product "PHP T-Shirt" in the cart
         When I log out
         And I add products "PHP T-Shirt" and "Kotlin T-Shirt" to the cart
+        And I complete addressing step with email "robb@stark.com" and "United States" based billing address
         And Logged in user with email "robb@stark.com" starts a new session
         And He views cart
         Then there should be one item in his cart
