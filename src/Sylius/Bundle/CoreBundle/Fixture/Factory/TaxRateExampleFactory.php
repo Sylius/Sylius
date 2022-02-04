@@ -27,25 +27,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private FactoryInterface $taxRateFactory;
-
-    private RepositoryInterface $zoneRepository;
-
-    private RepositoryInterface $taxCategoryRepository;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $taxRateFactory,
-        RepositoryInterface $zoneRepository,
-        RepositoryInterface $taxCategoryRepository
+        private FactoryInterface $taxRateFactory,
+        private RepositoryInterface $zoneRepository,
+        private RepositoryInterface $taxCategoryRepository
     ) {
-        $this->taxRateFactory = $taxRateFactory;
-        $this->zoneRepository = $zoneRepository;
-        $this->taxCategoryRepository = $taxCategoryRepository;
-
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 

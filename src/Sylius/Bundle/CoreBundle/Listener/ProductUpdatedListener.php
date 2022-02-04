@@ -21,20 +21,11 @@ use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 
 final class ProductUpdatedListener
 {
-    private ProductRepositoryInterface $productRepository;
-
-    private ProductCatalogPromotionsProcessorInterface $productCatalogPromotionsProcessor;
-
-    private EntityManagerInterface $entityManager;
-
     public function __construct(
-        ProductRepositoryInterface $productRepository,
-        ProductCatalogPromotionsProcessorInterface $productCatalogPromotionsProcessor,
-        EntityManagerInterface $entityManager
+        private ProductRepositoryInterface $productRepository,
+        private ProductCatalogPromotionsProcessorInterface $productCatalogPromotionsProcessor,
+        private EntityManagerInterface $entityManager
     ) {
-        $this->productRepository = $productRepository;
-        $this->productCatalogPromotionsProcessor = $productCatalogPromotionsProcessor;
-        $this->entityManager = $entityManager;
     }
 
     public function __invoke(ProductUpdated $event): void

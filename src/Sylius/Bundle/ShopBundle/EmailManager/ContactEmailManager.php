@@ -19,12 +19,8 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class ContactEmailManager implements ContactEmailManagerInterface
 {
-    /** @var SenderInterface */
-    private $emailSender;
-
-    public function __construct(SenderInterface $emailSender)
+    public function __construct(private SenderInterface $emailSender)
     {
-        $this->emailSender = $emailSender;
     }
 
     public function sendContactRequest(

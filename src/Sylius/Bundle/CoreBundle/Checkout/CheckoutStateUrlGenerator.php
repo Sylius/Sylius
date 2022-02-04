@@ -20,14 +20,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterface
 {
-    private RouterInterface $router;
-
-    private array $routeCollection = [];
-
-    public function __construct(RouterInterface $router, array $routeCollection)
+    public function __construct(private RouterInterface $router, private array $routeCollection)
     {
-        $this->router = $router;
-        $this->routeCollection = $routeCollection;
     }
 
     public function generate($name, $parameters = [], $referenceType = self::ABSOLUTE_PATH): string

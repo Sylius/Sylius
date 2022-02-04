@@ -20,14 +20,8 @@ use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
  */
 final class DelegatingTemplateEventRenderer implements TemplateEventRendererInterface
 {
-    private TemplateBlockRegistryInterface $templateBlockRegistry;
-
-    private TemplateBlockRendererInterface $templateBlockRenderer;
-
-    public function __construct(TemplateBlockRegistryInterface $templateBlockRegistry, TemplateBlockRendererInterface $templateBlockRenderer)
+    public function __construct(private TemplateBlockRegistryInterface $templateBlockRegistry, private TemplateBlockRendererInterface $templateBlockRenderer)
     {
-        $this->templateBlockRegistry = $templateBlockRegistry;
-        $this->templateBlockRenderer = $templateBlockRenderer;
     }
 
     public function render(array $eventNames, array $context = []): string

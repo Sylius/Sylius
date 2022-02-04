@@ -21,11 +21,8 @@ use Twig\Environment;
  */
 final class TwigTemplateBlockRenderer implements TemplateBlockRendererInterface
 {
-    private Environment $twig;
-
-    public function __construct(Environment $twig)
+    public function __construct(private Environment $twig)
     {
-        $this->twig = $twig;
     }
 
     public function render(TemplateBlock $templateBlock, array $context = []): string

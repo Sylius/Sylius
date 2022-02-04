@@ -24,11 +24,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class TotalOfItemsFromTaxonConfigurationType extends AbstractType
 {
-    private RepositoryInterface $taxonRepository;
-
-    public function __construct(RepositoryInterface $taxonRepository)
+    public function __construct(private RepositoryInterface $taxonRepository)
     {
-        $this->taxonRepository = $taxonRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

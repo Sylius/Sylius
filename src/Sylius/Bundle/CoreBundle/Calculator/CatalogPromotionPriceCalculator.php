@@ -19,11 +19,8 @@ use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
 final class CatalogPromotionPriceCalculator implements CatalogPromotionPriceCalculatorInterface
 {
-    private iterable $priceCalculators;
-
-    public function __construct(iterable $priceCalculators)
+    public function __construct(private iterable $priceCalculators)
     {
-        $this->priceCalculators = $priceCalculators;
     }
 
     public function calculate(ChannelPricingInterface $channelPricing, CatalogPromotionActionInterface $action): int

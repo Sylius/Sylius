@@ -21,16 +21,8 @@ use Webmozart\Assert\Assert;
 
 final class OrderCustomerIpListener
 {
-    /** @var IpAssignerInterface */
-    private $ipAssigner;
-
-    /** @var RequestStack */
-    private $requestStack;
-
-    public function __construct(IpAssignerInterface $ipAssigner, RequestStack $requestStack)
+    public function __construct(private IpAssignerInterface $ipAssigner, private RequestStack $requestStack)
     {
-        $this->ipAssigner = $ipAssigner;
-        $this->requestStack = $requestStack;
     }
 
     public function assignCustomerIpToOrder(GenericEvent $event): void

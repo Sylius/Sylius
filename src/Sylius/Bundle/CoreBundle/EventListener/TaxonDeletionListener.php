@@ -23,20 +23,14 @@ use Webmozart\Assert\Assert;
 
 final class TaxonDeletionListener
 {
-    private SessionInterface $session;
-
-    private ChannelRepositoryInterface $channelRepository;
-
     /** @var TaxonAwareRuleUpdaterInterface[] */
     private array $ruleUpdaters;
 
     public function __construct(
-        SessionInterface $session,
-        ChannelRepositoryInterface $channelRepository,
+        private SessionInterface $session,
+        private ChannelRepositoryInterface $channelRepository,
         TaxonAwareRuleUpdaterInterface ...$ruleUpdaters
     ) {
-        $this->session = $session;
-        $this->channelRepository = $channelRepository;
         $this->ruleUpdaters = $ruleUpdaters;
     }
 

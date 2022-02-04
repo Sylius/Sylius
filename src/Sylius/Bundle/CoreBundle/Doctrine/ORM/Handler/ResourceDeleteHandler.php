@@ -22,14 +22,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ResourceDeleteHandler implements ResourceDeleteHandlerInterface
 {
-    private ResourceDeleteHandlerInterface $decoratedHandler;
-
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(ResourceDeleteHandlerInterface $decoratedHandler, EntityManagerInterface $entityManager)
+    public function __construct(private ResourceDeleteHandlerInterface $decoratedHandler, private EntityManagerInterface $entityManager)
     {
-        $this->decoratedHandler = $decoratedHandler;
-        $this->entityManager = $entityManager;
     }
 
     /**

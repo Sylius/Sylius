@@ -19,12 +19,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class FilterExtension extends BaseFilterExtension
 {
-    private string $imagesPath;
-
-    public function __construct(string $imagesPath, CacheManager $cache)
+    public function __construct(private string $imagesPath, CacheManager $cache)
     {
-        $this->imagesPath = $imagesPath;
-
         parent::__construct($cache);
     }
 
@@ -44,6 +40,6 @@ final class FilterExtension extends BaseFilterExtension
 
     private function canImageBeFiltered(string $path): bool
     {
-        return substr($path, -4) !== '.svg';
+        return !str_ends_with($path, '.svg');
     }
 }

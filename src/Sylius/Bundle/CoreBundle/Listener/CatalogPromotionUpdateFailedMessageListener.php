@@ -21,11 +21,8 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionUpdateFailedMessageListener
 {
-    private MessageBusInterface $messageBus;
-
-    public function __construct(MessageBusInterface $messageBus)
+    public function __construct(private MessageBusInterface $messageBus)
     {
-        $this->messageBus = $messageBus;
     }
 
     public function onMessageFailed(WorkerMessageFailedEvent $event)

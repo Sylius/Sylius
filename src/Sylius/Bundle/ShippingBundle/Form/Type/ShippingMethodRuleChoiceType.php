@@ -19,11 +19,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ShippingMethodRuleChoiceType extends AbstractType
 {
-    private array $rules;
-
-    public function __construct(array $rules)
+    public function __construct(private array $rules)
     {
-        $this->rules = $rules;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

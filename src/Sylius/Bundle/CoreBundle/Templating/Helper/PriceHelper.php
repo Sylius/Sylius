@@ -21,11 +21,8 @@ use Webmozart\Assert\Assert;
 
 class PriceHelper extends Helper
 {
-    private ProductVariantPriceCalculatorInterface $productVariantPriceCalculator;
-
-    public function __construct(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
+    public function __construct(private ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
     {
-        $this->productVariantPriceCalculator = $productVariantPriceCalculator;
     }
 
     /**

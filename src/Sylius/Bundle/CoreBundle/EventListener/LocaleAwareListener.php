@@ -30,11 +30,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class LocaleAwareListener implements EventSubscriberInterface
 {
-    private DecoratedLocaleListener $decoratedListener;
-
-    public function __construct(DecoratedLocaleListener $decoratedListener)
+    public function __construct(private DecoratedLocaleListener $decoratedListener)
     {
-        $this->decoratedListener = $decoratedListener;
     }
 
     public function onKernelRequest(RequestEvent $event): void

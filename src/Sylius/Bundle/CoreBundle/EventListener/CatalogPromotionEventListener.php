@@ -20,11 +20,8 @@ use Webmozart\Assert\Assert;
 
 final class CatalogPromotionEventListener
 {
-    private CatalogPromotionAnnouncerInterface $catalogPromotionAnnouncer;
-
-    public function __construct(CatalogPromotionAnnouncerInterface $catalogPromotionAnnouncer)
+    public function __construct(private CatalogPromotionAnnouncerInterface $catalogPromotionAnnouncer)
     {
-        $this->catalogPromotionAnnouncer = $catalogPromotionAnnouncer;
     }
 
     public function handleCatalogPromotionCreatedEvent(GenericEvent $event): void

@@ -23,11 +23,8 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
  */
 final class TemplateBlockDataCollector extends DataCollector
 {
-    private TemplateBlockRenderingHistory $templateBlockRenderingHistory;
-
-    public function __construct(TemplateBlockRenderingHistory $templateBlockRenderingHistory)
+    public function __construct(private TemplateBlockRenderingHistory $templateBlockRenderingHistory)
     {
-        $this->templateBlockRenderingHistory = $templateBlockRenderingHistory;
         $this->reset();
     }
 

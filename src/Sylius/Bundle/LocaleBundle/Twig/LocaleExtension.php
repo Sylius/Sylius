@@ -19,11 +19,8 @@ use Twig\TwigFilter;
 
 final class LocaleExtension extends AbstractExtension
 {
-    private LocaleHelperInterface $localeHelper;
-
-    public function __construct(LocaleHelperInterface $localeHelper)
+    public function __construct(private LocaleHelperInterface $localeHelper)
     {
-        $this->localeHelper = $localeHelper;
     }
 
     public function getFilters(): array

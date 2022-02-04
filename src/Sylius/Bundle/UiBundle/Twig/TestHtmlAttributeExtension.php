@@ -18,11 +18,8 @@ use Twig\TwigFunction;
 
 final class TestHtmlAttributeExtension extends AbstractExtension
 {
-    private string $env;
-
-    public function __construct(string $env)
+    public function __construct(private string $env)
     {
-        $this->env = $env;
     }
 
     /**
@@ -34,7 +31,7 @@ final class TestHtmlAttributeExtension extends AbstractExtension
             new TwigFunction(
                 'sylius_test_html_attribute',
                 function (string $name, ?string $value = null): string {
-                    if (strpos($this->env, 'test') === 0) {
+                    if (str_starts_with($this->env, 'test')) {
                         return sprintf('data-test-%s="%s"', $name, (string) $value);
                     }
 

@@ -25,13 +25,10 @@ use Webmozart\Assert\Assert;
 
 final class HasEnabledEntityValidator extends ConstraintValidator
 {
-    private ManagerRegistry $registry;
-
     private PropertyAccessor $accessor;
 
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(private ManagerRegistry $registry)
     {
-        $this->registry = $registry;
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
@@ -56,7 +53,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
 
         $criteria = [$constraint->enabledPath => true];
 
-        $repository = $objectManager->getRepository(get_class($value));
+        $repository = $objectManager->getRepository($value::class);
         $results = $repository->{$constraint->repositoryMethod}($criteria);
 
         /* If the result is a MongoCursor, it must be advanced to the first
@@ -80,10 +77,9 @@ final class HasEnabledEntityValidator extends ConstraintValidator
      * If no entity matched the query criteria or a single entity matched, which is the same as the entity being
      * validated, the entity is the last enabled entity available.
      *
-     * @param array|\Iterator $result
      * @param object $entity
      */
-    private function isLastEnabledEntity($result, $entity): bool
+    private function isLastEnabledEntity(array|\Iterator $result, $entity): bool
     {
         return !\is_countable($result) || 0 === count($result)
         || (1 === count($result) && $entity === ($result instanceof \Iterator ? $result->current() : current($result)));
@@ -99,13 +95,13 @@ final class HasEnabledEntityValidator extends ConstraintValidator
 
             $this->validateObjectManager($objectManager, sprintf('Object manager "%s" does not exist.', $manager));
         } else {
-            $objectManager = $this->registry->getManagerForClass(get_class($entity));
+            $objectManager = $this->registry->getManagerForClass($entity::class);
 
             $this->validateObjectManager(
                 $objectManager,
                 sprintf(
                     'Unable to find the object manager associated with an entity of class "%s".',
-                    get_class($entity)
+                    $entity::class
                 )
             );
         }
@@ -131,7 +127,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
     private function ensureEntityHasProvidedEnabledField(ObjectManager $objectManager, $entity, string $enabledPropertyPath): void
     {
         /** @var ClassMetadata $class */
-        $class = $objectManager->getClassMetadata(get_class($entity));
+        $class = $objectManager->getClassMetadata($entity::class);
 
         if (!$class->hasField($enabledPropertyPath) && !$class->hasAssociation($enabledPropertyPath)) {
             throw new ConstraintDefinitionException(

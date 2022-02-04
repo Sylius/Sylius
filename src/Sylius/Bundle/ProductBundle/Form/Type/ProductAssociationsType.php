@@ -24,16 +24,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductAssociationsType extends AbstractType
 {
-    private RepositoryInterface $productAssociationTypeRepository;
-
-    private DataTransformerInterface $productsToProductAssociationsTransformer;
-
     public function __construct(
-        RepositoryInterface $productAssociationTypeRepository,
-        DataTransformerInterface $productsToProductAssociationsTransformer
+        private RepositoryInterface $productAssociationTypeRepository,
+        private DataTransformerInterface $productsToProductAssociationsTransformer
     ) {
-        $this->productAssociationTypeRepository = $productAssociationTypeRepository;
-        $this->productsToProductAssociationsTransformer = $productsToProductAssociationsTransformer;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

@@ -20,11 +20,8 @@ use Webmozart\Assert\Assert;
 
 final class ShipmentShipListener
 {
-    private ShipmentEmailManagerInterface $shipmentEmailManager;
-
-    public function __construct(ShipmentEmailManagerInterface $shipmentEmailManager)
+    public function __construct(private ShipmentEmailManagerInterface $shipmentEmailManager)
     {
-        $this->shipmentEmailManager = $shipmentEmailManager;
     }
 
     public function sendConfirmationEmail(GenericEvent $event): void

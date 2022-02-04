@@ -22,16 +22,8 @@ final class AccountMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.shop.account';
 
-    /** @var FactoryInterface */
-    private $factory;
-
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
-
-    public function __construct(FactoryInterface $factory, EventDispatcherInterface $eventDispatcher)
+    public function __construct(private FactoryInterface $factory, private EventDispatcherInterface $eventDispatcher)
     {
-        $this->factory = $factory;
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function createMenu(array $options): ItemInterface

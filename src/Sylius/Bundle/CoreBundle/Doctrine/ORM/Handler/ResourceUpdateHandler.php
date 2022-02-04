@@ -23,15 +23,8 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 final class ResourceUpdateHandler implements ResourceUpdateHandlerInterface
 {
-    private ResourceUpdateHandlerInterface $decoratedHandler;
-
-    /** @var EntityManagerInterface */
-    private $entityManager;
-
-    public function __construct(ResourceUpdateHandlerInterface $decoratedHandler, EntityManagerInterface $entityManager)
+    public function __construct(private ResourceUpdateHandlerInterface $decoratedHandler, private EntityManagerInterface $entityManager)
     {
-        $this->decoratedHandler = $decoratedHandler;
-        $this->entityManager = $entityManager;
     }
 
     /**

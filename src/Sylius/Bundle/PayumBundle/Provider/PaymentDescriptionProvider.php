@@ -19,11 +19,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class PaymentDescriptionProvider implements PaymentDescriptionProviderInterface
 {
-    private TranslatorInterface $translator;
-
-    public function __construct(TranslatorInterface $translator)
+    public function __construct(private TranslatorInterface $translator)
     {
-        $this->translator = $translator;
     }
 
     public function getPaymentDescription(PaymentInterface $payment): string

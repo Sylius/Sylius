@@ -23,16 +23,8 @@ final class CustomerShowMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.customer.show';
 
-    private FactoryInterface $factory;
-
-    private EventDispatcherInterface $eventDispatcher;
-
-    public function __construct(
-        FactoryInterface $factory,
-        EventDispatcherInterface $eventDispatcher
-    ) {
-        $this->factory = $factory;
-        $this->eventDispatcher = $eventDispatcher;
+    public function __construct(private FactoryInterface $factory, private EventDispatcherInterface $eventDispatcher)
+    {
     }
 
     public function createMenu(array $options): ItemInterface

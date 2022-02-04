@@ -20,11 +20,8 @@ use Twig\TwigFunction;
 
 final class ChannelsCurrenciesExtension extends AbstractExtension
 {
-    private ChannelRepositoryInterface $channelRepository;
-
-    public function __construct(ChannelRepositoryInterface $channelRepository)
+    public function __construct(private ChannelRepositoryInterface $channelRepository)
     {
-        $this->channelRepository = $channelRepository;
     }
 
     public function getFunctions(): array
