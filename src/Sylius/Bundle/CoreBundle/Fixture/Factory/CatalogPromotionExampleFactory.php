@@ -46,7 +46,6 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
         $this->configureOptions($this->optionsResolver);
     }
 
-
     public function create(array $options = []): CatalogPromotionInterface
     {
         $options = $this->optionsResolver->resolve($options);

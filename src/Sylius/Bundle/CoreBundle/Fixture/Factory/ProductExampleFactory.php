@@ -34,6 +34,7 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -60,8 +61,8 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         private RepositoryInterface $productOptionRepository,
         private RepositoryInterface $channelRepository,
         private RepositoryInterface $localeRepository,
-        private ?\Sylius\Component\Resource\Repository\RepositoryInterface $taxCategoryRepository = null,
-        private ?\Symfony\Component\Config\FileLocatorInterface $fileLocator = null
+        private ?RepositoryInterface $taxCategoryRepository = null,
+        private ?FileLocatorInterface $fileLocator = null
     ) {
         if ($this->taxCategoryRepository === null) {
             @trigger_error(sprintf('Not passing a $taxCategoryRepository to %s constructor is deprecated since Sylius 1.6 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
