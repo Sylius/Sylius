@@ -54,7 +54,15 @@ final class Configuration implements ConfigurationInterface
                 ->arrayNode('catalog_promotions')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->integerNode('batch_size')->defaultValue(100)->end()
+                        ->integerNode('batch_size')
+                            ->defaultValue(100)
+                            ->validate()
+                                ->ifTrue(function (int $batchSize): bool {
+                                    return $batchSize <= 0;
+                                })
+                                ->thenInvalid('Expected value bigger than 0, but got %s.')
+                            ->end()
+                        ->end()
                     ->end()
                 ->end()
             ->end()
