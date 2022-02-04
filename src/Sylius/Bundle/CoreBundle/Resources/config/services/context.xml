@@ -42,7 +42,7 @@
             <argument type="service" id="sylius.context.customer" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.repository.order" />
-            <tag name="sylius.context.cart" priority="-555" />
+            <tag name="sylius.context.cart" priority="-888" />
         </service>
 
         <service id="sylius.storage.currency" class="Sylius\Component\Core\Currency\CurrencyStorage">
