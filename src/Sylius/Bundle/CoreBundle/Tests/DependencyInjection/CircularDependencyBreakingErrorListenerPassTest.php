@@ -21,6 +21,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 final class CircularDependencyBreakingErrorListenerPassTest extends AbstractCompilerPassTestCase
 {
+    /** @test */
     public function it_register_circular_dependency_breaking_error_listener_when_exception_listener_is_registered(): void
     {
         $this->container->setDefinition('exception_listener', new Definition('ExceptionListener'));
@@ -30,6 +31,7 @@ final class CircularDependencyBreakingErrorListenerPassTest extends AbstractComp
         $this->assertContainerBuilderHasService(CircularDependencyBreakingErrorListener::class);
     }
 
+    /** @test */
     public function it_does_nothing_when_exception_listener_is_not_registered(): void
     {
         $this->compile();
