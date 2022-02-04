@@ -25,18 +25,8 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 final class ShopCartBlamerListener
 {
-    /** @var CartContextInterface */
-    private $cartContext;
-
-    /** @var SectionProviderInterface */
-    private $uriBasedSectionContext;
-
-    public function __construct(
-        CartContextInterface $cartContext,
-        SectionProviderInterface $uriBasedSectionContext
-    ) {
-        $this->cartContext = $cartContext;
-        $this->uriBasedSectionContext = $uriBasedSectionContext;
+    public function __construct(private CartContextInterface $cartContext, private SectionProviderInterface $uriBasedSectionContext)
+    {
     }
 
     public function onImplicitLogin(UserEvent $userEvent): void
@@ -85,7 +75,7 @@ final class ShopCartBlamerListener
     {
         try {
             $cart = $this->cartContext->getCart();
-        } catch (CartNotFoundException $exception) {
+        } catch (CartNotFoundException) {
             return null;
         }
 

@@ -22,11 +22,8 @@ use Twig\TwigFunction;
  */
 final class TemplateEventExtension extends AbstractExtension
 {
-    private TemplateEventRendererInterface $templateEventRenderer;
-
-    public function __construct(TemplateEventRendererInterface $templateEventRenderer)
+    public function __construct(private TemplateEventRendererInterface $templateEventRenderer)
     {
-        $this->templateEventRenderer = $templateEventRenderer;
     }
 
     public function getFunctions(): array
@@ -39,7 +36,7 @@ final class TemplateEventExtension extends AbstractExtension
     /**
      * @param string|string[] $eventName
      */
-    public function render($eventName, array $context = []): string
+    public function render(string|array $eventName, array $context = []): string
     {
         return $this->templateEventRenderer->render((array) $eventName, $context);
     }

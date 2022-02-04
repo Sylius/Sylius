@@ -23,11 +23,8 @@ use Symfony\Component\Form\FormEvents;
 
 final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
 {
-    private ?CypherInterface $cypher;
-
-    public function __construct(?CypherInterface $cypher = null)
+    public function __construct(private ?\Payum\Core\Security\CypherInterface $cypher = null)
     {
-        $this->cypher = $cypher;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

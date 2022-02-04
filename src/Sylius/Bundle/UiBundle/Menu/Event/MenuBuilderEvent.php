@@ -19,14 +19,8 @@ use SyliusLabs\Polyfill\Symfony\EventDispatcher\Event;
 
 class MenuBuilderEvent extends Event
 {
-    private FactoryInterface $factory;
-
-    private ItemInterface $menu;
-
-    public function __construct(FactoryInterface $factory, ItemInterface $menu)
+    public function __construct(private FactoryInterface $factory, private ItemInterface $menu)
     {
-        $this->factory = $factory;
-        $this->menu = $menu;
     }
 
     public function getFactory(): FactoryInterface

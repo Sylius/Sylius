@@ -20,14 +20,8 @@ use Twig\TwigFunction;
 
 final class NotificationWidgetExtension extends AbstractExtension
 {
-    private bool $areNotificationsEnabled;
-
-    private int $checkFrequency;
-
-    public function __construct(bool $areNotificationsEnabled, int $checkFrequency)
+    public function __construct(private bool $areNotificationsEnabled, private int $checkFrequency)
     {
-        $this->areNotificationsEnabled = $areNotificationsEnabled;
-        $this->checkFrequency = $checkFrequency;
     }
 
     public function getFunctions(): array

@@ -24,24 +24,11 @@ use Twig\Environment;
 
 final class CustomerStatisticsController
 {
-    private CustomerStatisticsProviderInterface $statisticsProvider;
-
-    private RepositoryInterface $customerRepository;
-
-    /** @var EngineInterface|Environment */
-    private $templatingEngine;
-
-    /**
-     * @param EngineInterface|Environment $templatingEngine
-     */
     public function __construct(
-        CustomerStatisticsProviderInterface $statisticsProvider,
-        RepositoryInterface $customerRepository,
-        object $templatingEngine
+        private CustomerStatisticsProviderInterface $statisticsProvider,
+        private RepositoryInterface $customerRepository,
+        private EngineInterface|Environment $templatingEngine
     ) {
-        $this->statisticsProvider = $statisticsProvider;
-        $this->customerRepository = $customerRepository;
-        $this->templatingEngine = $templatingEngine;
     }
 
     /**

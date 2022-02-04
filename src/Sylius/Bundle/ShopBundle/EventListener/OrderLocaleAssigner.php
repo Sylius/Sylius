@@ -20,12 +20,8 @@ use Webmozart\Assert\Assert;
 
 final class OrderLocaleAssigner
 {
-    /** @var LocaleContextInterface */
-    private $localeContext;
-
-    public function __construct(LocaleContextInterface $localeContext)
+    public function __construct(private LocaleContextInterface $localeContext)
     {
-        $this->localeContext = $localeContext;
     }
 
     public function assignLocale(ResourceControllerEvent $event): void

@@ -25,16 +25,12 @@ final class CatalogPromotionActionTypeExtension extends AbstractTypeExtension
 
     private array $actionConfigurationTypes;
 
-    private Environment $twig;
-
-    public function __construct(iterable $actionConfigurationTypes, Environment $twig)
+    public function __construct(iterable $actionConfigurationTypes, private Environment $twig)
     {
         foreach ($actionConfigurationTypes as $type => $formType) {
-            $this->actionConfigurationTypes[$type] = get_class($formType);
+            $this->actionConfigurationTypes[$type] = $formType::class;
             $this->actionTypes['sylius.form.catalog_promotion.action.' . $type] = $type;
         }
-
-        $this->twig = $twig;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

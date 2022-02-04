@@ -24,24 +24,15 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class NotificationController
 {
-    private ClientInterface $client;
-
-    private MessageFactory $messageFactory;
-
     private Uri $hubUri;
 
-    private string $environment;
-
     public function __construct(
-        ClientInterface $client,
-        MessageFactory $messageFactory,
+        private ClientInterface $client,
+        private MessageFactory $messageFactory,
         string $hubUri,
-        string $environment
+        private string $environment
     ) {
-        $this->client = $client;
-        $this->messageFactory = $messageFactory;
         $this->hubUri = new Uri($hubUri);
-        $this->environment = $environment;
     }
 
     public function getVersionAction(Request $request): JsonResponse
@@ -65,7 +56,7 @@ final class NotificationController
 
         try {
             $hubResponse = $this->client->send($hubRequest, ['verify' => false]);
-        } catch (GuzzleException $exception) {
+        } catch (GuzzleException) {
             return JsonResponse::create('', JsonResponse::HTTP_NO_CONTENT);
         }
 

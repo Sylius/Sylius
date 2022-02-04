@@ -20,25 +20,20 @@ use Symfony\Component\Templating\Helper\Helper;
 
 final class LocaleHelper extends Helper implements LocaleHelperInterface
 {
-    private LocaleConverterInterface $localeConverter;
-
-    private ?LocaleContextInterface $localeContext;
-
-    public function __construct(LocaleConverterInterface $localeConverter, ?LocaleContextInterface $localeContext = null)
-    {
+    public function __construct(
+        private LocaleConverterInterface $localeConverter,
+        private ?LocaleContextInterface $localeContext = null
+    ) {
         if (null === $localeContext) {
             @trigger_error('Not passing LocaleContextInterface explicitly as the second argument is deprecated since 1.4 and will be prohibited in 2.0', \E_USER_DEPRECATED);
         }
-
-        $this->localeConverter = $localeConverter;
-        $this->localeContext = $localeContext;
     }
 
     public function convertCodeToName(string $code, ?string $localeCode = null): ?string
     {
         try {
             return $this->localeConverter->convertCodeToName($code, $this->getLocaleCode($localeCode));
-        } catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException) {
             return $code;
         }
     }
@@ -60,7 +55,7 @@ final class LocaleHelper extends Helper implements LocaleHelperInterface
 
         try {
             return $this->localeContext->getLocaleCode();
-        } catch (LocaleNotFoundException $exception) {
+        } catch (LocaleNotFoundException) {
             return null;
         }
     }

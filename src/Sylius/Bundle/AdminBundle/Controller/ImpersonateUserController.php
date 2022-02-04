@@ -26,32 +26,19 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 final class ImpersonateUserController
 {
-    private UserImpersonatorInterface $impersonator;
-
-    private AuthorizationCheckerInterface $authorizationChecker;
-
-    private UserProviderInterface $userProvider;
-
     private ?RouterInterface $router;
 
-    private string $authorizationRole;
-
     public function __construct(
-        UserImpersonatorInterface $impersonator,
-        AuthorizationCheckerInterface $authorizationChecker,
-        UserProviderInterface $userProvider,
+        private UserImpersonatorInterface $impersonator,
+        private AuthorizationCheckerInterface $authorizationChecker,
+        private UserProviderInterface $userProvider,
         ?RouterInterface $router,
-        string $authorizationRole
+        private string $authorizationRole
     ) {
         if (null !== $router) {
             @trigger_error('Passing RouterInterface as the fourth argument is deprecated since 1.4 and will be prohibited in 2.0', \E_USER_DEPRECATED);
         }
-
-        $this->impersonator = $impersonator;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->userProvider = $userProvider;
         $this->router = $router;
-        $this->authorizationRole = $authorizationRole;
     }
 
     public function impersonateAction(Request $request, string $username): Response

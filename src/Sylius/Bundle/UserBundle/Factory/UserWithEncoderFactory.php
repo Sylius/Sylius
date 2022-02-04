@@ -19,14 +19,8 @@ use Webmozart\Assert\Assert;
 
 final class UserWithEncoderFactory implements FactoryInterface
 {
-    private FactoryInterface $decoratedUserFactory;
-
-    private string $encoderName;
-
-    public function __construct(FactoryInterface $decoratedUserFactory, string $encoderName)
+    public function __construct(private FactoryInterface $decoratedUserFactory, private string $encoderName)
     {
-        $this->decoratedUserFactory = $decoratedUserFactory;
-        $this->encoderName = $encoderName;
     }
 
     public function createNew(): UserInterface

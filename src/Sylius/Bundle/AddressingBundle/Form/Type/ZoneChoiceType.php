@@ -22,16 +22,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ZoneChoiceType extends AbstractType
 {
-    private RepositoryInterface $zoneRepository;
-
-    /** @var string[] */
-    private array $scopeTypes;
-
-    public function __construct(RepositoryInterface $zoneRepository, array $scopeTypes = [])
+    public function __construct(private RepositoryInterface $zoneRepository, private array $scopeTypes = [])
     {
-        $this->zoneRepository = $zoneRepository;
-        $this->scopeTypes = $scopeTypes;
-
         if (count($scopeTypes) === 0) {
             @trigger_error('Not passing scopeTypes thru constructor is deprecated in Sylius 1.5 and it will be removed in Sylius 2.0');
         }

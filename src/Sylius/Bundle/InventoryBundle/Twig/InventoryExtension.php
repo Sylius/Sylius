@@ -19,11 +19,8 @@ use Twig\TwigFunction;
 
 final class InventoryExtension extends AbstractExtension
 {
-    private InventoryHelper $helper;
-
-    public function __construct(InventoryHelper $helper)
+    public function __construct(private InventoryHelper $helper)
     {
-        $this->helper = $helper;
     }
 
     public function getFunctions(): array

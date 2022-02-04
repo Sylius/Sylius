@@ -22,26 +22,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class AbstractUserProvider implements UserProviderInterface
 {
-    /** @var string */
-    protected $supportedUserClass = UserInterface::class;
-
-    /** @var UserRepositoryInterface */
-    protected $userRepository;
-
-    /** @var CanonicalizerInterface */
-    protected $canonicalizer;
-
     /**
      * @param string $supportedUserClass FQCN
      */
     public function __construct(
-        string $supportedUserClass,
-        UserRepositoryInterface $userRepository,
-        CanonicalizerInterface $canonicalizer
+        protected string $supportedUserClass,
+        protected UserRepositoryInterface $userRepository,
+        protected CanonicalizerInterface $canonicalizer
     ) {
-        $this->supportedUserClass = $supportedUserClass;
-        $this->userRepository = $userRepository;
-        $this->canonicalizer = $canonicalizer;
     }
 
     public function loadUserByUsername($username): UserInterface
@@ -66,9 +54,9 @@ abstract class AbstractUserProvider implements UserProviderInterface
             );
         }
 
-        if (!$this->supportsClass(get_class($user))) {
+        if (!$this->supportsClass($user::class)) {
             throw new UnsupportedUserException(
-                sprintf('Instances of "%s" are not supported.', get_class($user))
+                sprintf('Instances of "%s" are not supported.', $user::class)
             );
         }
 

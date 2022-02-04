@@ -19,12 +19,8 @@ use Twig\TwigFilter;
 
 class ProvinceNamingExtension extends AbstractExtension
 {
-    /** @var ProvinceNamingProviderInterface */
-    private $provinceNamingProvider;
-
-    public function __construct(ProvinceNamingProviderInterface $provinceNamingProvider)
+    public function __construct(private ProvinceNamingProviderInterface $provinceNamingProvider)
     {
-        $this->provinceNamingProvider = $provinceNamingProvider;
     }
 
     public function getFilters(): array

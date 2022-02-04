@@ -24,16 +24,8 @@ use Webmozart\Assert\Assert;
 
 final class SessionCartSubscriber implements EventSubscriberInterface
 {
-    /** @var CartContextInterface */
-    private $cartContext;
-
-    /** @var CartStorageInterface */
-    private $cartStorage;
-
-    public function __construct(CartContextInterface $cartContext, CartStorageInterface $cartStorage)
+    public function __construct(private CartContextInterface $cartContext, private CartStorageInterface $cartStorage)
     {
-        $this->cartContext = $cartContext;
-        $this->cartStorage = $cartStorage;
     }
 
     public static function getSubscribedEvents(): array
@@ -65,7 +57,7 @@ final class SessionCartSubscriber implements EventSubscriberInterface
 
             /** @var OrderInterface $cart */
             Assert::isInstanceOf($cart, OrderInterface::class);
-        } catch (CartNotFoundException $exception) {
+        } catch (CartNotFoundException) {
             return;
         }
 

@@ -23,14 +23,8 @@ use Webmozart\Assert\Assert;
 
 class ProvinceAddressConstraintValidator extends ConstraintValidator
 {
-    private RepositoryInterface $countryRepository;
-
-    private RepositoryInterface $provinceRepository;
-
-    public function __construct(RepositoryInterface $countryRepository, RepositoryInterface $provinceRepository)
+    public function __construct(private RepositoryInterface $countryRepository, private RepositoryInterface $provinceRepository)
     {
-        $this->countryRepository = $countryRepository;
-        $this->provinceRepository = $provinceRepository;
     }
 
     public function validate($value, Constraint $constraint): void
@@ -47,7 +41,7 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
         $propertyPath = $this->context->getPropertyPath();
 
         foreach (iterator_to_array($this->context->getViolations()) as $violation) {
-            if (0 === strpos($violation->getPropertyPath(), $propertyPath)) {
+            if (str_starts_with($violation->getPropertyPath(), $propertyPath)) {
                 return;
             }
         }

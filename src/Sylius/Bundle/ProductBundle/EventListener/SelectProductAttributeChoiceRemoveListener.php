@@ -22,11 +22,8 @@ use Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface
 
 final class SelectProductAttributeChoiceRemoveListener
 {
-    private string $productAttributeValueClass;
-
-    public function __construct(string $productAttributeValueClass)
+    public function __construct(private string $productAttributeValueClass)
     {
-        $this->productAttributeValueClass = $productAttributeValueClass;
     }
 
     public function postUpdate(LifecycleEventArgs $event): void

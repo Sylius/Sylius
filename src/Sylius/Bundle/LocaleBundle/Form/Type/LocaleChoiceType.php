@@ -22,11 +22,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class LocaleChoiceType extends AbstractType
 {
-    private RepositoryInterface $localeRepository;
-
-    public function __construct(RepositoryInterface $repository)
+    public function __construct(private RepositoryInterface $localeRepository)
     {
-        $this->localeRepository = $repository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

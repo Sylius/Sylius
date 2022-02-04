@@ -24,14 +24,8 @@ use Webmozart\Assert\Assert;
 
 final class GenerateProductVariantsSubscriber implements EventSubscriberInterface
 {
-    private ProductVariantGeneratorInterface $generator;
-
-    private Session $session;
-
-    public function __construct(ProductVariantGeneratorInterface $generator, Session $session)
+    public function __construct(private ProductVariantGeneratorInterface $generator, private Session $session)
     {
-        $this->generator = $generator;
-        $this->session = $session;
     }
 
     public static function getSubscribedEvents(): array

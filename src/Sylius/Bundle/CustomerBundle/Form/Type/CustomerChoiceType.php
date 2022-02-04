@@ -24,11 +24,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class CustomerChoiceType extends AbstractType
 {
-    private RepositoryInterface $customerRepository;
-
-    public function __construct(RepositoryInterface $customerRepository)
+    public function __construct(private RepositoryInterface $customerRepository)
     {
-        $this->customerRepository = $customerRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

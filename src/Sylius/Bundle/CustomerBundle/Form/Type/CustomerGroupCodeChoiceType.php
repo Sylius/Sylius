@@ -21,11 +21,8 @@ use Symfony\Component\Form\ReversedTransformer;
 
 final class CustomerGroupCodeChoiceType extends AbstractType
 {
-    private RepositoryInterface $customerGroupRepository;
-
-    public function __construct(RepositoryInterface $customerGroupRepository)
+    public function __construct(private RepositoryInterface $customerGroupRepository)
     {
-        $this->customerGroupRepository = $customerGroupRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

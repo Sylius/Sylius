@@ -40,7 +40,7 @@ class AppKernel extends Kernel
 
     protected function getContainerBaseClass(): string
     {
-        if (0 === strpos($this->environment, 'test')) {
+        if (str_starts_with($this->environment, 'test')) {
             return MockerContainer::class;
         }
 

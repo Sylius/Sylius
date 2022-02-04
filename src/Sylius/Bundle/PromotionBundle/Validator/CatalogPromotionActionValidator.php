@@ -22,13 +22,10 @@ use Webmozart\Assert\Assert;
 
 final class CatalogPromotionActionValidator extends ConstraintValidator
 {
-    private array $actionTypes;
-
     private array $actionValidators;
 
-    public function __construct(array $actionTypes, iterable $actionValidators)
+    public function __construct(private array $actionTypes, iterable $actionValidators)
     {
-        $this->actionTypes = $actionTypes;
         $this->actionValidators = $actionValidators instanceof \Traversable ? iterator_to_array($actionValidators) : $actionValidators;
     }
 

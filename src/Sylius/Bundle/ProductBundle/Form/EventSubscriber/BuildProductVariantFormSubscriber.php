@@ -22,14 +22,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 final class BuildProductVariantFormSubscriber implements EventSubscriberInterface
 {
-    private FormFactoryInterface $factory;
-
-    private bool $disabled;
-
-    public function __construct(FormFactoryInterface $factory, bool $disabled = false)
+    public function __construct(private FormFactoryInterface $factory, private bool $disabled = false)
     {
-        $this->factory = $factory;
-        $this->disabled = $disabled;
     }
 
     public static function getSubscribedEvents(): array

@@ -22,11 +22,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProvinceChoiceType extends AbstractType
 {
-    private RepositoryInterface $provinceRepository;
-
-    public function __construct(RepositoryInterface $provinceRepository)
+    public function __construct(private RepositoryInterface $provinceRepository)
     {
-        $this->provinceRepository = $provinceRepository;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

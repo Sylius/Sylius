@@ -20,11 +20,8 @@ use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
  */
 final class HtmlDebugTemplateBlockRenderer implements TemplateBlockRendererInterface
 {
-    private TemplateBlockRendererInterface $templateBlockRenderer;
-
-    public function __construct(TemplateBlockRendererInterface $templateBlockRenderer)
+    public function __construct(private TemplateBlockRendererInterface $templateBlockRenderer)
     {
-        $this->templateBlockRenderer = $templateBlockRenderer;
     }
 
     public function render(TemplateBlock $templateBlock, array $context = []): string

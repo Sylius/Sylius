@@ -22,16 +22,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class LocaleStrippingRouter implements RouterInterface, WarmableInterface
 {
-    /** @var RouterInterface */
-    private $router;
-
-    /** @var LocaleContextInterface */
-    private $localeContext;
-
-    public function __construct(RouterInterface $router, LocaleContextInterface $localeContext)
+    public function __construct(private RouterInterface $router, private LocaleContextInterface $localeContext)
     {
-        $this->router = $router;
-        $this->localeContext = $localeContext;
     }
 
     public function match($pathinfo): array
@@ -43,7 +35,7 @@ final class LocaleStrippingRouter implements RouterInterface, WarmableInterface
     {
         $url = $this->router->generate($name, $parameters, $referenceType);
 
-        if (false === strpos($url, '_locale')) {
+        if (!str_contains($url, '_locale')) {
             return $url;
         }
 

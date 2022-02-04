@@ -20,7 +20,9 @@ This obvious dev dependency was part of Sylius requirements. In 1.11 we've moved
 
 Due to the drop of support PHP `7.4` Sylius also will not support it since version `1.11`.
 
-### Potential BC-break
+### Potential BC-breaks
+
+#### WinzouStateMachine
 
 In Sylius we are using WinzouStateMachine where as example `sylius_order` state machine has declared 14 callbacks on one state.
 If this will be customized and number of callbacks comes up to 16 and higher - the priority of callbacks will become randomized.
@@ -31,6 +33,23 @@ Please note that those priorities are being executed in ascending order. You can
 
 Be aware that if those priorities were customized, this would lead to problems. 
 You should check and adjust priorities on your application.
+
+#### Promoted properties from PHP 8.0
+
+We've introduced promoted properties all over the code where it was possible. Please, pay attention especially to these classes:
+- `Sylius\Bundle\AdminBundle\Controller\CustomerStatisticsController`
+- `Sylius\Bundle\AdminBundle\Controller\Dashboard\StatisticsController`
+- `Sylius\Bundle\AdminBundle\Controller\DashboardController`
+- `Sylius\Bundle\ShopBundle\Controller\ContactController`
+- `Sylius\Bundle\ShopBundle\Controller\CurrencySwitchController`
+- `Sylius\Bundle\ShopBundle\Controller\HomepageController`
+- `Sylius\Bundle\ShopBundle\Controller\LocaleSwitchController`
+- `Sylius\Bundle\ShopBundle\Controller\SecurityWidgetController`
+- `Sylius\Bundle\UiBundle\Controller\SecurityController`
+
+In all of them constructor argument `$templatingEngine`, previously typed as `object` was changed to `EngineInterface|Environment`.
+It should not cause any problems (only such services would work in these controllers), but is theoretically making the type
+requirement stricter.
 
 ### Minimum price & Promotions
 

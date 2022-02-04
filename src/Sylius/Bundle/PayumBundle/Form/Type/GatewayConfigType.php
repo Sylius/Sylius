@@ -23,16 +23,12 @@ use Symfony\Component\Form\FormEvents;
 
 final class GatewayConfigType extends AbstractResourceType
 {
-    private FormTypeRegistryInterface $gatewayConfigurationTypeRegistry;
-
     public function __construct(
         string $dataClass,
         array $validationGroups,
-        FormTypeRegistryInterface $gatewayConfigurationTypeRegistry
+        private FormTypeRegistryInterface $gatewayConfigurationTypeRegistry
     ) {
         parent::__construct($dataClass, $validationGroups);
-
-        $this->gatewayConfigurationTypeRegistry = $gatewayConfigurationTypeRegistry;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

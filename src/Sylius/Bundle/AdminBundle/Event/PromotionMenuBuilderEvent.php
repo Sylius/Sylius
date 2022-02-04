@@ -20,16 +20,12 @@ use Sylius\Component\Core\Model\PromotionInterface;
 
 final class PromotionMenuBuilderEvent extends MenuBuilderEvent
 {
-    private PromotionInterface $promotion;
-
     public function __construct(
         FactoryInterface $factory,
         ItemInterface $menu,
-        PromotionInterface $promotion
+        private PromotionInterface $promotion
     ) {
         parent::__construct($factory, $menu);
-
-        $this->promotion = $promotion;
     }
 
     public function getPromotion(): PromotionInterface

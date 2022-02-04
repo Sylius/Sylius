@@ -18,11 +18,8 @@ use Symfony\Component\Templating\Helper\Helper;
 
 class FormatMoneyHelper extends Helper implements FormatMoneyHelperInterface
 {
-    private MoneyFormatterInterface $moneyFormatter;
-
-    public function __construct(MoneyFormatterInterface $moneyFormatter)
+    public function __construct(private MoneyFormatterInterface $moneyFormatter)
     {
-        $this->moneyFormatter = $moneyFormatter;
     }
 
     public function formatAmount(int $amount, string $currencyCode, string $localeCode): string
