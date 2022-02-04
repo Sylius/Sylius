@@ -20,57 +20,43 @@ use SyliusLabs\DoctrineMigrationsExtraBundle\DependencyInjection\SyliusLabsDoctr
 
 final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function it_autoconfigures_prepending_doctrine_migrations_with_proper_migrations_path_for_test_env(): void
     {
         $this->testPrependingDoctrineMigrations('test');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_autoconfigures_prepending_doctrine_migrations_with_proper_migrations_path_for_test_cached_env(): void
     {
         $this->testPrependingDoctrineMigrations('test_cached');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_autoconfigures_prepending_doctrine_migrations_with_proper_migrations_path_for_dev_env(): void
     {
         $this->testPrependingDoctrineMigrations('dev');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_does_not_autoconfigure_prepending_doctrine_migrations_if_it_is_disabled_for_test_env(): void
     {
         $this->testNotPrependingDoctrineMigrations('test');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_does_not_autoconfigure_prepending_doctrine_migrations_if_it_is_disabled_for_test_cached_env(): void
     {
         $this->testNotPrependingDoctrineMigrations('test_cached');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_does_not_autoconfigure_prepending_doctrine_migrations_if_it_is_disabled_for_dev_env(): void
     {
         $this->testNotPrependingDoctrineMigrations('dev');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_loads_batch_size_parameter_value_properly(): void
     {
         $this->container->setParameter('kernel.environment', 'dev');
@@ -80,9 +66,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter('sylius_core.catalog_promotions.batch_size', 200);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_loads_default_batch_size_properly(): void
     {
         $this->container->setParameter('kernel.environment', 'dev');

@@ -57,9 +57,7 @@ final class Configuration implements ConfigurationInterface
                         ->integerNode('batch_size')
                             ->defaultValue(100)
                             ->validate()
-                                ->ifTrue(function (int $batchSize): bool {
-                                    return $batchSize <= 0;
-                                })
+                                ->ifTrue(fn(int $batchSize): bool => $batchSize <= 0)
                                 ->thenInvalid('Expected value bigger than 0, but got %s.')
                             ->end()
                         ->end()
