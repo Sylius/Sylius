@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Session;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -30,16 +31,20 @@ final class ShopSecurityContext implements Context
 
     private UserRepositoryInterface $userRepository;
 
+    private ?Session $session;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         SecurityServiceInterface $securityService,
         ExampleFactoryInterface $userFactory,
-        UserRepositoryInterface $userRepository
+        UserRepositoryInterface $userRepository,
+        Session $session = null
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->securityService = $securityService;
         $this->userFactory = $userFactory;
         $this->userRepository = $userRepository;
+        $this->session = $session;
     }
 
     /**
@@ -77,5 +82,15 @@ final class ShopSecurityContext implements Context
         $this->securityService->logIn($user);
 
         $this->sharedStorage->set('user', $user);
+    }
+
+    /**
+     * @When Logged in user with email :email starts a new session
+     */
+    public function loggedInUserWithEmailStartsANewSession(string $email): void
+    {
+        $this->session->restart();
+
+        $this->iAmLoggedInAs($email);
     }
 }

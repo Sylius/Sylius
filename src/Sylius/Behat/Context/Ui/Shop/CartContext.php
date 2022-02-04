@@ -48,6 +48,7 @@ final class CartContext implements Context
 
     /**
      * @When /^I see the summary of my (?:|previous )cart$/
+     * @When He views cart
      */
     public function iOpenCartSummaryPage()
     {
@@ -333,7 +334,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then there should be one item in my cart
+     * @Then /^there should be one item in (?:my|his) cart$/
      */
     public function thereShouldBeOneItemInMyCart()
     {
@@ -454,7 +455,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then my cart's total should be :total
+     * @Then /^(?:my|his) cart's total should be "([^"]+)"$/
      */
     public function myCartSTotalShouldBe($total)
     {
