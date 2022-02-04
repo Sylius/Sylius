@@ -19,6 +19,12 @@
     <services>
         <defaults public="true" />
 
+        <service id="sylius.checker.province_address_checker" class="Sylius\Bundle\AddressingBundle\Checker\ProvinceAddressChecker">
+            <argument type="service" id="sylius.repository.country" />
+            <argument type="service" id="sylius.repository.province" />
+            <tag name="validator.constraint_validator" alias="sylius_province_address_validator" />
+        </service>
+
         <service id="sylius.custom_factory.zone" class="Sylius\Component\Addressing\Factory\ZoneFactory" decorates="sylius.factory.zone" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.zone.inner" />
             <argument type="service" id="sylius.factory.zone_member" />
@@ -52,8 +58,7 @@
         </service>
 
         <service id="sylius.validator.valid_province_address" class="Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraintValidator">
-            <argument type="service" id="sylius.repository.country" />
-            <argument type="service" id="sylius.repository.province" />
+            <argument type="service" id="sylius.checker.province_address_checker" />
             <tag name="validator.constraint_validator" alias="sylius_province_address_validator" />
         </service>
 

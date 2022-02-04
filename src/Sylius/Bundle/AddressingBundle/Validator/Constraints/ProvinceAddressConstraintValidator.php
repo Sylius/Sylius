@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
+use Sylius\Bundle\AddressingBundle\Checker\ProvinceAddressChecker;
+use Sylius\Bundle\AddressingBundle\Checker\ProvinceAddressCheckerInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
-use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -23,14 +23,28 @@ use Webmozart\Assert\Assert;
 
 class ProvinceAddressConstraintValidator extends ConstraintValidator
 {
-    private RepositoryInterface $countryRepository;
+    private ProvinceAddressCheckerInterface $provinceAddressChecker;
 
-    private RepositoryInterface $provinceRepository;
-
-    public function __construct(RepositoryInterface $countryRepository, RepositoryInterface $provinceRepository)
+    public function __construct(object $countryRepositoryOrProvinceAddressChecker, ?RepositoryInterface $provinceRepository= null)
     {
-        $this->countryRepository = $countryRepository;
-        $this->provinceRepository = $provinceRepository;
+        if (!$countryRepositoryOrProvinceAddressChecker instanceof ProvinceAddressCheckerInterface) {
+            Assert::implementsInterface($countryRepositoryOrProvinceAddressChecker, RepositoryInterface::class);
+            Assert::notNull($provinceRepository);
+
+            @trigger_error(
+                sprintf(
+                    'Passing a $countryRepository and $provinceRepository to %s constructor is deprecated since Sylius 1.10 and will be removed in Sylius 2.0. Please, provide %s as first argument',
+                    self::class,
+                    ProvinceAddressCheckerInterface::class
+                ),
+                \E_USER_DEPRECATED
+            );
+
+
+            $this->provinceAddressChecker = new ProvinceAddressChecker($countryRepositoryOrProvinceAddressChecker, $provinceRepository);
+        } else {
+            $this->provinceAddressChecker = $countryRepositoryOrProvinceAddressChecker;
+        }
     }
 
     public function validate($value, Constraint $constraint): void
@@ -59,34 +73,6 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
 
     protected function isProvinceValid(AddressInterface $address): bool
     {
-        $countryCode = $address->getCountryCode();
-
-        /** @var CountryInterface|null $country */
-        $country = $this->countryRepository->findOneBy(['code' => $countryCode]);
-
-        if (null === $country) {
-            return true;
-        }
-
-        if (!$country->hasProvinces() && null !== $address->getProvinceCode()) {
-            return false;
-        }
-
-        if (!$country->hasProvinces()) {
-            return true;
-        }
-
-        if (null === $address->getProvinceCode()) {
-            return false;
-        }
-
-        /** @var ProvinceInterface|null $province */
-        $province = $this->provinceRepository->findOneBy(['code' => $address->getProvinceCode()]);
-
-        if (null === $province) {
-            return false;
-        }
-
-        return $country->hasProvince($province);
+        return $this->provinceAddressChecker->isValid($address);
     }
 }

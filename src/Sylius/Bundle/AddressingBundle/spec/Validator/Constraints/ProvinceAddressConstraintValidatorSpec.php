@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\AddressingBundle\Checker\ProvinceAddressCheckerInterface;
 use Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraint;
 use Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraintValidator;
 use Sylius\Component\Addressing\Model\AddressInterface;
@@ -47,20 +48,12 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
     }
 
     function it_does_not_add_violation_because_a_violation_exists(
-        RepositoryInterface $countryRepository,
+        ProvinceAddressCheckerInterface $provinceAddressChecker,
         AddressInterface $address,
-        Country $country,
         ProvinceAddressConstraint $constraint,
         ExecutionContextInterface $context
     ): void {
-        // DO NOT REMOVE THIS CODE: it ensures that there is a violation that can be added
-        // if the logic that is being tested (NOT adding a validation) does not work.
-        $country->getCode()->willReturn('PL');
-        $address->getCountryCode()->willReturn('PL');
-        $countryRepository->findOneBy(['code' => 'PL'])->willReturn($country);
-
-        $country->hasProvinces()->willReturn(true);
-        $address->getProvinceCode()->willReturn(null);
+        $this->beConstructedWith($provinceAddressChecker);
 
         $this->initialize($context);
 
@@ -69,26 +62,19 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
             $this->createViolation('property_path'),
         ]));
 
+        $provinceAddressChecker->isValid($address)->shouldNotBeCalled();
         $context->addViolation(Argument::any())->shouldNotBeCalled();
 
         $this->validate($address, $constraint);
     }
 
     function it_does_not_add_violation_because_a_violation_exists_when_address_is_the_root_object(
-        RepositoryInterface $countryRepository,
+        ProvinceAddressCheckerInterface $provinceAddressChecker,
         AddressInterface $address,
-        Country $country,
         ProvinceAddressConstraint $constraint,
         ExecutionContextInterface $context
     ): void {
-        // DO NOT REMOVE THIS CODE: it ensures that there is a violation that can be added
-        // if the logic that is being tested (NOT adding a validation) does not work.
-        $country->getCode()->willReturn('PL');
-        $address->getCountryCode()->willReturn('PL');
-        $countryRepository->findOneBy(['code' => 'PL'])->willReturn($country);
-
-        $country->hasProvinces()->willReturn(true);
-        $address->getProvinceCode()->willReturn(null);
+        $this->beConstructedWith($provinceAddressChecker);
 
         $this->initialize($context);
 
@@ -98,6 +84,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         ]));
 
         $context->addViolation(Argument::any())->shouldNotBeCalled();
+        $provinceAddressChecker->isValid($address)->shouldNotBeCalled();
 
         $this->validate($address, $constraint);
     }
@@ -218,6 +205,64 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $context->addViolation(Argument::any())->shouldNotBeCalled();
 
         $this->validate($address, $constraint);
+    }
+
+    function it_adds_violation_because_address_has_invalid_province(
+        ProvinceAddressCheckerInterface $provinceAddressChecker,
+        AddressInterface $address,
+        ProvinceAddressConstraint $constraint,
+        ExecutionContextInterface $context
+    ): void {
+        $this->beConstructedWith($provinceAddressChecker);
+
+        $provinceAddressChecker->isValid($address)->willReturn(false);
+
+        $this->initialize($context);
+
+        $context->getPropertyPath()->willReturn('property_path');
+        $context->getViolations()->willReturn(new \ArrayIterator([
+            $this->createViolation('other_property_path'),
+        ]));
+
+        $context->addViolation(Argument::any())->shouldBeCalled();
+
+        $this->validate($address, $constraint);
+    }
+
+    function it_does_not_add_a_violation_because_address_has_valid_province(
+        ProvinceAddressCheckerInterface $provinceAddressChecker,
+        AddressInterface $address,
+        ProvinceAddressConstraint $constraint,
+        ExecutionContextInterface $context
+    ): void {
+        $this->beConstructedWith($provinceAddressChecker);
+
+        $provinceAddressChecker->isValid($address)->willReturn(true);
+
+        $this->initialize($context);
+
+        $context->getPropertyPath()->willReturn('property_path');
+        $context->getViolations()->willReturn(new \ArrayIterator([
+            $this->createViolation('other_property_path'),
+        ]));
+
+        $context->addViolation(Argument::any())->shouldNotBeCalled();
+
+        $this->validate($address, $constraint);
+    }
+
+    function it_cannot_be_constructed_with_object_different_then_address_province_checked_or_repositories_as_first_argument()
+    {
+        $this->beConstructedWith(new \stdClass());
+
+        $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
+    }
+
+    function it_cannot_be_constructed_with_only_one_repository(RepositoryInterface $repository)
+    {
+        $this->beConstructedWith($repository);
+
+        $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }
 
     private function createViolation($propertyPath)
