@@ -21,6 +21,7 @@ use Symfony\Component\HttpKernel\Kernel as HttpKernel;
  * @deprecated Using "Sylius\Bundle\CoreBundle\Application\Kernel" as Symfony kernel is deprecated since Sylius 1.3.
  *             Please migrate to Symfony 4 directory structure.
  *             Upgrade guide: https://github.com/Sylius/Sylius/blob/1.3/UPGRADE-1.3.md#directory-structure-change
+ * @final
  */
 class Kernel extends HttpKernel
 {
