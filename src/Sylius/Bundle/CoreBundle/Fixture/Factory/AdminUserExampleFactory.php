@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Faker\Generator;
 use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\AvatarImage;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
@@ -26,33 +26,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private FactoryInterface $userFactory;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
-    private string $localeCode;
-
-    private ?FileLocatorInterface $fileLocator;
-
-    private ?ImageUploaderInterface $imageUploader;
-
-    private ?FactoryInterface $avatarImageFactory;
-
     public function __construct(
-        FactoryInterface $userFactory,
-        string $localeCode,
-        ?FileLocatorInterface $fileLocator = null,
-        ?ImageUploaderInterface $imageUploader = null,
-        ?FactoryInterface $avatarImageFactory = null
+        private FactoryInterface $userFactory,
+        private string $localeCode,
+        private ?FileLocatorInterface $fileLocator = null,
+        private ?ImageUploaderInterface $imageUploader = null,
+        private ?FactoryInterface $avatarImageFactory = null
     ) {
-        $this->userFactory = $userFactory;
-        $this->localeCode = $localeCode;
-        $this->fileLocator = $fileLocator;
-        $this->imageUploader = $imageUploader;
-        $this->avatarImageFactory = $avatarImageFactory;
-
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
@@ -101,8 +85,8 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('email', fn(Options $options): string => $this->faker->email)
-            ->setDefault('username', fn(Options $options): string => $this->faker->firstName . ' ' . $this->faker->lastName)
+            ->setDefault('email', fn (Options $options): string => $this->faker->email)
+            ->setDefault('username', fn (Options $options): string => $this->faker->firstName . ' ' . $this->faker->lastName)
             ->setDefault('enabled', true)
             ->setAllowedTypes('enabled', 'bool')
             ->setDefault('password', 'password123')

@@ -35,37 +35,18 @@ use Webmozart\Assert\Assert;
  */
 class UserProvider extends BaseUserProvider implements AccountConnectorInterface, OAuthAwareUserProviderInterface
 {
-    private FactoryInterface $oauthFactory;
-
-    private RepositoryInterface $oauthRepository;
-
-    private FactoryInterface $customerFactory;
-
-    private FactoryInterface $userFactory;
-
-    private ObjectManager $userManager;
-
-    private CustomerRepositoryInterface $customerRepository;
-
     public function __construct(
         string $supportedUserClass,
-        FactoryInterface $customerFactory,
-        FactoryInterface $userFactory,
+        private FactoryInterface $customerFactory,
+        private FactoryInterface $userFactory,
         UserRepositoryInterface $userRepository,
-        FactoryInterface $oauthFactory,
-        RepositoryInterface $oauthRepository,
-        ObjectManager $userManager,
+        private FactoryInterface $oauthFactory,
+        private RepositoryInterface $oauthRepository,
+        private ObjectManager $userManager,
         CanonicalizerInterface $canonicalizer,
-        CustomerRepositoryInterface $customerRepository
+        private CustomerRepositoryInterface $customerRepository
     ) {
         parent::__construct($supportedUserClass, $userRepository, $canonicalizer);
-
-        $this->customerFactory = $customerFactory;
-        $this->oauthFactory = $oauthFactory;
-        $this->oauthRepository = $oauthRepository;
-        $this->userFactory = $userFactory;
-        $this->userManager = $userManager;
-        $this->customerRepository = $customerRepository;
     }
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface

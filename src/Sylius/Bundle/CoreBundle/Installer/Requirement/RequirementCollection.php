@@ -15,15 +15,11 @@ namespace Sylius\Bundle\CoreBundle\Installer\Requirement;
 
 abstract class RequirementCollection implements \IteratorAggregate
 {
-    /** @var string */
-    protected $label;
-
     /** @var array|Requirement[] */
     protected $requirements = [];
 
-    public function __construct(string $label)
+    public function __construct(protected string $label)
     {
-        $this->label = $label;
     }
 
     public function getLabel(): string
@@ -36,9 +32,6 @@ abstract class RequirementCollection implements \IteratorAggregate
         return new \ArrayIterator($this->requirements);
     }
 
-    /**
-     * @return RequirementCollection
-     */
     public function add(Requirement $requirement): self
     {
         $this->requirements[] = $requirement;

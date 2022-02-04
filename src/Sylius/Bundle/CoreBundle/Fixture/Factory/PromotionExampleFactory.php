@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Faker\Generator;
 use Faker\Factory;
+use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -29,33 +29,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PromotionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private FactoryInterface $promotionFactory;
-
-    private ExampleFactoryInterface $promotionRuleExampleFactory;
-
-    private ExampleFactoryInterface $promotionActionExampleFactory;
-
-    private ChannelRepositoryInterface $channelRepository;
-
-    private ?FactoryInterface $couponFactory;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $promotionFactory,
-        ExampleFactoryInterface $promotionRuleExampleFactory,
-        ExampleFactoryInterface $promotionActionExampleFactory,
-        ChannelRepositoryInterface $channelRepository,
-        ?FactoryInterface $couponFactory = null
+        private FactoryInterface $promotionFactory,
+        private ExampleFactoryInterface $promotionRuleExampleFactory,
+        private ExampleFactoryInterface $promotionActionExampleFactory,
+        private ChannelRepositoryInterface $channelRepository,
+        private ?FactoryInterface $couponFactory = null
     ) {
-        $this->promotionFactory = $promotionFactory;
-        $this->promotionRuleExampleFactory = $promotionRuleExampleFactory;
-        $this->promotionActionExampleFactory = $promotionActionExampleFactory;
-        $this->channelRepository = $channelRepository;
-        $this->couponFactory = $couponFactory;
-
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
@@ -114,7 +98,7 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('code', fn(Options $options): string => StringInflector::nameToCode($options['name']))
+            ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
             ->setDefault('name', $this->faker->words(3, true))
             ->setDefault('description', $this->faker->sentence())
             ->setDefault('usage_limit', null)

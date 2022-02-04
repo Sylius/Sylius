@@ -29,25 +29,15 @@ use Webmozart\Assert\Assert;
 
 class AddressExampleFactory extends AbstractExampleFactory
 {
-    private FactoryInterface $addressFactory;
-
-    private RepositoryInterface $countryRepository;
-
-    private RepositoryInterface $customerRepository;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $addressFactory,
-        RepositoryInterface $countryRepository,
-        RepositoryInterface $customerRepository
+        private FactoryInterface $addressFactory,
+        private RepositoryInterface $countryRepository,
+        private RepositoryInterface $customerRepository
     ) {
-        $this->addressFactory = $addressFactory;
-        $this->countryRepository = $countryRepository;
-        $this->customerRepository = $customerRepository;
-
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 

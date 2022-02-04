@@ -23,14 +23,10 @@ use Webmozart\Assert\Assert;
 
 final class LocalesAwareValidAttributeValueValidator extends ConstraintValidator
 {
-    private ServiceRegistryInterface $attributeTypeRegistry;
-
-    private TranslationLocaleProviderInterface $localeProvider;
-
-    public function __construct(ServiceRegistryInterface $attributeTypeRegistry, TranslationLocaleProviderInterface $localeProvider)
-    {
-        $this->attributeTypeRegistry = $attributeTypeRegistry;
-        $this->localeProvider = $localeProvider;
+    public function __construct(
+        private ServiceRegistryInterface $attributeTypeRegistry,
+        private TranslationLocaleProviderInterface $localeProvider
+    ) {
     }
 
     /**

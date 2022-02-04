@@ -22,19 +22,15 @@ use Webmozart\Assert\Assert;
 
 final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
 {
-    private string $type;
-
     /** @var array|OrderTaxesApplicatorInterface[] */
     private array $applicators;
 
     /**
      * @param array|OrderTaxesApplicatorInterface[] $applicators
      */
-    public function __construct(string $type, array $applicators)
+    public function __construct(private string $type, array $applicators)
     {
         $this->assertApplicatorsHaveCorrectType($applicators);
-
-        $this->type = $type;
         $this->applicators = $applicators;
     }
 

@@ -20,11 +20,8 @@ use Symfony\Component\Templating\Helper\Helper;
 
 class ProductVariantsPricesHelper extends Helper
 {
-    private ProductVariantsPricesProviderInterface $productVariantsPricesProvider;
-
-    public function __construct(ProductVariantsPricesProviderInterface $productVariantsPricesProvider)
+    public function __construct(private ProductVariantsPricesProviderInterface $productVariantsPricesProvider)
     {
-        $this->productVariantsPricesProvider = $productVariantsPricesProvider;
     }
 
     public function getPrices(ProductInterface $product, ChannelInterface $channel): array

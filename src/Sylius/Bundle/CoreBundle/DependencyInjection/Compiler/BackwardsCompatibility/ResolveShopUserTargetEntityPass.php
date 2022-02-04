@@ -28,7 +28,7 @@ final class ResolveShopUserTargetEntityPass implements CompilerPassInterface
         try {
             $resolveTargetEntityListener = $container->findDefinition('doctrine.orm.listeners.resolve_target_entity');
             $shopUserClass = $container->getParameter('sylius.model.shop_user.class');
-        } catch (InvalidArgumentException $exception) {
+        } catch (InvalidArgumentException) {
             return;
         }
 

@@ -26,11 +26,8 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
  */
 final class CartCollector extends DataCollector
 {
-    private CartContextInterface $cartContext;
-
-    public function __construct(CartContextInterface $cartContext)
+    public function __construct(private CartContextInterface $cartContext)
     {
-        $this->cartContext = $cartContext;
         $this->data = [];
     }
 
@@ -116,7 +113,7 @@ final class CartCollector extends DataCollector
                     'payment' => $cart->getPaymentState(),
                 ],
             ];
-        } catch (CartNotFoundException $exception) {
+        } catch (CartNotFoundException) {
             $this->data = [];
         }
     }

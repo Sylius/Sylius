@@ -27,16 +27,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ChannelPricingType extends AbstractResourceType
 {
-    private ?RepositoryInterface $channelPricingRepository;
-
     public function __construct(
         string $dataClass,
         array $validationGroups,
-        ?RepositoryInterface $channelPricingRepository = null
+        private ?\Sylius\Component\Resource\Repository\RepositoryInterface $channelPricingRepository = null
     ) {
         parent::__construct($dataClass, $validationGroups);
-
-        $this->channelPricingRepository = $channelPricingRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

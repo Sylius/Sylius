@@ -19,11 +19,8 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class OrderEmailManager implements OrderEmailManagerInterface
 {
-    private SenderInterface $emailSender;
-
-    public function __construct(SenderInterface $emailSender)
+    public function __construct(private SenderInterface $emailSender)
     {
-        $this->emailSender = $emailSender;
     }
 
     public function sendConfirmationEmail(OrderInterface $order): void

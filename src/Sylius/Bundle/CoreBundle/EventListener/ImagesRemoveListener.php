@@ -25,20 +25,14 @@ use Sylius\Component\Core\Uploader\ImageUploaderInterface;
  */
 final class ImagesRemoveListener
 {
-    private ImageUploaderInterface $imageUploader;
-
-    private CacheManager $cacheManager;
-
-    private FilterManager $filterManager;
-
     /** @var string[] */
     private array $imagesToDelete = [];
 
-    public function __construct(ImageUploaderInterface $imageUploader, CacheManager $cacheManager, FilterManager $filterManager)
-    {
-        $this->imageUploader = $imageUploader;
-        $this->cacheManager = $cacheManager;
-        $this->filterManager = $filterManager;
+    public function __construct(
+        private ImageUploaderInterface $imageUploader,
+        private CacheManager $cacheManager,
+        private FilterManager $filterManager
+    ) {
     }
 
     public function onFlush(OnFlushEventArgs $event): void

@@ -22,11 +22,8 @@ use Webmozart\Assert\Assert;
 
 final class ForProductsScopeValidator implements ScopeValidatorInterface
 {
-    private ProductRepositoryInterface $productRepository;
-
-    public function __construct(ProductRepositoryInterface $productRepository)
+    public function __construct(private ProductRepositoryInterface $productRepository)
     {
-        $this->productRepository = $productRepository;
     }
 
     public function validate(array $configuration, Constraint $constraint, ExecutionContextInterface $context): void

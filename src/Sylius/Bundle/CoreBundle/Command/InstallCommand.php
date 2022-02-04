@@ -90,7 +90,7 @@ EOT
                 }
 
                 $this->commandExecutor->runCommand('sylius:install:' . $command['command'], $parameters, $output);
-            } catch (RuntimeException $exception) {
+            } catch (RuntimeException) {
                 $errored = true;
             }
         }

@@ -22,11 +22,8 @@ use Webmozart\Assert\Assert;
 
 final class ProductsToCodesTransformer implements DataTransformerInterface
 {
-    private ProductRepositoryInterface $productRepository;
-
-    public function __construct(ProductRepositoryInterface $productRepository)
+    public function __construct(private ProductRepositoryInterface $productRepository)
     {
-        $this->productRepository = $productRepository;
     }
 
     /**

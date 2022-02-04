@@ -24,20 +24,13 @@ use Symfony\Component\Form\FormEvents;
 
 final class CustomerCheckoutGuestType extends AbstractResourceType
 {
-    private RepositoryInterface $customerRepository;
-
-    private FactoryInterface $customerFactory;
-
     public function __construct(
         string $dataClass,
         array $validationGroups,
-        RepositoryInterface $customerRepository,
-        FactoryInterface $customerFactory
+        private RepositoryInterface $customerRepository,
+        private FactoryInterface $customerFactory
     ) {
         parent::__construct($dataClass, $validationGroups);
-
-        $this->customerRepository = $customerRepository;
-        $this->customerFactory = $customerFactory;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options = []): void

@@ -61,7 +61,7 @@ final class DefaultUsernameORMListener
             $user->setUsernameCanonical($customer->getEmailCanonical());
 
             /** @var ClassMetadata $userMetadata */
-            $userMetadata = $entityManager->getClassMetadata(get_class($user));
+            $userMetadata = $entityManager->getClassMetadata($user::class);
             $unitOfWork->recomputeSingleEntityChangeSet($userMetadata, $user);
         }
     }

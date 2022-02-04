@@ -19,11 +19,8 @@ use Twig\TwigFunction;
 
 final class CheckoutStepsExtension extends AbstractExtension
 {
-    private CheckoutStepsHelper $checkoutStepsHelper;
-
-    public function __construct(CheckoutStepsHelper $checkoutStepsHelper)
+    public function __construct(private CheckoutStepsHelper $checkoutStepsHelper)
     {
-        $this->checkoutStepsHelper = $checkoutStepsHelper;
     }
 
     public function getFunctions(): array

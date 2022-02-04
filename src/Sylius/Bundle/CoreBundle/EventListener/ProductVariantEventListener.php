@@ -22,11 +22,8 @@ use Webmozart\Assert\Assert;
 
 final class ProductVariantEventListener
 {
-    private MessageBusInterface $eventBus;
-
-    public function __construct(MessageBusInterface $eventBus)
+    public function __construct(private MessageBusInterface $eventBus)
     {
-        $this->eventBus = $eventBus;
     }
 
     public function dispatchProductVariantCreatedEvent(GenericEvent $event): void

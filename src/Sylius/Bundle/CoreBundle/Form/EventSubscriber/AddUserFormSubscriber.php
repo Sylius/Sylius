@@ -23,11 +23,8 @@ use Webmozart\Assert\Assert;
 
 final class AddUserFormSubscriber implements EventSubscriberInterface
 {
-    private string $entryType;
-
-    public function __construct(string $entryType)
+    public function __construct(private string $entryType)
     {
-        $this->entryType = $entryType;
     }
 
     public static function getSubscribedEvents(): array

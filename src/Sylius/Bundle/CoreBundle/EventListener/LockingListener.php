@@ -21,11 +21,8 @@ use Webmozart\Assert\Assert;
 
 final class LockingListener
 {
-    private EntityManagerInterface $manager;
-
-    public function __construct(EntityManagerInterface $manager)
+    public function __construct(private EntityManagerInterface $manager)
     {
-        $this->manager = $manager;
     }
 
     public function lock(GenericEvent $event): void

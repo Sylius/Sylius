@@ -21,13 +21,10 @@ use Webmozart\Assert\Assert;
 
 final class CatalogPromotionScopeValidator extends ConstraintValidator
 {
-    private array $scopeTypes;
-
     private array $scopeValidators;
 
-    public function __construct(array $scopeTypes, iterable $scopeValidators)
+    public function __construct(private array $scopeTypes, iterable $scopeValidators)
     {
-        $this->scopeTypes = $scopeTypes;
         $this->scopeValidators = $scopeValidators instanceof \Traversable ? iterator_to_array($scopeValidators) : $scopeValidators;
     }
 
