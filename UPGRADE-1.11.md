@@ -1,5 +1,23 @@
 # UPGRADE FROM `v1.10.X` TO `v1.11.0`
 
+### "pagerfanta/pagerfanta" semantic_ui_translated removed
+
+The `pagination.html.twig` has been changed to use the Twig view.
+
+There are differences in the markup between the PHP template and the Twig template.
+
+The wrapping container from 2.x branch of Pagerfanta in the PHP template was
+```html
+<div class="ui stackable fluid pagination menu">
+```
+
+while in the Twig template in 3.x branch it's 
+```html
+<div class="ui pagination menu">
+```
+
+The "stackable" class affects responsive display and "fluid" affects whether the pagination menu is full-width). 
+
 ### "polishsymfonycommunity/symfony-mocker-container" moved to dev-requirements
 
 This obvious dev dependency was part of Sylius requirements. In 1.11 we've moved it to proper place. However, it may lead to app break, as this container could be used in your Kernel, if you used Sylius-Standard as your template. In such a case, please update your `src/Kernel.php` class as follows:
