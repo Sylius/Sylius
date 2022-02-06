@@ -45,7 +45,8 @@ final class SalesDataProvider implements SalesDataProviderInterface
 
         switch ($interval->asString()) {
             case 'year':
-                $queryBuilder
+                $queryBuilder                    
+                    ->addSelect('o.checkoutCompletedAt')
                     ->addSelect('YEAR(o.checkoutCompletedAt) as year')
                     ->groupBy('year')
                     ->andHaving('YEAR(o.checkoutCompletedAt) >= :startYear AND YEAR(o.checkoutCompletedAt) <= :endYear')
@@ -62,6 +63,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
                 break;
             case 'month':
                 $queryBuilder
+                    ->addSelect('o.checkoutCompletedAt')
                     ->addSelect('YEAR(o.checkoutCompletedAt) as year')
                     ->addSelect('MONTH(o.checkoutCompletedAt) as month')
                     ->groupBy('year')
@@ -87,6 +89,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
                 break;
             case 'week':
                 $queryBuilder
+                    ->addSelect('o.checkoutCompletedAt')
                     ->addSelect('YEAR(o.checkoutCompletedAt) as year')
                     ->addSelect('WEEK(o.checkoutCompletedAt) as week')
                     ->groupBy('year')
@@ -112,6 +115,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
                 break;
             case 'day':
                 $queryBuilder
+                    ->addSelect('o.checkoutCompletedAt')
                     ->addSelect('YEAR(o.checkoutCompletedAt) as year')
                     ->addSelect('MONTH(o.checkoutCompletedAt) as month')
                     ->addSelect('DAY(o.checkoutCompletedAt) as day')
