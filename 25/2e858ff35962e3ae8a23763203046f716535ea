@@ -1,0 +1,33 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2022-02-03T11:05:20Z
+
+cc @kulczy but seems good for me 😄
+
+---------------------------------------------------------------------------
+
+by mbabker at 2022-02-03T14:48:21Z
+
+You need to use the “twig” view with the `@BabDevPagerfanta/semantic_ui.html.twig` template to keep translation support.  The “semantic_ui” view is PHP generated without translation support.
+
+This’ll also close https://github.com/Sylius/Sylius/issues/12462 😉
+
+---------------------------------------------------------------------------
+
+by loic425 at 2022-02-03T14:51:24Z
+
+@mbabker Thx a lot, I will follow your issue details to update this PR.
+
+---------------------------------------------------------------------------
+
+by loic425 at 2022-02-04T08:45:15Z
+
+@mbabker I updated this PR, is that ok for you?
+
+For the package configuration, I think it's needed into the sylius/sylius-standard repository.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-02-07T09:21:06Z
+
+Thank you, Loïc! :tada:
