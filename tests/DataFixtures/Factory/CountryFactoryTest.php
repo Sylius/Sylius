@@ -18,15 +18,17 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactory;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 final class CountryFactoryTest extends KernelTestCase
 {
+    use ResetDatabase;
     use Factories;
 
     /** @test */
     function it_creates_countries(): void
     {
-        $country = CountryFactory::new()->withoutPersisting()->create();
+        $country = CountryFactory::new()->create();
 
         $this->assertInstanceOf(CountryInterface::class, $country->object());
     }
@@ -34,11 +36,11 @@ final class CountryFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_countries_with_codes(): void
     {
-        $country = CountryFactory::new()->withoutPersisting()->withCode('PL')->create();
+        $country = CountryFactory::new()->withCode('PL')->create();
 
         $this->assertEquals('PL', $country->getCode());
 
-        $country = CountryFactory::new()->withoutPersisting()->create();
+        $country = CountryFactory::new()->create();
 
         $this->assertNotNull($country->getCode());
     }
@@ -46,7 +48,7 @@ final class CountryFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_enabled_countries(): void
     {
-        $country = CountryFactory::new()->withoutPersisting()->enabled()->create();
+        $country = CountryFactory::new()->enabled()->create();
 
         $this->assertTrue($country->isEnabled());
     }
@@ -54,7 +56,7 @@ final class CountryFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_disabled_countries(): void
     {
-        $country = CountryFactory::new()->withoutPersisting()->disabled()->create();
+        $country = CountryFactory::new()->disabled()->create();
 
         $this->assertFalse($country->isEnabled());
     }
