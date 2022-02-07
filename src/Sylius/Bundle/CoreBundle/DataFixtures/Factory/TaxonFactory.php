@@ -106,7 +106,7 @@ final class TaxonFactory extends ModelFactory implements TaxonFactoryInterface
             $taxon = $this->taxonFactory->createNew();
         }
 
-        $taxon->setCode($attributes['code']);
+        $taxon->setCode($code);
 
         if (null !== $parentTaxon) {
             $taxon->setParent($parentTaxon);

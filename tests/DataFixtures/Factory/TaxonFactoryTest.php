@@ -16,18 +16,19 @@ namespace Sylius\Tests\DataFixtures\Factory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactory;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 final class TaxonFactoryTest extends KernelTestCase
 {
+    use ResetDatabase;
     use Factories;
 
     /** @test */
     function it_creates_taxa(): void
     {
-        $taxon = TaxonFactory::new()->withoutPersisting()->create();
+        $taxon = TaxonFactory::new()->create();
 
         $this->assertInstanceOf(TaxonInterface::class, $taxon->object());
     }
@@ -35,11 +36,11 @@ final class TaxonFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_taxa_with_codes(): void
     {
-        $taxon = TaxonFactory::new()->withoutPersisting()->withCode('board-games')->create();
+        $taxon = TaxonFactory::new()->withCode('board-games')->create();
 
         $this->assertEquals('board-games', $taxon->getCode());
 
-        $taxon = TaxonFactory::new()->withoutPersisting()->create();
+        $taxon = TaxonFactory::new()->create();
 
         $this->assertNotNull($taxon->getCode());
     }
@@ -47,8 +48,8 @@ final class TaxonFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_taxa_with_translations_for_each_locales(): void
     {
-        LocaleFactory::randomOrCreate(['code' => 'en_US']);
-        LocaleFactory::randomOrCreate(['code' => 'fr_FR']);
+        LocaleFactory::new()->withCode('en_US')->create();
+        LocaleFactory::new()->withCode('fr_FR')->create();
 
         $taxon = TaxonFactory::new()->withName('Board games')->withoutPersisting()->create();
 
@@ -70,8 +71,8 @@ final class TaxonFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_taxa_with_custom_translations(): void
     {
-        LocaleFactory::randomOrCreate(['code' => 'fr_FR']);
-        LocaleFactory::randomOrCreate(['code' => 'en_US']);
+        LocaleFactory::new()->withCode('en_US')->create();
+        LocaleFactory::new()->withCode('fr_FR')->create();
 
         $taxon = TaxonFactory::new()->withTranslations([
             'en_US' => [
@@ -98,7 +99,7 @@ final class TaxonFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_taxa_with_children(): void
     {
-        LocaleFactory::randomOrCreate(['code' => 'en_US']);
+        LocaleFactory::new()->withCode('en_US')->create();;
 
         $taxon = TaxonFactory::new()->withCode('categories')->withChildren([
             [
