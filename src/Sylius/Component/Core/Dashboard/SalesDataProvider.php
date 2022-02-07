@@ -48,7 +48,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
                 $queryBuilder                    
                     ->addSelect('o.checkoutCompletedAt')
                     ->addSelect('YEAR(o.checkoutCompletedAt) as year')
-                    ->groupBy('year')
+                    ->groupBy('YEAR(o.checkoutCompletedAt)')
                     ->andHaving('YEAR(o.checkoutCompletedAt) >= :startYear AND YEAR(o.checkoutCompletedAt) <= :endYear')
                     ->setParameter('startYear', $startDate->format('Y'))
                     ->setParameter('endYear', $endDate->format('Y'))
@@ -66,8 +66,8 @@ final class SalesDataProvider implements SalesDataProviderInterface
                     ->addSelect('o.checkoutCompletedAt')
                     ->addSelect('YEAR(o.checkoutCompletedAt) as year')
                     ->addSelect('MONTH(o.checkoutCompletedAt) as month')
-                    ->groupBy('year')
-                    ->addGroupBy('month')
+                    ->groupBy('YEAR(o.checkoutCompletedAt)')
+                    ->addGroupBy('MONTH(o.checkoutCompletedAt)')
                     ->andHaving($queryBuilder->expr()->orX(
                         'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) = :endYear AND MONTH(o.checkoutCompletedAt) >= :startMonth AND MONTH(o.checkoutCompletedAt) <= :endMonth',
                         'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) != :endYear AND MONTH(o.checkoutCompletedAt) >= :startMonth',
@@ -92,8 +92,8 @@ final class SalesDataProvider implements SalesDataProviderInterface
                     ->addSelect('o.checkoutCompletedAt')
                     ->addSelect('YEAR(o.checkoutCompletedAt) as year')
                     ->addSelect('WEEK(o.checkoutCompletedAt) as week')
-                    ->groupBy('year')
-                    ->addGroupBy('week')
+                    ->groupBy('YEAR(o.checkoutCompletedAt)')
+                    ->addGroupBy('WEEK(o.checkoutCompletedAt)')
                     ->andHaving($queryBuilder->expr()->orX(
                         'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) = :endYear AND WEEK(o.checkoutCompletedAt) >= :startWeek AND WEEK(o.checkoutCompletedAt) <= :endWeek',
                         'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) != :endYear AND WEEK(o.checkoutCompletedAt) >= :startWeek',
@@ -119,9 +119,9 @@ final class SalesDataProvider implements SalesDataProviderInterface
                     ->addSelect('YEAR(o.checkoutCompletedAt) as year')
                     ->addSelect('MONTH(o.checkoutCompletedAt) as month')
                     ->addSelect('DAY(o.checkoutCompletedAt) as day')
-                    ->groupBy('year')
-                    ->addGroupBy('month')
-                    ->addGroupBy('day')
+                    ->groupBy('YEAR(o.checkoutCompletedAt)')
+                    ->addGroupBy('MONTH(o.checkoutCompletedAt)')
+                    ->addGroupBy('DAY(o.checkoutCompletedAt)')
                     ->andHaving($queryBuilder->expr()->orX(
                         'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) = :endYear AND MONTH(o.checkoutCompletedAt) = :startMonth AND MONTH(o.checkoutCompletedAt) = :endMonth AND DAY(o.checkoutCompletedAt) >= :startDay AND DAY(o.checkoutCompletedAt) <= :endDay',
                         'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) = :endYear AND MONTH(o.checkoutCompletedAt) = :startMonth AND MONTH(o.checkoutCompletedAt) != :endMonth AND DAY(o.checkoutCompletedAt) >= :startDay',
