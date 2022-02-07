@@ -168,6 +168,16 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
+     * @Given :catalogPromotion catalog promotion is exclusive
+     */
+    public function catalogPromotionIsExclusive(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $catalogPromotion->setExclusive(true);
+        $this->entityManager->flush();
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
+    /**
      * @Given /^(it) reduces price by ("[^"]+")$/
      */
     public function itWillReducePrice(CatalogPromotionInterface $catalogPromotion, float $discount): void
