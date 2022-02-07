@@ -95,14 +95,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function isExclusive(): bool
     {
-        return $this->hasElement('is_exclusive');
+        return $this->hasElement('exclusive');
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'end_date' => '[data-test-end-date]',
-            'is_exclusive' => '[data-test-is-exclusive]',
+            'exclusive' => '[data-test-exclusive]',
             'name' => '[data-test-name]',
             'priority' => '[data-test-priority]',
             'start_date' => '[data-test-start-date]',
