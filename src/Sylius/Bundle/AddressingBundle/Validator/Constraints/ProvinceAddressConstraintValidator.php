@@ -47,7 +47,7 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
         $propertyPath = $this->context->getPropertyPath();
 
         foreach (iterator_to_array($this->context->getViolations()) as $violation) {
-            if (0 === strpos($violation->getPropertyPath(), $propertyPath)) {
+            if ('' === $propertyPath || 0 === strpos($violation->getPropertyPath(), $propertyPath)) {
                 return;
             }
         }
