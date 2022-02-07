@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionAction;
 
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction\ActionValidatorInterface;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionAction;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
@@ -24,12 +26,18 @@ use Webmozart\Assert\Assert;
 
 final class FixedDiscountActionValidator implements ActionValidatorInterface
 {
-    public function __construct(private ChannelRepositoryInterface $channelRepository)
-    {
+    public function __construct(
+        private ChannelRepositoryInterface $channelRepository,
+        private SectionProviderInterface $sectionProvider
+    ) {
     }
 
     public function validate(array $configuration, Constraint $constraint, ExecutionContextInterface $context): void
     {
+        if (!$this->sectionProvider->getSection() instanceof AdminApiSection) {
+            return;
+        }
+
         /** @var CatalogPromotionAction $constraint */
         Assert::isInstanceOf($constraint, CatalogPromotionAction::class);
 
@@ -60,7 +68,8 @@ final class FixedDiscountActionValidator implements ActionValidatorInterface
                 return;
             }
 
-            if (!array_key_exists('amount', $channelConfiguration) || !is_integer($channelConfiguration['amount']) || $channelConfiguration['amount'] < 0) {
+            if (!array_key_exists('amount',
+                    $channelConfiguration) || !is_integer($channelConfiguration['amount']) || $channelConfiguration['amount'] < 0) {
                 $context->buildViolation('sylius.catalog_promotion_action.fixed_discount.not_valid')->atPath('configuration')->addViolation();
 
                 return;
@@ -70,6 +79,7 @@ final class FixedDiscountActionValidator implements ActionValidatorInterface
 
     private function isChannelConfigured(string $channelCode, array $configuration): bool
     {
-        return (array_key_exists($channelCode, $configuration) && isset($configuration[$channelCode]['amount']) && $configuration[$channelCode]['amount'] > 0);
+        return (array_key_exists($channelCode,
+                $configuration) && isset($configuration[$channelCode]['amount']) && $configuration[$channelCode]['amount'] > 0);
     }
 }

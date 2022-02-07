@@ -30,6 +30,7 @@
         </service>
 
         <service id="Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction\PercentageDiscountActionValidator">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
             <tag name="sylius.catalog_promotion.action_validator" key="percentage_discount"/>
         </service>
 
