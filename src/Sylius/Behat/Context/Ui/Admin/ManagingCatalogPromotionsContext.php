@@ -601,6 +601,15 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I edit it to have empty amount of percentage discount
+     */
+    public function iEditItToHaveEmptyPercentageDiscount(): void
+    {
+        $this->formElement->chooseActionType('Percentage discount');
+        $this->formElement->specifyLastActionDiscount('');
+    }
+
+    /**
      * @Then I should be notified that a discount amount should be between 0% and 100%
      */
     public function iShouldBeNotifiedThatADiscountAmountShouldBeBetween0And100Percent(): void
