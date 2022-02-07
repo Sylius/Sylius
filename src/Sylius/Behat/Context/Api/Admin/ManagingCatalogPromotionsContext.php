@@ -1425,6 +1425,22 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Given it should be exclusive
+     */
+    public function itShouldBeExclusive(): void
+    {
+        Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'exclusive', true));
+    }
+
+    /**
+     * @Given it should not be exclusive
+     */
+    public function itShouldNotBeExclusive(): void
+    {
+        Assert::false($this->responseChecker->hasValue($this->client->getLastResponse(), 'exclusive', true));
+    }
+
+    /**
      * @Then I should get information that the end date cannot be set before start date
      */
     public function iShouldGetInformationThatTheEndDateCannotBeSetBeforeStartDate(): void

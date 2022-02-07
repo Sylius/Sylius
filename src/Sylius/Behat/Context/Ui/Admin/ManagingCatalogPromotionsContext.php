@@ -1047,6 +1047,22 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Given it should be exclusive
+     */
+    public function itShouldBeExclusive(): void
+    {
+        Assert::true($this->showPage->isExclusive());
+    }
+
+    /**
+     * @Given it should not be exclusive
+     */
+    public function itShouldNotBeExclusive(): void
+    {
+        Assert::false($this->showPage->isExclusive());
+    }
+
+    /**
      * @Then it should start at :startDate and end at :endDate
      */
     public function itShouldStartAtAndEndAt(string $startDate, string $endDate): void
