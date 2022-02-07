@@ -17,15 +17,17 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CurrencyFactory;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 final class CurrencyFactoryTest extends KernelTestCase
 {
+    use ResetDatabase;
     use Factories;
 
     /** @test */
     function it_creates_currencies(): void
     {
-        $currency = CurrencyFactory::new()->withoutPersisting()->create();
+        $currency = CurrencyFactory::new()->create();
 
         $this->assertInstanceOf(CurrencyInterface::class, $currency->object());
     }
@@ -33,11 +35,11 @@ final class CurrencyFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_currencies_with_codes(): void
     {
-        $currency = CurrencyFactory::new()->withoutPersisting()->withCode('EUR')->create();
+        $currency = CurrencyFactory::new()->withCode('EUR')->create();
 
         $this->assertEquals('EUR', $currency->getCode());
 
-        $currency = CurrencyFactory::new()->withoutPersisting()->create();
+        $currency = CurrencyFactory::new()->create();
 
         $this->assertNotNull($currency->getCode());
     }
