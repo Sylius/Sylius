@@ -17,15 +17,17 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerGroupFactory;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 final class CustomerGroupFactoryTest extends KernelTestCase
 {
+    use ResetDatabase;
     use Factories;
 
     /** @test */
     function it_creates_customer_groups(): void
     {
-        $customerGroup = CustomerGroupFactory::new()->withoutPersisting()->create();
+        $customerGroup = CustomerGroupFactory::new()->create();
 
         $this->assertInstanceOf(CustomerGroupInterface::class, $customerGroup->object());
     }
@@ -33,11 +35,11 @@ final class CustomerGroupFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_customer_groups_with_codes(): void
     {
-        $customerGroup = CustomerGroupFactory::new()->withCode('group_a')->withoutPersisting()->create();
+        $customerGroup = CustomerGroupFactory::new()->withCode('group_a')->create();
 
         $this->assertEquals('group_a', $customerGroup->getCode());
 
-        $customerGroup = CustomerGroupFactory::new()->withoutPersisting()->create();
+        $customerGroup = CustomerGroupFactory::new()->create();
 
         $this->assertNotNull($customerGroup->getCode());
     }
@@ -45,11 +47,11 @@ final class CustomerGroupFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_customer_groups_with_names(): void
     {
-        $customerGroup = CustomerGroupFactory::new()->withName('Group A')->withoutPersisting()->create();
+        $customerGroup = CustomerGroupFactory::new()->withName('Group A')->create();
 
         $this->assertEquals('Group A', $customerGroup->getName());
 
-        $customerGroup = CustomerGroupFactory::new()->withoutPersisting()->create();
+        $customerGroup = CustomerGroupFactory::new()->create();
 
         $this->assertNotNull($customerGroup->getName());
     }
