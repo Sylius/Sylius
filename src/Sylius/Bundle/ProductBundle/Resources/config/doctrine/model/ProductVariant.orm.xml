@@ -32,6 +32,8 @@
             <gedmo:timestampable on="update"/>
         </field>
 
+        <field name="productId" column="product_id" type="integer" nullable="false"/>
+
         <many-to-one target-entity="Sylius\Component\Product\Model\ProductInterface" field="product" inversed-by="variants">
             <join-column name="product_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
             <gedmo:sortable-group />

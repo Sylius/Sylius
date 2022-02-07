@@ -33,10 +33,12 @@ sylius_admin_ajax_all_product_variants_by_phrase:
             serialization_groups: [Autocomplete]
             permission: true
             repository:
-                method: findByPhrase
+                method: findByPhrasePartial
                 arguments:
                     phrase: $phrase
                     locale: expr:service('sylius.context.locale').getLocaleCode()
+                    page: 1
+                    maxResults: 5
 
 sylius_admin_ajax_product_variants_by_codes:
     path: /

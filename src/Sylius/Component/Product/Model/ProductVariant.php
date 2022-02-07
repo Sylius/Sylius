@@ -36,6 +36,8 @@ class ProductVariant implements ProductVariantInterface
      */
     protected $code;
 
+    protected int $productId;
+
     /**
      * @var ProductInterface|null
      */

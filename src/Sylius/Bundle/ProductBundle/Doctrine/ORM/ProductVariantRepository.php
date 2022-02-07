@@ -18,6 +18,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\QueryBuilder\QueryBuilderPagination;
 
 class ProductVariantRepository extends EntityRepository implements ProductVariantRepositoryInterface
 {
@@ -41,6 +42,24 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
             ->andWhere('product.code = :productCode')
             ->setParameter('locale', $locale)
             ->setParameter('productCode', $productCode)
+        ;
+    }
+
+    public function createQueryBuilderByPhraseAndLocale(string $phrase, string $locale): QueryBuilder
+    {
+        $expr = $this->getEntityManager()->getExpressionBuilder();
+
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
+            ->andWhere($expr->orX(
+                'translation.name LIKE :phrase',
+                'o.code LIKE :phrase'
+            ))
+            ->setParameter('phrase', '%' . $phrase . '%')
+            ->setParameter('locale', $locale)
+            ->orderBy('o.productId', 'ASC')
+            ->addOrderBy('o.position', 'ASC')
+
         ;
     }
 
@@ -152,19 +171,18 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
 
     public function findByPhrase(string $phrase, string $locale): array
     {
-        $expr = $this->getEntityManager()->getExpressionBuilder();
+        $queryBuilder = $this->createQueryBuilderByPhraseAndLocale($phrase, $locale);
 
-        return $this->createQueryBuilder('o')
-            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
-            ->andWhere($expr->orX(
-                'translation.name LIKE :phrase',
-                'o.code LIKE :phrase'
-            ))
-            ->setParameter('phrase', '%' . $phrase . '%')
-            ->setParameter('locale', $locale)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function findByPhrasePartial(string $phrase, string $locale, $page, $maxResults): array
+    {
+        $queryBuilder = $this->createQueryBuilderByPhraseAndLocale($phrase, $locale);
+
+        QueryBuilderPagination::create($queryBuilder, (int) $page, (int) $maxResults);
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
     public function getCodesOfAllVariants(): array
