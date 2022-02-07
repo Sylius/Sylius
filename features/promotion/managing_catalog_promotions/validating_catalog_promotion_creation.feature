@@ -103,7 +103,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that a discount amount should be between 0% and 100%
         And there should be an empty list of catalog promotions
 
-    @api @ui @javascript
+    @api
     Scenario: Trying to create a catalog promotion with wrong value of percentage discount action
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
