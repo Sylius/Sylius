@@ -17,15 +17,17 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactory;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 final class LocaleFactoryTest extends KernelTestCase
 {
+    use ResetDatabase;
     use Factories;
 
     /** @test */
     function it_creates_locales(): void
     {
-        $locale = LocaleFactory::new()->withoutPersisting()->create();
+        $locale = LocaleFactory::new()->create();
 
         $this->assertInstanceOf(LocaleInterface::class, $locale->object());
     }
@@ -33,11 +35,11 @@ final class LocaleFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_locales_with_codes(): void
     {
-        $locale = LocaleFactory::new()->withoutPersisting()->withCode('fr_FR')->create();
+        $locale = LocaleFactory::new()->withCode('fr_FR')->create();
 
         $this->assertEquals('fr_FR', $locale->getCode());
 
-        $locale = LocaleFactory::new()->withoutPersisting()->create();
+        $locale = LocaleFactory::new()->create();
 
         $this->assertNotNull($locale->getCode());
     }
@@ -45,7 +47,7 @@ final class LocaleFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_locales_with_default_locale_codes(): void
     {
-        $locale = LocaleFactory::new()->withoutPersisting()->withDefaultLocaleCode()->create();
+        $locale = LocaleFactory::new()->withDefaultLocaleCode()->create();
 
         $this->assertEquals('en_US', $locale->getCode());
     }
