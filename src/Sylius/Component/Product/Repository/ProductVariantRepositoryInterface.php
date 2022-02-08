@@ -60,7 +60,7 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
     /**
      * @return array|ProductVariantInterface[]
      */
-    public function findByPhrase(string $phrase, string $locale, $limit): array;
+    public function findByPhrase(string $phrase, string $locale, ?int $limit): array;
 
     /**
      * @return array|string[]

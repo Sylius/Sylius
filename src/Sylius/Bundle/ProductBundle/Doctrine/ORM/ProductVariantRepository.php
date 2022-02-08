@@ -150,11 +150,11 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
         ;
     }
 
-    public function findByPhrase(string $phrase, string $locale, $limit): array
+    public function findByPhrase(string $phrase, string $locale, ?int $limit): array
     {
         $expr = $this->getEntityManager()->getExpressionBuilder();
 
-        return $this->createQueryBuilder('o')
+        $queryBuilder = $this->createQueryBuilder('o')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->andWhere($expr->orX(
                 'translation.name LIKE :phrase',
@@ -165,9 +165,13 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
             ->orderBy('o.product', 'ASC')
             ->addOrderBy('o.position', 'ASC')
             ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult()
         ;
+
+        if (null !== $limit) {
+            $queryBuilder->setMaxResults($limit);
+        }
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
     public function getCodesOfAllVariants(): array
