@@ -1,0 +1,27 @@
+[
+  {
+    "descriptor":"Mug 1 (MUG_1)",
+    "id":@integer@,
+    "code":"MUG_1"
+  },
+  {
+    "descriptor":"Mug 2 (MUG_2)",
+    "id":@integer@,
+    "code":"MUG_2"
+  },
+  {
+    "descriptor":"Mug 3 (MUG_3)",
+    "id":@integer@,
+    "code":"MUG_3"
+  },
+  {
+    "descriptor":"Mug 4 (MUG_4)",
+    "id":@integer@,
+    "code":"MUG_4"
+  },
+  {
+    "descriptor":"Mug 5 (MUG_5)",
+    "id":@integer@,
+    "code":"MUG_5"
+  }
+]

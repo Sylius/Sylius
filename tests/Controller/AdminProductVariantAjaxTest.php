@@ -18,7 +18,7 @@ class AdminProductVariantAjaxTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
 
-        $this->assertEquals($response->getStatusCode(), Response::HTTP_UNAUTHORIZED);
+        $this->assertEquals($response->getStatusCode(), Response::HTTP_FOUND);
     }
 
     /**
@@ -26,41 +26,19 @@ class AdminProductVariantAjaxTest extends JsonApiTestCase
      */
     public function it_returns_only_specified_part_of_all_product_variants()
     {
+        $this->loadFixturesFromFile('authentication/administrator.yml');
+        $this->loadFixturesFromFiles([
+            'resources/product_variants.yml',
+
+        ]);
+
         $this->authenticateAdminUser();
 
-        $this->client->request('GET', '/admin/ajax/product-variants/search-all');
+        $this->client->request('GET', '/admin/ajax/product-variants/search-all?phrase=');
 
         $response = $this->client->getResponse();
 
-        $expectedData = '[
-            {
-                "descriptor": "S (Everyday_white_basic_T_Shirt-variant-0)",
-                "id": 1,
-                "code": "Everyday_white_basic_T_Shirt-variant-0"
-            },
-            {
-                "descriptor": "M (Everyday_white_basic_T_Shirt-variant-1)",
-                "id": 2,
-                "code": "Everyday_white_basic_T_Shirt-variant-1"
-            },
-            {
-                "descriptor": "L (Everyday_white_basic_T_Shirt-variant-2)",
-                "id": 3,
-                "code": "Everyday_white_basic_T_Shirt-variant-2"
-            },
-            {
-                "descriptor": "XL (Everyday_white_basic_T_Shirt-variant-3)",
-                "id": 4,
-                "code": "Everyday_white_basic_T_Shirt-variant-3"
-            },
-            {
-                "descriptor": "XXL (Everyday_white_basic_T_Shirt-variant-4)",
-                "id": 5,
-                "code": "Everyday_white_basic_T_Shirt-variant-4"
-            }
-        ]';
-
-        $this->assertEquals($response->getContent(), $expectedData);
+        $this->assertResponse($response, 'ajax/product_variant/index_response', Response::HTTP_OK);
     }
 
     private function authenticateAdminUser(): void
