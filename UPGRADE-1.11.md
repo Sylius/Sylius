@@ -102,6 +102,10 @@ Use `Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface` i
 - Service `sylius.behat.context.hook.calendar` has been removed, use in your suites `Sylius\Calendar\Tests\Behat\Context\Hook\CalendarContext` instead.
 - Service `sylius.behat.context.setup.calendar` has been removed, use in your suites `Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext` instead.
 
+### Messenger transport
+
+If you don't already have configured the messenger transport, configure it according to your needs by setting an environment variable `MESSENGER_TRANSPORT_DSN`. 
+
 ### API v2
 
 For changes according to the API v2, please visit [API v2 upgrade file](UPGRADE-API-1.11.md).
