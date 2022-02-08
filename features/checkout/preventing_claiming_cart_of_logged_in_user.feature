@@ -1,13 +1,15 @@
 @checkout
-Feature: Checking out as guest with existing email, while email owner starts a new cart session
+Feature: Preventing claiming cart of logged in user
     In order to make the checkout cart available only for user who owns the cart
-    As a Logged in user
+    As a Customer
     I want to be able to checkout with my previous cart when someone used my email in checkout
 
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$20.00"
         And the store has a product "Kotlin T-Shirt" priced at "$30.00"
+        And the store has a product "Symfony T-Shirt" priced at "$100.00"
+        And the store has a product "Sylius T-Shirt" priced at "$150.00"
         And the store ships everywhere for free
         And the store allows paying offline
         And there is a user "robb@stark.com" identified by "KingInTheNorth"
