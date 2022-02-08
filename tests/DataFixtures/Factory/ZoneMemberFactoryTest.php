@@ -13,23 +13,22 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\DataFixtures\Factory;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneMemberFactory;
-use Sylius\Component\Addressing\Model\Zone;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
-use Sylius\Component\Locale\Model\LocaleInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 final class ZoneMemberFactoryTest extends KernelTestCase
 {
+    use ResetDatabase;
     use Factories;
 
     /** @test */
     function it_creates_zone_members(): void
     {
-        $zoneMember = ZoneMemberFactory::new()->withoutPersisting()->create();
+        $zoneMember = ZoneMemberFactory::new()->create();
 
         $this->assertInstanceOf(ZoneMemberInterface::class, $zoneMember->object());
     }
@@ -37,11 +36,11 @@ final class ZoneMemberFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_zone_members_with_codes(): void
     {
-        $zoneMember = ZoneMemberFactory::new()->withoutPersisting()->withCode('united_states')->create();
+        $zoneMember = ZoneMemberFactory::new()->withCode('united_states')->create();
 
         $this->assertEquals('united_states', $zoneMember->getCode());
 
-        $zoneMember = ZoneMemberFactory::new()->withoutPersisting()->create();
+        $zoneMember = ZoneMemberFactory::new()->create();
 
         $this->assertNotNull($zoneMember->getCode());
     }
