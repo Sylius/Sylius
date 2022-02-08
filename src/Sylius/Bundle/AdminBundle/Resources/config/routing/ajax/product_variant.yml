@@ -37,7 +37,7 @@ sylius_admin_ajax_all_product_variants_by_phrase:
                 arguments:
                     phrase: $phrase
                     locale: expr:service('sylius.context.locale').getLocaleCode()
-                    limit: 5
+                    limit: 25
 
 sylius_admin_ajax_product_variants_by_codes:
     path: /
