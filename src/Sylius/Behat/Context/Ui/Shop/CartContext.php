@@ -19,6 +19,7 @@ use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\SessionService;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
@@ -34,21 +35,24 @@ final class CartContext implements Context
 
     private NotificationCheckerInterface $notificationChecker;
 
+    private SessionService $sessionService;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         SummaryPageInterface $summaryPage,
         ShowPageInterface $productShowPage,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
+        SessionService $sessionService
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->summaryPage = $summaryPage;
         $this->productShowPage = $productShowPage;
         $this->notificationChecker = $notificationChecker;
+        $this->sessionService = $sessionService;
     }
 
     /**
      * @When /^I see the summary of my (?:|previous )cart$/
-     * @When He views cart
      */
     public function iOpenCartSummaryPage()
     {
@@ -248,6 +252,7 @@ final class CartContext implements Context
      * @Given /^I (?:add|added) (this product) to the cart$/
      * @Given /^I have (product "[^"]+") added to the cart$/
      * @Given I added product :product to the cart
+     * @Given he added product :product to the cart
      * @Given /^I (?:have|had) (product "[^"]+") in the cart$/
      * @Given the customer added :product product to the cart
      * @Given /^I (?:add|added) ("[^"]+" product) to the (cart)$/
@@ -267,6 +272,18 @@ final class CartContext implements Context
      */
     public function iAddMultipleProductsToTheCart(array $products)
     {
+        foreach ($products as $product) {
+            $this->iAddProductToTheCart($product);
+        }
+    }
+
+    /**
+     * @When /^an anonymous user in another browser adds (products "([^"]+)" and "([^"]+)") to the cart$/
+     */
+    public function anonymousUserAddsMultipleProductsToTheCart(array $products)
+    {
+        $this->sessionService->changeSession();
+
         foreach ($products as $product) {
             $this->iAddProductToTheCart($product);
         }
@@ -334,7 +351,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^there should be one item in (?:my|his) cart$/
+     * @Then there should be one item in my cart
      */
     public function thereShouldBeOneItemInMyCart()
     {
@@ -363,6 +380,16 @@ final class CartContext implements Context
     public function thisItemShouldHaveCode($variantCode)
     {
         Assert::true($this->summaryPage->hasItemWithCode($variantCode));
+    }
+
+    /**
+     * @Then I view cart on my browser
+     */
+    public function iViewCartOnMySession(): void
+    {
+        $this->sessionService->restorePreviousSession();
+
+        $this->summaryPage->open();
     }
 
     /**
@@ -455,7 +482,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^(?:my|his) cart's total should be "([^"]+)"$/
+     * @Then my cart's total should be :total
      */
     public function myCartSTotalShouldBe($total)
     {
