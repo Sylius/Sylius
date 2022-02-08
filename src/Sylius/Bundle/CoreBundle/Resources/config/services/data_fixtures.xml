@@ -48,6 +48,13 @@
 
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface" alias="sylius.data_fixtures.factory.locale" />
 
+        <service id="sylius.data_fixtures.factory.shipping_category" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShippingCategoryFactory">
+            <argument type="service" id="sylius.factory.shipping_category" />
+            <tag name="foundry.factory" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShippingCategoryFactoryInterface" alias="sylius.data_fixtures.factory.shipping_category" />
+
         <service id="sylius.data_fixtures.factory.shop_user" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactory">
             <argument type="service" id="sylius.factory.shop_user" />
             <argument type="service" id="sylius.factory.customer" />
