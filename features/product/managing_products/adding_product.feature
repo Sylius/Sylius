@@ -9,7 +9,7 @@ Feature: Adding a new product
         And the store has "Standard" shipping category
         And I am logged in as an administrator
 
-    @ui @api
+    @ui @no-api
     Scenario: Adding a new simple product with price
         Given I want to create a new simple product
         When I specify its code as "BOARD_DICE_BREWING"
@@ -20,7 +20,7 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the store
 
-    @ui
+    @ui @no-api
     Scenario: Adding a new simple product with discounted price
         Given I want to create a new simple product
         When I specify its code as "BOARD_DICE_BREWING"
@@ -32,7 +32,7 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the store
 
-    @ui @api
+    @ui @no-api
     Scenario: Adding a new simple free product
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
@@ -43,7 +43,7 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the store
 
-    @ui
+    @ui @no-api
     Scenario: Adding a new simple product with specific shipping category
         Given I want to create a new simple product
         When I specify its code as "BOARD_DICE_BREWING"
@@ -79,7 +79,7 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Gentleman Jack" should appear in the store
 
-    @ui
+    @ui @no-api
     Scenario: Adding a new simple product without shipping required
         Given I want to create a new simple product
         When I specify its code as "BOARD_DICE_BREWING"

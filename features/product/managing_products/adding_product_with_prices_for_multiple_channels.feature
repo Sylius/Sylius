@@ -10,7 +10,7 @@ Feature: Adding product with prices for multiple channels
         And the store operates on another channel named "Web-GB" in "GBP" currency
         And I am logged in as an administrator
 
-    @ui
+    @ui @no-api
     Scenario: Configure prices for each channel and currency while adding a new simple product
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
@@ -23,7 +23,7 @@ Feature: Adding product with prices for multiple channels
         And product "Dice Brewing" should be priced at $10.00 for channel "Web-US"
         And product "Dice Brewing" should be priced at £5.00 for channel "Web-GB"
 
-    @ui
+    @ui @no-api
     Scenario: Configure prices for each channel while adding a new simple product
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
@@ -57,7 +57,7 @@ Feature: Adding product with prices for multiple channels
         And I add it
         Then I should be notified that price must be defined for every channel
 
-    @ui
+    @ui @no-api
     Scenario: Do not specify price while adding a new simple product
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
