@@ -17,6 +17,7 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactory;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Intl\Countries;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
@@ -31,18 +32,16 @@ final class CountryFactoryTest extends KernelTestCase
         $country = CountryFactory::new()->create();
 
         $this->assertInstanceOf(CountryInterface::class, $country->object());
+        $this->assertNotNull($country->getCode());
+        $this->assertTrue(Countries::exists($country->getCode()));
     }
 
     /** @test */
-    function it_creates_countries_with_codes(): void
+    function it_creates_countries_with_custom_codes(): void
     {
         $country = CountryFactory::new()->withCode('PL')->create();
 
         $this->assertEquals('PL', $country->getCode());
-
-        $country = CountryFactory::new()->create();
-
-        $this->assertNotNull($country->getCode());
     }
 
     /** @test */
