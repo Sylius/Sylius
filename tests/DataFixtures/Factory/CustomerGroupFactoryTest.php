@@ -30,29 +30,23 @@ final class CustomerGroupFactoryTest extends KernelTestCase
         $customerGroup = CustomerGroupFactory::new()->create();
 
         $this->assertInstanceOf(CustomerGroupInterface::class, $customerGroup->object());
+        $this->assertNotNull($customerGroup->getCode());
+        $this->assertNotNull($customerGroup->getName());
     }
 
     /** @test */
-    function it_creates_customer_groups_with_codes(): void
+    function it_creates_customer_groups_with_custom_codes(): void
     {
         $customerGroup = CustomerGroupFactory::new()->withCode('group_a')->create();
 
         $this->assertEquals('group_a', $customerGroup->getCode());
-
-        $customerGroup = CustomerGroupFactory::new()->create();
-
-        $this->assertNotNull($customerGroup->getCode());
     }
 
     /** @test */
-    function it_creates_customer_groups_with_names(): void
+    function it_creates_customer_groups_with_custom_names(): void
     {
         $customerGroup = CustomerGroupFactory::new()->withName('Group A')->create();
 
         $this->assertEquals('Group A', $customerGroup->getName());
-
-        $customerGroup = CustomerGroupFactory::new()->create();
-
-        $this->assertNotNull($customerGroup->getName());
     }
 }
