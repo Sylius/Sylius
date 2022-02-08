@@ -162,7 +162,7 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
             ))
             ->setParameter('phrase', '%' . $phrase . '%')
             ->setParameter('locale', $locale)
-            ->orderBy('o.productId', 'ASC')
+            ->orderBy('o.product', 'ASC')
             ->addOrderBy('o.position', 'ASC')
             ->setMaxResults($limit)
             ->getQuery()
