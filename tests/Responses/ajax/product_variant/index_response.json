@@ -23,5 +23,90 @@
     "descriptor":"Mug 5 (MUG_5)",
     "id":@integer@,
     "code":"MUG_5"
+  },
+  {
+    "descriptor":"Mug 6 (MUG_6)",
+    "id":@integer@,
+    "code":"MUG_6"
+  },
+  {
+    "descriptor":"Mug 7 (MUG_7)",
+    "id":@integer@,
+    "code":"MUG_7"
+  },
+  {
+    "descriptor":"Mug 8 (MUG_8)",
+    "id":@integer@,
+    "code":"MUG_8"
+  },
+  {
+    "descriptor":"Mug 9 (MUG_9)",
+    "id":@integer@,
+    "code":"MUG_9"
+  },
+  {
+    "descriptor":"Mug 10 (MUG_10)",
+    "id":@integer@,
+    "code":"MUG_10"
+  },
+  {
+    "descriptor":"Mug 11 (MUG_11)",
+    "id":@integer@,
+    "code":"MUG_11"
+  },
+  {
+    "descriptor":"Mug 12 (MUG_12)",
+    "id":@integer@,
+    "code":"MUG_12"
+  },
+  {
+    "descriptor":"Mug 13 (MUG_13)",
+    "id":@integer@,
+    "code":"MUG_13"
+  },
+  {
+    "descriptor":"Mug 14 (MUG_14)",
+    "id":@integer@,
+    "code":"MUG_14"
+  },
+  {
+    "descriptor":"Mug 15 (MUG_15)",
+    "id":@integer@,
+    "code":"MUG_15"
+  },
+  {
+    "descriptor":"Mug 16 (MUG_16)",
+    "id":@integer@,
+    "code":"MUG_16"
+  },
+  {
+    "descriptor":"Mug 17 (MUG_17)",
+    "id":@integer@,
+    "code":"MUG_17"
+  },
+  {
+    "descriptor":"Mug 18 (MUG_18)",
+    "id":@integer@,
+    "code":"MUG_18"
+  },
+  {
+    "descriptor":"Mug 19 (MUG_19)",
+    "id":@integer@,
+    "code":"MUG_19"
+  },
+  {
+    "descriptor":"Mug 20 (MUG_20)",
+    "id":@integer@,
+    "code":"MUG_20"
+  },
+  {
+    "descriptor":"Large Mug (LARGE_MUG)",
+    "id":@integer@,
+    "code":"LARGE_MUG"
+  },
+  {
+    "descriptor":"Small sticker (SMALL_STICKER)",
+    "id":@integer@,
+    "code":"SMALL_STICKER"
   }
 ]
