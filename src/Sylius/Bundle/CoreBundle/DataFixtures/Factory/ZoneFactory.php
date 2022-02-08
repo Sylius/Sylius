@@ -49,6 +49,36 @@ final class ZoneFactory extends ModelFactory implements ZoneFactoryInterface
         return $this->addState(['code' => $code]);
     }
 
+    public function withMembers(array $members, ?string $type = null): self
+    {
+        $data = [];
+
+        foreach ($members as $member) {
+            if (\is_string($member)) {
+                $data[] = ZoneMemberFactory::randomOrCreate(['code' => $member]);
+
+                continue;
+            }
+
+            $data[] = $member;
+        }
+
+        return $this->addState([
+            'type' => $type ?? ZoneInterface::TYPE_ZONE,
+            'members' => $data
+        ]);
+    }
+
+    public function withCountries(array $countries): self
+    {
+        return $this->withMembers($countries, ZoneInterface::TYPE_COUNTRY);
+    }
+
+    public function withProvinces(array $countries): self
+    {
+        return $this->withMembers($countries, ZoneInterface::TYPE_PROVINCE);
+    }
+
     protected function getDefaults(): array
     {
         return [
