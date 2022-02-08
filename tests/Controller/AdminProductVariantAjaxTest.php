@@ -21,7 +21,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 final class AdminProductVariantAjaxTest extends JsonApiTestCase
 {
     /** @test */
-    public function it_denies_access_to_product_variants_for_not_authenticated_user()
+    public function it_denies_access_to_product_variants_for_not_authenticated_user(): void
     {
         $this->client->request('GET', '/admin/ajax/product-variants/search-all');
 
@@ -31,7 +31,7 @@ final class AdminProductVariantAjaxTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_returns_only_specified_part_of_all_product_variants()
+    public function it_returns_only_specified_part_of_all_product_variants(): void
     {
         $this->loadFixturesFromFile('authentication/administrator.yml');
         $this->loadFixturesFromFiles(['resources/product_variants.yml']);
