@@ -119,5 +119,18 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="validator.constraint_validator" alias="sylius_api_unique_reviewer_email_validator" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\PercentageDiscountActionValidator">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
+            <tag name="sylius.catalog_promotion.action_validator" key="percentage_discount"/>
+        </service>
+
+        <service
+            id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\FixedDiscountActionValidator"
+            decorates="Sylius\Bundle\CoreBundle\Validator\CatalogPromotionAction\FixedDiscountActionValidator"
+        >
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\FixedDiscountActionValidator.inner" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
+        </service>
     </services>
 </container>

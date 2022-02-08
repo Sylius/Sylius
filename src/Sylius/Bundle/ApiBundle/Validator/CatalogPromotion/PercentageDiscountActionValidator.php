@@ -11,10 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction;
+namespace Sylius\Bundle\ApiBundle\Validator\CatalogPromotion;
 
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
+use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction\ActionValidatorInterface;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionAction;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
