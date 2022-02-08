@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sylius\Tests\Controller;
 
 use ApiTestCase\JsonApiTestCase;
@@ -7,11 +9,9 @@ use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-class AdminProductVariantAjaxTest extends JsonApiTestCase
+final class AdminProductVariantAjaxTest extends JsonApiTestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function it_denies_access_to_product_variants_for_not_authenticated_user()
     {
         $this->client->request('GET', '/admin/ajax/product-variants/search-all');
@@ -21,16 +21,11 @@ class AdminProductVariantAjaxTest extends JsonApiTestCase
         $this->assertEquals($response->getStatusCode(), Response::HTTP_FOUND);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_returns_only_specified_part_of_all_product_variants()
     {
         $this->loadFixturesFromFile('authentication/administrator.yml');
-        $this->loadFixturesFromFiles([
-            'resources/product_variants.yml',
-
-        ]);
+        $this->loadFixturesFromFiles(['resources/product_variants.yml']);
 
         $this->authenticateAdminUser();
 
