@@ -16,7 +16,6 @@ namespace Sylius\Tests\DataFixtures\Factory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactory;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Intl\Locales;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
@@ -32,7 +31,6 @@ final class LocaleFactoryTest extends KernelTestCase
 
         $this->assertInstanceOf(LocaleInterface::class, $locale->object());
         $this->assertNotNull($locale->getCode());
-        $this->assertTrue(Locales::exists($locale->getCode()));
     }
 
     /** @test */
