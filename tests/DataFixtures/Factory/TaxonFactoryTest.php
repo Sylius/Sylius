@@ -31,41 +31,63 @@ final class TaxonFactoryTest extends KernelTestCase
         $taxon = TaxonFactory::new()->create();
 
         $this->assertInstanceOf(TaxonInterface::class, $taxon->object());
-    }
-
-    /** @test */
-    function it_creates_taxa_with_codes(): void
-    {
-        $taxon = TaxonFactory::new()->withCode('board-games')->create();
-
-        $this->assertEquals('board-games', $taxon->getCode());
-
-        $taxon = TaxonFactory::new()->create();
-
         $this->assertNotNull($taxon->getCode());
     }
 
     /** @test */
-    function it_creates_taxa_with_translations_for_each_locales(): void
+    function it_creates_taxa_with_custom_codes(): void
+    {
+        $taxon = TaxonFactory::new()->withCode('board-games')->create();
+
+        $this->assertEquals('board-games', $taxon->getCode());
+    }
+
+    /** @test */
+    function it_creates_taxa_with_names_for_each_locales(): void
     {
         LocaleFactory::new()->withCode('en_US')->create();
         LocaleFactory::new()->withCode('fr_FR')->create();
 
-        $taxon = TaxonFactory::new()->withName('Board games')->withoutPersisting()->create();
+        $taxon = TaxonFactory::new()->withName('Board games')->create();
 
         $this->assertEquals(2, $taxon->getTranslations()->count());
 
+        // testing en_US translation
         $taxon->setCurrentLocale('en_US');
         $taxon->setFallbackLocale('en_US');
 
         $this->assertEquals('Board games', $taxon->getName());
         $this->assertEquals('board-games', $taxon->getSlug());
 
+        // testing fr_FR translation
         $taxon->setCurrentLocale('fr_fr');
         $taxon->setFallbackLocale('fr_FR');
 
         $this->assertEquals('Board games', $taxon->getName());
         $this->assertEquals('board-games', $taxon->getSlug());
+    }
+
+    /** @test */
+    function it_creates_taxa_with_descriptions_for_each_locales(): void
+    {
+        LocaleFactory::new()->withCode('en_US')->create();
+        LocaleFactory::new()->withCode('fr_FR')->create();
+
+        $taxon = TaxonFactory::new()->withDescription('Board games are awesome.')->create();
+
+        $this->assertEquals(2, $taxon->getTranslations()->count());
+
+        // testing en_US translation
+        $taxon->setCurrentLocale('en_US');
+        $taxon->setFallbackLocale('en_US');
+
+        $this->assertEquals('Board games are awesome.', $taxon->getDescription());
+
+        // testing fr_FR translation
+        $taxon->setCurrentLocale('fr_fr');
+        $taxon->setFallbackLocale('fr_FR');
+
+        $this->assertEquals('Board games are awesome.', $taxon->getDescription());
     }
 
     /** @test */
@@ -83,13 +105,15 @@ final class TaxonFactoryTest extends KernelTestCase
             ],
         ])->withoutPersisting()->create();
 
+        // testing en_US translation
         $taxon->setCurrentLocale('en_US');
         $taxon->setFallbackLocale('en_US');
 
         $this->assertEquals('Board games', $taxon->getName());
         $this->assertEquals('board-games', $taxon->getSlug());
 
-        $taxon->setCurrentLocale('fr_fr');
+        // testing fr_FR translation
+        $taxon->setCurrentLocale('fr_FR');
         $taxon->setFallbackLocale('fr_FR');
 
         $this->assertEquals('Jeux de société', $taxon->getName());
@@ -97,7 +121,7 @@ final class TaxonFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_taxa_with_children(): void
+    function it_creates_taxa_with_custom_children(): void
     {
         LocaleFactory::new()->withCode('en_US')->create();;
 

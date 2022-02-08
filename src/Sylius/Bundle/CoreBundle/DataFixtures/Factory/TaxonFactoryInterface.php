@@ -40,6 +40,8 @@ interface TaxonFactoryInterface
 
     public function withName(string $name): self;
 
+    public function withDescription(string $description): self;
+
     public function withTranslations(array $translations): self;
 
     public function withChildren(array $children): self;
