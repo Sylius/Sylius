@@ -946,7 +946,7 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::true(
             $this->responseChecker->hasItemWithValues(
                 $response,
-                ['name' => $catalogPromotion->getName(), 'startDate' => $startDate.' 00:00:00', 'endDate' => $endDate.' 00:00:00']
+                ['name' => $catalogPromotion->getName(), 'startDate' => $startDate . ':00', 'endDate' => $endDate . ':00']
             ),
             sprintf(
                 'Cannot find catalog promotions with name "%s" operating between "%s" and "%s" in the list',
