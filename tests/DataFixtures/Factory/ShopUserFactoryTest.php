@@ -118,11 +118,11 @@ final class ShopUserFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_customers_with_password(): void
     {
-        $shopUser = ShopUserFactory::new()->withPassword('passw0rd')->create();
+        $shopUser = ShopUserFactory::new()->withoutPersisting()->withPassword('passw0rd')->create();
 
         $this->assertEquals('passw0rd', $shopUser->getPlainPassword());
 
-        $shopUser = ShopUserFactory::new()->create();
+        $shopUser = ShopUserFactory::new()->withoutPersisting()->create();
 
         $this->assertNotNull($shopUser->getPlainPassword());
     }
@@ -134,19 +134,19 @@ final class ShopUserFactoryTest extends KernelTestCase
 
         $this->assertNotNull($shopUser->getCustomer()->getGroup());
 
-        $shopUser = ShopUserFactory::new()->withCustomerGroup('group_a')->create();
+        $shopUser = ShopUserFactory::new()->withoutPersisting()->withCustomerGroup('group_a')->create();
 
         $this->assertEquals('group_a', $shopUser->getCustomer()->getGroup()->getCode());
 
         // with proxy
-        $customerGroup = CustomerGroupFactory::new()->withCode('group_a')->create();
-        $shopUser = ShopUserFactory::new()->withCustomerGroup($customerGroup)->create();
+        $customerGroup = CustomerGroupFactory::new()->withoutPersisting()->withCode('group_a')->create();
+        $shopUser = ShopUserFactory::new()->withoutPersisting()->withCustomerGroup($customerGroup)->create();
 
         $this->assertEquals($customerGroup->object(), $shopUser->getCustomer()->getGroup());
 
         // without proxy
-        $customerGroup = CustomerGroupFactory::new()->withCode('group_a')->create()->object();
-        $shopUser = ShopUserFactory::new()->withCustomerGroup($customerGroup)->create();
+        $customerGroup = CustomerGroupFactory::new()->withoutPersisting()->withCode('group_a')->create()->object();
+        $shopUser = ShopUserFactory::new()->withoutPersisting()->withCustomerGroup($customerGroup)->create();
 
         $this->assertEquals($customerGroup, $shopUser->getCustomer()->getGroup());
     }
