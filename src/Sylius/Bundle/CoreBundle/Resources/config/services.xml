@@ -19,6 +19,7 @@
         <import resource="services/commands.xml" />
         <import resource="services/context.xml" />
         <import resource="services/dashboard.xml" />
+        <import resource="services/data_fixtures.xml" />
         <import resource="services/emails.xml" />
         <import resource="services/fixtures.xml" />
         <import resource="services/fixtures_factories.xml" />

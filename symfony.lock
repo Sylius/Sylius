@@ -52,6 +52,9 @@
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },
+    "composer/pcre": {
+        "version": "1.0.1"
+    },
     "composer/semver": {
         "version": "1.5.1"
     },
@@ -113,6 +116,18 @@
             "config/packages/prod/doctrine.yaml",
             "src/Entity/.gitignore",
             "src/Repository/.gitignore"
+        ]
+    },
+    "doctrine/doctrine-fixtures-bundle": {
+        "version": "3.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "1f5514cfa15b947298df4d771e694e578d4c204d"
+        },
+        "files": [
+            "src/DataFixtures/AppFixtures.php"
         ]
     },
     "doctrine/doctrine-migrations-bundle": {
@@ -521,6 +536,9 @@
     },
     "ramsey/uuid": {
         "version": "3.8.0"
+    },
+    "rector/rector": {
+        "version": "0.11.52"
     },
     "sebastian/code-unit-reverse-lookup": {
         "version": "1.0.1"
@@ -1086,5 +1104,24 @@
     },
     "zendframework/zend-eventmanager": {
         "version": "3.2.1"
+    },
+    "zenstruck/assert": {
+        "version": "v1.0.0"
+    },
+    "zenstruck/callback": {
+        "version": "v1.4.1"
+    },
+    "zenstruck/foundry": {
+        "version": "1.16",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.9",
+            "ref": "4105965892040697deb766a89e518eddc8d207e1"
+        },
+        "files": [
+            "config/packages/dev/zenstruck_foundry.yaml",
+            "config/packages/test/zenstruck_foundry.yaml"
+        ]
     }
 }
