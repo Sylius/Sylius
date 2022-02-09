@@ -54,6 +54,10 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         $databaseName = $this->getDatabaseName();
 
         try {
+            if ($this->isSqlite()) {
+                return file_exists($databaseName);
+            }
+
             $schemaManager = $this->getSchemaManager();
 
             return in_array($databaseName, $schemaManager->listDatabases());
@@ -121,5 +125,14 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     private function getEntityManager(): EntityManagerInterface
     {
         return $this->doctrineRegistry->getManager();
+    }
+
+    private function isSqlite(): bool
+    {
+        $platform = $this->getEntityManager()->getConnection()->getDatabasePlatform();
+        if ($platform instanceof \Doctrine\DBAL\Platforms\SqlitePlatform) {
+            return true;
+        }
+        return false;
     }
 }
