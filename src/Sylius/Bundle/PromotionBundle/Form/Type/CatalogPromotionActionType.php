@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPriceCalculator;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -69,6 +70,12 @@ final class CatalogPromotionActionType extends AbstractResourceType
                             if ($channelConfiguration['amount'] === '') {
                                 return;
                             }
+                        }
+                    }
+
+                    if ($data['type'] === PercentageDiscountPriceCalculator::TYPE) {
+                        if ($data['configuration']['amount'] === '') {
+                            return;
                         }
                     }
 
