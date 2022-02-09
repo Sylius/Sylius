@@ -8,7 +8,7 @@ Feature: Toggle the product
         Given the store has a product "Dice Brewing"
         And I am logged in as an administrator
 
-    @ui
+    @ui @no-api
     Scenario: Disabling a simple product
         Given the "Dice Brewing" product is enabled
         And I want to modify the "Dice Brewing" product
@@ -17,7 +17,7 @@ Feature: Toggle the product
         Then I should be notified that it has been successfully edited
         And this product should be disabled along with its variant
 
-    @ui
+    @ui @no-api
     Scenario: Enabling a simple product
         Given the "Dice Brewing" product is disabled
         And I want to modify the "Dice Brewing" product

@@ -33,7 +33,7 @@ Feature: Adding product with prices for multiple channels
         And I add it
         Then I should be notified that price must be defined for every channel
 
-    @ui
+    @ui @no-api
     Scenario: Require prices only for chosen channels
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
@@ -45,7 +45,7 @@ Feature: Adding product with prices for multiple channels
         Then I should be notified that it has been successfully created
         And product "Dice Brewing" should be priced at $10.00 for channel "Web-US"
 
-    @ui
+    @ui @no-api
     Scenario: Require prices for all chosen channels
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
