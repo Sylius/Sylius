@@ -1,8 +1,0 @@
-{
-    "@context": "\/api\/v2\/contexts\/ShippingMethod",
-    "@id": "\/api\/v2\/shop\/shipments\/@integer@\/methods",
-    "@type": "hydra:Collection",
-    "hydra:member": [
-    ],
-    "hydra:totalItems": 0
-}

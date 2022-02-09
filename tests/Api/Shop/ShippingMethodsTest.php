@@ -71,7 +71,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_returns_empty_list_of_available_shipping_methods_of_assigned_cart_for_visitor(): void
+    public function it_returns_list_of_available_shipping_methods_of_assigned_cart_for_visitor(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/customer.yaml',
@@ -94,18 +94,18 @@ final class ShippingMethodsTest extends JsonApiTestCase
 
         $this->client->request(
             'GET',
-            sprintf('/api/v2/shop/orders/nAWw2jewpA/shipments/%s/methods', $shipment->getId()),
+            sprintf('/api/v2/shop/shipping-methods?shipmentId=%s&tokenValue=nAWw2jewpA', $shipment->getId()),
             [],
             [],
             self::CONTENT_TYPE_HEADER
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_empty_order_shipping_methods_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/get_order_shipping_methods_response', Response::HTTP_OK);
     }
 
     /** @test */
-    public function it_returns_empty_list_of_available_shipping_methods_of_assigned_cart_for_other_users(): void
+    public function it_returns_list_of_available_shipping_methods_of_assigned_cart_for_other_users_if_shipment_id_and_cart_provided(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/customer.yaml',
@@ -131,14 +131,14 @@ final class ShippingMethodsTest extends JsonApiTestCase
 
         $this->client->request(
             'GET',
-            sprintf('/api/v2/shop/orders/nAWw2jewpA/shipments/%s/methods', $shipment->getId()),
+            sprintf('/api/v2/shop/shipping-methods?shipmentId=%s&tokenValue=nAWw2jewpA', $shipment->getId()),
             [],
             [],
             self::CONTENT_TYPE_HEADER
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_empty_order_shipping_methods_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/get_order_shipping_methods_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -152,20 +152,9 @@ final class ShippingMethodsTest extends JsonApiTestCase
             'shipping_method.yaml',
         ]);
 
-        $tokenValue = 'nAWw2jewpA';
-        $customer = 'oliver@doe.com';
-
-        $this->getCartAndPutItemForCustomer($tokenValue, $customer);
-
-        /** @var ShipmentRepositoryInterface $shipmentRepository */
-        $shipmentRepository = $this->get('sylius.repository.shipment');
-
-        /** @var ShipmentInterface $shipment */
-        $shipment = $shipmentRepository->findOneBy([]);
-
         $this->client->request(
             'GET',
-            '/api/v2/shop/orders/nAWw2jewpA/shipments/-1/methods',
+            '/api/v2/shop/shipping-methods?shipmentId=-10&tokenValue=nAWw2jewpA',
             [],
             [],
             self::CONTENT_TYPE_HEADER
@@ -188,14 +177,14 @@ final class ShippingMethodsTest extends JsonApiTestCase
 
         $this->client->request(
             'GET',
-            '/api/v2/shop/orders/nAWw2jewpA/shipments/-1/methods',
+            '/api/v2/shop/shipping-methods?shipmentId=-10&tokenValue=test',
             [],
             [],
             self::CONTENT_TYPE_HEADER
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_empty_shipping_methods_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/get_empty_order_shipping_methods_response', Response::HTTP_OK);
     }
 
     private function getCartAndPutItemForCustomer(string $tokenValue, string $customer): void

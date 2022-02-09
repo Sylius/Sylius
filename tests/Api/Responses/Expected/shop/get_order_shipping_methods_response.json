@@ -1,25 +1,26 @@
 {
     "@context": "\/api\/v2\/contexts\/ShippingMethod",
+    "@id": "\/api\/v2\/shop\/shipping-methods",
     "@type": "hydra:Collection",
     "hydra:member": [
         {
             "@id": "\/api\/v2\/shop\/shipping-methods\/UPS",
             "@type": "ShippingMethod",
-            "id": @integer@,
+            "id": "@integer@",
             "code": "UPS",
             "position": 0,
             "name": "UPS",
-            "description": @string@,
+            "description": "@string@",
             "price": 500
         },
         {
             "@id": "\/api\/v2\/shop\/shipping-methods\/DHL",
             "@type": "ShippingMethod",
-            "id": @integer@,
+            "id": "@integer@",
             "code": "DHL",
             "position": 1,
             "name": "DHL",
-            "description": @string@,
+            "description": "@string@",
             "price": 1000
         }
     ],

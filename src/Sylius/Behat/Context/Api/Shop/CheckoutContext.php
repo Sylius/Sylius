@@ -49,6 +49,8 @@ final class CheckoutContext implements Context
 
     private ApiClientInterface $addressesClient;
 
+    private ApiClientInterface $shippingMethodClient;
+
     private ResponseCheckerInterface $responseChecker;
 
     private RepositoryInterface $shippingMethodRepository;
@@ -73,6 +75,7 @@ final class CheckoutContext implements Context
     public function __construct(
         ApiClientInterface $ordersClient,
         ApiClientInterface $addressesClient,
+        ApiClientInterface $shippingMethodClient,
         ResponseCheckerInterface $responseChecker,
         RepositoryInterface $shippingMethodRepository,
         OrderRepositoryInterface $orderRepository,
@@ -85,6 +88,7 @@ final class CheckoutContext implements Context
     ) {
         $this->ordersClient = $ordersClient;
         $this->addressesClient = $addressesClient;
+        $this->shippingMethodClient = $shippingMethodClient;
         $this->responseChecker = $responseChecker;
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->orderRepository = $orderRepository;
@@ -1195,17 +1199,14 @@ final class CheckoutContext implements Context
 
     private function getCartShippingMethods(array $cart): array
     {
-        $request = Request::customItemAction(
-            'shop',
-            'orders',
-            $cart['tokenValue'],
-            HTTPRequest::METHOD_GET,
-            sprintf('shipments/%s/methods', $cart['shipments'][0]['id'])
+        $request = Request::custom(
+            sprintf('/api/v2/shop/shipping-methods?shipmentId=%s&tokenValue=%s', $cart['shipments'][0]['id'], $cart['tokenValue']),
+            HTTPRequest::METHOD_GET
         );
 
-        $this->ordersClient->executeCustomRequest($request);
+        $this->shippingMethodClient->executeCustomRequest($request);
 
-        return $this->responseChecker->getCollection($this->ordersClient->getLastResponse());
+        return $this->responseChecker->getCollection($this->shippingMethodClient->getLastResponse());
     }
 
     private function hasShippingMethod(ShippingMethodInterface $shippingMethod): bool
