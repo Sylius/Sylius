@@ -43,7 +43,7 @@ final class FixedDiscountActionValidatorSpec extends ObjectBehavior
         $this->shouldHaveType(ActionValidatorInterface::class);
     }
 
-    function if_it_is_not_admin_api_section_it_just_fallbacks_to_base_validator(
+    function it_just_fallbacks_to_base_validator_if_it_is_not_admin_api_section_it(
         ActionValidatorInterface $baseActionValidator,
         SectionProviderInterface $sectionProvider,
         ExecutionContextInterface $executionContext
@@ -55,6 +55,8 @@ final class FixedDiscountActionValidatorSpec extends ObjectBehavior
         $baseActionValidator->validate([], $constraint, $executionContext)->shouldBeCalled();
 
         $executionContext->buildViolation(Argument::any())->shouldNotBeCalled();
+
+        $this->validate([], $constraint, $executionContext);
     }
 
     function it_adds_violation_if_catalog_promotion_action_has_an_empty_configuration(

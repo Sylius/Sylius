@@ -35,6 +35,8 @@ final class FixedDiscountActionValidator implements ActionValidatorInterface
     public function validate(array $configuration, Constraint $constraint, ExecutionContextInterface $context): void
     {
         if (!$this->sectionProvider->getSection() instanceof AdminApiSection) {
+            $this->baseActionValidator->validate($configuration, $constraint, $context);
+
             return;
         }
 

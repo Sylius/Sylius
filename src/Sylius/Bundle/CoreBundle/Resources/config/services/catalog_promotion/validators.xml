@@ -29,19 +29,16 @@
 
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionScope\ForProductsScopeValidator">
             <argument type="service" id="sylius.repository.product" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
             <tag name="sylius.catalog_promotion.scope_validator" key="for_products"/>
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionScope\ForTaxonsScopeValidator">
             <argument type="service" id="sylius.repository.taxon" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
             <tag name="sylius.catalog_promotion.scope_validator" key="for_taxons"/>
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionScope\ForVariantsScopeValidator">
             <argument type="service" id="sylius.repository.product_variant" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
             <tag name="sylius.catalog_promotion.scope_validator" key="for_variants"/>
         </service>
     </services>

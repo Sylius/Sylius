@@ -28,6 +28,7 @@ final class ProductVariantForCatalogPromotionEligibility implements ProductVaria
     {
         /** @var CatalogPromotionScopeInterface $scope */
         foreach ($promotion->getScopes() as $scope) {
+            /** @var VariantInScopeCheckerInterface $checker */
             $checker = $this->locator->get($scope->getType());
 
             if ($checker->inScope($scope, $variant)) {
