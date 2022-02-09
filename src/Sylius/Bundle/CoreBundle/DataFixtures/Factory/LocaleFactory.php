@@ -16,7 +16,6 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 use Sylius\Component\Locale\Model\Locale;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
@@ -41,7 +40,6 @@ final class LocaleFactory extends ModelFactory implements LocaleFactoryInterface
 {
     public function __construct(
         private FactoryInterface $localeFactory,
-        private RepositoryInterface $localeRepository,
         private string $baseLocaleCode,
     ) {
         parent::__construct();
@@ -68,16 +66,10 @@ final class LocaleFactory extends ModelFactory implements LocaleFactoryInterface
     {
         return $this
             ->instantiateWith(function(array $attributes): LocaleInterface {
-                $code = $attributes['code'];
-
-                if (null !== $locale = $this->localeRepository->findOneBy(['code' => $code])) {
-                    return $locale;
-                }
-
                 /** @var LocaleInterface $locale */
                 $locale = $this->localeFactory->createNew();
 
-                $locale->setCode($code);
+                $locale->setCode($attributes['code']);
 
                 return $locale;
             })
