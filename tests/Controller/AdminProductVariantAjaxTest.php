@@ -55,7 +55,7 @@ final class AdminProductVariantAjaxTest extends JsonApiTestCase
 
         $this->expectException(\TypeError::class);
 
-        $this->client->request('GET', '/admin/ajax/product-variants/search-all?limit=25');
+        $this->client->request('GET', '/admin/ajax/product-variants/search-all');
     }
 
     /** @test */
