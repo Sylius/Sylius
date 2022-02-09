@@ -13,28 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DataProvider;
 
-use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\ContextAwareCollectionDataProviderInterface;
-use ApiPlatform\Core\DataProvider\OperationDataProviderTrait;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use ApiPlatform\Core\DataProvider\SubresourceDataProviderInterface;
-use ApiPlatform\Core\Exception\InvalidArgumentException;
-use ApiPlatform\Core\Exception\InvalidIdentifierException;
-use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
-use ApiPlatform\Core\Util\AttributesExtractor;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
-use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
@@ -48,32 +37,29 @@ final class CartShippingMethodsCollectionDataProvider implements ContextAwareCol
 
     private ShippingMethodsResolverInterface $shippingMethodsResolver;
 
-    private UserContextInterface $userContext;
-
-    private OrderInterface $order;
+    private ChannelContextInterface $channelContext;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         ShipmentRepositoryInterface $shipmentRepository,
         ShippingMethodRepositoryInterface $shippingMethodsRepository,
         ShippingMethodsResolverInterface $shippingMethodsResolver,
-        UserContextInterface $userContext,
-        OrderInterface $order,
+        ChannelContextInterface $channelContext
     ) {
         $this->orderRepository = $orderRepository;
         $this->shipmentRepository = $shipmentRepository;
         $this->shippingMethodsRepository = $shippingMethodsRepository;
         $this->shippingMethodsResolver = $shippingMethodsResolver;
-        $this->userContext = $userContext;
-        $this->order = $order;
+        $this->channelContext= $channelContext;
     }
 
     public function getCollection(string $resourceClass, string $operationName = null, array $context = []): array
     {
         if (!isset($context['filters'])) {
-            $channel = $this->order->getChannel();
+            /** @var ChannelInterface $channel */
+            $channel = $this->channelContext->getChannel();
 
-            return $this->shippingMethodsRepository->findEnabledForChannel($channel); // Find by channel
+            return $this->shippingMethodsRepository->findEnabledForChannel($channel);
         }
 
         $parameters = $context['filters'];
@@ -81,20 +67,18 @@ final class CartShippingMethodsCollectionDataProvider implements ContextAwareCol
         Assert::keyExists($parameters, 'tokenValue');
         Assert::keyExists($parameters, 'shipmentId');
 
-        $user = $this->userContext->getUser();
-
-        /** @var CustomerInterface|null $customer */
-        $customer = $user instanceof ShopUserInterface ? $user->getCustomer() : null;
+        /** @var ChannelInterface $channel */
+        $channel = $this->channelContext->getChannel();
 
         /** @var OrderInterface|null $cart */
-        $cart = $this->orderRepository->findCartByTokenValueAndCustomer($parameters['tokenValue'], $customer);// Search for cart by token & user is null || cart by token & user
-        if ($cart->isEmpty()) { // return empty array if cart not found
+        $cart = $this->orderRepository->findCartByTokenValueAndChannel($parameters['tokenValue'], $channel);
+        if ($cart === null) {
             return [];
         }
 
         /** @var ShipmentInterface|null $shipment */
-        $shipment = $this->shipmentRepository->find($parameters['shipmentId']);  // Search for shipment by cart and shipment id
-        if ($shipment === null) { // return empty array if shipment not found
+        $shipment = $this->shipmentRepository->findOneByOrderId($parameters['shipmentId'], $cart->getId());
+        if ($shipment === null) {
             return [];
         }
 

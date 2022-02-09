@@ -433,17 +433,17 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function findCartByTokenValueAndCustomer(string $tokenValue, CustomerInterface $customer): ?BaseOrderInterface
+    public function findCartByTokenValueAndChannel(string $tokenValue, ChannelInterface $channel): ?BaseOrderInterface
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.state = :state')
             ->andWhere('o.tokenValue = :tokenValue')
-            ->andWhere('o.customer_id = :customer')
+            ->andWhere('o.channel = :channel')
             ->setParameter('state', OrderInterface::STATE_CART)
             ->setParameter('tokenValue', $tokenValue)
-            ->setParameter('customer', $customer->getId())
+            ->setParameter('channel', $channel)
             ->getQuery()
             ->getOneOrNullResult()
-            ;
+        ;
     }
 }

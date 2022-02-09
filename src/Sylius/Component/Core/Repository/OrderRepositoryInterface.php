@@ -85,5 +85,5 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     public function findCartByTokenValue(string $tokenValue): ?BaseOrderInterface;
 
-    public function findCartByTokenValueAndCustomer(string $tokenValue, CustomerInterface $customer): ?BaseOrderInterface;
+    public function findCartByTokenValueAndChannel(string $tokenValue, ChannelInterface $channel): ?BaseOrderInterface;
 }
