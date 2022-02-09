@@ -103,7 +103,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that a discount amount should be between 0% and 100%
         And there should be an empty list of catalog promotions
 
-    @api
+    @api @ui @javascript
     Scenario: Trying to create a catalog promotion with wrong value of percentage discount action
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -111,7 +111,7 @@ Feature: Validating a catalog promotion creation
         And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add invalid percentage discount action with non number in amount
         And I try to add it
-        Then I should be notified that a discount amount should be a number and cannot be empty
+        Then I should be notified that a discount amount is not valid
         And there should be an empty list of catalog promotions
 
     @api @ui @javascript

@@ -617,6 +617,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then I should be notified that a discount amount is not valid
+     */
+    public function iShouldBeNotifiedThatADiscountAmountIsNotValie(): void
+    {
+        Assert::same($this->formElement->getValidationMessage(), 'This value is not valid.');
+    }
+
+    /**
      * @Then I should be notified that a discount amount should be configured for at least one channel
      */
     public function iShouldBeNotifiedThatADiscountAmountShouldBeConfiguredForAtLeasOneChannel(): void
