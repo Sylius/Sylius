@@ -21,7 +21,7 @@ Feature: Select taxon for a new product
         Then I should be notified that it has been successfully created
         And main taxon of product "Gentleman Jack" should be "Sad"
 
-    @ui @javascript @api
+    @ui @javascript @no-api
     Scenario: Specifying main taxon for simple product
         When I want to create a new simple product
         And I choose main taxon "Sad"

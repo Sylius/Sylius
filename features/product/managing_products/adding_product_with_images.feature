@@ -8,7 +8,7 @@ Feature: Adding a new product with images
         Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Adding a new simple product with a single image
         Given I want to create a new simple product
         When I specify its code as "LAMBORGHINI_GALLARDO"
@@ -19,7 +19,7 @@ Feature: Adding a new product with images
         Then I should be notified that it has been successfully created
         And the product "Lamborghini Gallardo Model" should have an image with "banner" type
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Adding a new simple product with multiple images
         Given I want to create a new simple product
         When I specify its code as "LAMBORGHINI_GALLARDO"
