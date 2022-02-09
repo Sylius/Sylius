@@ -1,7 +1,7 @@
 @checkout
-Feature: Checking out as guest with existing email, while email owner starts a new cart session
+Feature: Preventing claiming cart of logged in user
     In order to make the checkout cart available only for user who owns the cart
-    As a Logged in user
+    As a Customer
     I want to be able to checkout with my previous cart when someone used my email in checkout
 
     Background:

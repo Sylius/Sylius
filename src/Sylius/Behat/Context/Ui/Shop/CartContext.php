@@ -19,7 +19,7 @@ use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Behat\Service\SessionService;
+use Sylius\Behat\Service\SessionManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
@@ -35,14 +35,14 @@ final class CartContext implements Context
 
     private NotificationCheckerInterface $notificationChecker;
 
-    private SessionService $sessionService;
+    private SessionManager $sessionService;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
         SummaryPageInterface $summaryPage,
         ShowPageInterface $productShowPage,
         NotificationCheckerInterface $notificationChecker,
-        SessionService $sessionService
+        SessionManager $sessionService
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->summaryPage = $summaryPage;

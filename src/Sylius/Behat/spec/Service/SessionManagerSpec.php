@@ -17,11 +17,11 @@ use Behat\Mink\Mink;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Behat\Service\SecurityServiceInterface;
-use Sylius\Behat\Service\SessionServiceInterface;
+use Sylius\Behat\Service\SessionManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-class SessionServiceSpec extends ObjectBehavior
+final class SessionManagerSpec extends ObjectBehavior
 {
     function let(Mink $mink, SharedStorageInterface $sharedStorage, SecurityServiceInterface $securityService)
     {
@@ -30,7 +30,7 @@ class SessionServiceSpec extends ObjectBehavior
 
     function it_implements_session_service_interface(): void
     {
-        $this->shouldImplement(SessionServiceInterface::class);
+        $this->shouldImplement(SessionManagerInterface::class);
     }
 
     function it_changes_session_and_doesnt_restore_session_token_if_session_was_not_called_before(

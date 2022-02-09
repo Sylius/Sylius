@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service;
 
-interface SessionServiceInterface
+interface SessionManagerInterface
 {
     public function changeSession(): void;
 

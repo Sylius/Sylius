@@ -15,7 +15,7 @@ namespace Sylius\Behat\Service;
 
 use Behat\Mink\Mink;
 
-final class SessionService implements SessionServiceInterface
+final class SessionManager implements SessionManagerInterface
 {
     private Mink $mink;
 
@@ -36,11 +36,7 @@ final class SessionService implements SessionServiceInterface
     {
         $sessionName = self::SESSION_CHROME_HEADLESS_SECOND;
 
-        $this->savePreviousSession();
-
-        $this->mink->setDefaultSessionName($sessionName);
-
-        $this->mink->restartSessions();
+        $this->saveAndRestartSession($sessionName);
 
         if ($this->sharedStorage->has(sprintf('behat_previous_session_token_%s', $sessionName))) {
             $this->securityService->restoreToken($this->sharedStorage->get(sprintf('behat_previous_session_token_%s', $sessionName)));
@@ -56,21 +52,21 @@ final class SessionService implements SessionServiceInterface
         /** @var string $sessionName */
         $sessionName = $this->sharedStorage->get('behat_previous_session_name');
 
-        $this->savePreviousSession();
-
-        $this->mink->setDefaultSessionName($sessionName);
-
-        $this->mink->restartSessions();
+        $this->saveAndRestartSession($sessionName);
 
         $this->securityService->restoreToken($this->sharedStorage->get(sprintf('behat_previous_session_token_%s', $sessionName)));
     }
 
-    private function savePreviousSession(): void
+    private function saveAndRestartSession(string $newSessionName): void
     {
-        /** @var string $sessionName */
-        $sessionName = $this->mink->getDefaultSessionName();
+        /** @var string $previousSessionName */
+        $previousSessionName = $this->mink->getDefaultSessionName();
 
-        $this->sharedStorage->set('behat_previous_session_name', $sessionName);
-        $this->sharedStorage->set(sprintf('behat_previous_session_token_%s', $sessionName), $this->securityService->getCurrentToken());
+        $this->sharedStorage->set('behat_previous_session_name', $previousSessionName);
+        $this->sharedStorage->set(sprintf('behat_previous_session_token_%s', $previousSessionName), $this->securityService->getCurrentToken());
+
+        $this->mink->setDefaultSessionName($newSessionName);
+
+        $this->mink->restartSessions();
     }
 }
