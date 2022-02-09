@@ -49,6 +49,30 @@ final class CatalogPromotionFixtureTest extends TestCase
     }
 
     /** @test */
+    public function catalog_promotion_exclusiveness_can_be_set(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['exclusive' => true]]]], 'custom.*.exclusive');
+    }
+
+    /** @test */
+    public function catalog_promotion_priority_can_be_set(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['priority' => 4]]]], 'custom.*.priority');
+    }
+
+    /** @test */
+    public function catalog_promotion_start_date_can_be_set(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['start_date' => '2020-01-02']]]], 'custom.*.start_date');
+    }
+
+    /** @test */
+    public function catalog_promotion_end_date_can_be_set(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['end_date' => '2022-01-02']]]], 'custom.*.end_date');
+    }
+
+    /** @test */
     public function catalog_promotion_description_can_be_set(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['description' => 'Description']]]], 'custom.*.description');
