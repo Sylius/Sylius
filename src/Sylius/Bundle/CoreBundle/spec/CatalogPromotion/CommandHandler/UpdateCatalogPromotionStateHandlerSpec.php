@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\UpdateCatalogPromotionState;
-use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionStateProcessorInterface;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionStateProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 

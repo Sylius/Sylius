@@ -15,19 +15,6 @@
     <services>
         <defaults public="true" />
 
-        <service
-            id="Sylius\Component\CoreBundle\Calculator\CatalogPromotionPriceCalculatorInterface"
-            class="Sylius\Bundle\CoreBundle\Calculator\CatalogPromotionPriceCalculator"
-        >
-            <argument type="tagged_iterator" tag="sylius.catalog_promotion.price_calculator" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Calculator\FixedDiscountPriceCalculator">
-            <tag name="sylius.catalog_promotion.price_calculator" type="fixed_discount" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator">
-            <tag name="sylius.catalog_promotion.price_calculator" type="percentage_discount" />
-        </service>
+        <service id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" class="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculator"/>
     </services>
 </container>

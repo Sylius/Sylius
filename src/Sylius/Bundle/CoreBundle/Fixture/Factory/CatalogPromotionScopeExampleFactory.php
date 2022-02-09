@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Sylius\Bundle\CoreBundle\Checker\InForVariantsScopeVariantChecker;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForVariantsScopeVariantChecker;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
