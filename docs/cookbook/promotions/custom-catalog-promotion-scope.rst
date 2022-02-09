@@ -65,49 +65,11 @@ And the code for the checker itself:
 
 Now the Catalog Promotion should work with your new Scope for programmatically and API created resource.
 
-Prepare a custom validator for the new scope
---------------------------------------------
+Validation
+----------
 
-We can start with configuration, declare our basic validator for this particular scope:
-
-.. code-block:: yaml
-
-    # config/services.yaml
-
-    App\Validator\CatalogPromotionScope\ByPhraseScopeValidator:
-        tags:
-            - { name: 'sylius.catalog_promotion.scope_validator', key: 'by_phrase' }
-
-In this validator we will check only the case for the ``phrase`` key to exist. But you can also extend it with your own
-keys to check as well as their corresponding values.
-
-.. code-block:: php
-
-    <?php
-
-    namespace App\Validator\CatalogPromotionScope;
-
-    use Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionScope\ScopeValidatorInterface;
-    use Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\Constraints\CatalogPromotionScope;
-    use Symfony\Component\Validator\Constraint;
-    use Symfony\Component\Validator\Context\ExecutionContextInterface;
-    use Webmozart\Assert\Assert;
-
-    class ByPhraseScopeValidator implements ScopeValidatorInterface
-    {
-        public function validate(array $configuration, Constraint $constraint, ExecutionContextInterface $context): void
-        {
-            /** @var CatalogPromotionScope $constraint */
-            Assert::isInstanceOf($constraint, CatalogPromotionScope::class);
-
-            if (!array_key_exists('phrase', $configuration) || empty($configuration['phrase'])) {
-                $context->buildViolation('There is no phrase provided')->atPath('configuration.phrase')->addViolation();
-            }
-        }
-    }
-
-Alright, we have a working basic validation, and our new type of scope exists, can be created, and edited
-programmatically or by API. Let's now prepare the UI part of this new feature.
+As your new Scope requires only basic syntactical validation, it's recommended to configure it on the Form type, rather
+than in the custom validator.
 
 Prepare a configuration form type for your new scope
 ----------------------------------------------------
@@ -147,7 +109,7 @@ Now let's create a form type and declare it service:
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\Validator\Constraints\NotBlank;
 
-    class ByPhraseScopeConfigurationType extends AbstractType
+    final class ByPhraseScopeConfigurationType extends AbstractType
     {
         public function buildForm(FormBuilderInterface $builder, array $options): void
         {
