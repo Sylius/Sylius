@@ -262,7 +262,7 @@ final class CatalogPromotionContext implements Context
             ]],
             [[
                 'type' => FixedDiscountPriceCalculator::TYPE,
-                'configuration' => [$channel->getCode() => ['amount' => $discount]],
+                'configuration' => [$channel->getCode() => ['amount' => $discount/100]],
             ]]
         );
 
@@ -290,7 +290,7 @@ final class CatalogPromotionContext implements Context
             ]],
             [[
                 'type' => FixedDiscountPriceCalculator::TYPE,
-                'configuration' => [$channel->getCode() => ['amount' => $discount]],
+                'configuration' => [$channel->getCode() => ['amount' => $discount/100]],
             ]]
         );
 
@@ -318,7 +318,7 @@ final class CatalogPromotionContext implements Context
             ]],
             [[
                 'type' => FixedDiscountPriceCalculator::TYPE,
-                'configuration' => [$channel->getCode() => ['amount' => $discount]],
+                'configuration' => [$channel->getCode() => ['amount' => $discount/100]],
             ]]
         );
 
@@ -417,8 +417,8 @@ final class CatalogPromotionContext implements Context
                 'type' => PercentageDiscountPriceCalculator::TYPE,
                 'configuration' => ['amount' => $discount],
             ]],
-            startDate: new \DateTimeImmutable($startDate),
-            endDate: new \DateTimeImmutable($endDate)
+            startDate: $startDate,
+            endDate: $endDate
         );
 
         $this->entityManager->flush();
@@ -446,8 +446,8 @@ final class CatalogPromotionContext implements Context
                 'type' => PercentageDiscountPriceCalculator::TYPE,
                 'configuration' => ['amount' => $discount],
             ]],
-            startDate: new \DateTimeImmutable($startDate),
-            endDate: new \DateTimeImmutable($endDate),
+            startDate: $startDate,
+            endDate: $endDate,
             enabled: false
         );
 
@@ -506,8 +506,8 @@ final class CatalogPromotionContext implements Context
                 'type' => PercentageDiscountPriceCalculator::TYPE,
                 'configuration' => ['amount' => $discount],
             ]],
-            startDate: new \DateTimeImmutable($startDate),
-            endDate: new \DateTimeImmutable($endDate)
+            startDate: $startDate,
+            endDate: $endDate
         );
 
         $this->entityManager->flush();
@@ -535,8 +535,8 @@ final class CatalogPromotionContext implements Context
                 'type' => PercentageDiscountPriceCalculator::TYPE,
                 'configuration' => ['amount' => $discount],
             ]],
-            startDate: new \DateTimeImmutable($startDate),
-            endDate: new \DateTimeImmutable($endDate),
+            startDate: $startDate,
+            endDate: $endDate,
             enabled: false
         );
 
@@ -663,7 +663,7 @@ final class CatalogPromotionContext implements Context
             ]],
             [[
                 'type' => FixedDiscountPriceCalculator::TYPE,
-                'configuration' => [$channel->getCode() => ['amount' => $discount]],
+                'configuration' => [$channel->getCode() => ['amount' => $discount/100]],
             ]],
             $priority
         );
@@ -693,7 +693,7 @@ final class CatalogPromotionContext implements Context
             ]],
             [[
                 'type' => FixedDiscountPriceCalculator::TYPE,
-                'configuration' => [$channel->getCode() => ['amount' => $discount]],
+                'configuration' => [$channel->getCode() => ['amount' => $discount/100]],
             ]],
             $priority,
         );
@@ -799,8 +799,8 @@ final class CatalogPromotionContext implements Context
         array $actions = [],
         int $priority = null,
         bool $exclusive = false,
-        \DateTimeImmutable $startDate = null,
-        \DateTimeImmutable $endDate = null,
+        ?string $startDate = null,
+        ?string $endDate = null,
         bool $enabled = true
     ): CatalogPromotionInterface {
         if (empty($channels) && $this->sharedStorage->has('channel')) {
@@ -813,8 +813,8 @@ final class CatalogPromotionContext implements Context
         $catalogPromotion = $this->catalogPromotionExampleFactory->create([
             'name' => $name,
             'code' => $code,
-            'startDate' => $startDate,
-            'endDate' => $endDate,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
             'enabled' => $enabled,
             'channels' => $channels,
             'actions' => $actions,

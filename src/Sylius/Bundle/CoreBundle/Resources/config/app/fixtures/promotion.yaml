@@ -59,4 +59,52 @@ sylius_fixtures:
                                 actions:
                                     -   type: 'percentage_discount'
                                         configuration:
+                                            amount: 0.5   
+                            spring:
+                                code: 'spring'
+                                name: 'Spring sale'
+                                channels:
+                                    - 'FASHION_WEB'
+                                priority: 100
+                                scopes:
+                                    -   type: 'for_taxons'
+                                        configuration:
+                                            taxons:
+                                                - 'jeans'
+                                actions:
+                                    -   type: 'fixed_discount'
+                                        configuration:
+                                            FASHION_WEB:
+                                                amount: 3.00
+                            summer:
+                                code: 'summer'
+                                name: 'Summer sale'
+                                channels:
+                                    - 'FASHION_WEB'
+                                exclusive: true
+                                priority: 30
+                                scopes:
+                                    -   type: 'for_variants'
+                                        configuration:
+                                            variants:
+                                                - '000F_office_grey_jeans-variant-0'
+                                actions:
+                                    -   type: 'percentage_discount'
+                                        configuration:
+                                            amount: 0.5
+                            autumn:
+                                code: 'autumn'
+                                name: 'Autumn sale'
+                                start_date: '2 days'
+                                end_date: '10 days'
+                                channels:
+                                    - 'FASHION_WEB'
+                                scopes:
+                                    -   type: 'for_products'
+                                        configuration:
+                                            products:
+                                                - 'Knitted_wool_blend_green_cap'
+                                actions:
+                                    -   type: 'percentage_discount'
+                                        configuration:
                                             amount: 0.5

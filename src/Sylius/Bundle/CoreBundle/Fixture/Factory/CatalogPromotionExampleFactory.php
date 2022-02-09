@@ -54,8 +54,15 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
         $catalogPromotion = $this->catalogPromotionFactory->createNew();
         $catalogPromotion->setCode($options['code']);
         $catalogPromotion->setName($options['name']);
-        $catalogPromotion->setStartDate($options['startDate']);
-        $catalogPromotion->setEndDate($options['endDate']);
+
+        if (isset($options['start_date'])) {
+            $catalogPromotion->setStartDate(new \DateTime($options['start_date']));
+        }
+
+        if (isset($options['end_date'])) {
+            $catalogPromotion->setEndDate(new \DateTime($options['end_date']));
+        }
+
         $catalogPromotion->setEnabled($options['enabled']);
         $catalogPromotion->setPriority($options['priority'] ?? 0);
         $catalogPromotion->setExclusive($options['exclusive'] ?? false);
@@ -96,9 +103,7 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('code', function (Options $options): string {
-                return StringInflector::nameToCode($options['name']);
-            })
+            ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
             ->setNormalizer('code', static function (Options $options, ?string $code): string {
                 if ($code === null) {
                     return StringInflector::nameToCode($options['name']);
@@ -106,18 +111,9 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
 
                 return $code;
             })
-            ->setDefault('name', function (Options $options): string {
-                /** @var string $words */
-                $words = $this->faker->words(3, true);
-
-                return $words;
-            })
-            ->setDefault('label', function (Options $options): string {
-                return $options['name'];
-            })
-            ->setDefault('description', function (Options $options): string {
-                return $this->faker->sentence();
-            })
+            ->setDefault('name', fn (Options $options): string => (string) $this->faker->words(3, true))
+            ->setDefault('label', fn (Options $options): string => $options['name'])
+            ->setDefault('description', fn (Options $options): string => $this->faker->sentence())
             ->setDefault('channels', LazyOption::all($this->channelRepository))
             ->setAllowedTypes('channels', 'array')
             ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))
@@ -127,10 +123,10 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
             ->setAllowedTypes('priority', ['integer', 'null'])
             ->setDefault('exclusive', false)
             ->setAllowedTypes('exclusive', ['boolean', 'null'])
-            ->setDefault('startDate', null)
-            ->setAllowedTypes('startDate', [\DateTimeInterface::class, 'null'])
-            ->setDefault('endDate', null)
-            ->setAllowedTypes('endDate', [\DateTimeInterface::class, 'null'])
+            ->setDefault('start_date', null)
+            ->setAllowedTypes('start_date', ['string', 'null'])
+            ->setDefault('end_date', null)
+            ->setAllowedTypes('end_date', ['string', 'null'])
             ->setDefault('enabled', true)
             ->setAllowedTypes('enabled', 'boolean')
         ;
