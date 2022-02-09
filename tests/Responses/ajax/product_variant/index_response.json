@@ -105,8 +105,23 @@
     "code":"LARGE_MUG"
   },
   {
-    "descriptor":"Small sticker (SMALL_STICKER)",
+    "descriptor":"Mug 23 (MUG_23)",
     "id":@integer@,
-    "code":"SMALL_STICKER"
+    "code":"MUG_23"
+  },
+  {
+    "descriptor":"Mug 24 (MUG_24)",
+    "id":@integer@,
+    "code":"MUG_24"
+  },
+  {
+    "descriptor":"Mug 25 (MUG_25)",
+    "id":@integer@,
+    "code":"MUG_25"
+  },
+  {
+    "descriptor":"Mug 26 (MUG_26)",
+    "id":@integer@,
+    "code":"MUG_26"
   }
 ]

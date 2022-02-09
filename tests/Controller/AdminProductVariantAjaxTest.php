@@ -31,18 +31,65 @@ final class AdminProductVariantAjaxTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_returns_only_specified_part_of_all_product_variants(): void
+    public function it_returns_only_specified_part_of_all_product_variants_for_empty_phrase(): void
     {
         $this->loadFixturesFromFile('authentication/administrator.yml');
         $this->loadFixturesFromFiles(['resources/product_variants.yml']);
 
         $this->authenticateAdminUser();
 
-        $this->client->request('GET', '/admin/ajax/product-variants/search-all?phrase=');
+        $this->client->request('GET', '/admin/ajax/product-variants/search-all?phrase=&limit=25');
 
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'ajax/product_variant/index_response', Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function it_throws_type_error_when_phrase_is_not_specified(): void
+    {
+        $this->loadFixturesFromFile('authentication/administrator.yml');
+        $this->loadFixturesFromFiles(['resources/product_variants.yml']);
+
+        $this->authenticateAdminUser();
+
+        $this->expectException(\TypeError::class);
+
+        $this->client->request('GET', '/admin/ajax/product-variants/search-all?limit=25');
+    }
+
+    /** @test */
+    public function it_returns_all_product_variants_if_limit_is_empty(): void
+    {
+        $this->loadFixturesFromFile('authentication/administrator.yml');
+        $this->loadFixturesFromFiles(['resources/product_variants.yml']);
+
+        $this->authenticateAdminUser();
+
+        $this->client->request('GET', '/admin/ajax/product-variants/search-all?phrase=&limit=');
+
+        $response = $this->client->getResponse();
+
+        $productVariantAmount = count(json_decode($response->getContent()));
+
+        $this->assertEquals(30, $productVariantAmount);
+    }
+
+    /** @test */
+    public function it_returns_specific_product_variants_for_given_phrase(): void
+    {
+        $this->loadFixturesFromFile('authentication/administrator.yml');
+        $this->loadFixturesFromFiles(['resources/product_variants.yml']);
+
+        $this->authenticateAdminUser();
+
+        $this->client->request('GET', '/admin/ajax/product-variants/search-all?phrase=LA');
+
+        $response = $this->client->getResponse();
+
+        $productVariants = json_decode($response->getContent());
+
+        $this->assertEquals('LARGE_MUG', $productVariants[0]->code);
     }
 
     private function authenticateAdminUser(): void
