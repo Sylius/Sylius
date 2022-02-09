@@ -7,7 +7,7 @@ Feature: Changing images of an existing product
     Background:
         Given I am logged in as an administrator
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Changing a single image of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "ford.jpg" with "thumbnail" type
@@ -27,7 +27,7 @@ Feature: Changing images of an existing product
         Then I should be notified that it has been successfully edited
         And this product should have an image with "thumbnail" type
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Changing the type of image of a simple product
         Given the store has a product "Lamborghini Ford Model"
         And this product has an image "lamborghini.jpg" with "thumbnail" type
