@@ -8,6 +8,7 @@ framework:
 
         routing:
             'Sylius\Bundle\CoreBundle\Command\ApplyCatalogPromotionsOnVariants': main
+            'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\UpdateCatalogPromotionState': main
             'Sylius\Component\Promotion\Event\CatalogPromotionCreated': main
             'Sylius\Component\Promotion\Event\CatalogPromotionEnded': main
             'Sylius\Component\Promotion\Event\CatalogPromotionUpdated': main

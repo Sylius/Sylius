@@ -13,33 +13,20 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Listener;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionStateProcessorInterface;
-use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\UpdateCatalogPromotionState;
 use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionStateChangedListener
 {
-    public function __construct(
-        private CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
-        private RepositoryInterface $catalogPromotionRepository,
-        private EntityManagerInterface $entityManager
-    ) {
+    public function __construct(private MessageBusInterface $messageBus)
+    {
     }
 
     public function __invoke(CatalogPromotionCreated|CatalogPromotionUpdated|CatalogPromotionEnded $event): void
     {
-        /** @var CatalogPromotionInterface|null $catalogPromotion */
-        $catalogPromotion = $this->catalogPromotionRepository->findOneBy(['code' => $event->code]);
-        if (null === $catalogPromotion) {
-            return;
-        }
-
-        $this->catalogPromotionStateProcessor->process($catalogPromotion);
-
-        $this->entityManager->flush();
+        $this->messageBus->dispatch(new UpdateCatalogPromotionState($event->code));
     }
 }

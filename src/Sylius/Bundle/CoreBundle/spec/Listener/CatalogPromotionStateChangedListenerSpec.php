@@ -13,83 +13,45 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\Listener;
 
-use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionStateProcessorInterface;
-use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\UpdateCatalogPromotionState;
 use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionStateChangedListenerSpec extends ObjectBehavior
 {
-    function let(
-        CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
-        RepositoryInterface $catalogPromotionRepository,
-        EntityManagerInterface $entityManager
-    ): void {
-        $this->beConstructedWith($catalogPromotionStateProcessor, $catalogPromotionRepository, $entityManager);
+    function let(MessageBusInterface $messageBus): void
+    {
+        $this->beConstructedWith($messageBus);
     }
 
-    function it_processes_catalog_promotion_that_has_just_been_created(
-        CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
-        RepositoryInterface $catalogPromotionRepository,
-        EntityManagerInterface $entityManager,
-        CatalogPromotionInterface $catalogPromotion
+    function it_dispatches_update_state_command_of_catalog_promotion_that_has_just_been_created(
+        MessageBusInterface $messageBus
     ): void {
-        $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
-
-        $catalogPromotionStateProcessor->process($catalogPromotion)->shouldBeCalled();
-
-        $entityManager->flush()->shouldBeCalled();
+        $command = new UpdateCatalogPromotionState('WINTER_MUGS_SALE');
+        $messageBus->dispatch($command)->willReturn(new Envelope($command))->shouldBeCalled();
 
         $this(new CatalogPromotionCreated('WINTER_MUGS_SALE'));
     }
 
-    function it_processes_catalog_promotion_that_has_just_been_updated(
-        CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
-        RepositoryInterface $catalogPromotionRepository,
-        EntityManagerInterface $entityManager,
-        CatalogPromotionInterface $catalogPromotion
+    function it_dispatches_update_state_command_of_catalog_promotion_that_has_just_been_updated(
+        MessageBusInterface $messageBus
     ): void {
-        $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
-
-        $catalogPromotionStateProcessor->process($catalogPromotion)->shouldBeCalled();
-
-        $entityManager->flush()->shouldBeCalled();
+        $command = new UpdateCatalogPromotionState('WINTER_MUGS_SALE');
+        $messageBus->dispatch($command)->willReturn(new Envelope($command))->shouldBeCalled();
 
         $this(new CatalogPromotionUpdated('WINTER_MUGS_SALE'));
     }
 
-    function it_processes_catalog_promotion_that_has_just_been_ended(
-        CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
-        RepositoryInterface $catalogPromotionRepository,
-        EntityManagerInterface $entityManager,
-        CatalogPromotionInterface $catalogPromotion
+    function it_dispatches_update_state_command_of_catalog_promotion_that_has_just_been_ended(
+        MessageBusInterface $messageBus
     ): void {
-        $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
-
-        $catalogPromotionStateProcessor->process($catalogPromotion)->shouldBeCalled();
-
-        $entityManager->flush()->shouldBeCalled();
+        $command = new UpdateCatalogPromotionState('WINTER_MUGS_SALE');
+        $messageBus->dispatch($command)->willReturn(new Envelope($command))->shouldBeCalled();
 
         $this(new CatalogPromotionEnded('WINTER_MUGS_SALE'));
-    }
-
-    function it_does_nothing_if_there_is_no_catalog_promotion_with_given_code(
-        CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
-        RepositoryInterface $catalogPromotionRepository,
-        EntityManagerInterface $entityManager
-    ): void {
-        $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn(null);
-        $catalogPromotionRepository->findAll()->shouldNotBeCalled();
-
-        $catalogPromotionStateProcessor->process(Argument::any())->shouldNotBeCalled();
-
-        $entityManager->flush()->shouldNotBeCalled();
-
-        $this(new CatalogPromotionUpdated('WINTER_MUGS_SALE'));
     }
 }
