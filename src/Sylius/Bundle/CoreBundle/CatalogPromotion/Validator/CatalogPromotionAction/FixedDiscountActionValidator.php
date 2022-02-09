@@ -26,18 +26,12 @@ use Webmozart\Assert\Assert;
 
 final class FixedDiscountActionValidator implements ActionValidatorInterface
 {
-    public function __construct(
-        private ChannelRepositoryInterface $channelRepository,
-        private SectionProviderInterface $sectionProvider
-    ) {
+    public function __construct(private ChannelRepositoryInterface $channelRepository)
+    {
     }
 
     public function validate(array $configuration, Constraint $constraint, ExecutionContextInterface $context): void
     {
-        if (!$this->sectionProvider->getSection() instanceof AdminApiSection) {
-            return;
-        }
-
         /** @var CatalogPromotionAction $constraint */
         Assert::isInstanceOf($constraint, CatalogPromotionAction::class);
 
