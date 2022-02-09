@@ -38,7 +38,7 @@ final class AdminProductVariantAjaxTest extends JsonApiTestCase
 
         $this->authenticateAdminUser();
 
-        $this->client->request('GET', '/admin/ajax/product-variants/search-all?phrase=&limit=25');
+        $this->client->request('GET', '/admin/ajax/product-variants/search-all?phrase=');
 
         $response = $this->client->getResponse();
 
@@ -56,23 +56,6 @@ final class AdminProductVariantAjaxTest extends JsonApiTestCase
         $this->expectException(\TypeError::class);
 
         $this->client->request('GET', '/admin/ajax/product-variants/search-all?limit=25');
-    }
-
-    /** @test */
-    public function it_returns_all_product_variants_if_limit_is_empty(): void
-    {
-        $this->loadFixturesFromFile('authentication/administrator.yml');
-        $this->loadFixturesFromFiles(['resources/product_variants.yml']);
-
-        $this->authenticateAdminUser();
-
-        $this->client->request('GET', '/admin/ajax/product-variants/search-all?phrase=&limit=');
-
-        $response = $this->client->getResponse();
-
-        $productVariantAmount = count(json_decode($response->getContent()));
-
-        $this->assertEquals(30, $productVariantAmount);
     }
 
     /** @test */
