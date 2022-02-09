@@ -27,7 +27,7 @@ final class LocaleFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_locales(): void
     {
-        $locale = LocaleFactory::new()->create();
+        $locale = LocaleFactory::createOne();
 
         $this->assertInstanceOf(LocaleInterface::class, $locale->object());
         $this->assertNotNull($locale->getCode());
