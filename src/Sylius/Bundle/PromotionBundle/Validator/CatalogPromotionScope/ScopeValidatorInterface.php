@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionScope;
+namespace Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScope;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
