@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Validator\CatalogPromotion;
 
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionScope\ScopeValidatorInterface;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\Constraints\CatalogPromotionScope;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ScopeValidatorInterface;
-use Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScope;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Webmozart\Assert\Assert;

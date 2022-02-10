@@ -17,11 +17,9 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionScope\ScopeValidatorInterface;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\Constraints\CatalogPromotionScope;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ScopeValidatorInterface;
-use Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScope;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 

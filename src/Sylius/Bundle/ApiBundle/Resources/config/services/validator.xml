@@ -127,7 +127,7 @@
 
         <service
             id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\FixedDiscountActionValidator"
-            decorates="Sylius\Bundle\CoreBundle\Validator\CatalogPromotionAction\FixedDiscountActionValidator"
+            decorates="Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionAction\FixedDiscountActionValidator"
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\FixedDiscountActionValidator.inner" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
@@ -135,7 +135,7 @@
 
         <service
             id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\ForProductsScopeValidator"
-            decorates="Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ForProductsScopeValidator"
+            decorates="Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionScope\ForProductsScopeValidator"
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\ForProductsScopeValidator.inner" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
@@ -143,7 +143,7 @@
 
         <service
             id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\ForTaxonsScopeValidator"
-            decorates="Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ForTaxonsScopeValidator"
+            decorates="Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionScope\ForTaxonsScopeValidator"
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\ForTaxonsScopeValidator.inner" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
@@ -151,7 +151,7 @@
 
         <service
             id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\ForVariantsScopeValidator"
-            decorates="Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ForVariantsScopeValidator"
+            decorates="Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionScope\ForVariantsScopeValidator"
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\ForVariantsScopeValidator.inner" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />

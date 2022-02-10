@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Validator\CatalogPromotion;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
@@ -21,11 +20,6 @@ use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction\ActionValidatorInterface;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionAction;
-use Sylius\Bundle\ShopBundle\SectionResolver\ShopSection;
-use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
-use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
