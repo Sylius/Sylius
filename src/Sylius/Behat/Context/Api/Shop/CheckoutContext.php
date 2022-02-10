@@ -589,6 +589,24 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should see :firstPaymentMethodName and :secondPaymentMethodName payment methods
+     */
+    public function iShouldSeeAndPaymentMethods(string $firstPaymentMethodName, string $secondPaymentMethodName): void
+    {
+        $paymentMethods = $this->getPossiblePaymentMethods();
+
+        Assert::true(
+            array_search($firstPaymentMethodName, array_column($paymentMethods, 'name'), true),
+            sprintf('There is no %s payment method', $firstPaymentMethodName)
+        );
+
+        Assert::true(
+            array_search($secondPaymentMethodName, array_column($paymentMethods, 'name'), true),
+            sprintf('There is no %s payment method', $secondPaymentMethodName)
+        );
+    }
+
+    /**
      * @Then I should have :paymentMethodName payment method available as the :choice choice
      */
     public function iShouldHavePaymentMethodAvailableAsTheChoice(string $paymentMethodName, string $choice): void
