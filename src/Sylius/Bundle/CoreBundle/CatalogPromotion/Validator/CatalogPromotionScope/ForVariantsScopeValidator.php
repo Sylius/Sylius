@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionScope;
 
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\Constraints\CatalogPromotionScope;
 use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScope\ScopeValidatorInterface;
+use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionScope;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -33,7 +33,11 @@ final class ForVariantsScopeValidator implements ScopeValidatorInterface
 
         foreach ($configuration['variants'] as $variantCode) {
             if (null === $this->variantRepository->findOneBy(['code' => $variantCode])) {
-                $context->buildViolation($constraint->invalidVariants)->atPath('configuration.variants')->addViolation();
+                $context
+                    ->buildViolation('sylius.catalog_promotion_scope.for_variants.invalid_variants')
+                    ->atPath('configuration.variants')
+                    ->addViolation()
+                ;
 
                 return;
             }

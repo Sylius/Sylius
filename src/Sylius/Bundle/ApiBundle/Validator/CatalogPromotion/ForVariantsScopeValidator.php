@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Validator\CatalogPromotion;
 
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\Constraints\CatalogPromotionScope;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScope\ScopeValidatorInterface;
+use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionScope;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Webmozart\Assert\Assert;
@@ -38,7 +38,11 @@ final class ForVariantsScopeValidator implements ScopeValidatorInterface
             $this->sectionProvider->getSection() instanceof AdminApiSection &&
             (!isset($configuration['variants']) || empty($configuration['variants']))
         ) {
-            $context->buildViolation($constraint->variantsNotEmpty)->atPath('configuration.variants')->addViolation();
+            $context
+                ->buildViolation('sylius.catalog_promotion_scope.for_variants.not_empty')
+                ->atPath('configuration.variants')
+                ->addViolation()
+            ;
 
             return;
         }
