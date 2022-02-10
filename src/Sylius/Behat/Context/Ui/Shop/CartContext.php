@@ -386,8 +386,8 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I view my cart
-     * @Then they view their cart
+     * @When I view my cart
+     * @When they view their cart
      */
     public function iViewMyCart(): void
     {

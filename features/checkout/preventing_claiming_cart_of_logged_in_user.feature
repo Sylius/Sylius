@@ -14,7 +14,7 @@ Feature: Preventing claiming cart of logged in user
         And the store allows paying offline
         And there is a user "robb@stark.com" identified by "KingInTheNorth"
 
-    @ui
+    @ui @no-api
     Scenario: Preventing anonymous user from claiming cart of logged in user
         Given I am logged in as "robb@stark.com"
         And I have product "PHP T-Shirt" in the cart
@@ -23,7 +23,7 @@ Feature: Preventing claiming cart of logged in user
         And they added product "Symfony T-Shirt" to the cart
         Then theirs cart total should be "$150.00"
 
-    @ui
+    @ui @no-api
     Scenario: Preventing anonymous user from claiming cart of logged in user
         Given I am logged in as "robb@stark.com"
         And I have product "PHP T-Shirt" in the cart
@@ -34,7 +34,7 @@ Feature: Preventing claiming cart of logged in user
         Then there should be one item in my cart
         And my cart's total should be "$20.00"
 
-    @ui
+    @ui @no-api
     Scenario: Preventing logged in user from claiming cart of anonymous user
         Given an anonymous user added product "Kotlin T-Shirt" to the cart
         And they have completed addressing step with email "robb@stark.com" and "United States" based billing address
