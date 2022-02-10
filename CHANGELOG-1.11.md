@@ -1,5 +1,33 @@
 # CHANGELOG FOR `1.11.X`
 
+## v1.11.0-RC.1 (2022-02-10)
+
+#### TL;DR
+
+Final fixes for Catalog Promotions' system
+
+#### Details
+
+- [#13431](https://github.com/Sylius/Sylius/issues/13431) FIX: Avoid passing empty needle to strpos() ([@rimas-kudelis](https://github.com/rimas-kudelis))
+- [#13588](https://github.com/Sylius/Sylius/issues/13588) Use semantic ui view instead of deprecated semantic_ui_translated ([@loic425](https://github.com/loic425))
+- [#13604](https://github.com/Sylius/Sylius/issues/13604) [CatalogPromotion][UI][Shop] Fixed label displaying after option change ([@Rafikooo](https://github.com/Rafikooo))
+- [#13606](https://github.com/Sylius/Sylius/issues/13606) [Catalog Promotion] Add exclusive flag to UI ([@AdamKasp](https://github.com/AdamKasp))
+- [#13607](https://github.com/Sylius/Sylius/issues/13607) [Catalog Promotion][UI] Fixed error when trying to save catalog promotion with empty percentage discount value ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13608](https://github.com/Sylius/Sylius/issues/13608) [Catalog Promotion] Improve fixtures ([@AdamKasp](https://github.com/AdamKasp))
+- [#13611](https://github.com/Sylius/Sylius/issues/13611) Optimize variant autocomplete selector ([@rafal](https://github.com/rafal).[@swierczek](https://github.com/swierczek)@[@drophub](https://github.com/drophub).[@pl](https://github.com/pl))
+- [#13614](https://github.com/Sylius/Sylius/issues/13614) [Maintenance] Add info about messenger transport and api_platform directory to UPGRADE files ([@GSadee](https://github.com/GSadee))
+- [#13616](https://github.com/Sylius/Sylius/issues/13616) [Behat][API] Fixed adding simple product scenarios ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13620](https://github.com/Sylius/Sylius/issues/13620) Changes in Catalog Promotions validation ([@Zales0123](https://github.com/Zales0123))
+- [#13623](https://github.com/Sylius/Sylius/issues/13623) [Core] Reorganize namespaces of services related with catalog promotions ([@GSadee](https://github.com/GSadee))
+- [#13624](https://github.com/Sylius/Sylius/issues/13624) [CatalogPromotions] Refactor processing catalog promotions states to use commands ([@GSadee](https://github.com/GSadee))
+- [#13626](https://github.com/Sylius/Sylius/issues/13626) [Behat][Api] Second part of fixing simple product creation in api tests ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13627](https://github.com/Sylius/Sylius/issues/13627) Move ScopeValidatorInterface to PromotionBundle ([@Zales0123](https://github.com/Zales0123))
+- [#13629](https://github.com/Sylius/Sylius/issues/13629) [Catalog Promotion] Fix priorities fixtures ([@AdamKasp](https://github.com/AdamKasp))
+- [#13630](https://github.com/Sylius/Sylius/issues/13630) [Docs][Catalog Promotion] Warning added to docs ([@AdamKasp](https://github.com/AdamKasp))
+- [#13633](https://github.com/Sylius/Sylius/issues/13633) [UPGRADE] Add more details about PHP, mocker container and api platform folder ([@lchrusciel](https://github.com/lchrusciel))
+- [#13635](https://github.com/Sylius/Sylius/issues/13635) [Docs] Drop warning about active, not applied promotions as states are handled in async manner as well ([@lchrusciel](https://github.com/lchrusciel))
+- [#13637](https://github.com/Sylius/Sylius/issues/13637) [CatalogPromotion] Move scope validator and constraint to PromotionBundle ([@GSadee](https://github.com/GSadee)
+
 ## v1.11.0-BETA.1 (2022-02-04)
 
 #### TL;DR
