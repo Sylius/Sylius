@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
-use Sylius\Bundle\CoreBundle\Calculator\FixedDiscountPriceCalculator;
-use Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator;
-use Sylius\Bundle\CoreBundle\Checker\InForProductScopeVariantChecker;
-use Sylius\Bundle\CoreBundle\Checker\InForTaxonsScopeVariantChecker;
-use Sylius\Bundle\CoreBundle\Checker\InForVariantsScopeVariantChecker;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPriceCalculator;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForProductScopeVariantChecker;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForTaxonsScopeVariantChecker;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForVariantsScopeVariantChecker;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;

@@ -40,7 +40,7 @@ And the code for the calculator itself:
     namespace App\Calculator;
 
     use App\Model\CatalogPromotionActionInterface;
-    use Sylius\Bundle\CoreBundle\Calculator\ActionBasedPriceCalculatorInterface;
+    use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\ActionBasedPriceCalculatorInterface;
     use Sylius\Component\Core\Model\ChannelPricingInterface;
     use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface as BaseCatalogPromotionActionInterface;
 

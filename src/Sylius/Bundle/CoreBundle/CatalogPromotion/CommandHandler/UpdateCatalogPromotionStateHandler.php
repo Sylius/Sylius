@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler;
 
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\UpdateCatalogPromotionState;
-use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionStateProcessorInterface;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionStateProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 

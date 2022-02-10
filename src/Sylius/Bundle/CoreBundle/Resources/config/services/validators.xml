@@ -63,31 +63,5 @@
         <service id="sylius.validator.channel_default_locale_enabled" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelDefaultLocaleEnabledValidator">
             <tag name="validator.constraint_validator" alias="sylius_channel_default_locale_enabled" />
         </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScopeValidator">
-            <argument>%sylius.catalog_promotion.scopes_types%</argument>
-            <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_validator" index-by="key" />
-            <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_scope" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Validator\CatalogPromotionAction\FixedDiscountActionValidator">
-            <argument type="service" id="sylius.repository.channel" />
-            <tag name="sylius.catalog_promotion.action_validator" key="fixed_discount"/>
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ForProductsScopeValidator">
-            <argument type="service" id="sylius.repository.product" />
-            <tag name="sylius.catalog_promotion.scope_validator" key="for_products"/>
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ForTaxonsScopeValidator">
-            <argument type="service" id="sylius.repository.taxon" />
-            <tag name="sylius.catalog_promotion.scope_validator" key="for_taxons"/>
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ForVariantsScopeValidator">
-            <argument type="service" id="sylius.repository.product_variant" />
-            <tag name="sylius.catalog_promotion.scope_validator" key="for_variants"/>
-        </service>
     </services>
 </container>
