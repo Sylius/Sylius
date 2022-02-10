@@ -1,5 +1,16 @@
 # UPGRADE FROM `v1.10.X` TO `v1.11.0`
 
+## Preconditions
+
+### PHP8.0 support
+
+Sylius v1.11 comes with bump of minimal dependencies of PHP to v8.0. We strongly advice to make upgrade process step by step,
+so it is highly recommended updating your PHP version being still on Sylius v1.10, as it is supporting both PHP7.4 and PHP8.0.
+
+After ensuring, that previous step succeed, you may move forward to the Sylius v1.11 update.
+
+## Main update
+
 ### "pagerfanta/pagerfanta" semantic_ui_translated removed
 
 The `pagination.html.twig` has been changed to use the Twig view.
@@ -34,9 +45,19 @@ This obvious dev dependency was part of Sylius requirements. In 1.11 we've moved
      }
 ```
 
+If you were using MockerContainer in your app, you should also execute the following command:
+
+```bash
+composer req --dev polishsymfonycommunity/symfony-mocker-container
+```
+
 ### Drop support for PHP 7.4
 
 Due to the drop of support PHP `7.4` Sylius also will not support it since version `1.11`.
+
+### API Platform required folders
+
+If you don't already have, add an empty directory `api_platform` in your `config` directory and customize there any API resources.
 
 ### Potential BC-breaks
 
