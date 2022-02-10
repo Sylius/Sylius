@@ -15,12 +15,6 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\Constraints\CatalogPromotionScopeValidator">
-            <argument>%sylius.catalog_promotion.scopes_types%</argument>
-            <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_validator" index-by="key" />
-            <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_scope" />
-        </service>
-
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionAction\FixedDiscountActionValidator">
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />

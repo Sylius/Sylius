@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionScope;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\Constraints\CatalogPromotionScope;
 use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScope\ScopeValidatorInterface;
+use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionScope;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
