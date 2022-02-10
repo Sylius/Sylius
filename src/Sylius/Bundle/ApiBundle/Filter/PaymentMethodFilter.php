@@ -20,7 +20,7 @@ final class PaymentMethodFilter implements FilterInterface
     public function getDescription(string $resourceClass): array
     {
         return [
-            'PaymentId' => [
+            'paymentId' => [
                 'type' => 'string',
                 'required' => false,
                 'property' => null,

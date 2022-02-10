@@ -7,7 +7,7 @@ Feature: Viewing available payment methods based on current channel
     Background:
         Given the store operates on another channel named "United States" in "USD" currency and with hostname "usa.cool-clothes.example"
         And the store operates on a channel named "Poland" with hostname "polski-sklep.pl"
-        And the store has a zone "World" with code "WRLD"
+        And the store has a zone "World" with code "WORLD"
         And the store ships to "United States"
         And this zone has the "United States" country member
         And the store allows paying "Bank of America" in "United States" channel
@@ -27,7 +27,8 @@ Feature: Viewing available payment methods based on current channel
         When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I complete the shipping step with first shipping method
         Then I should be on the checkout payment step
-        And I should see "Bank of America" and "offline" payment methods
+        And I should see "Bank of America" and "Offline" payment methods
+        But I should not see "Bank of Poland" and "Bank of Universe" payment methods
 
     @api @ui
     Scenario: Seeing shipping methods that are available in another channel as an logged in customer
@@ -37,7 +38,8 @@ Feature: Viewing available payment methods based on current channel
         When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I complete the shipping step with first shipping method
         Then I should be on the checkout payment step
-        And I should see "Bank of Poland" and "offline" payment methods
+        And I should see "Bank of Poland" and "Offline" payment methods
+        But I should not see "Bank of Universe" and "Bank of America" payment methods
 
     @api @ui
     Scenario: Seeing payment methods that are available in channel as a guest
@@ -46,7 +48,8 @@ Feature: Viewing available payment methods based on current channel
         When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I complete the shipping step with first shipping method
         Then I should be on the checkout payment step
-        And I should see "Bank of America" and "offline" payment methods
+        And I should see "Bank of America" and "Offline" payment methods
+        But I should not see "Bank of Poland" and "Bank of Universe" payment methods
 
     @api @ui
     Scenario: Seeing shipping methods that are available in another channel as a guest
@@ -55,4 +58,5 @@ Feature: Viewing available payment methods based on current channel
         When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I complete the shipping step with first shipping method
         Then I should be on the checkout payment step
-        And I should see "Bank of Poland" and "offline" payment methods
+        And I should see "Bank of Poland" and "Offline" payment methods
+        But I should not see "Bank of Universe" and "Bank of America" payment methods

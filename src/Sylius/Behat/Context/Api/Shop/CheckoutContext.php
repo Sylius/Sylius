@@ -589,21 +589,27 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should see :firstPaymentMethodName and :secondPaymentMethodName payment methods
+     * @Then I should  see :firstPaymentMethodName and :secondPaymentMethodName payment methods
      */
     public function iShouldSeeAndPaymentMethods(string $firstPaymentMethodName, string $secondPaymentMethodName): void
     {
         $paymentMethods = $this->getPossiblePaymentMethods();
 
-        Assert::true(
-            array_search($firstPaymentMethodName, array_column($paymentMethods, 'name'), true),
-            sprintf('There is no %s payment method', $firstPaymentMethodName)
-        );
+        Assert::inArray($firstPaymentMethodName, array_column($paymentMethods, 'name'));
 
-        Assert::true(
-            array_search($secondPaymentMethodName, array_column($paymentMethods, 'name'), true),
-            sprintf('There is no %s payment method', $secondPaymentMethodName)
-        );
+        Assert::inArray($secondPaymentMethodName, array_column($paymentMethods, 'name'));
+    }
+
+    /**
+     * @Then I should not see :firstPaymentMethodName and :secondPaymentMethodName payment methods
+     */
+    public function iShouldNotSeeAndPaymentMethods(string $firstPaymentMethodName, string $secondPaymentMethodName): void
+    {
+        $paymentMethods = $this->getPossiblePaymentMethods();
+
+        Assert::false(in_array($firstPaymentMethodName, array_column($paymentMethods, 'name'), true));
+
+        Assert::false(in_array($secondPaymentMethodName, array_column($paymentMethods, 'name'), true));
     }
 
     /**
@@ -1260,12 +1266,13 @@ final class CheckoutContext implements Context
             return [];
         }
 
-        $request = Request::customItemAction(
-            'shop',
-            'orders',
-            $this->sharedStorage->get('cart_token'),
-            HTTPRequest::METHOD_GET,
-            sprintf('payments/%s/methods', $order->getLastPayment()->getId())
+        $request = Request::custom(
+            sprintf(
+                '/api/v2/shop/payment-methods?paymentId=%s&tokenValue=%s',
+                $order->getLastPayment()->getId(),
+                $order->getTokenValue()
+            ),
+            HTTPRequest::METHOD_GET
         );
 
         $this->ordersClient->executeCustomRequest($request);
