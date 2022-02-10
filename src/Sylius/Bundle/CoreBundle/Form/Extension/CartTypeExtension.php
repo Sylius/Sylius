@@ -39,7 +39,7 @@ final class CartTypeExtension extends AbstractTypeExtension
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setNormalizer('validation_groups', fn(Options $options, array $validationGroups) => function (FormInterface $form) use ($validationGroups) {
+        $resolver->setNormalizer('validation_groups', fn (Options $options, array $validationGroups) => function (FormInterface $form) use ($validationGroups) {
             if ((bool) $form->get('promotionCoupon')->getNormData()) { // Validate the coupon if it was sent
                 $validationGroups[] = 'sylius_promotion_coupon';
             }

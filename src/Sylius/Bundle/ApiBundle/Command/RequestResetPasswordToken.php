@@ -16,19 +16,13 @@ namespace Sylius\Bundle\ApiBundle\Command;
 /** @experimental */
 class RequestResetPasswordToken implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $email;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     public $channelCode;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     public $localeCode;
 
     public function __construct(string $email)

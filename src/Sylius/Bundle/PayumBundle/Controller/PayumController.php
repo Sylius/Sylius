@@ -105,7 +105,7 @@ final class PayumController
 
         $token = $this->getHttpRequestVerifier()->verify($request);
 
-        /** @var Generic&GetStatusInterface $status */
+        /** @var Generic|GetStatusInterface $status */
         $status = $this->getStatusRequestFactory->createNewWithModel($token);
         $this->payum->getGateway($token->getGatewayName())->execute($status);
 

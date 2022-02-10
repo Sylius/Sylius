@@ -21,16 +21,16 @@ class PaymentSecurityToken implements PaymentSecurityTokenInterface
     protected $hash;
 
     /** @var object|null */
-    protected $details = null;
+    protected $details;
 
     /** @var string|null */
-    protected $afterUrl = null;
+    protected $afterUrl;
 
     /** @var string|null */
-    protected $targetUrl = null;
+    protected $targetUrl;
 
     /** @var string|null */
-    protected $gatewayName = null;
+    protected $gatewayName;
 
     public function __construct()
     {

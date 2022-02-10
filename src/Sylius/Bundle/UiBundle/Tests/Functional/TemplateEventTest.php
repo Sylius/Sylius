@@ -15,7 +15,6 @@ namespace Sylius\Bundle\UiBundle\Tests\Functional;
 
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Twig\Environment;
 
 final class TemplateEventTest extends KernelTestCase
 {

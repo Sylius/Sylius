@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Faker\Generator;
 use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\AvatarImage;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
@@ -101,8 +101,8 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('email', fn(Options $options): string => $this->faker->email)
-            ->setDefault('username', fn(Options $options): string => $this->faker->firstName . ' ' . $this->faker->lastName)
+            ->setDefault('email', fn (Options $options): string => $this->faker->email)
+            ->setDefault('username', fn (Options $options): string => $this->faker->firstName . ' ' . $this->faker->lastName)
             ->setDefault('enabled', true)
             ->setAllowedTypes('enabled', 'bool')
             ->setDefault('password', 'password123')

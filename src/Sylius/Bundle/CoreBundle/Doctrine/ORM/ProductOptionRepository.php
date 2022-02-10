@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Mapping;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionRepository as BaseProductOptionRepository;
 use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
