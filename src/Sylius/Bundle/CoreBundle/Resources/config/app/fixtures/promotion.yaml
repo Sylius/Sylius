@@ -49,6 +49,7 @@ sylius_fixtures:
                                 name: 'Winter sale'
                                 channels:
                                     - 'FASHION_WEB'
+                                priority: 1
                                 scopes:
                                     -   type: 'for_variants'
                                         configuration:
@@ -65,7 +66,7 @@ sylius_fixtures:
                                 name: 'Spring sale'
                                 channels:
                                     - 'FASHION_WEB'
-                                priority: 100
+                                priority: 3
                                 scopes:
                                     -   type: 'for_taxons'
                                         configuration:
@@ -82,7 +83,7 @@ sylius_fixtures:
                                 channels:
                                     - 'FASHION_WEB'
                                 exclusive: true
-                                priority: 30
+                                priority: 4
                                 scopes:
                                     -   type: 'for_variants'
                                         configuration:
@@ -99,6 +100,7 @@ sylius_fixtures:
                                 end_date: '10 days'
                                 channels:
                                     - 'FASHION_WEB'
+                                priority: 2
                                 scopes:
                                     -   type: 'for_products'
                                         configuration:
