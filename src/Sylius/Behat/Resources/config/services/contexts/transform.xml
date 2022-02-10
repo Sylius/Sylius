@@ -93,6 +93,10 @@
             <argument type="service" id="sylius.repository.product_option" />
         </service>
 
+        <service id="sylius.behat.context.transform.product_option_value" class="Sylius\Behat\Context\Transform\ProductOptionValueContext">
+            <argument type="service" id="sylius.repository.product_option_value" />
+        </service>
+
         <service id="sylius.behat.context.transform.product_review" class="Sylius\Behat\Context\Transform\ProductReviewContext">
             <argument type="service" id="sylius.repository.product_review" />
         </service>
