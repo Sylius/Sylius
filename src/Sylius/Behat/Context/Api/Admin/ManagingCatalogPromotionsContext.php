@@ -631,6 +631,21 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I edit it to have empty amount of percentage discount
+     */
+    public function iEditItToHaveEmptyPercentageDiscount(): void
+    {
+        $content = $this->client->getContent();
+
+        $content['actions'] = [[
+            'type' => PercentageDiscountPriceCalculator::TYPE,
+            'configuration' => ['amount' => ''],
+        ]];
+
+        $this->client->setRequestData($content);
+    }
+
+    /**
      * @When I add catalog promotion scope with nonexistent type
      */
     public function iAddCatalogPromotionScopeWithNonexistentType(): void
