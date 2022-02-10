@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Validator\CatalogPromotion;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ScopeValidatorInterface;
@@ -48,9 +49,28 @@ final class ForTaxonsScopeValidatorSpec extends ObjectBehavior
         $constraintViolationBuilder->atPath('configuration.taxons')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
-        $baseScopeValidator->validate([], $constraint, $executionContext)->shouldNotBeCalled();
+        $baseScopeValidator->validate(Argument::any())->shouldNotBeCalled();
 
         $this->validate([], $constraint, $executionContext);
+    }
+
+    function it_adds_violation_if_catalog_promotion_scope_does_not_have_taxons_key_defined(
+        ScopeValidatorInterface $baseScopeValidator,
+        SectionProviderInterface $sectionProvider,
+        ExecutionContextInterface $executionContext,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder
+    ): void {
+        $constraint = new CatalogPromotionScope();
+
+        $sectionProvider->getSection()->willReturn(new AdminApiSection());
+
+        $executionContext->buildViolation('sylius.catalog_promotion_scope.for_taxons.not_empty')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('configuration.taxons')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+
+        $baseScopeValidator->validate(Argument::any())->shouldNotBeCalled();
+
+        $this->validate(['taxons' => []], $constraint, $executionContext);
     }
 
     function it_does_nothing_if_catalog_promotion_scope_is_valid(

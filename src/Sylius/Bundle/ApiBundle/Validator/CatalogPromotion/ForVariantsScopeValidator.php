@@ -35,13 +35,10 @@ final class ForVariantsScopeValidator implements ScopeValidatorInterface
         /** @var CatalogPromotionScope $constraint */
         Assert::isInstanceOf($constraint, CatalogPromotionScope::class);
 
-        if (!$this->sectionProvider->getSection() instanceof AdminApiSection) {
-            $this->baseScopeValidator->validate($configuration, $constraint, $context);
-
-            return;
-        }
-
-        if (!array_key_exists('variants', $configuration) || empty($configuration['variants'])) {
+        if (
+            $this->sectionProvider->getSection() instanceof AdminApiSection &&
+            (!isset($configuration['variants']) || empty($configuration['variants']))
+        ) {
             $context->buildViolation($constraint->variantsNotEmpty)->atPath('configuration.variants')->addViolation();
 
             return;

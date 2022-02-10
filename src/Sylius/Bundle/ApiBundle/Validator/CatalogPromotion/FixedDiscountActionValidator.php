@@ -34,22 +34,20 @@ final class FixedDiscountActionValidator implements ActionValidatorInterface
 
     public function validate(array $configuration, Constraint $constraint, ExecutionContextInterface $context): void
     {
+        /** @var CatalogPromotionAction $constraint */
+        Assert::isInstanceOf($constraint, CatalogPromotionAction::class);
+
         if (!$this->sectionProvider->getSection() instanceof AdminApiSection) {
             $this->baseActionValidator->validate($configuration, $constraint, $context);
 
             return;
         }
 
-        /** @var CatalogPromotionAction $constraint */
-        Assert::isInstanceOf($constraint, CatalogPromotionAction::class);
-
         if (empty($configuration)) {
             $context->buildViolation('sylius.catalog_promotion_action.fixed_discount.not_valid')->atPath('configuration')->addViolation();
 
             return;
         }
-
-        $this->baseActionValidator->validate($configuration, $constraint, $context);
 
         foreach ($configuration as $channelConfiguration) {
             if ($this->isChannelAmountValid($channelConfiguration)) {
@@ -58,6 +56,8 @@ final class FixedDiscountActionValidator implements ActionValidatorInterface
                 return;
             }
         }
+
+        $this->baseActionValidator->validate($configuration, $constraint, $context);
     }
 
     private function isChannelAmountValid(array $channelConfiguration): bool

@@ -70,6 +70,23 @@ final class ForProductsScopeValidatorSpec extends ObjectBehavior
         $this->validate([], new CatalogPromotionScope(), $executionContext);
     }
 
+    function it_adds_violation_if_catalog_promotion_scope_does_not_have_products_key_defined(
+        ScopeValidatorInterface $baseScopeValidator,
+        SectionProviderInterface $sectionProvider,
+        ExecutionContextInterface $executionContext,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder
+    ): void {
+        $sectionProvider->getSection()->willReturn(new AdminApiSection());
+
+        $executionContext->buildViolation('sylius.catalog_promotion_scope.for_products.not_empty')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('configuration.products')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+
+        $baseScopeValidator->validate(Argument::any())->shouldNotBeCalled();
+
+        $this->validate(['products' => []], new CatalogPromotionScope(), $executionContext);
+    }
+
     function it_does_nothing_if_catalog_promotion_scope_is_valid(
         ScopeValidatorInterface $baseScopeValidator,
         SectionProviderInterface $sectionProvider,

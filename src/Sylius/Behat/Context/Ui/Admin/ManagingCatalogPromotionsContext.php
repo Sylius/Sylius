@@ -619,7 +619,7 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @Then I should be notified that a discount amount is not valid
      */
-    public function iShouldBeNotifiedThatADiscountAmountIsNotValie(): void
+    public function iShouldBeNotifiedThatADiscountAmountIsNotValid(): void
     {
         Assert::same($this->formElement->getValidationMessage(), 'This value is not valid.');
     }
@@ -630,7 +630,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldBeNotifiedThatADiscountAmountShouldBeConfiguredForAtLeasOneChannel(): void
     {
         Assert::true($this->formElement->hasValidationMessage(
-            'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.'
+            'Configuration for one of the required channels is not provided.'
         ));
     }
 

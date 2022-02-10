@@ -32,16 +32,13 @@ final class ForTaxonsScopeValidator implements ScopeValidatorInterface
 
     public function validate(array $configuration, Constraint $constraint, ExecutionContextInterface $context): void
     {
-        if (!$this->sectionProvider->getSection() instanceof AdminApiSection) {
-            $this->baseScopeValidator->validate($configuration, $constraint, $context);
-
-            return;
-        }
-
         /** @var CatalogPromotionScope $constraint */
         Assert::isInstanceOf($constraint, CatalogPromotionScope::class);
 
-        if (!isset($configuration['taxons']) || empty($configuration['taxons'])) {
+        if (
+            $this->sectionProvider->getSection() instanceof AdminApiSection &&
+            (!isset($configuration['taxons']) || empty($configuration['taxons']))
+        ) {
             $context->buildViolation($constraint->taxonsNotEmpty)->atPath('configuration.taxons')->addViolation();
 
             return;

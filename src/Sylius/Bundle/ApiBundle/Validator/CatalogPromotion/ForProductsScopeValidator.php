@@ -34,13 +34,10 @@ final class ForProductsScopeValidator implements ScopeValidatorInterface
         /** @var CatalogPromotionScope $constraint */
         Assert::isInstanceOf($constraint, CatalogPromotionScope::class);
 
-        if (!$this->sectionProvider->getSection() instanceof AdminApiSection) {
-            $this->baseScopeValidator->validate($configuration, $constraint, $context);
-
-            return;
-        }
-
-        if (!isset($configuration['products']) || empty($configuration['products'])) {
+        if (
+            $this->sectionProvider->getSection() instanceof AdminApiSection &&
+            (!isset($configuration['products']) || empty($configuration['products']))
+        ) {
             $context->buildViolation($constraint->productsNotEmpty)->atPath('configuration.products')->addViolation();
 
             return;

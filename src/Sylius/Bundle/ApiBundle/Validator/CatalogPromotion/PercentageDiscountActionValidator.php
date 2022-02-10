@@ -36,7 +36,7 @@ final class PercentageDiscountActionValidator implements ActionValidatorInterfac
         /** @var CatalogPromotionAction $constraint */
         Assert::isInstanceOf($constraint, CatalogPromotionAction::class);
 
-        if (!array_key_exists('amount', $configuration)) {
+        if (!isset($configuration['amount'])) {
             $context->buildViolation($constraint->notNumberOrEmpty)->atPath('configuration.amount')->addViolation();
 
             return;
