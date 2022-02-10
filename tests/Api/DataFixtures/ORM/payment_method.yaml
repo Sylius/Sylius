@@ -6,14 +6,14 @@ Sylius\Component\Core\Model\PaymentMethod:
         currentLocale: 'en_US'
         translations:
             - '@payment_method_cash_on_delivery_translation'
-        channels: ['@channel_web', '@channel_mobile']
+        channels: ['@channel_web']
     payment_method_bank_transfer:
         code: 'BANK_TRANSFER'
         enabled: true
         gatewayConfig: '@gateway_offline'
         translations:
             - '@payment_method_bank_transfer_translation'
-        channels: ['@channel_web', '@channel_mobile']
+        channels: ['@channel_web']
 
 Sylius\Bundle\PayumBundle\Model\GatewayConfig:
     gateway_offline:

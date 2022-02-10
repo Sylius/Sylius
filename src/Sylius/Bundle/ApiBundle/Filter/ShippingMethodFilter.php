@@ -35,7 +35,7 @@ final class ShippingMethodFilter implements FilterInterface
                 'property' => null,
                 'swagger' => [
                     'name' => 'Order',
-                    'description' => 'Id of order for which you would like to check available shipping methods. Should be set if you are checking shipping methods for shipment, that is not assigned to user.',
+                    'description' => 'Token of an order for which you would like to check available shipping methods. Should be set if you are checking shipping methods for shipment, that is not assigned to user.',
                 ],
             ],
         ];

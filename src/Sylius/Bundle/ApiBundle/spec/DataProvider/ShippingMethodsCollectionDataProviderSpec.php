@@ -17,81 +17,64 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-final class CartShippingMethodsCollectionDataProviderSpec extends ObjectBehavior
+final class ShippingMethodsCollectionDataProviderSpec extends ObjectBehavior
 {
     function let(
-        OrderRepositoryInterface $orderRepository,
         ShipmentRepositoryInterface $shipmentRepository,
         ShippingMethodRepositoryInterface $shippingMethodsRepository,
         ShippingMethodsResolverInterface $shippingMethodsResolver,
         ChannelContextInterface $channelContext
     ): void {
-        $this->beConstructedWith($orderRepository, $shipmentRepository, $shippingMethodsRepository, $shippingMethodsResolver, $channelContext);
+        $this->beConstructedWith($shipmentRepository, $shippingMethodsRepository, $shippingMethodsResolver, $channelContext);
     }
 
-    function it_supports_shipping(): void
+    function it_supports_shipping_methods_interface_and_only_shop_context(): void
     {
         $this
             ->supports(
                 ShippingMethodInterface::class,
                 Request::METHOD_GET,
-                ['filters' => ['tokenValue' => '666', 'shipmentId' => '999']],
+                [
+                    'collection_operation_name' => 'shop_get',
+                    'filters' => ['tokenValue' => '666', 'shipmentId' => '999']
+                ],
             )
             ->shouldReturn(true)
         ;
-    }
-
-    function it_doesnt_throw_the_exception_if_cart_doesnt_exists(
-        OrderRepositoryInterface $orderRepository,
-        ChannelInterface $channel,
-        ChannelContextInterface $channelContext
-    ): void {
-        $channelContext->getChannel()->willReturn($channel);
-        $orderRepository->findCartByTokenValueAndChannel('666', $channel)->willReturn(null);
 
         $this
-            ->shouldNotThrow(\InvalidArgumentException::class)
-            ->during('getCollection', [
+            ->supports(
                 ShippingMethodInterface::class,
                 Request::METHOD_GET,
-                ['filters' => ['tokenValue' => '666', 'shipmentId' => '999']],
-            ])
+                [
+                    'collection_operation_name' => 'admin_get',
+                    'filters' => ['tokenValue' => '666', 'shipmentId' => '999']
+                ],
+            )
+            ->shouldReturn(false)
+        ;
+
+        $this
+            ->supports(
+                ChannelContextInterface::class,
+                Request::METHOD_GET,
+                [
+                    'collection_operation_name' => 'shop_get',
+                    'filters' => ['tokenValue' => '666', 'shipmentId' => '999']
+                ],
+            )
+            ->shouldReturn(false)
         ;
     }
 
-    function it_doesnt_throw_an_exception_if_shipment_doesnt_exist(
-        OrderRepositoryInterface $orderRepository,
-        ShipmentRepositoryInterface $shipmentRepository,
-        OrderInterface $cart,
-        ChannelInterface $channel,
-        ChannelContextInterface $channelContext
-    ): void {
-        $channelContext->getChannel()->willReturn($channel);
-        $orderRepository->findCartByTokenValueAndChannel('666', $channel)->willReturn($cart);
-        $cart->getId()->willReturn('111');
-        $shipmentRepository->findOneByOrderId('999', '111')->willReturn(null);
-
-        $this
-            ->shouldNotThrow(\InvalidArgumentException::class)
-            ->during('getCollection', [
-                ShippingMethodInterface::class,
-                Request::METHOD_GET,
-                ['filters' => ['tokenValue' => '666', 'shipmentId' => '999']],
-            ])
-        ;
-    }
-
-    function it_returns_an_empty_array_if_cart_not_found(
-        OrderRepositoryInterface $orderRepository,
+    function it_returns_an_empty_array_if_token_not_provided(
         ShipmentRepositoryInterface $shipmentRepository,
         OrderInterface $cart,
         ShipmentInterface $shipment,
@@ -101,8 +84,7 @@ final class CartShippingMethodsCollectionDataProviderSpec extends ObjectBehavior
     ): void {
         $channelContext->getChannel()->willReturn($channel);
 
-        $orderRepository->findCartByTokenValueAndChannel('666', $channel)->willReturn(null);
-        $shipmentRepository->findOneByOrderId('999', null)->willReturn($shipment);
+        $shipmentRepository->findOneByOrderTokenAndChannel('999', '', $channel)->willReturn(null);
 
         $cart->hasShipment($shipment)->willReturn(false);
         $shippingMethodsResolver->getSupportedMethods($shipment)->willReturn([]);
@@ -112,15 +94,14 @@ final class CartShippingMethodsCollectionDataProviderSpec extends ObjectBehavior
                 ShippingMethodInterface::class,
                 Request::METHOD_GET,
                 [
-                    'filters' => ['tokenValue' => '666', 'shipmentId' => '999'],
+                    'filters' => ['tokenValue' => '', 'shipmentId' => '999'],
                 ],
             )
             ->shouldReturn([])
         ;
     }
 
-    function it_returns_an_empty_array_if_shipping_not_found(
-        OrderRepositoryInterface $orderRepository,
+    function it_returns_an_empty_array_if_shipment_id_not_provided(
         ShipmentRepositoryInterface $shipmentRepository,
         OrderInterface $cart,
         ShipmentInterface $shipment,
@@ -130,9 +111,7 @@ final class CartShippingMethodsCollectionDataProviderSpec extends ObjectBehavior
     ): void {
         $channelContext->getChannel()->willReturn($channel);
 
-        $orderRepository->findCartByTokenValueAndChannel('666', $channel)->willReturn($cart);
-        $cart->getId()->willReturn('111');
-        $shipmentRepository->findOneByOrderId('999', '111')->willReturn(null);
+        $shipmentRepository->findOneByOrderTokenAndChannel('', '666', $channel)->willReturn(null);
 
         $cart->hasShipment($shipment)->willReturn(false);
         $shippingMethodsResolver->getSupportedMethods($shipment)->willReturn([]);
@@ -142,15 +121,14 @@ final class CartShippingMethodsCollectionDataProviderSpec extends ObjectBehavior
                 ShippingMethodInterface::class,
                 Request::METHOD_GET,
                 [
-                    'filters' => ['tokenValue' => '666', 'shipmentId' => '999'],
+                    'filters' => ['tokenValue' => '666', 'shipmentId' => ''],
                 ],
             )
             ->shouldReturn([])
         ;
     }
 
-    function it_returns_cart_shipping_methods(
-        OrderRepositoryInterface $orderRepository,
+    function it_returns_shipping_methods_resolved_based_on_given_shipment_and_order(
         ShipmentRepositoryInterface $shipmentRepository,
         ShippingMethodsResolverInterface $shippingMethodsResolver,
         OrderInterface $cart,
@@ -161,9 +139,8 @@ final class CartShippingMethodsCollectionDataProviderSpec extends ObjectBehavior
     ): void {
         $channelContext->getChannel()->willReturn($channel);
 
-        $orderRepository->findCartByTokenValueAndChannel('666', $channel)->willReturn($cart);
-        $cart->getId()->willReturn('111');
-        $shipmentRepository->findOneByOrderId('999', '111')->willReturn($shipment);
+        $shipmentRepository->findOneByOrderTokenAndChannel('999', '666', $channel)->willReturn($shipment);
+
         $cart->hasShipment($shipment)->willReturn(true);
         $cart->hasShipments()->willReturn(true);
 
@@ -176,6 +153,26 @@ final class CartShippingMethodsCollectionDataProviderSpec extends ObjectBehavior
                 [
                     'filters' => ['tokenValue' => '666', 'shipmentId' => '999'],
                 ],
+            )
+            ->shouldReturn([$shippingMethod])
+        ;
+    }
+
+    function it_returns_all_shipping_methods_for_channel_if_no_parameters_provided(
+        ChannelContextInterface $channelContext,
+        ChannelInterface $channel,
+        ShippingMethodRepositoryInterface $shippingMethodsRepository,
+        ShippingMethodInterface $shippingMethod
+
+    ): void {
+        $channelContext->getChannel()->willReturn($channel);
+
+        $shippingMethodsRepository->findEnabledForChannel($channel)->willReturn([$shippingMethod]);
+
+        $this
+            ->getCollection(
+                ShippingMethodInterface::class,
+                Request::METHOD_GET
             )
             ->shouldReturn([$shippingMethod])
         ;

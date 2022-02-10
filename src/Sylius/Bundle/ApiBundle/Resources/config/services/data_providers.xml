@@ -58,8 +58,7 @@
             <tag name="api_platform.item_data_provider" priority="10" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\DataProvider\CartShippingMethodsCollectionDataProvider">
-            <argument type="service" id="sylius.repository.order" />
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\ShippingMethodsCollectionDataProvider">
             <argument type="service" id="sylius.repository.shipment" />
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.shipping_methods_resolver" />

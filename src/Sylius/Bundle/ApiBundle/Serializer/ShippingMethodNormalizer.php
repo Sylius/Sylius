@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use ApiPlatform\Core\Util\RequestParser;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
@@ -21,7 +23,6 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
@@ -34,24 +35,13 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
 
     private const ALREADY_CALLED = 'sylius_shipping_method_normalizer_already_called';
 
-    private OrderRepositoryInterface $orderRepository;
-
-    private ShipmentRepositoryInterface $shipmentRepository;
-
-    private ServiceRegistryInterface $shippingCalculators;
-
-    private RequestStack $requestStack;
-
     public function __construct(
-        OrderRepositoryInterface $orderRepository,
-        ShipmentRepositoryInterface $shipmentRepository,
-        ServiceRegistryInterface $shippingCalculators,
-        RequestStack $requestStack
+        private OrderRepositoryInterface $orderRepository,
+        private ShipmentRepositoryInterface $shipmentRepository,
+        private ServiceRegistryInterface $shippingCalculators,
+        private RequestStack $requestStack,
+        private ChannelContextInterface $channelContext
     ) {
-        $this->orderRepository = $orderRepository;
-        $this->shipmentRepository = $shipmentRepository;
-        $this->shippingCalculators = $shippingCalculators;
-        $this->requestStack = $requestStack;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -63,31 +53,36 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
 
         $request = $this->requestStack->getCurrentRequest();
 
-        if (null === $filters = $request->attributes->get('_api_filters')) {
+        $filters = $request->attributes->get('_api_filters');
+        if (null === $filters) {
             $queryString = RequestParser::getQueryString($request);
             $filters = $queryString ? RequestParser::parseRequestParams($queryString) : null;
         }
 
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        if (!isset($filters)) {
+        if (null === $filters) {
             return $data;
         }
 
-        Assert::keyExists($filters, 'tokenValue');
-        Assert::keyExists($filters, 'shipmentId');
+        if (!isset($filters['tokenValue']) || !isset($filters['shipmentId'])) {
+            return;
+        }
 
-        /** @var ShipmentInterface $shipment */
-        $shipment = $this->shipmentRepository->find($filters['shipmentId']); // Duplication of logic from CartShippingMethodCollectionDataProvider
+        /** @var ChannelInterface $channel */
+        $channel = $this->channelContext->getChannel();
+
+        /** @var OrderInterface|null $cart */
+        $cart = $this->orderRepository->findCartByTokenValueAndChannel($filters['tokenValue'], $channel);
+
+        Assert::notNull($cart);
+
+        /** @var ShipmentInterface|null $shipment */
+        $shipment = $this->shipmentRepository->findOneByOrderId($filters['shipmentId'], $cart->getId());
 
         Assert::notNull($shipment);
 
-        /** @var OrderInterface|null $cart */
-        $cart = $this->orderRepository->findCartByTokenValue($filters['tokenValue']);
-        Assert::notNull($cart);
-
         Assert::true($cart->hasShipment($shipment), 'Shipment doesn\'t match for order');
-
 
         $calculator = $this->shippingCalculators->get($object->getCalculator());
         $data['price'] = $calculator->calculate($shipment, $object->getConfiguration());

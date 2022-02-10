@@ -49,7 +49,7 @@ final class CheckoutContext implements Context
 
     private ApiClientInterface $addressesClient;
 
-    private ApiClientInterface $shippingMethodClient;
+    private ApiClientInterface $shippingMethodsClient;
 
     private ResponseCheckerInterface $responseChecker;
 
@@ -75,7 +75,7 @@ final class CheckoutContext implements Context
     public function __construct(
         ApiClientInterface $ordersClient,
         ApiClientInterface $addressesClient,
-        ApiClientInterface $shippingMethodClient,
+        ApiClientInterface $shippingMethodsClient,
         ResponseCheckerInterface $responseChecker,
         RepositoryInterface $shippingMethodRepository,
         OrderRepositoryInterface $orderRepository,
@@ -88,7 +88,7 @@ final class CheckoutContext implements Context
     ) {
         $this->ordersClient = $ordersClient;
         $this->addressesClient = $addressesClient;
-        $this->shippingMethodClient = $shippingMethodClient;
+        $this->shippingMethodsClient = $shippingMethodsClient;
         $this->responseChecker = $responseChecker;
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->orderRepository = $orderRepository;
@@ -1199,14 +1199,12 @@ final class CheckoutContext implements Context
 
     private function getCartShippingMethods(array $cart): array
     {
-        $request = Request::custom(
-            sprintf('/api/v2/shop/shipping-methods?shipmentId=%s&tokenValue=%s', $cart['shipments'][0]['id'], $cart['tokenValue']),
-            HTTPRequest::METHOD_GET
-        );
+        $this->shippingMethodsClient->index();
+        $this->shippingMethodsClient->addFilter('tokenValue', $cart['tokenValue']);
+        $this->shippingMethodsClient->addFilter('shipmentId', $cart['shipments'][0]['id']);
+        $this->shippingMethodsClient->filter();
 
-        $this->shippingMethodClient->executeCustomRequest($request);
-
-        return $this->responseChecker->getCollection($this->shippingMethodClient->getLastResponse());
+        return $this->responseChecker->getCollection($this->shippingMethodsClient->getLastResponse());
     }
 
     private function hasShippingMethod(ShippingMethodInterface $shippingMethod): bool
