@@ -55,7 +55,7 @@
             <argument type="string">shop</argument>
         </service>
 
-        <service id="sylius.behat.service.session_service" class="Sylius\Behat\Service\SessionManager" public="false">
+        <service id="sylius.behat.service.session_manager" class="Sylius\Behat\Service\SessionManager" public="false">
             <argument type="service" id="behat.mink" />
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.shop_security" />

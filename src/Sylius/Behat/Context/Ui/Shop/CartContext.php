@@ -102,6 +102,7 @@ final class CartContext implements Context
     /**
      * @Then the grand total value should be :total
      * @Then my cart total should be :total
+     * @Then theirs cart total should be :total
      */
     public function myCartTotalShouldBe($total)
     {
@@ -249,6 +250,7 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given /^an anonymous user added (product "([^"]+)") to the cart$/
      * @Given /^I (?:add|added) (this product) to the cart$/
      * @Given /^I have (product "[^"]+") added to the cart$/
      * @Given I added product :product to the cart
@@ -257,6 +259,7 @@ final class CartContext implements Context
      * @Given the customer added :product product to the cart
      * @Given /^I (?:add|added) ("[^"]+" product) to the (cart)$/
      * @When I add product :product to the cart
+     * @When they added product :product to the cart
      */
     public function iAddProductToTheCart(ProductInterface $product): void
     {
@@ -280,7 +283,7 @@ final class CartContext implements Context
     /**
      * @When /^an anonymous user in another browser adds (products "([^"]+)" and "([^"]+)") to the cart$/
      */
-    public function anonymousUserAddsMultipleProductsToTheCart(array $products)
+    public function anonymousUserAddsMultipleProductsToTheCart(array $products): void
     {
         $this->sessionService->changeSession();
 
@@ -383,9 +386,10 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I view cart on my browser
+     * @Then I view my cart
+     * @Then they view their cart
      */
-    public function iViewCartOnMySession(): void
+    public function iViewMyCart(): void
     {
         $this->sessionService->restorePreviousSession();
 

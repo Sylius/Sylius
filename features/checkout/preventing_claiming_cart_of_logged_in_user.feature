@@ -13,13 +13,31 @@ Feature: Preventing claiming cart of logged in user
         And the store ships everywhere for free
         And the store allows paying offline
         And there is a user "robb@stark.com" identified by "KingInTheNorth"
-        And I am logged in as "robb@stark.com"
 
     @ui
-    Scenario: Preventing anonymous user claiming logged in user's cart
-        Given I have product "PHP T-Shirt" in the cart
+    Scenario: Preventing anonymous user from claiming cart of logged in user
+        Given I am logged in as "robb@stark.com"
+        And I have product "PHP T-Shirt" in the cart
         When an anonymous user in another browser adds products "PHP T-Shirt" and "Kotlin T-Shirt" to the cart
-        And he completes addressing step with email "robb@stark.com" and "United States" based billing address
-        And I view cart on my browser
+        And they complete addressing step with email "robb@stark.com" and "United States" based billing address
+        And they added product "Symfony T-Shirt" to the cart
+        Then theirs cart total should be "$150.00"
+
+    @ui
+    Scenario: Preventing anonymous user from claiming cart of logged in user
+        Given I am logged in as "robb@stark.com"
+        And I have product "PHP T-Shirt" in the cart
+        When an anonymous user in another browser adds products "PHP T-Shirt" and "Kotlin T-Shirt" to the cart
+        And they complete addressing step with email "robb@stark.com" and "United States" based billing address
+        And they added product "Symfony T-Shirt" to the cart
+        And I view my cart
         Then there should be one item in my cart
         And my cart's total should be "$20.00"
+
+    @ui
+    Scenario: Preventing logged in user from claiming cart of anonymous user
+        Given an anonymous user added product "Kotlin T-Shirt" to the cart
+        And they have completed addressing step with email "robb@stark.com" and "United States" based billing address
+        When I log in as "robb@stark.com"
+        And I add product "Sylius T-Shirt" to the cart
+        Then my cart's total should be "$150.00"

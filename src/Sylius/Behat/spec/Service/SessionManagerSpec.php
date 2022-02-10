@@ -83,7 +83,7 @@ final class SessionManagerSpec extends ObjectBehavior
         $this->changeSession();
     }
 
-    function it_restores_session_and_token (
+    function it_restores_session_and_token(
         Mink $mink,
         SharedStorageInterface $sharedStorage,
         SecurityServiceInterface $securityService,
@@ -109,7 +109,7 @@ final class SessionManagerSpec extends ObjectBehavior
         $this->restorePreviousSession();
     }
 
-    function it_does_not_restore_session_and_token_if_previous_session_was_never_called (
+    function it_does_not_restore_session_and_token_if_previous_session_was_never_called(
         Mink $mink,
         SharedStorageInterface $sharedStorage,
         SecurityServiceInterface $securityService,

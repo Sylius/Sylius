@@ -217,7 +217,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult()
-            ;
+        ;
     }
 
     public function getTotalSalesForChannel(ChannelInterface $channel): int
