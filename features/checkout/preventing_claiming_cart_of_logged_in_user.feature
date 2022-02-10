@@ -15,7 +15,7 @@ Feature: Preventing claiming cart of logged in user
         And there is a user "robb@stark.com" identified by "KingInTheNorth"
         And I am logged in as "robb@stark.com"
 
-    @ui @javascript
+    @ui
     Scenario: Preventing anonymous user claiming logged in user's cart
         Given I have product "PHP T-Shirt" in the cart
         When an anonymous user in another browser adds products "PHP T-Shirt" and "Kotlin T-Shirt" to the cart
