@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionAction;
 
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction\ActionValidatorInterface;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionAction;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
@@ -59,17 +61,11 @@ final class FixedDiscountActionValidator implements ActionValidatorInterface
 
                 return;
             }
-
-            if (!array_key_exists('amount', $channelConfiguration) || !is_integer($channelConfiguration['amount']) || $channelConfiguration['amount'] < 0) {
-                $context->buildViolation('sylius.catalog_promotion_action.fixed_discount.not_valid')->atPath('configuration')->addViolation();
-
-                return;
-            }
         }
     }
 
     private function isChannelConfigured(string $channelCode, array $configuration): bool
     {
-        return (array_key_exists($channelCode, $configuration) && isset($configuration[$channelCode]['amount']) && $configuration[$channelCode]['amount'] > 0);
+        return (isset($configuration[$channelCode]) && isset($configuration[$channelCode]['amount']));
     }
 }

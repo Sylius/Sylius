@@ -33,17 +33,6 @@ final class ForProductsScopeValidatorSpec extends ObjectBehavior
         $this->shouldHaveType(ScopeValidatorInterface::class);
     }
 
-    function it_adds_violation_if_catalog_promotion_scope_does_not_have_products_key_configured(
-        ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
-    ): void {
-        $executionContext->buildViolation('sylius.catalog_promotion_scope.for_products.not_empty')->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->atPath('configuration.products')->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->addViolation()->shouldBeCalled();
-
-        $this->validate([], new CatalogPromotionScope(), $executionContext);
-    }
-
     function it_adds_violation_if_catalog_promotion_scope_has_not_existing_products_configured(
         ProductRepositoryInterface $productRepository,
         ExecutionContextInterface $executionContext,

@@ -140,12 +140,6 @@ In this validator, we will check the provided configuration for necessary data a
 
                     return;
                 }
-
-                if (!array_key_exists('price', $channelConfiguration) || !is_integer($channelConfiguration['price']) || $channelConfiguration['price'] < 0) {
-                    $context->buildViolation('The provided configuration for channel is not valid.')->atPath('configuration')->addViolation();
-
-                    return;
-                }
             }
         }
     }
@@ -180,6 +174,8 @@ And with the current implementation, as our action is channel-based, you need to
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\OptionsResolver\OptionsResolver;
+    use Symfony\Comp§onent\Validator\Constraints\GreaterThan;
+    use Symfony\Component\Validator\Constraints\NotBlank;
 
     final class FixedPriceActionConfigurationType extends AbstractType
     {
@@ -189,6 +185,17 @@ And with the current implementation, as our action is channel-based, you need to
                 ->add('price', MoneyType::class, [
                     'label' => 'Price',
                     'currency' => $options['currency'],
+                    'constraints' => [
+                        new NotBlank([
+                            'groups' => 'sylius',
+                            'message' => 'Price needs to be set',
+                        ]),
+                        new GreaterThan([
+                            'value' => 0,
+                            'groups' => 'sylius',
+                            'message' => 'Price cannot be lower than 0',
+                        ]),
+                    ],
                 ])
             ;
         }

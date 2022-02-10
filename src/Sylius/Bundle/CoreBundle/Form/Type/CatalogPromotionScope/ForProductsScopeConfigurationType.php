@@ -17,6 +17,7 @@ use Sylius\Bundle\ProductBundle\Form\Type\ProductAutocompleteChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class ForProductsScopeConfigurationType extends AbstractType
 {
@@ -33,6 +34,9 @@ final class ForProductsScopeConfigurationType extends AbstractType
             'choice_name' => 'name',
             'choice_value' => 'code',
             'resource' => 'sylius.product',
+            'constraints' => [
+                new NotBlank(['groups' => 'sylius', 'message' => 'sylius.catalog_promotion_scope.for_products.not_empty'])
+            ],
         ]);
 
         $builder->get('products')->addModelTransformer($this->productsToCodesTransformer);

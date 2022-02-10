@@ -23,6 +23,7 @@
 
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionAction\FixedDiscountActionValidator">
             <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
             <tag name="sylius.catalog_promotion.action_validator" key="fixed_discount"/>
         </service>
 

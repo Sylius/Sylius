@@ -30,12 +30,6 @@ final class ForVariantsScopeValidator implements ScopeValidatorInterface
         /** @var CatalogPromotionScope $constraint */
         Assert::isInstanceOf($constraint, CatalogPromotionScope::class);
 
-        if (!array_key_exists('variants', $configuration) || empty($configuration['variants'])) {
-            $context->buildViolation($constraint->variantsNotEmpty)->atPath('configuration.variants')->addViolation();
-
-            return;
-        }
-
         foreach ($configuration['variants'] as $variantCode) {
             if (null === $this->variantRepository->findOneBy(['code' => $variantCode])) {
                 $context->buildViolation($constraint->invalidVariants)->atPath('configuration.variants')->addViolation();

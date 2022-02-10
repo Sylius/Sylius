@@ -30,12 +30,6 @@ final class ForProductsScopeValidator implements ScopeValidatorInterface
         /** @var CatalogPromotionScope $constraint */
         Assert::isInstanceOf($constraint, CatalogPromotionScope::class);
 
-        if (!isset($configuration['products']) || empty($configuration['products'])) {
-            $context->buildViolation($constraint->productsNotEmpty)->atPath('configuration.products')->addViolation();
-
-            return;
-        }
-
         foreach ($configuration['products'] as $productCode) {
             if (null === $this->productRepository->findOneBy(['code' => $productCode])) {
                 $context->buildViolation($constraint->invalidProducts)->atPath('configuration.products')->addViolation();
