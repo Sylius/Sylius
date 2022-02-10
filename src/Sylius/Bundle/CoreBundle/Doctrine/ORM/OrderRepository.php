@@ -201,7 +201,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function findFirstNotEmptyCartByChannelAndCustomer(
+    public function findFirstNotEmptyAuthorizedCartByChannelAndCustomer(
         ChannelInterface $channel,
         CustomerInterface $customer
     ): ?OrderInterface {
