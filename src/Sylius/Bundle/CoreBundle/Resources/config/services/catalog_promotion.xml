@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="catalog_promotion/applicators.xml" />
+        <import resource="catalog_promotion/calculators.xml" />
+        <import resource="catalog_promotion/checkers.xml" />
+        <import resource="catalog_promotion/command_handlers.xml" />
+        <import resource="catalog_promotion/listeners.xml" />
+        <import resource="catalog_promotion/processors.xml" />
+        <import resource="catalog_promotion/validators.xml" />
+    </imports>
+
+    <services>
+        <defaults public="true" />
+
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\DiscountApplicationCriteria\ExclusiveCriteria">
+            <tag name="sylius.catalog_promotion.applicator_criteria" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\DiscountApplicationCriteria\MinimumPriceCriteria">
+            <tag name="sylius.catalog_promotion.applicator_criteria" />
+        </service>
+        <service
+            id="Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncerInterface"
+            class="Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncer"
+        >
+            <argument type="service" id="sylius.event_bus" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" />
+            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+        </service>
+
+        <service
+            id="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface"
+            class="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandDispatcher\BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher"
+        >
+            <argument type="service" id="sylius.command_bus" />
+            <argument>%sylius_core.catalog_promotions.batch_size%</argument>
+        </service>
+    </services>
+</container>

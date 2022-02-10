@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service
+            id="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\ProductVariantForCatalogPromotionEligibilityInterface"
+            class="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\ProductVariantForCatalogPromotionEligibility"
+        >
+            <argument type="tagged_locator" tag="sylius.catalog_promotion.variant_checker" index-by="type" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\CatalogPromotionEligibilityChecker">
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.criteria" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForProductScopeVariantChecker">
+            <tag name="sylius.catalog_promotion.variant_checker" type="for_products" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForTaxonsScopeVariantChecker">
+            <tag name="sylius.catalog_promotion.variant_checker" type="for_taxons" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForVariantsScopeVariantChecker">
+            <tag name="sylius.catalog_promotion.variant_checker" type="for_variants" />
+        </service>
+    </services>
+</container>

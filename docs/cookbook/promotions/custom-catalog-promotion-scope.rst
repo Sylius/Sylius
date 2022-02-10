@@ -87,8 +87,8 @@ keys to check as well as their corresponding values.
 
     namespace App\Validator\CatalogPromotionScope;
 
-    use Sylius\Bundle\CoreBundle\Validator\CatalogPromotionScope\ScopeValidatorInterface;
-    use Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScope;
+    use Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionScope\ScopeValidatorInterface;
+    use Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\Constraints\CatalogPromotionScope;
     use Symfony\Component\Validator\Constraint;
     use Symfony\Component\Validator\Context\ExecutionContextInterface;
     use Webmozart\Assert\Assert;
