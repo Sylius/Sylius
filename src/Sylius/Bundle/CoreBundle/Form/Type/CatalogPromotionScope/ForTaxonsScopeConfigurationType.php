@@ -17,6 +17,7 @@ use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class ForTaxonsScopeConfigurationType extends AbstractType
 {
@@ -33,6 +34,9 @@ final class ForTaxonsScopeConfigurationType extends AbstractType
             'choice_name' => 'name',
             'choice_value' => 'code',
             'resource' => 'sylius.taxon',
+            'constraints' => [
+                new NotBlank(['groups' => 'sylius', 'message' => 'sylius.catalog_promotion_scope.for_taxons.not_empty'])
+            ],
         ]);
 
         $builder->get('taxons')->addModelTransformer($this->taxonsToCodesTransformer);

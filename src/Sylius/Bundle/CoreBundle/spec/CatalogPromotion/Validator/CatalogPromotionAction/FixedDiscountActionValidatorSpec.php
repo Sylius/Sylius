@@ -67,49 +67,6 @@ final class FixedDiscountActionValidatorSpec extends ObjectBehavior
         $this->validate(['nonexistent_channel' => ['amount' => 1000]], new CatalogPromotionAction(), $executionContext);
     }
 
-    function it_adds_violation_if_catalog_promotion_action_has_not_configured_amount(
-        ChannelRepositoryInterface $channelRepository,
-        ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder,
-        ChannelInterface $channel,
-        CatalogPromotionActionInterface $catalogPromotionAction,
-        CatalogPromotionInterface $catalogPromotion
-    ): void {
-        $channelRepository->findOneBy(['code' => 'channel'])->willReturn($channel);
-
-        $executionContext->getObject()->willReturn($catalogPromotionAction);
-        $catalogPromotionAction->getCatalogPromotion()->willReturn($catalogPromotion);
-        $catalogPromotion->getChannels()->willReturn(new ArrayCollection([]));
-
-        $executionContext->buildViolation('sylius.catalog_promotion_action.fixed_discount.not_valid')->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->atPath('configuration')->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->addViolation()->shouldBeCalled();
-
-        $this->validate(['channel' => []], new CatalogPromotionAction(), $executionContext);
-    }
-
-    function it_adds_violation_if_catalog_promotion_action_has_invalid_amount_configured(
-        ChannelRepositoryInterface $channelRepository,
-        ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder,
-        ChannelInterface $channel,
-        CatalogPromotionActionInterface $catalogPromotionAction,
-        CatalogPromotionInterface $catalogPromotion
-    ): void {
-        $channelRepository->findOneBy(['code' => 'channel'])->willReturn($channel);
-
-        $executionContext->getObject()->willReturn($catalogPromotionAction);
-        $catalogPromotionAction->getCatalogPromotion()->willReturn($catalogPromotion);
-        $catalogPromotion->getChannels()->willReturn(new ArrayCollection([$channel->getWrappedObject()]));
-        $channel->getCode()->willReturn('channel');
-
-        $executionContext->buildViolation('sylius.catalog_promotion_action.fixed_discount.not_valid')->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->atPath('configuration')->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->addViolation()->shouldBeCalled();
-
-        $this->validate(['channel' => ['amount' => 'wrong_value']], new CatalogPromotionAction(), $executionContext);
-    }
-
     function it_does_nothing_if_the_provided_configuration_is_valid(
         ChannelRepositoryInterface $channelRepository,
         ExecutionContextInterface $executionContext,
@@ -124,7 +81,6 @@ final class FixedDiscountActionValidatorSpec extends ObjectBehavior
         $catalogPromotion->getChannels()->willReturn(new ArrayCollection([$channel->getWrappedObject()]));
         $channel->getCode()->willReturn('channel');
 
-        $executionContext->buildViolation('sylius.catalog_promotion_action.fixed_discount.not_empty')->shouldNotBeCalled();
         $executionContext->buildViolation('sylius.catalog_promotion_action.fixed_discount.invalid_channel')->shouldNotBeCalled();
         $executionContext->buildViolation('sylius.catalog_promotion_action.fixed_discount.not_valid')->shouldNotBeCalled();
 

@@ -11,8 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction;
+namespace Sylius\Bundle\ApiBundle\Validator\CatalogPromotion;
 
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
+use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction\ActionValidatorInterface;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionAction;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -20,12 +23,20 @@ use Webmozart\Assert\Assert;
 
 final class PercentageDiscountActionValidator implements ActionValidatorInterface
 {
+    public function __construct(private SectionProviderInterface $sectionProvider)
+    {
+    }
+
     public function validate(array $configuration, Constraint $constraint, ExecutionContextInterface $context): void
     {
+        if (!$this->sectionProvider->getSection() instanceof AdminApiSection) {
+            return;
+        }
+
         /** @var CatalogPromotionAction $constraint */
         Assert::isInstanceOf($constraint, CatalogPromotionAction::class);
 
-        if (!array_key_exists('amount', $configuration)) {
+        if (!isset($configuration['amount'])) {
             $context->buildViolation($constraint->notNumberOrEmpty)->atPath('configuration.amount')->addViolation();
 
             return;

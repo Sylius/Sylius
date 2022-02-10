@@ -33,17 +33,6 @@ final class ForTaxonsScopeValidatorSpec extends ObjectBehavior
         $this->shouldHaveType(ScopeValidatorInterface::class);
     }
 
-    function it_adds_violation_if_catalog_promotion_scope_does_not_have_taxons_key_configured(
-        ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
-    ): void {
-        $executionContext->buildViolation('sylius.catalog_promotion_scope.for_taxons.not_empty')->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->atPath('configuration.taxons')->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->addViolation()->shouldBeCalled();
-
-        $this->validate([], new CatalogPromotionScope(), $executionContext);
-    }
-
     function it_adds_violation_if_catalog_promotion_scope_has_not_existing_taxons_configured(
         TaxonRepositoryInterface $taxonRepository,
         ExecutionContextInterface $executionContext,
@@ -65,7 +54,6 @@ final class ForTaxonsScopeValidatorSpec extends ObjectBehavior
     ): void {
         $taxonRepository->findOneBy(['code' => 'taxon'])->willReturn($taxon);
 
-        $executionContext->buildViolation('sylius.catalog_promotion_scope.for_taxons.not_empty')->shouldNotBeCalled();
         $executionContext->buildViolation('sylius.catalog_promotion_scope.for_taxons.invalid_taxons')->shouldNotBeCalled();
 
         $this->validate(['taxons' => ['taxon']], new CatalogPromotionScope(), $executionContext);

@@ -30,12 +30,6 @@ final class ForTaxonsScopeValidator implements ScopeValidatorInterface
         /** @var CatalogPromotionScope $constraint */
         Assert::isInstanceOf($constraint, CatalogPromotionScope::class);
 
-        if (!isset($configuration['taxons']) || empty($configuration['taxons'])) {
-            $context->buildViolation($constraint->taxonsNotEmpty)->atPath('configuration.taxons')->addViolation();
-
-            return;
-        }
-
         foreach ($configuration['taxons'] as $taxonCode) {
             if (null === $this->taxonRepository->findOneBy(['code' => $taxonCode])) {
                 $context->buildViolation($constraint->invalidTaxons)->atPath('configuration.taxons')->addViolation();
