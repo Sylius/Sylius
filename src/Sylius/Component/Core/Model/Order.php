@@ -110,9 +110,6 @@ class Order extends BaseOrder implements OrderInterface
      */
     protected $customerIp;
 
-    /**
-     * @var bool
-     */
     protected bool $guest = true;
 
     public function __construct()

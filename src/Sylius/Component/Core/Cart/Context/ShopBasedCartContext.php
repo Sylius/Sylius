@@ -46,7 +46,7 @@ final class ShopBasedCartContext implements CartContextInterface
         $this->tokenStorage = $tokenStorage;
 
         if ($tokenStorage === null) {
-            @trigger_error('Not passing tokenStorage through constructor is deprecated in Sylius 1.10 and it will be removed in Sylius 2.0');
+            @trigger_error('Not passing tokenStorage through constructor is deprecated in Sylius 1.10.9 and it will be removed in Sylius 2.0');
         }
     }
 

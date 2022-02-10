@@ -420,7 +420,7 @@
             <argument type="service" id="sylius.behat.page.shop.cart_summary" />
             <argument type="service" id="sylius.behat.page.shop.product.show" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <argument type="service" id="sylius.behat.service.session_manager"/>
+            <argument type="service" id="Sylius\Behat\Service\SessionManagerInterface"/>
         </service>
 
         <service id="sylius.behat.context.ui.shop.contact" class="Sylius\Behat\Context\Ui\Shop\ContactContext">
