@@ -99,7 +99,6 @@ final class ManagingProductsContext implements Context
 
     /**
      * @When I want to create a new configurable product
-     * @When I want to create a new simple product
      */
     public function iWantToCreateANewConfigurableProduct(): void
     {

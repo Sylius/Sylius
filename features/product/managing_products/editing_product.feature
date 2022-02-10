@@ -14,7 +14,7 @@ Feature: Editing a product
         When I want to modify the "Dice Brewing" product
         Then I should not be able to edit its code
 
-    @ui @api
+    @ui @no-api
     Scenario: Renaming a simple product
         Given I want to modify the "Dice Brewing" product
         When I rename it to "7 Wonders" in "English (United States)"
@@ -22,7 +22,7 @@ Feature: Editing a product
         Then I should be notified that it has been successfully edited
         And this product name should be "7 Wonders"
 
-    @ui
+    @ui @no-api
     Scenario: Renaming a simple product does not change its variant name
         Given this product only variant was renamed to "Dice Brewing: The Game"
         And I want to modify this product
@@ -31,7 +31,7 @@ Feature: Editing a product
         And I want to view all variants of this product
         Then the first variant in the list should have name "Dice Brewing: The Game"
 
-    @ui
+    @ui @no-api
     Scenario: Changing a simple product price
         Given I want to modify the "Dice Brewing" product
         When I change its price to $15.00 for "United States" channel
@@ -39,7 +39,7 @@ Feature: Editing a product
         Then I should be notified that it has been successfully edited
         And it should be priced at $15.00 for channel "United States"
 
-    @ui
+    @ui @no-api
     Scenario: Changing a simple product price
         Given I want to modify the "Dice Brewing" product
         When I change its price to $7.50 for "United States" channel

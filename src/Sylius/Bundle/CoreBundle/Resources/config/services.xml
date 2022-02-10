@@ -312,6 +312,12 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler\UpdateCatalogPromotionStateHandler">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionStateProcessorInterface" />
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+        </service>
+
         <service
             id="Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibilityInterface"
             class="Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibility"
