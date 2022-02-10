@@ -1,6 +1,4 @@
 # UPGRADE FROM `v1.10.X` TO `v1.11.0`
-
-1. If you don't already have, add an empty directory `api_platform` in your `config` directory and customize there any API resources.
  
 1. The product images should have a proper prefix (`/media/image/`) added to the path, so the images could be resolved. 
    This is now done out of the box and response of `Product Image` resource is now:
