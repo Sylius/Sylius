@@ -21,6 +21,10 @@
         <import resource="services/provider.xml" />
     </imports>
 
+    <parameters>
+        <parameter key="sylius.ajax.product.variant_autocomplete_limit">25</parameter>
+    </parameters>
+
     <services>
         <defaults public="true" />
 
