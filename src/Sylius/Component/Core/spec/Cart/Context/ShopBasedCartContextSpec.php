@@ -25,6 +25,9 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 final class ShopBasedCartContextSpec extends ObjectBehavior
 {
@@ -186,5 +189,77 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($firstCart);
         $this->reset();
         $this->getCart()->shouldReturn($secondCart);
+    }
+
+    function it_assigns_if_order_is_created_by_logged_customer(
+        CartContextInterface $cartContext,
+        ShopperContextInterface $shopperContext,
+        OrderInterface $cart,
+        ChannelInterface $channel,
+        CurrencyInterface $currency,
+        CustomerInterface $customer,
+        TokenStorageInterface $tokenStorage,
+        TokenInterface $token,
+        UserInterface $user
+    ): void {
+        $this->beConstructedWith($cartContext, $shopperContext, $tokenStorage);
+
+        $tokenStorage->getToken()->willReturn($token);
+        $token->getUser()->willReturn($user);
+
+        $cart->setGuest(false)->shouldBeCalled();
+
+        $cartContext->getCart()->shouldBeCalledTimes(1)->willReturn($cart);
+
+        $shopperContext->getChannel()->willReturn($channel);
+        $shopperContext->getLocaleCode()->willReturn('pl');
+        $shopperContext->getCustomer()->willReturn($customer);
+        $customer->getDefaultAddress()->willReturn(null);
+
+        $channel->getBaseCurrency()->willReturn($currency);
+        $currency->getCode()->willReturn('PLN');
+
+        $cart->setChannel($channel)->shouldBeCalled();
+        $cart->setCurrencyCode('PLN')->shouldBeCalled();
+        $cart->setLocaleCode('pl')->shouldBeCalled();
+        $cart->setCustomer($customer)->shouldBeCalled();
+
+        $this->getCart()->shouldReturn($cart);
+    }
+
+    function it_leaves_guest_to_be_true_if_session_is_anonymous(
+        CartContextInterface $cartContext,
+        ShopperContextInterface $shopperContext,
+        OrderInterface $cart,
+        ChannelInterface $channel,
+        CurrencyInterface $currency,
+        CustomerInterface $customer,
+        TokenStorageInterface $tokenStorage,
+        TokenInterface $token,
+        UserInterface $user
+    ): void {
+        $this->beConstructedWith($cartContext, $shopperContext, $tokenStorage);
+
+        $tokenStorage->getToken()->willReturn($token);
+        $token->getUser()->willReturn(null);
+
+        $cart->setGuest(false)->shouldNotBeCalled();
+
+        $cartContext->getCart()->shouldBeCalledTimes(1)->willReturn($cart);
+
+        $shopperContext->getChannel()->willReturn($channel);
+        $shopperContext->getLocaleCode()->willReturn('pl');
+        $shopperContext->getCustomer()->willReturn($customer);
+        $customer->getDefaultAddress()->willReturn(null);
+
+        $channel->getBaseCurrency()->willReturn($currency);
+        $currency->getCode()->willReturn('PLN');
+
+        $cart->setChannel($channel)->shouldBeCalled();
+        $cart->setCurrencyCode('PLN')->shouldBeCalled();
+        $cart->setLocaleCode('pl')->shouldBeCalled();
+        $cart->setCustomer($customer)->shouldBeCalled();
+
+        $this->getCart()->shouldReturn($cart);
     }
 }

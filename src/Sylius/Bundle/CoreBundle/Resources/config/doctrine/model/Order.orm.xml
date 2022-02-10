@@ -12,6 +12,11 @@
         <field type="string" name="checkoutState" column="checkout_state" />
         <field type="string" name="paymentState" column="payment_state" />
         <field type="string" name="shippingState" column="shipping_state" />
+        <field type="boolean" name="guest" column="guest" >
+            <options>
+                <option name="default">1</option>
+            </options>
+        </field>
 
         <many-to-one field="channel" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
             <join-column name="channel_id" referenced-column-name="id" nullable="true" />
