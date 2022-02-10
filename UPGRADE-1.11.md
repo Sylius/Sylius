@@ -5,9 +5,9 @@
 ### PHP8.0 support
 
 Sylius v1.11 comes with bump of minimal dependencies of PHP to v8.0. We strongly advice to make upgrade process step by step,
-so it is highly recommended updating you PHP version being still on Sylius v1.10, as it is supporting both PHP7.4 and PHP8.0.
+so it is highly recommended updating your PHP version being still on Sylius v1.10, as it is supporting both PHP7.4 and PHP8.0.
 
-After ensuring, that previous step succeed, we may move forward to the Sylius v1.11 update.
+After ensuring, that previous step succeed, you may move forward to the Sylius v1.11 update.
 
 ## Main update
 
@@ -55,7 +55,7 @@ composer req --dev polishsymfonycommunity/symfony-mocker-container
 
 Due to the drop of support PHP `7.4` Sylius also will not support it since version `1.11`.
 
-### Api Platform required folders
+### API Platform required folders
 
 If you don't already have, add an empty directory `api_platform` in your `config` directory and customize there any API resources.
 
