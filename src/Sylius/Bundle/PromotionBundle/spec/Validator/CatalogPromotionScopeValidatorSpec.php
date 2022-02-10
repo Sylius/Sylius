@@ -11,13 +11,11 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\Constraints;
+namespace spec\Sylius\Bundle\PromotionBundle\Validator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForTaxonsScopeVariantChecker;
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForVariantsScopeVariantChecker;
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\Constraints\CatalogPromotionScope;
 use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScope\ScopeValidatorInterface;
+use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionScope;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -32,12 +30,12 @@ final class CatalogPromotionScopeValidatorSpec extends ObjectBehavior
     ): void {
         $this->beConstructedWith(
             [
-                InForTaxonsScopeVariantChecker::TYPE,
-                InForVariantsScopeVariantChecker::TYPE
+                'for_taxons',
+                'for_variants'
             ],
             [
-                InForTaxonsScopeVariantChecker::TYPE => $forTaxonsValidator,
-                InForVariantsScopeVariantChecker::TYPE => $forVariantsValidator,
+                'for_taxons' => $forTaxonsValidator,
+                'for_variants' => $forVariantsValidator,
             ]
         );
 
@@ -70,7 +68,7 @@ final class CatalogPromotionScopeValidatorSpec extends ObjectBehavior
     ): void {
         $constraint = new CatalogPromotionScope();
 
-        $scope->getType()->willReturn(InForVariantsScopeVariantChecker::TYPE);
+        $scope->getType()->willReturn('for_variants');
         $scope->getConfiguration()->willReturn([]);
 
         $forVariantsValidator->validate([], $constraint, $executionContext)->shouldBeCalled();
