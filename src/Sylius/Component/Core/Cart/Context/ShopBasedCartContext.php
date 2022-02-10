@@ -23,6 +23,7 @@ use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Webmozart\Assert\Assert;
 
 final class ShopBasedCartContext implements CartContextInterface
@@ -31,12 +32,22 @@ final class ShopBasedCartContext implements CartContextInterface
 
     private ShopperContextInterface $shopperContext;
 
+    private ?TokenStorageInterface $tokenStorage;
+
     private ?OrderInterface $cart = null;
 
-    public function __construct(CartContextInterface $cartContext, ShopperContextInterface $shopperContext)
-    {
+    public function __construct(
+        CartContextInterface $cartContext,
+        ShopperContextInterface $shopperContext,
+        ?TokenStorageInterface $tokenStorage = null
+    ) {
         $this->cartContext = $cartContext;
         $this->shopperContext = $shopperContext;
+        $this->tokenStorage = $tokenStorage;
+
+        if ($tokenStorage === null) {
+            @trigger_error('Not passing tokenStorage through constructor is deprecated in Sylius 1.10.9 and it will be removed in Sylius 2.0');
+        }
     }
 
     public function getCart(): BaseOrderInterface
@@ -75,6 +86,14 @@ final class ShopBasedCartContext implements CartContextInterface
     private function setCustomerAndAddressOnCart(OrderInterface $cart, CustomerInterface $customer): void
     {
         $cart->setCustomer($customer);
+
+        if ($this->tokenStorage !== null) {
+            $user = $this->tokenStorage->getToken()->getUser();
+
+            if ($user !== null) {
+                $cart->setGuest(false);
+            }
+        }
 
         $defaultAddress = $customer->getDefaultAddress();
         if (null !== $defaultAddress) {
