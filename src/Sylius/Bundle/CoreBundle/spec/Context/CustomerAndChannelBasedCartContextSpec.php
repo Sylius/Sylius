@@ -50,7 +50,7 @@ final class CustomerAndChannelBasedCartContextSpec extends ObjectBehavior
         $channelContext->getChannel()->willReturn($channel);
         $customerContext->getCustomer()->willReturn($customer);
 
-        $orderRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn($order);
+        $orderRepository->findFirstNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn($order);
 
         $this->getCart()->shouldReturn($order);
     }
@@ -65,7 +65,7 @@ final class CustomerAndChannelBasedCartContextSpec extends ObjectBehavior
         $channelContext->getChannel()->willReturn($channel);
         $customerContext->getCustomer()->willReturn($customer);
 
-        $orderRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn(null);
+        $orderRepository->findFirstNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn(null);
 
         $this
             ->shouldThrow(new CartNotFoundException('Sylius was not able to find the cart for currently logged in user.'))
