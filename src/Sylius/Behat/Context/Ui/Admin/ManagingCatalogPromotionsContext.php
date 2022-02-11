@@ -638,7 +638,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatADiscountAmountShouldBeConfiguredForAtLeasOneChannel(): void
     {
-        Assert::true($this->formElement->hasValidationMessage(
+        Assert::true($this->formElement->hasOnlyOneValidationMessage(
             'Configuration for one of the required channels is not provided.'
         ));
     }
