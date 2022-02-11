@@ -31,10 +31,10 @@ final class ProductOptionValueContext implements Context
     {
         $productOptionValues = $this->productOptionValueRepository->findBy(['code' => $code]);
 
-        Assert::eq(
-            count($productOptionValues),
+        Assert::count(
+            $productOptionValues,
             1,
-            sprintf('%d product option values has been found with name "%s" but should be only one.', count($productOptionValues), $code)
+            sprintf('%d product option values have been found with name "%s" but should be only one.', count($productOptionValues), $code)
         );
 
         return $productOptionValues[0];
