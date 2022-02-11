@@ -36,7 +36,7 @@ use Zenstruck\Foundry\Proxy;
  * @method static LocaleInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method LocaleInterface|Proxy create(array|callable $attributes = [])
  */
-final class LocaleFactory extends ModelFactory implements LocaleFactoryInterface
+class LocaleFactory extends ModelFactory implements LocaleFactoryInterface
 {
     public function __construct(
         private FactoryInterface $localeFactory,

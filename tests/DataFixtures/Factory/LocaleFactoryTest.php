@@ -44,7 +44,7 @@ final class LocaleFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_locale_with_default_code(): void
     {
-        $locale = LocaleFactory::new()->withDefaultLocaleCode()->create();
+        $locale = LocaleFactory::new()->withDefaultCode()->create();
 
         $this->assertEquals('en_US', $locale->getCode());
     }
