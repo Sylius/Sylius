@@ -26,9 +26,9 @@ final class CurrencyFactoryTest extends KernelTestCase
     use Factories;
 
     /** @test */
-    function it_creates_currencies(): void
+    function it_creates_currency_with_random_code(): void
     {
-        $currency = CurrencyFactory::new()->create();
+        $currency = CurrencyFactory::createOne();
 
         $this->assertInstanceOf(CurrencyInterface::class, $currency->object());
         $this->assertNotNull($currency->getCode());
@@ -36,7 +36,7 @@ final class CurrencyFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_currencies_with_custom_codes(): void
+    function it_creates_currency_with_given_code(): void
     {
         $currency = CurrencyFactory::new()->withCode('EUR')->create();
 
