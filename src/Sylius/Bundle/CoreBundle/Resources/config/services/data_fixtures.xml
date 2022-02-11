@@ -26,5 +26,12 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface" alias="sylius.data_fixtures.factory.locale" />
+
+        <service id="sylius.data_fixtures.factory.country" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactory">
+            <argument type="service" id="sylius.factory.country" />
+            <tag name="foundry.factory" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactoryInterface" alias="sylius.data_fixtures.factory.country" />
     </services>
 </container>
