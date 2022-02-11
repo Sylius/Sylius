@@ -27,6 +27,7 @@
     ],
     "require": {
         "php": "^8.0",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "egulias/email-validator": "^3.0",
         "fakerphp/faker": "^1.10",
@@ -70,7 +71,8 @@
         "symfony/swiftmailer-bundle": "^3.4",
         "symfony/templating": "^5.4",
         "symfony/webpack-encore-bundle": "^1.15",
-        "winzou/state-machine-bundle": "^0.5"
+        "winzou/state-machine-bundle": "^0.5",
+        "zenstruck/foundry": "^1.16"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^1.12 || ^2.0",
