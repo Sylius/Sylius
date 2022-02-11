@@ -124,6 +124,12 @@
             </errorLevel>
         </DeprecatedMethod>
 
+        <ImplementedReturnTypeMismatch>
+            <errorLevel type="info">
+                <directory name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory" />
+            </errorLevel>
+        </ImplementedReturnTypeMismatch>
+
         <InternalMethod>
             <errorLevel type="info">
                 <referencedMethod name="PHPUnit\Framework\TestCase::__construct" />
