@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Tests\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactory;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactory;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Intl\Countries;
@@ -27,7 +26,7 @@ final class CountryFactoryTest extends KernelTestCase
     use Factories;
 
     /** @test */
-    function it_creates_countries(): void
+    function it_creates_country_with_random_code(): void
     {
         $country = CountryFactory::new()->create();
 
@@ -37,7 +36,7 @@ final class CountryFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_countries_with_custom_codes(): void
+    function it_creates_country_with_custom_code(): void
     {
         $country = CountryFactory::new()->withCode('PL')->create();
 
@@ -45,7 +44,7 @@ final class CountryFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_enabled_countries(): void
+    function it_creates_enabled_country(): void
     {
         $country = CountryFactory::new()->enabled()->create();
 
@@ -53,7 +52,7 @@ final class CountryFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_disabled_countries(): void
+    function it_creates_disabled_country(): void
     {
         $country = CountryFactory::new()->disabled()->create();
 
