@@ -411,7 +411,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then /^I should see this product is not discounted$/
+     * @Then I should see this product is not discounted
      */
     public function iShouldSeeProductIsNotDiscounted(): void
     {
