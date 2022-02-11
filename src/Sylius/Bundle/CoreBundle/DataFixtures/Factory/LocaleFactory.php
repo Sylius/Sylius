@@ -45,7 +45,7 @@ final class LocaleFactory extends ModelFactory implements LocaleFactoryInterface
         parent::__construct();
     }
 
-    public function withDefaultLocaleCode(): self
+    public function withDefaultCode(): self
     {
         return $this->addState(['code' => $this->baseLocaleCode]);
     }

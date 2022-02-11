@@ -34,7 +34,7 @@ final class LocaleFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_locales_with_custom_codes(): void
+    function it_creates_locale_with_given_code(): void
     {
         $locale = LocaleFactory::new()->withCode('fr_FR')->create();
 
@@ -42,7 +42,7 @@ final class LocaleFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_locales_with_default_locale_codes(): void
+    function it_creates_locale_with_default_code(): void
     {
         $locale = LocaleFactory::new()->withDefaultLocaleCode()->create();
 

@@ -36,7 +36,7 @@ use Zenstruck\Foundry\Proxy;
  */
 interface LocaleFactoryInterface
 {
-    public function withDefaultLocaleCode(): self;
+    public function withDefaultCode(): self;
 
     public function withCode(string $code): self;
 }
