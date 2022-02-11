@@ -391,12 +391,9 @@ class User implements UserInterface, \Stringable
         $this->encoderName = $encoderName;
     }
 
-    /**
-     * The serialized data have to contain the fields used by the equals method and the username.
-     */
-    public function serialize(): string
+    public function __serialize(): array
     {
-        return serialize([
+        return [
             $this->password,
             $this->salt,
             $this->usernameCanonical,
@@ -405,29 +402,42 @@ class User implements UserInterface, \Stringable
             $this->enabled,
             $this->id,
             $this->encoderName,
-        ]);
+        ];
     }
 
     /**
-     * @param string $serialized
+     * The serialized data have to contain the fields used by the equals method and the username.
+     *
+     * @internal
+     */
+    public function serialize(): string
+    {
+        return serialize($this->__serialize());
+    }
+
+    public function __unserialize(array $data): void
+    {
+        $this->password = $data['password'] ?? null;
+        $this->salt = $data['salt'] ?? null;
+        $this->usernameCanonical = $data['usernameCanonical'] ?? null;
+        $this->username = $data['username'] ?? null;
+        $this->locked = $data['locked'] ?? null;
+        $this->enabled = $data['enabled'] ?? null;
+        $this->id = $data['id'] ?? null;
+        $this->encoderName = $data['encoderName'] ?? null;
+    }
+
+    /**
+     * @internal
      */
     public function unserialize($serialized): void
     {
-        $data = unserialize($serialized);
+        $data = (array) unserialize((string) $serialized);
         // add a few extra elements in the array to ensure that we have enough keys when unserializing
         // older data which does not include all properties.
         $data = array_merge($data, array_fill(0, 2, null));
 
-        [
-            $this->password,
-            $this->salt,
-            $this->usernameCanonical,
-            $this->username,
-            $this->locked,
-            $this->enabled,
-            $this->id,
-            $this->encoderName,
-        ] = $data;
+        $this->__unserialize($data);
     }
 
     protected function hasExpired(?\DateTimeInterface $date): bool
