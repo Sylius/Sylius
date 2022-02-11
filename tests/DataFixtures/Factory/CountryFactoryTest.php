@@ -36,7 +36,7 @@ final class CountryFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_country_with_custom_code(): void
+    function it_creates_country_with_given_code(): void
     {
         $country = CountryFactory::new()->withCode('PL')->create();
 
