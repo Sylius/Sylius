@@ -25,7 +25,7 @@ final class LocaleFactoryTest extends KernelTestCase
     use Factories;
 
     /** @test */
-    function it_creates_locales(): void
+    function it_creates_locale_with_random_code(): void
     {
         $locale = LocaleFactory::createOne();
 
