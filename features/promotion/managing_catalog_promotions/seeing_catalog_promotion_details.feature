@@ -23,7 +23,7 @@ Feature: Seeing catalog promotion's details
         And it should apply on "PHP T-Shirt" variant
         And it should apply on "T-Shirt" product
         And it should not be exclusive
-        And it should start at "2021-11-10" and end at "2022-01-08"
+        And it should start at "2021-11-10 00:00" and end at "2022-01-08 00:00"
 
     @api @ui
     Scenario: Seeing exclusive catalog promotion's details
