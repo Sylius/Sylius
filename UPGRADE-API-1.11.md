@@ -33,8 +33,8 @@
     * PaymentMethods
     * Orders
 
-   Note that it concerns only `shop` endpoints. Now instead of returning an array of `translations` for a given resource, translation is done automatically based on the current locale.
-   For example changes in request body of `GET` `api/v2/shop/shipping-methods/{code}` endpoint: 
+   Note that it concerns only `shop` endpoints. Now instead of returning an array of `translations` for a given resource, 
+   translation is done automatically based on the current locale. For example changes in request body of `GET` `api/v2/shop/shipping-methods/{code}` endpoint: 
     
     ```diff
          {
@@ -56,7 +56,8 @@
          }
      ```
 
-1. The `api/v2/shop/payment/{id}/methods` endpoint has now `shop:payment_method:read` serialization group assigned. Therefore its body will look like this by default:
+1. The `api/v2/shop/payment/{id}/methods` endpoint has now `shop:payment_method:read` serialization group assigned. 
+   Therefore its body will look like this by default:
    
     ```
     {
