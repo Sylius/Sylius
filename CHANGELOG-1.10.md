@@ -1,5 +1,28 @@
 # CHANGELOG FOR `1.10.X`
 
+## v1.10.9 (2022-02-14)
+
+#### Details
+
+- [#13421](https://github.com/Sylius/Sylius/issues/13421) [Docs] How to customize the invoice logo - updated cookbook ([@Rafikooo](https://github.com/Rafikooo))
+- [#13423](https://github.com/Sylius/Sylius/issues/13423) [Docs] Customizing Credit Memo's logo ([@TheMilek](https://github.com/TheMilek))
+- [#13431](https://github.com/Sylius/Sylius/issues/13431) FIX: Avoid passing empty needle to strpos() ([@rimas-kudelis](https://github.com/rimas-kudelis))
+- [#13498](https://github.com/Sylius/Sylius/issues/13498) [Docs] Sylius 1.8 is not supported anymore ([@Zales0123](https://github.com/Zales0123))
+- [#13504](https://github.com/Sylius/Sylius/issues/13504) Postpone 1.10 end of maintenance date ([@Zales0123](https://github.com/Zales0123))
+- [#13506](https://github.com/Sylius/Sylius/issues/13506) [Docs] How to customize the invoice logo - neatly cut invoice image ([@Rafikooo](https://github.com/Rafikooo))
+- [#13513](https://github.com/Sylius/Sylius/issues/13513) [Architecture] Do not double install PHP dependencies ([@lchrusciel](https://github.com/lchrusciel))
+- [#13514](https://github.com/Sylius/Sylius/issues/13514) [Documentation] Update Core Team in our documentation ([@lchrusciel](https://github.com/lchrusciel))
+- [#13515](https://github.com/Sylius/Sylius/issues/13515) [Maintenance] Replace `test-package.sh` with native GH Actions ([@lchrusciel](https://github.com/lchrusciel))
+- [#13516](https://github.com/Sylius/Sylius/issues/13516) [Maintenance] Remove NelmioAlice from the main packages config ([@lchrusciel](https://github.com/lchrusciel))
+- [#13517](https://github.com/Sylius/Sylius/issues/13517) [Docs] Change the template path in customization ([@Roshyo](https://github.com/Roshyo))
+- [#13519](https://github.com/Sylius/Sylius/issues/13519) [Docs] Altered custom invoice logo path ([@Rafikooo](https://github.com/Rafikooo))
+- [#13520](https://github.com/Sylius/Sylius/issues/13520) change suggested path in refund docs ([@AdamKasp](https://github.com/AdamKasp))
+- [#13527](https://github.com/Sylius/Sylius/issues/13527) [Minor] Typo fixes in github packages config ([@lchrusciel](https://github.com/lchrusciel))
+- [#13535](https://github.com/Sylius/Sylius/issues/13535) [Minor] Removal of logic duplication in shipping charges processor ([@lchrusciel](https://github.com/lchrusciel))
+- [#13552](https://github.com/Sylius/Sylius/issues/13552) Fixing the documentation (1.10) ([@mamazu](https://github.com/mamazu))
+- [#13553](https://github.com/Sylius/Sylius/issues/13553) [Fixtures] USA deleted from the World zone ([@TheMilek](https://github.com/TheMilek))
+- [#13561](https://github.com/Sylius/Sylius/issues/13561) [Docs] Mention autoconfiguration case when extending the form ([@Zales0123](https://github.com/Zales0123))
+
 ## v1.10.8 (2022-01-17)
 
 #### Details
