@@ -1,5 +1,18 @@
 # CHANGELOG FOR `1.11.X`
 
+## v1.11.1 (2022-02-14)
+
+#### TL;DR
+
+Final-**final** fixes for CatalogPromotions' system
+
+#### Details
+
+- [#13632](https://github.com/Sylius/Sylius/issues/13632) Add time for start and end date in catalog promotions index ()
+- [#13638](https://github.com/Sylius/Sylius/issues/13638) [CatalogPromotion] Code improvements ([@Rafikooo](https://github.com/Rafikooo))
+- [#13639](https://github.com/Sylius/Sylius/issues/13639) [UI][CatalogPromotion] Fix to not displaying duplicated validation message for fixed discount action ([@GSadee](https://github.com/GSadee))
+- [#13644](https://github.com/Sylius/Sylius/issues/13644) [Maintenance] Minor clean up of UPGRADE files for Sylius 1.11 ([@GSadee](https://github.com/GSadee))
+
 ## v1.11.0-RC.1 (2022-02-10)
 
 #### TL;DR
