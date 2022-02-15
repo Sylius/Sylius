@@ -33,5 +33,12 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactoryInterface" alias="sylius.data_fixtures.factory.country" />
+
+        <service id="sylius.data_fixtures.factory.currency" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CurrencyFactory">
+            <argument type="service" id="sylius.factory.currency" />
+            <tag name="foundry.factory" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CurrencyFactoryInterface" alias="sylius.data_fixtures.factory.currency" />
     </services>
 </container>
