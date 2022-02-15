@@ -26,16 +26,16 @@ final class TaxonFactoryTest extends KernelTestCase
     use Factories;
 
     /** @test */
-    function it_creates_taxa(): void
+    function it_creates_taxon_with_random_code(): void
     {
-        $taxon = TaxonFactory::new()->create();
+        $taxon = TaxonFactory::createOne();
 
         $this->assertInstanceOf(TaxonInterface::class, $taxon->object());
         $this->assertNotNull($taxon->getCode());
     }
 
     /** @test */
-    function it_creates_taxa_with_custom_codes(): void
+    function it_creates_taxon_with_given_code(): void
     {
         $taxon = TaxonFactory::new()->withCode('board-games')->create();
 
@@ -43,7 +43,7 @@ final class TaxonFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_taxa_with_names_for_each_locales(): void
+    function it_creates_taxon_with_names_for_each_locales(): void
     {
         LocaleFactory::new()->withCode('en_US')->create();
         LocaleFactory::new()->withCode('fr_FR')->create();
@@ -68,7 +68,7 @@ final class TaxonFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_taxa_with_descriptions_for_each_locales(): void
+    function it_creates_taxon_with_descriptions_for_each_locales(): void
     {
         LocaleFactory::new()->withCode('en_US')->create();
         LocaleFactory::new()->withCode('fr_FR')->create();
@@ -91,7 +91,7 @@ final class TaxonFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_taxa_with_custom_translations(): void
+    function it_creates_taxon_with_given_translations(): void
     {
         LocaleFactory::new()->withCode('en_US')->create();
         LocaleFactory::new()->withCode('fr_FR')->create();
@@ -121,7 +121,7 @@ final class TaxonFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_taxa_with_custom_children(): void
+    function it_creates_taxon_with_given_children(): void
     {
         LocaleFactory::new()->withCode('en_US')->create();;
 
