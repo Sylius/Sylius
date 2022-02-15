@@ -79,7 +79,7 @@ final class TaxonFactory extends ModelFactory implements TaxonFactoryInterface
     protected function getDefaults(): array
     {
         return [
-            'name' => StringInflector::nameToCode(self::faker()->unique()->words(3, true)),
+            'name' => self::faker()->unique()->words(3, true),
             'code' => null,
             'slug' => null,
             'description' => self::faker()->paragraph,
