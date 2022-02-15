@@ -39,7 +39,7 @@ use Zenstruck\Foundry\Proxy;
  */
 final class CustomerGroupFactory extends ModelFactory implements CustomerGroupFactoryInterface
 {
-    public function __construct(private FactoryInterface $CustomerGroupFactory)
+    public function __construct(private FactoryInterface $customerGroupFactory)
     {
         parent::__construct();
     }
@@ -72,7 +72,7 @@ final class CustomerGroupFactory extends ModelFactory implements CustomerGroupFa
             })
             ->instantiateWith(function(array $attributes): CustomerGroupInterface {
                 /** @var CustomerGroupInterface $customerGroup */
-                $customerGroup = $this->CustomerGroupFactory->createNew();
+                $customerGroup = $this->customerGroupFactory->createNew();
 
                 $customerGroup->setCode($attributes['code']);
                 $customerGroup->setName($attributes['name']);
