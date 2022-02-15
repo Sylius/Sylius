@@ -25,9 +25,9 @@ final class CustomerGroupFactoryTest extends KernelTestCase
     use Factories;
 
     /** @test */
-    function it_creates_customer_groups(): void
+    function it_creates_customer_group_with_random_code_and_name(): void
     {
-        $customerGroup = CustomerGroupFactory::new()->create();
+        $customerGroup = CustomerGroupFactory::createOne();
 
         $this->assertInstanceOf(CustomerGroupInterface::class, $customerGroup->object());
         $this->assertNotNull($customerGroup->getCode());
@@ -35,7 +35,7 @@ final class CustomerGroupFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_customer_groups_with_custom_codes(): void
+    function it_creates_customer_group_with_given_code(): void
     {
         $customerGroup = CustomerGroupFactory::new()->withCode('group_a')->create();
 
@@ -43,7 +43,7 @@ final class CustomerGroupFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_customer_groups_with_custom_names(): void
+    function it_creates_customer_group_with_given_name(): void
     {
         $customerGroup = CustomerGroupFactory::new()->withName('Group A')->create();
 
