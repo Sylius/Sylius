@@ -19,13 +19,12 @@
             <tag name="doctrine.fixture.orm" />
         </service>
 
-        <service id="sylius.data_fixtures.factory.locale" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactory">
-            <argument type="service" id="sylius.factory.locale" />
-            <argument>%sylius_locale.locale%</argument>
+        <service id="sylius.data_fixtures.factory.customer_group" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerGroupFactory">
+            <argument type="service" id="sylius.factory.customer_group" />
             <tag name="foundry.factory" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface" alias="sylius.data_fixtures.factory.locale" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerGroupFactoryInterface" alias="sylius.data_fixtures.factory.customer_group" />
 
         <service id="sylius.data_fixtures.factory.country" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactory">
             <argument type="service" id="sylius.factory.country" />
@@ -40,5 +39,13 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CurrencyFactoryInterface" alias="sylius.data_fixtures.factory.currency" />
+
+        <service id="sylius.data_fixtures.factory.locale" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactory">
+            <argument type="service" id="sylius.factory.locale" />
+            <argument>%sylius_locale.locale%</argument>
+            <tag name="foundry.factory" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface" alias="sylius.data_fixtures.factory.locale" />
     </services>
 </container>
