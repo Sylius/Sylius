@@ -105,3 +105,11 @@ Feature: Editing catalog promotion
         And I edit it to have empty amount of percentage discount
         And I save my changes
         Then I should be notified that a discount amount should be a number and cannot be empty
+
+    @api @ui @javascript
+    Scenario: Editing catalog promotion action to be a percentage discount and not filling amount
+        Given there is a catalog promotion "Winter sale" that reduces price by fixed "$10.00" in the "United States" channel and applies on "T-Shirt" product
+        When I want to modify a catalog promotion "Christmas sale"
+        And I edit it to have empty amount of percentage discount
+        And I save my changes
+        Then I should be notified that a discount amount should be a number and cannot be empty
