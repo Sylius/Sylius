@@ -59,7 +59,7 @@ EOT
         }
 
         try {
-            $publicDir = $this->getContainer()->getParameter('sylius_core.public_dir');
+            $publicDir = $this->container->getParameter('sylius_core.public_dir');
 
             $this->ensureDirectoryExistsAndIsWritable($publicDir . '/media/', $output);
             $this->ensureDirectoryExistsAndIsWritable($publicDir . '/media/image/', $output);

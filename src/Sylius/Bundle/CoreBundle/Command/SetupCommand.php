@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -43,9 +45,9 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $currency = $this->getContainer()->get('sylius.setup.currency')->setup($input, $output, $this->getHelper('question'));
-        $locale = $this->getContainer()->get('sylius.setup.locale')->setup($input, $output, $this->getHelper('question'));
-        $this->getContainer()->get('sylius.setup.channel')->setup($locale, $currency);
+        $currency = $this->container->get('sylius.setup.currency')->setup($input, $output, $this->getHelper('question'));
+        $locale = $this->container->get('sylius.setup.locale')->setup($input, $output, $this->getHelper('question'));
+        $this->container->get('sylius.setup.channel')->setup($locale, $currency);
         $this->setupAdministratorUser($input, $output, $locale->getCode());
 
         return 0;
@@ -56,8 +58,10 @@ EOT
         $outputStyle = new SymfonyStyle($input, $output);
         $outputStyle->writeln('Create your administrator account.');
 
-        $userManager = $this->getContainer()->get('sylius.manager.admin_user');
-        $userFactory = $this->getContainer()->get('sylius.factory.admin_user');
+        /** @var EntityManagerInterface $userManager */
+        $userManager = $this->container->get('sylius.manager.admin_user');
+        /** @var FactoryInterface $userFactory */
+        $userFactory = $this->container->get('sylius.factory.admin_user');
 
         try {
             $user = $this->configureNewUser($userFactory->createNew(), $input, $output);
@@ -110,7 +114,7 @@ EOT
                  */
                 function ($value): string {
                     /** @var ConstraintViolationListInterface $errors */
-                    $errors = $this->getContainer()->get('validator')->validate((string) $value, [new Email(), new NotBlank()]);
+                    $errors = $this->container->get('validator')->validate((string) $value, [new Email(), new NotBlank()]);
                     foreach ($errors as $error) {
                         throw new \DomainException((string) $error->getMessage());
                     }
@@ -189,7 +193,7 @@ EOT
             /** @param mixed $value */
             function ($value): string {
                 /** @var ConstraintViolationListInterface $errors */
-                $errors = $this->getContainer()->get('validator')->validate($value, [new NotBlank()]);
+                $errors = $this->container->get('validator')->validate($value, [new NotBlank()]);
                 foreach ($errors as $error) {
                     throw new \DomainException((string) $error->getMessage());
                 }
@@ -211,6 +215,6 @@ EOT
 
     private function getAdminUserRepository(): UserRepositoryInterface
     {
-        return $this->getContainer()->get('sylius.repository.admin_user');
+        return $this->container->get('sylius.repository.admin_user');
     }
 }

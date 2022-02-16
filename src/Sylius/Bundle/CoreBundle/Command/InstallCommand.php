@@ -67,7 +67,7 @@ EOT
         $outputStyle->writeln('<info>Installing Sylius...</info>');
         $outputStyle->writeln($this->getSyliusLogo());
 
-        $this->ensureDirectoryExistsAndIsWritable((string) $this->getContainer()->getParameter('kernel.cache_dir'), $output);
+        $this->ensureDirectoryExistsAndIsWritable((string) $this->container->getParameter('kernel.cache_dir'), $output);
 
         $errored = false;
         /**

@@ -16,14 +16,17 @@ namespace Sylius\Bundle\UserBundle\Command;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-abstract class AbstractRoleCommand extends ContainerAwareCommand
+abstract class AbstractRoleCommand extends Command
 {
+    use ContainerAwareTrait;
+
     protected function interact(InputInterface $input, OutputInterface $output): void
     {
         // User types configured in the Bundle
@@ -74,7 +77,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
         }
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $email = $input->getArgument('email');
         $securityRoles = $input->getArgument('roles');
@@ -112,7 +115,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     {
         $class = $this->getUserModelClass($userType);
 
-        return $this->getContainer()->get('doctrine')->getManagerForClass($class);
+        return $this->container->get('doctrine')->getManagerForClass($class);
     }
 
     protected function getUserRepository(string $userType): UserRepositoryInterface
@@ -124,7 +127,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
 
     protected function getAvailableUserTypes(): array
     {
-        $config = $this->getContainer()->getParameter('sylius.user.users');
+        $config = $this->container->getParameter('sylius.user.users');
 
         // Keep only users types which implement \Sylius\Component\User\Model\UserInterface
         $userTypes = array_filter($config, fn(array $userTypeConfig): bool => isset($userTypeConfig['user']['classes']['model']) && is_a($userTypeConfig['user']['classes']['model'], UserInterface::class, true));
@@ -137,7 +140,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
      */
     protected function getUserModelClass(string $userType): string
     {
-        $config = $this->getContainer()->getParameter('sylius.user.users');
+        $config = $this->container->getParameter('sylius.user.users');
         if (empty($config[$userType]['user']['classes']['model'])) {
             throw new \InvalidArgumentException(sprintf('User type %s misconfigured.', $userType));
         }

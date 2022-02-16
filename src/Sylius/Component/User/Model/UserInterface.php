@@ -17,11 +17,11 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
-use SyliusLabs\Polyfill\Symfony\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
+use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 
 interface UserInterface extends
-    AdvancedUserInterface,
+    BaseUserInterface,
     CredentialsHolderInterface,
     ResourceInterface,
     \Serializable,
@@ -111,4 +111,12 @@ interface UserInterface extends
     public function addOAuthAccount(UserOAuthInterface $oauth): void;
 
     public function setEncoderName(?string $encoderName): void;
+
+    public function isAccountNonExpired();
+
+    public function isAccountNonLocked();
+
+    public function isCredentialsNonExpired();
+
+    public function isEnabled();
 }
