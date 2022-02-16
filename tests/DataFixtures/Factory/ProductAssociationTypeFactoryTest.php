@@ -26,16 +26,16 @@ final class ProductAssociationTypeFactoryTest extends KernelTestCase
     use Factories;
 
     /** @test */
-    function it_creates_product_association_types(): void
+    function it_creates_product_association_type_with_random_code(): void
     {
-        $productAssociationType = ProductAssociationTypeFactory::new()->create();
+        $productAssociationType = ProductAssociationTypeFactory::createOne();
 
         $this->assertInstanceOf(ProductAssociationTypeInterface::class, $productAssociationType->object());
         $this->assertNotNull($productAssociationType->getCode());
     }
 
     /** @test */
-    function it_creates_product_association_types_with_custom_codes(): void
+    function it_creates_product_association_type_with_given_code(): void
     {
         $productAssociationType = ProductAssociationTypeFactory::new()->withCode('expansion')->create();
 
@@ -54,7 +54,7 @@ final class ProductAssociationTypeFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_product_association_types_with_custom_names_on_each_locales(): void
+    function it_creates_product_association_type_with_given_name_on_each_locales(): void
     {
         LocaleFactory::new()->withCode('en_US')->create();
         LocaleFactory::new()->withCode('fr_FR')->create();
