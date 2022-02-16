@@ -26,9 +26,9 @@ final class ProductAttributeFactoryTest extends KernelTestCase
     use Factories;
 
     /** @test */
-    function it_creates_product_attributes(): void
+    function it_creates_product_attribute(): void
     {
-        $productAttribute = ProductAttributeFactory::new()->create();
+        $productAttribute = ProductAttributeFactory::createOne();
 
         $this->assertInstanceOf(ProductAttributeInterface::class, $productAttribute->object());
         $this->assertNotNull($productAttribute->getCode());
@@ -36,7 +36,7 @@ final class ProductAttributeFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_product_attributes_with_custom_codes(): void
+    function it_creates_product_attribute_with_given_code(): void
     {
         $productAttribute = ProductAttributeFactory::new()->withCode('brand')->create();
 
@@ -44,7 +44,7 @@ final class ProductAttributeFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_product_attributes_with_custom_types(): void
+    function it_creates_product_attribute_with_given_type(): void
     {
         $productAttribute = ProductAttributeFactory::new()->withType('textarea')->create();
 
@@ -52,7 +52,7 @@ final class ProductAttributeFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_product_attributes_with_translations_for_each_locales(): void
+    function it_creates_product_attribute_with_translations_for_each_locales(): void
     {
         LocaleFactory::new()->withCode('en_US')->create();
         LocaleFactory::new()->withCode('fr_FR')->create();
@@ -63,7 +63,7 @@ final class ProductAttributeFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_product_attributes_with_custom_names(): void
+    function it_creates_product_attribute_with_given_name(): void
     {
         LocaleFactory::new()->withCode('en_US')->create();
         LocaleFactory::new()->withCode('fr_FR')->create();
@@ -84,7 +84,7 @@ final class ProductAttributeFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_translatable_product_attributes(): void
+    function it_creates_translatable_product_attribute(): void
     {
         $productAttribute = ProductAttributeFactory::new()->translatable()->create();
 
@@ -92,7 +92,7 @@ final class ProductAttributeFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_untranslatable_product_attributes(): void
+    function it_creates_untranslatable_product_attribute(): void
     {
         $productAttribute = ProductAttributeFactory::new()->untranslatable()->create();
 
@@ -100,7 +100,7 @@ final class ProductAttributeFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_product_attributes_with_custom_configuration(): void
+    function it_creates_product_attribute_with_given_configuration(): void
     {
         $productAttribute = ProductAttributeFactory::new()->withConfiguration(['foo' => 'fighters'])->create();
 
