@@ -26,9 +26,9 @@ final class ShopUserFactoryTest extends KernelTestCase
     use Factories;
 
     /** @test */
-    function it_creates_customers(): void
+    function it_creates_customer_with_random_data(): void
     {
-        $shopUser = ShopUserFactory::new()->create();
+        $shopUser = ShopUserFactory::createOne();
 
         $this->assertInstanceOf(ShopUserInterface::class, $shopUser->object());
         $this->assertNotNull($shopUser->getCustomer()->getEmail());
@@ -42,7 +42,7 @@ final class ShopUserFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_customers_with_custom_emails(): void
+    function it_creates_customer_with_given_email(): void
     {
         $shopUser = ShopUserFactory::new()->withEmail('shop@sylius.com')->create();
 
@@ -50,7 +50,7 @@ final class ShopUserFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_customers_with_custom_first_names(): void
+    function it_creates_customer_with_given_first_name(): void
     {
         $shopUser = ShopUserFactory::new()->withFirstName('Marty')->create();
 
@@ -58,7 +58,7 @@ final class ShopUserFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_customers_with_custom_last_names(): void
+    function it_creates_customer_with_given_last_name(): void
     {
         $shopUser = ShopUserFactory::new()->withLastName('McFly')->create();
 
@@ -66,7 +66,7 @@ final class ShopUserFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_male_customers(): void
+    function it_creates_male_customer(): void
     {
         $shopUser = ShopUserFactory::new()->male()->create();
 
@@ -74,7 +74,7 @@ final class ShopUserFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_female_customers(): void
+    function it_creates_female_customer(): void
     {
         $shopUser = ShopUserFactory::new()->female()->create();
 
@@ -82,7 +82,7 @@ final class ShopUserFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_customers_with_custom_phone_numbers(): void
+    function it_creates_customer_with_given_phone_number(): void
     {
         $shopUser = ShopUserFactory::new()->withPhoneNumber('0102030405')->create();
 
@@ -90,7 +90,7 @@ final class ShopUserFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_customers_with_custom_birthdays(): void
+    function it_creates_customer_with_given_birthday(): void
     {
         $birthday = new \DateTimeImmutable('39 years ago');
 
@@ -100,7 +100,7 @@ final class ShopUserFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_customers_with_custom_birthdays_via_relative_date(): void
+    function it_creates_customer_with_given_birthday_via_relative_date(): void
     {
         $birthday = new \DateTimeImmutable('39 years ago');
 
@@ -110,7 +110,7 @@ final class ShopUserFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_customers_with_custom_passwords(): void
+    function it_creates_customer_with_given_password(): void
     {
         $shopUser = ShopUserFactory::new()->withoutPersisting()->withPassword('passw0rd')->create();
 
@@ -118,7 +118,7 @@ final class ShopUserFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_customers_with_new_custom_groups(): void
+    function it_creates_customer_with_new_given_group(): void
     {
         $shopUser = ShopUserFactory::new()->withCustomerGroup('group_a')->create();
 
@@ -126,7 +126,7 @@ final class ShopUserFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_customers_with_existing_proxy_custom_groups(): void
+    function it_creates_customer_with_existing_proxy_given_group(): void
     {
         $customerGroup = CustomerGroupFactory::new()->withCode('group_a')->create();
         $shopUser = ShopUserFactory::new()->withCustomerGroup($customerGroup)->create();
@@ -135,7 +135,7 @@ final class ShopUserFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_customers_with_existing_custom_groups(): void
+    function it_creates_customer_with_existing_given_group(): void
     {
         $customerGroup = CustomerGroupFactory::new()->withCode('group_a')->create()->object();
         $shopUser = ShopUserFactory::new()->withCustomerGroup($customerGroup)->create();
