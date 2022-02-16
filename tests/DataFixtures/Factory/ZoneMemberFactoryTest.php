@@ -26,40 +26,45 @@ final class ZoneMemberFactoryTest extends KernelTestCase
     use Factories;
 
     /** @test */
-    function it_creates_zone_members(): void
+    function it_creates_zone_member(): void
     {
-        $zoneMember = ZoneMemberFactory::new()->create();
+        $zoneMember = ZoneMemberFactory::createOne();
 
         $this->assertInstanceOf(ZoneMemberInterface::class, $zoneMember->object());
-    }
-
-    /** @test */
-    function it_creates_zone_members_with_codes(): void
-    {
-        $zoneMember = ZoneMemberFactory::new()->withCode('united_states')->create();
-
-        $this->assertEquals('united_states', $zoneMember->getCode());
-
-        $zoneMember = ZoneMemberFactory::new()->create();
-
         $this->assertNotNull($zoneMember->getCode());
     }
 
     /** @test */
-    function it_creates_zone_members_with_parents(): void
+    function it_creates_zone_member_with_given_code(): void
     {
-        $parentZone = ZoneFactory::new()->withoutPersisting()->create();
-        $zoneMember = ZoneMemberFactory::new()->withoutPersisting()->belongsTo($parentZone)->create();
+        $zoneMember = ZoneMemberFactory::new()->withCode('united_states')->create();
 
-        $this->assertEquals($parentZone->object(), $zoneMember->getBelongsTo());
+        $this->assertEquals('united_states', $zoneMember->getCode());
+    }
 
-        $parentZone = ZoneFactory::new()->withoutPersisting()->create()->object();
-        $zoneMember = ZoneMemberFactory::new()->withoutPersisting()->belongsTo($parentZone)->create();
-
-        $this->assertEquals($parentZone, $zoneMember->getBelongsTo());
-
-        $zoneMember = ZoneMemberFactory::new()->withoutPersisting()->belongsTo('world')->create();
+    /** @test */
+    function it_creates_zone_member_with_new_parent_code(): void
+    {
+        $zoneMember = ZoneMemberFactory::new()->belongsTo('world')->create();
 
         $this->assertEquals('world', $zoneMember->getBelongsTo()->getCode());
+    }
+
+    /** @test */
+    function it_creates_zone_member_with_existing_proxy_parent(): void
+    {
+        $parentZone = ZoneFactory::new()->create();
+        $zoneMember = ZoneMemberFactory::new()->belongsTo($parentZone)->create();
+
+        $this->assertEquals($parentZone->object(), $zoneMember->getBelongsTo());
+    }
+
+    /** @test */
+    function it_creates_zone_member_with_existing_parent(): void
+    {
+        $parentZone = ZoneFactory::new()->create()->object();
+        $zoneMember = ZoneMemberFactory::new()->belongsTo($parentZone)->create();
+
+        $this->assertEquals($parentZone, $zoneMember->getBelongsTo());
     }
 }
