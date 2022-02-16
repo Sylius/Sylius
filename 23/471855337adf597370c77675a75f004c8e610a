@@ -1,0 +1,30 @@
+---------------------------------------------------------------------------
+
+by Roshyo at 2022-02-14T06:01:21Z
+
+What about performances? Isn't it heavier to have all services public?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-02-14T08:50:58Z
+
+According to Mateusz posts(https://github.com/Sylius/Sylius/pull/13641#discussion_r804760104) we already have 964 services, all of them(or at least majority) are public. So creation of new private services probably have neglectable influence over the website.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-02-14T12:35:22Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "adr-public-services"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2022-02-16T07:19:16Z
+
+Thanks, Łukasz! :tada:
