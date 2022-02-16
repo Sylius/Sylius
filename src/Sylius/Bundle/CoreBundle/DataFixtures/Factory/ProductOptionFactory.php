@@ -80,9 +80,12 @@ final class ProductOptionFactory extends ModelFactory implements ProductOptionFa
             ->instantiateWith(function(array $attributes): ProductOptionInterface {
                 $code = $attributes['code'] ?? StringInflector::nameToCode($attributes['name']);
 
-                $values = $attributes['values'] ?? [];
-                for ($i = 1; $i <= 5; ++$i) {
-                    $values[sprintf('%s-option#%d', $attributes['code'], $i)] = sprintf('%s #i%d', $attributes['name'], $i);
+                $values = $attributes['values'] ?? null;
+
+                if (null === $values) {
+                    for ($i = 1; $i <= 5; ++$i) {
+                        $values[sprintf('%s-option#%d', $attributes['code'], $i)] = sprintf('%s #i%d', $attributes['name'], $i);
+                    }
                 }
 
                 /** @var ProductOptionInterface $productOption */

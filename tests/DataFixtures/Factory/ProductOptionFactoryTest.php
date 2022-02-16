@@ -27,7 +27,7 @@ final class ProductOptionFactoryTest extends KernelTestCase
     use Factories;
 
     /** @test */
-    function it_creates_product_options(): void
+    function it_creates_product_option_with_random_code(): void
     {
         $productOption = ProductOptionFactory::createOne();
 
@@ -37,7 +37,7 @@ final class ProductOptionFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_product_options_with_custom_codes(): void
+    function it_creates_product_option_with_given_code(): void
     {
         $productOption = ProductOptionFactory::new()->withCode('color')->create();
 
@@ -45,7 +45,7 @@ final class ProductOptionFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_product_options_with_translations_for_each_locales(): void
+    function it_creates_product_option_with_translations_for_each_locales(): void
     {
         LocaleFactory::createMany(2);
 
@@ -55,7 +55,7 @@ final class ProductOptionFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_product_options_with_custom_names(): void
+    function it_creates_product_option_with_given_name(): void
     {
         LocaleFactory::new()->withCode('en_US')->create();
         LocaleFactory::new()->withCode('fr_FR')->create();
@@ -76,7 +76,7 @@ final class ProductOptionFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_product_options_with_custom_values(): void
+    function it_creates_product_option_with_given_values(): void
     {
         LocaleFactory::createOne();
 
