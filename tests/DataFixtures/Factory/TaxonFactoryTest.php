@@ -48,7 +48,7 @@ final class TaxonFactoryTest extends KernelTestCase
         LocaleFactory::new()->withCode('en_US')->create();
         LocaleFactory::new()->withCode('fr_FR')->create();
 
-        $taxon = TaxonFactory::new()->withName('Board games')->create();
+        $taxon = TaxonFactory::new()->withName('Board games')->create()->object();
 
         $this->assertEquals(2, $taxon->getTranslations()->count());
 
@@ -73,7 +73,7 @@ final class TaxonFactoryTest extends KernelTestCase
         LocaleFactory::new()->withCode('en_US')->create();
         LocaleFactory::new()->withCode('fr_FR')->create();
 
-        $taxon = TaxonFactory::new()->withDescription('Board games are awesome.')->create();
+        $taxon = TaxonFactory::new()->withDescription('Board games are awesome.')->create()->object();
 
         $this->assertEquals(2, $taxon->getTranslations()->count());
 
@@ -103,7 +103,7 @@ final class TaxonFactoryTest extends KernelTestCase
             'fr_FR' => [
                 'name' => 'Jeux de société',
             ],
-        ])->create();
+        ])->create()->object();
 
         // testing en_US translation
         $taxon->setCurrentLocale('en_US');
