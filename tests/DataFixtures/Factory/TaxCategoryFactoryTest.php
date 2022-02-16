@@ -25,9 +25,9 @@ final class TaxCategoryFactoryTest extends KernelTestCase
     use Factories;
 
     /** @test */
-    function it_creates_tax_categories(): void
+    function it_creates_tax_category(): void
     {
-        $taxCategory = TaxCategoryFactory::new()->create();
+        $taxCategory = TaxCategoryFactory::createOne();
 
         $this->assertInstanceOf(TaxCategoryInterface::class, $taxCategory->object());
         $this->assertNotNull($taxCategory->getCode());
@@ -36,7 +36,7 @@ final class TaxCategoryFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_locales_with_custom_codes(): void
+    function it_creates_locales_with_given_code(): void
     {
         $taxCategory = TaxCategoryFactory::new()->withCode('TC1')->create();
 
@@ -44,7 +44,7 @@ final class TaxCategoryFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_locales_with_custom_names(): void
+    function it_creates_locales_with_given_name(): void
     {
         $taxCategory = TaxCategoryFactory::new()->withName('Taxable goods')->create();
 
@@ -53,7 +53,7 @@ final class TaxCategoryFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_locales_with_custom_descriptions(): void
+    function it_creates_locales_with_given_description(): void
     {
         $taxCategory = TaxCategoryFactory::new()->withDescription('Taxable goods are evil.')->create();
 
