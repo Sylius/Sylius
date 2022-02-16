@@ -155,6 +155,12 @@
             </errorLevel>
         </UndefinedMethod>
 
+        <UndefinedMethod>
+            <errorLevel type="info">
+                <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ShopUserFactory.php" />
+            </errorLevel>
+        </UndefinedMethod>
+
         <MissingReturnType errorLevel="info" />
 
         <PropertyNotSetInConstructor errorLevel="info" />
