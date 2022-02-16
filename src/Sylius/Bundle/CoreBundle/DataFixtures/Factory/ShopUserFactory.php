@@ -114,7 +114,7 @@ final class ShopUserFactory extends ModelFactory implements ShopUserFactoryInter
             'customer_group' => $this->customerGroupFactory::randomOrCreate(),
             'gender' => CustomerInterface::UNKNOWN_GENDER,
             'phone_number' => self::faker()->phoneNumber(),
-            'birthday' => self::faker()->dateTimeThisCentury(),
+            'birthday' => self::faker()->dateTimeBetween('-80 years', '-18 years'),
         ];
     }
 
