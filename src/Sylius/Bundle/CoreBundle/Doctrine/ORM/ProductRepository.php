@@ -37,10 +37,16 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
 
     public function createListQueryBuilder(string $locale, $taxonId = null): QueryBuilder
     {
-        $queryBuilder = $this->createQueryBuilder('o')
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder = $queryBuilder
             ->addSelect('translation')
-            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
-            ->setParameter('locale', $locale)
+            ->leftJoin('o.translations', 'translation', 'WITH', $queryBuilder->expr()->orX(
+                $queryBuilder->expr()->eq('translation.locale', ':currentLocale'),
+                $queryBuilder->expr()->eq('translation.locale', ':defaultLocale'),
+            ))
+            ->setParameter('defaultLocale', 'en_US')
+            ->setParameter('currentLocale', $locale)
         ;
 
         if (null !== $taxonId) {
