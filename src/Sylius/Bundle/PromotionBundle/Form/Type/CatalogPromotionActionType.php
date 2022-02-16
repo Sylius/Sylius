@@ -1,11 +1,18 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator;
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPriceCalculator;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -65,27 +72,10 @@ final class CatalogPromotionActionType extends AbstractResourceType
                     $formData->setType($data['type']);
                     $formData->setConfiguration($data['configuration']);
 
-                    if ($data['type'] === FixedDiscountPriceCalculator::TYPE) {
-                        foreach ($data['configuration'] as $channelConfiguration) {
-                            if ($channelConfiguration['amount'] === '') {
-                                return;
-                            }
-                        }
-                    }
-
-                    if ($data['type'] === PercentageDiscountPriceCalculator::TYPE) {
-                        if ($data['configuration']['amount'] === '') {
-                            return;
-                        }
-                    }
-
                     $form->setData($formData);
                 }
 
-                $actionConfigurationType = $this->actionConfigurationTypes[$data['type']];
-                $form->add('configuration', $actionConfigurationType, [
-                    'label' => false,
-                ]);
+                $this->addConfigurationTypeToForm($event);
             })
         ;
     }
@@ -97,7 +87,6 @@ final class CatalogPromotionActionType extends AbstractResourceType
 
     private function addConfigurationTypeToForm(FormEvent $event): void
     {
-        /** @var CatalogPromotionActionInterface|null $data */
         $data = $event->getData();
         if ($data === null) {
             return;
@@ -105,7 +94,9 @@ final class CatalogPromotionActionType extends AbstractResourceType
 
         $form = $event->getForm();
 
-        $actionConfigurationType = $this->actionConfigurationTypes[$data->getType()];
+        $dataType = $data instanceof CatalogPromotionActionInterface ? $data->getType() : $data['type'];
+
+        $actionConfigurationType = $this->actionConfigurationTypes[$dataType];
         $form->add('configuration', $actionConfigurationType, [
             'label' => false,
         ]);

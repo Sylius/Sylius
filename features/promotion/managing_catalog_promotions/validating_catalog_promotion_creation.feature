@@ -111,7 +111,7 @@ Feature: Validating a catalog promotion creation
         And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add invalid percentage discount action with non number in amount
         And I try to add it
-        Then I should be notified that a discount amount is not valid
+        Then I should be notified that a discount amount should be a number and cannot be empty
         And there should be an empty list of catalog promotions
 
     @api @ui @javascript
