@@ -19,6 +19,14 @@
             <tag name="doctrine.fixture.orm" />
         </service>
 
+        <service id="sylius.data_fixtures.factory.address" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\AddressFactory">
+            <argument type="service" id="sylius.factory.address" />
+            <argument type="service" id="sylius.data_fixtures.factory.country" />
+            <tag name="foundry.factory" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\AddressFactoryInterface" alias="sylius.data_fixtures.factory.address" />
+
         <service id="sylius.data_fixtures.factory.customer_group" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerGroupFactory">
             <argument type="service" id="sylius.factory.customer_group" />
             <tag name="foundry.factory" />
