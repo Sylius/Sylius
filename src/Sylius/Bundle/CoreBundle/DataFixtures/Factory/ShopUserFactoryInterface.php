@@ -47,6 +47,8 @@ interface ShopUserFactoryInterface
 
     public function male(): self;
 
+    public function female(): self;
+
     public function withPhoneNumber(string $phoneNumber): self;
 
     public function withBirthday(\DateTimeInterface|string $birthday): self;

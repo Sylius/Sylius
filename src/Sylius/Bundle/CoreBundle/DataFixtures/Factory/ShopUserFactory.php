@@ -80,13 +80,11 @@ final class ShopUserFactory extends ModelFactory implements ShopUserFactoryInter
 
     public function withBirthday(\DateTimeInterface|string $birthday): self
     {
-        return $this->addState(function () use ($birthday): array {
-            if (is_string($birthday)) {
-                return ['birthday' => new \DateTimeImmutable($birthday)];
-            }
+        if (is_string($birthday)) {
+            $birthday = new \DateTimeImmutable($birthday);
+        }
 
-            return ['birthday' => $birthday];
-        });
+        return $this->addState(['birthday' => $birthday]);
     }
 
     public function withPassword(string $password): self
