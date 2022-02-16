@@ -26,27 +26,24 @@ final class ZoneFactoryTest extends KernelTestCase
     use Factories;
 
     /** @test */
-    function it_creates_zones(): void
+    function it_creates_zone_with_random_code(): void
     {
-        $zone = ZoneFactory::new()->create();
+        $zone = ZoneFactory::createOne();
 
         $this->assertInstanceOf(ZoneInterface::class, $zone->object());
-    }
-
-    /** @test */
-    function it_creates_zones_with_codes(): void
-    {
-        $zone = ZoneFactory::new()->withCode('world')->create();
-
-        $this->assertEquals('world', $zone->getCode());
-
-        $zone = ZoneFactory::new()->create();
-
         $this->assertNotNull($zone->getCode());
     }
 
     /** @test */
-    function it_creates_zones_with_new_members(): void
+    function it_creates_zone_with_given_code(): void
+    {
+        $zone = ZoneFactory::new()->withCode('world')->create();
+
+        $this->assertEquals('world', $zone->getCode());
+    }
+
+    /** @test */
+    function it_creates_zone_with_new_members(): void
     {
         $zone = ZoneFactory::new()->withMembers(['united_states', 'france'])->create();
 
@@ -55,7 +52,7 @@ final class ZoneFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_zones_with_existing_proxy_members(): void
+    function it_creates_zone_with_existing_proxy_members(): void
     {
         $firstZoneMember = ZoneMemberFactory::new()->withCode('zone_a')->create();
         $secondZoneMember = ZoneMemberFactory::new()->withCode('zone_b')->create();
@@ -70,7 +67,7 @@ final class ZoneFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_zones_with_existing_members(): void
+    function it_creates_zone_with_existing_members(): void
     {
         $firstZoneMember = ZoneMemberFactory::new()->withCode('zone_a')->create()->object();
         $secondZoneMember = ZoneMemberFactory::new()->withCode('zone_b')->create()->object();
@@ -85,7 +82,7 @@ final class ZoneFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_zones_with_new_countries(): void
+    function it_creates_zone_with_new_countries(): void
     {
         $zone = ZoneFactory::new()->withCountries(['FR', 'EN'])->create();
 
@@ -94,7 +91,7 @@ final class ZoneFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_zones_with_existing_proxy_countries(): void
+    function it_creates_zone_with_existing_proxy_countries(): void
     {
         $firstZoneMember = ZoneMemberFactory::new()->withCode('FR')->create();
         $secondZoneMember = ZoneMemberFactory::new()->withCode('EN')->create();
@@ -109,7 +106,7 @@ final class ZoneFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_zones_with_existing_countries(): void
+    function it_creates_zone_with_existing_countries(): void
     {
         $firstZoneMember = ZoneMemberFactory::new()->withCode('FR')->create()->object();
         $secondZoneMember = ZoneMemberFactory::new()->withCode('EN')->create()->object();
@@ -124,7 +121,7 @@ final class ZoneFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_zones_with_new_provinces(): void
+    function it_creates_zone_with_new_provinces(): void
     {
         $zone = ZoneFactory::new()->withProvinces(['US-TX', 'US-ME'])->create();
 
@@ -133,7 +130,7 @@ final class ZoneFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_zones_with_existing_proxy_provinces(): void
+    function it_creates_zone_with_existing_proxy_provinces(): void
     {
         $firstZoneMember = ZoneMemberFactory::new()->withCode('US-TX')->create();
         $secondZoneMember = ZoneMemberFactory::new()->withCode('US-ME')->create();
@@ -148,7 +145,7 @@ final class ZoneFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_zones_with_existing_provinces(): void
+    function it_creates_zone_with_existing_provinces(): void
     {
         $firstZoneMember = ZoneMemberFactory::new()->withCode('US-TX')->create()->object();
         $secondZoneMember = ZoneMemberFactory::new()->withCode('US-ME')->create()->object();
