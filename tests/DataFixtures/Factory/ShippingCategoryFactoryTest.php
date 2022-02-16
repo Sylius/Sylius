@@ -26,27 +26,24 @@ final class ShippingCategoryFactoryTest extends KernelTestCase
     use Factories;
 
     /** @test */
-    function it_creates_shipping_categories(): void
+    function it_creates_shipping_category(): void
     {
-        $shippingCategory = ShippingCategoryFactory::new()->create();
+        $shippingCategory = ShippingCategoryFactory::createOne();
 
         $this->assertInstanceOf(ShippingCategoryInterface::class, $shippingCategory->object());
-    }
-
-    /** @test */
-    function it_creates_shipping_categories_with_codes(): void
-    {
-        $shippingCategory = ShippingCategoryFactory::new()->withCode('SC2')->create();
-
-        $this->assertEquals('SC2', $shippingCategory->getCode());
-
-        $shippingCategory = ShippingCategoryFactory::new()->create();
-
         $this->assertNotNull($shippingCategory->getCode());
     }
 
     /** @test */
-    function it_creates_shipping_categories_with_names(): void
+    function it_creates_shipping_category_with_given_code(): void
+    {
+        $shippingCategory = ShippingCategoryFactory::new()->withCode('SC2')->create();
+
+        $this->assertEquals('SC2', $shippingCategory->getCode());
+    }
+
+    /** @test */
+    function it_creates_shipping_category_with_given_name(): void
     {
         $shippingCategory = ShippingCategoryFactory::new()->withName('Shipping category one')->create();
 
@@ -55,7 +52,7 @@ final class ShippingCategoryFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_shipping_categories_with_descriptions(): void
+    function it_creates_shipping_category_with_given_description(): void
     {
         $shippingCategory = ShippingCategoryFactory::new()->withDescription('One category to rule them all.')->create();
 
