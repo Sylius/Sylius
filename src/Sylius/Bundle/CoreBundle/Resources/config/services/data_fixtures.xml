@@ -47,5 +47,14 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface" alias="sylius.data_fixtures.factory.locale" />
+
+        <service id="sylius.data_fixtures.factory.shop_user" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactory">
+            <argument type="service" id="sylius.factory.shop_user" />
+            <argument type="service" id="sylius.factory.customer" />
+            <argument type="service" id="sylius.data_fixtures.factory.customer_group" />
+            <tag name="foundry.factory" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactoryInterface" alias="sylius.data_fixtures.factory.shop_user" />
     </services>
 </container>
