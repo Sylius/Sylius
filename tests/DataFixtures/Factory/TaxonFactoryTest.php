@@ -134,9 +134,14 @@ final class TaxonFactoryTest extends KernelTestCase
             ],
         ])->create();
 
+        $this->assertCount(2, $taxon->getChildren());
+
         /** @var TaxonInterface $firstTaxon */
         $firstTaxon = $taxon->getChildren()->first();
-        $this->assertCount(2, $taxon->getChildren());
         $this->assertEquals('Jeans', $firstTaxon->getName());
+
+        /** @var TaxonInterface $secondTaxon */
+        $secondTaxon = $taxon->getChildren()->last();
+        $this->assertEquals('Dresses', $secondTaxon->getName());
     }
 }
