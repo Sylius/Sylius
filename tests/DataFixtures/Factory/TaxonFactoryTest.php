@@ -103,7 +103,7 @@ final class TaxonFactoryTest extends KernelTestCase
             'fr_FR' => [
                 'name' => 'Jeux de société',
             ],
-        ])->withoutPersisting()->create();
+        ])->create();
 
         // testing en_US translation
         $taxon->setCurrentLocale('en_US');
@@ -132,7 +132,7 @@ final class TaxonFactoryTest extends KernelTestCase
             [
                 'name' => 'Dresses',
             ],
-        ])->withoutPersisting()->create();
+        ])->create();
 
         /** @var TaxonInterface $firstTaxon */
         $firstTaxon = $taxon->getChildren()->first();
