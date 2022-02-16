@@ -24,7 +24,7 @@ sylius_grid:
                 name:
                     type: string
                     label: sylius.ui.name
-                    sortable: translation.name
+                    sortable: translations.name
                 mainTaxon:
                     type: twig
                     label: sylius.ui.main_taxon
@@ -40,7 +40,7 @@ sylius_grid:
                     type: string
                     label: sylius.ui.search
                     options:
-                        fields: [code, translation.name]
+                        fields: [code, translations.name]
                 enabled:
                     type: boolean
                     label: sylius.ui.enabled
