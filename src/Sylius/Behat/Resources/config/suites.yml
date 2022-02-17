@@ -47,6 +47,7 @@ imports:
 
     - suites/cli/installer.yml
     - suites/cli/showing_available_plugins.yml
+    - suites/cli/canceling_unpaid_orders.yml
 
     - suites/domain/cart/shopping_cart.yml
     - suites/domain/order/managing_orders.yml

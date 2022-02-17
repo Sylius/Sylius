@@ -23,8 +23,9 @@
             <argument type="service" id="kernel" />
         </service>
 
-        <service id="Sylius\Behat\Context\Cli\CancelUnpaidOrdersContext">
+        <service id="sylius.behat.context.cli.cancel_unpaid_orders" class="Sylius\Behat\Context\Cli\CancelUnpaidOrdersContext">
             <argument type="service" id="kernel" />
+            <argument type="service" id="sylius.repository.order" />
         </service>
     </services>
 </container>

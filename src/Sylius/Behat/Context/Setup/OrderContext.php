@@ -727,6 +727,18 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given the customer has refunded the order with number :orderNumber
+     */
+    public function customerHasRefundedTheOrderWithNumber(string $orderNumber)
+    {
+        $order = $this->sharedStorage->get('orders')[$orderNumber];
+
+        $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_REFUND);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^the customer cancelled (this order)$/
      * @Given /^(this order) was cancelled$/
      * @Given the order :order was cancelled
@@ -793,6 +805,24 @@ final class OrderContext implements Context
         $this->completeCheckout($order);
 
         $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^there is a (customer "[^"]+") that has placed 2 orders with numbers "([^"]*)" and "([^"]*)"$/
+     */
+    public function thereIsCustomerThatPlacedTwoOrders(
+        CustomerInterface $customer,
+        string $orderNumber1,
+        string $orderNumber2
+    ): void {
+        $order1 = $this->createOrder($customer, $orderNumber1);
+        $order2 = $this->createOrder($customer, $orderNumber2);
+
+        $this->sharedStorage->set('customer', $customer);
+        $this->sharedStorage->set('orders', [$orderNumber1 => $order1, $orderNumber2 => $order2]);
+
+        $this->orderRepository->add($order1);
+        $this->orderRepository->add($order2);
     }
 
     /**

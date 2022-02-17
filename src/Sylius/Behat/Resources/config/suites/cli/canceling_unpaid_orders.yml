@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        cli_canceling_unpaid_orders:
+            contexts:
+                - sylius.behat.context.cli.cancel_unpaid_orders
+                
+                - sylius.behat.context.setup.order
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.payment
+                
+                - sylius.behat.context.domain.managing_orders
+            filters:
+                tags: "@canceling_unpaid_orders&&@cli"

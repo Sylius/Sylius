@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Cli;
 
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 use Behat\Behat\Context\Context;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -27,24 +28,31 @@ final class CancelUnpaidOrdersContext implements Context
 
     private ?CommandTester $commandTester = null;
 
-    public function __construct(KernelInterface $kernel)
+    private OrderRepositoryInterface $orderRepository;
+
+    public function __construct(KernelInterface $kernel, OrderRepositoryInterface $orderRepository)
     {
         $this->application = new Application($kernel);
+        $this->orderRepository = $orderRepository;
     }
 
     /**
-     * @When the unpaid orders has been cancelled
+     * @Then only unpaid order with number :orderNumber should be canceled
      */
-    public function runCancelUnpaidOrdersCommand(): void
+    public function runCancelUnpaidOrdersCommand(string $orderNumber): void
     {
         $command = $this->application->find(self::CANCEL_UNPAID_ORDERS_COMMAND);
 
         $this->commandTester = new CommandTester($command);
         $this->commandTester->execute(['command' => self::CANCEL_UNPAID_ORDERS_COMMAND]);
+
+        $order = $this->orderRepository->findOneByNumber($orderNumber);
+
+        Assert::eq($order->getNumber(), $orderNumber);
     }
 
     /**
-     * @Then I should see be informed that unpaid orders have been cancelled
+     * @Then I should be informed that unpaid order have been cancelled
      */
     public function shouldSeeOutputMessage(): void
     {
