@@ -15,7 +15,7 @@
             ...
         }
     ```
-   
+
 1. The  `GET` `api/v2/shop/orders/{token}/shipments/{id}/methods` and `api/v2/shop/shipments/{id}/methods` endpoints have been removed and changed into collection request with 2 parameters `api/v2/shop/shipping-methods?shipmentId={id}&orderToken={token}`.
 Now when we do not provide parameters in response it returns all available `shippingMethods` in channel.
 Wrong parameters otherwise cause empty array `[]` in response and correct parameters return `shippingMethods` available for your `shipment`.     
@@ -59,3 +59,8 @@ Here is how the response looks like:
         }
       }
    ```
+
+1. Service `src/Sylius/Bundle/ApiBundle/DataProvider/CartPaymentMethodsSubresourceDataProvider.php` has been removed and logic was replaced by `src/Sylius/Bundle/ApiBundle/DataProvider/PaymentMethodsCollectionDataProvider.php`
+
+1. Endpoints `/shop/orders/{tokenValue}/payments/{payments}/methods`, `/shop/payments/{id}/methods` has been removed and replaced by `/shop/payment-methods` with filter `paymentId` and `tokenValue`
+   `/shop/payment-methods` returns all enable payment methods if filters are not set, payment methods related to payment if filters are filled or empty response if filters ale filled with invalid data.
