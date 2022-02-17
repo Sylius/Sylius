@@ -62,5 +62,9 @@
         <service id="sylius_shop.form.type.product_review" class="Sylius\Bundle\ShopBundle\Form\Type\Product\ProductReviewType">
             <tag name="form.type" />
         </service>
+
+        <service id="Sylius\Bundle\ShopBundle\Form\Extension\ChannelTypeExtension">
+            <tag name="form.type_extension" />
+        </service>
     </services>
 </container>
