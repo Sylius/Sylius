@@ -24,10 +24,10 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. tip::
 
-    If it is a new project you are initiating, then first install Sylius-Standard in **version ^1.10** according to
+    If it is a new project you are initiating, then first install Sylius-Standard in **version ^1.11** according to
     :doc:`these instructions </book/installation/installation>`.
 
-    If you're installing Plus package to an existing project, then make sure you're upgraded to ``sylius/sylius ^1.10``.
+    If you're installing Plus package to an existing project, then make sure you're upgraded to ``sylius/sylius ^1.11``.
 
 **1.** Configure access to the private Packagist package in composer by using the Access Token you have been given with your license.
 
@@ -63,18 +63,6 @@ Installing Sylius Plus as a plugin to a Sylius application
     imports:
     # ...
         - { resource: "@SyliusPlusPlugin/Resources/config/config.yaml" }
-
-.. warning::
-
-    Recommended Sylius version to use with Sylius Plus is 1.11. If, for any reason, you need to use Sylius 1.10, it's required
-    to customise some API configurations. Run the following commands, to do it:
-
-    .. code-block:: bash
-
-        mkdir config/api_platform/
-        cp -R vendor/sylius/plus/etc/sylius-1.10/Resources/config/api_resources/* config/api_platform/
-        rm vendor/sylius/plus/src/Resources/config/api_resources/Customer.xml
-        rm vendor/sylius/plus/src/Resources/config/api_resources/Order.xml
 
 **5.** Configure Shop, Admin and Admin API routing:
 
