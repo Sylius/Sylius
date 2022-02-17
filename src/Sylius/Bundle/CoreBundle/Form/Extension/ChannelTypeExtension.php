@@ -24,7 +24,6 @@ use Sylius\Bundle\CoreBundle\Form\Type\TaxCalculationStrategyChoiceType;
 use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyChoiceType;
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
-use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
 use Sylius\Component\Core\Model\Scope;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -68,12 +67,6 @@ final class ChannelTypeExtension extends AbstractTypeExtension
             ])
             ->add('taxCalculationStrategy', TaxCalculationStrategyChoiceType::class, [
                 'label' => 'sylius.form.channel.tax_calculation_strategy',
-            ])
-            ->add('themeName', ThemeNameChoiceType::class, [
-                'label' => 'sylius.form.channel.theme',
-                'required' => false,
-                'empty_data' => null,
-                'placeholder' => 'sylius.ui.no_theme',
             ])
             ->add('contactEmail', EmailType::class, [
                 'label' => 'sylius.form.channel.contact_email',
