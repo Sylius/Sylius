@@ -36,7 +36,7 @@ final class ResetPasswordHandler implements MessageHandlerInterface
         /** @var ShopUserInterface|null $user */
         $user = $this->userRepository->findOneBy(['passwordResetToken' => $command->resetPasswordToken]);
 
-        Assert::notNull($user);
+        Assert::notNull($user, 'No user found with reset token: ' . $command->resetPasswordToken);
 
         $resetting = $this->metadata->getParameter('resetting');
         $lifetime = new \DateInterval($resetting['token']['ttl']);
