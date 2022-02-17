@@ -10,7 +10,3 @@ default:
 
             filters:
                 tags: "@showing_available_plugins&&@cli"
-
-        cli_cancel_unpaid_orders:
-            contexts:
-                - Sylius\Behat\Context\Cli\CancelUnpaidOrdersContext
