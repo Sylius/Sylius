@@ -41,7 +41,8 @@ final class AddressFactory extends ModelFactory implements AddressFactoryInterfa
 {
     public function __construct(
         private FactoryInterface $addressFactory,
-        private CountryFactoryInterface $countryFactory
+        private CountryFactoryInterface $countryFactory,
+        private ShopUserFactoryInterface $shopUserFactory
     ) {
         parent::__construct();
     }
@@ -94,6 +95,17 @@ final class AddressFactory extends ModelFactory implements AddressFactoryInterfa
     public function withProvinceCode(string $provinceCode): self
     {
         return $this->addState(['province_code' => $provinceCode]);
+    }
+
+    public function withCustomer(Proxy|CustomerInterface|string $customer): self
+    {
+        return $this->addState(function () use ($customer): array {
+            if (is_string($customer)) {
+                $customer = $this->shopUserFactory::randomOrCreate(['email' => $customer])->getCustomer();
+            }
+
+            return ['customer' => $customer];
+        });
     }
 
     protected function getDefaults(): array

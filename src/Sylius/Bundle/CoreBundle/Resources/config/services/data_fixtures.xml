@@ -22,6 +22,7 @@
         <service id="sylius.data_fixtures.factory.address" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\AddressFactory">
             <argument type="service" id="sylius.factory.address" />
             <argument type="service" id="sylius.data_fixtures.factory.country" />
+            <argument type="service" id="sylius.data_fixtures.factory.shop_user" />
             <tag name="foundry.factory" />
         </service>
 

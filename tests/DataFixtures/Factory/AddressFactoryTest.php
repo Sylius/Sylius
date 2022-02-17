@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Tests\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\AddressFactory;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactory;
 use Sylius\Component\Core\Model\AddressInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
@@ -116,5 +117,31 @@ final class AddressFactoryTest extends KernelTestCase
         $address = AddressFactory::new()->withProvinceCode('CA')->create();
 
         $this->assertEquals('CA', $address->getProvinceCode());
+    }
+
+    /** @test */
+    function it_creates_address_with_new_given_customer_email(): void
+    {
+        $address = AddressFactory::new()->withCustomer('marty.mcfly@future.com')->create();
+
+        $this->assertEquals('marty.mcfly@future.com', $address->getCustomer()->getEmail());
+    }
+
+    /** @test */
+    function it_creates_address_with_existing_proxy_given_customer_email(): void
+    {
+        $shopUser = ShopUserFactory::new()->withEmail('marty.mcfly@future.com')->create();
+        $address = AddressFactory::new()->withCustomer($shopUser->getCustomer())->create();
+
+        $this->assertEquals($shopUser->getCustomer(), $address->getCustomer());
+    }
+
+    /** @test */
+    function it_creates_address_with_existing_given_customer_email(): void
+    {
+        $shopUser = ShopUserFactory::new()->withEmail('marty.mcfly@future.com')->create()->object();
+        $address = AddressFactory::new()->withCustomer($shopUser->getCustomer())->create();
+
+        $this->assertEquals($shopUser->getCustomer(), $address->getCustomer());
     }
 }
