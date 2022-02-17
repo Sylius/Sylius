@@ -1,9 +1,9 @@
 @cli
-Feature: Cancel unpaid orders
-    In order to manually cancel only unpaid orders
-    As a developer
-    I need to use command in terminal
+Feature: Canceling unpaid orders
+    In order to have my orders list free from completed but unpaid orders
+    As a Developer
+    I want to have unpaid orders cancelled
 
-    Scenario: Canceling unpaid orders from console
-        When I run command that cancels unpaid orders
-        Then I should see output "Unpaid orders has been canceled" message in terminal
+    Scenario: Canceling unpaid orders
+        When the unpaid orders has been cancelled
+        Then I should see be informed that unpaid orders have been cancelled
