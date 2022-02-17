@@ -11,7 +11,6 @@ Feature: Canceling unpaid orders
         And the store allows paying with "Paypal Express Checkout"
 
     Scenario: Having order cancelled after 6 days of being unpaid
-        Given there is a customer "john.doe@gmail.com" that placed an order "#00000022"
         Given there is a customer "john.doe@gmail.com" that has placed 2 orders with numbers "#00000025" and "#00000026"
         And the customer has refunded the order with number "#00000026"
         When the order with number "#00000025" has not been paid for 6 days
