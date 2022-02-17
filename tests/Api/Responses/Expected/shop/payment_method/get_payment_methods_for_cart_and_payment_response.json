@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/PaymentMethod",
-    "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA\/payments\/@integer@\/methods",
+    "@id": "\/api\/v2\/shop\/payment-methods",
     "@type": "hydra:Collection",
     "hydra:member": [
         {
@@ -24,5 +24,28 @@
             "instructions": null
         }
     ],
-    "hydra:totalItems": 2
+   "hydra:totalItems": 2,
+   "hydra:view": {
+      "@id": @string@,
+      "@type": "hydra:PartialCollectionView"
+   },
+   "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "/api/v2/shop/payment-methods{?paymentId,tokenValue}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+       {
+            "@type": "IriTemplateMapping",
+            "variable": "paymentId",
+            "property": null,
+            "required": false
+       },
+       {
+            "@type": "IriTemplateMapping",
+            "variable": "tokenValue",
+            "property": null,
+            "required": false
+       }
+     ]
+   }
 }

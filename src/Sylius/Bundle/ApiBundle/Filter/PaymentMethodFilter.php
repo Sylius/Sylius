@@ -35,7 +35,7 @@ final class PaymentMethodFilter implements FilterInterface
                 'property' => null,
                 'swagger' => [
                     'name' => 'Order',
-                    'description' => 'Id of order for which you would like to check available payment methods. Should be set if you are checking payment methods for payment, that is not assigned to user.',
+                    'description' => 'Token value of order for which you would like to check available payment methods. Must be set if you want to get payment methods for specific order\'s payment.'
                 ],
             ],
         ];

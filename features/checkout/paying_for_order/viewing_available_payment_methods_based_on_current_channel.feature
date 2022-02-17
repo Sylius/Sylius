@@ -7,7 +7,7 @@ Feature: Viewing available payment methods based on current channel
     Background:
         Given the store operates on another channel named "United States" in "USD" currency and with hostname "usa.cool-clothes.example"
         And the store operates on a channel named "Poland" with hostname "polski-sklep.pl"
-        And the store has a zone "World" with code "WORLD"
+        And the store has a zone "World"
         And the store ships to "United States"
         And this zone has the "United States" country member
         And the store allows paying "Bank of America" in "United States" channel
@@ -19,12 +19,12 @@ Feature: Viewing available payment methods based on current channel
         And this product is also priced at "$25.00" in "Poland" channel
         And the store ships everywhere for free for all channels
 
-    @api @ui
+    @ui @api
     Scenario: Seeing payment methods that are available in channel as an logged in customer
         Given I am a logged in customer
         And I view shop on "United States" channel
         And I have product "PHP T-Shirt" in the cart
-        When I complete addressing step with email "john@example.com" and "United States" based billing address
+        When I complete addressing step with "United States" based billing address
         And I complete the shipping step with first shipping method
         Then I should be on the checkout payment step
         And I should see "Bank of America" and "Offline" payment methods
@@ -35,15 +35,15 @@ Feature: Viewing available payment methods based on current channel
         Given I am a logged in customer
         And I view shop on "Poland" channel
         And I have product "PHP T-Shirt" in the cart
-        When I complete addressing step with email "john@example.com" and "United States" based billing address
+        When I complete addressing step with "United States" based billing address
         And I complete the shipping step with first shipping method
         Then I should be on the checkout payment step
         And I should see "Bank of Poland" and "Offline" payment methods
         But I should not see "Bank of Universe" and "Bank of America" payment methods
 
-    @api @ui
+    @ui @api
     Scenario: Seeing payment methods that are available in channel as a guest
-        And I view shop on "United States" channel
+        Given I view shop on "United States" channel
         And I have product "PHP T-Shirt" in the cart
         When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I complete the shipping step with first shipping method
@@ -51,9 +51,9 @@ Feature: Viewing available payment methods based on current channel
         And I should see "Bank of America" and "Offline" payment methods
         But I should not see "Bank of Poland" and "Bank of Universe" payment methods
 
-    @api @ui
+    @ui @api
     Scenario: Seeing shipping methods that are available in another channel as a guest
-        And I view shop on "Poland" channel
+        Given I view shop on "Poland" channel
         And I have product "PHP T-Shirt" in the cart
         When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I complete the shipping step with first shipping method

@@ -183,4 +183,20 @@ final class CheckoutPaymentContext implements Context
             sprintf('There is no %s payment method', $secondPaymentMethodName)
         );
     }
+
+    /**
+     * @Then I should not see :firstPaymentMethodName and :secondPaymentMethodName payment methods
+     */
+    public function iShouldNotSeeAndPaymentMethods(string $firstPaymentMethodName, string $secondPaymentMethodName): void
+    {
+        Assert::false(
+            $this->selectPaymentPage->hasPaymentMethod($firstPaymentMethodName),
+            sprintf('There is %s payment method', $firstPaymentMethodName)
+        );
+
+        Assert::false(
+            $this->selectPaymentPage->hasPaymentMethod($secondPaymentMethodName),
+            sprintf('There is %s payment method', $secondPaymentMethodName)
+        );
+    }
 }

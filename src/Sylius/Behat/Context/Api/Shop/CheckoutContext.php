@@ -51,6 +51,8 @@ final class CheckoutContext implements Context
 
     private ApiClientInterface $shippingMethodsClient;
 
+    private ApiClientInterface $paymentMethodsClient;
+
     private ResponseCheckerInterface $responseChecker;
 
     private RepositoryInterface $shippingMethodRepository;
@@ -76,6 +78,7 @@ final class CheckoutContext implements Context
         ApiClientInterface $ordersClient,
         ApiClientInterface $addressesClient,
         ApiClientInterface $shippingMethodsClient,
+        ApiClientInterface $paymentMethodsClient,
         ResponseCheckerInterface $responseChecker,
         RepositoryInterface $shippingMethodRepository,
         OrderRepositoryInterface $orderRepository,
@@ -89,6 +92,7 @@ final class CheckoutContext implements Context
         $this->ordersClient = $ordersClient;
         $this->addressesClient = $addressesClient;
         $this->shippingMethodsClient = $shippingMethodsClient;
+        $this->paymentMethodsClient = $paymentMethodsClient;
         $this->responseChecker = $responseChecker;
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->orderRepository = $orderRepository;
@@ -292,6 +296,23 @@ final class CheckoutContext implements Context
     {
         $this->addressOrder([
             'email' => $email,
+            'billingAddress' => [
+                'city' => $address->getCity(),
+                'street' => $address->getStreet(),
+                'postcode' => $address->getPostcode(),
+                'countryCode' => $address->getCountryCode(),
+                'firstName' => $address->getFirstName(),
+                'lastName' => $address->getLastName(),
+            ],
+        ]);
+    }
+
+    /**
+     * @When /^I complete addressing step with ("[^"]+" based billing address)$/
+     */
+    public function iCompleteAddressingStepWithAddress(AddressInterface $address): void
+    {
+        $this->addressOrder([
             'billingAddress' => [
                 'city' => $address->getCity(),
                 'street' => $address->getStreet(),
@@ -589,7 +610,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should  see :firstPaymentMethodName and :secondPaymentMethodName payment methods
+     * @Then I should see :firstPaymentMethodName and :secondPaymentMethodName payment methods
      */
     public function iShouldSeeAndPaymentMethods(string $firstPaymentMethodName, string $secondPaymentMethodName): void
     {
@@ -1266,18 +1287,12 @@ final class CheckoutContext implements Context
             return [];
         }
 
-        $request = Request::custom(
-            sprintf(
-                '/api/v2/shop/payment-methods?paymentId=%s&tokenValue=%s',
-                $order->getLastPayment()->getId(),
-                $order->getTokenValue()
-            ),
-            HTTPRequest::METHOD_GET
-        );
+        $this->paymentMethodsClient->index();
+        $this->paymentMethodsClient->addFilter('paymentId', $order->getLastPayment()->getId());
+        $this->paymentMethodsClient->addFilter('tokenValue', $order->getTokenValue());
+        $this->paymentMethodsClient->filter();
 
-        $this->ordersClient->executeCustomRequest($request);
-
-        return $this->responseChecker->getCollection($this->ordersClient->getLastResponse());
+        return $this->responseChecker->getCollection($this->paymentMethodsClient->getLastResponse());
     }
 
     private function hasProductWithNameAndQuantityInCart(string $productName, int $quantity): bool
