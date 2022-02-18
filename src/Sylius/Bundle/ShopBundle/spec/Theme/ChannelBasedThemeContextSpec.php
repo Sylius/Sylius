@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\Theme;
+namespace spec\Sylius\Bundle\ShopBundle\Theme;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
