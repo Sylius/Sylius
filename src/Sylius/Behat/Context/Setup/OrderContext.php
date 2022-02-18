@@ -797,21 +797,6 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^there is a (customer "[^"]+") that has placed 2 orders with numbers "([^"]*)" and "([^"]*)"$/
-     */
-    public function thereIsCustomerThatPlacedTwoOrders(
-        CustomerInterface $customer,
-        string $orderNumber1,
-        string $orderNumber2
-    ): void {
-        $order1 = $this->createOrder($customer, $orderNumber1);
-        $order2 = $this->createOrder($customer, $orderNumber2);
-
-        $this->orderRepository->add($order1);
-        $this->orderRepository->add($order2);
-    }
-
-    /**
      * @param string $transition
      */
     private function applyShipmentTransitionOnOrder(OrderInterface $order, $transition)
