@@ -148,13 +148,11 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Given /^the order with number "([^"]*)" has not been paid for (\d+) (day|days)$/
+     * @When /^the (order "[^"]+") has not been paid for (\d+) (day|days)$/
      */
-    public function orderWithNumberHasNotBeenPaidForDays(string $orderNumber, $amount, $time)
+    public function orderWithNumberHasNotBeenPaidForDays(OrderInterface $order, int $amount, string $days): void
     {
-        $order = $this->sharedStorage->get('orders')[$orderNumber];
-
-        $order->setCheckoutCompletedAt(new \DateTime(sprintf('-%d %s', $amount, $time)));
+        $order->setCheckoutCompletedAt(new \DateTime(sprintf('-%d %s', $amount, $days)));
 
         $this->orderManager->flush();
     }

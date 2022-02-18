@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Cli;
 
+use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 use Behat\Behat\Context\Context;
@@ -37,25 +38,32 @@ final class CancelUnpaidOrdersContext implements Context
     }
 
     /**
-     * @Then only unpaid order with number :orderNumber should be canceled
+     * @Then I run cancel unpaid orders command
      */
-    public function runCancelUnpaidOrdersCommand(string $orderNumber): void
+    public function runCancelUnpaidOrdersCommand(): void
     {
         $command = $this->application->find(self::CANCEL_UNPAID_ORDERS_COMMAND);
 
         $this->commandTester = new CommandTester($command);
         $this->commandTester->execute(['command' => self::CANCEL_UNPAID_ORDERS_COMMAND]);
-
-        $order = $this->orderRepository->findOneByNumber($orderNumber);
-
-        Assert::eq($order->getNumber(), $orderNumber);
     }
 
     /**
-     * @Then I should be informed that unpaid order have been cancelled
+     * @Then only the order with number :orderNumber should be canceled
      */
-    public function shouldSeeOutputMessage(): void
+    public function onlyOrderWithNumberShouldBeCanceled(string $orderNumber): void
     {
-        Assert::contains($this->commandTester->getDisplay(), "Unpaid orders has been canceled");
+        $order = $this->orderRepository->findOneByNumber($orderNumber);
+
+        Assert::notEmpty($order);
+        Assert::same($order->getState(), OrderInterface::STATE_CANCELLED);
+    }
+
+    /**
+     * @Then I should be informed that unpaid orders have been canceled
+     */
+    public function shouldBeInformedThatUnpaidOrdersHaveBeenCanceled(): void
+    {
+        Assert::contains($this->commandTester->getDisplay(), "Unpaid orders have been canceled");
     }
 }

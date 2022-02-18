@@ -718,21 +718,10 @@ final class OrderContext implements Context
 
     /**
      * @Given /^(this order) has been refunded$/
+     * @Given the customer has refunded the order with number :order
      */
     public function thisOrderHasBeenRefunded(OrderInterface $order)
     {
-        $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_REFUND);
-
-        $this->objectManager->flush();
-    }
-
-    /**
-     * @Given the customer has refunded the order with number :orderNumber
-     */
-    public function customerHasRefundedTheOrderWithNumber(string $orderNumber)
-    {
-        $order = $this->sharedStorage->get('orders')[$orderNumber];
-
         $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_REFUND);
 
         $this->objectManager->flush();
@@ -817,9 +806,6 @@ final class OrderContext implements Context
     ): void {
         $order1 = $this->createOrder($customer, $orderNumber1);
         $order2 = $this->createOrder($customer, $orderNumber2);
-
-        $this->sharedStorage->set('customer', $customer);
-        $this->sharedStorage->set('orders', [$orderNumber1 => $order1, $orderNumber2 => $order2]);
 
         $this->orderRepository->add($order1);
         $this->orderRepository->add($order2);
