@@ -72,7 +72,7 @@ final class ConvertPaymentAction implements ActionInterface
             ++$m;
         }
 
-        if (0 !== $shippingTotal = $order->getShippingTotal()) {
+        if (0 !== $shippingTotal = $order->getAdjustmentsTotalRecursively(AdjustmentInterface::SHIPPING_ADJUSTMENT)) {
             $details['L_PAYMENTREQUEST_0_NAME' . $m] = 'Shipping Total';
             $details['L_PAYMENTREQUEST_0_AMT' . $m] = $this->formatPrice($shippingTotal);
             $details['L_PAYMENTREQUEST_0_QTY' . $m] = 1;
