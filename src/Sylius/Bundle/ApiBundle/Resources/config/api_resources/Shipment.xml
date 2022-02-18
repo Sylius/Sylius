@@ -66,20 +66,10 @@
             </itemOperation>
         </itemOperations>
 
-        <subresourceOperations>
-            <subresourceOperation name="methods_get_subresource">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/shipments/{id}/methods</attribute>
-            </subresourceOperation>
-        </subresourceOperations>
-
         <property name="id" identifier="true" />
         <property name="createdAt" />
         <property name="updatedAt" />
         <property name="state" />
-        <property name="method">
-            <subresource resourceClass="%sylius.model.shipping_method.class%" />
-        </property>
         <property name="units" />
         <property name="tracking" />
         <property name="shippedAt" />

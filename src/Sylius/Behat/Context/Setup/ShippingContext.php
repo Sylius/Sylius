@@ -259,6 +259,28 @@ final class ShippingContext implements Context
     }
 
     /**
+     * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee per shipment for ("[^"]+" channel)$/
+     */
+    public function storeHasShippingMethodWithFeePerShipmentForChannel(
+        string $shippingMethodName,
+        string $fee,
+        ChannelInterface $channel,
+    ): void {
+        $configuration = [$channel->getCode() => ['amount' => $fee]];
+
+        $this->saveShippingMethod($this->shippingMethodExampleFactory->create([
+            'name' => $shippingMethodName,
+            'enabled' => true,
+            'zone' => $this->getShippingZone(),
+            'calculator' => [
+                'type' => DefaultCalculators::FLAT_RATE,
+                'configuration' => $configuration,
+            ],
+            'channels' => [$channel],
+        ]));
+    }
+
+    /**
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee per unit for ("[^"]+" channel)$/
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee per unit for ("[^"]+" channel) and ("[^"]+") for ("[^"]+" channel)$/
      */

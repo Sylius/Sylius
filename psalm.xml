@@ -127,8 +127,16 @@
             <errorLevel type="info">
                 <referencedMethod name="PHPUnit\Framework\TestCase::__construct" />
                 <referencedMethod name="Symfony\Bundle\SecurityBundle\Security\_FirewallMap::getFirewallConfig" />
+                <referencedMethod name="ApiPlatform\Core\Util\RequestParser::getQueryString" />
+                <referencedMethod name="ApiPlatform\Core\Util\RequestParser::parseRequestParams" />
             </errorLevel>
         </InternalMethod>
+
+        <InternalClass>
+            <errorLevel type="info">
+                <referencedClass name="ApiPlatform\Core\Util\RequestParser" />
+            </errorLevel>
+        </InternalClass>
 
         <InvalidDocblock>
             <errorLevel type="info">
