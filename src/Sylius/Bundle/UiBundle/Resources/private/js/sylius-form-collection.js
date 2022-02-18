@@ -24,7 +24,7 @@ class CollectionForm {
 
     this.$element = $(element);
     this.$list = this.$element.find('[data-form-collection="list"]:first');
-    this.count = this.$list.children().length;
+    this.nextIndexElement = this.$element.data('index');
     this.lastChoice = null;
     this.$element.on('click', '[data-form-collection="add"]:last', this.addItem);
     this.$element.on('click', '[data-form-collection="delete"]', this.deleteItem);
@@ -46,10 +46,10 @@ class CollectionForm {
     let prototype = this.$element.data('prototype');
     let prototypeName = new RegExp(this.$element.data('prototype-name'), 'g');
 
-    prototype = prototype.replace(prototypeName, this.count);
+    prototype = prototype.replace(prototypeName, this.nextIndexElement);
 
     this.$list.append(prototype);
-    this.count = this.count + 1;
+    this.nextIndexElement = this.nextIndexElement + 1;
 
     $(document).trigger('collection-form-add', [this.$list.children().last()]);
   }
