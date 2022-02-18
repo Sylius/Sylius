@@ -648,9 +648,8 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @When /^I edit it to have empty amount of fixed discount in the ("[^"]+" channel)$/
      */
-    public function iEditItToHaveEmptyFixedDiscountInTheChannel(
-        ChannelInterface $channel
-    ): void {
+    public function iEditItToHaveEmptyFixedDiscountInTheChannel(ChannelInterface $channel): void
+    {
         $content = $this->client->getContent();
 
         $content['actions'] = [[
