@@ -46,7 +46,7 @@ final class ShopBasedCartContext implements CartContextInterface
         $this->tokenStorage = $tokenStorage;
 
         if ($tokenStorage === null) {
-            @trigger_error('Not passing tokenStorage through constructor is deprecated in Sylius 1.10.9 and it will be removed in Sylius 2.0');
+            @trigger_error('Not passing tokenStorage through constructor is deprecated in Sylius 1.10.9 and it will be prohibited in Sylius 2.0');
         }
     }
 
@@ -88,11 +88,7 @@ final class ShopBasedCartContext implements CartContextInterface
         $cart->setCustomer($customer);
 
         if ($this->tokenStorage !== null) {
-            $user = $this->tokenStorage->getToken()->getUser();
-
-            if ($user !== null) {
-                $cart->setByGuest(false);
-            }
+            $cart->setByGuest($this->resolveByGuestFlag());
         }
 
         $defaultAddress = $customer->getDefaultAddress();
@@ -101,6 +97,21 @@ final class ShopBasedCartContext implements CartContextInterface
             $clonedAddress->setCustomer(null);
             $cart->setBillingAddress($clonedAddress);
         }
+    }
+
+    private function resolveByGuestFlag(): bool
+    {
+        $token = $this->tokenStorage->getToken();
+        if ($token === null) {
+            return true;
+        }
+
+        $user = $token->getUser();
+        if ($user !== null) {
+            return false;
+        }
+
+        return true;
     }
 
     public function reset(): void

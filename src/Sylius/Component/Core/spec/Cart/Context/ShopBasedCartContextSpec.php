@@ -191,7 +191,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($secondCart);
     }
 
-    function it_assigns_if_order_is_created_by_logged_customer(
+    function it_sets_by_guest_flag_as_false_if_order_is_created_by_logged_in_customer(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
         OrderInterface $cart,
@@ -227,7 +227,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($cart);
     }
 
-    function it_leaves_guest_to_be_true_if_session_is_anonymous(
+    function it_sets_by_guest_flag_as_true_if_order_is_created_by_anonymous_user(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
         OrderInterface $cart,
@@ -235,15 +235,14 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         CurrencyInterface $currency,
         CustomerInterface $customer,
         TokenStorageInterface $tokenStorage,
-        TokenInterface $token,
-        UserInterface $user
+        TokenInterface $token
     ): void {
         $this->beConstructedWith($cartContext, $shopperContext, $tokenStorage);
 
         $tokenStorage->getToken()->willReturn($token);
         $token->getUser()->willReturn(null);
 
-        $cart->setByGuest(false)->shouldNotBeCalled();
+        $cart->setByGuest(true)->shouldBeCalled();
 
         $cartContext->getCart()->shouldBeCalledTimes(1)->willReturn($cart);
 
