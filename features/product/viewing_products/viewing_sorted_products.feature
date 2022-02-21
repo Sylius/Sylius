@@ -16,49 +16,52 @@ Feature: Sorting listed products
         And the store also has a product "Xtreme Pug" with code "X_PUG", created at "07-09-2016"
         And this product belongs to "Fluffy Pets"
         And this product's price is "$12.51"
+        And the store also has a product "Unreal Pug" with code "U_PUG", created at "04-10-2016"
+        And this product belongs to "Fluffy Pets"
+        And this product's price is "$13.27"
 
     @ui
     Scenario: Sorting products by their dates with descending order
         When I view newest products from taxon "Fluffy Pets"
-        Then I should see 3 products in the list
+        Then I should see 4 products in the list
         And I should see a product with name "Xtreme Pug"
         But the first product on the list should have name "Pug of Love"
 
     @ui
     Scenario: Sorting products by their dates with ascending order
         When I view oldest products from taxon "Fluffy Pets"
-        Then I should see 3 products in the list
+        Then I should see 4 products in the list
         And I should see a product with name "Berserk Pug"
         But the first product on the list should have name "Xtreme Pug"
 
-    @ui @api
-    Scenario: Sorting products by their prices with descending order
+    @api @ui
+    Scenario: Sorting products by their prices with ascending order
         When I browse products from taxon "Fluffy Pets"
         And I sort products by the lowest price first
-        Then I should see 3 products in the list
+        Then I should see 4 products in the list
         And I should see a product with name "Xtreme Pug"
         But the first product on the list should have name "Berserk Pug"
 
-    @ui @api
-    Scenario: Sorting products by their prices with ascending order
+    @api @ui
+    Scenario: Sorting products by their prices with descending order
         When I browse products from taxon "Fluffy Pets"
         And I sort products by the highest price first
-        Then I should see 3 products in the list
+        Then I should see 4 products in the list
         And I should see a product with name "Xtreme Pug"
         But the first product on the list should have name "Pug of Love"
 
-    @ui
+    @api @ui
     Scenario: Sorting products by their names from a to z
         When I browse products from taxon "Fluffy Pets"
         And I sort products alphabetically from a to z
-        Then I should see 3 products in the list
+        Then I should see 4 products in the list
         And the first product on the list should have name "Berserk Pug"
         And the last product on the list should have name "Xtreme Pug"
 
-    @ui
+    @api @ui
     Scenario: Sorting products by their names from z to a
         When I browse products from taxon "Fluffy Pets"
         And I sort products alphabetically from z to a
-        Then I should see 3 products in the list
+        Then I should see 4 products in the list
         And the first product on the list should have name "Xtreme Pug"
         And the last product on the list should have name "Berserk Pug"

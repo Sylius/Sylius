@@ -27,7 +27,6 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
-use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
@@ -125,6 +124,22 @@ final class ProductContext implements Context
     public function iSortProductsByTheHighestPriceFirst(): void
     {
         $this->client->sort(['price' => 'desc']);
+    }
+
+    /**
+     * @When I sort products alphabetically from a to z
+     */
+    public function iSortProductsAlphabeticallyFromAToZ(): void
+    {
+        $this->client->sort(['translation.name' => 'asc']);
+    }
+
+    /**
+     * @When I sort products alphabetically from z to a
+     */
+    public function iSortProductsAlphabeticallyFromZToA(): void
+    {
+        $this->client->sort(['translation.name' => 'desc']);
     }
 
     /**
