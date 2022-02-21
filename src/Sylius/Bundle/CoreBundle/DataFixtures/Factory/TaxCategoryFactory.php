@@ -37,7 +37,7 @@ use Zenstruck\Foundry\Proxy;
  * @method static TaxCategoryInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method TaxCategoryInterface|Proxy create(array|callable $attributes = [])
  */
-final class TaxCategoryFactory extends ModelFactory implements TaxCategoryFactoryInterface
+class TaxCategoryFactory extends ModelFactory implements TaxCategoryFactoryInterface
 {
     public function __construct(private FactoryInterface $taxCategoryFactory)
     {
