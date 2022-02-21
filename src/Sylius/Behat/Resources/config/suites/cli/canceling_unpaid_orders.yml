@@ -6,6 +6,8 @@ default:
         cli_canceling_unpaid_orders:
             contexts:
                 - sylius.behat.context.cli.cancel_unpaid_orders
+                    
+                - sylius.behat.context.domain.managing_orders
 
                 - sylius.behat.context.hook.doctrine_orm
                 
