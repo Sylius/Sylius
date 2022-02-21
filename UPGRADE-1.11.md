@@ -111,6 +111,9 @@ Add a new bundle to your list of used bundles in `config/bundles.php` if they ar
     +   Sylius\Calendar\SyliusCalendarBundle::class => ['all' => true],
     ```
 
+Creating a ShippingCalculator without implementing `Sylius\Component\Shipping\Calculator\SettableTypeCalculatorInterface` has been deprecated.
+A new Trait has been added to ease the work: `Sylius\Component\Shipping\Calculator\SettableTypeCalculatorTrait`
+
 ### Order prices recalculator
 
 Passing a `Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface` to `Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator` 
