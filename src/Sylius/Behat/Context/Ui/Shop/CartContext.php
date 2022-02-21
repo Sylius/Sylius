@@ -35,20 +35,20 @@ final class CartContext implements Context
 
     private NotificationCheckerInterface $notificationChecker;
 
-    private SessionManagerInterface $sessionService;
+    private SessionManagerInterface $sessionManager;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
         SummaryPageInterface $summaryPage,
         ShowPageInterface $productShowPage,
         NotificationCheckerInterface $notificationChecker,
-        SessionManagerInterface $sessionService
+        SessionManagerInterface $sessionManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->summaryPage = $summaryPage;
         $this->productShowPage = $productShowPage;
         $this->notificationChecker = $notificationChecker;
-        $this->sessionService = $sessionService;
+        $this->sessionManager = $sessionManager;
     }
 
     /**
@@ -102,7 +102,7 @@ final class CartContext implements Context
     /**
      * @Then the grand total value should be :total
      * @Then my cart total should be :total
-     * @Then theirs cart total should be :total
+     * @Then their cart total should be :total
      */
     public function myCartTotalShouldBe($total)
     {
@@ -259,7 +259,7 @@ final class CartContext implements Context
      * @Given the customer added :product product to the cart
      * @Given /^I (?:add|added) ("[^"]+" product) to the (cart)$/
      * @When I add product :product to the cart
-     * @When they added product :product to the cart
+     * @When they add product :product to the cart
      */
     public function iAddProductToTheCart(ProductInterface $product): void
     {
@@ -285,7 +285,7 @@ final class CartContext implements Context
      */
     public function anonymousUserAddsMultipleProductsToTheCart(array $products): void
     {
-        $this->sessionService->changeSession();
+        $this->sessionManager->changeSession();
 
         foreach ($products as $product) {
             $this->iAddProductToTheCart($product);
@@ -386,12 +386,11 @@ final class CartContext implements Context
     }
 
     /**
-     * @When I view my cart
-     * @When they view their cart
+     * @When I view my cart in the previous session
      */
-    public function iViewMyCart(): void
+    public function iViewMyCartInPreviousSession(): void
     {
-        $this->sessionService->restorePreviousSession();
+        $this->sessionManager->restorePreviousSession();
 
         $this->summaryPage->open();
     }

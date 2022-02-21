@@ -103,6 +103,7 @@ final class SessionManagerSpec extends ObjectBehavior
         $mink->restartSessions()->shouldBeCalled();
 
         $securityService->getCurrentToken()->willReturn($defaultToken);
+        $sharedStorage->has('behat_previous_session_token_previous_session')->willReturn(true);
         $sharedStorage->get('behat_previous_session_token_previous_session')->willReturn($token);
         $securityService->restoreToken($token)->shouldBeCalled();
 

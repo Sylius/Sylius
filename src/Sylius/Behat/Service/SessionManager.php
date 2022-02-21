@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Service;
 
 use Behat\Mink\Mink;
+use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class SessionManager implements SessionManagerInterface
 {
@@ -54,7 +55,9 @@ final class SessionManager implements SessionManagerInterface
 
         $this->saveAndRestartSession($sessionName);
 
-        $this->securityService->restoreToken($this->sharedStorage->get(sprintf('behat_previous_session_token_%s', $sessionName)));
+        if ($this->sharedStorage->has(sprintf('behat_previous_session_token_%s', $sessionName))) {
+            $this->securityService->restoreToken($this->sharedStorage->get(sprintf('behat_previous_session_token_%s', $sessionName)));
+        }
     }
 
     private function saveAndRestartSession(string $newSessionName): void
@@ -63,7 +66,11 @@ final class SessionManager implements SessionManagerInterface
         $previousSessionName = $this->mink->getDefaultSessionName();
 
         $this->sharedStorage->set('behat_previous_session_name', $previousSessionName);
-        $this->sharedStorage->set(sprintf('behat_previous_session_token_%s', $previousSessionName), $this->securityService->getCurrentToken());
+        try {
+            $token = $this->securityService->getCurrentToken();
+            $this->sharedStorage->set(sprintf('behat_previous_session_token_%s', $previousSessionName), $token);
+        } catch (TokenNotFoundException $exception) {
+        }
 
         $this->mink->setDefaultSessionName($newSessionName);
 
