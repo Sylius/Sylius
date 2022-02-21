@@ -113,9 +113,9 @@ interface OrderInterface extends
 
     public function setCustomerIp(?string $customerIp): void;
 
-    public function getGuest(): bool;
+    public function getByGuest(): bool;
 
-    public function setGuest(bool $guest): void;
+    public function setByGuest(bool $guest): void;
 
     /**
      * @return Collection|OrderItemInterface[]

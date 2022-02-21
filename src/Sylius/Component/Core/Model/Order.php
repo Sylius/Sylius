@@ -110,7 +110,7 @@ class Order extends BaseOrder implements OrderInterface
      */
     protected $customerIp;
 
-    protected bool $guest = true;
+    protected bool $byGuest = true;
 
     public function __construct()
     {
@@ -463,13 +463,13 @@ class Order extends BaseOrder implements OrderInterface
         $this->customerIp = $customerIp;
     }
 
-    public function getGuest(): bool
+    public function getByGuest(): bool
     {
-        return $this->guest;
+        return $this->byGuest;
     }
 
-    public function setGuest(bool $guest): void
+    public function setByGuest(bool $byGuest): void
     {
-        $this->guest = $guest;
+        $this->byGuest = $byGuest;
     }
 }

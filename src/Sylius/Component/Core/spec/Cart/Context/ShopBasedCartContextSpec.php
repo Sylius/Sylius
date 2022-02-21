@@ -207,7 +207,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $tokenStorage->getToken()->willReturn($token);
         $token->getUser()->willReturn($user);
 
-        $cart->setGuest(false)->shouldBeCalled();
+        $cart->setByGuest(false)->shouldBeCalled();
 
         $cartContext->getCart()->shouldBeCalledTimes(1)->willReturn($cart);
 
@@ -243,7 +243,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $tokenStorage->getToken()->willReturn($token);
         $token->getUser()->willReturn(null);
 
-        $cart->setGuest(false)->shouldNotBeCalled();
+        $cart->setByGuest(false)->shouldNotBeCalled();
 
         $cartContext->getCart()->shouldBeCalledTimes(1)->willReturn($cart);
 

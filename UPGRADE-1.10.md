@@ -1,7 +1,7 @@
-# UPGRADE FROM `v1.10.x` TO `v1.10.9`
+# UPGRADE FROM `v1.10.8` TO `v1.10.10`
 
-1. Field `guest` has been added to `Sylius\Component\Core\Model\Order`,
-this change will allow us to distinguish carts between logged in customers and guests.
+1. Field `byGuest` has been added to `Sylius\Component\Core\Model\Order`, this change will allow us to distinguish carts 
+between guests and logged in customers.
 
 2. Not passing tokenStorage through constructor is deprecated in Sylius 1.10.9 and it will be removed in Sylius 2.0
 

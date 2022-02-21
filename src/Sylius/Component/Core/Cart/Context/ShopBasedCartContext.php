@@ -91,7 +91,7 @@ final class ShopBasedCartContext implements CartContextInterface
             $user = $this->tokenStorage->getToken()->getUser();
 
             if ($user !== null) {
-                $cart->setGuest(false);
+                $cart->setByGuest(false);
             }
         }
 

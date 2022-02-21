@@ -12,7 +12,7 @@
         <field type="string" name="checkoutState" column="checkout_state" />
         <field type="string" name="paymentState" column="payment_state" />
         <field type="string" name="shippingState" column="shipping_state" />
-        <field type="boolean" name="guest" >
+        <field type="boolean" name="byGuest" column="by_guest" >
             <options>
                 <option name="default">1</option>
             </options>
