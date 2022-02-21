@@ -148,7 +148,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When /^the (order "[^"]+") has not been paid for (\d+) (day|days)$/
+     * @Given /^the (order "[^"]+") has not been paid for (\d+) (day|days)$/
      */
     public function orderWithNumberHasNotBeenPaidForDays(OrderInterface $order, int $amount, string $days): void
     {

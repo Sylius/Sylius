@@ -38,7 +38,7 @@ final class CancelUnpaidOrdersContext implements Context
     }
 
     /**
-     * @Then I run cancel unpaid orders command
+     * @When I run cancel unpaid orders command
      */
     public function runCancelUnpaidOrdersCommand(): void
     {

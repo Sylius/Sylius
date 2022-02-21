@@ -7,8 +7,6 @@ default:
             contexts:
                 - sylius.behat.context.cli.cancel_unpaid_orders
 
-                - sylius.behat.context.domain.managing_orders
-
                 - sylius.behat.context.hook.doctrine_orm
                 
                 - sylius.behat.context.setup.order
@@ -25,5 +23,6 @@ default:
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.order
+
             filters:
                 tags: "@canceling_unpaid_orders&&@cli"
