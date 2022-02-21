@@ -63,5 +63,12 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactoryInterface" alias="sylius.data_fixtures.factory.shop_user" />
+
+        <service id="sylius.data_fixtures.factory.tax_category" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxCategoryFactory">
+            <argument type="service" id="sylius.factory.tax_category" />
+            <tag name="foundry.factory" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxCategoryFactoryInterface" alias="sylius.data_fixtures.factory.tax_category" />
     </services>
 </container>
