@@ -15,15 +15,12 @@ namespace Sylius\Component\Shipping\Calculator;
 
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 
-final class FlatRateCalculator implements CalculatorInterface
+final class FlatRateCalculator implements CalculatorInterface, SettableTypeCalculatorInterface
 {
+    use SettableTypeCalculatorTrait;
+
     public function calculate(ShipmentInterface $subject, array $configuration): int
     {
         return (int) $configuration['amount'];
-    }
-
-    public function getType(): string
-    {
-        return 'flat_rate';
     }
 }

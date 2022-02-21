@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler;
 
+use Sylius\Component\Shipping\Calculator\SettableTypeCalculatorInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -37,6 +38,16 @@ final class RegisterCalculatorsPass implements CompilerPassInterface
 
                 $name = $attribute['calculator'];
                 $calculators[$name] = $attribute['label'];
+
+                $calculatorDefinition = $container->getDefinition($id);
+                if (\in_array(
+                    SettableTypeCalculatorInterface::class,
+                    \class_implements($calculatorDefinition->getClass())
+                )) {
+                    $calculatorDefinition->addMethodCall('setType', [$name]);
+                } else {
+                    @trigger_error(sprintf('Not implementing %s in a shipping calculator is deprecated since Sylius 1.11 and will be removed in Sylius 2.0.', SettableTypeCalculatorInterface::class), \E_USER_DEPRECATED);
+                }
 
                 $registry->addMethodCall('register', [$name, new Reference($id)]);
 

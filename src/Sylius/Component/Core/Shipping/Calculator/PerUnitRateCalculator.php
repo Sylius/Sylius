@@ -16,11 +16,15 @@ namespace Sylius\Component\Core\Shipping\Calculator;
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
+use Sylius\Component\Shipping\Calculator\SettableTypeCalculatorInterface;
+use Sylius\Component\Shipping\Calculator\SettableTypeCalculatorTrait;
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 use Webmozart\Assert\Assert;
 
-final class PerUnitRateCalculator implements CalculatorInterface
+final class PerUnitRateCalculator implements CalculatorInterface, SettableTypeCalculatorInterface
 {
+    use SettableTypeCalculatorTrait;
+
     /**
      * @throws MissingChannelConfigurationException
      */
@@ -40,10 +44,5 @@ final class PerUnitRateCalculator implements CalculatorInterface
         }
 
         return (int) ($configuration[$channelCode]['amount'] * $subject->getShippingUnitCount());
-    }
-
-    public function getType(): string
-    {
-        return 'per_unit_rate';
     }
 }
