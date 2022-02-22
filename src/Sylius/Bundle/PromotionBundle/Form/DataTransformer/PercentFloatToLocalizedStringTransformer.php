@@ -30,10 +30,22 @@ final class PercentFloatToLocalizedStringTransformer extends PercentToLocalizedS
      */
     public function reverseTransform($value)
     {
-        if ('' === $value) {
+        if (!is_numeric($value)) {
             return;
         }
 
         return (float) parent::reverseTransform($value);
+    }
+
+    /**
+     * @param float|string $value
+     */
+    public function transform($value)
+    {
+        if (!is_numeric($value)) {
+            return;
+        }
+
+        return parent::transform((float) $value);
     }
 }

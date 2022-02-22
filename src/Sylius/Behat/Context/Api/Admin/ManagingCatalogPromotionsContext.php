@@ -646,6 +646,21 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I edit it to have empty amount of fixed discount in the ("[^"]+" channel)$/
+     */
+    public function iEditItToHaveEmptyFixedDiscountInTheChannel(ChannelInterface $channel): void
+    {
+        $content = $this->client->getContent();
+
+        $content['actions'] = [[
+            'type' => FixedDiscountPriceCalculator::TYPE,
+            'configuration' => [$channel->getCode() => ['amount' => '']],
+        ]];
+
+        $this->client->setRequestData($content);
+    }
+
+    /**
      * @When I add catalog promotion scope with nonexistent type
      */
     public function iAddCatalogPromotionScopeWithNonexistentType(): void
