@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Cli;
 
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 use Behat\Behat\Context\Context;
@@ -53,10 +53,10 @@ final class CancelUnpaidOrdersContext implements Context
      */
     public function onlyOrderWithNumberShouldBeCanceled(string $orderNumber): void
     {
-        $order = $this->orderRepository->findOneByNumber($orderNumber);
+        $orders = $this->orderRepository->findBy(['paymentState' => OrderPaymentStates::STATE_CANCELLED]);
 
-        Assert::notEmpty($order);
-        Assert::same($order->getState(), OrderInterface::STATE_CANCELLED);
+        Assert::same(count($orders), 1);
+        Assert::same($orders[0]->getNumber(), $orderNumber);
     }
 
     /**
