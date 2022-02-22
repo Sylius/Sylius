@@ -415,3 +415,4 @@ Improvements and fixes in Catalog Promotion and Shop API
 - [#13387](https://github.com/Sylius/Sylius/issues/13387) Explanation note about minimum price in product variant creation form ([@TheMilek](https://github.com/TheMilek))
 - [#13388](https://github.com/Sylius/Sylius/issues/13388) [Migrations] Remove invalid NOT NULL usage ([@Zales0123](https://github.com/Zales0123))
 - [#13391](https://github.com/Sylius/Sylius/issues/13391) [Maintenance] Conflict with Symfony 6 packages ([@lchrusciel](https://github.com/lchrusciel))
+- [#13678](https://github.com/Sylius/Sylius/issues/13678) [Minor] Fix minor typo in docs and AdminBundle messages ([@gigamarr](https://github.com/gigamarr))
