@@ -68,6 +68,29 @@ final class TaxonFactoryTest extends KernelTestCase
     }
 
     /** @test */
+    function it_creates_taxon_with_slugs_for_each_locales(): void
+    {
+        LocaleFactory::new()->withCode('en_US')->create();
+        LocaleFactory::new()->withCode('fr_FR')->create();
+
+        $taxon = TaxonFactory::new()->withSlug('boardgames')->create()->object();
+
+        $this->assertEquals(2, $taxon->getTranslations()->count());
+
+        // testing en_US translation
+        $taxon->setCurrentLocale('en_US');
+        $taxon->setFallbackLocale('en_US');
+
+        $this->assertEquals('boardgames', $taxon->getSlug());
+
+        // testing fr_FR translation
+        $taxon->setCurrentLocale('fr_fr');
+        $taxon->setFallbackLocale('fr_FR');
+
+        $this->assertEquals('boardgames', $taxon->getSlug());
+    }
+
+    /** @test */
     function it_creates_taxon_with_descriptions_for_each_locales(): void
     {
         LocaleFactory::new()->withCode('en_US')->create();

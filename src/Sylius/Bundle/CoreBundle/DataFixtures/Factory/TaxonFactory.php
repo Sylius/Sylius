@@ -61,6 +61,11 @@ class TaxonFactory extends ModelFactory implements TaxonFactoryInterface
         return $this->addState(['name' => $name]);
     }
 
+    public function withSlug(string $slug): self
+    {
+        return $this->addState(['slug' => $slug]);
+    }
+
     public function withDescription(string $description): self
     {
         return $this->addState(['description' => $description]);
