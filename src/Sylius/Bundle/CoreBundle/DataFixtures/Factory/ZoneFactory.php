@@ -49,13 +49,13 @@ class ZoneFactory extends ModelFactory implements ZoneFactoryInterface
         return $this->addState(['code' => $code]);
     }
 
-    public function withMembers(array $members, ?string $type = null): self
+    public function withMembers(array $members, string $type = ZoneInterface::TYPE_ZONE): self
     {
         $data = [];
 
         foreach ($members as $member) {
             if (\is_string($member)) {
-                $data[] = ZoneMemberFactory::randomOrCreate(['code' => $member]);
+                $data[] = ZoneMemberFactory::createOne(['code' => $member]);
 
                 continue;
             }
@@ -64,7 +64,7 @@ class ZoneFactory extends ModelFactory implements ZoneFactoryInterface
         }
 
         return $this->addState([
-            'type' => $type ?? ZoneInterface::TYPE_ZONE,
+            'type' => $type,
             'members' => $data
         ]);
     }

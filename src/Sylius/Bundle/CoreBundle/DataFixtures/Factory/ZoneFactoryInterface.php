@@ -42,5 +42,5 @@ interface ZoneFactoryInterface
 
     public function withCountries(array $countries): self;
 
-    public function withProvinces(array $countries): self;
+    public function withProvinces(array $countries, string $type): self;
 }
