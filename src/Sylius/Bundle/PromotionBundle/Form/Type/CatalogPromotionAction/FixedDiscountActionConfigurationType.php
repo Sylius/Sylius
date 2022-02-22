@@ -36,7 +36,6 @@ final class FixedDiscountActionConfigurationType extends AbstractType
             ->resetModelTransformers()
             ->addViewTransformer(new MoneyIntToLocalizedStringTransformer())
         ;
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void

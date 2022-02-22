@@ -13,21 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Form\DataTransformer;
 
-use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedStringTransformer;
 
 final class MoneyIntToLocalizedStringTransformer extends MoneyToLocalizedStringTransformer
 {
-    /**
-     * Transforms a localized money string into a normalized format.
-     *
-     * @param string $value Localized money string
-     *
-     * @return int|float|null
-     *
-     * @throws TransformationFailedException if the given value is not a string
-     *                                       or if the value cannot be transformed
-     */
     public function reverseTransform($value)
     {
         if (!is_numeric($value)) {
