@@ -83,6 +83,11 @@ final class ShopBasedCartContext implements CartContextInterface
         return $cart;
     }
 
+    public function reset(): void
+    {
+        $this->cart = null;
+    }
+
     private function setCustomerAndAddressOnCart(OrderInterface $cart, CustomerInterface $customer): void
     {
         $cart->setCustomer($customer);
@@ -112,10 +117,5 @@ final class ShopBasedCartContext implements CartContextInterface
         }
 
         return true;
-    }
-
-    public function reset(): void
-    {
-        $this->cart = null;
     }
 }

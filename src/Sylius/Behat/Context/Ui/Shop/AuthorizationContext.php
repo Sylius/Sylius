@@ -17,7 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Shop\Account\RegisterElementInterface;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
-use Sylius\Behat\Service\SessionManagerInterface;
 
 final class AuthorizationContext implements Context
 {
@@ -27,35 +26,21 @@ final class AuthorizationContext implements Context
 
     private RegisterElementInterface $registerElement;
 
-    private SessionManagerInterface $sessionManager;
-
     public function __construct(
         LoginPageInterface $loginPage,
         RegisterPageInterface $registerPage,
-        RegisterElementInterface $registerElement,
-        SessionManagerInterface $sessionManager
+        RegisterElementInterface $registerElement
     ) {
         $this->loginPage = $loginPage;
         $this->registerPage = $registerPage;
         $this->registerElement = $registerElement;
-        $this->sessionManager = $sessionManager;
     }
 
     /**
      * @When I sign in with email :email and password :password
-     */
-    public function iSignInWithEmailAndPassword(string $email, string $password): void
-    {
-        $this->loginPage->open();
-        $this->loginPage->specifyUsername($email);
-        $this->loginPage->specifyPassword($password);
-        $this->loginPage->logIn();
-    }
-
-    /**
      * @When I sign in again with email :email and password :password in the previous session
      */
-    public function iSignInAgainWithEmailAndPasswordInThePreviousSession(string $email, string $password): void
+    public function iSignInWithEmailAndPassword(string $email, string $password): void
     {
         $this->loginPage->open();
         $this->loginPage->specifyUsername($email);

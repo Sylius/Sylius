@@ -18,13 +18,13 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class SessionManager implements SessionManagerInterface
 {
+    private const SESSION_CHROME_HEADLESS_SECOND = 'chrome_headless_second_session';
+
     private Mink $mink;
 
     private SharedStorageInterface $sharedStorage;
 
     private SecurityServiceInterface $securityService;
-
-    private const SESSION_CHROME_HEADLESS_SECOND = 'chrome_headless_second_session';
 
     public function __construct(Mink $mink, SharedStorageInterface $sharedStorage, SecurityServiceInterface $securityService)
     {
@@ -39,8 +39,8 @@ final class SessionManager implements SessionManagerInterface
 
         $this->saveAndRestartSession($sessionName);
 
-        if ($this->sharedStorage->has(sprintf('behat_previous_session_token_%s', $sessionName))) {
-            $this->securityService->restoreToken($this->sharedStorage->get(sprintf('behat_previous_session_token_%s', $sessionName)));
+        if ($this->sharedStorage->has($this->getKeyForToken($sessionName))) {
+            $this->securityService->restoreToken($this->sharedStorage->get($this->getKeyForToken($sessionName)));
         }
     }
 
@@ -55,8 +55,8 @@ final class SessionManager implements SessionManagerInterface
 
         $this->saveAndRestartSession($sessionName);
 
-        if ($this->sharedStorage->has(sprintf('behat_previous_session_token_%s', $sessionName))) {
-            $this->securityService->restoreToken($this->sharedStorage->get(sprintf('behat_previous_session_token_%s', $sessionName)));
+        if ($this->sharedStorage->has($this->getKeyForToken($sessionName))) {
+            $this->securityService->restoreToken($this->sharedStorage->get($this->getKeyForToken($sessionName)));
         }
     }
 
@@ -68,12 +68,17 @@ final class SessionManager implements SessionManagerInterface
         $this->sharedStorage->set('behat_previous_session_name', $previousSessionName);
         try {
             $token = $this->securityService->getCurrentToken();
-            $this->sharedStorage->set(sprintf('behat_previous_session_token_%s', $previousSessionName), $token);
+            $this->sharedStorage->set($this->getKeyForToken($previousSessionName), $token);
         } catch (TokenNotFoundException $exception) {
         }
 
         $this->mink->setDefaultSessionName($newSessionName);
 
         $this->mink->restartSessions();
+    }
+
+    private function getKeyForToken(string $sessionName): string
+    {
+        return sprintf('behat_previous_session_token_%s', $sessionName);
     }
 }

@@ -34,11 +34,18 @@ Provided solution should:
 
 ### Introducing flag on order entity to mark order created by guest
 
+Adding a flag to order entity allows us to distinguish carts created by guest or by logged in customer. To mark cart 
+as soon as possible, to solve all cases of the initial problem, the flag needs to be set in Sylius\Component\Core\Cart\Context\ShopBasedCartContext, 
+where the customer of logged in user is also set on cart. This context is definitely not a proper service to do such operations, 
+however it is consistent with current approach in Sylius. Setting this value only after logging in would not be enough, 
+as it doesn't resolve the situation when the already logged in user creates a cart. It is similar with setting flag after
+the addressing step, it doesn't resolve the problem as the cart of logged in user is marked too late and before addressing
+the cart couldn't be distinguished to whom it belongs.
+
 * Good, because it solves the initial problem
 * Good, because it does not break a backward compatibility
 * Good, because it can be used to additional features in the future
 * Bad, because it requires to set the flag in Sylius\Component\Core\Cart\Context\ShopBasedCartContext 
-which is not a proper service to do such an operation 
 
 ## Decision Outcome
 
@@ -49,5 +56,5 @@ and it is the solution that could be used to additional features in the future.
 
 ## References
 
-* [Approach with chnaging priorities](https://github.com/Sylius/Sylius/pull/13603)
+* [Approach with changing priorities](https://github.com/Sylius/Sylius/pull/13603)
 * [Chosen approach with introducing flag](https://github.com/Sylius/Sylius/pull/13676)

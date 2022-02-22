@@ -33,7 +33,7 @@ final class SessionManagerSpec extends ObjectBehavior
         $this->shouldImplement(SessionManagerInterface::class);
     }
 
-    function it_changes_session_and_doesnt_restore_session_token_if_session_was_not_called_before(
+    function it_changes_session_and_does_not_restore_session_token_if_session_was_not_called_before(
         Mink $mink,
         SharedStorageInterface $sharedStorage,
         SecurityServiceInterface $securityService,
