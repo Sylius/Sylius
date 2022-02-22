@@ -16,6 +16,7 @@ namespace spec\Sylius\Component\Core\Cart\Context;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
+use Sylius\Component\Core\Cart\Resolver\ByGuestFlagResolverInterface;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -25,9 +26,6 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 final class ShopBasedCartContextSpec extends ObjectBehavior
 {
@@ -194,18 +192,15 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
     function it_sets_by_guest_flag_as_false_if_order_is_created_by_logged_in_customer(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
+        ByGuestFlagResolverInterface $byGuestFlagResolver,
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
-        CustomerInterface $customer,
-        TokenStorageInterface $tokenStorage,
-        TokenInterface $token,
-        UserInterface $user
+        CustomerInterface $customer
     ): void {
-        $this->beConstructedWith($cartContext, $shopperContext, $tokenStorage);
+        $this->beConstructedWith($cartContext, $shopperContext, $byGuestFlagResolver);
 
-        $tokenStorage->getToken()->willReturn($token);
-        $token->getUser()->willReturn($user);
+        $byGuestFlagResolver->resolveFlag()->willReturn(false);
 
         $cart->setByGuest(false)->shouldBeCalled();
 
@@ -230,17 +225,15 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
     function it_sets_by_guest_flag_as_true_if_order_is_created_by_anonymous_user(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
+        ByGuestFlagResolverInterface $byGuestFlagResolver,
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
-        CustomerInterface $customer,
-        TokenStorageInterface $tokenStorage,
-        TokenInterface $token
+        CustomerInterface $customer
     ): void {
-        $this->beConstructedWith($cartContext, $shopperContext, $tokenStorage);
+        $this->beConstructedWith($cartContext, $shopperContext, $byGuestFlagResolver);
 
-        $tokenStorage->getToken()->willReturn($token);
-        $token->getUser()->willReturn(null);
+        $byGuestFlagResolver->resolveFlag()->willReturn(true);
 
         $cart->setByGuest(true)->shouldBeCalled();
 

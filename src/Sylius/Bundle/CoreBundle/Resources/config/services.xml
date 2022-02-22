@@ -245,5 +245,9 @@
         </service>
 
         <service id="security.authentication_manager" alias="security.authentication.manager" />
+
+        <service id="Sylius\Component\Core\Cart\Resolver\ByGuestFlagResolverInterface" class="Sylius\Component\Core\Cart\Resolver\ByGuestFlagResolver">
+            <argument type="service" id="security.token_storage" />
+        </service>
     </services>
 </container>

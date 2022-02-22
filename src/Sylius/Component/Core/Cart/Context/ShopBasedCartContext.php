@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Cart\Context;
 
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
+use Sylius\Component\Core\Cart\Resolver\ByGuestFlagResolverInterface;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -23,7 +24,6 @@ use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Webmozart\Assert\Assert;
 
 final class ShopBasedCartContext implements CartContextInterface
@@ -32,21 +32,21 @@ final class ShopBasedCartContext implements CartContextInterface
 
     private ShopperContextInterface $shopperContext;
 
-    private ?TokenStorageInterface $tokenStorage;
+    private ?ByGuestFlagResolverInterface $byGuestFlagResolver;
 
     private ?OrderInterface $cart = null;
 
     public function __construct(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
-        ?TokenStorageInterface $tokenStorage = null
+        ?ByGuestFlagResolverInterface $byGuestFlagResolver = null
     ) {
         $this->cartContext = $cartContext;
         $this->shopperContext = $shopperContext;
-        $this->tokenStorage = $tokenStorage;
+        $this->byGuestFlagResolver = $byGuestFlagResolver;
 
-        if ($tokenStorage === null) {
-            @trigger_error('Not passing tokenStorage through constructor is deprecated in Sylius 1.10.9 and it will be prohibited in Sylius 2.0');
+        if ($byGuestFlagResolver === null) {
+            @trigger_error('Not passing byGuestFlagResolver through constructor is deprecated in Sylius 1.10.9 and it will be prohibited in Sylius 2.0');
         }
     }
 
@@ -92,8 +92,8 @@ final class ShopBasedCartContext implements CartContextInterface
     {
         $cart->setCustomer($customer);
 
-        if ($this->tokenStorage !== null) {
-            $cart->setByGuest($this->resolveByGuestFlag());
+        if ($this->byGuestFlagResolver !== null) {
+            $cart->setByGuest($this->byGuestFlagResolver->resolveFlag());
         }
 
         $defaultAddress = $customer->getDefaultAddress();
@@ -102,20 +102,5 @@ final class ShopBasedCartContext implements CartContextInterface
             $clonedAddress->setCustomer(null);
             $cart->setBillingAddress($clonedAddress);
         }
-    }
-
-    private function resolveByGuestFlag(): bool
-    {
-        $token = $this->tokenStorage->getToken();
-        if ($token === null) {
-            return true;
-        }
-
-        $user = $token->getUser();
-        if ($user !== null) {
-            return false;
-        }
-
-        return true;
     }
 }
