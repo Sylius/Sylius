@@ -312,11 +312,11 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     {
         return $this->createQueryBuilder('o')
             ->where('o.checkoutState = :checkoutState')
-            ->andWhere('o.paymentState != :paymentState')
+            ->andWhere('o.paymentState = :paymentState')
             ->andWhere('o.state = :orderState')
             ->andWhere('o.checkoutCompletedAt < :terminalDate')
             ->setParameter('checkoutState', OrderCheckoutStates::STATE_COMPLETED)
-            ->setParameter('paymentState', OrderPaymentStates::STATE_PAID)
+            ->setParameter('paymentState', OrderPaymentStates::STATE_AWAITING_PAYMENT)
             ->setParameter('orderState', OrderInterface::STATE_NEW)
             ->setParameter('terminalDate', $terminalDate)
             ->getQuery()
