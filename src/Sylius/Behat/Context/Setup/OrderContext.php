@@ -718,6 +718,7 @@ final class OrderContext implements Context
 
     /**
      * @Given /^(this order) has been refunded$/
+     * @Given the customer has refunded the order with number :order
      */
     public function thisOrderHasBeenRefunded(OrderInterface $order)
     {
