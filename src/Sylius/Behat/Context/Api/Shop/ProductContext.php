@@ -340,26 +340,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then the first product on the list should have name :name
-     */
-    public function theFirstProductOnTheListShouldHaveName(string $name): void
-    {
-        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
-
-        Assert::same($products[0]['translations']['en_US']['name'], $name);
-    }
-
-    /**
-     * @Then the last product on the list should have name :name
-     */
-    public function theLastProductOnTheListShouldHaveName(string $name): void
-    {
-        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
-
-        Assert::same(end($products)['translations']['en_US']['name'], $name);
-    }
-
-    /**
      * @When /^I should see only (\d+) product(s)$/
      */
     public function iShouldSeeOnlyProducts(int $count): void
