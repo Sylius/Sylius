@@ -128,6 +128,22 @@ final class ProductContext implements Context
     }
 
     /**
+     * @When I sort products alphabetically from a to z
+     */
+    public function iSortProductsAlphabeticallyFromAToZ(): void
+    {
+        $this->client->sort(['translation.name' => 'asc']);
+    }
+
+    /**
+     * @When I sort products alphabetically from z to a
+     */
+    public function iSortProductsAlphabeticallyFromZToA(): void
+    {
+        $this->client->sort(['translation.name' => 'desc']);
+    }
+
+    /**
      * @When I clear filter
      */
     public function iClearFilter(): void
@@ -321,6 +337,26 @@ final class ProductContext implements Context
         $products = $this->responseChecker->getCollection($this->client->getLastResponse());
 
         Assert::same(end($products)['name'], $name);
+    }
+
+    /**
+     * @Then the first product on the list should have name :name
+     */
+    public function theFirstProductOnTheListShouldHaveName(string $name): void
+    {
+        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same($products[0]['translations']['en_US']['name'], $name);
+    }
+
+    /**
+     * @Then the last product on the list should have name :name
+     */
+    public function theLastProductOnTheListShouldHaveName(string $name): void
+    {
+        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same(end($products)['translations']['en_US']['name'], $name);
     }
 
     /**
