@@ -161,9 +161,9 @@ final class PaymentContext implements Context
     }
 
     /**
-     * @Given the store allows paying :paymentMethodName in :channel channel
+     * @Given the store allows paying with :paymentMethodName in :channel channel
      */
-    public function theStoreAllowsPayingInChannel(string $paymentMethodName, ChannelInterface $channel): void
+    public function theStoreAllowsPayingWithInChannel(string $paymentMethodName, ChannelInterface $channel): void
     {
         $paymentMethod = $this->createPaymentMethod(
             $paymentMethodName,

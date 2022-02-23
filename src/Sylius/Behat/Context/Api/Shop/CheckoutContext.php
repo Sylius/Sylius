@@ -612,25 +612,25 @@ final class CheckoutContext implements Context
     /**
      * @Then I should see :firstPaymentMethodName and :secondPaymentMethodName payment methods
      */
-    public function iShouldSeeAndPaymentMethods(string $firstPaymentMethodName, string $secondPaymentMethodName): void
+    public function iShouldSeePaymentMethods(string ...$paymentMethodsNames): void
     {
         $paymentMethods = $this->getPossiblePaymentMethods();
 
-        Assert::inArray($firstPaymentMethodName, array_column($paymentMethods, 'name'));
-
-        Assert::inArray($secondPaymentMethodName, array_column($paymentMethods, 'name'));
+        foreach ($paymentMethodsNames as $paymentMethodName) {
+            Assert::inArray($paymentMethodName, array_column($paymentMethods, 'name'));
+        }
     }
 
     /**
      * @Then I should not see :firstPaymentMethodName and :secondPaymentMethodName payment methods
      */
-    public function iShouldNotSeeAndPaymentMethods(string $firstPaymentMethodName, string $secondPaymentMethodName): void
+    public function iShouldNotSeePaymentMethods(string ...$paymentMethodsNames): void
     {
         $paymentMethods = $this->getPossiblePaymentMethods();
 
-        Assert::false(in_array($firstPaymentMethodName, array_column($paymentMethods, 'name'), true));
-
-        Assert::false(in_array($secondPaymentMethodName, array_column($paymentMethods, 'name'), true));
+        foreach ($paymentMethodsNames as $paymentMethodName) {
+            Assert::false(in_array($paymentMethodName, array_column($paymentMethods, 'name'), true));
+        }
     }
 
     /**

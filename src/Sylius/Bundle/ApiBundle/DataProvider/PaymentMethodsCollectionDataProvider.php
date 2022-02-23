@@ -49,11 +49,7 @@ final class PaymentMethodsCollectionDataProvider implements ContextAwareCollecti
 
         $parameters = $context['filters'];
 
-        if (!array_key_exists('tokenValue', $parameters)) {
-           return [];
-        }
-
-        if (!array_key_exists('paymentId', $parameters)) {
+        if (!array_key_exists('tokenValue', $parameters) || !array_key_exists('paymentId', $parameters) ) {
            return [];
         }
 

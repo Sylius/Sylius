@@ -10,8 +10,8 @@ Feature: Viewing available payment methods based on current channel
         And the store has a zone "World"
         And the store ships to "United States"
         And this zone has the "United States" country member
-        And the store allows paying "Bank of America" in "United States" channel
-        And the store allows paying "Bank of Poland" in "Poland" channel
+        And the store allows paying with "Bank of America" in "United States" channel
+        And the store allows paying with "Bank of Poland" in "Poland" channel
         And the store allows paying offline for all channels
         And the store allows paying "Bank of Universe"
         And this payment method has been disabled
@@ -20,9 +20,9 @@ Feature: Viewing available payment methods based on current channel
         And the store ships everywhere for free for all channels
 
     @ui @api
-    Scenario: Seeing payment methods that are available in channel as an logged in customer
+    Scenario: Seeing payment methods that are available in channel as a logged in customer
         Given I am a logged in customer
-        And I view shop on "United States" channel
+        And I am in the "United States" channel
         And I have product "PHP T-Shirt" in the cart
         When I complete addressing step with "United States" based billing address
         And I complete the shipping step with first shipping method
@@ -33,7 +33,7 @@ Feature: Viewing available payment methods based on current channel
     @api @ui
     Scenario: Seeing shipping methods that are available in another channel as an logged in customer
         Given I am a logged in customer
-        And I view shop on "Poland" channel
+        And I am in the "Poland" channel
         And I have product "PHP T-Shirt" in the cart
         When I complete addressing step with "United States" based billing address
         And I complete the shipping step with first shipping method
@@ -43,7 +43,7 @@ Feature: Viewing available payment methods based on current channel
 
     @ui @api
     Scenario: Seeing payment methods that are available in channel as a guest
-        Given I view shop on "United States" channel
+        Given I am in the "United States" channel
         And I have product "PHP T-Shirt" in the cart
         When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I complete the shipping step with first shipping method
@@ -53,7 +53,7 @@ Feature: Viewing available payment methods based on current channel
 
     @ui @api
     Scenario: Seeing shipping methods that are available in another channel as a guest
-        Given I view shop on "Poland" channel
+        Given I am in the "Poland" channel
         And I have product "PHP T-Shirt" in the cart
         When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I complete the shipping step with first shipping method

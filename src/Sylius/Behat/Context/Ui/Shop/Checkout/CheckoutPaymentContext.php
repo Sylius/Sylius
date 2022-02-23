@@ -171,32 +171,26 @@ final class CheckoutPaymentContext implements Context
     /**
      * @Then I should see :firstPaymentMethodName and :secondPaymentMethodName payment methods
      */
-    public function iShouldSeeAndPaymentMethods(string $firstPaymentMethodName, string $secondPaymentMethodName): void
+    public function iShouldSeeAndPaymentMethods(string ...$paymentMethodsNames): void
     {
-        Assert::true(
-            $this->selectPaymentPage->hasPaymentMethod($firstPaymentMethodName),
-            sprintf('There is no %s payment method', $firstPaymentMethodName)
-        );
-
-        Assert::true(
-            $this->selectPaymentPage->hasPaymentMethod($secondPaymentMethodName),
-            sprintf('There is no %s payment method', $secondPaymentMethodName)
-        );
+        foreach ($paymentMethodsNames as $paymentMethodName) {
+            Assert::true(
+                $this->selectPaymentPage->hasPaymentMethod($paymentMethodName),
+                sprintf('There is no %s payment method', $paymentMethodName)
+            );
+        }
     }
 
     /**
      * @Then I should not see :firstPaymentMethodName and :secondPaymentMethodName payment methods
      */
-    public function iShouldNotSeeAndPaymentMethods(string $firstPaymentMethodName, string $secondPaymentMethodName): void
+    public function iShouldNotSeeAndPaymentMethods(string ...$paymentMethodsNames): void
     {
-        Assert::false(
-            $this->selectPaymentPage->hasPaymentMethod($firstPaymentMethodName),
-            sprintf('There is %s payment method', $firstPaymentMethodName)
-        );
-
-        Assert::false(
-            $this->selectPaymentPage->hasPaymentMethod($secondPaymentMethodName),
-            sprintf('There is %s payment method', $secondPaymentMethodName)
-        );
+        foreach ($paymentMethodsNames as $paymentMethodName) {
+            Assert::false(
+                $this->selectPaymentPage->hasPaymentMethod($paymentMethodName),
+                sprintf('There is %s payment method', $paymentMethodName)
+            );
+        }
     }
 }
