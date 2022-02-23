@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Cart\Resolver;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 final class ByGuestFlagResolver implements ByGuestFlagResolverInterface
 {
@@ -31,6 +32,9 @@ final class ByGuestFlagResolver implements ByGuestFlagResolverInterface
             return true;
         }
 
-        return null === $token->getUser();
+        /** @var UserInterface|null $user */
+        $user = $token->getUser();
+
+        return null === $user;
     }
 }

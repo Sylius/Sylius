@@ -6,15 +6,15 @@
 ## Context and Problem Statement
 
 Cart and its processing is one of the key aspects of Sylius. It turned out that it has a vulnerability and there is
-possible for an anonymous user to retrieve or override the cart of logged in customer by using only its email.
-This is because when entering an email, during addressing step, the customer with this email is assigned to the cart 
-and from then, there is no simple way to distinguish between the carts created by the guest and the logged in user.
-The question is how should we distinguish the carts to solve the vulnerability.
+possible for an anonymous user to override the cart of logged in customer by using only its email. This is because 
+when entering an email, during addressing step, the customer with this email is assigned to the cart and from then, 
+there is no simple way to distinguish between the carts created by the guest and the logged in user. The question is 
+how should we distinguish the carts to solve the vulnerability.
 
 ## Decision Drivers
 
 Provided solution should:
-* solve the initial problem with retrieving or overriding cart of logged in customer by anonymous user
+* solve the initial problem with overriding cart of logged in customer by anonymous user
 * not break a backward compatibility, both code and business behaviour
 
 ## Considered Options
