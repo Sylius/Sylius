@@ -55,9 +55,7 @@ class ZoneFactory extends ModelFactory implements ZoneFactoryInterface
 
         foreach ($members as $member) {
             if (\is_string($member)) {
-                $data[] = ZoneMemberFactory::createOne(['code' => $member]);
-
-                continue;
+                $member = ZoneMemberFactory::createOne(['code' => $member]);
             }
 
             $data[] = $member;
