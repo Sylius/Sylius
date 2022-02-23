@@ -37,6 +37,17 @@
 
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\AddressFactoryInterface" alias="sylius.data_fixtures.factory.address" />
 
+        <service id="sylius.data_fixtures.factory.admin_user" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\AdminUserFactory">
+            <argument type="service" id="sylius.factory.admin_user" />
+            <argument type="service" id="sylius.factory.avatar_image" />
+            <argument type="service" id="file_locator" />
+            <argument type="service" id="sylius.image_uploader" />
+            <argument>%locale%</argument>
+            <tag name="foundry.factory" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\AdminUserFactoryInterface" alias="sylius.data_fixtures.factory.admin_user" />
+
         <service id="sylius.data_fixtures.factory_default_values.address" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\AddressFactoryDefaultValues">
             <argument type="service" id="sylius.data_fixtures.factory.country" />
             <argument type="service" id="sylius.data_fixtures.factory.shop_user" />
