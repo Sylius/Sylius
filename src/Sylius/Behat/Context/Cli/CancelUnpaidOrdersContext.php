@@ -55,7 +55,7 @@ final class CancelUnpaidOrdersContext implements Context
     {
         $orders = $this->orderRepository->findBy(['paymentState' => OrderPaymentStates::STATE_CANCELLED]);
 
-        Assert::same(count($orders), 1);
+        Assert::count($orders, 1);
         Assert::same($orders[0]->getNumber(), $orderNumber);
     }
 
