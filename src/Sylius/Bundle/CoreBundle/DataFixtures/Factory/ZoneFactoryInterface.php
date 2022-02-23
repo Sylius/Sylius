@@ -38,9 +38,9 @@ interface ZoneFactoryInterface
 {
     public function withCode(string $code): self;
 
-    public function withMembers(array $members): self;
+    public function withMembers(array $members, string $type): self;
 
     public function withCountries(array $countries): self;
 
-    public function withProvinces(array $countries, string $type): self;
+    public function withProvinces(array $countries): self;
 }
