@@ -167,4 +167,30 @@ final class CheckoutPaymentContext implements Context
 
         throw new UnexpectedPageException('It should not be possible to complete checkout payment step.');
     }
+
+    /**
+     * @Then I should see :firstPaymentMethodName and :secondPaymentMethodName payment methods
+     */
+    public function iShouldSeeAndPaymentMethods(string ...$paymentMethodsNames): void
+    {
+        foreach ($paymentMethodsNames as $paymentMethodName) {
+            Assert::true(
+                $this->selectPaymentPage->hasPaymentMethod($paymentMethodName),
+                sprintf('There is no %s payment method', $paymentMethodName)
+            );
+        }
+    }
+
+    /**
+     * @Then I should not see :firstPaymentMethodName and :secondPaymentMethodName payment methods
+     */
+    public function iShouldNotSeeAndPaymentMethods(string ...$paymentMethodsNames): void
+    {
+        foreach ($paymentMethodsNames as $paymentMethodName) {
+            Assert::false(
+                $this->selectPaymentPage->hasPaymentMethod($paymentMethodName),
+                sprintf('There is %s payment method', $paymentMethodName)
+            );
+        }
+    }
 }

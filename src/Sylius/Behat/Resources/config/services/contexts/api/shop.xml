@@ -69,6 +69,7 @@
             <argument type="service" id="sylius.behat.api_platform_client.shop.order" />
             <argument type="service" id="sylius.behat.api_platform_client.shop.address" />
             <argument type="service" id="sylius.behat.api_platform_client.shop.shipping_methods" />
+            <argument type="service" id="sylius.behat.api_platform_client.shop.payment_method" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.repository.order" />

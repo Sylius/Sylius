@@ -49,6 +49,11 @@
             <argument>shop</argument>
         </service>
 
+        <service id="sylius.behat.api_platform_client.shop.payment_method" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
+            <argument>payment-methods</argument>
+            <argument>shop</argument>
+        </service>
+
         <service id="sylius.behat.api_platform_client.shop.currency" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>currencies</argument>
             <argument>shop</argument>

@@ -51,6 +51,8 @@ final class CheckoutContext implements Context
 
     private ApiClientInterface $shippingMethodsClient;
 
+    private ApiClientInterface $paymentMethodsClient;
+
     private ResponseCheckerInterface $responseChecker;
 
     private RepositoryInterface $shippingMethodRepository;
@@ -76,6 +78,7 @@ final class CheckoutContext implements Context
         ApiClientInterface $ordersClient,
         ApiClientInterface $addressesClient,
         ApiClientInterface $shippingMethodsClient,
+        ApiClientInterface $paymentMethodsClient,
         ResponseCheckerInterface $responseChecker,
         RepositoryInterface $shippingMethodRepository,
         OrderRepositoryInterface $orderRepository,
@@ -89,6 +92,7 @@ final class CheckoutContext implements Context
         $this->ordersClient = $ordersClient;
         $this->addressesClient = $addressesClient;
         $this->shippingMethodsClient = $shippingMethodsClient;
+        $this->paymentMethodsClient = $paymentMethodsClient;
         $this->responseChecker = $responseChecker;
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->orderRepository = $orderRepository;
@@ -292,6 +296,23 @@ final class CheckoutContext implements Context
     {
         $this->addressOrder([
             'email' => $email,
+            'billingAddress' => [
+                'city' => $address->getCity(),
+                'street' => $address->getStreet(),
+                'postcode' => $address->getPostcode(),
+                'countryCode' => $address->getCountryCode(),
+                'firstName' => $address->getFirstName(),
+                'lastName' => $address->getLastName(),
+            ],
+        ]);
+    }
+
+    /**
+     * @When /^I complete addressing step with ("[^"]+" based billing address)$/
+     */
+    public function iCompleteAddressingStepWithAddress(AddressInterface $address): void
+    {
+        $this->addressOrder([
             'billingAddress' => [
                 'city' => $address->getCity(),
                 'street' => $address->getStreet(),
@@ -586,6 +607,30 @@ final class CheckoutContext implements Context
         $paymentMethods = $this->getPossiblePaymentMethods();
 
         Assert::notFalse(array_search($paymentMethodName, array_column($paymentMethods, 'name'), true));
+    }
+
+    /**
+     * @Then I should see :firstPaymentMethodName and :secondPaymentMethodName payment methods
+     */
+    public function iShouldSeePaymentMethods(string ...$paymentMethodsNames): void
+    {
+        $paymentMethods = $this->getPossiblePaymentMethods();
+
+        foreach ($paymentMethodsNames as $paymentMethodName) {
+            Assert::inArray($paymentMethodName, array_column($paymentMethods, 'name'));
+        }
+    }
+
+    /**
+     * @Then I should not see :firstPaymentMethodName and :secondPaymentMethodName payment methods
+     */
+    public function iShouldNotSeePaymentMethods(string ...$paymentMethodsNames): void
+    {
+        $paymentMethods = $this->getPossiblePaymentMethods();
+
+        foreach ($paymentMethodsNames as $paymentMethodName) {
+            Assert::false(in_array($paymentMethodName, array_column($paymentMethods, 'name'), true));
+        }
     }
 
     /**
@@ -1242,17 +1287,12 @@ final class CheckoutContext implements Context
             return [];
         }
 
-        $request = Request::customItemAction(
-            'shop',
-            'orders',
-            $this->sharedStorage->get('cart_token'),
-            HTTPRequest::METHOD_GET,
-            sprintf('payments/%s/methods', $order->getLastPayment()->getId())
-        );
+        $this->paymentMethodsClient->index();
+        $this->paymentMethodsClient->addFilter('paymentId', $order->getLastPayment()->getId());
+        $this->paymentMethodsClient->addFilter('tokenValue', $order->getTokenValue());
+        $this->paymentMethodsClient->filter();
 
-        $this->ordersClient->executeCustomRequest($request);
-
-        return $this->responseChecker->getCollection($this->ordersClient->getLastResponse());
+        return $this->responseChecker->getCollection($this->paymentMethodsClient->getLastResponse());
     }
 
     private function hasProductWithNameAndQuantityInCart(string $productName, int $quantity): bool
