@@ -43,7 +43,7 @@ final class TaxonFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_taxon_with_names_for_each_locales(): void
+    function it_creates_taxon_with_name_for_each_locale(): void
     {
         LocaleFactory::new()->withCode('en_US')->create();
         LocaleFactory::new()->withCode('fr_FR')->create();
@@ -68,7 +68,7 @@ final class TaxonFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_taxon_with_slugs_for_each_locales(): void
+    function it_creates_taxon_with_slug_for_each_locale(): void
     {
         LocaleFactory::new()->withCode('en_US')->create();
         LocaleFactory::new()->withCode('fr_FR')->create();
@@ -91,7 +91,7 @@ final class TaxonFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_taxon_with_descriptions_for_each_locales(): void
+    function it_creates_taxon_with_description_for_each_locale(): void
     {
         LocaleFactory::new()->withCode('en_US')->create();
         LocaleFactory::new()->withCode('fr_FR')->create();
