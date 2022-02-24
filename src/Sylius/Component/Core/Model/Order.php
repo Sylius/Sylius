@@ -477,12 +477,12 @@ class Order extends BaseOrder implements OrderInterface
         return $total;
     }
 
-    public function getCreatedByGuest(): bool
+    public function getByGuest(): bool
     {
         return $this->createdByGuest;
     }
 
-    public function setCreatedByGuest(bool $createdByGuest): void
+    public function setByGuest(bool $createdByGuest): void
     {
         $this->createdByGuest = $createdByGuest;
     }

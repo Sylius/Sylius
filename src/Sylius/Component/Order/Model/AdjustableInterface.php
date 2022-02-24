@@ -18,7 +18,7 @@ use Doctrine\Common\Collections\Collection;
 interface AdjustableInterface
 {
     /**
-     * @return AdjustmentInterface[]
+     * @return Collection|AdjustmentInterface[]
      *
      * @psalm-return Collection<array-key, AdjustmentInterface>
      */
