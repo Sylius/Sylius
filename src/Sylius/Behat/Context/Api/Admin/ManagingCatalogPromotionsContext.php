@@ -646,7 +646,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I edit it to have empty amount of fixed discount in the ("[^"]+" channel)$/
+     * @When I edit it to have empty amount of fixed discount in the :channel channel
      */
     public function iEditItToHaveEmptyFixedDiscountInTheChannel(ChannelInterface $channel): void
     {

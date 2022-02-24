@@ -59,9 +59,8 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $catalogPromotionAction = $form->getData();
 
         $this->assertInstanceOf(CatalogPromotionActionInterface::class, $catalogPromotionAction);
-        $this->assertTrue($form->isSynchronized());
         $this->assertSame('fixed_discount', $catalogPromotionAction->getType());
-        $this->assertSame(['WEB_US' => ['amount' => 20]], $catalogPromotionAction->getConfiguration());
+        $this->assertSame(['WEB_US' => ['amount' => 2000]], $catalogPromotionAction->getConfiguration());
     }
 
     /** @test */
@@ -113,8 +112,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
 
         $this->assertInstanceOf(CatalogPromotionActionInterface::class, $catalogPromotionAction);
         $this->assertSame('fixed_discount', $catalogPromotionAction->getType());
-        $this->assertSame(['WEB_US' => ['amount' => 10]], $catalogPromotionAction->getConfiguration());
-        $this->assertSame(['WEB_US' => ['amount' => 10]], $catalogPromotionAction->getConfiguration());
+        $this->assertSame(['WEB_US' => ['amount' => 1000]], $catalogPromotionAction->getConfiguration());
     }
 
     /** @test */
@@ -222,6 +220,33 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
     }
 
     /** @test */
+    public function it_updates_fixed_discount_with_float_amount(): void
+    {
+        $fixedDiscount = $this->setupFixedDiscount();
+
+        $this->channelRepository->findAll(Argument::any())->willReturn(
+            [$this->channel->reveal()]
+        );
+
+        $form = $this->factory->create(CatalogPromotionActionType::class, $fixedDiscount);
+        $form->submit([
+            'type' => 'fixed_discount',
+            'configuration' => [
+                'WEB_US' => [
+                    'amount' => 20.54
+                ]
+            ]
+        ]);
+
+        $this->assertTrue($form->isSynchronized());
+        $catalogPromotionAction = $form->getData();
+
+        $this->assertInstanceOf(CatalogPromotionActionInterface::class, $catalogPromotionAction);
+        $this->assertSame('fixed_discount', $catalogPromotionAction->getType());
+        $this->assertSame(['WEB_US' => ['amount' => 2054]], $catalogPromotionAction->getConfiguration());
+    }
+
+    /** @test */
     public function it_updates_percentage_discount_with_not_valid_amount(): void
     {
         $percentageDiscount = $this->setupPercentageDiscount();
@@ -251,7 +276,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $this->channelRepository = $this->prophesize(ChannelRepositoryInterface::class);
 
         $currency = $this->prophesize(CurrencyInterface::class);
-        $currency->getCode()->willReturn('$');
+        $currency->getCode()->willReturn('USD');
 
         $channel = $this->prophesize(ChannelInterface::class);
         $channel->getCode()->willReturn('WEB_US');
