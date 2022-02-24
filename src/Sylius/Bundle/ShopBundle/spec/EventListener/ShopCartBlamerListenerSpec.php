@@ -89,7 +89,7 @@ final class ShopCartBlamerListenerSpec extends ObjectBehavior
         $user->getCustomer()->willReturn($customer);
 
         $cart->setCustomer($customer)->shouldBeCalled();
-        $cart->setByGuest(false)->shouldBeCalled();
+        $cart->setCreatedByGuest(false)->shouldBeCalled();
 
         $this->onImplicitLogin($userEvent);
     }
@@ -111,7 +111,7 @@ final class ShopCartBlamerListenerSpec extends ObjectBehavior
         $user->getCustomer()->willReturn($customer);
 
         $cart->setCustomer($customer)->shouldBeCalled();
-        $cart->setByGuest(false)->shouldBeCalled();
+        $cart->setCreatedByGuest(false)->shouldBeCalled();
 
         $this->onInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
     }
@@ -130,7 +130,7 @@ final class ShopCartBlamerListenerSpec extends ObjectBehavior
         $cart->getCustomer()->willReturn($customer);
 
         $cart->setCustomer(Argument::any())->shouldNotBeCalled();
-        $cart->setByGuest(false)->shouldNotBeCalled();
+        $cart->setCreatedByGuest(false)->shouldNotBeCalled();
 
         $this->onInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
     }
@@ -148,7 +148,7 @@ final class ShopCartBlamerListenerSpec extends ObjectBehavior
         $token->getUser()->willReturn('anon.');
 
         $cart->setCustomer(Argument::any())->shouldNotBeCalled();
-        $cart->setByGuest(false)->shouldNotBeCalled();
+        $cart->setCreatedByGuest(false)->shouldNotBeCalled();
 
         $this->onInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
     }
