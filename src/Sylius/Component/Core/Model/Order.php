@@ -463,12 +463,12 @@ class Order extends BaseOrder implements OrderInterface
         $this->customerIp = $customerIp;
     }
 
-    public function getByGuest(): bool
+    public function getCreatedByGuest(): bool
     {
         return $this->createdByGuest;
     }
 
-    public function setByGuest(bool $createdByGuest): void
+    public function setCreatedByGuest(bool $createdByGuest): void
     {
         $this->createdByGuest = $createdByGuest;
     }
