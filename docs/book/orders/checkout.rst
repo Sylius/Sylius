@@ -93,6 +93,8 @@ Firstly if the **Customer** is not yet set on the Order it will be assigned depe
             </class>
         </constraint-mapping>
 
+    If you would like to achieve the same behaviour in API, read :doc:`the dedicated cookbook </cookbook/api/how_force_login_already_registered_user_during_checkout>`.
+
 .. hint::
 
     If you do not understand the Users and Customers concept in Sylius go to the :doc:`Users Concept documentation </book/customers/customer_and_shopuser>`.
