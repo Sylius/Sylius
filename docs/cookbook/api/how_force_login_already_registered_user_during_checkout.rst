@@ -10,7 +10,7 @@ Firstly you need to add a new constraint class:
 
 .. code-block:: php
 
-    // # src/App/Validator/Constraints
+    // src/App/Validator/Constraints
 
     <?php
 
@@ -39,7 +39,7 @@ Then you need to add a validator class:
 
 .. code-block:: php
 
-    // # src/App/Validator/Constraints
+    // src/App/Validator/Constraints
 
     <?php
 
@@ -57,15 +57,10 @@ Then you need to add a validator class:
 
     final class UserAlreadyRegisteredValidator extends ConstraintValidator
     {
-        private CustomerRepositoryInterface $customerRepository;
-        private TokenStorageInterface $tokenStorage;
-
         public function __construct(
-            CustomerRepositoryInterface $customerRepository,
-            TokenStorageInterface $tokenStorage
+            private CustomerRepositoryInterface $customerRepository,
+            private TokenStorageInterface $tokenStorage
         ) {
-            $this->tokenStorage = $tokenStorage;
-            $this->customerRepository = $customerRepository;
         }
 
         public function validate($value, Constraint $constraint): void
@@ -113,4 +108,3 @@ As the last thing you need to do is enable this constraint validator in your app
         App\Validator\Constraints\UserAlreadyRegisteredValidator:
             class: App\Validator\Constraints\UserAlreadyRegisteredValidator
             tags: [ { name: validator.constraint_validator, alias: sylius_api_registered_user_validator } ]
-
