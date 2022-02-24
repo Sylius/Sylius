@@ -202,7 +202,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
 
         $createdByGuestFlagResolver->resolveFlag()->willReturn(false);
 
-        $cart->setByGuest(false)->shouldBeCalled();
+        $cart->setCreatedByGuest(false)->shouldBeCalled();
 
         $cartContext->getCart()->shouldBeCalledTimes(1)->willReturn($cart);
 
@@ -235,7 +235,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
 
         $createdByGuestFlagResolver->resolveFlag()->willReturn(true);
 
-        $cart->setByGuest(true)->shouldBeCalled();
+        $cart->setCreatedByGuest(true)->shouldBeCalled();
 
         $cartContext->getCart()->shouldBeCalledTimes(1)->willReturn($cart);
 

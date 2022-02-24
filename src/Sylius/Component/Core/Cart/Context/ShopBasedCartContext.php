@@ -93,7 +93,7 @@ final class ShopBasedCartContext implements CartContextInterface
         $cart->setCustomer($customer);
 
         if ($this->createdByGuestFlagResolver !== null) {
-            $cart->setByGuest($this->createdByGuestFlagResolver->resolveFlag());
+            $cart->setCreatedByGuest($this->createdByGuestFlagResolver->resolveFlag());
         }
 
         $defaultAddress = $customer->getDefaultAddress();
