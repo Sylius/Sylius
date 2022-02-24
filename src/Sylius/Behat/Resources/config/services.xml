@@ -48,6 +48,12 @@
             <argument type="string">shop</argument>
         </service>
 
+        <service id="Sylius\Behat\Service\SessionManagerInterface" class="Sylius\Behat\Service\SessionManager" public="false">
+            <argument type="service" id="behat.mink" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.shop_security" />
+        </service>
+
         <service id="sylius.behat.shared_security" class="Sylius\Behat\Service\SharedSecurityService" public="false">
             <argument type="service" id="sylius.behat.admin_security" />
         </service>

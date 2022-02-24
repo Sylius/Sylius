@@ -110,6 +110,8 @@ class Order extends BaseOrder implements OrderInterface
      */
     protected $customerIp;
 
+    protected bool $createdByGuest = true;
+
     public function __construct()
     {
         parent::__construct();
@@ -473,5 +475,15 @@ class Order extends BaseOrder implements OrderInterface
         }
 
         return $total;
+    }
+
+    public function getByGuest(): bool
+    {
+        return $this->createdByGuest;
+    }
+
+    public function setByGuest(bool $createdByGuest): void
+    {
+        $this->createdByGuest = $createdByGuest;
     }
 }

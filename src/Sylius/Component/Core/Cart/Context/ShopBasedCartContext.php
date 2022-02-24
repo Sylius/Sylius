@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Cart\Context;
 
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
+use Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolverInterface;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -27,10 +28,26 @@ use Webmozart\Assert\Assert;
 
 final class ShopBasedCartContext implements CartContextInterface
 {
+    private CartContextInterface $cartContext;
+
+    private ShopperContextInterface $shopperContext;
+
+    private ?CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver;
+
     private ?OrderInterface $cart = null;
 
-    public function __construct(private CartContextInterface $cartContext, private ShopperContextInterface $shopperContext)
-    {
+    public function __construct(
+        CartContextInterface $cartContext,
+        ShopperContextInterface $shopperContext,
+        ?CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver = null
+    ) {
+        $this->cartContext = $cartContext;
+        $this->shopperContext = $shopperContext;
+        $this->createdByGuestFlagResolver = $createdByGuestFlagResolver;
+
+        if ($createdByGuestFlagResolver === null) {
+            @trigger_error('Not passing createdByGuestFlagResolver through constructor is deprecated in Sylius 1.10.9 and it will be prohibited in Sylius 2.0');
+        }
     }
 
     public function getCart(): BaseOrderInterface
@@ -66,9 +83,18 @@ final class ShopBasedCartContext implements CartContextInterface
         return $cart;
     }
 
+    public function reset(): void
+    {
+        $this->cart = null;
+    }
+
     private function setCustomerAndAddressOnCart(OrderInterface $cart, CustomerInterface $customer): void
     {
         $cart->setCustomer($customer);
+
+        if ($this->createdByGuestFlagResolver !== null) {
+            $cart->setByGuest($this->createdByGuestFlagResolver->resolveFlag());
+        }
 
         $defaultAddress = $customer->getDefaultAddress();
         if (null !== $defaultAddress) {
@@ -76,10 +102,5 @@ final class ShopBasedCartContext implements CartContextInterface
             $clonedAddress->setCustomer(null);
             $cart->setBillingAddress($clonedAddress);
         }
-    }
-
-    public function reset(): void
-    {
-        $this->cart = null;
     }
 }

@@ -44,6 +44,7 @@ final class ShopSecurityContext implements Context
 
     /**
      * @Given I am logged in as :email
+     * @When I log in as :email
      */
     public function iAmLoggedInAs(string $email): void
     {
