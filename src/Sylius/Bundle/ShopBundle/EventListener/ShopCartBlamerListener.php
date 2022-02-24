@@ -76,7 +76,7 @@ final class ShopCartBlamerListener
         }
 
         $cart->setCustomer($user->getCustomer());
-        $cart->setByGuest(false);
+        $cart->setCreatedByGuest(false);
     }
 
     /**
