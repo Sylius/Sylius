@@ -18,7 +18,10 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface ChannelRepositoryInterface extends RepositoryInterface
 {
+    /** @deprecated No longer used by internal code and not recommended. */
     public function findOneByHostname(string $hostname): ?ChannelInterface;
+
+    public function findOneEnabledByHostname(string $hostname): ?ChannelInterface;
 
     public function findOneByCode(string $code): ?ChannelInterface;
 

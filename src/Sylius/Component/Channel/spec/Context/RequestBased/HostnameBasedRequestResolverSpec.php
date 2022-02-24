@@ -38,7 +38,7 @@ final class HostnameBasedRequestResolverSpec extends ObjectBehavior
     ): void {
         $request->getHost()->willReturn('example.org');
 
-        $channelRepository->findOneByHostname('example.org')->willReturn($channel);
+        $channelRepository->findOneEnabledByHostname('example.org')->willReturn($channel);
 
         $this->findChannel($request)->shouldReturn($channel);
     }
@@ -49,7 +49,7 @@ final class HostnameBasedRequestResolverSpec extends ObjectBehavior
     ): void {
         $request->getHost()->willReturn('example.org');
 
-        $channelRepository->findOneByHostname('example.org')->willReturn(null);
+        $channelRepository->findOneEnabledByHostname('example.org')->willReturn(null);
 
         $this->findChannel($request)->shouldReturn(null);
     }

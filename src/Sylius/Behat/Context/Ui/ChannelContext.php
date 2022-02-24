@@ -78,4 +78,20 @@ final class ChannelContext implements Context
     {
         Assert::same($this->pluginMainPage->getContent(), $content);
     }
+
+    /**
+     * @When I visit the homepage
+     */
+    public function iVisitTheHomepage(): void
+    {
+        $this->homePage->open();
+    }
+
+    /**
+     * @Then I should be on channel :channel
+     */
+    public function iShouldBeOnChannel(ChannelInterface $channel): void
+    {
+        Assert::eq($this->homePage->getMetaTitle(), $channel->getName());
+    }
 }

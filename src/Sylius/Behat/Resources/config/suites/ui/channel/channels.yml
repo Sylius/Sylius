@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_channels:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.channel
+
+                - sylius.behat.context.setup.channel
+
+                - sylius.behat.context.ui.channel
+            filters:
+                tags: "@channels&&@ui"
