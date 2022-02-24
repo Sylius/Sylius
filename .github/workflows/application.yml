@@ -583,6 +583,67 @@ jobs:
                     path: etc/build/
                     if-no-files-found: ignore
 
+    test-application-caching-mechanism:
+        name: PHP 8.0, Symfony 6, Varnish 6
+        runs-on: ubuntu-20.04
+        strategy:
+            fail-fast: false
+            matrix:
+                mysql: [ "5.7" ]
+                include:
+                    -   php: '8.0'
+                        symfony-version: '6.*'
+        env:
+            APP_ENV: test_cached
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
+            VARNISH_VERSION: '6.6'
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v2
+
+            -   name: Shutdown default MySQL
+                run: sudo service mysql stop
+
+            -   name: Setup MySQL
+                uses: mirromutth/mysql-action@v1.1
+                with:
+                    mysql version: "${{ matrix.mysql }}"
+                    mysql root password: "root"
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: "${{ matrix.php }}"
+                    ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=0, opcache.memory_consumption=512, opcache.max_accelerated_files=65407, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
+                    extensions: intl, gd, opcache, mysql, pdo_mysql
+                    tools: symfony, composer-require-checker
+                    coverage: none
+
+            -   name: Copy configuration
+                run: |
+                    cp etc/varnish/docker-compose.yaml .
+                    cp etc/varnish/api_platform/config.yaml src/Sylius/Bundle/ApiBundle/Resources/config/app/config.yaml
+
+            -   name: Setup Varnish
+                run: |
+                    docker-compose up --build -d
+
+            -   name: Install composer dependencies
+                run: |
+                    composer update --prefer-dist --no-interaction --no-progress
+
+            -   name: Prepare application database
+                run: |
+                    APP_DEBUG=1 bin/console doctrine:database:create -vvv
+                    bin/console doctrine:migrations:migrate -n -vvv
+
+            -   name: Run webserver
+                run: symfony server:start --port=8443 --dir=public --daemon --no-tls
+
+            -   name: Execute tests
+                run: vendor/bin/phpunit tests/Api/Admin/ProductVariantsCacheTest.php
+
     test-application-with-frontend:
         runs-on: ubuntu-latest
 

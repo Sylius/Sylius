@@ -1,0 +1,8 @@
+version: '3'
+services:
+    varnish:
+        image: plopix/docker-varnish6
+        volumes:
+            - './etc/varnish/default.vcl:/etc/varnish/default.vcl:ro'
+        ports:
+            - '8085:80'

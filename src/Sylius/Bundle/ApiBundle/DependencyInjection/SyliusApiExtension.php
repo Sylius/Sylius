@@ -13,9 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DependencyInjection;
 
+use Sylius\Bundle\ApiBundle\Cache\VarnishPurger;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /** @experimental */
@@ -38,5 +41,16 @@ final class SyliusApiExtension extends Extension
         if ($container->hasParameter('api_platform.enable_swagger_ui') && $container->getParameter('api_platform.enable_swagger_ui')) {
             $loader->load('integrations/swagger.xml');
         }
+
+        if (!$container->hasDefinition('api_platform.http_cache.purger.varnish')) {
+            return;
+        }
+
+        $definition = new Definition(VarnishPurger::class);
+        $definition->setDecoratedService('api_platform.http_cache.purger.varnish');
+        $definition->addArgument(new Reference(VarnishPurger::class . '.inner'));
+        $definition->addArgument(new Reference('router'));
+
+        $container->setDefinition(VarnishPurger::class, $definition);
     }
 }
