@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Mapping;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -191,9 +190,11 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->andWhere('o.channel = :channel')
             ->andWhere('o.customer = :customer')
             ->andWhere('o.items IS NOT EMPTY')
+            ->andWhere('o.createdByGuest = :createdByGuest')
             ->setParameter('state', OrderInterface::STATE_CART)
             ->setParameter('channel', $channel)
             ->setParameter('customer', $customer)
+            ->setParameter('createdByGuest', false)
             ->addOrderBy('o.createdAt', 'DESC')
             ->setMaxResults(1)
             ->getQuery()

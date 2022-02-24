@@ -16,6 +16,7 @@ namespace spec\Sylius\Component\Core\Cart\Context;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
+use Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolverInterface;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -186,5 +187,71 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($firstCart);
         $this->reset();
         $this->getCart()->shouldReturn($secondCart);
+    }
+
+    function it_sets_created_by_guest_flag_as_false_if_order_is_created_by_logged_in_customer(
+        CartContextInterface $cartContext,
+        ShopperContextInterface $shopperContext,
+        CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver,
+        OrderInterface $cart,
+        ChannelInterface $channel,
+        CurrencyInterface $currency,
+        CustomerInterface $customer
+    ): void {
+        $this->beConstructedWith($cartContext, $shopperContext, $createdByGuestFlagResolver);
+
+        $createdByGuestFlagResolver->resolveFlag()->willReturn(false);
+
+        $cart->setByGuest(false)->shouldBeCalled();
+
+        $cartContext->getCart()->shouldBeCalledTimes(1)->willReturn($cart);
+
+        $shopperContext->getChannel()->willReturn($channel);
+        $shopperContext->getLocaleCode()->willReturn('pl');
+        $shopperContext->getCustomer()->willReturn($customer);
+        $customer->getDefaultAddress()->willReturn(null);
+
+        $channel->getBaseCurrency()->willReturn($currency);
+        $currency->getCode()->willReturn('PLN');
+
+        $cart->setChannel($channel)->shouldBeCalled();
+        $cart->setCurrencyCode('PLN')->shouldBeCalled();
+        $cart->setLocaleCode('pl')->shouldBeCalled();
+        $cart->setCustomer($customer)->shouldBeCalled();
+
+        $this->getCart()->shouldReturn($cart);
+    }
+
+    function it_sets_created_by_guest_flag_as_true_if_order_is_created_by_anonymous_user(
+        CartContextInterface $cartContext,
+        ShopperContextInterface $shopperContext,
+        CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver,
+        OrderInterface $cart,
+        ChannelInterface $channel,
+        CurrencyInterface $currency,
+        CustomerInterface $customer
+    ): void {
+        $this->beConstructedWith($cartContext, $shopperContext, $createdByGuestFlagResolver);
+
+        $createdByGuestFlagResolver->resolveFlag()->willReturn(true);
+
+        $cart->setByGuest(true)->shouldBeCalled();
+
+        $cartContext->getCart()->shouldBeCalledTimes(1)->willReturn($cart);
+
+        $shopperContext->getChannel()->willReturn($channel);
+        $shopperContext->getLocaleCode()->willReturn('pl');
+        $shopperContext->getCustomer()->willReturn($customer);
+        $customer->getDefaultAddress()->willReturn(null);
+
+        $channel->getBaseCurrency()->willReturn($currency);
+        $currency->getCode()->willReturn('PLN');
+
+        $cart->setChannel($channel)->shouldBeCalled();
+        $cart->setCurrencyCode('PLN')->shouldBeCalled();
+        $cart->setLocaleCode('pl')->shouldBeCalled();
+        $cart->setCustomer($customer)->shouldBeCalled();
+
+        $this->getCart()->shouldReturn($cart);
     }
 }

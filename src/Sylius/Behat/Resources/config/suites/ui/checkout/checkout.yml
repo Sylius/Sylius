@@ -49,6 +49,7 @@ default:
                 - sylius.behat.context.ui.channel
                 - sylius.behat.context.ui.email
                 - sylius.behat.context.ui.shop.address_book
+                - sylius.behat.context.ui.shop.authorization
                 - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.shop.checkout
                 - sylius.behat.context.ui.shop.checkout.addressing
@@ -60,6 +61,7 @@ default:
                 - sylius.behat.context.ui.shop.currency
                 - sylius.behat.context.ui.shop.homepage
                 - sylius.behat.context.ui.shop.locale
+                - sylius.behat.context.ui.user
 
             filters:
                 tags: "@checkout&&@ui"

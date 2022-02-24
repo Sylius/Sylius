@@ -19,6 +19,7 @@ use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\SessionManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
@@ -34,16 +35,20 @@ final class CartContext implements Context
 
     private NotificationCheckerInterface $notificationChecker;
 
+    private SessionManagerInterface $sessionManager;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         SummaryPageInterface $summaryPage,
         ShowPageInterface $productShowPage,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
+        SessionManagerInterface $sessionManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->summaryPage = $summaryPage;
         $this->productShowPage = $productShowPage;
         $this->notificationChecker = $notificationChecker;
+        $this->sessionManager = $sessionManager;
     }
 
     /**
@@ -97,6 +102,7 @@ final class CartContext implements Context
     /**
      * @Then the grand total value should be :total
      * @Then my cart total should be :total
+     * @Then their cart total should be :total
      */
     public function myCartTotalShouldBe($total)
     {
@@ -244,13 +250,16 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given /^an anonymous user added (product "([^"]+)") to the cart$/
      * @Given /^I (?:add|added) (this product) to the cart$/
      * @Given /^I have (product "[^"]+") added to the cart$/
      * @Given I added product :product to the cart
+     * @Given he added product :product to the cart
      * @Given /^I (?:have|had) (product "[^"]+") in the cart$/
      * @Given the customer added :product product to the cart
      * @Given /^I (?:add|added) ("[^"]+" product) to the (cart)$/
      * @When I add product :product to the cart
+     * @When they add product :product to the cart
      */
     public function iAddProductToTheCart(ProductInterface $product): void
     {
@@ -266,6 +275,18 @@ final class CartContext implements Context
      */
     public function iAddMultipleProductsToTheCart(array $products)
     {
+        foreach ($products as $product) {
+            $this->iAddProductToTheCart($product);
+        }
+    }
+
+    /**
+     * @When /^an anonymous user in another browser adds (products "([^"]+)" and "([^"]+)") to the cart$/
+     */
+    public function anonymousUserAddsMultipleProductsToTheCart(array $products): void
+    {
+        $this->sessionManager->changeSession();
+
         foreach ($products as $product) {
             $this->iAddProductToTheCart($product);
         }
@@ -362,6 +383,16 @@ final class CartContext implements Context
     public function thisItemShouldHaveCode($variantCode)
     {
         Assert::true($this->summaryPage->hasItemWithCode($variantCode));
+    }
+
+    /**
+     * @When I view my cart in the previous session
+     */
+    public function iViewMyCartInPreviousSession(): void
+    {
+        $this->sessionManager->restorePreviousSession();
+
+        $this->summaryPage->open();
     }
 
     /**
