@@ -167,5 +167,6 @@ API
     :hidden:
 
     api/add_to_cart_product_chosen_by_product_options
+    api/how_force_login_already_registered_user_during_checkout
 
 .. include:: /cookbook/api/map.rst.inc
