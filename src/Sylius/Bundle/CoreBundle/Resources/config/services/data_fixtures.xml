@@ -71,6 +71,16 @@
 
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxCategoryFactoryInterface" alias="sylius.data_fixtures.factory.tax_category" />
 
+        <service id="sylius.data_fixtures.factory.taxon" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactory">
+            <argument type="service" id="sylius.factory.taxon" />
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.generator.taxon_slug" />
+            <tag name="foundry.factory" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactoryInterface" alias="sylius.data_fixtures.factory.taxon" />
+
         <service id="sylius.data_fixtures.factory.zone" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactory">
             <argument type="service" id="sylius.factory.zone" />
             <tag name="foundry.factory" />
