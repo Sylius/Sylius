@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Cart\Resolver;
 
-interface ByGuestFlagResolverInterface
+interface CreatedByGuestFlagResolverInterface
 {
     public function resolveFlag(): bool;
 }

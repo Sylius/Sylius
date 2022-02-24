@@ -1,9 +1,9 @@
 # UPGRADE FROM `v1.10.8` TO `v1.10.10`
 
-1. Field `byGuest` has been added to `Sylius\Component\Core\Model\Order`, this change will allow us to distinguish carts 
+1. Field `createdByGuest` has been added to `Sylius\Component\Core\Model\Order`, this change will allow us to distinguish carts 
 between guests and logged in customers.
 
-2. Not passing `byGuestFlagResolver` through constructor in `Sylius\Component\Core\Cart\Context\ShopBasedCartContext` 
+2. Not passing `createdByGuestFlagResolver` through constructor in `Sylius\Component\Core\Cart\Context\ShopBasedCartContext` 
 is deprecated in Sylius 1.10.9 and it will be prohibited in Sylius 2.0.
 
 # UPGRADE FROM `v1.10.x` TO `v1.10.8`

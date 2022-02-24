@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Cart\Context;
 
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
-use Sylius\Component\Core\Cart\Resolver\ByGuestFlagResolverInterface;
+use Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolverInterface;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -32,21 +32,21 @@ final class ShopBasedCartContext implements CartContextInterface
 
     private ShopperContextInterface $shopperContext;
 
-    private ?ByGuestFlagResolverInterface $byGuestFlagResolver;
+    private ?CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver;
 
     private ?OrderInterface $cart = null;
 
     public function __construct(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
-        ?ByGuestFlagResolverInterface $byGuestFlagResolver = null
+        ?CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver = null
     ) {
         $this->cartContext = $cartContext;
         $this->shopperContext = $shopperContext;
-        $this->byGuestFlagResolver = $byGuestFlagResolver;
+        $this->createdByGuestFlagResolver = $createdByGuestFlagResolver;
 
-        if ($byGuestFlagResolver === null) {
-            @trigger_error('Not passing byGuestFlagResolver through constructor is deprecated in Sylius 1.10.9 and it will be prohibited in Sylius 2.0');
+        if ($createdByGuestFlagResolver === null) {
+            @trigger_error('Not passing createdByGuestFlagResolver through constructor is deprecated in Sylius 1.10.9 and it will be prohibited in Sylius 2.0');
         }
     }
 
@@ -92,8 +92,8 @@ final class ShopBasedCartContext implements CartContextInterface
     {
         $cart->setCustomer($customer);
 
-        if ($this->byGuestFlagResolver !== null) {
-            $cart->setByGuest($this->byGuestFlagResolver->resolveFlag());
+        if ($this->createdByGuestFlagResolver !== null) {
+            $cart->setByGuest($this->createdByGuestFlagResolver->resolveFlag());
         }
 
         $defaultAddress = $customer->getDefaultAddress();

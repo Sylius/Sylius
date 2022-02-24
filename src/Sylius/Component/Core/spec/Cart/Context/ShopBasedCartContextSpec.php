@@ -16,7 +16,7 @@ namespace spec\Sylius\Component\Core\Cart\Context;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
-use Sylius\Component\Core\Cart\Resolver\ByGuestFlagResolverInterface;
+use Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolverInterface;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -189,18 +189,18 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($secondCart);
     }
 
-    function it_sets_by_guest_flag_as_false_if_order_is_created_by_logged_in_customer(
+    function it_sets_created_by_guest_flag_as_false_if_order_is_created_by_logged_in_customer(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
-        ByGuestFlagResolverInterface $byGuestFlagResolver,
+        CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver,
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
         CustomerInterface $customer
     ): void {
-        $this->beConstructedWith($cartContext, $shopperContext, $byGuestFlagResolver);
+        $this->beConstructedWith($cartContext, $shopperContext, $createdByGuestFlagResolver);
 
-        $byGuestFlagResolver->resolveFlag()->willReturn(false);
+        $createdByGuestFlagResolver->resolveFlag()->willReturn(false);
 
         $cart->setByGuest(false)->shouldBeCalled();
 
@@ -222,18 +222,18 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($cart);
     }
 
-    function it_sets_by_guest_flag_as_true_if_order_is_created_by_anonymous_user(
+    function it_sets_created_by_guest_flag_as_true_if_order_is_created_by_anonymous_user(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
-        ByGuestFlagResolverInterface $byGuestFlagResolver,
+        CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver,
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
         CustomerInterface $customer
     ): void {
-        $this->beConstructedWith($cartContext, $shopperContext, $byGuestFlagResolver);
+        $this->beConstructedWith($cartContext, $shopperContext, $createdByGuestFlagResolver);
 
-        $byGuestFlagResolver->resolveFlag()->willReturn(true);
+        $createdByGuestFlagResolver->resolveFlag()->willReturn(true);
 
         $cart->setByGuest(true)->shouldBeCalled();
 

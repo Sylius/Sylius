@@ -14,21 +14,21 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Cart\Resolver;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Cart\Resolver\ByGuestFlagResolverInterface;
+use Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolverInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-final class ByGuestFlagResolverSpec extends ObjectBehavior
+final class CreatedByGuestFlagResolverSpec extends ObjectBehavior
 {
     function let(TokenStorageInterface $tokenStorage): void
     {
         $this->beConstructedWith($tokenStorage);
     }
 
-    function it_implements_a_by_guest_flag_resolver_interface(): void
+    function it_implements_a_created_by_guest_flag_resolver_interface(): void
     {
-        $this->shouldImplement(ByGuestFlagResolverInterface::class);
+        $this->shouldImplement(CreatedByGuestFlagResolverInterface::class);
     }
 
     function it_returns_false_if_there_is_logged_in_customer(

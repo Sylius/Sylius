@@ -16,7 +16,7 @@ namespace Sylius\Component\Core\Cart\Resolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-final class ByGuestFlagResolver implements ByGuestFlagResolverInterface
+final class CreatedByGuestFlagResolver implements CreatedByGuestFlagResolverInterface
 {
     private TokenStorageInterface $tokenStorage;
 
