@@ -10,7 +10,7 @@ Firstly you need to add a new constraint class:
 
 .. code-block:: php
 
-    // src/App/Validator/Constraints
+    // src/Validator/Constraints
 
     <?php
 
@@ -39,7 +39,7 @@ Then you need to add a validator class:
 
 .. code-block:: php
 
-    // src/App/Validator/Constraints
+    // src/Validator/Constraints
 
     <?php
 
