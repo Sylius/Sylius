@@ -103,6 +103,11 @@ class HomePage extends SymfonyPage implements HomePageInterface
         );
     }
 
+    public function getMetaTitle(): string
+    {
+        return $this->getElement('meta_title')->getText();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -111,6 +116,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
             'latest_products' => '[data-test-latest-products]',
             'locale_selector' => '[data-test-locale-selector]',
             'logout_button' => '[data-test-logout-button]',
+            'meta_title' => 'title',
         ]);
     }
 }

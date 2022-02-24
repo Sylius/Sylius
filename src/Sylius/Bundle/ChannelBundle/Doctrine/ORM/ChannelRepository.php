@@ -24,6 +24,11 @@ class ChannelRepository extends EntityRepository implements ChannelRepositoryInt
         return $this->findOneBy(['hostname' => $hostname]);
     }
 
+    public function findOneEnabledByHostname(string $hostname): ?ChannelInterface
+    {
+        return $this->findOneBy(['hostname' => $hostname, 'enabled' => true]);
+    }
+
     public function findOneByCode(string $code): ?ChannelInterface
     {
         return $this->findOneBy(['code' => $code]);

@@ -6,6 +6,10 @@ between guests and logged in customers.
 2. Not passing `createdByGuestFlagResolver` through constructor in `Sylius\Component\Core\Cart\Context\ShopBasedCartContext` 
 is deprecated in Sylius 1.10.9 and it will be prohibited in Sylius 2.0.
 
+# UPGRADE FROM `v1.10.9` TO `v1.10.10`
+
+1. The ChannelRepository findOneByHostname has been deprecated, consider replace it with the new findOneEnabledByHostname method. 
+
 # UPGRADE FROM `v1.10.x` TO `v1.10.8`
 
 1. Update `payum/payum` to `^1.7` and execute Doctrine Migrations
