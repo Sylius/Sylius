@@ -39,7 +39,7 @@ use Zenstruck\Foundry\Proxy;
  * @method static ProductAttributeInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method ProductAttributeInterface|Proxy create(array|callable $attributes = [])
  */
-final class ProductAttributeFactory extends ModelFactory implements ProductAttributeFactoryInterface
+class ProductAttributeFactory extends ModelFactory implements ProductAttributeFactoryInterface
 {
     public function __construct(
         private AttributeFactoryInterface $productAttributeFactory,
