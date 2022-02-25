@@ -77,16 +77,20 @@ class ProductOptionFactory extends ModelFactory implements ProductOptionFactoryI
     protected function initialize(): self
     {
         return $this
+            ->beforeInstantiate(function(array $attributes): array {
+                if (is_array($attributes['values'])) {
+                    return $attributes;
+                }
+
+                $attributes['values'] = [];
+                for ($i = 1; $i <= 5; ++$i) {
+                    $attributes['values'][sprintf('%s-option#%d', $attributes['code'], $i)] = sprintf('%s #i%d', $attributes['name'], $i);
+                }
+
+                return $attributes;
+            })
             ->instantiateWith(function(array $attributes): ProductOptionInterface {
                 $code = $attributes['code'] ?? StringInflector::nameToCode($attributes['name']);
-
-                $values = $attributes['values'] ?? null;
-
-                if (null === $values) {
-                    for ($i = 1; $i <= 5; ++$i) {
-                        $values[sprintf('%s-option#%d', $attributes['code'], $i)] = sprintf('%s #i%d', $attributes['name'], $i);
-                    }
-                }
 
                 /** @var ProductOptionInterface $productOption */
                 $productOption = $this->productOptionFactory->createNew();
@@ -100,7 +104,7 @@ class ProductOptionFactory extends ModelFactory implements ProductOptionFactoryI
                     $productOption->setName($attributes['name']);
                 }
 
-                foreach ($values as $code => $value) {
+                foreach ($attributes['values'] as $code => $value) {
                     /** @var ProductOptionValueInterface $productOptionValue */
                     $productOptionValue = $this->productOptionValueFactory->createNew();
                     $productOptionValue->setCode($code);
