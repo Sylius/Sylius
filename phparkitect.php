@@ -7,10 +7,12 @@ use Arkitect\CLI\Config;
 use Arkitect\Expression\ForClasses\Extend;
 use Arkitect\Expression\ForClasses\HaveNameMatching;
 use Arkitect\Expression\ForClasses\IsFinal;
+use Arkitect\Expression\ForClasses\IsNotFinal;
 use Arkitect\Expression\ForClasses\NotDependsOnTheseNamespaces;
 use Arkitect\Expression\ForClasses\ResideInOneOfTheseNamespaces;
 use Arkitect\Rules\Rule;
 use PhpSpec\ObjectBehavior;
+use Zenstruck\Foundry\ModelFactory;
 
 return static function (Config $config): void
 {
@@ -34,6 +36,12 @@ return static function (Config $config): void
         ->that(new Extend(ObjectBehavior::class))
         ->should(new IsFinal())
         ->because('Specifications should not be extendable')
+    ;
+
+    $rules[] = Rule::allClasses()
+        ->that(new Extend(ModelFactory::class))
+        ->should(new IsNotFinal())
+        ->because('Foundry data fixture factories should be extensible')
     ;
 
     $config->add($srcClassSet, ...$rules);
