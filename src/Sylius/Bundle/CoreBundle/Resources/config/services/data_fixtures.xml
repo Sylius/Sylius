@@ -80,6 +80,13 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\AdminUserFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.admin_user" />
 
+        <service id="sylius.data_fixtures.factory.catalog_promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionActionFactory">
+            <argument type="service" id="sylius.factory.catalog_promotion_action" />
+            <tag name="foundry.factory" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionActionFactoryInterface" alias="sylius.data_fixtures.factory.catalog_promotion_action" />
+
         <service id="sylius.data_fixtures.factory.customer_group" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerGroupFactory">
             <argument type="service" id="sylius.factory.customer_group" />
             <tag name="foundry.factory" />
