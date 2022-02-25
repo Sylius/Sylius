@@ -56,6 +56,15 @@
 
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAssociationTypeFactoryInterface" alias="sylius.data_fixtures.factory.product_association_type" />
 
+        <service id="sylius.data_fixtures.factory.product_attribute" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAttributeFactory">
+            <argument type="service" id="sylius.factory.product_attribute" />
+            <argument type="service" id="sylius.repository.locale" />
+            <argument>%sylius.attribute.attribute_types%</argument>
+            <tag name="foundry.factory" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAttributeFactoryInterface" alias="sylius.data_fixtures.factory.product_attribute" />
+
         <service id="sylius.data_fixtures.factory.shipping_category" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShippingCategoryFactory">
             <argument type="service" id="sylius.factory.shipping_category" />
             <tag name="foundry.factory" />
