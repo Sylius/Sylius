@@ -45,5 +45,6 @@ interface ProductAttributeFactoryInterface
     public function translatable(): self;
 
     public function untranslatable(): self;
+
     public function withConfiguration(array $configuration): self;
 }
