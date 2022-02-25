@@ -34,7 +34,7 @@ return static function (Config $config): void
     $rules[] = Rule::allClasses()
         ->that(new Extend(ModelFactory::class))
         ->should(new IsNotFinal())
-        ->because('Factories should be extensible')
+        ->because('Foundry data fixture factories should be extensible')
     ;
 
     $config->add($srcClassSet, ...$rules);
