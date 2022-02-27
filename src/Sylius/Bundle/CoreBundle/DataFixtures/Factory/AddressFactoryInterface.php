@@ -55,4 +55,6 @@ interface AddressFactoryInterface
     public function withProvinceName(string $provinceName): self;
 
     public function withProvinceCode(string $provinceCode): self;
+
+    public function withCustomer(Proxy|CustomerInterface|string $customer): self
 }
