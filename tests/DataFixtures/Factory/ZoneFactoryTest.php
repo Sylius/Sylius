@@ -17,6 +17,7 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneMemberFactory;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Tests\PurgeDatabaseTrait;
+use Sylius\Component\Core\Model\Scope;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
 
@@ -26,12 +27,13 @@ final class ZoneFactoryTest extends KernelTestCase
     use Factories;
 
     /** @test */
-    function it_creates_zone_with_random_code(): void
+    function it_creates_zone(): void
     {
         $zone = ZoneFactory::createOne();
 
         $this->assertInstanceOf(ZoneInterface::class, $zone->object());
         $this->assertNotNull($zone->getCode());
+        $this->assertEquals('all', $zone->getScope());
     }
 
     /** @test */
@@ -157,5 +159,13 @@ final class ZoneFactoryTest extends KernelTestCase
 
         $this->assertTrue($zone->hasMember($firstZoneMember));
         $this->assertTrue($zone->hasMember($secondZoneMember));
+    }
+
+    /** @test */
+    function it_creates_zone_with_given_scope(): void
+    {
+        $zone = ZoneFactory::new()->withScope(Scope::TAX)->create();
+
+        $this->assertEquals(Scope::TAX, $zone->getScope());
     }
 }
