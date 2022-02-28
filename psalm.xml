@@ -160,6 +160,7 @@
         <UndefinedMethod>
             <errorLevel type="info">
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/AddressFactory.php" />
+                <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/CatalogPromotionActionFactory.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/DefaultValues/AddressFactoryDefaultValues.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ShopUserFactory.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/Transformer/AddressFactoryTransformer.php" />
