@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\DataFixtures\Factory;
 
-use Sylius\Bundle\CoreBundle\Calculator\FixedDiscountPriceCalculator;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionActionFactory;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
