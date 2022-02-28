@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
@@ -56,5 +57,5 @@ interface AddressFactoryInterface
 
     public function withProvinceCode(string $provinceCode): self;
 
-    public function withCustomer(Proxy|CustomerInterface|string $customer): self
+    public function withCustomer(Proxy|CustomerInterface|string $customer): self;
 }
