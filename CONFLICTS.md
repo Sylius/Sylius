@@ -52,6 +52,11 @@ references related issues.
 
    Probably introduced in: https://github.com/symfony/symfony/pull/40811
 
+ - `symfony/framework-bundle:4.4.38|5.4.5`:
+    
+   These versions are causing a problem with mink session:
+   `InvalidArgumentException: Specify session name to get in vendor/friends-of-behat/mink/src/Mink.php:198`
+
 In this section we keep track of the reasons, why some restrictions were added to the `requires` section of `composer.json`
 
 - `doctrine/dbal:^2`:
