@@ -32,7 +32,7 @@ final class ProductsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_returns_product_with_translations(): void
+    public function it_returns_product_with_translations_in_default_locale(): void
     {
         $fixtures = $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
 
@@ -48,6 +48,27 @@ final class ProductsTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'shop/product/get_product_with_default_locale_translation',
+            Response::HTTP_OK
+        );
+    }
+
+    /** @test */
+    public function it_returns_product_with_translations_in_locale_from_header(): void
+    {
+        $fixtures = $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
+
+        /** @var ProductInterface $product */
+        $product = $fixtures['product_mug'];
+        $this->client->request('GET',
+            sprintf('/api/v2/shop/products/%s', $product->getCode()),
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json', 'HTTP_ACCEPT_LANGUAGE' => 'de_DE']
+    );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/product/get_product_with_de_DE_locale_translation',
             Response::HTTP_OK
         );
     }
