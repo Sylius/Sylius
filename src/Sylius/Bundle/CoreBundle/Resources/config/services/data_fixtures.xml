@@ -98,6 +98,13 @@
         <service id="sylius.data_fixtures.factory_updater.catalog_promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\CatalogPromotionActionFactoryUpdater" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\CatalogPromotionActionFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.catalog_promotion_action" />
 
+        <service id="sylius.data_fixtures.factory.catalog_promotion_scope" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionScopeFactory">
+            <argument type="service" id="sylius.factory.catalog_promotion_scope" />
+            <tag name="foundry.factory" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionScopeFactoryInterface" alias="sylius.data_fixtures.factory.catalog_promotion_scope" />
+
         <service id="sylius.data_fixtures.factory.customer_group" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerGroupFactory">
             <argument type="service" id="sylius.factory.customer_group" />
             <tag name="foundry.factory" />

@@ -36,4 +36,7 @@ use Zenstruck\Foundry\Proxy;
  */
 interface CatalogPromotionScopeFactoryInterface
 {
+    public function withType(string $type): self;
+
+    public function withConfiguration(array $configuration): self;
 }

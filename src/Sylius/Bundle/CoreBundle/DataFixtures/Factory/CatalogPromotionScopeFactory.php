@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForProductScopeVariantChecker;
-use Sylius\Bundle\CoreBundle\Validator\Constraints\CatalogPromotionScope;
+use Sylius\Component\Core\Model\CatalogPromotionScope;
 use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Zenstruck\Foundry\ModelFactory;
@@ -42,6 +42,16 @@ class CatalogPromotionScopeFactory extends ModelFactory implements CatalogPromot
     public function __construct(private FactoryInterface $catalogPromotionScopeFactory)
     {
         parent::__construct();
+    }
+
+    public function withType(string $type): self
+    {
+        return $this->addState(['type' => $type]);
+    }
+
+    public function withConfiguration(array $configuration): self
+    {
+        return $this->addState(['configuration' => $configuration]);
     }
 
     protected function getDefaults(): array
