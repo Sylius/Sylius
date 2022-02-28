@@ -116,6 +116,17 @@
         <service id="sylius.data_fixtures.factory_updater.catalog_promotion_scope" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\CatalogPromotionScopeFactoryUpdater" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\CatalogPromotionScopeFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.catalog_promotion_scope" />
 
+        <service id="sylius.data_fixtures.factory.channel" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactory">
+            <argument type="service" id="sylius.factory.channel" />
+            <argument type="service" id="sylius.data_fixtures.factory.zone" />
+            <argument type="service" id="sylius.data_fixtures.factory.locale" />
+            <argument type="service" id="sylius.data_fixtures.factory.currency" />
+            <argument type="service" id="sylius.data_fixtures.factory.taxon" />
+            <argument type="service" id="sylius.data_fixtures.factory.shop_billing_data" />
+            <tag name="foundry.factory" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface" alias="sylius.data_fixtures.factory.channel" />
+
         <service id="sylius.data_fixtures.factory.customer_group" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerGroupFactory">
             <argument type="service" id="sylius.factory.customer_group" />
             <tag name="foundry.factory" />
@@ -178,6 +189,13 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShippingCategoryFactoryInterface" alias="sylius.data_fixtures.factory.shipping_category" />
+
+        <service id="sylius.data_fixtures.factory.shop_billing_data" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopBillingDataFactory">
+            <argument type="service" id="sylius.factory.shop_billing_data" />
+            <tag name="foundry.factory" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopBillingDataFactoryInterface" alias="sylius.data_fixtures.factory.shop_billing_data" />
 
         <service id="sylius.data_fixtures.factory.shop_user" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactory">
             <argument type="service" id="sylius.factory.shop_user" />

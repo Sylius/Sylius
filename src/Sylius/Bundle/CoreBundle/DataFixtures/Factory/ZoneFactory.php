@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
+use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\Zone;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -84,6 +85,11 @@ class ZoneFactory extends ModelFactory implements ZoneFactoryInterface, FactoryW
         return $this->withMembers($countries, ZoneInterface::TYPE_PROVINCE);
     }
 
+    public function withScope(string $scope): self
+    {
+        return $this->addState(['scope' => $scope]);
+    }
+
     protected function getDefaults(): array
     {
         return [
@@ -91,6 +97,7 @@ class ZoneFactory extends ModelFactory implements ZoneFactoryInterface, FactoryW
             'name' => self::faker()->word(),
             'type' => ZoneInterface::TYPE_ZONE,
             'members' => [],
+            'scope' => Scope::ALL,
         ];
     }
 
@@ -109,6 +116,7 @@ class ZoneFactory extends ModelFactory implements ZoneFactoryInterface, FactoryW
                 $zone->setCode($attributes['code']);
                 $zone->setName($attributes['name']);
                 $zone->setType($attributes['type']);
+                $zone->setScope($attributes['scope']);
 
                 foreach ($attributes['members'] as $member) {
                     $zone->addMember($member);

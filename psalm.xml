@@ -170,6 +170,7 @@
 
         <UndefinedMethod>
             <errorLevel type="info">
+                <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ChannelFactory.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ShopUserFactory.php" />
             </errorLevel>
         </UndefinedMethod>
