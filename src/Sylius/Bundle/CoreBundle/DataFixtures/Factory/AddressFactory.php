@@ -121,7 +121,7 @@ class AddressFactory extends ModelFactory implements AddressFactoryInterface
             'country_code' => $this->countryFactory::randomOrCreate()->getCode(),
             'province_name' => null,
             'province_code' => null,
-            'customer' => null,
+            'customer' => $this->shopUserFactory::randomOrCreate()->getCustomer(),
         ];
     }
 

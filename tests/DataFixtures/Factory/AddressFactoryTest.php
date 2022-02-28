@@ -37,6 +37,7 @@ final class AddressFactoryTest extends KernelTestCase
         $this->assertNotNull($address->getCity());
         $this->assertNotNull($address->getPostcode());
         $this->assertNotNull($address->getCountryCode());
+        $this->assertNotNull($address->getCustomer());
     }
 
     /** @test */
