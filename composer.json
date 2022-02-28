@@ -167,6 +167,7 @@
         "symfony/amqp-messenger": "^6.0",
         "symfony/doctrine-messenger": "^6.0",
         "symfony/error-handler": "^6.0",
+        "symfony/dependency-injection": "4.4.38 || 5.4.5",
         "symfony/redis-messenger": "^6.0",
         "symfony/stopwatch": "^6.0",
         "symfony/twig-bridge": "^6.0",
