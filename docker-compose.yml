@@ -36,6 +36,8 @@ services:
         platform: linux/amd64
         environment:
             - MYSQL_ROOT_PASSWORD=1234
+        volumes:
+            - ./docker/mysql:/docker-entrypoint-initdb.d:delegated
         ports:
             - "3306:3306"
         depends_on:
