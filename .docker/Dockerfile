@@ -29,6 +29,7 @@ RUN apt update && apt install -y \
     php8.0-zip \
     php8.0-fpm \
     php8.0-mysql \
+    php8.0-mbstring \
     nginx
 
 RUN ln -s /usr/sbin/php-fpm8.0 /usr/sbin/php-fpm
