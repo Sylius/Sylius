@@ -34,8 +34,6 @@ services:
     database:
         image: mysql:5.7
         platform: linux/amd64
-        environment:
-            - MYSQL_ROOT_PASSWORD=1234
         volumes:
             - ./docker/mysql:/docker-entrypoint-initdb.d:delegated
         ports:
