@@ -36,14 +36,21 @@ RUN ln -s /usr/sbin/php-fpm8.0 /usr/sbin/php-fpm
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename composer
 
+# Create directory for php-fpm socket
 RUN mkdir -p /run/php
+
+# Install node - static version
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt update && apt install -y \
+    nodejs
+RUN npm install -g yarn
 
 # Initialize config files
 COPY supervisord.conf   /etc/supervisor/conf.d/supervisor.conf
 COPY nginx.conf         /etc/nginx/nginx.conf
 COPY fpm.conf           /etc/php/8.0/fpm/pool.d/www.conf
-COPY php.ini            /etc/php/8.0/fpm/php.init
-COPY php.ini            /etc/php/8.0/cli/php.init
+COPY php.ini            /etc/php/8.0/fpm/php.ini
+COPY php.ini            /etc/php/8.0/cli/php.ini
 
 WORKDIR /app
 
