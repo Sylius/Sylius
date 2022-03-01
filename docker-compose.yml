@@ -34,8 +34,10 @@ services:
     database:
         image: mysql:5.7
         platform: linux/amd64
+        environment:
+            - MYSQL_ALLOW_EMPTY_PASSWORD=true
         volumes:
-            - ./docker/mysql:/docker-entrypoint-initdb.d:delegated
+            - ./.docker/mysql:/docker-entrypoint-initdb.d:delegated
         ports:
             - "3306:3306"
         depends_on:
