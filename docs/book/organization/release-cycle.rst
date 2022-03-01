@@ -76,7 +76,7 @@ Future Releases
 +---------+----------------------+------------------------+--------------------+
 | Version | Development starts   | Stabilization starts   | Release date       |
 +=========+======================+========================+====================+
-| 1.12    | Feb 14, 2021         | To-be confirmed        | To-be confirmed    |
+| 1.12    | Feb 14, 2022         | To-be confirmed        | To-be confirmed    |
 +---------+----------------------+------------------------+--------------------+
 
 Backward Compatibility
