@@ -1,0 +1,52 @@
+services:
+    traefik:
+        image: traefik:2.6
+        command:
+            - "--log.level=DEBUG"
+            - "--api.insecure=true"
+            - "--providers.docker=true"
+            - "--providers.docker.exposedbydefault=false"
+            - "--entrypoints.web.address=:80"
+        ports:
+            - "80:80"     # HTTP
+            - "443:443"   # HTTPS
+            - "8080:8080" # Traefik UI dashboard
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+        # setting ip address for traefik is required
+        networks:
+            sylius:
+                ipv4_address: 192.168.10.2
+
+    app:
+        build:
+            context: .docker
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.symfony.rule=Host(`app.sylius.localhost`)"
+        volumes:
+            - ./:/app:delegated
+        depends_on:
+            - traefik
+        networks:
+            - sylius
+    
+    database:
+        image: mysql:5.7
+        platform: linux/amd64
+        environment:
+            - MYSQL_ROOT_PASSWORD=1234
+        ports:
+            - "3306:3306"
+        depends_on:
+            - traefik
+        networks:
+            - sylius
+
+networks:
+    sylius:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 192.168.10.0/24
