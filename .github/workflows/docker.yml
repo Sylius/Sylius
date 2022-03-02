@@ -1,6 +1,5 @@
 name: Build Docker Image
 
-# Copy paste 
 on:
     push:
         paths:
