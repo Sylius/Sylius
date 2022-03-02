@@ -1,17 +1,12 @@
 services:
     traefik:
         image: traefik:2.6
-        command:
-            - "--log.level=DEBUG"
-            - "--api.insecure=true"
-            - "--providers.docker=true"
-            - "--providers.docker.exposedbydefault=false"
-            - "--entrypoints.web.address=:80"
         ports:
             - "80:80"     # HTTP
             - "443:443"   # HTTPS
             - "8080:8080" # Traefik UI dashboard
         volumes:
+            - ./.docker/traefik.yaml:/etc/traefik/traefik.yaml
             - /var/run/docker.sock:/var/run/docker.sock:ro
         # setting ip address for traefik is required
         networks:
@@ -21,13 +16,11 @@ services:
     app:
         build:
             context: .docker
-        labels:
-            - "traefik.enable=true"
-            - "traefik.http.routers.symfony.rule=Host(`app.sylius.localhost`)"
         volumes:
             - ./:/app:delegated
         depends_on:
             - traefik
+            - database
         networks:
             - sylius
 
