@@ -36,4 +36,6 @@ interface DashboardPageInterface extends SymfonyPageInterface
     public function logOut(): void;
 
     public function chooseChannel(string $channelName): void;
+
+    public function goBackInTheBrowser(): void;
 }

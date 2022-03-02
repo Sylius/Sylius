@@ -44,6 +44,7 @@ default:
                 - sylius.behat.context.ui.shop.checkout.shipping
                 - sylius.behat.context.ui.shop.currency
                 - sylius.behat.context.ui.shop.homepage
+                - sylius.behat.context.ui.user
 
             filters:
                 tags: "@customer_account&&@ui"

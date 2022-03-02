@@ -84,6 +84,11 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         $this->getElement('channel_choosing_link', ['%channelName%' => $channelName])->click();
     }
 
+    public function goBackInTheBrowser(): void
+    {
+        $this->getDriver()->back();
+    }
+
     public function getRouteName(): string
     {
         return 'sylius_admin_dashboard';

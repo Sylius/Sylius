@@ -70,6 +70,14 @@ final class UserContext implements Context
     }
 
     /**
+     * @When I go back one page in the browser
+     */
+    public function iGoBackOnePageInTheBrowser(): void
+    {
+        $this->homePage->goBackInTheBrowser();
+    }
+
+    /**
      * @Then the user account should be deleted
      */
     public function accountShouldBeDeleted()
