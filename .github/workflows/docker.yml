@@ -3,7 +3,7 @@ name: Build Docker Image
 on:
     push:
         paths:
-            - '.docker/*'
+            - '.docker/**'
             - 'Dockerfile'
             - 'docker-compose.yml'
 
