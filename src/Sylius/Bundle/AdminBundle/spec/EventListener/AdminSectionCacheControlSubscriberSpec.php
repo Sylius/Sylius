@@ -14,12 +14,9 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\AdminBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface;
 use Sylius\Bundle\AdminBundle\SectionResolver\AdminSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionInterface;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Component\Core\Model\ShipmentInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -35,7 +32,7 @@ final class AdminSectionCacheControlSubscriberSpec extends ObjectBehavior
         $this->beConstructedWith($sectionProvider);
     }
 
-    function it_subscribes_to_kernel_response_event()
+    function it_subscribes_to_kernel_response_event(): void
     {
         $this::getSubscribedEvents()->shouldReturn([KernelEvents::RESPONSE => 'setCacheControlDirectives']);
     }
@@ -67,7 +64,7 @@ final class AdminSectionCacheControlSubscriberSpec extends ObjectBehavior
         $this->setCacheControlDirectives($event);
     }
 
-    function it_does_nothing_if_section_is_different_then_admin(
+    function it_does_nothing_if_section_is_different_than_admin(
         SectionProviderInterface $sectionProvider,
         HttpKernelInterface $kernel,
         Request $request,

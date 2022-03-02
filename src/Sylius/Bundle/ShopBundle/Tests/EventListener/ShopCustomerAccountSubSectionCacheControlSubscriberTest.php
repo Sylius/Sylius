@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Tests\EventListener;
+namespace Sylius\Bundle\ShopBundle\Tests\EventListener;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-final class AdminSectionCacheControlSubscriberTest extends WebTestCase
+final class ShopCustomerAccountSubSectionCacheControlSubscriberTest extends WebTestCase
 {
     /**
      * @test
@@ -32,7 +32,7 @@ final class AdminSectionCacheControlSubscriberTest extends WebTestCase
     /**
      * @test
      */
-    public function it_returns_normal_headers_otherwise(): void
+    public function it_returns_standard_headers_otherwise(): void
     {
         $client = static::createClient();
 

@@ -32,7 +32,7 @@ final class AdminSectionCacheControlSubscriberTest extends WebTestCase
     /**
      * @test
      */
-    public function it_returns_normal_headers_otherwise(): void
+    public function it_returns_standard_headers_otherwise(): void
     {
         $client = static::createClient();
 

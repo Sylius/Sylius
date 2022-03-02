@@ -64,7 +64,7 @@ final class ShopCustomerAccountSubSectionCacheControlSubscriberSpec extends Obje
         $this->setCacheControlDirectives($event);
     }
 
-    function it_does_nothing_if_section_is_different_then_customer_account(
+    function it_does_nothing_if_section_is_different_than_customer_account(
         SectionProviderInterface $sectionProvider,
         HttpKernelInterface $kernel,
         Request $request,
