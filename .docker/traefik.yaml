@@ -1,0 +1,15 @@
+log:
+    level: ERROR
+    
+api:
+    insecure: true
+
+entrypoints:
+    web:
+        address: :80
+
+providers:
+    docker:
+        exposedByDefault: true
+        #http://masterminds.github.io/sprig/strings.html
+        defaultRule: "Host(`{{ trimSuffix \"-sylius\" .Name }}.sylius.localhost`)"
