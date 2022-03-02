@@ -1,0 +1,24 @@
+name: Build Docker Image
+
+# Copy paste 
+on:
+    push:
+        paths:
+            - '.docker/*'
+            - 'Dockerfile'
+            - 'docker-compose.yml'
+
+jobs:
+    buildx:
+        runs-on: ubuntu-latest
+        steps:
+            -
+                name: Checkout
+                uses: actions/checkout@v2
+            -
+                name: Set up Docker Buildx
+                id: buildx
+                uses: docker/setup-buildx-action@v1
+            -
+                name: Build
+                run: docker build .
