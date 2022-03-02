@@ -18,16 +18,17 @@ use Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionResolverInterface;
 
 final class ShopUriBasedSectionResolver implements UriBasedSectionResolverInterface
 {
-    private string $shopCustomerAccountResourceUri;
+    /** @var string */
+    private $shopCustomerAccountUri;
 
-    public function __construct(string $shopCustomerAccountResourceUri = 'account')
+    public function __construct(string $shopCustomerAccountUri = 'account')
     {
-        $this->shopCustomerAccountResourceUri = $shopCustomerAccountResourceUri;
+        $this->shopCustomerAccountUri = $shopCustomerAccountUri;
     }
 
     public function getSection(string $uri): SectionInterface
     {
-        if (str_contains($uri, $this->shopCustomerAccountResourceUri)) {
+        if (str_contains($uri, $this->shopCustomerAccountUri)) {
             return new ShopCustomerAccountSubSection();
         }
 

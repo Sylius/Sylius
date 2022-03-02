@@ -21,7 +21,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class AdminSectionCacheControlSubscriber implements EventSubscriberInterface
 {
-    private SectionProviderInterface $sectionProvider;
+    /** @var SectionProviderInterface */
+    private $sectionProvider;
 
     public function __construct(SectionProviderInterface $sectionProvider)
     {
