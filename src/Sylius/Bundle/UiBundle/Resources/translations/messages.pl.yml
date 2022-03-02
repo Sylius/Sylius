@@ -491,6 +491,7 @@ sylius:
         meta_keywords: 'Słowa kluczowe w sekcji meta'
         metadata_index: 'Informacje o dokumencie'
         method: 'metoda'
+        missing_translation: 'brakujące tłumaczenie'
         modified: 'modyfikacja'
         money: 'Pieniądze'
         most_expensive_first: 'Najpierw najdroższe'

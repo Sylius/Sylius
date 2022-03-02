@@ -503,6 +503,7 @@ sylius:
         meta_keywords: 'Meta keywords'
         metadata_index: 'Metadata'
         method: 'Method'
+        missing_translation: 'missing translation'
         minimum_price: 'Minimum price'
         modified: 'Modified'
         money: 'Money'
