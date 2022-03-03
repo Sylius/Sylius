@@ -2,10 +2,6 @@ name: Build Docker Image
 
 on:
     push:
-        paths:
-            - '.docker/**'
-            - 'Dockerfile'
-            - 'docker-compose.yml'
 
 jobs:
     buildx:
