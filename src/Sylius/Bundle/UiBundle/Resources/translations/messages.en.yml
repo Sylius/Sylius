@@ -493,6 +493,7 @@ sylius:
         meta_keywords: 'Meta keywords'
         metadata_index: 'Metadata'
         method: 'Method'
+        missing_translation: 'missing translation'
         modified: 'Modified'
         money: 'Money'
         most_expensive_first: 'Most expensive first'
