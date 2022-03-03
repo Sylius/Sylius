@@ -95,7 +95,7 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\EventListener\LocaleAwareListener.inner" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\EventListener\FinishResponseListener">
+        <service id="Sylius\Bundle\CoreBundle\EventListener\XFrameOptionsSubscriber">
             <tag name="kernel.event_subscriber" />
         </service>
 

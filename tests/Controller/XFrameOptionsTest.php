@@ -15,7 +15,7 @@ namespace Sylius\Tests\Controller;
 
 use ApiTestCase\JsonApiTestCase;
 
-final class FinishResponseTest extends JsonApiTestCase
+final class XFrameOptionsTest extends JsonApiTestCase
 {
     /** @test */
     public function it_sets_frame_options_header(): void
