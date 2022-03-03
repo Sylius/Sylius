@@ -18,5 +18,8 @@ jobs:
                 name: Build
                 run: |
                     docker build .docker --tag sylius
+            -
+                name: Run Versions
+                run: |
                     chmod +x .docker/run-tests.sh
                     ./.docker/run-tests.sh
