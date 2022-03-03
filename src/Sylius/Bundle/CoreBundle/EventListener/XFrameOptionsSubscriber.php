@@ -17,8 +17,15 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-final class FinishResponseListener implements EventSubscriberInterface
+final class XFrameOptionsSubscriber implements EventSubscriberInterface
 {
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            KernelEvents::RESPONSE => 'onKernelResponse',
+        ];
+    }
+
     public function onKernelResponse(ResponseEvent $event): void
     {
         if (!$this->isMainRequest($event)) {
@@ -28,13 +35,6 @@ final class FinishResponseListener implements EventSubscriberInterface
         $response = $event->getResponse();
 
         $response->headers->set('X-Frame-Options', 'sameorigin');
-    }
-
-    public static function getSubscribedEvents()
-    {
-        return [
-            KernelEvents::RESPONSE => [['onKernelResponse']],
-        ];
     }
 
     private function isMainRequest(ResponseEvent $event): bool
