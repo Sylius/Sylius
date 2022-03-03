@@ -1165,6 +1165,22 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then the first product on the list should have :attributeName data attribute
+     */
+    public function theFirstProductOnTheListShouldHaveAttribute(string $attributeName): void
+    {
+        Assert::true($this->indexPage->checkFirstProductHasDataAttribute($attributeName));
+    }
+
+    /**
+     * @Then the last product on the list should have :attributeName data attribute
+     */
+    public function theLastProductOnTheListShouldHaveDataAttribute(string $attributeName): void
+    {
+        Assert::true($this->indexPage->checkLastProductHasDataAttribute($attributeName));
+    }
+
+    /**
      * @param string $element
      * @param string $value
      */
