@@ -17,6 +17,6 @@ jobs:
             -
                 name: Build
                 run: |
-                    docker build .docker/Dockerfile -t sylius
+                    docker build .docker -t sylius
                     docker -i -t sylius "node --version"
 # check node, pgp, yarn, version
