@@ -1,17 +1,22 @@
 FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Add php official repository
-RUN apt update && apt install -y software-properties-common
-RUN add-apt-repository ppa:ondrej/php
-
-# Only required PHP extensions
+# Install basic tools
 RUN apt update && apt install -y \
-    curl \
+    software-properties-common \
+    curl
+
+# Append NODE and PHP repositories
+RUN add-apt-repository ppa:ondrej/php && curl -sL https://deb.nodesource.com/setup_14.x | bash -
+
+# Install required PHP extensions
+RUN apt update && apt install -y \
     make \
     supervisor \
     git \
     unzip \
+    nodejs \
+    nginx \
     php8.0 \
     php8.0-common \
     php8.0-cli \
@@ -29,9 +34,9 @@ RUN apt update && apt install -y \
     php8.0-zip \
     php8.0-fpm \
     php8.0-mysql \
-    php8.0-mbstring \
-    nginx
+    php8.0-mbstring
 
+# Link php-fpm binary file without version
 RUN ln -s /usr/sbin/php-fpm8.0 /usr/sbin/php-fpm
 
 # Install Composer
@@ -40,9 +45,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin -
 # Create directory for php-fpm socket
 RUN mkdir -p /run/php
 
-# Install node - static version
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
-RUN apt update && apt install -y nodejs
+# Install yarn
 RUN npm install -g yarn
 
 # Initialize config files
