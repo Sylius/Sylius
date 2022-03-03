@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Uploader;
 
+use enshrined\svgSanitize\Sanitizer;
 use Gaufrette\Filesystem;
 use Sylius\Component\Core\Generator\ImagePathGeneratorInterface;
 use Sylius\Component\Core\Generator\UploadedImagePathGenerator;
@@ -22,11 +23,17 @@ use Webmozart\Assert\Assert;
 
 class ImageUploader implements ImageUploaderInterface
 {
+    private const MIME_SVG_XML = 'image/svg+xml';
+    private const MIME_SVG = 'image/svg';
+
     /** @var Filesystem */
     protected $filesystem;
 
     /** @var ImagePathGeneratorInterface */
     protected $imagePathGenerator;
+
+    /** @var Sanitizer */
+    protected $sanitizer;
 
     public function __construct(
         Filesystem $filesystem,
@@ -41,6 +48,7 @@ class ImageUploader implements ImageUploaderInterface
         }
 
         $this->imagePathGenerator = $imagePathGenerator ?? new UploadedImagePathGenerator();
+        $this->sanitizer = new Sanitizer();
     }
 
     public function upload(ImageInterface $image): void
@@ -49,10 +57,12 @@ class ImageUploader implements ImageUploaderInterface
             return;
         }
 
+        /** @var File $file */
         $file = $image->getFile();
 
-        /** @var File $file */
         Assert::isInstanceOf($file, File::class);
+
+        $fileContent = $this->sanitizeContent(file_get_contents($file->getPathname()), $file->getMimeType());
 
         if (null !== $image->getPath() && $this->has($image->getPath())) {
             $this->remove($image->getPath());
@@ -64,10 +74,7 @@ class ImageUploader implements ImageUploaderInterface
 
         $image->setPath($path);
 
-        $this->filesystem->write(
-            $image->getPath(),
-            file_get_contents($image->getFile()->getPathname())
-        );
+        $this->filesystem->write($image->getPath(), $fileContent);
     }
 
     public function remove(string $path): bool
@@ -77,6 +84,15 @@ class ImageUploader implements ImageUploaderInterface
         }
 
         return false;
+    }
+
+    protected function sanitizeContent(string $fileContent, string $mimeType): string
+    {
+        if (self::MIME_SVG_XML === $mimeType || self::MIME_SVG === $mimeType) {
+            $fileContent = $this->sanitizer->sanitize($fileContent);
+        }
+
+        return $fileContent;
     }
 
     private function has(string $path): bool
