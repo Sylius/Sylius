@@ -20,6 +20,7 @@ use Doctrine\Inflector\Rules\Substitution;
 use Doctrine\Inflector\Rules\Substitutions;
 use Doctrine\Inflector\Rules\Transformations;
 use Doctrine\Inflector\Rules\Word;
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\CancelOrderStateMachineCallbackPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\ResolveShopUserTargetEntityPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CircularDependencyBreakingErrorListenerPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CircularDependencyBreakingExceptionListenerPass;
@@ -71,6 +72,7 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         $container->addCompilerPass(new ResolveShopUserTargetEntityPass());
         $container->addCompilerPass(new RegisterUriBasedSectionResolverPass());
         $container->addCompilerPass(new LiipImageFiltersPass());
+        $container->addCompilerPass(new CancelOrderStateMachineCallbackPass());
     }
 
     /**
