@@ -17,6 +17,7 @@ jobs:
             -
                 name: Build
                 run: |
-                    docker build .docker -t sylius
-#                    docker run -i -t sylius "node --version"
+                    docker build .docker --tag sylius
+                    chmod +x run-tests.sh
+                    ./run-tests.sh
 # check node, pgp, yarn, version
