@@ -10,7 +10,8 @@ RUN apt update && apt install -y \
 
 # Append NODE and PHP repositories
 RUN add-apt-repository ppa:ondrej/php \
-    && add-apt-repository ppa:ondrej/nginx
+    && add-apt-repository ppa:ondrej/nginx \
+    && curl -sL https://deb.nodesource.com/setup_14.x | bash -
 
 # Install required PHP extensions
 RUN apt update && apt install -y \
