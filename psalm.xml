@@ -165,6 +165,7 @@
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/DefaultValues/AddressFactoryDefaultValues.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/DefaultValues/ChannelFactoryDefaultValues.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ShopUserFactory.php" />
+                <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/TaxRateFactory.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/Transformer/AddressFactoryTransformer.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/Transformer/ChannelFactoryTransformer.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ZoneMemberFactory.php" />
