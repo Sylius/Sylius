@@ -28,7 +28,7 @@ final class ShopUriBasedSectionResolver implements UriBasedSectionResolverInterf
 
     public function getSection(string $uri): SectionInterface
     {
-        if (str_contains($uri, $this->shopCustomerAccountUri)) {
+        if (strpos($uri, $this->shopCustomerAccountUri) !== false) {
             return new ShopCustomerAccountSubSection();
         }
 
