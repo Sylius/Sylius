@@ -16,13 +16,13 @@ namespace Sylius\Tests\DataFixtures\Factory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerGroupFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactory;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Tests\PurgeDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
-use Zenstruck\Foundry\Test\ResetDatabase;
 
 final class ShopUserFactoryTest extends KernelTestCase
 {
-    use ResetDatabase;
+    use PurgeDatabaseTrait;
     use Factories;
 
     /** @test */

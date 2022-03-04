@@ -13,16 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\DataFixtures\Factory;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShippingCategoryFactory;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Tests\PurgeDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
-use Zenstruck\Foundry\Test\ResetDatabase;
 
 final class ShippingCategoryFactoryTest extends KernelTestCase
 {
-    use ResetDatabase;
+    use PurgeDatabaseTrait;
     use Factories;
 
     /** @test */

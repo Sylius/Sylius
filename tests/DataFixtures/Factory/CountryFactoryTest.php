@@ -15,14 +15,14 @@ namespace Sylius\Tests\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactory;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Tests\PurgeDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Intl\Countries;
 use Zenstruck\Foundry\Test\Factories;
-use Zenstruck\Foundry\Test\ResetDatabase;
 
 final class CountryFactoryTest extends KernelTestCase
 {
-    use ResetDatabase;
+    use PurgeDatabaseTrait;
     use Factories;
 
     /** @test */
