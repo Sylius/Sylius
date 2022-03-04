@@ -63,13 +63,20 @@ references related issues.
 
    Probably introduced in: https://github.com/symfony/symfony/pull/40811
 
-- `doctrine/orm:2.10.0`:
+ - `symfony/dependency-injection:4.4.38|5.4.5`:
 
-  This version causes a problem with the creation of nested taxons by throwing the exception:
+   These versions are causing a problem with mink session:
+   `InvalidArgumentException: Specify session name to get in vendor/friends-of-behat/mink/src/Mink.php:198`,
+   Psalm error:
+   `UndefinedDocblockClass: Docblock-defined class, interface or enum named UnitEnum does not exist`.
+ 
+ - `doctrine/orm:2.10.0`:
+
+   This version causes a problem with the creation of nested taxons by throwing the exception:
   
-  `Gedmo\Exception\UnexpectedValueException: Root cannot be changed manually, change parent instead in vendor/gedmo/doctrine-extensions/src/Tree/Strategy/ORM/Nested.php:145`
+   `Gedmo\Exception\UnexpectedValueException: Root cannot be changed manually, change parent instead in vendor/gedmo/doctrine-extensions/src/Tree/Strategy/ORM/Nested.php:145`
 
-  References: https://github.com/doctrine-extensions/DoctrineExtensions/issues/2155
+   References: https://github.com/doctrine-extensions/DoctrineExtensions/issues/2155
 
 In this section we keep track of the reasons, why some restrictions were added to the `requires` section of `composer.json`
 
