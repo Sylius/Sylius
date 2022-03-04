@@ -71,7 +71,7 @@ Feature: Sorting listed products
         And I browse products
         And I sort the products ascending by name
         Then I should see 3 products in the list
-        And the first product on the list should have "data-test-missing-translation-paragraph" data attribute
+        And the first product on the list shouldn't have a name
         And the last product on the list should have name "Ekstremalny Mops"
 
     @ui
@@ -82,4 +82,4 @@ Feature: Sorting listed products
         And I sort the products descending by name
         Then I should see 3 products in the list
         And the first product on the list should have name "Ekstremalny Mops"
-        And the last product on the list should have "data-test-missing-translation-paragraph" data attribute
+        And the last product on the list shouldn't have a name
