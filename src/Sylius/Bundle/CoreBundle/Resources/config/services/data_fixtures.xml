@@ -246,6 +246,15 @@
 
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxCategoryFactoryInterface" alias="sylius.data_fixtures.factory.tax_category" />
 
+        <service id="sylius.data_fixtures.factory.tax_rate" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxRateFactory">
+            <argument type="service" id="sylius.factory.tax_rate" />
+            <argument type="service" id="sylius.data_fixtures.factory.zone" />
+            <argument type="service" id="sylius.data_fixtures.factory.tax_category" />
+            <tag name="foundry.factory" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxRateFactoryInterface" alias="sylius.data_fixtures.factory.tax_rate" />
+
         <service id="sylius.data_fixtures.factory.taxon" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactory">
             <argument type="service" id="sylius.factory.taxon" />
             <argument type="service" id="sylius.repository.taxon" />
