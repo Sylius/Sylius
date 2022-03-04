@@ -66,14 +66,6 @@ final class DashboardContext implements Context
     }
 
     /**
-     * @When I go back one page in the browser
-     */
-    public function iGoBackOnePageInTheBrowser(): void
-    {
-        $this->dashboardPage->goBackInTheBrowser();
-    }
-
-    /**
      * @Then I should see :number new orders
      */
     public function iShouldSeeNewOrders($number)

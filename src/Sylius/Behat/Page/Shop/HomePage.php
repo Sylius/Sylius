@@ -103,11 +103,6 @@ class HomePage extends SymfonyPage implements HomePageInterface
         );
     }
 
-    public function goBackInTheBrowser(): void
-    {
-        $this->getDriver()->back();
-    }
-
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
