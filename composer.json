@@ -165,6 +165,7 @@
         "doctrine/doctrine-bundle": "2.3.0",
         "doctrine/orm": "^2.10.0",
         "jms/serializer-bundle": "3.9.0",
+        "symfony/dependency-injection": "4.4.38 || 5.4.5",
         "symfony/doctrine-bridge": "4.4.16",
         "symfony/polyfill-mbstring": "^1.22.0",
         "symfony/property-info": "4.4.22 || 5.2.7",
