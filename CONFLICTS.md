@@ -69,6 +69,11 @@ references related issues.
    `InvalidArgumentException: Specify session name to get in vendor/friends-of-behat/mink/src/Mink.php:198`,
    Psalm error:
    `UndefinedDocblockClass: Docblock-defined class, interface or enum named UnitEnum does not exist`.
+
+ - `symfony/framework-bundle:^4.4.38|^5.4.5`:
+
+   These versions are causing a problem with returning null as token from `Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage`
+   which leads to wrong solving path prefix by `Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider` in API scenarios
  
  - `doctrine/orm:2.10.0`:
 
