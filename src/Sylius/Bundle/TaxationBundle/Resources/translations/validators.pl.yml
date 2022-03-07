@@ -16,6 +16,7 @@ sylius:
             not_blank: Proszę podać nazwę stawki podatkowej.
         amount:
             not_blank: Proszę podać wartość stawki podatkowej.
+            invalid: Wartość stawki podatkowej jest nieprawidłowa.
         calculator:
             not_blank: Proszę wybrać kalkulator stawki podatkowej.
         zone:
