@@ -1,5 +1,24 @@
 # CHANGELOG FOR `1.10.X`
 
+## v1.10.10 (2022-03-07)
+
+#### Details
+
+- [#13575](https://github.com/Sylius/Sylius/issues/13575) [DX] add correct return type to getAdjustments method ([@PILLOWPET](https://github.com/PILLOWPET))
+- [#13641](https://github.com/Sylius/Sylius/issues/13641) [ADR] Declaring services as public in container ([@lchrusciel](https://github.com/lchrusciel))
+- [#13647](https://github.com/Sylius/Sylius/issues/13647) Update Sylius supported versions ([@Zales0123](https://github.com/Zales0123))
+- [#13650](https://github.com/Sylius/Sylius/issues/13650) [Documentation] Update installation guide for Plus ([@GSadee](https://github.com/GSadee))
+- [#13660](https://github.com/Sylius/Sylius/issues/13660) [CLI] Cancel unpaid orders command ([@rafalswierczek](https://github.com/rafalswierczek))
+- [#13676](https://github.com/Sylius/Sylius/issues/13676) [Cart] Fix retrieving/overriding cart of logged in user by guest ([@SirDomin](https://github.com/SirDomin), [@GSadee](https://github.com/GSadee))
+- [#13683](https://github.com/Sylius/Sylius/issues/13683) Improve verbosity of canceling unpaid orders test ([@rafalswierczek](https://github.com/rafalswierczek))
+- [#13684](https://github.com/Sylius/Sylius/issues/13684) [Product][API][Bug] Fixed product sorting by translated names ([@Rafikooo](https://github.com/Rafikooo))
+- [#13695](https://github.com/Sylius/Sylius/issues/13695) [Order] Change getters and setters to use a proper flag name ([@GSadee](https://github.com/GSadee))
+- [#13715](https://github.com/Sylius/Sylius/issues/13715) add dependency injection conflict ([@SirDomin](https://github.com/SirDomin))
+- [#13716](https://github.com/Sylius/Sylius/issues/13716) [Documentation] Fix start date of development 1.12 version ([@GSadee](https://github.com/GSadee))
+- [#13725](https://github.com/Sylius/Sylius/issues/13725) [PaypalExpress] Dont take shipping tax adjustment to shipping cost ([@SirDomin](https://github.com/SirDomin))
+- [#13730](https://github.com/Sylius/Sylius/issues/13730) [Maintenance] Add conflict to symfony/framework-bundle to fix problem with solving path prefix in API scenarios ([@GSadee](https://github.com/GSadee))
+- [#13732](https://github.com/Sylius/Sylius/issues/13732) [Hot-fix] Conflict with symfony/dependency-injection even more ([@Zales0123](https://github.com/Zales0123))
+
 ## v1.10.9 (2022-02-14)
 
 #### Details
