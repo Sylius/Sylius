@@ -18,6 +18,8 @@ services:
             context: .docker
         volumes:
             - ./:/app:delegated
+            - ./.docker/dev/php.ini:/etc/php/8.0/fpm/php.ini:delegated
+            - ./.docker/dev/php.ini:/etc/php/8.0/cli/php.ini:delegated
         depends_on:
             - traefik
             - database
@@ -30,7 +32,7 @@ services:
         environment:
             - MYSQL_ALLOW_EMPTY_PASSWORD=true
         volumes:
-            - ./.docker/mysql:/docker-entrypoint-initdb.d:delegated
+            - ./.docker/dev/mysql:/docker-entrypoint-initdb.d:delegated
         ports:
             - "3306:3306"
         depends_on:
