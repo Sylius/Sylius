@@ -38,7 +38,8 @@ RUN apt update && apt install -y \
     php8.0-zip \
     php8.0-fpm \
     php8.0-mysql \
-    php8.0-mbstring
+    php8.0-mbstring \
+    php8.0-xdebug
 
 # Link php-fpm binary file without version
 RUN ln -s /usr/sbin/php-fpm8.0 /usr/sbin/php-fpm
@@ -56,8 +57,8 @@ RUN npm install -g yarn
 COPY supervisord.conf   /etc/supervisor/conf.d/supervisor.conf
 COPY nginx.conf         /etc/nginx/nginx.conf
 COPY fpm.conf           /etc/php/8.0/fpm/pool.d/www.conf
-COPY php.ini            /etc/php/8.0/fpm/php.ini
-COPY php.ini            /etc/php/8.0/cli/php.ini
+COPY prod/php.ini       /etc/php/8.0/fpm/php.ini
+COPY prod/php.ini       /etc/php/8.0/cli/php.ini
 
 WORKDIR /app
 
