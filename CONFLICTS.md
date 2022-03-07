@@ -59,6 +59,11 @@ references related issues.
    Psalm error: 
    `UndefinedDocblockClass: Docblock-defined class, interface or enum named UnitEnum does not exist`.
 
+ - `symfony/framework-bundle:^4.4.38|^5.4.5`:
+
+   These versions are causing a problem with returning null as token from `Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage`
+   which leads to wrong solving path prefix by `Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider` in API scenarios
+
 In this section we keep track of the reasons, why some restrictions were added to the `requires` section of `composer.json`
 
 - `doctrine/dbal:^2`:

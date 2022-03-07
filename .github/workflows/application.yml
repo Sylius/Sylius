@@ -85,11 +85,6 @@ jobs:
                 if: always() && steps.end-of-setup.outcome == 'success'
 
             -
-                name: Validate Doctrine mapping
-                run: bin/console doctrine:schema:validate --skip-sync -vvv
-                if: always() && steps.end-of-setup.outcome == 'success'
-
-            -
                 name: Validate Twig templates
                 run: bin/console lint:twig src
                 if: always() && steps.end-of-setup.outcome == 'success'
@@ -490,7 +485,6 @@ jobs:
                 run: |
                     bin/console doctrine:migrations:migrate first --no-interaction
                     bin/console doctrine:migrations:migrate latest --no-interaction
-                    bin/console doctrine:schema:validate --skip-mapping -vvv
 
             -
                 name: Test installer
