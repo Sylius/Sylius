@@ -16,6 +16,7 @@ This part of the documentation is about the currently developed unified API for 
     introduction
     authorization
     sylius_api_paths
+    translations
     legacy_api
 
 .. include:: /book/api/map.rst.inc

@@ -39,6 +39,12 @@
 
         <service id="sylius.context.locale.composite" class="Sylius\Component\Locale\Context\CompositeLocaleContext" decorates="sylius.context.locale" decoration-priority="256" public="false" />
 
+        <service id="Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext">
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="sylius.locale_provider" />
+            <tag name="sylius.context.locale" priority="256" />
+        </service>
+
         <service id="sylius.locale_provider" class="Sylius\Component\Locale\Provider\LocaleProvider">
             <argument type="service" id="sylius.repository.locale" />
             <argument>%sylius_locale.locale%</argument>
