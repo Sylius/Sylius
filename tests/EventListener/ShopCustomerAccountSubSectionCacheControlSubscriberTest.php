@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Tests\EventListener;
+namespace Sylius\Tests\EventListener;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -27,17 +27,5 @@ final class ShopCustomerAccountSubSectionCacheControlSubscriberTest extends WebT
         $client->request('GET', '/en_US/account/');
 
         $this->assertResponseHeaderSame('Cache-Control', 'max-age=0, must-revalidate, no-cache, no-store, private');
-    }
-
-    /**
-     * @test
-     */
-    public function it_returns_standard_headers_otherwise(): void
-    {
-        $client = static::createClient();
-
-        $client->request('GET', '/en_US/');
-
-        $this->assertResponseHeaderSame('Cache-Control', 'max-age=0, must-revalidate, private');
     }
 }
