@@ -243,7 +243,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function iShouldBeNotifiedThatIsInvalid($element)
     {
-        $this->assertFieldValidationMessage($element, sprintf('The %s is invalid.', $element));
+        $this->assertFieldValidationMessage($element, sprintf('The tax rate %s is invalid.', $element));
     }
 
     /**
