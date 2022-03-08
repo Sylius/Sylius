@@ -7,7 +7,8 @@ jobs:
     buildx:
         runs-on: ubuntu-latest
         env:
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius"
+            # But it would be better to use mysql docker image
+            DATABASE_URL: "mysql://root:root@host.docker.internal/sylius"
         steps:
             -
                 name: Checkout
