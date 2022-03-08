@@ -8,7 +8,7 @@ jobs:
         runs-on: ubuntu-latest
         env:
             # But it would be better to use mysql docker image
-            DATABASE_URL: "mysql://root:root@host.docker.internal/sylius"
+            DATABASE_URL: "mysql://root@mysql/sylius"
         steps:
             -
                 name: Checkout
@@ -31,10 +31,12 @@ jobs:
                 run: sudo service mysql stop
             -
                 name: Setup MySQL
-                uses: mirromutth/mysql-action@v1.1
-                with:
-                    mysql version: "5.7"
-                    mysql root password: "root"
+                run: |
+                    docker run \
+                    --platform linux/amd64 \
+                    -e MYSQL_ALLOW_EMPTY_PASSWORD=true \
+                    --name mysql \
+                    -d mysql:5.7
             -
                 name: Run PHPUnit
                 run: |
