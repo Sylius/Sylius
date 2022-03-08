@@ -454,7 +454,49 @@ jobs:
                 name: Run JS Behat
                 run: |
                     bin/console cache:pool:clear cache.global_clearer
-                    vendor/bin/behat --colors --strict --no-interaction -vvv --tags="@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/account --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/addressing --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/admin --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/cart --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/channel --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/checkout --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/cli --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/contact --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/currency --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/customer --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/homepage --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/installer --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/inventory --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/locale --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/order --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/payment --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/product --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/promotion --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/shipping --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/taxation --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/taxonomy --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat features/user --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"
             -
                 name: Upload Behat logs
                 uses: actions/upload-artifact@v2
