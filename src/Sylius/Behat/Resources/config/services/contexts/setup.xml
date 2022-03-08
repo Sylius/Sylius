@@ -266,12 +266,12 @@
             <argument type="service" id="behat.mink.parameters" />
         </service>
 
-        <service id="sylius.behat.context.setup.theme" class="Sylius\Behat\Context\Setup\ThemeContext">
-            <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.repository.theme" />
-            <argument type="service" id="sylius.manager.channel" />
-            <argument type="service" id="Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface" />
-        </service>
+<!--        <service id="sylius.behat.context.setup.theme" class="Sylius\Behat\Context\Setup\ThemeContext">-->
+<!--            <argument type="service" id="sylius.behat.shared_storage" />-->
+<!--            <argument type="service" id="sylius.repository.theme" />-->
+<!--            <argument type="service" id="sylius.manager.channel" />-->
+<!--            <argument type="service" id="Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface" />-->
+<!--        </service>-->
 
         <service id="sylius.behat.context.setup.user" class="Sylius\Behat\Context\Setup\UserContext">
             <argument type="service" id="sylius.behat.shared_storage" />
