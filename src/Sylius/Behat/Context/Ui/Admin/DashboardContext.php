@@ -30,9 +30,10 @@ final class DashboardContext implements Context
     }
 
     /**
+     * @Given I am on the administration dashboard
      * @When I (try to )open administration dashboard
      */
-    public function iOpenAdministrationDashboard()
+    public function iOpenAdministrationDashboard(): void
     {
         try {
             $this->dashboardPage->open();
@@ -54,6 +55,14 @@ final class DashboardContext implements Context
     public function iChooseChannel($channelName)
     {
         $this->dashboardPage->chooseChannel($channelName);
+    }
+
+    /**
+     * @When I log out
+     */
+    public function iLogOut(): void
+    {
+        $this->dashboardPage->logOut();
     }
 
     /**
@@ -102,5 +111,13 @@ final class DashboardContext implements Context
     public function iShouldSeeNewOrdersInTheList($number)
     {
         Assert::same($this->dashboardPage->getNumberOfNewOrdersInTheList(), (int) $number);
+    }
+
+    /**
+     * @Then I should not see the administration dashboard
+     */
+    public function iShouldNotSeeTheAdministrationDashboard(): void
+    {
+        Assert::false($this->dashboardPage->isOpen());
     }
 }
