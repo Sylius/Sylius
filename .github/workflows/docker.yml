@@ -35,5 +35,6 @@ jobs:
             -
                 name: Run PHPUnit
                 run: |
+                    docker run -i sylius ls -l
                     docker run -i sylius composer install
                     docker run -i sylius vendor/bin/phpunit --debug
