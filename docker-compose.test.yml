@@ -3,6 +3,8 @@ services:
         build:
             context: .docker
         command: make ci
+        environment:
+            - APP_ENV=test
         volumes:
             - ./:/app:delegated
             - ./.docker/dev/php.ini:/etc/php/8.0/fpm/php.ini:delegated
