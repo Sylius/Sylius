@@ -4,8 +4,25 @@ on:
     push:
 
 jobs:
-    buildx:
+    docker-compose:
+        name: Build and Excute Tests on Docker Compose
         runs-on: ubuntu-latest
+        env:
+            COMPOSE_FILE: docker-compose.test.yml
+        
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v2
+
+            -   name: Build docker images
+                run: docker-compose build
+
+            -   name: Run tests
+                run: docker-compose run ci
+    
+    docker:
+        runs-on: ubuntu-latest
+        name: Build and Excute Tests on Docker Containers
         steps:
             -
                 name: Checkout
