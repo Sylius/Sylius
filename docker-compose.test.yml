@@ -1,0 +1,35 @@
+services:
+    ci:
+        build:
+            context: .docker
+        command: make ci
+        volumes:
+            - ./:/app:delegated
+            - ./.docker/dev/php.ini:/etc/php/8.0/fpm/php.ini:delegated
+            - ./.docker/dev/php.ini:/etc/php/8.0/cli/php.ini:delegated
+        ports:
+            - "80:80"
+        depends_on:
+            - database
+        networks:
+            - sylius
+
+    database:
+        image: mysql:5.7
+        platform: linux/amd64
+        environment:
+            - MYSQL_ALLOW_EMPTY_PASSWORD=true
+        volumes:
+            - ./.docker/dev/mysql:/docker-entrypoint-initdb.d:delegated
+        ports:
+            - "3306:3306"
+        networks:
+            - sylius
+
+networks:
+    sylius:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 192.168.10.0/24

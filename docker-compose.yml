@@ -29,8 +29,7 @@ services:
     ci:
         build:
             context: .docker
-        command:
-            - make init
+        command: make ci
         volumes:
             - ./:/app:delegated
             - ./.docker/dev/php.ini:/etc/php/8.0/fpm/php.ini:delegated

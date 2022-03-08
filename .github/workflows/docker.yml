@@ -6,6 +6,8 @@ on:
 jobs:
     buildx:
         runs-on: ubuntu-latest
+        env:
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius"
         steps:
             -
                 name: Checkout
@@ -37,12 +39,6 @@ jobs:
                 run: |
                     docker run \
                     -v "$(pwd)"/:/app:delegated \
-                    -v "$(pwd)"/.docker/dev/php.ini:/etc/php/8.0/fpm/php.ini:delegated \
-                    -v "$(pwd)"/.docker/dev/php.ini:/etc/php/8.0/cli/php.ini:delegated \
-                    -i sylius composer install
-                    
-                    docker run \
-                    -v "$(pwd)"/:/app:delegated \
-                    -v "$(pwd)"/.docker/dev/php.ini:/etc/php/8.0/fpm/php.ini:delegated \
-                    -v "$(pwd)"/.docker/dev/php.ini:/etc/php/8.0/cli/php.ini:delegated \
-                    -i sylius vendor/bin/phpunit --debug
+                    -v "$(pwd)"/.docker/test/php.ini:/etc/php/8.0/fpm/php.ini:delegated \
+                    -v "$(pwd)"/.docker/test/php.ini:/etc/php/8.0/cli/php.ini:delegated \
+                    -i sylius make ci
