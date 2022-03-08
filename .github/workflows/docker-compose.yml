@@ -8,8 +8,6 @@ jobs:
         runs-on: ubuntu-latest
         env:
             COMPOSE_FILE: docker-compose.yml
-            DOCKER_USER: ${{ secrets.DOCKER_USER }}
-            DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
         
         steps:
             - name: Checkout code
@@ -19,4 +17,4 @@ jobs:
               run: docker-compose build
 
             - name: Run tests
-              run: docker-compose run test
+              run: docker-compose run app
