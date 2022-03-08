@@ -25,6 +25,21 @@ services:
             - database
         networks:
             - sylius
+    
+    ci:
+        build:
+            context: .docker
+        command:
+            - make init
+        volumes:
+            - ./:/app:delegated
+            - ./.docker/dev/php.ini:/etc/php/8.0/fpm/php.ini:delegated
+            - ./.docker/dev/php.ini:/etc/php/8.0/cli/php.ini:delegated
+        depends_on:
+            - traefik
+            - database
+        networks:
+            - sylius
 
     database:
         image: mysql:5.7
