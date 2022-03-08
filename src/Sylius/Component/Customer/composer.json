@@ -36,7 +36,7 @@
         "sylius/resource": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.1"
+        "phpspec/phpspec": "dev-main"
     },
     "extra": {
         "branch-alias": {
