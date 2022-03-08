@@ -35,5 +35,14 @@ jobs:
             -
                 name: Run PHPUnit
                 run: |
-                    docker run -v "$(pwd)"/:/app -i sylius composer install
-                    docker run -v "$(pwd)"/:/app -i sylius vendor/bin/phpunit --debug
+                    docker run \
+                    -v "$(pwd)"/:/app:delegated \
+                    -v "$(pwd)"/.docker/dev/php.ini:/etc/php/8.0/fpm/php.ini:delegated \
+                    -v "$(pwd)"/.docker/dev/php.ini:/etc/php/8.0/cli/php.ini:delegated \
+                    -i sylius composer install
+                    
+                    docker run \
+                    -v "$(pwd)"/:/app:delegated \
+                    -v "$(pwd)"/.docker/dev/php.ini:/etc/php/8.0/fpm/php.ini:delegated \
+                    -v "$(pwd)"/.docker/dev/php.ini:/etc/php/8.0/cli/php.ini:delegated \
+                    -i sylius vendor/bin/phpunit --debug
