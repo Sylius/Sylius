@@ -35,5 +35,5 @@ jobs:
             -
                 name: Run PHPUnit
                 run: |
-                    docker run -v "$(pwd)"/:/app -i sylius_app composer install
-                    docker run -v "$(pwd)"/:/app -i sylius_app vendor/bin/phpunit --debug
+                    docker run -v "$(pwd)"/:/app -i sylius composer install
+                    docker run -v "$(pwd)"/:/app -i sylius vendor/bin/phpunit --debug
