@@ -35,8 +35,8 @@
     },
     "require-dev": {
         "doctrine/orm": "^2.7",
-        "phpspec/phpspec": "dev-main",
         "phpunit/phpunit": "^8.5",
+        "sylius/phpspec": "^7.2",
         "symfony/browser-kit": "^4.4 || ^5.2",
         "symfony/dependency-injection": "^4.4 || ^5.2",
         "symfony/form": "^4.4 || ^5.2"
