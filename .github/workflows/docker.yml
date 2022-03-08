@@ -6,9 +6,6 @@ on:
 jobs:
     buildx:
         runs-on: ubuntu-latest
-        env:
-            # But it would be better to use mysql docker image
-            DATABASE_URL: "mysql://root@mysql/sylius"
         steps:
             -
                 name: Checkout
@@ -45,5 +42,5 @@ jobs:
                     -v "$(pwd)"/:/app:delegated \
                     -v "$(pwd)"/.docker/test/php.ini:/etc/php/8.0/fpm/php.ini:delegated \
                     -v "$(pwd)"/.docker/test/php.ini:/etc/php/8.0/cli/php.ini:delegated \
-                    -e DATABASE_URL=$DATABASE_URL \
+                    -e DATABASE_URL="mysql://root@127.0.0.1/sylius" \
                     -i sylius make ci
