@@ -23,3 +23,16 @@ jobs:
                 run: |
                     chmod +x .docker/run-tests.sh
                     ./.docker/run-tests.sh
+            -
+                name: Shutdown default MySQL
+                run: sudo service mysql stop
+            -
+                name: Setup MySQL
+                uses: mirromutth/mysql-action@v1.1
+                with:
+                    mysql version: "5.7"
+                    mysql root password: "root"
+            -
+                name: Run PHPUnit
+                run: |
+                    docker run -i sylius vendor/bin/phpunit --debug
