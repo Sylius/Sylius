@@ -41,5 +41,5 @@ jobs:
                     -v "$(pwd)"/:/app:delegated \
                     -v "$(pwd)"/.docker/test/php.ini:/etc/php/8.0/fpm/php.ini:delegated \
                     -v "$(pwd)"/.docker/test/php.ini:/etc/php/8.0/cli/php.ini:delegated \
-                    -e $DATABASE_URL \
+                    -e DATABASE_URL=$DATABASE_URL \
                     -i sylius make ci
