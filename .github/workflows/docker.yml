@@ -35,6 +35,7 @@ jobs:
                     docker run \
                     --platform linux/amd64 \
                     -e MYSQL_ALLOW_EMPTY_PASSWORD=true \
+                    -p 3306:3306/tcp \
                     --name mysql \
                     -d mysql:5.7
             -
