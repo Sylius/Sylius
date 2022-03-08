@@ -1,12 +1,12 @@
 init:
-	composer install
+	composer install --no-interaction
 	bin/console sylius:install -n
-	yarn install
+	yarn install --frozen-lockfile
 	node_modules/gulp/bin/gulp.js
 
 ci:
-	composer install
+	composer install --no-interaction
 	bin/console sylius:install -n
-	yarn install
+	yarn install --frozen-lockfile
 	node_modules/gulp/bin/gulp.js
-	vendor/bin/phpunit --debug
+	vendor/bin/phpunit
