@@ -17,7 +17,7 @@ jobs:
             -
                 name: Build Docker Image
                 run: |
-                    docker build .docker --tag sylius
+                    docker build .docker --tag sylius_app
             -
                 name: Check Versions
                 run: |
@@ -29,11 +29,14 @@ jobs:
             -
                 name: Setup MySQL
                 run: |
+                    docker network create sylius_network
                     docker run \
                     --platform linux/amd64 \
                     -e MYSQL_ALLOW_EMPTY_PASSWORD=true \
                     -p 3306:3306/tcp \
+                    -v "$(pwd)"/.docker/dev/mysql:/docker-entrypoint-initdb.d:delegated \
                     --name mysql \
+                    --net sylius_network \
                     -d mysql:5.7
             -
                 name: Run PHPUnit
@@ -42,5 +45,7 @@ jobs:
                     -v "$(pwd)"/:/app:delegated \
                     -v "$(pwd)"/.docker/test/php.ini:/etc/php/8.0/fpm/php.ini:delegated \
                     -v "$(pwd)"/.docker/test/php.ini:/etc/php/8.0/cli/php.ini:delegated \
-                    -e DATABASE_URL="mysql://root@127.0.0.1/sylius" \
-                    -i sylius make ci
+                    -e DATABASE_URL="mysql://root@mysql/sylius_dev" \
+                    --net sylius_network \
+                    -p 80:80/tcp \
+                    -i sylius_app make ci
