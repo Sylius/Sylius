@@ -181,7 +181,7 @@
         "behat/behat": "^3.6.1",
         "behat/mink-selenium2-driver": "^1.4",
         "dmore/behat-chrome-extension": "^1.3",
-        "dmore/chrome-mink-driver": "^2.7",
+        "ferror/chrome-mink-driver": "dev-master",
         "doctrine/data-fixtures": "^1.4",
         "friends-of-behat/mink": "^1.8",
         "friends-of-behat/mink-browserkit-driver": "^1.4",
