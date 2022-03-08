@@ -15,11 +15,11 @@ jobs:
                 id: buildx
                 uses: docker/setup-buildx-action@v1
             -
-                name: Build
+                name: Build Docker Image
                 run: |
                     docker build .docker --tag sylius
             -
-                name: Run Versions
+                name: Check Versions
                 run: |
                     chmod +x .docker/run-tests.sh
                     ./.docker/run-tests.sh
