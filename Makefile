@@ -10,5 +10,6 @@ ci:
 	yarn install --pure-lockfile
 	node_modules/gulp/bin/gulp.js
 	vendor/bin/phpunit
+	vendor/bin/phpspec run --ansi --no-interaction -f dot
 	vendor/bin/behat --colors --strict --no-interaction -vvv --tags="@cli&&~@todo"
 	vendor/bin/behat --colors --strict --no-interaction -vvv --tags="~@javascript&&~@todo&&~@cli"
