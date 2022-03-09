@@ -44,8 +44,8 @@
 
         <service id="sylius.provider.channel_based_default_zone_provider" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider" />
 
-        <service id="Sylius\Bundle\CoreBundle\Provider\SymfonyTranslatorResourceProvider" decorates="Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\SymfonyTranslatorResourceProvider" >
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Provider\SymfonyTranslatorResourceProvider.inner" />
+        <service id="Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\SymfonyTranslatorResourceProvider" class="Sylius\Bundle\CoreBundle\Provider\SymfonyTranslatorResourceProvider">
+            <argument type="collection" /> <!-- resources filepaths -->
         </service>
 
         <service id="sylius.integer_distributor" class="Sylius\Component\Core\Distributor\IntegerDistributor" />

@@ -11,18 +11,16 @@ use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResourceInterface;
 /** @internal */
 class SymfonyTranslatorResourceProvider implements TranslatorResourceProviderInterface
 {
-    private TranslatorResourceProviderInterface $decorated;
-
     /** @var TranslationResourceInterface[] */
     private array $resources = [];
 
     private array $resourcesLocales = [];
 
-    private array $filepaths = [];
+    private array $filepaths;
 
-    public function __construct(TranslatorResourceProviderInterface $decorated)
+    public function __construct(array $filepaths = [])
     {
-        $this->decorated = $decorated;
+        $this->filepaths = $filepaths;
     }
 
     public function getResources(): array
@@ -30,12 +28,10 @@ class SymfonyTranslatorResourceProvider implements TranslatorResourceProviderInt
         $this->initialize();
 
         return $this->resources;
-
     }
 
     public function getResourcesLocales(): array
     {
-
         $this->initialize();
 
         return $this->resourcesLocales;
@@ -48,6 +44,9 @@ class SymfonyTranslatorResourceProvider implements TranslatorResourceProviderInt
      */
     private function initialize(): void
     {
+        $this->resources = [];
+        $this->resourcesLocales = [];
+
         foreach ($this->filepaths as $key => $filepath) {
             $resource = new TranslationResource($filepath);
 
