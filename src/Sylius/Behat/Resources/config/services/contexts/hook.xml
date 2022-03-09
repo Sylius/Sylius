@@ -19,9 +19,9 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
-<!--        <service id="sylius.behat.context.hook.test_theme" class="Sylius\Behat\Context\Hook\TestThemeContext">-->
-<!--            <argument type="service" id="Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface" />-->
-<!--        </service>-->
+        <service id="sylius.behat.context.hook.test_theme" class="Sylius\Behat\Context\Hook\TestThemeContext">
+            <argument type="service" id="Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface" />
+        </service>
 
         <service id="sylius.behat.context.hook.email_spool" class="Sylius\Behat\Context\Hook\EmailSpoolContext">
             <argument type="service" id="sylius.behat.email_checker"/>

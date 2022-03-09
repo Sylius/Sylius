@@ -6,15 +6,15 @@ default:
         ui_theming:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
-#                - sylius.behat.context.hook.test_theme
+                - sylius.behat.context.hook.test_theme
 
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.channel
-#                - sylius.behat.context.transform.theme
+                - sylius.behat.context.transform.theme
 
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.admin_security
-#                - sylius.behat.context.setup.theme
+                - sylius.behat.context.setup.theme
 
                 - sylius.behat.context.ui.channel
                 - sylius.behat.context.ui.theme

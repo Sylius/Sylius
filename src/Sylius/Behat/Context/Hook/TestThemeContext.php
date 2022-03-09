@@ -30,6 +30,6 @@ final class TestThemeContext implements Context
      */
     public function purgeTestThemes()
     {
-        $this->testThemeConfigurationManager->clear();
+//        $this->testThemeConfigurationManager->clear();
     }
 }

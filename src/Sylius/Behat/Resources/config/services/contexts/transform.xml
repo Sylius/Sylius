@@ -137,9 +137,9 @@
             <argument>%locale%</argument>
         </service>
 
-<!--        <service id="sylius.behat.context.transform.theme" class="Sylius\Behat\Context\Transform\ThemeContext">-->
-<!--            <argument type="service" id="sylius.repository.theme" />-->
-<!--        </service>-->
+        <service id="sylius.behat.context.transform.theme" class="Sylius\Behat\Context\Transform\ThemeContext">
+            <argument type="service" id="sylius.repository.theme" />
+        </service>
 
         <service id="sylius.behat.context.transform.user" class="Sylius\Behat\Context\Transform\UserContext">
             <argument type="service" id="sylius.behat.shared_storage" />
