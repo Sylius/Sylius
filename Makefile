@@ -2,13 +2,13 @@ up:
 	docker compose --env-file .docker/.env up -d
 
 init:
-	composer install --no-interaction
+	composer install --no-interaction --no-scripts
 	bin/console sylius:install -n
 	yarn install --pure-lockfile
 	node_modules/gulp/bin/gulp.js
 
 ci:
-	composer install --no-interaction
+	composer install --no-interaction --no-scripts
 	bin/console sylius:install -n
 	yarn install --pure-lockfile
 	node_modules/gulp/bin/gulp.js
