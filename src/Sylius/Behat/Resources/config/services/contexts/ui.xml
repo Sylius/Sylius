@@ -380,13 +380,6 @@
             <argument type="service" id="sylius.behat.paypal_api_mocker" />
         </service>
 
-        <service id="sylius.behat.context.ui.theme" class="Sylius\Behat\Context\Ui\ThemeContext">
-            <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.behat.page.admin.channel.index" />
-            <argument type="service" id="sylius.behat.page.admin.channel.update" />
-            <argument type="service" id="sylius.behat.page.shop.home" />
-        </service>
-
         <service id="sylius.behat.context.ui.user" class="Sylius\Behat\Context\Ui\UserContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.repository.shop_user" />

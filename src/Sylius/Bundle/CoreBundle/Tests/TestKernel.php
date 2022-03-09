@@ -107,7 +107,6 @@ final class TestKernel extends BaseKernel
             new BabDevPagerfantaBundle(),
             new SyliusFixturesBundle(),
             new SyliusPayumBundle(),
-            new SyliusThemeBundle(),
             new SonataBlockBundle(),
             new DoctrineMigrationsBundle(),
             new SyliusLabsDoctrineMigrationsExtraBundle(),
