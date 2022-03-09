@@ -19,12 +19,6 @@
             "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/ferror/syliusthemebundle"
-        }
-    ],
     "require": {
         "php": "^7.4 || ^8.0",
         "ext-exif": "*",
@@ -74,7 +68,7 @@
         "sylius/registry": "^1.5",
         "sylius/resource": "^1.7",
         "sylius/resource-bundle": "^1.7",
-        "sylius/theme-bundle": "dev-bug-translation-memory-leak",
+        "sylius/theme-bundle": "dev-fix-memory-leak",
         "symfony/asset": "^4.4 || ^5.2",
         "symfony/config": "^4.4 || ^5.2",
         "symfony/console": "^4.4 || ^5.2",
