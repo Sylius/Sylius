@@ -11,10 +11,10 @@ Feature: Editing menu taxon on channel
         And channel "Web Store" has menu taxon "Clothes"
         And I am logged in as an administrator
 
-    @ui @javascript
-    Scenario: Editing menu taxon on the channel
-        When I want to modify a channel "Web Store"
-        And I change its menu taxon to "Guns"
-        And I save my changes
-        Then I should be notified that it has been successfully edited
-        And this channel menu taxon should be "Guns"
+#    @ui @javascript
+#    Scenario: Editing menu taxon on the channel
+#        When I want to modify a channel "Web Store"
+#        And I change its menu taxon to "Guns"
+#        And I save my changes
+#        Then I should be notified that it has been successfully edited
+#        And this channel menu taxon should be "Guns"
