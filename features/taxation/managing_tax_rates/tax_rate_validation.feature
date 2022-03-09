@@ -84,8 +84,8 @@ Feature: Tax rate validation
 
     @ui
     Scenario: Trying to add a new tax rate with negative amount
-        Given I want to create a new tax rate
-        When I name it "Food and Beverage Tax Rates"
+        When I want to create a new tax rate
+        And I name it "Food and Beverage Tax Rates"
         And I specify its amount as -20%
         And I try to add it
         Then I should be notified that amount is invalid
