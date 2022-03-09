@@ -37,11 +37,6 @@ class SymfonyTranslatorResourceProvider implements TranslatorResourceProviderInt
         return $this->resourcesLocales;
     }
 
-    /**
-     * 1. The function does not initialize if needed. It initializes everytime it is executed.
-     * 2. The function appends resources and locales each time it is executed, meaning that if I have 100 translation
-     * files and execute it
-     */
     private function initialize(): void
     {
         $this->resources = [];
