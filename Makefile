@@ -1,3 +1,6 @@
+up:
+	docker compose --env-file .docker/.env up -d
+
 init:
 	composer install --no-interaction
 	bin/console sylius:install -n
