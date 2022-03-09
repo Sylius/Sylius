@@ -1,0 +1,151 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.catalog_promotion.class%" shortName="CatalogPromotion">
+
+        <attribute name="validation_groups">sylius</attribute>
+
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="path">/admin/catalog-promotions</attribute>
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:catalog_promotion:read</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="path">/admin/catalog-promotions</attribute>
+                <attribute name="method">POST</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:catalog_promotion:read</attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:catalog_promotion:create</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="description">
+Example configuration for `for_variants` scope type:
+
+```
+{
+    "type": "for_variants",
+    "configuration": {
+        "variants": [
+            "string"
+        ]
+    }
+}
+```
+
+Example configuration for `percentage_discount` action type:
+
+```
+{
+    "type": "percentage_discount",
+    "configuration": {
+        "amount": float
+    }
+}
+```
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="admin_get">
+                <attribute name="path">/admin/catalog-promotions/{code}</attribute>
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:catalog_promotion:read</attribute>
+                </attribute>
+            </itemOperation>
+            <itemOperation name="shop_get">
+                <attribute name="path">/shop/catalog-promotions/{code}</attribute>
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:catalog_promotion:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="path">/admin/catalog-promotions/{code}</attribute>
+                <attribute name="method">PUT</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:catalog_promotion:read</attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:catalog_promotion:update</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="description">
+Example configuration for `for_variants` scope type:
+
+```
+{
+    "type": "for_variants",
+    "configuration": {
+        "variants": [
+            "string"
+        ]
+    }
+}
+```
+
+Example configuration for `percentage_discount` action type:
+
+```
+{
+    "type": "percentage_discount",
+    "configuration": {
+        "amount": float
+    }
+}
+```
+                    </attribute>
+                </attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="id" identifier="false" writable="false" />
+        <property name="code" identifier="true" />
+        <property name="name" writable="true" />
+        <property name="startDate" writable="true" />
+        <property name="endDate" writable="true" />
+        <property name="priority" writable="true" />
+        <property name="state" writable="true" />
+        <property name="channels" writable="true" />
+        <property name="translations" readable="true" writable="true">
+            <attribute name="openapi_context">
+                <attribute name="type">object</attribute>
+                <attribute name="example">
+                    <attribute name="en_US">
+                        <attribute name="label">string</attribute>
+                        <attribute name="description">string</attribute>
+                        <attribute name="locale">string</attribute>
+                    </attribute>
+                </attribute>
+            </attribute>
+        </property>
+        <property name="scopes" writable="true" />
+        <property name="actions" writable="true" />
+        <property name="enabled" writable="true" />
+        <property name="exclusive" writable="true" />
+        <property name="label" writable="true" />
+    </resource>
+</resources>

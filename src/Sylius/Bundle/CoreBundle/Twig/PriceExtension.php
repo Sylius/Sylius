@@ -19,11 +19,8 @@ use Twig\TwigFilter;
 
 final class PriceExtension extends AbstractExtension
 {
-    private PriceHelper $helper;
-
-    public function __construct(PriceHelper $helper)
+    public function __construct(private PriceHelper $helper)
     {
-        $this->helper = $helper;
     }
 
     public function getFilters(): array

@@ -19,11 +19,8 @@ use Twig\TwigFilter;
 
 final class FormatMoneyExtension extends AbstractExtension
 {
-    private FormatMoneyHelperInterface $helper;
-
-    public function __construct(FormatMoneyHelperInterface $helper)
+    public function __construct(private FormatMoneyHelperInterface $helper)
     {
-        $this->helper = $helper;
     }
 
     public function getFilters(): array

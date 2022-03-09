@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
-use Sylius\Bundle\ApiBundle\Command\ChangeShopUserPassword;
+use Sylius\Bundle\ApiBundle\Command\Account\ChangeShopUserPassword;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
@@ -26,8 +26,11 @@ final class CorrectChangeShopUserConfirmPasswordValidator extends ConstraintVali
     {
         Assert::isInstanceOf($value, ChangeShopUserPassword::class);
 
+        /** @var CorrectChangeShopUserConfirmPassword $constraint */
+        Assert::isInstanceOf($constraint, CorrectChangeShopUserConfirmPassword::class);
+
         if ($value->confirmNewPassword !== $value->newPassword) {
-            $this->context->buildViolation('sylius.user.plainPassword.mismatch')
+            $this->context->buildViolation($constraint->message)
                 ->atPath('newPassword')
                 ->addViolation()
             ;

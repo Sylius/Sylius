@@ -25,15 +25,20 @@
             <group>admin:shipping_method:create</group>
             <group>admin:shipping_method:read</group>
             <group>admin:shipping_method:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
-            <group>shop:shipping_method:read</group>
-            <group>shop:shipment:read</group>
         </attribute>
 
         <attribute name="code">
             <group>admin:shipping_method:create</group>
             <group>admin:shipping_method:read</group>
+            <group>shop:shipping_method:read</group>
+        </attribute>
+
+        <attribute name="name">
+            <group>admin:shipping_method:read</group>
+            <group>shop:shipping_method:read</group>
+        </attribute>
+
+        <attribute name="description">
             <group>shop:shipping_method:read</group>
         </attribute>
 
@@ -54,14 +59,12 @@
             <group>admin:shipping_method:create</group>
             <group>admin:shipping_method:read</group>
             <group>admin:shipping_method:update</group>
-            <group>shop:shipping_method:read</group>
         </attribute>
 
         <attribute name="channels">
             <group>admin:shipping_method:create</group>
             <group>admin:shipping_method:read</group>
             <group>admin:shipping_method:update</group>
-            <group>shop:shipping_method:read</group>
         </attribute>
 
         <attribute name="calculator">

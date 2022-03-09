@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\VerifyCustomerAccount;
+use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\AccountVerificationTokenEligibility;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibility;
 use Sylius\Component\Core\Model\ShopUserInterface;

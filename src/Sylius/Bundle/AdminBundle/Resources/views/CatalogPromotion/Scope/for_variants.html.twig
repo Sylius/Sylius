@@ -1,0 +1,5 @@
+{% form_theme field '@SyliusAdmin/Form/theme.html.twig' %}
+
+{{ form_row(field.variants, {'remote_url': path('sylius_admin_ajax_all_product_variants_by_phrase'), 'remote_criteria_type': 'contains', 'remote_criteria_name': 'phrase', 'load_edit_url': path('sylius_admin_ajax_all_product_variants_by_codes')}) }}
+
+<div class="catalog-promotion-form-divider"></div>

@@ -24,24 +24,20 @@ use Webmozart\Assert\Assert;
 
 class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterface
 {
-    /** @var PaymentMethodRepositoryInterface */
-    protected $paymentMethodRepository;
-
-    public function __construct(PaymentMethodRepositoryInterface $paymentMethodRepository)
+    public function __construct(protected PaymentMethodRepositoryInterface $paymentMethodRepository)
     {
-        $this->paymentMethodRepository = $paymentMethodRepository;
     }
 
     /**
      * @throws UnresolvedDefaultPaymentMethodException
      */
-    public function getDefaultPaymentMethod(BasePaymentInterface $subject): PaymentMethodInterface
+    public function getDefaultPaymentMethod(BasePaymentInterface $payment): PaymentMethodInterface
     {
-        /** @var PaymentInterface $subject */
-        Assert::isInstanceOf($subject, PaymentInterface::class);
+        /** @var PaymentInterface $payment */
+        Assert::isInstanceOf($payment, PaymentInterface::class);
 
         /** @var ChannelInterface $channel */
-        $channel = $subject->getOrder()->getChannel();
+        $channel = $payment->getOrder()->getChannel();
 
         $paymentMethods = $this->paymentMethodRepository->findEnabledForChannel($channel);
         if (empty($paymentMethods)) {

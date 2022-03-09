@@ -19,11 +19,8 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 
 final class LoadMetadataSubscriber implements EventSubscriber
 {
-    private array $subjects;
-
-    public function __construct(array $subjects)
+    public function __construct(private array $subjects)
     {
-        $this->subjects = $subjects;
     }
 
     public function getSubscribedEvents(): array

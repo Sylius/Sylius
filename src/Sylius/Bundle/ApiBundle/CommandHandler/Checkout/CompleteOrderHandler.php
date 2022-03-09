@@ -27,20 +27,11 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class CompleteOrderHandler implements MessageHandlerInterface
 {
-    private OrderRepositoryInterface $orderRepository;
-
-    private FactoryInterface $stateMachineFactory;
-
-    private MessageBusInterface $eventBus;
-
     public function __construct(
-        OrderRepositoryInterface $orderRepository,
-        FactoryInterface $stateMachineFactory,
-        MessageBusInterface $eventBus
+        private OrderRepositoryInterface $orderRepository,
+        private FactoryInterface $stateMachineFactory,
+        private MessageBusInterface $eventBus
     ) {
-        $this->orderRepository = $orderRepository;
-        $this->stateMachineFactory = $stateMachineFactory;
-        $this->eventBus = $eventBus;
     }
 
     public function __invoke(CompleteOrder $completeOrder): OrderInterface
@@ -51,6 +42,7 @@ final class CompleteOrderHandler implements MessageHandlerInterface
         $cart = $this->orderRepository->findOneBy(['tokenValue' => $orderTokenValue]);
 
         Assert::notNull($cart, sprintf('Order with %s token has not been found.', $orderTokenValue));
+        Assert::notNull($cart->getCustomer(), 'Please enter your email before completing the order.');
 
         if ($completeOrder->notes !== null) {
             $cart->setNotes($completeOrder->notes);

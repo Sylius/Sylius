@@ -129,6 +129,20 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         return $taxonName === $this->getDocument()->find('css', '.search > .text')->getText();
     }
 
+    public function checkProductTaxon(TaxonInterface $taxon): void
+    {
+        $this->openTaxonBookmarks();
+
+        $productTaxonsCodes = [];
+        $productTaxonsElement = $this->getElement('product_taxons');
+        if ($productTaxonsElement->getValue() !== '') {
+            $productTaxonsCodes = explode(',', $productTaxonsElement->getValue());
+        }
+        $productTaxonsCodes[] = $taxon->getCode();
+
+        $productTaxonsElement->setValue(implode(',', $productTaxonsCodes));
+    }
+
     public function attachImage(string $path, string $type = null): void
     {
         $this->clickTabIfItsNotActive('media');
@@ -250,6 +264,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'language_tab' => '[data-locale="%locale%"] .title',
             'locale_tab' => '#attributesContainer .menu [data-tab="%localeCode%"]',
             'main_taxon' => '#sylius_product_mainTaxon',
+            'product_taxons' => '#sylius_product_productTaxons',
             'name' => '#sylius_product_translations_%locale%_name',
             'non_translatable_attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% "] input',
             'original_price' => '#sylius_product_variant_channelPricings input[name$="[originalPrice]"][id*="%channelCode%"]',

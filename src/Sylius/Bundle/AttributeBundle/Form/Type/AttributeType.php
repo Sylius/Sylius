@@ -25,22 +25,13 @@ use Symfony\Component\Form\FormEvents;
 
 abstract class AttributeType extends AbstractResourceType
 {
-    /** @var string */
-    protected $attributeTranslationType;
-
-    /** @var FormTypeRegistryInterface */
-    protected $formTypeRegistry;
-
     public function __construct(
         string $dataClass,
         array $validationGroups,
-        string $attributeTranslationType,
-        FormTypeRegistryInterface $formTypeRegistry
+        protected string $attributeTranslationType,
+        protected FormTypeRegistryInterface $formTypeRegistry
     ) {
         parent::__construct($dataClass, $validationGroups);
-
-        $this->attributeTranslationType = $attributeTranslationType;
-        $this->formTypeRegistry = $formTypeRegistry;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

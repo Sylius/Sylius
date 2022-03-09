@@ -1,0 +1,20 @@
+{
+    "@context": "\/api\/v2\/contexts\/Locale",
+    "@id": "\/api\/v2\/shop\/locales",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+      {
+          "@id": "\/api\/v2\/shop\/locales\/en_US",
+          "@type": "Locale",
+          "code": "en_US",
+          "name": "English (United States)"
+      },
+      {
+          "@id": "\/api\/v2\/shop\/locales\/pl_PL",
+          "@type": "Locale",
+          "code": "pl_PL",
+          "name": "Polish (Poland)"
+      }
+    ],
+    "hydra:totalItems": 2
+}

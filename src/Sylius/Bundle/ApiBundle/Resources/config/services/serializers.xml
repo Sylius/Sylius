@@ -16,6 +16,8 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
+        <defaults public="true" />
+
         <service id="Sylius\Bundle\ApiBundle\Serializer\AddressDenormalizer">
             <argument type="service" id="serializer.normalizer.object" />
             <argument type="string">%sylius.model.address.class%</argument>
@@ -23,17 +25,23 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandFieldItemIriToIdentifierDenormalizer">
+        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandArgumentsDenormalizer">
             <argument type="service" id="serializer.normalizer.object" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Converter\ItemIriToIdentifierConverter" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface" />
             <argument type="service" id="sylius.api.data_transformer.command_aware_input_data_transformer" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Map\CommandItemIriArgumentToIdentifierMap" />
             <tag name="serializer.normalizer" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\ProductNormalizer">
             <argument type="service" id="sylius.product_variant_resolver.default" />
             <argument type="service" id="api_platform.iri_converter" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductImageNormalizer">
+            <argument type="service" id="liip_imagine.cache.manager" />
+            <argument type="service" id="request_stack" />
+            <argument type="string">%sylius_api.product_image_prefix%</argument>
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
@@ -51,7 +59,25 @@
             <argument type="service" id="sylius.calculator.product_variant_price" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.availability_checker" />
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="api_platform.iri_converter" />
             <tag name="serializer.normalizer" priority="64" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ShippingMethodNormalizer">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.repository.shipment" />
+            <argument type="service" id="sylius.registry.shipping_calculator" />
+            <argument type="service" id="Symfony\Component\HttpFoundation\RequestStack" />
+            <argument type="service" id="Sylius\Component\Channel\Context\ChannelContextInterface" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
+        <service id="date_time_normalizer" class="Symfony\Component\Serializer\Normalizer\DateTimeNormalizer">
+            <argument type="collection">
+                <argument key="datetime_format">Y-m-d H:i:s</argument>
+            </argument>
+            <tag name="serializer.normalizer"/>
         </service>
     </services>
 </container>

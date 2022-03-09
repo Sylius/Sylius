@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ApiBundle\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use Sylius\Bundle\ApiBundle\Command\VerifyCustomerAccount;
+use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
 
 /** @experimental  */
 final class VerifyCustomerAccountItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface

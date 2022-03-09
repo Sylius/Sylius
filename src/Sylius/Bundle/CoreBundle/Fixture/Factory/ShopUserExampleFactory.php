@@ -27,25 +27,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private FactoryInterface $shopUserFactory;
-
-    private FactoryInterface $customerFactory;
-
-    private RepositoryInterface $customerGroupRepository;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $shopUserFactory,
-        FactoryInterface $customerFactory,
-        RepositoryInterface $customerGroupRepository
+        private FactoryInterface $shopUserFactory,
+        private FactoryInterface $customerFactory,
+        private RepositoryInterface $customerGroupRepository
     ) {
-        $this->shopUserFactory = $shopUserFactory;
-        $this->customerFactory = $customerFactory;
-        $this->customerGroupRepository = $customerGroupRepository;
-
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
@@ -99,7 +89,7 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
             ->setNormalizer(
                 'birthday',
                 /** @param string|\DateTimeInterface|null $value */
-                function (Options $options, $value) {
+                function (Options $options, string|\DateTimeInterface|null $value) {
                     if (is_string($value)) {
                         return \DateTime::createFromFormat('Y-m-d H:i:s', $value);
                     }

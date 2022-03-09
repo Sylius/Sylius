@@ -9,6 +9,8 @@ sylius:
             title: Τίτλος
         cart:
             coupon: Κουπόνι
+        catalog_promotion:
+            channels: Κανάλια
         checkout:
             addressing:
                 different_billing_address: Να γίνει χρήση διαφορετικής διεύθυνσης για τιμολόγηση;

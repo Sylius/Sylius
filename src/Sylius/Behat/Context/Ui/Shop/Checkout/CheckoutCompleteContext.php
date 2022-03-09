@@ -377,4 +377,12 @@ final class CheckoutCompleteContext implements Context
 
         throw new UnexpectedPageException('It should not be possible to complete checkout complete step.');
     }
+
+    /**
+     * @When /^I should see (product "[^"]+") with unit price ("[^"]+")$/
+     */
+    public function iShouldSeeWithUnitPrice(ProductInterface $product, int $unitPrice): void
+    {
+        Assert::same($this->completePage->getProductUnitPrice($product), $unitPrice);
+    }
 }

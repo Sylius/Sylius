@@ -82,6 +82,11 @@ sylius_resource:
                 model: Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource
 
 services:
+    test.channel.id_filter:
+        parent: api_platform.doctrine.orm.search_filter
+        arguments: [{id: 'exact', hostname: 'partial'}]
+        tags: ['api_platform.filter']
+
     Sylius\Bundle\ApiBundle\Application\CommandHandler\FooHandler:
         tags:
             - { name: messenger.message_handler, bus: sylius.command_bus }

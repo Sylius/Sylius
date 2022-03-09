@@ -9,6 +9,8 @@ sylius:
             title: 標題
         cart:
             coupon: 折價券
+        catalog_promotion:
+            channels: 頻道
         checkout:
             addressing:
                 different_billing_address: 使用其他地址作為賬單地址嗎？

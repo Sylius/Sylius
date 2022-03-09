@@ -82,7 +82,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/orders/{tokenValue}/cancel</attribute>
                 <attribute name="input">false</attribute>
-                <attribute name="controller">sylius.api.order_state_machine_transition_applicator:cancel</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicatorInterface:cancel</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:order:update</attribute>
                 </attribute>
@@ -92,7 +92,7 @@
             </itemOperation>
 
             <itemOperation name="shop_add_item">
-                <attribute name="method">PATCH</attribute>
+                <attribute name="method">POST</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}/items</attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart</attribute>
@@ -104,22 +104,6 @@
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Adds Item to cart</attribute>
-                </attribute>
-            </itemOperation>
-
-            <itemOperation name="shop_address">
-                <attribute name="method">PATCH</attribute>
-                <attribute name="path">/shop/orders/{tokenValue}/address</attribute>
-                <attribute name="messenger">input</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">shop:cart:address</attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
-                </attribute>
-                <attribute name="openapi_context">
-                    <attribute name="summary">Addresses cart to given location, logged in Customer does not have to provide an email</attribute>
                 </attribute>
             </itemOperation>
 
@@ -230,7 +214,7 @@
 
             <itemOperation name="get_configuration">
                 <attribute name="method">GET</attribute>
-                <attribute name="controller">sylius.api.get_configuration_action</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\Payment\GetPaymentConfiguration</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}/payments/{paymentId}/configuration</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Retrieve payment method configuration</attribute>
@@ -337,24 +321,19 @@
                 </attribute>
             </itemOperation>
 
-            <itemOperation name="shop_apply_coupon">
-                <attribute name="method">PATCH</attribute>
-                <attribute name="path">/shop/orders/{tokenValue}/apply-coupon</attribute>
-                <attribute name="messenger">input</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">shop:cart:apply_coupon</attribute>
-                </attribute>
-                <attribute name="openapi_context">
-                    <attribute name="summary">Applies coupon to cart</attribute>
-                </attribute>
-            </itemOperation>
-
             <itemOperation name="shop_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:cart:update</attribute>
+                    <attribute name="groups">shop:cart:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:cart:read</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Addresses cart to given location, logged in Customer does not have to provide an email. Applies coupon to cart.</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
@@ -378,16 +357,6 @@
             <subresourceOperation name="adjustments_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}/adjustments</attribute>
-            </subresourceOperation>
-
-            <subresourceOperation name="payments_methods_get_subresource">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/orders/{tokenValue}/payments/{payments}/methods</attribute>
-            </subresourceOperation>
-
-            <subresourceOperation name="shipments_methods_get_subresource">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/orders/{tokenValue}/shipments/{shipments}/methods</attribute>
             </subresourceOperation>
 
             <subresourceOperation name="items_adjustments_get_subresource">

@@ -34,14 +34,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private ChannelFactoryInterface $channelFactory;
-
-    private RepositoryInterface $localeRepository;
-
-    private RepositoryInterface $currencyRepository;
-
-    private RepositoryInterface $zoneRepository;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
@@ -51,10 +43,10 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
     private ?FactoryInterface $shopBillingDataFactory;
 
     public function __construct(
-        ChannelFactoryInterface $channelFactory,
-        RepositoryInterface $localeRepository,
-        RepositoryInterface $currencyRepository,
-        RepositoryInterface $zoneRepository,
+        private ChannelFactoryInterface $channelFactory,
+        private RepositoryInterface $localeRepository,
+        private RepositoryInterface $currencyRepository,
+        private RepositoryInterface $zoneRepository,
         ?TaxonRepositoryInterface $taxonRepository = null,
         ?FactoryInterface $shopBillingDataFactory = null
     ) {
@@ -65,11 +57,6 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         if (null === $shopBillingDataFactory) {
             @trigger_error('Passing RouterInterface as the sixth argument is deprecated since 1.8 and will be prohibited in 2.0', \E_USER_DEPRECATED);
         }
-
-        $this->channelFactory = $channelFactory;
-        $this->localeRepository = $localeRepository;
-        $this->currencyRepository = $currencyRepository;
-        $this->zoneRepository = $zoneRepository;
         $this->taxonRepository = $taxonRepository;
         $this->shopBillingDataFactory = $shopBillingDataFactory;
 

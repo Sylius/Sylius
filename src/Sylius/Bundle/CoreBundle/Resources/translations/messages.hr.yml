@@ -9,6 +9,8 @@ sylius:
             title: Naslov
         cart:
             coupon: Kupon
+        catalog_promotion:
+            channels: Kanali
         checkout:
             addressing:
                 different_billing_address: Želim koristiti drugu adresu za račun.

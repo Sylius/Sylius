@@ -32,7 +32,7 @@
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/shop/product-reviews</attribute>
                 <attribute name="messenger">input</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\AddProductReview</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:product_review:create</attribute>
                 </attribute>
@@ -88,7 +88,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/product-reviews/{id}/accept</attribute>
                 <attribute name="input">false</attribute>
-                <attribute name="controller">sylius.api.product_review_state_machine_transition_applicator:accept</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface:accept</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Accepts Product Review</attribute>
                 </attribute>
@@ -101,7 +101,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/product-reviews/{id}/reject</attribute>
                 <attribute name="input">false</attribute>
-                <attribute name="controller">sylius.api.product_review_state_machine_transition_applicator:reject</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface:reject</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Rejects Product Review</attribute>
                 </attribute>

@@ -23,15 +23,11 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 final class ChannelCollector extends DataCollector
 {
-    private ChannelContextInterface $channelContext;
-
     public function __construct(
         ChannelRepositoryInterface $channelRepository,
-        ChannelContextInterface $channelContext,
+        private ChannelContextInterface $channelContext,
         bool $channelChangeSupport = false
     ) {
-        $this->channelContext = $channelContext;
-
         $this->data = [
             'channel' => null,
             'channels' => array_map([$this, 'pluckChannel'], $channelRepository->findAll()),
@@ -61,7 +57,7 @@ final class ChannelCollector extends DataCollector
     {
         try {
             $this->data['channel'] = $this->pluckChannel($this->channelContext->getChannel());
-        } catch (ChannelNotFoundException $exception) {
+        } catch (ChannelNotFoundException) {
         }
     }
 

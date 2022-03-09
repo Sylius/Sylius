@@ -24,11 +24,8 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class PromotionRuleFactory implements PromotionRuleFactoryInterface
 {
-    private FactoryInterface $decoratedFactory;
-
-    public function __construct(FactoryInterface $decoratedFactory)
+    public function __construct(private FactoryInterface $decoratedFactory)
     {
-        $this->decoratedFactory = $decoratedFactory;
     }
 
     public function createNew(): PromotionRuleInterface

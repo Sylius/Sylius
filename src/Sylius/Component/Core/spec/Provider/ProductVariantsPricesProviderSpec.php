@@ -16,6 +16,7 @@ namespace spec\Sylius\Component\Core\Provider;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -53,6 +54,11 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
             $blackLargeTShirt->getWrappedObject(),
             $whiteLargeTShirt->getWrappedObject(),
         ]));
+
+        $blackSmallTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
+        $whiteSmallTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
+        $blackLargeTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
+        $whiteLargeTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
 
         $blackSmallTShirt->getOptionValues()->willReturn(
             new ArrayCollection([$black->getWrappedObject(), $small->getWrappedObject()])
@@ -102,6 +108,97 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
                 't_shirt_color' => 'black',
                 't_shirt_size' => 'large',
                 'value' => 2000,
+            ],
+            [
+                't_shirt_color' => 'white',
+                't_shirt_size' => 'large',
+                'value' => 2500,
+                'original-price' => 3000,
+            ],
+        ]);
+    }
+
+    function it_provides_array_containing_product_variant_options_map_with_corresponding_price_and_applied_promotions(
+        ChannelInterface $channel,
+        ProductInterface $tShirt,
+        ProductOptionValueInterface $black,
+        ProductOptionValueInterface $large,
+        ProductOptionValueInterface $small,
+        ProductOptionValueInterface $white,
+        ProductVariantInterface $blackLargeTShirt,
+        ProductVariantInterface $blackSmallTShirt,
+        ProductVariantInterface $whiteLargeTShirt,
+        ProductVariantInterface $whiteSmallTShirt,
+        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
+        CatalogPromotionInterface $winterCatalogPromotion,
+        CatalogPromotionInterface $summerCatalogPromotion
+    ): void {
+        $tShirt->getEnabledVariants()->willReturn(new ArrayCollection([
+            $blackSmallTShirt->getWrappedObject(),
+            $whiteSmallTShirt->getWrappedObject(),
+            $blackLargeTShirt->getWrappedObject(),
+            $whiteLargeTShirt->getWrappedObject(),
+        ]));
+
+        $blackSmallTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([
+            $winterCatalogPromotion->getWrappedObject()
+        ]));
+        $whiteSmallTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
+        $blackLargeTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([
+            $summerCatalogPromotion->getWrappedObject()]
+        ));
+        $whiteLargeTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
+
+        $blackSmallTShirt->getOptionValues()->willReturn(
+            new ArrayCollection([$black->getWrappedObject(), $small->getWrappedObject()])
+        );
+        $whiteSmallTShirt->getOptionValues()->willReturn(
+            new ArrayCollection([$white->getWrappedObject(), $small->getWrappedObject()])
+        );
+        $blackLargeTShirt->getOptionValues()->willReturn(
+            new ArrayCollection([$black->getWrappedObject(), $large->getWrappedObject()])
+        );
+        $whiteLargeTShirt->getOptionValues()->willReturn(
+            new ArrayCollection([$white->getWrappedObject(), $large->getWrappedObject()])
+        );
+
+        $productVariantPriceCalculator->calculate($blackSmallTShirt, ['channel' => $channel])->willReturn(1000);
+        $productVariantPriceCalculator->calculateOriginal($blackSmallTShirt, ['channel' => $channel])->willReturn(1000);
+        $productVariantPriceCalculator->calculate($whiteSmallTShirt, ['channel' => $channel])->willReturn(1500);
+        $productVariantPriceCalculator->calculateOriginal($whiteSmallTShirt, ['channel' => $channel])->willReturn(2000);
+        $productVariantPriceCalculator->calculate($blackLargeTShirt, ['channel' => $channel])->willReturn(2000);
+        $productVariantPriceCalculator->calculateOriginal($blackLargeTShirt, ['channel' => $channel])->willReturn(2000);
+        $productVariantPriceCalculator->calculate($whiteLargeTShirt, ['channel' => $channel])->willReturn(2500);
+        $productVariantPriceCalculator->calculateOriginal($whiteLargeTShirt, ['channel' => $channel])->willReturn(3000);
+
+        $black->getOptionCode()->willReturn('t_shirt_color');
+        $white->getOptionCode()->willReturn('t_shirt_color');
+        $small->getOptionCode()->willReturn('t_shirt_size');
+        $large->getOptionCode()->willReturn('t_shirt_size');
+
+        $black->getCode()->willReturn('black');
+        $white->getCode()->willReturn('white');
+        $small->getCode()->willReturn('small');
+        $large->getCode()->willReturn('large');
+
+        $this->provideVariantsPrices($tShirt, $channel)->shouldReturn([
+            [
+                't_shirt_color' => 'black',
+                't_shirt_size' => 'small',
+                'value' => 1000,
+                'applied_promotions' => [$winterCatalogPromotion],
+            ],
+            [
+                't_shirt_color' => 'white',
+                't_shirt_size' => 'small',
+                'value' => 1500,
+                'original-price' => 2000,
+            ],
+            [
+                't_shirt_color' => 'black',
+                't_shirt_size' => 'large',
+                'value' => 2000,
+                'applied_promotions' => [$summerCatalogPromotion],
             ],
             [
                 't_shirt_color' => 'white',

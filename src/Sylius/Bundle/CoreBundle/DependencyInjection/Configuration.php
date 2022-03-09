@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Sylius\Bundle\CoreBundle\Controller\ProductTaxonController;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\AvatarImageRepository;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\ChannelPricingRepository;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Bundle\CoreBundle\Form\Type\ShopBillingDataType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -49,6 +50,19 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->booleanNode('prepend_doctrine_migrations')->defaultTrue()->end()
+                ->booleanNode('shipping_address_based_taxation')->defaultFalse()->end()
+                ->arrayNode('catalog_promotions')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->integerNode('batch_size')
+                            ->defaultValue(100)
+                            ->validate()
+                                ->ifTrue(fn(int $batchSize): bool => $batchSize <= 0)
+                                ->thenInvalid('Expected value bigger than 0, but got %s.')
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

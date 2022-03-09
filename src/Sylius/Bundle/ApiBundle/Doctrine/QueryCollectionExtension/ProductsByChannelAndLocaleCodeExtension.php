@@ -24,11 +24,8 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ProductsByChannelAndLocaleCodeExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    private UserContextInterface $userContext;
-
-    public function __construct(UserContextInterface $userContext)
+    public function __construct(private UserContextInterface $userContext)
     {
-        $this->userContext = $userContext;
     }
 
     public function applyToCollection(
@@ -54,12 +51,20 @@ final class ProductsByChannelAndLocaleCodeExtension implements ContextAwareQuery
         $localeCode = $context[ContextKeys::LOCALE_CODE];
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
+        $localeCodeParameterName = $queryNameGenerator->generateParameterName('localeCode');
+        $channelsParameterName = $queryNameGenerator->generateParameterName('channel');
+
         $queryBuilder
             ->addSelect('translation')
-            ->innerJoin(sprintf('%s.translations', $rootAlias), 'translation', 'WITH', 'translation.locale = :localeCode')
-            ->andWhere(sprintf(':channel MEMBER OF %s.channels', $rootAlias))
-            ->setParameter('channel', $channel)
-            ->setParameter('localeCode', $localeCode)
+            ->innerJoin(
+                sprintf('%s.translations', $rootAlias),
+                'translation',
+                'WITH',
+                sprintf('translation.locale = :%s', $localeCodeParameterName)
+            )
+            ->andWhere(sprintf(':%s MEMBER OF %s.channels', $channelsParameterName, $rootAlias))
+            ->setParameter($channelsParameterName, $channel)
+            ->setParameter($localeCodeParameterName, $localeCode)
         ;
     }
 }

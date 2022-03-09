@@ -2,6 +2,12 @@
 
 <div id="sylius-variants-pricing" data-unavailable-text="{{ 'sylius.ui.unavailable'|trans }}">
 {% for price in pricing %}
-    <div {% for option, value in price %}data-{{ option }}="{% if option == 'value' or option == 'original-price' %}{{ money.convertAndFormat(value) }}{% else %}{{ value|replace({'\"': '\''}) }}{% endif %}" {{ sylius_test_html_attribute('variant-price') }}{% endfor %}></div>
+    {% set catalog_promotions = [] %}
+    {% if price.applied_promotions is defined %}
+        {% for promotion in price.applied_promotions %}
+            {% set catalog_promotions = catalog_promotions|merge([{'label': promotion.name, 'description': promotion.description}]) %}
+        {% endfor %}
+    {% endif %}
+    <div {% for option, value in price %}data-{{ option }}="{% if option == 'value' or option == 'original-price' %}{{ money.convertAndFormat(value) }}{% elseif option == 'applied_promotions' %}{{ catalog_promotions|json_encode }}{% else %}{{ value|replace({'\"': '\''}) }}{% endif %}" {{ sylius_test_html_attribute('variant-price') }}{% endfor %}></div>
 {% endfor %}
 </div>

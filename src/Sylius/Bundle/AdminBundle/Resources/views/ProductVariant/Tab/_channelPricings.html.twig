@@ -1,0 +1,30 @@
+<div class="ui tab" data-tab="channel_pricings">
+    <h3 class="ui dividing header">{{ 'sylius.ui.channel_pricings'|trans }}</h3>
+    <div class="ui info message">
+        {{ 'sylius.ui.price_details'|trans }}
+        <br/>
+        {{ 'sylius.ui.original_price_details'|trans }}
+        <br/>
+        {{ 'sylius.ui.minimum_price_details'|trans }}
+    </div>
+    <div id="sylius_product_variant_channelPricings">
+        {{ form_errors(form.channelPricings) }}
+        {% for channelCode, channelPricing in form.channelPricings %}
+            <div class="ui segment">
+                <div>
+                    <strong>{{ channelPricing.vars.label }}</strong>
+                </div>
+                {% if channelCode not in product_variant.product.channels|map(channel => channel.code) %}
+                    <div class="ui info message">
+                        {{ 'sylius.ui.product.product_not_active_in_channel'|trans }}
+                    </div>
+                {% endif %}
+                {{ form_row(channelPricing.price) }}
+                {{ form_row(channelPricing.originalPrice) }}
+                {{ form_row(channelPricing.minimumPrice) }}
+            </div>
+        {% endfor %}
+    </div>
+
+    {{ sylius_template_event(['sylius.admin.product_variant.' ~ action ~ '.tab_channel_pricings', 'sylius.admin.product_variant.channelPricings'], {'form': form}) }}
+</div>

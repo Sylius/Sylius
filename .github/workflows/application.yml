@@ -31,8 +31,8 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["7.4", "8.0"]
-                symfony: ["^4.4", "5.2.*", "5.3.*", "5.4.*"]
+                php: ["8.0"]
+                symfony: ["^5.4"]
 
         steps:
             -
@@ -90,6 +90,11 @@ jobs:
                 if: always() && steps.end-of-setup.outcome == 'success'
 
             -
+                name: Validate Container
+                run: bin/console lint:container
+                if: always() && steps.end-of-setup.outcome == 'success'
+                
+            -
                 name: Validate Yaml files
                 run: bin/console lint:yaml src
                 if: always() && steps.end-of-setup.outcome == 'success'
@@ -102,6 +107,15 @@ jobs:
             -
                 name: Run PHPStan
                 run: vendor/bin/phpstan analyse
+                if: always() && steps.end-of-setup.outcome == 'success'
+            
+            -
+                name: Run ComposerRequireChecker
+                run: |
+                    (cat composer.json | jq '.["autoload-dev"]["psr-4"] |= . + {"Sylius\\Behat\\": "src/Sylius/Behat/"}' | jq 'del(.autoload["psr-4"]["Sylius\\Behat\\"])') > _composer.json
+                    mv _composer.json composer.json
+                    composer dump-autoload
+                    composer-require-checker check --config-file=composer-require-checker.json
                 if: always() && steps.end-of-setup.outcome == 'success'
 
     architecture-tests:
@@ -136,15 +150,13 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["7.4", "8.0"]
-                symfony: ["^4.4", "^5.2"]
+                php: ["8.0"]
+                symfony: ["^5.4"]
 
         steps:
-            -
-                uses: actions/checkout@v2
+            -   uses: actions/checkout@v2
 
-            -
-                name: Setup PHP
+            -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: "${{ matrix.php }}"
@@ -153,11 +165,68 @@ jobs:
                     tools: symfony
                     coverage: none
 
+            -   name: Restrict Symfony version
+                if: matrix.symfony != ''
+                run: |
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.13.4"
+                    composer config extra.symfony.require "${{ matrix.symfony }}"
+            -   name: Get Composer cache directory
+                id: composer-cache
+                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            -   name: Cache Composer
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
+                    restore-keys: |
+                        ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
+            -   name: Install PHP dependencies
+                run: composer update --no-interaction --no-scripts
+                id: end-of-setup
+
+            -   name: Run PHPSpec
+                run: vendor/bin/phpspec run --ansi --no-interaction -f dot
+
+    test-application-without-frontend-postgres:
+        runs-on: ubuntu-latest
+
+        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgresSQL ${{ matrix.postgres }})"
+        strategy:
+            matrix:
+                php: ["8.0"]
+                symfony: ["^5.4"]
+                postgres: ["13.3"]
+
+        env:
+            APP_ENV: test_cached
+            DATABASE_URL: "pgsql://postgres:postgres@127.0.0.1/sylius?serverVersion=${{ matrix.postgres }}"
+
+        steps:
+            -
+                uses: actions/checkout@v2
+            -
+                name: Shutdown default MySQL
+                run: sudo service mysql stop
+            -
+                uses: harmon758/postgresql-action@v1
+                with:
+                    postgresql version: "${{ matrix.postgres }}"
+                    postgresql password: "postgres"
+            -
+                name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: "${{ matrix.php }}"
+                    ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=0, opcache.memory_consumption=256, opcache.max_accelerated_files=32531, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
+                    extensions: intl, gd, opcache, pgsql, pdo_pgsql
+                    tools: symfony
+                    coverage: none
             -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.13.4"
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -
@@ -177,13 +246,152 @@ jobs:
             -
                 name: Install PHP dependencies
                 run: composer update --no-interaction --no-scripts
-                id: end-of-setup
 
             -
-                name: Run PHPSpec
-                run: vendor/bin/phpspec run --ansi --no-interaction -f dot
+                name: Dump the environment
+                run: |
+                    echo "DATABASE_URL=$DATABASE_URL" >> .env.$APP_ENV
+                    composer dump-env $APP_ENV
 
-    test-application-without-frontend:
+            -
+                name: Warmup cache
+                run: bin/console cache:warmup
+
+            -
+                name: Make filesystem readonly
+                run: chmod -R 555 app bin config docs features src templates tests translations vendor
+
+            -
+                name: Prepare application database
+                run: |
+                    APP_DEBUG=1 bin/console doctrine:database:create -vvv
+                    bin/console doctrine:schema:up --force -vvv
+                    bin/console doctrine:schema:validate
+                continue-on-error: true
+
+    test-application-without-frontend-mariadb:
+        runs-on: ubuntu-latest
+
+        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }})"
+        strategy:
+            matrix:
+                php: ["8.0"]
+                symfony: ["^5.4"]
+                mariadb: ["10.4.10"]
+
+        env:
+            APP_ENV: test_cached
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=mariadb-${{ matrix.mariadb }}"
+
+        steps:
+            -
+                uses: actions/checkout@v2
+            -
+                name: Shutdown default MySQL
+                run: sudo service mysql stop
+            -
+                uses: getong/mariadb-action@v1.1
+                with:
+                    mariadb version: "${{ matrix.mariadb }}"
+                    mysql root password: root
+            -
+                name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: "${{ matrix.php }}"
+                    ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=0, opcache.memory_consumption=256, opcache.max_accelerated_files=32531, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
+                    extensions: intl, gd, opcache, mysql, pdo_mysql
+                    tools: symfony
+                    coverage: none
+            -
+                name: Restrict Symfony version
+                if: matrix.symfony != ''
+                run: |
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
+                    composer config extra.symfony.require "${{ matrix.symfony }}"
+
+            -
+                name: Get Composer cache directory
+                id: composer-cache
+                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            -
+                name: Cache Composer
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
+                    restore-keys: |
+                        ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
+
+            -
+                name: Install PHP dependencies
+                run: composer update --no-interaction --no-scripts
+
+            -
+                name: Dump the environment
+                run: |
+                    echo "DATABASE_URL=$DATABASE_URL" >> .env.$APP_ENV
+                    composer dump-env $APP_ENV
+
+            -
+                name: Warmup cache
+                run: bin/console cache:warmup
+
+            -
+                name: Make filesystem readonly
+                run: chmod -R 555 app bin config docs features src templates tests translations vendor
+
+            -
+                name: Prepare application database
+                run: |
+                    APP_DEBUG=1 bin/console doctrine:database:create -vvv
+                    bin/console doctrine:migrations:migrate -n -vvv
+
+            -
+                name: Test provided migrations
+                run: |
+                    bin/console doctrine:migrations:migrate first --no-interaction
+                    bin/console doctrine:migrations:migrate latest --no-interaction
+                    bin/console doctrine:schema:validate --skip-mapping -vvv
+                continue-on-error: true
+
+            -
+                name: Test installer
+                run: bin/console sylius:install --no-interaction -vvv
+                continue-on-error: true
+
+            -
+                name: Load fixtures
+                run: bin/console sylius:fixtures:load default --no-interaction
+                continue-on-error: true
+
+            -
+                name: Run PHPUnit
+                run: vendor/bin/phpunit --colors=always
+                continue-on-error: true
+
+            -
+                name: Run CLI Behat
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --rerun
+                continue-on-error: true
+
+            -
+                name: Run non-JS Behat
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli" --rerun
+                continue-on-error: true
+
+            -
+                name: Upload Behat logs
+                uses: actions/upload-artifact@v2
+                if: failure()
+                with:
+                    name: "Behat logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
+                    path: etc/build/
+                    if-no-files-found: ignore
+                continue-on-error: true
+
+    test-application-without-frontend-mysql:
         runs-on: ubuntu-latest
 
         name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }})"
@@ -193,9 +401,9 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["7.4", "8.0"]
-                symfony: ["^4.4", "5.2.*", "5.3.*", "5.4.*"]
-                node: ["14.x"]
+                php: ["8.0"]
+                symfony: ["^5.4"]
+                node: ["14.x", "16.x"]
                 mysql: ["5.7", "8.0"]
 
         env:
@@ -319,9 +527,9 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["7.4", "8.0"]
-                symfony: ["^4.4", "5.2.*", "5.3.*", "5.4.*"]
-                node: ["14.x"]
+                php: ["8.0"]
+                symfony: ["^5.4"]
+                node: ["14.x", "16.x"]
                 mysql: ["5.7", "8.0"]
 
         env:
@@ -463,7 +671,7 @@ jobs:
 
         if: failure() && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'release')
 
-        needs: [static-checks, test-application-without-frontend, test-application-with-frontend]
+        needs: [static-checks, test-application-without-frontend-mysql, test-application-without-frontend-postgres, test-application-without-frontend-mariadb, test-application-with-frontend]
 
         name: "Notify about build failure"
 

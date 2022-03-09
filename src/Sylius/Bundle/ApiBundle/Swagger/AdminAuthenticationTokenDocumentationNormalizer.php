@@ -19,14 +19,10 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 /** @experimental */
 final class AdminAuthenticationTokenDocumentationNormalizer implements NormalizerInterface
 {
-    private NormalizerInterface $decoratedNormalizer;
-
-    private string $apiRoute;
-
-    public function __construct(NormalizerInterface $decoratedNormalizer, string $apiRoute)
-    {
-        $this->decoratedNormalizer = $decoratedNormalizer;
-        $this->apiRoute = $apiRoute;
+    public function __construct(
+        private NormalizerInterface $decoratedNormalizer,
+        private string $apiRoute
+    ) {
     }
 
     public function supportsNormalization($data, $format = null): bool

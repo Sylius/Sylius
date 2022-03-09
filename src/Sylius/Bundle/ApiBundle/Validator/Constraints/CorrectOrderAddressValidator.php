@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
-use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
+use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -23,17 +23,14 @@ use Webmozart\Assert\Assert;
 
 final class CorrectOrderAddressValidator extends ConstraintValidator
 {
-    private RepositoryInterface $countryRepository;
-
-    public function __construct(RepositoryInterface $countryRepository)
+    public function __construct(private RepositoryInterface $countryRepository)
     {
-        $this->countryRepository = $countryRepository;
     }
 
     public function validate($value, Constraint $constraint): void
     {
-        /** @var AddressOrder $value */
-        Assert::isInstanceOf($value, AddressOrder::class);
+        /** @var UpdateCart $value */
+        Assert::isInstanceOf($value, UpdateCart::class);
 
         /** @var CorrectOrderAddress $constraint */
         Assert::isInstanceOf($constraint, CorrectOrderAddress::class);

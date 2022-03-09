@@ -18,7 +18,7 @@
     <services>
         <defaults public="false" />
 
-        <service id="sylius.context.cart.token_value_based" class="Sylius\Bundle\ApiBundle\Context\TokenValueBasedCartContext">
+        <service id="Sylius\Bundle\ApiBundle\Context\TokenValueBasedCartContext">
             <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.repository.order" />
             <argument>%sylius.security.new_api_route%</argument>

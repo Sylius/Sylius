@@ -21,27 +21,24 @@ use Webmozart\Assert\Assert;
 
 final class ChannelBasedPaymentMethodsResolver implements PaymentMethodsResolverInterface
 {
-    private PaymentMethodRepositoryInterface $paymentMethodRepository;
-
-    public function __construct(PaymentMethodRepositoryInterface $paymentMethodRepository)
+    public function __construct(private PaymentMethodRepositoryInterface $paymentMethodRepository)
     {
-        $this->paymentMethodRepository = $paymentMethodRepository;
     }
 
-    public function getSupportedMethods(BasePaymentInterface $payment): array
+    public function getSupportedMethods(BasePaymentInterface $subject): array
     {
-        /** @var PaymentInterface $payment */
-        Assert::isInstanceOf($payment, PaymentInterface::class);
-        Assert::true($this->supports($payment), 'This payment method is not support by resolver');
+        /** @var PaymentInterface $subject */
+        Assert::isInstanceOf($subject, PaymentInterface::class);
+        Assert::true($this->supports($subject), 'This payment method is not support by resolver');
 
-        return $this->paymentMethodRepository->findEnabledForChannel($payment->getOrder()->getChannel());
+        return $this->paymentMethodRepository->findEnabledForChannel($subject->getOrder()->getChannel());
     }
 
-    public function supports(BasePaymentInterface $payment): bool
+    public function supports(BasePaymentInterface $subject): bool
     {
-        return $payment instanceof PaymentInterface &&
-            null !== $payment->getOrder() &&
-            null !== $payment->getOrder()->getChannel()
+        return $subject instanceof PaymentInterface &&
+            null !== $subject->getOrder() &&
+            null !== $subject->getOrder()->getChannel()
         ;
     }
 }

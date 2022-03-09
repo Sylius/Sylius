@@ -23,27 +23,18 @@ use Sylius\Component\Order\Model\OrderInterface;
 
 final class CustomerAndChannelBasedCartContext implements CartContextInterface
 {
-    private CustomerContextInterface $customerContext;
-
-    private ChannelContextInterface $channelContext;
-
-    private OrderRepositoryInterface $orderRepository;
-
     public function __construct(
-        CustomerContextInterface $customerContext,
-        ChannelContextInterface $channelContext,
-        OrderRepositoryInterface $orderRepository
+        private CustomerContextInterface $customerContext,
+        private ChannelContextInterface $channelContext,
+        private OrderRepositoryInterface $orderRepository
     ) {
-        $this->customerContext = $customerContext;
-        $this->channelContext = $channelContext;
-        $this->orderRepository = $orderRepository;
     }
 
     public function getCart(): OrderInterface
     {
         try {
             $channel = $this->channelContext->getChannel();
-        } catch (ChannelNotFoundException $exception) {
+        } catch (ChannelNotFoundException) {
             throw new CartNotFoundException('Sylius was not able to find the cart, as there is no current channel.');
         }
 

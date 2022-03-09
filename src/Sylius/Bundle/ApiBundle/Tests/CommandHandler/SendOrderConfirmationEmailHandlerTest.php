@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Tests\Mailer;
+namespace Sylius\Bundle\ApiBundle\Tests\CommandHandler;
 
 use Prophecy\Prophecy\ObjectProphecy;
-use Sylius\Bundle\ApiBundle\Command\SendOrderConfirmation;
-use Sylius\Bundle\ApiBundle\CommandHandler\SendOrderConfirmationHandler;
+use Sylius\Bundle\ApiBundle\Command\Checkout\SendOrderConfirmation;
+use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendOrderConfirmationHandler;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;

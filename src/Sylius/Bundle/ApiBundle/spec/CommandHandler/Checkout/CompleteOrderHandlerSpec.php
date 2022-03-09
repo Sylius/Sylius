@@ -18,6 +18,7 @@ use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Event\OrderCompleted;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -40,12 +41,15 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         OrderInterface $order,
         FactoryInterface $stateMachineFactory,
-        MessageBusInterface $eventBus
+        MessageBusInterface $eventBus,
+        CustomerInterface $customer
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
+
+        $order->getCustomer()->willReturn($customer);
 
         $order->setNotes(null)->shouldNotBeCalled();
 
@@ -71,10 +75,13 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         OrderInterface $order,
         FactoryInterface $stateMachineFactory,
-        MessageBusInterface $eventBus
+        MessageBusInterface $eventBus,
+        CustomerInterface $customer
     ): void {
         $completeOrder = new CompleteOrder('ThankYou');
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
+
+        $order->getCustomer()->willReturn($customer);
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
@@ -115,15 +122,35 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         StateMachineInterface $stateMachine,
         OrderInterface $order,
-        FactoryInterface $stateMachineFactory
+        FactoryInterface $stateMachineFactory,
+        CustomerInterface $customer
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
+        $order->getCustomer()->willReturn($customer);
+
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can(OrderCheckoutTransitions::TRANSITION_COMPLETE)->willReturn(false);
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('__invoke', [$completeOrder])
+        ;
+    }
+
+    function it_throws_an_exception_if_order_customer_is_null(
+        OrderRepositoryInterface $orderRepository,
+        OrderInterface $order
+    ): void {
+        $completeOrder = new CompleteOrder();
+        $completeOrder->setOrderTokenValue('ORDERTOKEN');
+
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
+
+        $order->getCustomer()->willReturn(null);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)

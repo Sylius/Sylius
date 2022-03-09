@@ -24,11 +24,8 @@ final class ShippingCountryRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'shipping_country';
 
-    private RepositoryInterface $countryRepository;
-
-    public function __construct(RepositoryInterface $countryRepository)
+    public function __construct(private RepositoryInterface $countryRepository)
     {
-        $this->countryRepository = $countryRepository;
     }
 
     /**

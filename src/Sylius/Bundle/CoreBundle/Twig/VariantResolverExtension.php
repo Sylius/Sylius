@@ -19,11 +19,8 @@ use Twig\TwigFilter;
 
 final class VariantResolverExtension extends AbstractExtension
 {
-    private VariantResolverHelper $helper;
-
-    public function __construct(VariantResolverHelper $helper)
+    public function __construct(private VariantResolverHelper $helper)
     {
-        $this->helper = $helper;
     }
 
     public function getFilters(): array

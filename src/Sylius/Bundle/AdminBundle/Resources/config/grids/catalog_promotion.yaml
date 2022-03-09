@@ -1,0 +1,57 @@
+sylius_grid:
+    grids:
+        sylius_admin_catalog_promotion:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.catalog_promotion.class%"
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                    sortable: ~
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    sortable: ~
+                startDate:
+                    type: datetime
+                    label: sylius.ui.start_date
+                    sortable: ~
+                    options:
+                        format: Y-m-d H:i
+                endDate:
+                    type: datetime
+                    label: sylius.ui.end_date
+                    sortable: ~
+                    options:
+                        format: Y-m-d H:i
+                priority:
+                    type: string
+                    label: sylius.ui.priority
+                    sortable: ~
+                channels:
+                    type: twig
+                    label: sylius.ui.channels
+                    options:
+                        template: '@SyliusAdmin/Grid/Field/_channels.html.twig'
+                state:
+                    type: twig
+                    label: sylius.ui.state
+                    options:
+                        template: '@SyliusAdmin/Common/Label/catalogPromotionState.html.twig'
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    show:
+                        type: show
+                    update:
+                        type: update

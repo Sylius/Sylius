@@ -33,7 +33,7 @@ Feature: Applying promotion coupon with per customer usage limit
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving no discount from valid coupon that has reached its per customer usage limit
         Given this coupon can be used once per customer
         And I placed an order "#00000022"
@@ -57,7 +57,7 @@ Feature: Applying promotion coupon with per customer usage limit
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
-    @ui
+    @ui @api
     Scenario: Cancelled orders affect per customer usage limit
         Given this coupon is set as non reusable after cancelling the order in which it has been used
         And this coupon can be used once per customer

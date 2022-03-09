@@ -23,6 +23,11 @@
         <service id="sylius.checker.order_payment_method_selection_requirement" class="Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementChecker" >
             <argument type="service" id="sylius.payment_methods_resolver"/>
         </service>
+
+        <service id="Sylius\Component\Core\Checker\CLIContextCheckerInterface" class="Sylius\Component\Core\Checker\CLIContextChecker">
+            <argument type="service" id="request_stack" />
+        </service>
+
         <service id="Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface" alias="sylius.checker.order_payment_method_selection_requirement" />
     </services>
 </container>

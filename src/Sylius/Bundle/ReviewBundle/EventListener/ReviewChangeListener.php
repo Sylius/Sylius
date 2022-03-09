@@ -19,11 +19,8 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 final class ReviewChangeListener
 {
-    private ReviewableRatingUpdaterInterface $averageRatingUpdater;
-
-    public function __construct(ReviewableRatingUpdaterInterface $averageRatingUpdater)
+    public function __construct(private ReviewableRatingUpdaterInterface $averageRatingUpdater)
     {
-        $this->averageRatingUpdater = $averageRatingUpdater;
     }
 
     public function postPersist(LifecycleEventArgs $args)

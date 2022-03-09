@@ -16,11 +16,13 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
-use Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
+use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
@@ -130,7 +132,10 @@ final class CartContext implements Context
             $tokenValue = $this->pickupCart();
         }
 
-        $this->commandBus->dispatch(ApplyCouponToCart::createFromData($tokenValue, $couponCode));
+        $updateCart = UpdateCart::createWithCouponData($couponCode);
+        $updateCart->setOrderTokenValue($tokenValue);
+
+        $this->commandBus->dispatch($updateCart);
     }
 
     private function pickupCart(): string
@@ -143,6 +148,16 @@ final class CartContext implements Context
 
         $commandPickupCart = new PickupCart($tokenValue);
         $commandPickupCart->setChannelCode($channelCode);
+
+        if ($this->sharedStorage->has('token') && $this->sharedStorage->has('user')) {
+            $user = $this->sharedStorage->get('user');
+
+            if ($user instanceof ShopUserInterface) {
+                /** @var CustomerInterface $customer */
+                $customer = $user->getCustomer();
+                $commandPickupCart->setEmail($customer->getEmail());
+            }
+        }
 
         $this->commandBus->dispatch($commandPickupCart);
 

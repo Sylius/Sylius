@@ -73,6 +73,7 @@ final class PromotionContext implements Context
 
     /**
      * @Given there is (also) a promotion :name
+     * @Given there is a promotion :name that applies to discounted products
      * @Given there is a promotion :name identified by :code code
      */
     public function thereIsPromotion(string $name, ?string $code = null): void
@@ -175,6 +176,19 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given there is a promotion :name that does not apply to discounted products
+     */
+    public function thereIsAPromotionThatDoesNotApplyToDiscountedProducts(string $name): void
+    {
+        $promotion = $this->createPromotion($name);
+        $promotion->setAppliesToDiscounted(false);
+
+        $this->promotionRepository->add($promotion);
+
+        $this->sharedStorage->set('promotion', $promotion);
+    }
+
+    /**
      * @Given /^(this promotion) has "([^"]+)", "([^"]+)" and "([^"]+)" coupons/
      */
     public function thisPromotionHasCoupons(PromotionInterface $promotion, string ...$couponCodes): void
@@ -185,6 +199,16 @@ final class PromotionContext implements Context
         }
 
         $promotion->setCouponBased(true);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this promotion) does not apply on discounted products$/
+     */
+    public function thisPromotionDoesNotApplyOnDiscountedProducts(PromotionInterface $promotion): void
+    {
+        $promotion->setAppliesToDiscounted(false);
 
         $this->objectManager->flush();
     }
@@ -765,6 +789,39 @@ final class PromotionContext implements Context
         string $suffix
     ): void {
         $this->generateCoupons($amount, $promotion, $codeLength, null, $suffix);
+    }
+
+    /**
+     * @Given /^(this promotion) is not available in any channel$/
+     */
+    public function thisPromotionIsNotAvailableInAnyChannel(PromotionInterface $promotion): void
+    {
+        /** @var ChannelInterface $channel */
+        foreach ($promotion->getChannels() as $channel) {
+            $promotion->removeChannel($channel);
+        }
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this promotion) has usage limit equal to (\d+)$/
+     */
+    public function thisPromotionHasUsageLimitEqualTo(PromotionInterface $promotion, int $usageLimit): void
+    {
+        $promotion->setUsageLimit($usageLimit);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this promotion) usage limit is already reached$/
+     */
+    public function thisPromotionUsageLimitIsAlreadyReached(PromotionInterface $promotion): void
+    {
+        $promotion->setUsed($promotion->getUsageLimit());
+
+        $this->objectManager->flush();
     }
 
     private function getTaxonFilterConfiguration(array $taxonCodes): array

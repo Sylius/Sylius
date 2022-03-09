@@ -116,6 +116,46 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return (float) $this->getElement('average_rating')->getAttribute('data-test-average-rating');
     }
 
+    public function getCatalogPromotionName(): string
+    {
+        return explode(' - ', $this->getElement('catalog_promotion')->getText())[0];
+    }
+
+    public function hasCatalogPromotionApplied(string $name): bool
+    {
+        $catalogPromotions = $this->getDocument()->findAll('css', '.column .promotion_label');
+        foreach ($catalogPromotions as $catalogPromotion) {
+            if (explode(' - ', $catalogPromotion->getText())[0] === $name) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function getCatalogPromotions(): array
+    {
+        $catalogPromotions = [];
+
+        /** @var NodeElement $catalogPromotion */
+        foreach ($this->getElement('product_price_content')->findAll('css', '.promotion_label') as $catalogPromotion) {
+            $catalogPromotions[] = explode(' - ', $catalogPromotion->getText())[0];
+        }
+
+        return $catalogPromotions;
+    }
+
+    public function getCatalogPromotionNames(): array
+    {
+        /** @var NodeElement $productPriceContent */
+        $productPriceContent = $this->getElement('product_price_content');
+        $catalogPromotions = $productPriceContent->findAll('css', '.promotion_label');
+
+        return array_map(function (NodeElement $element): string {
+            return $element->getText();
+        }, $catalogPromotions);
+    }
+
     public function getCurrentUrl(): string
     {
         return $this->getDriver()->getCurrentUrl();
@@ -138,9 +178,18 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getElement('product_price')->getText();
     }
 
-    public function getOriginalPrice(): string
+    public function getOriginalPrice(): ?string
     {
-        return $this->getElement('product_original_price')->getText();
+        $originalPrice = $this->getElement('product_original_price');
+
+        if (
+            $originalPrice->getAttribute('style') !== null &&
+            strpos($originalPrice->getAttribute('style'), 'display: none') !== false
+        ) {
+            return null;
+        }
+
+        return $originalPrice->getText();
     }
 
     public function isOriginalPriceVisible(): bool
@@ -235,7 +284,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function selectVariant(string $variantName): void
     {
-        $variantRadio = $this->getElement('variant_radio', ['%variantName%' => $variantName]);
+        try {
+            $variantRadio = $this->getElement('variant_radio', ['%variantName%' => $variantName]);
+        } catch (ElementNotFoundException $exception) {
+            return;
+        }
 
         $driver = $this->getDriver();
         if ($driver instanceof Selenium2Driver || $driver instanceof ChromeDriver) {
@@ -304,23 +357,26 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'add_to_cart_button' => '[data-test-add-to-cart-button]',
+            'applied_promotions' => '#appliedPromotions',
             'association' => '[data-test-product-association="%associationName%"]',
             'attributes' => '[data-test-product-attributes]',
             'average_rating' => '[data-test-average-rating]',
+            'catalog_promotion' => '.promotion_label',
             'current_variant_input' => '[data-test-product-variants] td input:checked',
             'details' => '[data-tab="details"]',
             'main_image' => '[data-test-main-image]',
             'name' => '[data-test-product-name]',
             'option_select' => '#sylius_add_to_cart_cartItem_variant_%optionCode%',
             'out_of_stock' => '[data-test-product-out-of-stock]',
-            'product_price' => '[data-test-product-price]',
-            'product_original_price' => '[data-test-product-original-price]',
             'product_name' => '[data-test-product-name]',
+            'product_original_price' => '[data-test-product-price-content] [data-test-product-original-price]',
+            'product_price' => '[data-test-product-price-content] [data-test-product-price]',
+            'product_price_content' => '[data-test-product-price-content]',
+            'quantity' => '[data-test-quantity]',
             'reviews' => '[data-test-product-reviews]',
             'reviews_comment' => '[data-test-comment="%title%"]',
             'selecting_variants' => '[data-test-product-selecting-variant]',
             'tab' => '[data-test-tab="%name%"]',
-            'quantity' => '[data-test-quantity]',
             'validation_errors' => '[data-test-cart-validation-error]',
             'variant_radio' => '[data-test-product-variants] tbody tr:contains("%variantName%") input',
             'variants_rows' => '[data-test-product-variants-row]',

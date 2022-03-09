@@ -76,6 +76,8 @@ interface RequestInterface
 
     public function content(): string;
 
+    public function getContent(): array;
+
     public function setContent(array $content): void;
 
     public function updateContent(array $newValues): void;

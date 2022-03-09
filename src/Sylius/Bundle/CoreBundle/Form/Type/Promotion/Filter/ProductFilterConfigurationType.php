@@ -20,11 +20,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class ProductFilterConfigurationType extends AbstractType
 {
-    private DataTransformerInterface $productsToCodesTransformer;
-
-    public function __construct(DataTransformerInterface $productsToCodesTransformer)
+    public function __construct(private DataTransformerInterface $productsToCodesTransformer)
     {
-        $this->productsToCodesTransformer = $productsToCodesTransformer;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

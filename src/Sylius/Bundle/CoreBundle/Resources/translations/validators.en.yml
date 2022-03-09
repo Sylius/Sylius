@@ -3,6 +3,22 @@ sylius:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
             upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
+    catalog_promotion_action:
+        fixed_discount:
+            channel_not_configured: Configuration for one of the required channels is not provided.
+            invalid_channel: Provided configuration contains errors. At least one of the provided channel codes does not exist.
+            not_valid: Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.
+    catalog_promotion_scope:
+        invalid_type: Catalog promotion scope type is invalid. Please choose a valid type.
+        for_products:
+            invalid_products: Provided configuration contains errors. Please add only existing products.
+            not_empty: Provided configuration contains errors. Please add at least 1 product.
+        for_variants:
+            invalid_variants: Provided configuration contains errors. Please add only existing variants.
+            not_empty: Please add at least 1 variant.
+        for_taxons:
+            invalid_taxons: Provided configuration contains errors. Please add only existing taxons.
+            not_empty: Provided configuration contains errors. Please add at least 1 taxon.
     channel:
         base_currency:
             not_blank: Please enter channel base currency.
@@ -20,6 +36,8 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Please select shipping method.
+        email:
+            not_changeable: Email can't be changed for logged in customer.
     contact:
         email:
             invalid: This email is invalid.

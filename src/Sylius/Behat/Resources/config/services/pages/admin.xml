@@ -16,6 +16,7 @@
         <import resource="admin/dashboard.xml" />
         <import resource="admin/account.xml" />
         <import resource="admin/admin_user.xml" />
+        <import resource="admin/catalog_promotion.xml" />
         <import resource="admin/channel.xml" />
         <import resource="admin/country.xml" />
         <import resource="admin/currency.xml" />

@@ -40,7 +40,6 @@ sylius:
         presentation: 'Weergawe'
         product_reviews: 'Produk resensies'
         products: 'Produkte'
-        promotions: 'Promosies'
         province: 'Provinsie'
         provinces: 'Provinsies'
         ready: 'Gereed'

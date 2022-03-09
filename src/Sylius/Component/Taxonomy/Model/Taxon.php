@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
-class Taxon implements TaxonInterface
+class Taxon implements TaxonInterface, \Stringable
 {
     use TranslatableTrait {
         __construct as private initializeTranslationsCollection;
@@ -115,11 +115,11 @@ class Taxon implements TaxonInterface
         return $this->parent;
     }
 
-    public function setParent(?TaxonInterface $parent): void
+    public function setParent(?TaxonInterface $taxon): void
     {
-        $this->parent = $parent;
-        if (null !== $parent) {
-            $parent->addChild($this);
+        $this->parent = $taxon;
+        if (null !== $taxon) {
+            $taxon->addChild($this);
         }
     }
 

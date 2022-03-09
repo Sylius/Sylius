@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Описание
+            name: Округ
+            priority: Приоритет
         promotion:
             actions: Действия
             add_action: Добавить действие

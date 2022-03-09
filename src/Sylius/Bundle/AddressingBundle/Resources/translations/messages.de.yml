@@ -16,7 +16,7 @@ sylius:
             zone: Versandgebiet
         country:
             add_province: Bundesland hinzufügen
-            name: Datenbankname
+            name: Name
             provinces: Bundesländer
             select: Land auswählen
             enabled: Aktiviert

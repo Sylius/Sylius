@@ -53,6 +53,9 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 
         $loader->load('services.xml');
 
+        $container->setParameter('sylius_core.taxation.shipping_address_based_taxation', $config['shipping_address_based_taxation']);
+        $container->setParameter('sylius_core.catalog_promotions.batch_size', $config['catalog_promotions']['batch_size']);
+
         $env = $container->getParameter('kernel.environment');
         if ('test' === $env || 'test_cached' === $env) {
             $loader->load('test_services.xml');

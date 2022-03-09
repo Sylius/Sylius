@@ -18,7 +18,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 
-class User implements UserInterface
+class User implements UserInterface, \Stringable
 {
     use TimestampableTrait, ToggleableTrait;
 
@@ -198,9 +198,9 @@ class User implements UserInterface
         return $this->plainPassword;
     }
 
-    public function setPlainPassword(?string $password): void
+    public function setPlainPassword(?string $plainPassword): void
     {
-        $this->plainPassword = $password;
+        $this->plainPassword = $plainPassword;
     }
 
     public function getPassword(): ?string
@@ -208,9 +208,9 @@ class User implements UserInterface
         return $this->password;
     }
 
-    public function setPassword(?string $password): void
+    public function setPassword(?string $encodedPassword): void
     {
-        $this->password = $password;
+        $this->password = $encodedPassword;
     }
 
     public function getExpiresAt(): ?\DateTimeInterface

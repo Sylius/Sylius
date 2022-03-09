@@ -9,7 +9,7 @@ sylius:
             max_length: Attributname darf nicht länger als 1 Zeichen sein.|Attributname darf nicht länger als {{ limit }} Zeichen sein.
         code:
             not_blank: Bitte Attribut-Code eingeben.
-            regex: Der Attributname darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+            regex: Der Attribut-Code darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Dieser Code wird bereits verwendet.
         configuration:
             max_entries: Der Maximalwert muss größer oder gleich dem Mindestwert sein.

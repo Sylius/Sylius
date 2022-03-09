@@ -13,12 +13,17 @@ Feature: Switching the current currency
         When I browse that channel
         Then I should shop using the "EUR" currency
 
-    @ui
+    @ui @no-api
     Scenario: Showing available currencies
         When I browse that channel
         Then I should be able to shop using the "USD" currency
 
-    @ui
+    @api
+    Scenario: Showing available currencies
+        When I browse currencies
+        Then I should see "USD" and "EUR" in the list
+
+    @ui @no-api
     Scenario: Switching the current currency
         When I browse that channel
         And I switch to the "USD" currency

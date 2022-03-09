@@ -23,11 +23,8 @@ use Webmozart\Assert\Assert;
 
 final class CartItemAvailabilityValidator extends ConstraintValidator
 {
-    private AvailabilityCheckerInterface $availabilityChecker;
-
-    public function __construct(AvailabilityCheckerInterface $availabilityChecker)
+    public function __construct(private AvailabilityCheckerInterface $availabilityChecker)
     {
-        $this->availabilityChecker = $availabilityChecker;
     }
 
     public function validate($value, Constraint $constraint): void

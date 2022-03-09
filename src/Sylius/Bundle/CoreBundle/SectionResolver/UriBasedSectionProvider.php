@@ -18,14 +18,11 @@ use Webmozart\Assert\Assert;
 
 final class UriBasedSectionProvider implements SectionProviderInterface
 {
-    private RequestStack $requestStack;
-
     /** @var iterable|UriBasedSectionResolverInterface[] */
     private iterable $resolvers;
 
-    public function __construct(RequestStack $requestStack, iterable $resolvers)
+    public function __construct(private RequestStack $requestStack, iterable $resolvers)
     {
-        $this->requestStack = $requestStack;
         Assert::allIsInstanceOf($resolvers, UriBasedSectionResolverInterface::class);
         $this->resolvers = $resolvers;
     }
@@ -42,7 +39,7 @@ final class UriBasedSectionProvider implements SectionProviderInterface
         foreach ($this->resolvers as $resolver) {
             try {
                 return $resolver->getSection($uri);
-            } catch (SectionCannotBeResolvedException $exception) {
+            } catch (SectionCannotBeResolvedException) {
             }
         }
 

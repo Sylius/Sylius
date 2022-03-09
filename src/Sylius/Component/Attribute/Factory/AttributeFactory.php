@@ -20,14 +20,8 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class AttributeFactory implements AttributeFactoryInterface
 {
-    private FactoryInterface $factory;
-
-    private ServiceRegistryInterface $attributeTypesRegistry;
-
-    public function __construct(FactoryInterface $factory, ServiceRegistryInterface $attributeTypesRegistry)
+    public function __construct(private FactoryInterface $factory, private ServiceRegistryInterface $attributeTypesRegistry)
     {
-        $this->factory = $factory;
-        $this->attributeTypesRegistry = $attributeTypesRegistry;
     }
 
     public function createNew(): AttributeInterface

@@ -15,12 +15,6 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
-    <class name="Sylius\Bundle\ApiBundle\Command\ResendVerificationEmail">
-        <attribute name="email">
-            <group>shop:resend_verification_email:create</group>
-        </attribute>
-        <attribute name="localeCode" serialized-name="locale">
-            <group>shop:resend_verification_email:create</group>
-        </attribute>
+    <class name="Sylius\Bundle\ApiBundle\Command\Account\ResendVerificationEmail">
     </class>
 </serializer>

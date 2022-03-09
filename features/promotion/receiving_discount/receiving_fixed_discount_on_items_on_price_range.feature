@@ -45,21 +45,21 @@ Feature: Receiving fixed discount on products from specific price range
         Then its price should be decreased by "$10.00"
         And my cart total should be "$10.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving fixed discount on multiple items fulfilling range price criteria
         Given the promotion gives "$10.00" off on every product priced between "$50.00" and "$150.00"
         When I add 3 products "PHP T-Shirt" to the cart
         Then theirs price should be decreased by "$30.00"
         And my cart total should be "$270.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving fixed discount equal to the items total of my cart
         Given the promotion gives "$20.00" off on every product priced between "$10.00" and "$50.00"
         When I add 3 products "PHP Mug" to the cart
         Then theirs price should be decreased by "$60.00"
         And my cart total should be "$0.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving fixed discount equal to the items total of my cart even if the discount is bigger than the items total
         Given the promotion gives "$30.00" off on every product priced between "$10.00" and "$50.00"
         When I add 2 products "PHP Mug" to the cart

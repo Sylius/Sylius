@@ -26,20 +26,20 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^8.0",
         "ramsey/uuid": "^3.9",
         "stof/doctrine-extensions-bundle": "^1.4",
         "sylius/attribute": "^1.6",
         "sylius/resource-bundle": "^1.7",
-        "symfony/framework-bundle": "^4.4 || ^5.2"
+        "symfony/framework-bundle": "^5.4"
     },
     "require-dev": {
         "doctrine/orm": "^2.7",
         "phpspec/phpspec": "^7.1",
         "phpunit/phpunit": "^8.5",
-        "symfony/browser-kit": "^4.4 || ^5.2",
-        "symfony/dependency-injection": "^4.4 || ^5.2",
-        "symfony/form": "^4.4 || ^5.2"
+        "symfony/browser-kit": "^5.4",
+        "symfony/dependency-injection": "^5.4",
+        "symfony/form": "^5.4"
     },
     "extra": {
         "branch-alias": {

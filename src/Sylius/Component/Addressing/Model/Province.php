@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Model;
 
-class Province implements ProvinceInterface
+class Province implements ProvinceInterface, \Stringable
 {
     /** @var mixed */
     protected $id;

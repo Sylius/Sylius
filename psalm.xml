@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <psalm
-    totallyTyped="false"
+    errorLevel="2"
+    reportMixedIssues="false"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
@@ -127,8 +128,16 @@
             <errorLevel type="info">
                 <referencedMethod name="PHPUnit\Framework\TestCase::__construct" />
                 <referencedMethod name="Symfony\Bundle\SecurityBundle\Security\_FirewallMap::getFirewallConfig" />
+                <referencedMethod name="ApiPlatform\Core\Util\RequestParser::getQueryString" />
+                <referencedMethod name="ApiPlatform\Core\Util\RequestParser::parseRequestParams" />
             </errorLevel>
         </InternalMethod>
+
+        <InternalClass>
+            <errorLevel type="info">
+                <referencedClass name="ApiPlatform\Core\Util\RequestParser" />
+            </errorLevel>
+        </InternalClass>
 
         <InvalidDocblock>
             <errorLevel type="info">
@@ -153,6 +162,20 @@
         <MissingParamType errorLevel="info" />
 
         <RedundantConditionGivenDocblockType errorLevel="info" />
+
+        <UndefinedClass>
+            <errorLevel type="info">
+                <file name="src/Sylius/Bundle/AdminBundle/Controller/CustomerStatisticsController.php" />
+                <file name="src/Sylius/Bundle/AdminBundle/Controller/Dashboard/StatisticsController.php" />
+                <file name="src/Sylius/Bundle/AdminBundle/Controller/DashboardController.php" />
+                <file name="src/Sylius/Bundle/ShopBundle/Controller/ContactController.php" />
+                <file name="src/Sylius/Bundle/ShopBundle/Controller/CurrencySwitchController.php" />
+                <file name="src/Sylius/Bundle/ShopBundle/Controller/HomepageController.php" />
+                <file name="src/Sylius/Bundle/ShopBundle/Controller/LocaleSwitchController.php" />
+                <file name="src/Sylius/Bundle/ShopBundle/Controller/SecurityWidgetController.php" />
+                <file name="src/Sylius/Bundle/UiBundle/Controller/SecurityController.php" />
+            </errorLevel>
+        </UndefinedClass>
 
         <!-- level 4 issues - points to possible deficiencies in logic, higher false-positives -->
 

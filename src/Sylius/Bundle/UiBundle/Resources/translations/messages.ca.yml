@@ -190,7 +190,6 @@ sylius:
         product_reviews: 'Ressenyes de productes'
         products: 'Productes'
         promotion_coupons: 'Cupons'
-        promotions: 'Promocions'
         province: 'Província'
         provinces: 'Províncies'
         quantity: 'Quantitat'

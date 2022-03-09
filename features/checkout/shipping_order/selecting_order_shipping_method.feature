@@ -18,3 +18,9 @@ Feature: Selecting order shipping method
         When I select "Raven Post" shipping method
         And I complete the shipping step
         Then I should be on the checkout payment step
+
+    @api
+    Scenario: Selecting shipping method before addressing the order
+        Given I have product "Targaryen T-Shirt" in the cart
+        When I select "Raven Post" shipping method
+        Then I should be notified that the order should be addressed first

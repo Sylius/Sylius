@@ -25,15 +25,11 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 final class SyliusCollector extends DataCollector
 {
-    private ShopperContextInterface $shopperContext;
-
     public function __construct(
-        ShopperContextInterface $shopperContext,
+        private ShopperContextInterface $shopperContext,
         array $bundles,
         string $defaultLocaleCode
     ) {
-        $this->shopperContext = $shopperContext;
-
         $this->data = [
             'version' => Kernel::VERSION,
             'base_currency_code' => null,
@@ -104,12 +100,12 @@ final class SyliusCollector extends DataCollector
 
             $this->data['base_currency_code'] = $channel->getBaseCurrency()->getCode();
             $this->data['currency_code'] = $this->shopperContext->getCurrencyCode();
-        } catch (ChannelNotFoundException | CurrencyNotFoundException $exception) {
+        } catch (ChannelNotFoundException | CurrencyNotFoundException) {
         }
 
         try {
             $this->data['locale_code'] = $this->shopperContext->getLocaleCode();
-        } catch (LocaleNotFoundException $exception) {
+        } catch (LocaleNotFoundException) {
         }
     }
 

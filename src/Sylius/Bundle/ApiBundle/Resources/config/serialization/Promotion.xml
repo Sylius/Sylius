@@ -15,42 +15,62 @@
         <attribute name="id">
             <group>admin:promotion:read</group>
         </attribute>
+
         <attribute name="name">
             <group>admin:promotion:read</group>
+            <group>admin:promotion:create</group>
         </attribute>
+
         <attribute name="code">
             <group>admin:promotion:read</group>
+            <group>admin:promotion:create</group>
         </attribute>
+
         <attribute name="description">
             <group>admin:promotion:read</group>
         </attribute>
+
         <attribute name="priority">
             <group>admin:promotion:read</group>
         </attribute>
+
         <attribute name="exclusive">
             <group>admin:promotion:read</group>
         </attribute>
+
+        <attribute name="appliesToDiscounted">
+            <group>admin:promotion:read</group>
+            <group>admin:promotion:create</group>
+        </attribute>
+
         <attribute name="usageLimit">
             <group>admin:promotion:read</group>
         </attribute>
+
         <attribute name="startsAt">
             <group>admin:promotion:read</group>
         </attribute>
+
         <attribute name="endsAt">
             <group>admin:promotion:read</group>
         </attribute>
+
         <attribute name="couponBased">
             <group>admin:promotion:read</group>
         </attribute>
+
         <attribute name="coupons">
             <group>admin:promotion:read</group>
         </attribute>
+
         <attribute name="rules">
             <group>admin:promotion:read</group>
         </attribute>
+
         <attribute name="actions">
             <group>admin:promotion:read</group>
         </attribute>
+
         <attribute name="channels">
             <group>admin:promotion:read</group>
         </attribute>

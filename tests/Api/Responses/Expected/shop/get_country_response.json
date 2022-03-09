@@ -1,0 +1,8 @@
+{
+    "@context": "\/api\/v2\/contexts\/Country",
+    "@id": "\/api\/v2\/shop\/countries\/FR",
+    "@type": "Country",
+    "code": "FR",
+    "name": "France",
+    "provinces": []
+}

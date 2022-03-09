@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DependencyInjection\Compiler;
@@ -28,7 +37,7 @@ final class ReflectionExtractorHotfixPass implements CompilerPassInterface
         try {
             /** @psalm-suppress MissingDependency */
             $container->findDefinition('property_info.reflection_extractor')->setClass(ReflectionExtractor::class);
-        } catch (ServiceNotFoundException $exception) {
+        } catch (ServiceNotFoundException) {
             return;
         }
     }

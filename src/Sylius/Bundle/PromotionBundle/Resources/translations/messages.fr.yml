@@ -3,6 +3,17 @@
 
 sylius:
     form:
+        catalog_promotion:
+            action:
+                percentage_discount: Pourcentage de remise
+            description: Description
+            enabled: Activée
+            end_date: Date de fin
+            label: Libellé
+            name: Nom
+            priority: Priorité
+            start_date: Date de début
+            translations: Traductions
         promotion:
             actions: Actions
             add_action: Ajouter une action

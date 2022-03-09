@@ -1,6 +1,6 @@
 {% macro simple(paginator, options) %}
     {% if paginator.haveToPaginate() %}
-        {{ pagerfanta(paginator, 'semantic_ui_translated', options|default({})) }}
+        {{ pagerfanta(paginator, 'twig', options|default({'template': '@BabDevPagerfanta/semantic_ui.html.twig'})) }}
     {% endif %}
 {% endmacro %}
 

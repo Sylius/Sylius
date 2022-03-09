@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
-use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -26,20 +25,11 @@ use Webmozart\Assert\Assert;
 
 class UniqueReviewerEmailValidator extends ConstraintValidator
 {
-    private UserRepositoryInterface $userRepository;
-
-    private TokenStorageInterface $tokenStorage;
-
-    private AuthorizationCheckerInterface $authorizationChecker;
-
     public function __construct(
-        UserRepositoryInterface $userRepository,
-        TokenStorageInterface $tokenStorage,
-        AuthorizationCheckerInterface $authorizationChecker
+        private UserRepositoryInterface $userRepository,
+        private TokenStorageInterface $tokenStorage,
+        private AuthorizationCheckerInterface $authorizationChecker
     ) {
-        $this->userRepository = $userRepository;
-        $this->tokenStorage = $tokenStorage;
-        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function validate($value, Constraint $constraint): void

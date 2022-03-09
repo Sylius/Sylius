@@ -9,6 +9,8 @@ sylius:
             title: Název
         cart:
             coupon: Kupón
+        catalog_promotion:
+            channels: Kanály
         checkout:
             addressing:
                 different_billing_address: Použít jinou adresu pro fakturaci?

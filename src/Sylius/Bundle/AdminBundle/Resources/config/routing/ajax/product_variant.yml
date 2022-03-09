@@ -23,6 +23,22 @@ sylius_admin_ajax_product_variants_by_phrase:
                     locale: expr:service('sylius.context.locale').getLocaleCode()
                     productCode: $productCode
 
+sylius_admin_ajax_all_product_variants_by_phrase:
+    path: /search-all
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_variant:indexAction
+        _format: json
+        _sylius:
+            serialization_groups: [Autocomplete]
+            permission: true
+            repository:
+                method: findByPhrase
+                arguments:
+                    phrase: $phrase
+                    locale: expr:service('sylius.context.locale').getLocaleCode()
+                    limit: "!!int %sylius.ajax.product.variant_autocomplete_limit%"
+
 sylius_admin_ajax_product_variants_by_codes:
     path: /
     methods: [GET]
@@ -35,3 +51,16 @@ sylius_admin_ajax_product_variants_by_codes:
             repository:
                 method: findByCodesAndProductCode
                 arguments: [$code, $productCode]
+
+sylius_admin_ajax_all_product_variants_by_codes:
+    path: /all
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_variant:indexAction
+        _format: json
+        _sylius:
+            serialization_groups: [Autocomplete]
+            permission: true
+            repository:
+                method: findByCodes
+                arguments: [$code]

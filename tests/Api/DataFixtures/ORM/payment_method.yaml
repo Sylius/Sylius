@@ -1,0 +1,46 @@
+Sylius\Component\Core\Model\PaymentMethod:
+    payment_method_cash_on_delivery:
+        code: 'CASH_ON_DELIVERY'
+        enabled: true
+        gatewayConfig: '@gateway_offline'
+        currentLocale: 'en_US'
+        translations:
+            - '@payment_method_cash_on_delivery_translation'
+        channels: ['@channel_web']
+    payment_method_bank_transfer:
+        code: 'BANK_TRANSFER'
+        enabled: true
+        gatewayConfig: '@gateway_offline'
+        translations:
+            - '@payment_method_bank_transfer_translation'
+        channels: ['@channel_web']
+    disabled_payment_method:
+        code: 'DISABLED_PAYMENT_METHOD'
+        enabled: false
+        gatewayConfig: '@gateway_offline'
+        translations:
+            - '@disabled_payment_method_translation'
+        channels: ['@channel_web']
+
+Sylius\Bundle\PayumBundle\Model\GatewayConfig:
+    gateway_offline:
+        gatewayName: 'Offline'
+        factoryName: 'offline'
+        config: []
+
+Sylius\Component\Payment\Model\PaymentMethodTranslation:
+    payment_method_cash_on_delivery_translation:
+        name: 'Cash on delivery'
+        locale: 'en_US'
+        description: '<paragraph(2)>'
+        translatable: '@payment_method_cash_on_delivery'
+    payment_method_bank_transfer_translation:
+        name: 'Bank transfer'
+        locale: 'en_US'
+        description: '<paragraph(2)>'
+        translatable: '@payment_method_bank_transfer'
+    disabled_payment_method_translation:
+        name: 'Disabled payment method'
+        locale: 'en_US'
+        description: '<paragraph(2)>'
+        translatable: '@disabled_payment_method'

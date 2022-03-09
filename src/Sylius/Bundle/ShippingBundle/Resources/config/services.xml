@@ -73,10 +73,12 @@
                  label="sylius.form.shipping_calculator.per_unit_rate_configuration.label"/>
         </service>
 
-        <service id="sylius.calendar" class="Sylius\Bundle\ShippingBundle\Provider\Calendar"/>
+        <service id="sylius.calendar" class="Sylius\Bundle\ShippingBundle\Provider\Calendar">
+            <deprecated>The "%service_id%" is deprecated since Sylius 1.11 and will be removed in 2.0. Use "Sylius\Calendar\Provider\DateTimeProviderInterface" instead.</deprecated>
+        </service>
 
         <service id="sylius.shipping_date_assigner" class="Sylius\Bundle\ShippingBundle\Assigner\ShippingDateAssigner">
-            <argument type="service" id="sylius.calendar"/>
+            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface"/>
         </service>
 
         <service id="sylius.shipping_method_rule_checker.total_weight_greater_than_or_equal"

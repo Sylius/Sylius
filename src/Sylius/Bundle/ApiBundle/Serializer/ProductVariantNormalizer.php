@@ -1,12 +1,26 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
@@ -19,22 +33,15 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
 {
     use NormalizerAwareTrait;
 
-    private const ALREADY_CALLED = 'product_variant_normalizer_already_called';
-
-    private ProductVariantPricesCalculatorInterface $priceCalculator;
-
-    private ChannelContextInterface $channelContext;
-
-    private AvailabilityCheckerInterface $availabilityChecker;
+    private const ALREADY_CALLED = 'sylius_product_variant_normalizer_already_called';
 
     public function __construct(
-        ProductVariantPricesCalculatorInterface $priceCalculator,
-        ChannelContextInterface $channelContext,
-        AvailabilityCheckerInterface $availabilityChecker
+        private ProductVariantPricesCalculatorInterface $priceCalculator,
+        private ChannelContextInterface $channelContext,
+        private AvailabilityCheckerInterface $availabilityChecker,
+        private SectionProviderInterface $uriBasedSectionContext,
+        private IriConverterInterface $iriConverter
     ) {
-        $this->priceCalculator = $priceCalculator;
-        $this->channelContext = $channelContext;
-        $this->availabilityChecker = $availabilityChecker;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -43,13 +50,23 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         Assert::keyNotExists($context, self::ALREADY_CALLED);
 
         $context[self::ALREADY_CALLED] = true;
-
         $data = $this->normalizer->normalize($object, $format, $context);
+        $channel = $this->channelContext->getChannel();
 
         try {
-            $data['price'] = $this->priceCalculator->calculate($object, ['channel' => $this->channelContext->getChannel()]);
-        } catch (ChannelNotFoundException $exception) {
-            unset($data['price']);
+            $data['price'] = $this->priceCalculator->calculate($object, ['channel' => $channel]);
+            $data['originalPrice'] = $this->priceCalculator->calculateOriginal($object, ['channel' => $channel]);
+        } catch (ChannelNotFoundException) {
+            unset($data['price'], $data['originalPrice']);
+        }
+
+        /** @var ArrayCollection $appliedPromotions */
+        $appliedPromotions = $object->getAppliedPromotionsForChannel($channel);
+        if (!$appliedPromotions->isEmpty()) {
+            $data['appliedPromotions'] = array_map(
+                fn (CatalogPromotionInterface $catalogPromotion) => $this->iriConverter->getIriFromItem($catalogPromotion),
+                $appliedPromotions->toArray()
+            );
         }
 
         $data['inStock'] = $this->availabilityChecker->isStockAvailable($object);
@@ -63,11 +80,11 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
             return false;
         }
 
-        return $data instanceof ProductVariantInterface && $this->isNotAdminGetOperation($context);
+        return $data instanceof ProductVariantInterface && $this->isNotAdminApiSection();
     }
 
-    private function isNotAdminGetOperation(array $context): bool
+    private function isNotAdminApiSection(): bool
     {
-        return !isset($context['item_operation_name']) || !($context['item_operation_name'] === 'admin_get');
+        return !$this->uriBasedSectionContext->getSection() instanceof AdminApiSection;
     }
 }

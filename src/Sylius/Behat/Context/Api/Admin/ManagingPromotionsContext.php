@@ -43,6 +43,39 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I want to create a new promotion
+     */
+    public function iWantToCreateANewPromotion(): void
+    {
+        $this->client->buildCreateRequest();
+    }
+
+    /**
+     * @When I specify its :field as :value
+     * @When I :field it :value
+     */
+    public function iSpecifyItsAs(string $field, string $value): void
+    {
+        $this->client->addRequestData($field, $value);
+    }
+
+    /**
+     * @When I set it as not applies to discounted by catalog promotion items
+     */
+    public function iSetItAsNotAppliesToDiscountedByCatalogPromotionItems(): void
+    {
+        $this->client->updateRequestData(['appliesToDiscounted' => false]);
+    }
+
+    /**
+     * @When I add it
+     */
+    public function iAddIt(): void
+    {
+        $this->client->create();
+    }
+
+    /**
      * @Then I should see a single promotion in the list
      * @Then there should be :amount promotions
      */
@@ -105,7 +138,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iDeletePromotion(PromotionInterface $promotion): void
     {
-        $this->client->delete((string) $promotion->getId());
+        $this->client->delete($promotion->getCode());
     }
 
     /**
@@ -130,6 +163,24 @@ final class ManagingPromotionsContext implements Context
         Assert::false(
             $this->responseChecker->hasItemWithValue($response, 'name', $promotionName),
             sprintf('Promotion with name %s still exist', $promotionName)
+        );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully created
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
+    {
+        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getLastResponse()));
+    }
+
+    /**
+     * @Then the :promotion promotion should not applies to discounted items
+     */
+    public function thePromotionShouldNotAppliesToDiscountedItems(PromotionInterface $promotion): void
+    {
+        Assert::false(
+            $this->responseChecker->getValue($this->client->show($promotion->getCode()), 'appliesToDiscounted')
         );
     }
 }

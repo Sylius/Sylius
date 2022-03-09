@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
@@ -36,6 +37,21 @@ class ShipmentRepository extends EntityRepository implements ShipmentRepositoryI
             ->andWhere('o.order = :orderId')
             ->setParameter('shipmentId', $shipmentId)
             ->setParameter('orderId', $orderId)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    public function findOneByOrderTokenAndChannel($shipmentId, string $tokenValue, ChannelInterface $channel): ?ShipmentInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.order', 'orders')
+            ->andWhere('o.id = :shipmentId')
+            ->andWhere('orders.tokenValue = :tokenValue')
+            ->andWhere('orders.channel = :channel')
+            ->setParameter('shipmentId', $shipmentId)
+            ->setParameter('tokenValue', $tokenValue)
+            ->setParameter('channel', $channel)
             ->getQuery()
             ->getOneOrNullResult()
         ;

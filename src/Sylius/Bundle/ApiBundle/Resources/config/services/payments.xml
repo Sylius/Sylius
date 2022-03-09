@@ -16,7 +16,9 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="sylius.api.get_configuration_action" class="Sylius\Bundle\ApiBundle\Controller\Payment\GetPaymentConfiguration" public="true">
+        <defaults public="true" />
+
+        <service id="Sylius\Bundle\ApiBundle\Controller\Payment\GetPaymentConfiguration">
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProvider" />
         </service>

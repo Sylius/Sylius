@@ -19,25 +19,18 @@ use Webmozart\Assert\Assert;
 
 final class UniquePinGenerator implements GeneratorInterface
 {
-    private RandomnessGeneratorInterface $generator;
-
-    private UniquenessCheckerInterface $uniquenessChecker;
-
     private int $pinLength;
 
     /**
      * @throws \InvalidArgumentException
      */
     public function __construct(
-        RandomnessGeneratorInterface $generator,
-        UniquenessCheckerInterface $uniquenessChecker,
+        private RandomnessGeneratorInterface $generator,
+        private UniquenessCheckerInterface $uniquenessChecker,
         int $pinLength
     ) {
         Assert::greaterThanEq($pinLength, 1, 'The value of token length has to be at least 1.');
-
-        $this->generator = $generator;
         $this->pinLength = $pinLength;
-        $this->uniquenessChecker = $uniquenessChecker;
     }
 
     public function generate(): string

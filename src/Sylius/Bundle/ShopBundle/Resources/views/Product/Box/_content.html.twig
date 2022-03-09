@@ -13,8 +13,18 @@
     </a>
     <div class="content" {{ sylius_test_html_attribute('product-content') }}>
         <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="header sylius-product-name" {{ sylius_test_html_attribute('product-name', product.name) }}>{{ product.name }}</a>
+
         {% if not product.enabledVariants.empty() %}
-            <div class="sylius-product-price" {{ sylius_test_html_attribute('product-price') }}>{{ money.calculatePrice(product|sylius_resolve_variant) }}</div>
+            {% set appliedPromotions = (product|sylius_resolve_variant).getAppliedPromotionsForChannel(sylius.channel) %}
+            {% set price = money.calculatePrice(product|sylius_resolve_variant) %}
+            {% set originalPrice = money.calculateOriginalPrice(product|sylius_resolve_variant) %}
+
+            {% include '@SyliusShop/Product/Show/_catalogPromotionLabels.html.twig' with {'appliedPromotions': appliedPromotions, 'withDescription': false} %}
+
+            {% if price != originalPrice %}
+            <div class="sylius-product-original-price" {{ sylius_test_html_attribute('product-original-price') }}><del>{{ originalPrice }}</del></div>
+            {% endif %}
+            <div class="sylius-product-price" {{ sylius_test_html_attribute('product-price') }}>{{ price }}</div>
         {% endif %}
     </div>
 </div>

@@ -14,8 +14,10 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
         <import resource="services/eligibility_checkers.xml" />
+        <import resource="services/criteria.xml" />
         <import resource="services/forms.xml" />
         <import resource="services/command.xml" />
+        <import resource="services/validators.xml" />
     </imports>
 
     <services>
@@ -71,16 +73,12 @@
             <argument type="service" id="sylius.repository.promotion_coupon" />
         </service>
 
-        <service id="sylius.validator.promotion_subject_coupon" class="Sylius\Bundle\PromotionBundle\Validator\PromotionSubjectCouponValidator">
-            <argument type="service" id="sylius.promotion_eligibility_checker" />
-            <tag name="validator.constraint_validator" alias="sylius_promotion_subject_validator" />
-        </service>
-        <service id="sylius.validator.date_range" class="Sylius\Bundle\PromotionBundle\Validator\PromotionDateRangeValidator">
-            <tag name="validator.constraint_validator" alias="sylius_promotion_date_range_validator" />
-        </service>
-        <service id="sylius.validator.promotion_coupon_generation_amount" class="Sylius\Bundle\PromotionBundle\Validator\CouponGenerationAmountValidator">
-            <argument type="service" id="sylius.promotion_coupon_generator.percentage_policy" />
-            <tag name="validator.constraint_validator" alias="sylius_coupon_generation_amount_validator" />
+        <service
+            id="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface"
+            class="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProvider"
+        >
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.criteria" />
         </service>
     </services>
 </container>

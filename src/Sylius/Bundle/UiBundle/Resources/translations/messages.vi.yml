@@ -89,7 +89,6 @@ sylius:
         price: 'Giá'
         product_options: 'Tuỳ chọn cho sản phẩm'
         products: 'Sản phẩm'
-        promotions: 'Chương trình khuyến mãi'
         province: 'Tỉnh'
         provinces: 'Tỉnh'
         qty: 'Số lượng'

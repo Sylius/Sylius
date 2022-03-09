@@ -41,7 +41,9 @@ winzou_state_machine:
                     on: ["fail", "cancel"]
                     do: ["@sylius.order_processing.order_payment_processor.after_checkout", "process"]
                     args: ["object.getOrder()"]
+                    priority: -100
                 sylius_resolve_state:
                     on: ["complete", "process", "refund", "authorize"]
                     do: ["@sylius.state_resolver.order_payment", "resolve"]
                     args: ["object.getOrder()"]
+                    priority: -100

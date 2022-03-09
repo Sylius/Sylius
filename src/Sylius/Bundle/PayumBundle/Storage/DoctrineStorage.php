@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\Storage;
@@ -18,14 +27,9 @@ use Payum\Core\Storage\AbstractStorage;
  */
 class DoctrineStorage extends AbstractStorage
 {
-    /** @var ObjectManager */
-    protected $objectManager;
-
-    public function __construct(ObjectManager $objectManager, $modelClass)
+    public function __construct(protected ObjectManager $objectManager, $modelClass)
     {
         parent::__construct($modelClass);
-
-        $this->objectManager = $objectManager;
     }
 
     public function findBy(array $criteria): array
@@ -52,7 +56,7 @@ class DoctrineStorage extends AbstractStorage
 
     protected function doGetIdentity($model): Identity
     {
-        $modelMetadata = $this->objectManager->getClassMetadata(get_class($model));
+        $modelMetadata = $this->objectManager->getClassMetadata($model::class);
         $id = $modelMetadata->getIdentifierValues($model);
         if (count($id) > 1) {
             throw new \LogicException('Storage not support composite primary ids');

@@ -1,0 +1,18 @@
+<table class="ui very basic celled table">
+    <tbody>
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ 'sylius.ui.type'|trans }}</strong></td>
+        <td>{{ 'sylius.ui.for_taxons'|trans }}</td>
+    </tr>
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ 'sylius.ui.taxons'|trans }}</strong></td>
+        <td {{ sylius_test_html_attribute('scope-taxons') }}>
+            <ul class="ui bulleted list">
+                {% for taxon in scope.configuration.taxons %}
+                    <li>{{ taxon }}</li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>

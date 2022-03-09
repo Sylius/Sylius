@@ -9,6 +9,8 @@ sylius:
             title: Titulli
         cart:
             coupon: Kuponi
+        catalog_promotion:
+            channels: Kanalet
         checkout:
             addressing:
                 different_billing_address: Përdor adresë tjetër për faturën?

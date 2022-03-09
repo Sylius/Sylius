@@ -13,7 +13,7 @@ Feature: Products validation
         And this product attribute has set min value as 3 and max value as 30
         And I am logged in as an administrator
 
-    @ui
+    @ui @no-api
     Scenario: Adding a new simple product without specifying its code
         Given I want to create a new simple product
         When I name it "Dice Brewing" in "English (United States)"
@@ -22,7 +22,7 @@ Feature: Products validation
         Then I should be notified that code is required
         And product with name "Dice Brewing" should not be added
 
-    @ui
+    @ui @no-api
     Scenario: Adding a new simple product with duplicated code among products
         Given the store has a product "7 Wonders" with code "AWESOME_GAME"
         And I want to create a new simple product
@@ -33,7 +33,7 @@ Feature: Products validation
         Then I should be notified that code has to be unique
         And product with name "Dice Brewing" should not be added
 
-    @ui
+    @ui @no-api
     Scenario: Adding a new simple product with duplicated code among product variants
         Given the store has a product "7 Wonders"
         And this product has "7 Wonders: Cities" variant priced at "$30" identified by "AWESOME_GAME"
@@ -45,7 +45,7 @@ Feature: Products validation
         Then I should be notified that simple product code has to be unique
         And product with name "Dice Brewing" should not be added
 
-    @ui
+    @ui @no-api
     Scenario: Adding a new simple product without specifying its slug
         Given I want to create a new simple product
         When I specify its code as "BOARD_DICE_BREWING"
@@ -56,7 +56,7 @@ Feature: Products validation
         Then I should be notified that slug is required
         And product with name "Dice Brewing" should not be added
 
-    @ui
+    @ui @no-api
     Scenario: Adding a new simple product without specifying its name
         Given I want to create a new simple product
         When I specify its code as "BOARD_DICE_BREWING"
@@ -65,7 +65,7 @@ Feature: Products validation
         Then I should be notified that name is required
         And product with code "BOARD_DICE_BREWING" should not be added
 
-    @ui
+    @ui @no-api
     Scenario: Adding a new simple product without specifying its price for every channel
         Given the store operates on another channel named "Web-GB"
         When I want to create a new simple product
@@ -106,7 +106,7 @@ Feature: Products validation
         And product with code "BOARD_DICE_BREWING" should not be added
 
     @ui @api
-    Scenario: Trying to remove name from existing simple product
+    Scenario: Trying to remove name from existing product
         Given the store has a "Dice Brewing" product
         And I want to modify this product
         When I remove its name from "English (United States)" translation
@@ -133,7 +133,7 @@ Feature: Products validation
         And I save my changes
         Then I should be notified that I have to define product variants' prices for newly assigned channels first
 
-    @ui
+    @ui @no-api
     Scenario: Adding a new simple product with price
         Given the store has a "7 Wonders" configurable product with "7-wonders" slug
         And I want to create a new configurable product
@@ -144,7 +144,7 @@ Feature: Products validation
         Then I should be notified that slug has to be unique
         And product with code "7-WONDERS-BABEL" should not be added
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Trying to add a new product with a text attribute without specifying its value in default locale
         When I want to create a new simple product
         And I specify its code as "X-18-MUG"
@@ -156,7 +156,7 @@ Feature: Products validation
         Then I should be notified that I have to define the "Mug material" attribute in "English (United States)"
         And product with code "X-18-MUG" should not be added
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Trying to add a new product with a text attribute without specifying its value in additional locale with proper length
         When I want to create a new simple product
         And I specify its code as "X-18-MUG"

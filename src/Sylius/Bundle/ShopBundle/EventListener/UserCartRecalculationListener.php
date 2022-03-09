@@ -25,23 +25,11 @@ use Webmozart\Assert\Assert;
 
 final class UserCartRecalculationListener
 {
-    /** @var CartContextInterface */
-    private $cartContext;
-
-    /** @var OrderProcessorInterface */
-    private $orderProcessor;
-
-    /** @var SectionProviderInterface */
-    private $uriBasedSectionContext;
-
     public function __construct(
-        CartContextInterface $cartContext,
-        OrderProcessorInterface $orderProcessor,
-        SectionProviderInterface $uriBasedSectionContext
+        private CartContextInterface $cartContext,
+        private OrderProcessorInterface $orderProcessor,
+        private SectionProviderInterface $uriBasedSectionContext
     ) {
-        $this->cartContext = $cartContext;
-        $this->orderProcessor = $orderProcessor;
-        $this->uriBasedSectionContext = $uriBasedSectionContext;
     }
 
     /**
@@ -64,7 +52,7 @@ final class UserCartRecalculationListener
 
         try {
             $cart = $this->cartContext->getCart();
-        } catch (CartNotFoundException $exception) {
+        } catch (CartNotFoundException) {
             return;
         }
 

@@ -8,6 +8,8 @@ sylius:
             title: Tiêu đề
         cart:
             coupon: Phiếu giảm giá
+        catalog_promotion:
+            channels: Kênh
         promotion:
             channels: Kênh
         group:

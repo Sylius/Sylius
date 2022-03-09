@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Comparable;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\Product;
@@ -279,6 +280,21 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->setProduct($product);
         $this->addImage($image);
         $this->getImagesByType('thumbnail')->shouldBeLike(new ArrayCollection([$image->getWrappedObject()]));
+    }
+
+    function it_returns_channel_pricing_applied_promotions(
+        ChannelPricingInterface $channelPricing,
+        ChannelInterface $channel,
+        CatalogPromotionInterface $catalogPromotion,
+    ): void {
+        $channel->getCode()->willReturn('CHANNEL_WEB');
+        $channelPricing->setProductVariant($this)->shouldBeCalled();
+        $channelPricing->getChannelCode()->willReturn('CHANNEL_WEB');
+        $channelPricing->getAppliedPromotions()->willReturn(new ArrayCollection([$catalogPromotion->getWrappedObject()]));
+
+        $this->addChannelPricing($channelPricing);
+
+        $this->getAppliedPromotionsForChannel($channel)->shouldBeLike(new ArrayCollection([$catalogPromotion->getWrappedObject()]));
     }
 
     function it_is_comparable(): void

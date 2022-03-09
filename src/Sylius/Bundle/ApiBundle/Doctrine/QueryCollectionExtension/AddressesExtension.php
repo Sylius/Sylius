@@ -26,11 +26,8 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 /** @experimental */
 final class AddressesExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    private UserContextInterface $userContext;
-
-    public function __construct(UserContextInterface $userContext)
+    public function __construct(private UserContextInterface $userContext)
     {
-        $this->userContext = $userContext;
     }
 
     public function applyToCollection(
@@ -51,10 +48,12 @@ final class AddressesExtension implements ContextAwareQueryCollectionExtensionIn
 
         if ($user instanceof ShopUserInterface && in_array('ROLE_USER', $user->getRoles(), true)) {
             $rootAlias = $queryBuilder->getRootAliases()[0];
+            $customerParameterName = $queryNameGenerator->generateParameterName('customer');
+
             $queryBuilder
                 ->innerJoin(sprintf('%s.customer', $rootAlias), 'customer')
-                ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
-                ->setParameter('customer', $user->getCustomer())
+                ->andWhere(sprintf('%s.customer = :%s', $rootAlias, $customerParameterName))
+                ->setParameter($customerParameterName, $user->getCustomer())
             ;
 
             return;

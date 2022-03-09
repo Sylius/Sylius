@@ -17,13 +17,13 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 final class UserVerifiedAtToBooleanTransformer implements DataTransformerInterface
 {
-    public function transform($data)
+    public function transform($value)
     {
-        return (bool) $data;
+        return (bool) $value;
     }
 
-    public function reverseTransform($data)
+    public function reverseTransform($value)
     {
-        return $data ? new \DateTime() : null;
+        return $value ? new \DateTime() : null;
     }
 }

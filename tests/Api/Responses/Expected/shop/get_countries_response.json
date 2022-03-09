@@ -1,0 +1,29 @@
+{
+    "@context": "\/api\/v2\/contexts\/Country",
+    "@id": "\/api\/v2\/shop\/countries",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/countries\/US",
+            "@type": "Country",
+            "code": "US",
+            "name": "United States",
+            "provinces": []
+        },
+        {
+            "@id": "\/api\/v2\/shop\/countries\/FR",
+            "@type": "Country",
+            "code": "FR",
+            "name": "France",
+            "provinces": []
+        },
+        {
+            "@id": "\/api\/v2\/shop\/countries\/DE",
+            "@type": "Country",
+            "code": "DE",
+            "name": "Germany",
+            "provinces": []
+        }
+    ],
+    "hydra:totalItems": 3
+}

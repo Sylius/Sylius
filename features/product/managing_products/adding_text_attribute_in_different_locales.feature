@@ -12,7 +12,7 @@ Feature: Adding text attributes in different locales to a product
         And the store has a text product attribute "Mug material"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Adding a product with a text attribute in different locales
         When I want to create a new simple product
         And I specify its code as "mug"

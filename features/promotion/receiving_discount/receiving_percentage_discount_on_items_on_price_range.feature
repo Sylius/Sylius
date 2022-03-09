@@ -45,7 +45,7 @@ Feature: Receiving percentage discount on products from specific price range
         Then its price should be decreased by "$10.00"
         And my cart total should be "$10.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving percentage discount on multiple items fulfilling range price criteria
         Given this promotion gives "50%" off on every product priced between "$50.00" and "$150.00"
         When I add 3 products "PHP T-Shirt" to the cart

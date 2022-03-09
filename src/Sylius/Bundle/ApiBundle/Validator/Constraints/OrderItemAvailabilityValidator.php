@@ -25,16 +25,10 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class OrderItemAvailabilityValidator extends ConstraintValidator
 {
-    private OrderRepositoryInterface $orderRepository;
-
-    private AvailabilityCheckerInterface $availabilityChecker;
-
     public function __construct(
-        OrderRepositoryInterface $orderRepository,
-        AvailabilityCheckerInterface $availabilityChecker
+        private OrderRepositoryInterface $orderRepository,
+        private AvailabilityCheckerInterface $availabilityChecker
     ) {
-        $this->orderRepository = $orderRepository;
-        $this->availabilityChecker = $availabilityChecker;
     }
 
     public function validate($value, Constraint $constraint)

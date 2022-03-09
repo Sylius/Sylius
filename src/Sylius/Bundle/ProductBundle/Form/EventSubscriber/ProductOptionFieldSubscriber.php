@@ -23,11 +23,8 @@ use Webmozart\Assert\Assert;
 
 final class ProductOptionFieldSubscriber implements EventSubscriberInterface
 {
-    private ProductVariantResolverInterface $variantResolver;
-
-    public function __construct(ProductVariantResolverInterface $variantResolver)
+    public function __construct(private ProductVariantResolverInterface $variantResolver)
     {
-        $this->variantResolver = $variantResolver;
     }
 
     public static function getSubscribedEvents(): array

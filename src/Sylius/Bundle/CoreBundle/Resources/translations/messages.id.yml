@@ -9,6 +9,8 @@ sylius:
             title: Judul
         cart:
             coupon: Kupon
+        catalog_promotion:
+            channels: Saluran
         checkout:
             addressing:
                 different_billing_address: Menggunakan alamat berbeda untuk penagihan?

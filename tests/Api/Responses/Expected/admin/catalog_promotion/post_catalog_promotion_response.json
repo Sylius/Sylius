@@ -1,0 +1,50 @@
+{
+    "@context": "\/api\/v2\/contexts\/CatalogPromotion",
+    "@id": "\/api\/v2\/admin\/catalog-promotions\/tshirts_discount",
+    "@type": "CatalogPromotion",
+    "id": @integer@,
+    "name": "T-Shirts discount",
+    "code": "tshirts_discount",
+    "startDate": "2022-01-01 00:00:00",
+    "endDate": "2022-01-02 00:00:00",
+    "priority": 100,
+    "state": @string@,
+    "channels": [
+        "\/api\/v2\/admin\/channels\/WEB"
+    ],
+    "scopes": [
+        {
+            "@type": "CatalogPromotionScope",
+            "@id": @string@,
+            "id": @integer@,
+            "type": "for_variants",
+            "configuration": {
+                "variants": [
+                    "MUG"
+                ]
+            }
+        }
+    ],
+    "actions": [
+        {
+            "@type": "CatalogPromotionAction",
+            "@id": @string@,
+            "id": @integer@,
+            "type": "percentage_discount",
+            "configuration": {
+                "amount": 0.5
+            }
+        }
+    ],
+    "enabled": @boolean@,
+    "exclusive": false,
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/catalog-promotion-translations\/@integer@",
+            "@type": "CatalogPromotionTranslation",
+            "id": @integer@,
+            "label": "T-Shirts discount",
+            "description": "50% discount on every T-Shirt"
+        }
+    }
+}

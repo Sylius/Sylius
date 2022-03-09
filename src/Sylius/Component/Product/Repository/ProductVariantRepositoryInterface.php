@@ -43,10 +43,27 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
      */
     public function findByCodesAndProductCode(array $codes, string $productCode): array;
 
+    /**
+     * @param array|string[] $codes
+     *
+     * @return array|ProductVariantInterface[]
+     */
+    public function findByCodes(array $codes): array;
+
     public function findOneByIdAndProductId($id, $productId): ?ProductVariantInterface;
 
     /**
      * @return array|ProductVariantInterface[]
      */
     public function findByPhraseAndProductCode(string $phrase, string $locale, string $productCode): array;
+
+    /**
+     * @return array|ProductVariantInterface[]
+     */
+    public function findByPhrase(string $phrase, string $locale, ?int $limit = null): array;
+
+    /**
+     * @return array|string[]
+     */
+    public function getCodesOfAllVariants(): array;
 }

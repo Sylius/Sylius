@@ -53,8 +53,9 @@ final class CartContext implements Context
 
     /**
      * @When /^I see the summary of my (?:|previous )cart$/
+     * @When /^I check details of my cart$/
      */
-    public function iOpenCartSummaryPage()
+    public function iOpenCartSummaryPage(): void
     {
         $this->summaryPage->open();
     }
@@ -102,6 +103,7 @@ final class CartContext implements Context
     /**
      * @Then the grand total value should be :total
      * @Then my cart total should be :total
+     * @Then the cart total should be :total
      * @Then their cart total should be :total
      */
     public function myCartTotalShouldBe($total)
@@ -256,7 +258,7 @@ final class CartContext implements Context
      * @Given I added product :product to the cart
      * @Given he added product :product to the cart
      * @Given /^I (?:have|had) (product "[^"]+") in the cart$/
-     * @Given the customer added :product product to the cart
+     * @Given /^the customer (?:added|adds) ("[^"]+" product) to the cart$/
      * @Given /^I (?:add|added) ("[^"]+" product) to the (cart)$/
      * @When I add product :product to the cart
      * @When they add product :product to the cart
@@ -435,11 +437,38 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^I should see "([^"]+)" with unit price ("[^"]+") in my cart$/
+     * @Then /^I should see(?:| also) "([^"]+)" with unit price ("[^"]+") in my cart$/
+     * @Then /^I should see(?:| also) "([^"]+)" with discounted unit price ("[^"]+") in my cart$/
+     * @Then /^the product "([^"]+)" should have discounted unit price ("[^"]+") in the cart$/
      */
-    public function iShouldSeeProductWithUnitPriceInMyCart($productName, $unitPrice)
+    public function iShouldSeeProductWithUnitPriceInMyCart(string $productName, int $unitPrice): void
     {
         Assert::same($this->summaryPage->getItemUnitPrice($productName), $unitPrice);
+    }
+
+    /**
+     * @Then /^the product "([^"]+)" should have total price ("[^"]+") in the cart$/
+     */
+    public function theProductShouldHaveTotalPrice(string $productName, int $totalPrice): void
+    {
+        Assert::same($this->summaryPage->getItemTotal($productName), $totalPrice);
+    }
+
+    /**
+     * @Then /^I should see "([^"]+)" with original price ("[^"]+") in my cart$/
+     */
+    public function iShouldSeeWithOriginalPriceInMyCart(string $productName, int $originalPrice): void
+    {
+        Assert::same($this->summaryPage->getItemUnitRegularPrice($productName), $originalPrice);
+    }
+
+    /**
+     * @Then /^I should see "([^"]+)" only with unit price ("[^"]+") in my cart$/
+     */
+    public function iShouldSeeOnlyWithUnitPriceInMyCart(string $productName, int $unitPrice): void
+    {
+        $this->iShouldSeeProductWithUnitPriceInMyCart($productName, $unitPrice);
+        Assert::false($this->summaryPage->hasOriginalPrice($productName));
     }
 
     /**

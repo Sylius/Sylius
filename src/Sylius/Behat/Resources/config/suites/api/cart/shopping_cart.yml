@@ -11,10 +11,12 @@ default:
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.promotion
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.shipping_category
                 - sylius.behat.context.setup.shop_api_security
                 - sylius.behat.context.setup.user
+                - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
                 - sylius.behat.context.transform.cart
                 - sylius.behat.context.transform.channel

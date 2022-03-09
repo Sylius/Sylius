@@ -1,0 +1,5 @@
+{% form_theme field '@SyliusAdmin/Form/theme.html.twig' %}
+
+{{ form_row(field.taxons, {'remote_url': path('sylius_admin_ajax_taxon_by_name_phrase'), 'load_edit_url': path('sylius_admin_ajax_taxon_by_code')}) }}
+
+<div class="catalog-promotion-form-divider"></div>

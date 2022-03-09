@@ -5,8 +5,8 @@ Feature: Seeing detailed shipping fee on multiple channels with different base c
     I want to be able to see shipping fee in channel’s base currency
 
     Background:
-        Given the store operates on a channel named "Web-US" in "USD" currency
-        And the store operates on another channel named "Web-GB" in "GBP" currency
+        Given the store operates on a channel named "Web-US" in "USD" currency and with hostname "usa.cool-clothes.example"
+        And the store operates on another channel named "Web-GB" in "GBP" currency and with hostname "gb.cool-clothes.example"
         And the store ships to "United States"
         And the store has a zone "United States" with code "US"
         And this zone has the "United States" country member

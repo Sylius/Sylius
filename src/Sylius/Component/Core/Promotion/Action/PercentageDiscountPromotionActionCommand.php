@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Promotion\Action;
 
+use Sylius\Component\Core\Distributor\MinimumPriceDistributorInterface;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
@@ -25,16 +26,11 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
 {
     public const TYPE = 'order_percentage_discount';
 
-    private ProportionalIntegerDistributorInterface $distributor;
-
-    private UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator;
-
     public function __construct(
-        ProportionalIntegerDistributorInterface $distributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+        private ProportionalIntegerDistributorInterface $distributor,
+        private UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
+        private ?MinimumPriceDistributorInterface $minimumPriceDistributor = null
     ) {
-        $this->distributor = $distributor;
-        $this->unitsPromotionAdjustmentsApplicator = $unitsPromotionAdjustmentsApplicator;
     }
 
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
@@ -48,21 +44,41 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
 
         try {
             $this->isConfigurationValid($configuration);
-        } catch (\InvalidArgumentException $exception) {
+        } catch (\InvalidArgumentException) {
             return false;
         }
 
-        $promotionAmount = $this->calculateAdjustmentAmount($subject->getPromotionSubjectTotal(), $configuration['percentage']);
+        $subjectTotal = $this->getSubjectTotal($subject, $promotion);
+        $promotionAmount = $this->calculateAdjustmentAmount($subjectTotal, $configuration['percentage']);
+
         if (0 === $promotionAmount) {
             return false;
         }
 
-        $itemsTotal = [];
-        foreach ($subject->getItems() as $orderItem) {
-            $itemsTotal[] = $orderItem->getTotal();
+        if ($this->minimumPriceDistributor !== null) {
+            $splitPromotion = $this->minimumPriceDistributor->distribute($subject->getItems()->toArray(), $promotionAmount, $subject->getChannel(), $promotion->getAppliesToDiscounted());
+        } else {
+            $itemsTotal = [];
+            foreach ($subject->getItems() as $orderItem) {
+                if ($promotion->getAppliesToDiscounted()) {
+                    $itemsTotal[] = $orderItem->getTotal();
+
+                    continue;
+                }
+
+                $variant = $orderItem->getVariant();
+                if (!$variant->getAppliedPromotionsForChannel($subject->getChannel())->isEmpty()) {
+                    $itemsTotal[] = 0;
+
+                    continue;
+                }
+
+                $itemsTotal[] = $orderItem->getTotal();
+            }
+
+            $splitPromotion = $this->distributor->distribute($itemsTotal, $promotionAmount);
         }
 
-        $splitPromotion = $this->distributor->distribute($itemsTotal, $promotionAmount);
         $this->unitsPromotionAdjustmentsApplicator->apply($subject, $promotion, $splitPromotion);
 
         return true;
@@ -78,5 +94,10 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
     private function calculateAdjustmentAmount(int $promotionSubjectTotal, float $percentage): int
     {
         return -1 * (int) round($promotionSubjectTotal * $percentage);
+    }
+
+    private function getSubjectTotal(OrderInterface $order, PromotionInterface $promotion): int
+    {
+        return $promotion->getAppliesToDiscounted() ? $order->getPromotionSubjectTotal() : $order->getNonDiscountedItemsTotal();
     }
 }

@@ -361,11 +361,30 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I set it as not applies to discounted by catalog promotion items
+     */
+    public function iSetItAsNotAppliesToDiscountedByCatalogPromotionItems(): void
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->makeNotAppliesToDiscountedItem();
+    }
+
+    /**
      * @Then the :promotion promotion should be exclusive
      */
     public function thePromotionShouldBeExclusive(PromotionInterface $promotion)
     {
         $this->assertIfFieldIsTrue($promotion, 'exclusive');
+    }
+
+    /**
+     * @Then the :promotion promotion should not applies to discounted items
+     */
+    public function thePromotionShouldNotAppliesToDiscountedItems(PromotionInterface $promotion): void
+    {
+        $this->assertIfFieldIsFalse($promotion, 'applies_to_discounted');
     }
 
     /**
@@ -676,6 +695,38 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I add a new rule
+     */
+    public function iAddANewRule()
+    {
+        $this->createPage->addRule(null);
+    }
+
+    /**
+     * @When I add a new action
+     */
+    public function iAddANewAction()
+    {
+        $this->createPage->addAction(null);
+    }
+
+    /**
+     * @Then I should see the rule configuration form
+     */
+    public function iShouldSeeTheRuleConfigurationForm()
+    {
+        Assert::true($this->createPage->checkIfRuleConfigurationFormIsVisible(), 'Cart promotion rule configuration form is not visible.');
+    }
+
+    /**
+     * @Then I should see the action configuration form
+     */
+    public function iShouldSeeTheActionConfigurationForm()
+    {
+        Assert::true($this->createPage->checkIfActionConfigurationFormIsVisible(), 'Cart promotion action configuration form is not visible.');
+    }
+
+    /**
      * @param string $element
      * @param string $expectedMessage
      */
@@ -695,5 +746,12 @@ final class ManagingPromotionsContext implements Context
         $this->iWantToModifyAPromotion($promotion);
 
         Assert::true($this->updatePage->hasResourceValues([$field => 1]));
+    }
+
+    private function assertIfFieldIsFalse(PromotionInterface $promotion, $field): void
+    {
+        $this->iWantToModifyAPromotion($promotion);
+
+        Assert::false($this->updatePage->hasResourceValues([$field => 1]));
     }
 }

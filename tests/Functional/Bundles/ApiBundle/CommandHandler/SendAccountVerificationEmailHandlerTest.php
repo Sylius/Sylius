@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Tests\Functional\Bundles\ApiBundle\CommandHandler;
 
 use Prophecy\Prophecy\ObjectProphecy;
-use Sylius\Bundle\ApiBundle\Command\SendAccountVerificationEmail;
-use Sylius\Bundle\ApiBundle\CommandHandler\SendAccountVerificationEmailHandler;
+use Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail;
+use Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountVerificationEmailHandler;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\EmailChecker;

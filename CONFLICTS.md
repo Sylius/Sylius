@@ -7,11 +7,11 @@ references related issues.
 "symfony/error-handler": "^6.0", "symfony/redis-messenger": "^6.0", "symfony/stopwatch": "^6.0", "symfony/twig-bridge": "^6.0", 
 "symfony/var-dumper": "^6.0", "symfony/var-exporter": "^6.0",:
 
-   Symfony in version 5.2 is installing amqp-messenger, doctrine-messenger, error-handler, redis-messenger, stopwatch, 
-twig-bridge, var-dumper, var-exporter 6.0, which is not compatible with the current version of Sylius. This is not happening for Sf4.4, Sf5.3, Sf5.4. 
+   These libraries still happen to be installed with Sylius if no flex is used. As we don't support Sf6 yet they are conflicted. Installation of symfony/cache v6.0 results with following error:
+   ```
+   Uncaught Error: Class "Symfony\Component\Cache\DoctrineProvider" not found
+   ```
    
-   References: https://github.com/Sylius/Sylius/pull/13357
-
  - `symfony/password-hasher": "^6.0`:
 
    Symfony in version 5.3 change password hashing logic, and in version 6.0 they removed BC layer

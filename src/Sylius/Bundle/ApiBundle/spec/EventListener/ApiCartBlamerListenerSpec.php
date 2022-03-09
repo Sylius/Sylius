@@ -15,7 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Command\BlameCart;
+use Sylius\Bundle\ApiBundle\Command\Cart\BlameCart;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiOrdersSubSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionInterface;

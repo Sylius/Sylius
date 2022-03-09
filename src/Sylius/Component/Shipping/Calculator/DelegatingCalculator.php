@@ -18,11 +18,8 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 final class DelegatingCalculator implements DelegatingCalculatorInterface
 {
-    private ServiceRegistryInterface $registry;
-
-    public function __construct(ServiceRegistryInterface $registry)
+    public function __construct(private ServiceRegistryInterface $registry)
     {
-        $this->registry = $registry;
     }
 
     public function calculate(ShipmentInterface $subject): int

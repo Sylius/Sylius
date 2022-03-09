@@ -38,7 +38,7 @@ class CountryNameExtension extends AbstractExtension
 
         try {
             $countryName = Countries::getName($countryCode, $locale);
-        } catch (MissingResourceException $exception) {
+        } catch (MissingResourceException) {
             return $countryCode;
         }
 

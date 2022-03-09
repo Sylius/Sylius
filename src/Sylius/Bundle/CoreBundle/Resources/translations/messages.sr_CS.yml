@@ -9,6 +9,8 @@ sylius:
             title: Naziv
         cart:
             coupon: Kupon
+        catalog_promotion:
+            channels: Kanali
         checkout:
             payment_method: Način plaćanja
         promotion:

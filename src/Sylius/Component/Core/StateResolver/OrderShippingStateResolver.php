@@ -25,11 +25,8 @@ use Webmozart\Assert\Assert;
 
 final class OrderShippingStateResolver implements StateResolverInterface
 {
-    private FactoryInterface $stateMachineFactory;
-
-    public function __construct(FactoryInterface $stateMachineFactory)
+    public function __construct(private FactoryInterface $stateMachineFactory)
     {
-        $this->stateMachineFactory = $stateMachineFactory;
     }
 
     public function resolve(BaseOrderInterface $order): void

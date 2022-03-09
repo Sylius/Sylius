@@ -129,6 +129,14 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When /^I set its minimum price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
+     */
+    public function iSetItsMinimumPriceTo(string $price, ChannelInterface $channel): void
+    {
+        $this->createPage->specifyMinimumPrice($price, $channel);
+    }
+
+    /**
      * @When I remove its price for :channel channel
      */
     public function iRemoveItsPriceForChannel(ChannelInterface $channel): void
@@ -218,12 +226,24 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @Then /^the (variant with code "[^"]+") should be priced at (?:€|£|\$)([^"]+) for (channel "([^"]+)")$/
+     * @Then /^the (variant with code "[^"]+") should be priced at "(?:€|£|\$)([^"]+)" for (channel "([^"]+)")$/
      */
     public function theVariantWithCodeShouldBePricedAtForChannel(ProductVariantInterface $productVariant, string $price, ChannelInterface $channel)
     {
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
 
         Assert::same($this->updatePage->getPriceForChannel($channel), $price);
+    }
+
+    /**
+     * @Then /^the (variant with code "[^"]+") should have minimum price (?:€|£|\$)([^"]+) for (channel "([^"]+)")$/
+     * @Then /^the (variant with code "[^"]+") should have minimum price "(?:€|£|\$)([^"]+)" for (channel "([^"]+)")$/
+     */
+    public function theVariantWithCodeShouldHaveMinimumPriceForChannel(ProductVariantInterface $productVariant, string $price, ChannelInterface $channel): void
+    {
+        $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
+
+        Assert::same($this->updatePage->getMinimumPriceForChannel($channel), $price);
     }
 
     /**

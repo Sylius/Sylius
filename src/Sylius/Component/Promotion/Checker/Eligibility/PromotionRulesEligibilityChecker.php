@@ -21,11 +21,8 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 
 final class PromotionRulesEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
-    private ServiceRegistryInterface $ruleRegistry;
-
-    public function __construct(ServiceRegistryInterface $ruleRegistry)
+    public function __construct(private ServiceRegistryInterface $ruleRegistry)
     {
-        $this->ruleRegistry = $ruleRegistry;
     }
 
     public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion): bool

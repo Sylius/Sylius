@@ -22,18 +22,13 @@ use Webmozart\Assert\Assert;
 
 class ImageUploader implements ImageUploaderInterface
 {
-    /** @var Filesystem */
-    protected $filesystem;
-
     /** @var ImagePathGeneratorInterface */
     protected $imagePathGenerator;
 
     public function __construct(
-        Filesystem $filesystem,
+        protected Filesystem $filesystem,
         ?ImagePathGeneratorInterface $imagePathGenerator = null
     ) {
-        $this->filesystem = $filesystem;
-
         if ($imagePathGenerator === null) {
             @trigger_error(sprintf(
                 'Not passing an $imagePathGenerator to %s constructor is deprecated since Sylius 1.6 and will be not possible in Sylius 2.0.',
@@ -90,6 +85,6 @@ class ImageUploader implements ImageUploaderInterface
      */
     private function isAdBlockingProne(string $path): bool
     {
-        return strpos($path, 'ad') !== false;
+        return str_contains($path, 'ad');
     }
 }

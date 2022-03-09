@@ -17,6 +17,8 @@ import 'sylius/ui/sylius-product-attributes';
 import 'sylius/ui/sylius-product-auto-complete';
 import 'sylius/ui/sylius-prototype-handler';
 
+import './sylius-catalog-promotion-actions';
+import './sylius-catalog-promotion-scopes';
 import './sylius-compound-form-errors';
 import './sylius-lazy-choice-tree';
 import './sylius-menu-search';
@@ -59,16 +61,14 @@ $(document).ready(() => {
     containerSelector: '.configuration',
   });
 
-  $('#actions a[data-form-collection="add"]').on('click', () => {
+  $('#sylius_promotion_actions > a[data-form-collection="add"]').on('click', () => {
     setTimeout(() => {
       $('select[name^="sylius_promotion[actions]"][name$="[type]"]').last().change();
     }, 50);
   });
-  $('#rules a[data-form-collection="add"]').on('click', (event) => {
-    const name = $(event.target).closest('form').attr('name');
-
+  $('#sylius_promotion_rules > a[data-form-collection="add"]').on('click', () => {
     setTimeout(() => {
-      $(`select[name^="${name}[rules]"][name$="[type]"]`).last().change();
+      $('select[name^="sylius_promotion[rules]"][name$="[type]"]').last().change();
     }, 50);
   });
 
@@ -78,6 +78,18 @@ $(document).ready(() => {
         $(element).autoComplete();
       }
     });
+
+    if ($('#sylius_catalog_promotion_scopes').length > 0) {
+      $(document).loadCatalogPromotionScopeConfiguration(
+        document.querySelector('#sylius_catalog_promotion_scopes [data-form-collection="item"]:last-child')
+      );
+    }
+
+    if ($('#sylius_catalog_promotion_actions').length > 0) {
+      $(document).loadCatalogPromotionActionConfiguration(
+        document.querySelector('#sylius_catalog_promotion_actions [data-form-collection="item"]:last-child')
+      );
+    }
   });
   $(document).on('collection-form-update', () => {
     $('.sylius-autocomplete').each((index, element) => {
@@ -96,6 +108,12 @@ $(document).ready(() => {
   $(document).taxonSlugGenerator();
   $(document).previewUploadedImage('#sylius_product_images');
   $(document).previewUploadedImage('#sylius_taxon_images');
+  if ($('#sylius_catalog_promotion_actions').length > 0) {
+    $(document).loadCatalogPromotionActionConfiguration(document.querySelector('#sylius_catalog_promotion_actions'));
+  }
+  if ($('#sylius_catalog_promotion_scopes').length > 0) {
+    $(document).loadCatalogPromotionScopeConfiguration(document.querySelector('#sylius_catalog_promotion_scopes'));
+  }
 
   $(document).previewUploadedImage('#add-avatar');
 

@@ -25,16 +25,13 @@ use Symfony\Component\Intl\Exception\MissingResourceException;
 
 final class CurrencySetup implements CurrencySetupInterface
 {
-    private RepositoryInterface $currencyRepository;
-
-    private FactoryInterface $currencyFactory;
-
     private string $currency;
 
-    public function __construct(RepositoryInterface $currencyRepository, FactoryInterface $currencyFactory, string $currency = 'USD')
-    {
-        $this->currencyRepository = $currencyRepository;
-        $this->currencyFactory = $currencyFactory;
+    public function __construct(
+        private RepositoryInterface $currencyRepository,
+        private FactoryInterface $currencyFactory,
+        string $currency = 'USD'
+    ) {
         $this->currency = trim($currency);
     }
 
@@ -87,7 +84,7 @@ final class CurrencySetup implements CurrencySetupInterface
     {
         try {
             return Currencies::getName($code);
-        } catch (MissingResourceException $exception) {
+        } catch (MissingResourceException) {
             return null;
         }
     }

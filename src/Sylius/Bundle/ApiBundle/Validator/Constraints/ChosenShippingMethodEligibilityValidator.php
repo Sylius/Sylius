@@ -26,20 +26,11 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ChosenShippingMethodEligibilityValidator extends ConstraintValidator
 {
-    private ShipmentRepositoryInterface $shipmentRepository;
-
-    private ShippingMethodRepositoryInterface $shippingMethodRepository;
-
-    private ShippingMethodsResolverInterface $shippingMethodsResolver;
-
     public function __construct(
-        ShipmentRepositoryInterface $shipmentRepository,
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ShippingMethodsResolverInterface $shippingMethodsResolver
+        private ShipmentRepositoryInterface $shipmentRepository,
+        private ShippingMethodRepositoryInterface $shippingMethodRepository,
+        private ShippingMethodsResolverInterface $shippingMethodsResolver
     ) {
-        $this->shipmentRepository = $shipmentRepository;
-        $this->shippingMethodRepository = $shippingMethodRepository;
-        $this->shippingMethodsResolver = $shippingMethodsResolver;
     }
 
     public function validate($value, Constraint $constraint): void
@@ -61,6 +52,12 @@ final class ChosenShippingMethodEligibilityValidator extends ConstraintValidator
         /** @var ShipmentInterface|null $shipment */
         $shipment = $this->shipmentRepository->find($value->shipmentId);
         Assert::notNull($shipment);
+
+        $order = $shipment->getOrder();
+
+        if ($order->getShippingAddress() === null) {
+            $this->context->addViolation($constraint->shippingAddressNotFoundMessage);
+        }
 
         if (!in_array($shippingMethod, $this->shippingMethodsResolver->getSupportedMethods($shipment), true)) {
             $this->context->addViolation($constraint->message, ['%name%' => $shippingMethod->getName()]);

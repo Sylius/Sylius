@@ -2,7 +2,7 @@ Carts & Orders
 ==============
 
 In this chapter you will learn everything you need to know about orders in Sylius. This concept comes together
-with a few additional ones, like promotions, payments, shipments or checkout in general.
+with a few additional ones, like cart promotions, payments, shipments or checkout in general.
 
 .. warning::
 
@@ -15,7 +15,7 @@ with a few additional ones, like promotions, payments, shipments or checkout in 
     cart-flow
     taxation
     adjustments
-    promotions
+    cart-promotions
     coupons
     shipments
     payments

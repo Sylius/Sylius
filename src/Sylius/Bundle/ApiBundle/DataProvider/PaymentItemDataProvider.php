@@ -25,14 +25,10 @@ use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 /** @experimental */
 final class PaymentItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
-    private PaymentRepositoryInterface $paymentRepository;
-
-    private UserContextInterface $userContext;
-
-    public function __construct(PaymentRepositoryInterface $paymentRepository, UserContextInterface $userContext)
-    {
-        $this->paymentRepository = $paymentRepository;
-        $this->userContext = $userContext;
+    public function __construct(
+        private PaymentRepositoryInterface $paymentRepository,
+        private UserContextInterface $userContext
+    ) {
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool

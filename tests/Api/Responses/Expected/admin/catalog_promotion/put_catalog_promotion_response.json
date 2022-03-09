@@ -1,0 +1,50 @@
+{
+    "@context": "\/api\/v2\/contexts\/CatalogPromotion",
+    "@id": "\/api\/v2\/admin\/catalog-promotions\/mugs_discount",
+    "@type": "CatalogPromotion",
+    "id": @integer@,
+    "name": "T-Shirts discount",
+    "code": "mugs_discount",
+    "startDate": null,
+    "endDate": null,
+    "priority": 0,
+    "state": @string@,
+    "channels": [
+        "\/api\/v2\/admin\/channels\/MOBILE"
+    ],
+    "scopes": [
+        {
+            "@type": "CatalogPromotionScope",
+            "@id": @string@,
+            "id": @integer@,
+            "type": "for_variants",
+            "configuration": {
+                "variants": [
+                    "MUG"
+                ]
+            }
+        }
+    ],
+    "actions": [
+        {
+            "@type": "CatalogPromotionAction",
+            "@id": @string@,
+            "id": @integer@,
+            "type": "percentage_discount",
+            "configuration": {
+                "amount": 0.4
+            }
+        }
+    ],
+  "enabled": @boolean@,
+  "exclusive": false,
+  "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/catalog-promotion-translations\/@integer@",
+            "@type": "CatalogPromotionTranslation",
+            "id": @integer@,
+            "label": "T-Shirts discount",
+            "description": @string@
+        }
+    }
+}

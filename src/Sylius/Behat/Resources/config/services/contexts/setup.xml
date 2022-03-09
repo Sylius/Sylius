@@ -212,7 +212,7 @@
 
         <service id="sylius.behat.context.setup.admin_api_security" class="Sylius\Behat\Context\Setup\AdminSecurityContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.behat.admin_api_security" />
+            <argument type="service" id="sylius.behat.api_security" />
             <argument type="service" id="sylius.fixture.example_factory.admin_user" />
             <argument type="service" id="sylius.repository.admin_user" />
         </service>
@@ -226,7 +226,7 @@
 
         <service id="sylius.behat.context.setup.shop_api_security" class="Sylius\Behat\Context\Setup\ShopSecurityContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.behat.shop_api_security" />
+            <argument type="service" id="sylius.behat.api_security" />
             <argument type="service" id="sylius.fixture.example_factory.shop_user" />
             <argument type="service" id="sylius.repository.shop_user" />
         </service>
@@ -289,8 +289,15 @@
             <argument type="service" id="sylius.factory.zone_member" />
         </service>
 
-        <service id="sylius.behat.context.setup.calendar" class="Sylius\Behat\Context\Setup\CalendarContext">
-            <argument>%kernel.project_dir%</argument>
+        <service id="Sylius\Behat\Context\Setup\CatalogPromotionContext">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Fixture\Factory\CatalogPromotionExampleFactory" />
+            <argument type="service" id="sylius.factory.catalog_promotion_scope" />
+            <argument type="service" id="sylius.factory.catalog_promotion_action" />
+            <argument type="service" id="sylius.manager.catalog_promotion" />
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius.event_bus" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
     </services>
 </container>

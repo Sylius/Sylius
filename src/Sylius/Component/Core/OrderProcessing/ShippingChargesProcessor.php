@@ -24,22 +24,18 @@ use Webmozart\Assert\Assert;
 
 final class ShippingChargesProcessor implements OrderProcessorInterface
 {
-    private FactoryInterface $adjustmentFactory;
-
-    private DelegatingCalculatorInterface $shippingChargesCalculator;
-
-    public function __construct(
-        FactoryInterface $adjustmentFactory,
-        DelegatingCalculatorInterface $shippingChargesCalculator
-    ) {
-        $this->adjustmentFactory = $adjustmentFactory;
-        $this->shippingChargesCalculator = $shippingChargesCalculator;
+    public function __construct(private FactoryInterface $adjustmentFactory, private DelegatingCalculatorInterface $shippingChargesCalculator)
+    {
     }
 
     public function process(BaseOrderInterface $order): void
     {
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
+
+        if (OrderInterface::STATE_CART !== $order->getState()) {
+            return;
+        }
 
         foreach ($order->getShipments() as $shipment) {
             $shipment->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT);
@@ -59,7 +55,7 @@ final class ShippingChargesProcessor implements OrderProcessorInterface
                 ]);
 
                 $shipment->addAdjustment($adjustment);
-            } catch (UndefinedShippingMethodException $exception) {
+            } catch (UndefinedShippingMethodException) {
             }
         }
     }

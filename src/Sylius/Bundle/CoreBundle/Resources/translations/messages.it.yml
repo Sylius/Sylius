@@ -9,6 +9,8 @@ sylius:
             title: Titolo
         cart:
             coupon: Codice sconto
+        catalog_promotion:
+            channels: Canali
         checkout:
             addressing:
                 different_billing_address: Vuoi usare un indirizzo diverso per la fatturazione?

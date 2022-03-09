@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Beskrywing
+            name: Naam
         promotion:
             description: Beskrywing
             name: Naam

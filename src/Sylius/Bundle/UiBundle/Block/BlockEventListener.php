@@ -21,16 +21,12 @@ use Sonata\BlockBundle\Model\Block;
  */
 final class BlockEventListener
 {
-    private string $template;
-
-    public function __construct(string $template)
+    public function __construct(private string $template)
     {
         @trigger_error(
             sprintf('Using "%s" to add blocks to the templates is deprecated since Sylius 1.7 and will be removed in Sylius 2.0. Use "sylius_ui" configuration instead.', self::class),
             \E_USER_DEPRECATED
         );
-
-        $this->template = $template;
     }
 
     public function onBlockEvent(BlockEvent $event): void

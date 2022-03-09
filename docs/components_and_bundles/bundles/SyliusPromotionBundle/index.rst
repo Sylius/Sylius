@@ -40,4 +40,4 @@ This means you can for instance create the following promotions :
 Learn more
 ----------
 
-* :doc:`Promotions in the Sylius platform </book/orders/promotions>` - concept documentation
+* :doc:`Cart Promotions in the Sylius platform </book/orders/cart-promotions>` - concept documentation

@@ -19,11 +19,8 @@ use Twig\TwigFunction;
 
 final class AggregateAdjustmentsExtension extends AbstractExtension
 {
-    private AdjustmentsHelper $adjustmentsHelper;
-
-    public function __construct(AdjustmentsHelper $adjustmentsHelper)
+    public function __construct(private AdjustmentsHelper $adjustmentsHelper)
     {
-        $this->adjustmentsHelper = $adjustmentsHelper;
     }
 
     public function getFunctions(): array

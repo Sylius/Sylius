@@ -9,6 +9,8 @@ sylius:
             title: Başlık
         cart:
             coupon: Kupon
+        catalog_promotion:
+            channels: Kanallar
         checkout:
             addressing:
                 different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?

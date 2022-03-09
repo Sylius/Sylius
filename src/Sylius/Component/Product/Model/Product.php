@@ -22,7 +22,7 @@ use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Resource\Model\TranslationInterface;
 use Webmozart\Assert\Assert;
 
-class Product implements ProductInterface
+class Product implements ProductInterface, \Stringable
 {
     use TimestampableTrait, ToggleableTrait;
     use TranslatableTrait {

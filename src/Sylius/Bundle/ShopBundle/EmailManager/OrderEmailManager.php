@@ -20,17 +20,10 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class OrderEmailManager implements OrderEmailManagerInterface
 {
-    /** @var SenderInterface */
-    private $emailSender;
-
-    /** @var DecoratedOrderEmailManagerInterface|null */
-    private $decoratedEmailManager;
-
-    public function __construct(SenderInterface $emailSender, ?DecoratedOrderEmailManagerInterface $decoratedEmailManager)
-    {
-        $this->emailSender = $emailSender;
-        $this->decoratedEmailManager = $decoratedEmailManager;
-
+    public function __construct(
+        private SenderInterface $emailSender,
+        private ?DecoratedOrderEmailManagerInterface $decoratedEmailManager
+    ) {
         if ($decoratedEmailManager === null) {
             @trigger_error(
                 sprintf(

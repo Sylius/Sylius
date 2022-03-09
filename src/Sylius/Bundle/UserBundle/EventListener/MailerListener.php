@@ -20,12 +20,8 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 class MailerListener
 {
-    /** @var SenderInterface */
-    protected $emailSender;
-
-    public function __construct(SenderInterface $emailSender)
+    public function __construct(protected SenderInterface $emailSender)
     {
-        $this->emailSender = $emailSender;
     }
 
     public function sendResetPasswordTokenEmail(GenericEvent $event): void

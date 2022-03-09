@@ -22,7 +22,7 @@ Feature: Apply correct taxes based on customer data
         Then my cart total should be "$110.00"
         And my cart taxes should be "$10.00"
 
-    @ui
+    @ui @api
     Scenario: Proper taxes after specifying shipping address
         Given I am a logged in customer
         When I add product "PHP T-Shirt" to the cart
@@ -30,7 +30,7 @@ Feature: Apply correct taxes based on customer data
         Then my cart total should be "$123.00"
         And my cart taxes should be "$23.00"
 
-    @ui
+    @ui @api
     Scenario: Proper taxes after specifying shipping address
         Given I am a logged in customer
         When I add product "PHP T-Shirt" to the cart

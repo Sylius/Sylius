@@ -18,6 +18,7 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentMethodTranslationInterface;
@@ -157,6 +158,22 @@ final class PaymentContext implements Context
         $paymentMethod->setGatewayConfig($config);
 
         $this->paymentMethodManager->flush();
+    }
+
+    /**
+     * @Given the store allows paying with :paymentMethodName in :channel channel
+     */
+    public function theStoreAllowsPayingWithInChannel(string $paymentMethodName, ChannelInterface $channel): void
+    {
+        $paymentMethod = $this->createPaymentMethod(
+            $paymentMethodName,
+            StringInflector::nameToUppercaseCode($paymentMethodName),
+            'Offline',
+            'Payment method',
+            false
+        );
+
+        $paymentMethod->addChannel($channel);
     }
 
     /**

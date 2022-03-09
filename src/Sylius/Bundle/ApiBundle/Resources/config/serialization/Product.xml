@@ -25,6 +25,18 @@
             <group>admin:product:read</group>
             <group>shop:product:read</group>
         </attribute>
+        <attribute name="name">
+            <group>shop:product:read</group>
+        </attribute>
+        <attribute name="description">
+            <group>shop:product:read</group>
+        </attribute>
+        <attribute name="slug">
+            <group>shop:product:read</group>
+        </attribute>
+        <attribute name="shortDescription">
+            <group>shop:product:read</group>
+        </attribute>
         <attribute name="createdAt">
             <group>admin:product:read</group>
             <group>shop:product:read</group>
@@ -37,7 +49,6 @@
             <group>admin:product:create</group>
             <group>admin:product:read</group>
             <group>admin:product:update</group>
-            <group>shop:product:read</group>
         </attribute>
         <attribute name="mainTaxon">
             <group>admin:product:create</group>
@@ -72,9 +83,6 @@
             <group>shop:product:read</group>
         </attribute>
         <attribute name="averageRating">
-            <group>shop:product:read</group>
-        </attribute>
-        <attribute name="description">
             <group>shop:product:read</group>
         </attribute>
     </class>

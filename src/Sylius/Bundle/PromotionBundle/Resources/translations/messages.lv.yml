@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Apraksts
+            name: Nosaukums
         promotion:
             description: Apraksts
             name: Nosaukums

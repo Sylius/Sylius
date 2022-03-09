@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Promotion\Applicator;
 
 use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
@@ -25,16 +26,8 @@ use Webmozart\Assert\Assert;
 
 final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustmentsApplicatorInterface
 {
-    private AdjustmentFactoryInterface $adjustmentFactory;
-
-    private IntegerDistributorInterface $distributor;
-
-    public function __construct(
-        AdjustmentFactoryInterface $adjustmentFactory,
-        IntegerDistributorInterface $distributor
-    ) {
-        $this->adjustmentFactory = $adjustmentFactory;
-        $this->distributor = $distributor;
+    public function __construct(private AdjustmentFactoryInterface $adjustmentFactory, private IntegerDistributorInterface $distributor)
+    {
     }
 
     /**
@@ -51,16 +44,19 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
                 continue;
             }
 
-            $this->applyAdjustmentsOnItemUnits($item, $promotion, $adjustmentAmount);
+            $this->applyAdjustmentsOnItemUnits($item, $promotion, $adjustmentAmount, $order->getChannel());
         }
     }
 
     private function applyAdjustmentsOnItemUnits(
         OrderItemInterface $item,
         PromotionInterface $promotion,
-        int $itemPromotionAmount
+        int $itemPromotionAmount,
+        ChannelInterface $channel
     ): void {
         $splitPromotionAmount = $this->distributor->distribute($itemPromotionAmount, $item->getQuantity());
+
+        $variantMinimumPrice = $item->getVariant()->getChannelPricingForChannel($channel)->getMinimumPrice();
 
         $i = 0;
         foreach ($item->getUnits() as $unit) {
@@ -69,7 +65,11 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
                 continue;
             }
 
-            $this->addAdjustment($promotion, $unit, $promotionAmount);
+            $this->addAdjustment(
+                $promotion,
+                $unit,
+                $this->calculate($unit->getTotal(), $variantMinimumPrice, $promotionAmount)
+            );
         }
     }
 
@@ -81,5 +81,14 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
         $adjustment->setOriginCode($promotion->getCode());
 
         $unit->addAdjustment($adjustment);
+    }
+
+    private function calculate(int $itemTotal, int $minimumPrice, int $promotionAmount): int
+    {
+        if ($itemTotal + $promotionAmount <= $minimumPrice) {
+            return $minimumPrice - $itemTotal;
+        }
+
+        return $promotionAmount;
     }
 }

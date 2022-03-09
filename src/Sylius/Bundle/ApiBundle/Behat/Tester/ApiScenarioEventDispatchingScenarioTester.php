@@ -26,11 +26,8 @@ use Behat\Testwork\Tester\Setup\Teardown;
 /** @experimental */
 final class ApiScenarioEventDispatchingScenarioTester implements ScenarioTester
 {
-    private ScenarioTester $baseTester;
-
-    public function __construct(ScenarioTester $baseTester)
+    public function __construct(private ScenarioTester $baseTester)
     {
-        $this->baseTester = $baseTester;
     }
 
     public function setUp(Environment $env, FeatureNode $feature, Scenario $scenario, $skip): Setup
@@ -39,7 +36,7 @@ final class ApiScenarioEventDispatchingScenarioTester implements ScenarioTester
             if ($env->getSuite()->getSetting('javascript')) {
                 return $this->baseTester->setUp($env, $feature, $scenario, $skip);
             }
-        } catch (ParameterNotFoundException $exception) {
+        } catch (ParameterNotFoundException) {
             return $this->baseTester->setUp($env, $feature, $scenario, $skip);
         }
 

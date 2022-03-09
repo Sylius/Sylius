@@ -71,8 +71,12 @@ Promotions
 .. toctree::
     :hidden:
 
-    promotions/custom-promotion-rule
-    promotions/custom-promotion-action
+    promotions/custom-cart-promotion-rule
+    promotions/custom-cart-promotion-action
+    promotions/custom-catalog-promotion-scope
+    promotions/custom-catalog-promotion-action
+    promotions/catalog-promotion-labels
+    promotions/catalog-promotion-performance
 
 .. include:: /cookbook/promotions/map.rst.inc
 
@@ -163,5 +167,6 @@ API
     :hidden:
 
     api/add_to_cart_product_chosen_by_product_options
+    api/how_force_login_already_registered_user_during_checkout
 
 .. include:: /cookbook/api/map.rst.inc

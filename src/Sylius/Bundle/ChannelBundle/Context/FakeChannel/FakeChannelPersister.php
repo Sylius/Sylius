@@ -19,11 +19,8 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 final class FakeChannelPersister
 {
-    private FakeChannelCodeProviderInterface $fakeChannelCodeProvider;
-
-    public function __construct(FakeChannelCodeProviderInterface $fakeChannelCodeProvider)
+    public function __construct(private FakeChannelCodeProviderInterface $fakeChannelCodeProvider)
     {
-        $this->fakeChannelCodeProvider = $fakeChannelCodeProvider;
     }
 
     public function onKernelResponse(ResponseEvent $filterResponseEvent): void

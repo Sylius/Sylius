@@ -25,12 +25,6 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 final class ProductsToProductAssociationsTransformer implements DataTransformerInterface
 {
-    private FactoryInterface $productAssociationFactory;
-
-    private ProductRepositoryInterface $productRepository;
-
-    private RepositoryInterface $productAssociationTypeRepository;
-
     /**
      * @var Collection|ProductAssociationInterface[]
      *
@@ -39,27 +33,24 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
     private ?Collection $productAssociations = null;
 
     public function __construct(
-        FactoryInterface $productAssociationFactory,
-        ProductRepositoryInterface $productRepository,
-        RepositoryInterface $productAssociationTypeRepository
+        private FactoryInterface $productAssociationFactory,
+        private ProductRepositoryInterface $productRepository,
+        private RepositoryInterface $productAssociationTypeRepository
     ) {
-        $this->productAssociationFactory = $productAssociationFactory;
-        $this->productRepository = $productRepository;
-        $this->productAssociationTypeRepository = $productAssociationTypeRepository;
     }
 
-    public function transform($productAssociations)
+    public function transform($value)
     {
-        $this->setProductAssociations($productAssociations);
+        $this->setProductAssociations($value);
 
-        if (null === $productAssociations) {
+        if (null === $value) {
             return '';
         }
 
         $values = [];
 
         /** @var ProductAssociationInterface $productAssociation */
-        foreach ($productAssociations as $productAssociation) {
+        foreach ($value as $productAssociation) {
             $productCodesAsString = $this->getCodesAsStringFromProducts($productAssociation->getAssociatedProducts());
 
             $values[$productAssociation->getType()->getCode()] = $productCodesAsString;
@@ -68,9 +59,9 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
         return $values;
     }
 
-    public function reverseTransform($values): ?Collection
+    public function reverseTransform($value): ?Collection
     {
-        if (null === $values || '' === $values || !is_array($values)) {
+        if (null === $value || '' === $value || !is_array($value)) {
             return null;
         }
 
@@ -78,7 +69,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
          * @psalm-var Collection<array-key, ProductAssociationInterface> $productAssociations
          */
         $productAssociations = new ArrayCollection();
-        foreach ($values as $productAssociationTypeCode => $productCodes) {
+        foreach ($value as $productAssociationTypeCode => $productCodes) {
             if (null === $productCodes) {
                 continue;
             }

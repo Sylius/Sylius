@@ -57,5 +57,11 @@
         <attribute name="user">
             <group>shop:customer:read</group>
         </attribute>
+
+        <attribute name="gender">
+            <group>admin:customer:read</group>
+            <group>shop:customer:read</group>
+            <group>shop:customer:update</group>
+        </attribute>
     </class>
 </serializer>

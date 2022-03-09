@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new Sylius\Calendar\SyliusCalendarBundle(),
             new Sylius\Bundle\PromotionBundle\SyliusPromotionBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
@@ -40,7 +41,7 @@ class AppKernel extends Kernel
 
     protected function getContainerBaseClass(): string
     {
-        if (0 === strpos($this->environment, 'test')) {
+        if (str_starts_with($this->environment, 'test')) {
             return MockerContainer::class;
         }
 

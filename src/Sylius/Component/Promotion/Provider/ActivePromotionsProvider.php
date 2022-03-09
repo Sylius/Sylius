@@ -18,11 +18,8 @@ use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
 final class ActivePromotionsProvider implements PreQualifiedPromotionsProviderInterface
 {
-    private PromotionRepositoryInterface $promotionRepository;
-
-    public function __construct(PromotionRepositoryInterface $promotionRepository)
+    public function __construct(private PromotionRepositoryInterface $promotionRepository)
     {
-        $this->promotionRepository = $promotionRepository;
     }
 
     public function getPromotions(PromotionSubjectInterface $subject): array

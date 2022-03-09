@@ -22,11 +22,8 @@ use Sylius\Component\Core\Model\ProductInterface;
 /** @experimental */
 final class ProductsWithEnableFlagExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    private UserContextInterface $userContext;
-
-    public function __construct(UserContextInterface $userContext)
+    public function __construct(private UserContextInterface $userContext)
     {
-        $this->userContext = $userContext;
     }
 
     public function applyToCollection(
@@ -46,7 +43,9 @@ final class ProductsWithEnableFlagExtension implements ContextAwareQueryCollecti
         }
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
-        $queryBuilder->andWhere($rootAlias . '.enabled = :enabled');
-        $queryBuilder->setParameter('enabled', true);
+        $enabledParameterName = $queryNameGenerator->generateParameterName('enabled');
+
+        $queryBuilder->andWhere(sprintf('%s.enabled = :%s', $rootAlias, $enabledParameterName));
+        $queryBuilder->setParameter($enabledParameterName, true);
     }
 }

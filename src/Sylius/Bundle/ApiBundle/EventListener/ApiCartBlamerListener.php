@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\EventListener;
 
-use Sylius\Bundle\ApiBundle\Command\BlameCart;
+use Sylius\Bundle\ApiBundle\Command\Cart\BlameCart;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiOrdersSubSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -26,20 +26,11 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 final class ApiCartBlamerListener
 {
-    private CartContextInterface $cartContext;
-
-    private SectionProviderInterface $uriBasedSectionContext;
-
-    private MessageBusInterface $commandBus;
-
     public function __construct(
-        CartContextInterface $cartContext,
-        SectionProviderInterface $uriBasedSectionContext,
-        MessageBusInterface $commandBus
+        private CartContextInterface $cartContext,
+        private SectionProviderInterface $uriBasedSectionContext,
+        private MessageBusInterface $commandBus
     ) {
-        $this->cartContext = $cartContext;
-        $this->uriBasedSectionContext = $uriBasedSectionContext;
-        $this->commandBus = $commandBus;
     }
 
     public function onInteractiveLogin(InteractiveLoginEvent $interactiveLoginEvent): void
@@ -68,7 +59,7 @@ final class ApiCartBlamerListener
     {
         try {
             $cart = $this->cartContext->getCart();
-        } catch (CartNotFoundException $exception) {
+        } catch (CartNotFoundException) {
             return null;
         }
 

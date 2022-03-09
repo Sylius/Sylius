@@ -15,7 +15,7 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
-    <class name="Sylius\Bundle\ApiBundle\Command\RegisterShopUser">
+    <class name="Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser">
         <attribute name="firstName">
             <group>shop:customer:create</group>
         </attribute>

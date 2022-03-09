@@ -204,4 +204,18 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->getOneOrNullResult()
         ;
     }
+
+    public function findByTaxon(TaxonInterface $taxon): array
+    {
+        return $this
+            ->createQueryBuilder('product')
+            ->distinct()
+            ->addSelect('productTaxon')
+            ->innerJoin('product.productTaxons', 'productTaxon')
+            ->andWhere('productTaxon.taxon = :taxon')
+            ->setParameter('taxon', $taxon)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

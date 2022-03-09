@@ -25,6 +25,7 @@ default:
                 - sylius.behat.context.transform.tax_category
                 - sylius.behat.context.transform.user
                 - sylius.behat.context.transform.zone
+                - Sylius\Behat\Context\Transform\CatalogPromotionContext
 
                 - sylius.behat.context.setup.address
                 - sylius.behat.context.setup.admin_user
@@ -44,8 +45,7 @@ default:
                 - sylius.behat.context.setup.taxation
                 - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.zone
-
-                - sylius.behat.context.api.admin.managing_orders
+                - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
                 - sylius.behat.context.api.shop.cart
                 - sylius.behat.context.api.shop.channel

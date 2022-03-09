@@ -9,6 +9,8 @@ sylius:
             title: Заглавие
         cart:
             coupon: Талон
+        catalog_promotion:
+            channels: Канали
         checkout:
             addressing:
                 different_billing_address: Използвайте различен адрес за фактуриране?

@@ -7,7 +7,7 @@ Feature: Removing images of an existing product
     Background:
         Given I am logged in as an administrator
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Removing a single image of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "lamborghini.jpg" with "thumbnail" type
@@ -27,7 +27,7 @@ Feature: Removing images of an existing product
         Then I should be notified that it has been successfully edited
         And this product should not have any images
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Removing all images of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "lamborghini.jpg" with "thumbnail" type
@@ -51,7 +51,7 @@ Feature: Removing images of an existing product
         Then I should be notified that it has been successfully edited
         And this product should not have any images
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Removing only one image of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "lamborghini.jpg" with "thumbnail" type
@@ -63,7 +63,7 @@ Feature: Removing images of an existing product
         And this product should have an image with "main" type
         But it should not have any images with "thumbnail" type
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Removing only one image of a simple product when all images have same type
         Given the store has a product "Lamborghini Ford Model"
         And this product has an image "lamborghini.jpg" with "thumbnail" type
@@ -86,7 +86,7 @@ Feature: Removing images of an existing product
         And this product should have an image with "main" type
         But it should not have any images with "thumbnail" type
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Adding multiple images and removing a single image of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         When I want to modify this product

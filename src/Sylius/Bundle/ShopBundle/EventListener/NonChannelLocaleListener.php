@@ -24,15 +24,6 @@ use Webmozart\Assert\Assert;
 
 final class NonChannelLocaleListener
 {
-    /** @var RouterInterface */
-    private $router;
-
-    /** @var LocaleProviderInterface */
-    private $channelBasedLocaleProvider;
-
-    /** @var FirewallMap */
-    private $firewallMap;
-
     /** @var string[] */
     private $firewallNames;
 
@@ -40,18 +31,14 @@ final class NonChannelLocaleListener
      * @param string[] $firewallNames
      */
     public function __construct(
-        RouterInterface $router,
-        LocaleProviderInterface $channelBasedLocaleProvider,
-        FirewallMap $firewallMap,
+        private RouterInterface $router,
+        private LocaleProviderInterface $channelBasedLocaleProvider,
+        private FirewallMap $firewallMap,
         array $firewallNames
     ) {
         Assert::notEmpty($firewallNames);
         Assert::allString($firewallNames);
-
-        $this->channelBasedLocaleProvider = $channelBasedLocaleProvider;
-        $this->firewallMap = $firewallMap;
         $this->firewallNames = $firewallNames;
-        $this->router = $router;
     }
 
     /**
@@ -59,7 +46,12 @@ final class NonChannelLocaleListener
      */
     public function restrictRequestLocale(RequestEvent $event): void
     {
-        if (!$event->isMasterRequest()) {
+        if (\method_exists($event, 'isMainRequest')) {
+            $isMainRequest = $event->isMainRequest();
+        } else {
+            $isMainRequest = $event->isMasterRequest();
+        }
+        if (!$isMainRequest) {
             return;
         }
 

@@ -91,6 +91,11 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return $this->hasElement('payment_method');
     }
 
+    public function getProductUnitPrice(ProductInterface $product): int
+    {
+        return $this->getPriceFromString($this->getElement('product_unit_price', ['%name%' => $product->getName()])->getText());
+    }
+
     public function hasProductDiscountedUnitPriceBy(ProductInterface $product, int $amount): bool
     {
         $priceWithoutDiscount = $this->getPriceFromString($this->getElement('product_old_price', ['%name%' => $product->getName()])->getText());

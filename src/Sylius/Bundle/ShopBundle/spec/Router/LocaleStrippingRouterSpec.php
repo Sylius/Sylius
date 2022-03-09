@@ -47,17 +47,17 @@ final class LocaleStrippingRouterSpec extends ObjectBehavior
         $decoratedRouter
             ->generate('route_name', [], UrlGeneratorInterface::ABSOLUTE_PATH)
             ->willReturn(
-                'http://generated.url/?_locale=pl_PL',
-                'http://generated.url/?foo=bar&_locale=pl_PL',
-                'http://generated.url/?_locale=pl_PL&foo=bar',
-                'http://generated.url/?bar=foo&_locale=pl_PL&foo=bar'
+                'https://generated.url/?_locale=pl_PL',
+                'https://generated.url/?foo=bar&_locale=pl_PL',
+                'https://generated.url/?_locale=pl_PL&foo=bar',
+                'https://generated.url/?bar=foo&_locale=pl_PL&foo=bar'
             )
         ;
 
-        $this->generate('route_name')->shouldReturn('http://generated.url/');
-        $this->generate('route_name')->shouldReturn('http://generated.url/?foo=bar');
-        $this->generate('route_name')->shouldReturn('http://generated.url/?foo=bar');
-        $this->generate('route_name')->shouldReturn('http://generated.url/?bar=foo&foo=bar');
+        $this->generate('route_name')->shouldReturn('https://generated.url/');
+        $this->generate('route_name')->shouldReturn('https://generated.url/?foo=bar');
+        $this->generate('route_name')->shouldReturn('https://generated.url/?foo=bar');
+        $this->generate('route_name')->shouldReturn('https://generated.url/?bar=foo&foo=bar');
     }
 
     function it_does_not_strip_locale_from_the_generated_url_if_locale_is_different_than_the_one_from_context(
@@ -68,10 +68,10 @@ final class LocaleStrippingRouterSpec extends ObjectBehavior
 
         $decoratedRouter
             ->generate('route_name', [], UrlGeneratorInterface::ABSOLUTE_PATH)
-            ->willReturn('http://generated.url/?_locale=pl_PL')
+            ->willReturn('https://generated.url/?_locale=pl_PL')
         ;
 
-        $this->generate('route_name')->shouldReturn('http://generated.url/?_locale=pl_PL');
+        $this->generate('route_name')->shouldReturn('https://generated.url/?_locale=pl_PL');
     }
 
     function it_does_not_stirp_locale_from_the_generated_url_if_there_is_no_locale_parameter(
@@ -79,9 +79,9 @@ final class LocaleStrippingRouterSpec extends ObjectBehavior
     ): void {
         $decoratedRouter
             ->generate('route_name', [], UrlGeneratorInterface::ABSOLUTE_PATH)
-            ->willReturn('http://generated.url/')
+            ->willReturn('https://generated.url/')
         ;
 
-        $this->generate('route_name')->shouldReturn('http://generated.url/');
+        $this->generate('route_name')->shouldReturn('https://generated.url/');
     }
 }

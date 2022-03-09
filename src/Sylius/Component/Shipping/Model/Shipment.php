@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
-class Shipment implements ShipmentInterface
+class Shipment implements ShipmentInterface, \Stringable
 {
     use TimestampableTrait;
 

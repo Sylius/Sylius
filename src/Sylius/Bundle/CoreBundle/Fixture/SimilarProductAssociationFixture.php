@@ -23,25 +23,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SimilarProductAssociationFixture extends AbstractFixture
 {
-    private AbstractResourceFixture $productAssociationTypeFixture;
-
-    private AbstractResourceFixture $productAssociationFixture;
-
-    private ProductRepositoryInterface $productRepository;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
     public function __construct(
-        AbstractResourceFixture $productAssociationTypeFixture,
-        AbstractResourceFixture $productAssociationFixture,
-        ProductRepositoryInterface $productRepository
+        private AbstractResourceFixture $productAssociationTypeFixture,
+        private AbstractResourceFixture $productAssociationFixture,
+        private ProductRepositoryInterface $productRepository
     ) {
-        $this->productAssociationTypeFixture = $productAssociationTypeFixture;
-        $this->productAssociationFixture = $productAssociationFixture;
-        $this->productRepository = $productRepository;
-
         $this->faker = Factory::create();
         $this->optionsResolver =
             (new OptionsResolver())

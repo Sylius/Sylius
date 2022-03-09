@@ -7,16 +7,13 @@
     <resource class="%sylius.model.product_image.class%" shortName="ProductImage">
         <attribute name="validation_groups">sylius</attribute>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>product_image:read</attribute>
-            </attribute>
-        </attribute>
-
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-images</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_image:read</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -24,14 +21,34 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-images/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_image:read</attribute>
+                </attribute>
             </itemOperation>
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-images/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product_image:read</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">filter</attribute>
+                            <attribute name="in">query</attribute>
+                            <attribute name="description">Provide one of supported image liip imagine filters.</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                                <attribute name="enum" />
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
         <property name="path" required="true" />
+        <property name="type" />
     </resource>
 </resources>

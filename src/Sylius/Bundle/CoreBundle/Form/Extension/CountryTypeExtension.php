@@ -27,11 +27,8 @@ use Symfony\Component\Intl\Countries;
 
 final class CountryTypeExtension extends AbstractTypeExtension
 {
-    private RepositoryInterface $countryRepository;
-
-    public function __construct(RepositoryInterface $countryRepository)
+    public function __construct(private RepositoryInterface $countryRepository)
     {
-        $this->countryRepository = $countryRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

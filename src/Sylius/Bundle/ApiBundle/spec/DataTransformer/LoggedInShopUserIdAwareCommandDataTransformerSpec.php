@@ -36,16 +36,16 @@ final class LoggedInShopUserIdAwareCommandDataTransformerSpec extends ObjectBeha
         $this->supportsTransformation($commandAwareDataTransformer)->shouldReturn(false);
     }
 
-    function it_sets_current_shop_user_id(
+    function it_sets_current_shop_user_email(
         UserContextInterface $userContext,
         ShopUserInterface $shopUser,
         ShopUserIdAwareInterface $shopUserIdAwareCommand
     ): void {
         $userContext->getUser()->willReturn($shopUser);
 
-        $shopUser->getId()->willReturn(2);
+        $shopUser->getId()->willReturn(42);
 
-        $shopUserIdAwareCommand->setShopUserId(2)->shouldBeCalled();
+        $shopUserIdAwareCommand->setShopUserId(42)->shouldBeCalled();
 
         $this->transform($shopUserIdAwareCommand, '', [])->shouldReturn($shopUserIdAwareCommand);
     }

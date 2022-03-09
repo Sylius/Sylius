@@ -110,6 +110,11 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return $this->getPriceFromString(trim($unitPrice->getText()));
     }
 
+    public function hasOriginalPrice(string $productName): bool
+    {
+        return $this->hasElement('product_unit_regular_price', ['%name%' => $productName]);
+    }
+
     public function getItemImage(int $itemNumber): string
     {
         $itemImage = $this->getElement('item_image', ['%number%' => $itemNumber]);

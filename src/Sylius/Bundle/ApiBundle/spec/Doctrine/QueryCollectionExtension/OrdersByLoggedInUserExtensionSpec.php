@@ -51,6 +51,8 @@ class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
     ): void {
         $userContext->getUser()->willReturn($user);
 
+        $queryNameGenerator->generateParameterName('state')->shouldBeCalled()->willReturn('state');
+
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->andWhere('o.state != :state')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->setParameter('state', OrderInterface::STATE_CART)->shouldBeCalled()->willReturn($queryBuilder);
@@ -68,6 +70,9 @@ class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
         $userContext->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
 
+        $queryNameGenerator->generateParameterName('state')->shouldBeCalled()->willReturn('state');
+        $queryNameGenerator->generateParameterName('customer')->shouldBeCalled()->willReturn('customer');
+
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->andWhere('o.state != :state')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->andWhere('o.customer = :customer')->shouldBeCalled()->willReturn($queryBuilder);
@@ -84,6 +89,8 @@ class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $userContext->getUser()->willReturn($user);
+
+        $queryNameGenerator->generateParameterName('state')->shouldBeCalled()->willReturn('state');
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->andWhere('o.state != :state')->shouldBeCalled()->willReturn($queryBuilder);

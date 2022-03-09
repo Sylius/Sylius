@@ -34,7 +34,7 @@ final class LazyCacheWarmupPass implements CompilerPassInterface
         try {
             $definition = $container->findDefinition($id);
             $definition->setLazy(true);
-        } catch (InvalidArgumentException $exception) {
+        } catch (InvalidArgumentException) {
             // intentionally left blank
         }
     }

@@ -19,12 +19,8 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 class TaxRateResolver implements TaxRateResolverInterface
 {
-    /** @var RepositoryInterface */
-    protected $taxRateRepository;
-
-    public function __construct(RepositoryInterface $taxRateRepository)
+    public function __construct(protected RepositoryInterface $taxRateRepository)
     {
-        $this->taxRateRepository = $taxRateRepository;
     }
 
     public function resolve(TaxableInterface $taxable, array $criteria = []): ?TaxRateInterface

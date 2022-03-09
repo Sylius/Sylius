@@ -15,8 +15,19 @@
             <group>admin:taxon:create</group>
             <group>admin:taxon:update</group>
         </attribute>
+        <attribute name="name">
+            <group>shop:taxon:read</group>
+        </attribute>
+        <attribute name="slug">
+            <group>shop:taxon:read</group>
+        </attribute>
+        <attribute name="description">
+            <group>shop:taxon:read</group>
+        </attribute>
         <attribute name="translations">
             <group>admin:taxon:read</group>
+        </attribute>
+        <attribute name="children">
             <group>shop:taxon:read</group>
         </attribute>
     </class>

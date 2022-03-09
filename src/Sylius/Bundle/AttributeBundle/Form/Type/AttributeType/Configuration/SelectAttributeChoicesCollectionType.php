@@ -57,7 +57,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
                     $fixedData[$newKey] = $this->resolveValues($values);
 
                     if ($form->offsetExists($key)) {
-                        $type = get_class($form->get($key)->getConfig()->getType()->getInnerType());
+                        $type = $form->get($key)->getConfig()->getType()->getInnerType()::class;
                         $options = $form->get($key)->getConfig()->getOptions();
 
                         $form->remove($key);

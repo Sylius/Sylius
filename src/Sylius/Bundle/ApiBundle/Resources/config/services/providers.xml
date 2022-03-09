@@ -16,6 +16,8 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
+        <defaults public="true" />
+
         <service id="Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\CustomerProvider">
             <argument type="service" id="sylius.canonicalizer" />
             <argument type="service" id="sylius.factory.customer" />
@@ -23,8 +25,12 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider">
-            <argument type="service" id="sylius.api.context.user" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <argument>%sylius.security.new_api_route%</argument>
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Provider\ProductImageFilterProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\LiipProductImageFilterProvider">
+            <argument>%liip_imagine.filter_sets%</argument>
         </service>
     </services>
 </container>

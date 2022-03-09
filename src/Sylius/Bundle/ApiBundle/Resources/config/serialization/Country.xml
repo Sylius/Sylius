@@ -24,6 +24,10 @@
            <group>admin:country:create</group>
            <group>shop:country:read</group>
        </attribute>
+       <attribute name="name">
+           <group>admin:country:read</group>
+           <group>shop:country:read</group>
+       </attribute>
        <attribute name="enabled">
            <group>admin:country:read</group>
            <group>admin:country:create</group>

@@ -39,16 +39,11 @@ final class ShippingMethodEligibilityChecker implements ShippingMethodEligibilit
                 ++$numMatches;
             }
         }
-
-        switch ($shippingMethod->getCategoryRequirement()) {
-            case ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE:
-                return 0 === $numMatches;
-            case ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY:
-                return 0 < $numMatches;
-            case ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL:
-                return $numShippables === $numMatches;
-        }
-
-        return false;
+        return match ($shippingMethod->getCategoryRequirement()) {
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE => 0 === $numMatches,
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY => 0 < $numMatches,
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL => $numShippables === $numMatches,
+            default => false,
+        };
     }
 }

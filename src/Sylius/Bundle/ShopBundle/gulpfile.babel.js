@@ -6,16 +6,19 @@ import concat from 'gulp-concat';
 import dedent from 'dedent';
 import gulp from 'gulp';
 import gulpif from 'gulp-if';
+import gulpSass from 'gulp-sass';
 import inject from 'rollup-plugin-inject';
 import livereload from 'gulp-livereload';
 import merge from 'merge-stream';
 import order from 'gulp-order';
+import realSass from 'sass';
 import resolve from 'rollup-plugin-node-resolve';
-import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
 import uglifycss from 'gulp-uglifycss';
 import upath from 'upath';
 import yargs from 'yargs';
+
+const sass = gulpSass(realSass);
 
 const { argv } = yargs
   .options({

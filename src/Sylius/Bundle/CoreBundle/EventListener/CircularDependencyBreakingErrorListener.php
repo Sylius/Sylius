@@ -47,11 +47,8 @@ use Symfony\Component\HttpKernel\EventListener\ErrorListener;
  */
 final class CircularDependencyBreakingErrorListener extends ErrorListener
 {
-    private ErrorListener $decoratedListener;
-
-    public function __construct(ErrorListener $decoratedListener)
+    public function __construct(private ErrorListener $decoratedListener)
     {
-        $this->decoratedListener = $decoratedListener;
     }
 
     public function logKernelException(ExceptionEvent $event): void

@@ -40,7 +40,7 @@ final class ProductNormalizerSpec extends ObjectBehavior
     function it_does_not_support_if_the_normalizer_has_been_already_called(ProductVariantInterface $variant): void
     {
         $this
-            ->supportsNormalization($variant, null, ['product_normalizer_already_called' => true])
+            ->supportsNormalization($variant, null, ['sylius_product_normalizer_already_called' => true])
             ->shouldReturn(false)
         ;
     }
@@ -54,7 +54,7 @@ final class ProductNormalizerSpec extends ObjectBehavior
     ): void {
         $this->setNormalizer($normalizer);
 
-        $normalizer->normalize($product, null, ['product_normalizer_already_called' => true])->willReturn([]);
+        $normalizer->normalize($product, null, ['sylius_product_normalizer_already_called' => true])->willReturn([]);
         $defaultProductVariantResolver->getVariant($product)->willReturn($variant);
         $iriConverter->getIriFromItem($variant)->willReturn('/api/v2/shop/product-variants/CODE');
 
@@ -69,7 +69,7 @@ final class ProductNormalizerSpec extends ObjectBehavior
     ): void {
         $this->setNormalizer($normalizer);
 
-        $normalizer->normalize($product, null, ['product_normalizer_already_called' => true])->willReturn([]);
+        $normalizer->normalize($product, null, ['sylius_product_normalizer_already_called' => true])->willReturn([]);
         $defaultProductVariantResolver->getVariant($product)->willReturn(null);
         $iriConverter->getIriFromItem(Argument::any())->shouldNotBeCalled();
 
@@ -82,11 +82,11 @@ final class ProductNormalizerSpec extends ObjectBehavior
     ): void {
         $this->setNormalizer($normalizer);
 
-        $normalizer->normalize($product, null, ['product_normalizer_already_called' => true])->shouldNotBeCalled();
+        $normalizer->normalize($product, null, ['sylius_product_normalizer_already_called' => true])->shouldNotBeCalled();
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('normalize', [$product, null, ['product_normalizer_already_called' => true]])
+            ->during('normalize', [$product, null, ['sylius_product_normalizer_already_called' => true]])
         ;
     }
 }

@@ -7,7 +7,7 @@ Feature: Viewing a product discounted price
     Background:
         Given the store operates on a single channel in "United States"
 
-    @ui
+    @ui @api
     Scenario: Viewing a detailed page with product's original price
         Given the store has a product "T-shirt banana" priced at "$39.00"
         Given the product "T-shirt banana" has original price "$50.00"

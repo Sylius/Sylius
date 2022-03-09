@@ -223,6 +223,66 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then it should have :amount items
+     */
+    public function itShouldHaveAmountOfItems(int $amount): void
+    {
+        Assert::count($this->responseChecker->getValue($this->client->getLastResponse(), 'items'), $amount);
+    }
+
+    /**
+     * @Then the product named :productName should be in the items list
+     */
+    public function theProductShouldBeInTheItemsList(string $productName): void
+    {
+        $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'items');
+
+        foreach ($items as $item) {
+            if ($item['productName'] === $productName) {
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException('There is no product with given name.');
+    }
+
+    /**
+     * @Then /^the order's shipping total should be ("[^"]+")$/
+     */
+    public function theOrdersShippingTotalShouldBe(int $shippingTotal): void
+    {
+        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'shippingTotal'), $shippingTotal);
+    }
+
+    /**
+     * @Then /^the order's tax total should(?:| still) be ("[^"]+")$/
+     */
+    public function theOrdersTaxTotalShouldBe(int $taxTotal): void
+    {
+        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'taxTotal'), $taxTotal);
+    }
+
+    /**
+     * @Then /^the order's items total should be ("[^"]+")$/
+     */
+    public function theOrdersItemsTotalShouldBe(int $itemsTotal): void
+    {
+        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'itemsTotal'), $itemsTotal);
+    }
+
+    /**
+     * @Then /^the order's payment should(?:| also) be ("[^"]+")$/
+     */
+    public function theOrdersPaymentShouldBe(int $paymentAmount): void
+    {
+        $response = $this->paymentsClient->showByIri(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'payments')[0]['@id']
+        );
+
+        Assert::same($this->responseChecker->getValue($response, 'amount'), $paymentAmount);
+    }
+
+    /**
      * @Then /^I should not be able to cancel (this order)$/
      */
     public function iShouldNotBeAbleToCancelThisOrder(OrderInterface $order): void
@@ -254,21 +314,6 @@ final class ManagingOrdersContext implements Context
             $this->responseChecker->getValue($this->client->getLastResponse(), 'orderPromotionTotal'),
             $promotionTotal
         );
-    }
-
-    /**
-     * @Then /^(the administrator) should know about (this additional note) for (this order made by "[^"]+")$/
-     */
-    public function theCustomerServiceShouldKnowAboutThisAdditionalNotes(
-        AdminUserInterface $user,
-        string $notes,
-        OrderInterface $order
-    ): void {
-        $this->adminSecurityService->logIn($user);
-
-        $orderNotes = $this->responseChecker->getValue($this->client->show($order->getTokenValue()), 'notes');
-
-        Assert::same($notes, $orderNotes);
     }
 
     /**

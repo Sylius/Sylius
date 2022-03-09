@@ -22,25 +22,16 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class FakeChannelContext implements ChannelContextInterface
 {
-    private FakeChannelCodeProviderInterface $fakeChannelCodeProvider;
-
-    private ChannelRepositoryInterface $channelRepository;
-
-    private RequestStack $requestStack;
-
     public function __construct(
-        FakeChannelCodeProviderInterface $fakeChannelCodeProvider,
-        ChannelRepositoryInterface $channelRepository,
-        RequestStack $requestStack
+        private FakeChannelCodeProviderInterface $fakeChannelCodeProvider,
+        private ChannelRepositoryInterface $channelRepository,
+        private RequestStack $requestStack
     ) {
-        $this->fakeChannelCodeProvider = $fakeChannelCodeProvider;
-        $this->channelRepository = $channelRepository;
-        $this->requestStack = $requestStack;
     }
 
     public function getChannel(): ChannelInterface
     {
-        $fakeChannelCode = $this->fakeChannelCodeProvider->getCode($this->getMasterRequest());
+        $fakeChannelCode = $this->fakeChannelCodeProvider->getCode($this->getMainRequest());
 
         if (null === $fakeChannelCode) {
             throw new ChannelNotFoundException();
@@ -58,13 +49,17 @@ final class FakeChannelContext implements ChannelContextInterface
     /**
      * @throws ChannelNotFoundException
      */
-    private function getMasterRequest(): Request
+    private function getMainRequest(): Request
     {
-        $masterRequest = $this->requestStack->getMasterRequest();
-        if (null === $masterRequest) {
+        if (\method_exists($this->requestStack, 'getMainRequest')) {
+            $mainRequest = $this->requestStack->getMainRequest();
+        } else {
+            $mainRequest = $this->requestStack->getMasterRequest();
+        }
+        if (null === $mainRequest) {
             throw new ChannelNotFoundException();
         }
 
-        return $masterRequest;
+        return $mainRequest;
     }
 }

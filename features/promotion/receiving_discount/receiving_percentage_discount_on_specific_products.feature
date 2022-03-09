@@ -17,7 +17,7 @@ Feature: Receiving percentage discount on specific products
         Then its price should be decreased by "$20.00"
         And my cart total should be "$80.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving percentage discount on a multiple items
         When I add 3 products "PHP T-Shirt" to the cart
         Then theirs price should be decreased by "$60.00"

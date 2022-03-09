@@ -23,49 +23,40 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
 {
-    private FactoryInterface $productTaxonFactory;
-
-    private RepositoryInterface $productTaxonRepository;
-
-    private ProductInterface $product;
-
     public function __construct(
-        FactoryInterface $productTaxonFactory,
-        RepositoryInterface $productTaxonRepository,
-        ProductInterface $product
+        private FactoryInterface $productTaxonFactory,
+        private RepositoryInterface $productTaxonRepository,
+        private ProductInterface $product
     ) {
-        $this->productTaxonFactory = $productTaxonFactory;
-        $this->productTaxonRepository = $productTaxonRepository;
-        $this->product = $product;
     }
 
-    public function transform($productTaxon): ?TaxonInterface
+    public function transform($value): ?TaxonInterface
     {
-        if (null === $productTaxon) {
+        if (null === $value) {
             return null;
         }
 
-        $this->assertTransformationValueType($productTaxon, ProductTaxonInterface::class);
+        $this->assertTransformationValueType($value, ProductTaxonInterface::class);
 
-        return $productTaxon->getTaxon();
+        return $value->getTaxon();
     }
 
-    public function reverseTransform($taxon): ?ProductTaxonInterface
+    public function reverseTransform($value): ?ProductTaxonInterface
     {
-        if (null === $taxon) {
+        if (null === $value) {
             return null;
         }
 
-        $this->assertTransformationValueType($taxon, TaxonInterface::class);
+        $this->assertTransformationValueType($value, TaxonInterface::class);
 
         /** @var ProductTaxonInterface|null $productTaxon */
-        $productTaxon = $this->productTaxonRepository->findOneBy(['taxon' => $taxon, 'product' => $this->product]);
+        $productTaxon = $this->productTaxonRepository->findOneBy(['taxon' => $value, 'product' => $this->product]);
 
         if (null === $productTaxon) {
             /** @var ProductTaxonInterface $productTaxon */
             $productTaxon = $this->productTaxonFactory->createNew();
             $productTaxon->setProduct($this->product);
-            $productTaxon->setTaxon($taxon);
+            $productTaxon->setTaxon($value);
         }
 
         return $productTaxon;
@@ -81,7 +72,7 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
                 sprintf(
                     'Expected "%s", but got "%s"',
                     $expectedType,
-                    is_object($value) ? get_class($value) : gettype($value)
+                    get_debug_type($value)
                 )
             );
         }

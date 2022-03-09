@@ -37,6 +37,10 @@ final class InstallCommand extends AbstractInstallCommand
             'message' => 'Shop configuration.',
         ],
         [
+            'command' => 'jwt-setup',
+            'message' => 'Configuring JWT token.',
+        ],
+        [
             'command' => 'assets',
             'message' => 'Installing assets.',
         ],
@@ -86,7 +90,7 @@ EOT
                 }
 
                 $this->commandExecutor->runCommand('sylius:install:' . $command['command'], $parameters, $output);
-            } catch (RuntimeException $exception) {
+            } catch (RuntimeException) {
                 $errored = true;
             }
         }

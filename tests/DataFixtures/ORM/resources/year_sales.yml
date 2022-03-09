@@ -62,7 +62,7 @@ Sylius\Component\Core\Model\Order:
         currencyCode: USD
         localeCode: en_US
         customer: "@customer_oliver"
-        state: new
+        state: cart
         checkoutState: completed
         paymentState: paid
         checkoutCompletedAt: "<(new \\DateTime('2019-12-27 00:00:01'))>"
@@ -71,7 +71,7 @@ Sylius\Component\Core\Model\Order:
         currencyCode: USD
         localeCode: en_US
         customer: "@customer_oliver"
-        state: new
+        state: cart
         checkoutState: completed
         paymentState: paid
         checkoutCompletedAt: "<(new \\DateTime('2020-01-15 06:00:01'))>"
@@ -80,7 +80,7 @@ Sylius\Component\Core\Model\Order:
         currencyCode: USD
         localeCode: en_US
         customer: "@customer_oliver"
-        state: new
+        state: cart
         checkoutState: completed
         paymentState: paid
         checkoutCompletedAt: "<(new \\DateTime('2020-01-15 15:00:01'))>"
@@ -89,7 +89,7 @@ Sylius\Component\Core\Model\Order:
         currencyCode: USD
         localeCode: en_US
         customer: "@customer_oliver"
-        state: new
+        state: cart
         checkoutState: completed
         paymentState: paid
         checkoutCompletedAt: "<(new \\DateTime('2020-01-18 06:00:01'))>"
@@ -98,7 +98,7 @@ Sylius\Component\Core\Model\Order:
         currencyCode: USD
         localeCode: en_US
         customer: "@customer_oliver"
-        state: new
+        state: cart
         checkoutState: completed
         paymentState: paid
         checkoutCompletedAt: "<(new \\DateTime('2020-02-18 08:00:01'))>"
@@ -107,7 +107,7 @@ Sylius\Component\Core\Model\Order:
         currencyCode: USD
         localeCode: en_US
         customer: "@customer_oliver"
-        state: new
+        state: cart
         checkoutState: completed
         paymentState: paid
         checkoutCompletedAt: "<(new \\DateTime('2020-02-18 09:30:01'))>"
@@ -116,7 +116,7 @@ Sylius\Component\Core\Model\Order:
         currencyCode: USD
         localeCode: en_US
         customer: "@customer_oliver"
-        state: new
+        state: cart
         checkoutState: completed
         paymentState: paid
         checkoutCompletedAt: "<(new \\DateTime('2019-12-29 09:30:01'))>"
@@ -125,7 +125,7 @@ Sylius\Component\Core\Model\Order:
         currencyCode: USD
         localeCode: en_US
         customer: "@customer_oliver"
-        state: new
+        state: cart
         checkoutState: completed
         paymentState: new
         checkoutCompletedAt: "<(new \\DateTime('2020-01-18 09:30:01'))>"

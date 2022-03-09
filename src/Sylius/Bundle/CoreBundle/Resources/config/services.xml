@@ -13,6 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
+        <import resource="services/calculators.xml" />
+        <import resource="services/catalog_promotion.xml" />
         <import resource="services/checkers.xml" />
         <import resource="services/checkout.xml" />
         <import resource="services/commands.xml" />
@@ -20,6 +22,7 @@
         <import resource="services/dashboard.xml" />
         <import resource="services/emails.xml" />
         <import resource="services/fixtures.xml" />
+        <import resource="services/fixtures_listeners.xml" />
         <import resource="services/fixtures_factories.xml" />
         <import resource="services/form.xml" />
         <import resource="services/installer.xml" />
@@ -37,6 +40,8 @@
 
     <parameters>
         <parameter key="sylius.order_item_quantity_modifier.limit">9999</parameter>
+        <parameter key="env(SYLIUS_UNSECURED_URLS)">true</parameter>
+        <parameter key="sylius.unsecured_urls">%env(bool:SYLIUS_UNSECURED_URLS)%</parameter>
     </parameters>
 
     <services>
@@ -49,6 +54,10 @@
 
         <service id="sylius.proportional_integer_distributor" class="Sylius\Component\Core\Distributor\ProportionalIntegerDistributor" />
         <service id="Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface" alias="sylius.proportional_integer_distributor" />
+
+        <service id="Sylius\Component\Core\Distributor\MinimumPriceDistributorInterface" class="Sylius\Component\Core\Distributor\MinimumPriceDistributor">
+            <argument type="service" id="sylius.proportional_integer_distributor" />
+        </service>
 
         <service id="sylius.invoice_number_generator" class="Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator" />
         <service id="Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface" alias="sylius.invoice_number_generator" />
@@ -104,6 +113,10 @@
             <argument type="service" id="sylius.zone_matcher" />
         </service>
         <service id="Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface" alias="sylius.shipping_method_resolver.default" />
+
+        <service id="sylius.taxation_address_resolver" class="Sylius\Component\Core\Resolver\TaxationAddressResolver">
+            <argument>%sylius_core.taxation.shipping_address_based_taxation%</argument>
+        </service>
 
         <service id="sylius.context.customer" class="Sylius\Bundle\CoreBundle\Context\CustomerContext">
             <argument type="service" id="security.token_storage" />
@@ -226,6 +239,7 @@
 
         <service id="sylius.custom_resource_controller.resource_update_handler" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceUpdateHandler" decorates="sylius.resource_controller.resource_update_handler" public="false">
             <argument type="service" id="sylius.custom_resource_controller.resource_update_handler.inner" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <service id="sylius.custom_resource_controller.resource_delete_handler" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceDeleteHandler" decorates="sylius.resource_controller.resource_delete_handler" public="false">

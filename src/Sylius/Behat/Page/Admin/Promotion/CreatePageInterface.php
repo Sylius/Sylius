@@ -22,7 +22,7 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function nameIt(string $name): void;
 
-    public function addRule(string $ruleName): void;
+    public function addRule(?string $ruleName): void;
 
     public function selectRuleOption(string $option, string $value, bool $multiple = false): void;
 
@@ -35,7 +35,7 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function fillRuleOptionForChannel(string $channelName, string $option, string $value): void;
 
-    public function addAction(string $actionName): void;
+    public function addAction(?string $actionName): void;
 
     public function selectActionOption(string $option, string $value, bool $multiple = false): void;
 
@@ -46,6 +46,8 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function fillUsageLimit(string $limit): void;
 
     public function makeExclusive(): void;
+
+    public function makeNotAppliesToDiscountedItem(): void;
 
     public function checkCouponBased(): void;
 
@@ -64,4 +66,8 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string|string[] $value
      */
     public function selectAutoCompleteFilterOption(string $option, $value, bool $multiple = false): void;
+
+    public function checkIfRuleConfigurationFormIsVisible(): bool;
+
+    public function checkIfActionConfigurationFormIsVisible(): bool;
 }

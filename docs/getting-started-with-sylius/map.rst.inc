@@ -4,6 +4,7 @@
 * :doc:`/getting-started-with-sylius/first-product`
 * :doc:`/getting-started-with-sylius/shop-customizations`
 * :doc:`/getting-started-with-sylius/custom-business-logic`
+* :doc:`/getting-started-with-sylius/using-api`
 * :doc:`/getting-started-with-sylius/plugin-installation`
 * :doc:`/getting-started-with-sylius/deployment`
 * :doc:`/getting-started-with-sylius/summary`

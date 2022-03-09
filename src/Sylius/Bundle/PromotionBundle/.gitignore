@@ -10,3 +10,4 @@
 test/app/cache
 test/app/logs
 test/app/db.sql
+test/var/

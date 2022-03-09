@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use SM\Factory\FactoryInterface;
+use Sylius\Bundle\ApiBundle\Command\Checkout\SendShipmentConfirmationEmail;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ShipShipment;
-use Sylius\Bundle\ApiBundle\Command\SendShipmentConfirmationEmail;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
@@ -27,20 +27,11 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ShipShipmentHandler implements MessageHandlerInterface
 {
-    private ShipmentRepositoryInterface $shipmentRepository;
-
-    private FactoryInterface $stateMachineFactory;
-
-    private MessageBusInterface $eventBus;
-
     public function __construct(
-        ShipmentRepositoryInterface $shipmentRepository,
-        FactoryInterface $stateMachineFactory,
-        MessageBusInterface $eventBus
+        private ShipmentRepositoryInterface $shipmentRepository,
+        private FactoryInterface $stateMachineFactory,
+        private MessageBusInterface $eventBus
     ) {
-        $this->shipmentRepository = $shipmentRepository;
-        $this->stateMachineFactory = $stateMachineFactory;
-        $this->eventBus = $eventBus;
     }
 
     public function __invoke(ShipShipment $shipShipment): ShipmentInterface

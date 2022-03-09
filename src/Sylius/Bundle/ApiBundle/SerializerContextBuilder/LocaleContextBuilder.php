@@ -22,14 +22,10 @@ use Symfony\Component\HttpFoundation\Request;
 /** @experimental */
 final class LocaleContextBuilder implements SerializerContextBuilderInterface
 {
-    private SerializerContextBuilderInterface $decoratedLocaleBuilder;
-
-    private LocaleContextInterface $localeContext;
-
-    public function __construct(SerializerContextBuilderInterface $decoratedLocaleBuilder, LocaleContextInterface $localeContext)
-    {
-        $this->decoratedLocaleBuilder = $decoratedLocaleBuilder;
-        $this->localeContext = $localeContext;
+    public function __construct(
+        private SerializerContextBuilderInterface $decoratedLocaleBuilder,
+        private LocaleContextInterface $localeContext
+    ) {
     }
 
     public function createFromRequest(Request $request, bool $normalization, ?array $extractedAttributes = null): array
@@ -38,7 +34,7 @@ final class LocaleContextBuilder implements SerializerContextBuilderInterface
 
         try {
             $context[ContextKeys::LOCALE_CODE] = $this->localeContext->getLocaleCode();
-        } catch (LocaleNotFoundException $exception) {
+        } catch (LocaleNotFoundException) {
         }
 
         return $context;

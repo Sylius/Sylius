@@ -60,7 +60,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/shipping-methods/{code}/archive</attribute>
                 <attribute name="input">false</attribute>
-                <attribute name="controller">sylius.api.archiving_shipping_method_applicator:archive</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface:archive</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Archives Shipping Method</attribute>
                 </attribute>
@@ -70,7 +70,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/shipping-methods/{code}/restore</attribute>
                 <attribute name="input">false</attribute>
-                <attribute name="controller">sylius.api.archiving_shipping_method_applicator:restore</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface:restore</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Restores archived Shipping Method</attribute>
                 </attribute>
@@ -82,12 +82,25 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/shipping-methods</attribute>
                 <attribute name="filters">
-                    <attribute>sylius.api.filter_archived_shipping_methods</attribute>
+                    <attribute>sylius.api.archived_shipping_methods_filter</attribute>
                     <attribute>sylius.api.shipping_method_order_filter</attribute>
-                    <attribute>sylius.api.translation_order_name_and_locale_filter</attribute>
+                    <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:shipping_method:read</attribute>
+                </attribute>
+            </collectionOperation>
+            <collectionOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/shipping-methods</attribute>
+                <attribute name="pagination_enabled">false</attribute>
+                <attribute name="filters">
+                    <attribute>Sylius\Bundle\ApiBundle\Filter\ShippingMethodFilter</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>shop:shipping_method:read</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -124,5 +137,6 @@
                 </attribute>
             </attribute>
         </property>
+        <property name="description" readable="true" />
     </resource>
 </resources>

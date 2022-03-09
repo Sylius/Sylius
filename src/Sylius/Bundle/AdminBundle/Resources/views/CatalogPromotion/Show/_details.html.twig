@@ -1,0 +1,55 @@
+<div class="ui attached segment">
+    <div>
+        {% if catalog_promotion.enabled %}
+        <span class="ui teal label"><i class="checkmark icon"></i>{{ 'sylius.ui.enabled'|trans }}</span>
+        {% else %}
+        <span class="ui red label"><i class="remove icon"></i>{{ 'sylius.ui.disabled'|trans }}</span>
+        {% endif %}
+
+        {% if catalog_promotion.exclusive %}
+        <span class="ui teal label" {{ sylius_test_html_attribute('exclusive') }}><i class="checkmark icon"></i>{{ 'sylius.ui.exclusive'|trans }}</span>
+        {% endif %}
+
+        {% include '@SyliusAdmin/Common/Label/catalogPromotionState.html.twig' with {'data': catalog_promotion.state} %}
+
+        <table class="ui very basic celled table">
+            <tbody>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'sylius.ui.code'|trans }}</strong></td>
+                <td>{{ catalog_promotion.code }}</td>
+            </tr>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'sylius.ui.name'|trans }}</strong></td>
+                <td {{ sylius_test_html_attribute('name') }}>{{ catalog_promotion.name }}</td>
+            </tr>
+
+            {% if catalog_promotion.startDate is not null %}
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'sylius.ui.start_date'|trans }}</strong></td>
+                <td {{ sylius_test_html_attribute('start-date') }}>{{ catalog_promotion.startDate|format_datetime(pattern='YYYY-MM-dd HH:mm:ss') }}</td>
+            </tr>
+            {% endif %}
+
+            {% if catalog_promotion.endDate is not null %}
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'sylius.ui.end_date'|trans }}</strong></td>
+                <td {{ sylius_test_html_attribute('end-date') }}>{{ catalog_promotion.endDate|format_datetime(pattern='YYYY-MM-dd HH:mm:ss') }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'sylius.ui.priority'|trans }}</strong></td>
+                <td {{ sylius_test_html_attribute('priority') }}>{{ catalog_promotion.priority }}</td>
+            </tr>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'sylius.ui.channels'|trans }}</strong></td>
+                <td>
+                    {% for channel in catalog_promotion.channels %}
+                        {% include '@SyliusAdmin/Common/_channel.html.twig' with {'channel': channel} %}
+                        <br />
+                    {% endfor %}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

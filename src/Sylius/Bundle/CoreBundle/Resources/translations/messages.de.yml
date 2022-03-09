@@ -16,6 +16,12 @@ sylius:
             to_reset_your_password: 'Um Ihr Passwort zurückzusetzen, klicken Sie auf den unten stehenden Link.'
             to_reset_your_password_token: 'Um das Passwort zurückzusetzen, benutzen Sie den unten stehenden Code'
             token: 'Ihr Code zum Zurücksetzen des Passworts lautet'
+        shipment_confirmation:
+            has_been_sent_using: 'wurde gesendet mit'
+            subject: 'Versandbestätigung'
+            thank_you_for_transaction: 'Vielen Dank für eine erfolgreiche Transaktion.'
+            you_can_check_its_location_with_the_tracking_code: 'Sie können den Standort mit dem Tracking-Code %tracking_code% überprüfen.'
+            your_order_with_number: 'Ihre Bestellung mit Nummer'
         user_registration:
             start_shopping: 'Jetzt einkaufen'
             subject: 'Benutzerregistrierung'
@@ -34,12 +40,14 @@ sylius:
             title: Titel
         cart:
             coupon: Gutschein
+        catalog_promotion:
+            channels: Ausgabekanäle
         checkout:
             addressing:
                 different_billing_address: Eine abweichende Rechnungsadresse benutzen?
                 different_shipping_address: Eine abweichende Lieferadresse benutzen?
             payment_method: Zahlungsmethode
-            shipping_method: Versandarten
+            shipping_method: Versandart
         promotion:
             channels: Ausgabekanäle
         promotion_action:

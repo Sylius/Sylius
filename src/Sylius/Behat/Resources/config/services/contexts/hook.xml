@@ -27,9 +27,5 @@
             <argument type="service" id="sylius.behat.email_checker"/>
             <argument type="service" id="filesystem" />
         </service>
-
-        <service id="sylius.behat.context.hook.calendar" class="Sylius\Behat\Context\Hook\CalendarContext">
-            <argument>%kernel.project_dir%</argument>
-        </service>
     </services>
 </container>

@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Lýsing
+            name: Nafn
+            priority: Forgangur
         promotion:
             actions: Aðgerðir
             add_action: Skrá aðgerð

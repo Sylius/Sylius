@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Leírás
+            name: Név
+            priority: Fontosság
         promotion:
             actions: Műveletek
             add_action: Művelet hozzáadása

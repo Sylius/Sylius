@@ -12,7 +12,7 @@ Feature: Receiving percentage discount on shipping
         And there is a promotion "Holiday promotion"
         And I am a logged in customer
 
-    @ui
+    @ui @api
     Scenario: Receiving percentage discount on shipping
         Given the promotion gives "20%" discount on shipping to every order
         When I add product "PHP T-Shirt" to the cart
@@ -20,7 +20,7 @@ Feature: Receiving percentage discount on shipping
         Then my cart total should be "$108.00"
         And my cart shipping total should be "$8.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving free shipping
         Given the promotion gives free shipping to every order
         When I add product "PHP T-Shirt" to the cart

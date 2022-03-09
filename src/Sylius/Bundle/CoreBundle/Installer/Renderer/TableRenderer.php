@@ -20,17 +20,14 @@ final class TableRenderer
 {
     private Table $table;
 
-    private OutputInterface $output;
-
     private ?array $headers = null;
 
     private array $rows = [];
 
     private ?string $label = null;
 
-    public function __construct(OutputInterface $output)
+    public function __construct(private OutputInterface $output)
     {
-        $this->output = $output;
         $this->table = new Table($output);
     }
 

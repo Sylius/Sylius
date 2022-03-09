@@ -13,75 +13,200 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Symfony\Component\BrowserKit\AbstractBrowser;
-use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductVariantsContext implements Context
 {
-    private AbstractBrowser $client;
+    private ApiClientInterface $client;
 
-    private SessionInterface $session;
+    private ResponseCheckerInterface $responseChecker;
 
-    public function __construct(AbstractBrowser $client, SessionInterface $session)
-    {
+    private IriConverterInterface $iriConverter;
+
+    public function __construct(
+        ApiClientInterface $client,
+        ResponseCheckerInterface $responseChecker,
+        IriConverterInterface $iriConverter
+    ) {
         $this->client = $client;
-        $this->session = $session;
+        $this->responseChecker = $responseChecker;
+        $this->iriConverter = $iriConverter;
     }
 
     /**
-     * @When I look for a variant with :phrase in descriptor within the :product product
+     * @When /^I want to create a new variant of (this product)$/
      */
-    public function iLookForVariantWithDescriptorWithinProduct($phrase, ProductInterface $product): void
+    public function iWantToCreateANewProductVariant(ProductInterface $product): void
     {
-        $this->client->getCookieJar()->set(new Cookie($this->session->getName(), $this->session->getId()));
-        $this->client->request(
-            'GET',
-            '/admin/ajax/product-variants/search',
-            ['phrase' => $phrase, 'productCode' => $product->getCode()],
-            [],
-            ['ACCEPT' => 'application/json']
+        $this->client->buildCreateRequest();
+        $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
+    }
+
+    /**
+     * @When I specify its code as :code
+     */
+    public function iSpecifyItsCodeAs(string $code): void
+    {
+        $this->client->addRequestData('code', $code);
+    }
+
+    /**
+     * @When /^I set its price to ("[^"]+") for ("[^"]+" channel)$/
+     */
+    public function iSetItsPriceToForChannel(int $price, ChannelInterface $channel): void
+    {
+        $this->client->addRequestData('channelPricings', [
+            $channel->getCode() => [
+                'price' => $price,
+                'channelCode' => $channel->getCode()
+            ]
+        ]);
+    }
+
+    /**
+     * @When /^I set its minimum price to ("[^"]+") for ("[^"]+" channel)$/
+     */
+    public function iSetItsMinimumPriceToForChannel(int $minimumPrice, ChannelInterface $channel): void
+    {
+        $content = $this->client->getContent();
+        $content['channelPricings'][$channel->getCode()]['minimumPrice'] = $minimumPrice;
+
+        $this->client->updateRequestData($content);
+    }
+
+    /**
+     * @When I add it
+     */
+    public function iAddIt(): void
+    {
+        $this->client->create();
+    }
+
+    /**
+     * @When /^I change the price of the ("[^"]+" product variant) to ("[^"]+") in ("[^"]+" channel)$/
+     */
+    public function iChangeThePriceOfTheProductVariantInChannel(
+        ProductVariantInterface $variant,
+        int $price,
+        ChannelInterface $channel
+    ): void {
+        $this->updateChannelPricingField($variant, $channel, $price, 'price');
+    }
+
+    /**
+     * @When /^I change the original price of the ("[^"]+" product variant) to ("[^"]+") in ("[^"]+" channel)$/
+     */
+    public function iChangeTheOriginalPriceOfTheProductVariantInChannel(
+        ProductVariantInterface $variant,
+        int $originalPrice,
+        ChannelInterface $channel
+    ): void {
+        $this->updateChannelPricingField($variant, $channel, $originalPrice, 'originalPrice');
+    }
+
+    /**
+     * @When /^I remove the original price of the ("[^"]+" product variant) in ("[^"]+" channel)$/
+     */
+    public function iRemoveTheOriginalPriceOfTheProductVariantInChannel(
+        ProductVariantInterface $variant,
+        ChannelInterface $channel
+    ): void {
+        $this->updateChannelPricingField($variant, $channel, null, 'originalPrice');
+    }
+
+    /**
+     * @When /^I create a new "([^"]+)" variant priced at ("[^"]+") for ("[^"]+" product) in the ("[^"]+" channel)$/
+     */
+    public function iCreateANewVariantPricedAtForProductInTheChannel(
+        string $name,
+        int $price,
+        ProductInterface $product,
+        ChannelInterface $channel
+    ): void {
+        $this->createNewVariantWithPrice($name, $price, $product, $channel);
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully created
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
+    {
+        Assert::true(
+            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
+            'Product Variant could not be created'
         );
     }
 
     /**
-     * @Then /^I should see (\d+) product variants? on the list$/
+     * @Then the :productVariantCode variant of the :product product should appear in the store
      */
-    public function iShouldSeeProductVariantsInTheList($number): void
+    public function theProductVariantShouldAppearInTheShop(string $productVariantCode, ProductInterface $product): void
     {
-        Assert::eq(count($this->getJSONResponse()), $number);
+        $response = $this->client->index();
+
+        Assert::true($this->responseChecker->hasItemWithValue($response, 'code', $productVariantCode));
     }
 
     /**
-     * @Then I should see the product variant named :firstName on the list
-     * @Then I should see the product variants named :firstName and :secondName on the list
-     * @Then I should see the product variants named :firstName, :secondName and :thirdName on the list
-     * @Then I should see the product variants named :firstName, :secondName, :thirdName and :fourthName on the list
+     * @Then /^the (variant with code "[^"]+") should be priced at ("[^"]+") for (channel "([^"]+)")$/
      */
-    public function iShouldSeeTheProductVariantNamedAnd(...$names): void
+    public function theVariantWithCodeShouldBePricedAtForChannel(ProductVariantInterface $productVariant, int $price, ChannelInterface $channel): void
     {
-        $itemsNames = array_map(static function ($item) {
-            return strstr($item['descriptor'], ' ', true);
-        }, $this->getJSONResponse());
+        $response = $this->responseChecker->getCollection($this->client->index());
 
-        Assert::allOneOf($itemsNames, $names);
+        Assert::same($response[0]['channelPricings'][$channel->getCode()]['price'], $price);
     }
 
     /**
-     * @Then I should see the product variant labeled :label on the list
+     * @Then /^the (variant with code "[^"]+") should have minimum price ("[^"]+") for (channel "([^"]+)")$/
      */
-    public function iShouldSeeTheProductVariantLabeledAs($label): void
+    public function theVariantWithCodeShouldHaveMinimumPriceForChannel(ProductVariantInterface $productVariant, int $minimumPrice, ChannelInterface $channel): void
     {
-        $itemsLabels = array_column($this->getJSONResponse(), 'descriptor');
+        $response = $this->responseChecker->getCollection($this->client->index());
 
-        Assert::oneOf($label, $itemsLabels, 'Expected "%s" to be on the list, found: %s.');
+        Assert::same($response[0]['channelPricings'][$channel->getCode()]['minimumPrice'], $minimumPrice);
     }
 
-    private function getJSONResponse()
-    {
-        return json_decode($this->client->getResponse()->getContent(), true);
+    private function updateChannelPricingField(
+        ProductVariantInterface $variant,
+        ChannelInterface $channel,
+        ?int $price,
+        string $field
+    ): void {
+        $this->client->buildUpdateRequest($variant->getCode());
+
+        $content = $this->client->getContent();
+        $content['channelPricings'][$channel->getCode()][$field] = $price;
+        $this->client->updateRequestData($content);
+
+        $this->client->update();
+    }
+
+    private function createNewVariantWithPrice(
+        string $name,
+        int $price,
+        ProductInterface $product,
+        ChannelInterface $channel
+    ): void {
+        $this->client->buildCreateRequest();
+        $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
+        $this->client->addRequestData('code', StringInflector::nameToCode($name));
+
+        $this->client->addRequestData('channelPricings', [
+            $channel->getCode() => [
+                'price' => $price,
+                'channelCode' => $channel->getCode()
+            ]
+        ]);
+
+        $this->client->create();
     }
 }

@@ -10,6 +10,7 @@
     </thead>
     <tbody>
     {% for key, variant in product.enabledVariants %}
+        {% set channelPricing = variant.getChannelPricingForChannel(sylius.channel) %}
         <tr {{ sylius_test_html_attribute('product-variants-row') }}>
             <td>
                 {{ variant.name }}
@@ -23,7 +24,8 @@
                     </div>
                 {% endif %}
             </td>
-            <td class="sylius-product-variant-price" {% if variant|sylius_has_discount({'channel': sylius.channel}) %}data-original-price="{{ money.calculateOriginalPrice(variant) }}"{% endif %}>
+            {% set appliedPromotions = channelPricing.appliedPromotions|map(promotion => ({'label': promotion.label, 'description': promotion.description})) %}
+            <td class="sylius-product-variant-price" data-applied-promotions="{{ appliedPromotions|json_encode }}"  {% if variant|sylius_has_discount({'channel': sylius.channel}) %}data-original-price="{{ money.calculateOriginalPrice(variant) }}"{% endif %}>
                 {{ money.calculatePrice(variant) }}
             </td>
             <td class="right aligned">

@@ -17,6 +17,7 @@
 >
     <resource class="%sylius.model.locale.class%" shortName="Locale">
         <attribute name="validation_groups">sylius</attribute>
+        <attribute name="pagination_enabled">false</attribute>
 
         <collectionOperations>
             <collectionOperation name="admin_get">
@@ -67,5 +68,6 @@
         <property name="code" identifier="true" required="true" />
         <property name="createdAt" writable="false" />
         <property name="updatedAt" writable="false" />
+        <property name="name" writable="false" />
     </resource>
 </resources>

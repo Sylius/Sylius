@@ -15,7 +15,7 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -27,7 +27,7 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 final class OrderPricesRecalculatorSpec extends ObjectBehavior
 {
-    function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator): void
+    function let(ProductVariantPricesCalculatorInterface $productVariantPriceCalculator): void
     {
         $this->beConstructedWith($productVariantPriceCalculator);
     }
@@ -44,8 +44,10 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $item,
         ProductVariantInterface $variant,
-        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator
     ): void {
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
         $order->getCustomer()->willReturn($customer);
         $order->getChannel()->willReturn(null);
         $order->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
@@ -63,7 +65,12 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
             ->calculate($variant, ['channel' => $channel])
             ->willReturn(10)
         ;
+        $productVariantPriceCalculator
+            ->calculateOriginal($variant, ['channel' => $channel])
+            ->willReturn(20)
+        ;
         $item->setUnitPrice(10)->shouldBeCalled();
+        $item->setOriginalUnitPrice(20)->shouldBeCalled();
 
         $this->process($order);
     }
@@ -74,5 +81,15 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('process', [$order])
         ;
+    }
+
+    function it_does_nothing_if_the_order_is_in_a_state_different_than_cart(OrderInterface $order): void
+    {
+        $order->getState()->willReturn(OrderInterface::STATE_NEW);
+
+        $order->getChannel()->shouldNotBeCalled();
+        $order->getItems()->shouldNotBeCalled();
+
+        $this->process($order);
     }
 }

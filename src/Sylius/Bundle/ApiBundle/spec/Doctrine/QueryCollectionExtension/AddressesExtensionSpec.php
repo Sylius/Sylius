@@ -43,6 +43,8 @@ final class AddressesExtensionSpec extends ObjectBehavior
         $shopUser->getCustomer()->willReturn($customer);
         $shopUser->getRoles()->willReturn(['ROLE_USER']);
 
+        $queryNameGenerator->generateParameterName('customer')->shouldBeCalled()->willReturn('customer');
+
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->innerJoin('o.customer', 'customer')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->andWhere('o.customer = :customer')->shouldBeCalled()->willReturn($queryBuilder);

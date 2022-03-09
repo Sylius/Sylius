@@ -1,0 +1,112 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_fixtures:
+    suites:
+        default:
+            listeners:
+                catalog_promotion_processor_executor: ~
+            fixtures:
+                promotion:
+                    options:
+                        custom:
+                            christmas:
+                                code: 'christmas'
+                                name: 'Christmas'
+                                channels:
+                                    - 'FASHION_WEB'
+                                coupon_based: true
+                                coupons:
+                                    -   code: 'CHRISTMAS_SALE'
+                                        expires_at: 'December 24'
+                                        usage_limit: 10
+                                        per_customer_usage_limit: 1
+                            new_year:
+                                code: 'new_year'
+                                name: 'New Year'
+                                usage_limit: 10
+                                priority: 2
+                                starts_at: '-7 day'
+                                ends_at: '7 day'
+                                channels:
+                                    - 'FASHION_WEB'
+                                rules:
+                                    -   type: 'item_total'
+                                        configuration:
+                                            FASHION_WEB:
+                                                amount: 100.00
+                                actions:
+                                    -   type: 'order_fixed_discount'
+                                        configuration:
+                                            FASHION_WEB:
+                                                amount: 10.00
+
+                catalog_promotion:
+                    options:
+                        custom:
+                            winter:
+                                code: 'winter'
+                                name: 'Winter sale'
+                                channels:
+                                    - 'FASHION_WEB'
+                                priority: 1
+                                scopes:
+                                    -   type: 'for_variants'
+                                        configuration:
+                                            variants:
+                                                - '000F_office_grey_jeans-variant-0'
+                                                - '000F_office_grey_jeans-variant-1'
+                                                - '000F_office_grey_jeans-variant-2'
+                                actions:
+                                    -   type: 'percentage_discount'
+                                        configuration:
+                                            amount: 0.5   
+                            spring:
+                                code: 'spring'
+                                name: 'Spring sale'
+                                channels:
+                                    - 'FASHION_WEB'
+                                priority: 3
+                                scopes:
+                                    -   type: 'for_taxons'
+                                        configuration:
+                                            taxons:
+                                                - 'jeans'
+                                actions:
+                                    -   type: 'fixed_discount'
+                                        configuration:
+                                            FASHION_WEB:
+                                                amount: 3.00
+                            summer:
+                                code: 'summer'
+                                name: 'Summer sale'
+                                channels:
+                                    - 'FASHION_WEB'
+                                exclusive: true
+                                priority: 4
+                                scopes:
+                                    -   type: 'for_variants'
+                                        configuration:
+                                            variants:
+                                                - '000F_office_grey_jeans-variant-0'
+                                actions:
+                                    -   type: 'percentage_discount'
+                                        configuration:
+                                            amount: 0.5
+                            autumn:
+                                code: 'autumn'
+                                name: 'Autumn sale'
+                                start_date: '2 days'
+                                end_date: '10 days'
+                                channels:
+                                    - 'FASHION_WEB'
+                                priority: 2
+                                scopes:
+                                    -   type: 'for_products'
+                                        configuration:
+                                            products:
+                                                - 'Knitted_wool_blend_green_cap'
+                                actions:
+                                    -   type: 'percentage_discount'
+                                        configuration:
+                                            amount: 0.5

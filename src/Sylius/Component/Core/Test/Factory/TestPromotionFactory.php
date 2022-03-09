@@ -20,11 +20,8 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class TestPromotionFactory implements TestPromotionFactoryInterface
 {
-    private FactoryInterface $promotionFactory;
-
-    public function __construct(FactoryInterface $promotionFactory)
+    public function __construct(private FactoryInterface $promotionFactory)
     {
-        $this->promotionFactory = $promotionFactory;
     }
 
     public function create(string $name): PromotionInterface

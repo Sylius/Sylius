@@ -22,11 +22,8 @@ use Webmozart\Assert\Assert;
 
 final class TaxonsToCodesTransformer implements DataTransformerInterface
 {
-    private TaxonRepositoryInterface $taxonRepository;
-
-    public function __construct(TaxonRepositoryInterface $taxonRepository)
+    public function __construct(private TaxonRepositoryInterface $taxonRepository)
     {
-        $this->taxonRepository = $taxonRepository;
     }
 
     /**
@@ -46,10 +43,10 @@ final class TaxonsToCodesTransformer implements DataTransformerInterface
     /**
      * @throws \InvalidArgumentException
      */
-    public function reverseTransform($taxons): array
+    public function reverseTransform($value): array
     {
-        Assert::isInstanceOf($taxons, Collection::class);
+        Assert::isInstanceOf($value, Collection::class);
 
-        return array_map(fn(TaxonInterface $taxon) => $taxon->getCode(), $taxons->toArray());
+        return array_map(fn(TaxonInterface $taxon) => $taxon->getCode(), $value->toArray());
     }
 }

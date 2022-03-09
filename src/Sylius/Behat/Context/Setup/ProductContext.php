@@ -161,7 +161,9 @@ final class ProductContext implements Context
 
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
-        $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
+        if (!$productVariant->hasChannelPricingForChannel($channel)) {
+            $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
+        }
 
         $this->objectManager->flush();
     }
@@ -319,6 +321,26 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^the (product "[^"]+") has(?:| a) "([^"]+)" variant priced at ("[^"]+") configured with ("[^"]+" option value)$/
+     * @Given /^(this product) has "([^"]+)" variant priced at ("[^"]+") configured with ("[^"]+" option value)$/
+     */
+    public function theProductHasVariantPricedAtConfiguredWithOptionValue(
+        ProductInterface $product,
+        string $productVariantName,
+        int $price,
+        ProductOptionValueInterface $optionValue
+    ) {
+        $this->createProductVariant(
+            $product,
+            $productVariantName,
+            $price,
+            StringInflector::nameToUppercaseCode($productVariantName),
+            $this->sharedStorage->get('channel'),
+            optionValue: $optionValue
+        );
+    }
+
+    /**
      * @Given /^("[^"]+" variant) priced at ("[^"]+") in ("[^"]+" channel)$/
      */
     public function variantPricedAtInChannel(
@@ -342,6 +364,19 @@ final class ProductContext implements Context
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $productVariant->getChannelPricingForChannel($channel);
         $channelPricing->setOriginalPrice($originalPrice);
+    }
+
+    /**
+     * @Given /^the ("[^"]+" variant) has minimum price of ("[^"]+") in the ("[^"]+" channel)$/
+     */
+    public function variantHasMinimumPriceInChannel(
+        ProductVariantInterface $productVariant,
+        int $minimumPrice,
+        ChannelInterface $channel
+    ): void {
+        /** @var ChannelPricingInterface $channelPricing */
+        $channelPricing = $productVariant->getChannelPricingForChannel($channel);
+        $channelPricing->setMinimumPrice($minimumPrice);
     }
 
     /**
@@ -1040,6 +1075,28 @@ final class ProductContext implements Context
         $this->objectManager->flush();
     }
 
+    /**
+     * @Given /^(this product) is available in ("[^"]+" channel) and ("[^"]+" channel)$/
+     */
+    public function thisProductIsAvailableInChannels(ProductInterface $product, ChannelInterface ...$channels): void
+    {
+        foreach ($channels as $channel) {
+            $product->addChannel($channel);
+        }
+
+        $this->saveProduct($product);
+    }
+
+    /**
+     * @Given /^(this product) is configured with the option matching selection method$/
+     */
+    public function thisProductIsConfiguredWithTheOptionMatchingSelectionMethod(ProductInterface $product): void
+    {
+        $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
+
+        $this->saveProduct($product);
+    }
+
     private function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
@@ -1142,7 +1199,8 @@ final class ProductContext implements Context
         ChannelInterface $channel = null,
         $position = null,
         $shippingRequired = true,
-        int $currentStock = 0
+        int $currentStock = 0,
+        ?ProductOptionValueInterface $optionValue = null
     ) {
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_CHOICE);
 
@@ -1156,6 +1214,9 @@ final class ProductContext implements Context
         $variant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
         $variant->setPosition((null === $position) ? null : (int) $position);
         $variant->setShippingRequired($shippingRequired);
+        if (null !== $optionValue) {
+            $variant->addOptionValue($optionValue);
+        }
 
         $product->addVariant($variant);
 

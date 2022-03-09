@@ -26,14 +26,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class ResourceDeleteSubscriber implements EventSubscriberInterface
 {
-    private UrlGeneratorInterface $router;
-
-    private SessionInterface $session;
-
-    public function __construct(UrlGeneratorInterface $router, SessionInterface $session)
+    public function __construct(private UrlGeneratorInterface $router, private SessionInterface $session)
     {
-        $this->router = $router;
-        $this->session = $session;
     }
 
     public static function getSubscribedEvents(): array
@@ -50,7 +44,12 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (!$event->isMasterRequest() || 'html' !== $event->getRequest()->getRequestFormat()) {
+        if (\method_exists($event, 'isMainRequest')) {
+            $isMainRequest = $event->isMainRequest();
+        } else {
+            $isMainRequest = $event->isMasterRequest();
+        }
+        if (!$isMainRequest || 'html' !== $event->getRequest()->getRequestFormat()) {
             return;
         }
 
@@ -112,7 +111,7 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
 
     private function isSyliusRoute(string $route): bool
     {
-        return 0 === strpos($route, 'sylius');
+        return str_starts_with($route, 'sylius');
     }
 
     private function isAdminSection(array $syliusParameters): bool

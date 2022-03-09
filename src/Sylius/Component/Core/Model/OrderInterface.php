@@ -130,4 +130,6 @@ interface OrderInterface extends
      * @return ChannelInterface|null
      */
     public function getChannel(): ?BaseChannelInterface;
+
+    public function getNonDiscountedItemsTotal(): int;
 }

@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
-class ProductOption implements ProductOptionInterface
+class ProductOption implements ProductOptionInterface, \Stringable
 {
     use TimestampableTrait;
     use TranslatableTrait {
@@ -102,25 +102,25 @@ class ProductOption implements ProductOptionInterface
         return $this->values;
     }
 
-    public function addValue(ProductOptionValueInterface $value): void
+    public function addValue(ProductOptionValueInterface $optionValue): void
     {
-        if (!$this->hasValue($value)) {
-            $value->setOption($this);
-            $this->values->add($value);
+        if (!$this->hasValue($optionValue)) {
+            $optionValue->setOption($this);
+            $this->values->add($optionValue);
         }
     }
 
-    public function removeValue(ProductOptionValueInterface $value): void
+    public function removeValue(ProductOptionValueInterface $optionValue): void
     {
-        if ($this->hasValue($value)) {
-            $this->values->removeElement($value);
-            $value->setOption(null);
+        if ($this->hasValue($optionValue)) {
+            $this->values->removeElement($optionValue);
+            $optionValue->setOption(null);
         }
     }
 
-    public function hasValue(ProductOptionValueInterface $value): bool
+    public function hasValue(ProductOptionValueInterface $optionValue): bool
     {
-        return $this->values->contains($value);
+        return $this->values->contains($optionValue);
     }
 
     /**

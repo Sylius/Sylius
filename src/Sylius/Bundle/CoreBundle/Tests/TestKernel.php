@@ -49,6 +49,7 @@ use Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle;
 use Sylius\Bundle\ThemeBundle\SyliusThemeBundle;
 use Sylius\Bundle\UiBundle\SyliusUiBundle;
 use Sylius\Bundle\UserBundle\SyliusUserBundle;
+use Sylius\Calendar\SyliusCalendarBundle;
 use SyliusLabs\DoctrineMigrationsExtraBundle\SyliusLabsDoctrineMigrationsExtraBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -74,6 +75,7 @@ final class TestKernel extends BaseKernel
             new SwiftmailerBundle(),
             new TwigBundle(),
             new DoctrineBundle(),
+            new SyliusCalendarBundle(),
             new SyliusOrderBundle(),
             new SyliusMoneyBundle(),
             new SyliusCurrencyBundle(),

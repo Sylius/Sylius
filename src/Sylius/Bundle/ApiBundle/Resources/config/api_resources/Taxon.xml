@@ -61,6 +61,10 @@
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
+        <property name="name" required="true" />
+        <property name="slug" required="true" />
+        <property name="description" required="true" />
+        <property name="children" readableLink="false" />
         <property name="translations" readable="true" writable="true" />
     </resource>
 </resources>

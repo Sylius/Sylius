@@ -28,9 +28,26 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('code');
     }
 
-    public function specifyPrice(int $price): void
+    public function specifyPrice(int $price, ?ChannelInterface $channel = null): void
     {
-        $this->getDocument()->fillField('Price', $price);
+        if ($channel === null) {
+            $this->getDocument()->fillField('Price', $price);
+
+            return;
+        }
+
+        $this->getElement('price', ['%channelCode%' => $channel->getCode()])->setValue($price);
+    }
+
+    public function specifyOriginalPrice(?int $originalPrice, ?ChannelInterface $channel = null): void
+    {
+        if ($channel === null) {
+            $this->getDocument()->fillField('Original price', $originalPrice);
+
+            return;
+        }
+
+        $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
     }
 
     public function disableTracking(): void
@@ -58,6 +75,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function getPriceForChannel(ChannelInterface $channel): string
     {
         return $this->getElement('price', ['%channelCode%' => $channel->getCode()])->getValue();
+    }
+
+    public function getMinimumPriceForChannel(ChannelInterface $channel): string
+    {
+        return $this->getElement('minimum_price', ['%channelCode%' => $channel->getCode()])->getValue();
     }
 
     public function getOriginalPriceForChannel(ChannelInterface $channel): string
@@ -109,6 +131,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_variant_code',
+            'minimum_price' => '#sylius_product_variant_channelPricings input[name$="[minimumPrice]"][id*="%channelCode%"]',
             'name' => '#sylius_product_variant_translations_%language%_name',
             'on_hand' => '#sylius_product_variant_onHand',
             'option_values' => '#sylius_product_variant_optionValues_%optionName%',

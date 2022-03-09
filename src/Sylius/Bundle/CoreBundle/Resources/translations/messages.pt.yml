@@ -9,6 +9,8 @@ sylius:
             title: Título
         cart:
             coupon: Cupão
+        catalog_promotion:
+            channels: Canais
         checkout:
             addressing:
                 different_billing_address: Usar uma morada diferente para a faturação?

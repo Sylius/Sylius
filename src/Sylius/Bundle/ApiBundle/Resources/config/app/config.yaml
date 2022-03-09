@@ -4,6 +4,10 @@
 parameters:
     env(SYLIUS_API_AUTHORIZATION_HEADER): Authorization
     sylius.api.authorization_header: "%env(resolve:SYLIUS_API_AUTHORIZATION_HEADER)%"
+    sylius.api.paths_to_hide: 
+        - "/api/v2/admin/catalog-promotion-actions/{id}"
+        - "/api/v2/admin/catalog-promotion-scopes/{id}"
+        - "/api/v2/admin/channel-pricings/{id}"
     sylius.security.new_api_route: "/api/v2"
     sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
     sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
@@ -31,6 +35,8 @@ api_platform:
     collection:
         pagination:
             client_items_per_page: true
+    mapping:
+        paths: ['%kernel.project_dir%/config/api_platform']
 
 lexik_jwt_authentication:
     token_extractors:
@@ -38,4 +44,3 @@ lexik_jwt_authentication:
             enabled: true
             prefix: Bearer
             name: "%sylius.api.authorization_header%"
-

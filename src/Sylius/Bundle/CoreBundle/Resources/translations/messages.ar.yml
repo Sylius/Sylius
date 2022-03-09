@@ -9,6 +9,8 @@ sylius:
             title: عنوان
         cart:
             coupon: قسيمة شرائية
+        catalog_promotion:
+            channels: القنوات
         checkout:
             addressing:
                 different_billing_address: استخدام عنوان مختلف للفوترة؟

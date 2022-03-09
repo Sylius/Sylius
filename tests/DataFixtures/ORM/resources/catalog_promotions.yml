@@ -1,0 +1,29 @@
+Sylius\Component\Core\Model\CatalogPromotion:
+    sale_1:
+        code: sale1
+        name: Sale1
+        enabled: true
+        start_date: "<(new \\DateTime('2021-10-12 00:00:00'))>"
+        end_date: "<(new \\DateTime('2021-10-12 23:59:58'))>"
+        state: inactive
+    sale_2:
+        code: sale2
+        name: Sale2
+        enabled: true
+        start_date: "<(new \\DateTime('2021-10-12 00:00:01'))>"
+        end_date: "<(new \\DateTime('2021-10-12 23:59:58'))>"
+        state: inactive
+    sale_3:
+        code: sale3
+        name: Sale3
+        enabled: true
+        start_date: "<(new \\DateTime('2021-10-12 00:00:02'))>"
+        end_date: "<(new \\DateTime('2021-10-12 23:59:59'))>"
+        state: inactive
+    sale_4:
+        code: sale4
+        name: Sale4
+        enabled: true
+        start_date: "<(new \\DateTime('2021-10-12 00:00:03'))>"
+        end_date: "<(new \\DateTime('2021-10-12 23:59:59'))>"
+        state: inactive

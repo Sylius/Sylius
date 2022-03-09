@@ -93,7 +93,6 @@ sylius:
         product: '産品'
         product_reviews: '産品評論'
         products: '産品'
-        promotions: '促銷推廣'
         province: '省'
         provinces: '省份'
         ratio: '比率'

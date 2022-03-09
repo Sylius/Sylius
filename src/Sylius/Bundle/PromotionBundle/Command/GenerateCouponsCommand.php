@@ -28,18 +28,11 @@ final class GenerateCouponsCommand extends Command
 {
     protected static $defaultName = 'sylius:promotion:generate-coupons';
 
-    private PromotionRepositoryInterface $promotionRepository;
-
-    private PromotionCouponGeneratorInterface $couponGenerator;
-
     public function __construct(
-        PromotionRepositoryInterface $promotionRepository,
-        PromotionCouponGeneratorInterface $couponGenerator
+        private PromotionRepositoryInterface $promotionRepository,
+        private PromotionCouponGeneratorInterface $couponGenerator
     ) {
         parent::__construct();
-
-        $this->promotionRepository = $promotionRepository;
-        $this->couponGenerator = $couponGenerator;
     }
 
     protected function configure(): void

@@ -1,0 +1,58 @@
+{
+    "@context": "/api/v2/contexts/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "scopes[0].type: Catalog promotion scope type is invalid. Please choose a valid type.\nscopes[1].configuration.variants: Please add at least 1 variant.\nscopes[2].configuration.variants: Please add at least 1 variant.\nscopes[3].configuration.variants: Provided configuration contains errors. Please add only existing variants.\nscopes[4].configuration.products: Provided configuration contains errors. Please add at least 1 product.\nscopes[5].configuration.products: Provided configuration contains errors. Please add at least 1 product.\nscopes[6].configuration.products: Provided configuration contains errors. Please add only existing products.\nscopes[7].configuration.taxons: Provided configuration contains errors. Please add at least 1 taxon.\nscopes[8].configuration.taxons: Provided configuration contains errors. Please add at least 1 taxon.\nscopes[9].configuration.taxons: Provided configuration contains errors. Please add only existing taxons.",
+    "violations": [
+        {
+            "propertyPath": "scopes[0].type",
+            "message": "Catalog promotion scope type is invalid. Please choose a valid type.",
+            "code": null
+        },
+        {
+            "propertyPath": "scopes[1].configuration.variants",
+            "message": "Please add at least 1 variant.",
+            "code": null
+        },
+        {
+            "propertyPath": "scopes[2].configuration.variants",
+            "message": "Please add at least 1 variant.",
+            "code": null
+        },
+        {
+            "propertyPath": "scopes[3].configuration.variants",
+            "message": "Provided configuration contains errors. Please add only existing variants.",
+            "code": null
+        },
+        {
+            "propertyPath": "scopes[4].configuration.products",
+            "message": "Provided configuration contains errors. Please add at least 1 product.",
+            "code": null
+        },
+        {
+            "propertyPath": "scopes[5].configuration.products",
+            "message": "Provided configuration contains errors. Please add at least 1 product.",
+            "code": null
+        },
+        {
+            "propertyPath": "scopes[6].configuration.products",
+            "message": "Provided configuration contains errors. Please add only existing products.",
+            "code": null
+        },
+        {
+            "propertyPath": "scopes[7].configuration.taxons",
+            "message": "Provided configuration contains errors. Please add at least 1 taxon.",
+            "code": null
+        },
+        {
+            "propertyPath": "scopes[8].configuration.taxons",
+            "message": "Provided configuration contains errors. Please add at least 1 taxon.",
+            "code": null
+        },
+        {
+            "propertyPath": "scopes[9].configuration.taxons",
+            "message": "Provided configuration contains errors. Please add only existing taxons.",
+            "code": null
+        }
+    ]
+}

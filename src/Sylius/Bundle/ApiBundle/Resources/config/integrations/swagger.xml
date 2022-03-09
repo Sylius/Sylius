@@ -46,49 +46,79 @@
         </service>
 
         <service
-            id="sylius.api.swagger_admin_authentication_documentation_normalizer"
-            class="Sylius\Bundle\ApiBundle\Swagger\AdminAuthenticationTokenDocumentationNormalizer"
+            id="Sylius\Bundle\ApiBundle\Swagger\AdminAuthenticationTokenDocumentationNormalizer"
             decorates="api_platform.swagger.normalizer.documentation"
-            public="true"
             autoconfigure="false"
             decoration-priority="20"
         >
-            <argument type="service" id="sylius.api.swagger_admin_authentication_documentation_normalizer.inner" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\AdminAuthenticationTokenDocumentationNormalizer.inner" />
             <argument>%sylius.security.new_api_route%</argument>
         </service>
 
         <service
-            id="sylius.api.swagger_shop_authentication_documentation_normalizer"
-            class="Sylius\Bundle\ApiBundle\Swagger\ShopAuthenticationTokenDocumentationNormalizer"
+            id="Sylius\Bundle\ApiBundle\Swagger\ShopAuthenticationTokenDocumentationNormalizer"
             decorates="api_platform.swagger.normalizer.documentation"
-            public="true"
             autoconfigure="false"
             decoration-priority="10"
         >
-            <argument type="service" id="sylius.api.swagger_shop_authentication_documentation_normalizer.inner" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ShopAuthenticationTokenDocumentationNormalizer.inner" />
             <argument>%sylius.security.new_api_route%</argument>
         </service>
 
         <service
-            id="sylius.api.swagger_product_documentation_normalizer"
-            class="Sylius\Bundle\ApiBundle\Swagger\ProductDocumentationNormalizer"
+            id="Sylius\Bundle\ApiBundle\Swagger\ProductDocumentationNormalizer"
             decorates="api_platform.swagger.normalizer.documentation"
-            public="true"
             autoconfigure="false"
             decoration-priority="20"
         >
-            <argument type="service" id="sylius.api.swagger_product_documentation_normalizer.inner" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ProductDocumentationNormalizer.inner" />
         </service>
 
         <service
-            id="sylius.api.swagger_product_variant_documentation_normalizer"
-            class="Sylius\Bundle\ApiBundle\Swagger\ProductVariantDocumentationNormalizer"
+            id="Sylius\Bundle\ApiBundle\Swagger\ProductImageDocumentationNormalizer"
             decorates="api_platform.swagger.normalizer.documentation"
-            public="true"
             autoconfigure="false"
             decoration-priority="20"
         >
-            <argument type="service" id="sylius.api.swagger_product_variant_documentation_normalizer.inner" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ProductImageDocumentationNormalizer.inner" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\ProductImageFilterProviderInterface" />
+        </service>
+
+        <service
+            id="Sylius\Bundle\ApiBundle\Swagger\ProductSlugDocumentationNormalizer"
+            decorates="api_platform.swagger.normalizer.documentation"
+            autoconfigure="false"
+            decoration-priority="20"
+        >
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ProductSlugDocumentationNormalizer.inner" />
+        </service>
+
+        <service
+            id="Sylius\Bundle\ApiBundle\Swagger\ProductVariantDocumentationNormalizer"
+            decorates="api_platform.swagger.normalizer.documentation"
+            autoconfigure="false"
+            decoration-priority="20"
+        >
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ProductVariantDocumentationNormalizer.inner" />
+        </service>
+
+        <service
+            id="Sylius\Bundle\ApiBundle\Swagger\ShippingMethodDocumentationNormalizer"
+            decorates="api_platform.swagger.normalizer.documentation"
+            autoconfigure="false"
+            decoration-priority="20"
+        >
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ShippingMethodDocumentationNormalizer.inner" />
+        </service>
+
+        <service
+            id="Sylius\Bundle\ApiBundle\Swagger\PathHiderDocumentationNormalizer"
+            decorates="api_platform.swagger.normalizer.documentation"
+            autoconfigure="false"
+            decoration-priority="20"
+        >
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\PathHiderDocumentationNormalizer.inner" />
+            <argument>%sylius.api.paths_to_hide%</argument>
         </service>
     </services>
 </container>

@@ -18,11 +18,8 @@ use Twig\TwigFunction;
 
 final class ShopExtension extends AbstractExtension
 {
-    private bool $isShopEnabled;
-
-    public function __construct(bool $isShopEnabled)
+    public function __construct(private bool $isShopEnabled)
     {
-        $this->isShopEnabled = $isShopEnabled;
     }
 
     public function getFunctions(): array

@@ -22,6 +22,10 @@
             <argument type="service" id="sylius.fixture.example_factory.address" />
         </service>
 
+        <service id="Sylius\Behat\Context\Transform\CatalogPromotionContext">
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+        </service>
+
         <service id="sylius.behat.context.transform.channel" class="Sylius\Behat\Context\Transform\ChannelContext">
             <argument type="service" id="sylius.repository.channel" />
         </service>
@@ -87,6 +91,10 @@
 
         <service id="sylius.behat.context.transform.product_option" class="Sylius\Behat\Context\Transform\ProductOptionContext">
             <argument type="service" id="sylius.repository.product_option" />
+        </service>
+
+        <service id="sylius.behat.context.transform.product_option_value" class="Sylius\Behat\Context\Transform\ProductOptionValueContext">
+            <argument type="service" id="sylius.repository.product_option_value" />
         </service>
 
         <service id="sylius.behat.context.transform.product_review" class="Sylius\Behat\Context\Transform\ProductReviewContext">

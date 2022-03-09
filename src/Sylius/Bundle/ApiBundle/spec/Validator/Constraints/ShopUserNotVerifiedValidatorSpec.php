@@ -15,7 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
-use Sylius\Bundle\ApiBundle\Command\ResendVerificationEmail;
+use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserNotVerified;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -55,9 +55,19 @@ final class ShopUserNotVerifiedValidatorSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_shop_user_does_not_exist(UserRepositoryInterface $userRepository): void
     {
-        $value = new ResendVerificationEmail('test@sylius.com');
+        $value = new class() implements ShopUserIdAwareInterface {
+            public function getShopUserId()
+            {
+                return 42;
+            }
 
-        $userRepository->findOneByEmail('test@sylius.com')->willReturn(null);
+            public function setShopUserId($shopUserId): void
+            {
+                // Intentionally left blank
+            }
+        };
+
+        $userRepository->find(42)->willReturn(null);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -72,11 +82,22 @@ final class ShopUserNotVerifiedValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $value = new ResendVerificationEmail('test@sylius.com');
+        $value = new class() implements ShopUserIdAwareInterface {
+            public function getShopUserId()
+            {
+                return 42;
+            }
 
-        $userRepository->findOneByEmail('test@sylius.com')->willReturn($shopUser);
+            public function setShopUserId($shopUserId): void
+            {
+                // Intentionally left blank
+            }
+        };
+
+        $userRepository->find(42)->willReturn($shopUser);
 
         $shopUser->isVerified()->willReturn(true);
+        $shopUser->getEmail()->willReturn('test@sylius.com');
 
         $executionContext
             ->addViolation('sylius.account.is_verified', ['%email%' => 'test@sylius.com'])
@@ -92,9 +113,19 @@ final class ShopUserNotVerifiedValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $value = new ResendVerificationEmail('test@sylius.com');
+        $value = new class() implements ShopUserIdAwareInterface {
+            public function getShopUserId()
+            {
+                return 42;
+            }
 
-        $userRepository->findOneByEmail('test@sylius.com')->willReturn($shopUser);
+            public function setShopUserId($shopUserId): void
+            {
+                // Intentionally left blank
+            }
+        };
+
+        $userRepository->find(42)->willReturn($shopUser);
 
         $shopUser->isVerified()->willReturn(false);
 

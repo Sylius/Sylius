@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
-use Sylius\Bundle\ApiBundle\Command\ResendVerificationEmail;
+use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -22,21 +23,19 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ShopUserNotVerifiedValidator extends ConstraintValidator
 {
-    private UserRepositoryInterface $shopUserRepository;
-
-    public function __construct(UserRepositoryInterface $shopUserRepository)
+    public function __construct(private UserRepositoryInterface $shopUserRepository)
     {
-        $this->shopUserRepository = $shopUserRepository;
     }
 
     public function validate($value, Constraint $constraint): void
     {
-        Assert::isInstanceOf($value, ResendVerificationEmail::class);
+        Assert::isInstanceOf($value, ShopUserIdAwareInterface::class);
 
         /** @var ShopUserNotVerified $constraint */
         Assert::isInstanceOf($constraint, ShopUserNotVerified::class);
 
-        $shopUser = $this->shopUserRepository->findOneByEmail($value->email);
+        /** @var ShopUserInterface $shopUser */
+        $shopUser = $this->shopUserRepository->find($value->getShopUserId());
 
         Assert::notNull($shopUser);
 
@@ -44,6 +43,6 @@ final class ShopUserNotVerifiedValidator extends ConstraintValidator
             return;
         }
 
-        $this->context->addViolation($constraint->message, ['%email%' => $value->email]);
+        $this->context->addViolation($constraint->message, ['%email%' => $shopUser->getEmail()]);
     }
 }

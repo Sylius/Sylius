@@ -15,7 +15,7 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
-    <resource class="Sylius\Bundle\ApiBundle\Command\VerifyCustomerAccount" shortName="VerifyCustomerAccount">
+    <resource class="Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount" shortName="VerifyCustomerAccount">
         <attribute name="route_prefix">shop</attribute>
         <attribute name="messenger">input</attribute>
         <attribute name="validation_groups">sylius</attribute>
@@ -25,7 +25,7 @@
             <collectionOperation name="shop_resend_verification_email">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/account-verification-requests</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\ResendVerificationEmail</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Account\ResendVerificationEmail</attribute>
                 <attribute name="status">202</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:resend_verification_email:create</attribute>
@@ -33,6 +33,7 @@
                 <attribute name="openapi_context">
                     <attribute name="summary">Resends verification email</attribute>
                 </attribute>
+                <attribute name="security">is_granted("ROLE_USER")</attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -40,7 +41,7 @@
             <itemOperation name="shop_verify_customer_account">
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/account-verification-requests/{token}</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\VerifyCustomerAccount</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount</attribute>
                 <attribute name="status">202</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:account_verification:update</attribute>

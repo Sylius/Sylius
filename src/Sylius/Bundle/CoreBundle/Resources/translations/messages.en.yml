@@ -37,6 +37,12 @@ sylius:
             title: Title
         cart:
             coupon: Coupon
+        catalog_promotion:
+            channels: Channels
+            scope:
+                for_products: For products
+                for_taxons: For taxons
+                for_variants: For variants
         checkout:
             addressing:
                 different_billing_address: Use different address for billing?

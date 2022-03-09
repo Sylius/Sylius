@@ -26,7 +26,7 @@ sylius:
         verification_token:
             hello: 'Hallo'
             subject: 'Verificatie van e-mailadres'
-            to_verify_your_email_address: 'Om je e-mailadres te verifiëren - klik op de onderstaande link'
+            to_verify_your_email_address: 'Om uw e-mailadres te verifiëren - klik op de onderstaande link'
             verify_your_email_address: 'Verifieer uw e-mailadres'
     homepage:
         about_us: 'Over ons'

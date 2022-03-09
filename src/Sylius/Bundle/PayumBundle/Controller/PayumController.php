@@ -38,40 +38,16 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class PayumController
 {
-    private Payum $payum;
-
-    private OrderRepositoryInterface $orderRepository;
-
-    private MetadataInterface $orderMetadata;
-
-    private RequestConfigurationFactoryInterface $requestConfigurationFactory;
-
-    private ViewHandlerInterface $viewHandler;
-
-    private RouterInterface $router;
-
-    private GetStatusFactoryInterface $getStatusRequestFactory;
-
-    private ResolveNextRouteFactoryInterface $resolveNextRouteRequestFactory;
-
     public function __construct(
-        Payum $payum,
-        OrderRepositoryInterface $orderRepository,
-        MetadataInterface $orderMetadata,
-        RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        ViewHandlerInterface $viewHandler,
-        RouterInterface $router,
-        GetStatusFactoryInterface $getStatusFactory,
-        ResolveNextRouteFactoryInterface $resolveNextRouteFactory
+        private Payum $payum,
+        private OrderRepositoryInterface $orderRepository,
+        private MetadataInterface $orderMetadata,
+        private RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        private ViewHandlerInterface $viewHandler,
+        private RouterInterface $router,
+        private GetStatusFactoryInterface $getStatusRequestFactory,
+        private ResolveNextRouteFactoryInterface $resolveNextRouteRequestFactory
     ) {
-        $this->payum = $payum;
-        $this->orderRepository = $orderRepository;
-        $this->orderMetadata = $orderMetadata;
-        $this->requestConfigurationFactory = $requestConfigurationFactory;
-        $this->viewHandler = $viewHandler;
-        $this->router = $router;
-        $this->getStatusRequestFactory = $getStatusFactory;
-        $this->resolveNextRouteRequestFactory = $resolveNextRouteFactory;
     }
 
     public function prepareCaptureAction(Request $request, $tokenValue): Response

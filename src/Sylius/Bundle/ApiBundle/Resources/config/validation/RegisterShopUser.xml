@@ -12,7 +12,7 @@
 -->
 
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
-    <class name="Sylius\Bundle\ApiBundle\Command\RegisterShopUser">
+    <class name="Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser">
         <property name="firstName">
             <constraint name="NotBlank">
                 <option name="message">sylius.customer.first_name.not_blank</option>

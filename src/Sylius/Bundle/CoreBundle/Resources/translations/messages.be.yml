@@ -9,6 +9,8 @@ sylius:
             title: Назва
         cart:
             coupon: Купон
+        catalog_promotion:
+            channels: Каналы
         checkout:
             addressing:
                 different_billing_address: Выкарыстоўваць іншы адрас для аплаты?

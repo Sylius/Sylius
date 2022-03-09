@@ -25,6 +25,9 @@ sylius_admin_impersonate_user:
 sylius_admin_admin_user:
     resource: "@SyliusAdminBundle/Resources/config/routing/admin_user.yml"
 
+sylius_admin_catalog_promotion:
+    resource: "@SyliusAdminBundle/Resources/config/routing/catalog_promotion.yaml"
+
 sylius_admin_channel:
     resource: "@SyliusAdminBundle/Resources/config/routing/channel.yml"
 

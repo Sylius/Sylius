@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Açıklama
+            name: Ad
+            priority: Öncelik
         promotion:
             actions: Eylemler
             add_action: Eylem Ekle

@@ -29,3 +29,4 @@ winzou_state_machine:
                     on: ["ship"]
                     do: ["@sylius.state_resolver.order", "resolve"]
                     args: ["object"]
+                    priority: -100

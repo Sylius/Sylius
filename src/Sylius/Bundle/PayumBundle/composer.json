@@ -28,7 +28,7 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^8.0",
         "payum/payum": "^1.6",
         "payum/payum-bundle": "^2.4",
         "php-http/guzzle6-adapter": "^2.0",
@@ -40,7 +40,7 @@
     },
     "require-dev": {
         "phpspec/phpspec": "^7.1",
-        "symfony/dependency-injection": "^4.4 || ^5.2"
+        "symfony/dependency-injection": "^5.4"
     },
     "extra": {
         "branch-alias": {

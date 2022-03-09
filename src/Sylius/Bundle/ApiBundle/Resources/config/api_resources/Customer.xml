@@ -30,7 +30,7 @@
                     <attribute name="groups">shop:customer:create</attribute>
                 </attribute>
                 <attribute name="messenger">input</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\RegisterShopUser</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser</attribute>
                 <attribute name="output">false</attribute>
             </collectionOperation>
         </collectionOperations>
@@ -58,7 +58,7 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/shop/customers/{id}/password</attribute>
                 <attribute name="messenger">input</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\ChangeShopUserPassword</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Account\ChangeShopUserPassword</attribute>
                 <attribute name="output">false</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:customer:password:update</attribute>
@@ -73,6 +73,9 @@
                 <attribute name="path">/shop/customers/{id}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:customer:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:customer:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

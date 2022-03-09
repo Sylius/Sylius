@@ -21,11 +21,8 @@ use Sylius\Component\Review\Model\ReviewInterface;
 /** @experimental */
 final class AcceptedProductReviewsExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    private string $productReviewClass;
-
-    public function __construct(string $productReviewClass)
+    public function __construct(private string $productReviewClass)
     {
-        $this->productReviewClass = $productReviewClass;
     }
 
     public function applyToCollection(
@@ -45,9 +42,11 @@ final class AcceptedProductReviewsExtension implements ContextAwareQueryCollecti
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
 
+        $statusParameterName = $queryNameGenerator->generateParameterName('status');
+
         $queryBuilder
-            ->andWhere(sprintf('%s.status = :status', $rootAlias))
-            ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
+            ->andWhere(sprintf('%s.status = :%s', $rootAlias, $statusParameterName))
+            ->setParameter($statusParameterName, ReviewInterface::STATUS_ACCEPTED)
         ;
     }
 }

@@ -45,7 +45,7 @@ final class ManagingProductsContext implements Context
 
     private CreateConfigurableProductPageInterface $createConfigurableProductPage;
 
-    private \Sylius\Behat\Page\Admin\Product\IndexPageInterface $indexPage;
+    private IndexPageInterface $indexPage;
 
     private UpdateSimpleProductPageInterface $updateSimpleProductPage;
 

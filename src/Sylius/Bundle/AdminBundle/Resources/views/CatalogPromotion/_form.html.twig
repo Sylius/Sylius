@@ -1,0 +1,39 @@
+{% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationForm %}
+
+{% form_theme form '@SyliusAdmin/CatalogPromotion/theme.html.twig' %}
+
+<div class="ui two column stackable grid">
+    <div class="column">
+        {{ form_errors(form) }}
+        <div class="ui segment">
+            {{ form_row(form.code) }}
+            {{ form_row(form.name) }}
+            <div class="ui negative message">
+                <i class="close icon"></i>
+                {{ 'sylius.ui.catalog_promotion.dates_details'|trans }}
+            </div>
+            {{ form_row(form.startDate) }}
+            {{ form_row(form.endDate) }}
+            {{ form_row(form.enabled) }}
+            {{ form_row(form.priority) }}
+            {{ form_row(form.exclusive) }}
+            {{ form_row(form.channels) }}
+        </div>
+
+
+    </div>
+    <div class="column">
+        {{ translationForm(form.translations) }}
+    </div>
+    <div class="ui segment">
+        <h4 class="ui dividing header">{{ 'sylius.ui.configuration'|trans }}</h4>
+        <div class="ui two column stackable grid">
+            <div class="column" id="scopes">
+                {{ form_row(form.scopes) }}
+            </div>
+            <div class="column" id="actions">
+                {{ form_row(form.actions) }}
+            </div>
+        </div>
+    </div>
+</div>

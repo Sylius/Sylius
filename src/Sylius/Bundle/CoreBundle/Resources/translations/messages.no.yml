@@ -9,6 +9,8 @@ sylius:
             title: Tittel
         cart:
             coupon: Kupong
+        catalog_promotion:
+            channels: Kanaler
         checkout:
             addressing:
                 different_billing_address: Bruk annen adresse for fakturering?

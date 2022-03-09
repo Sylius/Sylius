@@ -1,0 +1,23 @@
+'%sylius.model.zone.class%':
+    collectionOperations:
+        admin_get:
+            enabled: false
+        admin_post:
+            enabled: false
+
+'%sylius.model.channel.class%':
+    collectionOperations:
+        channels-new-path:
+            method: GET
+            path: /shop/channels-new-path
+            normalization_context:
+                groups: ['shop:channel:read']
+            filters: ['test.channel.id_filter']
+
+'%sylius.model.order.class%':
+    itemOperations:
+        shop_select_shipping_method:
+            enabled: false
+    collectionOperations:
+        admin_get:
+            path: /admin/orders/get/all

@@ -37,7 +37,7 @@ Sylius\Component\Core\Model\Product:
         code: STICKER
 
 Sylius\Component\Product\Model\ProductVariantTranslation:
-    productVariantTranslation{1..20}:
+    productVariantTranslation{1..30}:
         name: "Mug <current()>"
         locale: en_US
         translatable: "@productVariant<current()>"
@@ -51,7 +51,7 @@ Sylius\Component\Product\Model\ProductVariantTranslation:
         translatable: "@productVariant22"
 
 Sylius\Component\Core\Model\ProductVariant:
-    productVariant{1..20}:
+    productVariant{1..30}:
         code: MUG_<current()>
         version: 1
         product: "@product1"

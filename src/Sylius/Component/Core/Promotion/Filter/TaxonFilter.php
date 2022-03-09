@@ -35,12 +35,12 @@ final class TaxonFilter implements FilterInterface
     }
 
     /**
-     * @param TaxonInterface[] $taxons
+     * @param string[] $taxonCodes
      */
-    private function hasProductValidTaxon(ProductInterface $product, array $taxons): bool
+    private function hasProductValidTaxon(ProductInterface $product, array $taxonCodes): bool
     {
         foreach ($product->getTaxons() as $taxon) {
-            if (in_array($taxon->getCode(), $taxons, true)) {
+            if (in_array($taxon->getCode(), $taxonCodes, true)) {
                 return true;
             }
         }

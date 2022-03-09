@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{% block title %}Sylius{% endblock %}</title>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    {% block metatags %}
+    {% endblock %}
+
+    {% block stylesheets %}
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    {% endblock %}
+</head>
+
+<body>
+    <div class="admin-layout">
+        <script>
+            const layoutBreakpoint = 768;
+            const layoutContainer = document.querySelector('.admin-layout');
+
+            let layoutState = sessionStorage.getItem('sylius:layout');
+
+            const setLayoutState = () => {
+                layoutContainer.classList.toggle('admin-layout--open', layoutState);
+                sessionStorage.setItem('sylius:layout', layoutState);
+            };
+
+            if (layoutState === null) {
+                layoutState = window.innerWidth > layoutBreakpoint;
+            } else {
+                layoutState = window.innerWidth > layoutBreakpoint ? layoutState === 'true' : false;
+            }
+
+            setLayoutState();
+        </script>
+
+        <div class="admin-layout__sidebar">
+            <div class="admin-layout__nav">
+                {% block sidebar %}
+                {% endblock %}
+                <div class="admin-layout__toggle" data-layout-toggle>
+                    <i class="close icon"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-layout__body">
+            <div class="admin-layout__topbar">
+                <div class="ui borderless menu">
+                    {% block topbar %}
+                    {% endblock %}
+                </div>
+            </div>
+
+            <div class="admin-layout__content">
+                {% block flash_messages %}
+                    {% include '@SyliusUi/_flashes.html.twig' %}
+                {% endblock %}
+
+                {% block pre_content %}
+                {% endblock %}
+
+                {% block content %}
+                {% endblock %}
+
+                {% block post_content %}
+                {% endblock %}
+            </div>
+
+            <div class="admin-layout__footer">
+                {% block footer %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const layoutToggleButton = document.querySelectorAll('[data-layout-toggle]');
+
+        layoutToggleButton.forEach((button) => {
+            button.addEventListener('click', () => {
+                layoutState = !layoutState;
+                setLayoutState();
+            });
+        });
+    </script>
+
+    {% include '@SyliusUi/Modal/_confirmation.html.twig' %}
+
+    {% block javascripts %}
+    {% endblock %}
+</body>
+</html>

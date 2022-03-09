@@ -35,12 +35,12 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^8.0",
         "doctrine/orm": "^2.7",
         "egulias/email-validator": "^3.0",
         "sylius/customer": "^1.6",
         "sylius/resource-bundle": "^1.7",
-        "symfony/framework-bundle": "^4.4 || ^5.2",
+        "symfony/framework-bundle": "^5.4",
         "webmozart/assert": "^1.8"
     },
     "conflict": {
@@ -50,9 +50,9 @@
         "phpspec/phpspec": "^7.1",
         "phpunit/phpunit": "^8.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "symfony/browser-kit": "^4.4 || ^5.2",
-        "symfony/dependency-injection": "^4.4 || ^5.2",
-        "symfony/form": "^4.4 || ^5.2"
+        "symfony/browser-kit": "^5.4",
+        "symfony/dependency-injection": "^5.4",
+        "symfony/form": "^5.4"
     },
     "extra": {
         "branch-alias": {

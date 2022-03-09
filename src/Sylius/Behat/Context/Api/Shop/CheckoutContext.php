@@ -24,11 +24,9 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentMethod;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Model\ShippingMethod;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
@@ -50,6 +48,10 @@ final class CheckoutContext implements Context
     private ApiClientInterface $ordersClient;
 
     private ApiClientInterface $addressesClient;
+
+    private ApiClientInterface $shippingMethodsClient;
+
+    private ApiClientInterface $paymentMethodsClient;
 
     private ResponseCheckerInterface $responseChecker;
 
@@ -75,6 +77,8 @@ final class CheckoutContext implements Context
     public function __construct(
         ApiClientInterface $ordersClient,
         ApiClientInterface $addressesClient,
+        ApiClientInterface $shippingMethodsClient,
+        ApiClientInterface $paymentMethodsClient,
         ResponseCheckerInterface $responseChecker,
         RepositoryInterface $shippingMethodRepository,
         OrderRepositoryInterface $orderRepository,
@@ -87,6 +91,8 @@ final class CheckoutContext implements Context
     ) {
         $this->ordersClient = $ordersClient;
         $this->addressesClient = $addressesClient;
+        $this->shippingMethodsClient = $shippingMethodsClient;
+        $this->paymentMethodsClient = $paymentMethodsClient;
         $this->responseChecker = $responseChecker;
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->orderRepository = $orderRepository;
@@ -180,6 +186,7 @@ final class CheckoutContext implements Context
 
     /**
      * @When /^I specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @When /^the visitor changes the billing (address to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^the (?:customer|visitor) specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^I specify the billing (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      * @Given /^the (?:visitor|customer) has specified (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
@@ -301,9 +308,26 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When /^I complete addressing step with ("[^"]+" based billing address)$/
+     */
+    public function iCompleteAddressingStepWithAddress(AddressInterface $address): void
+    {
+        $this->addressOrder([
+            'billingAddress' => [
+                'city' => $address->getCity(),
+                'street' => $address->getStreet(),
+                'postcode' => $address->getPostcode(),
+                'countryCode' => $address->getCountryCode(),
+                'firstName' => $address->getFirstName(),
+                'lastName' => $address->getLastName(),
+            ],
+        ]);
+    }
+
+    /**
      * @When I complete the addressing step
      * @When I try to complete the addressing step
-     * @When /^the (?:customer|visitor) complete the addressing step$/
+     * @When /^the (?:customer|visitor) completes the addressing step$/
      * @Given /^the (?:customer|visitor) has completed the addressing step$/
      * @When the visitor try to complete the addressing step in the customer cart
      */
@@ -409,6 +433,17 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should be notified that the order should be addressed first
+     */
+    public function iShouldBeNotifiedThatTheOrderShouldBeAddressedFirst(): void
+    {
+        Assert::true($this->isViolationWithMessageInResponse(
+            $this->ordersClient->getLastResponse(),
+            'Order should be addressed first.'
+        ));
+    }
+
+    /**
      * @Then I should be informed that shipping method with code :code does not exist
      */
     public function iShouldBeInformedThatShippingMethodWithCodeDoesNotExist(string $code): void
@@ -484,6 +519,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as (billing) address$/
+     * @Then /^the visitor should has ("[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+" specified as) (billing) address$/
      */
     public function addressShouldBeFilledAsBillingAddress(AddressInterface $address, string $addressType): void
     {
@@ -492,6 +528,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as (shipping) address$/
+     * @Then /^the visitor should has ("[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+" specified as) (shipping) address$/
      */
     public function addressShouldBeFilledAsShippingAddress(AddressInterface $address, string $addressType): void
     {
@@ -570,6 +607,30 @@ final class CheckoutContext implements Context
         $paymentMethods = $this->getPossiblePaymentMethods();
 
         Assert::notFalse(array_search($paymentMethodName, array_column($paymentMethods, 'name'), true));
+    }
+
+    /**
+     * @Then I should see :firstPaymentMethodName and :secondPaymentMethodName payment methods
+     */
+    public function iShouldSeePaymentMethods(string ...$paymentMethodsNames): void
+    {
+        $paymentMethods = $this->getPossiblePaymentMethods();
+
+        foreach ($paymentMethodsNames as $paymentMethodName) {
+            Assert::inArray($paymentMethodName, array_column($paymentMethods, 'name'));
+        }
+    }
+
+    /**
+     * @Then I should not see :firstPaymentMethodName and :secondPaymentMethodName payment methods
+     */
+    public function iShouldNotSeePaymentMethods(string ...$paymentMethodsNames): void
+    {
+        $paymentMethods = $this->getPossiblePaymentMethods();
+
+        foreach ($paymentMethodsNames as $paymentMethodName) {
+            Assert::false(in_array($paymentMethodName, array_column($paymentMethods, 'name'), true));
+        }
     }
 
     /**
@@ -659,7 +720,7 @@ final class CheckoutContext implements Context
         $shippingMethodName = $shippingMethod->getName();
 
         foreach ($shippingMethods as $method) {
-            if ($method['shippingMethod']['translations']['en_US']['name'] === $shippingMethodName) {
+            if ($method['name'] === $shippingMethodName) {
                 return;
             }
         }
@@ -786,7 +847,7 @@ final class CheckoutContext implements Context
     {
         $shippingMethods = $this->getCartShippingMethods($this->getCart());
 
-        Assert::true($shippingMethods[0]['shippingMethod']['code'] === $shippingMethod->getCode());
+        Assert::true($shippingMethods[0]['code'] === $shippingMethod->getCode());
     }
 
     /**
@@ -796,7 +857,7 @@ final class CheckoutContext implements Context
     {
         $shippingMethods = $this->getCartShippingMethods($this->getCart());
 
-        Assert::true(end($shippingMethods)['shippingMethod']['code'] === $shippingMethod->getCode());
+        Assert::true(end($shippingMethods)['code'] === $shippingMethod->getCode());
     }
 
     /**
@@ -863,6 +924,8 @@ final class CheckoutContext implements Context
      */
     public function thereShouldBeNoTaxesCharged(): void
     {
+        $this->ordersClient->show($this->sharedStorage->get('cart_token'));
+
         Assert::same($this->responseChecker->getValue($this->ordersClient->getLastResponse(), 'taxTotal'), 0);
     }
 
@@ -1032,7 +1095,7 @@ final class CheckoutContext implements Context
             'shop',
             'orders',
             $tokenValue,
-            HTTPRequest::METHOD_PATCH,
+            HTTPRequest::METHOD_POST,
             'items'
         );
 
@@ -1105,6 +1168,14 @@ final class CheckoutContext implements Context
         ));
     }
 
+    /**
+     * @When /^I should see (product "[^"]+") with unit price ("[^"]+")$/
+     */
+    public function iShouldSeeWithUnitPrice(ProductInterface $product, int $unitPrice): void
+    {
+        Assert::true($this->hasProductWithUnitPrice($product->getName(), $unitPrice));
+    }
+
     private function assertProvinceMessage(string $addressType): void
     {
         $response = $this->ordersClient->getLastResponse();
@@ -1139,17 +1210,9 @@ final class CheckoutContext implements Context
             $content['email'] = null;
         }
 
-        $request = Request::customItemAction(
-            'shop',
-            'orders',
-            $this->getCartTokenValue(),
-            HTTPRequest::METHOD_PATCH,
-            'address'
-        );
-
-        $request->setContent($content);
-
-        $this->ordersClient->executeCustomRequest($request);
+        $this->ordersClient->buildUpdateRequest($this->getCartTokenValue());
+        $this->ordersClient->setRequestData($content);
+        $this->ordersClient->update();
     }
 
     private function getCart(): array
@@ -1181,23 +1244,18 @@ final class CheckoutContext implements Context
 
     private function getCartShippingMethods(array $cart): array
     {
-        $request = Request::customItemAction(
-            'shop',
-            'orders',
-            $cart['tokenValue'],
-            HTTPRequest::METHOD_GET,
-            sprintf('shipments/%s/methods', $cart['shipments'][0]['id'])
-        );
+        $this->shippingMethodsClient->index();
+        $this->shippingMethodsClient->addFilter('tokenValue', $cart['tokenValue']);
+        $this->shippingMethodsClient->addFilter('shipmentId', $cart['shipments'][0]['id']);
+        $this->shippingMethodsClient->filter();
 
-        $this->ordersClient->executeCustomRequest($request);
-
-        return $this->responseChecker->getCollection($this->ordersClient->getLastResponse());
+        return $this->responseChecker->getCollection($this->shippingMethodsClient->getLastResponse());
     }
 
     private function hasShippingMethod(ShippingMethodInterface $shippingMethod): bool
     {
         foreach ($this->getCartShippingMethods($this->getCart()) as $cartShippingMethod) {
-            if ($cartShippingMethod['shippingMethod']['code'] === $shippingMethod->getCode()) {
+            if ($cartShippingMethod['code'] === $shippingMethod->getCode()) {
                 return true;
             }
         }
@@ -1210,7 +1268,7 @@ final class CheckoutContext implements Context
         foreach ($this->getCartShippingMethods($this->getCart()) as $cartShippingMethod) {
             if (
                 $cartShippingMethod['price'] === $fee &&
-                $cartShippingMethod['shippingMethod']['code'] === $shippingMethod->getCode()
+                $cartShippingMethod['code'] === $shippingMethod->getCode()
             ) {
                 return true;
             }
@@ -1229,17 +1287,12 @@ final class CheckoutContext implements Context
             return [];
         }
 
-        $request = Request::customItemAction(
-            'shop',
-            'orders',
-            $this->sharedStorage->get('cart_token'),
-            HTTPRequest::METHOD_GET,
-            sprintf('payments/%s/methods', $order->getLastPayment()->getId())
-        );
+        $this->paymentMethodsClient->index();
+        $this->paymentMethodsClient->addFilter('paymentId', $order->getLastPayment()->getId());
+        $this->paymentMethodsClient->addFilter('tokenValue', $order->getTokenValue());
+        $this->paymentMethodsClient->filter();
 
-        $this->ordersClient->executeCustomRequest($request);
-
-        return $this->responseChecker->getCollection($this->ordersClient->getLastResponse());
+        return $this->responseChecker->getCollection($this->paymentMethodsClient->getLastResponse());
     }
 
     private function hasProductWithNameAndQuantityInCart(string $productName, int $quantity): bool
@@ -1249,6 +1302,20 @@ final class CheckoutContext implements Context
 
         foreach ($items as $item) {
             if ($item['productName'] === $productName && $item['quantity'] === $quantity) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function hasProductWithUnitPrice(string $productName, int $unitPrice): bool
+    {
+        /** @var array $items */
+        $items = $this->responseChecker->getValue($this->ordersClient->getLastResponse(), 'items');
+
+        foreach ($items as $item) {
+            if ($item['productName'] === $productName && $item['unitPrice'] === $unitPrice) {
                 return true;
             }
         }
@@ -1328,7 +1395,7 @@ final class CheckoutContext implements Context
             'shop',
             'orders',
             $tokenValue,
-            HTTPRequest::METHOD_PATCH,
+            HTTPRequest::METHOD_POST,
             'items'
         );
 

@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        catalog_promotion:
+            description: Beschreibung
+            name: Name
+            priority: Priorität
         promotion:
             actions: Aktionen
             add_action: Aktion hinzufügen
@@ -44,11 +48,11 @@ sylius:
             contains_product: Enthält Produkt
             customer_group: Kundengruppe
             has_at_least_one_from_taxons: Hat mindestens eine aus der Klassifizierung
-            item_total: Stückzahl gesamt
+            item_total: Artikelsumme
             nth_order: N-te Bestellung
             shipping_country: Lieferadresse Land
             taxonomy: Klassifizierung
-            total_price_of_items_from_taxon: Gesamtpreis aller Produkte
+            total_price_of_items_from_taxon: Gesamtpreis aller Produkte aus Klassifizierung
             cart_quantity_configuration:
                 count: Anzahl
                 equal: Gleich

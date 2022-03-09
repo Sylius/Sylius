@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
-use Sylius\Bundle\ApiBundle\Command\VerifyCustomerAccount;
+use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Validator\Constraint;
@@ -23,11 +23,8 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class AccountVerificationTokenEligibilityValidator extends ConstraintValidator
 {
-    private RepositoryInterface $shopUserRepository;
-
-    public function __construct(RepositoryInterface $shopUserRepository)
+    public function __construct(private RepositoryInterface $shopUserRepository)
     {
-        $this->shopUserRepository = $shopUserRepository;
     }
 
     /** @param VerifyCustomerAccount|mixed $value */

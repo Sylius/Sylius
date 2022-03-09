@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Tests\CommandHandler;
 
 use Prophecy\Prophecy\ObjectProphecy;
-use Sylius\Bundle\ApiBundle\Command\SendAccountVerificationEmail;
-use Sylius\Bundle\ApiBundle\CommandHandler\SendAccountVerificationEmailHandler;
+use Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail;
+use Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountVerificationEmailHandler;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\EmailChecker;
@@ -70,10 +70,10 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
 
         $sendAccountVerificationEmailHandler(
             new SendAccountVerificationEmail(
-            'user@example.com',
-            'en_US',
-            'CHANNEL_CODE'
-        )
+                'user@example.com',
+                'en_US',
+                'CHANNEL_CODE'
+            )
         );
 
         self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));

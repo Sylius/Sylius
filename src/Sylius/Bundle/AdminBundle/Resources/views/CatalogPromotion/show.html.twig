@@ -1,0 +1,7 @@
+{% extends '@SyliusAdmin/layout.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.catalog_promotion'|trans ~ ' ' ~ catalog_promotion.name }} {{ parent() }}{% endblock %}
+
+{% block content %}
+    {{ sylius_template_event('sylius.admin.catalog_promotion.show.content', _context) }}
+{% endblock %}
