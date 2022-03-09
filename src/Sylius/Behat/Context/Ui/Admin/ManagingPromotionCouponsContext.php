@@ -401,7 +401,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @Then I should be notified that coupon usage limit per customer must be at least one
      */
-    public function iShouldBeNotifiedThatCouponUsageLimitPerCustomerMustBeAtLeast()
+    public function iShouldBeNotifiedThatCouponUsageLimitPerCustomerMustBeAtLeast(): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
