@@ -4,8 +4,8 @@ Feature: Adding countries with provinces
     As an Administrator
     I want to add a new country with its provinces to the store
 
-    Background:
-        Given I am logged in as an administrator
+#    Background:
+#        Given I am logged in as an administrator
 
     @ui @javascript @api
     Scenario: Adding a country with a province
