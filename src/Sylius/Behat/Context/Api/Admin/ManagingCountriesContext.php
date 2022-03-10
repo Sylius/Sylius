@@ -192,7 +192,7 @@ final class ManagingCountriesContext implements Context
     {
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Country could not be created'
+            'Country could not be created' . $this->client->getLastResponse()->getContent()
         );
     }
 
