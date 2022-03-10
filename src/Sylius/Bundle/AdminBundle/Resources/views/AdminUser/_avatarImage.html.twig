@@ -1,7 +1,7 @@
 {% if app.user.avatar is not empty and app.user.avatar.path is not empty %}
     {% set path = app.user.avatar.path|imagine_filter('sylius_admin_admin_user_avatar_thumbnail') %}
 {% else %}
-    {% set path = '//placehold.it/50x50' %}
+    {% set path = asset('assets/admin/img/50x50.png') %}
 {% endif %}
 
 <img style="margin-right: 10px;" class="ui avatar image" src="{{ path }}">
