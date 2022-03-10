@@ -46,16 +46,18 @@ final class AdminTaxonAjaxTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_throws_type_error_when_phrase_is_not_specified(): void
+    public function it_returns_taxons_when_phrase_is_not_specified(): void
     {
         $this->loadFixturesFromFile('authentication/administrator.yml');
         $this->loadFixturesFromFiles(['resources/taxons.yml']);
 
         $this->authenticateAdminUser();
 
-        $this->expectException(\TypeError::class);
-
         $this->client->request('GET', '/admin/ajax/taxons/search');
+
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'ajax/taxon/index_response', Response::HTTP_OK);
     }
 
     /** @test */
