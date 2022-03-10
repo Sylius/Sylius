@@ -1,0 +1,8 @@
+---------------------------------------------------------------------------
+
+by GSadee at 2022-03-10T20:29:59Z
+
+> But why are we disabling opcache for CLI?
+
+It is a good question 😃, to be honest, I'm not sure if is needed, but after this PR, configs for 1.10 and 1.11 branches will be the same, this is what I wanted to achieve.
+I will open another PR to revert the change of opcache for CLI to see the status of build 🕵🏻
