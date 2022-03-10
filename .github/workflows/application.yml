@@ -586,7 +586,7 @@ jobs:
             -
                 uses: browser-actions/setup-chrome@latest
                 with:
-                    chrome-version: 950365
+                    chrome-version: 98810
             
             -   
                 name: Run Chrome
