@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+
+by AdamKasp at 2022-03-09T12:47:04Z
+
+it looks fine, but I have no idea if it works :( we need some tests for it :)
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-03-09T12:54:59Z
+
+Maybe do that in the Core Bundle instead of TaxonomyBundle? 🤔
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-03-10T19:16:15Z
+
+Thanks, Ernest! :1st_place_medal:
