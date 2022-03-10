@@ -1,6 +1,37 @@
 # CHANGELOG FOR `1.11.X`
 
-## v1.11.1 (2022-02-14)
+## v1.11.1 (2022-03-07)
+
+#### Details
+
+- [#13575](https://github.com/Sylius/Sylius/issues/13575) [DX] add correct return type to getAdjustments method ([@PILLOWPET](https://github.com/PILLOWPET))
+- [#13641](https://github.com/Sylius/Sylius/issues/13641) [ADR] Declaring services as public in container ([@lchrusciel](https://github.com/lchrusciel))
+- [#13647](https://github.com/Sylius/Sylius/issues/13647) Update Sylius supported versions ([@Zales0123](https://github.com/Zales0123))
+- [#13650](https://github.com/Sylius/Sylius/issues/13650) [Documentation] Update installation guide for Plus ([@GSadee](https://github.com/GSadee))
+- [#13651](https://github.com/Sylius/Sylius/issues/13651) [Admin][API] Catalog promotion actions validation fixed ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13658](https://github.com/Sylius/Sylius/issues/13658) [Documentation] Adjust installation guide for Plus on 1.11 ([@GSadee](https://github.com/GSadee))
+- [#13660](https://github.com/Sylius/Sylius/issues/13660) [CLI] Cancel unpaid orders command ([@rafalswierczek](https://github.com/rafalswierczek))
+- [#13673](https://github.com/Sylius/Sylius/issues/13673) [Psalm] Configuration - totallyTyped replaced according to docs to avoid deprecation problem ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13676](https://github.com/Sylius/Sylius/issues/13676) [Cart] Fix retrieving/overriding cart of logged in user by guest ([@SirDomin](https://github.com/SirDomin), [@GSadee](https://github.com/GSadee))
+- [#13679](https://github.com/Sylius/Sylius/issues/13679) [Docs] [AdminBundle] fix minor typo ([@gigamarr](https://github.com/gigamarr))
+- [#13683](https://github.com/Sylius/Sylius/issues/13683) Improve verbosity of canceling unpaid orders test ([@rafalswierczek](https://github.com/rafalswierczek))
+- [#13684](https://github.com/Sylius/Sylius/issues/13684) [Product][API][Bug] Fixed product sorting by translated names ([@Rafikooo](https://github.com/Rafikooo))
+- [#13687](https://github.com/Sylius/Sylius/issues/13687) [Behat][API] Remove duplicated steps in ProductContext ([@GSadee](https://github.com/GSadee))
+- [#13691](https://github.com/Sylius/Sylius/issues/13691) [Docs] Force user to login during checkout ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13692](https://github.com/Sylius/Sylius/issues/13692) [Admin] Fix for floating point amount on fixed action in catalog promotion. ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13695](https://github.com/Sylius/Sylius/issues/13695) [Order] Change getters and setters to use a proper flag name ([@GSadee](https://github.com/GSadee))
+- [#13698](https://github.com/Sylius/Sylius/issues/13698) [Docs] Path fix for validator in API force login cookbook ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13699](https://github.com/Sylius/Sylius/issues/13699) [Documentation] Add reference to the cookbook about forcing login in API ([@GSadee](https://github.com/GSadee))
+- [#13700](https://github.com/Sylius/Sylius/issues/13700) [Order] Fix getters and setters to use a proper flag name after upmerge issue ([@GSadee](https://github.com/GSadee))
+- [#13704](https://github.com/Sylius/Sylius/issues/13704) Update PHP Version in installation doc ([@sad270](https://github.com/sad270))
+- [#13708](https://github.com/Sylius/Sylius/issues/13708) [Locale] Add header based locale context ([@AdamKasp](https://github.com/AdamKasp))
+- [#13715](https://github.com/Sylius/Sylius/issues/13715) add dependency injection conflict ([@SirDomin](https://github.com/SirDomin))
+- [#13716](https://github.com/Sylius/Sylius/issues/13716) [Documentation] Fix start date of development 1.12 version ([@GSadee](https://github.com/GSadee))
+- [#13725](https://github.com/Sylius/Sylius/issues/13725) [PaypalExpress] Dont take shipping tax adjustment to shipping cost ([@SirDomin](https://github.com/SirDomin))
+- [#13730](https://github.com/Sylius/Sylius/issues/13730) [Maintenance] Add conflict to symfony/framework-bundle to fix problem with solving path prefix in API scenarios ([@GSadee](https://github.com/GSadee))
+- [#13732](https://github.com/Sylius/Sylius/issues/13732) [Hot-fix] Conflict with symfony/dependency-injection even more ([@Zales0123](https://github.com/Zales0123))
+
+## v1.11.0 (2022-02-14)
 
 #### TL;DR
 
