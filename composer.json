@@ -19,6 +19,12 @@
             "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
+    "repositories": [
+        {
+            "type": "gitlab",
+            "url": "https://gitlab.com/Ferror/chrome-mink-driver"
+        }
+    ],
     "require": {
         "php": "^8.0",
         "ext-dom": "*",
@@ -197,8 +203,8 @@
     "require-dev": {
         "behat/behat": "^3.6.1",
         "behat/mink-selenium2-driver": "^1.4",
-        "dmore/behat-chrome-extension": "^1.3",
-        "dmore/chrome-mink-driver": "^2.7",
+        "dmore/behat-chrome-extension": "*",
+        "dmore/chrome-mink-driver": "dev-empty-offset-exception as 2.8.0",
         "doctrine/data-fixtures": "^1.4",
         "friends-of-behat/mink": "^1.8",
         "friends-of-behat/mink-browserkit-driver": "^1.4",
@@ -241,7 +247,13 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": false,
+            "dealerdirect/phpcodesniffer-composer-installer": false,
+            "symfony/flex": false,
+            "symfony/thanks": false
+        }
     },
     "extra": {
         "branch-alias": {
