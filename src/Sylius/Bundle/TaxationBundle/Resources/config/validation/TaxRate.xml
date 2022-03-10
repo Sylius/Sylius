@@ -53,6 +53,10 @@
                 <option name="message">sylius.tax_rate.amount.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Positive">
+                <option name="message">sylius.tax_rate.amount.invalid</option>
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
         <property name="calculator">
             <constraint name="NotBlank">
