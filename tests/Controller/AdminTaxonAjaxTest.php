@@ -72,10 +72,7 @@ final class AdminTaxonAjaxTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
 
-        $taxons = json_decode($response->getContent());
-
-        $this->assertEquals('Men T-Shirts', $taxons[0]->name);
-        $this->assertEquals('Women T-Shirts', $taxons[1]->name);
+        $this->assertResponse($response, 'ajax/taxon/specific_taxon_response', Response::HTTP_OK);
     }
 
     private function authenticateAdminUser(): void
