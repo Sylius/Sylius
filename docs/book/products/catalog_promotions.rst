@@ -327,7 +327,6 @@ Since the `main` transport is asynchronous by default, in order to use synchrono
             transports:
                 main: 'sync://'
 
-
 Synchronous processing means that, after submitting a catalog promotion form, one must wait for a server response until processing is complete.
 This may cause a worse user experience if there are other catalog promotions as it will trigger their recalculation as well.
 
