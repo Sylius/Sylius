@@ -580,9 +580,13 @@ jobs:
                 name: Install certificates
                 run: symfony server:ca:install
 
+#            -
+#                name: Run Chrome Headless
+#                run: google-chrome-stable --disable-gpu --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=1440,900 --proxy-server='direct://' --proxy-bypass-list='*' https://127.0.0.1 > /dev/null 2>&1 &
             -
-                name: Run Chrome Headless
-                run: google-chrome-stable --disable-gpu --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=1440,900 --proxy-server='direct://' --proxy-bypass-list='*' https://127.0.0.1 > /dev/null 2>&1 &
+                name: Run Chrome
+                uses: browser-actions/setup-chrome@latest
+                run: chrome -disable-gpu --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=1440,900 --proxy-server='direct://' --proxy-bypass-list='*' https://127.0.0.1 > /dev/null 2>&1 &
 
             -
                 name: Get Composer cache directory
