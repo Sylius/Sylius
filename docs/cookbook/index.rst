@@ -118,6 +118,7 @@ Deployment
     deployment/platform-sh
     deployment/cloudways
     deployment/cron-jobs
+    deployment/artifakt
 
 .. include:: /cookbook/deployment/map.rst.inc
 
