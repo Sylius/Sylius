@@ -12,6 +12,7 @@ sylius:
         name:
             not_blank: Please enter tax rate name.
         amount:
+            invalid: The tax rate amount is invalid.
             not_blank: Please enter tax rate amount.
         calculator:
             not_blank: Please select tax calculator.
