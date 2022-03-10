@@ -204,7 +204,7 @@
         "behat/behat": "^3.6.1",
         "behat/mink-selenium2-driver": "^1.4",
         "dmore/behat-chrome-extension": "*",
-        "dmore/chrome-mink-driver": "dev-empty-offset-exception as 2.8.0",
+        "dmore/chrome-mink-driver": "dev-bugfix-debug as 2.8.0",
         "doctrine/data-fixtures": "^1.4",
         "friends-of-behat/mink": "^1.8",
         "friends-of-behat/mink-browserkit-driver": "^1.4",
