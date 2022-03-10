@@ -24,7 +24,7 @@ final class TopBarElement extends Element implements TopBarElementInterface
 
     public function hasDefaultAvatarInMainBar(): bool
     {
-        return strpos($this->getAvatarImagePath(), '//placehold.it/50x50') !== false;
+        return strpos($this->getAvatarImagePath(), '/assets/admin/img/50x50.png') !== false;
     }
 
     private function getAvatarImagePath(): string
