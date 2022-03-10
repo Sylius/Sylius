@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CURRENT_NODE_VERSION=$(docker run -i sylius node --version)
+CURRENT_NODE_VERSION=$(docker run -i sylius_app node --version)
 EXPECTED_NODE_VERSION="v14.19.0"
 
 if [[ $CURRENT_NODE_VERSION != "$EXPECTED_NODE_VERSION" ]]; then
@@ -10,7 +10,7 @@ else
     echo "NODE version: $CURRENT_NODE_VERSION"
 fi
 
-CURRENT_PHP_VERSION=$(docker run -i sylius php -r 'echo phpversion();')
+CURRENT_PHP_VERSION=$(docker run -i sylius_app php -r 'echo phpversion();')
 EXPECTED_PHP_VERSION="8.0.16"
 
 if [[ $CURRENT_PHP_VERSION != "$EXPECTED_PHP_VERSION" ]]; then
