@@ -13,7 +13,7 @@
                             {% include '@SyliusAdmin/Product/Show/_imageVariants.html.twig' %}
                         {% endif %}
                         <a href="{{ image.path|imagine_filter('sylius_admin_product_original') }}" data-lightbox="sylius-product-image">
-                            <img src="{{ path }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_admin_product_large_thumbnail') }}" alt="{{ product.name }}" />
+{#                            <img src="{{ path }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_admin_product_large_thumbnail') }}" alt="{{ product.name }}" />#}
                         </a>
                     </div>
                 {% endfor %}

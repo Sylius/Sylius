@@ -13,7 +13,7 @@
 
 <div data-product-image="{{ path }}" data-product-link="{{ original_path }}"></div>
 <a href="{{ original_path }}" class="ui fluid image" data-lightbox="sylius-product-image">
-    <img src="{{ path }}" id="main-image" alt="{{ product.name }}" {{ sylius_test_html_attribute('main-image') }} />
+{#    <img src="{{ path }}" id="main-image" alt="{{ product.name }}" {{ sylius_test_html_attribute('main-image') }} />#}
 </a>
 {% if product.images|length > 1 %}
 <div class="ui divider"></div>
@@ -28,7 +28,7 @@
         {% include '@SyliusShop/Product/Show/_imageVariants.html.twig' %}
     {% endif %}
         <a href="{{ image.path|imagine_filter('sylius_shop_product_original') }}" data-lightbox="sylius-product-image">
-            <img src="{{ path }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}" alt="{{ product.name }}" />
+{#            <img src="{{ path }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}" alt="{{ product.name }}" />#}
         </a>
     </div>
     {% endfor %}
