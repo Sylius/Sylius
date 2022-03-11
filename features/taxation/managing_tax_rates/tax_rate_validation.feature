@@ -81,3 +81,12 @@ Feature: Tax rate validation
         When I remove its zone
         And I try to save my changes
         Then I should be notified that zone has to be selected
+
+    @ui
+    Scenario: Trying to add a new tax rate with negative amount
+        When I want to create a new tax rate
+        And I name it "Food and Beverage Tax Rates"
+        And I specify its amount as -20%
+        And I try to add it
+        Then I should be notified that amount is invalid
+        And tax rate with name "Food and Beverage Tax Rates" should not be added
