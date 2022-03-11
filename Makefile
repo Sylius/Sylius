@@ -9,6 +9,10 @@ init:
 	node_modules/gulp/bin/gulp.js
 
 ci:
+	apt install wget
+	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+	echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list
+	apt update && apt install google-chrome-stable
 	composer install --no-interaction --no-scripts
 	bin/console sylius:install --no-interaction
 	bin/console sylius:fixtures:load default --no-interaction
