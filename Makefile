@@ -15,3 +15,12 @@ ci:
 	vendor/bin/phpunit
 	vendor/bin/phpspec run --ansi --no-interaction -f dot
 	vendor/bin/behat --colors --strict --stop-on-failure --no-interaction -vvv -f progress
+
+unit:
+	vendor/bin/phpunit
+
+spec:
+	vendor/bin/phpspec run --ansi --no-interaction -f dot
+
+behat:
+	vendor/bin/behat --colors --strict --stop-on-failure --no-interaction -vvv -f progress
