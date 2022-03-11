@@ -19,7 +19,6 @@ use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantMatchType;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -33,11 +32,6 @@ final class CartItemTypeExtension extends AbstractTypeExtension
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('quantity', IntegerType::class, [
-            'attr' => ['min' => 1],
-            'label' => 'sylius.ui.quantity',
-        ]);
-
         if (isset($options['product']) && $options['product']->hasVariants() && !$options['product']->isSimple()) {
             $type =
                 Product::VARIANT_SELECTION_CHOICE === $options['product']->getVariantSelectionMethod()
