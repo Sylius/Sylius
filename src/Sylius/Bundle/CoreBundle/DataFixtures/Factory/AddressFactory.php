@@ -101,7 +101,7 @@ class AddressFactory extends ModelFactory implements AddressFactoryInterface
     {
         return $this->addState(function () use ($customer): array {
             if (is_string($customer)) {
-                $customer = $this->shopUserFactory::randomOrCreate(['email' => $customer])->getCustomer();
+                $customer = $this->shopUserFactory::findOrCreate(['email' => $customer])->getCustomer();
             }
 
             return ['customer' => $customer];
