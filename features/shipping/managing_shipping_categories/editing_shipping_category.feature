@@ -16,8 +16,8 @@ Feature: Editing shipping method
 
     @ui @api
     Scenario: Renaming the shipping category
-        Given I want to modify a shipping category "Standard"
-        When I rename it to "Normal"
+        When I want to modify a shipping category "Standard"
+        And I rename it to "Normal"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this shipping category name should be "Normal"

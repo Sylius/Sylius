@@ -10,8 +10,8 @@ Feature: Exchange rate validation
 
     @ui @api
     Scenario: Trying to add a new exchange rate without ratio
-        Given I want to add a new exchange rate
-        When I choose "US Dollar" as the source currency
+        When I want to add a new exchange rate
+        And I choose "US Dollar" as the source currency
         And I choose "British Pound" as the target currency
         And I don't specify its ratio
         And I try to add it
@@ -20,8 +20,8 @@ Feature: Exchange rate validation
 
     @ui @api
     Scenario: Trying to add a new exchange rate with negative ratio
-        Given I want to add a new exchange rate
-        When I choose "US Dollar" as the source currency
+        When I want to add a new exchange rate
+        And I choose "US Dollar" as the source currency
         And I choose "British Pound" as the target currency
         And I specify its ratio as -1.2
         And I try to add it
@@ -30,8 +30,8 @@ Feature: Exchange rate validation
 
     @ui @api
     Scenario: Trying to add a new exchange rate with same target currency as source
-        Given I want to add a new exchange rate
-        When I specify its ratio as 1.23
+        When I want to add a new exchange rate
+        And I specify its ratio as 1.23
         And I choose "US Dollar" as the source currency
         And I choose "US Dollar" as the target currency
         And I try to add it

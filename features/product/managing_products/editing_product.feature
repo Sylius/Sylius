@@ -16,8 +16,8 @@ Feature: Editing a product
 
     @ui @api
     Scenario: Renaming a simple product
-        Given I want to modify the "Dice Brewing" product
-        When I rename it to "7 Wonders" in "English (United States)"
+        When I want to modify the "Dice Brewing" product
+        And I rename it to "7 Wonders" in "English (United States)"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product name should be "7 Wonders"
@@ -25,24 +25,24 @@ Feature: Editing a product
     @ui
     Scenario: Renaming a simple product does not change its variant name
         Given this product only variant was renamed to "Dice Brewing: The Game"
-        And I want to modify this product
-        When I rename it to "7 Wonders" in "English (United States)"
+        When I want to modify this product
+        And I rename it to "7 Wonders" in "English (United States)"
         And I save my changes
         And I want to view all variants of this product
         Then the first variant in the list should have name "Dice Brewing: The Game"
 
     @ui
     Scenario: Changing a simple product price
-        Given I want to modify the "Dice Brewing" product
-        When I change its price to $15.00 for "United States" channel
+        When I want to modify the "Dice Brewing" product
+        And I change its price to $15.00 for "United States" channel
         And I save my changes
         Then I should be notified that it has been successfully edited
         And it should be priced at $15.00 for channel "United States"
 
     @ui
     Scenario: Changing a simple product price
-        Given I want to modify the "Dice Brewing" product
-        When I change its price to $7.50 for "United States" channel
+        When I want to modify the "Dice Brewing" product
+        And I change its price to $7.50 for "United States" channel
         And I change its original price to "$15.00" for "United States" channel
         And I save my changes
         Then I should be notified that it has been successfully edited
@@ -52,8 +52,8 @@ Feature: Editing a product
     @ui @api
     Scenario: Renaming a configurable product
         Given the store has a "Wyborowa Vodka" configurable product
-        And I want to modify this product
-        When I rename it to "Sobieski Vodka" in "English (United States)"
+        When I want to modify this product
+        And I rename it to "Sobieski Vodka" in "English (United States)"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product name should be "Sobieski Vodka"
@@ -63,8 +63,8 @@ Feature: Editing a product
         Given the store has a "Wyborowa Vodka" configurable product
         And the store has a product option "Bottle size" with a code "bottle_size"
         And this product has this product option
-        And I want to modify this product
-        When I rename it to "Sobieski Vodka" in "English (United States)"
+        When I want to modify this product
+        And I rename it to "Sobieski Vodka" in "English (United States)"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product name should be "Sobieski Vodka"
@@ -75,8 +75,8 @@ Feature: Editing a product
         And the store has a product option "T-Shirt size" with a code "t_shirt_size"
         And the store has a product option "T-Shirt color" with a code "t_shirt_color"
         And this product has a "T-Shirt size" option
-        And I want to modify this product
-        When I add the "T-Shirt color" option to it
+        When I want to modify this product
+        And I add the "T-Shirt color" option to it
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product should have a "T-Shirt color" option

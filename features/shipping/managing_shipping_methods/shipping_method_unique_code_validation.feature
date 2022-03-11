@@ -13,8 +13,8 @@ Feature: Shipping method unique code validation
 
     @ui @api @javascript
     Scenario: Trying to add shipping method with taken code
-        Given I want to create a new shipping method
-        When I specify its code as "UPS"
+        When I want to create a new shipping method
+        And I specify its code as "UPS"
         And I name it "FedEx Carrier" in "English (United States)"
         And I define it for the zone named "United States"
         And I choose "Flat rate per shipment" calculator

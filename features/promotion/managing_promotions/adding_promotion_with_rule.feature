@@ -11,8 +11,8 @@ Feature: Adding a new promotion with rule
 
     @ui @javascript
     Scenario: Adding a new promotion with taxon rule
-        Given I want to create a new promotion
-        When I specify its code as "HOLIDAY_SALE"
+        When I want to create a new promotion
+        And I specify its code as "HOLIDAY_SALE"
         And I name it "Holiday sale"
         And I add the "Has at least one from taxons" rule configured with "T-Shirts" and "Mugs"
         And I add it
@@ -21,8 +21,8 @@ Feature: Adding a new promotion with rule
 
     @ui @javascript
     Scenario: Adding a new promotion with total price of items from taxon rule
-        Given I want to create a new promotion
-        When I specify its code as "100_MUGS_PROMOTION"
+        When I want to create a new promotion
+        And I specify its code as "100_MUGS_PROMOTION"
         And I name it "100 Mugs promotion"
         And I add the "Total price of items from taxon" rule configured with "Mugs" taxon and $100 amount for "United States" channel
         And I add it
@@ -32,8 +32,8 @@ Feature: Adding a new promotion with rule
     @ui @javascript
     Scenario: Adding a new promotion with contains product rule
         Given the store has a product "PHP T-Shirt" priced at "$100.00"
-        And I want to create a new promotion
-        When I specify its code as "PHP_TSHIRT_PROMOTION"
+        When I want to create a new promotion
+        And I specify its code as "PHP_TSHIRT_PROMOTION"
         And I name it "PHP T-Shirt promotion"
         And I add the "Contains product" rule configured with the "PHP T-Shirt" product
         And I add it

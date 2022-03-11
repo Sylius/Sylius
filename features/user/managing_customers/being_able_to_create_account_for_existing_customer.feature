@@ -9,7 +9,7 @@ Feature: Create account option availability
 
     @ui
     Scenario: Being able to create an account for created customer
-        Given I want to create a new customer
+        When I want to create a new customer
         And I do not choose create account option
         And I specify their email as "bananaPotato@example.com"
         And I add them
@@ -19,7 +19,7 @@ Feature: Create account option availability
 
     @ui @javascript
     Scenario: Not seeing create account option after adding customer with account
-        Given I want to create a new customer account
+        When I want to create a new customer account
         And I choose create account option
         And I specify their password as "Banana"
         And I specify their email as "bananaPotato@example.com"

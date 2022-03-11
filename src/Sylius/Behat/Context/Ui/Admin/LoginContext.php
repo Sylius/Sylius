@@ -32,7 +32,7 @@ final class LoginContext implements Context
     }
 
     /**
-     * @Given I want to log in
+     * @When I want to log in
      */
     public function iWantToLogIn()
     {

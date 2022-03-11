@@ -11,8 +11,8 @@ Feature: Toggling the taxon
 
     @ui
     Scenario: Adding a disabled taxon
-        Given I want to create a new taxon
-        When I specify its code as "jeans"
+        When I want to create a new taxon
+        And I specify its code as "jeans"
         And I name it "Jeans" in "English (United States)"
         And I set its slug to "jeans" in "English (United States)"
         And I disable it
@@ -24,8 +24,8 @@ Feature: Toggling the taxon
     @ui
     Scenario: Enabling a Taxon
         Given the "T-Shirts" taxon is disabled
-        And I want to modify the "T-Shirts" taxon
-        When I enable it
+        When I want to modify the "T-Shirts" taxon
+        And I enable it
         And I save my changes
         Then I should be notified that it has been successfully edited
         And it should be enabled
@@ -33,8 +33,8 @@ Feature: Toggling the taxon
     @ui
     Scenario: Disabling a Taxon
         Given the "T-Shirts" taxon is enabled
-        And I want to modify the "T-Shirts" taxon
-        When I disable it
+        When I want to modify the "T-Shirts" taxon
+        And I disable it
         And I save my changes
         Then I should be notified that it has been successfully edited
         And it should be disabled

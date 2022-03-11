@@ -10,8 +10,8 @@ Feature: Toggling a customer account
     @ui
     Scenario: Enabling a customer account
         Given there is disabled customer account "f.baggins@example.com" with password "psw"
-        And I want to enable "f.baggins@example.com"
-        When I enable their account
+        When I want to enable "f.baggins@example.com"
+        And I enable their account
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this customer should be enabled
@@ -19,8 +19,8 @@ Feature: Toggling a customer account
     @ui
     Scenario: Disabling a customer account
         Given there is enabled customer account "f.baggins@example.com" with password "psw"
-        And I want to disable "f.baggins@example.com"
-        When I disable their account
+        When I want to disable "f.baggins@example.com"
+        And I disable their account
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this customer should be disabled
