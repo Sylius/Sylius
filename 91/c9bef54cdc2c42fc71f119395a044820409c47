@@ -1,0 +1,68 @@
+---------------------------------------------------------------------------
+
+by remoteclient at 2022-02-07T16:40:30Z
+
+Hile this commit seems to work with MySQL, it fails on Postgresql again with:
+```
+An exception has been thrown during the rendering of a template ("[Semantical Error] line 0, col 222 near 'YEAR(o.checkoutCompletedAt),': Error: Cannot group by undefined identification or result variable.").
+```
+Problem in the original file is, that it uses non-standard sql.
+
+In standard sql HAVING is evaluated before SELECT, so the alias is not known to the HAVING clause.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-02-07T16:47:53Z
+
+How about using an alias in group by, but not in having?
+
+---------------------------------------------------------------------------
+
+by remoteclient at 2022-02-07T17:51:54Z
+
+> How about using an alias in group by, but not in having?
+
+As you can see here: [mysql having](https://www.mysqltutorial.org/mysql-having.aspx), in standard sql GROUP BY is evaluated before HAVING.
+
+---------------------------------------------------------------------------
+
+by remoteclient at 2022-02-11T17:31:02Z
+
+Please check the results of total. I replaced the HAVING clause by WHERE
+
+I don't believe it makes sense to use HAVING here because:
+
+>WHERE clause introduces a condition on individual rows; HAVING clause introduces a condition on aggregations, i.e. results of selection where a single result, such as count, average, min, max, or sum, has been produced from multiple rows.
+
+Your HAVING is not using aggregate functions, it uses MONTH, YEAR...
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-02-11T17:37:10Z
+
+Indeed, it makes more sense to first filter out the orders that are outside the specified time range, then group them by the time unit.
+I'm curious how it reflects on the performance.
+
+---------------------------------------------------------------------------
+
+by flolivaud at 2022-03-10T12:52:50Z
+
+Hey, is it possible to move forward about this pull request?
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-03-10T12:56:40Z
+
+I would love to see a performance comparison, but nevertheless this will fix the bug. Thank you, @remoteclient!
+
+---------------------------------------------------------------------------
+
+by remoteclient at 2022-03-11T08:23:33Z
+
+@vvasiloi You are welcome! I am glad that I could contribute.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-03-11T08:49:41Z
+
+Thank you, @remoteclient! :tada:
