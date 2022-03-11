@@ -3,13 +3,15 @@ up:
 
 init:
 	composer install --no-interaction --no-scripts
-	bin/console sylius:install -n
+	bin/console sylius:install --no-interaction
+	bin/console sylius:fixtures:load default --no-interaction
 	yarn install --pure-lockfile
 	node_modules/gulp/bin/gulp.js
 
 ci:
 	composer install --no-interaction --no-scripts
-	bin/console sylius:install -n
+	bin/console sylius:install --no-interaction
+	bin/console sylius:fixtures:load default --no-interaction
 	yarn install --pure-lockfile
 	node_modules/gulp/bin/gulp.js
 	vendor/bin/phpunit
