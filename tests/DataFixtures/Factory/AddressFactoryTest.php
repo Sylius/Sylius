@@ -16,13 +16,13 @@ namespace Sylius\Tests\DataFixtures\Factory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\AddressFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactory;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Tests\PurgeDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
-use Zenstruck\Foundry\Test\ResetDatabase;
 
 final class AddressFactoryTest extends KernelTestCase
 {
-    use ResetDatabase;
+    use PurgeDatabaseTrait;
     use Factories;
 
     /** @test */
