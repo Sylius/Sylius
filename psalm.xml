@@ -157,6 +157,7 @@
 
         <UndefinedMethod>
             <errorLevel type="info">
+                <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/AddressFactory.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ShopUserFactory.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ZoneMemberFactory.php" />
             </errorLevel>
