@@ -34,7 +34,7 @@
         "laminas/laminas-stdlib": "^3.2"
     },
     "require-dev": {
-        "sylius/phpspec": "^7.2"
+        "phpspec/phpspec": "dev-main"
     },
     "extra": {
         "branch-alias": {

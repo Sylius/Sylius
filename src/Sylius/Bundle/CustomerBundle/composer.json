@@ -47,7 +47,7 @@
         "twig/twig": "^3.0"
     },
     "require-dev": {
-        "sylius/phpspec": "^7.2",
+        "phpspec/phpspec": "dev-main",
         "phpunit/phpunit": "^8.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "symfony/browser-kit": "^4.4 || ^5.2",

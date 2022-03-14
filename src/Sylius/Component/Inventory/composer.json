@@ -31,7 +31,7 @@
         "webmozart/assert": "^1.8"
     },
     "require-dev": {
-        "sylius/phpspec": "^7.2"
+        "phpspec/phpspec": "dev-main"
     },
     "extra": {
         "branch-alias": {

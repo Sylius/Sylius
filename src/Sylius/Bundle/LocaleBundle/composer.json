@@ -40,7 +40,7 @@
         "friendsofphp/proxy-manager-lts": "^1.0.7",
         "phpunit/phpunit": "^8.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "sylius/phpspec": "^7.2",
+        "phpspec/phpspec": "dev-main",
         "symfony/browser-kit": "^4.4 || ^5.2",
         "symfony/dependency-injection": "^4.4 || ^5.2",
         "twig/twig": "^2.12"

@@ -38,7 +38,7 @@
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "mockery/mockery": "^1.4",
-        "sylius/phpspec": "^7.2",
+        "phpspec/phpspec": "dev-main",
         "phpunit/phpunit": "^8.5",
         "symfony/dependency-injection": "^4.4 || ^5.2"
     },
