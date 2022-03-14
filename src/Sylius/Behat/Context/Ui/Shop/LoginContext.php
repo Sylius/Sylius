@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Element\Shop\Account\RegisterElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
@@ -303,5 +304,15 @@ final class LoginContext implements Context
     public function iShouldBeRedirectedToTheForgottenPasswordPage()
     {
         Assert::true($this->requestPasswordResetPage->isOpen(), 'User should be on the forgotten password page but they are not.');
+    }
+
+    /**
+     * @Then I should not be able to change my password again with the same token
+     */
+    public function iShouldNotBeAbleToChangeMyPasswordAgainWithTheSameToken(): void
+    {
+        $this->resetPasswordPage->tryToOpen(['token' => 'itotallyforgotmypassword']);
+
+        Assert::false($this->resetPasswordPage->isOpen(), 'User should not be on the forgotten password page');
     }
 }
