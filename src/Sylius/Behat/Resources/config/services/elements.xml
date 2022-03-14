@@ -20,10 +20,13 @@
         <import resource="elements/shop.xml" />
         <import resource="elements/product.xml" />
     </imports>
+
     <services>
         <service id="sylius.behat.element" class="FriendsOfBehat\PageObjectExtension\Element\Element" abstract="true" public="false">
             <argument type="service" id="behat.mink.default_session" />
             <argument type="service" id="behat.mink.parameters" />
         </service>
+
+        <service id="sylius.behat.element.browser" class="Sylius\Behat\Element\BrowserElement" parent="sylius.behat.element" public="false" />
     </services>
 </container>
