@@ -255,9 +255,10 @@ final class AccountContext implements Context
     }
 
     /**
+     * @Given I am browsing my orders
      * @When I browse my orders
      */
-    public function iBrowseMyOrders()
+    public function iBrowseMyOrders(): void
     {
         $this->orderIndexPage->open();
     }
@@ -522,5 +523,21 @@ final class AccountContext implements Context
         }
 
         throw new \InvalidArgumentException('Dashboard has been openned, but it shouldn\'t as customer should not be logged in');
+    }
+
+    /**
+     * @Then I should not see my orders
+     */
+    public function iShouldNotSeeMyOrders(): void
+    {
+        Assert::false($this->orderIndexPage->isOpen());
+    }
+
+    /**
+     * @Then I should be on the login page
+     */
+    public function iShouldBeOnTheLoginPage(): void
+    {
+        Assert::true($this->loginPage->isOpen());
     }
 }
