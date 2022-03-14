@@ -30,9 +30,6 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckout\AsynchronousOrderCheckoutStates;
-use Sylius\Component\Core\OrderCheckout\AsynchronousOrderCheckoutTransitions;
-use Sylius\Component\Core\OrderCheckoutStates;
-use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -43,9 +40,9 @@ use Webmozart\Assert\Assert;
 final class CheckoutContext implements Context
 {
     public const CHECKOUT_STATE_TYPES = [
-        'address' => OrderCheckoutStates::STATE_ADDRESSED,
-        'shipping method' => OrderCheckoutStates::STATE_SHIPPING_SELECTED,
-        'payment' => OrderCheckoutStates::STATE_PAYMENT_SELECTED,
+        'address' => AsynchronousOrderCheckoutStates::STATE_ADDRESSED,
+        'shipping method' => AsynchronousOrderCheckoutStates::STATE_SHIPPING_SELECTED,
+        'payment' => AsynchronousOrderCheckoutStates::STATE_PAYMENT_SELECTED,
     ];
 
     private ApiClientInterface $ordersClient;
@@ -339,8 +336,6 @@ final class CheckoutContext implements Context
     public function iCompleteTheAddressingStep(): void
     {
         $this->addressOrder($this->content);
-//        $response = $this->ordersClient->getLastResponse();
-//        Assert::notSame($response->getStatusCode(), 200, $this->responseChecker->getError($response));
 
         $this->content = [];
     }
@@ -548,14 +543,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeOnTheCheckoutCompleteStep(): void
     {
-        if ($this->sharedStorage->has('checkout_type') && $this->sharedStorage->get('checkout_type') === 'async') {
-            Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_PAYMENT_SELECTED);
-        } else {
-            Assert::inArray(
-                $this->getCheckoutState(),
-                [OrderCheckoutStates::STATE_PAYMENT_SKIPPED, OrderCheckoutStates::STATE_PAYMENT_SELECTED]
-            );
-        }
+        Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_PAYMENT_SELECTED);
     }
 
     /**
@@ -665,11 +653,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldStillBeOnTheCheckoutAddressingStep(): void
     {
-        if ($this->sharedStorage->has('checkout_type') && $this->sharedStorage->get('checkout_type') === 'async') {
-            Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_CART);
-        } else {
-            Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_CART);
-        }
+        Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_CART);
     }
 
     /**
@@ -677,14 +661,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeOnTheCheckoutPaymentStep(): void
     {
-        if ($this->sharedStorage->has('checkout_type') && $this->sharedStorage->get('checkout_type') === 'async') {
-            Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_SHIPPING_SELECTED);
-        } else {
-            Assert::inArray(
-                $this->getCheckoutState(),
-                [OrderCheckoutStates::STATE_SHIPPING_SELECTED, OrderCheckoutStates::STATE_SHIPPING_SKIPPED]
-            );
-        }
+        Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_SHIPPING_SELECTED);
     }
 
     /**
@@ -752,11 +729,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeOnTheCheckoutShippingStep(): void
     {
-        if ($this->sharedStorage->has('checkout_type') && $this->sharedStorage->get('checkout_type') === 'async') {
-            Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_ADDRESSED);
-        } else {
-            Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_ADDRESSED);
-        }
+        Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_ADDRESSED);
     }
 
     /**
@@ -835,31 +808,11 @@ final class CheckoutContext implements Context
     /**
      * @Then I should see the thank you page
      * @Then /^the (?:visitor|customer) should see the thank you page$/
-     * @Then the cart should be placed
+     * @Then the order should be placed
      */
     public function iShouldSeeTheThankYouPage(): void
     {
-        if ($this->sharedStorage->has('checkout_type') && $this->sharedStorage->get('checkout_type') === 'async') {
-            Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_COMPLETED);
-        } else {
-            Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_COMPLETED);
-        }
-    }
-
-    /**
-     * @Then /^the cart should NOT be placed$/
-     */
-    public function theCartShouldNotBePlaced()
-    {
-        if ($this->sharedStorage->has('checkout_type') && $this->sharedStorage->get('checkout_type') === 'async') {
-            Assert::notSame(
-                $this->getCheckoutState(),
-                AsynchronousOrderCheckoutStates::STATE_COMPLETED,
-                'Expected not COMPLETED, got: ' . $this->getCheckoutState()
-            );
-        } else {
-            Assert::notSame($this->getCheckoutState(), OrderCheckoutStates::STATE_COMPLETED);
-        }
+        Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_COMPLETED);
     }
 
     /**
@@ -1218,18 +1171,6 @@ final class CheckoutContext implements Context
     public function iShouldSeeWithUnitPrice(ProductInterface $product, int $unitPrice): void
     {
         Assert::true($this->hasProductWithUnitPrice($product->getName(), $unitPrice));
-    }
-
-    /**
-     * @Given I use :type checkout type
-     */
-    public function iUseSpecificCheckoutType(string $type): void
-    {
-        if ($type === 'async') {
-            $this->sharedStorage->set('checkout_type', AsynchronousOrderCheckoutTransitions::GRAPH);
-        } else {
-            $this->sharedStorage->set('checkout_type', OrderCheckoutTransitions::GRAPH);
-        }
     }
 
     private function assertProvinceMessage(string $addressType): void

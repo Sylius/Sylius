@@ -279,7 +279,7 @@ class Order extends BaseOrder implements OrderInterface
             /** @var OrderItemInterface $orderItem */
             Assert::isInstanceOf($orderItem, OrderItemInterface::class);
 
-            if ($orderItem->getVariant()->isShippingRequired()) {
+            if ($orderItem->getVariant() && $orderItem->getVariant()->isShippingRequired()) {
                 return true;
             }
         }

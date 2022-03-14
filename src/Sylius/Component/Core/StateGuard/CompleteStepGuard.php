@@ -14,58 +14,22 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\StateGuard;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Order\Requirements\RequiredBillingAddressSpecification;
+use Sylius\Component\Core\Order\Requirements\RequiredNonEmptyCartSpecification;
+use Sylius\Component\Core\Order\Requirements\RequiredPaymentSpecification;
+use Sylius\Component\Core\Order\Requirements\RequiredShippingSpecification;
 
-class CompleteStepGuard
+class CompleteStepGuard implements OrderGuardInterface
 {
-    /**
-     * When address is required? It seems like always
-     * But should we in any instance block the state change? No
-     */
-    public function address(OrderInterface $order): bool
+    public function isSatisfiedBy(OrderInterface $order): bool
     {
-        return false === $order->isEmpty();
-    }
+        $requirements = new RequiredNonEmptyCartSpecification();
+        $requirements
+            ->and(new RequiredBillingAddressSpecification())
+            ->and(new RequiredShippingSpecification())
+            ->and(new RequiredPaymentSpecification())
+        ;
 
-    /**
-     * When shipping address / method is required? When any item requires shipping
-     * But should we in any instance block the state change? No
-     */
-    public function selectShipping(OrderInterface $order): bool
-    {
-        return false === $order->isEmpty();
-    }
-
-    /**
-     * When payment method is required? When order is not free
-     * But should we in any instance block the state change? No
-     */
-    public function selectPayment(OrderInterface $order): bool
-    {
-        return false === $order->isEmpty();
-    }
-
-    public function complete(OrderInterface $order): bool
-    {
-        if ($order->isEmpty()) {
-            return false;
-        }
-
-        if ($order->isShippingRequired() === true) {
-            if ($order->getShippingAddress() === null) {
-                return false;
-            }
-        }
-
-        if ($order->getTotal() > 0) {
-            if ($order->hasPayments() === false) {
-                return false;
-            }
-        }
-
-        if ($order->getBillingAddress() === null) {
-            return false;
-        }
-
-        return true;
+        return $requirements->isSatisfiedBy($order);
     }
 }

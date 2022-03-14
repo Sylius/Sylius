@@ -264,6 +264,9 @@
             <argument type="service" id="security.token_storage" />
         </service>
 
-        <service id="sylius.complete_state_guard" class="Sylius\Component\Core\StateGuard\CompleteStepGuard" />
+        <service id="sylius.state_guard.complete" class="Sylius\Component\Core\StateGuard\CompleteStepGuard" />
+        <service id="sylius.state_guard.address" class="Sylius\Component\Core\StateGuard\AddressStepGuard" />
+        <service id="sylius.state_guard.select_payment" class="Sylius\Component\Core\StateGuard\SelectPaymentStepGuard" />
+        <service id="sylius.state_guard.select_shipping" class="Sylius\Component\Core\StateGuard\SelectShippingStepGuard" />
     </services>
 </container>
