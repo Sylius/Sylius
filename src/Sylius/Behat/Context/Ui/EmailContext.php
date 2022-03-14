@@ -163,7 +163,7 @@ final class EmailContext implements Context
 
     private function getShippingMethodName(OrderInterface $order): string
     {
-        /** @var ShipmentInterface $shipment */
+        /** @var ShipmentInterface|false $shipment */
         $shipment = $order->getShipments()->first();
         if (false === $shipment) {
             throw new \LogicException('Order should have at least one shipment.');
