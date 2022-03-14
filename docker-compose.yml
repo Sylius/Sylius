@@ -48,7 +48,7 @@ services:
 
     # Would be the best solution, yet owners does not merge PRs with arm support for about 6 months   
     chrome:
-        image: alpine-chrome
+        image: zenika/alpine-chrome
         entrypoint: [
             "chromium-browser",
             "--disable-background-networking", "--disable-gpu",
