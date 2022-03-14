@@ -26,6 +26,46 @@ services:
         networks:
             - sylius
 
+    # Working on ARM, yet do not know how to make it run with behat tests - getting timeout
+    chromium:
+        image: isholgueras/chrome-headless
+        command: [
+            "--disable-background-networking",
+            "--disable-default-apps", "--disable-extensions", "--disable-software-rasterizer",
+            "--disable-sync", "--disable-translate", "--disable-web-security", "--headless", "--hide-scrollbars",
+            "--metrics-recording-only", "--mute-audio", "--no-first-run", "--no-sandbox", 
+            "--remote-debugging-port=9222", "--remote-debugging-address=0.0.0.0", 
+            "--safebrowsing-disable-auto-update", "--user-data-dir", "--no-check-certificate"
+        ]
+        volumes:
+            - /dev/shm:/dev/shm
+        ports:
+            - "9223:9222"
+        depends_on:
+            - traefik
+        networks:
+            - sylius
+
+    # Would be the best solution, yet owners does not merge PRs with arm support for about 6 months   
+    chrome:
+        image: alpine-chrome
+        entrypoint: [
+            "chromium-browser",
+            "--disable-background-networking", "--disable-gpu",
+            "--disable-default-apps", "--disable-extensions", "--disable-software-rasterizer",
+            "--disable-sync", "--disable-translate", "--disable-web-security", "--headless", "--hide-scrollbars",
+            "--metrics-recording-only", "--mute-audio", "--no-first-run", "--no-sandbox",
+            "--safebrowsing-disable-auto-update",
+            "http://app.sylius.localhost"
+        ]
+        ports:
+            - "9222:9222"
+        depends_on:
+            - traefik
+        networks:
+            - sylius
+
+    # Maybe we could use: https://github.com/docksal/behat/blob/develop/example/docker-compose.yml
     database:
         image: mysql:5.7
         platform: linux/amd64

@@ -8,19 +8,11 @@ init:
 	yarn install --pure-lockfile
 	node_modules/gulp/bin/gulp.js
 
-ci:
-	apt install -y wget
-	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-	echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list
-	apt update && apt install -y google-chrome-stable
-	composer install --no-interaction --no-scripts
-	bin/console sylius:install --no-interaction
-	bin/console sylius:fixtures:load default --no-interaction
-	yarn install --pure-lockfile
-	node_modules/gulp/bin/gulp.js
-	vendor/bin/phpunit
-	vendor/bin/phpspec run --ansi --no-interaction -f dot
-	vendor/bin/behat --colors --strict --stop-on-failure --no-interaction -vvv -f progress
+browser-validation:
+	vendor/bin/behat features/account/customer_account/address_book/adding_address_validation.feature
+
+check-connection:
+	curl -H Host:app.sylius.localhost http://chromium:9222/json/version
 
 unit:
 	vendor/bin/phpunit
