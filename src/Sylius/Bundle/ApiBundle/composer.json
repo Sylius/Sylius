@@ -26,6 +26,7 @@
         "php": "^7.3",
         "api-platform/core": "^2.5",
         "doctrine/dbal": "^2.7",
+        "enshrined/svg-sanitize": "^0.15.4",
         "lexik/jwt-authentication-bundle": "^2.6",
         "sylius/core-bundle": "^1.7",
         "symfony/messenger": "^4.4 || ^5.2"
