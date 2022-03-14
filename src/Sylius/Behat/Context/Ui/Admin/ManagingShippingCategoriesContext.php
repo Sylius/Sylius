@@ -39,7 +39,7 @@ class ManagingShippingCategoriesContext implements Context
     }
 
     /**
-     * @Given I want to create a new shipping category
+     * @When I want to create a new shipping category
      */
     public function iWantToCreateANewShippingCategory()
     {
@@ -155,7 +155,7 @@ class ManagingShippingCategoriesContext implements Context
 
     /**
      * @When /^I modify a (shipping category "([^"]+)")$/
-     * @Given /^I want to modify a (shipping category "([^"]+)")$/
+     * @When /^I want to modify a (shipping category "([^"]+)")$/
      */
     public function iWantToModifyAShippingCategory(ShippingCategoryInterface $shippingCategory)
     {

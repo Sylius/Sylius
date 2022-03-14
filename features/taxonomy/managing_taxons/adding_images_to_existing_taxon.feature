@@ -11,24 +11,24 @@ Feature: Adding images to an existing taxon
 
     @ui @javascript
     Scenario: Adding a single image to an existing taxon
-        Given I want to modify the "T-Shirts" taxon
-        When I attach the "t-shirts.jpg" image with "banner" type
+        When I want to modify the "T-Shirts" taxon
+        And I attach the "t-shirts.jpg" image with "banner" type
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this taxon should have an image with "banner" type
 
     @ui @javascript
     Scenario: Adding a single image to an existing taxon without specifying the type
-        Given I want to modify the "T-Shirts" taxon
-        When I attach the "t-shirts.jpg" image
+        When I want to modify the "T-Shirts" taxon
+        And I attach the "t-shirts.jpg" image
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this taxon should have only one image
 
     @ui @javascript
     Scenario: Adding multiple images to an existing taxon
-        Given I want to modify the "T-Shirts" taxon
-        When I attach the "t-shirts.jpg" image with "banner" type
+        When I want to modify the "T-Shirts" taxon
+        And I attach the "t-shirts.jpg" image with "banner" type
         And I attach the "t-shirts.jpg" image with "thumbnail" type
         And I save my changes
         Then I should be notified that it has been successfully edited
@@ -37,8 +37,8 @@ Feature: Adding images to an existing taxon
 
     @ui @javascript
     Scenario: Adding multiple images of the same type to an existing taxon
-        Given I want to modify the "T-Shirts" taxon
-        When I attach the "t-shirts.jpg" image with "banner" type
+        When I want to modify the "T-Shirts" taxon
+        And I attach the "t-shirts.jpg" image with "banner" type
         And I attach the "t-shirts.jpg" image with "banner" type
         And I save my changes
         Then I should be notified that it has been successfully edited

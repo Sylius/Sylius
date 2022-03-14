@@ -10,8 +10,8 @@ Feature: Selecting default tax zone for a channel
 
     @ui
     Scenario: Adding a new channel with default tax zone
-        Given I want to create a new channel
-        When I specify its code as "MOBILE"
+        When I want to create a new channel
+        And I specify its code as "MOBILE"
         And I name it "Mobile store"
         And I select the "United States" as default tax zone
         And I choose "USD" as the base currency
@@ -23,8 +23,8 @@ Feature: Selecting default tax zone for a channel
     @ui
     Scenario: Selecting default tax zone for existing channel
         Given the store operates on a channel named "Web store"
-        And I want to modify this channel
-        When I select the "United States" as default tax zone
+        When I want to modify this channel
+        And I select the "United States" as default tax zone
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the default tax zone for the "Web store" channel should be "United States"

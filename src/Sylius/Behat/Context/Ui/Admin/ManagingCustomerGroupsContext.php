@@ -44,7 +44,7 @@ final class ManagingCustomerGroupsContext implements Context
     }
 
     /**
-     * @Given I want to create a new customer group
+     * @When I want to create a new customer group
      */
     public function iWantToCreateANewCustomerGroup()
     {

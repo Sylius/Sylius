@@ -57,7 +57,7 @@ final class ManagingPromotionCouponsContext implements Context
 
     /**
      * @Given /^I browse coupons of (this promotion)$/
-     * @Given /^I want to view all coupons of (this promotion)$/
+     * @When /^I want to view all coupons of (this promotion)$/
      * @When /^I browse all coupons of ("[^"]+" promotion)$/
      */
     public function iWantToViewAllCouponsOfThisPromotion(PromotionInterface $promotion)
@@ -66,7 +66,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @Given /^I want to create a new coupon for (this promotion)$/
+     * @When /^I want to create a new coupon for (this promotion)$/
      */
     public function iWantToCreateANewCouponForThisPromotion(PromotionInterface $promotion)
     {
@@ -74,7 +74,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @Given /^I want to modify the ("[^"]+" coupon) for (this promotion)$/
+     * @When /^I want to modify the ("[^"]+" coupon) for (this promotion)$/
      */
     public function iWantToModifyTheCoupon(PromotionCouponInterface $coupon, PromotionInterface $promotion)
     {

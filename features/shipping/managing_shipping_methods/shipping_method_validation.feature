@@ -20,8 +20,8 @@ Feature: Shipping method validation
 
     @ui @api
     Scenario: Trying to add a new shipping method without specifying its name
-        Given I want to create a new shipping method
-        When I specify its code as "FED_EX"
+        When I want to create a new shipping method
+        And I specify its code as "FED_EX"
         But I do not name it
         And I try to add it
         Then I should be notified that name is required
@@ -40,8 +40,8 @@ Feature: Shipping method validation
     @ui @api
     Scenario: Trying to remove name from existing shipping method
         Given the store allows shipping with "UPS Ground"
-        And I want to modify this shipping method
-        When I remove its name from "English (United States)" translation
+        When I want to modify this shipping method
+        And I remove its name from "English (United States)" translation
         And I try to save my changes
         Then I should be notified that name is required
         And this shipping method should still be named "UPS Ground"
@@ -49,7 +49,7 @@ Feature: Shipping method validation
     @ui
     Scenario: Trying to remove zone from existing shipping method
         Given the store allows shipping with "UPS Ground"
-        And I want to modify this shipping method
-        When I remove its zone
+        When I want to modify this shipping method
+        And I remove its zone
         And I try to save my changes
         Then I should be notified that zone has to be selected

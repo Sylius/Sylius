@@ -13,7 +13,7 @@ Feature: Managing option values of a product option
 
     @ui @javascript @api
     Scenario: Adding an option value to an existing product option
-        Given I want to modify the "T-Shirt size" product option
+        When I want to modify the "T-Shirt size" product option
         And I add the "L" option value identified by "OV3"
         And I save my changes
         Then I should be notified that it has been successfully edited
@@ -22,16 +22,16 @@ Feature: Managing option values of a product option
     @ui @javascript @todo
     Scenario: Removing an option value from an existing product option
         Given this product option has also the "L" option value with code "OV3"
-        And I want to modify the "T-Shirt size" product option
-        When I delete the "L" option value of this product option
+        When I want to modify the "T-Shirt size" product option
+        And I delete the "L" option value of this product option
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product option should not have the "L" option value
 
     @ui @javascript @todo
     Scenario: Removing and adding a new option value to an existing product option
-        Given I want to modify the "T-Shirt size" product option
-        When I delete the "M" option value of this product option
+        When I want to modify the "T-Shirt size" product option
+        And I delete the "M" option value of this product option
         And I add the "L" option value identified by "OV3"
         And I save my changes
         Then I should be notified that it has been successfully edited

@@ -61,7 +61,7 @@ final class ManagingTaxCategoriesContext implements Context
     }
 
     /**
-     * @Given I want to create a new tax category
+     * @When I want to create a new tax category
      */
     public function iWantToCreateNewTaxCategory()
     {
@@ -116,8 +116,8 @@ final class ManagingTaxCategoriesContext implements Context
     }
 
     /**
-     * @Given I want to modify a tax category :taxCategory
-     * @Given /^I want to modify (this tax category)$/
+     * @When I want to modify a tax category :taxCategory
+     * @When /^I want to modify (this tax category)$/
      */
     public function iWantToModifyTaxCategory(TaxCategoryInterface $taxCategory)
     {

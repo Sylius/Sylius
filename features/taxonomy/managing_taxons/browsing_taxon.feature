@@ -10,6 +10,6 @@ Feature: Browsing taxons
 
     @ui
     Scenario: Browsing taxons in store
-        Given I want to see all taxons in store
+        When I want to see all taxons in store
         Then I should see 2 taxons on the list
         And I should see the taxon named "T-Shirts" in the list

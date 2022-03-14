@@ -12,8 +12,8 @@ Feature: Adding a new coupon
 
     @ui
     Scenario: Adding a new coupon
-        Given I want to create a new coupon for this promotion
-        When I specify its code as "SANTA2016"
+        When I want to create a new coupon for this promotion
+        And I specify its code as "SANTA2016"
         And I limit its usage to 100 times
         And I limit its per customer usage to 50 times
         And I make it valid until "21.04.2017"

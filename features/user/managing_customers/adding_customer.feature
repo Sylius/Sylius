@@ -10,16 +10,16 @@ Feature: Adding a new customer
 
     @ui
     Scenario: Adding a new customer
-        Given I want to create a new customer
-        When I specify their email as "l.skywalker@gmail.com"
+        When I want to create a new customer
+        And I specify their email as "l.skywalker@gmail.com"
         And I add them
         Then I should be notified that it has been successfully created
         And the customer "l.skywalker@gmail.com" should appear in the store
-        
+
     @ui
     Scenario: Adding a new customer with full details
-        Given I want to create a new customer
-        When I specify their first name as "Luke"
+        When I want to create a new customer
+        And I specify their first name as "Luke"
         And I specify their last name as "Skywalker"
         And I specify their email as "l.skywalker@gmail.com"
         And I specify its birthday as "1892-01-03"
