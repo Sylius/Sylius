@@ -34,7 +34,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given I want to browse promotions
+     * @When I want to browse promotions
      * @When I browse promotions
      */
     public function iWantToBrowsePromotions(): void

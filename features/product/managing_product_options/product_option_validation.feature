@@ -11,8 +11,8 @@ Feature: Product option validation
 
     @ui @api
     Scenario: Trying to add a new product option without specifying its code
-        Given I want to create a new product option
-        When I name it "T-Shirt size" in "English (United States)"
+        When I want to create a new product option
+        And I name it "T-Shirt size" in "English (United States)"
         But I do not specify its code
         And I try to add it
         Then I should be notified that code is required
@@ -20,8 +20,8 @@ Feature: Product option validation
 
     @ui @api
     Scenario: Trying to add a new product option without specifying its name
-        Given I want to create a new product option
-        When I specify its code as "t_shirt_size"
+        When I want to create a new product option
+        And I specify its code as "t_shirt_size"
         But I do not name it
         And I try to add it
         Then I should be notified that name is required
@@ -29,8 +29,8 @@ Feature: Product option validation
 
     @ui @api
     Scenario: Trying to remove name from an existing product option
-        Given I want to modify the "T-Shirt color" product option
-        When I remove its name from "English (United States)" translation
+        When I want to modify the "T-Shirt color" product option
+        And I remove its name from "English (United States)" translation
         And I try to save my changes
         Then I should be notified that name is required
         And this product option should still be named "T-Shirt color"

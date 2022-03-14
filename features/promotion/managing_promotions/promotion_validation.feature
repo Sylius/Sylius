@@ -10,8 +10,8 @@ Feature: Promotion validation
 
     @ui
     Scenario: Trying to add a new promotion without specifying its code
-        Given I want to create a new promotion
-        When I name it "No-VAT promotion"
+        When I want to create a new promotion
+        And I name it "No-VAT promotion"
         And I do not specify its code
         And I try to add it
         Then I should be notified that code is required
@@ -19,8 +19,8 @@ Feature: Promotion validation
 
     @ui
     Scenario: Trying to add a new promotion without specifying its name
-        Given I want to create a new promotion
-        When I specify its code as "no_vat_promotion"
+        When I want to create a new promotion
+        And I specify its code as "no_vat_promotion"
         But I do not name it
         And I try to add it
         Then I should be notified that name is required
@@ -28,8 +28,8 @@ Feature: Promotion validation
 
     @ui
     Scenario: Adding a promotion with start date set up after end date
-        Given I want to create a new promotion
-        When I specify its code as "FULL_METAL_PROMOTION"
+        When I want to create a new promotion
+        And I specify its code as "FULL_METAL_PROMOTION"
         And I name it "Full metal promotion"
         And I make it available from "24.12.2017" to "12.12.2017"
         And I try to add it
@@ -38,8 +38,8 @@ Feature: Promotion validation
     @ui
     Scenario: Trying to remove name from existing promotion
         Given there is a promotion "Christmas sale"
-        And I want to modify this promotion
-        When I remove its name
+        When I want to modify this promotion
+        And I remove its name
         And I try to save my changes
         Then I should be notified that name is required
         And this promotion should still be named "Christmas sale"
@@ -47,15 +47,15 @@ Feature: Promotion validation
     @ui
     Scenario: Trying to add start later then end date for existing promotion
         Given there is a promotion "Christmas sale"
-        And I want to modify this promotion
+        When I want to modify this promotion
         And I make it available from "24.12.2017" to "12.12.2017"
         And I try to save my changes
         Then I should be notified that promotion cannot end before it start
 
     @ui @javascript
     Scenario: Trying to add a new promotion without specifying a percentage discount
-        Given I want to create a new promotion
-        When I specify its code as "christmas_sale"
+        When I want to create a new promotion
+        And I specify its code as "christmas_sale"
         And I name it "Christmas sale"
         And I add the "Order percentage discount" action configured without a percentage value
         And I try to add it
@@ -64,8 +64,8 @@ Feature: Promotion validation
 
     @ui @javascript
     Scenario: Trying to add a new promotion with a wrong percentage discount
-        Given I want to create a new promotion
-        When I specify its code as "christmas_sale"
+        When I want to create a new promotion
+        And I specify its code as "christmas_sale"
         And I name it "Christmas sale"
         And I add the "Order percentage discount" action configured with a percentage value of 120%
         And I try to add it
@@ -74,8 +74,8 @@ Feature: Promotion validation
 
     @ui @javascript
     Scenario: Trying to add a new promotion with a negative percentage discount
-        Given I want to create a new promotion
-        When I specify its code as "christmas_sale"
+        When I want to create a new promotion
+        And I specify its code as "christmas_sale"
         And I name it "Christmas sale"
         And I add the "Order percentage discount" action configured with a percentage value of -20%
         And I try to add it

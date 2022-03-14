@@ -54,7 +54,7 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Given I want to modify the :paymentMethod payment method
+     * @When I want to modify the :paymentMethod payment method
      */
     public function iWantToModifyAPaymentMethod(PaymentMethodInterface $paymentMethod)
     {

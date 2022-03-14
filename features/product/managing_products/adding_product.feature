@@ -11,8 +11,8 @@ Feature: Adding a new product
 
     @ui @no-api
     Scenario: Adding a new simple product with price
-        Given I want to create a new simple product
-        When I specify its code as "BOARD_DICE_BREWING"
+        When I want to create a new simple product
+        And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
         And I set its slug to "dice-brewing" in "English (United States)"
         And I set its price to "$10.00" for "United States" channel
@@ -22,8 +22,8 @@ Feature: Adding a new product
 
     @ui @no-api
     Scenario: Adding a new simple product with discounted price
-        Given I want to create a new simple product
-        When I specify its code as "BOARD_DICE_BREWING"
+        When I want to create a new simple product
+        And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
         And I set its slug to "dice-brewing" in "English (United States)"
         And I set its price to "$10.00" for "United States" channel
@@ -45,8 +45,8 @@ Feature: Adding a new product
 
     @ui @no-api
     Scenario: Adding a new simple product with specific shipping category
-        Given I want to create a new simple product
-        When I specify its code as "BOARD_DICE_BREWING"
+        When I want to create a new simple product
+        And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
         And I set its price to "$10.00" for "United States" channel
         And I set its slug to "dice-brewing" in "English (United States)"
@@ -60,8 +60,8 @@ Feature: Adding a new product
         Given the store has a product option "Bottle size" with a code "bottle_size"
         And this product option has the "0.7" option value with code "bottle_size_medium"
         And this product option has also the "0.5" option value with code "bottle_size_small"
-        And I want to create a new configurable product
-        When I specify its code as "WHISKEY_GENTLEMEN"
+        When I want to create a new configurable product
+        And I specify its code as "WHISKEY_GENTLEMEN"
         And I name it "Gentleman Jack" in "English (United States)"
         And I add the "Bottle size" option to it
         And I set its slug to "whiskey/gentleman-jack" in "English (United States)"
@@ -71,8 +71,8 @@ Feature: Adding a new product
 
     @ui @api
     Scenario: Adding a new configurable product without options
-        Given I want to create a new configurable product
-        When I specify its code as "WHISKEY_GENTLEMEN"
+        When I want to create a new configurable product
+        And I specify its code as "WHISKEY_GENTLEMEN"
         And I name it "Gentleman Jack" in "English (United States)"
         And I set its slug to "whiskey/gentleman-jack" in "English (United States)"
         And I add it
@@ -81,8 +81,8 @@ Feature: Adding a new product
 
     @ui @no-api
     Scenario: Adding a new simple product without shipping required
-        Given I want to create a new simple product
-        When I specify its code as "BOARD_DICE_BREWING"
+        When I want to create a new simple product
+        And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
         And I set its slug to "dice-brewing" in "English (United States)"
         And I set its price to "$10.00" for "United States" channel

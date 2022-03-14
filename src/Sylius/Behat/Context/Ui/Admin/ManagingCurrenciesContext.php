@@ -39,7 +39,7 @@ final class ManagingCurrenciesContext implements Context
     }
 
     /**
-     * @Given I want to add a new currency
+     * @When I want to add a new currency
      */
     public function iWantToAddNewCurrency()
     {
@@ -75,7 +75,7 @@ final class ManagingCurrenciesContext implements Context
     }
 
     /**
-     * @Given /^I want to edit (this currency)$/
+     * @When /^I want to edit (this currency)$/
      */
     public function iWantToEditThisCurrency(CurrencyInterface $currency)
     {
@@ -134,7 +134,7 @@ final class ManagingCurrenciesContext implements Context
     }
 
     /**
-     * @Given I want to browse currencies of the store
+     * @When I want to browse currencies of the store
      */
     public function iWantToSeeAllCurrenciesInStore()
     {

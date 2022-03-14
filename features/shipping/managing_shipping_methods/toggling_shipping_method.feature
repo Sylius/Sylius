@@ -12,8 +12,8 @@ Feature: Toggling a shipping method
     @ui @api
     Scenario: Disabling the shipping method
         Given the shipping method "UPS Carrier" is enabled
-        And I want to modify this shipping method
-        When I disable it
+        When I want to modify this shipping method
+        And I disable it
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this shipping method should be disabled
@@ -21,8 +21,8 @@ Feature: Toggling a shipping method
     @ui @api
     Scenario: Enabling the shipping method
         Given the shipping method "UPS Carrier" is disabled
-        And I want to modify this shipping method
-        When I enable it
+        When I want to modify this shipping method
+        And I enable it
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this shipping method should be enabled

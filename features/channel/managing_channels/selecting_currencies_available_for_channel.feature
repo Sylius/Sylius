@@ -11,8 +11,8 @@ Feature: Selecting available currencies for a channel
 
     @ui
     Scenario: Adding a new channel with currencies
-        Given I want to create a new channel
-        When I specify its code as MOBILE
+        When I want to create a new channel
+        And I specify its code as MOBILE
         And I name it "Mobile store"
         And I allow for paying in "Euro"
         And I choose "English (United States)" as a default locale
@@ -23,8 +23,8 @@ Feature: Selecting available currencies for a channel
     @ui
     Scenario: Adding currencies to an existing channel
         Given the store operates on a channel named "Web store"
-        And I want to modify this channel
-        When I allow for paying in "Euro"
+        When I want to modify this channel
+        And I allow for paying in "Euro"
         And I choose "English (United States)" as a default locale
         And I save my changes
         Then I should be notified that it has been successfully edited

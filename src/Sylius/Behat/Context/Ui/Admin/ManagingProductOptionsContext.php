@@ -44,7 +44,7 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @Given I want to create a new product option
+     * @When I want to create a new product option
      */
     public function iWantToCreateANewProductOption()
     {
@@ -52,7 +52,7 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @Given I want to modify the :productOption product option
+     * @When I want to modify the :productOption product option
      */
     public function iWantToModifyAProductOption(ProductOptionInterface $productOption)
     {

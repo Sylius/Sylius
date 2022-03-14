@@ -172,7 +172,7 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Given /^I want to change my password$/
+     * @When /^I want to change my password$/
      */
     public function iWantToChangeMyPassword()
     {

@@ -10,8 +10,8 @@ Feature: Editing tax category
 
     @todo
     Scenario: Trying to change tax category code
-        Given I want to modify a tax category "Alcohol"
-        When I change its code to "beverages"
+        When I want to modify a tax category "Alcohol"
+        And I change its code to "beverages"
         And I save my changes
         Then I should be notified that code cannot be changed
         And tax category "Alcohol" should still have code "alcohol"

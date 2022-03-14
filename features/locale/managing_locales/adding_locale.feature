@@ -9,8 +9,8 @@ Feature: Adding a new locale
 
     @ui @api
     Scenario: Adding a new locale
-        Given I want to create a new locale
-        When I choose Norwegian
+        When I want to create a new locale
+        And I choose Norwegian
         And I add it
         Then I should be notified that it has been successfully created
         And the store should be available in the Norwegian language

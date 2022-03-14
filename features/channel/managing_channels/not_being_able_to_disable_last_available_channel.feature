@@ -11,8 +11,8 @@ Feature: Toggling a channel
     @ui
     Scenario: Disabling the last available channel
         Given the channel "Web Channel" is enabled
-        And I want to modify this channel
-        When I disable it
+        When I want to modify this channel
+        And I disable it
         And I save my changes
         Then I should be notified that at least one channel has to be defined
         And channel with name "Web Channel" should still be enabled

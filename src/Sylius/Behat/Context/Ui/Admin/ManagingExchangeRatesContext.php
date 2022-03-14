@@ -40,7 +40,7 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @Given I want to add a new exchange rate
+     * @When I want to add a new exchange rate
      */
     public function iWantToAddNewExchangeRate()
     {
@@ -48,7 +48,7 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @Given /^I want to edit (this exchange rate)$/
+     * @When /^I want to edit (this exchange rate)$/
      * @When /^I am editing (this exchange rate)$/
      */
     public function iWantToEditThisExchangeRate(ExchangeRateInterface $exchangeRate)
