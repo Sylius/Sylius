@@ -1,5 +1,18 @@
 # CHANGELOG FOR `1.9.X`
 
+## v1.9.10 (2022-03-14)
+
+#### Details
+
+- [#11](https://github.com/Sylius/Sylius/issues/11) [Security] Set cache control directives to fix security leak after logging out and using back button ([@lchrusciel](https://github.com/lchrusciel), [@GSadee](https://github.com/GSadee))
+- [#12](https://github.com/Sylius/Sylius/issues/12) [Security] XSS - SVG file upload vulnerability fixed ([@Rafikooo](https://github.com/Rafikooo))
+- [#13275](https://github.com/Sylius/Sylius/issues/13275) [Maintenance] Add note about doctrine/dbal requirement ([@lchrusciel](https://github.com/lchrusciel))
+- [#13282](https://github.com/Sylius/Sylius/issues/13282) [API] Revert changes of checked keys in cart and checkout responses to fix the build ([@GSadee](https://github.com/GSadee))
+- [#13730](https://github.com/Sylius/Sylius/issues/13730) [Maintenance] Add conflict to symfony/framework-bundle to fix problem with solving path prefix in API scenarios ([@GSadee](https://github.com/GSadee))
+- [#13750](https://github.com/Sylius/Sylius/issues/13750) [Admin][Shop] placehold.it replaced to local placeholders ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13765](https://github.com/Sylius/Sylius/issues/13765) [Security] Fixes for SVG XSS, wrong cache for logged in users and clickjacking ([@ernestWarwas](https://github.com/ernestWarwas), [@lchrusciel](https://github.com/lchrusciel), [@GSadee](https://github.com/GSadee), [@Zales0123](https://github.com/Zales0123), [@Rafikooo](https://github.com/Rafikooo))
+- [#14](https://github.com/Sylius/Sylius/issues/14) [Security] Clickjacking vulnerability fixed ([@ernestWarwas](https://github.com/ernestWarwas))
+
 ## v1.9.9 (2021-11-03)
 
 - [#13165](https://github.com/Sylius/Sylius/issues/13165) [HotFix] Add conflict to doctrine/orm to fix the problem with creating taxons ([@GSadee](https://github.com/GSadee))
