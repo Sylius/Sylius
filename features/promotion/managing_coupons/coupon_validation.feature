@@ -2,7 +2,7 @@
 Feature: Coupon validation
     In order to avoid making mistakes when managing a coupon
     As an Administrator
-    I want to be prevented from adding it without specifying required fields
+    I want to be prevented from adding incorrect coupons
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -30,4 +30,15 @@ Feature: Coupon validation
         And I make it valid until "26.03.2017"
         And I try to add it
         Then I should be notified that coupon usage limit must be at least one
+        And there should be 0 coupon related to this promotion
+
+    @ui
+    Scenario: Trying to add a new coupon with per customer usage limit below one
+        When I want to create a new coupon for this promotion
+        And I specify its code as "SANTA2016"
+        And I limit its usage to 30 times
+        And I limit its per customer usage to -1 times
+        And I make it valid until "26.03.2017"
+        And I try to add it
+        Then I should be notified that coupon usage limit per customer must be at least one
         And there should be 0 coupon related to this promotion

@@ -166,7 +166,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @When I limit its per customer usage to :limit times
+     * @When /^I limit its per customer usage to ([^"]+) times$/
      */
     public function iLimitItsPerCustomerUsageLimitTo(int $limit)
     {
@@ -396,6 +396,17 @@ final class ManagingPromotionCouponsContext implements Context
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         Assert::same($currentPage->getValidationMessage('usage_limit'), 'Coupon usage limit must be at least 1.');
+    }
+
+    /**
+     * @Then I should be notified that coupon usage limit per customer must be at least one
+     */
+    public function iShouldBeNotifiedThatCouponUsageLimitPerCustomerMustBeAtLeast(): void
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::same($currentPage->getValidationMessage('per_customer_usage_limit'), 'Coupon usage limit per customer must be at least 1.');
     }
 
     /**
