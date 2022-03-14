@@ -44,7 +44,7 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
-     * @Given I want to create a new tax rate
+     * @When I want to create a new tax rate
      */
     public function iWantToCreateNewTaxRate()
     {
@@ -145,8 +145,8 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
-     * @Given I want to modify a tax rate :taxRate
-     * @Given /^I want to modify (this tax rate)$/
+     * @When I want to modify a tax rate :taxRate
+     * @When /^I want to modify (this tax rate)$/
      */
     public function iWantToModifyTaxRate(TaxRateInterface $taxRate)
     {

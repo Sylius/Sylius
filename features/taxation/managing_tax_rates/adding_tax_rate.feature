@@ -11,8 +11,8 @@ Feature: Adding a new tax rate
 
     @ui
     Scenario: Adding a new tax rate
-        Given I want to create a new tax rate
-        When I specify its code as "US_SALES_TAX"
+        When I want to create a new tax rate
+        And I specify its code as "US_SALES_TAX"
         And I name it "United States Sales Tax"
         And I define it for the "United States" zone
         And I make it applicable for the "Food and Beverage" tax category
@@ -24,8 +24,8 @@ Feature: Adding a new tax rate
 
     @ui @javascript
     Scenario: Adding a new tax rate which will be included in product price
-        Given I want to create a new tax rate
-        When I specify its code as "US_SALES_TAX"
+        When I want to create a new tax rate
+        And I specify its code as "US_SALES_TAX"
         And I name it "United States Sales Tax"
         And I define it for the "United States" zone
         And I make it applicable for the "Food and Beverage" tax category

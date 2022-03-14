@@ -19,8 +19,8 @@ Feature: Adding a new payment method
 
     @ui
     Scenario: Adding a new payment method with description
-        Given I want to create a new offline payment method
-        When I name it "Offline" in "English (United States)"
+        When I want to create a new offline payment method
+        And I name it "Offline" in "English (United States)"
         And I specify its code as "OFF"
         And I describe it as "Payment method Offline" in "English (United States)"
         And I add it
@@ -29,8 +29,8 @@ Feature: Adding a new payment method
 
     @ui
     Scenario: Adding a new payment method with instructions
-        Given I want to create a new offline payment method
-        When I name it "Offline" in "English (United States)"
+        When I want to create a new offline payment method
+        And I name it "Offline" in "English (United States)"
         And I specify its code as "OFF"
         And I set its instruction as "Bank account: 0000 1111 2222 3333" in "English (United States)"
         And I add it
@@ -40,8 +40,8 @@ Feature: Adding a new payment method
 
     @ui
     Scenario: Adding a new payment method for channel
-        Given I want to create a new offline payment method
-        When I name it "Offline" in "English (United States)"
+        When I want to create a new offline payment method
+        And I name it "Offline" in "English (United States)"
         And I specify its code as "OFF"
         And make it available in channel "United States"
         And I add it
@@ -51,8 +51,8 @@ Feature: Adding a new payment method
 
     @ui
     Scenario: Adding a new paypal payment method
-        Given I want to create a new payment method with "Paypal Express Checkout" gateway factory
-        When I name it "Paypal Express Checkout" in "English (United States)"
+        When I want to create a new payment method with "Paypal Express Checkout" gateway factory
+        And I name it "Paypal Express Checkout" in "English (United States)"
         And I specify its code as "PEC"
         And I configure it with test paypal credentials
         And I add it
@@ -61,8 +61,8 @@ Feature: Adding a new payment method
 
     @ui
     Scenario: Adding a new stripe payment method
-        Given I want to create a new payment method with "Stripe Checkout" gateway factory
-        When I name it "Stripe Checkout" in "English (United States)"
+        When I want to create a new payment method with "Stripe Checkout" gateway factory
+        And I name it "Stripe Checkout" in "English (United States)"
         And I specify its code as "SC"
         And I configure it with test stripe gateway data
         And I add it

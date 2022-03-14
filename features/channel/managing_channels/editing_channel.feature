@@ -10,8 +10,8 @@ Feature: Editing channel
 
     @todo
     Scenario: Trying to change channel code
-        Given I want to modify a channel "Web Channel"
-        When I change its code to "MOBILE"
+        When I want to modify a channel "Web Channel"
+        And I change its code to "MOBILE"
         And I save my changes
         Then I should be notified that code cannot be changed
         And channel "Web Channel" should still have code "MOBILE"
@@ -23,8 +23,8 @@ Feature: Editing channel
 
     @ui
     Scenario: Renaming the channel
-        Given I want to modify a channel "Web Channel"
-        When I rename it to "Website store"
+        When I want to modify a channel "Web Channel"
+        And I rename it to "Website store"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this channel name should be "Website store"

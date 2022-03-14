@@ -12,8 +12,8 @@ Feature: Shipping method code validation
 
     @ui
     Scenario: Trying to add a new shipping method with special symbols in the code
-        Given I want to create a new shipping method
-        When I name it "FedEx Carrier" in "English (United States)"
+        When I want to create a new shipping method
+        And I name it "FedEx Carrier" in "English (United States)"
         And I specify its code as "#π/"
         And I try to add it
         Then I should be notified that code needs to contain only specific symbols
@@ -21,8 +21,8 @@ Feature: Shipping method code validation
 
     @ui
     Scenario: Trying to add a new shipping method with spaces in the code
-        Given I want to create a new shipping method
-        When I name it "FedEx Carrier" in "English (United States)"
+        When I want to create a new shipping method
+        And I name it "FedEx Carrier" in "English (United States)"
         And I specify its code as "PEC  -PEC"
         And I try to add it
         Then I should be notified that code needs to contain only specific symbols
@@ -30,8 +30,8 @@ Feature: Shipping method code validation
 
     @ui @javascript
     Scenario: Trying to add a new shipping method with
-        Given I want to create a new shipping method
-        When I name it "FedEx Carrier First US Division" in "English (United States)"
+        When I want to create a new shipping method
+        And I name it "FedEx Carrier First US Division" in "English (United States)"
         And I specify its code as "PEC-US_01"
         And I define it for the zone named "United States"
         And I choose "Flat rate per shipment" calculator

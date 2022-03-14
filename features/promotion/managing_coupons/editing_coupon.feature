@@ -11,29 +11,29 @@ Feature: Editing promotion coupon
 
     @ui
     Scenario: Changing coupon expires date
-        Given I want to modify the "SANTA2016" coupon for this promotion
-        When I change expires date to "21.05.2019"
+        When I want to modify the "SANTA2016" coupon for this promotion
+        And I change expires date to "21.05.2019"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this coupon should be valid until "21.05.2019"
 
     @ui
     Scenario: Changing coupons usage limit
-        Given I want to modify the "SANTA2016" coupon for this promotion
-        When I change its usage limit to 50
+        When I want to modify the "SANTA2016" coupon for this promotion
+        And I change its usage limit to 50
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this coupon should have 50 usage limit
 
     @ui
     Scenario: Changing coupons per customer usage limit
-        Given I want to modify the "SANTA2016" coupon for this promotion
-        When I change its per customer usage limit to 20
+        When I want to modify the "SANTA2016" coupon for this promotion
+        And I change its per customer usage limit to 20
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this coupon should have 20 per customer usage limit
 
     @ui
     Scenario: Seeing a disabled code field when editing a coupon
-        Given I want to modify the "SANTA2016" coupon for this promotion
+        When I want to modify the "SANTA2016" coupon for this promotion
         Then the code field should be disabled

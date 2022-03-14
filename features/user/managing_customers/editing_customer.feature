@@ -10,8 +10,8 @@ Feature: Editing a customer
     @ui
     Scenario: Changing first and last name of an existing customer
         Given the store has customer "Frodo Baggins" with email "f.baggins@example.com"
-        And I want to edit this customer
-        When I specify his first name as "Jon"
+        When I want to edit this customer
+        And I specify his first name as "Jon"
         And I specify his last name as "Snow"
         And I save my changes
         Then I should be notified that it has been successfully edited
@@ -20,8 +20,8 @@ Feature: Editing a customer
     @ui
     Scenario: Removing first and last name from an existing customer
         Given the store has customer "Luke Skywalker" with email "l.skywalker@gmail.com"
-        And I want to edit this customer
-        When I remove its first name
+        When I want to edit this customer
+        And I remove its first name
         And I remove its last name
         And I save my changes
         Then I should be notified that it has been successfully edited

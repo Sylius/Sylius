@@ -60,7 +60,7 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @Given I want to create a new administrator
+     * @When I want to create a new administrator
      */
     public function iWantToCreateANewAdministrator()
     {

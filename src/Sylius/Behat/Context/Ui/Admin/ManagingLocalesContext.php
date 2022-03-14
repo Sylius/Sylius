@@ -31,8 +31,8 @@ final class ManagingLocalesContext implements Context
     }
 
     /**
-     * @Given I want to create a new locale
-     * @Given I want to add a new locale
+     * @When I want to create a new locale
+     * @When I want to add a new locale
      */
     public function iWantToCreateNewLocale()
     {

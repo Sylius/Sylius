@@ -12,8 +12,8 @@ Feature: Toggling a channel
     @ui
     Scenario: Disabling the channel
         Given the channel "Web Channel" is enabled
-        And I want to modify this channel
-        When I disable it
+        When I want to modify this channel
+        And I disable it
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this channel should be disabled
@@ -21,8 +21,8 @@ Feature: Toggling a channel
     @ui
     Scenario: Enabling the channel
         Given the channel "Web Channel" is disabled
-        And I want to modify this channel
-        When I enable it
+        When I want to modify this channel
+        And I enable it
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this channel should be enabled

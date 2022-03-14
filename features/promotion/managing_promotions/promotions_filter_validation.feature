@@ -10,8 +10,8 @@ Feature: Promotion filters validation
 
     @ui @javascript
     Scenario: Adding a promotion with wrong minimum price on price range filter
-        Given I want to create a new promotion
-        When I specify its code as "10_for_all_products_over_10"
+        When I want to create a new promotion
+        And I specify its code as "10_for_all_products_over_10"
         And I name it "$10 discount for all products over $10!"
         And I add the "Item percentage discount" action configured with a percentage value of 10% for "United States" channel
         And I specify that on "United States" channel this action should be applied to items with price greater then "$asdasd"
@@ -21,8 +21,8 @@ Feature: Promotion filters validation
 
     @ui @javascript
     Scenario: Adding a promotion with wrong maximum price on price range filter
-        Given I want to create a new promotion
-        When I specify its code as "10_for_all_products_over_10"
+        When I want to create a new promotion
+        And I specify its code as "10_for_all_products_over_10"
         And I name it "$10 discount for (almost) all products!"
         And I add the "Item percentage discount" action configured with a percentage value of 10% for "United States" channel
         And I specify that on "United States" channel this action should be applied to items with price lesser then "$asdasda"

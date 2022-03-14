@@ -11,16 +11,16 @@ Feature: Sign in to the store
 
     @ui @api
     Scenario: Sign in with email and password
-        Given I want to log in
-        When I specify the username as "admin@example.com"
+        When I want to log in
+        And I specify the username as "admin@example.com"
         And I specify the password as "sylius"
         And I log in
         Then I should be logged in
 
     @ui @api
     Scenario: Sign in with bad credentials
-        Given I want to log in
-        When I specify the username as "admin@example.com"
+        When I want to log in
+        And I specify the username as "admin@example.com"
         And I specify the password as "pswd"
         And I log in
         Then I should be notified about bad credentials
@@ -28,8 +28,8 @@ Feature: Sign in to the store
 
     @ui @api
     Scenario: Sign in using customer account
-        Given I want to log in
-        When I specify the username as "bear@example.com"
+        When I want to log in
+        And I specify the username as "bear@example.com"
         And I specify the password as "bear"
         And I log in
         Then I should be notified about bad credentials

@@ -9,8 +9,8 @@ Feature: Adding a new customer account
 
     @ui @javascript
     Scenario: Adding a new customer with an account
-        Given I want to create a new customer account
-        When I specify their email as "l.skywalker@gmail.com"
+        When I want to create a new customer account
+        And I specify their email as "l.skywalker@gmail.com"
         And I choose create account option
         And I specify their password as "psw123"
         And I add them
@@ -21,8 +21,8 @@ Feature: Adding a new customer account
     @ui @javascript
     Scenario: Creating an account for existing customer
         Given the store has customer "Frodo Baggins" with email "f.baggins@example.com"
-        And I want to edit this customer
-        When I choose create account option
+        When I want to edit this customer
+        And I choose create account option
         And I specify their password as "killSauron"
         And I save my changes
         Then I should be notified that it has been successfully edited

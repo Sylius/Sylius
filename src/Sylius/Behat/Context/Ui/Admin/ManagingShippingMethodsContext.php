@@ -201,8 +201,8 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Given I want to modify a shipping method :shippingMethod
-     * @Given /^I want to modify (this shipping method)$/
+     * @When I want to modify a shipping method :shippingMethod
+     * @When /^I want to modify (this shipping method)$/
      */
     public function iWantToModifyAShippingMethod(ShippingMethodInterface $shippingMethod)
     {
