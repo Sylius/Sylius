@@ -11,16 +11,16 @@ Feature: Editing payment methods
 
     @ui
     Scenario: Renaming the payment method
-        Given I want to modify the "Offline" payment method
-        When I rename it to "Cash on delivery" in "English (United States)"
+        When I want to modify the "Offline" payment method
+        And I rename it to "Cash on delivery" in "English (United States)"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this payment method name should be "Cash on delivery"
 
     @ui
     Scenario: Disabling payment method
-        Given I want to modify the "Offline" payment method
-        When I disable it
+        When I want to modify the "Offline" payment method
+        And I disable it
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this payment method should be disabled
@@ -28,8 +28,8 @@ Feature: Editing payment methods
     @ui
     Scenario: Enabling payment method
         Given the payment method "Offline" is disabled
-        And I want to modify the "Offline" payment method
-        When I enable it
+        When I want to modify the "Offline" payment method
+        And I enable it
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this payment method should be enabled

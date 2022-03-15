@@ -1,5 +1,22 @@
 # CHANGELOG FOR `1.11.X`
 
+## v1.11.2 (2022-03-14)
+
+#### Details
+
+- [#13432](https://github.com/Sylius/Sylius/issues/13432) Update SalesDataProvider.php ([@remoteclient](https://github.com/remoteclient))
+- [#13723](https://github.com/Sylius/Sylius/issues/13723) [Docs] Deployment on artifakt ([@AdamKasp](https://github.com/AdamKasp))
+- [#13731](https://github.com/Sylius/Sylius/issues/13731) [Taxation] Add validation of negative tax rate ([@coldic3](https://github.com/coldic3))
+- [#13734](https://github.com/Sylius/Sylius/issues/13734) [JS] add empty value to autocomplete selects ([@SirDomin](https://github.com/SirDomin))
+- [#13735](https://github.com/Sylius/Sylius/issues/13735) [Docs] add note to translation ([@AdamKasp](https://github.com/AdamKasp))
+- [#13737](https://github.com/Sylius/Sylius/issues/13737) [Admin] Fix undefined labels in taxon autocomplete ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13738](https://github.com/Sylius/Sylius/issues/13738) [Docs] Synchronous messenger transport ([@Rafikooo](https://github.com/Rafikooo))
+- [#13750](https://github.com/Sylius/Sylius/issues/13750) [Admin][Shop] placehold.it replaced to local placeholders ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13751](https://github.com/Sylius/Sylius/issues/13751) [Docs] Blank line removed ([@Rafikooo](https://github.com/Rafikooo))
+- [#13756](https://github.com/Sylius/Sylius/issues/13756) [GitHub Actions] Change PHP ini values + clear cache ([@GSadee](https://github.com/GSadee))
+- [#13765](https://github.com/Sylius/Sylius/issues/13765) [Security] Fixes for SVG XSS, wrong cache for logged in users and clickjacking ([@ernestWarwas](https://github.com/ernestWarwas), [@lchrusciel](https://github.com/lchrusciel), [@GSadee](https://github.com/GSadee), [@Zales0123](https://github.com/Zales0123), [@Rafikooo](https://github.com/Rafikooo))
+- [#13766](https://github.com/Sylius/Sylius/issues/13766) [Security][API] passwordResetToken nulled after password is changed ([@lchrusciel](https://github.com/lchrusciel), [@ernestWarwas](https://github.com/ernestWarwas), [@GSadee](https://github.com/GSadee), [@TheMilek](https://github.com/TheMilek))
+
 ## v1.11.1 (2022-03-07)
 
 #### Details

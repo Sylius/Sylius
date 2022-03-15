@@ -10,8 +10,8 @@ Feature: Adding a new taxon with images
 
     @ui @javascript
     Scenario: Adding a new taxon with a single image
-        Given I want to create a new taxon
-        When I specify its code as "t-shirts"
+        When I want to create a new taxon
+        And I specify its code as "t-shirts"
         And I name it "T-Shirts" in "English (United States)"
         And I attach the "t-shirts.jpg" image with "banner" type
         And I add it
@@ -21,8 +21,8 @@ Feature: Adding a new taxon with images
 
     @ui @javascript
     Scenario: Adding a new taxon with multiple images
-        Given I want to create a new taxon
-        When I specify its code as "t-shirts"
+        When I want to create a new taxon
+        And I specify its code as "t-shirts"
         And I name it "T-Shirts" in "English (United States)"
         And I attach the "t-shirts.jpg" image with "banner" type
         And I attach the "t-shirts.jpg" image with "thumbnail" type

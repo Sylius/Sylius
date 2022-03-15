@@ -10,8 +10,8 @@ Feature: Adding a new product option
 
     @ui @javascript @api
     Scenario: Adding a new product option with two required option values
-        Given I want to create a new product option
-        When I name it "T-Shirt size" in "English (United States)"
+        When I want to create a new product option
+        And I name it "T-Shirt size" in "English (United States)"
         And I specify its code as "t_shirt_size"
         And I add the "S" option value identified by "OV1"
         And I add the "M" option value identified by "OV2"
@@ -23,8 +23,8 @@ Feature: Adding a new product option
 
     @ui @api
     Scenario: Adding a new product option without any option values
-        Given I want to create a new product option
-        When I name it "T-Shirt size" in "English (United States)"
+        When I want to create a new product option
+        And I name it "T-Shirt size" in "English (United States)"
         And I specify its code as "t_shirt_size"
         But I do not add an option value
         And I try to add it
@@ -33,8 +33,8 @@ Feature: Adding a new product option
 
     @ui @javascript @api
     Scenario: Adding a new product option with one option value
-        Given I want to create a new product option
-        When I name it "T-Shirt size" in "English (United States)"
+        When I want to create a new product option
+        And I name it "T-Shirt size" in "English (United States)"
         And I specify its code as "t_shirt_size"
         And I add the "S" option value identified by "OV1"
         And I try to add it

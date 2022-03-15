@@ -13,8 +13,8 @@ Feature: Toggle the product variant
     @ui
     Scenario: Disabling a product variant
         Given the "Wyborowa Vodka Exquisite" product variant is enabled
-        And I want to modify the "Wyborowa Vodka Exquisite" product variant
-        When I disable it
+        When I want to modify the "Wyborowa Vodka Exquisite" product variant
+        And I disable it
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this variant should be disabled
@@ -22,8 +22,8 @@ Feature: Toggle the product variant
     @ui
     Scenario: Enabling a product variant
         Given the "Wyborowa Vodka Exquisite" product variant is disabled
-        And I want to modify the "Wyborowa Vodka Exquisite" product variant
-        When I enable it
+        When I want to modify the "Wyborowa Vodka Exquisite" product variant
+        And I enable it
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this variant should be enabled

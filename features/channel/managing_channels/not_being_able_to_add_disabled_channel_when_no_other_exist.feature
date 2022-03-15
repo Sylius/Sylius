@@ -11,8 +11,8 @@ Feature: Not being able to add a disabled channel when no other exist
 
     @ui
     Scenario: Adding a new disabled channel should result
-        Given I want to create a new channel
-        When I specify its code as "MOBILE"
+        When I want to create a new channel
+        And I specify its code as "MOBILE"
         And I name it "Mobile channel"
         And I choose "Euro" as the base currency
         And I choose "English (United States)" as a default locale

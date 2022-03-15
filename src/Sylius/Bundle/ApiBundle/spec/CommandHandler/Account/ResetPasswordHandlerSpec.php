@@ -54,6 +54,7 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
 
         $shopUser->setPlainPassword('newPassword')->shouldBeCalled();
         $passwordUpdater->updatePassword($shopUser)->shouldBeCalled();
+        $shopUser->setPasswordResetToken(null)->shouldBeCalled();
 
         $command = new ResetPassword('TOKEN');
         $command->newPassword = 'newPassword';

@@ -13,8 +13,8 @@ Feature: Adding a new product with text attribute
 
     @ui @javascript @no-api
     Scenario: Adding a text attribute to product
-        Given I want to create a new simple product
-        When I specify its code as "44_MAGNUM"
+        When I want to create a new simple product
+        And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
         And I set its price to "$100.00" for "United States" channel
         And I set its "Gun caliber" attribute to "11 mm" in "English (United States)"

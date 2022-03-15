@@ -69,7 +69,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given I want to browse promotions
+     * @When I want to browse promotions
      * @When I browse promotions
      */
     public function iWantToBrowsePromotions()
@@ -428,8 +428,8 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given I want to modify a :promotion promotion
-     * @Given /^I want to modify (this promotion)$/
+     * @When I want to modify a :promotion promotion
+     * @When /^I want to modify (this promotion)$/
      * @When I modify a :promotion promotion
      */
     public function iWantToModifyAPromotion(PromotionInterface $promotion): void

@@ -43,7 +43,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'code' => '#sylius_promotion_coupon_code',
             'expires_at' => '#sylius_promotion_coupon_expiresAt',
             'usage_limit' => '#sylius_promotion_coupon_usageLimit',
-            'usage_limit_per_customer' => '#sylius_promotion_coupon_usageLimit',
+            'per_customer_usage_limit' => '#sylius_promotion_coupon_perCustomerUsageLimit',
         ]);
     }
 }

@@ -11,8 +11,8 @@ Feature: Promotion unique code validation
 
     @ui
     Scenario: Trying to add promotion with taken code
-        Given I want to create a new promotion
-        When I specify its code as "NO_VAT"
+        When I want to create a new promotion
+        And I specify its code as "NO_VAT"
         And I name it "No VAT promotion"
         And I try to add it
         Then I should be notified that promotion with this code already exists

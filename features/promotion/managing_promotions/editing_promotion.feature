@@ -17,40 +17,40 @@ Feature: Editing promotion
 
     @ui
     Scenario: Editing promotions usage limit
-        Given I want to modify a "Christmas sale" promotion
-        When I set its usage limit to 50
+        When I want to modify a "Christmas sale" promotion
+        And I set its usage limit to 50
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the "Christmas sale" promotion should be available to be used only 50 times
 
     @ui
     Scenario: Editing promotion exclusiveness
-        Given I want to modify a "Christmas sale" promotion
-        When I make it exclusive
+        When I want to modify a "Christmas sale" promotion
+        And I make it exclusive
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the "Christmas sale" promotion should be exclusive
 
     @ui
     Scenario: Editing promotions coupon based option
-        Given I want to modify a "Christmas sale" promotion
-        When I make it coupon based
+        When I want to modify a "Christmas sale" promotion
+        And I make it coupon based
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the "Christmas sale" promotion should be coupon based
 
     @ui
     Scenario: Editing promotions channels
-        Given I want to modify a "Christmas sale" promotion
-        When I make it applicable for the "United States" channel
+        When I want to modify a "Christmas sale" promotion
+        And I make it applicable for the "United States" channel
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the "Christmas sale" promotion should be applicable for the "United States" channel
 
     @ui
     Scenario: Editing a promotion with start and end date
-        Given I want to modify a "Christmas sale" promotion
-        When I make it available from "12.12.2017" to "24.12.2017"
+        When I want to modify a "Christmas sale" promotion
+        And I make it available from "12.12.2017" to "24.12.2017"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the "Christmas sale" promotion should be available from "12.12.2017" to "24.12.2017"
@@ -63,8 +63,8 @@ Feature: Editing promotion
 
     @ui
     Scenario: Remove priority from existing promotion
-        Given I want to modify a "Christmas sale" promotion
-        When I remove its priority
+        When I want to modify a "Christmas sale" promotion
+        And I remove its priority
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the "Christmas sale" promotion should have priority 1

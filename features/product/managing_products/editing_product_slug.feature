@@ -18,8 +18,8 @@ Feature: Editing product's slug
 
     @ui @javascript @api
     Scenario: Creating a product with a custom slug
-        Given I want to create a new configurable product
-        When I specify its code as "BOARD_MANSION_OF_MADNESS"
+        When I want to create a new simple product
+        And I specify its code as "BOARD_MANSION_OF_MADNESS"
         And I name it "Mansion of Madness" in "English (United States)"
         And I set its slug to "mom-board-game" in "English (United States)"
         And I add it

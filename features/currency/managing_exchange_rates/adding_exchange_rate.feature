@@ -10,8 +10,8 @@ Feature: Adding a new exchange rate
 
     @ui @api
     Scenario: Adding a new exchange rate
-        Given I want to add a new exchange rate
-        When I specify its ratio as 1.20
+        When I want to add a new exchange rate
+        And I specify its ratio as 1.20
         And I choose "US Dollar" as the source currency
         And I choose "British Pound" as the target currency
         And I add it

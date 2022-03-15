@@ -60,8 +60,8 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @Given I want to create a new taxon
-     * @Given I want to see all taxons in store
+     * @When I want to create a new taxon
+     * @When I want to see all taxons in store
      */
     public function iWantToCreateANewTaxon()
     {
@@ -69,7 +69,7 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @Given I want to create a new taxon for :taxon
+     * @When I want to create a new taxon for :taxon
      */
     public function iWantToCreateANewTaxonForParent(TaxonInterface $taxon)
     {
@@ -77,7 +77,7 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @Given /^I want to modify the ("[^"]+" taxon)$/
+     * @When /^I want to modify the ("[^"]+" taxon)$/
      */
     public function iWantToModifyATaxon(TaxonInterface $taxon)
     {

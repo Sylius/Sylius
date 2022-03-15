@@ -58,8 +58,8 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Given I want to create a new customer
-     * @Given I want to create a new customer account
+     * @When I want to create a new customer
+     * @When I want to create a new customer account
      */
     public function iWantToCreateANewCustomer()
     {
@@ -310,9 +310,9 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Given I want to enable :customer
-     * @Given I want to disable :customer
-     * @Given I want to verify :customer
+     * @When I want to enable :customer
+     * @When I want to disable :customer
+     * @When I want to verify :customer
      */
     public function iWantToChangeStatusOf(CustomerInterface $customer): void
     {

@@ -91,6 +91,9 @@ sylius:
             invalid: Depth must be a number.
         channel_pricing:
             all_defined: 'You must define price for every channel.'
+    promotion_coupon:
+        per_customer_usage_limit:
+            min: Coupon usage limit per customer must be at least {{ limit }}.
     product_translation:
         short_description:
             max: Short description must not be longer then {{ limit }} characters.

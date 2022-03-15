@@ -62,7 +62,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Given /^I want to create a new variant of (this product)$/
+     * @When /^I want to create a new variant of (this product)$/
      */
     public function iWantToCreateANewProduct(ProductInterface $product)
     {
