@@ -371,7 +371,7 @@ final class CheckoutContext implements Context
         $response = $this->completeOrder();
 
         if ($response->getStatusCode() >= 400) {
-            throw new \Exception($this->responseChecker->getError($response));
+            return;
         }
 
         $this->sharedStorage->set('response', $response);
