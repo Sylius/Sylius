@@ -11,9 +11,7 @@ Feature: Add possibility to perform checkout in any order
         And I am a logged in customer
 
     @api
-    Scenario:
-        Completing cart with free, not shippable item (without doing addressing, shipping selection and payment
-    selection)
+    Scenario: Completing cart with free, not shippable item (without doing addressing, shipping selection and payment selection)
         Given I have product "Sylius eBook" in the cart
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Patrick Jane"
         And I complete the addressing step
