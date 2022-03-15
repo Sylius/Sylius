@@ -57,6 +57,12 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         if ('test' === $env || 'test_cached' === $env) {
             $loader->load('test_services.xml');
         }
+
+        if ($config['bring_back_previous_order_processing_priorities']) {
+            $definition = $container->getDefinition('sylius.order_processing.order_prices_recalculator');
+            $definition->clearTag('sylius.order_processor');
+            $definition->addTag('sylius.order_processor', ['priority' => 40]);
+        }
     }
 
     public function prepend(ContainerBuilder $container): void

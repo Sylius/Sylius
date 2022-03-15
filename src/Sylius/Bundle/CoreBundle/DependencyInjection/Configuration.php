@@ -49,6 +49,7 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->booleanNode('prepend_doctrine_migrations')->defaultTrue()->end()
+                ->booleanNode('bring_back_previous_order_processing_priorities')->defaultFalse()->end() // Think about better naming :)
             ->end()
         ;
 
