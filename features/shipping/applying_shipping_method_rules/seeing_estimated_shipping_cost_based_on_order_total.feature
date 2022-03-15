@@ -21,5 +21,5 @@ Feature: Seeing estimated shipping costs based on order total
 
     @ui @api
     Scenario: Seeing estimated shipping cost that handle cheap goods
-        Given I add product "Cheap Jacket" to the cart
+        When I add product "Cheap Jacket" to the cart
         Then my cart estimated shipping cost should be "$2.00"
