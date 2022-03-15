@@ -1,8 +1,7 @@
-# Using Doctrine Collection extension for getting available locales in active channel for shop user
+# Using data provider for getting available locales in active channel for shop user
 
-* Status: accepted
-* Propose date: 2021-07-05
-* Update date: 2022-03-15
+* Status: rejected
+* Date: 2021-07-05
 
 ## Context and Problem Statement
 Customer should have access only to locales available in their channel
@@ -17,11 +16,12 @@ Customer should have access only to locales available in their channel
 
 ### Using Data Provider
 
+* Good, because we already have this approach for older resources
 * Good, because it is easy to implement 
 * Bad, because using data providers omits extra Doctrine extensions like pagination
 
 ## Decision Outcome
 
-Chosen option: **"Using Doctrine Collection extension"**
-
-This option is consistent with current approach and does not omit Doctrine extensions like pagination.
+Chosen option: Using Data Provider
+Shops shouldn't have many locales for each channel, so lack of a pagination is smaller problem than creating overcomplicated 
+query in Doctrine Collection extension
