@@ -29,7 +29,7 @@ winzou_state_machine:
                 from: [payment_selected, shipping_skipped, shipping_selected]
                 to: payment_selected
             complete:
-                from: [payment_selected, payment_skipped]
+                from: [payment_selected, payment_skipped, addressed]
                 to: completed
         callbacks:
             after:
