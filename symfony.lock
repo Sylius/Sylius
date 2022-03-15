@@ -52,6 +52,9 @@
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },
+    "composer/pcre": {
+        "version": "3.0.0"
+    },
     "composer/semver": {
         "version": "1.5.1"
     },
@@ -269,14 +272,8 @@
     "laminas/laminas-code": {
         "version": "3.5.1"
     },
-    "laminas/laminas-eventmanager": {
-        "version": "3.3.0"
-    },
     "laminas/laminas-stdlib": {
         "version": "3.3.1"
-    },
-    "laminas/laminas-zendframework-bridge": {
-        "version": "1.1.1"
     },
     "lchrusciel/api-test-case": {
         "version": "v5.0.0"
@@ -293,20 +290,8 @@
     "league/uri-components": {
         "version": "1.8.2"
     },
-    "league/uri-hostname-parser": {
-        "version": "1.1.1"
-    },
     "league/uri-interfaces": {
         "version": "1.1.1"
-    },
-    "league/uri-manipulations": {
-        "version": "1.5.0"
-    },
-    "league/uri-parser": {
-        "version": "1.4.1"
-    },
-    "league/uri-schemes": {
-        "version": "1.2.1"
     },
     "lexik/jwt-authentication-bundle": {
         "version": "2.5",
@@ -369,14 +354,8 @@
     "netresearch/jsonmapper": {
         "version": "v2.1.0"
     },
-    "nette/neon": {
-        "version": "v3.2.2"
-    },
     "nikic/php-parser": {
         "version": "v4.6.0"
-    },
-    "ocramius/proxy-manager": {
-        "version": "2.10.1"
     },
     "openlss/lib-array2xml": {
         "version": "1.0.0"
@@ -407,9 +386,6 @@
     },
     "phar-io/version": {
         "version": "2.0.1"
-    },
-    "php": {
-        "version": "7.3"
     },
     "php-http/client-common": {
         "version": "1.7.0"
@@ -461,9 +437,6 @@
     },
     "phpstan/phpstan-doctrine": {
         "version": "0.10"
-    },
-    "phpstan/phpstan-shim": {
-        "version": "0.10.3"
     },
     "phpunit/php-code-coverage": {
         "version": "5.3.2"
@@ -525,6 +498,9 @@
     "ramsey/uuid": {
         "version": "3.8.0"
     },
+    "rector/rector": {
+        "version": "0.11.52"
+    },
     "sebastian/code-unit-reverse-lookup": {
         "version": "1.0.1"
     },
@@ -561,15 +537,6 @@
     "sebastian/version": {
         "version": "2.0.1"
     },
-    "sensiolabs/security-checker": {
-        "version": "4.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "4.0",
-            "ref": "421933bf8f0e75546ac8e00cb3eb12904fa2ac1a"
-        }
-    },
     "slevomat/coding-standard": {
         "version": "4.6.3"
     },
@@ -578,18 +545,6 @@
     },
     "sonata-project/cache": {
         "version": "2.0.1"
-    },
-    "sonata-project/core-bundle": {
-        "version": "3.9",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "3.9",
-            "ref": "2f69bd1995730b73a5211a9707622fb25a925df7"
-        }
-    },
-    "sonata-project/datagrid-bundle": {
-        "version": "2.3.1"
     },
     "sonata-project/doctrine-extensions": {
         "version": "1.9.1"
@@ -602,9 +557,6 @@
             "version": "1.0",
             "ref": "8273133183506fe6ec66895e8890227b0dfba1c7"
         }
-    },
-    "sonata-project/intl-bundle": {
-        "version": "2.5.0"
     },
     "sonata-project/twig-extensions": {
         "version": "1.4.1"
@@ -645,9 +597,6 @@
     "sylius-labs/polyfill-symfony-security": {
         "version": "v1.0.0"
     },
-    "sylius-labs/sensio-distribution-bundle": {
-        "version": "v6.0.1"
-    },
     "sylius/fixtures-bundle": {
         "version": "v1.4.1"
     },
@@ -680,9 +629,6 @@
     },
     "symfony/cache-contracts": {
         "version": "v2.1.3"
-    },
-    "symfony/class-loader": {
-        "version": "v3.4.14"
     },
     "symfony/config": {
         "version": "v4.1.3"
@@ -765,9 +711,6 @@
             "ref": "87c585d24de9f43bca80ebcfd5cf5cb39445d95f"
         }
     },
-    "symfony/http-client-contracts": {
-        "version": "v2.3.1"
-    },
     "symfony/http-foundation": {
         "version": "v4.1.3"
     },
@@ -808,7 +751,7 @@
         "version": "v4.1.3"
     },
     "symfony/password-hasher": {
-        "version": "v5.3.4"
+        "version": "v5.4.3"
     },
     "symfony/polyfill-ctype": {
         "version": "v1.9.0"
@@ -847,7 +790,7 @@
         "version": "v1.23.0"
     },
     "symfony/polyfill-util": {
-        "version": "v1.15.0"
+        "version": "v1.25.0"
     },
     "symfony/process": {
         "version": "v4.4.13"
@@ -1006,26 +949,8 @@
     "symfony/yaml": {
         "version": "v4.4.13"
     },
-    "symplify/composer-json-manipulator": {
-        "version": "v9.3.0"
-    },
-    "symplify/console-package-builder": {
-        "version": "v9.3.0"
-    },
     "symplify/easy-coding-standard": {
         "version": "v8.1.19"
-    },
-    "symplify/easy-testing": {
-        "version": "v9.3.0"
-    },
-    "symplify/rule-doc-generator-contracts": {
-        "version": "v9.3.0"
-    },
-    "symplify/skipper": {
-        "version": "v9.3.0"
-    },
-    "symplify/symplify-kernel": {
-        "version": "v9.3.0"
     },
     "textalk/websocket": {
         "version": "1.2.0"
@@ -1050,9 +975,6 @@
     },
     "vimeo/psalm": {
         "version": "3.11.6"
-    },
-    "webimpress/safe-writer": {
-        "version": "2.1.0"
     },
     "webmozart/assert": {
         "version": "1.9.1"
@@ -1083,11 +1005,5 @@
     },
     "winzou/state-machine-bundle": {
         "version": "0.3.2"
-    },
-    "zendframework/zend-code": {
-        "version": "3.4.1"
-    },
-    "zendframework/zend-eventmanager": {
-        "version": "3.2.1"
     }
 }
