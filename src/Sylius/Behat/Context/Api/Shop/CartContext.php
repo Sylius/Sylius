@@ -908,4 +908,30 @@ final class CartContext implements Context
 
         throw new \InvalidArgumentException(sprintf('The product %s does not exist', $productName));
     }
+//    /**
+//     * @When I add :variantName variant of product :product to the cart
+//     * @When /^I add "([^"]+)" variant of (this product) to the cart$/
+//     * @Given I have :variantName variant of product :product in the cart
+//     * @Given /^I have "([^"]+)" variant of (this product) in the cart$/
+//     */
+//    public function iAddProductToTheCartSelectingVariant($variantName, ProductInterface $product)
+//    {
+//        // 1. Do we have a car? No - pickup a cart
+//        // POST /api/v2/shop/orders
+//        // we get tokenValue
+//        $tokenValue = $this->pickupCart();
+//        $product->
+//
+//        // 2. Add item to the cart
+//        // POST /api/v2/shop/orders/{tokenValue}/items
+//        $this->cartsClient->buildCreateRequest();
+//        $request = Request::create('shop', 'orders/' . $tokenValue . '/items', 'Bearer');
+//        $request->setContent([
+//            'productVariant' => $variantName,
+//            'quantity' => 1,
+//        ]);
+//        $this->cartsClient->executeCustomRequest($request);
+//        $this->cartsClient->create();
+//
+//    }
 }
