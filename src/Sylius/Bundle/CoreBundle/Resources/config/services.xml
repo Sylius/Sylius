@@ -263,5 +263,7 @@
         <service id="Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolverInterface" class="Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolver">
             <argument type="service" id="security.token_storage" />
         </service>
+
+        <service id="sylius.complete_state_guard" class="Sylius\Component\Core\StateGuard\CompleteStepGuard" />
     </services>
 </container>

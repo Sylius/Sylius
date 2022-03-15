@@ -32,6 +32,11 @@ winzou_state_machine:
                 from: [payment_selected, payment_skipped, addressed]
                 to: completed
         callbacks:
+            guard:
+                sylius_complete_order_guard:
+                    on: ["complete"]
+                    do: ["@sylius.complete_state_guard", "isSatisfiedBy"]
+                    args: ["object"]
             after:
                 sylius_process_cart:
                     on: ["select_shipping", "address", "select_payment", "skip_shipping", "skip_payment"]
