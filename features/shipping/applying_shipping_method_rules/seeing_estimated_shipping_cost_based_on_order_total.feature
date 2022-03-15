@@ -15,11 +15,11 @@ Feature: Seeing estimated shipping costs based on order total
         And I am a logged in customer
 
     @ui @api
-    Scenario: Seeing estimated shipping cost that handle expensive goods
+    Scenario: Seeing valid estimated shipping cost for the cart with a value over minimum price configured on the shipping method
         When I add product "Expensive Jacket" to the cart
         Then my cart estimated shipping cost should be "$200.00"
 
     @ui @api
-    Scenario: Seeing estimated shipping cost that handle cheap goods
+    Scenario: Seeing valid estimated shipping cost for the cart with a value under maximum price configured on the shipping method
         When I add product "Cheap Jacket" to the cart
         Then my cart estimated shipping cost should be "$2.00"

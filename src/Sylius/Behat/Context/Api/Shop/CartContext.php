@@ -547,7 +547,7 @@ final class CartContext implements Context
     /**
      * @Then /^my cart shipping total should be ("[^"]+")$/
      * @Then I should not see shipping total for my cart
-     * @Then /^my cart estimated shipping cost should be ("[^"]+")/
+     * @Then /^my cart estimated shipping cost should be ("[^"]+")$/
      */
     public function myCartShippingFeeShouldBe(int $shippingTotal = 0): void
     {
