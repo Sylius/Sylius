@@ -175,35 +175,35 @@ class OrderItem implements OrderItemInterface
         return $this->units;
     }
 
-    public function addUnit(OrderItemUnitInterface $unit): void
+    public function addUnit(OrderItemUnitInterface $itemUnit): void
     {
-        if ($this !== $unit->getOrderItem()) {
+        if ($this !== $itemUnit->getOrderItem()) {
             throw new \LogicException('This order item unit is assigned to a different order item.');
         }
 
-        if (!$this->hasUnit($unit)) {
-            $this->units->add($unit);
+        if (!$this->hasUnit($itemUnit)) {
+            $this->units->add($itemUnit);
 
             ++$this->quantity;
-            $this->unitsTotal += $unit->getTotal();
+            $this->unitsTotal += $itemUnit->getTotal();
             $this->recalculateTotal();
         }
     }
 
-    public function removeUnit(OrderItemUnitInterface $unit): void
+    public function removeUnit(OrderItemUnitInterface $itemUnit): void
     {
-        if ($this->hasUnit($unit)) {
-            $this->units->removeElement($unit);
+        if ($this->hasUnit($itemUnit)) {
+            $this->units->removeElement($itemUnit);
 
             --$this->quantity;
-            $this->unitsTotal -= $unit->getTotal();
+            $this->unitsTotal -= $itemUnit->getTotal();
             $this->recalculateTotal();
         }
     }
 
-    public function hasUnit(OrderItemUnitInterface $unit): bool
+    public function hasUnit(OrderItemUnitInterface $itemUnit): bool
     {
-        return $this->units->contains($unit);
+        return $this->units->contains($itemUnit);
     }
 
     public function getAdjustments(?string $type = null): Collection

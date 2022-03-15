@@ -39,33 +39,33 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
         $this->product = $product;
     }
 
-    public function transform($productTaxon): ?TaxonInterface
+    public function transform($value): ?TaxonInterface
     {
-        if (null === $productTaxon) {
+        if (null === $value) {
             return null;
         }
 
-        $this->assertTransformationValueType($productTaxon, ProductTaxonInterface::class);
+        $this->assertTransformationValueType($value, ProductTaxonInterface::class);
 
-        return $productTaxon->getTaxon();
+        return $value->getTaxon();
     }
 
-    public function reverseTransform($taxon): ?ProductTaxonInterface
+    public function reverseTransform($value): ?ProductTaxonInterface
     {
-        if (null === $taxon) {
+        if (null === $value) {
             return null;
         }
 
-        $this->assertTransformationValueType($taxon, TaxonInterface::class);
+        $this->assertTransformationValueType($value, TaxonInterface::class);
 
         /** @var ProductTaxonInterface|null $productTaxon */
-        $productTaxon = $this->productTaxonRepository->findOneBy(['taxon' => $taxon, 'product' => $this->product]);
+        $productTaxon = $this->productTaxonRepository->findOneBy(['taxon' => $value, 'product' => $this->product]);
 
         if (null === $productTaxon) {
             /** @var ProductTaxonInterface $productTaxon */
             $productTaxon = $this->productTaxonFactory->createNew();
             $productTaxon->setProduct($this->product);
-            $productTaxon->setTaxon($taxon);
+            $productTaxon->setTaxon($value);
         }
 
         return $productTaxon;

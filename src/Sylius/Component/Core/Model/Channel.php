@@ -121,9 +121,9 @@ class Channel extends BaseChannel implements ChannelInterface
         return $this->baseCurrency;
     }
 
-    public function setBaseCurrency(?CurrencyInterface $baseCurrency): void
+    public function setBaseCurrency(?CurrencyInterface $currency): void
     {
-        $this->baseCurrency = $baseCurrency;
+        $this->baseCurrency = $currency;
     }
 
     public function getDefaultLocale(): ?LocaleInterface
@@ -131,9 +131,9 @@ class Channel extends BaseChannel implements ChannelInterface
         return $this->defaultLocale;
     }
 
-    public function setDefaultLocale(?LocaleInterface $defaultLocale): void
+    public function setDefaultLocale(?LocaleInterface $locale): void
     {
-        $this->defaultLocale = $defaultLocale;
+        $this->defaultLocale = $locale;
     }
 
     public function getDefaultTaxZone(): ?ZoneInterface

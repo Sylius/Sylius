@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Map;
 
 interface CommandItemIriArgumentToIdentifierMapInterface
 {
-    /** @psalm-var class-string $className */
+    /** @psalm-param class-string $className */
     public function get(string $className): string;
 
     public function has(?string $className): bool;
