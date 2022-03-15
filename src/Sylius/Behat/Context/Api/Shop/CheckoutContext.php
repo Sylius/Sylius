@@ -370,8 +370,8 @@ final class CheckoutContext implements Context
     {
         $response = $this->completeOrder();
 
-        if ($response->getStatusCode() === 422) {
-            return;
+        if ($response->getStatusCode() >= 400) {
+            throw new \Exception((string) $response->getContent());
         }
 
         $this->sharedStorage->set('response', $response);
@@ -812,6 +812,7 @@ final class CheckoutContext implements Context
     /**
      * @Then I should see the thank you page
      * @Then /^the (?:visitor|customer) should see the thank you page$/
+     * @Then the cart should be placed
      */
     public function iShouldSeeTheThankYouPage(): void
     {
