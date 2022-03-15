@@ -23,7 +23,7 @@ final class CommandItemIriArgumentToIdentifierMap implements CommandItemIriArgum
         $this->map = $map;
     }
 
-    /** @psalm-var class-string $className */
+    /** @psalm-param class-string $className */
     public function get(string $className): string
     {
         return $this->map[$className];
