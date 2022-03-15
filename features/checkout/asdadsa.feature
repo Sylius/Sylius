@@ -16,5 +16,6 @@ Feature: Add possibility to perform checkout in any order
     selection)
         Given I have product "Sylius eBook" in the cart
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Patrick Jane"
+        And I complete the addressing step
         When I confirm my order
         Then the cart should be placed
