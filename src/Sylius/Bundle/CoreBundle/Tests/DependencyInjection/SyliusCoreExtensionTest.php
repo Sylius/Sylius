@@ -29,24 +29,26 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
     {
         $this->container->setParameter('kernel.environment', 'dev');
 
-        $this->load(['bring_back_previous_order_processing_priorities' => true]);
+        $this->load(['shipment_processor_before_prices_recalculator' => true]);
 
-//        $this->assertContainerBuilderHasServiceDefinitionWithTag(
-//            'sylius.order_processing.order_shipment_processor',
-//            'sylius.order_processor',
-//            ['priority' => 50]
-//        );
-
-        $this->assertContainerBuilderHasServiceDefinitionWithTag(
-            'sylius.order_processing.order_prices_recalculator',
-            'sylius.order_processor',
-            ['priority' => 40]
+        $this->assertThat(
+            $this->container->findDefinition('sylius.order_processing.order_prices_recalculator'),
+            new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 40])
         );
 
-        $this->assertContainerBuilderHasServiceDefinitionWithTag(
-            'sylius.order_processing.order_prices_recalculator',
-            'sylius.order_processor',
-            ['priority' => 50]
+        $this->assertThat(
+            $this->container->findDefinition('sylius.order_processing.order_prices_recalculator'),
+            $this->logicalNot(new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 50]))
+        );
+
+        $this->assertThat(
+            $this->container->findDefinition('sylius.order_processing.order_shipment_processor'),
+            new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 50])
+        );
+
+        $this->assertThat(
+            $this->container->findDefinition('sylius.order_processing.order_shipment_processor'),
+            $this->logicalNot(new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 40]))
         );
     }
 

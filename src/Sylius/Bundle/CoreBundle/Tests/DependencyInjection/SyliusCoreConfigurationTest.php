@@ -28,8 +28,8 @@ final class SyliusCoreConfigurationTest extends TestCase
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
-            ['bring_back_previous_order_processing_priorities' => false],
-            'bring_back_previous_order_processing_priorities',
+            ['shipment_processor_before_prices_recalculator' => false],
+            'shipment_processor_before_prices_recalculator',
         );
     }
 
@@ -39,9 +39,9 @@ final class SyliusCoreConfigurationTest extends TestCase
     public function it_allows_to_define_that_previous_priorities_should_be_brought_back_for_order_processing(): void
     {
         $this->assertProcessedConfigurationEquals(
-            [['bring_back_previous_order_processing_priorities' => true]],
-            ['bring_back_previous_order_processing_priorities' => true],
-            'bring_back_previous_order_processing_priorities',
+            [['shipment_processor_before_prices_recalculator' => true]],
+            ['shipment_processor_before_prices_recalculator' => true],
+            'shipment_processor_before_prices_recalculator',
         );
     }
 
@@ -51,8 +51,8 @@ final class SyliusCoreConfigurationTest extends TestCase
     public function it_does_not_allow_to_define_previous_priorities_with_values_other_then_bool(): void
     {
         $this->assertConfigurationIsInvalid(
-            [['bring_back_previous_order_processing_priorities' => 'yolo']],
-            'Invalid type for path "sylius_core.bring_back_previous_order_processing_priorities". Expected "bool", but got "string".',
+            [['shipment_processor_before_prices_recalculator' => 'yolo']],
+            'Invalid type for path "sylius_core.shipment_processor_before_prices_recalculator". Expected "bool", but got "string".',
         );
     }
 
