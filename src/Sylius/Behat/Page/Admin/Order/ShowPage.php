@@ -436,7 +436,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->tableAccessor;
     }
 
-    private function hasAddress(string $elementText, string $customerName, string $street, string $postcode, string $city, string $countryName): bool
+    protected function hasAddress(string $elementText, string $customerName, string $street, string $postcode, string $city, string $countryName): bool
     {
         return
             (stripos($elementText, $customerName) !== false) &&
@@ -446,7 +446,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         ;
     }
 
-    private function getItemProperty(string $itemName, string $property): string
+    protected function getItemProperty(string $itemName, string $property): string
     {
         $rows = $this->tableAccessor->getRowsWithFields(
             $this->getElement('table'),
@@ -456,12 +456,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $rows[0]->find('css', '.' . $property)->getText();
     }
 
-    private function getRowWithItem(string $itemName): ?NodeElement
+    protected function getRowWithItem(string $itemName): ?NodeElement
     {
         return $this->tableAccessor->getRowWithFields($this->getElement('table'), ['item' => $itemName]);
     }
 
-    private function getLastOrderPaymentElement(OrderInterface $order): ?NodeElement
+    protected function getLastOrderPaymentElement(OrderInterface $order): ?NodeElement
     {
         $payment = $order->getPayments()->last();
 
@@ -471,7 +471,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $paymentStateElement->getParent()->getParent();
     }
 
-    private function getLastOrderShipmentElement(OrderInterface $order): ?NodeElement
+    protected function getLastOrderShipmentElement(OrderInterface $order): ?NodeElement
     {
         $shipment = $order->getShipments()->last();
 
@@ -481,7 +481,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $shipmentStateElement->getParent()->getParent();
     }
 
-    private function getFormattedMoney(int $orderPromotionTotal): string
+    protected function getFormattedMoney(int $orderPromotionTotal): string
     {
         return $this->moneyFormatter->format($orderPromotionTotal, $this->getDocument()->find('css', '#sylius-order-currency')->getText());
     }

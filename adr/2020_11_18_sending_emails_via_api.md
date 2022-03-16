@@ -1,11 +1,11 @@
 # API - Sending emails
 
-* Status: proposed
+* Status: accepted
 * Date: 2020-11-18
 
 ## Context and Problem Statement
 
-To achieve 100% API coverage, we need to handle emails by api.
+To achieve 100% API coverage, we need to handle emails by API.
 
 ## Considered Options
 
