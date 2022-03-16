@@ -22,6 +22,16 @@ class CompleteStepGuard
      */
     public function isSatisfiedBy(OrderInterface $order): bool
     {
+//        IDEA - Requests from API will be triggered from step after addressing, therefore
+//        var_dump($order->isShippingRequired());
+//        var_dump($order->getShippingAddress() === null);
+//        var_dump($order->getTotal());
+//        var_dump($order->hasPayments());
+//        var_dump($order->getBillingAddress() === null);
+//        var_dump($order->getShipments()->count());
+
+
+
         if ($order->isEmpty()) {
             return false;
         }
@@ -42,6 +52,6 @@ class CompleteStepGuard
             return false;
         }
 
-        return true;
+        return $order->getChannel()->isSkippingPaymentStepAllowed() && $order->getChannel()->isSkippingPaymentStepAllowed();
     }
 }
