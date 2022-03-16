@@ -90,11 +90,6 @@ jobs:
                 if: always() && steps.end-of-setup.outcome == 'success'
 
             -
-                name: Validate Container
-                run: bin/console lint:container
-                if: always() && steps.end-of-setup.outcome == 'success'
-
-            -
                 name: Validate Yaml files
                 run: bin/console lint:yaml src
                 if: always() && steps.end-of-setup.outcome == 'success'
