@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\DependencyInjection;
 
+use Matthias\SymfonyConfigTest\Partial\PartialProcessor;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Configuration;
+use Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 
 final class SyliusCoreConfigurationTest extends TestCase
 {
@@ -50,9 +52,12 @@ final class SyliusCoreConfigurationTest extends TestCase
      */
     public function it_does_not_allow_to_define_previous_priorities_with_values_other_then_bool(): void
     {
-        $this->assertConfigurationIsInvalid(
-            [['shipment_processor_before_prices_recalculator' => 'yolo']],
-            'Invalid type for path "sylius_core.shipment_processor_before_prices_recalculator". Expected "bool", but got "string".',
+        $this->expectException(InvalidTypeException::class);
+
+        (new PartialProcessor())->processConfiguration(
+            $this->getConfiguration(),
+            'shipment_processor_before_prices_recalculator',
+            [['shipment_processor_before_prices_recalculator' => 'yolo']]
         );
     }
 
