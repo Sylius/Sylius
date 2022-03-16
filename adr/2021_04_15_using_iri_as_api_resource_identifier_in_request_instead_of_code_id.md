@@ -1,6 +1,6 @@
 # Using IRI as API resource identifier in requests instead of code/id
 
-* Status: proposed
+* Status: accepted
 * Date: 2021-04-15
 
 ## Context and Problem Statement
