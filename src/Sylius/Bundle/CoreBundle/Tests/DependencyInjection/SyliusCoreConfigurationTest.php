@@ -23,9 +23,7 @@ final class SyliusCoreConfigurationTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_does_not_define_that_previous_priorities_should_be_brought_back_for_order_processing(): void
     {
         $this->assertProcessedConfigurationEquals(
@@ -35,9 +33,7 @@ final class SyliusCoreConfigurationTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_allows_to_define_that_previous_priorities_should_be_brought_back_for_order_processing(): void
     {
         $this->assertProcessedConfigurationEquals(
@@ -47,9 +43,7 @@ final class SyliusCoreConfigurationTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_does_not_allow_to_define_previous_priorities_with_values_other_then_bool(): void
     {
         $this->expectException(InvalidTypeException::class);
