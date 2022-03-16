@@ -41,7 +41,7 @@
         "symfony/security-core": "^5.4"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.1"
+        "phpspec/phpspec": "^7.2"
     },
     "suggest": {
         "ext-mbstring": "For better performance than using Symfony Polyfill Component"

@@ -34,7 +34,7 @@
         "symfony/options-resolver": "^5.4"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.1"
+        "phpspec/phpspec": "^7.2"
     },
     "extra": {
         "branch-alias": {
