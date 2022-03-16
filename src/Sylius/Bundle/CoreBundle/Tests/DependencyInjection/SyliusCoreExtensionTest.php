@@ -26,7 +26,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
     {
         $this->container->setParameter('kernel.environment', 'dev');
 
-        $this->load(['processing_shipments_before_prices' => true]);
+        $this->load(['process_shipments_before_recalculating_prices' => true]);
 
         $this->assertThat(
             $this->container->findDefinition('sylius.order_processing.order_prices_recalculator'),

@@ -24,12 +24,12 @@ final class SyliusCoreConfigurationTest extends TestCase
     use ConfigurationTestCaseTrait;
 
     /** @test */
-    public function it_does_not_define_that_previous_priorities_should_be_brought_back_for_order_processing(): void
+    public function it_does_not_bring_back_previous_priorities_for_order_processing_by_default(): void
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
-            ['processing_shipments_before_prices' => false],
-            'processing_shipments_before_prices',
+            ['process_shipments_before_recalculating_prices' => false],
+            'process_shipments_before_recalculating_prices',
         );
     }
 
@@ -37,9 +37,9 @@ final class SyliusCoreConfigurationTest extends TestCase
     public function it_allows_to_define_that_previous_priorities_should_be_brought_back_for_order_processing(): void
     {
         $this->assertProcessedConfigurationEquals(
-            [['processing_shipments_before_prices' => true]],
-            ['processing_shipments_before_prices' => true],
-            'processing_shipments_before_prices',
+            [['process_shipments_before_recalculating_prices' => true]],
+            ['process_shipments_before_recalculating_prices' => true],
+            'process_shipments_before_recalculating_prices',
         );
     }
 
@@ -50,8 +50,8 @@ final class SyliusCoreConfigurationTest extends TestCase
 
         (new PartialProcessor())->processConfiguration(
             $this->getConfiguration(),
-            'processing_shipments_before_prices',
-            [['processing_shipments_before_prices' => 'yolo']]
+            'process_shipments_before_recalculating_prices',
+            [['process_shipments_before_recalculating_prices' => 'yolo']]
         );
     }
 

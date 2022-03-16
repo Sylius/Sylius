@@ -59,7 +59,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             $loader->load('test_services.xml');
         }
 
-        if ($config['processing_shipments_before_prices']) {
+        if ($config['process_shipments_before_recalculating_prices']) {
             $this->switchOrderProcessorsPriorities(
                 $container->getDefinition('sylius.order_processing.order_shipment_processor'),
                 $container->getDefinition('sylius.order_processing.order_prices_recalculator')
