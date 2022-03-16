@@ -56,7 +56,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
                     return $date->format('Y');
                 };
                 $resultFormatter = static function (array $data): string {
-                    return $data['year'];
+                    return (string) $data['year'];
                 };
 
                 break;
