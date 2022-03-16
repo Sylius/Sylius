@@ -18,6 +18,11 @@ use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
+/**
+ * Locale context implementation based on Symfony Request's language negotiation (RFC 4647 based).
+ *
+ * @see Request::getPreferredLanguage()
+ */
 final class RequestHeaderBasedLocaleContext implements LocaleContextInterface
 {
     public function __construct(private RequestStack $requestStack, private LocaleProviderInterface $localeProvider)
@@ -31,16 +36,20 @@ final class RequestHeaderBasedLocaleContext implements LocaleContextInterface
             throw new LocaleNotFoundException('No main request available.');
         }
 
-        $localeCode = $request->headers->get('Accept-Language');
-        if (null === $localeCode) {
-            throw new LocaleNotFoundException('No locale is set on the master request\'s headers.');
-        }
-
         $availableLocalesCodes = $this->localeProvider->getAvailableLocalesCodes();
-        if (!in_array($localeCode, $availableLocalesCodes, true)) {
-            throw LocaleNotFoundException::notAvailable($localeCode, $availableLocalesCodes);
+
+        // Request::getPreferredLanguage() returns first available locale code if none matches. To allow detection of
+        // this unwanted behavior, we will prepend special locale code to the list of available locale codes.
+        $prependedAvailableLocalesCodes = array_merge(['FIRSTLOCALECODE'], $availableLocalesCodes);
+
+        $bestLocaleCode = $request->getPreferredLanguage($prependedAvailableLocalesCodes);
+        if ('FIRSTLOCALECODE' === $bestLocaleCode) {
+            throw new LocaleNotFoundException(sprintf(
+                'None of the available locales is acceptable: "%s".',
+                implode('", "', $availableLocalesCodes),
+            ));
         }
 
-        return $localeCode;
+        return $bestLocaleCode;
     }
 }

@@ -40,42 +40,31 @@ final class RequestHeaderBasedLocaleContextSpec extends ObjectBehavior
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }
 
-    function it_throws_locale_not_found_exception_if_main_request_does_not_have_accept_language_in_header(
-        RequestStack $requestStack,
-        Request $request,
-    ): void {
-        $requestStack->getMainRequest()->willReturn($request);
-
-        $request->headers = new HeaderBag();
-
-        $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
-    }
-
-    function it_throws_locale_not_found_exception_if_main_request_locale_code_is_not_among_available_ones(
+    function it_throws_locale_not_found_exception_if_main_request_preferred_language_is_default_locale(
         RequestStack $requestStack,
         LocaleProviderInterface $localeProvider,
         Request $request,
     ): void {
         $requestStack->getMainRequest()->willReturn($request);
 
-        $request->headers = new HeaderBag(['ACCEPT_LANGUAGE' => 'en_US']);
-
         $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'de_DE']);
+
+        $request->getPreferredLanguage(['FIRSTLOCALECODE', 'pl_PL', 'de_DE'])->willReturn('FIRSTLOCALECODE');
 
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }
 
-    function it_returns_main_request_locale_code(
+    function it_returns_main_request_preferred_language(
         RequestStack $requestStack,
         LocaleProviderInterface $localeProvider,
         Request $request,
     ): void {
         $requestStack->getMainRequest()->willReturn($request);
 
-        $request->headers = new HeaderBag(['Accept-Language' => 'pl_PL']);
-
         $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'de_DE']);
 
-        $this->getLocaleCode()->shouldReturn('pl_PL');
+        $request->getPreferredLanguage(['FIRSTLOCALECODE', 'pl_PL', 'de_DE'])->willReturn('de_DE');
+
+        $this->getLocaleCode()->shouldReturn('de_DE');
     }
 }

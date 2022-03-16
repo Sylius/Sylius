@@ -65,7 +65,7 @@ final class ProductsTest extends JsonApiTestCase
             sprintf('/api/v2/shop/products/%s', $product->getCode()),
             [],
             [],
-            ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json', 'HTTP_ACCEPT_LANGUAGE' => 'de_DE']
+            ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json', 'HTTP_ACCEPT_LANGUAGE' => 'de-DE']
         );
 
         $this->assertResponse(
