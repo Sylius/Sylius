@@ -49,7 +49,7 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->booleanNode('prepend_doctrine_migrations')->defaultTrue()->end()
-                ->booleanNode('shipment_processor_before_prices_recalculator')->defaultFalse()->end()
+                ->booleanNode('processing_shipments_before_prices')->defaultFalse()->end()
             ->end()
         ;
 

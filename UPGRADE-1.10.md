@@ -17,7 +17,7 @@ sylius.order_processing.order_shipment_processor           40         Sylius\Com
 ...     
 ```
 
-If you rely on previous priorities, you can bring them back by setting flag ``shipment_processor_before_prices_recalculator`` to ``true`` in ``config/packages/_sylius.yaml``. However, it is not recommended because new priorities fix [invalid estimated shipping costs](https://github.com/Sylius/Sylius/pull/13769).
+If you rely on previous priorities, you can bring them back by setting flag ``processing_shipments_before_prices`` to ``true`` in ``config/packages/_sylius.yaml``. However, it is not recommended because new priorities fix [invalid estimated shipping costs](https://github.com/Sylius/Sylius/pull/13769).
 
 # UPGRADE FROM `v1.10.8` TO `v1.10.10`
 
