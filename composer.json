@@ -217,7 +217,7 @@
         "phparkitect/phparkitect": "^0.2.9",
         "phpspec/phpspec": "^7.2",
         "phpstan/phpstan": "0.12.96",
-        "phpstan/phpstan-doctrine": "0.12.33",
+        "phpstan/phpstan-doctrine": "0.12.44",
         "phpunit/phpunit": "^8.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "psalm/plugin-mockery": "0.7.0",
