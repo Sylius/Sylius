@@ -1,6 +1,6 @@
 # Feature Coverage in API
 
-* Status: Accepted
+* Status: accepted
 * Date: 2020-03-03
 
 ## Context and Problem Statement

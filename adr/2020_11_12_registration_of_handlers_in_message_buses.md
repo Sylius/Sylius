@@ -38,4 +38,4 @@ without forcing him to use them. What is more, we may easily adjust this option 
 
 ## References <!-- optional -->
 
-* (Symfony documentation about buses)[https://symfony.com/doc/current/messenger/multiple_buses.html#restrict-handlers-per-bus]
+* [Symfony documentation about buses](https://symfony.com/doc/current/messenger/multiple_buses.html#restrict-handlers-per-bus)
