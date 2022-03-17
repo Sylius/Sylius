@@ -118,55 +118,36 @@ Remember to register ``App\Form\SupplierType`` for resource:
                     model: App\Entity\Supplier
        +            form: App\Form\Type\SupplierType
 
-1. Restrict access to the entity for the respective channel administrator:
+2. Restrict access to the entity for the respective channel administrator:
 --------------------------------------------------------------------------
 
 .. note::
 
     More information about using administrator roles (ACL/RBAC) can be found :doc:`here </book/customers/admin_user>`.
 
-* Create ``App\Checker\ResourceChannelEnabilibityChecker`` and decorate ``Sylius\Plus\ChannelAdmin\Application\Checker\ResourceChannelEnabilibityCheckerInterface``.
-
-* Then add ``Supplier`` as checking resource:
-
-.. code-block:: php
-
-    <?php
-
-    declare(strict_types=1);
-
-    namespace App\Checker;
-
-    use Sylius\Plus\ChannelAdmin\Application\Checker\ResourceChannelEnabilibityCheckerInterface;
-
-    final class ResourceChannelEnabilibityChecker implements ResourceChannelEnabilibityCheckerInterface
-    {
-        /** @var ResourceChannelEnabilibityCheckerInterface */
-        private $decoratedResourceChannelEnabilibityChecker;
-
-        public function __construct(ResourceChannelEnabilibityCheckerInterface $decoratedResourceChannelEnabilibityChecker)
-        {
-            $this->decoratedResourceChannelEnabilibityChecker = $decoratedResourceChannelEnabilibityChecker;
-        }
-
-        public function forResourceName(string $resourceName): bool
-        {
-            if ($this->decoratedResourceChannelEnabilibityChecker->forResourceName($resourceName)) {
-                return true;
-            }
-
-            return $resourceName === 'supplier';
-        }
-    }
+* Overwrite the parameter `sylius.channel_admin.restricted_resources` to add `supplier` as checking resource:
 
 .. code-block:: yaml
 
-    # config/services.yaml
-    App\Checker\ResourceChannelEnabilibityChecker:
-        decorates: Sylius\Plus\ChannelAdmin\Application\Checker\ResourceChannelEnabilibityCheckerInterface
-        arguments: ['@.inner']
+    parameters:
+        sylius.channel_admin.restricted_resources:
+            - credit_memo
+            - customer
+            - invoice
+            - order
+            - payment
+            - product
+            - product_variant
+            - return_request
+            - shipment
+            - supplier
 
-* Create ``App\Checker\ResourceChannelChecker`` and decorate ``Sylius\Plus\ChannelAdmin\Application\Checker\ResourceChannelCheckerInterface`` next add condition for checking ``Supplier``.
+* Create ``App\Checker\SupplierResourceChannelChecker`` and tag this service with `sylius_plus.channel_admin.resource_channel_checker`:
+
+.. tip::
+
+    If the created entity implements the ``Sylius\Component\Channel\Model\ChannelAwareInterface`` interface,
+    everything will work without having to do this step and create ``SupplierResourceChannelChecker``.
 
 .. code-block:: php
 
@@ -180,32 +161,24 @@ Remember to register ``App\Form\SupplierType`` for resource:
     use Sylius\Plus\ChannelAdmin\Application\Checker\ResourceChannelCheckerInterface;
     use Sylius\Plus\Entity\ChannelInterface;
 
-    final class ResourceChannelChecker implements ResourceChannelCheckerInterface
+    final class SupplierResourceChannelChecker implements ResourceChannelCheckerInterface
     {
-        /** @var ResourceChannelCheckerInterface */
-        private $decoratedResourceChannelChecker;
-
-        public function __construct(ResourceChannelCheckerInterface $decoratedResourceChannelChecker)
-        {
-            $this->decoratedResourceChannelChecker = $decoratedResourceChannelChecker;
-        }
-
         public function isFromChannel(object $resource, ChannelInterface $channel): bool
         {
             if ($resource instanceof Supplier && in_array($resource->getChannel(), [$channel, null], true)) {
                 return true;
             }
 
-            return $this->decoratedResourceChannelChecker->isFromChannel($resource, $channel);
+            return false;
         }
     }
 
 .. code-block:: yaml
 
     # config/services.yaml
-    App\Checker\ResourceChannelChecker:
-        decorates: Sylius\Plus\ChannelAdmin\Application\Checker\ResourceChannelCheckerInterface
-        arguments: ['@.inner']
+    App\Checker\SupplierResourceChannelChecker:
+        tags:
+            - { name: sylius_plus.channel_admin.resource_channel_checker }
 
 After that, access to the resource should work properly with all restrictions.
 
