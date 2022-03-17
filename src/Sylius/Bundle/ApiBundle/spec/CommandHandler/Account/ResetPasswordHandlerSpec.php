@@ -17,7 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Account\ResetPassword;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -26,10 +25,9 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
 {
     function let(
         UserRepositoryInterface $userRepository,
-        MetadataInterface $metadata,
         PasswordUpdaterInterface $passwordUpdater
     ): void {
-        $this->beConstructedWith($userRepository, $metadata, $passwordUpdater);
+        $this->beConstructedWith($userRepository, $passwordUpdater, 'P5D');
     }
 
     function it_is_a_message_handler(): void
@@ -40,11 +38,9 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
     function it_resets_password(
         UserRepositoryInterface $userRepository,
         ShopUserInterface $shopUser,
-        MetadataInterface $metadata,
         PasswordUpdaterInterface $passwordUpdater
     ): void {
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($shopUser);
-        $metadata->getParameter('resetting')->willReturn(['token' => ['ttl' => 'P5D']]);
 
         $shopUser->isPasswordRequestNonExpired(Argument::that(function (\DateInterval $dateInterval) {
             return $dateInterval->format('%d') === '5';
@@ -66,11 +62,9 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
     function it_throws_exception_if_token_is_expired(
         UserRepositoryInterface $userRepository,
         ShopUserInterface $shopUser,
-        MetadataInterface $metadata,
         PasswordUpdaterInterface $passwordUpdater
     ): void {
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($shopUser);
-        $metadata->getParameter('resetting')->willReturn(['token' => ['ttl' => 'P5D']]);
 
         $shopUser->isPasswordRequestNonExpired(Argument::that(function (\DateInterval $dateInterval) {
             return $dateInterval->format('%d') === '5';
@@ -93,11 +87,9 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
     function it_throws_exception_if_tokens_are_not_exact(
         UserRepositoryInterface $userRepository,
         ShopUserInterface $shopUser,
-        MetadataInterface $metadata,
         PasswordUpdaterInterface $passwordUpdater
     ): void {
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($shopUser);
-        $metadata->getParameter('resetting')->willReturn(['token' => ['ttl' => 'P5D']]);
 
         $shopUser->isPasswordRequestNonExpired(Argument::that(function (\DateInterval $dateInterval) {
             return $dateInterval->format('%d') === '5';

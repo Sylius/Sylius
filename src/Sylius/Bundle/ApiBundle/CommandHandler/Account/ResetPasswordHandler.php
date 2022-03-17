@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use Sylius\Bundle\ApiBundle\Command\Account\ResetPassword;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -26,8 +25,8 @@ final class ResetPasswordHandler implements MessageHandlerInterface
 {
     public function __construct(
         private UserRepositoryInterface $userRepository,
-        private MetadataInterface $metadata,
-        private PasswordUpdaterInterface $passwordUpdater
+        private PasswordUpdaterInterface $passwordUpdater,
+        private string $tokenTtl
     ) {
     }
 
@@ -38,8 +37,7 @@ final class ResetPasswordHandler implements MessageHandlerInterface
 
         Assert::notNull($user, 'No user found with reset token: ' . $command->resetPasswordToken);
 
-        $resetting = $this->metadata->getParameter('resetting');
-        $lifetime = new \DateInterval($resetting['token']['ttl']);
+        $lifetime = new \DateInterval($this->tokenTtl);
 
         if (!$user->isPasswordRequestNonExpired($lifetime)) {
             throw new \InvalidArgumentException('Password reset token has expired');
