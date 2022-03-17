@@ -17,7 +17,7 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderCheckoutTransitions;
+use Sylius\Component\Core\OrderCheckout\AsynchronousOrderCheckoutTransitions;
 use Webmozart\Assert\Assert;
 
 final class OrderAddressModifier implements OrderAddressModifierInterface
@@ -30,10 +30,10 @@ final class OrderAddressModifier implements OrderAddressModifierInterface
 
     public function modify(OrderInterface $order, AddressInterface $billingAddress, ?AddressInterface $shippingAddress = null): OrderInterface
     {
-        $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
+        $stateMachine = $this->stateMachineFactory->get($order, AsynchronousOrderCheckoutTransitions::GRAPH);
 
         Assert::true(
-            $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS),
+            $stateMachine->can(AsynchronousOrderCheckoutTransitions::TRANSITION_ADDRESS),
             sprintf('Order with %s token cannot be addressed.', $order->getTokenValue())
         );
 
@@ -56,7 +56,7 @@ final class OrderAddressModifier implements OrderAddressModifierInterface
             $order->setShippingAddress($newShippingAddress);
         }
 
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
+        $stateMachine->apply(AsynchronousOrderCheckoutTransitions::TRANSITION_ADDRESS);
 
         return $order;
     }

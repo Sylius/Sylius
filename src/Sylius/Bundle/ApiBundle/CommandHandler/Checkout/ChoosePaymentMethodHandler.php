@@ -18,7 +18,7 @@ use Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Core\OrderCheckoutTransitions;
+use Sylius\Component\Core\OrderCheckout\AsynchronousOrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
@@ -63,15 +63,15 @@ final class ChoosePaymentMethodHandler implements MessageHandlerInterface
         Assert::notNull($payment, 'Can not find payment with given identifier.');
 
         if ($cart->getState() === OrderInterface::STATE_CART) {
-            $stateMachine = $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH);
+            $stateMachine = $this->stateMachineFactory->get($cart, AsynchronousOrderCheckoutTransitions::GRAPH);
 
             Assert::true(
-                $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT),
+                $stateMachine->can(AsynchronousOrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT),
                 'Order cannot have payment method assigned.'
             );
 
             $payment->setMethod($paymentMethod);
-            $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
+            $stateMachine->apply(AsynchronousOrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
 
             return $cart;
         }
