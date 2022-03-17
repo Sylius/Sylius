@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\OrderBundle\NumberGenerator;
 
-use Sylius\Component\Order\Model\OrderInterface;
-
 interface OrderNumberGeneratorInterface
 {
-    public function generate(OrderInterface $order): string;
+    public function generate(): string;
 }
