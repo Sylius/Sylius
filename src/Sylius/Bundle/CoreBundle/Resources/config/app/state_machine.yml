@@ -3,6 +3,7 @@
 
 imports:
     - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine/sylius_catalog_promotion.yaml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine/sylius_async_order_checkout.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine/sylius_order_shipping.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine/sylius_order_payment.yml" }

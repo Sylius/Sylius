@@ -29,7 +29,10 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Core\OrderCheckout\AsynchronousOrderCheckoutStates;
+use Sylius\Component\Core\OrderCheckout\AsynchronousOrderCheckoutTransitions;
 use Sylius\Component\Core\OrderCheckoutStates;
+use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -67,7 +70,9 @@ final class CheckoutContext implements Context
 
     private SharedStorageInterface $sharedStorage;
 
-    /** @var string[] */
+    /**
+     * @psalm-var array<string, array<string, string|null>>
+     */
     private array $content = [];
 
     private string $paymentMethodClass;
@@ -334,6 +339,13 @@ final class CheckoutContext implements Context
     public function iCompleteTheAddressingStep(): void
     {
         $this->addressOrder($this->content);
+        $response = $this->ordersClient->getLastResponse();
+
+
+
+        if ($response->getStatusCode() !== 200) {
+            throw new \Exception($this->responseChecker->getError($response));
+        }
 
         $this->content = [];
     }
@@ -541,10 +553,14 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeOnTheCheckoutCompleteStep(): void
     {
-        Assert::inArray(
-            $this->getCheckoutState(),
-            [OrderCheckoutStates::STATE_PAYMENT_SKIPPED, OrderCheckoutStates::STATE_PAYMENT_SELECTED]
-        );
+        if ($this->sharedStorage->get('checkout_type') === 'async') {
+            Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_PAYMENT_SELECTED);
+        } else {
+            Assert::inArray(
+                $this->getCheckoutState(),
+                [OrderCheckoutStates::STATE_PAYMENT_SKIPPED, OrderCheckoutStates::STATE_PAYMENT_SELECTED]
+            );
+        }
     }
 
     /**
@@ -654,7 +670,11 @@ final class CheckoutContext implements Context
      */
     public function iShouldStillBeOnTheCheckoutAddressingStep(): void
     {
-        Assert::same($this->getCart()['checkoutState'], OrderCheckoutStates::STATE_CART);
+        if ($this->sharedStorage->get('checkout_type') === 'async') {
+            Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_CART);
+        } else {
+            Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_CART);
+        }
     }
 
     /**
@@ -662,10 +682,14 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeOnTheCheckoutPaymentStep(): void
     {
-        Assert::inArray(
-            $this->getCheckoutState(),
-            [OrderCheckoutStates::STATE_SHIPPING_SELECTED, OrderCheckoutStates::STATE_SHIPPING_SKIPPED]
-        );
+        if ($this->sharedStorage->get('checkout_type') === 'async') {
+            Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_SHIPPING_SELECTED);
+        } else {
+            Assert::inArray(
+                $this->getCheckoutState(),
+                [OrderCheckoutStates::STATE_SHIPPING_SELECTED, OrderCheckoutStates::STATE_SHIPPING_SKIPPED]
+            );
+        }
     }
 
     /**
@@ -733,7 +757,11 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeOnTheCheckoutShippingStep(): void
     {
-        Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_ADDRESSED);
+        if ($this->sharedStorage->get('checkout_type') === 'async') {
+            Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_ADDRESSED);
+        } else {
+            Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_ADDRESSED);
+        }
     }
 
     /**
@@ -816,7 +844,27 @@ final class CheckoutContext implements Context
      */
     public function iShouldSeeTheThankYouPage(): void
     {
-        Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_COMPLETED);
+        if ($this->sharedStorage->get('checkout_type') === 'async') {
+            Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_COMPLETED);
+        } else {
+            Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_COMPLETED);
+        }
+    }
+
+    /**
+     * @Then /^the cart should NOT be placed$/
+     */
+    public function theCartShouldNotBePlaced()
+    {
+        if ($this->sharedStorage->get('checkout_type') === 'async') {
+            Assert::notSame(
+                $this->getCheckoutState(),
+                AsynchronousOrderCheckoutStates::STATE_COMPLETED,
+                'Expected not COMPLETED, got: ' . $this->getCheckoutState()
+            );
+        } else {
+            Assert::notSame($this->getCheckoutState(), OrderCheckoutStates::STATE_COMPLETED);
+        }
     }
 
     /**
@@ -1177,6 +1225,18 @@ final class CheckoutContext implements Context
         Assert::true($this->hasProductWithUnitPrice($product->getName(), $unitPrice));
     }
 
+    /**
+     * @Given I use :type checkout type
+     */
+    public function iUseSpecificCheckoutType(string $type): void
+    {
+        if ($type === 'async') {
+            $this->sharedStorage->set('checkout_type', AsynchronousOrderCheckoutTransitions::GRAPH);
+        } else {
+            $this->sharedStorage->set('checkout_type', OrderCheckoutTransitions::GRAPH);
+        }
+    }
+
     private function assertProvinceMessage(string $addressType): void
     {
         $response = $this->ordersClient->getLastResponse();
@@ -1434,20 +1494,17 @@ final class CheckoutContext implements Context
 
     private function addressesAreEqual(array $address, AddressInterface $addressToCompare): bool
     {
-        if (
-            $address['firstName'] === $addressToCompare->getFirstName() &&
-            $address['lastName'] === $addressToCompare->getLastName() &&
-            $address['countryCode'] === $addressToCompare->getCountryCode() &&
-            $address['street'] === $addressToCompare->getStreet() &&
-            $address['city'] === $addressToCompare->getCity() &&
-            $address['postcode'] === $addressToCompare->getPostcode() &&
-            ($addressToCompare->getProvinceName() !== null && isset($address['provinceName'])) ?
-                $address['provinceName'] === $addressToCompare->getProvinceName() : true
-        ) {
-            return true;
-        }
-
-        return false;
+        return
+            $address['provinceName'] === $addressToCompare->getProvinceName()
+            || false === (
+                $address['firstName'] === $addressToCompare->getFirstName()
+                && $address['lastName'] === $addressToCompare->getLastName()
+                && $address['countryCode'] === $addressToCompare->getCountryCode()
+                && $address['street'] === $addressToCompare->getStreet()
+                && $address['city'] === $addressToCompare->getCity()
+                && $address['postcode'] === $addressToCompare->getPostcode()
+                && ($addressToCompare->getProvinceName() !== null && isset($address['provinceName']))
+            );
     }
 
     private function addressShouldBeFilledAs(AddressInterface $address, string $addressType): void

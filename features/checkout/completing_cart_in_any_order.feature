@@ -12,49 +12,63 @@ Feature: Add possibility to perform checkout in any order
         And the store has "SHL" shipping method with "$5.00" fee
         And the store allows paying "offline"
         And I am a logged in customer
+        And I use "async" checkout type
+        # Temporarily specify the checkout type
 
-    @api
+    @api @no-ui
     Scenario: Completing the cart with free, not shippable item
     (without doing addressing, shipping selection, and payment selection)
         Given I have product "Sylius eBook" in the cart
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         When I confirm my order
         Then the cart should be placed
 
-    @api
+    @api @no-ui
     Scenario: Completing the cart with free, shippable item
     (without doing addressing, shipping selection, and payment selection)
         Given I have product "Sylius T-Shirt" in the cart
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         When I confirm my order
         Then the cart should be placed
 
-    @api
+    @api @no-ui
     Scenario: Completing the cart with paid, shippable item
     (without doing addressing, shipping selection, and payment selection)
         Given I have product "PHP Mascot" in the cart
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         When I confirm my order
         Then the cart should be placed
 
-    @api
+    @api @no-ui
     Scenario: Completing the cart with paid, not shippable item
     (without doing addressing, shipping selection, and payment selection)
         Given I have product "Toyota Kata eBook" in the cart
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         When I confirm my order
         Then the cart should be placed
 
-    @api
+    @api @no-ui
     Scenario: Completing the cart with free, shippable item
     (without doing addressing and payment selection)
         Given I have product "Sylius T-Shirt" in the cart
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I completed the shipping step with "SHL" shipping method
         When I confirm my order
         Then the cart should be placed
 
-    @api
+    @api @no-ui
     Scenario: Completing the cart with paid, not shippable item
     (without doing addressing and shipping selection)
         Given I have product "Toyota Kata eBook" in the cart
-        And I want to pay for order
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
+        And I choose "offline" payment method
         When I confirm my order
         Then the cart should be placed
 
@@ -64,12 +78,12 @@ Feature: Add possibility to perform checkout in any order
 #        Given I have product "Sylius eBook" in the cart
 #        And I complete the addressing step
 
-    @api
+    @api @no-ui
     Scenario: Completing cart with address, selecting payment and selecting shipment (in this order)
         Given I have product "PHP Mascot" in the cart
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Patrick Jane"
         And I complete the addressing step
-        And I select "offline" payment method
+        And I choose "offline" payment method
         And I completed the shipping step with "SHL" shipping method
         When I confirm my order
         Then the cart should be placed

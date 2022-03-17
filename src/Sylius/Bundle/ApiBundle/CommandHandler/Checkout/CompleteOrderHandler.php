@@ -17,7 +17,7 @@ use SM\Factory\FactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Event\OrderCompleted;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderCheckoutTransitions;
+use Sylius\Component\Core\OrderCheckout\AsynchronousOrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -48,14 +48,14 @@ final class CompleteOrderHandler implements MessageHandlerInterface
             $cart->setNotes($completeOrder->notes);
         }
 
-        $stateMachine = $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH);
+        $stateMachine = $this->stateMachineFactory->get($cart, AsynchronousOrderCheckoutTransitions::GRAPH);
 
         Assert::true(
-            $stateMachine->can(OrderCheckoutTransitions::TRANSITION_COMPLETE),
+            $stateMachine->can(AsynchronousOrderCheckoutTransitions::TRANSITION_COMPLETE),
             sprintf('Order with %s token cannot be completed.', $orderTokenValue)
         );
 
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);
+        $stateMachine->apply(AsynchronousOrderCheckoutTransitions::TRANSITION_COMPLETE);
 
         $this->eventBus->dispatch(new OrderCompleted($cart->getTokenValue()), [new DispatchAfterCurrentBusStamp()]);
 

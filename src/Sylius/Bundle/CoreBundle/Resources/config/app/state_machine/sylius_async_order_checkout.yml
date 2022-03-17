@@ -1,0 +1,43 @@
+winzou_state_machine:
+    sylius_async_order_checkout:
+        class: "%sylius.model.order.class%"
+        property_path: checkoutState
+        graph: sylius_async_order_checkout
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            cart: ~
+            addressed: ~
+            shipping_selected: ~
+            payment_selected: ~
+            completed: ~
+        transitions:
+            address:
+                from: [cart, addressed, shipping_selected, payment_selected]
+                to: addressed
+            select_shipping:
+                from: [cart, addressed, shipping_selected, payment_selected]
+                to: shipping_selected
+            select_payment:
+                from: [cart, addressed, shipping_selected, payment_selected]
+                to: payment_selected
+            complete:
+                from: [cart, addressed, shipping_selected, payment_selected]
+                to: completed
+        callbacks:
+            guard:
+                sylius_complete_guard:
+                    on: ["complete"]
+                    do: ["@sylius.complete_state_guard", "complete"]
+                    args: ["object"]
+                sylius_address_guard:
+                    on: ["address"]
+                    do: ["@sylius.complete_state_guard", "address"]
+                    args: ["object"]
+                sylius_select_shipping_guard:
+                    on: ["select_shipping"]
+                    do: ["@sylius.complete_state_guard", "selectShipping"]
+                    args: ["object"]
+                sylius_select_payment_guard:
+                    on: ["select_shipping"]
+                    do: ["@sylius.complete_state_guard", "selectPayment"]
+                    args: ["object"]

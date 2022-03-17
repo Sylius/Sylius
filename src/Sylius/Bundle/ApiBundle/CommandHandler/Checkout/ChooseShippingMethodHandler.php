@@ -17,7 +17,7 @@ use SM\Factory\FactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\OrderCheckoutTransitions;
+use Sylius\Component\Core\OrderCheckout\AsynchronousOrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
@@ -44,10 +44,10 @@ final class ChooseShippingMethodHandler implements MessageHandlerInterface
 
         Assert::notNull($cart, 'Cart has not been found.');
 
-        $stateMachine = $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH);
+        $stateMachine = $this->stateMachineFactory->get($cart, AsynchronousOrderCheckoutTransitions::GRAPH);
 
         Assert::true(
-            $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING),
+            $stateMachine->can(AsynchronousOrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING),
             'Order cannot have shipment method assigned.'
         );
 
@@ -66,7 +66,7 @@ final class ChooseShippingMethodHandler implements MessageHandlerInterface
         );
 
         $shipment->setMethod($shippingMethod);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
+        $stateMachine->apply(AsynchronousOrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
 
         return $cart;
     }
