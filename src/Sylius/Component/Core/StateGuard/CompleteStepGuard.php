@@ -28,9 +28,9 @@ class CompleteStepGuard
      */
     public function address(OrderInterface $order): bool
     {
-        if ($order->isEmpty()) {
-            return false;
-        }
+//        if ($order->isEmpty()) {
+//            return false;
+//        }
 
         return true;
     }
