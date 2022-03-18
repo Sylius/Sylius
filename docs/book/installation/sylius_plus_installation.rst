@@ -301,7 +301,7 @@ your application's ``.env`` file:
 
 .. code-block:: bash
 
-    bin/console sylius:install plus
+    bin/console sylius:install -s plus
 
 .. tip::
 
@@ -309,7 +309,7 @@ your application's ``.env`` file:
 
     .. code-block:: bash
 
-        bin/console sylius:install plus -n
+        bin/console sylius:install -s plus -n
 
 **10.** Copy templates that are overridden by Sylius Plus into ``templates/bundles``:
 
