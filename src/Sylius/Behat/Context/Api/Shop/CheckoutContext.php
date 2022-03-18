@@ -1495,7 +1495,7 @@ final class CheckoutContext implements Context
     private function addressesAreEqual(array $address, AddressInterface $addressToCompare): bool
     {
         return
-            $address['provinceName'] === $addressToCompare->getProvinceName()
+            (isset($address['provinceName']) && $address['provinceName'] === $addressToCompare->getProvinceName())
             || false === (
                 $address['firstName'] === $addressToCompare->getFirstName()
                 && $address['lastName'] === $addressToCompare->getLastName()
