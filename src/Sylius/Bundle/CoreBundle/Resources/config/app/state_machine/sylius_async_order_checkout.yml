@@ -41,3 +41,29 @@ winzou_state_machine:
                     on: ["select_shipping"]
                     do: ["@sylius.complete_state_guard", "selectPayment"]
                     args: ["object"]
+            after:
+                sylius_process_cart:
+                    on: ["address", "select_shipping", "select_payment"]
+                    do: ["@sylius.order_processing.order_processor", "process" ]
+                    args: ["object" ]
+                    priority: -200
+                sylius_create_order:
+                    on: ["complete"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'create'", "'sylius_order'"]
+                    priority: -400
+                sylius_save_checkout_completion_date:
+                    on: ["complete"]
+                    do: ["object", "completeCheckout"]
+                    args: ["object"]
+                    priority: -300
+                sylius_control_payment_state:
+                    on: ["complete"]
+                    do: ["@sylius.state_resolver.order_payment", "resolve"]
+                    args: ["object"]
+                    priority: -200
+                sylius_control_shipping_state:
+                    on: ["complete"]
+                    do: ["@sylius.state_resolver.order_shipping", "resolve"]
+                    args: ["object"]
+                    priority: -100
