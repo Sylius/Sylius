@@ -1494,17 +1494,20 @@ final class CheckoutContext implements Context
 
     private function addressesAreEqual(array $address, AddressInterface $addressToCompare): bool
     {
-        return
-            (isset($address['provinceName']) && $address['provinceName'] === $addressToCompare->getProvinceName())
-            || false === (
-                $address['firstName'] === $addressToCompare->getFirstName()
-                && $address['lastName'] === $addressToCompare->getLastName()
-                && $address['countryCode'] === $addressToCompare->getCountryCode()
-                && $address['street'] === $addressToCompare->getStreet()
-                && $address['city'] === $addressToCompare->getCity()
-                && $address['postcode'] === $addressToCompare->getPostcode()
-                && ($addressToCompare->getProvinceName() !== null && isset($address['provinceName']))
-            );
+        if (
+            $address['firstName'] === $addressToCompare->getFirstName() &&
+            $address['lastName'] === $addressToCompare->getLastName() &&
+            $address['countryCode'] === $addressToCompare->getCountryCode() &&
+            $address['street'] === $addressToCompare->getStreet() &&
+            $address['city'] === $addressToCompare->getCity() &&
+            $address['postcode'] === $addressToCompare->getPostcode() &&
+            ($addressToCompare->getProvinceName() !== null && isset($address['provinceName'])) ?
+                $address['provinceName'] === $addressToCompare->getProvinceName() : true
+        ) {
+            return true;
+        }
+
+        return false;
     }
 
     private function addressShouldBeFilledAs(AddressInterface $address, string $addressType): void
