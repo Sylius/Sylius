@@ -125,22 +125,14 @@ Remember to register ``App\Form\SupplierType`` for resource:
 
     More information about using administrator roles (ACL/RBAC) can be found :doc:`here </book/customers/admin_user>`.
 
-* Overwrite the parameter `sylius.channel_admin.restricted_resources` to add `supplier` as checking resource:
+* Add `supplier` to restricted resources:
 
 .. code-block:: yaml
 
-    parameters:
-        sylius.channel_admin.restricted_resources:
-            - credit_memo
-            - customer
-            - invoice
-            - order
-            - payment
-            - product
-            - product_variant
-            - return_request
-            - shipment
-            - supplier
+    sylius_plus:
+        channel_admin:
+            restricted_resources:
+                supplier: ~
 
 * Create ``App\Checker\SupplierResourceChannelChecker`` and tag this service with `sylius_plus.channel_admin.resource_channel_checker`:
 
