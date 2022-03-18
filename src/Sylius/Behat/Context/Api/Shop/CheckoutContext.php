@@ -553,7 +553,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeOnTheCheckoutCompleteStep(): void
     {
-        if ($this->sharedStorage->get('checkout_type') === 'async') {
+        if ($this->sharedStorage->has('checkout_type') && $this->sharedStorage->get('checkout_type') === 'async') {
             Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_PAYMENT_SELECTED);
         } else {
             Assert::inArray(
@@ -670,7 +670,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldStillBeOnTheCheckoutAddressingStep(): void
     {
-        if ($this->sharedStorage->get('checkout_type') === 'async') {
+        if ($this->sharedStorage->has('checkout_type') && $this->sharedStorage->get('checkout_type') === 'async') {
             Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_CART);
         } else {
             Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_CART);
@@ -682,7 +682,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeOnTheCheckoutPaymentStep(): void
     {
-        if ($this->sharedStorage->get('checkout_type') === 'async') {
+        if ($this->sharedStorage->has('checkout_type') && $this->sharedStorage->get('checkout_type') === 'async') {
             Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_SHIPPING_SELECTED);
         } else {
             Assert::inArray(
@@ -757,7 +757,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeOnTheCheckoutShippingStep(): void
     {
-        if ($this->sharedStorage->get('checkout_type') === 'async') {
+        if ($this->sharedStorage->has('checkout_type') && $this->sharedStorage->get('checkout_type') === 'async') {
             Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_ADDRESSED);
         } else {
             Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_ADDRESSED);
@@ -844,7 +844,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldSeeTheThankYouPage(): void
     {
-        if ($this->sharedStorage->get('checkout_type') === 'async') {
+        if ($this->sharedStorage->has('checkout_type') && $this->sharedStorage->get('checkout_type') === 'async') {
             Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_COMPLETED);
         } else {
             Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_COMPLETED);
@@ -856,7 +856,7 @@ final class CheckoutContext implements Context
      */
     public function theCartShouldNotBePlaced()
     {
-        if ($this->sharedStorage->get('checkout_type') === 'async') {
+        if ($this->sharedStorage->has('checkout_type') && $this->sharedStorage->get('checkout_type') === 'async') {
             Assert::notSame(
                 $this->getCheckoutState(),
                 AsynchronousOrderCheckoutStates::STATE_COMPLETED,
