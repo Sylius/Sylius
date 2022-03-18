@@ -26,15 +26,29 @@ services:
         networks:
             - sylius
 
-    database:
+    mysql:
         image: mysql:5.7
         platform: linux/amd64
         environment:
-            - MYSQL_ALLOW_EMPTY_PASSWORD=true
+            - MYSQL_ROOT_PASSWORD=mysql
         volumes:
             - ./.docker/dev/mysql:/docker-entrypoint-initdb.d:delegated
         ports:
             - "3306:3306"
+        depends_on:
+            - traefik
+        networks:
+            - sylius
+    
+    postgres:
+        image: postgres:13
+        environment:
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=postgres
+        volumes:
+            - ./.docker/dev/postgres:/docker-entrypoint-initdb.d:delegated
+        ports:
+            - "5432:5432"
         depends_on:
             - traefik
         networks:
