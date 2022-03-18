@@ -16,7 +16,7 @@
         }
     ```
 
-1. The  `GET` `api/v2/shop/orders/{token}/shipments/{id}/methods` and `api/v2/shop/shipments/{id}/methods` endpoints have been removed and changed into collection request with 2 parameters `api/v2/shop/shipping-methods?shipmentId={id}&orderToken={token}`.
+1. The  `GET` `api/v2/shop/orders/{token}/shipments/{id}/methods` and `api/v2/shop/shipments/{id}/methods` endpoints have been removed and changed into collection request with 2 parameters `api/v2/shop/shipping-methods?shipmentId={id}&tokenValue={token}`.
 Now when we do not provide parameters in response it returns all available `shippingMethods` in channel.
 Wrong parameters otherwise cause empty array `[]` in response and correct parameters return `shippingMethods` available for your `shipment`.     
 Here is how the response looks like:
@@ -66,6 +66,8 @@ Here is how the response looks like:
    `/shop/payment-methods` returns all enable payment methods if filters are not set, payment methods related to payment if filters are filled or empty response if filters ale filled with invalid data.
 1. Service `Sylius\Bundle\ApiBundle\DataProvider/CartPaymentMethodsSubresourceDataProvider` has been removed and logic was replaced by `Sylius\Bundle\ApiBundle\DataProvider\PaymentMethodsCollectionDataProvider`
 
-1. The  `GET` `api/v2/shop/orders/{tokenValue}/payments/{payments}/methods` and `api/v2/shop/payments/{id}/methods` endpoints have been removed and changed into collection request with 2 parameters `api/v2/shop/payment-methods?paymentId={id}&orderToken={token}`.
+1. The  `GET` `api/v2/shop/orders/{tokenValue}/payments/{payments}/methods` and `api/v2/shop/payments/{id}/methods` endpoints have been removed and changed into collection request with 2 parameters `api/v2/shop/payment-methods?paymentId={id}&tokenValue={token}`.
    Now when we do not provide parameters in response it returns all available `paymentMethods` in channel.
    Wrong parameters otherwise cause empty array `[]` in response and correct parameters return `paymentMethods` available for your `payment`.
+ 
+1. The 2nd parameter `MetadataInterface` has been removed from `src/Sylius/Bundle/ApiBundle/CommandHandler/Account/ResetPasswordHandler` and a token TTL value must be used instead as the 3rd parameter. 
