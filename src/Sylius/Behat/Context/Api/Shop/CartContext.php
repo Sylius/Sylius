@@ -275,9 +275,9 @@ final class CartContext implements Context
     {
         Assert::same(
             $this->responseChecker->getValue(
-            $this->cartsClient->getLastResponse(),
-            'localeCode'
-        ),
+                $this->cartsClient->getLastResponse(),
+                'localeCode'
+            ),
             $locale->getCode()
         );
     }
@@ -308,7 +308,7 @@ final class CartContext implements Context
      * @Then /^my (cart) total should be ("[^"]+")$/
      * @Then /^the (cart) total should be ("[^"]+")$/
      */
-    public function myCartSTotalShouldBe(string $tokenValue, int $total): void
+    public function myCartTotalShouldBe(string $tokenValue, int $total): void
     {
         $response = $this->cartsClient->show($tokenValue);
         $responseTotal = $this->responseChecker->getValue(
@@ -602,6 +602,7 @@ final class CartContext implements Context
     /**
      * @Then /^my cart shipping total should be ("[^"]+")$/
      * @Then I should not see shipping total for my cart
+     * @Then /^my cart estimated shipping cost should be ("[^"]+")$/
      */
     public function myCartShippingFeeShouldBe(int $shippingTotal = 0): void
     {
