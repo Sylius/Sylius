@@ -20,7 +20,7 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Event\OrderCompleted;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderCheckoutTransitions;
+use Sylius\Component\Core\OrderCheckout\AsynchronousOrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -53,7 +53,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
         $order->setNotes(null)->shouldNotBeCalled();
 
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachineFactory->get($order, AsynchronousOrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('complete')->willReturn(true);
         $order->getTokenValue()->willReturn('COMPLETED_ORDER_TOKEN');
 
@@ -87,7 +87,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
         $order->setNotes('ThankYou')->shouldBeCalled();
 
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachineFactory->get($order, AsynchronousOrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('complete')->willReturn(true);
         $order->getTokenValue()->willReturn('COMPLETED_ORDER_TOKEN');
 
@@ -132,8 +132,8 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
         $order->getCustomer()->willReturn($customer);
 
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_COMPLETE)->willReturn(false);
+        $stateMachineFactory->get($order, AsynchronousOrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(AsynchronousOrderCheckoutTransitions::TRANSITION_COMPLETE)->willReturn(false);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)

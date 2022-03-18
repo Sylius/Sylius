@@ -20,7 +20,7 @@ use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderCheckoutTransitions;
+use Sylius\Component\Core\OrderCheckout\AsynchronousOrderCheckoutTransitions;
 
 final class OrderAddressModifierSpec extends ObjectBehavior
 {
@@ -45,11 +45,11 @@ final class OrderAddressModifierSpec extends ObjectBehavior
         $order->setBillingAddress($billingAddress)->shouldBeCalled();
         $order->setShippingAddress(Argument::type(AddressInterface::class))->shouldBeCalled();
 
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(true);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS)->shouldBeCalled();
+        $stateMachineFactory->get($order, AsynchronousOrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(AsynchronousOrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(true);
+        $stateMachine->apply(AsynchronousOrderCheckoutTransitions::TRANSITION_ADDRESS)->shouldBeCalled();
 
-        $this->modify($order, $billingAddress->getWrappedObject(), null, 'r2d2@droid.com');
+        $this->modify($order, $billingAddress->getWrappedObject(), null);
     }
 
     function it_handles_addressing_an_order_for_visitor(
@@ -66,11 +66,11 @@ final class OrderAddressModifierSpec extends ObjectBehavior
         $order->setBillingAddress($billingAddress)->shouldBeCalled();
         $order->setShippingAddress($shippingAddress)->shouldBeCalled();
 
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(true);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS)->shouldBeCalled();
+        $stateMachineFactory->get($order, AsynchronousOrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(AsynchronousOrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(true);
+        $stateMachine->apply(AsynchronousOrderCheckoutTransitions::TRANSITION_ADDRESS)->shouldBeCalled();
 
-        $this->modify($order, $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject(), 'r2d2@droid.com');
+        $this->modify($order, $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject());
     }
 
     function it_updates_order_address_based_on_data_form_new_order_address(
@@ -94,11 +94,11 @@ final class OrderAddressModifierSpec extends ObjectBehavior
         $order->setBillingAddress($oldBillingAddress)->shouldBeCalled();
         $order->setShippingAddress($oldShippingAddress)->shouldBeCalled();
 
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(true);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS)->shouldBeCalled();
+        $stateMachineFactory->get($order, AsynchronousOrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(AsynchronousOrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(true);
+        $stateMachine->apply(AsynchronousOrderCheckoutTransitions::TRANSITION_ADDRESS)->shouldBeCalled();
 
-        $this->modify($order, $newBillingAddress->getWrappedObject(), $newShippingAddress->getWrappedObject(), 'r2d2@droid.com');
+        $this->modify($order, $newBillingAddress->getWrappedObject(), $newShippingAddress->getWrappedObject());
     }
 
     function it_throws_an_exception_if_order_cannot_be_addressed(
@@ -108,9 +108,9 @@ final class OrderAddressModifierSpec extends ObjectBehavior
         OrderInterface $order,
         StateMachineInterface $stateMachine
     ): void {
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(false);
+        $stateMachineFactory->get($order, AsynchronousOrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(AsynchronousOrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(false);
 
-        $this->shouldThrow(\LogicException::class)->during('modify', [$order, $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject(), 'r2d2@droid.com']);
+        $this->shouldThrow(\LogicException::class)->during('modify', [$order, $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject()]);
     }
 }
