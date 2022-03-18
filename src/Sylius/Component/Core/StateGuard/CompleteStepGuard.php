@@ -28,11 +28,7 @@ class CompleteStepGuard
      */
     public function address(OrderInterface $order): bool
     {
-//        if ($order->isEmpty()) {
-//            return false;
-//        }
-
-        return true;
+        return false === $order->isEmpty();
     }
 
     /**
@@ -40,11 +36,7 @@ class CompleteStepGuard
      */
     public function selectShipping(OrderInterface $order): bool
     {
-        if ($order->isEmpty()) {
-            return false;
-        }
-
-        return true;
+        return false === $order->isEmpty();
     }
 
     /**
@@ -52,11 +44,7 @@ class CompleteStepGuard
      */
     public function selectPayment(OrderInterface $order): bool
     {
-        if ($order->isEmpty()) {
-            return false;
-        }
-
-        return true;
+        return false === $order->isEmpty();
     }
 
     public function complete(OrderInterface $order): bool
