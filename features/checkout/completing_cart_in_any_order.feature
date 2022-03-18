@@ -13,7 +13,6 @@ Feature: Add possibility to perform checkout in any order
         And the store allows paying "offline"
         And I am a logged in customer
         And I use "async" checkout type
-        # Temporarily specify the checkout type
 
     @api @no-ui
     Scenario: Completing the cart with free, not shippable item
@@ -71,12 +70,6 @@ Feature: Add possibility to perform checkout in any order
         And I choose "offline" payment method
         When I confirm my order
         Then the cart should be placed
-
-#    @api
-#    Scenario: Completing the cart with address and default shipping and payment method
-#    (without payment selection, addressing, and shipping selection)
-#        Given I have product "Sylius eBook" in the cart
-#        And I complete the addressing step
 
     @api @no-ui
     Scenario: Completing cart with address, selecting payment and selecting shipment (in this order)
