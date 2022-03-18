@@ -15,11 +15,40 @@ namespace Sylius\Bundle\CoreBundle\Tests\DependencyInjection;
 
 use Doctrine\Bundle\MigrationsBundle\DependencyInjection\DoctrineMigrationsExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasTagConstraint;
 use Sylius\Bundle\CoreBundle\DependencyInjection\SyliusCoreExtension;
 use SyliusLabs\DoctrineMigrationsExtraBundle\DependencyInjection\SyliusLabsDoctrineMigrationsExtraExtension;
 
 final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
 {
+    /** @test */
+    public function it_brings_back_previous_order_processing_priorities(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+
+        $this->load(['process_shipments_before_recalculating_prices' => true]);
+
+        $this->assertThat(
+            $this->container->findDefinition('sylius.order_processing.order_prices_recalculator'),
+            new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 40])
+        );
+
+        $this->assertThat(
+            $this->container->findDefinition('sylius.order_processing.order_prices_recalculator'),
+            $this->logicalNot(new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 50]))
+        );
+
+        $this->assertThat(
+            $this->container->findDefinition('sylius.order_processing.order_shipment_processor'),
+            new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 50])
+        );
+
+        $this->assertThat(
+            $this->container->findDefinition('sylius.order_processing.order_shipment_processor'),
+            $this->logicalNot(new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 40]))
+        );
+    }
+
     /** @test */
     public function it_autoconfigures_prepending_doctrine_migrations_with_proper_migrations_path_for_test_env(): void
     {
