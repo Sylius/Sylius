@@ -1,3 +1,67 @@
+Sylius\Component\Core\Model\Product:
+    mug:
+        code: "MUG"
+        channels: ["@channel_web"]
+        currentLocale: "en_US"
+        translations:
+            en_US: "@mug_translation"
+
+Sylius\Component\Core\Model\ProductTranslation:
+    mug_translation:
+        slug: "mug"
+        locale: "en_US"
+        name: "Mug"
+        description: "<paragraph(2)>"
+        translatable: "@mug"
+
+Sylius\Component\Core\Model\ProductVariant:
+    mug_lotr:
+        code: "MUG_LOTR"
+        product: "@mug"
+        currentLocale: "en_US"
+        translations:
+            en_US: "@lotr_mug_translation"
+        updatedAt: "<(new \\DateTime('2015-10-04'))>"
+        channelPricings:
+            WEB: "@lotr_mug_web_channel_pricing"
+
+Sylius\Component\Product\Model\ProductVariantTranslation:
+    lotr_mug_translation:
+        locale: "en_US"
+        name: "Lotr mug"
+        translatable: "@mug_lotr"
+
+Sylius\Component\Core\Model\OrderItem:
+    mug_lotr_item:
+        units: ["@sw_mug_item_unit1"]
+        variant: "@mug_lotr"
+        order: "@order"
+
+Sylius\Component\Core\Model\OrderItemUnit:
+    sw_mug_item_unit1:
+        __construct: ["@mug_lotr_item"]
+
+Sylius\Component\Core\Model\Channel:
+    channel_web:
+        code: "WEB"
+        name: "Web Channel"
+        hostname: "localhost"
+        description: "Lorem ipsum"
+        baseCurrency: "@currency"
+        defaultLocale: "@locale"
+        color: "black"
+        enabled: true
+        taxCalculationStrategy: "order_items_based"
+
+Sylius\Component\Locale\Model\Locale:
+    locale:
+        code: "en_US"
+
+Sylius\Component\Core\Model\ChannelPricing:
+    lotr_mug_web_channel_pricing:
+        channelCode: "WEB"
+        price: 20
+
 Sylius\Component\Core\Model\Order:
     order:
         channel: "@channel_web"
@@ -7,3 +71,4 @@ Sylius\Component\Core\Model\Order:
         tokenValue: "token"
         billingAddress: "@address"
         shippingAddress: "@address"
+        items: ["@mug_lotr_item"]
