@@ -9,7 +9,7 @@ Feature: Sorting listed payment methods
         And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
         And the store has a payment method "PayPal Express Checkout" with a code "PAYPAL" and Paypal Express Checkout gateway
         And this payment method is named "Ekspresowy Paypal" in the "Polish (Poland)" locale
-        And the store has a payment method "Offline" with a code "offline"
+        And the store has a payment method "Offline" with a code "Offline"
         And this payment method is named "Płatność Offline" in the "Polish (Poland)" locale
         And the store has a payment method "Cash on Delivery" with a code "cash_on_delivery"
         And this payment method is named "Płatność Przy Odbiorze" in the "Polish (Poland)" locale

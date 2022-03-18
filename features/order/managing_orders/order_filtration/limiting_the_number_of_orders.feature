@@ -7,8 +7,8 @@ Feature: Limiting the number of orders
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "Blue ElePHPant"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And there is a customer "john@doe.com" that placed an order "#00000022"
         And the customer bought a single "Blue ElePHPant"
         And the customer chose "Free" shipping method to "United States" with "Offline" payment

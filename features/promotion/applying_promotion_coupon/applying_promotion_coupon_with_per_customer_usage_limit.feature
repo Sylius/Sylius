@@ -11,7 +11,7 @@ Feature: Applying promotion coupon with per customer usage limit
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
         And this coupon can be used twice per customer
         And this promotion gives "$10.00" discount to every order
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying "Cash on Delivery"
         And I am a logged in customer
 

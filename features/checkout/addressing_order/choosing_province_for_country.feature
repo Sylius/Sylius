@@ -9,7 +9,7 @@ Feature: Choosing province for country
         And country "United States" has the "New York" province with "NY" code
         And the store ships to "Nepal"
         And the store has a product "The Dark Knight T-Shirt" priced at "$49.99"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And I am a logged in customer
 
     @ui @javascript @api

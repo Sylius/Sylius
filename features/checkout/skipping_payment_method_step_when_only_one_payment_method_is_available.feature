@@ -6,7 +6,7 @@ Feature: Skipping payment step when only one payment method is available
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And on this channel payment step is skipped if only a single payment method is available
         And the store has a product "Guards! Guards!" priced at "$20.00"
         And the store allows paying with "Paypal Express Checkout"

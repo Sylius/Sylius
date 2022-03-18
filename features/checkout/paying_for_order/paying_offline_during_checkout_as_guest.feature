@@ -1,5 +1,5 @@
 @paying_for_order
-Feature: Paying offline during checkout as guest
+Feature: Paying Offline during checkout as guest
     In order to pay with cash or by external means
     As a Guest
     I want to be able to complete checkout process without paying
@@ -8,8 +8,8 @@ Feature: Paying offline during checkout as guest
         Given the store operates on a single channel in "United States"
         And that channel allows to shop using "English (United States)" and "French (France)" locales
         And the store has a product "PHP T-Shirt" priced at "$19.99"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
 
     @ui @api
     Scenario: Successfully placing an order

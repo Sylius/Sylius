@@ -9,12 +9,12 @@ Feature: Adding a simple product to the cart
 
     @ui @api
     Scenario: Adding a simple product to the cart
-        Given the store has a product "T-shirt banana" priced at "$12.54"
+        Given the store has a product "T-Shirt banana" priced at "$12.54"
         When I add this product to the cart
         Then I should be on my cart summary page
         And I should be notified that the product has been successfully added
         And there should be one item in my cart
-        And this item should have name "T-shirt banana"
+        And this item should have name "T-Shirt banana"
 
     @ui @api
     Scenario: Adding a product to the cart as a logged in customer
@@ -28,7 +28,7 @@ Feature: Adding a simple product to the cart
 
     @api
     Scenario: Preventing adding to cart item with 0 quantity
-        Given the store has a product "T-shirt banana" priced at "$12.54"
-        When I try to add 0 products "T-shirt banana" to the cart
+        Given the store has a product "T-Shirt banana" priced at "$12.54"
+        When I try to add 0 products "T-Shirt banana" to the cart
         Then I should be notified that quantity of added product cannot be lower that 1
         And there should be 0 item in my cart

@@ -6,7 +6,7 @@ Feature: Prevent deletion of purchased product
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
         And the store has a product "Toyota GT86 model"
         And there is a customer "john.doe@gmail.com" that placed an order "#00000027"

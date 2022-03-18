@@ -7,8 +7,8 @@ Feature: Checking out as guest with a registered email
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And there is a customer account "john@example.com"
 
     @ui @api

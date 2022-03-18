@@ -7,8 +7,8 @@ Feature: Seeing payment state as paid after checkout steps if order total is zer
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "Angel T-Shirt" priced at "$10.00"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And the store has promotion "Holiday promotion" with coupon "HOLIDAYPROMO"
         And the promotion gives "$10.00" discount to every order with quantity at least 1
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"

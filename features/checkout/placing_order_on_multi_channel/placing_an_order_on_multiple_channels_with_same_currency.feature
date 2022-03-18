@@ -11,7 +11,7 @@ Feature: Placing an order on multiple channels with same currency
         And the store has a zone "United States" with code "US"
         And this zone has the "United States" country member
         And the store ships everywhere for free for all channels
-        And the store allows paying offline for all channels
+        And the store allows paying Offline for all channels
         And the store has a product "PHP T-Shirt" priced at "$12.54" available in channel "Web" and channel "Mobile"
         And there is an administrator "sylius@example.com" identified by "sylius"
         And there is a customer account "customer@example.com" identified by "sylius"

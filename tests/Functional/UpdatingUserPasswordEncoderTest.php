@@ -35,7 +35,6 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
 
         /** @var LoaderInterface $fixtureLoader */
         $fixtureLoader = $this->client->getContainer()->get('fidry_alice_data_fixtures.loader.doctrine');
-
         $fixtureLoader->load(
             [
                 __DIR__ . '/../DataFixtures/ORM/resources/channels.yml',
@@ -57,7 +56,10 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
         /** @var ObjectManager $shopUserManager */
         $shopUserManager = $this->client->getContainer()->get('sylius.manager.shop_user');
 
-        $shopUser = $shopUserRepository->findOneByEmail('Oliver@doe.com');
+        $shopUser = $shopUserRepository->findOneByEmail('oliver@doe.com');
+
+        Assert::assertNotNull($shopUser, 'Could not find Shop User with oliver@doe.com email address');
+
         $shopUser->setPlainPassword('testpassword');
         $shopUser->setEncoderName('argon2i');
 
@@ -73,7 +75,7 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
 
         Assert::assertSame(200, $this->client->getResponse()->getStatusCode());
         Assert::assertSame('/en_US/', parse_url($this->client->getCrawler()->getUri(), \PHP_URL_PATH));
-        Assert::assertSame('sha512', $shopUserRepository->findOneByEmail('Oliver@doe.com')->getEncoderName());
+        Assert::assertSame('sha512', $shopUserRepository->findOneByEmail('oliver@doe.com')->getEncoderName());
     }
 
     /** @test */

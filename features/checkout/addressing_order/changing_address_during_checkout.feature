@@ -6,12 +6,12 @@ Feature: Changing address during checkout
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a product "T-shirt banana" priced at "$12.54"
-        And the store ships everywhere for free
+        And the store has a product "T-Shirt banana" priced at "$12.54"
+        And the store ships everywhere for Free
 
     @ui @no-api
     Scenario: Going back to addressing step with and changing email
-        Given I have product "T-shirt banana" in the cart
+        Given I have product "T-Shirt banana" in the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -23,7 +23,7 @@ Feature: Changing address during checkout
 
     @api
     Scenario: Changing address
-        Given the visitor has product "T-shirt banana" in the cart
+        Given the visitor has product "T-Shirt banana" in the cart
         And the visitor has specified the email as "jon.snow@example.com"
         And the visitor has specified address as "Los Angeles", "Frost Alley", "90210", "United States" for "Jon Snow"
         And the visitor has completed the addressing step

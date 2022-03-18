@@ -6,7 +6,7 @@ Feature: Prevent deletion of purchased product variant
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
         And the store has a product "PHP Mug"
         And the product "PHP Mug" has "Medium PHP Mug" variant priced at "$40.00"

@@ -6,8 +6,8 @@ Feature: Order address validation
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a product "Stark T-shirt" priced at "$12.00"
-        And the store allows paying offline
+        And the store has a product "Stark T-Shirt" priced at "$12.00"
+        And the store allows paying Offline
         And the store has "UPS" shipping method with "$20.00" fee
 
     @api

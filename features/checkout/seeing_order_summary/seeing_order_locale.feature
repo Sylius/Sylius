@@ -8,8 +8,8 @@ Feature: Seeing order locale on order summary page
         Given the store operates on a single channel in "United States"
         And that channel allows to shop using "English (United States)" and "French (France)" locales
         And the store has a product "Stark T-Shirt" priced at "$21.50"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And I am a logged in customer
 
     @ui @api

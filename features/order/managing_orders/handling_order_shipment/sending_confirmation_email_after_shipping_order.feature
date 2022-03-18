@@ -8,7 +8,7 @@ Feature: Sending a confirmation email after shipping an order
         Given the store operates on a single channel in "United States"
         And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
         And the store has a product "Angel T-Shirt"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And the customer bought a single "Angel T-Shirt"

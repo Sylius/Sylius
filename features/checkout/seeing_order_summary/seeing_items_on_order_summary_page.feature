@@ -9,8 +9,8 @@ Feature: Seeing order items on order summary page
         And the store has a product "Lannister Coat" priced at "$19.99"
         And the store has a product "Targaryen Jacket" priced at "$39.99"
         And the store has a product "Stark T-Shirt" priced at "$21.50"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And I am a logged in customer
 
     @ui @api

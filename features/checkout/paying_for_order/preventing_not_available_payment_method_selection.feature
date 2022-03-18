@@ -9,7 +9,7 @@ Feature: Preventing not available payment method selection
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store allows paying with "Paypal Express Checkout"
         And the store allows paying with "Bank transfer"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And I am a logged in customer
 
     @ui @api

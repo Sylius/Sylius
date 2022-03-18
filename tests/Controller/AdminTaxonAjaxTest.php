@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Tests\Controller;
 
 use ApiTestCase\JsonApiTestCase;
+use PHPUnit\Framework\Assert;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -63,12 +64,18 @@ final class AdminTaxonAjaxTest extends JsonApiTestCase
     /** @test */
     public function it_returns_specific_taxons_for_given_phrase(): void
     {
-        $this->loadFixturesFromFile('authentication/administrator.yml');
-        $this->loadFixturesFromFiles(['resources/taxons.yml']);
+        Assert::assertNotEmpty(
+            $this->loadFixturesFromFile('authentication/administrator.yml'),
+            'Could not load administrator.yml'
+        );
+        Assert::assertNotEmpty(
+            $this->loadFixturesFromFile('resources/taxons.yml'),
+            'Could not load taxons.yml'
+        );
 
         $this->authenticateAdminUser();
 
-        $this->client->request('GET', '/admin/ajax/taxons/search?phrase=men');
+        $this->client->request('GET', '/admin/ajax/taxons/search?phrase=Women');
 
         $response = $this->client->getResponse();
 

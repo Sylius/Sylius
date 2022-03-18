@@ -8,7 +8,7 @@ Feature: Seeing an order with its items
         Given the store operates on a single channel in "United States"
         And the store has a product "Angel T-Shirt" priced at "$39.00"
         And the store has a product "Angel Mug" priced at "$19.00"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And the customer bought an "Angel T-Shirt" and an "Angel Mug"

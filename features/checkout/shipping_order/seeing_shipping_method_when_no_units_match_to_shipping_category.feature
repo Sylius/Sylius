@@ -10,7 +10,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
         And the store has a product "Star Trek Ship" priced at "$19.99"
         And this product belongs to "Over-sized" shipping category
         And the store has a product "Picasso T-Shirt" priced at "$19.99"
-        And the store has a product "T-shirt banana"
+        And the store has a product "T-Shirt banana"
         And this product has option "Size" with values "S" and "M"
         And this product is available in "S" size priced at "$12.54"
         And this product is available in "M" size priced at "$12.30"
@@ -20,7 +20,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
 
     @ui @api
     Scenario: Seeing shipping method which category is not same as category of all my units
-        Given I have product "Picasso T-shirt" in the cart
+        Given I have product "Picasso T-Shirt" in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
@@ -37,7 +37,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
 
     @ui @api
     Scenario: Seeing no shipping methods if its category is same as one category from my units categories
-        Given I have product "Picasso T-shirt" in the cart
+        Given I have product "Picasso T-Shirt" in the cart
         And I have product "Star Trek Ship" in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -46,9 +46,9 @@ Feature: Seeing shipping methods which category is not same as any category of a
 
     @ui @api
     Scenario: Seeing no shipping methods if any of my unit has product variants which shipping category matching to the shipping category from shipping method
-        And the "T-shirt banana" product's "S" size belongs to "Over-sized" shipping category
-        And I have product "T-shirt banana" with product option "Size" S in the cart
-        And I have product "T-shirt banana" with product option "Size" M in the cart
+        And the "T-Shirt banana" product's "S" size belongs to "Over-sized" shipping category
+        And I have product "T-Shirt banana" with product option "Size" S in the cart
+        And I have product "T-Shirt banana" with product option "Size" M in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
@@ -56,8 +56,8 @@ Feature: Seeing shipping methods which category is not same as any category of a
 
     @ui @api
     Scenario: Seeing shipping methods if none of my unit has variant with shipping method matching to the shipping category from shipping method
-        And I have product "T-shirt banana" with product option "Size" S in the cart
-        And I have product "T-shirt banana" with product option "Size" M in the cart
+        And I have product "T-Shirt banana" with product option "Size" S in the cart
+        And I have product "T-Shirt banana" with product option "Size" M in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step

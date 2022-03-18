@@ -14,7 +14,7 @@ Feature: Seeing shipping total with applied promotion and taxes
         And shipping method "Owl post" belongs to "Shipping Services" tax category
         And there is a promotion "50% shipping discount"
         And it gives "50%" discount on shipping to every order
-        And the store allows paying offline
+        And the store allows paying Offline
         And there is a customer "fleur@delacour.com" that placed an order "#00000777"
         And the customer bought a single "Gryffindor scarf"
         And I am logged in as an administrator

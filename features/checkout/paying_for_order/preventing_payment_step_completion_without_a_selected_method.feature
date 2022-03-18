@@ -6,7 +6,7 @@ Feature: Preventing payment step completion without a selected method
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And I am a logged in customer
 
@@ -31,7 +31,7 @@ Feature: Preventing payment step completion without a selected method
 
     @ui @todo
     Scenario: Preventing payment step completion if a payment method is disabled
-        Given the store has a payment method "Offline" with a code "offline"
+        Given the store has a payment method "Offline" with a code "Offline"
         And this payment method is disabled
         And I have product "PHP T-Shirt" in the cart
         When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -42,7 +42,7 @@ Feature: Preventing payment step completion without a selected method
 
     @ui @todo
     Scenario: Preventing payment step completion if a payment method is disabled or not assigned to a channel
-        Given the store has a payment method "Offline" with a code "offline"
+        Given the store has a payment method "Offline" with a code "Offline"
         And this payment method is disabled
         And the store has "Cash on Delivery" payment method not assigned to any channel
         And I have product "PHP T-Shirt" in the cart

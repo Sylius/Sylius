@@ -6,8 +6,8 @@ Feature: Statistics dashboard in a single channel
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And the store has a product "Sylius T-Shirt"
         And this product has "Red XL" variant priced at "$40"
         And I am logged in as an administrator

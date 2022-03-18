@@ -6,8 +6,8 @@ Feature: Modifying a customer's shipping address on an order with taxes
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store ships everything for free within the "US" zone
-        And the store allows paying offline
+        And the store ships everything for Free within the "US" zone
+        And the store allows paying Offline
         And the store has "VAT" tax rate of 20% for "Suits" within the "US" zone
         And the store has a product "Suit" priced at "$400.00"
         And it belongs to "Suits" tax category

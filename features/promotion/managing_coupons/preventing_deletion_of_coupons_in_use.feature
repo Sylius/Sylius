@@ -6,7 +6,7 @@ Feature: Not being able to delete a coupon which is in use
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store has a product "Jacket"
         And the store allows paying with "Cash on Delivery"
         And the store has promotion "Christmas sale" with coupon "SANTA2016"

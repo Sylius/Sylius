@@ -30,7 +30,7 @@ Feature: Receiving discount based on customer group
     Scenario: Not receiving discount when belonging to a different customer group that specified in the promotion
         Given the store has a customer group "Retail"
         And there is a customer account "retail@sylius.com"
-        And the customer belongs to group "retail"
+        And the customer belongs to group "Retail"
         And I am logged in as "retail@sylius.com"
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$80.00"

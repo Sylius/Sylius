@@ -10,7 +10,7 @@ Feature: Ability to confirm an order with a promotion on shipping
         And the store has "DHL" shipping method with "$50.00" fee
         And there is a promotion "Holiday promotion"
         And the promotion gives "10%" discount on shipping to every order
-        And the store allows paying offline
+        And the store allows paying Offline
         And I am a logged in customer
 
     @ui @api

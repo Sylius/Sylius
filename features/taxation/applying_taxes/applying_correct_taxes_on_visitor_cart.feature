@@ -8,7 +8,7 @@ Feature: Apply correct taxes on visitor cart
         Given the store operates on a single channel in "United States"
         And there is a zone "The Rest of the World" containing all other countries
         And the store ships to "Austria"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And default tax zone is "US"
         And the store has "RoW VAT" tax rate of 10% for "Clothes" for the rest of the world
         And the store has "US VAT" tax rate of 23% for "Clothes" within the "US" zone

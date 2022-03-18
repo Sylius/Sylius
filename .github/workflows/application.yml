@@ -297,11 +297,35 @@ jobs:
                 name: Prepare application database
                 run: |
                     APP_DEBUG=1 bin/console doctrine:database:create -vvv
-                    bin/console doctrine:schema:update --force -vvv
+                    bin/console doctrine:schema:up --force -vvv
+                    bin/console doctrine:schema:validate
+                    bin/console doctrine:migrations:sync-metadata-storage
 
-            -
-                name: Validate Database Schema
-                run: bin/console doctrine:schema:validate -vvv
+            -   name: Test installer
+                run: bin/console sylius:install --no-interaction -vvv
+
+            -   name: Load fixtures
+                run: bin/console sylius:fixtures:load default --no-interaction
+
+            -   name: Run PHPUnit
+                run: vendor/bin/phpunit --colors=always
+
+            -   name: Run CLI Behat
+                if: ${{ false }}
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo&&~@managing_product_variants_ajax" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo&&~@managing_product_variants_ajax" --rerun
+
+            -   name: Run non-JS Behat
+                if: ${{ false }}
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli&&~@managing_product_variants_ajax" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli&&~@managing_product_variants_ajax" --rerun
+
+            -   name: Upload Behat logs
+                uses: actions/upload-artifact@v2
+                if: failure()
+                with:
+                    name: "Behat logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
+                    path: etc/build/
+                    if-no-files-found: ignore
+                continue-on-error: true
 
     test-application-without-frontend-mariadb:
         runs-on: ubuntu-latest

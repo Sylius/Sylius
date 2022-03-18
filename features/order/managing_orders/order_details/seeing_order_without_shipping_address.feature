@@ -8,7 +8,7 @@ Feature: Seeing an order without shipping address
         Given the store operates on a single channel in "United States"
         And the store has a product "Angel E-book"
         And this product does not require shipping
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And the customer bought a single "Angel E-book"

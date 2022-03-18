@@ -13,13 +13,13 @@ Feature: Selecting available locales for a channel
     Scenario: Adding a new channel with locales
         When I want to create a new channel
         And I specify its code as "MOBILE"
-        And I name it "Mobile channel"
+        And I name it "Mobile Channel"
         And I make it available in "English (United States)"
         And I choose "Euro" as the base currency
         And I choose "English (United States)" as a default locale
         And I add it
         Then I should be notified that it has been successfully created
-        And the channel "Mobile channel" should be available in "English (United States)"
+        And the channel "Mobile Channel" should be available in "English (United States)"
 
     @ui
     Scenario: Adding locales to an existing channel
@@ -28,7 +28,7 @@ Feature: Selecting available locales for a channel
         And I make it available in "English (United States)"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And the channel "Web channel" should be available in "English (United States)"
+        And the channel "Web Channel" should be available in "English (United States)"
 
     @ui
     Scenario: Being unable to disable locale used as the default one for a channel

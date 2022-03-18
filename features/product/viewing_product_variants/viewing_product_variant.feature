@@ -15,4 +15,4 @@ Feature: Viewing product's enabled variants only
     Scenario: Viewing only enabled variants
         When I view variants
         Then I should see "Small", "Medium" and "Large" variants
-        But I should not see "Extra large" variant
+        But I should not see "Extra Large" variant

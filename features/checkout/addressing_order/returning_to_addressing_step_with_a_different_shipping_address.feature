@@ -7,7 +7,7 @@ Feature: Returning to addressing step with a different shipping address
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "Summer T-Shirt" priced at "$19.99"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
 
     @ui @no-api
     Scenario: Going back to addressing step after submitting a different shipping address

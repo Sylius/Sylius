@@ -7,8 +7,8 @@ Feature: Refunding order's payment
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "Green Arrow"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And the store allows paying with "Paypal Express Checkout"
         And there is a customer "oliver@teamarrow.com" that placed an order "#00000001"
         And the customer bought a single "Green Arrow"
