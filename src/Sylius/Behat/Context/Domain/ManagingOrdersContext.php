@@ -148,6 +148,16 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Given /^the (order "[^"]+") has not been paid for (\d+) (day|days)$/
+     */
+    public function orderWithNumberHasNotBeenPaidForDays(OrderInterface $order, int $amount, string $days): void
+    {
+        $order->setCheckoutCompletedAt(new \DateTime(sprintf('-%d %s', $amount, $days)));
+
+        $this->orderManager->flush();
+    }
+
+    /**
      * @Then /^(this order) should be automatically cancelled$/
      */
     public function thisOrderShouldBeAutomaticallyCancelled(OrderInterface $order)

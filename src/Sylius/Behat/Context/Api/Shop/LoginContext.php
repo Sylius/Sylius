@@ -278,6 +278,16 @@ final class LoginContext implements Context
         );
     }
 
+    /**
+     * @Then I should not be able to change my password again with the same token
+     */
+    public function iShouldNotBeAbleToChangeMyPasswordAgainWithTheSameToken(): void
+    {
+        $this->apiClient->executeCustomRequest($this->request);
+
+        Assert::same($this->apiClient->getLastResponse()->getStatusCode(), 404);
+    }
+
     private function addLocale(string $locale): void
     {
         $this->request->updateContent(['locale' => $locale]);

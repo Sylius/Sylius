@@ -35,13 +35,12 @@ Don't worry, everything was automatically installed via Composer.
 .. code-block:: php
 
     <?php
-
     // app/AppKernel.php
 
     public function registerBundles()
     {
         $bundles = array(
-            new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle()
+            new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),

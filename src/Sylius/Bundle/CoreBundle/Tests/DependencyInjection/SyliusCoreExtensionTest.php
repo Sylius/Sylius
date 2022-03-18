@@ -15,54 +15,71 @@ namespace Sylius\Bundle\CoreBundle\Tests\DependencyInjection;
 
 use Doctrine\Bundle\MigrationsBundle\DependencyInjection\DoctrineMigrationsExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasTagConstraint;
 use Sylius\Bundle\CoreBundle\DependencyInjection\SyliusCoreExtension;
 use SyliusLabs\DoctrineMigrationsExtraBundle\DependencyInjection\SyliusLabsDoctrineMigrationsExtraExtension;
 
 final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
+    public function it_brings_back_previous_order_processing_priorities(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+
+        $this->load(['process_shipments_before_recalculating_prices' => true]);
+
+        $this->assertThat(
+            $this->container->findDefinition('sylius.order_processing.order_prices_recalculator'),
+            new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 40])
+        );
+
+        $this->assertThat(
+            $this->container->findDefinition('sylius.order_processing.order_prices_recalculator'),
+            $this->logicalNot(new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 50]))
+        );
+
+        $this->assertThat(
+            $this->container->findDefinition('sylius.order_processing.order_shipment_processor'),
+            new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 50])
+        );
+
+        $this->assertThat(
+            $this->container->findDefinition('sylius.order_processing.order_shipment_processor'),
+            $this->logicalNot(new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 40]))
+        );
+    }
+
+    /** @test */
     public function it_autoconfigures_prepending_doctrine_migrations_with_proper_migrations_path_for_test_env(): void
     {
         $this->testPrependingDoctrineMigrations('test');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_autoconfigures_prepending_doctrine_migrations_with_proper_migrations_path_for_test_cached_env(): void
     {
         $this->testPrependingDoctrineMigrations('test_cached');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_autoconfigures_prepending_doctrine_migrations_with_proper_migrations_path_for_dev_env(): void
     {
         $this->testPrependingDoctrineMigrations('dev');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_does_not_autoconfigure_prepending_doctrine_migrations_if_it_is_disabled_for_test_env(): void
     {
         $this->testNotPrependingDoctrineMigrations('test');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_does_not_autoconfigure_prepending_doctrine_migrations_if_it_is_disabled_for_test_cached_env(): void
     {
         $this->testNotPrependingDoctrineMigrations('test_cached');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_does_not_autoconfigure_prepending_doctrine_migrations_if_it_is_disabled_for_dev_env(): void
     {
         $this->testNotPrependingDoctrineMigrations('dev');

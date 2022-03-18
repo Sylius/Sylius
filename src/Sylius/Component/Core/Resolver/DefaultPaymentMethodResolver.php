@@ -35,13 +35,13 @@ class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterf
     /**
      * @throws UnresolvedDefaultPaymentMethodException
      */
-    public function getDefaultPaymentMethod(BasePaymentInterface $subject): PaymentMethodInterface
+    public function getDefaultPaymentMethod(BasePaymentInterface $payment): PaymentMethodInterface
     {
-        /** @var PaymentInterface $subject */
-        Assert::isInstanceOf($subject, PaymentInterface::class);
+        /** @var PaymentInterface $payment */
+        Assert::isInstanceOf($payment, PaymentInterface::class);
 
         /** @var ChannelInterface $channel */
-        $channel = $subject->getOrder()->getChannel();
+        $channel = $payment->getOrder()->getChannel();
 
         $paymentMethods = $this->paymentMethodRepository->findEnabledForChannel($channel);
         if (empty($paymentMethods)) {

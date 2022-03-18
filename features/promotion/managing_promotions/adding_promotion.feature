@@ -10,8 +10,8 @@ Feature: Adding a new promotion
 
     @ui
     Scenario: Adding a new promotion
-        Given I want to create a new promotion
-        When I specify its code as "FULL_METAL_PROMOTION"
+        When I want to create a new promotion
+        And I specify its code as "FULL_METAL_PROMOTION"
         And I name it "Full metal promotion"
         And I add it
         Then I should be notified that it has been successfully created
@@ -19,8 +19,8 @@ Feature: Adding a new promotion
 
     @ui
     Scenario: Adding a new promotion with usage limit
-        Given I want to create a new promotion
-        When I specify its code as "FULL_METAL_PROMOTION"
+        When I want to create a new promotion
+        And I specify its code as "FULL_METAL_PROMOTION"
         And I name it "Full metal promotion"
         And I set its usage limit to 50
         And I add it
@@ -29,8 +29,8 @@ Feature: Adding a new promotion
 
     @ui
     Scenario: Adding a new exclusive promotion
-        Given I want to create a new promotion
-        When I specify its code as "FULL_METAL_PROMOTION"
+        When I want to create a new promotion
+        And I specify its code as "FULL_METAL_PROMOTION"
         And I name it "Full metal promotion"
         And I make it exclusive
         And I add it
@@ -39,8 +39,8 @@ Feature: Adding a new promotion
 
     @ui
     Scenario: Adding a new coupon based promotion
-        Given I want to create a new promotion
-        When I specify its code as "FULL_METAL_PROMOTION"
+        When I want to create a new promotion
+        And I specify its code as "FULL_METAL_PROMOTION"
         And I name it "Full metal promotion"
         And I make it coupon based
         And I add it
@@ -49,8 +49,8 @@ Feature: Adding a new promotion
 
     @ui
     Scenario: Adding a new channels promotion
-        Given I want to create a new promotion
-        When I specify its code as "FULL_METAL_PROMOTION"
+        When I want to create a new promotion
+        And I specify its code as "FULL_METAL_PROMOTION"
         And I name it "Full metal promotion"
         And I make it applicable for the "United States" channel
         And I add it
@@ -59,8 +59,8 @@ Feature: Adding a new promotion
 
     @ui
     Scenario: Adding a promotion with start and end date
-        Given I want to create a new promotion
-        When I specify its code as "FULL_METAL_PROMOTION"
+        When I want to create a new promotion
+        And I specify its code as "FULL_METAL_PROMOTION"
         And I name it "Full metal promotion"
         And I make it available from "21.04.2017" to "21.05.2017"
         And I add it

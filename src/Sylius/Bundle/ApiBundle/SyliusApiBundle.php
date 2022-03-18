@@ -21,9 +21,9 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /** @experimental */
 final class SyliusApiBundle extends Bundle
 {
-    public function build(ContainerBuilder $builder): void
+    public function build(ContainerBuilder $container): void
     {
-        $builder->addCompilerPass(new CommandDataTransformerPass());
-        $builder->addCompilerPass(new ReflectionExtractorHotfixPass());
+        $container->addCompilerPass(new CommandDataTransformerPass());
+        $container->addCompilerPass(new ReflectionExtractorHotfixPass());
     }
 }

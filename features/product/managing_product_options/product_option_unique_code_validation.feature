@@ -11,8 +11,8 @@ Feature: Product option unique code validation
 
     @ui @api
     Scenario: Trying to add product option with a taken code
-        Given I want to create a new product option
-        When I name it "T-Shirt color" in "English (United States)"
+        When I want to create a new product option
+        And I name it "T-Shirt color" in "English (United States)"
         And I specify its code as "t_shirt_size"
         And I try to add it
         Then I should be notified that product option with this code already exists

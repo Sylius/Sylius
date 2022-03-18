@@ -1,7 +1,7 @@
 {
     "name": "sylius/sylius",
     "type": "library",
-    "version": "v1.10.9-dev",
+    "version": "v1.10.12-dev",
     "description": "E-Commerce platform for PHP, based on Symfony framework.",
     "homepage": "https://sylius.com",
     "license": "MIT",
@@ -35,6 +35,7 @@
         "doctrine/migrations": "^3.0",
         "doctrine/orm": "^2.7",
         "egulias/email-validator": "^3.1",
+        "enshrined/svg-sanitize": "^0.15.4",
         "fakerphp/faker": "^1.9",
         "friendsofphp/proxy-manager-lts": "^1.0",
         "friendsofsymfony/rest-bundle": "^3.0",
@@ -163,10 +164,12 @@
         "jms/serializer-bundle": "3.9.0",
         "symfony/cache": "^6.0",
         "symfony/doctrine-bridge": "4.4.16",
+        "symfony/framework-bundle": "^4.4.38 || ^5.4.5",
         "symfony/password-hasher": "^6.0",
         "symfony/amqp-messenger": "^6.0",
         "symfony/doctrine-messenger": "^6.0",
         "symfony/error-handler": "^6.0",
+        "symfony/dependency-injection": "^4.4.38 || ^5.4.5",
         "symfony/redis-messenger": "^6.0",
         "symfony/stopwatch": "^6.0",
         "symfony/twig-bridge": "^6.0",
@@ -197,7 +200,7 @@
         "mikey179/vfsstream": "^1.6",
         "mockery/mockery": "^1.4",
         "phparkitect/phparkitect": "^0.2.9",
-        "phpspec/phpspec": "^7.1",
+        "phpspec/phpspec": "^7.2",
         "phpstan/phpstan": "0.12.96",
         "phpstan/phpstan-doctrine": "0.12.33",
         "phpunit/phpunit": "^8.5",
@@ -211,7 +214,7 @@
         "symfony/dotenv": "^4.4 || ^5.2",
         "symfony/flex": "^1.7",
         "symfony/web-profiler-bundle": "^4.4 || ^5.2",
-        "vimeo/psalm": "4.7.2"
+        "vimeo/psalm": "^4.19"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",

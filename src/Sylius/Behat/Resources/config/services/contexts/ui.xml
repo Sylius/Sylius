@@ -299,6 +299,10 @@
             <tag name="fob.context_service" />
         </service>
 
+        <service id="sylius.behat.context.ui.browser" class="Sylius\Behat\Context\Ui\BrowserContext">
+            <argument type="service" id="sylius.behat.element.browser" />
+        </service>
+
         <service id="sylius.behat.context.ui.channel" class="Sylius\Behat\Context\Ui\ChannelContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.channel_context_setter" />
@@ -415,11 +419,18 @@
             <argument type="service" id="sylius.behat.notification_checker" />
         </service>
 
+        <service id="sylius.behat.context.ui.shop.authorization" class="Sylius\Behat\Context\Ui\Shop\AuthorizationContext">
+            <argument type="service" id="sylius.behat.page.shop.account.login" />
+            <argument type="service" id="sylius.behat.page.shop.account.register" />
+            <argument type="service" id="sylius.behat.element.shop.account.register" />
+        </service>
+
         <service id="sylius.behat.context.ui.shop.cart" class="Sylius\Behat\Context\Ui\Shop\CartContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.shop.cart_summary" />
             <argument type="service" id="sylius.behat.page.shop.product.show" />
             <argument type="service" id="sylius.behat.notification_checker" />
+            <argument type="service" id="Sylius\Behat\Service\SessionManagerInterface"/>
         </service>
 
         <service id="sylius.behat.context.ui.shop.contact" class="Sylius\Behat\Context\Ui\Shop\ContactContext">

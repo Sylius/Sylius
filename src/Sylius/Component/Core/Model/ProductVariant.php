@@ -172,9 +172,9 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface, Com
         return $this->shippingCategory;
     }
 
-    public function setShippingCategory(?ShippingCategoryInterface $category): void
+    public function setShippingCategory(?ShippingCategoryInterface $shippingCategory): void
     {
-        $this->shippingCategory = $category;
+        $this->shippingCategory = $shippingCategory;
     }
 
     public function getWeight(): ?float

@@ -31,7 +31,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["7.4", "8.0"]
+                php: ["7.4", "8.0", "8.1"]
                 symfony: ["^4.4", "5.2.*", "5.3.*", "5.4.*"]
 
         steps:
@@ -43,8 +43,8 @@ jobs:
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: "${{ matrix.php }}"
-                    ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=1, opcache.memory_consumption=256, opcache.max_accelerated_files=32531, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
-                    extensions: intl, gd, opcache, mysql, pdo_mysql, :xdebug
+                    ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=0, opcache.memory_consumption=512, opcache.max_accelerated_files=65407, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
+                    extensions: intl, gd, opcache, mysql, pdo_mysql
                     tools: symfony
                     coverage: none
 
@@ -85,11 +85,6 @@ jobs:
                 if: always() && steps.end-of-setup.outcome == 'success'
 
             -
-                name: Validate Doctrine mapping
-                run: bin/console doctrine:schema:validate --skip-sync -vvv
-                if: always() && steps.end-of-setup.outcome == 'success'
-
-            -
                 name: Validate Twig templates
                 run: bin/console lint:twig src
                 if: always() && steps.end-of-setup.outcome == 'success'
@@ -119,7 +114,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["8.0"]
+                php: ["8.0", "8.1"]
 
         steps:
             -
@@ -141,7 +136,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["7.4", "8.0"]
+                php: ["7.4", "8.0", "8.1"]
                 symfony: ["^4.4", "^5.2"]
 
         steps:
@@ -198,7 +193,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["7.4", "8.0"]
+                php: ["7.4", "8.0", "8.1"]
                 symfony: ["^4.4", "5.2.*", "5.3.*", "5.4.*"]
                 node: ["14.x"]
                 mysql: ["5.7", "8.0"]
@@ -227,8 +222,8 @@ jobs:
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: "${{ matrix.php }}"
-                    ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=1, opcache.memory_consumption=256, opcache.max_accelerated_files=32531, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
-                    extensions: intl, gd, opcache, mysql, pdo_mysql, :xdebug
+                    ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=0, opcache.memory_consumption=512, opcache.max_accelerated_files=65407, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
+                    extensions: intl, gd, opcache, mysql, pdo_mysql
                     tools: symfony
                     coverage: none
 
@@ -282,7 +277,6 @@ jobs:
                 run: |
                     bin/console doctrine:migrations:migrate first --no-interaction
                     bin/console doctrine:migrations:migrate latest --no-interaction
-                    bin/console doctrine:schema:validate --skip-mapping -vvv
 
             -
                 name: Test installer
@@ -294,7 +288,9 @@ jobs:
 
             -
                 name: Run PHPUnit
-                run: vendor/bin/phpunit --colors=always
+                run: |
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/phpunit --debug
 
             -
                 name: Run CLI Behat
@@ -323,7 +319,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["7.4", "8.0"]
+                php: ["7.4", "8.0", "8.1"]
                 symfony: ["^4.4", "5.2.*", "5.3.*", "5.4.*"]
                 node: ["14.x"]
                 mysql: ["5.7", "8.0"]
@@ -352,8 +348,8 @@ jobs:
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: "${{ matrix.php }}"
-                    ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=1, opcache.memory_consumption=256, opcache.max_accelerated_files=32531, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
-                    extensions: intl, gd, opcache, mysql, pdo_mysql, :xdebug
+                    ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=0, opcache.memory_consumption=512, opcache.max_accelerated_files=65407, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
+                    extensions: intl, gd, opcache, mysql, pdo_mysql
                     tools: symfony
                     coverage: none
 
@@ -450,7 +446,9 @@ jobs:
 
             -
                 name: Run JS Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --rerun
+                run: |
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --rerun
 
             -
                 name: Upload Behat logs

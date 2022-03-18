@@ -11,7 +11,7 @@ Feature: Adding a new taxon for parent
 
     @ui
     Scenario: Adding a new taxon for specific parent taxon
-        Given I want to create a new taxon for "Category"
+        When I want to create a new taxon for "Category"
         And I specify its code as "guns"
         And I name it "Guns" in "English (United States)"
         And I set its slug to "guns" in "English (United States)"

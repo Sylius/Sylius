@@ -1,8 +1,9 @@
-Date: 2020-03-03
-
 # API - Translations
 
-In power from version: 1.8.0 (?)
+* Status: accepted
+* Date: 2020-03-03
+
+In power from version: 1.8.0
 
 Related PRs: #11136, #11144, #11157
 

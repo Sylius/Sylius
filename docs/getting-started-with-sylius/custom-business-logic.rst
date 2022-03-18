@@ -20,9 +20,8 @@ directory.
 
 .. code-block:: php
 
-    # src/ShippingCalculator/ParcelCalculator.php
-
     <?php
+    # src/ShippingCalculator/ParcelCalculator.php
 
     declare(strict_types=1);
 
@@ -54,9 +53,8 @@ in the calculator service, and a proper service registration in the ``services.y
 
 .. code-block:: php
 
-    # src/Form/Type/ParcelShippingCalculatorType.php
-
     <?php
+    # src/Form/Type/ParcelShippingCalculatorType.php
 
     declare(strict_types=1);
 
@@ -90,7 +88,7 @@ in the calculator service, and a proper service registration in the ``services.y
     # config/services.yml
 
     services:
-        //...
+        # ...
 
         App\ShippingCalculator\ParcelCalculator:
             tags:

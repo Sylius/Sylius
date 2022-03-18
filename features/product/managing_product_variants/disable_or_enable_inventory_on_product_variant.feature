@@ -13,16 +13,16 @@ Feature: Toggle the inventory tracking
     @ui
     Scenario: Disabling inventory for a product variant
         Given the "Wyborowa Vodka Exquisite" product variant is tracked by the inventory
-        And I want to modify the "Wyborowa Vodka Exquisite" product variant
-        When I disable its inventory tracking
+        When I want to modify the "Wyborowa Vodka Exquisite" product variant
+        And I disable its inventory tracking
         And I save my changes
         Then I should be notified that it has been successfully edited
         And inventory of this variant should not be tracked
 
     @ui
     Scenario: Enabling inventory for a product variant
-        Given I want to modify the "Wyborowa Vodka Exquisite" product variant
-        When I enable its inventory tracking
+        When I want to modify the "Wyborowa Vodka Exquisite" product variant
+        And I enable its inventory tracking
         And I save my changes
         Then I should be notified that it has been successfully edited
         And inventory of this variant should be tracked

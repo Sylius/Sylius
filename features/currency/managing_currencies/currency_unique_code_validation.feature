@@ -10,8 +10,8 @@ Feature: Currency unique code validation
 
     @ui @api
     Scenario: Trying to add currency with taken code
-        Given I want to add a new currency
-        When I choose "Euro"
+        When I want to add a new currency
+        And I choose "Euro"
         And I try to add it
         Then I should be notified that currency code must be unique
         And there should still be only one currency with code "EUR"

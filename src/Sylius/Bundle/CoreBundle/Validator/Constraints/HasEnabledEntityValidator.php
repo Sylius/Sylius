@@ -85,7 +85,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
      */
     private function isLastEnabledEntity($result, $entity): bool
     {
-        return !$result || 0 === count($result)
+        return !\is_countable($result) || 0 === count($result)
         || (1 === count($result) && $entity === ($result instanceof \Iterator ? $result->current() : current($result)));
     }
 

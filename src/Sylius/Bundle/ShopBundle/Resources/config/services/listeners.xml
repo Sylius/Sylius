@@ -32,6 +32,11 @@
             <tag name="kernel.event_listener" event="sylius.customer.post_update" method="sendVerificationEmail" />
         </service>
 
+        <service id="sylius.listener.shop_customer_account_sub_section_cache_control_subscriber" class="Sylius\Bundle\ShopBundle\EventListener\ShopCustomerAccountSubSectionCacheControlSubscriber">
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <tag name="kernel.event_subscriber" event="kernel.response" />
+        </service>
+
         <service id="sylius.listener.order_customer_ip" class="Sylius\Bundle\ShopBundle\EventListener\OrderCustomerIpListener">
             <argument type="service" id="sylius.customer_ip_assigner" />
             <argument type="service" id="request_stack" />

@@ -11,16 +11,16 @@ Feature: Toggle the inventory tracking
     @ui
     Scenario: Disabling inventory for a simple product
         Given the "Dice Brewing" product is tracked by the inventory
-        And I want to modify the "Dice Brewing" product
-        When I disable its inventory tracking
+        When I want to modify the "Dice Brewing" product
+        And I disable its inventory tracking
         And I save my changes
         Then I should be notified that it has been successfully edited
         And inventory of this product should not be tracked
 
     @ui
     Scenario: Enabling inventory for a simple product
-        Given I want to modify the "Dice Brewing" product
-        When I enable its inventory tracking
+        When I want to modify the "Dice Brewing" product
+        And I enable its inventory tracking
         And I save my changes
         Then I should be notified that it has been successfully edited
         And inventory of this product should be tracked

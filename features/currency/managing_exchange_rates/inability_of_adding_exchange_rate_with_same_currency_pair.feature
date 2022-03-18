@@ -11,8 +11,8 @@ Feature: Inability of adding exchange rates with the same currency pair
 
     @ui @api
     Scenario: Being prevented from adding an exchange rate for the same currency pair
-        Given I want to add a new exchange rate
-        When I specify its ratio as 3.20
+        When I want to add a new exchange rate
+        And I specify its ratio as 3.20
         And I choose "Euro" as the source currency
         And I choose "British Pound" as the target currency
         And I try to add it
@@ -22,8 +22,8 @@ Feature: Inability of adding exchange rates with the same currency pair
 
     @ui @api
     Scenario: Being prevented from adding an exchange rate for a reversed currency pair
-        Given I want to add a new exchange rate
-        When I specify its ratio as 3.20
+        When I want to add a new exchange rate
+        And I specify its ratio as 3.20
         And I choose "British Pound" as the source currency
         And I choose "Euro" as the target currency
         And I try to add it

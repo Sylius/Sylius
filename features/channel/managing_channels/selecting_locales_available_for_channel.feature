@@ -11,8 +11,8 @@ Feature: Selecting available locales for a channel
 
     @ui
     Scenario: Adding a new channel with locales
-        Given I want to create a new channel
-        When I specify its code as "MOBILE"
+        When I want to create a new channel
+        And I specify its code as "MOBILE"
         And I name it "Mobile channel"
         And I make it available in "English (United States)"
         And I choose "Euro" as the base currency
@@ -24,8 +24,8 @@ Feature: Selecting available locales for a channel
     @ui
     Scenario: Adding locales to an existing channel
         Given the store operates on a channel named "Web Channel"
-        And I want to modify this channel
-        When I make it available in "English (United States)"
+        When I want to modify this channel
+        And I make it available in "English (United States)"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the channel "Web channel" should be available in "English (United States)"

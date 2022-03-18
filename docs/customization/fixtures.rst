@@ -248,7 +248,7 @@ just like in the example mentioned above.
         suites:
             default:
                 fixtures:
-                    ...
+                    # ...
                     shipping_method: # our new configuration with the new field
                         options:
                             custom:

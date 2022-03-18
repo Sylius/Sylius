@@ -53,8 +53,6 @@ final class TranslationOrderNameAndLocaleFilter extends AbstractContextAwareFilt
             }
 
             $queryBuilder
-                ->addSelect('translation')
-                ->innerJoin('o.translations', 'translation')
                 ->orderBy('translation.name', $direction)
             ;
         }

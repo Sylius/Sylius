@@ -44,7 +44,7 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
-     * @Given I want to create a new tax rate
+     * @When I want to create a new tax rate
      */
     public function iWantToCreateNewTaxRate()
     {
@@ -61,7 +61,7 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
-     * @When I specify its amount as :amount%
+     * @When /^I specify its amount as ([^"]+)%$/
      * @When I do not specify its amount
      * @When I remove its amount
      */
@@ -145,8 +145,8 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
-     * @Given I want to modify a tax rate :taxRate
-     * @Given /^I want to modify (this tax rate)$/
+     * @When I want to modify a tax rate :taxRate
+     * @When /^I want to modify (this tax rate)$/
      */
     public function iWantToModifyTaxRate(TaxRateInterface $taxRate)
     {
@@ -236,6 +236,14 @@ final class ManagingTaxRateContext implements Context
     public function iShouldBeNotifiedThatIsRequired($element)
     {
         $this->assertFieldValidationMessage($element, sprintf('Please enter tax rate %s.', $element));
+    }
+
+    /**
+     * @Then I should be notified that :element is invalid
+     */
+    public function iShouldBeNotifiedThatIsInvalid(string $element): void
+    {
+        $this->assertFieldValidationMessage($element, sprintf('The tax rate %s is invalid.', $element));
     }
 
     /**

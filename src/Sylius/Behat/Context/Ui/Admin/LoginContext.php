@@ -32,7 +32,7 @@ final class LoginContext implements Context
     }
 
     /**
-     * @Given I want to log in
+     * @When I want to log in
      */
     public function iWantToLogIn()
     {
@@ -138,5 +138,13 @@ final class LoginContext implements Context
         $this->loginPage->specifyUsername($username);
         $this->loginPage->specifyPassword($password);
         $this->loginPage->logIn();
+    }
+
+    /**
+     * @Then I should be on the login page
+     */
+    public function iShouldBeOnTheLoginPage(): void
+    {
+        Assert::true($this->loginPage->isOpen());
     }
 }

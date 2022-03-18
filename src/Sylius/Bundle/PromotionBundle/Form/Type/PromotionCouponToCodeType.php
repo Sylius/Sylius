@@ -36,26 +36,26 @@ final class PromotionCouponToCodeType extends AbstractType implements DataTransf
         $builder->addModelTransformer($this);
     }
 
-    public function transform($coupon): string
+    public function transform($value): string
     {
-        if (null === $coupon) {
+        if (null === $value) {
             return '';
         }
 
-        if (!$coupon instanceof PromotionCouponInterface) {
-            throw new UnexpectedTypeException($coupon, PromotionCouponInterface::class);
+        if (!$value instanceof PromotionCouponInterface) {
+            throw new UnexpectedTypeException($value, PromotionCouponInterface::class);
         }
 
-        return $coupon->getCode();
+        return $value->getCode();
     }
 
-    public function reverseTransform($code): ?PromotionCouponInterface
+    public function reverseTransform($value): ?PromotionCouponInterface
     {
-        if (null === $code || '' === $code) {
+        if (null === $value || '' === $value) {
             return null;
         }
 
-        return $this->promotionCouponRepository->findOneBy(['code' => $code]);
+        return $this->promotionCouponRepository->findOneBy(['code' => $value]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

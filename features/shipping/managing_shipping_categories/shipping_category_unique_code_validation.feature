@@ -11,8 +11,8 @@ Feature: Shipping category unique code validation
 
     @ui @api
     Scenario: Trying to add shipping category with taken code
-        Given I want to create a new shipping category
-        When I specify its code as "STANDARD"
+        When I want to create a new shipping category
+        And I specify its code as "STANDARD"
         And I name it "Normal"
         And I try to add it
         Then I should be notified that shipping category with this code already exists

@@ -9,8 +9,8 @@ Feature: Tax category validation
 
     @ui @api
     Scenario: Trying to add a new tax category without specifying its code
-        Given I want to create a new tax category
-        When I name it "Food and Beverage"
+        When I want to create a new tax category
+        And I name it "Food and Beverage"
         But I do not specify its code
         And I try to add it
         Then I should be notified that code is required

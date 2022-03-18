@@ -2,5 +2,5 @@
     {% set path = app.user.avatar.path|imagine_filter('sylius_admin_admin_user_avatar_thumbnail') %}
     <img style="margin-right: 10px;" class="ui avatar image" src="{{ path }}">
 {% else %}
-    <i style="margin-right: 10px;" class="ui avatar circular user icon"></i>
+    <i class="ui avatar icon user"></i>
 {% endif %}
