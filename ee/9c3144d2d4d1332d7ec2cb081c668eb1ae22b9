@@ -1,0 +1,29 @@
+---------------------------------------------------------------------------
+
+by Ferror at 2022-03-15T11:55:58Z
+
+I don't think we should update the ADRs when we change our decision, especially after a year. In that case, I think we should create another ADR with relation to the first one that explains why the previous approach appeared to be wrong.
+
+The decision was made, people died, this cannot be undone :)
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-03-15T13:41:57Z
+
+> I don't think we should update the ADRs when we change our decision, especially after a year. In that case, I think we should create another ADR with relation to the first one that explains why the previous approach appeared to be wrong.
+>
+> The decision was made, people died, this cannot be undone :)
+
+I wonder about doing it in this way, but I wanted to simplify our ADRs, especially that the changed ADR was in `proposed` state. However, I agree with your arguments and I've added the new ADR with reference to the old one.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-03-16T12:06:57Z
+
+as a contr-argument for changing ADRs with time - we have git in place. Therefore, we could replace them and base our current decisions only on existing ADRs at the moment. Of course, there is one more case - when we are transitioning from one approach to another, while two ADRs may exist: legacy and new one
+
+---------------------------------------------------------------------------
+
+by AdamKasp at 2022-03-18T13:06:51Z
+
+Thank you, Grzegorz! :1st_place_medal:
