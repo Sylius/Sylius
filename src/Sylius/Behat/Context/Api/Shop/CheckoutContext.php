@@ -339,13 +339,8 @@ final class CheckoutContext implements Context
     public function iCompleteTheAddressingStep(): void
     {
         $this->addressOrder($this->content);
-        $response = $this->ordersClient->getLastResponse();
-
-
-
-        if ($response->getStatusCode() !== 200) {
-            throw new \Exception($this->responseChecker->getError($response));
-        }
+//        $response = $this->ordersClient->getLastResponse();
+//        Assert::notSame($response->getStatusCode(), 200, $this->responseChecker->getError($response));
 
         $this->content = [];
     }
@@ -367,7 +362,7 @@ final class CheckoutContext implements Context
     {
         $response = $this->completeOrder();
 
-        Assert::notSame($response->getStatusCode(), 200);
+        Assert::notSame($response->getStatusCode(), 200, $this->responseChecker->getError($response));
 
         $this->ordersClient->show($this->sharedStorage->get('cart_token'));
     }
