@@ -140,7 +140,7 @@ The above grid modification will change the redirect of the ``show`` action to r
 Also the label was changed here.
 
 How to remove label of an action from a grid?
-''''''''''''''''''''''''''''''''''''
+'''''''''''''''''''''''''''''''''''''''''''''
 
 If you would like to remove label for some actions in any grid, you just need to set its ``labeled`` option to ``false`` like below:
 
