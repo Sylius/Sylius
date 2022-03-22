@@ -3,4 +3,4 @@
 {% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('create')), options.link.parameters|default([]))) %}
 
 {% set labeled = options.labeled is defined ? options.labeled : true %}
-{{ buttons.edit(path, action.label, null, labeled) }}
+{{ buttons.create(path, action.label, null, labeled) }}
