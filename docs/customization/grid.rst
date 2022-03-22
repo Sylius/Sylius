@@ -1,3 +1,4 @@
+
 Customizing Grids
 =================
 
@@ -154,7 +155,8 @@ If you would like to remove label for some actions in any grid, you just need to
                     item:
                         delete:
                             type: delete
-                            labeled: false
+                            options:
+                                labeled: false
 
 How to modify positions of fields, filters and actions in a grid?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
