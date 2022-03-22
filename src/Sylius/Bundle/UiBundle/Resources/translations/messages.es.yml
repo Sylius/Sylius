@@ -911,7 +911,7 @@ sylius:
         view: 'Ver'
         view_and_edit_cart: 'Ver y modificar carrito'
         view_more: 'Ver más'
-        view_order: 'Ver perdido'
+        view_order: 'Ver pedido'
         view_product_details: 'Ver detalles de %product%'
         view_your_order_or_change_payment_method: 'Ver pedido o cambiar forma de pago'
         view_your_store: 'Ver su tienda'
