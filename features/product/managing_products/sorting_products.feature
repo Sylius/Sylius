@@ -13,6 +13,7 @@ Feature: Sorting listed products
         And this product is named "Mops Miłości" in the "Polish (Poland)" locale
         And the store also has a product "Xtreme Pug" with code "X_PUG"
         And this product is named "Ekstremalny Mops" in the "Polish (Poland)" locale
+        And this product is named "Ekstremalny Mops" in the "Polish" locale
         And I am logged in as an administrator
 
     @ui @api
@@ -63,3 +64,22 @@ Feature: Sorting listed products
         And I sort the products descending by name
         Then I should see 3 products in the list
         And the first product on the list should have name "Szałowy Mops"
+
+    @ui
+    Scenario: Missing translations are sorted as first when sorting by name ascending
+        When I change my locale to "Polish"
+        And I browse products
+        And I sort the products ascending by name
+        Then I should see 3 products in the list
+        And the first product on the list shouldn't have a name
+        And the last product on the list should have name "Ekstremalny Mops"
+
+    @ui
+    Scenario: Missing translation are sorted as last when sorting by name descending
+        When I change my locale to "Polish"
+        And I browse products
+        And the products are already sorted ascending by name
+        And I sort the products descending by name
+        Then I should see 3 products in the list
+        And the first product on the list should have name "Ekstremalny Mops"
+        And the last product on the list shouldn't have a name
