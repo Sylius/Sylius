@@ -20,6 +20,8 @@
 /behat.yml
 /phpspec.yml
 
+/drivers/
+
 # Symfony CLI https://symfony.com/doc/current/setup/symfony_server.html#different-php-settings-per-project
 /.php-version
 /php.ini

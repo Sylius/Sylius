@@ -73,13 +73,13 @@ default:
                                 browserName: chrome
                                 browser: chrome
                                 extra_capabilities:
-                                chromeOptions:
-                                    args:
-                                        - "--window-size=2880,1800"
-                                        - "--headless"
-                                        - "start-fullscreen"
-                                        - "start-maximized"
-                                        - "no-sandbox"
+                                    chromeOptions:
+                                        args:
+                                            - "--window-size=2880,1800"
+                                            - "--headless"
+                                            - "start-fullscreen"
+                                            - "start-maximized"
+                                            - "no-sandbox"
                                     acceptSslCerts: true
                                     acceptInsecureCerts: true
                                     unexpectedAlertBehaviour: accept
