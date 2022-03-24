@@ -22,4 +22,4 @@ it gives us ability to avoid an inconsistent data and if something fails we have
 
 ## References <!-- optional -->
 
-* [Abstracting the Doctrine ORM flush](https://www.thinktocode.com/2019/03/28/abstracting-the-doctrine-orm-flush/)
+* [Transactions and Concurrency](https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/transactions-and-concurrency.html)
