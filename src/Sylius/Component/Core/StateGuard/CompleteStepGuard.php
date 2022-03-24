@@ -14,17 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\StateGuard;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 
 class CompleteStepGuard
 {
-    public function __construct(
-        private StateMachineFactoryInterface $stateMachineFactory,
-    ) {
-    }
-
     /**
      * When address is required? It seems like always
+     * But should we in any instance block the state change? No
      */
     public function address(OrderInterface $order): bool
     {
@@ -33,6 +28,7 @@ class CompleteStepGuard
 
     /**
      * When shipping address / method is required? When any item requires shipping
+     * But should we in any instance block the state change? No
      */
     public function selectShipping(OrderInterface $order): bool
     {
@@ -41,6 +37,7 @@ class CompleteStepGuard
 
     /**
      * When payment method is required? When order is not free
+     * But should we in any instance block the state change? No
      */
     public function selectPayment(OrderInterface $order): bool
     {
@@ -49,22 +46,6 @@ class CompleteStepGuard
 
     public function complete(OrderInterface $order): bool
     {
-//        $state = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
-//        $channel = $order->getChannel();
-
-        // DEBUG
-//        var_dump($order->isEmpty());
-//        var_dump('shipping required: ' . (int)$order->isShippingRequired());
-//        var_dump($order->getShippingAddress() === null);
-//        var_dump('payments required: ' . (int)($order->getTotal() > 0));
-//        var_dump($order->hasPayments());
-//        var_dump($order->getBillingAddress() === null);
-//        var_dump($order->getShipments()->count());
-//        var_dump($state->getState());
-//        var_dump($channel->isSkippingShippingStepAllowed());
-//        var_dump($channel->isSkippingPaymentStepAllowed());
-        // DEBUG
-
         if ($order->isEmpty()) {
             return false;
         }
