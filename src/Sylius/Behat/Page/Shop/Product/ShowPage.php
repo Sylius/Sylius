@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Product;
 
+use Behat\Mink\Driver\PantherDriver;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
@@ -21,6 +22,7 @@ use DMore\ChromeDriver\ChromeDriver;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
+use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\JQueryHelper;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
@@ -81,8 +83,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $attributesTable = $this->getElement('attributes');
 
-        $driver = $this->getDriver();
-        if ($driver instanceof Selenium2Driver || $driver instanceof ChromeDriver) {
+        if (DriverHelper::isJavascriptSession($this->getDriver())) {
             try {
                 $attributesTab = $this->getElement('tab', ['%name%' => 'attributes']);
                 if (!$attributesTab->hasAttribute('[data-test-active]')) {
@@ -237,8 +238,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $variantRadio = $this->getElement('variant_radio', ['%variantName%' => $variantName]);
 
-        $driver = $this->getDriver();
-        if ($driver instanceof Selenium2Driver || $driver instanceof ChromeDriver) {
+        if (DriverHelper::isJavascriptSession($this->getDriver())) {
             $variantRadio->click();
 
             return;
@@ -329,7 +329,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     private function waitForCartSummary(): void
     {
-        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
+        if (DriverHelper::isJavascriptSession($this->getDriver())) {
             JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
             $this->getDocument()->waitFor(3, function (): bool {
                 return $this->summaryPage->isOpen();

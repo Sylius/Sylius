@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
+use Behat\Mink\Driver\PantherDriver;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
@@ -20,6 +21,7 @@ use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\Mink\Session;
 use DMore\ChromeDriver\ChromeDriver;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\JQueryHelper;
 use Sylius\Component\Core\Factory\AddressFactoryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -52,8 +54,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     public function chooseDifferentShippingAddress(): void
     {
-        $driver = $this->getDriver();
-        if ($driver instanceof Selenium2Driver || $driver instanceof ChromeDriver) {
+        if (DriverHelper::isJavascriptSession($this->getDriver())) {
             $this->getElement('different_shipping_address_label')->click();
 
             return;

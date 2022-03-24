@@ -25,7 +25,7 @@ default:
             files_path: "%paths.base%/src/Sylius/Behat/Resources/fixtures/"
             base_url: "https://127.0.0.1:8080/"
             default_session: symfony
-            javascript_session: chrome_headless
+            javascript_session: panther
             sessions:
                 symfony:
                     symfony: ~
@@ -56,6 +56,30 @@ default:
                                 unexpectedAlertBehaviour: accept
                                 goog:chromeOptions:
                                     w3c: false # https://github.com/Sylius/Sylius/issues/10561
+                panther:
+                    panther:
+                       options:
+                           browser: 'chrome'
+                           webServerDir: '%paths.base%/public' # your custom public dir
+                           external_base_uri: 'https://127.0.0.1:8080/'
+                       kernel_options:
+                            APP_ENV: test_cached
+                            APP_DEBUG: false
+                       manager_options:
+                            connection_timeout_in_ms: 5000
+                            request_timeout_in_ms: 120000
+                            capabilities:
+                                browserName: chrome
+                                browser: chrome
+                                chrome:
+                                    switches:
+                                    - "start-fullscreen"
+                                    - "start-maximized"
+                                    - "no-sandbox"
+                                extra_capabilities:
+                                    acceptSslCerts: true
+                                    acceptInsecureCerts: true
+                                    unexpectedAlertBehaviour: accept
                 firefox:
                     selenium2:
                         browser: firefox

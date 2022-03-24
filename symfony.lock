@@ -61,6 +61,9 @@
     "composer/xdebug-handler": {
         "version": "1.4.3"
     },
+    "dbrekelmans/bdi": {
+        "version": "1.0"
+    },
     "dealerdirect/phpcodesniffer-composer-installer": {
         "version": "v0.7.0"
     },
@@ -408,6 +411,9 @@
     "php-http/promise": {
         "version": "v1.0.0"
     },
+    "php-webdriver/webdriver": {
+        "version": "1.12.0"
+    },
     "phparkitect/phparkitect": {
         "version": "0.2.9"
     },
@@ -500,6 +506,12 @@
     },
     "rector/rector": {
         "version": "0.11.52"
+    },
+    "robertfausk/behat-panther-extension": {
+        "version": "v1.1.0"
+    },
+    "robertfausk/mink-panther-driver": {
+        "version": "v1.0.8"
     },
     "sebastian/code-unit-reverse-lookup": {
         "version": "1.0.1"
@@ -711,6 +723,12 @@
             "ref": "87c585d24de9f43bca80ebcfd5cf5cb39445d95f"
         }
     },
+    "symfony/http-client": {
+        "version": "v5.4.5"
+    },
+    "symfony/http-client-contracts": {
+        "version": "v2.5.0"
+    },
     "symfony/http-foundation": {
         "version": "v4.1.3"
     },
@@ -749,6 +767,15 @@
     },
     "symfony/options-resolver": {
         "version": "v4.1.3"
+    },
+    "symfony/panther": {
+        "version": "1.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "877d853a05c6713665a2f4b954734592680abff6"
+        }
     },
     "symfony/password-hasher": {
         "version": "v5.4.3"

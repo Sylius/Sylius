@@ -44,7 +44,7 @@ abstract class SlugGenerationHelper
 
     public static function isSlugReadonly(Session $session, NodeElement $element): bool
     {
-        if (!$session->getDriver() instanceof Selenium2Driver && !$session->getDriver() instanceof ChromeDriver) {
+        if (!DriverHelper::isJavascriptSession($session->getDriver())) {
             return $element->hasAttribute('readonly');
         }
 
