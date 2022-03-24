@@ -77,9 +77,9 @@ default:
                                         args:
                                             - "--window-size=2880,1800"
                                             - "--headless"
+                                            - "--no-sandbox"
                                             - "start-fullscreen"
                                             - "start-maximized"
-                                            - "no-sandbox"
                                     acceptSslCerts: true
                                     acceptInsecureCerts: true
                                     unexpectedAlertBehaviour: accept
