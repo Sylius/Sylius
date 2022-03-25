@@ -1,0 +1,18 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-03-25T10:17:15Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "ignore-phpstan-config-file"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-03-25T10:17:49Z
+
+Thank you, Zbigniew! :1st_place_medal:
