@@ -1,0 +1,61 @@
+---------------------------------------------------------------------------
+
+by mamazu at 2022-03-10T19:36:09Z
+
+Thanks. Is it okay to be a MR to the master branch or should I also target older versions as well?
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-03-10T19:51:41Z
+
+I see no reason to not have it in 1.10 and 1.11 too.
+
+---------------------------------------------------------------------------
+
+by mamazu at 2022-03-10T21:29:20Z
+
+I have rebased it now.
+
+---------------------------------------------------------------------------
+
+by mamazu at 2022-03-11T10:30:34Z
+
+Appearently someone was quicker than me. #13750
+
+But I still think that we should replace the placeholder image in Sylius with a more good looking icon.
+
+---------------------------------------------------------------------------
+
+by mamazu at 2022-03-18T22:30:07Z
+
+I have re-added the image. But the build is still failing for some reason.
+
+---------------------------------------------------------------------------
+
+by mamazu at 2022-03-21T11:24:42Z
+
+I have fixed it. I accidentally removed the `i` tag that renders the icon while rebasing.
+
+---------------------------------------------------------------------------
+
+by mamazu at 2022-03-22T22:15:40Z
+
+The failure exists in the frontend as far as I know which I didn't touch. Does someone have an idea how to fix that. I can't really get any helpful information from the Github Action Logs.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-03-24T14:15:17Z
+
+I've rerun all failed jobs, perhaps it will help
+
+---------------------------------------------------------------------------
+
+by mamazu at 2022-03-24T22:43:31Z
+
+Yep it's green.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-03-25T18:17:17Z
+
+Thank you, @mamazu! :tada:
