@@ -16,6 +16,7 @@ namespace Sylius\Behat\Page\Admin;
 use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Behat\Service\JQueryHelper;
 use Symfony\Component\Routing\RouterInterface;
 
 class DashboardPage extends SymfonyPage implements DashboardPageInterface
@@ -75,6 +76,8 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
 
     public function logOut(): void
     {
+        $this->getElement('avatar')->click();
+        JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
         $this->getElement('logout')->click();
     }
 
@@ -91,6 +94,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'avatar' => '.dropdown .avatar',
             'average_order_value' => '#average-order-value',
             'customer_list' => '#customers',
             'dropdown' => 'i.dropdown',
