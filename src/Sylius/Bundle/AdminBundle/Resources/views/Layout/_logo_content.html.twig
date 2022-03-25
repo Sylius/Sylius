@@ -1,0 +1,10 @@
+{{ sylius_template_event('sylius.admin.layout.before_logo', _context) }}
+
+<a class="item" href="{{ path('sylius_admin_dashboard') }}" style="padding: 13px 0;">
+    <div style="max-width: 90px; margin: 0 auto;">
+        <img src="{{ asset('assets/admin/img/admin-logo.svg') }}" class="ui fluid image">
+    </div>
+</a>
+
+{{ sylius_template_event('sylius.admin.layout.after_logo', _context) }}
+
