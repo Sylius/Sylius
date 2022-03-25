@@ -1,0 +1,63 @@
+---------------------------------------------------------------------------
+
+by vvasiloi at 2020-09-16T14:13:39Z
+
+Isn't that something Symfony already does https://symfony.com/doc/current/routing.html#redirecting-urls-with-trailing-slashes?
+
+---------------------------------------------------------------------------
+
+by loic425 at 2020-09-16T19:56:52Z
+
+> Isn't that something Symfony already does https://symfony.com/doc/current/routing.html#redirecting-urls-with-trailing-slashes?
+
+Yes, indeed and this is what I use to fix the problem.
+But the slug is wrong with the trailing slash.
+
+https://demo.sylius.com/en_US/taxons/caps/with-pompons/
+In this example, $slug equals to "taxons/caps/with-pompons/" instead of "taxons/caps/with-pompons" => 404
+
+With my change, the slug is now fixed and Symfony makes a redirection without the trailing slash.
+
+---------------------------------------------------------------------------
+
+by stale[bot] at 2020-12-25T13:03:08Z
+
+This issue has been automatically marked as stale because it has not had any recent activity. It will be closed in a week if no further activity occurs. Thank you for your contributions.
+
+---------------------------------------------------------------------------
+
+by loic425 at 2020-12-29T12:31:22Z
+
+> I believe it's still a valid fix 👍 Just should be rebased with 1.8
+
+@Zales0123 done 👍
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-03-16T09:37:13Z
+
+Hey Loic,
+
+could you rebase it to 1.10? Would be awesome to have it merged
+
+---------------------------------------------------------------------------
+
+by loic425 at 2022-03-22T11:20:24Z
+
+> Hey Loic,
+>
+> could you rebase it to 1.10? Would be awesome to have it merged
+
+done
+
+---------------------------------------------------------------------------
+
+by loic425 at 2022-03-25T09:01:12Z
+
+@lchrusciel I think you could merge ;)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-03-25T17:51:33Z
+
+Thank you, Loïc! :tada:
