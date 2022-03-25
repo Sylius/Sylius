@@ -38,6 +38,10 @@
 /.php_cs.cache
 ###< friendsofphp/php-cs-fixer ###
 
+###> phpstan/phpstan ###
+/phpstan.neon
+###< phpstan/phpstan ###
+
 ###> phpunit/phpunit ###
 /phpunit.xml
 /.phpunit.result.cache
