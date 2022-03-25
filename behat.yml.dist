@@ -1,8 +1,3 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-# This file is referenced in Sylius-Standard v1.0.0 - v1.3.x
-
 imports:
     - src/Sylius/Behat/Resources/config/suites.yml
 
@@ -14,6 +9,9 @@ default:
             snippets: false
 
     extensions:
+        FriendsOfBehat\SymfonyExtension: ~
+        FriendsOfBehat\VariadicExtension: ~
+
         DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
 
         FriendsOfBehat\MinkDebugExtension:
@@ -22,8 +20,8 @@ default:
             screenshot: true
 
         Behat\MinkExtension:
-            files_path: "%paths.base%/src/Sylius/Behat/Resources/fixtures/"
-            base_url: "https://127.0.0.1:8080/"
+            files_path: "%paths.base%/vendor/sylius/sylius/src/Sylius/Behat/Resources/fixtures/"
+            base_url: "http://chrome/"
             default_session: symfony
             javascript_session: chrome_headless
             sessions:
@@ -31,40 +29,4 @@ default:
                     symfony: ~
                 chrome_headless:
                     chrome:
-                        api_url: http://127.0.0.1:9222
-                        validate_certificate: false
-                chrome_headless_second_session:
-                    chrome:
-                        api_url: http://127.0.0.1:9222
-                        validate_certificate: false
-                chrome:
-                    selenium2:
-                        browser: chrome
-                        capabilities:
-                            browserName: chrome
-                            browser: chrome
-                            version: ""
-                            marionette: null # https://github.com/Behat/MinkExtension/pull/311
-                            chrome:
-                                switches:
-                                    - "start-fullscreen"
-                                    - "start-maximized"
-                                    - "no-sandbox"
-                            extra_capabilities:
-                                acceptSslCerts: true
-                                acceptInsecureCerts: true
-                                unexpectedAlertBehaviour: accept
-                                goog:chromeOptions:
-                                    w3c: false # https://github.com/Sylius/Sylius/issues/10561
-                firefox:
-                    selenium2:
-                        browser: firefox
-            show_auto: false
-
-        FriendsOfBehat\SymfonyExtension: ~
-
-        FriendsOfBehat\VariadicExtension: ~
-
-    gherkin:
-        filters:
-            tags: "~@todo&&~@cli" # CLI is excluded as it registers an error handler that mutes fatal errors
+                        api_url: http://chrome:9222
