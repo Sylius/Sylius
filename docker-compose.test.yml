@@ -5,6 +5,7 @@ services:
         command: make ci
         environment:
             - APP_ENV=test
+            - DATABASE_URL=mysql://root@mysql/sylius_test
         volumes:
             - ./:/app:delegated
             - ./.docker/test/php.ini:/etc/php/8.0/fpm/php.ini:delegated
@@ -12,11 +13,11 @@ services:
         ports:
             - "80:80"
         depends_on:
-            - database
+            - mysql
         networks:
-            - sylius
+            - sylius-test
 
-    database:
+    mysql:
         image: mysql:5.7
         platform: linux/amd64
         environment:
@@ -26,7 +27,7 @@ services:
         ports:
             - "3306:3306"
         networks:
-            - sylius
+            - sylius-test
     
     chrome:
         image: ferror/alpine-chrome
@@ -34,12 +35,12 @@ services:
         ports:
             - "9222:9222"
         networks:
-            - sylius
+            - sylius-test
 
 networks:
-    sylius:
+    sylius-test:
         driver: bridge
         ipam:
             driver: default
             config:
-                - subnet: 192.168.10.0/24
+                - subnet: 192.168.21.0/24
