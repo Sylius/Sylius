@@ -11,10 +11,8 @@ init:
 browser-validation:
 	vendor/bin/behat features/account/customer_account/address_book/adding_address_validation.feature
 
-check-connection:
-	curl -H Host:app.sylius.localhost http://chromium:9222/json/version
-
 ci:
+	curl -H Host:app.sylius.localhost http://chrome:9222/json/version
 	composer install --no-interaction --no-scripts
 	bin/console sylius:install --no-interaction
 	bin/console sylius:fixtures:load default --no-interaction
