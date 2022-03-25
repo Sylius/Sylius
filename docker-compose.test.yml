@@ -27,6 +27,14 @@ services:
             - "3306:3306"
         networks:
             - sylius
+    
+    chrome:
+        image: ferror/alpine-chrome
+        command: "--enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --remote-debugging-address=0.0.0.0 --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' --disable-dev-shm-usage --disable-software-rasterizer"
+        ports:
+            - "9222:9222"
+        networks:
+            - sylius
 
 networks:
     sylius:
