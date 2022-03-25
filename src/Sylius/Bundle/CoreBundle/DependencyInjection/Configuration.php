@@ -49,7 +49,10 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->booleanNode('prepend_doctrine_migrations')->defaultTrue()->end()
-                ->booleanNode('process_shipments_before_recalculating_prices')->defaultFalse()->end()
+                ->booleanNode('process_shipments_before_recalculating_prices')
+                    ->setDeprecated('sylius/sylius', '1.10', 'The "%path%.%node%" parameter is deprecated and will be removed in 2.0.')
+                    ->defaultFalse()
+                ->end()
             ->end()
         ;
 
