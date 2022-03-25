@@ -21,4 +21,6 @@ spec:
 	vendor/bin/phpspec run --ansi --no-interaction -f dot
 
 behat:
-	vendor/bin/behat --colors --strict --stop-on-failure --no-interaction -vvv -f progress
+	vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"  # CLI Behat
+	vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli" # NON JS Behat
+	vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"  # JS Behat
