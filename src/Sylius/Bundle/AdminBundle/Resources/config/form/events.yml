@@ -1,0 +1,32 @@
+sylius_ui:
+    events:
+        sylius.admin.admin_user.form_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/AdminUser/_form_content.html.twig'
+                    priority: 10
+        sylius.admin.channel.form_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Channel/_form_content.html.twig'
+                    priority: 10
+        sylius.admin.customer.form_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Customer/_form_content.html.twig'
+                    priority: 10
+        sylius.admin.dashboard.channel_switch_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Dashboard/_channelSwitch_content.html.twig'
+                    priority: 10
+        sylius.admin.layout.logo_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Layout/_logo_content.html.twig'
+                    priority: 10
+        sylius.admin.product_variant.tab_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/ProductVariant/Tab/_inventory_content.html.twig'
+                    priority: 10
