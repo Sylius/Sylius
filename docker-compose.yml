@@ -54,6 +54,16 @@ services:
         networks:
             - sylius
 
+    mailhog:
+        image: mailhog/mailhog
+        ports:
+            - "1025:1025" # SMTP
+            - "8025:8025" # UI
+        depends_on:
+            - traefik
+        networks:
+            - sylius
+
 networks:
     sylius:
         driver: bridge
