@@ -226,6 +226,11 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->updateContent($data);
     }
 
+    public function setSubResourceData(string $key, array $data): void
+    {
+        $this->request->setSubResource($key, $data);
+    }
+
     public function addSubResourceData(string $key, array $data): void
     {
         $this->request->addSubResource($key, $data);

@@ -233,6 +233,11 @@ final class Request implements RequestInterface
         $this->files = array_merge($this->files, $newFiles);
     }
 
+    public function setSubresource(string $key, array $subResource): void
+    {
+        $this->content[$key] = $subResource;
+    }
+
     public function addSubResource(string $key, array $subResource): void
     {
         $this->content[$key][] = $subResource;
