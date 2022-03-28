@@ -11,7 +11,7 @@ else
 fi
 
 CURRENT_PHP_VERSION=$(docker run -i sylius_app php -r 'echo phpversion();')
-EXPECTED_PHP_VERSION="8.0.16"
+EXPECTED_PHP_VERSION="8.0.17"
 
 if [[ $CURRENT_PHP_VERSION != "$EXPECTED_PHP_VERSION" ]]; then
     echo "Invalid PHP version got $CURRENT_PHP_VERSION expected $EXPECTED_PHP_VERSION"
