@@ -36,17 +36,36 @@ Example custom configuration:
 
 Make sure to clear the cache each time the configuration is changed.
 
-If you have a permission issue when generating an invoice, you may also need to update the ``config/packages/knp_snappy.yaml`` configuration file:
-
-.. code-block:: yaml
-
-    knp_snappy:
-        pdf:
-            options:
-                allow: '%env(resolve:SYLIUS_INVOICING_LOGO_FILE)%'
-
-
 .. image:: ../../_images/cookbook/custom-invoice/pdf_with_custom_logo.png
+
+How to add more graphics to the Invoice?
+--------------------------------------------
+In case you would like to add an extra graphic to your Invoice twig template, it is super important to provide access to this file.
+Let's say you would like to add second image to the Invoice.
+You may face the problem that ``wkhtmltopdf`` from version 0.12.6 disables access to the local files by default.
+Fortunately, there are two options to deal with it:
+
+* Update the ``config/packages/knp_snappy.yaml`` file by adding access to local files globally:
+
+    .. code-block:: yaml
+
+        knp_snappy:
+            pdf:
+                options:
+                    enable-local-file-access: true
+
+* Specify the exact list of accessible files. As you may have noticed, the logo displays correctly even though local file access is not enabled.
+  This is because we handle it by specifying the exact list of allowed files.
+  The list can be replaced with the ``sylius_refund.pdf_generator.allowed_files`` parameter in the ``config/packages/_sylius.yaml``:
+
+    .. code-block:: yaml
+
+        sylius_invoicing:
+            pdf_generator:
+                allowed_files:
+                    - '%env(default:default_logo_file:resolve:SYLIUS_INVOICING_LOGO_FILE)%'
+                    - 'path/image.png'
+                    - 'directory/with/allowed/files'
 
 How to customize the invoice appearance?
 ----------------------------------------
