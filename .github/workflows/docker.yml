@@ -21,8 +21,8 @@ jobs:
                 run: docker-compose run ci
     
     docker:
-        runs-on: ubuntu-latest
         name: Build and Excute Tests on Docker Containers
+        runs-on: ubuntu-latest
         steps:
             -
                 name: Checkout

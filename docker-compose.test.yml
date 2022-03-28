@@ -5,6 +5,7 @@ services:
         command: make ci
         environment:
             - APP_ENV=test
+            - DATABASE_URL=mysql://root:mysql@mysql/sylius_test
         volumes:
             - ./:/app:delegated
             - ./.docker/test/php.ini:/etc/php/8.0/fpm/php.ini:delegated
@@ -16,11 +17,11 @@ services:
         networks:
             - sylius
 
-    database:
+    mysql:
         image: mysql:5.7
         platform: linux/amd64
         environment:
-            - MYSQL_ALLOW_EMPTY_PASSWORD=true
+            - MYSQL_ROOT_PASSWORD=mysql
         volumes:
             - ./.docker/dev/mysql:/docker-entrypoint-initdb.d:delegated
         ports:
