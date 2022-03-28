@@ -183,7 +183,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iAddIt(): void
     {
-        $this->client->addSubResourceData('shopBillingData', $this->shopBillingData);
+        $this->client->setSubResourceData('shopBillingData', $this->shopBillingData);
 
         $this->client->create();
     }
