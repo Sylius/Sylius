@@ -264,9 +264,25 @@
             <argument type="service" id="security.token_storage" />
         </service>
 
-        <service id="sylius.state_guard.complete" class="Sylius\Component\Core\StateGuard\CompleteStepGuard" />
+        <service id="sylius.state_guard.complete" class="Sylius\Component\Core\StateGuard\CompleteStepGuard">
+            <argument type="tagged_iterator" id="sylius.order_checkout_specification"/>
+        </service>
+
         <service id="sylius.state_guard.address" class="Sylius\Component\Core\StateGuard\AddressStepGuard" />
         <service id="sylius.state_guard.select_payment" class="Sylius\Component\Core\StateGuard\SelectPaymentStepGuard" />
         <service id="sylius.state_guard.select_shipping" class="Sylius\Component\Core\StateGuard\SelectShippingStepGuard" />
+
+        <service id="sylius.specification.required_billing_address" class="Sylius\Component\Core\Order\Requirements\RequiredBillingAddressSpecification">
+            <tag name="sylius.order_checkout_specification" type="service" />
+        </service>
+        <service id="sylius.specification.required_non_empty_cart" class="Sylius\Component\Core\Order\Requirements\RequiredNonEmptyCartSpecification">
+            <tag name="sylius.order_checkout_specification" type="service" />
+        </service>
+        <service id="sylius.specification.required_payment" class="Sylius\Component\Core\Order\Requirements\RequiredPaymentSpecification">
+            <tag name="sylius.order_checkout_specification" type="service" />
+        </service>
+        <service id="sylius.specification.required_shipping" class="Sylius\Component\Core\Order\Requirements\RequiredShippingSpecification">
+            <tag name="sylius.order_checkout_specification" type="service" />
+        </service>
     </services>
 </container>

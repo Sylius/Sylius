@@ -18,18 +18,45 @@ use Sylius\Component\Core\Order\Requirements\RequiredBillingAddressSpecification
 use Sylius\Component\Core\Order\Requirements\RequiredNonEmptyCartSpecification;
 use Sylius\Component\Core\Order\Requirements\RequiredPaymentSpecification;
 use Sylius\Component\Core\Order\Requirements\RequiredShippingSpecification;
+use Sylius\Component\Core\Specification\Specification;
 
 class CompleteStepGuard implements OrderGuardInterface
 {
+    /**
+     * @param iterable<Specification> $requirements
+     */
+    public function __construct(private iterable $requirements)
+    {
+    }
+
     public function isSatisfiedBy(OrderInterface $order): bool
     {
-        $requirements = new RequiredNonEmptyCartSpecification();
-        $requirements
-            ->and(new RequiredBillingAddressSpecification())
-            ->and(new RequiredShippingSpecification())
-            ->and(new RequiredPaymentSpecification())
-        ;
+// Iterable approach
+//        foreach ($this->requirements as $requirement) {
+//            if (!$requirement->isSatisfiedBy($order)) {
+//                return false;
+//            }
+//        }
+//
+//        return true;
 
-        return $requirements->isSatisfiedBy($order);
+// Dynamic Tree approach
+//        $first = array_shift($this->requirements);
+//
+//        foreach ($this->requirements as $requirement) {
+//            $first = $first->and($requirement);
+//        }
+//
+//        return $first->isSatisfiedBy($order);
+
+// Static approach
+//        $requirements = new RequiredNonEmptyCartSpecification();
+//        $requirements
+//            ->and(new RequiredBillingAddressSpecification())
+//            ->and(new RequiredShippingSpecification())
+//            ->and(new RequiredPaymentSpecification())
+//        ;
+//
+//        return $requirements->isSatisfiedBy($order);
     }
 }
