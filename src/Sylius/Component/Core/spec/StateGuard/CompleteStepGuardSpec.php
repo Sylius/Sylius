@@ -16,17 +16,28 @@ namespace spec\Sylius\Component\Core\StateGuard;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Order\Requirements\RequiredBillingAddressSpecification;
+use Sylius\Component\Core\Order\Requirements\RequiredNonEmptyCartSpecification;
+use Sylius\Component\Core\Order\Requirements\RequiredPaymentSpecification;
+use Sylius\Component\Core\Order\Requirements\RequiredShippingSpecification;
 use Sylius\Component\Core\StateGuard\OrderGuardInterface;
 
 class CompleteStepGuardSpec extends ObjectBehavior
 {
     function it_implements_order_guard_interface()
     {
+        $this->beConstructedWith([]);
         $this->shouldImplement(OrderGuardInterface::class);
     }
 
     function it_is_satisfied_by_order(OrderInterface $order, AddressInterface $address)
     {
+        $this->beConstructedWith([
+            new RequiredNonEmptyCartSpecification(),
+            new RequiredPaymentSpecification(),
+            new RequiredShippingSpecification(),
+            new RequiredBillingAddressSpecification(),
+        ]);
         $order->isEmpty()->willReturn(false);
 
         $order->getBillingAddress()->willReturn($address);

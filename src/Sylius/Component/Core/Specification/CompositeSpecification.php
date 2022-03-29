@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Specification;
 
-abstract class CompositeSpecificationInterface implements SpecificationInterface
+abstract class CompositeSpecification implements SpecificationInterface
 {
     public function and(SpecificationInterface $specification): SpecificationInterface
     {
