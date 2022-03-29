@@ -1,0 +1,12 @@
+<div class="ui hidden divider"></div>
+<h4 class="ui top attached large header">{{ 'sylius.ui.money'|trans }}</h4>
+<div class="ui attached segment">
+    <div class="two fields">
+        {{ form_row(form.baseCurrency) }}
+        {{ form_row(form.currencies) }}
+    </div>
+</div>
+<div class="ui attached segment">
+    {{ form_row(form.defaultTaxZone) }}
+    {{ form_row(form.taxCalculationStrategy) }}
+</div>

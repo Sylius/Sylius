@@ -1,0 +1,7 @@
+<div class="scrolling menu">
+    {% for channel in channels %}
+        <a href="{{ path('sylius_admin_dashboard', {'channel': channel.code}) }}" class="item">
+            {% include '@SyliusAdmin/Common/_channel.html.twig' %}
+        </a>
+    {% endfor %}
+</div>
