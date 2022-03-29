@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Specification;
 
-class AndSpecification extends CompositeSpecification
+class AndSpecification extends CompositeSpecificationInterface
 {
     public function __construct(
-        private Specification $left,
-        private Specification $right,
+        private SpecificationInterface $left,
+        private SpecificationInterface $right,
     ) {
     }
 

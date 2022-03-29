@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Order\Requirements;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Specification\CompositeSpecification;
+use Sylius\Component\Core\Specification\CompositeSpecificationInterface;
 
-class RequiredShippingSpecification extends CompositeSpecification
+class RequiredShippingSpecification extends CompositeSpecificationInterface
 {
     public function isSatisfiedBy(object $candidate): bool
     {

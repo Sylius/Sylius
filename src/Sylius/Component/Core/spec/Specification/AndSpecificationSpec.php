@@ -14,35 +14,49 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Specification;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Specification\MemorySpecification;
-use Sylius\Component\Core\Specification\Specification;
+use Sylius\Component\Core\Specification\SpecificationInterface;
 
 class AndSpecificationSpec extends ObjectBehavior
 {
-    function let(): void
+    function let(SpecificationInterface $left, SpecificationInterface $right): void
     {
-        $this->beConstructedWith(
-            new MemorySpecification(true),
-            new MemorySpecification(true),
-        );
+        $this->beConstructedWith($left, $right);
     }
 
     function it_implements_specification(): void
     {
-        $this->shouldImplement(Specification::class);
+        $this->shouldImplement(SpecificationInterface::class);
     }
 
-    function it_is_satisfied_by_object(): void
+    function it_is_satisfied_by_object_when_left_and_right_are_true(SpecificationInterface $left, SpecificationInterface $right, $candidate): void
     {
-        $this->isSatisfiedBy(new class(){})->shouldBe(true);
+        $left->isSatisfiedBy($candidate)->willReturn(true);
+        $right->isSatisfiedBy($candidate)->willReturn(true);
+
+        $this->isSatisfiedBy($candidate)->shouldBe(true);
     }
 
-    function it_is_not_satisfied_by_object(): void
+    function it_is_not_satisfied_by_object_when_right_is_false(SpecificationInterface $left, SpecificationInterface $right, $candidate): void
     {
-        $this->beConstructedWith(
-            new MemorySpecification(true),
-            new MemorySpecification(false),
-        );
-        $this->isSatisfiedBy(new class(){})->shouldBe(false);
+        $left->isSatisfiedBy($candidate)->willReturn(true);
+        $right->isSatisfiedBy($candidate)->willReturn(false);
+
+        $this->isSatisfiedBy($candidate)->shouldBe(false);
+    }
+
+    function it_is_not_satisfied_by_object_when_left_is_false(SpecificationInterface $left, SpecificationInterface $right, $candidate): void
+    {
+        $left->isSatisfiedBy($candidate)->willReturn(false);
+        $right->isSatisfiedBy($candidate)->willReturn(true);
+
+        $this->isSatisfiedBy($candidate)->shouldBe(false);
+    }
+
+    function it_is_not_satisfied_by_object_when_both_are_false(SpecificationInterface $left, SpecificationInterface $right, $candidate): void
+    {
+        $left->isSatisfiedBy($candidate)->willReturn(false);
+        $right->isSatisfiedBy($candidate)->willReturn(false);
+
+        $this->isSatisfiedBy($candidate)->shouldBe(false);
     }
 }

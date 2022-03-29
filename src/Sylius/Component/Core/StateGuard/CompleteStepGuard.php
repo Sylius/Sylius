@@ -18,12 +18,12 @@ use Sylius\Component\Core\Order\Requirements\RequiredBillingAddressSpecification
 use Sylius\Component\Core\Order\Requirements\RequiredNonEmptyCartSpecification;
 use Sylius\Component\Core\Order\Requirements\RequiredPaymentSpecification;
 use Sylius\Component\Core\Order\Requirements\RequiredShippingSpecification;
-use Sylius\Component\Core\Specification\Specification;
+use Sylius\Component\Core\Specification\SpecificationInterface;
 
 class CompleteStepGuard implements OrderGuardInterface
 {
     /**
-     * @param iterable<Specification> $requirements
+     * @param iterable<SpecificationInterface> $requirements
      */
     public function __construct(private iterable $requirements)
     {
