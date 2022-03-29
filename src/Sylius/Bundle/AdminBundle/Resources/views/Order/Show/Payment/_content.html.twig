@@ -1,0 +1,8 @@
+<div class="content">
+    <div class="header">
+        {{ payment.method }}
+    </div>
+    <div class="description">
+        {{ money.format(payment.amount, payment.order.currencyCode) }}
+    </div>
+</div>

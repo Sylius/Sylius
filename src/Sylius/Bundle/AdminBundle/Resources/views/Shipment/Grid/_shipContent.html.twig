@@ -1,0 +1,8 @@
+{{ form_start(form, {'action': path('sylius_admin_shipment_ship', configuration.vars.route.parameters), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+<input type="hidden" name="_method" value="PUT">
+<div class="ui inline fields" style="margin: 0">
+    {{ form_widget(form.tracking, {'attr': {'placeholder': 'sylius.ui.tracking_code'|trans ~ '...'}}) }}
+    <button type="submit" class="ui labeled icon teal button"><i class="plane icon"></i> {{ 'sylius.ui.ship'|trans }}</button>
+</div>
+{{ form_row(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

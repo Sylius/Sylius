@@ -128,7 +128,7 @@ sylius_ui:
                     priority: 20
                 channels:
                     template: '@SyliusAdmin/Dashboard/ChannelSwitchMenu/_channels.html.twig'
-                    prioryty: 10
+                    priority: 10
         sylius.admin.layout.logo_content:
             blocks:
                 content:
@@ -138,4 +138,151 @@ sylius_ui:
             blocks:
                 content:
                     template: '@SyliusAdmin/ProductVariant/Tab/_inventory_content.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.details:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_details.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.taxonomy:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_taxonomy.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.pricing:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_pricing.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.shipping:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_shipping.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.media:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_media.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.mode_details:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_moreDetails.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.attributes:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_attributes.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.associations:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_associations.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.details_content:
+            blocks:
+                labels:
+                    template: '@SyliusAdmin/Product/Show/_detailsTable.html.twig'
+                    priority: 20
+                table:
+                    template: '@SyliusAdmin/Product/Show/_detailsTable.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.variant_content_shipping:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_variantContentShipping.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.variant_content_pricing:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_variantContentPricing.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.variant_item_content:
+            blocks:
+                button:
+                    template: '@SyliusAdmin/Product/Show/VariantItem/_button.html.twig'
+                    priority: 80
+                item:
+                    template: '@SyliusAdmin/Product/Show/VariantItem/_item.html.twig'
+                    priority: 70
+                option_values:
+                    template: '@SyliusAdmin/Product/Show/VariantItem/_optionValues.html.twig'
+                    priority: 60
+                tracking:
+                    template: '@SyliusAdmin/Product/Show/VariantItem/_tracking.html.twig'
+                    priority: 50
+                shipping:
+                    template: '@SyliusAdmin/Product/Show/VariantItem/_shipping.html.twig'
+                    priority: 40
+                tax_category:
+                    template: '@SyliusAdmin/Product/Show/VariantItem/_taxCategory.html.twig'
+                    priority: 30
+                stock:
+                    template: '@SyliusAdmin/Product/Show/VariantItem/_stock.html.twig'
+                    priority: 20
+                edit_button:
+                    template: '@SyliusAdmin/Product/Show/VariantItem/_editButton.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.variants:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_variants.html.twig'
+                    priority: 10
+        sylius.admin.shipment.ship_with_tracking_code_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Shipment/Grid/Action/_shipWithTrackingCodeContent.html.twig'
+                    priority: 10
+        sylius.admin.shipment.ship_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Shipment/Grid/_shipContent.html.twig'
+                    priority: 10
+        sylius.admin.shipment.show.content:
+            blocks:
+                header:
+                    template: '@SyliusAdmin/Shipment/Show/_headerContent.html.twig'
+                    priority: 30
+                content:
+                    template: '@SyliusAdmin/Shipment/Show/_breadcrumb.html.twig'
+                    priority: 20
+                shipment_units:
+                    template: '@SyliusAdmin/Shipment/Show/_shipmentUnits.html.twig'
+                    priority: 10
+        sylius.admin.shipment.show.breadcrumb:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Shipment/Show/_breadcrumb.html.twig'
+                    priority: 10
+        sylius.admin.order.show.header_items:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Order/Show/_headerItems.html.twig'
+                    priority: 10
+        sylius.admin.order.show.payment_content:
+            blocks:
+                header:
+                    template: '@SyliusAdmin/Order/Show/Payment/_header.html.twig'
+                    priority: 30
+                content:
+                    template: '@SyliusAdmin/Order/Show/Payment/_content.html.twig'
+                    priority: 20
+                transitions:
+                    template: '@SyliusAdmin/Order/Show/Payment/_transitions.html.twig'
+                    priority: 10
+        sylius.admin.order.show.shipment_content:
+            blocks:
+                header:
+                    template: '@SyliusAdmin/Order/Show/Shipment/_header.html.twig'
+                    priority: 30
+                content:
+                    template: '@SyliusAdmin/Order/Show/Shipment/_content.html.twig'
+                    priority: 20
+                transitions:
+                    template: '@SyliusAdmin/Order/Show/Shipment/_transitions.html.twig'
+                    priority: 10
+        sylius.admin.order.show.shipments_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Order/Show/_shipmentsContent.html.twig'
                     priority: 10
