@@ -1,0 +1,64 @@
+---------------------------------------------------------------------------
+
+by mmenozzi at 2022-02-28T11:48:02Z
+
+The build is red but I don't think it's related to these changes.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-03-19T10:38:46Z
+
+Hey @mmenozzi! I finally tried to reproduce this issue and it occurs with PHP 8.0, but not with PHP 8.1.
+It's an issue faced by Symfony too and they simply [bumped the minimum required PHP version to 8.1 in Symfony 6.1](https://symfony.com/blog/symfony-6-1-will-require-php-8-1).
+Perhaps Sylius should do the same in the next minor release.
+
+@Sylius/core-team I would like to see more opinions on this.
+
+---------------------------------------------------------------------------
+
+by Ferror at 2022-03-25T18:52:11Z
+
+I was also able to encounter this problem on ex. on Sylius-Standard.
+```
+<b>Fatal error</b>:  Failed to load class Symfony\Bundle\FrameworkBundle\Templating\EngineInterface used by typed property Sylius\Bundle\ShopBundle\Controller\SecurityWidgetController::$templatingEngine during preloading in <b>Unknown</b> on line <b>0</b><br />
+
+```
+
+From my perspective preloading provide value in production. If Symfony 4 is not supported anymore by Sylius and the class `EngineInterface` was deleted I don't see a reason why we should still keep a reference to it. Especially that we gain is simple typed classes and less ignored phpstan and psalm errors :)
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2022-03-25T19:27:01Z
+
+Thank you @Ferror this is exactly what I think.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-03-26T06:24:14Z
+
+Removing the reference to that interface will mitigate the problem at hand.
+However, if we choose to keep support for PHP 8.0, then we will need a test for preloading to avoid another issue.
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2022-03-26T08:39:33Z
+
+Yes I agree it could be useful to have a test for that but I think it should be done in a separate PR. Note also that there's already a kind of test: it's PHPStan/psalm.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-03-26T13:34:19Z
+
+Sure, I was also thinking of a separate PR. Psalm/PHPStorm will probably be enough for Sylius code, but another issue might be coming from it's 3rd party dependencies.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-03-29T07:24:01Z
+
+@mmenozzi are you willing to do the PR with testing for it?
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-03-29T07:28:24Z
+
+Thank you, Manuele! :1st_place_medal:
