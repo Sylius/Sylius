@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.10.4-slim-buster
 
 WORKDIR /usr/src/app
 
@@ -7,4 +7,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD [ "bash", "build.sh" ]
+CMD ["bash", "build.sh"]
