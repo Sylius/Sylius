@@ -186,14 +186,12 @@ sylius_ui:
                 table:
                     template: '@SyliusAdmin/Product/Show/_detailsTable.html.twig'
                     priority: 10
-        sylius.admin.simple_product.show.variant_content_shipping:
+        sylius.admin.simple_product.show.variant_content:
             blocks:
-                content:
+                shipping:
                     template: '@SyliusAdmin/Product/Show/_variantContentShipping.html.twig'
-                    priority: 10
-        sylius.admin.simple_product.show.variant_content_pricing:
-            blocks:
-                content:
+                    priority: 20
+                pricing:
                     template: '@SyliusAdmin/Product/Show/_variantContentPricing.html.twig'
                     priority: 10
         sylius.admin.simple_product.show.variant_item_content:
