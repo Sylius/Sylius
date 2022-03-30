@@ -115,3 +115,7 @@ bin/console doctrine:migrations:execute Sylius\\Bundle\\AdminApiBundle\\Migratio
 ### API v2
 
 For changes according to the API v2, please visit [API v2 upgrade file](UPGRADE-API-1.10.md).
+
+### chart.js
+
+Library chart.js upgraded from 2.9.3 to 3.7.1, please visit [3.x Migration Guide](https://www.chartjs.org/docs/latest/getting-started/v3-migration.html) if needed.
