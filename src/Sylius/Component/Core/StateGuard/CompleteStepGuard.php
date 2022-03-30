@@ -14,16 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\StateGuard;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Order\Requirements\RequiredBillingAddressSpecification;
-use Sylius\Component\Core\Order\Requirements\RequiredNonEmptyCartSpecification;
-use Sylius\Component\Core\Order\Requirements\RequiredPaymentSpecification;
-use Sylius\Component\Core\Order\Requirements\RequiredShippingSpecification;
-use Sylius\Component\Core\Specification\SpecificationInterface;
+use Sylius\Component\Core\Specification\Specification;
 
 class CompleteStepGuard implements OrderGuardInterface
 {
     /**
-     * @param iterable<SpecificationInterface> $requirements
+     * @param iterable<Specification> $requirements
      */
     public function __construct(private iterable $requirements)
     {
@@ -41,20 +37,20 @@ class CompleteStepGuard implements OrderGuardInterface
 //        return true;
 
 // Dynamic Tree approach
-//        $first = array_shift($this->requirements);
-//
-//        foreach ($this->requirements as $requirement) {
-//            $first = $first->and($requirement);
-//        }
-//
-//        return $first->isSatisfiedBy($order);
+        $first = array_shift($this->requirements);
+
+        foreach ($this->requirements as $requirement) {
+            $first = $first->and($requirement);
+        }
+
+        return $first->isSatisfiedBy($order);
 
 // Static approach
-//        $requirements = new RequiredNonEmptyCartSpecification();
+//        $requirements = new \Sylius\Component\Core\Order\Requirements\RequiredNonEmptyCartSpecification();
 //        $requirements
-//            ->and(new RequiredBillingAddressSpecification())
-//            ->and(new RequiredShippingSpecification())
-//            ->and(new RequiredPaymentSpecification())
+//            ->and(new \Sylius\Component\Core\Order\Requirements\RequiredBillingAddressSpecification())
+//            ->and(new \Sylius\Component\Core\Order\Requirements\RequiredShippingSpecification())
+//            ->and(new \Sylius\Component\Core\Order\Requirements\RequiredPaymentSpecification())
 //        ;
 //
 //        return $requirements->isSatisfiedBy($order);

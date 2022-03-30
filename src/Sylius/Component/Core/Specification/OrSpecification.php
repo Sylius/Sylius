@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Specification;
 
-class AndSpecification extends Specification
+class OrSpecification extends Specification
 {
     public function __construct(
         private Specification $left,
@@ -23,6 +23,6 @@ class AndSpecification extends Specification
 
     public function isSatisfiedBy(object $candidate): bool
     {
-        return $this->left->isSatisfiedBy($candidate) && $this->right->isSatisfiedBy($candidate);
+        return $this->left->isSatisfiedBy($candidate) || $this->right->isSatisfiedBy($candidate);
     }
 }

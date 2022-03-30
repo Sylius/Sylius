@@ -13,10 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Specification;
 
-abstract class CompositeSpecification implements SpecificationInterface
+abstract class Specification
 {
-    public function and(SpecificationInterface $specification): SpecificationInterface
+    public abstract function isSatisfiedBy(object $candidate): bool;
+
+    public function and(self $specification): self
     {
         return new AndSpecification($this, $specification);
+    }
+
+    public function or(self $specification): self
+    {
+        return new OrSpecification($this, $specification);
     }
 }

@@ -16,7 +16,7 @@ namespace spec\Sylius\Component\Core\Specification;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Specification\Specification;
 
-class AndSpecificationSpec extends ObjectBehavior
+class OrSpecificationSpec extends ObjectBehavior
 {
     function let(Specification $left, Specification $right): void
     {
@@ -28,7 +28,7 @@ class AndSpecificationSpec extends ObjectBehavior
         $this->shouldImplement(Specification::class);
     }
 
-    function it_is_satisfied_by_object_when_left_and_right_are_true(Specification $left, Specification $right, $candidate): void
+    function it_is_true_when_left_and_right_are_true(Specification $left, Specification $right, $candidate): void
     {
         $left->isSatisfiedBy($candidate)->willReturn(true);
         $right->isSatisfiedBy($candidate)->willReturn(true);
@@ -36,23 +36,23 @@ class AndSpecificationSpec extends ObjectBehavior
         $this->isSatisfiedBy($candidate)->shouldBe(true);
     }
 
-    function it_is_not_satisfied_by_object_when_right_is_false(Specification $left, Specification $right, $candidate): void
-    {
-        $left->isSatisfiedBy($candidate)->willReturn(true);
-        $right->isSatisfiedBy($candidate)->willReturn(false);
-
-        $this->isSatisfiedBy($candidate)->shouldBe(false);
-    }
-
-    function it_is_not_satisfied_by_object_when_left_is_false(Specification $left, Specification $right, $candidate): void
+    function it_is_true_when_right_is_true(Specification $left, Specification $right, $candidate): void
     {
         $left->isSatisfiedBy($candidate)->willReturn(false);
         $right->isSatisfiedBy($candidate)->willReturn(true);
 
-        $this->isSatisfiedBy($candidate)->shouldBe(false);
+        $this->isSatisfiedBy($candidate)->shouldBe(true);
     }
 
-    function it_is_not_satisfied_by_object_when_both_are_false(Specification $left, Specification $right, $candidate): void
+    function it_is_true_when_left_is_true(Specification $left, Specification $right, $candidate): void
+    {
+        $left->isSatisfiedBy($candidate)->willReturn(true);
+        $right->isSatisfiedBy($candidate)->willReturn(false);
+
+        $this->isSatisfiedBy($candidate)->shouldBe(true);
+    }
+
+    function it_is_false_when_left_and_right_are_false(Specification $left, Specification $right, $candidate): void
     {
         $left->isSatisfiedBy($candidate)->willReturn(false);
         $right->isSatisfiedBy($candidate)->willReturn(false);
