@@ -13,14 +13,12 @@ sylius_ui:
                 content:
                     template: '@SyliusAdmin/AdminUser/Form/_form.html.twig'
                     priority: 10
-        sylius.admin.admin_user.general_info:
+        sylius.admin.admin_user.first_column:
             blocks:
-                content:
+                general_info:
                     template: '@SyliusAdmin/AdminUser/Form/_generalInfo.html.twig'
-                    priority: 10
-        sylius.admin.admin_user.general_info_extended:
-            blocks:
-                content:
+                    priority: 20
+                general_info_extended:
                     template: '@SyliusAdmin/AdminUser/Form/_generalInfoExtended.html.twig'
                     priority: 10
         sylius.admin.admin_user.columns:
@@ -31,19 +29,15 @@ sylius_ui:
                 second_column:
                     template: '@SyliusAdmin/AdminUser/Form/_secondColumn.html.twig'
                     priority: 10
-        sylius.admin.admin_user.additional_information:
+        sylius.admin.admin_user.second_column:
             blocks:
-                content:
+                additional_information:
                     template: '@SyliusAdmin/AdminUser/Form/_additionalInformation.html.twig'
-                    priority: 10
-        sylius.admin.admin_user.avatar:
-            blocks:
-                content:
+                    priority: 30
+                avatar:
                     template: '@SyliusAdmin/AdminUser/Form/_avatar.html.twig'
-                    priority: 10
-        sylius.admin.admin_user.preferences:
-            blocks:
-                content:
+                    priority: 20
+                preferences:
                     template: '@SyliusAdmin/AdminUser/Form/_preferences.html.twig'
                     priority: 10
         sylius.admin.channel.form_content:

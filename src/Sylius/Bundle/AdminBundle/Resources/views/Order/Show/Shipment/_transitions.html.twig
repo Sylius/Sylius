@@ -1,20 +1,28 @@
-{% if sm_can(shipment, 'ship', 'sylius_shipment') %}
-    {{ render(path('sylius_admin_partial_shipment_ship', {'orderId': order.id, 'id': shipment.id})) }}
-{% endif %}
-{% if shipment.tracking is not empty %}
-    <div class="ui segment">
-        <span class="ui top attached icon label"><i class="plane icon"></i> {{ 'sylius.ui.tracking_code'|trans|upper }}</span>
-        <p>{{ shipment.tracking }}</p>
-    </div>
-{% endif %}
-{% if shipment.state != cart %}
-    <a class="ui icon labeled tiny fluid button" style="color: gray; margin-top: 10px;" href="{{ path('sylius_admin_shipment_show', {'id': shipment.id}) }}" {{ sylius_test_html_attribute('shipment-show-button') }}>
-        <i class="icon search"></i>{{ 'sylius.ui.show'|trans }}
-    </a>
-{% endif %}
-{% if shipment.state == shipped %}
-    {% set path = path('sylius_admin_shipment_resend_confirmation_email', {'id': shipment.id, '_csrf_token': csrf_token(shipment.id)}) %}
-    <a href="{{ path }}" class="ui icon labeled tiny fluid button" style="margin: 7px 0 0;" {{ sylius_test_html_attribute('resend-shipment-confirmation-email') }}>
-        <i class="send icon"></i> {{ 'sylius.ui.resend_the_shipment_confirmation_email'|trans }}
-    </a>
-{% endif %}
+{% block state_machine %}
+    {% if sm_can(shipment, 'ship', 'sylius_shipment') %}
+        {{ render(path('sylius_admin_partial_shipment_ship', {'orderId': order.id, 'id': shipment.id})) }}
+    {% endif %}
+{% endblock %}
+
+{% block tracking %}
+    {% if shipment.tracking is not empty %}
+        <div class="ui segment">
+            <span class="ui top attached icon label"><i class="plane icon"></i> {{ 'sylius.ui.tracking_code'|trans|upper }}</span>
+            <p>{{ shipment.tracking }}</p>
+        </div>
+    {% endif %}
+{% enblock %}
+
+{% block state %}
+    {% if shipment.state != cart %}
+        <a class="ui icon labeled tiny fluid button" style="color: gray; margin-top: 10px;" href="{{ path('sylius_admin_shipment_show', {'id': shipment.id}) }}" {{ sylius_test_html_attribute('shipment-show-button') }}>
+            <i class="icon search"></i>{{ 'sylius.ui.show'|trans }}
+        </a>
+    {% endif %}
+    {% if shipment.state == shipped %}
+        {% set path = path('sylius_admin_shipment_resend_confirmation_email', {'id': shipment.id, '_csrf_token': csrf_token(shipment.id)}) %}
+        <a href="{{ path }}" class="ui icon labeled tiny fluid button" style="margin: 7px 0 0;" {{ sylius_test_html_attribute('resend-shipment-confirmation-email') }}>
+            <i class="send icon"></i> {{ 'sylius.ui.resend_the_shipment_confirmation_email'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
