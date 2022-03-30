@@ -267,23 +267,35 @@ sylius_ui:
             blocks:
                 header:
                     template: '@SyliusAdmin/Order/Show/Payment/_header.html.twig'
-                    priority: 30
+                    priority: 40
                 content:
                     template: '@SyliusAdmin/Order/Show/Payment/_content.html.twig'
+                    priority: 30
+                transitions_complete:
+                    template: '@SyliusAdmin/Order/Show/Payment/_stateMachineComplete.html.twig'
                     priority: 20
-                transitions:
-                    template: '@SyliusAdmin/Order/Show/Payment/_transitions.html.twig'
+                transitions_refund:
+                    template: '@SyliusAdmin/Order/Show/Payment/_stateMachineRefund.html.twig'
                     priority: 10
         sylius.admin.order.show.shipment_content:
             blocks:
                 header:
                     template: '@SyliusAdmin/Order/Show/Shipment/_header.html.twig'
-                    priority: 30
+                    priority: 60
                 content:
                     template: '@SyliusAdmin/Order/Show/Shipment/_content.html.twig'
-                    priority: 20
+                    priority: 50
                 transitions:
-                    template: '@SyliusAdmin/Order/Show/Shipment/_transitions.html.twig'
+                    template: '@SyliusAdmin/Order/Show/Shipment/_stateMachineShip.html.twig'
+                    priority: 40
+                shipment_tracking:
+                    template: '@SyliusAdmin/Order/Show/Shipment/_shipmentTracking.html.twig'
+                    priority: 30
+                shipment_show:
+                    template: '@SyliusAdmin/Order/Show/Shipment/_shipmentShow.html.twig'
+                    priority: 20
+                shipment_email:
+                    template: '@SyliusAdmin/Order/Show/Shipment/_shipmentEmail.html.twig'
                     priority: 10
         sylius.admin.order.show.shipments_content:
             blocks:
