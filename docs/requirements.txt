@@ -1,5 +1,6 @@
 sphinx==1.8.5
 docutils<0.18
+jinja2==3.0.0
 pyOpenSSL
 requests[security]
 sphinx-copybutton
