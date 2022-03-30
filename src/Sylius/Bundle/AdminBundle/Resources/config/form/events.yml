@@ -6,37 +6,35 @@ sylius_ui:
         sylius.admin.admin_user.form_content:
             blocks:
                 content:
-                    template: '@SyliusAdmin/AdminUser/_form_content.html.twig'
+                    template: '@SyliusAdmin/AdminUser/_formContent.html.twig'
                     priority: 10
         sylius.admin.admin_user.form:
             blocks:
                 content:
                     template: '@SyliusAdmin/AdminUser/Form/_form.html.twig'
                     priority: 10
-        sylius.admin.admin_user.first_column:
-            blocks:
-                content:
-                    template: '@SyliusAdmin/AdminUser/Form/_first_column.html.twig'
-                    priority: 10
         sylius.admin.admin_user.general_info:
             blocks:
                 content:
-                    template: '@SyliusAdmin/AdminUser/Form/_general_info.html.twig'
+                    template: '@SyliusAdmin/AdminUser/Form/_generalInfo.html.twig'
                     priority: 10
         sylius.admin.admin_user.general_info_extended:
             blocks:
                 content:
-                    template: '@SyliusAdmin/AdminUser/Form/_general_info_extended.html.twig'
+                    template: '@SyliusAdmin/AdminUser/Form/_generalInfoExtended.html.twig'
                     priority: 10
-        sylius.admin.admin_user.second_column:
+        sylius.admin.admin_user.columns:
             blocks:
-                content:
-                    template: '@SyliusAdmin/AdminUser/Form/_second_column.html.twig'
+                first_column:
+                    template: '@SyliusAdmin/AdminUser/Form/_firstColumn.html.twig'
+                    priority: 20
+                second_column:
+                    template: '@SyliusAdmin/AdminUser/Form/_secondColumn.html.twig'
                     priority: 10
         sylius.admin.admin_user.additional_information:
             blocks:
                 content:
-                    template: '@SyliusAdmin/AdminUser/Form/_additional_information.html.twig'
+                    template: '@SyliusAdmin/AdminUser/Form/_additionalInformation.html.twig'
                     priority: 10
         sylius.admin.admin_user.avatar:
             blocks:
@@ -51,15 +49,15 @@ sylius_ui:
         sylius.admin.channel.form_content:
             blocks:
                 content:
-                    template: '@SyliusAdmin/Channel/_form_content.html.twig'
+                    template: '@SyliusAdmin/Channel/_formContent.html.twig'
                     priority: 10
         sylius.admin.channel.form:
             blocks:
                 first_column:
-                    template: '@SyliusAdmin/Channel/Form/_first_column.html.twig'
+                    template: '@SyliusAdmin/Channel/Form/_firstColumn.html.twig'
                     priority: 30
                 second_column:
-                    template: '@SyliusAdmin/Channel/Form/_second_column.html.twig'
+                    template: '@SyliusAdmin/Channel/Form/_secondColumn.html.twig'
                     priority: 20
         sylius.admin.channel.first_column_content:
             blocks:
@@ -75,16 +73,16 @@ sylius_ui:
         sylius.admin.channel.second_column_content:
             blocks:
                 general:
-                    template: '@SyliusAdmin/Channel/Form/_billing_data.html.twig'
+                    template: '@SyliusAdmin/Channel/Form/_billingData.html.twig'
                     priority: 20
                 money:
-                    template: '@SyliusAdmin/Channel/Form/_look_and_feel.html.twig'
+                    template: '@SyliusAdmin/Channel/Form/_lookAndFeel.html.twig'
                     priority: 10
 
         sylius.admin.customer.form_content:
             blocks:
                 content:
-                    template: '@SyliusAdmin/Customer/Form/_form_content.html.twig'
+                    template: '@SyliusAdmin/Customer/Form/_formContent.html.twig'
                     priority: 10
         sylius.admin.customer.form:
             blocks:
@@ -94,7 +92,7 @@ sylius_ui:
         sylius.admin.customer.first_column:
             blocks:
                 content:
-                    template: '@SyliusAdmin/Customer/Form/_form_first_column.html.twig'
+                    template: '@SyliusAdmin/Customer/Form/_formFirstColumn.html.twig'
                     priority: 10
         sylius.admin.customer.customer_details:
             blocks:
@@ -104,22 +102,22 @@ sylius_ui:
         sylius.admin.customer.extra_information:
             blocks:
                 content:
-                    template: '@SyliusAdmin/Customer/Form/_extra_information.html.twig'
+                    template: '@SyliusAdmin/Customer/Form/_extraInformation.html.twig'
                     priority: 10
         sylius.admin.customer.second_column:
             blocks:
                 content:
-                    template: '@SyliusAdmin/Customer/Form/_form_second_column.html.twig'
+                    template: '@SyliusAdmin/Customer/Form/_formSecondColumn.html.twig'
                     priority: 10
         sylius.admin.customer.account_credentials:
             blocks:
                 content:
-                    template: '@SyliusAdmin/Customer/Form/_account_credentials.html.twig'
+                    template: '@SyliusAdmin/Customer/Form/_accountCredentials.html.twig'
                     priority: 10
         sylius.admin.dashboard.channel_switch_content:
             blocks:
                 content:
-                    template: '@SyliusAdmin/Dashboard/_channelSwitch_content.html.twig'
+                    template: '@SyliusAdmin/Dashboard/_channelSwitchContent.html.twig'
                     priority: 10
         sylius.admin.dashboard.channel_switch_menu:
             blocks:
@@ -132,12 +130,12 @@ sylius_ui:
         sylius.admin.layout.logo_content:
             blocks:
                 content:
-                    template: '@SyliusAdmin/Layout/_logo_content.html.twig'
+                    template: '@SyliusAdmin/Layout/_logoContent.html.twig'
                     priority: 10
         sylius.admin.product_variant.tab_content:
             blocks:
                 content:
-                    template: '@SyliusAdmin/ProductVariant/Tab/_inventory_content.html.twig'
+                    template: '@SyliusAdmin/ProductVariant/Tab/_inventoryContent.html.twig'
                     priority: 10
         sylius.admin.simple_product.show.details:
             blocks:
