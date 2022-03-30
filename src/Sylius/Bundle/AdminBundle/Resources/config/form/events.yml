@@ -55,14 +55,17 @@ sylius_ui:
             blocks:
                 first_column:
                     template: '@SyliusAdmin/Channel/Form/_firstColumn.html.twig'
-                    priority: 30
+                    priority: 20
                 second_column:
                     template: '@SyliusAdmin/Channel/Form/_secondColumn.html.twig'
-                    priority: 20
+                    priority: 10
         sylius.admin.channel.first_column_content:
             blocks:
                 general:
                     template: '@SyliusAdmin/Channel/Form/_general.html.twig'
+                    priority: 40
+                general_host:
+                    template: '@SyliusAdmin/Channel/Form/_generalHost.html.twig'
                     priority: 30
                 money:
                     template: '@SyliusAdmin/Channel/Form/_money.html.twig'
@@ -75,10 +78,9 @@ sylius_ui:
                 general:
                     template: '@SyliusAdmin/Channel/Form/_billingData.html.twig'
                     priority: 20
-                money:
+                look_and_feel:
                     template: '@SyliusAdmin/Channel/Form/_lookAndFeel.html.twig'
                     priority: 10
-
         sylius.admin.customer.form_content:
             blocks:
                 content:
@@ -137,6 +139,11 @@ sylius_ui:
                 content:
                     template: '@SyliusAdmin/ProductVariant/Tab/_inventoryContent.html.twig'
                     priority: 10
+        sylius.admin.product.tab_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Tab/_inventoryContent.html.twig'
+                    priority: 10
         sylius.admin.simple_product.show.details:
             blocks:
                 content:
@@ -162,7 +169,7 @@ sylius_ui:
                 content:
                     template: '@SyliusAdmin/Product/Show/_media.html.twig'
                     priority: 10
-        sylius.admin.simple_product.show.mode_details:
+        sylius.admin.simple_product.show.more_details:
             blocks:
                 content:
                     template: '@SyliusAdmin/Product/Show/_moreDetails.html.twig'
@@ -180,7 +187,7 @@ sylius_ui:
         sylius.admin.simple_product.show.details_content:
             blocks:
                 labels:
-                    template: '@SyliusAdmin/Product/Show/_detailsTable.html.twig'
+                    template: '@SyliusAdmin/Product/Show/_detailsLabels.html.twig'
                     priority: 20
                 table:
                     template: '@SyliusAdmin/Product/Show/_detailsTable.html.twig'
@@ -231,10 +238,15 @@ sylius_ui:
                 content:
                     template: '@SyliusAdmin/Shipment/Grid/Action/_shipWithTrackingCodeContent.html.twig'
                     priority: 10
-        sylius.admin.shipment.ship_content:
+        sylius.admin.shipment.grid.ship_content:
             blocks:
                 content:
                     template: '@SyliusAdmin/Shipment/Grid/_shipContent.html.twig'
+                    priority: 10
+        sylius.admin.shipment.partial.ship_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Shipment/Partial/_shipContent.html.twig'
                     priority: 10
         sylius.admin.shipment.show.content:
             blocks:
