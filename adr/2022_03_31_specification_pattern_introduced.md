@@ -115,9 +115,11 @@ final class Guard
 Same in PHP:
 ```php
 new Guard(
-    new FirstCustomSpecification(),
-    new SecondCustomSpecification(),
-    new ThirdCustomSpecification(),
+    [ // array or some other iterable
+        new FirstCustomSpecification(),
+        new SecondCustomSpecification(),
+        new ThirdCustomSpecification(),
+    ]
 );
 ```
 
@@ -215,6 +217,7 @@ final class Guard
         <argument type="service" id="sylius.state_guard.state_name.specification"/>
     </service>
     
+    <!--  But creating factory would be much cleaner approach  -->
     <service id="sylius.state_guard.state_name.specification" class="AndSpecification">
         <argument type="service" id="sylius.specification.first" />
         <argument type="service" id="sylius.specification.second" />
@@ -268,9 +271,8 @@ final class Guard
     ) {
     }
 
-    public function isSatisfiedByIterableApproach(OrderInterface $order): bool
+    public function isSatisfiedBy(OrderInterface $order): bool
     {
-        // Iterable approach
         foreach ($this->requirements as $requirement) {
             if (!$requirement->isSatisfiedBy($order)) {
                 return false;
@@ -303,13 +305,15 @@ final class Guard
 Same in PHP:
 ```php
 new Guard(
-    new FirstCustomSpecification(),
-    new SecondCustomSpecification(),
-    new ThirdCustomSpecification(),
+    [// array or some other iterable 
+        new FirstCustomSpecification(),
+        new SecondCustomSpecification(),
+        new ThirdCustomSpecification(),
+    ]
 );
 ```
 
-* Good, because [argument a]
+* Good, because it's the simplest approach
 * Bad, because [argument b]
 * … <!-- numbers of pros and cons can vary -->
 
