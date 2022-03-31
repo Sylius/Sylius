@@ -21,7 +21,7 @@ The new concept would reduce the number of requests to the API and get rid of th
 
 ## Considered Options
 
-### Option 1 - Tree-Based Specification Pattern
+### Option 1 - Tree-Based Builder Specification Pattern
 #### Diagram
 ![](assets/2022_03_31_specification_pattern_introduced/specification_pattern_uml_option_1.png)
 
@@ -216,7 +216,16 @@ final class Guard
     </service>
 </services>
 ```
-
+Same in PHP:
+```php
+new Guard(
+    new AndSpecification(
+        new FirstCustomSpecification(),
+        new SecondCustomSpecification(),
+        new ThirdCustomSpecification(),
+    )
+);
+```
 #### Advanced Dependency Injection Example
 ```xml
 <services>
@@ -258,7 +267,7 @@ new Guard(
 ```
 
 * Good, because with a factory you can handle pretty complex problem
-* Good, because the Guards may not be needed
+* Good, because the Guard does not vote
 * Good, because it provides `OR` and `AND` abstraction
 * Good, because it provides generic interface
 
@@ -326,27 +335,25 @@ new Guard(
 
 * Good, because it is the simplest approach
 * Good, because it provides generic interface
-* Good, because we can use tagged_iterator in a simple way
+* Good, because we can use `tagged_iterator` in a simple way
 * Bad, because it lacks `OR` and `AND` abstraction
+* Bad, because Guard vote
 
 ## Decision Outcome
 
-Deciding on which option to choose I kinda decided to step back and think about how would User would like to use them.
+Before deciding on which option to choose I would like to step back and think about how would User use them.
 
-If we want to preserve `tagged_iterator` the solution will always be `AND` or `OR` operation only. In that case
+Let's say the user would like to change the Guard logic. What would be the simplest ways? - To override Guard service.
+Let's say the user would like to extend guard logic. What would be the simplest ways? - To create custom Specification,
+define it as a service and tag it.
+
+Preserving `tagged_iterator` results with solution being `AND` or `OR` operation only. In that case
 **attaching additional Specification will be user-friendly**, but more complex logic will require
 overriding/implementing Guard.
 
 Without `tagged_iterator` we could focus on building logic as a composite service and pass the built Specification to
 the constructor of the Guard. Building Specification will require some sort of Factory class.
 
-Let's say the user would like to change the Guard logic. What would be the simplest ways? - To override Guard service.
-Let's say the user would like to extend guard logic. What would be the simplest ways? - To create custom Specification,
-define it as a service and tag it.
-
 Option 2 is extension of Option 3 with logical operation moved to the `AND` and `OR` Specifications.
 
 Chosen option: **Option 2 - Tree-Based Iterator Specification**
-
-It provides a simple and clean Specification interface and will be user-friendly in
-time of change. 
