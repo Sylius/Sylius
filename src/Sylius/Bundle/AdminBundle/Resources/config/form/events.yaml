@@ -287,13 +287,13 @@ sylius_ui:
                     template: '@SyliusAdmin/Order/Show/Shipment/_stateMachineShip.html.twig'
                     priority: 40
                 shipment_tracking:
-                    template: '@SyliusAdmin/Order/Show/Shipment/_shipmentTracking.html.twig'
+                    template: '@SyliusAdmin/Order/Show/Shipment/_tracking.html.twig'
                     priority: 30
                 shipment_show:
-                    template: '@SyliusAdmin/Order/Show/Shipment/_shipmentShow.html.twig'
+                    template: '@SyliusAdmin/Order/Show/Shipment/_showButton.html.twig'
                     priority: 20
                 shipment_email:
-                    template: '@SyliusAdmin/Order/Show/Shipment/_shipmentEmail.html.twig'
+                    template: '@SyliusAdmin/Order/Show/Shipment/_resendConfirmationEmailButton.html.twig'
                     priority: 10
         sylius.admin.order.show.shipments_content:
             blocks:
