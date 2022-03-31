@@ -1,0 +1,7 @@
+<td>
+    {% if variant.tracked %}
+        <span class="ui teal label"><i class="checkmark icon"></i>{{ 'sylius.ui.tracked'|trans }}</span>
+    {% else %}
+        <span class="ui red label"><i class="remove icon"></i>{{ 'sylius.ui.not_tracked'|trans }}</span>
+    {% endif %}
+</td>

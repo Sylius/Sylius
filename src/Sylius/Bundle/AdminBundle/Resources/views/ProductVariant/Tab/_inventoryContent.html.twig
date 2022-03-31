@@ -1,0 +1,13 @@
+<h3 class="ui dividing header">{{ 'sylius.ui.inventory'|trans }}</h3>
+<div class="ui segment">
+    {{ form_row(form.onHand) }}
+    {{ form_row(form.tracked) }}
+
+    <div class="ui pointing above ignored label">
+        {{ form_help(form.tracked) }}
+    </div>
+
+    {{ form_row(form.version) }}
+</div>
+
+{{ sylius_template_event(['sylius.admin.product_variant.' ~ action ~ '.tab_inventory', 'sylius.admin.product_variant.tab_inventory'], {'form': form}) }}
