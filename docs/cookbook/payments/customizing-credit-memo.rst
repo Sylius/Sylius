@@ -32,18 +32,38 @@ You can achieve that by updating it's path in your ``.env`` file like in example
 
         SYLIUS_REFUND_LOGO_FILE=%kernel.project_dir%/public/assets/custom-logo.png
 
-If you have a permission issue when generating a credit memo, you may also need to update ``config/packages/knp_snappy.yaml`` file with an ``allow`` parameter:
+Make sure to clear the cache each time the configuration is changed.
+
+.. image:: ../../_images/cookbook/custom-credit-memo/customized-pdf.png
+
+How to add more graphics to the Credit Memo?
+--------------------------------------------
+In case you would like to add an extra graphic to your Credit Memo twig template, it is super important to provide access to this file.
+Let's say you would like to add second image to the Credit Memo.
+You may face the problem that ``wkhtmltopdf`` from version 0.12.6 disables access to the local files by default.
+Fortunately, there are two options to deal with it:
+
+* Update the ``config/packages/knp_snappy.yaml`` file by adding access to local files globally:
 
     .. code-block:: yaml
 
         knp_snappy:
             pdf:
                 options:
-                    allow: '%env(resolve:SYLIUS_REFUND_LOGO_FILE)%'
+                    enable-local-file-access: true
 
-Make sure to clear the cache each time the configuration is changed.
+* Specify the exact list of accessible files. As you may have noticed, the logo displays correctly even though local file access is not enabled.
+  This is because we handle it by specifying the exact list of allowed files.
+  The list can be replaced with the ``sylius_refund.pdf_generator.allowed_files`` parameter in the ``config/packages/_sylius.yaml``:
 
-.. image:: ../../_images/cookbook/custom-credit-memo/customized-pdf.png
+    .. code-block:: yaml
+
+        sylius_refund:
+            pdf_generator:
+                allowed_files:
+                    - '%env(default:default_logo_file:resolve:SYLIUS_REFUND_LOGO_FILE)%'
+                    - 'path/image.png'
+                    - 'directory/with/allowed/files'
 
 Displaying additional Customer's data on Credit Memo
 ----------------------------------------------------
