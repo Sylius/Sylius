@@ -61,11 +61,11 @@ sylius_ui:
                 general_host:
                     template: '@SyliusAdmin/Channel/Form/_generalHost.html.twig'
                     priority: 30
-                money:
-                    template: '@SyliusAdmin/Channel/Form/_money.html.twig'
-                    priority: 20
                 countries:
                     template: '@SyliusAdmin/Channel/Form/_countries.html.twig'
+                    priority: 20
+                money:
+                    template: '@SyliusAdmin/Channel/Form/_money.html.twig'
                     priority: 10
         sylius.admin.channel.second_column_content:
             blocks:
@@ -128,12 +128,12 @@ sylius_ui:
                 content:
                     template: '@SyliusAdmin/Layout/_logoContent.html.twig'
                     priority: 10
-        sylius.admin.product_variant.tab_content:
+        sylius.admin.product_variant.tab_inventory_content:
             blocks:
                 content:
                     template: '@SyliusAdmin/ProductVariant/Tab/_inventoryContent.html.twig'
                     priority: 10
-        sylius.admin.product.tab_content:
+        sylius.admin.product.tab_inventory_content:
             blocks:
                 content:
                     template: '@SyliusAdmin/Product/Tab/_inventoryContent.html.twig'
