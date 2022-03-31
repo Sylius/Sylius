@@ -81,21 +81,8 @@ final class Guard
     ) {
     }
 
-    public function isSatisfiedByIterableApproach(OrderInterface $order): bool
+    public function isSatisfiedBy(OrderInterface $order): bool
     {
-        // Iterable approach
-        foreach ($this->requirements as $requirement) {
-            if (!$requirement->isSatisfiedBy($order)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    public function isSatisfiedByDynamicTreeApproach(OrderInterface $order): bool
-    {
-        // Dynamic Tree approach
         $first = array_shift($this->requirements);
 
         foreach ($this->requirements as $requirement) {
@@ -261,11 +248,71 @@ new Guard(
 * … <!-- numbers of pros and cons can vary -->
 * Good, because Guards may not be needed
 
-## Decision Outcome
+### Option 3 - Order-Based Specification
+
+#### Implementation Example
+
+```php
+interface SpecificationInterface
+{
+    public function isSatisfiedBy(object $candidate): bool;
+}
+
+final class Guard
+{
+    /**
+     * @param iterable<SpecificationInterface> $requirements
+     */
+    public function __construct(
+        private iterable $requirements
+    ) {
+    }
+
+    public function isSatisfiedByIterableApproach(OrderInterface $order): bool
+    {
+        // Iterable approach
+        foreach ($this->requirements as $requirement) {
+            if (!$requirement->isSatisfiedBy($order)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+```
+#### Dependency Injection Example
+```xml
+<services>
+    <service id="sylius.state_guard.state_name" class="Guard">
+        <argument type="tagged_iterator" id="sylius.state_guard.state_name.specification"/>
+    </service>
+    
+    <service id="sylius.specification.first" class="FirstCustomSpecification">
+        <tag name="sylius.state_guard.state_name.specification" type="service" />
+    </service>
+    <service id="sylius.specification.second" class="SecondCustomSpecification">
+        <tag name="sylius.state_guard.state_name.specification" type="service" />
+    </service>
+    <service id="sylius.specification.third" class="ThirdCustomSpecification">
+        <tag name="sylius.state_guard.state_name.specification" type="service" />
+    </service>
+</services>
+```
+
+Same in PHP:
+```php
+new Guard(
+    new FirstCustomSpecification(),
+    new SecondCustomSpecification(),
+    new ThirdCustomSpecification(),
+);
+```
+
+* Good, because [argument a]
+* Bad, because [argument b]
+* … <!-- numbers of pros and cons can vary -->
+
+## Decision Outcome (TODO)
 
 Chosen option: "[option 1]", because [justification. e.g., only option, which meets k.o. criterion decision driver | which resolves force force | … | comes out best (see below)].
-
-## References <!-- optional -->
-
-* [Link type] [Link to ADR] <!-- example: Refined by [ADR-0005](0005-example.md) -->
-* … <!-- numbers of links can vary -->
