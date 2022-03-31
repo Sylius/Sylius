@@ -25,7 +25,7 @@ The new concept would reduce amount of requests to the API and get rid of the or
 #### Diagram
 ![](assets/2022_03_31_specification_pattern_introduced/specification_pattern_uml_option_1.png)
 
-#### Code Example
+#### Implementation Example
 
 ```php
 abstract class Specification
@@ -106,15 +106,39 @@ final class Guard
     }
 }
 ```
-DI example
+#### Dependency Injection Example
 ```xml
+<services>
+    <service id="sylius.state_guard.state_name" class="Guard">
+        <argument type="tagged_iterator" id="sylius.state_guard.state_name.specification"/>
+    </service>
+    
+    <service id="sylius.specification.first" class="FirstCustomSpecification">
+        <tag name="sylius.state_guard.state_name.specification" type="service" />
+    </service>
+    <service id="sylius.specification.second" class="SecondCustomSpecification">
+        <tag name="sylius.state_guard.state_name.specification" type="service" />
+    </service>
+    <service id="sylius.specification.third" class="ThirdCustomSpecification">
+        <tag name="sylius.state_guard.state_name.specification" type="service" />
+    </service>
+</services>
+```
+
+Same in PHP:
+```php
+new Guard(
+    new FirstCustomSpecification(),
+    new SecondCustomSpecification(),
+    new ThirdCustomSpecification(),
+);
 ```
 
 * Good, because [argument a]
 * Bad, because [argument b]
 * … <!-- numbers of pros and cons can vary -->
 
-### Option 2
+### Option 2 - Iterator-Based Specification
 
 ```php
 interface SpecificationInterface
@@ -178,20 +202,58 @@ final class Guard
         return $this->requirement->isSatisfiedBy($order);
     }
 }
-
-new OrSpecification(
-    new AndSpecification(
-        new XSpecification(),
-        new YSpecification(),
-    ),
-    new ZSpecification(),
-);
+```
+#### Dependency Injection Example
+```xml
+<services>
+    <service id="sylius.state_guard.state_name" class="Guard">
+        <argument type="service" id="sylius.state_guard.state_name.specification"/>
+    </service>
+    
+    <service id="sylius.state_guard.state_name.specification" class="AndSpecification">
+        <argument type="service" id="FirstCustomSpecification" />
+        <argument type="service" id="SecondCustomSpecification" />
+    </service>
+    
+    <service id="sylius.specification.first"  class="FirstCustomSpecification" />
+    <service id="sylius.specification.second" class="SecondCustomSpecification" />
+    <service id="sylius.specification.third"  class="ThirdCustomSpecification" />
+</services>
 ```
 
-
-
-DI example
+#### Advanced Dependency Injection Example
 ```xml
+<services>
+    <service id="sylius.state_guard.state_name" class="Guard">
+        <argument type="service" id="sylius.state_guard.state_name.specification"/>
+    </service>
+    
+    <service id="sylius.state_guard.state_name.specification" class="AndSpecification">
+        <argument type="service" id="sylius.specification.first" />
+        <argument type="service" id="sylius.specification.second" />
+        <argument type="service" id="sylius.state_guard.state_name.partial_specification" />
+    </service>
+    
+    <service id="sylius.state_guard.state_name.partial_specification" class="OrSpecification">
+        <argument type="service" id="SecondCustomSpecification" />
+    </service>
+    
+    <service id="sylius.specification.first"  class="FirstCustomSpecification" />
+    <service id="sylius.specification.second" class="SecondCustomSpecification" />
+    <service id="sylius.specification.third"  class="ThirdCustomSpecification" />
+</services>
+```
+Same in PHP:
+```php
+new Guard(
+    new AndSpecification(
+        new FirstCustomSpecification(),
+        new SecondCustomSpecification(),
+        new OrSpecification(
+            new ThirdCustomSpecification(),
+        ),
+    )
+);
 ```
 
 * Good, because [argument a]
