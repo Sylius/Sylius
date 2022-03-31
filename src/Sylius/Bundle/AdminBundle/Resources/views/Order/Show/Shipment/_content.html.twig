@@ -1,0 +1,11 @@
+<div class="content">
+    <div class="header">
+        {{ shipment.method }}
+    </div>
+    <div class="description">
+        <i class="globe icon"></i>{{ shipment.method.zone }}
+    </div>
+    {% if shipment.shippedAt is not empty %}
+        {{ 'sylius.ui.shipped_at'|trans }}: <span class="shipped-at-date">{{ shipment.shippedAt|date('d-m-Y H:i:s') }}</span>
+    {% endif %}
+</div>

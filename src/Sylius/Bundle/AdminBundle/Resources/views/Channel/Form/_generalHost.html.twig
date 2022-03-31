@@ -1,0 +1,13 @@
+<div class="ui attached segment">
+    <div class="field">
+        {{ form_label(form.hostname) }}
+        <div class="ui labeled input">
+            <div class="ui label">https://</div>
+            {{ form_widget(form.hostname) }}
+        </div>
+        {{ form_errors(form.hostname) }}
+    </div>
+    {{ form_row(form.contactEmail) }}
+    {{ form_row(form.contactPhoneNumber) }}
+    {{ form_row(form.description, {'attr': {'rows' : '3'}}) }}
+</div>

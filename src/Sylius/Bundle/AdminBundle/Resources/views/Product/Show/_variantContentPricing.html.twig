@@ -1,31 +1,33 @@
 {% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
 
-<div class="ui segment">
-    <div class="ui small header">
-        {{ 'sylius.ui.pricing'|trans }}
-    </div>
-    <table class="ui very basic celled table">
-        <tbody>
-        <tr>
-            <td class="gray text"><strong>{{ 'sylius.ui.channels'|trans }}</strong></td>
-            <td class="gray text"><strong>{{ 'sylius.ui.price'|trans }}</strong></td>
-            <td class="gray text"><strong>{{ 'sylius.ui.original_price'|trans }}</strong></td>
-        </tr>
-        {% set currencies = sylius_channels_currencies() %}
-        {% for channelPricing in variant.channelPricings %}
-            <tr class="pricing">
-                <td class="five wide gray text">
-                    <strong>{{ channelPricing.channelCode }}</strong>
-                </td>
-                {% set channelCode = channelPricing.channelCode %}
-                <td>{{ money.format(channelPricing.price, currencies[channelCode]) }}</td>
-                {% if channelPricing.originalPrice != null %}
-                    <td>{{ money.format(channelPricing.originalPrice, currencies[channelCode]) }}</td>
-                {% else %}
-                    <td><span class="gray text">-</span></td>
-                {% endif %}
+<div class="column">
+    <div class="ui segment">
+        <div class="ui small header">
+            {{ 'sylius.ui.pricing'|trans }}
+        </div>
+        <table class="ui very basic celled table">
+            <tbody>
+            <tr>
+                <td class="gray text"><strong>{{ 'sylius.ui.channels'|trans }}</strong></td>
+                <td class="gray text"><strong>{{ 'sylius.ui.price'|trans }}</strong></td>
+                <td class="gray text"><strong>{{ 'sylius.ui.original_price'|trans }}</strong></td>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            {% set currencies = sylius_channels_currencies() %}
+            {% for channelPricing in variant.channelPricings %}
+                <tr class="pricing">
+                    <td class="five wide gray text">
+                        <strong>{{ channelPricing.channelCode }}</strong>
+                    </td>
+                    {% set channelCode = channelPricing.channelCode %}
+                    <td>{{ money.format(channelPricing.price, currencies[channelCode]) }}</td>
+                    {% if channelPricing.originalPrice != null %}
+                        <td>{{ money.format(channelPricing.originalPrice, currencies[channelCode]) }}</td>
+                    {% else %}
+                        <td><span class="gray text">-</span></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>

@@ -1,0 +1,6 @@
+{% if shipment.state == shipped %}
+    {% set path = path('sylius_admin_shipment_resend_confirmation_email', {'id': shipment.id, '_csrf_token': csrf_token(shipment.id)}) %}
+    <a href="{{ path }}" class="ui icon labeled tiny fluid button" style="margin: 7px 0 0;" {{ sylius_test_html_attribute('resend-shipment-confirmation-email') }}>
+        <i class="send icon"></i> {{ 'sylius.ui.resend_the_shipment_confirmation_email'|trans }}
+    </a>
+{% endif %}
