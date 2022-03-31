@@ -2,26 +2,28 @@
 
 <div class="ui grid">
     <div class="sixteen wide mobile ten wide computer column">
-        {% include '@SyliusAdmin/Product/Show/_details.html.twig' %}
+        {{ sylius_template_event('sylius.admin.simple_product.show.details', _context) }}
         <div class="ui hidden divider"></div>
-        {% include '@SyliusAdmin/Product/Show/_taxonomy.html.twig' %}
+        {{ sylius_template_event('sylius.admin.simple_product.show.taxonomy', _context) }}
     </div>
     <div class="sixteen wide mobile six wide computer column">
-        {% include '@SyliusAdmin/Product/Show/_pricing.html.twig' %}
+        {{ sylius_template_event('sylius.admin.simple_product.show.pricing', _context) }}
         <div class="ui hidden divider"></div>
-        {% include '@SyliusAdmin/Product/Show/_shipping.html.twig' %}
+        {{ sylius_template_event('sylius.admin.simple_product.show.shipping', _context) }}
     </div>
 </div>
 <div class="ui hidden divider"></div>
-{% include '@SyliusAdmin/Product/Show/_media.html.twig' %}
+{{ sylius_template_event('sylius.admin.simple_product.show.media', _context) }}
+
 <div class="ui hidden divider"></div>
-{% include '@SyliusAdmin/Product/Show/_moreDetails.html.twig' %}
+{{ sylius_template_event('sylius.admin.simple_product.show.more_details', _context) }}
+
 <div class="ui hidden divider"></div>
 <div class="ui grid">
     <div class="sixteen wide mobile ten wide computer column">
-        {% include '@SyliusAdmin/Product/Show/_attributes.html.twig' %}
+        {{ sylius_template_event('sylius.admin.simple_product.show.attributes', _context) }}
     </div>
     <div class="sixteen wide mobile six wide computer column">
-        {% include '@SyliusAdmin/Product/Show/_associations.html.twig' %}
+        {{ sylius_template_event('sylius.admin.simple_product.show.associations', _context) }}
     </div>
 </div>

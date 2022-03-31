@@ -2,12 +2,8 @@
     <td colspan="8" style="padding: 20px">
         <div class="ui grid">
             <div class="doubling two column row">
-                <div class="column">
-                    {% include '@SyliusAdmin/Product/Show/_variantContentShipping.html.twig' %}
-                </div>
-                <div class="column">
-                    {% include '@SyliusAdmin/Product/Show/_variantContentPricing.html.twig' %}
-                </div>
+                {{ sylius_template_event('sylius.admin.simple_product.show.variant_content', _context) }}
+
             </div>
         </div>
     </td>

@@ -1,0 +1,5 @@
+<td>
+    {% for optionValue in variant.optionValues %}
+        <div><span class="gray text">{{ optionValue.option.name }}:</span> {{ optionValue.value }}</div>
+    {% endfor %}
+</td>

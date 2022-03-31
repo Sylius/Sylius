@@ -1,0 +1,21 @@
+{% if channels|length > 1 %}
+
+{% set selected = channels|first %}
+{% set code = app.request.query.get('channel') %}
+
+{% for channel in channels %}
+    {% if channel.code is same as(code) %}
+        {% set selected = channel %}
+    {% endif %}
+{% endfor %}
+
+<div class="ui floating dropdown labeled icon button">
+    <i class="share alternate icon"></i>
+    <span class="text">
+        {% include '@SyliusAdmin/Common/_channel.html.twig' with {'channel': selected} %}
+    </span>
+    <div class="menu">
+        {{ sylius_template_event('sylius.admin.dashboard.channel_switch_menu', _context) }}
+    </div>
+</div>
+{% endif %}

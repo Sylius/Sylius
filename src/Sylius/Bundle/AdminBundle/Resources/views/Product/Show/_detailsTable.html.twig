@@ -1,0 +1,27 @@
+<table class="ui very basic celled table">
+    <tbody>
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ 'sylius.ui.code'|trans }}</strong></td>
+        <td>{{ product.code }}</td>
+    </tr>
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ 'sylius.ui.channels'|trans }}</strong></td>
+        <td>
+            {% for channel in product.channels %}
+                <div>
+                    <span class="ui large empty horizontal circular label" style="background-color: {{ channel.color }}"></span>
+                    <span class="channel-name">{{ channel }}</span>
+                </div>
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ 'sylius.ui.current_stock'|trans }}</strong></td>
+        <td>{{ product.variants.first.onHand }}</td>
+    </tr>
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ 'sylius.ui.tax_category'|trans }}</strong></td>
+        <td>{{ product.variants.first.taxCategory }}</td>
+    </tr>
+    </tbody>
+</table>

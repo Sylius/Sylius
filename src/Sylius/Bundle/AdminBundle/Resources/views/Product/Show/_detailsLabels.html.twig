@@ -1,0 +1,17 @@
+{% if product.enabled %}
+    <span class="ui teal label"><i class="checkmark icon"></i>{{ 'sylius.ui.enabled'|trans }}</span>
+{% else %}
+    <span class="ui red label"><i class="remove icon"></i>{{ 'sylius.ui.disabled'|trans }}</span>
+{% endif %}
+
+{% if product.variants.first.tracked %}
+    <span class="ui teal label"><i class="checkmark icon"></i>{{ 'sylius.ui.tracked'|trans }}</span>
+{% else %}
+    <span class="ui red label"><i class="remove icon"></i>{{ 'sylius.ui.not_tracked'|trans }}</span>
+{% endif %}
+
+{% if product.variants.first.shippingRequired %}
+    <span class="ui teal label"><i class="checkmark icon"></i>{{ 'sylius.ui.shipping_required'|trans }}</span>
+{% else %}
+    <span class="ui orange label"><i class="remove icon"></i>{{ 'sylius.ui.shipping_not_required'|trans }}</span>
+{% endif %}

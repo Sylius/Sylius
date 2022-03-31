@@ -1,0 +1,6 @@
+{% if shipment.tracking is not empty %}
+    <div class="ui segment">
+        <span class="ui top attached icon label"><i class="plane icon"></i> {{ 'sylius.ui.tracking_code'|trans|upper }}</span>
+        <p>{{ shipment.tracking }}</p>
+    </div>
+{% endif %}

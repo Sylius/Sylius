@@ -1,0 +1,302 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_ui:
+    events:
+        sylius.admin.admin_user.form_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/AdminUser/_formContent.html.twig'
+                    priority: 10
+        sylius.admin.admin_user.form:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/AdminUser/Form/_form.html.twig'
+                    priority: 10
+        sylius.admin.admin_user.first_column:
+            blocks:
+                general_info:
+                    template: '@SyliusAdmin/AdminUser/Form/_generalInfo.html.twig'
+                    priority: 20
+                general_info_extended:
+                    template: '@SyliusAdmin/AdminUser/Form/_generalInfoExtended.html.twig'
+                    priority: 10
+        sylius.admin.admin_user.columns:
+            blocks:
+                first_column:
+                    template: '@SyliusAdmin/AdminUser/Form/_firstColumn.html.twig'
+                    priority: 20
+                second_column:
+                    template: '@SyliusAdmin/AdminUser/Form/_secondColumn.html.twig'
+                    priority: 10
+        sylius.admin.admin_user.second_column:
+            blocks:
+                additional_information:
+                    template: '@SyliusAdmin/AdminUser/Form/_additionalInformation.html.twig'
+                    priority: 30
+                avatar:
+                    template: '@SyliusAdmin/AdminUser/Form/_avatar.html.twig'
+                    priority: 20
+                preferences:
+                    template: '@SyliusAdmin/AdminUser/Form/_preferences.html.twig'
+                    priority: 10
+        sylius.admin.channel.form_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Channel/_formContent.html.twig'
+                    priority: 10
+        sylius.admin.channel.form:
+            blocks:
+                first_column:
+                    template: '@SyliusAdmin/Channel/Form/_firstColumn.html.twig'
+                    priority: 20
+                second_column:
+                    template: '@SyliusAdmin/Channel/Form/_secondColumn.html.twig'
+                    priority: 10
+        sylius.admin.channel.first_column_content:
+            blocks:
+                general:
+                    template: '@SyliusAdmin/Channel/Form/_general.html.twig'
+                    priority: 40
+                general_host:
+                    template: '@SyliusAdmin/Channel/Form/_generalHost.html.twig'
+                    priority: 30
+                countries:
+                    template: '@SyliusAdmin/Channel/Form/_countries.html.twig'
+                    priority: 20
+                money:
+                    template: '@SyliusAdmin/Channel/Form/_money.html.twig'
+                    priority: 10
+        sylius.admin.channel.second_column_content:
+            blocks:
+                general:
+                    template: '@SyliusAdmin/Channel/Form/_billingData.html.twig'
+                    priority: 20
+                look_and_feel:
+                    template: '@SyliusAdmin/Channel/Form/_lookAndFeel.html.twig'
+                    priority: 10
+        sylius.admin.customer.form_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Customer/Form/_formContent.html.twig'
+                    priority: 10
+        sylius.admin.customer.form:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Customer/Form/_form.html.twig'
+                    priority: 10
+        sylius.admin.customer.first_column:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Customer/Form/_formFirstColumn.html.twig'
+                    priority: 10
+        sylius.admin.customer.customer_details:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Customer/Form/_details.html.twig'
+                    priority: 10
+        sylius.admin.customer.extra_information:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Customer/Form/_extraInformation.html.twig'
+                    priority: 10
+        sylius.admin.customer.second_column:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Customer/Form/_formSecondColumn.html.twig'
+                    priority: 10
+        sylius.admin.customer.account_credentials:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Customer/Form/_accountCredentials.html.twig'
+                    priority: 10
+        sylius.admin.dashboard.channel_switch_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Dashboard/_channelSwitchContent.html.twig'
+                    priority: 10
+        sylius.admin.dashboard.channel_switch_menu:
+            blocks:
+                search:
+                    template: '@SyliusAdmin/Dashboard/ChannelSwitchMenu/_search.html.twig'
+                    priority: 20
+                channels:
+                    template: '@SyliusAdmin/Dashboard/ChannelSwitchMenu/_channels.html.twig'
+                    priority: 10
+        sylius.admin.layout.logo_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Layout/_logoContent.html.twig'
+                    priority: 10
+        sylius.admin.product_variant.tab_inventory_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/ProductVariant/Tab/_inventoryContent.html.twig'
+                    priority: 10
+        sylius.admin.product.tab_inventory_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Tab/_inventoryContent.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.details:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_details.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.taxonomy:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_taxonomy.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.pricing:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_pricing.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.shipping:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_shipping.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.media:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_media.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.more_details:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_moreDetails.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.attributes:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_attributes.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.associations:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_associations.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.details_content:
+            blocks:
+                labels:
+                    template: '@SyliusAdmin/Product/Show/_detailsLabels.html.twig'
+                    priority: 20
+                table:
+                    template: '@SyliusAdmin/Product/Show/_detailsTable.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.variant_content:
+            blocks:
+                shipping:
+                    template: '@SyliusAdmin/Product/Show/_variantContentShipping.html.twig'
+                    priority: 20
+                pricing:
+                    template: '@SyliusAdmin/Product/Show/_variantContentPricing.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.variant_item_content:
+            blocks:
+                button:
+                    template: '@SyliusAdmin/Product/Show/VariantItem/_button.html.twig'
+                    priority: 80
+                item:
+                    template: '@SyliusAdmin/Product/Show/VariantItem/_item.html.twig'
+                    priority: 70
+                option_values:
+                    template: '@SyliusAdmin/Product/Show/VariantItem/_optionValues.html.twig'
+                    priority: 60
+                tracking:
+                    template: '@SyliusAdmin/Product/Show/VariantItem/_tracking.html.twig'
+                    priority: 50
+                shipping:
+                    template: '@SyliusAdmin/Product/Show/VariantItem/_shipping.html.twig'
+                    priority: 40
+                tax_category:
+                    template: '@SyliusAdmin/Product/Show/VariantItem/_taxCategory.html.twig'
+                    priority: 30
+                stock:
+                    template: '@SyliusAdmin/Product/Show/VariantItem/_stock.html.twig'
+                    priority: 20
+                edit_button:
+                    template: '@SyliusAdmin/Product/Show/VariantItem/_editButton.html.twig'
+                    priority: 10
+        sylius.admin.simple_product.show.variants:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_variants.html.twig'
+                    priority: 10
+        sylius.admin.shipment.ship_with_tracking_code_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Shipment/Grid/Action/_shipWithTrackingCodeContent.html.twig'
+                    priority: 10
+        sylius.admin.shipment.grid.ship_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Shipment/Grid/_shipContent.html.twig'
+                    priority: 10
+        sylius.admin.shipment.partial.ship_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Shipment/Partial/_shipContent.html.twig'
+                    priority: 10
+        sylius.admin.shipment.show.content:
+            blocks:
+                header:
+                    template: '@SyliusAdmin/Shipment/Show/_headerContent.html.twig'
+                    priority: 30
+                content:
+                    template: '@SyliusAdmin/Shipment/Show/_breadcrumb.html.twig'
+                    priority: 20
+                shipment_units:
+                    template: '@SyliusAdmin/Shipment/Show/_shipmentUnits.html.twig'
+                    priority: 10
+        sylius.admin.shipment.show.breadcrumb:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Shipment/Show/_breadcrumb.html.twig'
+                    priority: 10
+        sylius.admin.order.show.header_items:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Order/Show/_headerItems.html.twig'
+                    priority: 10
+        sylius.admin.order.show.payment_content:
+            blocks:
+                header:
+                    template: '@SyliusAdmin/Order/Show/Payment/_header.html.twig'
+                    priority: 40
+                content:
+                    template: '@SyliusAdmin/Order/Show/Payment/_content.html.twig'
+                    priority: 30
+                transitions_complete:
+                    template: '@SyliusAdmin/Order/Show/Payment/_stateMachineComplete.html.twig'
+                    priority: 20
+                transitions_refund:
+                    template: '@SyliusAdmin/Order/Show/Payment/_stateMachineRefund.html.twig'
+                    priority: 10
+        sylius.admin.order.show.shipment_content:
+            blocks:
+                header:
+                    template: '@SyliusAdmin/Order/Show/Shipment/_header.html.twig'
+                    priority: 60
+                content:
+                    template: '@SyliusAdmin/Order/Show/Shipment/_content.html.twig'
+                    priority: 50
+                transitions:
+                    template: '@SyliusAdmin/Order/Show/Shipment/_stateMachineShip.html.twig'
+                    priority: 40
+                tracking:
+                    template: '@SyliusAdmin/Order/Show/Shipment/_tracking.html.twig'
+                    priority: 30
+                show_button:
+                    template: '@SyliusAdmin/Order/Show/Shipment/_showButton.html.twig'
+                    priority: 20
+                resend_confirmation_email_button:
+                    template: '@SyliusAdmin/Order/Show/Shipment/_resendConfirmationEmailButton.html.twig'
+                    priority: 10
+        sylius.admin.order.show.shipments_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Order/Show/_shipmentsContent.html.twig'
+                    priority: 10
