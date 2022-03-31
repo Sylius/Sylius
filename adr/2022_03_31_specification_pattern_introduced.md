@@ -6,18 +6,18 @@
 ## Context and Problem Statement
 
 During the implementation of Headless Checkout [Pull Request](https://github.com/Sylius/Sylius/pull/13793) we encountered
-need to use Specification pattern as there are multiple business requirements that must be met before completing checkout.
+need to use a Specification pattern as multiple business requirements must be met before completing checkout.
 
 ### What Headless Checkout is?
-Current checkout system is highly coupled with UI, therefore to maintain current checkout system, but use it via API
-user had to make at least 5 requests in specific order (add to cart, address, payment select, shipping select, complete).
-The new concept would reduce amount of requests to the API and get rid of the order requirement.
+The current checkout system is highly coupled with UI, therefore to maintain the current checkout system, but use it via API
+a user had to make at least 5 requests in a specific order (add to cart, address, payment select, shipping select, complete).
+The new concept would reduce the number of requests to the API and get rid of the order requirement.
 
 ## Decision Drivers
 
-* User must be able to create, change and extend logic of completing order requirements
+* User must be able to create, change and extend the logic of completing order requirements
 * Solution may be generic (abstract) from implementation
-* Specification or Composite must be able to be passed via Dependency Injection  
+* Specification or Composite must be able to be passed via Dependency Injection
 
 ## Considered Options
 
@@ -97,7 +97,7 @@ final class Guard
 ```xml
 <services>
     <service id="sylius.state_guard.state_name" class="Guard">
-        <argument type="tagged_iterator" id="sylius.state_guard.state_name.specification"/>
+        <argument type="tagged_iterator" id="sylius.state_guard.state_name.specification" />
     </service>
     
     <service id="sylius.specification.first" class="FirstCustomSpecification">
@@ -123,11 +123,13 @@ new Guard(
 );
 ```
 
-* Good, because [argument a]
-* Bad, because [argument b]
-* … <!-- numbers of pros and cons can vary -->
+* Good, because it provides `OR` and `AND` abstraction
+* Good, because the solution may be used with `tagged_iterator`
+* Good, because it may be used in more complex scenarios
+* Bad, because Guard does actual voting
+* Bad, because it provides Abstract class instead of Interface
 
-### Option 2 - Iterator-Based Specification
+### Option 2 - Tree-Based Iterator Specification
 
 ```php
 interface SpecificationInterface
@@ -196,17 +198,22 @@ final class Guard
 ```xml
 <services>
     <service id="sylius.state_guard.state_name" class="Guard">
-        <argument type="service" id="sylius.state_guard.state_name.specification"/>
+        <argument type="service" id="sylius.state_guard.state_name.specification" />
     </service>
     
     <service id="sylius.state_guard.state_name.specification" class="AndSpecification">
-        <argument type="service" id="FirstCustomSpecification" />
-        <argument type="service" id="SecondCustomSpecification" />
+        <argument type="tagged_iterator" id="sylius.state_guard.state_name.specification" />
     </service>
-    
-    <service id="sylius.specification.first"  class="FirstCustomSpecification" />
-    <service id="sylius.specification.second" class="SecondCustomSpecification" />
-    <service id="sylius.specification.third"  class="ThirdCustomSpecification" />
+
+    <service id="sylius.specification.first" class="FirstCustomSpecification">
+        <tag name="sylius.state_guard.state_name.specification" type="service" />
+    </service>
+    <service id="sylius.specification.second" class="SecondCustomSpecification">
+        <tag name="sylius.state_guard.state_name.specification" type="service" />
+    </service>
+    <service id="sylius.specification.third" class="ThirdCustomSpecification">
+        <tag name="sylius.state_guard.state_name.specification" type="service" />
+    </service>
 </services>
 ```
 
@@ -217,20 +224,24 @@ final class Guard
         <argument type="service" id="sylius.state_guard.state_name.specification"/>
     </service>
     
-    <!--  But creating factory would be much cleaner approach  -->
     <service id="sylius.state_guard.state_name.specification" class="AndSpecification">
-        <argument type="service" id="sylius.specification.first" />
-        <argument type="service" id="sylius.specification.second" />
-        <argument type="service" id="sylius.state_guard.state_name.partial_specification" />
+        <argument type="tagged_iterator" id="sylius.state_guard.state_name.specification" />
     </service>
     
     <service id="sylius.state_guard.state_name.partial_specification" class="OrSpecification">
-        <argument type="service" id="SecondCustomSpecification" />
+        <argument type="tagged_iterator" id="sylius.state_guard.state_name.or_specification" />
+        <tag name="sylius.state_guard.state_name.specification" type="service" />
     </service>
-    
-    <service id="sylius.specification.first"  class="FirstCustomSpecification" />
-    <service id="sylius.specification.second" class="SecondCustomSpecification" />
-    <service id="sylius.specification.third"  class="ThirdCustomSpecification" />
+
+    <service id="sylius.specification.first" class="FirstCustomSpecification">
+        <tag name="sylius.state_guard.state_name.specification" type="service" />
+    </service>
+    <service id="sylius.specification.second" class="SecondCustomSpecification">
+        <tag name="sylius.state_guard.state_name.specification" type="service" />
+    </service>
+    <service id="sylius.specification.third" class="ThirdCustomSpecification">
+        <tag name="sylius.state_guard.state_name.or_specification" type="service" />
+    </service>
 </services>
 ```
 Same in PHP:
@@ -246,10 +257,10 @@ new Guard(
 );
 ```
 
-* Good, because [argument a]
-* Bad, because [argument b]
-* … <!-- numbers of pros and cons can vary -->
-* Good, because Guards may not be needed
+* Good, because with a factory you can handle pretty complex problem
+* Good, because the Guards may not be needed
+* Good, because it provides `OR` and `AND` abstraction
+* Good, because it provides generic interface
 
 ### Option 3 - Order-Based Specification
 
@@ -287,7 +298,7 @@ final class Guard
 ```xml
 <services>
     <service id="sylius.state_guard.state_name" class="Guard">
-        <argument type="tagged_iterator" id="sylius.state_guard.state_name.specification"/>
+        <argument type="tagged_iterator" id="sylius.state_guard.state_name.specification" />
     </service>
     
     <service id="sylius.specification.first" class="FirstCustomSpecification">
@@ -313,10 +324,29 @@ new Guard(
 );
 ```
 
-* Good, because it's the simplest approach
-* Bad, because [argument b]
-* … <!-- numbers of pros and cons can vary -->
+* Good, because it is the simplest approach
+* Good, because it provides generic interface
+* Good, because we can use tagged_iterator in a simple way
+* Bad, because it lacks `OR` and `AND` abstraction
 
-## Decision Outcome (TODO)
+## Decision Outcome
 
-Chosen option: "[option 1]", because [justification. e.g., only option, which meets k.o. criterion decision driver | which resolves force force | … | comes out best (see below)].
+Deciding on which option to choose I kinda decided to step back and think about how would User would like to use them.
+
+If we want to preserve `tagged_iterator` the solution will always be `AND` or `OR` operation only. In that case
+**attaching additional Specification will be user-friendly**, but more complex logic will require
+overriding/implementing Guard.
+
+Without `tagged_iterator` we could focus on building logic as a composite service and pass the built Specification to
+the constructor of the Guard. Building Specification will require some sort of Factory class.
+
+Let's say the user would like to change the Guard logic. What would be the simplest ways? - To override Guard service.
+Let's say the user would like to extend guard logic. What would be the simplest ways? - To create custom Specification,
+define it as a service and tag it.
+
+Option 2 is extension of Option 3 with logical operation moved to the `AND` and `OR` Specifications.
+
+Chosen option: **Option 2 - Tree-Based Iterator Specification**
+
+It provides a simple and clean Specification interface and will be user-friendly in
+time of change. 
