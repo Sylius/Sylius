@@ -1,0 +1,93 @@
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-03-25T10:23:19Z
+
+Great initiative! I'm not a fan of `before` / `after` hooks, especially in complex templates like forms.
+From my experience customizing forms, I rarely wanted to just append / prepend something to a form.
+I would rather partition the forms in smaller pieces and display each piece with an event then let the events system do it's job.
+Here's a good example of it:
+
+- `sylius.shop.layout.header` in [@SyliusShop/layout.html.twig](https://github.com/Sylius/Sylius/blob/8a6966ef1264e2a90db546ed76a76dfbe4053747/src/Sylius/Bundle/ShopBundle/Resources/views/layout.html.twig#L34)
+    ```yaml
+    sylius.shop.layout.header:
+        blocks:
+            header:
+                template: "@SyliusShop/_header.html.twig"
+                priority: 20
+            after_header_legacy:
+                template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                priority: 15
+                context:
+                    event: sylius.shop.layout.after_header
+            menu:
+                template: "@SyliusShop/Layout/Header/_menu.html.twig"
+                priority: 10
+     ```
+- `sylius.shop.layout.header.grid` in [@SyliusShop/_header.html.twig](https://github.com/Sylius/Sylius/blob/8a6966ef1264e2a90db546ed76a76dfbe4053747/src/Sylius/Bundle/ShopBundle/Resources/views/_header.html.twig#L3)
+    ```yaml
+    sylius.shop.layout.header.grid:
+        blocks:
+            logo:
+                template: "@SyliusShop/Layout/Header/_logo.html.twig"
+                priority: 30
+            content:
+                template: "@SyliusShop/Layout/Header/_content.html.twig"
+                priority: 20
+            cart:
+                template: "@SyliusShop/Layout/Header/_cart.html.twig"
+                priority: 10
+    ```
+- `sylius.shop.layout.header.content` in [@SyliusShop/Layout/Header/_content.html.twig](https://github.com/Sylius/Sylius/blob/8a6966ef1264e2a90db546ed76a76dfbe4053747/src/Sylius/Bundle/ShopBundle/Resources/views/Layout/Header/_content.html.twig#L2)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-03-25T10:49:17Z
+
+Looking for @vvasiloi and @GSadee answers we have a consensus on how to do it:
+
+```yaml
+sylius_ui:
+    events:
+        sylius.admin.channel.form_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Channel/Form/_content.html.twig' # inside of it just enough of HTML to have columns layout
+                    priority: 10
+        sylius.admin.channel.form_columns:
+            blocks:
+                first_column:
+                    template: '@SyliusAdmin/Channel/Form/_first_column.html.twig' # inside of it just enough of HTML to single column wrapping + new event
+                    priority: 20
+                second_column:
+                    template: '@SyliusAdmin/Channel/Form/_second_column.html.twig' # inside of it just enough of HTML to single column wrapping + new event
+                    priority: 10
+        sylius.admin.channel.first_form_column:
+            blocks:
+                general:
+                    template: '@SyliusAdmin/Channel/Form/FirstColumn/_general.html.twig' # content from H4 with sylius.ui.general + block below it
+                    priority: 20
+                money:
+                    template: '@SyliusAdmin/Channel/Form/FirstColumn/_money.html.twig' # content from H4 with sylius.ui.money + block below it
+                    priority: 10
+```
+
+Probably could be even more granural, but that would be great improvement already IMHO
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-03-31T06:03:29Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "sylius-template-event-forms"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-03-31T11:45:47Z
+
+Thank you, @SirDomin! :1st_place_medal:
