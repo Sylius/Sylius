@@ -22,10 +22,7 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Core\OrderCheckout\AsynchronousOrderCheckoutStates;
-use Sylius\Component\Core\OrderCheckout\AsynchronousOrderCheckoutTransitions;
 use Sylius\Component\Core\OrderCheckoutStates;
-use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
@@ -102,6 +99,7 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         $choosePaymentMethod->setSubresourceId('123');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
+        $cart->getState()->willReturn(OrderInterface::STATE_CART);
 
         $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn(null);
 
@@ -179,6 +177,9 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         $choosePaymentMethod->setSubresourceId('123');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
+
+        $cart->getState()->willReturn(OrderInterface::STATE_CART);
+
         $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn($paymentMethod);
 
         $cart->getCheckoutState()->willReturn(OrderCheckoutStates::STATE_COMPLETED);
