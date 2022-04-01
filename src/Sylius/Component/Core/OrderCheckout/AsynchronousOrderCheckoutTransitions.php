@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\OrderCheckout;
 
 interface AsynchronousOrderCheckoutTransitions
 {
-    public const GRAPH = 'sylius_async_order_checkout';
+    public const GRAPH = 'sylius_headless_order_checkout';
 
     public const TRANSITION_ADDRESS = 'address';
 

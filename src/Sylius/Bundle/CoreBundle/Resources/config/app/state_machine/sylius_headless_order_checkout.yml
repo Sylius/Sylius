@@ -1,8 +1,8 @@
 winzou_state_machine:
-    sylius_async_order_checkout:
+    sylius_headless_order_checkout:
         class: "%sylius.model.order.class%"
         property_path: checkoutState
-        graph: sylius_async_order_checkout
+        graph: sylius_headless_order_checkout
         state_machine_class: "%sylius.state_machine.class%"
         states:
             cart: ~
