@@ -16,17 +16,22 @@ namespace spec\Sylius\Component\Core\StateGuard;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderItem;
+use Sylius\Component\Core\Order\Requirements\RequiredNonEmptyCartSpecification;
 use Sylius\Component\Core\StateGuard\OrderGuardInterface;
 
-class SelectPaymentStepGuardSpec extends ObjectBehavior
+class ProcessStepGuardSpec extends ObjectBehavior
 {
     function it_implements_order_guard_interface()
     {
+        $this->beConstructedWith([]);
         $this->shouldImplement(OrderGuardInterface::class);
     }
 
     function it_is_satisfied_by_order()
     {
+        $this->beConstructedWith([
+            new RequiredNonEmptyCartSpecification(),
+        ]);
         $order = new Order();
         $order->addItem(new OrderItem());
 
