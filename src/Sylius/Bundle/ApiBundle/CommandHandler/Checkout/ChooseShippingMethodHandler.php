@@ -13,11 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
-use SM\Factory\FactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\OrderCheckout\AsynchronousOrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
@@ -33,7 +31,6 @@ final class ChooseShippingMethodHandler implements MessageHandlerInterface
         private ShippingMethodRepositoryInterface $shippingMethodRepository,
         private ShipmentRepositoryInterface $shipmentRepository,
         private ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
-        private FactoryInterface $stateMachineFactory
     ) {
     }
 
@@ -44,18 +41,11 @@ final class ChooseShippingMethodHandler implements MessageHandlerInterface
 
         Assert::notNull($cart, 'Cart has not been found.');
 
-        $stateMachine = $this->stateMachineFactory->get($cart, AsynchronousOrderCheckoutTransitions::GRAPH);
-
-        Assert::true(
-            $stateMachine->can(AsynchronousOrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING),
-            'Order cannot have shipment method assigned.'
-        );
-
         /** @var ShippingMethodInterface|null $shippingMethod */
         $shippingMethod = $this->shippingMethodRepository->findOneBy([
             'code' => $chooseShippingMethod->shippingMethodCode,
         ]);
-        Assert::notNull($shippingMethod, 'Shipping method has not been found');
+        Assert::notNull($shippingMethod, 'Shipping method has not been found.');
 
         $shipment = $this->shipmentRepository->findOneByOrderId($chooseShippingMethod->shipmentId, $cart->getId());
         Assert::notNull($shipment, 'Can not find shipment with given identifier.');
@@ -66,7 +56,6 @@ final class ChooseShippingMethodHandler implements MessageHandlerInterface
         );
 
         $shipment->setMethod($shippingMethod);
-        $stateMachine->apply(AsynchronousOrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
 
         return $cart;
     }
