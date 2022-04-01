@@ -6,36 +6,20 @@ winzou_state_machine:
         state_machine_class: "%sylius.state_machine.class%"
         states:
             cart: ~
-            addressed: ~
-            shipping_selected: ~
-            payment_selected: ~
+            process: ~
             completed: ~
         transitions:
-            address:
-                from: [cart, addressed, shipping_selected, payment_selected]
-                to: addressed
-            select_shipping:
-                from: [cart, addressed, shipping_selected, payment_selected]
-                to: shipping_selected
-            select_payment:
-                from: [cart, addressed, shipping_selected, payment_selected]
-                to: payment_selected
+            process:
+                from: cart
+                to: process
             complete:
-                from: [cart, addressed, shipping_selected, payment_selected]
+                from: process
                 to: completed
         callbacks:
             guard:
-                sylius_address_guard:
-                    on: ["address"]
+                sylius_process_guard:
+                    on: ["process"]
                     do: ["@sylius.state_guard.address", "isSatisfiedBy"]
-                    args: ["object"]
-                sylius_select_shipping_guard:
-                    on: ["select_shipping"]
-                    do: ["@sylius.state_guard.select_shipping", "isSatisfiedBy"]
-                    args: ["object"]
-                sylius_select_payment_guard:
-                    on: ["select_shipping"]
-                    do: ["@sylius.state_guard.select_payment", "isSatisfiedBy"]
                     args: ["object"]
                 sylius_complete_guard:
                     on: ["complete"]
@@ -43,8 +27,8 @@ winzou_state_machine:
                     args: ["object"]
             after:
                 sylius_process_cart:
-                    on: ["address", "select_shipping", "select_payment"]
-                    do: ["@sylius.order_processing.order_processor", "process" ]
+                    on: ["process"]
+                    do: ["@sylius.order_processing.order_processor", "process"]
                     args: ["object" ]
                     priority: -200
                 sylius_create_order:

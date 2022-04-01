@@ -27,16 +27,6 @@ class CompleteStepGuard implements OrderGuardInterface
 
     public function isSatisfiedBy(OrderInterface $order): bool
     {
-// Iterable approach
-//        foreach ($this->requirements as $requirement) {
-//            if (!$requirement->isSatisfiedBy($order)) {
-//                return false;
-//            }
-//        }
-//
-//        return true;
-
-// Dynamic Tree approach
         $first = array_shift($this->requirements);
 
         foreach ($this->requirements as $requirement) {
@@ -44,15 +34,5 @@ class CompleteStepGuard implements OrderGuardInterface
         }
 
         return $first->isSatisfiedBy($order);
-
-// Static approach
-//        $requirements = new \Sylius\Component\Core\Order\Requirements\RequiredNonEmptyCartSpecification();
-//        $requirements
-//            ->and(new \Sylius\Component\Core\Order\Requirements\RequiredBillingAddressSpecification())
-//            ->and(new \Sylius\Component\Core\Order\Requirements\RequiredShippingSpecification())
-//            ->and(new \Sylius\Component\Core\Order\Requirements\RequiredPaymentSpecification())
-//        ;
-//
-//        return $requirements->isSatisfiedBy($order);
     }
 }

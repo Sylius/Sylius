@@ -15,15 +15,25 @@ namespace Sylius\Component\Core\StateGuard;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Order\Requirements\RequiredNonEmptyCartSpecification;
+use Sylius\Component\Core\Specification\Specification;
 
-class SelectShippingStepGuard implements OrderGuardInterface
+class ProcessStepGuard implements OrderGuardInterface
 {
     /**
-     * When shipping address / method is required? When any item requires shipping
-     * But should we in any instance block the state change? No
+     * @param iterable<Specification> $requirements
      */
+    public function __construct(private iterable $requirements)
+    {
+    }
+
     public function isSatisfiedBy(OrderInterface $order): bool
     {
-        return (new RequiredNonEmptyCartSpecification())->isSatisfiedBy($order);
+        $first = array_shift($this->requirements);
+
+        foreach ($this->requirements as $requirement) {
+            $first = $first->and($requirement);
+        }
+
+        return $first->isSatisfiedBy($order);
     }
 }
