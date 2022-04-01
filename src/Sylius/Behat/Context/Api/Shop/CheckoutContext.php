@@ -39,12 +39,6 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutContext implements Context
 {
-    public const CHECKOUT_STATE_TYPES = [
-        'address' => AsynchronousOrderCheckoutStates::STATE_ADDRESSED,
-        'shipping method' => AsynchronousOrderCheckoutStates::STATE_SHIPPING_SELECTED,
-        'payment' => AsynchronousOrderCheckoutStates::STATE_PAYMENT_SELECTED,
-    ];
-
     private ApiClientInterface $ordersClient;
 
     private ApiClientInterface $addressesClient;
@@ -543,7 +537,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeOnTheCheckoutCompleteStep(): void
     {
-        Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_PAYMENT_SELECTED);
+        // This step has no use-case in API
     }
 
     /**
@@ -661,7 +655,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeOnTheCheckoutPaymentStep(): void
     {
-        Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_SHIPPING_SELECTED);
+        // This step has no use-case in API
     }
 
     /**
@@ -729,7 +723,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeOnTheCheckoutShippingStep(): void
     {
-        Assert::same($this->getCheckoutState(), AsynchronousOrderCheckoutStates::STATE_ADDRESSED);
+        // This step has no use-case in API
     }
 
     /**
@@ -767,7 +761,7 @@ final class CheckoutContext implements Context
      */
     public function theVisitorShouldHaveCheckoutAddressStepCompleted(string $stepType): void
     {
-        Assert::same($this->getCheckoutState(), $this::CHECKOUT_STATE_TYPES[$stepType]);
+        // API checkout does not have steps
     }
 
     /**

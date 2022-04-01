@@ -16,14 +16,10 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\OrderCheckout\AsynchronousOrderCheckoutTransitions;
-use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
@@ -36,14 +32,12 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ShipmentRepositoryInterface $shipmentRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
-        FactoryInterface $stateMachineFactory
     ): void {
         $this->beConstructedWith(
             $orderRepository,
             $shippingMethodRepository,
             $shipmentRepository,
             $eligibilityChecker,
-            $stateMachineFactory
         );
     }
 
@@ -52,20 +46,15 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ShipmentRepositoryInterface $shipmentRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
-        FactoryInterface $stateMachineFactory,
         OrderInterface $cart,
         ShippingMethodInterface $shippingMethod,
         ShipmentInterface $shipment,
-        StateMachineInterface $stateMachine
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
         $chooseShippingMethod->setSubresourceId('123');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
-
-        $stateMachineFactory->get($cart, AsynchronousOrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(AsynchronousOrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING)->willReturn(true);
 
         $shippingMethodRepository->findOneBy(['code' => 'DHL_SHIPPING_METHOD'])->willReturn($shippingMethod);
 
@@ -78,7 +67,6 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         $eligibilityChecker->isEligible($shipment, $shippingMethod)->willReturn(true);
 
         $shipment->setMethod($shippingMethod)->shouldBeCalled();
-        $stateMachine->apply(AsynchronousOrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING)->shouldBeCalled();
 
         $this($chooseShippingMethod)->shouldReturn($cart);
     }
@@ -88,20 +76,15 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ShipmentRepositoryInterface $shipmentRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
-        FactoryInterface $stateMachineFactory,
         OrderInterface $cart,
         ShippingMethodInterface $shippingMethod,
         ShipmentInterface $shipment,
-        StateMachineInterface $stateMachine
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
         $chooseShippingMethod->setSubresourceId('123');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
-
-        $stateMachineFactory->get($cart, AsynchronousOrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(AsynchronousOrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING)->willReturn(true);
 
         $shippingMethodRepository->findOneBy(['code' => 'DHL_SHIPPING_METHOD'])->willReturn($shippingMethod);
 
@@ -114,7 +97,6 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         $eligibilityChecker->isEligible($shipment, $shippingMethod)->willReturn(false);
 
         $shipment->setMethod(Argument::type(ShippingMethodInterface::class))->shouldNotBeCalled();
-        $stateMachine->apply(AsynchronousOrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING)->shouldNotBeCalled();
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -142,9 +124,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
     function it_throws_an_exception_if_order_cannot_have_shipping_selected(
         OrderRepositoryInterface $orderRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        FactoryInterface $stateMachineFactory,
         OrderInterface $cart,
-        StateMachineInterface $stateMachine,
         ShipmentInterface $shipment
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
@@ -153,11 +133,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
         $shippingMethodRepository->findOneBy(['code' => 'DHL_SHIPPING_METHOD'])->willReturn(null);
 
-        $stateMachineFactory->get($cart, AsynchronousOrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(AsynchronousOrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING)->willReturn(false);
-
         $shipment->setMethod(Argument::type(ShippingMethodInterface::class))->shouldNotBeCalled();
-        $stateMachine->apply(AsynchronousOrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING)->shouldNotBeCalled();
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -168,9 +144,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
     function it_throws_an_exception_if_shipping_method_with_given_code_has_not_been_found(
         OrderRepositoryInterface $orderRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        FactoryInterface $stateMachineFactory,
         OrderInterface $cart,
-        StateMachineInterface $stateMachine,
         ShipmentInterface $shipment
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
@@ -179,13 +153,9 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
 
-        $stateMachineFactory->get($cart, AsynchronousOrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(AsynchronousOrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING)->willReturn(true);
-
         $shippingMethodRepository->findOneBy(['code' => 'DHL_SHIPPING_METHOD'])->willReturn(null);
 
         $shipment->setMethod(Argument::type(ShippingMethodInterface::class))->shouldNotBeCalled();
-        $stateMachine->apply(AsynchronousOrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING)->shouldNotBeCalled();
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -197,10 +167,8 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ShipmentRepositoryInterface $shipmentRepository,
-        FactoryInterface $stateMachineFactory,
         OrderInterface $cart,
         ShippingMethodInterface $shippingMethod,
-        StateMachineInterface $stateMachine
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
@@ -208,16 +176,11 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
 
-        $stateMachineFactory->get($cart, AsynchronousOrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(AsynchronousOrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING)->willReturn(true);
-
         $shippingMethodRepository->findOneBy(['code' => 'DHL_SHIPPING_METHOD'])->willReturn($shippingMethod);
 
         $cart->getId()->willReturn('111');
 
         $shipmentRepository->findOneByOrderId('123', '111')->willReturn(null);
-
-        $stateMachine->apply(AsynchronousOrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING)->shouldNotBeCalled();
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)

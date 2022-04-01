@@ -17,11 +17,7 @@ interface AsynchronousOrderCheckoutTransitions
 {
     public const GRAPH = 'sylius_headless_order_checkout';
 
-    public const TRANSITION_ADDRESS = 'address';
+    public const TRANSITION_PROCESS = 'process';
 
     public const TRANSITION_COMPLETE = 'complete';
-
-    public const TRANSITION_SELECT_PAYMENT = 'select_payment';
-
-    public const TRANSITION_SELECT_SHIPPING = 'select_shipping';
 }

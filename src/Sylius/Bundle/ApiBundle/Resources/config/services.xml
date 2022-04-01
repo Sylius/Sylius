@@ -146,7 +146,6 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface" class="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifier" public="true">
-            <argument type="service" id="sm.factory" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface" />
         </service>

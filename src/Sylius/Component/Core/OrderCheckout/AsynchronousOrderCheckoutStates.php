@@ -15,13 +15,9 @@ namespace Sylius\Component\Core\OrderCheckout;
 
 interface AsynchronousOrderCheckoutStates
 {
-    public const STATE_ADDRESSED = 'addressed';
-
     public const STATE_CART = 'cart';
 
+    public const STATE_PROCESS = 'process';
+
     public const STATE_COMPLETED = 'completed';
-
-    public const STATE_PAYMENT_SELECTED = 'payment_selected';
-
-    public const STATE_SHIPPING_SELECTED = 'shipping_selected';
 }
