@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\StateGuard;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Order\Requirements\RequiredNonEmptyCartSpecification;
 use Sylius\Component\Core\Specification\Specification;
 
 class ProcessStepGuard implements OrderGuardInterface
@@ -28,12 +27,12 @@ class ProcessStepGuard implements OrderGuardInterface
 
     public function isSatisfiedBy(OrderInterface $order): bool
     {
-        $first = array_shift($this->requirements);
-
         foreach ($this->requirements as $requirement) {
-            $first = $first->and($requirement);
+            if (!$requirement->isSatisfiedBy($order)) {
+                return false;
+            }
         }
 
-        return $first->isSatisfiedBy($order);
+        return true;
     }
 }

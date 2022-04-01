@@ -27,12 +27,12 @@ class CompleteStepGuard implements OrderGuardInterface
 
     public function isSatisfiedBy(OrderInterface $order): bool
     {
-        $first = array_shift($this->requirements);
-
         foreach ($this->requirements as $requirement) {
-            $first = $first->and($requirement);
+            if (!$requirement->isSatisfiedBy($order)) {
+                return false;
+            }
         }
 
-        return $first->isSatisfiedBy($order);
+        return true;
     }
 }
