@@ -10,10 +10,10 @@ winzou_state_machine:
             completed: ~
         transitions:
             process:
-                from: cart
+                from: [cart]
                 to: process
             complete:
-                from: process
+                from: [process]
                 to: completed
         callbacks:
             guard:
