@@ -405,8 +405,8 @@ final class ManagingZonesContext implements Context
     {
         Assert::true(
             $this->responseChecker->isDeletionSuccessful(
-            $this->client->getLastResponse()
-        ),
+                $this->client->getLastResponse()
+            ),
             'Zone could not be deleted'
         );
     }

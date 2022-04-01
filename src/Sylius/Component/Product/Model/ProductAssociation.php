@@ -24,14 +24,10 @@ class ProductAssociation implements ProductAssociationInterface
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var ProductAssociationTypeInterface|null
-     */
+    /** @var ProductAssociationTypeInterface|null */
     protected $type;
 
-    /**
-     * @var ProductInterface|null
-     */
+    /** @var ProductInterface|null */
     protected $owner;
 
     /**

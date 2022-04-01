@@ -19,18 +19,15 @@ use Sylius\Bundle\ApiBundle\Command\SubresourceIdAwareInterface;
 /** @experimental */
 class ChooseShippingMethod implements OrderTokenValueAwareInterface, SubresourceIdAwareInterface
 {
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     public $orderTokenValue;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     public $shipmentId;
 
     /**
      * @psalm-immutable
+     *
      * @var string
      */
     public $shippingMethodCode;

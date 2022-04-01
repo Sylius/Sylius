@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Faker\Generator;
 use Faker\Factory;
+use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -155,7 +155,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
                 return $words;
             })
 
-            ->setDefault('code', fn(Options $options): string => StringInflector::nameToCode($options['name']))
+            ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
 
             ->setDefault('enabled', true)
             ->setAllowedTypes('enabled', 'bool')
@@ -163,9 +163,9 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('tracked', false)
             ->setAllowedTypes('tracked', 'bool')
 
-            ->setDefault('slug', fn(Options $options): string => $this->slugGenerator->generate($options['name']))
+            ->setDefault('slug', fn (Options $options): string => $this->slugGenerator->generate($options['name']))
 
-            ->setDefault('short_description', fn(Options $options): string => $this->faker->paragraph)
+            ->setDefault('short_description', fn (Options $options): string => $this->faker->paragraph)
 
             ->setDefault('description', function (Options $options): string {
                 /** @var string $paragraphs */
@@ -191,7 +191,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
             ->setDefault('product_attributes', [])
             ->setAllowedTypes('product_attributes', 'array')
-            ->setNormalizer('product_attributes', fn(Options $options, array $productAttributes): array => $this->setAttributeValues($productAttributes))
+            ->setNormalizer('product_attributes', fn (Options $options, array $productAttributes): array => $this->setAttributeValues($productAttributes))
 
             ->setDefault('product_options', [])
             ->setAllowedTypes('product_options', 'array')
@@ -409,7 +409,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         return trim(array_reduce(
             $variant->getOptionValues()->toArray(),
-            static fn(?string $variantName, ProductOptionValueInterface $variantOption) => $variantName . sprintf('%s ', $variantOption->getValue()),
+            static fn (?string $variantName, ProductOptionValueInterface $variantOption) => $variantName . sprintf('%s ', $variantOption->getValue()),
             ''
         ));
     }

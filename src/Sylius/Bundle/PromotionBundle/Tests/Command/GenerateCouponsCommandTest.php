@@ -13,15 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Tests\Command;
 
-use Symfony\Component\Console\Command\Command;
 use InvalidArgumentException;
-use Sylius\Bundle\PromotionBundle\Command\GenerateCouponsCommand;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 
 class GenerateCouponsCommandTest extends KernelTestCase

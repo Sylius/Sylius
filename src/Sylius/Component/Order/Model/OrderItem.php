@@ -21,29 +21,19 @@ class OrderItem implements OrderItemInterface
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var OrderInterface|null
-     */
+    /** @var OrderInterface|null */
     protected $order;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $quantity = 0;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $unitPrice = 0;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $total = 0;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $immutable = false;
 
     /**
@@ -53,9 +43,7 @@ class OrderItem implements OrderItemInterface
      */
     protected $units;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $unitsTotal = 0;
 
     /**
@@ -65,9 +53,7 @@ class OrderItem implements OrderItemInterface
      */
     protected $adjustments;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $adjustmentsTotal = 0;
 
     public function __construct()

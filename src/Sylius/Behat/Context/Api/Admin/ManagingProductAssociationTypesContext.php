@@ -145,8 +145,8 @@ final class ManagingProductAssociationTypesContext implements Context
     {
         Assert::true(
             $this->responseChecker->isDeletionSuccessful(
-            $this->client->getLastResponse()
-        ),
+                $this->client->getLastResponse()
+            ),
             'Product association type could not be deleted'
         );
     }

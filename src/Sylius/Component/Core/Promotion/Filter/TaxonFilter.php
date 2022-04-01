@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Promotion\Filter;
 
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 
 final class TaxonFilter implements FilterInterface
 {

@@ -24,14 +24,10 @@ class Shipment implements ShipmentInterface
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $state = ShipmentInterface::STATE_CART;
 
-    /**
-     * @var ShippingMethodInterface|null
-     */
+    /** @var ShippingMethodInterface|null */
     protected $method;
 
     /**
@@ -41,14 +37,10 @@ class Shipment implements ShipmentInterface
      */
     protected $units;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $tracking;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $shippedAt;
 
     public function __construct()

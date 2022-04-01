@@ -30,19 +30,13 @@ class Taxon implements TaxonInterface
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $code;
 
-    /**
-     * @var TaxonInterface|null
-     */
+    /** @var TaxonInterface|null */
     protected $root;
 
-    /**
-     * @var TaxonInterface|null
-     */
+    /** @var TaxonInterface|null */
     protected $parent;
 
     /**
@@ -52,24 +46,16 @@ class Taxon implements TaxonInterface
      */
     protected $children;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $left;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $right;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $level;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $position;
 
     public function __construct()

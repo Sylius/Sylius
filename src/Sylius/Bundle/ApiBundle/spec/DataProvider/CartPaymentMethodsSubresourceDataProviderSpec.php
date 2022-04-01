@@ -59,8 +59,7 @@ final class CartPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_cart_does_not_exist(
         OrderRepositoryInterface $orderRepository
-    ): void
-    {
+    ): void {
         $context['subresource_identifiers'] = ['tokenValue' => '69', 'payments' => '420'];
 
         $orderRepository->findCartByTokenValue($context['subresource_identifiers']['tokenValue'])->willReturn(null);

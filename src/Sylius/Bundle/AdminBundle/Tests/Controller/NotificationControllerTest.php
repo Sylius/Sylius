@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Tests\Controller;
 
-use Prophecy\Prophecy\ObjectProphecy;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use Http\Message\MessageFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\ProphecyInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;

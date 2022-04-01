@@ -59,7 +59,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
             ->during('validate', [
                 new ChangeItemQuantityInCart(2),
                 new class() extends Constraint {
-                }
+                },
             ])
         ;
     }

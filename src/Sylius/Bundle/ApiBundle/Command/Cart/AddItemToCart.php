@@ -18,19 +18,19 @@ use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 /** @experimental */
 class AddItemToCart implements OrderTokenValueAwareInterface
 {
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     public $orderTokenValue;
 
     /**
      * @psalm-immutable
+     *
      * @var string
      */
     public $productVariantCode;
 
     /**
      * @psalm-immutable
+     *
      * @var int
      */
     public $quantity;

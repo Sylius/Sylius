@@ -11,7 +11,6 @@ use Payum\Bundle\PayumBundle\Controller\NotifyController;
 use Payum\Bundle\PayumBundle\Controller\PayoutController;
 use Payum\Bundle\PayumBundle\Controller\RefundController;
 use Payum\Bundle\PayumBundle\Controller\SyncController;
-use Payum\Bundle\PayumBundle\Controller;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;

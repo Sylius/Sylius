@@ -20,19 +20,19 @@ use Sylius\Bundle\ApiBundle\Command\SubresourceIdAwareInterface;
 /** @experimental */
 class ChoosePaymentMethod implements OrderTokenValueAwareInterface, SubresourceIdAwareInterface, PaymentMethodCodeAwareInterface
 {
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     public $orderTokenValue;
 
     /**
      * @psalm-immutable
+     *
      * @var string|null
      */
     public $paymentId;
 
     /**
      * @psalm-immutable
+     *
      * @var string|null
      */
     public $paymentMethodCode;

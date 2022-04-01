@@ -53,7 +53,7 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
             ->during('validate', [
                 new AddressOrder('john@doe.com', $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject()),
                 new class() extends Constraint {
-                }
+                },
             ])
         ;
     }
