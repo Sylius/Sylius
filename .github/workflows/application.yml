@@ -94,6 +94,10 @@ jobs:
                 run: bin/console lint:yaml src
                 if: always() && steps.end-of-setup.outcome == 'success'
 
+            -   name: Run ECS
+                if: matrix.php != '7.4'
+                run: vendor/bin/ecs check src/
+
             -
                 name: Run Psalm
                 run: vendor/bin/psalm --show-info=false --output-format=github --php-version=${{ matrix.php }}
