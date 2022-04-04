@@ -5,19 +5,20 @@
 
 ## Context and Problem Statement
 
-During the implementation of Headless Checkout [Pull Request](https://github.com/Sylius/Sylius/pull/13793) we encountered
-need to use a Specification pattern as multiple business requirements must be met before completing checkout.
+During the implementation of a Headless Checkout ([Pull Request](https://github.com/Sylius/Sylius/pull/13793)) we
+encountered the need to enforce multiple business requirements when completing the checkout, which is a perfect
+application of the [Specification pattern](https://en.wikipedia.org/wiki/Specification_pattern).
 
-### What Headless Checkout is?
-The current checkout system is highly coupled with UI, therefore to maintain the current checkout system, but use it via API
-a user had to make at least 5 requests in a specific order (add to cart, address, payment select, shipping select, complete).
-The new concept would reduce the number of requests to the API and get rid of the order requirement.
+### What is Headless Checkout?
+The current checkout system is highly coupled with UI. To use it via API, multiple requests must be made in a specific
+order: add to cart, address, select payment, select shipping, complete. The new concept would allow completing checkout
+with fewer requests in any order. This is crucial for one-page checkouts, where the user might perform any action in any order.
 
 ## Decision Drivers
 
-* User must be able to create, change and extend the logic of completing order requirements
-* Solution may be generic (abstract) from implementation
-* Specification or Composite must be able to be passed via Dependency Injection
+* User must be able to add, remove, or change order requirements
+* The solution may consist of a generic (abstract) and a concrete implementation
+* The solution must be applied using Dependency Injection to facilitate its customization by the user
 
 ## Considered Options
 
