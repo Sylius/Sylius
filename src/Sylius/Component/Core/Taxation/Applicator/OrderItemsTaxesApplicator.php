@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Taxation\Applicator;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
+use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
@@ -31,6 +32,7 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
         private AdjustmentFactoryInterface $adjustmentFactory,
         private IntegerDistributorInterface $distributor,
         private TaxRateResolverInterface $taxRateResolver,
+        private ProportionalIntegerDistributorInterface $proportionalIntegerDistributor
     ) {
     }
 
@@ -39,27 +41,40 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
      */
     public function apply(OrderInterface $order, ZoneInterface $zone): void
     {
-        foreach ($order->getItems() as $item) {
-            $quantity = $item->getQuantity();
-            Assert::notSame($quantity, 0, 'Cannot apply tax to order item with 0 quantity.');
+        $itemTaxFloatAmounts = [];
+        $itemTaxRates = [];
 
+        foreach ($order->getItems() as $index => $item) {
             /** @var TaxRateInterface|null $taxRate */
             $taxRate = $this->taxRateResolver->resolve($item->getVariant(), ['zone' => $zone]);
             if (null === $taxRate) {
+                $itemTaxFloatAmounts[$index] = 0;
+
                 continue;
             }
 
-            $totalTaxAmount = $this->calculator->calculate($item->getTotal(), $taxRate);
-            $splitTaxes = $this->distributor->distribute($totalTaxAmount, $quantity);
+            $itemTaxFloatAmounts[$index] = $this->calculator->calculate($item->getTotal(), $taxRate);
+            $itemTaxRates[$index] = $taxRate;
+        }
 
-            $i = 0;
-            foreach ($item->getUnits() as $unit) {
-                if (0 === $splitTaxes[$i]) {
+        $itemTaxWholeAmounts = array_map(fn (float $amount) => (int)round($amount), $itemTaxFloatAmounts);
+        $itemTotalTaxWholeAmount = (int)round(array_sum($itemTaxFloatAmounts));
+        $itemSplitTaxes = $this->proportionalIntegerDistributor->distribute($itemTaxWholeAmounts, $itemTotalTaxWholeAmount);
+
+        foreach ($order->getItems() as $i => $item) {
+            $quantity = $item->getQuantity();
+            Assert::notSame($quantity, 0, 'Cannot apply tax to order item with 0 quantity.');
+
+            $totalTaxAmount = $itemSplitTaxes[$i];
+            $taxRate = $itemTaxRates[$i];
+
+            $unitSplitTaxes = $this->distributor->distribute((float)$totalTaxAmount, $quantity);
+            foreach ($item->getUnits() as $j => $unit) {
+                if (0 === $unitSplitTaxes[$j]) {
                     continue;
                 }
 
-                $this->addAdjustment($unit, $splitTaxes[$i], $taxRate);
-                ++$i;
+                $this->addAdjustment($unit, $unitSplitTaxes[$j], $taxRate);
             }
         }
     }

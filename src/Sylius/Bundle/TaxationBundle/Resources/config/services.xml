@@ -36,6 +36,9 @@
         <service id="sylius.tax_calculator.default" class="Sylius\Component\Taxation\Calculator\DefaultCalculator">
             <tag name="sylius.tax_calculator" calculator="default" />
         </service>
+        <service id="sylius.tax_calculator.decimal" class="Sylius\Component\Taxation\Calculator\DefaultCalculator">
+            <tag name="sylius.tax_calculator" calculator="decimal" />
+        </service>
 
         <service id="sylius.tax_rate_resolver" class="Sylius\Component\Taxation\Resolver\TaxRateResolver">
             <argument type="service" id="sylius.repository.tax_rate" />
