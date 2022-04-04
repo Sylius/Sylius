@@ -33,6 +33,7 @@ To use themes inside of your project you need to add these few lines to your ``c
    sylius_theme:
        sources:
            filesystem:
+               scan_depth: 1
                directories:
                     - "%kernel.project_dir%/themes"
 
