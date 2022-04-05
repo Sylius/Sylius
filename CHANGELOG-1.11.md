@@ -224,7 +224,7 @@ Improvements and fixes in Catalog Promotion and Shop API
 - NEW FEATURE 🎉🎉🎉 Catalog promotions management: CRUD, asynchronous application on variants, different scopes, priorities management, exclusiveness and many more
 - New API improvements: especially the **Shop** part, reaching ~80% of UI features coverage
 - Bump required PHP version to 8.0, due to the end of life of PHP 7.4
-- Bump required Symfony version to 5.4 LTS
+- Bump required Symfony 5 version to 5.4 LTS
 
 #### Details
 
