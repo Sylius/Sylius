@@ -22,14 +22,18 @@ use Webmozart\Assert\Assert;
 final class LocaleContext implements Context
 {
     /** @var ApiClientInterface */
-    private $client;
+    private $localesClient;
+
+    /** @var ApiClientInterface */
+    private $cartsClient;
 
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
-    public function __construct(ApiClientInterface $client, ResponseCheckerInterface $responseChecker)
+    public function __construct(ApiClientInterface $localesClient, ApiClientInterface $cartsClient, ResponseCheckerInterface $responseChecker)
     {
-        $this->client = $client;
+        $this->localesClient = $localesClient;
+        $this->cartsClient = $cartsClient;
         $this->responseChecker = $responseChecker;
     }
 
@@ -38,7 +42,7 @@ final class LocaleContext implements Context
      */
     public function iGetAvailableLocales(): void
     {
-       $this->client->index();
+        $this->localesClient->index();
     }
 
     /**
@@ -46,7 +50,7 @@ final class LocaleContext implements Context
      */
     public function iGetLocale(LocaleInterface $locale): void
     {
-        $this->client->show($locale->getCode());
+        $this->localesClient->show($locale->getCode());
     }
 
     /**
@@ -55,7 +59,7 @@ final class LocaleContext implements Context
     public function iShouldHaveLocales(int $count): void
     {
         Assert::same(
-            $this->responseChecker->countCollectionItems($this->client->getLastResponse()),
+            $this->responseChecker->countCollectionItems($this->localesClient->getLastResponse()),
             $count
         );
     }
@@ -66,7 +70,7 @@ final class LocaleContext implements Context
     public function theLocaleWithCodeShouldBeAvailable(string $name, string $code): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValues($this->client->getLastResponse(), ['name' => $name, 'code' => $code])
+            $this->responseChecker->hasItemWithValues($this->localesClient->getLastResponse(), ['name' => $name, 'code' => $code])
         );
     }
 
@@ -76,7 +80,7 @@ final class LocaleContext implements Context
     public function theLocaleWithCodeShouldNotBeAvailable(string $name, string $code): void
     {
         Assert::false(
-            $this->responseChecker->hasItemWithValues($this->client->getLastResponse(), ['name' => $name, 'code' => $code])
+            $this->responseChecker->hasItemWithValues($this->localesClient->getLastResponse(), ['name' => $name, 'code' => $code])
         );
     }
 
@@ -85,9 +89,22 @@ final class LocaleContext implements Context
      */
     public function iShouldHaveWithCode(string $name, string $code): void
     {
-        $response = $this->client->getLastResponse();
+        $response = $this->localesClient->getLastResponse();
 
         Assert::true($this->responseChecker->hasValue($response, 'name', $name));
         Assert::true($this->responseChecker->hasValue($response, 'code', $code));
+    }
+
+    /**
+     * @Then I should( still) shop using the :localeCode locale
+     */
+    public function iShouldShopUsingTheLocale(string $localeCode): void
+    {
+        $this->cartsClient->buildCreateRequest();
+
+        Assert::same(
+            $this->responseChecker->getValue($this->cartsClient->create(), 'localeCode'),
+            $localeCode
+        );
     }
 }

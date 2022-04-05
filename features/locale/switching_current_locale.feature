@@ -23,5 +23,5 @@ Feature: Switching the current locale
     Scenario: Switching the current locale
         When I browse that channel
         And I switch to the "Polish (Poland)" locale
-        Then I should shop using the "polski (Polska)" locale
+        Then I should shop using the "Polish (Poland)" locale
         And I should be able to shop using the "angielski (Stany Zjednoczone)" locale
