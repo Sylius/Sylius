@@ -40,7 +40,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 .. code-block:: bash
 
     composer config repositories.plus composer https://sylius.repo.packagist.com/ShortNameOfYourOrganization/
-    composer require "sylius/plus:^1.0.0-ALPHA.5" --no-update
+    composer require "sylius/plus:^1.0.0-ALPHA.6" --no-update
     composer update --no-scripts
     composer sync-recipes
 
@@ -105,21 +105,25 @@ Installing Sylius Plus as a plugin to a Sylius application
     namespace App\Entity\User;
 
     use Doctrine\Common\Collections\ArrayCollection;
-    use Doctrine\ORM\Mapping\Entity;
-    use Doctrine\ORM\Mapping\Table;
+    use Doctrine\ORM\Mapping as ORM;
+    use Sylius\Component\Channel\Model\ChannelAwareInterface;
     use Sylius\Component\Core\Model\AdminUser as BaseAdminUser;
-    use Sylius\Plus\Entity\AdminUserInterface;
-    use Sylius\Plus\Entity\AdminUserTrait;
+    use Sylius\Component\Core\Model\AdminUserInterface;
+    use Sylius\Plus\ChannelAdmin\Domain\Model\AdminChannelAwareTrait;
+    use Sylius\Plus\Entity\LastLoginIpAwareInterface;
+    use Sylius\Plus\Entity\LastLoginIpAwareTrait;
+    use Sylius\Plus\Rbac\Domain\Model\AdminUserInterface as RbacAdminUserInterface;
     use Sylius\Plus\Rbac\Domain\Model\RoleableTrait;
     use Sylius\Plus\Rbac\Domain\Model\ToggleablePermissionCheckerTrait;
 
     /**
-     * @Entity
-     * @Table(name="sylius_admin_user")
+     * @ORM\Entity
+     * @ORM\Table(name="sylius_admin_user")
      */
-    class AdminUser extends BaseAdminUser implements AdminUserInterface
+    class AdminUser extends BaseAdminUser implements AdminUserInterface, RbacAdminUserInterface, ChannelAwareInterface, LastLoginIpAwareInterface
     {
-        use AdminUserTrait;
+        use AdminChannelAwareTrait;
+        use LastLoginIpAwareTrait;
         use ToggleablePermissionCheckerTrait;
         use RoleableTrait;
 
@@ -140,19 +144,25 @@ Installing Sylius Plus as a plugin to a Sylius application
 
     namespace App\Entity\Channel;
 
-    use Doctrine\ORM\Mapping\Entity;
-    use Doctrine\ORM\Mapping\Table;
-    use Sylius\Plus\Entity\ChannelInterface;
-    use Sylius\Plus\Entity\ChannelTrait;
+    use Doctrine\ORM\Mapping as ORM;
     use Sylius\Component\Core\Model\Channel as BaseChannel;
+    use Sylius\Component\Core\Model\ChannelInterface;
+    use Sylius\Plus\BusinessUnits\Domain\Model\BusinessUnitAwareTrait;
+    use Sylius\Plus\BusinessUnits\Domain\Model\ChannelInterface as BusinessUnitsChannelInterface;
+    use Sylius\Plus\CustomerPools\Domain\Model\ChannelInterface as CustomerPoolsChannelInterface;
+    use Sylius\Plus\CustomerPools\Domain\Model\CustomerPoolAwareTrait;
+    use Sylius\Plus\Returns\Domain\Model\ChannelInterface as ReturnsChannelInterface;
+    use Sylius\Plus\Returns\Domain\Model\ReturnRequestsAllowedAwareTrait;
 
     /**
-     * @Entity
-     * @Table(name="sylius_channel")
+     * @ORM\Entity
+     * @ORM\Table(name="sylius_channel")
      */
-    class Channel extends BaseChannel implements ChannelInterface
+    class Channel extends BaseChannel implements ChannelInterface, ReturnsChannelInterface, BusinessUnitsChannelInterface, CustomerPoolsChannelInterface
     {
-        use ChannelTrait;
+        use ReturnRequestsAllowedAwareTrait;
+        use CustomerPoolAwareTrait;
+        use BusinessUnitAwareTrait;
     }
 
 .. code-block:: php
@@ -164,19 +174,22 @@ Installing Sylius Plus as a plugin to a Sylius application
 
     namespace App\Entity\Customer;
 
-    use Doctrine\ORM\Mapping\Entity;
-    use Doctrine\ORM\Mapping\Table;
-    use Sylius\Plus\Entity\CustomerInterface;
-    use Sylius\Plus\Entity\CustomerTrait;
+    use Doctrine\ORM\Mapping as ORM;
     use Sylius\Component\Core\Model\Customer as BaseCustomer;
+    use Sylius\Component\Core\Model\CustomerInterface;
+    use Sylius\Plus\CustomerPools\Domain\Model\CustomerInterface as CustomerPoolsCustomerInterface;
+    use Sylius\Plus\CustomerPools\Domain\Model\CustomerPoolAwareTrait;
+    use Sylius\Plus\Loyalty\Domain\Model\CustomerInterface as LoyaltyCustomerInterface;
+    use Sylius\Plus\Loyalty\Domain\Model\LoyaltyAwareTrait;
 
     /**
-     * @Entity
-     * @Table(name="sylius_customer")
+     * @ORM\Entity
+     * @ORM\Table(name="sylius_customer")
      */
-    class Customer extends BaseCustomer implements CustomerInterface
+    class Customer extends BaseCustomer implements CustomerInterface, CustomerPoolsCustomerInterface, LoyaltyCustomerInterface
     {
-        use CustomerTrait;
+        use CustomerPoolAwareTrait;
+        use LoyaltyAwareTrait;
     }
 
 .. code-block:: php
@@ -188,19 +201,19 @@ Installing Sylius Plus as a plugin to a Sylius application
 
     namespace App\Entity\Order;
 
-    use Doctrine\ORM\Mapping\Entity;
-    use Doctrine\ORM\Mapping\Table;
-    use Sylius\Plus\Entity\OrderInterface;
-    use Sylius\Plus\Entity\OrderTrait;
+    use Doctrine\ORM\Mapping as ORM;
     use Sylius\Component\Core\Model\Order as BaseOrder;
+    use Sylius\Component\Core\Model\OrderInterface;
+    use Sylius\Plus\Returns\Domain\Model\OrderInterface as ReturnsOrderInterface;
+    use Sylius\Plus\Returns\Domain\Model\ReturnRequestAwareTrait;
 
     /**
-     * @Entity
-     * @Table(name="sylius_order")
+     * @ORM\Entity
+     * @ORM\Table(name="sylius_order")
      */
-    class Order extends BaseOrder implements OrderInterface
+    class Order extends BaseOrder implements OrderInterface, ReturnsOrderInterface
     {
-        use OrderTrait;
+        use ReturnRequestAwareTrait;
     }
 
 .. code-block:: php
@@ -212,20 +225,20 @@ Installing Sylius Plus as a plugin to a Sylius application
 
     namespace App\Entity\Product;
 
-    use Doctrine\ORM\Mapping\Entity;
-    use Doctrine\ORM\Mapping\Table;
+    use Doctrine\ORM\Mapping as ORM;
     use Sylius\Component\Core\Model\ProductVariant as BaseProductVariant;
+    use Sylius\Component\Core\Model\ProductVariantInterface;
     use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
-    use Sylius\Plus\Entity\ProductVariantInterface;
-    use Sylius\Plus\Entity\ProductVariantTrait;
+    use Sylius\Plus\Inventory\Domain\Model\InventorySourceStocksAwareTrait;
+    use Sylius\Plus\Inventory\Domain\Model\ProductVariantInterface as InventoryProductVariantInterface;
 
     /**
-    * @Entity
-    * @Table(name="sylius_product_variant")
-    */
-    class ProductVariant extends BaseProductVariant implements ProductVariantInterface
+     * @ORM\Entity()
+     * @ORM\Table(name="sylius_product_variant")
+     */
+    class ProductVariant extends BaseProductVariant implements ProductVariantInterface, InventoryProductVariantInterface
     {
-        use ProductVariantTrait {
+        use InventorySourceStocksAwareTrait {
             __construct as private initializeProductVariantTrait;
         }
 
@@ -251,19 +264,19 @@ Installing Sylius Plus as a plugin to a Sylius application
 
     namespace App\Entity\Shipping;
 
-    use Doctrine\ORM\Mapping\Entity;
-    use Doctrine\ORM\Mapping\Table;
+    use Doctrine\ORM\Mapping as ORM;
     use Sylius\Component\Core\Model\Shipment as BaseShipment;
-    use Sylius\Plus\Entity\ShipmentInterface;
-    use Sylius\Plus\Entity\ShipmentTrait;
+    use Sylius\Component\Core\Model\ShipmentInterface;
+    use Sylius\Plus\Inventory\Domain\Model\InventorySourceAwareTrait;
+    use Sylius\Plus\Inventory\Domain\Model\ShipmentInterface as InventoryShipmentInterface;
 
     /**
-     * @Entity
-     * @Table(name="sylius_shipment")
+     * @ORM\Entity()
+     * @ORM\Table(name="sylius_shipment")
      */
-    class Shipment extends BaseShipment implements ShipmentInterface
+    class Shipment extends BaseShipment implements ShipmentInterface, InventoryShipmentInterface
     {
-        use ShipmentTrait;
+        use InventorySourceAwareTrait;
     }
 
 **7.** Add wkhtmltopdf binary for Invoicing purposes.
