@@ -18,7 +18,8 @@ Sylius Documentation
 
 .. tip::
 
-   **The Book, Customization Guide, REST API Reference, Cookbook, Contribution Guide and Behat Guide**
+   **Getting Started with Sylius, The Book, Customization Guide, The Cookbook,**
+   **BDD Guide, Components & Bundles and Performance Guide**
    are chapters describing the usage of **the whole Sylius platform**, on the examples for Sylius-Standard distribution.
 
    For tips on using only some bundles of Sylius head to Bundles and Components docs.
