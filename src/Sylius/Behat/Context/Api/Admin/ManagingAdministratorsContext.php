@@ -25,9 +25,11 @@ use Webmozart\Assert\Assert;
 
 final class ManagingAdministratorsContext implements Context
 {
-    private ApiClientInterface $client;
+    private const RESOURCE_ADMINISTRATORS = 'administrators';
 
-    private ApiClientInterface $avatarImagesClient;
+    private const RESOURCE_AVATAR_IMAGES = 'avatar-images';
+
+    private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
 
@@ -39,14 +41,12 @@ final class ManagingAdministratorsContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
-        ApiClientInterface $avatarImagesClient,
         ResponseCheckerInterface $responseChecker,
         IriConverterInterface $iriConverter,
         SharedStorageInterface $sharedStorage,
         \ArrayAccess $minkParameters
     ) {
         $this->client = $client;
-        $this->avatarImagesClient = $avatarImagesClient;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
         $this->sharedStorage = $sharedStorage;
@@ -59,7 +59,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iWantToEditThisAdministrator(AdminUserInterface $adminUser): void
     {
-        $this->client->buildUpdateRequest((string) $adminUser->getId());
+        $this->client->buildUpdateRequest(self::RESOURCE_ADMINISTRATORS, (string) $adminUser->getId());
     }
 
     /**
@@ -68,7 +68,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iBrowseAdministrators(): void
     {
-        $this->client->index();
+        $this->client->index(self::RESOURCE_ADMINISTRATORS);
     }
 
     /**
@@ -76,7 +76,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iWantToCreateANewAdministrator(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(self::RESOURCE_ADMINISTRATORS);
     }
 
     /**
@@ -153,7 +153,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iDeleteAdministratorWithEmail(AdminUserInterface $adminUser): void
     {
-        $this->client->delete((string) $adminUser->getId());
+        $this->client->delete(self::RESOURCE_ADMINISTRATORS, (string) $adminUser->getId());
     }
 
     /**
@@ -161,10 +161,10 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iUploadTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
     {
-        $this->avatarImagesClient->buildUploadRequest();
-        $this->avatarImagesClient->addParameter('owner', $this->iriConverter->getIriFromItem($administrator));
-        $this->avatarImagesClient->addFile('file', new UploadedFile($this->minkParameters['files_path'] . $avatar, basename($avatar)));
-        $response = $this->avatarImagesClient->upload();
+        $this->client->buildUploadRequest(self::RESOURCE_AVATAR_IMAGES);
+        $this->client->addParameter('owner', $this->iriConverter->getIriFromItem($administrator));
+        $this->client->addFile('file', new UploadedFile($this->minkParameters['files_path'] . $avatar, basename($avatar)));
+        $response = $this->client->upload();
 
         $this->sharedStorage->set(StringInflector::nameToCode($avatar), $this->responseChecker->getValue($response, '@id'));
     }
@@ -179,7 +179,7 @@ final class ManagingAdministratorsContext implements Context
         $avatar = $administrator->getAvatar();
         Assert::notNull($avatar);
 
-        $this->avatarImagesClient->delete((string) $avatar->getId());
+        $this->client->delete(self::RESOURCE_AVATAR_IMAGES, (string) $avatar->getId());
     }
 
     /**
@@ -198,7 +198,7 @@ final class ManagingAdministratorsContext implements Context
     public function theAdministratorShouldAppearInTheStore(string $email): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(), 'email', $email),
+            $this->responseChecker->hasItemWithValue($this->client->index(self::RESOURCE_ADMINISTRATORS), 'email', $email),
             sprintf('Administrator with email %s does not exist', $email)
         );
     }
@@ -209,7 +209,7 @@ final class ManagingAdministratorsContext implements Context
     public function thereShouldNotBeAdministratorAnymore(string $email): void
     {
         Assert::false(
-            $this->responseChecker->hasItemWithValue($this->client->index(), 'email', $email),
+            $this->responseChecker->hasItemWithValue($this->client->index(self::RESOURCE_ADMINISTRATORS), 'email', $email),
             sprintf('Administrator with email %s exists, but it should not', $email)
         );
     }
@@ -220,7 +220,7 @@ final class ManagingAdministratorsContext implements Context
     public function thereShouldStillBeOnlyOneAdministratorWithAnEmail(string $email): void
     {
         Assert::count(
-            $this->responseChecker->getCollectionItemsWithValue($this->client->index(), 'email', $email),
+            $this->responseChecker->getCollectionItemsWithValue($this->client->index(self::RESOURCE_ADMINISTRATORS), 'email', $email),
             1,
             sprintf('There is more than one administrator with email %s', $email)
         );
@@ -233,7 +233,7 @@ final class ManagingAdministratorsContext implements Context
     public function thisAdministratorWithNameShouldAppearInTheStore(string $username): void
     {
         Assert::count(
-            $this->responseChecker->getCollectionItemsWithValue($this->client->index(), 'username', $username),
+            $this->responseChecker->getCollectionItemsWithValue($this->client->index(self::RESOURCE_ADMINISTRATORS), 'username', $username),
             1,
             sprintf('There is more than one administrator with username %s', $username)
         );
@@ -337,7 +337,7 @@ final class ManagingAdministratorsContext implements Context
     public function iShouldSeeTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
     {
         Assert::true($this->responseChecker->hasValue(
-            $this->client->show((string) $administrator->getId()),
+            $this->client->show(self::RESOURCE_ADMINISTRATORS, (string) $administrator->getId()),
             'avatar',
             $this->sharedStorage->get(StringInflector::nameToCode($avatar))
         ));
@@ -352,7 +352,7 @@ final class ManagingAdministratorsContext implements Context
         $administrator = $this->sharedStorage->get('administrator');
 
         Assert::true($this->responseChecker->hasValue(
-            $this->client->show((string) $administrator->getId()),
+            $this->client->show(self::RESOURCE_ADMINISTRATORS, (string) $administrator->getId()),
             'avatar',
             null
         ));

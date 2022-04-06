@@ -21,6 +21,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingTaxCategoriesContext implements Context
 {
+    private const RESOURCE = 'tax-categories';
+
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
@@ -36,7 +38,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iWantToCreateNewTaxCategory(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(self::RESOURCE);
     }
 
     /**
@@ -45,7 +47,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iWantToModifyTaxCategory(TaxCategoryInterface $taxCategory): void
     {
-        $this->client->buildUpdateRequest($taxCategory->getCode());
+        $this->client->buildUpdateRequest(self::RESOURCE, $taxCategory->getCode());
     }
 
     /**
@@ -53,7 +55,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iDeleteTaxCategory(TaxCategoryInterface $taxCategory): void
     {
-        $this->client->delete($taxCategory->getCode());
+        $this->client->delete(self::RESOURCE, $taxCategory->getCode());
     }
 
     /**
@@ -116,7 +118,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iWantToBrowseTaxCategories(): void
     {
-        $this->client->index();
+        $this->client->index(self::RESOURCE);
     }
 
     /**
@@ -163,7 +165,7 @@ final class ManagingTaxCategoriesContext implements Context
     public function thisTaxCategoryNameShouldBe(TaxCategoryInterface $taxCategory, string $taxCategoryName): void
     {
         Assert::true(
-            $this->responseChecker->hasValue($this->client->show($taxCategory->getCode()), 'name', $taxCategoryName),
+            $this->responseChecker->hasValue($this->client->show(self::RESOURCE, $taxCategory->getCode()), 'name', $taxCategoryName),
             sprintf('Tax category name is not %s', $taxCategoryName)
         );
     }
@@ -252,6 +254,6 @@ final class ManagingTaxCategoriesContext implements Context
 
     private function isItemOnIndex(string $property, string $value): bool
     {
-        return $this->responseChecker->hasItemWithValue($this->client->index(), $property, $value);
+        return $this->responseChecker->hasItemWithValue($this->client->index(self::RESOURCE), $property, $value);
     }
 }

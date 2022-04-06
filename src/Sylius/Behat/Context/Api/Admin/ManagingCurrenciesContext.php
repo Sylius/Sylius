@@ -20,6 +20,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCurrenciesContext implements Context
 {
+    private const RESOURCE = 'currencies';
+
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
@@ -35,7 +37,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iWantToSeeAllCurrenciesInStore(): void
     {
-        $this->client->index();
+        $this->client->index(self::RESOURCE);
     }
 
     /**
@@ -43,7 +45,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iWantToAddNewCurrency(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(self::RESOURCE);
     }
 
     /**
@@ -79,7 +81,7 @@ final class ManagingCurrenciesContext implements Context
     public function currencyShouldAppearInTheStore(string $currencyName): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $currencyName),
+            $this->responseChecker->hasItemWithValue($this->client->index(self::RESOURCE), 'name', $currencyName),
             sprintf('There is no currency with name "%s"', $currencyName)
         );
     }
@@ -89,7 +91,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function thereShouldStillBeOnlyOneCurrencyWithCode(string $code): void
     {
-        $response = $this->client->index();
+        $response = $this->client->index(self::RESOURCE);
         Assert::same($this->responseChecker->countCollectionItems($response), 1);
         Assert::true(
             $this->responseChecker->hasItemWithValue($response, 'code', $code),
