@@ -14,9 +14,6 @@ jobs:
             -   name: Checkout code
                 uses: actions/checkout@v2
 
-            -   name: Build docker images
-                run: docker-compose build
-
             -   name: Run PHPUnit, PHPSpec and Behat tests
                 run: docker-compose run ci
     
@@ -27,19 +24,6 @@ jobs:
             -
                 name: Checkout
                 uses: actions/checkout@v2
-            -
-                name: Set up Docker Buildx
-                id: buildx
-                uses: docker/setup-buildx-action@v1
-            -
-                name: Build Docker Image
-                run: |
-                    docker build .docker --tag sylius_app
-            -
-                name: Check Versions
-                run: |
-                    chmod +x .docker/run-tests.sh
-                    ./.docker/run-tests.sh
             -
                 name: Shutdown default MySQL
                 run: sudo service mysql stop
@@ -65,4 +49,4 @@ jobs:
                     -e DATABASE_URL="mysql://root@mysql/sylius_dev" \
                     --net sylius_network \
                     -p 80:80/tcp \
-                    -i sylius_app make ci
+                    -i sylius/standard:1.11-traditional make ci

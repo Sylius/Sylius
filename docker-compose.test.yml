@@ -1,7 +1,7 @@
 services:
     ci:
         image: sylius/standard:1.11-traditional
-        command: make ci
+        entrypoint: ["make", "ci"]
         environment:
             APP_ENV: "test"
             DATABASE_URL: "mysql://root:mysql@mysql/sylius_test"
