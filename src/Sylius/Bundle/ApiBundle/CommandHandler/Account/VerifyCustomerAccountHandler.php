@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use InvalidArgumentException;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
+use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,8 +24,10 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /** @experimental  */
 final class VerifyCustomerAccountHandler implements MessageHandlerInterface
 {
-    public function __construct(private RepositoryInterface $shopUserRepository)
-    {
+    public function __construct(
+        private RepositoryInterface $shopUserRepository,
+        private DateTimeProviderInterface $calendar
+    ) {
     }
 
     public function __invoke(VerifyCustomerAccount $command): JsonResponse
@@ -37,7 +40,7 @@ final class VerifyCustomerAccountHandler implements MessageHandlerInterface
             );
         }
 
-        $user->setVerifiedAt(new \DateTime());
+        $user->setVerifiedAt($this->calendar->now());
         $user->setEmailVerificationToken(null);
         $user->enable();
 
