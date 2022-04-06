@@ -24,18 +24,20 @@ use Webmozart\Assert\Assert;
 
 final class ShipmentContext implements Context
 {
-    private ApiClientInterface $shipmentsClient;
+    private const RESOURCE = 'shipments';
+
+    private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
 
     private SharedStorageInterface $sharedStorage;
 
     public function __construct(
-        ApiClientInterface $shipmentsClient,
+        ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage
     ) {
-        $this->shipmentsClient = $shipmentsClient;
+        $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
     }
@@ -52,7 +54,7 @@ final class ShipmentContext implements Context
         /** @var ShipmentInterface $shipment */
         $shipment = $order->getShipments()->first();
 
-        $this->shipmentsClient->show((string) $shipment->getId());
+        $this->client->show(self::RESOURCE, (string) $shipment->getId());
     }
 
     /**
@@ -60,6 +62,6 @@ final class ShipmentContext implements Context
      */
     public function iShouldNotBeAbleToSeeThatShipment(): void
     {
-        Assert::false($this->responseChecker->isShowSuccessful($this->shipmentsClient->getLastResponse()));
+        Assert::false($this->responseChecker->isShowSuccessful($this->client->getLastResponse()));
     }
 }

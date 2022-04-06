@@ -39,7 +39,7 @@ final class ChannelContext implements Context
         $this->sharedStorage->set('hostname', $channel->getHostname());
         $this->sharedStorage->remove('current_locale_code');
 
-        $this->client->show($channel->getCode());
+        $this->client->show('channels', $channel->getCode());
     }
 
     /**

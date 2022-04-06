@@ -30,13 +30,15 @@ use Webmozart\Assert\Assert;
 
 final class CartContext implements Context
 {
-    private ApiClientInterface $cartsClient;
+    private const RESOURCE_ORDERS = 'orders';
 
-    private ApiClientInterface $ordersAdminClient;
+    private const RESOURCE_PRODUCTS = 'products';
 
-    private ApiClientInterface $productsClient;
+    private const RESOURCE_PRODUCT_VARIANTS = 'product-variants';
 
-    private ApiClientInterface $productVariantsClient;
+    private ApiClientInterface $shopClient;
+
+    private ApiClientInterface $adminClient;
 
     private ResponseCheckerInterface $responseChecker;
 
@@ -47,19 +49,15 @@ final class CartContext implements Context
     private IriConverterInterface $iriConverter;
 
     public function __construct(
-        ApiClientInterface $cartsClient,
-        ApiClientInterface $ordersAdminClient,
-        ApiClientInterface $productsClient,
-        ApiClientInterface $productVariantsClient,
+        ApiClientInterface $shopClient,
+        ApiClientInterface $adminClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
         ProductVariantResolverInterface $productVariantResolver,
         IriConverterInterface $iriConverter
     ) {
-        $this->cartsClient = $cartsClient;
-        $this->ordersAdminClient = $ordersAdminClient;
-        $this->productsClient = $productsClient;
-        $this->productVariantsClient = $productVariantsClient;
+        $this->shopClient = $shopClient;
+        $this->adminClient = $adminClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
         $this->productVariantResolver = $productVariantResolver;
@@ -71,7 +69,7 @@ final class CartContext implements Context
      */
     public function iClearMyCart(string $tokenValue): void
     {
-        $this->cartsClient->delete($tokenValue);
+        $this->shopClient->delete(self::RESOURCE_ORDERS, $tokenValue);
 
         $this->sharedStorage->set('cart_token', null);
     }
@@ -87,7 +85,7 @@ final class CartContext implements Context
             $tokenValue = $this->pickupCart();
         }
 
-        $this->cartsClient->show($tokenValue);
+        $this->shopClient->show(self::RESOURCE_ORDERS, $tokenValue);
     }
 
     /**
@@ -95,7 +93,7 @@ final class CartContext implements Context
      */
     public function theAdministratorTryToSeeTheSummaryOfCart(?string $tokenValue): void
     {
-        $this->ordersAdminClient->show($tokenValue);
+        $this->adminClient->show(self::RESOURCE_ORDERS, $tokenValue);
     }
 
     /**
@@ -143,28 +141,28 @@ final class CartContext implements Context
         string $productOption,
         string $productOptionValue
     ): void {
-        $productData = json_decode($this->productsClient->show($product->getCode())->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+        $productData = json_decode($this->shopClient->show(self::RESOURCE_PRODUCTS, $product->getCode())->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
         $variantIri = null;
         foreach ($productData['options'] as $optionIri) {
-            $optionData = json_decode($this->productsClient->showByIri($optionIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+            $optionData = json_decode($this->shopClient->showByIri($optionIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
             if ($optionData['name'] !== $productOption) {
                 continue;
             }
 
             foreach ($optionData['values'] as $valueIri) {
-                $optionValueData = json_decode($this->productsClient->showByIri($valueIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+                $optionValueData = json_decode($this->shopClient->showByIri($valueIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
                 if ($optionValueData['value'] !== $productOptionValue) {
                     continue;
                 }
 
-                $this->productVariantsClient->index();
-                $this->productVariantsClient->addFilter('product', $productData['@id']);
-                $this->productVariantsClient->addFilter('optionValues', $valueIri);
+                $this->shopClient->index(self::RESOURCE_PRODUCT_VARIANTS);
+                $this->shopClient->addFilter('product', $productData['@id']);
+                $this->shopClient->addFilter('optionValues', $valueIri);
 
-                $variantsData = json_decode($this->productVariantsClient->filter()->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+                $variantsData = json_decode($this->shopClient->filter()->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
                 Assert::same($variantsData['hydra:totalItems'], 1);
 
@@ -186,7 +184,7 @@ final class CartContext implements Context
             'quantity' => 1,
         ]);
 
-        $this->cartsClient->executeCustomRequest($request);
+        $this->shopClient->executeCustomRequest($request);
     }
 
     /**
@@ -233,7 +231,7 @@ final class CartContext implements Context
      */
     public function iCheckDetailsOfMyCart(string $tokenValue): void
     {
-        $this->cartsClient->show($tokenValue);
+        $this->shopClient->show(self::RESOURCE_ORDERS, $tokenValue);
     }
 
     /**
@@ -243,7 +241,7 @@ final class CartContext implements Context
     public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
     {
         Assert::true($this->responseChecker->hasViolationWithMessage(
-            $this->cartsClient->getLastResponse(),
+            $this->shopClient->getLastResponse(),
             sprintf('The product variant with %s code does not have sufficient stock.', $product->getCode())
         ));
     }
@@ -255,7 +253,7 @@ final class CartContext implements Context
     public function iShouldNotBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
     {
         Assert::false($this->responseChecker->hasViolationWithMessage(
-            $this->cartsClient->getLastResponse(),
+            $this->shopClient->getLastResponse(),
             sprintf('The product variant with %s code does not have sufficient stock.', $product->getCode())
         ));
     }
@@ -275,7 +273,7 @@ final class CartContext implements Context
     {
         Assert::same(
             $this->responseChecker->getValue(
-                $this->cartsClient->getLastResponse(),
+                $this->shopClient->getLastResponse(),
                 'localeCode'
             ),
             $locale->getCode()
@@ -287,7 +285,7 @@ final class CartContext implements Context
      */
     public function iDoNotHaveAccessToSeeTheSummaryOfMyCart(string $tokenValue): void
     {
-        Assert::same($this->cartsClient->show($tokenValue)->getStatusCode(), Response::HTTP_NOT_FOUND);
+        Assert::same($this->shopClient->show(self::RESOURCE_ORDERS, $tokenValue)->getStatusCode(), Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -295,7 +293,7 @@ final class CartContext implements Context
      */
     public function myCartShouldBeCleared(): void
     {
-        $response = $this->cartsClient->getLastResponse();
+        $response = $this->shopClient->getLastResponse();
 
         Assert::true(
             $this->responseChecker->isDeletionSuccessful($response),
@@ -310,7 +308,7 @@ final class CartContext implements Context
      */
     public function myCartTotalShouldBe(string $tokenValue, int $total): void
     {
-        $response = $this->cartsClient->show($tokenValue);
+        $response = $this->shopClient->show(self::RESOURCE_ORDERS, $tokenValue);
         $responseTotal = $this->responseChecker->getValue(
             $response,
             'total'
@@ -324,7 +322,7 @@ final class CartContext implements Context
      */
     public function myCartShouldBeEmpty(string $tokenValue): void
     {
-        $response = $this->cartsClient->show($tokenValue);
+        $response = $this->shopClient->show(self::RESOURCE_ORDERS, $tokenValue);
 
         Assert::true(
             $this->responseChecker->isShowSuccessful($response),
@@ -337,7 +335,7 @@ final class CartContext implements Context
      */
     public function theVisitorHasNoAccessToCustomer(?string $tokenValue): void
     {
-        $response = $this->cartsClient->show($tokenValue);
+        $response = $this->shopClient->show(self::RESOURCE_ORDERS, $tokenValue);
 
         Assert::false(
             $this->responseChecker->isShowSuccessful($response),
@@ -358,7 +356,7 @@ final class CartContext implements Context
      */
     public function iShouldBeNotifiedThatTheProductHasBeenSuccessfullyAdded(): void
     {
-        $response = $this->cartsClient->getLastResponse();
+        $response = $this->shopClient->getLastResponse();
         Assert::true(
             $this->responseChecker->isCreationSuccessful($response),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Item has not been added.', $response)
@@ -370,7 +368,7 @@ final class CartContext implements Context
      */
     public function iShouldBeNotifiedThatQuantityOfAddedProductCannotBeLowerThan1(): void
     {
-        $response = $this->cartsClient->getLastResponse();
+        $response = $this->shopClient->getLastResponse();
         Assert::false(
             $this->responseChecker->isCreationSuccessful($response),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Quantity of an order item cannot be lower than 1.', $response)
@@ -382,7 +380,7 @@ final class CartContext implements Context
      */
     public function iShouldSeeProductWithUnitPriceInMyCart(string $productName, int $unitPrice): void
     {
-        $response = $this->cartsClient->getLastResponse();
+        $response = $this->shopClient->getLastResponse();
 
         foreach ($this->responseChecker->getValue($response, 'items') as $item) {
             if ($item['productName'] === $productName) {
@@ -401,7 +399,7 @@ final class CartContext implements Context
      */
     public function iShouldSeeProductWithDiscountedUnitPriceInMyCart(string $productName, int $discountedUnitPrice): void
     {
-        $response = $this->cartsClient->getLastResponse();
+        $response = $this->shopClient->getLastResponse();
 
         foreach ($this->responseChecker->getValue($response, 'items') as $item) {
             if ($item['productName'] === $productName) {
@@ -419,7 +417,7 @@ final class CartContext implements Context
      */
     public function theProductShouldHaveTotalPriceInTheCart(string $productName, int $totalPrice): void
     {
-        $response = $this->cartsClient->getLastResponse();
+        $response = $this->shopClient->getLastResponse();
 
         foreach ($this->responseChecker->getValue($response, 'items') as $item) {
             if ($item['productName'] === $productName) {
@@ -437,7 +435,7 @@ final class CartContext implements Context
      */
     public function thereShouldBeOneItemInMyCart(): void
     {
-        $response = $this->cartsClient->getLastResponse();
+        $response = $this->shopClient->getLastResponse();
         $items = $this->responseChecker->getValue($response, 'items');
 
         Assert::count($items, 1);
@@ -450,7 +448,7 @@ final class CartContext implements Context
      */
     public function thereShouldCountItemsInMyCart(int $count, string $cartToken): void
     {
-        $response = $this->cartsClient->show($cartToken);
+        $response = $this->shopClient->show(self::RESOURCE_ORDERS, $cartToken);
         $items = $this->responseChecker->getValue($response, 'items');
 
         Assert::count($items, $count);
@@ -520,7 +518,7 @@ final class CartContext implements Context
      */
     public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void
     {
-        $this->checkProductQuantityByCustomer($this->cartsClient->getLastResponse(), $productName, $quantity);
+        $this->checkProductQuantityByCustomer($this->shopClient->getLastResponse(), $productName, $quantity);
     }
 
     /**
@@ -528,7 +526,7 @@ final class CartContext implements Context
      */
     public function iShouldBeInformedThatCartItemsAreNoLongerAvailable(): void
     {
-        $response = $this->sharedStorage->get('response') ?? $this->cartsClient->getLastResponse();
+        $response = $this->sharedStorage->get('response') ?? $this->shopClient->getLastResponse();
 
         Assert::same($response->getStatusCode(), 404);
 
@@ -540,7 +538,7 @@ final class CartContext implements Context
      */
     public function theAdministratorShouldSeeProductWithQuantityInTheCart(string $productName, int $quantity): void
     {
-        $this->checkProductQuantityByAdmin($this->ordersAdminClient->getLastResponse(), $productName, $quantity);
+        $this->checkProductQuantityByAdmin($this->adminClient->getLastResponse(), $productName, $quantity);
     }
 
     /**
@@ -551,7 +549,7 @@ final class CartContext implements Context
         string $tokenValue,
         int $quantity = 1
     ): void {
-        $this->cartsClient->show($tokenValue);
+        $this->shopClient->show(self::RESOURCE_ORDERS, $tokenValue);
 
         $this->iShouldSeeWithQuantityInMyCart($product->getName(), $quantity);
     }
@@ -563,7 +561,7 @@ final class CartContext implements Context
     {
         $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_GET, 'items');
 
-        $this->cartsClient->executeCustomRequest($request);
+        $this->shopClient->executeCustomRequest($request);
     }
 
     /**
@@ -572,7 +570,7 @@ final class CartContext implements Context
     public function myCartShouldHaveItemsTotal(int $itemsTotal): void
     {
         Assert::same(
-            $this->responseChecker->getValue($this->cartsClient->getLastResponse(), 'itemsTotal'),
+            $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'itemsTotal'),
             $itemsTotal
         );
     }
@@ -583,7 +581,7 @@ final class CartContext implements Context
     public function myCartTaxesShouldBe(int $taxTotal): void
     {
         Assert::same(
-            $this->responseChecker->getValue($this->cartsClient->getLastResponse(), 'taxTotal'),
+            $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'taxTotal'),
             $taxTotal
         );
     }
@@ -594,7 +592,7 @@ final class CartContext implements Context
      */
     public function myCartShouldHaveItems(int $quantity, ProductInterface $product): void
     {
-        $response = $this->cartsClient->getLastResponse();
+        $response = $this->shopClient->getLastResponse();
 
         Assert::true($this->hasItemWithNameAndQuantity($response, $product->getName(), $quantity));
     }
@@ -606,7 +604,7 @@ final class CartContext implements Context
      */
     public function myCartShippingFeeShouldBe(int $shippingTotal = 0): void
     {
-        $response = $this->cartsClient->getLastResponse();
+        $response = $this->shopClient->getLastResponse();
 
         Assert::same(
             $this->responseChecker->getValue($response, 'shippingTotal'),
@@ -627,7 +625,7 @@ final class CartContext implements Context
      */
     public function iShouldHaveEmptyCart(string $tokenValue): void
     {
-        $items = $this->responseChecker->getValue($this->cartsClient->show($tokenValue), 'items');
+        $items = $this->responseChecker->getValue($this->shopClient->show(self::RESOURCE_ORDERS, $tokenValue), 'items');
 
         Assert::same(count($items), 0, 'There should be an empty cart');
     }
@@ -643,7 +641,7 @@ final class CartContext implements Context
         $tokenValue = $this->pickupCart();
         $this->putProductVariantToCart($productVariant, $tokenValue);
 
-        $response = $this->cartsClient->getLastResponse();
+        $response = $this->shopClient->getLastResponse();
         Assert::same($response->getStatusCode(), 422);
     }
 
@@ -654,16 +652,16 @@ final class CartContext implements Context
     {
         $item = $this->sharedStorage->get('item');
 
-        $variantData = json_decode($this->cartsClient->showByIri(urldecode($item['variant']))->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+        $variantData = json_decode($this->shopClient->showByIri(urldecode($item['variant']))->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
         foreach ($variantData['optionValues'] as $valueIri) {
-            $optionValueData = json_decode($this->cartsClient->showByIri($valueIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+            $optionValueData = json_decode($this->shopClient->showByIri($valueIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
             if ($optionValueData['value'] !== $optionValue) {
                 continue;
             }
 
-            $optionData = json_decode($this->cartsClient->showByIri($optionValueData['option'])->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+            $optionData = json_decode($this->shopClient->showByIri($optionValueData['option'])->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
             if ($optionData['name'] !== $optionName) {
                 continue;
@@ -679,9 +677,9 @@ final class CartContext implements Context
     {
         $request = Request::custom('/api/v2/shop/orders', HttpRequest::METHOD_POST, ['HTTP_ACCEPT_LANGUAGE' => $localeCode]);
 
-        $this->cartsClient->executeCustomRequest($request);
+        $this->shopClient->executeCustomRequest($request);
 
-        $tokenValue = $this->responseChecker->getValue($this->cartsClient->getLastResponse(), 'tokenValue');
+        $tokenValue = $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'tokenValue');
 
         $this->sharedStorage->set('cart_token', $tokenValue);
 
@@ -699,7 +697,7 @@ final class CartContext implements Context
             'quantity' => $quantity,
         ]);
 
-        $this->cartsClient->executeCustomRequest($request);
+        $this->shopClient->executeCustomRequest($request);
     }
 
     private function putProductVariantToCart(ProductVariantInterface $productVariant, ?string $tokenValue, int $quantity = 1): void
@@ -713,7 +711,7 @@ final class CartContext implements Context
             'quantity' => $quantity,
         ]);
 
-        $this->cartsClient->executeCustomRequest($request);
+        $this->shopClient->executeCustomRequest($request);
     }
 
     private function removeOrderItemFromCart(string $orderItemId, string $tokenValue): void
@@ -726,7 +724,7 @@ final class CartContext implements Context
             \sprintf('items/%s', $orderItemId)
         );
 
-        $this->cartsClient->executeCustomRequest($request);
+        $this->shopClient->executeCustomRequest($request);
     }
 
     private function getProductForItem(array $item): Response
@@ -738,9 +736,9 @@ final class CartContext implements Context
             );
         }
 
-        $response = $this->cartsClient->showByIri(urldecode($item['variant']));
+        $response = $this->shopClient->showByIri(urldecode($item['variant']));
 
-        return $this->cartsClient->showByIri(urldecode($this->responseChecker->getValue($response, 'product')));
+        return $this->shopClient->showByIri(urldecode($this->responseChecker->getValue($response, 'product')));
     }
 
     private function getProductVariantForItem(array $item): Response
@@ -752,14 +750,14 @@ final class CartContext implements Context
             );
         }
 
-        $this->cartsClient->executeCustomRequest(Request::custom($item['variant'], HttpRequest::METHOD_GET));
+        $this->shopClient->executeCustomRequest(Request::custom($item['variant'], HttpRequest::METHOD_GET));
 
-        return $this->cartsClient->getLastResponse();
+        return $this->shopClient->getLastResponse();
     }
 
     private function getOrderItemResponseFromProductInCart(ProductInterface $product, string $tokenValue): ?array
     {
-        $items = $this->responseChecker->getValue($this->cartsClient->show($tokenValue), 'items');
+        $items = $this->responseChecker->getValue($this->shopClient->show(self::RESOURCE_ORDERS, $tokenValue), 'items');
 
         foreach ($items as $item) {
             $response = $this->getProductForItem($item);
@@ -777,9 +775,9 @@ final class CartContext implements Context
 
         $request->updateContent(['quantity' => $quantity]);
 
-        $this->cartsClient->executeCustomRequest($request);
+        $this->shopClient->executeCustomRequest($request);
 
-        $this->sharedStorage->set('response', $this->cartsClient->getLastResponse());
+        $this->sharedStorage->set('response', $this->shopClient->getLastResponse());
     }
 
     private function hasItemWithNameAndQuantity(Response $response, string $productName, int $quantity): bool
@@ -842,7 +840,7 @@ final class CartContext implements Context
 
     private function compareItemSubtotal(string $productName, int $productPrice): void
     {
-        $items = $this->responseChecker->getValue($this->cartsClient->show($this->sharedStorage->get('cart_token')), 'items');
+        $items = $this->responseChecker->getValue($this->shopClient->show(self::RESOURCE_ORDERS, $this->sharedStorage->get('cart_token')), 'items');
 
         foreach ($items as $item) {
             if ($item['productName'] === $productName) {
@@ -857,7 +855,7 @@ final class CartContext implements Context
 
     private function getExpectedPriceOfProductTimesQuantity(ProductInterface $product): int
     {
-        $cartResponse = $this->cartsClient->show($this->sharedStorage->get('cart_token'));
+        $cartResponse = $this->shopClient->show(self::RESOURCE_ORDERS, $this->sharedStorage->get('cart_token'));
         $items = $this->responseChecker->getValue($cartResponse, 'items');
 
         foreach ($items as $item) {
@@ -878,7 +876,7 @@ final class CartContext implements Context
      */
     public function iShouldSeeWithOriginalPriceInMyCart(string $productName, int $originalPrice): void
     {
-        $response = $this->cartsClient->getLastResponse();
+        $response = $this->shopClient->getLastResponse();
 
         foreach ($this->responseChecker->getValue($response, 'items') as $item) {
             if ($item['productName'] === $productName) {
@@ -896,7 +894,7 @@ final class CartContext implements Context
      */
     public function iShouldSeeOnlyWithUnitPriceInMyCart(string $productName, int $unitPrice): void
     {
-        $response = $this->cartsClient->getLastResponse();
+        $response = $this->shopClient->getLastResponse();
 
         foreach ($this->responseChecker->getValue($response, 'items') as $item) {
             if ($item['productName'] === $productName) {

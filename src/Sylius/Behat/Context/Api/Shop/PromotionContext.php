@@ -23,18 +23,20 @@ use Webmozart\Assert\Assert;
 
 final class PromotionContext implements Context
 {
-    private ApiClientInterface $ordersClient;
+    private const RESOURCE = 'orders';
+
+    private ApiClientInterface $client;
 
     private SharedStorageInterface $sharedStorage;
 
     private ResponseCheckerInterface $responseChecker;
 
     public function __construct(
-        ApiClientInterface $ordersClient,
+        ApiClientInterface $client,
         SharedStorageInterface $sharedStorage,
         ResponseCheckerInterface $responseChecker
     ) {
-        $this->ordersClient = $ordersClient;
+        $this->client = $client;
         $this->sharedStorage = $sharedStorage;
         $this->responseChecker = $responseChecker;
     }
@@ -53,7 +55,7 @@ final class PromotionContext implements Context
      */
     public function iShouldBeNotifiedThatCouponIsInvalid(): void
     {
-        $response = $this->ordersClient->getLastResponse();
+        $response = $this->client->getLastResponse();
 
         Assert::same($response->getStatusCode(), 422);
         Assert::same($this->responseChecker->getError($response), 'couponCode: Coupon code is invalid.');
@@ -70,8 +72,8 @@ final class PromotionContext implements Context
 
     private function useCouponCode(?string $couponCode): void
     {
-        $this->ordersClient->buildUpdateRequest($this->getCartTokenValue());
-        $this->ordersClient->setRequestData(['couponCode' => $couponCode]);
-        $this->ordersClient->update();
+        $this->client->buildUpdateRequest(self::RESOURCE, $this->getCartTokenValue());
+        $this->client->setRequestData(['couponCode' => $couponCode]);
+        $this->client->update();
     }
 }

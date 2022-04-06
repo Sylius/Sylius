@@ -27,9 +27,11 @@ use Webmozart\Assert\Assert;
 
 final class CustomerContext implements Context
 {
-    private ApiClientInterface $customerClient;
+    private const RESOURCE_CUSTOMERS = 'customers';
 
-    private ApiClientInterface $orderShopClient;
+    private const RESOURCE_ORDERS = 'orders';
+
+    private ApiClientInterface $client;
 
     private SharedStorageInterface $sharedStorage;
 
@@ -44,16 +46,14 @@ final class CustomerContext implements Context
     private ?string $verificationToken = '';
 
     public function __construct(
-        ApiClientInterface $customerClient,
-        ApiClientInterface $orderShopClient,
+        ApiClientInterface $client,
         SharedStorageInterface $sharedStorage,
         ResponseCheckerInterface $responseChecker,
         RegistrationContext $registrationContext,
         LoginContext $loginContext,
         ShopSecurityContext $shopApiSecurityContext
     ) {
-        $this->customerClient = $customerClient;
-        $this->orderShopClient = $orderShopClient;
+        $this->client = $client;
         $this->sharedStorage = $sharedStorage;
         $this->responseChecker = $responseChecker;
         $this->registrationContext = $registrationContext;
@@ -70,7 +70,7 @@ final class CustomerContext implements Context
         $shopUser = $this->sharedStorage->get('user');
         $customer = $shopUser->getCustomer();
 
-        $this->customerClient->buildUpdateRequest((string) $customer->getId());
+        $this->client->buildUpdateRequest(self::RESOURCE_CUSTOMERS, (string) $customer->getId());
     }
 
     /**
@@ -83,7 +83,7 @@ final class CustomerContext implements Context
         /** @var CustomerInterface $customer */
         $customer = $shopUser->getCustomer();
 
-        $this->customerClient->buildCustomUpdateRequest((string) $customer->getId(), 'password');
+        $this->client->buildCustomUpdateRequest(self::RESOURCE_CUSTOMERS, (string) $customer->getId(), 'password');
     }
 
     /**
@@ -92,7 +92,7 @@ final class CustomerContext implements Context
      */
     public function iSpecifyTheFirstName(string $firstName = ''): void
     {
-        $this->customerClient->addRequestData('firstName', $firstName);
+        $this->client->addRequestData('firstName', $firstName);
     }
 
     /**
@@ -101,7 +101,7 @@ final class CustomerContext implements Context
      */
     public function iSpecifyTheLastName(string $lastName = ''): void
     {
-        $this->customerClient->addRequestData('lastName', $lastName);
+        $this->client->addRequestData('lastName', $lastName);
     }
 
     /**
@@ -110,7 +110,7 @@ final class CustomerContext implements Context
      */
     public function iSpecifyCustomerTheEmail(string $email = ''): void
     {
-        $this->customerClient->addRequestData('email', $email);
+        $this->client->addRequestData('email', $email);
     }
 
     /**
@@ -118,7 +118,7 @@ final class CustomerContext implements Context
      */
     public function iSaveMyChanges(): void
     {
-        $this->customerClient->update();
+        $this->client->update();
     }
 
     /**
@@ -126,7 +126,7 @@ final class CustomerContext implements Context
      */
     public function iSpecifyTheCurrentPasswordAs(string $password): void
     {
-        $this->customerClient->addRequestData('currentPassword', $password);
+        $this->client->addRequestData('currentPassword', $password);
     }
 
     /**
@@ -134,7 +134,7 @@ final class CustomerContext implements Context
      */
     public function iSpecifyTheNewPasswordAs(string $password): void
     {
-        $this->customerClient->addRequestData('newPassword', $password);
+        $this->client->addRequestData('newPassword', $password);
     }
 
     /**
@@ -142,7 +142,7 @@ final class CustomerContext implements Context
      */
     public function iSpecifyTheConfirmationPasswordAs(string $password): void
     {
-        $this->customerClient->addRequestData('confirmNewPassword', $password);
+        $this->client->addRequestData('confirmNewPassword', $password);
     }
 
     /**
@@ -150,7 +150,7 @@ final class CustomerContext implements Context
      */
     public function iChangePasswordTo(string $oldPassword, string $newPassword): void
     {
-        $this->customerClient->setRequestData([
+        $this->client->setRequestData([
             'currentPassword' => $oldPassword,
             'newPassword' => $newPassword,
             'confirmNewPassword' => $newPassword,
@@ -162,7 +162,7 @@ final class CustomerContext implements Context
      */
     public function iSubscribeToTheNewsletter(): void
     {
-        $this->customerClient->addRequestData('subscribedToNewsletter', true);
+        $this->client->addRequestData('subscribedToNewsletter', true);
     }
 
     /**
@@ -170,7 +170,7 @@ final class CustomerContext implements Context
      */
     public function iShouldBeSubscribedToTheNewsletter(): void
     {
-        $response = $this->customerClient->getLastResponse();
+        $response = $this->client->getLastResponse();
 
         Assert::true($this->responseChecker->getValue($response, 'subscribedToNewsletter'));
     }
@@ -227,7 +227,7 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
-        Assert::true($this->responseChecker->isUpdateSuccessful($this->customerClient->getLastResponse()));
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
     }
 
     /**
@@ -235,7 +235,7 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatTheVerificationEmailHasBeenSent(): void
     {
-        Assert::same($this->customerClient->getLastResponse()->getStatusCode(), 202);
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 202);
     }
 
     /**
@@ -249,7 +249,7 @@ final class CustomerContext implements Context
 
         $this->shopApiSecurityContext->iAmLoggedInAs($email);
 
-        $response = $this->customerClient->show((string) $shopUser->getCustomer()->getId());
+        $response = $this->client->show(self::RESOURCE_CUSTOMERS, (string) $shopUser->getCustomer()->getId());
 
         Assert::true($this->responseChecker->hasValue($response, 'email', $email));
     }
@@ -263,7 +263,7 @@ final class CustomerContext implements Context
         /** @var ShopUserInterface $shopUser */
         $shopUser = $this->sharedStorage->get('user');
 
-        $response = $this->customerClient->show((string) $shopUser->getCustomer()->getId());
+        $response = $this->client->show(self::RESOURCE_CUSTOMERS, (string) $shopUser->getCustomer()->getId());
 
         Assert::true($this->responseChecker->hasValue($response, 'fullName', $name));
     }
@@ -274,7 +274,7 @@ final class CustomerContext implements Context
     public function iShouldBeNotifiedThatFirstNameIsRequired(): void
     {
         Assert::true($this->isViolationWithMessageInResponse(
-            $this->customerClient->getLastResponse(),
+            $this->client->getLastResponse(),
             'First name must be at least 2 characters long.'
         ));
     }
@@ -285,7 +285,7 @@ final class CustomerContext implements Context
     public function iShouldBeNotifiedThatLastNameIsRequired(): void
     {
         Assert::true($this->isViolationWithMessageInResponse(
-            $this->customerClient->getLastResponse(),
+            $this->client->getLastResponse(),
             'Last name must be at least 2 characters long.'
         ));
     }
@@ -296,7 +296,7 @@ final class CustomerContext implements Context
     public function iShouldBeNotifiedThatEmailIsRequired(): void
     {
         Assert::true($this->isViolationWithMessageInResponse(
-            $this->customerClient->getLastResponse(),
+            $this->client->getLastResponse(),
             'Please enter your email.'
         ));
     }
@@ -307,7 +307,7 @@ final class CustomerContext implements Context
     public function iShouldBeNotifiedThatTheEmailIsAlreadyUsed(): void
     {
         Assert::true($this->isViolationWithMessageInResponse(
-            $this->customerClient->getLastResponse(),
+            $this->client->getLastResponse(),
             'This email is already used.'
         ));
     }
@@ -318,7 +318,7 @@ final class CustomerContext implements Context
     public function iShouldBeNotifiedThatElementIsInvalid(): void
     {
         Assert::true($this->isViolationWithMessageInResponse(
-            $this->customerClient->getLastResponse(),
+            $this->client->getLastResponse(),
             'This email is invalid.'
         ));
     }
@@ -329,7 +329,7 @@ final class CustomerContext implements Context
     public function iShouldBeNotifiedThatTheVerificationTokenIsInvalid(): void
     {
         $this->isViolationWithMessageInResponse(
-            $this->customerClient->getLastResponse(),
+            $this->client->getLastResponse(),
             sprintf('There is no shop user with %s email verification token.', $this->verificationToken)
         );
     }
@@ -339,7 +339,7 @@ final class CustomerContext implements Context
      */
     public function iBrowseMyOrders(): void
     {
-        $this->orderShopClient->index();
+        $this->client->index(self::RESOURCE_ORDERS);
     }
 
     /**
@@ -360,7 +360,7 @@ final class CustomerContext implements Context
      */
     public function iShouldSeeASingleOrderInTheList(): void
     {
-        Assert::same($this->responseChecker->countCollectionItems($this->orderShopClient->index()), 1);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->index(self::RESOURCE_ORDERS)), 1);
     }
 
     /**
@@ -370,7 +370,7 @@ final class CustomerContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasItemWithValue(
-                $this->orderShopClient->getLastResponse(),
+                $this->client->getLastResponse(),
                 'number',
                 $orderNumber
             )
@@ -382,7 +382,7 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatTheVerificationWasSuccessful(): void
     {
-        $this->responseChecker->isCreationSuccessful($this->customerClient->getLastResponse());
+        $this->responseChecker->isCreationSuccessful($this->client->getLastResponse());
     }
 
     /**
@@ -392,7 +392,7 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyChanged(): void
     {
-        $response = $this->customerClient->getLastResponse();
+        $response = $this->client->getLastResponse();
 
         Assert::same(
             $response->getStatusCode(),
@@ -406,10 +406,10 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatProvidedPasswordIsDifferentThanTheCurrentOne(): void
     {
-        Assert::same($this->customerClient->getLastResponse()->getStatusCode(), 422);
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 422);
 
         Assert::contains(
-            $this->responseChecker->getError($this->customerClient->getLastResponse()),
+            $this->responseChecker->getError($this->client->getLastResponse()),
             'Provided password is different than the current one.'
         );
     }
@@ -419,10 +419,10 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch(): void
     {
-        Assert::same($this->customerClient->getLastResponse()->getStatusCode(), 422);
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 422);
 
         Assert::contains(
-            $this->responseChecker->getError($this->customerClient->getLastResponse()),
+            $this->responseChecker->getError($this->client->getLastResponse()),
             'newPassword: The entered passwords don\'t match'
         );
     }
@@ -433,7 +433,7 @@ final class CustomerContext implements Context
     public function iShouldBeNotifiedThatTheElementShouldBe(string $elementName, string $validationMessage): void
     {
         Assert::contains(
-            $this->responseChecker->getError($this->customerClient->getLastResponse()),
+            $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('%s must be %s.', ucfirst($elementName), $validationMessage)
         );
     }
@@ -469,7 +469,7 @@ final class CustomerContext implements Context
         $this->resendVerificationEmail($user->getEmail());
 
         Assert::same(
-            $this->responseChecker->getError($this->customerClient->getLastResponse()),
+            $this->responseChecker->getError($this->client->getLastResponse()),
             \sprintf('Account with email %s is currently verified.', $user->getEmail()),
             'Validation message is different then expected.'
         );
@@ -494,7 +494,7 @@ final class CustomerContext implements Context
             HttpRequest::METHOD_PATCH,
         );
 
-        $this->customerClient->executeCustomRequest($request);
+        $this->client->executeCustomRequest($request);
     }
 
     private function registerAccount(?string $email = 'example@example.com', ?string $password = 'example'): void
@@ -508,7 +508,7 @@ final class CustomerContext implements Context
             'password' => $password,
         ]);
 
-        $this->customerClient->executeCustomRequest($request);
+        $this->client->executeCustomRequest($request);
     }
 
     private function resendVerificationEmail(string $email): void
@@ -517,7 +517,7 @@ final class CustomerContext implements Context
 
         $request->setContent(['email' => $email]);
 
-        $this->customerClient->executeCustomRequest($request);
+        $this->client->executeCustomRequest($request);
     }
 
     private function getResponseWithAccountData(): Response
@@ -526,6 +526,6 @@ final class CustomerContext implements Context
         $user = $this->sharedStorage->get('user');
         $this->loginContext->iLogInAsWithPassword($user->getEmail(), 'sylius');
 
-        return $this->customerClient->show((string) $user->getCustomer()->getId());
+        return $this->client->show(self::RESOURCE_CUSTOMERS, (string) $user->getCustomer()->getId());
     }
 }

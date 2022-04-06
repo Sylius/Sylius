@@ -32,9 +32,11 @@ use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
-    private ApiClientInterface $client;
+    private const RESOURCE_PRODUCTS = 'products';
 
-    private ApiClientInterface $productVariantClient;
+    private const RESOURCE_PRODUCT_VARIANTS = 'product-variants';
+
+    private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
 
@@ -46,14 +48,12 @@ final class ProductContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
-        ApiClientInterface $productVariantClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
         IriConverterInterface $iriConverter,
         ChannelContextSetterInterface $channelContextSetter
     ) {
         $this->client = $client;
-        $this->productVariantClient = $productVariantClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
         $this->iriConverter = $iriConverter;
@@ -70,8 +70,8 @@ final class ProductContext implements Context
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $product->getVariants()->first();
 
-        $this->client->show($product->getCode());
-        $this->productVariantClient->show($productVariant->getCode());
+        $this->client->show(self::RESOURCE_PRODUCTS, $product->getCode());
+        $this->client->show(self::RESOURCE_PRODUCT_VARIANTS, $productVariant->getCode());
 
         $this->sharedStorage->set('product', $product);
         $this->sharedStorage->set('product_variant', $productVariant);
@@ -116,7 +116,7 @@ final class ProductContext implements Context
      */
     public function iBrowseProductsFromTaxon(?TaxonInterface $taxon = null): void
     {
-        $this->client->index();
+        $this->client->index(self::RESOURCE_PRODUCTS);
 
         if ($taxon !== null) {
             $this->client->addFilter('taxon', $this->iriConverter->getIriFromItem($taxon));
@@ -484,7 +484,7 @@ final class ProductContext implements Context
         $this->channelContextSetter->setChannel($channel);
 
         Assert::true($this->hasProductWithPrice(
-            [$this->responseChecker->getResponseContent($this->client->show($product->getCode()))],
+            [$this->responseChecker->getResponseContent($this->client->show(self::RESOURCE_PRODUCTS, $product->getCode()))],
             $price,
             null,
             StringInflector::nameToCamelCase($priceType)

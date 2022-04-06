@@ -21,19 +21,15 @@ use Webmozart\Assert\Assert;
 
 final class HomepageContext implements Context
 {
-    private ApiClientInterface $productsClient;
-
-    private ApiClientInterface $taxonsClient;
+    private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
 
     public function __construct(
-        ApiClientInterface $productsClient,
-        ApiClientInterface $taxonsClient,
+        ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker
     ) {
-        $this->productsClient = $productsClient;
-        $this->taxonsClient = $taxonsClient;
+        $this->client = $client;
         $this->responseChecker = $responseChecker;
     }
 
@@ -42,7 +38,7 @@ final class HomepageContext implements Context
      */
     public function iCheckLatestProducts(): void
     {
-        $this->productsClient->customAction(
+        $this->client->customAction(
             'api/v2/shop/products?itemsPerPage=3&order[createdAt]=desc',
             HttpRequest::METHOD_GET
         );
@@ -53,7 +49,7 @@ final class HomepageContext implements Context
      */
     public function iCheckAvailableTaxons(): void
     {
-        $this->taxonsClient->customAction('api/v2/shop/taxons', HttpRequest::METHOD_GET);
+        $this->client->customAction('api/v2/shop/taxons', HttpRequest::METHOD_GET);
     }
 
     /**
@@ -61,7 +57,7 @@ final class HomepageContext implements Context
      */
     public function iShouldSeeProductsInTheList(int $count): void
     {
-        Assert::eq($this->responseChecker->countCollectionItems($this->productsClient->getLastResponse()), $count);
+        Assert::eq($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
     }
 
     /**
@@ -70,7 +66,7 @@ final class HomepageContext implements Context
      */
     public function iShouldSeeAndInTheMenu(string ...$expectedMenuItems): void
     {
-        $response = json_decode($this->taxonsClient->getLastResponse()->getContent(), true);
+        $response = json_decode($this->client->getLastResponse()->getContent(), true);
         Assert::keyExists($response, 'hydra:member');
         $menuItems = array_column($response['hydra:member'],  'name');
 
@@ -85,7 +81,7 @@ final class HomepageContext implements Context
      */
     public function iShouldNotSeeAndInTheMenu(string ...$unexpectedMenuItems): void
     {
-        $response = json_decode($this->taxonsClient->getLastResponse()->getContent(), true);
+        $response = json_decode($this->client->getLastResponse()->getContent(), true);
         $menuItems = array_column($response, 'name');
 
         foreach ($unexpectedMenuItems as $unexpectedMenuItem) {

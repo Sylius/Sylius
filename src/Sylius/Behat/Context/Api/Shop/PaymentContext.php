@@ -24,18 +24,20 @@ use Webmozart\Assert\Assert;
 
 final class PaymentContext implements Context
 {
-    private ApiClientInterface $paymentsClient;
+    private const RESOURCE = 'payments';
+
+    private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
 
     private SharedStorageInterface $sharedStorage;
 
     public function __construct(
-        ApiClientInterface $paymentsClient,
+        ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage
     ) {
-        $this->paymentsClient = $paymentsClient;
+        $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
     }
@@ -52,7 +54,7 @@ final class PaymentContext implements Context
         /** @var PaymentInterface $payment */
         $payment = $order->getPayments()->first();
 
-        $this->paymentsClient->show((string) $payment->getId());
+        $this->client->show(self::RESOURCE, (string) $payment->getId());
     }
 
     /**
@@ -60,6 +62,6 @@ final class PaymentContext implements Context
      */
     public function iShouldNotBeAbleToSeeThatPayment(): void
     {
-        Assert::false($this->responseChecker->isShowSuccessful($this->paymentsClient->getLastResponse()));
+        Assert::false($this->responseChecker->isShowSuccessful($this->client->getLastResponse()));
     }
 }

@@ -24,6 +24,8 @@ use Webmozart\Assert\Assert;
 
 final class ProductReviewContext implements Context
 {
+    private const RESOURCE = 'product-reviews';
+
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
@@ -52,7 +54,7 @@ final class ProductReviewContext implements Context
         /** @var ProductInterface $product */
         $product = $this->sharedStorage->get('product');
 
-        $this->client->index();
+        $this->client->index(self::RESOURCE);
         $this->client->addFilter('reviewSubject', $this->iriConverter->getIriFromItem($product));
         $this->client->filter();
     }
@@ -71,7 +73,7 @@ final class ProductReviewContext implements Context
      */
     public function iWantToReviewProduct(ProductInterface $product): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(self::RESOURCE);
         $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
     }
 
@@ -113,7 +115,7 @@ final class ProductReviewContext implements Context
         /** @var ProductInterface $product */
         $product = $this->sharedStorage->get('product');
 
-        $this->client->index();
+        $this->client->index(self::RESOURCE);
         $this->client->addFilter('reviewSubject', $this->iriConverter->getIriFromItem($product));
         $this->client->addFilter('itemsPerPage', 3);
         $this->client->addFilter('order[createdAt]', 'desc');

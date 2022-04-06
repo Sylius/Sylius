@@ -21,6 +21,8 @@ use Webmozart\Assert\Assert;
 
 final class CurrencyContext implements Context
 {
+    private const RESOURCE = 'currencies';
+
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
@@ -38,7 +40,7 @@ final class CurrencyContext implements Context
      */
     public function iBrowseCurrencies(): void
     {
-        $this->client->index();
+        $this->client->index(self::RESOURCE);
     }
 
     /**
