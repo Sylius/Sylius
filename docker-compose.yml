@@ -1,28 +1,15 @@
 services:
-    traefik:
-        image: traefik:2.6
-        ports:
-            - "80:80"     # HTTP
-            - "443:443"   # HTTPS
-            - "8080:8080" # Traefik UI dashboard
-        volumes:
-            - ./.docker/traefik.yaml:/etc/traefik/traefik.yaml
-            - /var/run/docker.sock:/var/run/docker.sock:ro
-        # setting ip address for traefik is required
-        networks:
-            sylius:
-                ipv4_address: 192.168.10.2
-
     app:
-        build:
-            context: .docker
+        image: sylius/standard:1.11-traditional
+        environment:
+            APP_ENV: "dev"
+            DATABASE_URL: "mysql://root:mysql@mysql/sylius_%kernel.environment%"
         volumes:
             - ./:/app:delegated
             - ./.docker/dev/php.ini:/etc/php/8.0/fpm/php.ini:delegated
             - ./.docker/dev/php.ini:/etc/php/8.0/cli/php.ini:delegated
         depends_on:
-            - traefik
-            - database
+            - mysql
         networks:
             - sylius
 
@@ -34,33 +21,27 @@ services:
         volumes:
             - ./.docker/dev/mysql:/docker-entrypoint-initdb.d:delegated
         ports:
-            - "3306:3306"
-        depends_on:
-            - traefik
+            - 3306:3306
         networks:
             - sylius
     
-    postgres:
-        image: postgres:13
-        environment:
-            - POSTGRES_USER=root
-            - POSTGRES_PASSWORD=postgres
-        volumes:
-            - ./.docker/dev/postgres:/docker-entrypoint-initdb.d:delegated
-        ports:
-            - "5432:5432"
-        depends_on:
-            - traefik
-        networks:
-            - sylius
+#    postgres:
+#        image: postgres:13
+#        environment:
+#            - POSTGRES_USER=root
+#            - POSTGRES_PASSWORD=postgres
+#        volumes:
+#            - ./.docker/dev/postgres:/docker-entrypoint-initdb.d:delegated
+#        ports:
+#            - 5432:5432
+#        networks:
+#            - sylius
 
     mailhog:
         image: mailhog/mailhog
         ports:
-            - "1025:1025" # SMTP
-            - "8025:8025" # UI
-        depends_on:
-            - traefik
+            - 1025:1025 # SMTP
+            - 8025:8025 # UI
         networks:
             - sylius
 
