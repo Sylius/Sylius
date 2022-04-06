@@ -48,5 +48,6 @@ jobs:
                     -v "$(pwd)"/.docker/test/php.ini:/etc/php/8.0/cli/php.ini:delegated \
                     -e DATABASE_URL="mysql://root@mysql/sylius_dev" \
                     --net sylius_network \
+                    --entrypoint make ci \
                     -p 80:80/tcp \
-                    -i sylius/standard:1.11-traditional make ci
+                    -i sylius/standard:1.11-traditional
