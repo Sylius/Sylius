@@ -84,6 +84,7 @@
             <argument type="service" id="behat.mink.default_session" />
             <argument type="service" id="router" />
         </service>
+        <service id="sylius.behat.price_resolver" class="Sylius\Behat\Service\Resolver\PriceResolver" public="false" />
 
         <service id="sylius.behat.shared_storage" class="Sylius\Behat\Service\SharedStorage" public="false"/>
 

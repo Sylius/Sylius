@@ -19,6 +19,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\Resolver\PriceResolverInterface;
 use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -27,37 +28,20 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
-use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ApiClientInterface $productVariantClient;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private IriConverterInterface $iriConverter;
-
-    private ChannelContextSetterInterface $channelContextSetter;
 
     public function __construct(
-        ApiClientInterface $client,
-        ApiClientInterface $productVariantClient,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage,
-        IriConverterInterface $iriConverter,
-        ChannelContextSetterInterface $channelContextSetter
+        private ApiClientInterface $client,
+        private ApiClientInterface $productVariantClient,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage,
+        private IriConverterInterface $iriConverter,
+        private ChannelContextSetterInterface $channelContextSetter,
+        private PriceResolverInterface $priceResolver
     ) {
-        $this->client = $client;
-        $this->productVariantClient = $productVariantClient;
-        $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
-        $this->iriConverter = $iriConverter;
-        $this->channelContextSetter = $channelContextSetter;
     }
 
     /**
@@ -82,7 +66,7 @@ final class ProductContext implements Context
      */
     public function iViewProductUsingSlug(ProductInterface $product): void
     {
-        $this->client->showByIri('/api/v2/shop/products-by-slug/'.$product->getSlug());
+        $this->client->showByIri('/api/v2/shop/products-by-slug/' . $product->getSlug());
 
         $this->sharedStorage->set('product', $product);
     }
@@ -94,7 +78,7 @@ final class ProductContext implements Context
     {
         $response = $this->client->getLastResponse();
 
-        Assert::eq($response->headers->get('Location'), '/api/v2/shop/products/'.$product->getCode());
+        Assert::eq($response->headers->get('Location'), '/api/v2/shop/products/' . $product->getCode());
     }
 
     /**
@@ -330,6 +314,22 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then the first product on the list should have name :name and price :price
+     */
+    public function theFirstProductOnTheListShouldHaveNameAndPrice(string $name, string $price): void
+    {
+        $product = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
+
+        $defaultVariantPrice = $this->responseChecker->getValue(
+            $this->productVariantClient->showByIri($product['defaultVariant']),
+            'price'
+        );
+
+        Assert::same($product['name'], $name);
+        Assert::same($defaultVariantPrice, $this->priceResolver->getPriceFromString($price));
+    }
+
+    /**
      * @Then the last product on the list should have name :name
      */
     public function theLastProductOnTheListShouldHaveName(string $name): void
@@ -337,6 +337,23 @@ final class ProductContext implements Context
         $products = $this->responseChecker->getCollection($this->client->getLastResponse());
 
         Assert::same(end($products)['name'], $name);
+    }
+
+    /**
+     * @Then the last product on the list should have name :name and price :price
+     */
+    public function theLastProductOnTheListShouldHaveNameAndPrice(string $name, string $price): void
+    {
+        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
+        $product = end($products);
+
+        $defaultVariantPrice = $this->responseChecker->getValue(
+            $this->productVariantClient->showByIri($product['defaultVariant']),
+            'price'
+        );
+
+        Assert::same($product['name'], $name);
+        Assert::same($defaultVariantPrice, $this->priceResolver->getPriceFromString($price));
     }
 
     /**

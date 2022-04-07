@@ -101,6 +101,7 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="sylius.behat.channel_context_setter" />
+            <argument type="service" id="sylius.behat.price_resolver" />
         </service>
 
         <service id="sylius.behat.context.api.shop.product_variant" class="Sylius\Behat\Context\Api\Shop\ProductVariantContext">
