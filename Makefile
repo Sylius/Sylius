@@ -18,9 +18,9 @@ ci:
 	node_modules/gulp/bin/gulp.js
 	vendor/bin/phpunit
 	vendor/bin/phpspec run --ansi --no-interaction -f dot
-	vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"  # CLI Behat
-	vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli" # NON JS Behat
-	#vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli"  # JS Behat
+	vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&@cli&&~@todo"  # CLI Behat
+	vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@cli&&~@todo" # NON JS Behat
+	#vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@cli&&~@todo" # JS Behat
 
 unit:
 	vendor/bin/phpunit
