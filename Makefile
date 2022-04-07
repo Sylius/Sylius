@@ -14,6 +14,7 @@ ci:
 	bin/console doctrine:database:create --if-not-exists
 	bin/console sylius:install --no-interaction
 	bin/console sylius:fixtures:load default --no-interaction
+	bin/console cache:warmup
 	yarn install --pure-lockfile
 	node_modules/gulp/bin/gulp.js
 	vendor/bin/phpunit
