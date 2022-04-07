@@ -49,6 +49,6 @@ jobs:
                     -e APP_ENV="test" \
                     -e PHP_DATE_TIMEZONE="Europe/Warsaw" \
                     --net sylius_network \
-                    --entrypoint make ci \
+                    --entrypoint="make ci" \
                     -p 80:80/tcp \
                     -i sylius/standard:1.11-traditional
