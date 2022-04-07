@@ -32,7 +32,7 @@ jobs:
             fail-fast: false
             matrix:
                 php: ["7.4", "8.0", "8.1"]
-                symfony: ["^4.4", "5.2.*", "5.3.*", "5.4.*"]
+                symfony: ["^4.4", "5.3.*", "5.4.*"]
 
         steps:
             -
@@ -52,7 +52,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.13.4"
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -
@@ -157,7 +157,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.13.4"
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -
@@ -231,7 +231,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.13.4"
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -
@@ -357,7 +357,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.13.4"
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -
