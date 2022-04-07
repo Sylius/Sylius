@@ -16,10 +16,10 @@ namespace Sylius\Bundle\ShopBundle\Controller;
 use Sylius\Bundle\ShopBundle\Locale\LocaleSwitcherInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Templating\EngineInterface;
 use Twig\Environment;
 
 final class LocaleSwitchController

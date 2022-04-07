@@ -18,10 +18,10 @@ use Sylius\Component\Core\Currency\CurrencyStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Templating\EngineInterface;
 use Twig\Environment;
 
 final class CurrencySwitchController

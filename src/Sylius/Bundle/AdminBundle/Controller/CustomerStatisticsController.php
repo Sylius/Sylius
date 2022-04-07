@@ -16,10 +16,10 @@ namespace Sylius\Bundle\AdminBundle\Controller;
 use Sylius\Component\Core\Customer\Statistics\CustomerStatisticsProviderInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Templating\EngineInterface;
 use Twig\Environment;
 
 final class CustomerStatisticsController
