@@ -3,6 +3,7 @@ up:
 
 init:
 	composer install --no-interaction --no-scripts
+	bin/console doctrine:database:create --if-not-exists
 	bin/console sylius:install --no-interaction
 	bin/console sylius:fixtures:load default --no-interaction
 	yarn install --pure-lockfile
@@ -10,6 +11,7 @@ init:
 
 ci:
 	composer install --no-interaction --no-scripts
+	bin/console doctrine:database:create --if-not-exists
 	bin/console sylius:install --no-interaction
 	bin/console sylius:fixtures:load default --no-interaction
 	yarn install --pure-lockfile
