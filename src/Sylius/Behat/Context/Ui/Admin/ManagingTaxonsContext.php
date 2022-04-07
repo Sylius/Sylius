@@ -204,7 +204,7 @@ final class ManagingTaxonsContext implements Context
     public function thisTaxonElementShouldHaveSlugIn($value, $language = null)
     {
         if (null !== $language) {
-            $this->updatePage->activateLanguageTab($language ?? '');
+            $this->updatePage->activateLanguageTab($language);
         }
 
         Assert::same($this->updatePage->getSlug($language ?? ''), $value);
