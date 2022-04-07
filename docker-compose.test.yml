@@ -5,6 +5,7 @@ services:
         environment:
             APP_ENV: "test"
             DATABASE_URL: "mysql://root:mysql@mysql/sylius_test"
+            PHP_DATE_TIMEZONE: "Europe/Warsaw"
         volumes:
             - ./:/app:delegated
             - ./.docker/test/php.ini:/etc/php/8.0/fpm/php.ini:delegated
@@ -21,8 +22,6 @@ services:
         platform: linux/amd64
         environment:
             - MYSQL_ROOT_PASSWORD=mysql
-        volumes:
-            - ./.docker/dev/mysql:/docker-entrypoint-initdb.d:delegated
         ports:
             - 3306:3306
         networks:
