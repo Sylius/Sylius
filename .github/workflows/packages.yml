@@ -50,7 +50,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["7.4", "8.0", "8.1"]
+                php: ["7.4", "8.0"]
                 symfony: ["^4.4", "5.3.*", "5.4.*"]
                 package: "${{ fromJson(needs.list.outputs.packages) }}"
 
