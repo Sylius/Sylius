@@ -927,7 +927,7 @@ final class OrderContext implements Context
 
     private function createOrProvideCustomer(string $email): CustomerInterface
     {
-        /** @var CustomerInterface $customer */
+        /** @var CustomerInterface|null $customer */
         $customer = $this->customerRepository->findOneBy(['email' => $email]);
 
         return $customer ?? $this->createCustomer($email);
