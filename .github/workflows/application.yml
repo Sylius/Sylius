@@ -52,7 +52,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.13.4"
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -
@@ -93,7 +93,7 @@ jobs:
                 name: Validate Container
                 run: bin/console lint:container
                 if: always() && steps.end-of-setup.outcome == 'success'
-                
+
             -
                 name: Validate Yaml files
                 run: bin/console lint:yaml src
@@ -307,7 +307,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -
@@ -439,7 +439,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.13.4"
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -
@@ -565,7 +565,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.13.4"
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -
