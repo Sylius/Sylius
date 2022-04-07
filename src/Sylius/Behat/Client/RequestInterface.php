@@ -66,7 +66,7 @@ interface RequestInterface
         ?string $token = null
     ): self;
 
-    public static function custom(string $url, string $method, ?string $token = null): self;
+    public static function custom(string $url, string $method, array $additionalHeaders = [], ?string $token = null): self;
 
     public function url(): string;
 

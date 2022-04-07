@@ -39,7 +39,8 @@
                     <attribute name="groups">shop:order:create</attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Pickups a new cart. Provided locale code has to be one of available for a particular channel.</attribute>                </attribute>
+                    <attribute name="summary">Pickups a new cart</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="shop_get">
