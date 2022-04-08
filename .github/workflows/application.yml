@@ -2,6 +2,8 @@ name: Application
 
 on:
     push:
+        tags:
+            - v1.*
         branches-ignore:
             - 'dependabot/**'
         paths-ignore:
@@ -13,8 +15,6 @@ on:
             - "adr/**"
             - "docs/**"
             - "*.md"
-    release:
-        types: [created]
     schedule:
         -
             cron: "0 1 * * 6" # Run at 1am every Saturday
