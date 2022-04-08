@@ -38,7 +38,7 @@ default:
                 - sylius.behat.context.transform.shared_storage
 
                 - sylius.behat.context.api.admin.managing_orders
-                - sylius.behat.context.ui.email
+                - sylius.behat.context.api.email
 
             filters:
                 tags: "@managing_orders&&@api"
