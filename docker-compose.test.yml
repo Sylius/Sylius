@@ -1,0 +1,32 @@
+services:
+    ci:
+        image: sylius/standard:1.11-traditional
+        entrypoint: ["make", "ci"]
+        environment:
+            APP_ENV: "test"
+            DATABASE_URL: "mysql://root:mysql@mysql/sylius_test"
+            PHP_DATE_TIMEZONE: "Europe/Warsaw"
+        volumes:
+            - ./:/app:delegated
+            - ./.docker/test/php.ini:/etc/php/8.0/fpm/php.ini:delegated
+            - ./.docker/test/php.ini:/etc/php/8.0/cli/php.ini:delegated
+        ports:
+            - 80:80
+        depends_on:
+            - mysql
+        networks:
+            - sylius
+
+    mysql:
+        image: mysql:5.7
+        platform: linux/amd64
+        environment:
+            - MYSQL_ROOT_PASSWORD=mysql
+        ports:
+            - 3306:3306
+        networks:
+            - sylius
+
+networks:
+    sylius:
+        driver: bridge

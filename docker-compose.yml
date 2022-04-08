@@ -1,0 +1,51 @@
+services:
+    app:
+        image: sylius/standard:1.11-traditional
+        environment:
+            APP_ENV: "dev"
+            DATABASE_URL: "mysql://root:mysql@mysql/sylius_%kernel.environment%"
+#            DATABASE_URL: "pgsql://root:postgres@postgres/sylius_%kernel.environment%" # When using postgres
+            PHP_DATE_TIMEZONE: "Europe/Warsaw"
+            MAILER_URL: "smtp://mailhog:1025"
+        volumes:
+            - ./:/app:delegated
+            - ./.docker/dev/php.ini:/etc/php/8.0/fpm/php.ini:delegated
+            - ./.docker/dev/php.ini:/etc/php/8.0/cli/php.ini:delegated
+        ports:
+            - 80:80
+        depends_on:
+            - mysql
+        networks:
+            - sylius
+
+    mysql:
+        image: mysql:5.7
+        platform: linux/amd64
+        environment:
+            - MYSQL_ROOT_PASSWORD=mysql
+        ports:
+            - 3306:3306
+        networks:
+            - sylius
+    
+    #    postgres:
+    #        image: postgres:13
+    #        environment:
+    #            - POSTGRES_USER=root
+    #            - POSTGRES_PASSWORD=postgres
+    #        ports:
+    #            - 5432:5432
+    #        networks:
+    #            - sylius
+
+    mailhog:
+        image: mailhog/mailhog
+        ports:
+            - 1025:1025 # SMTP
+            - 8025:8025 # UI
+        networks:
+            - sylius
+
+networks:
+    sylius:
+        driver: bridge
