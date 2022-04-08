@@ -63,8 +63,8 @@ final class ChannelContext implements Context
             $this->responseChecker->getValue(
             $this->client->getLastResponse(),
             'baseCurrency'
-        )['code'],
-            $currencyCode
+            ),
+            sprintf('/api/v2/shop/currencies/%s', $currencyCode)
         );
     }
 }
