@@ -15,6 +15,7 @@
     <services>
         <defaults public="true" />
         <service id="sylius.behat.context.api.email" class="Sylius\Behat\Context\Api\EmailContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.email_checker" />
             <argument type="service" id="translator" />
         </service>
