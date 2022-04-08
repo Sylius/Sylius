@@ -1,5 +1,42 @@
 # CHANGELOG FOR `1.11.X`
 
+## v1.11.3 (2022-04-08)
+
+#### Details
+
+- [#11850](https://github.com/Sylius/Sylius/issues/11850) Fix redirection when there is a trailing slash in the products list path ([@loic425](https://github.com/loic425))
+- [#12538](https://github.com/Sylius/Sylius/issues/12538) [Behat] Allow to use some useful methods on Order show page ([@loic425](https://github.com/loic425))
+- [#13724](https://github.com/Sylius/Sylius/issues/13724) Fix disappearing products in Admin Panel when translation for current locale is missing ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#13736](https://github.com/Sylius/Sylius/issues/13736) [Maintenance] Testing with PHP 8.1 ([@loic425](https://github.com/loic425))
+- [#13744](https://github.com/Sylius/Sylius/issues/13744) [Maintenance]Ignore phpstan.neon file ([@Ferror](https://github.com/Ferror))
+- [#13745](https://github.com/Sylius/Sylius/issues/13745) [Promotion] Add validation of coupon usage limit per customer ([@coldic3](https://github.com/coldic3))
+- [#13753](https://github.com/Sylius/Sylius/issues/13753) [UI] Replacing the placeholder avatar with an icon ([@mamazu](https://github.com/mamazu))
+- [#13759](https://github.com/Sylius/Sylius/issues/13759) [Behat] Use "When" for user actions where possible ([@coldic3](https://github.com/coldic3))
+- [#13767](https://github.com/Sylius/Sylius/issues/13767) Change sylius.behat.context.ui.email context to sylius.behat.context.api.email ([@Ferror](https://github.com/Ferror))
+- [#13768](https://github.com/Sylius/Sylius/issues/13768) Bump Psalm version to 4.19 (php 8.1 support) ([@loic425](https://github.com/loic425))
+- [#13769](https://github.com/Sylius/Sylius/issues/13769) [Core][Shipping] Fix estimated shipping costs ([@coldic3](https://github.com/coldic3), [@lchrusciel](https://github.com/lchrusciel))
+- [#13770](https://github.com/Sylius/Sylius/issues/13770) [ADR] Clean up existing ADRs mostly by updating their statuses ([@GSadee](https://github.com/GSadee))
+- [#13772](https://github.com/Sylius/Sylius/issues/13772) [ADR][API] Update ADR for providing locales after changing the approach ([@GSadee](https://github.com/GSadee))
+- [#13775](https://github.com/Sylius/Sylius/issues/13775) [Behat][API] Change the undefined step to create a configurable product instead of simple one ([@GSadee](https://github.com/GSadee))
+- [#13779](https://github.com/Sylius/Sylius/issues/13779) [Documentation][Plus] Update cookbook about restricting access to the entity ([@GSadee](https://github.com/GSadee))
+- [#13782](https://github.com/Sylius/Sylius/issues/13782) [Plus] Fix Sylius installation guide ([@lchrusciel](https://github.com/lchrusciel))
+- [#13787](https://github.com/Sylius/Sylius/issues/13787) [ADR] Use raw data in commands and events ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13790](https://github.com/Sylius/Sylius/issues/13790) [Maintenance] Update UPGRADE-1.11.md ([@coldic3](https://github.com/coldic3))
+- [#13795](https://github.com/Sylius/Sylius/issues/13795) [ADR] Remove flush() from handlers. ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13798](https://github.com/Sylius/Sylius/issues/13798) [Events] Sylius template event forms ([@SirDomin](https://github.com/SirDomin))
+- [#13799](https://github.com/Sylius/Sylius/issues/13799) [Core][Shipping] Deprecate processing shipments before recalculating prices ([@coldic3](https://github.com/coldic3))
+- [#13801](https://github.com/Sylius/Sylius/issues/13801) [Behat] added context to manage non-collection subresources ([@emmanuel-tilleuls](https://github.com/emmanuel-tilleuls))
+- [#13802](https://github.com/Sylius/Sylius/issues/13802) [Docs] Add a guide on how to deal with file access problems in the wkhtmltopdf ([@coldic3](https://github.com/coldic3))
+- [#13803](https://github.com/Sylius/Sylius/issues/13803) [Admin][JS] Applying all the options selected for an attribute of type multiple select fixed ([@TheMilek](https://github.com/TheMilek))
+- [#13805](https://github.com/Sylius/Sylius/issues/13805) [JS] Not render empty value in multi select autocompletes ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13809](https://github.com/Sylius/Sylius/issues/13809) [Documentation] Fix build by specifying jinja2 version requirement ([@GSadee](https://github.com/GSadee))
+- [#13811](https://github.com/Sylius/Sylius/issues/13811) [Documentation][Plus] Adjust installation guide after entities refactor ([@GSadee](https://github.com/GSadee))
+- [#13817](https://github.com/Sylius/Sylius/issues/13817) [Admin] Clean up and refactor new template events ([@GSadee](https://github.com/GSadee))
+- [#13818](https://github.com/Sylius/Sylius/issues/13818) [Maintenance] Bump copyright year in docs and license files ([@coldic3](https://github.com/coldic3))
+- [#13828](https://github.com/Sylius/Sylius/issues/13828) [Maintenance] Fix a misleading description ([@GSadee](https://github.com/GSadee))
+- [#13839](https://github.com/Sylius/Sylius/issues/13839) Limit the number of packages build run on 1.10 ([@Zales0123](https://github.com/Zales0123))
+- [#13840](https://github.com/Sylius/Sylius/issues/13840) [GitHub Actions] Fix symfony/flex in workflows and invalid EngineInterface namespace ([@coldic3](https://github.com/coldic3))
+
 ## v1.11.2 (2022-03-14)
 
 #### Details
