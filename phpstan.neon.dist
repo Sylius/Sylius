@@ -2,7 +2,7 @@ includes:
     - vendor/phpstan/phpstan-doctrine/extension.neon
 
 parameters:
-    level: 1
+    level: 2
 
     reportUnmatchedIgnoredErrors: false
 
