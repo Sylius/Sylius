@@ -71,3 +71,28 @@ Here is how the response looks like:
    Wrong parameters otherwise cause empty array `[]` in response and correct parameters return `paymentMethods` available for your `payment`.
 
 1. The 2nd parameter `MetadataInterface` has been removed from `src/Sylius/Bundle/ApiBundle/CommandHandler/Account/ResetPasswordHandler` and replaced by `Sylius\Component\User\Security\PasswordUpdaterInterface` (previously 3rd parameter). From now on a token TTL value must be used instead as the 3rd parameter.
+
+1. Constructor of `Sylius\Bundle\ApiBundle\CommandHandler\Account\RequestResetPasswordTokenHandler` has been extended with `Sylius\Calendar\Provider\DateTimeProviderInterface` argument:
+
+    ```diff
+        public function __construct(
+            private UserRepositoryInterface $userRepository,
+            private MessageBusInterface $commandBus,
+    -       private GeneratorInterface $generator
+    +       private GeneratorInterface $generator,
+    +       private DateTimeProviderInterface $calendar
+        ) {
+        }
+    ```
+
+1. Constructor of `\Sylius\Bundle\ApiBundle\CommandHandler\Account\VerifyCustomerAccountHandler` has been extended with `Sylius\Calendar\Provider\DateTimeProviderInterface` argument:
+
+    ```diff
+    -   public function __construct(private RepositoryInterface $shopUserRepository)
+    -   {
+    +   public function __construct(
+    +       private RepositoryInterface $shopUserRepository,
+    +       private DateTimeProviderInterface $calendar
+    +   ) {
+        }
+    ```
