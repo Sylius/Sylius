@@ -51,6 +51,7 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:product:read</attribute>
                 </attribute>
+                <attribute name="force_eager">false</attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">
