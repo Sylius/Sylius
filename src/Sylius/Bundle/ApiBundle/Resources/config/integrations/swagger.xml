@@ -125,7 +125,7 @@
             id="Sylius\Bundle\ApiBundle\Swagger\IriReferenceExampleNormalizer"
             decorates="api_platform.swagger.normalizer.documentation"
             autoconfigure="false"
-            decoration-priority="0"
+            decoration-priority="5"
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\IriReferenceExampleNormalizer.inner" />
         </service>
