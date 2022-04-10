@@ -120,5 +120,14 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\PathHiderDocumentationNormalizer.inner" />
             <argument>%sylius.api.paths_to_hide%</argument>
         </service>
+
+        <service
+            id="Sylius\Bundle\ApiBundle\Swagger\IriReferenceExampleNormalizer"
+            decorates="api_platform.swagger.normalizer.documentation"
+            autoconfigure="false"
+            decoration-priority="0"
+        >
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\IriReferenceExampleNormalizer.inner" />
+        </service>
     </services>
 </container>
