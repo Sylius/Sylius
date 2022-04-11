@@ -15,34 +15,47 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\HomePageInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
 
 final class LocaleContext implements Context
 {
-    private HomePageInterface $homePage;
-
-    public function __construct(HomePageInterface $homePage)
-    {
-        $this->homePage = $homePage;
+    public function __construct(
+        private HomePageInterface $homePage,
+        private SharedStorageInterface $sharedStorage
+    ) {
     }
 
     /**
-     * @Given I switched the shop's locale to :name
-     * @Given I have switched to the :name locale
-     * @When I switch to the :name locale
-     * @When I change my locale to :name
+     * @Given I switched the shop's locale to :locale
+     * @Given I have switched to the :locale locale
+     * @When I switch to the :locale locale
+     * @When I change my locale to :locale
      */
-    public function iSwitchTheLocaleToTheLocale(string $name): void
+    public function iSwitchTheLocaleToTheLocale(LocaleInterface $locale): void
     {
         $this->homePage->open();
-        $this->homePage->switchLocale($name);
+        $this->homePage->switchLocale($locale->getName('en_US'));
+
+        $this->sharedStorage->set('locale', $locale);
     }
 
     /**
-     * @When I show homepage with the locale :localeCode
+     * @When I show homepage with the locale :locale
      */
-    public function iShowHomepageWithTheLocale(string $localeCode): void
+    public function iShowHomepageWithTheLocale(LocaleInterface $locale): void
+    {
+        $this->homePage->tryToOpen(['_locale' => $locale->getCode()]);
+
+        $this->sharedStorage->set('locale', $locale);
+    }
+
+    /**
+     * @When I try to open homepage with the locale :localeCode
+     */
+    public function iTryToOpenHomepageWithTheLocale(string $localeCode): void
     {
         $this->homePage->tryToOpen(['_locale' => $localeCode]);
     }

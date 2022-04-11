@@ -466,6 +466,7 @@
 
         <service id="sylius.behat.context.ui.shop.locale" class="Sylius\Behat\Context\Ui\Shop\LocaleContext">
             <argument type="service" id="sylius.behat.page.shop.home" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="sylius.behat.context.ui.shop.login" class="Sylius\Behat\Context\Ui\Shop\LoginContext">
