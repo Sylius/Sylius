@@ -15,22 +15,13 @@ namespace Sylius\Behat\Service;
 
 interface SharedStorageInterface
 {
-    /**
-     * @param string $key
-     */
-    public function get($key);
+    public function get(string $key);
 
-    /**
-     * @param string $key
-     *
-     * @return bool
-     */
-    public function has($key);
+    public function has(string $key): bool;
 
-    /**
-     * @param string $key
-     */
-    public function set($key, $resource);
+    public function set(string $key, $resource): void;
+
+    public function remove(string $key): void;
 
     public function getLatestResource();
 
