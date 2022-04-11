@@ -52,9 +52,12 @@ final class TaxonFilter extends AbstractContextAwareFilter
             ->innerJoin(sprintf('%s.productTaxons', $alias), 'productTaxon')
             ->innerJoin('productTaxon.taxon', 'taxon')
             ->andWhere('taxon.root = :taxonRoot')
-            ->addOrderBy('productTaxon.position')
             ->setParameter('taxonRoot', $taxon->getRoot())
         ;
+
+        if (empty($context['filters']['order'])) {
+            $queryBuilder->addOrderBy('productTaxon.position');
+        }
     }
 
     public function getDescription(string $resourceClass): array
