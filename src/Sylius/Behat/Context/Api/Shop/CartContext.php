@@ -211,7 +211,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @When I pick up my cart (again)
+     * @When I pick up (my )cart (again)
      * @When I pick up cart in the :localeCode locale
      * @When the visitor picks up the cart
      */
@@ -677,10 +677,11 @@ final class CartContext implements Context
 
     private function pickupCart(?string $localeCode = null): string
     {
-        $this->cartsClient->buildCreateRequest();
-        $this->cartsClient->addRequestData('localeCode', $localeCode);
+        $request = Request::custom('/api/v2/shop/orders', HttpRequest::METHOD_POST, ['HTTP_ACCEPT_LANGUAGE' => $localeCode]);
 
-        $tokenValue = $this->responseChecker->getValue($this->cartsClient->create(), 'tokenValue');
+        $this->cartsClient->executeCustomRequest($request);
+
+        $tokenValue = $this->responseChecker->getValue($this->cartsClient->getLastResponse(), 'tokenValue');
 
         $this->sharedStorage->set('cart_token', $tokenValue);
 

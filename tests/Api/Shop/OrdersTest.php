@@ -40,7 +40,7 @@ final class OrdersTest extends JsonApiTestCase
         /** @var MessageBusInterface $commandBus */
         $commandBus = $this->get('sylius.command_bus');
 
-        $pickupCartCommand = new PickupCart($tokenValue, 'en_US');
+        $pickupCartCommand = new PickupCart($tokenValue);
         $pickupCartCommand->setChannelCode('WEB');
         $commandBus->dispatch($pickupCartCommand);
 
@@ -76,7 +76,7 @@ final class OrdersTest extends JsonApiTestCase
         /** @var MessageBusInterface $commandBus */
         $commandBus = $this->get('sylius.command_bus');
 
-        $pickupCartCommand = new PickupCart($tokenValue, 'en_US');
+        $pickupCartCommand = new PickupCart($tokenValue);
         $pickupCartCommand->setChannelCode('WEB');
         $commandBus->dispatch($pickupCartCommand);
 
@@ -101,7 +101,7 @@ final class OrdersTest extends JsonApiTestCase
         /** @var MessageBusInterface $commandBus */
         $commandBus = $this->get('sylius.command_bus');
 
-        $pickupCartCommand = new PickupCart($tokenValue, 'en_US');
+        $pickupCartCommand = new PickupCart($tokenValue);
         $pickupCartCommand->setChannelCode('WEB');
         $commandBus->dispatch($pickupCartCommand);
 
@@ -125,7 +125,7 @@ final class OrdersTest extends JsonApiTestCase
         /** @var MessageBusInterface $commandBus */
         $commandBus = $this->get('sylius.command_bus');
 
-        $pickupCartCommand = new PickupCart($tokenValue, 'en_US');
+        $pickupCartCommand = new PickupCart($tokenValue);
         $pickupCartCommand->setChannelCode('WEB');
         $commandBus->dispatch($pickupCartCommand);
 
@@ -164,7 +164,7 @@ final class OrdersTest extends JsonApiTestCase
         /** @var MessageBusInterface $commandBus */
         $commandBus = $this->get('sylius.command_bus');
 
-        $pickupCartCommand = new PickupCart($tokenValue, 'en_US');
+        $pickupCartCommand = new PickupCart($tokenValue);
         $pickupCartCommand->setChannelCode('WEB');
         $commandBus->dispatch($pickupCartCommand);
 
@@ -219,5 +219,41 @@ final class OrdersTest extends JsonApiTestCase
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/updated_payment_method_on_order_response', Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function it_creates_empty_cart_with_provided_locale(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+
+        $this->client->request(
+            'POST',
+            '/api/v2/shop/orders',
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json', 'HTTP_ACCEPT_LANGUAGE' => 'pl_PL'],
+            json_encode([])
+        );
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/create_cart_response', Response::HTTP_CREATED);
+    }
+
+    /** @test */
+    public function it_creates_empty_cart_with_default_locale(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+
+        $this->client->request(
+            'POST',
+            '/api/v2/shop/orders',
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json'],
+            json_encode([])
+        );
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/create_cart_with_default_locale_response', Response::HTTP_CREATED);
     }
 }

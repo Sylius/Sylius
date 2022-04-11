@@ -78,6 +78,7 @@ final class OrderContext implements Context
                 (string) $order->getPayments()->first()->getId()
             ),
             HttpRequest::METHOD_PATCH,
+            [],
             $this->shopOrderClient->getToken()
         );
 

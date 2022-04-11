@@ -163,12 +163,14 @@ final class Request implements RequestInterface
         );
     }
 
-    public static function custom(string $url, string $method, ?string $token = null): RequestInterface
+    public static function custom(string $url, string $method, array $additionalHeaders = [], ?string $token = null): RequestInterface
     {
         $headers = ['CONTENT_TYPE' => self::resolveHttpMethod($method)];
         if ($token !== null) {
             $headers['HTTP_Authorization'] = 'Bearer ' . $token;
         }
+
+        $headers = array_merge($headers, $additionalHeaders);
 
         return new self($url, $method, $headers);
     }

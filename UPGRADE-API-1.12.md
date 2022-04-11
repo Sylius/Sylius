@@ -72,6 +72,7 @@ Here is how the response looks like:
 
 1. The 2nd parameter `MetadataInterface` has been removed from `src/Sylius/Bundle/ApiBundle/CommandHandler/Account/ResetPasswordHandler` and replaced by `Sylius\Component\User\Security\PasswordUpdaterInterface` (previously 3rd parameter). From now on a token TTL value must be used instead as the 3rd parameter.
 
+<<<<<<< HEAD
 1. Constructor of `Sylius\Bundle\ApiBundle\CommandHandler\Account\RequestResetPasswordTokenHandler` has been extended with `Sylius\Calendar\Provider\DateTimeProviderInterface` argument:
 
     ```diff
@@ -96,3 +97,5 @@ Here is how the response looks like:
     +   ) {
         }
     ```
+
+1. The 2nd parameter `localeCode` has been removed from `src/Sylius/Bundle/ApiBundle/Command/Cart/PickupCart.php` and now is set automatically by `src/Sylius/Bundle/ApiBundle/DataTransformer/LocaleCodeAwareInputCommandDataTransformer.php`.
