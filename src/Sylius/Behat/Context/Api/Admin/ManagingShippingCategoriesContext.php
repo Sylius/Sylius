@@ -21,8 +21,6 @@ use Webmozart\Assert\Assert;
 
 final class ManagingShippingCategoriesContext implements Context
 {
-    private const RESOURCE = 'shipping-methods';
-
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
@@ -38,7 +36,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iWantToCreateANewShippingCategory(): void
     {
-        $this->client->buildCreateRequest(self::RESOURCE);
+        $this->client->buildCreateRequest('shipping-methods');
     }
 
     /**
@@ -46,7 +44,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iWantToModifyAShippingCategory(ShippingCategoryInterface $shippingCategory): void
     {
-        $this->client->buildUpdateRequest(self::RESOURCE, $shippingCategory->getCode());
+        $this->client->buildUpdateRequest('shipping-methods', $shippingCategory->getCode());
     }
 
     /**
@@ -62,7 +60,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iDeleteShippingCategory(ShippingCategoryInterface $shippingCategory): void
     {
-        $this->client->delete(self::RESOURCE, $shippingCategory->getCode());
+        $this->client->delete('shipping-methods', $shippingCategory->getCode());
     }
 
     /**
@@ -70,7 +68,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iBrowseShippingCategories(): void
     {
-        $this->client->index(self::RESOURCE);
+        $this->client->index('shipping-methods');
     }
 
     /**
@@ -101,7 +99,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iModifyAShippingCategory(ShippingCategoryInterface $shippingCategory): void
     {
-        $this->client->buildUpdateRequest(self::RESOURCE, $shippingCategory->getCode());
+        $this->client->buildUpdateRequest('shipping-methods', $shippingCategory->getCode());
     }
 
     /**
@@ -257,7 +255,7 @@ final class ManagingShippingCategoriesContext implements Context
 
     private function isItemOnIndex(string $property, string $value): bool
     {
-        $this->client->index(self::RESOURCE);
+        $this->client->index('shipping-methods');
 
         return $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), $property, $value);
     }

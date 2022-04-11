@@ -24,8 +24,6 @@ use Webmozart\Assert\Assert;
 
 final class PaymentContext implements Context
 {
-    private const RESOURCE = 'payments';
-
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
@@ -54,7 +52,7 @@ final class PaymentContext implements Context
         /** @var PaymentInterface $payment */
         $payment = $order->getPayments()->first();
 
-        $this->client->show(self::RESOURCE, (string) $payment->getId());
+        $this->client->show('payments', (string) $payment->getId());
     }
 
     /**

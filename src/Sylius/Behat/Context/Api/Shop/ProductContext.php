@@ -32,10 +32,6 @@ use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
-    private const RESOURCE_PRODUCTS = 'products';
-
-    private const RESOURCE_PRODUCT_VARIANTS = 'product-variants';
-
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
@@ -70,8 +66,8 @@ final class ProductContext implements Context
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $product->getVariants()->first();
 
-        $this->client->show(self::RESOURCE_PRODUCTS, $product->getCode());
-        $this->client->show(self::RESOURCE_PRODUCT_VARIANTS, $productVariant->getCode());
+        $this->client->show('products', $product->getCode());
+        $this->client->show('product-variants', $productVariant->getCode());
 
         $this->sharedStorage->set('product', $product);
         $this->sharedStorage->set('product_variant', $productVariant);
@@ -116,7 +112,7 @@ final class ProductContext implements Context
      */
     public function iBrowseProductsFromTaxon(?TaxonInterface $taxon = null): void
     {
-        $this->client->index(self::RESOURCE_PRODUCTS);
+        $this->client->index('products');
 
         if ($taxon !== null) {
             $this->client->addFilter('taxon', $this->iriConverter->getIriFromItem($taxon));
@@ -484,7 +480,7 @@ final class ProductContext implements Context
         $this->channelContextSetter->setChannel($channel);
 
         Assert::true($this->hasProductWithPrice(
-            [$this->responseChecker->getResponseContent($this->client->show(self::RESOURCE_PRODUCTS, $product->getCode()))],
+            [$this->responseChecker->getResponseContent($this->client->show('products', $product->getCode()))],
             $price,
             null,
             StringInflector::nameToCamelCase($priceType)

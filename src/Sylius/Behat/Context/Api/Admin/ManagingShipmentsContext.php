@@ -30,8 +30,6 @@ use Webmozart\Assert\Assert;
 
 final class ManagingShipmentsContext implements Context
 {
-    private const RESOURCE = 'shipments';
-
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
@@ -53,7 +51,7 @@ final class ManagingShipmentsContext implements Context
      */
     public function iBrowseShipments(): void
     {
-        $this->client->index(self::RESOURCE);
+        $this->client->index('shipments');
     }
 
     /**
@@ -93,7 +91,7 @@ final class ManagingShipmentsContext implements Context
      */
     public function iViewTheShipmentOfTheOrder(OrderInterface $order): void
     {
-        $this->client->show(self::RESOURCE, (string) $order->getShipments()->first()->getId());
+        $this->client->show('shipments', (string) $order->getShipments()->first()->getId());
     }
 
     /**
@@ -110,7 +108,7 @@ final class ManagingShipmentsContext implements Context
      */
     public function iShipShipmentOfOrder(OrderInterface $order): void
     {
-        $this->client->applyTransition(self::RESOURCE, (string) $order->getShipments()->first()->getId(), ShipmentTransitions::TRANSITION_SHIP);
+        $this->client->applyTransition('shipments', (string) $order->getShipments()->first()->getId(), ShipmentTransitions::TRANSITION_SHIP);
     }
 
     /**
@@ -133,7 +131,7 @@ final class ManagingShipmentsContext implements Context
     public function iShipTheShipmentOfOrderWithTrackingCode(OrderInterface $order, string $trackingCode): void
     {
         $this->client->applyTransition(
-            self::RESOURCE,
+            'shipments',
             (string) $order->getShipments()->first()->getId(),
             ShipmentTransitions::TRANSITION_SHIP,
             ['tracking' => $trackingCode]
@@ -166,7 +164,7 @@ final class ManagingShipmentsContext implements Context
     public function iShouldSeeTheShipmentOfOrderAs(OrderInterface $order, string $shippingState): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValues($this->client->index(self::RESOURCE), [
+            $this->responseChecker->hasItemWithValues($this->client->index('shipments'), [
                 'order' => $this->iriConverter->getIriFromItem($order),
                 'state' => strtolower($shippingState),
             ]),
@@ -196,7 +194,7 @@ final class ManagingShipmentsContext implements Context
     public function iShouldSeeTheShippingDateAs(OrderInterface $order, string $dateTime): void
     {
         Assert::eq(
-            new \DateTime($this->responseChecker->getValue($this->client->show(self::RESOURCE, (string) $order->getShipments()->first()->getId()), 'shippedAt')),
+            new \DateTime($this->responseChecker->getValue($this->client->show('shipments', (string) $order->getShipments()->first()->getId()), 'shippedAt')),
             new \DateTime($dateTime),
             'Shipment was shipped in different date'
         );
@@ -212,7 +210,7 @@ final class ManagingShipmentsContext implements Context
         CustomerInterface $customer,
         ChannelInterface $channel = null
     ): void {
-        $this->client->index(self::RESOURCE);
+        $this->client->index('shipments');
 
         foreach ($this->responseChecker->getCollectionItemsWithValue(
             $this->client->getLastResponse(),

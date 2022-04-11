@@ -25,8 +25,6 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductVariantsContext implements Context
 {
-    private const RESOURCE = 'product-variants';
-
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
@@ -48,7 +46,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iWantToCreateANewProductVariant(ProductInterface $product): void
     {
-        $this->client->buildCreateRequest(self::RESOURCE);
+        $this->client->buildCreateRequest('product-variants');
         $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
     }
 
@@ -152,7 +150,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function theProductVariantShouldAppearInTheShop(string $productVariantCode, ProductInterface $product): void
     {
-        $response = $this->client->index(self::RESOURCE);
+        $response = $this->client->index('product-variants');
 
         Assert::true($this->responseChecker->hasItemWithValue($response, 'code', $productVariantCode));
     }
@@ -162,7 +160,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function theVariantWithCodeShouldBePricedAtForChannel(ProductVariantInterface $productVariant, int $price, ChannelInterface $channel): void
     {
-        $response = $this->responseChecker->getCollection($this->client->index(self::RESOURCE));
+        $response = $this->responseChecker->getCollection($this->client->index('product-variants'));
 
         Assert::same($response[0]['channelPricings'][$channel->getCode()]['price'], $price);
     }
@@ -172,7 +170,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function theVariantWithCodeShouldHaveMinimumPriceForChannel(ProductVariantInterface $productVariant, int $minimumPrice, ChannelInterface $channel): void
     {
-        $response = $this->responseChecker->getCollection($this->client->index(self::RESOURCE));
+        $response = $this->responseChecker->getCollection($this->client->index('product-variants'));
 
         Assert::same($response[0]['channelPricings'][$channel->getCode()]['minimumPrice'], $minimumPrice);
     }
@@ -183,7 +181,7 @@ final class ManagingProductVariantsContext implements Context
         ?int $price,
         string $field
     ): void {
-        $this->client->buildUpdateRequest(self::RESOURCE, $variant->getCode());
+        $this->client->buildUpdateRequest('product-variants', $variant->getCode());
 
         $content = $this->client->getContent();
         $content['channelPricings'][$channel->getCode()][$field] = $price;
@@ -198,7 +196,7 @@ final class ManagingProductVariantsContext implements Context
         ProductInterface $product,
         ChannelInterface $channel
     ): void {
-        $this->client->buildCreateRequest(self::RESOURCE);
+        $this->client->buildCreateRequest('product-variants');
         $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
         $this->client->addRequestData('code', StringInflector::nameToCode($name));
 

@@ -27,10 +27,6 @@ use Webmozart\Assert\Assert;
 
 final class CustomerContext implements Context
 {
-    private const RESOURCE_CUSTOMERS = 'customers';
-
-    private const RESOURCE_ORDERS = 'orders';
-
     private ApiClientInterface $client;
 
     private SharedStorageInterface $sharedStorage;
@@ -70,7 +66,7 @@ final class CustomerContext implements Context
         $shopUser = $this->sharedStorage->get('user');
         $customer = $shopUser->getCustomer();
 
-        $this->client->buildUpdateRequest(self::RESOURCE_CUSTOMERS, (string) $customer->getId());
+        $this->client->buildUpdateRequest('customers', (string) $customer->getId());
     }
 
     /**
@@ -83,7 +79,7 @@ final class CustomerContext implements Context
         /** @var CustomerInterface $customer */
         $customer = $shopUser->getCustomer();
 
-        $this->client->buildCustomUpdateRequest(self::RESOURCE_CUSTOMERS, (string) $customer->getId(), 'password');
+        $this->client->buildCustomUpdateRequest('customers', (string) $customer->getId(), 'password');
     }
 
     /**
@@ -249,7 +245,7 @@ final class CustomerContext implements Context
 
         $this->shopApiSecurityContext->iAmLoggedInAs($email);
 
-        $response = $this->client->show(self::RESOURCE_CUSTOMERS, (string) $shopUser->getCustomer()->getId());
+        $response = $this->client->show('customers', (string) $shopUser->getCustomer()->getId());
 
         Assert::true($this->responseChecker->hasValue($response, 'email', $email));
     }
@@ -263,7 +259,7 @@ final class CustomerContext implements Context
         /** @var ShopUserInterface $shopUser */
         $shopUser = $this->sharedStorage->get('user');
 
-        $response = $this->client->show(self::RESOURCE_CUSTOMERS, (string) $shopUser->getCustomer()->getId());
+        $response = $this->client->show('customers', (string) $shopUser->getCustomer()->getId());
 
         Assert::true($this->responseChecker->hasValue($response, 'fullName', $name));
     }
@@ -339,7 +335,7 @@ final class CustomerContext implements Context
      */
     public function iBrowseMyOrders(): void
     {
-        $this->client->index(self::RESOURCE_ORDERS);
+        $this->client->index('orders');
     }
 
     /**
@@ -360,7 +356,7 @@ final class CustomerContext implements Context
      */
     public function iShouldSeeASingleOrderInTheList(): void
     {
-        Assert::same($this->responseChecker->countCollectionItems($this->client->index(self::RESOURCE_ORDERS)), 1);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->index('orders')), 1);
     }
 
     /**
@@ -526,6 +522,6 @@ final class CustomerContext implements Context
         $user = $this->sharedStorage->get('user');
         $this->loginContext->iLogInAsWithPassword($user->getEmail(), 'sylius');
 
-        return $this->client->show(self::RESOURCE_CUSTOMERS, (string) $user->getCustomer()->getId());
+        return $this->client->show('customers', (string) $user->getCustomer()->getId());
     }
 }

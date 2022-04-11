@@ -22,8 +22,6 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductReviewsContext implements Context
 {
-    private const RESOURCE = 'product-reviews';
-
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
@@ -45,7 +43,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iWantToBrowseProductReviews(): void
     {
-        $this->client->index(self::RESOURCE);
+        $this->client->index('product-reviews');
     }
 
     /**
@@ -53,7 +51,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iWantToModifyTheProductReview(ReviewInterface $productReview): void
     {
-        $this->client->buildUpdateRequest(self::RESOURCE, (string) $productReview->getId());
+        $this->client->buildUpdateRequest('product-reviews', (string) $productReview->getId());
     }
 
     /**
@@ -95,7 +93,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iChangeStateTheProductReview(string $state, ReviewInterface $productReview): void
     {
-        $this->client->applyTransition(self::RESOURCE, (string) $productReview->getId(), $state);
+        $this->client->applyTransition('product-reviews', (string) $productReview->getId(), $state);
     }
 
     /**
@@ -105,7 +103,7 @@ final class ManagingProductReviewsContext implements Context
     {
         $this->sharedStorage->set('product_review_id', $productReview->getId());
 
-        $this->client->delete(self::RESOURCE, (string) $productReview->getId());
+        $this->client->delete('product-reviews', (string) $productReview->getId());
     }
 
     /**
@@ -223,14 +221,14 @@ final class ManagingProductReviewsContext implements Context
 
     private function isItemOnIndex(string $property, string $value): bool
     {
-        return $this->responseChecker->hasItemWithValue($this->client->index(self::RESOURCE), $property, $value);
+        return $this->responseChecker->hasItemWithValue($this->client->index('product-reviews'), $property, $value);
     }
 
     /** @param string|int $value */
     private function assertIfReviewHasElementWithValue(ReviewInterface $productReview, string $element, $value): void
     {
         Assert::true(
-            $this->responseChecker->hasValue($this->client->show(self::RESOURCE, (string) $productReview->getId()), $element, $value),
+            $this->responseChecker->hasValue($this->client->show('product-reviews', (string) $productReview->getId()), $element, $value),
             sprintf('Product review %s is not %s', $element, $value)
         );
     }

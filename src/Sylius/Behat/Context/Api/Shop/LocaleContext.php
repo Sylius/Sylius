@@ -33,7 +33,7 @@ final class LocaleContext implements Context
      */
     public function iGetAvailableLocales(): void
     {
-        $this->client->index(self::RESOURCE_LOCALES);
+       $this->client->index('locales');
     }
 
     /**
@@ -41,7 +41,7 @@ final class LocaleContext implements Context
      */
     public function iGetLocale(LocaleInterface $locale): void
     {
-        $this->client->show(self::RESOURCE_LOCALES, $locale->getCode());
+        $this->client->show('locales', $locale->getCode());
     }
 
     /**
@@ -100,7 +100,7 @@ final class LocaleContext implements Context
      */
     public function iShouldShopUsingTheLocale(string $localeCode): void
     {
-        $this->client->buildCreateRequest(self::RESOURCE_CARTS);
+        $this->client->buildCreateRequest('carts');
 
         Assert::same($this->responseChecker->getValue($this->cartsClient->create(), 'localeCode'), $localeCode);
     }

@@ -26,8 +26,6 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPaymentsContext implements Context
 {
-    private const RESOURCE_PAYMENTS = 'payments';
-
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
@@ -50,7 +48,7 @@ final class ManagingPaymentsContext implements Context
      */
     public function iAmBrowsingPayments(): void
     {
-        $this->client->index(self::RESOURCE_PAYMENTS);
+        $this->client->index('payments');
     }
 
     /**
@@ -62,7 +60,7 @@ final class ManagingPaymentsContext implements Context
         Assert::notNull($payment);
 
         $this->client->applyTransition(
-            self::RESOURCE_PAYMENTS,
+            'payments',
             (string) $payment->getId(),
             PaymentTransitions::TRANSITION_COMPLETE
         );
@@ -164,7 +162,7 @@ final class ManagingPaymentsContext implements Context
         Assert::notNull($payment);
 
         Assert::true($this->responseChecker->hasValue(
-            $this->client->show(self::RESOURCE_PAYMENTS, (string) $payment->getId()),
+            $this->client->show('payments', (string) $payment->getId()),
             'state',
             StringInflector::nameToLowercaseCode($paymentState)
         ));

@@ -35,8 +35,6 @@ use Webmozart\Assert\Assert;
 
 final class OrderContext implements Context
 {
-    private const RESOURCE = 'orders';
-
     private ApiClientInterface $shopClient;
 
     private ApiClientInterface $adminClient;
@@ -94,7 +92,7 @@ final class OrderContext implements Context
      */
     public function iViewTheSummaryOfMyOrder(OrderInterface $order): void
     {
-        $this->shopClient->show(self::RESOURCE, $order->getTokenValue());
+        $this->shopClient->show('orders', $order->getTokenValue());
     }
 
     /**
@@ -114,7 +112,7 @@ final class OrderContext implements Context
      */
     public function iShouldBeAbleToAccessThisOrderDetails(): void
     {
-        $response = $this->shopClient->show(self::RESOURCE, $this->sharedStorage->get('cart_token'));
+        $response = $this->shopClient->show('orders', $this->sharedStorage->get('cart_token'));
 
         Assert::same($response->getStatusCode(), Response::HTTP_OK);
         Assert::same(
@@ -322,7 +320,7 @@ final class OrderContext implements Context
     {
         $payment = $this
             ->responseChecker
-            ->getValue($this->shopClient->show(self::RESOURCE, $this->sharedStorage->get('cart_token')), 'payments')[0]
+            ->getValue($this->shopClient->show('orders', $this->sharedStorage->get('cart_token')), 'payments')[0]
         ;
 
         Assert::same($this->iriConverter->getIriFromItem($paymentMethod), $payment['method']);
@@ -369,7 +367,7 @@ final class OrderContext implements Context
 
         Assert::same(
             $notes,
-            $this->responseChecker->getValue($this->adminClient->show(self::RESOURCE, $order->getTokenValue()), 'notes')
+            $this->responseChecker->getValue($this->adminClient->show('orders', $order->getTokenValue()), 'notes')
         );
     }
 
@@ -385,13 +383,13 @@ final class OrderContext implements Context
 
         Assert::same(
             $currency,
-            $this->responseChecker->getValue($this->adminClient->show(self::RESOURCE, $order->getTokenValue()), 'currencyCode')
+            $this->responseChecker->getValue($this->adminClient->show('orders', $order->getTokenValue()), 'currencyCode')
         );
     }
 
     private function getAdjustmentsForOrder(): array
     {
-        $response = $this->shopClient->subResourceIndex(self::RESOURCE, 'adjustments', $this->sharedStorage->get('cart_token'));
+        $response = $this->shopClient->subResourceIndex('orders', 'adjustments', $this->sharedStorage->get('cart_token'));
 
         return $this->responseChecker->getCollection($response);
     }
@@ -408,7 +406,7 @@ final class OrderContext implements Context
 
     private function geOrderItemIdForProductInCart(ProductInterface $product, string $tokenValue): ?string
     {
-        $items = $this->responseChecker->getValue($this->shopClient->show(self::RESOURCE, $tokenValue), 'items');
+        $items = $this->responseChecker->getValue($this->shopClient->show('orders', $tokenValue), 'items');
 
         foreach ($items as $item) {
             $response = $this->getProductForItem($item);

@@ -24,8 +24,6 @@ use Webmozart\Assert\Assert;
 
 final class ShipmentContext implements Context
 {
-    private const RESOURCE = 'shipments';
-
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
@@ -54,7 +52,7 @@ final class ShipmentContext implements Context
         /** @var ShipmentInterface $shipment */
         $shipment = $order->getShipments()->first();
 
-        $this->client->show(self::RESOURCE, (string) $shipment->getId());
+        $this->client->show('shipments', (string) $shipment->getId());
     }
 
     /**

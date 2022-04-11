@@ -23,8 +23,6 @@ use Webmozart\Assert\Assert;
 
 final class PromotionContext implements Context
 {
-    private const RESOURCE = 'orders';
-
     private ApiClientInterface $client;
 
     private SharedStorageInterface $sharedStorage;
@@ -72,7 +70,7 @@ final class PromotionContext implements Context
 
     private function useCouponCode(?string $couponCode): void
     {
-        $this->client->buildUpdateRequest(self::RESOURCE, $this->getCartTokenValue());
+        $this->client->buildUpdateRequest('orders', $this->getCartTokenValue());
         $this->client->setRequestData(['couponCode' => $couponCode]);
         $this->client->update();
     }

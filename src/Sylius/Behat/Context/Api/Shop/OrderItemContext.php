@@ -25,10 +25,6 @@ use Webmozart\Assert\Assert;
 
 final class OrderItemContext implements Context
 {
-    private const RESOURCE_ORDER_ITEMS = 'order-items';
-
-    private const RESOURCE_ORDER_ITEM_UNITS = 'order-item-units';
-
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
@@ -57,7 +53,7 @@ final class OrderItemContext implements Context
         /** @var OrderItemInterface $orderItem */
         $orderItem = $order->getItems()->first();
 
-        $this->client->show(self::RESOURCE_ORDER_ITEMS, (string) $orderItem->getId());
+        $this->client->show('order-items', (string) $orderItem->getId());
     }
 
     /**
@@ -72,7 +68,7 @@ final class OrderItemContext implements Context
         /** @var OrderItemUnitInterface $orderItemUnit */
         $orderItemUnit = $order->getItemUnits()->first();
 
-        $this->client->show(self::RESOURCE_ORDER_ITEM_UNITS, (string) $orderItemUnit->getId());
+        $this->client->show('order-item-units', (string) $orderItemUnit->getId());
     }
 
     /**

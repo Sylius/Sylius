@@ -21,8 +21,6 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPromotionsContext implements Context
 {
-    private const RESOURCE = 'promotions';
-
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
@@ -41,7 +39,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iWantToBrowsePromotions(): void
     {
-        $this->client->index(self::RESOURCE);
+        $this->client->index('promotions');
     }
 
     /**
@@ -49,7 +47,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iWantToCreateANewPromotion(): void
     {
-        $this->client->buildCreateRequest(self::RESOURCE);
+        $this->client->buildCreateRequest('promotions');
     }
 
     /**
@@ -140,7 +138,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iDeletePromotion(PromotionInterface $promotion): void
     {
-        $this->client->delete(self::RESOURCE, $promotion->getCode());
+        $this->client->delete('promotions', $promotion->getCode());
     }
 
     /**
@@ -159,7 +157,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function promotionShouldNotExistInTheRegistry(PromotionInterface $promotion): void
     {
-        $response = $this->client->index(self::RESOURCE);
+        $response = $this->client->index('promotions');
         $promotionName = (string) $promotion->getName();
 
         Assert::false(
@@ -182,7 +180,7 @@ final class ManagingPromotionsContext implements Context
     public function thePromotionShouldNotAppliesToDiscountedItems(PromotionInterface $promotion): void
     {
         Assert::false(
-            $this->responseChecker->getValue($this->client->show(self::RESOURCE, $promotion->getCode()), 'appliesToDiscounted')
+            $this->responseChecker->getValue($this->client->show('promotions', $promotion->getCode()), 'appliesToDiscounted')
         );
     }
 }

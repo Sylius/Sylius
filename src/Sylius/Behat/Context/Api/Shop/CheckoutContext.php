@@ -45,14 +45,6 @@ final class CheckoutContext implements Context
         'payment' => OrderCheckoutStates::STATE_PAYMENT_SELECTED,
     ];
 
-    private const RESOURCE_ORDERS = 'orders';
-
-    private const RESOURCE_ADDRESSES = 'addresses';
-
-    private const RESOURCE_SHIPPING_METHODS = 'shipping-methods';
-
-    private const RESOURCE_PAYMENT_METHODS = 'payment-methods';
-
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
@@ -155,7 +147,7 @@ final class CheckoutContext implements Context
      */
     public function iChooseForBillingAddress(string $street, string $addressType): void
     {
-        $addressBook = $this->responseChecker->getCollection($this->client->index(self::RESOURCE_ADDRESSES));
+        $addressBook = $this->responseChecker->getCollection($this->client->index('addresses'));
 
         $addressType .= 'Address';
 
@@ -353,7 +345,7 @@ final class CheckoutContext implements Context
 
         Assert::notSame($response->getStatusCode(), 200);
 
-        $this->client->show(self::RESOURCE_ORDERS, $this->sharedStorage->get('cart_token'));
+        $this->client->show('orders', $this->sharedStorage->get('cart_token'));
     }
 
     /**
@@ -903,7 +895,7 @@ final class CheckoutContext implements Context
     {
         if ($this->sharedStorage->has('cart_token')) {
             $discountTotal = $this->responseChecker->getValue(
-                $this->client->show(self::RESOURCE_ORDERS, $this->sharedStorage->get('cart_token')),
+                $this->client->show('orders', $this->sharedStorage->get('cart_token')),
                 'orderPromotionTotal'
             );
 
@@ -920,7 +912,7 @@ final class CheckoutContext implements Context
      */
     public function thereShouldBeNoTaxesCharged(): void
     {
-        $this->client->show(self::RESOURCE_ORDERS, $this->sharedStorage->get('cart_token'));
+        $this->client->show('orders', $this->sharedStorage->get('cart_token'));
 
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'taxTotal'), 0);
     }
@@ -1206,14 +1198,14 @@ final class CheckoutContext implements Context
             $content['email'] = null;
         }
 
-        $this->client->buildUpdateRequest(self::RESOURCE_ORDERS, $this->getCartTokenValue());
+        $this->client->buildUpdateRequest('orders', $this->getCartTokenValue());
         $this->client->setRequestData($content);
         $this->client->update();
     }
 
     private function getCart(): array
     {
-        return $this->responseChecker->getResponseContent($this->client->show(self::RESOURCE_ORDERS, $this->getCartTokenValue()));
+        return $this->responseChecker->getResponseContent($this->client->show('orders', $this->getCartTokenValue()));
     }
 
     private function getCartTokenValue(): ?string
@@ -1231,7 +1223,7 @@ final class CheckoutContext implements Context
 
     private function getCheckoutState(): string
     {
-        $this->client->show(self::RESOURCE_ORDERS, $this->sharedStorage->get('cart_token'));
+        $this->client->show('orders', $this->sharedStorage->get('cart_token'));
 
         $response = $this->client->getLastResponse();
 
@@ -1240,7 +1232,7 @@ final class CheckoutContext implements Context
 
     private function getCartShippingMethods(array $cart): array
     {
-        $this->client->index(self::RESOURCE_SHIPPING_METHODS);
+        $this->client->index('shipping-methods');
         $this->client->addFilter('tokenValue', $cart['tokenValue']);
         $this->client->addFilter('shipmentId', $cart['shipments'][0]['id']);
         $this->client->filter();
@@ -1283,7 +1275,7 @@ final class CheckoutContext implements Context
             return [];
         }
 
-        $this->client->index(self::RESOURCE_PAYMENT_METHODS);
+        $this->client->index('payment-methods');
         $this->client->addFilter('paymentId', $order->getLastPayment()->getId());
         $this->client->addFilter('tokenValue', $order->getTokenValue());
         $this->client->filter();
@@ -1447,7 +1439,7 @@ final class CheckoutContext implements Context
 
     private function addressShouldBeFilledAs(AddressInterface $address, string $addressType): void
     {
-        $response = $this->client->show(self::RESOURCE_ORDERS, $this->sharedStorage->get('cart_token'));
+        $response = $this->client->show('orders', $this->sharedStorage->get('cart_token'));
 
         $addressFromResponse = $this->responseChecker->getValue($response, $addressType . 'Address');
 

@@ -23,8 +23,6 @@ use Webmozart\Assert\Assert;
 
 final class ProductVariantContext implements Context
 {
-    private const RESOURCE_PRODUCT_VARIANTS = 'product-variants';
-
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
@@ -49,7 +47,7 @@ final class ProductVariantContext implements Context
     public function iSelectVariant(ProductVariantInterface $variant): void
     {
         $this->sharedStorage->set('variant', $variant);
-        $this->client->show(self::RESOURCE_PRODUCT_VARIANTS, $variant->getCode());
+        $this->client->show('product-variants', $variant->getCode());
     }
 
     /**
@@ -58,7 +56,7 @@ final class ProductVariantContext implements Context
     public function visitorViewVariant(ProductVariantInterface $variant): void
     {
         $this->sharedStorage->set('token', null);
-        $this->client->show(self::RESOURCE_PRODUCT_VARIANTS, $variant->getCode());
+        $this->client->show('product-variants', $variant->getCode());
     }
 
     /**
@@ -66,7 +64,7 @@ final class ProductVariantContext implements Context
      */
     public function iViewVariants(): void
     {
-        $this->client->index(self::RESOURCE_PRODUCT_VARIANTS);
+        $this->client->index('product-variants');
     }
 
     /**
@@ -160,7 +158,7 @@ final class ProductVariantContext implements Context
         string $promotionName
     ): void {
         $this->sharedStorage->set('token', null);
-        $this->client->show(self::RESOURCE_PRODUCT_VARIANTS, $productVariant->getCode());
+        $this->client->show('product-variants', $productVariant->getCode());
 
         $this->iShouldSeeVariantIsDiscountedFromToWithPromotions($productVariant, $originalPrice, $price, $promotionName);
     }
@@ -175,7 +173,7 @@ final class ProductVariantContext implements Context
         int $numberOfPromotions
     ): void {
         $this->sharedStorage->set('token', null);
-        $this->client->show(self::RESOURCE_PRODUCT_VARIANTS, $variant->getCode());
+        $this->client->show('product-variants', $variant->getCode());
 
         $this->iShouldSeeVariantIsDiscountedFromToWithNumberOfPromotions($variant, $originalPrice, $price, $numberOfPromotions);
     }
@@ -206,7 +204,7 @@ final class ProductVariantContext implements Context
      */
     public function iShouldSeeThisVariantIsNotDiscounted(ProductVariantInterface $variant): void
     {
-        $content = $this->responseChecker->getResponseContent($this->client->show(self::RESOURCE_PRODUCT_VARIANTS, $variant->getCode()));
+        $content = $this->responseChecker->getResponseContent($this->client->show('product-variants', $variant->getCode()));
 
         Assert::keyNotExists($content, 'appliedPromotions');
     }
@@ -221,7 +219,7 @@ final class ProductVariantContext implements Context
 
         /** @var ProductVariantInterface $variant */
         foreach ($variants as $variant) {
-            $content = $this->responseChecker->getResponseContent($this->client->show(self::RESOURCE_PRODUCT_VARIANTS, $variant->getCode()));
+            $content = $this->responseChecker->getResponseContent($this->client->show('product-variants', $variant->getCode()));
             Assert::keyExists(
                 $content,
                 'appliedPromotions',
@@ -240,7 +238,7 @@ final class ProductVariantContext implements Context
 
         /** @var ProductVariantInterface $variant */
         foreach ($variants as $variant) {
-            $content = $this->responseChecker->getResponseContent($this->client->show(self::RESOURCE_PRODUCT_VARIANTS, $variant->getCode()));
+            $content = $this->responseChecker->getResponseContent($this->client->show('product-variants', $variant->getCode()));
             Assert::keyNotExists(
                 $content,
                 'appliedPromotions',

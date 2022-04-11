@@ -23,8 +23,6 @@ use Webmozart\Assert\Assert;
 
 final class RegistrationContext implements Context
 {
-    private const RESOURCE = 'customers';
-
     private AbstractBrowser $client;
 
     private ApiClientInterface $shopClient;
@@ -268,7 +266,7 @@ final class RegistrationContext implements Context
     {
         $customer = $this->sharedStorage->get('customer');
 
-        $response = $this->shopClient->show(self::RESOURCE, (string) $customer->getId());
+        $response = $this->shopClient->show('customers', (string) $customer->getId());
 
         Assert::true($this->responseChecker->getResponseContent($response)['subscribedToNewsletter']);
     }

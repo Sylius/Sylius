@@ -27,8 +27,6 @@ use Webmozart\Assert\Assert;
 
 final class ManagingChannelsContext implements Context
 {
-    private const RESOURCE = 'channels';
-
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
@@ -52,7 +50,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iWantToCreateANewChannel(): void
     {
-        $this->client->buildCreateRequest(self::RESOURCE);
+        $this->client->buildCreateRequest('channels');
     }
 
     /**
@@ -195,7 +193,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iWantToBrowseChannels(): void
     {
-        $this->client->index(self::RESOURCE);
+        $this->client->index('channels');
     }
 
     /**
@@ -216,7 +214,7 @@ final class ManagingChannelsContext implements Context
     public function theChannelShouldAppearInTheRegistry(string $name): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(self::RESOURCE), 'name', $name),
+            $this->responseChecker->hasItemWithValue($this->client->index('channels'), 'name', $name),
             sprintf('Channel with name %s does not exist', $name)
         );
     }
@@ -227,7 +225,7 @@ final class ManagingChannelsContext implements Context
     public function theChannelShouldHaveAsAMenuTaxon(ChannelInterface $channel, TaxonInterface $taxon): void
     {
         Assert::same(
-            $this->responseChecker->getValue($this->client->show(self::RESOURCE, $channel->getCode()), 'menuTaxon'),
+            $this->responseChecker->getValue($this->client->show('channels', $channel->getCode()), 'menuTaxon'),
             $this->iriConverter->getIriFromItem($taxon),
             sprintf('Channel %s does not have %s menu taxon', $channel->getName(), $taxon->getName())
         );

@@ -21,8 +21,6 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCustomerGroupsContext implements Context
 {
-    private const RESOURCE = 'customer-groups';
-
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
@@ -38,7 +36,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iWantToCreateANewCustomerGroup(): void
     {
-        $this->client->buildCreateRequest(self::RESOURCE);
+        $this->client->buildCreateRequest('customer-groups');
     }
 
     /**
@@ -74,7 +72,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iWantToEditThisCustomerGroup(CustomerGroupInterface $customerGroup): void
     {
-        $this->client->buildUpdateRequest(self::RESOURCE, $customerGroup->getCode());
+        $this->client->buildUpdateRequest('customer-groups', $customerGroup->getCode());
     }
 
     /**
@@ -91,7 +89,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iWantToBrowseCustomerGroups(): void
     {
-        $this->client->index(self::RESOURCE);
+        $this->client->index('customer-groups');
     }
 
     /**
@@ -99,7 +97,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iDeleteTheCustomerGroup(CustomerGroupInterface $customerGroup): void
     {
-        $this->client->delete(self::RESOURCE, $customerGroup->getCode());
+        $this->client->delete('customer-groups', $customerGroup->getCode());
     }
 
     /**
@@ -108,7 +106,7 @@ final class ManagingCustomerGroupsContext implements Context
     public function theCustomerGroupShouldAppearInTheStore(CustomerGroupInterface $customerGroup): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(self::RESOURCE), 'code', $customerGroup->getCode()),
+            $this->responseChecker->hasItemWithValue($this->client->index('customer-groups'), 'code', $customerGroup->getCode()),
             sprintf('Customer group with code %s does not exist', $customerGroup->getCode())
         );
     }
@@ -120,7 +118,7 @@ final class ManagingCustomerGroupsContext implements Context
     public function thisCustomerGroupWithNameShouldAppearInTheStore(string $name): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(self::RESOURCE), 'name', $name),
+            $this->responseChecker->hasItemWithValue($this->client->index('customer-groups'), 'name', $name),
             sprintf('Customer group with name %s does not exist', $name)
         );
     }
@@ -131,7 +129,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldSeeCustomerGroupsInTheList(int $amountOfCustomerGroups = 1): void
     {
-        Assert::same($this->responseChecker->countCollectionItems($this->client->index(self::RESOURCE)), $amountOfCustomerGroups);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->index('customer-groups')), $amountOfCustomerGroups);
     }
 
     /**
@@ -140,7 +138,7 @@ final class ManagingCustomerGroupsContext implements Context
     public function thisCustomerGroupShouldStillBeNamed(CustomerGroupInterface $customerGroup, string $name): void
     {
         Assert::true(
-            $this->responseChecker->hasValue($this->client->show(self::RESOURCE, $customerGroup->getCode()), 'name', $name),
+            $this->responseChecker->hasValue($this->client->show('customer-groups', $customerGroup->getCode()), 'name', $name),
             'Customer groups name is not ' . $name
         );
     }
@@ -234,6 +232,6 @@ final class ManagingCustomerGroupsContext implements Context
 
     private function isItemOnIndex(string $property, string $value): bool
     {
-        return $this->responseChecker->hasItemWithValue($this->client->index(self::RESOURCE), $property, $value);
+        return $this->responseChecker->hasItemWithValue($this->client->index('customer-groups'), $property, $value);
     }
 }
