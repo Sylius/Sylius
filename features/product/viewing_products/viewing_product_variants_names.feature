@@ -16,7 +16,7 @@ Feature: Viewing product's variants names
         When I view product "Die Hard Movie"
         Then its current variant should be named "Die Hard - Extended Cut"
 
-    @ui
+    @ui @api
     Scenario: Seeing proper variant's name after locale change
         When I view product "Die Hard Movie" in the "Polish (Poland)" locale
         Then its current variant should be named "Szklana Pułapka - Wersja Reżyserska"

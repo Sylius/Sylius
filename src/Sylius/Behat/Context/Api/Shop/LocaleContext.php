@@ -16,25 +16,18 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
 
 final class LocaleContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $localesClient;
-
-    /** @var ApiClientInterface */
-    private $cartsClient;
-
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
-
-    public function __construct(ApiClientInterface $localesClient, ApiClientInterface $cartsClient, ResponseCheckerInterface $responseChecker)
-    {
-        $this->localesClient = $localesClient;
-        $this->cartsClient = $cartsClient;
-        $this->responseChecker = $responseChecker;
+    public function __construct(
+        private ApiClientInterface $localesClient,
+        private ApiClientInterface $cartsClient,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage
+    ) {
     }
 
     /**
@@ -51,6 +44,15 @@ final class LocaleContext implements Context
     public function iGetLocale(LocaleInterface $locale): void
     {
         $this->localesClient->show($locale->getCode());
+    }
+
+    /**
+     * @When I switch to the :localeCode locale
+     * @When I use the locale :localeCode
+     */
+    public function iSwitchToTheLocale(string $localeCode): void
+    {
+        $this->sharedStorage->set('current_locale_code', $localeCode);
     }
 
     /**
@@ -102,9 +104,30 @@ final class LocaleContext implements Context
     {
         $this->cartsClient->buildCreateRequest();
 
-        Assert::same(
-            $this->responseChecker->getValue($this->cartsClient->create(), 'localeCode'),
-            $localeCode
+        Assert::same($this->responseChecker->getValue($this->cartsClient->create(), 'localeCode'), $localeCode);
+    }
+
+    /**
+     * @Then I should be able to shop using the :localeCode locale
+     */
+    public function iShouldBeAbleToShopUsingTheLocale(string $localeCode): void
+    {
+        $this->iGetAvailableLocales();
+
+        Assert::true(
+            $this->responseChecker->hasItemWithValue($this->localesClient->getLastResponse(), 'code', $localeCode)
+        );
+    }
+
+    /**
+     * @Then I should not be able to shop using the :localeCode locale
+     */
+    public function iShouldNotBeAbleToShopUsingTheLocale(string $localeCode): void
+    {
+        $this->iGetAvailableLocales();
+
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($this->localesClient->getLastResponse(), 'code', $localeCode)
         );
     }
 }

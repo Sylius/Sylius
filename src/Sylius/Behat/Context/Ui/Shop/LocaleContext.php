@@ -39,33 +39,24 @@ final class LocaleContext implements Context
         $this->homePage->open();
         $this->homePage->switchLocale($locale->getName('en_US'));
 
-        $this->sharedStorage->set('locale', $locale);
+        $this->sharedStorage->set('current_locale_code', $locale->getCode());
     }
 
     /**
-     * @When I show homepage with the locale :locale
+     * @When I use the locale :localeCode
      */
-    public function iShowHomepageWithTheLocale(LocaleInterface $locale): void
-    {
-        $this->homePage->tryToOpen(['_locale' => $locale->getCode()]);
-
-        $this->sharedStorage->set('locale', $locale);
-    }
-
-    /**
-     * @When I try to open homepage with the locale :localeCode
-     */
-    public function iTryToOpenHomepageWithTheLocale(string $localeCode): void
+    public function iUseTheLocale(string $localeCode): void
     {
         $this->homePage->tryToOpen(['_locale' => $localeCode]);
     }
 
     /**
-     * @Then I should( still) shop using the :localeNameInCurrentLocale locale
+     * @Then I should shop using the :localeNameInItsLocale locale
+     * @Then I should still shop using the :localeNameInItsLocale locale
      */
-    public function iShouldShopUsingTheLocale(string $localeNameInCurrentLocale)
+    public function iShouldShopUsingTheLocale(string $localeNameInItsLocale): void
     {
-        Assert::same($this->homePage->getActiveLocale(), $localeNameInCurrentLocale);
+        Assert::same($this->homePage->getActiveLocale(), $localeNameInItsLocale);
     }
 
     /**

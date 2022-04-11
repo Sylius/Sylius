@@ -41,22 +41,36 @@ final class LocaleContext implements Context
     }
 
     /**
-     * @Transform :localeName
+     * @Transform :localeNameInItsLocale
      */
-    public function castToLocaleName(string $localeCode): string
+    public function castToItsLocale(string $localeName): string
     {
-        return $this->localeNameConverter->convertCodeToName($localeCode);
+        $localeCode = $this->localeNameConverter->convertNameToCode($localeName);
+
+        return $this->localeNameConverter->convertCodeToName($localeCode, $localeCode);
     }
 
     /**
      * @Transform :localeNameInCurrentLocale
      */
-    public function castToLocaleNameInCurrentLocale(string $localeName): string
+    public function castToCurrentLocale(string $localeName): string
     {
-        return $this->localeNameConverter->convertCodeToName(
-            $this->localeNameConverter->convertNameToCode($localeName),
-            $this->sharedStorage->get('locale')?->getCode()
-        );
+        if ($this->sharedStorage->has('current_locale_code')) {
+            return $this->localeNameConverter->convertCodeToName(
+                $this->localeNameConverter->convertNameToCode($localeName),
+                $this->sharedStorage->get('current_locale_code')
+            );
+        }
+
+        return $localeName;
+    }
+
+    /**
+     * @Transform :localeName
+     */
+    public function castToLocaleName(string $localeCode): string
+    {
+        return $this->localeNameConverter->convertCodeToName($localeCode);
     }
 
     /**
