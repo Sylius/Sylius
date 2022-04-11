@@ -25,6 +25,14 @@
                 </attribute>
             </collectionOperation>
 
+            <collectionOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/channels</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:channel:read</attribute>
+                </attribute>
+            </collectionOperation>
+
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/channels</attribute>
