@@ -31,12 +31,12 @@ final class ProductDocumentationNormalizer implements NormalizerInterface
     {
         $docs = $this->decoratedNormalizer->normalize($object, $format, $context);
 
-        $defaultVariantSchema = [
+        $defaultVariantSchema = new \ArrayObject([
             'type' => 'string',
             'format' => 'iri-reference',
             'nullable' => true,
-            'readOnly' => true,
-        ];
+            'readOnly' => true
+        ]);
 
         $docs['components']['schemas']['Product.jsonld-admin.product.read']['properties']['defaultVariant'] = $defaultVariantSchema;
         $docs['components']['schemas']['Product.jsonld-shop.product.read']['properties']['defaultVariant'] = $defaultVariantSchema;
