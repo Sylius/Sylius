@@ -45,6 +45,7 @@ final class ChannelContext implements Context
     public function iAmBrowsingChannel(ChannelInterface $channel): void
     {
         $this->sharedStorage->set('hostname', $channel->getHostname());
+        $this->sharedStorage->set('locale', $channel->getDefaultLocale());
     }
 
     /**

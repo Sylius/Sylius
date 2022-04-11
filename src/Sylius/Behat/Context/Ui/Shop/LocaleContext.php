@@ -48,20 +48,20 @@ final class LocaleContext implements Context
     }
 
     /**
-     * @Then I should( still) shop using the :localeNameInItsLocale locale
+     * @Then I should( still) shop using the :localeNameInCurrentLocale locale
      */
-    public function iShouldShopUsingTheLocale(string $localeNameInItsLocale)
+    public function iShouldShopUsingTheLocale(string $localeNameInCurrentLocale)
     {
-        Assert::same($this->homePage->getActiveLocale(), $localeNameInItsLocale);
+        Assert::same($this->homePage->getActiveLocale(), $localeNameInCurrentLocale);
     }
 
     /**
-     * @Then I should be able to shop using the :locale locale
-     * @Then the store should be available in the :locale locale
+     * @Then I should be able to shop using the :localeNameInCurrentLocale locale
+     * @Then the store should be available in the :localeNameInCurrentLocale locale
      */
-    public function iShouldBeAbleToShopUsingTheLocale($locale)
+    public function iShouldBeAbleToShopUsingTheLocale(string $localeNameInCurrentLocale)
     {
-        Assert::oneOf($locale, $this->homePage->getAvailableLocales());
+        Assert::oneOf($localeNameInCurrentLocale, $this->homePage->getAvailableLocales());
     }
 
     /**
