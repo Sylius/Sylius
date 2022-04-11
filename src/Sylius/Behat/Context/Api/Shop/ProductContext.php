@@ -112,6 +112,16 @@ final class ProductContext implements Context
     }
 
     /**
+     * @When /^I sort products by the (oldest|newest) date first$/
+     */
+    public function iSortProductsByTheDateFirst(string $sortDirection): void
+    {
+        $sortDirection = 'oldest' === $sortDirection ? 'asc' : 'desc';
+
+        $this->client->sort(['createdAt' => $sortDirection]);
+    }
+
+    /**
      * @When I sort products by the lowest price first
      */
     public function iSortProductsByTheLowestPriceFirst(): void

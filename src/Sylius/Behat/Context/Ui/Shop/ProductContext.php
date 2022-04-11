@@ -266,6 +266,16 @@ final class ProductContext implements Context
     }
 
     /**
+     * @When /^I sort products by the (oldest|newest) date first$/
+     */
+    public function iSortProductsByTheDateFirst(string $sortDirection): void
+    {
+        $sortDirection = 'oldest' === $sortDirection ? 'Oldest first' : 'Newest first';
+
+        $this->indexPage->sort($sortDirection);
+    }
+
+    /**
      * @When I sort products by the lowest price first
      */
     public function iSortProductsByTheLowestPriceFirst(): void
@@ -276,7 +286,7 @@ final class ProductContext implements Context
     /**
      * @When I sort products by the highest price first
      */
-    public function iSortProductsByTheHighestPriceFisrt(): void
+    public function iSortProductsByTheHighestPriceFirst(): void
     {
         $this->indexPage->sort('Most expensive first');
     }
@@ -674,16 +684,6 @@ final class ProductContext implements Context
     public function iShouldSeeAMainImage(): void
     {
         Assert::true($this->showPage->isMainImageDisplayed());
-    }
-
-    /**
-     * @When /^I view (oldest|newest) products from (taxon "([^"]+)")$/
-     */
-    public function iViewSortedProductsFromTaxon($sortDirection, TaxonInterface $taxon): void
-    {
-        $sorting = ['createdAt' => 'oldest' === $sortDirection ? 'asc' : 'desc'];
-
-        $this->indexPage->open(['slug' => $taxon->getSlug(), 'sorting' => $sorting]);
     }
 
     /**
