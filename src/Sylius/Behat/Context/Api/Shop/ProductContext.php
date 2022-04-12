@@ -459,7 +459,7 @@ final class ProductContext implements Context
     /**
      * @Then I should see a main image
      */
-    public function iShouldSeeAMainImage()
+    public function iShouldSeeAMainImage(): void
     {
         Assert::true($this->hasProductWithMainImage());
     }
