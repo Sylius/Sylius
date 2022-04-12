@@ -87,8 +87,8 @@ sylius:
     user:
         email:
             unique: Email ini telah digunakan.
-            min: Email harus mengandung minimal {{ min }} karakter.
-            max: Email maksimal hanya terdiri dari {{ max }} karakter.
+            min: Email harus mengandung minimal {{ limit }} karakter.
+            max: Email maksimal hanya terdiri dari {{ limit }} karakter.
             invalid: Email ini tidak valid.
         username:
             unique: Username ini telah digunakan.
