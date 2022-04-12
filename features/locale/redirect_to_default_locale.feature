@@ -13,10 +13,10 @@ Feature: Redirect to default locale
     Scenario: Stay on the current locale if it is available
         When I browse that channel
         And I show homepage with the locale "French (France)"
-        Then I should shop using the "français (France)" locale
+        Then I should shop using the "French (France)" locale
 
     @ui
     Scenario: Redirect to default locale if it is not available
         When I browse that channel
-        And I show homepage with the locale "Polish (Poland)"
+        And I try to open homepage with the locale "Polish (Poland)"
         Then I should shop using the "English (United States)" locale

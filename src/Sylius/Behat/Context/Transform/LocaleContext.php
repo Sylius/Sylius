@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -21,14 +22,11 @@ use Webmozart\Assert\Assert;
 
 final class LocaleContext implements Context
 {
-    private LocaleConverterInterface $localeNameConverter;
-
-    private RepositoryInterface $localeRepository;
-
-    public function __construct(LocaleConverterInterface $localeNameConverter, RepositoryInterface $localeRepository)
-    {
-        $this->localeNameConverter = $localeNameConverter;
-        $this->localeRepository = $localeRepository;
+    public function __construct(
+        private LocaleConverterInterface $localeNameConverter,
+        private RepositoryInterface $localeRepository,
+        private SharedStorageInterface $sharedStorage
+    ) {
     }
 
     /**
@@ -48,6 +46,17 @@ final class LocaleContext implements Context
     public function castToLocaleName(string $localeCode): string
     {
         return $this->localeNameConverter->convertCodeToName($localeCode);
+    }
+
+    /**
+     * @Transform :localeNameInCurrentLocale
+     */
+    public function castToLocaleNameInCurrentLocale(string $localeName): string
+    {
+        return $this->localeNameConverter->convertCodeToName(
+            $this->localeNameConverter->convertNameToCode($localeName),
+            $this->sharedStorage->get('locale')?->getCode()
+        );
     }
 
     /**

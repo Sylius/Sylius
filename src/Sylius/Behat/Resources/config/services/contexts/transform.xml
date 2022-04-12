@@ -69,6 +69,7 @@
         <service id="sylius.behat.context.transform.locale" class="Sylius\Behat\Context\Transform\LocaleContext">
             <argument type="service" id="sylius.locale_converter" />
             <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="sylius.behat.context.transform.order" class="Sylius\Behat\Context\Transform\OrderContext">

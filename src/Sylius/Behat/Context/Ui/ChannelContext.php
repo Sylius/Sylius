@@ -75,6 +75,9 @@ final class ChannelContext implements Context
      */
     public function iVisitChannelHomepage(ChannelInterface $channel): void
     {
+        $this->sharedStorage->set('hostname', $channel->getHostname());
+        $this->sharedStorage->set('locale', $channel->getDefaultLocale());
+
         $this->channelContextSetter->setChannel($channel);
 
         $defaultLocale = $channel->getDefaultLocale();

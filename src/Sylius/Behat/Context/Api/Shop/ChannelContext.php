@@ -40,10 +40,12 @@ final class ChannelContext implements Context
 
     /**
      * @Given I am browsing channel :channel
+     * @When /^I (?:am browsing|start browsing|try to browse|browse) (?:|the )("[^"]+" channel)$/
      */
     public function iAmBrowsingChannel(ChannelInterface $channel): void
     {
         $this->sharedStorage->set('hostname', $channel->getHostname());
+        $this->sharedStorage->set('locale', $channel->getDefaultLocale());
     }
 
     /**
@@ -61,8 +63,8 @@ final class ChannelContext implements Context
     {
         Assert::same(
             $this->responseChecker->getValue(
-            $this->client->getLastResponse(),
-            'baseCurrency'
+                $this->client->getLastResponse(),
+                'baseCurrency'
             ),
             sprintf('/api/v2/shop/currencies/%s', $currencyCode)
         );
