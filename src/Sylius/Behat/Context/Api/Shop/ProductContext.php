@@ -456,6 +456,14 @@ final class ProductContext implements Context
         ));
     }
 
+    /**
+     * @Then I should see a main image
+     */
+    public function iShouldSeeAMainImage(): void
+    {
+        Assert::true($this->hasProductWithMainImage());
+    }
+
     private function hasProductWithPrice(
         array $products,
         int $price,
@@ -502,5 +510,12 @@ final class ProductContext implements Context
         }
 
         return false;
+    }
+
+    private function hasProductWithMainImage(): bool
+    {
+        $images = $this->responseChecker->getValue($this->client->getLastResponse(), 'images');
+
+        return $images[0]['type'] === 'main' && $images[0]['path'];
     }
 }
