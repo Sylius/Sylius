@@ -1303,7 +1303,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function thereShouldStillBeOnlyOneCatalogPromotionWithCode(string $code): void
     {
-        Assert::count($this->responseChecker->getCollectionItemsWithValue($this->client->index(), 'code', $code), 1);
+        Assert::count($this->responseChecker->getCollectionItemsWithValue($this->client->index('catalog-promotions'), 'code', $code), 1);
     }
 
     /**

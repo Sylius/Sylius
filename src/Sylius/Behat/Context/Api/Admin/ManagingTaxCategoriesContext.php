@@ -185,7 +185,7 @@ final class ManagingTaxCategoriesContext implements Context
     public function thereShouldStillBeOnlyOneTaxCategoryWith(string $element, string $value): void
     {
         Assert::same(
-            count($this->responseChecker->getCollectionItemsWithValue($this->client->index(), $element, $value)),
+            count($this->responseChecker->getCollectionItemsWithValue($this->client->index('tax-categories'), $element, $value)),
             1
         );
     }

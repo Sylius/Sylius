@@ -146,7 +146,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iShouldSeeShippingCategoriesInTheList(int $count = 1): void
     {
-        Assert::same($this->responseChecker->countCollectionItems($this->client->index()), $count);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->index('shipping-categories')), $count);
     }
 
     /**
@@ -204,7 +204,7 @@ final class ManagingShippingCategoriesContext implements Context
     public function thereShouldStillBeOnlyOneShippingCategoryWith(string $code): void
     {
         Assert::same(
-            count($this->responseChecker->getCollectionItemsWithValue($this->client->index(), 'code', $code)),
+            count($this->responseChecker->getCollectionItemsWithValue($this->client->index('shipping-categories'), 'code', $code)),
             1
         );
     }

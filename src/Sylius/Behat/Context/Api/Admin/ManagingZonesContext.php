@@ -26,8 +26,6 @@ use Webmozart\Assert\Assert;
 
 final class ManagingZonesContext implements Context
 {
-    private const RESOURCE = 'zones';
-
     private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;

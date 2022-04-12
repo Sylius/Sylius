@@ -24,7 +24,8 @@ final class LocaleContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
-        private ResponseCheckerInterface $responseChecker
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage
     ) {
     }
 
@@ -100,9 +101,9 @@ final class LocaleContext implements Context
      */
     public function iShouldShopUsingTheLocale(string $localeCode): void
     {
-        $this->client->buildCreateRequest('carts');
+        $this->client->buildCreateRequest('orders');
 
-        Assert::same($this->responseChecker->getValue($this->cartsClient->create(), 'localeCode'), $localeCode);
+        Assert::same($this->responseChecker->getValue($this->client->create(), 'localeCode'), $localeCode);
     }
 
     /**
@@ -113,7 +114,7 @@ final class LocaleContext implements Context
         $this->iGetAvailableLocales();
 
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->localesClient->getLastResponse(), 'code', $localeCode)
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'code', $localeCode)
         );
     }
 
@@ -125,7 +126,7 @@ final class LocaleContext implements Context
         $this->iGetAvailableLocales();
 
         Assert::false(
-            $this->responseChecker->hasItemWithValue($this->localesClient->getLastResponse(), 'code', $localeCode)
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'code', $localeCode)
         );
     }
 }

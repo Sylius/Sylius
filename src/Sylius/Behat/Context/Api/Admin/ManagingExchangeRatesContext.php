@@ -365,7 +365,7 @@ final class ManagingExchangeRatesContext implements Context
         CurrencyInterface $targetCurrency
     ): ?array {
         /** @var array $item */
-        foreach ($this->responseChecker->getCollection($this->client->index()) as $item) {
+        foreach ($this->responseChecker->getCollection($this->client->index('exchange-rates')) as $item) {
             if (
                 $item['sourceCurrency'] === '/api/v2/admin/currencies/' . $sourceCurrency->getCode() &&
                 $item['targetCurrency'] === '/api/v2/admin/currencies/' . $targetCurrency->getCode()
