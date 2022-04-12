@@ -14,3 +14,8 @@ Feature: Picking up the cart with the locale other than the default
         When I pick up cart in the "French (France)" locale
         And I check details of my cart
         Then my cart's locale should be "French (France)"
+
+    @api
+    Scenario: Picking up the cart with non valid locale
+        When I pick up cart using wrong locale
+        Then I should be notified that locale does not exist
