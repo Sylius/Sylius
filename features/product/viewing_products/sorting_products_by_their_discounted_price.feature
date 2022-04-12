@@ -1,6 +1,6 @@
 @viewing_products
-Feature: Viewing products sorted by discounted price
-    In order to see product variant sorted by discounted price
+Feature: Sorting products by discounted price
+    In order to see product variants sorted by their discounted price
     As a Visitor
     I want to be able to see a properly sorted products by their discounted price
 

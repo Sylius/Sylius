@@ -1,5 +1,8 @@
 @viewing_products
-Feature: Viewing products sorted by first variant price
+Feature: Sorting products by first variant price
+    In order to see product variants sorted by their variant price
+    As a Visitor
+    I want to be able to see a properly sorted products by their discounted price
 
     Background:
         Given the store operates on a single channel in "United States"
