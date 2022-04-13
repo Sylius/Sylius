@@ -36,7 +36,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iWantToCreateANewShippingCategory(): void
     {
-        $this->client->buildCreateRequest('shipping-methods');
+        $this->client->buildCreateRequest('shipping-categories');
     }
 
     /**
@@ -44,7 +44,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iWantToModifyAShippingCategory(ShippingCategoryInterface $shippingCategory): void
     {
-        $this->client->buildUpdateRequest('shipping-methods', $shippingCategory->getCode());
+        $this->client->buildUpdateRequest('shipping-categories', $shippingCategory->getCode());
     }
 
     /**
@@ -60,7 +60,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iDeleteShippingCategory(ShippingCategoryInterface $shippingCategory): void
     {
-        $this->client->delete('shipping-methods', $shippingCategory->getCode());
+        $this->client->delete('shipping-categories', $shippingCategory->getCode());
     }
 
     /**
@@ -68,7 +68,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iBrowseShippingCategories(): void
     {
-        $this->client->index('shipping-methods');
+        $this->client->index('shipping-categories');
     }
 
     /**
@@ -99,7 +99,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iModifyAShippingCategory(ShippingCategoryInterface $shippingCategory): void
     {
-        $this->client->buildUpdateRequest('shipping-methods', $shippingCategory->getCode());
+        $this->client->buildUpdateRequest('shipping-categories', $shippingCategory->getCode());
     }
 
     /**
@@ -255,7 +255,7 @@ final class ManagingShippingCategoriesContext implements Context
 
     private function isItemOnIndex(string $property, string $value): bool
     {
-        $this->client->index('shipping-methods');
+        $this->client->index('shipping-categories');
 
         return $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), $property, $value);
     }

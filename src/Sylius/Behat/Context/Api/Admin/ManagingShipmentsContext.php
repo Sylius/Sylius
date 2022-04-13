@@ -17,6 +17,7 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -30,20 +31,12 @@ use Webmozart\Assert\Assert;
 
 final class ManagingShipmentsContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private IriConverterInterface $iriConverter;
-
     public function __construct(
-        ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private IriConverterInterface $iriConverter,
+        private SharedStorageInterface $sharedStorage
     ) {
-        $this->client = $client;
-        $this->responseChecker = $responseChecker;
-        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -91,7 +84,9 @@ final class ManagingShipmentsContext implements Context
      */
     public function iViewTheShipmentOfTheOrder(OrderInterface $order): void
     {
-        $this->client->show('shipments', (string) $order->getShipments()->first()->getId());
+        $response = $this->client->show('shipments', (string) $order->getShipments()->first()->getId());
+
+        $this->sharedStorage->set('response', $response);
     }
 
     /**
@@ -267,7 +262,9 @@ final class ManagingShipmentsContext implements Context
      */
     public function iShouldSeeUnitsInTheList(int $amount, ProductInterface $product): void
     {
-        $shipmentUnitsFromResponse = $this->responseChecker->getValue($this->client->getLastResponse(), 'units');
+        $response = $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
+
+        $shipmentUnitsFromResponse = $this->responseChecker->getValue($response, 'units');
 
         $productUnitsCounter = 0;
         foreach ($shipmentUnitsFromResponse as $shipmentUnitFromResponse) {

@@ -94,7 +94,9 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iBrowseShippingMethods(): void
     {
-        $this->client->index('shipping-methods');
+        $response = $this->client->index('shipping-methods');
+
+        $this->sharedStorage->set('response', $response);
     }
 
     /**
@@ -589,7 +591,9 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function theLastShippingMethodOnTheListShouldHave(string $value): void
     {
-        $shippingMethods = $this->responseChecker->getCollection($this->client->getLastResponse());
+        $response = $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
+
+        $shippingMethods = $this->responseChecker->getCollection($response);
 
         Assert::same(end($shippingMethods)['translations']['en_US']['name'], $value);
     }

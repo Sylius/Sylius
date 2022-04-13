@@ -64,7 +64,9 @@ final class ProductVariantContext implements Context
      */
     public function iViewVariants(): void
     {
-        $this->client->index('product-variants');
+        $response = $this->client->index('product-variants');
+
+        $this->sharedStorage->set('response', $response);
     }
 
     /**
@@ -183,7 +185,9 @@ final class ProductVariantContext implements Context
      */
     public function iShouldSeeVariantIsNotDiscounted(ProductVariantInterface $variant): void
     {
-        $items = $this->responseChecker->getCollectionItemsWithValue($this->client->getLastResponse(), 'code', $variant->getCode());
+        $response = $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
+
+        $items = $this->responseChecker->getCollectionItemsWithValue($response, 'code', $variant->getCode());
         $item = array_pop($items);
         Assert::keyNotExists($item, 'appliedPromotions');
     }
@@ -249,7 +253,7 @@ final class ProductVariantContext implements Context
 
     private function findVariant(?ProductVariantInterface $variant): array
     {
-        $response = $this->client->getLastResponse();
+        $response = $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
 
         if ($variant !== null && $this->responseChecker->hasValue($response, '@type', 'hydra:Collection')) {
             $returnValue = $this->responseChecker->getCollectionItemsWithValue($response, 'code', $variant->getCode());

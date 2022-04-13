@@ -62,6 +62,8 @@ final class ManagingProductsContext implements Context
             'translation.name' => self::SORT_TYPES[$sortType],
             'localeCode' => $this->getAdminLocaleCode(),
         ]);
+
+        $this->sharedStorage->set('response', $this->client->getLastResponse());
     }
 
     /**
@@ -72,6 +74,8 @@ final class ManagingProductsContext implements Context
     public function iWantToBrowseProducts(): void
     {
         $this->client->index('products');
+
+        $this->sharedStorage->set('response', $this->client->getLastResponse());
     }
 
     /**
@@ -195,6 +199,8 @@ final class ManagingProductsContext implements Context
     public function iSwitchTheWayProductsAreSortedByCode(string $sortType = 'ascending'): void
     {
         $this->client->sort(['code' => self::SORT_TYPES[$sortType]]);
+
+        $this->sharedStorage->set('response', $this->client->getLastResponse());
     }
 
     /**
@@ -331,8 +337,10 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldSeeProductWith(string $field, string $value): void
     {
+        $response = $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
+
         Assert::true(
-            $this->hasProductWithFieldValue($this->client->getLastResponse(), $field, $value),
+            $this->hasProductWithFieldValue($response, $field, $value),
             sprintf('Product has not %s with %s', $field, $value)
         );
     }
@@ -342,10 +350,10 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldNotSeeAnyProductWith(string $field, string $value): void
     {
+        $response = $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
+
         Assert::false(
-            $this
-                ->responseChecker
-                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value),
+            $this->responseChecker->hasItemWithTranslation($response, 'en_US', $field, $value),
             sprintf('Product with %s set as %s still exists, but it should not', $field, $value)
         );
     }
@@ -429,7 +437,9 @@ final class ManagingProductsContext implements Context
      */
     public function theFirstProductOnTheListShouldHave(string $field, string $value): void
     {
-        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
+        $response = $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
+
+        $products = $this->responseChecker->getCollection($response);
 
         Assert::same($this->getFieldValueOfFirstProduct($products[0], $field), $value);
     }

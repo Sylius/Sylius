@@ -63,11 +63,10 @@ final class ProductContext implements Context
      */
     public function iViewProduct(ProductInterface $product): void
     {
+        $this->client->show('products', $product->getCode());
+
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $product->getVariants()->first();
-
-        $this->client->show('products', $product->getCode());
-        $this->client->show('product-variants', $productVariant->getCode());
 
         $this->sharedStorage->set('product', $product);
         $this->sharedStorage->set('product_variant', $productVariant);
@@ -448,8 +447,10 @@ final class ProductContext implements Context
      */
     public function theProductPriceShouldBe(int $price): void
     {
+        $response = $this->client->getLastResponse();
+
         $defaultVariantResponse = $this->client->showByIri(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'defaultVariant')
+            $this->responseChecker->getValue($response, 'defaultVariant')
         );
 
         Assert::same($this->responseChecker->getValue($defaultVariantResponse, 'price'), $price);
