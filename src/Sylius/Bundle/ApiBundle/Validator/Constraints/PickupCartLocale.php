@@ -22,7 +22,7 @@ final class PickupCartLocale extends Constraint
 
     public function validatedBy(): string
     {
-        return 'sylius_api_pickup_cart';
+        return 'sylius_api_pickup_cart_locale';
     }
 
     public function getTargets(): string

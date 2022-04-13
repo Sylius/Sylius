@@ -377,8 +377,10 @@ final class CartContext implements Context
 
         Assert::false(
             $this->responseChecker->isCreationSuccessful($response),
-            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('The locale en does not exist.', $response)
+            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('The given locale exists but it should not', $response)
         );
+
+        Assert::same($this->responseChecker->getError($response), 'The locale en does not exist.');
     }
 
     /**

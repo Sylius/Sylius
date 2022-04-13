@@ -35,16 +35,18 @@ class PickupCartLocaleValidator extends ConstraintValidator
         /** @var PickupCart $value */
         Assert::isInstanceOf($value, PickupCart::class);
 
+        if ($value->localeCode === null) {
+            return;
+        }
+
         /** @var ChannelInterface $channel */
         $channel = $this->channelRepository->findOneByCode($value->getChannelCode());
 
-        $locales = $channel->getLocales();
-
-        $locale = $locales->filter(function (LocaleInterface $locale) use ($value): bool {
+        $locales = $channel->getLocales()->filter(function (LocaleInterface $locale) use ($value): bool {
             return $locale->getCode() === $value->localeCode;
         });
 
-        if ($locale->isEmpty()) {
+        if ($locales->isEmpty()) {
             $this->context->addViolation($constraint->notExist, ['%localeCode%' => $value->localeCode]);
         }
     }
