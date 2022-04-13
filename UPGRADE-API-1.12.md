@@ -98,3 +98,5 @@ Here is how the response looks like:
     ```
 
 1. The 2nd parameter `localeCode` has been removed from `src/Sylius/Bundle/ApiBundle/Command/Cart/PickupCart.php` and now is set automatically by `src/Sylius/Bundle/ApiBundle/DataTransformer/LocaleCodeAwareInputCommandDataTransformer.php`.
+
+1. The `api/v2/admin/products` and `api/v2/admin/products/{code}` have been changed and the `defaultVariant` field has been removed.
