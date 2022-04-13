@@ -848,6 +848,7 @@ sylius_ui:
             blocks:
                 content:
                     template: '@SyliusAdmin/Product/Show/_variantsContent.html.twig'
+                    priority: 10
 
         sylius.admin.customer.show.content:
             blocks:
