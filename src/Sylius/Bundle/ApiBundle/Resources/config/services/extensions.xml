@@ -73,6 +73,7 @@
             decorates="api_platform.doctrine.orm.query_extension.filter_eager_loading"
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\FilterEagerLoadingExtension.inner" />
+            <argument>%sylius_api.filter_eager_loading_extension.restricted_operations%</argument>
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\AddressItemExtension">

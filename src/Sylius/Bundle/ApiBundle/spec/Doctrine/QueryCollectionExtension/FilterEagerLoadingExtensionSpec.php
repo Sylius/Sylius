@@ -24,13 +24,16 @@ final class FilterEagerLoadingExtensionSpec extends ObjectBehavior
 {
     function let(ContextAwareQueryCollectionExtensionInterface $decoratedExtension): void
     {
-        $this->beConstructedWith($decoratedExtension);
+        $this->beConstructedWith(
+            $decoratedExtension,
+            ['shop_get' => ['resources' => [Product::class => ['enabled' => true]]]]
+        );
     }
 
-    function it_does_nothing_if_current_resource_and_operation_forces_lazy_loading(
+    function it_does_nothing_if_current_resource_and_operation_is_restricted(
+        ContextAwareQueryCollectionExtensionInterface $decoratedExtension,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        ContextAwareQueryCollectionExtensionInterface $decoratedExtension
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $args = [$queryBuilder, $queryNameGenerator, Product::class, 'shop_get', []];
 
@@ -38,12 +41,23 @@ final class FilterEagerLoadingExtensionSpec extends ObjectBehavior
         $this->applyToCollection(...$args);
     }
 
-    public function it_calls_filter_eager_loading_extension(
+    public function it_calls_filter_eager_loading_extension_if_current_resource_is_not_restricted(
+        ContextAwareQueryCollectionExtensionInterface $decoratedExtension,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        ContextAwareQueryCollectionExtensionInterface $decoratedExtension
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $args = [$queryBuilder, $queryNameGenerator, Order::class, 'shop_get', []];
+
+        $decoratedExtension->applyToCollection(...$args)->shouldBeCalled();
+        $this->applyToCollection(...$args);
+    }
+
+    public function it_calls_filter_eager_loading_extension_if_current_operation_is_not_restricted(
+        ContextAwareQueryCollectionExtensionInterface $decoratedExtension,
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator
+    ): void {
+        $args = [$queryBuilder, $queryNameGenerator, Product::class, 'admin_get', []];
 
         $decoratedExtension->applyToCollection(...$args)->shouldBeCalled();
         $this->applyToCollection(...$args);

@@ -51,6 +51,43 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderNotHasService('api_platform.swagger.action.ui');
     }
 
+    /** @test */
+    public function it_loads_filter_eager_loading_extension_restricted_operations_configuration_properly(): void
+    {
+        $this->load([
+            'filter_eager_loading_extension' => [
+                'restricted_operations' => [
+                    'shop_get' => [
+                        'resources' => [
+                            'FirstResourceClass' => [],
+                            'SecondResourceClass' => false,
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter(
+            'sylius_api.filter_eager_loading_extension.restricted_operations',
+            [
+                'shop_get' => [
+                    'resources' => [
+                        'FirstResourceClass' => ['enabled' => true],
+                        'SecondResourceClass' => ['enabled' => false],
+                    ],
+                ],
+            ]
+        );
+    }
+
+    /** @test */
+    public function it_loads_default_filter_eager_loading_extension_restricted_operations_configuration_properly(): void
+    {
+        $this->load();
+
+        $this->assertContainerBuilderHasParameter('sylius_api.filter_eager_loading_extension.restricted_operations', []);
+    }
+
     protected function getContainerExtensions(): array
     {
         return [

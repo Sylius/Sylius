@@ -28,6 +28,10 @@ final class SyliusApiExtension extends Extension
 
         $container->setParameter('sylius_api.enabled', $config['enabled']);
         $container->setParameter('sylius_api.product_image_prefix', $config['product_image_prefix']);
+        $container->setParameter(
+            'sylius_api.filter_eager_loading_extension.restricted_operations',
+            $config['filter_eager_loading_extension']['restricted_operations']
+        );
 
         $loader->load('services.xml');
 

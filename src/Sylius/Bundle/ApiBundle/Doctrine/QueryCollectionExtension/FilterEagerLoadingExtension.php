@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Component\Core\Model\Product;
 
 /**
  * @experimental
@@ -25,16 +24,21 @@ use Sylius\Component\Core\Model\Product;
  */
 final class FilterEagerLoadingExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    public function __construct(private ContextAwareQueryCollectionExtensionInterface $decoratedExtension)
+    public function __construct(private ContextAwareQueryCollectionExtensionInterface $decoratedExtension, private array $restrictedOperations)
     {
     }
 
-    public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null, array $context = [])
+    public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null, array $context = []): void
     {
-        if (Product::class === $resourceClass && 'shop_get' === $operationName) {
+        if ($this->isOperationRestricted($resourceClass, $operationName)) {
             return;
         }
 
         $this->decoratedExtension->applyToCollection($queryBuilder, $queryNameGenerator, $resourceClass, $operationName, $context);
+    }
+
+    private function isOperationRestricted(string $resourceClass, string $operationName): bool
+    {
+        return $this->restrictedOperations[$operationName]['resources'][$resourceClass]['enabled'] ?? false;
     }
 }
