@@ -216,6 +216,16 @@ final class CartContext implements Context
     }
 
     /**
+     * @When I pick up cart using wrong locale
+     */
+    public function iPickUpMyCartUsingWrongLocale(): void
+    {
+        $this->cartsClient->buildCreateRequest();
+        $this->cartsClient->addRequestData('localeCode', 'en');
+        $this->cartsClient->create();
+    }
+
+    /**
      * @When I update my cart
      */
     public function iUpdateMyCart(): void
@@ -356,6 +366,21 @@ final class CartContext implements Context
             $this->responseChecker->isUpdateSuccessful($response),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Item has not been added.', $response)
         );
+    }
+
+    /**
+     * @Then I should be notified that locale does not exist
+     */
+    public function iShouldBeNotifiedThatLocaleDoesNotExist(): void
+    {
+        $response = $this->cartsClient->getLastResponse();
+
+        Assert::false(
+            $this->responseChecker->isCreationSuccessful($response),
+            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('The given locale exists but it should not', $response)
+        );
+
+        Assert::same($this->responseChecker->getError($response), 'The locale en does not exist.');
     }
 
     /**
