@@ -52,7 +52,7 @@ final class ProductReviewContext implements Context
         /** @var ProductInterface $product */
         $product = $this->sharedStorage->get('product');
 
-        $this->client->index();
+        $this->client->index('product-reviews');
         $this->client->addFilter('reviewSubject', $this->iriConverter->getIriFromItem($product));
         $this->client->filter();
     }
@@ -71,7 +71,7 @@ final class ProductReviewContext implements Context
      */
     public function iWantToReviewProduct(ProductInterface $product): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest('product-reviews');
         $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
     }
 
@@ -113,7 +113,7 @@ final class ProductReviewContext implements Context
         /** @var ProductInterface $product */
         $product = $this->sharedStorage->get('product');
 
-        $this->client->index();
+        $this->client->index('product-reviews');
         $this->client->addFilter('reviewSubject', $this->iriConverter->getIriFromItem($product));
         $this->client->addFilter('itemsPerPage', 3);
         $this->client->addFilter('order[createdAt]', 'desc');

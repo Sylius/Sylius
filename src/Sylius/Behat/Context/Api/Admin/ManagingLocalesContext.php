@@ -37,7 +37,7 @@ final class ManagingLocalesContext implements Context
      */
     public function iWantToAddNewLocale(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest('locales');
     }
 
     /**
@@ -73,7 +73,7 @@ final class ManagingLocalesContext implements Context
      */
     public function theStoreShouldBeAvailableInTheLanguage(string $localeCode): void
     {
-        $response = $this->client->index();
+        $response = $this->client->index('locales');
         Assert::true(
             $this->responseChecker->hasItemWithValue($response, 'code', $localeCode),
             sprintf('There is no locale with code "%s"', $localeCode)

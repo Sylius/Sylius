@@ -35,7 +35,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iWantToSeeAllCurrenciesInStore(): void
     {
-        $this->client->index();
+        $this->client->index('currencies');
     }
 
     /**
@@ -43,7 +43,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iWantToAddNewCurrency(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest('currencies');
     }
 
     /**
@@ -79,7 +79,7 @@ final class ManagingCurrenciesContext implements Context
     public function currencyShouldAppearInTheStore(string $currencyName): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $currencyName),
+            $this->responseChecker->hasItemWithValue($this->client->index('currencies'), 'name', $currencyName),
             sprintf('There is no currency with name "%s"', $currencyName)
         );
     }
@@ -89,7 +89,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function thereShouldStillBeOnlyOneCurrencyWithCode(string $code): void
     {
-        $response = $this->client->index();
+        $response = $this->client->index('currencies');
         Assert::same($this->responseChecker->countCollectionItems($response), 1);
         Assert::true(
             $this->responseChecker->hasItemWithValue($response, 'code', $code),

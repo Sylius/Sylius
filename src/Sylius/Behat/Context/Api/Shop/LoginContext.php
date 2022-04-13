@@ -32,7 +32,7 @@ final class LoginContext implements Context
 {
     private ApiSecurityClientInterface $apiSecurityClient;
 
-    private ApiClientInterface $apiClient;
+    private ApiClientInterface $client;
 
     private IriConverterInterface $iriConverter;
 
@@ -46,14 +46,14 @@ final class LoginContext implements Context
 
     public function __construct(
         ApiSecurityClientInterface $apiSecurityClient,
-        ApiClientInterface $apiClient,
+        ApiClientInterface $client,
         IriConverterInterface $iriConverter,
         AbstractBrowser $shopAuthenticationTokenClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage
     ) {
         $this->apiSecurityClient = $apiSecurityClient;
-        $this->apiClient = $apiClient;
+        $this->client = $client;
         $this->iriConverter = $iriConverter;
         $this->shopAuthenticationTokenClient = $shopAuthenticationTokenClient;
         $this->responseChecker = $responseChecker;
@@ -132,7 +132,7 @@ final class LoginContext implements Context
      */
     public function iResetIt(): void
     {
-        $this->apiClient->executeCustomRequest($this->request);
+        $this->client->executeCustomRequest($this->request);
     }
 
     /**
@@ -237,7 +237,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeNotifiedThatEmailWithResetInstructionWasSent(): void
     {
-        Assert::same($this->apiClient->getLastResponse()->getStatusCode(), 202);
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 202);
     }
 
     /**
@@ -283,9 +283,9 @@ final class LoginContext implements Context
      */
     public function iShouldNotBeAbleToChangeMyPasswordAgainWithTheSameToken(): void
     {
-        $this->apiClient->executeCustomRequest($this->request);
+        $this->client->executeCustomRequest($this->request);
 
-        Assert::same($this->apiClient->getLastResponse()->getStatusCode(), 404);
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 404);
     }
 
     private function addLocale(string $locale): void

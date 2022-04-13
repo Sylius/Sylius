@@ -39,7 +39,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iWantToBrowsePromotions(): void
     {
-        $this->client->index();
+        $this->client->index('promotions');
     }
 
     /**
@@ -47,7 +47,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iWantToCreateANewPromotion(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest('promotions');
     }
 
     /**
@@ -138,7 +138,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iDeletePromotion(PromotionInterface $promotion): void
     {
-        $this->client->delete($promotion->getCode());
+        $this->client->delete('promotions', $promotion->getCode());
     }
 
     /**
@@ -157,7 +157,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function promotionShouldNotExistInTheRegistry(PromotionInterface $promotion): void
     {
-        $response = $this->client->index();
+        $response = $this->client->index('promotions');
         $promotionName = (string) $promotion->getName();
 
         Assert::false(
@@ -180,7 +180,7 @@ final class ManagingPromotionsContext implements Context
     public function thePromotionShouldNotAppliesToDiscountedItems(PromotionInterface $promotion): void
     {
         Assert::false(
-            $this->responseChecker->getValue($this->client->show($promotion->getCode()), 'appliesToDiscounted')
+            $this->responseChecker->getValue($this->client->show('promotions', $promotion->getCode()), 'appliesToDiscounted')
         );
     }
 }

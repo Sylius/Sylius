@@ -45,7 +45,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iWantToEditThisExchangeRate(ExchangeRateInterface $exchangeRate): void
     {
-        $this->client->buildUpdateRequest((string) $exchangeRate->getId());
+        $this->client->buildUpdateRequest('exchange-rates', (string) $exchangeRate->getId());
 
         $this->sharedStorage->set('exchange_rate_id', (string) $exchangeRate->getId());
     }
@@ -57,7 +57,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iBrowseExchangeRatesOfTheStore(): void
     {
-        $this->client->index();
+        $this->client->index('exchange-rates',);
     }
 
     /**
@@ -65,7 +65,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iWantToAddNewExchangeRate(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest('exchange-rates',);
     }
 
     /**
@@ -124,7 +124,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iDeleteTheExchangeRateBetweenAnd(ExchangeRateInterface $exchangeRate): void
     {
-        $this->client->delete((string) $exchangeRate->getId());
+        $this->client->delete('exchange-rates', (string) $exchangeRate->getId());
     }
 
     /**
@@ -157,7 +157,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldSeeASingleExchangeRateInTheList(): void
     {
-        Assert::same($this->responseChecker->countCollectionItems($this->client->index()), 1);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->index('exchange-rates')), 1);
     }
 
     /**
@@ -199,7 +199,7 @@ final class ManagingExchangeRatesContext implements Context
     public function itShouldHaveARatioOf(float $ratio): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(), 'ratio', $ratio),
+            $this->responseChecker->hasItemWithValue($this->client->index('exchange-rates'), 'ratio', $ratio),
             sprintf('ExchangeRate with ratio %s does not exist', $ratio)
         );
     }
@@ -231,7 +231,7 @@ final class ManagingExchangeRatesContext implements Context
         CurrencyInterface $sourceCurrency,
         CurrencyInterface $targetCurrency
     ): void {
-        $this->client->index();
+        $this->client->index('exchange-rates');
 
         Assert::null($this->getExchangeRateFromResponse($sourceCurrency, $targetCurrency));
     }
@@ -344,14 +344,14 @@ final class ManagingExchangeRatesContext implements Context
 
     private function assertIfNotBeAbleToEditItCurrency(string $currencyType): void
     {
-        $this->client->buildUpdateRequest($this->sharedStorage->get('exchange_rate_id'));
+        $this->client->buildUpdateRequest('exchange-rates', $this->sharedStorage->get('exchange_rate_id'));
 
         $this->client->addRequestData($currencyType, '/api/v2/admin/currencies/EUR');
         $this->client->update();
 
         Assert::false(
             $this->responseChecker->hasItemOnPositionWithValue(
-                $this->client->index(),
+                $this->client->index('exchange-rates'),
                 0,
                 $currencyType,
                 '/api/v2/admin/currencies/EUR'
@@ -365,7 +365,7 @@ final class ManagingExchangeRatesContext implements Context
         CurrencyInterface $targetCurrency
     ): ?array {
         /** @var array $item */
-        foreach ($this->responseChecker->getCollection($this->client->index()) as $item) {
+        foreach ($this->responseChecker->getCollection($this->client->index('exchange-rates')) as $item) {
             if (
                 $item['sourceCurrency'] === '/api/v2/admin/currencies/' . $sourceCurrency->getCode() &&
                 $item['targetCurrency'] === '/api/v2/admin/currencies/' . $targetCurrency->getCode()

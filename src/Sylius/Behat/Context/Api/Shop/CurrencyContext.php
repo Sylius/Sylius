@@ -38,7 +38,7 @@ final class CurrencyContext implements Context
      */
     public function iBrowseCurrencies(): void
     {
-        $this->client->index();
+        $this->client->index('currencies');
     }
 
     /**

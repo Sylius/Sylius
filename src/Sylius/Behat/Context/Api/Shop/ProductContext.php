@@ -34,8 +34,6 @@ final class ProductContext implements Context
 {
     private ApiClientInterface $client;
 
-    private ApiClientInterface $productVariantClient;
-
     private ResponseCheckerInterface $responseChecker;
 
     private SharedStorageInterface $sharedStorage;
@@ -46,14 +44,12 @@ final class ProductContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
-        ApiClientInterface $productVariantClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
         IriConverterInterface $iriConverter,
         ChannelContextSetterInterface $channelContextSetter
     ) {
         $this->client = $client;
-        $this->productVariantClient = $productVariantClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
         $this->iriConverter = $iriConverter;
@@ -67,11 +63,10 @@ final class ProductContext implements Context
      */
     public function iViewProduct(ProductInterface $product): void
     {
+        $this->client->show('products', $product->getCode());
+
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $product->getVariants()->first();
-
-        $this->client->show($product->getCode());
-        $this->productVariantClient->show($productVariant->getCode());
 
         $this->sharedStorage->set('product', $product);
         $this->sharedStorage->set('product_variant', $productVariant);
@@ -116,7 +111,7 @@ final class ProductContext implements Context
      */
     public function iBrowseProductsFromTaxon(?TaxonInterface $taxon = null): void
     {
-        $this->client->index();
+        $this->client->index('products');
 
         if ($taxon !== null) {
             $this->client->addFilter('taxon', $this->iriConverter->getIriFromItem($taxon));
@@ -452,8 +447,10 @@ final class ProductContext implements Context
      */
     public function theProductPriceShouldBe(int $price): void
     {
+        $response = $this->client->getLastResponse();
+
         $defaultVariantResponse = $this->client->showByIri(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'defaultVariant')
+            $this->responseChecker->getValue($response, 'defaultVariant')
         );
 
         Assert::same($this->responseChecker->getValue($defaultVariantResponse, 'price'), $price);
@@ -484,7 +481,7 @@ final class ProductContext implements Context
         $this->channelContextSetter->setChannel($channel);
 
         Assert::true($this->hasProductWithPrice(
-            [$this->responseChecker->getResponseContent($this->client->show($product->getCode()))],
+            [$this->responseChecker->getResponseContent($this->client->show('products', $product->getCode()))],
             $price,
             null,
             StringInflector::nameToCamelCase($priceType)

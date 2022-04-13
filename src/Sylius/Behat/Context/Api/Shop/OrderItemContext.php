@@ -25,22 +25,18 @@ use Webmozart\Assert\Assert;
 
 final class OrderItemContext implements Context
 {
-    private ApiClientInterface $orderItemsClient;
-
-    private ApiClientInterface $orderItemUnitsClient;
+    private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
 
     private SharedStorageInterface $sharedStorage;
 
     public function __construct(
-        ApiClientInterface $orderItemsClient,
-        ApiClientInterface $orderItemUnitsClient,
+        ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage
     ) {
-        $this->orderItemsClient = $orderItemsClient;
-        $this->orderItemUnitsClient = $orderItemUnitsClient;
+        $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
     }
@@ -57,7 +53,7 @@ final class OrderItemContext implements Context
         /** @var OrderItemInterface $orderItem */
         $orderItem = $order->getItems()->first();
 
-        $this->orderItemsClient->show((string) $orderItem->getId());
+        $this->client->show('order-items', (string) $orderItem->getId());
     }
 
     /**
@@ -72,7 +68,7 @@ final class OrderItemContext implements Context
         /** @var OrderItemUnitInterface $orderItemUnit */
         $orderItemUnit = $order->getItemUnits()->first();
 
-        $this->orderItemUnitsClient->show((string) $orderItemUnit->getId());
+        $this->client->show('order-item-units', (string) $orderItemUnit->getId());
     }
 
     /**
@@ -80,7 +76,7 @@ final class OrderItemContext implements Context
      */
     public function iShouldNotBeAbleToSeeThatItem(): void
     {
-        Assert::false($this->responseChecker->isShowSuccessful($this->orderItemsClient->getLastResponse()));
+        Assert::false($this->responseChecker->isShowSuccessful($this->client->getLastResponse()));
     }
 
     /**
@@ -88,6 +84,6 @@ final class OrderItemContext implements Context
      */
     public function iShouldNotBeAbleToSeeThatUnit(): void
     {
-        Assert::false($this->responseChecker->isShowSuccessful($this->orderItemUnitsClient->getLastResponse()));
+        Assert::false($this->responseChecker->isShowSuccessful($this->client->getLastResponse()));
     }
 }

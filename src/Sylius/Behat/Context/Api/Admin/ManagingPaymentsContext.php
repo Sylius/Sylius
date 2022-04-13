@@ -48,7 +48,7 @@ final class ManagingPaymentsContext implements Context
      */
     public function iAmBrowsingPayments(): void
     {
-        $this->client->index();
+        $this->client->index('payments');
     }
 
     /**
@@ -60,6 +60,7 @@ final class ManagingPaymentsContext implements Context
         Assert::notNull($payment);
 
         $this->client->applyTransition(
+            'payments',
             (string) $payment->getId(),
             PaymentTransitions::TRANSITION_COMPLETE
         );
@@ -161,7 +162,7 @@ final class ManagingPaymentsContext implements Context
         Assert::notNull($payment);
 
         Assert::true($this->responseChecker->hasValue(
-            $this->client->show((string) $payment->getId()),
+            $this->client->show('payments', (string) $payment->getId()),
             'state',
             StringInflector::nameToLowercaseCode($paymentState)
         ));

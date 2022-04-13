@@ -25,7 +25,7 @@ final class RegistrationContext implements Context
 {
     private AbstractBrowser $client;
 
-    private ApiClientInterface $customerClient;
+    private ApiClientInterface $shopClient;
 
     private LoginContext $loginContext;
 
@@ -37,13 +37,13 @@ final class RegistrationContext implements Context
 
     public function __construct(
         AbstractBrowser $client,
-        ApiClientInterface $customerClient,
+        ApiClientInterface $shopClient,
         LoginContext $loginContext,
         SharedStorageInterface $sharedStorage,
         ResponseCheckerInterface $responseChecker
     ) {
         $this->client = $client;
-        $this->customerClient = $customerClient;
+        $this->shopClient = $shopClient;
         $this->loginContext = $loginContext;
         $this->sharedStorage = $sharedStorage;
         $this->responseChecker = $responseChecker;
@@ -266,7 +266,7 @@ final class RegistrationContext implements Context
     {
         $customer = $this->sharedStorage->get('customer');
 
-        $response = $this->customerClient->show((string) $customer->getId());
+        $response = $this->shopClient->show('customers', (string) $customer->getId());
 
         Assert::true($this->responseChecker->getResponseContent($response)['subscribedToNewsletter']);
     }
