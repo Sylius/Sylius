@@ -496,6 +496,36 @@ final class ProductContext implements Context
         Assert::true($this->hasProductWithMainImage());
     }
 
+    /**
+     * @Then /^I should not be able to select the "([^"]+)" ([^\s]+) option value$/
+     */
+    public function iShouldNotBeAbleToSelectTheOptionValue(string $optionValue, string $optionName): void
+    {
+        Assert::false($this->hasProductOptionWithNameAndValue($optionValue, $optionName));
+    }
+
+    /**
+     * @Then I should be able to select between :count variants
+     */
+    public function iShouldBeAbleToSelectBetweenVariants(int $count): void
+    {
+        $response = $this->client->getLastResponse();
+        $variants = $this->responseChecker->getValue($response, 'variants');
+
+        Assert::count($variants, $count);
+    }
+
+    /**
+     * @Then I should not be able to select the :productVariantName variant
+     */
+    public function iShouldNotBeAbleToSelectTheVariant(string $productVariantName): void
+    {
+        $response = $this->client->getLastResponse();
+        $variants = $this->responseChecker->getValue($response, 'variants');
+
+        Assert::false($this->productHasProductVariantWithName($variants, $productVariantName));
+    }
+
     private function hasProductWithPrice(
         array $products,
         int $price,
@@ -537,6 +567,64 @@ final class ProductContext implements Context
     {
         foreach ($products as $product) {
             if ($product['name'] === $name && $product['shortDescription'] === $shortDescription) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function hasProductOptionWithNameAndValue(string $optionValue, string $optionName): bool
+    {
+        $response = $this->client->getLastResponse();
+        $productOptions = $this->responseChecker->getValue($response, 'options');
+
+        foreach ($productOptions as $optionIri) {
+            if ($this->hasProductOptionWithName($optionIri, $optionName)) {
+                $variants = $this->responseChecker->getValue($response, 'variants');
+
+                foreach ($variants as $variantIri) {
+                    if ($this->variantHasProductOptionValue($variantIri, $optionValue))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private function hasProductOptionWithName(string $optionIri, string $optionName): bool
+    {
+        $response = $this->client->showByIri($optionIri);
+
+        return $this->responseChecker->hasValue($response, 'code', StringInflector::nameToUppercaseCode($optionName));
+    }
+
+    private function variantHasProductOptionValue(string $variantIri, string $optionValue): bool
+    {
+        $variants = $this->client->showByIri($variantIri);
+        $optionValues = $this->responseChecker->getValue($variants, 'optionValues');
+
+            foreach ($optionValues as $valueIri) {
+                if ($this->hasProductOptionWithValue($valueIri, $optionValue)) {
+                    return true;
+                }
+            }
+
+        return false;
+    }
+
+    private function hasProductOptionWithValue(string $valueIri, string $optionValue): bool
+    {
+        return $this->responseChecker->hasValue($this->client->ShowByIri($valueIri), 'code', StringInflector::nameToUppercaseCode($optionValue));
+    }
+
+    private function productHasProductVariantWithName(array $variants, string $variantName): bool
+    {
+        foreach ($variants as $variantIri) {
+            if ($this->responseChecker->hasValue($this->client->showByIri($variantIri), 'name', $variantName)) {
                 return true;
             }
         }
