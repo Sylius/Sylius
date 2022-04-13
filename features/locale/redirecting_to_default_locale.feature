@@ -1,5 +1,5 @@
 @locales
-Feature: Redirect to default locale
+Feature: Redirecting to the default locale
     In order to prevent locale deactivation
     As a Customer
     I want to be redirect with default locale if locale is not available
@@ -8,15 +8,16 @@ Feature: Redirect to default locale
         Given the store operates on a channel named "Web"
         And that channel allows to shop using "English (United States)" and "French (France)" locales
         And it uses the "English (United States)" locale by default
+        And the store has a product "PHP T-shirt"
 
-    @ui
-    Scenario: Stay on the current locale if it is available
+    @ui @api
+    Scenario: Staying on the current locale if it is available
         When I browse that channel
-        And I show homepage with the locale "French (France)"
+        And I use the locale "French (France)"
         Then I should shop using the "French (France)" locale
 
-    @ui
-    Scenario: Redirect to default locale if it is not available
+    @ui @api
+    Scenario: Redirecting to default locale if it is not available
         When I browse that channel
-        And I try to open homepage with the locale "Polish (Poland)"
+        And I use the locale "Polish (Poland)"
         Then I should shop using the "English (United States)" locale

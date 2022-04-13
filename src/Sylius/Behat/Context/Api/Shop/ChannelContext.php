@@ -22,37 +22,23 @@ use Webmozart\Assert\Assert;
 
 final class ChannelContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private SharedStorageInterface $sharedStorage;
-
     public function __construct(
-        ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage
     ) {
-        $this->client = $client;
-        $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**
      * @Given I am browsing channel :channel
      * @When /^I (?:am browsing|start browsing|try to browse|browse) (?:|the )("[^"]+" channel)$/
+     * @When /^I (?:start browsing|try to browse|browse) (that channel)$/
      */
     public function iAmBrowsingChannel(ChannelInterface $channel): void
     {
         $this->sharedStorage->set('hostname', $channel->getHostname());
-        $this->sharedStorage->set('locale', $channel->getDefaultLocale());
-    }
+        $this->sharedStorage->remove('current_locale_code');
 
-    /**
-     * @When /^I (?:start browsing|try to browse|browse) (that channel)$/
-     */
-    public function iVisitChannelHomepage(ChannelInterface $channel): void
-    {
         $this->client->show($channel->getCode());
     }
 

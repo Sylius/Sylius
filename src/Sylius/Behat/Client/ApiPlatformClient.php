@@ -258,9 +258,7 @@ final class ApiPlatformClient implements ApiClientInterface
 
     private function request(RequestInterface $request): Response
     {
-        if ($this->sharedStorage->has('hostname')) {
-            $this->client->setServerParameter('HTTP_HOST', $this->sharedStorage->get('hostname'));
-        }
+        $this->setServerParameters();
 
         $this->client->request(
             $request->method(),
@@ -272,5 +270,16 @@ final class ApiPlatformClient implements ApiClientInterface
         );
 
         return $this->getLastResponse();
+    }
+
+    private function setServerParameters(): void
+    {
+        if ($this->sharedStorage->has('hostname')) {
+            $this->client->setServerParameter('HTTP_HOST', $this->sharedStorage->get('hostname'));
+        }
+
+        if ($this->sharedStorage->has('current_locale_code')) {
+            $this->client->setServerParameter('HTTP_ACCEPT_LANGUAGE', $this->sharedStorage->get('current_locale_code'));
+        }
     }
 }

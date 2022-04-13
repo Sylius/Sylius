@@ -65,7 +65,7 @@ final class ProductContext implements Context
      * @When I view product :product
      * @When customer view product :product
      */
-    public function iOpenProductPage(ProductInterface $product): void
+    public function iViewProduct(ProductInterface $product): void
     {
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $product->getVariants()->first();
@@ -75,6 +75,19 @@ final class ProductContext implements Context
 
         $this->sharedStorage->set('product', $product);
         $this->sharedStorage->set('product_variant', $productVariant);
+    }
+    /**
+     * @When I view product :product in the :localeCode locale
+     * @When /^I check (this product)'s details in the ("([^"]+)" locale)$/
+     * @When /^I try to check (this product)'s details in the ("([^"]+)" locale)$/
+     */
+    public function iViewProductInTheLocale(ProductInterface $product, string $localeCode): void
+    {
+        $this->sharedStorage->set('current_locale_code', $localeCode);
+
+        $this->iViewProduct($product);
+
+        $this->sharedStorage->remove('current_locale_code');
     }
 
     /**
@@ -365,6 +378,18 @@ final class ProductContext implements Context
     public function iShouldSeeProductName(string $name): void
     {
         Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $name));
+    }
+
+    /**
+     * @Then /^I should not be able to view (this product) in the ("([^"]+)" locale)$/
+     */
+    public function iShouldNotBeAbleToViewThisProductInLocale(ProductInterface $product, string $localeCode): void
+    {
+        Assert::false($this->responseChecker->hasValue(
+            $this->client->getLastResponse(),
+            'name',
+            $product->getTranslation($localeCode)->getName()
+        ));
     }
 
     /**

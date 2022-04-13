@@ -159,6 +159,7 @@
             <argument type="service" id="sylius.behat.api_platform_client.shop.locale" />
             <argument type="service" id="sylius.behat.api_platform_client.shop.cart" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
     </services>
 </container>

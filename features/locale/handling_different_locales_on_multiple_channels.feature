@@ -12,7 +12,7 @@ Feature: Handling different locales on multiple channels
         And that channel allows to shop using "Polish (Poland)" and "Norwegian (Norway)" locales
         And it uses the "Polish (Poland)" locale by default
 
-    @ui
+    @ui @api
     Scenario: Showing locales only from the current channel
         When I browse the "Mobile" channel
         Then I should shop using the "Polish (Poland)" locale
@@ -25,7 +25,7 @@ Feature: Handling different locales on multiple channels
         And I start browsing the "Mobile" channel
         Then I should shop using the "Polish (Poland)" locale
 
-    @ui
+    @ui @api
     Scenario: Switching a locale applies only to the current channel
         When I browse the "Web" channel
         And I switch to the "Norwegian (Norway)" locale
