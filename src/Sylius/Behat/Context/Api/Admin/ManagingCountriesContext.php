@@ -17,6 +17,7 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
@@ -50,7 +51,7 @@ final class ManagingCountriesContext implements Context
      */
     public function iWantToAddANewCountry(): void
     {
-        $this->client->buildCreateRequest('countries');
+        $this->client->buildCreateRequest(Resources::COUNTRIES);
     }
 
     /**
@@ -75,7 +76,7 @@ final class ManagingCountriesContext implements Context
      */
     public function iWantToEditThisCountry(CountryInterface $country): void
     {
-        $this->client->buildUpdateRequest('countries', $country->getCode());
+        $this->client->buildUpdateRequest(Resources::COUNTRIES, $country->getCode());
     }
 
     /**
@@ -154,7 +155,7 @@ final class ManagingCountriesContext implements Context
     {
         $iri = $this->iriConverter->getItemIriFromResourceClass(get_class($province), ['code' => $province->getCode()]);
 
-        $provinces = $this->responseChecker->getValue($this->client->show('countries', $country->getCode()), 'provinces');
+        $provinces = $this->responseChecker->getValue($this->client->show(Resources::COUNTRIES, $country->getCode()), 'provinces');
         foreach ($provinces as $countryProvince) {
             if ($iri === $countryProvince) {
                 $this->client->removeSubResource('provinces', $countryProvince);
@@ -176,7 +177,7 @@ final class ManagingCountriesContext implements Context
      */
     public function iRemoveProvinceName(ProvinceInterface $province): void
     {
-        $this->client->buildUpdateRequest('provinces', $province->getCode());
+        $this->client->buildUpdateRequest(Resources::PROVINCES, $province->getCode());
         $this->client->addRequestData('name', '');
         $this->client->update();
     }
@@ -198,7 +199,7 @@ final class ManagingCountriesContext implements Context
     public function theCountryShouldAppearInTheStore(CountryInterface $country): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index('countries'), 'code', $country->getCode()),
+            $this->responseChecker->hasItemWithValue($this->client->index(Resources::COUNTRIES), 'code', $country->getCode()),
             sprintf('There is no country with name "%s"', $country->getName())
         );
     }
@@ -210,7 +211,7 @@ final class ManagingCountriesContext implements Context
     public function theCountryShouldHaveTheProvince(CountryInterface $country, ProvinceInterface $province): void
     {
         Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->subResourceIndex('countries', 'provinces', $country->getCode()),
+            $this->client->subResourceIndex(Resources::COUNTRIES, 'provinces', $country->getCode()),
             'code',
             $province->getCode()
         ));
@@ -224,7 +225,7 @@ final class ManagingCountriesContext implements Context
         /** @var CountryInterface $country */
         $country = $this->sharedStorage->get('country');
         Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->subResourceIndex('countries', 'provinces', $country->getCode()),
+            $this->client->subResourceIndex(Resources::COUNTRIES, 'provinces', $country->getCode()),
             'code',
             $province->getCode()
         ));
@@ -262,7 +263,7 @@ final class ManagingCountriesContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasValue(
-                $this->client->show('countries', $country->getCode()),
+                $this->client->show(Resources::COUNTRIES, $country->getCode()),
                 'enabled',
                 $enabled === 'enabled'
             ),
@@ -358,7 +359,7 @@ final class ManagingCountriesContext implements Context
 
     private function getProvincesOfCountry(CountryInterface $country): iterable
     {
-        $response = $this->client->show('countries', $country->getCode());
+        $response = $this->client->show(Resources::COUNTRIES, $country->getCode());
         $countryFromResponse = $this->responseChecker->getResponseContent($response);
 
         foreach ($countryFromResponse['provinces'] as $provinceFromResponse) {

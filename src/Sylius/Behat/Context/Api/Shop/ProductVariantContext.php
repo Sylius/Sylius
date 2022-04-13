@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -47,7 +48,7 @@ final class ProductVariantContext implements Context
     public function iSelectVariant(ProductVariantInterface $variant): void
     {
         $this->sharedStorage->set('variant', $variant);
-        $this->client->show('product-variants', $variant->getCode());
+        $this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode());
     }
 
     /**
@@ -56,7 +57,7 @@ final class ProductVariantContext implements Context
     public function visitorViewVariant(ProductVariantInterface $variant): void
     {
         $this->sharedStorage->set('token', null);
-        $this->client->show('product-variants', $variant->getCode());
+        $this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode());
     }
 
     /**
@@ -64,7 +65,7 @@ final class ProductVariantContext implements Context
      */
     public function iViewVariants(): void
     {
-        $response = $this->client->index('product-variants');
+        $response = $this->client->index(Resources::PRODUCT_VARIANTS);
 
         $this->sharedStorage->set('response', $response);
     }
@@ -160,7 +161,7 @@ final class ProductVariantContext implements Context
         string $promotionName
     ): void {
         $this->sharedStorage->set('token', null);
-        $this->client->show('product-variants', $productVariant->getCode());
+        $this->client->show(Resources::PRODUCT_VARIANTS, $productVariant->getCode());
 
         $this->iShouldSeeVariantIsDiscountedFromToWithPromotions($productVariant, $originalPrice, $price, $promotionName);
     }
@@ -175,7 +176,7 @@ final class ProductVariantContext implements Context
         int $numberOfPromotions
     ): void {
         $this->sharedStorage->set('token', null);
-        $this->client->show('product-variants', $variant->getCode());
+        $this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode());
 
         $this->iShouldSeeVariantIsDiscountedFromToWithNumberOfPromotions($variant, $originalPrice, $price, $numberOfPromotions);
     }
@@ -208,7 +209,7 @@ final class ProductVariantContext implements Context
      */
     public function iShouldSeeThisVariantIsNotDiscounted(ProductVariantInterface $variant): void
     {
-        $content = $this->responseChecker->getResponseContent($this->client->show('product-variants', $variant->getCode()));
+        $content = $this->responseChecker->getResponseContent($this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode()));
 
         Assert::keyNotExists($content, 'appliedPromotions');
     }
@@ -223,7 +224,7 @@ final class ProductVariantContext implements Context
 
         /** @var ProductVariantInterface $variant */
         foreach ($variants as $variant) {
-            $content = $this->responseChecker->getResponseContent($this->client->show('product-variants', $variant->getCode()));
+            $content = $this->responseChecker->getResponseContent($this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode()));
             Assert::keyExists(
                 $content,
                 'appliedPromotions',
@@ -242,7 +243,7 @@ final class ProductVariantContext implements Context
 
         /** @var ProductVariantInterface $variant */
         foreach ($variants as $variant) {
-            $content = $this->responseChecker->getResponseContent($this->client->show('product-variants', $variant->getCode()));
+            $content = $this->responseChecker->getResponseContent($this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode()));
             Assert::keyNotExists(
                 $content,
                 'appliedPromotions',

@@ -17,6 +17,7 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -49,7 +50,7 @@ final class AddressContext implements Context
      */
     public function iAmEditingTheAddressOf(AddressInterface $address): void
     {
-        $this->client->buildUpdateRequest('addresses', (string) $address->getId());
+        $this->client->buildUpdateRequest(Resources::ADDRESSES, (string) $address->getId());
     }
 
     /**
@@ -57,7 +58,7 @@ final class AddressContext implements Context
      */
     public function iWantToAddANewAddressToMyAddressBook(): void
     {
-        $this->client->buildCreateRequest('addresses');
+        $this->client->buildCreateRequest(Resources::ADDRESSES);
     }
 
     /**
@@ -130,7 +131,7 @@ final class AddressContext implements Context
      */
     public function iBrowseMyAddresses(): void
     {
-        $this->client->index('addresses');
+        $this->client->index(Resources::ADDRESSES);
     }
 
     /**
@@ -140,7 +141,7 @@ final class AddressContext implements Context
     {
         $id = $this->getAddressIdFromAddressBookByFullName($fullName);
 
-        $this->client->delete('addresses', $id);
+        $this->client->delete(Resources::ADDRESSES, $id);
     }
 
     /**
@@ -148,7 +149,7 @@ final class AddressContext implements Context
      */
     public function iDeleteTheAddressBelongsTo(AddressInterface $address): void
     {
-        $this->client->delete('addresses', (string) $address->getId());
+        $this->client->delete(Resources::ADDRESSES, (string) $address->getId());
     }
 
     /**
@@ -158,7 +159,7 @@ final class AddressContext implements Context
     {
         $addressIri = $this->getAddressIriFromAddressBookByFullName($fullName);
 
-        $this->client->buildUpdateRequest('customers', (string) $this->sharedStorage->get('user')->getCustomer()->getId());
+        $this->client->buildUpdateRequest(Resources::CUSTOMERS, (string) $this->sharedStorage->get('user')->getCustomer()->getId());
         $this->client->addRequestData('defaultAddress', $addressIri);
         $this->client->update();
     }
@@ -168,7 +169,7 @@ final class AddressContext implements Context
      */
     public function iTryToEditTheAddressOf(AddressInterface $address): void
     {
-        $this->client->buildUpdateRequest('addresses', (string) $address->getId());
+        $this->client->buildUpdateRequest(Resources::ADDRESSES, (string) $address->getId());
     }
 
     /**
@@ -286,7 +287,7 @@ final class AddressContext implements Context
      */
     public function iShouldHaveAddresses(int $count = 1): void
     {
-        Assert::same(count($this->responseChecker->getCollection($this->client->index('addresses'))), $count);
+        Assert::same(count($this->responseChecker->getCollection($this->client->index(Resources::ADDRESSES))), $count);
     }
 
     /**
@@ -319,7 +320,7 @@ final class AddressContext implements Context
      */
     public function thereShouldBeNoAddresses(): void
     {
-        Assert::same(count($this->responseChecker->getCollection($this->client->index('addresses'))), 0);
+        Assert::same(count($this->responseChecker->getCollection($this->client->index(Resources::ADDRESSES))), 0);
     }
 
     /**
@@ -344,7 +345,7 @@ final class AddressContext implements Context
      */
     public function addressShouldBeMarkedAsMyDefaultAddress(AddressInterface $address): void
     {
-        $customerResponse = $this->client->show('customers', (string) $this->sharedStorage->get('user')->getCustomer()->getId());
+        $customerResponse = $this->client->show(Resources::CUSTOMERS, (string) $this->sharedStorage->get('user')->getCustomer()->getId());
         $addressResponse = $this->client->showByIri($this->responseChecker->getValue($customerResponse, 'defaultAddress'));
 
         Assert::true($this->responseChecker->hasValue($addressResponse, 'city', $address->getCity()));
@@ -408,7 +409,7 @@ final class AddressContext implements Context
      */
     public function iShouldHaveNoDefaultAddress(): void
     {
-        $userShowResponse = $this->client->show('customers', (string) $this->sharedStorage->get('user')->getCustomer()->getId());
+        $userShowResponse = $this->client->show(Resources::CUSTOMERS, (string) $this->sharedStorage->get('user')->getCustomer()->getId());
         Assert::null(
             $this->responseChecker->getValue($userShowResponse, 'defaultAddress'),
             'Default address should be null'
@@ -499,7 +500,7 @@ final class AddressContext implements Context
         Assert::notNull($fullName);
         [$firstName, $lastName] = explode(' ', $fullName);
 
-        $addresses = $this->responseChecker->getCollection($this->client->index('addresses'));
+        $addresses = $this->responseChecker->getCollection($this->client->index(Resources::ADDRESSES));
         /** @var AddressInterface $address */
         foreach ($addresses as $address) {
             if ($firstName === $address['firstName'] && $lastName === $address['lastName']) {

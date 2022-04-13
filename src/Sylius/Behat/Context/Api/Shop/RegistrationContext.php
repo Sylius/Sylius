@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
@@ -266,7 +267,7 @@ final class RegistrationContext implements Context
     {
         $customer = $this->sharedStorage->get('customer');
 
-        $response = $this->shopClient->show('customers', (string) $customer->getId());
+        $response = $this->shopClient->show(Resources::CUSTOMERS, (string) $customer->getId());
 
         Assert::true($this->responseChecker->getResponseContent($response)['subscribedToNewsletter']);
     }

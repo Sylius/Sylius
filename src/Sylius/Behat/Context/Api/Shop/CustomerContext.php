@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Context\Setup\ShopSecurityContext;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -66,7 +67,7 @@ final class CustomerContext implements Context
         $shopUser = $this->sharedStorage->get('user');
         $customer = $shopUser->getCustomer();
 
-        $this->client->buildUpdateRequest('customers', (string) $customer->getId());
+        $this->client->buildUpdateRequest(Resources::CUSTOMERS, (string) $customer->getId());
     }
 
     /**
@@ -79,7 +80,7 @@ final class CustomerContext implements Context
         /** @var CustomerInterface $customer */
         $customer = $shopUser->getCustomer();
 
-        $this->client->buildCustomUpdateRequest('customers', (string) $customer->getId(), 'password');
+        $this->client->buildCustomUpdateRequest(Resources::CUSTOMERS, (string) $customer->getId(), 'password');
     }
 
     /**
@@ -245,7 +246,7 @@ final class CustomerContext implements Context
 
         $this->shopApiSecurityContext->iAmLoggedInAs($email);
 
-        $response = $this->client->show('customers', (string) $shopUser->getCustomer()->getId());
+        $response = $this->client->show(Resources::CUSTOMERS, (string) $shopUser->getCustomer()->getId());
 
         Assert::true($this->responseChecker->hasValue($response, 'email', $email));
     }
@@ -259,7 +260,7 @@ final class CustomerContext implements Context
         /** @var ShopUserInterface $shopUser */
         $shopUser = $this->sharedStorage->get('user');
 
-        $response = $this->client->show('customers', (string) $shopUser->getCustomer()->getId());
+        $response = $this->client->show(Resources::CUSTOMERS, (string) $shopUser->getCustomer()->getId());
 
         Assert::true($this->responseChecker->hasValue($response, 'fullName', $name));
     }
@@ -335,7 +336,7 @@ final class CustomerContext implements Context
      */
     public function iBrowseMyOrders(): void
     {
-        $this->client->index('orders');
+        $this->client->index(Resources::ORDERS);
     }
 
     /**
@@ -356,7 +357,7 @@ final class CustomerContext implements Context
      */
     public function iShouldSeeASingleOrderInTheList(): void
     {
-        Assert::same($this->responseChecker->countCollectionItems($this->client->index('orders')), 1);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->index(Resources::ORDERS)), 1);
     }
 
     /**
@@ -495,7 +496,7 @@ final class CustomerContext implements Context
 
     private function registerAccount(?string $email = 'example@example.com', ?string $password = 'example'): void
     {
-        $request = Request::create('shop', 'customers', '');
+        $request = Request::create('shop', Resources::CUSTOMERS, '');
 
         $request->setContent([
             'firstName' => 'First',
@@ -522,6 +523,6 @@ final class CustomerContext implements Context
         $user = $this->sharedStorage->get('user');
         $this->loginContext->iLogInAsWithPassword($user->getEmail(), 'sylius');
 
-        return $this->client->show('customers', (string) $user->getCustomer()->getId());
+        return $this->client->show(Resources::CUSTOMERS, (string) $user->getCustomer()->getId());
     }
 }

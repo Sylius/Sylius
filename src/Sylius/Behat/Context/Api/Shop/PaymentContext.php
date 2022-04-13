@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -52,7 +53,7 @@ final class PaymentContext implements Context
         /** @var PaymentInterface $payment */
         $payment = $order->getPayments()->first();
 
-        $this->client->show('payments', (string) $payment->getId());
+        $this->client->show(Resources::PAYMENTS, (string) $payment->getId());
     }
 
     /**

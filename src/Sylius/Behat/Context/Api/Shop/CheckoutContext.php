@@ -18,6 +18,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -147,7 +148,7 @@ final class CheckoutContext implements Context
      */
     public function iChooseForBillingAddress(string $street, string $addressType): void
     {
-        $addressBook = $this->responseChecker->getCollection($this->client->index('addresses'));
+        $addressBook = $this->responseChecker->getCollection($this->client->index(Resources::ADDRESSES));
 
         $addressType .= 'Address';
 
@@ -345,7 +346,7 @@ final class CheckoutContext implements Context
 
         Assert::notSame($response->getStatusCode(), 200);
 
-        $this->client->show('orders', $this->sharedStorage->get('cart_token'));
+        $this->client->show(Resources::ORDERS, $this->sharedStorage->get('cart_token'));
     }
 
     /**
@@ -391,7 +392,7 @@ final class CheckoutContext implements Context
     {
         $request = Request::customItemAction(
             'shop',
-            'orders',
+            Resources::ORDERS,
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_PATCH,
             sprintf('shipments/%s', $this->getCart()['shipments'][0]['id'])
@@ -409,7 +410,7 @@ final class CheckoutContext implements Context
     {
         $request = Request::customItemAction(
             'shop',
-            'orders',
+            Resources::ORDERS,
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_PATCH,
             sprintf('payments/%s', $this->getCart()['payments'][0]['id'])
@@ -480,7 +481,7 @@ final class CheckoutContext implements Context
     {
         $request = Request::customItemAction(
             'shop',
-            'orders',
+            Resources::ORDERS,
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_PATCH,
             \sprintf('payments/%s', $this->getCart()['payments'][0]['id'])
@@ -895,7 +896,7 @@ final class CheckoutContext implements Context
     {
         if ($this->sharedStorage->has('cart_token')) {
             $discountTotal = $this->responseChecker->getValue(
-                $this->client->show('orders', $this->sharedStorage->get('cart_token')),
+                $this->client->show(Resources::ORDERS, $this->sharedStorage->get('cart_token')),
                 'orderPromotionTotal'
             );
 
@@ -912,7 +913,7 @@ final class CheckoutContext implements Context
      */
     public function thereShouldBeNoTaxesCharged(): void
     {
-        $this->client->show('orders', $this->sharedStorage->get('cart_token'));
+        $this->client->show(Resources::ORDERS, $this->sharedStorage->get('cart_token'));
 
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'taxTotal'), 0);
     }
@@ -1081,7 +1082,7 @@ final class CheckoutContext implements Context
 
         $request = Request::customItemAction(
             'shop',
-            'orders',
+            Resources::ORDERS,
             $tokenValue,
             HTTPRequest::METHOD_POST,
             'items'
@@ -1198,14 +1199,14 @@ final class CheckoutContext implements Context
             $content['email'] = null;
         }
 
-        $this->client->buildUpdateRequest('orders', $this->getCartTokenValue());
+        $this->client->buildUpdateRequest(Resources::ORDERS, $this->getCartTokenValue());
         $this->client->setRequestData($content);
         $this->client->update();
     }
 
     private function getCart(): array
     {
-        return $this->responseChecker->getResponseContent($this->client->show('orders', $this->getCartTokenValue()));
+        return $this->responseChecker->getResponseContent($this->client->show(Resources::ORDERS, $this->getCartTokenValue()));
     }
 
     private function getCartTokenValue(): ?string
@@ -1223,7 +1224,7 @@ final class CheckoutContext implements Context
 
     private function getCheckoutState(): string
     {
-        $this->client->show('orders', $this->sharedStorage->get('cart_token'));
+        $this->client->show(Resources::ORDERS, $this->sharedStorage->get('cart_token'));
 
         $response = $this->client->getLastResponse();
 
@@ -1232,7 +1233,7 @@ final class CheckoutContext implements Context
 
     private function getCartShippingMethods(array $cart): array
     {
-        $this->client->index('shipping-methods');
+        $this->client->index(Resources::SHIPPING_METHODS);
         $this->client->addFilter('tokenValue', $cart['tokenValue']);
         $this->client->addFilter('shipmentId', $cart['shipments'][0]['id']);
         $this->client->filter();
@@ -1275,7 +1276,7 @@ final class CheckoutContext implements Context
             return [];
         }
 
-        $this->client->index('payment-methods');
+        $this->client->index(Resources::PAYMENT_METHODS);
         $this->client->addFilter('paymentId', $order->getLastPayment()->getId());
         $this->client->addFilter('tokenValue', $order->getTokenValue());
         $this->client->filter();
@@ -1381,7 +1382,7 @@ final class CheckoutContext implements Context
     {
         $request = Request::customItemAction(
             'shop',
-            'orders',
+            Resources::ORDERS,
             $tokenValue,
             HTTPRequest::METHOD_POST,
             'items'
@@ -1399,7 +1400,7 @@ final class CheckoutContext implements Context
     {
         $request = Request::customItemAction(
             'shop',
-            'orders',
+            Resources::ORDERS,
             $tokenValue,
             HttpRequest::METHOD_DELETE,
             \sprintf('items/%s', $orderItemId)
@@ -1439,7 +1440,7 @@ final class CheckoutContext implements Context
 
     private function addressShouldBeFilledAs(AddressInterface $address, string $addressType): void
     {
-        $response = $this->client->show('orders', $this->sharedStorage->get('cart_token'));
+        $response = $this->client->show(Resources::ORDERS, $this->sharedStorage->get('cart_token'));
 
         $addressFromResponse = $this->responseChecker->getValue($response, $addressType . 'Address');
 
@@ -1452,7 +1453,7 @@ final class CheckoutContext implements Context
 
         $request = Request::customItemAction(
             'shop',
-            'orders',
+            Resources::ORDERS,
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_PATCH,
             'complete'
@@ -1467,7 +1468,7 @@ final class CheckoutContext implements Context
     {
         $request = Request::customItemAction(
             'shop',
-            'orders',
+            Resources::ORDERS,
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_PATCH,
             sprintf('shipments/%s', $this->getCart()['shipments'][0]['id'])

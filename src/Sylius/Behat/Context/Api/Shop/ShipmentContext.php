@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -52,7 +53,7 @@ final class ShipmentContext implements Context
         /** @var ShipmentInterface $shipment */
         $shipment = $order->getShipments()->first();
 
-        $this->client->show('shipments', (string) $shipment->getId());
+        $this->client->show(Resources::SHIPMENTS, (string) $shipment->getId());
     }
 
     /**

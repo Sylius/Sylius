@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -53,7 +54,7 @@ final class OrderItemContext implements Context
         /** @var OrderItemInterface $orderItem */
         $orderItem = $order->getItems()->first();
 
-        $this->client->show('order-items', (string) $orderItem->getId());
+        $this->client->show(Resources::ORDER_ITEMS, (string) $orderItem->getId());
     }
 
     /**
@@ -68,7 +69,7 @@ final class OrderItemContext implements Context
         /** @var OrderItemUnitInterface $orderItemUnit */
         $orderItemUnit = $order->getItemUnits()->first();
 
-        $this->client->show('order-item-units', (string) $orderItemUnit->getId());
+        $this->client->show(Resources::ORDER_ITEM_UNITS, (string) $orderItemUnit->getId());
     }
 
     /**
