@@ -844,6 +844,11 @@ sylius_ui:
                     context:
                         event: sylius.admin.product.index.after_content
 
+        sylius.admin.product.show.variants_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Product/Show/_variantsContent.html.twig'
+
         sylius.admin.customer.show.content:
             blocks:
                 before_header_legacy:
@@ -993,12 +998,18 @@ sylius_ui:
             blocks:
                 additional_information:
                     template: '@SyliusAdmin/AdminUser/Form/_additionalInformation.html.twig'
-                    priority: 30
-                avatar:
-                    template: '@SyliusAdmin/AdminUser/Form/_avatar.html.twig'
                     priority: 20
                 preferences:
                     template: '@SyliusAdmin/AdminUser/Form/_preferences.html.twig'
+                    priority: 10
+
+        sylius.admin.admin_user.form.additional_information:
+            blocks:
+                personals:
+                    template: '@SyliusAdmin/AdminUser/Form/_personals.html.twig'
+                    priority: 20
+                avatar:
+                    template: '@SyliusAdmin/AdminUser/Form/_avatar.html.twig'
                     priority: 10
 
         sylius.admin.channel.form:
