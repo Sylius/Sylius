@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
@@ -42,8 +43,12 @@ final class ProductNormalizer implements ContextAwareNormalizerInterface, Normal
         $context[self::ALREADY_CALLED] = true;
 
         $data = $this->normalizer->normalize($object, $format, $context);
-        $variant = $this->defaultProductVariantResolver->getVariant($object);
-        $data['defaultVariant'] = $variant === null ? null : $this->iriConverter->getIriFromItem($variant);
+
+        $variantsIris = array_map(fn(ProductVariantInterface $variant): string => $this->iriConverter->getIriFromItem($variant), $object->getEnabledVariants()->toArray());
+        $data['variants'] = array_values($variantsIris);
+
+        $defaultVariant = $this->defaultProductVariantResolver->getVariant($object);
+        $data['defaultVariant'] = $defaultVariant === null ? null : $this->iriConverter->getIriFromItem($defaultVariant);
 
         return $data;
     }
@@ -54,6 +59,18 @@ final class ProductNormalizer implements ContextAwareNormalizerInterface, Normal
             return false;
         }
 
-        return $data instanceof ProductInterface;
+        return $data instanceof ProductInterface && $this->isShopGetOperation($context);
+    }
+
+    private function isShopGetOperation(array $context): bool
+    {
+        if (isset($context['item_operation_name'])) {
+            return \str_starts_with($context['item_operation_name'], 'shop_get');
+        }
+        if (isset($context['collection_operation_name'])) {
+            return \str_starts_with($context['collection_operation_name'], 'shop_get');
+        }
+
+        return false;
     }
 }
