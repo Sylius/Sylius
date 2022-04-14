@@ -60,6 +60,7 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
                     'FirstResourceClass' => [
                         'operations' => [
                             'shop_get' => [],
+                            'admin_get' => null,
                         ],
                     ],
                     'SecondResourceClass' => [
@@ -77,6 +78,7 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
                 'FirstResourceClass' => [
                     'operations' => [
                         'shop_get' => ['enabled' => true],
+                        'admin_get' => ['enabled' => true],
                     ],
                 ],
                 'SecondResourceClass' => [
