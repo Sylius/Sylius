@@ -28,33 +28,17 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
-use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private IriConverterInterface $iriConverter;
-
-    private ChannelContextSetterInterface $channelContextSetter;
-
     public function __construct(
-        ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage,
-        IriConverterInterface $iriConverter,
-        ChannelContextSetterInterface $channelContextSetter
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage,
+        private IriConverterInterface $iriConverter,
+        private ChannelContextSetterInterface $channelContextSetter,
     ) {
-        $this->client = $client;
-        $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
-        $this->iriConverter = $iriConverter;
-        $this->channelContextSetter = $channelContextSetter;
     }
 
     /**
@@ -91,7 +75,7 @@ final class ProductContext implements Context
      */
     public function iViewProductUsingSlug(ProductInterface $product): void
     {
-        $this->client->showByIri('/api/v2/shop/products-by-slug/'.$product->getSlug());
+        $this->client->showByIri('/api/v2/shop/products-by-slug/' . $product->getSlug());
 
         $this->sharedStorage->set('product', $product);
     }
@@ -103,7 +87,7 @@ final class ProductContext implements Context
     {
         $response = $this->client->getLastResponse();
 
-        Assert::eq($response->headers->get('Location'), '/api/v2/shop/products/'.$product->getCode());
+        Assert::eq($response->headers->get('Location'), '/api/v2/shop/products/' . $product->getCode());
     }
 
     /**
@@ -349,6 +333,22 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then /^the first product on the list should have name "([^"]+)" and price ("[^"]+")$/
+     */
+    public function theFirstProductOnTheListShouldHaveNameAndPrice(string $name, int $price): void
+    {
+        $product = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
+
+        $defaultVariantPrice = $this->responseChecker->getValue(
+            $this->client->showByIri($product['defaultVariant']),
+            'price'
+        );
+
+        Assert::same($product['name'], $name);
+        Assert::same($defaultVariantPrice, $price);
+    }
+
+    /**
      * @Then the last product on the list should have name :name
      */
     public function theLastProductOnTheListShouldHaveName(string $name): void
@@ -356,6 +356,23 @@ final class ProductContext implements Context
         $products = $this->responseChecker->getCollection($this->client->getLastResponse());
 
         Assert::same(end($products)['name'], $name);
+    }
+
+    /**
+     * @Then /^the last product on the list should have name "([^"]+)" and price ("[^"]+")$/
+     */
+    public function theLastProductOnTheListShouldHaveNameAndPrice(string $name, int $price): void
+    {
+        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
+        $product = end($products);
+
+        $defaultVariantPrice = $this->responseChecker->getValue(
+            $this->client->showByIri($product['defaultVariant']),
+            'price'
+        );
+
+        Assert::same($product['name'], $name);
+        Assert::same($defaultVariantPrice, $price);
     }
 
     /**
