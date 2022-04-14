@@ -6,8 +6,6 @@ sylius:
         without_country: 'The address without country cannot exist'
     country:
         not_exist: 'The country %countryCode% does not exist.'
-    locale:
-        not_exist: 'The locale %localeCode% does not exist.'
     order:
         not_empty: 'An empty order cannot be completed.'
     payment_method:

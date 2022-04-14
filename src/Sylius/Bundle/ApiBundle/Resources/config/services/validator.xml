@@ -92,11 +92,6 @@
             <tag name="validator.constraint_validator" alias="sylius_api_confirm_reset_password" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\PickupCartLocaleValidator">
-            <argument type="service" id="sylius.repository.channel" />
-            <tag name="validator.constraint_validator" alias="sylius_api_pickup_cart_locale" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\PromotionCouponEligibilityValidator">
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <argument type="service" id="sylius.repository.order" />
