@@ -38,7 +38,6 @@ final class ProductDocumentationNormalizer implements NormalizerInterface
             'readOnly' => true,
         ];
 
-        $docs['components']['schemas']['Product.jsonld-admin.product.read']['properties']['defaultVariant'] = $defaultVariantSchema;
         $docs['components']['schemas']['Product.jsonld-shop.product.read']['properties']['defaultVariant'] = $defaultVariantSchema;
 
         return $docs;

@@ -252,6 +252,37 @@ final class ProductVariantContext implements Context
         }
     }
 
+    /**
+     * @Then I should not see :variant variant
+     */
+    public function iShouldNotSeeVariant(ProductVariantInterface $variant): void
+    {
+        $content = $this->responseChecker->getResponseContent($this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode()));
+        Assert::same(
+            $content['code'],
+            404,
+            sprintf('%s variant should be disabled', $variant->getName())
+        );
+    }
+
+    /**
+     * @Then /^I should see ("([^"]+)", "([^"]+)" and "([^"]+)" variants)$/
+     */
+    public function variantAndVariantShouldBeVisible(array $variants): void
+    {
+        $this->sharedStorage->set('token', null);
+
+        /** @var ProductVariantInterface $variant */
+        foreach ($variants as $variant) {
+            $content = $this->responseChecker->getResponseContent($this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode()));
+            Assert::same(
+                $content['name'],
+                $variant->getName(),
+                sprintf('%s variant should be visible', $variant->getName())
+            );
+        }
+    }
+
     private function findVariant(?ProductVariantInterface $variant): array
     {
         $response = $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();

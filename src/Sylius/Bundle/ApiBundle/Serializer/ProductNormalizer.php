@@ -44,8 +44,11 @@ final class ProductNormalizer implements ContextAwareNormalizerInterface, Normal
 
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        $variantsIris = array_map(fn(ProductVariantInterface $variant): string => $this->iriConverter->getIriFromItem($variant), $object->getEnabledVariants()->toArray());
-        $data['variants'] = array_values($variantsIris);
+        $data['variants'] = $object
+            ->getEnabledVariants()
+            ->map(fn(ProductVariantInterface $variant): string => $this->iriConverter->getIriFromItem($variant))
+            ->getValues()
+        ;
 
         $defaultVariant = $this->defaultProductVariantResolver->getVariant($object);
         $data['defaultVariant'] = $defaultVariant === null ? null : $this->iriConverter->getIriFromItem($defaultVariant);
@@ -59,10 +62,10 @@ final class ProductNormalizer implements ContextAwareNormalizerInterface, Normal
             return false;
         }
 
-        return $data instanceof ProductInterface && $this->isShopGetOperation($context);
+        return $data instanceof ProductInterface && $this->isShopOperation($context);
     }
 
-    private function isShopGetOperation(array $context): bool
+    private function isShopOperation(array $context): bool
     {
         if (isset($context['item_operation_name'])) {
             return \str_starts_with($context['item_operation_name'], 'shop_get');
