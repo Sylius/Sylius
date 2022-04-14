@@ -19,7 +19,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Service\Resolver\PriceResolverInterface;
 use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -40,7 +39,6 @@ final class ProductContext implements Context
         private SharedStorageInterface $sharedStorage,
         private IriConverterInterface $iriConverter,
         private ChannelContextSetterInterface $channelContextSetter,
-        private PriceResolverInterface $priceResolver
     ) {
     }
 
@@ -314,9 +312,9 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then the first product on the list should have name :name and price :price
+     * @Then /^the first product on the list should have name "([^"]+)" and price ("[^"]+")$/
      */
-    public function theFirstProductOnTheListShouldHaveNameAndPrice(string $name, string $price): void
+    public function theFirstProductOnTheListShouldHaveNameAndPrice(string $name, int $price): void
     {
         $product = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
 
@@ -326,7 +324,7 @@ final class ProductContext implements Context
         );
 
         Assert::same($product['name'], $name);
-        Assert::same($defaultVariantPrice, $this->priceResolver->getPriceFromString($price));
+        Assert::same($defaultVariantPrice, $price);
     }
 
     /**
@@ -340,9 +338,9 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then the last product on the list should have name :name and price :price
+     * @Then /^the last product on the list should have name "([^"]+)" and price ("[^"]+")$/
      */
-    public function theLastProductOnTheListShouldHaveNameAndPrice(string $name, string $price): void
+    public function theLastProductOnTheListShouldHaveNameAndPrice(string $name, int $price): void
     {
         $products = $this->responseChecker->getCollection($this->client->getLastResponse());
         $product = end($products);
@@ -353,7 +351,7 @@ final class ProductContext implements Context
         );
 
         Assert::same($product['name'], $name);
-        Assert::same($defaultVariantPrice, $this->priceResolver->getPriceFromString($price));
+        Assert::same($defaultVariantPrice, $price);
     }
 
     /**
