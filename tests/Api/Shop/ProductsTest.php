@@ -64,11 +64,30 @@ final class ProductsTest extends JsonApiTestCase
             [],
             [],
             ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json', 'HTTP_ACCEPT_LANGUAGE' => 'de_DE']
-    );
+        );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'shop/product/get_product_with_de_DE_locale_translation',
+            Response::HTTP_OK
+        );
+    }
+
+    /** @test */
+    public function it_returns_products_collection(): void
+    {
+        $this->loadFixturesFromFiles(['product/product_variant_with_original_price.yaml']);
+
+        $this->client->request('GET',
+            '/api/v2/shop/products',
+            [],
+            [],
+            self::CONTENT_TYPE_HEADER
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/product/get_products_collection_response',
             Response::HTTP_OK
         );
     }
