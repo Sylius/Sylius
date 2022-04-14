@@ -20,7 +20,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\Product;
 
-final class FilterEagerLoadingExtensionSpec extends ObjectBehavior
+final class RestrictingFilterEagerLoadingExtensionSpec extends ObjectBehavior
 {
     function let(ContextAwareQueryCollectionExtensionInterface $decoratedExtension): void
     {

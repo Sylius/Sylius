@@ -68,7 +68,7 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
         ]);
 
         $this->assertContainerBuilderHasParameter(
-            'sylius_api.filter_eager_loading_extension.restricted_operations',
+            'sylius_api.filter_eager_loading_extension.restricted_resources',
             [
                 'shop_get' => [
                     'resources' => [
@@ -85,7 +85,7 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->assertContainerBuilderHasParameter('sylius_api.filter_eager_loading_extension.restricted_operations', []);
+        $this->assertContainerBuilderHasParameter('sylius_api.filter_eager_loading_extension.restricted_resources', []);
     }
 
     protected function getContainerExtensions(): array

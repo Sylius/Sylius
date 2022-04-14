@@ -22,7 +22,7 @@ use Doctrine\ORM\QueryBuilder;
  * This class decorates api_platform.doctrine.orm.query_extension.filter_eager_loading.
  * It is a workaround for https://github.com/api-platform/core/issues/2253.
  */
-final class FilterEagerLoadingExtension implements ContextAwareQueryCollectionExtensionInterface
+final class RestrictingFilterEagerLoadingExtension implements ContextAwareQueryCollectionExtensionInterface
 {
     public function __construct(private ContextAwareQueryCollectionExtensionInterface $decoratedExtension, private array $restrictedOperations)
     {
