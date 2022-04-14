@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
@@ -70,7 +71,7 @@ final class PromotionContext implements Context
 
     private function useCouponCode(?string $couponCode): void
     {
-        $this->client->buildUpdateRequest('orders', $this->getCartTokenValue());
+        $this->client->buildUpdateRequest(Resources::ORDERS, $this->getCartTokenValue());
         $this->client->setRequestData(['couponCode' => $couponCode]);
         $this->client->update();
     }

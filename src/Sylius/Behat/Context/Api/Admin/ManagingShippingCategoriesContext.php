@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -36,7 +37,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iWantToCreateANewShippingCategory(): void
     {
-        $this->client->buildCreateRequest('shipping-categories');
+        $this->client->buildCreateRequest(Resources::SHIPPING_CATEGORIES);
     }
 
     /**
@@ -44,7 +45,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iWantToModifyAShippingCategory(ShippingCategoryInterface $shippingCategory): void
     {
-        $this->client->buildUpdateRequest('shipping-categories', $shippingCategory->getCode());
+        $this->client->buildUpdateRequest(Resources::SHIPPING_CATEGORIES, $shippingCategory->getCode());
     }
 
     /**
@@ -60,7 +61,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iDeleteShippingCategory(ShippingCategoryInterface $shippingCategory): void
     {
-        $this->client->delete('shipping-categories', $shippingCategory->getCode());
+        $this->client->delete(Resources::SHIPPING_CATEGORIES, $shippingCategory->getCode());
     }
 
     /**
@@ -68,7 +69,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iBrowseShippingCategories(): void
     {
-        $this->client->index('shipping-categories');
+        $this->client->index(Resources::SHIPPING_CATEGORIES);
     }
 
     /**
@@ -99,7 +100,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iModifyAShippingCategory(ShippingCategoryInterface $shippingCategory): void
     {
-        $this->client->buildUpdateRequest('shipping-categories', $shippingCategory->getCode());
+        $this->client->buildUpdateRequest(Resources::SHIPPING_CATEGORIES, $shippingCategory->getCode());
     }
 
     /**
@@ -146,7 +147,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iShouldSeeShippingCategoriesInTheList(int $count = 1): void
     {
-        Assert::same($this->responseChecker->countCollectionItems($this->client->index('shipping-categories')), $count);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->index(Resources::SHIPPING_CATEGORIES)), $count);
     }
 
     /**
@@ -204,7 +205,7 @@ final class ManagingShippingCategoriesContext implements Context
     public function thereShouldStillBeOnlyOneShippingCategoryWith(string $code): void
     {
         Assert::same(
-            count($this->responseChecker->getCollectionItemsWithValue($this->client->index('shipping-categories'), 'code', $code)),
+            count($this->responseChecker->getCollectionItemsWithValue($this->client->index(Resources::SHIPPING_CATEGORIES), 'code', $code)),
             1
         );
     }
@@ -255,7 +256,7 @@ final class ManagingShippingCategoriesContext implements Context
 
     private function isItemOnIndex(string $property, string $value): bool
     {
-        $this->client->index('shipping-categories');
+        $this->client->index(Resources::SHIPPING_CATEGORIES);
 
         return $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), $property, $value);
     }

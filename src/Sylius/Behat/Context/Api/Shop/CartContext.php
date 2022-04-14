@@ -18,6 +18,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -63,7 +64,7 @@ final class CartContext implements Context
      */
     public function iClearMyCart(string $tokenValue): void
     {
-        $this->shopClient->delete('orders', $tokenValue);
+        $this->shopClient->delete(Resources::ORDERS, $tokenValue);
 
         $this->sharedStorage->set('cart_token', null);
     }
@@ -79,7 +80,7 @@ final class CartContext implements Context
             $tokenValue = $this->pickupCart();
         }
 
-        $this->shopClient->show('orders', $tokenValue);
+        $this->shopClient->show(Resources::ORDERS, $tokenValue);
     }
 
     /**
@@ -87,7 +88,7 @@ final class CartContext implements Context
      */
     public function theAdministratorTryToSeeTheSummaryOfCart(?string $tokenValue): void
     {
-        $this->adminClient->show('orders', $tokenValue);
+        $this->adminClient->show(Resources::ORDERS, $tokenValue);
     }
 
     /**
@@ -135,7 +136,7 @@ final class CartContext implements Context
         string $productOption,
         string $productOptionValue
     ): void {
-        $productData = json_decode($this->shopClient->show('products', $product->getCode())->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+        $productData = json_decode($this->shopClient->show(Resources::PRODUCTS, $product->getCode())->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
         $variantIri = null;
         foreach ($productData['options'] as $optionIri) {
@@ -152,7 +153,7 @@ final class CartContext implements Context
                     continue;
                 }
 
-                $this->shopClient->index('product-variants');
+                $this->shopClient->index(Resources::PRODUCT_VARIANTS);
                 $this->shopClient->addFilter('product', $productData['@id']);
                 $this->shopClient->addFilter('optionValues', $valueIri);
 
@@ -170,7 +171,7 @@ final class CartContext implements Context
 
         $tokenValue = $this->pickupCart();
 
-        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_POST, 'items');
+        $request = Request::customItemAction('shop', Resources::ORDERS, $tokenValue, HttpRequest::METHOD_POST, 'items');
 
         $request->updateContent([
             'productCode' => $productData['code'],
@@ -233,7 +234,7 @@ final class CartContext implements Context
      */
     public function iCheckDetailsOfMyCart(string $tokenValue): void
     {
-        $this->shopClient->show('orders', $tokenValue);
+        $this->shopClient->show(Resources::ORDERS, $tokenValue);
     }
 
     /**
@@ -287,7 +288,7 @@ final class CartContext implements Context
      */
     public function iDoNotHaveAccessToSeeTheSummaryOfMyCart(string $tokenValue): void
     {
-        Assert::same($this->shopClient->show('orders', $tokenValue)->getStatusCode(), Response::HTTP_NOT_FOUND);
+        Assert::same($this->shopClient->show(Resources::ORDERS, $tokenValue)->getStatusCode(), Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -310,7 +311,7 @@ final class CartContext implements Context
      */
     public function myCartTotalShouldBe(string $tokenValue, int $total): void
     {
-        $response = $this->shopClient->show('orders', $tokenValue);
+        $response = $this->shopClient->show(Resources::ORDERS, $tokenValue);
         $responseTotal = $this->responseChecker->getValue(
             $response,
             'total'
@@ -324,7 +325,7 @@ final class CartContext implements Context
      */
     public function myCartShouldBeEmpty(string $tokenValue): void
     {
-        $response = $this->shopClient->show('orders', $tokenValue);
+        $response = $this->shopClient->show(Resources::ORDERS, $tokenValue);
 
         Assert::true(
             $this->responseChecker->isShowSuccessful($response),
@@ -337,7 +338,7 @@ final class CartContext implements Context
      */
     public function theVisitorHasNoAccessToCustomer(?string $tokenValue): void
     {
-        $response = $this->shopClient->show('orders', $tokenValue);
+        $response = $this->shopClient->show(Resources::ORDERS, $tokenValue);
 
         Assert::false(
             $this->responseChecker->isShowSuccessful($response),
@@ -450,7 +451,7 @@ final class CartContext implements Context
      */
     public function thereShouldCountItemsInMyCart(int $count, string $cartToken): void
     {
-        $response = $this->shopClient->show('orders', $cartToken);
+        $response = $this->shopClient->show(Resources::ORDERS, $cartToken);
         $items = $this->responseChecker->getValue($response, 'items');
 
         Assert::count($items, $count);
@@ -551,7 +552,7 @@ final class CartContext implements Context
         string $tokenValue,
         int $quantity = 1
     ): void {
-        $this->shopClient->show('orders', $tokenValue);
+        $this->shopClient->show(Resources::ORDERS, $tokenValue);
 
         $this->iShouldSeeWithQuantityInMyCart($product->getName(), $quantity);
     }
@@ -561,7 +562,7 @@ final class CartContext implements Context
      */
     public function iCheckItemsOfMyCart(string $tokenValue): void
     {
-        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_GET, 'items');
+        $request = Request::customItemAction('shop', Resources::ORDERS, $tokenValue, HttpRequest::METHOD_GET, 'items');
 
         $this->shopClient->executeCustomRequest($request);
     }
@@ -627,7 +628,7 @@ final class CartContext implements Context
      */
     public function iShouldHaveEmptyCart(string $tokenValue): void
     {
-        $items = $this->responseChecker->getValue($this->shopClient->show('orders', $tokenValue), 'items');
+        $items = $this->responseChecker->getValue($this->shopClient->show(Resources::ORDERS, $tokenValue), 'items');
 
         Assert::same(count($items), 0, 'There should be an empty cart');
     }
@@ -692,7 +693,7 @@ final class CartContext implements Context
     {
         $tokenValue = $tokenValue ?? $this->pickupCart();
 
-        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_POST, 'items');
+        $request = Request::customItemAction('shop', Resources::ORDERS, $tokenValue, HttpRequest::METHOD_POST, 'items');
 
         $request->updateContent([
             'productVariant' => $this->iriConverter->getIriFromItem($this->productVariantResolver->getVariant($product)),
@@ -706,7 +707,7 @@ final class CartContext implements Context
     {
         $tokenValue = $tokenValue ?? $this->pickupCart();
 
-        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_POST, 'items');
+        $request = Request::customItemAction('shop', Resources::ORDERS, $tokenValue, HttpRequest::METHOD_POST, 'items');
 
         $request->updateContent([
             'productVariant' => $this->iriConverter->getIriFromItem($productVariant),
@@ -720,7 +721,7 @@ final class CartContext implements Context
     {
         $request = Request::customItemAction(
             'shop',
-            'orders',
+            Resources::ORDERS,
             $tokenValue,
             HttpRequest::METHOD_DELETE,
             \sprintf('items/%s', $orderItemId)
@@ -759,7 +760,7 @@ final class CartContext implements Context
 
     private function getOrderItemResponseFromProductInCart(ProductInterface $product, string $tokenValue): ?array
     {
-        $items = $this->responseChecker->getValue($this->shopClient->show('orders', $tokenValue), 'items');
+        $items = $this->responseChecker->getValue($this->shopClient->show(Resources::ORDERS, $tokenValue), 'items');
 
         foreach ($items as $item) {
             $response = $this->getProductForItem($item);
@@ -773,7 +774,7 @@ final class CartContext implements Context
 
     private function changeQuantityOfOrderItem(string $orderItemId, int $quantity, string $tokenValue): void
     {
-        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, sprintf('items/%s', $orderItemId));
+        $request = Request::customItemAction('shop', Resources::ORDERS, $tokenValue, HttpRequest::METHOD_PATCH, sprintf('items/%s', $orderItemId));
 
         $request->updateContent(['quantity' => $quantity]);
 
@@ -842,7 +843,7 @@ final class CartContext implements Context
 
     private function compareItemSubtotal(string $productName, int $productPrice): void
     {
-        $items = $this->responseChecker->getValue($this->shopClient->show('orders', $this->sharedStorage->get('cart_token')), 'items');
+        $items = $this->responseChecker->getValue($this->shopClient->show(Resources::ORDERS, $this->sharedStorage->get('cart_token')), 'items');
 
         foreach ($items as $item) {
             if ($item['productName'] === $productName) {
@@ -857,7 +858,7 @@ final class CartContext implements Context
 
     private function getExpectedPriceOfProductTimesQuantity(ProductInterface $product): int
     {
-        $cartResponse = $this->shopClient->show('orders', $this->sharedStorage->get('cart_token'));
+        $cartResponse = $this->shopClient->show(Resources::ORDERS, $this->sharedStorage->get('cart_token'));
         $items = $this->responseChecker->getValue($cartResponse, 'items');
 
         foreach ($items as $item) {

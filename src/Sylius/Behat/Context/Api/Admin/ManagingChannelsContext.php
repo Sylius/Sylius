@@ -17,6 +17,7 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -50,7 +51,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iWantToCreateANewChannel(): void
     {
-        $this->client->buildCreateRequest('channels');
+        $this->client->buildCreateRequest(Resources::CHANNELS);
     }
 
     /**
@@ -193,7 +194,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iWantToBrowseChannels(): void
     {
-        $this->client->index('channels');
+        $this->client->index(Resources::CHANNELS);
     }
 
     /**
@@ -214,7 +215,7 @@ final class ManagingChannelsContext implements Context
     public function theChannelShouldAppearInTheRegistry(string $name): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index('channels'), 'name', $name),
+            $this->responseChecker->hasItemWithValue($this->client->index(Resources::CHANNELS), 'name', $name),
             sprintf('Channel with name %s does not exist', $name)
         );
     }
@@ -225,7 +226,7 @@ final class ManagingChannelsContext implements Context
     public function theChannelShouldHaveAsAMenuTaxon(ChannelInterface $channel, TaxonInterface $taxon): void
     {
         Assert::same(
-            $this->responseChecker->getValue($this->client->show('channels', $channel->getCode()), 'menuTaxon'),
+            $this->responseChecker->getValue($this->client->show(Resources::CHANNELS, $channel->getCode()), 'menuTaxon'),
             $this->iriConverter->getIriFromItem($taxon),
             sprintf('Channel %s does not have %s menu taxon', $channel->getName(), $taxon->getName())
         );

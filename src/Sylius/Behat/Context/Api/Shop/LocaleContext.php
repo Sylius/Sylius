@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
@@ -34,7 +35,7 @@ final class LocaleContext implements Context
      */
     public function iGetAvailableLocales(): void
     {
-       $this->client->index('locales');
+       $this->client->index(Resources::LOCALES);
     }
 
     /**
@@ -42,7 +43,7 @@ final class LocaleContext implements Context
      */
     public function iGetLocale(LocaleInterface $locale): void
     {
-        $this->client->show('locales', $locale->getCode());
+        $this->client->show(Resources::LOCALES, $locale->getCode());
     }
 
     /**
@@ -101,7 +102,7 @@ final class LocaleContext implements Context
      */
     public function iShouldShopUsingTheLocale(string $localeCode): void
     {
-        $this->client->buildCreateRequest('orders');
+        $this->client->buildCreateRequest(Resources::ORDERS);
 
         Assert::same($this->responseChecker->getValue($this->client->create(), 'localeCode'), $localeCode);
     }

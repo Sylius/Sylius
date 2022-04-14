@@ -19,6 +19,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -63,7 +64,7 @@ final class ProductContext implements Context
      */
     public function iViewProduct(ProductInterface $product): void
     {
-        $this->client->show('products', $product->getCode());
+        $this->client->show(Resources::PRODUCTS, $product->getCode());
 
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $product->getVariants()->first();
@@ -111,7 +112,7 @@ final class ProductContext implements Context
      */
     public function iBrowseProductsFromTaxon(?TaxonInterface $taxon = null): void
     {
-        $this->client->index('products');
+        $this->client->index(Resources::PRODUCTS);
 
         if ($taxon !== null) {
             $this->client->addFilter('taxon', $this->iriConverter->getIriFromItem($taxon));
@@ -481,7 +482,7 @@ final class ProductContext implements Context
         $this->channelContextSetter->setChannel($channel);
 
         Assert::true($this->hasProductWithPrice(
-            [$this->responseChecker->getResponseContent($this->client->show('products', $product->getCode()))],
+            [$this->responseChecker->getResponseContent($this->client->show(Resources::PRODUCTS, $product->getCode()))],
             $price,
             null,
             StringInflector::nameToCamelCase($priceType)

@@ -17,6 +17,7 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -55,7 +56,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iWantToEditThisAdministrator(AdminUserInterface $adminUser): void
     {
-        $this->client->buildUpdateRequest('administrators', (string) $adminUser->getId());
+        $this->client->buildUpdateRequest(Resources::ADMINISTRATORS, (string) $adminUser->getId());
     }
 
     /**
@@ -64,7 +65,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iBrowseAdministrators(): void
     {
-        $this->client->index('administrators');
+        $this->client->index(Resources::ADMINISTRATORS);
     }
 
     /**
@@ -72,7 +73,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iWantToCreateANewAdministrator(): void
     {
-        $this->client->buildCreateRequest('administrators');
+        $this->client->buildCreateRequest(Resources::ADMINISTRATORS);
     }
 
     /**
@@ -149,7 +150,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iDeleteAdministratorWithEmail(AdminUserInterface $adminUser): void
     {
-        $this->client->delete('administrators', (string) $adminUser->getId());
+        $this->client->delete(Resources::ADMINISTRATORS, (string) $adminUser->getId());
     }
 
     /**
@@ -157,7 +158,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iUploadTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
     {
-        $this->client->buildUploadRequest('avatar-images');
+        $this->client->buildUploadRequest(Resources::AVATAR_IMAGES);
         $this->client->addParameter('owner', $this->iriConverter->getIriFromItem($administrator));
         $this->client->addFile('file', new UploadedFile($this->minkParameters['files_path'] . $avatar, basename($avatar)));
         $response = $this->client->upload();
@@ -175,7 +176,7 @@ final class ManagingAdministratorsContext implements Context
         $avatar = $administrator->getAvatar();
         Assert::notNull($avatar);
 
-        $this->client->delete('avatar-images', (string) $avatar->getId());
+        $this->client->delete(Resources::AVATAR_IMAGES, (string) $avatar->getId());
     }
 
     /**
@@ -194,7 +195,7 @@ final class ManagingAdministratorsContext implements Context
     public function theAdministratorShouldAppearInTheStore(string $email): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index('administrators'), 'email', $email),
+            $this->responseChecker->hasItemWithValue($this->client->index(Resources::ADMINISTRATORS), 'email', $email),
             sprintf('Administrator with email %s does not exist', $email)
         );
     }
@@ -205,7 +206,7 @@ final class ManagingAdministratorsContext implements Context
     public function thereShouldNotBeAdministratorAnymore(string $email): void
     {
         Assert::false(
-            $this->responseChecker->hasItemWithValue($this->client->index('administrators'), 'email', $email),
+            $this->responseChecker->hasItemWithValue($this->client->index(Resources::ADMINISTRATORS), 'email', $email),
             sprintf('Administrator with email %s exists, but it should not', $email)
         );
     }
@@ -216,7 +217,7 @@ final class ManagingAdministratorsContext implements Context
     public function thereShouldStillBeOnlyOneAdministratorWithAnEmail(string $email): void
     {
         Assert::count(
-            $this->responseChecker->getCollectionItemsWithValue($this->client->index('administrators'), 'email', $email),
+            $this->responseChecker->getCollectionItemsWithValue($this->client->index(Resources::ADMINISTRATORS), 'email', $email),
             1,
             sprintf('There is more than one administrator with email %s', $email)
         );
@@ -229,7 +230,7 @@ final class ManagingAdministratorsContext implements Context
     public function thisAdministratorWithNameShouldAppearInTheStore(string $username): void
     {
         Assert::count(
-            $this->responseChecker->getCollectionItemsWithValue($this->client->index('administrators'), 'username', $username),
+            $this->responseChecker->getCollectionItemsWithValue($this->client->index(Resources::ADMINISTRATORS), 'username', $username),
             1,
             sprintf('There is more than one administrator with username %s', $username)
         );
@@ -333,7 +334,7 @@ final class ManagingAdministratorsContext implements Context
     public function iShouldSeeTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
     {
         Assert::true($this->responseChecker->hasValue(
-            $this->client->show('administrators', (string) $administrator->getId()),
+            $this->client->show(Resources::ADMINISTRATORS, (string) $administrator->getId()),
             'avatar',
             $this->sharedStorage->get(StringInflector::nameToCode($avatar))
         ));
@@ -348,7 +349,7 @@ final class ManagingAdministratorsContext implements Context
         $administrator = $this->sharedStorage->get('administrator');
 
         Assert::true($this->responseChecker->hasValue(
-            $this->client->show('administrators', (string) $administrator->getId()),
+            $this->client->show(Resources::ADMINISTRATORS, (string) $administrator->getId()),
             'avatar',
             null
         ));
