@@ -3,6 +3,8 @@
 1. The support for Symfony 5.2 has been dropped, because it is not maintained version that has some security vulnerabilities. 
    The recommended Symfony version to use with Sylius is 5.4 as it is the current long-term support version.
 
+2. `Order total` shipping rule has been changed to `Items total` and now it is based on items total instead of order total.
+
 # UPGRADE FROM `v1.10.x` TO `v1.10.12`
 
 1. Order Processors' priorities have changed and `sylius.order_processing.order_prices_recalculator` has now a higher priority than `sylius.order_processing.order_shipment_processor`.
