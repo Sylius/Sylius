@@ -24,7 +24,7 @@ use Doctrine\ORM\QueryBuilder;
  */
 final class RestrictingFilterEagerLoadingExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    public function __construct(private ContextAwareQueryCollectionExtensionInterface $decoratedExtension, private array $restrictedOperations)
+    public function __construct(private ContextAwareQueryCollectionExtensionInterface $decoratedExtension, private array $restrictedResources)
     {
     }
 
@@ -39,6 +39,6 @@ final class RestrictingFilterEagerLoadingExtension implements ContextAwareQueryC
 
     private function isOperationRestricted(string $resourceClass, string $operationName): bool
     {
-        return $this->restrictedOperations[$operationName]['resources'][$resourceClass]['enabled'] ?? false;
+        return $this->restrictedResources[$resourceClass]['operations'][$operationName]['enabled'] ?? false;
     }
 }
