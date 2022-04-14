@@ -33,14 +33,14 @@
         <service id="sylius.shipping_method_rule_checker.order_total_greater_than_or_equal"
                  class="Sylius\Component\Core\Shipping\Checker\Rule\OrderTotalGreaterThanOrEqualRuleChecker">
             <tag name="sylius.shipping_method_rule_checker" type="order_total_greater_than_or_equal"
-                 label="sylius.form.shipping_method_rule.order_total_greater_than_or_equal"
+                 label="sylius.form.shipping_method_rule.items_total_greater_than_or_equal"
                  form-type="Sylius\Bundle\CoreBundle\Form\Type\Shipping\Rule\ChannelBasedOrderTotalGreaterThanOrEqualConfigurationType"/>
         </service>
 
         <service id="sylius.shipping_method_rule_checker.order_total_less_than_or_equal"
                  class="Sylius\Component\Core\Shipping\Checker\Rule\OrderTotalLessThanOrEqualRuleChecker">
             <tag name="sylius.shipping_method_rule_checker" type="order_total_less_than_or_equal"
-                 label="sylius.form.shipping_method_rule.order_total_less_than_or_equal"
+                 label="sylius.form.shipping_method_rule.items_total_less_than_or_equal"
                  form-type="Sylius\Bundle\CoreBundle\Form\Type\Shipping\Rule\ChannelBasedOrderTotalLessThanOrEqualConfigurationType"/>
         </service>
     </services>

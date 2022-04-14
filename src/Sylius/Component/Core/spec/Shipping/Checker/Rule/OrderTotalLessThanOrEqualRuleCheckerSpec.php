@@ -45,7 +45,7 @@ final class OrderTotalLessThanOrEqualRuleCheckerSpec extends ObjectBehavior
     ): void {
         $subject->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
-        $order->getTotal()->willReturn(99);
+        $order->getItemsTotal()->willReturn(99);
         $channel->getCode()->willReturn('CHANNEL');
 
         $this->isEligible($subject, [
@@ -62,7 +62,7 @@ final class OrderTotalLessThanOrEqualRuleCheckerSpec extends ObjectBehavior
     ): void {
         $subject->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
-        $order->getTotal()->willReturn(100);
+        $order->getItemsTotal()->willReturn(100);
         $channel->getCode()->willReturn('CHANNEL');
 
         $this->isEligible($subject, [
@@ -79,7 +79,7 @@ final class OrderTotalLessThanOrEqualRuleCheckerSpec extends ObjectBehavior
     ): void {
         $subject->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
-        $order->getTotal()->willReturn(101);
+        $order->getItemsTotal()->willReturn(101);
         $channel->getCode()->willReturn('CHANNEL');
 
         $this->isEligible($subject, [

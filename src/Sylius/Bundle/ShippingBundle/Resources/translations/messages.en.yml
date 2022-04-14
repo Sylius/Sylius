@@ -49,8 +49,8 @@ sylius:
             tax_category: Tax category
             translations: Translations
         shipping_method_rule:
-            order_total_greater_than_or_equal: Order total greater than or equal
-            order_total_less_than_or_equal: Order total less than or equal
+            items_total_greater_than_or_equal: Items total greater than or equal
+            items_total_less_than_or_equal: Items total less than or equal
             type: Type
             total: Total
             total_weight_greater_than_or_equal: Total weight greater than or equal
