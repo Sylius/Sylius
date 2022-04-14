@@ -376,6 +376,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'validation_errors' => '[data-test-cart-validation-error]',
             'variant_radio' => '[data-test-product-variants] tbody tr:contains("%variantName%") input',
             'variants_rows' => '[data-test-product-variants-row]',
+            'breadcrumb' => '.breadcrumb',
         ]);
     }
 
@@ -385,5 +386,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
             $this->getDocument()->waitFor(3, fn (): bool => $this->summaryPage->isOpen());
         }
+    }
+
+    public function hasBreadcrumbLink(string $taxon): bool
+    {
+        return $this->getElement('breadcrumb')->findLink($taxon) != null;
     }
 }
