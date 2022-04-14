@@ -1,0 +1,22 @@
+<div class="ui attached spaceless segment">
+    <table class="ui very basic table" style="padding-top: 20px">
+        <thead>
+        <tr>
+            <th></th>
+            <th>{{ 'sylius.ui.name'|trans }}</th>
+            <th>{{ 'sylius.ui.options'|trans }}</th>
+            <th>{{ 'sylius.ui.tracked'|trans }}</th>
+            <th>{{ 'sylius.ui.shipping_required'|trans }}</th>
+            <th>{{ 'sylius.ui.tax_category'|trans }}</th>
+            <th>{{ 'sylius.ui.current_stock'|trans }}</th>
+            <th style="padding-right: 15px;">{{ 'sylius.ui.actions'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody class="variants-accordion">
+        {% for variant in product.variants %}
+            {% include '@SyliusAdmin/Product/Show/_variantItem.html.twig' %}
+            {% include '@SyliusAdmin/Product/Show/_variantContent.html.twig' %}
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
