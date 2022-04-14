@@ -338,7 +338,7 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldSeeProductWith(string $field, string $value): void
     {
-        $response = $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
+        $response = $this->getLastResponse();
 
         Assert::true(
             $this->hasProductWithFieldValue($response, $field, $value),
@@ -351,7 +351,7 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldNotSeeAnyProductWith(string $field, string $value): void
     {
-        $response = $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
+        $response = $this->getLastResponse();
 
         Assert::false(
             $this->responseChecker->hasItemWithTranslation($response, 'en_US', $field, $value),
@@ -438,7 +438,7 @@ final class ManagingProductsContext implements Context
      */
     public function theFirstProductOnTheListShouldHave(string $field, string $value): void
     {
-        $response = $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
+        $response = $this->getLastResponse();
 
         $products = $this->responseChecker->getCollection($response);
 
@@ -552,5 +552,10 @@ final class ManagingProductsContext implements Context
         }
 
         return false;
+    }
+
+    private function getLastResponse(): Response
+    {
+        return $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
     }
 }
