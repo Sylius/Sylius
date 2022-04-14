@@ -105,8 +105,8 @@ Rule Types
 
 The types of rules that are configured in **Sylius** by default are:
 
-* **Order total greater than or equal** - checks if the order total is greater than or equal to a given amount
-* **Order total less than or equal** - checks if the order total is less than or equal to a given amount
+* **Items total greater than or equal** - checks if the order total is greater than or equal to a given amount
+* **Items total less than or equal** - checks if the order total is less than or equal to a given amount
 * **Total weight greater than or equal** - checks if the total weight of the order is greater than or equal to a given number
 * **Total weight less than or equal** - checks if the total weight of the order is less than or equal to a given number
 
