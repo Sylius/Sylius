@@ -16,13 +16,15 @@ namespace spec\Sylius\Bundle\ApiBundle\Swagger;
 use ApiPlatform\Core\Documentation\Documentation;
 use ApiPlatform\Core\Metadata\Resource\ResourceNameCollection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class AcceptLanguageHeaderDocumentationNormalizerSpec extends ObjectBehavior
 {
-    function let(NormalizerInterface $decoratedNormalizer): void
+    function let(NormalizerInterface $decoratedNormalizer, RepositoryInterface $localeRepository): void
     {
-        $this->beConstructedWith($decoratedNormalizer);
+        $this->beConstructedWith($decoratedNormalizer, $localeRepository);
     }
 
     function it_supports_normalization(NormalizerInterface $decoratedNormalizer): void
@@ -43,6 +45,9 @@ final class AcceptLanguageHeaderDocumentationNormalizerSpec extends ObjectBehavi
 
     function it_does_not_add_accept_language_header_to_paths_which_are_not_objects(
         NormalizerInterface $decoratedNormalizer,
+        RepositoryInterface $localeRepository,
+        LocaleInterface $locale1,
+        LocaleInterface $locale2
     ): void {
         $docs = [
             'paths' => [
@@ -55,6 +60,11 @@ final class AcceptLanguageHeaderDocumentationNormalizerSpec extends ObjectBehavi
         ];
 
         $documentation = new Documentation(new ResourceNameCollection());
+
+        $localeRepository->findAll()->willReturn([$locale1, $locale2]);
+
+        $locale1->getCode()->willReturn('en_US');
+        $locale2->getCode()->willReturn('de_DE');
 
         $decoratedNormalizer
             ->normalize($documentation, null, ['spec_version' => 3])
@@ -75,7 +85,12 @@ final class AcceptLanguageHeaderDocumentationNormalizerSpec extends ObjectBehavi
         ;
     }
 
-    function it_adds_accept_language_header_to_paths_which_are_objects(NormalizerInterface $decoratedNormalizer,): void
+    function it_adds_accept_language_header_to_paths_which_are_objects(
+        NormalizerInterface $decoratedNormalizer,
+        RepositoryInterface $localeRepository,
+        LocaleInterface $locale1,
+        LocaleInterface $locale2
+    ): void
     {
         $docs = [
             'paths' => [
@@ -90,6 +105,11 @@ final class AcceptLanguageHeaderDocumentationNormalizerSpec extends ObjectBehavi
         ];
 
         $documentation = new Documentation(new ResourceNameCollection());
+
+        $localeRepository->findAll()->willReturn([$locale1, $locale2]);
+
+        $locale1->getCode()->willReturn('en_US');
+        $locale2->getCode()->willReturn('de_DE');
 
         $decoratedNormalizer
             ->normalize($documentation, null, ['spec_version' => 3])
@@ -108,7 +128,8 @@ final class AcceptLanguageHeaderDocumentationNormalizerSpec extends ObjectBehavi
                                     'in' => 'header',
                                     'required' => false,
                                     'schema' => [
-                                        'type' => 'string'
+                                        'type' => 'string',
+                                        'enum' => ['en_US', 'de_DE']
                                     ],
                                 ],
                             ],
