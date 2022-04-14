@@ -1,5 +1,8 @@
 @viewing_products
-Feature: Viewing products sorted by first variant price
+Feature: Sorting products by first variant price
+    In order to see product variants sorted by their variant price
+    As a Visitor
+    I want to be able to see a properly sorted products by their discounted price
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -13,14 +16,14 @@ Feature: Viewing products sorted by first variant price
         And the product "Johnnie Walker" has "Johnnie Walker Red Label" variant priced at "$20.00"
         And the product "Johnnie Walker" has "Johnnie Walker Blue Label" variant priced at "$125.00"
 
-    @ui
+    @ui @api
     Scenario: Sorting products by price of their first variant with ascending order
         When I browse products from taxon "Whiskey"
         And I sort products by the lowest price first
         Then the first product on the list should have name "Johnnie Walker" and price "$20.00"
         And the last product on the list should have name "Jack Daniel's" and price "$50.00"
 
-    @ui
+    @ui @api
     Scenario: Sorting products by price of their first variant with descending order
         When I browse products from taxon "Whiskey"
         And I sort products by the highest price first

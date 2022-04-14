@@ -16,6 +16,14 @@ parameters:
     sylius.security.new_api_shop_regex: "^%sylius.security.new_api_shop_route%"
     sylius.security.new_api_user_account_route: "%sylius.security.new_api_shop_route%/account"
     sylius.security.new_api_user_account_regex: "^%sylius.security.new_api_user_account_route%"
+      
+sylius_api:
+    filter_eager_loading_extension:
+        restricted_operations:
+            shop_get:
+                resources:
+                    '%sylius.model.product.class%': ~
+        
 
 api_platform:
     patch_formats:
