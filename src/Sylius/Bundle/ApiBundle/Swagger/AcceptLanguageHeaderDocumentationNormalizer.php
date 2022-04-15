@@ -39,6 +39,7 @@ final class AcceptLanguageHeaderDocumentationNormalizer implements NormalizerInt
             'name' => 'Accept-Language',
             'in' => 'header',
             'required' => false,
+            'description' => 'Locales in this enum are all locales defined in the shop and only enabled ones will work in the given channel in the shop.',
             'schema' => [
                 'type' => 'string',
                 'enum' => array_map(
