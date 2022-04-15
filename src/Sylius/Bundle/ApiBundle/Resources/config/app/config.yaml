@@ -19,10 +19,10 @@ parameters:
       
 sylius_api:
     filter_eager_loading_extension:
-        restricted_operations:
-            shop_get:
-                resources:
-                    '%sylius.model.product.class%': ~
+        restricted_resources:
+            '%sylius.model.product.class%':
+                operations:
+                    shop_get: ~
         
 
 api_platform:
