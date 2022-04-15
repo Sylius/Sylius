@@ -141,6 +141,11 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request($this->request);
     }
 
+    public function resend(): Response
+    {
+        return $this->request($this->request);
+    }
+
     public function executeCustomRequest(RequestInterface $request): Response
     {
         $request->authorize($this->getToken(), $this->authorizationHeader);
