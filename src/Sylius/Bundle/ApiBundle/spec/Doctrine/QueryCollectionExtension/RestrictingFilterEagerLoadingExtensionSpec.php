@@ -19,14 +19,18 @@ use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\Product;
+use Sylius\Component\Core\Model\ProductReview;
 
-final class FilterEagerLoadingExtensionSpec extends ObjectBehavior
+final class RestrictingFilterEagerLoadingExtensionSpec extends ObjectBehavior
 {
     function let(ContextAwareQueryCollectionExtensionInterface $decoratedExtension): void
     {
         $this->beConstructedWith(
             $decoratedExtension,
-            ['shop_get' => ['resources' => [Product::class => ['enabled' => true]]]]
+            [
+                Product::class => ['operations' => ['shop_get' => ['enabled' => true]]],
+                ProductReview::class => ['operations' => ['shop_get' => ['enabled' => true], 'admin_get' => ['enabled' => false]]],
+            ]
         );
     }
 
@@ -58,6 +62,17 @@ final class FilterEagerLoadingExtensionSpec extends ObjectBehavior
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $args = [$queryBuilder, $queryNameGenerator, Product::class, 'admin_get', []];
+
+        $decoratedExtension->applyToCollection(...$args)->shouldBeCalled();
+        $this->applyToCollection(...$args);
+    }
+
+    public function it_calls_filter_eager_loading_extension_if_current_resource_is_restricted_but_operation_is_not(
+        ContextAwareQueryCollectionExtensionInterface $decoratedExtension,
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator
+    ): void {
+        $args = [$queryBuilder, $queryNameGenerator, ProductReview::class, 'admin_get', []];
 
         $decoratedExtension->applyToCollection(...$args)->shouldBeCalled();
         $this->applyToCollection(...$args);
