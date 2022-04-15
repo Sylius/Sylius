@@ -82,6 +82,7 @@
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ProductImageDocumentationNormalizer.inner" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\ProductImageFilterProviderInterface" />
+            <argument>%sylius.security.new_api_route%</argument>
         </service>
 
         <service
@@ -91,6 +92,7 @@
             decoration-priority="20"
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ProductSlugDocumentationNormalizer.inner" />
+            <argument>%sylius.security.new_api_route%</argument>
         </service>
 
         <service
