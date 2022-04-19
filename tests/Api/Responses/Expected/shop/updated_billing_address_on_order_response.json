@@ -1,0 +1,50 @@
+{
+    "shippingAddress": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "countryCode": "US",
+        "street": "Avenue",
+        "city": "New York",
+        "postcode": "90000"
+    },
+    "billingAddress": {
+        "firstName": "Jane",
+        "lastName": "Doe",
+        "countryCode": "US",
+        "street": "Top secret",
+        "city": "Nebraska",
+        "postcode": "12343",
+        "phoneNumber": "666111333",
+        "company": "Potato Corp."
+    },
+    "payments": [
+        {
+            "method": {
+                "name": "Cash on delivery"
+            }
+        }
+    ],
+    "shipments": [
+        {
+            "method": "\/api\/v2\/shop\/shipping-methods\/UPS"
+        }
+    ],
+    "localeCode": "en_US",
+    "checkoutState": "completed",
+    "tokenValue": "nAWw2jewpA",
+    "id": @integer@,
+    "number": "000000001",
+    "items": [
+        {
+            "variant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
+            "productName": "Mug",
+            "id": @integer@,
+            "quantity": 3
+        }
+    ],
+    "itemsTotal": 6000,
+    "total": 6500,
+    "taxTotal": 0,
+    "shippingTotal": 500,
+    "orderPromotionTotal": 0
+}
