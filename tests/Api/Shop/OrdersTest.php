@@ -16,6 +16,7 @@ namespace Sylius\Tests\Api\Shop;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -255,5 +256,71 @@ final class OrdersTest extends JsonApiTestCase
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/create_cart_with_default_locale_response', Response::HTTP_CREATED);
+    }
+
+    /** @test */
+    public function it_allows_to_patch_orders_address(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+
+        $loginData = $this->logInShopUser('oliver@doe.com');
+        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
+        $header = array_merge($header, self::CONTENT_TYPE_HEADER);
+
+        $tokenValue = 'nAWw2jewpA';
+
+        $this->placeOrder($tokenValue, 'oliver@doe.com');
+
+        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], $header);
+        $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->client->request(
+            'PATCH',
+            sprintf('/api/v2/shop/account/orders/nAWw2jewpA/payments/%s',$orderResponse['payments'][0]['id']),
+            [],
+            [],
+            [
+                'CONTENT_TYPE' => 'application/merge-patch+json',
+                'HTTP_Authorization' => sprintf('Bearer %s', $loginData)
+            ],
+            json_encode([
+                'paymentMethod' => '/api/v2/shop/payment-methods/CASH_ON_DELIVERY',
+            ])
+        );
+
+        /** @var CountryInterface $country */
+        $country = $fixtures['country_US'];
+
+        $billingAddress = [
+            'firstName'=> 'Jane',
+            'lastName'=> 'Doe',
+            'phoneNumber'=> '666111333',
+            'company'=> 'Potato Corp.',
+            'countryCode'=> $country->getCode(),
+            'provinceCode'=> null,
+            'provinceName'=> null,
+            'street'=> 'Top secret',
+            'city'=> 'Nebraska',
+            'postcode'=> '12343'
+        ];
+
+        $this->client->request(
+            'PATCH',
+            '/api/v2/shop/orders/nAWw2jewpA/address',
+            [],
+            [],
+            [
+                'CONTENT_TYPE' => 'application/merge-patch+json',
+                'HTTP_Authorization' => sprintf('Bearer %s', $loginData)
+            ],
+            json_encode([
+                'email' => 'oliver@doe.com',
+                'billingAddress' => $billingAddress,
+            ])
+        );
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/updated_billing_address_on_order_response', Response::HTTP_OK);
     }
 }
