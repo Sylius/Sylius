@@ -270,8 +270,8 @@ final class OrdersTest extends JsonApiTestCase
         ];
 
         $this->client->request(
-            'PATCH',
-            '/api/v2/shop/orders/nAWw2jewpA/address',
+            'PUT',
+            '/api/v2/shop/orders/nAWw2jewpA',
             [],
             [],
             [
@@ -279,7 +279,6 @@ final class OrdersTest extends JsonApiTestCase
                 'HTTP_Authorization' => sprintf('Bearer %s', $loginData)
             ],
             json_encode([
-                'email' => 'oliver@doe.com',
                 'billingAddress' => $billingAddress,
             ])
         );
