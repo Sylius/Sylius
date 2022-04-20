@@ -253,7 +253,6 @@ final class OrdersTest extends JsonApiTestCase
             [
                 'CONTENT_TYPE' => 'application/ld+json',
                 'HTTP_ACCEPT' => 'application/ld+json',
-                'HTTP_Authorization' => sprintf('Bearer %s', $loginData)
             ],
             json_encode([
                 'email' => 'oliver@doe.com',
