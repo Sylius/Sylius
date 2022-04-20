@@ -26,7 +26,7 @@ const updateSlug = function updateSlug(element) {
       locale: element.closest('[data-locale]').data('locale'),
       parentId: slugInput.attr('data-parent'),
     };
-  } else if ($('#sylius_taxon_parent').length > 0 && $('#sylius_taxon_parent').is(':visible') && $('#sylius_taxon_parent').val() != '') {
+  } else if ($('#sylius_taxon_parent').length > 0 && $('#sylius_taxon_parent').val() != '') {
     data = {
       name: element.val(),
       locale: element.closest('[data-locale]').data('locale'),

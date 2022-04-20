@@ -34,7 +34,7 @@ final class TaxonSlugController
     {
         $name = (string) $request->query->get('name');
         $locale = (string) $request->query->get('locale');
-        $parentId = $request->query->get('parentId');
+        $parentCode = $request->query->get('parentCode');
 
         /** @var TaxonInterface $taxon */
         $taxon = $this->taxonFactory->createNew();
@@ -42,8 +42,8 @@ final class TaxonSlugController
         $taxon->setFallbackLocale($locale);
         $taxon->setName($name);
 
-        if (null !== $parentId) {
-            $taxon->setParent($this->taxonRepository->find($parentId));
+        if (null !== $parentCode) {
+            $taxon->setParent($this->taxonRepository->findOneBy(['code' => $parentCode]));
         }
 
         return new JsonResponse([
