@@ -1,0 +1,7 @@
+{% include '@SyliusAdmin/Order/Label/PaymentState/' ~ order.paymentState ~ '.html.twig' with { 'value': 'sylius.ui.' ~ order.paymentState, 'attached': true } %}
+<h3 class="ui dividing header">{{ 'sylius.ui.payments'|trans }}</h3>
+<div class="ui relaxed divided list" id="sylius-payments">
+    {% for payment in order.payments %}
+        {% include '@SyliusAdmin/Order/Show/_payment.html.twig' %}
+    {% endfor %}
+</div>

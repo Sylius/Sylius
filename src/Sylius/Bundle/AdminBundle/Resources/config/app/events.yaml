@@ -640,6 +640,12 @@ sylius_ui:
                     template: '@SyliusAdmin/Order/Show/_headerItems.html.twig'
                     priority: 10
 
+        sylius.admin.order.show.payments_content:
+            blocks:
+                content:
+                    template: '@SyliusAdmin/Order/Show/_paymentsContent.html.twig'
+                    priority: 10
+
         sylius.admin.order.show.payment_content:
             blocks:
                 header:
