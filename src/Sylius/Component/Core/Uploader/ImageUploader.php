@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Uploader;
 
 use enshrined\svgSanitize\Sanitizer;
-use Gaufrette\Filesystem;
+use Gaufrette\FilesystemInterface;
 use Sylius\Component\Core\Generator\ImagePathGeneratorInterface;
 use Sylius\Component\Core\Generator\UploadedImagePathGenerator;
 use Sylius\Component\Core\Model\ImageInterface;
@@ -26,7 +26,7 @@ class ImageUploader implements ImageUploaderInterface
     private const MIME_SVG_XML = 'image/svg+xml';
     private const MIME_SVG = 'image/svg';
 
-    /** @var Filesystem */
+    /** @var FilesystemInterface */
     protected $filesystem;
 
     /** @var ImagePathGeneratorInterface */
@@ -36,7 +36,7 @@ class ImageUploader implements ImageUploaderInterface
     protected $sanitizer;
 
     public function __construct(
-        Filesystem $filesystem,
+        FilesystemInterface $filesystem,
         ?ImagePathGeneratorInterface $imagePathGenerator = null
     ) {
         $this->filesystem = $filesystem;
