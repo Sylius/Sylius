@@ -20,7 +20,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 //file that was distributed with this source code.',
 //    ]);
 
-    $containerConfigurator->parameters()->set(Option::SKIP, [
+    $parameters = $containerConfigurator->parameters();
+    $parameters->set(Option::PARALLEL, true);
+    $parameters->set(Option::SKIP, [
         InlineDocCommentDeclarationSniff::class . '.MissingVariable',
         InlineDocCommentDeclarationSniff::class . '.NoAssignment',
         VisibilityRequiredFixer::class => ['*Spec.php'],
