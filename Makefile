@@ -26,3 +26,6 @@ spec:
 
 behat:
 	vendor/bin/behat --colors --strict --stop-on-failure --no-interaction -vvv -f progress
+
+profile:
+	docker-compose exec blackfire blackfire curl -L http://app
