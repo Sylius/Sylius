@@ -128,6 +128,7 @@
             decoration-priority="20"
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\AcceptLanguageHeaderDocumentationNormalizer.inner" />
+            <argument type="service" id="sylius.repository.locale" />
         </service>
     </services>
 </container>
