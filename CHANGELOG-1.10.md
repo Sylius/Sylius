@@ -1,5 +1,24 @@
 # CHANGELOG FOR `1.10.X`
 
+## v1.10.13 (2022-04-22)
+
+#### Details
+
+- [#13601](https://github.com/Sylius/Sylius/issues/13601) Use the Gaufrette FilesystemInterface instead of a concrete implementation ([@GSadee](https://github.com/GSadee), [@mbabker](https://github.com/mbabker))
+- [#13841](https://github.com/Sylius/Sylius/issues/13841) [Maintenance] Add note to UPGRADE file about dropping Symfony 5.2 support ([@GSadee](https://github.com/GSadee))
+- [#13848](https://github.com/Sylius/Sylius/issues/13848) [DOCS] Update index tip ([@arti0090](https://github.com/arti0090))
+- [#13852](https://github.com/Sylius/Sylius/issues/13852) [Maintenance] Run the build on tags rather than on releases ([@Zales0123](https://github.com/Zales0123))
+- [#13857](https://github.com/Sylius/Sylius/issues/13857) [DOC] Bump minimal PHP version needed to install Sylius ([@Roshyo](https://github.com/Roshyo))
+- [#13865](https://github.com/Sylius/Sylius/issues/13865) [Cart] Add Validator for localeCode ([@SirDomin](https://github.com/SirDomin))
+- [#13866](https://github.com/Sylius/Sylius/issues/13866) [Maintenance] Relax conflict on liip imagine bundle - rebased version ([@Nek-](https://github.com/Nek-))
+- [#13867](https://github.com/Sylius/Sylius/issues/13867) [Template][Events] Sylius template events - improvements ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13870](https://github.com/Sylius/Sylius/issues/13870) [ShippingMethod] Change shipping rule to be based on items total instead of order total ([@GSadee](https://github.com/GSadee), [@mdevlamynck](https://github.com/mdevlamynck))
+- [#13878](https://github.com/Sylius/Sylius/issues/13878) [Template] Variant name instead of product name ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13886](https://github.com/Sylius/Sylius/issues/13886) [Templates][Admin] Refactor order payments template to use events ([@coldic3](https://github.com/coldic3))
+- [#13888](https://github.com/Sylius/Sylius/issues/13888) [Documentation] Fix the description of items total shipping rules ([@GSadee](https://github.com/GSadee))
+- [#13890](https://github.com/Sylius/Sylius/issues/13890) [maintenance]Fix ECS HeaderCommentFixer ([@Ferror](https://github.com/Ferror))
+- [#13891](https://github.com/Sylius/Sylius/issues/13891) [maintenance]Run ECS in parallel ([@Ferror](https://github.com/Ferror))
+
 ## v1.10.12 (2022-04-08)
 
 #### Details
