@@ -17,20 +17,13 @@ use Sylius\Bundle\ApiBundle\Provider\ProductImageFilterProviderInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /** @experimental */
-class ProductImageDocumentationNormalizer implements NormalizerInterface
+final class ProductImageDocumentationNormalizer implements NormalizerInterface
 {
-    private const SHOP_ITEM_PATH = '/api/v2/shop/product-images/{id}';
-
-    /** @var NormalizerInterface */
-    private $decoratedNormalizer;
-
-    /** @var ProductImageFilterProviderInterface */
-    private $filterProvider;
-
-    public function __construct(NormalizerInterface $decoratedNormalizer, ProductImageFilterProviderInterface $filterProvider)
-    {
-        $this->decoratedNormalizer = $decoratedNormalizer;
-        $this->filterProvider = $filterProvider;
+    public function __construct(
+        private NormalizerInterface $decoratedNormalizer,
+        private ProductImageFilterProviderInterface $filterProvider,
+        private string $apiRoute
+    ) {
     }
 
     public function supportsNormalization($data, $format = null)
@@ -45,17 +38,18 @@ class ProductImageDocumentationNormalizer implements NormalizerInterface
         $enums = $this->filterProvider->provideShopFilters();
         $enums = array_keys($enums);
 
-        $params = $docs['paths'][self::SHOP_ITEM_PATH]['get']['parameters'];
+        $shopProductImagePath = $this->apiRoute . '/shop/product-images/{id}';
+        $params = $docs['paths'][$shopProductImagePath]['get']['parameters'];
 
-        foreach ($params as $index => $param) {
+        foreach ($params as &$param) {
             if ($param['in'] === 'query') {
                 if (is_string($param['schema']['enum']) || $param['schema']['enum'] === null) {
-                    $docs['paths'][self::SHOP_ITEM_PATH]['get']['parameters'][$index]['schema']['enum'] = $enums;
+                    $param['schema']['enum'] = $enums;
 
                     break;
                 }
 
-                $docs['paths'][self::SHOP_ITEM_PATH]['get']['parameters'][$index]['schema']['enum'] = array_merge($param['schema']['enum'], $enums);
+                $param['schema']['enum'] = array_merge($param['schema']['enum'], $enums);
             }
         }
 

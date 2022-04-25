@@ -18,10 +18,10 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 /** @experimental */
 final class ProductSlugDocumentationNormalizer implements NormalizerInterface
 {
-    private const PRODUCT_SLUG_PATH = '/api/v2/shop/products-by-slug/{slug}';
-
-    public function __construct(private NormalizerInterface $decoratedNormalizer)
-    {
+    public function __construct(
+        private NormalizerInterface $decoratedNormalizer,
+        private string $apiRoute
+    ) {
     }
 
     public function supportsNormalization($data, $format = null): bool
@@ -33,11 +33,12 @@ final class ProductSlugDocumentationNormalizer implements NormalizerInterface
     {
         $docs = $this->decoratedNormalizer->normalize($object, $format, $context);
 
-        $params = $docs['paths'][self::PRODUCT_SLUG_PATH]['get']['parameters'];
+        $shopProductBySlugPath = $this->apiRoute . '/shop/products-by-slug/{slug}';
+        $params = $docs['paths'][$shopProductBySlugPath]['get']['parameters'];
 
         foreach ($params as $index => $param) {
             if ($param['name'] === 'code') {
-                unset($docs['paths'][self::PRODUCT_SLUG_PATH]['get']['parameters'][$index]);
+                unset($docs['paths'][$shopProductBySlugPath]['get']['parameters'][$index]);
             }
         }
 
