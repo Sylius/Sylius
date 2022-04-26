@@ -22,6 +22,7 @@ final class RequestFactory implements RequestFactoryInterface
 
     public function __construct(
         private ContentTypeGuideInterface $contentTypeGuide,
+        private string $apiUrlPrefix,
     ) {
     }
 
@@ -32,7 +33,7 @@ final class RequestFactory implements RequestFactoryInterface
         ?string $token = null
     ): RequestInterface {
         $builder = RequestBuilder::create(
-            sprintf('/api/v2/%s/%s', $section, $resource),
+            sprintf('%s/%s/%s', $this->apiUrlPrefix, $section, $resource),
             HttpRequest::METHOD_GET,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
@@ -47,7 +48,7 @@ final class RequestFactory implements RequestFactoryInterface
     public function subResourceIndex(string $section, string $resource, string $id, string $subResource): RequestInterface
     {
         $builder = RequestBuilder::create(
-            sprintf('/api/v2/%s/%s/%s/%s', $section, $resource, $id, $subResource),
+            sprintf('%s/%s/%s/%s/%s', $this->apiUrlPrefix, $section, $resource, $id, $subResource),
             HttpRequest::METHOD_GET,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
@@ -63,7 +64,7 @@ final class RequestFactory implements RequestFactoryInterface
         ?string $token = null
     ): RequestInterface {
         $builder = RequestBuilder::create(
-            sprintf('/api/v2/%s/%s/%s', $section, $resource, $id),
+            sprintf('%s/%s/%s/%s', $this->apiUrlPrefix, $section, $resource, $id),
             HttpRequest::METHOD_GET,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
@@ -82,7 +83,7 @@ final class RequestFactory implements RequestFactoryInterface
         ?string $token = null
     ): RequestInterface {
         $builder = RequestBuilder::create(
-            sprintf('/api/v2/%s/%s', $section, $resource),
+            sprintf('%s/%s/%s', $this->apiUrlPrefix, $section, $resource),
             HttpRequest::METHOD_POST,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
@@ -103,7 +104,7 @@ final class RequestFactory implements RequestFactoryInterface
         ?string $token = null
     ): RequestInterface {
         $builder = RequestBuilder::create(
-            sprintf('/api/v2/%s/%s/%s', $section, $resource, $id),
+            sprintf('%s/%s/%s/%s', $this->apiUrlPrefix, $section, $resource, $id),
             HttpRequest::METHOD_PUT,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
@@ -124,7 +125,7 @@ final class RequestFactory implements RequestFactoryInterface
         ?string $token = null
     ): RequestInterface {
         $builder = RequestBuilder::create(
-            sprintf('/api/v2/%s/%s/%s', $section, $resource, $id),
+            sprintf('%s/%s/%s/%s', $this->apiUrlPrefix, $section, $resource, $id),
             HttpRequest::METHOD_DELETE,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
@@ -138,13 +139,13 @@ final class RequestFactory implements RequestFactoryInterface
 
     public function transition(string $section, string $resource, string $id, string $transition): RequestInterface
     {
-        return self::customItemAction($section, $resource, $id, HttpRequest::METHOD_PATCH, $transition);
+        return $this->customItemAction($section, $resource, $id, HttpRequest::METHOD_PATCH, $transition);
     }
 
     public function customItemAction(string $section, string $resource, string $id, string $type, string $action): RequestInterface
     {
         $builder = RequestBuilder::create(
-            sprintf('/api/v2/%s/%s/%s/%s', $section, $resource, $id, $action),
+            sprintf('%s/%s/%s/%s/%s', $this->apiUrlPrefix, $section, $resource, $id, $action),
             $type,
         );
         $builder->withHeader('CONTENT_TYPE', $this->contentTypeGuide->guide($type));
@@ -160,7 +161,7 @@ final class RequestFactory implements RequestFactoryInterface
         ?string $token = null
     ): RequestInterface {
         $builder = RequestBuilder::create(
-            sprintf('/api/v2/%s/%s', $section, $resource),
+            sprintf('%s/%s/%s', $this->apiUrlPrefix, $section, $resource),
             HttpRequest::METHOD_POST,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);

@@ -32,7 +32,7 @@ final class RegistrationContext implements Context
         private LoginContext $loginContext,
         private SharedStorageInterface $sharedStorage,
         private ResponseCheckerInterface $responseChecker,
-        private string $apiRoute
+        private string $apiUrlPrefix
     ) {
     }
 
@@ -108,7 +108,7 @@ final class RegistrationContext implements Context
 
         $this->client->request(
             'PATCH',
-            \sprintf('%s/shop/account-verification-requests/%s', $this->apiRoute, $token),
+            \sprintf('%s/shop/account-verification-requests/%s', $this->apiUrlPrefix, $token),
             [],
             [],
             ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/merge-patch+json'],
@@ -142,7 +142,7 @@ final class RegistrationContext implements Context
     {
         $this->client->request(
             'POST',
-            sprintf('%s/shop/customers', $this->apiRoute),
+            sprintf('%s/shop/customers', $this->apiUrlPrefix),
             [],
             [],
             ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/ld+json'],

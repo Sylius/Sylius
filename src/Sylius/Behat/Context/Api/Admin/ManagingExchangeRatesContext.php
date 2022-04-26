@@ -28,7 +28,7 @@ final class ManagingExchangeRatesContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
-        private string $apiRoute
+        private string $apiUrlPrefix
     ) {
     }
 
@@ -79,7 +79,7 @@ final class ManagingExchangeRatesContext implements Context
     {
         $this->client->addRequestData(
             'sourceCurrency',
-            sprintf('%s/admin/currencies/%s', $this->apiRoute, $currencyCode)
+            sprintf('%s/admin/currencies/%s', $this->apiUrlPrefix, $currencyCode)
         );
     }
 
@@ -90,7 +90,7 @@ final class ManagingExchangeRatesContext implements Context
     {
         $this->client->addRequestData(
             'targetCurrency',
-            sprintf('%s/admin/currencies/%s', $this->apiRoute, $currencyCode)
+            sprintf('%s/admin/currencies/%s', $this->apiUrlPrefix, $currencyCode)
         );
     }
 
@@ -347,7 +347,7 @@ final class ManagingExchangeRatesContext implements Context
 
         $this->client->addRequestData(
             $currencyType,
-            sprintf('%s/admin/currencies/EUR', $this->apiRoute)
+            sprintf('%s/admin/currencies/EUR', $this->apiUrlPrefix)
         );
         $this->client->update();
 
@@ -356,7 +356,7 @@ final class ManagingExchangeRatesContext implements Context
                 $this->client->index(Resources::EXCHANGE_RATES),
                 0,
                 $currencyType,
-                sprintf('%s/admin/currencies/EUR', $this->apiRoute)
+                sprintf('%s/admin/currencies/EUR', $this->apiUrlPrefix)
             ),
             sprintf('It was possible to change %s', $currencyType)
         );
@@ -369,8 +369,8 @@ final class ManagingExchangeRatesContext implements Context
         /** @var array $item */
         foreach ($this->responseChecker->getCollection($this->client->index(Resources::EXCHANGE_RATES)) as $item) {
             if (
-                $item['sourceCurrency'] === sprintf('%s/admin/currencies/%s', $this->apiRoute, $sourceCurrency->getCode()) &&
-                $item['targetCurrency'] === sprintf('%s/admin/currencies/%s', $this->apiRoute, $targetCurrency->getCode())
+                $item['sourceCurrency'] === sprintf('%s/admin/currencies/%s', $this->apiUrlPrefix, $sourceCurrency->getCode()) &&
+                $item['targetCurrency'] === sprintf('%s/admin/currencies/%s', $this->apiUrlPrefix, $targetCurrency->getCode())
             ) {
                 return $item;
             }

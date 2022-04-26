@@ -38,6 +38,7 @@ final class CustomerContext implements Context
         private LoginContext $loginContext,
         private ShopSecurityContext $shopApiSecurityContext,
         private RequestFactoryInterface $requestFactory,
+        private string $apiUrlPrefix,
     ) {
     }
 
@@ -470,7 +471,7 @@ final class CustomerContext implements Context
     private function verifyAccount(string $token): void
     {
         $request = $this->requestFactory->custom(
-            \sprintf('/shop/account-verification-requests/%s', $token),
+            \sprintf('%s/shop/account-verification-requests/%s', $this->apiUrlPrefix, $token),
             HttpRequest::METHOD_PATCH,
         );
 

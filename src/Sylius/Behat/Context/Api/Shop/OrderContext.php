@@ -37,13 +37,14 @@ use Webmozart\Assert\Assert;
 final class OrderContext implements Context
 {
     public function __construct(
-        private ApiClientInterface $shopClient,
-        private ApiClientInterface $adminClient,
+        private ApiClientInterface       $shopClient,
+        private ApiClientInterface       $adminClient,
         private ResponseCheckerInterface $responseChecker,
-        private SharedStorageInterface $sharedStorage,
-        private IriConverterInterface $iriConverter,
+        private SharedStorageInterface   $sharedStorage,
+        private IriConverterInterface    $iriConverter,
         private SecurityServiceInterface $securityService,
-        private RequestFactoryInterface $requestFactory,
+        private RequestFactoryInterface  $requestFactory,
+        private string                   $apiUrlPrefix,
     ) {
     }
 
@@ -57,7 +58,8 @@ final class OrderContext implements Context
 
         $request = $this->requestFactory->custom(
             sprintf(
-                '/shop/account/orders/%s/payments/%s',
+                '%s/shop/account/orders/%s/payments/%s',
+                $this->apiUrlPrefix,
                 $order->getTokenValue(),
                 (string) $order->getPayments()->first()->getId()
             ),
@@ -380,7 +382,7 @@ final class OrderContext implements Context
     private function getAdjustmentsForOrderItem(string $itemId): array
     {
         $response = $this->shopClient->customAction(
-            sprintf('/shop/orders/%s/items/%s/adjustments', $this->sharedStorage->get('cart_token'), $itemId),
+            sprintf('%s/shop/orders/%s/items/%s/adjustments', $this->sharedStorage->get('cart_token'), $itemId),
             HttpRequest::METHOD_GET
         );
 

@@ -36,7 +36,7 @@ final class ManagingProductsContext implements Context
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
         private SharedStorageInterface $sharedStorage,
-        private string $apiRoute
+        private string $apiUrlPrefix
     ) {
     }
 
@@ -362,7 +362,7 @@ final class ManagingProductsContext implements Context
                 $this->client->getLastResponse(),
                 0,
                 'code',
-                sprintf('%s/admin/products/_NEW', $this->apiRoute)
+                sprintf('%s/admin/products/_NEW', $this->apiUrlPrefix)
             ),
             sprintf('It was possible to change %s', '_NEW')
         );

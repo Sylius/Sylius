@@ -24,7 +24,7 @@ final class HomepageContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private string $apiRoute
+        private string $apiUrlPrefix
     ) {
     }
 
@@ -34,7 +34,7 @@ final class HomepageContext implements Context
     public function iCheckLatestProducts(): void
     {
         $this->client->customAction(
-            sprintf('%s/shop/products?itemsPerPage=3&order[createdAt]=desc', $this->apiRoute),
+            sprintf('%s/shop/products?itemsPerPage=3&order[createdAt]=desc', $this->apiUrlPrefix),
             HttpRequest::METHOD_GET
         );
     }
@@ -44,7 +44,7 @@ final class HomepageContext implements Context
      */
     public function iCheckAvailableTaxons(): void
     {
-        $this->client->customAction(sprintf('%s/shop/taxons', $this->apiRoute), HttpRequest::METHOD_GET);
+        $this->client->customAction(sprintf('%s/shop/taxons', $this->apiUrlPrefix), HttpRequest::METHOD_GET);
     }
 
     /**

@@ -23,7 +23,7 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
 
     public function __construct(
         private AbstractBrowser $client,
-        private string $apiRoute,
+        private string $apiUrlPrefix,
         private string $section,
         private SharedStorageInterface $sharedStorage
     ) {
@@ -31,7 +31,7 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
 
     public function prepareLoginRequest(): void
     {
-        $this->request['url'] = sprintf('%s/%s/authentication-token', $this->apiRoute, $this->section);
+        $this->request['url'] = sprintf('%s/%s/authentication-token', $this->apiUrlPrefix, $this->section);
         $this->request['method'] = 'POST';
     }
 

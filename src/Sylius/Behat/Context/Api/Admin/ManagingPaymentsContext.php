@@ -31,7 +31,7 @@ final class ManagingPaymentsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
-        private string $apiRoute
+        private string $apiUrlPrefix
     ) {
     }
 
@@ -134,7 +134,7 @@ final class ManagingPaymentsContext implements Context
             $this->client->getLastResponse(),
             $position - 1,
             'order',
-            sprintf('%s/admin/orders/%s', $this->apiRoute, $order->getTokenValue())
+            sprintf('%s/admin/orders/%s', $this->apiUrlPrefix, $order->getTokenValue())
         ));
     }
 
