@@ -15,7 +15,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\Request;
+use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Context\Setup\ShopSecurityContext;
@@ -28,34 +28,17 @@ use Webmozart\Assert\Assert;
 
 final class CustomerContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private RegistrationContext $registrationContext;
-
-    private LoginContext $loginContext;
-
-    private ShopSecurityContext $shopApiSecurityContext;
-
     private ?string $verificationToken = '';
 
     public function __construct(
-        ApiClientInterface $client,
-        SharedStorageInterface $sharedStorage,
-        ResponseCheckerInterface $responseChecker,
-        RegistrationContext $registrationContext,
-        LoginContext $loginContext,
-        ShopSecurityContext $shopApiSecurityContext
+        private ApiClientInterface $client,
+        private SharedStorageInterface $sharedStorage,
+        private ResponseCheckerInterface $responseChecker,
+        private RegistrationContext $registrationContext,
+        private LoginContext $loginContext,
+        private ShopSecurityContext $shopApiSecurityContext,
+        private RequestFactoryInterface $requestFactory,
     ) {
-        $this->client = $client;
-        $this->sharedStorage = $sharedStorage;
-        $this->responseChecker = $responseChecker;
-        $this->registrationContext = $registrationContext;
-        $this->loginContext = $loginContext;
-        $this->shopApiSecurityContext = $shopApiSecurityContext;
     }
 
     /**
@@ -486,7 +469,7 @@ final class CustomerContext implements Context
 
     private function verifyAccount(string $token): void
     {
-        $request = Request::custom(
+        $request = $this->requestFactory->custom(
             \sprintf('/api/v2/shop/account-verification-requests/%s', $token),
             HttpRequest::METHOD_PATCH,
         );
@@ -496,7 +479,7 @@ final class CustomerContext implements Context
 
     private function registerAccount(?string $email = 'example@example.com', ?string $password = 'example'): void
     {
-        $request = Request::create('shop', Resources::CUSTOMERS, '');
+        $request = $this->requestFactory->create('shop', Resources::CUSTOMERS, '');
 
         $request->setContent([
             'firstName' => 'First',
@@ -510,7 +493,7 @@ final class CustomerContext implements Context
 
     private function resendVerificationEmail(string $email): void
     {
-        $request = Request::create('shop', 'account-verification-requests', 'Bearer');
+        $request = $this->requestFactory->create('shop', 'account-verification-requests', 'Bearer');
 
         $request->setContent(['email' => $email]);
 

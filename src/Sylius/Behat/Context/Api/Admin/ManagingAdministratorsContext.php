@@ -16,38 +16,27 @@ namespace Sylius\Behat\Context\Api\Admin;
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\RequestBuilder;
+use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
 final class ManagingAdministratorsContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private IriConverterInterface $iriConverter;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private \ArrayAccess $minkParameters;
-
     public function __construct(
-        ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter,
-        SharedStorageInterface $sharedStorage,
-        \ArrayAccess $minkParameters
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private IriConverterInterface $iriConverter,
+        private SharedStorageInterface $sharedStorage,
+        private \ArrayAccess $minkParameters,
+        private RequestFactoryInterface $requestFactory,
     ) {
-        $this->client = $client;
-        $this->responseChecker = $responseChecker;
-        $this->iriConverter = $iriConverter;
-        $this->sharedStorage = $sharedStorage;
-        $this->minkParameters = $minkParameters;
     }
 
     /**
@@ -158,10 +147,17 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iUploadTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
     {
-        $this->client->buildUploadRequest(Resources::AVATAR_IMAGES);
-        $this->client->addParameter('owner', $this->iriConverter->getIriFromItem($administrator));
-        $this->client->addFile('file', new UploadedFile($this->minkParameters['files_path'] . $avatar, basename($avatar)));
-        $response = $this->client->upload();
+        $builder = RequestBuilder::create(
+            sprintf('/api/v2/%s/%s', 'admin', Resources::AVATAR_IMAGES),
+            Request::METHOD_POST,
+        );
+        $builder->withHeader('CONTENT_TYPE', 'multipart/form-data');
+        $builder->withHeader('HTTP_ACCEPT', 'application/ld+json');
+        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withParameter('owner', $this->iriConverter->getIriFromItem($administrator));
+        $builder->withFile('file', new UploadedFile($this->minkParameters['files_path'] . $avatar, basename($avatar)));
+
+        $response = $this->client->request($builder->build());
 
         $this->sharedStorage->set(StringInflector::nameToCode($avatar), $this->responseChecker->getValue($response, '@id'));
     }
