@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\PayumBundle\Extension;
 
+use Exception;
 use Payum\Core\Extension\Context;
 use Payum\Core\Extension\ExtensionInterface;
 use Payum\Core\GatewayInterface;
@@ -98,6 +99,7 @@ final class UpdatePaymentStateExtensionSpec extends ObjectBehavior
         FactoryInterface $factory,
         StateMachineInterface $stateMachine
     ): void {
+        $context->getException()->willReturn(null);
         $context->getRequest()->willReturn($request);
         $request->getModel()->willReturn($payment);
         $payment->getId()->willReturn(1);
@@ -132,6 +134,7 @@ final class UpdatePaymentStateExtensionSpec extends ObjectBehavior
         FactoryInterface $factory,
         StateMachineInterface $stateMachine
     ): void {
+        $context->getException()->willReturn(null);
         $previousContext->getRequest()->willReturn($previousRequest);
         $previousRequest->getModel()->willReturn($previousPayment);
         $previousPayment->getId()->willReturn(1);
@@ -162,6 +165,7 @@ final class UpdatePaymentStateExtensionSpec extends ObjectBehavior
         Context $context,
         TokenAggregateInterface $request
     ): void {
+        $context->getException()->willReturn(null);
         $context->getRequest()->willReturn($request);
 
         $context->getPrevious()->willReturn([1]);
@@ -173,6 +177,7 @@ final class UpdatePaymentStateExtensionSpec extends ObjectBehavior
         Context $context,
         TokenAggregateInterface $request
     ): void {
+        $context->getException()->willReturn(null);
         $context->getRequest()->willReturn($request);
 
         $context->getPrevious()->willReturn([]);
@@ -185,10 +190,21 @@ final class UpdatePaymentStateExtensionSpec extends ObjectBehavior
         ModelAggregateInterface $request,
         PayumPaymentInterface $model
     ): void {
+        $context->getException()->willReturn(null);
         $context->getRequest()->willReturn($request);
         $request->getModel()->willReturn($model);
 
         $context->getPrevious()->willReturn([]);
+
+        $this->onPostExecute($context);
+    }
+
+    public function it_onPostExecute_with_exception_does_nothing(
+        Context $context,
+        TokenAggregateInterface $request
+    ): void {
+        $exception = new Exception();
+        $context->getException()->willReturn($exception);
 
         $this->onPostExecute($context);
     }
