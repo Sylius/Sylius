@@ -382,7 +382,7 @@ final class OrderContext implements Context
     private function getAdjustmentsForOrderItem(string $itemId): array
     {
         $response = $this->shopClient->customAction(
-            sprintf('%s/shop/orders/%s/items/%s/adjustments', $this->sharedStorage->get('cart_token'), $itemId),
+            sprintf('%s/shop/orders/%s/items/%s/adjustments', $this->apiUrlPrefix, $this->sharedStorage->get('cart_token'), $itemId),
             HttpRequest::METHOD_GET
         );
 
