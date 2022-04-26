@@ -31,24 +31,13 @@ final class ManagingProductsContext implements Context
 {
     public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
 
-    private ApiClientInterface $client;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private IriConverterInterface $iriConverter;
-
-    private SharedStorageInterface $sharedStorage;
-
     public function __construct(
-        ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter,
-        SharedStorageInterface $sharedStorage
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private IriConverterInterface $iriConverter,
+        private SharedStorageInterface $sharedStorage,
+        private string $apiRoute
     ) {
-        $this->client = $client;
-        $this->responseChecker = $responseChecker;
-        $this->iriConverter = $iriConverter;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -373,7 +362,7 @@ final class ManagingProductsContext implements Context
                 $this->client->getLastResponse(),
                 0,
                 'code',
-                '/api/v2/admin/products/_NEW'
+                sprintf('%s/admin/products/_NEW', $this->apiRoute)
             ),
             sprintf('It was possible to change %s', '_NEW')
         );

@@ -27,20 +27,12 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPaymentsContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private IriConverterInterface $iriConverter;
-
     public function __construct(
-        ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private IriConverterInterface $iriConverter,
+        private string $apiRoute
     ) {
-        $this->client = $client;
-        $this->responseChecker = $responseChecker;
-        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -142,7 +134,7 @@ final class ManagingPaymentsContext implements Context
             $this->client->getLastResponse(),
             $position - 1,
             'order',
-            sprintf('/api/v2/admin/orders/%s', $order->getTokenValue())
+            sprintf('%s/admin/orders/%s', $this->apiRoute, $order->getTokenValue())
         ));
     }
 

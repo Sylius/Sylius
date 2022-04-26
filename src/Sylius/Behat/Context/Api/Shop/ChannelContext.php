@@ -26,7 +26,8 @@ final class ChannelContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
+        private string $apiRoute
     ) {
     }
 
@@ -53,7 +54,7 @@ final class ChannelContext implements Context
                 $this->client->getLastResponse(),
                 'baseCurrency'
             ),
-            sprintf('/api/v2/shop/currencies/%s', $currencyCode)
+            sprintf('%s/shop/currencies/%s', $this->apiRoute, $currencyCode)
         );
     }
 }

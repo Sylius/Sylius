@@ -16,6 +16,7 @@
         <service id="sylius.behat.api_platform_client" class="Sylius\Behat\Client\ApiPlatformClient" abstract="true">
             <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument>%sylius.security.new_api_route%</argument>
             <argument type="service" id="sylius.behat.request_factory" />
             <argument>%sylius.api.authorization_header%</argument>
         </service>
@@ -34,12 +35,14 @@
 
         <service id="sylius.behat.client.admin_api_platform_security_client" class="Sylius\Behat\Client\ApiPlatformSecurityClient">
             <argument type="service" id="test.client" />
+            <argument>%sylius.security.new_api_route%</argument>
             <argument>admin</argument>
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="sylius.behat.client.shop_api_platform_security_client" class="Sylius\Behat\Client\ApiPlatformSecurityClient">
             <argument type="service" id="test.client" />
+            <argument>%sylius.security.new_api_route%</argument>
             <argument>shop</argument>
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>

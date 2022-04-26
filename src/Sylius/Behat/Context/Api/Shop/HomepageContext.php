@@ -21,16 +21,11 @@ use Webmozart\Assert\Assert;
 
 final class HomepageContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ResponseCheckerInterface $responseChecker;
-
     public function __construct(
-        ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private string $apiRoute
     ) {
-        $this->client = $client;
-        $this->responseChecker = $responseChecker;
     }
 
     /**
@@ -39,7 +34,7 @@ final class HomepageContext implements Context
     public function iCheckLatestProducts(): void
     {
         $this->client->customAction(
-            'api/v2/shop/products?itemsPerPage=3&order[createdAt]=desc',
+            sprintf('%s/shop/products?itemsPerPage=3&order[createdAt]=desc', $this->apiRoute),
             HttpRequest::METHOD_GET
         );
     }
@@ -49,7 +44,7 @@ final class HomepageContext implements Context
      */
     public function iCheckAvailableTaxons(): void
     {
-        $this->client->customAction('api/v2/shop/taxons', HttpRequest::METHOD_GET);
+        $this->client->customAction(sprintf('%s/shop/taxons', $this->apiRoute), HttpRequest::METHOD_GET);
     }
 
     /**

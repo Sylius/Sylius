@@ -470,7 +470,7 @@ final class CustomerContext implements Context
     private function verifyAccount(string $token): void
     {
         $request = $this->requestFactory->custom(
-            \sprintf('/api/v2/shop/account-verification-requests/%s', $token),
+            \sprintf('/shop/account-verification-requests/%s', $token),
             HttpRequest::METHOD_PATCH,
         );
 

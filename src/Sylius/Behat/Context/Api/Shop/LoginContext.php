@@ -39,7 +39,7 @@ final class LoginContext implements Context
         private AbstractBrowser $shopAuthenticationTokenClient,
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
-        private RequestFactoryInterface $requestFactory,
+        private RequestFactoryInterface $requestFactory
     ) {
     }
 
@@ -58,7 +58,7 @@ final class LoginContext implements Context
     {
         $this->shopAuthenticationTokenClient->request(
             'POST',
-            '/api/v2/shop/authentication-token',
+            '/shop/authentication-token',
             [],
             [],
             ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
@@ -104,7 +104,7 @@ final class LoginContext implements Context
     public function iFollowLinkOnMyEmailToResetPassword(ShopUserInterface $user): void
     {
         $this->request = $this->requestFactory->custom(
-            sprintf('api/v2/shop/reset-password-requests/%s', $user->getPasswordResetToken()),
+            sprintf('/shop/reset-password-requests/%s', $user->getPasswordResetToken()),
             HttpRequest::METHOD_PATCH
         );
     }
