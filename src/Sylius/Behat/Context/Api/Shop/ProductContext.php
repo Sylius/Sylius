@@ -337,7 +337,7 @@ final class ProductContext implements Context
      */
     public function theFirstProductOnTheListShouldHaveNameAndPrice(string $name, int $price): void
     {
-        $product = $this->responseChecker->getCollection($this->client->resend())[0];
+        $product = $this->responseChecker->getCollection($this->sharedStorage->get('response'))[0];
 
         $defaultVariantPrice = $this->responseChecker->getValue(
             $this->client->showByIri($product['defaultVariant']),
@@ -363,7 +363,7 @@ final class ProductContext implements Context
      */
     public function theLastProductOnTheListShouldHaveNameAndPrice(string $name, int $price): void
     {
-        $products = $this->responseChecker->getCollection($this->client->resend());
+        $products = $this->responseChecker->getCollection($this->sharedStorage->get('response'));
         $product = end($products);
 
         $defaultVariantPrice = $this->responseChecker->getValue(

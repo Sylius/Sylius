@@ -130,18 +130,12 @@ final class ApiPlatformClient implements ApiClientInterface
     public function customAction(string $url, string $method): Response
     {
         $request = Request::custom($url, $method);
-
         $request->authorize($this->getToken(), $this->authorizationHeader);
 
         return $this->request($request);
     }
 
     public function upload(): Response
-    {
-        return $this->request($this->request);
-    }
-
-    public function resend(): Response
     {
         return $this->request($this->request);
     }
@@ -155,8 +149,7 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function buildCreateRequest(string $resource): void
     {
-        $this->request = Request::create($this->section, $resource, $this->authorizationHeader);
-        $this->request->authorize($this->getToken(), $this->authorizationHeader);
+        $this->request = Request::create($this->section, $resource, $this->authorizationHeader, $this->getToken());
     }
 
     public function buildUpdateRequest(string $resource, string $id): void
