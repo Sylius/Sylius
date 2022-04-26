@@ -18,6 +18,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 interface ApiClientInterface
 {
+    public function request(RequestInterface $request): Response;
+
     public function index(string $resource): Response;
 
     public function showByIri(string $iri): Response;
@@ -42,8 +44,6 @@ interface ApiClientInterface
 
     public function customAction(string $url, string $method): Response;
 
-    public function upload(): Response;
-
     public function resend(): Response;
 
     public function executeCustomRequest(RequestInterface $request): Response;
@@ -51,8 +51,6 @@ interface ApiClientInterface
     public function buildCreateRequest(string $resource): void;
 
     public function buildUpdateRequest(string $resource, string $id): void;
-
-    public function buildUploadRequest(string $resource): void;
 
     public function setRequestData(array $data): void;
 
@@ -66,8 +64,8 @@ interface ApiClientInterface
 
     public function addFile(string $key, UploadedFile $file): void;
 
-    /** @param string|int|array $value */
-    public function addRequestData(string $key, $value): void;
+    /** @param string|int|bool|array $value */
+    public function addRequestData(string $key, mixed $value): void;
 
     public function setSubResourceData(string $key, array $data): void;
 

@@ -69,17 +69,21 @@
             <argument type="service" id="sylius.behat.mocker" />
             <argument type="service" id="sylius.behat.response_loader" />
         </service>
+
         <service id="sylius.behat.mocker" class="Sylius\Behat\Service\Mocker\Mocker" public="false">
             <argument type="service" id="service_container" />
         </service>
+
         <service id="sylius.behat.response_loader" class="Sylius\Behat\Service\ResponseLoader" public="false" />
 
         <service id="sylius.behat.notification_accessor" class="Sylius\Behat\Service\Accessor\NotificationAccessor" public="false">
             <argument type="service" id="behat.mink.default_session" />
         </service>
+
         <service id="sylius.behat.notification_checker" class="Sylius\Behat\Service\NotificationChecker" public="false">
             <argument type="service" id="sylius.behat.notification_accessor" />
         </service>
+
         <service id="sylius.behat.current_page_resolver" class="Sylius\Behat\Service\Resolver\CurrentPageResolver" public="false">
             <argument type="service" id="behat.mink.default_session" />
             <argument type="service" id="router" />

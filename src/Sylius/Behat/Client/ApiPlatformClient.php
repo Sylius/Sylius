@@ -25,6 +25,8 @@ final class ApiPlatformClient implements ApiClientInterface
 
     private SharedStorageInterface $sharedStorage;
 
+    private RequestFactoryInterface $requestFactory;
+
     private string $authorizationHeader;
 
     private ?string $section;
@@ -34,25 +36,27 @@ final class ApiPlatformClient implements ApiClientInterface
     public function __construct(
         AbstractBrowser $client,
         SharedStorageInterface $sharedStorage,
+        RequestFactoryInterface $requestFactory,
         string $authorizationHeader,
         ?string $section = null
     ) {
         $this->client = $client;
         $this->sharedStorage = $sharedStorage;
+        $this->requestFactory = $requestFactory;
         $this->authorizationHeader = $authorizationHeader;
         $this->section = $section;
     }
 
     public function index(string $resource): Response
     {
-        $this->request = Request::index($this->section, $resource, $this->authorizationHeader, $this->getToken());
+        $this->request = $this->requestFactory->index($this->section, $resource, $this->authorizationHeader, $this->getToken());
 
         return $this->request($this->request);
     }
 
     public function showByIri(string $iri): Response
     {
-        $request = Request::custom($iri, HttpRequest::METHOD_GET);
+        $request = $this->requestFactory->custom($iri, HttpRequest::METHOD_GET);
         $request->authorize($this->getToken(), $this->authorizationHeader);
 
         return $this->request($request);
@@ -60,7 +64,7 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function subResourceIndex(string $resource, string $subResource, string $id): Response
     {
-        $request = Request::subResourceIndex($this->section, $resource, $id, $subResource);
+        $request = $this->requestFactory->subResourceIndex($this->section, $resource, $id, $subResource);
         $request->authorize($this->getToken(), $this->authorizationHeader);
 
         return $this->request($request);
@@ -68,13 +72,15 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function show(string $resource, string $id): Response
     {
-        return $this->request(Request::show(
-            $this->section,
-            $resource,
-            $id,
-            $this->authorizationHeader,
-            $this->getToken()
-        ));
+        return $this->request(
+            $this->requestFactory->show(
+                $this->section,
+                $resource,
+                $id,
+                $this->authorizationHeader,
+                $this->getToken()
+            )
+        );
     }
 
     public function create(?RequestInterface $request = null): Response
@@ -87,15 +93,22 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request($this->request);
     }
 
+    public function resend(): Response
+    {
+        return $this->request($this->request);
+    }
+
     public function delete(string $resource, string $id): Response
     {
-        return $this->request(Request::delete(
-            $this->section,
-            $resource,
-            $id,
-            $this->authorizationHeader,
-            $this->getToken()
-        ));
+        return $this->request(
+            $this->requestFactory->delete(
+                $this->section,
+                $resource,
+                $id,
+                $this->authorizationHeader,
+                $this->getToken()
+            )
+        );
     }
 
     public function filter(): Response
@@ -112,7 +125,7 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function applyTransition(string $resource, string $id, string $transition, array $content = []): Response
     {
-        $request = Request::transition($this->section, $resource, $id, $transition);
+        $request = $this->requestFactory->transition($this->section, $resource, $id, $transition);
         $request->authorize($this->getToken(), $this->authorizationHeader);
         $request->setContent($content);
 
@@ -121,7 +134,7 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function customItemAction(string $resource, string $id, string $type, string $action): Response
     {
-        $request = Request::customItemAction($this->section, $resource, $id, $type, $action);
+        $request = $this->requestFactory->customItemAction($this->section, $resource, $id, $type, $action);
         $request->authorize($this->getToken(), $this->authorizationHeader);
 
         return $this->request($request);
@@ -129,21 +142,10 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function customAction(string $url, string $method): Response
     {
-        $request = Request::custom($url, $method);
-
+        $request = $this->requestFactory->custom($url, $method);
         $request->authorize($this->getToken(), $this->authorizationHeader);
 
         return $this->request($request);
-    }
-
-    public function upload(): Response
-    {
-        return $this->request($this->request);
-    }
-
-    public function resend(): Response
-    {
-        return $this->request($this->request);
     }
 
     public function executeCustomRequest(RequestInterface $request): Response
@@ -155,15 +157,14 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function buildCreateRequest(string $resource): void
     {
-        $this->request = Request::create($this->section, $resource, $this->authorizationHeader);
-        $this->request->authorize($this->getToken(), $this->authorizationHeader);
+        $this->request = $this->requestFactory->create($this->section, $resource, $this->authorizationHeader, $this->getToken());
     }
 
     public function buildUpdateRequest(string $resource, string $id): void
     {
         $this->show($resource, $id);
 
-        $this->request = Request::update(
+        $this->request = $this->requestFactory->update(
             $this->section,
             $resource,
             $id,
@@ -175,18 +176,13 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function buildCustomUpdateRequest(string $resource, string $id, string $customSuffix): void
     {
-        $this->request = Request::update(
+        $this->request = $this->requestFactory->update(
             $this->section,
             $resource,
             sprintf('%s/%s', $id, $customSuffix),
             $this->authorizationHeader,
             $this->getToken()
         );
-    }
-
-    public function buildUploadRequest(string $resource): void
-    {
-        $this->request = Request::upload($this->section, $resource, $this->authorizationHeader, $this->getToken());
     }
 
     /** @param string|int $value */
@@ -216,7 +212,7 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->updateFiles([$key => $file]);
     }
 
-    /** @param string|int|array $value */
+    /** @param string|int|bool|array $value */
     public function addRequestData(string $key, $value): void
     {
         $this->request->updateContent([$key => $value]);
@@ -257,7 +253,7 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->sharedStorage->has('token') ? $this->sharedStorage->get('token') : null;
     }
 
-    private function request(RequestInterface $request): Response
+    public function request(RequestInterface $request): Response
     {
         $this->setServerParameters();
 

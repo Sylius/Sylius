@@ -17,7 +17,7 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\Request;
+use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
@@ -38,6 +38,7 @@ final class ProductContext implements Context
         private SharedStorageInterface $sharedStorage,
         private IriConverterInterface $iriConverter,
         private ChannelContextSetterInterface $channelContextSetter,
+        private RequestFactoryInterface $requestFactory,
     ) {
     }
 
@@ -423,7 +424,8 @@ final class ProductContext implements Context
         $response = $this->client->getLastResponse();
 
         $productVariant = $this->responseChecker->getValue($response, 'variants');
-        $this->client->executeCustomRequest(Request::custom($productVariant[0], HttpRequest::METHOD_GET));
+        $request = $this->requestFactory->custom($productVariant[0], HttpRequest::METHOD_GET);
+        $this->client->executeCustomRequest($request);
 
         Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $variantName));
     }
@@ -556,7 +558,8 @@ final class ProductContext implements Context
             }
 
             foreach ($product['variants'] as $variantIri) {
-                $response = $this->client->executeCustomRequest(Request::custom($variantIri, HttpRequest::METHOD_GET));
+                $request = $this->requestFactory->custom($variantIri, HttpRequest::METHOD_GET);
+                $response = $this->client->executeCustomRequest($request);
 
                 /** @var int $variantPrice */
                 $variantPrice = $this->responseChecker->getValue($response, $priceType);

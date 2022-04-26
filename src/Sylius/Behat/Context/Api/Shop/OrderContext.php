@@ -16,7 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\Request;
+use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SecurityServiceInterface;
@@ -36,32 +36,15 @@ use Webmozart\Assert\Assert;
 
 final class OrderContext implements Context
 {
-    private ApiClientInterface $shopClient;
-
-    private ApiClientInterface $adminClient;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private IriConverterInterface $iriConverter;
-
-    private SecurityServiceInterface $securityService;
-
     public function __construct(
-        ApiClientInterface $shopClient,
-        ApiClientInterface $adminClient,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage,
-        IriConverterInterface $iriConverter,
-        SecurityServiceInterface $securityService
+        private ApiClientInterface $shopClient,
+        private ApiClientInterface $adminClient,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage,
+        private IriConverterInterface $iriConverter,
+        private SecurityServiceInterface $securityService,
+        private RequestFactoryInterface $requestFactory,
     ) {
-        $this->shopClient = $shopClient;
-        $this->adminClient = $adminClient;
-        $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
-        $this->iriConverter = $iriConverter;
-        $this->securityService = $securityService;
     }
 
     /**
@@ -72,8 +55,8 @@ final class OrderContext implements Context
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
 
-        $request = Request::custom(
-            \sprintf(
+        $request = $this->requestFactory->custom(
+            sprintf(
                 '/api/v2/shop/account/orders/%s/payments/%s',
                 $order->getTokenValue(),
                 (string) $order->getPayments()->first()->getId()
@@ -82,7 +65,6 @@ final class OrderContext implements Context
             [],
             $this->shopClient->getToken()
         );
-
         $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromItem($paymentMethod)]);
 
         $this->shopClient->executeCustomRequest($request);
@@ -428,7 +410,8 @@ final class OrderContext implements Context
             );
         }
 
-        $this->shopClient->executeCustomRequest(Request::custom($item['variant'], HttpRequest::METHOD_GET));
+        $request = $this->requestFactory->custom($item['variant'], HttpRequest::METHOD_GET);
+        $this->shopClient->executeCustomRequest($request);
 
         return $this->shopClient->showByIri($this->responseChecker->getValue($this->shopClient->getLastResponse(), 'product'));
     }

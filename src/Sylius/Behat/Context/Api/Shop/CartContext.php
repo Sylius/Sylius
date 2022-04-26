@@ -16,7 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\Request;
+use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -31,32 +31,15 @@ use Webmozart\Assert\Assert;
 
 final class CartContext implements Context
 {
-    private ApiClientInterface $shopClient;
-
-    private ApiClientInterface $adminClient;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private ProductVariantResolverInterface $productVariantResolver;
-
-    private IriConverterInterface $iriConverter;
-
     public function __construct(
-        ApiClientInterface $shopClient,
-        ApiClientInterface $adminClient,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage,
-        ProductVariantResolverInterface $productVariantResolver,
-        IriConverterInterface $iriConverter
+        private ApiClientInterface $shopClient,
+        private ApiClientInterface $adminClient,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage,
+        private ProductVariantResolverInterface $productVariantResolver,
+        private IriConverterInterface $iriConverter,
+        private RequestFactoryInterface $requestFactory,
     ) {
-        $this->shopClient = $shopClient;
-        $this->adminClient = $adminClient;
-        $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
-        $this->productVariantResolver = $productVariantResolver;
-        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -171,8 +154,13 @@ final class CartContext implements Context
 
         $tokenValue = $this->pickupCart();
 
-        $request = Request::customItemAction('shop', Resources::ORDERS, $tokenValue, HttpRequest::METHOD_POST, 'items');
-
+        $request = $this->requestFactory->customItemAction(
+            'shop',
+            Resources::ORDERS,
+            $tokenValue,
+            HttpRequest::METHOD_POST,
+            'items'
+        );
         $request->updateContent([
             'productCode' => $productData['code'],
             'productVariant' => $variantIri,
@@ -562,8 +550,13 @@ final class CartContext implements Context
      */
     public function iCheckItemsOfMyCart(string $tokenValue): void
     {
-        $request = Request::customItemAction('shop', Resources::ORDERS, $tokenValue, HttpRequest::METHOD_GET, 'items');
-
+        $request = $this->requestFactory->customItemAction(
+            'shop',
+            Resources::ORDERS,
+            $tokenValue,
+            HttpRequest::METHOD_GET,
+            'items'
+        );
         $this->shopClient->executeCustomRequest($request);
     }
 
@@ -678,8 +671,11 @@ final class CartContext implements Context
 
     private function pickupCart(?string $localeCode = null): string
     {
-        $request = Request::custom('/api/v2/shop/orders', HttpRequest::METHOD_POST, ['HTTP_ACCEPT_LANGUAGE' => $localeCode]);
-
+        $request = $this->requestFactory->custom(
+            '/api/v2/shop/orders',
+            HttpRequest::METHOD_POST,
+            $localeCode ? ['HTTP_ACCEPT_LANGUAGE' => $localeCode] : []
+        );
         $this->shopClient->executeCustomRequest($request);
 
         $tokenValue = $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'tokenValue');
@@ -693,8 +689,13 @@ final class CartContext implements Context
     {
         $tokenValue = $tokenValue ?? $this->pickupCart();
 
-        $request = Request::customItemAction('shop', Resources::ORDERS, $tokenValue, HttpRequest::METHOD_POST, 'items');
-
+        $request = $this->requestFactory->customItemAction(
+            'shop',
+            Resources::ORDERS,
+            $tokenValue,
+            HttpRequest::METHOD_POST,
+            'items'
+        );
         $request->updateContent([
             'productVariant' => $this->iriConverter->getIriFromItem($this->productVariantResolver->getVariant($product)),
             'quantity' => $quantity,
@@ -707,8 +708,13 @@ final class CartContext implements Context
     {
         $tokenValue = $tokenValue ?? $this->pickupCart();
 
-        $request = Request::customItemAction('shop', Resources::ORDERS, $tokenValue, HttpRequest::METHOD_POST, 'items');
-
+        $request = $this->requestFactory->customItemAction(
+            'shop',
+            Resources::ORDERS,
+            $tokenValue,
+            HttpRequest::METHOD_POST,
+            'items'
+        );
         $request->updateContent([
             'productVariant' => $this->iriConverter->getIriFromItem($productVariant),
             'quantity' => $quantity,
@@ -719,14 +725,13 @@ final class CartContext implements Context
 
     private function removeOrderItemFromCart(string $orderItemId, string $tokenValue): void
     {
-        $request = Request::customItemAction(
+        $request = $this->requestFactory->customItemAction(
             'shop',
             Resources::ORDERS,
             $tokenValue,
             HttpRequest::METHOD_DELETE,
-            \sprintf('items/%s', $orderItemId)
+            sprintf('items/%s', $orderItemId)
         );
-
         $this->shopClient->executeCustomRequest($request);
     }
 
@@ -753,7 +758,8 @@ final class CartContext implements Context
             );
         }
 
-        $this->shopClient->executeCustomRequest(Request::custom($item['variant'], HttpRequest::METHOD_GET));
+        $request = $this->requestFactory->custom($item['variant'], HttpRequest::METHOD_GET);
+        $this->shopClient->executeCustomRequest($request);
 
         return $this->shopClient->getLastResponse();
     }
@@ -774,8 +780,13 @@ final class CartContext implements Context
 
     private function changeQuantityOfOrderItem(string $orderItemId, int $quantity, string $tokenValue): void
     {
-        $request = Request::customItemAction('shop', Resources::ORDERS, $tokenValue, HttpRequest::METHOD_PATCH, sprintf('items/%s', $orderItemId));
-
+        $request = $this->requestFactory->customItemAction(
+            'shop',
+            Resources::ORDERS,
+            $tokenValue,
+            HttpRequest::METHOD_PATCH,
+            sprintf('items/%s', $orderItemId)
+        );
         $request->updateContent(['quantity' => $quantity]);
 
         $this->shopClient->executeCustomRequest($request);

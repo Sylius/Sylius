@@ -16,7 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\Request;
+use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -62,6 +62,8 @@ final class CheckoutContext implements Context
 
     private SharedStorageInterface $sharedStorage;
 
+    private RequestFactoryInterface $requestFactory;
+
     /** @var string[] */
     private array $content = [];
 
@@ -78,6 +80,7 @@ final class CheckoutContext implements Context
         ProductVariantResolverInterface $productVariantResolver,
         IriConverterInterface $iriConverter,
         SharedStorageInterface $sharedStorage,
+        RequestFactoryInterface $requestFactory,
         string $paymentMethodClass,
         string $shippingMethodClass
     ) {
@@ -89,6 +92,7 @@ final class CheckoutContext implements Context
         $this->productVariantResolver = $productVariantResolver;
         $this->iriConverter = $iriConverter;
         $this->sharedStorage = $sharedStorage;
+        $this->requestFactory = $requestFactory;
         $this->paymentMethodClass = $paymentMethodClass;
         $this->shippingMethodClass = $shippingMethodClass;
     }
@@ -390,14 +394,13 @@ final class CheckoutContext implements Context
      */
     public function iTryToSelectShippingMethod(string $shippingMethodCode): void
     {
-        $request = Request::customItemAction(
+        $request = $this->requestFactory->customItemAction(
             'shop',
             Resources::ORDERS,
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_PATCH,
             sprintf('shipments/%s', $this->getCart()['shipments'][0]['id'])
         );
-
         $request->setContent(['shippingMethod' => $this->iriConverter->getItemIriFromResourceClass($this->shippingMethodClass, ['code' => $shippingMethodCode])]);
 
         $this->client->executeCustomRequest($request);
@@ -408,14 +411,13 @@ final class CheckoutContext implements Context
      */
     public function iTryToSelectPaymentMethod(string $paymentMethodCode): void
     {
-        $request = Request::customItemAction(
+        $request = $this->requestFactory->customItemAction(
             'shop',
             Resources::ORDERS,
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_PATCH,
             sprintf('payments/%s', $this->getCart()['payments'][0]['id'])
         );
-
         $request->setContent(['paymentMethod' => $this->iriConverter->getItemIriFromResourceClass($this->paymentMethodClass, ['code' => $paymentMethodCode])]);
 
         $this->client->executeCustomRequest($request);
@@ -479,14 +481,13 @@ final class CheckoutContext implements Context
      */
     public function iChoosePaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
-        $request = Request::customItemAction(
+        $request = $this->requestFactory->customItemAction(
             'shop',
             Resources::ORDERS,
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_PATCH,
             \sprintf('payments/%s', $this->getCart()['payments'][0]['id'])
         );
-
         $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromItem($paymentMethod)]);
 
         $this->client->executeCustomRequest($request);
@@ -1080,14 +1081,13 @@ final class CheckoutContext implements Context
     {
         $tokenValue = $this->getCartTokenValue();
 
-        $request = Request::customItemAction(
+        $request = $this->requestFactory->customItemAction(
             'shop',
             Resources::ORDERS,
             $tokenValue,
             HTTPRequest::METHOD_POST,
             'items'
         );
-
         $request->setContent([
             'productVariant' => $this->iriConverter->getItemIriFromResourceClass(\get_class($product->getVariants()->first()), ['code' => $code]),
             'quantity' => 1,
@@ -1380,14 +1380,13 @@ final class CheckoutContext implements Context
 
     private function putVariantToCart(ProductVariantInterface $productVariant, string $tokenValue, int $quantity = 1): void
     {
-        $request = Request::customItemAction(
+        $request = $this->requestFactory->customItemAction(
             'shop',
             Resources::ORDERS,
             $tokenValue,
             HTTPRequest::METHOD_POST,
             'items'
         );
-
         $request->setContent([
             'productVariant' => $this->iriConverter->getIriFromItem($productVariant),
             'quantity' => $quantity,
@@ -1398,7 +1397,7 @@ final class CheckoutContext implements Context
 
     private function removeOrderItemFromCart(int $orderItemId, string $tokenValue): void
     {
-        $request = Request::customItemAction(
+        $request = $this->requestFactory->customItemAction(
             'shop',
             Resources::ORDERS,
             $tokenValue,
@@ -1451,14 +1450,13 @@ final class CheckoutContext implements Context
     {
         $notes = $this->content['additionalNote'] ?? null;
 
-        $request = Request::customItemAction(
+        $request = $this->requestFactory->customItemAction(
             'shop',
             Resources::ORDERS,
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_PATCH,
             'complete'
         );
-
         $request->setContent(['notes' => $notes]);
 
         return $this->client->executeCustomRequest($request);
@@ -1466,14 +1464,13 @@ final class CheckoutContext implements Context
 
     private function selectShippingMethod(ShippingMethodInterface $shippingMethod): Response
     {
-        $request = Request::customItemAction(
+        $request = $this->requestFactory->customItemAction(
             'shop',
             Resources::ORDERS,
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_PATCH,
             sprintf('shipments/%s', $this->getCart()['shipments'][0]['id'])
         );
-
         $request->setContent(['shippingMethod' => $this->iriConverter->getIriFromItem($shippingMethod)]);
 
         return $this->client->executeCustomRequest($request);

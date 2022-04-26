@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\RequestInterface;
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
-use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -30,34 +30,17 @@ use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
 {
-    private ApiSecurityClientInterface $apiSecurityClient;
-
-    private ApiClientInterface $client;
-
-    private IriConverterInterface $iriConverter;
-
-    private AbstractBrowser $shopAuthenticationTokenClient;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private SharedStorageInterface $sharedStorage;
-
     private ?RequestInterface $request = null;
 
     public function __construct(
-        ApiSecurityClientInterface $apiSecurityClient,
-        ApiClientInterface $client,
-        IriConverterInterface $iriConverter,
-        AbstractBrowser $shopAuthenticationTokenClient,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        private ApiSecurityClientInterface $apiSecurityClient,
+        private ApiClientInterface $client,
+        private IriConverterInterface $iriConverter,
+        private AbstractBrowser $shopAuthenticationTokenClient,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage,
+        private RequestFactoryInterface $requestFactory,
     ) {
-        $this->apiSecurityClient = $apiSecurityClient;
-        $this->client = $client;
-        $this->iriConverter = $iriConverter;
-        $this->shopAuthenticationTokenClient = $shopAuthenticationTokenClient;
-        $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -101,7 +84,7 @@ final class LoginContext implements Context
      */
     public function iWantToResetPassword(): void
     {
-        $this->request = Request::create('shop', 'reset-password-requests', 'Bearer');
+        $this->request = $this->requestFactory->create('shop', 'reset-password-requests', 'Bearer');
     }
 
     /**
@@ -120,7 +103,7 @@ final class LoginContext implements Context
      */
     public function iFollowLinkOnMyEmailToResetPassword(ShopUserInterface $user): void
     {
-        $this->request = Request::custom(
+        $this->request = $this->requestFactory->custom(
             sprintf('api/v2/shop/reset-password-requests/%s', $user->getPasswordResetToken()),
             HttpRequest::METHOD_PATCH
         );
