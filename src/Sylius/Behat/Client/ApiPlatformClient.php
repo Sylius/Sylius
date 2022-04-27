@@ -233,7 +233,7 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->client->getResponse();
     }
 
-    public function getToken(): ?string
+    private function getToken(): ?string
     {
         return $this->sharedStorage->has('token') ? $this->sharedStorage->get('token') : null;
     }

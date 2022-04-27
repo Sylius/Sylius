@@ -78,6 +78,4 @@ interface ApiClientInterface
     public function getContent(): array;
 
     public function getLastResponse(): Response;
-
-    public function getToken(): ?string;
 }

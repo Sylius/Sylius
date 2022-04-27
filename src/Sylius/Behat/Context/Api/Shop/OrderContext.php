@@ -65,7 +65,7 @@ final class OrderContext implements Context
             ),
             HttpRequest::METHOD_PATCH,
             [],
-            $this->shopClient->getToken()
+            $this->sharedStorage->get('token')
         );
         $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromItem($paymentMethod)]);
 
