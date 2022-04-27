@@ -24,7 +24,7 @@ final class HomepageContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private string $apiUrlPrefix
+        private string $apiUrlPrefix,
     ) {
     }
 

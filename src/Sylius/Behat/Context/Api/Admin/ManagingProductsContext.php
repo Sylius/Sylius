@@ -36,7 +36,7 @@ final class ManagingProductsContext implements Context
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
         private SharedStorageInterface $sharedStorage,
-        private string $apiUrlPrefix
+        private string $apiUrlPrefix,
     ) {
     }
 

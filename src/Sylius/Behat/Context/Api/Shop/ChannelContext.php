@@ -27,7 +27,7 @@ final class ChannelContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
-        private string $apiUrlPrefix
+        private string $apiUrlPrefix,
     ) {
     }
 
