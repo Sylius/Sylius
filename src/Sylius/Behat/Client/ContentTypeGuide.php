@@ -15,7 +15,7 @@ namespace Sylius\Behat\Client;
 
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
-class ContentTypeGuide implements ContentTypeGuideInterface
+final class ContentTypeGuide implements ContentTypeGuideInterface
 {
     private const JSON_CONTENT_TYPE = 'application/json';
 

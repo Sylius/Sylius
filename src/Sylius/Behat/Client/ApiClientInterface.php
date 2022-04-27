@@ -52,11 +52,11 @@ interface ApiClientInterface
 
     public function setRequestData(array $data): void;
 
-    /** @param string|int $value */
-    public function addParameter(string $key, $value): void;
+    /** @param string|int|bool $value */
+    public function addParameter(string $key, mixed $value): void;
 
-    /** @param string|int $value */
-    public function addFilter(string $key, $value): void;
+    /** @param string|int|bool $value */
+    public function addFilter(string $key, mixed $value): void;
 
     public function clearParameters(): void;
 
