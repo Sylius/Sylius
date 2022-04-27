@@ -170,12 +170,6 @@ final class ApiPlatformClient implements ApiClientInterface
         );
     }
 
-    /** @param string|int $value */
-    public function addParameter(string $key, $value): void
-    {
-        $this->request->updateParameters([$key => $value]);
-    }
-
     public function setRequestData(array $content): void
     {
         $this->request->setContent($content);
@@ -184,7 +178,7 @@ final class ApiPlatformClient implements ApiClientInterface
     /** @param string|int $value */
     public function addFilter(string $key, $value): void
     {
-        $this->addParameter($key, $value);
+        $this->request->updateParameters([$key => $value]);
     }
 
     public function clearParameters(): void
