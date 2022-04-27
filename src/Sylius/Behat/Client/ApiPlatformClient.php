@@ -238,7 +238,7 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->sharedStorage->has('token') ? $this->sharedStorage->get('token') : null;
     }
 
-    public function request(RequestInterface $request): Response
+    private function request(RequestInterface $request): Response
     {
         $this->setServerParameters();
 

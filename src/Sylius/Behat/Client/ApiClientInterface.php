@@ -18,8 +18,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 interface ApiClientInterface
 {
-    public function request(RequestInterface $request): Response;
-
     public function index(string $resource): Response;
 
     public function showByIri(string $iri): Response;

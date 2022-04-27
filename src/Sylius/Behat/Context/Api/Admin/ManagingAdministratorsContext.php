@@ -157,7 +157,7 @@ final class ManagingAdministratorsContext implements Context
         $builder->withParameter('owner', $this->iriConverter->getIriFromItem($administrator));
         $builder->withFile('file', new UploadedFile($this->minkParameters['files_path'] . $avatar, basename($avatar)));
 
-        $response = $this->client->request($builder->build());
+        $response = $this->client->executeCustomRequest($builder->build());
 
         $this->sharedStorage->set(StringInflector::nameToCode($avatar), $this->responseChecker->getValue($response, '@id'));
     }
