@@ -16,9 +16,13 @@ namespace Sylius\Behat\Context\Api\Admin;
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\RequestBuilder;
+use Sylius\Behat\Client\RequestBuilderFactoryInterface;
+use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\ApiBundle\Provider\PathPrefixes;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Symfony\Component\Intl\Countries;
@@ -26,24 +30,14 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCountriesContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private IriConverterInterface $iriConverter;
-
     public function __construct(
-        ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage,
-        IriConverterInterface $iriConverter
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage,
+        private IriConverterInterface $iriConverter,
+        private RequestFactoryInterface $requestFactory,
+        private RequestBuilderFactoryInterface $requestBuilderFactory,
     ) {
-        $this->client = $client;
-        $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
-        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -51,7 +45,13 @@ final class ManagingCountriesContext implements Context
      */
     public function iWantToAddANewCountry(): void
     {
-        $this->client->buildCreateRequest(Resources::COUNTRIES);
+        $requestBuilder = $this->requestBuilderFactory->create(
+            PathPrefixes::ADMIN_PREFIX,
+            Resources::COUNTRIES,
+            'Authorization',
+            $this->sharedStorage->get('token')
+        );
+        $this->sharedStorage->set('request-builder', $requestBuilder);
     }
 
     /**
@@ -59,7 +59,10 @@ final class ManagingCountriesContext implements Context
      */
     public function iChoose(string $countryName): void
     {
-        $this->client->addRequestData('code', $this->getCountryCodeByName($countryName));
+        /** @var RequestBuilder $request */
+        $request = $this->sharedStorage->get('request-builder');
+        $request->withPartialContent('code', $this->getCountryCodeByName($countryName));
+        $this->sharedStorage->set('request-builder', $request);
     }
 
     /**
@@ -67,7 +70,9 @@ final class ManagingCountriesContext implements Context
      */
     public function iAddIt(): void
     {
-        $this->client->create();
+        /** @var RequestBuilder $request */
+        $request = $this->sharedStorage->get('request-builder');
+        $this->client->executeCustomRequest($request->build());
     }
 
     /**
@@ -76,7 +81,25 @@ final class ManagingCountriesContext implements Context
      */
     public function iWantToEditThisCountry(CountryInterface $country): void
     {
-        $this->client->buildUpdateRequest(Resources::COUNTRIES, $country->getCode());
+        $showRequestBuilder = $this->requestBuilderFactory->show(
+            PathPrefixes::ADMIN_PREFIX,
+            Resources::COUNTRIES,
+            $country->getCode(),
+            'Authorization',
+            $this->sharedStorage->get('token')
+        );
+        $showResponse = $this->client->executeCustomRequest($showRequestBuilder->build());
+
+        $updateRequestBuilder = $this->requestBuilderFactory->update(
+            PathPrefixes::ADMIN_PREFIX,
+            Resources::COUNTRIES,
+            $country->getCode(),
+            'Authorization',
+            $this->sharedStorage->get('token')
+        );
+        $updateRequestBuilder->withContent(json_decode($showResponse->getContent(), true));
+
+        $this->sharedStorage->set('request-builder', $updateRequestBuilder);
     }
 
     /**
@@ -84,7 +107,10 @@ final class ManagingCountriesContext implements Context
      */
     public function iEnableIt(): void
     {
-        $this->client->addRequestData('enabled', true);
+        /** @var RequestBuilder $request */
+        $request = $this->sharedStorage->get('request-builder');
+        $request->withPartialContent('enabled', true);
+        $this->sharedStorage->set('request-builder', $request);
     }
 
     /**
@@ -92,7 +118,10 @@ final class ManagingCountriesContext implements Context
      */
     public function iDisableIt(): void
     {
-        $this->client->addRequestData('enabled', false);
+        /** @var RequestBuilder $request */
+        $request = $this->sharedStorage->get('request-builder');
+        $request->withPartialContent('enabled', false);
+        $this->sharedStorage->set('request-builder', $request);
     }
 
     /**
@@ -101,7 +130,10 @@ final class ManagingCountriesContext implements Context
      */
     public function iSaveMyChanges(): void
     {
-        $this->client->update();
+        /** @var RequestBuilder $request */
+        $request = $this->sharedStorage->get('request-builder');
+
+        $this->client->executeCustomRequest($request->build());
     }
 
     /**
@@ -109,10 +141,11 @@ final class ManagingCountriesContext implements Context
      */
     public function iNameTheProvince(string $provinceName): void
     {
-        $this->client->addSubResourceData(
-            'provinces',
-            ['name' => $provinceName]
-        );
+        /** @var RequestBuilder $request */
+        $request = $this->sharedStorage->get('request-builder');
+        $request->withPartialSubContent('provinces', ['name' => $provinceName]);
+
+        $this->sharedStorage->set('request-builder', $request);
     }
 
     /**
@@ -120,10 +153,11 @@ final class ManagingCountriesContext implements Context
      */
     public function iSpecifyTheProvinceCodeAs(string $provinceCode): void
     {
-        $this->client->addSubResourceData(
-            'provinces',
-            ['code' => $provinceCode]
-        );
+        /** @var RequestBuilder $request */
+        $request = $this->sharedStorage->get('request-builder');
+        $request->withPartialSubContent('provinces', ['code' => $provinceCode]);
+
+        $this->sharedStorage->set('request-builder', $request);
     }
 
     /**
@@ -131,10 +165,11 @@ final class ManagingCountriesContext implements Context
      */
     public function iAddTheProvinceWithCode(string $provinceName, string $provinceCode): void
     {
-        $this->client->addSubResourceData(
-            'provinces',
-            ['code' => $provinceCode, 'name' => $provinceName]
-        );
+        /** @var RequestBuilder $request */
+        $request = $this->sharedStorage->get('request-builder');
+        $request->withPartialSubContent('provinces', ['code' => $provinceCode, 'name' => $provinceName]);
+
+        $this->sharedStorage->set('request-builder', $request);
     }
 
     /**
@@ -142,10 +177,11 @@ final class ManagingCountriesContext implements Context
      */
     public function iAddTheProvinceWithCodeAndAbbreviation(string $name, string $code, string $abbreviation): void
     {
-        $this->client->addSubResourceData(
-            'provinces',
-            ['code' => $code, 'name' => $name, 'abbreviation' => $abbreviation]
-        );
+        /** @var RequestBuilder $request */
+        $request = $this->sharedStorage->get('request-builder');
+        $request->withPartialSubContent('provinces', ['code' => $code, 'name' => $name, 'abbreviation' => $abbreviation]);
+
+        $this->sharedStorage->set('request-builder', $request);
     }
 
     /**
@@ -155,12 +191,26 @@ final class ManagingCountriesContext implements Context
     {
         $iri = $this->iriConverter->getItemIriFromResourceClass(get_class($province), ['code' => $province->getCode()]);
 
-        $provinces = $this->responseChecker->getValue($this->client->show(Resources::COUNTRIES, $country->getCode()), 'provinces');
+        $showRequest = $this->requestFactory->show(
+            PathPrefixes::ADMIN_PREFIX,
+            Resources::COUNTRIES,
+            $country->getCode(),
+            'Authorization',
+            $this->sharedStorage->get('token')
+        );
+        $showResponse = $this->client->executeCustomRequest($showRequest);
+
+        /** @var RequestBuilder $request */
+        $request = $this->sharedStorage->get('request-builder');
+
+        $provinces = $this->responseChecker->getValue($showResponse, 'provinces');
         foreach ($provinces as $countryProvince) {
             if ($iri === $countryProvince) {
-                $this->client->removeSubResource('provinces', $countryProvince);
+                $request->withoutPartialSubContent('provinces', $countryProvince);
             }
         }
+
+        $this->sharedStorage->set('request-builder', $request);
     }
 
     /**
@@ -177,9 +227,26 @@ final class ManagingCountriesContext implements Context
      */
     public function iRemoveProvinceName(ProvinceInterface $province): void
     {
-        $this->client->buildUpdateRequest(Resources::PROVINCES, $province->getCode());
-        $this->client->addRequestData('name', '');
-        $this->client->update();
+        $showRequestBuilder = $this->requestBuilderFactory->show(
+            PathPrefixes::ADMIN_PREFIX,
+            Resources::PROVINCES,
+            $province->getCode(),
+            'Authorization',
+            $this->sharedStorage->get('token')
+        );
+        $showResponse = $this->client->executeCustomRequest($showRequestBuilder->build());
+
+        $updateRequestBuilder = $this->requestBuilderFactory->update(
+            PathPrefixes::ADMIN_PREFIX,
+            Resources::PROVINCES,
+            $province->getCode(),
+            'Authorization',
+            $this->sharedStorage->get('token')
+        );
+        $updateRequestBuilder->withContent(json_decode($showResponse->getContent(), true));
+        $updateRequestBuilder->withPartialContent('name', '');
+
+        $this->client->executeCustomRequest($updateRequestBuilder->build());
     }
 
     /**
@@ -198,8 +265,16 @@ final class ManagingCountriesContext implements Context
      */
     public function theCountryShouldAppearInTheStore(CountryInterface $country): void
     {
+        $request = $this->requestFactory->index(
+            PathPrefixes::ADMIN_PREFIX,
+            Resources::COUNTRIES,
+            'Authorization',
+            $this->sharedStorage->get('token')
+        );
+        $response = $this->client->executeCustomRequest($request);
+
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(Resources::COUNTRIES), 'code', $country->getCode()),
+            $this->responseChecker->hasItemWithValue($response, 'code', $country->getCode()),
             sprintf('There is no country with name "%s"', $country->getName())
         );
     }
@@ -210,11 +285,17 @@ final class ManagingCountriesContext implements Context
      */
     public function theCountryShouldHaveTheProvince(CountryInterface $country, ProvinceInterface $province): void
     {
-        Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->subResourceIndex(Resources::COUNTRIES, 'provinces', $country->getCode()),
-            'code',
-            $province->getCode()
-        ));
+        $request = $this->requestFactory->subResourceIndex(
+            PathPrefixes::ADMIN_PREFIX,
+            Resources::COUNTRIES,
+            $country->getCode(),
+            Resources::PROVINCES
+        );
+        $request->authorize($this->sharedStorage->get('token'), 'Authorization');
+
+        $response = $this->client->executeCustomRequest($request);
+
+        Assert::true($this->responseChecker->hasItemWithValue($response, 'code', $province->getCode()));
     }
 
     /**
@@ -224,11 +305,18 @@ final class ManagingCountriesContext implements Context
     {
         /** @var CountryInterface $country */
         $country = $this->sharedStorage->get('country');
-        Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->subResourceIndex(Resources::COUNTRIES, 'provinces', $country->getCode()),
-            'code',
-            $province->getCode()
-        ));
+
+        $request = $this->requestFactory->subResourceIndex(
+            PathPrefixes::ADMIN_PREFIX,
+            Resources::COUNTRIES,
+            $country->getCode(),
+            Resources::PROVINCES
+        );
+        $request->authorize($this->sharedStorage->get('token'), 'Authorization');
+
+        $response = $this->client->executeCustomRequest($request);
+
+        Assert::true($this->responseChecker->hasItemWithValue($response, 'code', $province->getCode()));
     }
 
     /**
@@ -236,8 +324,12 @@ final class ManagingCountriesContext implements Context
      */
     public function iShouldNotBeAbleToChoose(string $countryName): void
     {
-        $this->client->addRequestData('code', $this->getCountryCodeByName($countryName));
-        $response = $this->client->create();
+        /** @var RequestBuilder $request */
+        $request = $this->sharedStorage->get('request-builder');
+        $request->withPartialContent('code', $this->getCountryCodeByName($countryName));
+
+        $response = $this->client->executeCustomRequest($request->build());
+
         Assert::false(
             $this->responseChecker->isCreationSuccessful($response),
             'Country has been created successfully, but it should not'
@@ -261,9 +353,18 @@ final class ManagingCountriesContext implements Context
      */
     public function thisCountryShouldBeDisabled(CountryInterface $country, string $enabled): void
     {
+        $showRequest = $this->requestFactory->show(
+            PathPrefixes::ADMIN_PREFIX,
+            Resources::COUNTRIES,
+            $country->getCode(),
+            'Authorization',
+            $this->sharedStorage->get('token')
+        );
+        $showResponse = $this->client->executeCustomRequest($showRequest);
+
         Assert::true(
             $this->responseChecker->hasValue(
-                $this->client->show(Resources::COUNTRIES, $country->getCode()),
+                $showResponse,
                 'enabled',
                 $enabled === 'enabled'
             ),
@@ -276,9 +377,14 @@ final class ManagingCountriesContext implements Context
      */
     public function theCodeFieldShouldBeDisabled(): void
     {
-        $this->client->updateRequestData(['code' => 'NEW_CODE']);
+        /** @var RequestBuilder $request */
+        $request = $this->sharedStorage->get('request-builder');
+        $request->withContent(['code' => 'NEW_CODE']);
+        $this->sharedStorage->set('request-builder', $request);
 
-        Assert::false($this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'));
+        $response = $this->client->executeCustomRequest($request->build());
+
+        Assert::false($this->responseChecker->hasValue($response, 'code', 'NEW_CODE'));
     }
 
     /**
@@ -330,7 +436,7 @@ final class ManagingCountriesContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            \sprintf('Please enter province %s.', $field)
+            sprintf('Please enter province %s.', $field)
         );
     }
 
@@ -359,8 +465,15 @@ final class ManagingCountriesContext implements Context
 
     private function getProvincesOfCountry(CountryInterface $country): iterable
     {
-        $response = $this->client->show(Resources::COUNTRIES, $country->getCode());
-        $countryFromResponse = $this->responseChecker->getResponseContent($response);
+        $showRequest = $this->requestFactory->show(
+            PathPrefixes::ADMIN_PREFIX,
+            Resources::COUNTRIES,
+            $country->getCode(),
+            'Authorization',
+            $this->sharedStorage->get('token')
+        );
+        $showResponse = $this->client->executeCustomRequest($showRequest);
+        $countryFromResponse = $this->responseChecker->getResponseContent($showResponse);
 
         foreach ($countryFromResponse['provinces'] as $provinceFromResponse) {
             yield $this->iriConverter->getItemFromIri($provinceFromResponse);

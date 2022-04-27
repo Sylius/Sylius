@@ -42,6 +42,22 @@ final class RequestBuilderSpec extends ObjectBehavior
         $this->build()->headers()->shouldReturn(['key' => 'value']);
     }
 
+    function it_builds_request_with_content(): void
+    {
+        $this->withContent(['key1' => 'value1'])->shouldReturnAnInstanceOf(RequestBuilder::class);
+        $this->build()->getContent()->shouldReturn(['key1' => 'value1']);
+    }
+
+    function it_builds_request_with_partial_content(): void
+    {
+        $this->withContent(['key1' => 'value1'])->shouldReturnAnInstanceOf(RequestBuilder::class);
+        $this->withPartialContent('key2', ['value2'])->shouldReturnAnInstanceOf(RequestBuilder::class);
+        $this->build()->getContent()->shouldReturn([
+            'key1' => 'value1',
+            'key2' => ['value2'],
+        ]);
+    }
+
     function it_builds_request_with_file(): void
     {
         $file = new UploadedFile(__DIR__ . '/ford.jpg', 'ford.jpg', null, null, true);

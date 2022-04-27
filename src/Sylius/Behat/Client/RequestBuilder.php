@@ -53,6 +53,29 @@ final class RequestBuilder
         return $this;
     }
 
+    public function withPartialContent(string $key, mixed $content): self
+    {
+        $this->content[$key] = $content;
+
+        return $this;
+    }
+
+    public function withPartialSubContent(string $key, mixed $content): self
+    {
+        $this->content[$key][] = $content;
+
+        return $this;
+    }
+
+    public function withoutPartialSubContent(string $subResource, string $id): void
+    {
+        foreach ($this->content[$subResource] as $key => $resource) {
+            if ($resource === $id) {
+                unset($this->content[$subResource][$key]);
+            }
+        }
+    }
+
     public function withParameter(string $key, string $value): self
     {
         $this->parameters[$key] = $value;
