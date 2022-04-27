@@ -80,9 +80,12 @@ final class MailerListener
 
     private function sendEmail(UserInterface $user, string $emailCode): void
     {
+        $email = $user->getEmail();
+        Assert::notNull($email);
+
         $this->emailSender->send(
             $emailCode,
-            [$user->getEmail()],
+            [$email],
             [
                 'user' => $user,
                 'channel' => $this->channelContext->getChannel(),
