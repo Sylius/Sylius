@@ -23,9 +23,9 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
 
     public function __construct(
         private AbstractBrowser $client,
+        private SharedStorageInterface $sharedStorage,
         private string $apiUrlPrefix,
         private string $section,
-        private SharedStorageInterface $sharedStorage
     ) {
     }
 
