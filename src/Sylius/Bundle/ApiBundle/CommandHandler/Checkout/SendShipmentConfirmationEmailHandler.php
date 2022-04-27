@@ -34,12 +34,15 @@ final class SendShipmentConfirmationEmailHandler implements MessageHandlerInterf
     {
         /** @var ShipmentInterface $shipment */
         $shipment = $this->shipmentRepository->find($sendShipmentConfirmationEmail->shipmentId);
+        $order = $shipment->getOrder();
+        Assert::notNull($order);
 
-        Assert::notNull($order = $shipment->getOrder());
+        $email = $order->getCustomer()->getEmail();
+        Assert::notNull($email);
 
         $this->emailSender->send(
             Emails::SHIPMENT_CONFIRMATION,
-            [$order->getCustomer()->getEmail()],
+            [$email],
             [
                 'shipment' => $shipment,
                 'order' => $order,
