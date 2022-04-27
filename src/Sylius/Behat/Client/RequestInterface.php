@@ -37,8 +37,6 @@ interface RequestInterface
 
     public function files(): array;
 
-    public function updateFiles(array $newFiles): void;
-
     public function setSubResource(string $key, array $subResource): void;
 
     public function addSubResource(string $key, array $subResource): void;

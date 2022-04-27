@@ -15,7 +15,6 @@ namespace Sylius\Behat\Client;
 
 use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -184,11 +183,6 @@ final class ApiPlatformClient implements ApiClientInterface
     public function clearParameters(): void
     {
         $this->request->clearParameters();
-    }
-
-    public function addFile(string $key, UploadedFile $file): void
-    {
-        $this->request->updateFiles([$key => $file]);
     }
 
     /** @param string|int|bool|array $value */

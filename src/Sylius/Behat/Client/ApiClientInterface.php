@@ -57,8 +57,6 @@ interface ApiClientInterface
 
     public function clearParameters(): void;
 
-    public function addFile(string $key, UploadedFile $file): void;
-
     /** @param string|int|bool|array $value */
     public function addRequestData(string $key, mixed $value): void;
 

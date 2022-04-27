@@ -80,11 +80,6 @@ final class Request implements RequestInterface
         return $this->files;
     }
 
-    public function updateFiles(array $newFiles): void
-    {
-        $this->files = array_merge($this->files, $newFiles);
-    }
-
     public function setSubresource(string $key, array $subResource): void
     {
         $this->content[$key] = $subResource;
