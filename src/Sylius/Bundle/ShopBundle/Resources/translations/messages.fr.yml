@@ -33,7 +33,7 @@ sylius:
     homepage:
         about_us: 'À propos de nous'
         about_us_content: 'Bienvenu(e) dans notre magasin, votre boutique numéro un qui vous offre les meilleurs produits. Vous pouvez choisir parmi les meilleurs vêtements et chaussures de notre catalogue. (<i>Vous pouvez modifier ce contenu en surchargeant la clé "sylius.homepage.about_us_content" dans votre fichier de traduction</i>)'
-        carousel_header: 'Préparez-vous ! L''hiver arrive'
+        banner_content: 'Préparez-vous ! L''hiver arrive'
         newsletter: 'Newsletter'
         newsletter_description: 'Abonnez-vous à notre newsletter pour recevoir les nouvelles offres qui n''attendent que vous ! (<i>Vous pouvez modifier ce contenu en surchargeant la clé "sylius.homepage.newsletter_description" dans votre fichier de traduction</i>)'
         subscribe: 'S''abonner'

@@ -29,7 +29,7 @@ sylius:
             verify_your_email_address: 'Підтердіть вашу електронну пошту'
     homepage:
         about_us: 'Про нас'
-        carousel_header: 'Приготуйтесь! Зима наближається'
+        banner_content: 'Приготуйтесь! Зима наближається'
         newsletter: 'Розсилка новин'
         subscribe: 'Підписатися'
     lightbox:
