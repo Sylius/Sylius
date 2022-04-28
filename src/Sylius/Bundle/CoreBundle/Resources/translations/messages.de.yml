@@ -42,6 +42,10 @@ sylius:
             coupon: Gutschein
         catalog_promotion:
             channels: Ausgabekanäle
+            scope:
+                for_products: Für Produkte
+                for_taxons: Für Produktgruppen
+                for_variants: Für Varianten
         checkout:
             addressing:
                 different_billing_address: Eine abweichende Rechnungsadresse benutzen?
@@ -209,8 +213,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Multibyte String
-            off: false
-            on: true
+            off: off
+            on: on
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -240,8 +244,8 @@ sylius:
             detect_unicode_help: Setzen Sie 'detect_unicode = Off' in der php.ini Datei
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: Nicht veraltet
-            off: false
-            on: true
+            off: off
+            on: on
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
