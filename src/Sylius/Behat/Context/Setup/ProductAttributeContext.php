@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
-use Faker\Generator;
-use Faker\Factory;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;

@@ -18,30 +18,35 @@ class AddProductReview implements CommandAwareDataTransformerInterface
 {
     /**
      * @psalm-immutable
+     *
      * @var string|null
      */
     public $title;
 
     /**
      * @psalm-immutable
+     *
      * @var int|null
      */
     public $rating;
 
     /**
      * @psalm-immutable
+     *
      * @var string|null
      */
     public $comment;
 
     /**
      * @psalm-immutable
+     *
      * @var string
      */
     public $productCode;
 
     /**
      * @psalm-immutable
+     *
      * @var string|null
      */
     public $email;

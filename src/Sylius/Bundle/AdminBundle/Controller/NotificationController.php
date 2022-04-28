@@ -17,7 +17,6 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Uri;
 use Http\Message\MessageFactory;
-use Psr\Http\Message\UriInterface;
 use Sylius\Bundle\CoreBundle\Application\Kernel;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

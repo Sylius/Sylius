@@ -77,7 +77,7 @@ final class RegisterUriBasedSectionResolverPassTest extends AbstractCompilerPass
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function registerCompilerPass(ContainerBuilder $container): void
     {

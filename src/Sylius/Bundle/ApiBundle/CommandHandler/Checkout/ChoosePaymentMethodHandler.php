@@ -82,8 +82,8 @@ final class ChoosePaymentMethodHandler implements MessageHandlerInterface
 
             Assert::true(
                 $stateMachine->can(
-                OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT
-            ),
+                    OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT
+                ),
                 'Order cannot have payment method assigned.'
             );
 

@@ -66,6 +66,7 @@ final class SessionManager implements SessionManagerInterface
         $previousSessionName = $this->mink->getDefaultSessionName();
 
         $this->sharedStorage->set('behat_previous_session_name', $previousSessionName);
+
         try {
             $token = $this->securityService->getCurrentToken();
             $this->sharedStorage->set($this->getKeyForToken($previousSessionName), $token);

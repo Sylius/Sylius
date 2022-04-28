@@ -18,19 +18,13 @@ class PromotionAction implements PromotionActionInterface
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $type;
 
-    /**
-     * @var mixed[]
-     */
+    /** @var mixed[] */
     protected $configuration = [];
 
-    /**
-     * @var PromotionInterface|null
-     */
+    /** @var PromotionInterface|null */
     protected $promotion;
 
     public function getId()
