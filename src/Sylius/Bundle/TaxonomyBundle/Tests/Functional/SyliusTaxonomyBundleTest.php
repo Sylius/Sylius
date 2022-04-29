@@ -30,7 +30,7 @@ final class SyliusTaxonomyBundleTest extends KernelTestCase
         /** @var Container $container */
         $container = self::$kernel->getContainer();
 
-        $serviceIds = array_filter($container->getServiceIds(), fn(string $serviceId): bool => 0 === strpos($serviceId, 'sylius.'));
+        $serviceIds = array_filter($container->getServiceIds(), fn (string $serviceId): bool => 0 === strpos($serviceId, 'sylius.'));
 
         foreach ($serviceIds as $id) {
             Assert::assertNotNull($container->get($id, ContainerInterface::NULL_ON_INVALID_REFERENCE));

@@ -21,6 +21,7 @@ interface SummaryPageInterface extends PageInterface
     public function getGrandTotal(): string;
 
     public function getBaseGrandTotal(): string;
+
     public function getIncludedTaxTotal(): string;
 
     public function getExcludedTaxTotal(): string;

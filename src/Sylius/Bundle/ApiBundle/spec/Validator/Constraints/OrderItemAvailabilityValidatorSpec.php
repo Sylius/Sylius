@@ -50,7 +50,7 @@ final class OrderItemAvailabilityValidatorSpec extends ObjectBehavior
             ->during('validate', [
                 new CompleteOrder(),
                 new class() extends Constraint {
-                }
+                },
             ])
         ;
     }

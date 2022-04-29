@@ -39,7 +39,7 @@ final class FooApiCommandTest extends ApiTestCase
         $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
         $this->assertJsonContains([
             'code' => Response::HTTP_BAD_REQUEST,
-            'message' => 'Request does not have the following required fields specified: bar.'
+            'message' => 'Request does not have the following required fields specified: bar.',
         ]);
     }
 

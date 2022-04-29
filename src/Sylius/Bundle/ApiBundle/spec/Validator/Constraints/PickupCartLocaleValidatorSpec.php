@@ -20,7 +20,6 @@ use Sylius\Bundle\ApiBundle\Validator\Constraints\PickupCartLocale;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
@@ -53,7 +52,7 @@ final class PickupCartLocaleValidatorSpec extends ObjectBehavior
         $locale->getCode()->willReturn('en_US');
         $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
 
-        $executionContext->addViolation('sylius.locale.not_exist', ["%localeCode%" => "en_US"])->shouldNotBeCalled();
+        $executionContext->addViolation('sylius.locale.not_exist', ['%localeCode%' => 'en_US'])->shouldNotBeCalled();
 
         $this->validate($value, $constraint);
     }
@@ -70,7 +69,7 @@ final class PickupCartLocaleValidatorSpec extends ObjectBehavior
 
         $channelRepository->findOneByCode('code')->shouldNotBeCalled();
 
-        $executionContext->addViolation('sylius.locale.not_exist', ["%localeCode%" => "en_US"])->shouldNotBeCalled();
+        $executionContext->addViolation('sylius.locale.not_exist', ['%localeCode%' => 'en_US'])->shouldNotBeCalled();
 
         $this->validate($value, $constraint);
     }
@@ -92,7 +91,7 @@ final class PickupCartLocaleValidatorSpec extends ObjectBehavior
         $locale->getCode()->willReturn('en_US');
         $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
 
-        $executionContext->addViolation('sylius.locale.not_exist', ["%localeCode%" => "en"])->shouldBeCalled();
+        $executionContext->addViolation('sylius.locale.not_exist', ['%localeCode%' => 'en'])->shouldBeCalled();
 
         $this->validate($value, $constraint);
     }

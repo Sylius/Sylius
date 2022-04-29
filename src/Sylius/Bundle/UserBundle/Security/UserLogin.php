@@ -71,7 +71,7 @@ class UserLogin implements UserLoginInterface
             $user,
             null,
             $firewallName,
-            array_map(/** @param object|string $role */ static fn($role): string => (string) $role, $user->getRoles())
+            array_map(/** @param object|string $role */ static fn ($role): string => (string) $role, $user->getRoles())
         );
     }
 }

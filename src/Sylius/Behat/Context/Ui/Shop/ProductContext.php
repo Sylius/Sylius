@@ -218,7 +218,7 @@ final class ProductContext implements Context
      */
     public function iTryToBrowseProductsFromTaxonWithATrailingSlashInThePath(TaxonInterface $taxon): void
     {
-        $this->indexPage->tryToOpen(['slug' => $taxon->getSlug().'/']);
+        $this->indexPage->tryToOpen(['slug' => $taxon->getSlug() . '/']);
     }
 
     /**

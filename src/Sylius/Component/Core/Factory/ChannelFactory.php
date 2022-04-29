@@ -31,7 +31,7 @@ final class ChannelFactory implements ChannelFactoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function createNew(): ChannelInterface
     {

@@ -57,9 +57,9 @@ final class VariantsElement extends Element implements VariantsElementInterface
         $variantContent = $variant->getParent()->find(
             'css',
             sprintf(
-            '.variants-accordion__content.%s',
-            explode(' ', $variant->getAttribute('class'))[1]
-        )
+                '.variants-accordion__content.%s',
+                explode(' ', $variant->getAttribute('class'))[1]
+            )
         );
 
         if (

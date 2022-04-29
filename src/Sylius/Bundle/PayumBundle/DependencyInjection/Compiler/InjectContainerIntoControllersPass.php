@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\DependencyInjection\Compiler;
@@ -11,7 +20,6 @@ use Payum\Bundle\PayumBundle\Controller\NotifyController;
 use Payum\Bundle\PayumBundle\Controller\PayoutController;
 use Payum\Bundle\PayumBundle\Controller\RefundController;
 use Payum\Bundle\PayumBundle\Controller\SyncController;
-use Payum\Bundle\PayumBundle\Controller;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;

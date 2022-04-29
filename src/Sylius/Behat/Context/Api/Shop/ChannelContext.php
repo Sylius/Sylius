@@ -61,9 +61,9 @@ final class ChannelContext implements Context
     {
         Assert::same(
             $this->responseChecker->getValue(
-            $this->client->getLastResponse(),
-            'baseCurrency'
-        )['code'],
+                $this->client->getLastResponse(),
+                'baseCurrency'
+            )['code'],
             $currencyCode
         );
     }

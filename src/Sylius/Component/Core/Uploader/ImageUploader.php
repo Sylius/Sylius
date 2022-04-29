@@ -24,6 +24,7 @@ use Webmozart\Assert\Assert;
 class ImageUploader implements ImageUploaderInterface
 {
     private const MIME_SVG_XML = 'image/svg+xml';
+
     private const MIME_SVG = 'image/svg';
 
     /** @var FilesystemInterface */

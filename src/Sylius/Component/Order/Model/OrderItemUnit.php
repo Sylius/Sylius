@@ -19,11 +19,9 @@ use Doctrine\Common\Collections\Collection;
 class OrderItemUnit implements OrderItemUnitInterface
 {
     /** @var mixed */
-    protected $id = null;
+    protected $id;
 
-    /**
-     * @var OrderItemInterface
-     */
+    /** @var OrderItemInterface */
     protected $orderItem;
 
     /**
@@ -33,9 +31,7 @@ class OrderItemUnit implements OrderItemUnitInterface
      */
     protected $adjustments;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $adjustmentsTotal = 0;
 
     public function __construct(OrderItemInterface $orderItem)

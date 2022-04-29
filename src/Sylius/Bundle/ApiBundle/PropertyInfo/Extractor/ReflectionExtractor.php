@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\PropertyInfo\Extractor;
@@ -101,7 +110,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getProperties(string $class, array $context = []): ?array
     {
@@ -139,7 +148,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTypes(string $class, string $property, array $context = []): ?array
     {
@@ -178,7 +187,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTypesFromConstructor(string $class, string $property): ?array
     {
@@ -216,7 +225,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function isReadable(string $class, string $property, array $context = []): ?bool
     {
@@ -228,7 +237,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function isWritable(string $class, string $property, array $context = []): ?bool
     {
@@ -242,7 +251,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function isInitializable(string $class, string $property, array $context = []): ?bool
     {
@@ -270,7 +279,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getReadInfo(string $class, string $property, array $context = []): ?PropertyReadInfo
     {
@@ -329,7 +338,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getWriteInfo(string $class, string $property, array $context = []): ?PropertyWriteInfo
     {
