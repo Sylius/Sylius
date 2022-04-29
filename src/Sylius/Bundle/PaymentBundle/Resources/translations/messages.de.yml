@@ -12,7 +12,7 @@ sylius:
             type: Kartentyp
         payment:
             amount: Zahlungsbetrag
-            method: Zahlungsweise
+            method: Zahlungsart
             state:
                 header: Zahlungsstatus
                 checkout: Zur Kasse
