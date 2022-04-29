@@ -36,6 +36,7 @@ TEXT
 
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::PARALLEL, true);
+    $parameters->set(Option::PATHS, ['src/Sylius']);
     $parameters->set(Option::SKIP, [
         InlineDocCommentDeclarationSniff::class . '.MissingVariable',
         InlineDocCommentDeclarationSniff::class . '.NoAssignment',
