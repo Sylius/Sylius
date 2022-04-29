@@ -7,7 +7,6 @@ init:
 
 ci:
 	composer install --no-interaction --no-scripts
-	composer dump-env ${APP_ENV}
 	bin/console sylius:install --no-interaction
 	bin/console sylius:fixtures:load default --no-interaction
 	bin/console cache:warmup
@@ -15,9 +14,9 @@ ci:
 	yarn build
 	vendor/bin/phpunit
 	vendor/bin/phpspec run --ansi --no-interaction -f dot
-	vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&@cli&&~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&@cli&&~@todo" --rerun # CLI Behat
-	vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@cli&&~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@cli&&~@todo" --rerun # NON JS Behat
-	#vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@javascript&&~@cli&&~@todo" # JS Behat
+	vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&@cli&&~@todo"  # CLI Behat
+	vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@cli&&~@todo" # NON JS Behat
+	#vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@cli&&~@todo" # JS Behat
 
 unit:
 	vendor/bin/phpunit
