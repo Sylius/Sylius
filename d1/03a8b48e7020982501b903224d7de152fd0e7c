@@ -1,0 +1,24 @@
+---------------------------------------------------------------------------
+
+by Ferror at 2022-04-28T12:38:37Z
+
+We could add info on how to check where wkhtmltopdf binary is located. via `where wkhtmltopdf` or ``whereis wkhtmltopdf``
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-04-28T13:40:32Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "plus-installation-guide-upgraded"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-04-29T04:50:53Z
+
+Thanks, Rafał! :tada:
