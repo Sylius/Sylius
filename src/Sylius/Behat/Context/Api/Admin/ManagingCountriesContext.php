@@ -81,14 +81,14 @@ final class ManagingCountriesContext implements Context
      */
     public function iWantToEditThisCountry(CountryInterface $country): void
     {
-        $showRequestBuilder = $this->requestBuilderFactory->show(
+        $showRequest = $this->requestFactory->show(
             PathPrefixes::ADMIN_PREFIX,
             Resources::COUNTRIES,
             $country->getCode(),
             'Authorization',
             $this->sharedStorage->get('token')
         );
-        $showResponse = $this->client->executeCustomRequest($showRequestBuilder->build());
+        $showResponse = $this->client->executeCustomRequest($showRequest);
 
         $updateRequestBuilder = $this->requestBuilderFactory->update(
             PathPrefixes::ADMIN_PREFIX,
@@ -227,14 +227,14 @@ final class ManagingCountriesContext implements Context
      */
     public function iRemoveProvinceName(ProvinceInterface $province): void
     {
-        $showRequestBuilder = $this->requestBuilderFactory->show(
+        $showRequest = $this->requestFactory->show(
             PathPrefixes::ADMIN_PREFIX,
             Resources::PROVINCES,
             $province->getCode(),
             'Authorization',
             $this->sharedStorage->get('token')
         );
-        $showResponse = $this->client->executeCustomRequest($showRequestBuilder->build());
+        $showResponse = $this->client->executeCustomRequest($showRequest);
 
         $updateRequestBuilder = $this->requestBuilderFactory->update(
             PathPrefixes::ADMIN_PREFIX,
