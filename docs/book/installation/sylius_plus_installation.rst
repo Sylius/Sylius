@@ -291,9 +291,31 @@ Installing Sylius Plus as a plugin to a Sylius application
         use InventorySourceAwareTrait;
     }
 
-**7.** Add wkhtmltopdf binary for Invoicing purposes.
+**7.** Install wkhtmltopdf binary:
 
-If you do not have the ``wkhtmltopdf`` binary, download it `here <https://wkhtmltopdf.org/downloads.html>`_.
+Default configuration assumes enabled PDF file generator. If you don't want to use that feature change your app configuration:
+
+.. code-block:: yaml
+
+    # config/packages/sylius_plus.yaml
+    sylius_plus:
+        pdf_generator:
+            enabled: false
+
+.. warning::
+
+    Sylius Plus uses both the Sylius Invoicing and Sylius Refund plugins which have their own configuration for disabling PDF Generator.
+
+
+Check if you have wkhtmltopdf binary.
+If not, you can download it `here <https://wkhtmltopdf.org/downloads.html>`_.
+
+By default wkhtmltopdf is installed in ``/usr/local/bin/wkhtmltopdf`` directory.
+
+.. tip::
+
+    If you not sure if you have already installed wkhtmltopdf and where it is located, write the following command in the terminal:
+    ``which wkhtmltopdf``
 
 In case wkhtmltopdf is not located in ``/usr/local/bin/wkhtmltopdf``, add the following snippet at the end of
 your application's ``.env`` file:
