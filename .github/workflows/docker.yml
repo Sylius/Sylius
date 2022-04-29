@@ -5,7 +5,7 @@ on:
 
 jobs:
     docker-compose:
-        name: Execute Tests on Docker Compose
+        name: Excute Tests on Docker Compose
         runs-on: ubuntu-latest
         env:
             COMPOSE_FILE: docker-compose.test.yml
@@ -18,7 +18,7 @@ jobs:
                 run: docker-compose run ci
 
     docker:
-        name: Execute Tests on Docker Containers
+        name: Excute Tests on Docker Containers
         runs-on: ubuntu-latest
         steps:
             -
@@ -48,7 +48,6 @@ jobs:
                         -e DATABASE_URL="mysql://root@mysql/sylius_test" \
                         -e APP_ENV="test" \
                         -e PHP_DATE_TIMEZONE="Europe/Warsaw" \
-                        -e MESSENGER_TRANSPORT_DSN="sync://" \
                         --net sylius_network \
                         --entrypoint="" \
                         -p 80:80/tcp \
