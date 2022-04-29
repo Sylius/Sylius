@@ -5,7 +5,7 @@ on:
 
 jobs:
     docker-compose:
-        name: Excute Tests on Docker Compose
+        name: Execute Tests on Docker Compose
         runs-on: ubuntu-latest
         env:
             COMPOSE_FILE: docker-compose.test.yml
@@ -18,7 +18,7 @@ jobs:
                 run: docker-compose run ci
 
     docker:
-        name: Excute Tests on Docker Containers
+        name: Execute Tests on Docker Containers
         runs-on: ubuntu-latest
         steps:
             -

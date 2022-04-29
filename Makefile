@@ -7,6 +7,7 @@ init:
 
 ci:
 	composer install --no-interaction --no-scripts
+	composer dump-env $APP_ENV
 	bin/console sylius:install --no-interaction
 	bin/console sylius:fixtures:load default --no-interaction
 	bin/console cache:warmup

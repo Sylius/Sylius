@@ -3,7 +3,7 @@ services:
         image: sylius/standard:1.11-traditional
         entrypoint: ["make", "ci"]
         environment:
-            APP_ENV: "test"
+            APP_ENV: "test_cached"
             DATABASE_URL: "mysql://root:mysql@mysql/sylius_test"
             PHP_DATE_TIMEZONE: "Europe/Warsaw"
             MESSENGER_TRANSPORT_DSN: "sync://"
