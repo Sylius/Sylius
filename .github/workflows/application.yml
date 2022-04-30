@@ -108,7 +108,7 @@ jobs:
                 name: Run PHPStan
                 run: vendor/bin/phpstan analyse
                 if: always() && steps.end-of-setup.outcome == 'success'
-            
+
             -
                 name: Run ComposerRequireChecker
                 run: |
@@ -394,7 +394,7 @@ jobs:
     test-application-without-frontend-mysql:
         runs-on: ubuntu-latest
 
-        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }})"
+        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }})"
 
         timeout-minutes: 25
 
@@ -405,6 +405,14 @@ jobs:
                 symfony: ["^5.4"]
                 node: ["14.x", "16.x"]
                 mysql: ["5.7", "8.0"]
+                twig: ["3.x"]
+                include:
+                    -
+                        php: "8.0"
+                        symfony: "^5.4"
+                        node: "14.x"
+                        twig: "2.x"
+                        mysql: "5.7"
 
         env:
             APP_ENV: test_cached
@@ -455,6 +463,12 @@ jobs:
                     key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
                     restore-keys: |
                         ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
+
+            -
+                name: Restrict Twig version
+                if: matrix.twig != ''
+                run: |
+                    composer require "twig/twig:${{ matrix.twig }}" --no-update --no-scripts --no-interaction
 
             -
                 name: Install PHP dependencies
