@@ -48,7 +48,7 @@ final class SecurityServiceSpec extends ObjectBehavior
     ) {
         $shopUser->getRoles()->willReturn(['ROLE_USER']);
         $shopUser->getPassword()->willReturn('xyz');
-        $shopUser->serialize()->willReturn('serialized_user');
+        $shopUser->__serialize()->willReturn(['serialized_user']);
 
         $session->set('_security_shop', Argument::any())->shouldBeCalled();
         $session->save()->shouldBeCalled();
