@@ -124,7 +124,20 @@ Done! If you do not see any changes on the ``/admin/countries/new`` url, clear y
 How to customize templates via events?
 --------------------------------------
 
-Sylius uses the Events mechanism provided by the `SonataBlockBundle <https://sonata-project.org/bundles/block/master/doc/reference/events.html>`_.
+Sylius uses it's own event mechanism called Sylius Template Event which implementation is based purely on Twig.
+This (in compare to legacy way of using SonataBlockBundle) leads to:
+
+* better performance - as it is no longer based on EventListeners
+* less boilerplate code - no need to register more Listeners
+* easier variable pass - now you just need to add it to configuration file
+* extended configuration - now you can change if block is enabled, change its template, or even priority
+
+.. note::
+
+    If you want to read more about the Sylius Template Event from developers/architectural perspective
+    checkout [Github Issue](https://github.com/Sylius/Sylius/issues/10997) referring this feature.
+
+We will now guide you through a simple way of customizing your template with Sylius Template Event.
 
 How to locate template events?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -145,7 +158,7 @@ on the create action of Resources, at the bottom of the page (after the content 
     {% set event_prefix = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.create' %}
 
     {# And then the slot name is appended to the event_prefix #}
-    {{ sonata_block_render_event(event_prefix ~ '.after_content', {'resource': resource}) }}
+    {{ sylius_template_event([event_prefix, 'sylius.admin.create'], _context) }}
 
 .. note::
 
@@ -155,8 +168,25 @@ on the create action of Resources, at the bottom of the page (after the content 
 
 .. tip::
 
-    In order to find events in Sylius templates you can simply search for the ``sonata_block_render_event`` phrase in your
+    In order to find events in Sylius templates you can simply search for the ``sylius_template_event`` phrase in your
     project's directory.
+
+How to locate event in browser?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you want to more easily search for the event name you want to modify, the Sylius Template Event lets you easily find
+it in your browser with the debug tools it provides.
+Just use the ``explore`` (in Chrome browser) or its equivalent in other browsers to check the HTML code of your webpage.
+Here you will be able to see commented blocks where the name of the template as well as the event name will be shown:
+
+.. image:: /_images/sylius_event_debug.png
+
+In the example above we were looking for the template and event of the Sylius Logo. The html code of it was surrounded
+by statements of where the event, as well as block started.
+
+.. image:: /_images/sylius_logo_locate.png
+
+This will have all the necessary information that you need for further customization.
 
 How to use template events for customizations?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -194,6 +224,42 @@ That's it. Your new block should appear in the view.
 .. tip::
 
     Learn more about adding custom Admin JS & CSS in the cookbook :doc:`here </cookbook/frontend/admin-js-and-css>`.
+
+Can I do more with the Sylius Template Event?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You might think that this is only way of customisation with the event, but you can also do more.
+
+1. Disabling blocks:
+    You can now disable some blocks that does not fit your usage, just put in config:
+
+    .. code-block:: yaml
+
+        sylius_ui:
+            events:
+                sylius.shop.layout.ugly_block:
+                    blocks:
+                        the_block_i_dont_like:
+                            enabled: false
+
+2. Change the priority of blocks:
+    In order to override the templates from vendor, or maybe you are developing plugin you can change the priority of the block
+
+    .. code-block:: yaml
+
+        sylius_ui:
+            events:
+                sylius.shop.layout.vendor_block:
+                    blocks:
+                        my_important_block:
+                            priority: 1
+
+3. Pass variables:
+    You can pass any variable from the template to the block and access it with function:
+
+    .. code-block:: html
+
+        {{ dump(resource) }}
 
 How to use themes for customizations?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
