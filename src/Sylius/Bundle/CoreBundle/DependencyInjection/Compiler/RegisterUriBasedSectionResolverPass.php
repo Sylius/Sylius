@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Reference;
 final class RegisterUriBasedSectionResolverPass implements CompilerPassInterface
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function process(ContainerBuilder $container): void
     {
@@ -37,7 +37,7 @@ final class RegisterUriBasedSectionResolverPass implements CompilerPassInterface
             }
         }
 
-        usort($uriBasedSectionProviders, static fn(array $a, array $b): int => -($a['priority'] <=> $b['priority']));
+        usort($uriBasedSectionProviders, static fn (array $a, array $b): int => -($a['priority'] <=> $b['priority']));
 
         $uriBasedSectionResolver->setArgument(1, array_column($uriBasedSectionProviders, 'id'));
     }

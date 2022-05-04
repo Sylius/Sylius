@@ -269,11 +269,11 @@ final class ManagingOrdersContext implements Context
      * @Then the order should be billed to :customerName, :street, :postcode, :city, :countryName
      */
     public function itShouldBeBilledToCustomerAtAddress(
-           string $customerName,
-           string $street,
-           string $postcode,
-           string $city,
-           string $countryName
+        string $customerName,
+        string $street,
+        string $postcode,
+        string $city,
+        string $countryName
     ) {
         $this->itShouldBeBilledTo(null, $customerName, $street, $postcode, $city, $countryName);
     }

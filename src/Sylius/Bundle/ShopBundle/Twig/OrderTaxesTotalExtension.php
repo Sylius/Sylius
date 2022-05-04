@@ -43,7 +43,7 @@ class OrderTaxesTotalExtension extends AbstractExtension
     {
         return array_reduce(
             $order->getAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->toArray(),
-            static fn(int $total, BaseAdjustmentInterface $adjustment) => $isNeutral === $adjustment->isNeutral() ? $total + $adjustment->getAmount() : $total,
+            static fn (int $total, BaseAdjustmentInterface $adjustment) => $isNeutral === $adjustment->isNeutral() ? $total + $adjustment->getAmount() : $total,
             0
         );
     }

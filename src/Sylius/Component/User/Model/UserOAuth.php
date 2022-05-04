@@ -18,29 +18,19 @@ class UserOAuth implements UserOAuthInterface
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $provider;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $identifier;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $accessToken;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $refreshToken;
 
-    /**
-     * @var UserInterface|null
-     */
+    /** @var UserInterface|null */
     protected $user;
 
     public function getId()

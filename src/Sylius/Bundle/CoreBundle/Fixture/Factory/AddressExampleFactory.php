@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Faker\Generator;
-use Faker\Factory;
 use Doctrine\Common\Collections\Collection;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
@@ -47,13 +47,13 @@ class AddressExampleFactory extends AbstractExampleFactory
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('first_name', fn(Options $options): string => $this->faker->firstName)
-            ->setDefault('last_name', fn(Options $options): string => $this->faker->lastName)
-            ->setDefault('phone_number', fn(Options $options): ?string => random_int(1, 100) > 50 ? $this->faker->phoneNumber : null)
-            ->setDefault('company', fn(Options $options): ?string => random_int(1, 100) > 50 ? $this->faker->company : null)
-            ->setDefault('street', fn(Options $options): string => $this->faker->streetAddress)
-            ->setDefault('city', fn(Options $options): string => $this->faker->city)
-            ->setDefault('postcode', fn(Options $options): string => $this->faker->postcode)
+            ->setDefault('first_name', fn (Options $options): string => $this->faker->firstName)
+            ->setDefault('last_name', fn (Options $options): string => $this->faker->lastName)
+            ->setDefault('phone_number', fn (Options $options): ?string => random_int(1, 100) > 50 ? $this->faker->phoneNumber : null)
+            ->setDefault('company', fn (Options $options): ?string => random_int(1, 100) > 50 ? $this->faker->company : null)
+            ->setDefault('street', fn (Options $options): string => $this->faker->streetAddress)
+            ->setDefault('city', fn (Options $options): string => $this->faker->city)
+            ->setDefault('postcode', fn (Options $options): string => $this->faker->postcode)
             ->setDefault('country_code', function (Options $options): string {
                 $countries = $this->countryRepository->findAll();
                 shuffle($countries);

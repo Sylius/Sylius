@@ -22,64 +22,40 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 class ProductVariant extends BaseVariant implements ProductVariantInterface, Comparable, \Stringable
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $version = 1;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $onHold = 0;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $onHand = 0;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $tracked = false;
 
-    /**
-     * @var float|null
-     */
+    /** @var float|null */
     protected $weight;
 
-    /**
-     * @var float|null
-     */
+    /** @var float|null */
     protected $width;
 
-    /**
-     * @var float|null
-     */
+    /** @var float|null */
     protected $height;
 
-    /**
-     * @var float|null
-     */
+    /** @var float|null */
     protected $depth;
 
-    /**
-     * @var TaxCategoryInterface|null
-     */
+    /** @var TaxCategoryInterface|null */
     protected $taxCategory;
 
-    /**
-     * @var ShippingCategoryInterface|null
-     */
+    /** @var ShippingCategoryInterface|null */
     protected $shippingCategory;
 
-    /**
-     * @var Collection
-     */
+    /** @var Collection */
     protected $channelPricings;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $shippingRequired = true;
 
     /**

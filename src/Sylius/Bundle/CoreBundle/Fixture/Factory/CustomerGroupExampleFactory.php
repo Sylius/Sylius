@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Faker\Generator;
 use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -56,7 +56,7 @@ class CustomerGroupExampleFactory extends AbstractExampleFactory implements Exam
 
                 return $words;
             })
-            ->setDefault('code', fn(Options $options): string => StringInflector::nameToCode($options['name']))
+            ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
         ;
     }
 }

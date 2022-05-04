@@ -29,9 +29,7 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
      */
     protected $channels;
 
-    /**
-     * @var GatewayConfigInterface|null
-     */
+    /** @var GatewayConfigInterface|null */
     protected $gatewayConfig;
 
     public function __construct()

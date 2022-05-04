@@ -29,24 +29,16 @@ use Webmozart\Assert\Assert;
 
 class Order extends BaseOrder implements OrderInterface
 {
-    /**
-     * @var CustomerInterface|null
-     */
+    /** @var \Sylius\Component\Core\Model\CustomerInterface|null */
     protected $customer;
 
-    /**
-     * @var ChannelInterface|null
-     */
+    /** @var \Sylius\Component\Core\Model\ChannelInterface|null */
     protected $channel;
 
-    /**
-     * @var AddressInterface|null
-     */
+    /** @var AddressInterface|null */
     protected $shippingAddress;
 
-    /**
-     * @var AddressInterface|null
-     */
+    /** @var AddressInterface|null */
     protected $billingAddress;
 
     /**
@@ -63,34 +55,22 @@ class Order extends BaseOrder implements OrderInterface
      */
     protected $shipments;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $currencyCode;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $localeCode;
 
-    /**
-     * @var BaseCouponInterface|null
-     */
+    /** @var BaseCouponInterface|null */
     protected $promotionCoupon;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $checkoutState = OrderCheckoutStates::STATE_CART;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $paymentState = OrderPaymentStates::STATE_CART;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $shippingState = OrderShippingStates::STATE_CART;
 
     /**
@@ -100,14 +80,10 @@ class Order extends BaseOrder implements OrderInterface
      */
     protected $promotions;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $tokenValue;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $customerIp;
 
     protected bool $createdByGuest = true;

@@ -33,9 +33,7 @@ class Product implements ProductInterface, \Stringable
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $code;
 
     /**

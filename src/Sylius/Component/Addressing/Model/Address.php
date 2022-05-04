@@ -22,54 +22,34 @@ class Address implements AddressInterface
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $firstName;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $lastName;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $phoneNumber;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $company;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $countryCode;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $provinceCode;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $provinceName;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $street;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $city;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $postcode;
 
     public function __construct()

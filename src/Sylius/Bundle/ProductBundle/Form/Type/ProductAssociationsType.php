@@ -40,8 +40,8 @@ final class ProductAssociationsType extends AbstractType
         $resolver->setDefaults([
             'entries' => $this->productAssociationTypeRepository->findAll(),
             'entry_type' => TextType::class,
-            'entry_name' => fn(ProductAssociationTypeInterface $productAssociationType) => $productAssociationType->getCode(),
-            'entry_options' => fn(ProductAssociationTypeInterface $productAssociationType) => [
+            'entry_name' => fn (ProductAssociationTypeInterface $productAssociationType) => $productAssociationType->getCode(),
+            'entry_options' => fn (ProductAssociationTypeInterface $productAssociationType) => [
                 'label' => $productAssociationType->getName(),
             ],
         ]);
