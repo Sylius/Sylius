@@ -10,7 +10,7 @@ Feature: Viewing product's select attributes
         And the store has a select product attribute "T-shirt material" with values "Banana skin" and "Cotton"
         And there is an administrator "sylius@example.com" identified by "sylius"
 
-    @ui
+    @ui @api
     Scenario: Viewing a detailed page with product's select attribute
         Given this product has select attribute "T-shirt material" with values "Banana skin" and "Cotton"
         When I check this product's details

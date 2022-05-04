@@ -22,6 +22,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -164,6 +165,63 @@ final class ProductContext implements Context
     {
         $this->client->addFilter('translations.name', $name);
         $this->client->filter();
+    }
+
+    /**
+     * @Then I should (also) see the product attribute :attributeName with value :expectedAttribute
+     */
+    public function iShouldSeeTheProductAttributeWithValue($attributeName, $expectedAttribute): void
+    {
+        $attribute = $this->getAttributeByName($attributeName);
+
+        Assert::same(
+            $attribute['value'],
+            $expectedAttribute
+        );
+    }
+
+    /**
+     * @Then I should (also) see the product attribute :attributeName with date :expectedAttribute
+     */
+    public function iShouldSeeTheProductAttributeWithDate($attributeName, $expectedAttribute): void
+    {
+        $attribute = $this->getAttributeByName($attributeName);
+
+        Assert::same(
+            new \DateTime($attribute['date']),
+            new \DateTime($expectedAttribute)
+        );
+    }
+
+    /**
+     * @Then I should see :count attributes
+     */
+    public function iShouldSeeAttributes($count): void
+    {
+        Assert::same(
+            count($this->responseChecker->getValue($this->client->getLastResponse(), 'attributes')),
+            (int) $count
+        );
+    }
+
+    /**
+     * @Then the first attribute should be :name
+     */
+    public function theFirstAttributeShouldBe($name): void
+    {
+        $attributes = $this->responseChecker->getValue($this->client->getLastResponse(), 'attributes');
+
+        Assert::same(reset($attributes)['name'], $name);
+    }
+
+    /**
+     * @Then the last attribute should be :name
+     */
+    public function theLastAttributeShouldBe($name): void
+    {
+        $attributes = $this->responseChecker->getValue($this->client->getLastResponse(), 'attributes');
+
+        Assert::same(end($attributes)['name'], $name);
     }
 
     /**
@@ -659,5 +717,21 @@ final class ProductContext implements Context
         $images = $this->responseChecker->getValue($this->client->getLastResponse(), 'images');
 
         return $images[0]['type'] === 'main' && $images[0]['path'];
+    }
+
+    private function getAttributeByName($name): array
+    {
+        $attributes = $this->responseChecker->getValue($this->client->getLastResponse(), 'attributes');
+        $attribute = null;
+
+        foreach ($attributes as $attribute) {
+            if ($attribute['name'] === $name) {
+                break;
+            }
+        }
+
+        Assert::notNull($attribute);
+
+        return $attribute;
     }
 }
