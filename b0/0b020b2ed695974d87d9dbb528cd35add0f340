@@ -1,0 +1,35 @@
+---------------------------------------------------------------------------
+
+by Ferror at 2022-04-26T15:03:40Z
+
+Hi @Prometee I love that change! We (at Sylius) are currently working on improving Behat Developer Experience. Unfortunately, because of that, there are conflicts in this PR. Do you mind solving them? I will postpone my changes until that, but... could do this today or tomorrow?
+
+---------------------------------------------------------------------------
+
+by Prometee at 2022-04-26T17:50:05Z
+
+@Ferror I rebase the PR, good to see this new `RequestFactory` service (I was thinking about doing it too).
+
+I fix the scenario which try to change a password twice, by adding the right response code and a check about the corresponding  error message.
+
+I think, a better work is needed to centralize the url prefix usage to avoid adding it to all of those Behat contexts. WDYT ?
+
+---------------------------------------------------------------------------
+
+by Ferror at 2022-04-26T21:29:44Z
+
+> I think, a better work is needed to centralize the url prefix usage to avoid adding it to all of those Behat contexts. WDYT ?
+
+Yea I was thinking about some sort UriFactory for all these sprintf's functions as they are all similar and now require dependency :)
+
+---------------------------------------------------------------------------
+
+by Prometee at 2022-04-27T08:11:05Z
+
+@Zales0123  @Ferror Waiting for the build to finish and it can be merged.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2022-05-04T12:33:24Z
+
+Thank you, Francis! :tada: We could also thing about backporting it to 1.10 (before latest changes in Behat api clients) :rocket:
