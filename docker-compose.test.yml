@@ -6,6 +6,7 @@ services:
             APP_ENV: "test"
             DATABASE_URL: "mysql://root:mysql@mysql/sylius_test"
             PHP_DATE_TIMEZONE: "Europe/Warsaw"
+            MESSENGER_TRANSPORT_DSN: "sync://"
         volumes:
             - ./:/app:delegated
             - ./.docker/test/php.ini:/etc/php/8.0/fpm/php.ini:delegated
