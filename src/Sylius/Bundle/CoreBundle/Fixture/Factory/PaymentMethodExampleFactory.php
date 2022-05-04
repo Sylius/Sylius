@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Faker\Generator;
 use Faker\Factory;
+use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
@@ -81,14 +81,14 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
 
                 return $words;
             })
-            ->setDefault('code', fn(Options $options): string => StringInflector::nameToCode($options['name']))
-            ->setDefault('description', fn(Options $options): string => $this->faker->sentence())
+            ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
+            ->setDefault('description', fn (Options $options): string => $this->faker->sentence())
             ->setDefault('instructions', null)
             ->setAllowedTypes('instructions', ['null', 'string'])
             ->setDefault('gatewayName', 'Offline')
             ->setDefault('gatewayFactory', 'offline')
             ->setDefault('gatewayConfig', [])
-            ->setDefault('enabled', fn(Options $options): bool => $this->faker->boolean(90))
+            ->setDefault('enabled', fn (Options $options): bool => $this->faker->boolean(90))
             ->setDefault('channels', LazyOption::all($this->channelRepository))
             ->setAllowedTypes('channels', 'array')
             ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))

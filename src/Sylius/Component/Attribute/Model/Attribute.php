@@ -29,34 +29,22 @@ class Attribute implements AttributeInterface, \Stringable
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $code;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $type = TextAttributeType::TYPE;
 
-    /**
-     * @var mixed[]
-     */
+    /** @var mixed[] */
     protected $configuration = [];
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $storageType;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $position;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $translatable = true;
 
     public function __construct()

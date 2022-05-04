@@ -16,36 +16,24 @@ namespace Sylius\Component\Core\Model;
 class ShopBillingData implements ShopBillingDataInterface
 {
     /** @var mixed */
-    protected $id = null;
+    protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $company;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $taxId;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $countryCode;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $street;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $city;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $postcode;
 
     public function getId()

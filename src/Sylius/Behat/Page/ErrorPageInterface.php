@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page;
 
 use Behat\Mink\Exception\ElementNotFoundException;
+
 interface ErrorPageInterface
 {
     public function getCode(): int;

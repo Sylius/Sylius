@@ -127,7 +127,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
         $config = $this->getContainer()->getParameter('sylius.user.users');
 
         // Keep only users types which implement \Sylius\Component\User\Model\UserInterface
-        $userTypes = array_filter($config, fn(array $userTypeConfig): bool => isset($userTypeConfig['user']['classes']['model']) && is_a($userTypeConfig['user']['classes']['model'], UserInterface::class, true));
+        $userTypes = array_filter($config, fn (array $userTypeConfig): bool => isset($userTypeConfig['user']['classes']['model']) && is_a($userTypeConfig['user']['classes']['model'], UserInterface::class, true));
 
         return array_keys($userTypes);
     }

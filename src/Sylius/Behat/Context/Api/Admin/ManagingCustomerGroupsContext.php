@@ -225,8 +225,8 @@ final class ManagingCustomerGroupsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isDeletionSuccessful(
-            $this->client->getLastResponse()
-        ),
+                $this->client->getLastResponse()
+            ),
             'Customer group could not be deleted'
         );
     }

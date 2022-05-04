@@ -18,12 +18,14 @@ class BlameCart
 {
     /**
      * @psalm-immutable
+     *
      * @var string
      */
     public $shopUserEmail;
 
     /**
      * @psalm-immutable
+     *
      * @var string
      */
     public $orderTokenValue;

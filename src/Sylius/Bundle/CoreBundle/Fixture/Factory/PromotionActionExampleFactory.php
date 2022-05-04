@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Faker\Generator;
 use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Core\Factory\PromotionActionFactoryInterface;
 use Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;

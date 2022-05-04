@@ -26,12 +26,14 @@ class ResendVerificationEmail implements ShopUserIdAwareInterface, ChannelCodeAw
 
     /**
      * @psalm-immutable
+     *
      * @var string|null
      */
     public $channelCode;
 
     /**
      * @psalm-immutable
+     *
      * @var string|null
      */
     public $localeCode;

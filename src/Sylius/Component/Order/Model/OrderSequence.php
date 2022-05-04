@@ -18,9 +18,7 @@ class OrderSequence implements OrderSequenceInterface
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $index = 0;
 
     public function getId()

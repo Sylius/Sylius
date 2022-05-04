@@ -20,9 +20,7 @@ class ProductOptionTranslation extends AbstractTranslation implements ProductOpt
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $name;
 
     public function getId()

@@ -27,6 +27,7 @@ class Country implements CountryInterface, \Stringable
 
     /**
      * Country code ISO 3166-1 alpha-2.
+     *
      * @var string|null
      */
     protected $code;

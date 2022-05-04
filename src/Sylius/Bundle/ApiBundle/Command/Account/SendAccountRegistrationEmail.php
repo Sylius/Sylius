@@ -19,19 +19,13 @@ namespace Sylius\Bundle\ApiBundle\Command\Account;
  */
 class SendAccountRegistrationEmail
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $shopUserEmail;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $localeCode;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $channelCode;
 
     public function __construct(string $shopUserEmail, string $localeCode, string $channelCode)

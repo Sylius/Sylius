@@ -22,17 +22,15 @@ class PickupCart implements ChannelCodeAwareInterface, CustomerEmailAwareInterfa
 {
     /**
      * @psalm-immutable
-     * @var string|null */
+     *
+     * @var string|null
+     */
     public $tokenValue;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     public $localeCode;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $channelCode;
 
     /**

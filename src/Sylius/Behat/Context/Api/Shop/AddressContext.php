@@ -381,9 +381,9 @@ final class AddressContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasViolationWithMessage(
-            $this->client->getLastResponse(),
-            'Please select proper province.'
-        )
+                $this->client->getLastResponse(),
+                'Please select proper province.'
+            )
         );
     }
 

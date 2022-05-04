@@ -37,7 +37,7 @@ final class ShippingCategoryChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'choices' => fn(Options $options) => $this->shippingCategoryRepository->findAll(),
+            'choices' => fn (Options $options) => $this->shippingCategoryRepository->findAll(),
             'choice_value' => 'code',
             'choice_label' => 'name',
             'choice_translation_domain' => false,

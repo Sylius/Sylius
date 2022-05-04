@@ -123,10 +123,10 @@ final class ManagingOrdersContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasItemWithValue(
-            $this->client->getLastResponse(),
-            'customer',
-            $this->iriConverter->getIriFromItem($customer)
-        ),
+                $this->client->getLastResponse(),
+                'customer',
+                $this->iriConverter->getIriFromItem($customer)
+            ),
             sprintf('There is no order for customer %s', $customer->getEmail())
         );
     }

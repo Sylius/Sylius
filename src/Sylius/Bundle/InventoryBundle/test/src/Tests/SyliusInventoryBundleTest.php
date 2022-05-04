@@ -30,7 +30,7 @@ final class SyliusInventoryBundleTest extends WebTestCase
 
         $services = $container->getServiceIds();
 
-        $services = array_filter($services, fn(string $serviceId): bool => str_starts_with($serviceId, 'sylius.'));
+        $services = array_filter($services, fn (string $serviceId): bool => str_starts_with($serviceId, 'sylius.'));
 
         foreach ($services as $id) {
             Assert::assertNotNull($container->get($id, ContainerInterface::NULL_ON_INVALID_REFERENCE));

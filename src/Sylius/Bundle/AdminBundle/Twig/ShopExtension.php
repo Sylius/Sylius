@@ -25,7 +25,7 @@ final class ShopExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('is_shop_enabled', fn(): bool => $this->isShopEnabled),
+            new TwigFunction('is_shop_enabled', fn (): bool => $this->isShopEnabled),
         ];
     }
 }

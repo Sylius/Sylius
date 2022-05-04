@@ -62,7 +62,7 @@ final class CountryChoiceType extends AbstractType
                     $countries = array_filter($countries, $options['choice_filter']);
                 }
 
-                usort($countries, static fn(CountryInterface $firstCountry, CountryInterface $secondCountry): int => $firstCountry->getName() <=> $secondCountry->getName());
+                usort($countries, static fn (CountryInterface $firstCountry, CountryInterface $secondCountry): int => $firstCountry->getName() <=> $secondCountry->getName());
 
                 return $countries;
             })

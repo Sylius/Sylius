@@ -16,21 +16,15 @@ namespace Sylius\Component\Review\Model;
 class Reviewer implements ReviewerInterface
 {
     /** @var mixed */
-    protected $id = null;
+    protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $email;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $firstName;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $lastName;
 
     /**

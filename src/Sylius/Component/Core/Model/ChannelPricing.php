@@ -19,26 +19,18 @@ use Doctrine\Common\Collections\Collection;
 class ChannelPricing implements ChannelPricingInterface, \Stringable
 {
     /** @var mixed */
-    protected $id = null;
+    protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $channelCode;
 
-    /**
-     * @var ProductVariantInterface|null
-     */
+    /** @var ProductVariantInterface|null */
     protected $productVariant;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $price;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $originalPrice;
 
     /**
