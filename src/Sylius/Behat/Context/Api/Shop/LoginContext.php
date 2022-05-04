@@ -276,6 +276,14 @@ final class LoginContext implements Context
     }
 
     /**
+     * @Then I should be notified that the user email does not exist
+     */
+    public function iShouldBeNotifiedThatTheUserDoesNotExist(): void
+    {
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 422);
+    }
+
+    /**
      * @Then I should not be able to change my password again with the same token
      */
     public function iShouldNotBeAbleToChangeMyPasswordAgainWithTheSameToken(): void
