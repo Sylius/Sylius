@@ -115,6 +115,12 @@
             <tag name="validator.constraint_validator" alias="sylius_api_shipment_already_shipped" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\UserNotFoundValidator">
+            <argument type="service" id="sylius.canonicalizer" />
+            <argument type="service" id="sylius.repository.shop_user" />
+            <tag name="validator.constraint_validator" alias="sylius_api_user_not_found" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ResetPasswordTokenExistsValidator">
             <argument type="service" id="sylius.repository.shop_user" />
             <tag name="validator.constraint_validator" alias="sylius_api_reset_password_token_exists" />
