@@ -36,7 +36,8 @@ final class ManagingShipmentsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
+        private string $apiUrlPrefix,
     ) {
     }
 
@@ -116,7 +117,7 @@ final class ManagingShipmentsContext implements Context
         $shipment = $order->getShipments()->first();
 
         $this->client->customAction(
-            sprintf('/api/v2/admin/shipments/%s/ship', (string) $shipment->getId()),
+            sprintf('%s/admin/shipments/%s/ship', $this->apiUrlPrefix,(string) $shipment->getId()),
             HttpRequest::METHOD_PATCH
         );
     }

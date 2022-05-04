@@ -39,6 +39,7 @@ final class ProductContext implements Context
         private IriConverterInterface $iriConverter,
         private ChannelContextSetterInterface $channelContextSetter,
         private RequestFactoryInterface $requestFactory,
+        private string $apiUrlPrefix
     ) {
     }
 
@@ -76,7 +77,7 @@ final class ProductContext implements Context
      */
     public function iViewProductUsingSlug(ProductInterface $product): void
     {
-        $this->client->showByIri('/api/v2/shop/products-by-slug/' . $product->getSlug());
+        $this->client->showByIri(sprintf('%s/shop/products-by-slug/%s', $this->apiUrlPrefix, $product->getSlug()));
 
         $this->sharedStorage->set('product', $product);
     }
@@ -88,7 +89,7 @@ final class ProductContext implements Context
     {
         $response = $this->client->getLastResponse();
 
-        Assert::eq($response->headers->get('Location'), '/api/v2/shop/products/' . $product->getCode());
+        Assert::eq($response->headers->get('Location'), sprintf('%s/shop/products/%s', $this->apiUrlPrefix, $product->getCode()));
     }
 
     /**

@@ -24,20 +24,12 @@ use Webmozart\Assert\Assert;
 
 final class ManagingExchangeRatesContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private SharedStorageInterface $sharedStorage;
-
     public function __construct(
-        ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage,
+        private string $apiUrlPrefix
     ) {
-        $this->client = $client;
-        $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -85,7 +77,10 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iChooseAsTheSourceCurrency(string $currencyCode): void
     {
-        $this->client->addRequestData('sourceCurrency', '/api/v2/admin/currencies/' . $currencyCode);
+        $this->client->addRequestData(
+            'sourceCurrency',
+            sprintf('%s/admin/currencies/%s', $this->apiUrlPrefix, $currencyCode)
+        );
     }
 
     /**
@@ -93,7 +88,10 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iChooseAsTheTargetCurrency(string $currencyCode): void
     {
-        $this->client->addRequestData('targetCurrency', '/api/v2/admin/currencies/' . $currencyCode);
+        $this->client->addRequestData(
+            'targetCurrency',
+            sprintf('%s/admin/currencies/%s', $this->apiUrlPrefix, $currencyCode)
+        );
     }
 
     /**
@@ -347,7 +345,10 @@ final class ManagingExchangeRatesContext implements Context
     {
         $this->client->buildUpdateRequest(Resources::EXCHANGE_RATES, $this->sharedStorage->get('exchange_rate_id'));
 
-        $this->client->addRequestData($currencyType, '/api/v2/admin/currencies/EUR');
+        $this->client->addRequestData(
+            $currencyType,
+            sprintf('%s/admin/currencies/EUR', $this->apiUrlPrefix)
+        );
         $this->client->update();
 
         Assert::false(
@@ -355,7 +356,7 @@ final class ManagingExchangeRatesContext implements Context
                 $this->client->index(Resources::EXCHANGE_RATES),
                 0,
                 $currencyType,
-                '/api/v2/admin/currencies/EUR'
+                sprintf('%s/admin/currencies/EUR', $this->apiUrlPrefix)
             ),
             sprintf('It was possible to change %s', $currencyType)
         );
@@ -368,8 +369,8 @@ final class ManagingExchangeRatesContext implements Context
         /** @var array $item */
         foreach ($this->responseChecker->getCollection($this->client->index(Resources::EXCHANGE_RATES)) as $item) {
             if (
-                $item['sourceCurrency'] === '/api/v2/admin/currencies/' . $sourceCurrency->getCode() &&
-                $item['targetCurrency'] === '/api/v2/admin/currencies/' . $targetCurrency->getCode()
+                $item['sourceCurrency'] === sprintf('%s/admin/currencies/%s', $this->apiUrlPrefix, $sourceCurrency->getCode()) &&
+                $item['targetCurrency'] === sprintf('%s/admin/currencies/%s', $this->apiUrlPrefix, $targetCurrency->getCode())
             ) {
                 return $item;
             }

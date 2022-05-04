@@ -40,6 +40,7 @@ final class LoginContext implements Context
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
         private RequestFactoryInterface $requestFactory,
+        private string $apiUrlPrefix
     ) {
     }
 
@@ -58,7 +59,7 @@ final class LoginContext implements Context
     {
         $this->shopAuthenticationTokenClient->request(
             'POST',
-            '/api/v2/shop/authentication-token',
+            sprintf('%s/shop/authentication-token', $this->apiUrlPrefix),
             [],
             [],
             ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
@@ -104,7 +105,7 @@ final class LoginContext implements Context
     public function iFollowLinkOnMyEmailToResetPassword(ShopUserInterface $user): void
     {
         $this->request = $this->requestFactory->custom(
-            sprintf('api/v2/shop/reset-password-requests/%s', $user->getPasswordResetToken()),
+            sprintf('%s/shop/reset-password-requests/%s', $this->apiUrlPrefix, $user->getPasswordResetToken()),
             HttpRequest::METHOD_PATCH
         );
     }
@@ -268,7 +269,10 @@ final class LoginContext implements Context
     {
         $this->client->executeCustomRequest($this->request);
 
-        Assert::same($this->client->getLastResponse()->getStatusCode(), 404);
+        // token is removed when used
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 500);
+        $message = $this->responseChecker->getError($this->client->getLastResponse());
+        Assert::startsWith($message, 'No user found with reset token: ');
     }
 
     private function addLocale(string $locale): void

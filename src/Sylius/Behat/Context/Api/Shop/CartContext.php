@@ -39,6 +39,7 @@ final class CartContext implements Context
         private ProductVariantResolverInterface $productVariantResolver,
         private IriConverterInterface $iriConverter,
         private RequestFactoryInterface $requestFactory,
+        private string $apiUrlPrefix,
     ) {
     }
 
@@ -672,7 +673,7 @@ final class CartContext implements Context
     private function pickupCart(?string $localeCode = null): string
     {
         $request = $this->requestFactory->custom(
-            '/api/v2/shop/orders',
+            sprintf('%s/shop/orders', $this->apiUrlPrefix),
             HttpRequest::METHOD_POST,
             $localeCode ? ['HTTP_ACCEPT_LANGUAGE' => $localeCode] : []
         );

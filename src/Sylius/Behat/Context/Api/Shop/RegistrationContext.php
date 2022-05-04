@@ -24,30 +24,16 @@ use Webmozart\Assert\Assert;
 
 final class RegistrationContext implements Context
 {
-    private AbstractBrowser $client;
-
-    private ApiClientInterface $shopClient;
-
-    private LoginContext $loginContext;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private ResponseCheckerInterface $responseChecker;
-
     private array $content = [];
 
     public function __construct(
-        AbstractBrowser $client,
-        ApiClientInterface $shopClient,
-        LoginContext $loginContext,
-        SharedStorageInterface $sharedStorage,
-        ResponseCheckerInterface $responseChecker
+        private AbstractBrowser $client,
+        private ApiClientInterface $shopClient,
+        private LoginContext $loginContext,
+        private SharedStorageInterface $sharedStorage,
+        private ResponseCheckerInterface $responseChecker,
+        private string $apiUrlPrefix
     ) {
-        $this->client = $client;
-        $this->shopClient = $shopClient;
-        $this->loginContext = $loginContext;
-        $this->sharedStorage = $sharedStorage;
-        $this->responseChecker = $responseChecker;
     }
 
     /**
@@ -122,7 +108,7 @@ final class RegistrationContext implements Context
 
         $this->client->request(
             'PATCH',
-            \sprintf('/api/v2/shop/account-verification-requests/%s', $token),
+            \sprintf('%s/shop/account-verification-requests/%s', $this->apiUrlPrefix, $token),
             [],
             [],
             ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/merge-patch+json'],
@@ -156,7 +142,7 @@ final class RegistrationContext implements Context
     {
         $this->client->request(
             'POST',
-            '/api/v2/shop/customers',
+            sprintf('%s/shop/customers', $this->apiUrlPrefix),
             [],
             [],
             ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/ld+json'],

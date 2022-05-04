@@ -21,30 +21,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ApiPlatformClient implements ApiClientInterface
 {
-    private AbstractBrowser $client;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private RequestFactoryInterface $requestFactory;
-
-    private string $authorizationHeader;
-
-    private ?string $section;
-
     private ?RequestInterface $request = null;
 
     public function __construct(
-        AbstractBrowser $client,
-        SharedStorageInterface $sharedStorage,
-        RequestFactoryInterface $requestFactory,
-        string $authorizationHeader,
-        ?string $section = null
+        private AbstractBrowser $client,
+        private SharedStorageInterface $sharedStorage,
+        private RequestFactoryInterface $requestFactory,
+        private string $authorizationHeader,
+        private ?string $section = null
     ) {
-        $this->client = $client;
-        $this->sharedStorage = $sharedStorage;
-        $this->requestFactory = $requestFactory;
-        $this->authorizationHeader = $authorizationHeader;
-        $this->section = $section;
     }
 
     public function index(string $resource): Response
