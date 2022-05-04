@@ -286,6 +286,15 @@ final class LoginContext implements Context
         Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_NOT_FOUND);
         $message = $this->responseChecker->getError($this->client->getLastResponse());
         Assert::startsWith($message, 'No user found with reset token:');
+        $this->iShouldBeNotifiedThatMyPasswordShouldNotBeReset();
+    }
+
+    /**
+     * @Then I should be notified that my password should not be reset
+     */
+    public function iShouldBeNotifiedThatMyPasswordShouldNotBeReset(): void
+    {
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 422);
     }
 
     private function addLocale(string $locale): void

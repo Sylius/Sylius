@@ -31,6 +31,7 @@ final class UserContext implements Context
         private ExampleFactoryInterface $userFactory,
         private ObjectManager $userManager,
         private MessageBusInterface $messageBus,
+        private string $passwordResetTokenTtl,
     ) {
     }
 
@@ -151,6 +152,21 @@ final class UserContext implements Context
 
         $user->setPasswordResetToken($token);
         $user->setPasswordRequestedAt(new \DateTime());
+
+        $this->userManager->flush();
+    }
+
+    /**
+     * @Given /^(?:(I) have|(this user) has) already received a resetting password email a while ago$/
+     */
+    public function iWaitedTooMuchTimeToResetMyPassword(UserInterface $user): void
+    {
+        $this->prepareUserPasswordResetToken($user);
+
+        /** @var \DateTime $passwordRequestedAt */
+        $passwordRequestedAt = $user->getPasswordRequestedAt();
+        $passwordRequestedAt->sub(new \DateInterval($this->passwordResetTokenTtl));
+        $user->setPasswordRequestedAt($passwordRequestedAt);
 
         $this->userManager->flush();
     }
