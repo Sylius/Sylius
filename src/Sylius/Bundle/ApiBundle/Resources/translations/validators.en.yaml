@@ -30,3 +30,6 @@ sylius:
         not_found: 'The shipping method with %code% code does not exist.'
         not_available: 'The shipping method %name% is not available for this order. Please reselect your shipping method.'
         shipping_address_not_found: 'Order should be addressed first.'
+    reset_password:
+        invalid_token: 'No user found with reset token: %token%.'
+        token_expired: 'Password reset token has expired.'
