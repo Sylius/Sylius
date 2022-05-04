@@ -1,0 +1,140 @@
+---------------------------------------------------------------------------
+
+by pavol-tuka at 2022-01-04T18:30:35Z
+
+I upgraded chart.js to 3.7.0.
+
+```
+$ yarn upgrade chart.js --latest
+yarn upgrade v1.22.17
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+warning " > sass-loader@7.3.1" has unmet peer dependency "webpack@^3.0.0 || ^4.0.0".
+[4/4] Rebuilding all packages...
+success Saved lockfile.
+success Saved 1 new dependency.
+info Direct dependencies
+└─ chart.js@3.7.0
+info All dependencies
+└─ chart.js@3.7.0
+Done in 2.19s.
+
+$ yarn encore production
+yarn run v1.22.17
+$ /var/www/sylius/node_modules/.bin/encore production
+Running webpack ...
+
+DONE  Compiled successfully in 3351ms
+I  26 files written to public/build/shop
+
+DONE  Compiled successfully in 7483ms
+I  20 files written to public/build/admin
+
+Child shop:
+Entrypoint shop-entry [big] = shop-entry.945bbc90.css shop-entry.9ae26e2f.js
+
+Child admin:
+Entrypoint admin-entry [big] = admin-entry.f898d39b.css admin-entry.1025c52a.js
+
+Done in 7.98s.
+```
+
+---------------------------------------------------------------------------
+
+by UlrichHP at 2022-03-29T13:53:59Z
+
+Hey!
+Is there any news on when this PR will be merged ?
+Thanks
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-03-29T14:48:47Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-2"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-04-06T10:23:41Z
+
+Blocked by #13829
+
+---------------------------------------------------------------------------
+
+by UlrichHP at 2022-04-11T09:05:00Z
+
+Is it ok now for this PR ? The issue that blocked it seems fixed.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-04-11T09:46:36Z
+
+@UlrichHP there's one more issue: how to upgrade without breaking end-user applications.
+Right now, if we are to release this patch (1.10.x), then just upgrading Sylius will break applications on case-sensitive filesystems.
+@lchrusciel pointed this out by referring to this change: https://github.com/Sylius/Sylius/pull/13419/files#diff-c1e4e1fc57577b280d0448615026ca337655c021d9f830cee33117282a130ffaR1
+The issue comes from the fact that this file is used directly in end-user applications through Gulp/Webpack config files.
+The `package.json` and `yarn.lock` files updated in this PR are only used for the development and testing of the Sylius itself.
+End-user applications have their own `package.json` and `yarn.lock` files, usually inherited from Sylius-Standard.
+In these circumstances, an update of Sylius would then also require an explicit update of `chart.js`.
+I'm not sure wherever noting this in UPGRADE.md is enough.
+
+---------------------------------------------------------------------------
+
+by UlrichHP at 2022-04-11T12:05:23Z
+
+Oh ok i understand, thanks for the explanation @vvasiloi.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-04-11T13:17:46Z
+
+Hey,
+
+unfortunately, it won't be that simple. This change will break charts on each case sensitive OS. We have to open it to master and provide a nice upgrade file + fix it on Sylius Standard.
+
+Sorry, for making some mess, as I was the one responsible for lowering the branch
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-04-11T13:18:20Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-2"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-04-11T13:21:30Z
+
+@lchrusciel maybe we can provide some sort of a compatibility layer in `sylius-chart.js`, so it works with both versions 2 and 3 of chart.js?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-04-15T14:54:53Z
+
+Victor, I'm open to that, but it's outside of my specialization zone. I would merge it to master and provide upgrade file for that
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-04-15T14:59:58Z
+
+@lchrusciel I looked into it, but couldn't find anything... I'm not proficient in JS stuff.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2022-05-04T10:45:00Z
+
+Thanks, Pavol! :tada:
