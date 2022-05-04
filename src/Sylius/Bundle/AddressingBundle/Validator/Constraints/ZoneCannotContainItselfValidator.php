@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -31,7 +32,13 @@ final class ZoneCannotContainItselfValidator extends ConstraintValidator
 
         /** @var ZoneMemberInterface $zoneMember */
         foreach ($value as $zoneMember) {
-            if ($zoneMember->getCode() === $zoneMember->getBelongsTo()->getCode()) {
+            $zone = $zoneMember->getBelongsTo();
+
+            if ($zone->getType() !== ZoneInterface::TYPE_ZONE) {
+                continue;
+            }
+
+            if ($zoneMember->getCode() === $zone->getCode()) {
                 $this->context->addViolation($constraint->message);
             }
         }
