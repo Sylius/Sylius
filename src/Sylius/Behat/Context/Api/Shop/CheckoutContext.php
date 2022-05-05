@@ -20,6 +20,7 @@ use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -329,6 +330,22 @@ final class CheckoutContext implements Context
         $this->addressOrder($this->content);
 
         $this->content = [];
+    }
+
+    /**
+     * @When I proceed as guest :email with :country as billing country
+     */
+    public function iProceedLoggingAsGuestWithAsBillingCountry(string $email, CountryInterface $country): void
+    {
+        $this->addressOrderWithCountryAndEmail($country, $email);
+    }
+
+    /**
+     * @When I proceed selecting :country as billing country
+     */
+    public function iProceedSelectingCountryAsBillingCountry(CountryInterface $country): void
+    {
+        $this->addressOrderWithCountryAndEmail($country);
     }
 
     /**
@@ -1191,6 +1208,21 @@ final class CheckoutContext implements Context
         }
 
         return false;
+    }
+
+    private function addressOrderWithCountryAndEmail(CountryInterface $country, ?string $email = null): void
+    {
+        $this->addressOrder([
+            'email' => $email,
+            'billingAddress' => [
+                'city' => 'Madrid',
+                'street' => 'Av. de Concha Espina',
+                'postcode' => '28036',
+                'countryCode' => $country->getCode(),
+                'firstName' => 'Santiago',
+                'lastName' => 'Bernabeu',
+            ],
+        ]);
     }
 
     private function addressOrder(array $content): void
