@@ -19,6 +19,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -66,7 +67,8 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
-        LocaleInterface $locale
+        LocaleInterface $locale,
+        AddressInterface $address
     ): void {
         $pickupCart = new PickupCart();
         $pickupCart->setChannelCode('code');
@@ -77,6 +79,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $channel->getDefaultLocale()->willReturn($locale);
 
         $customerRepository->findOneBy(['email' => 'sample@email.com'])->willReturn($customer);
+        $customer->getDefaultAddress()->willReturn($address);
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn(null);
 
@@ -88,6 +91,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $cartFactory->createNew()->willReturn($cart);
         $cart->setCustomer($customer)->shouldBeCalled();
+        $cart->setBillingAddress($address)->shouldBeCalled();
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('USD')->shouldBeCalled();
         $cart->setLocaleCode('en_US')->shouldBeCalled();
