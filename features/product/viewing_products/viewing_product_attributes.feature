@@ -40,14 +40,14 @@ Feature: Viewing product's attributes
         Given the store has a product "T-shirt banana"
         And this product has a "checkbox" attribute "T-shirt with cotton" set to "Yes"
         When I check this product's details
-        Then I should see the product attribute "T-shirt with cotton" with value "Yes"
+        Then I should see the product attribute "T-shirt with cotton" with positive value
 
     @ui @api
     Scenario: Viewing a detailed page with product's checkbox non-translatable attribute
         Given the store has a product "T-shirt banana"
         And this product has non-translatable "checkbox" attribute "T-shirt with cotton" set to "Yes"
         When I check this product's details
-        Then I should see the product attribute "T-shirt with cotton" with value "Yes"
+        Then I should see the product attribute "T-shirt with cotton" with positive value
 
     @ui @api
     Scenario: Viewing a detailed page with product's date attribute
@@ -82,14 +82,14 @@ Feature: Viewing product's attributes
         Given the store has a product "T-shirt banana"
         And this product has a percent attribute "T-shirt cotton content" with value 50%
         When I check this product's details
-        Then I should see the product attribute "T-shirt cotton content" with value "50 %"
+        Then I should see the product attribute "T-shirt cotton content" with value 50%
 
     @ui @api
     Scenario: Viewing a detailed page with product's percent non-translatable attribute
         Given the store has a product "T-shirt banana"
         And this product has non-translatable percent attribute "T-shirt cotton content" with value 50%
         When I check this product's details
-        Then I should see the product attribute "T-shirt cotton content" with value "50 %"
+        Then I should see the product attribute "T-shirt cotton content" with value 50%
 
     @ui @api
     Scenario: The product attributes are listed by their respective position

@@ -195,6 +195,14 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then /^I should(?:| also) see the product attribute "([^"]+)" with (positive|negative) value$/
+     */
+    public function iShouldSeeTheProductAttributeWithBoolean($attributeName, $expectedAttribute): void
+    {
+        Assert::same($this->showPage->getAttributeByName($attributeName), 'positive' === $expectedAttribute ? 'Yes' : 'No');
+    }
+
+    /**
      * @Then I should not see the product attribute :attributeName
      */
     public function iShouldNotSeeTheProductAttribute(string $attributeName): void
@@ -210,6 +218,17 @@ final class ProductContext implements Context
         Assert::eq(
             new \DateTime($this->showPage->getAttributeByName($attributeName)),
             new \DateTime($expectedAttribute)
+        );
+    }
+
+    /**
+     * @Then /^I should(?:| also) see the product attribute "([^"]+)" with value ([^"]+)%$/
+     */
+    public function iShouldSeeTheProductAttributeWithPercentage(string $attributeName, int $expectedAttribute): void
+    {
+        Assert::eq(
+            $this->showPage->getAttributeByName($attributeName),
+            sprintf('%d %%', $expectedAttribute)
         );
     }
 
@@ -607,7 +626,7 @@ final class ProductContext implements Context
     ): void {
         $this->showPage->selectVariant($variant->getName());
 
-        Assert::same(sizeof($this->showPage->getCatalogPromotions()), 1);
+        Assert::same(count($this->showPage->getCatalogPromotions()), 1);
         Assert::same($this->showPage->getCatalogPromotionName(), $promotionName);
         Assert::same($this->showPage->getPrice(), $price);
         Assert::same($this->showPage->getOriginalPrice(), $originalPrice);

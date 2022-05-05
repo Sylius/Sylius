@@ -22,7 +22,6 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -30,6 +29,7 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
+use Webmozart\Assert\InvalidArgumentException;
 
 final class ProductContext implements Context
 {
@@ -51,14 +51,18 @@ final class ProductContext implements Context
      */
     public function iViewProduct(ProductInterface $product): void
     {
-        $this->client->show(Resources::PRODUCTS, $product->getCode());
+        $productAttributesResponse = $this->client->subResourceIndex(Resources::PRODUCTS, 'attributes', $product->getCode());
 
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $product->getVariants()->first();
 
         $this->sharedStorage->set('product', $product);
         $this->sharedStorage->set('product_variant', $productVariant);
+        $this->sharedStorage->set('product_attributes', $this->responseChecker->getCollection($productAttributesResponse));
+
+        $this->client->show(Resources::PRODUCTS, $product->getCode());
     }
+
     /**
      * @When I view product :product in the :localeCode locale
      * @When /^I check (this product)'s details in the ("([^"]+)" locale)$/
@@ -170,7 +174,7 @@ final class ProductContext implements Context
     /**
      * @Then I should (also) see the product attribute :attributeName with value :expectedAttribute
      */
-    public function iShouldSeeTheProductAttributeWithValue($attributeName, $expectedAttribute): void
+    public function iShouldSeeTheProductAttributeWithValue(string $attributeName, string $expectedAttribute): void
     {
         $attribute = $this->getAttributeByName($attributeName);
 
@@ -181,16 +185,39 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then I should (also) see the product attribute :attributeName with date :expectedAttribute
+     * @Then /^I should(?:| also) see the product attribute "([^"]+)" with (positive|negative) value$/
      */
-    public function iShouldSeeTheProductAttributeWithDate($attributeName, $expectedAttribute): void
+    public function iShouldSeeTheProductAttributeWithBoolean(string $attributeName, string $expectedAttribute): void
     {
         $attribute = $this->getAttributeByName($attributeName);
 
         Assert::same(
-            new \DateTime($attribute['date']),
-            new \DateTime($expectedAttribute)
+            $attribute['value'],
+            'positive' === $expectedAttribute
         );
+    }
+
+    /**
+     * @Then /^I should(?:| also) see the product attribute "([^"]+)" with value ([^"]+)%$/
+     */
+    public function iShouldSeeTheProductAttributeWithPercentage(string $attributeName, int $expectedAttribute): void
+    {
+        $attribute = $this->getAttributeByName($attributeName);
+
+        Assert::same(
+            $attribute['value'],
+            $expectedAttribute / 100
+        );
+    }
+
+    /**
+     * @Then I should (also) see the product attribute :attributeName with date :expectedAttribute
+     */
+    public function iShouldSeeTheProductAttributeWithDate(string $attributeName, string $expectedAttribute): void
+    {
+        $attribute = $this->getAttributeByName($attributeName);
+
+        Assert::true(new \DateTime($attribute['value']) == new \DateTime($expectedAttribute));
     }
 
     /**
@@ -199,7 +226,7 @@ final class ProductContext implements Context
     public function iShouldSeeAttributes($count): void
     {
         Assert::same(
-            count($this->responseChecker->getValue($this->client->getLastResponse(), 'attributes')),
+            count($this->sharedStorage->get('product_attributes')),
             (int) $count
         );
     }
@@ -209,7 +236,7 @@ final class ProductContext implements Context
      */
     public function theFirstAttributeShouldBe($name): void
     {
-        $attributes = $this->responseChecker->getValue($this->client->getLastResponse(), 'attributes');
+        $attributes = $this->sharedStorage->get('product_attributes');
 
         Assert::same(reset($attributes)['name'], $name);
     }
@@ -219,7 +246,7 @@ final class ProductContext implements Context
      */
     public function theLastAttributeShouldBe($name): void
     {
-        $attributes = $this->responseChecker->getValue($this->client->getLastResponse(), 'attributes');
+        $attributes = $this->sharedStorage->get('product_attributes');
 
         Assert::same(end($attributes)['name'], $name);
     }
@@ -721,17 +748,12 @@ final class ProductContext implements Context
 
     private function getAttributeByName($name): array
     {
-        $attributes = $this->responseChecker->getValue($this->client->getLastResponse(), 'attributes');
-        $attribute = null;
-
-        foreach ($attributes as $attribute) {
+        foreach ($this->sharedStorage->get('product_attributes') as $attribute) {
             if ($attribute['name'] === $name) {
-                break;
+                return $attribute;
             }
         }
 
-        Assert::notNull($attribute);
-
-        return $attribute;
+        throw new InvalidArgumentException('Expected a value other than null.');
     }
 }
