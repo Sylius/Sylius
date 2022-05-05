@@ -15,14 +15,14 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Validator\Constraints\ResetPasswordTokenNotExpired;
+use Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserResetPasswordTokenNotExpired;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-final class ResetPasswordTokenNotExpiredValidatorSpec extends ObjectBehavior
+final class ShopUserResetPasswordTokenNotExpiredValidatorSpec extends ObjectBehavior
 {
     function let(UserRepositoryInterface $userRepository): void
     {
@@ -66,7 +66,7 @@ final class ResetPasswordTokenNotExpiredValidatorSpec extends ObjectBehavior
             ->addViolation('sylius.reset_password.token_expired')
             ->shouldNotBeCalled();
 
-        $this->validate($value, new ResetPasswordTokenNotExpired());
+        $this->validate($value, new ShopUserResetPasswordTokenNotExpired());
     }
 
     function it_does_not_add_violation_if_reset_password_token_is_not_expired(
@@ -89,7 +89,7 @@ final class ResetPasswordTokenNotExpiredValidatorSpec extends ObjectBehavior
             ->addViolation('sylius.reset_password.token_expired')
             ->shouldNotBeCalled();
 
-        $this->validate($value, new ResetPasswordTokenNotExpired());
+        $this->validate($value, new ShopUserResetPasswordTokenNotExpired());
     }
 
     function it_adds_violation_if_reset_password_token_is_expired(
@@ -112,6 +112,6 @@ final class ResetPasswordTokenNotExpiredValidatorSpec extends ObjectBehavior
             ->addViolation('sylius.reset_password.token_expired')
             ->shouldBeCalled();
 
-        $this->validate($value, new ResetPasswordTokenNotExpired());
+        $this->validate($value, new ShopUserResetPasswordTokenNotExpired());
     }
 }

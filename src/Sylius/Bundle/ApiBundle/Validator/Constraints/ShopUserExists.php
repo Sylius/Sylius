@@ -16,12 +16,12 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 
 /** @experimental */
-final class ResetPasswordTokenExists extends Constraint
+final class ShopUserExists extends Constraint
 {
-    public string $message = 'sylius.reset_password.invalid_token';
+    public string $message = 'sylius.shop_user.not_found';
 
     public function validatedBy(): string
     {
-        return 'sylius_api_reset_password_token_exists';
+        return 'sylius_api_shop_user_exists';
     }
 }

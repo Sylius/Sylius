@@ -20,7 +20,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class ResetPasswordTokenNotExpiredValidator extends ConstraintValidator
+final class ShopUserResetPasswordTokenNotExpiredValidator extends ConstraintValidator
 {
     public function __construct(
         private UserRepositoryInterface $userRepository,
@@ -32,8 +32,8 @@ final class ResetPasswordTokenNotExpiredValidator extends ConstraintValidator
     {
         Assert::string($value);
 
-        /** @var ResetPasswordTokenNotExpired $constraint */
-        Assert::isInstanceOf($constraint, ResetPasswordTokenNotExpired::class);
+        /** @var ShopUserResetPasswordTokenNotExpired $constraint */
+        Assert::isInstanceOf($constraint, ShopUserResetPasswordTokenNotExpired::class);
 
         /** @var UserInterface|null $user */
         $user = $this->userRepository->findOneBy(['passwordResetToken' => $value]);

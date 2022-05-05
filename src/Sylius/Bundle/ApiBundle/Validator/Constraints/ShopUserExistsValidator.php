@@ -21,7 +21,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class UserExistsValidator extends ConstraintValidator
+final class ShopUserExistsValidator extends ConstraintValidator
 {
     public function __construct(
         private CanonicalizerInterface $canonicalizer,
@@ -33,8 +33,8 @@ final class UserExistsValidator extends ConstraintValidator
     {
         Assert::string($value);
 
-        /** @var UserExists $constraint */
-        Assert::isInstanceOf($constraint, UserExists::class);
+        /** @var ShopUserExists $constraint */
+        Assert::isInstanceOf($constraint, ShopUserExists::class);
 
         $emailCanonical = $this->canonicalizer->canonicalize($value);
         /** @var UserInterface $user */
