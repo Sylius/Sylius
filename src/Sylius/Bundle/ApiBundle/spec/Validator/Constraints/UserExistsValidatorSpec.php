@@ -14,15 +14,15 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Validator\Constraints\UserNotFound;
-use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Bundle\ApiBundle\Validator\Constraints\UserExists;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-final class UserNotFoundValidatorSpec extends ObjectBehavior
+final class UserExistsValidatorSpec extends ObjectBehavior
 {
     function let(
         CanonicalizerInterface $canonicalizer,
@@ -54,11 +54,11 @@ final class UserNotFoundValidatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_not_add_violation_if_shop_user_exist(
+    function it_does_not_add_violation_if_user_exist(
         CanonicalizerInterface $canonicalizer,
         UserRepositoryInterface $userRepository,
         ExecutionContextInterface $executionContext,
-        ShopUserInterface $shopUser
+        UserInterface $user
     ): void {
         $this->initialize($executionContext);
 
@@ -66,16 +66,16 @@ final class UserNotFoundValidatorSpec extends ObjectBehavior
 
         $canonicalizer->canonicalize('sylius@example.com')->willReturn('sylius@example.com');
 
-        $userRepository->findOneByEmail('sylius@example.com')->willReturn($shopUser);
+        $userRepository->findOneByEmail('sylius@example.com')->willReturn($user);
 
         $executionContext
             ->addViolation('sylius.user.not_found', ['%email%' => 'sylius@example.com'])
             ->shouldNotBeCalled();
 
-        $this->validate($value, new UserNotFound());
+        $this->validate($value, new UserExists());
     }
 
-    function it_adds_violation_if_reset_password_token_exists(
+    function it_adds_violation_if_user_does_not_exist(
         CanonicalizerInterface $canonicalizer,
         UserRepositoryInterface $userRepository,
         ExecutionContextInterface $executionContext
@@ -92,6 +92,6 @@ final class UserNotFoundValidatorSpec extends ObjectBehavior
             ->addViolation('sylius.user.not_found', ['%email%' => 'sylius@example.com'])
             ->shouldBeCalled();
 
-        $this->validate($value, new UserNotFound());
+        $this->validate($value, new UserExists());
     }
 }

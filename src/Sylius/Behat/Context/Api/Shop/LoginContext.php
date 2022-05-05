@@ -290,19 +290,23 @@ final class LoginContext implements Context
     {
         $this->client->executeCustomRequest($this->request);
 
+<<<<<<< HEAD
         // token is removed when used
         Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_NOT_FOUND);
         $message = $this->responseChecker->getError($this->client->getLastResponse());
         Assert::startsWith($message, 'No user found with reset token:');
         $this->iShouldBeNotifiedThatMyPasswordShouldNotBeReset();
+=======
+        $this->iShouldNotBeAbleToChangeMyPassword();
+>>>>>>> e19f21d74d (Rename validators and spec methods)
     }
 
     /**
-     * @Then I should be notified that my password should not be reset
+     * @Then I should not be able to change my password
      */
-    public function iShouldBeNotifiedThatMyPasswordShouldNotBeReset(): void
+    public function iShouldNotBeAbleToChangeMyPassword(): void
     {
-        Assert::same($this->client->getLastResponse()->getStatusCode(), 422);
+        Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     private function addLocale(string $locale): void

@@ -56,4 +56,4 @@ Feature: Resetting a password
         And I specify my new password as "newp@ssw0rd"
         And I confirm my new password as "newp@ssw0rd"
         And I reset it
-        Then I should be notified that my password should not be reset
+        Then I should not be able to change my password

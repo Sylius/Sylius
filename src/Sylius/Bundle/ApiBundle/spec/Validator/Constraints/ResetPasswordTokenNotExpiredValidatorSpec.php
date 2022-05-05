@@ -15,14 +15,14 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Validator\Constraints\ResetPasswordTokenExpires;
-use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Bundle\ApiBundle\Validator\Constraints\ResetPasswordTokenNotExpired;
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-final class ResetPasswordTokenExpiresValidatorSpec extends ObjectBehavior
+final class ResetPasswordTokenNotExpiredValidatorSpec extends ObjectBehavior
 {
     function let(UserRepositoryInterface $userRepository): void
     {
@@ -52,7 +52,7 @@ final class ResetPasswordTokenExpiresValidatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_not_add_violation_if_shop_user_does_not_exist(
+    function it_does_not_add_violation_if_reset_password_token_does_not_exist(
         UserRepositoryInterface $userRepository,
         ExecutionContextInterface $executionContext
     ): void {
@@ -66,52 +66,52 @@ final class ResetPasswordTokenExpiresValidatorSpec extends ObjectBehavior
             ->addViolation('sylius.reset_password.token_expired')
             ->shouldNotBeCalled();
 
-        $this->validate($value, new ResetPasswordTokenExpires());
+        $this->validate($value, new ResetPasswordTokenNotExpired());
     }
 
-    function it_does_not_add_violation_if_password_request_is_not_expired(
+    function it_does_not_add_violation_if_reset_password_token_is_not_expired(
         UserRepositoryInterface $userRepository,
         ExecutionContextInterface $executionContext,
-        ShopUserInterface $shopUser
+        UserInterface $user
     ): void {
         $this->initialize($executionContext);
 
         $value = 'token';
 
-        $shopUser->isPasswordRequestNonExpired(Argument::that(function (\DateInterval $dateInterval) {
+        $user->isPasswordRequestNonExpired(Argument::that(function (\DateInterval $dateInterval) {
             return $dateInterval->format('%d') === '1';
         }))->willReturn(true);
 
-        $userRepository->findOneBy(['passwordResetToken' => 'token'])->willReturn($shopUser);
+        $userRepository->findOneBy(['passwordResetToken' => 'token'])->willReturn($user);
 
 
         $executionContext
             ->addViolation('sylius.reset_password.token_expired')
             ->shouldNotBeCalled();
 
-        $this->validate($value, new ResetPasswordTokenExpires());
+        $this->validate($value, new ResetPasswordTokenNotExpired());
     }
 
-    function it_adds_violation_if_reset_password_token_expires(
+    function it_adds_violation_if_reset_password_token_is_expired(
         UserRepositoryInterface $userRepository,
         ExecutionContextInterface $executionContext,
-        ShopUserInterface $shopUser
+        UserInterface $user
     ): void {
         $this->initialize($executionContext);
 
         $value = 'token';
 
-        $shopUser->isPasswordRequestNonExpired(Argument::that(function (\DateInterval $dateInterval) {
+        $user->isPasswordRequestNonExpired(Argument::that(function (\DateInterval $dateInterval) {
             return $dateInterval->format('%d') === '1';
         }))->willReturn(false);
 
-        $userRepository->findOneBy(['passwordResetToken' => 'token'])->willReturn($shopUser);
+        $userRepository->findOneBy(['passwordResetToken' => 'token'])->willReturn($user);
 
 
         $executionContext
             ->addViolation('sylius.reset_password.token_expired')
             ->shouldBeCalled();
 
-        $this->validate($value, new ResetPasswordTokenExpires());
+        $this->validate($value, new ResetPasswordTokenNotExpired());
     }
 }

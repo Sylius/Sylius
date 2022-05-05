@@ -15,7 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\ResetPasswordTokenExists;
-use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
@@ -51,16 +51,16 @@ final class ResetPasswordTokenExistsValidatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_not_add_violation_if_shop_user_exist(
+    function it_does_not_add_violation_if_user_exist(
         UserRepositoryInterface $userRepository,
         ExecutionContextInterface $executionContext,
-        ShopUserInterface $shopUser
+        UserInterface $user
     ): void {
         $this->initialize($executionContext);
 
         $value = 'token';
 
-        $userRepository->findOneBy(['passwordResetToken' => 'token'])->willReturn($shopUser);
+        $userRepository->findOneBy(['passwordResetToken' => 'token'])->willReturn($user);
 
         $executionContext
             ->addViolation('sylius.reset_password.invalid_token', ['%token%' => 'token'])
@@ -69,7 +69,7 @@ final class ResetPasswordTokenExistsValidatorSpec extends ObjectBehavior
         $this->validate($value, new ResetPasswordTokenExists());
     }
 
-    function it_adds_violation_if_reset_password_token_exists(
+    function it_adds_violation_if_reset_password_token_does_not_exist(
         UserRepositoryInterface $userRepository,
         ExecutionContextInterface $executionContext
     ): void {

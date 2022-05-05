@@ -278,13 +278,13 @@ final class LoginContext implements Context
     {
         $this->resetPasswordPage->tryToOpen(['token' => 'itotallyforgotmypassword']);
 
-        $this->iShouldBeNotifiedThatMyPasswordShouldNotBeReset();
+        $this->iShouldNotBeAbleToChangeMyPassword();
     }
 
     /**
-     * @Then I should be notified that my password should not be reset
+     * @Then I should not be able to change my password
      */
-    public function iShouldBeNotifiedThatMyPasswordShouldNotBeReset(): void
+    public function iShouldNotBeAbleToChangeMyPassword(): void
     {
         Assert::false($this->resetPasswordPage->isOpen(), 'User should not be on the forgotten password page');
     }

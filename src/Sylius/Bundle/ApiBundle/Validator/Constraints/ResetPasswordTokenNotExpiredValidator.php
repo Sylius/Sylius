@@ -13,18 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
-use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class ResetPasswordTokenExpiresValidator extends ConstraintValidator
+final class ResetPasswordTokenNotExpiredValidator extends ConstraintValidator
 {
     public function __construct(
-        private UserRepositoryInterface $shopUserRepository,
-        private string $passwordResetTokenTtl
+        private UserRepositoryInterface $userRepository,
+        private string $passwordResetTokenTtl,
     ) {
     }
 
@@ -32,19 +32,19 @@ final class ResetPasswordTokenExpiresValidator extends ConstraintValidator
     {
         Assert::string($value);
 
-        /** @var ResetPasswordTokenExpires $constraint */
-        Assert::isInstanceOf($constraint, ResetPasswordTokenExpires::class);
+        /** @var ResetPasswordTokenNotExpired $constraint */
+        Assert::isInstanceOf($constraint, ResetPasswordTokenNotExpired::class);
 
-        /** @var ShopUserInterface|null $shopUser */
-        $shopUser = $this->shopUserRepository->findOneBy(['passwordResetToken' => $value]);
+        /** @var UserInterface|null $user */
+        $user = $this->userRepository->findOneBy(['passwordResetToken' => $value]);
 
-        if (null === $shopUser) {
+        if (null === $user) {
             return;
         }
 
         $lifetime = new \DateInterval($this->passwordResetTokenTtl);
 
-        if ($shopUser->isPasswordRequestNonExpired($lifetime)) {
+        if ($user->isPasswordRequestNonExpired($lifetime)) {
             return;
         }
 

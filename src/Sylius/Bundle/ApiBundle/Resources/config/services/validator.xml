@@ -115,21 +115,21 @@
             <tag name="validator.constraint_validator" alias="sylius_api_shipment_already_shipped" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\UserNotFoundValidator">
+        <service id="sylius.api.validator.shop.user_exists" class="Sylius\Bundle\ApiBundle\Validator\Constraints\UserExistsValidator">
             <argument type="service" id="sylius.canonicalizer" />
             <argument type="service" id="sylius.repository.shop_user" />
-            <tag name="validator.constraint_validator" alias="sylius_api_user_not_found" />
+            <tag name="validator.constraint_validator" alias="sylius_api_user_exists" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ResetPasswordTokenExistsValidator">
+        <service id="sylius.api.validator.shop.reset_password_token_exists" class="Sylius\Bundle\ApiBundle\Validator\Constraints\ResetPasswordTokenExistsValidator">
             <argument type="service" id="sylius.repository.shop_user" />
             <tag name="validator.constraint_validator" alias="sylius_api_reset_password_token_exists" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ResetPasswordTokenExpiresValidator">
+        <service id="sylius.api.validator.shop.reset_password_token_not_expired" class="Sylius\Bundle\ApiBundle\Validator\Constraints\ResetPasswordTokenNotExpiredValidator">
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="string">%sylius.shop_user.token.password_reset.ttl%</argument>
-            <tag name="validator.constraint_validator" alias="sylius_api_reset_password_token_expires" />
+            <tag name="validator.constraint_validator" alias="sylius_api_reset_password_token_not_expired" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserNotVerifiedValidator">

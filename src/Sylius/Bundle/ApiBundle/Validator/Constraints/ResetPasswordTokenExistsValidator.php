@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
-use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -22,7 +22,7 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ResetPasswordTokenExistsValidator extends ConstraintValidator
 {
-    public function __construct(private UserRepositoryInterface $shopUserRepository)
+    public function __construct(private UserRepositoryInterface $userRepository)
     {
     }
 
@@ -33,10 +33,10 @@ final class ResetPasswordTokenExistsValidator extends ConstraintValidator
         /** @var ResetPasswordTokenExists $constraint */
         Assert::isInstanceOf($constraint, ResetPasswordTokenExists::class);
 
-        /** @var ShopUserInterface|null $shopUser */
-        $shopUser = $this->shopUserRepository->findOneBy(['passwordResetToken' => $value]);
+        /** @var UserInterface|null $user */
+        $user = $this->userRepository->findOneBy(['passwordResetToken' => $value]);
 
-        if (null !== $shopUser) {
+        if (null !== $user) {
             return;
         }
 
