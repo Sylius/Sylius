@@ -265,9 +265,11 @@ jobs:
                 name: Prepare application database
                 run: |
                     APP_DEBUG=1 bin/console doctrine:database:create -vvv
-                    bin/console doctrine:schema:up --force -vvv
-                    bin/console doctrine:schema:validate
-                continue-on-error: true
+                    bin/console doctrine:schema:update --force -vvv
+
+            -
+                name: Validate Database Schema
+                run: bin/console doctrine:schema:validate -vvv
 
     test-application-without-frontend-mariadb:
         runs-on: ubuntu-latest
@@ -353,9 +355,11 @@ jobs:
                 run: |
                     bin/console doctrine:migrations:migrate first --no-interaction
                     bin/console doctrine:migrations:migrate latest --no-interaction
-                    bin/console doctrine:schema:validate --skip-mapping -vvv
-                continue-on-error: true
 
+            -
+                name: Validate Database Schema
+                run: bin/console doctrine:schema:validate -vvv
+            
             -
                 name: Test installer
                 run: bin/console sylius:install --no-interaction -vvv
@@ -499,6 +503,10 @@ jobs:
                 run: |
                     bin/console doctrine:migrations:migrate first --no-interaction
                     bin/console doctrine:migrations:migrate latest --no-interaction
+            
+            -
+                name: Validate Database Schema
+                run: bin/console doctrine:schema:validate -vvv
 
             -
                 name: Test installer
@@ -655,6 +663,10 @@ jobs:
                 run: |
                     APP_DEBUG=1 bin/console doctrine:database:create -vvv
                     bin/console doctrine:migrations:migrate -n -vvv
+
+            -
+                name: Validate Database Schema
+                run: bin/console doctrine:schema:validate -vvv
 
             -
                 name: Build assets

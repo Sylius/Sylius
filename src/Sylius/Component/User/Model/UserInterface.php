@@ -111,4 +111,8 @@ interface UserInterface extends
     public function addOAuthAccount(UserOAuthInterface $oauth): void;
 
     public function setEncoderName(?string $encoderName): void;
+
+    public function __serialize(): array;
+
+    public function __unserialize(array $data): void;
 }
