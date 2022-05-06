@@ -420,6 +420,7 @@ final class CartContext implements Context
 
     /**
      * @Then /^the product "([^"]+)" should have total price ("[^"]+") in the cart$/
+     * @Then /^total price of "([^"]+)" item should be ("[^"]+")$/
      */
     public function theProductShouldHaveTotalPriceInTheCart(string $productName, int $totalPrice): void
     {
@@ -592,7 +593,7 @@ final class CartContext implements Context
     public function myCartTaxesShouldBe(int $taxTotal): void
     {
         Assert::same(
-            $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'taxTotal'),
+            $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'taxExcludedTotal'),
             $taxTotal
         );
     }
