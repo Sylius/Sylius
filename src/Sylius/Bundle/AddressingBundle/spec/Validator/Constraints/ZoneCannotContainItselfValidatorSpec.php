@@ -57,7 +57,40 @@ final class ZoneCannotContainItselfValidatorSpec extends ObjectBehavior
         ZoneMemberInterface $zoneMember
     ): void {
         $zone->getCode()->willReturn('WORLD');
+        $zone->getType()->willReturn(ZoneInterface::TYPE_ZONE);
         $zoneMember->getCode()->willReturn('EU');
+        $zoneMember->getBelongsTo()->willReturn($zone);
+
+        $executionContext->addViolation(Argument::cetera())->shouldNotBeCalled();
+
+        $this->validate([$zoneMember], new ZoneCannotContainItself());
+    }
+
+    function it_does_not_add_violation_for_zones_of_country_type_containing_a_member_with_same_code(
+        ExecutionContextInterface $executionContext,
+        ZoneInterface $zone,
+        ZoneMemberInterface $zoneMember
+    ): void {
+        $zone->getCode()->willReturn('US');
+        $zone->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
+
+        $zoneMember->getCode()->willReturn('US');
+        $zoneMember->getBelongsTo()->willReturn($zone);
+
+        $executionContext->addViolation(Argument::cetera())->shouldNotBeCalled();
+
+        $this->validate([$zoneMember], new ZoneCannotContainItself());
+    }
+
+    function it_does_not_add_violation_for_zones_of_province_type_containing_a_member_with_same_code(
+        ExecutionContextInterface $executionContext,
+        ZoneInterface $zone,
+        ZoneMemberInterface $zoneMember
+    ): void {
+        $zone->getCode()->willReturn('RO-B');
+        $zone->getType()->willReturn(ZoneInterface::TYPE_PROVINCE);
+
+        $zoneMember->getCode()->willReturn('RO-B');
         $zoneMember->getBelongsTo()->willReturn($zone);
 
         $executionContext->addViolation(Argument::cetera())->shouldNotBeCalled();
@@ -71,6 +104,7 @@ final class ZoneCannotContainItselfValidatorSpec extends ObjectBehavior
         ZoneMemberInterface $zoneMember
     ): void {
         $zone->getCode()->willReturn('EU');
+        $zone->getType()->willReturn(ZoneInterface::TYPE_ZONE);
         $zoneMember->getCode()->willReturn('EU');
         $zoneMember->getBelongsTo()->willReturn($zone);
 

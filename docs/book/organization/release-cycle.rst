@@ -61,8 +61,11 @@ Future release
 +---------+----------------------+------------------------+--------------------+
 | Version | Development starts   | Stabilization starts   | Release date       |
 +=========+======================+========================+====================+
-| 1.12    | Feb 14, 2022         | To-be confirmed        | To-be confirmed    |
+| 1.12    | Feb 14, 2022         | Q3 2022                | Q3 2022            |
 +---------+----------------------+------------------------+--------------------+
+
+.. image:: ../../_images/planned_1_12_scope.png
+   :align: center
 
 Supported versions
 ------------------
