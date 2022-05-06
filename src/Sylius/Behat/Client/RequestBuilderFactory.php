@@ -21,66 +21,64 @@ final class RequestBuilderFactory implements RequestBuilderFactoryInterface
 
     public function __construct(
         private ContentTypeGuideInterface $contentTypeGuide,
+        private string $apiPrefix,
     ) {
     }
 
-    public function show(
-        string $section,
-        string $resource,
-        string $id,
-        string $authorizationHeader,
-        ?string $token = null
-    ): RequestBuilder {
+    public function get(string ...$resources): RequestBuilder
+    {
         $builder = RequestBuilder::create(
-            sprintf('/api/v2/%s/%s/%s', $section, $resource, $id),
+            sprintf('/%s/%s', $this->apiPrefix, implode('/', $resources)),
             HttpRequest::METHOD_GET,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
 
-        if ($token) {
-            $builder->withHeader('HTTP_' . $authorizationHeader, 'Bearer ' . $token);
-        }
-
         return $builder;
     }
 
-    public function create(
-        string $section,
-        string $resource,
-        string $authorizationHeader,
-        ?string $token = null
-    ): RequestBuilder {
+    public function post(string ...$resources): RequestBuilder
+    {
         $builder = RequestBuilder::create(
-            sprintf('/api/v2/%s/%s', $section, $resource),
+            sprintf('/%s/%s', $this->apiPrefix, implode('/', $resources)),
             HttpRequest::METHOD_POST,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
         $builder->withHeader('CONTENT_TYPE', self::LINKED_DATA_JSON_CONTENT_TYPE);
 
-        if ($token) {
-            $builder->withHeader('HTTP_' . $authorizationHeader, 'Bearer ' . $token);
-        }
-
         return $builder;
     }
 
-    public function update(
-        string $section,
-        string $resource,
-        string $id,
-        string $authorizationHeader,
-        ?string $token = null
-    ): RequestBuilder {
+    public function put(string ...$resources): RequestBuilder
+    {
         $builder = RequestBuilder::create(
-            sprintf('/api/v2/%s/%s/%s', $section, $resource, $id),
+            sprintf('/%s/%s', $this->apiPrefix, implode('/', $resources)),
             HttpRequest::METHOD_PUT,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
         $builder->withHeader('CONTENT_TYPE', $this->contentTypeGuide->guide(HttpRequest::METHOD_PUT));
 
-        if ($token) {
-            $builder->withHeader('HTTP_' . $authorizationHeader, 'Bearer ' . $token);
-        }
+        return $builder;
+    }
+
+    public function patch(string ...$resources): RequestBuilder
+    {
+        $builder = RequestBuilder::create(
+            sprintf('/%s/%s', $this->apiPrefix, implode('/', $resources)),
+            HttpRequest::METHOD_PATCH,
+        );
+        $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
+        $builder->withHeader('CONTENT_TYPE', $this->contentTypeGuide->guide(HttpRequest::METHOD_PUT));
+
+        return $builder;
+    }
+
+    public function delete(string ...$resources): RequestBuilder
+    {
+        $builder = RequestBuilder::create(
+            sprintf('/%s/%s', $this->apiPrefix, implode('/', $resources)),
+            HttpRequest::METHOD_DELETE,
+        );
+        $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
 
         return $builder;
     }

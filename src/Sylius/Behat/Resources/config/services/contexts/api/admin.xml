@@ -49,6 +49,7 @@
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="sylius.behat.request_factory" />
             <argument type="service" id="sylius.behat.request_builder_factory" />
+            <argument type="service" id="sylius.behat.helper" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_currencies" class="Sylius\Behat\Context\Api\Admin\ManagingCurrenciesContext">

@@ -15,26 +15,13 @@ namespace Sylius\Behat\Client;
 
 interface RequestBuilderFactoryInterface
 {
-    public function show(
-        string $section,
-        string $resource,
-        string $id,
-        string $authorizationHeader,
-        ?string $token = null
-    ): RequestBuilder;
+    public function get(string ...$resources): RequestBuilder;
 
-    public function create(
-        string $section,
-        string $resource,
-        string $authorizationHeader,
-        ?string $token = null
-    ): RequestBuilder;
+    public function post(string ...$resources): RequestBuilder;
 
-    public function update(
-        string $section,
-        string $resource,
-        string $id,
-        string $authorizationHeader,
-        ?string $token = null
-    ): RequestBuilder;
+    public function put(string ...$resources): RequestBuilder;
+
+    public function patch(string ...$resources): RequestBuilder;
+
+    public function delete(string ...$resources): RequestBuilder;
 }
