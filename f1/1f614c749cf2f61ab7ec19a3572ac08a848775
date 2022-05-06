@@ -1,0 +1,32 @@
+---------------------------------------------------------------------------
+
+by loic425 at 2022-05-04T16:48:38Z
+
+@lchrusciel I think we should base this PR on 1.11 branch, what do you think?
+
+---------------------------------------------------------------------------
+
+by sad270 at 2022-05-05T08:11:13Z
+
+> @lchrusciel I think we should base this PR on 1.11 branch, what do you think?
+
+Yes, there is no BC break. I don't see that I'm on the master. It's for 1.11 not for 1.12
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-05-05T11:07:01Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "master"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-05-06T09:32:49Z
+
+Thanks, Sadetdin! :tada:
