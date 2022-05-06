@@ -101,6 +101,10 @@ interface OrderInterface extends
 
     public function getTaxTotal(): int;
 
+    public function getTaxExcludedTotal(): int;
+
+    public function getTaxIncludedTotal(): int;
+
     public function getShippingTotal(): int;
 
     public function getOrderPromotionTotal(): int;

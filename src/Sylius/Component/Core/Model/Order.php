@@ -395,6 +395,24 @@ class Order extends BaseOrder implements OrderInterface
         return $taxTotal;
     }
 
+    public function getTaxExcludedTotal(): int
+    {
+        return array_reduce(
+            $this->getAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->toArray(),
+            static fn (int $total, AdjustmentInterface $adjustment) => !$adjustment->isNeutral() ? $total + $adjustment->getAmount() : $total,
+            0
+        );
+    }
+
+    public function getTaxIncludedTotal(): int
+    {
+        return array_reduce(
+            $this->getAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->toArray(),
+            static fn (int $total, AdjustmentInterface $adjustment) => $adjustment->isNeutral() ? $total + $adjustment->getAmount() : $total,
+            0
+        );
+    }
+
     /**
      * Returns shipping fee together with taxes decreased by shipping discount.
      */
