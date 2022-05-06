@@ -173,6 +173,7 @@ final class CartContext implements Context
 
     /**
      * @When /^I change (product "[^"]+") quantity to (\d+) in my (cart)$/
+     * @Given I change :productName quantity to :quantity
      * @When /^the (?:visitor|customer) change (product "[^"]+") quantity to (\d+) in his (cart)$/
      * @When /^the visitor try to change (product "[^"]+") quantity to (\d+) in the customer (cart)$/
      * @When /^I try to change (product "[^"]+") quantity to (\d+) in my (cart)$/

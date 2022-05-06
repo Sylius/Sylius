@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -72,6 +73,7 @@ final class PickupCartHandler implements MessageHandlerInterface
         $cart->setTokenValue($pickupCart->tokenValue ?? $this->generator->generateUriSafeString(10));
         if ($customer !== null) {
             $cart->setCustomer($customer);
+            $cart->setBillingAddress($this->getDefaultAddress($customer));
         }
 
         $this->orderManager->persist($cart);
@@ -107,5 +109,16 @@ final class PickupCartHandler implements MessageHandlerInterface
         }
 
         return $localeCode;
+    }
+
+    private function getDefaultAddress(CustomerInterface $customer): ?AddressInterface
+    {
+        $defaultAddress = $customer->getDefaultAddress();
+        if (null !== $defaultAddress) {
+            $clonedAddress = clone $defaultAddress;
+            $clonedAddress->setCustomer(null);
+        }
+
+        return $clonedAddress ?? null;
     }
 }
