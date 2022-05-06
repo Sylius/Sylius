@@ -381,9 +381,9 @@ class User implements UserInterface, \Stringable
     /**
      * The serialized data have to contain the fields used by the equals method and the username.
      */
-    public function serialize(): string
+    public function __serialize(): array
     {
-        return serialize([
+        return [
             $this->password,
             $this->salt,
             $this->usernameCanonical,
@@ -392,18 +392,23 @@ class User implements UserInterface, \Stringable
             $this->enabled,
             $this->id,
             $this->encoderName,
-        ]);
+        ];
     }
 
     /**
-     * @param string $serialized
+     * @internal
+     * @deprecated since 1.11 and will be removed in Sylius 2.0, use \Sylius\Component\User\Model\User::__serialize() or \serialize($user) in PHP 8.1 instead
      */
-    public function unserialize($serialized): void
+    public function serialize(): string
     {
-        $data = unserialize($serialized);
+        return serialize($this->__serialize());
+    }
+
+    public function __unserialize(array $serialized): void
+    {
         // add a few extra elements in the array to ensure that we have enough keys when unserializing
         // older data which does not include all properties.
-        $data = array_merge($data, array_fill(0, 2, null));
+        $serialized = array_merge($serialized, array_fill(0, 2, null));
 
         [
             $this->password,
@@ -414,7 +419,18 @@ class User implements UserInterface, \Stringable
             $this->enabled,
             $this->id,
             $this->encoderName,
-        ] = $data;
+        ] = $serialized;
+    }
+
+    /**
+     * @param string $serialized
+     *
+     * @internal
+     * @deprecated since 1.11 and will be removed in Sylius 2.0, use \Sylius\Component\User\Model\User::__unserialize() or \unserialize($serialized) in PHP 8.1 instead
+     */
+    public function unserialize($serialized): void
+    {
+        $this->__unserialize(unserialize($serialized));
     }
 
     protected function hasExpired(?\DateTimeInterface $date): bool
