@@ -74,14 +74,12 @@ final class ProductNormalizerSpec extends ObjectBehavior
         IriConverterInterface $iriConverter,
         NormalizerInterface $normalizer,
         ProductInterface $product,
-        ProductVariantInterface $variant,
-        ArrayCollection $arrayCollection
+        ProductVariantInterface $variant
     ): void {
         $this->setNormalizer($normalizer);
 
         $normalizer->normalize($product, null, ['sylius_product_normalizer_already_called' => true])->willReturn([]);
-        $product->getEnabledVariants()->willReturn($arrayCollection);
-        $arrayCollection->toArray()->willReturn([$variant]);
+        $product->getEnabledVariants()->willReturn(new ArrayCollection([$variant->getWrappedObject()]));
         $defaultProductVariantResolver->getVariant($product)->willReturn($variant);
         $iriConverter->getIriFromItem($variant)->willReturn('/api/v2/shop/product-variants/CODE');
 
@@ -96,15 +94,13 @@ final class ProductNormalizerSpec extends ObjectBehavior
         IriConverterInterface $iriConverter,
         NormalizerInterface $normalizer,
         ProductVariantInterface $variant,
-        ProductInterface $product,
-        ArrayCollection $arrayCollection
+        ProductInterface $product
     ): void {
         $this->setNormalizer($normalizer);
 
         $normalizer->normalize($product, null, ['sylius_product_normalizer_already_called' => true])->willReturn([]);
         $iriConverter->getIriFromItem($variant)->willReturn('/api/v2/shop/product-variants/CODE');
-        $product->getEnabledVariants()->willReturn($arrayCollection);
-        $arrayCollection->toArray()->willReturn([$variant]);
+        $product->getEnabledVariants()->willReturn(new ArrayCollection([$variant->getWrappedObject()]));
 
         $defaultProductVariantResolver->getVariant($product)->willReturn(null);
 

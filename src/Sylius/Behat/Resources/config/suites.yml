@@ -34,6 +34,7 @@ imports:
     - suites/api/product/managing_products.yml
     - suites/api/product/viewing_products.yml
     - suites/api/product/viewing_product_reviews.yml
+    - suites/api/product/viewing_product_variants.yml
     - suites/api/promotion/applying_catalog_promotions.yml
     - suites/api/promotion/applying_promotion_coupon.yml
     - suites/api/promotion/applying_promotion_rules.yml

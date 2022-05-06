@@ -602,14 +602,14 @@ final class ProductContext implements Context
         $productOptions = $this->responseChecker->getValue($response, 'options');
 
         foreach ($productOptions as $optionIri) {
-            if ($this->hasProductOptionWithName($optionIri, $optionName)) {
-                $variants = $this->responseChecker->getValue($response, 'variants');
+            if (!$this->hasProductOptionWithName($optionIri, $optionName)) {
+                continue;
+            }
 
-                foreach ($variants as $variantIri) {
-                    if ($this->variantHasProductOptionValue($variantIri, $optionValue))
-                    {
-                        return true;
-                    }
+            $variants = $this->responseChecker->getValue($response, 'variants');
+            foreach ($variants as $variantIri) {
+                if ($this->variantHasProductOptionValue($variantIri, $optionValue)) {
+                    return true;
                 }
             }
         }
@@ -629,11 +629,11 @@ final class ProductContext implements Context
         $variants = $this->client->showByIri($variantIri);
         $optionValues = $this->responseChecker->getValue($variants, 'optionValues');
 
-            foreach ($optionValues as $valueIri) {
-                if ($this->hasProductOptionWithValue($valueIri, $optionValue)) {
-                    return true;
-                }
+        foreach ($optionValues as $valueIri) {
+            if ($this->hasProductOptionWithValue($valueIri, $optionValue)) {
+                return true;
             }
+        }
 
         return false;
     }
