@@ -70,7 +70,7 @@ final class RequestResetPasswordTokenHandlerSpec extends ObjectBehavior
         $this($requestResetPasswordToken);
     }
 
-    function it_does_nothing_when_shop_user_has_not_been_found(
+    function it_return_if_shop_user_has_not_been_found(
         UserRepositoryInterface $userRepository,
         MessageBusInterface $messageBus,
     ): void {

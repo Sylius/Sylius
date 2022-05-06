@@ -201,7 +201,6 @@ final class LoginContext implements Context
 
     /**
      * @Then I should be notified that email with reset instruction has been sent
-     * @Then I should be notified that the user email does not exist
      */
     public function iShouldBeNotifiedThatEmailWithResetInstructionWasSent(): void
     {

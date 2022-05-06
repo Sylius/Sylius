@@ -18,6 +18,7 @@ use Sylius\Behat\Service\Checker\EmailCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Webmozart\Assert\Assert;
 
@@ -27,6 +28,7 @@ final class EmailContext implements Context
         private SharedStorageInterface $sharedStorage,
         private EmailCheckerInterface $emailChecker,
         private TranslatorInterface $translator,
+        private Filesystem $filesystem,
     ) {
     }
 
@@ -49,6 +51,14 @@ final class EmailContext implements Context
             $this->translator->trans('sylius.email.password_reset.reset_your_password', [], null, $localeCode),
             $recipient,
         );
+    }
+
+    /**
+     * @Then no email should be sent
+     */
+    public function noEmailShouldBeSent(): void
+    {
+        Assert::false($this->filesystem->exists($this->emailChecker->getSpoolDirectory()));
     }
 
     /**

@@ -16,13 +16,6 @@ Feature: Resetting a password validation
         Then I should be notified that the email is required
 
     @ui @api
-    Scenario: Trying to reset password with a wrong email
-        When I want to reset password
-        And I specify customer email as "wrongman@example.com"
-        And I try to reset it
-        Then I should be notified that the user email does not exist
-
-    @ui @api
     Scenario: Trying to reset password with a wrong confirmation password
         Given I have already received a resetting password email
         When I follow link on my email to reset my password
