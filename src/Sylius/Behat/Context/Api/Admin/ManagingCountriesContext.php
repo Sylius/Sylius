@@ -19,7 +19,6 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Helper;
 use Sylius\Behat\Client\RequestBuilder;
 use Sylius\Behat\Client\RequestBuilderFactoryInterface;
-use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -36,7 +35,6 @@ final class ManagingCountriesContext implements Context
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
         private IriConverterInterface $iriConverter,
-        private RequestFactoryInterface $requestFactory,
         private RequestBuilderFactoryInterface $requestBuilderFactory,
         private Helper $helper,
     ) {
@@ -217,7 +215,7 @@ final class ManagingCountriesContext implements Context
     {
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            $this->responseChecker->getError($this->client->getLastResponse())
+            'Country could not be created'
         );
     }
 
@@ -303,7 +301,7 @@ final class ManagingCountriesContext implements Context
     {
         Assert::true(
             $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            $this->responseChecker->getError($this->client->getLastResponse())
+            'Country could not be edited'
         );
     }
 

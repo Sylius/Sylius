@@ -28,7 +28,7 @@ final class RequestBuilderFactory implements RequestBuilderFactoryInterface
     public function get(string ...$resources): RequestBuilder
     {
         $builder = RequestBuilder::create(
-            sprintf('/%s/%s', $this->apiPrefix, implode('/', $resources)),
+            sprintf('%s/%s', $this->apiPrefix, implode('/', $resources)),
             HttpRequest::METHOD_GET,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
@@ -39,7 +39,7 @@ final class RequestBuilderFactory implements RequestBuilderFactoryInterface
     public function post(string ...$resources): RequestBuilder
     {
         $builder = RequestBuilder::create(
-            sprintf('/%s/%s', $this->apiPrefix, implode('/', $resources)),
+            sprintf('%s/%s', $this->apiPrefix, implode('/', $resources)),
             HttpRequest::METHOD_POST,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
@@ -51,7 +51,7 @@ final class RequestBuilderFactory implements RequestBuilderFactoryInterface
     public function put(string ...$resources): RequestBuilder
     {
         $builder = RequestBuilder::create(
-            sprintf('/%s/%s', $this->apiPrefix, implode('/', $resources)),
+            sprintf('%s/%s', $this->apiPrefix, implode('/', $resources)),
             HttpRequest::METHOD_PUT,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
@@ -63,11 +63,11 @@ final class RequestBuilderFactory implements RequestBuilderFactoryInterface
     public function patch(string ...$resources): RequestBuilder
     {
         $builder = RequestBuilder::create(
-            sprintf('/%s/%s', $this->apiPrefix, implode('/', $resources)),
+            sprintf('%s/%s', $this->apiPrefix, implode('/', $resources)),
             HttpRequest::METHOD_PATCH,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
-        $builder->withHeader('CONTENT_TYPE', $this->contentTypeGuide->guide(HttpRequest::METHOD_PUT));
+        $builder->withHeader('CONTENT_TYPE', $this->contentTypeGuide->guide(HttpRequest::METHOD_PATCH));
 
         return $builder;
     }
@@ -75,7 +75,7 @@ final class RequestBuilderFactory implements RequestBuilderFactoryInterface
     public function delete(string ...$resources): RequestBuilder
     {
         $builder = RequestBuilder::create(
-            sprintf('/%s/%s', $this->apiPrefix, implode('/', $resources)),
+            sprintf('%s/%s', $this->apiPrefix, implode('/', $resources)),
             HttpRequest::METHOD_DELETE,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
