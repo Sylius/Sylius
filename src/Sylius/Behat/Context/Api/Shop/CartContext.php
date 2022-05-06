@@ -310,6 +310,20 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then /^my included in price taxes should be ("[^"]+")$/
+     */
+    public function myIncludedInPriceTaxesShouldBe(int $taxTotal): void
+    {
+        $response = $this->shopClient->getLastResponse();
+
+        Assert::same(
+            $this->responseChecker->getValue($response, 'taxIncludedTotal'),
+            $taxTotal,
+            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Expected totals are not the same.', $response)
+        );
+    }
+
+    /**
      * @Then /^my (cart) should be empty$/
      */
     public function myCartShouldBeEmpty(string $tokenValue): void

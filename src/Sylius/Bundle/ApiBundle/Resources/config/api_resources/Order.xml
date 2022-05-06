@@ -388,6 +388,8 @@
         <property name="notes" writable="true" />
         <property name="itemsTotal" readable="true" />
         <property name="taxTotal" readable="true"/>
+        <property name="taxExcludedTotal" readable="true"/>
+        <property name="taxIncludedTotal" readable="true"/>
         <property name="adjustments" writable="false">
             <subresource resourceClass="%sylius.model.adjustment.class%" />
         </property>
