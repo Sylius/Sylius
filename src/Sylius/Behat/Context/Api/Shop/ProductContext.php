@@ -58,6 +58,7 @@ final class ProductContext implements Context
         $this->sharedStorage->set('product', $product);
         $this->sharedStorage->set('product_variant', $productVariant);
     }
+
     /**
      * @When I view product :product in the :localeCode locale
      * @When /^I check (this product)'s details in the ("([^"]+)" locale)$/

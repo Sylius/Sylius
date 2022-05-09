@@ -42,11 +42,11 @@ final class CatalogPromotionUpdateFailedMessageListenerSpec extends ObjectBehavi
         );
 
         $messageBus->dispatch(Argument::that(
-            function($object): bool {
-                return (
+            function ($object): bool {
+                return
                     $object->code === 'code' &&
                     $object instanceof CatalogPromotionFailed
-                );
+                ;
             }
         ))->willReturn(new Envelope($catalogPromotionFailed))->shouldBeCalled();
 

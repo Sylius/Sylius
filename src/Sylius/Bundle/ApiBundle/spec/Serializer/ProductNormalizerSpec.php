@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -85,7 +84,7 @@ final class ProductNormalizerSpec extends ObjectBehavior
 
         $this->normalize($product, null, [])->shouldReturn([
             'variants' => ['/api/v2/shop/product-variants/CODE'],
-            'defaultVariant' => '/api/v2/shop/product-variants/CODE'
+            'defaultVariant' => '/api/v2/shop/product-variants/CODE',
         ]);
     }
 
@@ -106,7 +105,7 @@ final class ProductNormalizerSpec extends ObjectBehavior
 
         $this->normalize($product, null, [])->shouldReturn([
             'variants' => ['/api/v2/shop/product-variants/CODE'],
-            'defaultVariant' => null
+            'defaultVariant' => null,
         ]);
     }
 

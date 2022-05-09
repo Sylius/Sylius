@@ -31,7 +31,7 @@ final class CatalogPromotionScopeValidatorSpec extends ObjectBehavior
         $this->beConstructedWith(
             [
                 'for_taxons',
-                'for_variants'
+                'for_variants',
             ],
             [
                 'for_taxons' => $forTaxonsValidator,

@@ -34,7 +34,7 @@ final class ForTaxonsScopeConfigurationType extends AbstractType
             'choice_value' => 'code',
             'resource' => 'sylius.taxon',
             'constraints' => [
-                new NotBlank(['groups' => 'sylius', 'message' => 'sylius.catalog_promotion_scope.for_taxons.not_empty'])
+                new NotBlank(['groups' => 'sylius', 'message' => 'sylius.catalog_promotion_scope.for_taxons.not_empty']),
             ],
         ]);
 

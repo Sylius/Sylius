@@ -42,7 +42,7 @@ final class CatalogPromotionActionValidator extends ConstraintValidator
         }
 
         $type = $value->getType();
-        if (!key_exists($type, $this->actionValidators)) {
+        if (!array_key_exists($type, $this->actionValidators)) {
             return;
         }
 

@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ShopBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Templating\EngineInterface;
 use Twig\Environment;
 
 final class HomepageController

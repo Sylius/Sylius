@@ -397,6 +397,7 @@ class User implements UserInterface, \Stringable
 
     /**
      * @internal
+     *
      * @deprecated since 1.11 and will be removed in Sylius 2.0, use \Sylius\Component\User\Model\User::__serialize() or \serialize($user) in PHP 8.1 instead
      */
     public function serialize(): string
@@ -426,6 +427,7 @@ class User implements UserInterface, \Stringable
      * @param string $serialized
      *
      * @internal
+     *
      * @deprecated since 1.11 and will be removed in Sylius 2.0, use \Sylius\Component\User\Model\User::__unserialize() or \unserialize($serialized) in PHP 8.1 instead
      */
     public function unserialize($serialized): void

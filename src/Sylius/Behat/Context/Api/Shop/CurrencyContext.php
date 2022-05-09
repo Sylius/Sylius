@@ -17,8 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Component\Currency\Model\CurrencyInterface;
-use Webmozart\Assert\Assert;
 
 final class CurrencyContext implements Context
 {

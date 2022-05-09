@@ -820,7 +820,6 @@ final class CartContext implements Context
 
                 return;
             }
-
         }
 
         throw new \InvalidArgumentException('Invalid item data');

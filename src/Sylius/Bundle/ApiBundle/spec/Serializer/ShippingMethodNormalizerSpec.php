@@ -45,7 +45,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         $this
             ->supportsNormalization($shippingMethod, null, [
                 'collection_operation_name' => 'shop_get',
-                'filters' => ['tokenValue' => '666', 'shipmentId' => '999']
+                'filters' => ['tokenValue' => '666', 'shipmentId' => '999'],
             ])
             ->shouldReturn(true)
         ;
@@ -53,7 +53,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         $this
             ->supportsNormalization($shippingMethod, null, [
                 'collection_operation_name' => 'admin_get',
-                'filters' => ['tokenValue' => '666', 'shipmentId' => '999']
+                'filters' => ['tokenValue' => '666', 'shipmentId' => '999'],
             ])
             ->shouldReturn(false)
         ;
@@ -61,7 +61,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         $this
             ->supportsNormalization($channel, null, [
                 'collection_operation_name' => 'shop_get',
-                'filters' => ['tokenValue' => '666', 'shipmentId' => '999']
+                'filters' => ['tokenValue' => '666', 'shipmentId' => '999'],
             ])
             ->shouldReturn(false)
         ;
@@ -172,7 +172,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         $normalizer
             ->normalize($shippingMethod, null, [
                 'sylius_shipping_method_normalizer_already_called' => true,
-                'filters' => ['tokenValue'=> '666', 'shipmentId' => '999'],
+                'filters' => ['tokenValue' => '666', 'shipmentId' => '999'],
             ])
             ->willReturn([])
         ;
@@ -185,7 +185,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
 
         $this
             ->normalize($shippingMethod, null, [
-                'filters' => ['tokenValue'=> '666', 'shipmentId' => '999'],
+                'filters' => ['tokenValue' => '666', 'shipmentId' => '999'],
             ])
             ->shouldReturn(['price' => 1000])
         ;

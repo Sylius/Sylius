@@ -17,8 +17,8 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -117,7 +117,7 @@ final class ManagingShipmentsContext implements Context
         $shipment = $order->getShipments()->first();
 
         $this->client->customAction(
-            sprintf('%s/admin/shipments/%s/ship', $this->apiUrlPrefix,(string) $shipment->getId()),
+            sprintf('%s/admin/shipments/%s/ship', $this->apiUrlPrefix, (string) $shipment->getId()),
             HttpRequest::METHOD_PATCH
         );
     }

@@ -37,6 +37,7 @@ final class Week extends FunctionNode
     public function getSql(SqlWalker $sqlWalker): string
     {
         $platformName = $sqlWalker->getConnection()->getDatabasePlatform()->getName();
+
         return match ($platformName) {
             'mysql' => sprintf('WEEK(%s)', $sqlWalker->walkArithmeticPrimary($this->date)),
             'postgresql' => sprintf('EXTRACT(WEEK FROM %s)', $sqlWalker->walkArithmeticPrimary($this->date)),

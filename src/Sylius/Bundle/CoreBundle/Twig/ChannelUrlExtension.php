@@ -22,7 +22,9 @@ use Twig\TwigFunction;
 final class ChannelUrlExtension extends AbstractExtension
 {
     private ChannelContextInterface $channelContext;
+
     private UrlHelper $urlHelper;
+
     private bool $unsecuredUrls;
 
     public function __construct(
@@ -38,7 +40,7 @@ final class ChannelUrlExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('sylius_channel_url', [$this, 'generateChannelUrl'])
+            new TwigFunction('sylius_channel_url', [$this, 'generateChannelUrl']),
         ];
     }
 

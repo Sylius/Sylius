@@ -24,7 +24,6 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
-use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class PaymentMethodsCollectionDataProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
@@ -49,8 +48,8 @@ final class PaymentMethodsCollectionDataProvider implements ContextAwareCollecti
 
         $parameters = $context['filters'];
 
-        if (!array_key_exists('tokenValue', $parameters) || !array_key_exists('paymentId', $parameters) ) {
-           return [];
+        if (!array_key_exists('tokenValue', $parameters) || !array_key_exists('paymentId', $parameters)) {
+            return [];
         }
 
         /** @var OrderInterface|null $cart */

@@ -16,7 +16,6 @@ namespace Sylius\Bundle\AdminBundle\Controller\Dashboard;
 use Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Templating\EngineInterface;
 use Twig\Environment;
 
 final class StatisticsController

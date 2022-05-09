@@ -96,8 +96,8 @@ final class PaymentMethodsCollectionDataProviderSpec extends ObjectBehavior
 
         $context = [
             'filters' => [
-                'tokenValue' => 'CART_TOKEN_VALUE'
-            ]
+                'tokenValue' => 'CART_TOKEN_VALUE',
+            ],
         ];
 
         $this->getCollection(PaymentMethodInterface::class, null, $context)->shouldReturn([]);
@@ -114,8 +114,8 @@ final class PaymentMethodsCollectionDataProviderSpec extends ObjectBehavior
 
         $context = [
             'filters' => [
-                'paymentId' => '123'
-            ]
+                'paymentId' => '123',
+            ],
         ];
 
         $this->getCollection(PaymentMethodInterface::class, null, $context)->shouldReturn([]);
@@ -136,8 +136,8 @@ final class PaymentMethodsCollectionDataProviderSpec extends ObjectBehavior
         $context = [
             'filters' => [
                 'tokenValue' => 'CART_TOKEN_VALUE',
-                'paymentId' => '123'
-            ]
+                'paymentId' => '123',
+            ],
         ];
 
         $this->getCollection(PaymentMethodInterface::class, null, $context)->shouldReturn([]);
@@ -163,8 +163,8 @@ final class PaymentMethodsCollectionDataProviderSpec extends ObjectBehavior
         $context = [
             'filters' => [
                 'tokenValue' => 'CART_TOKEN_VALUE',
-                'paymentId' => '123'
-            ]
+                'paymentId' => '123',
+            ],
         ];
 
         $this->getCollection(PaymentMethodInterface::class, null, $context)->shouldReturn([]);
@@ -196,8 +196,8 @@ final class PaymentMethodsCollectionDataProviderSpec extends ObjectBehavior
         $context = [
             'filters' => [
                 'tokenValue' => 'CART_TOKEN_VALUE',
-                'paymentId' => '123'
-            ]
+                'paymentId' => '123',
+            ],
         ];
 
         $this

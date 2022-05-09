@@ -42,6 +42,7 @@ final class SetCatalogPromotionScopeTypesPassTest extends AbstractCompilerPassTe
             ['custom', 'another_custom', 'second_custom']
         );
     }
+
     /** @test */
     public function it_throws_an_exception_if_there_is_no_type_attribute_defined(): void
     {

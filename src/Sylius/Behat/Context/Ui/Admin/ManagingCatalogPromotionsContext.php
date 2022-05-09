@@ -22,12 +22,12 @@ use Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
@@ -233,7 +233,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddScopeThatAppliesOnVariants(ProductVariantInterface ...$variants): void
     {
-        $variantCodes = array_map(function(ProductVariantInterface $variant) {
+        $variantCodes = array_map(function (ProductVariantInterface $variant) {
             return $variant->getCode();
         }, $variants);
 
@@ -247,7 +247,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddScopeThatAppliesOnTaxons(TaxonInterface ...$taxons): void
     {
-        $taxonsCodes = array_map(function(TaxonInterface $taxon) {
+        $taxonsCodes = array_map(function (TaxonInterface $taxon) {
             return $taxon->getCode();
         }, $taxons);
 
@@ -686,7 +686,9 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->indexPage->isSingleResourceOnPage(['name' => $name, 'startDate' => $startDate, 'endDate' => $endDate]),
             sprintf(
                 'Cannot find catalog promotions with name "%s" operating between "%s" and "%s" in the list',
-                $name, $startDate, $endDate
+                $name,
+                $startDate,
+                $endDate
             )
         );
     }
@@ -700,7 +702,8 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->indexPage->isSingleResourceOnPage(['name' => $name, 'priority' => $priority]),
             sprintf(
                 'Cannot find catalog promotions with name "%s" and priority %s in the list',
-                $name, $priority
+                $name,
+                $priority
             )
         );
     }
@@ -973,7 +976,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->iBrowseCatalogPromotions();
 
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['code' => $catalogPromotion->getCode(), 'name' => $name,])
+            $this->indexPage->isSingleResourceOnPage(['code' => $catalogPromotion->getCode(), 'name' => $name])
         );
     }
 

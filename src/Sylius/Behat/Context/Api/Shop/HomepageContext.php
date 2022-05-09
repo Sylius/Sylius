@@ -63,7 +63,7 @@ final class HomepageContext implements Context
     {
         $response = json_decode($this->client->getLastResponse()->getContent(), true);
         Assert::keyExists($response, 'hydra:member');
-        $menuItems = array_column($response['hydra:member'],  'name');
+        $menuItems = array_column($response['hydra:member'], 'name');
 
         Assert::notEmpty($menuItems);
         Assert::allOneOf($menuItems, $expectedMenuItems);

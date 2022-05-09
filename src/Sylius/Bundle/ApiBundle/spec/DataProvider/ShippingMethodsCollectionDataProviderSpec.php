@@ -43,7 +43,7 @@ final class ShippingMethodsCollectionDataProviderSpec extends ObjectBehavior
                 Request::METHOD_GET,
                 [
                     'collection_operation_name' => 'shop_get',
-                    'filters' => ['tokenValue' => '666', 'shipmentId' => '999']
+                    'filters' => ['tokenValue' => '666', 'shipmentId' => '999'],
                 ],
             )
             ->shouldReturn(true)
@@ -55,7 +55,7 @@ final class ShippingMethodsCollectionDataProviderSpec extends ObjectBehavior
                 Request::METHOD_GET,
                 [
                     'collection_operation_name' => 'admin_get',
-                    'filters' => ['tokenValue' => '666', 'shipmentId' => '999']
+                    'filters' => ['tokenValue' => '666', 'shipmentId' => '999'],
                 ],
             )
             ->shouldReturn(false)
@@ -67,7 +67,7 @@ final class ShippingMethodsCollectionDataProviderSpec extends ObjectBehavior
                 Request::METHOD_GET,
                 [
                     'collection_operation_name' => 'shop_get',
-                    'filters' => ['tokenValue' => '666', 'shipmentId' => '999']
+                    'filters' => ['tokenValue' => '666', 'shipmentId' => '999'],
                 ],
             )
             ->shouldReturn(false)
@@ -163,7 +163,6 @@ final class ShippingMethodsCollectionDataProviderSpec extends ObjectBehavior
         ChannelInterface $channel,
         ShippingMethodRepositoryInterface $shippingMethodsRepository,
         ShippingMethodInterface $shippingMethod
-
     ): void {
         $channelContext->getChannel()->willReturn($channel);
 

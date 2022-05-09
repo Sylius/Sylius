@@ -90,8 +90,7 @@ final class AcceptLanguageHeaderDocumentationNormalizerSpec extends ObjectBehavi
         RepositoryInterface $localeRepository,
         LocaleInterface $locale1,
         LocaleInterface $locale2
-    ): void
-    {
+    ): void {
         $docs = [
             'paths' => [
                 '/api/v2/admin/addresses/{id}' => [
@@ -99,7 +98,7 @@ final class AcceptLanguageHeaderDocumentationNormalizerSpec extends ObjectBehavi
                         [
                             'parameters' => [],
                         ],
-                    )
+                    ),
                 ],
             ],
         ];
@@ -130,7 +129,7 @@ final class AcceptLanguageHeaderDocumentationNormalizerSpec extends ObjectBehavi
                                     'description' => 'Locales in this enum are all locales defined in the shop and only enabled ones will work in the given channel in the shop.',
                                     'schema' => [
                                         'type' => 'string',
-                                        'enum' => ['en_US', 'de_DE']
+                                        'enum' => ['en_US', 'de_DE'],
                                     ],
                                 ],
                             ],
