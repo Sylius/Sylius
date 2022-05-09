@@ -102,6 +102,51 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $this($pickupCart);
     }
 
+    function it_picks_up_a_new_cart_for_logged_in_shop_user_when_the_user_has_no_default_address(
+        FactoryInterface $cartFactory,
+        OrderRepositoryInterface $cartRepository,
+        ChannelRepositoryInterface $channelRepository,
+        CustomerInterface $customer,
+        ObjectManager $orderManager,
+        RandomnessGeneratorInterface $generator,
+        CustomerRepositoryInterface $customerRepository,
+        OrderInterface $cart,
+        ChannelInterface $channel,
+        CurrencyInterface $currency,
+        LocaleInterface $locale
+    ): void {
+        $pickupCart = new PickupCart();
+        $pickupCart->setChannelCode('code');
+        $pickupCart->setEmail('sample@email.com');
+
+        $channelRepository->findOneByCode('code')->willReturn($channel);
+        $channel->getBaseCurrency()->willReturn($currency);
+        $channel->getDefaultLocale()->willReturn($locale);
+
+        $customerRepository->findOneBy(['email' => 'sample@email.com'])->willReturn($customer);
+        $customer->getDefaultAddress()->willReturn(null);
+
+        $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn(null);
+
+        $generator->generateUriSafeString(10)->willReturn('urisafestr');
+        $currency->getCode()->willReturn('USD');
+        $locale->getCode()->willReturn('en_US');
+
+        $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
+
+        $cartFactory->createNew()->willReturn($cart);
+        $cart->setCustomer($customer)->shouldBeCalled();
+        $cart->setBillingAddress(null)->shouldBeCalled();
+        $cart->setChannel($channel)->shouldBeCalled();
+        $cart->setCurrencyCode('USD')->shouldBeCalled();
+        $cart->setLocaleCode('en_US')->shouldBeCalled();
+        $cart->setTokenValue('urisafestr')->shouldBeCalled();
+
+        $orderManager->persist($cart)->shouldBeCalled();
+
+        $this($pickupCart);
+    }
+
     function it_picks_up_an_existing_cart_for_logged_in_shop_user(
         FactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
