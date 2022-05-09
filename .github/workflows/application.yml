@@ -672,7 +672,7 @@ jobs:
                 name: Build assets
                 run: |
                     bin/console assets:install public -vvv
-                    yarn build
+                    GULP_ENV=prod yarn build
 
             -
                 name: Make filesystem readonly
