@@ -66,8 +66,8 @@ final class ManagingProductVariantsContext implements Context
         $this->client->addRequestData('channelPricings', [
             $channel->getCode() => [
                 'price' => $price,
-                'channelCode' => $channel->getCode()
-            ]
+                'channelCode' => $channel->getCode(),
+            ],
         ]);
     }
 
@@ -203,8 +203,8 @@ final class ManagingProductVariantsContext implements Context
         $this->client->addRequestData('channelPricings', [
             $channel->getCode() => [
                 'price' => $price,
-                'channelCode' => $channel->getCode()
-            ]
+                'channelCode' => $channel->getCode(),
+            ],
         ]);
 
         $this->client->create();

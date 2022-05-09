@@ -15,9 +15,9 @@ namespace spec\Sylius\Bundle\CoreBundle\CatalogPromotion\DiscountApplicationCrit
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\PromotionBundle\DiscountApplicationCriteria\DiscountApplicationCriteriaInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Webmozart\Assert\InvalidArgumentException;
 
 final class ExclusiveCriteriaSpec extends ObjectBehavior

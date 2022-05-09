@@ -30,8 +30,9 @@ final class InForTaxonsScopeVariantChecker implements VariantInScopeCheckerInter
 
         /** @var ProductInterface $product */
         $product = $productVariant->getProduct();
+
         return $product->getTaxons()->exists(
-            fn($key, TaxonInterface $taxon): bool => \in_array($taxon->getCode(), $scope->getConfiguration()['taxons'], true)
+            fn ($key, TaxonInterface $taxon): bool => \in_array($taxon->getCode(), $scope->getConfiguration()['taxons'], true)
         );
     }
 }

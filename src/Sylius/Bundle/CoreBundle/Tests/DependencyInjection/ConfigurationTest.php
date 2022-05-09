@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Configuration;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use PHPUnit\Framework\TestCase;
 
 final class ConfigurationTest extends TestCase
 {

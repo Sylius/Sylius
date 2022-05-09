@@ -32,7 +32,7 @@ final class ProportionalIntegerDistributor implements ProportionalIntegerDistrib
             }
         }
 
-        if(array_sum($distributedAmounts) === 0) {
+        if (array_sum($distributedAmounts) === 0) {
             return $distributedAmounts;
         }
 

@@ -15,7 +15,6 @@ namespace spec\Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Stripe\Collection;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -90,8 +89,7 @@ final class ChannelPricingSpec extends ObjectBehavior
 
     function it_has_information_about_applied_exclusive_catalog_promotion_applied(
         CatalogPromotionInterface $catalogPromotion
-    ): void
-    {
+    ): void {
         $catalogPromotion->isExclusive()->willReturn(true);
 
         $this->addAppliedPromotion($catalogPromotion);

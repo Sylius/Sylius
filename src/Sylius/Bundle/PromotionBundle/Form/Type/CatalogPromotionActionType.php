@@ -55,10 +55,10 @@ final class CatalogPromotionActionType extends AbstractResourceType
         ;
 
         $builder
-            ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event): void {
-               $this->addConfigurationTypeToForm($event);
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
+                $this->addConfigurationTypeToForm($event);
             })
-            ->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event): void {
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
                 /** @var array|null $data */
                 $data = $event->getData();
                 if ($data === null) {

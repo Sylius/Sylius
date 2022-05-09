@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\CatalogPromotion\DiscountApplicationCriteria;
 
 use Sylius\Bundle\PromotionBundle\DiscountApplicationCriteria\DiscountApplicationCriteriaInterface;
-use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Webmozart\Assert\Assert;
 
 final class MinimumPriceCriteria implements DiscountApplicationCriteriaInterface
