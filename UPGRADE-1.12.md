@@ -32,5 +32,12 @@ Therefore you need to update your code to follow this change.
    - "chart.js": "^2.9.3",
    + "chart.js": "^3.7.1", 
    ```
-   
+   ```diff
+   - "rollup": "^0.60.2",
+   + "rollup": "^0.66.2",
+   ```
+   ```diff
+   - "rollup-plugin-uglify": "^4.0.0",
+   + "rollup-plugin-uglify": "^6.0.2",
+   ```
     Please visit [3.x Migration Guide](https://www.chartjs.org/docs/latest/getting-started/v3-migration.html) for more information.
