@@ -22,7 +22,8 @@ use Sylius\Component\Core\Model\ChannelInterface;
 final class ChannelsCollectionDataProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
 {
     public function __construct(private ChannelContextInterface $channelContext)
-    {}
+    {
+    }
 
     public function getCollection(string $resourceClass, string $operationName = null, array $context = []): array
     {

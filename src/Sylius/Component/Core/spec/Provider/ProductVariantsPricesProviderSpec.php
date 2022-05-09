@@ -141,11 +141,12 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
         ]));
 
         $blackSmallTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([
-            $winterCatalogPromotion->getWrappedObject()
+            $winterCatalogPromotion->getWrappedObject(),
         ]));
         $whiteSmallTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
-        $blackLargeTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([
-            $summerCatalogPromotion->getWrappedObject()]
+        $blackLargeTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection(
+            [
+            $summerCatalogPromotion->getWrappedObject(), ]
         ));
         $whiteLargeTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
 

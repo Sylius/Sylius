@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request as HttpRequest;
 final class RequestFactory implements RequestFactoryInterface
 {
     private const LINKED_DATA_JSON_CONTENT_TYPE = 'application/ld+json';
+
     private const UPLOAD_FILE_CONTENT_TYPE = 'multipart/form-data';
 
     public function __construct(

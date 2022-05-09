@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\CatalogPromotion\Listener;
 
 use Sylius\Component\Promotion\Event\CatalogPromotionFailed;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Messenger\Event\WorkerMessageFailedEvent;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -39,9 +38,9 @@ final class CatalogPromotionUpdateFailedMessageListener
 
     private function isWorkerMessageValid(WorkerMessageFailedEvent $event): bool
     {
-        return (
+        return
             $event->willRetry() === false &&
             $event->getEnvelope()->getMessage() instanceof CatalogPromotionUpdated
-        );
+        ;
     }
 }

@@ -37,6 +37,7 @@ final class Day extends FunctionNode
     public function getSql(SqlWalker $sqlWalker): string
     {
         $platformName = $sqlWalker->getConnection()->getDatabasePlatform()->getName();
+
         return match ($platformName) {
             'mysql' => sprintf('DAY(%s)', $sqlWalker->walkArithmeticPrimary($this->date)),
             'postgresql' => sprintf('EXTRACT(DAY FROM %s)', $sqlWalker->walkArithmeticPrimary($this->date)),

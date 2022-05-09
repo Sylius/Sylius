@@ -35,7 +35,7 @@ final class LocaleContext implements Context
      */
     public function iGetAvailableLocales(): void
     {
-       $this->client->index(Resources::LOCALES);
+        $this->client->index(Resources::LOCALES);
     }
 
     /**

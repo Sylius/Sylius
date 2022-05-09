@@ -25,7 +25,8 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
         private ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator,
         private ProductVariantForCatalogPromotionEligibilityInterface $checker,
         private CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker
-    ) {}
+    ) {
+    }
 
     public function applyOnVariant(
         ProductVariantInterface $variant,

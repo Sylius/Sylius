@@ -37,6 +37,7 @@ final class Month extends FunctionNode
     public function getSql(SqlWalker $sqlWalker): string
     {
         $platformName = $sqlWalker->getConnection()->getDatabasePlatform()->getName();
+
         return match ($platformName) {
             'mysql' => sprintf('MONTH(%s)', $sqlWalker->walkArithmeticPrimary($this->date)),
             'postgresql' => sprintf('EXTRACT(MONTH FROM %s)', $sqlWalker->walkArithmeticPrimary($this->date)),

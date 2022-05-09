@@ -16,7 +16,7 @@ namespace Sylius\Component\Core\Resolver;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
-final class TaxationAddressResolver Implements TaxationAddressResolverInterface
+final class TaxationAddressResolver implements TaxationAddressResolverInterface
 {
     public function __construct(private bool $shippingAddressBasedTaxation)
     {

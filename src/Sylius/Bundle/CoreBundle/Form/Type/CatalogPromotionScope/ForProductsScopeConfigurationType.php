@@ -35,7 +35,7 @@ final class ForProductsScopeConfigurationType extends AbstractType
             'choice_value' => 'code',
             'resource' => 'sylius.product',
             'constraints' => [
-                new NotBlank(['groups' => 'sylius', 'message' => 'sylius.catalog_promotion_scope.for_products.not_empty'])
+                new NotBlank(['groups' => 'sylius', 'message' => 'sylius.catalog_promotion_scope.for_products.not_empty']),
             ],
         ]);
 

@@ -607,7 +607,7 @@ final class ProductContext implements Context
     ): void {
         $this->showPage->selectVariant($variant->getName());
 
-        Assert::same(sizeof($this->showPage->getCatalogPromotions()), 1);
+        Assert::same(count($this->showPage->getCatalogPromotions()), 1);
         Assert::same($this->showPage->getCatalogPromotionName(), $promotionName);
         Assert::same($this->showPage->getPrice(), $price);
         Assert::same($this->showPage->getOriginalPrice(), $originalPrice);

@@ -71,8 +71,11 @@ final class EnabledProductVariantItemExtensionSpec extends ObjectBehavior
         $queryBuilder->andWhere('o.enabled = :enabled')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->setParameter('enabled', true)->shouldBeCalled()->willReturn($queryBuilder);
 
-        $this->applyToItem($queryBuilder, $queryNameGenerator,
-            ProductVariantInterface::class, [],
+        $this->applyToItem(
+            $queryBuilder,
+            $queryNameGenerator,
+            ProductVariantInterface::class,
+            [],
             'get',
             [ContextKeys::CHANNEL => $channel, ContextKeys::LOCALE_CODE => 'en_US']
         );

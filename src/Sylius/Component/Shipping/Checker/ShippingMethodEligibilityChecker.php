@@ -39,6 +39,7 @@ final class ShippingMethodEligibilityChecker implements ShippingMethodEligibilit
                 ++$numMatches;
             }
         }
+
         return match ($shippingMethod->getCategoryRequirement()) {
             ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE => 0 === $numMatches,
             ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY => 0 < $numMatches,

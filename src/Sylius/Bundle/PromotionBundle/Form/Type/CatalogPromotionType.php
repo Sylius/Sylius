@@ -90,7 +90,7 @@ final class CatalogPromotionType extends AbstractResourceType
             ])
         ;
 
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event): void {
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
             $data = $event->getData();
 
             if (isset($data['startDate']) && $data['startDate']['date'] !== '' && $data['startDate']['time'] === '') {

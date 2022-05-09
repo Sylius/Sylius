@@ -26,14 +26,14 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
-use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -262,7 +262,7 @@ final class CatalogPromotionContext implements Context
             ]],
             [[
                 'type' => FixedDiscountPriceCalculator::TYPE,
-                'configuration' => [$channel->getCode() => ['amount' => $discount/100]],
+                'configuration' => [$channel->getCode() => ['amount' => $discount / 100]],
             ]]
         );
 
@@ -290,7 +290,7 @@ final class CatalogPromotionContext implements Context
             ]],
             [[
                 'type' => FixedDiscountPriceCalculator::TYPE,
-                'configuration' => [$channel->getCode() => ['amount' => $discount/100]],
+                'configuration' => [$channel->getCode() => ['amount' => $discount / 100]],
             ]]
         );
 
@@ -318,7 +318,7 @@ final class CatalogPromotionContext implements Context
             ]],
             [[
                 'type' => FixedDiscountPriceCalculator::TYPE,
-                'configuration' => [$channel->getCode() => ['amount' => $discount/100]],
+                'configuration' => [$channel->getCode() => ['amount' => $discount / 100]],
             ]]
         );
 
@@ -469,7 +469,7 @@ final class CatalogPromotionContext implements Context
             null,
             [
                 $firstChannel->getCode(),
-                $secondChannel->getCode()
+                $secondChannel->getCode(),
             ],
             [[
                 'type' => InForVariantsScopeVariantChecker::TYPE,
@@ -663,7 +663,7 @@ final class CatalogPromotionContext implements Context
             ]],
             [[
                 'type' => FixedDiscountPriceCalculator::TYPE,
-                'configuration' => [$channel->getCode() => ['amount' => $discount/100]],
+                'configuration' => [$channel->getCode() => ['amount' => $discount / 100]],
             ]],
             $priority
         );
@@ -693,7 +693,7 @@ final class CatalogPromotionContext implements Context
             ]],
             [[
                 'type' => FixedDiscountPriceCalculator::TYPE,
-                'configuration' => [$channel->getCode() => ['amount' => $discount/100]],
+                'configuration' => [$channel->getCode() => ['amount' => $discount / 100]],
             ]],
             $priority,
         );

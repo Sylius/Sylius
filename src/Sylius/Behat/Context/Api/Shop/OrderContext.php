@@ -43,7 +43,7 @@ final class OrderContext implements Context
         private SharedStorageInterface $sharedStorage,
         private IriConverterInterface $iriConverter,
         private SecurityServiceInterface $securityService,
-        private RequestFactoryInterface  $requestFactory,
+        private RequestFactoryInterface $requestFactory,
         private string $apiUrlPrefix,
     ) {
     }

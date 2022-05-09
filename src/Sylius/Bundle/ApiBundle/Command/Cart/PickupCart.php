@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
-use Sylius\Bundle\ApiBundle\Command\CustomerEmailAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\CustomerEmailAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 
 /** @experimental */
@@ -33,9 +33,7 @@ class PickupCart implements ChannelCodeAwareInterface, CustomerEmailAwareInterfa
     /** @var string|null */
     private $channelCode;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     public $email;
 
     public function __construct(?string $tokenValue = null)

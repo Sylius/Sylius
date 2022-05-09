@@ -98,7 +98,7 @@ final class ProductVariantContext implements Context
     /**
      * @Transform /^"([^"]+)", "([^"]+)" and "([^"]+)" variants$/
      */
-    public function getVariantsByNames(string...$variantNames): array
+    public function getVariantsByNames(string ...$variantNames): array
     {
         return array_map(function ($variantName) {
             return $this->getProductVariantByName($variantName);
