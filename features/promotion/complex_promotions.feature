@@ -25,7 +25,7 @@ Feature: Receiving a discount based on a configured promotion
         Then my cart total should be "$40.00"
         And my discount should be "-$10.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving a discount on items and shipping from one promotion based on items total
         Given the store has "DHL" shipping method with "$10.00" fee
         And there is a promotion "Jackets and shipping discount"
@@ -46,7 +46,7 @@ Feature: Receiving a discount based on a configured promotion
         Then product "Black Sabbath jacket" price should be decreased by "$10.00"
         And my cart total should be "$170.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving a discount on items and the whole order from one promotion based on items total
         Given there is a promotion "Greatest promotion"
         And it gives "20%" off on every product classified as "Jackets" and a "$50.00" discount to every order with items total equal at least "$500.00"

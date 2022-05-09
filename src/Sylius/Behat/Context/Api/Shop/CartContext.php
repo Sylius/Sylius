@@ -860,7 +860,7 @@ final class CartContext implements Context
 
         foreach ($items as $item) {
             if ($item['productName'] === $productName) {
-                Assert::same($item['total'], $productPrice);
+                Assert::same($item['subtotal'], $productPrice);
             }
 
             return;
