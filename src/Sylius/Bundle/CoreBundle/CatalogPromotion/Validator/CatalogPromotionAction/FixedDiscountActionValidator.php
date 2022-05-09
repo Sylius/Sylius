@@ -64,6 +64,6 @@ final class FixedDiscountActionValidator implements ActionValidatorInterface
 
     private function isChannelConfigured(string $channelCode, array $configuration): bool
     {
-        return (isset($configuration[$channelCode]) && isset($configuration[$channelCode]['amount']));
+        return isset($configuration[$channelCode]) && isset($configuration[$channelCode]['amount']);
     }
 }

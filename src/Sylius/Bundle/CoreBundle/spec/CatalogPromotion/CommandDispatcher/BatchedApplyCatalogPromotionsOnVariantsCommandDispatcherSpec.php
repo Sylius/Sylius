@@ -21,7 +21,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class BatchedApplyCatalogPromotionsOnVariantsCommandDispatcherSpec extends ObjectBehavior
 {
-    public function let(MessageBusInterface $messageBus,): void
+    public function let(MessageBusInterface $messageBus): void
     {
         $this->beConstructedWith($messageBus, 2);
     }

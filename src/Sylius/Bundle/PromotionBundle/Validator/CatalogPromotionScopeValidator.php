@@ -42,7 +42,7 @@ final class CatalogPromotionScopeValidator extends ConstraintValidator
         }
 
         $type = $value->getType();
-        if (!key_exists($type, $this->scopeValidators)) {
+        if (!array_key_exists($type, $this->scopeValidators)) {
             return;
         }
 

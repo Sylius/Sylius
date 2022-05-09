@@ -23,13 +23,13 @@ use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPrice
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForProductScopeVariantChecker;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForTaxonsScopeVariantChecker;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForVariantsScopeVariantChecker;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
@@ -214,7 +214,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $actions = [[
             'type' => PercentageDiscountPriceCalculator::TYPE,
             'configuration' => [
-                'amount' => $amount
+                'amount' => $amount,
             ],
         ]];
 
@@ -230,7 +230,7 @@ final class ManagingCatalogPromotionsContext implements Context
             'type' => FixedDiscountPriceCalculator::TYPE,
             'configuration' => [
                 $channel->getCode() => [
-                    'amount' => $amount
+                    'amount' => $amount,
                 ],
             ],
         ]];
@@ -248,7 +248,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $additionalAction = [[
             'type' => PercentageDiscountPriceCalculator::TYPE,
             'configuration' => [
-                'amount' => $amount
+                'amount' => $amount,
             ],
         ]];
 
@@ -304,7 +304,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $actions = [[
             'type' => PercentageDiscountPriceCalculator::TYPE,
             'configuration' => [
-                'amount' => 'text'
+                'amount' => 'text',
             ],
         ]];
 
@@ -326,7 +326,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $this->client->updateRequestData([
             'startDate' => (new \DateTime('yesterday'))->format('Y-m-d H:i:s'),
-            'endDate' => (new \DateTime('tomorrow'))->format('Y-m-d H:i:s')
+            'endDate' => (new \DateTime('tomorrow'))->format('Y-m-d H:i:s'),
         ]);
     }
 
@@ -366,7 +366,7 @@ final class ManagingCatalogPromotionsContext implements Context
                 'variants' => [
                     $firstVariant->getCode(),
                     $secondVariant->getCode(),
-                ]
+                ],
             ],
         ]];
 
@@ -397,7 +397,7 @@ final class ManagingCatalogPromotionsContext implements Context
                 'taxons' => [
                     'BAD_TAXON',
                     'EVEN_WORSE_TAXON',
-                ]
+                ],
             ],
         ]];
 
@@ -428,7 +428,7 @@ final class ManagingCatalogPromotionsContext implements Context
                 'products' => [
                     'BAD_PRODUCT',
                     'EVEN_WORSE_PRODUCT',
-                ]
+                ],
             ],
         ]];
 
@@ -443,7 +443,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $scopes = [[
             'type' => InForTaxonsScopeVariantChecker::TYPE,
             'configuration' => [
-                'taxons' => [$taxon->getCode()]
+                'taxons' => [$taxon->getCode()],
             ],
         ]];
 
@@ -458,7 +458,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $scopes = [[
             'type' => InForProductScopeVariantChecker::TYPE,
             'configuration' => [
-                'products' => [$product->getCode()]
+                'products' => [$product->getCode()],
             ],
         ]];
 
@@ -514,7 +514,7 @@ final class ManagingCatalogPromotionsContext implements Context
             'configuration' => [
                 'variants' => [
                     $productVariant->getCode(),
-                ]
+                ],
             ],
         ]];
 
@@ -536,7 +536,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $content['scopes'][0]['type'] = InForTaxonsScopeVariantChecker::TYPE;
         $content['scopes'][0]['configuration']['taxons'] = [$taxon->getCode()];
 
-        $this->client->setRequestData($content);;
+        $this->client->setRequestData($content);
 
         $this->client->update();
     }
@@ -555,7 +555,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $content['scopes'][0]['type'] = InForProductScopeVariantChecker::TYPE;
         $content['scopes'][0]['configuration']['products'] = [$product->getCode()];
 
-        $this->client->setRequestData($content);;
+        $this->client->setRequestData($content);
 
         $this->client->update();
     }
@@ -668,7 +668,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $scopes = [[
             'type' => 'nonexistent_scope',
             'configuration' => [
-                'config' => 'config'
+                'config' => 'config',
             ],
         ]];
 
@@ -980,7 +980,9 @@ final class ManagingCatalogPromotionsContext implements Context
             ),
             sprintf(
                 'Cannot find catalog promotions with name "%s" operating between "%s" and "%s" in the list',
-                $catalogPromotion->getName(), $startDate, $endDate
+                $catalogPromotion->getName(),
+                $startDate,
+                $endDate
             )
         );
     }
@@ -1001,7 +1003,8 @@ final class ManagingCatalogPromotionsContext implements Context
             ),
             sprintf(
                 'Cannot find catalog promotions with name "%s" and priority "%s" in the list',
-                $catalogPromotion->getName(), $priority
+                $catalogPromotion->getName(),
+                $priority
             )
         );
     }
@@ -1020,12 +1023,14 @@ final class ManagingCatalogPromotionsContext implements Context
                 [
                     'name' => $catalogPromotion->getName(),
                     'startDate' => (new \DateTime('yesterday'))->format('Y-m-d H:i:s'),
-                    'endDate' => (new \DateTime('tomorrow'))->format('Y-m-d H:i:s')
+                    'endDate' => (new \DateTime('tomorrow'))->format('Y-m-d H:i:s'),
                 ]
             ),
             sprintf(
                 'Cannot find catalog promotions with name "%s" operating between "%s" and "%s" in the list',
-                $catalogPromotion->getName(), (new \DateTime('yesterday'))->format('Y-m-d H:i:s'), (new \DateTime('tomorrow'))->format('Y-m-d H:i:s')
+                $catalogPromotion->getName(),
+                (new \DateTime('yesterday'))->format('Y-m-d H:i:s'),
+                (new \DateTime('tomorrow'))->format('Y-m-d H:i:s')
             )
         );
     }
@@ -1589,18 +1594,18 @@ final class ManagingCatalogPromotionsContext implements Context
             'exclusive' => $exclusive,
             'translations' => ['en_US' => [
                 'locale' => 'en_US',
-                'label' => $name
+                'label' => $name,
             ]],
             'actions' => [[
                 'type' => PercentageDiscountPriceCalculator::TYPE,
                 'configuration' => [
-                    'amount' => $discount
+                    'amount' => $discount,
                 ],
             ]],
             'scopes' => [[
                 'type' => InForProductScopeVariantChecker::TYPE,
                 'configuration' => [
-                    'products' => [$product->getCode()]
+                    'products' => [$product->getCode()],
                 ],
             ]],
         ]);

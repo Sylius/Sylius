@@ -52,6 +52,6 @@ final class RequestHeaderBasedLocaleContext implements LocaleContextInterface
             return $this->requestStack->getMainRequest();
         }
 
-       return $this->requestStack->getMasterRequest();
+        return $this->requestStack->getMasterRequest();
     }
 }

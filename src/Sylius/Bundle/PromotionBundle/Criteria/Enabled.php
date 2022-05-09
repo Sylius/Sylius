@@ -23,7 +23,7 @@ final class Enabled implements CriteriaInterface
         $root = $queryBuilder->getRootAliases()[0];
 
         $queryBuilder
-            ->andWhere($root.'.enabled = :enabled')
+            ->andWhere($root . '.enabled = :enabled')
             ->setParameter('enabled', true)
         ;
 

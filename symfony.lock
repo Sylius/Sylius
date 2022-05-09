@@ -564,6 +564,9 @@
     "squizlabs/php_codesniffer": {
         "version": "3.3.1"
     },
+    "stella-maris/clock": {
+        "version": "0.1.4"
+    },
     "stof/doctrine-extensions-bundle": {
         "version": "1.2",
         "recipe": {
@@ -596,6 +599,9 @@
     },
     "sylius-labs/polyfill-symfony-security": {
         "version": "v1.0.0"
+    },
+    "sylius/calendar": {
+        "version": "v0.3.0"
     },
     "sylius/fixtures-bundle": {
         "version": "v1.4.1"
@@ -788,9 +794,6 @@
     },
     "symfony/polyfill-php81": {
         "version": "v1.23.0"
-    },
-    "symfony/polyfill-util": {
-        "version": "v1.25.0"
     },
     "symfony/process": {
         "version": "v4.4.13"

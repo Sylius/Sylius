@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Promotion\Model;
 
-use Sylius\Component\Resource\Model\TranslatableTrait;
-use Sylius\Component\Resource\Model\TranslationInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
 class CatalogPromotion implements CatalogPromotionInterface
 {

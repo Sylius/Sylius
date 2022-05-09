@@ -33,9 +33,7 @@ class ChannelPricing implements ChannelPricingInterface, \Stringable
     /** @var int|null */
     protected $originalPrice;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $minimumPrice = 0;
 
     /**
@@ -121,7 +119,7 @@ class ChannelPricing implements ChannelPricingInterface, \Stringable
 
     public function addAppliedPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
-        if($this->appliedPromotions->contains($catalogPromotion)) {
+        if ($this->appliedPromotions->contains($catalogPromotion)) {
             return;
         }
 
@@ -146,7 +144,7 @@ class ChannelPricing implements ChannelPricingInterface, \Stringable
     public function hasExclusiveCatalogPromotionApplied(): bool
     {
         foreach ($this->appliedPromotions as $appliedPromotion) {
-            if($appliedPromotion->isExclusive()) {
+            if ($appliedPromotion->isExclusive()) {
                 return true;
             }
         }
