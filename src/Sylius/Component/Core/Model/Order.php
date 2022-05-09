@@ -20,6 +20,7 @@ use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
+use Sylius\Component\Order\Model\AdjustmentInterface as BaseAdjustmentInterface;
 use Sylius\Component\Order\Model\Order as BaseOrder;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface as BaseCouponInterface;
@@ -29,10 +30,10 @@ use Webmozart\Assert\Assert;
 
 class Order extends BaseOrder implements OrderInterface
 {
-    /** @var \Sylius\Component\Core\Model\CustomerInterface|null */
+    /** @var CustomerInterface|null */
     protected $customer;
 
-    /** @var \Sylius\Component\Core\Model\ChannelInterface|null */
+    /** @var ChannelInterface|null */
     protected $channel;
 
     /** @var AddressInterface|null */
@@ -393,6 +394,24 @@ class Order extends BaseOrder implements OrderInterface
         }
 
         return $taxTotal;
+    }
+
+    public function getTaxExcludedTotal(): int
+    {
+        return array_reduce(
+            $this->getAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->toArray(),
+            static fn (int $total, BaseAdjustmentInterface $adjustment) => !$adjustment->isNeutral() ? $total + $adjustment->getAmount() : $total,
+            0
+        );
+    }
+
+    public function getTaxIncludedTotal(): int
+    {
+        return array_reduce(
+            $this->getAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->toArray(),
+            static fn (int $total, BaseAdjustmentInterface $adjustment) => $adjustment->isNeutral() ? $total + $adjustment->getAmount() : $total,
+            0
+        );
     }
 
     /**

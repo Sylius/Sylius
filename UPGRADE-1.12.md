@@ -2,6 +2,9 @@
 
 ## Main update
 
+1. Service `sylius.twig.extension.taxes` has been deprecated. Use methods `getTaxExcludedTotal` and `getTaxIncludedTotal` 
+   from `Sylius\Component\Core\Model\Order` instead. 
+
 ### Asset management changes
 
 We updated gulp-sass plugin as well as the sass implementation we use to be compatible with most installation
@@ -13,10 +16,12 @@ Therefore you need to update your code to follow this change.
    - "gulp-sass": "^4.0.1",
    + "gulp-sass": "^5.1.0",
    ```
+
 2. Add sass to your package.json:
    ```diff
    + "sass": "^1.48.0",
    ```
+
 3. Follow [this guide](https://github.com/dlmanning/gulp-sass/tree/master#migrating-to-version-5) to upgrade your
    code when using gulp-sass this is an example:
    ```diff

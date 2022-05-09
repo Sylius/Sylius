@@ -117,6 +117,18 @@
             <group>shop:order:account:read</group>
         </attribute>
 
+        <attribute name="taxExcludedTotal">
+            <group>admin:order:read</group>
+            <group>shop:cart:read</group>
+            <group>shop:order:account:read</group>
+        </attribute>
+
+        <attribute name="taxIncludedTotal">
+            <group>admin:order:read</group>
+            <group>shop:cart:read</group>
+            <group>shop:order:account:read</group>
+        </attribute>
+
         <attribute name="localeCode">
             <group>admin:cart:update</group>
             <group>admin:order:read</group>

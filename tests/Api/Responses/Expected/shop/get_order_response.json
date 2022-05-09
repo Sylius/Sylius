@@ -63,6 +63,8 @@
     "itemsTotal": 6000,
     "total": 6500,
     "taxTotal": 0,
+    "taxIncludedTotal": 0,
+    "taxExcludedTotal": 0,
     "shippingTotal": 500,
     "orderPromotionTotal": 0
 }

@@ -17,6 +17,8 @@
     "total": 0,
     "state": "cart",
     "taxTotal": 0,
+    "taxIncludedTotal": 0,
+    "taxExcludedTotal": 0,
     "shippingTotal": 0,
     "orderPromotionTotal": 0
 }
