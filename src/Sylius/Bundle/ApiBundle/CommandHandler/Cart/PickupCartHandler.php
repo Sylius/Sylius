@@ -117,8 +117,10 @@ final class PickupCartHandler implements MessageHandlerInterface
         if (null !== $defaultAddress) {
             $clonedAddress = clone $defaultAddress;
             $clonedAddress->setCustomer(null);
+
+            return $clonedAddress;
         }
 
-        return $clonedAddress ?? null;
+        return null;
     }
 }
