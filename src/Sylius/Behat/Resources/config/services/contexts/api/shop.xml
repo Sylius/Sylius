@@ -121,7 +121,6 @@
         </service>
 
         <service id="sylius.behat.context.api.shop.registration" class="Sylius\Behat\Context\Api\Shop\RegistrationContext">
-            <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.api_platform_client.shop" />
             <argument type="service" id="sylius.behat.context.api.shop.login" />
             <argument type="service" id="sylius.behat.shared_storage" />

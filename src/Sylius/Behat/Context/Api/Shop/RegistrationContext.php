@@ -20,7 +20,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Symfony\Component\BrowserKit\AbstractBrowser;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
 
 final class RegistrationContext implements Context
@@ -28,7 +28,6 @@ final class RegistrationContext implements Context
     private array $content = [];
 
     public function __construct(
-        private AbstractBrowser $client,
         private ApiClientInterface $shopClient,
         private LoginContext $loginContext,
         private SharedStorageInterface $sharedStorage,
@@ -108,14 +107,11 @@ final class RegistrationContext implements Context
 
         $token = $customer->getUser()->getEmailVerificationToken();
 
-        $this->client->request(
-            'PATCH',
+        $request = $this->requestFactory->custom(
             \sprintf('%s/shop/account-verification-requests/%s', $this->apiUrlPrefix, $token),
-            [],
-            [],
-            ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/merge-patch+json'],
-            json_encode([], \JSON_THROW_ON_ERROR)
+            HttpRequest::METHOD_PATCH,
         );
+        $this->shopClient->executeCustomRequest($request);
     }
 
     /**
@@ -236,16 +232,9 @@ final class RegistrationContext implements Context
 
     /**
      * @Then I should not be logged in
-     */
-    public function iShouldNotBeLoggedIn(): void
-    {
-        // Intentionally left blank
-    }
-
-    /**
      * @Then I should be logged in
      */
-    public function iShouldBeLoggedIn(): void
+    public function iShouldNotBeLoggedIn(): void
     {
         // Intentionally left blank
     }
@@ -283,7 +272,7 @@ final class RegistrationContext implements Context
 
     private function getResponseContent(): array
     {
-        return json_decode($this->client->getResponse()->getContent(), true);
+        return json_decode($this->shopClient->getLastResponse()->getContent(), true);
     }
 
     private function convertElementsToCamelCase(array $fields): array
