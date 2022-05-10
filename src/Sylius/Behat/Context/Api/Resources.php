@@ -27,6 +27,8 @@ final class Resources
 
     public const COUNTRIES = 'countries';
 
+    public const CONTACT_REQUEST = 'contact-request';
+
     public const CURRENCIES = 'currencies';
 
     public const CUSTOMER_GROUPS = 'customer-groups';
