@@ -203,6 +203,14 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then I should (also) see the product attribute :attributeName with value :expectedAttribute on the list
+     */
+    public function iShouldSeeTheProductAttributeWithValueOnTheList($attributeName, $expectedAttribute): void
+    {
+        Assert::inArray($expectedAttribute, $this->showPage->getAttributeListByName($attributeName));
+    }
+
+    /**
      * @Then I should not see the product attribute :attributeName
      */
     public function iShouldNotSeeTheProductAttribute(string $attributeName): void

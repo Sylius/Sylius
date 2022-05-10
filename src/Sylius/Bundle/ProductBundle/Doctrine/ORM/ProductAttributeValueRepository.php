@@ -37,11 +37,11 @@ class ProductAttributeValueRepository extends EntityRepository implements Produc
     ): QueryBuilder {
         $acceptableLocaleCodes = [$localeCode];
 
-        if ($fallbackLocaleCode) {
+        if (null !== $fallbackLocaleCode) {
             $acceptableLocaleCodes[] = $fallbackLocaleCode;
         }
 
-        if ($defaultLocaleCode && array_count_values($acceptableLocaleCodes)[$localeCode] > 1) {
+        if (null !== $defaultLocaleCode && array_count_values($acceptableLocaleCodes)[$localeCode] > 1) {
             $acceptableLocaleCodes[] = $defaultLocaleCode;
         }
 

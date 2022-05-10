@@ -34,7 +34,7 @@
             "name": "available until",
             "type": "datetime",
             "code": "available_until",
-            "value": "2023-05-02T13:45:00+00:00"
+            "value": "2023-05-02 13:45:00"
         },
         {
             "@id": "\/api\/v2\/shop\/product-attribute-values\/@integer@",

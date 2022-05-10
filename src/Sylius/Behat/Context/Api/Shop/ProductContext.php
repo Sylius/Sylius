@@ -211,6 +211,19 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then I should (also) see the product attribute :attributeName with value :expectedAttribute on the list
+     */
+    public function iShouldSeeTheProductAttributeWithValueOnTheList(string $attributeName, string $expectedAttribute): void
+    {
+        $attribute = $this->getAttributeByName($attributeName);
+
+        Assert::inArray(
+            $expectedAttribute,
+            $attribute['value']
+        );
+    }
+
+    /**
      * @Then I should (also) see the product attribute :attributeName with date :expectedAttribute
      */
     public function iShouldSeeTheProductAttributeWithDate(string $attributeName, string $expectedAttribute): void
