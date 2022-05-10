@@ -32,7 +32,6 @@ final class ChannelContext implements Context
     }
 
     /**
-     * @Given I am browsing channel :channel
      * @When /^I (?:am browsing|start browsing|try to browse|browse) (?:|the )("[^"]+" channel)$/
      * @When /^I (?:start browsing|try to browse|browse) (that channel)$/
      * @When /^I (?:am browsing|start browsing|try to browse|browse) (?:|the )(channel "[^"]+")$/
