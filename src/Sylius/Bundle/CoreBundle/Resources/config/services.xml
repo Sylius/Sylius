@@ -14,6 +14,7 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
         <import resource="services/calculators.xml" />
+        <import resource="services/catalog_promotion.xml" />
         <import resource="services/checkers.xml" />
         <import resource="services/checkout.xml" />
         <import resource="services/commands.xml" />
@@ -29,7 +30,6 @@
         <import resource="services/listeners.xml" />
         <import resource="services/order_processing.xml" />
         <import resource="services/payment.xml" />
-        <import resource="services/processors.xml" />
         <import resource="services/promotion.xml" />
         <import resource="services/shipping.xml" />
         <import resource="services/state_resolvers.xml" />
@@ -258,81 +258,10 @@
             <argument type="service" id="sylius.email_sender" />
         </service>
 
-        <service
-            id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface"
-            class="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicator"
-        >
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\ActionBasedDiscountApplicatorInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibilityInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Checker\CatalogPromotionEligibilityChecker" />
-        </service>
-
-        <service
-            id="Sylius\Bundle\CoreBundle\Applicator\ActionBasedDiscountApplicatorInterface"
-            class="Sylius\Bundle\CoreBundle\Applicator\ActionBasedDiscountApplicator"
-        >
-            <argument type="service" id="Sylius\Component\CoreBundle\Calculator\CatalogPromotionPriceCalculatorInterface" />
-            <argument type="tagged_iterator" tag="sylius.catalog_promotion.applicator_criteria" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\DiscountApplicationCriteria\ExclusiveCriteria">
-            <tag name="sylius.catalog_promotion.applicator_criteria" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\DiscountApplicationCriteria\MinimumPriceCriteria">
-            <tag name="sylius.catalog_promotion.applicator_criteria" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" class="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculator"/>
-
         <service id="security.authentication_manager" alias="security.authentication.manager" />
 
-        <service
-            id="Sylius\Bundle\CoreBundle\Announcer\CatalogPromotionAnnouncerInterface"
-            class="Sylius\Bundle\CoreBundle\Announcer\CatalogPromotionAnnouncer"
-        >
-            <argument type="service" id="sylius.event_bus" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" />
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
-        </service>
-
-        <service
-            id="Sylius\Bundle\CoreBundle\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface"
-            class="Sylius\Bundle\CoreBundle\CommandDispatcher\BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher"
-        >
-            <argument type="service" id="sylius.command_bus" />
-            <argument>%sylius_core.catalog_promotions.batch_size%</argument>
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\CommandHandler\ApplyCatalogPromotionsOnVariantsHandler">
-            <argument type="service" id="Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Applicator\CatalogPromotionApplicatorInterface"/>
-            <argument type="service" id="sylius.repository.product_variant" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionClearerInterface" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus" />
-        </service>
-
-        <service
-            id="Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibilityInterface"
-            class="Sylius\Bundle\CoreBundle\Checker\ProductVariantForCatalogPromotionEligibility"
-        >
-            <argument type="tagged_locator" tag="sylius.catalog_promotion.variant_checker" index-by="type" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Checker\CatalogPromotionEligibilityChecker">
-            <argument type="tagged_iterator" tag="sylius.catalog_promotion.criteria" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Checker\InForProductScopeVariantChecker">
-            <tag name="sylius.catalog_promotion.variant_checker" type="for_products" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Checker\InForTaxonsScopeVariantChecker">
-            <tag name="sylius.catalog_promotion.variant_checker" type="for_taxons" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Checker\InForVariantsScopeVariantChecker">
-            <tag name="sylius.catalog_promotion.variant_checker" type="for_variants" />
+        <service id="Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolverInterface" class="Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolver">
+            <argument type="service" id="security.token_storage" />
         </service>
     </services>
 </container>

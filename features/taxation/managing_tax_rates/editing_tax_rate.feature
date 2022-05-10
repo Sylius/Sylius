@@ -12,8 +12,8 @@ Feature: Editing tax rate
 
     @todo
     Scenario: Trying to change tax rate code
-        Given I want to modify a tax rate "United States Sales Tax"
-        When I change its code to "us_vat"
+        When I want to modify a tax rate "United States Sales Tax"
+        And I change its code to "us_vat"
         And I save my changes
         Then I should be notified that code cannot be changed
         And tax rate "United States Sales Tax" should still have code "united_states_sales_tax"
@@ -25,16 +25,16 @@ Feature: Editing tax rate
 
     @ui
     Scenario: Renaming the tax rate
-        Given I want to modify a tax rate "United States Sales Tax"
-        When I rename it to "US VAT"
+        When I want to modify a tax rate "United States Sales Tax"
+        And I rename it to "US VAT"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this tax rate name should be "US VAT"
 
     @ui
     Scenario: Changing the tax rate amount
-        Given I want to modify a tax rate "United States Sales Tax"
-        When I specify its amount as 16%
+        When I want to modify a tax rate "United States Sales Tax"
+        And I specify its amount as 16%
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this tax rate amount should be 16%
@@ -42,8 +42,8 @@ Feature: Editing tax rate
     @ui
     Scenario: Changing related tax category
         Given the store has a tax category "Food and Beverage" also
-        And I want to modify a tax rate "United States Sales Tax"
-        When I change it to be applicable for the "Food and Beverage" tax category
+        When I want to modify a tax rate "United States Sales Tax"
+        And I change it to be applicable for the "Food and Beverage" tax category
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this tax rate should be applicable for the "Food and Beverage" tax category
@@ -51,8 +51,8 @@ Feature: Editing tax rate
     @ui
     Scenario: Changing related zone
         Given there is a zone "The Rest of the World" containing all other countries
-        And I want to modify a tax rate "United States Sales Tax"
-        When I change its zone to "The Rest of the World"
+        When I want to modify a tax rate "United States Sales Tax"
+        And I change its zone to "The Rest of the World"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this tax rate should be applicable in "The Rest of the World" zone

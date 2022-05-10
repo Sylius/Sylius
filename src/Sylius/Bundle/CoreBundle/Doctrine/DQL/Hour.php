@@ -37,6 +37,7 @@ final class Hour extends FunctionNode
     public function getSql(SqlWalker $sqlWalker): string
     {
         $platformName = $sqlWalker->getConnection()->getDatabasePlatform()->getName();
+
         return match ($platformName) {
             'mysql' => sprintf('HOUR(%s)', $sqlWalker->walkArithmeticPrimary($this->date)),
             'postgresql' => sprintf('EXTRACT(HOUR FROM %s)', $sqlWalker->walkArithmeticPrimary($this->date)),

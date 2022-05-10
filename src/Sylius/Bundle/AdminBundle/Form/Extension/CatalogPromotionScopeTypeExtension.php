@@ -29,7 +29,7 @@ final class CatalogPromotionScopeTypeExtension extends AbstractTypeExtension
     {
         foreach ($scopeConfigurationTypes as $type => $formType) {
             $this->scopeConfigurationTypes[$type] = $formType::class;
-            $this->scopeTypes['sylius.form.catalog_promotion.scope.'.$type] = $type;
+            $this->scopeTypes['sylius.form.catalog_promotion.scope.' . $type] = $type;
         }
     }
 
@@ -39,15 +39,14 @@ final class CatalogPromotionScopeTypeExtension extends AbstractTypeExtension
             ->add('type', ChoiceType::class, [
                 'label' => 'sylius.ui.type',
                 'choices' => $this->scopeTypes,
-                'choice_attr' => function(?string $type) use ($builder): array {
+                'choice_attr' => function (?string $type) use ($builder): array {
                     return [
-                        'data-configuration' =>
-                            $this->twig->render(
-                                '@SyliusAdmin/CatalogPromotion/Scope/'.$type.'.html.twig',
-                                ['field' => $builder->create('configuration', $this->scopeConfigurationTypes[$type])->getForm()->createView()]
-                            )
+                        'data-configuration' => $this->twig->render(
+                            '@SyliusAdmin/CatalogPromotion/Scope/' . $type . '.html.twig',
+                            ['field' => $builder->create('configuration', $this->scopeConfigurationTypes[$type])->getForm()->createView()]
+                        ),
                     ];
-                }
+                },
             ])
         ;
     }

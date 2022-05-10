@@ -6,6 +6,10 @@
         <span class="ui red label"><i class="remove icon"></i>{{ 'sylius.ui.disabled'|trans }}</span>
         {% endif %}
 
+        {% if catalog_promotion.exclusive %}
+        <span class="ui teal label" {{ sylius_test_html_attribute('exclusive') }}><i class="checkmark icon"></i>{{ 'sylius.ui.exclusive'|trans }}</span>
+        {% endif %}
+
         {% include '@SyliusAdmin/Common/Label/catalogPromotionState.html.twig' with {'data': catalog_promotion.state} %}
 
         <table class="ui very basic celled table">

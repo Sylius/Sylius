@@ -101,6 +101,10 @@ interface OrderInterface extends
 
     public function getTaxTotal(): int;
 
+    public function getTaxExcludedTotal(): int;
+
+    public function getTaxIncludedTotal(): int;
+
     public function getShippingTotal(): int;
 
     public function getOrderPromotionTotal(): int;
@@ -112,6 +116,10 @@ interface OrderInterface extends
     public function getCustomerIp(): ?string;
 
     public function setCustomerIp(?string $customerIp): void;
+
+    public function getCreatedByGuest(): bool;
+
+    public function setCreatedByGuest(bool $createdByGuest): void;
 
     /**
      * @return Collection|OrderItemInterface[]

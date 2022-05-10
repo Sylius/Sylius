@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
@@ -23,30 +24,16 @@ use Webmozart\Assert\Assert;
 
 final class RegistrationContext implements Context
 {
-    private AbstractBrowser $client;
-
-    private ApiClientInterface $customerClient;
-
-    private LoginContext $loginContext;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private ResponseCheckerInterface $responseChecker;
-
     private array $content = [];
 
     public function __construct(
-        AbstractBrowser $client,
-        ApiClientInterface $customerClient,
-        LoginContext $loginContext,
-        SharedStorageInterface $sharedStorage,
-        ResponseCheckerInterface $responseChecker
+        private AbstractBrowser $client,
+        private ApiClientInterface $shopClient,
+        private LoginContext $loginContext,
+        private SharedStorageInterface $sharedStorage,
+        private ResponseCheckerInterface $responseChecker,
+        private string $apiUrlPrefix
     ) {
-        $this->client = $client;
-        $this->customerClient = $customerClient;
-        $this->loginContext = $loginContext;
-        $this->sharedStorage = $sharedStorage;
-        $this->responseChecker = $responseChecker;
     }
 
     /**
@@ -121,7 +108,7 @@ final class RegistrationContext implements Context
 
         $this->client->request(
             'PATCH',
-            \sprintf('/api/v2/shop/account-verification-requests/%s', $token),
+            \sprintf('%s/shop/account-verification-requests/%s', $this->apiUrlPrefix, $token),
             [],
             [],
             ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/merge-patch+json'],
@@ -155,7 +142,7 @@ final class RegistrationContext implements Context
     {
         $this->client->request(
             'POST',
-            '/api/v2/shop/customers',
+            sprintf('%s/shop/customers', $this->apiUrlPrefix),
             [],
             [],
             ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/ld+json'],
@@ -266,7 +253,7 @@ final class RegistrationContext implements Context
     {
         $customer = $this->sharedStorage->get('customer');
 
-        $response = $this->customerClient->show((string) $customer->getId());
+        $response = $this->shopClient->show(Resources::CUSTOMERS, (string) $customer->getId());
 
         Assert::true($this->responseChecker->getResponseContent($response)['subscribedToNewsletter']);
     }

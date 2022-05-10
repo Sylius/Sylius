@@ -14,7 +14,7 @@ Price and Original Price
 ------------------------
 
 Price - this is the current price of the product variant displayed in the catalog. It can be modified explicitly by i.e. catalog promotions.
-Original price - this is the price of the product variant it is displayed as crossed-out in the catalog. It is used as the base for current price calculations. If this value is not definded, Catalog Promotion logic will copy value from Price to Original Price.
+Original price - this is the price of the product variant it is displayed as crossed-out in the catalog. It is used as the base for current price calculations. If this value is not defined, Catalog Promotion logic will copy value from Price to Original Price.
 
 Minimum Price
 -------------

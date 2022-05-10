@@ -30,14 +30,10 @@ class ProductOption implements ProductOptionInterface, \Stringable
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $code;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $position;
 
     /**

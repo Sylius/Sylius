@@ -125,7 +125,7 @@ Feature: Validating a catalog promotion creation
         And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add fixed discount action without amount configured
         And I try to add it
-        Then I should be notified that not all channels are filled
+        Then I should be notified that a discount amount should be configured for at least one channel
         And there should be an empty list of catalog promotions
 
     @api

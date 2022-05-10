@@ -24,7 +24,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\EventSubscriber\CatalogPromotionEventSubscriber">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Announcer\CatalogPromotionAnnouncerInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncerInterface" />
             <tag name="kernel.event_subscriber" />
         </service>
 

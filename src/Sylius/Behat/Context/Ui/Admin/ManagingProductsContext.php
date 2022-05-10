@@ -1165,6 +1165,22 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then the first product on the list shouldn't have a name
+     */
+    public function theFirstProductOnTheListShouldNotHaveName(): void
+    {
+        Assert::true($this->indexPage->checkFirstProductHasDataAttribute('data-test-missing-translation-paragraph'));
+    }
+
+    /**
+     * @Then the last product on the list shouldn't have a name
+     */
+    public function theLastProductOnTheListShouldNotHaveName(): void
+    {
+        Assert::true($this->indexPage->checkLastProductHasDataAttribute('data-test-missing-translation-paragraph'));
+    }
+
+    /**
      * @param string $element
      * @param string $value
      */

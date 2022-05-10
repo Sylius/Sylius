@@ -1,0 +1,18 @@
+{% import '@SyliusUi/Macro/flags.html.twig' as flags %}
+
+<div class="item">
+    {{ order.checkoutCompletedAt|format_datetime }}
+</div>
+<div class="item" id="sylius-order-state">
+    {% include [('@SyliusAdmin/Order/Label/State' ~ '/' ~ order.state ~ '.html.twig'), '@SyliusUi/Label/_default.html.twig'] with {'value': ('sylius.ui.' ~ order.state)|trans} %}
+</div>
+<div class="item" id="sylius-order-currency">
+    {{ order.currencyCode }}
+</div>
+<div class="item">
+    {{ flags.fromLocaleCode(order.localeCode) }}{{ order.localeCode|sylius_locale_name }}
+</div>
+<div class="item">
+    {{ 'sylius.ui.purchased_from'|trans }}
+    {% include '@SyliusAdmin/Common/_channel.html.twig' with {'channel': order.channel} %}
+</div>

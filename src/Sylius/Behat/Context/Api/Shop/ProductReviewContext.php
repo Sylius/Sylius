@@ -17,6 +17,7 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -52,7 +53,7 @@ final class ProductReviewContext implements Context
         /** @var ProductInterface $product */
         $product = $this->sharedStorage->get('product');
 
-        $this->client->index();
+        $this->client->index(Resources::PRODUCT_REVIEWS);
         $this->client->addFilter('reviewSubject', $this->iriConverter->getIriFromItem($product));
         $this->client->filter();
     }
@@ -71,7 +72,7 @@ final class ProductReviewContext implements Context
      */
     public function iWantToReviewProduct(ProductInterface $product): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(Resources::PRODUCT_REVIEWS);
         $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
     }
 
@@ -113,7 +114,7 @@ final class ProductReviewContext implements Context
         /** @var ProductInterface $product */
         $product = $this->sharedStorage->get('product');
 
-        $this->client->index();
+        $this->client->index(Resources::PRODUCT_REVIEWS);
         $this->client->addFilter('reviewSubject', $this->iriConverter->getIriFromItem($product));
         $this->client->addFilter('itemsPerPage', 3);
         $this->client->addFilter('order[createdAt]', 'desc');

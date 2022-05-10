@@ -78,6 +78,10 @@ const copyValueToAllLanguages = function copyValueToAllLanguages() {
       $inputs.each((i, input) => {
         if (input.getAttribute('type') === 'checkbox') {
           input.checked = $masterAttributeInputs[i].checked;
+        } else if (input.nodeName === 'SELECT') {
+          for (let x = 0; x < $inputs[i].length; x++) {
+            input[x].selected = $masterAttributeInputs[i][x].selected;
+          }
         } else {
           input.value = $masterAttributeInputs[i].value;
         }

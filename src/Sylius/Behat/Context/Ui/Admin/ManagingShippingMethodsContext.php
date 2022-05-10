@@ -201,8 +201,8 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Given I want to modify a shipping method :shippingMethod
-     * @Given /^I want to modify (this shipping method)$/
+     * @When I want to modify a shipping method :shippingMethod
+     * @When /^I want to modify (this shipping method)$/
      */
     public function iWantToModifyAShippingMethod(ShippingMethodInterface $shippingMethod)
     {
@@ -518,20 +518,20 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When /^I add the "Order total greater than or equal" rule configured with (?:€|£|\$)([^"]+) for "([^"]+)" channel$/
+     * @When /^I add the "Items total greater than or equal" rule configured with (?:€|£|\$)([^"]+) for "([^"]+)" channel$/
      */
-    public function iAddTheOrderTotalGreaterThanOrEqualRuleConfiguredWith($value, string $channel): void
+    public function iAddTheItemsTotalGreaterThanOrEqualRuleConfiguredWith($value, string $channel): void
     {
-        $this->createPage->addRule('Order total greater than or equal');
+        $this->createPage->addRule('Items total greater than or equal');
         $this->createPage->fillRuleOptionForChannel($channel, 'Amount', (string) $value);
     }
 
     /**
-     * @When /^I add the "Order total less than or equal" rule configured with (?:€|£|\$)([^"]+) for "([^"]+)" channel$/
+     * @When /^I add the "Items total less than or equal" rule configured with (?:€|£|\$)([^"]+) for "([^"]+)" channel$/
      */
-    public function iAddTheOrderTotalLessThanOrEqualRuleConfiguredWith($value, string $channel): void
+    public function iAddTheItemsTotalLessThanOrEqualRuleConfiguredWith($value, string $channel): void
     {
-        $this->createPage->addRule('Order total less than or equal');
+        $this->createPage->addRule('Items total less than or equal');
         $this->createPage->fillRuleOptionForChannel($channel, 'Amount', (string) $value);
     }
 

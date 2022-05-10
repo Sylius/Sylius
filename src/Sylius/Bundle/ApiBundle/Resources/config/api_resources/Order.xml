@@ -39,7 +39,8 @@
                     <attribute name="groups">shop:order:create</attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Pickups a new cart. Provided locale code has to be one of available for a particular channel.</attribute>                </attribute>
+                    <attribute name="summary">Pickups a new cart</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="shop_get">
@@ -359,16 +360,6 @@
                 <attribute name="path">/shop/orders/{tokenValue}/adjustments</attribute>
             </subresourceOperation>
 
-            <subresourceOperation name="payments_methods_get_subresource">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/orders/{tokenValue}/payments/{payments}/methods</attribute>
-            </subresourceOperation>
-
-            <subresourceOperation name="shipments_methods_get_subresource">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/orders/{tokenValue}/shipments/{shipments}/methods</attribute>
-            </subresourceOperation>
-
             <subresourceOperation name="items_adjustments_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}/items/{items}/adjustments</attribute>
@@ -397,6 +388,8 @@
         <property name="notes" writable="true" />
         <property name="itemsTotal" readable="true" />
         <property name="taxTotal" readable="true"/>
+        <property name="taxExcludedTotal" readable="true"/>
+        <property name="taxIncludedTotal" readable="true"/>
         <property name="adjustments" writable="false">
             <subresource resourceClass="%sylius.model.adjustment.class%" />
         </property>

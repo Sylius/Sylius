@@ -46,6 +46,7 @@
         <attribute name="defaultLocale">
             <group>admin:channel:read</group>
             <group>admin:channel:create</group>
+            <group>shop:channel:read</group>
         </attribute>
         <attribute name="defaultTaxZone">
             <group>admin:channel:read</group>
@@ -58,10 +59,12 @@
         <attribute name="currencies">
             <group>admin:channel:read</group>
             <group>admin:channel:create</group>
+            <group>shop:channel:read</group>
         </attribute>
         <attribute name="locales">
             <group>admin:channel:read</group>
             <group>admin:channel:create</group>
+            <group>shop:channel:read</group>
         </attribute>
         <attribute name="countries">
             <group>admin:channel:read</group>

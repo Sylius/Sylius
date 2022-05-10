@@ -68,6 +68,8 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.shipment" />
             <argument type="service" id="sylius.registry.shipping_calculator" />
+            <argument type="service" id="Symfony\Component\HttpFoundation\RequestStack" />
+            <argument type="service" id="Sylius\Component\Channel\Context\ChannelContextInterface" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
 

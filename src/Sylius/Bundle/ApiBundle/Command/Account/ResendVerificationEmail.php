@@ -22,16 +22,18 @@ use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
 class ResendVerificationEmail implements ShopUserIdAwareInterface, ChannelCodeAwareInterface, LocaleCodeAwareInterface, IriToIdentifierConversionAwareInterface
 {
     /** @var string|int|null */
-    public $shopUserId = null;
+    public $shopUserId;
 
     /**
      * @psalm-immutable
+     *
      * @var string|null
      */
     public $channelCode;
 
     /**
      * @psalm-immutable
+     *
      * @var string|null
      */
     public $localeCode;

@@ -15,26 +15,25 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
 
 final class PromotionContext implements Context
 {
-    private ApiClientInterface $ordersClient;
+    private ApiClientInterface $client;
 
     private SharedStorageInterface $sharedStorage;
 
     private ResponseCheckerInterface $responseChecker;
 
     public function __construct(
-        ApiClientInterface $ordersClient,
+        ApiClientInterface $client,
         SharedStorageInterface $sharedStorage,
         ResponseCheckerInterface $responseChecker
     ) {
-        $this->ordersClient = $ordersClient;
+        $this->client = $client;
         $this->sharedStorage = $sharedStorage;
         $this->responseChecker = $responseChecker;
     }
@@ -53,7 +52,7 @@ final class PromotionContext implements Context
      */
     public function iShouldBeNotifiedThatCouponIsInvalid(): void
     {
-        $response = $this->ordersClient->getLastResponse();
+        $response = $this->client->getLastResponse();
 
         Assert::same($response->getStatusCode(), 422);
         Assert::same($this->responseChecker->getError($response), 'couponCode: Coupon code is invalid.');
@@ -70,8 +69,8 @@ final class PromotionContext implements Context
 
     private function useCouponCode(?string $couponCode): void
     {
-        $this->ordersClient->buildUpdateRequest($this->getCartTokenValue());
-        $this->ordersClient->setRequestData(['couponCode' => $couponCode]);
-        $this->ordersClient->update();
+        $this->client->buildUpdateRequest(Resources::ORDERS, $this->getCartTokenValue());
+        $this->client->setRequestData(['couponCode' => $couponCode]);
+        $this->client->update();
     }
 }

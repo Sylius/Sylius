@@ -146,6 +146,7 @@
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="messenger.default_bus" />
             <argument type="service" id="sylius.shop_user.token_generator.password_reset" />
+            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
@@ -160,13 +161,8 @@
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\ResetPasswordHandler">
             <argument type="service" id="sylius.repository.shop_user" />
-            <argument type="service">
-                <service class="Sylius\Component\Resource\Metadata\MetadataInterface">
-                    <factory service="sylius.resource_registry" method="get" />
-                    <argument type="string">sylius.shop_user</argument>
-                </service>
-            </argument>
             <argument type="service" id="sylius.security.password_updater" />
+            <argument type="string">%sylius.shop_user.token.password_reset.ttl%</argument>
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
@@ -211,6 +207,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\VerifyCustomerAccountHandler">
             <argument type="service" id="sylius.repository.shop_user" />
+            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>

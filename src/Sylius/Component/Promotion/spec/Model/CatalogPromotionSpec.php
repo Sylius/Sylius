@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Promotion\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 
 final class CatalogPromotionSpec extends ObjectBehavior

@@ -24,7 +24,7 @@ final class ChannelBasedOrderTotalGreaterThanOrEqualConfigurationType extends Ab
     {
         $resolver->setDefaults([
             'entry_type' => OrderTotalGreaterThanOrEqualConfigurationType::class,
-            'entry_options' => fn(ChannelInterface $channel): array => [
+            'entry_options' => fn (ChannelInterface $channel): array => [
                 'label' => $channel->getName(),
                 'currency' => $channel->getBaseCurrency()->getCode(),
             ],

@@ -40,10 +40,10 @@ Feature: Apply correct taxes for items with the same tax rate
         Then my cart total should be "$73.80"
         And my cart taxes should be "$13.80"
 
-    @ui
+    @ui @api
     Scenario: Proper taxes after changing item quantity
         Given I have 3 products "PHP T-Shirt" in the cart
         And I have 2 products "Symfony Hat" in the cart
-        When I change "PHP T-Shirt" quantity to 1
+        When I change product "PHP T-Shirt" quantity to 1 in my cart
         Then my cart total should be "$196.80"
         And my cart taxes should be "$36.80"

@@ -17,6 +17,7 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -31,8 +32,6 @@ final class ManagingShippingMethodsContext implements Context
 
     private ApiClientInterface $client;
 
-    private ApiClientInterface $adminUsersClient;
-
     private ResponseCheckerInterface $responseChecker;
 
     private IriConverterInterface $iriConverter;
@@ -41,13 +40,11 @@ final class ManagingShippingMethodsContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
-        ApiClientInterface $adminUsersClient,
         ResponseCheckerInterface $responseChecker,
         IriConverterInterface $iriConverter,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
-        $this->adminUsersClient = $adminUsersClient;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
         $this->sharedStorage = $sharedStorage;
@@ -58,7 +55,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iAmBrowsingArchivalShippingMethods(): void
     {
-        $this->client->index();
+        $this->client->index(Resources::SHIPPING_METHODS);
         $this->client->addFilter('exists[archivedAt]', true);
         $this->client->filter();
     }
@@ -84,10 +81,10 @@ final class ManagingShippingMethodsContext implements Context
         /** @var AdminUserInterface $adminUser */
         $adminUser = $this->sharedStorage->get('administrator');
 
-        $this->adminUsersClient->buildUpdateRequest((string) $adminUser->getId());
+        $this->client->buildUpdateRequest(Resources::ADMINISTRATORS, (string) $adminUser->getId());
 
-        $this->adminUsersClient->updateRequestData(['localeCode' => $localeCode]);
-        $this->adminUsersClient->update();
+        $this->client->updateRequestData(['localeCode' => $localeCode]);
+        $this->client->update();
     }
 
     /**
@@ -98,7 +95,9 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iBrowseShippingMethods(): void
     {
-        $this->client->index();
+        $response = $this->client->index(Resources::SHIPPING_METHODS);
+
+        $this->sharedStorage->set('response', $response);
     }
 
     /**
@@ -106,7 +105,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iDeleteShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
-        $this->client->delete($shippingMethod->getCode());
+        $this->client->delete(Resources::SHIPPING_METHODS, $shippingMethod->getCode());
     }
 
     /**
@@ -115,7 +114,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iWantToCreateANewShippingMethod(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(Resources::SHIPPING_METHODS);
     }
 
     /**
@@ -123,7 +122,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iTryToCreateANewShippingMethodWithValidData(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(Resources::SHIPPING_METHODS);
         $this->client->setRequestData([
             'code' => 'FED_EX_CARRIER',
             'position' => 0,
@@ -139,7 +138,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iTryToShowShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
-        $this->client->show($shippingMethod->getCode());
+        $this->client->show(Resources::SHIPPING_METHODS, $shippingMethod->getCode());
     }
 
     /**
@@ -237,8 +236,8 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iArchiveTheShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
-        $this->client->customItemAction($shippingMethod->getCode(), HttpRequest::METHOD_PATCH, 'archive');
-        $this->client->index();
+        $this->client->customItemAction(Resources::SHIPPING_METHODS, $shippingMethod->getCode(), HttpRequest::METHOD_PATCH, 'archive');
+        $this->client->index(Resources::SHIPPING_METHODS);
     }
 
     /**
@@ -246,7 +245,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iTryToRestoreTheShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
-        $this->client->customItemAction($shippingMethod->getCode(), HttpRequest::METHOD_PATCH, 'restore');
+        $this->client->customItemAction(Resources::SHIPPING_METHODS, $shippingMethod->getCode(), HttpRequest::METHOD_PATCH, 'restore');
     }
 
     /**
@@ -264,7 +263,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iWantToModifyShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
-        $this->client->buildUpdateRequest($shippingMethod->getCode());
+        $this->client->buildUpdateRequest(Resources::SHIPPING_METHODS, $shippingMethod->getCode());
     }
 
     /**
@@ -324,7 +323,7 @@ final class ManagingShippingMethodsContext implements Context
     public function theShippingMethodShouldAppearInTheRegistry(string $name): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithTranslation($this->client->index(), 'en_US', 'name', $name),
+            $this->responseChecker->hasItemWithTranslation($this->client->index(Resources::SHIPPING_METHODS), 'en_US', 'name', $name),
             sprintf('Shipping method with name %s does not exists', $name)
         );
     }
@@ -337,7 +336,7 @@ final class ManagingShippingMethodsContext implements Context
         $name = $shippingMethod->getName();
 
         Assert::true(
-            $this->responseChecker->hasItemWithTranslation($this->client->index(), 'en_US', 'name', $name),
+            $this->responseChecker->hasItemWithTranslation($this->client->index(Resources::SHIPPING_METHODS), 'en_US', 'name', $name),
             sprintf('Shipping method with name %s does not exists', $name)
         );
     }
@@ -361,7 +360,7 @@ final class ManagingShippingMethodsContext implements Context
         $shippingMethodName = $shippingMethod->getName();
 
         Assert::false(
-            $this->responseChecker->hasItemWithTranslation($this->client->index(), 'en_US', 'name', $shippingMethodName),
+            $this->responseChecker->hasItemWithTranslation($this->client->index(Resources::SHIPPING_METHODS), 'en_US', 'name', $shippingMethodName),
             sprintf('Shipping method with name %s does not exists', $shippingMethodName)
         );
     }
@@ -392,7 +391,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasValueInCollection(
-                $this->client->show($shippingMethod->getCode()),
+                $this->client->show(Resources::SHIPPING_METHODS, $shippingMethod->getCode()),
                 'channels',
                 $this->iriConverter->getIriFromItem($channel)
             ),
@@ -408,7 +407,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasTranslation(
-                $this->client->show($shippingMethod->getCode()),
+                $this->client->show(Resources::SHIPPING_METHODS, $shippingMethod->getCode()),
                 'en_US',
                 'name',
                 $name
@@ -424,7 +423,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasValue(
-                $this->client->show($shippingMethod->getCode()),
+                $this->client->show(Resources::SHIPPING_METHODS, $shippingMethod->getCode()),
                 'enabled',
                 false
             ),
@@ -439,7 +438,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasValue(
-                $this->client->show($shippingMethod->getCode()),
+                $this->client->show(Resources::SHIPPING_METHODS, $shippingMethod->getCode()),
                 'enabled',
                 true
             ),
@@ -492,7 +491,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function thereShouldStillBeOnlyOneShippingMethodWith(string $value): void
     {
-        $response = $this->client->index();
+        $response = $this->client->index(Resources::SHIPPING_METHODS);
         $itemsCount = $this->responseChecker->countCollectionItems($response);
 
         Assert::same($itemsCount, 1, sprintf('Expected 1 shipping method, but got %d', $itemsCount));
@@ -516,7 +515,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iShouldSeeShippingMethodOnTheList(int $amount): void
     {
-        $this->client->index();
+        $this->client->index(Resources::SHIPPING_METHODS);
 
         $response = $this->client->getLastResponse();
         $itemsCount = $this->responseChecker->countCollectionItems($response);
@@ -563,7 +562,7 @@ final class ManagingShippingMethodsContext implements Context
     public function theShippingMethodWithElementValueShouldNotBeAdded(string $element, string $value): void
     {
         Assert::false(
-            $this->responseChecker->hasItemWithValue($this->client->index(), $element, $value),
+            $this->responseChecker->hasItemWithValue($this->client->index(Resources::SHIPPING_METHODS), $element, $value),
             sprintf('Shipping method should not have %s "%s", but it does,', $element, $value)
         );
     }
@@ -593,7 +592,9 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function theLastShippingMethodOnTheListShouldHave(string $value): void
     {
-        $shippingMethods = $this->responseChecker->getCollection($this->client->getLastResponse());
+        $response = $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
+
+        $shippingMethods = $this->responseChecker->getCollection($response);
 
         Assert::same(end($shippingMethods)['translations']['en_US']['name'], $value);
     }
@@ -611,7 +612,7 @@ final class ManagingShippingMethodsContext implements Context
         /** @var AdminUserInterface $adminUser */
         $adminUser = $this->sharedStorage->get('administrator');
 
-        $response = $this->adminUsersClient->show((string) $adminUser->getId());
+        $response = $this->client->show(Resources::ADMINISTRATORS, (string) $adminUser->getId());
 
         return $this->responseChecker->getValue($response, 'localeCode');
     }

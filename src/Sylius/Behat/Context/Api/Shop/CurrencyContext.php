@@ -16,8 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
-use Webmozart\Assert\Assert;
+use Sylius\Behat\Context\Api\Resources;
 
 final class CurrencyContext implements Context
 {
@@ -38,7 +37,7 @@ final class CurrencyContext implements Context
      */
     public function iBrowseCurrencies(): void
     {
-        $this->client->index();
+        $this->client->index(Resources::CURRENCIES);
     }
 
     /**

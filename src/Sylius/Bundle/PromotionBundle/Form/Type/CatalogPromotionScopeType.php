@@ -35,7 +35,7 @@ final class CatalogPromotionScopeType extends AbstractResourceType
 
         foreach ($scopeConfigurationTypes as $type => $formType) {
             $this->scopeConfigurationTypes[$type] = $formType::class;
-            $this->scopeTypes['sylius.form.catalog_promotion.scope.'.$type] = $type;
+            $this->scopeTypes['sylius.form.catalog_promotion.scope.' . $type] = $type;
         }
     }
 
@@ -53,10 +53,10 @@ final class CatalogPromotionScopeType extends AbstractResourceType
         ;
 
         $builder
-            ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event): void {
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
                 $this->addScopeToForm($event);
             })
-            ->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event): void {
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
                 $this->addScopeToForm($event);
             })
         ;

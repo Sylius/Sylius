@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Webmozart\Assert\Assert;
 
 final class ManagingLocalesContext implements Context
@@ -37,7 +38,7 @@ final class ManagingLocalesContext implements Context
      */
     public function iWantToAddNewLocale(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(Resources::LOCALES);
     }
 
     /**
@@ -73,7 +74,7 @@ final class ManagingLocalesContext implements Context
      */
     public function theStoreShouldBeAvailableInTheLanguage(string $localeCode): void
     {
-        $response = $this->client->index();
+        $response = $this->client->index(Resources::LOCALES);
         Assert::true(
             $this->responseChecker->hasItemWithValue($response, 'code', $localeCode),
             sprintf('There is no locale with code "%s"', $localeCode)

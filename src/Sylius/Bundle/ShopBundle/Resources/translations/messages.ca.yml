@@ -9,7 +9,7 @@ sylius:
             subject: 'Confirmació de la comanda'
     homepage:
         about_us: 'Sobre nosaltres'
-        carousel_header: 'Prepara''t! Arriba l''hivern'
+        banner_content: 'Prepara''t! Arriba l''hivern'
     menu:
         shop:
             account:

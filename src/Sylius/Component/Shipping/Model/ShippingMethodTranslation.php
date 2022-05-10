@@ -20,14 +20,10 @@ class ShippingMethodTranslation extends AbstractTranslation implements ShippingM
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $name;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $description;
 
     public function __toString(): string

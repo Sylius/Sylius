@@ -37,6 +37,7 @@ final class Year extends FunctionNode
     public function getSql(SqlWalker $sqlWalker): string
     {
         $platformName = $sqlWalker->getConnection()->getDatabasePlatform()->getName();
+
         return match ($platformName) {
             'mysql' => sprintf('YEAR(%s)', $sqlWalker->walkArithmeticPrimary($this->date)),
             'postgresql' => sprintf('EXTRACT(YEAR FROM %s)', $sqlWalker->walkArithmeticPrimary($this->date)),

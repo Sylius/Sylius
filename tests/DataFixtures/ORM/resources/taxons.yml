@@ -19,3 +19,83 @@ Sylius\Component\Core\Model\Taxon:
     women:
         code: "women"
         parent: "@t-shirts"
+        
+Sylius\Component\Taxonomy\Model\TaxonTranslation:
+    en_us_category_translation:
+        slug: "categories"
+        locale: "en_US"
+        name: "Categories"
+        description: "Some description Lorem ipsum dolor sit amet."
+        translatable: "@category"
+    en_us_mug_taxon_translation:
+        slug: "categories/mugs"
+        locale: "en_US"
+        name: "Mugs"
+        description: "Some description Lorem ipsum dolor sit amet."
+        translatable: "@mugs"
+    en_us_sticker_translation:
+        slug: "categories/stickers"
+        locale: "en_US"
+        name: "Stickers"
+        description: "Some description Lorem ipsum dolor sit amet."
+        translatable: "@stickers"
+    en_us_book_taxon_translation:
+        slug: "categories/books"
+        locale: "en_US"
+        name: "Books"
+        description: "Some description Lorem ipsum dolor sit amet."
+        translatable: "@books"
+    en_us_t_shirt_translation:
+        slug: "categories/t-shirts"
+        locale: "en_US"
+        name: "T-Shirts"
+        description: "Some description Lorem ipsum dolor sit amet."
+        translatable: "@t-shirts"
+    en_us_men_t_shirt_translation:
+        slug: "categories/t-shirts/men-t-shirts"
+        locale: "en_US"
+        name: "Men T-Shirts"
+        description: "Some description Lorem ipsum dolor sit amet."
+        translatable: "@men"
+    en_us_women_t_shirt_translation:
+        slug: "categories/t-shirts/women-t-shirts"
+        locale: "en_US"
+        name: "Women T-Shirts"
+        description: "Some description Lorem ipsum dolor sit amet."
+        translatable: "@women"
+    de_de_mug_taxon_translation:
+        slug: "tassen"
+        locale: "de_DE"
+        name: "Tassen"
+        description: "Einige Beschreibung Lorem ipsum dolor sit amet."
+        translatable: "@mugs"
+    de_de_aufkleber_translation:
+        slug: "aufkleber"
+        locale: "de_DE"
+        name: "Aufkleber"
+        translatable: "@stickers"
+    de_de_buchen_taxon_translation:
+        slug: "buchen"
+        locale: "de_DE"
+        name: "Buchen"
+        description: "Einige Beschreibung Lorem ipsum dolor sit amet."
+        translatable: "@books"
+    de_de_t_shirt_taxon_translation:
+        slug: "t-shirts"
+        locale: "de_DE"
+        name: "T-Shirts"
+        description: "Einige Beschreibung Lorem ipsum dolor sit amet."
+        translatable: "@t-shirts"
+    de_de_men_t_shirt_translation:
+        slug: "männer-t-shirts"
+        locale: "de_DE"
+        name: "Männer T-Shirts"
+        description: "Einige Beschreibung Lorem ipsum dolor sit amet."
+        translatable: "@men"
+    de_de_women_t_shirt_translation:
+        slug: "frauen-t-shirts"
+        locale: "de_DE"
+        name: "Frauen T-Shirts"
+        description: "Einige Beschreibung Lorem ipsum dolor sit amet."
+        translatable: "@women"
+        

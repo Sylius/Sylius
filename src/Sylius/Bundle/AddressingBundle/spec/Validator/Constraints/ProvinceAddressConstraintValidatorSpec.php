@@ -46,13 +46,52 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
     }
 
     function it_does_not_add_violation_because_a_violation_exists(
+        RepositoryInterface $countryRepository,
         AddressInterface $address,
+        Country $country,
         ProvinceAddressConstraint $constraint,
         ExecutionContextInterface $context
     ): void {
+        // DO NOT REMOVE THIS CODE: it ensures that there is a violation that can be added
+        // if the logic that is being tested (NOT adding a validation) does not work.
+        $country->getCode()->willReturn('PL');
+        $address->getCountryCode()->willReturn('PL');
+        $countryRepository->findOneBy(['code' => 'PL'])->willReturn($country);
+
+        $country->hasProvinces()->willReturn(true);
+        $address->getProvinceCode()->willReturn(null);
+
         $this->initialize($context);
 
         $context->getPropertyPath()->willReturn('property_path');
+        $context->getViolations()->willReturn(new \ArrayIterator([
+            $this->createViolation('property_path'),
+        ]));
+
+        $context->addViolation(Argument::any())->shouldNotBeCalled();
+
+        $this->validate($address, $constraint);
+    }
+
+    function it_does_not_add_violation_because_a_violation_exists_when_address_is_the_root_object(
+        RepositoryInterface $countryRepository,
+        AddressInterface $address,
+        Country $country,
+        ProvinceAddressConstraint $constraint,
+        ExecutionContextInterface $context
+    ): void {
+        // DO NOT REMOVE THIS CODE: it ensures that there is a violation that can be added
+        // if the logic that is being tested (NOT adding a validation) does not work.
+        $country->getCode()->willReturn('PL');
+        $address->getCountryCode()->willReturn('PL');
+        $countryRepository->findOneBy(['code' => 'PL'])->willReturn($country);
+
+        $country->hasProvinces()->willReturn(true);
+        $address->getProvinceCode()->willReturn(null);
+
+        $this->initialize($context);
+
+        $context->getPropertyPath()->willReturn('');
         $context->getViolations()->willReturn(new \ArrayIterator([
             $this->createViolation('property_path'),
         ]));

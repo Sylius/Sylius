@@ -10,7 +10,7 @@ Feature: Locale validation
 
     @api
     Scenario: Trying to add a locale without specifying a code
-        Given I want to create a new locale
-        When I do not choose a code
+        When I want to create a new locale
+        And I do not choose a code
         And I try to add it
         Then I should be notified that a code is required

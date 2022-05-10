@@ -35,12 +35,21 @@ $.fn.extend({
             return settings;
           },
           onResponse(response) {
+            let results = response.map(item => ({
+              name: item[choiceName],
+              value: item[choiceValue],
+            }));
+
+            if (!element.hasClass('multiple')){
+              results.unshift({
+                name: '&nbsp;',
+                value: '&nbsp;',
+              });
+            }
+
             return {
               success: true,
-              results: response.map(item => ({
-                name: item[choiceName],
-                value: item[choiceValue],
-              })),
+              results: results,
             };
           },
         },

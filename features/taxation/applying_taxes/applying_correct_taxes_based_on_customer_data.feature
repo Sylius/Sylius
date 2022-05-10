@@ -15,7 +15,7 @@ Feature: Apply correct taxes based on customer data
         And it belongs to "Clothes" tax category
         And there is user "john@example.com" with "Germany" as shipping country
 
-    @ui
+    @ui @api
     Scenario: Proper taxes for logged in Customer
         Given I am logged in as "john@example.com"
         When I add product "PHP T-Shirt" to the cart

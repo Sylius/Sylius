@@ -10,10 +10,10 @@ Feature: Adding a new product with a percent attribute
         And the store has a non-translatable percent product attribute "Accuracy"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Adding a percent attribute to product
-        Given I want to create a new simple product
-        When I specify its code as "44_MAGNUM"
+        When I want to create a new simple product
+        And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
         And I set its price to "$100.00" for "United States" channel
         And I set its "Awesomeness rating" attribute to "80" in "English (United States)"
@@ -22,7 +22,7 @@ Feature: Adding a new product with a percent attribute
         And the product "44 Magnum" should appear in the store
         And attribute "Awesomeness rating" of product "44 Magnum" should be "80"
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Adding a non-translatable percent attribute to product
         When I want to create a new simple product
         And I specify its code as "44_MAGNUM"

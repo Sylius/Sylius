@@ -16,42 +16,32 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Webmozart\Assert\Assert;
 
 final class ChannelContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private SharedStorageInterface $sharedStorage;
-
     public function __construct(
-        ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage,
+        private string $apiUrlPrefix,
     ) {
-        $this->client = $client;
-        $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**
      * @Given I am browsing channel :channel
+     * @When /^I (?:am browsing|start browsing|try to browse|browse) (?:|the )("[^"]+" channel)$/
+     * @When /^I (?:start browsing|try to browse|browse) (that channel)$/
      */
     public function iAmBrowsingChannel(ChannelInterface $channel): void
     {
         $this->sharedStorage->set('hostname', $channel->getHostname());
-    }
+        $this->sharedStorage->remove('current_locale_code');
 
-    /**
-     * @When /^I (?:start browsing|try to browse|browse) (that channel)$/
-     */
-    public function iVisitChannelHomepage(ChannelInterface $channel): void
-    {
-        $this->client->show($channel->getCode());
+        $this->client->show(Resources::CHANNELS, $channel->getCode());
     }
 
     /**
@@ -61,10 +51,10 @@ final class ChannelContext implements Context
     {
         Assert::same(
             $this->responseChecker->getValue(
-            $this->client->getLastResponse(),
-            'baseCurrency'
-        )['code'],
-            $currencyCode
+                $this->client->getLastResponse(),
+                'baseCurrency'
+            ),
+            sprintf('%s/shop/currencies/%s', $this->apiUrlPrefix, $currencyCode)
         );
     }
 }

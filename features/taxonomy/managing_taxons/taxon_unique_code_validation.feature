@@ -11,8 +11,8 @@ Feature: Taxon unique code validation
 
     @ui
     Scenario: Trying to add taxon with taken code
-        Given I want to create a new taxon
-        When I specify its code as "t_shirts"
+        When I want to create a new taxon
+        And I specify its code as "t_shirts"
         And I name it "T-Shirts" in "English (United States)"
         And I try to add it
         Then I should be notified that taxon with this code already exists

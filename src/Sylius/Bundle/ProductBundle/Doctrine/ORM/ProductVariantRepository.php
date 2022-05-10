@@ -150,7 +150,7 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
         ;
     }
 
-    public function findByPhrase(string $phrase, string $locale): array
+    public function findByPhrase(string $phrase, string $locale, ?int $limit = null): array
     {
         $expr = $this->getEntityManager()->getExpressionBuilder();
 
@@ -162,6 +162,9 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
             ))
             ->setParameter('phrase', '%' . $phrase . '%')
             ->setParameter('locale', $locale)
+            ->orderBy('o.product', 'ASC')
+            ->addOrderBy('o.position', 'ASC')
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
         ;

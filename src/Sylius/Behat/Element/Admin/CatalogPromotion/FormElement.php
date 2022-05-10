@@ -170,6 +170,20 @@ final class FormElement extends Element implements FormElementInterface
         return false;
     }
 
+    public function hasOnlyOneValidationMessage(string $message): bool
+    {
+        $validationElements = $this->getDocument()->findAll('css', '.sylius-validation-error');
+
+        $counter = 0;
+        foreach ($validationElements as $validationElement) {
+            if ($validationElement->getText() === $message) {
+                ++$counter;
+            }
+        }
+
+        return $counter === 1;
+    }
+
     public function removeAllActions(): void
     {
         $deleteButtons = $this->getDocument()->findAll('css', '#actions [data-form-collection="delete"]');

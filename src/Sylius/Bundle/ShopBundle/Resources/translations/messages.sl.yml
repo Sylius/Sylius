@@ -13,7 +13,7 @@ sylius:
             subject: 'Ponastavitev gesla'
     homepage:
         about_us_content: 'Dobrodošli v naši spletni trgovini. Izbirate lahko med pestro ponudbo oblačil in obutve.'
-        carousel_header: 'Pripravite se! Zima Prihaja'
+        banner_content: 'Pripravite se! Zima Prihaja'
         newsletter_description: 'Prijavite se na naše e-novice!'
     lightbox:
         image_album_label: 'Slika %1 od %2'

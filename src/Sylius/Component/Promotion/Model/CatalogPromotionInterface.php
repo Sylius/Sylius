@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Promotion\Model;
 
-use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;

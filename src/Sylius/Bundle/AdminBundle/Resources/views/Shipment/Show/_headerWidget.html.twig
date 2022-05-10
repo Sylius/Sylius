@@ -1,0 +1,10 @@
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+
+<div class="ui stackable two column grid">
+    <div class="twelve wide column">
+        {% include '@SyliusAdmin/Shipment/Show/_header.html.twig' %}
+    </div>
+    <div class="four wide right aligned column">
+        {{ buttons.default(app.request.headers.get('referer'), '', 'back', 'arrow alternate circle left outline') }}
+    </div>
+</div>

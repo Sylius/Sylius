@@ -68,11 +68,23 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
         $field->clickLink('Details');
     }
 
+    public function checkFirstProductHasDataAttribute(string $attributeName): bool
+    {
+        return $this->getElement('first_product')->find('css', sprintf('[%s]', $attributeName)) !== null;
+    }
+
+    public function checkLastProductHasDataAttribute(string $attributeName): bool
+    {
+        return $this->getElement('last_product')->find('css', sprintf('[%s]', $attributeName)) !== null;
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'channel_filter' => '#criteria_channel',
             'taxon_filter' => '.sylius-tree__item a:contains("%taxon%")',
+            'first_product' => '.table > tbody > tr:first-child',
+            'last_product' => '.table > tbody > tr:last-child',
         ]);
     }
 }

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Faker\Generator;
 use Faker\Factory;
+use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -63,16 +63,16 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('code', fn(Options $options): string => StringInflector::nameToCode($options['name']))
+            ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
             ->setDefault('name', function (Options $options): string {
                 /** @var string $words */
                 $words = $this->faker->words(3, true);
 
                 return $words;
             })
-            ->setDefault('amount', fn(Options $options): float => $this->faker->randomFloat(2, 0, 0.4))
+            ->setDefault('amount', fn (Options $options): float => $this->faker->randomFloat(2, 0, 0.4))
             ->setAllowedTypes('amount', 'float')
-            ->setDefault('included_in_price', fn(Options $options): bool => $this->faker->boolean())
+            ->setDefault('included_in_price', fn (Options $options): bool => $this->faker->boolean())
             ->setAllowedTypes('included_in_price', 'bool')
             ->setDefault('calculator', 'default')
             ->setDefault('zone', LazyOption::randomOne($this->zoneRepository))

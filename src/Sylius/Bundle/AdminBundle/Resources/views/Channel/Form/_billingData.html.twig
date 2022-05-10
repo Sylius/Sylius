@@ -1,0 +1,15 @@
+<h4 class="ui top attached large header">{{ form_label(form.shopBillingData) }}</h4>
+<div class="ui attached segment">
+    <div class="two fields">
+        {{ form_row(form.shopBillingData.company) }}
+        {{ form_row(form.shopBillingData.taxId) }}
+    </div>
+    <div class="two fields">
+        {{ form_row(form.shopBillingData.countryCode) }}
+        {{ form_row(form.shopBillingData.street) }}
+    </div>
+    <div class="two fields">
+        {{ form_row(form.shopBillingData.city) }}
+        {{ form_row(form.shopBillingData.postcode) }}
+    </div>
+</div>

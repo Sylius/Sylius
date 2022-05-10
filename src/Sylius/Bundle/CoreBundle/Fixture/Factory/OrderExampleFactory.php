@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Faker\Generator;
-use Faker\Factory;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
+use Faker\Generator;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -100,7 +100,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setAllowedTypes('country', ['null', 'string', CountryInterface::class])
             ->setNormalizer('country', LazyOption::findOneBy($this->countryRepository, 'code'))
 
-            ->setDefault('complete_date', fn(Options $options): \DateTimeInterface => $this->faker->dateTimeBetween('-1 years', 'now'))
+            ->setDefault('complete_date', fn (Options $options): \DateTimeInterface => $this->faker->dateTimeBetween('-1 years', 'now'))
             ->setAllowedTypes('complete_date', ['null', \DateTime::class])
 
             ->setDefault('fulfilled', false)

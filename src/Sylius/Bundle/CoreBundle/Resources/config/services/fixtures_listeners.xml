@@ -16,9 +16,9 @@
         <defaults public="true" />
 
         <service id="sylius_fixtures.listener.catalog_promotion_executor" class="Sylius\Bundle\CoreBundle\Fixture\Listener\CatalogPromotionExecutorListener" public="false">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\AllProductVariantsCatalogPromotionsProcessorInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Processor\CatalogPromotionStateProcessorInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessorInterface" />
             <argument type="service" id="Sylius\Bundle\PromotionBundle\Doctrine\ORM\CatalogPromotionRepository" />
+            <argument type="service" id="sylius.command_bus" />
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.criteria" />
             <tag name="sylius_fixtures.listener" />
         </service>

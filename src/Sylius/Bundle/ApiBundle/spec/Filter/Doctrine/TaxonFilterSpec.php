@@ -55,4 +55,35 @@ final class TaxonFilterSpec extends ObjectBehavior
             'resourceClass'
         );
     }
+
+    function it_does_not_add_the_default_order_by_taxon_position_if_a_different_order_parameter_is_specified(
+        IriConverterInterface $iriConverter,
+        TaxonInterface $taxon,
+        TaxonInterface $taxonRoot,
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+    ): void {
+        $context['filters']['order'] = ['differentOrderParameter' => 'asc'];
+        $iriConverter->getItemFromIri('api/taxon')->willReturn($taxon);
+        $queryBuilder->getRootAliases()->willReturn(['o']);
+
+        $queryBuilder->distinct()->willReturn($queryBuilder);
+        $queryBuilder->addSelect('productTaxon')->willReturn($queryBuilder);
+        $queryBuilder->innerJoin('o.productTaxons', 'productTaxon')->willReturn($queryBuilder);
+        $queryBuilder->innerJoin('productTaxon.taxon', 'taxon')->willReturn($queryBuilder);
+        $queryBuilder->andWhere('taxon.root = :taxonRoot')->willReturn($queryBuilder);
+        $queryBuilder->addOrderBy('productTaxon.position')->shouldNotBeCalled();
+
+        $taxon->getRoot()->willReturn($taxonRoot);
+        $queryBuilder->setParameter('taxonRoot', $taxonRoot)->willReturn($queryBuilder);
+
+        $this->filterProperty(
+            'taxon',
+            'api/taxon',
+            $queryBuilder,
+            $queryNameGenerator,
+            'resourceClass',
+            context: $context
+        );
+    }
 }

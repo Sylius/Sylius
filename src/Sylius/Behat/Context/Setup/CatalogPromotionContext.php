@@ -17,23 +17,23 @@ use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManagerInterface;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Bundle\CoreBundle\Calculator\FixedDiscountPriceCalculator;
-use Sylius\Bundle\CoreBundle\Calculator\PercentageDiscountPriceCalculator;
-use Sylius\Bundle\CoreBundle\Checker\InForProductScopeVariantChecker;
-use Sylius\Bundle\CoreBundle\Checker\InForTaxonsScopeVariantChecker;
-use Sylius\Bundle\CoreBundle\Checker\InForVariantsScopeVariantChecker;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPriceCalculator;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForProductScopeVariantChecker;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForTaxonsScopeVariantChecker;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForVariantsScopeVariantChecker;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
-use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -168,6 +168,16 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
+     * @Given :catalogPromotion catalog promotion is exclusive
+     */
+    public function catalogPromotionIsExclusive(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $catalogPromotion->setExclusive(true);
+        $this->entityManager->flush();
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
+    /**
      * @Given /^(it) reduces price by ("[^"]+")$/
      */
     public function itWillReducePrice(CatalogPromotionInterface $catalogPromotion, float $discount): void
@@ -201,8 +211,8 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" variant) and ("[^"]+" variant)$/
-     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
+     * @Given /^there is (?:a|another) catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" variant) and ("[^"]+" variant)$/
+     * @Given /^there is (?:a|another) catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
      */
     public function thereIsACatalogPromotionThatReducesPriceByAndAppliesOn(
         string $name,
@@ -252,7 +262,7 @@ final class CatalogPromotionContext implements Context
             ]],
             [[
                 'type' => FixedDiscountPriceCalculator::TYPE,
-                'configuration' => [$channel->getCode() => ['amount' => $discount]],
+                'configuration' => [$channel->getCode() => ['amount' => $discount / 100]],
             ]]
         );
 
@@ -280,7 +290,7 @@ final class CatalogPromotionContext implements Context
             ]],
             [[
                 'type' => FixedDiscountPriceCalculator::TYPE,
-                'configuration' => [$channel->getCode() => ['amount' => $discount]],
+                'configuration' => [$channel->getCode() => ['amount' => $discount / 100]],
             ]]
         );
 
@@ -308,7 +318,7 @@ final class CatalogPromotionContext implements Context
             ]],
             [[
                 'type' => FixedDiscountPriceCalculator::TYPE,
-                'configuration' => [$channel->getCode() => ['amount' => $discount]],
+                'configuration' => [$channel->getCode() => ['amount' => $discount / 100]],
             ]]
         );
 
@@ -407,8 +417,8 @@ final class CatalogPromotionContext implements Context
                 'type' => PercentageDiscountPriceCalculator::TYPE,
                 'configuration' => ['amount' => $discount],
             ]],
-            startDate: new \DateTimeImmutable($startDate),
-            endDate: new \DateTimeImmutable($endDate)
+            startDate: $startDate,
+            endDate: $endDate
         );
 
         $this->entityManager->flush();
@@ -436,8 +446,8 @@ final class CatalogPromotionContext implements Context
                 'type' => PercentageDiscountPriceCalculator::TYPE,
                 'configuration' => ['amount' => $discount],
             ]],
-            startDate: new \DateTimeImmutable($startDate),
-            endDate: new \DateTimeImmutable($endDate),
+            startDate: $startDate,
+            endDate: $endDate,
             enabled: false
         );
 
@@ -459,7 +469,7 @@ final class CatalogPromotionContext implements Context
             null,
             [
                 $firstChannel->getCode(),
-                $secondChannel->getCode()
+                $secondChannel->getCode(),
             ],
             [[
                 'type' => InForVariantsScopeVariantChecker::TYPE,
@@ -496,8 +506,8 @@ final class CatalogPromotionContext implements Context
                 'type' => PercentageDiscountPriceCalculator::TYPE,
                 'configuration' => ['amount' => $discount],
             ]],
-            startDate: new \DateTimeImmutable($startDate),
-            endDate: new \DateTimeImmutable($endDate)
+            startDate: $startDate,
+            endDate: $endDate
         );
 
         $this->entityManager->flush();
@@ -525,8 +535,8 @@ final class CatalogPromotionContext implements Context
                 'type' => PercentageDiscountPriceCalculator::TYPE,
                 'configuration' => ['amount' => $discount],
             ]],
-            startDate: new \DateTimeImmutable($startDate),
-            endDate: new \DateTimeImmutable($endDate),
+            startDate: $startDate,
+            endDate: $endDate,
             enabled: false
         );
 
@@ -653,7 +663,7 @@ final class CatalogPromotionContext implements Context
             ]],
             [[
                 'type' => FixedDiscountPriceCalculator::TYPE,
-                'configuration' => [$channel->getCode() => ['amount' => $discount]],
+                'configuration' => [$channel->getCode() => ['amount' => $discount / 100]],
             ]],
             $priority
         );
@@ -683,7 +693,7 @@ final class CatalogPromotionContext implements Context
             ]],
             [[
                 'type' => FixedDiscountPriceCalculator::TYPE,
-                'configuration' => [$channel->getCode() => ['amount' => $discount]],
+                'configuration' => [$channel->getCode() => ['amount' => $discount / 100]],
             ]],
             $priority,
         );
@@ -789,8 +799,8 @@ final class CatalogPromotionContext implements Context
         array $actions = [],
         int $priority = null,
         bool $exclusive = false,
-        \DateTimeImmutable $startDate = null,
-        \DateTimeImmutable $endDate = null,
+        ?string $startDate = null,
+        ?string $endDate = null,
         bool $enabled = true
     ): CatalogPromotionInterface {
         if (empty($channels) && $this->sharedStorage->has('channel')) {
@@ -803,8 +813,8 @@ final class CatalogPromotionContext implements Context
         $catalogPromotion = $this->catalogPromotionExampleFactory->create([
             'name' => $name,
             'code' => $code,
-            'startDate' => $startDate,
-            'endDate' => $endDate,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
             'enabled' => $enabled,
             'channels' => $channels,
             'actions' => $actions,

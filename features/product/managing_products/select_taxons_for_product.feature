@@ -20,7 +20,7 @@ Feature: Select taxon for an existing product
         Then I should be notified that it has been successfully edited
         And main taxon of product "T-Shirt Banana" should be "T-Shirts"
 
-    @ui @javascript @api
+    @ui @javascript @no-api
     Scenario: Specifying main taxon for simple product
         When I want to modify the "T-Shirt Batman" product
         And I choose main taxon "Sad"

@@ -11,8 +11,8 @@ Feature: Product variant validation
 
     @ui
     Scenario: Adding a new product variant without specifying its price
-        Given I want to create a new variant of this product
-        When I specify its code as "VODKA_WYBOROWA_PREMIUM"
+        When I want to create a new variant of this product
+        And I specify its code as "VODKA_WYBOROWA_PREMIUM"
         But I do not set its price
         And I try to add it
         Then I should be notified that prices in all channels must be defined
@@ -20,8 +20,8 @@ Feature: Product variant validation
 
     @ui
     Scenario: Adding a new product variant with price below 0
-        Given I want to create a new variant of this product
-        When I specify its code as "VODKA_WYBOROWA_PREMIUM"
+        When I want to create a new variant of this product
+        And I specify its code as "VODKA_WYBOROWA_PREMIUM"
         And I set its price to "$-60.00" for "United States" channel
         And I try to add it
         Then I should be notified that price cannot be lower than 0
@@ -29,8 +29,8 @@ Feature: Product variant validation
 
     @ui
     Scenario: Adding a new product variant without specifying its code
-        Given I want to create a new variant of this product
-        When I set its price to "$80.00" for "United States" channel
+        When I want to create a new variant of this product
+        And I set its price to "$80.00" for "United States" channel
         But I do not specify its code
         And I try to add it
         Then I should be notified that code is required
@@ -39,8 +39,8 @@ Feature: Product variant validation
     @ui
     Scenario: Adding a new product variant with duplicated code
         Given this product has "Wyborowa Exquisite" variant priced at "$90" identified by "VODKA_WYBOROWA_PREMIUM"
-        And I want to create a new variant of this product
-        When I set its price to "$80.00" for "United States" channel
+        When I want to create a new variant of this product
+        And I set its price to "$80.00" for "United States" channel
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
         And I try to add it
         Then I should be notified that code has to be unique
@@ -50,8 +50,8 @@ Feature: Product variant validation
     Scenario: Adding a new product variant with same set of options
         Given this product has option "Taste" with values "Orange" and "Melon"
         And this product is available in "Melon" taste priced at "$95.00"
-        And I want to create a new variant of this product
-        When I specify its code as "VODKA_WYBOROWA_PREMIUM"
+        When I want to create a new variant of this product
+        And I specify its code as "VODKA_WYBOROWA_PREMIUM"
         And I set its "Taste" option to "Melon"
         And I set its price to "$100.00" for "United States" channel
         And I try to add it
@@ -60,8 +60,8 @@ Feature: Product variant validation
 
     @ui
     Scenario: Adding a new product variant with negative properties
-        Given I want to create a new variant of this product
-        When I specify its code as "VODKA_WYBOROWA_PREMIUM"
+        When I want to create a new variant of this product
+        And I specify its code as "VODKA_WYBOROWA_PREMIUM"
         And I set its price to "$100.00" for "United States" channel
         And I set its height, width, depth and weight to "-1"
         And I try to add it
@@ -70,8 +70,8 @@ Feature: Product variant validation
 
     @ui
     Scenario: Adding a new product variant without current stock
-        Given I want to create a new variant of this product
-        When I specify its code as "VODKA_WYBOROWA_PREMIUM"
+        When I want to create a new variant of this product
+        And I specify its code as "VODKA_WYBOROWA_PREMIUM"
         And I set its price to "$100.00" for "United States" channel
         But I do not specify its current stock
         And I try to add it

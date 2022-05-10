@@ -98,3 +98,25 @@ Feature: Editing catalog promotion
         And I make it available in channel "Poland"
         And I save my changes
         Then I should be notified that not all channels are filled
+
+    @api @ui @javascript
+    Scenario: Receiving error message after not filling percentage value for percentage discount
+        When I want to modify a catalog promotion "Christmas sale"
+        And I edit it to have empty amount of percentage discount
+        And I save my changes
+        Then I should be notified that a discount amount should be a number and cannot be empty
+
+    @api @ui @javascript
+    Scenario: Editing catalog promotion action to be a percentage discount and not filling amount
+        Given there is a catalog promotion "Winter sale" that reduces price by fixed "$10.00" in the "United States" channel and applies on "T-Shirt" product
+        When I want to modify a catalog promotion "Christmas sale"
+        And I edit it to have empty amount of percentage discount
+        And I save my changes
+        Then I should be notified that a discount amount should be a number and cannot be empty
+
+    @api @ui @javascript
+    Scenario: Editing catalog promotion action to be a fixed discount and not filling amount
+        When I want to modify a catalog promotion "Christmas sale"
+        And I edit it to have empty amount of fixed discount in the "United States" channel
+        And I save my changes
+        Then I should be notified that a discount amount should be configured for at least one channel

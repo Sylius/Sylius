@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -24,18 +25,18 @@ use Webmozart\Assert\Assert;
 
 final class PaymentContext implements Context
 {
-    private ApiClientInterface $paymentsClient;
+    private ApiClientInterface $client;
 
     private ResponseCheckerInterface $responseChecker;
 
     private SharedStorageInterface $sharedStorage;
 
     public function __construct(
-        ApiClientInterface $paymentsClient,
+        ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage
     ) {
-        $this->paymentsClient = $paymentsClient;
+        $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
     }
@@ -52,7 +53,7 @@ final class PaymentContext implements Context
         /** @var PaymentInterface $payment */
         $payment = $order->getPayments()->first();
 
-        $this->paymentsClient->show((string) $payment->getId());
+        $this->client->show(Resources::PAYMENTS, (string) $payment->getId());
     }
 
     /**
@@ -60,6 +61,6 @@ final class PaymentContext implements Context
      */
     public function iShouldNotBeAbleToSeeThatPayment(): void
     {
-        Assert::false($this->responseChecker->isShowSuccessful($this->paymentsClient->getLastResponse()));
+        Assert::false($this->responseChecker->isShowSuccessful($this->client->getLastResponse()));
     }
 }

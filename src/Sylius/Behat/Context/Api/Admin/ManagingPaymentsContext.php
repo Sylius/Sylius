@@ -17,6 +17,7 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -26,20 +27,12 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPaymentsContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private IriConverterInterface $iriConverter;
-
     public function __construct(
-        ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private IriConverterInterface $iriConverter,
+        private string $apiUrlPrefix
     ) {
-        $this->client = $client;
-        $this->responseChecker = $responseChecker;
-        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -48,7 +41,7 @@ final class ManagingPaymentsContext implements Context
      */
     public function iAmBrowsingPayments(): void
     {
-        $this->client->index();
+        $this->client->index(Resources::PAYMENTS);
     }
 
     /**
@@ -60,6 +53,7 @@ final class ManagingPaymentsContext implements Context
         Assert::notNull($payment);
 
         $this->client->applyTransition(
+            Resources::PAYMENTS,
             (string) $payment->getId(),
             PaymentTransitions::TRANSITION_COMPLETE
         );
@@ -140,7 +134,7 @@ final class ManagingPaymentsContext implements Context
             $this->client->getLastResponse(),
             $position - 1,
             'order',
-            sprintf('/api/v2/admin/orders/%s', $order->getTokenValue())
+            sprintf('%s/admin/orders/%s', $this->apiUrlPrefix, $order->getTokenValue())
         ));
     }
 
@@ -161,7 +155,7 @@ final class ManagingPaymentsContext implements Context
         Assert::notNull($payment);
 
         Assert::true($this->responseChecker->hasValue(
-            $this->client->show((string) $payment->getId()),
+            $this->client->show(Resources::PAYMENTS, (string) $payment->getId()),
             'state',
             StringInflector::nameToLowercaseCode($paymentState)
         ));

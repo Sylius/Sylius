@@ -10,8 +10,8 @@ Feature: Adding a new percent product attribute
 
     @ui
     Scenario: Adding a new percent product attribute
-        Given I want to create a new percent product attribute
-        When I specify its code as "t_shirt_cotton_content"
+        When I want to create a new percent product attribute
+        And I specify its code as "t_shirt_cotton_content"
         And I name it "T-shirt cotton content" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created

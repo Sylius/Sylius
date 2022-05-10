@@ -10,8 +10,8 @@ Feature: Channel unique code validation
 
     @ui
     Scenario: Trying to add channel with taken code
-        Given I want to create a new channel
-        When I specify its code as "WEB"
+        When I want to create a new channel
+        And I specify its code as "WEB"
         And I name it "Mobile channel"
         And I try to add it
         Then I should be notified that channel with this code already exists

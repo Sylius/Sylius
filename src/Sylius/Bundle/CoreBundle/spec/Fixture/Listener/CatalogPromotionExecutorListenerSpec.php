@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Fixture\Listener;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\UpdateCatalogPromotionState;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessorInterface;
 use Sylius\Bundle\CoreBundle\Fixture\CatalogPromotionFixture;
-use Sylius\Bundle\CoreBundle\Processor\AllProductVariantsCatalogPromotionsProcessorInterface;
-use Sylius\Bundle\CoreBundle\Processor\CatalogPromotionStateProcessorInterface;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 use Sylius\Bundle\FixturesBundle\Listener\AfterFixtureListenerInterface;
 use Sylius\Bundle\FixturesBundle\Listener\FixtureEvent;
@@ -25,20 +26,22 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
+use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionExecutorListenerSpec extends ObjectBehavior
 {
     function let(
         AllProductVariantsCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
-        CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
         CatalogPromotionRepositoryInterface $catalogPromotionRepository,
+        MessageBusInterface $messageBus,
         CriteriaInterface $firstCriterion,
         CriteriaInterface $secondCriterion
     ): void {
         $this->beConstructedWith(
             $allCatalogPromotionsProcessor,
-            $catalogPromotionStateProcessor,
             $catalogPromotionRepository,
+            $messageBus,
             [$firstCriterion, $secondCriterion]
         );
     }
@@ -55,10 +58,10 @@ final class CatalogPromotionExecutorListenerSpec extends ObjectBehavior
 
     function it_triggers_catalog_promotion_processing_after_catalog_promotion_fixture_execution(
         AllProductVariantsCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
-        CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
+        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
+        MessageBusInterface $messageBus,
         SuiteInterface $suite,
         CatalogPromotionFixture $catalogPromotionFixture,
-        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         CatalogPromotionInterface $firstCatalogPromotion,
         CatalogPromotionInterface $secondCatalogPromotion,
         CriteriaInterface $firstCriterion,
@@ -69,27 +72,32 @@ final class CatalogPromotionExecutorListenerSpec extends ObjectBehavior
             ->willReturn([$firstCatalogPromotion, $secondCatalogPromotion])
         ;
 
-        $this->afterFixture(new FixtureEvent($suite->getWrappedObject(), $catalogPromotionFixture->getWrappedObject(), []), []);
+        $firstCatalogPromotion->getCode()->willReturn('WINTER');
+        $secondCatalogPromotion->getCode()->willReturn('AUTUMN');
 
         $allCatalogPromotionsProcessor->process()->shouldBeCalled();
-        $catalogPromotionStateProcessor->process($firstCatalogPromotion)->shouldBeCalled();
-        $catalogPromotionStateProcessor->process($secondCatalogPromotion)->shouldBeCalled();
+
+        $firstCommand = new UpdateCatalogPromotionState('WINTER');
+        $messageBus->dispatch($firstCommand)->willReturn(new Envelope($firstCommand))->shouldBeCalled();
+
+        $secondCommand = new UpdateCatalogPromotionState('AUTUMN');
+        $messageBus->dispatch($secondCommand)->willReturn(new Envelope($secondCommand))->shouldBeCalled();
+
+        $this->afterFixture(new FixtureEvent($suite->getWrappedObject(), $catalogPromotionFixture->getWrappedObject(), []), []);
     }
 
     function it_does_not_trigger_catalog_promotion_processing_after_any_other_fixture_execution(
-        AllProductVariantsCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
-        CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
+        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
+        MessageBusInterface $messageBus,
         SuiteInterface $suite,
         FixtureInterface $fixture,
-        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         CriteriaInterface $firstCriterion,
         CriteriaInterface $secondCriterion
     ): void {
         $catalogPromotionRepository->findByCriteria([$firstCriterion, $secondCriterion])->shouldNotBeCalled();
 
-        $this->afterFixture(new FixtureEvent($suite->getWrappedObject(), $fixture->getWrappedObject(), []), []);
+        $messageBus->dispatch(Argument::any())->shouldNotBeCalled();
 
-        $allCatalogPromotionsProcessor->process()->shouldNotBeCalled();
-        $catalogPromotionStateProcessor->process()->shouldNotBeCalled();
+        $this->afterFixture(new FixtureEvent($suite->getWrappedObject(), $fixture->getWrappedObject(), []), []);
     }
 }

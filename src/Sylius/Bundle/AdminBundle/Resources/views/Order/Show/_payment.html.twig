@@ -1,35 +1,5 @@
-{% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
 {% import '@SyliusUi/Macro/labels.html.twig' as label %}
 
 <div class="item">
-    <div class="right floated content">
-        {% include '@SyliusAdmin/Common/Label/paymentState.html.twig' with {'data': payment.state} %}
-    </div>
-    <i class="large payment icon"></i>
-    <div class="content">
-        <div class="header">
-            {{ payment.method }}
-        </div>
-        <div class="description">
-            {{ money.format(payment.amount, payment.order.currencyCode) }}
-        </div>
-    </div>
-    {% if sm_can(payment, 'complete', 'sylius_payment') %}
-    <div class="ui segment">
-        <form action="{{ path('sylius_admin_order_payment_complete', {'orderId': order.id, 'id': payment.id}) }}" method="post" novalidate>
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token(payment.id) }}" />
-            <input type="hidden" name="_method" value="PUT">
-            <button type="submit" class="ui icon labeled tiny blue fluid loadable button"><i class="check icon"></i> {{ 'sylius.ui.complete'|trans }}</button>
-        </form>
-    </div>
-    {% endif %}
-    {% if sm_can(payment, 'refund', 'sylius_payment') %}
-        <div class="ui segment">
-            <form action="{{ path('sylius_admin_order_payment_refund', {'orderId': order.id, 'id': payment.id}) }}" method="post" novalidate>
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token(payment.id) }}" />
-                <input type="hidden" name="_method" value="PUT">
-                <button type="submit" class="ui icon labeled tiny yellow fluid loadable button"><i class="reply all icon"></i> {{ 'sylius.ui.refund'|trans }}</button>
-            </form>
-        </div>
-    {% endif %}
+    {{ sylius_template_event('sylius.admin.order.show.payment_content', _context) }}
 </div>

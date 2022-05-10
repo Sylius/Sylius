@@ -22,14 +22,10 @@ class ShipmentUnit implements ShipmentUnitInterface, \Stringable
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var ShipmentInterface|null
-     */
+    /** @var ShipmentInterface|null */
     protected $shipment;
 
-    /**
-     * @var ShippableInterface|null
-     */
+    /** @var ShippableInterface|null */
     protected $shippable;
 
     public function __construct()

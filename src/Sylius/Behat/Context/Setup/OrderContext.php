@@ -48,68 +48,23 @@ use Webmozart\Assert\Assert;
 
 final class OrderContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private \Sylius\Component\Resource\Factory\FactoryInterface $orderFactory;
-
-    private \Sylius\Component\Resource\Factory\FactoryInterface $addressFactory;
-
-    private \Sylius\Component\Resource\Factory\FactoryInterface $customerFactory;
-
-    private \Sylius\Component\Resource\Factory\FactoryInterface $orderItemFactory;
-
-    private \Sylius\Component\Resource\Factory\FactoryInterface $shipmentFactory;
-
-    private StateMachineFactoryInterface $stateMachineFactory;
-
-    private RepositoryInterface $countryRepository;
-
-    private RepositoryInterface $customerRepository;
-
-    private OrderRepositoryInterface $orderRepository;
-
-    private PaymentMethodRepositoryInterface $paymentMethodRepository;
-
-    private ShippingMethodRepositoryInterface $shippingMethodRepository;
-
-    private ProductVariantResolverInterface $variantResolver;
-
-    private OrderItemQuantityModifierInterface $itemQuantityModifier;
-
-    private ObjectManager $objectManager;
-
     public function __construct(
-        SharedStorageInterface $sharedStorage,
-        FactoryInterface $orderFactory,
-        FactoryInterface $addressFactory,
-        FactoryInterface $customerFactory,
-        FactoryInterface $orderItemFactory,
-        FactoryInterface $shipmentFactory,
-        StateMachineFactoryInterface $stateMachineFactory,
-        RepositoryInterface $countryRepository,
-        RepositoryInterface $customerRepository,
-        OrderRepositoryInterface $orderRepository,
-        PaymentMethodRepositoryInterface $paymentMethodRepository,
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ProductVariantResolverInterface $variantResolver,
-        OrderItemQuantityModifierInterface $itemQuantityModifier,
-        ObjectManager $objectManager
+        private SharedStorageInterface $sharedStorage,
+        private FactoryInterface $orderFactory,
+        private FactoryInterface $addressFactory,
+        private FactoryInterface $customerFactory,
+        private FactoryInterface $orderItemFactory,
+        private FactoryInterface $shipmentFactory,
+        private StateMachineFactoryInterface $stateMachineFactory,
+        private RepositoryInterface $countryRepository,
+        private RepositoryInterface $customerRepository,
+        private OrderRepositoryInterface $orderRepository,
+        private PaymentMethodRepositoryInterface $paymentMethodRepository,
+        private ShippingMethodRepositoryInterface $shippingMethodRepository,
+        private ProductVariantResolverInterface $variantResolver,
+        private OrderItemQuantityModifierInterface $itemQuantityModifier,
+        private ObjectManager $objectManager
     ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->orderFactory = $orderFactory;
-        $this->addressFactory = $addressFactory;
-        $this->customerFactory = $customerFactory;
-        $this->orderItemFactory = $orderItemFactory;
-        $this->shipmentFactory = $shipmentFactory;
-        $this->stateMachineFactory = $stateMachineFactory;
-        $this->countryRepository = $countryRepository;
-        $this->customerRepository = $customerRepository;
-        $this->orderRepository = $orderRepository;
-        $this->paymentMethodRepository = $paymentMethodRepository;
-        $this->shippingMethodRepository = $shippingMethodRepository;
-        $this->variantResolver = $variantResolver;
-        $this->itemQuantityModifier = $itemQuantityModifier;
-        $this->objectManager = $objectManager;
     }
 
     /**
@@ -718,6 +673,7 @@ final class OrderContext implements Context
 
     /**
      * @Given /^(this order) has been refunded$/
+     * @Given the customer has refunded the order with number :order
      */
     public function thisOrderHasBeenRefunded(OrderInterface $order)
     {
@@ -926,7 +882,7 @@ final class OrderContext implements Context
 
     private function createOrProvideCustomer(string $email): CustomerInterface
     {
-        /** @var CustomerInterface $customer */
+        /** @var CustomerInterface|null $customer */
         $customer = $this->customerRepository->findOneBy(['email' => $email]);
 
         return $customer ?? $this->createCustomer($email);

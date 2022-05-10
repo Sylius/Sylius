@@ -16,6 +16,7 @@ namespace Sylius\Bundle\AdminBundle\EmailManager;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
+use Webmozart\Assert\Assert;
 
 final class OrderEmailManager implements OrderEmailManagerInterface
 {
@@ -25,9 +26,12 @@ final class OrderEmailManager implements OrderEmailManagerInterface
 
     public function sendConfirmationEmail(OrderInterface $order): void
     {
+        $email = $order->getCustomer()->getEmail();
+        Assert::notNull($email);
+
         $this->emailSender->send(
             Emails::ORDER_CONFIRMATION_RESENT,
-            [$order->getCustomer()->getEmail()],
+            [$email],
             [
                 'order' => $order,
                 'channel' => $order->getChannel(),

@@ -31,9 +31,7 @@ class Shipment extends BaseShipment implements ShipmentInterface
      */
     protected $adjustments;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $adjustmentsTotal = 0;
 
     public function __construct()

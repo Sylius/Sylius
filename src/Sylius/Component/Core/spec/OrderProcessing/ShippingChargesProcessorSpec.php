@@ -40,7 +40,6 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
     {
         $order->getState()->willReturn(OrderInterface::STATE_CART);
 
-
         $order->getShipments()->willReturn(new ArrayCollection([]));
 
         $this->process($order);

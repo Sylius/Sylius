@@ -30,7 +30,7 @@ default:
                 - sylius.behat.context.setup.zone
                 - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
 
-                - sylius.behat.context.ui.email
+                - sylius.behat.context.api.email
 
                 - sylius.behat.context.api.admin.managing_shipments
             filters:

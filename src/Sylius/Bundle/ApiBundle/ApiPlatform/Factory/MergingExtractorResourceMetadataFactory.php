@@ -46,6 +46,7 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
     public function create(string $resourceClass): ResourceMetadata
     {
         $parentResourceMetadata = null;
+
         try {
             $parentResourceMetadata = $this->decorated->create($resourceClass);
         } catch (ResourceClassNotFoundException) {

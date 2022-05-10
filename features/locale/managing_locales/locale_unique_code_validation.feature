@@ -10,5 +10,5 @@ Feature: Locale unique code validation
 
     @ui @api
     Scenario: Trying to add new locale with used code
-        Given I want to add a new locale
+        When I want to add a new locale
         Then I should not be able to choose "Norwegian (Norway)"

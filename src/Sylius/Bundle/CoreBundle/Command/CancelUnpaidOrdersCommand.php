@@ -45,6 +45,8 @@ class CancelUnpaidOrdersCommand extends ContainerAwareCommand
 
         $this->getContainer()->get('sylius.manager.order')->flush();
 
+        $output->writeln('<info>Unpaid orders have been canceled</info>');
+
         return 0;
     }
 }

@@ -25,79 +25,72 @@ class User implements UserInterface, \Stringable
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $username;
 
     /**
      * Normalized representation of a username.
+     *
      * @var string|null
      */
     protected $usernameCanonical;
 
     /**
      * Random data that is used as an additional input to a function that hashes a password.
+     *
      * @var string
      */
     protected $salt;
 
     /**
      * Encrypted password. Must be persisted.
+     *
      * @var string|null
      */
     protected $password;
 
     /**
      * Password before encryption. Used for model validation. Must not be persisted.
+     *
      * @var string|null
      */
     protected $plainPassword;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $lastLogin;
 
     /**
      * Random string sent to the user email address in order to verify it
+     *
      * @var string|null
      */
     protected $emailVerificationToken;
 
     /**
      * Random string sent to the user email address in order to verify the password resetting request
+     *
      * @var string|null
      */
     protected $passwordResetToken;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $passwordRequestedAt;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $verifiedAt;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $locked = false;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $expiresAt;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $credentialsExpireAt;
 
     /**
      * We need at least one role to be able to authenticate
+     *
      * @var mixed[]
      */
     protected $roles = [UserInterface::DEFAULT_ROLE];
@@ -109,19 +102,13 @@ class User implements UserInterface, \Stringable
      */
     protected $oauthAccounts;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $email;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $emailCanonical;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $encoderName;
 
     public function __construct()
@@ -394,9 +381,9 @@ class User implements UserInterface, \Stringable
     /**
      * The serialized data have to contain the fields used by the equals method and the username.
      */
-    public function serialize(): string
+    public function __serialize(): array
     {
-        return serialize([
+        return [
             $this->password,
             $this->salt,
             $this->usernameCanonical,
@@ -405,18 +392,24 @@ class User implements UserInterface, \Stringable
             $this->enabled,
             $this->id,
             $this->encoderName,
-        ]);
+        ];
     }
 
     /**
-     * @param string $serialized
+     * @internal
+     *
+     * @deprecated since 1.11 and will be removed in Sylius 2.0, use \Sylius\Component\User\Model\User::__serialize() or \serialize($user) in PHP 8.1 instead
      */
-    public function unserialize($serialized): void
+    public function serialize(): string
     {
-        $data = unserialize($serialized);
+        return serialize($this->__serialize());
+    }
+
+    public function __unserialize(array $serialized): void
+    {
         // add a few extra elements in the array to ensure that we have enough keys when unserializing
         // older data which does not include all properties.
-        $data = array_merge($data, array_fill(0, 2, null));
+        $serialized = array_merge($serialized, array_fill(0, 2, null));
 
         [
             $this->password,
@@ -427,7 +420,19 @@ class User implements UserInterface, \Stringable
             $this->enabled,
             $this->id,
             $this->encoderName,
-        ] = $data;
+        ] = $serialized;
+    }
+
+    /**
+     * @param string $serialized
+     *
+     * @internal
+     *
+     * @deprecated since 1.11 and will be removed in Sylius 2.0, use \Sylius\Component\User\Model\User::__unserialize() or \unserialize($serialized) in PHP 8.1 instead
+     */
+    public function unserialize($serialized): void
+    {
+        $this->__unserialize(unserialize($serialized));
     }
 
     protected function hasExpired(?\DateTimeInterface $date): bool

@@ -22,12 +22,12 @@ use Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
@@ -233,7 +233,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddScopeThatAppliesOnVariants(ProductVariantInterface ...$variants): void
     {
-        $variantCodes = array_map(function(ProductVariantInterface $variant) {
+        $variantCodes = array_map(function (ProductVariantInterface $variant) {
             return $variant->getCode();
         }, $variants);
 
@@ -247,7 +247,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddScopeThatAppliesOnTaxons(TaxonInterface ...$taxons): void
     {
-        $taxonsCodes = array_map(function(TaxonInterface $taxon) {
+        $taxonsCodes = array_map(function (TaxonInterface $taxon) {
             return $taxon->getCode();
         }, $taxons);
 
@@ -601,6 +601,24 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I edit it to have empty amount of percentage discount
+     */
+    public function iEditItToHaveEmptyPercentageDiscount(): void
+    {
+        $this->formElement->chooseActionType('Percentage discount');
+        $this->formElement->specifyLastActionDiscount('');
+    }
+
+    /**
+     * @When I edit it to have empty amount of fixed discount in the :channel channel
+     */
+    public function iEditItToHaveEmptyFixedDiscountInChannel(ChannelInterface $channel): void
+    {
+        $this->formElement->chooseActionType('Fixed discount');
+        $this->formElement->specifyLastActionDiscountForChannel('', $channel);
+    }
+
+    /**
      * @Then I should be notified that a discount amount should be between 0% and 100%
      */
     public function iShouldBeNotifiedThatADiscountAmountShouldBeBetween0And100Percent(): void
@@ -617,12 +635,20 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then I should be notified that a discount amount is not valid
+     */
+    public function iShouldBeNotifiedThatADiscountAmountIsNotValid(): void
+    {
+        Assert::same($this->formElement->getValidationMessage(), 'This value is not valid.');
+    }
+
+    /**
      * @Then I should be notified that a discount amount should be configured for at least one channel
      */
     public function iShouldBeNotifiedThatADiscountAmountShouldBeConfiguredForAtLeasOneChannel(): void
     {
-        Assert::true($this->formElement->hasValidationMessage(
-            'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.'
+        Assert::true($this->formElement->hasOnlyOneValidationMessage(
+            'Configuration for one of the required channels is not provided.'
         ));
     }
 
@@ -660,7 +686,9 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->indexPage->isSingleResourceOnPage(['name' => $name, 'startDate' => $startDate, 'endDate' => $endDate]),
             sprintf(
                 'Cannot find catalog promotions with name "%s" operating between "%s" and "%s" in the list',
-                $name, $startDate, $endDate
+                $name,
+                $startDate,
+                $endDate
             )
         );
     }
@@ -674,7 +702,8 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->indexPage->isSingleResourceOnPage(['name' => $name, 'priority' => $priority]),
             sprintf(
                 'Cannot find catalog promotions with name "%s" and priority %s in the list',
-                $name, $priority
+                $name,
+                $priority
             )
         );
     }
@@ -947,7 +976,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->iBrowseCatalogPromotions();
 
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['code' => $catalogPromotion->getCode(), 'name' => $name,])
+            $this->indexPage->isSingleResourceOnPage(['code' => $catalogPromotion->getCode(), 'name' => $name])
         );
     }
 
@@ -1044,6 +1073,22 @@ final class ManagingCatalogPromotionsContext implements Context
     public function itShouldApplyOnProduct(ProductInterface $product): void
     {
         Assert::true($this->showPage->hasScopeWithProduct($product));
+    }
+
+    /**
+     * @Given it should be exclusive
+     */
+    public function itShouldBeExclusive(): void
+    {
+        Assert::true($this->showPage->isExclusive());
+    }
+
+    /**
+     * @Given it should not be exclusive
+     */
+    public function itShouldNotBeExclusive(): void
+    {
+        Assert::false($this->showPage->isExclusive());
     }
 
     /**

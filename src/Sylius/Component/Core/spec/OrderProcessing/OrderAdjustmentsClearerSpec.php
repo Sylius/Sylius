@@ -16,9 +16,7 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Provider\ZoneProviderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 
 final class OrderAdjustmentsClearerSpec extends ObjectBehavior
 {

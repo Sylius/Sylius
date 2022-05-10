@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use Sylius\Behat\Client\RequestInterface;
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
-use Sylius\Behat\Client\Request;
+use Sylius\Behat\Client\RequestFactoryInterface;
+use Sylius\Behat\Client\RequestInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -30,34 +30,18 @@ use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
 {
-    private ApiSecurityClientInterface $apiSecurityClient;
-
-    private ApiClientInterface $apiClient;
-
-    private IriConverterInterface $iriConverter;
-
-    private AbstractBrowser $shopAuthenticationTokenClient;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private SharedStorageInterface $sharedStorage;
-
     private ?RequestInterface $request = null;
 
     public function __construct(
-        ApiSecurityClientInterface $apiSecurityClient,
-        ApiClientInterface $apiClient,
-        IriConverterInterface $iriConverter,
-        AbstractBrowser $shopAuthenticationTokenClient,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        private ApiSecurityClientInterface $apiSecurityClient,
+        private ApiClientInterface $client,
+        private IriConverterInterface $iriConverter,
+        private AbstractBrowser $shopAuthenticationTokenClient,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage,
+        private RequestFactoryInterface $requestFactory,
+        private string $apiUrlPrefix
     ) {
-        $this->apiSecurityClient = $apiSecurityClient;
-        $this->apiClient = $apiClient;
-        $this->iriConverter = $iriConverter;
-        $this->shopAuthenticationTokenClient = $shopAuthenticationTokenClient;
-        $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -75,7 +59,7 @@ final class LoginContext implements Context
     {
         $this->shopAuthenticationTokenClient->request(
             'POST',
-            '/api/v2/shop/authentication-token',
+            sprintf('%s/shop/authentication-token', $this->apiUrlPrefix),
             [],
             [],
             ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
@@ -101,7 +85,7 @@ final class LoginContext implements Context
      */
     public function iWantToResetPassword(): void
     {
-        $this->request = Request::create('shop', 'reset-password-requests', 'Bearer');
+        $this->request = $this->requestFactory->create('shop', 'reset-password-requests', 'Bearer');
     }
 
     /**
@@ -120,8 +104,8 @@ final class LoginContext implements Context
      */
     public function iFollowLinkOnMyEmailToResetPassword(ShopUserInterface $user): void
     {
-        $this->request = Request::custom(
-            sprintf('api/v2/shop/reset-password-requests/%s', $user->getPasswordResetToken()),
+        $this->request = $this->requestFactory->custom(
+            sprintf('%s/shop/reset-password-requests/%s', $this->apiUrlPrefix, $user->getPasswordResetToken()),
             HttpRequest::METHOD_PATCH
         );
     }
@@ -132,7 +116,7 @@ final class LoginContext implements Context
      */
     public function iResetIt(): void
     {
-        $this->apiClient->executeCustomRequest($this->request);
+        $this->client->executeCustomRequest($this->request);
     }
 
     /**
@@ -237,7 +221,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeNotifiedThatEmailWithResetInstructionWasSent(): void
     {
-        Assert::same($this->apiClient->getLastResponse()->getStatusCode(), 202);
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 202);
     }
 
     /**
@@ -276,6 +260,19 @@ final class LoginContext implements Context
             ),
             $this->iriConverter->getIriFromItem($customer)
         );
+    }
+
+    /**
+     * @Then I should not be able to change my password again with the same token
+     */
+    public function iShouldNotBeAbleToChangeMyPasswordAgainWithTheSameToken(): void
+    {
+        $this->client->executeCustomRequest($this->request);
+
+        // token is removed when used
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 500);
+        $message = $this->responseChecker->getError($this->client->getLastResponse());
+        Assert::startsWith($message, 'No user found with reset token: ');
     }
 
     private function addLocale(string $locale): void

@@ -40,7 +40,7 @@ abstract class OrderTotalRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        return $this->compare($order->getTotal(), $amount);
+        return $this->compare($order->getItemsTotal(), $amount);
     }
 
     abstract protected function compare(int $total, int $threshold): bool;

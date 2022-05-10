@@ -1,5 +1,111 @@
 # CHANGELOG FOR `1.10.X`
 
+## v1.10.13 (2022-04-22)
+
+#### Details
+
+- [#13601](https://github.com/Sylius/Sylius/issues/13601) Use the Gaufrette FilesystemInterface instead of a concrete implementation ([@GSadee](https://github.com/GSadee), [@mbabker](https://github.com/mbabker))
+- [#13841](https://github.com/Sylius/Sylius/issues/13841) [Maintenance] Add note to UPGRADE file about dropping Symfony 5.2 support ([@GSadee](https://github.com/GSadee))
+- [#13848](https://github.com/Sylius/Sylius/issues/13848) [DOCS] Update index tip ([@arti0090](https://github.com/arti0090))
+- [#13852](https://github.com/Sylius/Sylius/issues/13852) [Maintenance] Run the build on tags rather than on releases ([@Zales0123](https://github.com/Zales0123))
+- [#13857](https://github.com/Sylius/Sylius/issues/13857) [DOC] Bump minimal PHP version needed to install Sylius ([@Roshyo](https://github.com/Roshyo))
+- [#13865](https://github.com/Sylius/Sylius/issues/13865) [Cart] Add Validator for localeCode ([@SirDomin](https://github.com/SirDomin))
+- [#13866](https://github.com/Sylius/Sylius/issues/13866) [Maintenance] Relax conflict on liip imagine bundle - rebased version ([@Nek-](https://github.com/Nek-))
+- [#13867](https://github.com/Sylius/Sylius/issues/13867) [Template][Events] Sylius template events - improvements ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13870](https://github.com/Sylius/Sylius/issues/13870) [ShippingMethod] Change shipping rule to be based on items total instead of order total ([@GSadee](https://github.com/GSadee), [@mdevlamynck](https://github.com/mdevlamynck))
+- [#13878](https://github.com/Sylius/Sylius/issues/13878) [Template] Variant name instead of product name ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13886](https://github.com/Sylius/Sylius/issues/13886) [Templates][Admin] Refactor order payments template to use events ([@coldic3](https://github.com/coldic3))
+- [#13888](https://github.com/Sylius/Sylius/issues/13888) [Documentation] Fix the description of items total shipping rules ([@GSadee](https://github.com/GSadee))
+- [#13890](https://github.com/Sylius/Sylius/issues/13890) [maintenance]Fix ECS HeaderCommentFixer ([@Ferror](https://github.com/Ferror))
+- [#13891](https://github.com/Sylius/Sylius/issues/13891) [maintenance]Run ECS in parallel ([@Ferror](https://github.com/Ferror))
+
+## v1.10.12 (2022-04-08)
+
+#### Details
+
+- [#11850](https://github.com/Sylius/Sylius/issues/11850) Fix redirection when there is a trailing slash in the products list path ([@loic425](https://github.com/loic425))
+- [#12538](https://github.com/Sylius/Sylius/issues/12538) [Behat] Allow to use some useful methods on Order show page ([@loic425](https://github.com/loic425))
+- [#13724](https://github.com/Sylius/Sylius/issues/13724) Fix disappearing products in Admin Panel when translation for current locale is missing ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#13736](https://github.com/Sylius/Sylius/issues/13736) [Maintenance] Testing with PHP 8.1 ([@loic425](https://github.com/loic425))
+- [#13744](https://github.com/Sylius/Sylius/issues/13744) [Maintenance]Ignore phpstan.neon file ([@Ferror](https://github.com/Ferror))
+- [#13745](https://github.com/Sylius/Sylius/issues/13745) [Promotion] Add validation of coupon usage limit per customer ([@coldic3](https://github.com/coldic3))
+- [#13753](https://github.com/Sylius/Sylius/issues/13753) [UI] Replacing the placeholder avatar with an icon ([@mamazu](https://github.com/mamazu))
+- [#13759](https://github.com/Sylius/Sylius/issues/13759) [Behat] Use "When" for user actions where possible ([@coldic3](https://github.com/coldic3))
+- [#13767](https://github.com/Sylius/Sylius/issues/13767) Change sylius.behat.context.ui.email context to sylius.behat.context.api.email ([@Ferror](https://github.com/Ferror))
+- [#13768](https://github.com/Sylius/Sylius/issues/13768) Bump Psalm version to 4.19 (php 8.1 support) ([@loic425](https://github.com/loic425))
+- [#13769](https://github.com/Sylius/Sylius/issues/13769) [Core][Shipping] Fix estimated shipping costs ([@coldic3](https://github.com/coldic3), [@lchrusciel](https://github.com/lchrusciel))
+- [#13770](https://github.com/Sylius/Sylius/issues/13770) [ADR] Clean up existing ADRs mostly by updating their statuses ([@GSadee](https://github.com/GSadee))
+- [#13779](https://github.com/Sylius/Sylius/issues/13779) [Documentation][Plus] Update cookbook about restricting access to the entity ([@GSadee](https://github.com/GSadee))
+- [#13782](https://github.com/Sylius/Sylius/issues/13782) [Plus] Fix Sylius installation guide ([@lchrusciel](https://github.com/lchrusciel))
+- [#13787](https://github.com/Sylius/Sylius/issues/13787) [ADR] Use raw data in commands and events ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13795](https://github.com/Sylius/Sylius/issues/13795) [ADR] Remove flush() from handlers. ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13798](https://github.com/Sylius/Sylius/issues/13798) [Events] Sylius template event forms ([@SirDomin](https://github.com/SirDomin))
+- [#13799](https://github.com/Sylius/Sylius/issues/13799) [Core][Shipping] Deprecate processing shipments before recalculating prices ([@coldic3](https://github.com/coldic3))
+- [#13801](https://github.com/Sylius/Sylius/issues/13801) [Behat] added context to manage non-collection subresources ([@emmanuel-tilleuls](https://github.com/emmanuel-tilleuls))
+- [#13802](https://github.com/Sylius/Sylius/issues/13802) [Docs] Add a guide on how to deal with file access problems in the wkhtmltopdf ([@coldic3](https://github.com/coldic3))
+- [#13803](https://github.com/Sylius/Sylius/issues/13803) [Admin][JS] Applying all the options selected for an attribute of type multiple select fixed ([@TheMilek](https://github.com/TheMilek))
+- [#13805](https://github.com/Sylius/Sylius/issues/13805) [JS] Not render empty value in multi select autocompletes ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13809](https://github.com/Sylius/Sylius/issues/13809) [Documentation] Fix build by specifying jinja2 version requirement ([@GSadee](https://github.com/GSadee))
+- [#13811](https://github.com/Sylius/Sylius/issues/13811) [Documentation][Plus] Adjust installation guide after entities refactor ([@GSadee](https://github.com/GSadee))
+- [#13817](https://github.com/Sylius/Sylius/issues/13817) [Admin] Clean up and refactor new template events ([@GSadee](https://github.com/GSadee))
+- [#13818](https://github.com/Sylius/Sylius/issues/13818) [Maintenance] Bump copyright year in docs and license files ([@coldic3](https://github.com/coldic3))
+- [#13839](https://github.com/Sylius/Sylius/issues/13839) Limit the number of packages build run on 1.10 ([@Zales0123](https://github.com/Zales0123))
+
+## v1.10.11 (2022-03-14)
+
+#### Details
+
+- [#13432](https://github.com/Sylius/Sylius/issues/13432) Update SalesDataProvider.php ([@remoteclient](https://github.com/remoteclient))
+- [#13723](https://github.com/Sylius/Sylius/issues/13723) [Docs] Deployment on artifakt ([@AdamKasp](https://github.com/AdamKasp))
+- [#13731](https://github.com/Sylius/Sylius/issues/13731) [Taxation] Add validation of negative tax rate ([@coldic3](https://github.com/coldic3))
+- [#13734](https://github.com/Sylius/Sylius/issues/13734) [JS] add empty value to autocomplete selects ([@SirDomin](https://github.com/SirDomin))
+- [#13750](https://github.com/Sylius/Sylius/issues/13750) [Admin][Shop] placehold.it replaced to local placeholders ([@ernestWarwas](https://github.com/ernestWarwas))
+- [#13756](https://github.com/Sylius/Sylius/issues/13756) [GitHub Actions] Change PHP ini values + clear cache ([@GSadee](https://github.com/GSadee))
+- [#13765](https://github.com/Sylius/Sylius/issues/13765) [Security] Fixes for SVG XSS, wrong cache for logged in users and clickjacking ([@ernestWarwas](https://github.com/ernestWarwas), [@lchrusciel](https://github.com/lchrusciel), [@GSadee](https://github.com/GSadee), [@Zales0123](https://github.com/Zales0123), [@Rafikooo](https://github.com/Rafikooo))
+- [#13766](https://github.com/Sylius/Sylius/issues/13766) [Security][API] passwordResetToken nulled after password is changed ([@lchrusciel](https://github.com/lchrusciel), [@ernestWarwas](https://github.com/ernestWarwas), [@GSadee](https://github.com/GSadee), [@TheMilek](https://github.com/TheMilek))
+
+## v1.10.10 (2022-03-07)
+
+#### Details
+
+- [#13575](https://github.com/Sylius/Sylius/issues/13575) [DX] add correct return type to getAdjustments method ([@PILLOWPET](https://github.com/PILLOWPET))
+- [#13641](https://github.com/Sylius/Sylius/issues/13641) [ADR] Declaring services as public in container ([@lchrusciel](https://github.com/lchrusciel))
+- [#13647](https://github.com/Sylius/Sylius/issues/13647) Update Sylius supported versions ([@Zales0123](https://github.com/Zales0123))
+- [#13650](https://github.com/Sylius/Sylius/issues/13650) [Documentation] Update installation guide for Plus ([@GSadee](https://github.com/GSadee))
+- [#13660](https://github.com/Sylius/Sylius/issues/13660) [CLI] Cancel unpaid orders command ([@rafalswierczek](https://github.com/rafalswierczek))
+- [#13676](https://github.com/Sylius/Sylius/issues/13676) [Cart] Fix retrieving/overriding cart of logged in user by guest ([@SirDomin](https://github.com/SirDomin), [@GSadee](https://github.com/GSadee))
+- [#13683](https://github.com/Sylius/Sylius/issues/13683) Improve verbosity of canceling unpaid orders test ([@rafalswierczek](https://github.com/rafalswierczek))
+- [#13684](https://github.com/Sylius/Sylius/issues/13684) [Product][API][Bug] Fixed product sorting by translated names ([@Rafikooo](https://github.com/Rafikooo))
+- [#13695](https://github.com/Sylius/Sylius/issues/13695) [Order] Change getters and setters to use a proper flag name ([@GSadee](https://github.com/GSadee))
+- [#13715](https://github.com/Sylius/Sylius/issues/13715) add dependency injection conflict ([@SirDomin](https://github.com/SirDomin))
+- [#13716](https://github.com/Sylius/Sylius/issues/13716) [Documentation] Fix start date of development 1.12 version ([@GSadee](https://github.com/GSadee))
+- [#13725](https://github.com/Sylius/Sylius/issues/13725) [PaypalExpress] Dont take shipping tax adjustment to shipping cost ([@SirDomin](https://github.com/SirDomin))
+- [#13730](https://github.com/Sylius/Sylius/issues/13730) [Maintenance] Add conflict to symfony/framework-bundle to fix problem with solving path prefix in API scenarios ([@GSadee](https://github.com/GSadee))
+- [#13732](https://github.com/Sylius/Sylius/issues/13732) [Hot-fix] Conflict with symfony/dependency-injection even more ([@Zales0123](https://github.com/Zales0123))
+
+## v1.10.9 (2022-02-14)
+
+#### Details
+
+- [#13421](https://github.com/Sylius/Sylius/issues/13421) [Docs] How to customize the invoice logo - updated cookbook ([@Rafikooo](https://github.com/Rafikooo))
+- [#13423](https://github.com/Sylius/Sylius/issues/13423) [Docs] Customizing Credit Memo's logo ([@TheMilek](https://github.com/TheMilek))
+- [#13431](https://github.com/Sylius/Sylius/issues/13431) FIX: Avoid passing empty needle to strpos() ([@rimas-kudelis](https://github.com/rimas-kudelis))
+- [#13498](https://github.com/Sylius/Sylius/issues/13498) [Docs] Sylius 1.8 is not supported anymore ([@Zales0123](https://github.com/Zales0123))
+- [#13504](https://github.com/Sylius/Sylius/issues/13504) Postpone 1.10 end of maintenance date ([@Zales0123](https://github.com/Zales0123))
+- [#13506](https://github.com/Sylius/Sylius/issues/13506) [Docs] How to customize the invoice logo - neatly cut invoice image ([@Rafikooo](https://github.com/Rafikooo))
+- [#13513](https://github.com/Sylius/Sylius/issues/13513) [Architecture] Do not double install PHP dependencies ([@lchrusciel](https://github.com/lchrusciel))
+- [#13514](https://github.com/Sylius/Sylius/issues/13514) [Documentation] Update Core Team in our documentation ([@lchrusciel](https://github.com/lchrusciel))
+- [#13515](https://github.com/Sylius/Sylius/issues/13515) [Maintenance] Replace `test-package.sh` with native GH Actions ([@lchrusciel](https://github.com/lchrusciel))
+- [#13516](https://github.com/Sylius/Sylius/issues/13516) [Maintenance] Remove NelmioAlice from the main packages config ([@lchrusciel](https://github.com/lchrusciel))
+- [#13517](https://github.com/Sylius/Sylius/issues/13517) [Docs] Change the template path in customization ([@Roshyo](https://github.com/Roshyo))
+- [#13519](https://github.com/Sylius/Sylius/issues/13519) [Docs] Altered custom invoice logo path ([@Rafikooo](https://github.com/Rafikooo))
+- [#13520](https://github.com/Sylius/Sylius/issues/13520) change suggested path in refund docs ([@AdamKasp](https://github.com/AdamKasp))
+- [#13527](https://github.com/Sylius/Sylius/issues/13527) [Minor] Typo fixes in github packages config ([@lchrusciel](https://github.com/lchrusciel))
+- [#13535](https://github.com/Sylius/Sylius/issues/13535) [Minor] Removal of logic duplication in shipping charges processor ([@lchrusciel](https://github.com/lchrusciel))
+- [#13552](https://github.com/Sylius/Sylius/issues/13552) Fixing the documentation (1.10) ([@mamazu](https://github.com/mamazu))
+- [#13553](https://github.com/Sylius/Sylius/issues/13553) [Fixtures] USA deleted from the World zone ([@TheMilek](https://github.com/TheMilek))
+- [#13561](https://github.com/Sylius/Sylius/issues/13561) [Docs] Mention autoconfiguration case when extending the form ([@Zales0123](https://github.com/Zales0123))
+
 ## v1.10.8 (2022-01-17)
 
 #### Details

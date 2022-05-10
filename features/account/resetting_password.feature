@@ -31,3 +31,12 @@ Feature: Resetting a password
         And I reset it
         Then I should be notified that my password has been successfully reset
         And I should be able to log in as "goodman@example.com" with "newp@ssw0rd" password
+
+    @ui @email @api
+    Scenario: Trying to change my account password twice with token I received
+        Given I have already received a resetting password email
+        When I follow link on my email to reset my password
+        And I specify my new password as "newp@ssw0rd"
+        And I confirm my new password as "newp@ssw0rd"
+        And I reset it
+        Then I should not be able to change my password again with the same token

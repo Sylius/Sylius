@@ -19,31 +19,21 @@ use Doctrine\Common\Collections\Collection;
 class ChannelPricing implements ChannelPricingInterface, \Stringable
 {
     /** @var mixed */
-    protected $id = null;
+    protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $channelCode;
 
-    /**
-     * @var ProductVariantInterface|null
-     */
+    /** @var ProductVariantInterface|null */
     protected $productVariant;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $price;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $originalPrice;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $minimumPrice = 0;
 
     /**
@@ -129,7 +119,7 @@ class ChannelPricing implements ChannelPricingInterface, \Stringable
 
     public function addAppliedPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
-        if($this->appliedPromotions->contains($catalogPromotion)) {
+        if ($this->appliedPromotions->contains($catalogPromotion)) {
             return;
         }
 
@@ -154,7 +144,7 @@ class ChannelPricing implements ChannelPricingInterface, \Stringable
     public function hasExclusiveCatalogPromotionApplied(): bool
     {
         foreach ($this->appliedPromotions as $appliedPromotion) {
-            if($appliedPromotion->isExclusive()) {
+            if ($appliedPromotion->isExclusive()) {
                 return true;
             }
         }

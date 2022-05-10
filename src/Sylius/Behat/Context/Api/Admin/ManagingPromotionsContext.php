@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Webmozart\Assert\Assert;
 
@@ -34,12 +35,12 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given I want to browse promotions
+     * @When I want to browse promotions
      * @When I browse promotions
      */
     public function iWantToBrowsePromotions(): void
     {
-        $this->client->index();
+        $this->client->index(Resources::PROMOTIONS);
     }
 
     /**
@@ -47,7 +48,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iWantToCreateANewPromotion(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(Resources::PROMOTIONS);
     }
 
     /**
@@ -138,7 +139,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iDeletePromotion(PromotionInterface $promotion): void
     {
-        $this->client->delete($promotion->getCode());
+        $this->client->delete(Resources::PROMOTIONS, $promotion->getCode());
     }
 
     /**
@@ -157,7 +158,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function promotionShouldNotExistInTheRegistry(PromotionInterface $promotion): void
     {
-        $response = $this->client->index();
+        $response = $this->client->index(Resources::PROMOTIONS);
         $promotionName = (string) $promotion->getName();
 
         Assert::false(
@@ -180,7 +181,7 @@ final class ManagingPromotionsContext implements Context
     public function thePromotionShouldNotAppliesToDiscountedItems(PromotionInterface $promotion): void
     {
         Assert::false(
-            $this->responseChecker->getValue($this->client->show($promotion->getCode()), 'appliesToDiscounted')
+            $this->responseChecker->getValue($this->client->show(Resources::PROMOTIONS, $promotion->getCode()), 'appliesToDiscounted')
         );
     }
 }

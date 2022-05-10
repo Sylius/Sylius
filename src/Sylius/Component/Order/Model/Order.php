@@ -24,19 +24,13 @@ class Order implements OrderInterface
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $checkoutCompletedAt;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $number;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $notes;
 
     /**
@@ -46,9 +40,7 @@ class Order implements OrderInterface
      */
     protected $items;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $itemsTotal = 0;
 
     /**
@@ -58,20 +50,17 @@ class Order implements OrderInterface
      */
     protected $adjustments;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $adjustmentsTotal = 0;
 
     /**
      * Items total + adjustments total.
+     *
      * @var int
      */
     protected $total = 0;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $state = OrderInterface::STATE_CART;
 
     public function __construct()

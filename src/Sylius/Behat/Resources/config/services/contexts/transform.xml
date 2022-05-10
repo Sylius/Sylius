@@ -69,6 +69,7 @@
         <service id="sylius.behat.context.transform.locale" class="Sylius\Behat\Context\Transform\LocaleContext">
             <argument type="service" id="sylius.locale_converter" />
             <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="sylius.behat.context.transform.order" class="Sylius\Behat\Context\Transform\OrderContext">
@@ -91,6 +92,10 @@
 
         <service id="sylius.behat.context.transform.product_option" class="Sylius\Behat\Context\Transform\ProductOptionContext">
             <argument type="service" id="sylius.repository.product_option" />
+        </service>
+
+        <service id="sylius.behat.context.transform.product_option_value" class="Sylius\Behat\Context\Transform\ProductOptionValueContext">
+            <argument type="service" id="sylius.repository.product_option_value" />
         </service>
 
         <service id="sylius.behat.context.transform.product_review" class="Sylius\Behat\Context\Transform\ProductReviewContext">

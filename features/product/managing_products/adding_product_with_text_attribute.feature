@@ -11,10 +11,10 @@ Feature: Adding a new product with text attribute
         And the store has a non-translatable text product attribute "Author"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Adding a text attribute to product
-        Given I want to create a new simple product
-        When I specify its code as "44_MAGNUM"
+        When I want to create a new simple product
+        And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
         And I set its price to "$100.00" for "United States" channel
         And I set its "Gun caliber" attribute to "11 mm" in "English (United States)"
@@ -23,7 +23,7 @@ Feature: Adding a new product with text attribute
         And the product "44 Magnum" should appear in the store
         And attribute "Gun caliber" of product "44 Magnum" should be "11 mm"
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Adding a non-translatable text attribute to product
         When I want to create a new simple product
         And I specify its code as "44_MAGNUM"
@@ -35,7 +35,7 @@ Feature: Adding a new product with text attribute
         And the product "44 Magnum" should appear in the store
         And non-translatable attribute "Author" of product "44 Magnum" should be "Colt"
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Adding and removing text attributes on product create page
         When I want to create a new simple product
         And I specify its code as "44_MAGNUM"

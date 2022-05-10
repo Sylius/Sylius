@@ -25,5 +25,10 @@
             <argument type="service" id="session" />
             <tag name="kernel.event_subscriber" event="kernel.exception" />
         </service>
+
+        <service id="sylius.event_subscriber.admin_cache_control_subscriber" class="Sylius\Bundle\AdminBundle\EventListener\AdminSectionCacheControlSubscriber">
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <tag name="kernel.event_subscriber" event="kernel.response" />
+        </service>
     </services>
 </container>

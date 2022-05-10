@@ -34,6 +34,7 @@ imports:
     - suites/api/product/managing_products.yml
     - suites/api/product/viewing_products.yml
     - suites/api/product/viewing_product_reviews.yml
+    - suites/api/product/viewing_product_variants.yml
     - suites/api/promotion/applying_catalog_promotions.yml
     - suites/api/promotion/applying_promotion_coupon.yml
     - suites/api/promotion/applying_promotion_rules.yml
@@ -41,6 +42,7 @@ imports:
     - suites/api/promotion/managing_promotions.yml
     - suites/api/promotion/receiving_discount.yml
     - suites/api/shipping/applying_shipping_method_rules.yml
+    - suites/api/shipping/viewing_shipping_methods.yml
     - suites/api/shipping/managing_shipments.yml
     - suites/api/shipping/managing_shipping_categories.yml
     - suites/api/shipping/managing_shipping_methods.yml
@@ -50,6 +52,7 @@ imports:
     - suites/api/user/managing_administrators.yml
     - suites/api/user/managing_customer_groups.yml
 
+    - suites/cli/canceling_unpaid_orders.yml
     - suites/cli/installer.yml
     - suites/cli/showing_available_plugins.yml
 
@@ -113,6 +116,7 @@ imports:
     - suites/ui/promotion/receiving_discount.yml
     - suites/ui/shipping/applying_shipping_fee.yml
     - suites/ui/shipping/applying_shipping_method_rules.yml
+    - suites/ui/shipping/viewing_shipping_methods.yml
     - suites/ui/shipping/managing_shipments.yml
     - suites/ui/shipping/managing_shipping_categories.yml
     - suites/ui/shipping/managing_shipping_methods.yml

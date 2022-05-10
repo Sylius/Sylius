@@ -1,0 +1,7 @@
+<td>
+    {% if variant.shippingRequired %}
+        <span class="ui teal label"><i class="checkmark icon"></i>{{ 'sylius.ui.shipping_required'|trans }}</span>
+    {% else %}
+        <span class="ui orange label"><i class="remove icon"></i>{{ 'sylius.ui.shipping_not_required'|trans }}</span>
+    {% endif %}
+</td>

@@ -13,42 +13,42 @@ Feature: Products validation
         And this product attribute has set min value as 3 and max value as 30
         And I am logged in as an administrator
 
-    @ui
+    @ui @no-api
     Scenario: Adding a new simple product without specifying its code
-        Given I want to create a new simple product
-        When I name it "Dice Brewing" in "English (United States)"
+        When I want to create a new simple product
+        And I name it "Dice Brewing" in "English (United States)"
         And I set its price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that code is required
         And product with name "Dice Brewing" should not be added
 
-    @ui
+    @ui @no-api
     Scenario: Adding a new simple product with duplicated code among products
         Given the store has a product "7 Wonders" with code "AWESOME_GAME"
-        And I want to create a new simple product
-        When I specify its code as "AWESOME_GAME"
+        When I want to create a new simple product
+        And I specify its code as "AWESOME_GAME"
         And I name it "Dice Brewing" in "English (United States)"
         And I set its price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that code has to be unique
         And product with name "Dice Brewing" should not be added
 
-    @ui
+    @ui @no-api
     Scenario: Adding a new simple product with duplicated code among product variants
         Given the store has a product "7 Wonders"
         And this product has "7 Wonders: Cities" variant priced at "$30" identified by "AWESOME_GAME"
-        And I want to create a new simple product
-        When I specify its code as "AWESOME_GAME"
+        When I want to create a new simple product
+        And I specify its code as "AWESOME_GAME"
         And I name it "Dice Brewing" in "English (United States)"
         And I set its price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that simple product code has to be unique
         And product with name "Dice Brewing" should not be added
 
-    @ui
+    @ui @no-api
     Scenario: Adding a new simple product without specifying its slug
-        Given I want to create a new simple product
-        When I specify its code as "BOARD_DICE_BREWING"
+        When I want to create a new simple product
+        And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
         And I set its price to "$10.00" for "Web" channel
         And I remove its slug
@@ -56,16 +56,16 @@ Feature: Products validation
         Then I should be notified that slug is required
         And product with name "Dice Brewing" should not be added
 
-    @ui
+    @ui @no-api
     Scenario: Adding a new simple product without specifying its name
-        Given I want to create a new simple product
-        When I specify its code as "BOARD_DICE_BREWING"
+        When I want to create a new simple product
+        And I specify its code as "BOARD_DICE_BREWING"
         And I set its price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that name is required
         And product with code "BOARD_DICE_BREWING" should not be added
 
-    @ui
+    @ui @no-api
     Scenario: Adding a new simple product without specifying its price for every channel
         Given the store operates on another channel named "Web-GB"
         When I want to create a new simple product
@@ -80,8 +80,8 @@ Feature: Products validation
 
     @ui @api
     Scenario: Adding a new configurable product without specifying its code
-        Given I want to create a new configurable product
-        When I name it "Dice Brewing" in "English (United States)"
+        When I want to create a new configurable product
+        And I name it "Dice Brewing" in "English (United States)"
         And I try to add it
         Then I should be notified that code is required
         And product with name "Dice Brewing" should not be added
@@ -89,8 +89,8 @@ Feature: Products validation
     @ui @api
     Scenario: Adding a new configurable product with duplicated code
         Given the store has a product "7 Wonders" with code "AWESOME_GAME"
-        And I want to create a new configurable product
-        When I specify its code as "AWESOME_GAME"
+        When I want to create a new configurable product
+        And I specify its code as "AWESOME_GAME"
         And I name it "Dice Brewing" in "English (United States)"
         And I try to add it
         Then I should be notified that code has to be unique
@@ -106,10 +106,10 @@ Feature: Products validation
         And product with code "BOARD_DICE_BREWING" should not be added
 
     @ui @api
-    Scenario: Trying to remove name from existing simple product
+    Scenario: Trying to remove name from existing product
         Given the store has a "Dice Brewing" product
-        And I want to modify this product
-        When I remove its name from "English (United States)" translation
+        When I want to modify this product
+        And I remove its name from "English (United States)" translation
         And I try to save my changes
         Then I should be notified that name is required
         And this product should still be named "Dice Brewing"
@@ -117,8 +117,8 @@ Feature: Products validation
     @ui @api
     Scenario: Not seeing validation error for duplicated code if product code has not been changed
         Given the store has a "Dice Brewing" product
-        And I want to modify this product
-        When I remove its name from "English (United States)" translation
+        When I want to modify this product
+        And I remove its name from "English (United States)" translation
         And I try to save my changes
         Then this product should still be named "Dice Brewing"
 
@@ -133,18 +133,18 @@ Feature: Products validation
         And I save my changes
         Then I should be notified that I have to define product variants' prices for newly assigned channels first
 
-    @ui
+    @ui @no-api
     Scenario: Adding a new simple product with price
         Given the store has a "7 Wonders" configurable product with "7-wonders" slug
-        And I want to create a new configurable product
-        When I specify its code as "7-WONDERS-BABEL"
+        When I want to create a new configurable product
+        And I specify its code as "7-WONDERS-BABEL"
         And I name it "7 Wonders Babel" in "English (United States)"
         And I set its slug to "7-wonders" in "English (United States)"
         And I add it
         Then I should be notified that slug has to be unique
         And product with code "7-WONDERS-BABEL" should not be added
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Trying to add a new product with a text attribute without specifying its value in default locale
         When I want to create a new simple product
         And I specify its code as "X-18-MUG"
@@ -156,7 +156,7 @@ Feature: Products validation
         Then I should be notified that I have to define the "Mug material" attribute in "English (United States)"
         And product with code "X-18-MUG" should not be added
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Trying to add a new product with a text attribute without specifying its value in additional locale with proper length
         When I want to create a new simple product
         And I specify its code as "X-18-MUG"

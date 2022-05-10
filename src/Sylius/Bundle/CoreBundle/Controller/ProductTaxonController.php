@@ -37,7 +37,7 @@ class ProductTaxonController extends ResourceController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
-        $productTaxons = $this->getParameterFromRequest($request,'productTaxons');
+        $productTaxons = $this->getParameterFromRequest($request, 'productTaxons');
         $this->validateCsrfProtection($request, $configuration);
 
         if ($this->shouldProductsPositionsBeUpdated($request, $productTaxons)) {
@@ -63,7 +63,7 @@ class ProductTaxonController extends ResourceController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
-        $productTaxons = $this->getParameterFromRequest($request,'productTaxons');
+        $productTaxons = $this->getParameterFromRequest($request, 'productTaxons');
 
         $this->validateCsrfProtection($request, $configuration);
 

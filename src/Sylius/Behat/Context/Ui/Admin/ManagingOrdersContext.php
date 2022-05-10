@@ -235,15 +235,27 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @Then it should be shipped to :customerName, :street, :postcode, :city, :countryName
+     */
+    public function itShouldBeShippedToCustomerAtAddress(
+        string $customerName,
+        string $street,
+        string $postcode,
+        string $city,
+        string $countryName
+    ) {
+        $this->itShouldBeShippedTo(null, $customerName, $street, $postcode, $city, $countryName);
+    }
+
+    /**
      * @Then /^(this order) should (?:|still )be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
      */
     public function itShouldBeShippedTo(
-        OrderInterface $order = null,
-        $customerName,
-        $street,
-        $postcode,
-        $city,
-        $countryName
+        ?OrderInterface $order,
+        string $customerName,
+        string $street,
+        string $postcode,
+        string $city,
+        string $countryName
     ) {
         if (null !== $order) {
             $this->iSeeTheOrder($order);
@@ -255,15 +267,27 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then it should be billed to :customerName, :street, :postcode, :city, :countryName
      * @Then the order should be billed to :customerName, :street, :postcode, :city, :countryName
+     */
+    public function itShouldBeBilledToCustomerAtAddress(
+        string $customerName,
+        string $street,
+        string $postcode,
+        string $city,
+        string $countryName
+    ) {
+        $this->itShouldBeBilledTo(null, $customerName, $street, $postcode, $city, $countryName);
+    }
+
+    /**
      * @Then /^(this order) bill should (?:|still )be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
      */
     public function itShouldBeBilledTo(
-        OrderInterface $order = null,
-        $customerName,
-        $street,
-        $postcode,
-        $city,
-        $countryName
+        ?OrderInterface $order,
+        string $customerName,
+        string $street,
+        string $postcode,
+        string $city,
+        string $countryName
     ) {
         if (null !== $order) {
             $this->iSeeTheOrder($order);

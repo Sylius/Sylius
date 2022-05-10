@@ -17,8 +17,9 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\Request;
+use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -27,37 +28,19 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
-use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ApiClientInterface $productVariantClient;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private IriConverterInterface $iriConverter;
-
-    private ChannelContextSetterInterface $channelContextSetter;
-
     public function __construct(
-        ApiClientInterface $client,
-        ApiClientInterface $productVariantClient,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage,
-        IriConverterInterface $iriConverter,
-        ChannelContextSetterInterface $channelContextSetter
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage,
+        private IriConverterInterface $iriConverter,
+        private ChannelContextSetterInterface $channelContextSetter,
+        private RequestFactoryInterface $requestFactory,
+        private string $apiUrlPrefix
     ) {
-        $this->client = $client;
-        $this->productVariantClient = $productVariantClient;
-        $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
-        $this->iriConverter = $iriConverter;
-        $this->channelContextSetter = $channelContextSetter;
     }
 
     /**
@@ -65,16 +48,29 @@ final class ProductContext implements Context
      * @When I view product :product
      * @When customer view product :product
      */
-    public function iOpenProductPage(ProductInterface $product): void
+    public function iViewProduct(ProductInterface $product): void
     {
+        $this->client->show(Resources::PRODUCTS, $product->getCode());
+
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $product->getVariants()->first();
 
-        $this->client->show($product->getCode());
-        $this->productVariantClient->show($productVariant->getCode());
-
         $this->sharedStorage->set('product', $product);
         $this->sharedStorage->set('product_variant', $productVariant);
+    }
+
+    /**
+     * @When I view product :product in the :localeCode locale
+     * @When /^I check (this product)'s details in the ("([^"]+)" locale)$/
+     * @When /^I try to check (this product)'s details in the ("([^"]+)" locale)$/
+     */
+    public function iViewProductInTheLocale(ProductInterface $product, string $localeCode): void
+    {
+        $this->sharedStorage->set('current_locale_code', $localeCode);
+
+        $this->iViewProduct($product);
+
+        $this->sharedStorage->remove('current_locale_code');
     }
 
     /**
@@ -82,7 +78,7 @@ final class ProductContext implements Context
      */
     public function iViewProductUsingSlug(ProductInterface $product): void
     {
-        $this->client->showByIri('/api/v2/shop/products-by-slug/'.$product->getSlug());
+        $this->client->showByIri(sprintf('%s/shop/products-by-slug/%s', $this->apiUrlPrefix, $product->getSlug()));
 
         $this->sharedStorage->set('product', $product);
     }
@@ -94,7 +90,7 @@ final class ProductContext implements Context
     {
         $response = $this->client->getLastResponse();
 
-        Assert::eq($response->headers->get('Location'), '/api/v2/shop/products/'.$product->getCode());
+        Assert::eq($response->headers->get('Location'), sprintf('%s/shop/products/%s', $this->apiUrlPrefix, $product->getCode()));
     }
 
     /**
@@ -103,12 +99,22 @@ final class ProductContext implements Context
      */
     public function iBrowseProductsFromTaxon(?TaxonInterface $taxon = null): void
     {
-        $this->client->index();
+        $this->client->index(Resources::PRODUCTS);
 
         if ($taxon !== null) {
             $this->client->addFilter('taxon', $this->iriConverter->getIriFromItem($taxon));
             $this->client->filter();
         }
+    }
+
+    /**
+     * @When /^I sort products by the (oldest|newest) date first$/
+     */
+    public function iSortProductsByTheDateFirst(string $sortDirection): void
+    {
+        $sortDirection = 'oldest' === $sortDirection ? 'asc' : 'desc';
+
+        $this->client->sort(['createdAt' => $sortDirection]);
     }
 
     /**
@@ -125,6 +131,22 @@ final class ProductContext implements Context
     public function iSortProductsByTheHighestPriceFirst(): void
     {
         $this->client->sort(['price' => 'desc']);
+    }
+
+    /**
+     * @When I sort products alphabetically from a to z
+     */
+    public function iSortProductsAlphabeticallyFromAToZ(): void
+    {
+        $this->client->sort(['translation.name' => 'asc']);
+    }
+
+    /**
+     * @When I sort products alphabetically from z to a
+     */
+    public function iSortProductsAlphabeticallyFromZToA(): void
+    {
+        $this->client->sort(['translation.name' => 'desc']);
     }
 
     /**
@@ -314,6 +336,22 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then /^the first product on the list should have name "([^"]+)" and price ("[^"]+")$/
+     */
+    public function theFirstProductOnTheListShouldHaveNameAndPrice(string $name, int $price): void
+    {
+        $product = $this->responseChecker->getCollection($this->client->resend())[0];
+
+        $defaultVariantPrice = $this->responseChecker->getValue(
+            $this->client->showByIri($product['defaultVariant']),
+            'price'
+        );
+
+        Assert::same($product['name'], $name);
+        Assert::same($defaultVariantPrice, $price);
+    }
+
+    /**
      * @Then the last product on the list should have name :name
      */
     public function theLastProductOnTheListShouldHaveName(string $name): void
@@ -321,6 +359,23 @@ final class ProductContext implements Context
         $products = $this->responseChecker->getCollection($this->client->getLastResponse());
 
         Assert::same(end($products)['name'], $name);
+    }
+
+    /**
+     * @Then /^the last product on the list should have name "([^"]+)" and price ("[^"]+")$/
+     */
+    public function theLastProductOnTheListShouldHaveNameAndPrice(string $name, int $price): void
+    {
+        $products = $this->responseChecker->getCollection($this->client->resend());
+        $product = end($products);
+
+        $defaultVariantPrice = $this->responseChecker->getValue(
+            $this->client->showByIri($product['defaultVariant']),
+            'price'
+        );
+
+        Assert::same($product['name'], $name);
+        Assert::same($defaultVariantPrice, $price);
     }
 
     /**
@@ -352,6 +407,18 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then /^I should not be able to view (this product) in the ("([^"]+)" locale)$/
+     */
+    public function iShouldNotBeAbleToViewThisProductInLocale(ProductInterface $product, string $localeCode): void
+    {
+        Assert::false($this->responseChecker->hasValue(
+            $this->client->getLastResponse(),
+            'name',
+            $product->getTranslation($localeCode)->getName()
+        ));
+    }
+
+    /**
      * @Then its current variant should be named :variantName
      */
     public function itsCurrentVariantShouldBeNamed(string $variantName): void
@@ -359,7 +426,8 @@ final class ProductContext implements Context
         $response = $this->client->getLastResponse();
 
         $productVariant = $this->responseChecker->getValue($response, 'variants');
-        $this->client->executeCustomRequest(Request::custom($productVariant[0], HttpRequest::METHOD_GET));
+        $request = $this->requestFactory->custom($productVariant[0], HttpRequest::METHOD_GET);
+        $this->client->executeCustomRequest($request);
 
         Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $variantName));
     }
@@ -401,8 +469,10 @@ final class ProductContext implements Context
      */
     public function theProductPriceShouldBe(int $price): void
     {
+        $response = $this->client->getLastResponse();
+
         $defaultVariantResponse = $this->client->showByIri(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'defaultVariant')
+            $this->responseChecker->getValue($response, 'defaultVariant')
         );
 
         Assert::same($this->responseChecker->getValue($defaultVariantResponse, 'price'), $price);
@@ -433,11 +503,49 @@ final class ProductContext implements Context
         $this->channelContextSetter->setChannel($channel);
 
         Assert::true($this->hasProductWithPrice(
-            [$this->responseChecker->getResponseContent($this->client->show($product->getCode()))],
+            [$this->responseChecker->getResponseContent($this->client->show(Resources::PRODUCTS, $product->getCode()))],
             $price,
             null,
             StringInflector::nameToCamelCase($priceType)
         ));
+    }
+
+    /**
+     * @Then I should see a main image
+     */
+    public function iShouldSeeAMainImage(): void
+    {
+        Assert::true($this->hasProductWithMainImage());
+    }
+
+    /**
+     * @Then /^I should not be able to select the "([^"]+)" ([^\s]+) option value$/
+     */
+    public function iShouldNotBeAbleToSelectTheOptionValue(string $optionValue, string $optionName): void
+    {
+        Assert::false($this->hasProductOptionWithNameAndValue($optionValue, $optionName));
+    }
+
+    /**
+     * @Then I should be able to select between :count variants
+     */
+    public function iShouldBeAbleToSelectBetweenVariants(int $count): void
+    {
+        $response = $this->client->getLastResponse();
+        $variants = $this->responseChecker->getValue($response, 'variants');
+
+        Assert::count($variants, $count);
+    }
+
+    /**
+     * @Then I should not be able to select the :productVariantName variant
+     */
+    public function iShouldNotBeAbleToSelectTheVariant(string $productVariantName): void
+    {
+        $response = $this->client->getLastResponse();
+        $variants = $this->responseChecker->getValue($response, 'variants');
+
+        Assert::false($this->productHasProductVariantWithName($variants, $productVariantName));
     }
 
     private function hasProductWithPrice(
@@ -452,7 +560,8 @@ final class ProductContext implements Context
             }
 
             foreach ($product['variants'] as $variantIri) {
-                $response = $this->client->executeCustomRequest(Request::custom($variantIri, HttpRequest::METHOD_GET));
+                $request = $this->requestFactory->custom($variantIri, HttpRequest::METHOD_GET);
+                $response = $this->client->executeCustomRequest($request);
 
                 /** @var int $variantPrice */
                 $variantPrice = $this->responseChecker->getValue($response, $priceType);
@@ -486,5 +595,70 @@ final class ProductContext implements Context
         }
 
         return false;
+    }
+
+    private function hasProductOptionWithNameAndValue(string $optionValue, string $optionName): bool
+    {
+        $response = $this->client->getLastResponse();
+        $productOptions = $this->responseChecker->getValue($response, 'options');
+
+        foreach ($productOptions as $optionIri) {
+            if (!$this->hasProductOptionWithName($optionIri, $optionName)) {
+                continue;
+            }
+
+            $variants = $this->responseChecker->getValue($response, 'variants');
+            foreach ($variants as $variantIri) {
+                if ($this->variantHasProductOptionValue($variantIri, $optionValue)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private function hasProductOptionWithName(string $optionIri, string $optionName): bool
+    {
+        $response = $this->client->showByIri($optionIri);
+
+        return $this->responseChecker->hasValue($response, 'code', StringInflector::nameToUppercaseCode($optionName));
+    }
+
+    private function variantHasProductOptionValue(string $variantIri, string $optionValue): bool
+    {
+        $variants = $this->client->showByIri($variantIri);
+        $optionValues = $this->responseChecker->getValue($variants, 'optionValues');
+
+        foreach ($optionValues as $valueIri) {
+            if ($this->hasProductOptionWithValue($valueIri, $optionValue)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function hasProductOptionWithValue(string $valueIri, string $optionValue): bool
+    {
+        return $this->responseChecker->hasValue($this->client->ShowByIri($valueIri), 'code', StringInflector::nameToUppercaseCode($optionValue));
+    }
+
+    private function productHasProductVariantWithName(array $variants, string $variantName): bool
+    {
+        foreach ($variants as $variantIri) {
+            if ($this->responseChecker->hasValue($this->client->showByIri($variantIri), 'name', $variantName)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function hasProductWithMainImage(): bool
+    {
+        $images = $this->responseChecker->getValue($this->client->getLastResponse(), 'images');
+
+        return $images[0]['type'] === 'main' && $images[0]['path'];
     }
 }

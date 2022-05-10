@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Webmozart\Assert\Assert;
 
@@ -36,7 +37,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iWantToCreateANewCustomerGroup(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(Resources::CUSTOMER_GROUPS);
     }
 
     /**
@@ -72,7 +73,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iWantToEditThisCustomerGroup(CustomerGroupInterface $customerGroup): void
     {
-        $this->client->buildUpdateRequest($customerGroup->getCode());
+        $this->client->buildUpdateRequest(Resources::CUSTOMER_GROUPS, $customerGroup->getCode());
     }
 
     /**
@@ -89,7 +90,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iWantToBrowseCustomerGroups(): void
     {
-        $this->client->index();
+        $this->client->index(Resources::CUSTOMER_GROUPS);
     }
 
     /**
@@ -97,7 +98,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iDeleteTheCustomerGroup(CustomerGroupInterface $customerGroup): void
     {
-        $this->client->delete($customerGroup->getCode());
+        $this->client->delete(Resources::CUSTOMER_GROUPS, $customerGroup->getCode());
     }
 
     /**
@@ -106,7 +107,7 @@ final class ManagingCustomerGroupsContext implements Context
     public function theCustomerGroupShouldAppearInTheStore(CustomerGroupInterface $customerGroup): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(), 'code', $customerGroup->getCode()),
+            $this->responseChecker->hasItemWithValue($this->client->index(Resources::CUSTOMER_GROUPS), 'code', $customerGroup->getCode()),
             sprintf('Customer group with code %s does not exist', $customerGroup->getCode())
         );
     }
@@ -118,7 +119,7 @@ final class ManagingCustomerGroupsContext implements Context
     public function thisCustomerGroupWithNameShouldAppearInTheStore(string $name): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $name),
+            $this->responseChecker->hasItemWithValue($this->client->index(Resources::CUSTOMER_GROUPS), 'name', $name),
             sprintf('Customer group with name %s does not exist', $name)
         );
     }
@@ -129,7 +130,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldSeeCustomerGroupsInTheList(int $amountOfCustomerGroups = 1): void
     {
-        Assert::same($this->responseChecker->countCollectionItems($this->client->index()), $amountOfCustomerGroups);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->index(Resources::CUSTOMER_GROUPS)), $amountOfCustomerGroups);
     }
 
     /**
@@ -138,7 +139,7 @@ final class ManagingCustomerGroupsContext implements Context
     public function thisCustomerGroupShouldStillBeNamed(CustomerGroupInterface $customerGroup, string $name): void
     {
         Assert::true(
-            $this->responseChecker->hasValue($this->client->show($customerGroup->getCode()), 'name', $name),
+            $this->responseChecker->hasValue($this->client->show(Resources::CUSTOMER_GROUPS, $customerGroup->getCode()), 'name', $name),
             'Customer groups name is not ' . $name
         );
     }
@@ -224,14 +225,14 @@ final class ManagingCustomerGroupsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isDeletionSuccessful(
-            $this->client->getLastResponse()
-        ),
+                $this->client->getLastResponse()
+            ),
             'Customer group could not be deleted'
         );
     }
 
     private function isItemOnIndex(string $property, string $value): bool
     {
-        return $this->responseChecker->hasItemWithValue($this->client->index(), $property, $value);
+        return $this->responseChecker->hasItemWithValue($this->client->index(Resources::CUSTOMER_GROUPS), $property, $value);
     }
 }

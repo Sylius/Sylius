@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UiBundle\Controller;
 
 use Sylius\Bundle\UiBundle\Form\Type\SecurityLoginType;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +28,7 @@ final class SecurityController
     public function __construct(
         private AuthenticationUtils $authenticationUtils,
         private FormFactoryInterface $formFactory,
-        private EngineInterface|Environment $templatingEngine,
+        private Environment $templatingEngine,
         private AuthorizationCheckerInterface $authorizationChecker,
         private RouterInterface $router
     ) {

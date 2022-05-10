@@ -24,56 +24,42 @@ class Promotion implements PromotionInterface
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $code;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $name;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $description;
 
     /**
      * When exclusive, promotion with top priority will be applied
+     *
      * @var int
      */
     protected $priority = 0;
 
     /**
      * Cannot be applied together with other promotions
+     *
      * @var bool
      */
     protected $exclusive = false;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $usageLimit;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $used = 0;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $startsAt;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $endsAt;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $couponBased = false;
 
     /**

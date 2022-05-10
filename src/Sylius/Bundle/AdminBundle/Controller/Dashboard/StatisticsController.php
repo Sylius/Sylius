@@ -15,14 +15,13 @@ namespace Sylius\Bundle\AdminBundle\Controller\Dashboard;
 
 use Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
 final class StatisticsController
 {
     public function __construct(
-        private EngineInterface|Environment $templatingEngine,
+        private Environment $templatingEngine,
         private StatisticsDataProviderInterface $statisticsDataProvider
     ) {
     }

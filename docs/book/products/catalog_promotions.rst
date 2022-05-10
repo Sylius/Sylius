@@ -313,6 +313,27 @@ After changes in CatalogPromotion, we dispatch proper message with delay calcula
     To enable asynchronous Catalog Promotion, remember about running messenger consumer in a separate process, use the command: ``php bin/console messenger:consume main``
     For more information check official `Symfony docs <https://symfony.com/doc/current/messenger.html#consuming-messages-running-the-worker>`_
 
+Catalog promotion synchronicity
+-------------------------------
+
+TL;DR: There is no reason to use synchronous processing unless you have only a few products and manually activate and deactivate catalog promotions.
+
+Since the `main` transport is asynchronous by default, in order to use synchronous processing, you need to override configuration by creating the `config/packages/messenger.yaml` file and pasting the following configuration:
+
+.. code-block:: yaml
+
+    framework:
+        messenger:
+            transports:
+                main: 'sync://'
+
+Synchronous processing means that, after submitting a catalog promotion form, one must wait for a server response until processing is complete.
+This may cause a worse user experience if there are other catalog promotions as it will trigger their recalculation as well.
+
+It is not possible to schedule the start of a catalog promotion on a given start date, it has to be started manually after that start date.
+It can be done by creating or editing any promotion.
+The same happens with the end date, so if the catalog promotion should have expired, it will not become inactive automatically, inactivation has to be triggered manually.
+
 How the Catalog Promotions are applied?
 ---------------------------------------
 

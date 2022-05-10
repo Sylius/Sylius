@@ -26,4 +26,8 @@ interface IndexPageInterface extends CrudIndexPageInterface
     public function chooseChannelFilter(string $channelName): void;
 
     public function filter(): void;
+
+    public function checkFirstProductHasDataAttribute(string $attributeName): bool;
+
+    public function checkLastProductHasDataAttribute(string $attributeName): bool;
 }

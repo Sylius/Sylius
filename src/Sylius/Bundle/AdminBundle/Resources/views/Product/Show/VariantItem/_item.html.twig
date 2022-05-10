@@ -1,0 +1,17 @@
+<td>
+    <div class="ui items">
+        <div class="item">
+            <div class="ui tiny image">
+                {% if variant.hasImages %}
+                    {% include '@SyliusAdmin/Product/_mainImage.html.twig' with {'product': variant, 'filter': 'sylius_admin_product_large_thumbnail'} %}
+                {% else %}
+                    {% include '@SyliusAdmin/Product/_mainImage.html.twig' with {'product': product, 'filter': 'sylius_admin_product_large_thumbnail'} %}
+                {% endif %}
+            </div>
+            <div class="middle aligned content">
+                <div><strong class="variant-name">{{ variant.name }}</strong></div>
+                <small class="gray text variant-code">{{ variant.code }}</small>
+            </div>
+        </div>
+    </div>
+</td>

@@ -1,0 +1,85 @@
+{
+    "@context": "\/api\/v2\/contexts\/Product",
+    "@id": "\/api\/v2\/admin\/products",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/products\/MUG",
+            "@type": "Product",
+            "productTaxons": [],
+            "mainTaxon": null,
+            "reviews": [],
+            "images": [],
+            "id": @integer@,
+            "code": "MUG",
+            "variants": [
+                "\/api\/v2\/admin\/product-variants\/MUG_BLUE",
+                "\/api\/v2\/admin\/product-variants\/MUG_RED"
+            ],
+            "options": [
+                "\/api\/v2\/admin\/product-options\/COLOR"
+            ],
+            "createdAt": @date@,
+            "updatedAt": @date@,
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
+                    "@type": "ProductTranslation",
+                    "id": @integer@,
+                    "name": "Mug",
+                    "slug": "mug"
+                }
+            }
+        }
+    ],
+    "hydra:totalItems": 1,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/products{?translations.name,order[code],order[createdAt],productTaxons.taxon.code,productTaxons.taxon.code[],order[translation.name],localeCode for order[translation.name]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "translations.name",
+                "property": "translations.name",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[code]",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[createdAt]",
+                "property": "createdAt",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "productTaxons.taxon.code",
+                "property": "productTaxons.taxon.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "productTaxons.taxon.code[]",
+                "property": "productTaxons.taxon.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[translation.name]",
+                "property": "translation",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "localeCode for order[translation.name]",
+                "property": "localeCode",
+                "required": false
+            }
+        ]
+    }
+}

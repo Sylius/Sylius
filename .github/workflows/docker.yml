@@ -1,0 +1,55 @@
+name: Docker Based Pipeline
+
+on:
+    push:
+
+jobs:
+    docker-compose:
+        name: Excute Tests on Docker Compose
+        runs-on: ubuntu-latest
+        env:
+            COMPOSE_FILE: docker-compose.test.yml
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v2
+
+            -   name: Run PHPUnit, PHPSpec and Behat tests
+                run: docker-compose run ci
+
+    docker:
+        name: Excute Tests on Docker Containers
+        runs-on: ubuntu-latest
+        steps:
+            -
+                name: Checkout
+                uses: actions/checkout@v2
+            -
+                name: Shutdown default MySQL
+                run: sudo service mysql stop
+            -
+                name: Setup MySQL
+                run: |
+                    docker network create sylius_network
+                    docker run \
+                        --platform linux/amd64 \
+                        -e MYSQL_ALLOW_EMPTY_PASSWORD=true \
+                        -p 3306:3306/tcp \
+                        --name mysql \
+                        --net sylius_network \
+                        -d mysql:5.7
+            -
+                name: Run PHPUnit, PHPSpec and Behat tests
+                run: |
+                    docker run \
+                        -v "$(pwd)"/:/app:delegated \
+                        -v "$(pwd)"/.docker/test/php.ini:/etc/php/8.0/fpm/php.ini:delegated \
+                        -v "$(pwd)"/.docker/test/php.ini:/etc/php/8.0/cli/php.ini:delegated \
+                        -e DATABASE_URL="mysql://root@mysql/sylius_test" \
+                        -e APP_ENV="test" \
+                        -e PHP_DATE_TIMEZONE="Europe/Warsaw" \
+                        --net sylius_network \
+                        --entrypoint="" \
+                        -p 80:80/tcp \
+                        -i sylius/standard:1.11-traditional \
+                        make ci

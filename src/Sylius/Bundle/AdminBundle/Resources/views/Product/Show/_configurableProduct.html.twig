@@ -22,4 +22,5 @@
     </div>
 </div>
 <div class="ui hidden divider"></div>
-{% include '@SyliusAdmin/Product/Show/_variants.html.twig' %}
+
+{{ sylius_template_event('sylius.admin.configurable_product.show', _context) }}

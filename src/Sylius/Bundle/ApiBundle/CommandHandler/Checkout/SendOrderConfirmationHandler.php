@@ -19,6 +19,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class SendOrderConfirmationHandler implements MessageHandlerInterface
@@ -33,10 +34,12 @@ final class SendOrderConfirmationHandler implements MessageHandlerInterface
     {
         /** @var OrderInterface $order */
         $order = $this->orderRepository->findOneByTokenValue($sendOrderConfirmation->orderToken());
+        $email = $order->getCustomer()->getEmail();
+        Assert::notNull($email);
 
         $this->emailSender->send(
             Emails::ORDER_CONFIRMATION,
-            [$order->getCustomer()->getEmail()],
+            [$email],
             [
                 'order' => $order,
                 'channel' => $order->getChannel(),

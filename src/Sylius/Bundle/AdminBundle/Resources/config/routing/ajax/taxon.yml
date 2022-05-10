@@ -49,7 +49,7 @@ sylius_admin_ajax_taxon_by_name_phrase:
             repository:
                 method: findByNamePart
                 arguments:
-                    phrase: $phrase
+                    phrase: expr:service('request_stack').getCurrentRequest().query.get('phrase', '')
                     locale: null
                     limit: 25
 
