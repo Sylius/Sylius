@@ -62,7 +62,7 @@ This way we can edit the existing endpoint and add custom normalization or chang
 
 .. warning::
 
-    By removing subresource operations, api platform creates its own endpoints to given subresoure without our firewall.
+    By removing subresource operations, api platform creates its own endpoints to given subresource without our firewall.
     To disable endpoint completely we need to overwrite xml configuration.
 
 To remove subresource from Sylius, create new xml file with copied resource class and remove its subresource operations, for example Country.
