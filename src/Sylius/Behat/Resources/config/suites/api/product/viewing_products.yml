@@ -11,6 +11,7 @@ default:
                 - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.locale
                 - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.product_association_type
                 - sylius.behat.context.transform.product_variant
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.taxon
@@ -20,6 +21,7 @@ default:
                 - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.product_association
                 - sylius.behat.context.setup.product_attribute
                 - sylius.behat.context.setup.product_review
                 - sylius.behat.context.setup.product_taxon
