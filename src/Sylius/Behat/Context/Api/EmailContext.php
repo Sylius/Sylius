@@ -147,6 +147,18 @@ final class EmailContext implements Context
         Assert::true($this->emailChecker->hasRecipient($recipient));
     }
 
+    /**
+     * @Then a welcoming email should have been sent to :recipient
+     * @Then a welcoming email should have been sent to :recipient in :localeCode locale
+     */
+    public function aWelcomingEmailShouldHaveBeenSentTo(string $recipient, string $localeCode = 'en_US'): void
+    {
+        $this->assertEmailContainsMessageTo(
+            $this->translator->trans('sylius.email.user_registration.welcome_to_our_store', [], null, $localeCode),
+            $recipient
+        );
+    }
+
     private function assertEmailContainsMessageTo(string $message, string $recipient): void
     {
         Assert::true($this->emailChecker->hasMessageTo($message, $recipient));
