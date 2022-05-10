@@ -509,7 +509,17 @@ final class CartContext implements Context
     {
         $pricing = $this->getExpectedPriceOfProductTimesQuantity($product);
 
-        $this->compareItemSubtotal($product->getName(), $pricing - $amount);
+        $this->compareItemPrice($product->getName(), $pricing - $amount);
+    }
+
+    /**
+     * @Then /^(its|theirs) subtotal price should be decreased by ("[^"]+")$/
+     */
+    public function itsSubtotalPriceShouldBeDecreasedBy(ProductInterface $product, int $amount): void
+    {
+        $pricing = $this->getExpectedPriceOfProductTimesQuantity($product);
+
+        $this->compareItemPrice($product->getName(), $pricing - $amount, 'subtotal');
     }
 
     /**
@@ -517,7 +527,7 @@ final class CartContext implements Context
      */
     public function productPriceShouldNotBeDecreased(ProductInterface $product): void
     {
-        $this->compareItemSubtotal($product->getName(), $this->getExpectedPriceOfProductTimesQuantity($product));
+        $this->compareItemPrice($product->getName(), $this->getExpectedPriceOfProductTimesQuantity($product));
     }
 
     /**
@@ -868,13 +878,13 @@ final class CartContext implements Context
         );
     }
 
-    private function compareItemSubtotal(string $productName, int $productPrice): void
+    private function compareItemPrice(string $productName, int $productPrice, string $priceType = 'total'): void
     {
         $items = $this->responseChecker->getValue($this->shopClient->show(Resources::ORDERS, $this->sharedStorage->get('cart_token')), 'items');
 
         foreach ($items as $item) {
             if ($item['productName'] === $productName) {
-                Assert::same($item['total'], $productPrice);
+                Assert::same($item[$priceType], $productPrice);
             }
 
             return;

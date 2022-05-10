@@ -228,6 +228,7 @@ final class CartContext implements Context
 
     /**
      * @Then /^(its|theirs) price should be decreased by ("[^"]+")$/
+     * @Then /^(its|theirs) subtotal price should be decreased by ("[^"]+")$/
      * @Then /^(product "[^"]+") price should be decreased by ("[^"]+")$/
      */
     public function itsPriceShouldBeDecreasedBy(ProductInterface $product, $amount)
