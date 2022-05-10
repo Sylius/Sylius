@@ -59,3 +59,28 @@ You can also overwrite existing endpoints, for example let's change admin_get op
                     groups: ['shop:channel:new_group']
 
 This way we can edit the existing endpoint and add custom normalization or change path.
+
+.. warning::
+
+    By removing subresource operations, api platform creates its own endpoints to given subresoure without our firewall.
+    To disable endpoint completely we need to overwrite xml configuration.
+
+To remove subresource from Sylius, create new xml file with copied resource class and remove its subresource operations, for example Country.
+
+.. code-block:: xml
+
+    <resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+    >
+        <resource class="%sylius.model.country.class%" shortName="Country">
+        ...
+        -    <subresourceOperations>
+        -        <subresourceOperation name="provinces_get_subresource">
+        -            <attribute name="method">GET</attribute>
+        -            <attribute name="path">/admin/countries/{code}/provinces</attribute>
+        -        </subresourceOperation>
+        -    </subresourceOperations>
+        ...
+        </resource>
+    </resources>
