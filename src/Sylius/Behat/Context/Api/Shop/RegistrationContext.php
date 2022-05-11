@@ -15,11 +15,12 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Symfony\Component\BrowserKit\AbstractBrowser;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
 
 final class RegistrationContext implements Context
@@ -27,11 +28,11 @@ final class RegistrationContext implements Context
     private array $content = [];
 
     public function __construct(
-        private AbstractBrowser $client,
         private ApiClientInterface $shopClient,
         private LoginContext $loginContext,
         private SharedStorageInterface $sharedStorage,
         private ResponseCheckerInterface $responseChecker,
+        private RequestFactoryInterface $requestFactory,
         private string $apiUrlPrefix
     ) {
     }
@@ -106,14 +107,11 @@ final class RegistrationContext implements Context
 
         $token = $customer->getUser()->getEmailVerificationToken();
 
-        $this->client->request(
-            'PATCH',
+        $request = $this->requestFactory->custom(
             \sprintf('%s/shop/account-verification-requests/%s', $this->apiUrlPrefix, $token),
-            [],
-            [],
-            ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/merge-patch+json'],
-            json_encode([], \JSON_THROW_ON_ERROR)
+            HttpRequest::METHOD_PATCH,
         );
+        $this->shopClient->executeCustomRequest($request);
     }
 
     /**
@@ -126,10 +124,15 @@ final class RegistrationContext implements Context
 
     /**
      * @When I register with email :email and password :password
+     * @When I register with email :email and password :password in the :localeCode locale
      */
-    public function iRegisterWithEmailAndPassword(string $email, string $password): void
+    public function iRegisterWithEmailAndPassword(string $email, string $password, string $localeCode = 'en_US'): void
     {
+        $this->sharedStorage->set('current_locale_code', $localeCode);
+
         $this->fillContent($email, $password);
+        $this->iSpecifyTheFirstNameAs('John');
+        $this->iSpecifyTheLastNameAs('Doe');
         $this->iRegisterThisAccount();
         $this->loginContext->iLogInAsWithPassword($email, $password);
     }
@@ -140,14 +143,11 @@ final class RegistrationContext implements Context
      */
     public function iRegisterThisAccount(): void
     {
-        $this->client->request(
-            'POST',
-            sprintf('%s/shop/customers', $this->apiUrlPrefix),
-            [],
-            [],
-            ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/ld+json'],
-            json_encode($this->content, \JSON_THROW_ON_ERROR)
-        );
+        $request = $this->requestFactory->create('shop', Resources::CUSTOMERS, '');
+        $request->setContent($this->content);
+
+        $this->shopClient->executeCustomRequest($request);
+
         $this->content = [];
     }
 
@@ -172,7 +172,7 @@ final class RegistrationContext implements Context
      */
     public function iShouldBeNotifiedThatNewAccountHasBeenSuccessfullyCreated(): void
     {
-        Assert::same($this->client->getResponse()->getStatusCode(), 204);
+        Assert::same($this->shopClient->getLastResponse()->getStatusCode(), 204);
     }
 
     /**
@@ -232,16 +232,9 @@ final class RegistrationContext implements Context
 
     /**
      * @Then I should not be logged in
-     */
-    public function iShouldNotBeLoggedIn(): void
-    {
-        // Intentionally left blank
-    }
-
-    /**
      * @Then I should be logged in
      */
-    public function iShouldBeLoggedIn(): void
+    public function iShouldNotBeLoggedIn(): void
     {
         // Intentionally left blank
     }
@@ -279,7 +272,7 @@ final class RegistrationContext implements Context
 
     private function getResponseContent(): array
     {
-        return json_decode($this->client->getResponse()->getContent(), true);
+        return json_decode($this->shopClient->getLastResponse()->getContent(), true);
     }
 
     private function convertElementsToCamelCase(array $fields): array
