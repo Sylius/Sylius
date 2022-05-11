@@ -29,6 +29,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
@@ -340,7 +341,6 @@ final class CheckoutContext implements Context
     /**
      * @Given I confirmed my order
      * @When I confirm my order
-     * @When I try to confirm my order
      * @When /^the (?:visitor|customer) confirm his order$/
      */
     public function iConfirmMyOrder(): void
@@ -356,6 +356,16 @@ final class CheckoutContext implements Context
             'order_number',
             $this->responseChecker->getValue($response, 'number')
         );
+    }
+
+    /**
+     * @When I try to confirm my order
+     */
+    public function iTryToConfirmMyOrder(): void
+    {
+        $response = $this->completeOrder();
+
+        $this->sharedStorage->set('response', $response);
     }
 
     /**
@@ -1139,6 +1149,13 @@ final class CheckoutContext implements Context
             $this->client->getLastResponse(),
             sprintf('The product variant with %s name does not have sufficient stock.', $variant->getName())
         ));
+    }
+
+    /**
+     * @Then /^I should be informed that (this promotion) is no longer applied$/
+     */
+    public function iShouldBeInformedThatMyPromotionIsNoLongerApplied(PromotionInterface $promotion)
+    {
     }
 
     /**

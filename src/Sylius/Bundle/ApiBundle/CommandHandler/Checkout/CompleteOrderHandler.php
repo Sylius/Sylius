@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Event\OrderCompleted;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
@@ -30,7 +32,8 @@ final class CompleteOrderHandler implements MessageHandlerInterface
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
         private FactoryInterface $stateMachineFactory,
-        private MessageBusInterface $eventBus
+        private MessageBusInterface $eventBus,
+        private OrderProcessorInterface $orderProcessor
     ) {
     }
 
@@ -46,6 +49,18 @@ final class CompleteOrderHandler implements MessageHandlerInterface
 
         if ($completeOrder->notes !== null) {
             $cart->setNotes($completeOrder->notes);
+        }
+
+        $previousPromotions = new ArrayCollection($cart->getPromotions()->toArray());
+
+        $this->orderProcessor->process($cart);
+
+        foreach ($previousPromotions as $previousPromotion) {
+            if (!$cart->getPromotions()->contains($previousPromotion)) {
+                throw new \RuntimeException(
+                    sprintf('You are no longer eligible for this promotion %s.', $previousPromotion->getName())
+                );
+            }
         }
 
         $stateMachine = $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH);
