@@ -129,29 +129,4 @@ final class ProductAttributeValueNormalizerSpec extends ObjectBehavior
             'value' => '2022-01-01',
         ]);
     }
-
-    function it_serializes_product_attribute_datetime_values(
-        NormalizerInterface $normalizer,
-        ProductAttributeValueInterface $productAttributeValue,
-        ProductAttributeInterface $productAttribute,
-        LocaleProviderInterface $localeProvider
-    ): void {
-        $normalizer
-            ->normalize($productAttributeValue, null, ['sylius_product_attribute_value_normalizer_already_called' => true])
-            ->willReturn([])
-        ;
-
-        $productAttributeValue->getType()->willReturn('datetime');
-        $productAttributeValue->getAttribute()->willReturn($productAttribute);
-
-        $productAttributeValue->getValue()->willReturn(new \DateTime('2022-01-01 14:16:53'));
-
-        $productAttributeValue->getLocaleCode()->willReturn('pl_PL');
-        $localeProvider->getDefaultLocaleCode()->willReturn('fr_FR');
-
-        $this->setNormalizer($normalizer);
-        $this->normalize($productAttributeValue, null, [])->shouldReturn([
-            'value' => '2022-01-01 14:16:53',
-        ]);
-    }
 }
