@@ -47,55 +47,22 @@ final class CheckoutContext implements Context
         'payment' => OrderCheckoutStates::STATE_PAYMENT_SELECTED,
     ];
 
-    private ApiClientInterface $client;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private RepositoryInterface $shippingMethodRepository;
-
-    private OrderRepositoryInterface $orderRepository;
-
-    private RepositoryInterface $paymentMethodRepository;
-
-    private ProductVariantResolverInterface $productVariantResolver;
-
-    private IriConverterInterface $iriConverter;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private RequestFactoryInterface $requestFactory;
-
     /** @var string[] */
     private array $content = [];
 
-    private string $paymentMethodClass;
-
-    private string $shippingMethodClass;
-
     public function __construct(
-        ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker,
-        RepositoryInterface $shippingMethodRepository,
-        OrderRepositoryInterface $orderRepository,
-        RepositoryInterface $paymentMethodRepository,
-        ProductVariantResolverInterface $productVariantResolver,
-        IriConverterInterface $iriConverter,
-        SharedStorageInterface $sharedStorage,
-        RequestFactoryInterface $requestFactory,
-        string $paymentMethodClass,
-        string $shippingMethodClass
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private RepositoryInterface $shippingMethodRepository,
+        private OrderRepositoryInterface $orderRepository,
+        private RepositoryInterface $paymentMethodRepository,
+        private ProductVariantResolverInterface $productVariantResolver,
+        private IriConverterInterface $iriConverter,
+        private SharedStorageInterface $sharedStorage,
+        private RequestFactoryInterface $requestFactory,
+        private string $paymentMethodClass,
+        private string $shippingMethodClass
     ) {
-        $this->client = $client;
-        $this->responseChecker = $responseChecker;
-        $this->shippingMethodRepository = $shippingMethodRepository;
-        $this->orderRepository = $orderRepository;
-        $this->paymentMethodRepository = $paymentMethodRepository;
-        $this->productVariantResolver = $productVariantResolver;
-        $this->iriConverter = $iriConverter;
-        $this->sharedStorage = $sharedStorage;
-        $this->requestFactory = $requestFactory;
-        $this->paymentMethodClass = $paymentMethodClass;
-        $this->shippingMethodClass = $shippingMethodClass;
     }
 
     /**
