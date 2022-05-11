@@ -29,7 +29,6 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
-use Webmozart\Assert\InvalidArgumentException;
 
 final class ProductContext implements Context
 {
@@ -169,99 +168,6 @@ final class ProductContext implements Context
     {
         $this->client->addFilter('translations.name', $name);
         $this->client->filter();
-    }
-
-    /**
-     * @Then I should (also) see the product attribute :attributeName with value :expectedAttribute
-     */
-    public function iShouldSeeTheProductAttributeWithValue(string $attributeName, string $expectedAttribute): void
-    {
-        $attribute = $this->getAttributeByName($attributeName);
-
-        Assert::same(
-            $attribute['value'],
-            $expectedAttribute
-        );
-    }
-
-    /**
-     * @Then /^I should(?:| also) see the product attribute "([^"]+)" with (positive|negative) value$/
-     */
-    public function iShouldSeeTheProductAttributeWithBoolean(string $attributeName, string $expectedAttribute): void
-    {
-        $attribute = $this->getAttributeByName($attributeName);
-
-        Assert::same(
-            $attribute['value'],
-            'positive' === $expectedAttribute
-        );
-    }
-
-    /**
-     * @Then /^I should(?:| also) see the product attribute "([^"]+)" with value ([^"]+)%$/
-     */
-    public function iShouldSeeTheProductAttributeWithPercentage(string $attributeName, int $expectedAttribute): void
-    {
-        $attribute = $this->getAttributeByName($attributeName);
-
-        Assert::same(
-            $attribute['value'],
-            $expectedAttribute / 100
-        );
-    }
-
-    /**
-     * @Then I should (also) see the product attribute :attributeName with value :expectedAttribute on the list
-     */
-    public function iShouldSeeTheProductAttributeWithValueOnTheList(string $attributeName, string $expectedAttribute): void
-    {
-        $attribute = $this->getAttributeByName($attributeName);
-
-        Assert::inArray(
-            $expectedAttribute,
-            $attribute['value']
-        );
-    }
-
-    /**
-     * @Then I should (also) see the product attribute :attributeName with date :expectedAttribute
-     */
-    public function iShouldSeeTheProductAttributeWithDate(string $attributeName, string $expectedAttribute): void
-    {
-        $attribute = $this->getAttributeByName($attributeName);
-
-        Assert::true(new \DateTime($attribute['value']) == new \DateTime($expectedAttribute));
-    }
-
-    /**
-     * @Then I should see :count attributes
-     */
-    public function iShouldSeeAttributes($count): void
-    {
-        Assert::same(
-            count($this->sharedStorage->get('product_attributes')),
-            (int) $count
-        );
-    }
-
-    /**
-     * @Then the first attribute should be :name
-     */
-    public function theFirstAttributeShouldBe($name): void
-    {
-        $attributes = $this->sharedStorage->get('product_attributes');
-
-        Assert::same(reset($attributes)['name'], $name);
-    }
-
-    /**
-     * @Then the last attribute should be :name
-     */
-    public function theLastAttributeShouldBe($name): void
-    {
-        $attributes = $this->sharedStorage->get('product_attributes');
-
-        Assert::same(end($attributes)['name'], $name);
     }
 
     /**
@@ -757,16 +663,5 @@ final class ProductContext implements Context
         $images = $this->responseChecker->getValue($this->client->getLastResponse(), 'images');
 
         return $images[0]['type'] === 'main' && $images[0]['path'];
-    }
-
-    private function getAttributeByName($name): array
-    {
-        foreach ($this->sharedStorage->get('product_attributes') as $attribute) {
-            if ($attribute['name'] === $name) {
-                return $attribute;
-            }
-        }
-
-        throw new InvalidArgumentException('Expected a value other than null.');
     }
 }

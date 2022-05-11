@@ -107,6 +107,10 @@
             <argument>%sylius.security.new_api_route%</argument>
         </service>
 
+        <service id="sylius.behat.context.api.shop.product_attribute" class="Sylius\Behat\Context\Api\Shop\ProductAttributeContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
+
         <service id="sylius.behat.context.api.shop.product_variant" class="Sylius\Behat\Context\Api\Shop\ProductVariantContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />

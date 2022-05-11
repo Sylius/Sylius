@@ -490,6 +490,10 @@
             <argument type="service" id="sylius.behat.channel_context_setter" />
         </service>
 
+        <service id="sylius.behat.context.ui.shop.product_attribute" class="Sylius\Behat\Context\Ui\Shop\ProductAttributeContext">
+            <argument type="service" id="sylius.behat.page.shop.product.show" />
+        </service>
+
         <service id="sylius.behat.context.ui.shop.browsing_product" class="Sylius\Behat\Context\Ui\Shop\BrowsingProductContext">
             <argument type="service" id="sylius.behat.page.shop.product.show" />
         </service>
