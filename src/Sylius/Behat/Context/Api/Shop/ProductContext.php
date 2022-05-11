@@ -50,16 +50,14 @@ final class ProductContext implements Context
      */
     public function iViewProduct(ProductInterface $product): void
     {
-        $productAttributesResponse = $this->client->subResourceIndex(Resources::PRODUCTS, 'attributes', $product->getCode());
+        $this->client->show(Resources::PRODUCTS, $product->getCode());
 
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $product->getVariants()->first();
 
         $this->sharedStorage->set('product', $product);
         $this->sharedStorage->set('product_variant', $productVariant);
-        $this->sharedStorage->set('product_attributes', $this->responseChecker->getCollection($productAttributesResponse));
-
-        $this->client->show(Resources::PRODUCTS, $product->getCode());
+        $this->sharedStorage->remove('product_attributes');
     }
 
     /**

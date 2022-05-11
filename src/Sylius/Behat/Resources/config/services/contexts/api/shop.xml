@@ -108,6 +108,8 @@
         </service>
 
         <service id="sylius.behat.context.api.shop.product_attribute" class="Sylius\Behat\Context\Api\Shop\ProductAttributeContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
