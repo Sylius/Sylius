@@ -55,7 +55,7 @@ Feature: Receiving a discount based on a configured promotion
         And my cart total should be "$510.00"
         And my discount should be "-$190.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving a discount on products from multiple taxons based on products from different taxons
         Given there is a promotion "Formal attire pack"
         And it gives "10%" off on every product classified as "Formal attire" or "Dresses" if order contains any product classified as "Trousers" or "Jackets"
