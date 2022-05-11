@@ -14,6 +14,7 @@ imports:
     - suites/api/cart/shopping_cart.yml
     - suites/api/channel/managing_channels.yml
     - suites/api/checkout/checkout.yml
+    - suites/api/contact/requesting_contact.yml
     - suites/api/checkout/paying_for_order.yml
     - suites/api/currency/currencies.yml
     - suites/api/currency/managing_currencies.yml

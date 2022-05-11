@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Webmozart\Assert\Assert;
 
 final class ContactContext implements Context
 {
@@ -24,7 +25,7 @@ final class ContactContext implements Context
 
     public function __construct(
         private RequestFactoryInterface $requestFactory,
-        private ApiClientInterface $apiClient,
+        private ApiClientInterface $apiClient
     ) {
     }
 
@@ -59,12 +60,22 @@ final class ContactContext implements Context
     {
         $request = $this->requestFactory->create(
             'shop',
-            Resources::CONTACT_REQUEST,
+            Resources::CONTACT_REQUESTS,
             'Bearer'
         );
 
         $request->setContent($this->content);
 
         $this->apiClient->request($request);
+    }
+
+    /**
+     * @Then I should be notified that the contact request has been submitted successfully
+     */
+    public function iShouldBeNotifiedThatTheContactRequestHasBeenSubmittedSuccessfully(): void
+    {
+        $response = $this->apiClient->getLastResponse();
+
+        Assert::same($response->getStatusCode(), 202);
     }
 }

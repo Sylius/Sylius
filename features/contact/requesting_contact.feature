@@ -18,7 +18,7 @@ Feature: Requesting contact
         Then I should be notified that the contact request has been submitted successfully
         And the email with contact request should be sent to "contact@goodshop.com"
 
-    @ui @email
+    @ui @api @email
     Scenario: Requesting contact as a guest
         When I want to request contact
         And I specify the email as "lucifer@morningstar.com"
