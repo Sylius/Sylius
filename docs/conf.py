@@ -24,6 +24,7 @@ release = ''
 exclude_patterns = ['_includes/*.rst']
 html_theme = 'sylius_rtd_theme'
 html_theme_path = ["_themes"]
+html_favicon = 'favicon.ico'
 htmlhelp_basename = 'Syliusdoc'
 man_pages = [
     ('index', 'sylius', u'Sylius Documentation',
