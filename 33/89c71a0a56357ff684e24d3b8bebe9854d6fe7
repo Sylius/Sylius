@@ -1,0 +1,107 @@
+---------------------------------------------------------------------------
+
+by Roshyo at 2022-01-24T15:08:35Z
+
+I agree with the changes, but still it is BC break imo, as we can not guarantee upgrade from 1.3 to 1.11 with this change. Can we ?
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2022-01-24T15:11:33Z
+
+@Roshyo Upgrade from 1.3 to 1.11 is already broken in my opinion. This old class uses deprecated bundles which at least are not compatible with Symfony 5.
+
+---------------------------------------------------------------------------
+
+by mbabker at 2022-01-24T20:16:12Z
+
+You might be able to blank out the `registerBundles()` method so anyone extending from the Sylius kernel isn't getting a fatally broken application, but flat out removing it has a lot more side effects than just requiring someone to change the class they're extending in their application (i.e. the Sylius version is referenced from this kernel in a handful of places within Sylius itself, or the plugin skeleton using the version info to load version-specific configs for the test application it provides).
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2022-01-24T20:39:34Z
+
+Hi @mbabker, yes you're right. Indeed the build currently fails due to what you say.
+
+What do you think if this class becomes final and we leave only the public constants in it? Making it final means that if someone is extending it he will get a fatal error but in my opinion this is a good thing: that class is not meant to be extended, it must be replaced with a real Kernel class in projects using it.
+
+And again I strongly believe that no one that will upgrade to Sylius 1.11 is still using this old kernel in his project.
+
+---------------------------------------------------------------------------
+
+by mbabker at 2022-01-25T15:33:02Z
+
+> What do you think if this class becomes final and we leave only the public constants in it?
+
+I wouldn't break B/C by adding the "final" keyword.  Blank the class (minus the public constants) since the core Symfony kernel functions well enough and the application kernel is expected to deal with the micro-kernel trait and its methods, find a new home for the version constants so those can be properly deprecated, and be done with it until a 2.0 release comes around.  Yes, the kernel as it exists now is catastrophically broken, but I don't think it's worth the hard B/C break to just dump it entirely when there are a few options available that can mitigate the break, make the class at least usable, and not cause a domino effect with more nuanced B/C breaks (i.e. the constants).
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-25T15:39:49Z
+
+I agree with @mbabker concerns and proposal.
+Removing the class right now will at least break a lot of plugins that are using those constants (inherited from the skeleton).
+I'm not sure why those constants were not moved when the class was deprecated and were actively used afterwards, but this a good opportunity to fix that.
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2022-01-25T15:47:40Z
+
+Yes guys I agree that the class shouldn't be removed.
+
+I do not agree about trying to make it work somehow. For me is much better to make it final and have an hard break instead creating something that might work and then having unexpected behavior maybe in production.
+
+---------------------------------------------------------------------------
+
+by mbabker at 2022-01-25T15:57:57Z
+
+Making it final and flat out removing it are both hard B/C breaks that are going to bite people still using this kernel in the backside whenever they try to upgrade.  The only real benefit to adding the final keyword over removal is you don't have to deal with the constants right away.
+
+Removing all of the methods from the class gets rid of the real problems for applications still inheriting from this kernel (namely the `registerBundles()` method existing and overriding the Flex-managed `config/bundles.php` file and the `registerContainerConfiguration()` method not supporting the `.yaml` file extension) and avoids breaking B/C for the sake of breaking B/C.  I don't think anyone is saying that this kernel class needs to be functional on its own like it could have been in the earlier versions, but making it so that it doesn't cause fatal errors just by extending it is much better than the current status quo.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-25T16:28:02Z
+
+Even though I doubt it would make a difference in DX when upgrading, let's go with the lesser evil and keep the class, remove the methods, copy and _alias_ the constants.
+As a new _home_ for the constants, I propose to use another infamous class: `Sylius\Bundle\CoreBundle\SyliusCoreBundle`.
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2022-01-25T21:45:39Z
+
+@mbabker @vvasiloi, what do you think now? I still have to move constants to `Sylius\Bundle\CoreBundle\SyliusCoreBundle`.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-25T22:42:39Z
+
+LGTM.
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2022-01-26T09:11:20Z
+
+@vvasiloi I moved the constants. What do you think?
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-26T09:20:52Z
+
+@mmenozzi looks good. I found one more place where that references the kernel constant
+https://github.com/Sylius/Sylius/blob/66ef7dd15bbe9fc11d3e5200d1809bb6846a603f/src/Sylius/Bundle/CoreBundle/Resources/config/app/config.yml#L111
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2022-02-04T21:18:36Z
+
+Hi @vvasiloi and @lchrusciel, sorry for the delay.
+I now removed the last usage of the Sylius\Bundle\CoreBundle\Application\Kernel::VERSION in [src/Sylius/Bundle/CoreBundle/Resources/config/app/config.yml](https://github.com/Sylius/Sylius/blob/66ef7dd15bbe9fc11d3e5200d1809bb6846a603f/src/Sylius/Bundle/CoreBundle/Resources/config/app/config.yml#L111).
+I also added the final keyword to the old Kernel class.
+
+This should be ready for merge now.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-05-11T17:49:23Z
+
+Thanks, Manuele! :tada:
