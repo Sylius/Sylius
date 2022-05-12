@@ -1,6 +1,7 @@
 services:
     app:
-        image: sylius/standard:1.11-traditional
+        build:
+            context: .docker
         environment:
             APP_ENV: "dev"
             DATABASE_URL: "mysql://root:mysql@mysql/sylius_%kernel.environment%?charset=utf8mb4"
@@ -43,6 +44,20 @@ services:
         ports:
             - 1025:1025 # SMTP
             - 8025:8025 # UI
+        networks:
+            - sylius
+
+    blackfire:
+        image: blackfire/blackfire:2
+        environment:
+            BLACKFIRE_LOG_LEVEL: 4
+            BLACKFIRE_SERVER_ID: ~
+            BLACKFIRE_SERVER_TOKEN: ~
+            BLACKFIRE_CLIENT_ID: ~
+            BLACKFIRE_CLIENT_TOKEN: ~
+            BLACKFIRE_DISABLE_LEGACY_PORT: true
+        ports:
+            - 8307:8307
         networks:
             - sylius
 

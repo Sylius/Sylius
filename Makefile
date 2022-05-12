@@ -26,3 +26,7 @@ spec:
 
 behat:
 	vendor/bin/behat --colors --strict --stop-on-failure --no-interaction -vvv -f progress
+
+# Example execution: make profile url=http://app
+profile:
+	docker compose exec blackfire blackfire curl -L $(url)
