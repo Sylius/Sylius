@@ -21,14 +21,9 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
 final class SendContactRequestHandlerSpec extends ObjectBehavior
 {
-    function let(
-         ContactEmailManagerInterface $contactEmailManager,
-         ChannelRepositoryInterface $channelRepository,
-    ): void {
-        $this->beConstructedWith(
-            $contactEmailManager,
-            $channelRepository
-        );
+    function let(ContactEmailManagerInterface $contactEmailManager, ChannelRepositoryInterface $channelRepository,): void
+    {
+        $this->beConstructedWith($contactEmailManager, $channelRepository);
     }
 
     function it_sends_contact_request(
@@ -54,9 +49,8 @@ final class SendContactRequestHandlerSpec extends ObjectBehavior
         $this($command);
     }
 
-    function it_throws_an_exception_if_channel_has_not_been_found(
-        ChannelRepositoryInterface $channelRepository,
-    ): void {
+    function it_throws_an_exception_if_channel_has_not_been_found(ChannelRepositoryInterface $channelRepository): void
+    {
         $command = new SendContactRequest('adam@sylius.com','message');
         $command->setChannelCode('CODE');
 

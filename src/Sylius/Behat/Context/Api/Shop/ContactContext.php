@@ -33,6 +33,8 @@ final class ContactContext implements Context
 
     /**
      * @When I want to request contact
+     * @When I do not specify the email
+     * @When I do not specify the message
      */
     public function iWantToRequestContact(): void
     {
@@ -53,15 +55,6 @@ final class ContactContext implements Context
     public function iSpecifyTheEmail($email): void
     {
         $this->content['email'] = $email;
-    }
-
-    /**
-     * @When I do not specify the email
-     * @When I do not specify the message
-     */
-    public function iDoNotSpecifyTheEmail(): void
-    {
-        // intentionally left empty
     }
 
     /**

@@ -25,9 +25,9 @@ final class Resources
 
     public const CHANNELS = 'channels';
 
-    public const COUNTRIES = 'countries';
-
     public const CONTACT_REQUESTS = 'contact-requests';
+
+    public const COUNTRIES = 'countries';
 
     public const CURRENCIES = 'currencies';
 
