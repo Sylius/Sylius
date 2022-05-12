@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use SM\Factory\FactoryInterface;
+use Sylius\Bundle\ApiBundle\Checker\OrderIntegrityCheckerInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Event\OrderCompleted;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -30,7 +31,8 @@ final class CompleteOrderHandler implements MessageHandlerInterface
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
         private FactoryInterface $stateMachineFactory,
-        private MessageBusInterface $eventBus
+        private MessageBusInterface $eventBus,
+        private OrderIntegrityCheckerInterface $orderIntegrityChecker
     ) {
     }
 
@@ -47,6 +49,8 @@ final class CompleteOrderHandler implements MessageHandlerInterface
         if ($completeOrder->notes !== null) {
             $cart->setNotes($completeOrder->notes);
         }
+
+        $this->orderIntegrityChecker->check($cart);
 
         $stateMachine = $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH);
 
