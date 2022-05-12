@@ -75,25 +75,6 @@ jobs:
                         ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
 
             -
-                name: Cache composer.lock
-                uses: actions/cache@v2
-                with:
-                    path: composer.lock
-                    key: ${{ steps.branch-name.outputs.base_ref_branch }}-${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-lock
-                    restore-keys: |
-                        ${{ steps.branch-name.outputs.base_ref_branch }}-${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-lock
-            -
-                name: Check existence of composer.lock
-                uses: andstor/file-existence-action@v1
-                id: check-old-composer-lock-existence
-                with:
-                    files: composer.lock
-            -
-                name: Move cached composer.lock (if exists)
-                run: mv composer.lock old-composer.lock
-                if: steps.check-old-composer-lock-existence.outputs.files_exists == 'true'
-
-            -
                 name: Install PHP dependencies
                 run: composer update --no-interaction --no-scripts
                 id: end-of-setup
@@ -102,29 +83,6 @@ jobs:
                 name: Validate composer.json
                 run: composer validate --strict --no-check-version
                 if: always() && steps.end-of-setup.outcome == 'success'
-
-            -   
-                name: Generate composer diff
-                uses: IonBazan/composer-diff-action@v1
-                if: steps.check-old-composer-lock-existence.outputs.files_exists == 'true'
-                id: composer_diff
-                with:
-                    base: old-composer.lock
-                    
-            -
-                name: Show diff in comment to PR
-                uses: marocchino/sticky-pull-request-comment@v2
-                if: ${{ steps.composer_diff.outputs.composer_diff_exit_code != 0 }}
-                with:
-                    recreate: true
-                    header: composer-diff # Creates a collapsed comment with the report
-                    message: |
-                        <details>
-                        <summary>Composer package changes</summary>
-                        
-                        ${{ steps.composer_diff.outputs.composer_diff }}
-                        
-                        </details>
 
             -
                 name: Check for security vulnerabilities

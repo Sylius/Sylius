@@ -1,0 +1,110 @@
+name: Diff composer packages on PRs
+
+on:
+    pull_request:
+        paths-ignore:
+            - "adr/**"
+            - "docs/**"
+            - "*.md"
+    workflow_dispatch: ~
+
+jobs:
+    static-checks:
+        runs-on: ubuntu-latest
+
+        name: "Generate diff of composer packages on PHP ${{ matrix.php }} and Symfony ${{ matrix.symfony }}"
+
+        timeout-minutes: 1
+
+        strategy:
+            fail-fast: false
+            matrix:
+                php: ["8.0", "8.1"]
+                symfony: ["^5.4"]
+
+        steps:
+            -
+                uses: actions/checkout@v2
+
+            -
+                name: Get branch name
+                uses: tj-actions/branch-names@v5.2
+                id: branch-name
+
+            -
+                name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: "${{ matrix.php }}"
+                    ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=0, opcache.memory_consumption=512, opcache.max_accelerated_files=65407, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
+                    extensions: intl, gd, opcache, mysql, pdo_mysql
+                    tools: symfony, composer-require-checker
+                    coverage: none
+
+            -
+                name: Restrict Symfony version
+                if: matrix.symfony != ''
+                run: |
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
+                    composer config extra.symfony.require "${{ matrix.symfony }}"
+
+            -
+                name: Get Composer cache directory
+                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                id: composer-cache
+
+            -
+                name: Cache Composer
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
+                    restore-keys: |
+                        ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
+
+            -
+                name: Cache composer.lock
+                uses: actions/cache@v2
+                with:
+                    path: composer.lock
+                    key: ${{ steps.branch-name.outputs.base_ref_branch }}-${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-lock
+                    restore-keys: |
+                        ${{ steps.branch-name.outputs.base_ref_branch }}-${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-lock
+            -
+                name: Check existence of composer.lock
+                uses: andstor/file-existence-action@v1
+                id: check-old-composer-lock-existence
+                with:
+                    files: composer.lock
+            -
+                name: Move cached composer.lock (if exists)
+                run: mv composer.lock old-composer.lock
+                if: steps.check-old-composer-lock-existence.outputs.files_exists == 'true'
+
+            -
+                name: Install PHP dependencies
+                run: composer update --no-interaction --no-scripts
+                id: end-of-setup
+
+            -   
+                name: Generate composer diff
+                uses: IonBazan/composer-diff-action@v1
+                if: steps.check-old-composer-lock-existence.outputs.files_exists == 'true'
+                id: composer_diff
+                with:
+                    base: old-composer.lock
+                    
+            -
+                name: Show diff in comment to PR
+                uses: marocchino/sticky-pull-request-comment@v2
+                if: ${{ steps.composer_diff.outputs.composer_diff_exit_code != 0 }}
+                with:
+                    recreate: true
+                    header: composer-diff # Creates a collapsed comment with the report
+                    message: |
+                        <details>
+                        <summary>Composer package changes</summary>
+                        
+                        ${{ steps.composer_diff.outputs.composer_diff }}
+                        
+                        </details>
