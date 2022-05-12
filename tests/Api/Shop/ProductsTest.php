@@ -38,7 +38,8 @@ final class ProductsTest extends JsonApiTestCase
 
         /** @var ProductInterface $product */
         $product = $fixtures['product_mug'];
-        $this->client->request('GET',
+        $this->client->request(
+            'GET',
             sprintf('/api/v2/shop/products/%s', $product->getCode()),
             [],
             [],
@@ -59,7 +60,8 @@ final class ProductsTest extends JsonApiTestCase
 
         /** @var ProductInterface $product */
         $product = $fixtures['product_mug'];
-        $this->client->request('GET',
+        $this->client->request(
+            'GET',
             sprintf('/api/v2/shop/products/%s', $product->getCode()),
             [],
             [],
@@ -78,7 +80,8 @@ final class ProductsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['product/product_variant_with_original_price.yaml']);
 
-        $this->client->request('GET',
+        $this->client->request(
+            'GET',
             '/api/v2/shop/products',
             [],
             [],
@@ -90,5 +93,40 @@ final class ProductsTest extends JsonApiTestCase
             'shop/product/get_products_collection_response',
             Response::HTTP_OK
         );
+    }
+
+    /** @test */
+    public function it_returns_product_attributes_collection_with_translations_in_locale_from_header(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'product/product_attribute.yaml']);
+
+        $this->client->request(
+            'GET',
+            sprintf('/api/v2/shop/products/%s/attributes', 'MUG_SW'),
+            [],
+            [],
+            array_merge(self::CONTENT_TYPE_HEADER, ['HTTP_ACCEPT_LANGUAGE' => 'pl_PL'])
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/product/get_product_attributes_collection_response'
+        );
+    }
+
+    /** @test */
+    public function it_returns_paginated_attributes_collection(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'product/product_attribute.yaml']);
+
+        $this->client->request(
+            'GET',
+            sprintf('/api/v2/shop/products/%s/attributes', 'MUG_SW'),
+            ['itemsPerPage' => 2],
+            [],
+            array_merge(self::CONTENT_TYPE_HEADER, ['HTTP_ACCEPT_LANGUAGE' => 'pl_PL'])
+        );
+
+        $this->assertCount(2, json_decode($this->client->getResponse()->getContent(), true)['hydra:member']);
     }
 }

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Product\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -22,4 +23,11 @@ interface ProductAttributeValueRepositoryInterface extends RepositoryInterface
      * @return array|ProductAttributeValueInterface[]
      */
     public function findByJsonChoiceKey(string $choiceKey): array;
+
+    public function createByProductCodeAndLocaleQueryBuilder(
+        string $productCode,
+        string $localeCode,
+        ?string $fallbackLocaleCode,
+        ?string $defaultLocaleCode,
+    ): QueryBuilder;
 }

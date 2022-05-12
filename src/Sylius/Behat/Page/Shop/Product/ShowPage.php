@@ -104,6 +104,13 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return trim($row->find('css', '[data-test-product-attribute-value]')->getText());
     }
 
+    public function getAttributeListByName(string $name): array
+    {
+        $attribute = $this->getAttributeByName($name);
+
+        return explode(', ', $attribute);
+    }
+
     public function getAttributes(): array
     {
         $attributesTable = $this->getElement('attributes');

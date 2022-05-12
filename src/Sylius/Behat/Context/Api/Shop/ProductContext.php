@@ -57,6 +57,7 @@ final class ProductContext implements Context
 
         $this->sharedStorage->set('product', $product);
         $this->sharedStorage->set('product_variant', $productVariant);
+        $this->sharedStorage->remove('product_attributes');
     }
 
     /**

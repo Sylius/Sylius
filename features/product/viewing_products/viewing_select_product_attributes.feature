@@ -10,18 +10,20 @@ Feature: Viewing product's select attributes
         And the store has a select product attribute "T-shirt material" with values "Banana skin" and "Cotton"
         And there is an administrator "sylius@example.com" identified by "sylius"
 
-    @ui
+    @ui @api
     Scenario: Viewing a detailed page with product's select attribute
         Given this product has select attribute "T-shirt material" with values "Banana skin" and "Cotton"
         When I check this product's details
-        Then I should see the product attribute "T-shirt material" with value "Banana skin, Cotton"
+        Then I should see the product attribute "T-shirt material" with value "Banana skin" on the list
+        And I should also see the product attribute "T-shirt material" with value "Cotton" on the list
 
     @ui
     Scenario: Viewing a detailed page with product's select attribute after changing a value
         Given this product has select attribute "T-shirt material" with values "Banana skin" and "Cotton"
         When the administrator changes this product attribute's value "Cotton" to "Orange skin"
         And I check this product's details
-        Then I should see the product attribute "T-shirt material" with value "Banana skin, Orange skin"
+        Then I should see the product attribute "T-shirt material" with value "Banana skin" on the list
+        And I should also see the product attribute "T-shirt material" with value "Orange skin" on the list
 
     @ui @javascript
     Scenario: Viewing a detailed page with product's select attribute after removing an only value

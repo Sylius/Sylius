@@ -15,10 +15,12 @@ default:
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.taxon
 
+                - sylius.behat.context.setup.admin_user
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.product_attribute
                 - sylius.behat.context.setup.product_review
                 - sylius.behat.context.setup.product_taxon
                 - sylius.behat.context.setup.shop_security
@@ -27,6 +29,7 @@ default:
 
                 - sylius.behat.context.api.shop.channel
                 - sylius.behat.context.api.shop.product
+                - sylius.behat.context.api.shop.product_attribute
                 - sylius.behat.context.api.shop.product_variant
 
             filters:
