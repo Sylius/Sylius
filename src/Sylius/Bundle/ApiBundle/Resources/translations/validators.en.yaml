@@ -6,6 +6,8 @@ sylius:
         without_country: 'The address without country cannot exist'
     country:
         not_exist: 'The country %countryCode% does not exist.'
+    contact_request:
+        email_is_invalid: 'The provided email is invalid.'
     order:
         not_empty: 'An empty order cannot be completed.'
     payment_method:

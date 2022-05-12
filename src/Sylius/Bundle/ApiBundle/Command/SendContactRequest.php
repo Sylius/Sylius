@@ -20,8 +20,8 @@ class SendContactRequest implements ChannelCodeAwareInterface, LocaleCodeAwareIn
     public ?string $channelCode = null;
 
     public function __construct(
-        private string $email,
-        private string $message,
+        private ?string $email = null,
+        private ?string $message = null,
     ) {
     }
 

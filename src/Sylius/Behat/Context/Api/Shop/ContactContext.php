@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
+use Sylius\Behat\Client\ResponseChecker;
 use Sylius\Behat\Context\Api\Resources;
 use Webmozart\Assert\Assert;
 
@@ -25,7 +26,8 @@ final class ContactContext implements Context
 
     public function __construct(
         private RequestFactoryInterface $requestFactory,
-        private ApiClientInterface $apiClient
+        private ApiClientInterface $apiClient,
+        private ResponseChecker $responseChecker,
     ) {
     }
 
@@ -40,7 +42,7 @@ final class ContactContext implements Context
     /**
      * @When I specify the message as :message
      */
-    public function iSpecifyTheMessage($message): void
+    public function iSpecifyTheMessage(string $message): void
     {
         $this->content['message'] = $message;
     }
@@ -54,7 +56,16 @@ final class ContactContext implements Context
     }
 
     /**
-     * @When I send it
+     * @When I do not specify the email
+     * @When I do not specify the message
+     */
+    public function iDoNotSpecifyTheEmail(): void
+    {
+        // intentionally left empty
+    }
+
+    /**
+     * @When I( try to) send it
      */
     public function iSendIt(): void
     {
@@ -77,5 +88,31 @@ final class ContactContext implements Context
         $response = $this->apiClient->getLastResponse();
 
         Assert::same($response->getStatusCode(), 202);
+    }
+
+    /**
+     * @Then I should be notified that the email is invalid
+     */
+    public function iShouldBeNotifiedThatEmailIsInvalid(): void
+    {
+        $response = $this->apiClient->getLastResponse();
+
+        Assert::same(
+            $this->responseChecker->getError($response),
+            'email: The provided email is invalid.'
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that the (email|message) is required$/
+     */
+    public function iShouldBeNotifiedThatElementIsRequired(string $element): void
+    {
+        $response = $this->apiClient->getLastResponse();
+
+        Assert::same(
+            $this->responseChecker->getError($response),
+            sprintf('%s: This value should not be blank.', $element)
+        );
     }
 }
