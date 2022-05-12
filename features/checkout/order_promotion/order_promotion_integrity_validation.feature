@@ -17,8 +17,8 @@ Feature: Order promotions integrity
         Given this promotion gives "$10.00" discount to every order
         And this promotion expires tomorrow
         And I added product "PHP T-Shirt" to the cart
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceeded with "Free" shipping method and "Offline" payment
+        And I have specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I proceeded with "Free" shipping method and "Offline" payment method
         And this promotion has already expired
         When I try to confirm my order
         Then I should be informed that this promotion is no longer applied
@@ -30,8 +30,8 @@ Feature: Order promotions integrity
         And there is a promotion "New Year" with priority 2
         And the promotion gives "$10.00" discount to every order with items total at least "$100.00"
         And I added product "PHP T-Shirt" to the cart
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceeded with "Free" shipping method and "Offline" payment
+        And I have specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I proceeded with "Free" shipping method and "Offline" payment method
         When I confirm my order
         Then I should see the thank you page
 
@@ -46,8 +46,8 @@ Feature: Order promotions integrity
     Scenario: Successfully placing an order with percentage discount when buying items for the required total value
         Given the promotion gives "50%" discount to every order with items total at least "$80.00"
         And I added product "PHP T-Shirt" to the cart
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceeded with "Free" shipping method and "Offline" payment
+        And I have specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I proceeded with "Free" shipping method and "Offline" payment method
         When I confirm my order
         Then I should see the thank you page
 
@@ -57,7 +57,7 @@ Feature: Order promotions integrity
         And this product belongs to "Clothes" tax category
         And this promotion gives "50%" discount to every order
         And I added product "PHP T-Shirt" to the cart
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceeded with "Free" shipping method and "Offline" payment
+        And I have specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I proceeded with "Free" shipping method and "Offline" payment method
         When I confirm my order
         Then I should see the thank you page

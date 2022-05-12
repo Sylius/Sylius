@@ -1010,7 +1010,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldNotSeeTheThankYouPage(): void
     {
-        Assert::same($this->client->getLastResponse()->getStatusCode(), 422);
+        Assert::false($this->client->getLastResponse()->getStatusCode() === 200);
     }
 
     /**
@@ -1156,6 +1156,10 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeInformedThatMyPromotionIsNoLongerApplied(PromotionInterface $promotion)
     {
+        Assert::contains(
+            $this->client->getLastResponse()->getContent(),
+            sprintf('Order is no longer eligible for this promotion %s.', $promotion->getName())
+        );
     }
 
     /**

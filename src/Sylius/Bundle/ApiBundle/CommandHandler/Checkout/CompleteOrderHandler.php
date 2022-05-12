@@ -58,7 +58,7 @@ final class CompleteOrderHandler implements MessageHandlerInterface
         foreach ($previousPromotions as $previousPromotion) {
             if (!$cart->getPromotions()->contains($previousPromotion)) {
                 throw new \RuntimeException(
-                    sprintf('You are no longer eligible for this promotion %s.', $previousPromotion->getName())
+                    sprintf('Order is no longer eligible for this promotion %s.', $previousPromotion->getName())
                 );
             }
         }
