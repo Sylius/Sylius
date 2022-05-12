@@ -103,7 +103,7 @@ header a.item:hover {
     bottom: 0;
     left: -100%;
     width: 300%;
-    height: 200px;
+    height: 600px;
     z-index: -1;
     background: #22b99a;
 }
@@ -714,8 +714,8 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
 
 [data-route="sylius_shop_homepage"] .homepage > .ui.huge.header,
 .ui.horizontal.section.divider.header {
-    margin-top: 80px;
-    margin-bottom: 60px;
+    margin-top: 60px;
+    margin-bottom: 40px;
 }
 
 [data-route="sylius_shop_homepage"] .ui.huge.header::after,
@@ -973,13 +973,6 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
 [data-route^="sylius_shop_checkout_"] .grid > .column:first-child .segment .header  {
     border: 0;
     font-size: 24px;
-}
-
-[data-route^="sylius_shop_checkout_"] .grid > .column:first-child .segment .header::after  {
-    content: "›";
-    display: inline-block;
-    padding: 0 0 0 15px;
-    color: #22b99a;
 }
 
 [data-route^="sylius_shop_checkout_"] .ui.container > .segment:first-child .menu {
