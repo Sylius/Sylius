@@ -454,14 +454,12 @@ jobs:
             matrix:
                 php: ["8.0", "8.1"]
                 symfony: ["^5.4"]
-                node: ["14.x", "16.x"]
                 mysql: ["5.7", "8.0"]
                 twig: ["3.x"]
                 include:
                     -
                         php: "8.0"
                         symfony: "^5.4"
-                        node: "14.x"
                         twig: "2.x"
                         mysql: "5.7"
 
@@ -589,7 +587,7 @@ jobs:
     test-application-with-frontend:
         runs-on: ubuntu-latest
 
-        name: "Test JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }})"
+        name: "Test JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Node ${{ matrix.node }})"
 
         timeout-minutes: 25
 
@@ -665,7 +663,7 @@ jobs:
 
             -
                 name: Setup Node
-                uses: actions/setup-node@v1
+                uses: actions/setup-node@v2
                 with:
                     node-version: "${{ matrix.node }}"
 
