@@ -21,7 +21,9 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -109,17 +111,19 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given I proceeded with :shippingMethodName shipping method and :paymentMethodName payment method
+     * @Given I proceeded with :shippingMethod shipping method and :paymentMethod payment method
      */
-    public function iHaveProceededWithSelectingPaymentMethod(): void
-    {
+    public function iHaveProceededWithSelectingPaymentMethod(
+        ShippingMethodInterface $shippingMethod,
+        PaymentMethodInterface $paymentMethod
+    ): void {
         $cartToken = $this->sharedStorage->get('cart_token');
 
         /** @var OrderInterface|null $cart */
         $cart = $this->orderRepository->findCartByTokenValue($cartToken);
         Assert::notNull($cart);
 
-        $this->completeCheckout($cart);
+        $this->completeCheckout($cart, $shippingMethod, $paymentMethod);
     }
 
     private function getDefaultAddress(): AddressInterface
@@ -137,9 +141,14 @@ final class CheckoutContext implements Context
         return $address;
     }
 
-    private function completeCheckout(OrderInterface $order): void
-    {
-        $command = new ChooseShippingMethod($this->shippingMethodRepository->findOneBy([])->getCode());
+    private function completeCheckout(
+        OrderInterface $order,
+        ShippingMethodInterface $shippingMethod = null,
+        PaymentMethodInterface $paymentMethod = null
+    ): void {
+        $shippingMethod = $shippingMethod ?: $this->shippingMethodRepository->findOneBy([]);
+
+        $command = new ChooseShippingMethod($shippingMethod->getCode());
         $command->setOrderTokenValue($order->getTokenValue());
 
         /** @var ShipmentInterface $shipment */
@@ -148,7 +157,9 @@ final class CheckoutContext implements Context
         $command->setSubresourceId((string) $shipment->getId());
         $this->commandBus->dispatch($command);
 
-        $command = new ChoosePaymentMethod($this->paymentMethodRepository->findOneBy([])->getCode());
+        $paymentMethod = $paymentMethod ?: $this->paymentMethodRepository->findOneBy([]);
+
+        $command = new ChoosePaymentMethod($paymentMethod->getCode());
         $command->setOrderTokenValue($order->getTokenValue());
 
         /** @var PaymentInterface $payment */

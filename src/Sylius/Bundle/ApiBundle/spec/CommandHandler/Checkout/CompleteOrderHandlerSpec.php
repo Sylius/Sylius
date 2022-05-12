@@ -13,19 +13,16 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
+use Sylius\Bundle\ApiBundle\Checker\OrderIntegrityCheckerInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Event\OrderCompleted;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
@@ -36,9 +33,9 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $stateMachineFactory,
         MessageBusInterface $eventBus,
-        OrderProcessorInterface $orderProcessor
+        OrderIntegrityCheckerInterface $orderIntegrityChecker
     ): void {
-        $this->beConstructedWith($orderRepository, $stateMachineFactory, $eventBus, $orderProcessor);
+        $this->beConstructedWith($orderRepository, $stateMachineFactory, $eventBus, $orderIntegrityChecker);
     }
 
     function it_handles_order_completion_without_notes(
@@ -48,7 +45,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         MessageBusInterface $eventBus,
         CustomerInterface $customer,
-        OrderProcessorInterface $orderProcessor
+        OrderIntegrityCheckerInterface $orderIntegrityChecker
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -59,9 +56,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
         $order->setNotes(null)->shouldNotBeCalled();
 
-        $order->getPromotions()->willReturn(new ArrayCollection());
-
-        $orderProcessor->process($order)->shouldBeCalled();
+        $orderIntegrityChecker->check($order)->shouldBeCalled();
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('complete')->willReturn(true);
@@ -87,7 +82,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         MessageBusInterface $eventBus,
         CustomerInterface $customer,
-        OrderProcessorInterface $orderProcessor
+        OrderIntegrityCheckerInterface $orderIntegrityChecker
     ): void {
         $completeOrder = new CompleteOrder('ThankYou');
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -98,9 +93,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
         $order->setNotes('ThankYou')->shouldBeCalled();
 
-        $order->getPromotions()->willReturn(new ArrayCollection());
-
-        $orderProcessor->process($order)->shouldBeCalled();
+        $orderIntegrityChecker->check($order)->shouldBeCalled();
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('complete')->willReturn(true);
@@ -139,7 +132,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         OrderInterface $order,
         FactoryInterface $stateMachineFactory,
         CustomerInterface $customer,
-        OrderProcessorInterface $orderProcessor
+        OrderIntegrityCheckerInterface $orderIntegrityChecker
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -148,9 +141,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
         $order->getCustomer()->willReturn($customer);
 
-        $order->getPromotions()->willReturn(new ArrayCollection());
-
-        $orderProcessor->process($order)->shouldBeCalled();
+        $orderIntegrityChecker->check($order)->shouldBeCalled();
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can(OrderCheckoutTransitions::TRANSITION_COMPLETE)->willReturn(false);
@@ -174,36 +165,6 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [$completeOrder])
-        ;
-    }
-
-    function it_throws_an_exception_if_promotion_already_expired(
-        OrderRepositoryInterface $orderRepository,
-        OrderInterface $order,
-        CustomerInterface $customer,
-        OrderProcessorInterface $orderProcessor,
-        PromotionInterface $oldPromotion,
-        PromotionInterface $newPromotion
-    ): void {
-        $completeOrder = new CompleteOrder();
-        $completeOrder->setOrderTokenValue('ORDERTOKEN');
-
-        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
-
-        $order->getCustomer()->willReturn($customer);
-
-        $order->setNotes(null)->shouldNotBeCalled();
-
-        $order->getPromotions()->willReturn(
-            new ArrayCollection([$oldPromotion->getWrappedObject()]),
-            new ArrayCollection([$newPromotion->getWrappedObject()])
-        );
-
-        $orderProcessor->process($order)->shouldBeCalled();
-
-        $this
-            ->shouldThrow(\RuntimeException::class)
             ->during('__invoke', [$completeOrder])
         ;
     }
