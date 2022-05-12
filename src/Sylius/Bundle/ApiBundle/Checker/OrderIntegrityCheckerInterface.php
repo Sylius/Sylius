@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Checker;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
+/** @experimental */
 interface OrderIntegrityCheckerInterface
 {
     public function check(OrderInterface $order): void;

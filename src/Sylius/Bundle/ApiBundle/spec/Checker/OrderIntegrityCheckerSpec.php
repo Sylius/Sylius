@@ -21,11 +21,12 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 final class OrderIntegrityCheckerSpec extends ObjectBehavior
 {
-    function let(OrderProcessorInterface $orderProcessor) {
+    function let(OrderProcessorInterface $orderProcessor): void
+    {
         $this->beConstructedWith($orderProcessor);
     }
 
-    function it_passes_check_when_promotion_are_still_valid(
+    function it_passes_check_when_promotion_is_still_valid(
         OrderInterface $order,
         PromotionInterface $promotion,
         OrderProcessorInterface $orderProcessor

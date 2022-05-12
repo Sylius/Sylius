@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
+/** @experimental */
 final class OrderIntegrityChecker implements OrderIntegrityCheckerInterface
 {
     public function __construct(private OrderProcessorInterface $orderProcessor)
