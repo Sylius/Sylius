@@ -51,6 +51,7 @@ final class BlameCartHandler implements MessageHandlerInterface
         }
 
         $cart->setCustomer($user->getCustomer());
+        $cart->setCreatedByGuest(false);
 
         $this->orderProcessor->process($cart);
     }

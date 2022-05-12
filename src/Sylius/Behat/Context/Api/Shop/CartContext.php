@@ -286,7 +286,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^I don't have access to see the summary of my (previous cart)$/
+     * @Then /^I should not have access to the summary of my (previous cart)$/
      */
     public function iDoNotHaveAccessToSeeTheSummaryOfMyCart(string $tokenValue): void
     {

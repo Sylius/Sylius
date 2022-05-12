@@ -58,6 +58,7 @@ final class BlameCartHandlerSpec extends ObjectBehavior
         $user->getCustomer()->willReturn($customer);
 
         $cart->setCustomer($customer)->shouldBeCalled();
+        $cart->setCreatedByGuest(false)->shouldBeCalled();
 
         $orderProcessor->process($cart)->shouldBeCalled();
 
