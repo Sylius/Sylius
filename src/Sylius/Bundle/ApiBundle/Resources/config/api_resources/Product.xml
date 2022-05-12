@@ -160,6 +160,7 @@
         <property name="slug" readable="true" />
         <property name="shortDescription" readable="true" />
         <property name="name" readable="true" />
+        <property name="associations" readable="true" />
         <property name="attributes" readable="true" writable="true">
             <subresource resourceClass="%sylius.model.product_attribute_value.class%" collection="true" />
         </property>

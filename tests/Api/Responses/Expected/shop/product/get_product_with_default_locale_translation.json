@@ -22,5 +22,8 @@
   "shortDescription": "Short mug description",
   "slug": "mug",
   "name": "Mug",
+  "associations": [
+    "\/api\/v2\/shop\/product-associations\/@integer@"
+  ],
   "defaultVariant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE"
 }

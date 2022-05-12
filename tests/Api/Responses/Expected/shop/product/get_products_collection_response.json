@@ -26,6 +26,7 @@
             "name": "Mug",
             "description": @string@,
             "slug": "mug",
+            "associations": [],
             "defaultVariant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE"
         }
     ],

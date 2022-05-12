@@ -549,6 +549,20 @@ final class ProductContext implements Context
         Assert::false($this->productHasProductVariantWithName($variants, $productVariantName));
     }
 
+    /**
+     * @Then /^I should(?:| also) see the product association "([^"]+)" with (products "[^"]+" and "[^"]+")$/
+     */
+    public function iShouldSeeTheProductAssociationWithProductsAnd(string $productAssociationName, array $products): void
+    {
+        /** @var ProductInterface $product */
+        $product = $this->sharedStorage->get('product');
+
+        $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
+        $associations = $this->responseChecker->getValue($response, 'associations');
+
+        Assert::true($this->hasAssociationsWithProducts($associations, $productAssociationName, $products));
+    }
+
     private function hasProductWithPrice(
         array $products,
         int $price,
@@ -661,5 +675,49 @@ final class ProductContext implements Context
         $images = $this->responseChecker->getValue($this->client->getLastResponse(), 'images');
 
         return $images[0]['type'] === 'main' && $images[0]['path'];
+    }
+
+    private function hasAssociationsWithProducts(
+        array $associationsIris,
+        string $productAssociationTypeName,
+        array $products
+    ): bool {
+        try {
+            $associatedProducts = $this->provideAssociatedProductsOfAssociationTypeName($associationsIris, $productAssociationTypeName);
+        } catch (\InvalidArgumentException) {
+            return false;
+        }
+
+        foreach ($products as $product) {
+            if (!$this->isProductAssociated($product, $associatedProducts)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function provideAssociatedProductsOfAssociationTypeName(
+        array $associationsIris,
+        string $productAssociationTypeName
+    ): array {
+        foreach ($associationsIris as $associationIri) {
+            $associationResponse = $this->client->showByIri($associationIri);
+            $associationTypeIri = $this->responseChecker->getValue($associationResponse, 'type');
+            $associationTypeResponse = $this->client->showByIri($associationTypeIri);
+
+            if ($this->responseChecker->hasValue($associationTypeResponse, 'name', $productAssociationTypeName)) {
+                return $this->responseChecker->getValue($associationResponse, 'associatedProducts');
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf('There is no product association with name %s.', $productAssociationTypeName));
+    }
+
+    private function isProductAssociated(ProductInterface $product, array $associatedProducts): bool
+    {
+        $productIri = $this->iriConverter->getIriFromItem($product);
+
+        return in_array($productIri, $associatedProducts, true);
     }
 }

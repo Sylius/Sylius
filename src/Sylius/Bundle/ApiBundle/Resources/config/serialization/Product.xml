@@ -85,5 +85,8 @@
         <attribute name="averageRating">
             <group>shop:product:read</group>
         </attribute>
+        <attribute name="associations">
+            <group>shop:product:read</group>
+        </attribute>
     </class>
 </serializer>
