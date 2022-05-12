@@ -3,8 +3,9 @@ services:
         image: sylius/standard:1.11-traditional
         entrypoint: ["make", "ci"]
         environment:
-            APP_ENV: "test"
-            DATABASE_URL: "mysql://root:mysql@mysql/sylius_test"
+            APP_ENV: "test_cached"
+            APP_DEBUG: 0
+            DATABASE_URL: "mysql://root:mysql@mysql/sylius_%kernel.environment%?charset=utf8mb4"
             PHP_DATE_TIMEZONE: "Europe/Warsaw"
             MESSENGER_TRANSPORT_DSN: "sync://"
         volumes:
@@ -22,7 +23,7 @@ services:
         image: mysql:5.7
         platform: linux/amd64
         environment:
-            - MYSQL_ROOT_PASSWORD=mysql
+            MYSQL_ROOT_PASSWORD: mysql
         ports:
             - 3306:3306
         networks:
