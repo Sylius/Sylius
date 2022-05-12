@@ -1,0 +1,26 @@
+{
+  "@context": "\/api\/v2\/contexts\/Product",
+  "@id": "\/api\/v2\/shop\/products\/MUG",
+  "@type": "Product",
+  "productTaxons": [],
+  "mainTaxon": null,
+  "reviews": [],
+  "averageRating": @integer@,
+  "images": [],
+  "id": @integer@,
+  "code": "MUG",
+  "variants": [
+    "\/api\/v2\/shop\/product-variants\/MUG_RED"
+  ],
+  "options": [
+    "\/api\/v2\/shop\/product-options\/COLOR"
+  ],
+  "createdAt": @date@,
+  "updatedAt": @date@,
+  "shortDescription": null,
+  "name": "Mug",
+  "description": @string@,
+  "slug": "mug",
+  "associations": [],
+  "defaultVariant": "\/api\/v2\/shop\/product-variants\/MUG_RED"
+}
