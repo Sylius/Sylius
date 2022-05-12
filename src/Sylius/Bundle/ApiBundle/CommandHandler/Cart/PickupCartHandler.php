@@ -71,9 +71,11 @@ final class PickupCartHandler implements MessageHandlerInterface
         $cart->setLocaleCode($this->getLocaleCode($pickupCart->localeCode, $channel));
         $cart->setCurrencyCode($currency->getCode());
         $cart->setTokenValue($pickupCart->tokenValue ?? $this->generator->generateUriSafeString(10));
+
         if ($customer !== null) {
             $cart->setCustomer($customer);
             $cart->setBillingAddress($this->getDefaultAddress($customer));
+            $cart->setCreatedByGuest(false);
         }
 
         $this->orderManager->persist($cart);

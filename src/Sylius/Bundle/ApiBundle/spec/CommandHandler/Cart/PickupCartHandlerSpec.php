@@ -91,6 +91,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $cartFactory->createNew()->willReturn($cart);
         $cart->setCustomer($customer)->shouldBeCalled();
+        $cart->setCreatedByGuest(false)->shouldBeCalled();
         $cart->setBillingAddress($address)->shouldBeCalled();
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('USD')->shouldBeCalled();
@@ -136,6 +137,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $cartFactory->createNew()->willReturn($cart);
         $cart->setCustomer($customer)->shouldBeCalled();
+        $cart->setCreatedByGuest(false)->shouldBeCalled();
         $cart->setBillingAddress(null)->shouldBeCalled();
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('USD')->shouldBeCalled();
