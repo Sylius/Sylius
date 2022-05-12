@@ -40,6 +40,36 @@ body.pushable .pusher {
     background: #0000001A !important;
 }
 
+.top-bar {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .top-bar {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.top-bar > div {
+    margin: 0 !important;
+}
+
+.top-bar > .item {
+    padding: 10px 20px;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.top-bar > .item:hover {
+    background: #0000001A;
+}
+
+.top-bar .dropdown .menu {
+    background: #fff !important;
+}
+
 header a.item:hover {
     color: inherit !important;
 }
