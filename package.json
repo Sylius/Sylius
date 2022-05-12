@@ -44,6 +44,10 @@
     "upath": "^1.1.0",
     "yargs": "^6.4.0"
   },
+  "engines": {
+    "node": "^14 || ^16"
+  },
+  "engineStrict": true,
   "scripts": {
     "build": "gulp build",
     "gulp": "gulp build",
