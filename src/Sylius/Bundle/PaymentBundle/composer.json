@@ -29,7 +29,7 @@
         "php": "^8.0",
         "sylius/payment": "^1.6",
         "sylius/resource-bundle": "^1.7",
-        "symfony/framework-bundle": "^5.4"
+        "symfony/framework-bundle": "^5.4 || ^6.0"
     },
     "conflict": {
         "twig/twig": "^3.0"
@@ -41,8 +41,8 @@
         "phpunit/phpunit": "^8.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "sylius/locale-bundle": "^1.6",
-        "symfony/browser-kit": "^5.4",
-        "symfony/dependency-injection": "^5.4"
+        "symfony/browser-kit": "^5.4 || ^6.0",
+        "symfony/dependency-injection": "^5.4 || ^6.0"
     },
     "config": {
         "allow-plugins": {
