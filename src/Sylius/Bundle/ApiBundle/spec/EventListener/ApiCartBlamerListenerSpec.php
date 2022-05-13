@@ -75,7 +75,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
     ): void {
         $sectionResolver->getSection()->willReturn($shopApiOrdersSubSectionSection);
         $cartContext->getCart()->willReturn($cart);
-        $cart->getCreatedByGuest()->willReturn(true);
+        $cart->isCreatedByGuest()->willReturn(true);
         $token->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
 
@@ -104,7 +104,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
     ): void {
         $sectionResolver->getSection()->willReturn($shopApiOrdersSubSectionSection);
         $cartContext->getCart()->willReturn($cart);
-        $cart->getCreatedByGuest()->willReturn(false);
+        $cart->isCreatedByGuest()->willReturn(false);
 
         $cart->setCustomer(Argument::any())->shouldNotBeCalled();
 

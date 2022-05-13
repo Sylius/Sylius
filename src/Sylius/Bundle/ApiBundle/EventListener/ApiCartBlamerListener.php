@@ -45,7 +45,7 @@ final class ApiCartBlamerListener
         }
 
         $cart = $this->getCart();
-        if (null === $cart || !$cart->getCreatedByGuest()) {
+        if (null === $cart || !$cart->isCreatedByGuest()) {
             return;
         }
 
