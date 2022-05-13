@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Checker;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Bundle\ApiBundle\Exception\OrderNoLongerEligibleForPromotion;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
@@ -32,9 +33,7 @@ final class OrderIntegrityChecker implements OrderIntegrityCheckerInterface
 
         foreach ($previousPromotions as $previousPromotion) {
             if (!$order->getPromotions()->contains($previousPromotion)) {
-                throw new \RuntimeException(
-                    sprintf('Order is no longer eligible for this promotion %s.', $previousPromotion->getName())
-                );
+                throw new OrderNoLongerEligibleForPromotion($previousPromotion->getName());
             }
         }
     }
