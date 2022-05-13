@@ -93,7 +93,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->initialize($context);
 
         $context->getPropertyPath()->willReturn('');
-        $context->getViolations()->willReturn(new \ArrayIterator([
+        $context->getViolations()->willReturn(new ConstraintViolationList([
             $this->createViolation('property_path'),
         ]));
 
@@ -118,7 +118,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->initialize($context);
 
         $context->getPropertyPath()->willReturn('property_path');
-        $context->getViolations()->willReturn(new \ArrayIterator([
+        $context->getViolations()->willReturn(new ConstraintViolationList([
             $this->createViolation('other_property_path'),
         ]));
 
@@ -150,7 +150,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->initialize($context);
 
         $context->getPropertyPath()->willReturn('property_path');
-        $context->getViolations()->willReturn(new \ArrayIterator([
+        $context->getViolations()->willReturn(new ConstraintViolationList([
             $this->createViolation('other_property_path'),
         ]));
 
@@ -179,7 +179,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->initialize($context);
 
         $context->getPropertyPath()->willReturn('property_path');
-        $context->getViolations()->willReturn(new \ArrayIterator([
+        $context->getViolations()->willReturn(new ConstraintViolationList([
             $this->createViolation('other_property_path'),
         ]));
 
@@ -211,7 +211,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->initialize($context);
 
         $context->getPropertyPath()->willReturn('property_path');
-        $context->getViolations()->willReturn(new \ArrayIterator([
+        $context->getViolations()->willReturn(new ConstraintViolationList([
             $this->createViolation('other_property_path'),
         ]));
 
