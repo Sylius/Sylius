@@ -1010,7 +1010,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldNotSeeTheThankYouPage(): void
     {
-        Assert::notSame($this->client->getLastResponse()->getStatusCode(), 200);
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 422);
     }
 
     /**

@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Checker;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ApiBundle\Exception\OrderNoLongerEligibleForPromotion;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
@@ -51,10 +52,12 @@ final class OrderIntegrityCheckerSpec extends ObjectBehavior
             new ArrayCollection([$newPromotion->getWrappedObject()])
         );
 
+        $oldPromotion->getName()->willReturn('Old promotion');
+
         $orderProcessor->process($order)->shouldBeCalled();
 
         $this
-            ->shouldThrow(\RuntimeException::class)
+            ->shouldThrow(new OrderNoLongerEligibleForPromotion('Old promotion'))
             ->during('check', [$order])
         ;
     }
