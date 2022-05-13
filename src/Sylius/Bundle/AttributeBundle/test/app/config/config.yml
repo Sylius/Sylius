@@ -12,7 +12,7 @@ framework:
     default_locale: "%locale%"
     session:
         handler_id: ~
-        storage_id: session.storage.mock_file
+        storage_factory_id: session.storage.factory.mock_file
     http_method_override: true
     test: ~
 
