@@ -20,7 +20,7 @@ To programmatically create an Order you will of course need a factory.
 
 .. code-block:: php
 
-    /** @var FactoryInterface $order */
+    /** @var FactoryInterface $orderFactory */
     $orderFactory = $this->container->get('sylius.factory.order');
 
     /** @var OrderInterface $order */
