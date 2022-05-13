@@ -29,8 +29,8 @@
         "php": "^8.0",
         "sylius/core-bundle": "^1.6",
         "sylius/ui-bundle": "^1.6",
-        "symfony/framework-bundle": "^5.4",
-        "symfony/security-bundle": "^5.4",
+        "symfony/framework-bundle": "^5.4 || ^6.0",
+        "symfony/security-bundle": "^5.4 || ^6.0",
         "twig/intl-extra": "^2.12",
         "twig/twig": "^2.12"
     },
@@ -40,7 +40,7 @@
         "mockery/mockery": "^1.4",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",
-        "symfony/dependency-injection": "^5.4"
+        "symfony/dependency-injection": "^5.4 || ^6.0"
     },
     "extra": {
         "branch-alias": {
