@@ -22,7 +22,6 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /** @experimental */
 final class OrderMethodsItemExtension implements QueryItemExtensionInterface
@@ -52,12 +51,6 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
 
         $user = $this->userContext->getUser();
 
-        if ($user === null) {
-            $this->applyForVisitor($queryBuilder, $queryNameGenerator, $rootAlias, $operationName);
-
-            return;
-        }
-
         if ($user instanceof ShopUserInterface && in_array('ROLE_USER', $user->getRoles(), true)) {
             $this->applyForShopUser($queryBuilder, $queryNameGenerator, $rootAlias, $operationName, $user);
 
@@ -69,28 +62,6 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
             $this->applyForAdminUser($queryBuilder, $queryNameGenerator, $rootAlias, $httpRequestMethodType);
 
             return;
-        }
-
-        throw new AccessDeniedHttpException('Requested method is not allowed.');
-    }
-
-    private function applyForVisitor(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $rootAlias, string $operationName): void
-    {
-        $queryBuilder
-            ->leftJoin(sprintf('%s.customer', $rootAlias), 'customer')
-            ->leftJoin('customer.user', 'user')
-            ->andWhere($queryBuilder->expr()->orX(
-                'user IS NULL',
-                sprintf('%s.customer IS NULL', $rootAlias),
-                $queryBuilder->expr()->andX(
-                    sprintf('%s.customer IS NOT NULL', $rootAlias),
-                    sprintf('%s.createdByGuest = :createdByGuest', $rootAlias)
-                )
-            ))->setParameter('createdByGuest', true)
-        ;
-
-        if ($operationName !== 'shop_select_payment_method') {
-            $this->filterCart($queryBuilder, $queryNameGenerator, $rootAlias);
         }
     }
 

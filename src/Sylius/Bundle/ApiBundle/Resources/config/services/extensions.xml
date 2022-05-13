@@ -91,6 +91,11 @@
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderVisitorItemExtension">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderMethodsItemExtension">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />

@@ -22,7 +22,6 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /** @experimental */
@@ -60,23 +59,6 @@ final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
         QueryNameGeneratorInterface $queryNameGenerator,
         string $rootAlias
     ): void {
-        if ($user === null) {
-            $queryBuilder
-                ->leftJoin(sprintf('%s.customer', $rootAlias), 'customer')
-                ->leftJoin('customer.user', 'user')
-                ->andWhere($queryBuilder->expr()->orX(
-                    'user IS NULL',
-                    sprintf('%s.customer IS NULL', $rootAlias),
-                    $queryBuilder->expr()->andX(
-                        sprintf('%s.customer IS NOT NULL', $rootAlias),
-                        sprintf('%s.createdByGuest = :createdByGuest', $rootAlias)
-                    )
-                ))->setParameter('createdByGuest', true)
-            ;
-
-            return;
-        }
-
         if ($user instanceof ShopUserInterface && in_array('ROLE_USER', $user->getRoles(), true)) {
             $customerParameterName = $queryNameGenerator->generateParameterName('customer');
 
@@ -92,7 +74,5 @@ final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
             //admin has access to get all orders
             return;
         }
-
-        throw new AccessDeniedHttpException('Requested method is not allowed.');
     }
 }
