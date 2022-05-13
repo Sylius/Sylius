@@ -1,5 +1,24 @@
 # CHANGELOG FOR `1.10.X`
 
+## v1.10.14 (2022-05-13)
+
+#### Details
+
+- [#12868](https://github.com/Sylius/Sylius/issues/12868) Fix zone cannot contain itself validator ([@vvasiloi](https://github.com/vvasiloi))
+- [#13894](https://github.com/Sylius/Sylius/issues/13894) Using Sylius template event to change logo ([@arti0090](https://github.com/arti0090))
+- [#13898](https://github.com/Sylius/Sylius/issues/13898) [maintenance][mailer]Assert that email is not null ([@Ferror](https://github.com/Ferror))
+- [#13903](https://github.com/Sylius/Sylius/issues/13903) [Documentation] Improve and fix the release cycle documentation ([@Zales0123](https://github.com/Zales0123))
+- [#13907](https://github.com/Sylius/Sylius/issues/13907) [Docs] Updated Sylius Plus installation guide - optional PDF Generator ([@Rafikooo](https://github.com/Rafikooo))
+- [#13908](https://github.com/Sylius/Sylius/issues/13908) [DX] General refactor using ECS ([@coldic3](https://github.com/coldic3))
+- [#13909](https://github.com/Sylius/Sylius/issues/13909) [Maintenance] Specify the default path in the ECS configuration ([@coldic3](https://github.com/coldic3))
+- [#13919](https://github.com/Sylius/Sylius/issues/13919) [Maintenance][CI] Add Refactor workflow ([@coldic3](https://github.com/coldic3))
+- [#13929](https://github.com/Sylius/Sylius/issues/13929) Specify rough 1.12 release term and its planned content ([@Zales0123](https://github.com/Zales0123))
+- [#13933](https://github.com/Sylius/Sylius/issues/13933) Bump flex to ^1.17, v1.13 - old infrastructure shutdown ([@em411](https://github.com/em411))
+- [#13940](https://github.com/Sylius/Sylius/issues/13940) [CS][DX] Refactor ([@github-actions](https://github.com/github-actions))
+- [#13959](https://github.com/Sylius/Sylius/issues/13959) [Docs] Favicon ([@Rafikooo](https://github.com/Rafikooo))
+- [#13961](https://github.com/Sylius/Sylius/issues/13961) [GH] Store composer lock and generate diff ([@lchrusciel](https://github.com/lchrusciel))
+- [#13966](https://github.com/Sylius/Sylius/issues/13966) Update orders.rst ([@groupecomplus](https://github.com/groupecomplus))
+
 ## v1.10.13 (2022-04-22)
 
 #### Details
