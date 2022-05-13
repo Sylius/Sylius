@@ -74,7 +74,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
             ->createNamed('provinceCode', ProvinceCodeChoiceType::class, 'province', Argument::withKey('country'))
             ->willReturn($provinceForm);
 
-        $form->add($provinceForm)->shouldBeCalled();
+        $form->add($provinceForm)->willReturn($form)->shouldBeCalled();
 
         $this->preSetData($event);
     }
@@ -101,7 +101,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
             ->createNamed('provinceName', TextType::class, 'Utah', Argument::any())
             ->willReturn($provinceForm);
 
-        $form->add($provinceForm)->shouldBeCalled();
+        $form->add($provinceForm)->willReturn($form)->shouldBeCalled();
 
         $this->preSetData($event);
     }
@@ -126,7 +126,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
             ->createNamed('provinceCode', ProvinceCodeChoiceType::class, null, Argument::withKey('country'))
             ->willReturn($provinceForm);
 
-        $form->add($provinceForm)->shouldBeCalled();
+        $form->add($provinceForm)->willReturn($form)->shouldBeCalled();
 
         $this->preSubmit($event);
     }
@@ -151,7 +151,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
             ->createNamed('provinceName', TextType::class, null, Argument::any())
             ->willReturn($provinceForm);
 
-        $form->add($provinceForm)->shouldBeCalled();
+        $form->add($provinceForm)->willReturn($form)->shouldBeCalled();
 
         $this->preSubmit($event);
     }
