@@ -32,7 +32,7 @@ jobs:
             fail-fast: false
             matrix:
                 php: ["8.0", "8.1"]
-                symfony: ["^5.4"]
+                symfony: ["^5.4", "^6.0"]
 
         steps:
             -
@@ -113,6 +113,21 @@ jobs:
                     base: old-composer.lock
 
             -
+                name: Show diff in comment to PR
+                uses: marocchino/sticky-pull-request-comment@v2
+                if: ${{ steps.composer_diff.outputs.composer_diff_exit_code != 0 }}
+                with:
+                    recreate: true
+                    header: composer-diff # Creates a collapsed comment with the report
+                    message: |
+                        <details>
+                        <summary>Composer package changes</summary>
+
+                        ${{ steps.composer_diff.outputs.composer_diff }}
+
+                        </details>
+
+            -
                 name: Check for security vulnerabilities
                 run: symfony security:check
                 if: always() && steps.end-of-setup.outcome == 'success'
@@ -184,7 +199,7 @@ jobs:
             fail-fast: false
             matrix:
                 php: ["8.0", "8.1"]
-                symfony: ["^5.4"]
+                symfony: ["^5.4", "^6.0"]
 
         steps:
             -   uses: actions/checkout@v2
@@ -229,7 +244,7 @@ jobs:
         strategy:
             matrix:
                 php: ["8.0"]
-                symfony: ["^5.4"]
+                symfony: ["^5.4", "^6.0"]
                 postgres: ["13.3"]
 
         env:
@@ -337,7 +352,7 @@ jobs:
         strategy:
             matrix:
                 php: ["8.0"]
-                symfony: ["^5.4"]
+                symfony: ["^5.4", "^6.0"]
                 mariadb: ["10.4.10"]
 
         env:
@@ -466,7 +481,7 @@ jobs:
             fail-fast: false
             matrix:
                 php: ["8.0", "8.1"]
-                symfony: ["^5.4"]
+                symfony: ["^5.4", "^6.0"]
                 mysql: ["5.7", "8.0"]
                 twig: ["3.x"]
                 include:
@@ -609,7 +624,7 @@ jobs:
             fail-fast: false
             matrix:
                 php: ["8.0", "8.1"]
-                symfony: ["^5.4"]
+                symfony: ["^5.4", "^6.0"]
                 node: ["14.x", "16.x"]
                 mysql: ["5.7", "8.0"]
 

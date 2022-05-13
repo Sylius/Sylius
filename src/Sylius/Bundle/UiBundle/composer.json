@@ -35,11 +35,11 @@
         "sonata-project/block-bundle": "^3.20|^4.0",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius/grid-bundle": "^1.8",
-        "symfony/config": "^5.4",
-        "symfony/framework-bundle": "^5.4",
-        "symfony/security-core": "^5.4",
-        "symfony/security-bundle": "^5.4",
-        "symfony/templating": "^5.4",
+        "symfony/config": "^5.4 || ^6.0",
+        "symfony/framework-bundle": "^5.4 || ^6.0",
+        "symfony/security-core": "^5.4 || ^6.0",
+        "symfony/security-bundle": "^5.4 || ^6.0",
+        "symfony/templating": "^5.4 || ^6.0",
         "laminas/laminas-stdlib": "^3.2"
     },
     "conflict": {
@@ -50,8 +50,8 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",
-        "symfony/dependency-injection": "^5.4",
-        "symfony/form": "^5.4",
+        "symfony/dependency-injection": "^5.4 || ^6.0",
+        "symfony/form": "^5.4 || ^6.0",
         "twig/twig": "^2.12"
     },
     "config": {
