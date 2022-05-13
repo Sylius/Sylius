@@ -51,7 +51,7 @@ jobs:
             fail-fast: false
             matrix:
                 php: ["8.0", "8.1"]
-                symfony: ["^5.4"]
+                symfony: ["^5.4", "^6.0"]
                 package: "${{ fromJson(needs.list.outputs.packages) }}"
 
         steps:

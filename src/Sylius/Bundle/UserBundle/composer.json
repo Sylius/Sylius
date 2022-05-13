@@ -45,7 +45,7 @@
         "sylius/mailer-bundle": "^1.4",
         "sylius/resource-bundle": "^1.7",
         "sylius/user": "^1.6",
-        "symfony/framework-bundle": "^5.4",
+        "symfony/framework-bundle": "^5.4 || ^6.0",
         "webmozart/assert": "^1.8"
     },
     "conflict": {
@@ -57,8 +57,8 @@
         "php-http/guzzle6-adapter": "^2.0",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",
-        "symfony/dependency-injection": "^5.4",
-        "symfony/security-bundle": "^5.4",
+        "symfony/dependency-injection": "^5.4 || ^6.0",
+        "symfony/security-bundle": "^5.4 || ^6.0",
         "symfony/swiftmailer-bundle": "^3.1"
     },
     "suggest": {
