@@ -32,17 +32,17 @@
         "sylius/locale-bundle": "^1.6",
         "sylius/product": "^1.6",
         "sylius/resource-bundle": "^1.7",
-        "symfony/framework-bundle": "^5.4"
+        "symfony/framework-bundle": "^5.4 || ^6.0"
     },
     "require-dev": {
         "doctrine/orm": "^2.7",
         "mockery/mockery": "^1.4",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",
-        "symfony/browser-kit": "^5.4",
-        "symfony/dependency-injection": "^5.4",
-        "symfony/form": "^5.4",
-        "symfony/validator": "^5.4"
+        "symfony/browser-kit": "^5.4 || ^6.0",
+        "symfony/dependency-injection": "^5.4 || ^6.0",
+        "symfony/form": "^5.4 || ^6.0",
+        "symfony/validator": "^5.4 || ^6.0"
     },
     "extra": {
         "branch-alias": {
