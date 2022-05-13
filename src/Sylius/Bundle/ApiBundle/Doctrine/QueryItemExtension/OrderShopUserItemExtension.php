@@ -18,13 +18,12 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
-use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /** @experimental */
-final class OrderMethodsItemExtension implements QueryItemExtensionInterface
+final class OrderShopUserItemExtension implements QueryItemExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)
     {
@@ -42,36 +41,13 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
             return;
         }
 
-        $httpRequestMethodType = $context[ContextKeys::HTTP_REQUEST_METHOD_TYPE];
-        if ($httpRequestMethodType === Request::METHOD_GET) {
-            return;
-        }
-
         $rootAlias = $queryBuilder->getRootAliases()[0];
-
         $user = $this->userContext->getUser();
 
-        if ($user instanceof ShopUserInterface && in_array('ROLE_USER', $user->getRoles(), true)) {
-            $this->applyForShopUser($queryBuilder, $queryNameGenerator, $rootAlias, $operationName, $user);
-
+        if (!$user instanceof ShopUserInterface) {
             return;
         }
 
-        if (
-            $user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
-            $this->applyForAdminUser($queryBuilder, $queryNameGenerator, $rootAlias, $httpRequestMethodType);
-
-            return;
-        }
-    }
-
-    private function applyForShopUser(
-        QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        string $rootAlias,
-        string $operationName,
-        ShopUserInterface $user
-    ): void {
         $customerParameterName = $queryNameGenerator->generateParameterName('customer');
 
         $queryBuilder
@@ -79,19 +55,17 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
             ->setParameter($customerParameterName, $user->getCustomer()->getId())
         ;
 
-        if (
-            $operationName !== 'shop_select_payment_method' &&
-            $operationName !== 'shop_account_change_payment_method'
-        ) {
-            $this->filterCart($queryBuilder, $queryNameGenerator, $rootAlias);
-        }
-    }
+        $httpRequestMethodType = $context[ContextKeys::HTTP_REQUEST_METHOD_TYPE];
 
-    private function applyForAdminUser(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $rootAlias, string $httpRequestMethodType): void
-    {
-        if ($httpRequestMethodType === Request::METHOD_DELETE) {
-            $this->filterCart($queryBuilder, $queryNameGenerator, $rootAlias);
+        if (
+            $operationName === 'shop_select_payment_method' ||
+            $operationName === 'shop_account_change_payment_method' ||
+            $httpRequestMethodType === Request::METHOD_GET
+        ) {
+            return;
         }
+
+        $this->filterCart($queryBuilder, $queryNameGenerator, $rootAlias);
     }
 
     private function filterCart(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $rootAlias): void
