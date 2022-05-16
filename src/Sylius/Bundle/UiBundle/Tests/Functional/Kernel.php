@@ -45,8 +45,6 @@ final class Kernel extends HttpKernel
             'secret' => 'S0ME_SECRET',
         ]);
 
-        $containerBuilder->loadFromExtension('security', ['firewalls' => ['main' => ['anonymous' => null]]]);
-
         $containerBuilder->loadFromExtension(
             'sonata_block',
             ['blocks' => ['sonata.block.service.template' => ['settings' => ['context' => null]]]]
