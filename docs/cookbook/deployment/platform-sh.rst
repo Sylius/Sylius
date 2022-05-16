@@ -95,6 +95,8 @@ In this guide you will find sufficient instructions to have your application up 
         nodejs:
             yarn: "*"
             gulp-cli: "*"
+        php:
+            composer/composer: '^2'
 
     # The size of the persistent disk of the application (in MB).
     disk: 2048
@@ -147,6 +149,9 @@ In this guide you will find sufficient instructions to have your application up 
                     # Only allow static files from the assets directories.
                     '\.(jpe?g|png|gif|svgz?)$':
                         allow: true
+    runtime:
+        extensions:
+            - sodium
 
 .. warning::
 
