@@ -68,7 +68,7 @@ final class BuildProductVariantFormSubscriberSpec extends ObjectBehavior
             ],
         )->willReturn($optionsForm);
 
-        $form->add($optionsForm)->shouldBeCalled();
+        $form->add($optionsForm)->willReturn($form)->shouldBeCalled();
 
         $this->preSetData($event);
     }
@@ -104,7 +104,7 @@ final class BuildProductVariantFormSubscriberSpec extends ObjectBehavior
             ],
         )->willReturn($optionsForm);
 
-        $form->add($optionsForm)->shouldBeCalled();
+        $form->add($optionsForm)->willReturn($form)->shouldBeCalled();
 
         $this->preSetData($event);
     }
