@@ -19,13 +19,22 @@ use Sylius\Component\Resource\Exception\VariantWithNoOptionsValuesException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Webmozart\Assert\Assert;
 
 final class GenerateProductVariantsSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private ProductVariantGeneratorInterface $generator, private Session $session)
+    public function __construct(private ProductVariantGeneratorInterface $generator, private /* Session */ $requestStack)
     {
+        /** @phpstan-ignore-next-line */
+        if (!$requestStack instanceof SessionInterface && !$requestStack instanceof RequestStack) {
+            throw new \InvalidArgumentException(sprintf('The second argument of "%s" should be instance of "%s" or "%s"', __METHOD__, SessionInterface::class, RequestStack::class));
+        }
+
+        if ($requestStack instanceof SessionInterface) {
+            @trigger_error(sprintf('Passing an instance of %s as constructor argument for %s is deprecated as of Sylius 1.12 and will be removed in 2.0. Pass an instance of %s instead.', SessionInterface::class, self::class, RequestStack::class), \E_USER_DEPRECATED);
+        }
     }
 
     public static function getSubscribedEvents(): array
@@ -45,7 +54,13 @@ final class GenerateProductVariantsSubscriber implements EventSubscriberInterfac
         try {
             $this->generator->generate($product);
         } catch (VariantWithNoOptionsValuesException $exception) {
-            $this->session->getFlashBag()->add('error', $exception->getMessage());
+            if ($this->requestStack instanceof SessionInterface) {
+                $session = $this->requestStack;
+            } else {
+                $session = $this->requestStack->getSession();
+            }
+
+            $session->getFlashBag()->add('error', $exception->getMessage());
         }
     }
 }
