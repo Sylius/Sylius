@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Order\Model\OrderItem as BaseOrderItem;
 use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
+use Sylius\Component\Order\Model\OrderItemUnitInterface as BaseOrderItemUnitInterface;
 use Webmozart\Assert\Assert;
 
 class OrderItem extends BaseOrderItem implements OrderItemInterface
@@ -142,6 +143,12 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
 
     public function getSubtotal(): int
     {
-        return $this->getDiscountedUnitPrice() * $this->quantity;
+        return array_reduce(
+            $this->getUnits()->toArray(),
+            function (int $subtotal, BaseOrderItemUnitInterface $unit) {
+                return $subtotal + $this->unitPrice + $unit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
+            },
+            0
+        );
     }
 }
