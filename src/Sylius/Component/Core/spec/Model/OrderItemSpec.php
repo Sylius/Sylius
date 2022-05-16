@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\Adjustment;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\OrderItemUnit;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Resource\Model\VersionedInterface;
 
@@ -97,24 +99,29 @@ final class OrderItemSpec extends ObjectBehavior
         $this->getDiscountedUnitPrice()->shouldReturn(10000);
     }
 
-    function it_returns_subtotal_which_consist_of_discounted_unit_price_multiplied_by_quantity(
-        OrderItemUnitInterface $firstUnit,
-        OrderItemUnitInterface $secondUnit
-    ): void {
+    function its_subtotal_consist_of_sum_of_units_discounted_price(): void
+    {
         $this->setUnitPrice(10000);
 
-        $firstUnit->getOrderItem()->willReturn($this);
-        $firstUnit->getTotal()->willReturn(9000);
-        $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(-500);
+        $firstUnit = new OrderItemUnit($this->getWrappedObject());
+        $adjustment1 = new Adjustment();
+        $adjustment1->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
+        $adjustment1->setAmount(-1667);
+        $firstUnit->addAdjustment($adjustment1);
 
-        $secondUnit->getOrderItem()->willReturn($this);
-        $secondUnit->getTotal()->willReturn(9000);
-        $secondUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(-500);
+        $secondUnit = new OrderItemUnit($this->getWrappedObject());
+        $adjustment2 = new Adjustment();
+        $adjustment2->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
+        $adjustment2->setAmount(-1667);
+        $secondUnit->addAdjustment($adjustment2);
 
-        $this->addUnit($firstUnit);
-        $this->addUnit($secondUnit);
+        $secondUnit = new OrderItemUnit($this->getWrappedObject());
+        $adjustment3 = new Adjustment();
+        $adjustment3->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
+        $adjustment3->setAmount(-1666);
+        $secondUnit->addAdjustment($adjustment3);
 
-        $this->getSubtotal()->shouldReturn(19000);
+        $this->getSubtotal()->shouldReturn(25000);
     }
 
     function it_has_no_variant_by_default(): void
