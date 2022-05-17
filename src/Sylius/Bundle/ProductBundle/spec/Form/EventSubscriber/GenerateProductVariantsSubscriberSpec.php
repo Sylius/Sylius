@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class GenerateProductVariantsSubscriberSpec extends ObjectBehavior
+final class GenerateProductVariantsSubscriberSpec extends ObjectBehavior
 {
     function let(ProductVariantGeneratorInterface $generator, RequestStack $requestStack): void
     {
