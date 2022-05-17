@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\ApiBundle\Checker\OrderIntegrityCheckerInterface;
+use Sylius\Bundle\ApiBundle\Command\Cart\InformAboutCartRecalculate;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Event\OrderCompleted;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -31,6 +32,7 @@ final class CompleteOrderHandler implements MessageHandlerInterface
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
         private FactoryInterface $stateMachineFactory,
+        private MessageBusInterface $commandBus,
         private MessageBusInterface $eventBus,
         private OrderIntegrityCheckerInterface $orderIntegrityChecker
     ) {
@@ -50,7 +52,11 @@ final class CompleteOrderHandler implements MessageHandlerInterface
             $cart->setNotes($completeOrder->notes);
         }
 
-        $this->orderIntegrityChecker->check($cart);
+        if (!$this->orderIntegrityChecker->check($cart)) {
+            $this->commandBus->dispatch(new InformAboutCartRecalculate(), [new DispatchAfterCurrentBusStamp()]);
+
+            return $cart;
+        }
 
         $stateMachine = $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH);
 

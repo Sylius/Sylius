@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Checker;
+namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
-use Sylius\Component\Core\Model\OrderInterface;
-
-/** @experimental */
-interface OrderIntegrityCheckerInterface
+/** @experimental  */
+class InformAboutCartRecalculate
 {
-    public function check(OrderInterface $order): bool;
+    public function __construct()
+    {
+    }
 }

@@ -16,8 +16,8 @@ namespace Sylius\Bundle\ApiBundle\Exception;
 /** @experimental */
 final class OrderNoLongerEligibleForPromotion extends \RuntimeException
 {
-    public function __construct(string $promotionName)
+    public function __construct()
     {
-        parent::__construct(sprintf('Order is no longer eligible for this promotion %s.', $promotionName));
+        parent::__construct('Order is no longer eligible for one of applied promotions. Your cart was recalculated.');
     }
 }
