@@ -15,6 +15,7 @@ Background:
 
 @api
 Scenario: Seeing exchange rates for currencies available in channel
+    Given I changed my current channel to "WEB-US"
     When I get exchange rates of the store
     Then I should see 2 exchange rates on the list
     And I should see that the exchange rate for "British Pound" is 0.7

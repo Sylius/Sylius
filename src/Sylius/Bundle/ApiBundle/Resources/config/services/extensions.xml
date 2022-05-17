@@ -73,6 +73,11 @@
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ExchangeRateCollectionExtension">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+        </service>
+
         <service
             id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\RestrictingFilterEagerLoadingExtension"
             decorates="api_platform.doctrine.orm.query_extension.filter_eager_loading"

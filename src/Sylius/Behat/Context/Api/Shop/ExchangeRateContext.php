@@ -44,10 +44,25 @@ final class ExchangeRateContext implements Context
     }
 
     /**
-     * @Then I should see that the exchange rate for :currency is :count
+     * @Then I should see that the exchange rate for :currency is :ratio
      */
-    public function iShouldSeeThatExchangeRateForCurrencyIs(string $currency, int $count): void
+    public function iShouldSeeThatExchangeRateForCurrencyIs(string $currency, float $ratio): void
     {
-        // TODO: I should see that the exchange rate for :currency is :count
+        $exchangeRate = $this->getExchangeRateByTargetCurrency($currency);
+
+        Assert::same($exchangeRate['ratio'], $ratio);
+    }
+
+    private function getExchangeRateByTargetCurrency(string $currencyCode): array
+    {
+        $exchangeRates = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        foreach ($exchangeRates as $exchangeRate) {
+            if (str_ends_with($exchangeRate['targetCurrency'], $currencyCode)) {
+                return $exchangeRate;
+            }
+        }
+
+        throw new \RuntimeException(sprintf('Cannot find exchange rate with "%s" target currency.', $currencyCode));
     }
 }
