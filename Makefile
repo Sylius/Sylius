@@ -1,31 +1,44 @@
-init:
-	composer install --no-interaction --no-scripts
-	bin/console sylius:install --no-interaction
-	bin/console sylius:fixtures:load default --no-interaction
-	yarn install --pure-lockfile
-	yarn build
-
-ci:
-	composer install --no-interaction --no-scripts
-	bin/console sylius:install --no-interaction
-	bin/console sylius:fixtures:load default --no-interaction
-	bin/console cache:warmup
-	yarn install --pure-lockfile
-	yarn build
-	vendor/bin/phpunit
-	vendor/bin/phpspec run --ansi --no-interaction -f dot
-	vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&@cli&&~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&@cli&&~@todo" --rerun # CLI Behat
-	vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@cli&&~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@cli&&~@todo" --rerun # NON JS Behat
-	#vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@javascript&&~@cli&&~@todo" # JS Behat
-
-unit:
+phpunit:
 	vendor/bin/phpunit
 
-spec:
+phpspec:
 	vendor/bin/phpspec run --ansi --no-interaction -f dot
 
-behat:
-	vendor/bin/behat --colors --strict --stop-on-failure --no-interaction -vvv -f progress
+phpstan:
+	vendor/bin/phpstan analyse
+
+psalm:
+	vendor/bin/psalm
+
+behat-cli:
+	vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&@cli&&~@todo"
+
+behat-non-js:
+	vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@cli&&~@todo"
+
+behat-js:
+	vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@cli&&~@todo"
+
+install:
+	composer install --no-interaction --no-scripts
+
+backend:
+	bin/console sylius:install --no-interaction
+	bin/console sylius:fixtures:load default --no-interaction
+
+frontend:
+	yarn install --pure-lockfile
+	GULP_ENV=prod yarn build
+
+behat: behat-cli behat-non-js behat-js
+
+init: install backend frontend
+
+ci: init phpstan psalm phpunit phpspec behat
+
+integration: init phpunit behat
+
+static: install phpspec phpstan psalm
 
 # Example execution: make profile url=http://app
 profile:
