@@ -57,16 +57,29 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
         $queryBuilder
             ->expr()
             ->shouldBeCalled()
-            ->willReturn($expr);
-
-        $expr
-            ->orX('user IS NULL', sprintf('%s.customer IS NULL', 'o'))
-            ->shouldBeCalled()
-            ->willReturn(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
+            ->willReturn($expr)
         ;
 
         $queryBuilder
-            ->andWhere(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
+            ->setParameter('createdByGuest', true)
+            ->shouldBeCalled()
+            ->willReturn($expr)
+        ;
+
+        $expr
+            ->andX('o.customer IS NOT NULL', 'o.createdByGuest = :createdByGuest')
+            ->shouldBeCalled()
+            ->willReturn('o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest')
+        ;
+
+        $expr
+            ->orX('user IS NULL', 'o.customer IS NULL', 'o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest')
+            ->shouldBeCalled()
+            ->willReturn('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest)')
+        ;
+
+        $queryBuilder
+            ->andWhere('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest)')
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;

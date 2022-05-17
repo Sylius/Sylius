@@ -90,11 +90,7 @@ final class ShopBasedCartContext implements CartContextInterface
 
     private function setCustomerAndAddressOnCart(OrderInterface $cart, CustomerInterface $customer): void
     {
-        $cart->setCustomer($customer);
-
-        if ($this->createdByGuestFlagResolver !== null) {
-            $cart->setCreatedByGuest($this->createdByGuestFlagResolver->resolveFlag());
-        }
+        $this->setCustomer($cart, $customer);
 
         $defaultAddress = $customer->getDefaultAddress();
         if (null !== $defaultAddress) {
@@ -102,5 +98,16 @@ final class ShopBasedCartContext implements CartContextInterface
             $clonedAddress->setCustomer(null);
             $cart->setBillingAddress($clonedAddress);
         }
+    }
+
+    private function setCustomer(OrderInterface $cart, CustomerInterface $customer): void
+    {
+        if ($this->createdByGuestFlagResolver !== null && !$this->createdByGuestFlagResolver->resolveFlag()) {
+            $cart->setCustomerWithAuthorization($customer);
+
+            return;
+        }
+
+        $cart->setCustomer($customer);
     }
 }

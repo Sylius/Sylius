@@ -11,7 +11,7 @@ Feature: Checking out as guest with a registered email
         And the store allows paying offline
         And there is a customer account "john@example.com"
 
-    @ui
+    @ui @api
     Scenario: Successfully placing an order
         Given I have product "PHP T-Shirt" in the cart
         When I complete addressing step with email "john@example.com" and "United States" based billing address

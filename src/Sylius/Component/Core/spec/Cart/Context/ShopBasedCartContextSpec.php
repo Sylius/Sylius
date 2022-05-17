@@ -189,7 +189,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($secondCart);
     }
 
-    function it_sets_created_by_guest_flag_as_false_if_order_is_created_by_logged_in_customer(
+    function it_creates_order_for_authorized_user(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
         CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver,
@@ -202,8 +202,6 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
 
         $createdByGuestFlagResolver->resolveFlag()->willReturn(false);
 
-        $cart->setCreatedByGuest(false)->shouldBeCalled();
-
         $cartContext->getCart()->shouldBeCalledTimes(1)->willReturn($cart);
 
         $shopperContext->getChannel()->willReturn($channel);
@@ -217,40 +215,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('PLN')->shouldBeCalled();
         $cart->setLocaleCode('pl')->shouldBeCalled();
-        $cart->setCustomer($customer)->shouldBeCalled();
-
-        $this->getCart()->shouldReturn($cart);
-    }
-
-    function it_sets_created_by_guest_flag_as_true_if_order_is_created_by_anonymous_user(
-        CartContextInterface $cartContext,
-        ShopperContextInterface $shopperContext,
-        CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver,
-        OrderInterface $cart,
-        ChannelInterface $channel,
-        CurrencyInterface $currency,
-        CustomerInterface $customer
-    ): void {
-        $this->beConstructedWith($cartContext, $shopperContext, $createdByGuestFlagResolver);
-
-        $createdByGuestFlagResolver->resolveFlag()->willReturn(true);
-
-        $cart->setCreatedByGuest(true)->shouldBeCalled();
-
-        $cartContext->getCart()->shouldBeCalledTimes(1)->willReturn($cart);
-
-        $shopperContext->getChannel()->willReturn($channel);
-        $shopperContext->getLocaleCode()->willReturn('pl');
-        $shopperContext->getCustomer()->willReturn($customer);
-        $customer->getDefaultAddress()->willReturn(null);
-
-        $channel->getBaseCurrency()->willReturn($currency);
-        $currency->getCode()->willReturn('PLN');
-
-        $cart->setChannel($channel)->shouldBeCalled();
-        $cart->setCurrencyCode('PLN')->shouldBeCalled();
-        $cart->setLocaleCode('pl')->shouldBeCalled();
-        $cart->setCustomer($customer)->shouldBeCalled();
+        $cart->setCustomerWithAuthorization($customer)->shouldBeCalled();
 
         $this->getCart()->shouldReturn($cart);
     }
