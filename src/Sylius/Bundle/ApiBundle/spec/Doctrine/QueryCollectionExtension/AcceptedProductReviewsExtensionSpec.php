@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductReview;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-class AcceptedProductReviewsExtensionSpec extends ObjectBehavior
+final class AcceptedProductReviewsExtensionSpec extends ObjectBehavior
 {
     function let(): void
     {

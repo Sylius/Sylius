@@ -23,7 +23,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class ProductsWithEnableFlagExtensionSpec extends ObjectBehavior
+final class ProductsWithEnableFlagExtensionSpec extends ObjectBehavior
 {
     function let(UserContextInterface $userContext)
     {

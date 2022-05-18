@@ -23,7 +23,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
-class TaxonExampleFactorySpec extends ObjectBehavior
+final class TaxonExampleFactorySpec extends ObjectBehavior
 {
     function let(
         FactoryInterface $taxonFactory,

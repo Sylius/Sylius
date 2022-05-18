@@ -25,7 +25,7 @@ use Sylius\Component\Core\Dashboard\SalesSummaryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 
-class StatisticsDataProviderSpec extends ObjectBehavior
+final class StatisticsDataProviderSpec extends ObjectBehavior
 {
     function let(
         DashboardStatisticsProviderInterface $statisticsProvider,
