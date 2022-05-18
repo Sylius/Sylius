@@ -97,7 +97,7 @@
             <argument type="service" id="sm.factory" />
             <argument type="service" id="sylius.command_bus" />
             <argument type="service" id="sylius.event_bus" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Checker\OrderIntegrityCheckerInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>

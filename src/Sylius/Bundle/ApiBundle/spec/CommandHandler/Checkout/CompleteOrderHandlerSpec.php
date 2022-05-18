@@ -32,10 +32,11 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
     function let(
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $stateMachineFactory,
+        MessageBusInterface $commandBus,
         MessageBusInterface $eventBus,
         OrderIntegrityCheckerInterface $orderIntegrityChecker
     ): void {
-        $this->beConstructedWith($orderRepository, $stateMachineFactory, $eventBus, $orderIntegrityChecker);
+        $this->beConstructedWith($orderRepository, $stateMachineFactory, $commandBus, $eventBus, $orderIntegrityChecker);
     }
 
     function it_handles_order_completion_without_notes(

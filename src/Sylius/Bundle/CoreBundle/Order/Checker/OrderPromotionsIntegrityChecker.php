@@ -11,14 +11,14 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Checker;
+namespace Sylius\Bundle\CoreBundle\Order\Checker;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 /** @experimental */
-final class OrderIntegrityChecker implements OrderIntegrityCheckerInterface
+final class OrderPromotionsIntegrityChecker implements OrderPromotionsIntegrityCheckerInterface
 {
     public function __construct(
         private OrderProcessorInterface $orderProcessor,

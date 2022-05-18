@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Checker;
+namespace Sylius\Bundle\CoreBundle\Order\Checker;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
-/** @experimental */
-interface OrderIntegrityCheckerInterface
+interface OrderPromotionsIntegrityCheckerInterface
 {
     public function check(OrderInterface $order): bool;
+
 }
