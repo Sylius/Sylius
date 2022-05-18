@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use SM\Factory\FactoryInterface;
-use Sylius\Bundle\ApiBundle\Command\Cart\InformAboutCartRecalculate;
+use Sylius\Bundle\ApiBundle\Command\Cart\InformAboutCartRecalculation;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Event\OrderCompleted;
 use Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface;
@@ -52,8 +52,10 @@ final class CompleteOrderHandler implements MessageHandlerInterface
             $cart->setNotes($completeOrder->notes);
         }
 
-        if (!$this->orderPromotionsIntegrityChecker->check($cart)) {
-            $this->commandBus->dispatch(new InformAboutCartRecalculate(), [new DispatchAfterCurrentBusStamp()]);
+        if ($promotion = $this->orderPromotionsIntegrityChecker->check($cart)){
+            $this->commandBus->dispatch(
+                new InformAboutCartRecalculation($promotion->getName()), [new DispatchAfterCurrentBusStamp()]
+            );
 
             return $cart;
         }

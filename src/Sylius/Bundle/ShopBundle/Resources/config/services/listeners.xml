@@ -60,8 +60,8 @@
 
         <service id="sylius.listener.order_integrity_checker" class="Sylius\Bundle\ShopBundle\EventListener\OrderIntegrityChecker">
             <argument type="service" id="router" />
-            <argument type="service" id="sylius.order_processing.order_processor" />
             <argument type="service" id="sylius.manager.order" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface" />
             <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="check" />
         </service>
 

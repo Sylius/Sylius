@@ -25,7 +25,7 @@ Feature: Order promotions integrity
         And I should not see the thank you page
 
     @ui @api
-    Scenario: Preventing customer from completing checkout with already expired promotion
+    Scenario: Recalculating cart when promotion already expired
         Given this promotion gives "$10.00" discount to every order
         And this promotion expires tomorrow
         And I added product "PHP T-Shirt" to the cart
@@ -33,9 +33,7 @@ Feature: Order promotions integrity
         And I proceeded with "Free" shipping method and "Offline" payment method
         And this promotion has already expired
         When I try to confirm my order
-        Then I should be informed that this promotion is no longer applied
-        And I should not see the thank you page
-        When I confirm my order
+        And I confirm my order
         Then I should see the thank you page
 
     @ui @api

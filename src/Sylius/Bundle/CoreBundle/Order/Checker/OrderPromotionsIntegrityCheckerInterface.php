@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Order\Checker;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PromotionInterface;
 
 interface OrderPromotionsIntegrityCheckerInterface
 {
-    public function check(OrderInterface $order): bool;
-
+    public function check(OrderInterface $order): ?PromotionInterface;
 }

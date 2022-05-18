@@ -57,7 +57,7 @@
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\InformAboutCartRecalculateHandler">
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\InformAboutCartRecalculationHandler">
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>

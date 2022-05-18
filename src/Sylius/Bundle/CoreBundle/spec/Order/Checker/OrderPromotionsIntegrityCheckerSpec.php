@@ -26,7 +26,7 @@ final class OrderPromotionsIntegrityCheckerSpec extends ObjectBehavior
         $this->beConstructedWith($orderProcessor);
     }
 
-    function it_returns_true_when_promotion_is_still_valid(
+    function it_returns_null_if_promotion_is_valid(
         OrderInterface $order,
         PromotionInterface $promotion,
         OrderProcessorInterface $orderProcessor
@@ -37,10 +37,10 @@ final class OrderPromotionsIntegrityCheckerSpec extends ObjectBehavior
 
         $orderProcessor->process($order)->shouldBeCalled();
 
-        $this->check($order)->shouldReturn(true);
+        $this->check($order)->shouldReturn(null);
     }
 
-    function it_returns_false_if_promotion_is_not_valid(
+    function it_returns_promotion_if_promotion_is_not_valid(
         OrderInterface $order,
         PromotionInterface $oldPromotion,
         PromotionInterface $newPromotion,
@@ -53,6 +53,6 @@ final class OrderPromotionsIntegrityCheckerSpec extends ObjectBehavior
 
         $orderProcessor->process($order)->shouldBeCalled();
 
-        $this->check($order)->shouldReturn(false);
+        $this->check($order)->shouldReturn($oldPromotion);
     }
 }

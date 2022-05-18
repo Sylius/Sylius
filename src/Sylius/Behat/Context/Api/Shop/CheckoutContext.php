@@ -1158,7 +1158,7 @@ final class CheckoutContext implements Context
     {
         Assert::contains(
             $this->client->getLastResponse()->getContent(),
-            'Order is no longer eligible for one of applied promotions. Your cart was recalculated.'
+            sprintf('Order is no longer eligible for this %s promotion. Your cart was recalculated.', $promotion->getName())
         );
     }
 

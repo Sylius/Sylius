@@ -15,17 +15,16 @@ namespace Sylius\Bundle\CoreBundle\Order\Checker;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
-/** @experimental */
 final class OrderPromotionsIntegrityChecker implements OrderPromotionsIntegrityCheckerInterface
 {
-    public function __construct(
-        private OrderProcessorInterface $orderProcessor,
-    ) {
+    public function __construct(private OrderProcessorInterface $orderProcessor)
+    {
     }
 
-    public function check(OrderInterface $order): bool
+    public function check(OrderInterface $order): ?PromotionInterface
     {
         $previousPromotions = new ArrayCollection($order->getPromotions()->toArray());
 
@@ -33,10 +32,10 @@ final class OrderPromotionsIntegrityChecker implements OrderPromotionsIntegrityC
 
         foreach ($previousPromotions as $previousPromotion) {
             if (!$order->getPromotions()->contains($previousPromotion)) {
-                return false;
+                return $previousPromotion;
             }
         }
 
-        return true;
+        return null;
     }
 }

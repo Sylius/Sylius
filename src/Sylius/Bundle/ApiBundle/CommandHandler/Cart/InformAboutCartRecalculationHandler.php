@@ -13,14 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
-use Sylius\Bundle\ApiBundle\Command\Cart\InformAboutCartRecalculate;
+use Sylius\Bundle\ApiBundle\Command\Cart\InformAboutCartRecalculation;
 use Sylius\Bundle\ApiBundle\Exception\OrderNoLongerEligibleForPromotion;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class InformAboutCartRecalculateHandler implements MessageHandlerInterface
+/** @experimental  */
+final class InformAboutCartRecalculationHandler implements MessageHandlerInterface
 {
-    public function __invoke(InformAboutCartRecalculate $command): void
+    public function __invoke(InformAboutCartRecalculation $command): void
     {
-        throw new OrderNoLongerEligibleForPromotion();
+        throw new OrderNoLongerEligibleForPromotion($command->promotionName());
     }
 }
