@@ -44,25 +44,40 @@ final class ExchangeRateContext implements Context
     }
 
     /**
-     * @Then I should see that the exchange rate for :currency is :ratio
+     * @Then I should see that the exchange rate of :sourceCurrency to :targetCurrency is :ratio
      */
-    public function iShouldSeeThatExchangeRateForCurrencyIs(string $currency, float $ratio): void
+    public function iShouldSeeThatExchangeRateOfSourceCurrencyToTargetCurrencyIs(string $sourceCurrency, string $targetCurrency, float $ratio): void
     {
-        $exchangeRate = $this->getExchangeRateByTargetCurrency($currency);
+        $exchangeRate = $this->getExchangeRateByTargetCurrency($sourceCurrency, $targetCurrency);
 
         Assert::same($exchangeRate['ratio'], $ratio);
     }
 
-    private function getExchangeRateByTargetCurrency(string $currencyCode): array
+    /**
+     * @Then I should not see :sourceCurrency to :targetCurrency exchange rate
+     */
+    public function iShouldNotSeeSourceCurrencyToTargetCurrencyExchangeRate(string $sourceCurrency, string $targetCurrency): void
+    {
+        Assert::throws(
+            fn () => $this->getExchangeRateByTargetCurrency($sourceCurrency, $targetCurrency),
+            \RuntimeException::class,
+            sprintf('Cannot find %s/%s exchange rate.', $sourceCurrency, $targetCurrency)
+        );
+    }
+
+    private function getExchangeRateByTargetCurrency(string $sourceCurrencyCode, string $targetCurrencyCode): array
     {
         $exchangeRates = $this->responseChecker->getCollection($this->client->getLastResponse());
 
         foreach ($exchangeRates as $exchangeRate) {
-            if (str_ends_with($exchangeRate['targetCurrency'], $currencyCode)) {
+            if (
+                str_ends_with($exchangeRate['sourceCurrency'], $sourceCurrencyCode) &&
+                str_ends_with($exchangeRate['targetCurrency'], $targetCurrencyCode)
+            ) {
                 return $exchangeRate;
             }
         }
 
-        throw new \RuntimeException(sprintf('Cannot find exchange rate with "%s" target currency.', $currencyCode));
+        throw new \RuntimeException(sprintf('Cannot find %s/%s exchange rate.', $sourceCurrencyCode, $targetCurrencyCode));
     }
 }
