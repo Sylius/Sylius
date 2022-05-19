@@ -17,6 +17,7 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolverInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -38,6 +39,7 @@ final class PickupCartHandler implements MessageHandlerInterface
         private ObjectManager $orderManager,
         private RandomnessGeneratorInterface $generator,
         private CustomerRepositoryInterface $customerRepository,
+        private CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver
     ) {
     }
 
@@ -76,6 +78,7 @@ final class PickupCartHandler implements MessageHandlerInterface
             $cart->setCustomerWithAuthorization($customer);
             $cart->setBillingAddress($this->getDefaultAddress($customer));
         }
+        $cart->setCreatedByGuest($this->createdByGuestFlagResolver->resolveFlag());
 
         $this->orderManager->persist($cart);
 

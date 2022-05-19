@@ -20,6 +20,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolverInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -40,6 +41,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator,
         CustomerRepositoryInterface $customerRepository,
+        CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver
     ): void {
         $this->beConstructedWith(
             $cartFactory,
@@ -48,6 +50,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
             $orderManager,
             $generator,
             $customerRepository,
+            $createdByGuestFlagResolver
         );
     }
 
@@ -68,6 +71,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         ChannelInterface $channel,
         CurrencyInterface $currency,
         LocaleInterface $locale,
+        CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver,
         AddressInterface $address,
     ): void {
         $pickupCart = new PickupCart();
@@ -89,6 +93,8 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
 
+        $createdByGuestFlagResolver->resolveFlag()->willReturn(false);
+
         $cartFactory->createNew()->willReturn($cart);
         $cart->setCustomerWithAuthorization($customer)->shouldBeCalled();
         $cart->setBillingAddress($address)->shouldBeCalled();
@@ -96,6 +102,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $cart->setCurrencyCode('USD')->shouldBeCalled();
         $cart->setLocaleCode('en_US')->shouldBeCalled();
         $cart->setTokenValue('urisafestr')->shouldBeCalled();
+        $cart->setCreatedByGuest(false)->shouldBeCalled();
 
         $orderManager->persist($cart)->shouldBeCalled();
 
@@ -114,33 +121,29 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         ChannelInterface $channel,
         CurrencyInterface $currency,
         LocaleInterface $locale,
+        CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver
     ): void {
         $pickupCart = new PickupCart();
         $pickupCart->setChannelCode('code');
-        $pickupCart->setEmail('sample@email.com');
-
         $channelRepository->findOneByCode('code')->willReturn($channel);
         $channel->getBaseCurrency()->willReturn($currency);
         $channel->getDefaultLocale()->willReturn($locale);
-
-        $customerRepository->findOneBy(['email' => 'sample@email.com'])->willReturn($customer);
-        $customer->getDefaultAddress()->willReturn(null);
-
-        $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn(null);
-
+        $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
         $generator->generateUriSafeString(10)->willReturn('urisafestr');
         $currency->getCode()->willReturn('USD');
         $locale->getCode()->willReturn('en_US');
 
         $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
 
+        $createdByGuestFlagResolver->resolveFlag()->willReturn(true);
+
         $cartFactory->createNew()->willReturn($cart);
-        $cart->setCustomerWithAuthorization($customer)->shouldBeCalled();
-        $cart->setBillingAddress(null)->shouldBeCalled();
+        $cart->setCustomer(Argument::any())->shouldNotBeCalled();
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('USD')->shouldBeCalled();
         $cart->setLocaleCode('en_US')->shouldBeCalled();
         $cart->setTokenValue('urisafestr')->shouldBeCalled();
+        $cart->setCreatedByGuest(true)->shouldBeCalled();
 
         $orderManager->persist($cart)->shouldBeCalled();
 
@@ -186,6 +189,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         ChannelInterface $channel,
         CurrencyInterface $currency,
         LocaleInterface $locale,
+        CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver
     ): void {
         $pickupCart = new PickupCart();
         $pickupCart->setChannelCode('code');
@@ -202,12 +206,15 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
 
+        $createdByGuestFlagResolver->resolveFlag()->willReturn(true);
+
         $cartFactory->createNew()->willReturn($cart);
         $cart->setCustomerWithAuthorization(Argument::any())->shouldNotBeCalled();
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('USD')->shouldBeCalled();
         $cart->setLocaleCode('en_US')->shouldBeCalled();
         $cart->setTokenValue('urisafestr')->shouldBeCalled();
+        $cart->setCreatedByGuest(true)->shouldBeCalled();
 
         $orderManager->persist($cart)->shouldBeCalled();
 
@@ -224,6 +231,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         ChannelInterface $channel,
         CurrencyInterface $currency,
         LocaleInterface $locale,
+        CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver
     ): void {
         $pickupCart = new PickupCart();
         $pickupCart->setChannelCode('code');
@@ -241,12 +249,15 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $currency->getCode()->willReturn('USD');
         $locale->getCode()->willReturn('en_US');
 
+        $createdByGuestFlagResolver->resolveFlag()->willReturn(true);
+
         $cartFactory->createNew()->willReturn($cart);
         $cart->setCustomerWithAuthorization(Argument::any())->shouldNotBeCalled();
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('USD')->shouldBeCalled();
         $cart->setLocaleCode('en_US')->shouldBeCalled();
         $cart->setTokenValue('urisafestr')->shouldBeCalled();
+        $cart->setCreatedByGuest(true)->shouldBeCalled();
 
         $orderManager->persist($cart)->shouldBeCalled();
 
