@@ -79,8 +79,8 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @Given /^(that channel)(?: also|) allows to shop using the "([^"]+)" currency$/
-     * @Given /^(that channel)(?: also|) allows to shop using "([^"]+)" and "([^"]+)" currencies$/
+     * @Given /^(that channel|"[^"]+" channel)(?: also|) allows to shop using the "([^"]+)" currency$/
+     * @Given /^(that channel|"[^"]+" channel)(?: also|) allows to shop using "([^"]+)" and "([^"]+)" currencies$/
      * @Given /^(that channel)(?: also|) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" currencies$/
      */
     public function thatChannelAllowsToShopUsingAndCurrencies(ChannelInterface $channel, ...$currenciesCodes)

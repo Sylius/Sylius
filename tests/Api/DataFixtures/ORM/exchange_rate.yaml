@@ -1,0 +1,28 @@
+Sylius\Component\Currency\Model\ExchangeRate:
+    exchange_rate_USDPLN:
+        sourceCurrency: '@currency_usd'
+        targetCurrency: '@currency_pln'
+        ratio: 4.44
+    exchange_rate_USDGBP:
+        sourceCurrency: '@currency_usd'
+        targetCurrency: '@currency_gbp'
+        ratio: 0.7
+    exchange_rate_CNYUSD:
+        sourceCurrency: '@currency_cny'
+        targetCurrency: '@currency_usd'
+        ratio: 0.15
+    exchange_rate_GBPBTN:
+        sourceCurrency: '@currency_gbp'
+        targetCurrency: '@currency_btn'
+        ratio: 2.37
+
+
+Sylius\Component\Currency\Model\Currency:
+    currency_pln:
+        code: 'PLN'
+    currency_gbp:
+        code: 'GBP'
+    currency_cny:
+        code: 'CNY'
+    currency_btn:
+        code: 'BTN'

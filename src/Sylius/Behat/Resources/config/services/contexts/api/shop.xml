@@ -60,6 +60,11 @@
             <argument>%sylius.security.new_api_route%</argument>
         </service>
 
+        <service id="sylius.behat.context.api.shop.exchange_rate" class="Sylius\Behat\Context\Api\Shop\ExchangeRateContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+        </service>
+
         <service id="sylius.behat.context.api.shop.promotion" class="Sylius\Behat\Context\Api\Shop\PromotionContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop" />
             <argument type="service" id="sylius.behat.shared_storage" />
