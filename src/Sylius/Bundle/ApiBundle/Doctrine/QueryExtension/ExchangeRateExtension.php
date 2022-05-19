@@ -11,9 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
+namespace Sylius\Bundle\ApiBundle\Doctrine\QueryExtension;
 
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionExtensionInterface;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
@@ -23,7 +24,7 @@ use Sylius\Component\Currency\Model\ExchangeRate;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class ExchangeRateCollectionExtension implements ContextAwareQueryCollectionExtensionInterface
+final class ExchangeRateExtension implements ContextAwareQueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)
     {
@@ -52,8 +53,18 @@ final class ExchangeRateCollectionExtension implements ContextAwareQueryCollecti
         $rootAlias = $queryBuilder->getRootAliases()[0];
 
         $queryBuilder
-            ->andWhere(sprintf('%s.sourceCurrency = :%s', $rootAlias, $currencyParameterName))
+            ->andWhere(
+                $queryBuilder->expr()->orX(
+                    sprintf('%s.sourceCurrency = :%s', $rootAlias, $currencyParameterName),
+                    sprintf('%s.targetCurrency = :%s', $rootAlias, $currencyParameterName)
+                )
+            )
             ->setParameter($currencyParameterName, $channel->getBaseCurrency())
         ;
+    }
+
+    public function applyToItem(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, array $identifiers, string $operationName = null, array $context = [])
+    {
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, $resourceClass, $operationName, $context);
     }
 }

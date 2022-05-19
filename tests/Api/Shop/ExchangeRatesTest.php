@@ -30,14 +30,25 @@ final class ExchangeRatesTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_gets_an_exchange_rate(): void
+    public function it_gets_an_exchange_rate_with_source_currency_the_same_as_the_channel_base_currency(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'exchange_rate.yaml']);
 
         $this->client->request('GET', sprintf('/api/v2/shop/exchange-rates/%d', $fixtures['exchange_rate_USDPLN']->getId()), [], [], self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_exchange_rate_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/get_exchange_rate_usdpln_response', Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function it_gets_an_exchange_rate_with_target_currency_the_same_as_the_channel_base_currency(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'exchange_rate.yaml']);
+
+        $this->client->request('GET', sprintf('/api/v2/shop/exchange-rates/%d', $fixtures['exchange_rate_CNYUSD']->getId()), [], [], self::CONTENT_TYPE_HEADER);
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/get_exchange_rate_cnyusd_response', Response::HTTP_OK);
     }
 
     /** @test */
