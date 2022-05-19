@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolverInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -36,7 +37,8 @@ final class PickupCartHandler implements MessageHandlerInterface
         private ChannelRepositoryInterface $channelRepository,
         private ObjectManager $orderManager,
         private RandomnessGeneratorInterface $generator,
-        private CustomerRepositoryInterface $customerRepository
+        private CustomerRepositoryInterface $customerRepository,
+        private CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver
     ) {
     }
 
@@ -73,6 +75,7 @@ final class PickupCartHandler implements MessageHandlerInterface
         if ($customer !== null) {
             $cart->setCustomer($customer);
         }
+        $cart->setCreatedByGuest($this->createdByGuestFlagResolver->resolveFlag());
 
         $this->orderManager->persist($cart);
 
