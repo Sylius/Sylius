@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import 'semantic-ui-css/components/popup';
-import 'semantic-ui-css/components/rating';
+import 'fomantic-ui/dist/components/popup';
+import 'fomantic-ui/dist/components/rating';
 import $ from 'jquery';
 import 'slick-carousel';
 

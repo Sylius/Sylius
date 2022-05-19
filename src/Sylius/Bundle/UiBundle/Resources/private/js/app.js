@@ -7,14 +7,14 @@
  * file that was distributed with this source code.
  */
 
-import 'semantic-ui-css/components/accordion';
-import 'semantic-ui-css/components/checkbox';
-import 'semantic-ui-css/components/dimmer';
-import 'semantic-ui-css/components/dropdown';
-import 'semantic-ui-css/components/rating';
-import 'semantic-ui-css/components/sidebar';
-import 'semantic-ui-css/components/tab';
-import 'semantic-ui-css/components/transition';
+import 'fomantic-ui/dist/components/accordion';
+import 'fomantic-ui/dist/components/checkbox';
+import 'fomantic-ui/dist/components/dimmer';
+import 'fomantic-ui/dist/components/dropdown';
+import 'fomantic-ui/dist/components/rating';
+import 'fomantic-ui/dist/components/sidebar';
+import 'fomantic-ui/dist/components/tab';
+import 'fomantic-ui/dist/components/transition';
 import $ from 'jquery';
 
 import './sylius-bulk-action-require-confirmation';

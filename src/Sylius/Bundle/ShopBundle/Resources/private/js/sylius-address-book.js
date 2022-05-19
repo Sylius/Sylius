@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import 'semantic-ui-css/components/dropdown';
+import 'fomantic-ui/dist/components/dropdown';
 import $ from 'jquery';
 
 const parseKey = function parseKey(key) {

@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import 'semantic-ui-css/components/modal';
+import 'fomantic-ui/dist/components/modal';
 import $ from 'jquery';
 
 $.fn.extend({

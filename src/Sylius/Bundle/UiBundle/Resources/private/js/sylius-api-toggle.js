@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import 'semantic-ui-css/components/api';
+import 'fomantic-ui/dist/components/api';
 import $ from 'jquery';
 
 $.fn.extend({
