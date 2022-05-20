@@ -5,8 +5,8 @@ Feature: Viewing exchange rates based on current channel
     I want to see all available for me exchange rates
 
 Background:
-    Given the store operates on a channel named "Web-US" with hostname "example.us"
-    And the store also operates on a channel named "Web-UK" with hostname "example.uk"
+    Given the store operates on a channel named "Web-US" in "USD" currency and with hostname "example.us"
+    And the store also operates on a channel named "Web-UK" in "GBP" currency and with hostname "example.uk"
     And "Web-US" channel allows to shop using "GBP" and "PLN" currencies
     And "Web-UK" channel allows to shop using the "BTN" currency
     And the exchange rate of "US Dollar" to "British Pound" is 0.7
