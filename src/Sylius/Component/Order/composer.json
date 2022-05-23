@@ -27,7 +27,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "sylius/resource": "^1.7",
+        "sylius/resource": "^1.10@alpha",
         "webmozart/assert": "^1.8",
         "laminas/laminas-stdlib": "^3.2"
     },

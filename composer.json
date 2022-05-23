@@ -81,7 +81,7 @@
         "sylius/mailer": "^1.5",
         "sylius/mailer-bundle": "^1.5",
         "sylius/registry": "^1.5",
-        "sylius/resource": "^1.9",
+        "sylius/resource": "^1.10@alpha",
         "sylius/resource-bundle": "^1.9",
         "sylius/theme-bundle": "^2.1.1",
         "symfony/asset": "^5.4 || ^6.0",
