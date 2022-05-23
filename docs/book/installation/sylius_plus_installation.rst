@@ -94,6 +94,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 * Order
 * ProductVariant
 * Shipment
+* ReturnRequest
 
 .. code-block:: php
 
@@ -277,6 +278,50 @@ Installing Sylius Plus as a plugin to a Sylius application
     class Shipment extends BaseShipment implements ShipmentInterface, InventoryShipmentInterface
     {
         use InventorySourceAwareTrait;
+    }
+
+.. code-block:: php
+
+    // src/Entity/ReturnRequest.php
+    declare(strict_types=1);
+
+    namespace App\Entity;
+
+    use Doctrine\Common\Collections\Collection;
+    use Sylius\Plus\Entity\CreditMemosAwareInterface;
+    use Sylius\Plus\Entity\CreditMemosAwareTrait;
+    use Sylius\Plus\Returns\Domain\Model\OrderInterface;
+    use Sylius\Plus\Returns\Domain\Model\ReturnRequest as BaseReturnRequest;
+    use Doctrine\ORM\Mapping as ORM;
+    use Sylius\Plus\Returns\Domain\Model\ReturnRequestResolution;
+
+    /**
+     * @ORM\Entity()
+     * @ORM\Table(name="sylius_plus_return_request")
+     * @final
+     */
+    class ReturnRequest extends BaseReturnRequest implements CreditMemosAwareInterface
+    {
+        use CreditMemosAwareTrait {
+            __construct as private initializeCreditMemoAwareTrait;
+        }
+
+        public function __construct(
+            string $id,
+            string $number,
+            OrderInterface $order,
+            ReturnRequestResolution $resolution,
+            string $reason,
+            \DateTimeInterface $submittedAt,
+            Collection $returnedUnits,
+            string $currencyCode,
+            Collection $images
+        )
+        {
+            parent::__construct($id, $number, $order, $resolution, $reason, $submittedAt, $returnedUnits, $currencyCode, $images);
+
+            $this->initializeCreditMemoAwareTrait();
+        }
     }
 
 **7.** Install wkhtmltopdf binary:
