@@ -22,3 +22,9 @@ Feature: Viewing products from a specific taxon
     Scenario: Viewing information about empty list of products from a given taxon
         When I browse products from taxon "Sad"
         Then I should see empty list of products
+
+    @api
+    Scenario: Searching products with non existing taxon
+        When I browse products from non existing taxon
+        Then I should see the product "Plastic Tomato"
+        And I should see the product "T-Shirt Banana"
