@@ -91,15 +91,23 @@ final class TaxonFilterSpec extends ObjectBehavior
 
     function it_does_not_add_the_default_order_by_taxon_position_if_taxon_does_not_exist(
         IriConverterInterface $iriConverter,
-        TaxonInterface $taxonRoot,
+        TaxonInterface $taxon,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $context['filters']['order'] = ['differentOrderParameter' => 'asc'];
         $iriConverter->getItemFromIri('api/taxon')->willThrow(ItemNotFoundException::class);
-        $queryBuilder->getRootAliases()->shouldNotBeCalled();
+        $queryBuilder->getRootAliases()->willReturn(['o']);
 
-        $queryBuilder->setParameter('taxonRoot', $taxonRoot)->shouldNotBeCalled();
+        $queryBuilder->distinct()->willReturn($queryBuilder);
+        $queryBuilder->addSelect('productTaxon')->willReturn($queryBuilder);
+        $queryBuilder->innerJoin('o.productTaxons', 'productTaxon')->willReturn($queryBuilder);
+        $queryBuilder->innerJoin('productTaxon.taxon', 'taxon')->willReturn($queryBuilder);
+        $queryBuilder->andWhere('taxon.root = :taxonRoot')->willReturn($queryBuilder);
+        $queryBuilder->addOrderBy('productTaxon.position')->shouldNotBeCalled();
+
+        $taxon->getRoot()->shouldNotBeCalled();
+        $queryBuilder->setParameter('taxonRoot', null)->willReturn($queryBuilder);
 
         $this->filterProperty(
             'taxon',
@@ -113,15 +121,24 @@ final class TaxonFilterSpec extends ObjectBehavior
 
     function it_does_not_add_the_default_order_by_taxon_position_if_taxon_is_given_with_wrong_format(
         IriConverterInterface $iriConverter,
-        TaxonInterface $taxonRoot,
+        TaxonInterface $taxon,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $context['filters']['order'] = ['differentOrderParameter' => 'asc'];
         $iriConverter->getItemFromIri('non-existing-taxon')->willThrow(InvalidArgumentException::class);
-        $queryBuilder->getRootAliases()->shouldNotBeCalled();
+        $queryBuilder->getRootAliases()->willReturn(['o']);
 
-        $queryBuilder->setParameter('taxonRoot', $taxonRoot)->shouldNotBeCalled();
+        $queryBuilder->distinct()->willReturn($queryBuilder);
+        $queryBuilder->addSelect('productTaxon')->willReturn($queryBuilder);
+        $queryBuilder->innerJoin('o.productTaxons', 'productTaxon')->willReturn($queryBuilder);
+        $queryBuilder->innerJoin('productTaxon.taxon', 'taxon')->willReturn($queryBuilder);
+        $queryBuilder->andWhere('taxon.root = :taxonRoot')->willReturn($queryBuilder);
+        $queryBuilder->addOrderBy('productTaxon.position')->shouldNotBeCalled();
+
+        $taxon->getRoot()->shouldNotBeCalled();
+
+        $queryBuilder->setParameter('taxonRoot', null)->willReturn($queryBuilder);
 
         $this->filterProperty(
             'taxon',

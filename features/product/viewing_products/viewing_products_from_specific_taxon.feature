@@ -26,5 +26,4 @@ Feature: Viewing products from a specific taxon
     @api
     Scenario: Searching products with non existing taxon
         When I browse products from non existing taxon
-        Then I should see the product "Plastic Tomato"
-        And I should see the product "T-Shirt Banana"
+        Then I should see empty list of products

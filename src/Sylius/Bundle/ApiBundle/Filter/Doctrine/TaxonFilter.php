@@ -47,8 +47,9 @@ final class TaxonFilter extends AbstractContextAwareFilter
         try{
             /** @var TaxonInterface $taxon */
             $taxon = $this->iriConverter->getItemFromIri($value);
+            $taxonRoot = $taxon->getRoot();
         } catch (InvalidArgumentException|ItemNotFoundException $argumentException) {
-            return;
+            $taxonRoot = null;
         }
 
         $alias = $queryBuilder->getRootAliases()[0];
@@ -59,7 +60,7 @@ final class TaxonFilter extends AbstractContextAwareFilter
             ->innerJoin(sprintf('%s.productTaxons', $alias), 'productTaxon')
             ->innerJoin('productTaxon.taxon', 'taxon')
             ->andWhere('taxon.root = :taxonRoot')
-            ->setParameter('taxonRoot', $taxon->getRoot())
+            ->setParameter('taxonRoot', $taxonRoot)
         ;
 
         if (empty($context['filters']['order'])) {
