@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import 'semantic-ui-css/components/accordion';
+import 'semantic-ui/dist/components/accordion';
 import $ from 'jquery';
 import 'jquery.dirtyforms/jquery.dirtyforms';
 

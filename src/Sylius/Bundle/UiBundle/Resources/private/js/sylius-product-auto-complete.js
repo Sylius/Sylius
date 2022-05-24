@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import 'semantic-ui-css/components/dropdown';
+import 'semantic-ui/dist/components/dropdown';
 import $ from 'jquery';
 
 $.fn.extend({

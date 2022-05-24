@@ -1,8 +1,7 @@
 import './js/shim/shim-jquery';
 import './js/shim/shim-lightbox';
-import './js/shim/shim-semantic-ui';
 
-import 'fomantic-ui/dist/semantic.css';
+import 'semantic-ui/dist/semantic.css';
 import 'lightbox2/dist/css/lightbox.min.css';
 import 'slick-carousel/slick/slick.css';
 
