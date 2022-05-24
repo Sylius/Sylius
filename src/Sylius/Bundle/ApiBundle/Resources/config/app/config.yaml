@@ -39,6 +39,7 @@ api_platform:
         SM\SMException: 422
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser: 422
         Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved: 422
+        Sylius\Bundle\ApiBundle\Exception\OrderNoLongerEligibleForPromotion: 422
         Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException: 400
     collection:
         pagination:

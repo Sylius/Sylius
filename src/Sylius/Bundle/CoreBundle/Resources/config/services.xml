@@ -263,5 +263,9 @@
         <service id="Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolverInterface" class="Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolver">
             <argument type="service" id="security.token_storage" />
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface" class="Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityChecker">
+            <argument type="service" id="sylius.order_processing.order_processor" />
+        </service>
     </services>
 </container>

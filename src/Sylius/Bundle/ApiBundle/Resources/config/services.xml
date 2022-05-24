@@ -145,10 +145,6 @@
             <argument type="service" id="sylius.promotion_coupon_eligibility_checker" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Checker\OrderIntegrityCheckerInterface" class="Sylius\Bundle\ApiBundle\Checker\OrderIntegrityChecker">
-            <argument type="service" id="sylius.order_processing.order_processor" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface" class="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifier" public="true">
             <argument type="service" id="sm.factory" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface" />

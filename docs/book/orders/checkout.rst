@@ -253,6 +253,10 @@ In this step the customer gets an order summary and is redirected to complete th
 | ``payment_selected``-> ``completed`` | ``SyliusShopBundle:Checkout:summary.html.twig`` |
 +--------------------------------------+-------------------------------------------------+
 
+.. note::
+
+    The order will be processed through ``OrderIntegrityChecker`` in case to validate promotions applied to the order. If any of the promotions will expire during the finalizing checkout processor will remove this promotion and recalculate the order and update it.
+
 How to complete Checkout programmatically?
 ''''''''''''''''''''''''''''''''''''''''''
 
