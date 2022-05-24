@@ -41,12 +41,15 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.item_data_provider" priority="10" />
         </service>
-
-        <service id="Sylius\Bundle\ApiBundle\DataProvider\ProductItemDataProvider">
-            <argument type="service" id="sylius.repository.product" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
-            <tag name="api_platform.item_data_provider" priority="10" />
-        </service>
+        
+<!--Disabled in order to make unit ProductTest passable ( to use an Extension instead of data provider ) -->
+<!--        <service id="Sylius\Bundle\ApiBundle\DataProvider\ProductItemDataProvider">-->
+<!--            <argument type="service" id="sylius.repository.product" />-->
+<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
+<!--            <argument type="service" id="doctrine" />-->
+<!--            <argument key="$itemExtensions" type="tagged" tag="api_platform.doctrine.orm.query_extension.item" />-->
+<!--            <tag name="api_platform.item_data_provider" priority="10" />-->
+<!--        </service>-->
 
         <service id="Sylius\Bundle\ApiBundle\DataProvider\ProductAttributesSubresourceDataProvider">
             <argument type="tagged" tag="api_platform.doctrine.orm.query_extension.collection" />

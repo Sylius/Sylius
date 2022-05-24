@@ -65,11 +65,18 @@ class ProductsWithEnableFlagExtensionSpec extends ObjectBehavior
         $userContext->getUser()->willReturn($user);
         $user->getRoles()->willReturn([]);
 
-        $queryNameGenerator->generateParameterName('enabled')->shouldBeCalled()->willReturn('enabled');
+        $queryNameGenerator->generateParameterName('enabled')->willReturn('enabled');
+        $queryNameGenerator->generateParameterName('enabledVariants')->willReturn('enabledVariants');
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
-        $queryBuilder->andWhere('o.enabled = :enabled')->shouldBeCalled()->willReturn($queryBuilder);
-        $queryBuilder->setParameter('enabled', true)->shouldBeCalled()->willReturn($queryBuilder);
+
+        $queryBuilder->innerJoin('o.variants', 'variants')->willReturn($queryBuilder);
+        $queryBuilder->andWhere('variants.enabled = :enabledVariants')->willReturn($queryBuilder);
+        $queryBuilder->addSelect('variants')->willReturn($queryBuilder);
+        $queryBuilder->setParameter('enabledVariants', true)->willReturn($queryBuilder);
+
+        $queryBuilder->andWhere('o.enabled = :enabled')->willReturn($queryBuilder);
+        $queryBuilder->setParameter('enabled', true)->willReturn($queryBuilder);
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, 'get', [ContextKeys::CHANNEL => $channel, ContextKeys::LOCALE_CODE => 'en_US']);
     }

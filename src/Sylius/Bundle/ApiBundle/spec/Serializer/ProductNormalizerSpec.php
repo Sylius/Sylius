@@ -83,7 +83,6 @@ final class ProductNormalizerSpec extends ObjectBehavior
         $iriConverter->getIriFromItem($variant)->willReturn('/api/v2/shop/product-variants/CODE');
 
         $this->normalize($product, null, [])->shouldReturn([
-            'variants' => ['/api/v2/shop/product-variants/CODE'],
             'defaultVariant' => '/api/v2/shop/product-variants/CODE',
         ]);
     }
@@ -104,7 +103,6 @@ final class ProductNormalizerSpec extends ObjectBehavior
         $defaultProductVariantResolver->getVariant($product)->willReturn(null);
 
         $this->normalize($product, null, [])->shouldReturn([
-            'variants' => ['/api/v2/shop/product-variants/CODE'],
             'defaultVariant' => null,
         ]);
     }

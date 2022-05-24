@@ -170,6 +170,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
 
     public function findOneByChannelAndCode(ChannelInterface $channel, string $code): ?ProductInterface
     {
+        // possible place to add logic from an extension with `innerJoin variants where variant is enabled`
         $product = $this->createQueryBuilder('o')
             ->where('o.code = :code')
             ->andWhere(':channel MEMBER OF o.channels')

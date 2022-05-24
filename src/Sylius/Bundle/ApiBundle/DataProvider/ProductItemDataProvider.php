@@ -13,9 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DataProvider;
 
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGenerator;
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\ProductWithEnabledVariantsExtension;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -28,7 +31,9 @@ final class ProductItemDataProvider implements RestrictedDataProviderInterface, 
 {
     public function __construct(
         private ProductRepositoryInterface $productRepository,
-        private UserContextInterface $userContext
+        private UserContextInterface $userContext,
+        private ManagerRegistry $managerRegistry,
+        private iterable $itemExtensions
     ) {
     }
 
@@ -44,6 +49,17 @@ final class ProductItemDataProvider implements RestrictedDataProviderInterface, 
 
         /** @var ChannelInterface $channel */
         $channel = $context[ContextKeys::CHANNEL];
+
+        /*
+         * Creating custom queryBuilder here makes below findOneByChannelAndCode unusable ( I guess )
+         * https://api-platform.com/docs/core/data-providers/#injecting-extensions-pagination-filter-eagerloading-etc
+         *
+        foreach ($this->itemExtensions as $extension) {
+            if ($extension instanceof ProductWithEnabledVariantsExtension) {
+                $extension->applyToItem($queryBuilder, $queryNameGenerator, $resourceClass, $identifiers, $operationName, $context);
+            }
+        }
+        */
 
         return $this->productRepository->findOneByChannelAndCode($channel, $id);
     }
