@@ -109,6 +109,17 @@ final class ProductContext implements Context
     }
 
     /**
+     * @When I browse products from non existing taxon
+     */
+    public function iBrowseProductsFromNonExistingTaxon(): void
+    {
+        $this->client->index(Resources::PRODUCTS);
+
+        $this->client->addFilter('taxon', 'non-existing-taxon');
+        $this->client->filter();
+    }
+
+    /**
      * @When /^I sort products by the (oldest|newest) date first$/
      */
     public function iSortProductsByTheDateFirst(string $sortDirection): void

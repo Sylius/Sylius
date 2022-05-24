@@ -15,6 +15,8 @@ namespace spec\Sylius\Bundle\ApiBundle\Filter\Doctrine;
 
 use ApiPlatform\Core\Api\IriConverterInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Core\Exception\InvalidArgumentException;
+use ApiPlatform\Core\Exception\ItemNotFoundException;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -80,6 +82,67 @@ final class TaxonFilterSpec extends ObjectBehavior
         $this->filterProperty(
             'taxon',
             'api/taxon',
+            $queryBuilder,
+            $queryNameGenerator,
+            'resourceClass',
+            context: $context
+        );
+    }
+
+    function it_does_not_add_the_default_order_by_taxon_position_if_taxon_does_not_exist(
+        IriConverterInterface $iriConverter,
+        TaxonInterface $taxon,
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+    ): void {
+        $context['filters']['order'] = ['differentOrderParameter' => 'asc'];
+        $iriConverter->getItemFromIri('api/taxon')->willThrow(ItemNotFoundException::class);
+        $queryBuilder->getRootAliases()->willReturn(['o']);
+
+        $queryBuilder->distinct()->willReturn($queryBuilder);
+        $queryBuilder->addSelect('productTaxon')->willReturn($queryBuilder);
+        $queryBuilder->innerJoin('o.productTaxons', 'productTaxon')->willReturn($queryBuilder);
+        $queryBuilder->innerJoin('productTaxon.taxon', 'taxon')->willReturn($queryBuilder);
+        $queryBuilder->andWhere('taxon.root = :taxonRoot')->willReturn($queryBuilder);
+        $queryBuilder->addOrderBy('productTaxon.position')->shouldNotBeCalled();
+
+        $taxon->getRoot()->shouldNotBeCalled();
+        $queryBuilder->setParameter('taxonRoot', null)->willReturn($queryBuilder);
+
+        $this->filterProperty(
+            'taxon',
+            'api/taxon',
+            $queryBuilder,
+            $queryNameGenerator,
+            'resourceClass',
+            context: $context
+        );
+    }
+
+    function it_does_not_add_the_default_order_by_taxon_position_if_taxon_is_given_with_wrong_format(
+        IriConverterInterface $iriConverter,
+        TaxonInterface $taxon,
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+    ): void {
+        $context['filters']['order'] = ['differentOrderParameter' => 'asc'];
+        $iriConverter->getItemFromIri('non-existing-taxon')->willThrow(InvalidArgumentException::class);
+        $queryBuilder->getRootAliases()->willReturn(['o']);
+
+        $queryBuilder->distinct()->willReturn($queryBuilder);
+        $queryBuilder->addSelect('productTaxon')->willReturn($queryBuilder);
+        $queryBuilder->innerJoin('o.productTaxons', 'productTaxon')->willReturn($queryBuilder);
+        $queryBuilder->innerJoin('productTaxon.taxon', 'taxon')->willReturn($queryBuilder);
+        $queryBuilder->andWhere('taxon.root = :taxonRoot')->willReturn($queryBuilder);
+        $queryBuilder->addOrderBy('productTaxon.position')->shouldNotBeCalled();
+
+        $taxon->getRoot()->shouldNotBeCalled();
+
+        $queryBuilder->setParameter('taxonRoot', null)->willReturn($queryBuilder);
+
+        $this->filterProperty(
+            'taxon',
+            'non-existing-taxon',
             $queryBuilder,
             $queryNameGenerator,
             'resourceClass',

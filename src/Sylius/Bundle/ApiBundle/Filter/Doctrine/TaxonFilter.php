@@ -16,6 +16,8 @@ namespace Sylius\Bundle\ApiBundle\Filter\Doctrine;
 use ApiPlatform\Core\Api\IriConverterInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\AbstractContextAwareFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Core\Exception\InvalidArgumentException;
+use ApiPlatform\Core\Exception\ItemNotFoundException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -42,8 +44,14 @@ final class TaxonFilter extends AbstractContextAwareFilter
             return;
         }
 
-        /** @var TaxonInterface $taxon */
-        $taxon = $this->iriConverter->getItemFromIri($value);
+        try{
+            /** @var TaxonInterface $taxon */
+            $taxon = $this->iriConverter->getItemFromIri($value);
+            $taxonRoot = $taxon->getRoot();
+        } catch (InvalidArgumentException|ItemNotFoundException $argumentException) {
+            $taxonRoot = null;
+        }
+
         $alias = $queryBuilder->getRootAliases()[0];
 
         $queryBuilder
@@ -52,7 +60,7 @@ final class TaxonFilter extends AbstractContextAwareFilter
             ->innerJoin(sprintf('%s.productTaxons', $alias), 'productTaxon')
             ->innerJoin('productTaxon.taxon', 'taxon')
             ->andWhere('taxon.root = :taxonRoot')
-            ->setParameter('taxonRoot', $taxon->getRoot())
+            ->setParameter('taxonRoot', $taxonRoot)
         ;
 
         if (empty($context['filters']['order'])) {
