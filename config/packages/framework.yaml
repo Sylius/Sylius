@@ -1,4 +1,10 @@
 framework:
+    assets:
+        packages:
+            shop:
+                json_manifest_path: '%kernel.project_dir%/public/build/shop/manifest.json'
+            admin:
+                json_manifest_path: '%kernel.project_dir%/public/build/admin/manifest.json'
     secret: '%env(APP_SECRET)%'
     form: true
     csrf_protection: true
