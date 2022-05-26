@@ -18,6 +18,7 @@ parameters:
         - '**/Bundle/*/test/src/**.php'
         - '**/Bundle/*/Tests/Functional/app/**.php'
         - '**/Bundle/*/Tests/Functional/var/**.php'
+        - '**/Bundle/*/DependencyInjection/Configuration.php'
 
         # Vendor files in subpackages
         - '**/Bundle/*/vendor/**.php'
