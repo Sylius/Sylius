@@ -11,11 +11,11 @@ default:
                 - sylius.behat.context.transform.shared_storage
 
                 - sylius.behat.context.setup.channel
-                - sylius.behat.context.setup.shop_security
+                - sylius.behat.context.setup.shop_api_security
                 - sylius.behat.context.setup.user
 
-                - sylius.behat.context.api.shop.contact_request
-                - sylius.behat.context.ui.email
+                - sylius.behat.context.api.shop.contact
+                - sylius.behat.context.api.email
 
             filters:
                 tags: "@requesting_contact&&@api"

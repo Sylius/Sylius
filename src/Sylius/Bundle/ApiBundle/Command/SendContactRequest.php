@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command;
 
 /** experimental */
-class SendContactRequest implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
+class SendContactRequest implements ChannelCodeAwareInterface, LocaleCodeAwareInterface, LoggedInCustomerEmailIfNotSetAwareInterface
 {
     public ?string $localeCode = null;
     public ?string $channelCode = null;
@@ -45,9 +45,14 @@ class SendContactRequest implements ChannelCodeAwareInterface, LocaleCodeAwareIn
         $this->localeCode = $localeCode;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
+    }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
     }
 
     public function getMessage(): string

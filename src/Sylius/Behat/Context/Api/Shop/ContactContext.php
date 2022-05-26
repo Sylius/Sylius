@@ -26,7 +26,7 @@ final class ContactContext implements Context
 
     public function __construct(
         private RequestFactoryInterface $requestFactory,
-        private ApiClientInterface $apiClient,
+        private ApiClientInterface $client,
         private ResponseChecker $responseChecker,
     ) {
     }
@@ -65,12 +65,13 @@ final class ContactContext implements Context
         $request = $this->requestFactory->create(
             'shop',
             Resources::CONTACT_REQUESTS,
-            'Bearer'
+            'Authorization',
+            $this->client->getToken()
         );
 
         $request->setContent($this->content);
 
-        $this->apiClient->request($request);
+        $this->client->request($request);
     }
 
     /**
@@ -78,7 +79,7 @@ final class ContactContext implements Context
      */
     public function iShouldBeNotifiedThatTheContactRequestHasBeenSubmittedSuccessfully(): void
     {
-        $response = $this->apiClient->getLastResponse();
+        $response = $this->client->getLastResponse();
 
         Assert::same($response->getStatusCode(), 202);
     }
@@ -88,7 +89,7 @@ final class ContactContext implements Context
      */
     public function iShouldBeNotifiedThatEmailIsInvalid(): void
     {
-        $response = $this->apiClient->getLastResponse();
+        $response = $this->client->getLastResponse();
 
         Assert::same(
             $this->responseChecker->getError($response),
@@ -101,7 +102,7 @@ final class ContactContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
-        $response = $this->apiClient->getLastResponse();
+        $response = $this->client->getLastResponse();
 
         Assert::same(
             $this->responseChecker->getError($response),
