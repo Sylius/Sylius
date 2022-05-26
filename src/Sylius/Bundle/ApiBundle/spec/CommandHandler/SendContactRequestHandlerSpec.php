@@ -15,21 +15,22 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\SendContactRequest;
-use Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class SendContactRequestHandlerSpec extends ObjectBehavior
 {
-    function let(ContactEmailManagerInterface $contactEmailManager, ChannelRepositoryInterface $channelRepository,): void
+    function let(SenderInterface $sender, ChannelRepositoryInterface $channelRepository,): void
     {
-        $this->beConstructedWith($contactEmailManager, $channelRepository);
+        $this->beConstructedWith($sender, $channelRepository);
     }
 
     function it_sends_contact_request(
         ChannelInterface $channel,
         ChannelRepositoryInterface $channelRepository,
-        ContactEmailManagerInterface $contactEmailManager
+        SenderInterface $sender
     ): void {
         $command = new SendContactRequest('adam@sylius.com','message');
         $command->setChannelCode('CODE');
@@ -39,11 +40,16 @@ final class SendContactRequestHandlerSpec extends ObjectBehavior
 
         $channel->getContactEmail()->willReturn('channel@contact.com');
 
-        $contactEmailManager->sendContactRequest(
-            ['message' => 'message', 'email' => 'adam@sylius.com'],
+        $sender->send(
+            Emails::CONTACT_REQUEST,
             ['channel@contact.com'],
-            $channel,
-            'en_US'
+            [
+                'data' => ['message' => 'message', 'email' => 'adam@sylius.com'],
+                'channel' => $channel,
+                'localeCode' => 'en_US'
+            ],
+            [],
+            ['adam@sylius.com']
         );
 
         $this($command);

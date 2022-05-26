@@ -1,18 +1,10 @@
+{% deprecated 'The "@SyliusShop/Email/contactRequest.html.twig" template is deprecated since Sylius 1.12 and will be removed in Sylius 2.0, use "@SyliusCore/Email/contactRequest.html.twig" instead.' %}
 {% extends '@SyliusShop/Email/layout.html.twig' %}
 
 {% block subject %}
-    {{ 'sylius.email.contact_request.subject'|trans({}, null, localeCode) }}
+    {% include '@SyliusCore/Email/Blocks/ContactRequest/_subject.html.twig' %}
 {% endblock %}
 
 {% block content %}
-    <div style="text-align: left;">
-        <div style="color: #1abb9c;">
-            <strong>{{ 'sylius.email.contact_request.message_from'|trans({}, null, localeCode) }}:</strong>
-        </div>
-        <div style="margin-bottom: 20px;">{{ data.email }}</div>
-        <div style="color: #1abb9c;">
-            <strong>{{ 'sylius.email.contact_request.content'|trans({}, null, localeCode) }}:</strong>
-        </div>
-        <div>{{ data.message|nl2br }}</div>
-    </div>
+    {% include '@SyliusCore/Email/Blocks/ContactRequest/_content.html.twig' %}
 {% endblock %}
