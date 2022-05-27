@@ -25,6 +25,11 @@
             <tag name="console.command" />
         </service>
 
+        <service id="Sylius\Bundle\OrderBundle\Command\ShowOrderCommand">
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="console.command" />
+        </service>
+
         <service id="sylius.context.cart.new" class="Sylius\Component\Order\Context\CartContext">
             <argument type="service" id="sylius.factory.order" />
             <tag name="sylius.context.cart" priority="-999" />
