@@ -52,12 +52,15 @@ final class ShowOrderContext implements Context
     public function runShowOrderCommand(string $number): void
     {
         $this->application = new Application($this->kernel);
-        $this->application->add(new ShowOrderCommand());
+        $this->application->add(new ShowOrderCommand($this->orderRepository));
 
         $this->command = $this->application->find('sylius:order:show');
         $this->tester = new CommandTester($this->command);
 
-        $this->tester->execute(['command' => 'sylius:order:show']);
+        $this->tester->execute([
+            'command' => 'sylius:order:show',
+            'number' => ltrim($number, '#'),
+        ]);
     }
 
     /**

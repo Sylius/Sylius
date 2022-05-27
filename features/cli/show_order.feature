@@ -12,6 +12,6 @@ Feature: Showing an order
         And there is a customer "john.doe@gmail.com" that placed an order "#00000025"
 
     Scenario: Show order information
-        When I run show order command for order "#00000026"
+        When I run show order command for order "#00000025"
         Then I should see the following information:
-            | Number\s+00000026 |
+            | Order #00000025 |
