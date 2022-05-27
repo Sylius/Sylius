@@ -5,5 +5,5 @@ Feature: Showing available Sylius plugins
     I want to be informed about available plugins
 
     Scenario: Showing available Sylius plugins
-        When I run show available plugins command
+        When I run show order command
         Then I should see output "Available official plugins and selected community plugins" with listed plugins
