@@ -3,7 +3,9 @@
 namespace Sylius\Bundle\OrderBundle\Command;
 
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\Order;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableCell;
@@ -54,6 +56,18 @@ class ShowOrderCommand extends Command
     {
         $style->title(sprintf('Order #%s', $order->getNumber()));
 
+        $style->section('Attributes');
+        $this->renderAttributes($output, $order);
+        $style->section('Customer');
+        $this->renderCustomer($output, $order->getCustomer());
+        $style->section('Shipping Address');
+        $this->renderAddress($output, $order->getShippingAddress());
+        $style->section('Billing Address');
+        $this->renderAddress($output, $order->getBillingAddress());
+    }
+
+    private function renderAttributes(OutputInterface $output, Order $order)
+    {
         $this->fieldValueTable($output, [
             [
                 ['Created', $order->getCreatedAt()->format(self::DATE_FORMAT)],
@@ -73,7 +87,7 @@ class ShowOrderCommand extends Command
                 ['Payment', $order->getPaymentState()],
             ],
             [
-                ['Channel', $order?->getChannel()->getCode()],
+                ['Channel', $order->getChannel()?->getCode()],
                 ['Locale', $order->getLocaleCode()],
                 ['Currency', $order->getCurrencyCode()],
                 ['Guest', $order->getCreatedByGuest() ? '✔' : '✘'],
@@ -84,7 +98,6 @@ class ShowOrderCommand extends Command
             ],
         ]);
     }
-
     private function fieldValueTable(OutputInterface $output, array $fieldValues): void
     {
         $table = new Table($output);
@@ -104,7 +117,7 @@ class ShowOrderCommand extends Command
     /**
      * @return array{string,string}
      */
-    private function fieldValue(string $field, ?string $value, int $span): array
+    private function fieldValue(string $field, ?string $value, int $span = 1): array
     {
         return [
             sprintf('<fg=#aaa>%s:</>', $field),
@@ -114,5 +127,44 @@ class ShowOrderCommand extends Command
         ];
     }
 
+    private function renderCustomer(OutputInterface $output, ?CustomerInterface $customer): void
+    {
+        if (null === $customer) {
+            return;
+        }
+
+        $this->fieldValueTable($output, [
+            [
+                ['id', $customer->getId()],
+                ['email', $customer->getEmail()],
+                ['group', $customer->getGroup()?->getCode()],
+            ]
+        ]);
+    }
+
+    private function renderAddress(OutputInterface $output, ?AddressInterface $address): void
+    {
+        if (null === $address) {
+            $output->writeln('No address');
+            $output->writeln('');
+            return;
+        }
+
+        $this->fieldValueTable($output, [
+            [
+                ['id', $address->getId()],
+                ['First Name', $address->getFirstName()],
+                ['Last Name', $address->getLastName()],
+                ['Company', $address->getCompany()],
+                ['Company', $address->getCompany()],
+            ],
+            [
+                ['Street', $address->getId()],
+                ['City', $address->getFirstName()],
+                ['Postcode', $address->getLastName()],
+                ['Province', sprintf('%s (%s)', $address->getProvinceName(), $address->getProvinceCode())],
+            ]
+        ]);
+    }
 
 }
