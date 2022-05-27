@@ -20,3 +20,5 @@ Feature: Showing an order
             | Customer: john.doe@gmail.com |
             | Channel: WEB-US              |
             | PHP T-Shirt                  |
+            | Offline                      |
+            | Free                         |

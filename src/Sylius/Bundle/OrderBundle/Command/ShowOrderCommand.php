@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\OrderBundle\Command;
 
-use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\Order;
@@ -145,7 +144,7 @@ class ShowOrderCommand extends Command
     {
         return [
             sprintf('<fg=#aaa>%s:</>', $field),
-            new TableCell((string)($value ?? 'n/a'), [
+            new TableCell((string) ($value ?? 'n/a'), [
                 'colspan' => $span,
             ]),
         ];
