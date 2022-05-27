@@ -17,6 +17,7 @@ use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -27,6 +28,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Traversable;
 
 class ShowOrderCommand extends Command
 {
@@ -71,8 +73,12 @@ class ShowOrderCommand extends Command
     {
         $style->title(sprintf('Order #%s', $order->getNumber()));
 
+        $style->section('Attributes');
         $this->renderAttributes($output, $order);
+        $style->section('Items');
         $this->renderItems($output, $order);
+        $style->section('Payments');
+        $this->renderPayments($output, $order->getPayments());
     }
 
     private function renderAttributes(OutputInterface $output, Order $order)
@@ -118,7 +124,7 @@ class ShowOrderCommand extends Command
         $table->setRows(array_map(
             fn (array $row) => array_reduce(
                 $row,
-                fn (array $carry, array $pair) => [...$carry, ...$this->fieldValue($pair[0], $pair[1], $pair[2] ?? 1)],
+                fn (array $carry, array $pair) => array_merge($carry, $this->fieldValue($pair[0], $pair[1], $pair[2] ?? 1)),
                 [],
             ),
             $fieldValues
@@ -129,13 +135,13 @@ class ShowOrderCommand extends Command
     }
 
     /**
-     * @return array{string,string}
+     * @return array{string,TableCell}
      */
-    private function fieldValue(string $field, ?string $value, int $span = 1): array
+    private function fieldValue(string $field, mixed $value, int $span = 1): array
     {
         return [
             sprintf('<fg=#aaa>%s:</>', $field),
-            new TableCell($value ?? 'n/a', [
+            new TableCell((string)($value ?? 'n/a'), [
                 'colspan' => $span,
             ]),
         ];
@@ -219,5 +225,36 @@ class ShowOrderCommand extends Command
             ],
         ));
         $table->render();
+        $output->writeln('');
+    }
+
+    /**
+     * @param Traversable<PaymentInterface> $payments
+     */
+    private function renderPayments(OutputInterface $output, Traversable $payments): void
+    {
+        $table = new Table($output);
+        $table->setHeaders([
+            'ID',
+            'Method',
+            'State',
+            'Created',
+            'Updated',
+            'Amount',
+            'Currency',
+        ]);
+        foreach ($payments as $payment) {
+            $table->addRow([
+                $payment->getId(),
+                $payment->getMethod()?->getName() ?? 'n/a',
+                $payment->getState(),
+                $payment->getCreatedAt()?->format(self::DATE_FORMAT),
+                $payment->getUpdatedAt()?->format(self::DATE_FORMAT),
+                $payment->getAmount(),
+                $payment->getCurrencyCode(),
+            ]);
+        }
+        $table->render();
+        $output->writeln('');
     }
 }
