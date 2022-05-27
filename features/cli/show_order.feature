@@ -14,4 +14,4 @@ Feature: Showing an order
     Scenario: Show order information
         When I run show order command for order "#00000026"
         Then I should see the following information:
-            | 1234 |
+            | Number\s+00000026 |

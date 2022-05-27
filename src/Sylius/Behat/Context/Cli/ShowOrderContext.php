@@ -65,6 +65,9 @@ final class ShowOrderContext implements Context
      */
     public function iShouldSeeTheFollowingInformation(TableNode $table): void
     {
-        throw new PendingException();
+        $output =  $this->tester->getDisplay();
+        foreach ($table->getColumn(0) as $regex) {
+            Assert::regex($output, '{' . $regex . '}');
+        }
     }
 }
