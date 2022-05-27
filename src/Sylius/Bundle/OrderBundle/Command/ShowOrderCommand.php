@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Sylius\Bundle\OrderBundle\Command;
 
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
@@ -19,9 +30,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ShowOrderCommand extends Command
 {
-    const ARG_NUMBER = 'number';
-    const DATE_FORMAT = 'Y-m-d H:i:s';
+    public const ARG_NUMBER = 'number';
 
+    public const DATE_FORMAT = 'Y-m-d H:i:s';
 
     protected static $defaultName = 'sylius:order:show';
 
@@ -40,13 +51,14 @@ class ShowOrderCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $number = (string)$input->getArgument(self::ARG_NUMBER);
+        $number = (string) $input->getArgument(self::ARG_NUMBER);
 
         // do not use findOneByNumber as we want also to get cart orders
         $order = $this->orderRepository->findOneBy(['number' => $number]);
         $style = new SymfonyStyle($input, $output);
         if (null === $order) {
             $style->error(sprintf('Order with number "%s" not found', $number));
+
             return self::FAILURE;
         }
 
@@ -99,6 +111,7 @@ class ShowOrderCommand extends Command
             ],
         ]);
     }
+
     private function fieldValueTable(OutputInterface $output, array $fieldValues): void
     {
         $table = new Table($output);
@@ -139,7 +152,7 @@ class ShowOrderCommand extends Command
                 ['id', $customer->getId()],
                 ['email', $customer->getEmail()],
                 ['group', $customer->getGroup()?->getCode()],
-            ]
+            ],
         ]);
     }
 
@@ -148,6 +161,7 @@ class ShowOrderCommand extends Command
         if (null === $address) {
             $output->writeln('No address');
             $output->writeln('');
+
             return;
         }
 
@@ -164,7 +178,7 @@ class ShowOrderCommand extends Command
                 ['City', $address->getFirstName()],
                 ['Postcode', $address->getLastName()],
                 ['Province', sprintf('%s (%s)', $address->getProvinceName(), $address->getProvinceCode())],
-            ]
+            ],
         ]);
     }
 
@@ -189,12 +203,12 @@ class ShowOrderCommand extends Command
             ]);
         }
         $table->setStyle('default');
-        $table->addRow(new TableSeparator()) ;
+        $table->addRow(new TableSeparator());
         $table->addRows(array_map(
             fn (array $pair) => [
                 new TableCell(
                     $pair[0],
-                    ['colspan' => 4, 'style' => new TableCellStyle(['align' => 'right']), ]
+                    ['colspan' => 4, 'style' => new TableCellStyle(['align' => 'right'])]
                 ),
                 $pair[1],
             ],
@@ -206,5 +220,4 @@ class ShowOrderCommand extends Command
         ));
         $table->render();
     }
-
 }

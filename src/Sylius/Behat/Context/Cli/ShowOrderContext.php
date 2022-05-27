@@ -15,8 +15,6 @@ namespace Sylius\Behat\Context\Cli;
 
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
-use PhpSpec\Exception\Example\PendingException;
-use Sylius\Bundle\CoreBundle\Command\SetupCommand;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
 use Sylius\Bundle\OrderBundle\Command\ShowOrderCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -40,8 +38,7 @@ final class ShowOrderContext implements Context
     public function __construct(
         KernelInterface $kernel,
         OrderRepository $orderRepository,
-    )
-    {
+    ) {
         $this->kernel = $kernel;
         $this->orderRepository = $orderRepository;
     }
@@ -68,7 +65,7 @@ final class ShowOrderContext implements Context
      */
     public function iShouldSeeTheFollowingInformation(TableNode $table): void
     {
-        $output =  $this->tester->getDisplay();
+        $output = $this->tester->getDisplay();
         foreach ($table->getColumn(0) as $regex) {
             Assert::regex($output, '{' . $regex . '}');
         }
