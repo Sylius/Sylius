@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\OrderBundle\Command;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -79,6 +81,8 @@ class ShowOrderCommand extends Command
         $this->renderItems($output, $order);
         $style->section('Payments');
         $this->renderPayments($output, $order->getPayments());
+        $style->section('Shipments');
+        $this->renderShipments($output, $order->getShipments());
     }
 
     private function renderAttributes(OutputInterface $output, Order $order)
@@ -252,6 +256,36 @@ class ShowOrderCommand extends Command
                 $payment->getUpdatedAt()?->format(self::DATE_FORMAT),
                 $payment->getAmount(),
                 $payment->getCurrencyCode(),
+            ]);
+        }
+        $table->render();
+        $output->writeln('');
+    }
+
+    /**
+     * @param Traversable<ShipmentInterface> $shipments
+     */
+    private function renderShipments(OutputInterface $output, Traversable $shipments): void
+    {
+        $table = new Table($output);
+        $table->setHeaders([
+            'ID',
+            'Method',
+            'State',
+            'Tracking',
+            'Created',
+            'Updated',
+            'Adjustments',
+        ]);
+        foreach ($shipments as $shipment) {
+            $table->addRow([
+                $shipment->getId(),
+                $shipment->getMethod()?->getName() ?? 'n/a',
+                $shipment->getState(),
+                $shipment->getTracking(),
+                $shipment->getCreatedAt()?->format(self::DATE_FORMAT),
+                $shipment->getUpdatedAt()?->format(self::DATE_FORMAT),
+                $shipment->getAdjustmentsTotal(),
             ]);
         }
         $table->render();
