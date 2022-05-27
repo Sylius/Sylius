@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInte
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-class LocalesAwareValidAttributeValueValidatorSpec extends ObjectBehavior
+final class LocalesAwareValidAttributeValueValidatorSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $attributeTypesRegistry, ExecutionContextInterface $context, TranslationLocaleProviderInterface $localeProvider): void
     {

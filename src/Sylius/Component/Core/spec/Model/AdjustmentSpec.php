@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 
-class AdjustmentSpec extends ObjectBehavior
+final class AdjustmentSpec extends ObjectBehavior
 {
     function it_implements_an_adjustment_interface(): void
     {

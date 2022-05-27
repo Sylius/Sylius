@@ -23,7 +23,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
+final class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
 {
     function let(UserContextInterface $userContext): void
     {

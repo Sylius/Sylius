@@ -25,7 +25,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class UpdateCartHandlerSpec extends ObjectBehavior
+final class UpdateCartHandlerSpec extends ObjectBehavior
 {
     function let(
         OrderRepositoryInterface $orderRepository,

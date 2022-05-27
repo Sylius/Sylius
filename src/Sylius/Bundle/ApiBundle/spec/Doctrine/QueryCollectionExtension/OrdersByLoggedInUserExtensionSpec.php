@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
+final class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
 {
     function let(UserContextInterface $userContext): void
     {
