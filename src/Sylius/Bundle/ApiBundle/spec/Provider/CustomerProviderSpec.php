@@ -20,7 +20,7 @@ use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 
-class CustomerProviderSpec extends ObjectBehavior
+final class CustomerProviderSpec extends ObjectBehavior
 {
     function let(
         CanonicalizerInterface $canonicalizer,

@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 
-class AddBaseCurrencySubscriberSpec extends ObjectBehavior
+final class AddBaseCurrencySubscriberSpec extends ObjectBehavior
 {
     function it_implements_event_subscriber_interface(): void
     {

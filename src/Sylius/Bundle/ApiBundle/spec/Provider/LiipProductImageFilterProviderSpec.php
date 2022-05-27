@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Provider\ProductImageFilterProviderInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LiipProductImageFilterProviderSpec extends ObjectBehavior
+final class LiipProductImageFilterProviderSpec extends ObjectBehavior
 {
     function let(): void
     {

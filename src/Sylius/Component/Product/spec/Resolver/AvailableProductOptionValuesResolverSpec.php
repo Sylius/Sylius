@@ -21,7 +21,7 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\AvailableProductOptionValuesResolverInterface;
 
-class AvailableProductOptionValuesResolverSpec extends ObjectBehavior
+final class AvailableProductOptionValuesResolverSpec extends ObjectBehavior
 {
     private const PRODUCT_CODE = 'PRODUCT_CODE';
 
