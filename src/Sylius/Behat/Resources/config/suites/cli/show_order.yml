@@ -1,0 +1,27 @@
+default:
+    suites:
+        # todo: remove unused contexts
+        cli_show_order:
+            contexts:
+                - sylius.behat.context.cli.show_order
+
+                - sylius.behat.context.hook.doctrine_orm
+                    
+                - sylius.behat.context.transform.address
+                - sylius.behat.context.transform.channel
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.payment
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.shipping_method
+                - sylius.behat.context.transform.order
+                
+                - sylius.behat.context.setup.order
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.payment
+
+            filters:
+                tags: "@show_order&&@cli"
+

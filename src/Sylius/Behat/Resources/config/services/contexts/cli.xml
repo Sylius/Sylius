@@ -27,5 +27,10 @@
             <argument type="service" id="kernel" />
             <argument type="service" id="sylius.repository.order" />
         </service>
+
+        <service id="sylius.behat.context.cli.show_order" class="Sylius\Behat\Context\Cli\ShowOrderContext">
+            <argument type="service" id="kernel" />
+            <argument type="service" id="sylius.repository.order" />
+        </service>
     </services>
 </container>
