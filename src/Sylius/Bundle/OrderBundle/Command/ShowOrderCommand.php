@@ -5,10 +5,13 @@ namespace Sylius\Bundle\OrderBundle\Command;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\Order;
+use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableCell;
+use Symfony\Component\Console\Helper\TableCellStyle;
+use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -56,14 +59,8 @@ class ShowOrderCommand extends Command
     {
         $style->title(sprintf('Order #%s', $order->getNumber()));
 
-        $style->section('Attributes');
         $this->renderAttributes($output, $order);
-        $style->section('Customer');
-        $this->renderCustomer($output, $order->getCustomer());
-        $style->section('Shipping Address');
-        $this->renderAddress($output, $order->getShippingAddress());
-        $style->section('Billing Address');
-        $this->renderAddress($output, $order->getBillingAddress());
+        $this->renderItems($output, $order);
     }
 
     private function renderAttributes(OutputInterface $output, Order $order)
@@ -75,7 +72,15 @@ class ShowOrderCommand extends Command
                 ['Completed', $order->getCheckoutCompletedAt()->format(self::DATE_FORMAT)],
             ],
             [
-                ['Token', $order->getTokenValue(), 3],
+                ['Id', $order->getId()],
+                ['Token', $order->getTokenValue(), 2],
+            ],
+        ]);
+        $this->fieldValueTable($output, [
+            [
+                ['Customer', sprintf('%s (id: %s)', $order->getCustomer()?->getEmail(), $order->getCustomer()?->getId())],
+                ['Billing Addr.', $order->getBillingAddress()?->getId()],
+                ['Shipping Addr.', $order->getShippingAddress()?->getId()],
             ],
         ]);
 
@@ -91,10 +96,6 @@ class ShowOrderCommand extends Command
                 ['Locale', $order->getLocaleCode()],
                 ['Currency', $order->getCurrencyCode()],
                 ['Guest', $order->getCreatedByGuest() ? '✔' : '✘'],
-            ],
-        ]);
-        $this->fieldValueTable($output, [
-            [
             ],
         ]);
     }
@@ -165,6 +166,45 @@ class ShowOrderCommand extends Command
                 ['Province', sprintf('%s (%s)', $address->getProvinceName(), $address->getProvinceCode())],
             ]
         ]);
+    }
+
+    private function renderItems(OutputInterface $output, Order $order): void
+    {
+        $table = new Table($output);
+        $table->setHeaders([
+            'ID',
+            'Variant',
+            'Unit price',
+            'Quantity',
+            'Total',
+        ]);
+        /** @var OrderItemInterface $item */
+        foreach ($order->getItems() as $item) {
+            $table->addRow([
+                $item->getId(),
+                sprintf('%s (id:%s)', $item->getVariantName(), $item->getVariant()?->getId()),
+                $item->getUnitPrice(),
+                $item->getQuantity(),
+                $item->getTotal(),
+            ]);
+        }
+        $table->setStyle('default');
+        $table->addRow(new TableSeparator()) ;
+        $table->addRows(array_map(
+            fn (array $pair) => [
+                new TableCell(
+                    $pair[0],
+                    ['colspan' => 4, 'style' => new TableCellStyle(['align' => 'right']), ]
+                ),
+                $pair[1],
+            ],
+            [
+                ['Shipping', $order->getShippingTotal()],
+                ['Adjustments', $order->getAdjustmentsTotal()],
+                ['Total', $order->getTotal()],
+            ],
+        ));
+        $table->render();
     }
 
 }
