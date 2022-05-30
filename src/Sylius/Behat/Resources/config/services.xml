@@ -91,6 +91,8 @@
 
         <service id="sylius.behat.shared_storage" class="Sylius\Behat\Service\SharedStorage" public="false"/>
 
+        <service id="sylius.behat.request_builder_storage" class="Sylius\Behat\Service\Storage\RequestBuilderStorage" public="false"/>
+
         <service id="sylius.behat.java_script_test_helper" class="Sylius\Behat\Service\Helper\JavaScriptTestHelper" >
             <argument>100000</argument>
             <argument>7</argument>

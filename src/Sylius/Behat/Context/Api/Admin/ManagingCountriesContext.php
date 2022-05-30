@@ -22,6 +22,7 @@ use Sylius\Behat\Client\RequestBuilderFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Behat\Service\Storage\RequestBuilderStorageInterface;
 use Sylius\Bundle\ApiBundle\Provider\PathPrefixes;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
@@ -37,6 +38,7 @@ final class ManagingCountriesContext implements Context
         private IriConverterInterface $iriConverter,
         private RequestBuilderFactoryInterface $requestBuilderFactory,
         private Helper $helper,
+        private RequestBuilderStorageInterface $requestBuilderStorage,
     ) {
     }
 
@@ -50,7 +52,7 @@ final class ManagingCountriesContext implements Context
             Resources::COUNTRIES,
         );
         $requestBuilder = $this->helper->authorize($requestBuilder);
-        $this->sharedStorage->set('request_builder', $requestBuilder);
+        $this->requestBuilderStorage->set($requestBuilder);
     }
 
     /**
@@ -77,7 +79,7 @@ final class ManagingCountriesContext implements Context
             $country->getCode(),
         );
 
-        $this->sharedStorage->set('request_builder', $updateRequestBuilder);
+        $this->requestBuilderStorage->set($updateRequestBuilder);
     }
 
     /**
@@ -107,8 +109,8 @@ final class ManagingCountriesContext implements Context
      */
     public function iSaveMyChanges(): void
     {
-        /** @var RequestBuilder $requestBuilder */
-        $requestBuilder = $this->sharedStorage->get('request_builder');
+        $requestBuilder = $this->requestBuilderStorage->get();
+        Assert::notNull($requestBuilder);
 
         $this->client->executeCustomRequest($requestBuilder->build());
     }
@@ -171,8 +173,8 @@ final class ManagingCountriesContext implements Context
         $showRequestBuilder = $this->helper->authorize($showRequestBuilder);
         $showResponse = $this->client->executeCustomRequest($showRequestBuilder->build());
 
-        /** @var RequestBuilder $requestBuilder */
-        $requestBuilder = $this->sharedStorage->get('request_builder');
+        $requestBuilder = $this->requestBuilderStorage->get();
+        Assert::notNull($requestBuilder);
 
         $provinces = $this->responseChecker->getValue($showResponse, 'provinces');
         foreach ($provinces as $countryProvince) {
@@ -181,7 +183,7 @@ final class ManagingCountriesContext implements Context
             }
         }
 
-        $this->sharedStorage->set('request_builder', $requestBuilder);
+        $this->requestBuilderStorage->set($requestBuilder);
     }
 
     /**
@@ -281,8 +283,8 @@ final class ManagingCountriesContext implements Context
      */
     public function iShouldNotBeAbleToChoose(string $countryName): void
     {
-        /** @var RequestBuilder $requestBuilder */
-        $requestBuilder = $this->sharedStorage->get('request_builder');
+        $requestBuilder = $this->requestBuilderStorage->get();
+        Assert::notNull($requestBuilder);
         $requestBuilder->withPartialContent('code', $this->getCountryCodeByName($countryName));
 
         $response = $this->client->executeCustomRequest($requestBuilder->build());
@@ -333,8 +335,8 @@ final class ManagingCountriesContext implements Context
      */
     public function theCodeFieldShouldBeDisabled(): void
     {
-        /** @var RequestBuilder $requestBuilder */
-        $requestBuilder = $this->sharedStorage->get('request_builder');
+        $requestBuilder = $this->requestBuilderStorage->get();
+        Assert::notNull($requestBuilder);
         $requestBuilder->withContent(['code' => 'NEW_CODE']);
 
         $response = $this->client->executeCustomRequest($requestBuilder->build());

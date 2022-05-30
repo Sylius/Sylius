@@ -96,20 +96,17 @@ final class ResponseChecker implements ResponseCheckerInterface
         return $response->getStatusCode() === Response::HTTP_OK;
     }
 
-    /** @param string|int $value */
-    public function hasValue(Response $response, string $key, $value): bool
+    public function hasValue(Response $response, string $key, string|int|bool $value): bool
     {
         return $this->getResponseContentValue($response, $key) === $value;
     }
 
-    /** @param string|int $value */
-    public function hasValueInCollection(Response $response, string $key, $value): bool
+    public function hasValueInCollection(Response $response, string $key, string|int|bool $value): bool
     {
         return in_array($value, $this->getResponseContentValue($response, $key), true);
     }
 
-    /** @param string|int $value */
-    public function hasItemWithValue(Response $response, string $key, $value): bool
+    public function hasItemWithValue(Response $response, string $key, string|int|bool $value): bool
     {
         foreach ($this->getCollection($response) as $resource) {
             if ($resource[$key] === $value) {
@@ -120,8 +117,7 @@ final class ResponseChecker implements ResponseCheckerInterface
         return false;
     }
 
-    /** @param string|int $value */
-    public function hasSubResourceWithValue(Response $response, string $subResource, string $key, $value): bool
+    public function hasSubResourceWithValue(Response $response, string $subResource, string $key, string|int|bool $value): bool
     {
         foreach ($this->getResponseContentValue($response, $subResource) as $resource) {
             if ($resource[$key] === $value) {
@@ -132,8 +128,7 @@ final class ResponseChecker implements ResponseCheckerInterface
         return false;
     }
 
-    /** @param string|array $value */
-    public function hasItemOnPositionWithValue(Response $response, int $position, string $key, $value): bool
+    public function hasItemOnPositionWithValue(Response $response, int $position, string $key, string|int|bool|array $value): bool
     {
         return $this->getCollection($response)[$position][$key] === $value;
     }
