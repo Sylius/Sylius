@@ -52,9 +52,10 @@ final class CompleteOrderHandler implements MessageHandlerInterface
             $cart->setNotes($completeOrder->notes);
         }
 
-        if ($promotion = $this->orderPromotionsIntegrityChecker->check($cart)){
+        if ($promotion = $this->orderPromotionsIntegrityChecker->check($cart)) {
             $this->commandBus->dispatch(
-                new InformAboutCartRecalculation($promotion->getName()), [new DispatchAfterCurrentBusStamp()]
+                new InformAboutCartRecalculation($promotion->getName()),
+                [new DispatchAfterCurrentBusStamp()]
             );
 
             return $cart;
