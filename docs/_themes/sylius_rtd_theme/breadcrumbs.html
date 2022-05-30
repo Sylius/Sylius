@@ -14,8 +14,13 @@
       <li class="navbar__separator">|</li>
       <li class="wy-breadcrumbs-aside">
         {% if display_github %}
-        <a href="https://github.com/{{ github_user }}/{{ github_repo }}/blob/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ source_suffix }}"
-          class="fa fa-github"> Edit on GitHub</a>
+          {% if sourcename == null %}
+            <a href="https://github.com/{{ github_user }}/{{ github_repo }}/blob/docs"
+             class="fa fa-github"> Edit on GitHub</a>
+          {% else %}
+            <a href="https://github.com/{{ github_user }}/{{ github_repo }}/blob/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ source_suffix }}"
+             class="fa fa-github"> Edit on GitHub</a>
+          {% endif %}
         {% elif display_bitbucket %}
         <a href="https://bitbucket.org/{{ bitbucket_user }}/{{ bitbucket_repo }}/src/{{ bitbucket_version}}{{ conf_py_path }}{{ pagename }}{{ source_suffix }}"
           class="fa fa-bitbucket"> Edit on Bitbucket</a>
