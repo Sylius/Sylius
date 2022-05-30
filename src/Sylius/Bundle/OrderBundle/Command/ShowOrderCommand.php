@@ -31,7 +31,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Traversable;
 
-class ShowOrderCommand extends Command
+final class ShowOrderCommand extends Command
 {
     public const ARG_NUMBER = 'number';
 
