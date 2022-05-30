@@ -1,0 +1,24 @@
+---------------------------------------------------------------------------
+
+by stloyd at 2022-05-28T13:18:46Z
+
+Seems like duplicated of https://github.com/Sylius/Sylius/pull/14018
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-05-30T04:58:48Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "sonata"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-05-30T05:48:09Z
+
+Thank you, Rafał! :tada:
