@@ -60,6 +60,7 @@
 
         <service id="sylius.behat.helper" class="Sylius\Behat\Client\Helper">
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.request_builder_storage" />
             <argument type="service" id="sylius.behat.request_builder_factory" />
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument>%sylius.api.authorization_header%</argument>
