@@ -45,21 +45,6 @@ It allows you to convert money values from one currency to another.
 
 This solution is used for displaying an *approximate* value of price when the desired currency is different from the base currency of the current channel.
 
-Available Currencies Provider
------------------------------
-
-The default menu for selecting currency is using a service - **CurrencyProvider** - with the ``sylius.currency_provider`` id, which returns all enabled currencies.
-This is your entry point if you would like override this logic and return different currencies for various scenarios.
-
-.. code-block:: php
-
-    <?php
-
-    public function fooAction()
-    {
-        $currencies = $this->get('sylius.currency_provider')->getAvailableCurrencies();
-    }
-
 Switching Currency of a Channel
 -------------------------------
 
