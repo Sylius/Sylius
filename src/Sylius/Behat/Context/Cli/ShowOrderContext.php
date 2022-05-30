@@ -44,7 +44,7 @@ final class ShowOrderContext implements Context
     }
 
     /**
-     * @When I run show order command for order :arg1
+     * @When I run show order command for order :number
      */
     public function runShowOrderCommand(string $number): void
     {
