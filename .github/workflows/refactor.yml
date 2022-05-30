@@ -17,7 +17,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                branch: ["1.10", "1.11", "master"]
+                branch: ["1.11", "master"]
         
         steps:
             -
