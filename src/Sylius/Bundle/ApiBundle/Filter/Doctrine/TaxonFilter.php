@@ -44,7 +44,7 @@ final class TaxonFilter extends AbstractContextAwareFilter
             return;
         }
 
-        try{
+        try {
             /** @var TaxonInterface $taxon */
             $taxon = $this->iriConverter->getItemFromIri($value);
             $taxonRoot = $taxon->getRoot();
