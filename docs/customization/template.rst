@@ -256,11 +256,52 @@ You might think that this is the only way of customisation with the events, but 
                             priority: 1
 
 3. Pass variables:
-    You can pass any variable from the template to the block and access it with function:
+    You can access variables by using the function:
 
     .. code-block:: html
 
-        {{ dump(resource) }}
+        {{ dump() }}
+
+    You can also access the resources and entities (in the correct views) variables:
+
+    .. code-block:: html
+
+        # for example in products show view
+        {{ dump(product) }}
+
+    Or you can pass any variable from the template to the block and access it with function:
+
+    .. code-block:: html
+
+        # Parent html
+        ...
+            {{ sylius_template_event('sylius.shop.product.show', {'customVariable': variable}) }}
+        ...
+
+    .. code-block:: html
+
+        # Template html
+        ...
+            {{ dump(customVariable) }}
+        ...
+
+4. Override block templates:
+    You can override the existing blocks by changing the config:
+
+    .. code-block:: yaml
+
+        # config.yaml
+        sylius_ui:
+            events:
+                sylius.shop.layout.header.grid:
+                    blocks:
+                        logo: 'logo.html.twig'
+
+    And adding your own template into `templates/logo.html.twig` folder.
+
+    .. note::
+
+        Check out the full example of overriding the template in :doc:`Shop Customizations </getting-started-with-sylius/shop-customizations>`
 
 How to use themes for customizations?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
