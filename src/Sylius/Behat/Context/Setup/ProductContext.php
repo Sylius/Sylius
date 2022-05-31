@@ -676,7 +676,7 @@ final class ProductContext implements Context
     {
         $code = sprintf('%s_%s', $product->getCode(), $optionValueName);
         /** @var ProductVariantInterface $productVariant */
-        $productVariant = $product->getVariants()->filter(fn($variant) => $code === $variant->getCode())->first();
+        $productVariant = $product->getVariants()->filter(fn ($variant) => $code === $variant->getCode())->first();
 
         Assert::notNull($productVariant, sprintf('Product variant with given code %s not exists!', $code));
 

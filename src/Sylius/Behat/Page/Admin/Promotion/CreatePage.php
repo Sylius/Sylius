@@ -32,7 +32,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
         $this->getDocument()->clickLink('Add rule');
 
-        $this->getDocument()->waitFor(5, fn() => $count + 1 === count($this->getCollectionItems('rules')));
+        $this->getDocument()->waitFor(5, fn () => $count + 1 === count($this->getCollectionItems('rules')));
 
         if (null !== $ruleName) {
             $this->selectRuleOption('Type', $ruleName);
@@ -80,7 +80,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
         $this->getDocument()->clickLink('Add action');
 
-        $this->getDocument()->waitFor(5, fn() => $count + 1 === count($this->getCollectionItems('actions')));
+        $this->getDocument()->waitFor(5, fn () => $count + 1 === count($this->getCollectionItems('actions')));
 
         if (null !== $actionName) {
             $this->selectActionOption('Type', $actionName);

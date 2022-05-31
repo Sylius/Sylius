@@ -62,7 +62,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 
         $form = $this->getDocument()->find('css', 'form');
 
-        $this->getDocument()->waitFor(1, fn() => $form->hasClass('loading'));
+        $this->getDocument()->waitFor(1, fn () => $form->hasClass('loading'));
     }
 
     public function removeAttribute(string $attributeName, string $localeCode): void
@@ -284,7 +284,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $dropdown->click();
 
         foreach ($productsNames as $productName) {
-            $dropdown->waitFor(5, fn() => $this->hasElement('association_dropdown_item', [
+            $dropdown->waitFor(5, fn () => $this->hasElement('association_dropdown_item', [
                 '%association%' => $productAssociationType->getName(),
                 '%item%' => $productName,
             ]));

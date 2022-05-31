@@ -169,7 +169,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $dropdown->click();
 
         foreach ($productsNames as $productName) {
-            $dropdown->waitFor(5, fn() => $this->hasElement('association_dropdown_item', [
+            $dropdown->waitFor(5, fn () => $this->hasElement('association_dropdown_item', [
                 '%association%' => $productAssociationType->getName(),
                 '%item%' => $productName,
             ]));
@@ -292,7 +292,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     private function waitForFormElement(int $timeout = 5): void
     {
         $form = $this->getElement('form');
-        $this->getDocument()->waitFor($timeout, fn() => false === strpos($form->getAttribute('class'), 'loading'));
+        $this->getDocument()->waitFor($timeout, fn () => false === strpos($form->getAttribute('class'), 'loading'));
     }
 
     private function clickTabIfItsNotActive(string $tabName): void

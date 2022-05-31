@@ -228,7 +228,7 @@ final class FormElement extends Element implements FormElementInterface
 
         $this->getElement($buttonElement)->click();
 
-        $this->getDocument()->waitFor(5, fn() => $count + 1 === count($this->getCollectionItems($collectionElement)));
+        $this->getDocument()->waitFor(5, fn () => $count + 1 === count($this->getCollectionItems($collectionElement)));
     }
 
     /** @return NodeElement[] */

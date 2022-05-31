@@ -40,7 +40,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function chooseMember(string $name): void
     {
-        $selectItems = $this->getDocument()->waitFor(2, fn() => $this->getDocument()->findAll('css', 'div[data-form-type="collection"] select'));
+        $selectItems = $this->getDocument()->waitFor(2, fn () => $this->getDocument()->findAll('css', 'div[data-form-type="collection"] select'));
         $lastSelectItem = end($selectItems);
 
         if (false === $lastSelectItem) {

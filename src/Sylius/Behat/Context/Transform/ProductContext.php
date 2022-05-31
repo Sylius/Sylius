@@ -54,6 +54,6 @@ final class ProductContext implements Context
      */
     public function getProductsByNames(...$productsNames)
     {
-        return array_map(fn($productName) => $this->getProductByName($productName), $productsNames);
+        return array_map(fn ($productName) => $this->getProductByName($productName), $productsNames);
     }
 }

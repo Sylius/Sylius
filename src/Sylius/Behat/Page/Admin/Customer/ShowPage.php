@@ -186,7 +186,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             ->findAll('css', '.row > .column > .statistic > .sylius-channel-name')
         ;
 
-        $statisticsRibs = array_filter($statisticsRibs, fn(NodeElement $statistic) => $channelName === trim($statistic->getText()));
+        $statisticsRibs = array_filter($statisticsRibs, fn (NodeElement $statistic) => $channelName === trim($statistic->getText()));
 
         $actualStatisticsCount = count($statisticsRibs);
         Assert::same(

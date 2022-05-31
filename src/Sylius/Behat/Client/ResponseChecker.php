@@ -36,7 +36,7 @@ final class ResponseChecker implements ResponseCheckerInterface
 
     public function getCollectionItemsWithValue(Response $response, string $key, string $value): array
     {
-        $items = array_filter($this->getCollection($response), fn(array $item): bool => $item[$key] === $value);
+        $items = array_filter($this->getCollection($response), fn (array $item): bool => $item[$key] === $value);
 
         return $items;
     }

@@ -26,6 +26,6 @@ abstract class JQueryHelper
     public static function waitForFormToStopLoading(DocumentElement $document, int $timeout = 10): void
     {
         $form = $document->find('css', 'form');
-        $document->waitFor($timeout, fn() => !$form->hasClass('loading'));
+        $document->waitFor($timeout, fn () => !$form->hasClass('loading'));
     }
 }
