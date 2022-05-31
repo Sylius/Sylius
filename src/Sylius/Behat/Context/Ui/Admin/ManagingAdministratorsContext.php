@@ -27,36 +27,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingAdministratorsContext implements Context
 {
-    private CreatePageInterface $createPage;
-
-    private IndexPageInterface $indexPage;
-
-    private UpdatePageInterface $updatePage;
-
-    private TopBarElementInterface $topBarElement;
-
-    private NotificationCheckerInterface $notificationChecker;
-
-    private RepositoryInterface $adminUserRepository;
-
-    private SharedStorageInterface $sharedStorage;
-
-    public function __construct(
-        CreatePageInterface $createPage,
-        IndexPageInterface $indexPage,
-        UpdatePageInterface $updatePage,
-        TopBarElementInterface $topBarElement,
-        NotificationCheckerInterface $notificationChecker,
-        RepositoryInterface $adminUserRepository,
-        SharedStorageInterface $sharedStorage
-    ) {
-        $this->createPage = $createPage;
-        $this->indexPage = $indexPage;
-        $this->updatePage = $updatePage;
-        $this->topBarElement = $topBarElement;
-        $this->notificationChecker = $notificationChecker;
-        $this->adminUserRepository = $adminUserRepository;
-        $this->sharedStorage = $sharedStorage;
+    public function __construct(private CreatePageInterface $createPage, private IndexPageInterface $indexPage, private UpdatePageInterface $updatePage, private TopBarElementInterface $topBarElement, private NotificationCheckerInterface $notificationChecker, private RepositoryInterface $adminUserRepository, private SharedStorageInterface $sharedStorage)
+    {
     }
 
     /**

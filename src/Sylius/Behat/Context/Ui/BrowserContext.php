@@ -18,11 +18,8 @@ use Sylius\Behat\Element\BrowserElementInterface;
 
 final class BrowserContext implements Context
 {
-    private BrowserElementInterface $browserElement;
-
-    public function __construct(BrowserElementInterface $browserElement)
+    public function __construct(private BrowserElementInterface $browserElement)
     {
-        $this->browserElement = $browserElement;
     }
 
     /**

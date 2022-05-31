@@ -27,28 +27,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingZonesContext implements Context
 {
-    private CreatePageInterface $createPage;
-
-    private IndexPageInterface $indexPage;
-
-    private UpdatePageInterface $updatePage;
-
-    private CurrentPageResolverInterface $currentPageResolver;
-
-    private NotificationCheckerInterface $notificationChecker;
-
-    public function __construct(
-        CreatePageInterface $createPage,
-        IndexPageInterface $indexPage,
-        UpdatePageInterface $updatePage,
-        CurrentPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker
-    ) {
-        $this->createPage = $createPage;
-        $this->indexPage = $indexPage;
-        $this->updatePage = $updatePage;
-        $this->currentPageResolver = $currentPageResolver;
-        $this->notificationChecker = $notificationChecker;
+    public function __construct(private CreatePageInterface $createPage, private IndexPageInterface $indexPage, private UpdatePageInterface $updatePage, private CurrentPageResolverInterface $currentPageResolver, private NotificationCheckerInterface $notificationChecker)
+    {
     }
 
     /**
@@ -367,7 +347,7 @@ final class ManagingZonesContext implements Context
 
         try {
             $member = $this->createPage->chooseMember($name);
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
         }
         Assert::isEmpty($member);
     }

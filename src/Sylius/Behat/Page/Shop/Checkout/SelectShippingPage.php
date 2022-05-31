@@ -68,7 +68,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     {
         try {
             $this->getElement('order_cannot_be_shipped_message');
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
             return false;
         }
 
@@ -79,7 +79,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     {
         $feeElement = $this->getElement('shipping_method_fee', ['%shipping_method%' => $shippingMethodName])->getText();
 
-        return false !== strpos($feeElement, $fee);
+        return str_contains($feeElement, $fee);
     }
 
     public function getItemSubtotal(string $itemName): string

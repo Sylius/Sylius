@@ -22,24 +22,8 @@ use Webmozart\Assert\Assert;
 
 final class ShopSecurityContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private SecurityServiceInterface $securityService;
-
-    private ExampleFactoryInterface $userFactory;
-
-    private UserRepositoryInterface $userRepository;
-
-    public function __construct(
-        SharedStorageInterface $sharedStorage,
-        SecurityServiceInterface $securityService,
-        ExampleFactoryInterface $userFactory,
-        UserRepositoryInterface $userRepository
-    ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->securityService = $securityService;
-        $this->userFactory = $userFactory;
-        $this->userRepository = $userRepository;
+    public function __construct(private SharedStorageInterface $sharedStorage, private SecurityServiceInterface $securityService, private ExampleFactoryInterface $userFactory, private UserRepositoryInterface $userRepository)
+    {
     }
 
     /**

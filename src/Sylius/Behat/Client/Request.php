@@ -17,10 +17,6 @@ use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 final class Request implements RequestInterface
 {
-    private string $url;
-
-    private string $method;
-
     private array $headers = ['HTTP_ACCEPT' => 'application/ld+json'];
 
     private array $content = [];
@@ -29,10 +25,8 @@ final class Request implements RequestInterface
 
     private array $files = [];
 
-    private function __construct(string $url, string $method, array $headers = [])
+    private function __construct(private string $url, private string $method, array $headers = [])
     {
-        $this->url = $url;
-        $this->method = $method;
         $this->headers = array_merge($this->headers, $headers);
     }
 

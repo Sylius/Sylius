@@ -26,32 +26,8 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class CustomerContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private CustomerRepositoryInterface $customerRepository;
-
-    private ObjectManager $customerManager;
-
-    private FactoryInterface $customerFactory;
-
-    private FactoryInterface $userFactory;
-
-    private FactoryInterface $addressFactory;
-
-    public function __construct(
-        SharedStorageInterface $sharedStorage,
-        CustomerRepositoryInterface $customerRepository,
-        ObjectManager $customerManager,
-        FactoryInterface $customerFactory,
-        FactoryInterface $userFactory,
-        FactoryInterface $addressFactory
-    ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->customerRepository = $customerRepository;
-        $this->customerManager = $customerManager;
-        $this->customerFactory = $customerFactory;
-        $this->userFactory = $userFactory;
-        $this->addressFactory = $addressFactory;
+    public function __construct(private SharedStorageInterface $sharedStorage, private CustomerRepositoryInterface $customerRepository, private ObjectManager $customerManager, private FactoryInterface $customerFactory, private FactoryInterface $userFactory, private FactoryInterface $addressFactory)
+    {
     }
 
     /**

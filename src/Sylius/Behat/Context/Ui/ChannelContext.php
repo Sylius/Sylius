@@ -25,32 +25,8 @@ use Webmozart\Assert\Assert;
 
 final class ChannelContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private ChannelContextSetterInterface $channelContextSetter;
-
-    private ChannelRepositoryInterface $channelRepository;
-
-    private CreatePageInterface $channelCreatePage;
-
-    private HomePageInterface $homePage;
-
-    private MainPageInterface $pluginMainPage;
-
-    public function __construct(
-        SharedStorageInterface $sharedStorage,
-        ChannelContextSetterInterface $channelContextSetter,
-        ChannelRepositoryInterface $channelRepository,
-        CreatePageInterface $channelCreatePage,
-        HomePageInterface $homePage,
-        MainPageInterface $pluginMainPage
-    ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->channelContextSetter = $channelContextSetter;
-        $this->channelRepository = $channelRepository;
-        $this->channelCreatePage = $channelCreatePage;
-        $this->homePage = $homePage;
-        $this->pluginMainPage = $pluginMainPage;
+    public function __construct(private SharedStorageInterface $sharedStorage, private ChannelContextSetterInterface $channelContextSetter, private ChannelRepositoryInterface $channelRepository, private CreatePageInterface $channelCreatePage, private HomePageInterface $homePage, private MainPageInterface $pluginMainPage)
+    {
     }
 
     /**

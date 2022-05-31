@@ -25,32 +25,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingAdministratorsContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ApiClientInterface $avatarImagesClient;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private IriConverterInterface $iriConverter;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private \ArrayAccess $minkParameters;
-
-    public function __construct(
-        ApiClientInterface $client,
-        ApiClientInterface $avatarImagesClient,
-        ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter,
-        SharedStorageInterface $sharedStorage,
-        \ArrayAccess $minkParameters
-    ) {
-        $this->client = $client;
-        $this->avatarImagesClient = $avatarImagesClient;
-        $this->responseChecker = $responseChecker;
-        $this->iriConverter = $iriConverter;
-        $this->sharedStorage = $sharedStorage;
-        $this->minkParameters = $minkParameters;
+    public function __construct(private ApiClientInterface $client, private ApiClientInterface $avatarImagesClient, private ResponseCheckerInterface $responseChecker, private IriConverterInterface $iriConverter, private SharedStorageInterface $sharedStorage, private \ArrayAccess $minkParameters)
+    {
     }
 
     /**

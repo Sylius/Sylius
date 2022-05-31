@@ -25,28 +25,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductAttributesContext implements Context
 {
-    private CreatePageInterface $createPage;
-
-    private IndexPageInterface $indexPage;
-
-    private UpdatePageInterface $updatePage;
-
-    private CurrentPageResolverInterface $currentPageResolver;
-
-    private SharedSecurityServiceInterface $sharedSecurityService;
-
-    public function __construct(
-        CreatePageInterface $createPage,
-        IndexPageInterface $indexPage,
-        UpdatePageInterface $updatePage,
-        CurrentPageResolverInterface $currentPageResolver,
-        SharedSecurityServiceInterface $sharedSecurityService
-    ) {
-        $this->createPage = $createPage;
-        $this->indexPage = $indexPage;
-        $this->updatePage = $updatePage;
-        $this->currentPageResolver = $currentPageResolver;
-        $this->sharedSecurityService = $sharedSecurityService;
+    public function __construct(private CreatePageInterface $createPage, private IndexPageInterface $indexPage, private UpdatePageInterface $updatePage, private CurrentPageResolverInterface $currentPageResolver, private SharedSecurityServiceInterface $sharedSecurityService)
+    {
     }
 
     /**

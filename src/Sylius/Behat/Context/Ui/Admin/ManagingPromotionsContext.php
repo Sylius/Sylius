@@ -27,36 +27,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPromotionsContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private \Sylius\Behat\Page\Admin\Promotion\IndexPageInterface $indexPage;
-
-    private IndexPageCouponInterface $indexCouponPage;
-
-    private CreatePageInterface $createPage;
-
-    private UpdatePageInterface $updatePage;
-
-    private CurrentPageResolverInterface $currentPageResolver;
-
-    private NotificationCheckerInterface $notificationChecker;
-
-    public function __construct(
-        SharedStorageInterface $sharedStorage,
-        IndexPageInterface $indexPage,
-        IndexPageCouponInterface $indexCouponPage,
-        CreatePageInterface $createPage,
-        UpdatePageInterface $updatePage,
-        CurrentPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker
-    ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->indexPage = $indexPage;
-        $this->indexCouponPage = $indexCouponPage;
-        $this->createPage = $createPage;
-        $this->updatePage = $updatePage;
-        $this->currentPageResolver = $currentPageResolver;
-        $this->notificationChecker = $notificationChecker;
+    public function __construct(private SharedStorageInterface $sharedStorage, private IndexPageInterface $indexPage, private IndexPageCouponInterface $indexCouponPage, private CreatePageInterface $createPage, private UpdatePageInterface $updatePage, private CurrentPageResolverInterface $currentPageResolver, private NotificationCheckerInterface $notificationChecker)
+    {
     }
 
     /**
@@ -217,8 +189,8 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddTheActionConfiguredWithAPercentageValueForChannel(
         string $actionType,
-        string $percentage = null,
-        string $channelName
+        string $channelName,
+        string $percentage = null
     ): void {
         $this->createPage->addAction($actionType);
         $this->createPage->fillActionOptionForChannel($channelName, 'Percentage', $percentage);

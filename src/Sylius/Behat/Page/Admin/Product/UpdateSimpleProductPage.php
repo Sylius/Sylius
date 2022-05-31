@@ -423,7 +423,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 
     public function hasNoPriceForChannel(string $channelName): bool
     {
-        return strpos($this->getElement('prices')->getHtml(), $channelName) === false;
+        return !str_contains($this->getElement('prices')->getHtml(), $channelName);
     }
 
     protected function getCodeElement(): NodeElement
@@ -554,7 +554,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 
     private function saveImageUrlForType(string $type, string $imageUrl): void
     {
-        if (false !== strpos($imageUrl, 'data:image/jpeg')) {
+        if (str_contains($imageUrl, 'data:image/jpeg')) {
             return;
         }
 

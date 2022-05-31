@@ -26,36 +26,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ProductAssociationContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private FactoryInterface $productAssociationTypeFactory;
-
-    private FactoryInterface $productAssociationTypeTranslationFactory;
-
-    private FactoryInterface $productAssociationFactory;
-
-    private ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository;
-
-    private RepositoryInterface $productAssociationRepository;
-
-    private ObjectManager $objectManager;
-
-    public function __construct(
-        SharedStorageInterface $sharedStorage,
-        FactoryInterface $productAssociationTypeFactory,
-        FactoryInterface $productAssociationTypeTranslationFactory,
-        FactoryInterface $productAssociationFactory,
-        ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository,
-        RepositoryInterface $productAssociationRepository,
-        ObjectManager $objectManager
-    ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->productAssociationTypeFactory = $productAssociationTypeFactory;
-        $this->productAssociationTypeTranslationFactory = $productAssociationTypeTranslationFactory;
-        $this->productAssociationFactory = $productAssociationFactory;
-        $this->productAssociationTypeRepository = $productAssociationTypeRepository;
-        $this->productAssociationRepository = $productAssociationRepository;
-        $this->objectManager = $objectManager;
+    public function __construct(private SharedStorageInterface $sharedStorage, private FactoryInterface $productAssociationTypeFactory, private FactoryInterface $productAssociationTypeTranslationFactory, private FactoryInterface $productAssociationFactory, private ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository, private RepositoryInterface $productAssociationRepository, private ObjectManager $objectManager)
+    {
     }
 
     /**

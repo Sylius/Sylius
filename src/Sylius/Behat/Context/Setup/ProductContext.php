@@ -43,72 +43,24 @@ use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private ProductRepositoryInterface $productRepository;
-
-    private ProductFactoryInterface $productFactory;
-
-    private FactoryInterface $productTranslationFactory;
-
-    private FactoryInterface $productVariantFactory;
-
-    private FactoryInterface $productVariantTranslationFactory;
-
-    private FactoryInterface $channelPricingFactory;
-
-    private FactoryInterface $productOptionFactory;
-
-    private FactoryInterface $productOptionValueFactory;
-
-    private FactoryInterface $productImageFactory;
-
-    private ObjectManager $objectManager;
-
-    private ProductVariantGeneratorInterface $productVariantGenerator;
-
-    private ProductVariantResolverInterface $defaultVariantResolver;
-
-    private ImageUploaderInterface $imageUploader;
-
-    private SlugGeneratorInterface $slugGenerator;
-
-    private \ArrayAccess $minkParameters;
-
     public function __construct(
-        SharedStorageInterface $sharedStorage,
-        ProductRepositoryInterface $productRepository,
-        ProductFactoryInterface $productFactory,
-        FactoryInterface $productTranslationFactory,
-        FactoryInterface $productVariantFactory,
-        FactoryInterface $productVariantTranslationFactory,
-        FactoryInterface $channelPricingFactory,
-        FactoryInterface $productOptionFactory,
-        FactoryInterface $productOptionValueFactory,
-        FactoryInterface $productImageFactory,
-        ObjectManager $objectManager,
-        ProductVariantGeneratorInterface $productVariantGenerator,
-        ProductVariantResolverInterface $defaultVariantResolver,
-        ImageUploaderInterface $imageUploader,
-        SlugGeneratorInterface $slugGenerator,
-        \ArrayAccess $minkParameters
+        private SharedStorageInterface $sharedStorage,
+        private ProductRepositoryInterface $productRepository,
+        private ProductFactoryInterface $productFactory,
+        private FactoryInterface $productTranslationFactory,
+        private FactoryInterface $productVariantFactory,
+        private FactoryInterface $productVariantTranslationFactory,
+        private FactoryInterface $channelPricingFactory,
+        private FactoryInterface $productOptionFactory,
+        private FactoryInterface $productOptionValueFactory,
+        private FactoryInterface $productImageFactory,
+        private ObjectManager $objectManager,
+        private ProductVariantGeneratorInterface $productVariantGenerator,
+        private ProductVariantResolverInterface $defaultVariantResolver,
+        private ImageUploaderInterface $imageUploader,
+        private SlugGeneratorInterface $slugGenerator,
+        private \ArrayAccess $minkParameters
     ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->productRepository = $productRepository;
-        $this->productFactory = $productFactory;
-        $this->productTranslationFactory = $productTranslationFactory;
-        $this->productVariantFactory = $productVariantFactory;
-        $this->productVariantTranslationFactory = $productVariantTranslationFactory;
-        $this->channelPricingFactory = $channelPricingFactory;
-        $this->productOptionFactory = $productOptionFactory;
-        $this->productOptionValueFactory = $productOptionValueFactory;
-        $this->productImageFactory = $productImageFactory;
-        $this->objectManager = $objectManager;
-        $this->productVariantGenerator = $productVariantGenerator;
-        $this->defaultVariantResolver = $defaultVariantResolver;
-        $this->imageUploader = $imageUploader;
-        $this->slugGenerator = $slugGenerator;
-        $this->minkParameters = $minkParameters;
     }
 
     /**
@@ -698,7 +650,7 @@ final class ProductContext implements Context
             }
 
             $this->productVariantGenerator->generate($product);
-        } catch (\InvalidArgumentException $exception) {
+        } catch (\InvalidArgumentException) {
             /** @var ProductVariantInterface $productVariant */
             $productVariant = $this->productVariantFactory->createNew();
 
@@ -1174,10 +1126,8 @@ final class ProductContext implements Context
      * @param string $productVariantName
      * @param int $price
      * @param string $code
-     * @param ChannelInterface $channel
      * @param int $position
      * @param bool $shippingRequired
-     *
      * @return ProductVariantInterface
      */
     private function createProductVariant(

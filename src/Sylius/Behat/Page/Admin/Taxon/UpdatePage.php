@@ -293,7 +293,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     private function saveImageUrlForType(string $type, string $imageUrl): void
     {
-        if (false !== strpos($imageUrl, 'data:image/jpeg')) {
+        if (str_contains($imageUrl, 'data:image/jpeg')) {
             return;
         }
 

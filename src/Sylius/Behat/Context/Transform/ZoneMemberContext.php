@@ -23,24 +23,8 @@ use Webmozart\Assert\Assert;
 
 final class ZoneMemberContext implements Context
 {
-    private CountryNameConverterInterface $countryNameConverter;
-
-    private RepositoryInterface $provinceRepository;
-
-    private RepositoryInterface $zoneRepository;
-
-    private RepositoryInterface $zoneMemberRepository;
-
-    public function __construct(
-        CountryNameConverterInterface $countryNameConverter,
-        RepositoryInterface $provinceRepository,
-        RepositoryInterface $zoneRepository,
-        RepositoryInterface $zoneMemberRepository
-    ) {
-        $this->countryNameConverter = $countryNameConverter;
-        $this->provinceRepository = $provinceRepository;
-        $this->zoneRepository = $zoneRepository;
-        $this->zoneMemberRepository = $zoneMemberRepository;
+    public function __construct(private CountryNameConverterInterface $countryNameConverter, private RepositoryInterface $provinceRepository, private RepositoryInterface $zoneRepository, private RepositoryInterface $zoneMemberRepository)
+    {
     }
 
     /**

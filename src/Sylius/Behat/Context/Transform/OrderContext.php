@@ -21,16 +21,8 @@ use Webmozart\Assert\Assert;
 
 final class OrderContext implements Context
 {
-    private CustomerRepositoryInterface $customerRepository;
-
-    private OrderRepositoryInterface $orderRepository;
-
-    public function __construct(
-        CustomerRepositoryInterface $customerRepository,
-        OrderRepositoryInterface $orderRepository
-    ) {
-        $this->customerRepository = $customerRepository;
-        $this->orderRepository = $orderRepository;
+    public function __construct(private CustomerRepositoryInterface $customerRepository, private OrderRepositoryInterface $orderRepository)
+    {
     }
 
     /**

@@ -30,36 +30,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingOrdersContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private IndexPageInterface $indexPage;
-
-    private ShowPageInterface $showPage;
-
-    private UpdatePageInterface $updatePage;
-
-    private HistoryPageInterface $historyPage;
-
-    private NotificationCheckerInterface $notificationChecker;
-
-    private SharedSecurityServiceInterface $sharedSecurityService;
-
-    public function __construct(
-        SharedStorageInterface $sharedStorage,
-        IndexPageInterface $indexPage,
-        ShowPageInterface $showPage,
-        UpdatePageInterface $updatePage,
-        HistoryPageInterface $historyPage,
-        NotificationCheckerInterface $notificationChecker,
-        SharedSecurityServiceInterface $sharedSecurityService
-    ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->indexPage = $indexPage;
-        $this->showPage = $showPage;
-        $this->updatePage = $updatePage;
-        $this->historyPage = $historyPage;
-        $this->notificationChecker = $notificationChecker;
-        $this->sharedSecurityService = $sharedSecurityService;
+    public function __construct(private SharedStorageInterface $sharedStorage, private IndexPageInterface $indexPage, private ShowPageInterface $showPage, private UpdatePageInterface $updatePage, private HistoryPageInterface $historyPage, private NotificationCheckerInterface $notificationChecker, private SharedSecurityServiceInterface $sharedSecurityService)
+    {
     }
 
     /**

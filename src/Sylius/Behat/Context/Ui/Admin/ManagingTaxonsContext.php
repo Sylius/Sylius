@@ -27,36 +27,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingTaxonsContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private CreatePageInterface $createPage;
-
-    private CreateForParentPageInterface $createForParentPage;
-
-    private UpdatePageInterface $updatePage;
-
-    private CurrentPageResolverInterface $currentPageResolver;
-
-    private NotificationCheckerInterface $notificationChecker;
-
-    private JavaScriptTestHelper $testHelper;
-
-    public function __construct(
-        SharedStorageInterface $sharedStorage,
-        CreatePageInterface $createPage,
-        CreateForParentPageInterface $createForParentPage,
-        UpdatePageInterface $updatePage,
-        CurrentPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker,
-        JavaScriptTestHelper $testHelper
-    ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->createPage = $createPage;
-        $this->createForParentPage = $createForParentPage;
-        $this->updatePage = $updatePage;
-        $this->currentPageResolver = $currentPageResolver;
-        $this->notificationChecker = $notificationChecker;
-        $this->testHelper = $testHelper;
+    public function __construct(private SharedStorageInterface $sharedStorage, private CreatePageInterface $createPage, private CreateForParentPageInterface $createForParentPage, private UpdatePageInterface $updatePage, private CurrentPageResolverInterface $currentPageResolver, private NotificationCheckerInterface $notificationChecker, private JavaScriptTestHelper $testHelper)
+    {
     }
 
     /**
@@ -468,7 +440,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @return CreatePageInterface|CreateForParentPageInterface|UpdatePageInterface
      */
-    private function resolveCurrentPage()
+    private function resolveCurrentPage(): CreateForParentPageInterface|CreatePageInterface|UpdatePageInterface
     {
         return $this->currentPageResolver->getCurrentPageWithForm([
             $this->createPage,

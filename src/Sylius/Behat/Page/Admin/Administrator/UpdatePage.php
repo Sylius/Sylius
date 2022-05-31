@@ -55,7 +55,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $srcPath = $this->getAvatarImagePath();
 
-        return strpos($srcPath, $avatarPath) !== false;
+        return str_contains($srcPath, $avatarPath);
     }
 
     protected function getDefinedElements(): array

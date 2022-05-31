@@ -40,40 +40,8 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionContext implements Context
 {
-    private ExampleFactoryInterface $catalogPromotionExampleFactory;
-
-    private FactoryInterface $catalogPromotionScopeFactory;
-
-    private FactoryInterface $catalogPromotionActionFactory;
-
-    private EntityManagerInterface $entityManager;
-
-    private ChannelRepositoryInterface $channelRepository;
-
-    private StateMachineFactoryInterface $stateMachineFactory;
-
-    private MessageBusInterface $eventBus;
-
-    private SharedStorageInterface $sharedStorage;
-
-    public function __construct(
-        ExampleFactoryInterface $catalogPromotionExampleFactory,
-        FactoryInterface $catalogPromotionScopeFactory,
-        FactoryInterface $catalogPromotionActionFactory,
-        EntityManagerInterface $entityManager,
-        ChannelRepositoryInterface $channelRepository,
-        StateMachineFactoryInterface $stateMachineFactory,
-        MessageBusInterface $eventBus,
-        SharedStorageInterface $sharedStorage
-    ) {
-        $this->catalogPromotionExampleFactory = $catalogPromotionExampleFactory;
-        $this->catalogPromotionScopeFactory = $catalogPromotionScopeFactory;
-        $this->catalogPromotionActionFactory = $catalogPromotionActionFactory;
-        $this->entityManager = $entityManager;
-        $this->channelRepository = $channelRepository;
-        $this->stateMachineFactory = $stateMachineFactory;
-        $this->eventBus = $eventBus;
-        $this->sharedStorage = $sharedStorage;
+    public function __construct(private ExampleFactoryInterface $catalogPromotionExampleFactory, private FactoryInterface $catalogPromotionScopeFactory, private FactoryInterface $catalogPromotionActionFactory, private EntityManagerInterface $entityManager, private ChannelRepositoryInterface $channelRepository, private StateMachineFactoryInterface $stateMachineFactory, private MessageBusInterface $eventBus, private SharedStorageInterface $sharedStorage)
+    {
     }
 
     /**

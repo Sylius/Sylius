@@ -32,17 +32,13 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     public const TYPE_SHIPPING = 'shipping';
 
-    private AddressFactoryInterface $addressFactory;
-
     public function __construct(
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        AddressFactoryInterface $addressFactory
+        private AddressFactoryInterface $addressFactory
     ) {
         parent::__construct($session, $minkParameters, $router);
-
-        $this->addressFactory = $addressFactory;
     }
 
     public function getRouteName(): string
@@ -77,7 +73,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     {
         try {
             return $this->getElement('shipping_address')->isVisible();
-        } catch (UnsupportedDriverActionException $e) {
+        } catch (UnsupportedDriverActionException) {
             // it's visible by default and is being hidden with JS
             return true;
         }
@@ -89,7 +85,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $validationElement = $this->getDocument()->waitFor(3, function (): ?NodeElement {
             try {
                 $validationElement = $this->getElement('login_validation_error');
-            } catch (ElementNotFoundException $elementNotFoundException) {
+            } catch (ElementNotFoundException) {
                 return null;
             }
 
@@ -160,7 +156,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
         try {
             $this->getElement('login_button')->press();
-        } catch (ElementNotFoundException $elementNotFoundException) {
+        } catch (ElementNotFoundException) {
             $this->getElement('login_button')->click();
         }
 
@@ -341,7 +337,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
         try {
             $address->setProvinceName($this->getElement(sprintf('%s_province', $type))->getValue());
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
             $address->setProvinceCode($this->getElement(sprintf('%s_country_province', $type))->getValue());
         }
 

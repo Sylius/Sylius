@@ -43,20 +43,15 @@ interface ResponseCheckerInterface
 
     public function hasCollection(Response $response): bool;
 
-    /** @param string|int $value */
-    public function hasValue(Response $response, string $key, $value): bool;
+    public function hasValue(Response $response, string $key, int|string $value): bool;
 
-    /** @param string|int $value */
-    public function hasValueInCollection(Response $response, string $key, $value): bool;
+    public function hasValueInCollection(Response $response, string $key, int|string $value): bool;
 
-    /** @param string|int $value */
-    public function hasItemWithValue(Response $response, string $key, $value): bool;
+    public function hasItemWithValue(Response $response, string $key, int|string $value): bool;
 
-    /** @param string|int $value */
-    public function hasSubResourceWithValue(Response $response, string $subResource, string $key, $value): bool;
+    public function hasSubResourceWithValue(Response $response, string $subResource, string $key, int|string $value): bool;
 
-    /** @param string|array $value */
-    public function hasItemOnPositionWithValue(Response $response, int $position, string $key, $value): bool;
+    public function hasItemOnPositionWithValue(Response $response, int $position, string $key, array|string $value): bool;
 
     public function hasItemWithTranslation(Response $response, string $locale, string $key, string $translation): bool;
 

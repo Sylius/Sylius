@@ -21,11 +21,8 @@ use Webmozart\Assert\Assert;
 
 final class DashboardContext implements Context
 {
-    private DashboardPageInterface $dashboardPage;
-
-    public function __construct(DashboardPageInterface $dashboardPage)
+    public function __construct(private DashboardPageInterface $dashboardPage)
     {
-        $this->dashboardPage = $dashboardPage;
     }
 
     /**
@@ -36,7 +33,7 @@ final class DashboardContext implements Context
     {
         try {
             $this->dashboardPage->open();
-        } catch (UnexpectedPageException $e) {
+        } catch (UnexpectedPageException) {
         }
     }
 

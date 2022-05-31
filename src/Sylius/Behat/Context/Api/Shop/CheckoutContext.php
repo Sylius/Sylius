@@ -45,55 +45,11 @@ final class CheckoutContext implements Context
         'payment' => OrderCheckoutStates::STATE_PAYMENT_SELECTED,
     ];
 
-    private ApiClientInterface $ordersClient;
-
-    private ApiClientInterface $addressesClient;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private RepositoryInterface $shippingMethodRepository;
-
-    private OrderRepositoryInterface $orderRepository;
-
-    private RepositoryInterface $paymentMethodRepository;
-
-    private ProductVariantResolverInterface $productVariantResolver;
-
-    private IriConverterInterface $iriConverter;
-
-    private SharedStorageInterface $sharedStorage;
-
     /** @var string[] */
     private array $content = [];
 
-    private string $paymentMethodClass;
-
-    private string $shippingMethodClass;
-
-    public function __construct(
-        ApiClientInterface $ordersClient,
-        ApiClientInterface $addressesClient,
-        ResponseCheckerInterface $responseChecker,
-        RepositoryInterface $shippingMethodRepository,
-        OrderRepositoryInterface $orderRepository,
-        RepositoryInterface $paymentMethodRepository,
-        ProductVariantResolverInterface $productVariantResolver,
-        IriConverterInterface $iriConverter,
-        SharedStorageInterface $sharedStorage,
-        string $paymentMethodClass,
-        string $shippingMethodClass
-    ) {
-        $this->ordersClient = $ordersClient;
-        $this->addressesClient = $addressesClient;
-        $this->responseChecker = $responseChecker;
-        $this->shippingMethodRepository = $shippingMethodRepository;
-        $this->orderRepository = $orderRepository;
-        $this->paymentMethodRepository = $paymentMethodRepository;
-        $this->productVariantResolver = $productVariantResolver;
-        $this->iriConverter = $iriConverter;
-        $this->sharedStorage = $sharedStorage;
-        $this->paymentMethodClass = $paymentMethodClass;
-        $this->shippingMethodClass = $shippingMethodClass;
+    public function __construct(private ApiClientInterface $ordersClient, private ApiClientInterface $addressesClient, private ResponseCheckerInterface $responseChecker, private RepositoryInterface $shippingMethodRepository, private OrderRepositoryInterface $orderRepository, private RepositoryInterface $paymentMethodRepository, private ProductVariantResolverInterface $productVariantResolver, private IriConverterInterface $iriConverter, private SharedStorageInterface $sharedStorage, private string $paymentMethodClass, private string $shippingMethodClass)
+    {
     }
 
     /**
@@ -1051,7 +1007,7 @@ final class CheckoutContext implements Context
         );
 
         $request->setContent([
-            'productVariant' => $this->iriConverter->getItemIriFromResourceClass(\get_class($product->getVariants()->first()), ['code' => $code]),
+            'productVariant' => $this->iriConverter->getItemIriFromResourceClass($product->getVariants()->first()::class, ['code' => $code]),
             'quantity' => 1,
         ]);
 

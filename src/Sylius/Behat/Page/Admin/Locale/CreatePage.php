@@ -27,7 +27,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             $this->chooseName($name);
 
             return true;
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
             return false;
         }
     }

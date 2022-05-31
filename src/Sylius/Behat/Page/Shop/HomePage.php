@@ -65,7 +65,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     {
         try {
             $this->getElement('currency_selector')->click(); // Needed for javascript scenarios
-        } catch (UnsupportedDriverActionException $exception) {
+        } catch (UnsupportedDriverActionException) {
         }
 
         $this->getElement('currency_selector')->clickLink($currencyCode);

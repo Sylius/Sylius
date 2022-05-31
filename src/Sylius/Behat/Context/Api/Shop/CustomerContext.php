@@ -27,38 +27,10 @@ use Webmozart\Assert\Assert;
 
 final class CustomerContext implements Context
 {
-    private ApiClientInterface $customerClient;
-
-    private ApiClientInterface $orderShopClient;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private RegistrationContext $registrationContext;
-
-    private LoginContext $loginContext;
-
-    private ShopSecurityContext $shopApiSecurityContext;
-
     private ?string $verificationToken = '';
 
-    public function __construct(
-        ApiClientInterface $customerClient,
-        ApiClientInterface $orderShopClient,
-        SharedStorageInterface $sharedStorage,
-        ResponseCheckerInterface $responseChecker,
-        RegistrationContext $registrationContext,
-        LoginContext $loginContext,
-        ShopSecurityContext $shopApiSecurityContext
-    ) {
-        $this->customerClient = $customerClient;
-        $this->orderShopClient = $orderShopClient;
-        $this->sharedStorage = $sharedStorage;
-        $this->responseChecker = $responseChecker;
-        $this->registrationContext = $registrationContext;
-        $this->loginContext = $loginContext;
-        $this->shopApiSecurityContext = $shopApiSecurityContext;
+    public function __construct(private ApiClientInterface $customerClient, private ApiClientInterface $orderShopClient, private SharedStorageInterface $sharedStorage, private ResponseCheckerInterface $responseChecker, private RegistrationContext $registrationContext, private LoginContext $loginContext, private ShopSecurityContext $shopApiSecurityContext)
+    {
     }
 
     /**

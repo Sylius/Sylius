@@ -22,16 +22,8 @@ use Webmozart\Assert\Assert;
 
 final class AccessingEditPageFromProductShowPageContext implements Context
 {
-    private UpdateSimpleProductPageInterface $updateSimpleProductPage;
-
-    private UpdatePageInterface $updateVariantProductPage;
-
-    public function __construct(
-        UpdateSimpleProductPageInterface $updateSimpleProductPage,
-        UpdatePageInterface $updateVariantProductPage
-    ) {
-        $this->updateSimpleProductPage = $updateSimpleProductPage;
-        $this->updateVariantProductPage = $updateVariantProductPage;
+    public function __construct(private UpdateSimpleProductPageInterface $updateSimpleProductPage, private UpdatePageInterface $updateVariantProductPage)
+    {
     }
 
     /**

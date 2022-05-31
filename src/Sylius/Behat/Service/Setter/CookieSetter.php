@@ -21,14 +21,8 @@ use Symfony\Component\BrowserKit\Cookie;
 
 final class CookieSetter implements CookieSetterInterface
 {
-    private Session $minkSession;
-
-    private \ArrayAccess $minkParameters;
-
-    public function __construct(Session $minkSession, \ArrayAccess $minkParameters)
+    public function __construct(private Session $minkSession, private \ArrayAccess $minkParameters)
     {
-        $this->minkSession = $minkSession;
-        $this->minkParameters = $minkParameters;
     }
 
     public function setCookie($name, $value)
@@ -77,7 +71,7 @@ final class CookieSetter implements CookieSetterInterface
             return true;
         }
 
-        if (false !== strpos($session->getCurrentUrl(), $this->minkParameters['base_url'])) {
+        if (str_contains($session->getCurrentUrl(), $this->minkParameters['base_url'])) {
             return false;
         }
 

@@ -24,8 +24,6 @@ use Webmozart\Assert\Assert;
 
 final class InstallerContext implements Context
 {
-    private KernelInterface $kernel;
-
     private ?Application $application = null;
 
     private ?CommandTester $tester = null;
@@ -41,9 +39,8 @@ final class InstallerContext implements Context
         'confirmation' => 'pswd',
     ];
 
-    public function __construct(KernelInterface $kernel)
+    public function __construct(private KernelInterface $kernel)
     {
-        $this->kernel = $kernel;
     }
 
     /**
@@ -127,7 +124,7 @@ final class InstallerContext implements Context
         try {
             $this->tester->setInputs($this->inputChoices);
             $this->tester->execute(['command' => $name]);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
         }
     }
 
@@ -136,7 +133,7 @@ final class InstallerContext implements Context
         try {
             $this->tester->setInputs(['y']);
             $this->tester->execute(['command' => $name]);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
         }
     }
 }

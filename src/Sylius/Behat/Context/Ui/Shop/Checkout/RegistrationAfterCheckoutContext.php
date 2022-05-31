@@ -25,32 +25,8 @@ use Webmozart\Assert\Assert;
 
 final class RegistrationAfterCheckoutContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private LoginPageInterface $loginPage;
-
-    private ThankYouPageInterface $thankYouPage;
-
-    private HomePageInterface $homePage;
-
-    private VerificationPageInterface $verificationPage;
-
-    private RegisterElementInterface $registerElement;
-
-    public function __construct(
-        SharedStorageInterface $sharedStorage,
-        LoginPageInterface $loginPage,
-        ThankYouPageInterface $thankYouPage,
-        HomePageInterface $homePage,
-        VerificationPageInterface $verificationPage,
-        RegisterElementInterface $registerElement
-    ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->loginPage = $loginPage;
-        $this->thankYouPage = $thankYouPage;
-        $this->homePage = $homePage;
-        $this->verificationPage = $verificationPage;
-        $this->registerElement = $registerElement;
+    public function __construct(private SharedStorageInterface $sharedStorage, private LoginPageInterface $loginPage, private ThankYouPageInterface $thankYouPage, private HomePageInterface $homePage, private VerificationPageInterface $verificationPage, private RegisterElementInterface $registerElement)
+    {
     }
 
     /**

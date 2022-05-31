@@ -18,14 +18,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ShippingCalculatorContext implements Context
 {
-    private array $shippingCalculators;
-
-    private TranslatorInterface $translator;
-
-    public function __construct(array $shippingCalculators, TranslatorInterface $translator)
+    public function __construct(private array $shippingCalculators, private TranslatorInterface $translator)
     {
-        $this->shippingCalculators = $shippingCalculators;
-        $this->translator = $translator;
     }
 
     /**

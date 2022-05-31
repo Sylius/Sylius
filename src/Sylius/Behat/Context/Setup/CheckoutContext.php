@@ -30,32 +30,8 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutContext implements Context
 {
-    private OrderRepositoryInterface $orderRepository;
-
-    private RepositoryInterface $shippingMethodRepository;
-
-    private RepositoryInterface $paymentMethodRepository;
-
-    private MessageBusInterface $commandBus;
-
-    private FactoryInterface $addressFactory;
-
-    private SharedStorageInterface $sharedStorage;
-
-    public function __construct(
-        OrderRepositoryInterface $orderRepository,
-        RepositoryInterface $shippingMethodRepository,
-        RepositoryInterface $paymentMethodRepository,
-        MessageBusInterface $commandBus,
-        FactoryInterface $addressFactory,
-        SharedStorageInterface $sharedStorage
-    ) {
-        $this->orderRepository = $orderRepository;
-        $this->shippingMethodRepository = $shippingMethodRepository;
-        $this->paymentMethodRepository = $paymentMethodRepository;
-        $this->commandBus = $commandBus;
-        $this->addressFactory = $addressFactory;
-        $this->sharedStorage = $sharedStorage;
+    public function __construct(private OrderRepositoryInterface $orderRepository, private RepositoryInterface $shippingMethodRepository, private RepositoryInterface $paymentMethodRepository, private MessageBusInterface $commandBus, private FactoryInterface $addressFactory, private SharedStorageInterface $sharedStorage)
+    {
     }
 
     /**

@@ -27,22 +27,10 @@ use Webmozart\Assert\Assert;
 
 final class ManagingChannelsContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private IriConverterInterface $iriConverter;
-
     private array $shopBillingData = [];
 
-    public function __construct(
-        ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter
-    ) {
-        $this->client = $client;
-        $this->responseChecker = $responseChecker;
-        $this->iriConverter = $iriConverter;
+    public function __construct(private ApiClientInterface $client, private ResponseCheckerInterface $responseChecker, private IriConverterInterface $iriConverter)
+    {
     }
 
     /**

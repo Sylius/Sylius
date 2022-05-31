@@ -74,7 +74,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function isUserFormHidden(): bool
     {
-        return false !== strpos($this->getElement('user_form')->getAttribute('style'), 'none');
+        return str_contains($this->getElement('user_form')->getAttribute('style'), 'none');
     }
 
     protected function getDefinedElements(): array

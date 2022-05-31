@@ -35,40 +35,8 @@ use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
 final class PromotionContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private PromotionActionFactoryInterface $actionFactory;
-
-    private PromotionCouponFactoryInterface $couponFactory;
-
-    private PromotionRuleFactoryInterface $ruleFactory;
-
-    private TestPromotionFactoryInterface $testPromotionFactory;
-
-    private PromotionRepositoryInterface $promotionRepository;
-
-    private PromotionCouponGeneratorInterface $couponGenerator;
-
-    private ObjectManager $objectManager;
-
-    public function __construct(
-        SharedStorageInterface $sharedStorage,
-        PromotionActionFactoryInterface $actionFactory,
-        PromotionCouponFactoryInterface $couponFactory,
-        PromotionRuleFactoryInterface $ruleFactory,
-        TestPromotionFactoryInterface $testPromotionFactory,
-        PromotionRepositoryInterface $promotionRepository,
-        PromotionCouponGeneratorInterface $couponGenerator,
-        ObjectManager $objectManager
-    ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->actionFactory = $actionFactory;
-        $this->couponFactory = $couponFactory;
-        $this->ruleFactory = $ruleFactory;
-        $this->testPromotionFactory = $testPromotionFactory;
-        $this->promotionRepository = $promotionRepository;
-        $this->couponGenerator = $couponGenerator;
-        $this->objectManager = $objectManager;
+    public function __construct(private SharedStorageInterface $sharedStorage, private PromotionActionFactoryInterface $actionFactory, private PromotionCouponFactoryInterface $couponFactory, private PromotionRuleFactoryInterface $ruleFactory, private TestPromotionFactoryInterface $testPromotionFactory, private PromotionRepositoryInterface $promotionRepository, private PromotionCouponGeneratorInterface $couponGenerator, private ObjectManager $objectManager)
+    {
     }
 
     /**

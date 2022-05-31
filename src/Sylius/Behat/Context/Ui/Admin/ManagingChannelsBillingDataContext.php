@@ -20,11 +20,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingChannelsBillingDataContext implements Context
 {
-    private ShopBillingDataElementInterface $shopBillingDataElement;
-
-    public function __construct(ShopBillingDataElementInterface $shopBillingDataElement)
+    public function __construct(private ShopBillingDataElementInterface $shopBillingDataElement)
     {
-        $this->shopBillingDataElement = $shopBillingDataElement;
     }
 
     /**

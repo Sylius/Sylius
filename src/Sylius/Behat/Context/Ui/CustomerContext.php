@@ -21,16 +21,8 @@ use Webmozart\Assert\Assert;
 
 final class CustomerContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private ShowPageInterface $customerShowPage;
-
-    public function __construct(
-        SharedStorageInterface $sharedStorage,
-        ShowPageInterface $customerShowPage
-    ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->customerShowPage = $customerShowPage;
+    public function __construct(private SharedStorageInterface $sharedStorage, private ShowPageInterface $customerShowPage)
+    {
     }
 
     /**
@@ -44,7 +36,7 @@ final class CustomerContext implements Context
 
         try {
             $this->customerShowPage->deleteAccount();
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
             return;
         }
 

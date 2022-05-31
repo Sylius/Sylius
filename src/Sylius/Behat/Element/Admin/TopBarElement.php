@@ -19,7 +19,7 @@ final class TopBarElement extends Element implements TopBarElementInterface
 {
     public function hasAvatarInMainBar(string $avatarPath): bool
     {
-        return strpos($this->getAvatarImagePath(), $avatarPath) !== false;
+        return str_contains($this->getAvatarImagePath(), $avatarPath);
     }
 
     public function hasDefaultAvatarInMainBar(): bool

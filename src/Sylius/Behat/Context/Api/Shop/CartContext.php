@@ -30,40 +30,8 @@ use Webmozart\Assert\Assert;
 
 final class CartContext implements Context
 {
-    private ApiClientInterface $cartsClient;
-
-    private ApiClientInterface $ordersAdminClient;
-
-    private ApiClientInterface $productsClient;
-
-    private ApiClientInterface $productVariantsClient;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private ProductVariantResolverInterface $productVariantResolver;
-
-    private IriConverterInterface $iriConverter;
-
-    public function __construct(
-        ApiClientInterface $cartsClient,
-        ApiClientInterface $ordersAdminClient,
-        ApiClientInterface $productsClient,
-        ApiClientInterface $productVariantsClient,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage,
-        ProductVariantResolverInterface $productVariantResolver,
-        IriConverterInterface $iriConverter
-    ) {
-        $this->cartsClient = $cartsClient;
-        $this->ordersAdminClient = $ordersAdminClient;
-        $this->productsClient = $productsClient;
-        $this->productVariantsClient = $productVariantsClient;
-        $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
-        $this->productVariantResolver = $productVariantResolver;
-        $this->iriConverter = $iriConverter;
+    public function __construct(private ApiClientInterface $cartsClient, private ApiClientInterface $ordersAdminClient, private ApiClientInterface $productsClient, private ApiClientInterface $productVariantsClient, private ResponseCheckerInterface $responseChecker, private SharedStorageInterface $sharedStorage, private ProductVariantResolverInterface $productVariantResolver, private IriConverterInterface $iriConverter)
+    {
     }
 
     /**

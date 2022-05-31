@@ -23,30 +23,10 @@ use Webmozart\Assert\Assert;
 
 final class RegistrationContext implements Context
 {
-    private AbstractBrowser $client;
-
-    private ApiClientInterface $customerClient;
-
-    private LoginContext $loginContext;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private ResponseCheckerInterface $responseChecker;
-
     private array $content = [];
 
-    public function __construct(
-        AbstractBrowser $client,
-        ApiClientInterface $customerClient,
-        LoginContext $loginContext,
-        SharedStorageInterface $sharedStorage,
-        ResponseCheckerInterface $responseChecker
-    ) {
-        $this->client = $client;
-        $this->customerClient = $customerClient;
-        $this->loginContext = $loginContext;
-        $this->sharedStorage = $sharedStorage;
-        $this->responseChecker = $responseChecker;
+    public function __construct(private AbstractBrowser $client, private ApiClientInterface $customerClient, private LoginContext $loginContext, private SharedStorageInterface $sharedStorage, private ResponseCheckerInterface $responseChecker)
+    {
     }
 
     /**

@@ -24,32 +24,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class GeographicalContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private FactoryInterface $countryFactory;
-
-    private FactoryInterface $provinceFactory;
-
-    private RepositoryInterface $countryRepository;
-
-    private CountryNameConverterInterface $countryNameConverter;
-
-    private ObjectManager $countryManager;
-
-    public function __construct(
-        SharedStorageInterface $sharedStorage,
-        FactoryInterface $countryFactory,
-        FactoryInterface $provinceFactory,
-        RepositoryInterface $countryRepository,
-        CountryNameConverterInterface $countryNameConverter,
-        ObjectManager $countryManager
-    ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->countryFactory = $countryFactory;
-        $this->provinceFactory = $provinceFactory;
-        $this->countryRepository = $countryRepository;
-        $this->countryNameConverter = $countryNameConverter;
-        $this->countryManager = $countryManager;
+    public function __construct(private SharedStorageInterface $sharedStorage, private FactoryInterface $countryFactory, private FactoryInterface $provinceFactory, private RepositoryInterface $countryRepository, private CountryNameConverterInterface $countryNameConverter, private ObjectManager $countryManager)
+    {
     }
 
     /**

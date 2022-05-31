@@ -29,44 +29,8 @@ use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
 {
-    private HomePageInterface $homePage;
-
-    private LoginPageInterface $loginPage;
-
-    private RegisterPageInterface $registerPage;
-
-    private RequestPasswordResetPageInterface $requestPasswordResetPage;
-
-    private ResetPasswordPageInterface $resetPasswordPage;
-
-    private WellKnownPasswordChangePageInterface $wellKnownPasswordChangePage;
-
-    private RegisterElementInterface $registerElement;
-
-    private NotificationCheckerInterface $notificationChecker;
-
-    private CurrentPageResolverInterface $currentPageResolver;
-
-    public function __construct(
-        HomePageInterface $homePage,
-        LoginPageInterface $loginPage,
-        RegisterPageInterface $registerPage,
-        RequestPasswordResetPageInterface $requestPasswordResetPage,
-        ResetPasswordPageInterface $resetPasswordPage,
-        WellKnownPasswordChangePageInterface $wellKnownPasswordChangePage,
-        RegisterElementInterface $registerElement,
-        NotificationCheckerInterface $notificationChecker,
-        CurrentPageResolverInterface $currentPageResolver
-    ) {
-        $this->homePage = $homePage;
-        $this->loginPage = $loginPage;
-        $this->registerPage = $registerPage;
-        $this->requestPasswordResetPage = $requestPasswordResetPage;
-        $this->resetPasswordPage = $resetPasswordPage;
-        $this->wellKnownPasswordChangePage = $wellKnownPasswordChangePage;
-        $this->registerElement = $registerElement;
-        $this->notificationChecker = $notificationChecker;
-        $this->currentPageResolver = $currentPageResolver;
+    public function __construct(private HomePageInterface $homePage, private LoginPageInterface $loginPage, private RegisterPageInterface $registerPage, private RequestPasswordResetPageInterface $requestPasswordResetPage, private ResetPasswordPageInterface $resetPasswordPage, private WellKnownPasswordChangePageInterface $wellKnownPasswordChangePage, private RegisterElementInterface $registerElement, private NotificationCheckerInterface $notificationChecker, private CurrentPageResolverInterface $currentPageResolver)
+    {
     }
 
     /**

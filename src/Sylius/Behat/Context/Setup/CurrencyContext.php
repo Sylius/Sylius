@@ -23,24 +23,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CurrencyContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private RepositoryInterface $currencyRepository;
-
-    private FactoryInterface $currencyFactory;
-
-    private ObjectManager $channelManager;
-
-    public function __construct(
-        SharedStorageInterface $sharedStorage,
-        RepositoryInterface $currencyRepository,
-        FactoryInterface $currencyFactory,
-        ObjectManager $channelManager
-    ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->currencyRepository = $currencyRepository;
-        $this->currencyFactory = $currencyFactory;
-        $this->channelManager = $channelManager;
+    public function __construct(private SharedStorageInterface $sharedStorage, private RepositoryInterface $currencyRepository, private FactoryInterface $currencyFactory, private ObjectManager $channelManager)
+    {
     }
 
     /**

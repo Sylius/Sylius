@@ -25,32 +25,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class AdminUserContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private ExampleFactoryInterface $userFactory;
-
-    private UserRepositoryInterface $userRepository;
-
-    private ImageUploaderInterface $imageUploader;
-
-    private ObjectManager $objectManager;
-
-    private \ArrayAccess $minkParameters;
-
-    public function __construct(
-        SharedStorageInterface $sharedStorage,
-        ExampleFactoryInterface $userFactory,
-        UserRepositoryInterface $userRepository,
-        ImageUploaderInterface $imageUploader,
-        ObjectManager $objectManager,
-        \ArrayAccess $minkParameters
-    ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->userFactory = $userFactory;
-        $this->userRepository = $userRepository;
-        $this->imageUploader = $imageUploader;
-        $this->objectManager = $objectManager;
-        $this->minkParameters = $minkParameters;
+    public function __construct(private SharedStorageInterface $sharedStorage, private ExampleFactoryInterface $userFactory, private UserRepositoryInterface $userRepository, private ImageUploaderInterface $imageUploader, private ObjectManager $objectManager, private \ArrayAccess $minkParameters)
+    {
     }
 
     /**

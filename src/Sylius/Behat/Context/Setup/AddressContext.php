@@ -24,20 +24,8 @@ use Webmozart\Assert\Assert;
 
 final class AddressContext implements Context
 {
-    private AddressRepositoryInterface $addressRepository;
-
-    private ObjectManager $customerManager;
-
-    private SharedStorageInterface $sharedStorage;
-
-    public function __construct(
-        AddressRepositoryInterface $addressRepository,
-        ObjectManager $customerManager,
-        SharedStorageInterface $sharedStorage
-    ) {
-        $this->addressRepository = $addressRepository;
-        $this->customerManager = $customerManager;
-        $this->sharedStorage = $sharedStorage;
+    public function __construct(private AddressRepositoryInterface $addressRepository, private ObjectManager $customerManager, private SharedStorageInterface $sharedStorage)
+    {
     }
 
     /**

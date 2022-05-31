@@ -27,32 +27,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPromotionCouponsContext implements Context
 {
-    private CreatePageInterface $createPage;
-
-    private GeneratePageInterface $generatePage;
-
-    private IndexPageInterface $indexPage;
-
-    private UpdatePageInterface $updatePage;
-
-    private CurrentPageResolverInterface $currentPageResolver;
-
-    private NotificationCheckerInterface $notificationChecker;
-
-    public function __construct(
-        CreatePageInterface $createPage,
-        GeneratePageInterface $generatePage,
-        IndexPageInterface $indexPage,
-        UpdatePageInterface $updatePage,
-        CurrentPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker
-    ) {
-        $this->createPage = $createPage;
-        $this->generatePage = $generatePage;
-        $this->indexPage = $indexPage;
-        $this->updatePage = $updatePage;
-        $this->currentPageResolver = $currentPageResolver;
-        $this->notificationChecker = $notificationChecker;
+    public function __construct(private CreatePageInterface $createPage, private GeneratePageInterface $generatePage, private IndexPageInterface $indexPage, private UpdatePageInterface $updatePage, private CurrentPageResolverInterface $currentPageResolver, private NotificationCheckerInterface $notificationChecker)
+    {
     }
 
     /**
