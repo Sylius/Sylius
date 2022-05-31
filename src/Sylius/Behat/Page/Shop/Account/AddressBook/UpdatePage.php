@@ -94,8 +94,6 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
 
     private function waitForElement(int $timeout, string $elementName): void
     {
-        $this->getDocument()->waitFor($timeout, function () use ($elementName) {
-            return $this->hasElement($elementName);
-        });
+        $this->getDocument()->waitFor($timeout, fn() => $this->hasElement($elementName));
     }
 }

@@ -42,8 +42,7 @@ final class TaxonomyContext implements Context
 
     private TaxonSlugGeneratorInterface $taxonSlugGenerator;
 
-    /** @var array */
-    private $minkParameters;
+    private array $minkParameters;
 
     public function __construct(
         RepositoryInterface $taxonRepository,

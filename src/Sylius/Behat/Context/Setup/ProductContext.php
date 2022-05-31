@@ -73,8 +73,7 @@ final class ProductContext implements Context
 
     private SlugGeneratorInterface $slugGenerator;
 
-    /** @var array */
-    private $minkParameters;
+    private array $minkParameters;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -677,9 +676,7 @@ final class ProductContext implements Context
     {
         $code = sprintf('%s_%s', $product->getCode(), $optionValueName);
         /** @var ProductVariantInterface $productVariant */
-        $productVariant = $product->getVariants()->filter(function ($variant) use ($code) {
-            return $code === $variant->getCode();
-        })->first();
+        $productVariant = $product->getVariants()->filter(fn($variant) => $code === $variant->getCode())->first();
 
         Assert::notNull($productVariant, sprintf('Product variant with given code %s not exists!', $code));
 

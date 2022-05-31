@@ -96,9 +96,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
         $this->getDocument()->clickLink('Add rule');
 
-        $this->getDocument()->waitFor(5, function () use ($count) {
-            return $count + 1 === count($this->getCollectionItems('rules'));
-        });
+        $this->getDocument()->waitFor(5, fn() => $count + 1 === count($this->getCollectionItems('rules')));
 
         $this->selectRuleOption('Type', $ruleName);
     }

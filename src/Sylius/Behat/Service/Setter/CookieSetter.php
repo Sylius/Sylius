@@ -23,8 +23,7 @@ final class CookieSetter implements CookieSetterInterface
 {
     private Session $minkSession;
 
-    /** @var array */
-    private $minkParameters;
+    private array $minkParameters;
 
     public function __construct(Session $minkSession, $minkParameters)
     {
