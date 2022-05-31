@@ -73,7 +73,7 @@ final class ProductContext implements Context
 
     private SlugGeneratorInterface $slugGenerator;
 
-    private array $minkParameters;
+    private \ArrayAccess $minkParameters;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -91,16 +91,8 @@ final class ProductContext implements Context
         ProductVariantResolverInterface $defaultVariantResolver,
         ImageUploaderInterface $imageUploader,
         SlugGeneratorInterface $slugGenerator,
-        $minkParameters
+        \ArrayAccess $minkParameters
     ) {
-        if (!is_array($minkParameters) && !$minkParameters instanceof \ArrayAccess) {
-            throw new \InvalidArgumentException(sprintf(
-                '"$minkParameters" passed to "%s" has to be an array or implement "%s".',
-                self::class,
-                \ArrayAccess::class
-            ));
-        }
-
         $this->sharedStorage = $sharedStorage;
         $this->productRepository = $productRepository;
         $this->productFactory = $productFactory;
