@@ -24,8 +24,11 @@ use Webmozart\Assert\Assert;
 
 final class ShipmentContext implements Context
 {
-    public function __construct(private ApiClientInterface $shipmentsClient, private ResponseCheckerInterface $responseChecker, private SharedStorageInterface $sharedStorage)
-    {
+    public function __construct(
+        private ApiClientInterface $shipmentsClient,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage
+    ) {
     }
 
     /**

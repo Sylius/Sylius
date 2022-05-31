@@ -48,8 +48,19 @@ final class CheckoutContext implements Context
     /** @var string[] */
     private array $content = [];
 
-    public function __construct(private ApiClientInterface $ordersClient, private ApiClientInterface $addressesClient, private ResponseCheckerInterface $responseChecker, private RepositoryInterface $shippingMethodRepository, private OrderRepositoryInterface $orderRepository, private RepositoryInterface $paymentMethodRepository, private ProductVariantResolverInterface $productVariantResolver, private IriConverterInterface $iriConverter, private SharedStorageInterface $sharedStorage, private string $paymentMethodClass, private string $shippingMethodClass)
-    {
+    public function __construct(
+        private ApiClientInterface $ordersClient,
+        private ApiClientInterface $addressesClient,
+        private ResponseCheckerInterface $responseChecker,
+        private RepositoryInterface $shippingMethodRepository,
+        private OrderRepositoryInterface $orderRepository,
+        private RepositoryInterface $paymentMethodRepository,
+        private ProductVariantResolverInterface $productVariantResolver,
+        private IriConverterInterface $iriConverter,
+        private SharedStorageInterface $sharedStorage,
+        private string $paymentMethodClass,
+        private string $shippingMethodClass
+    ) {
     }
 
     /**

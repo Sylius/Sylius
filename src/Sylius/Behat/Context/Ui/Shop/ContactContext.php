@@ -21,8 +21,10 @@ use Webmozart\Assert\Assert;
 
 final class ContactContext implements Context
 {
-    public function __construct(private ContactPageInterface $contactPage, private NotificationCheckerInterface $notificationChecker)
-    {
+    public function __construct(
+        private ContactPageInterface $contactPage,
+        private NotificationCheckerInterface $notificationChecker
+    ) {
     }
 
     /**

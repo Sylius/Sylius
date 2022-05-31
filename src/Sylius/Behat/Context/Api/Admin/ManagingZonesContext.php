@@ -26,8 +26,13 @@ use Webmozart\Assert\Assert;
 
 final class ManagingZonesContext implements Context
 {
-    public function __construct(private ApiClientInterface $client, private ResponseCheckerInterface $responseChecker, private SharedStorageInterface $sharedStorage, private IriConverterInterface $iriConverter, private string $zoneMemberClass)
-    {
+    public function __construct(
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage,
+        private IriConverterInterface $iriConverter,
+        private string $zoneMemberClass
+    ) {
     }
 
     /**

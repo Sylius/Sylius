@@ -20,8 +20,10 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 
 final class NotificationContext implements Context
 {
-    public function __construct(private NotificationCheckerInterface $notificationChecker, private JavaScriptTestHelperInterface $testHelper)
-    {
+    public function __construct(
+        private NotificationCheckerInterface $notificationChecker,
+        private JavaScriptTestHelperInterface $testHelper
+    ) {
     }
 
     /**

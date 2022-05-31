@@ -17,8 +17,10 @@ use Liip\ImagineBundle\Service\FilterService;
 
 final class ImageExistenceChecker implements ImageExistenceCheckerInterface
 {
-    public function __construct(private FilterService $filterService, private string $mediaRootPath)
-    {
+    public function __construct(
+        private FilterService $filterService,
+        private string $mediaRootPath
+    ) {
     }
 
     public function doesImageWithUrlExist(string $imageUrl, string $liipImagineFilter): bool

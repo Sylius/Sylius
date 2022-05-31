@@ -21,8 +21,10 @@ use Webmozart\Assert\Assert;
 
 final class AdminUserContext implements Context
 {
-    public function __construct(private RepositoryInterface $adminUserRepository, private SharedStorageInterface $sharedStorage)
-    {
+    public function __construct(
+        private RepositoryInterface $adminUserRepository,
+        private SharedStorageInterface $sharedStorage
+    ) {
     }
 
     /**

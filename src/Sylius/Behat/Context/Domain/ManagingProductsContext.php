@@ -23,8 +23,12 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductsContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage, private RepositoryInterface $productRepository, private RepositoryInterface $productVariantRepository, private RepositoryInterface $productReviewRepository)
-    {
+    public function __construct(
+        private SharedStorageInterface $sharedStorage,
+        private RepositoryInterface $productRepository,
+        private RepositoryInterface $productVariantRepository,
+        private RepositoryInterface $productReviewRepository
+    ) {
     }
 
     /**

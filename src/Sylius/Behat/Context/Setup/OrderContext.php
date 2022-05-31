@@ -48,8 +48,23 @@ use Webmozart\Assert\Assert;
 
 final class OrderContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage, private FactoryInterface $orderFactory, private FactoryInterface $addressFactory, private FactoryInterface $customerFactory, private FactoryInterface $orderItemFactory, private FactoryInterface $shipmentFactory, private StateMachineFactoryInterface $stateMachineFactory, private RepositoryInterface $countryRepository, private RepositoryInterface $customerRepository, private OrderRepositoryInterface $orderRepository, private PaymentMethodRepositoryInterface $paymentMethodRepository, private ShippingMethodRepositoryInterface $shippingMethodRepository, private ProductVariantResolverInterface $variantResolver, private OrderItemQuantityModifierInterface $itemQuantityModifier, private ObjectManager $objectManager)
-    {
+    public function __construct(
+        private SharedStorageInterface $sharedStorage,
+        private FactoryInterface $orderFactory,
+        private FactoryInterface $addressFactory,
+        private FactoryInterface $customerFactory,
+        private FactoryInterface $orderItemFactory,
+        private FactoryInterface $shipmentFactory,
+        private StateMachineFactoryInterface $stateMachineFactory,
+        private RepositoryInterface $countryRepository,
+        private RepositoryInterface $customerRepository,
+        private OrderRepositoryInterface $orderRepository,
+        private PaymentMethodRepositoryInterface $paymentMethodRepository,
+        private ShippingMethodRepositoryInterface $shippingMethodRepository,
+        private ProductVariantResolverInterface $variantResolver,
+        private OrderItemQuantityModifierInterface $itemQuantityModifier,
+        private ObjectManager $objectManager
+    ) {
     }
 
     /**

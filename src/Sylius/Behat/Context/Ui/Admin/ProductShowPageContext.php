@@ -32,8 +32,20 @@ use Webmozart\Assert\Assert;
 
 final class ProductShowPageContext implements Context
 {
-    public function __construct(private IndexPageInterface $indexPage, private ShowPageInterface $productShowPage, private AssociationsElementInterface $associationsElement, private AttributesElementInterface $attributesElement, private DetailsElementInterface $detailsElement, private MediaElementInterface $mediaElement, private MoreDetailsElementInterface $moreDetailsElement, private PricingElementInterface $pricingElement, private ShippingElementInterface $shippingElement, private TaxonomyElementInterface $taxonomyElement, private OptionsElementInterface $optionsElement, private VariantsElementInterface $variantsElement)
-    {
+    public function __construct(
+        private IndexPageInterface $indexPage,
+        private ShowPageInterface $productShowPage,
+        private AssociationsElementInterface $associationsElement,
+        private AttributesElementInterface $attributesElement,
+        private DetailsElementInterface $detailsElement,
+        private MediaElementInterface $mediaElement,
+        private MoreDetailsElementInterface $moreDetailsElement,
+        private PricingElementInterface $pricingElement,
+        private ShippingElementInterface $shippingElement,
+        private TaxonomyElementInterface $taxonomyElement,
+        private OptionsElementInterface $optionsElement,
+        private VariantsElementInterface $variantsElement
+    ) {
     }
 
     /**

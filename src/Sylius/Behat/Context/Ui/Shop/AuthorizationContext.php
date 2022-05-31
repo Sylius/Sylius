@@ -20,8 +20,11 @@ use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
 
 final class AuthorizationContext implements Context
 {
-    public function __construct(private LoginPageInterface $loginPage, private RegisterPageInterface $registerPage, private RegisterElementInterface $registerElement)
-    {
+    public function __construct(
+        private LoginPageInterface $loginPage,
+        private RegisterPageInterface $registerPage,
+        private RegisterElementInterface $registerElement
+    ) {
     }
 
     /**

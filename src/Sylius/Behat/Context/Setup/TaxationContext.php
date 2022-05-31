@@ -27,8 +27,14 @@ use Webmozart\Assert\Assert;
 
 final class TaxationContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage, private FactoryInterface $taxRateFactory, private FactoryInterface $taxCategoryFactory, private RepositoryInterface $taxRateRepository, private TaxCategoryRepositoryInterface $taxCategoryRepository, private ObjectManager $objectManager)
-    {
+    public function __construct(
+        private SharedStorageInterface $sharedStorage,
+        private FactoryInterface $taxRateFactory,
+        private FactoryInterface $taxCategoryFactory,
+        private RepositoryInterface $taxRateRepository,
+        private TaxCategoryRepositoryInterface $taxCategoryRepository,
+        private ObjectManager $objectManager
+    ) {
     }
 
     /**

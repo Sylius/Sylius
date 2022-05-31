@@ -37,8 +37,14 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 final class ShippingContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage, private ShippingMethodRepositoryInterface $shippingMethodRepository, private RepositoryInterface $zoneRepository, private ShippingMethodExampleFactory $shippingMethodExampleFactory, private FactoryInterface $shippingMethodRuleFactory, private ObjectManager $shippingMethodManager)
-    {
+    public function __construct(
+        private SharedStorageInterface $sharedStorage,
+        private ShippingMethodRepositoryInterface $shippingMethodRepository,
+        private RepositoryInterface $zoneRepository,
+        private ShippingMethodExampleFactory $shippingMethodExampleFactory,
+        private FactoryInterface $shippingMethodRuleFactory,
+        private ObjectManager $shippingMethodManager
+    ) {
     }
 
     /**

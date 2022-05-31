@@ -23,8 +23,11 @@ use Webmozart\Assert\Assert;
 
 final class ManagingExchangeRatesContext implements Context
 {
-    public function __construct(private CreatePageInterface $createPage, private IndexPageInterface $indexPage, private UpdatePageInterface $updatePage)
-    {
+    public function __construct(
+        private CreatePageInterface $createPage,
+        private IndexPageInterface $indexPage,
+        private UpdatePageInterface $updatePage
+    ) {
     }
 
     /**

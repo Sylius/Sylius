@@ -26,8 +26,14 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutAddressingContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage, private AddressPageInterface $addressPage, private FactoryInterface $addressFactory, private AddressComparatorInterface $addressComparator, private SelectShippingPageInterface $selectShippingPage, private JavaScriptTestHelperInterface $testHelper)
-    {
+    public function __construct(
+        private SharedStorageInterface $sharedStorage,
+        private AddressPageInterface $addressPage,
+        private FactoryInterface $addressFactory,
+        private AddressComparatorInterface $addressComparator,
+        private SelectShippingPageInterface $selectShippingPage,
+        private JavaScriptTestHelperInterface $testHelper
+    ) {
     }
 
     /**

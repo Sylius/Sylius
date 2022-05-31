@@ -26,8 +26,12 @@ use Webmozart\Assert\Assert;
 
 final class ManagingShipmentsContext implements Context
 {
-    public function __construct(private IndexPageInterface $indexPage, private OrderShowPageInterface $orderShowPage, private NotificationCheckerInterface $notificationChecker, private ShowPageInterface $showPage)
-    {
+    public function __construct(
+        private IndexPageInterface $indexPage,
+        private OrderShowPageInterface $orderShowPage,
+        private NotificationCheckerInterface $notificationChecker,
+        private ShowPageInterface $showPage
+    ) {
     }
 
     /**

@@ -27,8 +27,14 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPromotionCouponsContext implements Context
 {
-    public function __construct(private CreatePageInterface $createPage, private GeneratePageInterface $generatePage, private IndexPageInterface $indexPage, private UpdatePageInterface $updatePage, private CurrentPageResolverInterface $currentPageResolver, private NotificationCheckerInterface $notificationChecker)
-    {
+    public function __construct(
+        private CreatePageInterface $createPage,
+        private GeneratePageInterface $generatePage,
+        private IndexPageInterface $indexPage,
+        private UpdatePageInterface $updatePage,
+        private CurrentPageResolverInterface $currentPageResolver,
+        private NotificationCheckerInterface $notificationChecker
+    ) {
     }
 
     /**

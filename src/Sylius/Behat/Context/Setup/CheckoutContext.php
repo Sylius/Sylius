@@ -30,8 +30,14 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutContext implements Context
 {
-    public function __construct(private OrderRepositoryInterface $orderRepository, private RepositoryInterface $shippingMethodRepository, private RepositoryInterface $paymentMethodRepository, private MessageBusInterface $commandBus, private FactoryInterface $addressFactory, private SharedStorageInterface $sharedStorage)
-    {
+    public function __construct(
+        private OrderRepositoryInterface $orderRepository,
+        private RepositoryInterface $shippingMethodRepository,
+        private RepositoryInterface $paymentMethodRepository,
+        private MessageBusInterface $commandBus,
+        private FactoryInterface $addressFactory,
+        private SharedStorageInterface $sharedStorage
+    ) {
     }
 
     /**

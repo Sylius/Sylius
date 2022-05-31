@@ -28,8 +28,15 @@ use Webmozart\Assert\Assert;
 
 final class AddressBookContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage, private RepositoryInterface $addressRepository, private IndexPageInterface $addressBookIndexPage, private CreatePageInterface $addressBookCreatePage, private UpdatePageInterface $addressBookUpdatePage, private CurrentPageResolverInterface $currentPageResolver, private NotificationCheckerInterface $notificationChecker)
-    {
+    public function __construct(
+        private SharedStorageInterface $sharedStorage,
+        private RepositoryInterface $addressRepository,
+        private IndexPageInterface $addressBookIndexPage,
+        private CreatePageInterface $addressBookCreatePage,
+        private UpdatePageInterface $addressBookUpdatePage,
+        private CurrentPageResolverInterface $currentPageResolver,
+        private NotificationCheckerInterface $notificationChecker
+    ) {
     }
 
     /**

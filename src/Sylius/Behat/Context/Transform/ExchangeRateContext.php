@@ -22,8 +22,11 @@ use Webmozart\Assert\Assert;
 
 final class ExchangeRateContext implements Context
 {
-    public function __construct(private CurrencyNameConverterInterface $currencyNameConverter, private RepositoryInterface $currencyRepository, private ExchangeRateRepositoryInterface $exchangeRateRepository)
-    {
+    public function __construct(
+        private CurrencyNameConverterInterface $currencyNameConverter,
+        private RepositoryInterface $currencyRepository,
+        private ExchangeRateRepositoryInterface $exchangeRateRepository
+    ) {
     }
 
     /**

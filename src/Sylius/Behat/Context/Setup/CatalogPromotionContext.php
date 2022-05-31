@@ -40,8 +40,16 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionContext implements Context
 {
-    public function __construct(private ExampleFactoryInterface $catalogPromotionExampleFactory, private FactoryInterface $catalogPromotionScopeFactory, private FactoryInterface $catalogPromotionActionFactory, private EntityManagerInterface $entityManager, private ChannelRepositoryInterface $channelRepository, private StateMachineFactoryInterface $stateMachineFactory, private MessageBusInterface $eventBus, private SharedStorageInterface $sharedStorage)
-    {
+    public function __construct(
+        private ExampleFactoryInterface $catalogPromotionExampleFactory,
+        private FactoryInterface $catalogPromotionScopeFactory,
+        private FactoryInterface $catalogPromotionActionFactory,
+        private EntityManagerInterface $entityManager,
+        private ChannelRepositoryInterface $channelRepository,
+        private StateMachineFactoryInterface $stateMachineFactory,
+        private MessageBusInterface $eventBus,
+        private SharedStorageInterface $sharedStorage
+    ) {
     }
 
     /**

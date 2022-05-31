@@ -35,8 +35,13 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
 {
-    public function __construct(private ApiClientInterface $client, private ResponseCheckerInterface $responseChecker, private MessageBusInterface $messageBus, private IriConverterInterface $iriConverter, private SharedStorageInterface $sharedStorage)
-    {
+    public function __construct(
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private MessageBusInterface $messageBus,
+        private IriConverterInterface $iriConverter,
+        private SharedStorageInterface $sharedStorage
+    ) {
     }
 
     /**

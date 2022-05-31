@@ -25,8 +25,14 @@ use Webmozart\Assert\Assert;
 
 final class RegistrationAfterCheckoutContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage, private LoginPageInterface $loginPage, private ThankYouPageInterface $thankYouPage, private HomePageInterface $homePage, private VerificationPageInterface $verificationPage, private RegisterElementInterface $registerElement)
-    {
+    public function __construct(
+        private SharedStorageInterface $sharedStorage,
+        private LoginPageInterface $loginPage,
+        private ThankYouPageInterface $thankYouPage,
+        private HomePageInterface $homePage,
+        private VerificationPageInterface $verificationPage,
+        private RegisterElementInterface $registerElement
+    ) {
     }
 
     /**

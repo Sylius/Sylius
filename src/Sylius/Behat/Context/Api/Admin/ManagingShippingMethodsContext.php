@@ -29,8 +29,13 @@ final class ManagingShippingMethodsContext implements Context
 {
     public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
 
-    public function __construct(private ApiClientInterface $client, private ApiClientInterface $adminUsersClient, private ResponseCheckerInterface $responseChecker, private IriConverterInterface $iriConverter, private SharedStorageInterface $sharedStorage)
-    {
+    public function __construct(
+        private ApiClientInterface $client,
+        private ApiClientInterface $adminUsersClient,
+        private ResponseCheckerInterface $responseChecker,
+        private IriConverterInterface $iriConverter,
+        private SharedStorageInterface $sharedStorage
+    ) {
     }
 
     /**

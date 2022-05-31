@@ -30,8 +30,16 @@ use Webmozart\Assert\Assert;
 
 final class CartContext implements Context
 {
-    public function __construct(private ApiClientInterface $cartsClient, private ApiClientInterface $ordersAdminClient, private ApiClientInterface $productsClient, private ApiClientInterface $productVariantsClient, private ResponseCheckerInterface $responseChecker, private SharedStorageInterface $sharedStorage, private ProductVariantResolverInterface $productVariantResolver, private IriConverterInterface $iriConverter)
-    {
+    public function __construct(
+        private ApiClientInterface $cartsClient,
+        private ApiClientInterface $ordersAdminClient,
+        private ApiClientInterface $productsClient,
+        private ApiClientInterface $productVariantsClient,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage,
+        private ProductVariantResolverInterface $productVariantResolver,
+        private IriConverterInterface $iriConverter
+    ) {
     }
 
     /**

@@ -27,8 +27,15 @@ use Webmozart\Assert\Assert;
 
 final class ManagingTaxonsContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage, private CreatePageInterface $createPage, private CreateForParentPageInterface $createForParentPage, private UpdatePageInterface $updatePage, private CurrentPageResolverInterface $currentPageResolver, private NotificationCheckerInterface $notificationChecker, private JavaScriptTestHelper $testHelper)
-    {
+    public function __construct(
+        private SharedStorageInterface $sharedStorage,
+        private CreatePageInterface $createPage,
+        private CreateForParentPageInterface $createForParentPage,
+        private UpdatePageInterface $updatePage,
+        private CurrentPageResolverInterface $currentPageResolver,
+        private NotificationCheckerInterface $notificationChecker,
+        private JavaScriptTestHelper $testHelper
+    ) {
     }
 
     /**
@@ -437,9 +444,6 @@ final class ManagingTaxonsContext implements Context
         Assert::false($this->updatePage->isEnabled());
     }
 
-    /**
-     * @return CreatePageInterface|CreateForParentPageInterface|UpdatePageInterface
-     */
     private function resolveCurrentPage(): CreateForParentPageInterface|CreatePageInterface|UpdatePageInterface
     {
         return $this->currentPageResolver->getCurrentPageWithForm([

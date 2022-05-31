@@ -29,8 +29,15 @@ final class CustomerContext implements Context
 {
     private ?string $verificationToken = '';
 
-    public function __construct(private ApiClientInterface $customerClient, private ApiClientInterface $orderShopClient, private SharedStorageInterface $sharedStorage, private ResponseCheckerInterface $responseChecker, private RegistrationContext $registrationContext, private LoginContext $loginContext, private ShopSecurityContext $shopApiSecurityContext)
-    {
+    public function __construct(
+        private ApiClientInterface $customerClient,
+        private ApiClientInterface $orderShopClient,
+        private SharedStorageInterface $sharedStorage,
+        private ResponseCheckerInterface $responseChecker,
+        private RegistrationContext $registrationContext,
+        private LoginContext $loginContext,
+        private ShopSecurityContext $shopApiSecurityContext
+    ) {
     }
 
     /**

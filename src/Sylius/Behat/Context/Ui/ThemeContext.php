@@ -24,8 +24,12 @@ use Webmozart\Assert\Assert;
 
 final class ThemeContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage, private IndexPageInterface $channelIndexPage, private UpdatePageInterface $channelUpdatePage, private HomePageInterface $homePage)
-    {
+    public function __construct(
+        private SharedStorageInterface $sharedStorage,
+        private IndexPageInterface $channelIndexPage,
+        private UpdatePageInterface $channelUpdatePage,
+        private HomePageInterface $homePage
+    ) {
     }
 
     /**

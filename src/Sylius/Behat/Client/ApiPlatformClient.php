@@ -23,8 +23,13 @@ final class ApiPlatformClient implements ApiClientInterface
 {
     private ?RequestInterface $request = null;
 
-    public function __construct(private AbstractBrowser $client, private SharedStorageInterface $sharedStorage, private string $authorizationHeader, private string $resource, private ?string $section = null)
-    {
+    public function __construct(
+        private AbstractBrowser $client,
+        private SharedStorageInterface $sharedStorage,
+        private string $authorizationHeader,
+        private string $resource,
+        private ?string $section = null
+    ) {
     }
 
     public function index(): Response

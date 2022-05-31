@@ -25,8 +25,11 @@ final class Request implements RequestInterface
 
     private array $files = [];
 
-    private function __construct(private string $url, private string $method, array $headers = [])
-    {
+    private function __construct(
+        private string $url,
+        private string $method,
+        array $headers = []
+    ) {
         $this->headers = array_merge($this->headers, $headers);
     }
 

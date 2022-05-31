@@ -19,8 +19,10 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 
 final class CurrencyContext implements Context
 {
-    public function __construct(private ApiClientInterface $client, private ResponseCheckerInterface $responseChecker)
-    {
+    public function __construct(
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker
+    ) {
     }
 
     /**

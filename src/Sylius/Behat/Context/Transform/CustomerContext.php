@@ -21,8 +21,11 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class CustomerContext implements Context
 {
-    public function __construct(private CustomerRepositoryInterface $customerRepository, private FactoryInterface $customerFactory, private SharedStorageInterface $sharedStorage)
-    {
+    public function __construct(
+        private CustomerRepositoryInterface $customerRepository,
+        private FactoryInterface $customerFactory,
+        private SharedStorageInterface $sharedStorage
+    ) {
     }
 
     /**

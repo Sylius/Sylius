@@ -24,8 +24,14 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class LocaleContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage, private LocaleConverterInterface $localeConverter, private FactoryInterface $localeFactory, private RepositoryInterface $localeRepository, private ObjectManager $localeManager, private ObjectManager $channelManager)
-    {
+    public function __construct(
+        private SharedStorageInterface $sharedStorage,
+        private LocaleConverterInterface $localeConverter,
+        private FactoryInterface $localeFactory,
+        private RepositoryInterface $localeRepository,
+        private ObjectManager $localeManager,
+        private ObjectManager $channelManager
+    ) {
     }
 
     /**

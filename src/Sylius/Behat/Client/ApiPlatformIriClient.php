@@ -20,8 +20,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ApiPlatformIriClient implements ApiIriClientInterface
 {
-    public function __construct(private AbstractBrowser $client, private SharedStorageInterface $sharedStorage, private string $authorizationHeader)
-    {
+    public function __construct(
+        private AbstractBrowser $client,
+        private SharedStorageInterface $sharedStorage,
+        private string $authorizationHeader
+    ) {
     }
 
     public function showByIri(string $iri): Response

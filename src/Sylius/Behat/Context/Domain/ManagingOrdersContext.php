@@ -27,8 +27,16 @@ use Webmozart\Assert\Assert;
 
 final class ManagingOrdersContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage, private OrderRepositoryInterface $orderRepository, private RepositoryInterface $orderItemRepository, private RepositoryInterface $addressRepository, private RepositoryInterface $adjustmentRepository, private ObjectManager $orderManager, private ProductVariantResolverInterface $variantResolver, private UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater)
-    {
+    public function __construct(
+        private SharedStorageInterface $sharedStorage,
+        private OrderRepositoryInterface $orderRepository,
+        private RepositoryInterface $orderItemRepository,
+        private RepositoryInterface $addressRepository,
+        private RepositoryInterface $adjustmentRepository,
+        private ObjectManager $orderManager,
+        private ProductVariantResolverInterface $variantResolver,
+        private UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater
+    ) {
     }
 
     /**

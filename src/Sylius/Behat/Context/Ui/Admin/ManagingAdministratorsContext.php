@@ -27,8 +27,15 @@ use Webmozart\Assert\Assert;
 
 final class ManagingAdministratorsContext implements Context
 {
-    public function __construct(private CreatePageInterface $createPage, private IndexPageInterface $indexPage, private UpdatePageInterface $updatePage, private TopBarElementInterface $topBarElement, private NotificationCheckerInterface $notificationChecker, private RepositoryInterface $adminUserRepository, private SharedStorageInterface $sharedStorage)
-    {
+    public function __construct(
+        private CreatePageInterface $createPage,
+        private IndexPageInterface $indexPage,
+        private UpdatePageInterface $updatePage,
+        private TopBarElementInterface $topBarElement,
+        private NotificationCheckerInterface $notificationChecker,
+        private RepositoryInterface $adminUserRepository,
+        private SharedStorageInterface $sharedStorage
+    ) {
     }
 
     /**

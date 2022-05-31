@@ -21,8 +21,10 @@ use Symfony\Component\BrowserKit\Cookie;
 
 final class CookieSetter implements CookieSetterInterface
 {
-    public function __construct(private Session $minkSession, private \ArrayAccess $minkParameters)
-    {
+    public function __construct(
+        private Session $minkSession,
+        private \ArrayAccess $minkParameters
+    ) {
     }
 
     public function setCookie($name, $value)

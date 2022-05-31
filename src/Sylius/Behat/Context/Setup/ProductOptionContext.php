@@ -24,8 +24,13 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ProductOptionContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage, private ProductOptionRepositoryInterface $productOptionRepository, private FactoryInterface $productOptionFactory, private FactoryInterface $productOptionValueFactory, private ObjectManager $objectManager)
-    {
+    public function __construct(
+        private SharedStorageInterface $sharedStorage,
+        private ProductOptionRepositoryInterface $productOptionRepository,
+        private FactoryInterface $productOptionFactory,
+        private FactoryInterface $productOptionValueFactory,
+        private ObjectManager $objectManager
+    ) {
     }
 
     /**

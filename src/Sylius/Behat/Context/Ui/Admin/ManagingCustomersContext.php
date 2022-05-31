@@ -28,8 +28,14 @@ final class ManagingCustomersContext implements Context
     /**
      * @param CustomerIndexPageInterface $indexPage
      */
-    public function __construct(private CreatePageInterface $createPage, private IndexPageInterface $indexPage, private UpdatePageInterface $updatePage, private ShowPageInterface $showPage, private IndexPageInterface $ordersIndexPage, private CurrentPageResolverInterface $currentPageResolver)
-    {
+    public function __construct(
+        private CreatePageInterface $createPage,
+        private IndexPageInterface $indexPage,
+        private UpdatePageInterface $updatePage,
+        private ShowPageInterface $showPage,
+        private IndexPageInterface $ordersIndexPage,
+        private CurrentPageResolverInterface $currentPageResolver
+    ) {
     }
 
     /**

@@ -25,8 +25,13 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCountriesContext implements Context
 {
-    public function __construct(private ApiClientInterface $client, private ApiClientInterface $provincesClient, private ResponseCheckerInterface $responseChecker, private SharedStorageInterface $sharedStorage, private IriConverterInterface $iriConverter)
-    {
+    public function __construct(
+        private ApiClientInterface $client,
+        private ApiClientInterface $provincesClient,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage,
+        private IriConverterInterface $iriConverter
+    ) {
     }
 
     /**

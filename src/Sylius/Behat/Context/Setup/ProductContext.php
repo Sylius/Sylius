@@ -1128,6 +1128,7 @@ final class ProductContext implements Context
      * @param string $code
      * @param int $position
      * @param bool $shippingRequired
+     *
      * @return ProductVariantInterface
      */
     private function createProductVariant(

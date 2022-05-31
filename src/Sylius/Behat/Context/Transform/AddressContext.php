@@ -23,8 +23,12 @@ use Webmozart\Assert\Assert;
 
 final class AddressContext implements Context
 {
-    public function __construct(private FactoryInterface $addressFactory, private CountryNameConverterInterface $countryNameConverter, private AddressRepositoryInterface $addressRepository, private ExampleFactoryInterface $exampleAddressFactory)
-    {
+    public function __construct(
+        private FactoryInterface $addressFactory,
+        private CountryNameConverterInterface $countryNameConverter,
+        private AddressRepositoryInterface $addressRepository,
+        private ExampleFactoryInterface $exampleAddressFactory
+    ) {
     }
 
     /**

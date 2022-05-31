@@ -25,8 +25,13 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class UserContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage, private UserRepositoryInterface $userRepository, private ExampleFactoryInterface $userFactory, private ObjectManager $userManager, private MessageBusInterface $messageBus)
-    {
+    public function __construct(
+        private SharedStorageInterface $sharedStorage,
+        private UserRepositoryInterface $userRepository,
+        private ExampleFactoryInterface $userFactory,
+        private ObjectManager $userManager,
+        private MessageBusInterface $messageBus
+    ) {
     }
 
     /**

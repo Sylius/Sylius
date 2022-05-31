@@ -22,8 +22,12 @@ use Webmozart\Assert\Assert;
 
 final class ProductVariantContext implements Context
 {
-    public function __construct(private ApiClientInterface $variantClient, private ApiClientInterface $catalogPromotionClient, private ResponseCheckerInterface $responseChecker, private SharedStorageInterface $sharedStorage)
-    {
+    public function __construct(
+        private ApiClientInterface $variantClient,
+        private ApiClientInterface $catalogPromotionClient,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage
+    ) {
     }
 
     /**

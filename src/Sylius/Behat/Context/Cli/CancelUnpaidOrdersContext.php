@@ -29,8 +29,10 @@ final class CancelUnpaidOrdersContext implements Context
 
     private ?CommandTester $commandTester = null;
 
-    public function __construct(KernelInterface $kernel, private OrderRepositoryInterface $orderRepository)
-    {
+    public function __construct(
+        KernelInterface $kernel,
+        private OrderRepositoryInterface $orderRepository
+    ) {
         $this->application = new Application($kernel);
     }
 

@@ -23,8 +23,12 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 final class ThemeContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage, private ThemeRepositoryInterface $themeRepository, private ObjectManager $channelManager, private TestThemeConfigurationManagerInterface $testThemeConfigurationManager)
-    {
+    public function __construct(
+        private SharedStorageInterface $sharedStorage,
+        private ThemeRepositoryInterface $themeRepository,
+        private ObjectManager $channelManager,
+        private TestThemeConfigurationManagerInterface $testThemeConfigurationManager
+    ) {
     }
 
     /**

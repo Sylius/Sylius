@@ -21,8 +21,11 @@ use Webmozart\Assert\Assert;
 
 final class PromotionContext implements Context
 {
-    public function __construct(private ApiClientInterface $ordersClient, private SharedStorageInterface $sharedStorage, private ResponseCheckerInterface $responseChecker)
-    {
+    public function __construct(
+        private ApiClientInterface $ordersClient,
+        private SharedStorageInterface $sharedStorage,
+        private ResponseCheckerInterface $responseChecker
+    ) {
     }
 
     /**

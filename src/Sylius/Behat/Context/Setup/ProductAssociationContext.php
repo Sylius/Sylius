@@ -26,8 +26,15 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ProductAssociationContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage, private FactoryInterface $productAssociationTypeFactory, private FactoryInterface $productAssociationTypeTranslationFactory, private FactoryInterface $productAssociationFactory, private ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository, private RepositoryInterface $productAssociationRepository, private ObjectManager $objectManager)
-    {
+    public function __construct(
+        private SharedStorageInterface $sharedStorage,
+        private FactoryInterface $productAssociationTypeFactory,
+        private FactoryInterface $productAssociationTypeTranslationFactory,
+        private FactoryInterface $productAssociationFactory,
+        private ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository,
+        private RepositoryInterface $productAssociationRepository,
+        private ObjectManager $objectManager
+    ) {
     }
 
     /**

@@ -31,8 +31,16 @@ use Webmozart\Assert\Assert;
 
 final class AccountContext implements Context
 {
-    public function __construct(private DashboardPageInterface $dashboardPage, private ProfileUpdatePageInterface $profileUpdatePage, private ChangePasswordPageInterface $changePasswordPage, private IndexPageInterface $orderIndexPage, private ShowPageInterface $orderShowPage, private LoginPageInterface $loginPage, private NotificationCheckerInterface $notificationChecker, private SharedStorageInterface $sharedStorage)
-    {
+    public function __construct(
+        private DashboardPageInterface $dashboardPage,
+        private ProfileUpdatePageInterface $profileUpdatePage,
+        private ChangePasswordPageInterface $changePasswordPage,
+        private IndexPageInterface $orderIndexPage,
+        private ShowPageInterface $orderShowPage,
+        private LoginPageInterface $loginPage,
+        private NotificationCheckerInterface $notificationChecker,
+        private SharedStorageInterface $sharedStorage
+    ) {
     }
 
     /**

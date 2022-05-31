@@ -25,8 +25,14 @@ use Webmozart\Assert\Assert;
 
 final class ChannelContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage, private ChannelContextSetterInterface $channelContextSetter, private ChannelRepositoryInterface $channelRepository, private CreatePageInterface $channelCreatePage, private HomePageInterface $homePage, private MainPageInterface $pluginMainPage)
-    {
+    public function __construct(
+        private SharedStorageInterface $sharedStorage,
+        private ChannelContextSetterInterface $channelContextSetter,
+        private ChannelRepositoryInterface $channelRepository,
+        private CreatePageInterface $channelCreatePage,
+        private HomePageInterface $homePage,
+        private MainPageInterface $pluginMainPage
+    ) {
     }
 
     /**

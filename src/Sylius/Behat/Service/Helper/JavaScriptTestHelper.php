@@ -21,8 +21,10 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 
 final class JavaScriptTestHelper implements JavaScriptTestHelperInterface
 {
-    public function __construct(private int $microsecondsInterval, private int $defaultTimeout)
-    {
+    public function __construct(
+        private int $microsecondsInterval,
+        private int $defaultTimeout
+    ) {
     }
 
     public function waitUntilAssertionPasses(callable $callable, ?int $timeout = null): void

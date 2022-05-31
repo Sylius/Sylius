@@ -29,8 +29,11 @@ final class ManagingChannelsContext implements Context
 {
     private array $shopBillingData = [];
 
-    public function __construct(private ApiClientInterface $client, private ResponseCheckerInterface $responseChecker, private IriConverterInterface $iriConverter)
-    {
+    public function __construct(
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private IriConverterInterface $iriConverter
+    ) {
     }
 
     /**

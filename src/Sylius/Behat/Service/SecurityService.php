@@ -29,8 +29,11 @@ final class SecurityService implements SecurityServiceInterface
     /**
      * @param string $firewallContextName
      */
-    public function __construct(private SessionInterface $session, private CookieSetterInterface $cookieSetter, $firewallContextName)
-    {
+    public function __construct(
+        private SessionInterface $session,
+        private CookieSetterInterface $cookieSetter,
+        $firewallContextName
+    ) {
         $this->sessionTokenVariable = sprintf('_security_%s', $firewallContextName);
         $this->firewallContextName = $firewallContextName;
     }

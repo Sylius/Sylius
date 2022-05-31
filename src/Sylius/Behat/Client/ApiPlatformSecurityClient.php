@@ -21,8 +21,11 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
 {
     private array $request = [];
 
-    public function __construct(private AbstractBrowser $client, private string $section, private SharedStorageInterface $sharedStorage)
-    {
+    public function __construct(
+        private AbstractBrowser $client,
+        private string $section,
+        private SharedStorageInterface $sharedStorage
+    ) {
     }
 
     public function prepareLoginRequest(): void

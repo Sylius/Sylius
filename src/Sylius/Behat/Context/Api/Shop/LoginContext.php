@@ -32,8 +32,14 @@ final class LoginContext implements Context
 {
     private ?RequestInterface $request = null;
 
-    public function __construct(private ApiSecurityClientInterface $apiSecurityClient, private ApiClientInterface $apiClient, private IriConverterInterface $iriConverter, private AbstractBrowser $shopAuthenticationTokenClient, private ResponseCheckerInterface $responseChecker, private SharedStorageInterface $sharedStorage)
-    {
+    public function __construct(
+        private ApiSecurityClientInterface $apiSecurityClient,
+        private ApiClientInterface $apiClient,
+        private IriConverterInterface $iriConverter,
+        private AbstractBrowser $shopAuthenticationTokenClient,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage
+    ) {
     }
 
     /**

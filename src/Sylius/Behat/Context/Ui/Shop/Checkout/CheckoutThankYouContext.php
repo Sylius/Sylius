@@ -23,8 +23,12 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutThankYouContext implements Context
 {
-    public function __construct(private ThankYouPageInterface $thankYouPage, private ShowPageInterface $orderShowPage, private OrderRepositoryInterface $orderRepository, private OrderDetailsPage $orderDetails)
-    {
+    public function __construct(
+        private ThankYouPageInterface $thankYouPage,
+        private ShowPageInterface $orderShowPage,
+        private OrderRepositoryInterface $orderRepository,
+        private OrderDetailsPage $orderDetails
+    ) {
     }
 
     /**

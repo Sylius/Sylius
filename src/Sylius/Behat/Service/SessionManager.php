@@ -20,8 +20,11 @@ final class SessionManager implements SessionManagerInterface
 {
     private const SESSION_CHROME_HEADLESS_SECOND = 'chrome_headless_second_session';
 
-    public function __construct(private Mink $mink, private SharedStorageInterface $sharedStorage, private SecurityServiceInterface $securityService)
-    {
+    public function __construct(
+        private Mink $mink,
+        private SharedStorageInterface $sharedStorage,
+        private SecurityServiceInterface $securityService
+    ) {
     }
 
     public function changeSession(): void

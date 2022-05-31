@@ -27,8 +27,13 @@ use Webmozart\Assert\Assert;
 
 final class CartContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage, private SummaryPageInterface $summaryPage, private ShowPageInterface $productShowPage, private NotificationCheckerInterface $notificationChecker, private SessionManagerInterface $sessionManager)
-    {
+    public function __construct(
+        private SharedStorageInterface $sharedStorage,
+        private SummaryPageInterface $summaryPage,
+        private ShowPageInterface $productShowPage,
+        private NotificationCheckerInterface $notificationChecker,
+        private SessionManagerInterface $sessionManager
+    ) {
     }
 
     /**

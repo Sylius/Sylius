@@ -25,8 +25,13 @@ final class RegistrationContext implements Context
 {
     private array $content = [];
 
-    public function __construct(private AbstractBrowser $client, private ApiClientInterface $customerClient, private LoginContext $loginContext, private SharedStorageInterface $sharedStorage, private ResponseCheckerInterface $responseChecker)
-    {
+    public function __construct(
+        private AbstractBrowser $client,
+        private ApiClientInterface $customerClient,
+        private LoginContext $loginContext,
+        private SharedStorageInterface $sharedStorage,
+        private ResponseCheckerInterface $responseChecker
+    ) {
     }
 
     /**

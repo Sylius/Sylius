@@ -29,8 +29,17 @@ use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
 {
-    public function __construct(private HomePageInterface $homePage, private LoginPageInterface $loginPage, private RegisterPageInterface $registerPage, private RequestPasswordResetPageInterface $requestPasswordResetPage, private ResetPasswordPageInterface $resetPasswordPage, private WellKnownPasswordChangePageInterface $wellKnownPasswordChangePage, private RegisterElementInterface $registerElement, private NotificationCheckerInterface $notificationChecker, private CurrentPageResolverInterface $currentPageResolver)
-    {
+    public function __construct(
+        private HomePageInterface $homePage,
+        private LoginPageInterface $loginPage,
+        private RegisterPageInterface $registerPage,
+        private RequestPasswordResetPageInterface $requestPasswordResetPage,
+        private ResetPasswordPageInterface $resetPasswordPage,
+        private WellKnownPasswordChangePageInterface $wellKnownPasswordChangePage,
+        private RegisterElementInterface $registerElement,
+        private NotificationCheckerInterface $notificationChecker,
+        private CurrentPageResolverInterface $currentPageResolver
+    ) {
     }
 
     /**

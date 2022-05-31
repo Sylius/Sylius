@@ -24,8 +24,11 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPaymentsContext implements Context
 {
-    public function __construct(private IndexPageInterface $indexPage, private ShowPageInterface $orderShowPage, private NotificationCheckerInterface $notificationChecker)
-    {
+    public function __construct(
+        private IndexPageInterface $indexPage,
+        private ShowPageInterface $orderShowPage,
+        private NotificationCheckerInterface $notificationChecker
+    ) {
     }
 
     /**

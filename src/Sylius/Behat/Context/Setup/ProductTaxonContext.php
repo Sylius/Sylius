@@ -22,8 +22,10 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ProductTaxonContext implements Context
 {
-    public function __construct(private FactoryInterface $productTaxonFactory, private ObjectManager $objectManager)
-    {
+    public function __construct(
+        private FactoryInterface $productTaxonFactory,
+        private ObjectManager $objectManager
+    ) {
     }
 
     /**

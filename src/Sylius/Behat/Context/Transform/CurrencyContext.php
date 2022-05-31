@@ -20,8 +20,10 @@ use Webmozart\Assert\Assert;
 
 final class CurrencyContext implements Context
 {
-    public function __construct(private CurrencyNameConverterInterface $currencyNameConverter, private RepositoryInterface $currencyRepository)
-    {
+    public function __construct(
+        private CurrencyNameConverterInterface $currencyNameConverter,
+        private RepositoryInterface $currencyRepository
+    ) {
     }
 
     /**
