@@ -14,7 +14,7 @@ services:
             - ./.docker/dev/php.ini:/etc/php/8.0/fpm/php.ini:delegated
             - ./.docker/dev/php.ini:/etc/php/8.0/cli/php.ini:delegated
         ports:
-            - 80:80
+            - ${APP_PORT:-80}:80
         depends_on:
             - mysql
         networks:
@@ -26,7 +26,7 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: mysql
         ports:
-            - 3306:3306
+            - ${MYSQL_PORT:-3306}:3306
         networks:
             - sylius
     
@@ -36,15 +36,14 @@ services:
 #            POSTGRES_USER: root
 #            POSTGRES_PASSWORD: postgres
 #        ports:
-#            - 5432:5432
+#            - ${POSTGRES_PORT:-5432}:5432
 #        networks:
 #            - sylius
 
     mailhog:
         image: mailhog/mailhog
         ports:
-            - 1025:1025 # SMTP
-            - 8025:8025 # UI
+            - ${MAILHOG_PORT:-8025}:8025 # UI
         networks:
             - sylius
 
@@ -58,7 +57,7 @@ services:
             BLACKFIRE_CLIENT_TOKEN: ~
             BLACKFIRE_DISABLE_LEGACY_PORT: 1
         ports:
-            - 8307:8307
+            - ${BLACKFIRE_PORT:-8307}:8307
         networks:
             - sylius
 
