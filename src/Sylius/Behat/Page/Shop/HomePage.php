@@ -56,9 +56,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     public function getAvailableCurrencies(): array
     {
         return array_map(
-            function (NodeElement $element) {
-                return $element->getText();
-            },
+            fn (NodeElement $element) => $element->getText(),
             $this->getElement('currency_selector')->findAll('css', '[data-test-available-currency]')
         );
     }
@@ -81,9 +79,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     public function getAvailableLocales(): array
     {
         return array_map(
-            function (NodeElement $element) {
-                return $element->getText();
-            },
+            fn (NodeElement $element) => $element->getText(),
             $this->getElement('locale_selector')->findAll('css', '[data-test-available-locale]')
         );
     }
@@ -96,9 +92,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     public function getLatestProductsNames(): array
     {
         return array_map(
-            function (NodeElement $element) {
-                return $element->getText();
-            },
+            fn (NodeElement $element) => $element->getText(),
             $this->getElement('latest_products')->findAll('css', '[data-test-product-name]')
         );
     }

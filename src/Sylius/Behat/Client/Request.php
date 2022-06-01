@@ -21,16 +21,13 @@ final class Request implements RequestInterface
 
     private string $method;
 
-    /** @var array */
-    private $headers = ['HTTP_ACCEPT' => 'application/ld+json'];
+    private array $headers = ['HTTP_ACCEPT' => 'application/ld+json'];
 
     private array $content = [];
 
-    /** @var array */
-    private $parameters = [];
+    private array $parameters = [];
 
-    /** @var array */
-    private $files = [];
+    private array $files = [];
 
     private function __construct(string $url, string $method, array $headers = [])
     {

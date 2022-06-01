@@ -63,9 +63,7 @@ final class AjaxContext implements Context
      */
     public function iShouldSeeTheProductVariantNamedAnd(...$names): void
     {
-        $itemsNames = array_map(static function ($item) {
-            return strstr($item['descriptor'], ' ', true);
-        }, $this->getJSONResponse());
+        $itemsNames = array_map(static fn ($item) => strstr($item['descriptor'], ' ', true), $this->getJSONResponse());
 
         Assert::allOneOf($itemsNames, $names);
     }

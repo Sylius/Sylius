@@ -61,7 +61,7 @@ final class JavaScriptTestHelper implements JavaScriptTestHelperInterface
     private function waitUntilExceptionDisappears(callable $callable, string $exceptionClass, ?int $timeout = null): void
     {
         $start = microtime(true);
-        $timeout = $timeout ?? $this->defaultTimeout;
+        $timeout ??= $this->defaultTimeout;
         $end = $start + $timeout;
 
         do {

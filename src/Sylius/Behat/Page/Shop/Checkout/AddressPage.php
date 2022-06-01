@@ -169,9 +169,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     public function specifyPassword(string $password): void
     {
-        $this->getDocument()->waitFor(5, function () {
-            return $this->getElement('login_password')->isVisible();
-        });
+        $this->getDocument()->waitFor(5, fn () => $this->getElement('login_password')->isVisible());
 
         $this->getElement('login_password')->setValue($password);
     }
@@ -233,9 +231,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $addressBookSelect = $this->getElement('shipping_address_book');
 
         $addressBookSelect->click();
-        $addressOption = $addressBookSelect->waitFor(5, function () use ($address, $addressBookSelect) {
-            return $addressBookSelect->find('css', sprintf('[data-test-address-book-item][data-id="%s"]', $address->getId()));
-        });
+        $addressOption = $addressBookSelect->waitFor(5, fn () => $addressBookSelect->find('css', sprintf('[data-test-address-book-item][data-id="%s"]', $address->getId())));
 
         if (null === $addressOption) {
             throw new ElementNotFoundException($this->getDriver(), 'option', 'css', sprintf('[data-test-address-book-item][data-id="%s"]', $address->getId()));
@@ -250,9 +246,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $addressBookSelect = $this->getElement('billing_address_book');
 
         $addressBookSelect->click();
-        $addressOption = $addressBookSelect->waitFor(5, function () use ($address, $addressBookSelect) {
-            return $addressBookSelect->find('css', sprintf('[data-test-address-book-item][data-id="%s"]', $address->getId()));
-        });
+        $addressOption = $addressBookSelect->waitFor(5, fn () => $addressBookSelect->find('css', sprintf('[data-test-address-book-item][data-id="%s"]', $address->getId())));
 
         if (null === $addressOption) {
             throw new ElementNotFoundException($this->getDriver(), 'option', 'css', sprintf('[data-test-address-book-item][data-id="%s"]', $address->getId()));
@@ -325,7 +319,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     {
         return array_map(
             /** @return string[] */
-            static function (NodeElement $element): string { return $element->getText(); },
+            static fn (NodeElement $element): string => $element->getText(),
             $element->findAll('css', 'option[value!=""]')
         );
     }
@@ -389,16 +383,12 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     private function waitForLoginAction(): bool
     {
-        return $this->getDocument()->waitFor(5, function () {
-            return !$this->hasElement('login_password');
-        });
+        return $this->getDocument()->waitFor(5, fn () => !$this->hasElement('login_password'));
     }
 
     private function waitForElement(int $timeout, string $elementName): bool
     {
-        return $this->getDocument()->waitFor($timeout, function () use ($elementName) {
-            return $this->hasElement($elementName);
-        });
+        return $this->getDocument()->waitFor($timeout, fn () => $this->hasElement($elementName));
     }
 
     private function assertAddressType(string $type): void

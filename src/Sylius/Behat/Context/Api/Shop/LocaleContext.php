@@ -21,11 +21,9 @@ use Webmozart\Assert\Assert;
 
 final class LocaleContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $client;
+    private ApiClientInterface $client;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    private ResponseCheckerInterface $responseChecker;
 
     public function __construct(ApiClientInterface $client, ResponseCheckerInterface $responseChecker)
     {

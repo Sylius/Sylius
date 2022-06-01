@@ -25,8 +25,7 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCustomersContext implements Context
 {
-    /** @var CustomerIndexPageInterface */
-    private $indexPage;
+    private CustomerIndexPageInterface $indexPage;
 
     private CreatePageInterface $createPage;
 

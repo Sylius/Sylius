@@ -34,7 +34,7 @@ final class ShippingCalculatorContext implements Context
     public function getShippingCalculatorByName(string $shippingCalculator): string
     {
         $flippedCalculators = array_flip(array_map(
-            function (string $translationKey): string { return $this->translator->trans($translationKey); },
+            fn (string $translationKey): string => $this->translator->trans($translationKey),
             $this->shippingCalculators
         ));
 
