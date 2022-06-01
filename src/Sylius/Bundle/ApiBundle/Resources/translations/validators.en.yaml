@@ -4,6 +4,8 @@ sylius:
         is_verified: 'Account with email %email% is currently verified.'
     address:
         without_country: 'The address without country cannot exist'
+    contact_request:
+        email_is_invalid: 'The provided email is invalid.'
     country:
         not_exist: 'The country %countryCode% does not exist.'
     order:

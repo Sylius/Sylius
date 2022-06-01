@@ -1,5 +1,9 @@
 sylius:
     email:
+        contact_request:
+            content: 'Content'
+            message_from: 'Message from'
+            subject: 'Contact request'
         order_confirmation:
             has_been_successfully_placed: 'has been successfully placed.'
             subject: 'Order confirmation'

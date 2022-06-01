@@ -218,5 +218,12 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\SendContactRequestHandler">
+            <argument type="service" id="sylius.email_sender" />
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
     </services>
 </container>

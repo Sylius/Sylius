@@ -1,0 +1,10 @@
+<div style="text-align: left;">
+    <div style="color: #1abb9c;">
+        <strong>{{ 'sylius.email.contact_request.message_from'|trans({}, null, localeCode) }}:</strong>
+    </div>
+    <div style="margin-bottom: 20px;">{{ data.email }}</div>
+    <div style="color: #1abb9c;">
+        <strong>{{ 'sylius.email.contact_request.content'|trans({}, null, localeCode) }}:</strong>
+    </div>
+    <div>{{ data.message|nl2br }}</div>
+</div>

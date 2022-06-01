@@ -64,6 +64,11 @@
             <tag name="sylius.api.command_data_transformer" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInCustomerEmailIfNotSetAwareCommandDataTransformer">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="sylius.api.command_data_transformer" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInCustomerEmailAwareCommandDataTransformer">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="sylius.api.command_data_transformer" />

@@ -21,3 +21,6 @@ sylius_mailer:
         account_verification_token:
             subject: sylius.emails.user.verification_token.subject
             template: "@SyliusCore/Email/accountVerification.html.twig"
+        contact_request:
+            subject: sylius.emails.contact_request.subject
+            template: "@SyliusCore/Email/contactRequest.html.twig"
