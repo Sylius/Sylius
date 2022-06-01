@@ -141,7 +141,7 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @When I delete zone named :zone
+     * @When /^I(?:| try to) delete the (zone named "([^"]*)")$/
      */
     public function iDeleteZoneNamed(ZoneInterface $zone): void
     {
