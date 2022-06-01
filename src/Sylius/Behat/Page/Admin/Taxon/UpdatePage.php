@@ -199,9 +199,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             $languageTabTitle->click();
         }
 
-        $this->getDocument()->waitFor(10, function () use ($languageTabTitle) {
-            return $languageTabTitle->hasClass('active');
-        });
+        $this->getDocument()->waitFor(10, fn () => $languageTabTitle->hasClass('active'));
     }
 
     public function enable(): void

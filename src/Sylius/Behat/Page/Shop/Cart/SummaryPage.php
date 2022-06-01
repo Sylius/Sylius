@@ -224,9 +224,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
 
     public function waitForRedirect(int $timeout): void
     {
-        $this->getDocument()->waitFor($timeout, function () {
-            return $this->isOpen();
-        });
+        $this->getDocument()->waitFor($timeout, fn () => $this->isOpen());
     }
 
     public function getPromotionCouponValidationMessage(): string

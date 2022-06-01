@@ -158,9 +158,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $productPriceContent = $this->getElement('product_price_content');
         $catalogPromotions = $productPriceContent->findAll('css', '.promotion_label');
 
-        return array_map(function (NodeElement $element): string {
-            return $element->getText();
-        }, $catalogPromotions);
+        return array_map(fn (NodeElement $element): string => $element->getText(), $catalogPromotions);
     }
 
     public function getCurrentUrl(): string
@@ -348,9 +346,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $optionElement = $this->getElement('option_select', ['%optionCode%' => strtoupper($optionCode)]);
 
         return array_map(
-            function (NodeElement $element) {
-                return $element->getText();
-            },
+            fn (NodeElement $element) => $element->getText(),
             $optionElement->findAll('css', 'option')
         );
     }
@@ -394,9 +390,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
             JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
-            $this->getDocument()->waitFor(3, function (): bool {
-                return $this->summaryPage->isOpen();
-            });
+            $this->getDocument()->waitFor(3, fn (): bool => $this->summaryPage->isOpen());
         }
     }
 }

@@ -46,9 +46,7 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
         $saveConfigurationButton = $this->getElement('save_configuration_button');
         $saveConfigurationButton->press();
 
-        $this->getDocument()->waitFor(5, function () use ($saveConfigurationButton) {
-            return null === $saveConfigurationButton->find('css', '.loading');
-        });
+        $this->getDocument()->waitFor(5, fn () => null === $saveConfigurationButton->find('css', '.loading'));
     }
 
     protected function getDefinedElements(): array

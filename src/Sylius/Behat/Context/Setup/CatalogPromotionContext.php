@@ -807,7 +807,7 @@ final class CatalogPromotionContext implements Context
             $channels = [$this->sharedStorage->get('channel')];
         }
 
-        $code = $code ?? StringInflector::nameToCode($name);
+        $code ??= StringInflector::nameToCode($name);
 
         /** @var CatalogPromotionInterface $catalogPromotion */
         $catalogPromotion = $this->catalogPromotionExampleFactory->create([

@@ -233,9 +233,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddScopeThatAppliesOnVariants(ProductVariantInterface ...$variants): void
     {
-        $variantCodes = array_map(function (ProductVariantInterface $variant) {
-            return $variant->getCode();
-        }, $variants);
+        $variantCodes = array_map(fn (ProductVariantInterface $variant) => $variant->getCode(), $variants);
 
         $this->formElement->addScope();
         $this->formElement->chooseScopeType('For variants');
@@ -247,9 +245,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddScopeThatAppliesOnTaxons(TaxonInterface ...$taxons): void
     {
-        $taxonsCodes = array_map(function (TaxonInterface $taxon) {
-            return $taxon->getCode();
-        }, $taxons);
+        $taxonsCodes = array_map(fn (TaxonInterface $taxon) => $taxon->getCode(), $taxons);
 
         $this->formElement->addScope();
         $this->formElement->chooseScopeType('For taxons');

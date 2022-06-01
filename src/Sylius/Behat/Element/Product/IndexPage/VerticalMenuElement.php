@@ -22,9 +22,7 @@ final class VerticalMenuElement extends Element implements VerticalMenuElementIn
     {
         $menu = $this->getElement('vertical-menu');
 
-        return array_map(function (NodeElement $element): string {
-            return $element->getText();
-        }, $menu->findAll('css', '[data-test-vertical-menu-item]'));
+        return array_map(fn (NodeElement $element): string => $element->getText(), $menu->findAll('css', '[data-test-vertical-menu-item]'));
     }
 
     public function canNavigateToParentTaxon(): bool

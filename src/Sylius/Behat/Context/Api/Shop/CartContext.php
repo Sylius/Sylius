@@ -763,7 +763,7 @@ final class CartContext implements Context
 
     private function putProductToCart(ProductInterface $product, ?string $tokenValue, int $quantity = 1): void
     {
-        $tokenValue = $tokenValue ?? $this->pickupCart();
+        $tokenValue ??= $this->pickupCart();
 
         $request = $this->requestFactory->customItemAction(
             'shop',
@@ -782,7 +782,7 @@ final class CartContext implements Context
 
     private function putProductVariantToCart(ProductVariantInterface $productVariant, ?string $tokenValue, int $quantity = 1): void
     {
-        $tokenValue = $tokenValue ?? $this->pickupCart();
+        $tokenValue ??= $this->pickupCart();
 
         $request = $this->requestFactory->customItemAction(
             'shop',

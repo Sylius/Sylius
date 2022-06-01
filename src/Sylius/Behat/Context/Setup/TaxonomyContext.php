@@ -42,8 +42,7 @@ final class TaxonomyContext implements Context
 
     private TaxonSlugGeneratorInterface $taxonSlugGenerator;
 
-    /** @var array */
-    private $minkParameters;
+    private \ArrayAccess $minkParameters;
 
     public function __construct(
         RepositoryInterface $taxonRepository,
@@ -53,16 +52,8 @@ final class TaxonomyContext implements Context
         ObjectManager $objectManager,
         ImageUploaderInterface $imageUploader,
         TaxonSlugGeneratorInterface $taxonSlugGenerator,
-        $minkParameters
+        \ArrayAccess $minkParameters
     ) {
-        if (!is_array($minkParameters) && !$minkParameters instanceof \ArrayAccess) {
-            throw new \InvalidArgumentException(sprintf(
-                '"$minkParameters" passed to "%s" has to be an array or implement "%s".',
-                self::class,
-                \ArrayAccess::class
-            ));
-        }
-
         $this->taxonRepository = $taxonRepository;
         $this->taxonFactory = $taxonFactory;
         $this->taxonTranslationFactory = $taxonTranslationFactory;
