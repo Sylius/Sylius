@@ -1,0 +1,156 @@
+name: 'Repository split'
+
+on:
+    push:
+        branches:
+            - '1.11'
+            - 'master'
+
+env:
+    GITHUB_TOKEN: ${{ secrets.SPLIT_TOKEN }}
+
+jobs:
+    split_repository:
+        name: 'Package: ${{ matrix.package.split_repository }}, branch: ${{ github.ref_name }}'
+        runs-on: ubuntu-latest
+
+        strategy:
+            fail-fast: false
+            matrix:
+                package:
+                    -
+                        local_path: 'src/Sylius/Bundle/AddressingBundle'
+                        split_repository: 'SyliusAddressingBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/AdminBundle'
+                        split_repository: 'SyliusAdminBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/ApiBundle'
+                        split_repository: 'SyliusApiBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/AttributeBundle'
+                        split_repository: 'SyliusAttributeBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/ChannelBundle'
+                        split_repository: 'SyliusChannelBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/CoreBundle'
+                        split_repository: 'SyliusCoreBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/CurrencyBundle'
+                        split_repository: 'SyliusCurrencyBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/CustomerBundle'
+                        split_repository: 'SyliusCustomerBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/InventoryBundle'
+                        split_repository: 'SyliusInventoryBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/LocaleBundle'
+                        split_repository: 'SyliusLocaleBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/MoneyBundle'
+                        split_repository: 'SyliusMoneyBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/OrderBundle'
+                        split_repository: 'SyliusOrderBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/PaymentBundle'
+                        split_repository: 'SyliusPaymentBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/PayumBundle'
+                        split_repository: 'SyliusPayumBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/ProductBundle'
+                        split_repository: 'SyliusProductBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/PromotionBundle'
+                        split_repository: 'SyliusPromotionBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/ReviewBundle'
+                        split_repository: 'SyliusReviewBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/ShippingBundle'
+                        split_repository: 'SyliusShippingBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/ShopBundle'
+                        split_repository: 'SyliusShopBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/TaxationBundle'
+                        split_repository: 'SyliusTaxationBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/TaxonomyBundle'
+                        split_repository: 'SyliusTaxonomyBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/UiBundle'
+                        split_repository: 'SyliusUiBundle'
+                    -
+                        local_path: 'src/Sylius/Bundle/UserBundle'
+                        split_repository: 'SyliusUserBundle'
+                    -
+                        local_path: 'src/Sylius/Component/Addressing'
+                        split_repository: 'Addressing'
+                    -
+                        local_path: 'src/Sylius/Component/Attribute'
+                        split_repository: 'Attribute'
+                    -
+                        local_path: 'src/Sylius/Component/Channel'
+                        split_repository: 'Channel'
+                    -
+                        local_path: 'src/Sylius/Component/Core'
+                        split_repository: 'Core'
+                    -
+                        local_path: 'src/Sylius/Component/Currency'
+                        split_repository: 'Currency'
+                    -
+                        local_path: 'src/Sylius/Component/Customer'
+                        split_repository: 'Customer'
+                    -
+                        local_path: 'src/Sylius/Component/Inventory'
+                        split_repository: 'Inventory'
+                    -
+                        local_path: 'src/Sylius/Component/Locale'
+                        split_repository: 'Locale'
+                    -
+                        local_path: 'src/Sylius/Component/Order'
+                        split_repository: 'Order'
+                    -
+                        local_path: 'src/Sylius/Component/Payment'
+                        split_repository: 'Payment'
+                    -
+                        local_path: 'src/Sylius/Component/Product'
+                        split_repository: 'Product'
+                    -
+                        local_path: 'src/Sylius/Component/Promotion'
+                        split_repository: 'Promotion'
+                    -
+                        local_path: 'src/Sylius/Component/Review'
+                        split_repository: 'Review'
+                    -
+                        local_path: 'src/Sylius/Component/Shipping'
+                        split_repository: 'Shipping'
+                    -
+                        local_path: 'src/Sylius/Component/Taxation'
+                        split_repository: 'Taxation'
+                    -
+                        local_path: 'src/Sylius/Component/Taxonomy'
+                        split_repository: 'Taxonomy'
+                    -
+                        local_path: 'src/Sylius/Component/User'
+                        split_repository: 'User'
+
+        steps:
+            -   uses: actions/checkout@v2
+
+            -
+                uses: "symplify/monorepo-split-github-action@2.1"
+                with:
+                    package_directory: '${{ matrix.package.local_path }}'
+
+                    repository_organization: 'Sylius'
+                    repository_name: '${{ matrix.package.split_repository }}'
+
+                    branch: ${{ github.ref_name }}
+
+                    user_name: "SyliusBot"
+                    user_email: "bot@sylius.com"
