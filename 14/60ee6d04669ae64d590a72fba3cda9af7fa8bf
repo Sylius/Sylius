@@ -1,0 +1,47 @@
+---------------------------------------------------------------------------
+
+by loic425 at 2022-05-17T14:34:48Z
+
+@Zales0123 Is there something possible to do after tagging?
+
+---------------------------------------------------------------------------
+
+by mbabker at 2022-05-17T14:56:11Z
+
+> @Zales0123 Is there something possible to do after tagging?
+
+Yep, that part's absolutely needed (and the action's docs cover that).
+
+> I'm not sure do `user_name` and `user_email` should be mine (or anywhere else)... maybe we should use Sylius and [hello@sylius.com](mailto:hello@sylius.com)?
+
+If the Symplify tool works similarly to `splitsh-lite`, the author here should really only matter for tags and mostly just affects the releases page on the read-only repo (just look at the tags in https://github.com/symfony/console/tags or https://github.com/Pagerfanta/twig/tags, both are read-only split repos).
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2022-05-24T05:27:55Z
+
+@loic425 @mbabker aggreed, I just wanted to start simple and then extend the action (maybe I'm too cautious 😄 but I still have 5% of uncertainty would it work well :dancer:)
+
+---------------------------------------------------------------------------
+
+by loic425 at 2022-05-25T08:37:14Z
+
+@Zales0123 Yes, let's start simple, you're right, I prefer tiny PRs
+
+---------------------------------------------------------------------------
+
+by Ferror at 2022-05-27T09:00:06Z
+
+Yea I would go with ex github@sylius.com or any other email/user. We could even make it a little more fun and make Swan Bot <3 🦢
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2022-06-02T07:18:00Z
+
+I guess I could generate a token for @SyliusBot account 🤔 It seems as the best option for now 🖖
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-06-02T11:36:31Z
+
+Thanks, Mateusz! :tada:
