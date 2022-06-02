@@ -152,5 +152,5 @@ jobs:
 
                     branch: ${{ github.ref_name }}
 
-                    user_name: "Zales0123"
-                    user_email: "zaleslaw@gmail.com"
+                    user_name: "SyliusBot"
+                    user_email: "bot@sylius.com"
