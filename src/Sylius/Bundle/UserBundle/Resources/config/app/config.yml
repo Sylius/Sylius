@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 security:
-    encoders:
+    password_hashers:
         argon2i: argon2i
 
 sylius_user:

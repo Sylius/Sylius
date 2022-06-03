@@ -1,5 +1,5 @@
 security:
-    encoders:
+    password_hashers:
         sha512: sha512
         Sylius\Component\User\Model\UserInterface: sha512
 

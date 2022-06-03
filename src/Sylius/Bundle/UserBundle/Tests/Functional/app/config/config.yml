@@ -51,7 +51,7 @@ security:
                     foo:
                         password: foo
                         roles: ROLE_USER
-    encoders:
+    password_hashers:
         Sylius\Component\User\Model\UserInterface: sha512
     firewalls:
         admin:
