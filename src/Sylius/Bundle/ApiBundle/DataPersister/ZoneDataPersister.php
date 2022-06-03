@@ -15,15 +15,15 @@ namespace Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved;
+use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /** @experimental */
 final class ZoneDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(
         private ContextAwareDataPersisterInterface $decoratedDataPersister,
-        private RepositoryInterface $zoneMemberRepository
+        private ZoneDeletionCheckerInterface $zoneDeletionChecker
     ) {
     }
 
@@ -39,9 +39,7 @@ final class ZoneDataPersister implements ContextAwareDataPersisterInterface
 
     public function remove($data, array $context = [])
     {
-        $zoneMember = $this->zoneMemberRepository->findOneBy(['code' => $data->getCode()]);
-
-        if (null !== $zoneMember) {
+        if (!$this->zoneDeletionChecker->isDeletable($data)) {
             throw new ZoneCannotBeRemoved();
         }
 

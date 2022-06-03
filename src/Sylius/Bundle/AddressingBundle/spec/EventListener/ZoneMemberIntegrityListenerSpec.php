@@ -13,14 +13,12 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\AddressingBundle\EventListener;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\AddressingBundle\EventListener\ZoneMemberIntegrityListener;
+use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface;
+use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Model\ZoneMemberInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -29,24 +27,22 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 {
     function let(
         SessionInterface $session,
-        RepositoryInterface $zoneMemberRepository,
-        RepositoryInterface $provinceRepository,
+        ZoneDeletionCheckerInterface $zoneDeletionChecker,
+        CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker
     ): void {
-        $this->beConstructedWith($session, $zoneMemberRepository, $provinceRepository);
+        $this->beConstructedWith($session, $zoneDeletionChecker, $countryProvincesDeletionChecker);
     }
 
     function it_does_not_allow_to_remove_zone_if_it_exists_as_a_zone_member(
         SessionInterface $session,
-        RepositoryInterface $zoneMemberRepository,
+        ZoneDeletionCheckerInterface $zoneDeletionChecker,
         GenericEvent $event,
         ZoneInterface $zone,
-        ZoneMemberInterface $zoneMember,
-        FlashBagInterface $flashes,
+        FlashBagInterface $flashes
     ): void {
         $event->getSubject()->willReturn($zone);
-        $zone->getCode()->willReturn('MUG');
 
-        $zoneMemberRepository->findOneBy(['code' => 'MUG'])->willReturn($zoneMember);
+        $zoneDeletionChecker->isDeletable($zone)->willReturn(false);
 
         $session->getBag('flashes')->willReturn($flashes);
 
@@ -65,14 +61,13 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 
     function it_does_nothing_if_zone_does_not_exist_as_a_zone_member(
         SessionInterface $session,
-        RepositoryInterface $zoneMemberRepository,
+        ZoneDeletionCheckerInterface $zoneDeletionChecker,
         GenericEvent $event,
-        ZoneInterface $zone,
+        ZoneInterface $zone
     ): void {
         $event->getSubject()->willReturn($zone);
-        $zone->getCode()->willReturn('MUG');
 
-        $zoneMemberRepository->findOneBy(['code' => 'MUG'])->willReturn(null);
+        $zoneDeletionChecker->isDeletable($zone)->willReturn(true);
 
         $session->getBag('flashes')->shouldNotBeCalled();
         $event->stopPropagation()->shouldNotBeCalled();
@@ -92,33 +87,14 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 
     function it_does_not_allow_to_remove_province_if_it_exists_as_a_zone_member(
         SessionInterface $session,
-        RepositoryInterface $zoneMemberRepository,
-        RepositoryInterface $provinceRepository,
+        CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker,
         GenericEvent $event,
         CountryInterface $country,
-        ProvinceInterface $firstProvince,
-        ProvinceInterface $secondProvince,
-        ProvinceInterface $thirdProvince,
-        ZoneMemberInterface $zoneMember,
-        FlashBagInterface $flashes,
+        FlashBagInterface $flashes
     ): void {
         $event->getSubject()->willReturn($country);
 
-        $firstProvince->getCode()->willReturn('FIRST_PROVINCE');
-        $secondProvince->getCode()->willReturn('SECOND_PROVINCE');
-        $thirdProvince->getCode()->willReturn('THIRD_PROVINCE');
-
-        $country->getProvinces()->willReturn(new ArrayCollection([$secondProvince->getWrappedObject()]));
-        $provinceRepository->findBy(['country' => $country])->willReturn([
-            $firstProvince->getWrappedObject(),
-            $secondProvince->getWrappedObject(),
-            $thirdProvince->getWrappedObject(),
-        ]);
-
-        $zoneMemberRepository
-            ->findOneBy(['code' => [0 => 'FIRST_PROVINCE', 2 => 'THIRD_PROVINCE']])
-            ->willReturn($zoneMember)
-        ;
+        $countryProvincesDeletionChecker->isDeletable($country)->willReturn(false);
 
         $session->getBag('flashes')->willReturn($flashes);
 
@@ -137,31 +113,13 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 
     function it_does_nothing_if_province_does_not_exist_as_a_zone_member(
         SessionInterface $session,
-        RepositoryInterface $zoneMemberRepository,
-        RepositoryInterface $provinceRepository,
+        CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker,
         GenericEvent $event,
-        CountryInterface $country,
-        ProvinceInterface $firstProvince,
-        ProvinceInterface $secondProvince,
-        ProvinceInterface $thirdProvince,
+        CountryInterface $country
     ): void {
         $event->getSubject()->willReturn($country);
 
-        $firstProvince->getCode()->willReturn('FIRST_PROVINCE');
-        $secondProvince->getCode()->willReturn('SECOND_PROVINCE');
-        $thirdProvince->getCode()->willReturn('THIRD_PROVINCE');
-
-        $country->getProvinces()->willReturn(new ArrayCollection([$secondProvince->getWrappedObject()]));
-        $provinceRepository->findBy(['country' => $country])->willReturn([
-            $firstProvince->getWrappedObject(),
-            $secondProvince->getWrappedObject(),
-            $thirdProvince->getWrappedObject(),
-        ]);
-
-        $zoneMemberRepository
-            ->findOneBy(['code' => [0 => 'FIRST_PROVINCE', 2 => 'THIRD_PROVINCE']])
-            ->willReturn(null)
-        ;
+        $countryProvincesDeletionChecker->isDeletable($country)->willReturn(true);
 
         $session->getBag('flashes')->shouldNotBeCalled();
         $event->stopPropagation()->shouldNotBeCalled();

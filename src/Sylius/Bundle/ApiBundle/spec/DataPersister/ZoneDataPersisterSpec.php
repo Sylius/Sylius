@@ -5,6 +5,7 @@ namespace spec\Sylius\Bundle\ApiBundle\DataPersister;
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved;
+use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -14,9 +15,9 @@ class ZoneDataPersisterSpec extends ObjectBehavior
 {
     function let(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
-        RepositoryInterface $zoneMemberRepository,
+        ZoneDeletionCheckerInterface $zoneDeletionChecker
     ): void {
-        $this->beConstructedWith($decoratedDataPersister, $zoneMemberRepository);
+        $this->beConstructedWith($decoratedDataPersister, $zoneDeletionChecker);
     }
 
     function it_supports_only_zone_entity(ZoneInterface $zone, ProductInterface $product): void
@@ -27,7 +28,7 @@ class ZoneDataPersisterSpec extends ObjectBehavior
 
     function it_uses_decorated_data_persister_to_persist_zone(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
-        ZoneInterface $zone,
+        ZoneInterface $zone
     ): void {
         $decoratedDataPersister->persist($zone, [])->shouldBeCalled();
 
@@ -36,11 +37,10 @@ class ZoneDataPersisterSpec extends ObjectBehavior
 
     function it_uses_decorated_data_persister_to_remove_zone(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
-        RepositoryInterface $zoneMemberRepository,
-        ZoneInterface $zone,
+        ZoneDeletionCheckerInterface $zoneDeletionChecker,
+        ZoneInterface $zone
     ): void {
-        $zone->getCode()->willReturn('US');
-        $zoneMemberRepository->findOneBy(['code' => 'US'])->willReturn(null);
+        $zoneDeletionChecker->isDeletable($zone)->willReturn(true);
 
         $decoratedDataPersister->remove($zone, [])->shouldBeCalled();
 
@@ -49,12 +49,10 @@ class ZoneDataPersisterSpec extends ObjectBehavior
 
     function it_throws_an_error_if_the_zone_is_in_use(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
-        RepositoryInterface $zoneMemberRepository,
-        ZoneInterface $zone,
-        ZoneMemberInterface $zoneMember,
+        ZoneDeletionCheckerInterface $zoneDeletionChecker,
+        ZoneInterface $zone
     ): void {
-        $zone->getCode()->willReturn('US');
-        $zoneMemberRepository->findOneBy(['code' => 'US'])->willReturn($zoneMember);
+        $zoneDeletionChecker->isDeletable($zone)->willReturn(false);
 
         $decoratedDataPersister->remove($zone, [])->shouldNotBeCalled();
 

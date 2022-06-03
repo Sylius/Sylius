@@ -6,6 +6,7 @@ use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved;
+use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
@@ -16,10 +17,9 @@ class CountryDataPersisterSpec extends ObjectBehavior
 {
     function let(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
-        RepositoryInterface $provinceRepository,
-        RepositoryInterface $zoneMemberRepository,
+        CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker
     ): void {
-        $this->beConstructedWith($decoratedDataPersister, $provinceRepository, $zoneMemberRepository);
+        $this->beConstructedWith($decoratedDataPersister, $countryProvincesDeletionChecker);
     }
 
     function it_supports_only_zone_entity(CountryInterface $country, ProductInterface $product): void
@@ -39,28 +39,10 @@ class CountryDataPersisterSpec extends ObjectBehavior
 
     function it_uses_decorated_data_persister_to_persist_country(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
-        RepositoryInterface $provinceRepository,
-        RepositoryInterface $zoneMemberRepository,
-        CountryInterface $country,
-        ProvinceInterface $firstProvince,
-        ProvinceInterface $secondProvince,
-        ProvinceInterface $thirdProvince
+        CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker,
+        CountryInterface $country
     ): void {
-        $firstProvince->getCode()->willReturn('FIRST_PROVINCE');
-        $secondProvince->getCode()->willReturn('SECOND_PROVINCE');
-        $thirdProvince->getCode()->willReturn('THIRD_PROVINCE');
-
-        $country->getProvinces()->willReturn(new ArrayCollection([$secondProvince->getWrappedObject()]));
-        $provinceRepository->findBy(['country' => $country])->willReturn([
-            $firstProvince->getWrappedObject(),
-            $secondProvince->getWrappedObject(),
-            $thirdProvince->getWrappedObject(),
-        ]);
-
-        $zoneMemberRepository
-            ->findOneBy(['code' => [0 => 'FIRST_PROVINCE', 2 => 'THIRD_PROVINCE']])
-            ->willReturn(null)
-        ;
+        $countryProvincesDeletionChecker->isDeletable($country)->willReturn(true);
 
         $decoratedDataPersister->persist($country, [])->shouldBeCalled();
 
@@ -69,29 +51,10 @@ class CountryDataPersisterSpec extends ObjectBehavior
 
     function it_throws_an_error_if_the_province_within_a_country_is_in_use(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
-        RepositoryInterface $provinceRepository,
-        RepositoryInterface $zoneMemberRepository,
-        CountryInterface $country,
-        ProvinceInterface $firstProvince,
-        ProvinceInterface $secondProvince,
-        ProvinceInterface $thirdProvince,
-        ZoneMemberInterface $zoneMember
+        CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker,
+        CountryInterface $country
     ): void {
-        $firstProvince->getCode()->willReturn('FIRST_PROVINCE');
-        $secondProvince->getCode()->willReturn('SECOND_PROVINCE');
-        $thirdProvince->getCode()->willReturn('THIRD_PROVINCE');
-
-        $country->getProvinces()->willReturn(new ArrayCollection([$secondProvince->getWrappedObject()]));
-        $provinceRepository->findBy(['country' => $country])->willReturn([
-            $firstProvince->getWrappedObject(),
-            $secondProvince->getWrappedObject(),
-            $thirdProvince->getWrappedObject(),
-        ]);
-
-        $zoneMemberRepository
-            ->findOneBy(['code' => [0 => 'FIRST_PROVINCE', 2 => 'THIRD_PROVINCE']])
-            ->willReturn($zoneMember)
-        ;
+        $countryProvincesDeletionChecker->isDeletable($country)->willReturn(false);
 
         $decoratedDataPersister->persist($country, [])->shouldNotBeCalled();
 
