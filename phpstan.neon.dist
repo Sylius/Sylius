@@ -2,6 +2,8 @@ includes:
     - vendor/phpstan/phpstan-doctrine/extension.neon
     - vendor/phpstan/phpstan-webmozart-assert/extension.neon
     - vendor/jangregor/phpstan-prophecy/extension.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/phpstan/phpstan-symfony/rules.neon
 
 parameters:
     level: 2
