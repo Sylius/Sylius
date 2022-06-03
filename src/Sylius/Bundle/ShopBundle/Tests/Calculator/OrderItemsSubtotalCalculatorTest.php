@@ -56,6 +56,7 @@ final class OrderItemsSubtotalCalculatorTest extends MockeryTestCase
     private function getOrderItemMock(int $subTotal): OrderItemInterface
     {
         $orderItem = Mockery::mock(OrderItemInterface::class);
+        /** @phpstan-ignore-next-line */
         $orderItem
             ->shouldReceive('getSubTotal')
             ->once()
@@ -68,6 +69,7 @@ final class OrderItemsSubtotalCalculatorTest extends MockeryTestCase
     private function getOrderMock(array $orderItems): OrderInterface
     {
         $order = Mockery::mock(OrderInterface::class);
+        /** @phpstan-ignore-next-line */
         $order
             ->shouldReceive('getItems->toArray')
             ->once()

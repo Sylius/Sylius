@@ -200,6 +200,7 @@
         "friends-of-behat/symfony-extension": "^2.1",
         "friends-of-behat/variadic-extension": "^1.3",
         "hwi/oauth-bundle": "^1.1 || ^2.0@beta",
+        "jangregor/phpstan-prophecy": "^1.0",
         "lchrusciel/api-test-case": "^5.0",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
