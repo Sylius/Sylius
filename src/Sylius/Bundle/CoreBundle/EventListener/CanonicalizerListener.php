@@ -17,6 +17,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
 final class CanonicalizerListener
 {
@@ -30,7 +31,7 @@ final class CanonicalizerListener
 
         if ($item instanceof CustomerInterface) {
             $item->setEmailCanonical($this->canonicalizer->canonicalize($item->getEmail()));
-        } elseif ($item instanceof UserInterface) {
+        } elseif ($item instanceof UserInterface && $item instanceof SymfonyUserInterface) {
             $item->setUsernameCanonical($this->canonicalizer->canonicalize($item->getUsername()));
             $item->setEmailCanonical($this->canonicalizer->canonicalize($item->getEmail()));
         }

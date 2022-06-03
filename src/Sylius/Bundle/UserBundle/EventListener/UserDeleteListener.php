@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 use Webmozart\Assert\Assert;
 
 final class UserDeleteListener
@@ -59,17 +60,18 @@ final class UserDeleteListener
 
     private function isTryingToDeleteLoggedInUser(UserInterface $user): bool
     {
+        Assert::isInstanceOf($user, SymfonyUserInterface::class);
         $token = $this->tokenStorage->getToken();
         if (!$token) {
             return false;
         }
 
+        /** @var UserInterface&SymfonyUserInterface $loggedUser */
         $loggedUser = $token->getUser();
         if (!$loggedUser) {
             return false;
         }
 
-        /** @var UserInterface $loggedUser */
         return $loggedUser->getId() === $user->getId() && $loggedUser->getRoles() === $user->getRoles();
     }
 }

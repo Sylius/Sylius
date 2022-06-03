@@ -60,6 +60,7 @@ final class CircularDependencyBreakingErrorListener extends ErrorListener
     {
         try {
             /** @psalm-suppress TooManyArguments */
+            /** @phpstan-ignore-next-line */
             $this->decoratedListener->onKernelException($event, $eventName, $eventDispatcher);
         } catch (\Throwable $throwable) {
             $this->breakCircularDependency($throwable);

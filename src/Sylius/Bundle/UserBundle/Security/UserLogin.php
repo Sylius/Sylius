@@ -21,6 +21,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
+use Webmozart\Assert\Assert;
 
 class UserLogin implements UserLoginInterface
 {
@@ -49,6 +51,7 @@ class UserLogin implements UserLoginInterface
 
     protected function createToken(UserInterface $user, string $firewallName): UsernamePasswordToken
     {
+        Assert::isInstanceOf($user, SymfonyUserInterface::class);
         /** @deprecated parameter credential was deprecated in Symfony 5.4, so in Sylius 1.11 too, in Sylius 2.0 providing 4 arguments will be prohibited. */
         if (3 === (new \ReflectionClass(UsernamePasswordToken::class))->getConstructor()->getNumberOfParameters()) {
             return new UsernamePasswordToken(

@@ -19,8 +19,7 @@ parameters:
         - '**/Bundle/*/test/**.php'
         - '**/Bundle/*/test/app/**.php'
         - '**/Bundle/*/test/src/**.php'
-        - '**/Bundle/*/Tests/Functional/app/**.php'
-        - '**/Bundle/*/Tests/Functional/var/**.php'
+        - '**/Bundle/*/Tests/**.php'
         - '**/Bundle/*/DependencyInjection/Configuration.php'
         - 'src/Sylius/Behat/**.php'
 

@@ -28,6 +28,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Webmozart\Assert\Assert;
 
 final class CustomerEmailUpdaterListener
@@ -59,6 +60,7 @@ final class CustomerEmailUpdaterListener
         /** @var ShopUserInterface|null $user */
         $user = $customer->getUser();
         Assert::isInstanceOf($user, ShopUserInterface::class);
+        Assert::isInstanceOf($user, UserInterface::class);
 
         if ($customer->getEmail() !== $user->getUsername()) {
             $user->setVerifiedAt(null);

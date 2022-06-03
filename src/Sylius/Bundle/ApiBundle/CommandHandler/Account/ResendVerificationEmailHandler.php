@@ -37,7 +37,8 @@ final class ResendVerificationEmailHandler implements MessageHandlerInterface
     public function __invoke(ResendVerificationEmail $command): void
     {
         /** @var ShopUserInterface|null $user */
-        Assert::notNull($user = $this->shopUserRepository->find($command->getShopUserId()));
+        $user = $this->shopUserRepository->find($command->getShopUserId());
+        Assert::notNull($user);
 
         $token = $this->tokenGenerator->generate();
         $user->setEmailVerificationToken($token);
