@@ -136,6 +136,20 @@ final class ZoneContext implements Context
     }
 
     /**
+     * @Given /^(it)(?:| also) has the ("([^"]+)", "([^"]+)" and "([^"]+)" country) members$/
+     */
+    public function itHasCountryMembers(ZoneInterface $zone, array $countries): void
+    {
+        $zone->setType(ZoneInterface::TYPE_COUNTRY);
+
+        foreach ($countries as $country) {
+            $zone->addMember($this->createZoneMember($country));
+        }
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(it) has the ("[^"]+" province) member$/
      * @Given /^(it) also has the ("[^"]+" province) member$/
      */
