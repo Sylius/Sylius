@@ -20,7 +20,6 @@ parameters:
         - '**/Bundle/*/test/app/**.php'
         - '**/Bundle/*/test/src/**.php'
         - '**/Bundle/*/Tests/**.php'
-        - '**/Bundle/*/DependencyInjection/Configuration.php'
         - 'src/Sylius/Behat/**.php'
 
         # Vendor files in subpackages
