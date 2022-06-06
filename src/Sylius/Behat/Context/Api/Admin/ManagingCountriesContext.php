@@ -152,7 +152,7 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When /^I delete the ("[^"]+" province) of (this country)$/
+     * @When /^I(?:| also) delete the ("[^"]+" province) of (this country)$/
      */
     public function iDeleteTheProvinceOfThisCountry(ProvinceInterface $province, CountryInterface $country): void
     {
@@ -209,7 +209,7 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @Then the country :country should have the :province province
-     * @Then /^(this country) should have the ("[^"]*" province)$/
+     * @Then /^(this country) should(?:| still) have the ("[^"]*" province)$/
      */
     public function theCountryShouldHaveTheProvince(CountryInterface $country, ProvinceInterface $province): void
     {
@@ -345,6 +345,17 @@ final class ManagingCountriesContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->provincesClient->getLastResponse()),
             'Please enter province name.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that provinces that are in use cannot be deleted
+     */
+    public function iShouldBeNotifiedThatProvincesThatAreInUseCannotBeDeleted(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Cannot delete, the province is in use.'
         );
     }
 

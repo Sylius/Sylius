@@ -31,28 +31,13 @@ use Symfony\Component\Intl\Countries;
 
 final class ZoneContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private RepositoryInterface $zoneRepository;
-
-    private ObjectManager $objectManager;
-
-    private ZoneFactoryInterface $zoneFactory;
-
-    private FactoryInterface $zoneMemberFactory;
-
     public function __construct(
-        SharedStorageInterface $sharedStorage,
-        RepositoryInterface $zoneRepository,
-        ObjectManager $objectManager,
-        ZoneFactoryInterface $zoneFactory,
-        FactoryInterface $zoneMemberFactory
+        private SharedStorageInterface $sharedStorage,
+        private RepositoryInterface $zoneRepository,
+        private ObjectManager $objectManager,
+        private ZoneFactoryInterface $zoneFactory,
+        private FactoryInterface $zoneMemberFactory
     ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->zoneRepository = $zoneRepository;
-        $this->objectManager = $objectManager;
-        $this->zoneFactory = $zoneFactory;
-        $this->zoneMemberFactory = $zoneMemberFactory;
     }
 
     /**

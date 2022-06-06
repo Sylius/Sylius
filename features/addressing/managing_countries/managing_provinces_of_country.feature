@@ -26,6 +26,24 @@ Feature: Managing provinces of a country
         And this country should not have the "Northern Ireland" province
 
     @ui @javascript @api
+    Scenario: Removing a province that is a zone member should not be possible
+        Given this country has the "Northern Ireland" province with "GB-NIR" code
+        And this country also has the "Scotland" province with "GB-SCT" code
+        And this country also has the "England" province with "GB-ENG" code
+        And the store has a zone "Great Britain" with code "GB"
+        And it has the "Northern Ireland" province member
+        And it also has the "Scotland" province member
+        And it also has the "England" province member
+        When I want to edit this country
+        And I delete the "Northern Ireland" province of this country
+        And I also delete the "Scotland" province of this country
+        And I save my changes
+        Then I should be notified that provinces that are in use cannot be deleted
+        And this country should still have the "Northern Ireland" province
+        And this country should still have the "Scotland" province
+        And this country should still have the "England" province
+
+    @ui @javascript @api
     Scenario: Removing and adding a new province to an existing country
         Given this country has the "Northern Ireland" province with "GB-NIR" code
         When I want to edit this country
