@@ -180,7 +180,7 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @When I remove the :country country member
+     * @When /^I(?:| also) remove the ("([^"]+)" country) member$/
      */
     public function iRemoveTheCountryMember(CountryInterface $country): void
     {

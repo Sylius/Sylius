@@ -86,7 +86,7 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @When /^I remove (the "([^"]*)" (?:country|province|zone) member)$/
+     * @When /^I(?:| also) remove (the "([^"]*)" (?:country|province|zone) member)$/
      */
     public function iRemoveTheMember(ZoneMemberInterface $zoneMember)
     {
