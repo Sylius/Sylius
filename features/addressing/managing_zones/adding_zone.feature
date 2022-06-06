@@ -6,6 +6,7 @@ Feature: Adding a new zone with country type members
 
     Background:
         Given the store has country "France"
+        And the store has disabled country "Austria"
         And the store also has country "United States"
         And this country has the "Alabama" province with "AL" code
         And the store has a zone "North America" with code "NA"
@@ -52,3 +53,13 @@ Feature: Adding a new zone with country type members
         Then I should be notified that it has been successfully created
         And the zone named "European Union" with the "France" country member should appear in the registry
         And its scope should be "shipping"
+
+    @ui @javascript @api
+    Scenario: Adding zone with disabled country
+        When I want to create a new zone consisting of country
+        And I name it "European Union"
+        And I specify its code as "EU"
+        And I add a country "Austria"
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the zone named "European Union" with the "Austria" country member should appear in the registry

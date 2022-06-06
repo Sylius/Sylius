@@ -41,13 +41,11 @@ final class CountryChoiceType extends AbstractType
             ->setDefaults([
                 'choice_filter' => null,
                 'choices' => function (Options $options): iterable {
-                    if (null === $options['enabled']) {
-                        $countries = $this->countryRepository->findAll();
-                    } else {
-                        $countries = $this->countryRepository->findBy(['enabled' => $options['enabled']]);
+                    if ($options['enabled'] === true) {
+                        return  $this->countryRepository->findBy(['enabled' => $options['enabled']]);
                     }
 
-                    return $countries;
+                    return $this->countryRepository->findAll();
                 },
                 'choice_value' => 'code',
                 'choice_label' => 'name',
