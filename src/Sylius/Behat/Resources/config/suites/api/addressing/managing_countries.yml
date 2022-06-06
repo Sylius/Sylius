@@ -15,6 +15,7 @@ default:
 
                 - sylius.behat.context.setup.admin_api_security
                 - sylius.behat.context.setup.geographical
+                - sylius.behat.context.setup.zone
 
                 - sylius.behat.context.api.admin.managing_countries
 

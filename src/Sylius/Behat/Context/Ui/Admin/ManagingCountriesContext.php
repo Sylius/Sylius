@@ -15,33 +15,24 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Country\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Country\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Country\UpdatePageInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingCountriesContext implements Context
 {
-    private IndexPageInterface $indexPage;
-
-    private CreatePageInterface $createPage;
-
-    private UpdatePageInterface $updatePage;
-
-    private CurrentPageResolverInterface $currentPageResolver;
-
     public function __construct(
-        IndexPageInterface $indexPage,
-        CreatePageInterface $createPage,
-        UpdatePageInterface $updatePage,
-        CurrentPageResolverInterface $currentPageResolver
+        private IndexPageInterface $indexPage,
+        private CreatePageInterface $createPage,
+        private UpdatePageInterface $updatePage,
+        private CurrentPageResolverInterface $currentPageResolver,
+        private NotificationCheckerInterface $notificationChecker
     ) {
-        $this->indexPage = $indexPage;
-        $this->createPage = $createPage;
-        $this->updatePage = $updatePage;
-        $this->currentPageResolver = $currentPageResolver;
     }
 
     /**
@@ -166,8 +157,8 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then /^(this country) should have the "([^"]*)" province$/
-     * @Then /^the (country "[^"]*") should have the "([^"]*)" province$/
+     * @Then /^(this country) should(?:| still) have the "([^"]*)" province$/
+     * @Then /^the (country "[^"]*") should(?:| still) have the "([^"]*)" province$/
      */
     public function countryShouldHaveProvince(CountryInterface $country, $provinceName)
     {
@@ -217,7 +208,7 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When /^I delete the "([^"]*)" province of this country$/
+     * @When /^I(?:| also) delete the "([^"]*)" province of this country$/
      */
     public function iDeleteTheProvinceOfCountry($provinceName)
     {
@@ -283,5 +274,13 @@ final class ManagingCountriesContext implements Context
     public function iShouldBeNotifiedThatNameOfTheProvinceIsRequired(): void
     {
         Assert::same($this->updatePage->getValidationMessage('name'), 'Please enter province name.');
+    }
+
+    /**
+     * @Then I should be notified that provinces that are in use cannot be deleted
+     */
+    public function iShouldBeNotifiedThatProvincesThatAreInUseCannotBeDeleted(): void
+    {
+        $this->notificationChecker->checkNotification('Error Cannot delete, the province is in use.', NotificationType::failure());
     }
 }

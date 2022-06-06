@@ -36,8 +36,20 @@
             <tag name="api_platform.data_persister" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\DataPersister\CountryDataPersister">
+            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
+            <argument type="service" id="Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface" />
+            <tag name="api_platform.data_persister" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\DataPersister\ShippingMethodDataPersister">
             <argument type="service" id="api_platform.doctrine.orm.data_persister" />
+            <tag name="api_platform.data_persister" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataPersister\ZoneDataPersister">
+            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
+            <argument type="service" id="Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface" />
             <tag name="api_platform.data_persister" />
         </service>
     </services>
