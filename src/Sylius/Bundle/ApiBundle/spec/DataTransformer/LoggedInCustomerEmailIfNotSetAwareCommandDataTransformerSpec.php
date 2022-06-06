@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\DataTransformer;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\LoggedInCustomerEmailIfNotSetAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\LoggedInCustomerEmailIfNotSetAwareInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -41,7 +41,7 @@ final class LoggedInCustomerEmailIfNotSetAwareCommandDataTransformerSpec extends
         $customer->getEmail()->willReturn('sample@email.com');
         $command->setEmail('sample@email.com')->shouldBeCalled();
 
-        $this->transform($command,'', [])->shouldReturn($command);
+        $this->transform($command, '', [])->shouldReturn($command);
     }
 
     function it_does_not_add_email_to_contact_aware_command_if_provided(
@@ -57,7 +57,7 @@ final class LoggedInCustomerEmailIfNotSetAwareCommandDataTransformerSpec extends
         $customer->getEmail()->shouldNotBeCalled();
         $command->setEmail('sample@email.com')->shouldNotBeCalled();
 
-        $this->transform($command,'', [])->shouldReturn($command);
+        $this->transform($command, '', [])->shouldReturn($command);
     }
 
     function it_early_returns_contact_aware_command_if_admin_user_provided(
@@ -69,7 +69,7 @@ final class LoggedInCustomerEmailIfNotSetAwareCommandDataTransformerSpec extends
 
         $command->getEmail()->shouldNotBeCalled();
 
-        $this->transform($command,'', [])->shouldReturn($command);
+        $this->transform($command, '', [])->shouldReturn($command);
     }
 
     function it_adds_nothing_for_visitor(
@@ -80,7 +80,7 @@ final class LoggedInCustomerEmailIfNotSetAwareCommandDataTransformerSpec extends
 
         $command->setEmail('sample@email.com')->shouldNotBeCalled();
 
-        $this->transform($command,'',[])->shouldReturn($command);
+        $this->transform($command, '', [])->shouldReturn($command);
     }
 
     function it_supports_command_with_contact_aware_interface(LoggedInCustomerEmailIfNotSetAwareInterface $command, LocaleCodeAwareInterface $locale): void
