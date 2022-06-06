@@ -37,6 +37,17 @@ Feature: Editing a zone
         And this zone should have only the "France" country member
 
     @ui @javascript @api
+    Scenario: Removing and adding countries to a zone
+        Given the store has a zone "European Union" with code "EU"
+        And it has the "Belgium", "France" and "Germany" country members
+        When I want to modify the zone named "European Union"
+        And I remove the "Belgium", "France" and "Germany" country members
+        And I add a country "France"
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And this zone should have only the "France" country member
+
+    @ui @javascript @api
     Scenario: Removing a province from a zone
         Given the store has a zone "United States" with code "USA"
         And it has the "Alabama" province member
