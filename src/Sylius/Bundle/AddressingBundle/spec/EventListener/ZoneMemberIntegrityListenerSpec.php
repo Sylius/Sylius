@@ -20,20 +20,22 @@ use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 {
     function let(
-        SessionInterface $session,
+        RequestStack $requestStack,
         ZoneDeletionCheckerInterface $zoneDeletionChecker,
         CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker
     ): void {
-        $this->beConstructedWith($session, $zoneDeletionChecker, $countryProvincesDeletionChecker);
+        $this->beConstructedWith($requestStack, $zoneDeletionChecker, $countryProvincesDeletionChecker);
     }
 
     function it_does_not_allow_to_remove_zone_if_it_exists_as_a_zone_member(
+        RequestStack $requestStack,
         SessionInterface $session,
         ZoneDeletionCheckerInterface $zoneDeletionChecker,
         GenericEvent $event,
@@ -43,6 +45,8 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($zone);
 
         $zoneDeletionChecker->isDeletable($zone)->willReturn(false);
+
+        $requestStack->getSession()->willReturn($session);
 
         $session->getBag('flashes')->willReturn($flashes);
 
@@ -60,6 +64,7 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_zone_does_not_exist_as_a_zone_member(
+        RequestStack $requestStack,
         SessionInterface $session,
         ZoneDeletionCheckerInterface $zoneDeletionChecker,
         GenericEvent $event,
@@ -68,6 +73,8 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($zone);
 
         $zoneDeletionChecker->isDeletable($zone)->willReturn(true);
+
+        $requestStack->getSession()->willReturn($session);
 
         $session->getBag('flashes')->shouldNotBeCalled();
         $event->stopPropagation()->shouldNotBeCalled();
@@ -86,6 +93,7 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
     }
 
     function it_does_not_allow_to_remove_province_if_it_exists_as_a_zone_member(
+        RequestStack $requestStack,
         SessionInterface $session,
         CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker,
         GenericEvent $event,
@@ -95,6 +103,8 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($country);
 
         $countryProvincesDeletionChecker->isDeletable($country)->willReturn(false);
+
+        $requestStack->getSession()->willReturn($session);
 
         $session->getBag('flashes')->willReturn($flashes);
 
