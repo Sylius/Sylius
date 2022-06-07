@@ -43,7 +43,7 @@ final class ProductSlugDocumentationNormalizer implements NormalizerInterface
         }
 
         // reset key index after unset
-        $docs['paths'][self::PRODUCT_SLUG_PATH]['get']['parameters'] = array_values($docs['paths'][self::PRODUCT_SLUG_PATH]['get']['parameters']);
+        $docs['paths'][$shopProductBySlugPath]['get']['parameters'] = array_values($docs['paths'][$shopProductBySlugPath]['get']['parameters']);
 
         return $docs;
     }
