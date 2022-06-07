@@ -12,6 +12,7 @@ default:
 
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.zone_member
 
                 - sylius.behat.context.setup.admin_api_security
                 - sylius.behat.context.setup.geographical

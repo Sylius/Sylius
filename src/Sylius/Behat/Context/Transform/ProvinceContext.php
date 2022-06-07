@@ -44,4 +44,12 @@ final class ProvinceContext implements Context
 
         return $province;
     }
+
+    /**
+     * @Transform /^"([^"]*)" and "([^"]*)" provinces$/
+     */
+    public function getProvincesByName(string ...$provinceNames): array
+    {
+        return $this->provinceRepository->findBy(['name' => $provinceNames]);
+    }
 }
