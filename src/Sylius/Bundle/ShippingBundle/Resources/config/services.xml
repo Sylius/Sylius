@@ -74,7 +74,7 @@
         </service>
 
         <service id="sylius.calendar" class="Sylius\Bundle\ShippingBundle\Provider\Calendar">
-            <deprecated package="sylius/calendar" version="1.11">The "%service_id%" is deprecated since Sylius 1.11 and will be removed in 2.0. Use "Sylius\Calendar\Provider\DateTimeProviderInterface" instead.</deprecated>
+            <deprecated package="sylius/sylius" version="1.11">The "%service_id%" is deprecated since Sylius 1.11 and will be removed in 2.0. Use "Sylius\Calendar\Provider\DateTimeProviderInterface" instead.</deprecated>
         </service>
 
         <service id="sylius.shipping_date_assigner" class="Sylius\Bundle\ShippingBundle\Assigner\ShippingDateAssigner">
