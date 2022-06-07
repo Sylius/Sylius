@@ -15,6 +15,7 @@ namespace Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 
 class Zone implements ZoneInterface, \Stringable
 {
@@ -120,10 +121,19 @@ class Zone implements ZoneInterface, \Stringable
 
     public function addMember(ZoneMemberInterface $member): void
     {
-        if (!$this->hasMember($member)) {
-            $this->members->add($member);
-            $member->setBelongsTo($this);
+        if ($this->hasMember($member)) {
+            return;
         }
+
+        /** @psalm-suppress UndefinedMethod */
+        $matchingSnapshotMembers = (new ArrayCollection($this->members->getSnapshot()))->matching(
+            Criteria::create()->where(Criteria::expr()->eq('code', $member->getCode()))
+        );
+
+        $member = $matchingSnapshotMembers->isEmpty() ? $member : $matchingSnapshotMembers->first();
+
+        $this->members->add($member);
+        $member->setBelongsTo($this);
     }
 
     public function removeMember(ZoneMemberInterface $member): void
