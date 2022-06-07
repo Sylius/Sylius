@@ -16,13 +16,13 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\SendContactRequest;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class SendContactRequestHandlerSpec extends ObjectBehavior
 {
-    function let(SenderInterface $sender, ChannelRepositoryInterface $channelRepository,): void
+    function let(SenderInterface $sender, ChannelRepositoryInterface $channelRepository): void
     {
         $this->beConstructedWith($sender, $channelRepository);
     }
@@ -32,7 +32,7 @@ final class SendContactRequestHandlerSpec extends ObjectBehavior
         ChannelRepositoryInterface $channelRepository,
         SenderInterface $sender
     ): void {
-        $command = new SendContactRequest('adam@sylius.com','message');
+        $command = new SendContactRequest('adam@sylius.com', 'message');
         $command->setChannelCode('CODE');
         $command->setLocaleCode('en_US');
 
@@ -46,7 +46,7 @@ final class SendContactRequestHandlerSpec extends ObjectBehavior
             [
                 'data' => ['message' => 'message', 'email' => 'adam@sylius.com'],
                 'channel' => $channel,
-                'localeCode' => 'en_US'
+                'localeCode' => 'en_US',
             ],
             [],
             ['adam@sylius.com']
@@ -57,7 +57,7 @@ final class SendContactRequestHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_channel_has_not_been_found(ChannelRepositoryInterface $channelRepository): void
     {
-        $command = new SendContactRequest('adam@sylius.com','message');
+        $command = new SendContactRequest('adam@sylius.com', 'message');
         $command->setChannelCode('CODE');
 
         $channelRepository->findOneByCode('CODE')->willReturn(null);
