@@ -18,6 +18,7 @@ use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Webmozart\Assert\Assert;
@@ -25,7 +26,7 @@ use Webmozart\Assert\Assert;
 final class ZoneMemberIntegrityListener
 {
     public function __construct(
-        private SessionInterface $session,
+        private RequestStack $requestStack,
         private ZoneDeletionCheckerInterface $zoneDeletionChecker,
         private CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker
     ) {
@@ -38,7 +39,7 @@ final class ZoneMemberIntegrityListener
 
         if (!$this->zoneDeletionChecker->isDeletable($zone)) {
             /** @var FlashBagInterface $flashes */
-            $flashes = $this->session->getBag('flashes');
+            $flashes = $this->getSession()->getBag('flashes');
             $flashes->add('error', [
                 'message' => 'sylius.resource.delete_error',
                 'parameters' => ['%resource%' => 'zone'],
@@ -56,7 +57,7 @@ final class ZoneMemberIntegrityListener
 
         if (!$this->countryProvincesDeletionChecker->isDeletable($country)) {
             /** @var FlashBagInterface $flashes */
-            $flashes = $this->session->getBag('flashes');
+            $flashes = $this->getSession()->getBag('flashes');
             $flashes->add('error', [
                 'message' => 'sylius.resource.delete_error',
                 'parameters' => ['%resource%' => 'province'],
@@ -64,5 +65,15 @@ final class ZoneMemberIntegrityListener
 
             $event->stopPropagation();
         }
+    }
+
+    private function getSession(): SessionInterface
+    {
+        // bc-layer for Symfony 4
+        if (!method_exists(RequestStack::class, 'getSession')) {
+            return $this->requestStack->getMasterRequest()->getSession();
+        }
+
+        return $this->requestStack->getSession();
     }
 }
