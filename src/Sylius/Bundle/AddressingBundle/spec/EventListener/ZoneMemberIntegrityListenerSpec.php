@@ -31,7 +31,7 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
         ZoneDeletionCheckerInterface $zoneDeletionChecker,
         CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker
     ): void {
-        if (method_exists($session, 'getSession')) {
+        if (method_exists($requestStack, 'getSession')) {
             $this->beConstructedWith($requestStack, $zoneDeletionChecker, $countryProvincesDeletionChecker);
         } else {
             $this->beConstructedWith($session, $zoneDeletionChecker, $countryProvincesDeletionChecker);
@@ -50,7 +50,7 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 
         $zoneDeletionChecker->isDeletable($zone)->willReturn(false);
 
-        if (method_exists($session, 'getSession')) {
+        if (method_exists($requestStack, 'getSession')) {
             $requestStack->getSession()->willReturn($session);
         }
 
@@ -80,7 +80,7 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 
         $zoneDeletionChecker->isDeletable($zone)->willReturn(true);
 
-        if (method_exists($session, 'getSession')) {
+        if (method_exists($requestStack, 'getSession')) {
             $requestStack->getSession()->willReturn($session);
         }
 
